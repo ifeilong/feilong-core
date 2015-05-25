@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.feilong.platform</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.1.2-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>feilong-core</artifactId>
+	<name>feilong-core</name>
+
+	<!-- 会出现在site 界面 -->
+	<description>${project.name} ${project.version} API</description>
+
+	<properties>
+		<!-- -->
+		<maven-compiler-plugin.source>1.6</maven-compiler-plugin.source>
+		<maven-compiler-plugin.target>1.6</maven-compiler-plugin.target>
+	</properties>
+
+	<dependencies>
+
+		<!-- commons-lang -->
+		<dependency>
+			<artifactId>commons-lang</artifactId>
+			<groupId>commons-lang</groupId>
+		</dependency>
+
+		<!-- commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<!-- commons-beanutils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-collections</artifactId>
+					<groupId>commons-collections</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- commons-logging统一下版本 -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+
+		<!-- commons-collections -->
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+		<!-- commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<!-- <optional>true</optional> -->
+		</dependency>
+
+		<!-- net.sf.json-lib -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>${version.json-lib}</version>
+			<classifier>jdk15</classifier>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-beanutils</artifactId>
+					<groupId>commons-beanutils</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-collections</artifactId>
+					<groupId>commons-collections</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-lang</artifactId>
+					<groupId>commons-lang</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- java.lang.NoClassDefFoundError: nu/xom/Serializer -->
+		<!-- <dependency>
+			<groupId>xom</groupId>
+			<artifactId>xom</artifactId>
+			<version>${version.xom}</version>
+			<exclusions>
+			<exclusion>
+			<artifactId>xml-apis</artifactId>
+			<groupId>xml-apis</groupId>
+			</exclusion>
+			<exclusion>
+			<artifactId>xercesImpl</artifactId>
+			<groupId>xerces</groupId>
+			</exclusion>
+			</exclusions>
+			</dependency> -->
+
+		<!-- 这2个包的类在jdk1.6里自带有了，可能有冲突，如果你的运行环境是1.6的话就可以删掉这2个包 -->
+		<!--
+			<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+			</dependency> -->
+
+		<!-- 规范下 xercesImpl版本 -->
+		<!-- 解决This parser does not support specification "null" version "null" -->
+
+		<!-- 这2个包的类在jdk1.6里自带有了，可能有冲突，如果你的运行环境是1.6的话就可以删掉这2个包 -->
+		<!-- <dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<exclusions>
+			<exclusion>
+			<artifactId>xml-apis</artifactId>
+			<groupId>xml-apis</groupId>
+			</exclusion>
+			</exclusions>
+			</dependency> -->
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<!-- maven-surefire-plugin -->
+			<plugin>
+				<inherited>false</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/DateUtilTest.java</include>
+					</includes>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+
+			<!-- 测试覆盖率 http://stackoverflow.com/questions/25293433/coberturainstrumenter-unable-to-instrument-file -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<instrumentation>
+						<!--<ignore>.*</ignore>
+						-->
+						<excludes>
+							<exclude>**/*Test.class</exclude>
+						</excludes>
+					</instrumentation>
+					<formats>
+						<format>xml</format>
+					</formats>
+					<check>
+						<branchRate>0</branchRate>
+						<lineRate>0</lineRate>
+						<haltOnFailure>true</haltOnFailure>
+						<totalBranchRate>0</totalBranchRate>
+						<totalLineRate>0</totalLineRate>
+						<packageLineRate>0</packageLineRate>
+						<packageBranchRate>0</packageBranchRate>
+						<regexes>
+							<regex>
+								<pattern>**/DateUtilTest.java</pattern>
+								<branchRate>60</branchRate>
+								<lineRate>80</lineRate>
+							</regex>
+						</regexes>
+					</check>
+				</configuration>
+				<!-- <executions>
+					<execution>
+					<goals>
+					<goal>clean</goal>
+					<goal>check</goal>
+					</goals>
+					</execution>
+					</executions> -->
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>5.0.3</version>
+					</dependency>
+					<dependency>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+						<version>1.4.01</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- 打包时,添加信息 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<!-- <manifestFile>
+							src/main/resources/META-INF/MANIFEST.MF
+							</manifestFile> -->
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<!-- <mainClass>com.mypackage.MyClass</mainClass> -->
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<copyright>feilong</copyright>
+						</manifestEntries>
+					</archive>
+					<!-- <excludes> <exclude>**/temple/**</exclude> </excludes> -->
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- dependency插件 -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> <executions> <execution> <id>copy-dependencies</id>
+				默认:<phase>process-sources</phase> <goals> <goal>copy-dependencies</goal> </goals> <configuration> 默认:<outputDirectory>${project.build.directory}\dependency</outputDirectory>
+				</configuration> </execution> </executions> </plugin> -->
+
+			<!-- 可以运行ant 代码的插件 -->
+			<!-- -->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<echoproperties />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

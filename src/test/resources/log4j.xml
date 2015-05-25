@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This product currently only contains code developed by authors of specific components, as identified by the source code files.
+	Since product implements StAX API, it has dependencies to StAX API classes.
+	For additional credits (generally to people who reported problems) see CREDITS file.
+-->
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<!-- The default target is System.out. -->
+		<!-- <param name="Target" value="System.out" /> -->
+		<param name="Threshold" value="debug" />
+		<param name="encoding" value="UTF-8" />
+
+		<!-- 设置监视器输出方式 -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- <param name="ConversionPattern" value="%d{HH:mm:ss} %-5p (%F:%L) [%M()] %m%n" /> -->
+			<param name="ConversionPattern" value="%d{mm:ss} %-5p (%F:%L) [%M()] %m%n" />
+		</layout>
+		<!--限制输出级别 -->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="debug" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+	<appender name="htmlFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.html'" />
+		<param name="File" value="D:\\logs\\feilong\\feilong-core\\log.html" />
+		<layout class="org.apache.log4j.HTMLLayout">
+			<param name="LocationInfo" value="true" />
+			<param name="Title" value="feilong-common log" />
+		</layout>
+	</appender>
+
+	<appender name="logFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<param name="File" value="D:\\logs\\feilong\\feilong-core\\log.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %t (%F:%L) [%M()] - %m%n" />
+		</layout>
+	</appender>
+
+	<!--
+		priority已经由level代替 
+		category已经由logger代替。 
+	-->
+	<logger name="com.feilong">
+		<level value="debug" />
+	</logger>
+
+	<category name="org.apache.commons.beanutils">
+		<priority value="info" />
+	</category>
+
+	<!-- 设置接收所有输出的通道 -->
+	<root>
+		<level value="debug" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="htmlFile" />
+		<appender-ref ref="logFile" />
+	</root>
+</log4j:configuration>
