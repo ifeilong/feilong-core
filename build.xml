@@ -2,6 +2,7 @@
 
 	<description>feilong-core</description>
 	<property file="${basedir}/build.properties" />
+	
 
 	<!-- 访问环境变量 -->
 	<property environment="env" />
