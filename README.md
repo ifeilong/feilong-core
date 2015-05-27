@@ -69,7 +69,7 @@ Reduce development, Release ideas
 # feilong-platform module:
 
 Category |Name | Description | JDK编译版本(将来会统一)
-----|------------ | ---------|------------
+:----:|:------------: | :---------|:------------:
 commons |`feilong-core` | 核心jar,所有feilong-platform的基础 | 1.6
 
 
