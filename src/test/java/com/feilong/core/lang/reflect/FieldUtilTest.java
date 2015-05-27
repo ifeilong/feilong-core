@@ -40,8 +40,8 @@ public class FieldUtilTest{
      */
     @Test
     public void testGetStaticProperty(){
-        log.info("" + FieldUtil.getStaticProperty("com.feilong.commons.core.io.ImageType", "JPG"));
-        log.info("" + FieldUtil.getStaticProperty("com.feilong.commons.core.io.IOConstants", "GB"));
+        log.info("" + FieldUtil.getStaticProperty("com.feilong.core.io.ImageType", "JPG"));
+        log.info("" + FieldUtil.getStaticProperty("com.feilong.core.io.IOConstants", "GB"));
     }
 
     /**

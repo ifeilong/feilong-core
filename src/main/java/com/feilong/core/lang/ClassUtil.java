@@ -38,11 +38,11 @@ import java.util.Map;
  * <tr valign="top">
  * <td>{@link java.lang.Class#getCanonicalName()}<br>
  * 返回 Java Language Specification 中所定义的底层类的规范化名称</td>
- * <td>"com.feilong.commons.core.date.DatePattern"</td>
+ * <td>"com.feilong.core.date.DatePattern"</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.lang.Class#getName()}</td>
- * <td>"com.feilong.commons.core.date.DatePattern"</td>
+ * <td>"com.feilong.core.date.DatePattern"</td>
  * </tr>
  * <tr valign="top">
  * <td>{@link java.lang.Class#getSimpleName()}</td>
@@ -117,8 +117,8 @@ public final class ClassUtil{
         // getCanonicalName (返回 Java Language Specification 中所定义的底层类的规范化名称。) && getName
         //其实这两个方法没有什么不同的，对于大部分class来说，
         //但是对于array就显示出来了。 getName返回的是[[Ljava.lang.String之类的表现形式，而getCanonicalName返回的就是跟我们声明类似的形式。
-        map.put("clz.getCanonicalName()", klass.getCanonicalName());//"com.feilong.commons.core.date.DatePattern"
-        map.put("clz.getName()", klass.getName());//"com.feilong.commons.core.date.DatePattern"
+        map.put("clz.getCanonicalName()", klass.getCanonicalName());//"com.feilong.core.date.DatePattern"
+        map.put("clz.getName()", klass.getName());//"com.feilong.core.date.DatePattern"
         map.put("clz.getSimpleName()", klass.getSimpleName());//"DatePattern"
 
         map.put("clz.getComponentType()", klass.getComponentType());

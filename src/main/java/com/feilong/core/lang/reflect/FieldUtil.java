@@ -296,7 +296,7 @@ public final class FieldUtil{
      * {@code
      * example1 :
      * 获得 IOConstants类的 GB静态属性
-     * FieldUtil.getStaticProperty("com.feilong.commons.core.io.IOConstants", "GB")
+     * FieldUtil.getStaticProperty("com.feilong.core.io.IOConstants", "GB")
      * 返回 :1073741824
      * }
      * </pre>

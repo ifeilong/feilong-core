@@ -272,7 +272,7 @@ import com.feilong.core.util.Validator;
  * <td>sun.java.command</td>
  * <td>org.eclipse.jdt.internal.junit.runner.RemoteTestRunner -version 3 -port 60401 -testLoaderClass
  * org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader -loaderpluginname org.eclipse.jdt.junit4.runtime -test
- * com.feilong.commons.core.lang.SystemUtilTest:getPropertiesMapForLog</td>
+ * com.feilong.core.lang.SystemUtilTest:getPropertiesMapForLog</td>
  * </tr>
  * <tr valign="top">
  * <td>sun.java.launcher</td>

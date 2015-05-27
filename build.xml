@@ -127,10 +127,9 @@
 			<!-- <tag name="to do" scope="all" description="To do:"/> bootclasspath="${sun.boot.class.path}" classpathref="feilong.maven.dependencies.all" classpath="${java.class.path}" -->
 			<!-- <bootclasspath location="D:\\Program Files\\Java\\jdk1.6.0_37\\jre\\lib\\rt.jar"></bootclasspath> -->
 
-			<group title="日期操作工具包" packages="com.feilong.commons.core.date" />
-			<group title="加密解密工具包" packages="com.feilong.commons.core.security" />
-			<group title="IO工具包" packages="com.feilong.commons.core.io" />
-			<group title="各种常见工具包" packages="com.feilong.commons.core.util" />
+			<group title="日期操作工具包" packages="com.feilong.core.date" />
+			<group title="IO工具包" packages="com.feilong.core.io" />
+			<group title="各种常见工具包" packages="com.feilong.core.util" />
 		</javadoc>
 
 		<!-- copy 资源到 javadoc目录 -->

@@ -171,7 +171,7 @@ public final class TypeUtil{
             throw new NullPointerException("klass can't be null/empty!");
         }
 
-        Type type = klass.getGenericSuperclass(); //com.feilong.commons.core.lang.reflect.res.BaseSolrRepositoryImpl<com.feilong.commons.core.lang.reflect.res.SkuItem, java.lang.Long>
+        Type type = klass.getGenericSuperclass(); //com.feilong.core.lang.reflect.res.BaseSolrRepositoryImpl<com.feilong.core.lang.reflect.res.SkuItem, java.lang.Long>
 
         while (!(type instanceof ParameterizedType) && Object.class != klass){
             klass = klass.getSuperclass();
