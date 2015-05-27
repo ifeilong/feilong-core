@@ -1,6 +1,6 @@
 #重要说明
-	feilong-core (V 1.2.0) module 进行了调整:
-		内部package name 从 com.feilong.commons.core.xxx,修改成 com.feilong.core.xxx
+`feilong-core` (V 1.2.0) module 进行了调整:
+内部package name 从 `com.feilong.commons.core.xxx`,修改成 `com.feilong.core.xxx`
 
 feilong-platform feilong-core
 ================
@@ -34,9 +34,9 @@ Reduce development, Release ideas
 
 #说明
 
-1. 基于Apache2 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
-1. 基于maven3.2构建;
-1. 需要jdk1.6及以上环境;
+1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
+1. 基于`maven3.2`构建;
+1. 需要`jdk1.6`及以上环境;
 
 
 # Maven使用配置
