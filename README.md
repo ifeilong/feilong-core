@@ -1,6 +1,7 @@
 #重要说明
 `feilong-core` (V 1.2.0) module 进行了调整:
 * 内部package name 从 `com.feilong.commons.core.xxx`,修改成 `com.feilong.core.xxx`
+* 其他参见 https://github.com/venusdrogon/feilong-core/releases/tag/1.2.0 release log
 
 feilong-platform feilong-core
 ================
