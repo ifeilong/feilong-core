@@ -84,7 +84,7 @@ public final class ImageUtil{
      *             the unchecked io exception
      * @see FileUtil#getFileOutputStream(String)
      * @see #write(RenderedImage, OutputStream, String)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static void write(RenderedImage renderedImage,String outputFilePath,String formatName) throws UncheckedIOException{
         OutputStream outputStream = FileUtil.getFileOutputStream(outputFilePath);
@@ -202,7 +202,7 @@ public final class ImageUtil{
      * @throws UncheckedIOException
      *             the unchecked io exception
      * @see javax.imageio.ImageIO#read(File)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static BufferedImage getBufferedImage(File imageFile) throws UncheckedIOException{
         try{
@@ -226,7 +226,7 @@ public final class ImageUtil{
      * @param bufferedImage
      *            the buffered image
      * @return the buffered image info map for log
-     * @since 1.1.2
+     * @since 1.2.0
      */
     private static Map<String, Object> getBufferedImageInfoMapForLog(BufferedImage bufferedImage){
         Map<String, Object> map = new LinkedHashMap<String, Object>();
@@ -281,7 +281,7 @@ public final class ImageUtil{
      * @param bufferedImage
      *            the buffered image
      * @return the color space
-     * @since 1.1.2
+     * @since 1.2.0
      */
     private static ColorSpace getColorSpace(BufferedImage bufferedImage){
         ColorModel colorModel = bufferedImage.getColorModel();

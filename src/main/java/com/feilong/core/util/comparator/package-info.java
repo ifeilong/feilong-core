@@ -16,7 +16,7 @@
 /**比较器.
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a> 
- * @version 1.1.2 2015年5月21日 上午11:01:34 
- * @since 1.1.2
+ * @version 1.2.0 2015年5月21日 上午11:01:34 
+ * @since 1.2.0
  */
 package com.feilong.core.util.comparator;

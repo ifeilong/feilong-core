@@ -130,7 +130,7 @@ public final class FileUtil{
      * @throws UncheckedIOException
      *             the unchecked io exception
      * @see #getFileOutputStream(String, boolean)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static final FileOutputStream getFileOutputStream(String filePath,FileWriteMode fileWriteMode) throws UncheckedIOException{
         boolean append = (fileWriteMode == FileWriteMode.APPEND);
@@ -150,7 +150,7 @@ public final class FileUtil{
      * @throws UncheckedIOException
      *             the unchecked io exception
      * @see java.io.FileOutputStream#FileOutputStream(String, boolean)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     //默认 Access Modifiers 权限修饰符
     static final FileOutputStream getFileOutputStream(String filePath,boolean append) throws UncheckedIOException{
@@ -275,7 +275,7 @@ public final class FileUtil{
      *             the illegal argument exception
      * @see #getParent(String)
      * @see #createDirectory(String)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static void createDirectoryByFilePath(String filePath) throws NullPointerException,IllegalArgumentException{
         if (Validator.isNullOrEmpty(filePath)){

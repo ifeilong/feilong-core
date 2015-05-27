@@ -367,7 +367,7 @@ public final class SystemUtil{
      *
      * @param map
      *            the properties from map
-     * @since 1.1.2
+     * @since 1.2.0
      * @see java.lang.System#setProperty(String, String)
      */
     public static final void setPropertiesFromMap(Map<String, String> map){
@@ -386,7 +386,7 @@ public final class SystemUtil{
      *
      * @param properties
      *            the properties from properties
-     * @since 1.1.2
+     * @since 1.2.0
      * @see com.feilong.core.configure.PropertiesUtil#toMap(Properties)
      * @see com.feilong.core.lang.SystemUtil#setPropertiesFromMap(Map)
      * @see java.lang.System#setProperty(String, String)

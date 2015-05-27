@@ -687,7 +687,7 @@ public final class CollectionsUtil{
      *             the bean util exception
      * @throws NullPointerException
      *             the null pointer exception
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate includePredicate,String propertyName)
                     throws BeanUtilException,NullPointerException{

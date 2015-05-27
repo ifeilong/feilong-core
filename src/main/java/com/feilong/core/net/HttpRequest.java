@@ -22,9 +22,9 @@ import java.util.Map;
  * http 请求信息.
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
- * @version 1.1.2 2015年5月23日 上午12:43:38
+ * @version 1.2.0 2015年5月23日 上午12:43:38
  * @see "org.apache.http.HttpRequest"
- * @since 1.1.2
+ * @since 1.2.0
  */
 public class HttpRequest implements Serializable{
 

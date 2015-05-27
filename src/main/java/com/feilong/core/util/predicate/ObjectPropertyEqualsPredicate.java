@@ -24,8 +24,8 @@ import com.feilong.core.lang.ObjectUtil;
  * 调用 {@link com.feilong.core.bean.PropertyUtil#getProperty(Object, String)} 匹配属性值.
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
- * @version 1.1.2 2015年4月27日 下午1:52:29
- * @since 1.1.2
+ * @version 1.2.0 2015年4月27日 下午1:52:29
+ * @since 1.2.0
  */
 public class ObjectPropertyEqualsPredicate implements Predicate{
 

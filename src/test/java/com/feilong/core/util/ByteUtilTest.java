@@ -58,7 +58,7 @@ public class ByteUtilTest{
      * @param b
      *            the b
      * @return the string
-     * @since 1.1.2
+     * @since 1.2.0
      */
     private String toHexString(byte b){
         int intValue = 0;

@@ -67,7 +67,7 @@ public final class ParamUtil{
      * @param paramsMap
      *            用于拼接签名的参数
      * @return the string
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static String toNaturalOrderingString(Map<String, String> paramsMap){
         if (Validator.isNullOrEmpty(paramsMap)){

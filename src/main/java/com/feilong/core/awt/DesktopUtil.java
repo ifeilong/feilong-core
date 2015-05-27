@@ -100,7 +100,7 @@ public final class DesktopUtil{
      *            the url
      * @throws UncheckedIOException
      *             the unchecked io exception
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static void print(String url) throws UncheckedIOException{
         desktopAction(url, Desktop.Action.PRINT);
@@ -113,7 +113,7 @@ public final class DesktopUtil{
      *            the url
      * @throws UncheckedIOException
      *             the unchecked io exception
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static void edit(String url) throws UncheckedIOException{
         desktopAction(url, Desktop.Action.EDIT);
@@ -132,7 +132,7 @@ public final class DesktopUtil{
      *             the runtime exception
      * @throws UnsupportedOperationException
      *             the unsupported operation exception
-     * @since 1.1.2
+     * @since 1.2.0
      */
     private static void desktopAction(String url,Action action) throws UncheckedIOException,RuntimeException,UnsupportedOperationException{
         if (DESKTOP_SUPPORTED){

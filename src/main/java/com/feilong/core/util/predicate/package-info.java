@@ -16,8 +16,8 @@
 /**
  *自定义的  Predicate,常用在 {@link com.feilong.core.util.CollectionsUtil#select(java.util.Collection, org.apache.commons.collections.Predicate)},{@link com.feilong.core.util.CollectionsUtil#groupCount(java.util.Collection, org.apache.commons.collections.Predicate, String)} 等地方.
  * @author <a href="mailto:venusdrogon@163.com">feilong</a> 
- * @version 1.1.2 2015年4月27日 下午1:47:11 
- * @since 1.1.2
+ * @version 1.2.0 2015年4月27日 下午1:47:11 
+ * @since 1.2.0
  @see org.apache.commons.collections.PredicateUtils
  @see org.apache.commons.collections.functors.AllPredicate
  @see org.apache.commons.collections.functors.AndPredicate

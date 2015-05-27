@@ -164,7 +164,7 @@ public final class MapUtil{
      * @throws NullPointerException
      *             the null pointer exception
      * @see java.util.TreeMap#TreeMap(Map)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static <K, V> Map<K, V> sortByKeyAsc(Map<K, V> map) throws NullPointerException{
         if (Validator.isNullOrEmpty(map)){
@@ -187,7 +187,7 @@ public final class MapUtil{
      *             the null pointer exception
      * @see org.apache.commons.collections.comparators.ReverseComparator#ReverseComparator(Comparator)
      * @see PropertyComparator#PropertyComparator(String)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     @SuppressWarnings("unchecked")
     public static <K, V> Map<K, V> sortByKeyDesc(Map<K, V> map) throws NullPointerException{
@@ -212,7 +212,7 @@ public final class MapUtil{
      * @see PropertyComparator#PropertyComparator(String)
      * @see java.util.Map.Entry
      * @see #sortByValueDesc(Map)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static <K, V extends Comparable<V>> Map<K, V> sortByValueAsc(Map<K, V> map) throws NullPointerException{
         return sort(map, new PropertyComparator<Map.Entry<K, V>>("value"));
@@ -234,7 +234,7 @@ public final class MapUtil{
      * @see PropertyComparator#PropertyComparator(String)
      * @see java.util.Map.Entry
      * @see #sortByValueAsc(Map)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     @SuppressWarnings("unchecked")
     public static <K, V extends Comparable<V>> Map<K, V> sortByValueDesc(Map<K, V> map) throws NullPointerException{
@@ -259,7 +259,7 @@ public final class MapUtil{
      * @return 排序之后的map
      * @throws NullPointerException
      *             if Validator.isNullOrEmpty(map) or if Validator.isNullOrEmpty(mapEntryComparator)
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static <K, V> Map<K, V> sort(Map<K, V> map,Comparator<Map.Entry<K, V>> mapEntryComparator) throws NullPointerException{
 

@@ -25,8 +25,8 @@ import com.feilong.core.util.ArrayUtil;
  * <code>values</code>数组中.
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
- * @version 1.1.2 2015年4月27日 下午3:12:32
- * @since 1.1.2
+ * @version 1.2.0 2015年4月27日 下午3:12:32
+ * @since 1.2.0
  * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
  * @see com.feilong.core.util.ArrayUtil#isContain(Object[], Object)
  */

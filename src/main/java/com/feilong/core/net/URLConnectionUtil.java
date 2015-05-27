@@ -221,7 +221,7 @@ public final class URLConnectionUtil{
      * @return the input stream
      * @throws UncheckedIOException
      *             the unchecked io exception
-     * @since 1.1.2
+     * @since 1.2.0
      */
     public static InputStream getInputStream(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam)
                     throws UncheckedIOException{
@@ -312,7 +312,7 @@ public final class URLConnectionUtil{
      *             the malformed url exception
      * @throws IOException
      *             the IO exception
-     * @since 1.1.2
+     * @since 1.2.0
      */
     private static HttpURLConnection openConnection(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam)
                     throws MalformedURLException,IOException{

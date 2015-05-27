@@ -92,7 +92,7 @@ public final class ScreenShotUtil{
      * @return the robot
      * @throws RuntimeException
      *             the runtime exception
-     * @since 1.1.2
+     * @since 1.2.0
      */
     private static Robot getRobot() throws RuntimeException{
         Robot robot = null;

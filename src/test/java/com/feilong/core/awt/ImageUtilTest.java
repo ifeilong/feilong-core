@@ -25,8 +25,8 @@ import com.feilong.core.awt.ImageUtil;
  * The Class ImageUtilTest.
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
- * @version 1.1.2 2015年5月9日 上午12:03:27
- * @since 1.1.2
+ * @version 1.2.0 2015年5月9日 上午12:03:27
+ * @since 1.2.0
  */
 public class ImageUtilTest{
 
