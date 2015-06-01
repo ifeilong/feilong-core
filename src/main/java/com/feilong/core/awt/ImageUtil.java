@@ -176,8 +176,8 @@ public final class ImageUtil{
     }
 
     /**
-     * 获得image/BufferedImage 对象<br>
-     * BufferedImage 子类描述具有 可访问图像数据缓冲区的 Image.
+     * 获得image/{@link java.awt.image.BufferedImage} 对象.<br>
+     * {@link java.awt.image.BufferedImage} 子类描述具有 可访问图像数据缓冲区的 Image.
      *
      * @param imageFilePath
      *            图像路径
@@ -193,8 +193,8 @@ public final class ImageUtil{
     }
 
     /**
-     * 获得image/BufferedImage 对象<br>
-     * BufferedImage 子类描述具有 可访问图像数据缓冲区的 Image.
+     * 获得image/{@link java.awt.image.BufferedImage} 对象.<br>
+     * {@link java.awt.image.BufferedImage} 子类描述具有 可访问图像数据缓冲区的 Image.
      *
      * @param imageFile
      *            the file
@@ -209,7 +209,7 @@ public final class ImageUtil{
             BufferedImage bufferedImage = ImageIO.read(imageFile);
 
             if (log.isDebugEnabled()){
-                log.debug("image filePath:[{}]", imageFile.getAbsolutePath());
+                log.debug("input imageFile's absolutePath is:[{}]", imageFile.getAbsolutePath());
                 Map<String, Object> map = getBufferedImageInfoMapForLog(bufferedImage);
                 log.debug("bufferedImage info:{}", JsonUtil.format(map, new String[] { "data", "matrix" }));
             }
