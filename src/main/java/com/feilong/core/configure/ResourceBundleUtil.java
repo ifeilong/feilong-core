@@ -35,7 +35,7 @@ import com.feilong.core.util.StringUtil;
 import com.feilong.core.util.Validator;
 
 /**
- * {@link ResourceBundle} 工具类.
+ * {@link java.util.ResourceBundle} 工具类.
  * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0 2011-11-11 上午10:24:25
@@ -176,7 +176,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      */
     public static String getValue(ResourceBundle resourceBundle,String key){
         if (!resourceBundle.containsKey(key)){
-            log.warn("resourceBundle don't containsKey:[{}]", key);
+            log.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
         }else{
             try{
                 String value = resourceBundle.getString(key);
@@ -333,6 +333,22 @@ public final class ResourceBundleUtil implements BaseConfigure{
             return result;
         }
         return null;
+    }
+
+    /**
+     * 读取配置文件,将k/v 统统转成map(HashMap).
+     * 
+     * @param baseName
+     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
+     * @see #readAllPropertiesToMap(String, Locale)
+     * @since 1.2.1
+     */
+    public static Map<String, String> readAllPropertiesToMap(String baseName){
+        // Locale enLoc = new Locale("en", "US"); // 表示美国地区
+        final Locale defaultLocale = Locale.getDefault();
+        return readAllPropertiesToMap(baseName, defaultLocale);
+
     }
 
     /**
