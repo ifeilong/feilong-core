@@ -52,6 +52,34 @@ public final class MapUtil{
     }
 
     /**
+     * 取到指定keys的value,连接起来,如果value是null or empty将会被排除,不参与拼接.
+     *
+     * @param map
+     *            the map
+     * @param includeKeys
+     *            包含的key
+     * @return the mer data
+     * @since 1.2.1
+     */
+    public static String joinKeysValue(Map<String, String> map,String[] includeKeys){
+        if (Validator.isNullOrEmpty(map)){
+            throw new NullPointerException("map can't be null/empty!");
+        }
+        StringBuilder sb = new StringBuilder();
+        //有顺序的参数
+        for (String key : includeKeys){
+            String value = map.get(key);
+
+            //不判断的话,null会输出成null字符串
+            if (Validator.isNotNullOrEmpty(value)){
+                sb.append(value);
+            }
+        }
+        String merData = sb.toString();
+        return merData;
+    }
+
+    /**
      * 指定一个map,指定特定的keys,取得其中的 value 最小值.
      * 
      * @param <K>
