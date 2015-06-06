@@ -37,11 +37,28 @@ import com.feilong.core.util.Validator;
 /**
  * {@link java.util.ResourceBundle} 工具类.
  * 
+ * <h3>如果现在多种资源文件一起出现，该如何访问？</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 如果一个项目中同时存在Message.properties、Message_zh_CN.properties、Message_zh_ CN.class 3个类型的文件，那最终使用的是哪一个?<br>
+ * 只会使用一个，按照优先级使用。<br>
+ * 顺序为Message_zh_CN.class、Message_zh_CN.properties、Message.properties。<br>
+ * </p>
+ * <p>
+ * 解析原理，参见:<br>
+ * {@link "java.util.ResourceBundle#loadBundle(CacheKey, List, Control, boolean)"}<br>
+ * {@link java.util.ResourceBundle.Control#newBundle(String, Locale, String, ClassLoader, boolean)}
+ * </p>
+ * </blockquote>
+ * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
- * @version 1.0 2011-11-11 上午10:24:25
+ * @version 1.0.0 2011-11-11 上午10:24:25
  * @see MessageFormatUtil#format(String, Object...)
  * @see java.util.ResourceBundle
+ * 
  * @see java.util.PropertyResourceBundle
+ * @see java.util.ListResourceBundle
  * @since 1.0.0
  */
 public final class ResourceBundleUtil implements BaseConfigure{

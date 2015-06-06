@@ -61,9 +61,7 @@ public final class ClipboardUtil{
         ClipboardOwner clipboardOwner = null;
         clipboard.setContents(transferable, clipboardOwner);
 
-        if (log.isDebugEnabled()){
-            log.debug("Clipboard setContents over,clipboardOwner:null");
-        }
+        log.debug("Clipboard setContents over,clipboardOwner[null]");
     }
 
     //******************************************************************************

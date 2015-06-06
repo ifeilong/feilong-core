@@ -53,11 +53,12 @@ public final class PropertyUtil{
     }
 
     /**
-     * <p>
+     *
      * 返回一个<code>bean</code>中所有的可读属性，并将属性名/属性值放入一个Map中.
-     * </p>
      * 
+     * <p>
      * 另外还有一个名为class的属性，属性值是Object的类名，事实上class是java.lang.Object的一个属性
+     * </p>
      * 
      * @param bean
      *            Bean whose properties are to be extracted

@@ -21,17 +21,18 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 
 import com.feilong.core.io.UncheckedIOException;
 
 /**
  * 截屏操作.
- * 
+ *
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0 2011-5-30 下午01:33:59
- * @since 1.0.0
  * @see java.awt.Robot
  * @see java.awt.Toolkit
+ * @since 1.0.0
  */
 public final class ScreenShotUtil{
 
@@ -49,6 +50,7 @@ public final class ScreenShotUtil{
      *            文件名称
      * @param formatName
      *            图片格式
+     * @see #screenshot(String, String, int, int, int, int)
      */
     public static void screenshot(String fileName,String formatName){
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -76,31 +78,48 @@ public final class ScreenShotUtil{
      *            宽度
      * @throws UncheckedIOException
      *             the unchecked io exception
+     * @see #getRobot()
+     * @see com.feilong.core.awt.ImageUtil#write(RenderedImage, String, String)
      */
     public static void screenshot(String fileName,String formatName,int x,int y,int width,int height) throws UncheckedIOException{
-        Robot robot = getRobot();
-
         Rectangle rectangle = new Rectangle(x, y, width, height);
-        BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
+        screenshot(fileName, formatName, rectangle);
+    }
 
+    /**
+     * 区域截图.
+     *
+     * @param fileName
+     *            文件名称
+     * @param formatName
+     *            图片格式
+     * @param rectangle
+     *            {@link java.awt.Rectangle}
+     * @throws UncheckedIOException
+     *             the unchecked io exception
+     * @since 1.2.1
+     */
+    public static void screenshot(String fileName,String formatName,Rectangle rectangle) throws UncheckedIOException{
+        Robot robot = getRobot();
+        BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
         ImageUtil.write(bufferedImage, fileName, formatName);
     }
 
     /**
-     * 获得 robot.
+     * 获得 {@link java.awt.Robot}.
      *
      * @return the robot
      * @throws RuntimeException
      *             the runtime exception
+     * @see java.awt.Robot
      * @since 1.2.0
      */
     private static Robot getRobot() throws RuntimeException{
-        Robot robot = null;
         try{
-            robot = new Robot();
+            Robot robot = new Robot();
+            return robot;
         }catch (AWTException e){
             throw new RuntimeException(e);
         }
-        return robot;
     }
 }
