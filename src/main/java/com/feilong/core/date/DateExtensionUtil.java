@@ -15,14 +15,6 @@
  */
 package com.feilong.core.date;
 
-import static com.feilong.core.MessageConstants.DATE_DAY;
-import static com.feilong.core.MessageConstants.DATE_HOUR;
-import static com.feilong.core.MessageConstants.DATE_MILLISECOND;
-import static com.feilong.core.MessageConstants.DATE_MINUTE;
-import static com.feilong.core.MessageConstants.DATE_SECOND;
-import static com.feilong.core.MessageConstants.DATE_THEDAY_BEFORE_YESTERDAY;
-import static com.feilong.core.MessageConstants.DATE_YESTERDAY;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -260,16 +252,17 @@ public final class DateExtensionUtil{
         // 间隔一天
         if (spaceDay == 1){
             if (DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)){
-                returnValue = DATE_YESTERDAY + " ";
+                returnValue = MessageConstants.DATE_YESTERDAY + " ";
             }else{
-                returnValue = DATE_THEDAY_BEFORE_YESTERDAY + " ";
+                returnValue = MessageConstants.DATE_THEDAY_BEFORE_YESTERDAY + " ";
             }
             returnValue += DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
         }
         // 间隔2天
         else if (spaceDay == 2){
             if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
-                returnValue = DATE_THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                returnValue = MessageConstants.DATE_THEDAY_BEFORE_YESTERDAY + " "
+                                + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
             }else{
                 // 今年
                 if (year == inYear){
@@ -293,16 +286,17 @@ public final class DateExtensionUtil{
             // 小时间隔
             if (spaceHour != 0){
                 if (inDay == day){
-                    returnValue = spaceHour + DATE_HOUR + "前";
+                    returnValue = spaceHour + MessageConstants.DATE_HOUR + "前";
                 }else{
-                    returnValue = DATE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                    returnValue = MessageConstants.DATE_YESTERDAY + " "
+                                    + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
                 }
             }else{
                 // 分钟间隔
                 if (spaceMinute == 0){
-                    returnValue = spaceSecond + DATE_SECOND + "前";
+                    returnValue = spaceSecond + MessageConstants.DATE_SECOND + "前";
                 }else{
-                    returnValue = spaceMinute + DATE_MINUTE + "前";
+                    returnValue = spaceMinute + MessageConstants.DATE_MINUTE + "前";
                 }
             }
         }
@@ -373,19 +367,19 @@ public final class DateExtensionUtil{
         // **************************************************************************************
         StringBuilder stringBuilder = new StringBuilder();
         if (0 != spaceDay){
-            stringBuilder.append(spaceDay + DATE_DAY);
+            stringBuilder.append(spaceDay + MessageConstants.DATE_DAY);
         }
         if (0 != spaceHour){
-            stringBuilder.append(spaceHour + DATE_HOUR);
+            stringBuilder.append(spaceHour + MessageConstants.DATE_HOUR);
         }
         if (0 != spaceMinute){
-            stringBuilder.append(spaceMinute + DATE_MINUTE);
+            stringBuilder.append(spaceMinute + MessageConstants.DATE_MINUTE);
         }
         if (0 != spaceSecond){
-            stringBuilder.append(spaceSecond + DATE_SECOND);
+            stringBuilder.append(spaceSecond + MessageConstants.DATE_SECOND);
         }
         if (0 != spaceMillisecond){
-            stringBuilder.append(spaceMillisecond + DATE_MILLISECOND);
+            stringBuilder.append(spaceMillisecond + MessageConstants.DATE_MILLISECOND);
         }
         return stringBuilder.toString();
     }

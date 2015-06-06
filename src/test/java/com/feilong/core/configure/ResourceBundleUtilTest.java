@@ -23,8 +23,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.MessageConstants;
-import com.feilong.core.configure.ResourceBundleUtil;
 import com.feilong.core.tools.json.JsonUtil;
 
 /**
@@ -36,13 +34,13 @@ import com.feilong.core.tools.json.JsonUtil;
 public class ResourceBundleUtilTest{
 
     /** The Constant log. */
-    private static final Logger log            = LoggerFactory.getLogger(ResourceBundleUtilTest.class);
+    private static final Logger  log            = LoggerFactory.getLogger(ResourceBundleUtilTest.class);
 
     /** The base name. */
-    private String              baseName       = "messages/feilong-core-test";
+    private String               baseName       = "messages/feilong-core-test";
 
     /** The resource bundle. */
-    private ResourceBundle      resourceBundle = ResourceBundle.getBundle(baseName);
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName);
 
     /**
      * Gets the value.
@@ -53,7 +51,6 @@ public class ResourceBundleUtilTest{
     public final void testGetValue(){
         String aString = ResourceBundleUtil.getValue(baseName, "config_test_array");
         log.debug(aString);
-        log.debug(MessageConstants.DATE_DAY);
     }
 
     /**

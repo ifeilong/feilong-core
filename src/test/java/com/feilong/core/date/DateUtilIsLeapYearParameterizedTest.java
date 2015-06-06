@@ -25,8 +25,6 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.date.DateUtil;
-
 /**
  * The Class DateUtilIsLeapYearTest.
  */

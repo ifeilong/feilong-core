@@ -25,8 +25,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DatePattern;
-import com.feilong.core.date.DateUtil;
 import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.core.util.StringUtil;
 
@@ -57,10 +55,10 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * Aaaa.
+     * Test get interval hour.
      */
     @Test
-    public void aaaa(){
+    public void testGetIntervalHour(){
         Date beginDate = DateUtil.string2Date("2013-12-21 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
         Date endDate = DateUtil.string2Date("2013-12-21 05:00:00", DatePattern.COMMON_DATE_AND_TIME);
 

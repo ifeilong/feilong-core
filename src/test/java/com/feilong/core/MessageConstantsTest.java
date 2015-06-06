@@ -15,11 +15,9 @@
  */
 package com.feilong.core;
 
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.junit.Assert.assertEquals;
 
-import com.feilong.core.MessageConstants;
+import org.junit.Test;
 
 /**
  * The Class MessageConstantsTest.
@@ -30,14 +28,11 @@ import com.feilong.core.MessageConstants;
  */
 public class MessageConstantsTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(MessageConstantsTest.class);
-
     /**
      * Test.
      */
     @Test
     public void test(){
-        log.debug(MessageConstants.DATE_MINUTE);
+        assertEquals("分钟", MessageConstants.DATE_MINUTE);
     }
 }
