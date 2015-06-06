@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +32,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.tools.json.JsonUtil;
-import com.feilong.core.util.ByteUtil;
-import com.feilong.core.util.StringUtil;
 import com.feilong.test.User;
 
 /**
@@ -180,28 +180,6 @@ public class StringUtilTest{
     }
 
     /**
-     * Join.
-     */
-    @Test
-    public void join(){
-        Assert.assertEquals("a_2", StringUtil.join(true, "_", "a", "2"));
-        Assert.assertEquals("a_", StringUtil.join(true, "_", "a", ""));
-        Assert.assertEquals("a", StringUtil.join(false, "_", "a", ""));
-        Assert.assertEquals("a_2", StringUtil.join(false, "_", "a", "2"));
-
-        Assert.assertEquals("a__bb", StringUtil.join(true, "_", "a", "", "bb"));
-        Assert.assertEquals("a_bb", StringUtil.join(false, "_", "a", "", "bb"));
-
-        Assert.assertEquals("a_bb_", StringUtil.join(true, "_", "a", "bb", ""));
-        Assert.assertEquals("a_bb", StringUtil.join(false, "_", "a", "bb", ""));
-
-        Assert.assertEquals("a_bb", StringUtil.join(false, "_", "a", "bb", ""));
-
-        Assert.assertEquals("bb", StringUtil.join(false, "_", "", "bb", ""));
-
-    }
-
-    /**
      * Replace all.
      */
     @Test
@@ -266,6 +244,22 @@ public class StringUtilTest{
     @Test
     public void substring6(){
         log.info(StringUtil.substring(TEXT, "jinxin.", 1));
+    }
+
+    /**
+     * Test substring last.
+     */
+    @Test
+    public void testSubstringLast(){
+        assertEquals("ilong", StringUtil.substringLast(TEXT, 5));
+    }
+
+    /**
+     * Test substring without last.
+     */
+    @Test
+    public void testSubstringWithoutLast(){
+        assertEquals("jinxin.fe", StringUtil.substringWithoutLast(TEXT, 5));
     }
 
     // @Test

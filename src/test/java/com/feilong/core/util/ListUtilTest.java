@@ -30,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.tools.json.JsonUtil;
-import com.feilong.core.util.ListUtil;
 import com.feilong.test.User;
 
 /**
@@ -264,26 +263,7 @@ public class ListUtilTest{
     }
 
     /**
-     * Removes the duplicate.
-     */
-    @Test
-    public void removeDuplicate(){
-        List<String> list = new ArrayList<String>();
-        list.add("xinge");
-        list.add("feilong5");
-        list.add("feilong1");
-        list.add("feilong2");
-        list.add("feilong2");
-        list.add("feilong3");
-        list.add("feilong4");
-        list.add("feilong4");
-        list.add("feilong5");
-
-        log.info("list:{}", JsonUtil.format(ListUtil.removeDuplicate(list)));
-    }
-
-    /**
-     * {@link com.feilong.core.util.ListUtil#toStringReplaceBrackets(java.util.List)} 的测试方法。
+     * Test list to string b.
      */
     @Test
     public final void testListToStringB(){
@@ -305,7 +285,7 @@ public class ListUtilTest{
     }
 
     /**
-     * {@link com.feilong.core.util.ListUtil#toStringRemoveBrackets(java.util.List)} 的测试方法。
+     * Test list to string a.
      */
     @Test
     public final void testListToStringA(){

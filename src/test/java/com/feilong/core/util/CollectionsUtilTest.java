@@ -34,9 +34,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.entity.ToStringConfig;
 import com.feilong.core.tools.json.JsonUtil;
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
@@ -53,6 +51,48 @@ public class CollectionsUtilTest{
     /** The Constant log. */
     private static final Logger log = LoggerFactory.getLogger(CollectionsUtilTest.class);
 
+    /**
+     * Test remove.
+     */
+    @Test
+    public void testRemove(){
+        List<String> list = new ArrayList<String>();
+        list.add("xinge");
+        list.add("feilong5");
+        list.add("feilong1");
+        list.add("feilong2");
+        list.add("feilong2");
+        list.add("feilong3");
+        list.add("feilong4");
+        list.add("feilong4");
+        list.add("feilong5");
+
+        log.info("list:{}", JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
+        log.info("list:{}", JsonUtil.format(list));
+    }
+
+    /**
+     * Removes the duplicate.
+     */
+    @Test
+    public void removeDuplicate(){
+        List<String> list = new ArrayList<String>();
+        list.add("xinge");
+        list.add("feilong5");
+        list.add("feilong1");
+        list.add("feilong2");
+        list.add("feilong2");
+        list.add("feilong3");
+        list.add("feilong4");
+        list.add("feilong4");
+        list.add("feilong5");
+
+        log.info("list:{}", JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
+    }
+
+    /**
+     * Test group count.
+     */
     @Test
     public final void testGroupCount(){
         List<User> testList = new ArrayList<User>();

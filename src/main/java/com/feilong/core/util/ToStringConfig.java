@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.entity;
+package com.feilong.core.util;
 
 import java.io.Serializable;
 
 /**
  * 用于 连接object 成为字符串.
- * 
+ *
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0.0 Mar 11, 2011 2:37:57 PM
- * @since 1.0.0
  * @see org.apache.commons.lang3.builder.ToStringStyle
+ * @since 1.0.0
  */
 public final class ToStringConfig implements Serializable{
 
@@ -39,6 +39,13 @@ public final class ToStringConfig implements Serializable{
 
     /** 连接符,默认={@link #DEFAULT_CONNECTOR}. */
     private String             connector         = DEFAULT_CONNECTOR;
+
+    /**
+     * 是否拼接 null或者empty对象.
+     * 
+     * @since 1.2.1
+     */
+    private boolean            isJoinNullOrEmpty = true;
 
     /**
      * Instantiates a new join string entity.
@@ -73,5 +80,26 @@ public final class ToStringConfig implements Serializable{
      */
     public void setConnector(String connector){
         this.connector = connector;
+    }
+
+    /**
+     * 获得 是否拼接 null或者empty对象.
+     *
+     * @return the isJoinNullOrEmpty
+     * @since 1.2.1
+     */
+    public boolean getIsJoinNullOrEmpty(){
+        return isJoinNullOrEmpty;
+    }
+
+    /**
+     * 设置 是否拼接 null或者empty对象.
+     *
+     * @param isJoinNullOrEmpty
+     *            the isJoinNullOrEmpty to set
+     * @since 1.2.1
+     */
+    public void setIsJoinNullOrEmpty(boolean isJoinNullOrEmpty){
+        this.isJoinNullOrEmpty = isJoinNullOrEmpty;
     }
 }

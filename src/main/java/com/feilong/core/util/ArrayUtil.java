@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.entity.ToStringConfig;
 import com.feilong.core.lang.ObjectUtil;
 
 /**
@@ -204,6 +203,11 @@ public final class ArrayUtil{
     /**
      * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
      * 
+     * <pre>
+     * ArrayUtil.toString(new ToStringConfig(),"a","b")---->"a,b"
+     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)---->"a,b"
+     * </pre>
+     * 
      * @param <T>
      *            the generic type
      * @param arrays
@@ -215,22 +219,34 @@ public final class ArrayUtil{
      *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
      *         </ul>
      */
-    public static <T> String toString(T[] arrays,ToStringConfig toStringConfig){
+    public static <T> String toString(ToStringConfig toStringConfig,T...arrays){
         if (Validator.isNullOrEmpty(arrays)){
             return null;
         }
+
+        String connector = toStringConfig.getConnector();
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0, j = arrays.length; i < j; ++i){
             T t = arrays[i];
 
-            sb.append(t);
-            // 不是最后一个 拼接
-            if (i != j - 1){
-                sb.append(toStringConfig.getConnector());
+            //如果是null 或者 empty，但是参数值是不拼接，那么继续循环
+            if (Validator.isNullOrEmpty(t)){
+                if (!toStringConfig.getIsJoinNullOrEmpty()){
+                    continue;
+                }
             }
+            sb.append(t);
+            sb.append(connector);
         }
-        return sb.toString();
+
+        //由于上面的循环中，最后一个元素可能是null或者empty，判断加还是不加拼接符有点麻烦，因此，循环中统一拼接，但是循环之后做截取处理
+        String returnValue = sb.toString();
+        if (returnValue.endsWith(connector)){
+            //去掉最后的拼接符
+            return StringUtil.substringWithoutLast(returnValue, connector.length());
+        }
+        return returnValue;
     }
 
     /**

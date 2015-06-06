@@ -25,7 +25,7 @@ import com.feilong.core.configure.PropertiesUtil;
 import com.feilong.core.util.Validator;
 
 /**
- * System工具类.
+ * {@link java.lang.System}工具类.
  * 
  * <h3>{@link System#getProperties()}</h3>
  * 

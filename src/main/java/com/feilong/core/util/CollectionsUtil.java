@@ -35,7 +35,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.entity.ToStringConfig;
 import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
@@ -71,6 +70,90 @@ public final class CollectionsUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * 从 <code>collection</code>中 删除 所有的 <code>remove</code>. 返回剩余的集合,返回剩余的集合(原集合对象不变)
+     * <p>
+     * The cardinality of an element <code>e</code> in the returned collection is the same as the cardinality of <code>e</code> in
+     * <code>collection</code> unless <code>remove</code> contains <code>e</code>, in which case the cardinality is zero.
+     * </p>
+     * <p>
+     * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.removeAll(remove);</code>.
+     * </p>
+     * <p>
+     * 底层实现是调用的 {@link org.apache.commons.collections.ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>
+     * 的元素加入到新的list返回.
+     * </p>
+     * 
+     * @param <T>
+     *            the generic type
+     * @param collection
+     *            the collection from which items are removed (in the returned collection)
+     * @param remove
+     *            the items to be removed from the returned <code>collection</code>
+     * @return a <code>List</code> containing all the elements of <code>c</code> except
+     *         any elements that also occur in <code>remove</code>.
+     * @see org.apache.commons.collections.ListUtils#removeAll(Collection, Collection)
+     * @since Commons Collections 3.2
+     * @since 1.0.8
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> List<T> removeAll(Collection<T> collection,Collection<T> remove){
+        return org.apache.commons.collections.ListUtils.removeAll(collection, remove);
+    }
+
+    /**
+     * 从 <code>collection</code>中 删除 <code>removeElement</code>,返回剩余的集合(原集合对象不变).
+     * <p>
+     * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.remove(removeElement);</code>.
+     * </p>
+     * <p>
+     * 底层实现是调用的 {@link org.apache.commons.collections.ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>
+     * 的元素加入到新的list返回.
+     * </p>
+     * 
+     * @param <T>
+     *            the generic type
+     * @param collection
+     *            the collection from which items are removed (in the returned collection)
+     * @param removeElement
+     *            the remove element
+     * @return a <code>List</code> containing all the elements of <code>c</code> except
+     *         any elements that also occur in <code>remove</code>.
+     * @see org.apache.commons.collections.ListUtils#removeAll(Collection, Collection)
+     * @since Commons Collections 3.2
+     * @since 1.0.8
+     */
+    public static <T> List<T> remove(Collection<T> collection,T removeElement){
+        Collection<T> remove = new ArrayList<T>();
+        remove.add(removeElement);
+        return removeAll(collection, remove);
+    }
+
+    /**
+     * 去重(如果原collection是有序的,那么会保留原collection元素顺序).
+     * 
+     * @param <T>
+     *            the generic type
+     * @param collection
+     *            the item src list
+     * @return if Validator.isNullOrEmpty(collection) 返回null<br>
+     *         else 返回的是 {@link ArrayList}
+     * @see ArrayList#ArrayList(java.util.Collection)
+     * @see LinkedHashSet#LinkedHashSet(Collection)
+     * @see <a
+     *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments</a>
+     */
+    public static <T> List<T> removeDuplicate(Collection<T> collection){
+        if (Validator.isNullOrEmpty(collection)){
+            return null;
+        }
+        // 效率问题？contains的本质就是遍历.
+        // 在100W的list当中执行0.546秒，而contains，我则没耐心去等了.顺便贴一下在10W下2段代码的运行时间.
+        // [foo1] 100000 -> 50487 : 48610 ms.
+        // [foo2] 100000 -> 50487 : 47 ms.
+        return new ArrayList<T>(new LinkedHashSet<T>(collection));
     }
 
     /**

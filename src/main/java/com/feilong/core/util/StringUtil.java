@@ -162,47 +162,6 @@ public final class StringUtil{
     }
 
     /**
-     * 拼接任意字符串<br>
-     * 
-     * <pre>
-     * StringUtil.join(true, &quot;_&quot;, &quot;a&quot;, &quot;2&quot;)
-     * 
-     * return a_2
-     * </pre>
-     * 
-     * @param isJoinBlankOrNull
-     *            是否拼接空白和null,如果true 则拼接
-     * @param separator
-     *            分隔符
-     * @param elements
-     *            任意字符串
-     * @return the string
-     */
-    public static final String join(boolean isJoinBlankOrNull,String separator,String...elements){
-        if (Validator.isNullOrEmpty(elements)){
-            return null;
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        int length = elements.length;
-        for (int i = 0; i < length; ++i){
-            String string = elements[i];
-            boolean isCanJoin = true;
-            // 如果 是null 不忽略 那么就不拼接
-            if (Validator.isNullOrEmpty(string) && !isJoinBlankOrNull){
-                isCanJoin = false;
-            }
-            if (isCanJoin){
-                // 前面已经品结果字符串了
-                if (stringBuilder.length() > 0){
-                    stringBuilder.append(separator);
-                }
-                stringBuilder.append(string);
-            }
-        }
-        return stringBuilder.toString();
-    }
-
-    /**
      * 单词首字母大写 比如jinxin
      * 
      * return Jinxin
@@ -648,13 +607,24 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]:截取文字最后几个字符串.
+     * [截取]:获取文字最后位数的字符串.
+     * <p>
+     * 调用了 {@link java.lang.String#substring(int)}
+     * </p>
+     * 
+     * <pre>
+     * Example 1:
+     * {@code
+     * StringUtil.substringLast("jinxin.feilong", 5)---->ilong
+     * }
+     * </pre>
      * 
      * @param text
      *            文字
      * @param lastLenth
      *            最后的位数
      * @return 截取文字最后几个字符串
+     * @see java.lang.String#substring(int)
      */
     public static final String substringLast(String text,int lastLenth){
         return text.substring(text.length() - lastLenth);
@@ -663,11 +633,23 @@ public final class StringUtil{
     /**
      * [截取]:去除最后几位.
      * 
+     * <p>
+     * 调用了 {@link java.lang.String#substring(int, int)}
+     * </p>
+     * 
+     * <pre>
+     * Example 1:
+     * {@code
+     * StringUtil.substringWithoutLast("jinxin.feilong", 5)---->jinxin.fe
+     * }
+     * </pre>
+     * 
      * @param text
      *            文字
      * @param lastLenth
      *            最后的位数
      * @return 去除最后几位,如果text是空,则返回""
+     * @see java.lang.String#substring(int, int)
      */
     public static final String substringWithoutLast(String text,int lastLenth){
         if (Validator.isNullOrEmpty(text)){

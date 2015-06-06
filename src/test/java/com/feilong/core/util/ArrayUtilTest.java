@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,10 +31,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.entity.ToStringConfig;
 import com.feilong.core.tools.json.JsonUtil;
-import com.feilong.core.util.ArrayUtil;
-import com.feilong.core.util.ListUtil;
 import com.feilong.test.User;
 
 /**
@@ -265,20 +264,28 @@ public class ArrayUtilTest{
 
         List<User> list = ArrayUtil.toList(users);
         log.info(JsonUtil.format(list));
-
     }
 
     /**
-     * To string1.
+     * Test to string.
      */
     @Test
-    public void toString1(){
-        Object[] arrays = { "222", "1111" };
+    public void testToString(){
         ToStringConfig toStringConfig = new ToStringConfig(",");
-        log.info(ArrayUtil.toString(arrays, toStringConfig));
+        Object[] arrays = { "222", "1111" };
+        assertEquals("222,1111", ArrayUtil.toString(toStringConfig, arrays));
 
         Integer[] array1 = { 2, 1 };
-        log.info(ArrayUtil.toString(array1, toStringConfig));
+        assertEquals("2,1", ArrayUtil.toString(toStringConfig, array1));
 
+        Integer[] array2 = { 2, 1, null };
+        toStringConfig = new ToStringConfig(",");
+        toStringConfig.setIsJoinNullOrEmpty(false);
+        assertEquals("2,1", ArrayUtil.toString(toStringConfig, array2));
+
+        Integer[] array3 = { 2, null, 1, null };
+        toStringConfig = new ToStringConfig(",");
+        toStringConfig.setIsJoinNullOrEmpty(false);
+        assertEquals("2,1", ArrayUtil.toString(toStringConfig, array3));
     }
 }
