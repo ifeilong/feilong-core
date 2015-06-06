@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.entity.JoinStringEntity;
+import com.feilong.core.entity.ToStringConfig;
 import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.ListUtil;
@@ -274,11 +274,11 @@ public class ArrayUtilTest{
     @Test
     public void toString1(){
         Object[] arrays = { "222", "1111" };
-        JoinStringEntity joinStringEntity = new JoinStringEntity(",");
-        log.info(ArrayUtil.toString(arrays, joinStringEntity));
+        ToStringConfig toStringConfig = new ToStringConfig(",");
+        log.info(ArrayUtil.toString(arrays, toStringConfig));
 
         Integer[] array1 = { 2, 1 };
-        log.info(ArrayUtil.toString(array1, joinStringEntity));
+        log.info(ArrayUtil.toString(array1, toStringConfig));
 
     }
 }

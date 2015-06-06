@@ -34,7 +34,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.entity.JoinStringEntity;
+import com.feilong.core.entity.ToStringConfig;
 import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
@@ -286,9 +286,9 @@ public class CollectionsUtilTest{
         list.add("2548");
         list.add("");
 
-        JoinStringEntity joinStringEntity = new JoinStringEntity(",");
+        ToStringConfig toStringConfig = new ToStringConfig(",");
 
-        String string = CollectionsUtil.toString(list, joinStringEntity);
+        String string = CollectionsUtil.toString(list, toStringConfig);
         log.info(string);
     }
 

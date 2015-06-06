@@ -23,8 +23,9 @@ import java.io.Serializable;
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0.0 Mar 11, 2011 2:37:57 PM
  * @since 1.0.0
+ * @see org.apache.commons.lang3.builder.ToStringStyle
  */
-public final class JoinStringEntity implements Serializable{
+public final class ToStringConfig implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long  serialVersionUID  = 3182446945343865398L;
@@ -42,7 +43,7 @@ public final class JoinStringEntity implements Serializable{
     /**
      * Instantiates a new join string entity.
      */
-    public JoinStringEntity(){
+    public ToStringConfig(){
     }
 
     /**
@@ -51,7 +52,7 @@ public final class JoinStringEntity implements Serializable{
      * @param connector
      *            the connector
      */
-    public JoinStringEntity(String connector){
+    public ToStringConfig(String connector){
         this.connector = connector;
     }
 

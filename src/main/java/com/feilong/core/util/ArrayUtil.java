@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.entity.JoinStringEntity;
+import com.feilong.core.entity.ToStringConfig;
 import com.feilong.core.lang.ObjectUtil;
 
 /**
@@ -202,20 +202,20 @@ public final class ArrayUtil{
     }
 
     /**
-     * 将数组 通过 joinStringEntity 拼接成 字符串.
+     * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
      * 
      * @param <T>
      *            the generic type
      * @param arrays
      *            请使用包装类型,比如 Integer []arrays,而不是 int []arrays
-     * @param joinStringEntity
+     * @param toStringConfig
      *            the join string entity
      * @return <ul>
      *         <li>如果 arrays 是null 或者Empty ,返回null</li>
-     *         <li>否则循环,拼接joinStringEntity.getConnector()</li>
+     *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
      *         </ul>
      */
-    public static <T> String toString(T[] arrays,JoinStringEntity joinStringEntity){
+    public static <T> String toString(T[] arrays,ToStringConfig toStringConfig){
         if (Validator.isNullOrEmpty(arrays)){
             return null;
         }
@@ -227,7 +227,7 @@ public final class ArrayUtil{
             sb.append(t);
             // 不是最后一个 拼接
             if (i != j - 1){
-                sb.append(joinStringEntity.getConnector());
+                sb.append(toStringConfig.getConnector());
             }
         }
         return sb.toString();

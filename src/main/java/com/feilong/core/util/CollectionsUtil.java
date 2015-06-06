@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.entity.JoinStringEntity;
+import com.feilong.core.entity.ToStringConfig;
 import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
@@ -80,20 +80,20 @@ public final class CollectionsUtil{
      *            the generic type ,必须实现 {@link Serializable} 接口
      * @param collection
      *            集合, 建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
-     * @param joinStringEntity
+     * @param toStringConfig
      *            连接字符串 实体
      * @return 如果 collection isNullOrEmpty,返回null<br>
-     *         如果 joinStringEntity 是null,默认使用 {@link JoinStringEntity#DEFAULT_CONNECTOR} 进行连接<br>
-     *         都不是null,会循环,拼接joinStringEntity.getConnector()
+     *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
+     *         都不是null,会循环,拼接toStringConfig.getConnector()
      */
     // XXX 空字符串不拼接
-    public static final <T extends Serializable> String toString(final Collection<T> collection,final JoinStringEntity joinStringEntity){
+    public static final <T extends Serializable> String toString(final Collection<T> collection,final ToStringConfig toStringConfig){
 
         if (Validator.isNotNullOrEmpty(collection)){
 
-            String connector = JoinStringEntity.DEFAULT_CONNECTOR;
-            if (Validator.isNotNullOrEmpty(joinStringEntity)){
-                connector = joinStringEntity.getConnector();
+            String connector = ToStringConfig.DEFAULT_CONNECTOR;
+            if (Validator.isNotNullOrEmpty(toStringConfig)){
+                connector = toStringConfig.getConnector();
             }
 
             StringBuilder sb = new StringBuilder();
