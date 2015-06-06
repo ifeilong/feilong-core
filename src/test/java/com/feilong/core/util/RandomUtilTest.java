@@ -21,9 +21,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.ConfigConstants;
-import com.feilong.core.util.RandomUtil;
-
 /**
  * The Class RandomUtilTest.
  *
@@ -34,7 +31,13 @@ import com.feilong.core.util.RandomUtil;
 public class RandomUtilTest{
 
     /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(RandomUtilTest.class);
+    private static final Logger log                  = LoggerFactory.getLogger(RandomUtilTest.class);
+
+    /** The Constant NUMBERS. */
+    public static final String  NUMBERS              = "0123456789";
+
+    /** The Constant NUMBERSANDALLLETTERS. */
+    public static final String  NUMBERSANDALLLETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789";
 
     /**
      * {@link com.feilong.core.util.RandomUtil#createRandom(Number)} 的测试方法。
@@ -70,8 +73,8 @@ public class RandomUtilTest{
      */
     @Test
     public final void testgetRandomFromString(){
-        log.info(RandomUtil.createRandomFromString(ConfigConstants.NUMBERSANDALLLETTERS, 5));
-        log.info(RandomUtil.createRandomFromString(ConfigConstants.NUMBERS, 200));
+        log.info(RandomUtil.createRandomFromString(NUMBERSANDALLLETTERS, 5));
+        log.info(RandomUtil.createRandomFromString(NUMBERS, 200));
     }
 
     /**
@@ -79,7 +82,7 @@ public class RandomUtilTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public final void testgetRandomFromString1(){
-        log.info(RandomUtil.createRandomFromString(ConfigConstants.NUMBERS, 0));
+        log.info(RandomUtil.createRandomFromString(NUMBERS, 0));
     }
 
     /**
@@ -95,7 +98,7 @@ public class RandomUtilTest{
      */
     @Test
     public final void createRandomFromString(){
-        log.info(RandomUtil.createRandomFromString(ConfigConstants.NUMBERS, 8, 20));
+        log.info(RandomUtil.createRandomFromString(NUMBERS, 8, 20));
     }
 
     /**
