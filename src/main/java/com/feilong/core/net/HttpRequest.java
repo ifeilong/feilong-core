@@ -18,6 +18,8 @@ package com.feilong.core.net;
 import java.io.Serializable;
 import java.util.Map;
 
+import com.feilong.core.io.CharsetType;
+
 /**
  * http 请求信息.
  *
@@ -42,6 +44,15 @@ public class HttpRequest implements Serializable{
 
     /** 请求头 信息. */
     private Map<String, String> headerMap;
+
+    /**
+     * 完整的请求路径.
+     * 
+     * @return the full encoded url
+     */
+    public String getFullEncodedUrl(){
+        return URIUtil.getEncodedUrlByValueMap(uri, paramMap, CharsetType.UTF8);
+    }
 
     /**
      * 获得 请求的uri地址.

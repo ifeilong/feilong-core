@@ -86,6 +86,12 @@ import java.util.Date;
  * <td><a href="#text">Text</a></td>
  * <td><code>Tuesday</code>; <code>Tue</code></td>
  * </tr>
+ * <tr>
+ * <td><code>EEEE</code></td>
+ * <td>星期</td>
+ * <td></td>
+ * <td><code>星期二</code></td>
+ * </tr>
  * <tr style="background-color:#eeeeff">
  * <td><code>a</code></td>
  * <td>Am/pm marker</td>
