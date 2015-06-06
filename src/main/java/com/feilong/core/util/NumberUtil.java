@@ -394,6 +394,25 @@ public final class NumberUtil{
         return add;
     }
 
+    /**
+     * 所有数加起来(剔除null的值).
+     *
+     * @param numbers
+     *            the numbers
+     * @return the 添加 value
+     * @since 1.2.1
+     */
+    public static final BigDecimal getAddValue(Number...numbers){
+        BigDecimal returnValue = BigDecimal.ZERO;
+        for (Number number : numbers){
+            if (Validator.isNotNullOrEmpty(number)){
+                BigDecimal bigDecimal = ObjectUtil.toBigDecimal(number);
+                returnValue = returnValue.add(bigDecimal);
+            }
+        }
+        return returnValue;
+    }
+
     // [end]
 
     /**

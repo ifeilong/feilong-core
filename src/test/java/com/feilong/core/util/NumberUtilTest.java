@@ -25,9 +25,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.util.NumberPattern;
-import com.feilong.core.util.NumberUtil;
-
 /**
  * The Class NumberUtilTest.
  * 
@@ -318,5 +315,11 @@ public class NumberUtilTest{
         assertEquals(5, NumberUtil.getAddValue(null, 5));
         assertEquals(6, NumberUtil.getAddValue(new BigDecimal(6), null));
         assertEquals(11, NumberUtil.getAddValue(new BigDecimal(6), 5));
+    }
+
+    @Test
+    public void getAddValue2(){
+        assertEquals(new BigDecimal(11), NumberUtil.getAddValue(2, 4, 5));
+        assertEquals(new BigDecimal(6), NumberUtil.getAddValue(2, 4, null));
     }
 }
