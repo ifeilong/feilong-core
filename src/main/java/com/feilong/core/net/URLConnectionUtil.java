@@ -272,7 +272,8 @@ public final class URLConnectionUtil{
             //设置从主机读取数据超时（单位：毫秒）
             httpURLConnection.setReadTimeout(readTimeout);
 
-            httpURLConnection.setRequestMethod(httpRequest.getHttpMethodType().getMethod());
+            //这里要大写 否则会报  java.net.ProtocolException: Invalid HTTP method: get
+            httpURLConnection.setRequestMethod(httpRequest.getHttpMethodType().getMethod().toUpperCase());
 
             Map<String, String> headerMap = httpRequest.getHeaderMap();
             if (Validator.isNotNullOrEmpty(headerMap)){
