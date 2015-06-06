@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -327,9 +329,9 @@ public class CollectionsUtilTest{
         list.add("");
 
         ToStringConfig toStringConfig = new ToStringConfig(",");
+        toStringConfig.setIsJoinNullOrEmpty(false);
 
-        String string = CollectionsUtil.toString(list, toStringConfig);
-        log.info(string);
+        assertEquals("2548", CollectionsUtil.toString(list, toStringConfig));
     }
 
     /**

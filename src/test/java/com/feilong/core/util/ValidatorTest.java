@@ -24,8 +24,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
-import com.feilong.core.util.Validator;
 import com.feilong.test.User;
 
 /**
@@ -36,6 +34,15 @@ import com.feilong.test.User;
  * @since 1.0.7
  */
 public class ValidatorTest{
+
+    /**
+     * Test filter.
+     */
+    @Test
+    public void testFilter(){
+        int[] i = {};
+        assertEquals(true, Validator.isNullOrEmpty(i));
+    }
 
     /**
      * Name.

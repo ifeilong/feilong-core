@@ -203,15 +203,21 @@ public final class ArrayUtil{
     /**
      * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
      * 
+     * 
      * <pre>
+     * Example 1:
      * ArrayUtil.toString(new ToStringConfig(),"a","b")---->"a,b"
+     * 
+     * Example 2:
+     * ToStringConfig toStringConfig=new ToStringConfig(",");
+     * toStringConfig.setIsJoinNullOrEmpty(false);
      * ArrayUtil.toString(new ToStringConfig(),"a","b",null)---->"a,b"
      * </pre>
      * 
      * @param <T>
      *            the generic type
      * @param arrays
-     *            请使用包装类型,比如 Integer []arrays,而不是 int []arrays
+     *            请使用包装类型,比如 Integer []arrays,而不是 int []arrays //TODO
      * @param toStringConfig
      *            the join string entity
      * @return <ul>

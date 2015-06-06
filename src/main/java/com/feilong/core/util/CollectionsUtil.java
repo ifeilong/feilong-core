@@ -168,30 +168,13 @@ public final class CollectionsUtil{
      * @return 如果 collection isNullOrEmpty,返回null<br>
      *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
+     * @see com.feilong.core.util.ArrayUtil#toString(ToStringConfig, T...)
      */
-    // XXX 空字符串不拼接
-    public static final <T extends Serializable> String toString(final Collection<T> collection,final ToStringConfig toStringConfig){
-
-        if (Validator.isNotNullOrEmpty(collection)){
-
-            String connector = ToStringConfig.DEFAULT_CONNECTOR;
-            if (Validator.isNotNullOrEmpty(toStringConfig)){
-                connector = toStringConfig.getConnector();
-            }
-
-            StringBuilder sb = new StringBuilder();
-            int i = 0;
-            for (T t : collection){
-                sb.append(t);
-                // 拼接连接符
-                if (i < collection.size() - 1){
-                    sb.append(connector);
-                }
-                i++;
-            }
-            return sb.toString();
+    public static final <T extends Serializable> String toString(final Collection<T> collection,ToStringConfig toStringConfig){
+        if (Validator.isNullOrEmpty(collection)){
+            return null;
         }
-        return null;
+        return ArrayUtil.toString(toStringConfig, toArray(collection));
     }
 
     /**

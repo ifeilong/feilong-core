@@ -288,4 +288,14 @@ public class ArrayUtilTest{
         toStringConfig.setIsJoinNullOrEmpty(false);
         assertEquals("2,1", ArrayUtil.toString(toStringConfig, array3));
     }
+
+    /**
+     * Test to string2.
+     */
+    @Test
+    public void testToString2(){
+        ToStringConfig toStringConfig = new ToStringConfig(",");
+        int[] int1 = { 2, 1 };
+        assertEquals("2,1", ArrayUtil.toString(toStringConfig, int1));
+    }
 }
