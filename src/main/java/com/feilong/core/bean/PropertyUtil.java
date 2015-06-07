@@ -53,7 +53,6 @@ public final class PropertyUtil{
     }
 
     /**
-     *
      * 返回一个<code>bean</code>中所有的可读属性，并将属性名/属性值放入一个Map中.
      * 
      * <p>
@@ -84,7 +83,6 @@ public final class PropertyUtil{
      * 使用 {@link PropertyUtils#setProperty(Object, String, Object)} 来设置属性值(<b>不会进行类型转换</b>).
      * 
      * <pre>
-     * 
      * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); // 这里的9是String类型
      * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); // 这里的是int类型
      * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化，后者不能
@@ -119,7 +117,6 @@ public final class PropertyUtil{
      * 当然这3种类也可以组合使用啦！
      * //nest
      *     log.debug(BeanUtils.getProperty(c, "employee[1].name"));
-     * 
      * }
      * </pre>
      * 

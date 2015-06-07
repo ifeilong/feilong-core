@@ -16,8 +16,8 @@
 package com.feilong.core.configure;
 
 /**
- * 标识是配置文件处理类
- * 
+ * 标识是配置文件处理类.
+ *
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0 2011-2-7 上午12:28:38
  * @version 1.0.8 2014年8月4日 上午10:57:16 change abstract class to interface

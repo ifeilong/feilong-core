@@ -149,7 +149,7 @@ public final class BeanUtil{
     // [start] cloneBean
 
     /**
-     * 调用 {@link BeanUtils#cloneBean(Object)},<br>
+     * 调用 {@link BeanUtils#cloneBean(Object)}.<br>
      * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中<br>
      * 
      * <p>
@@ -191,11 +191,11 @@ public final class BeanUtil{
     // [start] describe 把Bean的属性值放入到一个Map里面
 
     /**
-     * <p>
      * 返回一个<code>bean</code>中所有的可读属性，并将属性名/属性值放入一个Map中.
-     * </p>
      * 
+     * <p>
      * 另外还有一个名为class的属性，属性值是Object的类名，事实上class是java.lang.Object的一个属性.
+     * </p>
      * <p>
      * <span style="color:red">缺陷:<br>
      * 自己手工注册的ConvertUtils.register(dateTimeConverter, java.util.Date.class)不会生效</span><br>
@@ -259,9 +259,12 @@ public final class BeanUtil{
 
     // [start] copyProperties
     /**
-     * 对象Properties的复制,调用了 {@link BeanUtils#copyProperties(Object, Object)}<br>
+     * 对象Properties的复制,调用了 {@link BeanUtils#copyProperties(Object, Object)}.
+     * 
+     * <p>
      * 注意:这种copy都是浅拷贝，复制后的2个Bean的同一个属性可能拥有同一个对象的ref，<br>
      * 这个在使用时要小心，特别是对于属性为自定义类的情况 .
+     * </p>
      * 
      * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
      * 
@@ -301,7 +304,7 @@ public final class BeanUtil{
     }
 
     /**
-     * 对象值的复制 {@code fromObj-->toObj}
+     * 对象值的复制 {@code fromObj-->toObj}.
      * 
      * <pre>
      * 如果有java.util.Date 类型的 需要copy,那么 需要先这么着
@@ -350,7 +353,7 @@ public final class BeanUtil{
 
     // [start] copyProperty
     /**
-     * 对象值的复制 {@code fromObj-->toObj}
+     * 对象值的复制 {@code fromObj-->toObj}.
      * 
      * <pre>
      * 如果有java.util.Date 类型的 需要copy,那么 需要先这么着
@@ -388,7 +391,7 @@ public final class BeanUtil{
     }
 
     /**
-     * bean中的成员变量name赋值为value<br>
+     * bean中的成员变量name赋值为value.
      * 
      * <pre>
      * 如果有java.util.Date 类型的 需要copy,那么 需要先这么着
@@ -513,7 +516,6 @@ public final class BeanUtil{
      * {@link PropertyUtils#getProperty(Object, String)} 结果是Object类型,不会做类型转换
      * </p>
      * </blockquote>
-     * 
      * 
      * <h3>具体实现:</h3>
      * 

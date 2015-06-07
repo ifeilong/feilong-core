@@ -26,7 +26,7 @@ import java.util.Date;
  */
 public final class ConstellationUtil{
 
-    /** 飞龙星座枚举. */
+    /** 星座枚举. */
     private static final ConstellationType[] CONSTELLATION_TYPES = {
                                                                  // 水瓶座 1月20日-2月18日
             ConstellationType.AQUARIUS,

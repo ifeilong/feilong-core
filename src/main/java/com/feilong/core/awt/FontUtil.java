@@ -51,8 +51,8 @@ public final class FontUtil{
     }
 
     /**
-     * 获得courier_New字体(默认 {@link Font#PLAIN})
-     * 
+     * 获得courier_New字体(默认 {@link Font#PLAIN}).
+     *
      * @param size
      *            the size
      * @return 获得courier_New字体
@@ -64,8 +64,8 @@ public final class FontUtil{
     }
 
     /**
-     * 获得verdana字体(默认 {@link Font#PLAIN})
-     * 
+     * 获得verdana字体(默认 {@link Font#PLAIN}).
+     *
      * @param size
      *            the size
      * @return verdana字体
@@ -77,8 +77,8 @@ public final class FontUtil{
     }
 
     /**
-     * 获得微软雅黑字体(默认 {@link Font#PLAIN})
-     * 
+     * 获得微软雅黑字体(默认 {@link Font#PLAIN}).
+     *
      * @param size
      *            the size
      * @return 获得微软雅黑字体
@@ -90,8 +90,8 @@ public final class FontUtil{
     }
 
     /**
-     * 获得字体(默认 {@link Font#PLAIN})
-     * 
+     * 获得字体(默认 {@link Font#PLAIN}).
+     *
      * @param fontName
      *            字体名称.<br>
      *            可以是字体外观名称或字体系列名称，并可表示此 GraphicsEnvironment 中找到的逻辑字体或物理字体.<br>

@@ -79,7 +79,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * @param <T>
      *            the generic type
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param key
      *            the key
      * @param typeClass
@@ -120,10 +120,10 @@ public final class ResourceBundleUtil implements BaseConfigure{
     }
 
     /**
-     * 获取Properties配置文件键值 ,采用java.util.ResourceBundle类的getBundle()方法来读取
+     * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      *
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param key
      *            Properties配置文件键名
      * @return 该键的值
@@ -137,10 +137,10 @@ public final class ResourceBundleUtil implements BaseConfigure{
     }
 
     /**
-     * 获取Properties配置文件键值 ,采用java.util.ResourceBundle类的getBundle()方法来读取
+     * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      *
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param key
      *            Properties配置文件键名
      * @param locale
@@ -156,11 +156,13 @@ public final class ResourceBundleUtil implements BaseConfigure{
     }
 
     /**
-     * 带参数的 配置文件<br>
+     * 带参数的 配置文件.
+     * <p>
      * 格式如:name={0}.
+     * </p>
      * 
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param key
      *            the key
      * @param locale
@@ -177,7 +179,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
     }
 
     /**
-     * 获取Properties配置文件键值 ,采用java.util.ResourceBundle类的getBundle()方法来读取
+     * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      * 
      * @param resourceBundle
      *            配置文件的包+类全名(不要尾缀)
@@ -209,8 +211,10 @@ public final class ResourceBundleUtil implements BaseConfigure{
     }
 
     /**
-     * 带参数的 配置文件<br>
+     * 带参数的 配置文件.
+     * <p>
      * 格式如:name={0}.
+     * </p>
      * 
      * @param resourceBundle
      *            the resource bundle
@@ -233,11 +237,13 @@ public final class ResourceBundleUtil implements BaseConfigure{
 
     // *****************************************************************************
     /**
-     * 读取值,转成数组,<br>
-     * 默认调用 getArray(baseName, key, spliter, String.class) 形式
+     * 读取值,转成数组.
+     * <p>
+     * 默认调用 {@link #getArray(ResourceBundle, String, String, Class)} 形式
+     * </p>
      * 
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param key
      *            the key
      * @param spliter
@@ -250,8 +256,10 @@ public final class ResourceBundleUtil implements BaseConfigure{
     }
 
     /**
-     * 读取值,转成数组,<br>
-     * 默认调用 getArray(resourceBundle, key, spliter, String.class) 形式
+     * 读取值,转成数组.
+     * <p>
+     * 默认调用 {@link #getArray(ResourceBundle, String, String, Class)} 形式
+     * </p>
      * 
      * @param resourceBundle
      *            the resource bundle
@@ -272,7 +280,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * @param <T>
      *            the generic type
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param key
      *            the key
      * @param spliter
@@ -321,7 +329,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * Read prefix as map(HashMap).
      * 
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param prefix
      *            前缀
      * @param spliter
@@ -356,7 +364,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * 读取配置文件,将k/v 统统转成map(HashMap).
      * 
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
      * @see #readAllPropertiesToMap(String, Locale)
      * @since 1.2.1
@@ -372,7 +380,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * 读取配置文件,将k/v 统统转成map(HashMap).
      * 
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param locale
      *            the locale 支持国际化
      * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
@@ -399,7 +407,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * 获得ResourceBundle.
      * 
      * @param baseName
-     *            the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @return the resource bundle
      * @see java.util.Locale#getDefault()
      * @see #getResourceBundle(String, Locale)
@@ -413,7 +421,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * 获得ResourceBundle.
      * 
      * @param baseName
-     *            配置文件的包+类全名(不要尾缀),the base name of the resource bundle, a fully qualified class name
+     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param locale
      *            the locale for which a resource bundle is desired
      * @return the resource bundle,may be null
@@ -432,6 +440,8 @@ public final class ResourceBundleUtil implements BaseConfigure{
         }
         return resourceBundle;
     }
+
+    //*****************************************************************************
 
     /**
      * 获得ResourceBundle({@link PropertyResourceBundle}),新增这个方法的初衷是为了能读取任意的资源(包括本地file等).

@@ -121,9 +121,11 @@ public final class ImageUtil{
     }
 
     /**
-     * 从一个old图片,生成一个新的 new BufferedImage,<br>
+     * 从一个old图片,生成一个新的 new BufferedImage.
+     * <p>
      * 该BufferedImage 的Width Height 和原图一样<br>
      * 该BufferedImage操作不会影响原图.
+     * </p>
      * 
      * @param oldBufferedImage
      *            oldBufferedImage
@@ -139,9 +141,11 @@ public final class ImageUtil{
     }
 
     /**
-     * 从一个old图片,生成一个新的 new BufferedImage,<br>
+     * 从一个old图片,生成一个新的 new BufferedImage.
+     * <p>
      * 该BufferedImage 的Width Height 和原图一样<br>
      * 该BufferedImage操作不会影响原图.
+     * </p>
      * 
      * @param imagePath
      *            图片

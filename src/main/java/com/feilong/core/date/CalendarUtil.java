@@ -40,8 +40,10 @@ public final class CalendarUtil{
     }
 
     /**
-     * 获得当天00:00:00<br>
-     * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00} .
+     * 获得当天00:00:00.
+     * <p>
+     * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00}
+     * </p>
      * 
      * @return 获得当天00:00:00
      */
@@ -50,9 +52,10 @@ public final class CalendarUtil{
     }
 
     /**
-     * 获得任意日期的00:00:00<br>
-     * 
+     * 获得任意日期的00:00:00.
+     * <p>
      * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00}.
+     * </p>
      * 
      * @param date
      *            the date
@@ -68,8 +71,10 @@ public final class CalendarUtil{
     }
 
     /**
-     * 获得任意日期的00:00:00<br>
+     * 获得任意日期的00:00:00.
+     * <p>
      * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00}.
+     * </p>
      * 
      * @param date
      *            the date
@@ -81,8 +86,8 @@ public final class CalendarUtil{
     }
 
     /**
-     * 获得日历字段值
-     * 
+     * 获得日历字段值.
+     *
      * @param date
      *            date
      * @param field
@@ -108,8 +113,8 @@ public final class CalendarUtil{
     }
 
     /**
-     * 将日期字符串转成Calendar
-     * 
+     * 将日期字符串转成Calendar.
+     *
      * @param dateString
      *            将日期字符串
      * @param datePattern
