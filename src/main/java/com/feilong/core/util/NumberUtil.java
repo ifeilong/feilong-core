@@ -327,6 +327,8 @@ public final class NumberUtil{
      *            标度,小数的位数,四舍五入
      * @return 获得两个数的乘积 <br>
      *         if isNotNullOrEmpty(two) return one
+     * @see #getMultiplyValue(BigDecimal, Serializable)
+     * @see #setScale(BigDecimal, int)
      */
     public static final BigDecimal getMultiplyValue(BigDecimal one,Serializable two,int scale){
         BigDecimal result = getMultiplyValue(one, two);
@@ -335,6 +337,10 @@ public final class NumberUtil{
 
     /**
      * 获得 multiply value.
+     * 
+     * <p>
+     * scale: (this.scale() + multiplicand.scale()).
+     * </p>
      *
      * @param one
      *            乘数
@@ -342,15 +348,36 @@ public final class NumberUtil{
      *            被乘数
      * @return 获得两个数的乘积 <br>
      *         if isNotNullOrEmpty(two) return one
+     * @see java.math.BigDecimal#multiply(BigDecimal)
      * @since 1.0.8
      */
     public static final BigDecimal getMultiplyValue(BigDecimal one,Serializable two){
-        if (Validator.isNotNullOrEmpty(two)){
-            BigDecimal multiplicand = new BigDecimal(two.toString());
-            BigDecimal result = one.multiply(multiplicand);
-            return result;
+        if (Validator.isNullOrEmpty(two)){
+            return one;
         }
-        return one;
+
+        BigDecimal multiplicand = new BigDecimal(two.toString());
+        BigDecimal result = one.multiply(multiplicand);
+        return result;
+    }
+
+    /**
+     * 获得 multiply value.
+     * <p>
+     * scale: (this.scale() + multiplicand.scale()).
+     * </p>
+     * 
+     * @param one
+     *            乘数
+     * @param two
+     *            被乘数
+     * @return 获得两个数的乘积 <br>
+     *         if isNotNullOrEmpty(two) return one
+     * @see #getMultiplyValue(BigDecimal, Serializable)
+     * @since 1.2.1
+     */
+    public static final BigDecimal getMultiplyValue(Number one,Serializable two){
+        return getMultiplyValue(ObjectUtil.toBigDecimal(one), two);
     }
 
     // [end]

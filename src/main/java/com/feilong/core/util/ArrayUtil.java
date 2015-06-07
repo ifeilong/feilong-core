@@ -233,6 +233,10 @@ public final class ArrayUtil{
             return null;
         }
 
+        if (Validator.isNullOrEmpty(toStringConfig)){
+            toStringConfig = new ToStringConfig();
+        }
+
         String connector = toStringConfig.getConnector();
 
         StringBuilder sb = new StringBuilder();
@@ -246,15 +250,21 @@ public final class ArrayUtil{
                 }
             }
             sb.append(t);
-            sb.append(connector);
+            if (Validator.isNotNullOrEmpty(connector)){
+                sb.append(connector);
+            }
         }
 
         //由于上面的循环中，最后一个元素可能是null或者empty，判断加还是不加拼接符有点麻烦，因此，循环中统一拼接，但是循环之后做截取处理
         String returnValue = sb.toString();
-        if (returnValue.endsWith(connector)){
-            //去掉最后的拼接符
-            return StringUtil.substringWithoutLast(returnValue, connector.length());
+
+        if (Validator.isNotNullOrEmpty(connector)){
+            if (returnValue.endsWith(connector)){
+                //去掉最后的拼接符
+                return StringUtil.substringWithoutLast(returnValue, connector.length());
+            }
         }
+
         return returnValue;
     }
 
