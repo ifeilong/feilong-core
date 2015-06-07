@@ -155,7 +155,7 @@ import java.util.Date;
  * </blockquote>
  * 
  * 
- * <h3>关于yyyy && YYYY</h3>
+ * <h3>关于yyyy && YYYY:</h3>
  * 
  * <blockquote>
  * <p>
@@ -180,7 +180,7 @@ import java.util.Date;
  * </p>
  * 
  * <p>
- * 注意:YYYY是 jdk1.7+支持的格式, jdk1.7-的版本, SimpleDateFormat会抛异常
+ * <span style="color:red"> 注意:YYYY是 jdk1.7+支持的格式, jdk1.7-的版本, SimpleDateFormat会抛异常</span>
  * </p>
  * </blockquote>
  * 

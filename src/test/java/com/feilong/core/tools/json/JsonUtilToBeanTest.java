@@ -33,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.HttpMethodType;
-import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.test.MyBean;
 import com.feilong.test.Order;
 import com.feilong.test.Person;
@@ -46,7 +45,6 @@ import com.feilong.test.UserInfo;
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
  * @version 1.0.7 2014-6-25 15:31:51
  */
-
 public class JsonUtilToBeanTest{
 
     /** The Constant log. */

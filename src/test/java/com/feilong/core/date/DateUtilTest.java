@@ -15,6 +15,8 @@
  */
 package com.feilong.core.date;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -39,19 +41,18 @@ public class DateUtilTest extends BaseDateUtilTest{
     /** The Constant log. */
     private static final Logger log = LoggerFactory.getLogger(DateUtilTest.class);
 
-    // ctrl +alt + ↑
-    // ctrl +alt+↓
-    // ctrl+D 删除光标所在行
-
     /**
      * TestDateUtilTest.
      */
     @Test
     public void testDateUtilTest(){
         Calendar calendar = Calendar.getInstance();
+
         calendar.set(2014, Calendar.DECEMBER, 29);
-        log.debug(DateUtil.date2String(calendar.getTime(), "yyyy-MM-dd"));
-        log.debug(DateUtil.date2String(calendar.getTime(), "YYYY-MM-dd"));
+        Date time = calendar.getTime();
+
+        assertEquals("2014-12-29", DateUtil.date2String(time, "yyyy-MM-dd"));
+        assertEquals("2015-12-29", DateUtil.date2String(time, "YYYY-MM-dd"));
     }
 
     /**

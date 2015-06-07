@@ -25,9 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.entity.BackWarnEntity;
-import com.feilong.core.lang.reflect.ConstructorUtil;
-import com.feilong.core.lang.reflect.MethodUtil;
-import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.core.util.StringUtil;
 
 /**
@@ -53,9 +50,9 @@ public class MethodUtilTest{
         return "name int";
     }
 
-    //    public String name(Integer name){
-    //        return "name Integer";
-    //    }
+    public String name(Integer name){
+        return "name Integer";
+    }
 
     /**
      * Test invoke method1.

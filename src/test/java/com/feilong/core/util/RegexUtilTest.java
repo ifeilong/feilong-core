@@ -21,9 +21,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.util.RegexPattern;
-import com.feilong.core.util.RegexUtil;
-
 /**
  * The Class RegexUtilTest.
  * 
@@ -92,6 +89,9 @@ public class RegexUtilTest{
         assertEquals(true, RegexUtil.matches(RegexPattern.EMAIL, "venusdrogon@163.com"));
     }
 
+    /**
+     * Test mobilephone.
+     */
     @Test
     public final void testMOBILEPHONE(){
         assertEquals(true, RegexUtil.matches(RegexPattern.MOBILEPHONE, "18501646315"));

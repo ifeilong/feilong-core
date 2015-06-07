@@ -317,6 +317,9 @@ public class NumberUtilTest{
         assertEquals(11, NumberUtil.getAddValue(new BigDecimal(6), 5));
     }
 
+    /**
+     * 获得 add value2.
+     */
     @Test
     public void getAddValue2(){
         assertEquals(new BigDecimal(11), NumberUtil.getAddValue(2, 4, 5));

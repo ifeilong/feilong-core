@@ -17,6 +17,14 @@ package com.feilong.core.lang.reflect.res;
 
 import java.io.Serializable;
 
+/**
+ * The Class BaseSolrRepositoryImpl2.
+ *
+ * @param <L>
+ *            the generic type
+ * @param <T>
+ *            the generic type
+ */
 public abstract class BaseSolrRepositoryImpl2<L, T> extends BaseSolrRepositoryImpl<T, Serializable>{
 
 }

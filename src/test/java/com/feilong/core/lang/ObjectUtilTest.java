@@ -17,7 +17,6 @@ package com.feilong.core.lang;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +33,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.test.User;
 
@@ -51,19 +49,16 @@ public class ObjectUtilTest{
 
     /**
      * Name.
-     * 
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
      */
     @Test
-    public void name() throws IOException{
+    public void testSize(){
         //		 log.info("Size of Object: " + ObjectUtil.size(new Object()));
         log.info("Size of Calendar: " + ObjectUtil.size(Calendar.getInstance()));
         log.info("Size of HashMap: " + ObjectUtil.size(new HashMap<String, String>()));
     }
 
     /**
-     * Test method for {@link com.feilong.core.lang.ObjectUtil#equalsNotNull(java.lang.Object, java.lang.Object)}.
+     * Test equals not null.
      */
     @Test
     public final void testEqualsNotNull(){
@@ -77,6 +72,9 @@ public class ObjectUtilTest{
         assertEquals(true, ObjectUtil.equalsNotNull("1", "1"));
     }
 
+    /**
+     * Test equals.
+     */
     @Test
     public final void testEquals(){
         assertEquals(true, ObjectUtil.equals(1, 1, false));
@@ -169,6 +167,7 @@ public class ObjectUtilTest{
      */
     @Test
     public final void testToInteger(){
+        assertEquals(null, ObjectUtil.toInteger(null));
         assertEquals(8, ObjectUtil.toInteger(8L).intValue());
         assertEquals(8, ObjectUtil.toInteger("8").intValue());
     }
@@ -179,7 +178,7 @@ public class ObjectUtilTest{
     @Test
     public final void testToStringObject(){
         String[] aaaa = { "aa", "aaa" };
-        log.info(ObjectUtil.toString(aaaa));
+        assertEquals("[aa, aaa]", ObjectUtil.toString(aaaa));
     }
 
     /**
@@ -190,9 +189,13 @@ public class ObjectUtilTest{
         log.info(ObjectUtil.toT(BigDecimal.ONE, Float.class) + "");
     }
 
+    /**
+     * Test to big decimal.
+     */
     @Test
     public final void testToBigDecimal(){
         assertEquals(BigDecimal.valueOf(1111), ObjectUtil.toBigDecimal(1111));
         assertEquals(BigDecimal.valueOf(0.1), ObjectUtil.toBigDecimal(0.1));
+        assertEquals(null, ObjectUtil.toBigDecimal(null));
     }
 }
