@@ -18,6 +18,7 @@ package com.feilong.core.lang;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,7 +28,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.iterators.EnumerationIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.Validator;
 
@@ -39,6 +43,9 @@ import com.feilong.core.util.Validator;
  */
 public final class ObjectUtil{
 
+    /** The Constant log. */
+    private static final Logger log = LoggerFactory.getLogger(ObjectUtil.class);
+
     /** Don't let anyone instantiate this class. */
     private ObjectUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -48,22 +55,32 @@ public final class ObjectUtil{
 
     /**
      * 返回对象内存大小.
+     * 
+     * <p>
+     * <span style="color:red">只有支持 {@link java.io.Serializable Serializable}或 {@link java.io.Externalizable Externalizable} 接口的对象才能被
+     * {@link java.io.ObjectInputStream ObjectInputStream}/{@link java.io.ObjectOutputStream ObjectOutputStream}所操作！</span>
+     * </p>
      *
      * @param serializable
      *            the object
      * @return the int
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
+     * @throws UncheckedIOException
+     *             the unchecked io exception
      * @see ByteArrayOutputStream#size()
      * @since 1.0.7
      */
     //XXX 这个需要check下,可能有更好的方案
-    public static int size(Object serializable) throws IOException{
+    public static int size(Serializable serializable) throws UncheckedIOException{
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream.writeObject(serializable);
-        objectOutputStream.close();
-        return byteArrayOutputStream.size();
+        try{
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(serializable);
+            objectOutputStream.close();
+            return byteArrayOutputStream.size();
+        }catch (IOException e){
+            log.error("", e);
+            throw new UncheckedIOException(e);
+        }
     }
 
     /**
@@ -139,6 +156,7 @@ public final class ObjectUtil{
         }
     }
 
+    //****************************************************************************************
     /**
      * 非空判断两个值是否相等 <br>
      * 当两个值都不为空,且object.equals(object2)才返回true
@@ -219,6 +237,8 @@ public final class ObjectUtil{
         return equals(object, object2, false);
     }
 
+    //****************************************************************************************
+
     /**
      * 判断对象是不是boolean类型数据.
      * 
@@ -270,51 +290,55 @@ public final class ObjectUtil{
      *             如果 参数不能转成 Integer
      */
     public static final Integer toInteger(Object value) throws IllegalArgumentException{
-        Integer returnValue = null;
-        if (Validator.isNotNullOrEmpty(value)){
-            if (value instanceof Integer){
-                returnValue = (Integer) value;
-            }else{
-                try{
-                    returnValue = new Integer(trim(value));
-                }catch (Exception e){
-                    throw new IllegalArgumentException("Input param:\"" + value + "\", convert to integer exception", e);
-                }
-            }
+        if (Validator.isNullOrEmpty(value)){
+            return null;
         }
-        return returnValue;
+
+        if (value instanceof Integer){
+            return (Integer) value;
+        }
+
+        try{
+            return new Integer(trim(value));
+        }catch (Exception e){
+            throw new IllegalArgumentException("Input param:[\"" + value + "\"], convert to integer exception", e);
+        }
     }
 
     /**
      * object类型转换成BigDecimal.
      * 
-     * 注意:
+     * <h3>注意:对于 double 转成 BigDecimal:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre>
-     * 对于 double 转成 BigDecimal，推荐使用 BigDecimal.valueOf，不建议使用new BigDecimal(double)，参见 JDK API
+     * <span style="color:red">推荐使用 BigDecimal.valueOf</span>，不建议使用new BigDecimal(double)，参见 JDK API
      * new BigDecimal(0.1) ====&gt;   0.1000000000000000055511151231257827021181583404541015625
      * BigDecimal.valueOf(0.1) ====&gt;  0.1
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param value
      *            值
      * @return BigDecimal
      */
     public static final BigDecimal toBigDecimal(Object value){
-        BigDecimal returnValue = null;
-        if (Validator.isNotNullOrEmpty(value)){
-            if (value instanceof BigDecimal){
-                returnValue = (BigDecimal) value;
-            }else{
-                //对于 double 转成 BigDecimal，推荐使用 BigDecimal.valueOf，不建议使用new BigDecimal(double)，参见 JDK API
-                //new BigDecimal(0.1) ====>   0.1000000000000000055511151231257827021181583404541015625
-                //BigDecimal.valueOf(0.1) ====>  0.1
-
-                //先转成string 就可以了
-                returnValue = new BigDecimal(value.toString().trim());
-            }
+        if (Validator.isNullOrEmpty(value)){
+            return null;
         }
-        return returnValue;
+
+        if (value instanceof BigDecimal){
+            return (BigDecimal) value;
+        }
+
+        //对于 double 转成 BigDecimal，推荐使用 BigDecimal.valueOf，不建议使用new BigDecimal(double)，参见 JDK API
+        //new BigDecimal(0.1) ====>   0.1000000000000000055511151231257827021181583404541015625
+        //BigDecimal.valueOf(0.1) ====>  0.1
+
+        //先转成string 就可以了
+        return new BigDecimal(trim(value));
     }
 
     /**
@@ -325,13 +349,14 @@ public final class ObjectUtil{
      * @return long 转换后的数值,对不能转换的对象返回null.
      */
     public static final Long toLong(Object value){
-        if (Validator.isNotNullOrEmpty(value)){
-            if (value instanceof Long){
-                return (Long) value;
-            }
-            return Long.parseLong(value.toString());
+        if (Validator.isNullOrEmpty(value)){
+            return null;
         }
-        return null;
+
+        if (value instanceof Long){
+            return (Long) value;
+        }
+        return Long.parseLong(value.toString());
     }
 
     /**
@@ -342,13 +367,14 @@ public final class ObjectUtil{
      * @return the double
      */
     public static final Double toDouble(Object value){
-        if (Validator.isNotNullOrEmpty(value)){
-            if (value instanceof Double){
-                return (Double) value;
-            }
-            return new Double(value.toString());
+        if (Validator.isNullOrEmpty(value)){
+            return null;
         }
-        return null;
+
+        if (value instanceof Double){
+            return (Double) value;
+        }
+        return new Double(value.toString());
     }
 
     /**
@@ -359,13 +385,14 @@ public final class ObjectUtil{
      * @return the float
      */
     public static final Float toFloat(Object value){
-        if (Validator.isNotNullOrEmpty(value)){
-            if (value instanceof Float){
-                return (Float) value;
-            }
-            return new Float(value.toString());
+        if (Validator.isNullOrEmpty(value)){
+            return null;
         }
-        return null;
+
+        if (value instanceof Float){
+            return (Float) value;
+        }
+        return new Float(value.toString());
     }
 
     /**
@@ -376,13 +403,14 @@ public final class ObjectUtil{
      * @return the short
      */
     public static final Short toShort(Object value){
-        if (Validator.isNotNullOrEmpty(value)){
-            if (value instanceof Short){
-                return (Short) value;
-            }
-            return new Short(value.toString());
+        if (Validator.isNullOrEmpty(value)){
+            return null;
         }
-        return null;
+
+        if (value instanceof Short){
+            return (Short) value;
+        }
+        return new Short(value.toString());
     }
 
     /**
@@ -491,15 +519,13 @@ public final class ObjectUtil{
     }
 
     /**
-     * 去除空格
+     * 去除空格.
      * 
      * <pre>
      * trim(null) --------&gt; &quot;&quot;
      * trim(&quot;null&quot;) --------&gt; &quot;null&quot;
      * 
      * </pre>
-     * 
-     * .
      * 
      * @param obj
      *            obj

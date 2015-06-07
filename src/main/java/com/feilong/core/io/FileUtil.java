@@ -41,7 +41,7 @@ import com.feilong.core.util.Validator;
  * </ul>
  * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
- * @version 1.0 2012-5-23 下午5:00:54
+ * @version 1.0.0 2012-5-23 下午5:00:54
  * @version 1.0.7 2014-5-23 20:27 add {@link #getFileFormatSize(File)}
  * @see java.io.File
  * @since 1.0.0
@@ -59,30 +59,53 @@ public final class FileUtil{
     }
 
     /**
-     * 将文件转成ByteArray.
+     * 将文件转成 {@code byte[] bytes}.
+     *
+     * @param fileName
+     *            the file name
+     * @return {@link java.io.ByteArrayOutputStream#toByteArray()}
+     * @throws UncheckedIOException
+     *             the unchecked io exception
+     * @see #toByteArray(File)
+     * @since 1.2.1
+     */
+    public static final byte[] toByteArray(String fileName) throws UncheckedIOException{
+        File file = new File(fileName);
+        return toByteArray(file);
+    }
+
+    /**
+     * 将文件转成 {@code byte[] bytes}.
      *
      * @param file
      *            file
-     * @return byteArrayOutputStream.toByteArray();
+     * @return {@link java.io.ByteArrayOutputStream#toByteArray()}
      * @throws UncheckedIOException
      *             the unchecked io exception
+     * @see com.feilong.core.io.FileUtil#getFileInputStream(File)
+     * @see java.io.ByteArrayOutputStream#toByteArray()
      */
-    public static final byte[] convertFileToByteArray(File file) throws UncheckedIOException{
-        InputStream inputStream = FileUtil.getFileInputStream(file);
+    public static final byte[] toByteArray(File file) throws UncheckedIOException{
+        InputStream inputStream = getFileInputStream(file);
 
+        //Creates a BufferedInputStream and saves its argument, the input stream in, for later use. 
+        //An internal buffer array is created and stored in buf.
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+
+        //Creates a new byte array output stream. 
+        //The buffer capacity is initially 32 bytes, though its size increases if necessary. 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-        byte[] bytes = new byte[IOConstants.DEFAULT_BUFFER_LENGTH];
-        int j;
-
         try{
+            byte[] bytes = new byte[IOConstants.DEFAULT_BUFFER_LENGTH];
+            int j;
             while ((j = bufferedInputStream.read(bytes)) != -1){
                 byteArrayOutputStream.write(bytes, 0, j);
             }
             byteArrayOutputStream.flush();
 
-            return byteArrayOutputStream.toByteArray();
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            return byteArray;
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
@@ -165,14 +188,16 @@ public final class FileUtil{
     //********************************************************************************************
 
     /**
-     * FileInputStream 从文件系统中的某个文件中获得输入字节.哪些文件可用取决于主机环境.<br>
-     * FileInputStream 用于读取诸如图像数据之类的原始字节流.要读取字符流，请考虑使用 FileReader..
+     * 从文件系统中的某个文件中获得输入字节.哪些文件可用取决于主机环境.<br>
+     * {@link java.io.FileInputStream} 用于读取诸如图像数据之类的原始字节流.<br>
+     * 要读取字符流，请考虑使用 {@link java.io.FileReader}
      *
      * @param fileName
      *            该文件通过文件系统中的路径名 fileName 指定.
      * @return FileInputStream
      * @throws UncheckedIOException
      *             the unchecked io exception
+     * @see #getFileInputStream(File)
      */
     public static final FileInputStream getFileInputStream(String fileName) throws UncheckedIOException{
         File file = new File(fileName);
@@ -180,14 +205,16 @@ public final class FileUtil{
     }
 
     /**
-     * FileInputStream 从文件系统中的某个文件中获得输入字节.哪些文件可用取决于主机环境.<br>
-     * FileInputStream 用于读取诸如图像数据之类的原始字节流.要读取字符流，请考虑使用 FileReader..
+     * 从文件系统中的某个文件中获得输入字节.哪些文件可用取决于主机环境.<br>
+     * {@link java.io.FileInputStream} 用于读取诸如图像数据之类的原始字节流.<br>
+     * 要读取字符流，请考虑使用 {@link java.io.FileReader}
      *
      * @param file
      *            为了进行读取而打开的文件.
      * @return FileInputStream
      * @throws UncheckedIOException
      *             the unchecked io exception
+     * @see java.io.FileInputStream
      */
     public static final FileInputStream getFileInputStream(File file) throws UncheckedIOException{
         try{
@@ -286,8 +313,11 @@ public final class FileUtil{
     }
 
     /**
-     * 创建文件夹,支持级联创建.<br>
+     * 创建文件夹,支持级联创建.
+     * 
+     * <p>
      * 注意:
+     * </p>
      * <ol>
      * <li>此处<span style="color:red">参数是文件夹</span>,如果需要传递文件路径自动创建父文件夹,那么请调用 {@link #createDirectoryByFilePath(String)}</li>
      * <li>对于不存在的文件夹/文件夹: "E:\\test\\1\\2011-07-07" 这么一个路径, 没有办法自动区别到底你是要创建文件还是文件夹</li>

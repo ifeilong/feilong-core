@@ -18,11 +18,13 @@ package com.feilong.core.entity;
 import java.io.Serializable;
 
 /**
- * 返回提示.<br>
+ * 返回提示.
+ * <p>
  * 可以用来被继承,以便实现各种定制化的功能
+ * </p>
  * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
- * @version 1.0 2010-6-24 上午03:14:56
+ * @version 1.0.0 2010-6-24 上午03:14:56
  * @since 1.0.0
  */
 public class BackWarnEntity implements Serializable{

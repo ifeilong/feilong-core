@@ -23,7 +23,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 /**
- * {@link java.io.Reader} 工具类
+ * {@link java.io.Reader} 工具类.
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
  * @version 1.0.9 2015年3月6日 上午10:51:54
@@ -57,7 +57,7 @@ public final class ReaderUtil{
      */
     public static String toString(Reader reader) throws UncheckedIOException{
 
-        BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
+        BufferedReader bufferedReader = org.apache.commons.io.IOUtils.toBufferedReader(reader);
 
         try{
             StringBuilder sb = new StringBuilder();

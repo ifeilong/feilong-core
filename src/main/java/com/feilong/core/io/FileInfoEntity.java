@@ -25,7 +25,7 @@ import com.feilong.core.date.DateUtil;
  * 文件信息 entity.
  * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
- * @version 1.0 Dec 7, 2013 8:13:34 PM
+ * @version 1.0.0 Dec 7, 2013 8:13:34 PM
  * @since 1.0.0
  */
 public class FileInfoEntity implements Serializable{
@@ -34,7 +34,7 @@ public class FileInfoEntity implements Serializable{
     private static final long serialVersionUID = 288232184048495608L;
 
     /** The date pattern. */
-    private String            datePattern      = DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
+    private final String      datePattern      = DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
 
     /** 名称. */
     private String            name;

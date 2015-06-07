@@ -37,14 +37,18 @@ public final class MessageFormatUtil{
     }
 
     /**
-     * 格式化.<br>
-     * 用法:
+     * 格式化.
+     * 
+     * <h3>用法:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre>
      * MessageFormatUtil.format(&quot;name=张三{0}a{1}&quot;, &quot;jin&quot;, &quot;xin&quot;)
-     * 
      * 返回: name=张三jinaxin
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param pattern
      *            占位符有三种方式书写方式：

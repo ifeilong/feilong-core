@@ -75,13 +75,15 @@ public final class ArrayUtil{
     }
 
     /**
-     * 将数组转成转成 {@link java.util.Iterator}.<br>
+     * 将数组转成转成 {@link java.util.Iterator}.
+     * <p>
      * 如果我们幸运的话，它是一个对象数组,我们可以遍历并with no copying<br>
      * 否则,异常 ClassCastException 中 ,Rats -- 它是一个基本类型数组,循环放入arrayList 转成arrayList.iterator()
-     * 
+     * </p>
      * <p>
      * <b>注:</b>{@link Arrays#asList(Object...)} 转的list是 {@link Array} 的内部类 ArrayList,这个类没有实现
-     * {@link java.util.AbstractList#add(int, Object)} 这个方法, 如果拿这个list进行add操作,会出现 {@link java.lang.UnsupportedOperationException}
+     * {@link java.util.AbstractList#add(int, Object)} 这个方法,<br>
+     * 如果拿这个list进行add操作,会出现 {@link java.lang.UnsupportedOperationException}
      * </p>
      * 
      * @param <T>
@@ -102,30 +104,31 @@ public final class ArrayUtil{
         if (null == arrays){
             return null;
         }
+        List<T> list = null;
         try{
             // 如果我们幸运的话，它是一个对象数组,我们可以遍历并with no copying
             Object[] objArrays = (Object[]) arrays;
-            List<T> list = (List<T>) Arrays.asList(objArrays);
-            return list.iterator();
+            list = (List<T>) toList(objArrays);
         }catch (ClassCastException e){
             if (log.isDebugEnabled()){
                 log.debug("arrays can not cast to Object[],maybe primitive type,values is:{},{}", arrays, e.getMessage());
             }
             // Rats -- 它是一个基本类型数组
             int length = Array.getLength(arrays);
-            List<T> list = new ArrayList<T>(length);
+            list = new ArrayList<T>(length);
             for (int i = 0; i < length; ++i){
                 Object object = Array.get(arrays, i);
                 list.add((T) object);
             }
-            return list.iterator();
         }
+        return list.iterator();
     }
 
     /**
-     * 数组转成 List({@link java.util.ArrayList})，此方法返回的list可以进行add等操作.
+     * 数组转成 ({@link java.util.ArrayList ArrayList})，此方法返回的list可以进行add等操作.
      * <p>
-     * 注意 :{@link java.util.Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)}方法<br>
+     * 注意 :{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
+     * Collection#add(Object)}方法<br>
      * 因此,会使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回
      * </p>
      * 
