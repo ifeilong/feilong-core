@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,14 +110,9 @@ public final class FileUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            try{
-                // 为避免内存泄漏，Stream的Close是必须的.即使中途发生了异常，也必须Close，
-                // 因此请在finally Block中描述close()
-                byteArrayOutputStream.close();
-                bufferedInputStream.close();
-            }catch (IOException e){
-                throw new UncheckedIOException(e);
-            }
+            // 为避免内存泄漏，Stream的Close是必须的.即使中途发生了异常，也必须Close，
+            IOUtils.closeQuietly(byteArrayOutputStream);
+            IOUtils.closeQuietly(bufferedInputStream);
         }
     }
 

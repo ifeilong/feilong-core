@@ -24,6 +24,8 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
+import org.apache.commons.io.IOUtils;
+
 import com.feilong.core.util.Validator;
 
 /**
@@ -129,14 +131,8 @@ public final class IOReaderUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            try{
-                // 用完关闭流 是个好习惯,^_^
-                if (fileInputStream != null){
-                    fileInputStream.close();
-                }
-            }catch (IOException e){
-                throw new UncheckedIOException(e);
-            }
+            // 用完关闭流 是个好习惯,^_^
+            IOUtils.closeQuietly(fileInputStream);
         }
     }
 }

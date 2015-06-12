@@ -27,6 +27,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -178,18 +179,10 @@ public final class IOWriteUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            try{
-                if (writableByteChannel != null){
-                    outputStream.close();
-                    writableByteChannel.close();
-                }
-                if (readableByteChannel != null){
-                    inputStream.close();
-                    readableByteChannel.close();
-                }
-            }catch (IOException e){
-                throw new UncheckedIOException(e);
-            }
+            IOUtils.closeQuietly(outputStream);
+            IOUtils.closeQuietly(writableByteChannel);
+            IOUtils.closeQuietly(inputStream);
+            IOUtils.closeQuietly(readableByteChannel);
         }
     }
 
@@ -317,13 +310,7 @@ public final class IOWriteUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            if (null != outputStream){
-                try{
-                    outputStream.close();
-                }catch (IOException e){
-                    throw new UncheckedIOException(e);
-                }
-            }
+            IOUtils.closeQuietly(outputStream);
         }
     }
 

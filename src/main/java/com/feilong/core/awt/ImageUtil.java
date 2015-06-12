@@ -29,6 +29,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageTypeSpecifier;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,11 +113,7 @@ public final class ImageUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            try{
-                outputStream.close();
-            }catch (IOException e){
-                throw new UncheckedIOException(e);
-            }
+            IOUtils.closeQuietly(outputStream);
         }
     }
 
