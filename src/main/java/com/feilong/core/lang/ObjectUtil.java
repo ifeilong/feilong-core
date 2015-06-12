@@ -16,8 +16,6 @@
 package com.feilong.core.lang;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -28,9 +26,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.iterators.EnumerationIterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import com.feilong.core.io.SerializableUtil;
 import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.Validator;
@@ -42,9 +39,6 @@ import com.feilong.core.util.Validator;
  * @since 1.0.0
  */
 public final class ObjectUtil{
-
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ObjectUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ObjectUtil(){
@@ -67,20 +61,11 @@ public final class ObjectUtil{
      * @throws UncheckedIOException
      *             the unchecked io exception
      * @see ByteArrayOutputStream#size()
+     * @see com.feilong.core.io.SerializableUtil#size(Serializable)
      * @since 1.0.7
      */
-    //XXX 这个需要check下,可能有更好的方案
     public static int size(Serializable serializable) throws UncheckedIOException{
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        try{
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-            objectOutputStream.writeObject(serializable);
-            objectOutputStream.close();
-            return byteArrayOutputStream.size();
-        }catch (IOException e){
-            log.error("", e);
-            throw new UncheckedIOException(e);
-        }
+        return SerializableUtil.size(serializable);
     }
 
     /**
