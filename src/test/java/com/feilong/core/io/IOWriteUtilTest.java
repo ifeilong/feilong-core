@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.junit.Test;
@@ -30,10 +31,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
-import com.feilong.core.io.FileUtil;
-import com.feilong.core.io.IOWriteUtil;
-import com.feilong.core.io.SpecialFolder;
-import com.feilong.core.io.UncheckedIOException;
 
 /**
  * The Class IOWriteUtilTest.
@@ -117,17 +114,9 @@ public class IOWriteUtilTest{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            try{
-                // 用完关闭流 是个好习惯,^_^
-                if (outputStream != null){
-                    outputStream.close();
-                }
-                if (inputStream != null){
-                    inputStream.close();
-                }
-            }catch (IOException e){
-                throw new UncheckedIOException(e);
-            }
+            // 用完关闭流 是个好习惯,^_^
+            IOUtils.closeQuietly(outputStream);
+            IOUtils.closeQuietly(inputStream);
         }
     }
 
