@@ -106,6 +106,6 @@ public class RandomUtilTest{
      */
     @Test
     public final void createRandom(){
-        log.info(RandomUtil.createRandom(10, 12) + "");
+        log.info("" + RandomUtil.createRandom(10, 20));
     }
 }

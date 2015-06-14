@@ -71,7 +71,10 @@ import com.feilong.core.util.Validator;
  * 
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
  * @version 1.0.7 2014年7月15日 下午1:08:15
+ * @version 1.1.0 2015-4-14 18:59
  * @see org.apache.commons.lang3.reflect.ConstructorUtils
+ * 
+ * @see "org.springframework.beans.BeanUtils.instantiateClass"
  * @since 1.0.7
  */
 public final class ConstructorUtil{
@@ -114,6 +117,8 @@ public final class ConstructorUtil{
      *             if isNullOrEmpty(className)
      * @see ClassUtil#loadClass(String)
      * @see #newInstance(Class, Object...)
+     * 
+     * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     @SuppressWarnings("unchecked")
     public static <T> T newInstance(String className,Object...parameterValues) throws ReflectException,NullPointerException{
@@ -148,6 +153,8 @@ public final class ConstructorUtil{
      * @see java.lang.Class#getConstructor(Class...)
      * @see java.lang.reflect.Constructor#newInstance(Object...)
      * @see org.apache.commons.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object...)
+     * 
+     * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     public static <T> T newInstance(Class<T> klass,Object...parameterValues) throws ReflectException{
         Class<?>[] parameterTypes = ClassUtil.toClass(parameterValues);
@@ -169,6 +176,8 @@ public final class ConstructorUtil{
      * @throws ReflectException
      *             the reflect exception
      * @see org.apache.commons.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object[], Class[])
+     * 
+     * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     public static <T> T newInstance(Class<T> klass,Object[] args,Class<?>[] parameterTypes) throws ReflectException{
         try{
