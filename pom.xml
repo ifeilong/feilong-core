@@ -13,12 +13,6 @@
 	<!-- 会出现在site 界面 -->
 	<description>${project.name} ${project.version} API</description>
 
-	<properties>
-		<!-- -->
-		<maven-compiler-plugin.source>1.6</maven-compiler-plugin.source>
-		<maven-compiler-plugin.target>1.6</maven-compiler-plugin.target>
-	</properties>
-
 	<!-- 软件配置管理，如cvs 和svn -->
 	<scm>
 		<url>https://github.com/venusdrogon/feilong-core</url>
