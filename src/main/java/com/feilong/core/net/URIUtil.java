@@ -94,8 +94,10 @@ public final class URIUtil{
     }
 
     /**
-     * 将网络文件下载到文件夹.<br>
+     * 将网络文件下载到文件夹.
+     * <p>
      * 取到网络文件的文件名 原样下载到目标文件夹.
+     * </p>
      *
      * @param urlString
      *            网络任意文件<br>
@@ -224,8 +226,10 @@ public final class URIUtil{
     }
 
     /**
-     * call {@link java.net.URI#URI(String)}.<br>
+     * call {@link java.net.URI#URI(String)}.
+     * <p>
      * 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个java.net.URISyntaxException.
+     * </p>
      *
      * @param path
      *            the path
