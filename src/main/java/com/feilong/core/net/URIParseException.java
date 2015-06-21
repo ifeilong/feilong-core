@@ -27,7 +27,7 @@ import com.feilong.core.log.Slf4jUtil;
 //	对于程序错误（言外之意不可恢复，大错已经酿成）使用运行时异常（RuntimeException）.
 
 /**
- * 解析url出现异常.
+ * 解析url/uri出现异常.
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
  * @version 1.0.8 2014年11月26日 下午6:33:10

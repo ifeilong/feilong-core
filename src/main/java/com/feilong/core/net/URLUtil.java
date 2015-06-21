@@ -15,8 +15,12 @@
  */
 package com.feilong.core.net;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
+import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -51,5 +55,53 @@ public class URLUtil{
             i++;
         }
         return stringArray;
+    }
+
+    /**
+     * To ur ls.
+     *
+     * @param paths
+     *            the paths
+     * @return the UR l[]
+     * @throws NullPointerException
+     *             the null pointer exception
+     */
+    public static URL[] toURLs(String[] paths) throws NullPointerException{
+        if (Validator.isNullOrEmpty(paths)){
+            throw new NullPointerException("paths can't be null/empty!");
+        }
+
+        int length = paths.length;
+
+        URL[] urls = new URL[length];
+
+        int i = 0;
+        try{
+            for (String path : paths){
+                urls[i] = new File(path).toURI().toURL();
+                i++;
+            }
+        }catch (MalformedURLException e){
+            throw new URIParseException(e);
+        }
+
+        return urls;
+    }
+
+    /**
+     * To ur ls.
+     *
+     * @param paths
+     *            the paths
+     * @return the UR l[]
+     * @throws NullPointerException
+     *             the null pointer exception
+     */
+    public static URL[] toURLs(List<String> paths) throws NullPointerException{
+        if (Validator.isNullOrEmpty(paths)){
+            throw new NullPointerException("paths can't be null/empty!");
+        }
+        String[] array = CollectionsUtil.toArray(paths);
+        return toURLs(array);
     }
 }

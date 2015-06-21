@@ -216,8 +216,12 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 集合转成数组<br>
+     * 集合转成数组.
+     * 
+     * <p style="color:red">
      * note:由于没有办法自动获得T 泛型的类型, 所以会取第一个值的类型做数组的类型,故需要确保第一个元素不是null.
+     * </p>
+     * 
      * 
      * @param <T>
      *            the generic type
