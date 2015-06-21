@@ -29,10 +29,50 @@ import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.tools.json.JsonUtil;
 
 /**
- * 根据类的class文件位置来定位的方法.
+ * {@link java.lang.ClassLoader}工具类.
  * 
+ * <h3>关于查找资源</h3>
+ * 
+ * <blockquote>
+ * 
+ * <ul>
+ * <li>{@link #getResource(String)}</li>
+ * <li>{@link #getClassPath()}</li>
+ * <li>{@link #getClassPath(ClassLoader)}</li>
+ * <li>{@link #getResource(String, Class)}</li>
+ * <li>{@link #getResource(ClassLoader, String)}</li>
+ * <li>{@link #getResources(String, Class)}</li>
+ * </ul>
+ * 
+ * <p>
+ * "",表示classes 的根目录
+ * </p>
+ * e.q:<br>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left"></th>
+ * <th align="left">(maven)测试</th>
+ * <th align="left">在web环境中(即使打成jar的情形)</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@code getResource("")}</td>
+ * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
+ * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@code getResource("com")}</td>
+ * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
+ * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
+ * </tr>
+ * </table>
+ * </blockquote>
+ *
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0 2011-4-27 上午12:40:08
+ * @see java.lang.ClassLoader
+ * @see java.net.URLClassLoader
  * @since 1.0.0
  */
 public final class ClassLoaderUtil{
@@ -269,6 +309,7 @@ public final class ClassLoaderUtil{
      * @throws ClassNotFoundException
      *             If the class cannot be found anywhere.
      * @see java.lang.ClassLoader#loadClass(String)
+     * @see java.lang.Class#forName(String)
      */
     public static Class<?> loadClass(String className,Class<?> callingClass) throws ClassNotFoundException{
         ClassLoader classLoader = null;
@@ -291,7 +332,7 @@ public final class ClassLoaderUtil{
     }
 
     /**
-     * 通过Thread.currentThread().getContextClassLoader() 获得ClassLoader
+     * 通过 {@link Thread#getContextClassLoader()} 获得 {@link ClassLoader}.
      * 
      * @return the class loader by current thread
      */
@@ -305,7 +346,7 @@ public final class ClassLoaderUtil{
     }
 
     /**
-     * 通过类来获得 classLoader.
+     * 通过类来获得 {@link ClassLoader}.
      * 
      * @param callingClass
      *            the calling class
@@ -321,7 +362,7 @@ public final class ClassLoaderUtil{
     }
 
     /**
-     * 获得 class loader info map for log.
+     * 获得 {@link ClassLoader} info map for log.
      *
      * @param classLoader
      *            the class loader
