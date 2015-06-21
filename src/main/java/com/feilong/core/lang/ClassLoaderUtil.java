@@ -31,7 +31,7 @@ import com.feilong.core.tools.json.JsonUtil;
 /**
  * {@link java.lang.ClassLoader}工具类.
  * 
- * <h3>关于查找资源</h3>
+ * <h3>关于查找资源:</h3>
  * 
  * <blockquote>
  * 
@@ -67,6 +67,28 @@ import com.feilong.core.tools.json.JsonUtil;
  * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
  * </tr>
  * </table>
+ * </blockquote>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} VS
+ * {@link java.lang.ClassLoader#getResourceAsStream(String) ClassLoader#getResourceAsStream(String)}</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 基本上,两个都可以用于从 classpath 里面进行资源读取,classpath包含classpath中的路径和classpath中的jar
+ * </p>
+ * <p>
+ * 假设配置文件在 src/main/resources下面,比如 messages/feilong-core-message_en_US.properties,
+ * </p>
+ * <ul>
+ * <li> {@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} 需要这么写
+ * <b>"/messages/feilong-core-message_en_US.properties"</b>, 路径可以写成相对路径或者绝对路径;<br>
+ * 以 / 开头,则这样的路径是指定绝对路径, 如果不以 / 开头, 则路径是相对与这个class所在的包的</li>
+ * <li>{@link java.lang.ClassLoader#getResourceAsStream(String) ClassLoader#getResourceAsStream(String)} 需要这么写
+ * <b>"messages/feilong-core-message_en_US.properties"</b>,ClassLoader JVM会使用BootstrapLoader去加载资源文件.<br>
+ * 所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" <span style="color:red">不需要“/”</span></li>
+ * </ul>
+ * 
  * </blockquote>
  *
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
@@ -157,6 +179,7 @@ public final class ClassLoaderUtil{
      *            The Class object of the calling object
      * @return the resource as stream
      * @see #getResource(String, Class)
+     * @see "org.apache.velocity.util.ClassUtils#getResourceAsStream(Class, String)"
      */
     public static InputStream getResourceAsStream(String resourceName,Class<?> callingClass){
         URL url = getResource(resourceName, callingClass);

@@ -19,6 +19,8 @@ import java.lang.reflect.Modifier;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.feilong.core.util.Validator;
+
 /**
  * {@link java.lang.Class} 工具类.
  * 
@@ -36,16 +38,16 @@ import java.util.Map;
  * <th align="left">说明</th>
  * </tr>
  * <tr valign="top">
- * <td>{@link java.lang.Class#getCanonicalName()}<br>
+ * <td>{@link java.lang.Class#getCanonicalName() getCanonicalName()}<br>
  * 返回 Java Language Specification 中所定义的底层类的规范化名称</td>
  * <td>"com.feilong.core.date.DatePattern"</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>{@link java.lang.Class#getName()}</td>
+ * <td>{@link java.lang.Class#getName() getName()}</td>
  * <td>"com.feilong.core.date.DatePattern"</td>
  * </tr>
  * <tr valign="top">
- * <td>{@link java.lang.Class#getSimpleName()}</td>
+ * <td>{@link java.lang.Class#getSimpleName() getSimpleName()}</td>
  * <td>"DatePattern"</td>
  * </tr>
  * </table>
@@ -53,9 +55,12 @@ import java.util.Map;
  * <p>
  * {@link java.lang.Class#getCanonicalName() getCanonicalName()} && {@link java.lang.Class#getName() getName()} 其实这两个方法,对于大部分class来说,没有什么不同的
  * <br>
- * 但是对于array就显示出来了。 {@link java.lang.Class#getName() getName()} 返回的是<b>[[Ljava.lang.String</b>之类的表现形式，而
- * {@link java.lang.Class#getCanonicalName() getCanonicalName()} 返回的就是跟我们声明类似的形式。
+ * 但是对于array就显示出来了。
  * </p>
+ * <ul>
+ * <li>{@link java.lang.Class#getName() getName()} 返回的是<b>[[Ljava.lang.String</b>之类的表现形式，</li>
+ * <li>而 {@link java.lang.Class#getCanonicalName() getCanonicalName()} 返回的就是跟我们声明类似的形式。</li>
+ * </ul>
  * 
  * </blockquote>
  * 
@@ -90,9 +95,11 @@ import java.util.Map;
  * </blockquote>
  * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
- * @version 1.0 2012-6-1 下午7:19:47
+ * @version 1.0.0 2012-6-1 下午7:19:47
+ * @version 1.2.1 2015-6-21 20:50 update javadoc
  * @since 1.0.0
  * @see java.lang.Class
+ * @see org.apache.commons.lang3.ClassUtils
  */
 public final class ClassUtil{
 
@@ -111,12 +118,12 @@ public final class ClassUtil{
      * @return the map for log
      */
     public static Map<String, Object> getClassInfoMapForLog(Class<?> klass){
+        if (Validator.isNullOrEmpty(klass)){
+            return null;
+        }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
 
-        // getCanonicalName (返回 Java Language Specification 中所定义的底层类的规范化名称。) && getName
-        //其实这两个方法没有什么不同的，对于大部分class来说，
-        //但是对于array就显示出来了。 getName返回的是[[Ljava.lang.String之类的表现形式，而getCanonicalName返回的就是跟我们声明类似的形式。
         map.put("clz.getCanonicalName()", klass.getCanonicalName());//"com.feilong.core.date.DatePattern"
         map.put("clz.getName()", klass.getName());//"com.feilong.core.date.DatePattern"
         map.put("clz.getSimpleName()", klass.getSimpleName());//"DatePattern"
