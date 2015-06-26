@@ -23,10 +23,23 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.PropertyUtil;
 
 /**
- * 属性比较器, 自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值, 进行比较.
+ * 属性比较器,自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值,进行比较,不用自己每个需要排序的类都创建 {@link Comparator}类.
+ * 
+ * <h3>关于 {@link #propertyName}:</h3>
+ * 
+ * <blockquote>
  * <p>
- * 注意:propertyName取出来的值,需要实现 {@link Comparable}接口, 比如 {@link Integer}, {@link String}等类型
+ * {@link #propertyName}取出来的值,必须实现 {@link Comparable}接口, 比如 {@link Integer}, {@link String}等类型
  * </p>
+ * </blockquote>
+ * 
+ * <h3>顺序:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 该类默认是<span style="color:red">正序</span>的形式,如果需要反序,请再使用 {@link org.apache.commons.collections.comparators.ReverseComparator}进行包装
+ * </p>
+ * </blockquote>
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
  * @version 1.2.0 2015年5月21日 上午11:02:42
@@ -42,19 +55,14 @@ public class PropertyComparator<T> implements Comparator<T>{
     /** The Constant log. */
     private static final Logger log = LoggerFactory.getLogger(PropertyComparator.class);
 
-    /** T对象中的属性名称. */
+    /** T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口. */
     private final String        propertyName;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-     */
     /**
      * The Constructor.
      *
      * @param propertyName
-     *            T对象中的属性名称
+     *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
      */
     public PropertyComparator(String propertyName){
         super();
@@ -73,12 +81,15 @@ public class PropertyComparator<T> implements Comparator<T>{
         Comparable<?> propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
 
         int compareTo = propertyValue1.compareTo(propertyValue2);
-        log.debug(
-                        "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],compareTo:[{}]",
-                        propertyName,
-                        propertyValue1,
-                        propertyValue2,
-                        compareTo);
+
+        if (log.isDebugEnabled()){
+            log.debug(
+                            "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],compareTo:[{}]",
+                            propertyName,
+                            propertyValue1,
+                            propertyValue2,
+                            compareTo);
+        }
         return compareTo;
     }
 }

@@ -274,9 +274,10 @@
 					<execution>
 						<phase>install</phase>
 						<configuration>
-							<tasks>
+							<!-- Parameter tasks is deprecated, use target instead -->
+							<target>
 								<echoproperties />
-							</tasks>
+							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>
