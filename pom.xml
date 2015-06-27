@@ -19,10 +19,11 @@
 	<url>https://github.com/venusdrogon/feilong-core</url>
 
 	<!-- 软件配置管理，如cvs 和svn -->
+	<!-- The scm url must start with 'scm:' -->
 	<scm>
 		<url>https://github.com/venusdrogon/feilong-core</url>
-		<connection>https://github.com/venusdrogon/feilong-core</connection>
-		<developerConnection>git@github.com:venusdrogon/feilong-core.git</developerConnection>
+		<connection>scm:git:https://github.com/venusdrogon/feilong-core</connection>
+		<developerConnection>scm:git:git@github.com:venusdrogon/feilong-core.git</developerConnection>
 	</scm>
 
 	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
