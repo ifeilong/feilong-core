@@ -75,7 +75,7 @@ commons |`feilong-core` | 核心jar,所有feilong-platform的基础 | 1.6
 
 # 类和方法介绍: 
 
-## com.feilong.commons.core.date 包,时间日期操作核心类:
+## com.feilong.core.date 包,时间日期操作核心类:
 
 * DateUtil时间工具类  
 
