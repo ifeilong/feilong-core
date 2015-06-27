@@ -26,6 +26,30 @@ package com.feilong.core.date;
 //默认作用域 --->当前包
 final class DateDictionary{
 
+    /** 昨天. */
+    public static final String   YESTERDAY                    = "昨天";
+
+    /** 前天. */
+    public static final String   THEDAY_BEFORE_YESTERDAY      = "前天";
+
+    /** 星期. */
+    public static final String   WEEK                         = "星期";
+
+    /** 天. */
+    public static final String   DAY                          = "天";
+
+    /** 小时. */
+    public static final String   HOUR                         = "小时";
+
+    /** 分钟. */
+    public static final String   MINUTE                       = "分钟";
+
+    /** 秒. */
+    public static final String   SECOND                       = "秒";
+
+    /** 毫秒. */
+    public static final String   MILLISECOND                  = "毫秒";
+
     /**
      * 英文星期.<br>
      * { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }
