@@ -10,8 +10,13 @@
 	<artifactId>feilong-core</artifactId>
 	<name>feilong-core</name>
 
+	<!-- 成立年份 -->
+	<inceptionYear>2008</inceptionYear>
+
 	<!-- 会出现在site 界面 -->
 	<description>${project.name} ${project.version} API</description>
+
+	<url>https://github.com/venusdrogon/feilong-core</url>
 
 	<!-- 软件配置管理，如cvs 和svn -->
 	<scm>
@@ -19,6 +24,40 @@
 		<connection>https://github.com/venusdrogon/feilong-core</connection>
 		<developerConnection>git@github.com:venusdrogon/feilong-core.git</developerConnection>
 	</scm>
+
+	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/venusdrogon/feilong-core/issues</url>
+	</issueManagement>
+
+	<!-- 项目提交者信息 -->
+	<developers>
+		<developer>
+			<id>feilong</id>
+			<name>金鑫</name>
+			<email>${developer.feilong.email}</email>
+			<url>http://venusdrogon.github.io/feilong-platform/</url>
+			<organization>feilong</organization>
+			<organizationUrl>http://venusdrogon.github.io/feilong-platform/</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>8</timezone>
+			<properties>
+				<qq>190600641</qq>
+			</properties>
+		</developer>
+	</developers>
+
+	<!-- 项目的贡献者，但不属于开发小组 -->
+	<contributors>
+		<contributor>
+			<name>bejamin.liu</name>
+			<url>https://github.com/benjaliu</url>
+		</contributor>
+	</contributors>
 
 	<dependencies>
 		<!-- slf4j-log4j12 -->
@@ -261,13 +300,7 @@
 				</executions>
 			</plugin>
 
-			<!-- dependency插件 -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> <executions> <execution> <id>copy-dependencies</id>
-				默认:<phase>process-sources</phase> <goals> <goal>copy-dependencies</goal> </goals> <configuration> 默认:<outputDirectory>${project.build.directory}\dependency</outputDirectory>
-				</configuration> </execution> </executions> </plugin> -->
-
 			<!-- 可以运行ant 代码的插件 -->
-			<!-- -->
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
