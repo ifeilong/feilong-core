@@ -17,6 +17,7 @@ package com.feilong.core.util.comparator;
 
 import java.util.Comparator;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,6 +49,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @see "org.springframework.beans.support.PropertyComparator"
  * @see org.apache.commons.collections.comparators.BooleanComparator
  * @see org.apache.commons.collections.comparators.ReverseComparator
+ * @see org.apache.commons.collections.comparators.ComparableComparator
  * @since 1.2.0
  */
 public class PropertyComparator<T> implements Comparator<T>{
@@ -70,17 +72,27 @@ public class PropertyComparator<T> implements Comparator<T>{
         log.info("propertyName:[{}]", propertyName);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+    /**
+     * Compare.
+     *
+     * @param t1
+     *            the t1
+     * @param t2
+     *            the t2
+     * @return the int
+     * @see org.apache.commons.lang3.ObjectUtils#compare(Comparable, Comparable)
+     * @see org.apache.commons.lang3.ObjectUtils#compare(Comparable, Comparable, boolean)
      */
     @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public int compare(T t1,T t2){
-        Comparable<Comparable<?>> propertyValue1 = PropertyUtil.getProperty(t1, propertyName);
-        Comparable<?> propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
+        Comparable propertyValue1 = PropertyUtil.getProperty(t1, propertyName);
+        Comparable propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
 
-        int compareTo = propertyValue1.compareTo(propertyValue2);
+        int compareTo = ObjectUtils.compare(propertyValue1, propertyValue2);
+
+        //NullPointException
+        //propertyValue1.compareTo(propertyValue2);
 
         if (log.isDebugEnabled()){
             log.debug(
