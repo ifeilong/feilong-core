@@ -86,10 +86,23 @@ public class PropertyComparator<T> implements Comparator<T>{
     @Override
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public int compare(T t1,T t2){
+        if (t1 == t2){
+            return 0;
+        }else if (null == t1){
+            return 1;
+        }else if (null == t2){
+            return -1;
+        }
+
         Comparable propertyValue1 = PropertyUtil.getProperty(t1, propertyName);
         Comparable propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
 
         int compareTo = ObjectUtils.compare(propertyValue1, propertyValue2);
+
+        if (0 == compareTo){
+            //避免TreeSet / TreeMap 过滤掉同sort字段但是对象不相同的情况
+            compareTo = ObjectUtils.compare(t1.hashCode(), t2.hashCode());
+        }
 
         //NullPointException
         //propertyValue1.compareTo(propertyValue2);

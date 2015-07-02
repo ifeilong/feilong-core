@@ -18,6 +18,8 @@ package com.feilong.core.util.comparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -38,22 +40,30 @@ public class PropertyComparatorTest{
 
     @Test
     public final void testPropertyComparator(){
-        PropertyComparator<User> propertyComparator = new PropertyComparator<User>("id");
-
         List<User> list = new ArrayList<User>();
         Long id = null;
         list.add(new User(id));
         list.add(new User(12L));
         list.add(new User(2L));
         list.add(new User(5L));
-        list.add(new User(88L));
+        list.add(null);
         list.add(new User(1L));
         list.add(new User(id));
+        Collections.sort(list, new PropertyComparator<User>("id"));
+        log.debug(JsonUtil.format(list));
+    }
 
-        Collections.sort(list, propertyComparator);
-
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(list));
-        }
+    @Test
+    public final void testPropertyComparator2(){
+        Set<User> list = new TreeSet<User>(new PropertyComparator<User>("id"));
+        Long id = null;
+        list.add(new User(id));
+        list.add(new User(12L));
+        list.add(new User(2L));
+        list.add(new User(5L));
+        list.add(null);
+        list.add(new User(2L));
+        list.add(new User(id));
+        log.debug(JsonUtil.format(list));
     }
 }
