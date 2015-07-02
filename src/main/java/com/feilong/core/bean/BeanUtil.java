@@ -278,22 +278,24 @@ public final class BeanUtil{
      * {@link <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a>}</li>
      * </ul>
      * </blockquote>
-     * 
+     *
      * @param toObj
      *            目标对象
      * @param fromObj
      *            原始对象
      * @throws BeanUtilException
      *             the bean util exception
+     * @throws NullPointerException
+     *             null == toObj or null == fromObj
      * @see org.apache.commons.beanutils.BeanUtils#copyProperties(Object, Object)
      * @see org.apache.commons.beanutils.BeanUtils#copyProperty(Object, String, Object)
      */
-    public static void copyProperties(Object toObj,Object fromObj) throws BeanUtilException{
+    public static void copyProperties(Object toObj,Object fromObj) throws BeanUtilException,NullPointerException{
         if (null == toObj){
-            throw new IllegalArgumentException("No destination bean/toObj specified");
+            throw new NullPointerException("No destination bean/toObj specified");
         }
         if (null == fromObj){
-            throw new IllegalArgumentException("No origin bean/fromObj specified");
+            throw new NullPointerException("No origin bean/fromObj specified");
         }
         try{
             BeanUtils.copyProperties(toObj, fromObj);
@@ -326,28 +328,34 @@ public final class BeanUtil{
      * BeanUtil.copyProperties(enterpriseSales,enterpriseSales_form,new
      * String[]{&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;});
      * </pre>
-     * 
+     *
      * @param toObj
      *            目标对象
      * @param fromObj
      *            原始对象
-     * @param filedNames
-     *            字段数组, can't be null/empty!
+     * @param includePropertyNames
+     *            包含的属性数组, can't be null/empty!
      * @throws BeanUtilException
      *             the bean util exception
+     * @throws NullPointerException
+     *             if isNullOrEmpty(includePropertyNames)
      * @see #copyProperty(Object, Object, String)
+     * @see com.feilong.core.bean.BeanUtil#copyProperty(Object, Object, String)
      */
-    public static void copyProperties(Object toObj,Object fromObj,String[] filedNames) throws BeanUtilException{
-        if (Validator.isNullOrEmpty(filedNames)){
-            throw new NullPointerException("filedNames can't be null/empty!");
+    public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames) throws BeanUtilException,
+                    NullPointerException{
+        if (Validator.isNullOrEmpty(includePropertyNames)){
+            throw new NullPointerException("includePropertyNames can't be null/empty!");
         }
 
-        int length = filedNames.length;
+        int length = includePropertyNames.length;
         for (int i = 0; i < length; ++i){
-            String filedName = filedNames[i];
+            String filedName = includePropertyNames[i];
             copyProperty(toObj, fromObj, filedName);
         }
     }
+
+    //TODO add excludePropertyNames support
 
     // [end]
 
