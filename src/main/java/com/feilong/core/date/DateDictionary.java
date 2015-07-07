@@ -27,71 +27,34 @@ package com.feilong.core.date;
 final class DateDictionary{
 
     /** 昨天. */
-    public static final String   YESTERDAY                    = "昨天";
+    public static final String    YESTERDAY                    = "昨天";
 
     /** 前天. */
-    public static final String   THEDAY_BEFORE_YESTERDAY      = "前天";
+    public static final String    THEDAY_BEFORE_YESTERDAY      = "前天";
 
     /** 星期. */
-    public static final String   WEEK                         = "星期";
+    public static final String    WEEK                         = "星期";
 
     /** 天. */
-    public static final String   DAY                          = "天";
+    public static final String    DAY                          = "天";
 
     /** 小时. */
-    public static final String   HOUR                         = "小时";
+    public static final String    HOUR                         = "小时";
 
     /** 分钟. */
-    public static final String   MINUTE                       = "分钟";
+    public static final String    MINUTE                       = "分钟";
 
     /** 秒. */
-    public static final String   SECOND                       = "秒";
+    public static final String    SECOND                       = "秒";
 
     /** 毫秒. */
-    public static final String   MILLISECOND                  = "毫秒";
-
-    /**
-     * 英文星期.<br>
-     * { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }
-     */
-    public static final String[] WEEK_ENGLISHS                = {
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"                                       };
-
-    /**
-     * 中文星期.<br>
-     * { "日", "一", "二", "三", "四", "五", "六" }
-     */
-    public static final String[] WEEK_CHINESES                = { "日", "一", "二", "三", "四", "五", "六" };
+    public static final String    MILLISECOND                  = "毫秒";
 
     /**
      * 生肖.<br>
      * ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"]
      */
-    public static final String[] ZODIACS                      = { "鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪" };
-
-    /**
-     * 天干.<br>
-     * ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
-     */
-    public static final String[] HEAVENLY_STEMS               = { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
-
-    /**
-     * 地支.<br>
-     * ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
-     */
-    public static final String[] EARTHLY_BRANCHES             = { "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
-
-    /**
-     * 中文数字.<br>
-     * ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
-     */
-    public static final String[] CHINSES_NUMBERS              = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
+    private static final String[] ZODIACS                      = { "鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪" };
 
     /**
      * 1901-2050每年阴历和农历相差量.
@@ -105,8 +68,8 @@ final class DateDictionary{
     //Public arrays, even ones declared static final can have their contents edited by malicious programs. 
     //The final keyword on an array declaration means that the array object itself may only be assigned once, but its contents are still mutable. Therefore making arrays public is a security risk.
     //Instead, arrays should be private and accessed through methods.
-    public static final char[]   SOLAR_AND_LUNAR_OFFSET_TABLE = { //
-                                                              49, //
+    public static final char[]    SOLAR_AND_LUNAR_OFFSET_TABLE = { //
+                                                               49, //
             38,
             28,
             46,
@@ -256,7 +219,7 @@ final class DateDictionary{
             44,
             32,
             22, // 2050
-                                                              };
+                                                               };
 
     /**
      * 农历闰月表 1901-2050.
@@ -266,7 +229,7 @@ final class DateDictionary{
      * 	  if it is 0 express not to have , every byte was stored for two years
      * </pre>
      */
-    public static final char[]   LUNAR_LEAP_MONTH_TABLE       = { 0x00, 0x50, 0x04, 0x00, 0x20, // 1910
+    public static final char[]    LUNAR_LEAP_MONTH_TABLE       = { 0x00, 0x50, 0x04, 0x00, 0x20, // 1910
             0x60,
             0x05,
             0x00,
@@ -336,8 +299,8 @@ final class DateDictionary{
             0x07,
             0x00,
             0x50,
-            0x03                                             // 2050
-                                                              };
+            0x03                                              // 2050
+                                                               };
 
     /**
      * 农历日期表 1901-2100农历表.
@@ -349,7 +312,7 @@ final class DateDictionary{
      * it is 30 days for 1 form in the corresponding location , otherwise it is 29 days
      * </pre>
      */
-    public static final int[]    LUNAR_MONTH_DAYS_TABLE       = {
+    public static final int[]     LUNAR_MONTH_DAYS_TABLE       = {
             0x4ae0,
             0xa570,
             0x5268,
@@ -499,8 +462,8 @@ final class DateDictionary{
             0xb528,
             0x6d20,
             0xada0,
-            0x55b0                                           // 2050
-                                                              };
+            0x55b0                                            // 2050
+                                                               };
 
     /** Don't let anyone instantiate this class. */
     private DateDictionary(){

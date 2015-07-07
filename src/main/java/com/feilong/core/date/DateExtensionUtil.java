@@ -44,12 +44,11 @@ import com.feilong.core.util.Validator;
  */
 public final class DateExtensionUtil{
 
-    /** Don't let anyone instantiate this class. */
-    private DateExtensionUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
+    /**
+     * 中文星期.<br>
+     * { "日", "一", "二", "三", "四", "五", "六" }
+     */
+    private static final String[] WEEK_CHINESES = { "日", "一", "二", "三", "四", "五", "六" };
 
     /**
      * 获得中文星期.
@@ -59,7 +58,7 @@ public final class DateExtensionUtil{
      * @return 如 星期一
      */
     public static String getChineseWeek(int week){
-        return DateDictionary.WEEK + DateDictionary.WEEK_CHINESES[week];
+        return DateDictionary.WEEK + WEEK_CHINESES[week];
     }
 
     // [start]extent 获得时间 /时间数组,可以用于sql查询
@@ -406,5 +405,12 @@ public final class DateExtensionUtil{
     public static final String getIntervalForView(Date date1,Date date2){
         long spaceTime = DateUtil.getIntervalTime(date1, date2);
         return getIntervalForView(spaceTime);
+    }
+
+    /** Don't let anyone instantiate this class. */
+    private DateExtensionUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 }

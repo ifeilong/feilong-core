@@ -96,14 +96,25 @@ import org.slf4j.LoggerFactory;
 public final class LunarDateUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(LunarDateUtil.class);
+    private static final Logger   LOGGER           = LoggerFactory.getLogger(LunarDateUtil.class);
 
-    /** Don't let anyone instantiate this class. */
-    private LunarDateUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
+    /**
+     * 天干.<br>
+     * ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
+     */
+    private static final String[] HEAVENLY_STEMS   = { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
+
+    /**
+     * 地支.<br>
+     * ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
+     */
+    private static final String[] EARTHLY_BRANCHES = { "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
+
+    /**
+     * 中文数字.<br>
+     * ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
+     */
+    private static final String[] CHINSES_NUMBERS  = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
 
     /**
      * 农历转成阳历The lunar calendar is turned into the Solar calendar.
@@ -217,19 +228,19 @@ public final class LunarDateUtil{
         }else if (lunarMonth == 1){
             stringBuilder.append("正月");
         }else{
-            stringBuilder.append(DateDictionary.CHINSES_NUMBERS[lunarMonth] + "月");
+            stringBuilder.append(CHINSES_NUMBERS[lunarMonth] + "月");
         }
         // **************day*************************************************
         if (lunarDay > 29){
             stringBuilder.append("三十");
         }else if (lunarDay > 20){
-            stringBuilder.append("二十" + DateDictionary.CHINSES_NUMBERS[lunarDay % 20]);
+            stringBuilder.append("二十" + CHINSES_NUMBERS[lunarDay % 20]);
         }else if (lunarDay == 20){
             stringBuilder.append("二十");
         }else if (lunarDay > 10){
-            stringBuilder.append("十" + DateDictionary.CHINSES_NUMBERS[lunarDay % 10]);
+            stringBuilder.append("十" + CHINSES_NUMBERS[lunarDay % 10]);
         }else{
-            stringBuilder.append("初" + DateDictionary.CHINSES_NUMBERS[lunarDay]);
+            stringBuilder.append("初" + CHINSES_NUMBERS[lunarDay]);
         }
         return stringBuilder.toString();
     }
@@ -247,7 +258,7 @@ public final class LunarDateUtil{
         for (int i = 0; i < cs.length; ++i){
             Object iObject = cs[i];
             int index = Integer.parseInt(iObject.toString());
-            stringBuilder.append(DateDictionary.CHINSES_NUMBERS[index]);
+            stringBuilder.append(CHINSES_NUMBERS[index]);
         }
         return stringBuilder.toString();
     }
@@ -276,7 +287,7 @@ public final class LunarDateUtil{
      */
     private static String getChineseGanZhi(int year){
         int temp = Math.abs(year - 1924);
-        return DateDictionary.HEAVENLY_STEMS[temp % 10] + DateDictionary.EARTHLY_BRANCHES[temp % 12];
+        return HEAVENLY_STEMS[temp % 10] + EARTHLY_BRANCHES[temp % 12];
     }
 
     /**
@@ -305,5 +316,12 @@ public final class LunarDateUtil{
         }
         iOffsetDays += iDay - 1;
         return iOffsetDays;
+    }
+
+    /** Don't let anyone instantiate this class. */
+    private LunarDateUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 }
