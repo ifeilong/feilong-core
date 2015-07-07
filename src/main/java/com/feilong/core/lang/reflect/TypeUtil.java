@@ -69,8 +69,8 @@ import com.feilong.core.util.Validator;
  */
 public final class TypeUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(TypeUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(TypeUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private TypeUtil(){
@@ -195,16 +195,16 @@ public final class TypeUtil{
             throw new NullPointerException("parameterizedType can't be null/empty!");
         }
 
-        if (log.isDebugEnabled()){
-            log.debug("parameterizedType info:{}", JsonUtil.format(parameterizedType));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("parameterizedType info:{}", JsonUtil.format(parameterizedType));
         }
 
         Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
 
         if (Validator.isNotNullOrEmpty(actualTypeArguments)){
 
-            if (log.isDebugEnabled()){
-                log.debug("actualTypeArguments:{}", JsonUtil.format(actualTypeArguments));
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("actualTypeArguments:{}", JsonUtil.format(actualTypeArguments));
             }
             int length = actualTypeArguments.length;
             Class<?>[] klasses = new Class<?>[length];

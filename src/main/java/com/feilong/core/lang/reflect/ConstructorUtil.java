@@ -79,8 +79,8 @@ import com.feilong.core.util.Validator;
  */
 public final class ConstructorUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ConstructorUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConstructorUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ConstructorUtil(){
@@ -131,7 +131,7 @@ public final class ConstructorUtil{
         try{
             klass = ClassUtil.loadClass(className);
         }catch (ClassNotFoundException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
         return (T) newInstance(klass, parameterValues);

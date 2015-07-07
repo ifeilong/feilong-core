@@ -36,8 +36,8 @@ import com.feilong.core.util.Validator;
  */
 public final class EnumUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(EnumUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(EnumUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private EnumUtil(){
@@ -169,8 +169,8 @@ public final class EnumUtil{
         // 如果此 Class 对象不表示枚举类型，则返回枚举类的元素或 null.
         E[] enumConstants = enumClass.getEnumConstants();
 
-        if (log.isDebugEnabled()){
-            log.debug("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants));
         }
         for (E e : enumConstants){
 

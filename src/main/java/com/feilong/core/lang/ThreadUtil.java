@@ -40,8 +40,8 @@ import com.feilong.core.util.Validator;
  */
 public final class ThreadUtil{
 
-    /** The Constant log. */
-    private static final Logger          log           = LoggerFactory.getLogger(ThreadUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger          LOGGER        = LoggerFactory.getLogger(ThreadUtil.class);
 
     /** 简单开关,只显示id name 和活跃线程数量 . */
     private static final ThreadLogSwitch SIMPLE_SWITCH = new ThreadLogSwitch(true, true, true);
@@ -64,12 +64,12 @@ public final class ThreadUtil{
         // 允许线程访问有关自己的线程组的信息，但是不允许它访问有关其线程组的父线程组或其他任何线程组的信息.
         Thread currentThread = Thread.currentThread();
 
-        log.debug(JsonUtil.format(getCurrentThreadMapForLog()));
+        LOGGER.debug(JsonUtil.format(getCurrentThreadMapForLog()));
 
         ThreadGroup currentThreadGroup = currentThread.getThreadGroup();
         ThreadGroup topThreadGroup = getTopThreadGroup(currentThreadGroup);
 
-        log.debug(JsonUtil.format(getThreadGroupInfoMapForLog(topThreadGroup)));
+        LOGGER.debug(JsonUtil.format(getThreadGroupInfoMapForLog(topThreadGroup)));
         // 返回此线程组中活动线程的估计数.
         int topThreadGroupActiveCount = topThreadGroup.activeCount();
 
@@ -84,7 +84,7 @@ public final class ThreadUtil{
      * @return the top thread group
      */
     private static ThreadGroup getTopThreadGroup(ThreadGroup threadGroup){
-        log.debug(JsonUtil.format(getThreadGroupInfoMapForLog(threadGroup)));
+        LOGGER.debug(JsonUtil.format(getThreadGroupInfoMapForLog(threadGroup)));
 
         ThreadGroup parentThreadGroup = threadGroup.getParent();
         if (parentThreadGroup == null){
@@ -96,7 +96,7 @@ public final class ThreadUtil{
     }
 
     /**
-     * 获得 ThreadGroup 对象log.
+     * 获得 ThreadGroup 对象LOGGER.
      * 
      * @param threadGroup
      *            the thread group
@@ -127,7 +127,7 @@ public final class ThreadUtil{
     }
 
     /**
-     * 获得 thread 对象log.
+     * 获得 thread 对象LOGGER.
      * 
      * @param thread
      *            线程 是程序中的执行线程.Java 虚拟机允许应用程序并发地运行多个执行线程.<br>
@@ -141,7 +141,7 @@ public final class ThreadUtil{
     }
 
     /**
-     * 获得 thread 对象log.
+     * 获得 thread 对象LOGGER.
      *
      * @param thread
      *            线程 是程序中的执行线程.Java 虚拟机允许应用程序并发地运行多个执行线程.<br>
@@ -254,7 +254,7 @@ public final class ThreadUtil{
     }
 
     /**
-     * 获得 thread 对象log.
+     * 获得 thread 对象LOGGER.
      *
      * @return the thread object log
      * @since 1.1.1
@@ -264,7 +264,7 @@ public final class ThreadUtil{
     }
 
     /**
-     * 获得 thread 对象log.
+     * 获得 thread 对象LOGGER.
      *
      * @param threadLogConfig
      *            the thread log config
@@ -319,7 +319,7 @@ public final class ThreadUtil{
     private static String getMethodName(Thread currentThread,int index){
         StackTraceElement[] stackTraceElements = currentThread.getStackTrace();
 
-        if (log.isDebugEnabled()){
+        if (LOGGER.isDebugEnabled()){
 
             List<String> list = new ArrayList<String>();
 
@@ -336,8 +336,8 @@ public final class ThreadUtil{
                                 stackTraceElement.getMethodName()));
             }
 
-            if (log.isDebugEnabled()){
-                log.debug(JsonUtil.format(list));
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug(JsonUtil.format(list));
             }
 
         }

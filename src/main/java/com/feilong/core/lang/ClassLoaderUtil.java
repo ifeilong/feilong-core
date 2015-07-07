@@ -99,8 +99,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public final class ClassLoaderUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ClassLoaderUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassLoaderUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ClassLoaderUtil(){
@@ -211,7 +211,7 @@ public final class ClassLoaderUtil{
         ClassLoader classLoader = getClassLoaderByCurrentThread();
         URL url = classLoader.getResource(resourceName);
         if (url == null){
-            log.warn(
+            LOGGER.warn(
                             "In ClassLoader:[{}],not found the resourceName:[{}]",
                             JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
                             resourceName);
@@ -220,7 +220,7 @@ public final class ClassLoaderUtil{
             url = getResource(classLoader, resourceName);
 
             if (url == null){
-                log.warn(
+                LOGGER.warn(
                                 "In ClassLoader:[{}],not found the resourceName:[{}]",
                                 JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
                                 resourceName);
@@ -229,9 +229,9 @@ public final class ClassLoaderUtil{
             }
         }
         if (url == null){
-            log.warn("resourceName:[{}] in all ClassLoader not found", resourceName);
+            LOGGER.warn("resourceName:[{}] in all ClassLoader not found", resourceName);
         }else{
-            log.debug(
+            LOGGER.debug(
                             "found the resourceName:[{}],In ClassLoader :[{}] ",
                             resourceName,
                             JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
@@ -302,9 +302,9 @@ public final class ClassLoaderUtil{
             }
         }
         if (urls == null){
-            log.warn("resourceName:[{}] in all ClassLoader not found!", resourceName);
+            LOGGER.warn("resourceName:[{}] in all ClassLoader not found!", resourceName);
         }else{
-            log.debug(
+            LOGGER.debug(
                             "In ClassLoader :[{}] found the resourceName:[{}]",
                             JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
                             resourceName);
@@ -362,8 +362,8 @@ public final class ClassLoaderUtil{
     public static ClassLoader getClassLoaderByCurrentThread(){
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
-        if (log.isDebugEnabled()){
-            log.debug("Thread.currentThread().getContextClassLoader:{}", JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("Thread.currentThread().getContextClassLoader:{}", JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
         }
         return classLoader;
     }
@@ -378,14 +378,14 @@ public final class ClassLoaderUtil{
      */
     public static ClassLoader getClassLoaderByClass(Class<?> callingClass){
         ClassLoader classLoader = callingClass.getClassLoader();
-        if (log.isDebugEnabled()){
-            log.debug("{}.getClassLoader():{}", callingClass.getSimpleName(), JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("{}.getClassLoader():{}", callingClass.getSimpleName(), JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
         }
         return classLoader;
     }
 
     /**
-     * 获得 {@link ClassLoader} info map for log.
+     * 获得 {@link ClassLoader} info map for LOGGER.
      *
      * @param classLoader
      *            the class loader

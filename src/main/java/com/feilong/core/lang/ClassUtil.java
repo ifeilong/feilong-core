@@ -111,7 +111,7 @@ public final class ClassUtil{
     }
 
     /**
-     * 获得 class info map for log.
+     * 获得 class info map for LOGGER.
      *
      * @param klass
      *            the clz

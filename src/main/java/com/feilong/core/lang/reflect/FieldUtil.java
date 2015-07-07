@@ -45,8 +45,8 @@ import com.feilong.core.util.Validator;
 //TODO 改写这里面的方法
 public final class FieldUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(FieldUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FieldUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private FieldUtil(){
@@ -102,7 +102,7 @@ public final class FieldUtil{
                 int modifiers = field.getModifiers();
                 // 私有并且静态 一般是log
                 boolean isPrivateAndStatic = Modifier.isPrivate(modifiers) && Modifier.isStatic(modifiers);
-                log.debug("field name:[{}],modifiers:[{}],isPrivateAndStatic:[{}]", fieldName, modifiers, isPrivateAndStatic);
+                LOGGER.debug("field name:[{}],modifiers:[{}],isPrivateAndStatic:[{}]", fieldName, modifiers, isPrivateAndStatic);
 
                 if (!isPrivateAndStatic){
                     //TODO see org.apache.commons.lang3.reflect.MemberUtils.setAccessibleWorkaround(AccessibleObject)
@@ -110,7 +110,7 @@ public final class FieldUtil{
                     try{
                         map.put(fieldName, field.get(obj));
                     }catch (Exception e){
-                        log.error(e.getClass().getName(), e);
+                        LOGGER.error(e.getClass().getName(), e);
                         throw new ReflectException(e);
                     }
                 }
@@ -137,8 +137,8 @@ public final class FieldUtil{
         //返回Class对象所代表的类或接口中所有成员变量(不限于public)
         Field[] fields = klass.getDeclaredFields();
         do{
-            if (log.isDebugEnabled()){
-                log.debug("current class:[{}],super class:[{}]", klass.getName(), superClass.getName());
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("current class:[{}],super class:[{}]", klass.getName(), superClass.getName());
             }
             fields = ArrayUtils.addAll(fields, superClass.getDeclaredFields());
             superClass = superClass.getSuperclass();
@@ -224,7 +224,7 @@ public final class FieldUtil{
             Field field = clz.getDeclaredField(name);
             return field;
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
     }
@@ -254,7 +254,7 @@ public final class FieldUtil{
             Field field = ownerClass.getField(fieldName);
             field.set(ownerClass, value);
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
     }
@@ -284,7 +284,7 @@ public final class FieldUtil{
             Object property = field.get(owner);
             return (T) property;
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
     }
@@ -322,7 +322,7 @@ public final class FieldUtil{
             Object property = field.get(ownerClass);
             return (T) property;
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
     }
