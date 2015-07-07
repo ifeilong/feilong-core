@@ -85,7 +85,6 @@ public final class JsonUtil{
 
     /**
      * 设置日期转换格式
-     * 
      */
     static{
         // 可转换的日期格式，即Json串中可以出现以下格式的日期与时间
