@@ -95,8 +95,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class LunarDateUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(LunarDateUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(LunarDateUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private LunarDateUtil(){
@@ -170,7 +170,7 @@ public final class LunarDateUtil{
     public static int getLunarMonthMaxDays(int iYear,int iMonth){
         int iLeapMonth = getLeapMonth(iYear);
         if ((iMonth > 12) && (iMonth - 12 != iLeapMonth) || (iMonth < 0)){
-            log.error("Wrong month,i think you are want a -1?");
+            LOGGER.error("Wrong month,i think you are want a -1?");
             return -1;
         }
         if (iMonth - 12 == iLeapMonth){

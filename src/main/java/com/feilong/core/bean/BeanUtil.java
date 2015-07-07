@@ -65,14 +65,14 @@ import com.feilong.core.util.Validator;
  * cub.deregister(Long.class);
  * cub.register(new MyLongConverter(), Long.class);
  * 
- * log.debug(cub.lookup(Long.class));
+ * LOGGER.debug(cub.lookup(Long.class));
  * 
  * BeanUtilsBean bub = new BeanUtilsBean(cub, new PropertyUtilsBean());
  * 
  * String name = bub.getProperty(myObject, &quot;name&quot;);
- * log.debug(name);
+ * LOGGER.debug(name);
  * String id = bub.getProperty(myObject, &quot;id&quot;);
- * log.debug(id);
+ * LOGGER.debug(id);
  * 
  * </pre>
  * 
@@ -119,8 +119,8 @@ import com.feilong.core.util.Validator;
  */
 public final class BeanUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(BeanUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(BeanUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private BeanUtil(){
@@ -181,7 +181,7 @@ public final class BeanUtil{
             T cloneBean = (T) BeanUtils.cloneBean(bean);
             return cloneBean;
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -224,7 +224,7 @@ public final class BeanUtil{
             Map<String, String> propertyMap = BeanUtils.describe(bean);
             return propertyMap;
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -250,7 +250,7 @@ public final class BeanUtil{
         try{
             BeanUtils.populate(bean, properties);
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -300,7 +300,7 @@ public final class BeanUtil{
         try{
             BeanUtils.copyProperties(toObj, fromObj);
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -433,7 +433,7 @@ public final class BeanUtil{
         try{
             BeanUtils.copyProperty(bean, propertyName, value);
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -461,26 +461,26 @@ public final class BeanUtil{
      *  
      * 对于Simple类型，参数二直接是属性名即可
      * //Simple
-     * log.debug(BeanUtils.getProperty(c, "name"));
+     * LOGGER.debug(BeanUtils.getProperty(c, "name"));
      *  
      * 对于Map类型，则需要以“属性名（key值）”的形式
      * //Map
-     *     log.debug(BeanUtils.getProperty(c, "address (A2)"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
      *     HashMap am = new HashMap();
      *     am.put("1","234-222-1222211");
      *     am.put("2","021-086-1232323");
      *     BeanUtils.setProperty(c,"telephone",am);
-     * log.debug(BeanUtils.getProperty(c, "telephone (2)"));
+     * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
      *  
      * 对于Indexed，则为“属性名[索引值]”，注意这里对于ArrayList和数组都可以用一样的方式进行操作.
      * //index
-     *     log.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
      *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
-     *     log.debug(BeanUtils.getProperty(c, "product[1]"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
      *  
      * 当然这3种类也可以组合使用啦！
      * //nest
-     *     log.debug(BeanUtils.getProperty(c, "employee[1].name"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
      * 
      * }
      * </pre>
@@ -503,7 +503,7 @@ public final class BeanUtil{
             // 在后台自动进行类型转换(字符串和真实类型的转换)
             BeanUtils.setProperty(bean, name, value);
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -535,26 +535,26 @@ public final class BeanUtil{
      *  
      * 对于Simple类型，参数二直接是属性名即可
      * //Simple
-     * log.debug(BeanUtils.getProperty(c, "name"));
+     * LOGGER.debug(BeanUtils.getProperty(c, "name"));
      *  
      * 对于Map类型，则需要以“属性名（key值）”的形式
      * //Map
-     *     log.debug(BeanUtils.getProperty(c, "address (A2)"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
      *     HashMap am = new HashMap();
      *     am.put("1","234-222-1222211");
      *     am.put("2","021-086-1232323");
      *     BeanUtils.setProperty(c,"telephone",am);
-     * log.debug(BeanUtils.getProperty(c, "telephone (2)"));
+     * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
      *  
      * 对于Indexed，则为“属性名[索引值]”，注意这里对于ArrayList和数组都可以用一样的方式进行操作.
      * //index
-     *     log.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
      *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
-     *     log.debug(BeanUtils.getProperty(c, "product[1]"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
      *  
      * 当然这3种类也可以组合使用啦！
      * //nest
-     *     log.debug(BeanUtils.getProperty(c, "employee[1].name"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
      * 
      * }
      * </pre>
@@ -578,7 +578,7 @@ public final class BeanUtil{
             String propertyValue = BeanUtils.getProperty(bean, name);
             return propertyValue;
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }

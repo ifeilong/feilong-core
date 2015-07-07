@@ -69,7 +69,7 @@ public final class IntrospectorUtil{
     }
 
     /**
-     * 获得 map for log.
+     * 获得 map for LOGGER.
      *
      * @param beanClass
      *            the bean class
@@ -108,7 +108,7 @@ public final class IntrospectorUtil{
     }
 
     /**
-     * 获得 {@link java.beans.BeanInfo#getPropertyDescriptors()}for log.
+     * 获得 {@link java.beans.BeanInfo#getPropertyDescriptors()}for LOGGER.
      *
      * @param beanInfo
      *            the bean info
@@ -142,7 +142,7 @@ public final class IntrospectorUtil{
     }
 
     /**
-     * 获得 {@link java.beans.BeanInfo#getMethodDescriptors()} for log.
+     * 获得 {@link java.beans.BeanInfo#getMethodDescriptors()} for LOGGER.
      * 
      * @param beanInfo
      *            the bean info
@@ -198,7 +198,7 @@ public final class IntrospectorUtil{
     }
 
     /**
-     * 获得 {@link java.beans.BeanInfo#getEventSetDescriptors()} for log.
+     * 获得 {@link java.beans.BeanInfo#getEventSetDescriptors()} for LOGGER.
      *
      * @param beanInfo
      *            the bean info

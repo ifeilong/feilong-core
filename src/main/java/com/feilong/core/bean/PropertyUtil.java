@@ -42,8 +42,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class PropertyUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PropertyUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private PropertyUtil(){
@@ -74,7 +74,7 @@ public final class PropertyUtil{
             Map<String, Object> propertyMap = PropertyUtils.describe(bean);
             return propertyMap;
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -97,26 +97,26 @@ public final class PropertyUtil{
      *  
      * 对于Simple类型，参数二直接是属性名即可
      * //Simple
-     * log.debug(BeanUtils.getProperty(c, "name"));
+     * LOGGER.debug(BeanUtils.getProperty(c, "name"));
      *  
      * 对于Map类型，则需要以“属性名（key值）”的形式
      * //Map
-     *     log.debug(BeanUtils.getProperty(c, "address (A2)"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
      *     HashMap am = new HashMap();
      *     am.put("1","234-222-1222211");
      *     am.put("2","021-086-1232323");
      *     BeanUtils.setProperty(c,"telephone",am);
-     * log.debug(BeanUtils.getProperty(c, "telephone (2)"));
+     * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
      *  
      * 对于Indexed，则为“属性名[索引值]”，注意这里对于ArrayList和数组都可以用一样的方式进行操作.
      * //index
-     *     log.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
      *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
-     *     log.debug(BeanUtils.getProperty(c, "product[1]"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
      *  
      * 当然这3种类也可以组合使用啦！
      * //nest
-     *     log.debug(BeanUtils.getProperty(c, "employee[1].name"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
      * }
      * </pre>
      * 
@@ -139,7 +139,7 @@ public final class PropertyUtil{
             // PropertyUtils的功能类似于BeanUtils,但在底层不会对传递的数据做转换处理
             PropertyUtils.setProperty(bean, name, value);
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -170,26 +170,26 @@ public final class PropertyUtil{
      *  
      * 对于Simple类型，参数二直接是属性名即可
      * //Simple
-     * log.debug(BeanUtils.getProperty(c, "name"));
+     * LOGGER.debug(BeanUtils.getProperty(c, "name"));
      *  
      * 对于Map类型，则需要以“属性名（key值）”的形式
      * //Map
-     *     log.debug(BeanUtils.getProperty(c, "address (A2)"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
      *     HashMap am = new HashMap();
      *     am.put("1","234-222-1222211");
      *     am.put("2","021-086-1232323");
      *     BeanUtils.setProperty(c,"telephone",am);
-     * log.debug(BeanUtils.getProperty(c, "telephone (2)"));
+     * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
      *  
      * 对于Indexed，则为“属性名[索引值]”，注意这里对于ArrayList和数组都可以用一样的方式进行操作.
      * //index
-     *     log.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
      *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
-     *     log.debug(BeanUtils.getProperty(c, "product[1]"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
      *  
      * 当然这3种类也可以组合使用啦！
      * //nest
-     *     log.debug(BeanUtils.getProperty(c, "employee[1].name"));
+     *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
      * 
      * }
      * </pre>
@@ -217,7 +217,7 @@ public final class PropertyUtil{
             T propertyValue = (T) PropertyUtils.getProperty(bean, name);
             return propertyValue;
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }

@@ -37,8 +37,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class ClipboardUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ClipboardUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClipboardUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ClipboardUtil(){
@@ -61,7 +61,7 @@ public final class ClipboardUtil{
         ClipboardOwner clipboardOwner = null;
         clipboard.setContents(transferable, clipboardOwner);
 
-        log.debug("Clipboard setContents over,clipboardOwner[null]");
+        LOGGER.debug("Clipboard setContents over,clipboardOwner[null]");
     }
 
     //******************************************************************************

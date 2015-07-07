@@ -40,8 +40,8 @@ import com.feilong.core.net.URIUtil;
  */
 public final class DesktopUtil{
 
-    /** The Constant log. */
-    private static final Logger  log               = LoggerFactory.getLogger(DesktopUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger  LOGGER            = LoggerFactory.getLogger(DesktopUtil.class);
 
     /** 判断当前系统是否支持Java AWT Desktop扩展. */
     private final static boolean DESKTOP_SUPPORTED = Desktop.isDesktopSupported();
@@ -166,7 +166,7 @@ public final class DesktopUtil{
                 }
             }
         }else{
-            log.error("don't Support Desktop");
+            LOGGER.error("don't Support Desktop");
             throw new RuntimeException("don't Support Desktop");
         }
     }

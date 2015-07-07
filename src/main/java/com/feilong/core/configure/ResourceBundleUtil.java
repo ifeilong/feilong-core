@@ -63,8 +63,8 @@ import com.feilong.core.util.Validator;
  */
 public final class ResourceBundleUtil implements BaseConfigure{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ResourceBundleUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResourceBundleUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ResourceBundleUtil(){
@@ -188,23 +188,23 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * @return 该键的值<br>
      *         如果配置文件中,
      *         <ul>
-     *         <li>key不存在,log.warn 输出警告,然后返回null</li>
-     *         <li>key存在,但value是null 或者 empty,log.warn 输出警告,然后返回value</li>
+     *         <li>key不存在,LOGGER.warn 输出警告,然后返回null</li>
+     *         <li>key存在,但value是null 或者 empty,LOGGER.warn 输出警告,然后返回value</li>
      *         </ul>
      * @see java.util.ResourceBundle#getString(String)
      */
     public static String getValue(ResourceBundle resourceBundle,String key){
         if (!resourceBundle.containsKey(key)){
-            log.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
+            LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
         }else{
             try{
                 String value = resourceBundle.getString(key);
                 if (Validator.isNullOrEmpty(value)){
-                    log.warn("resourceBundle has key:[{}],but value is null/empty", key);
+                    LOGGER.warn("resourceBundle has key:[{}],but value is null/empty", key);
                 }
                 return value;
             }catch (Exception e){
-                log.error(e.getMessage(), e);
+                LOGGER.error(e.getMessage(), e);
             }
         }
         return null;
@@ -436,7 +436,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
         }
         ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, locale);
         if (null == resourceBundle){
-            log.warn("resourceBundle is null,baseName:{},locale:{}", resourceBundle, baseName, locale);
+            LOGGER.warn("resourceBundle is null,baseName:{},locale:{}", resourceBundle, baseName, locale);
         }
         return resourceBundle;
     }

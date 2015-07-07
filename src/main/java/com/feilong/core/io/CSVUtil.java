@@ -40,8 +40,8 @@ import com.feilong.core.util.Validator;
  */
 public final class CSVUtil{
 
-    /** The Constant log. */
-    private static final Logger log                     = LoggerFactory.getLogger(CSVUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER                     = LoggerFactory.getLogger(CSVUtil.class);
 
     /** 转义引号用的字符 ". */
     private static final char   ESCAPE_CHARACTER        = '"';
@@ -204,7 +204,7 @@ public final class CSVUtil{
             if (Validator.isNotNullOrEmpty(columnTitles)){
                 dataList.add(0, columnTitles);
             }
-            log.info("begin write file:" + fileName);
+            LOGGER.info("begin write file:" + fileName);
             IOWriteUtil.write(fileName, getWriteContent(dataList, csvParams), csvParams.getEncode());
         }
     }

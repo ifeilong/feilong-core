@@ -62,8 +62,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public final class ImageUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ImageUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImageUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ImageUtil(){
@@ -91,7 +91,7 @@ public final class ImageUtil{
         OutputStream outputStream = FileUtil.getFileOutputStream(outputFilePath);
         write(renderedImage, outputStream, formatName);
 
-        log.info("write image success:[{}]", outputFilePath);
+        LOGGER.info("write image success:[{}]", outputFilePath);
     }
 
     /**
@@ -209,20 +209,20 @@ public final class ImageUtil{
         try{
             BufferedImage bufferedImage = ImageIO.read(imageFile);
 
-            if (log.isDebugEnabled()){
-                log.debug("input imageFile's absolutePath is:[{}]", imageFile.getAbsolutePath());
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("input imageFile's absolutePath is:[{}]", imageFile.getAbsolutePath());
                 Map<String, Object> map = getBufferedImageInfoMapForLog(bufferedImage);
-                log.debug("bufferedImage info:{}", JsonUtil.format(map, new String[] { "data", "matrix" }));
+                LOGGER.debug("bufferedImage info:{}", JsonUtil.format(map, new String[] { "data", "matrix" }));
             }
             return bufferedImage;
         }catch (IOException e){
-            log.error("", e);
+            LOGGER.error("", e);
             throw new UncheckedIOException(e);
         }
     }
 
     /**
-     * 获得 buffered image info map for log.
+     * 获得 buffered image info map for LOGGER.
      *
      * @param bufferedImage
      *            the buffered image
