@@ -73,8 +73,8 @@ import com.feilong.core.util.Validator;
  */
 public final class JsonUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(JsonUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private JsonUtil(){
@@ -562,8 +562,8 @@ public final class JsonUtil{
      */
     // TODO
     public static <T> Map<String, T> toMap(String json,Class<T> clazz,Map<String, Class<?>> classMap) throws JSONException{
-        if (log.isDebugEnabled()){
-            log.debug("in json:{}", json);
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("in json:{}", json);
         }
 
         JSONObject jsonObject = JSONObject.fromObject(json);
@@ -575,8 +575,8 @@ public final class JsonUtil{
         while (keys.hasNext()){
             String key = keys.next();
             Object value = jsonObject.get(key);
-            if (log.isDebugEnabled()){
-                log.debug("key:{} value:{}", key, value);
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("key:{} value:{}", key, value);
             }
             map.put(key, toBean(value, clazz, classMap));
         }

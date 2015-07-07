@@ -40,8 +40,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public final class RegexUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(RegexUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegexUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private RegexUtil(){
@@ -122,35 +122,35 @@ public final class RegexUtil{
         boolean matches = matcher.matches();
         if (matches){
 
-            if (log.isDebugEnabled()){
-                log.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
             }
             // 捕获组是从 1 开始从左到右的索引.组0表示整个模式，因此表达式 m.group(0) 等效于 m.group().
             groupMap.put(0, matcher.group());
 
-            if (log.isDebugEnabled()){
+            if (LOGGER.isDebugEnabled()){
                 //匹配的索引
-                log.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
+                LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
             }
 
             int groupCount = matcher.groupCount();
 
             for (int i = 1; i <= groupCount; ++i){
 
-                if (log.isDebugEnabled()){
+                if (LOGGER.isDebugEnabled()){
                     //匹配的索引
-                    log.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
+                    LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
                 }
                 String groupValue = matcher.group(i);
                 groupMap.put(i, groupValue);
             }
 
-            if (log.isDebugEnabled()){
-                log.debug("groupMap:{}", JsonUtil.format(groupMap));
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("groupMap:{}", JsonUtil.format(groupMap));
             }
         }else{
-            if (log.isDebugEnabled()){
-                log.debug("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
             }
         }
         return groupMap;
@@ -169,8 +169,8 @@ public final class RegexUtil{
      * Example 1:
      * 		String regexPattern = "(.*?)@(.*?)";
      * 		String email = "venusdrogon@163.com";
-     * 		log.info(RegexUtil.group(regexPattern, email, 1) + "");--->venusdrogon
-     * 		log.info(RegexUtil.group(regexPattern, email, 2) + "");--->163.com
+     * 		LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");--->venusdrogon
+     * 		LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");--->163.com
      * 
      * 
      * }

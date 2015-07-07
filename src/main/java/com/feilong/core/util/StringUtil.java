@@ -65,8 +65,8 @@ import com.feilong.core.lang.ObjectUtil;
  */
 public final class StringUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(StringUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(StringUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private StringUtil(){
@@ -148,7 +148,7 @@ public final class StringUtil{
      * 
      * <pre>
      * String text = &quot;jinxin.feilong&quot;;
-     * log.info(StringUtil.addDoubleQuotes(text));
+     * LOGGER.info(StringUtil.addDoubleQuotes(text));
      * 
      * 结果:  "jinxin.feilong"
      * </pre>
@@ -218,7 +218,7 @@ public final class StringUtil{
      */
     public static final boolean isContain(Object text,String beIncludedString){
         if (null == text){
-            log.warn("the param \"text\" is null,default return false");
+            LOGGER.warn("the param \"text\" is null,default return false");
             return false;
         }
         int indexOf = text.toString().indexOf(beIncludedString);
@@ -250,11 +250,11 @@ public final class StringUtil{
      */
     public static final boolean isContainIgnoreCase(Object text,String beIncludedString){
         if (null == text){
-            log.warn("the param \"text\" is null,default return false");
+            LOGGER.warn("the param \"text\" is null,default return false");
             return false;
         }
         if (null == beIncludedString){
-            log.warn("the param \"beIncludedString\" is null,default return false");
+            LOGGER.warn("the param \"beIncludedString\" is null,default return false");
             return false;
         }
         return isContain(text.toString().toLowerCase(), beIncludedString.toLowerCase());
@@ -568,10 +568,10 @@ public final class StringUtil{
             throw new IllegalArgumentException(logInfo);
         }else if (startIndex > text.length()){
 
-            if (log.isInfoEnabled()){
+            if (LOGGER.isInfoEnabled()){
                 String logInfo = StringBuilderUtil.append("beginIndex + shift > text.length(),", "beginIndex:", beginIndex, ",shift:"
                                 + shift, ",text:" + text, ",text.length:", text.length());
-                log.info(logInfo);
+                LOGGER.info(logInfo);
             }
 
             return null;
@@ -689,7 +689,7 @@ public final class StringUtil{
         try{
             return value.getBytes(charsetName);
         }catch (UnsupportedEncodingException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
         return null;
     }
@@ -955,7 +955,7 @@ public final class StringUtil{
     public static final String toHexStringUpperCase(String original){
         // 先 Charset.defaultCharset() 如果有异常 用 ISO-8859-1
         String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(original.getBytes());
-        log.debug("original:{},hexStringUpperCase:{}", original, hexStringUpperCase);
+        LOGGER.debug("original:{},hexStringUpperCase:{}", original, hexStringUpperCase);
         return hexStringUpperCase;
     }
 
@@ -971,10 +971,10 @@ public final class StringUtil{
     public static final String toHexStringUpperCase(String original,String charsetName){
         try{
             String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(original.getBytes(charsetName));
-            log.debug("original:{},hexStringUpperCase:{}", original, hexStringUpperCase);
+            LOGGER.debug("original:{},hexStringUpperCase:{}", original, hexStringUpperCase);
             return hexStringUpperCase;
         }catch (UnsupportedEncodingException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
         return null;
     }
@@ -989,7 +989,7 @@ public final class StringUtil{
     public static final String toOriginal(String hexStringUpperCase){
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
         String original = new String(hexBytesToBytes);
-        log.debug("hexStringUpperCase:{},original:{}", hexStringUpperCase, original);
+        LOGGER.debug("hexStringUpperCase:{},original:{}", hexStringUpperCase, original);
         return original;
     }
 
@@ -1008,9 +1008,9 @@ public final class StringUtil{
         try{
             original = new String(hexBytesToBytes, charsetName);
         }catch (UnsupportedEncodingException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
-        log.debug("hexStringUpperCase:{},original:{}", hexStringUpperCase, original);
+        LOGGER.debug("hexStringUpperCase:{},original:{}", hexStringUpperCase, original);
         return original;
     }
 

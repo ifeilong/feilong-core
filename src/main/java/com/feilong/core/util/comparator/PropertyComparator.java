@@ -54,8 +54,8 @@ import com.feilong.core.bean.PropertyUtil;
  */
 public class PropertyComparator<T> implements Comparator<T>{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PropertyComparator.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyComparator.class);
 
     /** T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口. */
     private final String        propertyName;
@@ -69,7 +69,7 @@ public class PropertyComparator<T> implements Comparator<T>{
     public PropertyComparator(String propertyName){
         super();
         this.propertyName = propertyName;
-        log.info("propertyName:[{}]", propertyName);
+        LOGGER.info("propertyName:[{}]", propertyName);
     }
 
     /**
@@ -107,8 +107,8 @@ public class PropertyComparator<T> implements Comparator<T>{
         //NullPointException
         //propertyValue1.compareTo(propertyValue2);
 
-        if (log.isDebugEnabled()){
-            log.debug(
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(
                             "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],compareTo:[{}]",
                             propertyName,
                             propertyValue1,

@@ -41,8 +41,8 @@ import com.feilong.core.util.comparator.PropertyComparator;
  */
 public final class MapUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(MapUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MapUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private MapUtil(){
@@ -135,7 +135,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
             }else{
-                log.warn("map don't contains key:[{}]", key);
+                LOGGER.warn("map don't contains key:[{}]", key);
             }
         }
         return returnMap;
@@ -172,7 +172,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.remove(key);
             }else{
-                log.warn("map don't contains key:[{}]", key);
+                LOGGER.warn("map don't contains key:[{}]", key);
             }
         }
         return returnMap;

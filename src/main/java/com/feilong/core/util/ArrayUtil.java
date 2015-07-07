@@ -40,8 +40,8 @@ import com.feilong.core.lang.ObjectUtil;
  */
 public final class ArrayUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ArrayUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArrayUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ArrayUtil(){
@@ -110,8 +110,8 @@ public final class ArrayUtil{
             Object[] objArrays = (Object[]) arrays;
             list = (List<T>) toList(objArrays);
         }catch (ClassCastException e){
-            if (log.isDebugEnabled()){
-                log.debug("arrays can not cast to Object[],maybe primitive type,values is:{},{}", arrays, e.getMessage());
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("arrays can not cast to Object[],maybe primitive type,values is:{},{}", arrays, e.getMessage());
             }
             // Rats -- 它是一个基本类型数组
             int length = Array.getLength(arrays);

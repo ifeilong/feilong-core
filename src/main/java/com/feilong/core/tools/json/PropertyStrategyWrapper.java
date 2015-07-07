@@ -32,8 +32,8 @@ import org.slf4j.LoggerFactory;
  */
 public class PropertyStrategyWrapper extends PropertySetStrategy{
 
-    /** The Constant log. */
-    private static final Logger       log = LoggerFactory.getLogger(PropertyStrategyWrapper.class);
+    /** The Constant LOGGER. */
+    private static final Logger       LOGGER = LoggerFactory.getLogger(PropertyStrategyWrapper.class);
 
     /** The original. */
     private final PropertySetStrategy propertySetStrategy;
@@ -58,7 +58,7 @@ public class PropertyStrategyWrapper extends PropertySetStrategy{
         try{
             propertySetStrategy.setProperty(o, string, o1);
         }catch (Exception e){
-            log.warn(e.getMessage(), e);
+            LOGGER.warn(e.getMessage(), e);
         }
     }
 }

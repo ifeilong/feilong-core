@@ -62,8 +62,8 @@ import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
  */
 public final class CollectionsUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(CollectionsUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(CollectionsUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private CollectionsUtil(){
@@ -325,19 +325,19 @@ public final class CollectionsUtil{
      * 
      * //数组
      * List&lt;String&gt; fieldValueList1 = ListUtil.getFieldValueList(testList, &quot;loves[1]&quot;);
-     * log.info(JsonUtil.format(fieldValueList1));
+     * LOGGER.info(JsonUtil.format(fieldValueList1));
      * 
      * //级联对象
      * List&lt;Integer&gt; fieldValueList2 = ListUtil.getFieldValueList(testList, &quot;userInfo.age&quot;);
-     * log.info(JsonUtil.format(fieldValueList2));
+     * LOGGER.info(JsonUtil.format(fieldValueList2));
      * 
      * //Map
      * List&lt;Integer&gt; attrList = ListUtil.getFieldValueList(testList, &quot;attrMap(蜀国)&quot;);
-     * log.info(JsonUtil.format(attrList));
+     * LOGGER.info(JsonUtil.format(attrList));
      * 
      * //集合
      * List&lt;String&gt; addressList = ListUtil.getFieldValueList(testList, &quot;userAddresseList[0]&quot;);
-     * log.info(JsonUtil.format(addressList));
+     * LOGGER.info(JsonUtil.format(addressList));
      * </pre>
      * 
      * </blockquote>
@@ -429,7 +429,7 @@ public final class CollectionsUtil{
                 returnCollection.add(property);
             }
         }catch (BeanUtilException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
         return returnCollection;
     }
@@ -832,8 +832,8 @@ public final class CollectionsUtil{
             if (!map.containsKey(key)){
                 map.put(key, o);
             }else{
-                if (log.isDebugEnabled()){
-                    log.debug("Abandoned except the first value outside,map:{},containsKey key:[{}],", JsonUtil.format(map.keySet()), key);
+                if (LOGGER.isDebugEnabled()){
+                    LOGGER.debug("Abandoned except the first value outside,map:{},containsKey key:[{}],", JsonUtil.format(map.keySet()), key);
                 }
             }
         }

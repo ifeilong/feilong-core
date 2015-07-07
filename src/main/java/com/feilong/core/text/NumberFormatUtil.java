@@ -43,8 +43,8 @@ import com.feilong.core.util.NumberPattern;
  */
 public final class NumberFormatUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(NumberFormatUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(NumberFormatUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private NumberFormatUtil(){
@@ -115,8 +115,8 @@ public final class NumberFormatUtil{
             // decimalFormat.applyPattern("##,###.000");
             String format = decimalFormat.format(value);
 
-            if (log.isDebugEnabled()){
-                log.debug(
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug(
                                 "value:[{}], pattern:[{}],return:[{}],decimalFormat.toLocalizedPattern():[{}]",
                                 value,
                                 numberPattern,
@@ -127,8 +127,8 @@ public final class NumberFormatUtil{
             return format;
         }catch (Exception e){
             Object[] objects = { e.getMessage(), value, numberPattern };
-            log.error("{},value:[{}],pattern:[{}]", objects);
-            log.error(e.getClass().getName(), e);
+            LOGGER.error("{},value:[{}],pattern:[{}]", objects);
+            LOGGER.error(e.getClass().getName(), e);
         }
         return null;
     }

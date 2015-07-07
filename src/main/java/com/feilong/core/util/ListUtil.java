@@ -31,8 +31,8 @@ import com.feilong.core.lang.ObjectUtil;
  */
 public final class ListUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ListUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ListUtil(){
@@ -84,7 +84,7 @@ public final class ListUtil{
                 }
             }
         }else{
-            log.debug("iterator is null/empty");
+            LOGGER.debug("iterator is null/empty");
         }
         return flag;
     }
