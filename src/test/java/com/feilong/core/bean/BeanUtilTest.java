@@ -34,7 +34,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.command.Address;
 import com.feilong.core.bean.command.Customer;
 import com.feilong.core.bean.command.Member;

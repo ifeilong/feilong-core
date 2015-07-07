@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 public class RandomUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER                  = LoggerFactory.getLogger(RandomUtilTest.class);
+    private static final Logger LOGGER               = LoggerFactory.getLogger(RandomUtilTest.class);
 
     /** The Constant NUMBERS. */
     public static final String  NUMBERS              = "0123456789";

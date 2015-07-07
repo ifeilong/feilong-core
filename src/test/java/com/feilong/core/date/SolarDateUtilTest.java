@@ -19,8 +19,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.SolarDateUtil;
-
 /**
  * The Class SolarDateUtilTest.
  * 

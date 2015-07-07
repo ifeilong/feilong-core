@@ -106,11 +106,9 @@ public final class URIUtil{
      *            目标文件夹
      * @throws IOException
      *             the IO exception
-     * @throws NullPointerException
-     *             if isNullOrEmpty(urlString) or isNullOrEmpty(directoryName)
      * @see IOWriteUtil#write(InputStream, String, String)
      */
-    public static void download(String urlString,String directoryName) throws IOException,NullPointerException{
+    public static void download(String urlString,String directoryName) throws IOException{
         if (Validator.isNullOrEmpty(urlString)){
             throw new NullPointerException("urlString can't be null/empty!");
         }
@@ -139,7 +137,6 @@ public final class URIUtil{
      * 如果url中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
      * 如果如果url中含?等参数,那么内部会调用 {@link #getEncodedUrlByArrayMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}创建
      * </p>
-     * 
      *
      * @param url
      *            url
@@ -148,14 +145,12 @@ public final class URIUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return if isNullOrEmpty(url),return null;<br>
      *         if Exception,return null
-     * @throws URIParseException
-     *             the URI parse exception
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
      * @see URI#create(String)
      * @see #getEncodedUrlByArrayMap(String, Map, String)
      */
-    public static URI create(String url,String charsetType) throws URIParseException{
+    public static URI create(String url,String charsetType){
         try{
             String encodeUrl = encodeUrl(url, charsetType);
             URI uri = URI.create(encodeUrl);
@@ -182,16 +177,12 @@ public final class URIUtil{
      *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return the string
-     * @throws URIParseException
-     *             the URI parse exception
-     * @throws NullPointerException
-     *             if isNullOrEmpty(url) or isNullOrEmpty(charsetType)
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
      * @see URI#create(String)
      * @see #getEncodedUrlByArrayMap(String, Map, String)
      */
-    public static String encodeUrl(String url,String charsetType) throws URIParseException,NullPointerException{
+    public static String encodeUrl(String url,String charsetType){
         if (Validator.isNullOrEmpty(url)){
             throw new NullPointerException("the url is null or empty!");
         }
@@ -234,11 +225,9 @@ public final class URIUtil{
      * @param path
      *            the path
      * @return {@link java.net.URI#URI(String)}
-     * @throws URIParseException
-     *             the URI parse exception
      * @see java.net.URI#URI(String)
      */
-    public static URI getURI(String path) throws URIParseException{
+    public static URI getURI(String path){
         try{
             // 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个java.net.URISyntaxException.
             URI uri = new URI(path);
@@ -255,10 +244,8 @@ public final class URIUtil{
      * @param path
      *            待验证的字符串
      * @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
-     * @throws URIParseException
-     *             the URI parse exception
      */
-    public static boolean isAbsolutePath(String path) throws URIParseException{
+    public static boolean isAbsolutePath(String path){
         URI uri = getURI(path);
 
         if (null == uri){
@@ -278,11 +265,8 @@ public final class URIUtil{
      *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return the encoded url1
-     * @throws URIParseException
-     *             the URI parse exception
      */
-    public static String getEncodedUrlByValueMap(String beforeUrl,Map<String, String> keyAndValueMap,String charsetType)
-                    throws URIParseException{
+    public static String getEncodedUrlByValueMap(String beforeUrl,Map<String, String> keyAndValueMap,String charsetType){
         Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
 
         if (Validator.isNotNullOrEmpty(keyAndValueMap)){
@@ -307,12 +291,9 @@ public final class URIUtil{
      *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return if isNullOrEmpty(keyAndArrayMap) return beforeUrl;
-     * @throws URIParseException
-     *             the URI parse exception
      * @see #combineQueryString(Map, String)
      */
-    public static String getEncodedUrlByArrayMap(String beforeUrl,Map<String, String[]> keyAndArrayMap,String charsetType)
-                    throws URIParseException{
+    public static String getEncodedUrlByArrayMap(String beforeUrl,Map<String, String[]> keyAndArrayMap,String charsetType){
         if (Validator.isNullOrEmpty(keyAndArrayMap)){
             return beforeUrl;
         }
@@ -359,11 +340,9 @@ public final class URIUtil{
      *            {@link CharsetType} 何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return if isNullOrEmpty(appendMap) ,return ""
-     * @throws URIParseException
-     *             the URI parse exception
      * @see CharsetType
      */
-    public static String combineQueryString(Map<String, String[]> appendMap,String charsetType) throws URIParseException{
+    public static String combineQueryString(Map<String, String[]> appendMap,String charsetType){
         if (Validator.isNullOrEmpty(appendMap)){
             return "";
         }
@@ -442,11 +421,9 @@ public final class URIUtil{
      *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return the {@code map<string, string>}
-     * @throws URIParseException
-     *             the URI parse exception
      * @see #parseQueryToArrayMap(String, String)
      */
-    public static Map<String, String> parseQueryToValueMap(String query,String charsetType) throws URIParseException{
+    public static Map<String, String> parseQueryToValueMap(String query,String charsetType){
         Map<String, String> returnMap = new HashMap<String, String>();
         Map<String, String[]> map = parseQueryToArrayMap(query, charsetType);
         if (Validator.isNotNullOrEmpty(map)){
@@ -472,10 +449,8 @@ public final class URIUtil{
      *         <li>没有Validator.isNullOrEmpty(bianma) 那么就原样返回</li>
      *         <li>如果有编码,统统先强制 decode 再 encode</li>
      *         </ul>
-     * @throws URIParseException
-     *             the URI parse exception
      */
-    public static Map<String, String[]> parseQueryToArrayMap(String query,String charsetType) throws URIParseException{
+    public static Map<String, String[]> parseQueryToArrayMap(String query,String charsetType){
         if (Validator.isNotNullOrEmpty(query)){
             String[] nameAndValueArray = query.split(URIComponents.AMPERSAND);
 
@@ -563,10 +538,8 @@ public final class URIUtil{
      * @param spec
      *            the <code>String</code> to parse as a URL.
      * @return 获取联合url
-     * @throws URIParseException
-     *             the URI parse exception
      */
-    public static String getUnionUrl(String context,String spec) throws URIParseException{
+    public static String getUnionUrl(String context,String spec){
         URL parentUrl = getURL(context);
         return getUnionUrl(parentUrl, spec);
     }
@@ -589,10 +562,8 @@ public final class URIUtil{
      * @param spec
      *            the <code>String</code> to parse as a URL.
      * @return 获取联合url
-     * @throws URIParseException
-     *             the URI parse exception
      */
-    public static String getUnionUrl(URL context,String spec) throws URIParseException{
+    public static String getUnionUrl(URL context,String spec){
         try{
             URL unionUrl = new URL(context, spec);
             return unionUrl.toString();
@@ -608,15 +579,10 @@ public final class URIUtil{
      * @param filePathName
      *            字符串路径
      * @return url
-     * @throws URIParseException
-     *             the URI parse exception
-     * @throws NullPointerException
-     *             if isNullOrEmpty(filePathName)
-     * 
      * @see java.io.File#toURI()
      * @see java.net.URI#toURL()
      */
-    public static URL getURL(String filePathName) throws URIParseException,NullPointerException{
+    public static URL getURL(String filePathName){
         if (Validator.isNullOrEmpty(filePathName)){
             throw new NullPointerException("filePathName can't be null/empty!");
         }
@@ -680,12 +646,10 @@ public final class URIUtil{
      *            charsetType {@link CharsetType}
      * @return {@link java.net.URLEncoder#encode(String, String)}<br>
      *         if isNullOrEmpty(charsetType), 原样返回 value<br>
-     * @throws URIParseException
-     *             the URI parse exception
      * @see URLEncoder#encode(String, String)
      * @see CharsetType
      */
-    public static String encode(String value,String charsetType) throws URIParseException{
+    public static String encode(String value,String charsetType){
         if (Validator.isNullOrEmpty(charsetType)){
             return value;
         }
@@ -714,12 +678,10 @@ public final class URIUtil{
      *            charsetType {@link CharsetType}
      * @return the newly {@link java.net.URLDecoder#decode(String, String)} 解码之后的值<br>
      *         if isNullOrEmpty(charsetType) ,原样返回 value<br>
-     * @throws URIParseException
-     *             the URI parse exception
      * @see URLEncoder#encode(java.lang.String, java.lang.String)
      * @see CharsetType
      */
-    public static String decode(String value,String charsetType) throws URIParseException{
+    public static String decode(String value,String charsetType){
         if (Validator.isNullOrEmpty(charsetType)){
             return value;
         }

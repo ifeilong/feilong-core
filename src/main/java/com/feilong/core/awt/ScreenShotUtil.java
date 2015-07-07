@@ -23,8 +23,6 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 
-import com.feilong.core.io.UncheckedIOException;
-
 /**
  * 截屏操作.
  *
@@ -76,12 +74,10 @@ public final class ScreenShotUtil{
      *            高度
      * @param height
      *            宽度
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #getRobot()
      * @see com.feilong.core.awt.ImageUtil#write(RenderedImage, String, String)
      */
-    public static void screenshot(String fileName,String formatName,int x,int y,int width,int height) throws UncheckedIOException{
+    public static void screenshot(String fileName,String formatName,int x,int y,int width,int height){
         Rectangle rectangle = new Rectangle(x, y, width, height);
         screenshot(fileName, formatName, rectangle);
     }
@@ -95,11 +91,9 @@ public final class ScreenShotUtil{
      *            图片格式
      * @param rectangle
      *            {@link java.awt.Rectangle}
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @since 1.2.1
      */
-    public static void screenshot(String fileName,String formatName,Rectangle rectangle) throws UncheckedIOException{
+    public static void screenshot(String fileName,String formatName,Rectangle rectangle){
         Robot robot = getRobot();
         BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
         ImageUtil.write(bufferedImage, fileName, formatName);
@@ -109,12 +103,10 @@ public final class ScreenShotUtil{
      * 获得 {@link java.awt.Robot}.
      *
      * @return the robot
-     * @throws RuntimeException
-     *             the runtime exception
      * @see java.awt.Robot
      * @since 1.2.0
      */
-    private static Robot getRobot() throws RuntimeException{
+    private static Robot getRobot(){
         try{
             Robot robot = new Robot();
             return robot;

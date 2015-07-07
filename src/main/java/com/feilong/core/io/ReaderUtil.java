@@ -51,11 +51,9 @@ public final class ReaderUtil{
      * @param reader
      *            the reader
      * @return the string
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
      */
-    public static String toString(Reader reader) throws UncheckedIOException{
+    public static String toString(Reader reader){
 
         BufferedReader bufferedReader = org.apache.commons.io.IOUtils.toBufferedReader(reader);
 
@@ -80,11 +78,9 @@ public final class ReaderUtil{
      * @param reader
      *            the reader
      * @return the string
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
      */
-    public static String readLine(Reader reader) throws UncheckedIOException{
+    public static String readLine(Reader reader){
 
         BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
 

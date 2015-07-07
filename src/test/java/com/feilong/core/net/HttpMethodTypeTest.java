@@ -21,7 +21,6 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import com.feilong.core.lang.EnumUtil;
-import com.feilong.core.net.HttpMethodType;
 
 /**
  * The Class HttpMethodTypeTest.

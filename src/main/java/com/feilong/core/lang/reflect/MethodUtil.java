@@ -107,8 +107,7 @@ public final class MethodUtil{
      * 比如 上传下载 service 有很多相同类型的方法,比如 importXX1,importXX2,对于这种,可以使用调用此方法来快速调用方法
      * </p>
      * </blockquote>
-     * 
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param obj
@@ -118,13 +117,11 @@ public final class MethodUtil{
      * @param params
      *            参数
      * @return 方法执行之后的结果值
-     * @throws ReflectException
-     *             如果在执行的过程中出现了异常
      * @see java.lang.reflect.Method#invoke(Object, Object...)
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object...)
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
      */
-    public static <T> T invokeMethod(Object obj,String methodName,Object...params) throws ReflectException{
+    public static <T> T invokeMethod(Object obj,String methodName,Object...params){
         final Class<?>[] parameterTypes = ClassUtil.toClass(params);
         return invokeMethod(obj, methodName, params, parameterTypes);
     }
@@ -143,15 +140,11 @@ public final class MethodUtil{
      * @param parameterTypes
      *            the parameter types
      * @return the t
-     * @throws ReflectException
-     *             the reflect exception
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[])
-     * 
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")
-    public static <T> T invokeMethod(final Object object,final String methodName,Object[] args,Class<?>[] parameterTypes)
-                    throws ReflectException{
+    public static <T> T invokeMethod(final Object object,final String methodName,Object[] args,Class<?>[] parameterTypes){
         try{
             return (T) org.apache.commons.lang3.reflect.MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
@@ -177,12 +170,10 @@ public final class MethodUtil{
      * @param params
      *            动态参数
      * @return 方法执行之后的结果值
-     * @throws ReflectException
-     *             the reflect exception
      * @see java.lang.reflect.Method#invoke(Object, Object...)
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object...)
      */
-    public static <T> T invokeStaticMethod(Class<?> klass,String methodName,Object...params) throws ReflectException{
+    public static <T> T invokeStaticMethod(Class<?> klass,String methodName,Object...params){
         final Class<?>[] parameterTypes = ClassUtil.toClass(params);
         return invokeStaticMethod(klass, methodName, params, parameterTypes);
     }
@@ -201,16 +192,11 @@ public final class MethodUtil{
      * @param parameterTypes
      *            the parameter types
      * @return the t
-     * @throws ReflectException
-     *             the reflect exception
-     * 
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])
-     * 
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")
-    public static <T> T invokeStaticMethod(final Class<?> cls,final String methodName,Object[] args,Class<?>[] parameterTypes)
-                    throws ReflectException{
+    public static <T> T invokeStaticMethod(final Class<?> cls,final String methodName,Object[] args,Class<?>[] parameterTypes){
         try{
             return (T) org.apache.commons.lang3.reflect.MethodUtils.invokeStaticMethod(cls, methodName, args, parameterTypes);
         }catch (Exception e){

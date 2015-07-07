@@ -19,7 +19,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,14 +51,12 @@ public final class RegexUtil{
 
     /**
      * 编译给定正则表达式并尝试将给定输入与其匹配, 调用了 {@link Pattern#matches(String, CharSequence)}方法.
-     * 
+     *
      * @param regexPattern
      *            正则表达式字符串
      * @param input
      *            The character sequence to be matched
      * @return 如果input 符合 regex的正则表达式格式,返回true, 否则返回 false;
-     * @throws PatternSyntaxException
-     *             If the expression's syntax is invalid
      * @see String
      * @see StringBuffer
      * @see StringBuilder
@@ -69,7 +66,7 @@ public final class RegexUtil{
      * @see RegexPattern
      * @since 1.0.7
      */
-    public static boolean matches(String regexPattern,CharSequence input) throws PatternSyntaxException{
+    public static boolean matches(String regexPattern,CharSequence input){
         //这里是等价的 getMatcher(regexPattern, input).matches();
         return Pattern.matches(regexPattern, input);
     }
@@ -203,14 +200,12 @@ public final class RegexUtil{
     //********************************************************************************************
     /**
      * Gets the matcher.
-     * 
+     *
      * @param regexPattern
      *            the regex pattern
      * @param input
      *            The character sequence to be matched
      * @return the matcher
-     * @throws PatternSyntaxException
-     *             the pattern syntax exception
      * @see String
      * @see StringBuffer
      * @see StringBuilder
@@ -218,14 +213,13 @@ public final class RegexUtil{
      * @see RegexPattern
      * @since 1.0.7
      */
-    private static Matcher getMatcher(String regexPattern,CharSequence input) throws PatternSyntaxException{
+    private static Matcher getMatcher(String regexPattern,CharSequence input){
         return getMatcher(regexPattern, input, 0);
     }
 
     /**
      * Gets the matcher.
-     * 
-     * 
+     *
      * @param regexPattern
      *            the regex pattern
      * @param input
@@ -248,18 +242,14 @@ public final class RegexUtil{
      *            </li>
      *            </ul>
      * @return the matcher
-     * @throws PatternSyntaxException
-     *             the pattern syntax exception
-     * 
      * @see String
      * @see StringBuffer
      * @see StringBuilder
      * @see Pattern#compile(String, int)
      * @see RegexPattern
-     * 
      * @since 1.0.7
      */
-    private static Matcher getMatcher(String regexPattern,CharSequence input,int flags) throws PatternSyntaxException{
+    private static Matcher getMatcher(String regexPattern,CharSequence input,int flags){
         Pattern pattern = Pattern.compile(regexPattern, flags);
         Matcher matcher = pattern.matcher(input);
         return matcher;

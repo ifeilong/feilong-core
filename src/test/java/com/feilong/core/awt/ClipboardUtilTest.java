@@ -15,14 +15,9 @@
  */
 package com.feilong.core.awt;
 
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.core.awt.ClipboardUtil;
 
 /**
  * The Class ClipboardUtilTest.
@@ -37,15 +32,10 @@ public class ClipboardUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(ClipboardUtilTest.class);
 
     /**
-     * {@link com.feilong.core.awt.ClipboardUtil#setClipboardContent(java.lang.String)} 的测试方法。
-     *
-     * @throws UnsupportedFlavorException
-     *             the unsupported flavor exception
-     * @throws IOException
-     *             the IO exception
+     * Test set clipboard contents.
      */
     @Test
-    public final void testSetClipboardContents() throws UnsupportedFlavorException,IOException{
+    public final void testSetClipboardContents(){
         LOGGER.info(ClipboardUtil.getClipboardContent());
     }
 

@@ -171,20 +171,16 @@ public final class NumberUtil{
 
     /**
      * 获得进度,默认格式为 {@link NumberPattern#PERCENT_WITH_NOPOINT}.
-     * 
+     *
      * @param current
      *            当前量
      * @param total
      *            总量
      * @return 50% 56% 58%不带小数点格式
-     * @throws NullPointerException
-     *             if total==null or if current==null
-     * @throws IllegalArgumentException
-     *             {@code if total<=0 or if current<=0 or if current>total}
      * @see NumberPattern
      * @since 1.0.7
      */
-    public static final String getProgress(Number current,Number total) throws NullPointerException,IllegalArgumentException{
+    public static final String getProgress(Number current,Number total){
         String numberPattern = NumberPattern.PERCENT_WITH_NOPOINT;
         return getProgress(current, total, numberPattern);
     }
@@ -203,7 +199,7 @@ public final class NumberUtil{
      *   	return 66.7%
      * }
      * </pre>
-     * 
+     *
      * @param current
      *            当前量
      * @param total
@@ -211,15 +207,10 @@ public final class NumberUtil{
      * @param numberPattern
      *            the number pattern {@link NumberPattern}
      * @return 根据numberPattern 返回 50.5%,100%.....
-     * @throws NullPointerException
-     *             if total==null or if current==null
-     * @throws IllegalArgumentException
-     *             {@code if total<=0 or if current<=0 or if current>total}
      * @see NumberPattern
      * @since 1.0.7
      */
-    public static final String getProgress(Number current,Number total,String numberPattern) throws NullPointerException,
-                    IllegalArgumentException{
+    public static final String getProgress(Number current,Number total,String numberPattern){
         if (null == current){
             throw new NullPointerException("current is null");
         }
@@ -279,7 +270,7 @@ public final class NumberUtil{
      * <b>注意:</b>不能直接one.divide(two), 避免 exception:Non-terminating decimal expansion; no exact representable decimal result<br>
      * 应该指定scale和roundingMode，保证对于无限小数有足够的范围来表示结果.
      * </p>
-     * 
+     *
      * @param one
      *            除数
      * @param two
@@ -290,13 +281,10 @@ public final class NumberUtil{
      *            舍入法 {@link RoundingMode}
      * @return 当two 是空或者是0的时候,直接返回one<br>
      *         否则返回除法结果one/two,依据舍入法 {@link RoundingMode},小数位数指定
-     * @throws NullPointerException
-     *             if isNullOrEmpty(roundingMode)
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @since 1.0.7
      */
-    public static final BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale,RoundingMode roundingMode)
-                    throws NullPointerException{
+    public static final BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale,RoundingMode roundingMode){
 
         if (Validator.isNullOrEmpty(roundingMode)){
             throw new NullPointerException("the roundingMode is null or empty!");
@@ -445,14 +433,12 @@ public final class NumberUtil{
     /**
      * 将数字转换成 小数点后一位为 0.0,0.5,1.0,1.5,2.0,2.5....<br>
      * 通常用于 评分制
-     * 
+     *
      * @param value
      *            数字
      * @return 0.0,0.5,1.0,1.5,2.0,2.5.......
-     * @throws NullPointerException
-     *             isNullOrEmpty(value)
      */
-    public static final String toPointFive(Number value) throws NullPointerException{
+    public static final String toPointFive(Number value){
         if (Validator.isNullOrEmpty(value)){
             throw new NullPointerException("value can't be null/empty!");
         }

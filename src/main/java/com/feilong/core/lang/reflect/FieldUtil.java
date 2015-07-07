@@ -59,18 +59,16 @@ public final class FieldUtil{
 
     /**
      * 获得这个对象 所有字段的值(不是属性),key是 fieldName，value 是值.
-     * 
+     *
      * @param obj
      *            the obj
      * @return the field value map,key是 fieldName，value 是值
-     * @throws ReflectException
-     *             the reflect exception
      * @see #getDeclaredFields(Object)
      * @see #getFieldValueMap(Object, String[])
      * @see java.lang.reflect.Modifier#isPrivate(int)
      * @see java.lang.reflect.Modifier#isStatic(int)
      */
-    public static Map<String, Object> getFieldValueMap(Object obj) throws ReflectException{
+    public static Map<String, Object> getFieldValueMap(Object obj){
         return getFieldValueMap(obj, null);
     }
 
@@ -82,10 +80,8 @@ public final class FieldUtil{
      * @param excludeFieldNames
      *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
      * @return the field value map
-     * @throws ReflectException
-     *             the reflect exception
      */
-    public static Map<String, Object> getFieldValueMap(Object obj,String[] excludeFieldNames) throws ReflectException{
+    public static Map<String, Object> getFieldValueMap(Object obj,String[] excludeFieldNames){
 
         // 获得一个对象所有的声明字段(包括私有的,继承的)
         Field[] fields = getDeclaredFields(obj);
@@ -209,17 +205,15 @@ public final class FieldUtil{
 
     /**
      * 返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段.
-     * 
+     *
      * @param clz
      *            clz
      * @param name
      *            属性名称
      * @return 返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段
-     * @throws ReflectException
-     *             the reflect exception
      * @see java.lang.Class#getDeclaredField(String)
      */
-    public static Field getDeclaredField(Class<?> clz,String name) throws ReflectException{
+    public static Field getDeclaredField(Class<?> clz,String name){
         try{
             Field field = clz.getDeclaredField(name);
             return field;
@@ -235,20 +229,18 @@ public final class FieldUtil{
 
     /**
      * 设置属性.
-     * 
+     *
      * @param owner
      *            the owner
      * @param fieldName
      *            字段
      * @param value
      *            值
-     * @throws ReflectException
-     *             the reflect exception
      * @see java.lang.Object#getClass()
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#set(Object, Object)
      */
-    public static void setProperty(Object owner,String fieldName,Object value) throws ReflectException{
+    public static void setProperty(Object owner,String fieldName,Object value){
         try{
             Class<?> ownerClass = owner.getClass();
             Field field = ownerClass.getField(fieldName);
@@ -261,7 +253,7 @@ public final class FieldUtil{
 
     /**
      * 得到某个对象的公共属性.
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param owner
@@ -269,15 +261,12 @@ public final class FieldUtil{
      * @param fieldName
      *            the field name
      * @return 该属性对象
-     * @throws ReflectException
-     *             the reflect exception
-     * 
      * @see java.lang.Object#getClass()
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#get(Object)
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getProperty(Object owner,String fieldName) throws ReflectException{
+    public static <T> T getProperty(Object owner,String fieldName){
         try{
             Class<?> ownerClass = owner.getClass();
             Field field = ownerClass.getField(fieldName);
@@ -300,7 +289,7 @@ public final class FieldUtil{
      * 返回 :1073741824
      * }
      * </pre>
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param className
@@ -308,14 +297,12 @@ public final class FieldUtil{
      * @param fieldName
      *            属性名
      * @return 该属性对象
-     * @throws ReflectException
-     *             the reflect exception
      * @see com.feilong.core.lang.ClassUtil#loadClass(String)
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#get(Object)
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getStaticProperty(String className,String fieldName) throws ReflectException{
+    public static <T> T getStaticProperty(String className,String fieldName){
         try{
             Class<?> ownerClass = ClassUtil.loadClass(className);
             Field field = ownerClass.getField(fieldName);

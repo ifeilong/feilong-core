@@ -32,7 +32,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
@@ -59,7 +58,7 @@ public class JsonUtilTest{
      *             the no such method exception
      */
     @Test
-    public void name() throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
+    public void name() throws Exception{
         String json = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
         JSONObject jsonObject = JSONObject.fromObject(json);
         Object bean = JSONObject.toBean(jsonObject);

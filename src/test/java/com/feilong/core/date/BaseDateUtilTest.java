@@ -20,9 +20,6 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DatePattern;
-import com.feilong.core.date.DateUtil;
-
 /**
  * The Class BaseDateUtil.
  *
@@ -33,7 +30,7 @@ import com.feilong.core.date.DateUtil;
 abstract class BaseDateUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER                     = LoggerFactory.getLogger(BaseDateUtilTest.class);
+    private static final Logger LOGGER                  = LoggerFactory.getLogger(BaseDateUtilTest.class);
 
     /** <code>{@value}</code> code. */
     static final String         FROMSTRING              = "2011-03-5 23:31:25.456";

@@ -53,11 +53,9 @@ public final class InputStreamUtil{
      * @param inputStream
      *            the input stream
      * @return 将 {@link java.io.InputStream} 转成string
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #inputStream2String(InputStream, String)
      */
-    public static String inputStream2String(InputStream inputStream) throws UncheckedIOException{
+    public static String inputStream2String(InputStream inputStream){
         Charset defaultCharset = Charset.defaultCharset();
         String charsetName = defaultCharset.name();
         LOGGER.debug("the param defaultCharset:[{}]", charsetName);
@@ -73,12 +71,10 @@ public final class InputStreamUtil{
      * @param charsetName
      *            指定受支持的 charset 的名称
      * @return 将 {@link java.io.InputStream} 转成string
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #toBufferedReader(InputStream, String)
      * @see ReaderUtil#toString(Reader)
      */
-    public static String inputStream2String(InputStream inputStream,String charsetName) throws UncheckedIOException{
+    public static String inputStream2String(InputStream inputStream,String charsetName){
         BufferedReader bufferedReader = toBufferedReader(inputStream, charsetName);
         return ReaderUtil.toString(bufferedReader);
     }
@@ -91,12 +87,10 @@ public final class InputStreamUtil{
      * @param charsetName
      *            the charset name
      * @return the buffered reader
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.io.BufferedReader
      * @see java.io.InputStreamReader#InputStreamReader(InputStream, String)
      */
-    public static BufferedReader toBufferedReader(InputStream inputStream,String charsetName) throws UncheckedIOException{
+    public static BufferedReader toBufferedReader(InputStream inputStream,String charsetName){
         try{
             Reader reader = new InputStreamReader(inputStream, charsetName);
 

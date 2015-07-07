@@ -20,7 +20,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.feilong.core.bean.BeanUtilException;
-import com.feilong.core.lang.EnumUtil;
 import com.feilong.core.net.HttpMethodType;
 
 /**
@@ -41,7 +40,7 @@ public class EnumUtilTest{
      *             the no such field exception
      */
     @Test
-    public final void testGetEnum() throws IllegalArgumentException,NoSuchFieldException{
+    public final void testGetEnum() throws Exception{
         assertEquals(HttpMethodType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "get"));
     }
 
@@ -54,7 +53,7 @@ public class EnumUtilTest{
      *             the no such field exception
      */
     @Test
-    public final void testGetHttpMethodType() throws IllegalArgumentException,NoSuchFieldException{
+    public final void testGetHttpMethodType() throws Exception{
         assertEquals(HttpMethodType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "post"));
         assertEquals(HttpMethodType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "pOst"));
         assertEquals(HttpMethodType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "POST"));
@@ -75,7 +74,7 @@ public class EnumUtilTest{
      *             the no such field exception
      */
     @Test(expected = NoSuchFieldException.class)
-    public final void testGetHttpMethodType1() throws IllegalArgumentException,NoSuchFieldException{
+    public final void testGetHttpMethodType1() throws Exception{
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "post111"));
     }
 
@@ -88,7 +87,7 @@ public class EnumUtilTest{
      *             the no such field exception
      */
     @Test(expected = NoSuchFieldException.class)
-    public final void testGetHttpMethodType2() throws IllegalArgumentException,NoSuchFieldException{
+    public final void testGetHttpMethodType2() throws Exception{
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", ""));
     }
 
@@ -101,7 +100,7 @@ public class EnumUtilTest{
      *             the no such field exception
      */
     @Test(expected = NoSuchFieldException.class)
-    public final void testGetHttpMethodType3() throws IllegalArgumentException,NoSuchFieldException{
+    public final void testGetHttpMethodType3() throws Exception{
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", null));
     }
 
@@ -116,7 +115,7 @@ public class EnumUtilTest{
      *             the bean util exception
      */
     @Test(expected = BeanUtilException.class)
-    public final void testGetHttpMethodType4() throws IllegalArgumentException,NoSuchFieldException,BeanUtilException{
+    public final void testGetHttpMethodType4() throws NoSuchFieldException{
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method2222", null));
     }
 }

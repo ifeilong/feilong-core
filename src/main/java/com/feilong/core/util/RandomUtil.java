@@ -69,16 +69,14 @@ public final class RandomUtil{
 
     /**
      * 创建最小值和最大值之间的随机数.
-     * 
+     *
      * @param min
      *            最小值
      * @param max
      *            最大值
      * @return 创建最小值和最大值之间的随机数
-     * @throws IllegalArgumentException
-     *             {@code if (maxLong < minLong)}
      */
-    public static long createRandom(Number min,Number max) throws IllegalArgumentException{
+    public static long createRandom(Number min,Number max){
         long maxLong = max.longValue();
         long minLong = min.longValue();
         if (maxLong < minLong){
@@ -93,8 +91,8 @@ public final class RandomUtil{
 
     /**
      * 生成一个指定长度大小的随机正整数<br>
-     * <b>目前内部调用全局随机数{@link #JVM_RANDOM}</b>
-     * 
+     * <b>目前内部调用全局随机数{@link #JVM_RANDOM}</b>.
+     *
      * @param length
      *            设定所取出随机数的长度.length小于11
      * @return 返回生成的随机数
@@ -120,21 +118,16 @@ public final class RandomUtil{
     /**
      * 随机抽取字符串char,拼接成随机字符串.<br>
      * 取一个字符串里面 随机长度字符
-     * 
+     *
+     * @param str
+     *            被抽取的字符串
      * @param minLength
      *            最小长度
      * @param maxLength
      *            最大长度
-     * @param str
-     *            被抽取的字符串
      * @return 得到随机字符串
-     * @throws NullPointerException
-     *             if isNullOrEmpty(str)
-     * @throws IllegalArgumentException
-     *             {@code if maxLength<=0 or if (maxLength < minLength)}
      */
-    public static String createRandomFromString(String str,int minLength,int maxLength) throws IllegalArgumentException,
-                    NullPointerException{
+    public static String createRandomFromString(String str,int minLength,int maxLength){
         if (Validator.isNullOrEmpty(str)){
             throw new NullPointerException("the str is null or empty!");
         }
@@ -155,18 +148,14 @@ public final class RandomUtil{
     /**
      * 随机抽取字符串char,拼接成随机字符串.<br>
      * 取一个字符串里面 指定长度字符
-     * 
+     *
      * @param str
      *            被抽取的字符串
      * @param length
      *            随机字符串长度
      * @return 得到随机字符串
-     * @throws NullPointerException
-     *             if isNullOrEmpty(str)
-     * @throws IllegalArgumentException
-     *             {@code if length<=0}
      */
-    public static String createRandomFromString(String str,int length) throws IllegalArgumentException,NullPointerException{
+    public static String createRandomFromString(String str,int length){
         if (Validator.isNullOrEmpty(str)){
             throw new NullPointerException("the str is null or empty!");
         }

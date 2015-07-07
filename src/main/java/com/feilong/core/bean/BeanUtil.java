@@ -168,13 +168,11 @@ public final class BeanUtil{
      *            Bean to be cloned
      * @return the cloned bean
      *         (复制的引用 ，无法实现深clone)
-     * @throws BeanUtilException
-     *             if IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException
      * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @since 1.0
      */
-    public static <T> T cloneBean(T bean) throws BeanUtilException{
+    public static <T> T cloneBean(T bean){
         try{
             //Clone a bean based on the available property getters and setters, even if the bean class itself does not implement Cloneable.
             @SuppressWarnings("unchecked")
@@ -204,21 +202,17 @@ public final class BeanUtil{
      * 但是 {@link org.apache.commons.beanutils.ConvertUtilsBean#ConvertUtilsBean()} 默认的构造函数 是使用标准的转换
      * 
      * </p>
-     * 
+     *
      * @param bean
      *            Bean whose properties are to be extracted
-     * 
      * @return Map of property descriptors
-     * 
-     * @throws BeanUtilException
-     *             if IllegalAccessException | InvocationTargetException | NoSuchMethodException
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @see PropertyUtil#describe(Object)
      * @see PropertyDescriptor
      * @see #populate(Object, Map)
      */
-    public static Map<String, String> describe(Object bean) throws BeanUtilException{
+    public static Map<String, String> describe(Object bean){
         try{
             //Return the entire set of properties for which the specified bean provides a read method.
             Map<String, String> propertyMap = BeanUtils.describe(bean);
@@ -235,18 +229,14 @@ public final class BeanUtil{
 
     /**
      * 把properties/map里面的值放入bean中.
-     * 
+     *
      * @param bean
      *            JavaBean whose properties are being populated
-     * 
      * @param properties
      *            Map keyed by property name, with the corresponding (String or String[]) value(s) to be set
-     * 
-     * @throws BeanUtilException
-     *             the bean util exception
      * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
      */
-    public static void populate(Object bean,Map<String, ?> properties) throws BeanUtilException{
+    public static void populate(Object bean,Map<String, ?> properties){
         try{
             BeanUtils.populate(bean, properties);
         }catch (Exception e){
@@ -283,14 +273,10 @@ public final class BeanUtil{
      *            目标对象
      * @param fromObj
      *            原始对象
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             null == toObj or null == fromObj
      * @see org.apache.commons.beanutils.BeanUtils#copyProperties(Object, Object)
      * @see org.apache.commons.beanutils.BeanUtils#copyProperty(Object, String, Object)
      */
-    public static void copyProperties(Object toObj,Object fromObj) throws BeanUtilException,NullPointerException{
+    public static void copyProperties(Object toObj,Object fromObj){
         if (null == toObj){
             throw new NullPointerException("No destination bean/toObj specified");
         }
@@ -335,15 +321,10 @@ public final class BeanUtil{
      *            原始对象
      * @param includePropertyNames
      *            包含的属性数组, can't be null/empty!
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             if isNullOrEmpty(includePropertyNames)
      * @see #copyProperty(Object, Object, String)
      * @see com.feilong.core.bean.BeanUtil#copyProperty(Object, Object, String)
      */
-    public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames) throws BeanUtilException,
-                    NullPointerException{
+    public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){
         if (Validator.isNullOrEmpty(includePropertyNames)){
             throw new NullPointerException("includePropertyNames can't be null/empty!");
         }
@@ -381,19 +362,17 @@ public final class BeanUtil{
      * 此时,可以使用
      * BeanUtil.copyProperty(enterpriseSales,enterpriseSales_form,&quot;enterpriseName&quot;);
      * </pre>
-     * 
+     *
      * @param toObj
      *            目标对象
      * @param fromObj
      *            原始对象
      * @param filedName
      *            字段名称
-     * @throws BeanUtilException
-     *             the bean util exception
      * @see #getProperty(Object, String)
      * @see #copyProperty(Object, String, Object)
      */
-    public static void copyProperty(Object toObj,Object fromObj,String filedName) throws BeanUtilException{
+    public static void copyProperty(Object toObj,Object fromObj,String filedName){
         Object value = getProperty(fromObj, filedName);
         copyProperty(toObj, filedName, value);
     }
@@ -418,18 +397,16 @@ public final class BeanUtil{
      * 所以,做为一般的日常使用,setProperty()方法是不推荐使用的.
      * 
      * </pre>
-     * 
+     *
      * @param bean
      *            bean
      * @param propertyName
      *            成员Property name (can be nested/indexed/mapped/combo)
      * @param value
      *            赋值为value
-     * @throws BeanUtilException
-     *             the bean util exception
      * @see org.apache.commons.beanutils.BeanUtils#copyProperty(Object, String, Object)
      */
-    public static void copyProperty(Object bean,String propertyName,Object value) throws BeanUtilException{
+    public static void copyProperty(Object bean,String propertyName,Object value){
         try{
             BeanUtils.copyProperty(bean, propertyName, value);
         }catch (Exception e){
@@ -484,20 +461,18 @@ public final class BeanUtil{
      * 
      * }
      * </pre>
-     * 
+     *
      * @param bean
      *            Bean on which setting is to be performed
      * @param name
      *            Property name (can be nested/indexed/mapped/combo)
      * @param value
      *            Value to be set
-     * @throws BeanUtilException
-     *             if IllegalAccessException | InvocationTargetException
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
      * @see com.feilong.core.bean.PropertyUtil#setProperty(Object, String, Object)
      */
-    public static void setProperty(Object bean,String name,Object value) throws BeanUtilException{
+    public static void setProperty(Object bean,String name,Object value){
         try{
             // BeanUtils支持把所有类型的属性都作为字符串处理
             // 在后台自动进行类型转换(字符串和真实类型的转换)
@@ -558,20 +533,17 @@ public final class BeanUtil{
      * 
      * }
      * </pre>
-     * 
-     * 
+     *
      * @param bean
      *            bean
      * @param name
      *            属性名称
      * @return 使用BeanUtils类从对象中取得属性值
-     * @throws BeanUtilException
-     *             if IllegalAccessException | InvocationTargetException | NoSuchMethodException
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      */
-    public static String getProperty(Object bean,String name) throws BeanUtilException{
+    public static String getProperty(Object bean,String name){
         // Return the value of the specified property of the specified bean,
         // no matter which property reference format is used, as a String.
         try{

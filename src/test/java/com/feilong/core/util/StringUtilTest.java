@@ -43,10 +43,10 @@ import com.feilong.test.User;
 public class StringUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER  = LoggerFactory.getLogger(StringUtilTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StringUtilTest.class);
 
     /** <code>{@value}</code>. */
-    private static final String TEXT = "jinxin.feilong";
+    private static final String TEXT   = "jinxin.feilong";
 
     /**
      * Search count.

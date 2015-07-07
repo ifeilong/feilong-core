@@ -111,17 +111,12 @@ public final class ConstructorUtil{
      * @param parameterValues
      *            构造函数的参数
      * @return 新建的实例,如果结果不能转成T 会抛出异常
-     * @throws ReflectException
-     *             the reflect exception
-     * @throws NullPointerException
-     *             if isNullOrEmpty(className)
      * @see ClassUtil#loadClass(String)
      * @see #newInstance(Class, Object...)
-     * 
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     @SuppressWarnings("unchecked")
-    public static <T> T newInstance(String className,Object...parameterValues) throws ReflectException,NullPointerException{
+    public static <T> T newInstance(String className,Object...parameterValues){
         if (Validator.isNullOrEmpty(className)){
             throw new NullPointerException("className can't be null/empty!");
         }
@@ -147,16 +142,13 @@ public final class ConstructorUtil{
      * @param parameterValues
      *            构造函数的参数值, 比如100L
      * @return the t
-     * @throws ReflectException
-     *             the reflect exception
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
      * @see java.lang.Class#getConstructor(Class...)
      * @see java.lang.reflect.Constructor#newInstance(Object...)
      * @see org.apache.commons.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object...)
-     * 
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
-    public static <T> T newInstance(Class<T> klass,Object...parameterValues) throws ReflectException{
+    public static <T> T newInstance(Class<T> klass,Object...parameterValues){
         Class<?>[] parameterTypes = ClassUtil.toClass(parameterValues);
         return newInstance(klass, parameterValues, parameterTypes);
     }
@@ -173,13 +165,10 @@ public final class ConstructorUtil{
      * @param parameterTypes
      *            the parameter types
      * @return the t
-     * @throws ReflectException
-     *             the reflect exception
      * @see org.apache.commons.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object[], Class[])
-     * 
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
-    public static <T> T newInstance(Class<T> klass,Object[] args,Class<?>[] parameterTypes) throws ReflectException{
+    public static <T> T newInstance(Class<T> klass,Object[] args,Class<?>[] parameterTypes){
         try{
             return org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor(klass, args, parameterTypes);
         }catch (Exception e){

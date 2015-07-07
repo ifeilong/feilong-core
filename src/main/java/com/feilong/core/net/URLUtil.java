@@ -45,11 +45,9 @@ public final class URLUtil{
      * @param urls
      *            the urls
      * @return the string[]
-     * @throws NullPointerException
-     *             if isNullOrEmpty(urls)
      * @since 1.2.1
      */
-    public static String[] toStringArray(URL[] urls) throws NullPointerException{
+    public static String[] toStringArray(URL[] urls){
         if (Validator.isNullOrEmpty(urls)){
             throw new NullPointerException("urls can't be null/empty!");
         }
@@ -70,10 +68,8 @@ public final class URLUtil{
      * @param paths
      *            the paths
      * @return the UR l[]
-     * @throws NullPointerException
-     *             the null pointer exception
      */
-    public static URL[] toURLs(String[] paths) throws NullPointerException{
+    public static URL[] toURLs(String[] paths){
         if (Validator.isNullOrEmpty(paths)){
             throw new NullPointerException("paths can't be null/empty!");
         }
@@ -101,10 +97,8 @@ public final class URLUtil{
      * @param paths
      *            the paths
      * @return the UR l[]
-     * @throws NullPointerException
-     *             the null pointer exception
      */
-    public static URL[] toURLs(List<String> paths) throws NullPointerException{
+    public static URL[] toURLs(List<String> paths){
         if (Validator.isNullOrEmpty(paths)){
             throw new NullPointerException("paths can't be null/empty!");
         }

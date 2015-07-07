@@ -161,11 +161,9 @@ public final class TypeUtil{
      * @param klass
      *            the klass
      * @return the superclass parameterized type
-     * @throws NullPointerException
-     *             the null pointer exception
      * @see java.lang.Class#getGenericSuperclass()
      */
-    private static ParameterizedType getGenericSuperclassParameterizedType(Class<?> klass) throws NullPointerException{
+    private static ParameterizedType getGenericSuperclassParameterizedType(Class<?> klass){
 
         if (Validator.isNullOrEmpty(klass)){
             throw new NullPointerException("klass can't be null/empty!");

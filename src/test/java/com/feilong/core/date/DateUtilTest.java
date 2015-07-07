@@ -349,7 +349,8 @@ public class DateUtilTest extends BaseDateUtilTest{
         Date startDate = DateUtil.string2Date("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
 
         LOGGER.debug(DateUtil.getIntervalSecond(startDate, NOW) + "");
-        LOGGER.debug(DateUtil.getIntervalSecond(startDate, DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
+        LOGGER.debug(DateUtil.getIntervalSecond(startDate, DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))
+                        + "");
 
         LOGGER.debug(DateUtil.getIntervalSecond(161986) + "");
         LOGGER.debug(Integer.MAX_VALUE + "");
@@ -379,20 +380,26 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetWeekOfYear(){
         LOGGER.debug(DateUtil.getWeekOfYear(new Date()) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date("2013-12-31 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
-                        + "");
+        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
+                        "2013-12-31 01:30:24.895",
+                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
         LOGGER.debug(DateUtil.getWeekOfYear(CURRENT_YEAR_BEGIN) + "");
         LOGGER.debug(DateUtil.getWeekOfYear(CURRENT_YEAR_END) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date("2014-12-31 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
-                        + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date("2014-12-30 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
-                        + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date("2014-12-20 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
-                        + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date("2014-12-26 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
-                        + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date("2011-03-10 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
-                        + "");
+        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
+                        "2014-12-31 01:30:24.895",
+                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
+        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
+                        "2014-12-30 01:30:24.895",
+                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
+        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
+                        "2014-12-20 01:30:24.895",
+                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
+        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
+                        "2014-12-26 01:30:24.895",
+                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
+        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
+                        "2011-03-10 01:30:24.895",
+                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
     }
 
     /**
@@ -540,7 +547,8 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void testGetIntervalTime(){
         Date startDate = DateUtil.string2Date("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
         LOGGER.debug(DateUtil.getIntervalTime(startDate, NOW) + "");
-        LOGGER.debug(DateUtil.getIntervalTime(startDate, DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
+        LOGGER.debug(DateUtil.getIntervalTime(startDate, DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))
+                        + "");
 
     }
 

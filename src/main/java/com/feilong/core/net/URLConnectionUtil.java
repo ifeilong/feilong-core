@@ -115,11 +115,9 @@ public final class URLConnectionUtil{
      * @param urlString
      *            the url string
      * @return 读取一个文本行.通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #readLine(String, HttpURLConnectionParam)
      */
-    public static String readLine(String urlString) throws UncheckedIOException{
+    public static String readLine(String urlString){
         return readLine(urlString, null);
     }
 
@@ -131,10 +129,8 @@ public final class URLConnectionUtil{
      * @param httpURLConnectionParam
      *            the http url connection param
      * @return 读取一个文本行.通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      */
-    public static String readLine(String urlString,HttpURLConnectionParam httpURLConnectionParam) throws UncheckedIOException{
+    public static String readLine(String urlString,HttpURLConnectionParam httpURLConnectionParam){
         InputStream inputStream = getInputStream(urlString, httpURLConnectionParam);
         BufferedReader bufferedReader = InputStreamUtil.toBufferedReader(inputStream, httpURLConnectionParam.getContentCharset());
         return ReaderUtil.readLine(bufferedReader);
@@ -147,11 +143,9 @@ public final class URLConnectionUtil{
      * @param urlString
      *            the url string
      * @return the response body as string
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #getResponseBodyAsString(String, HttpURLConnectionParam)
      */
-    public static String getResponseBodyAsString(String urlString) throws UncheckedIOException{
+    public static String getResponseBodyAsString(String urlString){
         return getResponseBodyAsString(urlString, null);
     }
 
@@ -163,13 +157,10 @@ public final class URLConnectionUtil{
      * @param httpURLConnectionParam
      *            httpURLConnectionParam
      * @return the response body as string
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #getInputStream(String, HttpURLConnectionParam)
      * @see InputStreamUtil#inputStream2String(InputStream, String)
      */
-    public static String getResponseBodyAsString(String urlString,HttpURLConnectionParam httpURLConnectionParam)
-                    throws UncheckedIOException{
+    public static String getResponseBodyAsString(String urlString,HttpURLConnectionParam httpURLConnectionParam){
         if (null == httpURLConnectionParam){
             httpURLConnectionParam = new HttpURLConnectionParam();
         }
@@ -185,11 +176,9 @@ public final class URLConnectionUtil{
      * @param urlString
      *            the url string
      * @return the input stream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #getInputStream(String, HttpURLConnectionParam)
      */
-    public static InputStream getInputStream(String urlString) throws UncheckedIOException{
+    public static InputStream getInputStream(String urlString){
         return getInputStream(urlString, null);
     }
 
@@ -201,11 +190,9 @@ public final class URLConnectionUtil{
      * @param httpURLConnectionParam
      *            the http url connection param
      * @return the input stream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #getInputStream(HttpRequest, HttpURLConnectionParam)
      */
-    public static InputStream getInputStream(String urlString,HttpURLConnectionParam httpURLConnectionParam) throws UncheckedIOException{
+    public static InputStream getInputStream(String urlString,HttpURLConnectionParam httpURLConnectionParam){
         HttpRequest httpRequest = new HttpRequest();
         httpRequest.setUri(urlString);
         return getInputStream(httpRequest, httpURLConnectionParam);
@@ -219,12 +206,9 @@ public final class URLConnectionUtil{
      * @param httpURLConnectionParam
      *            the http url connection param
      * @return the input stream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @since 1.2.0
      */
-    public static InputStream getInputStream(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam)
-                    throws UncheckedIOException{
+    public static InputStream getInputStream(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam){
         HttpURLConnection httpURLConnection = getHttpURLConnection(httpRequest, httpURLConnectionParam);
         try{
             InputStream inputStream = httpURLConnection.getInputStream();
@@ -247,11 +231,8 @@ public final class URLConnectionUtil{
      * @param httpURLConnectionParam
      *            httpURLConnectionParam
      * @return {@link java.net.HttpURLConnection}
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      */
-    private static HttpURLConnection getHttpURLConnection(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam)
-                    throws UncheckedIOException{
+    private static HttpURLConnection getHttpURLConnection(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam){
         if (Validator.isNullOrEmpty(httpRequest)){
             throw new NullPointerException("httpRequest can't be null/empty!");
         }

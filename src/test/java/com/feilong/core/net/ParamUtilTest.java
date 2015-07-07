@@ -25,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.CharsetType;
-import com.feilong.core.net.ParamUtil;
 
 /**
  * The Class ParamUtilTest.
@@ -39,7 +38,7 @@ public class ParamUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtilTest.class);
 
     /** The uri. */
-    private String              uri = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
+    private String              uri    = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
 
     /**
      * Test to natural ordering string.

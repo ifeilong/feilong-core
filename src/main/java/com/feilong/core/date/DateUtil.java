@@ -1124,18 +1124,16 @@ public final class DateUtil{
      * 标准阳历格列高利历/公历,现在的公历是根据罗马人的"儒略历"改编而
      * </p>
      * </blockquote>
-     * 
+     *
      * @param date
      *            date
      * @return Calendar
-     * @throws NullPointerException
-     *             isNullOrEmpty(date)
      * @see Calendar#getInstance()
      * @see GregorianCalendar
      * @see Calendar#setTime(Date)
      * @see Calendar#setTimeInMillis(long)
      */
-    public static Calendar toCalendar(Date date) throws NullPointerException{
+    public static Calendar toCalendar(Date date){
         if (Validator.isNullOrEmpty(date)){
             throw new NullPointerException("date can't be null/empty!");
         }

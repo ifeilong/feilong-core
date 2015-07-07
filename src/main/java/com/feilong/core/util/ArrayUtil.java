@@ -27,7 +27,6 @@ import java.util.WeakHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ObjectUtil;
 
@@ -62,15 +61,13 @@ public final class ArrayUtil{
      * @param index
      *            索引
      * @return 返回指定数组对象中索引组件的值,the (possibly wrapped) value of the indexed component in the specified array
-     * @throws IllegalArgumentException
-     *             If the specified object is not an array
      * @throws ArrayIndexOutOfBoundsException
      *             If the specified {@code index} argument is negative, or if it is greater than or equal to the length of the specified
      *             array
      * @see java.lang.reflect.Array#get(Object, int)
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getElement(Object array,int index) throws IllegalArgumentException,ArrayIndexOutOfBoundsException{
+    public static <T> T getElement(Object array,int index) throws ArrayIndexOutOfBoundsException{
         return (T) Array.get(array, index);
     }
 
@@ -216,13 +213,13 @@ public final class ArrayUtil{
      * toStringConfig.setIsJoinNullOrEmpty(false);
      * ArrayUtil.toString(new ToStringConfig(),"a","b",null)---->"a,b"
      * </pre>
-     * 
+     *
      * @param <T>
      *            the generic type
-     * @param arrays
-     *            请使用包装类型,比如 Integer []arrays,而不是 int []arrays //TODO
      * @param toStringConfig
      *            the join string entity
+     * @param arrays
+     *            请使用包装类型,比如 Integer []arrays,而不是 int []arrays //TODO
      * @return <ul>
      *         <li>如果 arrays 是null 或者Empty ,返回null</li>
      *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
@@ -341,15 +338,11 @@ public final class ArrayUtil{
      * @param propertyName
      *            对面里面属性的名称
      * @return the map< t, list< o>>
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             if Validator.isNullOrEmpty(propertyName)
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.util.CollectionsUtil#group(java.util.Collection, String)
      * @since 1.0.8
      */
-    public static <O, T> Map<T, List<O>> group(O[] objectArray,String propertyName) throws BeanUtilException,NullPointerException{
+    public static <O, T> Map<T, List<O>> group(O[] objectArray,String propertyName){
         if (null == objectArray){
             return null;
         }

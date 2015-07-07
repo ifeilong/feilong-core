@@ -29,9 +29,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.io.FileUtil;
-import com.feilong.core.io.UncheckedIOException;
-
 /**
  * The Class FileUtilTest.
  * 
@@ -41,7 +38,7 @@ import com.feilong.core.io.UncheckedIOException;
 public class FileUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER       = LoggerFactory.getLogger(FileUtilTest.class);
+    private static final Logger LOGGER    = LoggerFactory.getLogger(FileUtilTest.class);
 
     /** The file name1. */
     private String              fileName1 = "F:/pie2.png";

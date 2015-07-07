@@ -81,13 +81,11 @@ public final class ImageUtil{
      *            the output file path
      * @param formatName
      *            the format name
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see FileUtil#getFileOutputStream(String)
      * @see #write(RenderedImage, OutputStream, String)
      * @since 1.2.0
      */
-    public static void write(RenderedImage renderedImage,String outputFilePath,String formatName) throws UncheckedIOException{
+    public static void write(RenderedImage renderedImage,String outputFilePath,String formatName){
         OutputStream outputStream = FileUtil.getFileOutputStream(outputFilePath);
         write(renderedImage, outputStream, formatName);
 
@@ -103,11 +101,9 @@ public final class ImageUtil{
      *            outputStream will close
      * @param formatName
      *            a String containg the informal name of the format {@link ImageType}.
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see javax.imageio.ImageIO#write(RenderedImage, String, OutputStream)
      */
-    public static void write(RenderedImage renderedImage,OutputStream outputStream,String formatName) throws UncheckedIOException{
+    public static void write(RenderedImage renderedImage,OutputStream outputStream,String formatName){
         try{
             ImageIO.write(renderedImage, formatName, outputStream);
         }catch (IOException e){
@@ -183,12 +179,10 @@ public final class ImageUtil{
      * @param imageFilePath
      *            图像路径
      * @return the buffered image
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see javax.imageio.ImageIO#read(File)
      * @see #getBufferedImage(File)
      */
-    public static BufferedImage getBufferedImage(String imageFilePath) throws UncheckedIOException{
+    public static BufferedImage getBufferedImage(String imageFilePath){
         File file = new File(imageFilePath);
         return getBufferedImage(file);
     }
@@ -200,12 +194,10 @@ public final class ImageUtil{
      * @param imageFile
      *            the file
      * @return the buffered image
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see javax.imageio.ImageIO#read(File)
      * @since 1.2.0
      */
-    public static BufferedImage getBufferedImage(File imageFile) throws UncheckedIOException{
+    public static BufferedImage getBufferedImage(File imageFile){
         try{
             BufferedImage bufferedImage = ImageIO.read(imageFile);
 
@@ -261,15 +253,13 @@ public final class ImageUtil{
      * @param imageFilename
      *            文件
      * @return 是否是cmyk类型,是返回true
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.awt.color.ColorSpace
      * @see java.awt.color.ColorSpace#TYPE_CMYK
      * @see #getBufferedImage(String)
      * @deprecated 未成功验证,暂时不要调用
      */
     @Deprecated
-    public static boolean isCMYKType(String imageFilename) throws UncheckedIOException{
+    public static boolean isCMYKType(String imageFilename){
         BufferedImage bufferedImage = getBufferedImage(imageFilename);
         ColorSpace colorSpace = getColorSpace(bufferedImage);
         int colorSpaceType = colorSpace.getType();

@@ -28,7 +28,6 @@ import java.util.Set;
 import org.apache.commons.collections.iterators.EnumerationIterator;
 
 import com.feilong.core.io.SerializableUtil;
-import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.Validator;
 
@@ -58,13 +57,11 @@ public final class ObjectUtil{
      * @param serializable
      *            the object
      * @return the int
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see ByteArrayOutputStream#size()
      * @see com.feilong.core.io.SerializableUtil#size(Serializable)
      * @since 1.0.7
      */
-    public static int size(Serializable serializable) throws UncheckedIOException{
+    public static int size(Serializable serializable){
         return SerializableUtil.size(serializable);
     }
 
@@ -271,10 +268,8 @@ public final class ObjectUtil{
      *         <li>否则 new Integer(value.toString().trim())</li>
      *         <li>如果value不能转成integer 会抛出 IllegalArgumentException异常</li>
      *         </ul>
-     * @throws IllegalArgumentException
-     *             如果 参数不能转成 Integer
      */
-    public static final Integer toInteger(Object value) throws IllegalArgumentException{
+    public static final Integer toInteger(Object value){
         if (Validator.isNullOrEmpty(value)){
             return null;
         }

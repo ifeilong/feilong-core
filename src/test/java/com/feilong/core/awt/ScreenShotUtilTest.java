@@ -19,7 +19,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.feilong.core.awt.ScreenShotUtil;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.io.ImageType;

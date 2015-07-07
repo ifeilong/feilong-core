@@ -70,7 +70,7 @@ public final class NumberFormatUtil{
      * @see DecimalFormat
      * @see RoundingMode#HALF_UP
      */
-    public static String format(Number value,String numberPattern) throws NullPointerException{
+    public static String format(Number value,String numberPattern){
         // 如果不设置, DecimalFormat默认使用的是 RoundingMode.HALF_EVEN
         RoundingMode roundingMode = RoundingMode.HALF_UP;
         return format(value, numberPattern, roundingMode);
@@ -92,7 +92,7 @@ public final class NumberFormatUtil{
      * @see DecimalFormat
      * @see <a href="../util/NumberUtil.html#RoundingMode">JAVA 8种舍入法</a>
      */
-    public static String format(Number value,String numberPattern,RoundingMode roundingMode) throws NullPointerException{
+    public static String format(Number value,String numberPattern,RoundingMode roundingMode){
         if (null == value){
             throw new NullPointerException("the value is null or empty!");
         }

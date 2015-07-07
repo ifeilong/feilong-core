@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.CharsetType;
 import com.feilong.core.io.SpecialFolder;
-import com.feilong.core.net.URIUtil;
 import com.feilong.core.tools.json.JsonUtil;
 
 /**
@@ -40,7 +39,7 @@ import com.feilong.core.tools.json.JsonUtil;
 public class URIUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER    = LoggerFactory.getLogger(URIUtilTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(URIUtilTest.class);
 
     /** The result. */
     private String              result = null;

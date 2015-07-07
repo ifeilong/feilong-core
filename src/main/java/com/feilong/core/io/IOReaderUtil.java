@@ -54,10 +54,8 @@ public final class IOReaderUtil{
      * @param path
      *            路径
      * @return 文件内容string
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      */
-    public static String getFileContent(String path) throws UncheckedIOException{
+    public static String getFileContent(String path){
         return getFileContent(path, DEFAULT_CHARSET_NAME);
     }
 
@@ -69,11 +67,9 @@ public final class IOReaderUtil{
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return the file content
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @since 1.0.8
      */
-    public static String getFileContent(String path,String charsetName) throws UncheckedIOException{
+    public static String getFileContent(String path,String charsetName){
         File file = new File(path);
         return getFileContent(file, charsetName);
     }
@@ -86,12 +82,8 @@ public final class IOReaderUtil{
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return the file content
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws NullPointerException
-     *             if isNullOrEmpty(file)
      */
-    public static String getFileContent(File file,String charsetName) throws UncheckedIOException,NullPointerException{
+    public static String getFileContent(File file,String charsetName){
         if (Validator.isNullOrEmpty(file)){
             throw new NullPointerException("the file is null or empty!");
         }

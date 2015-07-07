@@ -58,11 +58,9 @@ public final class DesktopUtil{
      *
      * @param url
      *            url地址
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #desktopAction(String, Action)
      */
-    public static void browse(String url) throws UncheckedIOException{
+    public static void browse(String url){
         desktopAction(url, Desktop.Action.BROWSE);
     }
 
@@ -71,11 +69,9 @@ public final class DesktopUtil{
      *
      * @param url
      *            url地址
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #desktopAction(String, Action)
      */
-    public static void open(String url) throws UncheckedIOException{
+    public static void open(String url){
         desktopAction(url, Desktop.Action.OPEN);
     }
 
@@ -84,12 +80,10 @@ public final class DesktopUtil{
      *
      * @param mailtoURL
      *            the mail
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.awt.Desktop#mail(URI)
      * @see #desktopAction(String, Action)
      */
-    public static void mail(String mailtoURL) throws UncheckedIOException{
+    public static void mail(String mailtoURL){
         desktopAction(mailtoURL, Desktop.Action.MAIL);
     }
 
@@ -98,11 +92,9 @@ public final class DesktopUtil{
      *
      * @param url
      *            the url
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @since 1.2.0
      */
-    public static void print(String url) throws UncheckedIOException{
+    public static void print(String url){
         desktopAction(url, Desktop.Action.PRINT);
     }
 
@@ -111,11 +103,9 @@ public final class DesktopUtil{
      *
      * @param url
      *            the url
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @since 1.2.0
      */
-    public static void edit(String url) throws UncheckedIOException{
+    public static void edit(String url){
         desktopAction(url, Desktop.Action.EDIT);
     }
 
@@ -126,15 +116,9 @@ public final class DesktopUtil{
      *            the url
      * @param action
      *            the action
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws RuntimeException
-     *             the runtime exception
-     * @throws UnsupportedOperationException
-     *             the unsupported operation exception
      * @since 1.2.0
      */
-    private static void desktopAction(String url,Action action) throws UncheckedIOException,RuntimeException,UnsupportedOperationException{
+    private static void desktopAction(String url,Action action){
         if (DESKTOP_SUPPORTED){
             // 获取当前系统桌面扩展
             Desktop desktop = Desktop.getDesktop();

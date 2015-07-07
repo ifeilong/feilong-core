@@ -28,7 +28,6 @@ import net.sf.ezmorph.MorpherRegistry;
 import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
@@ -106,12 +105,10 @@ public final class JsonUtil{
      * @param obj
      *            任何对象
      * @return the string
-     * @throws JSONException
-     *             the JSON exception
      * @see #format(Object, String[])
      * @see #format(Object, JsonConfig)
      */
-    public static String format(Object obj) throws JSONException{
+    public static String format(Object obj){
         String[] excludes = null;
         return format(obj, excludes);
     }
@@ -124,12 +121,10 @@ public final class JsonUtil{
      * @param excludes
      *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
      * @return if null==obj will return {@code null}; {@link #format(Object, JsonConfig)}
-     * @throws JSONException
-     *             the JSON exception
      * @see #format(Object, JsonConfig)
      * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">java.lang.ClassCastException: JSON keys must be strings</a>
      */
-    public static String format(Object obj,String[] excludes) throws JSONException{
+    public static String format(Object obj,String[] excludes){
         return format(obj, excludes, 4, 4);
     }
 
@@ -145,10 +140,8 @@ public final class JsonUtil{
      * @param indent
      *            the indent
      * @return the string
-     * @throws JSONException
-     *             the JSON exception
      */
-    public static String format(Object obj,String[] excludes,int indentFactor,int indent) throws JSONException{
+    public static String format(Object obj,String[] excludes,int indentFactor,int indent){
         if (null == obj){
             return null;
         }
@@ -171,11 +164,9 @@ public final class JsonUtil{
      * @param includes
      *            the includes
      * @return the string
-     * @throws JSONException
-     *             the JSON exception
      * @since 1.0.8
      */
-    public static String formatWithIncludes(Object obj,final String...includes) throws JSONException{
+    public static String formatWithIncludes(Object obj,final String...includes){
 
         if (null == obj){
             return null;
@@ -227,15 +218,13 @@ public final class JsonUtil{
      * @param jsonConfig
      *            the json config
      * @return if null==obj will return {@code null}; else return toJSON(obj, jsonConfig).toString(4, 4)
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JsonConfig
      * @see #toJSON(Object, JsonConfig)
      * @see net.sf.json.JSON#toString(int, int)
      * @see #format(Object, JsonConfig, int, int)
      * @since 1.0.7
      */
-    public static String format(Object obj,JsonConfig jsonConfig) throws JSONException{
+    public static String format(Object obj,JsonConfig jsonConfig){
         return format(obj, jsonConfig, 4, 4);
     }
 
@@ -255,11 +244,9 @@ public final class JsonUtil{
      *            The indentation of the top level.
      * @return a printable, displayable, transmittable representation of the object, beginning with { (left brace) and ending with } (right
      *         brace).
-     * @throws JSONException
-     *             the JSON exception
      * @since 1.0.8
      */
-    public static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent) throws JSONException{
+    public static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent){
         if (null == obj){
             return null;
         }
@@ -285,10 +272,8 @@ public final class JsonUtil{
      * @param rootClass
      *            e.g. Person.class
      * @return the t
-     * @throws JSONException
-     *             the JSON exception
      */
-    public static <T> T toBean(Object json,Class<T> rootClass) throws JSONException{
+    public static <T> T toBean(Object json,Class<T> rootClass){
         return toBean(json, rootClass, null);
     }
 
@@ -304,13 +289,11 @@ public final class JsonUtil{
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return Object
-     * @throws JSONException
-     *             the JSON exception
      * @see #toBean(Object, JsonConfig)
      */
     // TODO
     @SuppressWarnings("unchecked")
-    public static <T> T toBean(Object json,Class<T> rootClass,Map<String, Class<?>> classMap) throws JSONException{
+    public static <T> T toBean(Object json,Class<T> rootClass,Map<String, Class<?>> classMap){
         JSONObject jsonObject = JSONObject.fromObject(json);
 
         JsonConfig jsonConfig = getDefaultJsonConfig();
@@ -330,11 +313,9 @@ public final class JsonUtil{
      * @param jsonConfig
      *            the json config
      * @return the object
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JSONObject#toBean(JSONObject, JsonConfig)
      */
-    public static Object toBean(Object json,JsonConfig jsonConfig) throws JSONException{
+    public static Object toBean(Object json,JsonConfig jsonConfig){
         JSONObject jsonObject = JSONObject.fromObject(json);
 
         // Ignore missing properties with Json-Lib
@@ -356,12 +337,10 @@ public final class JsonUtil{
      * @param json
      *            e.g. ['get',1,true,null]
      * @return Object[]
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JSONArray#fromObject(Object)
      * @see net.sf.json.JSONArray#toArray()
      */
-    public static Object[] toArray(String json) throws JSONException{
+    public static Object[] toArray(String json){
         return JSONArray.fromObject(json).toArray();
     }
 
@@ -375,11 +354,9 @@ public final class JsonUtil{
      * @param clazz
      *            e.g. Person.class
      * @return Object[]
-     * @throws JSONException
-     *             the JSON exception
      * @see #toArray(String, Class, Map)
      */
-    public static <T> T[] toArray(String json,Class<T> clazz) throws JSONException{
+    public static <T> T[] toArray(String json,Class<T> clazz){
         return toArray(json, clazz, null);
     }
 
@@ -395,14 +372,12 @@ public final class JsonUtil{
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return T[]
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JSONArray#fromObject(Object)
      * @see net.sf.json.JSONArray#getJSONObject(int)
      * @see #toBean(Object, Class, Map)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      */
-    public static <T> T[] toArray(String json,Class<T> clazz,Map<String, Class<?>> classMap) throws JSONException{
+    public static <T> T[] toArray(String json,Class<T> clazz,Map<String, Class<?>> classMap){
         JSONArray jsonArray = JSONArray.fromObject(json);
         int size = jsonArray.size();
 
@@ -427,11 +402,9 @@ public final class JsonUtil{
      * @param json
      *            e.g. ['get',1,true,null]
      * @return List
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JSONArray#get(int)
      */
-    public static List<Object> toList(String json) throws JSONException{
+    public static List<Object> toList(String json){
         JSONArray jsonArr = JSONArray.fromObject(json);
         int size = jsonArr.size();
 
@@ -453,11 +426,9 @@ public final class JsonUtil{
      * @param clazz
      *            the clazz
      * @return List
-     * @throws JSONException
-     *             the JSON exception
      * @see #toList(String, Class, Map)
      */
-    public static <T> List<T> toList(String json,Class<T> clazz) throws JSONException{
+    public static <T> List<T> toList(String json,Class<T> clazz){
         return toList(json, clazz, null);
     }
 
@@ -473,14 +444,12 @@ public final class JsonUtil{
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return List
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JSONArray#getJSONObject(int)
      * @see net.sf.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, Class, Map)
      */
     // TODO
-    public static <T> List<T> toList(String json,Class<T> clazz,Map<String, Class<?>> classMap) throws JSONException{
+    public static <T> List<T> toList(String json,Class<T> clazz,Map<String, Class<?>> classMap){
         JSONArray jsonArray = JSONArray.fromObject(json);
         List<T> list = new ArrayList<T>();
 
@@ -504,12 +473,10 @@ public final class JsonUtil{
      * @param json
      *            e.g. {'name':'get','int':1,'double',1.1,'null':null}
      * @return Map
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JSONObject#get(String)
      * @see net.sf.json.JSONObject#fromObject(Object)
      */
-    public static Map<String, Object> toMap(String json) throws JSONException{
+    public static Map<String, Object> toMap(String json){
         JSONObject jsonObject = JSONObject.fromObject(json);
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -535,11 +502,9 @@ public final class JsonUtil{
      * @param clazz
      *            e.g. Person.class
      * @return Map
-     * @throws JSONException
-     *             the JSON exception
      * @see #toMap(String, Class, Map)
      */
-    public static <T> Map<String, T> toMap(String json,Class<T> clazz) throws JSONException{
+    public static <T> Map<String, T> toMap(String json,Class<T> clazz){
         return toMap(json, clazz, null);
     }
 
@@ -555,13 +520,11 @@ public final class JsonUtil{
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return Map
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JSONObject#keys()
      * @see #toBean(Object, Class, Map)
      */
     // TODO
-    public static <T> Map<String, T> toMap(String json,Class<T> clazz,Map<String, Class<?>> classMap) throws JSONException{
+    public static <T> Map<String, T> toMap(String json,Class<T> clazz,Map<String, Class<?>> classMap){
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("in json:{}", json);
         }
@@ -593,11 +556,9 @@ public final class JsonUtil{
      * @param obj
      *            the obj
      * @return the jSON
-     * @throws JSONException
-     *             the JSON exception
      * @see #toJSON(Object, JsonConfig)
      */
-    public static JSON toJSON(Object obj) throws JSONException{
+    public static JSON toJSON(Object obj){
         return toJSON(obj, null);
     }
 
@@ -609,8 +570,6 @@ public final class JsonUtil{
      * @param jsonConfig
      *            the json config
      * @return the jSON
-     * @throws JSONException
-     *             the JSON exception
      * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
      * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
      * @see net.sf.json.util.JSONUtils#isArray(Object)
@@ -619,7 +578,7 @@ public final class JsonUtil{
      * @see org.apache.commons.collections.IteratorUtils#toList(Iterator)
      * @see org.apache.commons.collections.IteratorUtils#toList(Iterator, int)
      */
-    public static JSON toJSON(Object obj,JsonConfig jsonConfig) throws JSONException{
+    public static JSON toJSON(Object obj,JsonConfig jsonConfig){
         if (null == jsonConfig){
             jsonConfig = getDefaultJsonConfig();
             // 注册日期处理器

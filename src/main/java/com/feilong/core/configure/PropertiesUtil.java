@@ -166,14 +166,10 @@ public final class PropertiesUtil implements BaseConfigure{
      * @return <ul>
      *         <li>正常情况,返回 {@link java.util.Properties#load(InputStream)}</li>
      *         </ul>
-     * @throws NullPointerException
-     *             if null==inputStream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.util.Properties#load(InputStream)
      * @see "org.springframework.core.io.support.PropertiesLoaderUtils#loadProperties(Resource)"
      */
-    public static Properties getProperties(InputStream inputStream) throws NullPointerException,UncheckedIOException{
+    public static Properties getProperties(InputStream inputStream){
         if (null == inputStream){
             throw new NullPointerException("the inputStream is null or empty!");
         }

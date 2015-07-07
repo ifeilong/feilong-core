@@ -18,7 +18,6 @@ package com.feilong.core.lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.net.HttpMethodType;
 import com.feilong.core.tools.json.JsonUtil;
@@ -69,15 +68,11 @@ public final class EnumUtil{
      * @param value
      *            属性值 比如post
      * @return 获得 enum constant
-     * @throws IllegalArgumentException
-     *             if Validator.isNullOrEmpty(enumClass) or Validator.isNullOrEmpty(propertyName)
      * @throws NoSuchFieldException
      *             找不到匹配的枚举
-     * @throws BeanUtilException
-     *             the bean util exception
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T value)
-                    throws IllegalArgumentException,NoSuchFieldException,BeanUtilException{
+                    throws NoSuchFieldException{
         boolean ignoreCase = true;
         return getEnumByPropertyValue(enumClass, propertyName, value, ignoreCase);
     }
@@ -105,16 +100,12 @@ public final class EnumUtil{
      * @param value
      *            属性值 比如post
      * @return 获得 enum constant
-     * @throws IllegalArgumentException
-     *             if Validator.isNullOrEmpty(enumClass) or Validator.isNullOrEmpty(propertyName)
      * @throws NoSuchFieldException
      *             找不到匹配的枚举
-     * @throws BeanUtilException
-     *             the bean util exception
      * @since 1.0.8
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T value)
-                    throws IllegalArgumentException,NoSuchFieldException,BeanUtilException{
+                    throws NoSuchFieldException{
         boolean ignoreCase = false;
         return getEnumByPropertyValue(enumClass, propertyName, value, ignoreCase);
     }
@@ -144,17 +135,13 @@ public final class EnumUtil{
      * @param ignoreCase
      *            是否忽视大小写
      * @return 获得 enum constant
-     * @throws IllegalArgumentException
-     *             if Validator.isNullOrEmpty(enumClass) or Validator.isNullOrEmpty(propertyName)
      * @throws NoSuchFieldException
      *             找不到匹配的枚举
-     * @throws BeanUtilException
-     *             the bean util exception
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @since 1.0.8
      */
     private static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T value,boolean ignoreCase)
-                    throws IllegalArgumentException,NoSuchFieldException,BeanUtilException{
+                    throws NoSuchFieldException{
 
         if (Validator.isNullOrEmpty(enumClass)){
             throw new IllegalArgumentException("enumClass is null or empty!");

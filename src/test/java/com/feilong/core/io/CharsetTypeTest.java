@@ -21,8 +21,6 @@ import java.nio.charset.Charset;
 
 import org.junit.Test;
 
-import com.feilong.core.io.CharsetType;
-
 /**
  * The Class CharsetTypeTest.
  * 

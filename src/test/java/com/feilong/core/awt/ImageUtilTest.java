@@ -19,8 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.awt.ImageUtil;
-
 /**
  * The Class ImageUtilTest.
  *

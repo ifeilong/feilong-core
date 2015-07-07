@@ -17,8 +17,6 @@ package com.feilong.core.awt;
 
 import org.junit.Test;
 
-import com.feilong.core.awt.DesktopUtil;
-
 /**
  * The Class DesktopUtilTest.
  *

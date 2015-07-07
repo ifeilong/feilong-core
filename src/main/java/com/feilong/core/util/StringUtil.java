@@ -28,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtil;
-import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.io.CharsetType;
 import com.feilong.core.lang.ObjectUtil;
 
@@ -324,10 +323,8 @@ public final class StringUtil{
      * @param filedName
      *            字段名称
      * @return 替换,将内容content 中的需要被替换的内容target 替换成bean里面的filedName属性值
-     * @throws BeanUtilException
-     *             the bean util exception
      */
-    public static final String replace(Object content,String target,Object bean,String filedName) throws BeanUtilException{
+    public static final String replace(Object content,String target,Object bean,String filedName){
         String replacement = "";
         // 替换序列是null
         if (Validator.isNotNullOrEmpty(bean)){
@@ -529,7 +526,7 @@ public final class StringUtil{
      * substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,0)======&gt;&quot;.feilong&quot;
      * substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,1)======&gt;&quot;feilong&quot;
      * </pre>
-     * 
+     *
      * @param text
      *            text
      * @param beginString
@@ -543,11 +540,8 @@ public final class StringUtil{
      *         <li>{@code  beginIndex + shift > text.length()},return null</li>
      *         <li>else,return text.substring(beginIndex + shift)</li>
      *         </ul>
-     * @throws IllegalArgumentException
-     *             {@code  if beginIndex + shift<0}
-     * 
      */
-    public static final String substring(String text,String beginString,int shift) throws IllegalArgumentException{
+    public static final String substring(String text,String beginString,int shift){
         if (Validator.isNullOrEmpty(text)){
             return null;
         }else if (Validator.isNullOrEmpty(beginString)){
@@ -768,7 +762,7 @@ public final class StringUtil{
 
     /**
      * 转成T数组.
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param value
@@ -781,14 +775,12 @@ public final class StringUtil{
      *            类型,指明 T 类型<br>
      *            Temp support only:String.class and Integer.class
      * @return 泛型数组
-     * @throws IllegalArgumentException
-     *             目前仅仅支持String Integer转换,其余类型会抛出异常
      * @see java.util.regex.Pattern#split(CharSequence)
      * @see #splitToIntegerArray(String, String)
      * @see #splitToStringArray(String, String)
      */
     @SuppressWarnings("unchecked")
-    public static final <T> T[] splitToTArray(String value,String regexSpliter,Class<?> typeClass) throws IllegalArgumentException{
+    public static final <T> T[] splitToTArray(String value,String regexSpliter,Class<?> typeClass){
         if (typeClass == String.class){
             return (T[]) splitToStringArray(value, regexSpliter);
         }else if (typeClass == Integer.class){

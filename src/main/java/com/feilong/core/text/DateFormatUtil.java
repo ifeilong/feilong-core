@@ -89,25 +89,23 @@ public class DateFormatUtil{
 
     /**
      * parse 字符串类型转成日期类型,调用的是 {@link #parse(String, String, Locale)},locale使用 {@link Locale#getDefault()},<br>
-     * {@link SimpleDateFormat#SimpleDateFormat()} 默认使用的locale就是 {@link Locale#getDefault()}
-     * 
+     * {@link SimpleDateFormat#SimpleDateFormat()} 默认使用的locale就是 {@link Locale#getDefault()}.
+     *
      * @param dateString
      *            the date string
      * @param pattern
      *            the pattern
      * @return the date
-     * @throws NullPointerException
-     *             isNullOrEmpty(dateString)
      * @see SimpleDateFormat
      * @see #parse(String, String, Locale)
      */
-    public static Date parse(String dateString,String pattern) throws NullPointerException{
+    public static Date parse(String dateString,String pattern){
         return parse(dateString, pattern, Locale.getDefault());
     }
 
     /**
      * 字符串类型转成日期类型.
-     * 
+     *
      * @param dateString
      *            the date string
      * @param pattern
@@ -115,13 +113,11 @@ public class DateFormatUtil{
      * @param locale
      *            the locale
      * @return the date
-     * @throws NullPointerException
-     *             isNullOrEmpty(dateString)
      * @see SimpleDateFormat
      * @see SimpleDateFormat#parse(String)
      * @see SimpleDateFormat#parse(String, ParsePosition)
      */
-    public static Date parse(String dateString,String pattern,Locale locale) throws NullPointerException{
+    public static Date parse(String dateString,String pattern,Locale locale){
         if (Validator.isNullOrEmpty(dateString)){
             throw new NullPointerException("param dateString can not NullOrEmpty");
         }

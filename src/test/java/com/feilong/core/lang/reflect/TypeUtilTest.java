@@ -19,7 +19,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.reflect.TypeUtil;
 import com.feilong.core.lang.reflect.res.BaseSolrRepository;
 import com.feilong.core.lang.reflect.res.SkuItemRepositoryImpl;
 import com.feilong.core.lang.reflect.res.SkuItemRepositoryImpl2;

@@ -489,12 +489,10 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * @param reader
      *            the reader
      * @return the resource bundle
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.util.PropertyResourceBundle#PropertyResourceBundle(Reader)
      * @since 1.0.9
      */
-    public static ResourceBundle getResourceBundle(Reader reader) throws UncheckedIOException{
+    public static ResourceBundle getResourceBundle(Reader reader){
         if (Validator.isNullOrEmpty(reader)){
             throw new IllegalArgumentException("reader can't be null/empty!");
         }

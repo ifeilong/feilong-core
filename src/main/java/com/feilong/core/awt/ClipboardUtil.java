@@ -69,10 +69,8 @@ public final class ClipboardUtil{
      * 从剪贴板中取数据.
      *
      * @return the clipboard content
-     * @throws ClipboardException
-     *             the clipboard exception
      */
-    public static final String getClipboardContent() throws ClipboardException{
+    public static final String getClipboardContent(){
         Transferable transferable = getTransferable();
         // 因为原系的剪贴板里有多种信息, 如文字, 图片, 文件等
         // 先判断开始取得的可传输的数据是不是文字, 如果是, 取得这些文字
@@ -98,11 +96,9 @@ public final class ClipboardUtil{
      * 获得 clipboard reader.
      *
      * @return the clipboard reader
-     * @throws ClipboardException
-     *             the clipboard exception
      * @since 1.0.8
      */
-    public static final Reader getClipboardReader() throws ClipboardException{
+    public static final Reader getClipboardReader(){
         Transferable transferable = getTransferable();
 
         DataFlavor dataFlavor = DataFlavor.stringFlavor;

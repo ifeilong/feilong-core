@@ -41,7 +41,7 @@ import com.feilong.core.util.Validator;
 public final class CSVUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER                     = LoggerFactory.getLogger(CSVUtil.class);
+    private static final Logger LOGGER                  = LoggerFactory.getLogger(CSVUtil.class);
 
     /** 转义引号用的字符 ". */
     private static final char   ESCAPE_CHARACTER        = '"';
@@ -72,17 +72,13 @@ public final class CSVUtil{
      *            the file name
      * @param collection
      *            the iterable
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws IllegalArgumentException
-     *             the illegal argument exception
      * @see #write(String, String[], List, CSVParams)
      * @see #write(String, Collection, String[])
      * @see com.feilong.core.bean.BeanUtil#describe(Object)
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
      * @since 1.0.9
      */
-    public static final <T> void write(String fileName,Collection<T> collection) throws UncheckedIOException,IllegalArgumentException{
+    public static final <T> void write(String fileName,Collection<T> collection){
         write(fileName, collection, null);
     }
 
@@ -98,17 +94,12 @@ public final class CSVUtil{
      *            the iterable
      * @param excludePropertyNames
      *            排除的读属性名称
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws IllegalArgumentException
-     *             the illegal argument exception
      * @see #write(String, String[], List, CSVParams)
      * @see com.feilong.core.bean.BeanUtil#describe(Object)
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
      * @since 1.0.9
      */
-    public static final <T> void write(String fileName,Collection<T> collection,String[] excludePropertyNames) throws UncheckedIOException,
-                    IllegalArgumentException{
+    public static final <T> void write(String fileName,Collection<T> collection,String[] excludePropertyNames){
 
         if (Validator.isNullOrEmpty(fileName)){
             throw new NullPointerException("fileName can't be null/empty!");
@@ -163,14 +154,9 @@ public final class CSVUtil{
      *            列标题,可以为空
      * @param dataList
      *            数据数组,可以带列名
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws IllegalArgumentException
-     *             Validator.isNullOrEmpty(columnTitles) && Validator.isNullOrEmpty(dataList) 标题和内容都是空,没有任何意义,不创建文件
      * @since 1.0
      */
-    public static final void write(String fileName,String[] columnTitles,List<Object[]> dataList) throws UncheckedIOException,
-                    IllegalArgumentException{
+    public static final void write(String fileName,String[] columnTitles,List<Object[]> dataList){
         write(fileName, columnTitles, dataList, new CSVParams());
     }
 
@@ -185,15 +171,10 @@ public final class CSVUtil{
      *            数据数组,可以带列名
      * @param csvParams
      *            the csv params
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws IllegalArgumentException
-     *             Validator.isNullOrEmpty(columnTitles) && Validator.isNullOrEmpty(dataList) 标题和内容都是空,没有任何意义,不创建文件
      * @see com.feilong.core.io.IOWriteUtil#write(String, String, String)
      * @see #getWriteContent(List, CSVParams)
      */
-    public static final void write(String fileName,String[] columnTitles,List<Object[]> dataList,CSVParams csvParams)
-                    throws UncheckedIOException,IllegalArgumentException{
+    public static final void write(String fileName,String[] columnTitles,List<Object[]> dataList,CSVParams csvParams){
         // 标题和内容都是空,没有任何意义,不创建文件
         if (Validator.isNullOrEmpty(columnTitles) && Validator.isNullOrEmpty(dataList)){
             throw new IllegalArgumentException("columnTitles and dataList all null!");

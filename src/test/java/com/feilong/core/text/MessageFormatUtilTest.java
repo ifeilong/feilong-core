@@ -26,7 +26,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.core.tools.json.JsonUtil;
 
 /**
@@ -47,7 +46,7 @@ public class MessageFormatUtilTest{
      *             the parse exception
      */
     @Test
-    public final void format() throws ParseException{
+    public final void format(){
         LOGGER.info(MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin"));
         LOGGER.info(MessageFormatUtil.format("name=张三{0,number}a{1}", 5, "xin"));
         LOGGER.info(MessageFormatUtil.format("name=张三{0,date}a{1}", 15, "xin"));
@@ -60,7 +59,7 @@ public class MessageFormatUtilTest{
      *             the parse exception
      */
     @Test
-    public final void testGetValueWithArguments1() throws ParseException{
+    public final void testGetValueWithArguments1(){
         MessageFormat mf = new MessageFormat("{0}, {0}, {0}");
         String forParsing = "x, y, z";
         Object[] objs = mf.parse(forParsing, new ParsePosition(0));

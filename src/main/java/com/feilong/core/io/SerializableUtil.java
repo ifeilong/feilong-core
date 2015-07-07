@@ -86,12 +86,10 @@ public final class SerializableUtil{
      * @param serializable
      *            the serializable
      * @return the int
-     * @throws SerializationException
-     *             the serialization exception
      * @see #toByteArrayOutputStream(Serializable)
      * @see java.io.ByteArrayOutputStream#size()
      */
-    public static int size(Serializable serializable) throws SerializationException{
+    public static int size(Serializable serializable){
         ByteArrayOutputStream byteArrayOutputStream = null;
         try{
             byteArrayOutputStream = toByteArrayOutputStream(serializable);
@@ -108,13 +106,11 @@ public final class SerializableUtil{
      * @param serializable
      *            the serializable
      * @return the byte array output stream
-     * @throws SerializationException
-     *             the serialization exception
      * @see java.io.ObjectOutputStream#ObjectOutputStream(OutputStream)
      * @see java.io.ObjectOutputStream#writeObject(Object)
      * @see org.apache.commons.lang3.SerializationUtils#serialize(Serializable, OutputStream)
      */
-    private static ByteArrayOutputStream toByteArrayOutputStream(Serializable serializable) throws SerializationException{
+    private static ByteArrayOutputStream toByteArrayOutputStream(Serializable serializable){
         ObjectOutputStream objectOutputStream = null;
         try{
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -136,14 +132,12 @@ public final class SerializableUtil{
      * @param serializable
      *            the serializable
      * @return the string
-     * @throws SerializationException
-     *             the serialization exception
      * @see #toByteArrayOutputStream(Serializable)
      * @deprecated 转字符串值得商榷
      */
     //TODO
     @Deprecated
-    public static String toString(Serializable serializable) throws SerializationException{
+    public static String toString(Serializable serializable){
         ByteArrayOutputStream byteArrayOutputStream = null;
         try{
             byteArrayOutputStream = toByteArrayOutputStream(serializable);

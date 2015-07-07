@@ -341,7 +341,7 @@ public final class CollectionsUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param <T>
      *            返回集合类型 generic type
      * @param <O>
@@ -351,14 +351,12 @@ public final class CollectionsUtil{
      * @param propertyName
      *            迭代泛型对象的属性名称,Possibly indexed and/or nested name of the property to be extracted
      * @return 解析迭代集合,取到对象特殊属性,拼成List(ArrayList)
-     * @throws NullPointerException
-     *             if Validator.isNullOrEmpty(objectCollection) or Validator.isNullOrEmpty(propertyName)
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see #getPropertyValueCollection(Collection, String, Collection)
      * @since jdk1.5
      */
-    public static <T, O> List<T> getPropertyValueList(Collection<O> objectCollection,String propertyName) throws NullPointerException{
+    public static <T, O> List<T> getPropertyValueList(Collection<O> objectCollection,String propertyName){
         List<T> list = new ArrayList<T>();
         return getPropertyValueCollection(objectCollection, propertyName, list);
     }
@@ -375,12 +373,10 @@ public final class CollectionsUtil{
      * @param propertyName
      *            the property name
      * @return the property value set
-     * @throws NullPointerException
-     *             the null pointer exception
      * @see #getPropertyValueCollection(Collection, String, Collection)
      * @since 1.0.8
      */
-    public static <T, O> Set<T> getPropertyValueSet(Collection<O> objectCollection,String propertyName) throws NullPointerException{
+    public static <T, O> Set<T> getPropertyValueSet(Collection<O> objectCollection,String propertyName){
         Set<T> set = new LinkedHashSet<T>();
         return getPropertyValueCollection(objectCollection, propertyName, set);
     }
@@ -401,15 +397,13 @@ public final class CollectionsUtil{
      * @param returnCollection
      *            the return collection
      * @return the property value collection
-     * @throws NullPointerException
-     *             if Validator.isNullOrEmpty(objectCollection) or Validator.isNullOrEmpty(propertyName) or (null == returnCollection)
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @since 1.0.8
      */
     private static <T, O, K extends Collection<T>> K getPropertyValueCollection(
                     Collection<O> objectCollection,
                     String propertyName,
-                    K returnCollection) throws NullPointerException{
+                    K returnCollection){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
         }
@@ -451,12 +445,10 @@ public final class CollectionsUtil{
      * @param value
      *            the value
      * @return the first element of the collection which matches the predicate or null if none could be found
-     * @throws NullPointerException
-     *             the null pointer exception
      * @see org.apache.commons.collections.CollectionUtils#find(Collection, Predicate)
      */
     @SuppressWarnings("unchecked")
-    public static <O, V> O find(Collection<O> objectCollection,String propertyName,V value) throws NullPointerException{
+    public static <O, V> O find(Collection<O> objectCollection,String propertyName,V value){
         Predicate predicate = new ObjectPropertyEqualsPredicate(propertyName, value);
         return (O) org.apache.commons.collections.CollectionUtils.find(objectCollection, predicate);
     }
@@ -475,11 +467,9 @@ public final class CollectionsUtil{
      * @param value
      *            the value
      * @return the property value list
-     * @throws NullPointerException
-     *             if Validator.isNullOrEmpty(objectCollection) || Validator.isNullOrEmpty(propertyName)
      * @see org.apache.commons.collections.CollectionUtils#select(Collection, org.apache.commons.collections.Predicate)
      */
-    public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V value) throws NullPointerException{
+    public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V value){
         Object[] values = { value };
         return select(objectCollection, propertyName, values);
     }
@@ -500,11 +490,9 @@ public final class CollectionsUtil{
      *            the values
      * @return 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值，判断是否
      *         {@link ArrayUtil#isContain(Object[], Object)} 在 <code>values</code>数组中,如果在，将该对象存入list中返回
-     * @throws NullPointerException
-     *             if Validator.isNullOrEmpty(objectCollection) || Validator.isNullOrEmpty(propertyName)
      */
     @SuppressWarnings("unchecked")
-    public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...values) throws NullPointerException{
+    public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
         }
@@ -527,11 +515,9 @@ public final class CollectionsUtil{
      * @param predicate
      *            the predicate
      * @return the list< o>
-     * @throws NullPointerException
-     *             the null pointer exception
      */
     @SuppressWarnings("unchecked")
-    public static <O> List<O> select(Collection<O> objectCollection,Predicate predicate) throws NullPointerException{
+    public static <O> List<O> select(Collection<O> objectCollection,Predicate predicate){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
         }
@@ -552,11 +538,9 @@ public final class CollectionsUtil{
      * @param value
      *            the value
      * @return the property value list
-     * @throws NullPointerException
-     *             the null pointer exception
      * @see org.apache.commons.collections.CollectionUtils#selectRejected(Collection, org.apache.commons.collections.Predicate)
      */
-    public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V value) throws NullPointerException{
+    public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V value){
         Object[] values = { value };
         return selectRejected(objectCollection, propertyName, values);
     }
@@ -575,11 +559,9 @@ public final class CollectionsUtil{
      * @param values
      *            the values
      * @return the list< o>
-     * @throws NullPointerException
-     *             the null pointer exception
      */
     @SuppressWarnings("unchecked")
-    public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...values) throws NullPointerException{
+    public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
         }
@@ -621,7 +603,6 @@ public final class CollectionsUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
      *
      * @param <K>
      *            the key type
@@ -636,17 +617,11 @@ public final class CollectionsUtil{
      * @param valuePropertyName
      *            the value property name
      * @return 解析迭代集合,取到对象特殊属性,拼成List(ArrayList)
-     * @throws NullPointerException
-     *             if Validator.isNullOrEmpty(objectCollection) or Validator.isNullOrEmpty(propertyName) or
-     *             Validator.isNullOrEmpty(valuePropertyName)
-     * @throws BeanUtilException
-     *             the bean util exception
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @since jdk1.5
      */
-    public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName)
-                    throws NullPointerException,BeanUtilException{
+    public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
         }
@@ -684,17 +659,12 @@ public final class CollectionsUtil{
      * @param propertyName
      *            对面里面属性的名称
      * @return the map< t, list< o>>
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             if Validator.isNullOrEmpty(propertyName)
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.util.ArrayUtil#group(O[], String)
      * @see #groupOne(Collection, String)
      * @since 1.0.8
      */
-    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName) throws BeanUtilException,
-                    NullPointerException{
+    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection can't be null/empty!");
         }
@@ -729,13 +699,8 @@ public final class CollectionsUtil{
      * @param propertyName
      *            the property name
      * @return 返回的是 {@link LinkedHashMap}
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             the null pointer exception
      */
-    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName) throws BeanUtilException,
-                    NullPointerException{
+    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
         return groupCount(objectCollection, null, propertyName);
     }
 
@@ -753,14 +718,9 @@ public final class CollectionsUtil{
      * @param propertyName
      *            the property name
      * @return the map< t, integer>
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             the null pointer exception
      * @since 1.2.0
      */
-    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate includePredicate,String propertyName)
-                    throws BeanUtilException,NullPointerException{
+    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate includePredicate,String propertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection can't be null/empty!");
         }
@@ -805,15 +765,10 @@ public final class CollectionsUtil{
      * @param propertyName
      *            the property name
      * @return the map< t, o>
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             the null pointer exception
      * @see #group(Collection, String)
      * @since 1.0.8
      */
-    public static <T, O> Map<T, O> groupOne(Collection<O> objectCollection,String propertyName) throws BeanUtilException,
-                    NullPointerException{
+    public static <T, O> Map<T, O> groupOne(Collection<O> objectCollection,String propertyName){
 
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection can't be null/empty!");
@@ -833,7 +788,10 @@ public final class CollectionsUtil{
                 map.put(key, o);
             }else{
                 if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("Abandoned except the first value outside,map:{},containsKey key:[{}],", JsonUtil.format(map.keySet()), key);
+                    LOGGER.debug(
+                                    "Abandoned except the first value outside,map:{},containsKey key:[{}],",
+                                    JsonUtil.format(map.keySet()),
+                                    key);
                 }
             }
         }
@@ -852,14 +810,9 @@ public final class CollectionsUtil{
      * @param propertyNames
      *            需要计算平均值的对象属性名称
      * @return the map< string, list< o>>
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             the null pointer exception
      * @see #sum(Collection, String...)
      */
-    public static <O> Map<String, Number> avg(Collection<O> objectCollection,int scale,String...propertyNames) throws BeanUtilException,
-                    NullPointerException{
+    public static <O> Map<String, Number> avg(Collection<O> objectCollection,int scale,String...propertyNames){
 
         //总分
         Map<String, Number> sumMap = sum(objectCollection, propertyNames);
@@ -889,13 +842,8 @@ public final class CollectionsUtil{
      * @param propertyNames
      *            the property names
      * @return the map< string, list< o>>
-     * @throws BeanUtilException
-     *             the bean util exception
-     * @throws NullPointerException
-     *             the null pointer exception
      */
-    public static <O> Map<String, Number> sum(Collection<O> objectCollection,String...propertyNames) throws BeanUtilException,
-                    NullPointerException{
+    public static <O> Map<String, Number> sum(Collection<O> objectCollection,String...propertyNames){
 
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection can't be null/empty!");

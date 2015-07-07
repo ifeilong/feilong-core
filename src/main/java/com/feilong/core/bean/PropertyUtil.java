@@ -58,17 +58,15 @@ public final class PropertyUtil{
      * <p>
      * 另外还有一个名为class的属性，属性值是Object的类名，事实上class是java.lang.Object的一个属性
      * </p>
-     * 
+     *
      * @param bean
      *            Bean whose properties are to be extracted
      * @return The set of properties for the bean
-     * @throws BeanUtilException
-     *             if IllegalAccessException | InvocationTargetException | NoSuchMethodException
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @see com.feilong.core.bean.BeanUtil#describe(Object)
      */
-    public static Map<String, Object> describe(Object bean) throws BeanUtilException{
+    public static Map<String, Object> describe(Object bean){
         try{
             //Return the entire set of properties for which the specified bean provides a read method.
             Map<String, Object> propertyMap = PropertyUtils.describe(bean);
@@ -119,20 +117,18 @@ public final class PropertyUtil{
      *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
      * }
      * </pre>
-     * 
+     *
      * @param bean
      *            Bean whose property is to be modified
      * @param name
      *            Possibly indexed and/or nested name of the property to be modified
      * @param value
      *            Value to which this property is to be set
-     * @throws BeanUtilException
-     *             if IllegalAccessException | InvocationTargetException | NoSuchMethodException
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
      * @see com.feilong.core.bean.BeanUtil#setProperty(Object, String, Object)
      */
-    public static void setProperty(Object bean,String name,Object value) throws BeanUtilException{
+    public static void setProperty(Object bean,String name,Object value){
         try{
             //Set the value of the specified property of the specified bean, no matter which property reference format is used, with no type conversions.
 
@@ -193,23 +189,20 @@ public final class PropertyUtil{
      * 
      * }
      * </pre>
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param bean
      *            Bean whose property is to be extracted
      * @param name
      *            Possibly indexed and/or nested name of the property to be extracted
-     * 
      * @return 使用{@link PropertyUtils#getProperty(Object, String)} 从对象中取得属性值
-     * @throws BeanUtilException
-     *             if IllegalAccessException | InvocationTargetException | NoSuchMethodException
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtilsBean
      */
-    public static <T> T getProperty(Object bean,String name) throws BeanUtilException{
+    public static <T> T getProperty(Object bean,String name){
         //Return the value of the specified property of the specified bean, no matter which property reference format is used, with no type conversions.
         //For more details see PropertyUtilsBean.
         try{

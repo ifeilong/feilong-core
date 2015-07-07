@@ -17,7 +17,6 @@ package com.feilong.core.util;
 
 import static org.junit.Assert.assertEquals;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -111,16 +110,9 @@ public class ArrayUtilTest{
 
     /**
      * Test group object.
-     *
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     * @throws InvocationTargetException
-     *             the invocation target exception
-     * @throws NoSuchMethodException
-     *             the no such method exception
      */
     @Test
-    public void testGroupObject() throws IllegalAccessException,InvocationTargetException,NoSuchMethodException{
+    public void testGroupObject(){
         User[] users = {
                 new User("张三", 18),
                 new User("李四", 28),

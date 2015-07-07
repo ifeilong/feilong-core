@@ -17,8 +17,6 @@ package com.feilong.core.lang.reflect;
 
 import static org.junit.Assert.assertEquals;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -50,6 +48,13 @@ public class MethodUtilTest{
         return "name int";
     }
 
+    /**
+     * Name.
+     *
+     * @param name
+     *            the name
+     * @return the string
+     */
     public String name(Integer name){
         return "name Integer";
     }
@@ -94,15 +99,11 @@ public class MethodUtilTest{
     /**
      * Test invoke static method.
      *
-     * @throws NoSuchMethodException
-     *             the no such method exception
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     * @throws InvocationTargetException
-     *             the invocation target exception
+     * @throws Exception
+     *             the exception
      */
     @Test()
-    public final void testInvokeStaticMethod2() throws NoSuchMethodException,IllegalAccessException,InvocationTargetException{
+    public final void testInvokeStaticMethod2() throws Exception{
         assertEquals("fjinxinlong", MethodUtils.invokeStaticMethod(StringUtil.class, "replace", "feilong", "ei", "jinxin"));
     }
 }

@@ -86,11 +86,9 @@ public final class IOWriteUtil{
      *            文件夹路径 最后不带"/"
      * @param fileName
      *            文件名称
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see com.feilong.core.io.IOWriteUtil#write(InputStream, OutputStream)
      */
-    public static void write(InputStream inputStream,String directoryName,String fileName) throws UncheckedIOException{
+    public static void write(InputStream inputStream,String directoryName,String fileName){
         String filePath = directoryName + "/" + fileName;
 
         FileUtil.createDirectory(directoryName);
@@ -107,13 +105,11 @@ public final class IOWriteUtil{
      *            inputStream
      * @param outputStream
      *            outputStream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.io.OutputStream#write(byte[], int, int)
      * @see #write(int, InputStream, OutputStream)
      * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
      */
-    public static void write(InputStream inputStream,OutputStream outputStream) throws UncheckedIOException{
+    public static void write(InputStream inputStream,OutputStream outputStream){
         //Just write in blocks instead of copying it entirely into Java's memory first.
         //The below basic example writes it in blocks of 10KB.
         //This way you end up with a consistent memory usage of only 10KB instead of the complete content length. 
@@ -131,8 +127,6 @@ public final class IOWriteUtil{
      *            inputStream
      * @param outputStream
      *            outputStream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.io.OutputStream#write(byte[], int, int)
      * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
      * @see <a href="http://stackoverflow.com/questions/10142409/write-an-inputstream-to-an-httpservletresponse">As creme de la creme with
@@ -140,7 +134,7 @@ public final class IOWriteUtil{
      *      utility class,</a>
      * @see #writeUseNIO(int, InputStream, OutputStream)
      */
-    public static void write(int bufferLength,InputStream inputStream,OutputStream outputStream) throws UncheckedIOException{
+    public static void write(int bufferLength,InputStream inputStream,OutputStream outputStream){
         writeUseNIO(bufferLength, inputStream, outputStream);
     }
 
@@ -153,12 +147,10 @@ public final class IOWriteUtil{
      *            the input stream
      * @param outputStream
      *            the output stream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @since 1.0.8
      * @since jdk1.4
      */
-    private static void writeUseNIO(int bufferLength,InputStream inputStream,OutputStream outputStream) throws UncheckedIOException{
+    private static void writeUseNIO(int bufferLength,InputStream inputStream,OutputStream outputStream){
         int i = 0;
         int sumSize = 0;
         int j = 0;
@@ -208,17 +200,10 @@ public final class IOWriteUtil{
      *            文件路径
      * @param content
      *            字符串内容
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws IllegalArgumentException
-     *             <ul>
-     *             <li>如果filePath文件存在,且isDirectory</li>
-     *             <li>如果filePath文件存在,且是!canWrite</li>
-     *             </ul>
      * @see FileWriteMode
      * @see CharsetType
      */
-    public static void write(String filePath,String content) throws UncheckedIOException,IllegalArgumentException{
+    public static void write(String filePath,String content){
         String encode = null;
         write(filePath, content, encode);
     }
@@ -237,18 +222,11 @@ public final class IOWriteUtil{
      *            字符串内容
      * @param encode
      *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#GBK}编码 {@link CharsetType}
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws IllegalArgumentException
-     *             <ul>
-     *             <li>如果filePath文件存在,且isDirectory</li>
-     *             <li>如果filePath文件存在,且是!canWrite</li>
-     *             </ul>
      * @see FileWriteMode
      * @see CharsetType
      * @see #write(String, String, String, FileWriteMode)
      */
-    public static void write(String filePath,String content,String encode) throws UncheckedIOException,IllegalArgumentException{
+    public static void write(String filePath,String content,String encode){
         FileWriteMode default_fileWriteMode = FileWriteMode.COVER;
         write(filePath, content, encode, default_fileWriteMode);
     }
@@ -269,19 +247,11 @@ public final class IOWriteUtil{
      *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#GBK}编码 {@link CharsetType}
      * @param fileWriteMode
      *            写模式
-     * @throws UncheckedIOException
-     *             the unchecked io exception
-     * @throws IllegalArgumentException
-     *             <ul>
-     *             <li>如果filePath文件存在,且isDirectory</li>
-     *             <li>如果filePath文件存在,且是!canWrite</li>
-     *             </ul>
      * @see FileWriteMode
      * @see CharsetType
      * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
      */
-    public static void write(String filePath,String content,String encode,FileWriteMode fileWriteMode) throws UncheckedIOException,
-                    IllegalArgumentException{
+    public static void write(String filePath,String content,String encode,FileWriteMode fileWriteMode){
 
         //TODO 如果不传 将来可能会改成读取 系统默认语言
         if (Validator.isNullOrEmpty(encode)){

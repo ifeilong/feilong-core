@@ -65,12 +65,10 @@ public final class FileUtil{
      * @param fileName
      *            the file name
      * @return {@link java.io.ByteArrayOutputStream#toByteArray()}
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #toByteArray(File)
      * @since 1.2.1
      */
-    public static final byte[] toByteArray(String fileName) throws UncheckedIOException{
+    public static final byte[] toByteArray(String fileName){
         File file = new File(fileName);
         return toByteArray(file);
     }
@@ -81,12 +79,10 @@ public final class FileUtil{
      * @param file
      *            file
      * @return {@link java.io.ByteArrayOutputStream#toByteArray()}
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see com.feilong.core.io.FileUtil#getFileInputStream(File)
      * @see java.io.ByteArrayOutputStream#toByteArray()
      */
-    public static final byte[] toByteArray(File file) throws UncheckedIOException{
+    public static final byte[] toByteArray(File file){
         InputStream inputStream = getFileInputStream(file);
 
         //Creates a BufferedInputStream and saves its argument, the input stream in, for later use. 
@@ -126,12 +122,10 @@ public final class FileUtil{
      * @param filePath
      *            文件路径
      * @return FileOutputStream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.io.FileOutputStream#FileOutputStream(String)
      * @see #getFileOutputStream(String, boolean)
      */
-    public static final FileOutputStream getFileOutputStream(String filePath) throws UncheckedIOException{
+    public static final FileOutputStream getFileOutputStream(String filePath){
         //默认 append 是 false
         return getFileOutputStream(filePath, false);
     }
@@ -146,12 +140,10 @@ public final class FileUtil{
      * @param fileWriteMode
      *            the file write mode
      * @return the file output stream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #getFileOutputStream(String, boolean)
      * @since 1.2.0
      */
-    public static final FileOutputStream getFileOutputStream(String filePath,FileWriteMode fileWriteMode) throws UncheckedIOException{
+    public static final FileOutputStream getFileOutputStream(String filePath,FileWriteMode fileWriteMode){
         boolean append = (fileWriteMode == FileWriteMode.APPEND);
         return getFileOutputStream(filePath, append);
     }
@@ -166,13 +158,11 @@ public final class FileUtil{
      * @param append
      *            if true, then bytes will be written to the end of the file rather than the beginning
      * @return the file output stream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.io.FileOutputStream#FileOutputStream(String, boolean)
      * @since 1.2.0
      */
     //默认 Access Modifiers 权限修饰符
-    static final FileOutputStream getFileOutputStream(String filePath,boolean append) throws UncheckedIOException{
+    static final FileOutputStream getFileOutputStream(String filePath,boolean append){
         try{
             FileOutputStream fileOutputStream = new FileOutputStream(filePath, append);
             return fileOutputStream;
@@ -191,11 +181,9 @@ public final class FileUtil{
      * @param fileName
      *            该文件通过文件系统中的路径名 fileName 指定.
      * @return FileInputStream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see #getFileInputStream(File)
      */
-    public static final FileInputStream getFileInputStream(String fileName) throws UncheckedIOException{
+    public static final FileInputStream getFileInputStream(String fileName){
         File file = new File(fileName);
         return getFileInputStream(file);
     }
@@ -208,11 +196,9 @@ public final class FileUtil{
      * @param file
      *            为了进行读取而打开的文件.
      * @return FileInputStream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @see java.io.FileInputStream
      */
-    public static final FileInputStream getFileInputStream(File file) throws UncheckedIOException{
+    public static final FileInputStream getFileInputStream(File file){
         try{
             // 如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException.
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -233,12 +219,8 @@ public final class FileUtil{
      *         <li>如果directory is not Directory,throw IllegalArgumentException</li>
      *         <li>return file.list() ==0</li>
      *         </ul>
-     * @throws NullPointerException
-     *             the null pointer exception
-     * @throws IllegalArgumentException
-     *             the illegal argument exception
      */
-    public static boolean isEmptyDirectory(String directory) throws NullPointerException,IllegalArgumentException{
+    public static boolean isEmptyDirectory(String directory){
         if (Validator.isNullOrEmpty(directory)){
             throw new NullPointerException("directory param " + directory + " can't be null/empty!");
         }
@@ -292,15 +274,11 @@ public final class FileUtil{
      *
      * @param filePath
      *            <span style="color:red">文件路径</span>
-     * @throws NullPointerException
-     *             the null pointer exception
-     * @throws IllegalArgumentException
-     *             the illegal argument exception
      * @see #getParent(String)
      * @see #createDirectory(String)
      * @since 1.2.0
      */
-    public static void createDirectoryByFilePath(String filePath) throws NullPointerException,IllegalArgumentException{
+    public static void createDirectoryByFilePath(String filePath){
         if (Validator.isNullOrEmpty(filePath)){
             throw new NullPointerException("filePath can't be null/empty!");
         }
@@ -329,16 +307,12 @@ public final class FileUtil{
      * <li>{@code if mkdirs's result is true ---> log debug}</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * @param directory
      *            <span style="color:red">文件夹路径</span>
-     * @throws NullPointerException
-     *             the null pointer exception
-     * @throws IllegalArgumentException
-     *             the illegal argument exception
      * @see #createDirectoryByFilePath(String)
      */
-    public static void createDirectory(String directory) throws NullPointerException,IllegalArgumentException{
+    public static void createDirectory(String directory){
         if (Validator.isNullOrEmpty(directory)){
             throw new NullPointerException("filePath can't be null/empty!");
         }
@@ -373,10 +347,8 @@ public final class FileUtil{
      *
      * @param fileName
      *            文件或者文件夹名称
-     * @throws IllegalArgumentException
-     *             if file not exists
      */
-    public static void deleteFileOrDirectory(String fileName) throws IllegalArgumentException{
+    public static void deleteFileOrDirectory(String fileName){
         File file = new File(fileName);
         if (file.exists()){
             deleteFileOrDirectory(file);
@@ -429,16 +401,14 @@ public final class FileUtil{
      *       return F:/pie2.gif
      * }
      * </pre>
-     * 
+     *
      * @param fileName
      *            文件名称,比如 F:/pie2.png
      * @param newPostfixName
      *            不带.号, 比如 gif
      * @return 新文件名称
-     * @throws NullPointerException
-     *             isNullOrEmpty(fileName) or isNullOrEmpty(newPostfixName)
      */
-    public static final String getNewFileName(String fileName,String newPostfixName) throws NullPointerException{
+    public static final String getNewFileName(String fileName,String newPostfixName){
 
         if (Validator.isNullOrEmpty(fileName)){
             throw new NullPointerException("fileName can't be null/empty!");
@@ -561,16 +531,13 @@ public final class FileUtil{
      *      返回 mp2-product
      * }
      * </pre>
-     * 
+     *
      * @param pathname
      *            通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例.如果给定字符串是空字符串，那么结果是空抽象路径名.
      * @return 如果没有父文件夹,返回自己,比如 E:/ 直接返回 E:/
-     * @throws NullPointerException
-     *             isNullOrEmpty(fileName)
-     * 
      * @since 1.0.7
      */
-    public static final String getFileTopParentName(String pathname) throws NullPointerException{
+    public static final String getFileTopParentName(String pathname){
         if (Validator.isNullOrEmpty(pathname)){
             throw new NullPointerException("pathname can't be null/empty!");
         }
@@ -598,11 +565,9 @@ public final class FileUtil{
      * @param path
      *            the path
      * @return the parent
-     * @throws NullPointerException
-     *             the null pointer exception
      * @see java.io.File#getParent()
      */
-    public static String getParent(String path) throws NullPointerException{
+    public static String getParent(String path){
         if (Validator.isNullOrEmpty(path)){
             throw new NullPointerException("pathname can't be null/empty!");
         }
@@ -622,15 +587,13 @@ public final class FileUtil{
      *      返回 mp2-product
      * }
      * </pre>
-     * 
+     *
      * @param file
      *            the file
      * @return 如果没有父文件夹,返回自己,比如 E:/ 直接返回 E:/
-     * @throws NullPointerException
-     *             isNullOrEmpty(fileName)
      * @since 1.0.7
      */
-    public static final String getFileTopParentName(File file) throws NullPointerException{
+    public static final String getFileTopParentName(File file){
         if (Validator.isNullOrEmpty(file)){
             throw new NullPointerException("file can't be null/empty!");
         }
@@ -770,8 +733,6 @@ public final class FileUtil{
      * @param file
      *            the file
      * @return the file format size
-     * @throws NullPointerException
-     *             isNullOrEmpty(file)
      * @see #getFileSize(File)
      * @see IOConstants#GB
      * @see IOConstants#MB
@@ -779,7 +740,7 @@ public final class FileUtil{
      * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
      * @since 1.0.7
      */
-    public static final String getFileFormatSize(File file) throws NullPointerException{
+    public static final String getFileFormatSize(File file){
         if (Validator.isNullOrEmpty(file)){
             throw new NullPointerException("file can't be null/empty!");
         }

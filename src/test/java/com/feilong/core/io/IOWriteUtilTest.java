@@ -54,7 +54,7 @@ public class IOWriteUtilTest{
      *             the invocation target exception
      */
     @Test
-    public void unescapeHtml2() throws NoSuchMethodException,IllegalAccessException,InvocationTargetException{
+    public void unescapeHtml2() throws Exception{
         String a = "第572章 三十年后（大结局） *局";
         String result = (String) MethodUtils.invokeExactStaticMethod(IOWriteUtil.class, "getFormatFilePath", a);
         LOGGER.info(result);
@@ -75,7 +75,7 @@ public class IOWriteUtilTest{
      * @deprecated use {@link #writeUseNIO(int, InputStream, OutputStream)}
      */
     @Deprecated
-    private static void writeUseIO(int bufferLength,InputStream inputStream,OutputStream outputStream) throws UncheckedIOException{
+    private static void writeUseIO(int bufferLength,InputStream inputStream,OutputStream outputStream){
         int i = 0;
         int sumSize = 0;
         int j = 0;
