@@ -36,15 +36,15 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public class TypeUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(TypeUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(TypeUtilTest.class);
 
     /**
      * Test.
      */
     @Test
     public final void test(){
-        log.info("" + new SkuItemRepositoryImpl());
+        LOGGER.info("" + new SkuItemRepositoryImpl());
     }
 
     /**
@@ -52,7 +52,7 @@ public class TypeUtilTest{
      */
     @Test
     public final void test2(){
-        log.info("" + new SkuItemRepositoryImpl2());
+        LOGGER.info("" + new SkuItemRepositoryImpl2());
     }
 
     /**
@@ -60,14 +60,14 @@ public class TypeUtilTest{
      */
     @Test
     public final void test3(){
-        log.info("" + new SkuItemRepositoryImpl3());
+        LOGGER.info("" + new SkuItemRepositoryImpl3());
 
         Class<?>[] genericInterfacesParameterizedRawTypes = TypeUtil.getGenericInterfacesParameterizedRawTypes(
                         SkuItemRepositoryImpl3.class,
                         BaseSolrRepository.class);
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
         }
     }
 
@@ -81,8 +81,8 @@ public class TypeUtilTest{
         Class<?>[] genericInterfacesParameterizedRawTypes = TypeUtil
                         .getGenericSuperclassParameterizedRawTypes(skuItemRepository.getClass());
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
         }
     }
 }

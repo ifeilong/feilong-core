@@ -31,8 +31,8 @@ import org.slf4j.LoggerFactory;
  */
 public class GenericTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(GenericTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(GenericTest.class);
 
     /**
      * Gets the value.
@@ -46,21 +46,21 @@ public class GenericTest{
      * @return the value
      */
     public static <T> T getValue(String a,Class<?> clz){
-        log.info(a + "" + (clz == String.class));
+        LOGGER.info(a + "" + (clz == String.class));
         T aT = null;
         try{
             Method method = GenericTest.class.getMethod("getValue", String.class, Class.class);
             TypeVariable<?> typeVariable = (TypeVariable<?>) method.getGenericReturnType();
-            log.info(typeVariable.toString());
-            log.info(typeVariable.getName());
-            log.info("" + typeVariable.getBounds()[0]);
-            log.info(typeVariable.getGenericDeclaration().toString());
-            log.info(method.toGenericString());
-            log.info(method.toString());
+            LOGGER.info(typeVariable.toString());
+            LOGGER.info(typeVariable.getName());
+            LOGGER.info("" + typeVariable.getBounds()[0]);
+            LOGGER.info(typeVariable.getGenericDeclaration().toString());
+            LOGGER.info(method.toGenericString());
+            LOGGER.info(method.toString());
         }catch (SecurityException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }catch (NoSuchMethodException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
         return aT;
     }
@@ -70,9 +70,9 @@ public class GenericTest{
      */
     @Test
     public void testGenericTest(){
-        if (log.isInfoEnabled()){
-            log.info((String) getValue("jinxin", String.class));
-            log.info((String) getValue("jinxin", Integer.class));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info((String) getValue("jinxin", String.class));
+            LOGGER.info((String) getValue("jinxin", Integer.class));
         }
     }
 }

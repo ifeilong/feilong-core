@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
  */
 public class MathUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(MathUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MathUtilTest.class);
 
     /**
      * Atan2.
@@ -45,12 +45,12 @@ public class MathUtilTest{
 
         double angle = Math.atan2(d.y - b.y, b.x - d.x);
 
-        log.info(Math.atan(1) + "");
-        log.info(180 * Math.atan(1) / Math.PI + "");
-        log.info("angle:" + angle);
+        LOGGER.info(Math.atan(1) + "");
+        LOGGER.info(180 * Math.atan(1) / Math.PI + "");
+        LOGGER.info("angle:" + angle);
         // x=180*x/Math.PI//转换为角度值
 
         double du = 180 * Math.atan2(d.y - b.y, b.x - d.x) / Math.PI;
-        log.info(du + "");
+        LOGGER.info(du + "");
     }
 }

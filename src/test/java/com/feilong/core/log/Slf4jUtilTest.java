@@ -19,8 +19,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.log.Slf4jUtil;
-
 /**
  * The Class Slf4jUtilTest.
  * 
@@ -29,19 +27,19 @@ import com.feilong.core.log.Slf4jUtil;
  */
 public class Slf4jUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(Slf4jUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(Slf4jUtilTest.class);
 
     /**
      * Test.
      */
     @Test
     public final void test(){
-        log.info(Slf4jUtil.formatMessage("{},{}", "今天", "aaaa"));
-        log.info(Slf4jUtil.formatMessage(null, "今天", "aaaa"));
-        log.info(Slf4jUtil.formatMessage("", "今天", "aaaa"));
+        LOGGER.info(Slf4jUtil.formatMessage("{},{}", "今天", "aaaa"));
+        LOGGER.info(Slf4jUtil.formatMessage(null, "今天", "aaaa"));
+        LOGGER.info(Slf4jUtil.formatMessage("", "今天", "aaaa"));
         Object arg = null;
-        log.info(Slf4jUtil.formatMessage("", arg));
-        log.info(Slf4jUtil.formatMessage("", ""));
+        LOGGER.info(Slf4jUtil.formatMessage("", arg));
+        LOGGER.info(Slf4jUtil.formatMessage("", ""));
     }
 }

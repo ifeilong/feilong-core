@@ -34,8 +34,8 @@ import com.feilong.core.util.MapUtil;
  */
 public class MapUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(MapUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
     /**
      * Test get sub map exclude keys.
@@ -56,7 +56,7 @@ public class MapUtilTest{
         String[] keys = { "a", "g", "m" };
         Map<String, Integer> subMapExcludeKeys = MapUtil.getSubMapExcludeKeys(map, keys);
 
-        log.debug(JsonUtil.format(subMapExcludeKeys));
+        LOGGER.debug(JsonUtil.format(subMapExcludeKeys));
     }
 
     /**
@@ -78,7 +78,7 @@ public class MapUtilTest{
         String[] keys = { "a", "b", "d", "g", "m" };
         Integer minValue = MapUtil.getMinValue(object, keys);
 
-        log.info(minValue + "");
+        LOGGER.info(minValue + "");
     }
 
     /**
@@ -97,7 +97,7 @@ public class MapUtilTest{
         object.put("3", "6");
         object.put("4", "8");
 
-        log.debug(JsonUtil.format(object));
+        LOGGER.debug(JsonUtil.format(object));
     }
 
     /**
@@ -121,7 +121,7 @@ public class MapUtilTest{
         //a
         //b 8910
         //c
-        log.debug(JsonUtil.format(object));
+        LOGGER.debug(JsonUtil.format(object));
     }
 
     /**
@@ -133,7 +133,7 @@ public class MapUtilTest{
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);
-        log.debug(JsonUtil.format(MapUtil.sortByValueAsc(map)));
+        LOGGER.debug(JsonUtil.format(MapUtil.sortByValueAsc(map)));
     }
 
     /**
@@ -147,7 +147,7 @@ public class MapUtilTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        log.debug(JsonUtil.format(MapUtil.sortByValueDesc(map)));
+        LOGGER.debug(JsonUtil.format(MapUtil.sortByValueDesc(map)));
     }
 
     /**
@@ -161,7 +161,7 @@ public class MapUtilTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        log.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+        LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
     }
 
     /**
@@ -175,6 +175,6 @@ public class MapUtilTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        log.debug(JsonUtil.format(MapUtil.sortByKeyDesc(map)));
+        LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyDesc(map)));
     }
 }

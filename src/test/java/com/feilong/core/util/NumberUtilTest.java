@@ -33,18 +33,18 @@ import org.slf4j.LoggerFactory;
  */
 public class NumberUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(NumberUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(NumberUtilTest.class);
 
     /**
      * TestMathTest.
      */
     @Test
     public void testMathTest(){
-        log.debug("" + (0.4 + 0.8)); // = 1.2 ?
-        log.debug("" + (2 - 1.1)); // = 0.9 ?
-        log.debug("" + (0.2 * 3)); // = 0.6 ?
-        log.debug("" + (1.2 / 3)); // = 0.4 ?
+        LOGGER.debug("" + (0.4 + 0.8)); // = 1.2 ?
+        LOGGER.debug("" + (2 - 1.1)); // = 0.9 ?
+        LOGGER.debug("" + (0.2 * 3)); // = 0.6 ?
+        LOGGER.debug("" + (1.2 / 3)); // = 0.4 ?
 
         //1.2000000000000002
         //0.8999999999999999
@@ -53,12 +53,12 @@ public class NumberUtilTest{
 
         //new BigDecimal(0.1) ====>   0.1000000000000000055511151231257827021181583404541015625
         //BigDecimal.valueOf(0.1) ====>  0.1
-        log.debug("" + (new BigDecimal(0.1)));
-        log.debug("" + (BigDecimal.valueOf(0.1)));
+        LOGGER.debug("" + (new BigDecimal(0.1)));
+        LOGGER.debug("" + (BigDecimal.valueOf(0.1)));
 
-        log.debug("" + (new BigDecimal(0.4).add(new BigDecimal(0.8)))); // = 1.2 ?
-        log.debug("" + (new BigDecimal(2).subtract(new BigDecimal(1.1)))); // = 0.9 ?
-        log.debug("" + (new BigDecimal(0.2).multiply(new BigDecimal(3)))); // = 0.6 ?
+        LOGGER.debug("" + (new BigDecimal(0.4).add(new BigDecimal(0.8)))); // = 1.2 ?
+        LOGGER.debug("" + (new BigDecimal(2).subtract(new BigDecimal(1.1)))); // = 0.9 ?
+        LOGGER.debug("" + (new BigDecimal(0.2).multiply(new BigDecimal(3)))); // = 0.6 ?
 
     }
 
@@ -67,8 +67,8 @@ public class NumberUtilTest{
      */
     @Test
     public void testMathUtilTest2(){
-        log.info("" + NumberUtil.getDivideNoScaleValue(new BigDecimal(1.2), new BigDecimal(3)));
-        //log.debug(new BigDecimal(1.2).divide(new BigDecimal(3))); // = 0.4 ?
+        LOGGER.info("" + NumberUtil.getDivideNoScaleValue(new BigDecimal(1.2), new BigDecimal(3)));
+        //LOGGER.debug(new BigDecimal(1.2).divide(new BigDecimal(3))); // = 0.4 ?
     }
 
     /**
@@ -159,7 +159,7 @@ public class NumberUtilTest{
         int scale = 8;
         for (int i = 0; i < j; ++i){
             temp = NumberUtil.getDivideValue(a.add(temp), 2, scale);
-            log.info("{}次:{}", i, temp);
+            LOGGER.info("{}次:{}", i, temp);
         }
 
     }
@@ -176,8 +176,8 @@ public class NumberUtilTest{
         // decimalFormat.setMinimumFractionDigits(2);
         // maxFractionDigits
         number.setScale(2, BigDecimal.ROUND_HALF_UP);
-        log.info(number.toString());
-        log.info(decimalFormat.format(number));
+        LOGGER.info(number.toString());
+        LOGGER.info(decimalFormat.format(number));
     }
 
     /**
@@ -195,9 +195,9 @@ public class NumberUtilTest{
         assertEquals("88.0200005", NumberUtil.toString(88.0200005, pattern));
         assertEquals("88.002", NumberUtil.toString(88.002, pattern));
         // //######0
-        log.debug(NumberUtil.toString((double) 5 / 8 * 100, "#######.###"));
+        LOGGER.debug(NumberUtil.toString((double) 5 / 8 * 100, "#######.###"));
         DecimalFormat df = new DecimalFormat("######0");
-        log.debug(df.format(((double) 5 / Integer.valueOf(8)) * 100));
+        LOGGER.debug(df.format(((double) 5 / Integer.valueOf(8)) * 100));
 
         assertEquals("C00000008", NumberUtil.toString(8, "C00000000"));
 
@@ -268,7 +268,7 @@ public class NumberUtilTest{
      */
     @Test
     public void testGetMultiplyValue(){
-        log.debug("MultiplyValue:" + NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
+        LOGGER.debug("MultiplyValue:" + NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
     }
 
     /**
@@ -289,8 +289,8 @@ public class NumberUtilTest{
     public void test(){
         BigDecimal a = new BigDecimal("1.000000");
         BigDecimal b = new BigDecimal(1);
-        log.debug(a.compareTo(b) + "");
-        log.debug(a.equals(b) + "");
+        LOGGER.debug(a.compareTo(b) + "");
+        LOGGER.debug(a.equals(b) + "");
     }
 
     /**

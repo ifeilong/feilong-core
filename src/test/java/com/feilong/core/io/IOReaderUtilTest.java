@@ -32,8 +32,8 @@ import com.feilong.core.io.IOReaderUtil;
  */
 public class IOReaderUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(IOReaderUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(IOReaderUtilTest.class);
 
     /**
      * Testname.
@@ -47,8 +47,8 @@ public class IOReaderUtilTest{
         String content = IOReaderUtil.getFileContent(fileName, CharsetType.UTF8);
         // 将内容以换行符转成数组
         String[] rowsContents = content.split("\r\n");
-        log.info(content);
-        log.info("" + rowsContents.length);
+        LOGGER.info(content);
+        LOGGER.info("" + rowsContents.length);
     }
 
     /**
@@ -66,7 +66,7 @@ public class IOReaderUtilTest{
 
         // 将内容以换行符转成数组
         // String[] rowsContents = content.split("\r\n");
-        log.info(content);
+        LOGGER.info(content);
     }
 
     /**
@@ -78,6 +78,6 @@ public class IOReaderUtilTest{
     @Test
     public void testGetFileContent() throws IOException{
         String propertiesPath = "I:/Ebook/book.properties";
-        log.info(IOReaderUtil.getFileContent(propertiesPath, CharsetType.UTF8));
+        LOGGER.info(IOReaderUtil.getFileContent(propertiesPath, CharsetType.UTF8));
     }
 }

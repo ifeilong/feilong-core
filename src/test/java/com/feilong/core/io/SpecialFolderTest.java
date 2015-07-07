@@ -29,15 +29,15 @@ import com.feilong.core.io.SpecialFolder;
  */
 public class SpecialFolderTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(SpecialFolderTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SpecialFolderTest.class);
 
     /**
      * Test get desktop.
      */
     @Test
     public void testGetDesktop(){
-        log.info("桌面地址:" + SpecialFolder.getDesktop());
+        LOGGER.info("桌面地址:" + SpecialFolder.getDesktop());
     }
 
     /**
@@ -45,7 +45,7 @@ public class SpecialFolderTest{
      */
     @Test
     public void testGetMyDocuments(){
-        log.info("我的文档:" + SpecialFolder.getMyDocuments());
+        LOGGER.info("我的文档:" + SpecialFolder.getMyDocuments());
     }
 
     /**
@@ -53,6 +53,6 @@ public class SpecialFolderTest{
      */
     @Test
     public void testGetTemp(){
-        log.info("临时文件夹:" + SpecialFolder.getTemp());
+        LOGGER.info("临时文件夹:" + SpecialFolder.getTemp());
     }
 }

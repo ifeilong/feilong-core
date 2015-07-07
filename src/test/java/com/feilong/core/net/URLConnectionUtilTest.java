@@ -31,8 +31,8 @@ import com.feilong.core.net.URLConnectionUtil;
  */
 public class URLConnectionUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(URLConnectionUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(URLConnectionUtilTest.class);
 
     /**
      * 获得 response body as string.
@@ -45,6 +45,6 @@ public class URLConnectionUtilTest{
         httpURLConnectionParam.setContentCharset(CharsetType.GBK);
 
         String responseBodyAsString = URLConnectionUtil.getResponseBodyAsString(templateFile, httpURLConnectionParam);
-        log.info(responseBodyAsString);
+        LOGGER.info(responseBodyAsString);
     }
 }

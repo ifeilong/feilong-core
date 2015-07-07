@@ -40,8 +40,8 @@ import com.feilong.core.date.DateUtil;
  */
 public class IOWriteUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(IOWriteUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(IOWriteUtilTest.class);
 
     /**
      * Unescape html2.
@@ -57,7 +57,7 @@ public class IOWriteUtilTest{
     public void unescapeHtml2() throws NoSuchMethodException,IllegalAccessException,InvocationTargetException{
         String a = "第572章 三十年后（大结局） *局";
         String result = (String) MethodUtils.invokeExactStaticMethod(IOWriteUtil.class, "getFormatFilePath", a);
-        log.info(result);
+        LOGGER.info(result);
     }
 
     /**
@@ -96,8 +96,8 @@ public class IOWriteUtilTest{
                 i++;
                 sumSize = sumSize + j;
 
-                //if (log.isDebugEnabled()){
-                //  log.debug(
+                //if (LOGGER.isDebugEnabled()){
+                //  LOGGER.debug(
                 //                  "write data,index:[{}],bufferLength:[{}],currentLoopLength:[{}],sumSize:[{}]",
                 //                  i,
                 //                  bufferLength,
@@ -105,8 +105,8 @@ public class IOWriteUtilTest{
                 //                  FileUtil.formatSize(sumSize));
                 //}
             }
-            if (log.isDebugEnabled()){
-                log.debug("write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}]", FileUtil.formatSize(sumSize), bufferLength, i);
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}]", FileUtil.formatSize(sumSize), bufferLength, i);
             }
 
             //刷新此输出流并强制写出所有缓冲的输出字节。flush 的常规协定是：如果此输出流的实现已经缓冲了以前写入的任何字节，则调用此方法指示应将这些字节立即写入它们预期的目标。 
@@ -136,7 +136,7 @@ public class IOWriteUtilTest{
         IOWriteUtil.write(inputStream, outputStream);
 
         Date endDate = new Date();
-        log.info("time:{}", DateExtensionUtil.getIntervalForView(beginDate, endDate));
+        LOGGER.info("time:{}", DateExtensionUtil.getIntervalForView(beginDate, endDate));
     }
 
     /**

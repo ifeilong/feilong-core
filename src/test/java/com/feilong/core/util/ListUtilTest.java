@@ -41,8 +41,8 @@ import com.feilong.test.User;
  */
 public class ListUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ListUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListUtilTest.class);
 
     /**
      * Test list util test222222.
@@ -71,8 +71,8 @@ public class ListUtilTest{
 
         List<String> asList = new ArrayList<String>(Arrays.asList(array2));
         asList.add("小黑");
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(asList));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(asList));
         }
 
     }
@@ -83,7 +83,7 @@ public class ListUtilTest{
     @Test
     public void testListUtilTest6(){
         List<String> list = new ArrayList<String>();
-        log.debug("the param list.size():{}", list.size());
+        LOGGER.debug("the param list.size():{}", list.size());
 
     }
 
@@ -94,10 +94,10 @@ public class ListUtilTest{
     public void testListUtilTest2(){
         int[] ints = { 1, 2, 3, 4, 5 };
         List<?> list = Arrays.asList(ints);
-        log.debug("list'size：" + list.size());
+        LOGGER.debug("list'size：" + list.size());
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(list));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(list));
         }
     }
 
@@ -114,7 +114,7 @@ public class ListUtilTest{
             list1.add(student);
         }
         long end1 = System.currentTimeMillis();
-        log.debug("list1 time：" + (end1 - begin1));
+        LOGGER.debug("list1 time：" + (end1 - begin1));
 
         //*******************************************************
 
@@ -125,7 +125,7 @@ public class ListUtilTest{
             list2.add(student);
         }
         long end2 = System.currentTimeMillis();
-        log.debug("list2 time：" + (end2 - begin2));
+        LOGGER.debug("list2 time：" + (end2 - begin2));
     }
 
     /**
@@ -179,7 +179,7 @@ public class ListUtilTest{
             }
         }
 
-        log.debug(JsonUtil.format(list));
+        LOGGER.debug(JsonUtil.format(list));
     }
 
     /**
@@ -209,8 +209,8 @@ public class ListUtilTest{
             }
         }
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(userList));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(userList));
         }
 
     }
@@ -235,8 +235,8 @@ public class ListUtilTest{
             }
         }
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(list));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(list));
         }
     }
 
@@ -252,14 +252,14 @@ public class ListUtilTest{
         list.add("feilong3");
         list.add("feilong4");
         list.add("feilong5");
-        log.info(list.indexOf("xinge") + "");
+        LOGGER.info(list.indexOf("xinge") + "");
         for (Iterator<String> iterator = list.iterator(); iterator.hasNext();){
             String string = iterator.next();
             if ("feilong1".equals(string)){
                 iterator.remove();
             }
         }
-        log.info("list:{}", JsonUtil.format(list));
+        LOGGER.info("list:{}", JsonUtil.format(list));
     }
 
     /**
@@ -270,7 +270,7 @@ public class ListUtilTest{
         List<String> testList = new ArrayList<String>();
         testList.add("xinge");
         testList.add("feilong");
-        log.info(ListUtil.toStringReplaceBrackets(testList));
+        LOGGER.info(ListUtil.toStringReplaceBrackets(testList));
     }
 
     /**
@@ -281,7 +281,7 @@ public class ListUtilTest{
         List<String> testList = new ArrayList<String>();
         testList.add("xinge");
         testList.add("feilong");
-        log.info(ListUtil.getFirstItem(testList));
+        LOGGER.info(ListUtil.getFirstItem(testList));
     }
 
     /**
@@ -292,7 +292,7 @@ public class ListUtilTest{
         List<String> testList = new ArrayList<String>();
         testList.add("xinge");
         testList.add("feilong");
-        log.info(ListUtil.toStringRemoveBrackets(testList));
+        LOGGER.info(ListUtil.toStringRemoveBrackets(testList));
     }
 
     /**
@@ -303,7 +303,7 @@ public class ListUtilTest{
         List<String> testList = new ArrayList<String>();
         testList.add("xinge");
         testList.add("feilong");
-        log.info(ListUtil.toString(testList, true));
+        LOGGER.info(ListUtil.toString(testList, true));
     }
 
 }

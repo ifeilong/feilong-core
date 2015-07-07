@@ -29,16 +29,16 @@ import com.feilong.core.lang.ClassLoaderUtil;
  */
 public class ClassLoaderUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ClassLoaderUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassLoaderUtilTest.class);
 
     /**
      * {@link com.feilong.core.lang.ClassLoaderUtil#getResource(java.lang.String)} 的测试方法。
      */
     @Test
     public void testGetResource(){
-        log.info(ClassLoaderUtil.getResource("") + "");
-        log.info("" + ClassLoaderUtil.getResource("com"));
+        LOGGER.info(ClassLoaderUtil.getResource("") + "");
+        LOGGER.info("" + ClassLoaderUtil.getResource("com"));
         ClassLoaderUtil.getResource("jstl-1.2", this.getClass());
     }
 
@@ -47,7 +47,7 @@ public class ClassLoaderUtilTest{
      */
     @Test
     public void testGetClassPath(){
-        log.info("" + ClassLoaderUtil.getClassPath());
+        LOGGER.info("" + ClassLoaderUtil.getClassPath());
     }
 
     /**
@@ -66,9 +66,9 @@ public class ClassLoaderUtilTest{
         String d = this.getClass().getResource("/").getPath();
         // 获得应用程序完整路径
         // E:\Workspaces\eclipse3.5\feilong-platform\feilong-common
-        log.info(a);
-        log.info(b);
-        log.info(c);
-        log.info(d);
+        LOGGER.info(a);
+        LOGGER.info(b);
+        LOGGER.info(c);
+        LOGGER.info(d);
     }
 }

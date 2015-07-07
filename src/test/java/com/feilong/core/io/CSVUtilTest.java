@@ -38,8 +38,8 @@ import com.feilong.core.io.CSVUtil;
  */
 public class CSVUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(CSVUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(CSVUtilTest.class);
 
     /**
      * Test write.
@@ -51,7 +51,7 @@ public class CSVUtilTest{
     public void testWrite() throws IOException{
         String path = "/home/webuser/nike_int/johnData/${date}/nikeid_pix_demand.csv";
         path = path.replace("${date}", DateUtil.date2String(DateUtil.getYesterday(new Date()), DatePattern.COMMON_DATE));
-        log.info(path);
+        LOGGER.info(path);
         String[] columnTitles = { "a", "b" };
         List<Object[]> list = new ArrayList<Object[]>();
         for (int i = 0; i < 20; i++){

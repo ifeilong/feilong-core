@@ -29,14 +29,14 @@ import com.feilong.core.date.SolarDateUtil;
  */
 public class SolarDateUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(SolarDateUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SolarDateUtilTest.class);
 
     /**
      * To lundar.
      */
     @Test
     public void toLundar(){
-        log.info(SolarDateUtil.toLundar(2013, 1, 8));
+        LOGGER.info(SolarDateUtil.toLundar(2013, 1, 8));
     }
 }

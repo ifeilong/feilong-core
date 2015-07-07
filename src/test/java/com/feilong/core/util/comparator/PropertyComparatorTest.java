@@ -36,7 +36,7 @@ import com.feilong.test.User;
  */
 public class PropertyComparatorTest{
 
-    private static final Logger log = LoggerFactory.getLogger(PropertyComparatorTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyComparatorTest.class);
 
     @Test
     public final void testPropertyComparator(){
@@ -50,7 +50,7 @@ public class PropertyComparatorTest{
         list.add(new User(1L));
         list.add(new User(id));
         Collections.sort(list, new PropertyComparator<User>("id"));
-        log.debug(JsonUtil.format(list));
+        LOGGER.debug(JsonUtil.format(list));
     }
 
     @Test
@@ -64,6 +64,6 @@ public class PropertyComparatorTest{
         list.add(null);
         list.add(new User(2L));
         list.add(new User(id));
-        log.debug(JsonUtil.format(list));
+        LOGGER.debug(JsonUtil.format(list));
     }
 }

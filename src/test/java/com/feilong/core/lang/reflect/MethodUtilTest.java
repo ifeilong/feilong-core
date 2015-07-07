@@ -36,8 +36,8 @@ import com.feilong.core.util.StringUtil;
  */
 public class MethodUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(MethodUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodUtilTest.class);
 
     /**
      * Name.
@@ -59,8 +59,8 @@ public class MethodUtilTest{
      */
     @Test
     public final void testInvokeMethod1(){
-        log.info("" + MethodUtil.invokeMethod(ConstructorUtil.newInstance(MethodUtilTest.class), "name", 5));
-        log.info("" + MethodUtil.invokeMethod(new MethodUtilTest(), "name", Integer.parseInt("5")));
+        LOGGER.info("" + MethodUtil.invokeMethod(ConstructorUtil.newInstance(MethodUtilTest.class), "name", 5));
+        LOGGER.info("" + MethodUtil.invokeMethod(new MethodUtilTest(), "name", Integer.parseInt("5")));
     }
 
     /**
@@ -71,8 +71,8 @@ public class MethodUtilTest{
         BackWarnEntity backWarnEntity = new BackWarnEntity();
         String methodName = "getIsSuccess";
         Object[] params = new Object[0];
-        log.info("" + MethodUtil.invokeMethod(backWarnEntity, methodName, params));
-        log.info("" + MethodUtil.invokeMethod(backWarnEntity, methodName));
+        LOGGER.info("" + MethodUtil.invokeMethod(backWarnEntity, methodName, params));
+        LOGGER.info("" + MethodUtil.invokeMethod(backWarnEntity, methodName));
     }
 
     /**

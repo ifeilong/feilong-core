@@ -31,8 +31,8 @@ import com.feilong.core.util.ByteUtil;
  */
 public class ByteUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ByteUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ByteUtilTest.class);
 
     /**
      * Test byte to hex string lower case.
@@ -103,6 +103,6 @@ public class ByteUtilTest{
     @Test
     public void testBexBytesToBytes(){
         String hexString = "5B7B2264617465223A313333343037323035323038312C2273696D706C65536B75436F6D6D616E64223A7B22636F6465223A223331373830392D313030222C22666F625069726365223A323139392C226964223A353636372C226C6973745072696365223A323139392C226E616D65223A2241495220464F52434520312048494748204C5558204D4158204149522027303820515320E7A9BAE5869BE4B880E58FB7EFBC88E99990E9878FE58F91E594AEEFBC89227D7D5D";
-        log.info(new String(ByteUtil.hexBytesToBytes(hexString.getBytes())));
+        LOGGER.info(new String(ByteUtil.hexBytesToBytes(hexString.getBytes())));
     }
 }

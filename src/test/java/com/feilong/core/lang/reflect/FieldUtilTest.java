@@ -32,16 +32,16 @@ import com.feilong.test.User;
  */
 public class FieldUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(FieldUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FieldUtilTest.class);
 
     /**
      * Test get static property.
      */
     @Test
     public void testGetStaticProperty(){
-        log.info("" + FieldUtil.getStaticProperty("com.feilong.core.io.ImageType", "JPG"));
-        log.info("" + FieldUtil.getStaticProperty("com.feilong.core.io.IOConstants", "GB"));
+        LOGGER.info("" + FieldUtil.getStaticProperty("com.feilong.core.io.ImageType", "JPG"));
+        LOGGER.info("" + FieldUtil.getStaticProperty("com.feilong.core.io.IOConstants", "GB"));
     }
 
     /**
@@ -55,6 +55,6 @@ public class FieldUtilTest{
     @Test
     public final void testGetFieldValueMap() throws IllegalArgumentException,IllegalAccessException{
         User user = new User(12L);
-        log.info(JsonUtil.format(FieldUtil.getFieldValueMap(user)));
+        LOGGER.info(JsonUtil.format(FieldUtil.getFieldValueMap(user)));
     }
 }

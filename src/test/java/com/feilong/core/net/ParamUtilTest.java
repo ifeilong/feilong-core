@@ -35,8 +35,8 @@ import com.feilong.core.net.ParamUtil;
  */
 public class ParamUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ParamUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtilTest.class);
 
     /** The uri. */
     private String              uri = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
@@ -73,7 +73,7 @@ public class ParamUtilTest{
             object.put(keyAndValue[0], keyAndValue[1]);
         }
 
-        log.info(ParamUtil.toNaturalOrderingString(object));
+        LOGGER.info(ParamUtil.toNaturalOrderingString(object));
     }
 
     /**
@@ -84,7 +84,7 @@ public class ParamUtilTest{
         String pageParamName = "page";
         Object prePageNo = "";
         String addParameter = ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8);
-        log.info(addParameter);
+        LOGGER.info(addParameter);
     }
 
     /**
@@ -95,7 +95,7 @@ public class ParamUtilTest{
         String pageParamName = "label";
         Object prePageNo = "2-5-8-12";
         String addParameter = ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8);
-        log.info(addParameter);
+        LOGGER.info(addParameter);
     }
 
     /**
@@ -106,7 +106,7 @@ public class ParamUtilTest{
         uri = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
         String pageParamName = "label";
         String removeParameter = ParamUtil.removeParameter(uri, pageParamName, CharsetType.ISO_8859_1);
-        log.info(removeParameter);
+        LOGGER.info(removeParameter);
     }
 
     /**
@@ -122,7 +122,7 @@ public class ParamUtilTest{
 
         String charsetType = CharsetType.UTF8;
         String removeParameter = ParamUtil.removeParameterList(uri, paramNameList, charsetType);
-        log.info(removeParameter);
+        LOGGER.info(removeParameter);
     }
 
     /**
@@ -138,6 +138,6 @@ public class ParamUtilTest{
 
         String charsetType = CharsetType.UTF8;
         String removeParameter = ParamUtil.retentionParamList(uri, paramNameList, charsetType);
-        log.info(removeParameter);
+        LOGGER.info(removeParameter);
     }
 }

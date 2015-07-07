@@ -32,8 +32,8 @@ import com.feilong.core.net.InetAddressUtil;
  */
 public class InetAddressTest1{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(InetAddressTest1.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(InetAddressTest1.class);
 
     /**
      * The main method.
@@ -57,15 +57,15 @@ public class InetAddressTest1{
             netInterfaces = NetworkInterface.getNetworkInterfaces();
             while (netInterfaces.hasMoreElements()){
                 NetworkInterface ni = netInterfaces.nextElement();
-                log.info("DisplayName:" + ni.getDisplayName());
-                log.info("Name:" + ni.getName());
+                LOGGER.info("DisplayName:" + ni.getDisplayName());
+                LOGGER.info("Name:" + ni.getName());
                 Enumeration<InetAddress> ips = ni.getInetAddresses();
                 while (ips.hasMoreElements()){
-                    log.info("IP:" + ips.nextElement().getHostAddress());
+                    LOGGER.info("IP:" + ips.nextElement().getHostAddress());
                 }
             }
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
     }
 
@@ -83,13 +83,13 @@ public class InetAddressTest1{
             for (int i = 0; i < retry; i++){
                 // 测试是否可以达到该地址。
                 if (address.isReachable(timeOut)){
-                    log.info(i + " OK");
+                    LOGGER.info(i + " OK");
                 }else{
-                    log.info(i + " LOSS");
+                    LOGGER.info(i + " LOSS");
                 }
             }
         }catch (Exception e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
     }
 }

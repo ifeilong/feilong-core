@@ -28,16 +28,16 @@ import org.slf4j.LoggerFactory;
  */
 public class TimeIntervalTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(TimeIntervalTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(TimeIntervalTest.class);
 
     /**
      * Test.
      */
     @Test
     public final void test(){
-        log.info("" + TimeInterval.MILLISECOND_PER_YEAR);
-        log.info("" + TimeInterval.MILLISECOND_PER_MONTH);
-        log.info("" + TimeInterval.MILLISECOND_PER_WEEK);
+        LOGGER.info("" + TimeInterval.MILLISECOND_PER_YEAR);
+        LOGGER.info("" + TimeInterval.MILLISECOND_PER_MONTH);
+        LOGGER.info("" + TimeInterval.MILLISECOND_PER_WEEK);
     }
 }

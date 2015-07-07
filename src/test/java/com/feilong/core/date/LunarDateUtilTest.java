@@ -31,8 +31,8 @@ import com.feilong.core.date.LunarDateUtil;
  */
 public class LunarDateUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(LunarDateUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(LunarDateUtilTest.class);
 
     /**
      * Gets the lunar date string.
@@ -40,7 +40,7 @@ public class LunarDateUtilTest{
      */
     @Test
     public void testGetLunarDateString(){
-        log.info(LunarDateUtil.getLunarDateString(new Date()));
+        LOGGER.info(LunarDateUtil.getLunarDateString(new Date()));
     }
 
     /**
@@ -48,6 +48,6 @@ public class LunarDateUtilTest{
      */
     @Test
     public void toSolar(){
-        log.info(LunarDateUtil.toSolar(2014, 12, 30));
+        LOGGER.info(LunarDateUtil.toSolar(2014, 12, 30));
     }
 }

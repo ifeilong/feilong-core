@@ -42,8 +42,8 @@ import com.feilong.test.User;
  */
 public class StringUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log  = LoggerFactory.getLogger(StringUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER  = LoggerFactory.getLogger(StringUtilTest.class);
 
     /** <code>{@value}</code>. */
     private static final String TEXT = "jinxin.feilong";
@@ -54,12 +54,12 @@ public class StringUtilTest{
     @Test
     public void testReplace(){
         String source = "jiiiiiinxin.feilong";
-        log.info(StringUtil.replace(source, null) + "");
+        LOGGER.info(StringUtil.replace(source, null) + "");
 
         Map<String, Object> valuesMap = new HashMap<String, Object>();
         valuesMap.put("today", DateUtil.date2String(new Date(), DatePattern.COMMON_DATE));
         valuesMap.put("user", new User(1L));
-        log.info(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
+        LOGGER.info(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
     }
 
     /**
@@ -68,11 +68,11 @@ public class StringUtilTest{
     @Test
     public void testSearchCount(){
         String source = "jiiiiiinxin.feilong";
-        log.info(StringUtil.searchTimes(source, "i") + "");
-        log.info(StringUtils.countMatches(source, "i") + "");
-        log.info(StringUtil.searchTimes(source, "in") + "");
-        log.info(StringUtil.searchTimes(source, "ii") + "");
-        log.info(StringUtil.searchTimes(source, "xin") + "");
+        LOGGER.info(StringUtil.searchTimes(source, "i") + "");
+        LOGGER.info(StringUtils.countMatches(source, "i") + "");
+        LOGGER.info(StringUtil.searchTimes(source, "in") + "");
+        LOGGER.info(StringUtil.searchTimes(source, "ii") + "");
+        LOGGER.info(StringUtil.searchTimes(source, "xin") + "");
         Assert.assertEquals(1, StringUtil.searchTimes("xin", "xin"));
         Assert.assertEquals(1, StringUtil.searchTimes("xin", "i"));
         Assert.assertEquals(2, StringUtil.searchTimes("xiin", "i"));
@@ -84,12 +84,12 @@ public class StringUtilTest{
      */
     @Test
     public void compareTo(){
-        log.info("" + "8".compareTo("13"));
+        LOGGER.info("" + "8".compareTo("13"));
 
         final Integer parseInt = Integer.parseInt("8");
 
-        log.info("" + parseInt.compareTo(Integer.parseInt("13")));
-        log.info("" + "12".compareTo("13"));
+        LOGGER.info("" + parseInt.compareTo(Integer.parseInt("13")));
+        LOGGER.info("" + "12".compareTo("13"));
     }
 
     /**
@@ -97,7 +97,7 @@ public class StringUtilTest{
      */
     @Test
     public void addDoubleQuotes(){
-        log.info(StringUtil.addDoubleQuotes(TEXT));
+        LOGGER.info(StringUtil.addDoubleQuotes(TEXT));
     }
 
     /**
@@ -105,12 +105,12 @@ public class StringUtilTest{
      */
     @Test
     public void isContainIgnoreCase(){
-        log.info(StringUtil.isContainIgnoreCase(null, "") + "");
-        log.info(StringUtil.isContainIgnoreCase(TEXT, null) + "");
-        log.info(StringUtil.isContainIgnoreCase(TEXT, "") + "");
-        log.info(StringUtil.isContainIgnoreCase(TEXT, "feilong") + "");
-        log.info(StringUtil.isContainIgnoreCase(TEXT, "feilong1") + "");
-        log.info(StringUtil.isContainIgnoreCase(TEXT, "feiLong") + "");
+        LOGGER.info(StringUtil.isContainIgnoreCase(null, "") + "");
+        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, null) + "");
+        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, "") + "");
+        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, "feilong") + "");
+        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, "feilong1") + "");
+        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, "feiLong") + "");
     }
 
     /**
@@ -118,7 +118,7 @@ public class StringUtilTest{
      */
     @Test
     public void toHexStringUpperCase(){
-        log.info(StringUtil.toHexStringUpperCase(TEXT));
+        LOGGER.info(StringUtil.toHexStringUpperCase(TEXT));
     }
 
     /**
@@ -130,9 +130,9 @@ public class StringUtilTest{
         hexStringUpperCase = "5B7B22636F6465223A224B3034383031222C226964223A3730302C226E616D65223A22E697B6E5B09AE6ACBEE992A5E58C99E689A3227D2C7B22636F6465223A2231333433363143222C226964223A35362C226E616D65223A22E58AB2E985B7E688B7E5A496436875636B205461796C6F7220416C6C2053746172204261636B205A6970227D5D";
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
         String msg = new String(hexBytesToBytes);
-        log.info(msg);
+        LOGGER.info(msg);
         msg = StringUtil.toOriginal(hexStringUpperCase);
-        log.info(msg);
+        LOGGER.info(msg);
     }
 
     /**
@@ -141,12 +141,12 @@ public class StringUtilTest{
     @Test
     public void length(){
         String string = "我的新浪微博:http://weibo.com/venusdrogon,关注我哦[url=http://bbs.guqu.net/Query.asp?keyword=%B6%C5%B4%CF%D7%A8%BC%AD&boardid=0&sType=2]sssss[/url][url=http://weibo.com/venusdrogon][img]http://service.t.sina.com.cn/widget/qmd/1903991210/1c853142/5.png[/img][/url]";
-        log.info(string.length() + "");
+        LOGGER.info(string.length() + "");
 
-        log.info("572367774882343".length() + "");
+        LOGGER.info("572367774882343".length() + "");
 
         // 运单号
-        log.info("1900681807840".length() + "");
+        LOGGER.info("1900681807840".length() + "");
     }
 
     /**
@@ -154,18 +154,18 @@ public class StringUtilTest{
      */
     @Test
     public void format(){
-        log.info(StringUtil.format("%03d", 1));
-        log.info(StringUtil.format("%s%n%s%h", 1.2d, 2, "feilong"));
-        log.info(StringUtil.format("%+d", -5));
-        log.info(StringUtil.format("%-5d", -5));
-        log.info(StringUtil.format("%05d", -5));
-        log.info(StringUtil.format("% 5d", -5));
-        log.info(StringUtil.format("%,f", 5585458.254f));
-        log.info(StringUtil.format("%(f", -5585458.254f));
-        log.info(StringUtil.format("%#f", -5585458.254f));
-        log.info(StringUtil.format("%f和%<3.3f", 9.45));
-        log.info(StringUtil.format("%2$s,%1$s", 99, "abc"));
-        log.info(StringUtil.format("%1$s,%1$s", 99));
+        LOGGER.info(StringUtil.format("%03d", 1));
+        LOGGER.info(StringUtil.format("%s%n%s%h", 1.2d, 2, "feilong"));
+        LOGGER.info(StringUtil.format("%+d", -5));
+        LOGGER.info(StringUtil.format("%-5d", -5));
+        LOGGER.info(StringUtil.format("%05d", -5));
+        LOGGER.info(StringUtil.format("% 5d", -5));
+        LOGGER.info(StringUtil.format("%,f", 5585458.254f));
+        LOGGER.info(StringUtil.format("%(f", -5585458.254f));
+        LOGGER.info(StringUtil.format("%#f", -5585458.254f));
+        LOGGER.info(StringUtil.format("%f和%<3.3f", 9.45));
+        LOGGER.info(StringUtil.format("%2$s,%1$s", 99, "abc"));
+        LOGGER.info(StringUtil.format("%1$s,%1$s", 99));
     }
 
     /**
@@ -176,7 +176,7 @@ public class StringUtilTest{
         Object content = "黑色/黄色/蓝色";
         String target = "/";
         Object replacement = "_";
-        log.info(StringUtil.replace(content, target, replacement));
+        LOGGER.info(StringUtil.replace(content, target, replacement));
     }
 
     /**
@@ -187,7 +187,7 @@ public class StringUtilTest{
         Object content = "黑色/黄色/蓝色";
         String target = "/";
         String replacement = "_";
-        log.info(StringUtil.replaceAll(content, target, replacement));
+        LOGGER.info(StringUtil.replaceAll(content, target, replacement));
     }
 
     /**
@@ -195,8 +195,8 @@ public class StringUtilTest{
      */
     @Test
     public void substring1(){
-        log.info("3999e85461ce7271dd5292c88f18567e".length() + "");
-        log.info(StringUtil.substring(TEXT, 6));
+        LOGGER.info("3999e85461ce7271dd5292c88f18567e".length() + "");
+        LOGGER.info(StringUtil.substring(TEXT, 6));
     }
 
     /**
@@ -204,13 +204,13 @@ public class StringUtilTest{
      */
     @Test
     public void substring2(){
-        log.info(StringUtil.substring(null, 6, 8));
-        log.info(StringUtil.substring(TEXT, TEXT.length(), 8));
-        log.info(StringUtil.substring(TEXT, TEXT.length() - 1, 8));
-        log.info(StringUtil.substring(TEXT, 1, 0));
-        log.info(StringUtil.substring(TEXT, 0, 5));
+        LOGGER.info(StringUtil.substring(null, 6, 8));
+        LOGGER.info(StringUtil.substring(TEXT, TEXT.length(), 8));
+        LOGGER.info(StringUtil.substring(TEXT, TEXT.length() - 1, 8));
+        LOGGER.info(StringUtil.substring(TEXT, 1, 0));
+        LOGGER.info(StringUtil.substring(TEXT, 0, 5));
         Assert.assertEquals(".f", StringUtil.substring(TEXT, 6, 2));
-        log.info(StringUtil.substring(TEXT, 6, 20));
+        LOGGER.info(StringUtil.substring(TEXT, 6, 20));
     }
 
     /**
@@ -218,14 +218,14 @@ public class StringUtilTest{
      */
     @Test
     public void substring3(){
-        log.info(StringUtil.substring(null, "in", 8));
-        log.info(StringUtil.substring(TEXT, null, 8));
-        log.info(StringUtil.substring(TEXT, "sin", 8));
-        log.info(StringUtil.substring(TEXT, "in", 0));
-        log.info(StringUtil.substring(TEXT, "in", 5));
-        // log.info(StringUtil.substring(text, "in", -2));
-        log.info(StringUtil.substring(TEXT, "in", 20));
-        log.info(StringUtil.substring(TEXT, "j", TEXT.length() - 1));
+        LOGGER.info(StringUtil.substring(null, "in", 8));
+        LOGGER.info(StringUtil.substring(TEXT, null, 8));
+        LOGGER.info(StringUtil.substring(TEXT, "sin", 8));
+        LOGGER.info(StringUtil.substring(TEXT, "in", 0));
+        LOGGER.info(StringUtil.substring(TEXT, "in", 5));
+        // LOGGER.info(StringUtil.substring(text, "in", -2));
+        LOGGER.info(StringUtil.substring(TEXT, "in", 20));
+        LOGGER.info(StringUtil.substring(TEXT, "j", TEXT.length() - 1));
     }
 
     /**
@@ -233,9 +233,9 @@ public class StringUtilTest{
      */
     @Test
     public void substring(){
-        log.info(StringUtil.substring(TEXT, "jinxin".length()));
+        LOGGER.info(StringUtil.substring(TEXT, "jinxin".length()));
         String text1 = "Index: src/main/java/com/jumbo/shop/web/command/PageCacheCommand.java";
-        log.info(StringUtil.substring(text1, "Index: ".length()));
+        LOGGER.info(StringUtil.substring(text1, "Index: ".length()));
     }
 
     /**
@@ -243,7 +243,7 @@ public class StringUtilTest{
      */
     @Test
     public void substring6(){
-        log.info(StringUtil.substring(TEXT, "jinxin.", 1));
+        LOGGER.info(StringUtil.substring(TEXT, "jinxin.", 1));
     }
 
     /**
@@ -268,7 +268,7 @@ public class StringUtilTest{
      */
     public void testA(){
         String a = "SH1265,SH5951,SH6766,SH7235,SH1265,SH5951,SH6766,SH7235";
-        log.info(a.replaceAll("([a-zA-Z]+[0-9]+)", "'$1'"));
+        LOGGER.info(a.replaceAll("([a-zA-Z]+[0-9]+)", "'$1'"));
     }
 
     /**
@@ -287,7 +287,7 @@ public class StringUtilTest{
                 stringBuilder.append(",");
             }
         }
-        log.info(stringBuilder.toString());
+        LOGGER.info(stringBuilder.toString());
     }
 
     /**
@@ -313,8 +313,8 @@ public class StringUtilTest{
         String str = "jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong";
         String delimiters = "h";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters, false, false);
-        if (log.isInfoEnabled()){
-            log.info(JsonUtil.format(tokenizeToStringArray));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(JsonUtil.format(tokenizeToStringArray));
         }
     }
 
@@ -331,8 +331,8 @@ public class StringUtilTest{
         str = sb.toString();
         String delimiters = ";, .";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
-        if (log.isInfoEnabled()){
-            log.info(JsonUtil.format(tokenizeToStringArray));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(JsonUtil.format(tokenizeToStringArray));
         }
         Date beginDate = new Date();
 
@@ -341,7 +341,7 @@ public class StringUtilTest{
         }
 
         Date endDate = new Date();
-        log.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
     }
 
     /**
@@ -358,8 +358,8 @@ public class StringUtilTest{
 
         String regexSpliter = "[;, \\.]";
         String[] tokenizeToStringArray = StringUtil.splitToStringArray(str, regexSpliter);
-        if (log.isInfoEnabled()){
-            log.info(JsonUtil.format(tokenizeToStringArray));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(JsonUtil.format(tokenizeToStringArray));
         }
 
         Date beginDate = new Date();
@@ -369,6 +369,6 @@ public class StringUtilTest{
         }
 
         Date endDate = new Date();
-        log.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
     }
 }

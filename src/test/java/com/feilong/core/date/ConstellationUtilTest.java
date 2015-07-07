@@ -28,9 +28,6 @@ import org.junit.runners.Parameterized.Parameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.ConstellationType;
-import com.feilong.core.date.ConstellationUtil;
-
 /**
  * 测试 星座.
  *
@@ -40,8 +37,8 @@ import com.feilong.core.date.ConstellationUtil;
 @RunWith(Parameterized.class)
 public class ConstellationUtilTest extends TestCase{
 
-    /** The Constant log. */
-    private static final Logger     log = LoggerFactory.getLogger(ConstellationUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger     LOGGER = LoggerFactory.getLogger(ConstellationUtilTest.class);
 
     /** The f expected. */
     private final ConstellationType fExpected;
@@ -115,7 +112,7 @@ public class ConstellationUtilTest extends TestCase{
     public void testGetConstellationType(){
         String testBirthday = "1984-07-25";
         ConstellationType constellationType = ConstellationUtil.getConstellationType(testBirthday);
-        log.info(constellationType.getChineseName());
+        LOGGER.info(constellationType.getChineseName());
     }
 
     /**

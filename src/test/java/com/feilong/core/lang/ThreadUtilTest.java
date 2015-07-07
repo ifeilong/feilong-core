@@ -27,8 +27,8 @@ import org.slf4j.LoggerFactory;
  */
 public class ThreadUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ThreadUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadUtilTest.class);
 
     /**
      * Test get method name.
@@ -36,7 +36,7 @@ public class ThreadUtilTest{
     @Test
     public void testGetMethodName(){
         Thread currentThread = Thread.currentThread();
-        log.info(ThreadUtil.getCurrentMethodName(currentThread));
+        LOGGER.info(ThreadUtil.getCurrentMethodName(currentThread));
     }
 
     /**
@@ -44,7 +44,7 @@ public class ThreadUtilTest{
      */
     @Test
     public void testGetMethodName1(){
-        log.info("1");
+        LOGGER.info("1");
         testGetMethodName2();
     }
 
@@ -53,7 +53,7 @@ public class ThreadUtilTest{
      */
     @Test
     public void testGetMethodName2(){
-        log.info("2");
+        LOGGER.info("2");
         testGetMethodName3();
     }
 
@@ -62,7 +62,7 @@ public class ThreadUtilTest{
      */
     @Test
     public void testGetMethodName3(){
-        log.info("3");
+        LOGGER.info("3");
         testGetMethodName();
     }
 }

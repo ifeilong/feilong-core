@@ -44,17 +44,17 @@ import com.feilong.test.User;
  */
 public class ObjectUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ObjectUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTest.class);
 
     /**
      * Name.
      */
     @Test
     public void testSize(){
-        //		 log.info("Size of Object: " + ObjectUtil.size(new Object()));
-        log.info("Size of Calendar: " + ObjectUtil.size(Calendar.getInstance()));
-        log.info("Size of HashMap: " + ObjectUtil.size(new HashMap<String, String>()));
+        //		 LOGGER.info("Size of Object: " + ObjectUtil.size(new Object()));
+        LOGGER.info("Size of Calendar: " + ObjectUtil.size(Calendar.getInstance()));
+        LOGGER.info("Size of HashMap: " + ObjectUtil.size(new HashMap<String, String>()));
     }
 
     /**
@@ -91,8 +91,8 @@ public class ObjectUtilTest{
         Long a = new Long(1L);
         Long b = new Long(1L);
 
-        log.info((a == b) + "");
-        log.info(a.equals(b) + "");
+        LOGGER.info((a == b) + "");
+        LOGGER.info(a.equals(b) + "");
 
         User user = new User(1L);
         List<User> list = new ArrayList<User>();
@@ -104,7 +104,7 @@ public class ObjectUtilTest{
         list.add(new User(new Long(1L)));
 
         for (User user2 : list){
-            log.info((user2.getId() == user.getId()) + "");
+            LOGGER.info((user2.getId() == user.getId()) + "");
         }
     }
 
@@ -115,12 +115,12 @@ public class ObjectUtilTest{
     public final void testToIterator(){
 
         // *************************逗号分隔的数组********************************
-        log.info(StringUtils.center("逗号分隔的数组", 60, "*"));
+        LOGGER.info(StringUtils.center("逗号分隔的数组", 60, "*"));
         Iterator<?> iterator = ObjectUtil.toIterator("1,2");
         printIterator(iterator);
 
         // ************************map*********************************
-        log.info(StringUtils.center("map", 60, "*"));
+        LOGGER.info(StringUtils.center("map", 60, "*"));
         Map<String, String> map = new HashMap<String, String>();
 
         map.put("a", "1");
@@ -130,12 +130,12 @@ public class ObjectUtilTest{
         printIterator(iterator);
 
         // ***************************array******************************
-        log.info(StringUtils.center("array", 60, "*"));
+        LOGGER.info(StringUtils.center("array", 60, "*"));
         Object[] array = { "5", 8 };
         iterator = ObjectUtil.toIterator(array);
         printIterator(iterator);
         // ***************************collection******************************
-        log.info(StringUtils.center("collection", 60, "*"));
+        LOGGER.info(StringUtils.center("collection", 60, "*"));
         Collection<String> collection = new ArrayList<String>();
         collection.add("aaaa");
         collection.add("nnnnn");
@@ -144,9 +144,9 @@ public class ObjectUtilTest{
         printIterator(iterator);
 
         // **********************enumeration***********************************
-        log.info(StringUtils.center("enumeration", 60, "*"));
+        LOGGER.info(StringUtils.center("enumeration", 60, "*"));
         Enumeration<Object> enumeration = new StringTokenizer("this is a test");
-        log.debug(JsonUtil.format(ObjectUtil.toIterator(enumeration)));
+        LOGGER.debug(JsonUtil.format(ObjectUtil.toIterator(enumeration)));
     }
 
     /**
@@ -158,7 +158,7 @@ public class ObjectUtilTest{
     private void printIterator(Iterator<?> iterator){
         while (iterator.hasNext()){
             Object object = iterator.next();
-            log.info(object.toString());
+            LOGGER.info(object.toString());
         }
     }
 
@@ -186,7 +186,7 @@ public class ObjectUtilTest{
      */
     @Test
     public final void testToT(){
-        log.info(ObjectUtil.toT(BigDecimal.ONE, Float.class) + "");
+        LOGGER.info(ObjectUtil.toT(BigDecimal.ONE, Float.class) + "");
     }
 
     /**

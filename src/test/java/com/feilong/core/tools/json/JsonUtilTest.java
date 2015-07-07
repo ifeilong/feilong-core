@@ -45,8 +45,8 @@ import com.feilong.test.UserInfo;
  */
 public class JsonUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(JsonUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilTest.class);
 
     /**
      * Name.
@@ -83,7 +83,7 @@ public class JsonUtilTest{
         User user = JsonUtil.toBean(json, User.class);
         user.setId(10L);
         json = JsonUtil.format(user);
-        log.info(json);
+        LOGGER.info(json);
     }
 
     /**
@@ -97,7 +97,7 @@ public class JsonUtilTest{
         classMap.put("userAddresseList", UserAddress.class);
 
         User user = JsonUtil.toBean(json, User.class, classMap);
-        log.info(JsonUtil.format(user));
+        LOGGER.info(JsonUtil.format(user));
     }
 
     /**
@@ -145,7 +145,7 @@ public class JsonUtilTest{
         // json= JsonUtil.format(user);
 
         json = JsonUtil.toJSON(user).toString(4, 4);
-        log.info(json);
+        LOGGER.info(json);
         return json;
     }
 
@@ -166,18 +166,18 @@ public class JsonUtilTest{
         list.add(user2);
 
         String[] array = { "id", "name" };
-        log.info(JsonUtil.formatWithIncludes(list, array));
+        LOGGER.info(JsonUtil.formatWithIncludes(list, array));
 
         User[] users = { user1, user2 };
-        log.info(JsonUtil.formatWithIncludes(users, array));
+        LOGGER.info(JsonUtil.formatWithIncludes(users, array));
 
         List<String> list3 = new ArrayList<String>();
 
         list3.add("2,5,8");
         list3.add("2,5,9");
 
-        log.info(JsonUtil.formatWithIncludes(list3));
-        log.info(JsonUtil.formatWithIncludes(user1));
+        LOGGER.info(JsonUtil.formatWithIncludes(list3));
+        LOGGER.info(JsonUtil.formatWithIncludes(user1));
 
     }
 
@@ -187,7 +187,7 @@ public class JsonUtilTest{
     @Test
     public void testJsonUtilTest1(){
         Object[][] objects = { { "nike shoe", "500", 1 }, { "nike shoe2", "5000", 1 } };
-        log.info(JsonUtil.formatWithIncludes(objects));
+        LOGGER.info(JsonUtil.formatWithIncludes(objects));
     }
 
     /**
@@ -200,8 +200,8 @@ public class JsonUtilTest{
         vector.add(2222);
         vector.add(3333);
         vector.add(55555);
-        log.info("vector:{}", JsonUtil.format(vector));
-        log.info("" + vector.get(0));
+        LOGGER.info("vector:{}", JsonUtil.format(vector));
+        LOGGER.info("" + vector.get(0));
     }
 
     /**
@@ -212,7 +212,7 @@ public class JsonUtilTest{
         Hashtable<String, Object> hashtable = new Hashtable<String, Object>();
         hashtable.put("a", "a");
         // hashtable.put("a", null);
-        log.info("hashtable:{}", JsonUtil.format(hashtable));
+        LOGGER.info("hashtable:{}", JsonUtil.format(hashtable));
     }
 
 }

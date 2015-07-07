@@ -40,8 +40,8 @@ import com.feilong.core.io.UncheckedIOException;
  */
 public class FileUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log       = LoggerFactory.getLogger(FileUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER       = LoggerFactory.getLogger(FileUtilTest.class);
 
     /** The file name1. */
     private String              fileName1 = "F:/pie2.png";
@@ -58,7 +58,7 @@ public class FileUtilTest{
             URL url = new URL("http://www.jinbaowang.cn/images//20110722/096718c3d1c9b4a1.jpg");
             URLConnection urlConnection = url.openConnection();
             int contentLength = urlConnection.getContentLength();
-            log.info(FileUtil.formatSize(contentLength));
+            LOGGER.info(FileUtil.formatSize(contentLength));
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
@@ -66,7 +66,7 @@ public class FileUtilTest{
             URL url = new URL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
             url.openConnection();
         }catch (MalformedURLException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
@@ -79,8 +79,8 @@ public class FileUtilTest{
     // @Ignore
     public void testGetP(){
         File file = new File(fString);
-        log.info(file.getAbsolutePath());
-        log.info(file.getParent());
+        LOGGER.info(file.getAbsolutePath());
+        LOGGER.info(file.getParent());
     }
 
     /**
@@ -104,7 +104,7 @@ public class FileUtilTest{
         File file = new File(localPath);
         File[] files = file.listFiles();
         for (int i = 0; i < files.length; i++){
-            log.info("File:" + files[i].getCanonicalPath());
+            LOGGER.info("File:" + files[i].getCanonicalPath());
         }
     }
 
@@ -190,10 +190,10 @@ public class FileUtilTest{
         File file = new File(testFile);
 
         long fileSizes = FileUtil.getFileSize(file);
-        log.info(fileSizes + "");
-        log.info(FileUtil.formatSize(fileSizes) + "");
-        log.info(FileUtil.formatSize(file.length()) + "");
-        log.info("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
+        LOGGER.info(fileSizes + "");
+        LOGGER.info(FileUtil.formatSize(fileSizes) + "");
+        LOGGER.info(FileUtil.formatSize(file.length()) + "");
+        LOGGER.info("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
     }
 
     /**
@@ -201,8 +201,8 @@ public class FileUtilTest{
      */
     @Test
     public final void formatFileSize(){
-        log.info(FileUtil.formatSize(8981528));
-        log.info(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
+        LOGGER.info(FileUtil.formatSize(8981528));
+        LOGGER.info(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
     }
 
     /**
@@ -221,8 +221,8 @@ public class FileUtilTest{
     @Ignore
     public void testGetFilePostfixName(){
         assertEquals("png", FileUtil.getFilePostfixName(fileName1));
-        log.info(fileName1.substring(fileName1.lastIndexOf(".")));
-        log.info(fileName1.substring(fileName1.lastIndexOf("\\") + 1));
+        LOGGER.info(fileName1.substring(fileName1.lastIndexOf(".")));
+        LOGGER.info(fileName1.substring(fileName1.lastIndexOf("\\") + 1));
     }
 
     /**
@@ -239,7 +239,7 @@ public class FileUtilTest{
      */
     @Test
     public void testGetFileName(){
-        log.info(FileUtil.getFileName(fileName1));
+        LOGGER.info(FileUtil.getFileName(fileName1));
     }
 
     /**
@@ -248,7 +248,7 @@ public class FileUtilTest{
     @Test
     public void hasPostfixName(){
         fileName1 = "a";
-        log.debug(FileUtil.hasPostfixName(fileName1) + "");
+        LOGGER.debug(FileUtil.hasPostfixName(fileName1) + "");
     }
 
     /**
@@ -258,6 +258,6 @@ public class FileUtilTest{
     @Test
     public void tstGetFilePostfixNameLowerCase(){
         fileName1 = "a.A";
-        log.debug(FileUtil.getFilePostfixNameLowerCase(fileName1) + "");
+        LOGGER.debug(FileUtil.getFilePostfixNameLowerCase(fileName1) + "");
     }
 }

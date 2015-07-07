@@ -32,8 +32,8 @@ import com.feilong.test.User;
  */
 public class ConstructorUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ConstructorUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConstructorUtilTest.class);
 
     /**
      * New instance.
@@ -43,9 +43,9 @@ public class ConstructorUtilTest{
      */
     @Test
     public final void newInstance() throws ClassNotFoundException{
-        log.info(JsonUtil.format(ConstructorUtil.newInstance("com.feilong.test.User")));
-        log.info(JsonUtil.format(ConstructorUtil.newInstance("com.feilong.test.User", 100L)));
-        log.info(JsonUtil.format(ConstructorUtil.newInstance(User.class, Long.parseLong("5"))));
-        log.info(JsonUtil.format(ConstructorUtil.newInstance(User.class, 5, 8)));
+        LOGGER.info(JsonUtil.format(ConstructorUtil.newInstance("com.feilong.test.User")));
+        LOGGER.info(JsonUtil.format(ConstructorUtil.newInstance("com.feilong.test.User", 100L)));
+        LOGGER.info(JsonUtil.format(ConstructorUtil.newInstance(User.class, Long.parseLong("5"))));
+        LOGGER.info(JsonUtil.format(ConstructorUtil.newInstance(User.class, 5, 8)));
     }
 }

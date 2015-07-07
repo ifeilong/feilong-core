@@ -43,8 +43,8 @@ import com.feilong.test.User;
  */
 public class ArrayUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ArrayUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArrayUtilTest.class);
 
     /**
      * TestArrayUtilTest.
@@ -52,7 +52,7 @@ public class ArrayUtilTest{
     @Test
     public void testArrayUtilTest(){
         String[] strs = new String[10];
-        log.debug("" + strs.length);
+        LOGGER.debug("" + strs.length);
     }
 
     /**
@@ -66,8 +66,8 @@ public class ArrayUtilTest{
                 "ppt-coreContent10.png",
                 "ppt-coreContent11.png",
                 "ppt-coreContent2.png" };
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(strs));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(strs));
         }
 
     }
@@ -93,20 +93,20 @@ public class ArrayUtilTest{
 
         Map<Integer, List<Integer>> group = ArrayUtil.group(array);
 
-        log.debug(JsonUtil.format(group));
+        LOGGER.debug(JsonUtil.format(group));
 
         Collection<List<Integer>> values = group.values();
-        log.debug(JsonUtil.format(values));
+        LOGGER.debug(JsonUtil.format(values));
 
         //****************************************************************
         String[] array1 = { "金鑫", "feilong", "金鑫", "基友团", "金鑫" };
 
         Map<String, List<String>> group1 = ArrayUtil.group(array1);
 
-        log.debug(JsonUtil.format(group1));
+        LOGGER.debug(JsonUtil.format(group1));
 
         Collection<List<String>> values1 = group1.values();
-        log.debug(JsonUtil.format(values1));
+        LOGGER.debug(JsonUtil.format(values1));
     }
 
     /**
@@ -131,10 +131,10 @@ public class ArrayUtilTest{
 
         Map<Integer, List<User>> group = ArrayUtil.group(users, "age");
 
-        log.debug(JsonUtil.format(group));
+        LOGGER.debug(JsonUtil.format(group));
 
         Collection<List<User>> values = group.values();
-        log.debug(JsonUtil.format(values));
+        LOGGER.debug(JsonUtil.format(values));
 
     }
 
@@ -143,11 +143,11 @@ public class ArrayUtilTest{
      */
     @Test
     public void testGetElement(){
-        if (log.isInfoEnabled()){
+        if (LOGGER.isInfoEnabled()){
             Object array = new String[] { "jinxin", "feilong", "1" };
             int index = 2;
             String element = ArrayUtil.getElement(array, index);
-            log.info("" + element);
+            LOGGER.info("" + element);
         }
     }
 
@@ -159,10 +159,10 @@ public class ArrayUtilTest{
         String[] aStrings = new String[2];
         aStrings[0] = "a";
         aStrings[1] = "b";
-        log.info(Arrays.toString(aStrings));
-        log.info(ArrayUtils.toString(aStrings));
+        LOGGER.info(Arrays.toString(aStrings));
+        LOGGER.info(ArrayUtils.toString(aStrings));
         String aString = "FACTORY_ID,SHOE_NAME,CHANNEL,PRODUCT_CODE,COLOR_CODE,PAYTYPE,FACTORY_CODE,TRACKING_NO_UPS,MH_ID,DEVICE,SUB_TOTAL_PRICE,TAX_PRICE,DELIVERY_PRICE,TOTAL_PRICE,PAY_DATE,REVENUE_DATE,RETURN_DATE,CANCEL_DATE,SHOP_NAME,CALCEL_CODE";
-        log.info(ListUtil.toString(Arrays.asList(aString.split(",")), true));
+        LOGGER.info(ListUtil.toString(Arrays.asList(aString.split(",")), true));
     }
 
     /**
@@ -173,24 +173,24 @@ public class ArrayUtilTest{
 
         String aString = "FACTORY_ID,SHOE_NAME,CHANNEL,PRODUCT_CODE,COLOR_CODE,PAYTYPE,FACTORY_CODE,TRACKING_NO_UPS,MH_ID,DEVICE,SUB_TOTAL_PRICE,TAX_PRICE,DELIVERY_PRICE,TOTAL_PRICE,PAY_DATE,REVENUE_DATE,RETURN_DATE,CANCEL_DATE,SHOP_NAME,CALCEL_CODE";
         List<String> asList = Arrays.asList(aString.split(","));
-        log.info(ListUtil.toString(asList, true));
+        LOGGER.info(ListUtil.toString(asList, true));
 
         String[] array = asList.toArray(new String[0]);
 
         for (String string : array){
-            log.info(string);
+            LOGGER.info(string);
         }
 
         User[] users = { new User(5L), new User(6L) };
         List<User> list = Arrays.asList(users);
         for (User user : list){
-            log.info(user.getId() + "");
+            LOGGER.info(user.getId() + "");
         }
 
         User[] usersarray = list.toArray(new User[0]);
 
         for (User user : usersarray){
-            log.info(user.getId() + "");
+            LOGGER.info(user.getId() + "");
         }
     }
 
@@ -201,9 +201,9 @@ public class ArrayUtilTest{
     public final void convertListToStringReplaceBrackets(){
         String[] array = new String[] { "1", "223" };
         //Use "Arrays.toString(array)" instead.
-        log.info(array.toString());
-        log.info(Arrays.toString(array));
-        log.info(StringUtils.join(array, ","));
+        LOGGER.info(array.toString());
+        LOGGER.info(Arrays.toString(array));
+        LOGGER.info(StringUtils.join(array, ","));
     }
 
     /**
@@ -215,17 +215,17 @@ public class ArrayUtilTest{
         Iterator<String> iterator = ArrayUtil.toIterator(array);
 
         while (iterator.hasNext()){
-            log.debug(iterator.next());
+            LOGGER.debug(iterator.next());
         }
 
         int[] arrays = { 1, 2 };
         Iterator<Integer> iterator1 = ArrayUtil.toIterator(arrays);
 
         //		while (iterator1.hasNext()){
-        //			log.debug("" + iterator1.next());
+        //			LOGGER.debug("" + iterator1.next());
         //		}
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(iterator1));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(iterator1));
         }
 
     }
@@ -246,7 +246,7 @@ public class ArrayUtilTest{
 
         while (iterator.hasNext()){
             User user = iterator.next();
-            log.debug("{}", user.getId());
+            LOGGER.debug("{}", user.getId());
         }
     }
 
@@ -263,7 +263,7 @@ public class ArrayUtilTest{
         User[] users = { user1, user2 };
 
         List<User> list = ArrayUtil.toList(users);
-        log.info(JsonUtil.format(list));
+        LOGGER.info(JsonUtil.format(list));
     }
 
     /**

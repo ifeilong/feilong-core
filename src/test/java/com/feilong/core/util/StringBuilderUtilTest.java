@@ -29,14 +29,14 @@ import com.feilong.core.util.StringBuilderUtil;
  */
 public class StringBuilderUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(StringBuilderUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(StringBuilderUtilTest.class);
 
     /**
      * Append.
      */
     @Test
     public void append(){
-        log.info(StringBuilderUtil.append("1", 2, 5.2f, 6.03d));
+        LOGGER.info(StringBuilderUtil.append("1", 2, 5.2f, 6.03d));
     }
 }

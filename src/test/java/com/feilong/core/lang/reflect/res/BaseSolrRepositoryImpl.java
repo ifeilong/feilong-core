@@ -34,8 +34,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public abstract class BaseSolrRepositoryImpl<T, PK extends Serializable> implements BaseSolrRepository<T, PK>{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(BaseSolrRepositoryImpl.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseSolrRepositoryImpl.class);
 
     /** 和solr schemal对应的对象类型. */
     protected Class<T>          modelClass;
@@ -49,8 +49,8 @@ public abstract class BaseSolrRepositoryImpl<T, PK extends Serializable> impleme
 
         //TypeUtils.getTypeArguments(this.getClass());
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(modelClass)));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(modelClass)));
         }
     }
 }

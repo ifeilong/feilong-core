@@ -50,8 +50,8 @@ import com.feilong.test.UserInfo;
  */
 public class CollectionsUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(CollectionsUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(CollectionsUtilTest.class);
 
     /**
      * Test remove.
@@ -69,8 +69,8 @@ public class CollectionsUtilTest{
         list.add("feilong4");
         list.add("feilong5");
 
-        log.info("list:{}", JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
-        log.info("list:{}", JsonUtil.format(list));
+        LOGGER.info("list:{}", JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
+        LOGGER.info("list:{}", JsonUtil.format(list));
     }
 
     /**
@@ -89,7 +89,7 @@ public class CollectionsUtilTest{
         list.add("feilong4");
         list.add("feilong5");
 
-        log.info("list:{}", JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
+        LOGGER.info("list:{}", JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
     }
 
     /**
@@ -103,10 +103,10 @@ public class CollectionsUtilTest{
         testList.add(new User("刘备", 25));
 
         Map<String, Integer> map = CollectionsUtil.groupCount(testList, null, "name");
-        log.info(JsonUtil.format(map));
+        LOGGER.info(JsonUtil.format(map));
 
         map = CollectionsUtil.groupCount(testList, new ObjectPropertyEqualsPredicate("name", "刘备"), "name");
-        log.info(JsonUtil.format(map));
+        LOGGER.info(JsonUtil.format(map));
     }
 
     /**
@@ -119,7 +119,7 @@ public class CollectionsUtilTest{
         testList.add("feilong");
 
         String[] array = CollectionsUtil.toArray(testList);
-        log.info(JsonUtil.format(array));
+        LOGGER.info(JsonUtil.format(array));
     }
 
     /**
@@ -135,7 +135,7 @@ public class CollectionsUtilTest{
 
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
 
-        log.info(JsonUtil.format(map));
+        LOGGER.info(JsonUtil.format(map));
     }
 
     /**
@@ -151,7 +151,7 @@ public class CollectionsUtilTest{
         List<Long> fieldValueCollection = CollectionsUtil.getPropertyValueList(testList, "id");
         fieldValueCollection.add(7L);
         fieldValueCollection.add(8L);
-        log.info(JsonUtil.format(fieldValueCollection));
+        LOGGER.info(JsonUtil.format(fieldValueCollection));
     }
 
     /**
@@ -168,7 +168,7 @@ public class CollectionsUtilTest{
         fieldValueCollection.add(7L);
         fieldValueCollection.add(8L);
         fieldValueCollection.add(5L);
-        log.info(JsonUtil.format(fieldValueCollection));
+        LOGGER.info(JsonUtil.format(fieldValueCollection));
     }
 
     /**
@@ -221,19 +221,19 @@ public class CollectionsUtilTest{
 
         //数组
         List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(testList, "loves[1]");
-        log.info(JsonUtil.format(fieldValueList1));
+        LOGGER.info(JsonUtil.format(fieldValueList1));
 
         //级联对象
         List<Integer> fieldValueList2 = CollectionsUtil.getPropertyValueList(testList, "userInfo.age");
-        log.info(JsonUtil.format(fieldValueList2));
+        LOGGER.info(JsonUtil.format(fieldValueList2));
 
         //Map
         List<Integer> attrList = CollectionsUtil.getPropertyValueList(testList, "attrMap(蜀国)");
-        log.info(JsonUtil.format(attrList));
+        LOGGER.info(JsonUtil.format(attrList));
 
         //集合
         List<String> addressList = CollectionsUtil.getPropertyValueList(testList, "userAddresseList[0]");
-        log.info(JsonUtil.format(addressList));
+        LOGGER.info(JsonUtil.format(addressList));
     }
 
     /**
@@ -250,8 +250,8 @@ public class CollectionsUtilTest{
         set.add("5");
         set.add("1");
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(set));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(set));
         }
 
     }
@@ -268,11 +268,11 @@ public class CollectionsUtilTest{
         stack.add("3");
         stack.add("4");
 
-        if (log.isDebugEnabled()){
-            log.debug("" + stack.firstElement());
-            log.debug("" + stack.peek());
-            log.debug("" + stack.pop());
-            log.debug(JsonUtil.format(stack));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("" + stack.firstElement());
+            LOGGER.debug("" + stack.peek());
+            LOGGER.debug("" + stack.pop());
+            LOGGER.debug(JsonUtil.format(stack));
         }
 
     }
@@ -291,9 +291,9 @@ public class CollectionsUtilTest{
         queue.add(5);
         queue.add(6);
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(queue));
-            log.debug("" + queue.peek());
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(queue));
+            LOGGER.debug("" + queue.peek());
 
         }
 
@@ -315,7 +315,7 @@ public class CollectionsUtilTest{
         map.put(41, 4);
         Enumeration<Object> enumeration = CollectionsUtil.toEnumeration(map.keySet());
         while (enumeration.hasMoreElements()){
-            log.info("" + enumeration.nextElement());
+            LOGGER.info("" + enumeration.nextElement());
         }
     }
 
@@ -343,11 +343,11 @@ public class CollectionsUtilTest{
         Collections.addAll(list, "a", "b");
         Enumeration<String> enumeration = CollectionsUtil.toEnumeration(list);
         List<String> list2 = CollectionsUtil.toList(enumeration);
-        log.info(JsonUtil.format(list2));
+        LOGGER.info(JsonUtil.format(list2));
 
         enumeration = null;
         list2 = CollectionsUtil.toList(enumeration);
-        log.info(JsonUtil.format(list2));
+        LOGGER.info(JsonUtil.format(list2));
     }
 
     /**
@@ -361,25 +361,25 @@ public class CollectionsUtilTest{
             Collection collection = CollectionUtils.typedCollection(new ArrayList(), clz);
             collection.add(clz.newInstance());
 
-            log.info(collection.size() + "");
+            LOGGER.info(collection.size() + "");
             for (Object object : collection){
                 User user = (User) object;
-                log.info(user.getName());
+                LOGGER.info(user.getName());
             }
 
-            log.info("hahahah");
+            LOGGER.info("hahahah");
 
             Collection<User> collection2 = collection;
-            log.info(collection2.size() + "");
+            LOGGER.info(collection2.size() + "");
             for (Object object : collection2){
                 User user = (User) object;
-                log.info(user.getName());
+                LOGGER.info(user.getName());
             }
 
         }catch (InstantiationException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }catch (IllegalAccessException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
     }
 

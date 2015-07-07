@@ -30,8 +30,8 @@ import org.slf4j.LoggerFactory;
  */
 public class RandomUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log                  = LoggerFactory.getLogger(RandomUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER                  = LoggerFactory.getLogger(RandomUtilTest.class);
 
     /** The Constant NUMBERS. */
     public static final String  NUMBERS              = "0123456789";
@@ -44,7 +44,7 @@ public class RandomUtilTest{
      */
     @Test
     public final void testCreateRandom(){
-        log.info(RandomUtil.createRandom(8) + "");
+        LOGGER.info(RandomUtil.createRandom(8) + "");
     }
 
     /**
@@ -53,7 +53,7 @@ public class RandomUtilTest{
     @Test
     public final void createRandomWithLength(){
         for (int i = 0, j = 100; i < j; ++i){
-            log.info(RandomUtil.createRandomWithLength(2) + "");
+            LOGGER.info(RandomUtil.createRandomWithLength(2) + "");
         }
     }
 
@@ -64,7 +64,7 @@ public class RandomUtilTest{
     public final void createRandomWithLength2(){
         for (int i = 0, j = 100; i < j; ++i){
             Random rand = new Random();
-            log.info("" + rand.nextDouble());
+            LOGGER.info("" + rand.nextDouble());
         }
     }
 
@@ -73,8 +73,8 @@ public class RandomUtilTest{
      */
     @Test
     public final void testgetRandomFromString(){
-        log.info(RandomUtil.createRandomFromString(NUMBERSANDALLLETTERS, 5));
-        log.info(RandomUtil.createRandomFromString(NUMBERS, 200));
+        LOGGER.info(RandomUtil.createRandomFromString(NUMBERSANDALLLETTERS, 5));
+        LOGGER.info(RandomUtil.createRandomFromString(NUMBERS, 200));
     }
 
     /**
@@ -82,7 +82,7 @@ public class RandomUtilTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public final void testgetRandomFromString1(){
-        log.info(RandomUtil.createRandomFromString(NUMBERS, 0));
+        LOGGER.info(RandomUtil.createRandomFromString(NUMBERS, 0));
     }
 
     /**
@@ -90,7 +90,7 @@ public class RandomUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public final void testgetRandomFromString2(){
-        log.info(RandomUtil.createRandomFromString("", 5));
+        LOGGER.info(RandomUtil.createRandomFromString("", 5));
     }
 
     /**
@@ -98,7 +98,7 @@ public class RandomUtilTest{
      */
     @Test
     public final void createRandomFromString(){
-        log.info(RandomUtil.createRandomFromString(NUMBERS, 8, 20));
+        LOGGER.info(RandomUtil.createRandomFromString(NUMBERS, 8, 20));
     }
 
     /**
@@ -106,6 +106,6 @@ public class RandomUtilTest{
      */
     @Test
     public final void createRandom(){
-        log.info("" + RandomUtil.createRandom(10, 20));
+        LOGGER.info("" + RandomUtil.createRandom(10, 20));
     }
 }

@@ -33,8 +33,8 @@ import com.feilong.core.text.DateFormatUtil;
  */
 public class DateFormatUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(DateFormatUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateFormatUtilTest.class);
 
     /**
      * Format.
@@ -42,12 +42,12 @@ public class DateFormatUtilTest{
     @Test
     public void format(){
         Date now = new Date();
-        log.info(now.toString());
+        LOGGER.info(now.toString());
         String pattern = DatePattern.COMMON_DATE;
         pattern = "EEE MMM dd HH:mm:ss zzz yyyy";
         String nowString = DateFormatUtil.format(now, pattern, Locale.ENGLISH);
-        log.info(nowString);
-        log.info(now.toString().equals(nowString) + "");
+        LOGGER.info(nowString);
+        LOGGER.info(now.toString().equals(nowString) + "");
     }
 
     /**
@@ -56,8 +56,8 @@ public class DateFormatUtilTest{
     @Test
     public void parse(){
         Date now = new Date();
-        log.info(now.toString());
+        LOGGER.info(now.toString());
         Date now1 = DateFormatUtil.parse(now.toString(), "EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-        log.info(now1.toString());
+        LOGGER.info(now1.toString());
     }
 }

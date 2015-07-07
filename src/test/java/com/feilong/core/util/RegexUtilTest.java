@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
  */
 public class RegexUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(RegexUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegexUtilTest.class);
 
     /**
      * Group.
@@ -39,8 +39,8 @@ public class RegexUtilTest{
     public final void group(){
         String regexPattern = "(.*?)@(.*?)";
         String email = "venusdrogon@163.com";
-        log.info(RegexUtil.group(regexPattern, email, 1) + "");
-        log.info(RegexUtil.group(regexPattern, email, 2) + "");
+        LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");
+        LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");
     }
 
     /**
@@ -52,7 +52,7 @@ public class RegexUtilTest{
         //		regexPattern = "@Table[(]*\"(.*?)*[)]";
         //		regexPattern = "@Table(.*?)";
         String email = "@Table(name = \"T_MEM_MEMBER_ADDRESS\")";
-        log.info(RegexUtil.group(regexPatternTable, email) + "");
+        LOGGER.info(RegexUtil.group(regexPatternTable, email) + "");
     }
 
     /**

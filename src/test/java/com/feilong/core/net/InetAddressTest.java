@@ -29,8 +29,8 @@ import com.feilong.core.net.InetAddressUtil;
  */
 public class InetAddressTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(InetAddressTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(InetAddressTest.class);
 
     /**
      * {@link com.feilong.core.net.InetAddressUtil#domainName2IpAddress(java.lang.String)} 的测试方法。
@@ -40,7 +40,7 @@ public class InetAddressTest{
         String domainName = "www.e-lining.com";
         domainName = "www.baidu.com";
         domainName = "www.nikestore.com.cn";
-        log.info("ip:" + InetAddressUtil.domainName2IpAddress(domainName));
-        log.info("ip:" + InetAddressUtil.domainName2IpAddress("127.0.0.1"));
+        LOGGER.info("ip:" + InetAddressUtil.domainName2IpAddress(domainName));
+        LOGGER.info("ip:" + InetAddressUtil.domainName2IpAddress("127.0.0.1"));
     }
 }

@@ -37,8 +37,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public class MessageFormatUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(MessageFormatUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageFormatUtilTest.class);
 
     /**
      * Format.
@@ -48,9 +48,9 @@ public class MessageFormatUtilTest{
      */
     @Test
     public final void format() throws ParseException{
-        log.info(MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin"));
-        log.info(MessageFormatUtil.format("name=张三{0,number}a{1}", 5, "xin"));
-        log.info(MessageFormatUtil.format("name=张三{0,date}a{1}", 15, "xin"));
+        LOGGER.info(MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin"));
+        LOGGER.info(MessageFormatUtil.format("name=张三{0,number}a{1}", 5, "xin"));
+        LOGGER.info(MessageFormatUtil.format("name=张三{0,date}a{1}", 15, "xin"));
     }
 
     /**
@@ -65,9 +65,9 @@ public class MessageFormatUtilTest{
         String forParsing = "x, y, z";
         Object[] objs = mf.parse(forParsing, new ParsePosition(0));
         // result now equals {new String("z")}
-        log.info(Arrays.toString(objs));
+        LOGGER.info(Arrays.toString(objs));
 
-        log.info("objs:{}", JsonUtil.format(objs));
+        LOGGER.info("objs:{}", JsonUtil.format(objs));
 
         int planet = 7;
         String event = "a disturbance in the Force";
@@ -76,7 +76,7 @@ public class MessageFormatUtilTest{
                         planet,
                         new Date(),
                         event);
-        log.info(result);
+        LOGGER.info(result);
 
         MessageFormat form = new MessageFormat("The disk \"{1}\" contains {0}.");
         double[] filelimits = { 0, 1, 2 };
@@ -87,6 +87,6 @@ public class MessageFormatUtilTest{
         int fileCount = 0;
         String diskName = "MyDisk";
         Object[] testArgs = { new Long(fileCount), diskName };
-        log.info(form.format(testArgs));
+        LOGGER.info(form.format(testArgs));
     }
 }

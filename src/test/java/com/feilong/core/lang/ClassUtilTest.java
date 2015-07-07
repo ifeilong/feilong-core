@@ -32,17 +32,17 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public class ClassUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ClassUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtilTest.class);
 
     /**
      * Test to class.
      */
     @Test
     public void testToClass(){
-        if (log.isInfoEnabled()){
-            log.info("" + JsonUtil.format(ClassUtil.toClass("a", "a")));
-            log.info("" + JsonUtil.format(ClassUtil.toClass(1, true)));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("" + JsonUtil.format(ClassUtil.toClass("a", "a")));
+            LOGGER.info("" + JsonUtil.format(ClassUtil.toClass(1, true)));
         }
     }
 
@@ -51,20 +51,20 @@ public class ClassUtilTest{
      */
     @Test
     public void testIsInterface(){
-        if (log.isInfoEnabled()){
-            log.info("" + ClassUtil.isInterface(this.getClass()));
-            log.info("" + ClassUtil.isInterface(DatePattern.class));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("" + ClassUtil.isInterface(this.getClass()));
+            LOGGER.info("" + ClassUtil.isInterface(DatePattern.class));
         }
     }
 
     /**
-     * Test get class info map for log.
+     * Test get class info map for LOGGER.
      */
     @Test
     public void testGetClassInfoMapForLog(){
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(this.getClass())));
-            log.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(DatePattern.class)));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(this.getClass())));
+            LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(DatePattern.class)));
         }
     }
 }

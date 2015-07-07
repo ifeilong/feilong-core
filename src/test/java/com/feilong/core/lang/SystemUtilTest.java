@@ -37,8 +37,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public class SystemUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(SystemUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SystemUtilTest.class);
 
     /**
      * Nano time.
@@ -46,10 +46,10 @@ public class SystemUtilTest{
     @Test
     public void nanoTime(){
         //返回最准确的可用系统计时器的当前值，以毫微秒为单位。
-        log.info("" + System.nanoTime());
+        LOGGER.info("" + System.nanoTime());
 
         //返回以毫秒为单位的当前时间。注意，当返回值的时间单位是毫秒时，值的粒度取决于底层操作系统，并且粒度可能更大。例如，许多操作系统以几十毫秒为单位测量时间。 
-        log.info("" + System.currentTimeMillis());
+        LOGGER.info("" + System.currentTimeMillis());
 
     }
 
@@ -59,7 +59,7 @@ public class SystemUtilTest{
      */
     @Test
     public void testGetProperty(){
-        log.info(System.getProperty("path"));
+        LOGGER.info(System.getProperty("path"));
 
     }
 
@@ -73,19 +73,19 @@ public class SystemUtilTest{
         Object[] key = map.keySet().toArray();
         Arrays.sort(key);
         for (int i = 0; i < key.length; i++){
-            log.info(key[i] + "======>" + map.get(key[i]));
+            LOGGER.info(key[i] + "======>" + map.get(key[i]));
         }
     }
 
     /**
-     * Gets the env map for log.
+     * Gets the env map for LOGGER.
      * 
      */
     @Test
     public void testGetEnvMapForLog(){
         Map<String, String> envMapForLog = SystemUtil.getEnvMapForLog();
-        if (log.isInfoEnabled()){
-            log.info(JsonUtil.format(envMapForLog));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(JsonUtil.format(envMapForLog));
         }
     }
 
@@ -95,11 +95,11 @@ public class SystemUtilTest{
     @Test
     public void path(){
         String path = System.getenv("Path");
-        // log.info(path);
+        // LOGGER.info(path);
         String[] strings = path.split(";");
         Arrays.sort(strings);
         for (String p : strings){
-            log.info(p);
+            LOGGER.info(p);
         }
     }
 
@@ -108,7 +108,7 @@ public class SystemUtilTest{
      */
     @Test
     public void currentTimeMillis(){
-        log.info("" + System.currentTimeMillis());
+        LOGGER.info("" + System.currentTimeMillis());
     }
 
     /**
@@ -123,7 +123,7 @@ public class SystemUtilTest{
         Object[] key = properties.keySet().toArray();
         Arrays.sort(key);
         for (int i = 0; i < key.length; i++){
-            log.info(key[i] + "======>" + properties.get(key[i]));
+            LOGGER.info(key[i] + "======>" + properties.get(key[i]));
         }
         // OutputStream os = IOUtil.getFileOutputStream("E:/1.xml");
         // try{
@@ -136,14 +136,14 @@ public class SystemUtilTest{
     }
 
     /**
-     * Gets the properties map for log.
+     * Gets the properties map for LOGGER.
      * 
      */
     @Test
     public void testGetPropertiesMapForLog(){
         Map<String, String> propertiesMapForLog = SystemUtil.getPropertiesMapForLog();
-        if (log.isInfoEnabled()){
-            log.info(JsonUtil.format(propertiesMapForLog));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(JsonUtil.format(propertiesMapForLog));
         }
     }
 
@@ -161,13 +161,13 @@ public class SystemUtilTest{
         while (iterator.hasNext()){
             Object key = iterator.next();
             Object obj = map.get(key);
-            log.info("" + obj);
+            LOGGER.info("" + obj);
         }
-        log.info("---------------------------");
+        LOGGER.info("---------------------------");
         Object[] key = map.keySet().toArray();
         Arrays.sort(key);
         for (int i = 0; i < key.length; i++){
-            log.info(map.get(key[i]));
+            LOGGER.info(map.get(key[i]));
         }
     }
 }

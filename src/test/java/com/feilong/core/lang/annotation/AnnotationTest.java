@@ -32,8 +32,8 @@ import org.slf4j.LoggerFactory;
 @MyAnnotation(name = "feilong",sex = 0,loveStrings = { "胡伟立", "三国" })
 public class AnnotationTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(AnnotationTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationTest.class);
 
     /**
      * Feilong.
@@ -56,18 +56,18 @@ public class AnnotationTest{
      */
     @Test
     public void testAnnotationTest(){
-        log.info("" + AnnotationTest.class.isAnnotationPresent(MyAnnotation.class));
+        LOGGER.info("" + AnnotationTest.class.isAnnotationPresent(MyAnnotation.class));
 
         MyAnnotation myAnnotation = AnnotationTest.class.getAnnotation(MyAnnotation.class);
-        log.info(myAnnotation.name());
+        LOGGER.info(myAnnotation.name());
 
         // *************************************************************
         Method[] methods = AnnotationTest.class.getDeclaredMethods();
         for (Method method : methods){
             if (method.isAnnotationPresent(MyAnnotation.class)){
-                log.info("[Test." + method.getName() + "].annotation:");
+                LOGGER.info("[Test." + method.getName() + "].annotation:");
                 MyAnnotation fieldAnnotation = method.getAnnotation(MyAnnotation.class);
-                log.info(ArrayUtils.toString(fieldAnnotation.loveStrings()));
+                LOGGER.info(ArrayUtils.toString(fieldAnnotation.loveStrings()));
             }
         }
     }
