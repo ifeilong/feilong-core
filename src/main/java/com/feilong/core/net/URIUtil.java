@@ -83,8 +83,8 @@ import com.feilong.core.util.Validator;
  */
 public final class URIUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(URIUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(URIUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private URIUtil(){
@@ -118,7 +118,7 @@ public final class URIUtil{
             throw new NullPointerException("directoryName can't be null/empty!");
         }
 
-        log.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
+        LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
         URL url = new URL(urlString);
         InputStream inputStream = url.openStream();
@@ -128,7 +128,7 @@ public final class URIUtil{
 
         IOWriteUtil.write(inputStream, directoryName, fileName);
 
-        log.info("end download,url:[{}],directoryName:[{}]", urlString, directoryName);
+        LOGGER.info("end download,url:[{}],directoryName:[{}]", urlString, directoryName);
     }
 
     /**
@@ -161,7 +161,7 @@ public final class URIUtil{
             URI uri = URI.create(encodeUrl);
             return uri;
         }catch (Exception e){
-            log.error("Exception:", e);
+            LOGGER.error("Exception:", e);
             throw new URIParseException(e);
         }
     }
@@ -199,7 +199,7 @@ public final class URIUtil{
             throw new NullPointerException("the charsetType is null or empty!");
         }
 
-        log.debug("in url:[{}],charsetType:{}", url, charsetType);
+        LOGGER.debug("in url:[{}],charsetType:{}", url, charsetType);
 
         // 暂不处理 这种路径报错的情况
         // cmens/t-b-f-a-c-s-f-p400-600,0-200,200-400,600-up-gCold Gear-eBase Layer-i1-o.htm
@@ -213,8 +213,8 @@ public final class URIUtil{
             Map<String, String[]> map = parseQueryToArrayMap(query, charsetType);
             String encodeUrl = getEncodedUrlByArrayMap(before, map, charsetType);
 
-            if (log.isDebugEnabled()){
-                log.debug("after url:{}", encodeUrl);
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("after url:{}", encodeUrl);
             }
             return encodeUrl;
         }else{
@@ -244,7 +244,7 @@ public final class URIUtil{
             URI uri = new URI(path);
             return uri;
         }catch (URISyntaxException e){
-            log.error(Slf4jUtil.formatMessage("path:[{}]", path), e);
+            LOGGER.error(Slf4jUtil.formatMessage("path:[{}]", path), e);
             throw new URIParseException(e);
         }
     }
@@ -386,7 +386,7 @@ public final class URIUtil{
             // **************************************************************
 
             if (Validator.isNullOrEmpty(paramValues)){
-                log.warn("the param key:[{}] value is null", key);
+                LOGGER.warn("the param key:[{}] value is null", key);
                 sb.append(key);
                 sb.append("=");
                 sb.append("");
@@ -597,7 +597,7 @@ public final class URIUtil{
             URL unionUrl = new URL(context, spec);
             return unionUrl.toString();
         }catch (MalformedURLException e){
-            log.error("MalformedURLException:", e);
+            LOGGER.error("MalformedURLException:", e);
             throw new URIParseException(e);
         }
     }
@@ -626,7 +626,7 @@ public final class URIUtil{
             // file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
             return file.toURI().toURL();
         }catch (MalformedURLException e){
-            log.error("MalformedURLException:", e);
+            LOGGER.error("MalformedURLException:", e);
             throw new URIParseException(e);
         }
     }
@@ -654,7 +654,7 @@ public final class URIUtil{
         try{
             return new String(str.trim().getBytes(CharsetType.ISO_8859_1), bianma);
         }catch (UnsupportedEncodingException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
         return "";
     }
@@ -692,7 +692,7 @@ public final class URIUtil{
         try{
             return URLEncoder.encode(value, charsetType);
         }catch (UnsupportedEncodingException e){
-            log.error("UnsupportedEncodingException:", e);
+            LOGGER.error("UnsupportedEncodingException:", e);
             throw new URIParseException(e);
         }
     }
@@ -726,7 +726,7 @@ public final class URIUtil{
         try{
             return URLDecoder.decode(value, charsetType);
         }catch (UnsupportedEncodingException e){
-            log.error("UnsupportedEncodingException:", e);
+            LOGGER.error("UnsupportedEncodingException:", e);
             throw new URIParseException(e);
         }
     }

@@ -36,8 +36,8 @@ import com.feilong.core.util.Validator;
  */
 public final class ParamUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ParamUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ParamUtil(){
@@ -94,8 +94,8 @@ public final class ParamUtil{
         }
 
         String naturalOrderingString = sb.toString();
-        if (log.isDebugEnabled()){
-            log.debug(naturalOrderingString);
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(naturalOrderingString);
         }
         return naturalOrderingString;
     }

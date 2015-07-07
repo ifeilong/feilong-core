@@ -96,8 +96,8 @@ import com.feilong.core.util.Validator;
  */
 public final class URLConnectionUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(URLConnectionUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(URLConnectionUtil.class);
 
     //********************************************************************************************
     /** Don't let anyone instantiate this class. */
@@ -324,7 +324,7 @@ public final class URLConnectionUtil{
             httpURLConnectionParam = new HttpURLConnectionParam();
         }
 
-        log.debug("httpRequest:[{}],httpURLConnectionParam:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(httpURLConnectionParam));
+        LOGGER.debug("httpRequest:[{}],httpURLConnectionParam:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(httpURLConnectionParam));
 
         URL url = new URL(httpRequest.getUri());
 
@@ -334,7 +334,7 @@ public final class URLConnectionUtil{
         // 此处的urlConnection对象实际上是根据URL的请求协议(此处是http)生成的URLConnection类的子类HttpURLConnection,
         // 故此处最好将其转化 为HttpURLConnection类型的对象,以便用到 HttpURLConnection更多的API.
         if (Validator.isNotNullOrEmpty(proxy)){
-            log.debug("use proxy:{}", proxy.toString());
+            LOGGER.debug("use proxy:{}", proxy.toString());
             httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
         }else{
             // 每次调用此 URL 的协议处理程序的 openConnection 方法都打开一个新的连接.

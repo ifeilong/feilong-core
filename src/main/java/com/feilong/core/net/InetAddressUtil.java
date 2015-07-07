@@ -36,8 +36,8 @@ import com.feilong.core.util.Validator;
  */
 public final class InetAddressUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(InetAddressUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(InetAddressUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private InetAddressUtil(){
@@ -74,7 +74,7 @@ public final class InetAddressUtil{
             // 如果有安全管理器，则使用本地主机名和 -1 作为参数来调用其 checkConnect 方法，以查看是否允许该操作.如果不允许该操作，则返回表示回送地址的 InetAddress
             inetAddress = InetAddress.getLocalHost();
         }catch (UnknownHostException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
         return inetAddress;
     }
@@ -100,7 +100,7 @@ public final class InetAddressUtil{
             InetAddress inetAddress = InetAddress.getByName(host);
             return inetAddress;
         }catch (UnknownHostException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
         return null;
     }
@@ -177,7 +177,7 @@ public final class InetAddressUtil{
             // timeout - 调用中止前的时间（以毫秒为单位）
             object.put("isReachable(1000)", inetAddress.isReachable(1000));
         }catch (IOException e){
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
 
         return object;
