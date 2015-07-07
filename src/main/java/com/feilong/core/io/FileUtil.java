@@ -691,7 +691,7 @@ public final class FileUtil{
      * @return 上传的文件是否是常用图片格式
      */
     public static final boolean isCommonImage(String fileName){
-        return isInAppointTypes(fileName, IOConstants.COMMON_IMAGES);
+        return isInAppointTypes(fileName, COMMON_IMAGES);
     }
 
     /**
@@ -844,8 +844,8 @@ public final class FileUtil{
      * @see <a href="http://support.microsoft.com/kb/177506/zh-cn">错误消息： 文件名是无效的或不能包含任何以下字符</a>
      * @since 1.0.7
      */
-    private static final String[][] MICROSOFT_PC = { //
-                                                 //			{ "\\", "" }, // \
+    private static final String[][] MICROSOFT_PC  = { //
+                                                  //			{ "\\", "" }, // \
             //	{ "/", "" }, // /
             { "\"", "" }, // "
             { ":", "" }, // :
@@ -854,5 +854,13 @@ public final class FileUtil{
             { "<", "" }, // <
             { ">", "" }, // >
             { "|", "" }, // |
-                                                 };
+                                                  };
+
+    /**
+     * 常用图片格式.
+     * 
+     * @deprecated 表述不清晰,将会重构
+     */
+    @Deprecated
+    private static final String[]   COMMON_IMAGES = { "gif", "bmp", "jpg", "png" };
 }

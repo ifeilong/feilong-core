@@ -116,6 +116,13 @@ public final class LunarDateUtil{
      */
     private static final String[] CHINSES_NUMBERS  = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
 
+    /** Don't let anyone instantiate this class. */
+    private LunarDateUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
     /**
      * 农历转成阳历The lunar calendar is turned into the Solar calendar.
      * 
@@ -318,10 +325,4 @@ public final class LunarDateUtil{
         return iOffsetDays;
     }
 
-    /** Don't let anyone instantiate this class. */
-    private LunarDateUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 }

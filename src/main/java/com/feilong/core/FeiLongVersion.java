@@ -27,6 +27,13 @@ package com.feilong.core;
  */
 public class FeiLongVersion{
 
+    /** Don't let anyone instantiate this class. */
+    private FeiLongVersion(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
     /**
      * Return the full version feilong of the present feilong codebase, or <code>null</code> if it cannot be determined.
      * 
@@ -38,10 +45,4 @@ public class FeiLongVersion{
         return pkg != null ? pkg.getImplementationVersion() : null;
     }
 
-    /** Don't let anyone instantiate this class. */
-    private FeiLongVersion(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
 }
