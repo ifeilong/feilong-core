@@ -60,6 +60,10 @@
 		</contributor>
 	</contributors>
 
+	<properties>
+		<version.jackson2>2.5.4</version.jackson2>
+	</properties>
+
 	<dependencies>
 		<!-- slf4j-log4j12 -->
 		<dependency>
@@ -156,6 +160,23 @@
 					<groupId>commons-lang</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${version.jackson2}</version>
+		</dependency>
+		<!-- -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${version.jackson2}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${version.jackson2}</version>
 		</dependency>
 
 		<!-- java.lang.NoClassDefFoundError: nu/xom/Serializer -->

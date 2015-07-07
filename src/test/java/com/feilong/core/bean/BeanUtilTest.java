@@ -42,7 +42,7 @@ import com.feilong.core.bean.command.SalesOrder;
 import com.feilong.core.bean.command.SalesOrderDto;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
-import com.feilong.core.tools.json.JsonUtil;
+import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 
 /**

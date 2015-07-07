@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.json;
+package com.feilong.core.tools.jsonlib;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -26,50 +25,44 @@ import java.util.Vector;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.tools.BaseJsonTest;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
-import com.feilong.test.UserInfo;
 
 /**
  * The Class JsonlibTest.
  * 
  * @author feilong
  * @version 1.0.7 2014-6-25 15:31:11
+ * @deprecated
  */
-public class JsonUtilTest{
+@Deprecated
+public class JsonUtilTest extends BaseJsonTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilTest.class);
 
     /**
      * Name.
-     * 
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     * @throws InvocationTargetException
-     *             the invocation target exception
-     * @throws NoSuchMethodException
-     *             the no such method exception
      */
     @Test
-    public void name() throws Exception{
-        String json = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
+    public void name(){
         JSONObject jsonObject = JSONObject.fromObject(json);
         Object bean = JSONObject.toBean(jsonObject);
 
-        Assert.assertEquals(jsonObject.get("name"), PropertyUtils.getProperty(bean, "name"));
-        Assert.assertEquals(jsonObject.get("bool"), PropertyUtils.getProperty(bean, "bool"));
-        Assert.assertEquals(jsonObject.get("int"), PropertyUtils.getProperty(bean, "int"));
-        Assert.assertEquals(jsonObject.get("double"), PropertyUtils.getProperty(bean, "double"));
-        Assert.assertEquals(jsonObject.get("func"), PropertyUtils.getProperty(bean, "func"));
+        Assert.assertEquals(jsonObject.get("name"), PropertyUtil.getProperty(bean, "name"));
+        Assert.assertEquals(jsonObject.get("bool"), PropertyUtil.getProperty(bean, "bool"));
+        Assert.assertEquals(jsonObject.get("int"), PropertyUtil.getProperty(bean, "int"));
+        Assert.assertEquals(jsonObject.get("double"), PropertyUtil.getProperty(bean, "double"));
+        Assert.assertEquals(jsonObject.get("func"), PropertyUtil.getProperty(bean, "func"));
         List<?> expected = JSONArray.toList(jsonObject.getJSONArray("array"));
-        Assert.assertEquals(expected, PropertyUtils.getProperty(bean, "array"));
+        Assert.assertEquals(expected, PropertyUtil.getProperty(bean, "array"));
     }
 
     /**
@@ -77,7 +70,8 @@ public class JsonUtilTest{
      */
     @Test
     public void format(){
-        String json = getJsonString();
+        String json = JsonUtil.format(getUserForJsonTest());
+        LOGGER.info(json);
 
         User user = JsonUtil.toBean(json, User.class);
         user.setId(10L);
@@ -90,7 +84,8 @@ public class JsonUtilTest{
      */
     @Test
     public void toBean(){
-        String json = getJsonString();
+        String json = JsonUtil.format(getUserForJsonTest());
+        LOGGER.info(json);
 
         Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
         classMap.put("userAddresseList", UserAddress.class);
@@ -104,48 +99,8 @@ public class JsonUtilTest{
      */
     @Test
     public void testJsonString(){
-        getJsonString();
-    }
-
-    /**
-     * Gets the json string.
-     * 
-     * @return the json string
-     */
-    private String getJsonString(){
-        User user = new User();
-
-        user.setId(8L);
-        user.setName("feilong");
-
-        String[] loves = { "桔子", "香蕉" };
-        user.setLoves(loves);
-
-        UserInfo userInfo = new UserInfo();
-
-        userInfo.setAge(10);
-        user.setUserInfo(userInfo);
-
-        UserAddress userAddress1 = new UserAddress();
-        userAddress1.setAddress("上海市闸北区万荣路1188号H座109-118室");
-
-        UserAddress userAddress2 = new UserAddress();
-        userAddress2.setAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
-
-        UserAddress[] userAddresses = { userAddress1, userAddress2 };
-        user.setUserAddresses(userAddresses);
-
-        List<UserAddress> userAddresseList = new ArrayList<UserAddress>();
-        userAddresseList.add(userAddress1);
-        userAddresseList.add(userAddress2);
-        user.setUserAddresseList(userAddresseList);
-
-        String json;
-        // json= JsonUtil.format(user);
-
-        json = JsonUtil.toJSON(user).toString(4, 4);
+        String json = JsonUtil.format(getUserForJsonTest());
         LOGGER.info(json);
-        return json;
     }
 
     /**
@@ -177,7 +132,6 @@ public class JsonUtilTest{
 
         LOGGER.info(JsonUtil.formatWithIncludes(list3));
         LOGGER.info(JsonUtil.formatWithIncludes(user1));
-
     }
 
     /**
@@ -213,5 +167,4 @@ public class JsonUtilTest{
         // hashtable.put("a", null);
         LOGGER.info("hashtable:{}", JsonUtil.format(hashtable));
     }
-
 }

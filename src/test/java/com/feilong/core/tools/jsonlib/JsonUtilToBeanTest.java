@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.json;
+package com.feilong.core.tools.jsonlib;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.HttpMethodType;
+import com.feilong.core.tools.BaseJsonTest;
 import com.feilong.test.MyBean;
 import com.feilong.test.Order;
 import com.feilong.test.Person;
@@ -44,8 +45,10 @@ import com.feilong.test.UserInfo;
  * 
  * @author feilong
  * @version 1.0.7 2014-6-25 15:31:51
+ * @deprecated
  */
-public class JsonUtilToBeanTest{
+@Deprecated
+public class JsonUtilToBeanTest extends BaseJsonTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilToBeanTest.class);
