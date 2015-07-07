@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.feilong.core.util.ArrayUtil;
  * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值，判断是否 {@link ArrayUtil#isContain(Object[], Object)} 在
  * <code>values</code>数组中.
  *
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.2.0 2015年4月27日 下午3:12:32
  * @since 1.2.0
  * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)

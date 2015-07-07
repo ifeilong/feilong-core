@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import com.feilong.test.User;
 
 /**
  *
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.2.1 2015年6月26日 下午8:28:21
  * @since 1.2.1
  */

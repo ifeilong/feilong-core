@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import org.apache.commons.lang3.SystemUtils;
 /**
  * {@link java.lang.StringBuilder}工具类,可以用来快速的拼接字符串.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 2012-7-11 下午5:05:56
  * @since 1.0.0
  */

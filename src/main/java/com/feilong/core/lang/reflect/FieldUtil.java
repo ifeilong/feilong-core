@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import com.feilong.core.util.Validator;
  * This can allow fields to be changed that shouldn't be.
  * This facility should be used with care.
  * 
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.7 2014年7月15日 下午1:08:15
  * @see org.apache.commons.lang3.reflect.FieldUtils
  * @see "org.springframework.util.ReflectionUtils"

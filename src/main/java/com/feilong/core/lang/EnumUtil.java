@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.feilong.core.util.Validator;
 /**
  * {@link java.lang.Enum} 工具类.
  * 
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.6 2014年5月8日 上午3:30:51
  * @version 1.0.8 2014-7-22 13:43 add {@link EnumUtil#getEnumByPropertyValueIgnoreCase(Class, String, Object)}
  * @see org.apache.commons.lang.enums.EnumUtils

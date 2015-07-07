@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.feilong.core.date.DateUtil;
 /**
  * 时间转换 日期值处理器实现.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0.5 Jan 26, 2013 3:49:55 PM
  * @since 1.0.5
  */

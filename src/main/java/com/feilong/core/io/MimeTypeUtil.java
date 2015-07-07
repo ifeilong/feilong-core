@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import com.feilong.core.util.Validator;
  * <p>
  * MIME(Multi-Purpose Internet Mail Extensions)
  *
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.8 2014年11月19日 上午1:12:50
  * @see com.feilong.core.io.MimeType
  * @see "org.apache.catalina.startup.Tomcat#DEFAULT_MIME_MAPPINGS"

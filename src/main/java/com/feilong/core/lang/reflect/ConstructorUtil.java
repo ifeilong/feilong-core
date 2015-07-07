@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ import com.feilong.core.util.Validator;
  * </p>
  * </blockquote>
  * 
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.7 2014年7月15日 下午1:08:15
  * @version 1.1.0 2015-4-14 18:59
  * @see org.apache.commons.lang3.reflect.ConstructorUtils

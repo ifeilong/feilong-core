@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ package com.feilong.core.io;
  * 建议不要自己硬编码,直接调用这里预声明的常量.
  * </p>
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 2012-4-5 下午4:51:08
  * @version 1.0.5 2014-5-4 14:35 改成interface
  * @see org.apache.commons.lang3.CharEncoding

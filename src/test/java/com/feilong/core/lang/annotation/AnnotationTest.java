@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 /**
  * The Class AnnotationTest.
  * 
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.7 2014-5-30 0:25:27
  */
 @MyAnnotation(name = "feilong",sex = 0,loveStrings = { "胡伟立", "三国" })

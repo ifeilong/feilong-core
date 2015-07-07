@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import com.feilong.core.tools.json.JsonUtil;
 /**
  * 正则表达式工具类.
  * 
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.0 2010-1-13 下午02:33:11
  * @version 1.0.7 2014-5-27 14:21 规范了注释
  * @see Pattern

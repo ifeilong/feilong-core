@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.feilong.core.configure;
 /**
  * 标识是配置文件处理类.
  *
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 2011-2-7 上午12:28:38
  * @version 1.0.8 2014年8月4日 上午10:57:16 change abstract class to interface
  * @since 1.0.0

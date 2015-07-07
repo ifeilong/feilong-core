@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import com.feilong.core.util.Validator;
  * <li>{@link File#getCanonicalPath()} 可以看到CanonicalPath不但是全路径，而且把..或者.这样的符号解析出来.</li>
  * </ul>
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0.0 2012-5-23 下午5:00:54
  * @version 1.0.7 2014-5-23 20:27 add {@link #getFileFormatSize(File)}
  * @see java.io.File

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ import java.util.Map;
  * </ol>
  * </blockquote>
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0.0 Sep 2, 2010 8:35:28 PM
  * @version 1.0.1 2012-9-23 21:34 rename method,isNullOrEmpty替代isNull
  * @version 1.0.7 2014-5-22 15:57 add {@link #arrayIsNullOrEmpty(Object)}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import com.feilong.core.util.Validator;
 /**
  * 读文件.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 Dec 23, 2013 10:27:08 PM
  * @version 1.0.8 2014-11-25 20:04 add {@link #getFileContent(String, String)}
  * @since 1.0.0

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.feilong.core.net;
 /**
  * uri使用的常量.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 Apr 23, 2014 1:36:16 PM
  * @see "org.springframework.web.util.HierarchicalUriComponents.Type"
  * @since 1.0.9

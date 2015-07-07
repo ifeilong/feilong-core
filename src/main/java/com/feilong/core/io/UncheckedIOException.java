@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.io.IOException;
  * Wraps an {@link IOException} with an unchecked exception.
  * 注:jdk1.8 自带了 UncheckedIOException
  * 
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.9 2014年12月5日 下午3:19:59
  * @since 1.0.9
  * @since jdk1.7

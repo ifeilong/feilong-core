@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.apache.commons.lang3.SystemUtils;
 /**
  * {@link java.io.Reader} 工具类.
  *
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.9 2015年3月6日 上午10:51:54
  * @see java.io.BufferedReader
  * @see java.io.CharArrayReader

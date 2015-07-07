@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * </p>
  * </blockquote>
  * 
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.8 2014-7-21 17:45:30
  * @see org.apache.commons.beanutils.PropertyUtils
  * @see com.feilong.core.bean.BeanUtil

@@ -18,7 +18,7 @@ package com.feilong.core.lang.reflect.res;
 /**
  * 查询商品.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  */
 public interface SkuItemRepository extends BaseSolrRepository<SkuItem, Long>{
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ import com.feilong.core.util.Validator;
  * 
  * 如果需要覆盖写文件,可以调用 {@link #write(String, String, String, FileWriteMode)}.
  *
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 Dec 23, 2013 10:23:23 PM
  * @see "org.springframework.util.StreamUtils"
  * @see "org.springframework.util.FileCopyUtils"

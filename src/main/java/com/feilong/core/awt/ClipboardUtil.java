@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 操作剪切板 {@link java.awt.datatransfer.Clipboard}.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 2011-5-23 下午02:38:55
  * @since 1.0.0
  */

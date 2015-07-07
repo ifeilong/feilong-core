@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.feilong.core.lang.ClassLoaderUtil;
 /**
  * 操作properties配置文件.
  *
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 2010-3-22 上午10:05:19
  * @see "org.apache.velocity.texen.util.PropertiesUtil"
  * @see "org.apache.cxf.common.util.PropertiesLoaderUtils"

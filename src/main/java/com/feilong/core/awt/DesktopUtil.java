@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import com.feilong.core.net.URIUtil;
 /**
  * {@link java.awt.Desktop}允许 Java应用程序启动已在本机桌面上注册的关联应用程序，以及处理 URI 或文件 .
  *
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0.0 2011-5-5 下午05:07:45
  * @see java.awt.Desktop
  * @since 1.0.0

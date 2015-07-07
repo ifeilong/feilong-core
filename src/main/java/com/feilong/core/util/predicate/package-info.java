@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 /**
  *自定义的  Predicate,常用在 {@link com.feilong.core.util.CollectionsUtil#select(java.util.Collection, org.apache.commons.collections.Predicate)},{@link com.feilong.core.util.CollectionsUtil#groupCount(java.util.Collection, org.apache.commons.collections.Predicate, String)} 等地方.
- * @author <a href="mailto:venusdrogon@163.com">feilong</a> 
+ * @author feilong 
  * @version 1.2.0 2015年4月27日 下午1:47:11 
  * @since 1.2.0
  @see org.apache.commons.collections.PredicateUtils

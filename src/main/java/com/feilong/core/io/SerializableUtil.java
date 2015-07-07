@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 /**
  * {@link java.io.Serializable}util.
  *
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @author Justin Hu
  * @version 1.2.1 2015年6月11日 上午1:18:18
  * @see java.io.Serializable
