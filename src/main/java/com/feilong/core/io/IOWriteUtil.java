@@ -55,8 +55,8 @@ import com.feilong.core.util.Validator;
  */
 public final class IOWriteUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(IOWriteUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(IOWriteUtil.class);
 
     /**
      * 将inputStream 写到 某个文件夹(文件夹路径 最后不带"/"),名字为fileName.
@@ -173,8 +173,8 @@ public final class IOWriteUtil{
                 i++;
             }
 
-            if (log.isDebugEnabled()){
-                log.debug("Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}]", FileUtil.formatSize(sumSize), bufferLength, i);
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}]", FileUtil.formatSize(sumSize), bufferLength, i);
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);
@@ -297,8 +297,8 @@ public final class IOWriteUtil{
             writer.write(content);
             writer.close();
 
-            if (log.isInfoEnabled()){
-                log.info(
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info(
                                 "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}]",
                                 fileWriteMode,
                                 encode,

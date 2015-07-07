@@ -36,8 +36,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class InputStreamUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(InputStreamUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(InputStreamUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private InputStreamUtil(){
@@ -60,7 +60,7 @@ public final class InputStreamUtil{
     public static String inputStream2String(InputStream inputStream) throws UncheckedIOException{
         Charset defaultCharset = Charset.defaultCharset();
         String charsetName = defaultCharset.name();
-        log.debug("the param defaultCharset:[{}]", charsetName);
+        LOGGER.debug("the param defaultCharset:[{}]", charsetName);
         return inputStream2String(inputStream, charsetName);
     }
 

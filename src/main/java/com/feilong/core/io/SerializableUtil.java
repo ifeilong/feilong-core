@@ -44,8 +44,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class SerializableUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(SerializableUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SerializableUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private SerializableUtil(){
@@ -123,7 +123,7 @@ public final class SerializableUtil{
 
             return byteArrayOutputStream;
         }catch (IOException e){
-            log.error("", e);
+            LOGGER.error("", e);
             throw new SerializationException(e);
         }finally{
             IOUtils.closeQuietly(objectOutputStream);
@@ -153,7 +153,7 @@ public final class SerializableUtil{
 
             return serializableString;
         }catch (IOException e){
-            log.error("", e);
+            LOGGER.error("", e);
             throw new SerializationException(e);
         }finally{
             IOUtils.closeQuietly(byteArrayOutputStream);
@@ -182,7 +182,7 @@ public final class SerializableUtil{
 
             return org.apache.commons.lang3.SerializationUtils.deserialize(byteArrayInputStream);
         }catch (IOException e){
-            log.error("", e);
+            LOGGER.error("", e);
             throw new SerializationException(e);
         }finally{
             IOUtils.closeQuietly(byteArrayInputStream);

@@ -49,8 +49,8 @@ import com.feilong.core.util.Validator;
  */
 public final class FileUtil{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(FileUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private FileUtil(){
@@ -259,10 +259,10 @@ public final class FileUtil{
 
         int fileListLength = fileList.length;
 
-        if (log.isDebugEnabled()){
-            log.debug("file :[{}] list length:[{}]", directory, fileListLength);
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("file :[{}] list length:[{}]", directory, fileListLength);
             for (String fileName : fileList){
-                log.debug(fileName);
+                LOGGER.debug(fileName);
             }
         }
         boolean flag = (fileListLength == 0);
@@ -348,7 +348,7 @@ public final class FileUtil{
 
         //***********do with 存在******************
         if (isExists){//存在
-            log.debug("exists directoryFile:[{}],don't need mkdirs,nothing to do~", directoryFile);
+            LOGGER.debug("exists directoryFile:[{}],don't need mkdirs,nothing to do~", directoryFile);
             return;
         }
 
@@ -360,11 +360,11 @@ public final class FileUtil{
         // 级联创建 父级文件夹
         if (!flag){
             String msg = "File [" + absolutePath + "] could not be created";
-            log.error(msg);
+            LOGGER.error(msg);
             throw new IllegalArgumentException(msg);
         }else{
             //创建成功 记录下日志
-            log.debug("success mkdirs:[{}]~~", absolutePath);
+            LOGGER.debug("success mkdirs:[{}]~~", absolutePath);
         }
     }
 
@@ -586,8 +586,8 @@ public final class FileUtil{
         //递归
         String fileTopParentName = getFileTopParentName(file);
 
-        if (log.isDebugEnabled()){
-            log.debug("pathname:[{}],fileTopParentName:[{}]", pathname, fileTopParentName);
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("pathname:[{}],fileTopParentName:[{}]", pathname, fileTopParentName);
         }
         return fileTopParentName;
     }
@@ -640,16 +640,16 @@ public final class FileUtil{
         if (Validator.isNullOrEmpty(parent)){
             String name = file.getPath();//E:/--->E:\
 
-            if (log.isDebugEnabled()){
-                log.debug("parent is isNullOrEmpty,return file name:{}", name);
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("parent is isNullOrEmpty,return file name:{}", name);
             }
             return name;
         }
         //递归
         String fileTopParentName = getFileTopParentName(parent);
 
-        if (log.isDebugEnabled()){
-            log.debug("file.getAbsolutePath():[{}],fileTopParentName:[{}]", file.getAbsolutePath(), fileTopParentName);
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("file.getAbsolutePath():[{}],fileTopParentName:[{}]", file.getAbsolutePath(), fileTopParentName);
         }
         return fileTopParentName;
     }
@@ -820,7 +820,7 @@ public final class FileUtil{
             String oldChar = arrayElement[0];
             String newChar = arrayElement[1];
             if (formatFileName.contains(oldChar)){
-                log.warn("formatFileName:[{}] contains oldChar:[{}],will replace newChar:[{}]", formatFileName, oldChar, newChar);
+                LOGGER.warn("formatFileName:[{}] contains oldChar:[{}],will replace newChar:[{}]", formatFileName, oldChar, newChar);
                 formatFileName = formatFileName.replace(oldChar, newChar);
             }
         }
