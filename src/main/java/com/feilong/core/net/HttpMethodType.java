@@ -50,16 +50,14 @@ public enum HttpMethodType{
 
     /**
      * Gets the by method value ignore case.
-     * 
+     *
      * @param methodValue
      *            the method value
      * @return the by method value ignore case
-     * @throws NoSuchFieldException
-     *             找不到匹配的枚举
      * @see EnumUtil#getEnumByPropertyValueIgnoreCase(Class, String, Object)
      * @since 1.0.8
      */
-    public static HttpMethodType getByMethodValueIgnoreCase(String methodValue) throws NoSuchFieldException{
+    public static HttpMethodType getByMethodValueIgnoreCase(String methodValue){
         String propertyName = "method";
         return EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, propertyName, methodValue);
     }

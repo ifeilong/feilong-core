@@ -221,15 +221,12 @@ public final class CollectionsUtil{
      * <p style="color:red">
      * note:由于没有办法自动获得T 泛型的类型, 所以会取第一个值的类型做数组的类型,故需要确保第一个元素不是null.
      * </p>
-     * 
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param collection
      *            collection
      * @return 数组,if Validator.isNullOrEmpty(collection),return null
-     * @throws IllegalArgumentException
-     *             如果list中第一个元素 isNullOrEmpty
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
      * @see java.util.Collection#toArray()
@@ -243,7 +240,7 @@ public final class CollectionsUtil{
      * @see java.util.ArrayList#toArray()
      * @see java.util.ArrayList#toArray(Object[])
      */
-    public static <T> T[] toArray(Collection<T> collection) throws IllegalArgumentException{
+    public static <T> T[] toArray(Collection<T> collection){
         if (Validator.isNullOrEmpty(collection)){
             return null;
         }

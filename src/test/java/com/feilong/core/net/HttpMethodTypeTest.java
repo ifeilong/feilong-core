@@ -33,12 +33,9 @@ public class HttpMethodTypeTest{
 
     /**
      * Name.
-     *
-     * @throws NoSuchFieldException
-     *             the no such field exception
      */
     @Test
-    public void name() throws NoSuchFieldException{
+    public void name(){
         assertEquals(HttpMethodType.GET, HttpMethodType.valueOf("GET"));
         assertEquals(HttpMethodType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "get"));
         assertEquals(HttpMethodType.GET, HttpMethodType.getByMethodValueIgnoreCase("Get"));
@@ -46,12 +43,9 @@ public class HttpMethodTypeTest{
 
     /**
      * Name2.
-     *
-     * @throws NoSuchFieldException
-     *             the no such field exception
      */
     @Test(expected = NoSuchFieldException.class)
-    public void name2() throws NoSuchFieldException{
+    public void name2(){
         assertNotEquals(HttpMethodType.GET, HttpMethodType.getByMethodValueIgnoreCase("Get1"));
     }
 

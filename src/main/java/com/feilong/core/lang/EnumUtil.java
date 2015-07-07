@@ -18,7 +18,9 @@ package com.feilong.core.lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.log.Slf4jUtil;
 import com.feilong.core.net.HttpMethodType;
 import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.core.util.Validator;
@@ -68,11 +70,8 @@ public final class EnumUtil{
      * @param value
      *            属性值 比如post
      * @return 获得 enum constant
-     * @throws NoSuchFieldException
-     *             找不到匹配的枚举
      */
-    public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T value)
-                    throws NoSuchFieldException{
+    public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T value){
         boolean ignoreCase = true;
         return getEnumByPropertyValue(enumClass, propertyName, value, ignoreCase);
     }
@@ -100,12 +99,9 @@ public final class EnumUtil{
      * @param value
      *            属性值 比如post
      * @return 获得 enum constant
-     * @throws NoSuchFieldException
-     *             找不到匹配的枚举
      * @since 1.0.8
      */
-    public static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T value)
-                    throws NoSuchFieldException{
+    public static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T value){
         boolean ignoreCase = false;
         return getEnumByPropertyValue(enumClass, propertyName, value, ignoreCase);
     }
@@ -135,13 +131,10 @@ public final class EnumUtil{
      * @param ignoreCase
      *            是否忽视大小写
      * @return 获得 enum constant
-     * @throws NoSuchFieldException
-     *             找不到匹配的枚举
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @since 1.0.8
      */
-    private static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T value,boolean ignoreCase)
-                    throws NoSuchFieldException{
+    private static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T value,boolean ignoreCase){
 
         if (Validator.isNullOrEmpty(enumClass)){
             throw new IllegalArgumentException("enumClass is null or empty!");
@@ -174,8 +167,7 @@ public final class EnumUtil{
                 }
             }
         }
-
-        throw new NoSuchFieldException("can not found the enum constants,enumClass:[" + enumClass + "],propertyName:[" + propertyName
-                        + "],value:[" + value + "],ignoreCase:[" + ignoreCase + "]");
+        String messagePattern = "can not found the enum constants,enumClass:[{}],propertyName:[{}],value:[{}],ignoreCase:[{}]";
+        throw new BeanUtilException(Slf4jUtil.formatMessage(messagePattern, enumClass, propertyName, value, ignoreCase));
     }
 }
