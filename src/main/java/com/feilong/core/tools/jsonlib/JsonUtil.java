@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.json;
+package com.feilong.core.tools.jsonlib;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DatePattern;
-import com.feilong.core.tools.json.processor.DateJsonValueProcessor;
+import com.feilong.core.tools.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.Validator;
 
@@ -69,7 +69,9 @@ import com.feilong.core.util.Validator;
  * @author feilong
  * @version 1.0.5 Jan 26, 2013 8:02:09 PM
  * @since 1.0.5
+ * @deprecated net.sf.json-lib Non-maintenance,will use Jackson instead
  */
+@Deprecated
 public final class JsonUtil{
 
     /** The Constant LOGGER. */
@@ -82,6 +84,9 @@ public final class JsonUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    /** The Constant DEFAULT_JSON_CONFIG. */
+    private static final JsonConfig DEFAULT_JSON_CONFIG;
+
     /**
      * 设置日期转换格式
      */
@@ -93,6 +98,8 @@ public final class JsonUtil{
         // 注册器
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
         morpherRegistry.registerMorpher(dateMorpher);
+
+        DEFAULT_JSON_CONFIG = getDefaultJsonConfig();
     }
 
     //***************************format********************************************************
@@ -145,9 +152,10 @@ public final class JsonUtil{
         if (null == obj){
             return null;
         }
-        JsonConfig jsonConfig = getDefaultJsonConfig();
+        JsonConfig jsonConfig = null;
 
         if (Validator.isNotNullOrEmpty(excludes)){
+            jsonConfig = getDefaultJsonConfig();
             jsonConfig.setExcludes(excludes);
         }
 
@@ -172,10 +180,10 @@ public final class JsonUtil{
             return null;
         }
 
-        JsonConfig jsonConfig = getDefaultJsonConfig();
+        JsonConfig jsonConfig = null;
 
         if (Validator.isNotNullOrEmpty(includes)){
-
+            jsonConfig = getDefaultJsonConfig();
             jsonConfig.setJsonPropertyFilter(new PropertyFilter(){
 
                 @Override
@@ -201,6 +209,8 @@ public final class JsonUtil{
 
         //see net.sf.json.JsonConfig.DEFAULT_EXCLUDES    "class", "declaringClass","metaClass"  // 默认会过滤的几个key  
         jsonConfig.setIgnoreDefaultExcludes(true);
+
+        // 注册日期处理器
         jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor());
 
         // java.lang.ClassCastException: JSON keys must be strings
@@ -341,7 +351,8 @@ public final class JsonUtil{
      * @see net.sf.json.JSONArray#toArray()
      */
     public static Object[] toArray(String json){
-        return JSONArray.fromObject(json).toArray();
+        JSONArray jsonArray = JSONArray.fromObject(json);
+        return jsonArray.toArray();
     }
 
     /**
@@ -405,12 +416,12 @@ public final class JsonUtil{
      * @see net.sf.json.JSONArray#get(int)
      */
     public static List<Object> toList(String json){
-        JSONArray jsonArr = JSONArray.fromObject(json);
-        int size = jsonArr.size();
+        JSONArray jsonArray = JSONArray.fromObject(json);
+        int size = jsonArray.size();
 
         List<Object> list = new ArrayList<Object>();
         for (int i = 0; i < size; i++){
-            Object e = jsonArr.get(i);
+            Object e = jsonArray.get(i);
             list.add(e);
         }
         return list;
@@ -580,10 +591,7 @@ public final class JsonUtil{
      */
     public static JSON toJSON(Object obj,JsonConfig jsonConfig){
         if (null == jsonConfig){
-            jsonConfig = getDefaultJsonConfig();
-            // 注册日期处理器
-            DateJsonValueProcessor jsonValueProcessor = new DateJsonValueProcessor(DatePattern.COMMON_DATE_AND_TIME);
-            jsonConfig.registerJsonValueProcessor(Date.class, jsonValueProcessor);
+            jsonConfig = DEFAULT_JSON_CONFIG;
         }
 
         // obj instanceof Collection || obj instanceof Object[]

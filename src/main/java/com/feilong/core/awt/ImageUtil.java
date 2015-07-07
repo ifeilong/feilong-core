@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.io.FileUtil;
 import com.feilong.core.io.ImageType;
 import com.feilong.core.io.UncheckedIOException;
-import com.feilong.core.tools.json.JsonUtil;
+import com.feilong.core.tools.jsonlib.JsonUtil;
 
 /**
  * 和awt package相关的图片工具类.

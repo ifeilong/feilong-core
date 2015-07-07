@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.tools.json.JsonUtil;
+import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
 
