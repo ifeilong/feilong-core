@@ -43,8 +43,8 @@ public final class Slf4jUtil{
      * slf4j的log支持格式化输出log,比如:<br>
      * </p>
      * <ul>
-     * <li>log.error("{}","feilong");</li>
-     * <li>log.info("{},{}","feilong","hello");</li>
+     * <li>LOGGER.error("{}","feilong");</li>
+     * <li>LOGGER.info("{},{}","feilong","hello");</li>
      * </ul>
      * 这些写法非常简洁且有效,不易出错
      * 
