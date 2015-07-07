@@ -33,8 +33,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public class ResourceBundleUtilTest{
 
-    /** The Constant log. */
-    private static final Logger  log            = LoggerFactory.getLogger(ResourceBundleUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger  LOGGER         = LoggerFactory.getLogger(ResourceBundleUtilTest.class);
 
     /** The base name. */
     private String               baseName       = "messages/feilong-core-test";
@@ -50,7 +50,7 @@ public class ResourceBundleUtilTest{
     // "/WEB-INF/classes/feilong.user.properties"
     public final void testGetValue(){
         String aString = ResourceBundleUtil.getValue(baseName, "config_test_array");
-        log.debug(aString);
+        LOGGER.debug(aString);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ResourceBundleUtilTest{
     @Test
     public final void testGetValueWithArguments(){
         String aString = ResourceBundleUtil.getValueWithArguments(resourceBundle, "test", "2", "22");
-        log.debug(aString);
+        LOGGER.debug(aString);
     }
 
     /**
@@ -69,7 +69,7 @@ public class ResourceBundleUtilTest{
     @Test
     public final void readPropertiesAsArray(){
         String[] strings = ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class);
-        log.info(JsonUtil.format(strings));
+        LOGGER.info(JsonUtil.format(strings));
     }
 
     /**
@@ -80,7 +80,7 @@ public class ResourceBundleUtilTest{
 
         Locale locale = Locale.CHINA;
         Map<String, String> map = ResourceBundleUtil.readPrefixAsMap(baseName, "FileType", "\\.", locale);
-        log.info(JsonUtil.format(map));
+        LOGGER.info(JsonUtil.format(map));
     }
 
     /**
@@ -91,7 +91,7 @@ public class ResourceBundleUtilTest{
         Locale locale = Locale.CHINA;
         baseName = "messages/feilong-core-message";
         Map<String, String> map = ResourceBundleUtil.readAllPropertiesToMap(baseName, locale);
-        log.info(JsonUtil.format(map));
+        LOGGER.info(JsonUtil.format(map));
     }
 
     /**
@@ -102,6 +102,6 @@ public class ResourceBundleUtilTest{
     public final void testGetValue1(){
         Locale locale = Locale.ENGLISH;
         baseName = "messages/feilong-core-message";
-        log.info(ResourceBundleUtil.getValue(baseName, "config_date_hour", locale));
+        LOGGER.info(ResourceBundleUtil.getValue(baseName, "config_date_hour", locale));
     }
 }

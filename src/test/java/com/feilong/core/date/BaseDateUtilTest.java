@@ -32,8 +32,8 @@ import com.feilong.core.date.DateUtil;
  */
 abstract class BaseDateUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log                     = LoggerFactory.getLogger(BaseDateUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER                     = LoggerFactory.getLogger(BaseDateUtilTest.class);
 
     /** <code>{@value}</code> code. */
     static final String         FROMSTRING              = "2011-03-5 23:31:25.456";
@@ -62,6 +62,6 @@ abstract class BaseDateUtilTest{
      *            the date
      */
     protected void logDate(Date date){
-        log.debug(DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 }

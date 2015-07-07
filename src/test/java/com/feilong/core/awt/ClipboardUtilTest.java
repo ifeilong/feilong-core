@@ -33,8 +33,8 @@ import com.feilong.core.awt.ClipboardUtil;
  */
 public class ClipboardUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ClipboardUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClipboardUtilTest.class);
 
     /**
      * {@link com.feilong.core.awt.ClipboardUtil#setClipboardContent(java.lang.String)} 的测试方法。
@@ -46,7 +46,7 @@ public class ClipboardUtilTest{
      */
     @Test
     public final void testSetClipboardContents() throws UnsupportedFlavorException,IOException{
-        log.info(ClipboardUtil.getClipboardContent());
+        LOGGER.info(ClipboardUtil.getClipboardContent());
     }
 
     /**
@@ -63,6 +63,6 @@ public class ClipboardUtilTest{
         }
         stringBuilder.append("</enum>");
         ClipboardUtil.setClipboardContent(stringBuilder.toString());
-        log.info(stringBuilder.toString());
+        LOGGER.info(stringBuilder.toString());
     }
 }

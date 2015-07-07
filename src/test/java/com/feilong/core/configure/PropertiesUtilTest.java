@@ -38,8 +38,8 @@ import com.feilong.core.io.UncheckedIOException;
  */
 public class PropertiesUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PropertiesUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesUtilTest.class);
 
     /**
      * Gets the properties value.
@@ -55,10 +55,10 @@ public class PropertiesUtilTest{
 
         try{
             for (Object iterableElement : properties.keySet()){
-                log.info(new String(iterableElement.toString().getBytes(CharsetType.ISO_8859_1), CharsetType.GBK));
+                LOGGER.info(new String(iterableElement.toString().getBytes(CharsetType.ISO_8859_1), CharsetType.GBK));
             }
         }catch (UnsupportedEncodingException e1){
-            log.error("", e1);
+            LOGGER.error("", e1);
         }
         // = PropertiesUtil.getPropertiesValue(FeiLongPropertiesUtilTest.class, propertiesPath, "锦衣夜行");
         try{
@@ -80,7 +80,7 @@ public class PropertiesUtilTest{
 //		try{
 //			properties.store(new FileOutputStream(fileName), null);
 //		}catch (FileNotFoundException e){
-//			log.error(e.getClass().getName(), e);
+//			LOGGER.error(e.getClass().getName(), e);
 //		}catch (IOException e){
 //			throw new UncheckedIOException(e);
 //		}
@@ -93,12 +93,12 @@ public class PropertiesUtilTest{
 //		try{
 //			properties.load(new FileInputStream(fileName));
 //		}catch (FileNotFoundException e){
-//			log.error(e.getClass().getName(), e);
+//			LOGGER.error(e.getClass().getName(), e);
 //		}catch (IOException e){
 //			throw new UncheckedIOException(e);
 //		}
-//		log.debug(properties.get("a.b.c"));
-//		log.debug(properties.get("aaa"));
+//		LOGGER.debug(properties.get("a.b.c"));
+//		LOGGER.debug(properties.get("aaa"));
 //	}
 //
 //	/**

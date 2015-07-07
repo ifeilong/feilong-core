@@ -29,14 +29,14 @@ import com.feilong.core.FeiLongVersion;
  */
 public class FeiLongVersionTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(FeiLongVersionTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(FeiLongVersionTest.class);
 
     /**
      * Test method for {@link com.feilong.core.FeiLongVersion#getVersion()}.
      */
     @Test
     public final void testGetVersion(){
-        log.info(FeiLongVersion.getVersion());
+        LOGGER.info(FeiLongVersion.getVersion());
     }
 }

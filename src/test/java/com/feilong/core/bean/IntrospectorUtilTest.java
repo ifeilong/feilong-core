@@ -38,11 +38,11 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public class IntrospectorUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(IntrospectorUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(IntrospectorUtilTest.class);
 
     /**
-     * Test get introspector info map for log.
+     * Test get introspector info map for LOGGER.
      *
      * @throws IntrospectionException
      *             the introspection exception
@@ -50,7 +50,7 @@ public class IntrospectorUtilTest{
     @Test
     public final void testGetIntrospectorInfoMapForLog() throws IntrospectionException{
         Map<String, Object> map = IntrospectorUtil.getIntrospectorInfoMapForLog(SalesOrder.class);
-        log.debug(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
@@ -70,8 +70,8 @@ public class IntrospectorUtilTest{
         //为了查找 BeanInfo 类而被搜索的包名称数组。此数组的默认值与实现有关，例如 Sun 实现最初设置为 {"sun.beans.infos"}。
         String[] beanInfoSearchPath = Introspector.getBeanInfoSearchPath();
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(beanInfoSearchPath));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(beanInfoSearchPath));
         }
 
     }

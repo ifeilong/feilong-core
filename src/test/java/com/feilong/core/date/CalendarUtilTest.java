@@ -34,8 +34,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public class CalendarUtilTest extends BaseDateUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(CalendarUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(CalendarUtilTest.class);
 
     /**
      * Gets the max day of month.
@@ -47,7 +47,7 @@ public class CalendarUtilTest extends BaseDateUtilTest{
         int month = 2;
 
         Object[] objects = { year, month, CalendarUtil.getMaxDayOfMonth(year, month) };
-        log.debug("{} 年 {}月, 最大天:{}", objects);
+        LOGGER.debug("{} 年 {}月, 最大天:{}", objects);
     }
 
     /**
@@ -57,7 +57,7 @@ public class CalendarUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetActualMaximum(){
         Calendar calendar = CalendarUtil.string2Calendar("2007-02-20", DatePattern.COMMON_DATE);
-        log.debug("the param objects:{}", calendar.getActualMaximum(Calendar.DAY_OF_YEAR));
+        LOGGER.debug("the param objects:{}", calendar.getActualMaximum(Calendar.DAY_OF_YEAR));
     }
 
     /**
@@ -65,9 +65,9 @@ public class CalendarUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetDayOfYear(){
-        log.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
-        log.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
-        log.debug(CalendarUtil.getDayOfYear(2014, 12, 31) + "");
+        LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
+        LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
+        LOGGER.debug(CalendarUtil.getDayOfYear(2014, 12, 31) + "");
     }
 
     /**
@@ -75,6 +75,6 @@ public class CalendarUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testCalendarUtilTest(){
-        log.debug(JsonUtil.format(CalendarUtil.getWeekDateStringList(5, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
+        LOGGER.debug(JsonUtil.format(CalendarUtil.getWeekDateStringList(5, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
     }
 }

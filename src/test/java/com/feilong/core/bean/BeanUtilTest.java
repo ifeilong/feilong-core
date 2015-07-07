@@ -54,8 +54,8 @@ import com.feilong.test.User;
  */
 public class BeanUtilTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(BeanUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(BeanUtilTest.class);
 
     /** The sales order. */
     private SalesOrder          salesOrder;
@@ -110,7 +110,7 @@ public class BeanUtilTest{
     @Test
     public void testDemoNormalJavaBeans() throws Exception{
 
-        log.debug(StringUtils.center(" demoNormalJavaBeans ", 40, "="));
+        LOGGER.debug(StringUtils.center(" demoNormalJavaBeans ", 40, "="));
 
         // data setup  
         Address addr1 = new Address("CA1234", "xxx", "Los Angeles", "USA");
@@ -125,17 +125,17 @@ public class BeanUtilTest{
         String name = (String) PropertyUtils.getSimpleProperty(cust, "name");
         String city = (String) PropertyUtils.getProperty(cust, cityPattern);
         Object[] rawOutput1 = new Object[] { "The city of customer ", name, "'s first address is ", city, "." };
-        log.debug(StringUtils.join(rawOutput1));
+        LOGGER.debug(StringUtils.join(rawOutput1));
 
         // setting the zipcode of customer's second address  
         String zipPattern = "addresses[1].zipCode";
         if (PropertyUtils.isWriteable(cust, zipPattern)){//PropertyUtils  
-            log.debug("Setting zipcode ...");
+            LOGGER.debug("Setting zipcode ...");
             PropertyUtils.setProperty(cust, zipPattern, "200000");//PropertyUtils  
         }
         String zip = (String) PropertyUtils.getProperty(cust, zipPattern);//PropertyUtils  
         Object[] rawOutput2 = new Object[] { "The zipcode of customer ", name, "'s second address is now ", zip, "." };
-        log.debug(StringUtils.join(rawOutput2));
+        LOGGER.debug(StringUtils.join(rawOutput2));
     }
 
     /**
@@ -147,7 +147,7 @@ public class BeanUtilTest{
     @Test
     public void demoDynaBeans() throws Exception{
 
-        log.debug(StringUtils.center(" demoDynaBeans ", 40, "="));
+        LOGGER.debug(StringUtils.center(" demoDynaBeans ", 40, "="));
 
         // creating a DynaBean  
         DynaProperty[] dynaBeanProperties = new DynaProperty[] {//DynaProperty  
@@ -159,9 +159,9 @@ public class BeanUtilTest{
         cargo.set("name", "Instant Noodles");
         cargo.set("inPrice", new Double(21.3));
         cargo.set("outPrice", new Double(23.8));
-        log.debug("name: " + cargo.get("name"));
-        log.debug("inPrice: " + cargo.get("inPrice"));
-        log.debug("outPrice: " + cargo.get("outPrice"));
+        LOGGER.debug("name: " + cargo.get("name"));
+        LOGGER.debug("inPrice: " + cargo.get("inPrice"));
+        LOGGER.debug("outPrice: " + cargo.get("outPrice"));
     }
 
     /**
@@ -179,8 +179,8 @@ public class BeanUtilTest{
 
         String[] strs = { "date", "money" };
         BeanUtil.copyProperties(b, a, strs);
-        log.info(b.getDate() + "");
-        log.info(b.getMoney() + "");
+        LOGGER.info(b.getDate() + "");
+        LOGGER.info(b.getMoney() + "");
     }
 
     /**
@@ -200,8 +200,8 @@ public class BeanUtilTest{
         ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
         BeanUtil.copyProperties(b, a, aStrings);
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(b));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(b));
         }
 
     }
@@ -216,8 +216,8 @@ public class BeanUtilTest{
         //ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
         BeanUtil.copyProperties(salesOrderDto, salesOrder);
 
-        if (log.isDebugEnabled()){
-            log.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
         }
 
     }
@@ -234,7 +234,7 @@ public class BeanUtilTest{
 
         Map<String, String> map = BeanUtil.describe(a);
 
-        log.info("map:{}", JsonUtil.format(map));
+        LOGGER.info("map:{}", JsonUtil.format(map));
     }
 
     /**
@@ -252,7 +252,7 @@ public class BeanUtilTest{
         properties.put("id", 8L);
         // properties.put("date", 2010);
         BeanUtil.populate(a, properties);
-        log.info(JsonUtil.format(a));
+        LOGGER.info(JsonUtil.format(a));
     }
 
     /**
@@ -262,8 +262,8 @@ public class BeanUtilTest{
     public void cloneBean(){
         SalesOrder salesOrder1 = BeanUtil.cloneBean(salesOrder);
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(salesOrder1));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(salesOrder1));
         }
     }
 }
