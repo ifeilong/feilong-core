@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,21 +69,27 @@ public final class ClipboardUtil{
      * 从剪贴板中取数据.
      *
      * @return the clipboard content
-     * @throws UnsupportedFlavorException
-     *             the unsupported flavor exception
-     * @throws IOException
-     *             the IO exception
+     * @throws ClipboardException
+     *             the clipboard exception
      */
-    public static final String getClipboardContent() throws UnsupportedFlavorException,IOException{
+    public static final String getClipboardContent() throws ClipboardException{
         Transferable transferable = getTransferable();
         // 因为原系的剪贴板里有多种信息, 如文字, 图片, 文件等
         // 先判断开始取得的可传输的数据是不是文字, 如果是, 取得这些文字
         DataFlavor dataFlavor = DataFlavor.stringFlavor;
 
         if (transferable != null && transferable.isDataFlavorSupported(dataFlavor)){
-            // 同样, 因为Transferable中的DataFlavor是多种类型的,
-            // 所以传入DataFlavor这个参数, 指定要取得哪种类型的Data.
-            return (String) transferable.getTransferData(dataFlavor);
+            try{
+                // 同样, 因为Transferable中的DataFlavor是多种类型的,
+                // 所以传入DataFlavor这个参数, 指定要取得哪种类型的Data.
+                return (String) transferable.getTransferData(dataFlavor);
+            }catch (UnsupportedFlavorException e){
+                LOGGER.error("", e);
+                throw new ClipboardException(e);
+            }catch (IOException e){
+                LOGGER.error("", e);
+                throw new ClipboardException(e);
+            }
         }
         return null;
     }
@@ -92,18 +98,24 @@ public final class ClipboardUtil{
      * 获得 clipboard reader.
      *
      * @return the clipboard reader
-     * @throws UnsupportedFlavorException
-     *             the unsupported flavor exception
-     * @throws IOException
-     *             the IO exception
+     * @throws ClipboardException
+     *             the clipboard exception
      * @since 1.0.8
      */
-    public static final Reader getClipboardReader() throws UnsupportedFlavorException,IOException{
+    public static final Reader getClipboardReader() throws ClipboardException{
         Transferable transferable = getTransferable();
 
         DataFlavor dataFlavor = DataFlavor.stringFlavor;
-        Reader reader = dataFlavor.getReaderForText(transferable);
-        return reader;
+        try{
+            Reader reader = dataFlavor.getReaderForText(transferable);
+            return reader;
+        }catch (UnsupportedFlavorException e){
+            LOGGER.error("", e);
+            throw new ClipboardException(e);
+        }catch (IOException e){
+            LOGGER.error("", e);
+            throw new ClipboardException(e);
+        }
     }
 
     //******************************************************************************************
