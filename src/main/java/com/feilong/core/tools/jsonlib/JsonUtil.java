@@ -200,6 +200,7 @@ public final class JsonUtil{
      * 默认的JsonConfig.
      *
      * @return the default json config
+     * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
      */
     private static JsonConfig getDefaultJsonConfig(){
         JsonConfig jsonConfig = new JsonConfig();
@@ -207,9 +208,9 @@ public final class JsonUtil{
         // 排除,避免循环引用 There is a cycle in the hierarchy!
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
-        //see net.sf.json.JsonConfig.DEFAULT_EXCLUDES
+        //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
         //默认会过滤的几个key "class", "declaringClass","metaClass"  
-        jsonConfig.setIgnoreDefaultExcludes(true);
+        jsonConfig.setIgnoreDefaultExcludes(false);
 
         // 注册日期处理器
         jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor());
