@@ -15,7 +15,9 @@
  */
 package com.feilong.core.tools;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.feilong.test.User;
@@ -42,6 +44,8 @@ public class BaseJsonTest{
 
         user.setId(8L);
         user.setName("feilong");
+        user.setDate(new Date());
+        user.setMoney(new BigDecimal("99999999.00"));
 
         String[] loves = { "桔子", "香蕉" };
         user.setLoves(loves);

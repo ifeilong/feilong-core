@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.test.User;
 
 /**
  * The Class MapUtilTest.
@@ -35,6 +36,51 @@ public class MapUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
+
+    @Test
+    public void testInvertMap(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+
+        map.put("a", 3007);
+        map.put("b", 3001);
+        map.put("c", 3002);
+        map.put("d", 3003);
+        LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
+    }
+
+    /**
+     * Test construct sub map.
+     */
+    @Test
+    public void testConstructSubMap(){
+        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        map.put(1L, new User(1L));
+        map.put(2L, new User(2L));
+        map.put(53L, new User(3L));
+        map.put(5L, new User(5L));
+        map.put(6L, new User(6L));
+        map.put(4L, new User(4L));
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(MapUtil.constructSubMap(map, "id")));
+        }
+        if (LOGGER.isDebugEnabled()){
+            Long[] includeKeys = { 5L, 4L };
+            LOGGER.debug(JsonUtil.format(MapUtil.constructSubMap(map, includeKeys, "id")));
+        }
+        if (LOGGER.isDebugEnabled()){
+            Long[] includeKeys = { 5L, 4L };
+            LOGGER.debug(JsonUtil.format(MapUtil.constructSubMap(map, includeKeys, "userInfo.age")));
+        }
+    }
+
+    /**
+     * Test construct sub map1.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testConstructSubMap1(){
+        LOGGER.debug(JsonUtil.format(MapUtil.constructSubMap(null, "id")));
+    }
 
     /**
      * Test get sub map exclude keys.

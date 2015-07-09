@@ -29,6 +29,7 @@ import org.apache.commons.collections.comparators.ReverseComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 
 /**
@@ -167,6 +168,90 @@ public final class MapUtil{
         for (K key : excludeKeys){
             if (map.containsKey(key)){
                 returnMap.remove(key);
+            }else{
+                LOGGER.warn("map don't contains key:[{}]", key);
+            }
+        }
+        return returnMap;
+    }
+
+    /**
+     * map的key和value互转.
+     * <p>
+     * 这个操作map预先良好的定义.如果传过来的map,不同的key有相同的balue, 那么返回的map (key)只会有一个(value), 其他重复的key被丢掉了
+     * </p>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果map 是nullOrEmpty ,返回 一个empty map
+     * @since 1.2.2
+     */
+    @SuppressWarnings("unchecked")
+    public static <K, V> Map<V, K> invertMap(Map<K, V> map){
+        return org.apache.commons.collections.MapUtils.invertMap(map);
+    }
+
+    /**
+     * 抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回.
+     *
+     * @param <K>
+     *            the key type
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param map
+     *            the map
+     * @param extractPropertyName
+     *            the extract property name
+     * @return the map< k, o>
+     * @since 1.2.2
+     */
+    public static <K, T, O> Map<K, O> constructSubMap(Map<K, T> map,String extractPropertyName){
+        return constructSubMap(map, null, extractPropertyName);
+    }
+
+    /**
+     * 抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回.
+     *
+     * @param <K>
+     *            the key type
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param map
+     *            the map
+     * @param includeKeys
+     *            the include keys
+     * @param extractPropertyName
+     *            the extract property name
+     * @return 抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回,如果 <code>includeKeys</code>是null,那么抽取map所有的key
+     * @since 1.2.2
+     */
+    public static <K, T, O> Map<K, O> constructSubMap(Map<K, T> map,K[] includeKeys,String extractPropertyName){
+        if (Validator.isNullOrEmpty(map)){
+            throw new NullPointerException("the map is null or empty!");
+        }
+        if (Validator.isNullOrEmpty(extractPropertyName)){
+            throw new NullPointerException("extractPropertyName is null or empty!");
+        }
+        //如果excludeKeys 是null ,那么抽取 所有的key
+        if (Validator.isNullOrEmpty(includeKeys)){
+            includeKeys = CollectionsUtil.toArray(map.keySet());
+        }
+
+        Map<K, O> returnMap = new HashMap<K, O>();
+
+        for (K key : includeKeys){
+            if (map.containsKey(key)){
+                T t = map.get(key);
+                O o = PropertyUtil.getProperty(t, extractPropertyName);
+                returnMap.put(key, o);
             }else{
                 LOGGER.warn("map don't contains key:[{}]", key);
             }

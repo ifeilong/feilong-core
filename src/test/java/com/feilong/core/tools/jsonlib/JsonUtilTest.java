@@ -15,6 +15,7 @@
  */
 package com.feilong.core.tools.jsonlib;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -47,6 +48,22 @@ public class JsonUtilTest extends BaseJsonTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilTest.class);
+
+    /**
+     * Test json string.
+     */
+    @Test
+    public void testJsonString(){
+        String json = JsonUtil.format(getUserForJsonTest());
+        LOGGER.info(json);
+    }
+
+    @Test
+    public void testJsonString1(){
+        BigDecimal[] aBigDecimals = { new BigDecimal("9999.00") };
+        String json = JsonUtil.format(aBigDecimals);
+        LOGGER.info(json);
+    }
 
     /**
      * Name.
@@ -92,15 +109,6 @@ public class JsonUtilTest extends BaseJsonTest{
 
         User user = JsonUtil.toBean(json, User.class, classMap);
         LOGGER.info(JsonUtil.format(user));
-    }
-
-    /**
-     * Test json string.
-     */
-    @Test
-    public void testJsonString(){
-        String json = JsonUtil.format(getUserForJsonTest());
-        LOGGER.info(json);
     }
 
     /**
