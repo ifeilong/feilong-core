@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.jsonlib;
+package com.feilong.core.tools.jsonlib.propertySetStrategy;
 
 import net.sf.json.util.PropertySetStrategy;
 
@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
  * @see <a
  *      href="http://javaskeleton.blogspot.com/2011/05/ignore-missing-properties-with-json-lib.html">ignore-missing-properties-with-json-lib</a>
  * @see <a href="http://envy2002.iteye.com/blog/1682738">envy2002.iteye.com</a>
+ * @see net.sf.json.util.PropertySetStrategy
  * @since 1.0.5
  */
 public class PropertyStrategyWrapper extends PropertySetStrategy{
@@ -54,9 +55,9 @@ public class PropertyStrategyWrapper extends PropertySetStrategy{
      * @see net.sf.json.util.PropertySetStrategy#setProperty(java.lang.Object, java.lang.String, java.lang.Object)
      */
     @Override
-    public void setProperty(Object o,String string,Object o1){
+    public void setProperty(Object bean,String key,Object value){
         try{
-            propertySetStrategy.setProperty(o, string, o1);
+            propertySetStrategy.setProperty(bean, key, value);
         }catch (Exception e){
             LOGGER.warn(e.getMessage(), e);
         }
