@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
@@ -70,6 +71,54 @@ public final class CollectionsUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * 用于 自定义标签/ 自定义el.
+     * 
+     * @param collection
+     *            一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator.
+     * @param value
+     *            任意类型的值,最终toString 判断比较.
+     * @return true, if successful
+     * @see ObjectUtil#toIterator(Object)
+     * @see #isContain(Iterator, Object)
+     * @deprecated
+     */
+    @Deprecated
+    public static boolean isContainTag(Object collection,Object value){
+        Iterator<?> iterator = ObjectUtil.toIterator(collection);
+        return isContain(iterator, value);
+    }
+
+    /**
+     * iterator是否包含某个值.
+     * 
+     * @param iterator
+     *            iterator
+     * @param value
+     *            value
+     * @return iterator是否包含某个值,如果iterator为null/empty,则返回false
+     * @see Iterator#hasNext()
+     * @see Iterator#next()
+     * @deprecated 代码这里不是很严谨 ,需要重构
+     */
+    @Deprecated
+    public static boolean isContain(Iterator<?> iterator,Object value){
+        boolean flag = false;
+        if (Validator.isNotNullOrEmpty(iterator)){
+            Object object = null;
+            while (iterator.hasNext()){
+                object = iterator.next();
+                if (object.toString().equals(value.toString())){
+                    flag = true;
+                    break;
+                }
+            }
+        }else{
+            LOGGER.debug("iterator is null/empty");
+        }
+        return flag;
     }
 
     /**
