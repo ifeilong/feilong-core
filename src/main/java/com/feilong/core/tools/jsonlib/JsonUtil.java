@@ -65,9 +65,10 @@ import com.feilong.core.util.Validator;
  * </pre>
  * 
  * </blockquote>
- * 
+ *
  * @author feilong
  * @version 1.0.5 Jan 26, 2013 8:02:09 PM
+ * @see net.sf.json.JSONSerializer#toJSON(Object, JsonConfig)
  * @since 1.0.5
  * @deprecated net.sf.json-lib Non-maintenance,will use Jackson instead
  */
@@ -95,8 +96,10 @@ public final class JsonUtil{
      */
     static{
         // 可转换的日期格式，即Json串中可以出现以下格式的日期与时间
-        String[] formats = { DatePattern.COMMON_DATE_AND_TIME, DatePattern.COMMON_TIME, DatePattern.COMMON_DATE };
-        DateMorpher dateMorpher = new DateMorpher(formats);
+        DateMorpher dateMorpher = new DateMorpher(new String[] {
+            DatePattern.COMMON_DATE_AND_TIME,
+            DatePattern.COMMON_TIME,
+            DatePattern.COMMON_DATE });
 
         // 注册器
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
@@ -531,6 +534,10 @@ public final class JsonUtil{
     public static Map<String, Object> toMap(String json){
         JSONObject jsonObject = JSONObject.fromObject(json);
 
+        //处理不了key 是 null 的情况
+        //java.lang.ClassCastException: net.sf.json.JSONNull cannot be cast to java.lang.String
+        //Map<String, Object> map = (Map<String, Object>) JSONObject.toBean(jsonObject, Map.class);
+
         Map<String, Object> map = new HashMap<String, Object>();
 
         @SuppressWarnings("unchecked")
@@ -629,6 +636,7 @@ public final class JsonUtil{
      * @see net.sf.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
      * @see org.apache.commons.collections.IteratorUtils#toList(Iterator)
      * @see org.apache.commons.collections.IteratorUtils#toList(Iterator, int)
+     * @see net.sf.json.JSONSerializer#toJSON(Object)
      */
     public static JSON toJSON(Object obj,JsonConfig jsonConfig){
         if (null == jsonConfig){
@@ -673,8 +681,10 @@ public final class JsonUtil{
     }
 
     /**
-     * Object to xml<br>
+     * Object to xml.
+     * <p>
      * 缺点:
+     * </p>
      * <ul>
      * <li>不能去掉 {@code <?xml version="1.0" encoding="UTF-8"? >}</li>
      * <li>不能格式化输出</li>
@@ -694,9 +704,12 @@ public final class JsonUtil{
         JSON json = toJSON(object);
         XMLSerializer xmlSerializer = new XMLSerializer();
         // xmlSerializer.setRootName("outputPaymentPGW");
-        // xmlSerializer.setTypeHintsEnabled(true);
         // xmlSerializer.setTypeHintsCompatibility(true);
         // xmlSerializer.setSkipWhitespace(false);
+        // xmlSerializer.setTypeHintsEnabled(true);//是否保留元素类型标识，默认true
+        // xmlSerializer.setElementName("e");//设置元素标签，默认e
+        // xmlSerializer.setArrayName("a");//设置数组标签，默认a
+        // xmlSerializer.setObjectName("o");//设置对象标签，默认o
         if (Validator.isNotNullOrEmpty(encoding)){
             return xmlSerializer.write(json, encoding);
         }
@@ -742,6 +755,14 @@ public final class JsonUtil{
         //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
         //默认会过滤的几个key "class", "declaringClass","metaClass"  
         jsonConfig.setIgnoreDefaultExcludes(false);
+
+        //See javax.persistence.Transient
+        //jsonConfig.setIgnoreJPATransient(true);
+
+        //see Modifier.TRANSIENT
+        //jsonConfig.setIgnoreTransientFields(true);
+
+        //jsonConfig.setIgnorePublicFields(false);
 
         // 注册日期处理器
         jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor(DatePattern.COMMON_DATE_AND_TIME));

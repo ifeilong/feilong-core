@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 import org.junit.Test;
@@ -86,6 +87,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toBeanNUll(){
         LOGGER.info(JsonUtil.toJSON(null, null).toString(4, 4));
+        LOGGER.info(new JSONObject().toString(4));
     }
 
     /**
@@ -190,7 +192,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         String json = "[{'name':'get'},{'name':'set'}]";
         List<Person> list = JsonUtil.toList(json, Person.class);
 
-        LOGGER.info(JsonUtil.toJSON(list).toString(4, 4));
+        LOGGER.info(JsonUtil.format(list));
     }
 
     /**
@@ -217,14 +219,20 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void testGetMapFromJsonObjStr(){
         String json = "{'name':'get','int':1,'double':1.1,'null':null}";
+
+        //        JSONObject jsonObj = JSONObject.fromObject(json);
+        //        Map<String, Object> map = (Map<String, Object>) JSONObject.toBean(jsonObj, Map.class);
         Map<String, Object> map = JsonUtil.toMap(json);
-        for (Iterator<String> iter = map.keySet().iterator(); iter.hasNext();){
-            Object key = iter.next();
-            LOGGER.info(key + ":" + map.get(key).getClass().toString());
+
+        for (Map.Entry<String, Object> entry : map.entrySet()){
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            LOGGER.info(key + ":" + value + ":" + value.getClass().getCanonicalName());
         }
         /*
          * print: class java.lang.Double class net.sf.json.JSONNull class java.lang.Integer class java.lang.String
          */
+
     }
 
     /**

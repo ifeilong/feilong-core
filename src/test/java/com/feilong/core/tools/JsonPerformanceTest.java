@@ -15,7 +15,6 @@
  */
 package com.feilong.core.tools;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,9 +23,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.test.User;
 
@@ -41,7 +37,7 @@ public class JsonPerformanceTest extends BaseJsonTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonPerformanceTest.class);
 
     @Test
-    public void testJsonUtilTest2() throws JsonGenerationException,JsonMappingException,JsonProcessingException,IOException{
+    public void testJsonUtilTest2(){
         User user = getUserForJsonTest();
 
         List<Integer> list = new ArrayList<Integer>();
@@ -58,14 +54,13 @@ public class JsonPerformanceTest extends BaseJsonTest{
         }
     }
 
-    private void performanceTest(User user,int times) throws JsonGenerationException,JsonMappingException,JsonProcessingException,
-                    IOException{
-        String type = "jackson2 2";
-        //        String type = "json-lib";
+    private void performanceTest(User user,int times){
+        //String type = "jackson2 2";
+        String type = "json-lib";
         Date beginDate = new Date();
         for (int i = 0; i < times; ++i){
             //JsonUtil.toJSON(userForJsonTest, null);
-            com.feilong.core.tools.jackson2.JsonUtil.writeValueAsString(user);
+            //com.feilong.core.tools.jackson2.JsonUtil.writeValueAsString(user);
             //com.feilong.core.tools.jackson2.JsonUtil.toJson(user);
         }
         Date endDate = new Date();
