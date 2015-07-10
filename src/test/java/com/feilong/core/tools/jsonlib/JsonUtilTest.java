@@ -25,6 +25,7 @@ import java.util.Vector;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.processors.JsonValueProcessor;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,6 +34,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.tools.BaseJsonTest;
+import com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
+import com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 
@@ -97,6 +100,17 @@ public class JsonUtilTest extends BaseJsonTest{
     }
 
     /**
+     * Name1.
+     */
+    @Test
+    public void testFormat(){
+        User user = getUserForJsonTest();
+        //String[] excludes = { "name" };
+        String[] excludes = { "name" };
+        LOGGER.info(JsonUtil.format(user, excludes));
+    }
+
+    /**
      * To bean.
      */
     @Test
@@ -109,6 +123,25 @@ public class JsonUtilTest extends BaseJsonTest{
 
         User user = JsonUtil.toBean(json, User.class, classMap);
         LOGGER.info(JsonUtil.format(user));
+    }
+
+    /**
+     * TestJsonUtilTest.
+     */
+    @Test
+    public void testSensitiveWordsJsonValueProcessor(){
+        User user = new User("feilong1", 24);
+        user.setPassword("123456");
+        user.setMoney(new BigDecimal("9999.00"));
+
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+        propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
+        propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
+
+        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+
+        LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
     }
 
     /**

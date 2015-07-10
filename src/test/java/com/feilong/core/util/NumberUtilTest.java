@@ -18,7 +18,6 @@ package com.feilong.core.util;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import org.junit.Test;
@@ -149,7 +148,7 @@ public class NumberUtilTest{
      * Testadd.
      */
     @Test
-    public void testadd(){
+    public void testAdd(){
         BigDecimal a = new BigDecimal(19);
         BigDecimal b = new BigDecimal(20);
 
@@ -162,22 +161,6 @@ public class NumberUtilTest{
             LOGGER.info("{}次:{}", i, temp);
         }
 
-    }
-
-    /**
-     * Convert number to string2.
-     */
-    @Test
-    public void convertNumberToString2(){
-        DecimalFormat decimalFormat = new DecimalFormat("00");
-        BigDecimal number = BigDecimal.valueOf(88.50);
-        decimalFormat.setRoundingMode(RoundingMode.CEILING);
-        // decimalFormat.setMaximumFractionDigits(2);
-        // decimalFormat.setMinimumFractionDigits(2);
-        // maxFractionDigits
-        number.setScale(2, BigDecimal.ROUND_HALF_UP);
-        LOGGER.info(number.toString());
-        LOGGER.info(decimalFormat.format(number));
     }
 
     /**
@@ -235,20 +218,29 @@ public class NumberUtilTest{
      */
     @Test
     public void toNoScale2(){
-        assertEquals("88", NumberUtil.toNoScale(88.02));
-        assertEquals("89", NumberUtil.toNoScale(88.520));
-        assertEquals("89", NumberUtil.toNoScale(88.820f));
-        assertEquals("88", NumberUtil.toNoScale(88.4999f));
-        assertEquals("88", NumberUtil.toNoScale(88.4999d));
-        assertEquals("-88", NumberUtil.toNoScale(-88.5999d));
+        assertEquals(new BigDecimal(88), NumberUtil.toNoScale(88.02));
+        assertEquals(new BigDecimal(89), NumberUtil.toNoScale(88.520));
+        assertEquals(new BigDecimal(89), NumberUtil.toNoScale(88.820f));
+        assertEquals(new BigDecimal(88), NumberUtil.toNoScale(88.4999f));
+        assertEquals(new BigDecimal(88), NumberUtil.toNoScale(88.4999d));
+        assertEquals(new BigDecimal(-88), NumberUtil.toNoScale(-88.5999d));
         // ***********************************************************************
-        assertEquals("0", NumberUtil.toNoScale(0.1));
-        assertEquals("1", NumberUtil.toNoScale(0.5));
+        assertEquals(new BigDecimal(0), NumberUtil.toNoScale(0.1));
+        assertEquals(new BigDecimal(1), NumberUtil.toNoScale(0.5));
         //
-        assertEquals("-1", NumberUtil.toNoScale(-0.5));
-        assertEquals("0", NumberUtil.toNoScale(-0.11111111));
+        assertEquals(new BigDecimal(-1), NumberUtil.toNoScale(-0.5));
+        assertEquals(new BigDecimal(0), NumberUtil.toNoScale(-0.11111111));
         assertEquals(null, NumberUtil.toNoScale(null));
-        assertEquals("123", NumberUtil.toNoScale(new BigDecimal(123) + ""));
+        assertEquals(new BigDecimal(123), NumberUtil.toNoScale(new BigDecimal(123) + ""));
+    }
+
+    /**
+     * Test to string.
+     */
+    @Test
+    public void testToString(){
+        assertEquals("88.02", NumberUtil.toString(88.02, NumberPattern.TWO_DECIMAL_POINTS));
+        assertEquals("88.03", NumberUtil.toString(88.028, NumberPattern.TWO_DECIMAL_POINTS));
     }
 
     /**
@@ -268,7 +260,7 @@ public class NumberUtilTest{
      */
     @Test
     public void testGetMultiplyValue(){
-        LOGGER.debug("MultiplyValue:" + NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
+        assertEquals(new BigDecimal("7.31250"), NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
     }
 
     /**

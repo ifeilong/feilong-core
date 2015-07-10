@@ -115,12 +115,11 @@ public final class JsonUtil{
      * @param obj
      *            任何对象
      * @return the string
-     * @see #format(Object, String[])
-     * @see #format(Object, JsonConfig)
+     * @see #format(Object, JsonFormatConfig)
      */
     public static String format(Object obj){
-        String[] excludes = null;
-        return format(obj, excludes);
+        JsonFormatConfig jsonFormatConfig = null;
+        return format(obj, jsonFormatConfig);
     }
 
     /**
@@ -149,19 +148,15 @@ public final class JsonUtil{
      * @since 1.0.8
      */
     public static String formatWithIncludes(Object obj,final String...includes){
-
         if (null == obj){
             return null;
         }
-
-        JsonConfig jsonConfig = null;
-
+        JsonFormatConfig jsonFormatConfig = null;
         if (Validator.isNotNullOrEmpty(includes)){
-            jsonConfig = getDefaultJsonConfig();
-            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(includes));
-
+            jsonFormatConfig = new JsonFormatConfig();
+            jsonFormatConfig.setIncludes(includes);
         }
-        return format(obj, jsonConfig);
+        return format(obj, jsonFormatConfig);
     }
 
     /**
@@ -212,16 +207,75 @@ public final class JsonUtil{
      *            the indent
      * @return the string
      */
-    public static String format(Object obj,String[] excludes,int indentFactor,int indent){
+    public static String format(Object obj,String[] excludes,Integer indentFactor,Integer indent){
         if (null == obj){
             return null;
         }
+        JsonFormatConfig jsonFormatConfig = null;
+        if (Validator.isNotNullOrEmpty(excludes)){
+            jsonFormatConfig = new JsonFormatConfig();
+            jsonFormatConfig.setExcludes(excludes);
+        }
+        return format(obj, jsonFormatConfig, indentFactor, indent);
+    }
+
+    /**
+     * Format.
+     *
+     * @param obj
+     *            the obj
+     * @param jsonFormatConfig
+     *            the json format config
+     * @return the string
+     * @since 1.2.2
+     */
+    public static String format(Object obj,JsonFormatConfig jsonFormatConfig){
+        return format(obj, jsonFormatConfig, 4, 4);
+    }
+
+    /**
+     * Format.
+     *
+     * @param obj
+     *            the obj
+     * @param jsonFormatConfig
+     *            the json format config
+     * @param indentFactor
+     *            the indent factor
+     * @param indent
+     *            the indent
+     * @return the string
+     * @since 1.2.2
+     */
+    public static String format(Object obj,JsonFormatConfig jsonFormatConfig,int indentFactor,int indent){
         JsonConfig jsonConfig = null;
 
+        if (null == jsonFormatConfig){
+            return format(obj, jsonConfig);
+        }
+
+        jsonConfig = getDefaultJsonConfig();
+
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = jsonFormatConfig.getPropertyNameAndJsonValueProcessorMap();
+
+        if (Validator.isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
+            for (Map.Entry<String, JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
+                String propertyName = entry.getKey();
+                JsonValueProcessor jsonValueProcessor = entry.getValue();
+                jsonConfig.registerJsonValueProcessor(propertyName, jsonValueProcessor);
+            }
+        }
+
+        String[] excludes = jsonFormatConfig.getExcludes();
         if (Validator.isNotNullOrEmpty(excludes)){
-            jsonConfig = getDefaultJsonConfig();
             jsonConfig.setExcludes(excludes);
         }
+
+        String[] includes = jsonFormatConfig.getIncludes();
+        if (Validator.isNotNullOrEmpty(includes)){
+            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(includes));
+        }
+
         return format(obj, jsonConfig, indentFactor, indent);
     }
 
@@ -675,11 +729,14 @@ public final class JsonUtil{
      *
      * @return the default json config
      * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
+     * 
+     * @see net.sf.json.util.CycleDetectionStrategy#LENIENT
      */
     private static JsonConfig getDefaultJsonConfig(){
         JsonConfig jsonConfig = new JsonConfig();
 
         // 排除,避免循环引用 There is a cycle in the hierarchy!
+        //Returns empty array and null object
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
@@ -687,7 +744,7 @@ public final class JsonUtil{
         jsonConfig.setIgnoreDefaultExcludes(false);
 
         // 注册日期处理器
-        jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor());
+        jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor(DatePattern.COMMON_DATE_AND_TIME));
 
         // java.lang.ClassCastException: JSON keys must be strings
         // see http://feitianbenyue.iteye.com/blog/2046877

@@ -17,7 +17,13 @@ package com.feilong.core.text;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class NumberFormatUtilTest.
@@ -28,6 +34,9 @@ import org.junit.Test;
  */
 public class NumberFormatUtilTest{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(NumberFormatUtilTest.class);
+
     /**
      * Test method for {@link com.feilong.core.text.NumberFormatUtil#format(java.lang.Number, java.lang.String)}.
      */
@@ -35,5 +44,21 @@ public class NumberFormatUtilTest{
     public final void testFormat(){
         assertEquals("26", NumberFormatUtil.format(25.5, "#####"));
         assertEquals("RP 26", NumberFormatUtil.format(25.5, "RP #####"));
+    }
+
+    /**
+     * Convert number to string2.
+     */
+    @Test
+    public void testConvertNumberToString2(){
+        DecimalFormat decimalFormat = new DecimalFormat("00");
+        BigDecimal number = BigDecimal.valueOf(88.50);
+        decimalFormat.setRoundingMode(RoundingMode.CEILING);
+        // decimalFormat.setMaximumFractionDigits(2);
+        // decimalFormat.setMinimumFractionDigits(2);
+        // maxFractionDigits
+        number.setScale(2, BigDecimal.ROUND_HALF_UP);
+        LOGGER.info(number.toString());
+        LOGGER.info(decimalFormat.format(number));
     }
 }

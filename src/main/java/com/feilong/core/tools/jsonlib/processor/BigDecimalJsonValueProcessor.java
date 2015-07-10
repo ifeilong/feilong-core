@@ -15,34 +15,47 @@
  */
 package com.feilong.core.tools.jsonlib.processor;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
-import com.feilong.core.date.DatePattern;
-import com.feilong.core.date.DateUtil;
+import com.feilong.core.util.NumberPattern;
+import com.feilong.core.util.NumberUtil;
+import com.feilong.core.util.Validator;
 
 /**
- * 时间转换 日期值处理器实现.
- * 
+ * The Class BigDecimalJsonValueProcessor.
+ *
  * @author feilong
- * @version 1.0.5 Jan 26, 2013 3:49:55 PM
- * @since 1.0.5
+ * @version 1.2.2 2015年7月10日 下午11:16:48
+ * @since 1.2.2
  */
-public class DateJsonValueProcessor implements JsonValueProcessor{
+public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
 
-    /** The date pattern. */
-    private String datePattern = DatePattern.COMMON_DATE_AND_TIME;
+    /**
+     * The number pattern.
+     * 
+     * @see com.feilong.core.util.NumberPattern
+     * */
+    private String numberPattern;
+
+    /**
+     * The Constructor.
+     */
+    public BigDecimalJsonValueProcessor(){
+        super();
+    }
 
     /**
      * The Constructor.
      *
-     * @param datePattern
-     *            the date pattern
+     * @param numberPattern
+     *            the number pattern
      */
-    public DateJsonValueProcessor(String datePattern){
-        this.datePattern = datePattern;
+    public BigDecimalJsonValueProcessor(String numberPattern){
+        super();
+        this.numberPattern = numberPattern;
     }
 
     /*
@@ -73,12 +86,18 @@ public class DateJsonValueProcessor implements JsonValueProcessor{
      * @return the object
      */
     private Object process(Object value){
-        if (null == value){
-            return null;
+        if (value == null){
+            return "";
         }
-        if (value instanceof Date){
-            return DateUtil.date2String((Date) value, datePattern);
+        //两位小数点
+        if (value instanceof BigDecimal){
+            if (Validator.isNullOrEmpty(numberPattern)){
+                numberPattern = NumberPattern.TWO_DECIMAL_POINTS;
+            }
+
+            Number number = (Number) value;
+            return NumberUtil.toString(number, numberPattern);
         }
-        return value.toString();
+        return value;
     }
 }

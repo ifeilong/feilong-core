@@ -15,23 +15,25 @@
  */
 package com.feilong.core.tools.jsonlib.processor;
 
-import java.math.BigDecimal;
-
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * The Class DoubleJsonValueProcessor.
- * 
+ * 过滤敏感信息，最直接的就是像密码这样的内容，不可以输出在控制台，需要转换成***字眼.
+ *
  * @author feilong
- * @version 1.0.7 2014-5-28 13:30:06
+ * @version 1.2.2 2015年7月10日 下午10:54:55
+ * @since 1.2.2
  */
-public class DoubleJsonValueProcessor implements JsonValueProcessor{
+public class SensitiveWordsJsonValueProcessor implements JsonValueProcessor{
+
+    /** The default sensitive words. */
+    private static String DEFAULT_SENSITIVE_WORDS = "******";
 
     /**
-     * Instantiates a new double json value processor.
+     * The Constructor.
      */
-    public DoubleJsonValueProcessor(){
+    public SensitiveWordsJsonValueProcessor(){
     }
 
     /*
@@ -40,27 +42,8 @@ public class DoubleJsonValueProcessor implements JsonValueProcessor{
      * @see net.sf.json.processors.JsonValueProcessor#processArrayValue(java.lang.Object, net.sf.json.JsonConfig)
      */
     @Override
-    public Object processArrayValue(Object arg0,JsonConfig arg1){
-        return process(arg0);
-    }
-
-    /**
-     * Process.
-     * 
-     * @param arg0
-     *            the arg0
-     * @return the object
-     */
-    private Object process(Object arg0){
-        if (arg0 == null){
-            return "";
-        }else{
-            //对于 double 转成 BigDecimal，推荐使用 BigDecimal.valueOf，不建议使用new BigDecimal(double)，参见 JDK API
-            //new BigDecimal(0.1) ====>   0.1000000000000000055511151231257827021181583404541015625
-            //BigDecimal.valueOf(0.1) ====>  0.1
-            BigDecimal a = BigDecimal.valueOf((Double) arg0);
-            return String.valueOf(a);
-        }
+    public Object processArrayValue(Object value,JsonConfig jsonConfig){
+        return processValue(value);
     }
 
     /*
@@ -69,7 +52,21 @@ public class DoubleJsonValueProcessor implements JsonValueProcessor{
      * @see net.sf.json.processors.JsonValueProcessor#processObjectValue(java.lang.String, java.lang.Object, net.sf.json.JsonConfig)
      */
     @Override
-    public Object processObjectValue(String arg0,Object arg1,JsonConfig arg2){
-        return process(arg1);
+    public Object processObjectValue(String key,Object value,JsonConfig jsonConfig){
+        return processValue(value);
+    }
+
+    /**
+     * Process.
+     *
+     * @param value
+     *            the value
+     * @return the object
+     */
+    private Object processValue(Object value){
+        if (null == value){
+            return null;
+        }
+        return DEFAULT_SENSITIVE_WORDS;
     }
 }

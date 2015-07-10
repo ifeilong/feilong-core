@@ -123,6 +123,13 @@ public final class NumberPattern{
      * */
     public static final String NO_SCALE             = "#";
 
+    /**
+     * (2位小数点) <code>{@value}</code>.
+     * 
+     * @since 1.2.2
+     * */
+    public static final String TWO_DECIMAL_POINTS   = "#0.00";
+
     /** 百分数的表达式(不带小数) <code>{@value}</code>. */
     public static final String PERCENT_WITH_NOPOINT = "##%";
 
