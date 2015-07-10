@@ -27,7 +27,9 @@ import java.util.Collections;
  * 
  * @author 金鑫 2010-4-15 下午01:51:24
  * @since 1.0.0
+ * @deprecated will Re-structure
  */
+@Deprecated
 public final class Algorithm{
 
     /** Don't let anyone instantiate this class. */
