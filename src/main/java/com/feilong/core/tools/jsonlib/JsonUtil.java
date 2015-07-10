@@ -33,7 +33,6 @@ import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.JSONUtils;
-import net.sf.json.util.PropertyFilter;
 import net.sf.json.util.PropertySetStrategy;
 import net.sf.json.xml.XMLSerializer;
 
@@ -43,7 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.tools.jsonlib.processor.DateJsonValueProcessor;
-import com.feilong.core.util.ArrayUtil;
+import com.feilong.core.tools.jsonlib.propertyFilter.ArrayContainsPropertyNamesPropertyFilter;
 import com.feilong.core.util.Validator;
 
 /**
@@ -75,7 +74,12 @@ import com.feilong.core.util.Validator;
 public final class JsonUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtil.class);
+    private static final Logger     LOGGER = LoggerFactory.getLogger(JsonUtil.class);
+
+    /** The Constant DEFAULT_JSON_CONFIG. */
+    private static final JsonConfig DEFAULT_JSON_CONFIG;
+
+    //***********************************************************************************
 
     /** Don't let anyone instantiate this class. */
     private JsonUtil(){
@@ -84,9 +88,7 @@ public final class JsonUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /** The Constant DEFAULT_JSON_CONFIG. */
-    private static final JsonConfig DEFAULT_JSON_CONFIG;
-
+    //***********************************************************************************
     /**
      * 设置日期转换格式
      */
@@ -136,6 +138,67 @@ public final class JsonUtil{
     }
 
     /**
+     * 只包含这些key才被format出json格式.
+     *
+     * @param obj
+     *            the obj
+     * @param includes
+     *            the includes
+     * @return the string
+     * @since 1.0.8
+     */
+    public static String formatWithIncludes(Object obj,final String...includes){
+
+        if (null == obj){
+            return null;
+        }
+
+        JsonConfig jsonConfig = null;
+
+        if (Validator.isNotNullOrEmpty(includes)){
+            jsonConfig = getDefaultJsonConfig();
+            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(includes));
+
+        }
+        return format(obj, jsonConfig);
+    }
+
+    /**
+     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.<br>
+     *
+     * @param obj
+     *            the obj
+     * @param jsonConfig
+     *            the json config
+     * @return if null==obj will return {@code null}; else return toJSON(obj, jsonConfig).toString(4, 4)
+     * @see net.sf.json.JsonConfig
+     * @see #toJSON(Object, JsonConfig)
+     * @see net.sf.json.JSON#toString(int, int)
+     * @see #format(Object, JsonConfig, int, int)
+     * @since 1.0.7
+     */
+    public static String format(Object obj,JsonConfig jsonConfig){
+        return format(obj, jsonConfig, 4, 4);
+    }
+
+    /**
+     * Format.
+     *
+     * @param obj
+     *            the obj
+     * @param indentFactor
+     *            the indent factor
+     * @param indent
+     *            the indent
+     * @return the string
+     * @since 1.2.2
+     */
+    public static String format(Object obj,int indentFactor,int indent){
+        JsonConfig jsonConfig = null;
+        return format(obj, jsonConfig, indentFactor, indent);
+    }
+
+    /**
      * Format.
      *
      * @param obj
@@ -158,86 +221,7 @@ public final class JsonUtil{
             jsonConfig = getDefaultJsonConfig();
             jsonConfig.setExcludes(excludes);
         }
-
-        JSON json = toJSON(obj, jsonConfig);
-        String string = json.toString(indentFactor, indent);
-        return string;
-    }
-
-    /**
-     * 只包含这些key才被format出json格式.
-     *
-     * @param obj
-     *            the obj
-     * @param includes
-     *            the includes
-     * @return the string
-     * @since 1.0.8
-     */
-    public static String formatWithIncludes(Object obj,final String...includes){
-
-        if (null == obj){
-            return null;
-        }
-
-        JsonConfig jsonConfig = null;
-
-        if (Validator.isNotNullOrEmpty(includes)){
-            jsonConfig = getDefaultJsonConfig();
-            jsonConfig.setJsonPropertyFilter(new PropertyFilter(){
-
-                @Override
-                public boolean apply(Object source,String name,Object value){
-                    return !ArrayUtil.isContain(includes, name);
-                }
-            });
-
-        }
-        return format(obj, jsonConfig);
-    }
-
-    /**
-     * 默认的JsonConfig.
-     *
-     * @return the default json config
-     * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
-     */
-    private static JsonConfig getDefaultJsonConfig(){
-        JsonConfig jsonConfig = new JsonConfig();
-
-        // 排除,避免循环引用 There is a cycle in the hierarchy!
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-
-        //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
-        //默认会过滤的几个key "class", "declaringClass","metaClass"  
-        jsonConfig.setIgnoreDefaultExcludes(false);
-
-        // 注册日期处理器
-        jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor());
-
-        // java.lang.ClassCastException: JSON keys must be strings
-        // see http://feitianbenyue.iteye.com/blog/2046877
-        jsonConfig.setAllowNonStringKeys(true);
-
-        return jsonConfig;
-    }
-
-    /**
-     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.<br>
-     *
-     * @param obj
-     *            the obj
-     * @param jsonConfig
-     *            the json config
-     * @return if null==obj will return {@code null}; else return toJSON(obj, jsonConfig).toString(4, 4)
-     * @see net.sf.json.JsonConfig
-     * @see #toJSON(Object, JsonConfig)
-     * @see net.sf.json.JSON#toString(int, int)
-     * @see #format(Object, JsonConfig, int, int)
-     * @since 1.0.7
-     */
-    public static String format(Object obj,JsonConfig jsonConfig){
-        return format(obj, jsonConfig, 4, 4);
+        return format(obj, jsonConfig, indentFactor, indent);
     }
 
     /**
@@ -684,4 +668,30 @@ public final class JsonUtil{
     }
 
     // [end]
+
+    /**
+     * 默认的JsonConfig.
+     *
+     * @return the default json config
+     * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
+     */
+    private static JsonConfig getDefaultJsonConfig(){
+        JsonConfig jsonConfig = new JsonConfig();
+
+        // 排除,避免循环引用 There is a cycle in the hierarchy!
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+
+        //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
+        //默认会过滤的几个key "class", "declaringClass","metaClass"  
+        jsonConfig.setIgnoreDefaultExcludes(false);
+
+        // 注册日期处理器
+        jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor());
+
+        // java.lang.ClassCastException: JSON keys must be strings
+        // see http://feitianbenyue.iteye.com/blog/2046877
+        jsonConfig.setAllowNonStringKeys(true);
+
+        return jsonConfig;
+    }
 }

@@ -115,7 +115,7 @@ public class JsonUtilTest extends BaseJsonTest{
      * TestJsonUtilTest.
      */
     @Test
-    public void testJsonUtilTest(){
+    public void testFormatWithIncludes1(){
 
         User user1 = new User("feilong1", 24);
         user1.setId(8L);
@@ -146,7 +146,7 @@ public class JsonUtilTest extends BaseJsonTest{
      * TestJsonUtilTest.
      */
     @Test
-    public void testJsonUtilTest1(){
+    public void testFormatWithIncludes(){
         Object[][] objects = { { "nike shoe", "500", 1 }, { "nike shoe2", "5000", 1 } };
         LOGGER.info(JsonUtil.formatWithIncludes(objects));
     }

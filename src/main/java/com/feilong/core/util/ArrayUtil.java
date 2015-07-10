@@ -173,9 +173,11 @@ public final class ArrayUtil{
     }
 
     /**
-     * 判断 一个数组中,是否包含某个特定的值.<br>
+     * 判断 一个数组中,是否包含某个特定的值.
+     * <p>
      * 使用equals 来比较,所以如果是 对象类型 需要自己实现equals方法.<br>
      * 支持 null的判断
+     * </p>
      * 
      * @param <T>
      *            the generic type
