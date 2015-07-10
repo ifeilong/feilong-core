@@ -39,5 +39,6 @@ public class TimeIntervalTest{
         LOGGER.info("" + TimeInterval.MILLISECOND_PER_YEAR);
         LOGGER.info("" + TimeInterval.MILLISECOND_PER_MONTH);
         LOGGER.info("" + TimeInterval.MILLISECOND_PER_WEEK);
+        LOGGER.info("" + TimeInterval.MILLISECOND_PER_SECONDS);
     }
 }
