@@ -52,15 +52,49 @@ public class JsonUtilTest extends BaseJsonTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilTest.class);
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.core.tools.BaseJsonTest#testPerformance()
+     */
+    @Override
+    @Test
+    public void testPerformance(){
+        super.testPerformance();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.core.tools.BaseJsonTest#getType()
+     */
+    @Override
+    protected String getType(){
+        return "json-lib";
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.core.tools.BaseJsonTest#performanceMethod(com.feilong.test.User)
+     */
+    @Override
+    protected void performanceMethod(User user){
+        JsonUtil.toJSON(user, null);
+    }
+
     /**
      * Test json string.
      */
     @Test
     public void testJsonString(){
-        String json = JsonUtil.format(getUserForJsonTest());
+        String json = JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST);
         LOGGER.info(json);
     }
 
+    /**
+     * Test json string1.
+     */
     @Test
     public void testJsonString1(){
         BigDecimal[] aBigDecimals = { new BigDecimal("9999.00") };
@@ -73,7 +107,9 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void name(){
-        JSONObject jsonObject = JSONObject.fromObject(json);
+        String json_test = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
+
+        JSONObject jsonObject = JSONObject.fromObject(json_test);
         Object bean = JSONObject.toBean(jsonObject);
 
         Assert.assertEquals(jsonObject.get("name"), PropertyUtil.getProperty(bean, "name"));
@@ -90,24 +126,18 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void format(){
-        String json = JsonUtil.format(getUserForJsonTest());
-        LOGGER.info(json);
-
-        User user = JsonUtil.toBean(json, User.class);
+        User user = JsonUtil.toBean(DEFAULT_USER_FOR_JSON_TEST_JSON, User.class);
         user.setId(10L);
-        json = JsonUtil.format(user);
-        LOGGER.info(json);
+        LOGGER.info(JsonUtil.format(user));
     }
 
     /**
      * Name1.
      */
     @Test
-    public void testFormat(){
-        User user = getUserForJsonTest();
-        //String[] excludes = { "name" };
+    public void testExcludes(){
         String[] excludes = { "name" };
-        LOGGER.info(JsonUtil.format(user, excludes));
+        LOGGER.info(JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST, excludes));
     }
 
     /**
@@ -115,13 +145,10 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void toBean(){
-        String json = JsonUtil.format(getUserForJsonTest());
-        LOGGER.info(json);
-
         Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
         classMap.put("userAddresseList", UserAddress.class);
 
-        User user = JsonUtil.toBean(json, User.class, classMap);
+        User user = JsonUtil.toBean(DEFAULT_USER_FOR_JSON_TEST_JSON, User.class, classMap);
         LOGGER.info(JsonUtil.format(user));
     }
 

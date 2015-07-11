@@ -642,7 +642,6 @@ public final class JsonUtil{
         if (null == jsonConfig){
             jsonConfig = DEFAULT_JSON_CONFIG;
         }
-
         // obj instanceof Collection || obj instanceof Object[]
         if (JSONUtils.isArray(obj) || //
                         obj instanceof Enum || // obj.getClass().isEnum()这么些 null会报错// object' is an Enum. Use JSONArray instead

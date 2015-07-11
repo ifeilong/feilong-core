@@ -20,26 +20,39 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.feilong.core.date.DateExtensionUtil;
+import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
 
 /**
+ * The Class BaseJsonTest.
  *
  * @author feilong
  * @version 1.2.2 2015年7月8日 上午1:54:27
  * @since 1.2.2
  */
-public class BaseJsonTest{
+public abstract class BaseJsonTest{
 
-    protected String json = "{name=\"json\",bool:true,int:1,double:2.2,func:function(a){ return a; },array:[1,2]}";
+    /** The Constant log. */
+    private static final Logger   LOGGER                          = LoggerFactory.getLogger(BaseJsonTest.class);
+
+    /** The Constant DEFAULT_USER_FOR_JSON_TEST. */
+    protected static final User   DEFAULT_USER_FOR_JSON_TEST      = getUserForJsonTest();
+
+    /** The Constant DEFAULT_USER_FOR_JSON_TEST_JSON. */
+    protected static final String DEFAULT_USER_FOR_JSON_TEST_JSON = JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST);
 
     /**
      * Gets the json string.
      * 
      * @return the json string
      */
-    protected User getUserForJsonTest(){
+    private static User getUserForJsonTest(){
         User user = new User();
 
         user.setId(8L);
@@ -71,4 +84,38 @@ public class BaseJsonTest{
 
         return user;
     }
+
+    protected void testPerformance(){
+        User user = DEFAULT_USER_FOR_JSON_TEST;
+
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(1);
+        list.add(10);
+        list.add(100);
+        list.add(1000);
+        list.add(10000);
+        list.add(100000);
+        list.add(1000000);
+
+        for (Integer times : list){
+            performanceTest(user, times);
+        }
+    }
+
+    private void performanceTest(User user,int times){
+        //String type = "jackson2 2";
+        String type = getType();
+        Date beginDate = new Date();
+        for (int i = 0; i < times; ++i){
+            performanceMethod(user);
+
+        }
+        Date endDate = new Date();
+        LOGGER.info("[{}]{},use time:{}", type, times, DateExtensionUtil.getIntervalForView(beginDate, endDate));
+    }
+
+    protected abstract void performanceMethod(User user);
+
+    protected abstract String getType();
+
 }

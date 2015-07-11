@@ -15,7 +15,6 @@
  */
 package com.feilong.core.tools.jsonlib;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -60,12 +59,8 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toBean1(){
         String json = "{'name':'get','dateAttr':'2009-11-12'}";
-        Person person = JsonUtil.toBean(json, Person.class);
-        // print: get
-        LOGGER.info(person.getName());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        // print: 2009-11-12
-        LOGGER.info(sdf.format(person.getDateAttr()));
+        LOGGER.debug(JsonUtil.format(JsonUtil.toBean(json, Person.class)));
+        LOGGER.debug(JsonUtil.format(json));
     }
 
     /**
@@ -362,5 +357,27 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
 
         // print: {"person1":{"dateAttr":"2009-09-12 07:24:27","name":"get"}}
         LOGGER.info("" + JsonUtil.toJSON(map));
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.core.tools.BaseJsonTest#performanceMethod(com.feilong.test.User)
+     */
+    @Override
+    protected void performanceMethod(User user){
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.core.tools.BaseJsonTest#getType()
+     */
+    @Override
+    protected String getType(){
+        // TODO Auto-generated method stub
+        return null;
     }
 }
