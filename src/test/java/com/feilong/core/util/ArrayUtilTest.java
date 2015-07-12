@@ -98,7 +98,7 @@ public class ArrayUtilTest{
         LOGGER.debug(JsonUtil.format(values));
 
         //****************************************************************
-        String[] array1 = { "金鑫", "feilong", "金鑫", "基友团", "金鑫" };
+        String[] array1 = { "关羽", "feilong", "关羽", "基友团", "关羽" };
 
         Map<String, List<String>> group1 = ArrayUtil.group(array1);
 

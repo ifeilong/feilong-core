@@ -31,8 +31,10 @@ import com.feilong.core.util.Validator;
 
 /**
  * 处理参数相关.
- * 
- * @author 金鑫 2010-4-15 下午04:01:29
+ *
+ * @author feilong
+ * @version 1.0.0 2010-4-15 下午04:01:29
+ * @since 1.0.0
  */
 public final class ParamUtil{
 

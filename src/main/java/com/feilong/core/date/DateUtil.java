@@ -153,7 +153,7 @@ import com.feilong.core.util.Validator;
  * }
  * </pre>
  * 
- * @author <a href="venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0.0 2010-1-27 下午01:53:21
  * @version 1.0.5 2014-5-6 10:04
  * @see CalendarUtil

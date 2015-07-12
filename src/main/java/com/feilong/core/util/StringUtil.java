@@ -54,8 +54,9 @@ import com.feilong.core.lang.ObjectUtil;
  * 区别在于,split 使用的是 正则表达式 {@link Pattern#split(CharSequence)} 分隔(特别注意,一些特殊字符 $|()[{^?*+\\ 需要转义才能做分隔符),而 {@link StringTokenizer} 使用索引机制,在性能上
  * StringTokenizer更高<br>
  * 因此,在注重性能的场景,还是建议使用{@link StringTokenizer}
- * 
- * @author 金鑫 2010-2-9 上午09:53:37
+ *
+ * @author feilong
+ * @version 1.0.0 2010-2-9 上午09:53:37
  * @see "org.springframework.util.StringUtils#tokenizeToStringArray(String, String)"
  * @see "org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#MULTI_VALUE_ATTRIBUTE_DELIMITERS"
  * @see java.util.StringTokenizer

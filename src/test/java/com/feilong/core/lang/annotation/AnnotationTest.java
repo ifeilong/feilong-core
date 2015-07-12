@@ -46,7 +46,7 @@ public class AnnotationTest{
     /**
      * Jinxin.
      */
-    @MyAnnotation(name = "金鑫",sex = 1,loveStrings = { "胡伟立", "三国" })
+    @MyAnnotation(name = "关羽",sex = 1,loveStrings = { "胡伟立", "三国" })
     public void jinxin(){
         throw new NotImplementedException("jinxin is not implemented!");
     }

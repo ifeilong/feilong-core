@@ -73,7 +73,7 @@ public class PropertiesUtilTest{
 //		// 建立Properties对象
 //		Properties properties = new Properties();
 //		// 将信息方入Properties对象
-//		properties.put("a.b.c", "金鑫");
+//		properties.put("a.b.c", "关羽");
 //		properties.put("aaa", "ppp");
 //		// 将信息包存在a.ini文件中
 //		try{

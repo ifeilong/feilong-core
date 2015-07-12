@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 扩展 {@link DateUtil}类,更多人性化的操作及转换 .
  * 
- * @author <a href="venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.1 Aug 4, 2010 9:06:54 PM
  * @see DateUtil
  * @since 1.0.0

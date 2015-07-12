@@ -20,7 +20,8 @@ import java.util.List;
 /**
  * {@link List}工具类.
  * 
- * @author 金鑫 2010-3-2 下午03:20:12
+ * @author feilong
+ * @version 1.0.0 2010-3-2 下午03:20:12
  * @since 1.0.0
  */
 public final class ListUtil{

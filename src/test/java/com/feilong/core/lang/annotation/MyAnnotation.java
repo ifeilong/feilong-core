@@ -44,7 +44,7 @@ public @interface MyAnnotation{
      * 
      * @return the string
      */
-    String name() default "金鑫";
+    String name() default "关羽";
 
     /**
      * 性别 1=男.

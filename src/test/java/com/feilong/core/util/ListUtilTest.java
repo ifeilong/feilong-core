@@ -53,7 +53,6 @@ public class ListUtilTest{
         Map<String, String> map = new TreeMap<String, String>();
 
         map.put("周小州", "123");
-        map.put("金鑫", "234");
         map.put("郑猛", "345");
         map.put("谭斌", "8910");
         map.put("郑川旸", "8910");

@@ -33,8 +33,9 @@ import com.feilong.core.util.Validator;
 
 /**
  * object工具类.
- * 
- * @author 金鑫 2010-4-5 下午11:00:54
+ *
+ * @author feilong
+ * @version 1.0.0 2010-4-5 下午11:00:54
  * @since 1.0.0
  */
 public final class ObjectUtil{

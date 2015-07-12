@@ -25,7 +25,8 @@ import java.util.Collections;
  * 注：使用场景不高，一般需要用到排序的时候，会调用 {@link Arrays#sort(Object[], java.util.Comparator)}, {@link Collections#sort(java.util.List)}
  * </p>
  * 
- * @author 金鑫 2010-4-15 下午01:51:24
+ * @author feilong
+ * @version 1.0.0 2010-4-15 下午01:51:24
  * @since 1.0.0
  * @deprecated will Re-structure
  */
