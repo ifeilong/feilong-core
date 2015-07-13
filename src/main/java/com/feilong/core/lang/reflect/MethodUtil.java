@@ -16,6 +16,8 @@
 package com.feilong.core.lang.reflect;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.log.Slf4jUtil;
@@ -88,6 +90,9 @@ import com.feilong.core.log.Slf4jUtil;
  */
 public final class MethodUtil{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodUtil.class);
+
     /** Don't let anyone instantiate this class. */
     private MethodUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -154,6 +159,7 @@ public final class MethodUtil{
                             methodName,
                             args,
                             parameterTypes);
+            LOGGER.error(message, e);
             throw new ReflectException(message, e);
         }
     }
@@ -206,6 +212,7 @@ public final class MethodUtil{
                             methodName,
                             args,
                             parameterTypes);
+            LOGGER.error(message, e);
             throw new ReflectException(message, e);
         }
     }
