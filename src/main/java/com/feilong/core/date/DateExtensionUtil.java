@@ -44,11 +44,35 @@ import com.feilong.core.util.Validator;
  */
 public final class DateExtensionUtil{
 
+    /** 昨天. */
+    public static final String    YESTERDAY               = "昨天";
+
+    /** 前天. */
+    public static final String    THEDAY_BEFORE_YESTERDAY = "前天";
+
+    /** 星期. */
+    public static final String    WEEK                    = "星期";
+
+    /** 天. */
+    public static final String    DAY                     = "天";
+
+    /** 小时. */
+    public static final String    HOUR                    = "小时";
+
+    /** 分钟. */
+    public static final String    MINUTE                  = "分钟";
+
+    /** 秒. */
+    public static final String    SECOND                  = "秒";
+
+    /** 毫秒. */
+    public static final String    MILLISECOND             = "毫秒";
+
     /**
      * 中文星期.<br>
      * { "日", "一", "二", "三", "四", "五", "六" }
      */
-    private static final String[] WEEK_CHINESES = { "日", "一", "二", "三", "四", "五", "六" };
+    private static final String[] WEEK_CHINESES           = { "日", "一", "二", "三", "四", "五", "六" };
 
     /** Don't let anyone instantiate this class. */
     private DateExtensionUtil(){
@@ -65,7 +89,7 @@ public final class DateExtensionUtil{
      * @return 如 星期一
      */
     public static String getChineseWeek(int week){
-        return DateDictionary.WEEK + WEEK_CHINESES[week];
+        return WEEK + WEEK_CHINESES[week];
     }
 
     // [start]extent 获得时间 /时间数组,可以用于sql查询
@@ -257,17 +281,16 @@ public final class DateExtensionUtil{
         // 间隔一天
         if (spaceDay == 1){
             if (DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)){
-                returnValue = DateDictionary.YESTERDAY + " ";
+                returnValue = YESTERDAY + " ";
             }else{
-                returnValue = DateDictionary.THEDAY_BEFORE_YESTERDAY + " ";
+                returnValue = THEDAY_BEFORE_YESTERDAY + " ";
             }
             returnValue += DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
         }
         // 间隔2天
         else if (spaceDay == 2){
             if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
-                returnValue = DateDictionary.THEDAY_BEFORE_YESTERDAY + " "
-                                + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                returnValue = THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
             }else{
                 // 今年
                 if (year == inYear){
@@ -291,16 +314,16 @@ public final class DateExtensionUtil{
             // 小时间隔
             if (spaceHour != 0){
                 if (inDay == day){
-                    returnValue = spaceHour + DateDictionary.HOUR + "前";
+                    returnValue = spaceHour + HOUR + "前";
                 }else{
-                    returnValue = DateDictionary.YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                    returnValue = YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
                 }
             }else{
                 // 分钟间隔
                 if (spaceMinute == 0){
-                    returnValue = spaceSecond + DateDictionary.SECOND + "前";
+                    returnValue = spaceSecond + SECOND + "前";
                 }else{
-                    returnValue = spaceMinute + DateDictionary.MINUTE + "前";
+                    returnValue = spaceMinute + MINUTE + "前";
                 }
             }
         }
@@ -371,19 +394,19 @@ public final class DateExtensionUtil{
         // **************************************************************************************
         StringBuilder stringBuilder = new StringBuilder();
         if (0 != spaceDay){
-            stringBuilder.append(spaceDay + DateDictionary.DAY);
+            stringBuilder.append(spaceDay + DAY);
         }
         if (0 != spaceHour){
-            stringBuilder.append(spaceHour + DateDictionary.HOUR);
+            stringBuilder.append(spaceHour + HOUR);
         }
         if (0 != spaceMinute){
-            stringBuilder.append(spaceMinute + DateDictionary.MINUTE);
+            stringBuilder.append(spaceMinute + MINUTE);
         }
         if (0 != spaceSecond){
-            stringBuilder.append(spaceSecond + DateDictionary.SECOND);
+            stringBuilder.append(spaceSecond + SECOND);
         }
         if (0 != spaceMillisecond){
-            stringBuilder.append(spaceMillisecond + DateDictionary.MILLISECOND);
+            stringBuilder.append(spaceMillisecond + MILLISECOND);
         }
         return stringBuilder.toString();
     }

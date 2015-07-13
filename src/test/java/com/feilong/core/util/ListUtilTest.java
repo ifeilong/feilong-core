@@ -273,17 +273,6 @@ public class ListUtilTest{
     }
 
     /**
-     * Gets the first item.
-     */
-    @Test
-    public final void testGetFirstItem(){
-        List<String> testList = new ArrayList<String>();
-        testList.add("xinge");
-        testList.add("feilong");
-        LOGGER.info(ListUtil.getFirstItem(testList));
-    }
-
-    /**
      * Test list to string a.
      */
     @Test

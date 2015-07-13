@@ -587,5 +587,4 @@ public final class NumberUtil{
     private static final BigDecimal setScale(BigDecimal number,int scale,RoundingMode roundingMode){
         return number.setScale(scale, roundingMode);
     }
-
 }

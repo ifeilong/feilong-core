@@ -33,23 +33,6 @@ public final class ListUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /**
-     * 获得 list第一个元素.
-     * 
-     * @param <T>
-     *            the generic type
-     * @param list
-     *            list
-     * @return 第一个元素<br>
-     *         if (Validator.isNotNullOrEmpty(list),return null
-     */
-    public static <T> T getFirstItem(List<T> list){
-        if (Validator.isNotNullOrEmpty(list)){
-            return list.get(0);
-        }
-        return null;
-    }
-
     // ***********************************************************************************
     /**
      * list集合转换成字符串,仅将[]中括号符号 换成()小括号,其余不动<br>

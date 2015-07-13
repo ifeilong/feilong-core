@@ -23,7 +23,9 @@ import org.apache.commons.lang3.SystemUtils;
  * @author feilong
  * @version 1.0 2012-7-11 下午5:05:56
  * @since 1.0.0
+ * @deprecated 作用不大
  */
+@Deprecated
 public final class StringBuilderUtil{
 
     /** Don't let anyone instantiate this class. */
@@ -108,14 +110,12 @@ public final class StringBuilderUtil{
     }
 
     /**
-     * 文件 以醒目字符分隔,一般用于 文本输出 带标题的 <br>
+     * 文件 以醒目字符分隔,一般用于 文本输出 带标题的. <br>
      * 例如:
      * 
      * <pre>
      * ***************呵呵,下面是销售日报-库存部分*******************
      * </pre>
-     * 
-     * .
      * 
      * @param stringBuilder
      *            the string builder
