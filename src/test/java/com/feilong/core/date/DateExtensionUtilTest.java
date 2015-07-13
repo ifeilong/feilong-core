@@ -60,9 +60,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetIntervalDayList(){
         List<Date> dates = DateExtensionUtil.getIntervalDayList(FROMSTRING, TOSTRING, DatePattern.COMMON_DATE_AND_TIME);
-        for (int i = 0; i < dates.size(); ++i){
-            LOGGER.debug(DateUtil.date2String(dates.get(i), DatePattern.COMMON_DATE_AND_TIME));
-        }
+        LOGGER.debug(JsonUtil.format(dates));
     }
 
     /**
@@ -79,28 +77,18 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * 将传入的date转换为中国特色日期
-     * 
-     * <pre>
-     * 如果 现在是 2012-10-18 14:16:00
-     * 
-     * 给你个时间, 
-     * 2012-10-18 14:15:02,要你显示成   "58秒前"
-     * 2012-10-18 14:14:22,要你显示成   "1分钟前"
-     * 2012-10-18 13:55:00,要你显示成   "19分钟前"
-     * 2012-10-17 14:15:02,要你显示成   "昨天 14:15"
-     * 2012-10-16 14:15:02,要你显示成   "前天 14:15"
-     * 2012-10-15 14:15:02,要你显示成   "10-15 14:15"
-     * 2012-09-15 14:15:02,要你显示成   "09-15 14:15"
-     * 2011-09-15 14:15:02,要你显示成   "2011-09-15 14:15"
-     * 
-     * </pre>
-     * 
-     * .
+     * TestCalendarUtilTest.
+     */
+    @Test
+    public void testCalendarUtilTest(){
+        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getWeekDateStringList(5, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
+    }
+
+    /**
+     * Test to humanization date string.
      */
     @Test
     public void testToHumanizationDateString(){
-
         LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
                         "2012-10-18 13:55:00",
                         DatePattern.COMMON_DATE_AND_TIME)));

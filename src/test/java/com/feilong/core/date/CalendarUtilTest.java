@@ -22,8 +22,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.tools.jsonlib.JsonUtil;
-
 /**
  * The Class CalendarUtilTest.
  * 
@@ -66,13 +64,5 @@ public class CalendarUtilTest extends BaseDateUtilTest{
         LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
         LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
         LOGGER.debug(CalendarUtil.getDayOfYear(2014, 12, 31) + "");
-    }
-
-    /**
-     * TestCalendarUtilTest.
-     */
-    @Test
-    public void testCalendarUtilTest(){
-        LOGGER.debug(JsonUtil.format(CalendarUtil.getWeekDateStringList(5, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
     }
 }

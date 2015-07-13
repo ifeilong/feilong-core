@@ -15,12 +15,9 @@
  */
 package com.feilong.core.date;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 /**
  * 扩展 {@link DateUtil}类,更多人性化的操作及转换 .
@@ -40,15 +37,18 @@ public final class CalendarUtil{
     }
 
     /**
-     * 获得当天00:00:00.
+     * 获得任意日期的00:00:00.
      * <p>
-     * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00}
+     * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00}.
      * </p>
      * 
-     * @return 获得当天00:00:00
+     * @param date
+     *            the date
+     * @return 获得任意日期的00:00:00
      */
-    public static Calendar getResetTodayCalendarByDay(){
-        return getResetCalendarByDay(new Date());
+    public static Date getResetDateByDay(Date date){
+        Calendar calendar = getResetCalendarByDay(date);
+        return calendar.getTime();
     }
 
     /**
@@ -68,21 +68,6 @@ public final class CalendarUtil{
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar;
-    }
-
-    /**
-     * 获得任意日期的00:00:00.
-     * <p>
-     * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00}.
-     * </p>
-     * 
-     * @param date
-     *            the date
-     * @return 获得任意日期的00:00:00
-     */
-    public static Date getResetDateByDay(Date date){
-        Calendar calendar = getResetCalendarByDay(date);
-        return calendar.getTime();
     }
 
     /**
@@ -168,55 +153,6 @@ public final class CalendarUtil{
     public static int getDayOfYear(int year,int month,int day){
         Calendar calendar = toCalendar(year, month, day);
         return calendar.get(Calendar.DAY_OF_YEAR);// - 1
-    }
-
-    /**
-     * 获得一年中所有的周几集合 例如:getWeekDateStringList(6, "yyyy-MM-dd");.
-     * 
-     * @param week
-     *            周几 星期天开始为0 依次1 2 3 4 5 6
-     * @param datePattern
-     *            获得集合里面时间字符串模式
-     * @return 获得一年中所有的周几集合
-     */
-    public static List<String> getWeekDateStringList(int week,String datePattern){
-        List<String> list = new ArrayList<String>();
-        //当前日期
-        Calendar calendarToday = Calendar.getInstance();
-        //当前年份
-        int yearCurrent = calendarToday.get(Calendar.YEAR);
-        //下一个年份
-        int yearNext = 1 + yearCurrent;
-        //开始的calendar
-        Calendar calendarBegin = Calendar.getInstance();
-        //结束的calendar
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarBegin.set(yearCurrent, 0, 1);// 2010-1-1
-        calendarEnd.set(yearNext, 0, 1);// 2011-1-1
-        // ****************************************************************************************
-        // 今天在这个星期中的第几天 星期天为1 星期六为7
-        int todayDayOfWeek = calendarToday.get(Calendar.DAY_OF_WEEK);
-
-        // 今天前一个周六
-        calendarToday.add(Calendar.DAY_OF_MONTH, -todayDayOfWeek - 7 + (1 + week));// + week
-        Calendar calendarCloneToday = (Calendar) calendarToday.clone();
-
-        // 向前
-        for (; calendarToday.before(calendarEnd) && calendarToday.after(calendarBegin); calendarToday.add(Calendar.DAY_OF_YEAR, -7)){
-            list.add(toString(calendarToday, datePattern));
-        }
-
-        // 向后
-        for (int i = 0; calendarCloneToday.before(calendarEnd) && calendarCloneToday.after(calendarBegin); ++i, calendarCloneToday.add(
-                        Calendar.DAY_OF_YEAR,
-                        7)){
-            //第一个值和上面循环重复了 去掉
-            if (i != 0){
-                list.add(toString(calendarCloneToday, datePattern));
-            }
-        }
-        Collections.sort(list);
-        return list;
     }
 
     /**
