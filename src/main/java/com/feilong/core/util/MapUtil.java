@@ -16,6 +16,7 @@
 package com.feilong.core.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -92,6 +93,8 @@ public final class MapUtil{
      * @param keys
      *            指定特定的key
      * @return 如果 keys 中的所有的key 都不在 map 中出现 ,那么返回null
+     * @see java.util.Collection#toArray()
+     * @see java.util.Arrays#sort(Object[])
      */
     @SuppressWarnings("unchecked")
     public static <K, T extends Number> T getMinValue(Map<K, T> map,K[] keys){
@@ -100,8 +103,7 @@ public final class MapUtil{
         if (null != subMap){
             Collection<T> values = subMap.values();
             Object[] array = values.toArray();
-            // 冒泡排序
-            Algorithm.bubbleSort(array, false);
+            Arrays.sort(array);
             return (T) array[0];
         }
         return null;

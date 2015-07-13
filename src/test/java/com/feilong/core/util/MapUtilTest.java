@@ -37,6 +37,9 @@ public class MapUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
+    /**
+     * Test invert map.
+     */
     @Test
     public void testInvertMap(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -105,7 +108,7 @@ public class MapUtilTest{
     }
 
     /**
-     * Test method for {@link com.feilong.core.util.MapUtil#getMinValue(java.util.Map, java.lang.String[])}.
+     * Test get min value.
      */
     @Test
     public void testGetMinValue(){
