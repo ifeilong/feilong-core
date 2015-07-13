@@ -16,9 +16,7 @@
 package com.feilong.core.awt;
 
 import java.awt.Graphics2D;
-import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -247,36 +245,4 @@ public final class ImageUtil{
         return map;
     }
 
-    /**
-     * 是否是cmyk类型.
-     *
-     * @param imageFilename
-     *            文件
-     * @return 是否是cmyk类型,是返回true
-     * @see java.awt.color.ColorSpace
-     * @see java.awt.color.ColorSpace#TYPE_CMYK
-     * @see #getBufferedImage(String)
-     * @deprecated 未成功验证,暂时不要调用
-     */
-    @Deprecated
-    public static boolean isCMYKType(String imageFilename){
-        BufferedImage bufferedImage = getBufferedImage(imageFilename);
-        ColorSpace colorSpace = getColorSpace(bufferedImage);
-        int colorSpaceType = colorSpace.getType();
-        return colorSpaceType == ColorSpace.TYPE_CMYK;
-    }
-
-    /**
-     * 获得 color space.
-     *
-     * @param bufferedImage
-     *            the buffered image
-     * @return the color space
-     * @since 1.2.0
-     */
-    private static ColorSpace getColorSpace(BufferedImage bufferedImage){
-        ColorModel colorModel = bufferedImage.getColorModel();
-        ColorSpace colorSpace = colorModel.getColorSpace();
-        return colorSpace;
-    }
 }
