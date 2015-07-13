@@ -74,11 +74,28 @@ public final class DateExtensionUtil{
      */
     private static final String[] WEEK_CHINESES           = { "日", "一", "二", "三", "四", "五", "六" };
 
+    /**
+     * 英文星期.<br>
+     * { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }
+     */
+    private static final String[] WEEK_ENGLISHS           = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
     /** Don't let anyone instantiate this class. */
     private DateExtensionUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * 获得英文星期.
+     * 
+     * @param week
+     *            星期 日从0开始 1 2 --6
+     * @return 如 Sunday { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" } 中一个
+     */
+    public static String getEnglishWeek(int week){
+        return WEEK_ENGLISHS[week];
     }
 
     /**
