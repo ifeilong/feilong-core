@@ -15,12 +15,15 @@
  */
 package com.feilong.core.lang;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.test.User;
 
 /**
  * The Class ClassUtilTest.
@@ -34,15 +37,19 @@ public class ClassUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtilTest.class);
 
+    @Test
+    public void testIsInstance(){
+        assertEquals(true, ClassUtil.isInstance(new User(), Comparable.class));
+        assertEquals(true, ClassUtil.isInstance("1234", CharSequence.class));
+    }
+
     /**
      * Test to class.
      */
     @Test
     public void testToClass(){
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("" + JsonUtil.format(ClassUtil.toClass("a", "a")));
-            LOGGER.info("" + JsonUtil.format(ClassUtil.toClass(1, true)));
-        }
+        LOGGER.info("" + JsonUtil.format(ClassUtil.toClass("a", "a")));
+        LOGGER.info("" + JsonUtil.format(ClassUtil.toClass(1, true)));
     }
 
     /**
@@ -50,10 +57,8 @@ public class ClassUtilTest{
      */
     @Test
     public void testIsInterface(){
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("" + ClassUtil.isInterface(this.getClass()));
-            LOGGER.info("" + ClassUtil.isInterface(DatePattern.class));
-        }
+        LOGGER.info("" + ClassUtil.isInterface(this.getClass()));
+        LOGGER.info("" + ClassUtil.isInterface(DatePattern.class));
     }
 
     /**
@@ -61,9 +66,7 @@ public class ClassUtilTest{
      */
     @Test
     public void testGetClassInfoMapForLog(){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(this.getClass())));
-            LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(DatePattern.class)));
-        }
+        LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(this.getClass())));
+        LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(DatePattern.class)));
     }
 }
