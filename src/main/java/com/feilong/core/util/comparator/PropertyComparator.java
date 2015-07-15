@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.comparator;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -52,10 +53,13 @@ import com.feilong.core.bean.PropertyUtil;
  * @see org.apache.commons.collections.comparators.ComparableComparator
  * @since 1.2.0
  */
-public class PropertyComparator<T> implements Comparator<T>{
+public class PropertyComparator<T> implements Comparator<T>,Serializable{
+
+    /** The Constant serialVersionUID. */
+    private static final long   serialVersionUID = -3159374167882773300L;
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyComparator.class);
+    private static final Logger LOGGER           = LoggerFactory.getLogger(PropertyComparator.class);
 
     /** T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口. */
     private final String        propertyName;
