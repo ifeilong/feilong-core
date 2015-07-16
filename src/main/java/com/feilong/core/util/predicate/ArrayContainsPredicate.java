@@ -26,11 +26,13 @@ import com.feilong.core.util.ArrayUtil;
  *
  * @author feilong
  * @version 1.2.0 2015年4月27日 下午3:12:32
- * @since 1.2.0
+ * @param <T>
+ *            the generic type
  * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
  * @see com.feilong.core.util.ArrayUtil#isContain(Object[], Object)
+ * @since 1.2.0
  */
-public class ArrayContainsPredicate implements Predicate{
+public class ArrayContainsPredicate<T> implements Predicate<T>{
 
     /** The value. */
     private final Object[] values;
@@ -54,10 +56,10 @@ public class ArrayContainsPredicate implements Predicate{
     /*
      * (non-Javadoc)
      * 
-     * @see org.apache.commons.collections.Predicate#evaluate(java.lang.Object)
+     * @see org.apache.commons.collections4.Predicate#evaluate(java.lang.Object)
      */
     @Override
-    public boolean evaluate(Object object){
+    public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
         return ArrayUtil.isContain(values, property);
     }

@@ -18,7 +18,6 @@ package com.feilong.core.io;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
@@ -46,12 +45,8 @@ public class IOWriteUtilTest{
     /**
      * Unescape html2.
      *
-     * @throws NoSuchMethodException
-     *             the no such method exception
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     * @throws InvocationTargetException
-     *             the invocation target exception
+     * @throws Exception
+     *             the exception
      */
     @Test
     public void unescapeHtml2() throws Exception{
@@ -69,8 +64,6 @@ public class IOWriteUtilTest{
      *            the input stream
      * @param outputStream
      *            the output stream
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      * @since 1.0.8
      * @deprecated use {@link #writeUseNIO(int, InputStream, OutputStream)}
      */

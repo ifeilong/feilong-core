@@ -493,10 +493,9 @@ public final class CollectionsUtil{
      * @return the first element of the collection which matches the predicate or null if none could be found
      * @see CollectionUtils#find(Iterable, Predicate)
      */
-    @SuppressWarnings("unchecked")
     public static <O, V> O find(Collection<O> objectCollection,String propertyName,V value){
-        Predicate predicate = new ObjectPropertyEqualsPredicate(propertyName, value);
-        return (O) CollectionUtils.find(objectCollection, predicate);
+        Predicate<O> predicate = new ObjectPropertyEqualsPredicate<O>(propertyName, value);
+        return CollectionUtils.find(objectCollection, predicate);
     }
 
     /**
@@ -537,7 +536,6 @@ public final class CollectionsUtil{
      * @return 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值，判断是否
      *         {@link ArrayUtil#isContain(Object[], Object)} 在 <code>values</code>数组中,如果在，将该对象存入list中返回
      */
-    @SuppressWarnings("unchecked")
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
@@ -547,7 +545,7 @@ public final class CollectionsUtil{
             throw new NullPointerException("propertyName is null or empty!");
         }
 
-        Predicate predicate = new ArrayContainsPredicate(propertyName, values);
+        Predicate<O> predicate = new ArrayContainsPredicate<O>(propertyName, values);
         return (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
 
@@ -562,8 +560,7 @@ public final class CollectionsUtil{
      *            the predicate
      * @return the list< o>
      */
-    @SuppressWarnings("unchecked")
-    public static <O> List<O> select(Collection<O> objectCollection,Predicate predicate){
+    public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
         }
@@ -606,7 +603,6 @@ public final class CollectionsUtil{
      *            the values
      * @return the list< o>
      */
-    @SuppressWarnings("unchecked")
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
@@ -615,7 +611,7 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(propertyName)){
             throw new NullPointerException("propertyName is null or empty!");
         }
-        Predicate predicate = new ArrayContainsPredicate(propertyName, values);
+        Predicate<O> predicate = new ArrayContainsPredicate<O>(propertyName, values);
         return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
@@ -766,7 +762,7 @@ public final class CollectionsUtil{
      * @return the map< t, integer>
      * @since 1.2.0
      */
-    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate includePredicate,String propertyName){
+    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate<O> includePredicate,String propertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection can't be null/empty!");
         }

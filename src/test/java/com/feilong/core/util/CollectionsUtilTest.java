@@ -103,7 +103,7 @@ public class CollectionsUtilTest{
         Map<String, Integer> map = CollectionsUtil.groupCount(testList, null, "name");
         LOGGER.info(JsonUtil.format(map));
 
-        map = CollectionsUtil.groupCount(testList, new ObjectPropertyEqualsPredicate("name", "刘备"), "name");
+        map = CollectionsUtil.groupCount(testList, new ObjectPropertyEqualsPredicate<User>("name", "刘备"), "name");
         LOGGER.info(JsonUtil.format(map));
     }
 

@@ -341,9 +341,10 @@ public final class MapUtil{
      * @see #sortByValueAsc(Map)
      * @since 1.2.0
      */
-    @SuppressWarnings("unchecked")
     public static <K, V extends Comparable<V>> Map<K, V> sortByValueDesc(Map<K, V> map){
-        return sort(map, new ReverseComparator(new PropertyComparator<Map.Entry<K, V>>("value")));
+        PropertyComparator<Entry<K, V>> propertyComparator = new PropertyComparator<Map.Entry<K, V>>("value");
+        Comparator<Entry<K, V>> comparator = new ReverseComparator<Map.Entry<K, V>>(propertyComparator);
+        return sort(map, comparator);
     }
 
     /**

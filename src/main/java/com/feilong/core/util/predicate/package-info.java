@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 /**
- *自定义的  Predicate,常用在 {@link com.feilong.core.util.CollectionsUtil#select(java.util.Collection, org.apache.commons.collections.Predicate)},{@link com.feilong.core.util.CollectionsUtil#groupCount(java.util.Collection, org.apache.commons.collections.Predicate, String)} 等地方.
+ *自定义的  Predicate,常用在 {@link com.feilong.core.util.CollectionsUtil#select(java.util.Collection, org.apache.commons.collections4.Predicate)},{@link com.feilong.core.util.CollectionsUtil#groupCount(java.util.Collection, org.apache.commons.collections4.Predicate, String)} 等地方.
  * @author feilong 
  * @version 1.2.0 2015年4月27日 下午1:47:11 
  * @since 1.2.0
- @see org.apache.commons.collections.PredicateUtils
- @see org.apache.commons.collections.functors.AllPredicate
- @see org.apache.commons.collections.functors.AndPredicate
- @see org.apache.commons.collections.functors.AnyPredicate
- @see org.apache.commons.collections.functors.EqualPredicate
- @see org.apache.commons.collections.functors.ExceptionPredicate
- @see org.apache.commons.collections.functors.FalsePredicate
- @see org.apache.commons.collections.functors.IdentityPredicate
- @see org.apache.commons.collections.functors.InstanceofPredicate
- @see org.apache.commons.collections.functors.InvokerTransformer
- @see org.apache.commons.collections.functors.NonePredicate
- @see org.apache.commons.collections.functors.NotNullPredicate
- @see org.apache.commons.collections.functors.NotPredicate
- @see org.apache.commons.collections.functors.NullIsExceptionPredicate
- @see org.apache.commons.collections.functors.NullIsFalsePredicate
- @see org.apache.commons.collections.functors.NullIsTruePredicate
- @see org.apache.commons.collections.functors.NullPredicate
- @see org.apache.commons.collections.functors.OnePredicate
- @see org.apache.commons.collections.functors.OrPredicate
- @see org.apache.commons.collections.functors.TransformedPredicate
- @see org.apache.commons.collections.functors.TransformerPredicate
- @see org.apache.commons.collections.functors.TruePredicate
- @see org.apache.commons.collections.functors.UniquePredicate
+ @see org.apache.commons.collections4.PredicateUtils
+ @see org.apache.commons.collections4.functors.AllPredicate
+ @see org.apache.commons.collections4.functors.AndPredicate
+ @see org.apache.commons.collections4.functors.AnyPredicate
+ @see org.apache.commons.collections4.functors.EqualPredicate
+ @see org.apache.commons.collections4.functors.ExceptionPredicate
+ @see org.apache.commons.collections4.functors.FalsePredicate
+ @see org.apache.commons.collections4.functors.IdentityPredicate
+ @see org.apache.commons.collections4.functors.InstanceofPredicate
+ @see org.apache.commons.collections4.functors.InvokerTransformer
+ @see org.apache.commons.collections4.functors.NonePredicate
+ @see org.apache.commons.collections4.functors.NotNullPredicate
+ @see org.apache.commons.collections4.functors.NotPredicate
+ @see org.apache.commons.collections4.functors.NullIsExceptionPredicate
+ @see org.apache.commons.collections4.functors.NullIsFalsePredicate
+ @see org.apache.commons.collections4.functors.NullIsTruePredicate
+ @see org.apache.commons.collections4.functors.NullPredicate
+ @see org.apache.commons.collections4.functors.OnePredicate
+ @see org.apache.commons.collections4.functors.OrPredicate
+ @see org.apache.commons.collections4.functors.TransformedPredicate
+ @see org.apache.commons.collections4.functors.TransformerPredicate
+ @see org.apache.commons.collections4.functors.TruePredicate
+ @see org.apache.commons.collections4.functors.UniquePredicate
  */
 package com.feilong.core.util.predicate;

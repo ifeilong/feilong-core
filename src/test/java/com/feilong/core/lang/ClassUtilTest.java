@@ -37,6 +37,9 @@ public class ClassUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtilTest.class);
 
+    /**
+     * Test is instance.
+     */
     @Test
     public void testIsInstance(){
         assertEquals(true, ClassUtil.isInstance(new User(), Comparable.class));

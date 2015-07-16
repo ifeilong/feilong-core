@@ -25,9 +25,11 @@ import com.feilong.core.lang.ObjectUtil;
  *
  * @author feilong
  * @version 1.2.0 2015年4月27日 下午1:52:29
+ * @param <T>
+ *            the generic type
  * @since 1.2.0
  */
-public class ObjectPropertyEqualsPredicate implements Predicate{
+public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
 
     /** The property name. */
     private final String propertyName;
@@ -51,10 +53,10 @@ public class ObjectPropertyEqualsPredicate implements Predicate{
     /*
      * (non-Javadoc)
      * 
-     * @see org.apache.commons.collections.Predicate#evaluate(java.lang.Object)
+     * @see org.apache.commons.collections4.Predicate#evaluate(java.lang.Object)
      */
     @Override
-    public boolean evaluate(Object object){
+    public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
         return ObjectUtil.equals(property, value, true);
     }

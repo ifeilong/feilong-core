@@ -17,7 +17,6 @@ package com.feilong.core.text;
 
 import java.text.ChoiceFormat;
 import java.text.MessageFormat;
-import java.text.ParseException;
 import java.text.ParsePosition;
 import java.util.Arrays;
 import java.util.Date;
@@ -41,9 +40,6 @@ public class MessageFormatUtilTest{
 
     /**
      * Format.
-     * 
-     * @throws ParseException
-     *             the parse exception
      */
     @Test
     public final void format(){
@@ -54,9 +50,6 @@ public class MessageFormatUtilTest{
 
     /**
      * Test get value with arguments1.
-     * 
-     * @throws ParseException
-     *             the parse exception
      */
     @Test
     public final void testGetValueWithArguments1(){
