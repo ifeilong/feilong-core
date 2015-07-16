@@ -36,7 +36,7 @@ import net.sf.json.util.JSONUtils;
 import net.sf.json.util.PropertySetStrategy;
 import net.sf.json.xml.XMLSerializer;
 
-import org.apache.commons.collections.IteratorUtils;
+import org.apache.commons.collections4.IteratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

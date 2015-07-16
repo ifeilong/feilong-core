@@ -29,7 +29,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.EnumerationUtils;
+import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.collections4.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -131,8 +134,7 @@ public final class CollectionsUtil{
      * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.removeAll(remove);</code>.
      * </p>
      * <p>
-     * 底层实现是调用的 {@link org.apache.commons.collections.ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>
-     * 的元素加入到新的list返回.
+     * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
      * </p>
      * 
      * @param <T>
@@ -143,13 +145,12 @@ public final class CollectionsUtil{
      *            the items to be removed from the returned <code>collection</code>
      * @return a <code>List</code> containing all the elements of <code>c</code> except
      *         any elements that also occur in <code>remove</code>.
-     * @see org.apache.commons.collections.ListUtils#removeAll(Collection, Collection)
+     * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 3.2
      * @since 1.0.8
      */
-    @SuppressWarnings("unchecked")
     public static <T> List<T> removeAll(Collection<T> collection,Collection<T> remove){
-        return org.apache.commons.collections.ListUtils.removeAll(collection, remove);
+        return ListUtils.removeAll(collection, remove);
     }
 
     /**
@@ -158,8 +159,7 @@ public final class CollectionsUtil{
      * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.remove(removeElement);</code>.
      * </p>
      * <p>
-     * 底层实现是调用的 {@link org.apache.commons.collections.ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>
-     * 的元素加入到新的list返回.
+     * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
      * </p>
      * 
      * @param <T>
@@ -170,7 +170,7 @@ public final class CollectionsUtil{
      *            the remove element
      * @return a <code>List</code> containing all the elements of <code>c</code> except
      *         any elements that also occur in <code>remove</code>.
-     * @see org.apache.commons.collections.ListUtils#removeAll(Collection, Collection)
+     * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 3.2
      * @since 1.0.8
      */
@@ -252,7 +252,7 @@ public final class CollectionsUtil{
      * @see Collections#emptyList()
      * @see Collections#EMPTY_LIST
      * @see Collections#list(Enumeration)
-     * @see org.apache.commons.collections.EnumerationUtils#toList(Enumeration)
+     * @see EnumerationUtils#toList(Enumeration)
      * @since 1.0.7
      * @since JDK 1.5
      */
@@ -491,12 +491,12 @@ public final class CollectionsUtil{
      * @param value
      *            the value
      * @return the first element of the collection which matches the predicate or null if none could be found
-     * @see org.apache.commons.collections.CollectionUtils#find(Collection, Predicate)
+     * @see CollectionUtils#find(Iterable, Predicate)
      */
     @SuppressWarnings("unchecked")
     public static <O, V> O find(Collection<O> objectCollection,String propertyName,V value){
         Predicate predicate = new ObjectPropertyEqualsPredicate(propertyName, value);
-        return (O) org.apache.commons.collections.CollectionUtils.find(objectCollection, predicate);
+        return (O) CollectionUtils.find(objectCollection, predicate);
     }
 
     /**
@@ -513,7 +513,7 @@ public final class CollectionsUtil{
      * @param value
      *            the value
      * @return the property value list
-     * @see org.apache.commons.collections.CollectionUtils#select(Collection, org.apache.commons.collections.Predicate)
+     * @see CollectionUtils#select(Iterable, Predicate)
      */
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V value){
         Object[] values = { value };
@@ -548,7 +548,7 @@ public final class CollectionsUtil{
         }
 
         Predicate predicate = new ArrayContainsPredicate(propertyName, values);
-        return (List<O>) org.apache.commons.collections.CollectionUtils.select(objectCollection, predicate);
+        return (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
 
     /**
@@ -567,7 +567,7 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection is null or empty!");
         }
-        return (List<O>) org.apache.commons.collections.CollectionUtils.select(objectCollection, predicate);
+        return (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
 
     /**
@@ -584,7 +584,7 @@ public final class CollectionsUtil{
      * @param value
      *            the value
      * @return the property value list
-     * @see org.apache.commons.collections.CollectionUtils#selectRejected(Collection, org.apache.commons.collections.Predicate)
+     * @see CollectionUtils#selectRejected(Iterable, Predicate)
      */
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V value){
         Object[] values = { value };
@@ -616,7 +616,7 @@ public final class CollectionsUtil{
             throw new NullPointerException("propertyName is null or empty!");
         }
         Predicate predicate = new ArrayContainsPredicate(propertyName, values);
-        return (List<O>) org.apache.commons.collections.CollectionUtils.selectRejected(objectCollection, predicate);
+        return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
     /**

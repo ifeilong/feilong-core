@@ -18,6 +18,9 @@ package com.feilong.core.util.comparator;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import org.apache.commons.collections4.comparators.BooleanComparator;
+import org.apache.commons.collections4.comparators.ComparableComparator;
+import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +42,7 @@ import com.feilong.core.bean.PropertyUtil;
  * 
  * <blockquote>
  * <p>
- * 该类默认是<span style="color:red">正序</span>的形式,如果需要反序,请再使用 {@link org.apache.commons.collections.comparators.ReverseComparator}进行包装
+ * 该类默认是<span style="color:red">正序</span>的形式,如果需要反序,请再使用 {@link ReverseComparator}进行包装
  * </p>
  * </blockquote>
  *
@@ -48,9 +51,9 @@ import com.feilong.core.bean.PropertyUtil;
  * @param <T>
  *            the generic type
  * @see "org.springframework.beans.support.PropertyComparator"
- * @see org.apache.commons.collections.comparators.BooleanComparator
- * @see org.apache.commons.collections.comparators.ReverseComparator
- * @see org.apache.commons.collections.comparators.ComparableComparator
+ * @see BooleanComparator
+ * @see ReverseComparator
+ * @see ComparableComparator
  * @since 1.2.0
  */
 public class PropertyComparator<T> implements Comparator<T>,Serializable{

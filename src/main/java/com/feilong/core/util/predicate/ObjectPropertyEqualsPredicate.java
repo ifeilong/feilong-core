@@ -15,7 +15,7 @@
  */
 package com.feilong.core.util.predicate;
 
-import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections4.Predicate;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ObjectUtil;

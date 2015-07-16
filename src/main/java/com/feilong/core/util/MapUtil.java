@@ -24,9 +24,11 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import org.apache.commons.collections.comparators.ReverseComparator;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -192,9 +194,8 @@ public final class MapUtil{
      * @return 如果map 是nullOrEmpty ,返回 一个empty map
      * @since 1.2.2
      */
-    @SuppressWarnings("unchecked")
     public static <K, V> Map<V, K> invertMap(Map<K, V> map){
-        return org.apache.commons.collections.MapUtils.invertMap(map);
+        return MapUtils.invertMap(map);
     }
 
     /**
@@ -292,16 +293,17 @@ public final class MapUtil{
      * @param map
      *            the map
      * @return the map< k, v>
-     * @see org.apache.commons.collections.comparators.ReverseComparator#ReverseComparator(Comparator)
+     * @see ReverseComparator#ReverseComparator(Comparator)
      * @see PropertyComparator#PropertyComparator(String)
      * @since 1.2.0
      */
-    @SuppressWarnings("unchecked")
     public static <K, V> Map<K, V> sortByKeyDesc(Map<K, V> map){
         if (Validator.isNullOrEmpty(map)){
             throw new NullPointerException("map can't be null/empty!");
         }
-        return sort(map, new ReverseComparator(new PropertyComparator<Map.Entry<K, V>>("key")));
+        PropertyComparator<Entry<K, V>> propertyComparator = new PropertyComparator<Map.Entry<K, V>>("key");
+        Comparator<Entry<K, V>> comparator = new ReverseComparator<Map.Entry<K, V>>(propertyComparator);
+        return sort(map, comparator);
     }
 
     /**
@@ -333,7 +335,7 @@ public final class MapUtil{
      * @param map
      *            the map
      * @return the map< k, v>
-     * @see org.apache.commons.collections.comparators.ReverseComparator#ReverseComparator(Comparator)
+     * @see ReverseComparator#ReverseComparator(Comparator)
      * @see PropertyComparator#PropertyComparator(String)
      * @see java.util.Map.Entry
      * @see #sortByValueAsc(Map)

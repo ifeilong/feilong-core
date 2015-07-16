@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections.iterators.EnumerationIterator;
+import org.apache.commons.collections4.iterators.EnumerationIterator;
 
 import com.feilong.core.io.SerializableUtil;
 import com.feilong.core.util.ArrayUtil;

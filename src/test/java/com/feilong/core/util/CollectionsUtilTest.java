@@ -18,7 +18,6 @@ package com.feilong.core.util;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -31,7 +30,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -353,34 +351,25 @@ public class CollectionsUtilTest{
     /**
      * Test.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test
     public void test(){
-        try{
-            Class clz = User.class;
-            Collection collection = CollectionUtils.typedCollection(new ArrayList(), clz);
-            collection.add(clz.newInstance());
-
-            LOGGER.info(collection.size() + "");
-            for (Object object : collection){
-                User user = (User) object;
-                LOGGER.info(user.getName());
-            }
-
-            LOGGER.info("hahahah");
-
-            Collection<User> collection2 = collection;
-            LOGGER.info(collection2.size() + "");
-            for (Object object : collection2){
-                User user = (User) object;
-                LOGGER.info(user.getName());
-            }
-
-        }catch (InstantiationException e){
-            LOGGER.error(e.getClass().getName(), e);
-        }catch (IllegalAccessException e){
-            LOGGER.error(e.getClass().getName(), e);
-        }
+        //        Class clz = User.class;
+        //        Collection collection = CollectionUtils.typedCollection(new ArrayList(), clz);
+        //        collection.add(clz.newInstance());
+        //
+        //        LOGGER.info(collection.size() + "");
+        //        for (Object object : collection){
+        //            User user = (User) object;
+        //            LOGGER.info(user.getName());
+        //        }
+        //
+        //        LOGGER.info("hahahah");
+        //
+        //        Collection<User> collection2 = collection;
+        //        LOGGER.info(collection2.size() + "");
+        //        for (Object object : collection2){
+        //            User user = (User) object;
+        //            LOGGER.info(user.getName());
+        //        }
     }
-
 }
