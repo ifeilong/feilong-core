@@ -70,9 +70,8 @@ import com.feilong.core.util.Validator;
  * @version 1.0.5 Jan 26, 2013 8:02:09 PM
  * @see net.sf.json.JSONSerializer#toJSON(Object, JsonConfig)
  * @since 1.0.5
- * @deprecated net.sf.json-lib Non-maintenance,will use Jackson instead
  */
-@Deprecated
+//TODO @deprecated net.sf.json-lib Non-maintenance,will use Jackson instead
 public final class JsonUtil{
 
     /** The Constant LOGGER. */
