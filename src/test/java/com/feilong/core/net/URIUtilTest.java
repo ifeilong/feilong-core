@@ -84,7 +84,7 @@ public class URIUtilTest{
      */
     @Test
     public void testGetUnionUrl(){
-        result = URIUtil.getUnionUrl("E:\\test", "sanguo");
+        result = URIUtil.getUnionFileUrl("E:\\test", "sanguo");
         LOGGER.info(result);
     }
 

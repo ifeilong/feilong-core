@@ -118,7 +118,7 @@ public final class URIUtil{
 
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
-        URL url = new URL(urlString);
+        URL url = getUrl(urlString);
         InputStream inputStream = url.openStream();
 
         File file = new File(urlString);
@@ -240,10 +240,14 @@ public final class URIUtil{
 
     /**
      * 验证path是不是绝对路径.
+     * <p>
+     * (调用了 {@link java.net.URI#isAbsolute()},原理是{@code url's scheme !=null} ).
+     * </p>
      *
      * @param path
-     *            待验证的字符串
-     * @return 如果是符合格式的字符串,返回 <b>true </b>,否则为 <b>false </b>
+     *            路径
+     * @return <tt>true</tt> if, and only if, this URI is absolute
+     * @see java.net.URI#isAbsolute()
      */
     public static boolean isAbsolutePath(String path){
         URI uri = getURI(path);
@@ -528,8 +532,12 @@ public final class URIUtil{
     }
 
     /**
-     * 获取联合url,通过在指定的上下文中对给定的 spec 进行解析创建 URL. 新的 URL 从给定的上下文 URL 和 spec 参数创建<br>
+     * 获取联合url,通过在指定的上下文中对给定的 spec进行解析创建 URL. 新的 URL从给定的上下文 URL和 spec参数创建.
+     * 
+     * <p style="color:red">
      * 网站地址拼接,请使用{@link #getUnionUrl(URL, String)}
+     * </p>
+     * 
      * <p>
      * 示例: URIUtil.getUnionUrl("E:\\test", "sanguo")-------------{@code >}file:/E:/test/sanguo
      *
@@ -538,19 +546,27 @@ public final class URIUtil{
      * @param spec
      *            the <code>String</code> to parse as a URL.
      * @return 获取联合url
+     * @see com.feilong.core.net.URIUtil#getFileURL(String)
+     * @see com.feilong.core.net.URIUtil#getUnionUrl(URL, String)
      */
-    public static String getUnionUrl(String context,String spec){
-        URL parentUrl = getURL(context);
+    public static String getUnionFileUrl(String context,String spec){
+        URL parentUrl = getFileURL(context);
         return getUnionUrl(parentUrl, spec);
     }
 
     /**
-     * 获取联合url,通过在指定的上下文中对给定的 spec 进行解析创建 URL. 新的 URL 从给定的上下文 URL 和 spec 参数创建<br>
+     * 获取联合url,通过在指定的上下文中对给定的 spec 进行解析创建 URL. 新的 URL 从给定的上下文 URL 和 spec 参数创建.
+     * 
+     * <p style="color:red">
      * 网站地址拼接,请使用这个method
+     * </p>
      * 
      * <pre>
      * {@code
-     * 示例: URIUtil.getUnionUrl("E:\\test", "sanguo")------------->file:/E:/test/sanguo
+     * 示例: 
+     * 
+     * URIUtil.getUnionUrl("E:\\test", "sanguo")------------->file:/E:/test/sanguo
+     * 
      * URL url = new URL("http://www.exiaoshuo.com/jinyiyexing/");
      * result = URIUtil.getUnionUrl(url, "/jinyiyexing/1173348/");
      * http://www.exiaoshuo.com/jinyiyexing/1173348/
@@ -574,6 +590,24 @@ public final class URIUtil{
     }
 
     /**
+     * 获得 url.
+     *
+     * @param spec
+     *            the <code>String</code> to parse as a URL.
+     * @return the url
+     * @since 1.2.2
+     */
+    public static URL getUrl(String spec){
+        try{
+            URL url = new URL(spec);
+            return url;
+        }catch (MalformedURLException e){
+            LOGGER.error("MalformedURLException:", e);
+            throw new URIParseException(e);
+        }
+    }
+
+    /**
      * 将字符串路径转成url.
      *
      * @param filePathName
@@ -582,11 +616,10 @@ public final class URIUtil{
      * @see java.io.File#toURI()
      * @see java.net.URI#toURL()
      */
-    public static URL getURL(String filePathName){
+    public static URL getFileURL(String filePathName){
         if (Validator.isNullOrEmpty(filePathName)){
             throw new NullPointerException("filePathName can't be null/empty!");
         }
-
         File file = new File(filePathName);
         try{
             // file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
