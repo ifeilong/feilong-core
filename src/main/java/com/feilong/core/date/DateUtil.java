@@ -1147,7 +1147,7 @@ public final class DateUtil{
     // [start]isBefore 时间早晚
 
     /**
-     * 按照同样格式,转成Date类型,判断 date_before 是否早于date_after<br>
+     * 按照同样格式,转成Date类型,判断 date_before 是否早于date_after.<br>
      * 如:
      * 
      * <pre>
@@ -1192,7 +1192,36 @@ public final class DateUtil{
      */
     public static final boolean isBefore(Date before,String dateAfter,String datePattern){
         Date after = string2Date(dateAfter, datePattern);
-        return before.before(after);
+        return isBefore(before, after);
+    }
+
+    /**
+     * Checks if is before.
+     *
+     * @param before
+     *            the before
+     * @param when
+     *            the after
+     * @return true, if checks if is before
+     * @see java.util.Date#before(Date)
+     * @since 1.2.2
+     */
+    public static final boolean isBefore(Date before,Date when){
+        return before.before(when);
+    }
+
+    /**
+     * Checks if is after.
+     *
+     * @param after
+     *            the after
+     * @param when
+     *            the when
+     * @return true, if checks if is after
+     * @since 1.2.2
+     */
+    public static final boolean isAfter(Date after,Date when){
+        return after.after(when);
     }
 
     // [end]
