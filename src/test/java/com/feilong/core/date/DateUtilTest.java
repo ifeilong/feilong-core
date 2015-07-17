@@ -227,14 +227,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * Test add minute111.
-     */
-    @Test
-    public void testAddMinute111(){
-        LOGGER.debug(DateUtil.date2String(new Date(), DatePattern.ddMMyyyyHHmmss));
-    }
-
-    /**
      * 添加 month.
      */
     @Test
@@ -278,15 +270,6 @@ public class DateUtilTest extends BaseDateUtilTest{
         String toString = "2008-9-29";
         int intervalDay = DateUtil.getIntervalDay(fromString, toString, DatePattern.COMMON_DATE);
         LOGGER.debug(intervalDay + "");
-    }
-
-    /**
-     * Test date2 string.
-     */
-    @Test
-    public void testDate2String(){
-        String dateToString = DateUtil.date2String(new Date(), DatePattern.TIMESTAMP_WITH_MILLISECOND);
-        LOGGER.debug(dateToString);
     }
 
     /**

@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 
 /**
+ * The Class DatePatternTest.
  *
  * @author feilong
  * @version 1.2.2 2015年7月17日 下午3:31:43
@@ -32,6 +33,7 @@ import com.feilong.core.tools.jsonlib.JsonUtil;
  */
 public class DatePatternTest extends BaseDateUtilTest{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DatePatternTest.class);
 
     /**
@@ -59,13 +61,11 @@ public class DatePatternTest extends BaseDateUtilTest{
         map.put("yearAndMonth:", DateUtil.date2String(NOW, DatePattern.YEAR_AND_MONTH));
         map.put("yy:", DateUtil.date2String(NOW, DatePattern.yy));
         map.put("yyyyMMdd:", DateUtil.date2String(NOW, DatePattern.yyyyMMdd));
+        map.put("ddMMyyyyHHmmss:", DateUtil.date2String(NOW, DatePattern.ddMMyyyyHHmmss));
 
         map.put("yyyy年MM月dd日:", DateUtil.date2String(NOW, DatePattern.CHINESE_COMMON_DATE));
         map.put("yyyy年MM月dd日 HH:mm:ss:", DateUtil.date2String(NOW, DatePattern.CHINESE_COMMON_DATE_AND_TIME));
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(map));
-        }
+        LOGGER.debug(JsonUtil.format(map));
     }
-
 }
