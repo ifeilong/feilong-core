@@ -76,7 +76,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     public PropertyComparator(String propertyName){
         super();
         this.propertyName = propertyName;
-        LOGGER.info("propertyName:[{}]", propertyName);
+        LOGGER.debug("propertyName:[{}]", propertyName);
     }
 
     /**
