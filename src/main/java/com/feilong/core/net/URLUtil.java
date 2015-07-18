@@ -17,6 +17,8 @@ package com.feilong.core.net;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
@@ -104,5 +106,23 @@ public final class URLUtil{
         }
         String[] array = CollectionsUtil.toArray(paths);
         return toURLs(array);
+    }
+
+    /**
+     * 将 {@link URL}转成 {@link URI}.
+     *
+     * @param url
+     *            the url
+     * @return the uri
+     * @see "org.springframework.util.ResourceUtils#toURI(URL)"
+     * @since 1.2.2
+     */
+    public static URI toURI(URL url){
+        try{
+            URI uri = url.toURI();
+            return uri;
+        }catch (URISyntaxException e){
+            throw new URIParseException(e);
+        }
     }
 }
