@@ -162,9 +162,10 @@ public final class StringUtil{
     }
 
     /**
-     * 单词首字母大写 比如jinxin
-     * 
-     * return Jinxin
+     * 单词首字母大写.
+     * <p>
+     * Example 1: jinxin ---> Jinxin
+     * </p>
      * 
      * <pre>
      * StringUtils.capitalize(null)  = null
@@ -184,9 +185,10 @@ public final class StringUtil{
     }
 
     /**
-     * 单词首字母小写 比如Jinxin
-     * 
-     * return jinxin
+     * 单词首字母小写.
+     * <p>
+     * Example 1: Jinxin ---> jinxin
+     * </p>
      * 
      * <pre>
      * StringUtils.capitalize(null)  = null

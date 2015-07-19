@@ -230,6 +230,7 @@ public final class DateExtensionUtil{
      * @param datePattern
      *            获得集合里面时间字符串模式
      * @return 获得一年中所有的周几集合
+     * @see org.apache.commons.lang3.time.DateUtils#iterator(Date, int)
      */
     public static List<String> getWeekDateStringList(int week,String datePattern){
         List<String> list = new ArrayList<String>();

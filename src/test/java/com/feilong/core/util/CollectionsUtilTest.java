@@ -113,6 +113,7 @@ public class CollectionsUtilTest{
     @Test
     public final void toArray(){
         List<String> testList = new ArrayList<String>();
+        //testList.add(null);
         testList.add("xinge");
         testList.add("feilong");
 

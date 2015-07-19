@@ -125,8 +125,8 @@ public final class ArrayUtil{
      * 数组转成 ({@link java.util.ArrayList ArrayList})，此方法返回的list可以进行add等操作.
      * <p>
      * 注意 :{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
-     * Collection#add(Object)}方法<br>
-     * 因此,会使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回
+     * Collection#add(Object)}等方法<br>
+     * 因此,使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回
      * </p>
      * 
      * @param <T>

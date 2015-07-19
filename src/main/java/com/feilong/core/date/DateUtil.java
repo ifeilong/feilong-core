@@ -376,6 +376,7 @@ public final class DateUtil{
      * @return 加减年份后的时间
      * @see #operateDate(Date, int, int)
      * @see Calendar#YEAR
+     * @see org.apache.commons.lang3.time.DateUtils#addYears(Date, int)
      */
     public static final Date addYear(Date date,int year){
         return operateDate(date, Calendar.YEAR, year);
@@ -400,6 +401,7 @@ public final class DateUtil{
      * @return 加减月份后的时间
      * @see #operateDate(Date, int, int)
      * @see Calendar#MONTH
+     * @see org.apache.commons.lang3.time.DateUtils#addMonths(Date, int)
      */
     public static final Date addMonth(Date date,int month){
         return operateDate(date, Calendar.MONTH, month);
@@ -429,6 +431,7 @@ public final class DateUtil{
      * @return 日期加减天数
      * @see #operateDate(Date, int, int)
      * @see Calendar#DAY_OF_MONTH
+     * @see org.apache.commons.lang3.time.DateUtils#addDays(Date, int)
      */
     public static final Date addDay(Date date,int day){
         // Calendar.DAY_OF_MONTH 它与 Calendar.DATE 是同义词.一个月中第一天的值为 1.
@@ -483,6 +486,7 @@ public final class DateUtil{
      * @return the date
      * @see #operateDate(Date, int, int)
      * @see Calendar#HOUR_OF_DAY
+     * @see org.apache.commons.lang3.time.DateUtils#addHours(Date, int)
      */
     public static final Date addHour(Date date,int hour){
         return operateDate(date, Calendar.HOUR_OF_DAY, hour);
@@ -506,6 +510,7 @@ public final class DateUtil{
      * @return the date
      * @see #operateDate(Date, int, int)
      * @see Calendar#MINUTE
+     * @see org.apache.commons.lang3.time.DateUtils#addMinutes(Date, int)
      */
     public static final Date addMinute(Date date,int minute){
         return operateDate(date, Calendar.MINUTE, minute);
@@ -529,6 +534,7 @@ public final class DateUtil{
      * @return the date
      * @see #operateDate(Date, int, int)
      * @see Calendar#SECOND
+     * @see org.apache.commons.lang3.time.DateUtils#addSeconds(Date, int)
      */
     public static final Date addSecond(Date date,int second){
         return operateDate(date, Calendar.SECOND, second);
@@ -553,6 +559,7 @@ public final class DateUtil{
      * @see #addSecond(Date, int)
      * @see #toCalendar(Date)
      * @see Calendar#add(int, int)
+     * @see org.apache.commons.lang3.time.DateUtils#add(Date, int, int)
      */
     public static final Date operateDate(Date currentDate,int field,int amount){
         Calendar calendar = toCalendar(currentDate);
@@ -1132,6 +1139,8 @@ public final class DateUtil{
      * @see GregorianCalendar
      * @see Calendar#setTime(Date)
      * @see Calendar#setTimeInMillis(long)
+     * 
+     * @see org.apache.commons.lang3.time.DateUtils#toCalendar(Date)
      */
     public static Calendar toCalendar(Date date){
         if (Validator.isNullOrEmpty(date)){

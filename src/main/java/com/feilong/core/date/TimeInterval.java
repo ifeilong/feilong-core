@@ -85,7 +85,8 @@ public final class TimeInterval{
      * 每秒的毫秒数,1秒 1000ms.
      * 
      * @since 1.2.2
-     * @see com.feilong.core.date.TimeInterval#SECONDS_PER_SECOND
+     * @see #SECONDS_PER_SECOND
+     * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_SECOND
      */
     public static final int  MILLISECOND_PER_SECONDS = 1000;
 
@@ -93,7 +94,8 @@ public final class TimeInterval{
      * 每分钟的毫秒数,1分钟 60 000ms.
      * 
      * @since 1.2.1
-     * @see com.feilong.core.date.TimeInterval#SECONDS_PER_MINUTE
+     * @see #SECONDS_PER_MINUTE
+     * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_MINUTE
      */
     public static final int  MILLISECOND_PER_MINUTE  = SECONDS_PER_MINUTE * 1000;
 
@@ -101,7 +103,8 @@ public final class TimeInterval{
      * 每小时的毫秒数,1小时 3600 000ms.
      * 
      * @since 1.2.1
-     * @see com.feilong.core.date.TimeInterval#SECONDS_PER_HOUR
+     * @see #SECONDS_PER_HOUR
+     * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_HOUR
      */
     public static final int  MILLISECOND_PER_HOUR    = SECONDS_PER_HOUR * 1000;
 
@@ -109,7 +112,8 @@ public final class TimeInterval{
      * 每天的毫秒数,1天 86400 000ms.
      * 
      * @since 1.2.1
-     * @see com.feilong.core.date.TimeInterval#SECONDS_PER_DAY
+     * @see #SECONDS_PER_DAY
+     * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_DAY
      */
     public static final int  MILLISECOND_PER_DAY     = SECONDS_PER_DAY * 1000;
 
@@ -117,7 +121,7 @@ public final class TimeInterval{
      * 每星期的毫秒数,一个星期 604 800 000ms.
      * 
      * @since 1.2.1
-     * @see com.feilong.core.date.TimeInterval#SECONDS_PER_WEEK
+     * @see #SECONDS_PER_WEEK
      */
     public static final int  MILLISECOND_PER_WEEK    = SECONDS_PER_WEEK * 1000;
 
@@ -129,16 +133,15 @@ public final class TimeInterval{
      * </p>
      * 
      * @since 1.2.1
-     * @see com.feilong.core.date.TimeInterval#SECONDS_PER_MONTH
+     * @see #SECONDS_PER_MONTH
      */
     public static final long MILLISECOND_PER_MONTH   = 1000L * SECONDS_PER_MONTH;
 
     /**
      * 每年的毫秒数, 31536000 000ms,<span style="color:red">大于 {@link Integer#MAX_VALUE}:2147483647</span>
      * 
-     * 
      * @since 1.2.1
-     * @see com.feilong.core.date.TimeInterval#SECONDS_PER_YEAR
+     * @see #SECONDS_PER_YEAR
      */
     public static final long MILLISECOND_PER_YEAR    = 1000L * SECONDS_PER_YEAR;
 

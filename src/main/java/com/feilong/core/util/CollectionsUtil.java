@@ -288,7 +288,10 @@ public final class CollectionsUtil{
      * @see java.util.LinkedList#toArray(Object[])
      * @see java.util.ArrayList#toArray()
      * @see java.util.ArrayList#toArray(Object[])
+     * @see org.apache.commons.collections4.IteratorUtils#toArray(Iterator,Class)
+     * @deprecated 使用有局限,具体参见javadoc
      */
+    @Deprecated
     public static <T> T[] toArray(Collection<T> collection){
         if (Validator.isNullOrEmpty(collection)){
             return null;
