@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -28,6 +29,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.core.lang.ClassLoaderUtil;
+import com.feilong.core.net.URLUtil;
 
 /**
  * The Class FileUtilTest.
@@ -73,11 +77,27 @@ public class FileUtilTest{
      * Test get p.
      */
     @Test
-    // @Ignore
     public void testGetP(){
         File file = new File(fString);
         LOGGER.info(file.getAbsolutePath());
         LOGGER.info(file.getParent());
+    }
+
+    /**
+     * Test get p1.
+     * 
+     * @throws MalformedURLException
+     */
+    @Test
+    public void testGetP1() throws MalformedURLException{
+        URL resource = ClassLoaderUtil.getResource("org/apache/commons/collections4/map");
+        URI uri = URLUtil.toURI(resource);
+
+        File esapiDirectory = new File(uri);
+
+        String customDirectory = esapiDirectory.getAbsolutePath();
+
+        LOGGER.info(customDirectory);
     }
 
     /**
