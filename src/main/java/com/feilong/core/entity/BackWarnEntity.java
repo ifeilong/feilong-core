@@ -35,6 +35,13 @@ public class BackWarnEntity implements Serializable{
     /** 是否成功. */
     private boolean           isSuccess;
 
+    /**
+     * 错误码,某些时候需要 设置 ,而前台判断(可选).
+     *
+     * @since 1.2.2
+     */
+    private Integer           errorCode        = null;
+
     /** 描述. */
     private Serializable      description;
 
@@ -45,8 +52,8 @@ public class BackWarnEntity implements Serializable{
     }
 
     /**
-     * Instantiates a new back warn entity.
-     * 
+     * The Constructor.
+     *
      * @param isSuccess
      *            the is success
      * @param description
@@ -54,6 +61,24 @@ public class BackWarnEntity implements Serializable{
      */
     public BackWarnEntity(boolean isSuccess, Serializable description){
         this.isSuccess = isSuccess;
+        this.description = description;
+    }
+
+    /**
+     * The Constructor.
+     *
+     * @param isSuccess
+     *            the is success
+     * @param errorCode
+     *            the error code
+     * @param description
+     *            the description
+     * @since 1.2.2
+     */
+    public BackWarnEntity(boolean isSuccess, Integer errorCode, Serializable description){
+        super();
+        this.isSuccess = isSuccess;
+        this.errorCode = errorCode;
         this.description = description;
     }
 
@@ -93,5 +118,26 @@ public class BackWarnEntity implements Serializable{
      */
     public void setDescription(Serializable description){
         this.description = description;
+    }
+
+    /**
+     * 获得 错误码,某些时候需要 设置 ,而前台判断(可选).
+     *
+     * @return the errorCode
+     * @since 1.2.2
+     */
+    public Integer getErrorCode(){
+        return errorCode;
+    }
+
+    /**
+     * 设置 错误码,某些时候需要 设置 ,而前台判断(可选).
+     *
+     * @param errorCode
+     *            the errorCode to set
+     * @since 1.2.2
+     */
+    public void setErrorCode(Integer errorCode){
+        this.errorCode = errorCode;
     }
 }

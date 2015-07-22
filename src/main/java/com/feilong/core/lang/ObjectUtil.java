@@ -475,7 +475,7 @@ public final class ObjectUtil{
      */
     @SuppressWarnings("unchecked")
     // XXX
-    public static final <T> T toT(Object value,Class<?> klass){
+    public static final <T> T toT(Object value,Class<T> klass){
         if (null == value){
             return null;
         }

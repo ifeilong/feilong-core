@@ -17,8 +17,10 @@ package com.feilong.core.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 
@@ -98,6 +100,26 @@ public class StringUtilTest{
     @Test
     public void addDoubleQuotes(){
         LOGGER.info(StringUtil.addDoubleQuotes(TEXT));
+    }
+
+    @Test
+    public void toTTest(){
+        String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray("6", "_");
+
+        LinkedList<Serializable> linkedList = new LinkedList<Serializable>();
+
+        for (String string : tokenizeToStringArray){
+            Serializable t = StringUtil.toT(string, Serializable.class);
+
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug(t.getClass().getCanonicalName());
+            }
+            linkedList.add(t);
+        }
+
+        Serializable l = 6L;
+
+        LOGGER.info("linkedList:{},contains:{},{}", linkedList, l, linkedList.contains(l));
     }
 
     /**

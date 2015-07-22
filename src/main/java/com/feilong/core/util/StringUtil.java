@@ -699,7 +699,7 @@ public final class StringUtil{
      *            the generic type
      * @param value
      *            值
-     * @param class1
+     * @param klass
      *            the class1
      * @return <pre>
      * if (class1 == String.class){
@@ -711,9 +711,8 @@ public final class StringUtil{
      * }
      * </pre>
      */
-    @SuppressWarnings("unchecked")
-    public static final <T> T toT(String value,Class<?> class1){
-        return (T) ObjectUtil.toT(value, class1);
+    public static final <T> T toT(String value,Class<T> klass){
+        return ObjectUtil.toT(value, klass);
     }
 
     // [start]splitToT

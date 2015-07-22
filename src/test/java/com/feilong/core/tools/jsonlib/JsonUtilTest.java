@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.tools.BaseJsonTest;
+import com.feilong.core.tools.Menu;
 import com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
 import com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.test.User;
@@ -81,6 +82,18 @@ public class JsonUtilTest extends BaseJsonTest{
     @Override
     protected void performanceMethod(User user){
         JsonUtil.toJSON(user, null);
+    }
+
+    @Test
+    public void testJsonMenu(){
+        Menu menu = new Menu(4L);
+        List<Menu> children = new ArrayList<Menu>();
+
+        children.add(new Menu(5L));
+        menu.setChildren(children);
+
+        String json = JsonUtil.format(menu);
+        LOGGER.info(json);
     }
 
     /**
