@@ -222,6 +222,7 @@ public class URIUtilTest{
      */
     @Test
     public void parseQueryToValueMap1(){
+        LOGGER.info(JsonUtil.format(URIUtil.parseQueryToArrayMap("a=&b=2&a", CharsetType.UTF8)));
         LOGGER.info(JsonUtil.format(URIUtil.parseQueryToArrayMap("a=1&b=2&a", CharsetType.UTF8)));
     }
 }

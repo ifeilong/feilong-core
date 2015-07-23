@@ -58,7 +58,7 @@ Reduce development, Release ideas
 			<dependency>
 				<groupId>com.feilong.platform</groupId>
 				<artifactId>feilong-core</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2</version>
 			</dependency>
 			....
 		</dependencies>
