@@ -24,7 +24,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.awt.DesktopUtil;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.entity.BackWarnEntity;
@@ -73,6 +72,6 @@ public class CSVUtilTest{
         String[] excludePropertyNames = { "class" };
         String url = "d:/1.csv";
         CSVUtil.write(url, list, excludePropertyNames);
-        DesktopUtil.open(url);
+        //DesktopUtil.open(url);
     }
 }
