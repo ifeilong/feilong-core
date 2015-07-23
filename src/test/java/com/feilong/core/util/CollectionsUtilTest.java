@@ -117,7 +117,7 @@ public class CollectionsUtilTest{
         testList.add("xinge");
         testList.add("feilong");
 
-        String[] array = CollectionsUtil.toArray(testList);
+        String[] array = CollectionsUtil.toArray(testList, String.class);
         LOGGER.info(JsonUtil.format(array));
     }
 

@@ -104,7 +104,7 @@ public final class URLUtil{
         if (Validator.isNullOrEmpty(paths)){
             throw new NullPointerException("paths can't be null/empty!");
         }
-        String[] array = CollectionsUtil.toArray(paths);
+        String[] array = CollectionsUtil.toArray(paths, String.class);
         return toURLs(array);
     }
 

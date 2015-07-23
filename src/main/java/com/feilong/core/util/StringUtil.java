@@ -870,7 +870,7 @@ public final class StringUtil{
                 tokens.add(token);
             }
         }
-        return CollectionsUtil.toArray(tokens);
+        return CollectionsUtil.toArray(tokens, String.class);
     }
 
     // [end]

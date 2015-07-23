@@ -497,7 +497,7 @@ public final class URIUtil{
                             list = ArrayUtil.toList(valuesArrayInMap);
                         }
                         list.add(value);
-                        map.put(key, CollectionsUtil.toArray(list));
+                        map.put(key, CollectionsUtil.toArray(list, String.class));
                     }
                 }
                 return map;

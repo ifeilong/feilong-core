@@ -275,7 +275,37 @@ public final class CollectionsUtil{
      *            the generic type
      * @param collection
      *            collection
-     * @return 数组,if Validator.isNullOrEmpty(collection),return null
+     * @return 数组,if Validator.isNullOrEmpty(collection),throw NullPointerException
+     * @see com.feilong.core.util.CollectionsUtil#toArray(Collection, Class)
+     * @deprecated 使用有局限,具体参见javadoc 推荐使用 {@link #toArray(Collection, Class)}
+     */
+    @Deprecated
+    public static <T> T[] toArray(Collection<T> collection){
+        if (Validator.isNullOrEmpty(collection)){
+            throw new NullPointerException("the collection is null or empty!");
+        }
+        //**********************************************************************
+        Iterator<T> iterator = collection.iterator();
+        T firstT = iterator.next(); //list.get(0);
+        //TODO 可能有更好的方式
+        if (Validator.isNullOrEmpty(firstT)){
+            throw new IllegalArgumentException("list's first item can't be null/empty!");
+        }
+        //**********************************************************************
+        Class<T> compontType = (Class<T>) firstT.getClass();
+        return toArray(collection, compontType);
+    }
+
+    /**
+     * 集合转成数组.
+     *
+     * @param <T>
+     *            the generic type
+     * @param collection
+     *            collection
+     * @param arrayClass
+     *            the array class
+     * @return 数组,if null == collection or arrayClass == null,return NullPointerException
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
      * @see java.util.Collection#toArray()
@@ -289,36 +319,23 @@ public final class CollectionsUtil{
      * @see java.util.ArrayList#toArray()
      * @see java.util.ArrayList#toArray(Object[])
      * @see org.apache.commons.collections4.IteratorUtils#toArray(Iterator,Class)
-     * @deprecated 使用有局限,具体参见javadoc
+     * @since 1.2.2
      */
-    @Deprecated
-    public static <T> T[] toArray(Collection<T> collection){
-        if (Validator.isNullOrEmpty(collection)){
-            return null;
+    public static <T> T[] toArray(Collection<T> collection,Class<T> arrayClass){
+        if (null == collection){
+            throw new NullPointerException("collection must not be null");
         }
-
-        //**********************************************************************
-        Iterator<T> iterator = collection.iterator();
-
-        T firstT = iterator.next();
-        //list.get(0);
-        //TODO 可能有更好的方式
-        if (Validator.isNullOrEmpty(firstT)){
-            throw new IllegalArgumentException("list's first item can't be null/empty!");
+        if (arrayClass == null){
+            throw new NullPointerException("Array class must not be null");
         }
-        //**********************************************************************
-        Class<?> compontType = firstT.getClass();
-
-        int size = collection.size();
-
-        @SuppressWarnings("unchecked")
-        T[] tArray = (T[]) Array.newInstance(compontType, size);
 
         // 如果采用大家常用的把a的length设为0,就需要反射API来创建一个大小为size的数组,而这对性能有一定的影响.
         // 所以最好的方式就是直接把a的length设为Collection的size从而避免调用反射API来达到一定的性能优化.
+        @SuppressWarnings("unchecked")
+        T[] array = (T[]) Array.newInstance(arrayClass, collection.size());
 
         //注意，toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
-        return collection.toArray(tArray);
+        return collection.toArray(array);
     }
 
     /**
