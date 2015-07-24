@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 
@@ -27,7 +28,18 @@ import com.feilong.core.util.Validator;
 
 /**
  * 转换器.
- *
+ * 
+ * <h3>关于类型转换</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>{@link ConvertUtilsBean#registerPrimitives(boolean) registerPrimitives(boolean throwException)}</li>
+ * <li>{@link ConvertUtilsBean#registerStandard(boolean,boolean) registerStandard(boolean throwException, boolean defaultNull);}</li>
+ * <li>{@link ConvertUtilsBean#registerOther(boolean) registerOther(boolean throwException);}</li>
+ * <li>{@link ConvertUtilsBean#registerArrays(boolean,int) registerArrays(boolean throwException, int defaultArraySize);}</li>
+ * </ul>
+ * </blockquote>
+ * 
  * @author feilong
  * @version 1.2.3 2015年7月24日 下午7:43:33
  * @see org.apache.commons.beanutils.ConvertUtils
@@ -43,14 +55,39 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将string 类型数据转成 Long 类型.
+     * To long array.
+     *
+     * @param toBeConvertedValue
+     *            the to be converted value
+     * @return the long[]
+     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
+     */
+    public static final Long[] toLongs(Object toBeConvertedValue){
+        //        LongConverter elementConverter = new LongConverter(new Long(0L));
+        //        return ConvertUtil.convert(elementConverter, toBeConvertedValue);
+        return (Long[]) ConvertUtils.convert(toBeConvertedValue, Long[].class);
+    }
+
+    //***************************************************************************************
+
+    /**
+     * 把对象转换为long类型.
      * 
      * @param value
-     *            string 类型数据
-     * @return Long 类型
+     *            包含数字的对象.
+     * @return long 转换后的数值,对不能转换的对象返回null.
+     * @deprecated will Re-structure
      */
-    public static final Long parseLong(String value){
-        return Long.parseLong(value);
+    @Deprecated
+    public static final Long toLong(Object value){
+        if (Validator.isNullOrEmpty(value)){
+            return null;
+        }
+
+        if (value instanceof Long){
+            return (Long) value;
+        }
+        return Long.parseLong(value.toString());
     }
 
     /**
@@ -89,7 +126,9 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            需要被转换的值
      * @return the t
+     * @deprecated will Re-structure
      */
+    @Deprecated
     public static final <T> T convert(Class<T> defaultArrayType,Converter individualArrayElementConverter,Object toBeConvertedValue){
         //char[] allowedChars = new char[] { ',', '-' };
         char delimiter = ',';
@@ -124,22 +163,8 @@ public final class ConvertUtil{
         Class<T> defaultArrayType = null;
         return convert(defaultArrayType, individualArrayElementConverter, toBeConvertedValue);
 
+        //  ConvertUtilsBean convertUtils = beanUtilsBean.getConvertUtils();
         //return ConvertUtils.convert(toBeConvertedValue, targetType);
-    }
-
-    //  ConvertUtilsBean convertUtils = beanUtilsBean.getConvertUtils();
-
-    /**
-     * To long array.
-     *
-     * @param toBeConvertedValue
-     *            the to be converted value
-     * @return the long[]
-     */
-    public static final Long[] toLongs(Object toBeConvertedValue){
-        //        LongConverter elementConverter = new LongConverter(new Long(0L));
-        //        return ConvertUtil.convert(elementConverter, toBeConvertedValue);
-        return (Long[]) ConvertUtils.convert(toBeConvertedValue, Long[].class);
     }
 
     /**
@@ -148,7 +173,9 @@ public final class ConvertUtil{
      * @param object
      *            object
      * @return boolean
+     * @deprecated will Re-structure
      */
+    @Deprecated
     public static final Boolean toBoolean(Object object){
         if (null == object){
             throw new IllegalArgumentException("object can't be null/empty!");
@@ -167,7 +194,9 @@ public final class ConvertUtil{
      *         <li>否则 new Integer(value.toString().trim())</li>
      *         <li>如果value不能转成integer 会抛出 IllegalArgumentException异常</li>
      *         </ul>
+     * @deprecated will Re-structure
      */
+    @Deprecated
     public static final Integer toInteger(Object value){
         if (Validator.isNullOrEmpty(value)){
             return null;
@@ -202,7 +231,9 @@ public final class ConvertUtil{
      * @param value
      *            值
      * @return BigDecimal
+     * @deprecated will Re-structure
      */
+    @Deprecated
     public static final BigDecimal toBigDecimal(Object value){
         if (Validator.isNullOrEmpty(value)){
             return null;
@@ -221,30 +252,14 @@ public final class ConvertUtil{
     }
 
     /**
-     * 把对象转换为long类型.
-     * 
-     * @param value
-     *            包含数字的对象.
-     * @return long 转换后的数值,对不能转换的对象返回null.
-     */
-    public static final Long toLong(Object value){
-        if (Validator.isNullOrEmpty(value)){
-            return null;
-        }
-
-        if (value instanceof Long){
-            return (Long) value;
-        }
-        return Long.parseLong(value.toString());
-    }
-
-    /**
      * Object to double.
      * 
      * @param value
      *            the value
      * @return the double
+     * @deprecated will Re-structure
      */
+    @Deprecated
     public static final Double toDouble(Object value){
         if (Validator.isNullOrEmpty(value)){
             return null;
@@ -262,7 +277,9 @@ public final class ConvertUtil{
      * @param value
      *            the value
      * @return the float
+     * @deprecated will Re-structure
      */
+    @Deprecated
     public static final Float toFloat(Object value){
         if (Validator.isNullOrEmpty(value)){
             return null;
@@ -280,7 +297,9 @@ public final class ConvertUtil{
      * @param value
      *            the value
      * @return the short
+     * @deprecated will Re-structure
      */
+    @Deprecated
     public static final Short toShort(Object value){
         if (Validator.isNullOrEmpty(value)){
             return null;
@@ -303,7 +322,9 @@ public final class ConvertUtil{
      *         <li>{@code return value.toString()}</li>
      *         <li>对于数组，将会调用 {@link java.util.Arrays#toString(Object[])}</li>
      *         </ul>
+     * @deprecated will Re-structure
      */
+    @Deprecated
     public static final String toString(Object value){
         if (null == value){
             return null;
@@ -369,7 +390,9 @@ public final class ConvertUtil{
      *            the class1
      * @return if null==value return null,else to class convert<br>
      *         如果不是内置的class,将使用强制转换 (T) value
+     * @deprecated will Re-structure
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     // XXX
     public static final <T> T toT(Object value,Class<T> klass){
