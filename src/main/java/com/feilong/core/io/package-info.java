@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 /**
- * io操作,可以文件读 {@link com.feilong.core.io.IOReaderUtil IOReaderUtil}/写 {@link com.feilong.core.io.IOWriteUtil IOWriteUtil},流转换,注册表操作,csv格式输出 {@link com.feilong.core.io.CSVUtil},运行程序等操作.
+ * io操作,可以文件读 {@link com.feilong.core.io.IOReaderUtil IOReaderUtil}/写 {@link com.feilong.core.io.IOWriteUtil IOWriteUtil},流转换等操作.
  */
 package com.feilong.core.io;

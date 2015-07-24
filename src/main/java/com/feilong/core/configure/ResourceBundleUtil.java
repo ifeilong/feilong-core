@@ -89,7 +89,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      *            如果是Integer.class,则返回的是Integer
      * @return the value
      * @see #getValue(String, String)
-     * @see com.feilong.core.bean.ConvertUtil#toT(String, Class)
+     * @see com.feilong.core.bean.ConvertUtil#toT(Object, Class)
      */
     @SuppressWarnings("unchecked")
     public static <T> T getValue(String baseName,String key,Class<?> typeClass){
@@ -112,7 +112,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      *            如果是Integer.class,则返回的是Integer
      * @return the value
      * @see #getValue(ResourceBundle, String)
-     * @see com.feilong.core.bean.ConvertUtil#toT(String, Class)
+     * @see com.feilong.core.bean.ConvertUtil#toT(Object, Class)
      */
     @SuppressWarnings("unchecked")
     public static <T> T getValue(ResourceBundle resourceBundle,String key,Class<?> typeClass){
@@ -452,7 +452,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * @return the resource bundle,may be null
      * @see com.feilong.core.io.FileUtil#getFileInputStream(String)
      * @see java.util.PropertyResourceBundle#PropertyResourceBundle(InputStream)
-     * @see #ResourceBundleUtil.getResourceBundle(InputStream)
+     * @see ResourceBundleUtil#getResourceBundle(InputStream)
      * @since 1.0.9
      */
     public static ResourceBundle getResourceBundleByFileName(String fileName){

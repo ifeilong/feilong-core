@@ -31,7 +31,6 @@ import com.feilong.core.util.Validator;
  * <h3>方法介绍:</h3>
  * 
  * <blockquote>
- * <p>
  * <ol>
  * <li>{@link #newInstance(Class, Object...)} 获得实例</li>
  * <li>{@link #newInstance(String, Object...)} 获得实例</li>
@@ -44,7 +43,6 @@ import com.feilong.core.util.Validator;
  * <p>
  * 因此,不用担心 int-->Integer 原始类型参数和包装类型参数,以及父类/子类 这样的参数不匹配带来的问题
  * </p>
- * </p>
  * </blockquote>
  * 
  * <h3>如果不想使用自动匹配的特性</h3>
@@ -52,6 +50,7 @@ import com.feilong.core.util.Validator;
  * <blockquote>
  * <p>
  * 您可以使用 原生方法,下面两个是 获得精准的构造函数并实例,如果参数类型不匹配,那么就会抛异常
+ * </p>
  * 
  * <ol>
  * <li>{@link ConstructorUtils#invokeExactConstructor(Class, Object...)} 获得实例</li>
@@ -64,9 +63,6 @@ import com.feilong.core.util.Validator;
  * <li>{@link ConstructorUtils#getAccessibleConstructor(Class, Class...)}</li>
  * <li>{@link ConstructorUtils#getMatchingAccessibleConstructor(Class, Class...)}</li>
  * </ol>
- * 
- * 
- * </p>
  * </blockquote>
  * 
  * @author feilong

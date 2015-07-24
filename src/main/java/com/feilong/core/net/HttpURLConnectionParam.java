@@ -22,8 +22,8 @@ import com.feilong.core.io.CharsetType;
  * HttpURLConnectionParam.
  *
  * @author feilong
- * @version 1.0 Sep 27, 2013 4:54:08 PM
- * @version 1.0.9 2015年3月5日 下午5:49:15 add proxyAddress&&proxyPort
+ * @version 1.0.2 Sep 27, 2013 4:54:08 PM
+ * @version 1.0.9 2015年3月5日 下午5:49:15 add proxyAddress and proxyPort
  * @since 1.0.2
  * @deprecated 将来会使用 {@link com.feilong.core.net.HttpRequest}
  */

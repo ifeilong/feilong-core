@@ -37,6 +37,7 @@ import com.feilong.core.util.Validator;
  * @author feilong
  * @version 1.0.0 2010-4-5 下午11:00:54
  * @since 1.0.0
+ * @see org.apache.commons.lang3.ObjectUtils
  */
 public final class ObjectUtil{
 

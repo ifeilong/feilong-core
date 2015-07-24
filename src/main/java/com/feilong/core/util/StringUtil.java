@@ -791,9 +791,13 @@ public final class StringUtil{
     // [start]tokenizeToStringArray
 
     /**
-     * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"})<br>
-     * Tokenize the given String into a String array via a StringTokenizer.
+     * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
+     * 
+     * <p>
+     * Tokenize the given String into a String array via a StringTokenizer. <br>
      * Trims tokens and omits empty tokens.
+     * </p>
+     * 
      * <p>
      * The given delimiters string is supposed to consist of any number of delimiter characters. Each of those characters can be used to
      * separate tokens. A delimiter is always a single character; for multi-character delimiters, consider using
@@ -818,8 +822,10 @@ public final class StringUtil{
     }
 
     /**
-     * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"})<br>
+     * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
+     * <p>
      * Tokenize the given String into a String array via a StringTokenizer.
+     * </p>
      * <p>
      * The given delimiters string is supposed to consist of any number of delimiter characters. <br>
      * Each of those characters can be used to separate tokens. <br>

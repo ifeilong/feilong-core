@@ -49,14 +49,12 @@ import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
  * <h3>{@link <a href="http://stamen.iteye.com/blog/2003458">SET-MAP现代诗一首</a>}</h3>
  * 
  * <blockquote>
- * <p>
  * <ul>
  * <li>天下人都知道Set，Map不能重复</li>
  * <li>80%人知道hashCode,equals是判断重复的法则 </li>
  * <li>40%人知道Set添加重复元素时，旧元素不会被覆盖</li>
  * <li>20%人知道Map添加重复键时，旧键不会被覆盖，而值会覆盖</li>
  * </ul>
- * </p>
  * </blockquote>
  * 
  * @author feilong
@@ -217,7 +215,7 @@ public final class CollectionsUtil{
      * @return 如果 collection isNullOrEmpty,返回null<br>
      *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
-     * @see ArrayUtil#toString(ToStringConfig, T...)
+     * @see ArrayUtil#toString(ToStringConfig, Object...)
      */
     public static final <T extends Serializable> String toString(final Collection<T> collection,ToStringConfig toStringConfig){
         if (Validator.isNullOrEmpty(collection)){
@@ -721,7 +719,7 @@ public final class CollectionsUtil{
      *            对面里面属性的名称
      * @return the map< t, list< o>>
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
-     * @see com.feilong.core.util.ArrayUtil#group(O[], String)
+     * @see com.feilong.core.util.ArrayUtil#group(Object[], String)
      * @see #groupOne(Collection, String)
      * @since 1.0.8
      */

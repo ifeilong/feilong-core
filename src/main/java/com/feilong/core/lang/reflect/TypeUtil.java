@@ -86,7 +86,6 @@ public final class TypeUtil{
      * 
      * <pre>
      * Example 1:
-     * <p>
      * {@code public class SkuItemRepositoryImpl extends BaseSolrRepositoryImpl<SkuItem, Long> implements SkuItemRepository}<br>
      * 这样的类,
      * 
