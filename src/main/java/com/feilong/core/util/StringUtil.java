@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.io.CharsetType;
 import com.feilong.core.lang.ObjectUtil;
+import com.feilong.core.log.Slf4jUtil;
 
 /**
  * StringUtil {@link String}工具类,可以 查询,截取,format,转成16进制码.
@@ -559,16 +560,20 @@ public final class StringUtil{
         //****************************************************
         int startIndex = beginIndex + shift;
         if (startIndex < 0){
-            String logInfo = StringBuilderUtil.append("beginIndex + shift <0,", "beginIndex:", beginIndex, ",shift:" + shift, ",text:"
-                            + text, ",text.length:", text.length());
-
-            throw new IllegalArgumentException(logInfo);
+            throw new IllegalArgumentException(Slf4jUtil.formatMessage(
+                            "beginIndex + shift <0, beginIndex:{},shift:{},text:{},text.length:{}",
+                            beginIndex,
+                            shift,
+                            text,
+                            text.length()));
         }else if (startIndex > text.length()){
-
             if (LOGGER.isInfoEnabled()){
-                String logInfo = StringBuilderUtil.append("beginIndex + shift > text.length(),", "beginIndex:", beginIndex, ",shift:"
-                                + shift, ",text:" + text, ",text.length:", text.length());
-                LOGGER.info(logInfo);
+                LOGGER.info(
+                                "beginIndex + shift > text.length(), beginIndex:{},shift:{},text:{},text.length:{}",
+                                beginIndex,
+                                shift,
+                                text,
+                                text.length());
             }
 
             return null;
