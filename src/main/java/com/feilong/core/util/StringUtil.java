@@ -28,8 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtil;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.io.CharsetType;
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.log.Slf4jUtil;
 
 /**
@@ -388,7 +388,7 @@ public final class StringUtil{
      * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀，则返回 true；否则返回 false.还要注意，如果参数是空字符串，或者等于此 String 对象（用 equals(Object) 方法确定），则返回 true.
      */
     public static final boolean startsWith(Object value,String prefix){
-        return ObjectUtil.toString(value).startsWith(prefix);
+        return ConvertUtil.toString(value).startsWith(prefix);
     }
 
     // [end]
@@ -415,8 +415,10 @@ public final class StringUtil{
 
     // ********************************substring************************************************
     /**
-     * [截取]从指定索引处(beginIndex)的字符开始，直到此字符串末尾. <br>
+     * [截取]从指定索引处(beginIndex)的字符开始，直到此字符串末尾.
+     * <p>
      * 调用text.substring(beginIndex)
+     * </p>
      * 
      * <pre>
      * substring("jinxin.feilong",6) 
@@ -434,7 +436,7 @@ public final class StringUtil{
      *         </ul>
      */
     public static final String substring(Object text,int beginIndex){
-        String t = ObjectUtil.toString(text);
+        String t = ConvertUtil.toString(text);
         if (Validator.isNullOrEmpty(t)){
             return null;
         }
@@ -442,7 +444,7 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]从开始位置(startIndex),截取固定长度(length)字符串<br>
+     * [截取]从开始位置(startIndex),截取固定长度(length)字符串.
      * 
      * <pre>
      * StringUtil.substring("jinxin.feilong", 6, 2)
@@ -475,7 +477,7 @@ public final class StringUtil{
         if (Validator.isNullOrEmpty(textObject)){
             return null;
         }
-        String textString = ObjectUtil.toString(textObject);
+        String textString = ConvertUtil.toString(textObject);
         int textLength = textString.length();
         // 索引位置必须小于长度
         if (startIndex > textLength - 1){
@@ -522,9 +524,11 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]:从第一次出现字符串位置开始(包含)截取到最后,shift表示向前或者向后挪动位数,<br>
+     * [截取]:从第一次出现字符串位置开始(包含)截取到最后,shift表示向前或者向后挪动位数.
+     * <p>
      * beginIndex= text.indexOf(beginString) + shift;<br>
      * return text.substring(beginIndex);
+     * </p>
      * 
      * <pre>
      * substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,0)======&gt;&quot;.feilong&quot;
@@ -671,8 +675,9 @@ public final class StringUtil{
      * @param value
      *            字符串
      * @return byte数组
+     * @since 1.2.3
      */
-    public static final byte[] toBytes(String value){
+    public static final byte[] getBytes(String value){
         return value.getBytes();
     }
 
@@ -686,8 +691,9 @@ public final class StringUtil{
      * @return 所得 byte 数组
      * @see String#getBytes(String)
      * @see CharsetType
+     * @since 1.2.3
      */
-    public static final byte[] toBytes(String value,String charsetName){
+    public static final byte[] getBytes(String value,String charsetName){
         try{
             return value.getBytes(charsetName);
         }catch (UnsupportedEncodingException e){
@@ -697,28 +703,6 @@ public final class StringUtil{
     }
 
     // [end]
-    /**
-     * 将string 类型值转成泛型,一般用于配置文件读取数据.
-     * 
-     * @param <T>
-     *            the generic type
-     * @param value
-     *            值
-     * @param klass
-     *            the class1
-     * @return <pre>
-     * if (class1 == String.class){
-     *     return (T) value;
-     * }else if (class1 == Boolean.class){
-     *     return (T) ObjectUtil.objectToBoolean(value);
-     * }else if (class1 == Integer.class){
-     *     return (T) ObjectUtil.objectToInteger(value);
-     * }
-     * </pre>
-     */
-    public static final <T> T toT(String value,Class<T> klass){
-        return ObjectUtil.toT(value, klass);
-    }
 
     // [start]splitToT
 
@@ -735,7 +719,9 @@ public final class StringUtil{
      * @see String#split(String)
      * @see String#split(String, int)
      * @see java.util.regex.Pattern#split(CharSequence)
+     * @deprecated will Re-structure,support more type or remove
      */
+    @Deprecated
     public static final String[] splitToStringArray(String value,String regexSpliter){
         if (null != value){
             String[] strings = value.split(regexSpliter);
@@ -756,13 +742,15 @@ public final class StringUtil{
      * @return 如果value 是null,返回null
      * @see String#split(String)
      * @see String#split(String, int)
-     * @see ArrayUtil#toIntegers(Object[])
+     * @see ConvertUtil#toIntegers(Object[])
      * @see java.util.regex.Pattern#split(CharSequence)
+     * @deprecated will Re-structure,support more type or remove
      */
+    @Deprecated
     public static final Integer[] splitToIntegerArray(String value,String regexSpliter){
         if (null != value){
             String[] strings = value.split(regexSpliter);
-            return ArrayUtil.toIntegers(strings);
+            return ConvertUtil.toIntegers(strings);
         }
         return null;
     }
@@ -785,7 +773,9 @@ public final class StringUtil{
      * @see java.util.regex.Pattern#split(CharSequence)
      * @see #splitToIntegerArray(String, String)
      * @see #splitToStringArray(String, String)
+     * @deprecated will Re-structure,support more type or remove
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     public static final <T> T[] splitToTArray(String value,String regexSpliter,Class<?> typeClass){
         if (typeClass == String.class){
@@ -1014,4 +1004,5 @@ public final class StringUtil{
     }
 
     // [end]
+
 }
