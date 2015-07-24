@@ -137,6 +137,7 @@ public final class ArrayUtil{
      *         if Validator.isNullOrEmpty(arrays), return null,else return {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
      */
+    //TODO 看看 能否和 convert 混合下
     public static <T> List<T> toList(T[] arrays){
         if (Validator.isNullOrEmpty(arrays)){
             return null;
@@ -146,30 +147,6 @@ public final class ArrayUtil{
 
         List<T> list = new ArrayList<T>(Arrays.asList(arrays));
         return list;
-    }
-
-    /**
-     * 任意的数组转成Integer 数组.
-     * 
-     * @param objects
-     *            objects
-     * @return Validator.isNotNullOrEmpty(objects)则返回null<br>
-     *         一旦其中有值转换不了integer,则出现参数异常
-     * @deprecated 转成泛型
-     */
-    //TODO 转成泛型
-    @Deprecated
-    public static Integer[] toIntegers(Object[] objects){
-        if (Validator.isNullOrEmpty(objects)){
-            return null;
-        }
-
-        int length = objects.length;
-        Integer[] integers = new Integer[length];
-        for (int i = 0; i < length; i++){
-            integers[i] = ObjectUtil.toInteger(objects[i]);
-        }
-        return integers;
     }
 
     /**
