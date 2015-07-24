@@ -189,8 +189,10 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void testGetFirstDateOfThisWeek(){
         Date date = DateUtil.addDay(NOW, -2);
         LOGGER.debug("the param date:{}", DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+
         Date now3 = DateUtil.getFirstDateOfThisWeek(date);
         LOGGER.debug(DateUtil.date2String(now3, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+
         LOGGER.debug("今天所在week 第一天:{}", DateUtil.date2String(
                         DateUtil.getFirstDateOfThisWeek(new Date()),
                         DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));

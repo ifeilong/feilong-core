@@ -23,7 +23,7 @@ import java.util.GregorianCalendar;
  * 扩展 {@link DateUtil}类,更多人性化的操作及转换 .
  * 
  * @author feilong
- * @version 1.1 Aug 4, 2010 9:06:54 PM
+ * @version 1.0.1 Aug 4, 2010 9:06:54 PM
  * @see DateUtil
  * @since 1.0.0
  */
@@ -46,9 +46,9 @@ public final class CalendarUtil{
      *            the date
      * @return 获得任意日期的00:00:00
      */
-    public static Date getResetDateByDay(Date date){
-        Calendar calendar = getResetCalendarByDay(date);
-        return calendar.getTime();
+    public static Date resetDateByDay(Date date){
+        Calendar calendar = resetCalendarByDay(date);
+        return toDate(calendar);
     }
 
     /**
@@ -61,8 +61,27 @@ public final class CalendarUtil{
      *            the date
      * @return 获得任意日期的00:00:00
      */
-    public static Calendar getResetCalendarByDay(Date date){
+    public static Calendar resetCalendarByDay(Date date){
         Calendar calendar = DateUtil.toCalendar(date);
+        return resetDayBegin(calendar);
+    }
+
+    // [start]private
+
+    /**
+     * 一天开始,<code>00:00:00.000</code>
+     *
+     * @param calendar
+     *            the calendar
+     * @return the calendar
+     * @see Calendar#set(int, int)
+     * @see Calendar#HOUR_OF_DAY
+     * @see Calendar#MINUTE
+     * @see Calendar#SECOND
+     * @see Calendar#MILLISECOND
+     * @since 1.2.3
+     */
+    public static Calendar resetDayBegin(Calendar calendar){
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -70,6 +89,28 @@ public final class CalendarUtil{
         return calendar;
     }
 
+    /**
+     * 一天结束,最后的时间 <code>23:59:59.999</code>
+     *
+     * @param calendar
+     *            the calendar
+     * @return the calendar
+     * @see Calendar#set(int, int)
+     * @see Calendar#HOUR_OF_DAY
+     * @see Calendar#MINUTE
+     * @see Calendar#SECOND
+     * @see Calendar#MILLISECOND
+     * @since 1.2.3
+     */
+    public static Calendar resetDayEnd(Calendar calendar){
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        return calendar;
+    }
+
+    // [end]
     /**
      * 获得日历字段值.
      *
@@ -95,21 +136,6 @@ public final class CalendarUtil{
     public static int getCalendarFieldValue(Date date,int field){
         Calendar calendar = DateUtil.toCalendar(date);
         return calendar.get(field);
-    }
-
-    /**
-     * 将日期字符串转成Calendar.
-     *
-     * @param dateString
-     *            将日期字符串
-     * @param datePattern
-     *            datePattern
-     * @return Calendar
-     */
-    public static Calendar string2Calendar(String dateString,String datePattern){
-        Date date = DateUtil.string2Date(dateString, datePattern);
-        Calendar calendar = DateUtil.toCalendar(date);
-        return calendar;
     }
 
     /**
@@ -173,12 +199,28 @@ public final class CalendarUtil{
      * @param calendar
      *            calendar
      * @param datePattern
-     *            模式
+     *            日期pattern {@link DatePattern}
      * @return string
      */
     public static String toString(Calendar calendar,String datePattern){
         Date date = toDate(calendar);
         return DateUtil.date2String(date, datePattern);
+    }
+
+    /**
+     * 将日期字符串转成Calendar.
+     *
+     * @param dateString
+     *            将日期字符串
+     * @param datePattern
+     *            日期pattern {@link DatePattern}
+     * @return Calendar
+     * @since 1.2.3
+     */
+    public static Calendar toCalendar(String dateString,String datePattern){
+        Date date = DateUtil.string2Date(dateString, datePattern);
+        Calendar calendar = DateUtil.toCalendar(date);
+        return calendar;
     }
 
     /**

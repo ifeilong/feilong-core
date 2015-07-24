@@ -52,7 +52,7 @@ public class CalendarUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetActualMaximum(){
-        Calendar calendar = CalendarUtil.string2Calendar("2007-02-20", DatePattern.COMMON_DATE);
+        Calendar calendar = CalendarUtil.toCalendar("2007-02-20", DatePattern.COMMON_DATE);
         LOGGER.debug("the param objects:{}", calendar.getActualMaximum(Calendar.DAY_OF_YEAR));
     }
 

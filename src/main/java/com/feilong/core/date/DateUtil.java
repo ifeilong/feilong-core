@@ -173,10 +173,10 @@ public final class DateUtil{
     }
 
     /**
-     * 获得昨天(日期的前一天的此时此刻).
+     * 获得昨天(日期的前一天的<span style="color:red">此时此刻</span>).
      * 
      * <pre>
-     * 仅对天数-1,其余时间部分不做任何处理 
+     * <span style="color:red">仅对天数-1,其余时间部分不做任何处理 </span>
      * 
      * 比如 现在 2012-10-16 22:43:06 
      * return 2012-10-15 22:43:06.169
@@ -192,14 +192,14 @@ public final class DateUtil{
     public static final Date getYesterday(Date date){
         Calendar calendar = toCalendar(date);
         calendar.add(Calendar.DATE, -1);
-        return calendar.getTime();
+        return CalendarUtil.toDate(calendar);
     }
 
     // *****************************week****************************************************
     /**
-     * 获得传入date 所在的星期 第一天(<b>周日</b>) <code>00:00:00.000</code> 到毫秒.
+     * 获得传入date 所在的<span style="color:red">星期 第一天(周日)</span> <code>00:00:00.000</code> 到毫秒.
      * <p>
-     * 注意:按照外国制,周日为一个星期第一天,周六为最后一天<br>
+     * 注意:按照外国制,<span style="color:red">周日为一个星期第一天,周六为最后一天</span><br>
      * 注意:会自动跨月,跨年操作
      * </p>
      * 
@@ -217,20 +217,23 @@ public final class DateUtil{
      * @return 传入date 所在星期的第一天 <code>00:00:00.000</code> 到毫秒
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
-     * @see #dayBegin(Calendar)
+     * @see CalendarUtil#resetDayBegin(Calendar)
      * @see Calendar#getTime()
      */
     public static final Date getFirstDateOfThisWeek(Date date){
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        dayBegin(calendar);
-        return calendar.getTime();
+        CalendarUtil.resetDayBegin(calendar);
+        return CalendarUtil.toDate(calendar);
     }
 
     /**
-     * 获得传入date 所在星期的最后一天(周六) <code>23:59:59.999</code> 到毫秒.<br>
-     * 注意:按照外国制,周日为一个星期第一天,周六为最后一天<br>
+     * 获得传入date 所在<span style="color:red">星期的最后一天(周六)</span> <code>23:59:59.999</code> 到毫秒.
+     * 
+     * <p>
+     * 注意:按照外国制,<span style="color:red">周日为一个星期第一天,周六为最后一天</span><br>
      * 注意:会自动跨月,跨年操作
+     * </p>
      * 
      * <pre>
      * 如果 现在是 2012-10-11 17:10:30.701 (周四),
@@ -246,46 +249,47 @@ public final class DateUtil{
      * @return 传入date 所在星期的最后一天 <code>23:59:59.999</code> 到毫秒
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
-     * @see #dayEnd(Calendar)
+     * @see CalendarUtil#resetDayEnd(Calendar)
      * @see Calendar#getTime()
      * @since 1.0.1
      */
     public static final Date getLastDateOfThisWeek(Date date){
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-        dayEnd(calendar);
-        return calendar.getTime();
+        CalendarUtil.resetDayEnd(calendar);
+        return CalendarUtil.toDate(calendar);
     }
 
     // *********************************************************************************
 
     /**
-     * 获得当天所在月的第一天,<code>00:00:00</code> 到毫秒.<br>
+     * 获得当天所在月的第一天,<code>00:00:00</code> 到毫秒.
      * 
-     * <pre>
-     * 如果 现在是 2012-10-11 17:10:30.701 (周四),
-     * 
+     * <p>
+     * 如果 现在是 2012-10-11 17:10:30.701 (周四),<br>
      * return 2012-10-01 00:00:00
-     * </pre>
+     * </p>
      * 
      * @param date
      *            the date
      * @return Date
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
-     * @see #dayBegin(Calendar)
+     * @see CalendarUtil#resetDayBegin(Calendar)
      * @see Calendar#getTime()
      */
     public static final Date getFirstDateOfThisMonth(Date date){
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-        dayBegin(calendar);
-        return calendar.getTime();
+        CalendarUtil.resetDayBegin(calendar);
+        return CalendarUtil.toDate(calendar);
     }
 
     /**
-     * 获得当天所在月的最后一天 <code>23:59:59.999</code> 到毫秒.<br>
+     * 获得当天<span style="color:red">所在月的最后一天</span> <code>23:59:59.999</code> 到毫秒.
+     * <p>
      * 以当前月的实际天数为准,也就是说,2月会自动区分闰年 是28天还是29天
+     * </p>
      * 
      * <pre>
      * 如果 现在是 2012-10-11 17:10:30.701,
@@ -297,18 +301,18 @@ public final class DateUtil{
      * @return Date
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
-     * @see #dayEnd(Calendar)
+     * @see CalendarUtil#resetDayEnd(Calendar)
      * @see Calendar#getTime()
      */
     public static final Date getLastDateOfThisMonth(Date date){
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        dayEnd(calendar);
-        return calendar.getTime();
+        CalendarUtil.resetDayEnd(calendar);
+        return CalendarUtil.toDate(calendar);
     }
 
     /**
-     * 获得指定日期所在年的第一天,<code>00:00:00.000</code> 到毫秒.
+     * 获得指定日期<span style="color:red">所在年的第一天</span>,<code>00:00:00.000</code> 到毫秒.
      * 
      * <pre>
      * 如果 现在是 2012-10-11 17:10:30.701,
@@ -320,19 +324,19 @@ public final class DateUtil{
      * @return date
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
-     * @see #dayBegin(Calendar)
+     * @see CalendarUtil#resetDayBegin(Calendar)
      * @see Calendar#getTime()
      */
     public static final Date getFirstDateOfThisYear(Date date){
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.MONTH, Calendar.JANUARY);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-        dayBegin(calendar);
-        return calendar.getTime();
+        CalendarUtil.resetDayBegin(calendar);
+        return CalendarUtil.toDate(calendar);
     }
 
     /**
-     * 获得当天所在年的最后一天 <code>23:59:59.999</code> 到毫秒<br>
+     * 获得当天<span style="color:red">所在年的最后一天</span> <code>23:59:59.999</code> 到毫秒<br>
      * 
      * <pre>
      * 如果 现在是 2012-10-11 17:10:30.701,
@@ -345,15 +349,15 @@ public final class DateUtil{
      * @return Date
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
-     * @see #dayEnd(Calendar)
+     * @see CalendarUtil#resetDayEnd(Calendar)
      * @see Calendar#getTime()
      */
     public static final Date getLastDateOfThisYear(Date date){
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.MONTH, Calendar.DECEMBER);
         calendar.set(Calendar.DAY_OF_MONTH, 31);
-        dayEnd(calendar);
-        return calendar.getTime();
+        CalendarUtil.resetDayEnd(calendar);
+        return CalendarUtil.toDate(calendar);
     }
 
     // [start]operate 时间操作(加减)
@@ -564,7 +568,7 @@ public final class DateUtil{
     public static final Date operateDate(Date currentDate,int field,int amount){
         Calendar calendar = toCalendar(currentDate);
         calendar.add(field, amount);
-        return calendar.getTime();
+        return CalendarUtil.toDate(calendar);
     }
 
     // [end]
@@ -1007,7 +1011,7 @@ public final class DateUtil{
      * @param date2
      *            the date2
      * @param datePattern
-     *            the date pattern
+     *            日期pattern {@link DatePattern}
      * @return the interval week
      * @see #getIntervalWeek(Date, Date)
      * @since 1.2.1
@@ -1169,7 +1173,7 @@ public final class DateUtil{
      * @param dateAfter
      *            the date after
      * @param datePattern
-     *            pattern {@link DatePattern}
+     *            日期pattern {@link DatePattern}
      * @return 如果date_before 早于 date_after返回 true
      * @see #string2Date(String, String)
      * @see #isBefore(Date, String, String)
@@ -1193,7 +1197,7 @@ public final class DateUtil{
      * @param dateAfter
      *            dateAfter
      * @param datePattern
-     *            pattern {@link DatePattern}
+     *            日期pattern {@link DatePattern}
      * @return 如果before 早于 dateAfter返回 true
      * @see #string2Date(String, String)
      * @see #isBefore(String, String, String)
@@ -1345,44 +1349,5 @@ public final class DateUtil{
         return new GregorianCalendar().isLeapYear(year);
     }
 
-    // [end]
-
-    // [start]private
-
-    /**
-     * 一天开始,<code>00:00:00.000</code>
-     * 
-     * @param calendar
-     *            the calendar
-     * @see Calendar#set(int, int)
-     * @see Calendar#HOUR_OF_DAY
-     * @see Calendar#MINUTE
-     * @see Calendar#SECOND
-     * @see Calendar#MILLISECOND
-     */
-    private static void dayBegin(Calendar calendar){
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-    }
-
-    /**
-     * 一天结束,最后的时间 <code>23:59:59.999</code>
-     * 
-     * @param calendar
-     *            the calendar
-     * @see Calendar#set(int, int)
-     * @see Calendar#HOUR_OF_DAY
-     * @see Calendar#MINUTE
-     * @see Calendar#SECOND
-     * @see Calendar#MILLISECOND
-     */
-    private static void dayEnd(Calendar calendar){
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        calendar.set(Calendar.MILLISECOND, 999);
-    }
     // [end]
 }
