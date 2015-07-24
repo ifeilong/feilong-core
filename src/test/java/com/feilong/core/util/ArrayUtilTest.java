@@ -153,8 +153,6 @@ public class ArrayUtilTest{
         aStrings[1] = "b";
         LOGGER.info(Arrays.toString(aStrings));
         LOGGER.info(ArrayUtils.toString(aStrings));
-        String aString = "FACTORY_ID,SHOE_NAME,CHANNEL,PRODUCT_CODE,COLOR_CODE,PAYTYPE,FACTORY_CODE,TRACKING_NO_UPS,MH_ID,DEVICE,SUB_TOTAL_PRICE,TAX_PRICE,DELIVERY_PRICE,TOTAL_PRICE,PAY_DATE,REVENUE_DATE,RETURN_DATE,CANCEL_DATE,SHOP_NAME,CALCEL_CODE";
-        LOGGER.info(ListUtil.toString(Arrays.asList(aString.split(",")), true));
     }
 
     /**
@@ -165,7 +163,6 @@ public class ArrayUtilTest{
 
         String aString = "FACTORY_ID,SHOE_NAME,CHANNEL,PRODUCT_CODE,COLOR_CODE,PAYTYPE,FACTORY_CODE,TRACKING_NO_UPS,MH_ID,DEVICE,SUB_TOTAL_PRICE,TAX_PRICE,DELIVERY_PRICE,TOTAL_PRICE,PAY_DATE,REVENUE_DATE,RETURN_DATE,CANCEL_DATE,SHOP_NAME,CALCEL_CODE";
         List<String> asList = Arrays.asList(aString.split(","));
-        LOGGER.info(ListUtil.toString(asList, true));
 
         String[] array = asList.toArray(new String[0]);
 

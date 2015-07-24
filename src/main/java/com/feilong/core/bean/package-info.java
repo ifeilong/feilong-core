@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- *封装{@code org.apache.commons.beanutils}经常使用的工具类
- *@since 1.0.0
+ *  封装{@code org.apache.commons.beanutils}经常使用的工具类
+ *  @since 1.0.0
  */
 package com.feilong.core.bean;

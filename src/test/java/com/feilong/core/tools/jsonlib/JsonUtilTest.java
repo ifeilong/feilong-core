@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.tools.BaseJsonTest;
 import com.feilong.core.tools.Menu;
@@ -110,7 +111,7 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void testJsonString1(){
-        BigDecimal[] aBigDecimals = { new BigDecimal("9999.00") };
+        BigDecimal[] aBigDecimals = { ConvertUtil.toBigDecimal("99999999.00") };
         String json = JsonUtil.format(aBigDecimals);
         LOGGER.info(json);
     }
@@ -172,7 +173,7 @@ public class JsonUtilTest extends BaseJsonTest{
     public void testSensitiveWordsJsonValueProcessor(){
         User user = new User("feilong1", 24);
         user.setPassword("123456");
-        user.setMoney(new BigDecimal("9999.00"));
+        user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
         propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());

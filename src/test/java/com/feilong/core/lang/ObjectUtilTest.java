@@ -17,7 +17,6 @@ package com.feilong.core.lang;
 
 import static org.junit.Assert.assertEquals;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -162,40 +161,4 @@ public class ObjectUtilTest{
         }
     }
 
-    /**
-     * Test method for {@link com.feilong.core.lang.ObjectUtil#toInteger(java.lang.Object)}.
-     */
-    @Test
-    public final void testToInteger(){
-        assertEquals(null, ObjectUtil.toInteger(null));
-        assertEquals(8, ObjectUtil.toInteger(8L).intValue());
-        assertEquals(8, ObjectUtil.toInteger("8").intValue());
-    }
-
-    /**
-     * Test to string object.
-     */
-    @Test
-    public final void testToStringObject(){
-        String[] aaaa = { "aa", "aaa" };
-        assertEquals("[aa, aaa]", ObjectUtil.toString(aaaa));
-    }
-
-    /**
-     * Test method for {@link com.feilong.core.lang.ObjectUtil#toT(java.lang.Object, java.lang.Class)}.
-     */
-    @Test
-    public final void testToT(){
-        LOGGER.info(ObjectUtil.toT(BigDecimal.ONE, Float.class) + "");
-    }
-
-    /**
-     * Test to big decimal.
-     */
-    @Test
-    public final void testToBigDecimal(){
-        assertEquals(BigDecimal.valueOf(1111), ObjectUtil.toBigDecimal(1111));
-        assertEquals(BigDecimal.valueOf(0.1), ObjectUtil.toBigDecimal(0.1));
-        assertEquals(null, ObjectUtil.toBigDecimal(null));
-    }
 }

@@ -24,6 +24,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
+
 /**
  * The Class NumberUtilTest.
  * 
@@ -260,7 +262,7 @@ public class NumberUtilTest{
      */
     @Test
     public void testGetMultiplyValue(){
-        assertEquals(new BigDecimal("7.31250"), NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
+        assertEquals(ConvertUtil.toBigDecimal("7.31250"), NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
     }
 
     /**
@@ -279,7 +281,7 @@ public class NumberUtilTest{
      */
     @Test
     public void test(){
-        BigDecimal a = new BigDecimal("1.000000");
+        BigDecimal a = ConvertUtil.toBigDecimal("1.000000");
         BigDecimal b = new BigDecimal(1);
         LOGGER.debug(a.compareTo(b) + "");
         LOGGER.debug(a.equals(b) + "");
