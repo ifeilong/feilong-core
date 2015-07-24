@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import com.feilong.core.lang.ObjectUtil;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.NumberFormatUtil;
 
 /**
@@ -153,8 +153,7 @@ public final class NumberUtil{
         if (Validator.isNotNullOrEmpty(number)){
             //　将int、long、double、string类型的数值转为BigDecimal.使用double会造成精度丢失，
             //而使用BigDecimal就是为了解决精度丢失的问题，建议使用String方式转换.
-
-            BigDecimal bigDecimal = new BigDecimal(number.toString());
+            BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
             return setScale(bigDecimal, 0, roundingMode);
         }
         return null;
@@ -242,7 +241,7 @@ public final class NumberUtil{
         }
         // XXX
         int scale = 8;
-        BigDecimal bigDecimalCurrent = new BigDecimal(current.toString());
+        BigDecimal bigDecimalCurrent = ConvertUtil.toBigDecimal(current);
         BigDecimal divideValue = getDivideValue(bigDecimalCurrent, total, scale);
         return toString(divideValue, numberPattern);
     }
@@ -306,7 +305,7 @@ public final class NumberUtil{
             // 不能直接one.divide(two) 
             // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result
             // 应该指定scale和roundingMode，保证对于无限小数有足够的范围来表示结果.
-            BigDecimal divisor = new BigDecimal(two.toString());
+            BigDecimal divisor = ConvertUtil.toBigDecimal(two);
             return one.divide(divisor, scale, roundingMode);
         }
         return one;
@@ -356,7 +355,7 @@ public final class NumberUtil{
             return one;
         }
 
-        BigDecimal multiplicand = new BigDecimal(two.toString());
+        BigDecimal multiplicand = ConvertUtil.toBigDecimal(two);
         BigDecimal result = one.multiply(multiplicand);
         return result;
     }
@@ -377,7 +376,7 @@ public final class NumberUtil{
      * @since 1.2.1
      */
     public static final BigDecimal getMultiplyValue(Number one,Serializable two){
-        return getMultiplyValue(ObjectUtil.toBigDecimal(one), two);
+        return getMultiplyValue(ConvertUtil.toBigDecimal(one), two);
     }
 
     // [end]
@@ -407,17 +406,17 @@ public final class NumberUtil{
         // 第一个数不是null,第二个数是null,则直接返回第一个数
         if (!Validator.isNullOrEmpty(one) && Validator.isNullOrEmpty(two)){
             // ObjectUtil.toT(value, class1)
-            return ObjectUtil.toBigDecimal(one);
+            return ConvertUtil.toBigDecimal(one);
         }
 
-        BigDecimal augend = new BigDecimal(two.toString());
+        BigDecimal augend = ConvertUtil.toBigDecimal(two);
         // 第一个数是null,第二个数不是null,则,将第二个数转成BigDecimal 返回
         if (Validator.isNullOrEmpty(one) && !Validator.isNullOrEmpty(two)){
             return augend;
         }
 
         // 其他情况其他情况(两个数都不为空),返回 第一个数+第二个数
-        BigDecimal add = ObjectUtil.toBigDecimal(one).add(augend);
+        BigDecimal add = ConvertUtil.toBigDecimal(one).add(augend);
         return add;
     }
 
@@ -433,7 +432,7 @@ public final class NumberUtil{
         BigDecimal returnValue = BigDecimal.ZERO;
         for (Number number : numbers){
             if (Validator.isNotNullOrEmpty(number)){
-                BigDecimal bigDecimal = ObjectUtil.toBigDecimal(number);
+                BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
                 returnValue = returnValue.add(bigDecimal);
             }
         }
@@ -492,18 +491,6 @@ public final class NumberUtil{
 
     // *****************************************************************************************************
     /**
-     * 将string 类型数据转成 Long 类型.
-     * 
-     * @param value
-     *            string 类型数据
-     * @return Long 类型
-     */
-    public static final Long parseLong(String value){
-        return Long.parseLong(value);
-    }
-
-    // *****************************************************************************************************
-    /**
      * int类型转换成16进制字符串.
      * 
      * @param i
@@ -543,8 +530,8 @@ public final class NumberUtil{
             String valueString = value.toString();
             // Number /String
             if (value instanceof Number || value instanceof String){
-                BigDecimal bigDecimal = new BigDecimal(valueString);
-                int i = bigDecimal.compareTo(new BigDecimal(specificNumber));
+                BigDecimal bigDecimal = ConvertUtil.toBigDecimal(valueString);
+                int i = bigDecimal.compareTo(ConvertUtil.toBigDecimal(specificNumber));
                 flag = (i == 0);
             }
         }

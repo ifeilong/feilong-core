@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.io.FileUtil;
 import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.text.MessageFormatUtil;
@@ -88,12 +89,12 @@ public final class ResourceBundleUtil implements BaseConfigure{
      *            如果是Integer.class,则返回的是Integer
      * @return the value
      * @see #getValue(String, String)
-     * @see com.feilong.core.util.StringUtil#toT(String, Class)
+     * @see com.feilong.core.bean.ConvertUtil#toT(String, Class)
      */
     @SuppressWarnings("unchecked")
     public static <T> T getValue(String baseName,String key,Class<?> typeClass){
         String value = getValue(baseName, key);
-        return (T) StringUtil.toT(value, typeClass);
+        return (T) ConvertUtil.toT(value, typeClass);
     }
 
     /**
@@ -111,12 +112,12 @@ public final class ResourceBundleUtil implements BaseConfigure{
      *            如果是Integer.class,则返回的是Integer
      * @return the value
      * @see #getValue(ResourceBundle, String)
-     * @see com.feilong.core.util.StringUtil#toT(String, Class)
+     * @see com.feilong.core.bean.ConvertUtil#toT(String, Class)
      */
     @SuppressWarnings("unchecked")
     public static <T> T getValue(ResourceBundle resourceBundle,String key,Class<?> typeClass){
         String value = getValue(resourceBundle, key);
-        return (T) StringUtil.toT(value, typeClass);
+        return (T) ConvertUtil.toT(value, typeClass);
     }
 
     /**

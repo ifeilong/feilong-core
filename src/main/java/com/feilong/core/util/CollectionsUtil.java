@@ -17,7 +17,6 @@ package com.feilong.core.util;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,6 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
@@ -217,7 +217,7 @@ public final class CollectionsUtil{
      * @return 如果 collection isNullOrEmpty,返回null<br>
      *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
-     * @see com.feilong.core.util.ArrayUtil#toString(ToStringConfig, T...)
+     * @see ArrayUtil#toString(ToStringConfig, T...)
      */
     public static final <T extends Serializable> String toString(final Collection<T> collection,ToStringConfig toStringConfig){
         if (Validator.isNullOrEmpty(collection)){
@@ -254,7 +254,6 @@ public final class CollectionsUtil{
      * @see Collections#list(Enumeration)
      * @see EnumerationUtils#toList(Enumeration)
      * @since 1.0.7
-     * @since JDK 1.5
      */
     public static final <T> List<T> toList(final Enumeration<T> enumeration){
         if (Validator.isNullOrEmpty(enumeration)){
@@ -888,7 +887,7 @@ public final class CollectionsUtil{
             String key = entry.getKey();
             Number value = entry.getValue();
 
-            map.put(key, NumberUtil.getDivideValue(new BigDecimal(value.toString()), size, scale));
+            map.put(key, NumberUtil.getDivideValue(ConvertUtil.toBigDecimal(value), size, scale));
         }
 
         return map;
@@ -915,7 +914,6 @@ public final class CollectionsUtil{
             throw new NullPointerException("propertyNames is null or empty!");
         }
 
-        //**************************************************************************
         int size = objectCollection.size();
 
         //总分
@@ -923,11 +921,8 @@ public final class CollectionsUtil{
 
         for (O o : objectCollection){
             for (String propertyName : propertyNames){
-
-                //取到数据
                 Number propertyValue = PropertyUtil.getProperty(o, propertyName);
 
-                //map中的数值
                 Number mapPropertyNameValue = sumMap.get(propertyName);
                 if (null == mapPropertyNameValue){
                     mapPropertyNameValue = 0;
@@ -935,8 +930,6 @@ public final class CollectionsUtil{
                 sumMap.put(propertyName, NumberUtil.getAddValue(mapPropertyNameValue, propertyValue));
             }
         }
-
-        //**************************************************************************
         return sumMap;
     }
 }
