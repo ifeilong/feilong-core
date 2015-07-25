@@ -16,7 +16,6 @@
 package com.feilong.core.text;
 
 import java.text.DateFormat;
-import java.text.Format;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,11 +31,13 @@ import com.feilong.core.util.Validator;
  * </p>
  * 
  * @author feilong
- * @version 1.0 2012-3-27 上午1:39:38
- * @see Format
- * @see DateFormat
- * @see SimpleDateFormat
- * @since 1.0.0
+ * @version 1.0.1 2012-3-27 上午1:39:38
+ * @see java.text.Format
+ * @see java.text.DateFormat
+ * @see java.text.SimpleDateFormat
+ * @see org.apache.commons.beanutils.converters.DateConverter
+ * @see org.apache.commons.beanutils.locale.converters.DateLocaleConverter
+ * @since 1.0.1
  */
 public class DateFormatUtil{
 
@@ -83,7 +84,6 @@ public class DateFormatUtil{
     }
 
     // [end]
-    //*************************************************************************************************
 
     // [start]parse
 

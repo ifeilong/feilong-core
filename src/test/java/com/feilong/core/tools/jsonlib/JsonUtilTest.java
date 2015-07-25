@@ -85,6 +85,9 @@ public class JsonUtilTest extends BaseJsonTest{
         JsonUtil.toJSON(user, null);
     }
 
+    /**
+     * Test json menu.
+     */
     @Test
     public void testJsonMenu(){
         Menu menu = new Menu(4L);
@@ -102,8 +105,16 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void testJsonString(){
-        String json = JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST);
-        LOGGER.info(json);
+        LOGGER.info(JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST));
+    }
+
+    /**
+     * Test json string2.
+     */
+    @Test
+    public void testJsonString2(){
+        LOGGER.info(JsonUtil.format(1L));
+        LOGGER.info(JsonUtil.format(1));
     }
 
     /**
@@ -112,8 +123,7 @@ public class JsonUtilTest extends BaseJsonTest{
     @Test
     public void testJsonString1(){
         BigDecimal[] aBigDecimals = { ConvertUtil.toBigDecimal("99999999.00") };
-        String json = JsonUtil.format(aBigDecimals);
-        LOGGER.info(json);
+        LOGGER.info(JsonUtil.format(aBigDecimals));
     }
 
     /**
