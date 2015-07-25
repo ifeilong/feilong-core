@@ -79,7 +79,7 @@ public final class CalendarUtil{
      * @see Calendar#MINUTE
      * @see Calendar#SECOND
      * @see Calendar#MILLISECOND
-     * @since 1.2.3
+     * @since 1.3.0
      */
     public static Calendar resetDayBegin(Calendar calendar){
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -100,7 +100,7 @@ public final class CalendarUtil{
      * @see Calendar#MINUTE
      * @see Calendar#SECOND
      * @see Calendar#MILLISECOND
-     * @since 1.2.3
+     * @since 1.3.0
      */
     public static Calendar resetDayEnd(Calendar calendar){
         calendar.set(Calendar.HOUR_OF_DAY, 23);
@@ -215,7 +215,7 @@ public final class CalendarUtil{
      * @param datePattern
      *            日期pattern {@link DatePattern}
      * @return Calendar
-     * @since 1.2.3
+     * @since 1.3.0
      */
     public static Calendar toCalendar(String dateString,String datePattern){
         Date date = DateUtil.string2Date(dateString, datePattern);

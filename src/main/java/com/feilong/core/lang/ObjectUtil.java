@@ -58,7 +58,7 @@ public final class ObjectUtil{
      * @param findedClassType
      *            the finded class type
      * @return the t
-     * @since 1.2.3
+     * @since 1.3.0
      */
     @SuppressWarnings("unchecked")
     public static <T> T findTypeValue(Object findValue,Class<T> findedClassType){

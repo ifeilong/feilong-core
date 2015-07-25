@@ -41,9 +41,9 @@ import com.feilong.core.util.Validator;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.2.3 2015年7月24日 下午7:43:33
+ * @version 1.3.0 2015年7月24日 下午7:43:33
  * @see org.apache.commons.beanutils.ConvertUtils
- * @since 1.2.3
+ * @since 1.3.0
  */
 public final class ConvertUtil{
 

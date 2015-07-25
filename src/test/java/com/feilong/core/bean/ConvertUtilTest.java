@@ -32,8 +32,8 @@ import com.feilong.core.util.StringUtil;
  * The Class ConvertUtilTest.
  *
  * @author feilong
- * @version 1.2.3 2015年7月25日 上午1:57:56
- * @since 1.2.3
+ * @version 1.3.0 2015年7月25日 上午1:57:56
+ * @since 1.3.0
  */
 public class ConvertUtilTest{
 

@@ -675,7 +675,7 @@ public final class StringUtil{
      * @param value
      *            字符串
      * @return byte数组
-     * @since 1.2.3
+     * @since 1.3.0
      */
     public static final byte[] getBytes(String value){
         return value.getBytes();
@@ -691,7 +691,7 @@ public final class StringUtil{
      * @return 所得 byte 数组
      * @see String#getBytes(String)
      * @see CharsetType
-     * @since 1.2.3
+     * @since 1.3.0
      */
     public static final byte[] getBytes(String value,String charsetName){
         try{
