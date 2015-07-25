@@ -247,14 +247,13 @@ public final class ArrayUtil{
     /**
      * 将array 分组.
      * 
+     * <code>
      * <pre>
      * 
      * Example 1:
      * if Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
      * 
      * will return 
-     * 
-     * {@code
      *      {
      *         "1":         [
      *             1,
@@ -279,7 +278,7 @@ public final class ArrayUtil{
      *         ]
      *     }
      * }
-     * </pre>
+     * </pre></code>
      *
      * @param <T>
      *            the generic type
