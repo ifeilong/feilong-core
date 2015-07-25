@@ -28,6 +28,8 @@ import com.feilong.core.lang.ObjectUtil;
  * @param <T>
  *            the generic type
  * @since 1.2.0
+ * @see org.apache.commons.beanutils.BeanPredicate
+ * @see org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate
  */
 public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
 
@@ -58,6 +60,7 @@ public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
     @Override
     public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
-        return ObjectUtil.equals(property, value, true);
+        boolean nullTypeFlag = true;
+        return ObjectUtil.equals(property, value, nullTypeFlag);
     }
 }

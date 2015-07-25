@@ -742,7 +742,7 @@ public final class StringUtil{
      * @return 如果value 是null,返回null
      * @see String#split(String)
      * @see String#split(String, int)
-     * @see ConvertUtil#toIntegers(Object[])
+     * @see ConvertUtil#toIntegers(Object)
      * @see java.util.regex.Pattern#split(CharSequence)
      * @deprecated will Re-structure,support more type or remove
      */

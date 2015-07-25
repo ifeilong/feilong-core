@@ -488,7 +488,12 @@ public final class CollectionsUtil{
         }catch (BeanUtilException e){
             LOGGER.error(e.getClass().getName(), e);
         }
+
         return returnCollection;
+
+        // create the transformer
+        // BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer(propertyName);
+        // return CollectionUtils.collect(objectCollection, transformer, returnCollection);
     }
 
     /**
