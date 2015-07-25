@@ -612,10 +612,12 @@ public final class DateUtil{
 
     /**
      * 当前年中的星期数{@link Calendar#WEEK_OF_YEAR},一年中第一个星期的值为 1,一年52(365/7=52.14)个星期.
+     * 
      * <p>
      * 注意:<br>
      * 2014年的1-1 1-2 1-3 1-4 得出的WEEK_OF_YEAR 是1; <br>
      * 2014年的12-28 12-29 12-30 12-31 得出的WEEK_OF_YEAR 也是1
+     * </p>
      * 
      * <pre>
      * 
@@ -837,7 +839,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得时间在当天中的秒数,最大值86400 {@link TimeInterval#SECONDS_PER_DAY} .
+     * 获得时间在当天中的秒数,最大值86400 {@link TimeInterval#SECONDS_PER_DAY}.
      * 
      * <pre>
      * 2013-09-09 16:42:41
@@ -1121,14 +1123,15 @@ public final class DateUtil{
     // [start]toCalendar
 
     /**
-     * 将date转成Calendar,调用 {@link GregorianCalendar}.<br>
+     * 将date转成Calendar,调用 {@link GregorianCalendar}.
+     * 
      * <p>
      * {@link Calendar#getInstance()}方法,返回用默认的地区和时区的当前日期和当前时间所初始化的GregorianCalendar（标准日历）,<br>
      * 最终会调用 java.util.Calendar.createCalendar(TimeZone, Locale) 方法,<br>
      * 该方法会判断Locale(日本和泰国),其他国家最终会调用 {@link GregorianCalendar#GregorianCalendar(java.util.TimeZone, java.util.Locale)} 方法
      * </p>
      * 
-     * <h3> {@link GregorianCalendar}</h3>
+     * <h3>{@link GregorianCalendar}</h3>
      * 
      * <blockquote>
      * <p>
@@ -1160,8 +1163,11 @@ public final class DateUtil{
     // [start]isBefore 时间早晚
 
     /**
-     * 按照同样格式,转成Date类型,判断 date_before 是否早于date_after.<br>
+     * 按照同样格式,转成Date类型,判断 date_before 是否早于date_after.
+     * 
+     * <p>
      * 如:
+     * </p>
      * 
      * <pre>
      * isBefore("2011-05-01","2011-04-01",DateUtil.pattern_onlyDate)
@@ -1321,24 +1327,33 @@ public final class DateUtil{
     // [start]isLeapYear 闰年
 
     /**
-     * 判断某年是否为闰年 .<br>
-     * 规则:(year % 4 == 0 && year % 100 != 0) || year % 400 == 0
+     * 判断某年是否为闰年 .
+     * 
+     * <p>
+     * 规则: {@code (year % 4 == 0 && year % 100 != 0) || year % 400 == 0}
+     * </p>
      * 
      * <h3>闰年原因:</h3>
      * 
-     * <pre>
-     * 地球绕太阳运行周期为365天5小时48分46秒（合365.24219天）即一回归年（tropical year）.
-     *   
-     *  公历的平年只有365日，比回归年短约0.2422日，所余下的时间约为四年累计一天，故四年于2月加1天，使当年的历年长度为366日，这一年就为闰年.
-     *   		
-     *  现行公历中每400年有97个闰年.按照每四年一个闰年计算，平均每年就要多算出0.0078天，这样经过四百年就会多算出大约3天来，
-     *  因此，每四百年中要减少三个闰年.
-     *  
-     *  所以规定，公历年份是整百数的，必须是400的倍数的才是闰年，不是400的倍数的,虽然是100的倍数，也是平年,
-     *  这就是通常所说的：四年一闰，百年不闰，四百年再闰.
-     *  
-     *  例如，2000年是闰年，1900年则是平年.
-     * </pre>
+     * <blockquote>
+     * 
+     * <p>
+     * 地球绕太阳运行周期为365天5小时48分46秒（合365.24219天）即一回归年（tropical year）.<br>
+     * 公历的平年只有365日，比回归年短约0.2422日，所余下的时间约为四年累计一天，故四年于2月加1天，使当年的历年长度为366日，这一年就为闰年.<br>
+     * </p>
+     * 
+     * <p>
+     * 现行公历中每400年有97个闰年.按照每四年一个闰年计算，平均每年就要多算出0.0078天，这样经过四百年就会多算出大约3天来，<br>
+     * 因此，每四百年中要减少三个闰年.
+     * </p>
+     * 
+     * <p>
+     * 所以规定，公历年份是整百数的，必须是400的倍数的才是闰年，不是400的倍数的,虽然是100的倍数，也是平年,<br>
+     * 这就是通常所说的：四年一闰，百年不闰，四百年再闰.<br>
+     * 
+     * 例如，2000年是闰年，1900年则是平年.<br>
+     * </p>
+     * </blockquote>
      * 
      * @param year
      *            年份

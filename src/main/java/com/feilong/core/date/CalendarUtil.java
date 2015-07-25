@@ -39,7 +39,7 @@ public final class CalendarUtil{
     /**
      * 获得任意日期的00:00:00.
      * <p>
-     * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00}.
+     * 例如: {@code 2011-01-01 10:20:20  return 2011-01-01 00:00:00}.
      * </p>
      * 
      * @param date
@@ -54,7 +54,7 @@ public final class CalendarUtil{
     /**
      * 获得任意日期的00:00:00.
      * <p>
-     * 例如: {@code 2011-01-01 10:20:20---->2011-01-01 00:00:00}.
+     * 例如: {@code 2011-01-01 10:20:20 return 2011-01-01 00:00:00}.
      * </p>
      * 
      * @param date
@@ -224,8 +224,10 @@ public final class CalendarUtil{
     }
 
     /**
-     * 设置日历字段 YEAR、MONTH 和 DAY_OF_MONTH 的值.<br>
+     * 设置日历字段 YEAR、MONTH 和 DAY_OF_MONTH 的值.
+     * <p>
      * 保留其他日历字段以前的值.如果不需要这样做，则先调用 clear()..
+     * </p>
      * 
      * @param year
      *            用来设置 YEAR 日历字段的值
