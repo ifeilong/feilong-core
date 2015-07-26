@@ -199,8 +199,31 @@ public final class ConvertUtil{
      * <h3>对于 Array 转成 String</h3>
      * 
      * <blockquote>
+     * 
      * <p>
-     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)} <br>
+     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object) ArrayConverter#convertToString(Object)} <br>
+     * 
+     * 在转换的过程中, 如果发现 object 是数组,将使用 {@link java.lang.reflect.Array#get(Object, int) Array#get(Object, int)} 来获得数据,<br>
+     * 如果发现不是数组, 将会将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
+     * ArrayConverter#convertToCollection(Class, Object)} 再转成 迭代器 {@link java.util.Collection#iterator()}
+     * </p>
+     * 
+     * 
+     * <p>
+     * 在将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
+     * ArrayConverter#convertToCollection(Class, Object)}时候,有以下规则:
+     * </p>
+     * 
+     * <ul>
+     * <li>The string is expected to be a comma-separated list of values.</li>
+     * <li>字符串可以被'{' and '}'分隔符包裹.</li>
+     * <li>去除前后空白.</li>
+     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
+     * valid.</li>
+     * </ul>
+     * 
+     * 
+     * <p>
      * 默认:
      * 
      * <blockquote>

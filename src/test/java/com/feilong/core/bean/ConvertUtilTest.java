@@ -57,42 +57,21 @@ public class ConvertUtilTest{
      * @deprecated will Re-structure
      */
     @Deprecated
-    public static final <T> T convert(Class<T> defaultArrayType,Converter individualArrayElementConverter,Object toBeConvertedValue){
-        //char[] allowedChars = new char[] { ',', '-' };
+    public static final <T> T convert(Object toBeConvertedValue,Class<T> defaultArrayType,Converter individualArrayElementConverter){
+        char[] allowedChars = new char[] { ',', '-' };
         char delimiter = ',';
-        boolean onlyFirstToString = true;
+        boolean onlyFirstToString = false;
 
         int defaultSize = 0;
 
         //**********************************************************
         ArrayConverter arrayConverter = new ArrayConverter(defaultArrayType, individualArrayElementConverter, defaultSize);
-        //arrayConverter.setAllowedChars(allowedChars);
+        arrayConverter.setAllowedChars(allowedChars);
         arrayConverter.setDelimiter(delimiter);
         arrayConverter.setOnlyFirstToString(onlyFirstToString);
 
         T result = arrayConverter.convert(defaultArrayType, toBeConvertedValue);
         return result;
-    }
-
-    /**
-     * Convert.
-     *
-     * @param <T>
-     *            the generic type
-     * @param individualArrayElementConverter
-     *            the individual array element converter
-     * @param toBeConvertedValue
-     *            the to be converted value
-     * @return the t
-     */
-    public static final <T> T convert(Converter individualArrayElementConverter,Object toBeConvertedValue){
-        //if null will use default 
-        //see org.apache.commons.beanutils.converters.AbstractConverter.convertToDefaultType(Class<T>, Object)
-        Class<T> defaultArrayType = null;
-        return convert(defaultArrayType, individualArrayElementConverter, toBeConvertedValue);
-
-        //  ConvertUtilsBean convertUtils = beanUtilsBean.getConvertUtils();
-        //return ConvertUtils.convert(toBeConvertedValue, targetType);
     }
 
     /**
