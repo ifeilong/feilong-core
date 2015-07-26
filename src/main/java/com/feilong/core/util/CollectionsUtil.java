@@ -15,7 +15,6 @@
  */
 package com.feilong.core.util;
 
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -206,8 +205,6 @@ public final class CollectionsUtil{
     /**
      * 将集合使用连接符号链接成字符串.
      * 
-     * @param <T>
-     *            the generic type ,必须实现 {@link Serializable} 接口
      * @param collection
      *            集合, 建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
      * @param toStringConfig
@@ -217,11 +214,12 @@ public final class CollectionsUtil{
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see ArrayUtil#toString(ToStringConfig, Object...)
      */
-    public static final <T extends Serializable> String toString(final Collection<T> collection,ToStringConfig toStringConfig){
+    public static final String toString(final Collection collection,ToStringConfig toStringConfig){
         if (Validator.isNullOrEmpty(collection)){
             return null;
         }
-        return ArrayUtil.toString(toStringConfig, toArray(collection));
+        Object[] array = toArray(collection, Object.class);
+        return ArrayUtil.toString(toStringConfig, array);
     }
 
     /**
@@ -259,38 +257,6 @@ public final class CollectionsUtil{
         }
         ArrayList<T> list = Collections.list(enumeration);
         return list;
-    }
-
-    /**
-     * 集合转成数组.
-     * 
-     * <p style="color:red">
-     * note:由于没有办法自动获得T 泛型的类型, 所以会取第一个值的类型做数组的类型,故需要确保第一个元素不是null.
-     * </p>
-     *
-     * @param <T>
-     *            the generic type
-     * @param collection
-     *            collection
-     * @return 数组,if Validator.isNullOrEmpty(collection),throw NullPointerException
-     * @see com.feilong.core.util.CollectionsUtil#toArray(Collection, Class)
-     * @deprecated 使用有局限,具体参见javadoc 推荐使用 {@link #toArray(Collection, Class)}
-     */
-    @Deprecated
-    public static <T> T[] toArray(Collection<T> collection){
-        if (Validator.isNullOrEmpty(collection)){
-            throw new NullPointerException("the collection is null or empty!");
-        }
-        //**********************************************************************
-        Iterator<T> iterator = collection.iterator();
-        T firstT = iterator.next(); //list.get(0);
-        //TODO 可能有更好的方式
-        if (Validator.isNullOrEmpty(firstT)){
-            throw new IllegalArgumentException("list's first item can't be null/empty!");
-        }
-        //**********************************************************************
-        Class<T> compontType = (Class<T>) firstT.getClass();
-        return toArray(collection, compontType);
     }
 
     /**
