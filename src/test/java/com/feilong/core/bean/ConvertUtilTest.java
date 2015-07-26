@@ -195,13 +195,4 @@ public class ConvertUtilTest{
             LOGGER.debug(ConvertUtil.toString(int1));
         }
     }
-
-    /**
-     * Test to t.
-     */
-    @Test
-    public final void testToFloat(){
-        LOGGER.info("" + ConvertUtil.toFloat(BigDecimal.ONE));
-    }
-
 }
