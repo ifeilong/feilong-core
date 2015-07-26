@@ -51,8 +51,11 @@ public final class ArrayUtil{
 
     /**
      * 得到数组中的某个元素.
-     * (Returns the value of the indexed component in the specified array object.
+     * 
+     * <p>
+     * (Returns the value of the indexed component in the specified array object. <br>
      * The value is automatically wrapped in an object if it has a primitive type.)
+     * </p>
      *
      * @param <T>
      *            the generic type
@@ -211,6 +214,8 @@ public final class ArrayUtil{
         if (Validator.isNullOrEmpty(arrays)){
             return null;
         }
+
+        //ConvertUtils.primitiveToWrapper(type)
 
         if (Validator.isNullOrEmpty(toStringConfig)){
             toStringConfig = new ToStringConfig();

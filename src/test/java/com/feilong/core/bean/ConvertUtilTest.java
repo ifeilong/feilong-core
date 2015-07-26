@@ -200,16 +200,28 @@ public class ConvertUtilTest{
      * Test to string object.
      */
     @Test
-    public final void testToStringObject(){
+    public final void testToString(){
         String[] aaaa = { "aa", "aaa" };
         assertEquals("[aa, aaa]", ConvertUtil.toString(aaaa));
+    }
+
+    /**
+     * Test to string2.
+     */
+    @Test
+    public final void testToString2(){
+        int[] int1 = { 2, 1 };
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(ConvertUtil.toString(int1));
+        }
     }
 
     /**
      * Test to t.
      */
     @Test
-    public final void testToT(){
+    public final void testToFloat(){
         LOGGER.info("" + ConvertUtil.toFloat(BigDecimal.ONE));
     }
 

@@ -776,7 +776,6 @@ public final class StringUtil{
      * @deprecated will Re-structure,support more type or remove
      */
     @Deprecated
-    @SuppressWarnings("unchecked")
     public static final <T> T[] splitToTArray(String value,String regexSpliter,Class<?> typeClass){
         if (typeClass == String.class){
             return (T[]) splitToStringArray(value, regexSpliter);

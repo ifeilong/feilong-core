@@ -195,11 +195,47 @@ public final class ConvertUtil{
 
     /**
      * 把对象转换成字符串.
+     * 
+     * <h3>对于 Array 转成 String</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)} <br>
+     * 默认:
+     * 
+     * <blockquote>
+     * <table border="1" cellspacing="0" cellpadding="4">
+     * <tr style="background-color:#ccccff">
+     * <th align="left">字段</th>
+     * <th align="left">说明</th>
+     * </tr>
+     * <tr valign="top">
+     * <td>int defaultSize</td>
+     * <td>指定构建的默认数组的大小 or if less than zero indicates that a <code>null</code> default value should be used.</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>char delimiter = ','</td>
+     * <td>分隔符,转成的string中的元素分隔符</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>char[] allowedChars = new char[] {'.', '-'}</td>
+     * <td>用于{@link java.io.StreamTokenizer}分隔字符串</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>boolean onlyFirstToString = true;</td>
+     * <td>只转第一个值</td>
+     * </tr>
+     * </table>
+     * </blockquote>
+     * </p>
+     * </blockquote>
      *
      * @param toBeConvertedValue
      *            参数值
      * @return the string
      * @deprecated will Re-structure
+     * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)
+     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
      */
     @Deprecated
     public static final String toString(Object toBeConvertedValue){

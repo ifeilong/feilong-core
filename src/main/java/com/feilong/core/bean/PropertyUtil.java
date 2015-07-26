@@ -149,10 +149,10 @@ public final class PropertyUtil{
      * PropertyUtils.getProperty}的区别:</h3>
      * 
      * <blockquote>
-     * <p>
-     * {@link BeanUtils#getProperty(Object, String)} 会将结果转成String返回,<br>
-     * {@link PropertyUtils#getProperty(Object, String)} 结果是Object类型,不会做类型转换
-     * </p>
+     * <ul>
+     * <li>{@link BeanUtils#getProperty(Object, String)} 会将结果转成String返回</li>
+     * <li>{@link PropertyUtils#getProperty(Object, String)} 结果是Object类型,不会做类型转换</li>
+     * </ul>
      * </blockquote>
      * 
      * 
