@@ -21,6 +21,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 
+import org.apache.commons.beanutils.Converter;
+import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,15 +43,134 @@ public class ConvertUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(ConvertUtilTest.class);
 
     /**
+     * Convert.
+     *
+     * @param <T>
+     *            the generic type
+     * @param defaultArrayType
+     *            默认的数组类型
+     * @param individualArrayElementConverter
+     *            单个元素的 {@link Converter}
+     * @param toBeConvertedValue
+     *            需要被转换的值
+     * @return the t
+     * @deprecated will Re-structure
+     */
+    @Deprecated
+    public static final <T> T convert(Class<T> defaultArrayType,Converter individualArrayElementConverter,Object toBeConvertedValue){
+        //char[] allowedChars = new char[] { ',', '-' };
+        char delimiter = ',';
+        boolean onlyFirstToString = true;
+
+        int defaultSize = 0;
+
+        //**********************************************************
+        ArrayConverter arrayConverter = new ArrayConverter(defaultArrayType, individualArrayElementConverter, defaultSize);
+        //arrayConverter.setAllowedChars(allowedChars);
+        arrayConverter.setDelimiter(delimiter);
+        arrayConverter.setOnlyFirstToString(onlyFirstToString);
+
+        T result = arrayConverter.convert(defaultArrayType, toBeConvertedValue);
+        return result;
+    }
+
+    /**
+     * Convert.
+     *
+     * @param <T>
+     *            the generic type
+     * @param individualArrayElementConverter
+     *            the individual array element converter
+     * @param toBeConvertedValue
+     *            the to be converted value
+     * @return the t
+     */
+    public static final <T> T convert(Converter individualArrayElementConverter,Object toBeConvertedValue){
+        //if null will use default 
+        //see org.apache.commons.beanutils.converters.AbstractConverter.convertToDefaultType(Class<T>, Object)
+        Class<T> defaultArrayType = null;
+        return convert(defaultArrayType, individualArrayElementConverter, toBeConvertedValue);
+
+        //  ConvertUtilsBean convertUtils = beanUtilsBean.getConvertUtils();
+        //return ConvertUtils.convert(toBeConvertedValue, targetType);
+    }
+
+    /**
+     * Test to big decimal.
+     */
+    @Test
+    public final void testToBigDecimal(){
+        assertEquals(null, ConvertUtil.toBigDecimal(null));
+        assertEquals(BigDecimal.valueOf(1111), ConvertUtil.toBigDecimal(1111));
+        assertEquals(BigDecimal.valueOf(0.1), ConvertUtil.toBigDecimal(0.1));
+    }
+
+    /**
      * Test to longs.
      */
     @Test
     public void testToLongs(){
-        String source = "1,2,3";
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", "2", "3" })));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", null, "2", "3" })));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs("1,2,3")));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(null)));
+    }
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(source)));
-        }
+    /**
+     * Test to integers.
+     */
+    @Test
+    public void testToIntegers(){
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(null)));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", "2", "3" })));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", null, "2", "3" })));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers("1,2,3")));
+    }
+
+    /**
+     * Test to long.
+     */
+    @Test
+    public void testToLong(){
+        LOGGER.debug("" + ConvertUtil.toLong("1"));
+        LOGGER.debug("" + ConvertUtil.toLong(null));
+        LOGGER.debug("" + ConvertUtil.toLong(new String[] { "1", "2", "3" }));
+        LOGGER.debug("" + ConvertUtil.toLong(new String[] { "1", null, "2", "3" }));
+        LOGGER.debug("" + ConvertUtil.toLong("1,2,3"));
+    }
+
+    /**
+     * Test to boolean.
+     */
+    @Test
+    public void testToBoolean(){
+        LOGGER.debug("" + ConvertUtil.toBoolean("1"));
+        LOGGER.debug("" + ConvertUtil.toBoolean(null));
+        LOGGER.debug("" + ConvertUtil.toBoolean(new String[] { "1", "2", "3" }));
+        LOGGER.debug("" + ConvertUtil.toBoolean(new String[] { "1", null, "2", "3" }));
+        LOGGER.debug("" + ConvertUtil.toBoolean("1,2,3"));
+    }
+
+    /**
+     * Test to integer.
+     */
+    @Test
+    public void testToInteger(){
+        LOGGER.debug("" + ConvertUtil.toInteger("1"));
+        LOGGER.debug("" + ConvertUtil.toInteger(null));
+        LOGGER.debug("" + ConvertUtil.toInteger(new String[] { "1", "2", "3" }));
+        LOGGER.debug("" + ConvertUtil.toInteger(new String[] { "1", null, "2", "3" }));
+        LOGGER.debug("" + ConvertUtil.toInteger("1,2,3"));
+    }
+
+    /**
+     * Test to integer.
+     */
+    @Test
+    public final void testToInteger2(){
+        assertEquals(null, ConvertUtil.toInteger(null));
+        assertEquals(8, ConvertUtil.toInteger(8L).intValue());
+        assertEquals(8, ConvertUtil.toInteger("8").intValue());
     }
 
     /**
@@ -62,7 +183,7 @@ public class ConvertUtilTest{
         LinkedList<Serializable> linkedList = new LinkedList<Serializable>();
 
         for (String string : tokenizeToStringArray){
-            Serializable t = ConvertUtil.toT(string, Serializable.class);
+            Serializable t = ConvertUtil.convert(string, Serializable.class);
 
             if (LOGGER.isDebugEnabled()){
                 LOGGER.debug(t.getClass().getCanonicalName());
@@ -73,16 +194,6 @@ public class ConvertUtilTest{
         Serializable l = 6L;
 
         LOGGER.info("linkedList:{},contains:{},{}", linkedList, l, linkedList.contains(l));
-    }
-
-    /**
-     * Test to integer.
-     */
-    @Test
-    public final void testToInteger(){
-        assertEquals(null, ConvertUtil.toInteger(null));
-        assertEquals(8, ConvertUtil.toInteger(8L).intValue());
-        assertEquals(8, ConvertUtil.toInteger("8").intValue());
     }
 
     /**
@@ -99,16 +210,7 @@ public class ConvertUtilTest{
      */
     @Test
     public final void testToT(){
-        LOGGER.info(ConvertUtil.toT(BigDecimal.ONE, Float.class) + "");
+        LOGGER.info("" + ConvertUtil.toFloat(BigDecimal.ONE));
     }
 
-    /**
-     * Test to big decimal.
-     */
-    @Test
-    public final void testToBigDecimal(){
-        assertEquals(BigDecimal.valueOf(1111), ConvertUtil.toBigDecimal(1111));
-        assertEquals(BigDecimal.valueOf(0.1), ConvertUtil.toBigDecimal(0.1));
-        assertEquals(null, ConvertUtil.toBigDecimal(null));
-    }
 }

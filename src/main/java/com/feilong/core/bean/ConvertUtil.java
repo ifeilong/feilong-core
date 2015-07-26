@@ -16,15 +16,9 @@
 package com.feilong.core.bean;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.beanutils.converters.ArrayConverter;
-
-import com.feilong.core.lang.ObjectUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * 转换器.
@@ -43,6 +37,8 @@ import com.feilong.core.util.Validator;
  * @author feilong
  * @version 1.3.0 2015年7月24日 下午7:43:33
  * @see org.apache.commons.beanutils.ConvertUtils
+ * @see org.apache.commons.beanutils.converters.AbstractConverter#handleMissing(Class)
+ * @see org.apache.commons.beanutils.locale.LocaleConvertUtils
  * @since 1.3.0
  */
 public final class ConvertUtil{
@@ -52,6 +48,245 @@ public final class ConvertUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * object 类型转换成boolean类型.
+     * 
+     * @param toBeConvertedValue
+     *            object
+     * @return boolean
+     * @see #convert(Object, Class)
+     */
+    public static final Boolean toBoolean(Object toBeConvertedValue){
+        //        if (null == toBeConvertedValue){
+        //            throw new IllegalArgumentException("object can't be null/empty!");
+        //        }
+        //        return Boolean.parseBoolean(toBeConvertedValue.toString());
+        return convert(toBeConvertedValue, Boolean.class);
+    }
+
+    /**
+     * object转成integer类型.
+     *
+     * @param toBeConvertedValue
+     *            值
+     * @return the integer
+     */
+    public static final Integer toInteger(Object toBeConvertedValue){
+        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
+        //            return null;
+        //        }
+        //
+        //        if (toBeConvertedValue instanceof Integer){
+        //            return (Integer) toBeConvertedValue;
+        //        }
+        //
+        //        try{
+        //            return new Integer(ObjectUtil.trim(toBeConvertedValue));
+        //        }catch (Exception e){
+        //            throw new IllegalArgumentException("Input param:[\"" + toBeConvertedValue + "\"], convert to integer exception", e);
+        //        }
+        return convert(toBeConvertedValue, Integer.class);
+    }
+
+    /**
+     * object类型转换成 {@link java.math.BigDecimal}.
+     * 
+     * <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>，不建议使用 {@code new BigDecimal(double)}，参见 JDK API<br>
+     * </p>
+     * 
+     * <ul>
+     * <li>{@code new BigDecimal(0.1) ====> 0.1000000000000000055511151231257827021181583404541015625}</li>
+     * <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
+     * </ul>
+     * 
+     * 本方法底层调用的是 {@link org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
+     * NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal} </blockquote>
+     * 
+     * @param toBeConvertedValue
+     *            值
+     * @return BigDecimal
+     * @see #convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
+     */
+    public static final BigDecimal toBigDecimal(Object toBeConvertedValue){
+        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
+        //            return null;
+        //        }
+        //
+        //        if (toBeConvertedValue instanceof BigDecimal){
+        //            return (BigDecimal) toBeConvertedValue;
+        //        }
+        //
+        //        //先转成string 就可以了
+        //        return new BigDecimal(ObjectUtil.trim(toBeConvertedValue));
+        return convert(toBeConvertedValue, BigDecimal.class);
+    }
+
+    /**
+     * Object to double.
+     * 
+     * @param toBeConvertedValue
+     *            the value
+     * @return the double
+     * @deprecated will Re-structure
+     */
+    @Deprecated
+    public static final Double toDouble(Object toBeConvertedValue){
+        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
+        //            return null;
+        //        }
+        //
+        //        if (toBeConvertedValue instanceof Double){
+        //            return (Double) toBeConvertedValue;
+        //        }
+        //        return new Double(toBeConvertedValue.toString());
+        return convert(toBeConvertedValue, Double.class);
+    }
+
+    /**
+     * object to float.
+     * 
+     * @param toBeConvertedValue
+     *            the value
+     * @return the float
+     * @see org.apache.commons.beanutils.converters.FloatConverter
+     * @deprecated will Re-structure
+     */
+    @Deprecated
+    public static final Float toFloat(Object toBeConvertedValue){
+        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
+        //            return null;
+        //        }
+        //
+        //        if (toBeConvertedValue instanceof Float){
+        //            return (Float) toBeConvertedValue;
+        //        }
+        //        return new Float(toBeConvertedValue.toString());
+        return convert(toBeConvertedValue, Float.class);
+    }
+
+    /**
+     * object to short.
+     * 
+     * @param toBeConvertedValue
+     *            the value
+     * @return the short
+     * @deprecated will Re-structure
+     */
+    @Deprecated
+    public static final Short toShort(Object toBeConvertedValue){
+        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
+        //            return null;
+        //        }
+        //
+        //        if (toBeConvertedValue instanceof Short){
+        //            return (Short) toBeConvertedValue;
+        //        }
+        //        return new Short(toBeConvertedValue.toString());
+        return convert(toBeConvertedValue, Short.class);
+    }
+
+    /**
+     * 把对象转换成字符串.
+     *
+     * @param toBeConvertedValue
+     *            参数值
+     * @return the string
+     * @deprecated will Re-structure
+     */
+    @Deprecated
+    public static final String toString(Object toBeConvertedValue){
+        //        if (null == toBeConvertedValue){
+        //            return null;
+        //        }
+        //        if (toBeConvertedValue instanceof String){
+        //            return (String) toBeConvertedValue;
+        //        }
+        //        if (toBeConvertedValue instanceof Object[]){
+        //            return Arrays.toString((Object[]) toBeConvertedValue);
+        //        }
+        //
+        //        //***************************************************************
+        //        // primitive ints
+        //        if (toBeConvertedValue instanceof int[]){
+        //            return Arrays.toString((int[]) toBeConvertedValue);
+        //        }
+        //
+        //        // primitive long
+        //        if (toBeConvertedValue instanceof long[]){
+        //            return Arrays.toString((long[]) toBeConvertedValue);
+        //        }
+        //
+        //        // primitive float
+        //        if (toBeConvertedValue instanceof float[]){
+        //            return Arrays.toString((float[]) toBeConvertedValue);
+        //        }
+        //
+        //        // primitive double
+        //        if (toBeConvertedValue instanceof double[]){
+        //            return Arrays.toString((double[]) toBeConvertedValue);
+        //        }
+        //
+        //        // primitive char
+        //        if (toBeConvertedValue instanceof char[]){
+        //            return Arrays.toString((char[]) toBeConvertedValue);
+        //        }
+        //
+        //        // primitive boolean
+        //        if (toBeConvertedValue instanceof boolean[]){
+        //            return Arrays.toString((boolean[]) toBeConvertedValue);
+        //        }
+        //
+        //        // primitive byte
+        //        if (toBeConvertedValue instanceof byte[]){
+        //            return Arrays.toString((byte[]) toBeConvertedValue);
+        //        }
+        //
+        //        // primitive short
+        //        if (toBeConvertedValue instanceof short[]){
+        //            return Arrays.toString((short[]) toBeConvertedValue);
+        //        }
+        //        return toBeConvertedValue.toString();
+        return convert(toBeConvertedValue, String.class);
+    }
+
+    /**
+     * 把对象转换为long类型.
+     * 
+     * @param toBeConvertedValue
+     *            包含数字的对象.
+     * @return long 转换后的数值,对不能转换的对象返回null.
+     * @see #convert(Object, Class)
+     */
+    public static final Long toLong(Object toBeConvertedValue){
+        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
+        //            return null;
+        //        }
+        //
+        //        if (toBeConvertedValue instanceof Long){
+        //            return (Long) toBeConvertedValue;
+        //        }
+        //        return Long.parseLong(toBeConvertedValue.toString());
+        return convert(toBeConvertedValue, Long.class);
+    }
+
+    /**
+     * 任意的数组转成Integer 数组.
+     *
+     * @param toBeConvertedValue
+     *            the to be converted value
+     * @return the integer[]
+     * @see #convert(Object, Class)
+     */
+    public static Integer[] toIntegers(Object toBeConvertedValue){
+        return convert(toBeConvertedValue, Integer[].class);
     }
 
     /**
@@ -65,53 +300,8 @@ public final class ConvertUtil{
     public static final Long[] toLongs(Object toBeConvertedValue){
         //        LongConverter elementConverter = new LongConverter(new Long(0L));
         //        return ConvertUtil.convert(elementConverter, toBeConvertedValue);
-        return (Long[]) ConvertUtils.convert(toBeConvertedValue, Long[].class);
-    }
-
-    //***************************************************************************************
-
-    /**
-     * 把对象转换为long类型.
-     * 
-     * @param value
-     *            包含数字的对象.
-     * @return long 转换后的数值,对不能转换的对象返回null.
-     * @deprecated will Re-structure
-     */
-    @Deprecated
-    public static final Long toLong(Object value){
-        if (Validator.isNullOrEmpty(value)){
-            return null;
-        }
-
-        if (value instanceof Long){
-            return (Long) value;
-        }
-        return Long.parseLong(value.toString());
-    }
-
-    /**
-     * 任意的数组转成Integer 数组.
-     * 
-     * @param objects
-     *            objects
-     * @return Validator.isNotNullOrEmpty(objects)则返回null<br>
-     *         一旦其中有值转换不了integer,则出现参数异常
-     * @deprecated 转成泛型
-     */
-    //TODO 转成泛型
-    @Deprecated
-    public static Integer[] toIntegers(Object[] objects){
-        if (Validator.isNullOrEmpty(objects)){
-            return null;
-        }
-
-        int length = objects.length;
-        Integer[] integers = new Integer[length];
-        for (int i = 0; i < length; i++){
-            integers[i] = ConvertUtil.toInteger(objects[i]);
-        }
-        return integers;
+        //return (Long[]) ConvertUtils.convert(toBeConvertedValue,);
+        return convert(toBeConvertedValue, Long[].class);
     }
 
     /**
@@ -119,303 +309,16 @@ public final class ConvertUtil{
      *
      * @param <T>
      *            the generic type
-     * @param defaultArrayType
-     *            默认的数组类型
-     * @param individualArrayElementConverter
-     *            单个元素的 {@link Converter}
-     * @param toBeConvertedValue
-     *            需要被转换的值
+     * @param value
+     *            the value
+     * @param targetType
+     *            the target type
      * @return the t
-     * @deprecated will Re-structure
+     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)
      */
-    @Deprecated
-    public static final <T> T convert(Class<T> defaultArrayType,Converter individualArrayElementConverter,Object toBeConvertedValue){
-        //char[] allowedChars = new char[] { ',', '-' };
-        char delimiter = ',';
-        boolean onlyFirstToString = true;
-
-        int defaultSize = 0;
-
-        //**********************************************************
-        ArrayConverter arrayConverter = new ArrayConverter(defaultArrayType, individualArrayElementConverter, defaultSize);
-        //arrayConverter.setAllowedChars(allowedChars);
-        arrayConverter.setDelimiter(delimiter);
-        arrayConverter.setOnlyFirstToString(onlyFirstToString);
-
-        T result = arrayConverter.convert(defaultArrayType, toBeConvertedValue);
-        return result;
-    }
-
-    /**
-     * Convert.
-     *
-     * @param <T>
-     *            the generic type
-     * @param individualArrayElementConverter
-     *            the individual array element converter
-     * @param toBeConvertedValue
-     *            the to be converted value
-     * @return the t
-     */
-    public static final <T> T convert(Converter individualArrayElementConverter,Object toBeConvertedValue){
-        //if null will use default 
-        //see org.apache.commons.beanutils.converters.AbstractConverter.convertToDefaultType(Class<T>, Object)
-        Class<T> defaultArrayType = null;
-        return convert(defaultArrayType, individualArrayElementConverter, toBeConvertedValue);
-
-        //  ConvertUtilsBean convertUtils = beanUtilsBean.getConvertUtils();
-        //return ConvertUtils.convert(toBeConvertedValue, targetType);
-    }
-
-    /**
-     * object 类型转换成boolean类型.
-     * 
-     * @param object
-     *            object
-     * @return boolean
-     * @deprecated will Re-structure
-     */
-    @Deprecated
-    public static final Boolean toBoolean(Object object){
-        if (null == object){
-            throw new IllegalArgumentException("object can't be null/empty!");
-        }
-        return Boolean.parseBoolean(object.toString());
-    }
-
-    /**
-     * object转成integer类型.
-     *
-     * @param value
-     *            值
-     * @return <ul>
-     *         <li>如果value是null,则返回null</li>
-     *         <li>如果value本身是Integer类型,则强制转换成 (Integer) value</li>
-     *         <li>否则 new Integer(value.toString().trim())</li>
-     *         <li>如果value不能转成integer 会抛出 IllegalArgumentException异常</li>
-     *         </ul>
-     * @deprecated will Re-structure
-     */
-    @Deprecated
-    public static final Integer toInteger(Object value){
-        if (Validator.isNullOrEmpty(value)){
-            return null;
-        }
-
-        if (value instanceof Integer){
-            return (Integer) value;
-        }
-
-        try{
-            return new Integer(ObjectUtil.trim(value));
-        }catch (Exception e){
-            throw new IllegalArgumentException("Input param:[\"" + value + "\"], convert to integer exception", e);
-        }
-    }
-
-    /**
-     * object类型转换成BigDecimal.
-     * 
-     * <h3>注意:对于 double 转成 BigDecimal:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre>
-     * <span style="color:red">推荐使用 BigDecimal.valueOf</span>，不建议使用new BigDecimal(double)，参见 JDK API
-     * new BigDecimal(0.1) ====&gt;   0.1000000000000000055511151231257827021181583404541015625
-     * BigDecimal.valueOf(0.1) ====&gt;  0.1
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param value
-     *            值
-     * @return BigDecimal
-     * @deprecated will Re-structure
-     */
-    @Deprecated
-    public static final BigDecimal toBigDecimal(Object value){
-        if (Validator.isNullOrEmpty(value)){
-            return null;
-        }
-
-        if (value instanceof BigDecimal){
-            return (BigDecimal) value;
-        }
-
-        //对于 double 转成 BigDecimal，推荐使用 BigDecimal.valueOf，不建议使用new BigDecimal(double)，参见 JDK API
-        //new BigDecimal(0.1) ====>   0.1000000000000000055511151231257827021181583404541015625
-        //BigDecimal.valueOf(0.1) ====>  0.1
-
-        //先转成string 就可以了
-        return new BigDecimal(ObjectUtil.trim(value));
-    }
-
-    /**
-     * Object to double.
-     * 
-     * @param value
-     *            the value
-     * @return the double
-     * @deprecated will Re-structure
-     */
-    @Deprecated
-    public static final Double toDouble(Object value){
-        if (Validator.isNullOrEmpty(value)){
-            return null;
-        }
-
-        if (value instanceof Double){
-            return (Double) value;
-        }
-        return new Double(value.toString());
-    }
-
-    /**
-     * object to float.
-     * 
-     * @param value
-     *            the value
-     * @return the float
-     * @deprecated will Re-structure
-     */
-    @Deprecated
-    public static final Float toFloat(Object value){
-        if (Validator.isNullOrEmpty(value)){
-            return null;
-        }
-
-        if (value instanceof Float){
-            return (Float) value;
-        }
-        return new Float(value.toString());
-    }
-
-    /**
-     * object to short.
-     * 
-     * @param value
-     *            the value
-     * @return the short
-     * @deprecated will Re-structure
-     */
-    @Deprecated
-    public static final Short toShort(Object value){
-        if (Validator.isNullOrEmpty(value)){
-            return null;
-        }
-
-        if (value instanceof Short){
-            return (Short) value;
-        }
-        return new Short(value.toString());
-    }
-
-    /**
-     * 把对象转换成字符串.
-     * 
-     * @param value
-     *            参数值
-     * @return <ul>
-     *         <li>{@code (null == value) =====>return null}</li>
-     *         <li>{@code (value instanceof String) =====>return (String) value}</li>
-     *         <li>{@code return value.toString()}</li>
-     *         <li>对于数组，将会调用 {@link java.util.Arrays#toString(Object[])}</li>
-     *         </ul>
-     * @deprecated will Re-structure
-     */
-    @Deprecated
-    public static final String toString(Object value){
-        if (null == value){
-            return null;
-        }
-        if (value instanceof String){
-            return (String) value;
-        }
-        if (value instanceof Object[]){
-            return Arrays.toString((Object[]) value);
-        }
-
-        //***************************************************************
-        // primitive ints
-        if (value instanceof int[]){
-            return Arrays.toString((int[]) value);
-        }
-
-        // primitive long
-        if (value instanceof long[]){
-            return Arrays.toString((long[]) value);
-        }
-
-        // primitive float
-        if (value instanceof float[]){
-            return Arrays.toString((float[]) value);
-        }
-
-        // primitive double
-        if (value instanceof double[]){
-            return Arrays.toString((double[]) value);
-        }
-
-        // primitive char
-        if (value instanceof char[]){
-            return Arrays.toString((char[]) value);
-        }
-
-        // primitive boolean
-        if (value instanceof boolean[]){
-            return Arrays.toString((boolean[]) value);
-        }
-
-        // primitive byte
-        if (value instanceof byte[]){
-            return Arrays.toString((byte[]) value);
-        }
-
-        // primitive short
-        if (value instanceof short[]){
-            return Arrays.toString((short[]) value);
-        }
-        return value.toString();
-    }
-
-    /**
-     * 将Object 类型值转成泛型,一般用于配置文件读取数据.
-     * 
-     * @param <T>
-     *            the generic type
-     * @param value
-     *            the value
-     * @param klass
-     *            the class1
-     * @return if null==value return null,else to class convert<br>
-     *         如果不是内置的class,将使用强制转换 (T) value
-     * @deprecated will Re-structure
-     */
-    @Deprecated
     @SuppressWarnings("unchecked")
-    // XXX
-    public static final <T> T toT(Object value,Class<T> klass){
-        if (null == value){
-            return null;
-        }
-        if (klass == String.class){
-            return (T) toString(value);
-        }else if (klass == Boolean.class){
-            return (T) toBoolean(value);
-        }else if (klass == Integer.class){
-            return (T) toInteger(value);
-        }else if (klass == BigDecimal.class){
-            return (T) toBigDecimal(value);
-        }else if (klass == Long.class){
-            return (T) toLong(value);
-        }else if (klass == Double.class){
-            return (T) toDouble(value);
-        }else if (klass == Float.class){
-            return (T) toFloat(value);
-        }else if (klass == Short.class){
-            return (T) toShort(value);
-        }
-        return (T) value;
+    public static final <T> T convert(Object value,Class<T> targetType){
+        return (T) ConvertUtils.convert(value, targetType);
     }
 }

@@ -89,12 +89,12 @@ public final class ResourceBundleUtil implements BaseConfigure{
      *            如果是Integer.class,则返回的是Integer
      * @return the value
      * @see #getValue(String, String)
-     * @see com.feilong.core.bean.ConvertUtil#toT(Object, Class)
+     * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
      */
     @SuppressWarnings("unchecked")
     public static <T> T getValue(String baseName,String key,Class<?> typeClass){
         String value = getValue(baseName, key);
-        return (T) ConvertUtil.toT(value, typeClass);
+        return (T) ConvertUtil.convert(value, typeClass);
     }
 
     /**
@@ -112,12 +112,12 @@ public final class ResourceBundleUtil implements BaseConfigure{
      *            如果是Integer.class,则返回的是Integer
      * @return the value
      * @see #getValue(ResourceBundle, String)
-     * @see com.feilong.core.bean.ConvertUtil#toT(Object, Class)
+     * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
      */
     @SuppressWarnings("unchecked")
     public static <T> T getValue(ResourceBundle resourceBundle,String key,Class<?> typeClass){
         String value = getValue(resourceBundle, key);
-        return (T) ConvertUtil.toT(value, typeClass);
+        return (T) ConvertUtil.convert(value, typeClass);
     }
 
     /**
