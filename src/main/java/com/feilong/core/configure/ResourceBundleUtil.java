@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -387,7 +388,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
-     * @see org.apache.commons.collections.MapUtils#toMap(ResourceBundle)
+     * @see MapUtils#toMap(ResourceBundle)
      */
     public static Map<String, String> readAllPropertiesToMap(String baseName,Locale locale){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);

@@ -25,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
@@ -200,43 +201,65 @@ public final class MapUtil{
 
     /**
      * 抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回.
-     *
+     * 
+     * <p>
+     * 注意,在抽取的过程中, 如果 <code>map</code> 没有 某个 <code>includeKeys</code>,将会输出 warn log
+     * </p>
+     * 
      * @param <K>
      *            the key type
-     * @param <T>
-     *            the generic type
      * @param <O>
+     *            the generic type
+     * @param <V>
      *            the generic type
      * @param map
      *            the map
      * @param extractPropertyName
      *            the extract property name
-     * @return the map< k, o>
-     * @since 1.2.2
+     * @param keysClass
+     *            map key 的class 类型
+     * @return <ul>
+     *         <li>if Validator.isNullOrEmpty(map) ,NullPointerException</li>
+     *         <li>if Validator.isNullOrEmpty(extractPropertyName),NullPointerException</li>
+     *         <li>if Validator.isNullOrEmpty(includeKeys), then will extract map total keys</li>
+     *         <li>抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
+     *         </ul>
+     * @since 1.3.0
      */
-    public static <K, T, O> Map<K, O> constructSubMap(Map<K, T> map,String extractPropertyName){
-        return constructSubMap(map, null, extractPropertyName);
+    public static <K, O, V> Map<K, V> constructSubMap(Map<K, O> map,String extractPropertyName,Class<K> keysClass){
+        return constructSubMap(map, null, extractPropertyName, keysClass);
     }
 
     /**
      * 抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回.
+     * 
+     * <p>
+     * 注意,在抽取的过程中, 如果 <code>map</code> 没有 某个 <code>includeKeys</code>,将会输出 warn log
+     * </p>
      *
      * @param <K>
      *            the key type
-     * @param <T>
-     *            the generic type
      * @param <O>
      *            the generic type
+     * @param <V>
+     *            the value type
      * @param map
      *            the map
      * @param includeKeys
      *            the include keys
      * @param extractPropertyName
-     *            the extract property name
-     * @return 抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回,如果 <code>includeKeys</code>是null,那么抽取map所有的key
-     * @since 1.2.2
+     *            待提取的 {@code O} 的属性名称
+     * @param keysClass
+     *            map key 的class 类型
+     * @return <ul>
+     *         <li>if Validator.isNullOrEmpty(map) ,NullPointerException</li>
+     *         <li>if Validator.isNullOrEmpty(extractPropertyName),NullPointerException</li>
+     *         <li>if Validator.isNullOrEmpty(includeKeys), then will extract map total keys</li>
+     *         <li>抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
+     *         </ul>
+     * @since 1.3.0
      */
-    public static <K, T, O> Map<K, O> constructSubMap(Map<K, T> map,K[] includeKeys,String extractPropertyName){
+    public static <K, O, V> Map<K, V> constructSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName,Class<K> keysClass){
         if (Validator.isNullOrEmpty(map)){
             throw new NullPointerException("the map is null or empty!");
         }
@@ -245,16 +268,17 @@ public final class MapUtil{
         }
         //如果excludeKeys 是null ,那么抽取 所有的key
         if (Validator.isNullOrEmpty(includeKeys)){
-            includeKeys = CollectionsUtil.toArray(map.keySet());
+            Set<K> keySet = map.keySet();
+            includeKeys = CollectionsUtil.toArray(keySet, keysClass);
         }
 
-        Map<K, O> returnMap = new HashMap<K, O>();
+        Map<K, V> returnMap = new HashMap<K, V>();
 
         for (K key : includeKeys){
             if (map.containsKey(key)){
-                T t = map.get(key);
-                O o = PropertyUtil.getProperty(t, extractPropertyName);
-                returnMap.put(key, o);
+                O o = map.get(key);
+                V v = PropertyUtil.getProperty(o, extractPropertyName);
+                returnMap.put(key, v);
             }else{
                 LOGGER.warn("map don't contains key:[{}]", key);
             }
