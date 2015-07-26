@@ -144,9 +144,7 @@ public final class ArrayUtil{
         }
         //Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象，
         //而Arrays类里的内部类ArrayList没有实现AbstractList类的add方法，导致抛异常! strList.add("c");
-
-        List<T> list = new ArrayList<T>(Arrays.asList(arrays));
-        return list;
+        return new ArrayList<T>(Arrays.asList(arrays));
     }
 
     /**
@@ -182,28 +180,33 @@ public final class ArrayUtil{
     /**
      * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
      * 
-     * 
+     * <code>
      * <pre>
      * Example 1:
-     * ArrayUtil.toString(new ToStringConfig(),"a","b")---->"a,b"
+     * ArrayUtil.toString(new ToStringConfig(),"a","b")  return "a,b"
      * 
      * Example 2:
      * ToStringConfig toStringConfig=new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
-     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)---->"a,b"
+     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)  return "a,b"
      * </pre>
+     * </code>
      *
      * @param <T>
      *            the generic type
      * @param toStringConfig
      *            the join string entity
      * @param arrays
-     *            请使用包装类型,比如 Integer []arrays,而不是 int []arrays //TODO
+     *            <span style="color:red">请使用包装类型,比如 Integer []arrays,而不是 int []arrays</span>
+     *            //TODO
      * @return <ul>
      *         <li>如果 arrays 是null 或者Empty ,返回null</li>
      *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
      *         </ul>
+     * 
+     * @deprecated 有局限性, 具体参见参数 <code>arrays</code>
      */
+    @Deprecated
     public static <T> String toString(ToStringConfig toStringConfig,T...arrays){
         if (Validator.isNullOrEmpty(arrays)){
             return null;
