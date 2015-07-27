@@ -604,13 +604,13 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 解析对象集合,以 <code>keyPropertyName</code>属性值为key， <code>valuePropertyName</code>属性值为值，组成map返回<br>
+     * 解析对象集合,以 <code>keyPropertyName</code>属性值为key， <code>valuePropertyName</code>属性值为值，组成map返回.
      * 
      * <p>
      * 注意:返回的是 {@link LinkedHashMap}
      * </p>
      * <br>
-     * 使用 {@link com.feilong.core.bean.PropertyUtil#getProperty(Object, String)}取到对象特殊属性. <br>
+     * 使用 {@link PropertyUtil#getProperty(Object, String)}取到对象特殊属性. <br>
      * 支持属性级联获取,支付获取数组,集合,map,自定义bean等属性
      * 
      * <h3>使用示例:</h3>
@@ -646,7 +646,7 @@ public final class CollectionsUtil{
      *            the key property name
      * @param valuePropertyName
      *            the value property name
-     * @return 解析迭代集合,取到对象特殊属性,拼成List(ArrayList)
+     * @return 解析对象集合,以 <code>keyPropertyName</code>属性值为key， <code>valuePropertyName</code>属性值为值，组成map返回
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      */
