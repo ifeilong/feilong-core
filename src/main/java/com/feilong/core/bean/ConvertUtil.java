@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
+import org.apache.commons.beanutils.converters.BooleanConverter;
 
 /**
  * 转换器.
@@ -53,10 +54,35 @@ public final class ConvertUtil{
     /**
      * object 类型转换成boolean类型.
      * 
+     * <h3>逻辑或者规则:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ul>
+     * <li>if "true", "yes", "y", "on", "1", will return true</li>
+     * <li>if "false", "no", "n", "off", "0", will return false</li>
+     * <li>else will throw conversionException, but in
+     * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
+     * Throwable)} method will return default value, {@link BooleanConverter} defaultValue pls see
+     * {@link org.apache.commons.beanutils.ConvertUtilsBean#registerStandard(boolean, boolean) registerStandard(boolean, boolean)}</li>
+     * </ul>
+     * </blockquote>
+     * 
+     * <p>
+     * you also can call {@link org.apache.commons.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
+     * BooleanConverter(String[], String[], Object)} set trueStrings and falseStrings
+     * </p>
+     * 
+     * <p>
+     * {@link java.lang.Boolean#parseBoolean(String)}, only if <code>(String != null) && String.equalsIgnoreCase("true")</code> return true
+     * </p>
+     * 
      * @param toBeConvertedValue
      *            object
      * @return boolean
      * @see #convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.BooleanConverter
+     * @see java.lang.Boolean#parseBoolean(String)
      */
     public static final Boolean toBoolean(Object toBeConvertedValue){
         //        if (null == toBeConvertedValue){
@@ -72,6 +98,7 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            值
      * @return the integer
+     * @see org.apache.commons.beanutils.converters.IntegerConverter
      */
     public static final Integer toInteger(Object toBeConvertedValue){
         //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
@@ -114,6 +141,7 @@ public final class ConvertUtil{
      * @return BigDecimal
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
+     * @see org.apache.commons.beanutils.converters.BigDecimalConverter
      */
     public static final BigDecimal toBigDecimal(Object toBeConvertedValue){
         //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
@@ -195,6 +223,7 @@ public final class ConvertUtil{
      * @deprecated will Re-structure
      * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
+     * @see org.apache.commons.beanutils.converters.StringConverter
      */
     @Deprecated
     public static final String toString(Object toBeConvertedValue){
@@ -259,6 +288,7 @@ public final class ConvertUtil{
      *            包含数字的对象.
      * @return long 转换后的数值,对不能转换的对象返回null.
      * @see #convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.LongConverter
      */
     public static final Long toLong(Object toBeConvertedValue){
         //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
@@ -279,6 +309,7 @@ public final class ConvertUtil{
      *            the to be converted value
      * @return the integer[]
      * @see #convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.ArrayConverter
      */
     public static Integer[] toIntegers(Object toBeConvertedValue){
         return convert(toBeConvertedValue, Integer[].class);
@@ -291,6 +322,7 @@ public final class ConvertUtil{
      *            the to be converted value
      * @return the long[]
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.ArrayConverter
      */
     public static final Long[] toLongs(Object toBeConvertedValue){
         //        LongConverter elementConverter = new LongConverter(new Long(0L));

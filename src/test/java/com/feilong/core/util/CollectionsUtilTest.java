@@ -133,8 +133,15 @@ public class CollectionsUtilTest{
         testList.add(new User("刘备", 25));
 
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
-
         LOGGER.info(JsonUtil.format(map));
+
+        //        Map<Long, List<User>> map2 = new HashMap<Long, List<User>>();
+        //        map2.put(1L, testList);
+        //        map2.put(2L, testList);
+        //
+        //        Map<String, List<String>> map3 = CollectionsUtil.getPropertyValueMap(map2, "key", "value.name");
+        //        LOGGER.info(JsonUtil.format(map2));
+
     }
 
     /**
