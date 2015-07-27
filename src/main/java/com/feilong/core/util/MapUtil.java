@@ -226,8 +226,8 @@ public final class MapUtil{
      *         </ul>
      * @since 1.3.0
      */
-    public static <K, O, V> Map<K, V> constructSubMap(Map<K, O> map,String extractPropertyName,Class<K> keysClass){
-        return constructSubMap(map, null, extractPropertyName, keysClass);
+    public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,String extractPropertyName,Class<K> keysClass){
+        return extractSubMap(map, null, extractPropertyName, keysClass);
     }
 
     /**
@@ -259,7 +259,7 @@ public final class MapUtil{
      *         </ul>
      * @since 1.3.0
      */
-    public static <K, O, V> Map<K, V> constructSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName,Class<K> keysClass){
+    public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName,Class<K> keysClass){
         if (Validator.isNullOrEmpty(map)){
             throw new NullPointerException("the map is null or empty!");
         }

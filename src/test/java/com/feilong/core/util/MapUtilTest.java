@@ -65,15 +65,15 @@ public class MapUtilTest{
         map.put(4L, new User(4L));
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(MapUtil.constructSubMap(map, "id", Long.class)));
+            LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
         }
         if (LOGGER.isDebugEnabled()){
             Long[] includeKeys = { 5L, 4L };
-            LOGGER.debug(JsonUtil.format(MapUtil.constructSubMap(map, includeKeys, "id", Long.class)));
+            LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
         }
         if (LOGGER.isDebugEnabled()){
             Long[] includeKeys = { 5L, 4L };
-            LOGGER.debug(JsonUtil.format(MapUtil.constructSubMap(map, includeKeys, "userInfo.age", Long.class)));
+            LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "userInfo.age", Long.class)));
         }
     }
 
@@ -82,7 +82,7 @@ public class MapUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testConstructSubMap1(){
-        LOGGER.debug(JsonUtil.format(MapUtil.constructSubMap(null, "id", Long.class)));
+        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(null, "id", Long.class)));
     }
 
     /**
