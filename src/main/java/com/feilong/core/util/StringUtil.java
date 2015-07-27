@@ -327,7 +327,9 @@ public final class StringUtil{
      * @param filedName
      *            字段名称
      * @return 替换,将内容content 中的需要被替换的内容target 替换成bean里面的filedName属性值
+     * @deprecated will-remove
      */
+    @Deprecated
     public static final String replace(Object content,String target,Object bean,String filedName){
         String replacement = "";
         // 替换序列是null

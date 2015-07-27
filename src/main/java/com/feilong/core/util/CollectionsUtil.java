@@ -649,7 +649,6 @@ public final class CollectionsUtil{
      * @return 解析迭代集合,取到对象特殊属性,拼成List(ArrayList)
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
-     * @since jdk1.5
      */
     public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
