@@ -554,7 +554,7 @@ public final class NumberUtil{
      * @see java.math.RoundingMode#HALF_UP
      * @see java.math.BigDecimal#ROUND_HALF_UP
      */
-    private static final BigDecimal setScale(BigDecimal number,int scale){
+    private static BigDecimal setScale(BigDecimal number,int scale){
         RoundingMode roundingMode = RoundingMode.HALF_UP;
         return setScale(number, scale, roundingMode);
     }
@@ -571,7 +571,7 @@ public final class NumberUtil{
      * @return the big decimal
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      */
-    private static final BigDecimal setScale(BigDecimal number,int scale,RoundingMode roundingMode){
+    private static BigDecimal setScale(BigDecimal number,int scale,RoundingMode roundingMode){
         return number.setScale(scale, roundingMode);
     }
 }
