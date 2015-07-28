@@ -341,7 +341,7 @@ public final class SystemUtil{
      * @see java.util.TreeMap
      * @see "org.springframework.core.env.AbstractEnvironment#getSystemProperties()"
      */
-    public static final Map<String, String> getPropertiesMapForLog(){
+    public static Map<String, String> getPropertiesMapForLog(){
         Properties properties = System.getProperties();
         Map<String, String> map = new TreeMap<String, String>(PropertiesUtil.toMap(properties));
         return map;
@@ -356,7 +356,7 @@ public final class SystemUtil{
      * @see java.util.TreeMap
      * @see "org.springframework.core.env.AbstractEnvironment#getSystemEnvironment()"
      */
-    public static final Map<String, String> getEnvMapForLog(){
+    public static Map<String, String> getEnvMapForLog(){
         Map<String, String> envMap = System.getenv();
         Map<String, String> map = new TreeMap<String, String>(envMap);
         return map;
@@ -370,7 +370,7 @@ public final class SystemUtil{
      * @since 1.2.0
      * @see java.lang.System#setProperty(String, String)
      */
-    public static final void setPropertiesFromMap(Map<String, String> map){
+    public static void setPropertiesFromMap(Map<String, String> map){
         if (Validator.isNullOrEmpty(map)){
             throw new NullPointerException("map can't be null/empty!");
         }
@@ -391,7 +391,7 @@ public final class SystemUtil{
      * @see com.feilong.core.lang.SystemUtil#setPropertiesFromMap(Map)
      * @see java.lang.System#setProperty(String, String)
      */
-    public static final void setPropertiesFromProperties(Properties properties){
+    public static void setPropertiesFromProperties(Properties properties){
         if (Validator.isNullOrEmpty(properties)){
             throw new NullPointerException("properties can't be null/empty!");
         }

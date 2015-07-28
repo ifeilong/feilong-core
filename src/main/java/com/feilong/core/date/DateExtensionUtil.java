@@ -46,28 +46,28 @@ import com.feilong.core.util.Validator;
 public final class DateExtensionUtil{
 
     /** 昨天. */
-    public static final String    YESTERDAY               = "昨天";
+    public static String          YESTERDAY               = "昨天";
 
     /** 前天. */
-    public static final String    THEDAY_BEFORE_YESTERDAY = "前天";
+    public static String          THEDAY_BEFORE_YESTERDAY = "前天";
 
     /** 星期. */
-    public static final String    WEEK                    = "星期";
+    public static String          WEEK                    = "星期";
 
     /** 天. */
-    public static final String    DAY                     = "天";
+    public static String          DAY                     = "天";
 
     /** 小时. */
-    public static final String    HOUR                    = "小时";
+    public static String          HOUR                    = "小时";
 
     /** 分钟. */
-    public static final String    MINUTE                  = "分钟";
+    public static String          MINUTE                  = "分钟";
 
     /** 秒. */
-    public static final String    SECOND                  = "秒";
+    public static String          SECOND                  = "秒";
 
     /** 毫秒. */
-    public static final String    MILLISECOND             = "毫秒";
+    public static String          MILLISECOND             = "毫秒";
 
     /**
      * 中文星期.<br>
@@ -125,7 +125,7 @@ public final class DateExtensionUtil{
      * @deprecated 方法名在未来版本可能会更新
      */
     @Deprecated
-    public static final Date[] getExtentToday(){
+    public static Date[] getExtentToday(){
         Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
         Date today = calendar.getTime();
         // ***************************
@@ -154,7 +154,7 @@ public final class DateExtensionUtil{
      * @deprecated 方法名会更新
      */
     @Deprecated
-    public static final Date[] getExtentYesterday(){
+    public static Date[] getExtentYesterday(){
         Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
         Date today = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
@@ -190,7 +190,7 @@ public final class DateExtensionUtil{
      * @return the interval day list
      * @see DateUtil#getIntervalDay(Date, Date)
      */
-    public static final List<Date> getIntervalDayList(String fromDateString,String toDateString,String datePattern){
+    public static List<Date> getIntervalDayList(String fromDateString,String toDateString,String datePattern){
         List<Date> dateList = new ArrayList<Date>();
         //***************************************************************/
         Date beginDate = DateUtil.string2Date(fromDateString, datePattern);
@@ -314,7 +314,7 @@ public final class DateExtensionUtil{
      * @deprecated 未来名称可能会更改
      */
     @Deprecated
-    public static final String toHumanizationDateString(Date inDate){
+    public static String toHumanizationDateString(Date inDate){
         Date nowDate = new Date();
 
         //**************************************************************************************/
@@ -411,7 +411,7 @@ public final class DateExtensionUtil{
      * @return 如果 Validator.isNotNullOrEmpty(dateList) return null;<br>
      *         否则循环date转成string,返回{@code List<String>}
      */
-    public static final List<String> toStringList(List<Date> dateList,String datePattern){
+    public static List<String> toStringList(List<Date> dateList,String datePattern){
         if (Validator.isNotNullOrEmpty(dateList)){
             List<String> stringList = new ArrayList<String>();
             for (Date date : dateList){
@@ -444,7 +444,7 @@ public final class DateExtensionUtil{
      * @see DateUtil#getIntervalMinute(long)
      * @see DateUtil#getIntervalSecond(long)
      */
-    public static final String getIntervalForView(long spaceTime){
+    public static String getIntervalForView(long spaceTime){
         if (0 == spaceTime){
             return "0";
         }
@@ -500,7 +500,7 @@ public final class DateExtensionUtil{
      * @see #getIntervalForView(long)
      * @see DateUtil#getIntervalTime(Date, Date)
      */
-    public static final String getIntervalForView(Date date1,Date date2){
+    public static String getIntervalForView(Date date1,Date date2){
         long spaceTime = DateUtil.getIntervalTime(date1, date2);
         return getIntervalForView(spaceTime);
     }

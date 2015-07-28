@@ -28,24 +28,24 @@ import java.io.Serializable;
 public final class ToStringConfig implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long  serialVersionUID  = 3182446945343865398L;
+    private static final long serialVersionUID  = 3182446945343865398L;
 
     /**
      * 默认逗号连接 <code>{@value}</code>.
      * 
      * @since 1.0.6
      */
-    public static final String DEFAULT_CONNECTOR = ",";
+    public static String      DEFAULT_CONNECTOR = ",";
 
     /** 连接符,默认={@link #DEFAULT_CONNECTOR}. */
-    private String             connector         = DEFAULT_CONNECTOR;
+    private String            connector         = DEFAULT_CONNECTOR;
 
     /**
      * 是否拼接 null或者empty对象.
      * 
      * @since 1.2.1
      */
-    private boolean            isJoinNullOrEmpty = true;
+    private boolean           isJoinNullOrEmpty = true;
 
     /**
      * Instantiates a new join string entity.

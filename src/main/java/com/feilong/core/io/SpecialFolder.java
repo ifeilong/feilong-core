@@ -49,7 +49,7 @@ public final class SpecialFolder{
      * 
      * @see org.apache.commons.lang3.SystemUtils#JAVA_IO_TMPDIR
      */
-    public static final String getTemp(){
+    public static String getTemp(){
         // XXX 提取 java.io.tmpdir 这些环境变量名称
         //		String property = "java.io.tmpdir";
         //		String tempDir = System.getProperty(property);
@@ -67,7 +67,7 @@ public final class SpecialFolder{
      * @return 桌面地址
      * @see FileSystemView#getHomeDirectory()
      */
-    public static final String getDesktop(){
+    public static String getDesktop(){
         FileSystemView fileSystemView = FileSystemView.getFileSystemView();
         File file = fileSystemView.getHomeDirectory();
         // 或者 通过环境变量 USERPROFILE======>C:\Users\venusdrogon 再拼接 Desktop 获得
@@ -83,7 +83,7 @@ public final class SpecialFolder{
      * @return 我的文档地址
      * @see FileSystemView#getDefaultDirectory()
      */
-    public static final String getMyDocuments(){
+    public static String getMyDocuments(){
         FileSystemView fileSystemView = FileSystemView.getFileSystemView();
         File file = fileSystemView.getDefaultDirectory();
         return file.getPath();

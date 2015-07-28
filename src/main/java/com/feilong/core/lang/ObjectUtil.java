@@ -146,7 +146,7 @@ public final class ObjectUtil{
      * @since Commons Collections 1.0
      */
     @SuppressWarnings("unchecked")
-    public static final <T> Iterator<T> toIterator(Object object){
+    public static <T> Iterator<T> toIterator(Object object){
         if (null == object){
             return null;
         }
@@ -194,7 +194,7 @@ public final class ObjectUtil{
      *            object2
      * @return 当两个值都不为空,且object.equals(object2)才返回true
      */
-    public static final boolean equalsNotNull(Object object,Object object2){
+    public static boolean equalsNotNull(Object object,Object object2){
         if (Validator.isNotNullOrEmpty(object) && Validator.isNotNullOrEmpty(object2)){
             return object.equals(object2);
         }
@@ -214,7 +214,7 @@ public final class ObjectUtil{
      * @see "java.util.Objects#equals(Object, Object)"
      * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
      */
-    public static final Boolean equals(Object object,Object object2,boolean nullTypeFlag){
+    public static Boolean equals(Object object,Object object2,boolean nullTypeFlag){
         //TODO Either override Object.equals(Object), or totally rename the method to prevent any confusion.
         //Methods named "equals" should override Object.equals(Object)
         if (object == object2){
@@ -258,7 +258,7 @@ public final class ObjectUtil{
      * @see "java.util.Objects#equals(Object, Object)"
      * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
      */
-    public static final Boolean equals(Object object,Object object2){
+    public static Boolean equals(Object object,Object object2){
         //TODO Either override Object.equals(Object), or totally rename the method to prevent any confusion.
         //Methods named "equals" should override Object.equals(Object)
         return equals(object, object2, false);
@@ -273,7 +273,7 @@ public final class ObjectUtil{
      *            对象
      * @return 是返回true
      */
-    public static final Boolean isBoolean(Object object){
+    public static Boolean isBoolean(Object object){
         return object instanceof Boolean;
     }
 
@@ -284,7 +284,7 @@ public final class ObjectUtil{
      *            对象
      * @return 是返回true
      */
-    public static final Boolean isInteger(Object object){
+    public static Boolean isInteger(Object object){
         return object instanceof Integer;
     }
 
@@ -301,7 +301,7 @@ public final class ObjectUtil{
      *            obj
      * @return 去除空格
      */
-    public static final String trim(Object obj){
+    public static String trim(Object obj){
         return obj == null ? "" : obj.toString().trim();
     }
 }

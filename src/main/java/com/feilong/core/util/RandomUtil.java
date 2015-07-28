@@ -45,7 +45,7 @@ public final class RandomUtil{
      * @see org.apache.commons.lang.math.RandomUtils
      * @since 1.0.7
      */
-    public static final Random JVM_RANDOM = new Random();
+    public static Random JVM_RANDOM = new Random();
 
     /** Don't let anyone instantiate this class. */
     private RandomUtil(){

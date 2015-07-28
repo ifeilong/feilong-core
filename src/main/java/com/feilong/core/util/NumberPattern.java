@@ -121,27 +121,27 @@ public final class NumberPattern{
      * 
      * @since 1.0.7
      * */
-    public static final String NO_SCALE             = "#";
+    public static String NO_SCALE             = "#";
 
     /**
      * (2位小数点) <code>{@value}</code>.
      * 
      * @since 1.2.2
      * */
-    public static final String TWO_DECIMAL_POINTS   = "#0.00";
+    public static String TWO_DECIMAL_POINTS   = "#0.00";
 
     /** 百分数的表达式(不带小数) <code>{@value}</code>. */
-    public static final String PERCENT_WITH_NOPOINT = "##%";
+    public static String PERCENT_WITH_NOPOINT = "##%";
 
     /** 百分数的表达式(2位小数点) <code>{@value}</code>. */
-    public static final String PERCENT_WITH_2POINT  = "#0.00%";
+    public static String PERCENT_WITH_2POINT  = "#0.00%";
 
     /**
      * 百分数的表达式(1位小数点) <code>{@value}</code>.
      * 
      * @since 1.0.7
      */
-    public static final String PERCENT_WITH_1POINT  = "#0.0%";
+    public static String PERCENT_WITH_1POINT  = "#0.0%";
 
     /** Don't let anyone instantiate this class. */
     private NumberPattern(){

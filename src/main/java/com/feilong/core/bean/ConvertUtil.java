@@ -84,7 +84,7 @@ public final class ConvertUtil{
      * @see org.apache.commons.beanutils.converters.BooleanConverter
      * @see java.lang.Boolean#parseBoolean(String)
      */
-    public static final Boolean toBoolean(Object toBeConvertedValue){
+    public static Boolean toBoolean(Object toBeConvertedValue){
         //        if (null == toBeConvertedValue){
         //            throw new IllegalArgumentException("object can't be null/empty!");
         //        }
@@ -100,7 +100,7 @@ public final class ConvertUtil{
      * @return the integer
      * @see org.apache.commons.beanutils.converters.IntegerConverter
      */
-    public static final Integer toInteger(Object toBeConvertedValue){
+    public static Integer toInteger(Object toBeConvertedValue){
         //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
         //            return null;
         //        }
@@ -143,7 +143,7 @@ public final class ConvertUtil{
      * @see org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
      * @see org.apache.commons.beanutils.converters.BigDecimalConverter
      */
-    public static final BigDecimal toBigDecimal(Object toBeConvertedValue){
+    public static BigDecimal toBigDecimal(Object toBeConvertedValue){
         //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
         //            return null;
         //        }
@@ -226,7 +226,7 @@ public final class ConvertUtil{
      * @see org.apache.commons.beanutils.converters.StringConverter
      */
     @Deprecated
-    public static final String toString(Object toBeConvertedValue){
+    public static String toString(Object toBeConvertedValue){
         //        if (null == toBeConvertedValue){
         //            return null;
         //        }
@@ -290,7 +290,7 @@ public final class ConvertUtil{
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.LongConverter
      */
-    public static final Long toLong(Object toBeConvertedValue){
+    public static Long toLong(Object toBeConvertedValue){
         //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
         //            return null;
         //        }
@@ -324,7 +324,7 @@ public final class ConvertUtil{
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.ArrayConverter
      */
-    public static final Long[] toLongs(Object toBeConvertedValue){
+    public static Long[] toLongs(Object toBeConvertedValue){
         //        LongConverter elementConverter = new LongConverter(new Long(0L));
         //        return ConvertUtil.convert(elementConverter, toBeConvertedValue);
         //return (Long[]) ConvertUtils.convert(toBeConvertedValue,);
@@ -345,7 +345,7 @@ public final class ConvertUtil{
      * @see org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)
      */
     @SuppressWarnings("unchecked")
-    public static final <T> T convert(Object value,Class<T> targetType){
+    public static <T> T convert(Object value,Class<T> targetType){
         return (T) ConvertUtils.convert(value, targetType);
     }
 }

@@ -214,7 +214,7 @@ public final class CollectionsUtil{
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see ArrayUtil#toString(ToStringConfig, Object...)
      */
-    public static final String toString(final Collection collection,ToStringConfig toStringConfig){
+    public static String toString(final Collection collection,ToStringConfig toStringConfig){
         if (Validator.isNullOrEmpty(collection)){
             return null;
         }
@@ -232,7 +232,7 @@ public final class CollectionsUtil{
      * @return Enumeration
      * @see Collections#enumeration(Collection)
      */
-    public static final <T> Enumeration<T> toEnumeration(final Collection<T> collection){
+    public static <T> Enumeration<T> toEnumeration(final Collection<T> collection){
         return Collections.enumeration(collection);
     }
 
@@ -251,7 +251,7 @@ public final class CollectionsUtil{
      * @see EnumerationUtils#toList(Enumeration)
      * @since 1.0.7
      */
-    public static final <T> List<T> toList(final Enumeration<T> enumeration){
+    public static <T> List<T> toList(final Enumeration<T> enumeration){
         if (Validator.isNullOrEmpty(enumeration)){
             return Collections.emptyList();
         }

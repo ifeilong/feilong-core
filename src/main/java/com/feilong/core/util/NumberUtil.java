@@ -132,7 +132,7 @@ public final class NumberUtil{
      *         如果 isNotNullOrEmpty(number)返回null
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      */
-    public static final BigDecimal toNoScale(Serializable number){
+    public static BigDecimal toNoScale(Serializable number){
         RoundingMode roundingMode = RoundingMode.HALF_UP;
         return toNoScale(number, roundingMode);
     }
@@ -149,7 +149,7 @@ public final class NumberUtil{
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @since 1.0.7
      */
-    public static final BigDecimal toNoScale(Serializable number,RoundingMode roundingMode){
+    public static BigDecimal toNoScale(Serializable number,RoundingMode roundingMode){
         if (Validator.isNotNullOrEmpty(number)){
             //　将int、long、double、string类型的数值转为BigDecimal.使用double会造成精度丢失，
             //而使用BigDecimal就是为了解决精度丢失的问题，建议使用String方式转换.
@@ -176,7 +176,7 @@ public final class NumberUtil{
      * @return 当two 是空或者是0的时候,直接返回one<br>
      *         否则返回除法结果one/two,四舍五入 取整
      */
-    public static final BigDecimal getDivideNoScaleValue(BigDecimal one,Serializable two){
+    public static BigDecimal getDivideNoScaleValue(BigDecimal one,Serializable two){
         return getDivideValue(one, two, 0);
     }
 
@@ -191,7 +191,7 @@ public final class NumberUtil{
      * @see NumberPattern
      * @since 1.0.7
      */
-    public static final String getProgress(Number current,Number total){
+    public static String getProgress(Number current,Number total){
         String numberPattern = NumberPattern.PERCENT_WITH_NOPOINT;
         return getProgress(current, total, numberPattern);
     }
@@ -221,7 +221,7 @@ public final class NumberUtil{
      * @see NumberPattern
      * @since 1.0.7
      */
-    public static final String getProgress(Number current,Number total,String numberPattern){
+    public static String getProgress(Number current,Number total,String numberPattern){
         if (null == current){
             throw new NullPointerException("current is null");
         }
@@ -265,7 +265,7 @@ public final class NumberUtil{
      * @see java.math.RoundingMode#HALF_UP
      * @see java.math.BigDecimal#ROUND_HALF_UP
      */
-    public static final BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale){
+    public static BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale){
         RoundingMode roundingMode = RoundingMode.HALF_UP;
         return getDivideValue(one, two, scale, roundingMode);
     }
@@ -295,7 +295,7 @@ public final class NumberUtil{
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @since 1.0.7
      */
-    public static final BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale,RoundingMode roundingMode){
+    public static BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale,RoundingMode roundingMode){
 
         if (Validator.isNullOrEmpty(roundingMode)){
             throw new NullPointerException("the roundingMode is null or empty!");
@@ -329,7 +329,7 @@ public final class NumberUtil{
      * @see #getMultiplyValue(BigDecimal, Serializable)
      * @see #setScale(BigDecimal, int)
      */
-    public static final BigDecimal getMultiplyValue(BigDecimal one,Serializable two,int scale){
+    public static BigDecimal getMultiplyValue(BigDecimal one,Serializable two,int scale){
         BigDecimal result = getMultiplyValue(one, two);
         return setScale(result, scale);
     }
@@ -350,7 +350,7 @@ public final class NumberUtil{
      * @see java.math.BigDecimal#multiply(BigDecimal)
      * @since 1.0.8
      */
-    public static final BigDecimal getMultiplyValue(BigDecimal one,Serializable two){
+    public static BigDecimal getMultiplyValue(BigDecimal one,Serializable two){
         if (Validator.isNullOrEmpty(two)){
             return one;
         }
@@ -375,7 +375,7 @@ public final class NumberUtil{
      * @see #getMultiplyValue(BigDecimal, Serializable)
      * @since 1.2.1
      */
-    public static final BigDecimal getMultiplyValue(Number one,Serializable two){
+    public static BigDecimal getMultiplyValue(Number one,Serializable two){
         return getMultiplyValue(ConvertUtil.toBigDecimal(one), two);
     }
 
@@ -398,7 +398,7 @@ public final class NumberUtil{
      *         </ul>
      * @since 1.0
      */
-    public static final BigDecimal /* <T> T */getAddValue(Number one,Number two){
+    public static BigDecimal /* <T> T */getAddValue(Number one,Number two){
         // 如果两个数都是 null,则返回null
         if (Validator.isNullOrEmpty(one) && Validator.isNullOrEmpty(two)){
             return null;
@@ -428,7 +428,7 @@ public final class NumberUtil{
      * @return the 添加 value
      * @since 1.2.1
      */
-    public static final BigDecimal getAddValue(Number...numbers){
+    public static BigDecimal getAddValue(Number...numbers){
         BigDecimal returnValue = BigDecimal.ZERO;
         for (Number number : numbers){
             if (Validator.isNotNullOrEmpty(number)){
@@ -449,7 +449,7 @@ public final class NumberUtil{
      *            数字
      * @return 0.0,0.5,1.0,1.5,2.0,2.5.......
      */
-    public static final String toPointFive(Number value){
+    public static String toPointFive(Number value){
         if (Validator.isNullOrEmpty(value)){
             throw new NullPointerException("value can't be null/empty!");
         }
@@ -485,7 +485,7 @@ public final class NumberUtil{
      * 
      * @see NumberFormatUtil#format(Number, String)
      */
-    public static final String toString(Number value,String pattern){
+    public static String toString(Number value,String pattern){
         return NumberFormatUtil.format(value, pattern);
     }
 
@@ -497,7 +497,7 @@ public final class NumberUtil{
      *            int值
      * @return int类型转换成16进制字符串
      */
-    public static final String intToHexString(int i){
+    public static String intToHexString(int i){
         return Integer.toHexString(i);
     }
 
@@ -508,7 +508,7 @@ public final class NumberUtil{
      *            16进制字符串
      * @return int类型
      */
-    public static final int hexStringToInt(String hexString){
+    public static int hexStringToInt(String hexString){
         return Integer.parseInt(hexString, 16);
     }
 
@@ -524,7 +524,7 @@ public final class NumberUtil{
      * @return 系统自动将value 装成BigDecimal,并将specificNumber 也装成BigDecimal ,两个BigDecimal 进行compareTo,<br>
      *         如果是0 ,则返回true
      */
-    public static final boolean isSpecificNumber(Serializable value,String specificNumber){
+    public static boolean isSpecificNumber(Serializable value,String specificNumber){
         boolean flag = false;
         if (Validator.isNotNullOrEmpty(value)){
             String valueString = value.toString();

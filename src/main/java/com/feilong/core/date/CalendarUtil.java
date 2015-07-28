@@ -189,7 +189,7 @@ public final class CalendarUtil{
      * @return Date
      * @since 1.0
      */
-    public static final Date toDate(Calendar calendar){
+    public static Date toDate(Calendar calendar){
         return calendar.getTime();
     }
 

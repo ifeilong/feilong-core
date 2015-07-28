@@ -26,21 +26,21 @@ package com.feilong.core.net;
 public final class URIComponents{
 
     /** 查询片段 <code>{@value}</code>. */
-    public static final String FRAGMENT     = "#";
+    public static String FRAGMENT     = "#";
 
     /** <code>{@value}</code> The question mark is used as a separator and is not part of the query string. */
-    public static final String QUESTIONMARK = "?";
+    public static String QUESTIONMARK = "?";
 
     /** The Constant ampersand<code>{@value}</code>. */
-    public static final String AMPERSAND    = "&";
+    public static String AMPERSAND    = "&";
 
     /** http协议<code>{@value}</code>. */
-    public static final String SCHEME_HTTP  = "http";
+    public static String SCHEME_HTTP  = "http";
 
     /** https协议<code>{@value}</code>. */
-    public static final String SCHEME_HTTPS = "https";
+    public static String SCHEME_HTTPS = "https";
 
-    // public static final String equal = "=";
+    // public static String equal = "=";
 
     /** Don't let anyone instantiate this class. */
     private URIComponents(){

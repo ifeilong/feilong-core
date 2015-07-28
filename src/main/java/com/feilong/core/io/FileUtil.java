@@ -68,7 +68,7 @@ public final class FileUtil{
      * @see #toByteArray(File)
      * @since 1.2.1
      */
-    public static final byte[] toByteArray(String fileName){
+    public static byte[] toByteArray(String fileName){
         File file = new File(fileName);
         return toByteArray(file);
     }
@@ -82,7 +82,7 @@ public final class FileUtil{
      * @see com.feilong.core.io.FileUtil#getFileInputStream(File)
      * @see java.io.ByteArrayOutputStream#toByteArray()
      */
-    public static final byte[] toByteArray(File file){
+    public static byte[] toByteArray(File file){
         InputStream inputStream = getFileInputStream(file);
 
         //Creates a BufferedInputStream and saves its argument, the input stream in, for later use. 
@@ -125,7 +125,7 @@ public final class FileUtil{
      * @see java.io.FileOutputStream#FileOutputStream(String)
      * @see #getFileOutputStream(String, boolean)
      */
-    public static final FileOutputStream getFileOutputStream(String filePath){
+    public static FileOutputStream getFileOutputStream(String filePath){
         //默认 append 是 false
         return getFileOutputStream(filePath, false);
     }
@@ -143,7 +143,7 @@ public final class FileUtil{
      * @see #getFileOutputStream(String, boolean)
      * @since 1.2.0
      */
-    public static final FileOutputStream getFileOutputStream(String filePath,FileWriteMode fileWriteMode){
+    public static FileOutputStream getFileOutputStream(String filePath,FileWriteMode fileWriteMode){
         boolean append = (fileWriteMode == FileWriteMode.APPEND);
         return getFileOutputStream(filePath, append);
     }
@@ -183,7 +183,7 @@ public final class FileUtil{
      * @return FileInputStream
      * @see #getFileInputStream(File)
      */
-    public static final FileInputStream getFileInputStream(String fileName){
+    public static FileInputStream getFileInputStream(String fileName){
         File file = new File(fileName);
         return getFileInputStream(file);
     }
@@ -198,7 +198,7 @@ public final class FileUtil{
      * @return FileInputStream
      * @see java.io.FileInputStream
      */
-    public static final FileInputStream getFileInputStream(File file){
+    public static FileInputStream getFileInputStream(File file){
         try{
             // 如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException.
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -408,7 +408,7 @@ public final class FileUtil{
      *            不带.号, 比如 gif
      * @return 新文件名称
      */
-    public static final String getNewFileName(String fileName,String newPostfixName){
+    public static String getNewFileName(String fileName,String newPostfixName){
 
         if (Validator.isNullOrEmpty(fileName)){
             throw new NullPointerException("fileName can't be null/empty!");
@@ -432,7 +432,7 @@ public final class FileUtil{
      *            the file name
      * @return true, if successful
      */
-    public static final boolean hasPostfixName(String fileName){
+    public static boolean hasPostfixName(String fileName){
         String fileNameString = getFileName(fileName);
         int lastIndexOf = fileNameString.lastIndexOf(".");
         if (-1 == lastIndexOf){
@@ -461,7 +461,7 @@ public final class FileUtil{
      * @see org.apache.commons.io.FilenameUtils#getExtension(String)
      * @see java.lang.String#substring(int, int)
      */
-    public static final String getFilePostfixName(String fileName){
+    public static String getFilePostfixName(String fileName){
         if (hasPostfixName(fileName)){
             String filePostfixName = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
             return filePostfixName;
@@ -478,7 +478,7 @@ public final class FileUtil{
      * @return 不带. 的后缀
      * @see org.apache.commons.io.FilenameUtils#getExtension(String)
      */
-    public static final String getFilePostfixNameLowerCase(String fileName){
+    public static String getFilePostfixNameLowerCase(String fileName){
         String postfixName = getFilePostfixName(fileName);
         return postfixName.toLowerCase();
     }
@@ -501,7 +501,7 @@ public final class FileUtil{
      * @return 获得文件的不带后缀名的名称
      * @see java.lang.String#substring(int, int)
      */
-    public static final String getFilePreName(String fileName){
+    public static String getFilePreName(String fileName){
         return fileName.substring(0, fileName.lastIndexOf("."));
     }
 
@@ -514,7 +514,7 @@ public final class FileUtil{
      * @return the file name
      * @see java.io.File#getName()
      */
-    public static final String getFileName(String fileName){
+    public static String getFileName(String fileName){
         File file = new File(fileName);
         return file.getName();
     }
@@ -537,7 +537,7 @@ public final class FileUtil{
      * @return 如果没有父文件夹,返回自己,比如 E:/ 直接返回 E:/
      * @since 1.0.7
      */
-    public static final String getFileTopParentName(String pathname){
+    public static String getFileTopParentName(String pathname){
         if (Validator.isNullOrEmpty(pathname)){
             throw new NullPointerException("pathname can't be null/empty!");
         }
@@ -593,7 +593,7 @@ public final class FileUtil{
      * @return 如果没有父文件夹,返回自己,比如 E:/ 直接返回 E:/
      * @since 1.0.7
      */
-    public static final String getFileTopParentName(File file){
+    public static String getFileTopParentName(File file){
         if (Validator.isNullOrEmpty(file)){
             throw new NullPointerException("file can't be null/empty!");
         }
@@ -624,7 +624,7 @@ public final class FileUtil{
      *            the file path
      * @return 如果文件存在,返回true
      */
-    public static final boolean isExistFile(String filePath){
+    public static boolean isExistFile(String filePath){
         File file = new File(filePath);
         return file.exists();
     }
@@ -637,7 +637,7 @@ public final class FileUtil{
      * @return 如果文件不存在,返回true
      * @since 1.0.3
      */
-    public static final boolean isNotExistFile(String filePath){
+    public static boolean isNotExistFile(String filePath){
         return !isExistFile(filePath);
     }
 
@@ -653,7 +653,7 @@ public final class FileUtil{
      *            文件名称,可以是全路径 ,也可以是 部分路径,会解析取到后缀名
      * @return 上传的文件是否是常用图片格式
      */
-    public static final boolean isCommonImage(String fileName){
+    public static boolean isCommonImage(String fileName){
         return isInAppointTypes(fileName, COMMON_IMAGES);
     }
 
@@ -667,7 +667,7 @@ public final class FileUtil{
      * @return 上传的文件是否在指定的文件类型里面
      */
     // XXX 忽视大小写
-    public static final boolean isInAppointTypes(String fileName,String[] appointTypes){
+    public static boolean isInAppointTypes(String fileName,String[] appointTypes){
         return ArrayUtil.isContain(appointTypes, getFilePostfixName(fileName));
     }
 
@@ -691,7 +691,7 @@ public final class FileUtil{
      * 
      * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
      */
-    public static final String formatSize(long fileSize){
+    public static String formatSize(long fileSize){
         String danwei = "Bytes";
         // 除完之后的余数
         String yushu = "";
@@ -740,7 +740,7 @@ public final class FileUtil{
      * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
      * @since 1.0.7
      */
-    public static final String getFileFormatSize(File file){
+    public static String getFileFormatSize(File file){
         if (Validator.isNullOrEmpty(file)){
             throw new NullPointerException("file can't be null/empty!");
         }

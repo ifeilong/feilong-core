@@ -26,19 +26,19 @@ package com.feilong.core.io;
 public final class IOConstants{
 
     /** KB 1024. */
-    public static final int KB                    = 1024;
+    public static int KB                    = 1024;
 
     /** MB 1024 * 1024 1048576. */
-    public static final int MB                    = 1024 * KB;
+    public static int MB                    = 1024 * KB;
 
     /**
      * GB 1024 * 1024 * 1024 1073741824.<br>
      * <b>注意,{@link Integer#MAX_VALUE}=2147483647 是2G大小</b>
      * */
-    public static final int GB                    = 1024 * MB;
+    public static int GB                    = 1024 * MB;
 
     /** 默认缓冲大小 10k <code>{@value}</code> */
-    public static final int DEFAULT_BUFFER_LENGTH = IOConstants.KB * 10;
+    public static int DEFAULT_BUFFER_LENGTH = IOConstants.KB * 10;
 
     /** Don't let anyone instantiate this class. */
     private IOConstants(){
