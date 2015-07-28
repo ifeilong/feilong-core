@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import net.sf.ezmorph.MorpherRegistry;
 import net.sf.ezmorph.object.DateMorpher;
@@ -37,6 +38,8 @@ import net.sf.json.util.PropertySetStrategy;
 import net.sf.json.xml.XMLSerializer;
 
 import org.apache.commons.collections4.IteratorUtils;
+import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -122,6 +125,66 @@ public final class JsonUtil{
     public static String format(Object obj){
         JsonFormatConfig jsonFormatConfig = null;
         return format(obj, jsonFormatConfig);
+    }
+
+    /**
+     * 有些map 值很复杂，比如带有request信息， 这样的map转成json会抛异常
+     * 
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>此方法 将inputMap转成 simpleMap(<span style="color:red">原始inputMap不会变更</span>)</li>
+     * <li>此方法转换的simpleMap是 {@link TreeMap}类型,转换的json key经过排序的</li>
+     * </ul>
+     * </blockquote>
+     * 
+     * <h3>转换规则:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>如果value 是isPrimitiveOrWrapper类型， 那么会直接取到值 设置到 新的simpleMap中</li>
+     * <li>否则 使用 {@link String#valueOf(Object)} 转换到simpleMap中</li>
+     * </ul>
+     * </blockquote>.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param inputMap
+     *            the input map
+     * @return the string
+     * @since 1.3.0
+     */
+    public static <K, V> String formatSimpleMap(Map<K, V> inputMap){
+        if (null == inputMap){
+            return StringUtils.EMPTY;
+        }
+        Map<K, Object> simpleMap = new TreeMap<K, Object>();
+
+        for (Map.Entry<K, V> entry : inputMap.entrySet()){
+            K key = entry.getKey();
+            V value = entry.getValue();
+
+            Class<? extends Object> klassClass = value.getClass();
+
+            Object simpleValue = null;
+
+            //TODO
+            if (ClassUtils.isPrimitiveOrWrapper(klassClass) //
+                            || String.class == klassClass //
+                            || klassClass.isArray()//XXX 数组一般 是可以转换的 
+            ){
+                simpleValue = value;
+            }else{
+                simpleValue = String.valueOf(value);
+            }
+
+            simpleMap.put(key, simpleValue);
+        }
+        return format(simpleMap);
     }
 
     /**
