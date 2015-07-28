@@ -39,10 +39,10 @@ public class URLConnectionUtilTest{
     public final void getResponseBodyAsString(){
         String templateFile = "http://10.8.25.80:6666/template.csv?sign=123456";
 
-        HttpURLConnectionParam httpURLConnectionParam = new HttpURLConnectionParam();
-        httpURLConnectionParam.setContentCharset(CharsetType.GBK);
+        ConnectionConfig connectionConfig = new ConnectionConfig();
+        connectionConfig.setContentCharset(CharsetType.GBK);
 
-        String responseBodyAsString = URLConnectionUtil.getResponseBodyAsString(templateFile, httpURLConnectionParam);
+        String responseBodyAsString = URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig);
         LOGGER.info(responseBodyAsString);
     }
 }

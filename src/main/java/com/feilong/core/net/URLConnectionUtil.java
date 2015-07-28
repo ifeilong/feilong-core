@@ -115,7 +115,7 @@ public final class URLConnectionUtil{
      * @param urlString
      *            the url string
      * @return 读取一个文本行.通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
-     * @see #readLine(String, HttpURLConnectionParam)
+     * @see #readLine(String, ConnectionConfig)
      */
     public static String readLine(String urlString){
         return readLine(urlString, null);
@@ -126,13 +126,13 @@ public final class URLConnectionUtil{
      *
      * @param urlString
      *            the url string
-     * @param httpURLConnectionParam
-     *            the http url connection param
+     * @param connectionConfig
+     *            the connection config
      * @return 读取一个文本行.通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
      */
-    public static String readLine(String urlString,HttpURLConnectionParam httpURLConnectionParam){
-        InputStream inputStream = getInputStream(urlString, httpURLConnectionParam);
-        BufferedReader bufferedReader = InputStreamUtil.toBufferedReader(inputStream, httpURLConnectionParam.getContentCharset());
+    public static String readLine(String urlString,ConnectionConfig connectionConfig){
+        InputStream inputStream = getInputStream(urlString, connectionConfig);
+        BufferedReader bufferedReader = InputStreamUtil.toBufferedReader(inputStream, connectionConfig.getContentCharset());
         return ReaderUtil.readLine(bufferedReader);
     }
 
@@ -143,7 +143,7 @@ public final class URLConnectionUtil{
      * @param urlString
      *            the url string
      * @return the response body as string
-     * @see #getResponseBodyAsString(String, HttpURLConnectionParam)
+     * @see #getResponseBodyAsString(String, ConnectionConfig)
      */
     public static String getResponseBodyAsString(String urlString){
         return getResponseBodyAsString(urlString, null);
@@ -154,19 +154,18 @@ public final class URLConnectionUtil{
      *
      * @param urlString
      *            the url string
-     * @param httpURLConnectionParam
-     *            httpURLConnectionParam
+     * @param connectionConfig
+     *            connectionConfig
      * @return the response body as string
-     * @see #getInputStream(String, HttpURLConnectionParam)
+     * @see #getInputStream(String, ConnectionConfig)
      * @see InputStreamUtil#inputStream2String(InputStream, String)
      */
-    public static String getResponseBodyAsString(String urlString,HttpURLConnectionParam httpURLConnectionParam){
-        if (null == httpURLConnectionParam){
-            httpURLConnectionParam = new HttpURLConnectionParam();
+    public static String getResponseBodyAsString(String urlString,ConnectionConfig connectionConfig){
+        if (null == connectionConfig){
+            connectionConfig = new ConnectionConfig();
         }
-        InputStream inputStream = getInputStream(urlString, httpURLConnectionParam);
-        String inputStream2String = InputStreamUtil.inputStream2String(inputStream, httpURLConnectionParam.getContentCharset());
-        return inputStream2String;
+        InputStream inputStream = getInputStream(urlString, connectionConfig);
+        return InputStreamUtil.inputStream2String(inputStream, connectionConfig.getContentCharset());
 
     }
 
@@ -176,7 +175,7 @@ public final class URLConnectionUtil{
      * @param urlString
      *            the url string
      * @return the input stream
-     * @see #getInputStream(String, HttpURLConnectionParam)
+     * @see #getInputStream(String, ConnectionConfig)
      */
     public static InputStream getInputStream(String urlString){
         return getInputStream(urlString, null);
@@ -187,15 +186,15 @@ public final class URLConnectionUtil{
      *
      * @param urlString
      *            the url string
-     * @param httpURLConnectionParam
-     *            the http url connection param
+     * @param connectionConfig
+     *            the connection config
      * @return the input stream
-     * @see #getInputStream(HttpRequest, HttpURLConnectionParam)
+     * @see #getInputStream(HttpRequest, ConnectionConfig)
      */
-    public static InputStream getInputStream(String urlString,HttpURLConnectionParam httpURLConnectionParam){
+    public static InputStream getInputStream(String urlString,ConnectionConfig connectionConfig){
         HttpRequest httpRequest = new HttpRequest();
         httpRequest.setUri(urlString);
-        return getInputStream(httpRequest, httpURLConnectionParam);
+        return getInputStream(httpRequest, connectionConfig);
     }
 
     /**
@@ -203,13 +202,13 @@ public final class URLConnectionUtil{
      *
      * @param httpRequest
      *            the http request
-     * @param httpURLConnectionParam
-     *            the http url connection param
+     * @param connectionConfig
+     *            the connection config
      * @return the input stream
      * @since 1.2.0
      */
-    public static InputStream getInputStream(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam){
-        HttpURLConnection httpURLConnection = getHttpURLConnection(httpRequest, httpURLConnectionParam);
+    public static InputStream getInputStream(HttpRequest httpRequest,ConnectionConfig connectionConfig){
+        HttpURLConnection httpURLConnection = getHttpURLConnection(httpRequest, connectionConfig);
         try{
             InputStream inputStream = httpURLConnection.getInputStream();
             return inputStream;
@@ -228,24 +227,24 @@ public final class URLConnectionUtil{
      *
      * @param httpRequest
      *            the http request
-     * @param httpURLConnectionParam
-     *            httpURLConnectionParam
+     * @param connectionConfig
+     *            the connection config
      * @return {@link java.net.HttpURLConnection}
      */
-    private static HttpURLConnection getHttpURLConnection(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam){
+    private static HttpURLConnection getHttpURLConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         if (Validator.isNullOrEmpty(httpRequest)){
             throw new NullPointerException("httpRequest can't be null/empty!");
         }
 
-        if (null == httpURLConnectionParam){
-            httpURLConnectionParam = new HttpURLConnectionParam();
+        if (null == connectionConfig){
+            connectionConfig = new ConnectionConfig();
         }
         try{
-            HttpURLConnection httpURLConnection = openConnection(httpRequest, httpURLConnectionParam);
+            HttpURLConnection httpURLConnection = openConnection(httpRequest, connectionConfig);
 
             // **************************************************************************
-            int connectTimeout = httpURLConnectionParam.getConnectTimeout();
-            int readTimeout = httpURLConnectionParam.getReadTimeout();
+            int connectTimeout = connectionConfig.getConnectTimeout();
+            int readTimeout = connectionConfig.getReadTimeout();
 
             // 一定要为HttpUrlConnection设置connectTimeout属性以防止连接被阻塞
             //设置连接主机超时（单位：毫秒）
@@ -289,8 +288,8 @@ public final class URLConnectionUtil{
      *
      * @param httpRequest
      *            the http request
-     * @param httpURLConnectionParam
-     *            the http url connection param
+     * @param connectionConfig
+     *            the connection config
      * @return the http url connection
      * @throws MalformedURLException
      *             the malformed url exception
@@ -298,30 +297,27 @@ public final class URLConnectionUtil{
      *             the IO exception
      * @since 1.2.0
      */
-    private static HttpURLConnection openConnection(HttpRequest httpRequest,HttpURLConnectionParam httpURLConnectionParam)
+    private static HttpURLConnection openConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig)
                     throws MalformedURLException,IOException{
 
-        if (null == httpURLConnectionParam){
-            httpURLConnectionParam = new HttpURLConnectionParam();
+        if (null == connectionConfig){
+            connectionConfig = new ConnectionConfig();
         }
 
-        LOGGER.debug("httpRequest:[{}],httpURLConnectionParam:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(httpURLConnectionParam));
+        LOGGER.debug("httpRequest:[{}],connectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
 
         URL url = new URL(httpRequest.getUri());
 
-        Proxy proxy = getProxy(httpURLConnectionParam.getProxyAddress(), httpURLConnectionParam.getProxyPort());
+        Proxy proxy = getProxy(connectionConfig.getProxyAddress(), connectionConfig.getProxyPort());
 
-        HttpURLConnection httpURLConnection = null;
         // 此处的urlConnection对象实际上是根据URL的请求协议(此处是http)生成的URLConnection类的子类HttpURLConnection,
         // 故此处最好将其转化 为HttpURLConnection类型的对象,以便用到 HttpURLConnection更多的API.
         if (Validator.isNotNullOrEmpty(proxy)){
             LOGGER.debug("use proxy:{}", proxy.toString());
-            httpURLConnection = (HttpURLConnection) url.openConnection(proxy);
-        }else{
-            // 每次调用此 URL 的协议处理程序的 openConnection 方法都打开一个新的连接.
-            httpURLConnection = (HttpURLConnection) url.openConnection();
+            return (HttpURLConnection) url.openConnection(proxy);
         }
-        return httpURLConnection;
+        // 每次调用此 URL 的协议处理程序的 openConnection 方法都打开一个新的连接.
+        return (HttpURLConnection) url.openConnection();
     }
 
     // ******************************************************************************************

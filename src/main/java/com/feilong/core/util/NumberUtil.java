@@ -120,7 +120,7 @@ public final class NumberUtil{
     }
 
     /**
-     * 四舍五入 {@link RoundingMode#HALF_UP},取整,无小数.<br>
+     * 四舍五入 {@link RoundingMode#HALF_UP},取整,无小数.
      * 
      * <p style="color:red">
      * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2
@@ -248,6 +248,7 @@ public final class NumberUtil{
 
     /**
      * 获得 除法结果one/two,四舍五入 {@link RoundingMode#HALF_UP},小数位数指定.
+     * 
      * <p>
      * 当two是空或者是0的时候,直接返回one<br>
      * 否则返回除法结果one/two,四舍五入,小数位数指定.
@@ -272,13 +273,15 @@ public final class NumberUtil{
 
     /**
      * 获得 除法结果one/two,四舍五入,小数位数指定.
+     * 
      * <p>
      * 当two 是空或者是0的时候,直接返回one<br>
      * 否则返回除法结果one/two,四舍五入,小数位数指定.
      * </p>
      * 
      * <p>
-     * <b>注意:</b>不能直接one.divide(two), 避免 exception:Non-terminating decimal expansion; no exact representable decimal result<br>
+     * <b>注意:</b> <span style="color:red">不能直接one.divide(two),避免 exception:Non-terminating decimal expansion; no exact representable decimal
+     * result</span><br>
      * 应该指定scale和roundingMode，保证对于无限小数有足够的范围来表示结果.
      * </p>
      *
@@ -362,6 +365,7 @@ public final class NumberUtil{
 
     /**
      * 获得 multiply value.
+     * 
      * <p>
      * scale: (this.scale() + multiplicand.scale()).
      * </p>
@@ -442,8 +446,11 @@ public final class NumberUtil{
     // [end]
 
     /**
-     * 将数字转换成 小数点后一位为 0.0,0.5,1.0,1.5,2.0,2.5....<br>
+     * 将数字转换成 小数点后一位为 0.0,0.5,1.0,1.5,2.0,2.5....
+     * 
+     * <p>
      * 通常用于 评分制
+     * </p>
      *
      * @param value
      *            数字
@@ -461,10 +468,11 @@ public final class NumberUtil{
     }
 
     /**
-     * 数字格式化,和下面方法相等 .:
-     * <blockquote> {@link NumberFormatUtil#format(Number, String)} </blockquote>
-     * <p>
-     * 示例:
+     * 数字格式化,和 {@link NumberFormatUtil#format(Number, String)} 方法相等 .
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre>
      * {@code
@@ -476,6 +484,8 @@ public final class NumberUtil{
      *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT)
      *  }
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param value
      *            值
@@ -513,9 +523,12 @@ public final class NumberUtil{
     }
 
     /**
-     * 判断一个Object 类型的 value,是否是一个特定的数<br>
+     * 判断一个Object 类型的 value,是否是一个特定的数.
+     * 
+     * <p>
      * 系统自动将value 装成BigDecimal,并将specificNumber 也装成BigDecimal ,两个BigDecimal 进行compareTo,<br>
      * 如果是0 ,则返回true.
+     * </p>
      * 
      * @param value
      *            Object 类型的 value,类型必须是 Number 或者 String
@@ -539,11 +552,17 @@ public final class NumberUtil{
     }
 
     /**
-     * 小学学的 四舍五入的方式四舍五入 {@link RoundingMode#HALF_UP} 设置小数点位数.<br>
+     * 小学学的 四舍五入的方式四舍五入 {@link RoundingMode#HALF_UP} 设置小数点位数.
+     * 
+     * <p>
      * 被舍入部分>=0.5向上 否则向下<br>
+     * </p>
+     * 
      * <p style="color:red">
      * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2
      * </p>
+     * 
+     * 
      * 
      * @param number
      *            number

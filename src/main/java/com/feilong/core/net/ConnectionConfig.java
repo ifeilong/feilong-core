@@ -19,16 +19,13 @@ import com.feilong.core.date.TimeInterval;
 import com.feilong.core.io.CharsetType;
 
 /**
- * HttpURLConnectionParam.
- *
+ * 链接参数.
+ * 
  * @author feilong
- * @version 1.0.2 Sep 27, 2013 4:54:08 PM
- * @version 1.0.9 2015年3月5日 下午5:49:15 add proxyAddress and proxyPort
- * @since 1.0.2
- * @deprecated 将来会使用 {@link com.feilong.core.net.HttpRequest}
+ * @version 1.3.0 2015年7月29日 上午12:31:58
+ * @since 1.3.0
  */
-@Deprecated
-public final class HttpURLConnectionParam{
+public final class ConnectionConfig{
 
     /** 代理地址. */
     private String  proxyAddress;
