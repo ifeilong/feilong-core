@@ -80,7 +80,7 @@ public final class IntrospectorUtil{
      * @see java.beans.BeanInfo
      * @since 1.0.9
      */
-    public final static Map<String, Object> getIntrospectorInfoMapForLog(Class<?> beanClass) throws IntrospectionException{
+    public static Map<String, Object> getIntrospectorInfoMapForLog(Class<?> beanClass) throws IntrospectionException{
         //依据Bean产生一个相关的BeanInfo类   
         Class<?> stopClass = beanClass.getSuperclass();
         BeanInfo beanInfo = Introspector.getBeanInfo(beanClass, stopClass);

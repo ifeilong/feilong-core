@@ -77,7 +77,7 @@ public class ByteUtilTest{
      * @deprecated ("该方法性能不高,请使用ByteUtil.bytesToHexStringUpperCase(byte[] bytes)")
      */
     @Deprecated
-    public static final String bytesToHexString_old(byte[] bytes){
+    public static String bytesToHexString_old(byte[] bytes){
         if (null == bytes){
             throw new IllegalArgumentException("bytes不能为空");
         }

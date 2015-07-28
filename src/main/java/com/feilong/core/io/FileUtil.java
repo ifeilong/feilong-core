@@ -162,7 +162,7 @@ public final class FileUtil{
      * @since 1.2.0
      */
     //默认 Access Modifiers 权限修饰符
-    static final FileOutputStream getFileOutputStream(String filePath,boolean append){
+    static FileOutputStream getFileOutputStream(String filePath,boolean append){
         try{
             FileOutputStream fileOutputStream = new FileOutputStream(filePath, append);
             return fileOutputStream;

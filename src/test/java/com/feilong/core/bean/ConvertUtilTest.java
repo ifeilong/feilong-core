@@ -57,7 +57,7 @@ public class ConvertUtilTest{
      * @deprecated will Re-structure
      */
     @Deprecated
-    public static final <T> T convert(Object toBeConvertedValue,Class<T> defaultArrayType,Converter individualArrayElementConverter){
+    public static <T> T convert(Object toBeConvertedValue,Class<T> defaultArrayType,Converter individualArrayElementConverter){
         char[] allowedChars = new char[] { ',', '-' };
         char delimiter = ',';
         boolean onlyFirstToString = false;
