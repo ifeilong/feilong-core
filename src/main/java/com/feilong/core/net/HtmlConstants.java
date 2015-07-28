@@ -57,7 +57,7 @@ public final class HtmlConstants{
      * }
      * </pre>
      */
-    public static String NBSP = "&nbsp;";
+    public static final String NBSP = "&nbsp;";
 
     /** Don't let anyone instantiate this class. */
     private HtmlConstants(){

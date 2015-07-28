@@ -46,28 +46,28 @@ import com.feilong.core.util.Validator;
 public final class DateExtensionUtil{
 
     /** 昨天. */
-    public static String          YESTERDAY               = "昨天";
+    public static final String          YESTERDAY               = "昨天";
 
     /** 前天. */
-    public static String          THEDAY_BEFORE_YESTERDAY = "前天";
+    public static final String          THEDAY_BEFORE_YESTERDAY = "前天";
 
     /** 星期. */
-    public static String          WEEK                    = "星期";
+    public static final String          WEEK                    = "星期";
 
     /** 天. */
-    public static String          DAY                     = "天";
+    public static final String          DAY                     = "天";
 
     /** 小时. */
-    public static String          HOUR                    = "小时";
+    public static final String          HOUR                    = "小时";
 
     /** 分钟. */
-    public static String          MINUTE                  = "分钟";
+    public static final String          MINUTE                  = "分钟";
 
     /** 秒. */
-    public static String          SECOND                  = "秒";
+    public static final String          SECOND                  = "秒";
 
     /** 毫秒. */
-    public static String          MILLISECOND             = "毫秒";
+    public static final String          MILLISECOND             = "毫秒";
 
     /**
      * 中文星期.<br>
