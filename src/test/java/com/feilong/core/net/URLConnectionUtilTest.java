@@ -40,7 +40,7 @@ public class URLConnectionUtilTest{
         String templateFile = "http://10.8.25.80:6666/template.csv?sign=123456";
 
         ConnectionConfig connectionConfig = new ConnectionConfig();
-        connectionConfig.setContentCharset(CharsetType.GBK);
+        connectionConfig.setContentCharset(CharsetType.UTF8);
 
         String responseBodyAsString = URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig);
         LOGGER.info(responseBodyAsString);

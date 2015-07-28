@@ -54,7 +54,7 @@ public class PropertiesUtilTest{
 
         try{
             for (Object iterableElement : properties.keySet()){
-                LOGGER.info(new String(iterableElement.toString().getBytes(CharsetType.ISO_8859_1), CharsetType.GBK));
+                LOGGER.info(new String(iterableElement.toString().getBytes(CharsetType.ISO_8859_1), CharsetType.UTF8));
             }
         }catch (UnsupportedEncodingException e1){
             LOGGER.error("", e1);

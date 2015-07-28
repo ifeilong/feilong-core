@@ -73,7 +73,7 @@ public class URIUtilTest{
         value = "白色/黑色/纹理浅麻灰";
         result = URIUtil.encode(value, CharsetType.UTF8);
         LOGGER.info(result);
-        LOGGER.info(URIUtil.encode(value, CharsetType.GBK));
+        LOGGER.info(URIUtil.encode(value, CharsetType.UTF8));
 
         result = URIUtil.encode("Lifestyle / Graphic,", CharsetType.UTF8);
         LOGGER.info(result);

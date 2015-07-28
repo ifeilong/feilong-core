@@ -193,7 +193,7 @@ public final class IOWriteUtil{
      * <ul>
      * <li>如果文件不存在,自动创建;包括其父文件夹(级联创建文件夹)</li>
      * <li>如果文件存在,则覆盖旧文件 ,默认 以覆盖的模式 {@link FileWriteMode#COVER}内容.</li>
-     * <li>如果不设置encode,则默认使用 {@link CharsetType#GBK}编码</li>
+     * <li>如果不设置encode,则默认使用 {@link CharsetType#UTF8}编码</li>
      * </ul>
      *
      * @param filePath
@@ -221,7 +221,7 @@ public final class IOWriteUtil{
      * @param content
      *            字符串内容
      * @param encode
-     *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#GBK}编码 {@link CharsetType}
+     *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码 {@link CharsetType}
      * @see FileWriteMode
      * @see CharsetType
      * @see #write(String, String, String, FileWriteMode)
@@ -244,7 +244,7 @@ public final class IOWriteUtil{
      * @param content
      *            字符串内容
      * @param encode
-     *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#GBK}编码 {@link CharsetType}
+     *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码 {@link CharsetType}
      * @param fileWriteMode
      *            写模式
      * @see FileWriteMode
@@ -252,10 +252,8 @@ public final class IOWriteUtil{
      * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
      */
     public static void write(String filePath,String content,String encode,FileWriteMode fileWriteMode){
-
-        //TODO 如果不传 将来可能会改成读取 系统默认语言
         if (Validator.isNullOrEmpty(encode)){
-            encode = CharsetType.GBK;
+            encode = CharsetType.UTF8;
         }
 
         // **************************************************************************8
