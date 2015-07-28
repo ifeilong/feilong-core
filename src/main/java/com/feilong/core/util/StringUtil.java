@@ -16,6 +16,7 @@
 package com.feilong.core.util;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +75,30 @@ public final class StringUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * Constructs a new <code>String</code> by decoding the specified array of bytes using the given charset.
+     *
+     * @param bytes
+     *            The bytes to be decoded into characters, may be {@code null}
+     * @param charsetType
+     *            {@link CharsetType}
+     * @return A new <code>String</code> decoded from the specified array of bytes using the given charset,
+     *         or {@code null} if the input byte array was {@code null}.
+     * @see String#String(byte[], String)
+     * @see org.apache.commons.lang3.StringUtils#toString(byte[], String)
+     * @see org.apache.commons.lang3.StringUtils#toEncodedString(byte[], Charset)
+     * @see "org.apache.commons.codec.binary.StringUtils#newString(byte[], String)"
+     * @since 1.3.0
+     */
+    public static String newString(byte[] bytes,String charsetType){
+        try{
+            return StringUtils.toString(bytes, charsetType);
+        }catch (UnsupportedEncodingException e){
+            LOGGER.error("", e);
+            throw new RuntimeException(e);
+        }
     }
 
     // [start] search
