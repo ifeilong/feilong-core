@@ -159,6 +159,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
 
     /**
      * 带参数的 配置文件.
+     * 
      * <p>
      * 格式如:name={0}.
      * </p>
@@ -198,16 +199,17 @@ public final class ResourceBundleUtil implements BaseConfigure{
     public static String getValue(ResourceBundle resourceBundle,String key){
         if (!resourceBundle.containsKey(key)){
             LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
-        }else{
-            try{
-                String value = resourceBundle.getString(key);
-                if (Validator.isNullOrEmpty(value)){
-                    LOGGER.warn("resourceBundle has key:[{}],but value is null/empty", key);
-                }
-                return value;
-            }catch (Exception e){
-                LOGGER.error(e.getMessage(), e);
+            return null;
+        }
+
+        try{
+            String value = resourceBundle.getString(key);
+            if (Validator.isNullOrEmpty(value)){
+                LOGGER.warn("resourceBundle has key:[{}],but value is null/empty", key);
             }
+            return value;
+        }catch (Exception e){
+            LOGGER.error(e.getMessage(), e);
         }
         return null;
     }
@@ -372,7 +374,6 @@ public final class ResourceBundleUtil implements BaseConfigure{
      * @since 1.2.1
      */
     public static Map<String, String> readAllPropertiesToMap(String baseName){
-        // Locale enLoc = new Locale("en", "US"); // 表示美国地区
         final Locale defaultLocale = Locale.getDefault();
         return readAllPropertiesToMap(baseName, defaultLocale);
 
@@ -478,8 +479,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
             throw new IllegalArgumentException("inputStream can't be null/empty!");
         }
         try{
-            ResourceBundle resourceBundle = new PropertyResourceBundle(inputStream);
-            return resourceBundle;
+            return new PropertyResourceBundle(inputStream);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
@@ -499,8 +499,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
             throw new IllegalArgumentException("reader can't be null/empty!");
         }
         try{
-            ResourceBundle resourceBundle = new PropertyResourceBundle(reader);
-            return resourceBundle;
+            return new PropertyResourceBundle(reader);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
