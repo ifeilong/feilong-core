@@ -904,49 +904,170 @@ public final class StringUtil{
     // [start]format
 
     /**
-     * 格式化字符串
+     * 格式化字符串.
+     * 
      * <ul>
      * <li>StringUtil.format("%03d", 1)不能写成 StringUtil.format("%03d", "1")</li>
      * </ul>
+     * 
+     * <p>
      * %index$开头，index从1开始取值，表示将第index个参数拿进来进行格式化.<br>
      * 对整数进行格式化:格式化字符串由4部分组成:%[index$][标识][最小宽度]转换方式<br>
      * 对浮点数进行格式化:%[index$][标识][最少宽度][.精度]转换方式<br>
      * 转换方式 转换符和标志的说明<br>
+     * </p>
      * 
      * <h3>转换符</h3>
      * 
-     * <pre>
-     * %s	字符串类型	"mingrisoft"
-     * %c	字符类型	'm'
-     * %b	布尔类型	true
-     * %d	整数类型（十进制）	99
-     * %x	整数类型（十六进制）	FF
-     * %o	整数类型（八进制）	77
-     * %f	浮点类型	99.99
-     * %a	十六进制浮点类型	FF.35AE
-     * %e	指数类型	9.38e+5
-     * %g	通用浮点类型（f和e类型中较短的）
-     * %h	散列码
-     * %%	百分比类型	％
-     * %n	换行符
-     * %tx	日期与时间类型（x代表不同的日期与时间转换符
-     * </pre>
+     * <blockquote>
+     * <table border="1" cellspacing="0" cellpadding="4">
+     * <tr style="background-color:#ccccff">
+     * <th align="left">转换符</th>
+     * <th align="left">说明</th>
+     * <th align="left">示例</th>
+     * </tr>
+     * <tr valign="top">
+     * <td>%s</td>
+     * <td>字符串类型</td>
+     * <td>"mingrisoft"</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>%c</td>
+     * <td>字符类型</td>
+     * <td>'m'</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>%b</td>
+     * <td>布尔类型</td>
+     * <td>true</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>%d</td>
+     * <td>整数类型（十进制）</td>
+     * <td>99</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>%x</td>
+     * <td>整数类型（十六进制）</td>
+     * <td>FF</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>%o</td>
+     * <td>整数类型（八进制）</td>
+     * <td>77</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>%f</td>
+     * <td>浮点类型</td>
+     * <td>99.99</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>%a</td>
+     * <td>十六进制浮点类型</td>
+     * <td>FF.35AE</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>%e</td>
+     * <td>指数类型</td>
+     * <td>9.38e+5</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>%g</td>
+     * <td>通用浮点类型（f和e类型中较短的）</td>
+     * <td></td>
+     * </tr>
+     * <tr valign="top">
+     * <td>%h</td>
+     * <td>散列码</td>
+     * <td></td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>%%</td>
+     * <td>百分比类型</td>
+     * <td>％</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>%n</td>
+     * <td>换行符</td>
+     * <td></td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>%tx</td>
+     * <td>日期与时间类型（x代表不同的日期与时间转换符</td>
+     * <td></td>
+     * </tr>
+     * </table>
+     * </blockquote>
+     * 
      * 
      * <h3>标志</h3>
      * 
-     * <pre>
-     * {@code
-     * +	为正数或者负数添加符号	("%+d",15)	+15
-     * -	左对齐	("%-5d",15)	|15   |  不可以与“用0填充”同时使用
-     * 0	数字前面补0	("%04d", 99)	0099
-     * 空格	在整数之前添加指定数量的空格	("% 4d", 99)	|  99|
-     * ,	以“,”对数字分组	("%,f", 9999.99)	9,999.990000
-     * (	使用括号包含负数	("%(f", -99.99)	(99.990000)
-     * #	如果是浮点数则包含小数点，如果是16进制或8进制则添加0x或0
-     * <	格式化前一个转换符所描述的参数	("%f和%<3.2f", 99.45)	99.450000和99.45
-     * $	被格式化的参数索引	("%1$d,%2$s", 99,"abc")	99,abc
-     * }
-     * </pre>
+     * <blockquote>
+     * <table border="1" cellspacing="0" cellpadding="4">
+     * <tr style="background-color:#ccccff">
+     * <th align="left">标志</th>
+     * <th align="left">说明</th>
+     * <th align="left">示例</th>
+     * <th align="left">结果</th>
+     * </tr>
+     * <tr valign="top">
+     * <td>+</td>
+     * <td>为正数或者负数添加符号</td>
+     * <td>("%+d",15)</td>
+     * <td>+15</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>-</td>
+     * <td>左对齐(不可以与“用0填充”同时使用)</td>
+     * <td>("%-5d",15)</td>
+     * <td>|15 |</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>0</td>
+     * <td>数字前面补0</td>
+     * <td>("%04d", 99)</td>
+     * <td>0099</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>空格</td>
+     * <td>在整数之前添加指定数量的空格</td>
+     * <td>("% 4d", 99)</td>
+     * <td>| 99|</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>,</td>
+     * <td>以“,”对数字分组</td>
+     * <td>("%,f", 9999.99)</td>
+     * <td>9,999.990000</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>(</td>
+     * <td>使用括号包含负数</td>
+     * <td>("%(f", -99.99)</td>
+     * <td>(99.990000)</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>#</td>
+     * <td>如果是浮点数则包含小数点，如果是16进制或8进制则添加0x或0</td>
+     * <td>("%#x", 99) <br>
+     * ("%#o", 99)</td>
+     * <td>0x63<br>
+     * 0143</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>{@code <}</td>
+     * <td>格式化前一个转换符所描述的参数</td>
+     * <td>("%f和%{@code <}3.2f", 99.45)</td>
+     * <td>99.450000和99.45</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>$</td>
+     * <td>被格式化的参数索引</td>
+     * <td>("%1$d,%2$s", 99,"abc")</td>
+     * <td>99,abc</td>
+     * </tr>
+     * </table>
+     * </blockquote>
      * 
      * @param format
      *            the format
@@ -972,7 +1093,9 @@ public final class StringUtil{
      * @param original
      *            原始字符串
      * @return the string
+     * @deprecated will move
      */
+    @Deprecated
     public static String toHexStringUpperCase(String original){
         // 先 Charset.defaultCharset() 如果有异常 用 ISO-8859-1
         String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(original.getBytes());
@@ -988,7 +1111,9 @@ public final class StringUtil{
      * @param charsetName
      *            字符集 {@link CharsetType}
      * @return the string
+     * @deprecated will move
      */
+    @Deprecated
     public static String toHexStringUpperCase(String original,String charsetName){
         try{
             String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(original.getBytes(charsetName));
@@ -1006,7 +1131,9 @@ public final class StringUtil{
      * @param hexStringUpperCase
      *            大写的HexString
      * @return the string
+     * @deprecated will move
      */
+    @Deprecated
     public static String toOriginal(String hexStringUpperCase){
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
         String original = new String(hexBytesToBytes);
@@ -1022,7 +1149,9 @@ public final class StringUtil{
      * @param charsetName
      *            指定字符集
      * @return the string
+     * @deprecated will move
      */
+    @Deprecated
     public static String toOriginal(String hexStringUpperCase,String charsetName){
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
         String original = null;
