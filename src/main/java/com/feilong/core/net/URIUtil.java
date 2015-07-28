@@ -31,6 +31,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -643,16 +644,10 @@ public final class URIUtil{
     @Deprecated
     public static String decodeLuanMaISO8859(String str,String bianma){
         if (Validator.isNullOrEmpty(str)){
-            return "";
+            return StringUtils.EMPTY;
         }
-        //StringUtil.toBytes(value, charsetName)
-
-        try{
-            return new String(str.trim().getBytes(CharsetType.ISO_8859_1), bianma);
-        }catch (UnsupportedEncodingException e){
-            LOGGER.error(e.getClass().getName(), e);
-        }
-        return "";
+        byte[] bytes = StringUtil.getBytes(str.trim(), CharsetType.ISO_8859_1);
+        return StringUtil.newString(bytes, bianma);
     }
 
     //**************************************************************************************

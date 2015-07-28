@@ -40,9 +40,7 @@ import com.feilong.core.log.Slf4jUtil;
  * 
  * <blockquote>
  * <ul>
- * <li>{@link #splitToTArray(String, String, Class)}</li>
- * <li>{@link #splitToStringArray(String, String)}</li>
- * <li>{@link #splitToIntegerArray(String, String)}</li>
+ * <li>{@link #split(String, String)}</li>
  * </ul>
  * </blockquote>
  * 
@@ -736,80 +734,36 @@ public final class StringUtil{
     /**
      * 将字符串分隔成 字符串数组.
      * 
-     * @param value
-     *            value
-     * @param regexSpliter
-     *            分隔符,注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义，因此我们使用.的时候必须进行转义,<br>
-     *            要注意的是，"\"转义时要写成"\\\\"<br>
-     *            最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
-     * @return 如果value 是null,返回null
-     * @see String#split(String)
-     * @see String#split(String, int)
-     * @see java.util.regex.Pattern#split(CharSequence)
-     * @deprecated will Re-structure,support more type or remove
-     */
-    @Deprecated
-    public static String[] splitToStringArray(String value,String regexSpliter){
-        if (null != value){
-            String[] strings = value.split(regexSpliter);
-            return strings;
-        }
-        return null;
-    }
-
-    /**
-     * 将字符串分隔成 字符串数组.
+     * <h3>注意</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义，因此我们使用.的时候必须进行转义,<br>
+     * <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
+     * 最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
+     * </p>
+     * </blockquote>
+     * 
+     * 建议使用 {@link #tokenizeToStringArray(String, String)} 或者 {@link StringUtils#split(String)}
      * 
      * @param value
      *            value
      * @param regexSpliter
      *            分隔符,注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义，因此我们使用.的时候必须进行转义,<br>
-     *            要注意的是，"\"转义时要写成"\\\\"<br>
+     *            <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
      *            最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
      * @return 如果value 是null,返回null
      * @see String#split(String)
      * @see String#split(String, int)
-     * @see ConvertUtil#toIntegers(Object)
      * @see java.util.regex.Pattern#split(CharSequence)
-     * @deprecated will Re-structure,support more type or remove
+     * @see StringUtils#split(String)
+     * @see #tokenizeToStringArray(String, String)
      */
-    @Deprecated
-    public static Integer[] splitToIntegerArray(String value,String regexSpliter){
+    public static String[] split(String value,String regexSpliter){
         if (null != value){
-            String[] strings = value.split(regexSpliter);
-            return ConvertUtil.toIntegers(strings);
+            return value.split(regexSpliter);
         }
         return null;
-    }
-
-    /**
-     * 转成T数组.
-     *
-     * @param <T>
-     *            the generic type
-     * @param value
-     *            字符串
-     * @param regexSpliter
-     *            分隔符,注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义，因此我们使用.的时候必须进行转义,<br>
-     *            要注意的是，"\"转义时要写成"\\\\"<br>
-     *            最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
-     * @param typeClass
-     *            类型,指明 T 类型<br>
-     *            Temp support only:String.class and Integer.class
-     * @return 泛型数组
-     * @see java.util.regex.Pattern#split(CharSequence)
-     * @see #splitToIntegerArray(String, String)
-     * @see #splitToStringArray(String, String)
-     * @deprecated will Re-structure,support more type or remove
-     */
-    @Deprecated
-    public static <T> T[] splitToTArray(String value,String regexSpliter,Class<?> typeClass){
-        if (typeClass == String.class){
-            return (T[]) splitToStringArray(value, regexSpliter);
-        }else if (typeClass == Integer.class){
-            return (T[]) splitToIntegerArray(value, regexSpliter);
-        }
-        throw new IllegalArgumentException("Param typeClass don't support,Temp support only:String.class and Integer.class");
     }
 
     // [end]
