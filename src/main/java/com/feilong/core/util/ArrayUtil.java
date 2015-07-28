@@ -164,8 +164,8 @@ public final class ArrayUtil{
      * @param value
      *            特定值
      * @return 如果 Validator.isNotNullOrEmpty(arrays) 返回false <br>
-     *         否则，循环arrays，调用 {@link ObjectUtil#equals(Object, Object, boolean)} 方法,如果为true，则返回true<br>
-     * @see ObjectUtil#equals(Object, Object, boolean)
+     *         否则，循环arrays，调用 {@link ObjectUtil#equals(Object, Object)} 方法,如果为true，则返回true<br>
+     * @see ObjectUtil#equals(Object, Object)
      */
     public static <T> boolean isContain(T[] arrays,T value){
         if (Validator.isNullOrEmpty(arrays)){
@@ -173,7 +173,7 @@ public final class ArrayUtil{
         }
 
         for (T arr : arrays){
-            if (ObjectUtil.equals(arr, value, true)){
+            if (ObjectUtil.equals(arr, value)){
                 return true;
             }
         }

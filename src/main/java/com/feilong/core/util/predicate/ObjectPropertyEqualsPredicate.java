@@ -60,7 +60,6 @@ public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
     @Override
     public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
-        boolean nullTypeFlag = true;
-        return ObjectUtil.equals(property, value, nullTypeFlag);
+        return ObjectUtil.equals(property, value);
     }
 }

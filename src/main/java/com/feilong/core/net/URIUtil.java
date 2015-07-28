@@ -520,15 +520,12 @@ public final class URIUtil{
         if (Validator.isNullOrEmpty(url)){
             return "";
         }
-        String before = "";
         // 判断url中是否含有?
         int index = url.indexOf(URIComponents.QUESTIONMARK);
         if (index == -1){
-            before = url;
-        }else{
-            before = url.substring(0, index);
+            return url;
         }
-        return before;
+        return url.substring(0, index);
     }
 
     /**

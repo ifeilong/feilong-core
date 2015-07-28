@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -54,31 +52,6 @@ public class ObjectUtilTest{
         //		 LOGGER.info("Size of Object: " + ObjectUtil.size(new Object()));
         LOGGER.info("Size of Calendar: " + ObjectUtil.size(Calendar.getInstance()));
         LOGGER.info("Size of HashMap: " + ObjectUtil.size(new HashMap<String, String>()));
-    }
-
-    /**
-     * Test equals not null.
-     */
-    @Test
-    public final void testEqualsNotNull(){
-        assertEquals(false, ObjectUtil.equalsNotNull(1, 2));
-        assertEquals(false, ObjectUtil.equalsNotNull(1, null));
-        assertEquals(false, ObjectUtil.equalsNotNull(null, 2));
-        assertEquals(false, ObjectUtil.equalsNotNull(null, null));
-
-        assertEquals(false, ObjectUtil.equalsNotNull(1, "1"));
-        assertEquals(true, ObjectUtil.equalsNotNull(1, 1));
-        assertEquals(true, ObjectUtil.equalsNotNull("1", "1"));
-    }
-
-    /**
-     * Test equals.
-     */
-    @Test
-    public final void testEquals(){
-        assertEquals(true, ObjectUtil.equals(1, 1, false));
-        assertEquals(true, ObjectUtil.equals(null, null, false));
-        assertEquals(true, ObjectUtil.equals("", " ", false));
     }
 
     /**

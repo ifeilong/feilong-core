@@ -122,14 +122,17 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 从 <code>collection</code>中 删除 所有的 <code>remove</code>. 返回剩余的集合,返回剩余的集合(原集合对象不变)
+     * 从 <code>collection</code>中 删除 所有的 <code>remove</code>. 返回剩余的集合,返回剩余的集合(原集合对象不变).
+     * 
      * <p>
      * The cardinality of an element <code>e</code> in the returned collection is the same as the cardinality of <code>e</code> in
      * <code>collection</code> unless <code>remove</code> contains <code>e</code>, in which case the cardinality is zero.
      * </p>
+     * 
      * <p>
      * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.removeAll(remove);</code>.
      * </p>
+     * 
      * <p>
      * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
      * </p>
@@ -152,9 +155,11 @@ public final class CollectionsUtil{
 
     /**
      * 从 <code>collection</code>中 删除 <code>removeElement</code>,返回剩余的集合(原集合对象不变).
+     * 
      * <p>
      * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.remove(removeElement);</code>.
      * </p>
+     * 
      * <p>
      * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
      * </p>
@@ -302,8 +307,11 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 解析对象集合,使用 {@link com.feilong.core.bean.PropertyUtil#getProperty(Object, String)}取到对象特殊属性,拼成List(ArrayList). <br>
+     * 解析对象集合,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象特殊属性,拼成List(ArrayList).
+     * 
+     * <p>
      * 支持属性级联获取,支付获取数组,集合,map,自定义bean等属性
+     * </p>
      * 
      * <h3>使用示例:</h3>
      * 
@@ -427,6 +435,7 @@ public final class CollectionsUtil{
      *            the return collection
      * @return the property value collection
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
+     * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
      * @since 1.0.8
      */
     private static <T, O, K extends Collection<T>> K getPropertyValueCollection(
@@ -454,16 +463,12 @@ public final class CollectionsUtil{
         }catch (BeanUtilException e){
             LOGGER.error(e.getClass().getName(), e);
         }
-
         return returnCollection;
-
-        // create the transformer
-        // BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer(propertyName);
-        // return CollectionUtils.collect(objectCollection, transformer, returnCollection);
     }
 
     /**
      * Finds the first element in the given collection which matches the given predicate.
+     * 
      * <p>
      * If the input collection or predicate is null, or no element of the collection matches the predicate, null is returned.
      * </p>

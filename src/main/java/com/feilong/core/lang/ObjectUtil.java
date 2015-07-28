@@ -25,19 +25,19 @@ import java.util.Set;
 
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.io.SerializableUtil;
 import com.feilong.core.util.ArrayUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * object工具类.
  *
  * @author feilong
  * @version 1.0.0 2010-4-5 下午11:00:54
- * @since 1.0.0
  * @see org.apache.commons.lang3.ObjectUtils
+ * @since 1.0.0
  */
 public final class ObjectUtil{
 
@@ -183,88 +183,33 @@ public final class ObjectUtil{
         }
     }
 
-    //****************************************************************************************
     /**
-     * 非空判断两个值是否相等 <br>
-     * 当两个值都不为空,且object.equals(object2)才返回true
-     * 
-     * @param object
-     *            object
+     * <p>
+     * Compares two objects for equality, where either one or both objects may be {@code null}.
+     * </p>
+     *
+     * <pre>
+     * ObjectUtils.equals(null, null)                  = true
+     * ObjectUtils.equals(null, "")                    = false
+     * ObjectUtils.equals("", null)                    = false
+     * ObjectUtils.equals("", "")                      = true
+     * ObjectUtils.equals(Boolean.TRUE, null)          = false
+     * ObjectUtils.equals(Boolean.TRUE, "true")        = false
+     * ObjectUtils.equals(Boolean.TRUE, Boolean.TRUE)  = true
+     * ObjectUtils.equals(Boolean.TRUE, Boolean.FALSE) = false
+     * </pre>
+     *
+     * @param object1
+     *            the first object, may be {@code null}
      * @param object2
-     *            object2
-     * @return 当两个值都不为空,且object.equals(object2)才返回true
-     */
-    public static boolean equalsNotNull(Object object,Object object2){
-        if (Validator.isNotNullOrEmpty(object) && Validator.isNotNullOrEmpty(object2)){
-            return object.equals(object2);
-        }
-        return false;
-    }
-
-    /**
-     * 判断两个值是否相等,允许两个值都为null.
-     * 
-     * @param object
-     *            object
-     * @param object2
-     *            object2
-     * @param nullTypeFlag
-     *            标识null和""相比的情况,默认值为false 标识不相等
-     * @return 判断两个值是否相等
+     *            the second object, may be {@code null}
+     * @return {@code true} if the values of both objects are the same
      * @see "java.util.Objects#equals(Object, Object)"
      * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
      */
-    public static Boolean equals(Object object,Object object2,boolean nullTypeFlag){
-        //TODO Either override Object.equals(Object), or totally rename the method to prevent any confusion.
-        //Methods named "equals" should override Object.equals(Object)
-        if (object == object2){
-            return true;
-        }
-        // object 是空
-        if (null == object){
-            // 标识null和""相比的情况
-            if (nullTypeFlag){
-                if ("".equals(trim(object2))){
-                    return true;
-                }
-            }
-        }else{
-            // 标识null和""相比的情况
-            if ("".equals(trim(object))){
-                if (null == object2){
-                    if (nullTypeFlag){
-                        return true;
-                    }
-                }else{
-                    if ("".equals(trim(object2))){
-                        return true;
-                    }
-                }
-            }else{
-                return object.equals(object2);
-            }
-        }
-        return false;
+    public static Boolean equals(Object object1,Object object2){
+        return ObjectUtils.equals(object1, object2);
     }
-
-    /**
-     * 判断两个值是否相等,允许两个值都为null.
-     * 
-     * @param object
-     *            object
-     * @param object2
-     *            object2
-     * @return 判断两个值是否相等 标识null和""相比的情况,默认值为false 标识不相等
-     * @see "java.util.Objects#equals(Object, Object)"
-     * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
-     */
-    public static Boolean equals(Object object,Object object2){
-        //TODO Either override Object.equals(Object), or totally rename the method to prevent any confusion.
-        //Methods named "equals" should override Object.equals(Object)
-        return equals(object, object2, false);
-    }
-
-    //****************************************************************************************
 
     /**
      * 判断对象是不是boolean类型数据.
@@ -294,12 +239,12 @@ public final class ObjectUtil{
      * <pre>
      * trim(null) --------&gt; &quot;&quot;
      * trim(&quot;null&quot;) --------&gt; &quot;null&quot;
-     * 
      * </pre>
      * 
      * @param obj
      *            obj
      * @return 去除空格
+     * @see org.apache.commons.lang3.StringUtils#trim(String)
      */
     public static String trim(Object obj){
         return obj == null ? "" : obj.toString().trim();
