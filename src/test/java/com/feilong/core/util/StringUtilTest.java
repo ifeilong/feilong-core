@@ -357,7 +357,7 @@ public class StringUtilTest{
         str = sb.toString();
 
         String regexSpliter = "[;, \\.]";
-        String[] tokenizeToStringArray = StringUtil.splitToStringArray(str, regexSpliter);
+        String[] tokenizeToStringArray = StringUtil.split(str, regexSpliter);
         if (LOGGER.isInfoEnabled()){
             LOGGER.info(JsonUtil.format(tokenizeToStringArray));
         }
@@ -365,7 +365,7 @@ public class StringUtilTest{
         Date beginDate = new Date();
 
         for (int i = 0; i < 100000; ++i){
-            StringUtil.splitToStringArray(str, regexSpliter);
+            StringUtil.split(str, regexSpliter);
         }
 
         Date endDate = new Date();

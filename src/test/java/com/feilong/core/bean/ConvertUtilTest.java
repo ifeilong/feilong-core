@@ -195,4 +195,12 @@ public class ConvertUtilTest{
             LOGGER.debug(ConvertUtil.toString(int1));
         }
     }
+
+    @Test
+    public final void testConvertArray(){
+        String[] int1 = { "2", "1" };
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(ConvertUtil.convert(int1, Long.class)));
+        }
+    }
 }

@@ -836,7 +836,6 @@ public final class StringUtil{
         if (str == null){
             return null;
         }
-
         //StringTokenizer implements Enumeration<Object>
         //其在 Enumeration接口的基础上,  定义了 hasMoreTokens nextToken两个方法
         //实现的Enumeration接口中的  hasMoreElements nextElement 调用了  hasMoreTokens nextToken

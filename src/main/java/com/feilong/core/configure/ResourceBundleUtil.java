@@ -318,12 +318,12 @@ public final class ResourceBundleUtil implements BaseConfigure{
      *            如果是Integer.class,则返回的是Integer [] 数组
      * @return 以value.split(spliter),如果 资源值不存在,返回null
      * @see #getValue(ResourceBundle, String)
-     * @see com.feilong.core.util.StringUtil#splitToTArray(String, String, Class)
+     * @see com.feilong.core.util.StringUtil#tokenizeToStringArray(String, String)
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T[] getArray(ResourceBundle resourceBundle,String key,String spliter,Class<?> typeClass){
+    public static <T> T[] getArray(ResourceBundle resourceBundle,String key,String spliter,Class<T> typeClass){
         String value = getValue(resourceBundle, key);
-        return (T[]) StringUtil.splitToTArray(value, spliter, typeClass);
+        String[] array = StringUtil.tokenizeToStringArray(value, spliter);
+        return ConvertUtil.convert(array, typeClass);
     }
 
     // **************************************************************************

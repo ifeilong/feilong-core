@@ -220,10 +220,10 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            参数值
      * @return the string
-     * @deprecated will Re-structure
      * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
      * @see org.apache.commons.beanutils.converters.StringConverter
+     * @deprecated will Re-structure
      */
     @Deprecated
     public static String toString(Object toBeConvertedValue){
@@ -347,5 +347,29 @@ public final class ConvertUtil{
     @SuppressWarnings("unchecked")
     public static <T> T convert(Object value,Class<T> targetType){
         return (T) ConvertUtils.convert(value, targetType);
+    }
+
+    /**
+     * Convert an array of specified values to an array of objects of the specified class (if possible).
+     * 
+     * <p>
+     * If the specified Java class is itself an array class, this class will be the type of the returned value.<br>
+     * Otherwise, an array will be constructed whose component type is the specified class.
+     * </p>
+     *
+     * @param <T>
+     *            the generic type
+     * @param values
+     *            the values
+     * @param targetType
+     *            the target type
+     * @return the t[]
+     * @see org.apache.commons.beanutils.ConvertUtils#convert(String[], Class)
+     * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(String[], Class)
+     * @since 1.3.0
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T[] convert(String[] values,Class<T> targetType){
+        return (T[]) ConvertUtils.convert(values, targetType);
     }
 }

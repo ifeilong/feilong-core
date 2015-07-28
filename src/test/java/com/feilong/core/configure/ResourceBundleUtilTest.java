@@ -69,6 +69,7 @@ public class ResourceBundleUtilTest{
     @Test
     public final void readPropertiesAsArray(){
         LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
+        LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
     }
 
     /**
