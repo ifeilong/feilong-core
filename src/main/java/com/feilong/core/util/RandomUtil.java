@@ -38,9 +38,12 @@ import com.feilong.core.log.Slf4jUtil;
 public final class RandomUtil{
 
     /**
-     * Random object used by random method. <br>
+     * Random object used by random method.
+     * 
+     * <p>
      * This has to be not local to the random method so as to not return the same value in the same millisecond.<br>
      * 把Random对象作为一个全局实例（static）来使用. Java中Random是线程安全的（内部进行了加锁处理）；
+     * </p>
      * 
      * @see org.apache.commons.lang.math.RandomUtils
      * @since 1.0.7
@@ -55,8 +58,11 @@ public final class RandomUtil{
     }
 
     /**
-     * 创建0-最大值之间的随机数.<br>
-     * <b>目前内部调用全局随机数{@link #JVM_RANDOM}</b>
+     * 创建0-最大值之间的随机数.
+     * 
+     * <p>
+     * 目前内部调用全局随机数{@link #JVM_RANDOM}
+     * </p>
      * 
      * @param number
      *            随机数最大值
@@ -91,8 +97,11 @@ public final class RandomUtil{
     // ********************************************************************
 
     /**
-     * 生成一个指定长度大小的随机正整数<br>
-     * <b>目前内部调用全局随机数{@link #JVM_RANDOM}</b>.
+     * 生成一个指定长度大小的随机正整数.
+     * 
+     * <p>
+     * 目前内部调用全局随机数{@link #JVM_RANDOM}
+     * </p>
      *
      * @param length
      *            设定所取出随机数的长度.length小于11
@@ -117,8 +126,11 @@ public final class RandomUtil{
     // ****************************************************************
 
     /**
-     * 随机抽取字符串char,拼接成随机字符串.<br>
+     * 随机抽取字符串char,拼接成随机字符串.
+     * 
+     * <p>
      * 取一个字符串里面 随机长度字符
+     * </p>
      *
      * @param str
      *            被抽取的字符串
@@ -147,8 +159,11 @@ public final class RandomUtil{
     }
 
     /**
-     * 随机抽取字符串char,拼接成随机字符串.<br>
+     * 随机抽取字符串char,拼接成随机字符串.
+     * 
+     * <p>
      * 取一个字符串里面 指定长度字符
+     * </p>
      *
      * @param str
      *            被抽取的字符串
