@@ -336,6 +336,54 @@ public final class DateUtil{
     }
 
     /**
+     * 获得指定日期所在年的第一个星期 <code>week</code>.
+     * 
+     * <pre>
+     * 如果 现在是 2015-7-29 14:08
+     * 
+     * DateUtil.getFirstWeekOfSpecifyDateYear(NOW, Calendar.FRIDAY)
+     * return 2015-01-02 00:00:00.000
+     * 
+     * DateUtil.getFirstWeekOfSpecifyDateYear(NOW, Calendar.MONDAY)
+     * return 2015-01-05 00:00:00.000
+     * </pre>
+     * 
+     * @param date
+     *            指定日期
+     * @param week
+     *            周几 星期天开始为1 依次2 3 4 5 6 7,建议使用 常量 {@link Calendar#SUNDAY}, {@link Calendar#MONDAY}, {@link Calendar#TUESDAY},
+     *            {@link Calendar#WEDNESDAY}, {@link Calendar#THURSDAY}, {@link Calendar#FRIDAY}, {@link Calendar#SATURDAY}
+     * @return the first week of specify date year
+     * @see Calendar#SUNDAY
+     * @see Calendar#MONDAY
+     * @see Calendar#TUESDAY
+     * @see Calendar#WEDNESDAY
+     * @see Calendar#THURSDAY
+     * @see Calendar#FRIDAY
+     * @see Calendar#SATURDAY
+     * @since 1.3.0
+     */
+    public static Date getFirstWeekOfSpecifyDateYear(Date date,int week){
+        Calendar calendar = toCalendar(date);
+        calendar.clear();
+        calendar.set(Calendar.YEAR, getYear(date));
+        calendar.set(Calendar.MONTH, Calendar.JANUARY);
+        calendar.set(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
+        calendar.set(Calendar.DAY_OF_WEEK, week);
+
+        //DAY_OF_WEEK_IN_MONTH 指示当前月中的第几个星期。与 DAY_OF_WEEK 字段一起使用时，就可以唯一地指定某月中的某一天。
+        //与 WEEK_OF_MONTH 和 WEEK_OF_YEAR 不同，该字段的值并不 取决于 getFirstDayOfWeek() 或 getMinimalDaysInFirstWeek()。
+
+        //DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1；
+        //8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2，依此类推。
+        //DAY_OF_WEEK_IN_MONTH 0 表示 DAY_OF_WEEK_IN_MONTH 1 之前的那个星期。
+        //负值是从一个月的末尾开始逆向计数，因此，一个月的最后一个星期天被指定为 DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1。
+        //因为负值是逆向计数的，所以它们在月份中的对齐方式通常与正值的不同。
+        //例如，如果一个月有 31 天，那么 DAY_OF_WEEK_IN_MONTH -1 将与 DAY_OF_WEEK_IN_MONTH 5 和 DAY_OF_WEEK_IN_MONTH 4 的末尾相重叠
+        return CalendarUtil.toDate(calendar);
+    }
+
+    /**
      * 获得当天<span style="color:red">所在年的最后一天</span> <code>23:59:59.999</code> 到毫秒<br>
      * 
      * <pre>
@@ -585,11 +633,11 @@ public final class DateUtil{
      * @param date
      *            the date
      * @return 获得任意日期中的年份部分
-     * @see CalendarUtil#getCalendarFieldValue(Date, int)
+     * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#YEAR
      */
     public static int getYear(Date date){
-        return CalendarUtil.getCalendarFieldValue(date, Calendar.YEAR);
+        return CalendarUtil.getFieldValue(date, Calendar.YEAR);
     }
 
     /**
@@ -603,11 +651,11 @@ public final class DateUtil{
      * @param date
      *            the date
      * @return 获得任意日期中的月份
-     * @see CalendarUtil#getCalendarFieldValue(Date, int)
+     * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MONTH
      */
     public static int getMonth(Date date){
-        return 1 + CalendarUtil.getCalendarFieldValue(date, Calendar.MONTH);
+        return 1 + CalendarUtil.getFieldValue(date, Calendar.MONTH);
     }
 
     /**
@@ -660,7 +708,7 @@ public final class DateUtil{
      * @param date
      *            the date
      * @return 当前年中的星期数
-     * @see CalendarUtil#getCalendarFieldValue(Date, int)
+     * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#WEEK_OF_YEAR
      * @see Calendar#getFirstDayOfWeek()
      * @see Calendar#getMinimalDaysInFirstWeek()
@@ -671,7 +719,7 @@ public final class DateUtil{
         //      Calendar calendar = DateUtil.toCalendar(date);
         //      calendar.setMinimalDaysInFirstWeek(7);
         //      return calendar.get(Calendar.WEEK_OF_YEAR);
-        return CalendarUtil.getCalendarFieldValue(date, Calendar.WEEK_OF_YEAR);
+        return CalendarUtil.getFieldValue(date, Calendar.WEEK_OF_YEAR);
     }
 
     /**
@@ -709,11 +757,11 @@ public final class DateUtil{
      * @param date
      *            the date
      * @return 获得任意时间中的天
-     * @see CalendarUtil#getCalendarFieldValue(Date, int)
+     * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#DAY_OF_MONTH
      */
     public static int getDayOfMonth(Date date){
-        return CalendarUtil.getCalendarFieldValue(date, Calendar.DAY_OF_MONTH);
+        return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_MONTH);
     }
 
     /**
@@ -744,11 +792,11 @@ public final class DateUtil{
      * @see Calendar#THURSDAY
      * @see Calendar#FRIDAY
      * @see Calendar#SATURDAY
-     * @see CalendarUtil#getCalendarFieldValue(Date, int)
+     * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#DAY_OF_WEEK
      */
     public static int getDayOfWeek(Date date){
-        return CalendarUtil.getCalendarFieldValue(date, Calendar.DAY_OF_WEEK);
+        return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_WEEK);
     }
 
     /**
@@ -762,11 +810,11 @@ public final class DateUtil{
      * @param date
      *            date
      * @return 获得时间中的小时
-     * @see CalendarUtil#getCalendarFieldValue(Date, int)
+     * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#HOUR_OF_DAY
      */
     public static int getHourOfDay(Date date){
-        return CalendarUtil.getCalendarFieldValue(date, Calendar.HOUR_OF_DAY);
+        return CalendarUtil.getFieldValue(date, Calendar.HOUR_OF_DAY);
     }
 
     /**
@@ -813,11 +861,11 @@ public final class DateUtil{
      * @param date
      *            date
      * @return 获得时间中的分钟
-     * @see CalendarUtil#getCalendarFieldValue(Date, int)
+     * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MINUTE
      */
     public static int getMinute(Date date){
-        return CalendarUtil.getCalendarFieldValue(date, Calendar.MINUTE);
+        return CalendarUtil.getFieldValue(date, Calendar.MINUTE);
     }
 
     /**
@@ -831,11 +879,11 @@ public final class DateUtil{
      * @param date
      *            date
      * @return 获得时间中的秒
-     * @see CalendarUtil#getCalendarFieldValue(Date, int)
+     * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#SECOND
      */
     public static int getSecond(Date date){
-        return CalendarUtil.getCalendarFieldValue(date, Calendar.SECOND);
+        return CalendarUtil.getFieldValue(date, Calendar.SECOND);
     }
 
     /**

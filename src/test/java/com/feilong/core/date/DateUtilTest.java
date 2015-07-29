@@ -163,6 +163,15 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
+     * Test get first week of specify date year.
+     */
+    @Test
+    public void testGetFirstWeekOfSpecifyDateYear(){
+        logDate(DateUtil.getFirstWeekOfSpecifyDateYear(NOW, Calendar.FRIDAY));
+        logDate(DateUtil.getFirstWeekOfSpecifyDateYear(NOW, Calendar.MONDAY));
+    }
+
+    /**
      * Gets the first date of this year.
      */
     @Test

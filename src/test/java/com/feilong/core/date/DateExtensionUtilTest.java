@@ -16,6 +16,7 @@
 package com.feilong.core.date;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -81,7 +82,10 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testCalendarUtilTest(){
-        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getWeekDateStringList(5, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
+        List<String> weekDateStringList = DateExtensionUtil.getWeekDateStringList(
+                        Calendar.THURSDAY,
+                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND);
+        LOGGER.debug(JsonUtil.format(weekDateStringList));
     }
 
     /**

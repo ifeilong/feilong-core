@@ -17,6 +17,7 @@
 package com.feilong.core.date;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -64,5 +65,14 @@ public class CalendarUtilTest extends BaseDateUtilTest{
         LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
         LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
         LOGGER.debug(CalendarUtil.getDayOfYear(2014, 12, 31) + "");
+    }
+
+    /**
+     * Test reset year end.
+     */
+    @Test
+    public void testResetYearEnd(){
+        Calendar resetYearEnd = CalendarUtil.resetYearEnd(DateUtil.toCalendar(new Date()));
+        LOGGER.debug(CalendarUtil.toString(resetYearEnd, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 }

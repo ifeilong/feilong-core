@@ -216,7 +216,6 @@ public final class DateExtensionUtil{
                 dateList.add(DateUtil.addDay(minDate, i + 1));
             }
         }
-        //***************************************************************/
         return dateList;
     }
 
@@ -224,49 +223,32 @@ public final class DateExtensionUtil{
      * 获得一年中所有的周几集合 例如:getWeekDateStringList(6, "yyyy-MM-dd");.
      * 
      * @param week
-     *            周几 星期天开始为0 依次1 2 3 4 5 6
+     *            周几 星期天开始为1 依次2 3 4 5 6 7,建议使用 常量 {@link Calendar#SUNDAY}, {@link Calendar#MONDAY}, {@link Calendar#TUESDAY},
+     *            {@link Calendar#WEDNESDAY}, {@link Calendar#THURSDAY}, {@link Calendar#FRIDAY}, {@link Calendar#SATURDAY}
      * @param datePattern
      *            获得集合里面时间字符串模式
      * @return 获得一年中所有的周几集合
      * @see org.apache.commons.lang3.time.DateUtils#iterator(Date, int)
+     * @see Calendar#SUNDAY
+     * @see Calendar#MONDAY
+     * @see Calendar#TUESDAY
+     * @see Calendar#WEDNESDAY
+     * @see Calendar#THURSDAY
+     * @see Calendar#FRIDAY
+     * @see Calendar#SATURDAY
      */
     public static List<String> getWeekDateStringList(int week,String datePattern){
+        Date now = new Date();
+        Date firstWeekOfSpecifyDateYear = DateUtil.getFirstWeekOfSpecifyDateYear(now, week);
+        //当年最后一天
+        Calendar calendarEnd = CalendarUtil.resetYearEnd(DateUtil.toCalendar(now));
+
         List<String> list = new ArrayList<String>();
-        //当前日期
-        Calendar calendarToday = Calendar.getInstance();
-        //当前年份
-        int yearCurrent = calendarToday.get(Calendar.YEAR);
-        //下一个年份
-        int yearNext = 1 + yearCurrent;
-        //开始的calendar
-        Calendar calendarBegin = Calendar.getInstance();
-        //结束的calendar
-        Calendar calendarEnd = Calendar.getInstance();
-        calendarBegin.set(yearCurrent, 0, 1);// 2010-1-1
-        calendarEnd.set(yearNext, 0, 1);// 2011-1-1
-        // ****************************************************************************************
-        // 今天在这个星期中的第几天 星期天为1 星期六为7
-        int todayDayOfWeek = calendarToday.get(Calendar.DAY_OF_WEEK);
-
-        // 今天前一个周六
-        calendarToday.add(Calendar.DAY_OF_MONTH, -todayDayOfWeek - 7 + (1 + week));// + week
-        Calendar calendarCloneToday = (Calendar) calendarToday.clone();
-
-        // 向前
-        for (; calendarToday.before(calendarEnd) && calendarToday.after(calendarBegin); calendarToday.add(Calendar.DAY_OF_YEAR, -7)){
-            list.add(CalendarUtil.toString(calendarToday, datePattern));
-        }
-
-        // 向后
-        for (int i = 0; calendarCloneToday.before(calendarEnd) && calendarCloneToday.after(calendarBegin); ++i, calendarCloneToday.add(
+        for (Calendar calendar = DateUtil.toCalendar(firstWeekOfSpecifyDateYear); calendar.before(calendarEnd); calendar.add(
                         Calendar.DAY_OF_YEAR,
                         7)){
-            //第一个值和上面循环重复了 去掉
-            if (i != 0){
-                list.add(CalendarUtil.toString(calendarCloneToday, datePattern));
-            }
+            list.add(CalendarUtil.toString(calendar, datePattern));
         }
-        Collections.sort(list);
         return list;
     }
 
