@@ -31,31 +31,28 @@ import com.feilong.core.date.DateUtil;
 public class FileInfoEntity implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID = 288232184048495608L;
-
-    /** The date pattern. */
-    private final static String datePattern      = DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
+    private static final long serialVersionUID = 288232184048495608L;
 
     /** 名称. */
-    private String              name;
+    private String            name;
 
     /** 类型. */
-    private FileType            fileType;
+    private FileType          fileType;
 
     /** 文件大小， 单位 字节,如果是文件夹 不显示size. */
-    private Long                size;
+    private Long              size;
 
     /** 格式化显示的size. */
-    private String              formatSize;
+    private String            formatSize;
 
     /**
      * 返回此抽象路径名表示的文件最后一次被修改的时间. <br>
      * 表示文件最后一次被修改的时间的 long 值，用与时间点（1970 年 1 月 1 日，00:00:00 GMT）之间的毫秒数表示；如果该文件不存在，或者发生 I/O 错误，则返回 0L.
      */
-    private Long                lastModified;
+    private Long              lastModified;
 
     /** 格式化显示的时间默认 yy-mm hh:ss. */
-    private String              formatLastModified;
+    private String            formatLastModified;
 
     /**
      * Gets the 名称.
@@ -152,7 +149,7 @@ public class FileInfoEntity implements Serializable{
      */
     public String getFormatLastModified(){
         Date date = new Date(lastModified);
-        formatLastModified = DateUtil.date2String(date, datePattern);
+        formatLastModified = DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
         return formatLastModified;
     }
 

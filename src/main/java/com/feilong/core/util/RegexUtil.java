@@ -53,17 +53,13 @@ public final class RegexUtil{
      * 编译给定正则表达式并尝试将给定输入与其匹配, 调用了 {@link Pattern#matches(String, CharSequence)}方法.
      *
      * @param regexPattern
-     *            正则表达式字符串
+     *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
-     *            The character sequence to be matched
+     *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @return 如果input 符合 regex的正则表达式格式,返回true, 否则返回 false;
-     * @see String
-     * @see StringBuffer
-     * @see StringBuilder
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#matches()
      * @see Pattern#matches(String, CharSequence)
-     * @see RegexPattern
      * @since 1.0.7
      */
     public static boolean matches(String regexPattern,CharSequence input){
@@ -90,28 +86,19 @@ public final class RegexUtil{
      *    0 venusdrogon@163.com
      *    1 venusdrogon
      *    2 163.com
-     * 
      * }
      * </pre>
-     * 
+     *
      * @param regexPattern
-     *            the regex pattern
+     *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
-     *            The character sequence to be matched
+     *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @return if 匹配不了,返回
-     * @throws IllegalStateException
-     *             如果没有尝试任何匹配，或者以前的匹配操作失败.
-     * @throws IndexOutOfBoundsException
-     *             如果在给定索引的模式中不存在捕获组.
-     * @see String
-     * @see StringBuffer
-     * @see StringBuilder
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#group(int)
-     * @see RegexPattern
      * @since 1.0.7
      */
-    public static Map<Integer, String> group(String regexPattern,CharSequence input) throws IllegalStateException,IndexOutOfBoundsException{
+    public static Map<Integer, String> group(String regexPattern,CharSequence input){
 
         Map<Integer, String> groupMap = new LinkedHashMap<Integer, String>();
 
@@ -170,27 +157,19 @@ public final class RegexUtil{
      *      LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");--->163.com
      * }
      * </pre>
-     * 
+     *
      * @param regexPattern
-     *            the regex pattern
+     *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
-     *            the input
+     *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @param group
      *            the group
      * @return the map
-     * @throws IllegalStateException
-     *             如果没有尝试任何匹配，或者以前的匹配操作失败.
-     * @throws IndexOutOfBoundsException
-     *             如果在给定索引的模式中不存在捕获组.
-     * @see String
-     * @see StringBuffer
-     * @see StringBuilder
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#group(int)
-     * @see RegexPattern
      * @since 1.0.7
      */
-    public static String group(String regexPattern,CharSequence input,int group) throws IllegalStateException,IndexOutOfBoundsException{
+    public static String group(String regexPattern,CharSequence input,int group){
         Map<Integer, String> map = group(regexPattern, input);
         return map.get(group);
     }
@@ -200,15 +179,11 @@ public final class RegexUtil{
      * Gets the matcher.
      *
      * @param regexPattern
-     *            the regex pattern
+     *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
-     *            The character sequence to be matched
+     *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @return the matcher
-     * @see String
-     * @see StringBuffer
-     * @see StringBuilder
      * @see Pattern#compile(String)
-     * @see RegexPattern
      * @since 1.0.7
      */
     private static Matcher getMatcher(String regexPattern,CharSequence input){
@@ -219,9 +194,9 @@ public final class RegexUtil{
      * Gets the matcher.
      *
      * @param regexPattern
-     *            the regex pattern
+     *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
-     *            the input
+     *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @param flags
      *            如果需要多个组合,可以使用罗辑或
      *            <blockquote>{@code Pattern.compile(regex, CASE_INSENSITIVE | DOTALL);}</blockquote>
@@ -229,7 +204,6 @@ public final class RegexUtil{
      *            <li>{@link Pattern#CASE_INSENSITIVE} 匹配字符时与大小写无关，该标志默认只考虑US ASCII字符.</li>
      *            <li>{@link Pattern#MULTILINE} ^和$匹配一行的开始和结尾，而不是整个输入</li>
      *            <li>{@link Pattern#UNICODE_CASE} 当与CASE_INSENSITIVE结合时，使用Unicode字母匹配</li>
-     * 
      *            <li>{@link Pattern#CANON_EQ} 考虑Unicode字符的规范等价</li>
      *            <li>{@link Pattern#DOTALL} 当使用此标志时，.符号匹配包括行终止符在内的所有字符</li>
      *            <li>{@link Pattern#UNIX_LINES} 当在多行模式下匹配^和$时，只将'\n'看作行终止符</li>
@@ -240,11 +214,7 @@ public final class RegexUtil{
      *            </li>
      *            </ul>
      * @return the matcher
-     * @see String
-     * @see StringBuffer
-     * @see StringBuilder
      * @see Pattern#compile(String, int)
-     * @see RegexPattern
      * @since 1.0.7
      */
     private static Matcher getMatcher(String regexPattern,CharSequence input,int flags){

@@ -290,14 +290,11 @@ public final class URLConnectionUtil{
      * @param connectionConfig
      *            the connection config
      * @return the http url connection
-     * @throws MalformedURLException
-     *             the malformed url exception
      * @throws IOException
      *             the IO exception
      * @since 1.2.0
      */
-    private static HttpURLConnection openConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig)
-                    throws MalformedURLException,IOException{
+    private static HttpURLConnection openConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig) throws IOException{
 
         if (null == connectionConfig){
             connectionConfig = new ConnectionConfig();
