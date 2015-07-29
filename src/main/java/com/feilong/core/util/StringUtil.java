@@ -102,7 +102,7 @@ public final class StringUtil{
     // [start] search
 
     /**
-     * 查找子字符串在 字符串中出现的 次数
+     * 查找子字符串在 字符串中出现的次数.
      * 
      * <pre>
      *  StringUtil.searchTimes("xin", "xin")
@@ -168,7 +168,7 @@ public final class StringUtil{
 
     // [end]
     /**
-     * 给一串字符串前后增加两个引号<br>
+     * 给一串字符串前后增加两个引号.
      * 
      * <pre>
      * String text = &quot;jinxin.feilong&quot;;
@@ -187,6 +187,7 @@ public final class StringUtil{
 
     /**
      * 单词首字母大写.
+     * 
      * <p>
      * Example 1: jinxin ---> Jinxin
      * </p>
@@ -210,6 +211,7 @@ public final class StringUtil{
 
     /**
      * 单词首字母小写.
+     * 
      * <p>
      * Example 1: Jinxin ---> jinxin
      * </p>
@@ -252,7 +254,7 @@ public final class StringUtil{
     }
 
     /**
-     * 忽略 大小写 是否包含<br>
+     * 忽略 大小写 是否包含.
      * 
      * <pre>
      * StringUtil.isContainIgnoreCase(null, &quot;&quot;)  return false
@@ -304,20 +306,21 @@ public final class StringUtil{
      */
     public static String replaceAll(Object content,String regex,String replacement){
         if (null == content){
-            return "";
+            return StringUtils.EMPTY;
         }
         return content.toString().replaceAll(regex, replacement);
     }
 
     /**
-     * 使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串.<br>
+     * 使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串.
+     * 
+     * <p>
      * 该替换从字符串的开头朝末尾执行，例如，用 "b" 替换字符串 "aaa" 中的 "aa" 将生成 "ba" 而不是 "ab".
+     * </p>
      * 
      * <pre>
      * 处理了replacement为空的情况
      * </pre>
-     * 
-     * .
      * 
      * @param content
      *            内容
@@ -329,7 +332,7 @@ public final class StringUtil{
      */
     public static String replace(Object content,String target,Object replacement){
         if (null == content){
-            return "";
+            return StringUtils.EMPTY;
         }
         // 替换序列是null
         if (Validator.isNullOrEmpty(replacement)){
@@ -366,7 +369,7 @@ public final class StringUtil{
     }
 
     /**
-     * * The following example demonstrates this:
+     * The following example demonstrates this:
      * 
      * <pre>
      * Map valuesMap = HashMap();
@@ -395,8 +398,7 @@ public final class StringUtil{
      */
     public static <V> String replace(String templateString,Map<String, V> valuesMap){
         StrSubstitutor strSubstitutor = new StrSubstitutor(valuesMap);
-        String resolvedString = strSubstitutor.replace(templateString);
-        return resolvedString;
+        return strSubstitutor.replace(templateString);
     }
 
     // [end]

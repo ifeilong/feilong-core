@@ -74,7 +74,6 @@ import com.feilong.core.util.Validator;
  * 一个URI实例可以代表绝对的，也可以是相对的，只要它符合URI的语法规则;而URL类则不仅符合语义，还包含了定位该资源的信息，因此它不能是相对的，schema必须被指定。
  * </blockquote>
  * 
- * 
  * @author feilong
  * @version 1.0.0 2010-6-11 上午02:06:43
  * @see java.net.URI
@@ -96,6 +95,7 @@ public final class URIUtil{
 
     /**
      * 将网络文件下载到文件夹.
+     * 
      * <p>
      * 取到网络文件的文件名 原样下载到目标文件夹.
      * </p>
@@ -119,7 +119,7 @@ public final class URIUtil{
 
         LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
 
-        URL url = getUrl(urlString);
+        URL url = URLUtil.newURL(urlString);
         InputStream inputStream = url.openStream();
 
         File file = new File(urlString);
@@ -131,8 +131,11 @@ public final class URIUtil{
     }
 
     /**
-     * 基于 url字符串和charset创建 {@link URI}. <br>
-     * 内部调用 {@link URI#create(String)}方法<br>
+     * 基于 url字符串和charset创建 {@link URI}.
+     * 
+     * <p>
+     * 内部调用 {@link URI#create(String)}方法
+     * </p>
      * 
      * <p>
      * 如果url中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
@@ -163,14 +166,16 @@ public final class URIUtil{
     }
 
     /**
-     * 基于 url字符串和charset创建 {@link URI} <br>
-     * 内部调用 {@link URI#create(String)}方法<br>
+     * 基于 url字符串和charset创建 {@link URI}.
+     * 
+     * <p>
+     * 内部调用 {@link URI#create(String)}方法
+     * </p>
      * 
      * <p>
      * 如果url中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
      * 如果如果url中含?等参数,那么内部会调用 {@link #getEncodedUrlByArrayMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}创建
      * </p>
-     * .
      *
      * @param url
      *            url
@@ -219,6 +224,7 @@ public final class URIUtil{
 
     /**
      * call {@link java.net.URI#URI(String)}.
+     * 
      * <p>
      * 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个java.net.URISyntaxException.
      * </p>
@@ -231,8 +237,7 @@ public final class URIUtil{
     public static URI getURI(String path){
         try{
             // 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个java.net.URISyntaxException.
-            URI uri = new URI(path);
-            return uri;
+            return new URI(path);
         }catch (URISyntaxException e){
             LOGGER.error(Slf4jUtil.formatMessage("path:[{}]", path), e);
             throw new URIParseException(e);
@@ -241,6 +246,7 @@ public final class URIUtil{
 
     /**
      * 验证path是不是绝对路径.
+     * 
      * <p>
      * (调用了 {@link java.net.URI#isAbsolute()},原理是{@code url's scheme !=null} ).
      * </p>
@@ -349,7 +355,7 @@ public final class URIUtil{
      */
     public static String combineQueryString(Map<String, String[]> appendMap,String charsetType){
         if (Validator.isNullOrEmpty(appendMap)){
-            return "";
+            return StringUtils.EMPTY;
         }
 
         StringBuilder sb = new StringBuilder();
@@ -519,7 +525,7 @@ public final class URIUtil{
     @Deprecated
     public static String getBeforePath(String url){
         if (Validator.isNullOrEmpty(url)){
-            return "";
+            return StringUtils.EMPTY;
         }
         // 判断url中是否含有?
         int index = url.indexOf(URIComponents.QUESTIONMARK);
@@ -588,24 +594,6 @@ public final class URIUtil{
     }
 
     /**
-     * 获得 url.
-     *
-     * @param spec
-     *            the <code>String</code> to parse as a URL.
-     * @return the url
-     * @since 1.2.2
-     */
-    public static URL getUrl(String spec){
-        try{
-            URL url = new URL(spec);
-            return url;
-        }catch (MalformedURLException e){
-            LOGGER.error("MalformedURLException:", e);
-            throw new URIParseException(e);
-        }
-    }
-
-    /**
      * 将字符串路径转成url.
      *
      * @param filePathName
@@ -653,8 +641,12 @@ public final class URIUtil{
     //**************************************************************************************
 
     /**
-     * 加码,对参数值进行编码 <br>
+     * 加码,对参数值进行编码 .
+     * 
+     * <p>
      * 使用以下规则：
+     * </p>
+     * 
      * <ul>
      * <li>字母数字字符 "a" 到 "z"、"A" 到 "Z" 和 "0" 到 "9" 保持不变.</li>
      * <li>特殊字符 "."、"-"、"*" 和 "_" 保持不变.</li>
@@ -687,9 +679,12 @@ public final class URIUtil{
     }
 
     /**
-     * 解码,对参数值进行解码 <br>
+     * 解码,对参数值进行解码.
+     * 
+     * <p>
      * Decodes a <code>application/x-www-form-urlencoded</code> string using a specific encoding scheme. The supplied encoding is used to
      * determine what characters are represented by any consecutive sequences of the form "<code>%<i>xy</i></code>".
+     * </p>
      * 
      * <p>
      * Not doing so may introduce incompatibilites.<br>

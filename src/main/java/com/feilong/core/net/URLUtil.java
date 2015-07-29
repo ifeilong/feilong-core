@@ -22,6 +22,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 
@@ -33,6 +36,9 @@ import com.feilong.core.util.Validator;
  * @since 1.2.1
  */
 public final class URLUtil{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(URLUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private URLUtil(){
@@ -119,9 +125,25 @@ public final class URLUtil{
      */
     public static URI toURI(URL url){
         try{
-            URI uri = url.toURI();
-            return uri;
+            return url.toURI();
         }catch (URISyntaxException e){
+            throw new URIParseException(e);
+        }
+    }
+
+    /**
+     * New url.
+     *
+     * @param spec
+     *            the <code>String</code> to parse as a URL.
+     * @return the url
+     * @since 1.3.0
+     */
+    public static URL newURL(String spec){
+        try{
+            return new URL(spec);
+        }catch (MalformedURLException e){
+            LOGGER.error("MalformedURLException:", e);
             throw new URIParseException(e);
         }
     }
