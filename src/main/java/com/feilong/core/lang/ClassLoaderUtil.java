@@ -111,6 +111,7 @@ public final class ClassLoaderUtil{
 
     /**
      * 查找具有给定名称的资源.
+     * 
      * <p>
      * "",表示classes 的根目录
      * </p>
@@ -274,8 +275,7 @@ public final class ClassLoaderUtil{
      * @since 1.2.1
      */
     public static URL getResource(ClassLoader classLoader,String resourceName){
-        URL url = classLoader.getResource(resourceName);
-        return url;
+        return classLoader.getResource(resourceName);
     }
 
     /**

@@ -80,8 +80,7 @@ public final class MapUtil{
                 sb.append(value);
             }
         }
-        String merData = sb.toString();
-        return merData;
+        return sb.toString();
     }
 
     /**
@@ -103,13 +102,14 @@ public final class MapUtil{
     public static <K, T extends Number> T getMinValue(Map<K, T> map,K[] keys){
         Map<K, T> subMap = getSubMap(map, keys);
 
-        if (null != subMap){
-            Collection<T> values = subMap.values();
-            Object[] array = values.toArray();
-            Arrays.sort(array);
-            return (T) array[0];
+        if (null == subMap){
+            return null;
         }
-        return null;
+
+        Collection<T> values = subMap.values();
+        Object[] array = values.toArray();
+        Arrays.sort(array);
+        return (T) array[0];
     }
 
     /**
@@ -182,6 +182,7 @@ public final class MapUtil{
 
     /**
      * map的key和value互转.
+     * 
      * <p>
      * 这个操作map预先良好的定义.如果传过来的map,不同的key有相同的balue, 那么返回的map (key)只会有一个(value), 其他重复的key被丢掉了
      * </p>

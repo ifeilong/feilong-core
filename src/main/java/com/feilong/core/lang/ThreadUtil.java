@@ -71,9 +71,7 @@ public final class ThreadUtil{
 
         LOGGER.debug(JsonUtil.format(getThreadGroupInfoMapForLog(topThreadGroup)));
         // 返回此线程组中活动线程的估计数.
-        int topThreadGroupActiveCount = topThreadGroup.activeCount();
-
-        return topThreadGroupActiveCount;
+        return topThreadGroup.activeCount();
     }
 
     /**
@@ -342,7 +340,6 @@ public final class ThreadUtil{
 
         }
         StackTraceElement stackTraceElement = stackTraceElements[index];
-        String methodName = stackTraceElement.getMethodName();
-        return methodName;
+        return stackTraceElement.getMethodName();
     }
 }

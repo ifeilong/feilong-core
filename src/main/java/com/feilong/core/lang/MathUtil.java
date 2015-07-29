@@ -40,8 +40,7 @@ public final class MathUtil{
      * @return the double
      */
     public static double radian2Degree(double radians){
-        double degree = radians * 180 / Math.PI;
-        return degree;
+        return radians * 180 / Math.PI;
     }
 
     /**
@@ -52,7 +51,6 @@ public final class MathUtil{
      * @return the double
      */
     public static double degree2Radian(double degree){
-        double radians = degree * Math.PI / 180;
-        return radians;
+        return degree * Math.PI / 180;
     }
 }

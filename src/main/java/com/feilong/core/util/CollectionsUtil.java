@@ -260,8 +260,7 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(enumeration)){
             return Collections.emptyList();
         }
-        ArrayList<T> list = Collections.list(enumeration);
-        return list;
+        return Collections.list(enumeration);
     }
 
     /**

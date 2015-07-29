@@ -46,9 +46,12 @@ public final class PropertiesUtil implements BaseConfigure{
     }
 
     /**
-     * 转换成map<br>
+     * 转换成map.
+     * 
+     * <p>
      * Create a new HashMap and pass an instance of Properties.<br>
      * Properties is an implementation of a Map which keys and values stored as in a string.
+     * </p>
      * 
      * @param properties
      *            the properties
@@ -57,8 +60,7 @@ public final class PropertiesUtil implements BaseConfigure{
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Map<String, String> toMap(Properties properties){
-        Map<String, String> map = new HashMap<String, String>((Map) properties);
-        return map;
+        return new HashMap<String, String>((Map) properties);
     }
 
     // [start] getPropertiesValue

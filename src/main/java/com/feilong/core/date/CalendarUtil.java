@@ -219,8 +219,7 @@ public final class CalendarUtil{
      */
     public static Calendar toCalendar(String dateString,String datePattern){
         Date date = DateUtil.string2Date(dateString, datePattern);
-        Calendar calendar = DateUtil.toCalendar(date);
-        return calendar;
+        return DateUtil.toCalendar(date);
     }
 
     /**

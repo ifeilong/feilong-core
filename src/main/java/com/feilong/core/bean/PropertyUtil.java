@@ -69,8 +69,7 @@ public final class PropertyUtil{
     public static Map<String, Object> describe(Object bean){
         try{
             //Return the entire set of properties for which the specified bean provides a read method.
-            Map<String, Object> propertyMap = PropertyUtils.describe(bean);
-            return propertyMap;
+            return PropertyUtils.describe(bean);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
@@ -131,7 +130,6 @@ public final class PropertyUtil{
     public static void setProperty(Object bean,String name,Object value){
         try{
             //Set the value of the specified property of the specified bean, no matter which property reference format is used, with no type conversions.
-
             // PropertyUtils的功能类似于BeanUtils,但在底层不会对传递的数据做转换处理
             PropertyUtils.setProperty(bean, name, value);
         }catch (Exception e){
@@ -202,13 +200,12 @@ public final class PropertyUtil{
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtilsBean
      */
+    @SuppressWarnings("unchecked")
     public static <T> T getProperty(Object bean,String name){
         //Return the value of the specified property of the specified bean, no matter which property reference format is used, with no type conversions.
         //For more details see PropertyUtilsBean.
         try{
-            @SuppressWarnings("unchecked")
-            T propertyValue = (T) PropertyUtils.getProperty(bean, name);
-            return propertyValue;
+            return (T) PropertyUtils.getProperty(bean, name);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);

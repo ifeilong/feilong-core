@@ -96,8 +96,7 @@ public final class InputStreamUtil{
 
             // 缓冲 高效读取  bufferedReader 
             // 包装所有其 read() 操作可能开销很高的 Reader（如 FileReader 和 InputStreamReader）.
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            return bufferedReader;
+            return new BufferedReader(reader);
         }catch (UnsupportedEncodingException e){
             throw new UncheckedIOException(e);
         }

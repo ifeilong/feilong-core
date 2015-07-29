@@ -72,12 +72,12 @@ public final class RegexUtil{
     }
 
     /**
-     * 返回在以前匹配操作期间由给定组捕获的输入子序列.<br>
+     * 返回在以前匹配操作期间由给定组捕获的输入子序列.
      * 
+     * <p>
      * 对于匹配器 m、输入序列 s 和组索引 g，表达式 m.group(g) 和 s.substring(m.start(g), m.end(g)) 是等效的. <br>
-     * 
      * 捕获组是从 1 开始从左到右的索引.组0表示整个模式，因此表达式 m.group(0) 等效于 m.group().
-     * 
+     * </p>
      * 
      * <pre>
      * {@code
@@ -154,12 +154,12 @@ public final class RegexUtil{
     }
 
     /**
-     * 返回在以前匹配操作期间由给定组捕获的输入子序列.<br>
+     * 返回在以前匹配操作期间由给定组捕获的输入子序列.
      * 
+     * <p>
      * 对于匹配器 m、输入序列 s 和组索引 g，表达式 m.group(g) 和 s.substring(m.start(g), m.end(g)) 是等效的. <br>
-     * 
      * 捕获组是从 1 开始从左到右的索引.组0表示整个模式，因此表达式 m.group(0) 等效于 m.group().
-     * 
+     * </p>
      * 
      * <pre>
      * {@code
@@ -168,8 +168,6 @@ public final class RegexUtil{
      * 		String email = "venusdrogon@163.com";
      * 		LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");--->venusdrogon
      * 		LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");--->163.com
-     * 
-     * 
      * }
      * </pre>
      * 
@@ -251,7 +249,6 @@ public final class RegexUtil{
      */
     private static Matcher getMatcher(String regexPattern,CharSequence input,int flags){
         Pattern pattern = Pattern.compile(regexPattern, flags);
-        Matcher matcher = pattern.matcher(input);
-        return matcher;
+        return pattern.matcher(input);
     }
 }

@@ -131,8 +131,7 @@ public final class DateExtensionUtil{
         // ***************************
         calendar.add(Calendar.DATE, 1);
         Date tomorrow = calendar.getTime();
-        Date[] dates = { today, tomorrow };
-        return dates;
+        return new Date[] { today, tomorrow };
     }
 
     /**
@@ -159,8 +158,7 @@ public final class DateExtensionUtil{
         Date today = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
         Date yesterday = calendar.getTime();
-        Date[] dates = { yesterday, today };
-        return dates;
+        return new Date[] { yesterday, today };
     }
 
     // [end]
@@ -412,14 +410,15 @@ public final class DateExtensionUtil{
      *         否则循环date转成string,返回{@code List<String>}
      */
     public static List<String> toStringList(List<Date> dateList,String datePattern){
-        if (Validator.isNotNullOrEmpty(dateList)){
-            List<String> stringList = new ArrayList<String>();
-            for (Date date : dateList){
-                stringList.add(DateUtil.date2String(date, datePattern));
-            }
-            return stringList;
+        if (Validator.isNullOrEmpty(dateList)){
+            return Collections.emptyList();
         }
-        return null;
+
+        List<String> stringList = new ArrayList<String>();
+        for (Date date : dateList){
+            stringList.add(DateUtil.date2String(date, datePattern));
+        }
+        return stringList;
     }
 
     /**

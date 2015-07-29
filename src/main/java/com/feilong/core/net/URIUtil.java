@@ -157,8 +157,7 @@ public final class URIUtil{
     public static URI create(String url,String charsetType){
         try{
             String encodeUrl = encodeUrl(url, charsetType);
-            URI uri = URI.create(encodeUrl);
-            return uri;
+            return URI.create(encodeUrl);
         }catch (Exception e){
             LOGGER.error("Exception:", e);
             throw new URIParseException(e);

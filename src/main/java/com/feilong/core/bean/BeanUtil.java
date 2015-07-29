@@ -172,12 +172,11 @@ public final class BeanUtil{
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @since 1.0
      */
+    @SuppressWarnings("unchecked")
     public static <T> T cloneBean(T bean){
         try{
             //Clone a bean based on the available property getters and setters, even if the bean class itself does not implement Cloneable.
-            @SuppressWarnings("unchecked")
-            T cloneBean = (T) BeanUtils.cloneBean(bean);
-            return cloneBean;
+            return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
@@ -215,8 +214,7 @@ public final class BeanUtil{
     public static Map<String, String> describe(Object bean){
         try{
             //Return the entire set of properties for which the specified bean provides a read method.
-            Map<String, String> propertyMap = BeanUtils.describe(bean);
-            return propertyMap;
+            return BeanUtils.describe(bean);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
@@ -547,8 +545,7 @@ public final class BeanUtil{
         // Return the value of the specified property of the specified bean,
         // no matter which property reference format is used, as a String.
         try{
-            String propertyValue = BeanUtils.getProperty(bean, name);
-            return propertyValue;
+            return BeanUtils.getProperty(bean, name);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);

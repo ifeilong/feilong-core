@@ -117,8 +117,7 @@ public final class ByteUtil{
         byte b0 = Byte.decode("0x" + new String(new byte[] { byte1 })).byteValue();
         b0 = (byte) (b0 << 4);
         byte b1 = Byte.decode("0x" + new String(new byte[] { byte2 })).byteValue();
-        byte ret = (byte) (b0 ^ b1);
-        return ret;
+        return (byte) (b0 ^ b1);
     }
 
     /**

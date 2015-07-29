@@ -150,13 +150,13 @@ public final class NumberUtil{
      * @since 1.0.7
      */
     public static BigDecimal toNoScale(Serializable number,RoundingMode roundingMode){
-        if (Validator.isNotNullOrEmpty(number)){
-            //　将int、long、double、string类型的数值转为BigDecimal.使用double会造成精度丢失，
-            //而使用BigDecimal就是为了解决精度丢失的问题，建议使用String方式转换.
-            BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
-            return setScale(bigDecimal, 0, roundingMode);
+        if (Validator.isNullOrEmpty(number)){
+            return null;
         }
-        return null;
+        //　将int、long、double、string类型的数值转为BigDecimal.使用double会造成精度丢失，
+        //而使用BigDecimal就是为了解决精度丢失的问题，建议使用String方式转换.
+        BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
+        return setScale(bigDecimal, 0, roundingMode);
     }
 
     // ***********************************************************************************
@@ -359,8 +359,7 @@ public final class NumberUtil{
         }
 
         BigDecimal multiplicand = ConvertUtil.toBigDecimal(two);
-        BigDecimal result = one.multiply(multiplicand);
-        return result;
+        return one.multiply(multiplicand);
     }
 
     /**
@@ -420,8 +419,7 @@ public final class NumberUtil{
         }
 
         // 其他情况其他情况(两个数都不为空),返回 第一个数+第二个数
-        BigDecimal add = ConvertUtil.toBigDecimal(one).add(augend);
-        return add;
+        return ConvertUtil.toBigDecimal(one).add(augend);
     }
 
     /**
@@ -463,8 +461,7 @@ public final class NumberUtil{
         long avgRankLong = Math.round(Double.parseDouble(value.toString()) * 2);
 
         BigDecimal avgBigDecimal = BigDecimal.valueOf((double) (avgRankLong) / 2);
-        String avgRank = setScale(avgBigDecimal, 1).toString();
-        return avgRank;
+        return setScale(avgBigDecimal, 1).toString();
     }
 
     /**
@@ -538,17 +535,18 @@ public final class NumberUtil{
      *         如果是0 ,则返回true
      */
     public static boolean isSpecificNumber(Serializable value,String specificNumber){
-        boolean flag = false;
-        if (Validator.isNotNullOrEmpty(value)){
-            String valueString = value.toString();
-            // Number /String
-            if (value instanceof Number || value instanceof String){
-                BigDecimal bigDecimal = ConvertUtil.toBigDecimal(valueString);
-                int i = bigDecimal.compareTo(ConvertUtil.toBigDecimal(specificNumber));
-                flag = (i == 0);
-            }
+        if (Validator.isNullOrEmpty(value)){
+            return false;
         }
-        return flag;
+
+        String valueString = value.toString();
+        // Number /String
+        if (value instanceof Number || value instanceof String){
+            BigDecimal bigDecimal = ConvertUtil.toBigDecimal(valueString);
+            int i = bigDecimal.compareTo(ConvertUtil.toBigDecimal(specificNumber));
+            return i == 0;
+        }
+        return false;
     }
 
     /**
@@ -561,8 +559,6 @@ public final class NumberUtil{
      * <p style="color:red">
      * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2
      * </p>
-     * 
-     * 
      * 
      * @param number
      *            number

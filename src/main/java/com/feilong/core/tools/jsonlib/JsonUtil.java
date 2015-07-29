@@ -367,8 +367,7 @@ public final class JsonUtil{
             return null;
         }
         JSON json = toJSON(obj, jsonConfig);
-        String string = json.toString(indentFactor, indent);
-        return string;
+        return json.toString(indentFactor, indent);
     }
 
     // [end]
@@ -792,8 +791,7 @@ public final class JsonUtil{
      */
     public static JSON xmlToJSON(String xml){
         XMLSerializer xmlSerializer = new XMLSerializer();
-        JSON json = xmlSerializer.read(xml);
-        return json;
+        return xmlSerializer.read(xml);
     }
 
     // [end]

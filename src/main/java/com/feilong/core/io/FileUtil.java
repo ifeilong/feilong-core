@@ -101,9 +101,7 @@ public final class FileUtil{
                 byteArrayOutputStream.write(bytes, 0, j);
             }
             byteArrayOutputStream.flush();
-
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
-            return byteArray;
+            return byteArrayOutputStream.toByteArray();
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
@@ -165,8 +163,7 @@ public final class FileUtil{
     //默认 Access Modifiers 权限修饰符
     static FileOutputStream getFileOutputStream(String filePath,boolean append){
         try{
-            FileOutputStream fileOutputStream = new FileOutputStream(filePath, append);
-            return fileOutputStream;
+            return new FileOutputStream(filePath, append);
         }catch (FileNotFoundException e){
             throw new UncheckedIOException(e);
         }
@@ -202,8 +199,7 @@ public final class FileUtil{
     public static FileInputStream getFileInputStream(File file){
         try{
             // 如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException.
-            FileInputStream fileInputStream = new FileInputStream(file);
-            return fileInputStream;
+            return new FileInputStream(file);
         }catch (FileNotFoundException e){
             throw new UncheckedIOException(e);
         }
@@ -248,8 +244,7 @@ public final class FileUtil{
                 LOGGER.debug(fileName);
             }
         }
-        boolean flag = (fileListLength == 0);
-        return flag;
+        return (fileListLength == 0);
     }
 
     // [start] 文件夹操作(createDirectory/deleteFileOrDirectory/deleteFileOrDirectory)
@@ -388,7 +383,8 @@ public final class FileUtil{
     // [start] 解析文件名称
 
     /**
-     * 将一个文件使用新的文件后缀,其余部分不变
+     * 将一个文件使用新的文件后缀,其余部分不变.
+     * 
      * <p>
      * 如果一个文件没有后缀,将会添加 .+newPostfixName
      * </p>
@@ -436,10 +432,7 @@ public final class FileUtil{
     public static boolean hasPostfixName(String fileName){
         String fileNameString = getFileName(fileName);
         int lastIndexOf = fileNameString.lastIndexOf(".");
-        if (-1 == lastIndexOf){
-            return false;
-        }
-        return true;
+        return -1 != lastIndexOf;
     }
 
     /**
@@ -464,8 +457,7 @@ public final class FileUtil{
      */
     public static String getFilePostfixName(String fileName){
         if (hasPostfixName(fileName)){
-            String filePostfixName = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-            return filePostfixName;
+            return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
         }
         return StringUtils.EMPTY;
     }
@@ -573,8 +565,7 @@ public final class FileUtil{
             throw new NullPointerException("pathname can't be null/empty!");
         }
         File file = new File(path);
-        String parent = file.getParent();
-        return parent;
+        return file.getParent();
     }
 
     /**

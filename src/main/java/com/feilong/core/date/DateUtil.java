@@ -1298,8 +1298,7 @@ public final class DateUtil{
      * @see Date#before(Date)
      */
     public static boolean isInTime(Date date,Date beginTimeDate,Date endTimeDate){
-        boolean flag = date.after(beginTimeDate) && date.before(endTimeDate);
-        return flag;
+        return date.after(beginTimeDate) && date.before(endTimeDate);
     }
 
     // [end]

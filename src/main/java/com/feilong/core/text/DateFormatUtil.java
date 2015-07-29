@@ -79,8 +79,7 @@ public class DateFormatUtil{
      */
     public static String format(Date date,String pattern,Locale locale){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
-        String format = simpleDateFormat.format(date);
-        return format;
+        return simpleDateFormat.format(date);
     }
 
     // [end]
@@ -123,8 +122,7 @@ public class DateFormatUtil{
         }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
         ParsePosition parsePosition = new ParsePosition(0);
-        Date date = simpleDateFormat.parse(dateString, parsePosition);
-        return date;
+        return simpleDateFormat.parse(dateString, parsePosition);
     }
 
     // [end]

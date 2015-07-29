@@ -343,8 +343,7 @@ public final class SystemUtil{
      */
     public static Map<String, String> getPropertiesMapForLog(){
         Properties properties = System.getProperties();
-        Map<String, String> map = new TreeMap<String, String>(PropertiesUtil.toMap(properties));
-        return map;
+        return new TreeMap<String, String>(PropertiesUtil.toMap(properties));
     }
 
     /**
@@ -358,8 +357,7 @@ public final class SystemUtil{
      */
     public static Map<String, String> getEnvMapForLog(){
         Map<String, String> envMap = System.getenv();
-        Map<String, String> map = new TreeMap<String, String>(envMap);
-        return map;
+        return new TreeMap<String, String>(envMap);
     }
 
     /**

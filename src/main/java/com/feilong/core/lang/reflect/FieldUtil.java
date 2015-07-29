@@ -215,8 +215,7 @@ public final class FieldUtil{
      */
     public static Field getDeclaredField(Class<?> clz,String name){
         try{
-            Field field = clz.getDeclaredField(name);
-            return field;
+            return clz.getDeclaredField(name);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
@@ -270,8 +269,7 @@ public final class FieldUtil{
         try{
             Class<?> ownerClass = owner.getClass();
             Field field = ownerClass.getField(fieldName);
-            Object property = field.get(owner);
-            return (T) property;
+            return (T) field.get(owner);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
@@ -306,8 +304,7 @@ public final class FieldUtil{
         try{
             Class<?> ownerClass = ClassUtil.loadClass(className);
             Field field = ownerClass.getField(fieldName);
-            Object property = field.get(ownerClass);
-            return (T) property;
+            return (T) field.get(ownerClass);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);

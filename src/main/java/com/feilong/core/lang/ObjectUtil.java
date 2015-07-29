@@ -166,8 +166,7 @@ public final class ObjectUtil{
         // Enumeration
         else if (object instanceof Enumeration){
             Enumeration<T> enumeration = (Enumeration<T>) object;
-            EnumerationIterator<T> enumerationIterator = new EnumerationIterator<T>(enumeration);
-            return enumerationIterator;
+            return new EnumerationIterator<T>(enumeration);
         }
         // map
         else if (object instanceof Map){

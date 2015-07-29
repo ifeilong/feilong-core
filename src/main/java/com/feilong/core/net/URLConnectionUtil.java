@@ -210,8 +210,7 @@ public final class URLConnectionUtil{
     public static InputStream getInputStream(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         HttpURLConnection httpURLConnection = getHttpURLConnection(httpRequest, connectionConfig);
         try{
-            InputStream inputStream = httpURLConnection.getInputStream();
-            return inputStream;
+            return httpURLConnection.getInputStream();
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
@@ -336,11 +335,10 @@ public final class URLConnectionUtil{
      * @see java.net.InetSocketAddress#InetSocketAddress(String, int)
      */
     private static Proxy getProxy(String proxyAddress,Integer proxyPort){
-        Proxy proxy = null;
         if (Validator.isNotNullOrEmpty(proxyAddress) && Validator.isNotNullOrEmpty(proxyPort)){
             SocketAddress socketAddress = new InetSocketAddress(proxyAddress, proxyPort);
-            proxy = new Proxy(Proxy.Type.HTTP, socketAddress);
+            return new Proxy(Proxy.Type.HTTP, socketAddress);
         }
-        return proxy;
+        return null;
     }
 }
