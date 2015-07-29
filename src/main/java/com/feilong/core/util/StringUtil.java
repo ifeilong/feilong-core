@@ -490,13 +490,13 @@ public final class StringUtil{
      * @return
      *         <pre>
      * {@code
-     * 		Validator.isNullOrEmpty(textValue),	return null
-     * 		startIndex>textLength - 1,			return null
-     * 		startIndex==textLength - 1,			return substringLast(textString, 1)
-     * 		length<1,							return null
-     * 		1 == length,							return textString.substring(startIndex, startIndex + 1)
-     * 		remainLength > length,				return textString.substring(startIndex, startIndex + length)
-     * 		remainLength <= length,				return textString.substring(startIndex)
+     *      Validator.isNullOrEmpty(textValue), return null
+     *      startIndex>textLength - 1,          return null
+     *      startIndex==textLength - 1,         return substringLast(textString, 1)
+     *      length<1,                           return null
+     *      1 == length,                            return textString.substring(startIndex, startIndex + 1)
+     *      remainLength > length,              return textString.substring(startIndex, startIndex + length)
+     *      remainLength <= length,             return textString.substring(startIndex)
      * }
      * </pre>
      */

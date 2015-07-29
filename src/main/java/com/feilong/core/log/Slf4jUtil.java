@@ -54,10 +54,10 @@ public final class Slf4jUtil{
      * <pre>
      * 比如
      * throw new IllegalArgumentException(Slf4jUtil.formatMessage(
-     * 	"callbackUrl:[{}] ,length:[{}] can't {@code >}{}",
-     * 	callbackUrl,
-     * 	callbackUrlLength,
-     * 	callbackUrlMaxLength)
+     *  "callbackUrl:[{}] ,length:[{}] can't {@code >}{}",
+     *  callbackUrl,
+     *  callbackUrlLength,
+     *  callbackUrlMaxLength)
      * 
      * 又或者
      * return Slf4jUtil.formatMessage(" {} [{}]", encode, encode.length());

@@ -21,10 +21,10 @@ import com.feilong.core.log.Slf4jUtil;
 //
 //这两种Exception的区别主要是CheckedException需要用try...catch...显示的捕获，
 //而UncheckedException不需要捕获. 通常UncheckedException又叫做RuntimeException.
-//	
+//  
 //《effective java》指出：
-//	对于可恢复的条件使用被检查的异常（CheckedException），
-//	对于程序错误（言外之意不可恢复，大错已经酿成）使用运行时异常（RuntimeException）.
+//  对于可恢复的条件使用被检查的异常（CheckedException），
+//  对于程序错误（言外之意不可恢复，大错已经酿成）使用运行时异常（RuntimeException）.
 
 /**
  * 使用 beanutil出现的异常.

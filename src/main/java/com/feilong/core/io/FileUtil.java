@@ -392,7 +392,7 @@ public final class FileUtil{
      * <pre>
      * {@code
      * Example 1:
-     * 		String fileName="F:/pie2.png";
+     *      String fileName="F:/pie2.png";
      *       FileUtil.getNewFileName(fileName, "gif")
      *       
      *       return F:/pie2.gif
@@ -798,8 +798,8 @@ public final class FileUtil{
      * @since 1.0.7
      */
     private static final String[][] MICROSOFT_PC  = { //
-                                                  //			{ "\\", "" }, // \
-            //	{ "/", "" }, // /
+                                                  //            { "\\", "" }, // \
+            //  { "/", "" }, // /
             { "\"", "" }, // "
             { ":", "" }, // :
             { "*", "" }, // *

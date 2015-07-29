@@ -82,9 +82,9 @@ public final class RegexUtil{
      * <pre>
      * {@code
      * Example 1:
-     * 		String regexPattern = "(.*?)@(.*?)";
-     * 		String email = "venusdrogon@163.com";
-     * 		RegexUtil.group(regexPattern, email);
+     *      String regexPattern = "(.*?)@(.*?)";
+     *      String email = "venusdrogon@163.com";
+     *      RegexUtil.group(regexPattern, email);
      * 
      * 返回 
      *    0 venusdrogon@163.com
@@ -164,10 +164,10 @@ public final class RegexUtil{
      * <pre>
      * {@code
      * Example 1:
-     * 		String regexPattern = "(.*?)@(.*?)";
-     * 		String email = "venusdrogon@163.com";
-     * 		LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");--->venusdrogon
-     * 		LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");--->163.com
+     *      String regexPattern = "(.*?)@(.*?)";
+     *      String email = "venusdrogon@163.com";
+     *      LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");--->venusdrogon
+     *      LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");--->163.com
      * }
      * </pre>
      * 

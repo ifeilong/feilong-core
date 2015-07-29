@@ -55,7 +55,7 @@ public final class EnumUtil{
      * 适用于这种{@link HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
-     * 	EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
+     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * }
      * </pre>
      *
@@ -84,7 +84,7 @@ public final class EnumUtil{
      * 适用于这种{@link HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
-     * 	EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
+     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * }
      * </pre>
      *
@@ -114,7 +114,7 @@ public final class EnumUtil{
      * 适用于这种{@link HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
-     * 	EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
+     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * }
      * </pre>
      *

@@ -668,9 +668,9 @@ public final class DateUtil{
      * @since 1.0.7
      */
     public static int getWeekOfYear(Date date){
-        //		Calendar calendar = DateUtil.toCalendar(date);
-        //		calendar.setMinimalDaysInFirstWeek(7);
-        //		return calendar.get(Calendar.WEEK_OF_YEAR);
+        //      Calendar calendar = DateUtil.toCalendar(date);
+        //      calendar.setMinimalDaysInFirstWeek(7);
+        //      return calendar.get(Calendar.WEEK_OF_YEAR);
         return CalendarUtil.getCalendarFieldValue(date, Calendar.WEEK_OF_YEAR);
     }
 

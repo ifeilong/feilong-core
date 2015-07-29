@@ -202,12 +202,12 @@ public final class NumberUtil{
      * <pre>
      * {@code
      *   Example 1:  
-     *   	NumberUtil.getProgress(5, 5, "##%")
-     *   	return 100%
+     *      NumberUtil.getProgress(5, 5, "##%")
+     *      return 100%
      *   
      *   Example 2:
-     *   	NumberUtil.getProgress(2, 3, "#0.0%")
-     *   	return 66.7%
+     *      NumberUtil.getProgress(2, 3, "#0.0%")
+     *      return 66.7%
      * }
      * </pre>
      *
