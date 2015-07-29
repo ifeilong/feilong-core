@@ -85,25 +85,26 @@ public final class IntrospectorUtil{
         Class<?> stopClass = beanClass.getSuperclass();
         BeanInfo beanInfo = Introspector.getBeanInfo(beanClass, stopClass);
 
+        if (null == beanInfo){
+            return Collections.emptyMap();
+        }
+
         Map<String, Object> map = new LinkedHashMap<String, Object>();
 
-        if (null != beanInfo){
+        //内省成员属性
+        List<String> propertyDescriptorList = getPropertyDescriptorListForLog(beanInfo);
+        map.put("beanInfo propertyDescriptor", propertyDescriptorList);
 
-            //内省成员属性
-            List<String> propertyDescriptorList = getPropertyDescriptorListForLog(beanInfo);
-            map.put("beanInfo propertyDescriptor", propertyDescriptorList);
+        //内省成员方法
+        List<String> methodDescriptorList = getMethodDescriptorForLog(beanInfo);
+        map.put("beanInfo methodDescriptor", methodDescriptorList);
 
-            //内省成员方法
-            List<String> methodDescriptorList = getMethodDescriptorForLog(beanInfo);
-            map.put("beanInfo methodDescriptor", methodDescriptorList);
+        //内省绑定事件
+        List<String> eventSetDescriptorList = getEventSetDescriptorListForLog(beanInfo);
+        map.put("beanInfo eventSetDescriptor", eventSetDescriptorList);
 
-            //内省绑定事件
-            List<String> eventSetDescriptorList = getEventSetDescriptorListForLog(beanInfo);
-            map.put("beanInfo eventSetDescriptor", eventSetDescriptorList);
-
-            map.put("beanInfo.getDefaultEventIndex()", beanInfo.getDefaultEventIndex());
-            map.put("beanInfo.getDefaultPropertyIndex()", beanInfo.getDefaultPropertyIndex());
-        }
+        map.put("beanInfo.getDefaultEventIndex()", beanInfo.getDefaultEventIndex());
+        map.put("beanInfo.getDefaultPropertyIndex()", beanInfo.getDefaultPropertyIndex());
         return map;
     }
 
@@ -116,29 +117,26 @@ public final class IntrospectorUtil{
      * @since 1.0.9
      */
     private static List<String> getPropertyDescriptorListForLog(BeanInfo beanInfo){
-
         //用于获取该Bean中的所有允许公开的成员属性，以PropertyDescriptor数组的形式返回
         PropertyDescriptor[] propertyDescriptorArray = beanInfo.getPropertyDescriptors();
-
-        if (Validator.isNotNullOrEmpty(propertyDescriptorArray)){
-
-            List<String> propertyDescriptorList = new ArrayList<String>(propertyDescriptorArray.length);
-
-            //PropertyDescriptor类 用于描述一个成员属性
-            for (PropertyDescriptor propertyDescriptor : propertyDescriptorArray){
-
-                //获得该属性的名字
-                String propertyDescriptorName = propertyDescriptor.getName();
-
-                // 获得该属性的数据类型，以Class的形式给出
-                Class<?> propertyType = propertyDescriptor.getPropertyType();
-                propertyDescriptorList.add(propertyType.getName() + " " + propertyDescriptorName);
-            }
-
-            Collections.sort(propertyDescriptorList);
-            return propertyDescriptorList;
+        if (Validator.isNullOrEmpty(propertyDescriptorArray)){
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
+
+        List<String> propertyDescriptorList = new ArrayList<String>(propertyDescriptorArray.length);
+
+        //PropertyDescriptor类 用于描述一个成员属性
+        for (PropertyDescriptor propertyDescriptor : propertyDescriptorArray){
+            //获得该属性的名字
+            String propertyDescriptorName = propertyDescriptor.getName();
+
+            // 获得该属性的数据类型，以Class的形式给出
+            Class<?> propertyType = propertyDescriptor.getPropertyType();
+            propertyDescriptorList.add(propertyType.getName() + " " + propertyDescriptorName);
+        }
+
+        Collections.sort(propertyDescriptorList);
+        return propertyDescriptorList;
     }
 
     /**
@@ -150,51 +148,47 @@ public final class IntrospectorUtil{
      * @since 1.0.9
      */
     private static List<String> getMethodDescriptorForLog(BeanInfo beanInfo){
-
         //用于获取该Bean中的所有允许公开的成员方法，以MethodDescriptor数组的形式返回
         MethodDescriptor[] methodDescriptorArray = beanInfo.getMethodDescriptors();
-
-        if (Validator.isNotNullOrEmpty(methodDescriptorArray)){
-
-            List<String> methodDescriptorList = new ArrayList<String>(methodDescriptorArray.length);
-
-            //MethodDescriptor类 用于记载一个成员方法的所有信息
-            for (MethodDescriptor methodDescriptor : methodDescriptorArray){
-
-                //获得一个成员方法描述器所代表的方法的名字   
-                String methodName = methodDescriptor.getName();
-
-                //获得该方法对象   
-                Method method = methodDescriptor.getMethod();
-
-                //通过方法对象获得该方法的所有参数，以Class数组的形式返回   
-                Class<?>[] parameterTypes = method.getParameterTypes();
-
-                if (Validator.isNotNullOrEmpty(parameterTypes)){
-
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0, j = parameterTypes.length; i < j; ++i){
-                        //获得参数的类型的名字   
-                        Class<?> parameterType = parameterTypes[i];
-
-                        String methodParams = parameterType.getName();
-                        sb.append(methodParams);
-
-                        // 不是最后一个 拼接
-                        if (i != j - 1){
-                            sb.append(",");
-                        }
-                    }
-                    methodDescriptorList.add(methodName + "(" + sb.toString() + ")");
-                }else{
-                    methodDescriptorList.add(methodName + "()");
-                }
-            }
-
-            Collections.sort(methodDescriptorList);
-            return methodDescriptorList;
+        if (Validator.isNullOrEmpty(methodDescriptorArray)){
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
+
+        List<String> methodDescriptorList = new ArrayList<String>(methodDescriptorArray.length);
+        //MethodDescriptor类 用于记载一个成员方法的所有信息
+        for (MethodDescriptor methodDescriptor : methodDescriptorArray){
+
+            //获得一个成员方法描述器所代表的方法的名字   
+            String methodName = methodDescriptor.getName();
+
+            //获得该方法对象   
+            Method method = methodDescriptor.getMethod();
+
+            //通过方法对象获得该方法的所有参数，以Class数组的形式返回   
+            Class<?>[] parameterTypes = method.getParameterTypes();
+
+            if (Validator.isNotNullOrEmpty(parameterTypes)){
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0, j = parameterTypes.length; i < j; ++i){
+                    //获得参数的类型的名字   
+                    Class<?> parameterType = parameterTypes[i];
+
+                    String methodParams = parameterType.getName();
+                    sb.append(methodParams);
+
+                    // 不是最后一个 拼接
+                    if (i != j - 1){
+                        sb.append(",");
+                    }
+                }
+                methodDescriptorList.add(methodName + "(" + sb.toString() + ")");
+            }else{
+                methodDescriptorList.add(methodName + "()");
+            }
+        }
+
+        Collections.sort(methodDescriptorList);
+        return methodDescriptorList;
     }
 
     /**
@@ -208,22 +202,22 @@ public final class IntrospectorUtil{
     private static List<String> getEventSetDescriptorListForLog(BeanInfo beanInfo){
         //用于获取该Bean中的所有允许公开的成员事件，以EventSetDescriptor数组的形式返回
         EventSetDescriptor[] eventSetDescriptorArray = beanInfo.getEventSetDescriptors();
-
-        if (Validator.isNotNullOrEmpty(eventSetDescriptorArray)){
-            List<String> eventSetDescriptorList = new ArrayList<String>(eventSetDescriptorArray.length);
-
-            //eventSetDescriptor 用于描述一个成员事件
-            for (EventSetDescriptor eventSetDescriptor : eventSetDescriptorArray){
-                //获得该事件的名字
-                String eventName = eventSetDescriptor.getName();
-                //获得该事件所依赖的事件监听器，以Class的形式给出
-                Class<?> listenerType = eventSetDescriptor.getListenerType();
-                eventSetDescriptorList.add(eventName + "(" + listenerType.getName() + ")");
-            }
-
-            Collections.sort(eventSetDescriptorList);
-            return eventSetDescriptorList;
+        if (Validator.isNullOrEmpty(eventSetDescriptorArray)){
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
+
+        List<String> eventSetDescriptorList = new ArrayList<String>(eventSetDescriptorArray.length);
+
+        //eventSetDescriptor 用于描述一个成员事件
+        for (EventSetDescriptor eventSetDescriptor : eventSetDescriptorArray){
+            //获得该事件的名字
+            String eventName = eventSetDescriptor.getName();
+            //获得该事件所依赖的事件监听器，以Class的形式给出
+            Class<?> listenerType = eventSetDescriptor.getListenerType();
+            eventSetDescriptorList.add(eventName + "(" + listenerType.getName() + ")");
+        }
+
+        Collections.sort(eventSetDescriptorList);
+        return eventSetDescriptorList;
     }
 }
