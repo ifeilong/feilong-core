@@ -292,7 +292,7 @@ public final class ParamUtil{
      */
     public static String removeParameterList(URI uri,List<String> paramNameList,String charsetType){
         if (null == uri){
-            return "";
+            return StringUtils.EMPTY;
         }
         String url = uri.toString();
         // 如果 paramNameList 是null 原样返回
@@ -349,7 +349,7 @@ public final class ParamUtil{
      */
     public static String retentionParamList(URI uri,List<String> paramNameList,String charsetType){
         if (null == uri){
-            return "";
+            return StringUtils.EMPTY;
         }else{
             String url = uri.toString();
             // 如果 paramNameList 是null 原样返回

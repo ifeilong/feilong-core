@@ -20,6 +20,8 @@ import java.math.BigDecimal;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.feilong.core.util.NumberPattern;
 import com.feilong.core.util.NumberUtil;
 import com.feilong.core.util.Validator;
@@ -87,7 +89,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
      */
     private Object process(Object value){
         if (value == null){
-            return "";
+            return StringUtils.EMPTY;
         }
         //两位小数点
         if (value instanceof BigDecimal){

@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -466,7 +467,7 @@ public final class FileUtil{
             String filePostfixName = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
             return filePostfixName;
         }
-        return "";
+        return StringUtils.EMPTY;
     }
 
     /**

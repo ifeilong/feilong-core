@@ -75,7 +75,6 @@ public final class Slf4jUtil{
      */
     public static String formatMessage(String messagePattern,Object...args){
         FormattingTuple formattingTuple = MessageFormatter.arrayFormat(messagePattern, args);
-        String formatMessage = formattingTuple.getMessage();
-        return formatMessage;
+        return formattingTuple.getMessage();
     }
 }
