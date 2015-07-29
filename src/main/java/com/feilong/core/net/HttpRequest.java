@@ -15,7 +15,6 @@
  */
 package com.feilong.core.net;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import com.feilong.core.io.CharsetType;
@@ -28,16 +27,13 @@ import com.feilong.core.io.CharsetType;
  * @see "org.apache.http.HttpRequest"
  * @since 1.2.0
  */
-public class HttpRequest implements Serializable{
-
-    /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID = -6122597808127208467L;
+public class HttpRequest{
 
     /** 请求的uri地址. */
     private String              uri;
 
     /** 请求method 类型,默认 {@link HttpMethodType#GET}. */
-    private HttpMethodType      httpMethodType   = HttpMethodType.GET;
+    private HttpMethodType      httpMethodType = HttpMethodType.GET;
 
     /** 请求参数. */
     private Map<String, String> paramMap;
