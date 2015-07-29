@@ -18,6 +18,7 @@ package com.feilong.core.configure;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
@@ -26,6 +27,7 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -199,7 +201,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
     public static String getValue(ResourceBundle resourceBundle,String key){
         if (!resourceBundle.containsKey(key)){
             LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
-            return null;
+            return StringUtils.EMPTY;
         }
 
         try{
@@ -211,7 +213,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
         }catch (Exception e){
             LOGGER.error(e.getMessage(), e);
         }
-        return null;
+        return StringUtils.EMPTY;
     }
 
     /**
@@ -233,7 +235,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
     public static String getValueWithArguments(ResourceBundle resourceBundle,String key,Object...arguments){
         String value = getValue(resourceBundle, key);
         if (Validator.isNullOrEmpty(value)){
-            return null;
+            return StringUtils.EMPTY;
         }
         // 支持 arguments 为null,原样返回
         return MessageFormatUtil.format(value, arguments);
@@ -345,23 +347,24 @@ public final class ResourceBundleUtil implements BaseConfigure{
      */
     public static Map<String, String> readPrefixAsMap(String baseName,String prefix,String spliter,Locale locale){
         Map<String, String> propertyMap = readAllPropertiesToMap(baseName, locale);
-        if (Validator.isNotNullOrEmpty(propertyMap)){
-            Map<String, String> result = new HashMap<String, String>();
-            for (Map.Entry<String, String> entry : propertyMap.entrySet()){
-                String key = entry.getKey();
-                String value = entry.getValue();
-                // 以 prefix 开头
-                if (key.startsWith(prefix)){
-                    // 分隔
-                    String[] values = key.split(spliter);
-                    if (values.length >= 2){
-                        result.put(values[1], value);
-                    }
+        if (Validator.isNullOrEmpty(propertyMap)){
+            return Collections.emptyMap();
+        }
+
+        Map<String, String> result = new HashMap<String, String>();
+        for (Map.Entry<String, String> entry : propertyMap.entrySet()){
+            String key = entry.getKey();
+            String value = entry.getValue();
+            // 以 prefix 开头
+            if (key.startsWith(prefix)){
+                // 分隔
+                String[] values = key.split(spliter);
+                if (values.length >= 2){
+                    result.put(values[1], value);
                 }
             }
-            return result;
         }
-        return null;
+        return result;
     }
 
     /**
@@ -394,16 +397,17 @@ public final class ResourceBundleUtil implements BaseConfigure{
     public static Map<String, String> readAllPropertiesToMap(String baseName,Locale locale){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
         Enumeration<String> enumeration = resourceBundle.getKeys();
-        if (Validator.isNotNullOrEmpty(enumeration)){
-            Map<String, String> propertyMap = new HashMap<String, String>();
-            while (enumeration.hasMoreElements()){
-                String key = enumeration.nextElement();
-                String value = resourceBundle.getString(key);
-                propertyMap.put(key, value);
-            }
-            return propertyMap;
+        if (Validator.isNullOrEmpty(enumeration)){
+            return Collections.emptyMap();
         }
-        return null;
+
+        Map<String, String> propertyMap = new HashMap<String, String>();
+        while (enumeration.hasMoreElements()){
+            String key = enumeration.nextElement();
+            String value = resourceBundle.getString(key);
+            propertyMap.put(key, value);
+        }
+        return propertyMap;
     }
 
     /**

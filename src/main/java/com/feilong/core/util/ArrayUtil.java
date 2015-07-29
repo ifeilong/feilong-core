@@ -18,12 +18,14 @@ package com.feilong.core.util;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -143,7 +145,7 @@ public final class ArrayUtil{
     //TODO 看看 能否和 convert 混合下
     public static <T> List<T> toList(T[] arrays){
         if (Validator.isNullOrEmpty(arrays)){
-            return null;
+            return Collections.emptyList();
         }
         //Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象，
         //而Arrays类里的内部类ArrayList没有实现AbstractList类的add方法，导致抛异常! strList.add("c");
@@ -212,7 +214,7 @@ public final class ArrayUtil{
     @Deprecated
     public static <T> String toString(ToStringConfig toStringConfig,T...arrays){
         if (Validator.isNullOrEmpty(arrays)){
-            return null;
+            return StringUtils.EMPTY;
         }
 
         //ConvertUtils.primitiveToWrapper(type)
@@ -297,7 +299,7 @@ public final class ArrayUtil{
      */
     public static <T> Map<T, List<T>> group(T[] array){
         if (null == array){
-            return null;
+            return Collections.emptyMap();
         }
         //视需求  可以换成 HashMap 或者TreeMap
         Map<T, List<T>> map = new WeakHashMap<T, List<T>>(array.length);
@@ -330,7 +332,7 @@ public final class ArrayUtil{
      */
     public static <O, T> Map<T, List<O>> group(O[] objectArray,String propertyName){
         if (null == objectArray){
-            return null;
+            return Collections.emptyMap();
         }
 
         if (Validator.isNullOrEmpty(propertyName)){

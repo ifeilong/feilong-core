@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
 import org.slf4j.Logger;
@@ -465,7 +466,7 @@ public final class StringUtil{
     public static String substring(Object text,int beginIndex){
         String t = ConvertUtil.toString(text);
         if (Validator.isNullOrEmpty(t)){
-            return null;
+            return StringUtils.EMPTY;
         }
         return t.substring(beginIndex);
     }
@@ -502,17 +503,17 @@ public final class StringUtil{
     public static String substring(Object textObject,int startIndex,int length){
         String returnValue = null;
         if (Validator.isNullOrEmpty(textObject)){
-            return null;
+            return StringUtils.EMPTY;
         }
         String textString = ConvertUtil.toString(textObject);
         int textLength = textString.length();
         // 索引位置必须小于长度
         if (startIndex > textLength - 1){
-            return null;
+            return StringUtils.EMPTY;
         }else if (startIndex == textLength - 1){// 最后一位
             return substringLast(textString, 1);
         }else if (length < 1){// 截取长度必须>=1
-            return null;
+            return StringUtils.EMPTY;
         }else if (1 == length){// 截取1个 即本身
             // 截取本身索引的位置
             return textString.substring(startIndex, startIndex + 1);
@@ -578,15 +579,15 @@ public final class StringUtil{
      */
     public static String substring(String text,String beginString,int shift){
         if (Validator.isNullOrEmpty(text)){
-            return null;
+            return StringUtils.EMPTY;
         }else if (Validator.isNullOrEmpty(beginString)){
-            return null;
+            return StringUtils.EMPTY;
         }
         //****************************************************
         int beginIndex = text.indexOf(beginString);
         // 查不到指定的字符串
         if (beginIndex == -1){
-            return null;
+            return StringUtils.EMPTY;
         }
         //****************************************************
         int startIndex = beginIndex + shift;
@@ -606,8 +607,7 @@ public final class StringUtil{
                                 text,
                                 text.length());
             }
-
-            return null;
+            return StringUtils.EMPTY;
         }
         // 索引从0 开始
         return text.substring(startIndex);
@@ -630,7 +630,7 @@ public final class StringUtil{
      */
     public static String substring(String text,String startString,String endString){
         if (Validator.isNullOrEmpty(text)){
-            return null;
+            return StringUtils.EMPTY;
         }else if (Validator.isNullOrEmpty(startString)){
             return text.substring(0, text.indexOf(endString));
         }
@@ -686,7 +686,7 @@ public final class StringUtil{
      */
     public static String substringWithoutLast(String text,int lastLenth){
         if (Validator.isNullOrEmpty(text)){
-            return null;
+            return StringUtils.EMPTY;
         }
         return text.substring(0, text.length() - lastLenth);
     }
@@ -726,7 +726,7 @@ public final class StringUtil{
         }catch (UnsupportedEncodingException e){
             LOGGER.error(e.getClass().getName(), e);
         }
-        return null;
+        return ArrayUtils.EMPTY_BYTE_ARRAY;
     }
 
     // [end]
@@ -762,10 +762,10 @@ public final class StringUtil{
      * @see #tokenizeToStringArray(String, String)
      */
     public static String[] split(String value,String regexSpliter){
-        if (null != value){
-            return value.split(regexSpliter);
+        if (null == value){
+            return ArrayUtils.EMPTY_STRING_ARRAY;
         }
-        return null;
+        return value.split(regexSpliter);
     }
 
     // [end]
@@ -835,8 +835,8 @@ public final class StringUtil{
      * @since 1.0.7
      */
     public static String[] tokenizeToStringArray(String str,String delimiters,boolean trimTokens,boolean ignoreEmptyTokens){
-        if (str == null){
-            return null;
+        if (null == str){
+            return ArrayUtils.EMPTY_STRING_ARRAY;
         }
         //StringTokenizer implements Enumeration<Object>
         //其在 Enumeration接口的基础上,  定义了 hasMoreTokens nextToken两个方法
@@ -1077,7 +1077,7 @@ public final class StringUtil{
         }catch (UnsupportedEncodingException e){
             LOGGER.error(e.getClass().getName(), e);
         }
-        return null;
+        return StringUtils.EMPTY;
     }
 
     /**

@@ -194,7 +194,7 @@ public final class FieldUtil{
      */
     private static String[] getFieldsNames(Field[] fields){
         if (Validator.isNullOrEmpty(fields)){
-            return null;
+            return ArrayUtils.EMPTY_STRING_ARRAY;
         }
         String[] fieldNames = new String[fields.length];
         for (int j = 0; j < fields.length; ++j){

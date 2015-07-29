@@ -138,7 +138,7 @@ public final class IntrospectorUtil{
             Collections.sort(propertyDescriptorList);
             return propertyDescriptorList;
         }
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -194,7 +194,7 @@ public final class IntrospectorUtil{
             Collections.sort(methodDescriptorList);
             return methodDescriptorList;
         }
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -224,6 +224,6 @@ public final class IntrospectorUtil{
             Collections.sort(eventSetDescriptorList);
             return eventSetDescriptorList;
         }
-        return null;
+        return Collections.emptyList();
     }
 }

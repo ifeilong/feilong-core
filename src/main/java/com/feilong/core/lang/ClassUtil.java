@@ -16,6 +16,7 @@
 package com.feilong.core.lang;
 
 import java.lang.reflect.Modifier;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -119,7 +120,7 @@ public final class ClassUtil{
      */
     public static Map<String, Object> getClassInfoMapForLog(Class<?> klass){
         if (Validator.isNullOrEmpty(klass)){
-            return null;
+            return Collections.emptyMap();
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();

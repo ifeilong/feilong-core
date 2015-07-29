@@ -21,6 +21,7 @@ import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.NumberFormat;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -130,6 +131,6 @@ public final class NumberFormatUtil{
             LOGGER.error("{},value:[{}],pattern:[{}]", objects);
             LOGGER.error(e.getClass().getName(), e);
         }
-        return null;
+        return StringUtils.EMPTY;
     }
 }

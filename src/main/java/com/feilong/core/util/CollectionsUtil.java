@@ -31,6 +31,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -198,7 +199,7 @@ public final class CollectionsUtil{
      */
     public static <T> List<T> removeDuplicate(Collection<T> collection){
         if (Validator.isNullOrEmpty(collection)){
-            return null;
+            return Collections.emptyList();
         }
         // 效率问题？contains的本质就是遍历.
         // 在100W的list当中执行0.546秒，而contains，我则没耐心去等了.顺便贴一下在10W下2段代码的运行时间.
@@ -221,7 +222,7 @@ public final class CollectionsUtil{
      */
     public static String toString(final Collection collection,ToStringConfig toStringConfig){
         if (Validator.isNullOrEmpty(collection)){
-            return null;
+            return StringUtils.EMPTY;
         }
         Object[] array = toArray(collection, Object.class);
         return ArrayUtil.toString(toStringConfig, array);

@@ -214,7 +214,7 @@ public final class JsonUtil{
      */
     public static String formatWithIncludes(Object obj,final String...includes){
         if (null == obj){
-            return null;
+            return StringUtils.EMPTY;
         }
         JsonFormatConfig jsonFormatConfig = null;
         if (Validator.isNotNullOrEmpty(includes)){
@@ -274,7 +274,7 @@ public final class JsonUtil{
      */
     public static String format(Object obj,String[] excludes,Integer indentFactor,Integer indent){
         if (null == obj){
-            return null;
+            return StringUtils.EMPTY;
         }
         JsonFormatConfig jsonFormatConfig = null;
         if (Validator.isNotNullOrEmpty(excludes)){
@@ -364,7 +364,7 @@ public final class JsonUtil{
      */
     public static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent){
         if (null == obj){
-            return null;
+            return StringUtils.EMPTY;
         }
         JSON json = toJSON(obj, jsonConfig);
         return json.toString(indentFactor, indent);

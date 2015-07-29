@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.util.Validator;
 
@@ -89,7 +90,7 @@ public final class MimeTypeUtil{
 
         String extension = FilenameUtils.getExtension(fileName);
         if (Validator.isNullOrEmpty(extension)){
-            return null;
+            return StringUtils.EMPTY;
         }
 
         // 1. first use java's build-in utils

@@ -26,6 +26,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -452,64 +453,62 @@ public final class URIUtil{
      * @param query
      *            {@code a=1&b=2}类型的数据,支持{@code a=1&a=1}的形式， 返回map的值是数组
      * @param charsetType
-     *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
+     *            何种编码， {@link CharsetType} 如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return map value的处理 （{@link LinkedHashMap#LinkedHashMap(int, float)}
-     *         <ul>
-     *         <li>没有Validator.isNullOrEmpty(bianma) 那么就原样返回</li>
-     *         <li>如果有编码,统统先强制 decode 再 encode</li>
-     *         </ul>
+     * @return 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value)
+     * @see com.feilong.core.io.CharsetType
      */
     public static Map<String, String[]> parseQueryToArrayMap(String query,String charsetType){
-        if (Validator.isNotNullOrEmpty(query)){
-            String[] nameAndValueArray = query.split(URIComponents.AMPERSAND);
+        if (Validator.isNullOrEmpty(query)){
+            return Collections.emptyMap();
+        }
 
-            if (Validator.isNotNullOrEmpty(nameAndValueArray)){
+        String[] nameAndValueArray = query.split(URIComponents.AMPERSAND);
+        if (Validator.isNullOrEmpty(nameAndValueArray)){
+            return Collections.emptyMap();
+        }
 
-                Map<String, String[]> map = new LinkedHashMap<String, String[]>();
+        Map<String, String[]> map = new LinkedHashMap<String, String[]>();
 
-                for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
+        for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
 
-                    String nameAndValue = nameAndValueArray[i];
-                    String[] tempArray = nameAndValue.split("=", 2);
+            String nameAndValue = nameAndValueArray[i];
+            String[] tempArray = nameAndValue.split("=", 2);
 
-                    if (tempArray != null && tempArray.length == 2){
-                        String key = tempArray[0];
-                        String value = tempArray[1];
+            if (tempArray != null && tempArray.length == 2){
+                String key = tempArray[0];
+                String value = tempArray[1];
 
-                        if (Validator.isNullOrEmpty(charsetType)){
-                            // 没有编码 原样返回
-                        }else{
+                if (Validator.isNullOrEmpty(charsetType)){
+                    // 没有编码 原样返回
+                }else{
 
-                            // 浏览器传递queryString()参数差别
-                            // chrome 会将query 进行 encoded 再发送请求
-                            // 而ie 原封不动的发送
+                    // 浏览器传递queryString()参数差别
+                    // chrome 会将query 进行 encoded 再发送请求
+                    // 而ie 原封不动的发送
 
-                            // 由于暂时不能辨别是否encoded过,所以 先强制decode 再 encode
-                            // 此处不能先转  decode(query, charsetType) ,参数就是想传 =是转义符
+                    // 由于暂时不能辨别是否encoded过,所以 先强制decode 再 encode
+                    // 此处不能先转  decode(query, charsetType) ,参数就是想传 =是转义符
 
-                            // 统统先强制 decode 再 encode
-                            // 浏览器兼容问题
-                            key = encode(decode(key, charsetType), charsetType);
-                            value = encode(decode(value, charsetType), charsetType);
-                        }
-
-                        String[] valuesArrayInMap = map.get(key);
-
-                        List<String> list = null;
-                        if (Validator.isNullOrEmpty(valuesArrayInMap)){
-                            list = new ArrayList<String>();
-                        }else{
-                            list = ArrayUtil.toList(valuesArrayInMap);
-                        }
-                        list.add(value);
-                        map.put(key, CollectionsUtil.toArray(list, String.class));
-                    }
+                    // 统统先强制 decode 再 encode
+                    // 浏览器兼容问题
+                    key = encode(decode(key, charsetType), charsetType);
+                    value = encode(decode(value, charsetType), charsetType);
                 }
-                return map;
+
+                String[] valuesArrayInMap = map.get(key);
+
+                List<String> list = null;
+                if (Validator.isNullOrEmpty(valuesArrayInMap)){
+                    list = new ArrayList<String>();
+                }else{
+                    list = ArrayUtil.toList(valuesArrayInMap);
+                }
+                list.add(value);
+                map.put(key, CollectionsUtil.toArray(list, String.class));
             }
         }
-        return null;
+        return map;
     }
 
     /**

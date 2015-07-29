@@ -17,6 +17,7 @@ package com.feilong.core.lang;
 
 import java.lang.Thread.State;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,27 +102,28 @@ public final class ThreadUtil{
      * @return the thread group object log
      */
     public static Map<String, Object> getThreadGroupInfoMapForLog(ThreadGroup threadGroup){
-
-        if (null != threadGroup){
-            Map<String, Object> map = new LinkedHashMap<String, Object>();
-
-            // 返回此线程组中活动线程的估计数.
-            map.put("threadGroup.activeCount()", threadGroup.activeCount());
-
-            // 返回此线程组中活动线程组的估计数.
-            map.put("threadGroup.activeGroupCount()", threadGroup.activeGroupCount());
-
-            // 返回此线程组的最高优先级.
-            map.put("threadGroup.getMaxPriority()", threadGroup.getMaxPriority());
-            map.put("threadGroup.getName()", threadGroup.getName());
-
-            // 测试此线程组是否为一个后台程序线程组.
-            map.put("threadGroup.isDaemon()", threadGroup.isDaemon());
-            map.put("threadGroup.toString()", threadGroup.toString());
-
-            return map;
+        if (null == threadGroup){
+            return Collections.emptyMap();
         }
-        return null;
+
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+
+        // 返回此线程组中活动线程的估计数.
+        map.put("threadGroup.activeCount()", threadGroup.activeCount());
+
+        // 返回此线程组中活动线程组的估计数.
+        map.put("threadGroup.activeGroupCount()", threadGroup.activeGroupCount());
+
+        // 返回此线程组的最高优先级.
+        map.put("threadGroup.getMaxPriority()", threadGroup.getMaxPriority());
+        map.put("threadGroup.getName()", threadGroup.getName());
+
+        // 测试此线程组是否为一个后台程序线程组.
+        map.put("threadGroup.isDaemon()", threadGroup.isDaemon());
+        map.put("threadGroup.toString()", threadGroup.toString());
+
+        return map;
+
     }
 
     /**
@@ -153,102 +155,82 @@ public final class ThreadUtil{
      */
     public static Map<String, Object> getThreadInfoMapForLog(Thread thread,ThreadLogSwitch threadLogSwitch){
 
-        if (null != thread){
-
-            if (Validator.isNullOrEmpty(threadLogSwitch)){
-                threadLogSwitch = SIMPLE_SWITCH;
-            }
-
-            Map<String, Object> map = new LinkedHashMap<String, Object>();
-
-            if (threadLogSwitch.getIsShowId()){
-                //返回该线程的标识符
-                map.put("thread.getId()", thread.getId());
-            }
-
-            if (threadLogSwitch.getIsShowName()){
-                //返回该线程的名称
-                map.put("thread.getName()", thread.getName());
-            }
-
-            if (threadLogSwitch.getIsShowActiveCount()){
-                // 返回当前线程的线程组中活动线程的数目
-                map.put("Thread.activeCount()", Thread.activeCount());
-            }
-
-            if (threadLogSwitch.getIsShowIsAlive()){
-                //测试线程是否处于活动状态
-                map.put("thread.isAlive()", thread.isAlive());
-            }
-
-            if (threadLogSwitch.getIsShowIsDaemon()){
-                //测试该线程是否为守护线程
-                map.put("thread.isDaemon()", thread.isDaemon());
-            }
-
-            if (threadLogSwitch.getIsShowIsInterrupted()){
-                //测试线程是否已经中断
-                map.put("thread.isInterrupted()", thread.isInterrupted());
-            }
-
-            if (threadLogSwitch.getIsShowMIN_PRIORITY()){
-                map.put("Thread.MIN_PRIORITY", Thread.MIN_PRIORITY);
-            }
-
-            if (threadLogSwitch.getIsShowNORM_PRIORITY()){
-                map.put("Thread.NORM_PRIORITY", Thread.NORM_PRIORITY);
-            }
-
-            if (threadLogSwitch.getIsShowMAX_PRIORITY()){
-                map.put("Thread.MAX_PRIORITY", Thread.MAX_PRIORITY);
-            }
-
-            if (threadLogSwitch.getIsShowPriority()){
-
-                //返回线程的优先级
-                map.put("thread.getPriority()", thread.getPriority());
-            }
-
-            if (threadLogSwitch.getIsShowState()){
-                //返回该线程的状态
-                State state = thread.getState();
-                map.put("thread.getState()", state);
-            }
-
-            if (threadLogSwitch.getIsShowStackTrace()){
-                StackTraceElement[] stackTraceElement = thread.getStackTrace();
-                map.put("thread.getStackTrace()", stackTraceElement);
-            }
-
-            if (threadLogSwitch.getIsShowThreadGroup()){
-                //返回该线程所属的线程组
-                map.put("thread.getThreadGroup()", thread.getThreadGroup());
-            }
-
-            if (threadLogSwitch.getIsShowAllStackTraces()){
-                map.put("Thread.getAllStackTraces()", Thread.getAllStackTraces());
-            }
-
-            if (threadLogSwitch.getIsShowToString()){
-                map.put("thread.toString()", thread.toString());
-            }
-
-            if (threadLogSwitch.getIsShowContextClassLoader()){
-                map.put("thread.getContextClassLoader()", thread.getContextClassLoader());
-            }
-
-            if (threadLogSwitch.getIsShowUncaughtExceptionHandler()){
-                //返回该线程由于未捕获到异常而突然终止时调用的处理程序
-                map.put("thread.getUncaughtExceptionHandler()", thread.getUncaughtExceptionHandler());
-
-            }
-            if (threadLogSwitch.getIsShowDefaultUncaughtExceptionHandler()){
-                map.put("Thread.getDefaultUncaughtExceptionHandler()", Thread.getDefaultUncaughtExceptionHandler());
-            }
-
-            return map;
+        if (null == thread){
+            return Collections.emptyMap();
         }
-        return null;
+
+        if (Validator.isNullOrEmpty(threadLogSwitch)){
+            threadLogSwitch = SIMPLE_SWITCH;
+        }
+
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        if (threadLogSwitch.getIsShowId()){
+            //返回该线程的标识符
+            map.put("thread.getId()", thread.getId());
+        }
+        if (threadLogSwitch.getIsShowName()){
+            //返回该线程的名称
+            map.put("thread.getName()", thread.getName());
+        }
+        if (threadLogSwitch.getIsShowActiveCount()){
+            // 返回当前线程的线程组中活动线程的数目
+            map.put("Thread.activeCount()", Thread.activeCount());
+        }
+        if (threadLogSwitch.getIsShowIsAlive()){
+            //测试线程是否处于活动状态
+            map.put("thread.isAlive()", thread.isAlive());
+        }
+        if (threadLogSwitch.getIsShowIsDaemon()){
+            //测试该线程是否为守护线程
+            map.put("thread.isDaemon()", thread.isDaemon());
+        }
+        if (threadLogSwitch.getIsShowIsInterrupted()){
+            //测试线程是否已经中断
+            map.put("thread.isInterrupted()", thread.isInterrupted());
+        }
+        if (threadLogSwitch.getIsShowMIN_PRIORITY()){
+            map.put("Thread.MIN_PRIORITY", Thread.MIN_PRIORITY);
+        }
+        if (threadLogSwitch.getIsShowNORM_PRIORITY()){
+            map.put("Thread.NORM_PRIORITY", Thread.NORM_PRIORITY);
+        }
+        if (threadLogSwitch.getIsShowMAX_PRIORITY()){
+            map.put("Thread.MAX_PRIORITY", Thread.MAX_PRIORITY);
+        }
+        if (threadLogSwitch.getIsShowPriority()){
+            //返回线程的优先级
+            map.put("thread.getPriority()", thread.getPriority());
+        }
+        if (threadLogSwitch.getIsShowState()){
+            //返回该线程的状态
+            State state = thread.getState();
+            map.put("thread.getState()", state);
+        }
+        if (threadLogSwitch.getIsShowStackTrace()){
+            StackTraceElement[] stackTraceElement = thread.getStackTrace();
+            map.put("thread.getStackTrace()", stackTraceElement);
+        }
+        if (threadLogSwitch.getIsShowThreadGroup()){
+            //返回该线程所属的线程组
+            map.put("thread.getThreadGroup()", thread.getThreadGroup());
+        }
+        if (threadLogSwitch.getIsShowAllStackTraces()){
+            map.put("Thread.getAllStackTraces()", Thread.getAllStackTraces());
+        }
+        if (threadLogSwitch.getIsShowToString()){
+            map.put("thread.toString()", thread.toString());
+        }
+        if (threadLogSwitch.getIsShowContextClassLoader()){
+            map.put("thread.getContextClassLoader()", thread.getContextClassLoader());
+        }
+        if (threadLogSwitch.getIsShowUncaughtExceptionHandler()){
+            //返回该线程由于未捕获到异常而突然终止时调用的处理程序
+            map.put("thread.getUncaughtExceptionHandler()", thread.getUncaughtExceptionHandler());
+        }
+        if (threadLogSwitch.getIsShowDefaultUncaughtExceptionHandler()){
+            map.put("Thread.getDefaultUncaughtExceptionHandler()", Thread.getDefaultUncaughtExceptionHandler());
+        }
+        return map;
     }
 
     /**
