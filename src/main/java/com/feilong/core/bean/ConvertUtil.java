@@ -16,15 +16,22 @@
 package com.feilong.core.bean;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
+import org.apache.commons.beanutils.Converter;
+import org.apache.commons.beanutils.converters.AbstractConverter;
+import org.apache.commons.beanutils.converters.BigDecimalConverter;
 import org.apache.commons.beanutils.converters.BooleanConverter;
+import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.beanutils.converters.LongConverter;
+import org.apache.commons.beanutils.converters.NumberConverter;
 
 /**
  * 转换器.
  * 
- * <h3>关于类型转换</h3>
+ * <h3>关于类型转换:</h3>
  * 
  * <blockquote>
  * <ul>
@@ -33,6 +40,123 @@ import org.apache.commons.beanutils.converters.BooleanConverter;
  * <li>{@link ConvertUtilsBean#registerOther(boolean) registerOther(boolean throwException);}</li>
  * <li>{@link ConvertUtilsBean#registerArrays(boolean,int) registerArrays(boolean throwException, int defaultArraySize);}</li>
  * </ul>
+ * </blockquote>
+ * 
+ * <h3>{@link ConvertUtils} 几个方法的区别:</h3>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link ConvertUtils#convert(Object)}</td>
+ * <td>将指定的value转成string.<br>
+ * 如果value是array, 将会返回数组第一个元素转成string. 将会使用注册的 <code>java.lang.String</code> {@link Converter},允许应用 定制 Object->String conversions (
+ * 默认使用简单的使用 toString()) <br>
+ * see {@link ConvertUtilsBean#convert(Object)}</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link ConvertUtils#convert(String, Class)}</td>
+ * <td>将String value转成 指定Class 类型的对象 (如果可能),否则返回string. <br>
+ * see {@link ConvertUtilsBean#convert(String, Class)}</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link ConvertUtils#convert(String[], Class)}</td>
+ * <td>将数组转成指定class类型的对象. <br>
+ * 如果指定的Class类型是数组类型, 那么返回值的类型将是数组的类型. 否则将会构造一个指定类型的数组返回. <br>
+ * see {@link ConvertUtilsBean#convert(String[], Class)} <br>
+ * see {@link #convert(String[], Class)}</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link ConvertUtils#convert(Object, Class)}</td>
+ * <td>将value转成指定Class类型的对象,如果Class的转换器没有注册, 那么传入的value原样返回.<br>
+ * see {@link ConvertUtilsBean#convert(Object, Class)}<br>
+ * see {@link #convert(Object, Class)}</td>
+ * </tr>
+ * </table>
+ * </blockquote>
+ * 
+ * <p>
+ * standard {@link Converter} instances are provided for all of the following destination Classes:
+ * </p>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>java.lang.BigDecimal</td>
+ * <td><span style="color:red">no default value</span></td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>java.lang.BigInteger</td>
+ * <td><span style="color:red">no default value</span></td>
+ * </tr>
+ * <tr valign="top">
+ * <td>boolean and java.lang.Boolean</td>
+ * <td>default to false</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>byte and java.lang.Byte</td>
+ * <td>default to zero</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>char and java.lang.Character</td>
+ * <td>default to a space</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>java.lang.Class</td>
+ * <td><span style="color:red">no default value</span></td>
+ * </tr>
+ * <tr valign="top">
+ * <td>double and java.lang.Double</td>
+ * <td>default to zero</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>float and java.lang.Float</td>
+ * <td>default to zero</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>int and java.lang.Integer</td>
+ * <td>default to zero</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>long and java.lang.Long</td>
+ * <td>default to zero</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>short and java.lang.Short</td>
+ * <td>default to zero</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>java.lang.String</td>
+ * <td>default to null</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>java.io.File</td>
+ * <td><span style="color:red">no default value</span></td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>java.net.URL</td>
+ * <td><span style="color:red">no default value</span></td>
+ * </tr>
+ * <tr valign="top">
+ * <td>java.sql.Date</td>
+ * <td><span style="color:red">no default value</span></td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>java.sql.Time</td>
+ * <td><span style="color:red">no default value</span></td>
+ * </tr>
+ * <tr valign="top">
+ * <td>java.sql.Timestamp</td>
+ * <td><span style="color:red">no default value</span></td>
+ * </tr>
+ * </table>
  * </blockquote>
  * 
  * @author feilong
@@ -66,16 +190,20 @@ public final class ConvertUtil{
      * Throwable)} method will return default value, {@link BooleanConverter} defaultValue pls see
      * {@link org.apache.commons.beanutils.ConvertUtilsBean#registerStandard(boolean, boolean) registerStandard(boolean, boolean)}</li>
      * </ul>
-     * </blockquote>
      * 
      * <p>
      * you also can call {@link org.apache.commons.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
      * BooleanConverter(String[], String[], Object)} set trueStrings and falseStrings
      * </p>
+     * </blockquote>
      * 
+     * <h3>和 {@link Boolean#parseBoolean(String)}的区别:</h3>
+     * 
+     * <blockquote>
      * <p>
-     * {@link java.lang.Boolean#parseBoolean(String)}, only if <code>(String != null) && String.equalsIgnoreCase("true")</code> return true
+     * {@link Boolean#parseBoolean(String)}, 仅当 <code>(String != null) && String.equalsIgnoreCase("true")</code> 返回 true
      * </p>
+     * </blockquote>
      * 
      * @param toBeConvertedValue
      *            object
@@ -85,10 +213,6 @@ public final class ConvertUtil{
      * @see java.lang.Boolean#parseBoolean(String)
      */
     public static Boolean toBoolean(Object toBeConvertedValue){
-        //        if (null == toBeConvertedValue){
-        //            throw new IllegalArgumentException("object can't be null/empty!");
-        //        }
-        //        return Boolean.parseBoolean(toBeConvertedValue.toString());
         return convert(toBeConvertedValue, Boolean.class);
     }
 
@@ -101,20 +225,9 @@ public final class ConvertUtil{
      * @see org.apache.commons.beanutils.converters.IntegerConverter
      */
     public static Integer toInteger(Object toBeConvertedValue){
-        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
-        //            return null;
-        //        }
-        //
-        //        if (toBeConvertedValue instanceof Integer){
-        //            return (Integer) toBeConvertedValue;
-        //        }
-        //
-        //        try{
-        //            return new Integer(ObjectUtil.trim(toBeConvertedValue));
-        //        }catch (Exception e){
-        //            throw new IllegalArgumentException("Input param:[\"" + toBeConvertedValue + "\"], convert to integer exception", e);
-        //        }
-        return convert(toBeConvertedValue, Integer.class);
+        IntegerConverter integerConverter = new IntegerConverter(null);
+        return integerConverter.convert(Integer.class, toBeConvertedValue);
+        // return convert(toBeConvertedValue, Integer.class);
     }
 
     /**
@@ -133,7 +246,7 @@ public final class ConvertUtil{
      * <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
      * </ul>
      * 
-     * 本方法底层调用的是 {@link org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
+     * 本方法底层调用的是 {@link NumberConverter#toNumber(Class, Class, Number)
      * NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal} </blockquote>
      * 
      * @param toBeConvertedValue
@@ -144,17 +257,9 @@ public final class ConvertUtil{
      * @see org.apache.commons.beanutils.converters.BigDecimalConverter
      */
     public static BigDecimal toBigDecimal(Object toBeConvertedValue){
-        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
-        //            return null;
-        //        }
-        //
-        //        if (toBeConvertedValue instanceof BigDecimal){
-        //            return (BigDecimal) toBeConvertedValue;
-        //        }
-        //
-        //        //先转成string 就可以了
-        //        return new BigDecimal(ObjectUtil.trim(toBeConvertedValue));
-        return convert(toBeConvertedValue, BigDecimal.class);
+        BigDecimalConverter bigDecimalConverter = new BigDecimalConverter(null);
+        return bigDecimalConverter.convert(BigDecimal.class, toBeConvertedValue);
+        //  return convert(toBeConvertedValue, BigDecimal.class);
     }
 
     /**
@@ -172,11 +277,11 @@ public final class ConvertUtil{
      * ArrayConverter#convertToCollection(Class, Object)} 再转成 迭代器 {@link java.util.Collection#iterator()}
      * </p>
      * 
-     * 
      * <p>
      * 在将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
      * ArrayConverter#convertToCollection(Class, Object)}时候,有以下规则:
      * </p>
+     * </blockquote>
      * 
      * <ul>
      * <li>The string is expected to be a comma-separated list of values.</li>
@@ -186,9 +291,9 @@ public final class ConvertUtil{
      * valid.</li>
      * </ul>
      * 
-     * 
      * <p>
      * 默认:
+     * </p>
      * 
      * <blockquote>
      * <table border="1" cellspacing="0" cellpadding="4">
@@ -214,92 +319,34 @@ public final class ConvertUtil{
      * </tr>
      * </table>
      * </blockquote>
-     * </p>
-     * </blockquote>
      *
      * @param toBeConvertedValue
      *            参数值
      * @return the string
      * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
+     * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(Object)
      * @see org.apache.commons.beanutils.converters.StringConverter
-     * @deprecated will Re-structure
+     * 
+     * @see java.util.Arrays#toString(Object[])
      */
-    @Deprecated
     public static String toString(Object toBeConvertedValue){
-        //        if (null == toBeConvertedValue){
-        //            return null;
-        //        }
-        //        if (toBeConvertedValue instanceof String){
-        //            return (String) toBeConvertedValue;
-        //        }
-        //        if (toBeConvertedValue instanceof Object[]){
-        //            return Arrays.toString((Object[]) toBeConvertedValue);
-        //        }
-        //
-        //        //***************************************************************
-        //        // primitive ints
-        //        if (toBeConvertedValue instanceof int[]){
-        //            return Arrays.toString((int[]) toBeConvertedValue);
-        //        }
-        //
-        //        // primitive long
-        //        if (toBeConvertedValue instanceof long[]){
-        //            return Arrays.toString((long[]) toBeConvertedValue);
-        //        }
-        //
-        //        // primitive float
-        //        if (toBeConvertedValue instanceof float[]){
-        //            return Arrays.toString((float[]) toBeConvertedValue);
-        //        }
-        //
-        //        // primitive double
-        //        if (toBeConvertedValue instanceof double[]){
-        //            return Arrays.toString((double[]) toBeConvertedValue);
-        //        }
-        //
-        //        // primitive char
-        //        if (toBeConvertedValue instanceof char[]){
-        //            return Arrays.toString((char[]) toBeConvertedValue);
-        //        }
-        //
-        //        // primitive boolean
-        //        if (toBeConvertedValue instanceof boolean[]){
-        //            return Arrays.toString((boolean[]) toBeConvertedValue);
-        //        }
-        //
-        //        // primitive byte
-        //        if (toBeConvertedValue instanceof byte[]){
-        //            return Arrays.toString((byte[]) toBeConvertedValue);
-        //        }
-        //
-        //        // primitive short
-        //        if (toBeConvertedValue instanceof short[]){
-        //            return Arrays.toString((short[]) toBeConvertedValue);
-        //        }
-        //        return toBeConvertedValue.toString();
         return convert(toBeConvertedValue, String.class);
     }
 
     /**
      * 把对象转换为long类型.
-     * 
+     *
      * @param toBeConvertedValue
      *            包含数字的对象.
-     * @return long 转换后的数值,对不能转换的对象返回null.
+     * @return the long
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.LongConverter
      */
     public static Long toLong(Object toBeConvertedValue){
-        //        if (Validator.isNullOrEmpty(toBeConvertedValue)){
-        //            return null;
-        //        }
-        //
-        //        if (toBeConvertedValue instanceof Long){
-        //            return (Long) toBeConvertedValue;
-        //        }
-        //        return Long.parseLong(toBeConvertedValue.toString());
-        return convert(toBeConvertedValue, Long.class);
+        LongConverter longConverter = new LongConverter(null);
+        return longConverter.convert(Long.class, toBeConvertedValue);
+        //return convert(toBeConvertedValue, Long.class);
     }
 
     /**
@@ -332,7 +379,18 @@ public final class ConvertUtil{
     }
 
     /**
-     * Convert.
+     * 将value转成指定Class类型的对象,如果Class的转换器没有注册,那么传入的value原样返回..
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ul>
+     * <li>如果传的 value是 <code>value.getClass().isArray()</code> 或者 {@link Collection},那么<span style="color:red">会取第一个元素</span>进行转换
+     * {@link AbstractConverter#convert(Class, Object)} ,调用的 {@link AbstractConverter#convertArray(Object)} 方法</li>
+     * </ul>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -366,7 +424,6 @@ public final class ConvertUtil{
      * @return the t[]
      * @see org.apache.commons.beanutils.ConvertUtils#convert(String[], Class)
      * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(String[], Class)
-     * @since 1.3.0
      */
     @SuppressWarnings("unchecked")
     public static <T> T[] convert(String[] values,Class<T> targetType){

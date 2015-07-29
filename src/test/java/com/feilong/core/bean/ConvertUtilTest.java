@@ -135,9 +135,9 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToInteger(){
+        LOGGER.debug("" + ConvertUtil.toInteger(new String[] { "1", "2", "3" }));
         LOGGER.debug("" + ConvertUtil.toInteger("1"));
         LOGGER.debug("" + ConvertUtil.toInteger(null));
-        LOGGER.debug("" + ConvertUtil.toInteger(new String[] { "1", "2", "3" }));
         LOGGER.debug("" + ConvertUtil.toInteger(new String[] { "1", null, "2", "3" }));
         LOGGER.debug("" + ConvertUtil.toInteger("1,2,3"));
     }
