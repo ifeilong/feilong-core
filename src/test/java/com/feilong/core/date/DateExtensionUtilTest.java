@@ -73,8 +73,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         now = new Date();
         Date date = DateUtil.string2Date("2012-12-03 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
         LOGGER.debug(DateExtensionUtil.getIntervalForView(now, date));
-        long intervalTime = DateUtil.getIntervalTime(now, date);
-        LOGGER.debug(intervalTime + "");
+        LOGGER.debug(DateUtil.getIntervalTime(now, date) + "");
     }
 
     /**
@@ -132,11 +131,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         dateList.add(new Date());
         dateList.add(new Date());
         dateList.add(new Date());
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(DateExtensionUtil.toStringList(dateList, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
-        }
-
+        LOGGER.debug(JsonUtil.format(DateExtensionUtil.toStringList(dateList, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
     }
 
     /**

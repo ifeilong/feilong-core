@@ -313,9 +313,7 @@ public class StringUtilTest{
         String str = "jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong";
         String delimiters = "h";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters, false, false);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(JsonUtil.format(tokenizeToStringArray));
-        }
+        LOGGER.info(JsonUtil.format(tokenizeToStringArray));
     }
 
     /**
@@ -331,9 +329,7 @@ public class StringUtilTest{
         str = sb.toString();
         String delimiters = ";, .";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(JsonUtil.format(tokenizeToStringArray));
-        }
+        LOGGER.info(JsonUtil.format(tokenizeToStringArray));
         Date beginDate = new Date();
 
         for (int i = 0; i < 100000; ++i){
@@ -358,9 +354,7 @@ public class StringUtilTest{
 
         String regexSpliter = "[;, \\.]";
         String[] tokenizeToStringArray = StringUtil.split(str, regexSpliter);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(JsonUtil.format(tokenizeToStringArray));
-        }
+        LOGGER.info(JsonUtil.format(tokenizeToStringArray));
 
         Date beginDate = new Date();
 

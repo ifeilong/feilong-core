@@ -256,10 +256,7 @@ public class CollectionsUtilTest{
         set.add("5");
         set.add("1");
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(set));
-        }
-
+        LOGGER.debug(JsonUtil.format(set));
     }
 
     /**
@@ -273,14 +270,10 @@ public class CollectionsUtilTest{
         stack.add("2");
         stack.add("3");
         stack.add("4");
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("" + stack.firstElement());
-            LOGGER.debug("" + stack.peek());
-            LOGGER.debug("" + stack.pop());
-            LOGGER.debug(JsonUtil.format(stack));
-        }
-
+        LOGGER.debug("" + stack.firstElement());
+        LOGGER.debug("" + stack.peek());
+        LOGGER.debug("" + stack.pop());
+        LOGGER.debug(JsonUtil.format(stack));
     }
 
     /**
@@ -297,12 +290,8 @@ public class CollectionsUtilTest{
         queue.add(5);
         queue.add(6);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(queue));
-            LOGGER.debug("" + queue.peek());
-
-        }
-
+        LOGGER.debug(JsonUtil.format(queue));
+        LOGGER.debug("" + queue.peek());
     }
 
     /**

@@ -60,14 +60,10 @@ public class TypeUtilTest{
     @Test
     public final void test3(){
         LOGGER.info("" + new SkuItemRepositoryImpl3());
-
         Class<?>[] genericInterfacesParameterizedRawTypes = TypeUtil.getGenericInterfacesParameterizedRawTypes(
                         SkuItemRepositoryImpl3.class,
                         BaseSolrRepository.class);
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
-        }
+        LOGGER.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
     }
 
     /**
@@ -79,9 +75,6 @@ public class TypeUtilTest{
         //Class<?> componentType = SkuItemRepositoryImpl4.class.getComponentType();
         Class<?>[] genericInterfacesParameterizedRawTypes = TypeUtil
                         .getGenericSuperclassParameterizedRawTypes(skuItemRepository.getClass());
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
-        }
+        LOGGER.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
     }
 }

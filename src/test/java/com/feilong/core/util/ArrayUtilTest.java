@@ -65,10 +65,7 @@ public class ArrayUtilTest{
                 "ppt-coreContent10.png",
                 "ppt-coreContent11.png",
                 "ppt-coreContent2.png" };
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(strs));
-        }
-
+        LOGGER.debug(JsonUtil.format(strs));
     }
 
     /**
@@ -135,12 +132,10 @@ public class ArrayUtilTest{
      */
     @Test
     public void testGetElement(){
-        if (LOGGER.isInfoEnabled()){
-            Object array = new String[] { "jinxin", "feilong", "1" };
-            int index = 2;
-            String element = ArrayUtil.getElement(array, index);
-            LOGGER.info("" + element);
-        }
+        Object array = new String[] { "jinxin", "feilong", "1" };
+        int index = 2;
+        String element = ArrayUtil.getElement(array, index);
+        LOGGER.info("" + element);
     }
 
     /**
@@ -213,10 +208,7 @@ public class ArrayUtilTest{
         //		while (iterator1.hasNext()){
         //			LOGGER.debug("" + iterator1.next());
         //		}
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(iterator1));
-        }
-
+        LOGGER.debug(JsonUtil.format(iterator1));
     }
 
     /**

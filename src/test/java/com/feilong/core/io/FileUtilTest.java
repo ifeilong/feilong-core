@@ -92,12 +92,8 @@ public class FileUtilTest{
     public void testGetP1() throws MalformedURLException{
         URL resource = ClassLoaderUtil.getResource("org/apache/commons/collections4/map");
         URI uri = URLUtil.toURI(resource);
-
         File esapiDirectory = new File(uri);
-
-        String customDirectory = esapiDirectory.getAbsolutePath();
-
-        LOGGER.info(customDirectory);
+        LOGGER.info(esapiDirectory.getAbsolutePath());
     }
 
     /**
@@ -178,15 +174,12 @@ public class FileUtilTest{
     @Test
     public void testGetFileTopParentName(){
         assertEquals("E:/", FileUtil.getFileTopParentName("E:/"));
-
         assertEquals(
                         "mp2-product",
                         FileUtil.getFileTopParentName("mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
-
         assertEquals(
                         "mp2-product",
                         FileUtil.getFileTopParentName("mp2-product\\mp2-product-impl\\src\\..\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
-
         assertEquals("package-info.java", FileUtil.getFileTopParentName("package-info.java"));
 
     }
@@ -199,10 +192,8 @@ public class FileUtilTest{
      */
     @Test
     public void testGetFileSizes() throws IOException{
-
         String testFile = "E:\\DataCommon\\test\\1.png";
         testFile = "E:\\DataCommon\\Java\\JDK API 1.6.0 中文版.CHM";
-        testFile = "E:\\迅雷下载\\飞鸟娱乐(bbs.hdbird.com).小叮当与海盗仙子.720p.国英双语\\飞鸟娱乐(bbs.hdbird.com).小叮当与海盗仙子.720p.国英双语.mkv";
 
         File file = new File(testFile);
 

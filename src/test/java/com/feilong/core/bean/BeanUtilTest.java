@@ -198,11 +198,7 @@ public class BeanUtilTest{
         String[] aStrings = { "date", "id", "nickName" };
         ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
         BeanUtil.copyProperties(b, a, aStrings);
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(b));
-        }
-
+        LOGGER.debug(JsonUtil.format(b));
     }
 
     /**
@@ -211,14 +207,9 @@ public class BeanUtilTest{
     @Test
     public void copyProperties1(){
         SalesOrderDto salesOrderDto = new SalesOrderDto();
-
         //ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
         BeanUtil.copyProperties(salesOrderDto, salesOrder);
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
-        }
-
+        LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
     }
 
     /**
@@ -260,9 +251,6 @@ public class BeanUtilTest{
     @Test
     public void cloneBean(){
         SalesOrder salesOrder1 = BeanUtil.cloneBean(salesOrder);
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(salesOrder1));
-        }
+        LOGGER.debug(JsonUtil.format(salesOrder1));
     }
 }

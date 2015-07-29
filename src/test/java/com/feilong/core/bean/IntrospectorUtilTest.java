@@ -65,14 +65,9 @@ public class IntrospectorUtilTest{
      */
     @Test
     public final void testGetBeanInfoSearchPath(){
-
         //为了查找 BeanInfo 类而被搜索的包名称数组。此数组的默认值与实现有关，例如 Sun 实现最初设置为 {"sun.beans.infos"}。
         String[] beanInfoSearchPath = Introspector.getBeanInfoSearchPath();
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(beanInfoSearchPath));
-        }
-
+        LOGGER.debug(JsonUtil.format(beanInfoSearchPath));
     }
 
     /**
@@ -84,5 +79,4 @@ public class IntrospectorUtilTest{
         assertEquals("URL", IntrospectorUtil.decapitalize("URL"));
         assertEquals("jinXin", IntrospectorUtil.decapitalize("jinXin"));
     }
-
 }

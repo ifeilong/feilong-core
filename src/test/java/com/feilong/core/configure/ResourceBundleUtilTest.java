@@ -49,8 +49,7 @@ public class ResourceBundleUtilTest{
     @Test
     // "/WEB-INF/classes/feilong.user.properties"
     public final void testGetValue(){
-        String aString = ResourceBundleUtil.getValue(baseName, "config_test_array");
-        LOGGER.debug(aString);
+        LOGGER.debug(ResourceBundleUtil.getValue(baseName, "config_test_array"));
     }
 
     /**
@@ -59,8 +58,7 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public final void testGetValueWithArguments(){
-        String aString = ResourceBundleUtil.getValueWithArguments(resourceBundle, "test", "2", "22");
-        LOGGER.debug(aString);
+        LOGGER.debug(ResourceBundleUtil.getValueWithArguments(resourceBundle, "test", "2", "22"));
     }
 
     /**
@@ -77,7 +75,6 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public final void readPrefixAsMap(){
-
         Locale locale = Locale.CHINA;
         Map<String, String> map = ResourceBundleUtil.readPrefixAsMap(baseName, "FileType", "\\.", locale);
         LOGGER.info(JsonUtil.format(map));

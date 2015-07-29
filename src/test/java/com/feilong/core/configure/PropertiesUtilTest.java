@@ -15,18 +15,6 @@
  */
 package com.feilong.core.configure;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
-
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.feilong.core.io.CharsetType;
-import com.feilong.core.io.FileUtil;
-import com.feilong.core.io.UncheckedIOException;
 
 /**
  * The Class PropertiesUtilTest.
@@ -36,36 +24,6 @@ import com.feilong.core.io.UncheckedIOException;
  * @since 1.0
  */
 public class PropertiesUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesUtilTest.class);
-
-    /**
-     * Gets the properties value.
-     * 
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    @Test
-    public void testGetPropertiesValue() throws IOException{
-        String propertiesPath = "I:/Ebook/book.properties";
-        InputStream inputStream = FileUtil.getFileInputStream(propertiesPath);
-        Properties properties = PropertiesUtil.getProperties(inputStream);
-
-        try{
-            for (Object iterableElement : properties.keySet()){
-                LOGGER.info(new String(iterableElement.toString().getBytes(CharsetType.ISO_8859_1), CharsetType.UTF8));
-            }
-        }catch (UnsupportedEncodingException e1){
-            LOGGER.error("", e1);
-        }
-        // = PropertiesUtil.getPropertiesValue(FeiLongPropertiesUtilTest.class, propertiesPath, "锦衣夜行");
-        try{
-            inputStream.close();
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
-        }
-    }
 
     // @formatter:off
 

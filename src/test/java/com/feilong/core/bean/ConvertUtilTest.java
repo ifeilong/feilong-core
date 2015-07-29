@@ -47,12 +47,12 @@ public class ConvertUtilTest{
      *
      * @param <T>
      *            the generic type
+     * @param toBeConvertedValue
+     *            需要被转换的值
      * @param defaultArrayType
      *            默认的数组类型
      * @param individualArrayElementConverter
      *            单个元素的 {@link Converter}
-     * @param toBeConvertedValue
-     *            需要被转换的值
      * @return the t
      * @deprecated will Re-structure
      */
@@ -163,10 +163,7 @@ public class ConvertUtilTest{
 
         for (String string : tokenizeToStringArray){
             Serializable t = ConvertUtil.convert(string, Serializable.class);
-
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(t.getClass().getCanonicalName());
-            }
+            LOGGER.debug(t.getClass().getCanonicalName());
             linkedList.add(t);
         }
 
@@ -190,17 +187,15 @@ public class ConvertUtilTest{
     @Test
     public final void testToString2(){
         int[] int1 = { 2, 1 };
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(ConvertUtil.toString(int1));
-        }
+        LOGGER.debug(ConvertUtil.toString(int1));
     }
 
+    /**
+     * Test convert array.
+     */
     @Test
     public final void testConvertArray(){
         String[] int1 = { "2", "1" };
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(ConvertUtil.convert(int1, Long.class)));
-        }
+        LOGGER.debug(JsonUtil.format(ConvertUtil.convert(int1, Long.class)));
     }
 }

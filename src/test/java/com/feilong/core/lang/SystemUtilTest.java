@@ -83,9 +83,7 @@ public class SystemUtilTest{
     @Test
     public void testGetEnvMapForLog(){
         Map<String, String> envMapForLog = SystemUtil.getEnvMapForLog();
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(JsonUtil.format(envMapForLog));
-        }
+        LOGGER.info(JsonUtil.format(envMapForLog));
     }
 
     /**
@@ -141,9 +139,7 @@ public class SystemUtilTest{
     @Test
     public void testGetPropertiesMapForLog(){
         Map<String, String> propertiesMapForLog = SystemUtil.getPropertiesMapForLog();
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(JsonUtil.format(propertiesMapForLog));
-        }
+        LOGGER.info(JsonUtil.format(propertiesMapForLog));
     }
 
     /**

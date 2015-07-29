@@ -64,17 +64,11 @@ public class MapUtilTest{
         map.put(6L, new User(6L));
         map.put(4L, new User(4L));
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
-        }
-        if (LOGGER.isDebugEnabled()){
-            Long[] includeKeys = { 5L, 4L };
-            LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
-        }
-        if (LOGGER.isDebugEnabled()){
-            Long[] includeKeys = { 5L, 4L };
-            LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "userInfo.age", Long.class)));
-        }
+        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
+        Long[] includeKeys = { 5L, 4L };
+        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
+        Long[] includeKeys1 = { 5L, 4L };
+        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys1, "userInfo.age", Long.class)));
     }
 
     /**

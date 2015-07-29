@@ -70,9 +70,7 @@ public class GenericTest{
      */
     @Test
     public void testGenericTest(){
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info((String) getValue("jinxin", String.class));
-            LOGGER.info((String) getValue("jinxin", Integer.class));
-        }
+        LOGGER.info((String) getValue("jinxin", String.class));
+        LOGGER.info((String) getValue("jinxin", Integer.class));
     }
 }
