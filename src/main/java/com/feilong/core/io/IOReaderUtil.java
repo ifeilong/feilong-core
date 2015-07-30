@@ -88,10 +88,6 @@ public final class IOReaderUtil{
             throw new NullPointerException("the file is null or empty!");
         }
 
-        //        if (!file.canRead()) {
-        //            throw new IIOException("Can't read input file!");
-        //        }
-
         // 分配新的直接字节缓冲区
         final int capacity = 186140;
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(capacity);

@@ -126,33 +126,23 @@ public final class StringUtil{
         if (null == target){
             throw new IllegalArgumentException("target can't be null!");
         }
-
         // times 计数器
         int count = 0;
-
         // while 循环 点
         int j = 0;
-
         // 开始搜索的索引位置
         int fromIndex = 0;
-
         int sourceLength = source.length();
-        int targetLength = target.length();
-
         // 刚开始从 0的地方查找起
         while (j != sourceLength){
-
             // 从指定的索引开始 返回索引位置
             int i = source.indexOf(target, fromIndex);
             if (i != -1){
-
+                int targetLength = target.length();
                 // 一旦发现 查找到,下次 循环从找到的地方开始循环
                 // 查找 从 找到的地方 开始查找
                 j = i + targetLength;
-
                 fromIndex = i + targetLength;
-
-                // 总数 ++
                 count++;
             }else{
                 // 如果发现找不到了 就退出循环

@@ -116,9 +116,8 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
                         "2011-09-15 14:15:02",
                         DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2012-12-03 00:00:00",
-                        DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil
+                        .string2Date("2015-7-30 13:00:00", DatePattern.COMMON_DATE_AND_TIME)));
     }
 
     /**

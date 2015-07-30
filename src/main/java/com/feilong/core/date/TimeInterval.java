@@ -36,11 +36,8 @@ package com.feilong.core.date;
  */
 public final class TimeInterval{
 
-    //由于 annotation 的属性, 只能声明成  private类型
-    //Invalid type int for the annotation attribute ClientCache.value; 
-    //only primitive type, String, Class, annotation, enumeration are permitted or 1-dimensional arrays thereof
-
-    //声明成 int等 primitive类型,方便 annotation使用, 
+    //由于 annotation 的属性,只能声明成  primitive 类型
+    //否则提示 :Invalid type int for the annotation attribute xxx;only "primitive type, String, Class, annotation, enumeration" are permitted or 1-dimensional arrays thereof
 
     /**
      * 1秒 1s.

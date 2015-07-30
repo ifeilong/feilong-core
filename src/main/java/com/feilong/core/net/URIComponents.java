@@ -21,6 +21,8 @@ package com.feilong.core.net;
  * @author feilong
  * @version 1.0 Apr 23, 2014 1:36:16 PM
  * @see "org.springframework.web.util.HierarchicalUriComponents.Type"
+ * @see "org.springframework.web.util.UriComponentsBuilder"
+ * @see "org.springframework.web.util.UriComponents"
  * @since 1.0.9
  */
 public final class URIComponents{
@@ -39,8 +41,6 @@ public final class URIComponents{
 
     /** https协议<code>{@value}</code>. */
     public static final String SCHEME_HTTPS = "https";
-
-    // public static final String equal = "=";
 
     /** Don't let anyone instantiate this class. */
     private URIComponents(){

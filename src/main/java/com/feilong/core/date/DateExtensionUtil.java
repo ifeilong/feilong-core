@@ -253,11 +253,14 @@ public final class DateExtensionUtil{
     }
 
     // [start]转换成特色时间 toHumanizationDateString
+
     /**
-     * 人性化显示date时间,依据是和现在的时间间隔
+     * 人性化显示date时间,依据是和现在的时间间隔.
+     * 
      * <p>
-     * 转换规则,将传入的inDate和 new Date()当前时间比较<br>
-     * 当两者的时间差,(一般inDate小于当前时间 ,暂时不支持大于当前时间)
+     * 转换规则,将传入的inDate和 new Date()当前时间比较;当两者的时间差,(一般inDate小于当前时间 ,暂时不支持大于当前时间)
+     * </p>
+     * 
      * <ul>
      * <li>如果时间差为0天,<br>
      * 如果小时间隔等于0,如果分钟间隔为0,则显示间隔秒 + "秒钟前"<br>
@@ -297,85 +300,58 @@ public final class DateExtensionUtil{
     public static String toHumanizationDateString(Date inDate){
         Date nowDate = new Date();
 
-        //**************************************************************************************/
-        String returnValue = null;
         // 传过来的日期的年份
         int inYear = DateUtil.getYear(inDate);
-        // 传过来的日期的月份
-        // int inMonth = getMonth(inDate);
-        // 传过来的日期的日
-        int inDay = DateUtil.getDayOfMonth(inDate);
-
         //**************************************************************************************/
         // 当前时间的年
-        int year = DateUtil.getYear(nowDate);
-        // 当前时间的余额
-        // int month = getMonth();
-        // 当前时间的日
-        int day = DateUtil.getDayOfMonth(nowDate);
-
+        int currentYear = DateUtil.getYear(nowDate);
+        //是否是同一年
+        boolean isSameYear = currentYear == inYear;
         //**************************************************************************************/
         // 任意日期和现在相差的毫秒数
         long spaceTime = DateUtil.getIntervalTime(inDate, nowDate);
         // 相差天数
         int spaceDay = DateUtil.getIntervalDay(spaceTime);
-        // 相差小时数
-        int spaceHour = DateUtil.getIntervalHour(spaceTime);
-        // 相差分数
-        int spaceMinute = DateUtil.getIntervalMinute(spaceTime);
-        // 相差秒数
-        int spaceSecond = DateUtil.getIntervalSecond(spaceTime);
         //**************************************************************************************/
-        // 间隔一天
-        if (spaceDay == 1){
-            if (DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)){
-                returnValue = YESTERDAY + " ";
-            }else{
-                returnValue = THEDAY_BEFORE_YESTERDAY + " ";
-            }
-            returnValue += DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
-        }
-        // 间隔2天
-        else if (spaceDay == 2){
-            if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
-                returnValue = THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
-            }else{
-                // 今年
-                if (year == inYear){
-                    returnValue = DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
-                }else{
-                    returnValue = DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+
+        switch (spaceDay) {
+            case 0: // 间隔0天
+                int spaceHour = DateUtil.getIntervalHour(spaceTime); // 相差小时数
+                if (spaceHour == 0){// 小时间隔
+                    int spaceMinute = DateUtil.getIntervalMinute(spaceTime);
+                    if (spaceMinute == 0){
+                        int spaceSecond = DateUtil.getIntervalSecond(spaceTime);
+                        return spaceSecond + SECOND + "前";
+                    }
+                    return spaceMinute + MINUTE + "前";
                 }
-            }
-        }
-        // 间隔大于2天
-        else if (spaceDay > 2){
-            // 今年
-            if (year == inYear){
-                returnValue = DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
-            }else{
-                returnValue = DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
-            }
-        }
-        // 间隔0天
-        else if (spaceDay == 0){
-            // 小时间隔
-            if (spaceHour != 0){
-                if (inDay == day){
-                    returnValue = spaceHour + HOUR + "前";
-                }else{
-                    returnValue = YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                // 传过来的日期的日
+                int inDay = DateUtil.getDayOfMonth(inDate);
+                // 当前时间的日
+                int currentDayOfMonth = DateUtil.getDayOfMonth(nowDate);
+                if (inDay == currentDayOfMonth){
+                    return spaceHour + HOUR + "前";
                 }
-            }else{
-                // 分钟间隔
-                if (spaceMinute == 0){
-                    returnValue = spaceSecond + SECOND + "前";
-                }else{
-                    returnValue = spaceMinute + MINUTE + "前";
+                return YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+            case 1: // 间隔一天
+                if (DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)){
+                    return YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
                 }
-            }
+                return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+            case 2: // 间隔2天
+                if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
+                    return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                }
+                if (isSameYear){
+                    return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
+                }
+                return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+            default://spaceDay > 2     // 间隔大于2天
+                if (isSameYear){
+                    return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
+                }
+                return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
         }
-        return returnValue;
     }
 
     // [end]
