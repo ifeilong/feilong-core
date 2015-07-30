@@ -69,10 +69,8 @@ import com.feilong.core.util.Validator;
  * 
  * BeanUtilsBean bub = new BeanUtilsBean(cub, new PropertyUtilsBean());
  * 
- * String name = bub.getProperty(myObject, &quot;name&quot;);
- * LOGGER.debug(name);
- * String id = bub.getProperty(myObject, &quot;id&quot;);
- * LOGGER.debug(id);
+ * LOGGER.debug(bub.getProperty(myObject, &quot;name&quot;));
+ * LOGGER.debug(bub.getProperty(myObject, &quot;id&quot;));
  * 
  * </pre>
  * 
@@ -149,12 +147,15 @@ public final class BeanUtil{
     // [start] cloneBean
 
     /**
-     * 调用 {@link BeanUtils#cloneBean(Object)}.<br>
-     * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中<br>
+     * 调用 {@link BeanUtils#cloneBean(Object)}.
+     * 
+     * <p>
+     * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中
+     * <p>
      * 
      * <p>
      * {@link BeanUtils#cloneBean(Object)} 在源码上看是调用了 getPropertyUtils().copyProperties(newBean, bean);<br>
-     * 最后实际上还是<b>复制的引用 ，无法实现深clone</b><br>
+     * 最后实际上还是<b>复制的引用 ，无法实现深clone</b>
      * </p>
      * 
      * <p>
@@ -250,8 +251,7 @@ public final class BeanUtil{
      * 对象Properties的复制,调用了 {@link BeanUtils#copyProperties(Object, Object)}.
      * 
      * <p>
-     * 注意:这种copy都是浅拷贝，复制后的2个Bean的同一个属性可能拥有同一个对象的ref，<br>
-     * 这个在使用时要小心，特别是对于属性为自定义类的情况 .
+     * 注意:这种copy都是浅拷贝，复制后的2个Bean的同一个属性可能拥有同一个对象的ref， 这个在使用时要小心，特别是对于属性为自定义类的情况 .
      * </p>
      * 
      * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
@@ -292,26 +292,41 @@ public final class BeanUtil{
     /**
      * 对象值的复制 {@code fromObj-->toObj}.
      * 
+     * <h3>注意点:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre>
-     * 如果有java.util.Date 类型的 需要copy,那么 需要先这么着
+     * 如果有java.util.Date 类型的 需要copy,那么 需要先这么着:
      * DateConverter converter = new DateConverter(DatePattern.forToString, Locale.US);
      * ConvertUtils.register(converter, Date.class);
-     * 或者 使用 内置的
-     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class); *
+     * 
+     * 或者使用内置的:
+     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
      * 
      * BeanUtil.copyProperty(b, a, &quot;date&quot;);
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * 
+     * <h3>使用示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre>
      * 例如两个pojo:enterpriseSales和enterpriseSales_form 都含有字段&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;
+     * 
      * 通常写法
      * enterpriseSales.setEnterpriseName(enterpriseSales_form.getEnterpriseName());
      * enterpriseSales.setLinkMan(enterpriseSales_form.getLinkMan());
      * enterpriseSales.setPhone(enterpriseSales_form.getPhone());
+     * 
      * 此时,可以使用
-     * BeanUtil.copyProperties(enterpriseSales,enterpriseSales_form,new
-     * String[]{&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;});
+     * BeanUtil.copyProperties(enterpriseSales,enterpriseSales_form,new String[]{&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;});
      * </pre>
+     * 
+     * </blockquote>
      *
      * @param toObj
      *            目标对象
@@ -334,7 +349,7 @@ public final class BeanUtil{
         }
     }
 
-    //TODO add excludePropertyNames support
+    //XXX add excludePropertyNames support
 
     // [end]
 

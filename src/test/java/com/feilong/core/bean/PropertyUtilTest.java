@@ -58,4 +58,21 @@ public class PropertyUtilTest{
         LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(new HashMap())));
         LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(User.class)));
     }
+
+    @Test
+    public void testGetProperty(){
+        User a = new User();
+        a.setId(5L);
+        Date now = new Date();
+        a.setDate(now);
+
+        List list = new ArrayList();
+        list.add(a);
+        list.add(a);
+        list.add(a);
+
+        Object property = PropertyUtil.getProperty(list, "[0].id");
+        LOGGER.info("" + property);
+        LOGGER.info("map:{}", JsonUtil.format(property));
+    }
 }
