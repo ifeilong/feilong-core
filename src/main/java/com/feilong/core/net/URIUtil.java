@@ -210,33 +210,30 @@ public final class URIUtil{
             Map<String, String[]> map = parseQueryToArrayMap(query, charsetType);
             String encodeUrl = getEncodedUrlByArrayMap(before, map, charsetType);
 
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("after url:{}", encodeUrl);
-            }
+            LOGGER.debug("after url:{}", encodeUrl);
             return encodeUrl;
-        }else{
-            // 不带参数 一般不需要处理
-            return url;
         }
-        // 如果知道URI是有效的，不会产生URISyntaxException，可以使用静态的create(String uri)方法
-        // 调用的 new URI(str) 方法
+
+        // 不带参数 一般不需要处理
+        return url;
     }
 
     /**
      * call {@link java.net.URI#URI(String)}.
      * 
      * <p>
-     * 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个java.net.URISyntaxException.
+     * 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个java.net.URISyntaxException.<br>
+     * 如果知道URI是有效的，不会产生URISyntaxException，可以使用静态的create(String uri)方法
      * </p>
      *
      * @param path
      *            the path
      * @return {@link java.net.URI#URI(String)}
      * @see java.net.URI#URI(String)
+     * @since 1.3.0
      */
-    public static URI getURI(String path){
+    public static URI newURI(String path){
         try{
-            // 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个java.net.URISyntaxException.
             return new URI(path);
         }catch (URISyntaxException e){
             LOGGER.error(Slf4jUtil.formatMessage("path:[{}]", path), e);
@@ -257,7 +254,7 @@ public final class URIUtil{
      * @see java.net.URI#isAbsolute()
      */
     public static boolean isAbsolutePath(String path){
-        URI uri = getURI(path);
+        URI uri = newURI(path);
 
         if (null == uri){
             return false;
@@ -331,15 +328,15 @@ public final class URIUtil{
             appendMap.putAll(map);
         }
 
-        StringBuilder builder = new StringBuilder("");
-        builder.append(beforePath);
-        builder.append(URIComponents.QUESTIONMARK);
+        StringBuilder sb = new StringBuilder();
+        sb.append(beforePath);
+        sb.append(URIComponents.QUESTIONMARK);
 
         // *******************************************
         String queryString = combineQueryString(appendMap, charsetType);
-        builder.append(queryString);
+        sb.append(queryString);
 
-        return builder.toString();
+        return sb.toString();
     }
 
     /**
@@ -471,7 +468,6 @@ public final class URIUtil{
         Map<String, String[]> map = new LinkedHashMap<String, String[]>();
 
         for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
-
             String nameAndValue = nameAndValueArray[i];
             String[] tempArray = nameAndValue.split("=", 2);
 
@@ -479,19 +475,10 @@ public final class URIUtil{
                 String key = tempArray[0];
                 String value = tempArray[1];
 
-                if (Validator.isNullOrEmpty(charsetType)){
-                    // 没有编码 原样返回
-                }else{
+                if (Validator.isNotNullOrEmpty(charsetType)){
+                    // 浏览器传递queryString()参数差别(浏览器兼容问题);chrome会将query进行 encoded再发送请求;而ie原封不动的发送
 
-                    // 浏览器传递queryString()参数差别
-                    // chrome 会将query 进行 encoded 再发送请求
-                    // 而ie 原封不动的发送
-
-                    // 由于暂时不能辨别是否encoded过,所以 先强制decode 再 encode
-                    // 此处不能先转  decode(query, charsetType) ,参数就是想传 =是转义符
-
-                    // 统统先强制 decode 再 encode
-                    // 浏览器兼容问题
+                    // 由于暂时不能辨别是否encoded过,所以先强制decode再encode;此处不能先转decode(query,charsetType),参数就是想传 =是转义符
                     key = encode(decode(key, charsetType), charsetType);
                     value = encode(decode(value, charsetType), charsetType);
                 }
@@ -623,8 +610,7 @@ public final class URIUtil{
      *            字符串
      * @param bianma
      *            使用的编码
-     * @return 原来的字符串<br>
-     *         if isNullOrEmpty(str) return ""
+     * @return 原来的字符串,if isNullOrEmpty(str) return ""
      * @deprecated
      */
     @Deprecated
@@ -632,7 +618,7 @@ public final class URIUtil{
         if (Validator.isNullOrEmpty(str)){
             return StringUtils.EMPTY;
         }
-        byte[] bytes = StringUtil.getBytes(str.trim(), CharsetType.ISO_8859_1);
+        byte[] bytes = StringUtil.getBytes(str, CharsetType.ISO_8859_1);
         return StringUtil.newString(bytes, bianma);
     }
 

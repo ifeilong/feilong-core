@@ -92,12 +92,7 @@ public final class StringUtil{
      * @since 1.3.0
      */
     public static String newString(byte[] bytes,String charsetType){
-        try{
-            return StringUtils.toString(bytes, charsetType);
-        }catch (UnsupportedEncodingException e){
-            LOGGER.error("", e);
-            throw new RuntimeException(e);
-        }
+        return StringUtils.toEncodedString(bytes, Charset.forName(charsetType));
     }
 
     // [start] search
@@ -247,7 +242,7 @@ public final class StringUtil{
      */
     public static boolean isContain(Object text,String beIncludedString){
         if (null == text){
-            LOGGER.warn("the param \"text\" is null,default return false");
+            LOGGER.warn("the param [text] is null,default return false");
             return false;
         }
         int indexOf = text.toString().indexOf(beIncludedString);
@@ -274,16 +269,16 @@ public final class StringUtil{
      * @return <ul>
      *         <li>如果 null==text, return false</li>
      *         <li>如果 null==beIncludedString, return false</li>
-     *         <li>两个值 转成 小写 ,判断是否包含</li>
+     *         <li>两个值 转成小写 ,判断是否包含</li>
      *         </ul>
      */
     public static boolean isContainIgnoreCase(Object text,String beIncludedString){
         if (null == text){
-            LOGGER.warn("the param \"text\" is null,default return false");
+            LOGGER.warn("the param [text] is null,default return false");
             return false;
         }
         if (null == beIncludedString){
-            LOGGER.warn("the param \"beIncludedString\" is null,default return false");
+            LOGGER.warn("the param [beIncludedString] is null,default return false");
             return false;
         }
         return isContain(text.toString().toLowerCase(), beIncludedString.toLowerCase());
@@ -337,7 +332,7 @@ public final class StringUtil{
         }
         // 替换序列是null
         if (Validator.isNullOrEmpty(replacement)){
-            replacement = "";
+            replacement = StringUtils.EMPTY;
         }
         return content.toString().replace(target, replacement.toString());
     }
@@ -358,7 +353,7 @@ public final class StringUtil{
      */
     @Deprecated
     public static String replace(Object content,String target,Object bean,String filedName){
-        String replacement = "";
+        String replacement = StringUtils.EMPTY;
         // 替换序列是null
         if (Validator.isNotNullOrEmpty(bean)){
             Object filedValue = BeanUtil.getProperty(bean, filedName);
