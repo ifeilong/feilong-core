@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -64,26 +65,25 @@ public final class ObjectUtil{
     public static <T> T findTypeValue(Object findValue,Class<T> findedClassType){
         if (ClassUtil.isInstance(findValue, findedClassType)){
             return (T) findValue;
-        }else{
-            //一般自定义的command 里面 就是些 string int,list map等对象
-            //这些我们过滤掉,只取 类型是 findedClassType的
-            if (!ClassUtils.isPrimitiveOrWrapper(findedClassType)//
-                            && !ClassUtil.isInstance(findValue, CharSequence.class)//
-                            && !ClassUtil.isInstance(findValue, Collection.class) //
-                            && !ClassUtil.isInstance(findValue, Map.class) //
-            ){
-                Map<String, Object> describe = PropertyUtil.describe(findValue);
+        }
+        //一般自定义的command 里面 就是些 string int,list map等对象
+        //这些我们过滤掉,只取 类型是 findedClassType的
+        if (!ClassUtils.isPrimitiveOrWrapper(findedClassType)//
+                        && !ClassUtil.isInstance(findValue, CharSequence.class)//
+                        && !ClassUtil.isInstance(findValue, Collection.class) //
+                        && !ClassUtil.isInstance(findValue, Map.class) //
+        ){
+            Map<String, Object> describe = PropertyUtil.describe(findValue);
 
-                for (Map.Entry<String, Object> entry : describe.entrySet()){
-                    String key = entry.getKey();
-                    Object value = entry.getValue();
+            for (Map.Entry<String, Object> entry : describe.entrySet()){
+                String key = entry.getKey();
+                Object value = entry.getValue();
 
-                    if (null != value && !"class".equals(key)){
-                        //级联查询
-                        T t = findTypeValue(value, findedClassType);
-                        if (null != t){
-                            return t;
-                        }
+                if (null != value && !"class".equals(key)){
+                    //级联查询
+                    T t = findTypeValue(value, findedClassType);
+                    if (null != t){
+                        return t;
                     }
                 }
             }
@@ -139,11 +139,9 @@ public final class ObjectUtil{
      *         </ul>
      * @see ArrayUtil#toIterator(Object)
      * @see Collection#iterator()
-     * @see Iterator
-     * @see Map#keySet()
-     * @see Set#iterator()
-     * @see org.apache.commons.collections.iterators.EnumerationIterator#EnumerationIterator(Enumeration)
-     * @since Commons Collections 1.0
+     * @see EnumerationIterator#EnumerationIterator(Enumeration)
+     * @see IteratorUtils#getIterator(Object)
+     * @since Commons Collections4.0
      */
     @SuppressWarnings("unchecked")
     public static <T> Iterator<T> toIterator(Object object){
@@ -155,13 +153,13 @@ public final class ObjectUtil{
         if (object.getClass().isArray()){
             return ArrayUtil.toIterator(object);
         }
-        // Collection
-        else if (object instanceof Collection){
-            return ((Collection<T>) object).iterator();
-        }
         // Iterator
         else if (object instanceof Iterator){
             return (Iterator<T>) object;
+        }
+        // Collection
+        else if (object instanceof Collection){
+            return ((Collection<T>) object).iterator();
         }
         // Enumeration
         else if (object instanceof Enumeration){
@@ -230,6 +228,18 @@ public final class ObjectUtil{
      */
     public static Boolean isInteger(Object object){
         return object instanceof Integer;
+    }
+
+    /**
+     * 是否是数组.
+     *
+     * @param object
+     *            the object
+     * @return true, if checks if is array
+     * @since 1.3.0
+     */
+    public static Boolean isArray(Object object){
+        return object.getClass().isArray();
     }
 
     /**

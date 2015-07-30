@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DatePattern;
+import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.tools.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.core.tools.jsonlib.propertyFilter.ArrayContainsPropertyNamesPropertyFilter;
 import com.feilong.core.tools.jsonlib.propertySetStrategy.PropertyStrategyWrapper;
@@ -175,7 +176,7 @@ public final class JsonUtil{
             //TODO
             if (ClassUtils.isPrimitiveOrWrapper(klassClass) //
                             || String.class == klassClass //
-                            || klassClass.isArray()//XXX 数组一般 是可以转换的 
+                            || ObjectUtil.isArray(value)//XXX 数组一般 是可以转换的 
             ){
                 simpleValue = value;
             }else{
