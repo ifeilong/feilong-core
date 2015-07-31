@@ -22,8 +22,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.entity.BackWarnEntity;
 import com.feilong.core.util.StringUtil;
+import com.feilong.test.User;
 
 /**
  * The Class MethodUtilTest.
@@ -73,11 +73,11 @@ public class MethodUtilTest{
      */
     @Test
     public final void testInvokeMethod(){
-        BackWarnEntity backWarnEntity = new BackWarnEntity();
-        String methodName = "getIsSuccess";
+        User user = new User();
+        String methodName = "getId";
         Object[] params = new Object[0];
-        LOGGER.info("" + MethodUtil.invokeMethod(backWarnEntity, methodName, params));
-        LOGGER.info("" + MethodUtil.invokeMethod(backWarnEntity, methodName));
+        LOGGER.info("" + MethodUtil.invokeMethod(user, methodName, params));
+        LOGGER.info("" + MethodUtil.invokeMethod(user, methodName));
     }
 
     /**
@@ -85,7 +85,7 @@ public class MethodUtilTest{
      */
     @Test(expected = ReflectException.class)
     public final void testInvokeStaticMethod(){
-        MethodUtil.invokeStaticMethod(BackWarnEntity.class, "getIsSuccess", new Object[0]);
+        MethodUtil.invokeStaticMethod(User.class, "getId", new Object[0]);
     }
 
     /**
