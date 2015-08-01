@@ -163,16 +163,16 @@ public final class TypeUtil{
      * @see java.lang.Class#getGenericSuperclass()
      */
     private static ParameterizedType getGenericSuperclassParameterizedType(Class<?> klass){
-
         if (Validator.isNullOrEmpty(klass)){
             throw new NullPointerException("klass can't be null/empty!");
         }
 
-        Type type = klass.getGenericSuperclass(); //com.feilong.core.lang.reflect.res.BaseSolrRepositoryImpl<com.feilong.core.lang.reflect.res.SkuItem, java.lang.Long>
+        Class<?> useClass = klass;
+        Type type = useClass.getGenericSuperclass(); //com.feilong.core.lang.reflect.res.BaseSolrRepositoryImpl<com.feilong.core.lang.reflect.res.SkuItem, java.lang.Long>
 
-        while (!(type instanceof ParameterizedType) && Object.class != klass){
-            klass = klass.getSuperclass();
-            type = klass.getGenericSuperclass();
+        while (!(type instanceof ParameterizedType) && Object.class != useClass){
+            useClass = useClass.getSuperclass();
+            type = useClass.getGenericSuperclass();
         }
 
         return (ParameterizedType) type;

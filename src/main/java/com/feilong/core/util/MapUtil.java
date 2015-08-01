@@ -25,7 +25,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
@@ -324,14 +323,10 @@ public final class MapUtil{
             throw new NullPointerException("extractPropertyName is null or empty!");
         }
         //如果excludeKeys 是null ,那么抽取 所有的key
-        if (Validator.isNullOrEmpty(includeKeys)){
-            Set<K> keySet = map.keySet();
-            includeKeys = CollectionsUtil.toArray(keySet, keysClass);
-        }
+        K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? CollectionsUtil.toArray(map.keySet(), keysClass) : includeKeys;
 
         Map<K, V> returnMap = new HashMap<K, V>();
-
-        for (K key : includeKeys){
+        for (K key : useIncludeKeys){
             if (map.containsKey(key)){
                 O o = map.get(key);
                 V v = PropertyUtil.getProperty(o, extractPropertyName);

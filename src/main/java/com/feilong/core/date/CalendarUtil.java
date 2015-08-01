@@ -240,9 +240,6 @@ public final class CalendarUtil{
      * @since 1.3.0
      */
     public static Calendar resetYearEnd(Calendar calendar){
-        //int year = calendar.get(Calendar.YEAR);
-        //calendar.clear();
-        //calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, Calendar.DECEMBER);
         calendar.set(Calendar.DAY_OF_MONTH, 31);
         calendar.set(Calendar.HOUR_OF_DAY, 23);

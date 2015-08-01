@@ -99,7 +99,6 @@ public final class NumberFormatUtil{
         if (null == numberPattern){
             throw new NullPointerException("the numberPattern is null or empty!");
         }
-
         try{
             //改构造方法内部 调用了applyPattern(pattern, false)
             DecimalFormat decimalFormat = new DecimalFormat(numberPattern);
@@ -110,10 +109,7 @@ public final class NumberFormatUtil{
             if (null != roundingMode){
                 decimalFormat.setRoundingMode(roundingMode);
             }
-
-            // decimalFormat.applyPattern("##,###.000");
             String format = decimalFormat.format(value);
-
             if (LOGGER.isDebugEnabled()){
                 LOGGER.debug(
                                 "value:[{}], pattern:[{}],return:[{}],decimalFormat.toLocalizedPattern():[{}]",

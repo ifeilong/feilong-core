@@ -147,8 +147,7 @@ public final class ArrayUtil{
         if (Validator.isNullOrEmpty(arrays)){
             return Collections.emptyList();
         }
-        //Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象，
-        //而Arrays类里的内部类ArrayList没有实现AbstractList类的add方法，导致抛异常! strList.add("c");
+        //如果直接使用 Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象ArrayList,没有实现AbstractList类的add方法，如果 strList.add("c");导致抛异常! 
         return new ArrayList<T>(Arrays.asList(arrays));
     }
 
@@ -216,24 +215,17 @@ public final class ArrayUtil{
         if (Validator.isNullOrEmpty(arrays)){
             return StringUtils.EMPTY;
         }
-
         //ConvertUtils.primitiveToWrapper(type)
+        ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
 
-        if (Validator.isNullOrEmpty(toStringConfig)){
-            toStringConfig = new ToStringConfig();
-        }
-
-        String connector = toStringConfig.getConnector();
-
+        String connector = useToStringConfig.getConnector();
         StringBuilder sb = new StringBuilder();
         for (int i = 0, j = arrays.length; i < j; ++i){
             T t = arrays[i];
 
             //如果是null 或者 empty，但是参数值是不拼接，那么继续循环
-            if (Validator.isNullOrEmpty(t)){
-                if (!toStringConfig.getIsJoinNullOrEmpty()){
-                    continue;
-                }
+            if (Validator.isNullOrEmpty(t) && !useToStringConfig.getIsJoinNullOrEmpty()){
+                continue;
             }
             sb.append(t);
             if (Validator.isNotNullOrEmpty(connector)){
@@ -244,13 +236,10 @@ public final class ArrayUtil{
         //由于上面的循环中，最后一个元素可能是null或者empty，判断加还是不加拼接符有点麻烦，因此，循环中统一拼接，但是循环之后做截取处理
         String returnValue = sb.toString();
 
-        if (Validator.isNotNullOrEmpty(connector)){
-            if (returnValue.endsWith(connector)){
-                //去掉最后的拼接符
-                return StringUtil.substringWithoutLast(returnValue, connector.length());
-            }
+        if (Validator.isNotNullOrEmpty(connector) && returnValue.endsWith(connector)){
+            //去掉最后的拼接符
+            return StringUtil.substringWithoutLast(returnValue, connector.length());
         }
-
         return returnValue;
     }
 

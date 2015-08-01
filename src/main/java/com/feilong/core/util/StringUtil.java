@@ -321,10 +321,8 @@ public final class StringUtil{
             return StringUtils.EMPTY;
         }
         // 替换序列是null
-        if (Validator.isNullOrEmpty(replacement)){
-            replacement = StringUtils.EMPTY;
-        }
-        return content.toString().replace(target, replacement.toString());
+        String useReplacement = Validator.isNullOrEmpty(replacement) ? StringUtils.EMPTY : replacement.toString();
+        return content.toString().replace(target, useReplacement);
     }
 
     /**

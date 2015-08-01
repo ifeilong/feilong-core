@@ -87,7 +87,6 @@ public final class IOReaderUtil{
         if (Validator.isNullOrEmpty(file)){
             throw new NullPointerException("the file is null or empty!");
         }
-
         // 分配新的直接字节缓冲区
         final int capacity = 186140;
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(capacity);
@@ -99,12 +98,8 @@ public final class IOReaderUtil{
 
             // 用于读取、写入、映射和操作文件的通道.
             FileChannel fileChannel = fileInputStream.getChannel();
-
-            // 编码字符集和字符编码方案的组合,用于处理中文,可以更改
-            if (Validator.isNullOrEmpty(charsetName)){
-                charsetName = DEFAULT_CHARSET_NAME;
-            }
-            Charset charset = Charset.forName(charsetName);
+            String useCharsetName = Validator.isNullOrEmpty(charsetName) ? DEFAULT_CHARSET_NAME : charsetName;
+            Charset charset = Charset.forName(useCharsetName);
             while (fileChannel.read(byteBuffer) != -1){
                 // 反转此缓冲区
                 byteBuffer.flip();

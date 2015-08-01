@@ -51,6 +51,10 @@ public final class RegexUtil{
 
     /**
      * 编译给定正则表达式并尝试将给定输入与其匹配, 调用了 {@link Pattern#matches(String, CharSequence)}方法.
+     * 
+     * <p>
+     * 这里是等价于 {@link #getMatcher(String, CharSequence)}.matches();
+     * </p>
      *
      * @param regexPattern
      *            正则表达式字符串,pls use {@link RegexPattern}
@@ -63,7 +67,6 @@ public final class RegexUtil{
      * @since 1.0.7
      */
     public static boolean matches(String regexPattern,CharSequence input){
-        //这里是等价的 getMatcher(regexPattern, input).matches();
         return Pattern.matches(regexPattern, input);
     }
 

@@ -17,7 +17,6 @@ package com.feilong.core.tools.jsonlib;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -596,7 +595,7 @@ public final class JsonUtil{
     public static Map<String, Object> toMap(String json){
         JSONObject jsonObject = JSONObject.fromObject(json);
 
-        //处理不了key 是 null 的情况
+        //TODO 处理不了key 是 null 的情况
         //java.lang.ClassCastException: net.sf.json.JSONNull cannot be cast to java.lang.String
         //Map<String, Object> map = (Map<String, Object>) JSONObject.toBean(jsonObject, Map.class);
 
@@ -701,23 +700,20 @@ public final class JsonUtil{
      * @see net.sf.json.JSONSerializer#toJSON(Object)
      */
     public static JSON toJSON(Object obj,JsonConfig jsonConfig){
-        if (null == jsonConfig){
-            jsonConfig = DEFAULT_JSON_CONFIG;
-        }
+        JsonConfig useJsonConfig = null == jsonConfig ? DEFAULT_JSON_CONFIG : jsonConfig;
+
         // obj instanceof Collection || obj instanceof Object[]
         if (JSONUtils.isArray(obj) || //
                         obj instanceof Enum || // obj.getClass().isEnum()这么些 null会报错// object' is an Enum. Use JSONArray instead
                         obj instanceof Iterator){
-
             if (obj instanceof Iterator){
-                Collection<?> list = IteratorUtils.toList((Iterator<?>) obj);
-                obj = list;
+                return JSONArray.fromObject(IteratorUtils.toList((Iterator<?>) obj), useJsonConfig);
             }
             //Accepts JSON formatted strings, arrays, Collections and Enums.
-            return JSONArray.fromObject(obj, jsonConfig);
+            return JSONArray.fromObject(obj, useJsonConfig);
         }
         //Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.
-        return JSONObject.fromObject(obj, jsonConfig);
+        return JSONObject.fromObject(obj, useJsonConfig);
     }
 
     // [end]

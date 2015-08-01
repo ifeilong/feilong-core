@@ -136,7 +136,7 @@ public final class FileUtil{
      * @since 1.2.0
      */
     public static FileOutputStream getFileOutputStream(String filePath,FileWriteMode fileWriteMode){
-        boolean append = (fileWriteMode == FileWriteMode.APPEND);
+        boolean append = fileWriteMode == FileWriteMode.APPEND;
         return getFileOutputStream(filePath, append);
     }
 
@@ -237,7 +237,7 @@ public final class FileUtil{
                 LOGGER.debug(fileName);
             }
         }
-        return (fileListLength == 0);
+        return 0 == fileListLength;
     }
 
     // [start] 文件夹操作(createDirectory/deleteFileOrDirectory/deleteFileOrDirectory)

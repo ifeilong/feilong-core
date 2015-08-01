@@ -149,7 +149,7 @@ public final class ThreadUtil{
      *            每个线程都可以或不可以标记为一个守护程序.<br>
      *            当某个线程中运行的代码创建一个新 Thread 对象时，该新线程的初始优先级被设定为创建线程的优先级，并且当且仅当创建线程是守护线程时，新线程才是守护程序.
      * @param threadLogSwitch
-     *            the thread log config
+     *            the thread log switch
      * @return the thread object log
      * @since 1.1.1
      */
@@ -158,76 +158,75 @@ public final class ThreadUtil{
         if (null == thread){
             return Collections.emptyMap();
         }
-
-        if (Validator.isNullOrEmpty(threadLogSwitch)){
-            threadLogSwitch = SIMPLE_SWITCH;
-        }
+        //Method parameters, caught exceptions and foreach variables should not be reassigned
+        //Allowing parameters to be assigned to also reduces the code readability as developers will not be able to know whether the original parameter or some temporary variable is being accessed without going through the whole method.
+        ThreadLogSwitch useThreadLogSwitch = Validator.isNullOrEmpty(threadLogSwitch) ? SIMPLE_SWITCH : threadLogSwitch;
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        if (threadLogSwitch.getIsShowId()){
+        if (useThreadLogSwitch.getIsShowId()){
             //返回该线程的标识符
             map.put("thread.getId()", thread.getId());
         }
-        if (threadLogSwitch.getIsShowName()){
+        if (useThreadLogSwitch.getIsShowName()){
             //返回该线程的名称
             map.put("thread.getName()", thread.getName());
         }
-        if (threadLogSwitch.getIsShowActiveCount()){
+        if (useThreadLogSwitch.getIsShowActiveCount()){
             // 返回当前线程的线程组中活动线程的数目
             map.put("Thread.activeCount()", Thread.activeCount());
         }
-        if (threadLogSwitch.getIsShowIsAlive()){
+        if (useThreadLogSwitch.getIsShowIsAlive()){
             //测试线程是否处于活动状态
             map.put("thread.isAlive()", thread.isAlive());
         }
-        if (threadLogSwitch.getIsShowIsDaemon()){
+        if (useThreadLogSwitch.getIsShowIsDaemon()){
             //测试该线程是否为守护线程
             map.put("thread.isDaemon()", thread.isDaemon());
         }
-        if (threadLogSwitch.getIsShowIsInterrupted()){
+        if (useThreadLogSwitch.getIsShowIsInterrupted()){
             //测试线程是否已经中断
             map.put("thread.isInterrupted()", thread.isInterrupted());
         }
-        if (threadLogSwitch.getIsShowMIN_PRIORITY()){
+        if (useThreadLogSwitch.getIsShowMIN_PRIORITY()){
             map.put("Thread.MIN_PRIORITY", Thread.MIN_PRIORITY);
         }
-        if (threadLogSwitch.getIsShowNORM_PRIORITY()){
+        if (useThreadLogSwitch.getIsShowNORM_PRIORITY()){
             map.put("Thread.NORM_PRIORITY", Thread.NORM_PRIORITY);
         }
-        if (threadLogSwitch.getIsShowMAX_PRIORITY()){
+        if (useThreadLogSwitch.getIsShowMAX_PRIORITY()){
             map.put("Thread.MAX_PRIORITY", Thread.MAX_PRIORITY);
         }
-        if (threadLogSwitch.getIsShowPriority()){
+        if (useThreadLogSwitch.getIsShowPriority()){
             //返回线程的优先级
             map.put("thread.getPriority()", thread.getPriority());
         }
-        if (threadLogSwitch.getIsShowState()){
+        if (useThreadLogSwitch.getIsShowState()){
             //返回该线程的状态
             State state = thread.getState();
             map.put("thread.getState()", state);
         }
-        if (threadLogSwitch.getIsShowStackTrace()){
+        if (useThreadLogSwitch.getIsShowStackTrace()){
             StackTraceElement[] stackTraceElement = thread.getStackTrace();
             map.put("thread.getStackTrace()", stackTraceElement);
         }
-        if (threadLogSwitch.getIsShowThreadGroup()){
+        if (useThreadLogSwitch.getIsShowThreadGroup()){
             //返回该线程所属的线程组
             map.put("thread.getThreadGroup()", thread.getThreadGroup());
         }
-        if (threadLogSwitch.getIsShowAllStackTraces()){
+        if (useThreadLogSwitch.getIsShowAllStackTraces()){
             map.put("Thread.getAllStackTraces()", Thread.getAllStackTraces());
         }
-        if (threadLogSwitch.getIsShowToString()){
+        if (useThreadLogSwitch.getIsShowToString()){
             map.put("thread.toString()", thread.toString());
         }
-        if (threadLogSwitch.getIsShowContextClassLoader()){
+        if (useThreadLogSwitch.getIsShowContextClassLoader()){
             map.put("thread.getContextClassLoader()", thread.getContextClassLoader());
         }
-        if (threadLogSwitch.getIsShowUncaughtExceptionHandler()){
+        if (useThreadLogSwitch.getIsShowUncaughtExceptionHandler()){
             //返回该线程由于未捕获到异常而突然终止时调用的处理程序
             map.put("thread.getUncaughtExceptionHandler()", thread.getUncaughtExceptionHandler());
         }
-        if (threadLogSwitch.getIsShowDefaultUncaughtExceptionHandler()){
+        if (useThreadLogSwitch.getIsShowDefaultUncaughtExceptionHandler()){
             map.put("Thread.getDefaultUncaughtExceptionHandler()", Thread.getDefaultUncaughtExceptionHandler());
         }
         return map;
@@ -300,14 +299,9 @@ public final class ThreadUtil{
         StackTraceElement[] stackTraceElements = currentThread.getStackTrace();
 
         if (LOGGER.isDebugEnabled()){
-
             List<String> list = new ArrayList<String>();
-
             for (StackTraceElement stackTraceElement : stackTraceElements){
-
                 String messagePattern = "({}:{}) [{}()]";//"(%F:%L) [%M()]"
-                //stackTraceElement.getClassName()); //com.feilong.core.lang.ThreadUtil
-                //stackTraceElement.isNativeMethod());
                 String fileName = stackTraceElement.getFileName();
                 list.add(Slf4jUtil.formatMessage(
                                 messagePattern,
@@ -315,11 +309,9 @@ public final class ThreadUtil{
                                 stackTraceElement.getLineNumber(),
                                 stackTraceElement.getMethodName()));
             }
-
             if (LOGGER.isDebugEnabled()){
                 LOGGER.debug(JsonUtil.format(list));
             }
-
         }
         StackTraceElement stackTraceElement = stackTraceElements[index];
         return stackTraceElement.getMethodName();

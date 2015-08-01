@@ -161,11 +161,9 @@ public final class URLConnectionUtil{
      * @see InputStreamUtil#inputStream2String(InputStream, String)
      */
     public static String getResponseBodyAsString(String urlString,ConnectionConfig connectionConfig){
-        if (null == connectionConfig){
-            connectionConfig = new ConnectionConfig();
-        }
-        InputStream inputStream = getInputStream(urlString, connectionConfig);
-        return InputStreamUtil.inputStream2String(inputStream, connectionConfig.getContentCharset());
+        ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
+        InputStream inputStream = getInputStream(urlString, useConnectionConfig);
+        return InputStreamUtil.inputStream2String(inputStream, useConnectionConfig.getContentCharset());
 
     }
 
@@ -214,9 +212,8 @@ public final class URLConnectionUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            //TODO
             // 指示近期服务器不太可能有其他请求.调用 disconnect() 并不意味着可以对其他请求重用此 HttpURLConnection 实例.
-            // httpURLConnection.disconnect();
+            // TODO httpURLConnection.disconnect();
         }
     }
 
@@ -235,15 +232,13 @@ public final class URLConnectionUtil{
             throw new NullPointerException("httpRequest can't be null/empty!");
         }
 
-        if (null == connectionConfig){
-            connectionConfig = new ConnectionConfig();
-        }
+        ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
         try{
-            HttpURLConnection httpURLConnection = openConnection(httpRequest, connectionConfig);
+            HttpURLConnection httpURLConnection = openConnection(httpRequest, useConnectionConfig);
 
             // **************************************************************************
-            int connectTimeout = connectionConfig.getConnectTimeout();
-            int readTimeout = connectionConfig.getReadTimeout();
+            int connectTimeout = useConnectionConfig.getConnectTimeout();
+            int readTimeout = useConnectionConfig.getReadTimeout();
 
             // 一定要为HttpUrlConnection设置connectTimeout属性以防止连接被阻塞
             //设置连接主机超时（单位：毫秒）
@@ -265,15 +260,14 @@ public final class URLConnectionUtil{
                 }
             }
 
-            // httpURLConnection.setDoOutput(true);
+            // TODO  httpURLConnection.setDoOutput(true);
 
-            //  此处getOutputStream会隐含的进行connect(即：如同调用上面的connect()方法，所以在开发中不调用上述的connect()也可以). 
+            // 此处getOutputStream会隐含的进行connect(即：如同调用上面的connect()方法，所以在开发中不调用  httpURLConnection.connect(); 也可以). 
 
-            // 打开到此 URL 引用的资源的通信链接（如果尚未建立这样的连接）.  如果在已打开连接（此时 connected 字段的值为 true）的情况下调用 connect 方法，则忽略该调用.
+            // 打开到此 URL 引用的资源的通信链接（如果尚未建立这样的连接）.如果在已打开连接（此时 connected 字段的值为 true）的情况下调用 connect 方法，则忽略该调用.
 
             // 实际上只是建立了一个与服务器的tcp连接,并没有实际发送http请求. 
             // 无论是post还是get,http请求实际上直到HttpURLConnection的getInputStream()这个函数里面才正式发送出去. 
-            // httpURLConnection.connect();
             return httpURLConnection;
         }catch (MalformedURLException e){
             throw new UncheckedIOException(e);
@@ -295,16 +289,11 @@ public final class URLConnectionUtil{
      * @since 1.2.0
      */
     private static HttpURLConnection openConnection(HttpRequest httpRequest,ConnectionConfig connectionConfig) throws IOException{
-
-        if (null == connectionConfig){
-            connectionConfig = new ConnectionConfig();
-        }
-
-        LOGGER.debug("httpRequest:[{}],connectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(connectionConfig));
-
+        ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
+        LOGGER.debug("httpRequest:[{}],useConnectionConfig:[{}]", JsonUtil.format(httpRequest), JsonUtil.format(useConnectionConfig));
         URL url = new URL(httpRequest.getUri());
 
-        Proxy proxy = getProxy(connectionConfig.getProxyAddress(), connectionConfig.getProxyPort());
+        Proxy proxy = getProxy(useConnectionConfig.getProxyAddress(), useConnectionConfig.getProxyPort());
 
         // 此处的urlConnection对象实际上是根据URL的请求协议(此处是http)生成的URLConnection类的子类HttpURLConnection,
         // 故此处最好将其转化 为HttpURLConnection类型的对象,以便用到 HttpURLConnection更多的API.
