@@ -18,7 +18,6 @@ package com.feilong.core.io;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -172,14 +171,12 @@ public final class SerializableUtil{
     @Deprecated
     public static <T> T toObject(String serializableString){
         InputStream inputStream = null;
-        ObjectInputStream objectInputStream = null;
         try{
             String decodeString = URIUtil.encode(serializableString, CharsetType.UTF8);
             inputStream = IOUtils.toInputStream(decodeString, Charset.forName(CharsetType.ISO_8859_1));
             return org.apache.commons.lang3.SerializationUtils.deserialize(inputStream);
         }finally{
             IOUtils.closeQuietly(inputStream);
-            IOUtils.closeQuietly(objectInputStream);
         }
     }
 }

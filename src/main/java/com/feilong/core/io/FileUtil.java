@@ -29,7 +29,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -85,13 +84,7 @@ public final class FileUtil{
      */
     public static byte[] toByteArray(File file){
         InputStream inputStream = getFileInputStream(file);
-
-        //Creates a BufferedInputStream and saves its argument, the input stream in, for later use. 
-        //An internal buffer array is created and stored in buf.
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-
-        //Creates a new byte array output stream. 
-        //The buffer capacity is initially 32 bytes, though its size increases if necessary. 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         try{
@@ -406,7 +399,6 @@ public final class FileUtil{
      * @return 新文件名称
      */
     public static String getNewFileName(String fileName,String newPostfixName){
-
         if (Validator.isNullOrEmpty(fileName)){
             throw new NullPointerException("fileName can't be null/empty!");
         }
@@ -536,7 +528,6 @@ public final class FileUtil{
         }
 
         File file = new File(pathname);
-
         String parent = file.getParent();
 
         if (Validator.isNullOrEmpty(parent)){
@@ -545,7 +536,6 @@ public final class FileUtil{
 
         //递归
         String fileTopParentName = getFileTopParentName(file);
-
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("pathname:[{}],fileTopParentName:[{}]", pathname, fileTopParentName);
         }
@@ -591,7 +581,6 @@ public final class FileUtil{
         }
 
         File parent = file.getParentFile();
-
         if (Validator.isNullOrEmpty(parent)){
             String name = file.getPath();//E:/--->E:\
 
@@ -633,36 +622,6 @@ public final class FileUtil{
         return !isExistFile(filePath);
     }
 
-    // ************************************************************************
-    //
-    // 各种判断
-    //
-    // ************************************************************************
-    /**
-     * 上传的文件是否是常用图片格式.
-     * 
-     * @param fileName
-     *            文件名称,可以是全路径 ,也可以是 部分路径,会解析取到后缀名
-     * @return 上传的文件是否是常用图片格式
-     */
-    public static boolean isCommonImage(String fileName){
-        return isInAppointTypes(fileName, COMMON_IMAGES);
-    }
-
-    /**
-     * 上传的文件是否在指定的文件类型里面.
-     * 
-     * @param fileName
-     *            文件名称
-     * @param appointTypes
-     *            指定的文件类型数组
-     * @return 上传的文件是否在指定的文件类型里面
-     */
-    // XXX 忽视大小写
-    public static boolean isInAppointTypes(String fileName,String[] appointTypes){
-        return ArrayUtil.isContain(appointTypes, getFilePostfixName(fileName));
-    }
-
     // ************************************************************
     /**
      * 文件大小格式化.
@@ -684,11 +643,8 @@ public final class FileUtil{
      * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
      */
     public static String formatSize(long fileSize){
-        String danwei = "Bytes";
-        // 除完之后的余数
-        String yushu = "";
-        // 除数
-        long chushu = 1;
+        String danwei = "";
+        long chushu = 1;// 除数
         if (fileSize >= IOConstants.GB){
             danwei = "GB";
             chushu = IOConstants.GB;
@@ -698,11 +654,10 @@ public final class FileUtil{
         }else if (fileSize >= IOConstants.KB){
             danwei = "KB";
             chushu = IOConstants.KB;
+        }else{
+            return fileSize + "Bytes";
         }
-        if (chushu == 1){
-            return fileSize + danwei;
-        }
-        yushu = 100 * (fileSize % chushu) / chushu + "";
+        String yushu = 100 * (fileSize % chushu) / chushu + ""; // 除完之后的余数
         if ("0".equals(yushu)){
             return fileSize / chushu + danwei;
         }
@@ -764,7 +719,6 @@ public final class FileUtil{
      * @since 1.0.7
      */
     public static String getFormatFileName(final String fileName){
-
         String formatFileName = fileName;
 
         for (int i = 0, j = MICROSOFT_PC.length; i < j; ++i){
@@ -797,8 +751,8 @@ public final class FileUtil{
      * @see <a href="http://support.microsoft.com/kb/177506/zh-cn">错误消息： 文件名是无效的或不能包含任何以下字符</a>
      * @since 1.0.7
      */
-    private static final String[][] MICROSOFT_PC  = { //
-                                                  //            { "\\", "" }, // \
+    private static final String[][] MICROSOFT_PC = { //
+                                                 //            { "\\", "" }, // \
             //  { "/", "" }, // /
             { "\"", "" }, // "
             { ":", "" }, // :
@@ -807,13 +761,6 @@ public final class FileUtil{
             { "<", "" }, // <
             { ">", "" }, // >
             { "|", "" }, // |
-                                                  };
+                                                 };
 
-    /**
-     * 常用图片格式.
-     * 
-     * @deprecated 表述不清晰,将会重构
-     */
-    @Deprecated
-    private static final String[]   COMMON_IMAGES = { "gif", "bmp", "jpg", "png" };
 }
