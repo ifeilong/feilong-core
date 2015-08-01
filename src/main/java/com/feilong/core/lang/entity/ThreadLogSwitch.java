@@ -47,14 +47,11 @@ public final class ThreadLogSwitch implements Serializable{
     /** The is show is interrupted. */
     private boolean           isShowIsInterrupted;
 
-    /** The is show mi n_ priority. */
-    private boolean           isShowMIN_PRIORITY;
+    private boolean           isShowMinPriority;
 
-    /** The is show nor m_ priority. */
-    private boolean           isShowNORM_PRIORITY;
+    private boolean           isShowNormPriority;
 
-    /** The is show ma x_ priority. */
-    private boolean           isShowMAX_PRIORITY;
+    private boolean           isShowMaxPriority;
 
     /** The is show priority. */
     private boolean           isShowPriority;
@@ -226,18 +223,18 @@ public final class ThreadLogSwitch implements Serializable{
      *
      * @return the isShowMIN_PRIORITY
      */
-    public boolean getIsShowMIN_PRIORITY(){
-        return isShowMIN_PRIORITY;
+    public boolean isShowMinPriority(){
+        return isShowMinPriority;
     }
 
     /**
      * 设置 is show mi n_ priority.
      *
-     * @param isShowMIN_PRIORITY
+     * @param isShowMinPriority
      *            the isShowMIN_PRIORITY to set
      */
-    public void setIsShowMIN_PRIORITY(boolean isShowMIN_PRIORITY){
-        this.isShowMIN_PRIORITY = isShowMIN_PRIORITY;
+    public void setIsShowMinPriority(boolean isShowMinPriority){
+        this.isShowMinPriority = isShowMinPriority;
     }
 
     /**
@@ -245,18 +242,18 @@ public final class ThreadLogSwitch implements Serializable{
      *
      * @return the isShowNORM_PRIORITY
      */
-    public boolean getIsShowNORM_PRIORITY(){
-        return isShowNORM_PRIORITY;
+    public boolean isShowNormPriority(){
+        return isShowNormPriority;
     }
 
     /**
      * 设置 is show nor m_ priority.
      *
-     * @param isShowNORM_PRIORITY
+     * @param isShowNormPriority
      *            the isShowNORM_PRIORITY to set
      */
-    public void setIsShowNORM_PRIORITY(boolean isShowNORM_PRIORITY){
-        this.isShowNORM_PRIORITY = isShowNORM_PRIORITY;
+    public void setIsShowNormPriority(boolean isShowNormPriority){
+        this.isShowNormPriority = isShowNormPriority;
     }
 
     /**
@@ -264,18 +261,18 @@ public final class ThreadLogSwitch implements Serializable{
      *
      * @return the isShowMAX_PRIORITY
      */
-    public boolean getIsShowMAX_PRIORITY(){
-        return isShowMAX_PRIORITY;
+    public boolean isShowMaxPriority(){
+        return isShowMaxPriority;
     }
 
     /**
      * 设置 is show ma x_ priority.
      *
-     * @param isShowMAX_PRIORITY
+     * @param isShowMaxPriority
      *            the isShowMAX_PRIORITY to set
      */
-    public void setIsShowMAX_PRIORITY(boolean isShowMAX_PRIORITY){
-        this.isShowMAX_PRIORITY = isShowMAX_PRIORITY;
+    public void setIsShowMaxPriority(boolean isShowMaxPriority){
+        this.isShowMaxPriority = isShowMaxPriority;
     }
 
     /**

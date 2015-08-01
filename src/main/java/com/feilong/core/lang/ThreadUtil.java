@@ -187,13 +187,13 @@ public final class ThreadUtil{
             //测试线程是否已经中断
             map.put("thread.isInterrupted()", thread.isInterrupted());
         }
-        if (useThreadLogSwitch.getIsShowMIN_PRIORITY()){
+        if (useThreadLogSwitch.isShowMinPriority()){
             map.put("Thread.MIN_PRIORITY", Thread.MIN_PRIORITY);
         }
-        if (useThreadLogSwitch.getIsShowNORM_PRIORITY()){
+        if (useThreadLogSwitch.isShowNormPriority()){
             map.put("Thread.NORM_PRIORITY", Thread.NORM_PRIORITY);
         }
-        if (useThreadLogSwitch.getIsShowMAX_PRIORITY()){
+        if (useThreadLogSwitch.isShowMaxPriority()){
             map.put("Thread.MAX_PRIORITY", Thread.MAX_PRIORITY);
         }
         if (useThreadLogSwitch.getIsShowPriority()){

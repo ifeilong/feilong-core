@@ -358,22 +358,25 @@ public final class URIUtil{
     // [start] encode/decode
 
     /**
-     * iso-8859的方式去除乱码.
+     * iso-8859-1的方式去除乱码.
+     * 
+     * <p>
+     * iso-8859-1是JAVA网络传输使用的标准 字符集
+     * </p>
      * 
      * @param str
      *            字符串
-     * @param bianma
-     *            使用的编码
+     * @param charsetType
+     *            使用的编码,see {@link CharsetType}
      * @return 原来的字符串,if isNullOrEmpty(str) return ""
-     * @deprecated
+     * @see "org.apache.commons.codec.net.URLCodec#encode(String, String)"
      */
-    @Deprecated
-    public static String decodeLuanMaISO8859(String str,String bianma){
+    public static String decodeISO88591String(String str,String charsetType){
         if (Validator.isNullOrEmpty(str)){
             return StringUtils.EMPTY;
         }
         byte[] bytes = StringUtil.getBytes(str, CharsetType.ISO_8859_1);
-        return StringUtil.newString(bytes, bianma);
+        return StringUtil.newString(bytes, charsetType);
     }
 
     /**
