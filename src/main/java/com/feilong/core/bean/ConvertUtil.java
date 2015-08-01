@@ -218,6 +218,10 @@ public final class ConvertUtil{
 
     /**
      * object转成integer类型.
+     * 
+     * <p>
+     * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
+     * </p>
      *
      * @param toBeConvertedValue
      *            值
@@ -232,6 +236,10 @@ public final class ConvertUtil{
 
     /**
      * object类型转换成 {@link java.math.BigDecimal}.
+     * 
+     * <p>
+     * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
+     * </p>
      * 
      * <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
      * 
@@ -336,6 +344,10 @@ public final class ConvertUtil{
 
     /**
      * 把对象转换为long类型.
+     * 
+     * <p>
+     * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
+     * </p>
      *
      * @param toBeConvertedValue
      *            包含数字的对象.
@@ -346,7 +358,6 @@ public final class ConvertUtil{
     public static Long toLong(Object toBeConvertedValue){
         LongConverter longConverter = new LongConverter(null);
         return longConverter.convert(Long.class, toBeConvertedValue);
-        //return convert(toBeConvertedValue, Long.class);
     }
 
     /**

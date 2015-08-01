@@ -47,7 +47,7 @@ public class HttpRequest{
      * @return the full encoded url
      */
     public String getFullEncodedUrl(){
-        return URIUtil.getEncodedUrlByValueMap(uri, paramMap, CharsetType.UTF8);
+        return URIUtil.getEncodedUrlBySingleValueMap(uri, paramMap, CharsetType.UTF8);
     }
 
     /**

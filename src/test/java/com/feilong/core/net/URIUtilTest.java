@@ -15,10 +15,7 @@
  */
 package com.feilong.core.net;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,8 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.CharsetType;
-import com.feilong.core.io.SpecialFolder;
-import com.feilong.core.tools.jsonlib.JsonUtil;
 
 /**
  * The Class URIUtilTest.
@@ -43,19 +38,6 @@ public class URIUtilTest{
 
     /** The result. */
     private String              result = null;
-
-    /**
-     * Down.
-     * 
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    @Test
-    public void down() throws IOException{
-        String url = "http://www.kenwen.com/egbk/31/31186/4395342.txt";
-        String directoryName = SpecialFolder.getDesktop();
-        URIUtil.download(url, directoryName);
-    }
 
     /**
      * Test encode.
@@ -80,28 +62,6 @@ public class URIUtilTest{
     }
 
     /**
-     * Test get union url.
-     */
-    @Test
-    public void testGetUnionUrl(){
-        result = URIUtil.getUnionFileUrl("E:\\test", "sanguo");
-        LOGGER.info(result);
-    }
-
-    /**
-     * Test get union url2.
-     *
-     * @throws MalformedURLException
-     *             the malformed url exception
-     */
-    @Test
-    public void testGetUnionUrl2() throws MalformedURLException{
-        URL url = new URL("http://www.exiaoshuo.com/jinyiyexing/");
-        result = URIUtil.getUnionUrl(url, "/jinyiyexing/1173348/");
-        LOGGER.info(result);
-    }
-
-    /**
      * Decode.
      */
     @Test
@@ -118,8 +78,37 @@ public class URIUtilTest{
      */
     @Test
     public void specialCharToHexString(){
-        result = URIUtil.specialCharToHexString(" ");
+        result = specialCharToHexString(" ");
         LOGGER.info(result);
+    }
+
+    /**
+     * url中的特殊字符转为16进制代码,用于url传递.
+     * 
+     * @param specialCharacter
+     *            特殊字符
+     * @return 特殊字符url编码
+     * @deprecated 将来会重构
+     */
+    @Deprecated
+    public static String specialCharToHexString(String specialCharacter){
+
+        Map<String, String> specialCharacterMap = new HashMap<String, String>();
+
+        specialCharacterMap.put("+", "%2B");// URL 中+号表示空格
+        specialCharacterMap.put(" ", "%20");// URL中的空格可以用+号或者编码
+        specialCharacterMap.put("/", "%2F");// 分隔目录和子目录
+        specialCharacterMap.put(URIComponents.QUESTIONMARK, "%3F");// 分隔实际的 URL 和参数
+        specialCharacterMap.put("%", "%25");// 指定特殊字符
+        specialCharacterMap.put("#", "%23");// 表示书签
+        specialCharacterMap.put("&", "%26");// URL 中指定的参数间的分隔符
+        specialCharacterMap.put("=", "%3D");// URL 中指定参数的值
+
+        if (specialCharacterMap.containsKey(specialCharacter)){
+            return specialCharacterMap.get(specialCharacter);
+        }
+        // 不是 url 特殊字符 原样输出
+        return specialCharacter;
     }
 
     /**
@@ -159,9 +148,9 @@ public class URIUtilTest{
         Map<String, String> keyAndValueMap = new HashMap<String, String>();
         keyAndValueMap.put("a", "aaaa");
         String charsetType = CharsetType.UTF8;
-        LOGGER.info(URIUtil.getEncodedUrlByValueMap(beforeUrl, keyAndValueMap, charsetType));
-        LOGGER.info(URIUtil.getEncodedUrlByValueMap(beforeUrl, null, charsetType));
-        LOGGER.info(URIUtil.getEncodedUrlByValueMap(beforeUrl, null, null));
+        LOGGER.info(URIUtil.getEncodedUrlBySingleValueMap(beforeUrl, keyAndValueMap, charsetType));
+        LOGGER.info(URIUtil.getEncodedUrlBySingleValueMap(beforeUrl, null, charsetType));
+        LOGGER.info(URIUtil.getEncodedUrlBySingleValueMap(beforeUrl, null, null));
     }
 
     /**
@@ -174,55 +163,10 @@ public class URIUtilTest{
         Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
         keyAndArrayMap.put("a", new String[] { "aaaa", "bbbb" });
         String charsetType = CharsetType.UTF8;
-        LOGGER.info(URIUtil.getEncodedUrlByArrayMap(beforeUrl, keyAndArrayMap, charsetType));
-        LOGGER.info(URIUtil.getEncodedUrlByArrayMap(beforeUrl, null, charsetType));
-        LOGGER.info(URIUtil.getEncodedUrlByArrayMap(beforeUrl, null, null));
-        LOGGER.info(URIUtil.getEncodedUrlByArrayMap(null, keyAndArrayMap, null));
+        LOGGER.info(URIUtil.getEncodedUrlByArrayValueMap(beforeUrl, keyAndArrayMap, charsetType));
+        LOGGER.info(URIUtil.getEncodedUrlByArrayValueMap(beforeUrl, null, charsetType));
+        LOGGER.info(URIUtil.getEncodedUrlByArrayValueMap(beforeUrl, null, null));
+        LOGGER.info(URIUtil.getEncodedUrlByArrayValueMap(null, keyAndArrayMap, null));
     }
 
-    /**
-     * Combine query string.
-     */
-    @Test
-    public void combineQueryString(){
-        Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
-        keyAndArrayMap.put("a", new String[] { "aaaa", "bbbb" });
-        String charsetType = CharsetType.UTF8;
-        LOGGER.info(URIUtil.combineQueryString(keyAndArrayMap, charsetType));
-        LOGGER.info(URIUtil.combineQueryString(null, charsetType));
-        LOGGER.info(URIUtil.combineQueryString(null, null));
-        LOGGER.info(URIUtil.combineQueryString(keyAndArrayMap, null));
-    }
-
-    /**
-     * Parses the query to value map.
-     */
-    @Test
-    public void parseQueryToValueMap(){
-        LOGGER.info(JsonUtil.format(URIUtil.parseQueryToValueMap("a=1&b=2&a=3", CharsetType.UTF8)));
-        LOGGER.info(JsonUtil.format(URIUtil.parseQueryToValueMap("a=", CharsetType.UTF8)));
-        LOGGER.info(JsonUtil.format(URIUtil.parseQueryToValueMap("a=1&", CharsetType.UTF8)));
-        LOGGER.info(JsonUtil.format(URIUtil.parseQueryToValueMap("", CharsetType.UTF8)));
-
-    }
-
-    /**
-     * Parses the query to value map.
-     */
-    @Test
-    public void parseQueryToValueMap12(){
-        LOGGER.info(JsonUtil.format(URIUtil
-                        .parseQueryToValueMap(
-                                        "subject=%E4%B8%8A%E6%B5%B7%E5%AE%9D%E5%B0%8A%E7%94%B5%E5%95%86&sign_type=MD5&notify_url=http%3A%2F%2Fwww.gymboshop.com%2Fpay%2FdoNotify%2F1.htm&out_trade_no=2014072210034383&return_url=http%3A%2F%2Fwww.gymboshop.com%2Fpay%2FdoReturn%2F1.htm&sign=a6e7dfc7b6dd54a5cd5e8ca91302f934&_input_charset=UTF-8&it_b_pay=50m&total_fee=171.00&error_notify_url=http%3A%2F%2Fwww.gymboshop.com%2Fpay%2FnotifyError.htm%3Ftype%3D1&service=create_direct_pay_by_user&paymethod=directPay&partner=2088511258288082&anti_phishing_key=KP3FUWbOTF63CIcXqg%3D%3D&seller_email=pay%40gymboree.com.cn&payment_type=1",
-                                        CharsetType.UTF8)));
-    }
-
-    /**
-     * Parses the query to value map1.
-     */
-    @Test
-    public void parseQueryToValueMap1(){
-        LOGGER.info(JsonUtil.format(URIUtil.parseQueryToArrayMap("a=&b=2&a", CharsetType.UTF8)));
-        LOGGER.info(JsonUtil.format(URIUtil.parseQueryToArrayMap("a=1&b=2&a", CharsetType.UTF8)));
-    }
 }
