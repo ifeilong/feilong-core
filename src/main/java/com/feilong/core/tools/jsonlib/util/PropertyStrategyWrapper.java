@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.jsonlib.propertySetStrategy;
+package com.feilong.core.tools.jsonlib.util;
 
 import net.sf.json.util.PropertySetStrategy;
 

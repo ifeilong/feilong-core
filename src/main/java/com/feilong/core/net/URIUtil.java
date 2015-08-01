@@ -91,6 +91,11 @@ import com.feilong.core.util.Validator;
  * <h3>关于 URI path parameter(Matrix URIs) {@link <a href="http://www.w3.org/DesignIssues/MatrixURIs.html">MatrixURIs</a>}:</h3>
  * 
  * <blockquote>
+ * 
+ * <p style="color:red">
+ * Note: relative Matrix URLs are notgenerally implemented so this is just a theoretical discussion.
+ * </p>
+ * 
  * <p>
  * A URI path parameter is part of a path segment that occurs after its name. <br>
  * </p>
