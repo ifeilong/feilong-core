@@ -51,8 +51,11 @@ public class DateFormatUtil{
     // [start] format
 
     /**
-     * format 日期类型 格式化成字符串类型,调用的是 {@link #format(Date, String, Locale)},locale使用 {@link Locale#getDefault()}.<br>
-     * {@link SimpleDateFormat#SimpleDateFormat()} 默认使用的locale就是 {@link Locale#getDefault()}
+     * format 日期类型 格式化成字符串类型.
+     * 
+     * <p>
+     * 调用的是 {@link #format(Date, String, Locale)},locale使用 {@link Locale#getDefault()}.
+     * </p>
      * 
      * @param date
      *            the date
@@ -87,9 +90,12 @@ public class DateFormatUtil{
     // [start]parse
 
     /**
-     * parse 字符串类型转成日期类型,调用的是 {@link #parse(String, String, Locale)},locale使用 {@link Locale#getDefault()},<br>
-     * {@link SimpleDateFormat#SimpleDateFormat()} 默认使用的locale就是 {@link Locale#getDefault()}.
-     *
+     * parse 字符串类型转成日期类型.
+     * 
+     * <p>
+     * 调用的是 {@link #parse(String, String, Locale)},locale使用 {@link Locale#getDefault()}
+     * </p>
+     * 
      * @param dateString
      *            the date string
      * @param pattern

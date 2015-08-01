@@ -22,10 +22,10 @@ import java.text.MessageFormat;
  * {@link MessageFormat}工具类,常用于国际化 .
  * 
  * @author feilong
- * @version 1.0 2012-3-27 上午1:19:22
+ * @version 1.0.2 2012-3-27 上午1:19:22
  * @see MessageFormat
  * @see Format
- * @since 1.0.0
+ * @since 1.0.2
  */
 public final class MessageFormatUtil{
 

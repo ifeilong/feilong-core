@@ -115,10 +115,10 @@ public final class URIUtil{
      * 内部调用 {@link URI#create(String)}方法
      * </p>
      * 
-     * <p>
-     * 如果url中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
-     * 如果如果url中含?等参数,那么内部会调用 {@link #getEncodedUrlByArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}创建
-     * </p>
+     * <ul>
+     * <li>如果url中不含?等参数,直接调用 {@link URI#create(String)}创建</li>
+     * <li>如果如果url中含?等参数,那么内部会调用 {@link #getEncodedUrlByArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}创建</li>
+     * </ul>
      *
      * @param uriString
      *            the uri string
@@ -127,9 +127,9 @@ public final class URIUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return if isNullOrEmpty(uri),return null;<br>
      *         if Exception,throw URIParseException
+     * @see URI#create(String)
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
-     * @see URI#create(String)
      * @see #getEncodedUrlByArrayValueMap(String, Map, String)
      */
     public static URI create(String uriString,String charsetType){

@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -59,12 +60,12 @@ public final class ParamUtil{
      * @return the map< string, string>
      * @since 1.3.1
      */
-    public static Map<String, String> toSingleValueMap(Map<String, String[]> arrayValueMap){
+    public static Map<String, String> toSingleValueMap(Map<String, String[]> arrayValueMap){//返回 TreeMap 方便log 显示
         if (Validator.isNullOrEmpty(arrayValueMap)){
             return Collections.emptyMap();
         }
 
-        Map<String, String> singleValueMap = new HashMap<String, String>();
+        Map<String, String> singleValueMap = new TreeMap<String, String>();
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             String key = entry.getKey();
             String[] values = entry.getValue();
@@ -74,10 +75,32 @@ public final class ParamUtil{
         return singleValueMap;
     }
 
+    /**
+     * To array value map.
+     *
+     * @param nameAndValueMap
+     *            the name and value map
+     * @return the map< string, string[]>
+     * @since 1.3.1
+     */
+    private static Map<String, String[]> toArrayValueMap(Map<String, String> nameAndValueMap){
+        if (Validator.isNullOrEmpty(nameAndValueMap)){
+            return Collections.emptyMap();
+        }
+
+        Map<String, String[]> keyAndArrayMap = new TreeMap<String, String[]>();//返回 TreeMap 方便log 显示
+        for (Map.Entry<String, String> entry : nameAndValueMap.entrySet()){
+            String key = entry.getKey();
+            String value = entry.getValue();
+            keyAndArrayMap.put(key, new String[] { value });
+        }
+        return keyAndArrayMap;
+    }
+
     // ************************************addParameter******************************************************
 
     /**
-     * 添加参数,假如含有该参数会替换掉.
+     * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
      * 
      * @param url
      *            the url
@@ -87,7 +110,7 @@ public final class ParamUtil{
      *            添加的参数值
      * @param charsetType
      *            编码,see {@link CharsetType}
-     * @return 添加参数,加入含有该参数会替换掉
+     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameter(URI, String, Object, String)
      */
     public static String addParameter(String url,String paramName,Object parameValue,String charsetType){
@@ -96,7 +119,7 @@ public final class ParamUtil{
     }
 
     /**
-     * 添加参数,假如含有该参数会替换掉.
+     * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
      *
      * @param uriString
      *            the uri string
@@ -104,7 +127,7 @@ public final class ParamUtil{
      *            nameAndValueMap param name 和value 的键值对
      * @param charsetType
      *            编码,see {@link CharsetType}
-     * @return 添加参数,假如含有该参数会替换掉
+     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameterArrayValueMap(URI, Map, String)
      * @since 1.3.1
      */
@@ -114,7 +137,7 @@ public final class ParamUtil{
     }
 
     /**
-     * 添加参数,假如含有该参数会替换掉.
+     * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
      *
      * @param uriString
      *            the uri string
@@ -126,20 +149,12 @@ public final class ParamUtil{
      * @see #addParameterArrayValueMap(String, Map, String)
      */
     public static String addParameterSingleValueMap(String uriString,Map<String, String> nameAndValueMap,String charsetType){
-        Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
-
-        if (Validator.isNotNullOrEmpty(nameAndValueMap)){
-            for (Map.Entry<String, String> entry : nameAndValueMap.entrySet()){
-                String key = entry.getKey();
-                String value = entry.getValue();
-                keyAndArrayMap.put(key, new String[] { value });
-            }
-        }
+        Map<String, String[]> keyAndArrayMap = toArrayValueMap(nameAndValueMap);
         return addParameterArrayValueMap(uriString, keyAndArrayMap, charsetType);
     }
 
     /**
-     * 添加参数,假如含有该参数会替换掉.
+     * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
      * 
      * @param uri
      *            如果带有? 和参数,会先被截取,最后再拼接,<br>
@@ -150,7 +165,7 @@ public final class ParamUtil{
      *            添加的参数值
      * @param charsetType
      *            编码,see {@link CharsetType}
-     * @return 添加参数,假如含有该参数会替换掉
+     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameterArrayValueMap(URI, Map, String)
      */
     public static String addParameter(URI uri,String paramName,Object parameValue,String charsetType){
@@ -163,7 +178,7 @@ public final class ParamUtil{
      * 添加参数.
      * 
      * <p>
-     * 假如含有该参数会替换掉，比如原来是a=1&a=2,现在使用a,[3,4]调用这个方法， 会返回a=3&a=4.
+     * 如果uri包含指定的参数名字,那么会被新的值替换，比如原来是a=1&a=2,现在使用a,[3,4]调用这个方法， 会返回a=3&a=4.
      * </p>
      * 
      * @param uri
@@ -173,7 +188,7 @@ public final class ParamUtil{
      *            nameAndValueMap 类似于 request.getParameterMap
      * @param charsetType
      *            编码,see {@link CharsetType}
-     * @return 添加参数,假如含有该参数会替换掉
+     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      */
     public static String addParameterArrayValueMap(URI uri,Map<String, String[]> nameAndArrayValueMap,String charsetType){
         if (null == uri){

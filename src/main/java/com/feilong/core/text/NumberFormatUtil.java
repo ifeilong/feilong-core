@@ -29,18 +29,19 @@ import com.feilong.core.util.NumberPattern;
 
 /**
  * {@link NumberFormat}是所有数值格式的抽象基类,此类提供格式化和解析数值的接口.
+ * 
  * <p>
  * 直接已知子类： {@link ChoiceFormat}, {@link DecimalFormat}.<br>
  * 注意:<span style="color:red">{@link DecimalFormat}不是同步的 </span>,建议为每个线程创建独立的格式实例. (见JAVA API 文档)
  * </p>
  * 
  * @author feilong
- * @version 1.0 2012-3-27 上午1:39:53
+ * @version 1.0.2 2012-3-27 上午1:39:53
  * @see Format
  * @see NumberFormat
  * @see DecimalFormat
  * @see NumberPattern
- * @since 1.0.0
+ * @since 1.0.2
  */
 public final class NumberFormatUtil{
 
@@ -56,17 +57,16 @@ public final class NumberFormatUtil{
 
     /**
      * 将 {@link Number} 使用 numberPattern格式化.
-     * <p>
-     * 该方法使用RoundingMode.HALF_UP
-     * </p>
      * 
+     * <p>
+     * 该方法使用 {@link java.math.RoundingMode#HALF_UP}
+     * </p>
+     *
      * @param value
      *            the value
      * @param numberPattern
      *            the pattern {@link NumberPattern}
      * @return 如果有异常 将返回null
-     * @throws NullPointerException
-     *             if null == value or null == numberPattern
      * @see NumberPattern
      * @see DecimalFormat
      * @see RoundingMode#HALF_UP
@@ -79,7 +79,7 @@ public final class NumberFormatUtil{
 
     /**
      * 将 {@link Number} 使用 {@link RoundingMode} numberPattern格式化.
-     * 
+     *
      * @param value
      *            the value
      * @param numberPattern
@@ -87,8 +87,6 @@ public final class NumberFormatUtil{
      * @param roundingMode
      *            四舍五入的方法{@link RoundingMode}
      * @return 如果有异常 将返回null
-     * @throws NullPointerException
-     *             if null == value or null == numberPattern
      * @see NumberPattern
      * @see DecimalFormat
      * @see <a href="../util/NumberUtil.html#RoundingMode">JAVA 8种舍入法</a>
