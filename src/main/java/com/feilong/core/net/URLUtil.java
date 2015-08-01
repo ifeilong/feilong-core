@@ -33,6 +33,28 @@ import com.feilong.core.util.Validator;
 
 /**
  * The Class URLUtil.
+ * 
+ * <h3>URL 的长度上限</h3>
+ * 
+ * <blockquote>
+ * 
+ * <p>
+ * URL 的最大长度是多少？W3C 的 HTTP 协议 并没有限定，然而，在实际应用中，经过试验，不同浏览器和 Web 服务器有不同的约定：
+ * </p>
+ * 
+ * <ul>
+ * <li>IE 的 URL 长度上限是 2083 字节，其中纯路径部分不能超过 2048 字节。</li>
+ * <li>Firefox 浏览器的地址栏中超过 65536 字符后就不再显示。</li>
+ * <li>Safari 浏览器一致测试到 80000 字符还工作得好好的。</li>
+ * <li>Opera 浏览器测试到 190000 字符的时候，还正常工作。</li>
+ * </ul>
+ * 
+ * Web 服务器：
+ * <ul>
+ * <li>Apache Web 服务器在接收到大约 4000 字符长的 URL 时候产生 413 Entity Too Large" 错误。</li>
+ * <li>IIS 默认接收的最大 URL 是 16384 字符。</li>
+ * </ul>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.2.1 2015年6月21日 上午12:54:15

@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.CharsetType;
+import com.feilong.core.tools.jsonlib.JsonUtil;
 
 /**
  * The Class URIUtilTest.
@@ -132,6 +133,17 @@ public class URIUtilTest{
         // LOGGER.info(url1.toString());
         URI uri = URIUtil.create(url, CharsetType.UTF8);
         LOGGER.info(uri.toString());
+    }
+
+    /**
+     * Test create2.
+     */
+    @Test
+    public void testCreate2(){
+        String url = "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3";
+        URI uri = URIUtil.create(url, CharsetType.UTF8);
+        LOGGER.info(uri.toString());
+        LOGGER.info(JsonUtil.format(uri));
     }
 
     /**
