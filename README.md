@@ -84,18 +84,36 @@ commons |`feilong-core` | 核心jar,所有feilong-platform的基础 | 1.6
 
 ```XML
 <dependencies>
+
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.3.2</version>
-      <scope>compile</scope>
+      <version>3.4</version>
+    </dependency>
+    
+    <dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-collections4</artifactId>
+	<version>4.0</version>
     </dependency>
     
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
       <version>1.9.2</version>
-      <scope>compile</scope>
+    </dependency>
+    
+    <dependency>
+	<groupId>commons-io</groupId>
+	<artifactId>commons-io</artifactId>
+	<version>2.4</version>
+    </dependency>
+    
+    <dependency>
+	<groupId>net.sf.json-lib</groupId>
+	<artifactId>json-lib</artifactId>
+	<version>2.4</version>
+	<classifier>jdk15</classifier>
     </dependency>
     
     <dependency>
@@ -117,7 +135,7 @@ commons |`feilong-core` | 核心jar,所有feilong-platform的基础 | 1.6
 
 # About
 
-如果您对feilong platform 有任何建议，可以使用下面的联系方式：
+如果您对feilong core 有任何建议和批评，可以使用下面的联系方式：
 
 * 新浪微博:http://weibo.com/venusdrogon 
 * iteye博客:http://feitianbenyue.iteye.com/
