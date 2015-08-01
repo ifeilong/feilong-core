@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.net.ParamUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 
 /**
@@ -105,6 +106,7 @@ public final class MapUtil{
      * @param paramsMap
      *            用于拼接签名的参数
      * @return the string
+     * @see ParamUtil#parseArrayValueMapToQueryString(Map, String)
      * @since 1.3.1
      */
     public static String toNaturalOrderingString(Map<String, String> paramsMap){

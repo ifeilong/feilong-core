@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.io.CharsetType;
 import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -38,6 +39,7 @@ import com.feilong.core.util.Validator;
  * 
  * @author feilong
  * @version 1.0.0 2010-4-15 下午04:01:29
+ * @version 1.3.1 2015-8-1 22:08
  * @since 1.0.0
  */
 public final class ParamUtil{
@@ -83,7 +85,7 @@ public final class ParamUtil{
      * @return the map< string, string[]>
      * @since 1.3.1
      */
-    private static Map<String, String[]> toArrayValueMap(Map<String, String> nameAndValueMap){
+    public static Map<String, String[]> toArrayValueMap(Map<String, String> nameAndValueMap){
         if (Validator.isNullOrEmpty(nameAndValueMap)){
             return Collections.emptyMap();
         }
@@ -101,9 +103,9 @@ public final class ParamUtil{
 
     /**
      * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
-     * 
-     * @param url
-     *            the url
+     *
+     * @param uriString
+     *            the uri string
      * @param paramName
      *            添加的参数名称
      * @param parameValue
@@ -113,27 +115,31 @@ public final class ParamUtil{
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameter(URI, String, Object, String)
      */
-    public static String addParameter(String url,String paramName,Object parameValue,String charsetType){
-        URI uri = URIUtil.create(url, charsetType);
-        return addParameter(uri, paramName, parameValue, charsetType);
+    public static String addParameter(String uriString,String paramName,Object parameValue,String charsetType){
+        Map<String, String> nameAndValueMap = new HashMap<String, String>();
+        nameAndValueMap.put(paramName, "" + parameValue);
+        return addParameterSingleValueMap(uriString, nameAndValueMap, charsetType);
     }
 
     /**
      * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
-     *
-     * @param uriString
-     *            the uri string
-     * @param nameAndValuesMap
-     *            nameAndValueMap param name 和value 的键值对
+     * 
+     * @param uri
+     *            如果带有? 和参数,会先被截取,最后再拼接,<br>
+     *            如果不带?,则自动 增加?
+     * @param paramName
+     *            添加的参数名称
+     * @param parameValue
+     *            添加的参数值
      * @param charsetType
      *            编码,see {@link CharsetType}
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameterArrayValueMap(URI, Map, String)
-     * @since 1.3.1
      */
-    public static String addParameterArrayValueMap(String uriString,Map<String, String[]> nameAndValuesMap,String charsetType){
-        URI uri = URIUtil.create(uriString, charsetType);
-        return addParameterArrayValueMap(uri, nameAndValuesMap, charsetType);
+    public static String addParameter(URI uri,String paramName,Object parameValue,String charsetType){
+        Map<String, String[]> map = new HashMap<String, String[]>();
+        map.put(paramName, new String[] { "" + parameValue });
+        return addParameterArrayValueMap(uri, map, charsetType);
     }
 
     /**
@@ -155,23 +161,29 @@ public final class ParamUtil{
 
     /**
      * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
-     * 
-     * @param uri
-     *            如果带有? 和参数,会先被截取,最后再拼接,<br>
-     *            如果不带?,则自动 增加?
-     * @param paramName
-     *            添加的参数名称
-     * @param parameValue
-     *            添加的参数值
+     *
+     * @param uriString
+     *            the uri string
+     * @param nameAndArrayValueMap
+     *            the name and array value map
      * @param charsetType
      *            编码,see {@link CharsetType}
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameterArrayValueMap(URI, Map, String)
+     * @since 1.3.1
      */
-    public static String addParameter(URI uri,String paramName,Object parameValue,String charsetType){
-        Map<String, String[]> map = new HashMap<String, String[]>();
-        map.put(paramName, new String[] { parameValue.toString() });
-        return addParameterArrayValueMap(uri, map, charsetType);
+    public static String addParameterArrayValueMap(String uriString,Map<String, String[]> nameAndArrayValueMap,String charsetType){
+        //此处不能直接调用  addParameterArrayValueMap(URI uri 方法, 因为 uriString可能不是个符合规范的uri
+
+        if (null == uriString){
+            return StringUtils.EMPTY;
+        }
+
+        if (Validator.isNullOrEmpty(nameAndArrayValueMap)){
+            return uriString;
+        }
+        String queryString = URIUtil.getQueryString(uriString);
+        return addParameterArrayValueMap(uriString, queryString, nameAndArrayValueMap, charsetType);
     }
 
     /**
@@ -192,19 +204,47 @@ public final class ParamUtil{
      */
     public static String addParameterArrayValueMap(URI uri,Map<String, String[]> nameAndArrayValueMap,String charsetType){
         if (null == uri){
-            throw new IllegalArgumentException("uri can not be null!");
+            return StringUtils.EMPTY;
         }
+
+        String uriString = uri.toString();
         if (Validator.isNullOrEmpty(nameAndArrayValueMap)){
-            throw new IllegalArgumentException("nameAndValueMap can not be null!");
+            return uriString;
         }
-        String query = uri.getRawQuery();
-        Map<String, String[]> paramsMap = new LinkedHashMap<String, String[]>();
-        if (Validator.isNotNullOrEmpty(query)){
-            Map<String, String[]> originalMap = parseQueryStringToArrayValueMap(query, null);
+        String queryString = uri.getRawQuery();
+        return addParameterArrayValueMap(uriString, queryString, nameAndArrayValueMap, charsetType);
+    }
+
+    /**
+     * 添加 parameter array value map.
+     *
+     * @param uriString
+     *            the uri string
+     * @param queryString
+     *            the query
+     * @param nameAndArrayValueMap
+     *            the name and array value map
+     * @param charsetType
+     *            the charset type
+     * @return the string
+     * @since 1.3.1
+     */
+    private static String addParameterArrayValueMap(
+                    String uriString,
+                    String queryString,
+                    Map<String, String[]> nameAndArrayValueMap,
+                    String charsetType){
+        Map<String, String[]> paramsMap = new HashMap<String, String[]>();
+        paramsMap.putAll(nameAndArrayValueMap);
+        if (Validator.isNotNullOrEmpty(queryString)){
+            // 注意 action before 可能带参数
+            // "action": "https://202.6.215.230:8081/purchasing/purchase.do?action=loginRequest",
+            // "fullEncodedUrl":"https://202.6.215.230:8081/purchasing/purchase.do?action=loginRequest?miscFee=0&descp=&klikPayCode=03BELAV220&transactionDate=23%2F03%2F2014+02%3A40%3A19&currency=IDR",
+            Map<String, String[]> originalMap = parseQueryStringToArrayValueMap(queryString, null);
             paramsMap.putAll(originalMap);
         }
         paramsMap.putAll(nameAndArrayValueMap);
-        return combineUrl(uri, paramsMap, charsetType);
+        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), paramsMap, charsetType);
     }
 
     // ********************************removeParameter*********************************************************************
@@ -219,11 +259,15 @@ public final class ParamUtil{
      * @param charsetType
      *            编码,see {@link CharsetType}
      * @return the string
-     * @see #removeParameter(URI, String, String)
+     * @see #removeParameterList(String, List, String)
      */
     public static String removeParameter(String uriString,String paramName,String charsetType){
-        URI uri = URIUtil.create(uriString, charsetType);
-        return removeParameter(uri, paramName, charsetType);
+        if (null == paramName){
+            return uriString;
+        }
+        List<String> list = new ArrayList<String>();
+        list.add(paramName);
+        return removeParameterList(uriString, list, charsetType);
     }
 
     /**
@@ -238,7 +282,7 @@ public final class ParamUtil{
      * @return the string
      * @see #removeParameterList(URI, List, String)
      */
-    private static String removeParameter(URI uri,String paramName,String charsetType){
+    public static String removeParameter(URI uri,String paramName,String charsetType){
         List<String> paramNameList = null;
         if (Validator.isNotNullOrEmpty(paramName)){
             paramNameList = new ArrayList<String>();
@@ -259,8 +303,14 @@ public final class ParamUtil{
      * @return the string
      */
     public static String removeParameterList(String uriString,List<String> paramNameList,String charsetType){
-        URI uri = URIUtil.create(uriString, charsetType);
-        return removeParameterList(uri, paramNameList, charsetType);
+        if (null == uriString){
+            return StringUtils.EMPTY;
+        }
+        if (Validator.isNullOrEmpty(paramNameList)){// 如果 paramNameList 是null 原样返回
+            return uriString;
+        }
+        String queryString = URIUtil.getQueryString(uriString);
+        return removeParameterList(uriString, queryString, paramNameList, charsetType);
     }
 
     /**
@@ -278,19 +328,37 @@ public final class ParamUtil{
         if (null == uri){
             return StringUtils.EMPTY;
         }
-        String url = uri.toString();
-        if (Validator.isNullOrEmpty(paramNameList)){// 如果 paramNameList 是null 原样返回
-            return url;
+        String uriString = uri.toString();
+        if (Validator.isNullOrEmpty(paramNameList)){// 如果 paramNameList是null原样返回
+            return uriString;
         }
-        String query = uri.getRawQuery();// 返回此 URI 的原始查询组成部分。 URI 的查询组成部分（如果定义了）只包含合法的 URI 字符。
-        if (Validator.isNullOrEmpty(query)){
-            return url;// 不带参数原样返回
+        String queryString = uri.getRawQuery();// 返回此URI的原始查询组成部分。 URI的查询组成部分（如果定义了）只包含合法的 URI字符。
+        return removeParameterList(uriString, queryString, paramNameList, charsetType);
+    }
+
+    /**
+     * 删除 parameter list.
+     *
+     * @param uriString
+     *            the uri string
+     * @param queryString
+     *            the query string
+     * @param paramNameList
+     *            the param name list
+     * @param charsetType
+     *            the charset type
+     * @return the string
+     * @since 1.3.1
+     */
+    private static String removeParameterList(String uriString,String queryString,List<String> paramNameList,String charsetType){
+        if (Validator.isNullOrEmpty(queryString)){
+            return uriString;// 不带参数原样返回
         }
-        Map<String, String[]> paramsMap = parseQueryStringToArrayValueMap(query, null);
+        Map<String, String[]> paramsMap = parseQueryStringToArrayValueMap(queryString, null);
         for (String paramName : paramNameList){
             paramsMap.remove(paramName);
         }
-        return combineUrl(uri, paramsMap, charsetType);
+        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), paramsMap, charsetType);
     }
 
     // **************************************retentionParams********************************************************
@@ -308,8 +376,15 @@ public final class ParamUtil{
      * @see #retentionParamList(URI, List, String)
      */
     public static String retentionParamList(String uriString,List<String> paramNameList,String charsetType){
-        URI uri = URIUtil.create(uriString, charsetType);
-        return retentionParamList(uri, paramNameList, charsetType);
+        if (null == uriString){
+            return StringUtils.EMPTY;
+        }
+
+        if (Validator.isNullOrEmpty(paramNameList)){ // 如果 paramNameList 是null 原样返回
+            return uriString;
+        }
+        String queryString = URIUtil.getQueryString(uriString);
+        return retentionParamList(uriString, queryString, paramNameList, charsetType);
     }
 
     /**
@@ -320,9 +395,10 @@ public final class ParamUtil{
      * @param paramNameList
      *            the param name list
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            编码,see {@link CharsetType} , 何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return the string
-     * @see URIUtil#getEncodedUrlByArrayValueMap(String, Map, String)
+     * @see #parseQueryStringToArrayValueMap(String, String)
      */
     public static String retentionParamList(URI uri,List<String> paramNameList,String charsetType){
         if (null == uri){
@@ -330,21 +406,38 @@ public final class ParamUtil{
         }
 
         String uriString = uri.toString();
-        // 如果 paramNameList 是null 原样返回
-        if (Validator.isNullOrEmpty(paramNameList)){
+
+        if (Validator.isNullOrEmpty(paramNameList)){ // 如果 paramNameList 是null 原样返回
             return uriString;
         }
-        // 返回此 URI 的原始查询组成部分。 URI的查询组成部分（如果定义了）只包含合法的 URI 字符。
-        String query = uri.getRawQuery();
-        if (Validator.isNullOrEmpty(query)){
+        String queryString = uri.getRawQuery(); // 返回此 URI的原始查询组成部分。 URI的查询组成部分（如果定义了）只包含合法的 URI字符。
+        return retentionParamList(uriString, queryString, paramNameList, charsetType);
+    }
+
+    /**
+     * Retention param list.
+     *
+     * @param uriString
+     *            the uri string
+     * @param queryString
+     *            the query string
+     * @param paramNameList
+     *            the param name list
+     * @param charsetType
+     *            the charset type
+     * @return the string
+     * @since 1.3.1
+     */
+    private static String retentionParamList(String uriString,String queryString,List<String> paramNameList,String charsetType){
+        if (Validator.isNullOrEmpty(queryString)){
             return uriString; //不带参数原样返回
         }
-        Map<String, String[]> originalMap = parseQueryStringToArrayValueMap(query, null);
+        Map<String, String[]> originalMap = parseQueryStringToArrayValueMap(queryString, null);
         Map<String, String[]> paramsMap = new LinkedHashMap<String, String[]>();
         for (String paramName : paramNameList){
             paramsMap.put(paramName, originalMap.get(paramName));
         }
-        return combineUrl(uri, paramsMap, charsetType);
+        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), paramsMap, charsetType);
     }
 
     /**
@@ -427,8 +520,10 @@ public final class ParamUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return if isNullOrEmpty(appendMap) ,return ""
      * @see CharsetType
+     * @see MapUtil#toNaturalOrderingString(Map)
+     * @since 1.3.1
      */
-    public static String combineQueryString(Map<String, String[]> paramsMap,String charsetType){
+    public static String parseArrayValueMapToQueryString(Map<String, String[]> paramsMap,String charsetType){
         if (Validator.isNullOrEmpty(paramsMap)){
             return StringUtils.EMPTY;
         }
@@ -485,8 +580,8 @@ public final class ParamUtil{
     /**
      * Combine url.
      *
-     * @param uri
-     *            the uri
+     * @param beforePathWithoutQueryString
+     *            the before path without query string
      * @param paramsMap
      *            the map
      * @param charsetType
@@ -494,9 +589,19 @@ public final class ParamUtil{
      * @return the string
      * @since 1.3.1
      */
-    private static String combineUrl(URI uri,Map<String, String[]> paramsMap,String charsetType){
-        String uriString = uri.toString();
-        String before = URIUtil.getFullPathWithoutQueryString(uriString);
-        return URIUtil.getEncodedUrlByArrayValueMap(before, paramsMap, charsetType);
+    private static String combineUrl(String beforePathWithoutQueryString,Map<String, String[]> paramsMap,String charsetType){
+        if (Validator.isNullOrEmpty(beforePathWithoutQueryString)){
+            return StringUtils.EMPTY;
+        }
+        if (Validator.isNullOrEmpty(paramsMap)){//没有参数 直接return
+            return beforePathWithoutQueryString;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(beforePathWithoutQueryString);
+        sb.append(URIComponents.QUESTIONMARK);
+        sb.append(parseArrayValueMapToQueryString(paramsMap, charsetType));
+
+        return sb.toString();
     }
 }

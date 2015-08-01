@@ -21,7 +21,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -109,94 +108,11 @@ public final class URIUtil{
     }
 
     /**
-     * 基于 uri字符串和charset创建 {@link URI}.
-     * 
-     * <p>
-     * 内部调用 {@link URI#create(String)}方法
-     * </p>
-     * 
-     * <ul>
-     * <li>如果url中不含?等参数,直接调用 {@link URI#create(String)}创建</li>
-     * <li>如果如果url中含?等参数,那么内部会调用 {@link #getEncodedUrlByArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}创建</li>
-     * </ul>
-     *
-     * @param uriString
-     *            the uri string
-     * @param charsetType
-     *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
-     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return if isNullOrEmpty(uri),return null;<br>
-     *         if Exception,throw URIParseException
-     * @see URI#create(String)
-     * @see <a
-     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
-     * @see #getEncodedUrlByArrayValueMap(String, Map, String)
-     */
-    public static URI create(String uriString,String charsetType){
-        try{
-            String encodeUrl = encodeUrl(uriString, charsetType);
-            return URI.create(encodeUrl);
-        }catch (Exception e){
-            LOGGER.error("Exception:", e);
-            throw new URIParseException(e);
-        }
-    }
-
-    /**
-     * 基于 uriString和charset创建 {@link URI}.
-     * 
-     * <p>
-     * 内部调用 {@link URI#create(String)}方法
-     * </p>
-     * 
-     * <p>
-     * 如果uriString中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
-     * 如果如果uriString中含?等参数,那么内部会调用 {@link #getEncodedUrlByArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}创建
-     * </p>
-     *
-     * @param uriString
-     *            the uri string
-     * @param charsetType
-     *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
-     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return the string
-     * @see <a
-     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
-     * @see URI#create(String)
-     * @see #getEncodedUrlByArrayValueMap(String, Map, String)
-     */
-    public static String encodeUrl(String uriString,String charsetType){
-        if (Validator.isNullOrEmpty(uriString)){
-            throw new NullPointerException("the url is null or empty!");
-        }
-        if (Validator.isNullOrEmpty(charsetType)){
-            throw new NullPointerException("the charsetType is null or empty!");
-        }
-        LOGGER.debug("in uriString:[{}],charsetType:{}", uriString, charsetType);
-
-        if (!StringUtil.isContain(uriString, URIComponents.QUESTIONMARK)){
-            return uriString;// 不带参数 一般不需要处理
-        }
-
-        // XXX 暂不处理 这种路径报错的情况
-        // cmens/t-b-f-a-c-s-f-p400-600,0-200,200-400,600-up-gCold Gear-eBase Layer-i1-o.htm
-
-        // 问号前面的部分
-        String before = getFullPathWithoutQueryString(uriString);
-        String queryString = StringUtil.substring(uriString, URIComponents.QUESTIONMARK, 1);
-
-        Map<String, String[]> map = ParamUtil.parseQueryStringToArrayValueMap(queryString, charsetType);
-        String encodeUrl = getEncodedUrlByArrayValueMap(before, map, charsetType);
-        LOGGER.debug("after url:{}", encodeUrl);
-        return encodeUrl;
-    }
-
-    /**
      * call {@link java.net.URI#URI(String)}.
      * 
      * <p>
      * 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个 {@link URISyntaxException}.<br>
-     * 如果知道URI是有效的，不会产生 {@link URISyntaxException}，可以使用静态的create(String uri)方法
+     * 如果知道URI是有效的，不会产生 {@link URISyntaxException}，可以使用静态的 {@link java.net.URI#create(String)}方法
      * </p>
      *
      * @param uri
@@ -215,6 +131,41 @@ public final class URIUtil{
     }
 
     /**
+     * 基于 uri字符串和charset创建 {@link URI}.
+     * 
+     * <p>
+     * 内部调用 {@link URI#create(String)}方法
+     * </p>
+     * 
+     * <p>
+     * 如果uriString中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
+     * 如果如果uriString中含?等参数,那么内部会调用 {@link ParamUtil#addParameterArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}
+     * 创建
+     * </p>
+     *
+     * @param uriString
+     *            the uri string
+     * @param charsetType
+     *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
+     * @return if isNullOrEmpty(uri),return null;<br>
+     *         if Exception,throw URIParseException
+     * @see URI#create(String)
+     * @see #encodeUri(String, String)
+     * @see <a
+     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
+     */
+    public static URI create(String uriString,String charsetType){
+        try{
+            String encodeUrl = encodeUri(uriString, charsetType);
+            return URI.create(encodeUrl);
+        }catch (Exception e){
+            LOGGER.error("Exception:", e);
+            throw new URIParseException(e);
+        }
+    }
+
+    /**
      * 验证path是不是绝对路径.
      * 
      * <p>
@@ -228,80 +179,54 @@ public final class URIUtil{
      */
     public static boolean isAbsolutePath(String uriString){
         URI uri = newURI(uriString);
-
-        if (null == uri){
-            return false;
-        }
-        return uri.isAbsolute();
+        return null == uri ? false : uri.isAbsolute();
     }
 
     /**
-     * 拼接uri(如果charsetType 是null,则原样拼接,如果不是空,则返回安全的url).
+     * 基于 uriString和charset创建 {@link URI}.
+     * 
+     * <p>
+     * 内部调用 {@link URI#create(String)}方法
+     * </p>
+     * 
+     * <p>
+     * 如果uriString中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
+     * 如果如果uriString中含?等参数,那么内部会调用 {@link ParamUtil#addParameterArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}
+     * 创建
+     * </p>
      *
-     * @param beforeUri
-     *            支持带?的形式, 内部自动解析,如果 是 ？ 形似 ，参数会自动混合到 keyAndValueMap
-     * @param keyAndValueMap
-     *            单值Map，会转成 数组值Map
+     * @param uriString
+     *            the uri string
      * @param charsetType
      *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return the encoded url1
+     * @return the string
+     * @see <a
+     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
+     * @see URI#create(String)
+     * @see ParamUtil#addParameterArrayValueMap(String, Map, String)
      * @since 1.3.1
      */
-    public static String getEncodedUrlBySingleValueMap(String beforeUri,Map<String, String> keyAndValueMap,String charsetType){
-        Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
+    public static String encodeUri(String uriString,String charsetType){
+        if (Validator.isNullOrEmpty(uriString)){
+            throw new NullPointerException("the url is null or empty!");
+        }
+        LOGGER.debug("in uriString:[{}],charsetType:{}", uriString, charsetType);
 
-        if (Validator.isNotNullOrEmpty(keyAndValueMap)){
-            for (Map.Entry<String, String> entry : keyAndValueMap.entrySet()){
-                String key = entry.getKey();
-                String value = entry.getValue();
-                keyAndArrayMap.put(key, new String[] { value });
-            }
+        if (!hasQueryString(uriString)){
+            return uriString;// 不带参数 一般不需要处理
         }
 
-        return getEncodedUrlByArrayValueMap(beforeUri, keyAndArrayMap, charsetType);
-    }
+        // XXX 暂不处理 这种路径报错的情况
+        // cmens/t-b-f-a-c-s-f-p400-600,0-200,200-400,600-up-gCold Gear-eBase Layer-i1-o.htm
 
-    /**
-     * 拼接uri(如果charsetType 是null,则原样拼接,如果不是空,则返回安全的url).
-     *
-     * @param beforeUri
-     *            支持带?的形式, 内部自动解析,如果 是 ？ 形似 ，参数会自动混合到 keyAndArrayMap
-     * @param keyAndValueArrayMap
-     *            参数map value支持数组，类似于 request.getParameterMap
-     * @param charsetType
-     *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
-     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return if isNullOrEmpty(keyAndArrayMap) return beforeUrl;
-     * @see ParamUtil#combineQueryString(Map, String)
-     * @since 1.3.1
-     */
-    public static String getEncodedUrlByArrayValueMap(String beforeUri,Map<String, String[]> keyAndValueArrayMap,String charsetType){
-        if (Validator.isNullOrEmpty(keyAndValueArrayMap)){
-            return beforeUri;
-        }
+        // 问号前面的部分
+        String queryString = StringUtil.substring(uriString, URIComponents.QUESTIONMARK, 1);
 
-        Map<String, String[]> paramsMap = new HashMap<String, String[]>();
-        paramsMap.putAll(keyAndValueArrayMap);
-
-        // 注意 action before 可能带参数
-        // "action": "https://202.6.215.230:8081/purchasing/purchase.do?action=loginRequest",
-        // "fullEncodedUrl":"https://202.6.215.230:8081/purchasing/purchase.do?action=loginRequest?miscFee=0&descp=&klikPayCode=03BELAV220&transactionDate=23%2F03%2F2014+02%3A40%3A19&currency=IDR",
-
-        // *******************************************
-        String beforePath = beforeUri;
-        if (StringUtil.isContain(beforeUri, URIComponents.QUESTIONMARK)){
-            // 问号前面的部分
-            beforePath = getFullPathWithoutQueryString(beforeUri);
-            String queryString = StringUtil.substring(beforeUri, URIComponents.QUESTIONMARK, 1);
-
-            paramsMap.putAll(ParamUtil.parseQueryStringToArrayValueMap(queryString, null));
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append(beforePath);
-        sb.append(URIComponents.QUESTIONMARK);
-        sb.append(ParamUtil.combineQueryString(paramsMap, charsetType));
-        return sb.toString();
+        Map<String, String[]> map = ParamUtil.parseQueryStringToArrayValueMap(queryString, charsetType);
+        String encodeUrl = ParamUtil.addParameterArrayValueMap(uriString, map, charsetType);
+        LOGGER.debug("after url:{}", encodeUrl);
+        return encodeUrl;
     }
 
     /**
@@ -322,6 +247,44 @@ public final class URIUtil{
             return uri;
         }
         return uri.substring(0, index);
+    }
+
+    /**
+     * 获得queryString.
+     * 
+     * <p>
+     * 如果 uriString isNullOrEmpty,或者 uriString 不含有?,则返回 empty,否则截取第一个出现的?后面内容返回
+     * </p>
+     *
+     * @param uriString
+     *            the uri
+     * @return the query string
+     * @since 1.3.1
+     */
+    public static String getQueryString(String uriString){
+        if (Validator.isNullOrEmpty(uriString)){
+            return StringUtils.EMPTY;
+        }
+        // 判断url中是否含有?  XXX 有待严谨
+        int index = uriString.indexOf(URIComponents.QUESTIONMARK);
+        if (index == -1){
+            return StringUtils.EMPTY;
+        }
+        return StringUtil.substring(uriString, index + 1);
+    }
+
+    /**
+     * 是否有queryString.
+     *
+     * @param uriString
+     *            the uri string
+     * @return true, if checks for query string
+     * @since 1.3.1
+     */
+    // XXX 有待严谨
+    public static boolean hasQueryString(String uriString){
+        // 判断url中是否含有? 
+        return Validator.isNullOrEmpty(uriString) ? false : -1 != uriString.indexOf(URIComponents.QUESTIONMARK);
     }
 
     // [start] encode/decode

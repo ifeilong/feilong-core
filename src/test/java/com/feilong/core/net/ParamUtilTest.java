@@ -114,10 +114,10 @@ public class ParamUtilTest{
         Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
         keyAndArrayMap.put("a", new String[] { "aaaa", "bbbb" });
         String charsetType = CharsetType.UTF8;
-        LOGGER.info(ParamUtil.combineQueryString(keyAndArrayMap, charsetType));
-        LOGGER.info(ParamUtil.combineQueryString(null, charsetType));
-        LOGGER.info(ParamUtil.combineQueryString(null, null));
-        LOGGER.info(ParamUtil.combineQueryString(keyAndArrayMap, null));
+        LOGGER.info(ParamUtil.parseArrayValueMapToQueryString(keyAndArrayMap, charsetType));
+        LOGGER.info(ParamUtil.parseArrayValueMapToQueryString(null, charsetType));
+        LOGGER.info(ParamUtil.parseArrayValueMapToQueryString(null, null));
+        LOGGER.info(ParamUtil.parseArrayValueMapToQueryString(keyAndArrayMap, null));
     }
 
     /**
@@ -150,5 +150,23 @@ public class ParamUtilTest{
     public void parseQueryToValueMap1(){
         LOGGER.info(JsonUtil.format(ParamUtil.parseQueryStringToArrayValueMap("a=&b=2&a", CharsetType.UTF8)));
         LOGGER.info(JsonUtil.format(ParamUtil.parseQueryStringToArrayValueMap("a=1&b=2&a", CharsetType.UTF8)));
+    }
+
+    /**
+     * Gets the encoded url by array map.
+     * 
+     */
+    @Test
+    public void testGetEncodedUrlByArrayMap(){
+        String beforeUrl = "www.baidu.com";
+        Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
+        keyAndArrayMap.put("a", new String[] { "aaaa", "bbbb" });
+        String charsetType = CharsetType.UTF8;
+
+        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, charsetType));
+        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, null, charsetType));
+        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, null, null));
+        beforeUrl = null;
+        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, null));
     }
 }

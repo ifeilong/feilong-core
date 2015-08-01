@@ -128,45 +128,20 @@ public class URIUtilTest{
         // URIEditor uriEditor = new URIEditor();
         // uriEditor.setAsText(url);
         // LOGGER.info(URIEditor);
-        // try{
         // URL url1 = new URL(url);
         // LOGGER.info(url1.toString());
-        // }catch (MalformedURLException e){
-        // LOGGER.error(e.getClass().getName(), e);
-        // }
         URI uri = URIUtil.create(url, CharsetType.UTF8);
         LOGGER.info(uri.toString());
     }
 
     /**
-     * Gets the encoded url by value map.
-     * 
+     * Test get query string.
      */
     @Test
-    public void testGetEncodedUrlByValueMap(){
-        String beforeUrl = "www.baidu.com";
-        Map<String, String> keyAndValueMap = new HashMap<String, String>();
-        keyAndValueMap.put("a", "aaaa");
-        String charsetType = CharsetType.UTF8;
-        LOGGER.info(URIUtil.getEncodedUrlBySingleValueMap(beforeUrl, keyAndValueMap, charsetType));
-        LOGGER.info(URIUtil.getEncodedUrlBySingleValueMap(beforeUrl, null, charsetType));
-        LOGGER.info(URIUtil.getEncodedUrlBySingleValueMap(beforeUrl, null, null));
+    public void testGetQueryString(){
+        LOGGER.info(URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2"));
+        LOGGER.info(URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2?a"));
+        LOGGER.info(URIUtil.getQueryString("?"));
+        LOGGER.info(URIUtil.getQueryString("?a"));
     }
-
-    /**
-     * Gets the encoded url by array map.
-     * 
-     */
-    @Test
-    public void testGetEncodedUrlByArrayMap(){
-        String beforeUrl = "www.baidu.com";
-        Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
-        keyAndArrayMap.put("a", new String[] { "aaaa", "bbbb" });
-        String charsetType = CharsetType.UTF8;
-        LOGGER.info(URIUtil.getEncodedUrlByArrayValueMap(beforeUrl, keyAndArrayMap, charsetType));
-        LOGGER.info(URIUtil.getEncodedUrlByArrayValueMap(beforeUrl, null, charsetType));
-        LOGGER.info(URIUtil.getEncodedUrlByArrayValueMap(beforeUrl, null, null));
-        LOGGER.info(URIUtil.getEncodedUrlByArrayValueMap(null, keyAndArrayMap, null));
-    }
-
 }
