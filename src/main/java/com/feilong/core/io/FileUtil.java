@@ -283,7 +283,7 @@ public final class FileUtil{
     }
 
     /**
-     * 创建文件夹,支持级联创建.
+     * 创建文件夹,支持<span style="color:green">级联创建</span>.
      * 
      * <p>
      * 注意:

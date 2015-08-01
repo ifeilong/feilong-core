@@ -19,8 +19,8 @@ package com.feilong.core.io;
  * 文件类型.
  * 
  * @author feilong
- * @version 1.0 Dec 7, 2013 7:14:42 PM
- * @since 1.0.0
+ * @version 1.0.4 Dec 7, 2013 7:14:42 PM
+ * @since 1.0.4
  */
 public enum FileType{
 

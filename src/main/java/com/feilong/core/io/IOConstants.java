@@ -19,8 +19,8 @@ package com.feilong.core.io;
  * io常用常量.
  * 
  * @author feilong
- * @version 1.0 2010-5-21 下午04:31:08
- * @version 1.1 Apr 24, 2014 1:56:38 AM
+ * @version 1.0.0 2010-5-21 下午04:31:08
+ * @version 1.0.4 Apr 24, 2014 1:56:38 AM
  * @since 1.0.0
  */
 public final class IOConstants{
@@ -33,6 +33,7 @@ public final class IOConstants{
 
     /**
      * GB 1024 * 1024 * 1024 1073741824.
+     * 
      * <p>
      * <b>注意,{@link Integer#MAX_VALUE}=2147483647 是2G大小</b>
      * </p>
@@ -40,7 +41,7 @@ public final class IOConstants{
     public static final int GB                    = 1024 * MB;
 
     /** 默认缓冲大小 10k <code>{@value}</code> */
-    public static final int DEFAULT_BUFFER_LENGTH = IOConstants.KB * 10;
+    public static final int DEFAULT_BUFFER_LENGTH = 10 * KB;
 
     /** Don't let anyone instantiate this class. */
     private IOConstants(){

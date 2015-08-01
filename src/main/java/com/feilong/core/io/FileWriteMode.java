@@ -17,14 +17,15 @@ package com.feilong.core.io;
 
 /**
  * 文件写入的方式.
+ * 
  * <ul>
  * <li>{@link #COVER} 覆盖</li>
  * <li>{@link #APPEND} 追加</li>
  * </ul>
  * 
  * @author feilong
- * @version 1.0 Dec 23, 2013 8:11:33 PM
- * @since 1.0.0
+ * @version 1.0.4 Dec 23, 2013 8:11:33 PM
+ * @since 1.0.4
  */
 public enum FileWriteMode{
 

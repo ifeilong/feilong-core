@@ -25,8 +25,8 @@ import com.feilong.core.date.DateUtil;
  * 文件信息 entity.
  * 
  * @author feilong
- * @version 1.0.0 Dec 7, 2013 8:13:34 PM
- * @since 1.0.0
+ * @version 1.0.4 Dec 7, 2013 8:13:34 PM
+ * @since 1.0.4
  */
 public class FileInfoEntity implements Serializable{
 
@@ -152,5 +152,4 @@ public class FileInfoEntity implements Serializable{
         formatLastModified = DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
         return formatLastModified;
     }
-
 }

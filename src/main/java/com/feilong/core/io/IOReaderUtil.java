@@ -32,9 +32,9 @@ import com.feilong.core.util.Validator;
  * 读文件.
  * 
  * @author feilong
- * @version 1.0 Dec 23, 2013 10:27:08 PM
+ * @version 1.0.6 Dec 23, 2013 10:27:08 PM
  * @version 1.0.8 2014-11-25 20:04 add {@link #getFileContent(String, String)}
- * @since 1.0.0
+ * @since 1.0.6
  */
 public final class IOReaderUtil{
 

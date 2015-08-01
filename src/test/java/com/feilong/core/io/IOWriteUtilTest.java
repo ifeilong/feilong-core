@@ -15,10 +15,16 @@
  */
 package com.feilong.core.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -30,6 +36,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
+import com.feilong.core.util.StringUtil;
+import com.feilong.core.util.Validator;
 
 /**
  * The Class IOWriteUtilTest.
@@ -56,6 +64,165 @@ public class IOWriteUtilTest{
     }
 
     /**
+     * Write1.
+     */
+    @Test
+    public void write1(){
+
+        Date beginDate = new Date();
+
+        InputStream inputStream = FileUtil.getFileInputStream("K:\\Movie 电影\\1993 超级战警 马可·布拉姆贝拉 史泰龙.rmvb");
+        OutputStream outputStream = FileUtil.getFileOutputStream("D:\\1993 超级战警 马可·布拉姆贝拉 史泰龙.rmvb");
+        IOWriteUtil.write(inputStream, outputStream);
+
+        Date endDate = new Date();
+        LOGGER.info("time:{}", DateExtensionUtil.getIntervalForView(beginDate, endDate));
+    }
+
+    /**
+     * Write.
+     */
+    @Test
+    public void write(){
+        String url = "F:\\test.txt";
+        String directoryName = SpecialFolder.getDesktop();
+        IOWriteUtil.write(url, directoryName);
+    }
+
+    /**
+     * Test write nio.
+     */
+    @Test
+    public void testWriteNio(){
+        String content = getContent();
+
+        Date beginDate = new Date();
+        for (int i = 0; i < 10; ++i){
+            testWriteNio(content);
+        }
+        LOGGER.info("use time:{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+
+    }
+
+    /**
+     * Test write io.
+     */
+    @Test
+    public void testWriteIo(){
+        String content = getContent();
+        Date beginDate = new Date();
+        for (int i = 0; i < 10; ++i){
+            testWriteIO(content);
+        }
+        LOGGER.info("time:{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+    }
+
+    /**
+     * @param content
+     */
+    private void testWriteIO(String content){
+        Date beginDate = new Date();
+        String type = "io";
+        write(getPath(type), content, null, FileWriteMode.COVER);
+        LOGGER.info("[{}] time:{}", type, DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+    }
+
+    /**
+     * @param content
+     */
+    private void testWriteNio(String content){
+        Date beginDate = new Date();
+        String type = "nio";
+        IOWriteUtil.write(getPath(type), content);
+        LOGGER.info("[{}] time:{}", type, DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+    }
+
+    /**
+     * 获得 path.
+     *
+     * @param type
+     *            the type
+     * @return the path
+     */
+    private String getPath(String type){
+        String templateString = "/home/webuser/nike_int/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}_${type}.log";
+        Date date = new Date();
+        Map<String, String> valuesMap = new HashMap<String, String>();
+        valuesMap.put("yearMonth", DateUtil.date2String(date, DatePattern.YEAR_AND_MONTH));
+        valuesMap.put("expressDeliveryType", "sf");
+        valuesMap.put("fileName", DateUtil.date2String(date, DatePattern.TIMESTAMP));
+        valuesMap.put("type", type);
+        return StringUtil.replace(templateString, valuesMap);
+    }
+
+    /**
+     * 获得 content.
+     *
+     * @return the content
+     */
+    private String getContent(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("****************************************************" + SystemUtils.LINE_SEPARATOR);
+        sb.append("2011-05-13 22:24:37调用,系统顺丰在途订单597件" + SystemUtils.LINE_SEPARATOR);
+        sb.append("耗时:429020" + SystemUtils.LINE_SEPARATOR);
+        sb.append("****************************************************" + SystemUtils.LINE_SEPARATOR);
+        sb.append("派送成功订单495条" + SystemUtils.LINE_SEPARATOR);
+        for (int i = 0; i < 100000; i++){
+            sb.append("订单号:20850010运单号:102085592089\t寄件时间:2011-05-09 19:00:00\t签收人:张寄件时间:2011-05-10 14:49:00\t回单类型:1\n");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 将字符串写到文件中.
+     * 
+     * <ul>
+     * <li>如果文件不存在,自动创建,包括其父文件夹 (支持级联创建 文件夹)</li>
+     * <li>如果文件存在则覆盖旧文件,可以通过 指定 {@link FileWriteMode#APPEND}来表示追加内容而非覆盖</li>
+     * </ul>
+     *
+     * @param filePath
+     *            文件路径
+     * @param content
+     *            字符串内容
+     * @param encode
+     *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码 {@link CharsetType}
+     * @param fileWriteMode
+     *            写模式
+     * @see FileWriteMode
+     * @see CharsetType
+     * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
+     */
+    public static void write(String filePath,String content,String encode,FileWriteMode fileWriteMode){
+        String useEncode = Validator.isNullOrEmpty(encode) ? CharsetType.UTF8 : encode;
+        FileUtil.createDirectoryByFilePath(filePath);
+        OutputStream outputStream = null;
+        try{
+            outputStream = FileUtil.getFileOutputStream(filePath, fileWriteMode);
+            Writer outputStreamWriter = new OutputStreamWriter(outputStream, useEncode);
+
+            Writer writer = new PrintWriter(outputStreamWriter);
+            writer.write(content);
+            writer.close();
+
+            if (LOGGER.isInfoEnabled()){
+                File file = new File(filePath);
+                LOGGER.info(
+                                "fileWriteMode:[{}],useEncode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}]",
+                                fileWriteMode,
+                                useEncode,
+                                content.length(),
+                                FileUtil.getFileFormatSize(file),
+                                file.getAbsolutePath());
+            }
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }finally{
+            IOUtils.closeQuietly(outputStream);
+        }
+    }
+
+    /**
      * 使用IO API来写数据.
      *
      * @param bufferLength
@@ -65,10 +232,10 @@ public class IOWriteUtilTest{
      * @param outputStream
      *            the output stream
      * @since 1.0.8
-     * @deprecated use {@link #writeUseNIO(int, InputStream, OutputStream)}
+     * @deprecated use {@link IOWriteUtil#writeUseNIO(int, InputStream, OutputStream)}
      */
     @Deprecated
-    private static void writeUseIO(int bufferLength,InputStream inputStream,OutputStream outputStream){
+    public static void writeUseIO(int bufferLength,InputStream inputStream,OutputStream outputStream){
         int i = 0;
         int sumSize = 0;
         int j = 0;
@@ -111,63 +278,5 @@ public class IOWriteUtilTest{
             IOUtils.closeQuietly(outputStream);
             IOUtils.closeQuietly(inputStream);
         }
-    }
-
-    /**
-     * Write1.
-     *
-     * @throws IOException
-     *             the IO exception
-     */
-    @Test
-    public void write1() throws IOException{
-
-        Date beginDate = new Date();
-
-        InputStream inputStream = FileUtil.getFileInputStream("K:\\Movie 电影\\1993 超级战警 马可·布拉姆贝拉 史泰龙.rmvb");
-        OutputStream outputStream = FileUtil.getFileOutputStream("D:\\1993 超级战警 马可·布拉姆贝拉 史泰龙.rmvb");
-        IOWriteUtil.write(inputStream, outputStream);
-
-        Date endDate = new Date();
-        LOGGER.info("time:{}", DateExtensionUtil.getIntervalForView(beginDate, endDate));
-    }
-
-    /**
-     * Write.
-     * 
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    @Test
-    public void write() throws IOException{
-        String url = "F:\\test.txt";
-        String directoryName = SpecialFolder.getDesktop();
-        IOWriteUtil.write(url, directoryName);
-    }
-
-    /**
-     * Test write.
-     * 
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    @Test
-    public void testWrite() throws IOException{
-        String path = "/home/webuser/nike_int/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
-        Date date = new Date();
-        path = path.replace("${yearMonth}", DateUtil.date2String(date, DatePattern.YEAR_AND_MONTH));
-        path = path.replace("${expressDeliveryType}", "sf");
-        path = path.replace("${fileName}", DateUtil.date2String(date, DatePattern.TIMESTAMP));
-        // **************************************************************
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("****************************************************" + SystemUtils.LINE_SEPARATOR);
-        stringBuilder.append("2011-05-13 22:24:37调用,系统顺丰在途订单597件" + SystemUtils.LINE_SEPARATOR);
-        stringBuilder.append("耗时:429020" + SystemUtils.LINE_SEPARATOR);
-        stringBuilder.append("****************************************************" + SystemUtils.LINE_SEPARATOR);
-        stringBuilder.append("派送成功订单495条" + SystemUtils.LINE_SEPARATOR);
-        for (int i = 0; i < 1000; i++){
-            stringBuilder.append("订单号:20850010运单号:102085592089\t寄件时间:2011-05-09 19:00:00\t签收人:张寄件时间:2011-05-10 14:49:00\t回单类型:1\n");
-        }
-        IOWriteUtil.write(path, stringBuilder.toString());
     }
 }

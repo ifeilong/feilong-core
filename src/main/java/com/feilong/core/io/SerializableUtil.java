@@ -15,18 +15,21 @@
  */
 package com.feilong.core.io;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.core.net.URIUtil;
 
 /**
  * {@link java.io.Serializable}util.
@@ -168,20 +171,15 @@ public final class SerializableUtil{
     //TODO
     @Deprecated
     public static <T> T toObject(String serializableString){
-        ByteArrayInputStream byteArrayInputStream = null;
+        InputStream inputStream = null;
         ObjectInputStream objectInputStream = null;
         try{
-            String decodeString = java.net.URLDecoder.decode(serializableString, CharsetType.UTF8);
-            byteArrayInputStream = new ByteArrayInputStream(decodeString.getBytes(CharsetType.ISO_8859_1));
-
-            return org.apache.commons.lang3.SerializationUtils.deserialize(byteArrayInputStream);
-        }catch (IOException e){
-            LOGGER.error("", e);
-            throw new SerializationException(e);
+            String decodeString = URIUtil.encode(serializableString, CharsetType.UTF8);
+            inputStream = IOUtils.toInputStream(decodeString, Charset.forName(CharsetType.ISO_8859_1));
+            return org.apache.commons.lang3.SerializationUtils.deserialize(inputStream);
         }finally{
-            IOUtils.closeQuietly(byteArrayInputStream);
+            IOUtils.closeQuietly(inputStream);
             IOUtils.closeQuietly(objectInputStream);
         }
     }
-
 }
