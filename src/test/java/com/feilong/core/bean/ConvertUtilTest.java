@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -83,6 +84,18 @@ public class ConvertUtilTest{
         LOGGER.info(StringUtils.center("enumeration", 60, "*"));
         Enumeration<Object> enumeration = new StringTokenizer("this is a test");
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(enumeration)));
+
+    }
+
+    /**
+     * TestConvertUtilTest.
+     */
+    @Test
+    public void testConvertUtilTest(){
+        int[] i2 = { 1, 2 };
+        LOGGER.debug(JsonUtil.format(org.apache.commons.collections4.IteratorUtils.getIterator(i2)));
+        Iterator<Integer> iterator = ConvertUtil.toIterator(i2);
+        LOGGER.debug(JsonUtil.format(iterator));
     }
 
     /**

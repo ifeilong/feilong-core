@@ -19,8 +19,6 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
@@ -424,10 +422,13 @@ public final class ConvertUtil{
      * <ul>
      * <li>逗号分隔的字符串,{@link ConvertUtil#toStrings(Object)} 转成数组</li>
      * <li>数组</li>
-     * <li>{@link java.util.Map},将key 转成{@link java.util.Iterator}</li>
+     * <li>{@link java.util.Map},将 {@link java.util.Map#values()} 转成{@link java.util.Iterator}</li>
      * <li>{@link java.util.Collection}</li>
      * <li>{@link java.util.Iterator}</li>
      * <li>{@link java.util.Enumeration}</li>
+     * <li>{@link java.util.Dictionary}</li>
+     * <li>{@link org.w3c.dom.Node}</li>
+     * <li>{@link org.w3c.dom.NodeList}</li>
      * </ul>
      * </blockquote>
      *
@@ -437,14 +438,17 @@ public final class ConvertUtil{
      *            <ul>
      *            <li>逗号分隔的字符串,{@link ConvertUtil#toStrings(Object)} 转成数组</li>
      *            <li>数组</li>
-     *            <li>map,将key转成Iterator</li>
-     *            <li>Collection</li>
-     *            <li>Iterator</li>
-     *            <li>Enumeration</li>
+     *            <li>{@link java.util.Map},将 {@link java.util.Map#values()} 转成{@link java.util.Iterator}</li>
+     *            <li>{@link java.util.Collection}</li>
+     *            <li>{@link java.util.Iterator}</li>
+     *            <li>{@link java.util.Enumeration}</li>
+     *            <li>{@link java.util.Dictionary}</li>
+     *            <li>{@link org.w3c.dom.Node}</li>
+     *            <li>{@link org.w3c.dom.NodeList}</li>
      *            </ul>
      * @return <ul>
      *         <li>如果 null == object 返回null,</li>
-     *         <li>否则转成Iterator</li>
+     *         <li>否则转成 {@link IteratorUtils#getIterator(Object)}</li>
      *         </ul>
      * @see Collection#iterator()
      * @see EnumerationIterator#EnumerationIterator(Enumeration)
@@ -456,34 +460,11 @@ public final class ConvertUtil{
         if (null == object){
             return null;
         }
-
         // 逗号分隔的字符串
         if (object instanceof String){
             return toIterator(ConvertUtil.toStrings(object));
         }
-        // 数组
-        else if (object.getClass().isArray()){
-            return org.apache.commons.collections4.IteratorUtils.arrayIterator(object);
-        }
-        // Iterator
-        else if (object instanceof Iterator){
-            return (Iterator<T>) object;
-        }
-        // Collection
-        else if (object instanceof Collection){
-            return ((Collection<T>) object).iterator();
-        }
-        // Enumeration
-        else if (object instanceof Enumeration){
-            Enumeration<T> enumeration = (Enumeration<T>) object;
-            return new EnumerationIterator<T>(enumeration);
-        }
-        // map
-        else if (object instanceof Map){
-            Set<T> keySet = ((Map<T, ?>) object).keySet();
-            return keySet.iterator();
-        }
-        throw new IllegalArgumentException("param object:[" + object + "] don't support convert to Iterator.");
+        return (Iterator<T>) IteratorUtils.getIterator(object);
     }
 
     /**

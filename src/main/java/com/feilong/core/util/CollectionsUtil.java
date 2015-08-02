@@ -76,23 +76,29 @@ public final class CollectionsUtil{
     /**
      * 用于 自定义标签/ 自定义el.
      * 
+     * <p style="color:red">
+     * 注意,比较的是 {@link java.lang.Object#toString()}
+     * </p>
+     * 
      * @param collection
      *            一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator.
      * @param value
      *            任意类型的值,最终toString 判断比较.
      * @return true, if successful
      * @see ConvertUtil#toIterator(Object)
-     * @see #isContain(Iterator, Object)
-     * @deprecated
+     * @see #contains(Iterator, Object)
      */
-    @Deprecated
-    public static boolean isContainTag(Object collection,Object value){
+    public static boolean containsTag(Object collection,Object value){
         Iterator<?> iterator = ConvertUtil.toIterator(collection);
-        return isContain(iterator, value);
+        return contains(iterator, value);
     }
 
     /**
      * iterator是否包含某个值.
+     * 
+     * <p style="color:red">
+     * 注意,比较的是 {@link java.lang.Object#toString()}
+     * </p>
      * 
      * @param iterator
      *            iterator
@@ -101,24 +107,19 @@ public final class CollectionsUtil{
      * @return iterator是否包含某个值,如果iterator为null/empty,则返回false
      * @see Iterator#hasNext()
      * @see Iterator#next()
-     * @deprecated 代码这里不是很严谨 ,需要重构
      */
-    @Deprecated
-    public static boolean isContain(Iterator<?> iterator,Object value){
-        boolean flag = false;
-        if (Validator.isNotNullOrEmpty(iterator)){
-            Object object = null;
-            while (iterator.hasNext()){
-                object = iterator.next();
-                if (object.toString().equals(value.toString())){
-                    flag = true;
-                    break;
-                }
-            }
-        }else{
+    public static boolean contains(Iterator<?> iterator,Object value){
+        if (Validator.isNullOrEmpty(iterator)){
             LOGGER.debug("iterator is null/empty");
+            return false;
         }
-        return flag;
+        while (iterator.hasNext()){
+            Object object = iterator.next();
+            if (object.toString().equals(value.toString())){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
