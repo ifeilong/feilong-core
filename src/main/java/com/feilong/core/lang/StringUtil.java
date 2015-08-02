@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.lang;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -32,6 +32,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.io.CharsetType;
 import com.feilong.core.log.Slf4jUtil;
+import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.Validator;
 
 /**
  * {@link String}工具类,可以 查询,截取,format,转成16进制码.
@@ -79,12 +81,12 @@ import com.feilong.core.log.Slf4jUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.0.0 2010-2-9 上午09:53:37
  * @see "org.springframework.util.StringUtils#tokenizeToStringArray(String, String)"
  * @see "org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#MULTI_VALUE_ATTRIBUTE_DELIMITERS"
  * @see java.util.StringTokenizer
  * @see org.apache.commons.lang3.StringUtils
- * @since 1.0.0
+ * @version 1.3.1 2015年8月3日 上午3:06:20
+ * @since 1.3.1
  */
 public final class StringUtil{
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.lang.entity;
 
 import java.io.Serializable;
 
@@ -21,9 +21,9 @@ import java.io.Serializable;
  * 用于 连接object 成为字符串.
  *
  * @author feilong
- * @version 1.0.0 Mar 11, 2011 2:37:57 PM
+ * @version 1.3.1 2015年8月3日 上午3:06:20
  * @see org.apache.commons.lang3.builder.ToStringStyle
- * @since 1.0.0
+ * @since 1.3.1
  */
 public final class ToStringConfig implements Serializable{
 

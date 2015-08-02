@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.lang;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,6 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.lang.NumberPattern;
+import com.feilong.core.lang.NumberUtil;
 
 /**
  * The Class NumberUtilTest.

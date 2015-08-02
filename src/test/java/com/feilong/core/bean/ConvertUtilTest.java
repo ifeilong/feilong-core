@@ -35,8 +35,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.core.util.StringUtil;
 
 /**
  * The Class ConvertUtilTest.

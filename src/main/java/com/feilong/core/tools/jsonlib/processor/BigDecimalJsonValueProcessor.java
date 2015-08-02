@@ -22,8 +22,8 @@ import net.sf.json.processors.JsonValueProcessor;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.core.util.NumberPattern;
-import com.feilong.core.util.NumberUtil;
+import com.feilong.core.lang.NumberPattern;
+import com.feilong.core.lang.NumberUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -38,7 +38,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
     /**
      * The number pattern.
      * 
-     * @see com.feilong.core.util.NumberPattern
+     * @see com.feilong.core.lang.NumberPattern
      * */
     private String numberPattern;
 

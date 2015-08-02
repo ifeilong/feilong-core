@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.lang;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -21,6 +21,7 @@ import java.math.RoundingMode;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.NumberFormatUtil;
+import com.feilong.core.util.Validator;
 
 /**
  * 处理{@link Integer},{@link Long},{@link BigDecimal}等数据类型.
@@ -99,16 +100,16 @@ import com.feilong.core.text.NumberFormatUtil;
  * </tr>
  * </table>
  * </blockquote>
- * 
+ *
  * @author feilong
- * @version 1.0.0 2010-3-11 下午02:27:59
+ * @version 1.3.1 2015年8月3日 上午3:06:20
  * @see Integer
  * @see Long
  * @see BigDecimal
  * @see Number
  * @see NumberPattern
  * @see RoundingMode
- * @since 1.0.0
+ * @since 1.3.1
  */
 public final class NumberUtil{
 

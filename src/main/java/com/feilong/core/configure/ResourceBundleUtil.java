@@ -34,8 +34,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.io.FileUtil;
 import com.feilong.core.io.UncheckedIOException;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
-import com.feilong.core.util.StringUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -322,7 +322,7 @@ public final class ResourceBundleUtil implements BaseConfigure{
      *            如果是Integer.class,则返回的是Integer [] 数组
      * @return 以value.split(spliter),如果 资源值不存在,返回null
      * @see #getValue(ResourceBundle, String)
-     * @see com.feilong.core.util.StringUtil#tokenizeToStringArray(String, String)
+     * @see com.feilong.core.lang.StringUtil#tokenizeToStringArray(String, String)
      */
     public static <T> T[] getArray(ResourceBundle resourceBundle,String key,String spliter,Class<T> typeClass){
         String value = getValue(resourceBundle, key);

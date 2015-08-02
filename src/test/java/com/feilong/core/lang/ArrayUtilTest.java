@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.lang;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +29,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.ArrayUtil;
+import com.feilong.core.lang.entity.ToStringConfig;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 

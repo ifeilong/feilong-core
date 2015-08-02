@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.CharsetType;
-import com.feilong.core.util.ArrayUtil;
+import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 

@@ -38,6 +38,9 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.lang.ArrayUtil;
+import com.feilong.core.lang.NumberUtil;
+import com.feilong.core.lang.entity.ToStringConfig;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
@@ -699,7 +702,7 @@ public final class CollectionsUtil{
      *            对面里面属性的名称
      * @return the map< t, list< o>>
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
-     * @see com.feilong.core.util.ArrayUtil#group(Object[], String)
+     * @see com.feilong.core.lang.ArrayUtil#group(Object[], String)
      * @see #groupOne(Collection, String)
      * @since 1.0.8
      */

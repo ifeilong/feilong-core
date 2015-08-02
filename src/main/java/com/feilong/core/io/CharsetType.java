@@ -36,6 +36,11 @@ public final class CharsetType{
 
     /**
      * GB2312只能表示简体中文 <code>{@value}</code>.
+     * 
+     * <p style="color:red">
+     * if you want to use {@link #GB2312},may be use {@link #GB18030} is better
+     * </p>
+     * 
      * <p>
      * GB2312码是中华人民共和国国家汉字信息交换用编码，全称《信息交换用汉字编码字符集——基本集》，<br>
      * 由国家标准总局发布，<span style="color:green">1981年5月1日实施</span>，通行于大陆。 新加坡等地也使用此编码。<br>
@@ -47,22 +52,21 @@ public final class CharsetType{
      * 由于GB2312的出现，它基本上解决了我们日常的需要，它所收录的汉子已经覆盖了中国大陆99.75%的使用平率。 <br>
      * 但是我国文化博大精深，对于人名、古汉语等方面出现的罕用字，GB2312还是不能处理，于是后面的GBK和GB18030汉字字符集出现了。
      * </p>
-     * 
-     * @deprecated if you want to use {@link #GB2312},may be use {@link #GB18030} is better
      */
-    @Deprecated
     public static final String GB2312     = "GB2312";
 
     /**
      * GBK,全称《汉字内码扩展规范》,<span style="color:green">1995年12月1日制订</span>，K为扩展的汉语拼音中“扩”字的声母。,GBK可以表示简体中文和繁体中文 <code>{@value}</code>.
+     * 
+     * <p style="color:red">
+     * if you want to use {@link #GBK},may be use {@link #GB18030} is better
+     * </p>
+     * 
      * <p>
      * 英文全称Chinese Internal Code Specification。<br>
      * GBK编码标准兼容GB2312，共收录<span style="color:green">汉字21003个、符号883个，并提供1894个造字码位</span>，简、繁体字融于一库。
      * </p>
-     * 
-     * @deprecated if you want to use {@link #GBK},may be use {@link #GB18030} is better
      */
-    @Deprecated
     public static final String GBK        = "GBK";
 
     /**

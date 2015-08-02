@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.util.NumberPattern;
+import com.feilong.core.lang.NumberPattern;
 
 /**
  * {@link NumberFormat}是所有数值格式的抽象基类,此类提供格式化和解析数值的接口.

@@ -28,8 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.CharsetType;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.log.Slf4jUtil;
-import com.feilong.core.util.StringUtil;
 import com.feilong.core.util.Validator;
 
 /**

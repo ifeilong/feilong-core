@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.lang;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -28,6 +28,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.lang.entity.ToStringConfig;
+import com.feilong.core.util.Validator;
 
 /**
  * 数组工具类.
@@ -50,8 +52,8 @@ import com.feilong.core.bean.PropertyUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0 2010-4-16 下午01:00:27
- * @since 1.0.0
+ * @version 1.3.1 2015年8月3日 上午3:06:20
+ * @since 1.3.1
  */
 public final class ArrayUtil{
 
@@ -103,7 +105,6 @@ public final class ArrayUtil{
      *         if Validator.isNullOrEmpty(arrays), return null,else return {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
      */
-    //TODO 看看 能否和 convert 混合下
     public static <T> List<T> toList(T[] arrays){
         if (Validator.isNullOrEmpty(arrays)){
             return Collections.emptyList();

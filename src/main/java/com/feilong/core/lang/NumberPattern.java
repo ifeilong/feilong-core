@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.lang;
 
 import java.text.DecimalFormat;
 
@@ -107,12 +107,11 @@ import java.text.DecimalFormat;
  * </tr>
  * </table>
  * </blockquote>
- * 
+ *
  * @author feilong
- * @version 1.0 2012-3-6 下午8:33:23
- * @version 1.0.5 2014-5-4 14:35 改成interface
+ * @version 1.3.1 2015年8月3日 上午3:06:20
  * @see DecimalFormat
- * @since 1.0.0
+ * @since 1.3.1
  */
 public final class NumberPattern{
 

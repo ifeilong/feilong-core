@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
-import com.feilong.core.util.StringUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.Validator;
 
 /**
