@@ -407,7 +407,7 @@ public final class ConvertUtil{
      *            the to be converted value
      * @return the string[]
      * @see org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String[] toStrings(Object toBeConvertedValue){
         return convert(toBeConvertedValue, String[].class);

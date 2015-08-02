@@ -39,7 +39,7 @@ import com.feilong.core.util.Validator;
  * 
  * @author feilong
  * @version 1.0.0 2010-4-15 下午04:01:29
- * @version 1.3.1 2015-8-1 22:08
+ * @version 1.4.0 2015-8-1 22:08
  * @since 1.0.0
  */
 public final class ParamUtil{
@@ -64,7 +64,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the array value map
      * @return {@link TreeMap}
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static Map<String, String> toSingleValueMap(Map<String, String[]> arrayValueMap){//返回 TreeMap 方便log 显示
         if (Validator.isNullOrEmpty(arrayValueMap)){
@@ -91,7 +91,7 @@ public final class ParamUtil{
      * @param singleValueMap
      *            the name and value map
      * @return {@link TreeMap}
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static Map<String, String[]> toArrayValueMap(Map<String, String> singleValueMap){
         if (Validator.isNullOrEmpty(singleValueMap)){
@@ -186,7 +186,7 @@ public final class ParamUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameterArrayValueMap(URI, Map, String)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String addParameterArrayValueMap(String uriString,Map<String, String[]> arrayValueMap,String charsetType){
         //此处不能直接调用  addParameterArrayValueMap(URI uri 方法, 因为 uriString可能不是个符合规范的uri
@@ -246,7 +246,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String addParameterArrayValueMap(
                     String uriString,
@@ -381,7 +381,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String removeParameterList(String uriString,String queryString,List<String> paramNameList,String charsetType){
         if (Validator.isNullOrEmpty(uriString)){
@@ -467,7 +467,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String retentionParamList(String uriString,String queryString,List<String> paramNameList,String charsetType){
         if (Validator.isNullOrEmpty(queryString)){
@@ -495,7 +495,7 @@ public final class ParamUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the {@code map<string, string>}
      * @see #toSafeArrayValueMap(String, String)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static Map<String, String> toSingleValueMap(String queryString,String charsetType){
         Map<String, String[]> arrayValueMap = toSafeArrayValueMap(queryString, charsetType);
@@ -512,7 +512,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static Map<String, String[]> toSafeArrayValueMap(String queryString,String charsetType){
         if (Validator.isNullOrEmpty(queryString)){
@@ -563,7 +563,7 @@ public final class ParamUtil{
      * @return if isNullOrEmpty(appendMap) ,return ""
      * @see CharsetType
      * @see #toNaturalOrderingQueryString(Map)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String toSafeQueryString(Map<String, String[]> arrayValueMap,String charsetType){
         if (Validator.isNullOrEmpty(arrayValueMap)){
@@ -639,7 +639,7 @@ public final class ParamUtil{
      *            用于拼接签名的参数
      * @return the string
      * @see #toSafeQueryString(Map, String)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
         if (Validator.isNullOrEmpty(singleValueMap)){
@@ -661,7 +661,7 @@ public final class ParamUtil{
      * @return the string
      * @see #toArrayValueMap(Map)
      * @see #joinArrayValueMap(Map)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String joinSingleValueMap(Map<String, String> singleValueMap){
         if (Validator.isNullOrEmpty(singleValueMap)){
@@ -687,7 +687,7 @@ public final class ParamUtil{
      *            the array value map
      * @return the string
      * @see #joinParamNameAndValues(String, String[])
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String joinArrayValueMap(Map<String, String[]> arrayValueMap){
         if (Validator.isNullOrEmpty(arrayValueMap)){
@@ -724,7 +724,7 @@ public final class ParamUtil{
      * @see java.lang.AbstractStringBuilder#append(String)
      * @see org.apache.commons.lang3.StringUtils#defaultString(String)
      * @see "org.springframework.web.servlet.view.RedirectView#appendQueryProperties(StringBuilder,Map, String)"
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String joinParamNameAndValues(String paramName,String[] paramValues){
         StringBuilder sb = new StringBuilder();
@@ -757,7 +757,7 @@ public final class ParamUtil{
      * @return the string
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String decodeAndEncode(String value,String charsetType){
         if (Validator.isNullOrEmpty(value)){
@@ -781,7 +781,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String combineUrl(String beforePathWithoutQueryString,Map<String, String[]> arrayValueMap,String charsetType){
         if (Validator.isNullOrEmpty(beforePathWithoutQueryString)){

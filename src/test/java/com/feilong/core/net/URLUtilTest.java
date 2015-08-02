@@ -28,8 +28,8 @@ import com.feilong.core.io.SpecialFolder;
 /**
  *
  * @author feilong
- * @version 1.3.1 2015年8月1日 下午7:53:36
- * @since 1.3.1
+ * @version 1.4.0 2015年8月1日 下午7:53:36
+ * @since 1.4.0
  */
 public class URLUtilTest{
 

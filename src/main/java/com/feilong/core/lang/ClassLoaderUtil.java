@@ -340,7 +340,7 @@ public final class ClassLoaderUtil{
      * @see org.apache.commons.lang3.ClassUtils#getClass(String)
      * @see org.apache.commons.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
      * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static Class<?> getClass(String className) throws ClassNotFoundException{
         return org.apache.commons.lang3.ClassUtils.getClass(className);

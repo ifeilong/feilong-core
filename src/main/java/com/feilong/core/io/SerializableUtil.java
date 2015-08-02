@@ -84,7 +84,12 @@ public final class SerializableUtil{
     }
 
     /**
-     * Size.
+     * 返回对象内存大小.
+     * 
+     * <p>
+     * <span style="color:red">只有支持 {@link java.io.Serializable Serializable}或 {@link java.io.Externalizable Externalizable} 接口的对象才能被
+     * {@link java.io.ObjectInputStream ObjectInputStream}/{@link java.io.ObjectOutputStream ObjectOutputStream}所操作！</span>
+     * </p>
      *
      * @param serializable
      *            the serializable

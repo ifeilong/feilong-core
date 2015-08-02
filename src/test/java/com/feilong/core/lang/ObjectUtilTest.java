@@ -18,8 +18,6 @@ package com.feilong.core.lang;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,16 +39,6 @@ public class ObjectUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTest.class);
-
-    /**
-     * Name.
-     */
-    @Test
-    public void testSize(){
-        //		 LOGGER.info("Size of Object: " + ObjectUtil.size(new Object()));
-        LOGGER.info("Size of Calendar: " + ObjectUtil.size(Calendar.getInstance()));
-        LOGGER.info("Size of HashMap: " + ObjectUtil.size(new HashMap<String, String>()));
-    }
 
     /**
      * Assert equals.

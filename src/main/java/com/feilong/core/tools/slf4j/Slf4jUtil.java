@@ -22,8 +22,8 @@ import org.slf4j.helpers.MessageFormatter;
  * 对 slf4j 的封装提取.
  * 
  * @author feilong
- * @version 1.0.4 Dec 30, 2013 2:24:01 AM
- * @since 1.0.4
+ * @version 1.4.0 2015年8月3日 上午5:16:35
+ * @since 1.4.0
  */
 public final class Slf4jUtil{
 

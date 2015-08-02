@@ -61,8 +61,8 @@ import com.feilong.core.text.MessageFormatUtil;
  * 
  * @see java.util.PropertyResourceBundle
  * @see java.util.ListResourceBundle
- * @version 1.3.1 2015年8月3日 上午3:18:50
- * @since 1.3.1
+ * @version 1.4.0 2015年8月3日 上午3:18:50
+ * @since 1.4.0
  */
 public final class ResourceBundleUtil{
 

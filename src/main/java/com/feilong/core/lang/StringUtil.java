@@ -80,12 +80,12 @@ import com.feilong.core.util.Validator;
  * </blockquote>
  *
  * @author feilong
+ * @version 1.4.0 2015年8月3日 上午3:06:20
  * @see "org.springframework.util.StringUtils#tokenizeToStringArray(String, String)"
  * @see "org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#MULTI_VALUE_ATTRIBUTE_DELIMITERS"
  * @see java.util.StringTokenizer
  * @see org.apache.commons.lang3.StringUtils
- * @version 1.3.1 2015年8月3日 上午3:06:20
- * @since 1.3.1
+ * @since 1.4.0
  */
 public final class StringUtil{
 

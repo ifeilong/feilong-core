@@ -272,7 +272,7 @@ public final class URIUtil{
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
      * @see URI#create(String)
      * @see ParamUtil#addParameterArrayValueMap(String, Map, String)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String encodeUri(String uriString,String charsetType){
         if (Validator.isNullOrEmpty(uriString)){
@@ -302,7 +302,7 @@ public final class URIUtil{
      * @param uri
      *            the uri
      * @return if isNullOrEmpty(url),renturn {@link StringUtils#EMPTY}
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String getFullPathWithoutQueryString(String uri){
         if (Validator.isNullOrEmpty(uri)){
@@ -326,7 +326,7 @@ public final class URIUtil{
      * @param uriString
      *            the uri
      * @return the query string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String getQueryString(String uriString){
         if (Validator.isNullOrEmpty(uriString)){
@@ -346,7 +346,7 @@ public final class URIUtil{
      * @param uriString
      *            the uri string
      * @return true, if checks for query string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     // XXX 有待严谨
     public static boolean hasQueryString(String uriString){

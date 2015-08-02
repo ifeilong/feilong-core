@@ -228,7 +228,7 @@ public final class URLUtil{
      * @return 获取联合url
      * @see #getFileURL(String)
      * @see #getUnionUrl(URL, String)
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String getUnionFileUrl(String context,String spec){
         URL parentUrl = getFileURL(context);
@@ -259,7 +259,7 @@ public final class URLUtil{
      * @param spec
      *            the <code>String</code> to parse as a URL.
      * @return 获取联合url
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static String getUnionUrl(URL context,String spec){
         try{
@@ -279,7 +279,7 @@ public final class URLUtil{
      * @return url
      * @see java.io.File#toURI()
      * @see java.net.URI#toURL()
-     * @since 1.3.1
+     * @since 1.4.0
      */
     public static URL getFileURL(String filePathName){
         if (Validator.isNullOrEmpty(filePathName)){

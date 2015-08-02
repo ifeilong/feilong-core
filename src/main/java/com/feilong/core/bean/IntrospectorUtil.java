@@ -170,7 +170,7 @@ public final class IntrospectorUtil{
      * @param methodDescriptor
      *            the method descriptor
      * @return the string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String extractMethodNameAndParamsName(MethodDescriptor methodDescriptor){
         //获得一个成员方法描述器所代表的方法的名字   

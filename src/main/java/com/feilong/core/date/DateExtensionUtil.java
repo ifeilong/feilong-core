@@ -329,7 +329,7 @@ public final class DateExtensionUtil{
      * @param nowDate
      *            the now date
      * @return the string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String doWithOneDayInterval(Date inDate,Date nowDate){
         if (DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)){
@@ -348,7 +348,7 @@ public final class DateExtensionUtil{
      * @param isSameYear
      *            the is same year
      * @return the string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String doWithTwoDaysInterval(Date inDate,Date nowDate,boolean isSameYear){
         if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
@@ -370,7 +370,7 @@ public final class DateExtensionUtil{
      * @param spaceTime
      *            the space time
      * @return the string
-     * @since 1.3.1
+     * @since 1.4.0
      */
     private static String doWithZeroDayInterval(Date inDate,Date nowDate,long spaceTime){
         int spaceHour = DateUtil.getIntervalHour(spaceTime); // 相差小时数

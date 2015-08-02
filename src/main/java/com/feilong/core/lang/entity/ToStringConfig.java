@@ -21,9 +21,9 @@ import java.io.Serializable;
  * 用于 连接object 成为字符串.
  *
  * @author feilong
- * @version 1.3.1 2015年8月3日 上午3:06:20
+ * @version 1.4.0 2015年8月3日 上午3:06:20
  * @see org.apache.commons.lang3.builder.ToStringStyle
- * @since 1.3.1
+ * @since 1.4.0
  */
 public final class ToStringConfig implements Serializable{
 

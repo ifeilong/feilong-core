@@ -20,6 +20,8 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.activation.MimetypesFileTypeMap;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -62,17 +64,18 @@ public final class MimeTypeUtil{
     }
 
     /**
-     * 获得 content type by file name.<br>
+     * 获得 content type by file name.
      * 
      * //TODO
-     * <b>
-     * Very incomplete function. As of Java 7, html, pdf and jpeg extensions return the correct mime-type but js and css return null! </b> <br>
+     * <p>
+     * <b>Very incomplete function. As of Java 7, html, pdf and jpeg extensions return the correct mime-type but js and css return null!
+     * </b>
+     * </p>
      * 
      * <p>
      * I tried Apache Tika but it is huge with tons of dependencies, <br>
      * URLConnection doesn't use the bytes of the files, <br>
-     * MimetypesFileTypeMap also just looks at files names,<br>
-     * and I couldn't move to Java 7.
+     * {@link MimetypesFileTypeMap} also just looks at files names,and I couldn't move to Java 7.
      * </p>
      * 
      * @param fileName
