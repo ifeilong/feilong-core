@@ -245,22 +245,17 @@ public final class StringUtil{
     // [start]Contain
 
     /**
-     * 判断一个字符串内是否包含另外的字符串.
+     * 判断 <code>seq</code> 内是否包含 指定的 <code>searchSeq</code>.
      * 
-     * @param text
-     *            原始字符串 jinxin,自动转成string
-     * @param beIncludedString
-     *            被包含的字符串 in
+     * @param seq
+     *            原始字符串 jinxin,the CharSequence to check, may be null
+     * @param searchSeq
+     *            被包含的字符串 in,the CharSequence to find, may be null
      * @return 包含返回true,如果text 为null 返回false
-     * @see String#indexOf(String)
+     * @see org.apache.commons.lang3.StringUtils#contains(CharSequence, CharSequence)
      */
-    public static boolean isContain(Object text,String beIncludedString){
-        if (null == text){
-            LOGGER.warn("the param [text] is null,default return false");
-            return false;
-        }
-        int indexOf = text.toString().indexOf(beIncludedString);
-        return indexOf != -1;
+    public static boolean contains(final CharSequence seq,final CharSequence searchSeq){
+        return org.apache.commons.lang3.StringUtils.contains(seq, searchSeq);
     }
 
     /**
@@ -276,26 +271,15 @@ public final class StringUtil{
      * 
      * </pre>
      * 
-     * @param text
-     *            the text
-     * @param beIncludedString
-     *            the be included string
-     * @return <ul>
-     *         <li>如果 null==text, return false</li>
-     *         <li>如果 null==beIncludedString, return false</li>
-     *         <li>两个值 转成小写 ,判断是否包含</li>
-     *         </ul>
+     * @param str
+     *            the CharSequence to check, may be null
+     * @param searchStr
+     *            the CharSequence to find, may be null
+     * @return true if the CharSequence contains the search CharSequence irrespective of
+     *         case or false if not or {@code null} string input
      */
-    public static boolean isContainIgnoreCase(Object text,String beIncludedString){
-        if (null == text){
-            LOGGER.warn("the param [text] is null,default return false");
-            return false;
-        }
-        if (null == beIncludedString){
-            LOGGER.warn("the param [beIncludedString] is null,default return false");
-            return false;
-        }
-        return isContain(text.toString().toLowerCase(), beIncludedString.toLowerCase());
+    public static boolean containsIgnoreCase(final CharSequence str,final CharSequence searchStr){
+        return org.apache.commons.lang3.StringUtils.containsIgnoreCase(str, searchStr);
     }
 
     // [end] 

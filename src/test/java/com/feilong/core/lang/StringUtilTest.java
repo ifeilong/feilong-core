@@ -31,8 +31,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
-import com.feilong.core.lang.ByteUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 
@@ -49,6 +47,24 @@ public class StringUtilTest{
 
     /** <code>{@value}</code>. */
     private static final String TEXT   = "jinxin.feilong";
+
+    /**
+     * Test contains.
+     */
+    @Test
+    public void testContains(){
+        assertEquals(false, StringUtils.contains(null, ""));
+        assertEquals(true, StringUtils.contains("", ""));
+        assertEquals(true, StringUtil.contains("jiiiiiinxin.feilong", "xin"));
+    }
+
+    /**
+     * Test contains ignore case.
+     */
+    @Test
+    public void testContainsIgnoreCase(){
+        assertEquals(true, StringUtil.containsIgnoreCase("jiiiiiinxin.feilong", "Xin"));
+    }
 
     /**
      * Search count.
@@ -107,12 +123,12 @@ public class StringUtilTest{
      */
     @Test
     public void isContainIgnoreCase(){
-        LOGGER.info(StringUtil.isContainIgnoreCase(null, "") + "");
-        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, null) + "");
-        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, "") + "");
-        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, "feilong") + "");
-        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, "feilong1") + "");
-        LOGGER.info(StringUtil.isContainIgnoreCase(TEXT, "feiLong") + "");
+        LOGGER.info(StringUtil.containsIgnoreCase(null, "") + "");
+        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, null) + "");
+        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "") + "");
+        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feilong") + "");
+        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feilong1") + "");
+        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feiLong") + "");
     }
 
     /**
