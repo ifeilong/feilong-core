@@ -17,7 +17,7 @@ package com.feilong.core.util;
 
 import java.util.Random;
 
-import com.feilong.core.log.Slf4jUtil;
+import com.feilong.core.tools.slf4j.Slf4jUtil;
 
 /**
  * 

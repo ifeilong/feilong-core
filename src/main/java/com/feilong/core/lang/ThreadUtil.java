@@ -26,8 +26,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.entity.ThreadLogSwitch;
-import com.feilong.core.log.Slf4jUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.core.util.Validator;
 
 /**

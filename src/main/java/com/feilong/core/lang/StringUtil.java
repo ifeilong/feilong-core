@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.io.CharsetType;
-import com.feilong.core.log.Slf4jUtil;
+import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 

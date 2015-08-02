@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.log.Slf4jUtil;
+import com.feilong.core.tools.slf4j.Slf4jUtil;
 
 /**
  * 使用反射的方式执行调用bean中的方法,原先是自己写的,但是发现未尽全面,因此调用 {@link org.apache.commons.lang3.reflect.MethodUtils}相关方法 .
