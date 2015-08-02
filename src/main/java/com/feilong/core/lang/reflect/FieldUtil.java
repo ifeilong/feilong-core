@@ -102,17 +102,15 @@ public final class FieldUtil{
             boolean isPrivateAndStatic = Modifier.isPrivate(modifiers) && Modifier.isStatic(modifiers);
             LOGGER.debug("field name:[{}],modifiers:[{}],isPrivateAndStatic:[{}]", fieldName, modifiers, isPrivateAndStatic);
 
-            if (isPrivateAndStatic){
-                continue;
-            }
-
-            //XXX see org.apache.commons.lang3.reflect.MemberUtils.setAccessibleWorkaround(AccessibleObject)
-            field.setAccessible(true);
-            try{
-                map.put(fieldName, field.get(obj));
-            }catch (Exception e){
-                LOGGER.error(e.getClass().getName(), e);
-                throw new ReflectException(e);
+            if (!isPrivateAndStatic){
+                //XXX see org.apache.commons.lang3.reflect.MemberUtils.setAccessibleWorkaround(AccessibleObject)
+                field.setAccessible(true);
+                try{
+                    map.put(fieldName, field.get(obj));
+                }catch (Exception e){
+                    LOGGER.error(e.getClass().getName(), e);
+                    throw new ReflectException(e);
+                }
             }
         }
         return map;
