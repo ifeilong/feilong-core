@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateExtensionUtil;
+import com.feilong.core.lang.CharsetType;
 import com.feilong.core.util.Validator;
 
 /**

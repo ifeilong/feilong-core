@@ -16,7 +16,7 @@
 package com.feilong.core.net;
 
 import com.feilong.core.date.TimeInterval;
-import com.feilong.core.io.CharsetType;
+import com.feilong.core.lang.CharsetType;
 
 /**
  * 链接参数.

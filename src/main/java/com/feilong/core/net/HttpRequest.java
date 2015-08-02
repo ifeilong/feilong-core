@@ -17,7 +17,7 @@ package com.feilong.core.net;
 
 import java.util.Map;
 
-import com.feilong.core.io.CharsetType;
+import com.feilong.core.lang.CharsetType;
 
 /**
  * http 请求信息.

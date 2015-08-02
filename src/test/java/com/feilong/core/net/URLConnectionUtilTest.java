@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.io.CharsetType;
+import com.feilong.core.lang.CharsetType;
 
 /**
  * The Class URLConnectionUtilTest.

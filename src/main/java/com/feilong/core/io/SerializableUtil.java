@@ -28,6 +28,7 @@ import org.apache.commons.lang3.SerializationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.CharsetType;
 import com.feilong.core.net.URIUtil;
 
 /**

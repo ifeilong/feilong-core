@@ -26,6 +26,7 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
 
+import com.feilong.core.lang.CharsetType;
 import com.feilong.core.util.Validator;
 
 /**
