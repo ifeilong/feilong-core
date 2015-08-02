@@ -205,16 +205,14 @@ public class IOWriteUtilTest{
             writer.write(content);
             writer.close();
 
-            if (LOGGER.isInfoEnabled()){
-                File file = new File(filePath);
-                LOGGER.info(
-                                "fileWriteMode:[{}],useEncode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}]",
-                                fileWriteMode,
-                                useEncode,
-                                content.length(),
-                                FileUtil.getFileFormatSize(file),
-                                file.getAbsolutePath());
-            }
+            File file = new File(filePath);
+            LOGGER.info(
+                            "fileWriteMode:[{}],useEncode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}]",
+                            fileWriteMode,
+                            useEncode,
+                            content.length(),
+                            FileUtil.getFileFormatSize(file),
+                            file.getAbsolutePath());
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
@@ -256,19 +254,14 @@ public class IOWriteUtilTest{
                 i++;
                 sumSize = sumSize + j;
 
-                //if (LOGGER.isDebugEnabled()){
                 //  LOGGER.debug(
                 //                  "write data,index:[{}],bufferLength:[{}],currentLoopLength:[{}],sumSize:[{}]",
                 //                  i,
                 //                  bufferLength,
                 //                  j,
                 //                  FileUtil.formatSize(sumSize));
-                //}
             }
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}]", FileUtil.formatSize(sumSize), bufferLength, i);
-            }
-
+            LOGGER.debug("write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}]", FileUtil.formatSize(sumSize), bufferLength, i);
             //刷新此输出流并强制写出所有缓冲的输出字节。flush 的常规协定是：如果此输出流的实现已经缓冲了以前写入的任何字节，则调用此方法指示应将这些字节立即写入它们预期的目标。 
             outputStream.flush();
         }catch (IOException e){

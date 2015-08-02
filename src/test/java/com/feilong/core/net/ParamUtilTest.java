@@ -81,8 +81,7 @@ public class ParamUtilTest{
     public void addParameter1(){
         String pageParamName = "page";
         Object prePageNo = "";
-        String addParameter = ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8);
-        LOGGER.info(addParameter);
+        LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
     }
 
     /**
@@ -92,8 +91,7 @@ public class ParamUtilTest{
     public void addParameter(){
         String pageParamName = "label";
         Object prePageNo = "2-5-8-12";
-        String addParameter = ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8);
-        LOGGER.info(addParameter);
+        LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
     }
 
     /**
@@ -103,8 +101,7 @@ public class ParamUtilTest{
     public void removeParameter(){
         uri = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
         String pageParamName = "label";
-        String removeParameter = ParamUtil.removeParameter(uri, pageParamName, CharsetType.ISO_8859_1);
-        LOGGER.info(removeParameter);
+        LOGGER.info(ParamUtil.removeParameter(uri, pageParamName, CharsetType.ISO_8859_1));
     }
 
     /**
@@ -113,14 +110,11 @@ public class ParamUtilTest{
     @Test
     public void removeParameterList(){
         uri = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
-        String pageParamName = "label";
         List<String> paramNameList = new ArrayList<String>();
-        paramNameList.add(pageParamName);
+        paramNameList.add("label");
         paramNameList.add("keyword");
 
-        String charsetType = CharsetType.UTF8;
-        String removeParameter = ParamUtil.removeParameterList(uri, paramNameList, charsetType);
-        LOGGER.info(removeParameter);
+        LOGGER.info(ParamUtil.removeParameterList(uri, paramNameList, CharsetType.UTF8));
     }
 
     /**
@@ -129,14 +123,10 @@ public class ParamUtilTest{
     @Test
     public void retentionParamList(){
         uri = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
-        String pageParamName = "label";
         List<String> paramNameList = new ArrayList<String>();
-        paramNameList.add(pageParamName);
+        paramNameList.add("label");
         paramNameList.add("keyword");
-
-        String charsetType = CharsetType.UTF8;
-        String removeParameter = ParamUtil.retentionParamList(uri, paramNameList, charsetType);
-        LOGGER.info(removeParameter);
+        LOGGER.info(ParamUtil.retentionParamList(uri, paramNameList, CharsetType.UTF8));
     }
 
     /**
@@ -146,9 +136,8 @@ public class ParamUtilTest{
     public void combineQueryString(){
         Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
         keyAndArrayMap.put("a", new String[] { "aaaa", "bbbb" });
-        String charsetType = CharsetType.UTF8;
-        LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, charsetType));
-        LOGGER.info(ParamUtil.toSafeQueryString(null, charsetType));
+        LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, CharsetType.UTF8));
+        LOGGER.info(ParamUtil.toSafeQueryString(null, CharsetType.UTF8));
         LOGGER.info(ParamUtil.toSafeQueryString(null, null));
         LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, null));
     }
@@ -180,9 +169,10 @@ public class ParamUtilTest{
      * Parses the query to value map1.
      */
     @Test
-    public void parseQueryToValueMap1(){
-        LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", CharsetType.UTF8)));
+    public void testToSafeArrayValueMap(){
         LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a", CharsetType.UTF8)));
+        LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", CharsetType.UTF8)));
+        LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", CharsetType.UTF8)));
     }
 
     /**

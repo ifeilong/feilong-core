@@ -414,6 +414,9 @@ public final class URIUtil{
      * @see CharsetType
      */
     public static String encode(String value,String charsetType){
+        if (Validator.isNullOrEmpty(value)){
+            return StringUtils.EMPTY;
+        }
         if (Validator.isNullOrEmpty(charsetType)){
             return value;
         }
@@ -453,6 +456,9 @@ public final class URIUtil{
      * @see CharsetType
      */
     public static String decode(String value,String charsetType){
+        if (Validator.isNullOrEmpty(value)){
+            return StringUtils.EMPTY;
+        }
         if (Validator.isNullOrEmpty(charsetType)){
             return value;
         }

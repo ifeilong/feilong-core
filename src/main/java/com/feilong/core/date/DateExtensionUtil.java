@@ -294,26 +294,18 @@ public final class DateExtensionUtil{
      * @see DateUtil#getIntervalHour(long)
      * @see DateUtil#getIntervalMinute(long)
      * @see DateUtil#getIntervalSecond(long)
-     * @deprecated 未来名称可能会更改
      */
-    @Deprecated
-    public static String toHumanizationDateString(Date inDate){
+    public static String toPrettyDateString(Date inDate){
         Date nowDate = new Date();
 
         // 传过来的日期的年份
         int inYear = DateUtil.getYear(inDate);
         //**************************************************************************************/
-        // 当前时间的年
-        int currentYear = DateUtil.getYear(nowDate);
-        //是否是同一年
-        boolean isSameYear = currentYear == inYear;
+        int currentYear = DateUtil.getYear(nowDate);// 当前时间的年
+        boolean isSameYear = currentYear == inYear;//是否是同一年
+        long spaceTime = DateUtil.getIntervalTime(inDate, nowDate);// 任意日期和现在相差的毫秒数
+        int spaceDay = DateUtil.getIntervalDay(spaceTime);// 相差天数
         //**************************************************************************************/
-        // 任意日期和现在相差的毫秒数
-        long spaceTime = DateUtil.getIntervalTime(inDate, nowDate);
-        // 相差天数
-        int spaceDay = DateUtil.getIntervalDay(spaceTime);
-        //**************************************************************************************/
-
         switch (spaceDay) {
             case 0: // 间隔0天
                 return doWithZeroDayInterval(inDate, nowDate, spaceTime);

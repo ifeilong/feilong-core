@@ -173,9 +173,7 @@ public class ObjectUtilTest{
             Object[] objArrays = (Object[]) arrays;
             list = (List<T>) ArrayUtil.toList(objArrays);
         }catch (ClassCastException e){
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("arrays can not cast to Object[],maybe primitive type,values is:{},{}", arrays, e.getMessage());
-            }
+            LOGGER.debug("arrays can not cast to Object[],maybe primitive type,values is:{},{}", arrays, e.getMessage());
             // Rats -- 它是一个基本类型数组
             int length = Array.getLength(arrays);
             list = new ArrayList<T>(length);

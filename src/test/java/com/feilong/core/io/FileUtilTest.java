@@ -113,7 +113,7 @@ public class FileUtilTest{
      */
     @Test
     public void listFiles() throws IOException{
-        String localPath = "E:\\Workspaces\\baozun-else\\mp2-new\\mp2-configuration\\project\\mp2-web\\mp2-livechat\\dev";
+        String localPath = "E:\\DataCommon\\test";
         // 读取localPath目录下的全部properties文件
         File file = new File(localPath);
         File[] files = file.listFiles();

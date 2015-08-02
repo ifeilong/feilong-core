@@ -519,11 +519,11 @@ public final class ParamUtil{
         Map<String, String[]> map = new LinkedHashMap<String, String[]>();
         for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
             String nameAndValue = nameAndValueArray[i];
-            String[] tempArray = nameAndValue.split("=", 2);
+            if (null != nameAndValue){
+                String[] tempArray = nameAndValue.split("=", 2);
 
-            if (tempArray != null && tempArray.length == 2){
                 String key = tempArray[0];
-                String value = tempArray[1];
+                String value = tempArray.length == 2 ? tempArray[1] : StringUtils.EMPTY;//有可能 参数中 只有名字没有值 或者值是空,处理的时候不能遗失掉
 
                 if (Validator.isNotNullOrEmpty(charsetType)){
                     key = decodeAndEncode(key, charsetType);
@@ -638,9 +638,7 @@ public final class ParamUtil{
             return StringUtils.EMPTY;
         }
         Map<String, String> naturalParamsMapMap = new TreeMap<String, String>(singleValueMap);
-        String naturalOrderingString = join(naturalParamsMapMap);
-        LOGGER.debug(naturalOrderingString);
-        return naturalOrderingString;
+        return joinSingleValueMap(naturalParamsMapMap);
     }
 
     /**
@@ -655,7 +653,7 @@ public final class ParamUtil{
      * @return the string
      * @since 1.3.1
      */
-    private static String join(Map<String, String> singleValueMap){
+    private static String joinSingleValueMap(Map<String, String> singleValueMap){
         if (Validator.isNullOrEmpty(singleValueMap)){
             return StringUtils.EMPTY;
         }
@@ -742,6 +740,12 @@ public final class ParamUtil{
      * @since 1.3.1
      */
     private static String decodeAndEncode(String value,String charsetType){
+        if (Validator.isNullOrEmpty(value)){
+            return StringUtils.EMPTY;
+        }
+        if (Validator.isNullOrEmpty(charsetType)){
+            return value;
+        }
         return URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
     }
 

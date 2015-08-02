@@ -91,33 +91,16 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      * Test to humanization date string.
      */
     @Test
-    public void testToHumanizationDateString(){
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2012-10-18 13:55:00",
-                        DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2012-10-18 14:14:22",
-                        DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2012-10-18 14:15:22",
-                        DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2012-10-17 14:15:02",
-                        DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2012-10-16 14:15:02",
-                        DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2012-10-15 14:15:02",
-                        DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2012-09-15 14:15:02",
-                        DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil.string2Date(
-                        "2011-09-15 14:15:02",
-                        DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toHumanizationDateString(DateUtil
-                        .string2Date("2015-7-30 13:00:00", DatePattern.COMMON_DATE_AND_TIME)));
+    public void testToPrettyDateString(){
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-18 13:55:00", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-18 14:14:22", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-18 14:15:22", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-17 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-16 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-09-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2015-08-02 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2015-7-30 13:00:00", DatePattern.COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -139,9 +122,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     @Test
     public final void testGetExtentYesterday(){
         Date[] dates = DateExtensionUtil.getExtentYesterday();
-        for (Date date : dates){
-            logDate(date);
-        }
+        LOGGER.debug(JsonUtil.format(dates));
     }
 
     /**
@@ -150,8 +131,6 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     @Test
     public final void testGetExtentToday(){
         Date[] dates = DateExtensionUtil.getExtentToday();
-        for (Date date : dates){
-            LOGGER.debug(DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-        }
+        LOGGER.debug(JsonUtil.format(dates));
     }
 }

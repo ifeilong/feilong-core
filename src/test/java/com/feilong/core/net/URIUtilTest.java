@@ -37,9 +37,6 @@ public class URIUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(URIUtilTest.class);
 
-    /** The result. */
-    private String              result = null;
-
     /**
      * Test encode.
      */
@@ -52,14 +49,8 @@ public class URIUtilTest{
         LOGGER.info(URIUtil.encode(value, CharsetType.UTF8));
         value = "景儿,么么哒";
         LOGGER.info(URIUtil.encode(value, CharsetType.UTF8));
-
-        value = "白色/黑色/纹理浅麻灰";
-        result = URIUtil.encode(value, CharsetType.UTF8);
-        LOGGER.info(result);
-        LOGGER.info(URIUtil.encode(value, CharsetType.UTF8));
-
-        result = URIUtil.encode("Lifestyle / Graphic,", CharsetType.UTF8);
-        LOGGER.info(result);
+        LOGGER.info(URIUtil.encode("白色/黑色/纹理浅麻灰", CharsetType.UTF8));
+        LOGGER.info(URIUtil.encode("Lifestyle / Graphic,", CharsetType.UTF8));
     }
 
     /**
@@ -67,10 +58,10 @@ public class URIUtilTest{
      */
     @Test
     public void decode(){
-        result = URIUtil.decode(
-                        "%E9%87%91%E6%80%BB%EF%BC%8C%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E4%B9%88%EF%BC%8C%E5%B0%B1%E6%80%8E%E4%B9%88%E4%B9%88",
-                        CharsetType.UTF8);
-        LOGGER.info(result);
+        LOGGER.info(URIUtil
+                        .decode(
+                                        "%E9%87%91%E6%80%BB%EF%BC%8C%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E4%B9%88%EF%BC%8C%E5%B0%B1%E6%80%8E%E4%B9%88%E4%B9%88",
+                                        CharsetType.UTF8));
 
     }
 
@@ -79,8 +70,7 @@ public class URIUtilTest{
      */
     @Test
     public void specialCharToHexString(){
-        result = specialCharToHexString(" ");
-        LOGGER.info(result);
+        LOGGER.info(specialCharToHexString(" "));
     }
 
     /**
@@ -119,8 +109,6 @@ public class URIUtilTest{
     public void create(){
         String url = "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2";
         // url = "/cmens/t-b-f-a-c-s-f-p400-600,0-200,200-400,600-up-gCold Gear-eBase Layer-i1-o.htm";
-
-        //		String queryString = null;
         //		queryString = "'\"--></style></script><script>netsparker(0x0000E1)</script>=";
         // queryString = "'%22--%3E%3C/style%3E%3C/script%3E%3Cscript%3Enetsparker(0x0000E1)%3C/script%3E=";
 
@@ -140,8 +128,7 @@ public class URIUtilTest{
      */
     @Test
     public void testCreate2(){
-        String url = "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3";
-        URI uri = URIUtil.create(url, CharsetType.UTF8);
+        URI uri = URIUtil.create("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3", CharsetType.UTF8);
         LOGGER.info(uri.toString());
         LOGGER.info(JsonUtil.format(uri));
     }
