@@ -352,20 +352,24 @@ public final class FileUtil{
      *            文件或者文件夹名称
      */
     public static void deleteFileOrDirectory(File file){
-        if (file.exists() && file.isDirectory()){
-            File[] files = file.listFiles();
-            if (null != files && files.length > 0){
-                for (File currentFile : files){
-                    if (!currentFile.isDirectory()){
-                        currentFile.delete();
-                    }else{
-                        deleteFileOrDirectory(currentFile);
-                    }
-                }
+
+        if (!file.exists()){
+            return;
+        }
+
+        //文件
+        if (!file.isDirectory()){
+            file.delete();
+            return;
+        }
+
+        //文件夹
+        File[] files = file.listFiles();
+
+        if (Validator.isNotNullOrEmpty(files)){
+            for (File currentFile : files){
+                deleteFileOrDirectory(currentFile);
             }
-            file.delete();
-        }else{
-            file.delete();
         }
     }
 

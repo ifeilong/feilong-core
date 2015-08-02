@@ -68,11 +68,13 @@ public final class ObjectUtil{
         }
         //一般自定义的command 里面 就是些 string int,list map等对象
         //这些我们过滤掉,只取 类型是 findedClassType的
-        if (!ClassUtils.isPrimitiveOrWrapper(findedClassType)//
+        boolean canFindType = !ClassUtils.isPrimitiveOrWrapper(findedClassType)//
                         && !ClassUtil.isInstance(findValue, CharSequence.class)//
                         && !ClassUtil.isInstance(findValue, Collection.class) //
                         && !ClassUtil.isInstance(findValue, Map.class) //
-        ){
+        ;
+
+        if (canFindType){
             Map<String, Object> describe = PropertyUtil.describe(findValue);
 
             for (Map.Entry<String, Object> entry : describe.entrySet()){

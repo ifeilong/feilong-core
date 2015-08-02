@@ -86,8 +86,9 @@ public class FileUtilTest{
 
     /**
      * Test get p1.
-     * 
+     *
      * @throws MalformedURLException
+     *             the malformed url exception
      */
     @Test
     public void testGetP1() throws MalformedURLException{
@@ -249,6 +250,14 @@ public class FileUtilTest{
     @Test
     public void testGetFileName(){
         LOGGER.info(FileUtil.getFileName(fileName1));
+    }
+
+    /**
+     * Test delete file or directory2.
+     */
+    @Test
+    public void testDeleteFileOrDirectory2(){
+        FileUtil.deleteFileOrDirectory("E:/test");
     }
 
     /**

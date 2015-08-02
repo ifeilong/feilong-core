@@ -157,33 +157,44 @@ public final class IntrospectorUtil{
         List<String> methodDescriptorList = new ArrayList<String>(methodDescriptorArray.length);
         //MethodDescriptor类 用于记载一个成员方法的所有信息
         for (MethodDescriptor methodDescriptor : methodDescriptorArray){
-            //获得一个成员方法描述器所代表的方法的名字   
-            String methodName = methodDescriptor.getName();
-
-            //获得该方法对象   
-            Method method = methodDescriptor.getMethod();
-
-            //通过方法对象获得该方法的所有参数，以Class数组的形式返回   
-            Class<?>[] parameterTypes = method.getParameterTypes();
-
-            if (Validator.isNotNullOrEmpty(parameterTypes)){
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0, j = parameterTypes.length; i < j; ++i){
-                    Class<?> parameterType = parameterTypes[i];//获得参数的类型的名字   
-                    sb.append(parameterType.getName());
-
-                    if (i != j - 1){// 不是最后一个 拼接
-                        sb.append(",");
-                    }
-                }
-                methodDescriptorList.add(methodName + "(" + sb.toString() + ")");
-            }else{
-                methodDescriptorList.add(methodName + "()");
-            }
+            methodDescriptorList.add(extractMethodNameAndParamsName(methodDescriptor));
         }
 
         Collections.sort(methodDescriptorList);
         return methodDescriptorList;
+    }
+
+    /**
+     * Extract method name and params name.
+     *
+     * @param methodDescriptor
+     *            the method descriptor
+     * @return the string
+     * @since 1.3.1
+     */
+    private static String extractMethodNameAndParamsName(MethodDescriptor methodDescriptor){
+        //获得一个成员方法描述器所代表的方法的名字   
+        String methodName = methodDescriptor.getName();
+        //获得该方法对象   
+        Method method = methodDescriptor.getMethod();
+
+        //通过方法对象获得该方法的所有参数，以Class数组的形式返回   
+        Class<?>[] parameterTypes = method.getParameterTypes();
+
+        if (Validator.isNullOrEmpty(parameterTypes)){
+            return methodName + "()";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, j = parameterTypes.length; i < j; ++i){
+            Class<?> parameterType = parameterTypes[i];//获得参数的类型的名字   
+            sb.append(parameterType.getName());
+
+            if (i != j - 1){// 不是最后一个 拼接
+                sb.append(",");
+            }
+        }
+        return methodName + "(" + sb.toString() + ")";
     }
 
     /**

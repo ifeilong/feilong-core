@@ -17,6 +17,7 @@ package com.feilong.core.lang.reflect;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -81,34 +82,37 @@ public final class FieldUtil{
      * @return the field value map
      */
     public static Map<String, Object> getFieldValueMap(Object obj,String[] excludeFieldNames){
-
         // 获得一个对象所有的声明字段(包括私有的,继承的)
         Field[] fields = getDeclaredFields(obj);
 
+        if (Validator.isNullOrEmpty(fields)){
+            return Collections.emptyMap();
+        }
+
         Map<String, Object> map = new TreeMap<String, Object>();
-        if (Validator.isNotNullOrEmpty(fields)){
-            for (Field field : fields){
-                String fieldName = field.getName();
+        for (Field field : fields){
+            String fieldName = field.getName();
 
-                if (Validator.isNotNullOrEmpty(excludeFieldNames) && ArrayUtils.contains(excludeFieldNames, fieldName)){
-                    continue;
-                }
+            if (Validator.isNotNullOrEmpty(excludeFieldNames) && ArrayUtils.contains(excludeFieldNames, fieldName)){
+                continue;
+            }
 
-                int modifiers = field.getModifiers();
-                // 私有并且静态 一般是log
-                boolean isPrivateAndStatic = Modifier.isPrivate(modifiers) && Modifier.isStatic(modifiers);
-                LOGGER.debug("field name:[{}],modifiers:[{}],isPrivateAndStatic:[{}]", fieldName, modifiers, isPrivateAndStatic);
+            int modifiers = field.getModifiers();
+            // 私有并且静态 一般是log
+            boolean isPrivateAndStatic = Modifier.isPrivate(modifiers) && Modifier.isStatic(modifiers);
+            LOGGER.debug("field name:[{}],modifiers:[{}],isPrivateAndStatic:[{}]", fieldName, modifiers, isPrivateAndStatic);
 
-                if (!isPrivateAndStatic){
-                    //TODO see org.apache.commons.lang3.reflect.MemberUtils.setAccessibleWorkaround(AccessibleObject)
-                    field.setAccessible(true);
-                    try{
-                        map.put(fieldName, field.get(obj));
-                    }catch (Exception e){
-                        LOGGER.error(e.getClass().getName(), e);
-                        throw new ReflectException(e);
-                    }
-                }
+            if (isPrivateAndStatic){
+                continue;
+            }
+
+            //XXX see org.apache.commons.lang3.reflect.MemberUtils.setAccessibleWorkaround(AccessibleObject)
+            field.setAccessible(true);
+            try{
+                map.put(fieldName, field.get(obj));
+            }catch (Exception e){
+                LOGGER.error(e.getClass().getName(), e);
+                throw new ReflectException(e);
             }
         }
         return map;
