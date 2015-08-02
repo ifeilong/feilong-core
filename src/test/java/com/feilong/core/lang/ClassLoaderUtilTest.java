@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,18 @@ public class ClassLoaderUtilTest{
     @Test
     public void testGetClassPath(){
         LOGGER.info("" + ClassLoaderUtil.getClassPath());
+    }
+
+    /**
+     * Test get class.
+     *
+     * @throws ClassNotFoundException
+     *             the class not found exception
+     */
+    @Test
+    public void testGetClass() throws ClassNotFoundException{
+        LOGGER.info("" + ClassLoaderUtil.getClass("com.feilong.core.FeiLongVersion"));
+        LOGGER.info("" + ClassUtils.getClass("com.feilong.core.FeiLongVersion"));
     }
 
     /**

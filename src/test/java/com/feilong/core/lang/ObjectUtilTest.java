@@ -15,7 +15,9 @@
  */
 package com.feilong.core.lang;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -25,12 +27,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.apache.commons.collections4.iterators.ArrayIterator;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.core.util.ArrayUtil;
 import com.feilong.test.User;
 
 /**
@@ -85,11 +89,9 @@ public class ObjectUtilTest{
      */
     @Test
     public final void testToIterator(){
-
         // *************************逗号分隔的数组********************************
         LOGGER.info(StringUtils.center("逗号分隔的数组", 60, "*"));
-        Iterator<?> iterator = ObjectUtil.toIterator("1,2");
-        printIterator(iterator);
+        LOGGER.debug(JsonUtil.format(ObjectUtil.toIterator("1,2")));
 
         // ************************map*********************************
         LOGGER.info(StringUtils.center("map", 60, "*"));
@@ -98,22 +100,19 @@ public class ObjectUtilTest{
         map.put("a", "1");
         map.put("b", "2");
 
-        iterator = ObjectUtil.toIterator(map);
-        printIterator(iterator);
+        LOGGER.debug(JsonUtil.format(ObjectUtil.toIterator(map)));
 
         // ***************************array******************************
         LOGGER.info(StringUtils.center("array", 60, "*"));
         Object[] array = { "5", 8 };
-        iterator = ObjectUtil.toIterator(array);
-        printIterator(iterator);
+        LOGGER.debug(JsonUtil.format(ObjectUtil.toIterator(array)));
         // ***************************collection******************************
         LOGGER.info(StringUtils.center("collection", 60, "*"));
         Collection<String> collection = new ArrayList<String>();
         collection.add("aaaa");
         collection.add("nnnnn");
 
-        iterator = ObjectUtil.toIterator(collection);
-        printIterator(iterator);
+        LOGGER.debug(JsonUtil.format(ObjectUtil.toIterator(collection)));
 
         // **********************enumeration***********************************
         LOGGER.info(StringUtils.center("enumeration", 60, "*"));
@@ -122,16 +121,70 @@ public class ObjectUtilTest{
     }
 
     /**
-     * Prints the iterator.
-     * 
-     * @param iterator
-     *            the iterator
+     * To iterator.
      */
-    private void printIterator(Iterator<?> iterator){
-        while (iterator.hasNext()){
-            Object object = iterator.next();
-            LOGGER.info(object.toString());
+    @Test
+    public final void toIterator(){
+        String[] array = { "1", "223" };
+        LOGGER.debug(JsonUtil.format(toIterator(array)));
+
+        int[] arrays = { 1, 2 };
+        LOGGER.debug(JsonUtil.format(toIterator(arrays)));
+        LOGGER.debug(JsonUtil.format(new ArrayIterator(arrays)));
+        LOGGER.debug(JsonUtil.format(new ArrayIterator(array)));
+        LOGGER.debug(JsonUtil.format(new ArrayIterator(null)));
+    }
+
+    /**
+     * 将数组转成转成 {@link java.util.Iterator}.
+     * <p>
+     * 如果我们幸运的话，它是一个对象数组,我们可以遍历并with no copying<br>
+     * 否则,异常 ClassCastException 中 ,Rats -- 它是一个基本类型数组,循环放入arrayList 转成arrayList.iterator()
+     * </p>
+     * <p>
+     * <b>注:</b>{@link Arrays#asList(Object...)} 转的list是 {@link Array} 的内部类 ArrayList,这个类没有实现
+     * {@link java.util.AbstractList#add(int, Object)} 这个方法,<br>
+     * 如果拿这个list进行add操作,会出现 {@link java.lang.UnsupportedOperationException}
+     * </p>
+     * 
+     * @param <T>
+     *            the generic type
+     * @param arrays
+     *            数组,可以是 对象数组,或者是 基本类型数组
+     * @return if (null == arrays) return null;<br>
+     *         否则会先将arrays转成Object[]数组,调用 {@link Arrays#asList(Object...)}转成list,再调用 {@link List#iterator()
+     *         t}<br>
+     *         对于基本类型的数组,由于不是 Object[],会有类型转换异常,此时先通过 {@link Array#getLength(Object)}取到数组长度,循环调用 {@link Array#get(Object, int)}设置到 list中
+     * @see Arrays#asList(Object...)
+     * @see Array#getLength(Object)
+     * @see Array#get(Object, int)
+     * @see List#iterator()
+     * @deprecated
+     */
+    @Deprecated
+    @SuppressWarnings({ "unchecked" })
+    public static <T> Iterator<T> toIterator(Object arrays){
+        if (null == arrays){
+            return null;
         }
+        List<T> list = null;
+        try{
+            // 如果我们幸运的话，它是一个对象数组,我们可以遍历并with no copying
+            Object[] objArrays = (Object[]) arrays;
+            list = (List<T>) ArrayUtil.toList(objArrays);
+        }catch (ClassCastException e){
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("arrays can not cast to Object[],maybe primitive type,values is:{},{}", arrays, e.getMessage());
+            }
+            // Rats -- 它是一个基本类型数组
+            int length = Array.getLength(arrays);
+            list = new ArrayList<T>(length);
+            for (int i = 0; i < length; ++i){
+                Object object = Array.get(arrays, i);
+                list.add((T) object);
+            }
+        }
+        return list.iterator();
     }
 
 }

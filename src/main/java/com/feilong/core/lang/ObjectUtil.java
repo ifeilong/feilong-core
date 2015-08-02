@@ -28,9 +28,9 @@ import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.io.SerializableUtil;
-import com.feilong.core.util.ArrayUtil;
 
 /**
  * object工具类.
@@ -111,24 +111,28 @@ public final class ObjectUtil{
     }
 
     /**
-     * 支持将
+     * 支持将对象转成Iterator.
+     * 
+     * <h3>支持以下类型:</h3>
+     * 
+     * <blockquote>
      * <ul>
-     * <li>逗号分隔的字符串</li>
+     * <li>逗号分隔的字符串,{@link ConvertUtil#toStrings(Object)} 转成数组</li>
      * <li>数组</li>
      * <li>{@link java.util.Map},将key 转成{@link java.util.Iterator}</li>
      * <li>{@link java.util.Collection}</li>
      * <li>{@link java.util.Iterator}</li>
      * <li>{@link java.util.Enumeration}</li>
      * </ul>
-     * 转成Iterator.
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param object
      *            <ul>
-     *            <li>逗号分隔的字符串</li>
+     *            <li>逗号分隔的字符串,{@link ConvertUtil#toStrings(Object)} 转成数组</li>
      *            <li>数组</li>
-     *            <li>map,将key 转成Iterator</li>
+     *            <li>map,将key转成Iterator</li>
      *            <li>Collection</li>
      *            <li>Iterator</li>
      *            <li>Enumeration</li>
@@ -137,7 +141,6 @@ public final class ObjectUtil{
      *         <li>如果 null == object 返回null,</li>
      *         <li>否则转成Iterator</li>
      *         </ul>
-     * @see ArrayUtil#toIterator(Object)
      * @see Collection#iterator()
      * @see EnumerationIterator#EnumerationIterator(Enumeration)
      * @see IteratorUtils#getIterator(Object)
@@ -148,10 +151,14 @@ public final class ObjectUtil{
         if (null == object){
             return null;
         }
-        // object 不是空
+
+        // 逗号分隔的字符串
+        if (object instanceof String){
+            return toIterator(ConvertUtil.toStrings(object));
+        }
         // 数组
-        if (object.getClass().isArray()){
-            return ArrayUtil.toIterator(object);
+        else if (object.getClass().isArray()){
+            return org.apache.commons.collections4.IteratorUtils.arrayIterator(object);
         }
         // Iterator
         else if (object instanceof Iterator){
@@ -171,13 +178,7 @@ public final class ObjectUtil{
             Set<T> keySet = ((Map<T, ?>) object).keySet();
             return keySet.iterator();
         }
-        // 逗号分隔的字符串
-        else if (object instanceof String){
-            String[] strings = object.toString().split(",");
-            return ArrayUtil.toIterator(strings);
-        }else{
-            throw new IllegalArgumentException("param object:[" + object + "] don't support convert to Iterator.");
-        }
+        throw new IllegalArgumentException("param object:[" + object + "] don't support convert to Iterator.");
     }
 
     /**

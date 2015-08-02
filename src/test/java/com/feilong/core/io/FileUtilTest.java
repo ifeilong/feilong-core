@@ -24,6 +24,7 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -32,7 +33,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
-import com.feilong.core.util.ArrayUtil;
 
 /**
  * The Class FileUtilTest.
@@ -300,6 +300,7 @@ public class FileUtilTest{
      */
     // XXX 忽视大小写
     public static boolean isInAppointTypes(String fileName,String[] appointTypes){
-        return ArrayUtil.isContain(appointTypes, FileUtil.getFilePostfixName(fileName));
+        String filePostfixName = FileUtil.getFilePostfixName(fileName);
+        return ArrayUtils.contains(appointTypes, filePostfixName);
     }
 }

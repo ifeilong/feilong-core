@@ -96,6 +96,17 @@ public class ConvertUtilTest{
     }
 
     /**
+     * Test to strings.
+     */
+    @Test
+    public void testToStrings(){
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings("{5,4, 8,2;8 9_5@3`a}")));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(new Integer[] { 1, 2, 5 })));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings("null,1,2,3,\"4\",\'aaaa\'")));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(null)));
+    }
+
+    /**
      * Test to integers.
      */
     @Test

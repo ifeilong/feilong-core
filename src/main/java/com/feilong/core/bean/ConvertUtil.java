@@ -390,6 +390,31 @@ public final class ConvertUtil{
     }
 
     /**
+     * 转成string数组.
+     * 
+     * <p>
+     * Parse an incoming String of the form similar to an array initializer in the Java language into a <code>List</code> individual Strings
+     * for each element, according to the following rules.
+     * </p>
+     * <ul>
+     * <li>The string is expected to be a comma-separated list of values.</li>
+     * <li>The string may optionally have matching '{' and '}' delimiters around the list.</li>
+     * <li>Whitespace before and after each element is stripped.</li>
+     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
+     * valid.</li>
+     * </ul>
+     *
+     * @param toBeConvertedValue
+     *            the to be converted value
+     * @return the string[]
+     * @see org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String)
+     * @since 1.3.1
+     */
+    public static String[] toStrings(Object toBeConvertedValue){
+        return convert(toBeConvertedValue, String[].class);
+    }
+
+    /**
      * 将value转成指定Class类型的对象,如果Class的转换器没有注册,那么传入的value原样返回..
      * 
      * <h3>注意:</h3>

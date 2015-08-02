@@ -25,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -91,7 +90,7 @@ public final class FieldUtil{
             for (Field field : fields){
                 String fieldName = field.getName();
 
-                if (Validator.isNotNullOrEmpty(excludeFieldNames) && ArrayUtil.isContain(excludeFieldNames, fieldName)){
+                if (Validator.isNotNullOrEmpty(excludeFieldNames) && ArrayUtils.contains(excludeFieldNames, fieldName)){
                     continue;
                 }
 

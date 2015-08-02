@@ -18,18 +18,17 @@ package com.feilong.core.util.predicate;
 import org.apache.commons.collections4.Predicate;
 
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.util.ArrayUtil;
 
 /**
- * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值，判断是否 {@link ArrayUtil#isContain(Object[], Object)} 在
- * <code>values</code>数组中.
+ * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值，判断是否
+ * {@link org.apache.commons.lang3.ArrayUtils#contains(Object[], Object)} 在 <code>values</code>数组中.
  *
  * @author feilong
  * @version 1.2.0 2015年4月27日 下午3:12:32
  * @param <T>
  *            the generic type
  * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
- * @see com.feilong.core.util.ArrayUtil#isContain(Object[], Object)
+ * @see org.apache.commons.lang3.ArrayUtils#contains(Object[], Object)
  * @since 1.2.0
  */
 public class ArrayContainsPredicate<T> implements Predicate<T>{
@@ -61,6 +60,6 @@ public class ArrayContainsPredicate<T> implements Predicate<T>{
     @Override
     public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
-        return ArrayUtil.isContain(values, property);
+        return org.apache.commons.lang3.ArrayUtils.contains(values, property);
     }
 }

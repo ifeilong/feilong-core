@@ -314,44 +314,36 @@ public final class ClassLoaderUtil{
 
     /**
      * Load a class with a given name.
+     * 
      * <p>
      * It will try to load the class in the following order:
      * </p>
      * <ul>
      * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
-     * <li>Using the basic {@link Class#forName(java.lang.String) }
      * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
-     * <li>From the {@link Class#getClassLoader() callingClass.getClassLoader() }
      * </ul>
+     * 
+     * <p>
+     * Returns the class represented by {@code className} using the {@code classLoader}. <br>
+     * This implementation supports the syntaxes " {@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}", "
+     * {@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;} ".
+     * </p>
      * 
      * @param className
      *            The name of the class to load
-     * @param callingClass
-     *            The Class object of the calling object
      * @return the class
      * @throws ClassNotFoundException
      *             If the class cannot be found anywhere.
      * @see java.lang.ClassLoader#loadClass(String)
      * @see java.lang.Class#forName(String)
+     * @see java.lang.Class#forName(String, boolean, ClassLoader)
+     * @see org.apache.commons.lang3.ClassUtils#getClass(String)
+     * @see org.apache.commons.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
+     * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
+     * @since 1.3.1
      */
-    public static Class<?> loadClass(String className,Class<?> callingClass) throws ClassNotFoundException{
-        ClassLoader classLoader = null;
-        try{
-            classLoader = getClassLoaderByCurrentThread();
-            return classLoader.loadClass(className);
-        }catch (ClassNotFoundException e){
-            try{
-                return Class.forName(className);
-            }catch (ClassNotFoundException ex){
-                try{
-                    classLoader = getClassLoaderByClass(ClassLoaderUtil.class);
-                    return classLoader.loadClass(className);
-                }catch (ClassNotFoundException exc){
-                    classLoader = getClassLoaderByClass(callingClass);
-                    return classLoader.loadClass(className);
-                }
-            }
-        }
+    public static Class<?> getClass(String className) throws ClassNotFoundException{
+        return org.apache.commons.lang3.ClassUtils.getClass(className);
     }
 
     /**

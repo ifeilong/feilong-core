@@ -19,30 +19,41 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.lang.ObjectUtil;
 
 /**
  * 数组工具类.
+ * 
+ * <h3>判断是否包含</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>{@link ArrayUtils#contains(boolean[], boolean)}</li>
+ * <li>{@link ArrayUtils#contains(byte[], byte)}</li>
+ * <li>{@link ArrayUtils#contains(char[], char)}</li>
+ * <li>{@link ArrayUtils#contains(double[], double)}</li>
+ * <li>{@link ArrayUtils#contains(float[], float)}</li>
+ * <li>{@link ArrayUtils#contains(int[], int)}</li>
+ * <li>{@link ArrayUtils#contains(long[], long)}</li>
+ * <li>{@link ArrayUtils#contains(Object[], Object)}</li>
+ * <li>{@link ArrayUtils#contains(short[], short)}</li>
+ * <li>{@link ArrayUtils#contains(double[], double, double)}</li>
+ * </ul>
+ * </blockquote>
  * 
  * @author feilong
  * @version 1.0 2010-4-16 下午01:00:27
  * @since 1.0.0
  */
 public final class ArrayUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ArrayUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ArrayUtil(){
@@ -77,56 +88,6 @@ public final class ArrayUtil{
     }
 
     /**
-     * 将数组转成转成 {@link java.util.Iterator}.
-     * <p>
-     * 如果我们幸运的话，它是一个对象数组,我们可以遍历并with no copying<br>
-     * 否则,异常 ClassCastException 中 ,Rats -- 它是一个基本类型数组,循环放入arrayList 转成arrayList.iterator()
-     * </p>
-     * <p>
-     * <b>注:</b>{@link Arrays#asList(Object...)} 转的list是 {@link Array} 的内部类 ArrayList,这个类没有实现
-     * {@link java.util.AbstractList#add(int, Object)} 这个方法,<br>
-     * 如果拿这个list进行add操作,会出现 {@link java.lang.UnsupportedOperationException}
-     * </p>
-     * 
-     * @param <T>
-     *            the generic type
-     * @param arrays
-     *            数组,可以是 对象数组,或者是 基本类型数组
-     * @return if (null == arrays) return null;<br>
-     *         否则会先将arrays转成Object[]数组,调用 {@link Arrays#asList(Object...)}转成list,再调用 {@link List#iterator()
-     *         t}<br>
-     *         对于基本类型的数组,由于不是 Object[],会有类型转换异常,此时先通过 {@link Array#getLength(Object)}取到数组长度,循环调用 {@link Array#get(Object, int)}设置到 list中
-     * @see Arrays#asList(Object...)
-     * @see Array#getLength(Object)
-     * @see Array#get(Object, int)
-     * @see List#iterator()
-     */
-    @SuppressWarnings({ "unchecked" })
-    public static <T> Iterator<T> toIterator(Object arrays){
-        if (null == arrays){
-            return null;
-        }
-        List<T> list = null;
-        try{
-            // 如果我们幸运的话，它是一个对象数组,我们可以遍历并with no copying
-            Object[] objArrays = (Object[]) arrays;
-            list = (List<T>) toList(objArrays);
-        }catch (ClassCastException e){
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("arrays can not cast to Object[],maybe primitive type,values is:{},{}", arrays, e.getMessage());
-            }
-            // Rats -- 它是一个基本类型数组
-            int length = Array.getLength(arrays);
-            list = new ArrayList<T>(length);
-            for (int i = 0; i < length; ++i){
-                Object object = Array.get(arrays, i);
-                list.add((T) object);
-            }
-        }
-        return list.iterator();
-    }
-
-    /**
      * 数组转成 ({@link java.util.ArrayList ArrayList})，此方法返回的list可以进行add等操作.
      * <p>
      * 注意 :{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
@@ -149,36 +110,6 @@ public final class ArrayUtil{
         }
         //如果直接使用 Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象ArrayList,没有实现AbstractList类的add方法，如果 strList.add("c");导致抛异常! 
         return new ArrayList<T>(Arrays.asList(arrays));
-    }
-
-    /**
-     * 判断 一个数组中,是否包含某个特定的值.
-     * <p>
-     * 使用equals 来比较,所以如果是 对象类型 需要自己实现equals方法.<br>
-     * 支持 null的判断
-     * </p>
-     * 
-     * @param <T>
-     *            the generic type
-     * @param arrays
-     *            数组
-     * @param value
-     *            特定值
-     * @return 如果 Validator.isNotNullOrEmpty(arrays) 返回false <br>
-     *         否则，循环arrays，调用 {@link ObjectUtil#equals(Object, Object)} 方法,如果为true，则返回true<br>
-     * @see ObjectUtil#equals(Object, Object)
-     */
-    public static <T> boolean isContain(T[] arrays,T value){
-        if (Validator.isNullOrEmpty(arrays)){
-            return false;
-        }
-
-        for (T arr : arrays){
-            if (ObjectUtil.equals(arr, value)){
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

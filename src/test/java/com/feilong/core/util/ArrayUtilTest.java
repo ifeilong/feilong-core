@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -73,11 +72,14 @@ public class ArrayUtilTest{
      */
     @Test
     public void testIsContain(){
-        Assert.assertEquals(true, ArrayUtil.isContain(new Integer[] { 1, 223 }, 1));
-        Assert.assertEquals(true, ArrayUtil.isContain(new Long[] { 1L, 223L }, 1L));
+        Assert.assertEquals(true, ArrayUtils.contains(new Integer[] { 1, 223 }, 1));
+        Assert.assertEquals(true, ArrayUtils.contains(new Long[] { 1L, 223L }, 1L));
 
         String[] array = new String[] { "1", "223" };
-        Assert.assertEquals(false, ArrayUtil.isContain(array, "2"));
+        Assert.assertEquals(false, ArrayUtils.contains(array, "2"));
+
+        int[] intarray = { 1, 223 };
+        Assert.assertEquals(true, ArrayUtils.contains(intarray, 1));
     }
 
     /**
@@ -188,47 +190,6 @@ public class ArrayUtilTest{
         LOGGER.info(array.toString());
         LOGGER.info(Arrays.toString(array));
         LOGGER.info(StringUtils.join(array, ","));
-    }
-
-    /**
-     * To iterator.
-     */
-    @Test
-    public final void toIterator(){
-        String[] array = { "1", "223" };
-        Iterator<String> iterator = ArrayUtil.toIterator(array);
-
-        while (iterator.hasNext()){
-            LOGGER.debug(iterator.next());
-        }
-
-        int[] arrays = { 1, 2 };
-        Iterator<Integer> iterator1 = ArrayUtil.toIterator(arrays);
-
-        //		while (iterator1.hasNext()){
-        //			LOGGER.debug("" + iterator1.next());
-        //		}
-        LOGGER.debug(JsonUtil.format(iterator1));
-    }
-
-    /**
-     * To iterator user.
-     */
-    @Test
-    public final void toIteratorUser(){
-        User user1 = new User();
-        user1.setId(1L);
-        User user2 = new User();
-        user2.setId(2L);
-
-        User[] users = { user1, user2 };
-
-        Iterator<User> iterator = ArrayUtil.toIterator(users);
-
-        while (iterator.hasNext()){
-            User user = iterator.next();
-            LOGGER.debug("{}", user.getId());
-        }
     }
 
     /**

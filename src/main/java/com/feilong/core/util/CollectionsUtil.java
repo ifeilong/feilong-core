@@ -513,8 +513,11 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值，判断是否 {@link ArrayUtil#isContain(Object[], Object)}
-     * 在 <code>values</code>数组中,如果在，将该对象存入list中返回.
+     * 调用 {@link ArrayContainsPredicate},获得 <code>propertyName</code>的值，判断是否 在<code>values</code>数组中;如果在，将该对象存入list中返回.
+     * 
+     * <p>
+     * 具体参见 {@link ArrayContainsPredicate}的使用
+     * </p>
      *
      * @param <O>
      *            the generic type
@@ -526,8 +529,8 @@ public final class CollectionsUtil{
      *            the property name
      * @param values
      *            the values
-     * @return 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值，判断是否
-     *         {@link ArrayUtil#isContain(Object[], Object)} 在 <code>values</code>数组中,如果在，将该对象存入list中返回
+     * @return the list< o>
+     * @see com.feilong.core.util.predicate.ArrayContainsPredicate#ArrayContainsPredicate(String, Object...)
      */
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
