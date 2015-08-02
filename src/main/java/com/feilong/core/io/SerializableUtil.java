@@ -145,9 +145,7 @@ public final class SerializableUtil{
             byteArrayOutputStream = toByteArrayOutputStream(serializable);
 
             String serializableString = byteArrayOutputStream.toString(CharsetType.ISO_8859_1);
-            serializableString = java.net.URLEncoder.encode(serializableString, CharsetType.UTF8);
-
-            return serializableString;
+            return URIUtil.encode(serializableString, CharsetType.UTF8);
         }catch (IOException e){
             LOGGER.error("", e);
             throw new SerializationException(e);
@@ -156,7 +154,6 @@ public final class SerializableUtil{
         }
     }
 
-    //*******************************************************************************************
     /**
      * To object.
      *
