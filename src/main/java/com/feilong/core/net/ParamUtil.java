@@ -56,10 +56,14 @@ public final class ParamUtil{
 
     /**
      * 将多值的参数map转成单值的参数map.
+     * 
+     * <p style="color:green">
+     * 返回的是 {@link TreeMap},key自然排序
+     * </p>
      *
      * @param arrayValueMap
      *            the array value map
-     * @return the map< string, string>
+     * @return {@link TreeMap}
      * @since 1.3.1
      */
     public static Map<String, String> toSingleValueMap(Map<String, String[]> arrayValueMap){//返回 TreeMap 方便log 显示
@@ -79,10 +83,14 @@ public final class ParamUtil{
 
     /**
      * To array value map.
-     *
+     * 
+     * <p style="color:green">
+     * 返回的是 {@link TreeMap},key自然排序
+     * </p>
+     * 
      * @param singleValueMap
      *            the name and value map
-     * @return the map< string, string[]>
+     * @return {@link TreeMap}
      * @since 1.3.1
      */
     public static Map<String, String[]> toArrayValueMap(Map<String, String> singleValueMap){
@@ -651,9 +659,11 @@ public final class ParamUtil{
      * @param singleValueMap
      *            the params map
      * @return the string
+     * @see #toArrayValueMap(Map)
+     * @see #joinArrayValueMap(Map)
      * @since 1.3.1
      */
-    private static String joinSingleValueMap(Map<String, String> singleValueMap){
+    public static String joinSingleValueMap(Map<String, String> singleValueMap){
         if (Validator.isNullOrEmpty(singleValueMap)){
             return StringUtils.EMPTY;
         }
@@ -664,16 +674,22 @@ public final class ParamUtil{
     /**
      * Join array value map.
      * 
-     * <p style="color:red">
-     * 该方法不会执行encode操作,使用原生值进行拼接
-     * </p>
+     * <h3>注意点:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>该方法不会执行encode操作,使用原生值进行拼接</li>
+     * <li>按照传入的map key顺序进行排序,不会自行自动排序转换;如有有业务需求,先行排序完传入进来</li>
+     * </ul>
+     * </blockquote>
      *
      * @param arrayValueMap
      *            the array value map
      * @return the string
+     * @see #joinParamNameAndValues(String, String[])
      * @since 1.3.1
      */
-    private static String joinArrayValueMap(Map<String, String[]> arrayValueMap){
+    public static String joinArrayValueMap(Map<String, String[]> arrayValueMap){
         if (Validator.isNullOrEmpty(arrayValueMap)){
             return StringUtils.EMPTY;
         }
@@ -705,13 +721,17 @@ public final class ParamUtil{
      * @param paramValues
      *            参数多值
      * @return the string
+     * @see java.lang.AbstractStringBuilder#append(String)
+     * @see org.apache.commons.lang3.StringUtils#defaultString(String)
+     * @see "org.springframework.web.servlet.view.RedirectView#appendQueryProperties(StringBuilder,Map, String)"
      * @since 1.3.1
      */
     private static String joinParamNameAndValues(String paramName,String[] paramValues){
         StringBuilder sb = new StringBuilder();
         for (int i = 0, j = paramValues.length; i < j; ++i){
             String value = paramValues[i];
-            sb.append(paramName).append("=").append(value);
+            //value转换, 注意:如果 value 是null ,StringBuilder讲拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            sb.append(StringUtils.defaultString(paramName)).append("=").append(StringUtils.defaultString(value));
             if (i != j - 1){// 最后一个& 不拼接
                 sb.append(URIComponents.AMPERSAND);
             }

@@ -17,7 +17,6 @@ package com.feilong.core.lang;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -92,20 +91,10 @@ public class SystemUtilTest{
     @Test
     public void path(){
         String path = System.getenv("Path");
-        // LOGGER.info(path);
         String[] strings = path.split(";");
         Arrays.sort(strings);
-        for (String p : strings){
-            LOGGER.info(p);
-        }
-    }
 
-    /**
-     * Current time millis.
-     */
-    @Test
-    public void currentTimeMillis(){
-        LOGGER.info("" + System.currentTimeMillis());
+        LOGGER.debug(JsonUtil.format(strings));
     }
 
     /**
@@ -113,23 +102,14 @@ public class SystemUtilTest{
      */
     @Test
     public void testSystem(){
-
         System.getProperties().list(System.out);
 
         Properties properties = System.getProperties();
         Object[] key = properties.keySet().toArray();
         Arrays.sort(key);
         for (int i = 0; i < key.length; i++){
-            LOGGER.info(key[i] + "======>" + properties.get(key[i]));
+            LOGGER.debug(key[i] + "======>" + properties.get(key[i]));
         }
-        // OutputStream os = IOUtil.getFileOutputStream("E:/1.xml");
-        // try{
-        // properties.storeToXML(os, "ceshi");
-        // }catch (IOException e){
-        // throw new UncheckedIOException(e);
-        // }
-        // FeiLongTestUtil.print(properties);
-
     }
 
     /**
@@ -139,7 +119,7 @@ public class SystemUtilTest{
     @Test
     public void testGetPropertiesMapForLog(){
         Map<String, String> propertiesMapForLog = SystemUtil.getPropertiesMapForLog();
-        LOGGER.info(JsonUtil.format(propertiesMapForLog));
+        LOGGER.debug(JsonUtil.format(propertiesMapForLog));
     }
 
     /**
@@ -152,17 +132,13 @@ public class SystemUtilTest{
         map.put("cccc", "cccc");
         map.put("bbbb", "bbbb");
         map.put("dddd", "dddd");
-        Iterator<String> iterator = map.keySet().iterator();
-        while (iterator.hasNext()){
-            Object key = iterator.next();
-            Object obj = map.get(key);
-            LOGGER.info("" + obj);
-        }
-        LOGGER.info("---------------------------");
+        LOGGER.debug(JsonUtil.format(map));
+
+        LOGGER.debug("---------------------------");
         Object[] key = map.keySet().toArray();
         Arrays.sort(key);
         for (int i = 0; i < key.length; i++){
-            LOGGER.info(map.get(key[i]));
+            LOGGER.debug(map.get(key[i]));
         }
     }
 }

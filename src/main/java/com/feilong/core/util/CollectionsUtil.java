@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
@@ -82,13 +81,13 @@ public final class CollectionsUtil{
      * @param value
      *            任意类型的值,最终toString 判断比较.
      * @return true, if successful
-     * @see ObjectUtil#toIterator(Object)
+     * @see ConvertUtil#toIterator(Object)
      * @see #isContain(Iterator, Object)
      * @deprecated
      */
     @Deprecated
     public static boolean isContainTag(Object collection,Object value){
-        Iterator<?> iterator = ObjectUtil.toIterator(collection);
+        Iterator<?> iterator = ConvertUtil.toIterator(collection);
         return isContain(iterator, value);
     }
 

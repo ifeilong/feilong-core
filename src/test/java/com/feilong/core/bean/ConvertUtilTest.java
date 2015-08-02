@@ -19,10 +19,17 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.ArrayConverter;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +48,42 @@ public class ConvertUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ConvertUtilTest.class);
+
+    /**
+     * Test to iterator.
+     */
+    @Test
+    public final void testToIterator(){
+        // *************************逗号分隔的数组********************************
+        LOGGER.info(StringUtils.center("逗号分隔的数组", 60, "*"));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator("1,2")));
+
+        // ************************map*********************************
+        LOGGER.info(StringUtils.center("map", 60, "*"));
+        Map<String, String> map = new HashMap<String, String>();
+
+        map.put("a", "1");
+        map.put("b", "2");
+
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(map)));
+
+        // ***************************array******************************
+        LOGGER.info(StringUtils.center("array", 60, "*"));
+        Object[] array = { "5", 8 };
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(array)));
+        // ***************************collection******************************
+        LOGGER.info(StringUtils.center("collection", 60, "*"));
+        Collection<String> collection = new ArrayList<String>();
+        collection.add("aaaa");
+        collection.add("nnnnn");
+
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(collection)));
+
+        // **********************enumeration***********************************
+        LOGGER.info(StringUtils.center("enumeration", 60, "*"));
+        Enumeration<Object> enumeration = new StringTokenizer("this is a test");
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(enumeration)));
+    }
 
     /**
      * Convert.

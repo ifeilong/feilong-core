@@ -34,7 +34,7 @@ import com.feilong.core.io.CharsetType;
 import com.feilong.core.log.Slf4jUtil;
 
 /**
- * StringUtil {@link String}工具类,可以 查询,截取,format,转成16进制码.
+ * {@link String}工具类,可以 查询,截取,format,转成16进制码.
  * 
  * <h3>分隔(split)</h3>
  * 
@@ -49,11 +49,13 @@ import com.feilong.core.log.Slf4jUtil;
  * <li>{@link #tokenizeToStringArray(String, String)}</li>
  * <li>{@link #tokenizeToStringArray(String, String, boolean, boolean)}</li>
  * </ul>
- * </blockquote>
  * 
+ * <p>
  * 区别在于,split 使用的是 正则表达式 {@link Pattern#split(CharSequence)} 分隔(特别注意,一些特殊字符 $|()[{^?*+\\ 需要转义才能做分隔符),而 {@link StringTokenizer} 使用索引机制,在性能上
  * StringTokenizer更高<br>
  * 因此,在注重性能的场景,还是建议使用{@link StringTokenizer}
+ * </p>
+ * </blockquote>
  * 
  * <h3>{@link String#String(byte[] )} 和 {@link String#String(byte[], Charset)} 区别</h3>
  * 
@@ -62,6 +64,18 @@ import com.feilong.core.log.Slf4jUtil;
  * {@link String#String(byte[] )} 其实调用了{@link String#String(byte[], Charset)}; 先使用 {@link Charset#defaultCharset()},如果有异常 再用 ISO-8859-1,
  * 具体参见 {@link java.lang.StringCoding#decode(byte[], int, int)}
  * </p>
+ * </blockquote>
+ * 
+ * <h3>{@link StringBuffer} && {@link StringBuilder} && {@link String} 对比</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>{@link StringBuffer} 字符串变量（线程安全）</li>
+ * <li>{@link StringBuilder} 字符串变量（非线程安全）</li>
+ * <li>{@link String} 字符串常量</li>
+ * <li>在大部分情况下 {@link StringBuffer} {@code >} {@link String}</li>
+ * <li>在大部分情况下 {@link StringBuilder} {@code >} {@link StringBuffer}</li>
+ * </ul>
  * </blockquote>
  *
  * @author feilong
