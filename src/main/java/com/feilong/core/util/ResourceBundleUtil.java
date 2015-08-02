@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.configure;
+package com.feilong.core.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +36,6 @@ import com.feilong.core.io.FileUtil;
 import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * {@link java.util.ResourceBundle} 工具类.
@@ -57,15 +56,15 @@ import com.feilong.core.util.Validator;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.0 2011-11-11 上午10:24:25
  * @see MessageFormatUtil#format(String, Object...)
  * @see java.util.ResourceBundle
  * 
  * @see java.util.PropertyResourceBundle
  * @see java.util.ListResourceBundle
- * @since 1.0.0
+ * @version 1.3.1 2015年8月3日 上午3:18:50
+ * @since 1.3.1
  */
-public final class ResourceBundleUtil implements BaseConfigure{
+public final class ResourceBundleUtil{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourceBundleUtil.class);

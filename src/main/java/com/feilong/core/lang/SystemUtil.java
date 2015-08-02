@@ -21,7 +21,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.SystemUtils;
 
-import com.feilong.core.configure.PropertiesUtil;
+import com.feilong.core.util.PropertiesUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -385,7 +385,7 @@ public final class SystemUtil{
      * @param properties
      *            the properties from properties
      * @since 1.2.0
-     * @see com.feilong.core.configure.PropertiesUtil#toMap(Properties)
+     * @see com.feilong.core.util.PropertiesUtil#toMap(Properties)
      * @see com.feilong.core.lang.SystemUtil#setPropertiesFromMap(Map)
      * @see java.lang.System#setProperty(String, String)
      */
