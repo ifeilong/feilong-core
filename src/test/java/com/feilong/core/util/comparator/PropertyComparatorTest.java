@@ -29,6 +29,7 @@ import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 
 /**
+ * The Class PropertyComparatorTest.
  *
  * @author feilong
  * @version 1.2.1 2015年6月26日 下午8:28:21
@@ -36,8 +37,12 @@ import com.feilong.test.User;
  */
 public class PropertyComparatorTest{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyComparatorTest.class);
 
+    /**
+     * Test property comparator.
+     */
     @Test
     public final void testPropertyComparator(){
         List<User> list = new ArrayList<User>();
@@ -53,6 +58,9 @@ public class PropertyComparatorTest{
         LOGGER.debug(JsonUtil.format(list));
     }
 
+    /**
+     * Test property comparator2.
+     */
     @Test
     public final void testPropertyComparator2(){
         Set<User> list = new TreeSet<User>(new PropertyComparator<User>("id"));

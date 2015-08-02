@@ -29,6 +29,7 @@ import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 
 /**
+ * The Class PropertyUtilTest.
  *
  * @author feilong
  * @version 1.2.2 2015年7月14日 下午10:07:59
@@ -36,6 +37,7 @@ import com.feilong.test.User;
  */
 public class PropertyUtilTest{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtilTest.class);
 
     /**
@@ -59,6 +61,9 @@ public class PropertyUtilTest{
         LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(User.class)));
     }
 
+    /**
+     * Test get property.
+     */
     @Test
     public void testGetProperty(){
         User a = new User();
