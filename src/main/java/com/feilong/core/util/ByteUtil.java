@@ -104,6 +104,50 @@ public final class ByteUtil{
     }
 
     // *****************************************************************************************************
+
+    /**
+     * 16进制字符串转成字节数组.
+     * 
+     * @param bytes
+     *            the bytes
+     * @return 16进制字符串转成字节数组
+     */
+    public static byte[] hexBytesToBytes(byte[] bytes){
+        int length = bytes.length;
+        if (length % 2 != 0){
+            throw new IllegalArgumentException("length is not even,length is:" + length);//长度不是偶数
+        }
+        byte[] bytes2 = new byte[length / 2];
+        String item = "";
+        for (int n = 0; n < length; n += 2){
+            item = new String(bytes, n, 2);
+            // 两位一组，表示一个字节,把这样表示的16进制字符串，还原成一个进制字节
+            bytes2[n / 2] = (byte) Integer.parseInt(item, 16);
+        }
+        return bytes2;
+    }
+
+    /**
+     * 将指定字符串hexString,以每两个字符分割转换为16进制形式.
+     * 
+     * <p>
+     * 如：{@code "2B44EFD9" --> byte[] 0x2B, 0x44, 0xEF, 0xD9} .
+     * </p>
+     * 
+     * @param bytes
+     *            the bytes
+     * @return the byte[]
+     */
+    public static byte[] hexBytesToBytes2(byte[] bytes){
+        int size = bytes.length / 2;
+
+        byte[] ret = new byte[size];
+        for (int i = 0; i < size; ++i){
+            ret[i] = uniteBytes(bytes[i * 2], bytes[i * 2 + 1]);
+        }
+        return ret;
+    }
+
     /**
      * 将两个ASCII字符合成一个字节,如：{@code "EF"--> 0xEF}.
      * 
@@ -118,44 +162,5 @@ public final class ByteUtil{
         b0 = (byte) (b0 << 4);
         byte b1 = Byte.decode("0x" + new String(new byte[] { byte2 })).byteValue();
         return (byte) (b0 ^ b1);
-    }
-
-    /**
-     * 16进制字符串转成字节数组.
-     * 
-     * @param bytes
-     *            the bytes
-     * @return 16进制字符串转成字节数组
-     */
-    public static byte[] hexBytesToBytes(byte[] bytes){
-        int length = bytes.length;
-        if ((length % 2) != 0){
-            throw new IllegalArgumentException("长度不是偶数,length is:" + length);
-        }
-        byte[] bytes2 = new byte[length / 2];
-        String item = "";
-        for (int n = 0; n < length; n += 2){
-            item = new String(bytes, n, 2);
-            // 两位一组，表示一个字节,把这样表示的16进制字符串，还原成一个进制字节
-            bytes2[n / 2] = (byte) Integer.parseInt(item, 16);
-        }
-        return bytes2;
-    }
-
-    /**
-     * 将指定字符串hexString,以每两个字符分割转换为16进制形式 如："2B44EFD9" --> byte[]{0x2B, 0x44, 0xEF, 0xD9}.
-     * 
-     * @param bytes
-     *            the bytes
-     * @return the byte[]
-     */
-    public static byte[] hexBytesToBytes2(byte[] bytes){
-        int size = bytes.length / 2;
-
-        byte[] ret = new byte[size];
-        for (int i = 0; i < size; ++i){
-            ret[i] = ByteUtil.uniteBytes(bytes[i * 2], bytes[i * 2 + 1]);
-        }
-        return ret;
     }
 }

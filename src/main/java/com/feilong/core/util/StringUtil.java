@@ -29,7 +29,6 @@ import org.apache.commons.lang3.text.StrSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.io.CharsetType;
 import com.feilong.core.log.Slf4jUtil;
@@ -55,6 +54,15 @@ import com.feilong.core.log.Slf4jUtil;
  * 区别在于,split 使用的是 正则表达式 {@link Pattern#split(CharSequence)} 分隔(特别注意,一些特殊字符 $|()[{^?*+\\ 需要转义才能做分隔符),而 {@link StringTokenizer} 使用索引机制,在性能上
  * StringTokenizer更高<br>
  * 因此,在注重性能的场景,还是建议使用{@link StringTokenizer}
+ * 
+ * <h3>{@link String#String(byte[] )} 和 {@link String#String(byte[], Charset)} 区别</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * {@link String#String(byte[] )} 其实调用了{@link String#String(byte[], Charset)}; 先使用 {@link Charset#defaultCharset()},如果有异常 再用 ISO-8859-1,
+ * 具体参见 {@link java.lang.StringCoding#decode(byte[], int, int)}
+ * </p>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.0.0 2010-2-9 上午09:53:37
@@ -326,33 +334,6 @@ public final class StringUtil{
     }
 
     /**
-     * 将内容 <code>content</code> 中的需要被替换的内容 <code>target</code> 替换成 <code>bean</code>里面的 <code>filedName</code> 属性值.
-     *
-     * @param content
-     *            内容
-     * @param target
-     *            需要被替换的内容
-     * @param bean
-     *            bean
-     * @param filedName
-     *            字段名称
-     * @return 替换,将内容content 中的需要被替换的内容target 替换成bean里面的filedName属性值
-     * @deprecated will-remove
-     */
-    @Deprecated
-    public static String replace(Object content,String target,Object bean,String filedName){
-        String replacement = StringUtils.EMPTY;
-        // 替换序列是null
-        if (Validator.isNotNullOrEmpty(bean)){
-            Object filedValue = BeanUtil.getProperty(bean, filedName);
-            if (null != filedValue){
-                replacement = filedValue.toString();
-            }
-        }
-        return replace(content, target, replacement);
-    }
-
-    /**
      * The following example demonstrates this:
      * 
      * <pre>
@@ -484,10 +465,10 @@ public final class StringUtil{
      * </pre>
      */
     public static String substring(Object textObject,int startIndex,int length){
-        String returnValue = null;
         if (Validator.isNullOrEmpty(textObject)){
             return StringUtils.EMPTY;
         }
+
         String textString = ConvertUtil.toString(textObject);
         int textLength = textString.length();
         // 索引位置必须小于长度
@@ -500,21 +481,19 @@ public final class StringUtil{
         }else if (1 == length){// 截取1个 即本身
             // 截取本身索引的位置
             return textString.substring(startIndex, startIndex + 1);
-        }else{
-            // 剩余可以被截取的字符串长度
-            int remainLength = textLength - startIndex;
-            // 剩余字符长长度比截取的长度长
-            if (remainLength > length){
-                // 结束的索引
-                int endIndex = startIndex + length;
-                // 此方法最后一个不包含
-                returnValue = textString.substring(startIndex, endIndex);
-            }else{
-                // 没有需要被截取的长
-                returnValue = textString.substring(startIndex);
-            }
         }
-        return returnValue;
+
+        // 剩余可以被截取的字符串长度
+        int remainLength = textLength - startIndex;
+        // 剩余字符长长度比截取的长度长
+        if (remainLength > length){
+            // 结束的索引
+            int endIndex = startIndex + length;
+            // 此方法最后一个不包含
+            return textString.substring(startIndex, endIndex);
+        }
+        // 没有需要被截取的长
+        return textString.substring(startIndex);
     }
 
     /**
@@ -536,6 +515,7 @@ public final class StringUtil{
 
     /**
      * [截取]:从第一次出现字符串位置开始(包含)截取到最后,shift表示向前或者向后挪动位数.
+     * 
      * <p>
      * beginIndex= text.indexOf(beginString) + shift;<br>
      * return text.substring(beginIndex);
@@ -568,31 +548,20 @@ public final class StringUtil{
         }
         //****************************************************
         int beginIndex = text.indexOf(beginString);
-        // 查不到指定的字符串
-        if (beginIndex == -1){
+        if (beginIndex == -1){// 查不到指定的字符串
             return StringUtils.EMPTY;
         }
         //****************************************************
         int startIndex = beginIndex + shift;
+        int textLength = text.length();
         if (startIndex < 0){
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(
-                            "beginIndex + shift <0, beginIndex:{},shift:{},text:{},text.length:{}",
-                            beginIndex,
-                            shift,
-                            text,
-                            text.length()));
-        }else if (startIndex > text.length()){
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info(
-                                "beginIndex + shift > text.length(), beginIndex:{},shift:{},text:{},text.length:{}",
-                                beginIndex,
-                                shift,
-                                text,
-                                text.length());
-            }
+            String pattern = "beginIndex+shift<0,beginIndex:{},shift:{},text:{},text.length:{}";
+            throw new IllegalArgumentException(Slf4jUtil.formatMessage(pattern, beginIndex, shift, text, textLength));
+        }else if (startIndex > textLength){
+            LOGGER.info("beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}", beginIndex, shift, text, textLength);
             return StringUtils.EMPTY;
         }
-        // 索引从0 开始
+        // 索引从0开始
         return text.substring(startIndex);
     }
 
@@ -614,7 +583,8 @@ public final class StringUtil{
     public static String substring(String text,String startString,String endString){
         if (Validator.isNullOrEmpty(text)){
             return StringUtils.EMPTY;
-        }else if (Validator.isNullOrEmpty(startString)){
+        }
+        if (Validator.isNullOrEmpty(startString)){
             return text.substring(0, text.indexOf(endString));
         }
         int beginIndex = text.indexOf(startString);
@@ -625,7 +595,7 @@ public final class StringUtil{
     /**
      * [截取]:获取文字最后位数的字符串.
      * <p>
-     * 调用了 {@link java.lang.String#substring(int)}
+     * 调用了 {@link String#substring(int)}
      * </p>
      * 
      * <pre>
@@ -745,7 +715,7 @@ public final class StringUtil{
      * @see #tokenizeToStringArray(String, String)
      */
     public static String[] split(String value,String regexSpliter){
-        if (null == value){
+        if (Validator.isNullOrEmpty(value)){
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
         return value.split(regexSpliter);
@@ -1031,14 +1001,12 @@ public final class StringUtil{
      * @param original
      *            原始字符串
      * @return the string
+     * @see #toHexStringUpperCase(String, String)
      * @deprecated will move
      */
     @Deprecated
     public static String toHexStringUpperCase(String original){
-        // 先 Charset.defaultCharset() 如果有异常 用 ISO-8859-1
-        String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(original.getBytes());
-        LOGGER.debug("original:{},hexStringUpperCase:{}", original, hexStringUpperCase);
-        return hexStringUpperCase;
+        return toHexStringUpperCase(original, Charset.defaultCharset().name());
     }
 
     /**
@@ -1049,18 +1017,14 @@ public final class StringUtil{
      * @param charsetName
      *            字符集 {@link CharsetType}
      * @return the string
+     * @see ByteUtil#bytesToHexStringUpperCase(byte[])
      * @deprecated will move
      */
     @Deprecated
     public static String toHexStringUpperCase(String original,String charsetName){
-        try{
-            String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(original.getBytes(charsetName));
-            LOGGER.debug("original:{},hexStringUpperCase:{}", original, hexStringUpperCase);
-            return hexStringUpperCase;
-        }catch (UnsupportedEncodingException e){
-            LOGGER.error(e.getClass().getName(), e);
-        }
-        return StringUtils.EMPTY;
+        String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(getBytes(original, charsetName));
+        LOGGER.debug("original:{},hexStringUpperCase:{}", original, hexStringUpperCase);
+        return hexStringUpperCase;
     }
 
     /**
@@ -1069,14 +1033,12 @@ public final class StringUtil{
      * @param hexStringUpperCase
      *            大写的HexString
      * @return the string
+     * @see #toOriginal(String, String)
      * @deprecated will move
      */
     @Deprecated
     public static String toOriginal(String hexStringUpperCase){
-        byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
-        String original = new String(hexBytesToBytes);
-        LOGGER.debug("hexStringUpperCase:{},original:{}", hexStringUpperCase, original);
-        return original;
+        return toOriginal(hexStringUpperCase, Charset.defaultCharset().name());
     }
 
     /**
@@ -1087,21 +1049,15 @@ public final class StringUtil{
      * @param charsetName
      *            指定字符集
      * @return the string
+     * @see ByteUtil#hexBytesToBytes(byte[])
      * @deprecated will move
      */
     @Deprecated
     public static String toOriginal(String hexStringUpperCase,String charsetName){
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
-        String original = null;
-        try{
-            original = new String(hexBytesToBytes, charsetName);
-        }catch (UnsupportedEncodingException e){
-            LOGGER.error(e.getClass().getName(), e);
-        }
+        String original = newString(hexBytesToBytes, charsetName);
         LOGGER.debug("hexStringUpperCase:{},original:{}", hexStringUpperCase, original);
         return original;
     }
-
     // [end]
-
 }
