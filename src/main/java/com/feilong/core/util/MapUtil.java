@@ -127,7 +127,7 @@ public final class MapUtil{
      */
     public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K[] keys){
         if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("the map is null or empty!");
+            throw new NullPointerException("map can't be null/empty!");
         }
         if (Validator.isNullOrEmpty(keys)){
             return map;
@@ -161,7 +161,7 @@ public final class MapUtil{
      */
     public static <K, T> Map<K, T> getSubMapExcludeKeys(Map<K, T> map,K[] excludeKeys){
         if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("the map is null or empty!");
+            throw new NullPointerException("map can't be null/empty!");
         }
         if (Validator.isNullOrEmpty(excludeKeys)){
             return map;
@@ -261,7 +261,7 @@ public final class MapUtil{
      */
     public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName,Class<K> keysClass){
         if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("the map is null or empty!");
+            throw new NullPointerException("map can't be null/empty!");
         }
         if (Validator.isNullOrEmpty(extractPropertyName)){
             throw new NullPointerException("extractPropertyName is null or empty!");
@@ -388,7 +388,7 @@ public final class MapUtil{
     public static <K, V> Map<K, V> sort(Map<K, V> map,Comparator<Map.Entry<K, V>> mapEntryComparator){
 
         if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("the map is null or empty!");
+            throw new NullPointerException("map can't be null/empty!");
         }
 
         if (Validator.isNullOrEmpty(mapEntryComparator)){

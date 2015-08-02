@@ -445,7 +445,7 @@ public final class CollectionsUtil{
                     String propertyName,
                     K returnCollection){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection is null or empty!");
+            throw new NullPointerException("objectCollection can't be null/empty!");
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -536,7 +536,7 @@ public final class CollectionsUtil{
      */
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection is null or empty!");
+            throw new NullPointerException("objectCollection can't be null/empty!");
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -560,7 +560,7 @@ public final class CollectionsUtil{
      */
     public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection is null or empty!");
+            throw new NullPointerException("objectCollection can't be null/empty!");
         }
         return (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
@@ -603,7 +603,7 @@ public final class CollectionsUtil{
      */
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection is null or empty!");
+            throw new NullPointerException("objectCollection can't be null/empty!");
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -662,7 +662,7 @@ public final class CollectionsUtil{
      */
     public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection is null or empty!");
+            throw new NullPointerException("objectCollection can't be null/empty!");
         }
 
         if (Validator.isNullOrEmpty(keyPropertyName)){
@@ -708,7 +708,7 @@ public final class CollectionsUtil{
             throw new NullPointerException("objectCollection can't be null/empty!");
         }
         if (Validator.isNullOrEmpty(propertyName)){
-            throw new NullPointerException("the propertyName is null or empty!");
+            throw new NullPointerException("propertyName is null or empty!");
         }
 
         //视需求  可以换成 HashMap 或者TreeMap
@@ -765,7 +765,7 @@ public final class CollectionsUtil{
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
-            throw new NullPointerException("the propertyName is null or empty!");
+            throw new NullPointerException("propertyName is null or empty!");
         }
 
         Map<T, Integer> map = new LinkedHashMap<T, Integer>();
@@ -814,7 +814,7 @@ public final class CollectionsUtil{
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
-            throw new NullPointerException("the propertyName is null or empty!");
+            throw new NullPointerException("propertyName is null or empty!");
         }
 
         //视需求  可以换成 HashMap 或者TreeMap
