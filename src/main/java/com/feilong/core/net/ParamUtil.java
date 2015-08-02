@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.io.CharsetType;
 import com.feilong.core.util.ArrayUtil;
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -80,23 +80,23 @@ public final class ParamUtil{
     /**
      * To array value map.
      *
-     * @param nameAndValueMap
+     * @param singleValueMap
      *            the name and value map
      * @return the map< string, string[]>
      * @since 1.3.1
      */
-    public static Map<String, String[]> toArrayValueMap(Map<String, String> nameAndValueMap){
-        if (Validator.isNullOrEmpty(nameAndValueMap)){
+    public static Map<String, String[]> toArrayValueMap(Map<String, String> singleValueMap){
+        if (Validator.isNullOrEmpty(singleValueMap)){
             return Collections.emptyMap();
         }
 
-        Map<String, String[]> keyAndArrayMap = new TreeMap<String, String[]>();//返回 TreeMap 方便log 显示
-        for (Map.Entry<String, String> entry : nameAndValueMap.entrySet()){
+        Map<String, String[]> arrayValueMap = new TreeMap<String, String[]>();//返回 TreeMap 方便log 显示
+        for (Map.Entry<String, String> entry : singleValueMap.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
-            keyAndArrayMap.put(key, new String[] { value });
+            arrayValueMap.put(key, new String[] { value });
         }
-        return keyAndArrayMap;
+        return arrayValueMap;
     }
 
     // ************************************addParameter******************************************************
@@ -111,14 +111,16 @@ public final class ParamUtil{
      * @param parameValue
      *            添加的参数值
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameter(URI, String, Object, String)
      */
     public static String addParameter(String uriString,String paramName,Object parameValue,String charsetType){
-        Map<String, String> nameAndValueMap = new HashMap<String, String>();
-        nameAndValueMap.put(paramName, "" + parameValue);
-        return addParameterSingleValueMap(uriString, nameAndValueMap, charsetType);
+        Map<String, String> singleValueMap = new HashMap<String, String>();
+        singleValueMap.put(paramName, "" + parameValue);
+        return addParameterSingleValueMap(uriString, singleValueMap, charsetType);
     }
 
     /**
@@ -132,7 +134,9 @@ public final class ParamUtil{
      * @param parameValue
      *            添加的参数值
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameterArrayValueMap(URI, Map, String)
      */
@@ -147,16 +151,18 @@ public final class ParamUtil{
      *
      * @param uriString
      *            the uri string
-     * @param nameAndValueMap
-     *            nameAndValueMap param name 和value 的键值对
+     * @param singleValueMap
+     *            singleValueMap param name 和value 的键值对
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @see #addParameterArrayValueMap(String, Map, String)
      */
-    public static String addParameterSingleValueMap(String uriString,Map<String, String> nameAndValueMap,String charsetType){
-        Map<String, String[]> keyAndArrayMap = toArrayValueMap(nameAndValueMap);
-        return addParameterArrayValueMap(uriString, keyAndArrayMap, charsetType);
+    public static String addParameterSingleValueMap(String uriString,Map<String, String> singleValueMap,String charsetType){
+        Map<String, String[]> arrayValueMap = toArrayValueMap(singleValueMap);
+        return addParameterArrayValueMap(uriString, arrayValueMap, charsetType);
     }
 
     /**
@@ -164,26 +170,27 @@ public final class ParamUtil{
      *
      * @param uriString
      *            the uri string
-     * @param nameAndArrayValueMap
+     * @param arrayValueMap
      *            the name and array value map
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      * @see #addParameterArrayValueMap(URI, Map, String)
      * @since 1.3.1
      */
-    public static String addParameterArrayValueMap(String uriString,Map<String, String[]> nameAndArrayValueMap,String charsetType){
+    public static String addParameterArrayValueMap(String uriString,Map<String, String[]> arrayValueMap,String charsetType){
         //此处不能直接调用  addParameterArrayValueMap(URI uri 方法, 因为 uriString可能不是个符合规范的uri
-
         if (null == uriString){
             return StringUtils.EMPTY;
         }
 
-        if (Validator.isNullOrEmpty(nameAndArrayValueMap)){
+        if (Validator.isNullOrEmpty(arrayValueMap)){
             return uriString;
         }
         String queryString = URIUtil.getQueryString(uriString);
-        return addParameterArrayValueMap(uriString, queryString, nameAndArrayValueMap, charsetType);
+        return addParameterArrayValueMap(uriString, queryString, arrayValueMap, charsetType);
     }
 
     /**
@@ -196,23 +203,25 @@ public final class ParamUtil{
      * @param uri
      *            如果带有? 和参数,会先被截取,最后再拼接,<br>
      *            如果不带?,则自动 增加?
-     * @param nameAndArrayValueMap
-     *            nameAndValueMap 类似于 request.getParameterMap
+     * @param arrayValueMap
+     *            singleValueMap 类似于 request.getParameterMap
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
      */
-    public static String addParameterArrayValueMap(URI uri,Map<String, String[]> nameAndArrayValueMap,String charsetType){
+    public static String addParameterArrayValueMap(URI uri,Map<String, String[]> arrayValueMap,String charsetType){
         if (null == uri){
             return StringUtils.EMPTY;
         }
 
         String uriString = uri.toString();
-        if (Validator.isNullOrEmpty(nameAndArrayValueMap)){
+        if (Validator.isNullOrEmpty(arrayValueMap)){
             return uriString;
         }
         String queryString = uri.getRawQuery();
-        return addParameterArrayValueMap(uriString, queryString, nameAndArrayValueMap, charsetType);
+        return addParameterArrayValueMap(uriString, queryString, arrayValueMap, charsetType);
     }
 
     /**
@@ -222,29 +231,31 @@ public final class ParamUtil{
      *            the uri string
      * @param queryString
      *            the query
-     * @param nameAndArrayValueMap
+     * @param arrayValueMap
      *            the name and array value map
      * @param charsetType
-     *            the charset type
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @since 1.3.1
      */
     private static String addParameterArrayValueMap(
                     String uriString,
                     String queryString,
-                    Map<String, String[]> nameAndArrayValueMap,
+                    Map<String, String[]> arrayValueMap,
                     String charsetType){
-        Map<String, String[]> paramsMap = new HashMap<String, String[]>();
-        paramsMap.putAll(nameAndArrayValueMap);
+        Map<String, String[]> singleValueMap = new HashMap<String, String[]>();
+        singleValueMap.putAll(arrayValueMap);
         if (Validator.isNotNullOrEmpty(queryString)){
             // 注意 action before 可能带参数
             // "action": "https://202.6.215.230:8081/purchasing/purchase.do?action=loginRequest",
             // "fullEncodedUrl":"https://202.6.215.230:8081/purchasing/purchase.do?action=loginRequest?miscFee=0&descp=&klikPayCode=03BELAV220&transactionDate=23%2F03%2F2014+02%3A40%3A19&currency=IDR",
-            Map<String, String[]> originalMap = parseQueryStringToArrayValueMap(queryString, null);
-            paramsMap.putAll(originalMap);
+            Map<String, String[]> originalMap = toSafeArrayValueMap(queryString, null);
+            singleValueMap.putAll(originalMap);
         }
-        paramsMap.putAll(nameAndArrayValueMap);
-        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), paramsMap, charsetType);
+        singleValueMap.putAll(arrayValueMap);
+        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), singleValueMap, charsetType);
     }
 
     // ********************************removeParameter*********************************************************************
@@ -257,7 +268,9 @@ public final class ParamUtil{
      * @param paramName
      *            the param name
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @see #removeParameterList(String, List, String)
      */
@@ -278,16 +291,22 @@ public final class ParamUtil{
      * @param paramName
      *            the param name
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @see #removeParameterList(URI, List, String)
      */
     public static String removeParameter(URI uri,String paramName,String charsetType){
-        List<String> paramNameList = null;
-        if (Validator.isNotNullOrEmpty(paramName)){
-            paramNameList = new ArrayList<String>();
-            paramNameList.add(paramName);
+        if (null == uri){
+            return StringUtils.EMPTY;
         }
+        if (Validator.isNullOrEmpty(paramName)){// 如果 paramNameList 是null 原样返回
+            return uri.toString();
+        }
+        List<String> paramNameList = new ArrayList<String>();
+        paramNameList.add(paramName);
+
         return removeParameterList(uri, paramNameList, charsetType);
     }
 
@@ -299,7 +318,9 @@ public final class ParamUtil{
      * @param paramNameList
      *            the param name list
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      */
     public static String removeParameterList(String uriString,List<String> paramNameList,String charsetType){
@@ -321,7 +342,9 @@ public final class ParamUtil{
      * @param paramNameList
      *            the param name list
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      */
     public static String removeParameterList(URI uri,List<String> paramNameList,String charsetType){
@@ -346,19 +369,24 @@ public final class ParamUtil{
      * @param paramNameList
      *            the param name list
      * @param charsetType
-     *            the charset type
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @since 1.3.1
      */
     private static String removeParameterList(String uriString,String queryString,List<String> paramNameList,String charsetType){
+        if (Validator.isNullOrEmpty(uriString)){
+            return StringUtils.EMPTY;
+        }
         if (Validator.isNullOrEmpty(queryString)){
             return uriString;// 不带参数原样返回
         }
-        Map<String, String[]> paramsMap = parseQueryStringToArrayValueMap(queryString, null);
+        Map<String, String[]> singleValueMap = toSafeArrayValueMap(queryString, null);
         for (String paramName : paramNameList){
-            paramsMap.remove(paramName);
+            singleValueMap.remove(paramName);
         }
-        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), paramsMap, charsetType);
+        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), singleValueMap, charsetType);
     }
 
     // **************************************retentionParams********************************************************
@@ -369,9 +397,11 @@ public final class ParamUtil{
      * @param uriString
      *            the uri string
      * @param paramNameList
-     *            the param name list
+     *            要保留的参数名字list
      * @param charsetType
-     *            编码,see {@link CharsetType}
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @see #retentionParamList(URI, List, String)
      */
@@ -393,12 +423,13 @@ public final class ParamUtil{
      * @param uri
      *            the uri
      * @param paramNameList
-     *            the param name list
+     *            要保留的参数名字list
      * @param charsetType
-     *            编码,see {@link CharsetType} , 何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
-     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
-     * @see #parseQueryStringToArrayValueMap(String, String)
+     * @see #toSafeArrayValueMap(String, String)
      */
     public static String retentionParamList(URI uri,List<String> paramNameList,String charsetType){
         if (null == uri){
@@ -415,16 +446,18 @@ public final class ParamUtil{
     }
 
     /**
-     * Retention param list.
+     * 保留指定的参数.
      *
      * @param uriString
      *            the uri string
      * @param queryString
      *            the query string
      * @param paramNameList
-     *            the param name list
+     *            要保留的参数名字list
      * @param charsetType
-     *            the charset type
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @since 1.3.1
      */
@@ -432,13 +465,16 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(queryString)){
             return uriString; //不带参数原样返回
         }
-        Map<String, String[]> originalMap = parseQueryStringToArrayValueMap(queryString, null);
-        Map<String, String[]> paramsMap = new LinkedHashMap<String, String[]>();
+        Map<String, String[]> originalArrayValueMap = toSafeArrayValueMap(queryString, null);
+
+        Map<String, String[]> singleValueMap = new LinkedHashMap<String, String[]>();
         for (String paramName : paramNameList){
-            paramsMap.put(paramName, originalMap.get(paramName));
+            singleValueMap.put(paramName, originalArrayValueMap.get(paramName));
         }
-        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), paramsMap, charsetType);
+        return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), singleValueMap, charsetType);
     }
+
+    //*********************************************************************************
 
     /**
      * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value).
@@ -446,15 +482,16 @@ public final class ParamUtil{
      * @param queryString
      *            the query string
      * @param charsetType
-     *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
-     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the {@code map<string, string>}
-     * @see #parseQueryStringToArrayValueMap(String, String)
+     * @see #toSafeArrayValueMap(String, String)
      * @since 1.3.1
      */
-    public static Map<String, String> parseQueryStringToSingleValueMap(String queryString,String charsetType){
-        Map<String, String[]> arrayValueMap = parseQueryStringToArrayValueMap(queryString, charsetType);
-        return ParamUtil.toSingleValueMap(arrayValueMap);
+    public static Map<String, String> toSingleValueMap(String queryString,String charsetType){
+        Map<String, String[]> arrayValueMap = toSafeArrayValueMap(queryString, charsetType);
+        return toSingleValueMap(arrayValueMap);
     }
 
     /**
@@ -463,22 +500,23 @@ public final class ParamUtil{
      * @param queryString
      *            {@code a=1&b=2}类型的数据,支持{@code a=1&a=1}的形式， 返回map的值是数组
      * @param charsetType
-     *            何种编码， {@link CharsetType} 如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
-     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value)
      * @since 1.3.1
      */
-    public static Map<String, String[]> parseQueryStringToArrayValueMap(String queryString,String charsetType){
+    public static Map<String, String[]> toSafeArrayValueMap(String queryString,String charsetType){
         if (Validator.isNullOrEmpty(queryString)){
             return Collections.emptyMap();
         }
+
         String[] nameAndValueArray = queryString.split(URIComponents.AMPERSAND);
         if (Validator.isNullOrEmpty(nameAndValueArray)){
             return Collections.emptyMap();
         }
 
         Map<String, String[]> map = new LinkedHashMap<String, String[]>();
-
         for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
             String nameAndValue = nameAndValueArray[i];
             String[] tempArray = nameAndValue.split("=", 2);
@@ -488,22 +526,14 @@ public final class ParamUtil{
                 String value = tempArray[1];
 
                 if (Validator.isNotNullOrEmpty(charsetType)){
-                    // 浏览器传递queryString()参数差别(浏览器兼容问题);chrome会将query进行 encoded再发送请求;而ie原封不动的发送
-
-                    // 由于暂时不能辨别是否encoded过,所以先强制decode再encode;此处不能先转decode(query,charsetType),参数就是想传 =是转义符
-                    key = URIUtil.encode(URIUtil.decode(key, charsetType), charsetType);
-                    value = URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
+                    key = decodeAndEncode(key, charsetType);
+                    value = decodeAndEncode(value, charsetType);
                 }
-
                 String[] valuesArrayInMap = map.get(key);
 
-                List<String> list = null;
-                if (Validator.isNullOrEmpty(valuesArrayInMap)){
-                    list = new ArrayList<String>();
-                }else{
-                    list = ArrayUtil.toList(valuesArrayInMap);
-                }
+                List<String> list = null == valuesArrayInMap ? new ArrayList<String>() : ArrayUtil.toList(valuesArrayInMap);
                 list.add(value);
+
                 map.put(key, CollectionsUtil.toArray(list, String.class));
             }
         }
@@ -512,64 +542,152 @@ public final class ParamUtil{
 
     /**
      * 将map混合成 queryString.
+     * 
+     * <p>
+     * 返回的queryString参数顺序,按照传入的singleValueMap key顺序排列,可以考虑传入 {@link TreeMap},{@link LinkedHashMap}等以适应不同业务的需求
+     * </p>
      *
-     * @param paramsMap
+     * @param arrayValueMap
      *            类似于 request.getParamMap
      * @param charsetType
      *            {@link CharsetType} 何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return if isNullOrEmpty(appendMap) ,return ""
      * @see CharsetType
-     * @see MapUtil#toNaturalOrderingString(Map)
+     * @see #toNaturalOrderingQueryString(Map)
      * @since 1.3.1
      */
-    public static String parseArrayValueMapToQueryString(Map<String, String[]> paramsMap,String charsetType){
-        if (Validator.isNullOrEmpty(paramsMap)){
+    public static String toSafeQueryString(Map<String, String[]> arrayValueMap,String charsetType){
+        if (Validator.isNullOrEmpty(arrayValueMap)){
             return StringUtils.EMPTY;
         }
-        StringBuilder sb = new StringBuilder();
+        Map<String, String[]> safeArrayValueMap = toSafeArrayValueMap(arrayValueMap, charsetType);
+        return joinArrayValueMap(safeArrayValueMap);
+    }
 
-        int i = 0;
-        int size = paramsMap.size();
-        for (Map.Entry<String, String[]> entry : paramsMap.entrySet()){
+    /**
+     * To safe array value map.
+     *
+     * @param arrayValueMap
+     *            the array value map
+     * @param charsetType
+     *            the charset type
+     * @return if Validator.isNullOrEmpty(arrayValueMap) ,return emptyMap
+     */
+    private static Map<String, String[]> toSafeArrayValueMap(Map<String, String[]> arrayValueMap,String charsetType){
+        if (Validator.isNullOrEmpty(arrayValueMap)){
+            return Collections.emptyMap();
+        }
+
+        Map<String, String[]> safeArrayValueMap = new LinkedHashMap<String, String[]>();
+
+        for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             String key = entry.getKey();
             String[] paramValues = entry.getValue();
-
-            // **************************************************************
-            if (Validator.isNotNullOrEmpty(charsetType)){
-                // 统统先强制 decode再 encode,浏览器兼容问题
-                key = URIUtil.encode(URIUtil.decode(key, charsetType), charsetType);
-            }
-            // **************************************************************
             if (Validator.isNullOrEmpty(paramValues)){
                 LOGGER.warn("the param key:[{}] value is null", key);
-                sb.append(key).append("=").append("");
-            }else{
-                List<String> paramValueList = null;
-                if (Validator.isNotNullOrEmpty(charsetType)){
-                    paramValueList = new ArrayList<String>();
-                    for (String value : paramValues){
-                        if (Validator.isNotNullOrEmpty(value)){
-                            // 浏览器传递queryString()参数差别(浏览器兼容问题);chrome会将query进行 encoded再发送请求;而ie原封不动的发送
-                            // 由于暂时不能辨别是否encoded过,所以先强制decode再encode;此处不能先转decode(query,charsetType),参数就是想传 =是转义符
-                            paramValueList.add(URIUtil.encode(URIUtil.decode(value.toString(), charsetType), charsetType));
-                        }else{
-                            paramValueList.add("");
-                        }
-                    }
-                }else{
-                    paramValueList = ArrayUtil.toList(paramValues);
-                }
-
-                for (int j = 0, z = paramValueList.size(); j < z; ++j){
-                    String value = paramValueList.get(j);
-                    sb.append(key).append("=").append(value);
-                    if (j != z - 1){// 最后一个& 不拼接
-                        sb.append(URIComponents.AMPERSAND);
-                    }
-                }
+                paramValues = ArrayUtils.EMPTY_STRING_ARRAY;//赋予 empty数组,为了下面的转换
             }
-            if (i != size - 1){// 最后一个& 不拼接
+
+            if (Validator.isNotNullOrEmpty(charsetType)){
+                key = decodeAndEncode(key, charsetType);
+                List<String> paramValueList = new ArrayList<String>();
+                for (String value : paramValues){
+                    paramValueList.add(Validator.isNotNullOrEmpty(value) ? decodeAndEncode(value, charsetType) : StringUtils.EMPTY);
+                }
+                safeArrayValueMap.put(key, CollectionsUtil.toArray(paramValueList, String.class));
+            }else{
+                safeArrayValueMap.put(key, paramValues);
+            }
+        }
+        return safeArrayValueMap;
+    }
+
+    //*********************************************************************************************
+
+    /**
+     * 转成自然排序的字符串,生成待签名的字符串.
+     * 
+     * <p style="color:red">
+     * 该方法不会执行encode操作,使用原生值进行拼接,一般用于和第三方对接数据, 比如支付宝
+     * </p>
+     * 
+     * <ol>
+     * <li>对数组里的每一个值从 a 到 z 的顺序排序，若遇到相同首字母，则看第二个字母， 以此类推。</li>
+     * <li>排序完成之后，再把所有数组值以“&”字符连接起来</li>
+     * <li>没有值的参数无需传递，也无需包含到待签名数据中.</li>
+     * <li><span style="color:red">注意: 待签名数据应该是原生值而不是 encoding 之后的值</span></li>
+     * </ol>
+     * 
+     * <h3>代码流程:</h3> <blockquote>
+     * <ol>
+     * <li>{@code if isNullOrEmpty(filePath)---->} return {@link StringUtils#EMPTY}</li>
+     * <li>singleValueMap to naturalOrderingMap(TreeMap)</li>
+     * <li>for naturalOrderingMap's entrySet(),join key and value use =,join each entry use &</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param singleValueMap
+     *            用于拼接签名的参数
+     * @return the string
+     * @see #toSafeQueryString(Map, String)
+     * @since 1.3.1
+     */
+    public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
+        if (Validator.isNullOrEmpty(singleValueMap)){
+            return StringUtils.EMPTY;
+        }
+        Map<String, String> naturalParamsMapMap = new TreeMap<String, String>(singleValueMap);
+        String naturalOrderingString = join(naturalParamsMapMap);
+        LOGGER.debug(naturalOrderingString);
+        return naturalOrderingString;
+    }
+
+    /**
+     * 将map链接起来.
+     * 
+     * <p>
+     * 比如,参数名字 {@code paramName=name}, {@code paramValues 为 zhangfei},那么返回值是{@code name=zhangfei}
+     * </p>
+     *
+     * @param singleValueMap
+     *            the params map
+     * @return the string
+     * @since 1.3.1
+     */
+    private static String join(Map<String, String> singleValueMap){
+        if (Validator.isNullOrEmpty(singleValueMap)){
+            return StringUtils.EMPTY;
+        }
+        Map<String, String[]> arrayValueMap = toArrayValueMap(singleValueMap);
+        return joinArrayValueMap(arrayValueMap);
+    }
+
+    /**
+     * Join array value map.
+     * 
+     * <p style="color:red">
+     * 该方法不会执行encode操作,使用原生值进行拼接
+     * </p>
+     *
+     * @param arrayValueMap
+     *            the array value map
+     * @return the string
+     * @since 1.3.1
+     */
+    private static String joinArrayValueMap(Map<String, String[]> arrayValueMap){
+        if (Validator.isNullOrEmpty(arrayValueMap)){
+            return StringUtils.EMPTY;
+        }
+
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
+            String key = entry.getKey();
+            String[] paramValues = entry.getValue();
+            sb.append(joinParamNameAndValues(key, paramValues));
+
+            if (i != arrayValueMap.size() - 1){// 最后一个& 不拼接
                 sb.append(URIComponents.AMPERSAND);
             }
             ++i;
@@ -578,29 +696,81 @@ public final class ParamUtil{
     }
 
     /**
+     * 将参数和多值链接起来.
+     * 
+     * <p>
+     * 比如,参数名字 {@code paramName=name}, {@code paramValues 为 zhangfei,guanyu},那么返回值是{@code name=zhangfei&name=guanyu}
+     * </p>
+     *
+     * @param paramName
+     *            参数名字
+     * @param paramValues
+     *            参数多值
+     * @return the string
+     * @since 1.3.1
+     */
+    private static String joinParamNameAndValues(String paramName,String[] paramValues){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, j = paramValues.length; i < j; ++i){
+            String value = paramValues[i];
+            sb.append(paramName).append("=").append(value);
+            if (i != j - 1){// 最后一个& 不拼接
+                sb.append(URIComponents.AMPERSAND);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 浏览器传递queryString()参数差别(浏览器兼容问题);chrome会将query进行 encoded再发送请求;而ie原封不动的发送.
+     * 
+     * <p>
+     * 由于暂时不能辨别是否encoded过,所以先强制decode再encode;
+     * </p>
+     * 
+     * <p>
+     * 此处不能先转decode(query,charsetType),参数就是想传 =是转义符
+     * </p>
+     *
+     * @param value
+     *            the value
+     * @param charsetType
+     *            the charset type,pls use {@link CharsetType}
+     * @return the string
+     * @see <a
+     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
+     * @since 1.3.1
+     */
+    private static String decodeAndEncode(String value,String charsetType){
+        return URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
+    }
+
+    /**
      * Combine url.
      *
      * @param beforePathWithoutQueryString
      *            the before path without query string
-     * @param paramsMap
-     *            the map
+     * @param arrayValueMap
+     *            the array value map
      * @param charsetType
-     *            the charset type
+     *            何种编码， {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @since 1.3.1
      */
-    private static String combineUrl(String beforePathWithoutQueryString,Map<String, String[]> paramsMap,String charsetType){
+    private static String combineUrl(String beforePathWithoutQueryString,Map<String, String[]> arrayValueMap,String charsetType){
         if (Validator.isNullOrEmpty(beforePathWithoutQueryString)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(paramsMap)){//没有参数 直接return
+        if (Validator.isNullOrEmpty(arrayValueMap)){//没有参数 直接return
             return beforePathWithoutQueryString;
         }
 
         StringBuilder sb = new StringBuilder();
         sb.append(beforePathWithoutQueryString);
         sb.append(URIComponents.QUESTIONMARK);
-        sb.append(parseArrayValueMapToQueryString(paramsMap, charsetType));
+        sb.append(toSafeQueryString(arrayValueMap, charsetType));
 
         return sb.toString();
     }

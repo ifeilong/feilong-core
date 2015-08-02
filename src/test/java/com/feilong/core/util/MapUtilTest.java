@@ -38,39 +38,6 @@ public class MapUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
     /**
-     * Test to natural ordering string.
-     */
-    @Test
-    public void testToNaturalOrderingString(){
-        String[] parameters = {
-                "service=create_salesorder",
-                "partner=3088101011913539",
-                "_input_charset=gbk",
-                "code=137214341849121",
-                "memberID=325465",
-                "createTime=20130912150636",
-                "paymentType=unionpay_mobile",
-                "isNeededInvoice=true",
-                "invoiceTitle=上海宝尊电子商务有限公司",
-                "totalActual=210.00",
-                "receiver=王小二",
-                "receiverPhone=15001241318",
-                "receiverMobile=0513-86651522",
-                "zipCode=216000",
-                "province=江苏省",
-                "city=南通市",
-                "district=通州区",
-                "address=江苏南通市通州区平东镇甸北村1组188号",
-                "lines_data=[{\"extentionCode\":\"00887224869169\",\"count\":\"2\",\"unitPrice\":\"400.00\"},{\"extentionCode\":\"00887224869170\",\"count\":\"1\",\"unitPrice\":\"500.00\"}]" };
-        Map<String, String> object = new HashMap<String, String>();
-        for (String string : parameters){
-            String[] keyAndValue = string.split("=");
-            object.put(keyAndValue[0], keyAndValue[1]);
-        }
-        LOGGER.info(MapUtil.toNaturalOrderingString(object));
-    }
-
-    /**
      * Test invert map.
      */
     @Test

@@ -111,8 +111,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             compareTo = ObjectUtils.compare(t1.hashCode(), t2.hashCode());
         }
 
-        //NullPointException
-        //propertyValue1.compareTo(propertyValue2);
+        //NullPointException if propertyValue1.compareTo(propertyValue2);
 
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(

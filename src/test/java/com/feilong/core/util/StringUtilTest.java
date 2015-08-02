@@ -279,15 +279,15 @@ public class StringUtilTest{
     public void splitAndAddYinHao(){
         String a = "12345,56789,1123456";
         String[] aStrings = a.split(",");
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int size = aStrings.length;
         for (int i = 0; i < size; i++){
-            stringBuilder.append("'" + aStrings[i] + "'");
+            sb.append("'" + aStrings[i] + "'");
             if (i != size - 1){
-                stringBuilder.append(",");
+                sb.append(",");
             }
         }
-        LOGGER.info(stringBuilder.toString());
+        LOGGER.info(sb.toString());
     }
 
     /**

@@ -219,7 +219,9 @@ public final class CollectionsUtil{
      *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see ArrayUtil#toString(ToStringConfig, Object...)
+     * @deprecated
      */
+    @Deprecated
     public static String toString(final Collection collection,ToStringConfig toStringConfig){
         if (Validator.isNullOrEmpty(collection)){
             return StringUtils.EMPTY;
@@ -271,8 +273,8 @@ public final class CollectionsUtil{
      *            the generic type
      * @param collection
      *            collection
-     * @param arrayClass
-     *            the array class
+     * @param arrayComponentType
+     *            数组组件类型的 Class
      * @return 数组,if null == collection or arrayClass == null,return NullPointerException
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
@@ -289,18 +291,18 @@ public final class CollectionsUtil{
      * @see org.apache.commons.collections4.IteratorUtils#toArray(Iterator,Class)
      * @since 1.2.2
      */
-    public static <T> T[] toArray(Collection<T> collection,Class<T> arrayClass){
+    public static <T> T[] toArray(Collection<T> collection,Class<T> arrayComponentType){
         if (null == collection){
             throw new NullPointerException("collection must not be null");
         }
-        if (arrayClass == null){
-            throw new NullPointerException("Array class must not be null");
+        if (arrayComponentType == null){
+            throw new NullPointerException("Array ComponentType must not be null");
         }
 
         // 如果采用大家常用的把a的length设为0,就需要反射API来创建一个大小为size的数组,而这对性能有一定的影响.
         // 所以最好的方式就是直接把a的length设为Collection的size从而避免调用反射API来达到一定的性能优化.
         @SuppressWarnings("unchecked")
-        T[] array = (T[]) Array.newInstance(arrayClass, collection.size());
+        T[] array = (T[]) Array.newInstance(arrayComponentType, collection.size());
 
         //注意，toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
         return collection.toArray(array);

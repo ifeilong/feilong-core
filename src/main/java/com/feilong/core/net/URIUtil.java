@@ -258,9 +258,8 @@ public final class URIUtil{
      * </p>
      * 
      * <p>
-     * 如果uriString中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
-     * 如果如果uriString中含?等参数,那么内部会调用 {@link ParamUtil#addParameterArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}
-     * 创建
+     * 如果uriString中不含?等参数,直接调用{@link URI#create(String)}创建<br>
+     * 如果uriString中含?等参数,那么内部会调用{@link ParamUtil#addParameterArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}创建
      * </p>
      *
      * @param uriString
@@ -291,7 +290,7 @@ public final class URIUtil{
         // 问号前面的部分
         String queryString = StringUtil.substring(uriString, URIComponents.QUESTIONMARK, 1);
 
-        Map<String, String[]> map = ParamUtil.parseQueryStringToArrayValueMap(queryString, charsetType);
+        Map<String, String[]> map = ParamUtil.toSafeArrayValueMap(queryString, charsetType);
         String encodeUrl = ParamUtil.addParameterArrayValueMap(uriString, map, charsetType);
         LOGGER.debug("after url:{}", encodeUrl);
         return encodeUrl;

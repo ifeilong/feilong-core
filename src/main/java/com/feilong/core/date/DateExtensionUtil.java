@@ -463,23 +463,23 @@ public final class DateExtensionUtil{
         // 间隔秒 减去间隔天数及间隔小时,间隔分钟后,
         long spaceMillisecond = spaceTime - (((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60 + spaceSecond) * 1000;
         // **************************************************************************************
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         if (0 != spaceDay){
-            stringBuilder.append(spaceDay + DAY);
+            sb.append(spaceDay + DAY);
         }
         if (0 != spaceHour){
-            stringBuilder.append(spaceHour + HOUR);
+            sb.append(spaceHour + HOUR);
         }
         if (0 != spaceMinute){
-            stringBuilder.append(spaceMinute + MINUTE);
+            sb.append(spaceMinute + MINUTE);
         }
         if (0 != spaceSecond){
-            stringBuilder.append(spaceSecond + SECOND);
+            sb.append(spaceSecond + SECOND);
         }
         if (0 != spaceMillisecond){
-            stringBuilder.append(spaceMillisecond + MILLISECOND);
+            sb.append(spaceMillisecond + MILLISECOND);
         }
-        return stringBuilder.toString();
+        return sb.toString();
     }
 
     /**

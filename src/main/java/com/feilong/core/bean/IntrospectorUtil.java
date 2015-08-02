@@ -157,7 +157,6 @@ public final class IntrospectorUtil{
         List<String> methodDescriptorList = new ArrayList<String>(methodDescriptorArray.length);
         //MethodDescriptor类 用于记载一个成员方法的所有信息
         for (MethodDescriptor methodDescriptor : methodDescriptorArray){
-
             //获得一个成员方法描述器所代表的方法的名字   
             String methodName = methodDescriptor.getName();
 
@@ -170,14 +169,10 @@ public final class IntrospectorUtil{
             if (Validator.isNotNullOrEmpty(parameterTypes)){
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0, j = parameterTypes.length; i < j; ++i){
-                    //获得参数的类型的名字   
-                    Class<?> parameterType = parameterTypes[i];
+                    Class<?> parameterType = parameterTypes[i];//获得参数的类型的名字   
+                    sb.append(parameterType.getName());
 
-                    String methodParams = parameterType.getName();
-                    sb.append(methodParams);
-
-                    // 不是最后一个 拼接
-                    if (i != j - 1){
+                    if (i != j - 1){// 不是最后一个 拼接
                         sb.append(",");
                     }
                 }

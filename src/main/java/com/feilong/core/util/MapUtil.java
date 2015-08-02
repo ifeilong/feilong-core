@@ -29,12 +29,10 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.comparators.ReverseComparator;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.net.ParamUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 
 /**
@@ -82,60 +80,6 @@ public final class MapUtil{
             }
         }
         return sb.toString();
-    }
-
-    /**
-     * 转成自然排序的字符串,生成待签名的字符串.
-     * 
-     * <ol>
-     * <li>对数组里的每一个值从 a 到 z 的顺序排序，若遇到相同首字母，则看第二个字母， 以此类推。</li>
-     * <li>排序完成之后，再把所有数组值以“&”字符连接起来</li>
-     * <li>没有值的参数无需传递，也无需包含到待签名数据中.</li>
-     * <li><span style="color:red">注意: 待签名数据应该是原生值而不是 encoding 之后的值</span></li>
-     * </ol>
-     * 
-     * <h3>代码流程:</h3> <blockquote>
-     * <ol>
-     * <li>{@code if isNullOrEmpty(filePath)---->} return {@link StringUtils#EMPTY}</li>
-     * <li>paramsMap to naturalOrderingMap(TreeMap)</li>
-     * <li>for naturalOrderingMap's entrySet(),join key and value use =,join each entry use &</li>
-     * </ol>
-     * </blockquote>
-     *
-     * @param paramsMap
-     *            用于拼接签名的参数
-     * @return the string
-     * @see ParamUtil#parseArrayValueMapToQueryString(Map, String)
-     * @since 1.3.1
-     */
-    public static String toNaturalOrderingString(Map<String, String> paramsMap){
-        if (Validator.isNullOrEmpty(paramsMap)){
-            return StringUtils.EMPTY;
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        Map<String, String> naturalOrderingMap = new TreeMap<String, String>(paramsMap);
-
-        int i = 0;
-        int size = naturalOrderingMap.size();
-        for (Map.Entry<String, String> entry : naturalOrderingMap.entrySet()){
-            String key = entry.getKey();
-            String value = entry.getValue();
-
-            sb.append(key + "=" + value);
-
-            if (i != size - 1){
-                sb.append("&");// 最后一个不要拼接 &
-            }
-            ++i;
-        }
-
-        String naturalOrderingString = sb.toString();
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(naturalOrderingString);
-        }
-        return naturalOrderingString;
     }
 
     /**

@@ -102,7 +102,7 @@ public class URIUtilTest{
         specialCharacterMap.put(URIComponents.QUESTIONMARK, "%3F");// 分隔实际的 URL 和参数
         specialCharacterMap.put("%", "%25");// 指定特殊字符
         specialCharacterMap.put("#", "%23");// 表示书签
-        specialCharacterMap.put("&", "%26");// URL 中指定的参数间的分隔符
+        specialCharacterMap.put(URIComponents.AMPERSAND, "%26");// URL 中指定的参数间的分隔符
         specialCharacterMap.put("=", "%3D");// URL 中指定参数的值
 
         if (specialCharacterMap.containsKey(specialCharacter)){

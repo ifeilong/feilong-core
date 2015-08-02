@@ -231,7 +231,6 @@ public final class ConvertUtil{
     public static Integer toInteger(Object toBeConvertedValue){
         IntegerConverter integerConverter = new IntegerConverter(null);
         return integerConverter.convert(Integer.class, toBeConvertedValue);
-        // return convert(toBeConvertedValue, Integer.class);
     }
 
     /**
@@ -267,7 +266,6 @@ public final class ConvertUtil{
     public static BigDecimal toBigDecimal(Object toBeConvertedValue){
         BigDecimalConverter bigDecimalConverter = new BigDecimalConverter(null);
         return bigDecimalConverter.convert(BigDecimal.class, toBeConvertedValue);
-        //  return convert(toBeConvertedValue, BigDecimal.class);
     }
 
     /**
@@ -383,9 +381,6 @@ public final class ConvertUtil{
      * @see org.apache.commons.beanutils.converters.ArrayConverter
      */
     public static Long[] toLongs(Object toBeConvertedValue){
-        //        LongConverter elementConverter = new LongConverter(new Long(0L));
-        //        return ConvertUtil.convert(elementConverter, toBeConvertedValue);
-        //return (Long[]) ConvertUtils.convert(toBeConvertedValue,);
         return convert(toBeConvertedValue, Long[].class);
     }
 
