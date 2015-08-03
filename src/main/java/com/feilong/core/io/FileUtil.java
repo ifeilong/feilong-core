@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -294,8 +295,8 @@ public final class FileUtil{
 
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("file :[{}] list length:[{}]", directory, fileListLength);
-            for (File _file : listFiles){
-                LOGGER.debug("[{}] [{}]", _file.getName(), _file.isDirectory() ? FileType.DIRECTORY : FileType.FILE);
+            for (File tempFile : listFiles){
+                LOGGER.debug("[{}] [{}]", tempFile.getName(), tempFile.isDirectory() ? FileType.DIRECTORY : FileType.FILE);
             }
         }
         return 0 == fileListLength;
@@ -482,7 +483,7 @@ public final class FileUtil{
         }
 
         // 有后缀
-        if (hasPostfixName(fileName)){
+        if (hasExtension(fileName)){
             return fileName.substring(0, fileName.lastIndexOf(".") + 1) + newPostfixName;
         }
         // 没有后缀直接拼接
@@ -490,16 +491,20 @@ public final class FileUtil{
     }
 
     /**
-     * 判断是否有后缀.
+     * 获得文件后缀名,并返回小写字母.
+     * 
+     * <p>
+     * 如果文件没有后缀名 返回 ""
+     * </p>
      * 
      * @param fileName
-     *            the file name
-     * @return true, if successful
+     *            文件名称
+     * @return 不带. 的后缀
+     * @see org.apache.commons.io.FilenameUtils#getExtension(String)
      */
-    public static boolean hasPostfixName(String fileName){
-        String fileNameString = getFileName(fileName);
-        int lastIndexOf = fileNameString.lastIndexOf(".");
-        return -1 != lastIndexOf;
+    public static String getFilePostfixNameLowerCase(String fileName){
+        String postfixName = getFilePostfixName(fileName);
+        return postfixName.toLowerCase();
     }
 
     /**
@@ -526,27 +531,23 @@ public final class FileUtil{
      * @see java.lang.String#substring(int, int)
      */
     public static String getFilePostfixName(String fileName){
-        if (hasPostfixName(fileName)){
+        if (hasExtension(fileName)){
             return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
         }
         return StringUtils.EMPTY;
     }
 
     /**
-     * 获得文件后缀名,并返回小写字母.
-     * 
-     * <p>
-     * 如果文件没有后缀名 返回 ""
-     * </p>
+     * 判断是否有后缀.
      * 
      * @param fileName
-     *            文件名称
-     * @return 不带. 的后缀
-     * @see org.apache.commons.io.FilenameUtils#getExtension(String)
+     *            the file name
+     * @return true, if successful
+     * @see org.apache.commons.io.FilenameUtils#indexOfExtension(String)
+     * @since 1.4.0
      */
-    public static String getFilePostfixNameLowerCase(String fileName){
-        String postfixName = getFilePostfixName(fileName);
-        return postfixName.toLowerCase();
+    public static boolean hasExtension(String fileName){
+        return -1 != FilenameUtils.indexOfExtension(fileName);
     }
 
     /**
@@ -643,7 +644,7 @@ public final class FileUtil{
     }
 
     /**
-     * 获得文件的最顶层 父文件夹名称.
+     * 获得文件的最顶层父文件夹名称.
      * 
      * <pre>
      * {@code

@@ -283,7 +283,7 @@ public class FileUtilTest{
     @Test
     public void hasPostfixName(){
         fileName1 = "a";
-        LOGGER.debug(FileUtil.hasPostfixName(fileName1) + "");
+        LOGGER.debug(FileUtil.hasExtension(fileName1) + "");
     }
 
     /**
