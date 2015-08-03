@@ -65,19 +65,21 @@ public final class ObjectUtil{
                         && !ClassUtil.isInstance(findValue, Map.class) //
         ;
 
-        if (canFindType){
-            Map<String, Object> describe = PropertyUtil.describe(findValue);
+        if (!canFindType){
+            return null;
+        }
 
-            for (Map.Entry<String, Object> entry : describe.entrySet()){
-                String key = entry.getKey();
-                Object value = entry.getValue();
+        Map<String, Object> describe = PropertyUtil.describe(findValue);
 
-                if (null != value && !"class".equals(key)){
-                    //级联查询
-                    T t = findTypeValue(value, findedClassType);
-                    if (null != t){
-                        return t;
-                    }
+        for (Map.Entry<String, Object> entry : describe.entrySet()){
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            if (null != value && !"class".equals(key)){
+                //级联查询
+                T t = findTypeValue(value, findedClassType);
+                if (null != t){
+                    return t;
                 }
             }
         }

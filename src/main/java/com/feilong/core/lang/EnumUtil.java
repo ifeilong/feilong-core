@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,6 @@ import com.feilong.core.util.Validator;
  * @author feilong
  * @version 1.0.6 2014年5月8日 上午3:30:51
  * @version 1.0.8 2014-7-22 13:43 add {@link EnumUtil#getEnumByPropertyValueIgnoreCase(Class, String, Object)}
- * @see org.apache.commons.lang.enums.EnumUtils
  * @see org.apache.commons.lang3.EnumUtils
  * @since 1.0.6
  */
@@ -67,13 +67,13 @@ public final class EnumUtil{
      *            the enum class 比如 {@link HttpMethodType}
      * @param propertyName
      *            字段名称,比如 {@link HttpMethodType}的method,按照javabean 规范
-     * @param value
+     * @param specifiedValue
      *            属性值 比如post
      * @return 获得 enum constant
      */
-    public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T value){
+    public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T specifiedValue){
         boolean ignoreCase = true;
-        return getEnumByPropertyValue(enumClass, propertyName, value, ignoreCase);
+        return getEnumByPropertyValue(enumClass, propertyName, specifiedValue, ignoreCase);
     }
 
     /**
@@ -96,18 +96,18 @@ public final class EnumUtil{
      *            the enum class 比如 {@link HttpMethodType}
      * @param propertyName
      *            字段名称,比如 {@link HttpMethodType}的method,按照javabean 规范
-     * @param value
+     * @param specifiedValue
      *            属性值 比如post
      * @return 获得 enum constant
      * @since 1.0.8
      */
-    public static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T value){
+    public static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T specifiedValue){
         boolean ignoreCase = false;
-        return getEnumByPropertyValue(enumClass, propertyName, value, ignoreCase);
+        return getEnumByPropertyValue(enumClass, propertyName, specifiedValue, ignoreCase);
     }
 
     /**
-     * 通过fieldName的 value 获得枚举<br>
+     * 通过fieldName的 value 获得枚举.
      * 
      * <pre>
      * 
@@ -126,7 +126,7 @@ public final class EnumUtil{
      *            the enum class 比如 {@link HttpMethodType}
      * @param propertyName
      *            字段名称,比如 {@link HttpMethodType}的method,按照javabean 规范
-     * @param value
+     * @param specifiedValue
      *            属性值 比如post
      * @param ignoreCase
      *            是否忽视大小写
@@ -134,7 +134,11 @@ public final class EnumUtil{
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @since 1.0.8
      */
-    private static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T value,boolean ignoreCase){
+    private static <E extends Enum<?>, T> E getEnumByPropertyValue(
+                    Class<E> enumClass,
+                    String propertyName,
+                    T specifiedValue,
+                    boolean ignoreCase){
 
         if (Validator.isNullOrEmpty(enumClass)){
             throw new IllegalArgumentException("enumClass is null or empty!");
@@ -145,7 +149,7 @@ public final class EnumUtil{
         }
 
         // An enum is a kind of class
-        // and an annotation is a kind of interface
+        // An annotation is a kind of interface
         // 如果此 Class 对象不表示枚举类型，则返回枚举类的元素或 null.
         E[] enumConstants = enumClass.getEnumConstants();
 
@@ -153,21 +157,40 @@ public final class EnumUtil{
             LOGGER.debug("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants));
         }
         for (E e : enumConstants){
-
             Object propertyValue = PropertyUtil.getProperty(e, propertyName);
-
-            if (null == propertyValue && null == value){
+            if (isEquals(propertyValue, specifiedValue, ignoreCase)){
                 return e;
-            }
-            if (null != propertyValue && null != value){
-                if (ignoreCase && propertyValue.toString().equalsIgnoreCase(value.toString())){
-                    return e;
-                }else if (propertyValue.equals(value)){
-                    return e;
-                }
             }
         }
         String messagePattern = "can not found the enum constants,enumClass:[{}],propertyName:[{}],value:[{}],ignoreCase:[{}]";
-        throw new BeanUtilException(Slf4jUtil.formatMessage(messagePattern, enumClass, propertyName, value, ignoreCase));
+        throw new BeanUtilException(Slf4jUtil.formatMessage(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
+    }
+
+    /**
+     * Checks if is equals.
+     *
+     * @param <T>
+     *            the generic type
+     * @param propertyValue
+     *            the property value
+     * @param specifiedValue
+     *            指定的值
+     * @param ignoreCase
+     *            the ignore case
+     * @return true, if checked
+     * @since 1.4.0
+     */
+    private static <T> boolean isEquals(Object propertyValue,T specifiedValue,boolean ignoreCase){
+        if (propertyValue == null || specifiedValue == null){//很好的设计 赞一个 
+            return propertyValue == specifiedValue;
+        }else if (propertyValue == specifiedValue){
+            return true;
+        }
+        //到这里  propertyValue 和 specifiedValue, 肯定 不是null了 
+        String propertyValueString = propertyValue.toString();
+        String specifiedValueString = specifiedValue.toString();
+        return ignoreCase ? StringUtils.equalsIgnoreCase(propertyValueString, specifiedValueString) : StringUtils.equals(
+                        propertyValueString,
+                        specifiedValueString);
     }
 }

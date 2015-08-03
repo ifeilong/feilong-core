@@ -32,7 +32,7 @@ import com.feilong.core.net.HttpMethodType;
 public class EnumUtilTest{
 
     /**
-     * Test method for {@link com.feilong.core.lang.EnumUtil#getEnumByPropertyValue(Class, String, Object)}.
+     * Test get enum.
      */
     @Test
     public final void testGetEnum(){
@@ -58,7 +58,7 @@ public class EnumUtilTest{
     /**
      * Test get http method type1.
      */
-    @Test(expected = NoSuchFieldException.class)
+    @Test(expected = BeanUtilException.class)
     public final void testGetHttpMethodType1(){
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "post111"));
     }

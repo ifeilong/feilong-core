@@ -24,6 +24,7 @@ import com.feilong.core.lang.EnumUtil;
  * @version 1.0.0 2010-12-16 下午01:11:27
  * @version 1.0.6 2014-5-8 03:27
  * @since 1.0.0
+ * @see "org.springframework.http.HttpMethod"
  */
 public enum HttpMethodType{
 

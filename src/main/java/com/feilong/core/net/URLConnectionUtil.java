@@ -87,11 +87,56 @@ import com.feilong.core.util.Validator;
  * </pre>
  * 
  * </blockquote>
+ * 
+ * 
+ * <h3>关于 {@link HttpURLConnection#setDoInput(boolean)} && {@link HttpURLConnection#setDoOutput(boolean)}</h3>
+ * 
+ * 
+ * <blockquote>
+ * 
+ * 
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>httpUrlConnection.setDoOutput(true);</td>
+ * <td>以后就可以使用conn.getOutputStream().write()<br>
+ * get请求用不到conn.getOutputStream()，因为参数直接追加在地址后面，因此默认是false<br>
+ * post请求（比如：文件上传）需要往服务区传输大量的数据，这些数据是放在http的body里面的，因此需要在建立连接以后，往服务端写数据<br>
+ * URL连接可用于输出。如果打算使用URL连接进行输出，则将DoOutput标志设置为true；如果不打算使用，则设置为 false。默认值为 false。</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>httpUrlConnection.setDoInput(true);</td>
+ * <td>以后就可以使用conn.getInputStream().read(); <br>
+ * 因为总是使用conn.getInputStream()获取服务端的响应，因此默认值是true<br>
+ * URL连接可用于输入。如果打算使用URL连接进行输入，则将DoInput标志设置为true；如果不打算使用，则设置为 false。默认值为 true。 </td>
+ * </tr>
+ * </table>
+ * 
+ * <p>
+ * 您也可以参见 {@link "org.springframework.http.client.SimpleClientHttpRequestFactory#prepareConnection(HttpURLConnection, String)"} 的实现细节
+ * </p>
+ * </blockquote>
+ * 
+ * 
+ * <h3>关于 {@link HttpURLConnection#connect()} && {@link HttpURLConnection#getOutputStream()}</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * getOutputStream会隐含的进行connect(即：如同调用上面的connect()方法，所以在开发中不调用 httpURLConnection.connect(); 也可以).<br>
+ * 打开到此 URL 引用的资源的通信链接（如果尚未建立这样的连接）.如果在已打开连接（此时 connected 字段的值为 true）的情况下调用 connect 方法，则忽略该调用.<br>
+ * 实际上只是建立了一个与服务器的tcp连接,并没有实际发送http请求.<br>
+ * 无论是post还是get,http请求实际上直到HttpURLConnection的getInputStream()这个函数里面才正式发送出去. 
+ * </p>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.0 Sep 26, 2013 11:10:59 AM
  * @see java.net.HttpURLConnection
  * @see java.net.URLConnection
+ * @see "org.springframework.http.client.SimpleClientHttpRequestFactory"
  * @since 1.0.2
  */
 public final class URLConnectionUtil{
@@ -99,15 +144,12 @@ public final class URLConnectionUtil{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(URLConnectionUtil.class);
 
-    //********************************************************************************************
     /** Don't let anyone instantiate this class. */
     private URLConnectionUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
-
-    //********************************************************************************************
 
     /**
      * Read line with proxy.
@@ -235,44 +277,46 @@ public final class URLConnectionUtil{
         ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
         try{
             HttpURLConnection httpURLConnection = openConnection(httpRequest, useConnectionConfig);
-
-            // **************************************************************************
-            int connectTimeout = useConnectionConfig.getConnectTimeout();
-            int readTimeout = useConnectionConfig.getReadTimeout();
-
-            // 一定要为HttpUrlConnection设置connectTimeout属性以防止连接被阻塞
-            //设置连接主机超时（单位：毫秒）
-            httpURLConnection.setConnectTimeout(connectTimeout);
-            //设置从主机读取数据超时（单位：毫秒）
-            httpURLConnection.setReadTimeout(readTimeout);
-
-            //这里要大写
-            //否则会报  java.net.ProtocolException: Invalid HTTP method: get
-            String httpMethod = httpRequest.getHttpMethodType().getMethod().toUpperCase();
-            httpURLConnection.setRequestMethod(httpMethod);
-
-            Map<String, String> headerMap = httpRequest.getHeaderMap();
-            if (Validator.isNotNullOrEmpty(headerMap)){
-                for (Map.Entry<String, String> entry : headerMap.entrySet()){
-                    String key = entry.getKey();
-                    String value = entry.getValue();
-                    httpURLConnection.setRequestProperty(key, value);
-                }
-            }
-
-            // TODO  httpURLConnection.setDoOutput(true);
-
-            // 此处getOutputStream会隐含的进行connect(即：如同调用上面的connect()方法，所以在开发中不调用  httpURLConnection.connect(); 也可以). 
-
-            // 打开到此 URL 引用的资源的通信链接（如果尚未建立这样的连接）.如果在已打开连接（此时 connected 字段的值为 true）的情况下调用 connect 方法，则忽略该调用.
-
-            // 实际上只是建立了一个与服务器的tcp连接,并没有实际发送http请求. 
-            // 无论是post还是get,http请求实际上直到HttpURLConnection的getInputStream()这个函数里面才正式发送出去. 
+            prepareConnection(httpURLConnection, httpRequest, useConnectionConfig);
             return httpURLConnection;
         }catch (MalformedURLException e){
             throw new UncheckedIOException(e);
         }catch (IOException e){
             throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * Prepare connection.
+     *
+     * @param httpURLConnection
+     *            the http url connection
+     * @param httpRequest
+     *            the http request
+     * @param useConnectionConfig
+     *            the use connection config
+     * @throws IOException
+     *             the IO exception
+     * @since 1.4.0
+     * @see "org.springframework.http.client.SimpleClientHttpRequestFactory#prepareConnection(HttpURLConnection, String)"
+     */
+    private static void prepareConnection(HttpURLConnection httpURLConnection,HttpRequest httpRequest,ConnectionConfig useConnectionConfig)
+                    throws IOException{
+        HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
+
+        // 一定要为HttpUrlConnection设置connectTimeout属性以防止连接被阻塞
+        httpURLConnection.setConnectTimeout(useConnectionConfig.getConnectTimeout());
+        httpURLConnection.setReadTimeout(useConnectionConfig.getReadTimeout());
+
+        httpURLConnection.setRequestMethod(httpMethodType.getMethod().toUpperCase());//这里要大写,否则会报  java.net.ProtocolException: Invalid HTTP method: get
+
+        httpURLConnection.setDoOutput(HttpMethodType.POST == httpMethodType);
+
+        Map<String, String> headerMap = httpRequest.getHeaderMap();
+        if (null != headerMap){
+            for (Map.Entry<String, String> entry : headerMap.entrySet()){
+                httpURLConnection.setRequestProperty(entry.getKey(), entry.getValue());
+            }
         }
     }
 
