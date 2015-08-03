@@ -19,11 +19,11 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -32,14 +32,31 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.util.Validator;
 
 /**
- * {@link File}文件操作.<br>
+ * {@link File}文件操作.
  * 
- * File的几个属性:
+ * <h3>File的几个属性:</h3>
+ * 
+ * <blockquote>
  * <ul>
  * <li>{@link File#getAbsolutePath()} 得到的是全路径</li>
  * <li>{@link File#getPath()} 得到的是构造file的时候的路径</li>
  * <li>{@link File#getCanonicalPath()} 可以看到CanonicalPath不但是全路径，而且把..或者.这样的符号解析出来.</li>
  * </ul>
+ * </blockquote>
+ * 
+ * 
+ * <h3>关于大小</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>{@link FileUtils#ONE_KB} 1024</li>
+ * <li>{@link FileUtils#ONE_MB} 1024 * 1024 1048576</li>
+ * <li>{@link FileUtils#ONE_GB} 1024 * 1024 * 1024 1073741824
+ * <p style="color:red">
+ * <b>注意,{@link Integer#MAX_VALUE}=2147483647 是2G大小</b>
+ * </p>
+ * </ul>
+ * </blockquote>
  * 
  * @author feilong
  * @version 1.0.0 2012-5-23 下午5:00:54
@@ -50,7 +67,10 @@ import com.feilong.core.util.Validator;
 public final class FileUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class);
+    private static final Logger LOGGER                = LoggerFactory.getLogger(FileUtil.class);
+
+    /** 默认缓冲大小 10k <code>{@value}</code> */
+    public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
 
     /** Don't let anyone instantiate this class. */
     private FileUtil(){
@@ -88,7 +108,7 @@ public final class FileUtil{
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         try{
-            byte[] bytes = new byte[IOConstants.DEFAULT_BUFFER_LENGTH];
+            byte[] bytes = new byte[DEFAULT_BUFFER_LENGTH];
             int j;
             while ((j = bufferedInputStream.read(bytes)) != -1){
                 byteArrayOutputStream.write(bytes, 0, j);
@@ -141,23 +161,28 @@ public final class FileUtil{
     }
 
     /**
-     * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .<br>
+     * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .
+     * 
+     * <p>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
      * 如果要写入字符流，请考虑使用 {@link java.io.FileWriter}.
-     *
+     * </p>
+     * 
      * @param filePath
      *            the file path
      * @param append
-     *            if true, then bytes will be written to the end of the file rather than the beginning
+     *            if {@code true}, then bytes will be added to the end of the file rather than overwriting
      * @return the file output stream
      * @see java.io.FileOutputStream#FileOutputStream(String, boolean)
+     * @see org.apache.commons.io.FileUtils#openOutputStream(File, boolean)
      * @since 1.2.0
      */
     //默认 Access Modifiers 权限修饰符
     static FileOutputStream getFileOutputStream(String filePath,boolean append){
+        File file = new File(filePath);
         try{
-            return new FileOutputStream(filePath, append);
-        }catch (FileNotFoundException e){
+            return org.apache.commons.io.FileUtils.openOutputStream(file, append);
+        }catch (IOException e){
             throw new UncheckedIOException(e);
         }
     }
@@ -180,9 +205,16 @@ public final class FileUtil{
     }
 
     /**
-     * 从文件系统中的某个文件中获得输入字节.哪些文件可用取决于主机环境.<br>
+     * 从文件系统中的某个文件中获得输入字节.哪些文件可用取决于主机环境.
+     * 
+     * <p>
      * {@link java.io.FileInputStream} 用于读取诸如图像数据之类的原始字节流.<br>
      * 要读取字符流，请考虑使用 {@link java.io.FileReader}
+     * </p>
+     * 
+     * <p>
+     * 如果指定文件不存在;或者它是一个目录，而不是一个常规文件;抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException
+     * </p>
      *
      * @param file
      *            为了进行读取而打开的文件.
@@ -191,9 +223,9 @@ public final class FileUtil{
      */
     public static FileInputStream getFileInputStream(File file){
         try{
-            // 如果指定文件不存在，或者它是一个目录，而不是一个常规文件，抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException.
-            return new FileInputStream(file);
-        }catch (FileNotFoundException e){
+            return org.apache.commons.io.FileUtils.openInputStream(file);
+        }catch (IOException e){
+            LOGGER.error("", e);
             throw new UncheckedIOException(e);
         }
     }
@@ -242,9 +274,12 @@ public final class FileUtil{
 
     // [start] 文件夹操作(createDirectory/deleteFileOrDirectory/deleteFileOrDirectory)
     /**
-     * 创建文件夹by文件路径,支持级联创建.<br>
+     * 创建文件夹by文件路径,支持级联创建.
      * 
+     * <p>
      * 注意:
+     * </p>
+     * 
      * <ol>
      * <li>此处<span style="color:red">参数是文件路径</span>,如果需要传递文件夹路径自动创建文件夹,那么请调用 {@link #createDirectory(String)}</li>
      * <li>对于不存在的文件夹/文件夹: "E:\\test\\1\\2011-07-07" 这么一个路径, 没有办法自动区别到底你是要创建文件还是文件夹</li>
@@ -332,45 +367,55 @@ public final class FileUtil{
     }
 
     /**
-     * 删除某个文件或者文件夹.
+     * 删除文件或者文件夹,如果是文件夹 ,递归深层次 删除.
+     * 
+     * <p>
+     * Deletes a file, never throwing an exception. If file is a directory, delete it and all sub-directories.
+     * </p>
+     * 
+     * <h3>difference between {@link File#delete()} and current method:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>A directory to be deleted does not have to be empty.</li>
+     * <li>No exceptions are thrown when a file or directory cannot be deleted.</li>
+     * </ul>
+     * </blockquote>
      *
      * @param fileName
      *            文件或者文件夹名称
+     * @return {@code true} if the file or directory was deleted, otherwise {@code false}
+     * @see com.feilong.core.io.FileUtil#deleteFileOrDirectory(File)
      */
-    public static void deleteFileOrDirectory(String fileName){
+    public static boolean deleteFileOrDirectory(String fileName){
         File file = new File(fileName);
-        if (file.exists()){
-            deleteFileOrDirectory(file);
-        }
-        throw new IllegalArgumentException("file:[" + fileName + "] not exists,please check it!");
+        return deleteFileOrDirectory(file);
     }
 
     /**
      * 删除文件或者文件夹,如果是文件夹 ,递归深层次 删除.
      * 
+     * <p>
+     * Deletes a file, never throwing an exception. If file is a directory, delete it and all sub-directories.
+     * </p>
+     * 
+     * <h3>difference between {@link File#delete()} and current method:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>A directory to be deleted does not have to be empty.</li>
+     * <li>No exceptions are thrown when a file or directory cannot be deleted.</li>
+     * </ul>
+     * </blockquote>
+     *
      * @param file
-     *            文件或者文件夹名称
+     *            file or directory to delete, can be {@code null}
+     * @return {@code true} if the file or directory was deleted, otherwise {@code false}
+     * 
+     * @see org.apache.commons.io.FileUtils#deleteQuietly(File)
      */
-    public static void deleteFileOrDirectory(File file){
-
-        if (!file.exists()){
-            return;
-        }
-
-        //文件
-        if (!file.isDirectory()){
-            file.delete();
-            return;
-        }
-
-        //文件夹
-        File[] files = file.listFiles();
-
-        if (Validator.isNotNullOrEmpty(files)){
-            for (File currentFile : files){
-                deleteFileOrDirectory(currentFile);
-            }
-        }
+    public static boolean deleteFileOrDirectory(File file){
+        return FileUtils.deleteQuietly(file);
     }
 
     // [end]
@@ -495,8 +540,11 @@ public final class FileUtil{
     }
 
     /**
-     * 获得带后缀的文件纯名称<br>
+     * 获得带后缀的文件纯名称.
+     * 
+     * <p>
      * 如:F:/pie2.png,return pie2.png
+     * </p>
      * 
      * @param fileName
      *            the file name
@@ -510,7 +558,7 @@ public final class FileUtil{
 
     // [end]
     /**
-     * 获得文件的最顶层 父文件夹名称
+     * 获得文件的最顶层 父文件夹名称.
      * 
      * <pre>
      * {@code
@@ -563,7 +611,7 @@ public final class FileUtil{
     }
 
     /**
-     * 获得文件的最顶层 父文件夹名称
+     * 获得文件的最顶层 父文件夹名称.
      * 
      * <pre>
      * {@code
@@ -629,9 +677,11 @@ public final class FileUtil{
     // ************************************************************
     /**
      * 文件大小格式化.
+     * 
      * <p>
      * 目前支持单位有 GB MB KB以及最小单位 Bytes
      * </p>
+     * 
      * <p>
      * Common-io 2.4{@link org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)}有缺点，显示的是整数GB 不带小数（比如1.99G 显示为1G），apache 论坛上争议比较大
      * </p>
@@ -640,24 +690,24 @@ public final class FileUtil{
      *            文件大小 单位byte
      * @return 文件大小byte 转换
      * @see #getFileSize(File)
-     * @see IOConstants#GB
-     * @see IOConstants#MB
-     * @see IOConstants#KB
+     * @see org.apache.commons.io.FileUtils#ONE_GB
+     * @see org.apache.commons.io.FileUtils#ONE_MB
+     * @see org.apache.commons.io.FileUtils#ONE_KB
      * 
      * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
      */
     public static String formatSize(long fileSize){
         String danwei = "";
         long chushu = 1;// 除数
-        if (fileSize >= IOConstants.GB){
+        if (fileSize >= FileUtils.ONE_GB){
             danwei = "GB";
-            chushu = IOConstants.GB;
-        }else if (fileSize >= IOConstants.MB){
+            chushu = FileUtils.ONE_GB;
+        }else if (fileSize >= FileUtils.ONE_MB){
             danwei = "MB";
-            chushu = IOConstants.MB;
-        }else if (fileSize >= IOConstants.KB){
+            chushu = FileUtils.ONE_MB;
+        }else if (fileSize >= FileUtils.ONE_KB){
             danwei = "KB";
-            chushu = IOConstants.KB;
+            chushu = FileUtils.ONE_KB;
         }else{
             return fileSize + "Bytes";
         }
@@ -685,9 +735,7 @@ public final class FileUtil{
      *            the file
      * @return the file format size
      * @see #getFileSize(File)
-     * @see IOConstants#GB
-     * @see IOConstants#MB
-     * @see IOConstants#KB
+     * @see com.feilong.core.io.FileUtil#formatSize(long)
      * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
      * @since 1.0.7
      */

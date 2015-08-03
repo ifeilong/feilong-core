@@ -195,7 +195,7 @@ public class FileUtilTest{
     @Test
     public void testGetFileSizes() throws IOException{
         String testFile = "E:\\DataCommon\\test\\1.png";
-        testFile = "E:\\DataCommon\\Java\\JDK API 1.6.0 中文版.CHM";
+        testFile = "E:\\DataCommon\\JDK API 1.6.0 中文版.CHM";
 
         File file = new File(testFile);
 
@@ -257,7 +257,7 @@ public class FileUtilTest{
      */
     @Test
     public void testDeleteFileOrDirectory2(){
-        FileUtil.deleteFileOrDirectory("E:/test");
+        FileUtil.deleteFileOrDirectory("E:\\test");
     }
 
     /**

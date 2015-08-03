@@ -199,14 +199,14 @@ public final class ResourceBundleUtil{
      */
     public static String getValue(ResourceBundle resourceBundle,String key){
         if (!resourceBundle.containsKey(key)){
-            LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
+            LOGGER.debug("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
             return StringUtils.EMPTY;
         }
 
         try{
             String value = resourceBundle.getString(key);
             if (Validator.isNullOrEmpty(value)){
-                LOGGER.warn("resourceBundle has key:[{}],but value is null/empty", key);
+                LOGGER.debug("resourceBundle has key:[{}],but value is null/empty", key);
             }
             return value;
         }catch (Exception e){
