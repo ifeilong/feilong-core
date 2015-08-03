@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
+import com.feilong.core.tools.jsonlib.JsonUtil;
 
 /**
  * The Class FileUtilTest.
@@ -149,7 +150,23 @@ public class FileUtilTest{
 
         // 正确的 空目录
         Assert.assertEquals(true, FileUtil.isEmptyDirectory("E:\\empty"));
+    }
 
+    /**
+     * Test is empty directory1.
+     */
+    @Test
+    public void testIsEmptyDirectory1(){
+        // 正确的 空目录
+        Assert.assertEquals(true, FileUtil.isEmptyDirectory("E:\\empty"));
+    }
+
+    /**
+     * Test to ur ls.
+     */
+    @Test
+    public void testToURLs(){
+        LOGGER.info(JsonUtil.format(FileUtil.toURLs("D:\\Program Files", "D:\\新建文件夹")));
     }
 
     /**

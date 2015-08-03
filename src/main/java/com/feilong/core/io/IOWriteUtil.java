@@ -26,6 +26,7 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +58,10 @@ import com.feilong.core.util.Validator;
 public final class IOWriteUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(IOWriteUtil.class);
+    private static final Logger LOGGER                = LoggerFactory.getLogger(IOWriteUtil.class);
+
+    /** 默认缓冲大小 10k <code>{@value}</code> */
+    public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
 
     /** Don't let anyone instantiate this class. */
     private IOWriteUtil(){
@@ -172,11 +176,10 @@ public final class IOWriteUtil{
      * @param charsetType
      *            {@link CharsetType} 编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码
      * @param fileWriteMode
-     *            写模式
-     * @see FileWriteMode
-     * @see CharsetType
+     *            写模式 {@link FileWriteMode}
      * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
      * @see #write(InputStream, OutputStream)
+     * @see org.apache.commons.io.FileUtils#writeStringToFile(File, String, Charset, boolean)
      */
     public static void write(String filePath,String content,String charsetType,FileWriteMode fileWriteMode){
         if (Validator.isNullOrEmpty(filePath)){
@@ -232,7 +235,7 @@ public final class IOWriteUtil{
      * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
      */
     public static void write(InputStream inputStream,OutputStream outputStream){
-        write(IOConstants.DEFAULT_BUFFER_LENGTH, inputStream, outputStream);
+        write(DEFAULT_BUFFER_LENGTH, inputStream, outputStream);
     }
 
     /**

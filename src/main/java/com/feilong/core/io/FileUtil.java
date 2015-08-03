@@ -22,6 +22,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -29,6 +31,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -62,6 +66,8 @@ import com.feilong.core.util.Validator;
  * @version 1.0.0 2012-5-23 下午5:00:54
  * @version 1.0.7 2014-5-23 20:27 add {@link #getFileFormatSize(File)}
  * @see java.io.File
+ * @see org.apache.commons.io.FilenameUtils
+ * @see org.apache.commons.io.FileUtils
  * @since 1.0.0
  */
 public final class FileUtil{
@@ -69,7 +75,7 @@ public final class FileUtil{
     /** The Constant LOGGER. */
     private static final Logger LOGGER                = LoggerFactory.getLogger(FileUtil.class);
 
-    /** 默认缓冲大小 10k <code>{@value}</code> */
+    /** 默认缓冲大小 10k <code>{@value}</code>. */
     public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
 
     /** Don't let anyone instantiate this class. */
@@ -99,8 +105,10 @@ public final class FileUtil{
      * @param file
      *            file
      * @return {@link java.io.ByteArrayOutputStream#toByteArray()}
-     * @see com.feilong.core.io.FileUtil#getFileInputStream(File)
+     * @see #getFileInputStream(File)
      * @see java.io.ByteArrayOutputStream#toByteArray()
+     * @see org.apache.commons.io.FileUtils#readFileToByteArray(File)
+     * @see org.apache.commons.io.IOUtils#toByteArray(InputStream, int)
      */
     public static byte[] toByteArray(File file){
         InputStream inputStream = getFileInputStream(file);
@@ -180,6 +188,26 @@ public final class FileUtil{
     //默认 Access Modifiers 权限修饰符
     static FileOutputStream getFileOutputStream(String filePath,boolean append){
         File file = new File(filePath);
+        return getFileOutputStream(file, append);
+    }
+
+    /**
+     * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .
+     * 
+     * <p>
+     * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
+     * 如果要写入字符流，请考虑使用 {@link java.io.FileWriter}.
+     * </p>
+     *
+     * @param file
+     *            the file
+     * @param append
+     *            if {@code true}, then bytes will be added to the end of the file rather than overwriting
+     * @return the file output stream
+     * @since 1.4.0
+     */
+    //默认 Access Modifiers 权限修饰符
+    static FileOutputStream getFileOutputStream(File file,boolean append){
         try{
             return org.apache.commons.io.FileUtils.openOutputStream(file, append);
         }catch (IOException e){
@@ -219,7 +247,7 @@ public final class FileUtil{
      * @param file
      *            为了进行读取而打开的文件.
      * @return FileInputStream
-     * @see java.io.FileInputStream
+     * @see org.apache.commons.io.FileUtils#openInputStream(File)
      */
     public static FileInputStream getFileInputStream(File file){
         try{
@@ -231,7 +259,7 @@ public final class FileUtil{
     }
 
     /**
-     * 判断一个目录 是否是空目录(里面没有文件).
+     * 判断一个目录是否是空目录 <span style="color:red">(判断的原则:里面没有文件)</span>.
      *
      * @param directory
      *            指定一个存在的文件夹
@@ -241,6 +269,8 @@ public final class FileUtil{
      *         <li>如果directory is not Directory,throw IllegalArgumentException</li>
      *         <li>return file.list() ==0</li>
      *         </ul>
+     * @see org.apache.commons.io.FileUtils#sizeOf(File)
+     * @see org.apache.commons.io.FileUtils#sizeOfDirectory(File)
      */
     public static boolean isEmptyDirectory(String directory){
         if (Validator.isNullOrEmpty(directory)){
@@ -250,7 +280,6 @@ public final class FileUtil{
         if (!file.exists()){
             throw new IllegalArgumentException("directory file " + directory + " don't exists!");
         }
-
         if (!file.isDirectory()){
             throw new IllegalArgumentException("directory file " + directory + " is not Directory!");
         }
@@ -259,14 +288,14 @@ public final class FileUtil{
         // 如果此抽象路径名不表示一个目录，那么此方法将返回 null
 
         // ubuntu 已经 测试ok
-        String[] fileList = file.list();
+        File[] listFiles = file.listFiles();
 
-        int fileListLength = fileList.length;
+        int fileListLength = listFiles.length;
 
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("file :[{}] list length:[{}]", directory, fileListLength);
-            for (String fileName : fileList){
-                LOGGER.debug(fileName);
+            for (File _file : listFiles){
+                LOGGER.debug("[{}] [{}]", _file.getName(), _file.isDirectory() ? FileType.DIRECTORY : FileType.FILE);
             }
         }
         return 0 == fileListLength;
@@ -276,9 +305,7 @@ public final class FileUtil{
     /**
      * 创建文件夹by文件路径,支持级联创建.
      * 
-     * <p>
-     * 注意:
-     * </p>
+     * <h3>注意:</h3>
      * 
      * <ol>
      * <li>此处<span style="color:red">参数是文件路径</span>,如果需要传递文件夹路径自动创建文件夹,那么请调用 {@link #createDirectory(String)}</li>
@@ -313,9 +340,8 @@ public final class FileUtil{
     /**
      * 创建文件夹,支持<span style="color:green">级联创建</span>.
      * 
-     * <p>
-     * 注意:
-     * </p>
+     * <h3>注意:</h3>
+     * 
      * <ol>
      * <li>此处<span style="color:red">参数是文件夹</span>,如果需要传递文件路径自动创建父文件夹,那么请调用 {@link #createDirectoryByFilePath(String)}</li>
      * <li>对于不存在的文件夹/文件夹: "E:\\test\\1\\2011-07-07" 这么一个路径, 没有办法自动区别到底你是要创建文件还是文件夹</li>
@@ -477,8 +503,11 @@ public final class FileUtil{
     }
 
     /**
-     * 获得文件后缀名(不带. 的后缀),并返回原样字母<br>
-     * 如果文件没有后缀名 返回 "" (EMPTY).
+     * 获得文件后缀名(不带. 的后缀),并返回原样字母.
+     * 
+     * <p>
+     * 如果文件没有后缀名 返回 "" (EMPTY)
+     * </p>
      * 
      * <pre>
      * {@code
@@ -504,8 +533,11 @@ public final class FileUtil{
     }
 
     /**
-     * 获得文件后缀名,并返回小写字母<br>
-     * 如果文件没有后缀名 返回 "".
+     * 获得文件后缀名,并返回小写字母.
+     * 
+     * <p>
+     * 如果文件没有后缀名 返回 ""
+     * </p>
      * 
      * @param fileName
      *            文件名称
@@ -518,7 +550,7 @@ public final class FileUtil{
     }
 
     /**
-     * 获得文件的不带后缀名的名称. <br>
+     * 获得文件的不带后缀名的名称.
      * 
      * <pre>
      * {@code
@@ -784,6 +816,46 @@ public final class FileUtil{
             }
         }
         return formatFileName;
+    }
+
+    /**
+     * To ur ls.
+     *
+     * @param filePathList
+     *            the paths
+     * @return the UR l[]
+     * @see #toURLs(String...)
+     * @since 1.4.0
+     */
+    public static URL[] toURLs(List<String> filePathList){
+        if (Validator.isNullOrEmpty(filePathList)){
+            throw new NullPointerException("paths can't be null/empty!");
+        }
+        String[] filePaths = CollectionsUtil.toArray(filePathList, String.class);
+        return toURLs(filePaths);
+    }
+
+    /**
+     * To ur ls.
+     *
+     * @param filePaths
+     *            the file paths
+     * @return the UR l[]
+     * @see com.feilong.core.bean.ConvertUtil#convert(String[], Class)
+     * @see org.apache.commons.io.FileUtils#toURLs(File[])
+     * @since 1.4.0
+     */
+    public static URL[] toURLs(String...filePaths){
+        if (Validator.isNullOrEmpty(filePaths)){
+            throw new NullPointerException("paths can't be null/empty!");
+        }
+        File[] files = ConvertUtil.convert(filePaths, File.class);
+        try{
+            return FileUtils.toURLs(files);
+        }catch (IOException e){
+            LOGGER.error("", e);
+            throw new UncheckedIOException(e);
+        }
     }
 
     /**

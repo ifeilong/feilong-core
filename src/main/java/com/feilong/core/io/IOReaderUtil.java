@@ -83,6 +83,7 @@ public final class IOReaderUtil{
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return the file content
+     * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      */
     public static String getFileContent(File file,String charsetName){
         if (Validator.isNullOrEmpty(file)){

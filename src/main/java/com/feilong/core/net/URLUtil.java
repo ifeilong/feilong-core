@@ -22,13 +22,11 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.IOWriteUtil;
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -87,6 +85,10 @@ public final class URLUtil{
      * @throws IOException
      *             the IO exception
      * @see IOWriteUtil#write(InputStream, String, String)
+     * 
+     * @see org.apache.commons.io.FileUtils#copyURLToFile(URL, File)
+     * @see org.apache.commons.io.FileUtils#copyURLToFile(URL, File, int, int)
+     * 
      */
     public static void download(String urlString,String directoryName) throws IOException{
         if (Validator.isNullOrEmpty(urlString)){
@@ -130,50 +132,6 @@ public final class URLUtil{
             i++;
         }
         return stringArray;
-    }
-
-    /**
-     * To ur ls.
-     *
-     * @param paths
-     *            the paths
-     * @return the UR l[]
-     */
-    public static URL[] toURLs(String[] paths){
-        if (Validator.isNullOrEmpty(paths)){
-            throw new NullPointerException("paths can't be null/empty!");
-        }
-
-        int length = paths.length;
-
-        URL[] urls = new URL[length];
-
-        int i = 0;
-        try{
-            for (String path : paths){
-                urls[i] = new File(path).toURI().toURL();
-                i++;
-            }
-        }catch (MalformedURLException e){
-            throw new URIParseException(e);
-        }
-
-        return urls;
-    }
-
-    /**
-     * To ur ls.
-     *
-     * @param paths
-     *            the paths
-     * @return the UR l[]
-     */
-    public static URL[] toURLs(List<String> paths){
-        if (Validator.isNullOrEmpty(paths)){
-            throw new NullPointerException("paths can't be null/empty!");
-        }
-        String[] array = CollectionsUtil.toArray(paths, String.class);
-        return toURLs(array);
     }
 
     /**
