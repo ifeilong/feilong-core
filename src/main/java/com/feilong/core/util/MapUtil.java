@@ -56,6 +56,27 @@ public final class MapUtil{
     }
 
     /**
+     * 仅当 {@code null != map && null != value} 才将key/value put到map中.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map to add to, may not be null
+     * @param key
+     *            the key
+     * @param value
+     *            the value, null converted to ""
+     * @since 1.4.0
+     */
+    public static <K, V> void putIfValueNotNull(final Map<K, V> map,final K key,final V value){
+        if (null != map && null != value){
+            map.put(key, value);
+        }
+    }
+
+    /**
      * 取到指定keys的value,连接起来,如果value是null or empty将会被排除,不参与拼接.
      *
      * @param map
