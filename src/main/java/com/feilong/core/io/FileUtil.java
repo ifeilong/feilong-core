@@ -15,8 +15,6 @@
  */
 package com.feilong.core.io;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -113,23 +111,13 @@ public final class FileUtil{
      */
     public static byte[] toByteArray(File file){
         InputStream inputStream = getFileInputStream(file);
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
         try{
-            byte[] bytes = new byte[DEFAULT_BUFFER_LENGTH];
-            int j;
-            while ((j = bufferedInputStream.read(bytes)) != -1){
-                byteArrayOutputStream.write(bytes, 0, j);
-            }
-            byteArrayOutputStream.flush();
-            return byteArrayOutputStream.toByteArray();
+            return IOUtils.toByteArray(inputStream);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
             // 为避免内存泄漏，Stream的Close是必须的.即使中途发生了异常，也必须Close，
-            IOUtils.closeQuietly(byteArrayOutputStream);
-            IOUtils.closeQuietly(bufferedInputStream);
+            IOUtils.closeQuietly(inputStream);
         }
     }
 
@@ -503,7 +491,7 @@ public final class FileUtil{
      * @see org.apache.commons.io.FilenameUtils#getExtension(String)
      */
     public static String getFilePostfixNameLowerCase(String fileName){
-        String postfixName = getFilePostfixName(fileName);
+        String postfixName = getExtension(fileName);
         return postfixName.toLowerCase();
     }
 
@@ -524,17 +512,28 @@ public final class FileUtil{
      * }
      * </pre>
      * 
+     * Gets the extension of a filename.
+     * <p>
+     * This method returns the textual part of the filename after the last dot. There must be no directory separator after the dot.
+     * 
+     * <pre>
+     * foo.txt      --> "txt"
+     * a/b/c.jpg    --> "jpg"
+     * a/b.txt/c    --> ""
+     * a/b/c        --> ""
+     * </pre>
+     * <p>
+     * The output will be the same irrespective of the machine that the code is running on.
+     * 
      * @param fileName
      *            文件名称
      * @return 不带. 的后缀
      * @see org.apache.commons.io.FilenameUtils#getExtension(String)
      * @see java.lang.String#substring(int, int)
+     * @since 1.4.0
      */
-    public static String getFilePostfixName(String fileName){
-        if (hasExtension(fileName)){
-            return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-        }
-        return StringUtils.EMPTY;
+    public static String getExtension(String fileName){
+        return StringUtils.defaultString(org.apache.commons.io.FilenameUtils.getExtension(fileName));
     }
 
     /**

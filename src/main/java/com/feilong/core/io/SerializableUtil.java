@@ -169,6 +169,8 @@ public final class SerializableUtil{
      *            the serializable string
      * @return the t
      * @deprecated 转字符串值得商榷
+     * @see org.apache.commons.io.IOUtils#toInputStream(String, Charset)
+     * @see org.apache.commons.lang3.SerializationUtils#deserialize(InputStream)
      */
     //TODO
     @Deprecated

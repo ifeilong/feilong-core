@@ -47,7 +47,7 @@ public class FileUtilTest{
     private static final Logger LOGGER    = LoggerFactory.getLogger(FileUtilTest.class);
 
     /** The file name1. */
-    private String              fileName1 = "F:/pie2.png";
+    private static String       fileName1 = "F:/pie2.png";
 
     /** The string. */
     private final String        fString   = "/home/webuser/nike_int/johnData/${date}/nikeid_pix_${typeName}.csv";
@@ -242,12 +242,11 @@ public class FileUtilTest{
     }
 
     /**
-     * 获得后缀名 {@link com.feilong.core.io.FileUtil#getFilePostfixName(java.lang.String)} 的测试方法。
+     * Test get extension.
      */
     @Test
-    @Ignore
-    public void testGetFilePostfixName(){
-        assertEquals("png", FileUtil.getFilePostfixName(fileName1));
+    public void testGetExtension(){
+        assertEquals("png", FileUtil.getExtension(fileName1));
         LOGGER.info(fileName1.substring(fileName1.lastIndexOf(".")));
         LOGGER.info(fileName1.substring(fileName1.lastIndexOf("\\") + 1));
     }
@@ -326,7 +325,7 @@ public class FileUtilTest{
      */
     // XXX 忽视大小写
     public static boolean isInAppointTypes(String fileName,String[] appointTypes){
-        String filePostfixName = FileUtil.getFilePostfixName(fileName);
+        String filePostfixName = FileUtil.getExtension(fileName);
         return ArrayUtils.contains(appointTypes, filePostfixName);
     }
 }
