@@ -442,7 +442,7 @@ public final class StringUtil{
      * 
      * renturn .f
      * </pre>
-     * 
+     *
      * @param textObject
      *            被截取文字
      * @param startIndex
@@ -450,49 +450,15 @@ public final class StringUtil{
      * @param length
      *            长度 {@code >=1} 1个 即本身 <br>
      *            正常情况下,即返回出来的字符串长度
-     * @return
-     *         <pre>
-     * {@code
-     *      Validator.isNullOrEmpty(textValue), return null
-     *      startIndex>textLength - 1,          return null
-     *      startIndex==textLength - 1,         return substringLast(textString, 1)
-     *      length<1,                           return null
-     *      1 == length,                            return textString.substring(startIndex, startIndex + 1)
-     *      remainLength > length,              return textString.substring(startIndex, startIndex + length)
-     *      remainLength <= length,             return textString.substring(startIndex)
-     * }
-     * </pre>
+     * @return the string
+     * @see org.apache.commons.lang3.StringUtils#substring(String, int, int)
      */
     public static String substring(Object textObject,int startIndex,int length){
         if (Validator.isNullOrEmpty(textObject)){
             return StringUtils.EMPTY;
         }
-
         String textString = ConvertUtil.toString(textObject);
-        int textLength = textString.length();
-        // 索引位置必须小于长度
-        if (startIndex > textLength - 1){
-            return StringUtils.EMPTY;
-        }else if (startIndex == textLength - 1){// 最后一位
-            return substringLast(textString, 1);
-        }else if (length < 1){// 截取长度必须>=1
-            return StringUtils.EMPTY;
-        }else if (1 == length){// 截取1个 即本身
-            // 截取本身索引的位置
-            return textString.substring(startIndex, startIndex + 1);
-        }
-
-        // 剩余可以被截取的字符串长度
-        int remainLength = textLength - startIndex;
-        // 剩余字符长长度比截取的长度长
-        if (remainLength > length){
-            // 结束的索引
-            int endIndex = startIndex + length;
-            // 此方法最后一个不包含
-            return textString.substring(startIndex, endIndex);
-        }
-        // 没有需要被截取的长
-        return textString.substring(startIndex);
+        return org.apache.commons.lang3.StringUtils.substring(textString, startIndex, startIndex + length);
     }
 
     /**
