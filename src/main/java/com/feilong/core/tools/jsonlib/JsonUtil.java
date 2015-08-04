@@ -43,6 +43,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DatePattern;
+import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.tools.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.core.tools.jsonlib.util.ArrayContainsPropertyNamesPropertyFilter;
@@ -162,29 +163,84 @@ public final class JsonUtil{
         if (null == inputMap){
             return StringUtils.EMPTY;
         }
+        Class<?> allowClassTypes = null;
+        return formatSimpleMap(inputMap, allowClassTypes);
+    }
+
+    /**
+     * 有些map 值很复杂，比如带有request信息， 这样的map转成json会抛异常
+     * 
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>此方法 将inputMap转成 simpleMap(<span style="color:red">原始inputMap不会变更</span>)</li>
+     * <li>此方法转换的simpleMap是 {@link TreeMap}类型,转换的json key经过排序的</li>
+     * </ul>
+     * </blockquote>
+     * 
+     * <h3>转换规则:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>如果value 是isPrimitiveOrWrapper类型， 那么会直接取到值 设置到 新的simpleMap中</li>
+     * <li>否则 使用 {@link String#valueOf(Object)} 转换到simpleMap中</li>
+     * </ul>
+     * </blockquote>.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param inputMap
+     *            the input map
+     * @param allowFormatClassTypes
+     *            除了基本类型,数组之外允许的类型,请确保该类型可以被json format输出
+     * @return the string
+     * @since 1.3.0
+     */
+    public static <K, V> String formatSimpleMap(Map<K, V> inputMap,Class<?>...allowFormatClassTypes){
+        if (null == inputMap){
+            return StringUtils.EMPTY;
+        }
         Map<K, Object> simpleMap = new TreeMap<K, Object>();
 
         for (Map.Entry<K, V> entry : inputMap.entrySet()){
             K key = entry.getKey();
             V value = entry.getValue();
 
-            Class<? extends Object> klassClass = value.getClass();
-
-            Object simpleValue = null;
-
-            //TODO
-            if (ClassUtils.isPrimitiveOrWrapper(klassClass) //
-                            || String.class == klassClass //
-                            || ObjectUtil.isArray(value)//XXX 数组一般 是可以转换的 
-            ){
-                simpleValue = value;
+            if (isAllowFormatType(value, allowFormatClassTypes)){
+                simpleMap.put(key, value);
             }else{
-                simpleValue = String.valueOf(value);
+                simpleMap.put(key, String.valueOf(value));//注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
             }
-
-            simpleMap.put(key, simpleValue);
         }
         return format(simpleMap);
+    }
+
+    /**
+     * 是否是可以被json format的类型.
+     *
+     * @param <V>
+     *            the value type
+     * @param value
+     *            the value
+     * @param allowClassTypes
+     *            the allow class types
+     * @return true, if checks if is allow format type
+     * @since 1.4.0
+     */
+    private static <V> boolean isAllowFormatType(V value,Class<?>...allowClassTypes){
+        if (null == value){//null 是可以 format的
+            return true;
+        }
+        Class<?> klassClass = value.getClass();
+        return ClassUtils.isPrimitiveOrWrapper(klassClass) //
+                        || String.class == klassClass //
+                        || ObjectUtil.isArray(value)//XXX 数组一般 是可以转换的 
+                        || ClassUtil.isInstance(value, allowClassTypes)//
+        ;
     }
 
     /**
@@ -525,6 +581,7 @@ public final class JsonUtil{
         int size = jsonArray.size();
 
         List<Object> list = new ArrayList<Object>();
+
         for (int i = 0; i < size; i++){
             Object e = jsonArray.get(i);
             list.add(e);

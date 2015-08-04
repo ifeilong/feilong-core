@@ -95,12 +95,45 @@ import com.feilong.core.util.Validator;
  * </table>
  * </blockquote>
  * 
+ * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>instanceof运算符</td>
+ * <td>针对实例,是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例<br>
+ * 格式是：oo instanceof TypeName<br>
+ * 第一个参数是对象实例名，第二个参数是具体的类名或接口名<br>
+ * instanceof是Java的一个二元操作符，{@code ==，>，<}和是同一类东东,作用是测试它左边的对象是否是它右边的类的实例，返回boolean类型的数据</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>isAssignableFrom</td>
+ * <td>针对class对象,是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的超类或接口。<br>
+ * 通常调用格式是Class1.isAssignableFrom(Class2)<br>
+ * 调用者和参数都是java.lang.Class类型。</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>isInstance(Object obj)方法</td>
+ * <td>obj是被测试的对象，如果obj是调用这个方法的class或接口 的实例，则返回true。<br>
+ * 这个方法是instanceof运算符的动态等价</td>
+ * </tr>
+ * </table>
+ * 
+ * <p>
+ * instanceof :子 -----> 父 <br>
+ * isAssignableFrom :父 -----> 子
+ * </p>
+ * </blockquote>
+ *
  * @author feilong
  * @version 1.0.0 2012-6-1 下午7:19:47
  * @version 1.2.1 2015-6-21 20:50 update javadoc
- * @since 1.0.0
- * @see java.lang.Class
  * @see org.apache.commons.lang3.ClassUtils
+ * @since 1.0.0
  */
 public final class ClassUtil{
 
@@ -195,15 +228,96 @@ public final class ClassUtil{
     /**
      * 是不是某个类的实例.
      * 
+     * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
+     * 
+     * <blockquote>
+     * <table border="1" cellspacing="0" cellpadding="4">
+     * <tr style="background-color:#ccccff">
+     * <th align="left">字段</th>
+     * <th align="left">说明</th>
+     * </tr>
+     * <tr valign="top">
+     * <td>instanceof运算符</td>
+     * <td>针对实例,是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例<br>
+     * 格式是：oo instanceof TypeName<br>
+     * 第一个参数是对象实例名，第二个参数是具体的类名或接口名<br>
+     * instanceof是Java的一个二元操作符，{@code ==，>，<}和是同一类东东,作用是测试它左边的对象是否是它右边的类的实例，返回boolean类型的数据</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>isAssignableFrom</td>
+     * <td>针对class对象,是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的超类或接口。<br>
+     * 通常调用格式是Class1.isAssignableFrom(Class2)<br>
+     * 调用者和参数都是java.lang.Class类型。</td>
+     * </tr>
+     * <tr valign="top">
+     * <td>isInstance(Object obj)方法</td>
+     * <td>obj是被测试的对象，如果obj是调用这个方法的class或接口 的实例，则返回true。<br>
+     * 这个方法是instanceof运算符的动态等价</td>
+     * </tr>
+     * </table>
+     * 
+     * <p>
+     * instanceof :子 -----> 父 <br>
+     * isAssignableFrom :父 -----> 子
+     * </p>
+     * </blockquote>
+     * 
      * @param obj
      *            实例
      * @param klass
      *            类
-     * @return 如果 obj 是此类的实例，则返回 true
+     * @return 如果 obj 是此类的实例，则返回 true; if <code>null == klass</code> return false
      * @see java.lang.Class#isInstance(Object)
      */
     public static boolean isInstance(Object obj,Class<?> klass){
+        if (null == klass){
+            return false;
+        }
         return klass.isInstance(obj);
+    }
+
+    /**
+     * 判断 obj 是否isInstance 任意的一个 <code>klasses</code>.
+     *
+     * @param obj
+     *            the obj
+     * @param klasses
+     *            the klasses
+     * @return true, if checks if is instance; if <code>null == klasses</code> return false
+     * @since 1.4.0
+     */
+    public static boolean isInstance(Object obj,Class<?>[] klasses){
+        if (null == klasses){
+            return false;
+        }
+
+        for (Class<?> klass : klasses){
+            if (isInstance(obj, klass)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if is assignable from.
+     * 
+     * <p>
+     * instanceof :子 -----> 父 <br>
+     * isAssignableFrom :父 -----> 子
+     * </p>
+     *
+     * @param klass
+     *            the klass
+     * @param cls
+     *            the cls
+     * @return true, if checks if is assignable from
+     * @see java.lang.Class#isAssignableFrom(Class)
+     * @see org.apache.commons.lang3.ClassUtils#isAssignable(Class, Class)
+     * @since 1.4.0
+     */
+    public static boolean isAssignableFrom(Class<?> klass,Class<?> cls){
+        return klass.isAssignableFrom(cls);
     }
 
     /**
@@ -216,10 +330,8 @@ public final class ClassUtil{
      * @see java.lang.reflect.Modifier#isInterface(int)
      */
     public static boolean isInterface(Class<?> ownerClass){
-        // 返回此类或接口以整数编码的 Java 语言修饰符
-        int flag = ownerClass.getModifiers();
-        // 对类和成员访问修饰符进行解码
-        return Modifier.isInterface(flag);
+        int flag = ownerClass.getModifiers();// 返回此类或接口以整数编码的 Java 语言修饰符
+        return Modifier.isInterface(flag);// 对类和成员访问修饰符进行解码
     }
 
     /**

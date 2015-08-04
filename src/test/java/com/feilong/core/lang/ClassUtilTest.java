@@ -17,6 +17,7 @@ package com.feilong.core.lang;
 
 import static org.junit.Assert.assertEquals;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,30 @@ public class ClassUtilTest{
     public void testIsInstance(){
         assertEquals(true, ClassUtil.isInstance(new User(), Comparable.class));
         assertEquals(true, ClassUtil.isInstance("1234", CharSequence.class));
+    }
+
+    /**
+     * Test is instance2.
+     */
+    @Test
+    public void testIsInstance2(){
+        assertEquals(true, ClassUtil.isInstance(new User(), new Class<?>[] { Comparable.class, CharSequence.class }));
+        assertEquals(false, ClassUtil.isInstance(new User(), new Class<?>[] { Integer.class, CharSequence.class }));
+        assertEquals(true, ClassUtil.isInstance("1234", new Class<?>[] { Comparable.class, CharSequence.class }));
+    }
+
+    /**
+     * Test is assignable from.
+     */
+    @Test
+    public void testIsAssignableFrom(){
+
+        Class<?>[] klsClasses = { "1234".getClass(), "55555".getClass() };
+        assertEquals(true, ClassUtils.isAssignable(klsClasses, CharSequence.class));
+
+        assertEquals(true, ClassUtil.isAssignableFrom(Comparable.class, new User().getClass()));
+        assertEquals(true, ClassUtil.isAssignableFrom(CharSequence.class, "1234".getClass()));
+        assertEquals(true, ClassUtils.isAssignable("1234".getClass(), CharSequence.class));
     }
 
     /**

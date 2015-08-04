@@ -51,6 +51,7 @@ public final class ObjectUtil{
      *            the finded class type
      * @return the t
      * @since 1.3.0
+     * @see "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"
      */
     @SuppressWarnings("unchecked")
     public static <T> T findTypeValue(Object findValue,Class<T> findedClassType){
