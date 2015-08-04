@@ -508,7 +508,9 @@ public final class StringUtil{
     public static String substring(String text,String beginString,int shift){
         if (Validator.isNullOrEmpty(text)){
             return StringUtils.EMPTY;
-        }else if (Validator.isNullOrEmpty(beginString)){
+        }
+
+        if (Validator.isNullOrEmpty(beginString)){
             return StringUtils.EMPTY;
         }
         //****************************************************
@@ -519,10 +521,13 @@ public final class StringUtil{
         //****************************************************
         int startIndex = beginIndex + shift;
         int textLength = text.length();
+
         if (startIndex < 0){
             String pattern = "beginIndex+shift<0,beginIndex:{},shift:{},text:{},text.length:{}";
             throw new IllegalArgumentException(Slf4jUtil.formatMessage(pattern, beginIndex, shift, text, textLength));
-        }else if (startIndex > textLength){
+        }
+
+        if (startIndex > textLength){
             LOGGER.info("beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}", beginIndex, shift, text, textLength);
             return StringUtils.EMPTY;
         }
