@@ -121,7 +121,7 @@ public final class StringUtil{
     // [start] search
 
     /**
-     * 查找子字符串在 字符串中出现的次数.
+     * 查找子字符串 (<code>target</code>)在 字符串( <code>source</code>)中出现的次数.
      * 
      * <pre>
      *  StringUtil.searchTimes("xin", "xin")
@@ -139,40 +139,9 @@ public final class StringUtil{
      * @return count of target string in source
      * @see org.apache.commons.lang3.StringUtils#countMatches(CharSequence, CharSequence)
      * @since 1.0.2
-     * @deprecated 使用 {@link org.apache.commons.lang3.StringUtils#countMatches(CharSequence, CharSequence)}
      */
-    @Deprecated
-    public static int searchTimes(String source,String target){
-        if (null == source){
-            throw new IllegalArgumentException("source can't be null!");
-        }
-        if (null == target){
-            throw new IllegalArgumentException("target can't be null!");
-        }
-        // times 计数器
-        int count = 0;
-        // while 循环 点
-        int j = 0;
-        // 开始搜索的索引位置
-        int fromIndex = 0;
-        int sourceLength = source.length();
-        // 刚开始从 0的地方查找起
-        while (j != sourceLength){
-            // 从指定的索引开始 返回索引位置
-            int i = source.indexOf(target, fromIndex);
-            if (i != -1){
-                int targetLength = target.length();
-                // 一旦发现 查找到,下次 循环从找到的地方开始循环
-                // 查找 从 找到的地方 开始查找
-                j = i + targetLength;
-                fromIndex = i + targetLength;
-                count++;
-            }else{
-                // 如果发现找不到了 就退出循环
-                break;
-            }
-        }
-        return count;
+    public static int searchTimes(final CharSequence source,final CharSequence target){
+        return org.apache.commons.lang3.StringUtils.countMatches(source, target);
     }
 
     // [end]
@@ -339,8 +308,9 @@ public final class StringUtil{
      * Map valuesMap = HashMap();
      * valuesMap.put(&quot;animal&quot;, &quot;quick brown fox&quot;);
      * valuesMap.put(&quot;target&quot;, &quot;lazy dog&quot;);
-     * String templateString = &quot;The ${animal} jumped over the ${target}.&quot;;
+     * 
      * StrSubstitutor sub = new StrSubstitutor(valuesMap);
+     * String templateString = &quot;The ${animal} jumped over the ${target}.&quot;;
      * String resolvedString = sub.replace(templateString);
      * </pre>
      * 
@@ -357,7 +327,7 @@ public final class StringUtil{
      * @param valuesMap
      *            the values map
      * @return the string
-     * @see org.apache.commons.lang3.text.StrSubstitutor
+     * @see org.apache.commons.lang3.text.StrSubstitutor#replace(String)
      * @since 1.1.1
      */
     public static <V> String replace(String templateString,Map<String, V> valuesMap){
@@ -384,15 +354,22 @@ public final class StringUtil{
 
     // [end]
     /**
-     * 字符串和数字相加(一般生成流水号使用).
+     * 带有数字格式的数字字符串,与数字相加(一般生成流水号使用).
+     * 
+     * <pre>
+     * {@code
+     * stringAddInt("002",2); return 004
+     * stringAddInt("000002",1200); return 001202
+     * }
+     * </pre>
      * 
      * @param str
-     *            字符串
+     *            带有数字格式的数字字符串 比如 002
      * @param i
      *            数字
-     * @return 字符串和数字相加(一般生成流水号使用)
+     * @return 带有数字格式的数字字符串,与数字相加(一般生成流水号使用).
+     * @see NumberUtil#toString(Number, String)
      */
-    //TODO 测试+javadoc
     public static String stringAddInt(String str,int i){
         int length = str.length();
         String pattern = "";

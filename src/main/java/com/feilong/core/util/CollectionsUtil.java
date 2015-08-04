@@ -187,7 +187,21 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 去重(如果原collection是有序的,那么会保留原collection元素顺序).
+     * 去重.
+     * 
+     * <p>
+     * 如果原 <code>collection</code> 是有序的,那么会保留原 <code>collection</code>元素顺序
+     * </p>
+     * 
+     * <h3>效率问题？contains的本质就是遍历.</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 在100W的list当中执行0.546秒，而contains，我则没耐心去等了.顺便贴一下在10W下2段代码的运行时间.<br>
+     * [foo1] 100000 -> 50487 : 48610 ms.<br>
+     * [foo2] 100000 -> 50487 : 47 ms.<br>
+     * </p>
+     * </blockquote>
      * 
      * @param <T>
      *            the generic type
@@ -204,10 +218,6 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(collection)){
             return Collections.emptyList();
         }
-        // 效率问题？contains的本质就是遍历.
-        // 在100W的list当中执行0.546秒，而contains，我则没耐心去等了.顺便贴一下在10W下2段代码的运行时间.
-        // [foo1] 100000 -> 50487 : 48610 ms.
-        // [foo2] 100000 -> 50487 : 47 ms.
         return new ArrayList<T>(new LinkedHashSet<T>(collection));
     }
 

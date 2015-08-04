@@ -63,6 +63,15 @@ public class StringUtilTest{
     }
 
     /**
+     * String add int.
+     */
+    @Test
+    public void stringAddInt(){
+        assertEquals("004", StringUtil.stringAddInt("002", 2));
+        assertEquals("001202", StringUtil.stringAddInt("000002", 1200));
+    }
+
+    /**
      * Test contains.
      */
     @Test
@@ -100,15 +109,15 @@ public class StringUtilTest{
     @Test
     public void testSearchCount(){
         String source = "jiiiiiinxin.feilong";
-        LOGGER.info(StringUtil.searchTimes(source, "i") + "");
-        LOGGER.info(StringUtils.countMatches(source, "i") + "");
-        LOGGER.info(StringUtil.searchTimes(source, "in") + "");
-        LOGGER.info(StringUtil.searchTimes(source, "ii") + "");
-        LOGGER.info(StringUtil.searchTimes(source, "xin") + "");
-        Assert.assertEquals(1, StringUtil.searchTimes("xin", "xin"));
-        Assert.assertEquals(1, StringUtil.searchTimes("xin", "i"));
-        Assert.assertEquals(2, StringUtil.searchTimes("xiin", "i"));
-        Assert.assertEquals(2, StringUtil.searchTimes("xiiiin", "ii"));
+        assertEquals(8, StringUtil.searchTimes(source, "i"));
+        assertEquals(2, StringUtil.searchTimes(source, "in"));
+        assertEquals(3, StringUtil.searchTimes(source, "ii"));
+        assertEquals(1, StringUtil.searchTimes(source, "xin"));
+
+        assertEquals(1, StringUtil.searchTimes("xin", "xin"));
+        assertEquals(1, StringUtil.searchTimes("xin", "i"));
+        assertEquals(2, StringUtil.searchTimes("xiin", "i"));
+        assertEquals(2, StringUtil.searchTimes("xiiiin", "ii"));
     }
 
     /**
@@ -383,5 +392,60 @@ public class StringUtilTest{
 
         Date endDate = new Date();
         LOGGER.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
+    }
+
+    /**
+     * 查找子字符串在 字符串中出现的次数.
+     * 
+     * <pre>
+     *  StringUtil.searchTimes("xin", "xin")
+     *  return  1
+     *  
+     * StringUtil.searchTimes("xiiiin", "ii")
+     *  return  2
+     * 
+     * </pre>
+     *
+     * @param source
+     *            查找的源字符串
+     * @param target
+     *            目标子串
+     * @return count of target string in source
+     * @see org.apache.commons.lang3.StringUtils#countMatches(CharSequence, CharSequence)
+     * @since 1.0.2
+     * @deprecated 使用 {@link org.apache.commons.lang3.StringUtils#countMatches(CharSequence, CharSequence)}
+     */
+    @Deprecated
+    public static int searchTimes(String source,String target){
+        if (null == source){
+            throw new IllegalArgumentException("source can't be null!");
+        }
+        if (null == target){
+            throw new IllegalArgumentException("target can't be null!");
+        }
+        // times 计数器
+        int count = 0;
+        // while 循环 点
+        int j = 0;
+        // 开始搜索的索引位置
+        int fromIndex = 0;
+        int sourceLength = source.length();
+        // 刚开始从 0的地方查找起
+        while (j != sourceLength){
+            // 从指定的索引开始 返回索引位置
+            int i = source.indexOf(target, fromIndex);
+            if (i != -1){
+                int targetLength = target.length();
+                // 一旦发现 查找到,下次 循环从找到的地方开始循环
+                // 查找 从 找到的地方 开始查找
+                j = i + targetLength;
+                fromIndex = i + targetLength;
+                count++;
+            }else{
+                // 如果发现找不到了 就退出循环
+                break;
+            }
+        }
+        return count;
     }
 }

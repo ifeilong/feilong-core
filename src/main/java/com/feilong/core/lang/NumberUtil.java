@@ -109,6 +109,7 @@ import com.feilong.core.util.Validator;
  * @see Number
  * @see NumberPattern
  * @see RoundingMode
+ * @see org.apache.commons.lang3.math.NumberUtils
  * @since 1.4.0
  */
 public final class NumberUtil{
