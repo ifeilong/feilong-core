@@ -672,6 +672,35 @@ public final class ParamUtil{
     }
 
     /**
+     * 取到指定keys的value,连接起来.
+     * 
+     * <p>
+     * 会按照includeKeys的顺序拼接
+     * </p>
+     *
+     * @param singleValueMap
+     *            the map
+     * @param includeKeys
+     *            包含的key
+     * @return the mer data
+     * @since 1.4.0
+     */
+    public static String joinValues(Map<String, String> singleValueMap,String...includeKeys){
+        if (Validator.isNullOrEmpty(singleValueMap)){
+            throw new NullPointerException("map can't be null/empty!");
+        }
+        StringBuilder sb = new StringBuilder();
+        //有顺序的参数
+        for (String key : includeKeys){
+            String value = singleValueMap.get(key);
+
+            //value转换, 注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            sb.append(StringUtils.defaultString(value));
+        }
+        return sb.toString();
+    }
+
+    /**
      * Join array value map.
      * 
      * <h3>注意点:</h3>
@@ -730,7 +759,7 @@ public final class ParamUtil{
         StringBuilder sb = new StringBuilder();
         for (int i = 0, j = paramValues.length; i < j; ++i){
             String value = paramValues[i];
-            //value转换, 注意:如果 value 是null ,StringBuilder讲拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            //value转换, 注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
             sb.append(StringUtils.defaultString(paramName)).append("=").append(StringUtils.defaultString(value));
             if (i != j - 1){// 最后一个& 不拼接
                 sb.append(URIComponents.AMPERSAND);
