@@ -24,7 +24,6 @@ import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +46,21 @@ public class StringUtilTest{
 
     /** <code>{@value}</code>. */
     private static final String TEXT   = "jinxin.feilong";
+
+    /**
+     * Length.
+     */
+    @Test
+    public void length(){
+        String string = "我的新浪微博:http://weibo.com/venusdrogon,关注我哦[url=http://bbs.guqu.net/Query.asp?keyword=%B6%C5%B4%CF%D7%A8%BC%AD&boardid=0&sType=2]sssss[/url][url=http://weibo.com/venusdrogon][img]http://service.t.sina.com.cn/widget/qmd/1903991210/1c853142/5.png[/img][/url]";
+        LOGGER.info(string.length() + "");
+
+        LOGGER.info("572367774882343".length() + "");
+
+        // 运单号
+        LOGGER.info("1900681807840".length() + "");
+        LOGGER.info("3999e85461ce7271dd5292c88f18567e".length() + "");
+    }
 
     /**
      * Test contains.
@@ -103,9 +117,7 @@ public class StringUtilTest{
     @Test
     public void compareTo(){
         LOGGER.info("" + "8".compareTo("13"));
-
-        final Integer parseInt = Integer.parseInt("8");
-
+        Integer parseInt = Integer.parseInt("8");
         LOGGER.info("" + parseInt.compareTo(Integer.parseInt("13")));
         LOGGER.info("" + "12".compareTo("13"));
     }
@@ -147,24 +159,8 @@ public class StringUtilTest{
         String hexStringUpperCase = "5B7B2264617465223A313333343037323035323038312C2273696D706C65536B75436F6D6D616E64223A7B22636F6465223A223331373830392D313030222C22666F625069726365223A323139392C226964223A353636372C226C6973745072696365223A323139392C226E616D65223A2241495220464F52434520312048494748204C5558204D4158204149522027303820515320E7A9BAE5869BE4B880E58FB7EFBC88E99990E9878FE58F91E594AEEFBC89227D7D5D";
         hexStringUpperCase = "5B7B22636F6465223A224B3034383031222C226964223A3730302C226E616D65223A22E697B6E5B09AE6ACBEE992A5E58C99E689A3227D2C7B22636F6465223A2231333433363143222C226964223A35362C226E616D65223A22E58AB2E985B7E688B7E5A496436875636B205461796C6F7220416C6C2053746172204261636B205A6970227D5D";
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
-        String msg = new String(hexBytesToBytes);
-        LOGGER.info(msg);
-        msg = StringUtil.toOriginal(hexStringUpperCase);
-        LOGGER.info(msg);
-    }
-
-    /**
-     * Length.
-     */
-    @Test
-    public void length(){
-        String string = "我的新浪微博:http://weibo.com/venusdrogon,关注我哦[url=http://bbs.guqu.net/Query.asp?keyword=%B6%C5%B4%CF%D7%A8%BC%AD&boardid=0&sType=2]sssss[/url][url=http://weibo.com/venusdrogon][img]http://service.t.sina.com.cn/widget/qmd/1903991210/1c853142/5.png[/img][/url]";
-        LOGGER.info(string.length() + "");
-
-        LOGGER.info("572367774882343".length() + "");
-
-        // 运单号
-        LOGGER.info("1900681807840".length() + "");
+        LOGGER.info(new String(hexBytesToBytes));
+        LOGGER.info(StringUtil.toOriginal(hexStringUpperCase));
     }
 
     /**
@@ -191,10 +187,9 @@ public class StringUtilTest{
      */
     @Test
     public void replace(){
-        Object content = "黑色/黄色/蓝色";
         String target = "/";
         Object replacement = "_";
-        LOGGER.info(StringUtil.replace(content, target, replacement));
+        LOGGER.info(StringUtil.replace("黑色/黄色/蓝色", target, replacement));
     }
 
     /**
@@ -202,19 +197,18 @@ public class StringUtilTest{
      */
     @Test
     public void replaceAll(){
-        Object content = "黑色/黄色/蓝色";
         String target = "/";
         String replacement = "_";
-        LOGGER.info(StringUtil.replaceAll(content, target, replacement));
+        LOGGER.info(StringUtil.replaceAll("黑色/黄色/蓝色", target, replacement));
     }
 
     /**
-     * Substring1.
+     * Test sub string.
      */
     @Test
-    public void substring1(){
-        LOGGER.info("3999e85461ce7271dd5292c88f18567e".length() + "");
-        LOGGER.info(StringUtil.substring(TEXT, 6));
+    public void testSubString(){
+        LOGGER.info(StringUtil.substring(TEXT, "i", "g"));
+        LOGGER.info(StringUtils.substringBetween(TEXT, "i", "g"));
     }
 
     /**
@@ -244,6 +238,20 @@ public class StringUtilTest{
         // LOGGER.info(StringUtil.substring(text, "in", -2));
         LOGGER.info(StringUtil.substring(TEXT, "in", 20));
         LOGGER.info(StringUtil.substring(TEXT, "j", TEXT.length() - 1));
+        LOGGER.info(StringUtil.substring(TEXT, "jinxin.", 1));
+    }
+
+    /**
+     * Test substring3.
+     */
+    @Test
+    public void testSubstring3(){
+        LOGGER.info(StringUtil.substring(null, "in"));
+        LOGGER.info(StringUtil.substring(TEXT, null));
+        LOGGER.info(StringUtil.substring(TEXT, "sin"));
+        LOGGER.info(StringUtil.substring(TEXT, "."));
+        LOGGER.info(StringUtil.substring(TEXT, "j"));
+        LOGGER.info(StringUtil.substring(TEXT, "jinxin."));
     }
 
     /**
@@ -251,17 +259,12 @@ public class StringUtilTest{
      */
     @Test
     public void substring(){
-        LOGGER.info(StringUtil.substring(TEXT, "jinxin".length()));
-        String text1 = "Index: src/main/java/com/jumbo/shop/web/command/PageCacheCommand.java";
-        LOGGER.info(StringUtil.substring(text1, "Index: ".length()));
-    }
-
-    /**
-     * Substring6.
-     */
-    @Test
-    public void substring6(){
-        LOGGER.info(StringUtil.substring(TEXT, "jinxin.", 1));
+        assertEquals(
+                        "src/main/java/com/jumbo/shop/web/command/PageCacheCommand.java",
+                        StringUtil.substring("Index: src/main/java/com/jumbo/shop/web/command/PageCacheCommand.java", "Index: ".length()));
+        assertEquals(".feilong", StringUtil.substring(TEXT, "jinxin".length()));
+        assertEquals(".feilong", StringUtil.substring(TEXT, 6));
+        assertEquals("ng", StringUtil.substring(TEXT, -2));
     }
 
     /**
@@ -280,20 +283,18 @@ public class StringUtilTest{
         assertEquals("jinxin.fe", StringUtil.substringWithoutLast(TEXT, 5));
     }
 
-    // @Test
     /**
-     * Test a.
+     * Test replace all.
      */
-    public void testA(){
-        String a = "SH1265,SH5951,SH6766,SH7235,SH1265,SH5951,SH6766,SH7235";
-        LOGGER.info(a.replaceAll("([a-zA-Z]+[0-9]+)", "'$1'"));
+    @Test
+    public void testReplaceAll(){
+        LOGGER.info("SH1265,SH5951,SH6766,SH7235,SH1265,SH5951,SH6766,SH7235".replaceAll("([a-zA-Z]+[0-9]+)", "'$1'"));
     }
 
     /**
      * 分隔字符串并添加引号.
      */
     @Test
-    @Ignore
     public void splitAndAddYinHao(){
         String a = "12345,56789,1123456";
         String[] aStrings = a.split(",");

@@ -35,14 +35,7 @@ import com.feilong.core.util.Validator;
 public final class FilenameUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FilenameUtil.class);
-
-    /** Don't let anyone instantiate this class. */
-    private FilenameUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
+    private static final Logger     LOGGER       = LoggerFactory.getLogger(FilenameUtil.class);
 
     /**
      * 文件名称由文件名和扩展名组成，两者由小黑点分隔，扩展名通常是用来表示文件的类 别.
@@ -72,6 +65,13 @@ public final class FilenameUtil{
             { ">", "" }, // >
             { "|", "" }, // |
                                                  };
+
+    /** Don't let anyone instantiate this class. */
+    private FilenameUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
 
     /**
      * 不同的操作系统 对系统文件名称有要求,此方法的作用就是处理这些文件名称.

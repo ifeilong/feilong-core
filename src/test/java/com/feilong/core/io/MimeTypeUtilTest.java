@@ -34,7 +34,7 @@ public class MimeTypeUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(MimeTypeUtilTest.class);
 
     /**
-     * Test method for {@link com.feilong.core.io.MimeTypeUtil#getContentTypeByFileName(java.lang.String)}.
+     * Test get content type by file name.
      */
     @Test
     public final void testGetContentTypeByFileName(){

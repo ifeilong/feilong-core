@@ -134,7 +134,6 @@ public final class ArrayUtil{
      *            the join string entity
      * @param arrays
      *            <span style="color:red">请使用包装类型,比如 Integer []arrays,而不是 int []arrays</span>
-     *            //TODO
      * @return <ul>
      *         <li>如果 arrays 是null 或者Empty ,返回null</li>
      *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>

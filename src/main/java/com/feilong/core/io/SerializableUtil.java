@@ -143,7 +143,6 @@ public final class SerializableUtil{
      * @see #toByteArrayOutputStream(Serializable)
      * @deprecated 转字符串值得商榷
      */
-    //TODO
     @Deprecated
     public static String toString(Serializable serializable){
         ByteArrayOutputStream byteArrayOutputStream = null;
@@ -172,7 +171,6 @@ public final class SerializableUtil{
      * @see org.apache.commons.io.IOUtils#toInputStream(String, Charset)
      * @see org.apache.commons.lang3.SerializationUtils#deserialize(InputStream)
      */
-    //TODO
     @Deprecated
     public static <T> T toObject(String serializableString){
         InputStream inputStream = null;

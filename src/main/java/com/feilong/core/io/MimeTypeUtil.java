@@ -29,8 +29,10 @@ import com.feilong.core.util.Validator;
 
 /**
  * 获取文件Mime-Type.
+ * 
  * <p>
  * MIME(Multi-Purpose Internet Mail Extensions)
+ * </p>
  *
  * @author feilong
  * @version 1.0.8 2014年11月19日 上午1:12:50
@@ -66,7 +68,6 @@ public final class MimeTypeUtil{
     /**
      * 获得 content type by file name.
      * 
-     * //TODO
      * <p>
      * <b>Very incomplete function. As of Java 7, html, pdf and jpeg extensions return the correct mime-type but js and css return null!
      * </b>

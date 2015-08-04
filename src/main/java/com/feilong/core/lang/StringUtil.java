@@ -407,31 +407,44 @@ public final class StringUtil{
     // ********************************substring************************************************
     /**
      * [截取]从指定索引处(beginIndex)的字符开始，直到此字符串末尾.
+     * 
      * <p>
-     * 调用text.substring(beginIndex)
+     * Gets a substring from the specified String avoiding exceptions.
      * </p>
+     *
+     * <p>
+     * 如果 beginIndex 是负数,那么表示倒过来截取,从结尾开始截取长度,此时等同于 {@link #substringLast(String, int)}
+     * </p>
+     *
+     * <p>
+     * A {@code null} String will return {@code null}. An empty ("") String will return "".
+     * </p>
+     *
+     * <pre>
+     * StringUtil.substring(null, *)   = null
+     * StringUtil.substring("", *)     = ""
+     * StringUtil.substring("abc", 0)  = "abc"
+     * StringUtil.substring("abc", 2)  = "c"
+     * StringUtil.substring("abc", 4)  = ""
+     * StringUtil.substring("abc", -2) = "bc"
+     * StringUtil.substring("abc", -4) = "abc"
+     * </pre>
      * 
      * <pre>
      * substring("jinxin.feilong",6) 
-     * 
      * return .feilong
      * </pre>
      * 
      * @param text
-     *            内容
+     *            内容 the String to get the substring from, may be null
      * @param beginIndex
-     *            从指定索引处
-     * @return <ul>
-     *         <li>如果 Validator.isNull(t),return null</li>
-     *         <li>else,return text.substring(beginIndex)</li>
-     *         </ul>
+     *            从指定索引处 the position to start from,negative means count back from the end of the String by this many characters
+     * @return substring from start position, {@code null} if null String input
+     * @see org.apache.commons.lang3.StringUtils#substring(String, int)
+     * @see #substringLast(String, int)
      */
-    public static String substring(Object text,int beginIndex){
-        String t = ConvertUtil.toString(text);
-        if (Validator.isNullOrEmpty(t)){
-            return StringUtils.EMPTY;
-        }
-        return t.substring(beginIndex);
+    public static String substring(final String text,final int beginIndex){
+        return org.apache.commons.lang3.StringUtils.substring(text, beginIndex);
     }
 
     /**
@@ -443,7 +456,7 @@ public final class StringUtil{
      * renturn .f
      * </pre>
      *
-     * @param textObject
+     * @param textString
      *            被截取文字
      * @param startIndex
      *            索引开始位置,0开始
@@ -453,16 +466,16 @@ public final class StringUtil{
      * @return the string
      * @see org.apache.commons.lang3.StringUtils#substring(String, int, int)
      */
-    public static String substring(Object textObject,int startIndex,int length){
-        if (Validator.isNullOrEmpty(textObject)){
-            return StringUtils.EMPTY;
-        }
-        String textString = ConvertUtil.toString(textObject);
+    public static String substring(final String textString,int startIndex,int length){
         return org.apache.commons.lang3.StringUtils.substring(textString, startIndex, startIndex + length);
     }
 
     /**
-     * [截取]:调用{@link #substring(String, String, int)}, 默认 shift=0
+     * [截取]:从第一次出现字符串位置开始(包含)截取到最后.
+     * 
+     * <p>
+     * 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
+     * </p>
      * 
      * <pre>
      * substring(&quot;jinxin.feilong&quot;,&quot;.&quot;)======&gt;&quot;.feilong&quot;
@@ -472,24 +485,24 @@ public final class StringUtil{
      *            text
      * @param beginString
      *            beginString开始截取的字符串
-     * @return 调用{@link #substring(String, String, int)}, 默认 shift=0
+     * @return 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
+     * @see #substring(String, String, int)
      */
-    public static String substring(String text,String beginString){
+    public static String substring(final String text,String beginString){
         return substring(text, beginString, 0);
     }
 
     /**
      * [截取]:从第一次出现字符串位置开始(包含)截取到最后,shift表示向前或者向后挪动位数.
      * 
-     * <p>
-     * beginIndex= text.indexOf(beginString) + shift;<br>
-     * return text.substring(beginIndex);
-     * </p>
+     * <h3>示例:</h3>
      * 
-     * <pre>
-     * substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,0)======&gt;&quot;.feilong&quot;
-     * substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,1)======&gt;&quot;feilong&quot;
-     * </pre>
+     * <blockquote>
+     * <ul>
+     * <li>substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,0)======&gt;&quot;.feilong&quot;</li>
+     * <li>substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,1)======&gt;&quot;feilong&quot;</li>
+     * </ul>
+     * </blockquote>
      *
      * @param text
      *            text
@@ -504,8 +517,9 @@ public final class StringUtil{
      *         <li>{@code  beginIndex + shift > text.length()},return null</li>
      *         <li>else,return text.substring(beginIndex + shift)</li>
      *         </ul>
+     * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
      */
-    public static String substring(String text,String beginString,int shift){
+    public static String substring(final String text,String beginString,int shift){
         if (Validator.isNullOrEmpty(text)){
             return StringUtils.EMPTY;
         }
@@ -528,7 +542,7 @@ public final class StringUtil{
         }
 
         if (startIndex > textLength){
-            LOGGER.info("beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}", beginIndex, shift, text, textLength);
+            LOGGER.warn("beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}", beginIndex, shift, text, textLength);
             return StringUtils.EMPTY;
         }
         // 索引从0开始
@@ -536,7 +550,11 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]:从开始的字符串到结束的字符串中间的字符串(包括开始的字符串startString),不包含结束的endString.
+     * [截取]:从开始的字符串到结束的字符串中间的字符串.
+     * 
+     * <p>
+     * 包含开始的字符串startString,不包含结束的endString.
+     * </p>
      * 
      * @param text
      *            文字
@@ -544,13 +562,14 @@ public final class StringUtil{
      *            开始的字符串,null表示从开头开始截取
      * @param endString
      *            结束的字符串
-     * @return <pre>
-     * Validator.isNull(text),return null;
-     * Validator.isNull(startString),return text.substring(0, text.indexOf(endString))
-     * 
-     * </pre>
+     * @return
+     *         <ul>
+     *         <li>Validator.isNullOrEmpty(text),return null;</li>
+     *         <li>Validator.isNullOrEmpty(startString),return text.substring(0, text.indexOf(endString))</li>
+     *         </ul>
+     * @see org.apache.commons.lang3.StringUtils#substringBetween(String, String, String)
      */
-    public static String substring(String text,String startString,String endString){
+    public static String substring(final String text,final String startString,final String endString){
         if (Validator.isNullOrEmpty(text)){
             return StringUtils.EMPTY;
         }
@@ -564,6 +583,7 @@ public final class StringUtil{
 
     /**
      * [截取]:获取文字最后位数的字符串.
+     * 
      * <p>
      * 调用了 {@link String#substring(int)}
      * </p>
@@ -582,7 +602,7 @@ public final class StringUtil{
      * @return 截取文字最后几个字符串
      * @see java.lang.String#substring(int)
      */
-    public static String substringLast(String text,int lastLenth){
+    public static String substringLast(final String text,int lastLenth){
         return text.substring(text.length() - lastLenth);
     }
 
@@ -606,8 +626,9 @@ public final class StringUtil{
      *            最后的位数
      * @return 去除最后几位,如果text是空,则返回""
      * @see java.lang.String#substring(int, int)
+     * @see org.apache.commons.lang3.StringUtils#left(String, int)
      */
-    public static String substringWithoutLast(String text,int lastLenth){
+    public static String substringWithoutLast(final String text,int lastLenth){
         if (Validator.isNullOrEmpty(text)){
             return StringUtils.EMPTY;
         }
