@@ -172,29 +172,6 @@ public final class DateUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /**
-     * 获得昨天(日期的前一天的<span style="color:red">此时此刻</span>).
-     * 
-     * <pre>
-     * <span style="color:red">仅对天数-1,其余时间部分不做任何处理 </span>
-     * 
-     * 比如 现在 2012-10-16 22:43:06 
-     * return 2012-10-15 22:43:06.169
-     * </pre>
-     * 
-     * @param date
-     *            date
-     * @return 获得昨天/ 日期的前一天
-     * @see #toCalendar(Date)
-     * @see Calendar#add(int, int)
-     * @see Calendar#getTime()
-     */
-    public static Date getYesterday(Date date){
-        Calendar calendar = toCalendar(date);
-        calendar.add(Calendar.DATE, -1);
-        return CalendarUtil.toDate(calendar);
-    }
-
     // *****************************week****************************************************
     /**
      * 获得传入date 所在的<span style="color:red">星期 第一天(周日)</span> <code>00:00:00.000</code> 到毫秒.

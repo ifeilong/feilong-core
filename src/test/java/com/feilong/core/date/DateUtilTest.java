@@ -473,14 +473,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * Test get yesterday.
-     */
-    @Test
-    public void testGetYesterday(){
-        logDate(DateUtil.getYesterday(NOW));
-    }
-
-    /**
      * Test is in time.
      */
     @Test

@@ -131,4 +131,13 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     public final void testGetResetTodayAndTomorrow(){
         LOGGER.debug(JsonUtil.format(DateExtensionUtil.getResetTodayAndTomorrow()));
     }
+
+    /**
+     * Test get yesterday.
+     */
+    @Test
+    public void testGetYesterday(){
+        logDate(DateExtensionUtil.getYesterday(NOW));
+    }
+
 }

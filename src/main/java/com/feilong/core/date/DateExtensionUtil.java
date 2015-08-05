@@ -129,10 +129,7 @@ public final class DateExtensionUtil{
     public static Date[] getResetTodayAndTomorrow(){
         Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
         Date today = calendar.getTime();
-        // ***************************
-        calendar.add(Calendar.DATE, 1);
-        Date tomorrow = calendar.getTime();
-        return new Date[] { today, tomorrow };
+        return new Date[] { today, DateUtil.addDay(today, 1) };
     }
 
     /**
@@ -157,7 +154,27 @@ public final class DateExtensionUtil{
     public static Date[] getResetYesterdayAndToday(){
         Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
         Date today = calendar.getTime();
-        return new Date[] { DateUtil.getYesterday(today), today };
+        return new Date[] { getYesterday(today), today };
+    }
+
+    /**
+     * 获得昨天(日期的前一天的<span style="color:red">此时此刻</span>).
+     * 
+     * <pre>
+     * <span style="color:red">仅对天数-1,其余时间部分不做任何处理 </span>
+     * 
+     * 比如 现在 2012-10-16 22:43:06 
+     * return 2012-10-15 22:43:06.169
+     * </pre>
+     * 
+     * @param date
+     *            date
+     * @return 获得昨天/ 日期的前一天
+     * @see DateUtil#addDay(Date, int)
+     * @since 1.4.0
+     */
+    public static Date getYesterday(Date date){
+        return DateUtil.addDay(date, -1);
     }
 
     // [end]
