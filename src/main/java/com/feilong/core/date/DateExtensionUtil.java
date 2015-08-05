@@ -110,9 +110,13 @@ public final class DateExtensionUtil{
         return WEEK + WEEK_CHINESES[week];
     }
 
-    // [start]extent 获得时间 /时间数组,可以用于sql查询
+    // [start] 获得时间 /时间数组,可以用于sql查询
     /**
-     * 获得当天0:00:00及下一天0:00:00,一般用于统计当天数据,between ... and ...
+     * 获得重置清零的今天和明天,当天0:00:00及下一天0:00:00.
+     * 
+     * <p>
+     * 一般用于统计当天数据,between ... and ...
+     * </p>
      * 
      * <pre>
      * 比如今天是 2012-10-16 22:18:34
@@ -121,11 +125,8 @@ public final class DateExtensionUtil{
      * </pre>
      * 
      * @return Date数组 第一个为today 第二个为tomorrow
-     * @since 1.0
-     * @deprecated 方法名在未来版本可能会更新
      */
-    @Deprecated
-    public static Date[] getExtentToday(){
+    public static Date[] getResetTodayAndTomorrow(){
         Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
         Date today = calendar.getTime();
         // ***************************
@@ -135,10 +136,13 @@ public final class DateExtensionUtil{
     }
 
     /**
-     * 获得昨天的区间 [yestoday,today]<br>
+     * 获得重置清零的昨天和今天 [yestoday,today].
+     * 
+     * <p>
      * 第一个为昨天00:00 <br>
      * 第二个为今天00:00 <br>
      * 一般用于sql/hql统计昨天数据,between ... and ...
+     * </p>
      * 
      * <pre>
      * 比如现在 :2012-10-16 22:46:42
@@ -149,22 +153,20 @@ public final class DateExtensionUtil{
      * @return Date数组 <br>
      *         第一个为昨天00:00 <br>
      *         第二个为今天00:00
-     * @since 1.0
-     * @deprecated 方法名会更新
      */
-    @Deprecated
-    public static Date[] getExtentYesterday(){
+    public static Date[] getResetYesterdayAndToday(){
         Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
         Date today = calendar.getTime();
-        calendar.add(Calendar.DATE, -1);
-        Date yesterday = calendar.getTime();
-        return new Date[] { yesterday, today };
+        return new Date[] { DateUtil.getYesterday(today), today };
     }
 
     // [end]
     /**
-     * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表<br>
+     * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表.
+     * 
+     * <p>
      * 每天的日期会被重置清零 <code>00:00:00.000</code>
+     * </p>
      * 
      * <pre>
      * getIntervalDayList("2011-03-5 23:31:25.456","2011-03-10 01:30:24.895", DatePattern.commonWithTime)

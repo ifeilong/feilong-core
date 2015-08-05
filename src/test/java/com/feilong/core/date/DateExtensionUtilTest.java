@@ -120,17 +120,15 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      * Test get extent yesterday.
      */
     @Test
-    public final void testGetExtentYesterday(){
-        Date[] dates = DateExtensionUtil.getExtentYesterday();
-        LOGGER.debug(JsonUtil.format(dates));
+    public final void testGetResetYesterdayAndToday(){
+        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getResetYesterdayAndToday()));
     }
 
     /**
      * Test get extent today.
      */
     @Test
-    public final void testGetExtentToday(){
-        Date[] dates = DateExtensionUtil.getExtentToday();
-        LOGGER.debug(JsonUtil.format(dates));
+    public final void testGetResetTodayAndTomorrow(){
+        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getResetTodayAndTomorrow()));
     }
 }
