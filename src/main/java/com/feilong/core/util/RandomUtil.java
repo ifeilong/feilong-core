@@ -34,6 +34,8 @@ import com.feilong.core.tools.slf4j.Slf4jUtil;
  * @version 1.0.0 2010-4-5 下午10:55:19
  * @version 1.0.7 2014年5月19日 下午6:45:01
  * @since 1.0.0
+ * @see org.apache.commons.lang3.RandomStringUtils
+ * @see org.apache.commons.lang3.RandomUtils
  */
 public final class RandomUtil{
 
