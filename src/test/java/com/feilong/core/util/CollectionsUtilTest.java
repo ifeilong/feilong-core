@@ -15,13 +15,8 @@
  */
 package com.feilong.core.util;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +29,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.entity.ToStringConfig;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
 import com.feilong.test.User;
@@ -111,16 +105,6 @@ public class CollectionsUtilTest{
     /**
      * To array.
      */
-    @Test
-    public final void toArray(){
-        List<String> testList = new ArrayList<String>();
-        //testList.add(null);
-        testList.add("xinge");
-        testList.add("feilong");
-
-        String[] array = CollectionsUtil.toArray(testList, String.class);
-        LOGGER.info(JsonUtil.format(array));
-    }
 
     /**
      * Convert list to string replace brackets.
@@ -293,57 +277,6 @@ public class CollectionsUtilTest{
 
         LOGGER.debug(JsonUtil.format(queue));
         LOGGER.debug("" + queue.peek());
-    }
-
-    /**
-     * Test map to enumeration.
-     */
-    public void testMapToEnumeration(){
-        // Enumeration
-        final Map<Object, Object> map = new LinkedHashMap<Object, Object>();
-        map.put("jinxin", 1);
-        map.put(2, 2);
-        map.put("甲", 3);
-        map.put(4, 4);
-        map.put("jinxin1", 1);
-        map.put(21, 2);
-        map.put("甲1", 3);
-        map.put(41, 4);
-        Enumeration<Object> enumeration = CollectionsUtil.toEnumeration(map.keySet());
-        while (enumeration.hasMoreElements()){
-            LOGGER.info("" + enumeration.nextElement());
-        }
-    }
-
-    /**
-     * 集合转成字符串.
-     */
-    @Test
-    public void testCollectionToString(){
-        List<String> list = new ArrayList<String>();
-        list.add("2548");
-        list.add("");
-
-        ToStringConfig toStringConfig = new ToStringConfig(",");
-        toStringConfig.setIsJoinNullOrEmpty(false);
-
-        assertEquals("2548", CollectionsUtil.toString(list, toStringConfig));
-    }
-
-    /**
-     * To list.
-     */
-    @Test
-    public void toList(){
-        List<String> list = new ArrayList<String>();
-        Collections.addAll(list, "a", "b");
-        Enumeration<String> enumeration = CollectionsUtil.toEnumeration(list);
-        List<String> list2 = CollectionsUtil.toList(enumeration);
-        LOGGER.info(JsonUtil.format(list2));
-
-        enumeration = null;
-        list2 = CollectionsUtil.toList(enumeration);
-        LOGGER.info(JsonUtil.format(list2));
     }
 
     /**

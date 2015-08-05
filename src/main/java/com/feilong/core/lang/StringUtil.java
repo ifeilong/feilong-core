@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.tools.slf4j.Slf4jUtil;
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -773,7 +772,7 @@ public final class StringUtil{
                 tokens.add(token);
             }
         }
-        return CollectionsUtil.toArray(tokens, String.class);
+        return ConvertUtil.toArray(tokens, String.class);
     }
 
     // [end]

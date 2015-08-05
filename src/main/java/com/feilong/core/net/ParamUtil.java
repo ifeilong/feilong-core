@@ -29,9 +29,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.CharsetType;
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -542,7 +542,7 @@ public final class ParamUtil{
                 List<String> list = null == valuesArrayInMap ? new ArrayList<String>() : ArrayUtil.toList(valuesArrayInMap);
                 list.add(value);
 
-                map.put(key, CollectionsUtil.toArray(list, String.class));
+                map.put(key, ConvertUtil.toArray(list, String.class));
             }
         }
         return map;
@@ -603,7 +603,7 @@ public final class ParamUtil{
                 for (String value : paramValues){
                     paramValueList.add(Validator.isNotNullOrEmpty(value) ? decodeAndEncode(value, charsetType) : StringUtils.EMPTY);
                 }
-                safeArrayValueMap.put(key, CollectionsUtil.toArray(paramValueList, String.class));
+                safeArrayValueMap.put(key, ConvertUtil.toArray(paramValueList, String.class));
             }else{
                 safeArrayValueMap.put(key, paramValues);
             }

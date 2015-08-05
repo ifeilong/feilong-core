@@ -21,15 +21,20 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.ArrayConverter;
+import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -253,8 +258,14 @@ public class ConvertUtilTest{
      */
     @Test
     public final void testToString2(){
-        int[] int1 = { 2, 1 };
+        Integer[] int1 = { 2, null, 1, null };
         LOGGER.debug(ConvertUtil.toString(int1));
+
+        ArrayConverter arrayConverter = new ArrayConverter(ArrayUtils.EMPTY_INT_ARRAY.getClass(), new IntegerConverter());
+        arrayConverter.setOnlyFirstToString(false);
+        arrayConverter.setDelimiter(',');
+        arrayConverter.setAllowedChars(new char[] { '.', '-' });
+        LOGGER.debug(arrayConverter.convert(String.class, int1));
     }
 
     /**
@@ -264,5 +275,99 @@ public class ConvertUtilTest{
     public final void testConvertArray(){
         String[] int1 = { "2", "1" };
         LOGGER.debug(JsonUtil.format(ConvertUtil.convert(int1, Long.class)));
+    }
+
+    /**
+     * Test to string.
+     */
+    @Test
+    public void testToString33(){
+        ToStringConfig toStringConfig = new ToStringConfig(",");
+        Object[] arrays = { "222", "1111" };
+        assertEquals("222,1111", ConvertUtil.toString(toStringConfig, arrays));
+
+        Integer[] array1 = { 2, 1 };
+        assertEquals("2,1", ConvertUtil.toString(toStringConfig, array1));
+
+        Integer[] array2 = { 2, 1, null };
+        toStringConfig = new ToStringConfig(",");
+        toStringConfig.setIsJoinNullOrEmpty(false);
+        assertEquals("2,1", ConvertUtil.toString(toStringConfig, array2));
+
+        Integer[] array3 = { 2, null, 1, null };
+        toStringConfig = new ToStringConfig(",");
+        toStringConfig.setIsJoinNullOrEmpty(false);
+        assertEquals("2,1", ConvertUtil.toString(toStringConfig, array3));
+    }
+
+    /**
+     * Test to string2.
+     */
+    @Test
+    public void testToString22(){
+        int[] int1 = { 2, 1 };
+        assertEquals("2,1", ConvertUtil.toString(new ToStringConfig(","), int1));
+    }
+
+    @Test
+    public final void toArray(){
+        List<String> testList = new ArrayList<String>();
+        //testList.add(null);
+        testList.add("xinge");
+        testList.add("feilong");
+
+        String[] array = ConvertUtil.toArray(testList, String.class);
+        LOGGER.info(JsonUtil.format(array));
+    }
+
+    /**
+     * To list.
+     */
+    @Test
+    public void toList(){
+        List<String> list = new ArrayList<String>();
+        Collections.addAll(list, "a", "b");
+        Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);
+        List<String> list2 = ConvertUtil.toList(enumeration);
+        LOGGER.info(JsonUtil.format(list2));
+
+        enumeration = null;
+        list2 = ConvertUtil.toList(enumeration);
+        LOGGER.info(JsonUtil.format(list2));
+    }
+
+    /**
+     * 集合转成字符串.
+     */
+    @Test
+    public void testCollectionToString(){
+        List<String> list = new ArrayList<String>();
+        list.add("2548");
+        list.add("");
+
+        ToStringConfig toStringConfig = new ToStringConfig(",");
+        toStringConfig.setIsJoinNullOrEmpty(false);
+
+        assertEquals("2548", ConvertUtil.toString(list, toStringConfig));
+    }
+
+    /**
+     * Test map to enumeration.
+     */
+    public void testMapToEnumeration(){
+        // Enumeration
+        final Map<Object, Object> map = new LinkedHashMap<Object, Object>();
+        map.put("jinxin", 1);
+        map.put(2, 2);
+        map.put("甲", 3);
+        map.put(4, 4);
+        map.put("jinxin1", 1);
+        map.put(21, 2);
+        map.put("甲1", 3);
+        map.put(41, 4);
+        Enumeration<Object> enumeration = ConvertUtil.toEnumeration(map.keySet());
+        while (enumeration.hasMoreElements()){
+            LOGGER.info("" + enumeration.nextElement());
+        }
     }
 }

@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -29,8 +27,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.ArrayUtil;
-import com.feilong.core.lang.entity.ToStringConfig;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 
@@ -208,38 +204,5 @@ public class ArrayUtilTest{
 
         List<User> list = ArrayUtil.toList(users);
         LOGGER.info(JsonUtil.format(list));
-    }
-
-    /**
-     * Test to string.
-     */
-    @Test
-    public void testToString(){
-        ToStringConfig toStringConfig = new ToStringConfig(",");
-        Object[] arrays = { "222", "1111" };
-        assertEquals("222,1111", ArrayUtil.toString(toStringConfig, arrays));
-
-        Integer[] array1 = { 2, 1 };
-        assertEquals("2,1", ArrayUtil.toString(toStringConfig, array1));
-
-        Integer[] array2 = { 2, 1, null };
-        toStringConfig = new ToStringConfig(",");
-        toStringConfig.setIsJoinNullOrEmpty(false);
-        assertEquals("2,1", ArrayUtil.toString(toStringConfig, array2));
-
-        Integer[] array3 = { 2, null, 1, null };
-        toStringConfig = new ToStringConfig(",");
-        toStringConfig.setIsJoinNullOrEmpty(false);
-        assertEquals("2,1", ArrayUtil.toString(toStringConfig, array3));
-    }
-
-    /**
-     * Test to string2.
-     */
-    @Test
-    public void testToString2(){
-        ToStringConfig toStringConfig = new ToStringConfig(",");
-        int[] int1 = { 2, 1 };
-        assertEquals("2,1", ArrayUtil.toString(toStringConfig, int1));
     }
 }

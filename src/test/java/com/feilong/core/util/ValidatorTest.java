@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.User;
 
 /**
@@ -98,7 +99,7 @@ public class ValidatorTest{
         assertEquals(false, Validator.isNullOrEmpty(new short[] { 5 }));
 
         assertEquals(true, Validator.isNullOrEmpty(list.iterator()));
-        assertEquals(true, Validator.isNullOrEmpty(CollectionsUtil.toEnumeration(list)));
+        assertEquals(true, Validator.isNullOrEmpty(ConvertUtil.toEnumeration(list)));
         assertEquals(true, Validator.isNullOrEmpty(new Iterator<User>(){
 
             @Override

@@ -32,6 +32,7 @@ import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 
@@ -261,7 +262,7 @@ public final class MapUtil{
             throw new NullPointerException("extractPropertyName is null or empty!");
         }
         //如果excludeKeys 是null ,那么抽取 所有的key
-        K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? CollectionsUtil.toArray(map.keySet(), keysClass) : includeKeys;
+        K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(map.keySet(), keysClass) : includeKeys;
 
         Map<K, V> returnMap = new HashMap<K, V>();
         for (K key : useIncludeKeys){

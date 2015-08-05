@@ -15,10 +15,13 @@
  */
 package com.feilong.core.bean;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
@@ -29,8 +32,13 @@ import org.apache.commons.beanutils.converters.BooleanConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.beanutils.converters.LongConverter;
 import org.apache.commons.beanutils.converters.NumberConverter;
+import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
+import org.apache.commons.lang3.StringUtils;
+
+import com.feilong.core.lang.StringUtil;
+import com.feilong.core.util.Validator;
 
 /**
  * 转换器.
@@ -345,6 +353,171 @@ public final class ConvertUtil{
     }
 
     /**
+     * 将集合使用连接符号链接成字符串.
+     * 
+     * @param collection
+     *            集合, 建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
+     * @param toStringConfig
+     *            连接字符串 实体
+     * @return 如果 collection isNullOrEmpty,返回null<br>
+     *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
+     *         都不是null,会循环,拼接toStringConfig.getConnector()
+     * @see #toString(ToStringConfig, Object...)
+     * @deprecated
+     * @since 1.4.0
+     */
+    @Deprecated
+    public static String toString(final Collection collection,ToStringConfig toStringConfig){
+        if (Validator.isNullOrEmpty(collection)){
+            return StringUtils.EMPTY;
+        }
+        Object[] array = toArray(collection, Object.class);
+        return toString(toStringConfig, array);
+    }
+
+    /**
+     * 将集合转成枚举.
+     * 
+     * @param <T>
+     *            the generic type
+     * @param collection
+     *            集合
+     * @return Enumeration
+     * @see Collections#enumeration(Collection)
+     * @since 1.4.0
+     */
+    public static <T> Enumeration<T> toEnumeration(final Collection<T> collection){
+        return Collections.enumeration(collection);
+    }
+
+    /**
+     * 将枚举转成集合.
+     * 
+     * @param <T>
+     *            the generic type
+     * @param enumeration
+     *            the enumeration
+     * @return if Validator.isNullOrEmpty(enumeration), return {@link Collections#emptyList()},该emptyList不可以操作<br>
+     *         else return {@link Collections#list(Enumeration)}
+     * @see Collections#emptyList()
+     * @see Collections#EMPTY_LIST
+     * @see Collections#list(Enumeration)
+     * @see EnumerationUtils#toList(Enumeration)
+     * @since 1.0.7
+     */
+    public static <T> List<T> toList(final Enumeration<T> enumeration){
+        if (Validator.isNullOrEmpty(enumeration)){
+            return Collections.emptyList();
+        }
+        return Collections.list(enumeration);
+    }
+
+    /**
+     * 集合转成数组.
+     *
+     * @param <T>
+     *            the generic type
+     * @param collection
+     *            collection
+     * @param arrayComponentType
+     *            数组组件类型的 Class
+     * @return 数组,if null == collection or arrayClass == null,return NullPointerException
+     * @see java.lang.reflect.Array#newInstance(Class, int)
+     * @see java.lang.reflect.Array#newInstance(Class, int...)
+     * @see java.util.Collection#toArray()
+     * @see java.util.Collection#toArray(Object[])
+     * @see java.util.List#toArray()
+     * @see java.util.List#toArray(Object[])
+     * @see java.util.Vector#toArray()
+     * @see java.util.Vector#toArray(Object[])
+     * @see java.util.LinkedList#toArray()
+     * @see java.util.LinkedList#toArray(Object[])
+     * @see java.util.ArrayList#toArray()
+     * @see java.util.ArrayList#toArray(Object[])
+     * @see org.apache.commons.collections4.IteratorUtils#toArray(Iterator,Class)
+     * @since 1.2.2
+     */
+    public static <T> T[] toArray(Collection<T> collection,Class<T> arrayComponentType){
+        if (null == collection){
+            throw new NullPointerException("collection must not be null");
+        }
+        if (arrayComponentType == null){
+            throw new NullPointerException("Array ComponentType must not be null");
+        }
+
+        // 如果采用大家常用的把a的length设为0,就需要反射API来创建一个大小为size的数组,而这对性能有一定的影响.
+        // 所以最好的方式就是直接把a的length设为Collection的size从而避免调用反射API来达到一定的性能优化.
+        @SuppressWarnings("unchecked")
+        T[] array = (T[]) Array.newInstance(arrayComponentType, collection.size());
+
+        //注意，toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
+        return collection.toArray(array);
+    }
+
+    /**
+     * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
+     * 
+     * <code>
+     * <pre>
+     * Example 1:
+     * ArrayUtil.toString(new ToStringConfig(),"a","b")  return "a,b"
+     * 
+     * Example 2:
+     * ToStringConfig toStringConfig=new ToStringConfig(",");
+     * toStringConfig.setIsJoinNullOrEmpty(false);
+     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)  return "a,b"
+     * </pre>
+     * </code>
+     *
+     * @param <T>
+     *            the generic type
+     * @param toStringConfig
+     *            the join string entity
+     * @param arrays
+     *            <span style="color:red">请使用包装类型,比如 Integer []arrays,而不是 int []arrays</span>
+     * @return <ul>
+     *         <li>如果 arrays 是null 或者Empty ,返回null</li>
+     *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
+     *         </ul>
+     * 
+     * @deprecated 有局限性, 具体参见参数 <code>arrays</code>
+     * @see org.apache.commons.lang3.builder.ToStringStyle
+     * @since 1.4.0
+     */
+    @Deprecated
+    public static <T> String toString(ToStringConfig toStringConfig,T...arrays){
+        if (Validator.isNullOrEmpty(arrays)){
+            return StringUtils.EMPTY;
+        }
+        //ConvertUtils.primitiveToWrapper(type)
+        ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
+
+        String connector = useToStringConfig.getConnector();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, j = arrays.length; i < j; ++i){
+            T t = arrays[i];
+
+            //如果是null 或者 empty，但是参数值是不拼接，那么继续循环
+            if (Validator.isNullOrEmpty(t) && !useToStringConfig.getIsJoinNullOrEmpty()){
+                continue;
+            }
+            sb.append(t);
+            if (Validator.isNotNullOrEmpty(connector)){
+                sb.append(connector);
+            }
+        }
+
+        //由于上面的循环中，最后一个元素可能是null或者empty，判断加还是不加拼接符有点麻烦，因此，循环中统一拼接，但是循环之后做截取处理
+        String returnValue = sb.toString();
+
+        if (Validator.isNotNullOrEmpty(connector) && returnValue.endsWith(connector)){
+            //去掉最后的拼接符
+            return StringUtil.substringWithoutLast(returnValue, connector.length());
+        }
+        return returnValue;
+    }
+
+    /**
      * 把对象转换为long类型.
      * 
      * <p>
@@ -462,7 +635,7 @@ public final class ConvertUtil{
         }
         // 逗号分隔的字符串
         if (object instanceof String){
-            return toIterator(ConvertUtil.toStrings(object));
+            return toIterator(toStrings(object));
         }
         return (Iterator<T>) IteratorUtils.getIterator(object);
     }

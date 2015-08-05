@@ -29,7 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -576,7 +575,7 @@ public final class FileUtil{
         if (Validator.isNullOrEmpty(filePathList)){
             throw new NullPointerException("paths can't be null/empty!");
         }
-        String[] filePaths = CollectionsUtil.toArray(filePathList, String.class);
+        String[] filePaths = ConvertUtil.toArray(filePathList, String.class);
         return toURLs(filePaths);
     }
 
@@ -596,7 +595,7 @@ public final class FileUtil{
         }
         File[] files = ConvertUtil.convert(filePaths, File.class);
         try{
-            return FileUtils.toURLs(files);
+            return org.apache.commons.io.FileUtils.toURLs(files);
         }catch (IOException e){
             LOGGER.error("", e);
             throw new UncheckedIOException(e);

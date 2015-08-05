@@ -15,11 +15,9 @@
  */
 package com.feilong.core.util;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -28,19 +26,15 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.core.lang.entity.ToStringConfig;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
@@ -219,106 +213,6 @@ public final class CollectionsUtil{
             return Collections.emptyList();
         }
         return new ArrayList<T>(new LinkedHashSet<T>(collection));
-    }
-
-    /**
-     * 将集合使用连接符号链接成字符串.
-     * 
-     * @param collection
-     *            集合, 建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
-     * @param toStringConfig
-     *            连接字符串 实体
-     * @return 如果 collection isNullOrEmpty,返回null<br>
-     *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
-     *         都不是null,会循环,拼接toStringConfig.getConnector()
-     * @see ArrayUtil#toString(ToStringConfig, Object...)
-     * @deprecated
-     */
-    @Deprecated
-    public static String toString(final Collection collection,ToStringConfig toStringConfig){
-        if (Validator.isNullOrEmpty(collection)){
-            return StringUtils.EMPTY;
-        }
-        Object[] array = toArray(collection, Object.class);
-        return ArrayUtil.toString(toStringConfig, array);
-    }
-
-    /**
-     * 将集合转成枚举.
-     * 
-     * @param <T>
-     *            the generic type
-     * @param collection
-     *            集合
-     * @return Enumeration
-     * @see Collections#enumeration(Collection)
-     */
-    public static <T> Enumeration<T> toEnumeration(final Collection<T> collection){
-        return Collections.enumeration(collection);
-    }
-
-    /**
-     * 将枚举转成集合.
-     * 
-     * @param <T>
-     *            the generic type
-     * @param enumeration
-     *            the enumeration
-     * @return if Validator.isNullOrEmpty(enumeration), return {@link Collections#emptyList()},该emptyList不可以操作<br>
-     *         else return {@link Collections#list(Enumeration)}
-     * @see Collections#emptyList()
-     * @see Collections#EMPTY_LIST
-     * @see Collections#list(Enumeration)
-     * @see EnumerationUtils#toList(Enumeration)
-     * @since 1.0.7
-     */
-    public static <T> List<T> toList(final Enumeration<T> enumeration){
-        if (Validator.isNullOrEmpty(enumeration)){
-            return Collections.emptyList();
-        }
-        return Collections.list(enumeration);
-    }
-
-    /**
-     * 集合转成数组.
-     *
-     * @param <T>
-     *            the generic type
-     * @param collection
-     *            collection
-     * @param arrayComponentType
-     *            数组组件类型的 Class
-     * @return 数组,if null == collection or arrayClass == null,return NullPointerException
-     * @see java.lang.reflect.Array#newInstance(Class, int)
-     * @see java.lang.reflect.Array#newInstance(Class, int...)
-     * @see java.util.Collection#toArray()
-     * @see java.util.Collection#toArray(Object[])
-     * @see java.util.List#toArray()
-     * @see java.util.List#toArray(Object[])
-     * @see java.util.Vector#toArray()
-     * @see java.util.Vector#toArray(Object[])
-     * @see java.util.LinkedList#toArray()
-     * @see java.util.LinkedList#toArray(Object[])
-     * @see java.util.ArrayList#toArray()
-     * @see java.util.ArrayList#toArray(Object[])
-     * @see org.apache.commons.collections4.IteratorUtils#toArray(Iterator,Class)
-     * @since 1.2.2
-     */
-    public static <T> T[] toArray(Collection<T> collection,Class<T> arrayComponentType){
-        if (null == collection){
-            throw new NullPointerException("collection must not be null");
-        }
-        if (arrayComponentType == null){
-            throw new NullPointerException("Array ComponentType must not be null");
-        }
-
-        // 如果采用大家常用的把a的length设为0,就需要反射API来创建一个大小为size的数组,而这对性能有一定的影响.
-        // 所以最好的方式就是直接把a的length设为Collection的size从而避免调用反射API来达到一定的性能优化.
-        @SuppressWarnings("unchecked")
-        T[] array = (T[]) Array.newInstance(arrayComponentType, collection.size());
-
-        //注意，toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
-        return collection.toArray(array);
     }
 
     /**
