@@ -313,6 +313,7 @@ public final class DateExtensionUtil{
      * @see DateUtil#getIntervalHour(long)
      * @see DateUtil#getIntervalMinute(long)
      * @see DateUtil#getIntervalSecond(long)
+     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      */
     public static String toPrettyDateString(Date inDate){
         Date nowDate = new Date();

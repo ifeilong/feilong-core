@@ -185,12 +185,13 @@ import java.util.Date;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0 2012 1 21 04:18:00
- * @version 1.0.5 2014-5-4 14:23 change to interface
+ * @version 1.0.2 2012 1 21 04:18:00
+ * @version 1.0.5 2014-5-4 14:23
  * @see SimpleDateFormat
+ * @see org.apache.commons.lang3.time.DateFormatUtils
  * @see <a
  *      href="http://www.infoq.com/cn/news/2015/01/java-date-format-with-caution?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global">慎用Java日期格式化</a>
- * @since 1.0.0
+ * @since 1.0.2
  */
 public final class DatePattern{
 
@@ -199,6 +200,8 @@ public final class DatePattern{
      * <p>
      * example:<span style="color:green">2012-01-22</span>
      * </p>
+     * 
+     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_DATE_FORMAT
      */
     public static final String COMMON_DATE                                  = "yyyy-MM-dd";
 
@@ -217,6 +220,8 @@ public final class DatePattern{
      * <p>
      * example:<span style="color:green">21:57:36</span>
      * </p>
+     * 
+     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_TIME_NO_T_FORMAT
      */
     public static final String COMMON_TIME                                  = "HH:mm:ss";
 
@@ -397,6 +402,7 @@ public final class DatePattern{
      * </p>
      * 
      * @see Date#toString()
+     * @see org.apache.commons.lang3.time.DateFormatUtils#SMTP_DATETIME_FORMAT
      */
     public static final String forToString                                  = "EEE MMM dd HH:mm:ss zzz yyyy";
 
