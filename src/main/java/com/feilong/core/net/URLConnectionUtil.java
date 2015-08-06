@@ -27,6 +27,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -246,16 +247,21 @@ public final class URLConnectionUtil{
      *            the connection config
      * @return the input stream
      * @since 1.2.0
+     * @see "org.springframework.core.io.UrlResource#getInputStream()"
      */
     public static InputStream getInputStream(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         HttpURLConnection httpURLConnection = getHttpURLConnection(httpRequest, connectionConfig);
         try{
             return httpURLConnection.getInputStream();
         }catch (IOException e){
+            //指示近期服务器不太可能有其他请求.调用 disconnect() 并不意味着可以对其他请求重用此 HttpURLConnection 实例.
+            //不能写在 finally 里面, 否则调用者拿不到inputstream
+
+            // per Java's documentation, this is not necessary, and precludes keepalives. However in practise,
+            // connection errors will not be released quickly enough and can cause a too many open files error.
+            IOUtils.close(httpURLConnection); // Close the HTTP connection (if applicable). 
+
             throw new UncheckedIOException(e);
-        }finally{
-            // 指示近期服务器不太可能有其他请求.调用 disconnect() 并不意味着可以对其他请求重用此 HttpURLConnection 实例.
-            // TODO httpURLConnection.disconnect();
         }
     }
 

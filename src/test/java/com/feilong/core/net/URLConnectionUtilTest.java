@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net;
 
+import java.net.HttpURLConnection;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,5 +46,10 @@ public class URLConnectionUtilTest{
 
         String responseBodyAsString = URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig);
         LOGGER.info(responseBodyAsString);
+    }
+
+    @Test
+    public final void getResponseBodyAsString1(){
+        LOGGER.info("" + (null instanceof HttpURLConnection));
     }
 }
