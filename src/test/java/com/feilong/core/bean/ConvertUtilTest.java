@@ -39,6 +39,7 @@ import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.beanutils.converters.LongConverter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -352,6 +353,23 @@ public class ConvertUtilTest{
         toStringConfig.setIsJoinNullOrEmpty(false);
 
         assertEquals("2548", ConvertUtil.toString(list, toStringConfig));
+    }
+
+    /**
+     * 集合转成字符串.
+     */
+    @Test
+    public void testCollectionToString1(){
+        List<String> list = new ArrayList<String>();
+        list.add("2548");
+        list.add("2548");
+        list.add("2548");
+        list.add("2548");
+        list.add("2548");
+        list.add("2548");
+
+        ToStringConfig toStringConfig = new ToStringConfig(SystemUtils.LINE_SEPARATOR);
+        LOGGER.debug(ConvertUtil.toString(list, toStringConfig));
     }
 
     /**

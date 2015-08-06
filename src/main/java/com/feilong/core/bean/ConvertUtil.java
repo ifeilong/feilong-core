@@ -502,7 +502,8 @@ public final class ConvertUtil{
                 continue;
             }
             sb.append(t);
-            if (Validator.isNotNullOrEmpty(connector)){
+
+            if (null != connector){//注意可能传过来的是 换行符
                 sb.append(connector);
             }
         }
