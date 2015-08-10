@@ -17,6 +17,8 @@ package com.feilong.core.bean;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -35,8 +37,10 @@ import org.apache.commons.beanutils.converters.NumberConverter;
 import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.Validator;
 
@@ -354,20 +358,20 @@ public final class ConvertUtil{
 
     /**
      * 将集合使用连接符号链接成字符串.
-     * 
-     * @param collection
-     *            集合, 建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
+     *
      * @param toStringConfig
      *            连接字符串 实体
+     * @param collection
+     *            集合, 建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
      * @return 如果 collection isNullOrEmpty,返回null<br>
      *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see #toString(ToStringConfig, Object...)
-     * @deprecated
      * @since 1.4.0
+     * @deprecated
      */
     @Deprecated
-    public static String toString(final Collection collection,ToStringConfig toStringConfig){
+    public static String toString(ToStringConfig toStringConfig,final Collection collection){
         if (Validator.isNullOrEmpty(collection)){
             return StringUtils.EMPTY;
         }
@@ -410,6 +414,30 @@ public final class ConvertUtil{
             return Collections.emptyList();
         }
         return Collections.list(enumeration);
+    }
+
+    /**
+     * 数组转成 ({@link java.util.ArrayList ArrayList})，此方法返回的list可以进行add等操作.
+     * <p>
+     * 注意 :{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
+     * Collection#add(Object)}等方法<br>
+     * 因此,使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回
+     * </p>
+     * 
+     * @param <T>
+     *            the generic type
+     * @param arrays
+     *            T数组
+     * @return 数组转成 List(ArrayList)<br>
+     *         if Validator.isNullOrEmpty(arrays), return null,else return {@code new ArrayList<T>(Arrays.asList(arrays));}
+     * @see java.util.Arrays#asList(Object...)
+     */
+    public static <T> List<T> toList(T[] arrays){
+        if (Validator.isNullOrEmpty(arrays)){
+            return Collections.emptyList();
+        }
+        //如果直接使用 Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象ArrayList,没有实现AbstractList类的add方法，如果 strList.add("c");导致抛异常! 
+        return new ArrayList<T>(Arrays.asList(arrays));
     }
 
     /**
@@ -457,6 +485,10 @@ public final class ConvertUtil{
     /**
      * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
      * 
+     * <p style="color:green">
+     * 支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays
+     * </p>
+     * 
      * <code>
      * <pre>
      * Example 1:
@@ -466,6 +498,10 @@ public final class ConvertUtil{
      * ToStringConfig toStringConfig=new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
      * ArrayUtil.toString(new ToStringConfig(),"a","b",null)  return "a,b"
+     * 
+     * Example 3:
+     * int[] ints = { 2, 1 };
+     * ArrayUtil.toString(new ToStringConfig(),ints) return "2,1"
      * </pre>
      * </code>
      *
@@ -474,28 +510,29 @@ public final class ConvertUtil{
      * @param toStringConfig
      *            the join string entity
      * @param arrays
-     *            <span style="color:red">请使用包装类型,比如 Integer []arrays,而不是 int []arrays</span>
+     *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
      * @return <ul>
      *         <li>如果 arrays 是null 或者Empty ,返回null</li>
      *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
      *         </ul>
-     * 
-     * @deprecated 有局限性, 具体参见参数 <code>arrays</code>
      * @see org.apache.commons.lang3.builder.ToStringStyle
      * @since 1.4.0
      */
-    @Deprecated
     public static <T> String toString(ToStringConfig toStringConfig,T...arrays){
         if (Validator.isNullOrEmpty(arrays)){
             return StringUtils.EMPTY;
         }
-        //ConvertUtils.primitiveToWrapper(type)
+
         ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
+
+        //************************************************************************
+        Object[] operateArray = toObjects(arrays);
 
         String connector = useToStringConfig.getConnector();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0, j = arrays.length; i < j; ++i){
-            T t = arrays[i];
+        for (int i = 0, j = operateArray.length; i < j; ++i){
+            @SuppressWarnings("unchecked")
+            T t = (T) operateArray[i];
 
             //如果是null 或者 empty，但是参数值是不拼接，那么继续循环
             if (Validator.isNullOrEmpty(t) && !useToStringConfig.getIsJoinNullOrEmpty()){
@@ -511,11 +548,77 @@ public final class ConvertUtil{
         //由于上面的循环中，最后一个元素可能是null或者empty，判断加还是不加拼接符有点麻烦，因此，循环中统一拼接，但是循环之后做截取处理
         String returnValue = sb.toString();
 
-        if (Validator.isNotNullOrEmpty(connector) && returnValue.endsWith(connector)){
+        if (null != connector && returnValue.endsWith(connector)){
             //去掉最后的拼接符
             return StringUtil.substringWithoutLast(returnValue, connector.length());
         }
         return returnValue;
+    }
+
+    /**
+     * 将数组转成对象型数组, 如果 <code>arrays</code>是原始型的,那么会进行转换.
+     *
+     * @param <T>
+     *            the generic type
+     * @param arrays
+     *            the arrays
+     * @return the object[]
+     * @since 1.4.0
+     */
+    private static <T> Object[] toObjects(T...arrays){
+        if (Validator.isNullOrEmpty(arrays)){
+            return ArrayUtils.EMPTY_STRING_ARRAY;
+        }
+        if (arrays.length > 1){
+            return arrays;
+        }
+
+        Object o = arrays[0];
+        if (isPrimitiveArray(o)){
+            return primitiveArrayToObjectArray(o);
+        }
+        return arrays;
+    }
+
+    /**
+     * 判断是否是 Primitive型数组.
+     *
+     * @param o
+     *            the o
+     * @return true, if checks if is primitive array
+     * 
+     * @since 1.4.0
+     */
+    private static boolean isPrimitiveArray(Object o){
+        // Allocate a new Array
+        Class<? extends Object> klass = o.getClass();
+
+        if (!klass.isArray()){
+            return false;
+        }
+
+        Class<?> componentType = klass.getComponentType();
+        //原始型的
+        return componentType.isPrimitive();
+    }
+
+    /**
+     * To objects.
+     *
+     * @param primitiveArray
+     *            the o
+     * @return the object[]
+     * @since 1.4.0
+     */
+    private static Object[] primitiveArrayToObjectArray(Object primitiveArray){
+        int length = ArrayUtils.getLength(primitiveArray);
+
+        Object[] returnStringArray = new Object[length];
+        for (int i = 0; i < length; ++i){
+            Object element = ArrayUtil.getElement(primitiveArray, i);
+            returnStringArray[i] = element;
+        }
+        return returnStringArray;
     }
 
     /**
@@ -557,6 +660,7 @@ public final class ConvertUtil{
      * @return the long[]
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.ArrayConverter
+     * @see #convert(Object, Class)
      */
     public static Long[] toLongs(Object toBeConvertedValue){
         return convert(toBeConvertedValue, Long[].class);
@@ -581,6 +685,7 @@ public final class ConvertUtil{
      *            the to be converted value
      * @return the string[]
      * @see org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String)
+     * @see #convert(Object, Class)
      * @since 1.4.0
      */
     public static String[] toStrings(Object toBeConvertedValue){
@@ -667,7 +772,7 @@ public final class ConvertUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T convert(Object value,Class<T> targetType){
-        return (T) ConvertUtils.convert(value, targetType);
+        return (T) org.apache.commons.beanutils.ConvertUtils.convert(value, targetType);
     }
 
     /**
@@ -690,6 +795,6 @@ public final class ConvertUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T[] convert(String[] values,Class<T> targetType){
-        return (T[]) ConvertUtils.convert(values, targetType);
+        return (T[]) org.apache.commons.beanutils.ConvertUtils.convert(values, targetType);
     }
 }

@@ -17,7 +17,6 @@ package com.feilong.core.lang;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,9 +47,10 @@ import com.feilong.core.util.Validator;
  * <li>{@link ArrayUtils#contains(double[], double, double)}</li>
  * </ul>
  * </blockquote>
- * 
+ *
  * @author feilong
  * @version 1.4.0 2015年8月3日 上午3:06:20
+ * @see org.apache.commons.lang3.ArrayUtils
  * @since 1.4.0
  */
 public final class ArrayUtil{
@@ -85,30 +85,6 @@ public final class ArrayUtil{
     @SuppressWarnings("unchecked")
     public static <T> T getElement(Object array,int index) throws ArrayIndexOutOfBoundsException{
         return (T) Array.get(array, index);
-    }
-
-    /**
-     * 数组转成 ({@link java.util.ArrayList ArrayList})，此方法返回的list可以进行add等操作.
-     * <p>
-     * 注意 :{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
-     * Collection#add(Object)}等方法<br>
-     * 因此,使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回
-     * </p>
-     * 
-     * @param <T>
-     *            the generic type
-     * @param arrays
-     *            T数组
-     * @return 数组转成 List(ArrayList)<br>
-     *         if Validator.isNullOrEmpty(arrays), return null,else return {@code new ArrayList<T>(Arrays.asList(arrays));}
-     * @see java.util.Arrays#asList(Object...)
-     */
-    public static <T> List<T> toList(T[] arrays){
-        if (Validator.isNullOrEmpty(arrays)){
-            return Collections.emptyList();
-        }
-        //如果直接使用 Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象ArrayList,没有实现AbstractList类的add方法，如果 strList.add("c");导致抛异常! 
-        return new ArrayList<T>(Arrays.asList(arrays));
     }
 
     /**

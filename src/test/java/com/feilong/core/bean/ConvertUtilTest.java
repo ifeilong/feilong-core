@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.test.User;
 
 /**
  * The Class ConvertUtilTest.
@@ -311,8 +312,13 @@ public class ConvertUtilTest{
     public void testToString22(){
         int[] int1 = { 2, 1 };
         assertEquals("2,1", ConvertUtil.toString(new ToStringConfig(","), int1));
+        assertEquals("2", ConvertUtil.toString(new ToStringConfig(","), 2));
+        assertEquals("2", ConvertUtil.toString(new ToStringConfig(","), new Integer(2)));
     }
 
+    /**
+     * To array.
+     */
     @Test
     public final void toArray(){
         List<String> testList = new ArrayList<String>();
@@ -328,7 +334,7 @@ public class ConvertUtilTest{
      * To list.
      */
     @Test
-    public void toList(){
+    public void toList1(){
         List<String> list = new ArrayList<String>();
         Collections.addAll(list, "a", "b");
         Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);
@@ -338,6 +344,22 @@ public class ConvertUtilTest{
         enumeration = null;
         list2 = ConvertUtil.toList(enumeration);
         LOGGER.info(JsonUtil.format(list2));
+    }
+
+    /**
+     * To list.
+     */
+    @Test
+    public void toList(){
+        User user1 = new User();
+        user1.setId(1L);
+        User user2 = new User();
+        user2.setId(2L);
+
+        User[] users = { user1, user2 };
+
+        List<User> list = ConvertUtil.toList(users);
+        LOGGER.info(JsonUtil.format(list));
     }
 
     /**
@@ -352,7 +374,7 @@ public class ConvertUtilTest{
         ToStringConfig toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
 
-        assertEquals("2548", ConvertUtil.toString(list, toStringConfig));
+        assertEquals("2548", ConvertUtil.toString(toStringConfig, list));
     }
 
     /**
@@ -369,7 +391,7 @@ public class ConvertUtilTest{
         list.add("2548");
 
         ToStringConfig toStringConfig = new ToStringConfig(SystemUtils.LINE_SEPARATOR);
-        LOGGER.debug(ConvertUtil.toString(list, toStringConfig));
+        LOGGER.debug(ConvertUtil.toString(toStringConfig, list));
     }
 
     /**
@@ -467,6 +489,6 @@ public class ConvertUtilTest{
 
         BigDecimal bigDecimal = (BigDecimal) ConvertUtils.convert(888.000f, BigDecimal.class);
         System.out.println(bigDecimal);
-
     }
+
 }
