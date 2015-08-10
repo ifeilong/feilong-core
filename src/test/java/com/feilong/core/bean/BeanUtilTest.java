@@ -174,7 +174,7 @@ public class BeanUtilTest{
         a.setDate(new Date());
         User b = new User();
         // DateConverter converter = new DateConverter(DatePattern.forToString, Locale.US);
-        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
+        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
 
         String[] strs = { "date", "money" };
         BeanUtil.copyProperties(b, a, strs);
@@ -196,7 +196,7 @@ public class BeanUtilTest{
         User b = new User();
 
         String[] aStrings = { "date", "id", "nickName" };
-        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
+        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
         BeanUtil.copyProperties(b, a, aStrings);
         LOGGER.debug(JsonUtil.format(b));
     }

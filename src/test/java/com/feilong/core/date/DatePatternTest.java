@@ -43,7 +43,7 @@ public class DatePatternTest extends BaseDateUtilTest{
     public void testDatePattern(){
         Map<String, String> map = new LinkedHashMap<String, String>();
 
-        map.put("forToString", DateUtil.date2String(NOW, DatePattern.forToString));
+        map.put("TO_STRING_STYLE", DateUtil.date2String(NOW, DatePattern.TO_STRING_STYLE));
         map.put("ddMMyyyyHHmmss", DateUtil.date2String(NOW, DatePattern.ddMMyyyyHHmmss));
         map.put("timestamp", DateUtil.date2String(NOW, DatePattern.TIMESTAMP));
         map.put("timestampWithMillisecond", DateUtil.date2String(NOW, DatePattern.TIMESTAMP_WITH_MILLISECOND));

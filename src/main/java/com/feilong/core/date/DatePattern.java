@@ -404,7 +404,7 @@ public final class DatePattern{
      * @see Date#toString()
      * @see org.apache.commons.lang3.time.DateFormatUtils#SMTP_DATETIME_FORMAT
      */
-    public static final String forToString                                  = "EEE MMM dd HH:mm:ss zzz yyyy";
+    public static final String TO_STRING_STYLE                              = "EEE MMM dd HH:mm:ss zzz yyyy";
 
     //***************************************************************************************************
     /** Don't let anyone instantiate this class. */
