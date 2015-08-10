@@ -64,6 +64,21 @@ public final class ToStringConfig implements Serializable{
     }
 
     /**
+     * The Constructor.
+     *
+     * @param connector
+     *            the connector
+     * @param isJoinNullOrEmpty
+     *            the is join null or empty
+     * @since 1.4.0
+     */
+    public ToStringConfig(String connector, boolean isJoinNullOrEmpty){
+        super();
+        this.connector = connector;
+        this.isJoinNullOrEmpty = isJoinNullOrEmpty;
+    }
+
+    /**
      * 获得 连接符,默认={@link #DEFAULT_CONNECTOR}.
      * 
      * @return the connector

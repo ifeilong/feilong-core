@@ -523,36 +523,32 @@ public final class ConvertUtil{
             return StringUtils.EMPTY;
         }
 
-        ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
-
         //************************************************************************
+        ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
         Object[] operateArray = toObjects(arrays);
-
         String connector = useToStringConfig.getConnector();
+        //************************************************************************
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0, j = operateArray.length; i < j; ++i){
             @SuppressWarnings("unchecked")
             T t = (T) operateArray[i];
 
-            //如果是null 或者 empty，但是参数值是不拼接，那么继续循环
+            //如果是null 或者 empty，但是参数值是不拼接，那么跳过,继续循环
             if (Validator.isNullOrEmpty(t) && !useToStringConfig.getIsJoinNullOrEmpty()){
                 continue;
             }
-            sb.append(t);
+            //value转换, 注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            sb.append(null == t ? StringUtils.EMPTY : "" + t); //see StringUtils.defaultString(t)
 
-            if (null != connector){//注意可能传过来的是 换行符
+            if (null != connector){//注意可能传过来的是换行符 不能使用Validator.isNullOrEmpty来判断
+
+                //放心大胆的拼接 connector, 不判断是否是最后一个,最后会截取
                 sb.append(connector);
             }
         }
 
-        //由于上面的循环中，最后一个元素可能是null或者empty，判断加还是不加拼接符有点麻烦，因此，循环中统一拼接，但是循环之后做截取处理
-        String returnValue = sb.toString();
-
-        if (null != connector && returnValue.endsWith(connector)){
-            //去掉最后的拼接符
-            return StringUtil.substringWithoutLast(returnValue, connector.length());
-        }
-        return returnValue;
+        return StringUtil.substringWithoutLast(sb, connector);
     }
 
     /**

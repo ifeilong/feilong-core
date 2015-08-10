@@ -604,11 +604,39 @@ public final class StringUtil{
      * @see java.lang.String#substring(int, int)
      * @see org.apache.commons.lang3.StringUtils#left(String, int)
      */
-    public static String substringWithoutLast(final String text,int lastLenth){
+    public static String substringWithoutLast(final String text,final int lastLenth){
         if (Validator.isNullOrEmpty(text)){
             return StringUtils.EMPTY;
         }
         return text.substring(0, text.length() - lastLenth);
+    }
+
+    /**
+     * [截取]:去除最后的字符串(<code>text</code>必须以 <code>lastString</code>结尾).
+     *
+     * @param text
+     *            the text
+     * @param lastString
+     *            the last string
+     * @return the string
+     * @since 1.4.0
+     */
+    public static String substringWithoutLast(final CharSequence text,final String lastString){
+        if (Validator.isNullOrEmpty(text)){
+            return StringUtils.EMPTY;
+        }
+
+        //由于上面的循环中，最后一个元素可能是null或者empty，判断加还是不加拼接符有点麻烦，因此，循环中统一拼接，但是循环之后做截取处理
+        String returnValue = text.toString();
+        if (Validator.isNullOrEmpty(lastString)){
+            return returnValue;
+        }
+
+        if (returnValue.endsWith(lastString)){
+            //去掉最后的拼接符
+            return substringWithoutLast(returnValue, lastString.length());
+        }
+        return returnValue;
     }
 
     // [end]
