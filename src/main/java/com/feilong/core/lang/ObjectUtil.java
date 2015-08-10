@@ -47,20 +47,20 @@ public final class ObjectUtil{
      *            the generic type
      * @param findValue
      *            the find value
-     * @param findedClassType
+     * @param toBefindClassType
      *            the finded class type
      * @return the t
      * @since 1.3.0
      * @see "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"
      */
     @SuppressWarnings("unchecked")
-    public static <T> T findTypeValue(Object findValue,Class<T> findedClassType){
-        if (ClassUtil.isInstance(findValue, findedClassType)){
+    public static <T> T findTypeValue(Object findValue,Class<T> toBefindClassType){
+        if (ClassUtil.isInstance(findValue, toBefindClassType)){
             return (T) findValue;
         }
         //一般自定义的command 里面 就是些 string int,list map等对象
         //这些我们过滤掉,只取 类型是 findedClassType的
-        boolean canFindType = !ClassUtils.isPrimitiveOrWrapper(findedClassType)//
+        boolean canFindType = !ClassUtils.isPrimitiveOrWrapper(toBefindClassType)//
                         && !ClassUtil.isInstance(findValue, CharSequence.class)//
                         && !ClassUtil.isInstance(findValue, Collection.class) //
                         && !ClassUtil.isInstance(findValue, Map.class) //
@@ -78,7 +78,7 @@ public final class ObjectUtil{
 
             if (null != value && !"class".equals(key)){
                 //级联查询
-                T t = findTypeValue(value, findedClassType);
+                T t = findTypeValue(value, toBefindClassType);
                 if (null != t){
                     return t;
                 }
