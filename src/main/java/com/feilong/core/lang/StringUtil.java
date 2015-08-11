@@ -229,12 +229,12 @@ public final class StringUtil{
      * 忽略 大小写 是否包含.
      * 
      * <pre>
-     * StringUtil.isContainIgnoreCase(null, &quot;&quot;)  return false
-     * StringUtil.isContainIgnoreCase(text, null) return false
-     * StringUtil.isContainIgnoreCase(text, &quot;&quot;) return true
-     * StringUtil.isContainIgnoreCase(text, &quot;feilong&quot;) return true
-     * StringUtil.isContainIgnoreCase(text, &quot;feilong1&quot;)  return false
-     * StringUtil.isContainIgnoreCase(text, &quot;feiLong&quot;)  return true
+     * StringUtil.containsIgnoreCase(null, &quot;&quot;)  return false
+     * StringUtil.containsIgnoreCase(text, null) return false
+     * StringUtil.containsIgnoreCase(text, &quot;&quot;) return true
+     * StringUtil.containsIgnoreCase(text, &quot;feilong&quot;) return true
+     * StringUtil.containsIgnoreCase(text, &quot;feilong1&quot;)  return false
+     * StringUtil.containsIgnoreCase(text, &quot;feiLong&quot;)  return true
      * 
      * </pre>
      * 

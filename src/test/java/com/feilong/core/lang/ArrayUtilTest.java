@@ -69,7 +69,7 @@ public class ArrayUtilTest{
      * Test is contain.
      */
     @Test
-    public void testIsContain(){
+    public void testContain(){
         Assert.assertEquals(true, ArrayUtils.contains(new Integer[] { 1, 223 }, 1));
         Assert.assertEquals(true, ArrayUtils.contains(new Long[] { 1L, 223L }, 1L));
 

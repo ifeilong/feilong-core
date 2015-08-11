@@ -71,26 +71,6 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 用于 自定义标签/ 自定义el.
-     * 
-     * <p style="color:red">
-     * 注意,比较的是 {@link java.lang.Object#toString()}
-     * </p>
-     * 
-     * @param collection
-     *            一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator.
-     * @param value
-     *            任意类型的值,最终toString 判断比较.
-     * @return true, if successful
-     * @see ConvertUtil#toIterator(Object)
-     * @see #contains(Iterator, Object)
-     */
-    public static boolean containsTag(Object collection,Object value){
-        Iterator<?> iterator = ConvertUtil.toIterator(collection);
-        return contains(iterator, value);
-    }
-
-    /**
      * iterator是否包含某个值.
      * 
      * <p style="color:red">
@@ -107,7 +87,6 @@ public final class CollectionsUtil{
      */
     public static boolean contains(Iterator<?> iterator,Object value){
         if (Validator.isNullOrEmpty(iterator)){
-            LOGGER.debug("iterator is null/empty");
             return false;
         }
         while (iterator.hasNext()){

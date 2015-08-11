@@ -82,14 +82,6 @@ public class StringUtilTest{
     }
 
     /**
-     * Test contains ignore case.
-     */
-    @Test
-    public void testContainsIgnoreCase(){
-        assertEquals(true, StringUtil.containsIgnoreCase("jiiiiiinxin.feilong", "Xin"));
-    }
-
-    /**
      * Search count.
      */
     @Test
@@ -143,13 +135,14 @@ public class StringUtilTest{
      * Checks if is contain ignore case.
      */
     @Test
-    public void isContainIgnoreCase(){
+    public void testContainsIgnoreCase(){
         LOGGER.info(StringUtil.containsIgnoreCase(null, "") + "");
         LOGGER.info(StringUtil.containsIgnoreCase(TEXT, null) + "");
         LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "") + "");
         LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feilong") + "");
         LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feilong1") + "");
         LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feiLong") + "");
+        assertEquals(true, StringUtil.containsIgnoreCase("jiiiiiinxin.feilong", "Xin"));
     }
 
     /**

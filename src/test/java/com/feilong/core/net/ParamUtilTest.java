@@ -212,6 +212,14 @@ public class ParamUtilTest{
         LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", CharsetType.UTF8)));
     }
 
+    @Test
+    public void testToSingleValueMap(){
+        LOGGER.info(JsonUtil.format(ParamUtil
+                        .toSingleValueMap(
+                                        "_input_charset=UTF-8&out_order_no=2015080310000132&partner=2088201564809153&service=close_trade&sign=dc5a40d1d554b2ef115461f0ed6c49fc&sign_type=MD5&trade_role=S",
+                                        CharsetType.UTF8)));
+    }
+
     /**
      * Gets the encoded url by array map.
      * 

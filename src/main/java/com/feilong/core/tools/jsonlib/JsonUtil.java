@@ -51,7 +51,7 @@ import com.feilong.core.tools.jsonlib.util.PropertyStrategyWrapper;
 import com.feilong.core.util.Validator;
 
 /**
- * json 工具类.
+ * json工具类.
  * 
  * <h3>依赖于下面的jar:</h3>
  * 
@@ -69,10 +69,27 @@ import com.feilong.core.util.Validator;
  * </pre>
  * 
  * </blockquote>
+ * 
+ * 
+ * <h3>json-lib format map的时候</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * see {@link net.sf.json.JSONObject#_fromMap(Map, JsonConfig)}
+ * </p>
+ * <ul>
+ * <li>key不能是null</li>
+ * <li>key也不能是"null" 字符串</li>
+ * </ul>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.0.5 Jan 26, 2013 8:02:09 PM
  * @see net.sf.json.JSONSerializer#toJSON(Object, JsonConfig)
+ * 
+ * @see net.sf.json.JSONObject
+ * @see net.sf.json.JSONArray
+ * @see net.sf.json.JSONNull
  * @since 1.0.5
  */
 //XXX @deprecated net.sf.json-lib Non-maintenance,will use Jackson instead
@@ -281,7 +298,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.<br>
+     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.
      *
      * @param obj
      *            the obj
@@ -402,6 +419,7 @@ public final class JsonUtil{
 
     /**
      * Make a prettyprinted JSON text.
+     * 
      * <p>
      * Warning: This method assumes that the data structure is acyclical.
      * </p>
@@ -427,6 +445,132 @@ public final class JsonUtil{
     }
 
     // [end]
+
+    // [start]toJSON
+
+    /**
+     * 把实体Bean、Map对象、数组、列表集合转换成Json串.
+     *
+     * @param obj
+     *            the obj
+     * @return the jSON
+     * @see #toJSON(Object, JsonConfig)
+     */
+    public static JSON toJSON(Object obj){
+        return toJSON(obj, null);
+    }
+
+    /**
+     * 把实体Bean、Map对象、数组、列表集合转换成Json.
+     * 
+     * <p>
+     * 如果 <code>null==jsonConfig</code>,将使用 {@link #DEFAULT_JSON_CONFIG}
+     * </p>
+     *
+     * @param obj
+     *            the obj
+     * @param jsonConfig
+     *            the json config
+     * @return the jSON
+     * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
+     * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
+     * @see net.sf.json.util.JSONUtils#isArray(Object)
+     * @see java.lang.Class#isEnum()
+     * @see net.sf.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
+     * @see org.apache.commons.collections.IteratorUtils#toList(Iterator)
+     * @see org.apache.commons.collections.IteratorUtils#toList(Iterator, int)
+     * @see net.sf.json.JSONSerializer#toJSON(Object)
+     */
+    public static JSON toJSON(Object obj,JsonConfig jsonConfig){
+        JsonConfig useJsonConfig = defaultIfNull(jsonConfig);
+
+        // obj instanceof Collection || obj instanceof Object[]
+        if (JSONUtils.isArray(obj) || //
+                        obj instanceof Enum || // obj.getClass().isEnum()这么些 null会报错// object' is an Enum. Use JSONArray instead
+                        obj instanceof Iterator){
+            Object arrayJsonObject = obj;
+            if (obj instanceof Iterator){
+                arrayJsonObject = IteratorUtils.toList((Iterator<?>) obj);
+            }
+            return toJSONArray(arrayJsonObject, useJsonConfig);
+        }
+        return toJSONObject(obj, useJsonConfig);
+    }
+
+    // [end]
+
+    //********************************************************************************************
+
+    /**
+     * To json array.
+     *
+     * @param json
+     *            the json
+     * @return the JSON array
+     * @since 1.4.0
+     * @see net.sf.json.JSONArray#fromObject(Object)
+     */
+    private static JSONArray toJSONArray(String json){
+        return toJSONArray(json, new JsonConfig());
+    }
+
+    /**
+     * To json array.
+     *
+     * @param obj
+     *            the obj
+     * @param useJsonConfig
+     *            the use json config
+     * @return the JSON array
+     * @since 1.4.0
+     */
+    private static JSONArray toJSONArray(Object obj,JsonConfig useJsonConfig){
+        //Accepts JSON formatted strings, arrays, Collections and Enums.
+        return JSONArray.fromObject(obj, useJsonConfig);
+    }
+
+    //**************toJSONObject********************
+
+    /**
+     * To json object.
+     *
+     * @param json
+     *            the json
+     * @return the JSON object
+     * @since 1.4.0
+     * @see net.sf.json.JSONObject#fromObject(Object)
+     */
+    private static JSONObject toJSONObject(String json){
+        return toJSONObject(json, new JsonConfig());
+    }
+
+    /**
+     * To json object.
+     *
+     * @param obj
+     *            the obj
+     * @param useJsonConfig
+     *            the use json config
+     * @return the JSON object
+     * @since 1.4.0
+     * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
+     */
+    private static JSONObject toJSONObject(Object obj,JsonConfig useJsonConfig){
+        //Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.
+        return JSONObject.fromObject(obj, useJsonConfig);
+    }
+
+    /**
+     * Default if null.
+     *
+     * @param jsonConfig
+     *            the json config
+     * @return the json config
+     * @since 1.4.0
+     */
+    private static JsonConfig defaultIfNull(JsonConfig jsonConfig){
+        return null == jsonConfig ? DEFAULT_JSON_CONFIG : jsonConfig;
+    }
 
     // [start]toBean
 
@@ -512,7 +656,7 @@ public final class JsonUtil{
      * @see net.sf.json.JSONArray#toArray()
      */
     public static Object[] toArray(String json){
-        JSONArray jsonArray = JSONArray.fromObject(json);
+        JSONArray jsonArray = toJSONArray(json);
         return jsonArray.toArray();
     }
 
@@ -550,7 +694,7 @@ public final class JsonUtil{
      * @see java.lang.reflect.Array#newInstance(Class, int)
      */
     public static <T> T[] toArray(String json,Class<T> clazz,Map<String, Class<?>> classMap){
-        JSONArray jsonArray = JSONArray.fromObject(json);
+        JSONArray jsonArray = toJSONArray(json);
         int size = jsonArray.size();
 
         @SuppressWarnings("unchecked")
@@ -577,7 +721,7 @@ public final class JsonUtil{
      * @see net.sf.json.JSONArray#get(int)
      */
     public static List<Object> toList(String json){
-        JSONArray jsonArray = JSONArray.fromObject(json);
+        JSONArray jsonArray = toJSONArray(json);
         int size = jsonArray.size();
 
         List<Object> list = new ArrayList<Object>();
@@ -623,7 +767,7 @@ public final class JsonUtil{
      */
     // TODO
     public static <T> List<T> toList(String json,Class<T> clazz,Map<String, Class<?>> classMap){
-        JSONArray jsonArray = JSONArray.fromObject(json);
+        JSONArray jsonArray = toJSONArray(json);
         List<T> list = new ArrayList<T>();
 
         int size = jsonArray.size();
@@ -650,7 +794,7 @@ public final class JsonUtil{
      * @see net.sf.json.JSONObject#fromObject(Object)
      */
     public static Map<String, Object> toMap(String json){
-        JSONObject jsonObject = JSONObject.fromObject(json);
+        JSONObject jsonObject = toJSONObject(json);
 
         //TODO 处理不了key 是 null 的情况
         //java.lang.ClassCastException: net.sf.json.JSONNull cannot be cast to java.lang.String
@@ -706,7 +850,7 @@ public final class JsonUtil{
             LOGGER.debug("in json:{}", json);
         }
 
-        JSONObject jsonObject = JSONObject.fromObject(json);
+        JSONObject jsonObject = toJSONObject(json);
 
         Map<String, T> map = new HashMap<String, T>();
         @SuppressWarnings("unchecked")
@@ -721,56 +865,6 @@ public final class JsonUtil{
             map.put(key, toBean(value, clazz, classMap));
         }
         return map;
-    }
-
-    // [end]
-
-    // [start]toJSON
-
-    /**
-     * 把实体Bean、Map对象、数组、列表集合转换成Json串.
-     *
-     * @param obj
-     *            the obj
-     * @return the jSON
-     * @see #toJSON(Object, JsonConfig)
-     */
-    public static JSON toJSON(Object obj){
-        return toJSON(obj, null);
-    }
-
-    /**
-     * 把实体Bean、Map对象、数组、列表集合转换成Json串.
-     *
-     * @param obj
-     *            the obj
-     * @param jsonConfig
-     *            the json config
-     * @return the jSON
-     * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
-     * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
-     * @see net.sf.json.util.JSONUtils#isArray(Object)
-     * @see java.lang.Class#isEnum()
-     * @see net.sf.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
-     * @see org.apache.commons.collections.IteratorUtils#toList(Iterator)
-     * @see org.apache.commons.collections.IteratorUtils#toList(Iterator, int)
-     * @see net.sf.json.JSONSerializer#toJSON(Object)
-     */
-    public static JSON toJSON(Object obj,JsonConfig jsonConfig){
-        JsonConfig useJsonConfig = null == jsonConfig ? DEFAULT_JSON_CONFIG : jsonConfig;
-
-        // obj instanceof Collection || obj instanceof Object[]
-        if (JSONUtils.isArray(obj) || //
-                        obj instanceof Enum || // obj.getClass().isEnum()这么些 null会报错// object' is an Enum. Use JSONArray instead
-                        obj instanceof Iterator){
-            if (obj instanceof Iterator){
-                return JSONArray.fromObject(IteratorUtils.toList((Iterator<?>) obj), useJsonConfig);
-            }
-            //Accepts JSON formatted strings, arrays, Collections and Enums.
-            return JSONArray.fromObject(obj, useJsonConfig);
-        }
-        //Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.
-        return JSONObject.fromObject(obj, useJsonConfig);
     }
 
     // [end]
