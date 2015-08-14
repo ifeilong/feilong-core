@@ -728,6 +728,7 @@ public final class ConvertUtil{
      * @see Collection#iterator()
      * @see EnumerationIterator#EnumerationIterator(Enumeration)
      * @see IteratorUtils#getIterator(Object)
+     * @see "org.apache.taglibs.standard.tag.common.core.ForEachSupport#supportedTypeForEachIterator(Object)"
      * @since Commons Collections4.0
      */
     @SuppressWarnings("unchecked")
