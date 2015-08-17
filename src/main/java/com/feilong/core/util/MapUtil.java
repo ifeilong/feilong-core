@@ -178,7 +178,7 @@ public final class MapUtil{
      * map的key和value互转.
      * 
      * <p>
-     * 这个操作map预先良好的定义.如果传过来的map,不同的key有相同的balue, 那么返回的map (key)只会有一个(value), 其他重复的key被丢掉了
+     * <span style="color:red">这个操作map预先良好的定义</span>.如果传过来的map,不同的key有相同的value,那么返回的map(key)只会有一个(value),其他重复的key被丢掉了
      * </p>
      *
      * @param <K>
@@ -187,7 +187,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果map 是nullOrEmpty ,返回 一个empty map
+     * @return 如果map是nullOrEmpty ,返回 一个empty map
+     * @see org.apache.commons.collections4.MapUtils#invertMap(Map)
      * @since 1.2.2
      */
     public static <K, V> Map<V, K> invertMap(Map<K, V> map){
@@ -381,7 +382,6 @@ public final class MapUtil{
      * @since 1.2.0
      */
     public static <K, V> Map<K, V> sort(Map<K, V> map,Comparator<Map.Entry<K, V>> mapEntryComparator){
-
         if (Validator.isNullOrEmpty(map)){
             throw new NullPointerException("map can't be null/empty!");
         }
@@ -389,7 +389,6 @@ public final class MapUtil{
         if (Validator.isNullOrEmpty(mapEntryComparator)){
             throw new NullPointerException("mapEntryComparator is null or empty!");
         }
-
         //**********************************************************
 
         final int size = map.size();
@@ -409,7 +408,6 @@ public final class MapUtil{
             V value = entry.getValue();
             returnMap.put(key, value);
         }
-
         return returnMap;
     }
 }
