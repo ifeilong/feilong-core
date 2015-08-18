@@ -42,7 +42,7 @@ public class MessageFormatUtilTest{
      * Format.
      */
     @Test
-    public final void format(){
+    public void format(){
         LOGGER.info(MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin"));
         LOGGER.info(MessageFormatUtil.format("name=张三{0,number}a{1}", 5, "xin"));
         LOGGER.info(MessageFormatUtil.format("name=张三{0,date}a{1}", 15, "xin"));
@@ -52,7 +52,7 @@ public class MessageFormatUtilTest{
      * Test get value with arguments1.
      */
     @Test
-    public final void testGetValueWithArguments1(){
+    public void testGetValueWithArguments1(){
         MessageFormat mf = new MessageFormat("{0}, {0}, {0}");
         String forParsing = "x, y, z";
         Object[] objs = mf.parse(forParsing, new ParsePosition(0));

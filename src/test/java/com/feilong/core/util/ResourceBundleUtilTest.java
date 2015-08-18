@@ -48,7 +48,7 @@ public class ResourceBundleUtilTest{
      */
     @Test
     // "/WEB-INF/classes/feilong.user.properties"
-    public final void testGetValue(){
+    public void testGetValue(){
         LOGGER.debug(ResourceBundleUtil.getValue(baseName, "config_test_array"));
     }
 
@@ -57,7 +57,7 @@ public class ResourceBundleUtilTest{
      * 
      */
     @Test
-    public final void testGetValueWithArguments(){
+    public void testGetValueWithArguments(){
         LOGGER.debug(ResourceBundleUtil.getValueWithArguments(resourceBundle, "test", "2", "22"));
     }
 
@@ -65,7 +65,7 @@ public class ResourceBundleUtilTest{
      * Read properties as array.
      */
     @Test
-    public final void readPropertiesAsArray(){
+    public void readPropertiesAsArray(){
         LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
         LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
     }
@@ -74,7 +74,7 @@ public class ResourceBundleUtilTest{
      * Read prefix as map.
      */
     @Test
-    public final void readPrefixAsMap(){
+    public void readPrefixAsMap(){
         Map<String, String> map = ResourceBundleUtil.readPrefixAsMap(baseName, "FileType", "\\.", Locale.CHINA);
         LOGGER.info(JsonUtil.format(map));
     }
@@ -83,7 +83,7 @@ public class ResourceBundleUtilTest{
      * Read all properties to map.
      */
     @Test
-    public final void readAllPropertiesToMap(){
+    public void readAllPropertiesToMap(){
         Map<String, String> map = ResourceBundleUtil.readAllPropertiesToMap("messages/feilong-core-message", Locale.CHINA);
         LOGGER.info(JsonUtil.format(map));
     }
@@ -93,7 +93,7 @@ public class ResourceBundleUtilTest{
      * 
      */
     @Test
-    public final void testGetValue1(){
+    public void testGetValue1(){
         LOGGER.info(ResourceBundleUtil.getValue("messages/feilong-core-message", "config_date_hour", Locale.ENGLISH));
     }
 }

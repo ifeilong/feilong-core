@@ -41,7 +41,7 @@ public class NumberFormatUtilTest{
      * Test method for {@link com.feilong.core.text.NumberFormatUtil#format(java.lang.Number, java.lang.String)}.
      */
     @Test
-    public final void testFormat(){
+    public void testFormat(){
         assertEquals("26", NumberFormatUtil.format(25.5, "#####"));
         assertEquals("RP 26", NumberFormatUtil.format(25.5, "RP #####"));
     }

@@ -63,7 +63,7 @@ public class MethodUtilTest{
      * Test invoke method1.
      */
     @Test
-    public final void testInvokeMethod1(){
+    public void testInvokeMethod1(){
         LOGGER.info("" + MethodUtil.invokeMethod(ConstructorUtil.newInstance(MethodUtilTest.class), "name", 5));
         LOGGER.info("" + MethodUtil.invokeMethod(new MethodUtilTest(), "name", Integer.parseInt("5")));
     }
@@ -72,7 +72,7 @@ public class MethodUtilTest{
      * Test.
      */
     @Test
-    public final void testInvokeMethod(){
+    public void testInvokeMethod(){
         User user = new User();
         String methodName = "getId";
         Object[] params = new Object[0];
@@ -84,7 +84,7 @@ public class MethodUtilTest{
      * Test invoke static method.
      */
     @Test(expected = ReflectException.class)
-    public final void testInvokeStaticMethod(){
+    public void testInvokeStaticMethod(){
         MethodUtil.invokeStaticMethod(User.class, "getId", new Object[0]);
     }
 
@@ -92,7 +92,7 @@ public class MethodUtilTest{
      * Test invoke static method.
      */
     @Test()
-    public final void testInvokeStaticMethod1(){
+    public void testInvokeStaticMethod1(){
         assertEquals("eilong", MethodUtil.invokeStaticMethod(StringUtil.class, "substring", "feilong", "ei"));
     }
 
@@ -103,7 +103,7 @@ public class MethodUtilTest{
      *             the exception
      */
     @Test()
-    public final void testInvokeStaticMethod2() throws Exception{
+    public void testInvokeStaticMethod2() throws Exception{
         assertEquals("fjinxinlong", MethodUtils.invokeStaticMethod(StringUtil.class, "replace", "feilong", "ei", "jinxin"));
     }
 }

@@ -142,7 +142,7 @@ public class ArrayUtilTest{
      * Test.
      */
     @Test
-    public final void test(){
+    public void test(){
         String[] aStrings = new String[2];
         aStrings[0] = "a";
         aStrings[1] = "b";
@@ -154,7 +154,7 @@ public class ArrayUtilTest{
      * 数组和list 转换.
      */
     @Test
-    public final void arrayAndList(){
+    public void arrayAndList(){
 
         String aString = "FACTORY_ID,SHOE_NAME,CHANNEL,PRODUCT_CODE,COLOR_CODE,PAYTYPE,FACTORY_CODE,TRACKING_NO_UPS,MH_ID,DEVICE,SUB_TOTAL_PRICE,TAX_PRICE,DELIVERY_PRICE,TOTAL_PRICE,PAY_DATE,REVENUE_DATE,RETURN_DATE,CANCEL_DATE,SHOP_NAME,CALCEL_CODE";
         List<String> asList = Arrays.asList(aString.split(","));
@@ -182,7 +182,7 @@ public class ArrayUtilTest{
      * Convert list to string replace brackets.
      */
     @Test
-    public final void convertListToStringReplaceBrackets(){
+    public void convertListToStringReplaceBrackets(){
         String[] array = new String[] { "1", "223" };
         //Use "Arrays.toString(array)" instead.
         LOGGER.info(array.toString());

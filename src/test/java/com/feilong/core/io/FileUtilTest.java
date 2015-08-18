@@ -197,7 +197,7 @@ public class FileUtilTest{
      * {@link com.feilong.core.io.FileUtil#formatSize(long)} 的测试方法。
      */
     @Test
-    public final void formatFileSize(){
+    public void formatFileSize(){
         LOGGER.info(FileUtil.formatSize(8981528));
         LOGGER.info(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
     }

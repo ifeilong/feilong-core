@@ -34,7 +34,7 @@ public class FeiLongVersionTest{
      * Test get version.
      */
     @Test
-    public final void testGetVersion(){
+    public void testGetVersion(){
         LOGGER.info(FeiLongVersion.getVersion());
     }
 }

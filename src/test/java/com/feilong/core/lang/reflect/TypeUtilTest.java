@@ -42,7 +42,7 @@ public class TypeUtilTest{
      * Test.
      */
     @Test
-    public final void test(){
+    public void test(){
         LOGGER.info("" + new SkuItemRepositoryImpl());
     }
 
@@ -50,7 +50,7 @@ public class TypeUtilTest{
      * Test2.
      */
     @Test
-    public final void test2(){
+    public void test2(){
         LOGGER.info("" + new SkuItemRepositoryImpl2());
     }
 
@@ -58,7 +58,7 @@ public class TypeUtilTest{
      * Test3.
      */
     @Test
-    public final void test3(){
+    public void test3(){
         LOGGER.info("" + new SkuItemRepositoryImpl3());
         Class<?>[] genericInterfacesParameterizedRawTypes = TypeUtil.getGenericInterfacesParameterizedRawTypes(
                         SkuItemRepositoryImpl3.class,
@@ -70,7 +70,7 @@ public class TypeUtilTest{
      * Test4.
      */
     @Test
-    public final void test4(){
+    public void test4(){
         SkuItemRepositoryImpl4<String> skuItemRepository = new SkuItemRepositoryImpl4<String>();
         //Class<?> componentType = SkuItemRepositoryImpl4.class.getComponentType();
         Class<?>[] genericInterfacesParameterizedRawTypes = TypeUtil

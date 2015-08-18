@@ -47,7 +47,7 @@ public class IntrospectorUtilTest{
      *             the introspection exception
      */
     @Test
-    public final void testGetIntrospectorInfoMapForLog() throws IntrospectionException{
+    public void testGetIntrospectorInfoMapForLog() throws IntrospectionException{
         Map<String, Object> map = IntrospectorUtil.getIntrospectorInfoMapForLog(SalesOrder.class);
         LOGGER.debug(JsonUtil.format(map));
     }
@@ -56,7 +56,7 @@ public class IntrospectorUtilTest{
      * Test flush caches.
      */
     @Test
-    public final void testFlushCaches(){
+    public void testFlushCaches(){
         Introspector.flushCaches();
     }
 
@@ -64,7 +64,7 @@ public class IntrospectorUtilTest{
      * Test get bean info search path.
      */
     @Test
-    public final void testGetBeanInfoSearchPath(){
+    public void testGetBeanInfoSearchPath(){
         //为了查找 BeanInfo 类而被搜索的包名称数组。此数组的默认值与实现有关，例如 Sun 实现最初设置为 {"sun.beans.infos"}。
         String[] beanInfoSearchPath = Introspector.getBeanInfoSearchPath();
         LOGGER.debug(JsonUtil.format(beanInfoSearchPath));
@@ -74,7 +74,7 @@ public class IntrospectorUtilTest{
      * Test decapitalize.
      */
     @Test
-    public final void testDecapitalize(){
+    public void testDecapitalize(){
         assertEquals("jinxin", IntrospectorUtil.decapitalize("Jinxin"));
         assertEquals("URL", IntrospectorUtil.decapitalize("URL"));
         assertEquals("jinXin", IntrospectorUtil.decapitalize("jinXin"));

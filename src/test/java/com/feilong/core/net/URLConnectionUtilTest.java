@@ -38,7 +38,7 @@ public class URLConnectionUtilTest{
      * 获得 response body as string.
      */
     @Test
-    public final void getResponseBodyAsString(){
+    public void getResponseBodyAsString(){
         String templateFile = "http://10.8.25.80:6666/template.csv?sign=123456";
 
         ConnectionConfig connectionConfig = new ConnectionConfig();
@@ -48,8 +48,11 @@ public class URLConnectionUtilTest{
         LOGGER.info(responseBodyAsString);
     }
 
+    /**
+     * 获得 response body as string1.
+     */
     @Test
-    public final void getResponseBodyAsString1(){
+    public void getResponseBodyAsString1(){
         LOGGER.info("" + (null instanceof HttpURLConnection));
     }
 }

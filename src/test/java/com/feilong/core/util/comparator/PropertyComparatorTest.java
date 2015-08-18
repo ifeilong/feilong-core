@@ -44,7 +44,7 @@ public class PropertyComparatorTest{
      * Test property comparator.
      */
     @Test
-    public final void testPropertyComparator(){
+    public void testPropertyComparator(){
         List<User> list = new ArrayList<User>();
         Long id = null;
         list.add(new User(id));
@@ -62,7 +62,7 @@ public class PropertyComparatorTest{
      * Test property comparator2.
      */
     @Test
-    public final void testPropertyComparator2(){
+    public void testPropertyComparator2(){
         Set<User> list = new TreeSet<User>(new PropertyComparator<User>("id"));
         Long id = null;
         list.add(new User(id));

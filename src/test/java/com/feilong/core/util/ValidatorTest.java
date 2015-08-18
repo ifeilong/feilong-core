@@ -58,7 +58,7 @@ public class ValidatorTest{
      * Test method for {@link com.feilong.core.util.Validator#isNullOrEmpty(java.lang.Object)}.
      */
     @Test
-    public final void testIsNullOrEmpty(){
+    public void testIsNullOrEmpty(){
         List<String> list = new ArrayList<String>();
 
         assertEquals(true, Validator.isNullOrEmpty(""));

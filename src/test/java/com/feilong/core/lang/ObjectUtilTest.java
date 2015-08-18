@@ -45,7 +45,7 @@ public class ObjectUtilTest{
      * Assert equals.
      */
     @Test
-    public final void assertEquals2(){
+    public void assertEquals2(){
 
         Long a = new Long(1L);
         Long b = new Long(1L);
@@ -71,7 +71,7 @@ public class ObjectUtilTest{
      * To iterator.
      */
     @Test
-    public final void toIterator(){
+    public void toIterator(){
         String[] array = { "1", "223" };
         LOGGER.debug(JsonUtil.format(toIterator(array)));
 

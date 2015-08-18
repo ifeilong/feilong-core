@@ -34,7 +34,7 @@ public class Slf4jUtilTest{
      * Test.
      */
     @Test
-    public final void test(){
+    public void test(){
         LOGGER.info(Slf4jUtil.formatMessage("{},{}", "今天", "aaaa"));
         LOGGER.info(Slf4jUtil.formatMessage(null, "今天", "aaaa"));
         LOGGER.info(Slf4jUtil.formatMessage("", "今天", "aaaa"));

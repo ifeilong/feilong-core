@@ -36,7 +36,7 @@ public class RegexUtilTest{
      * Group.
      */
     @Test
-    public final void group(){
+    public void group(){
         String regexPattern = "(.*?)@(.*?)";
         String email = "venusdrogon@163.com";
         LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");
@@ -47,7 +47,7 @@ public class RegexUtilTest{
      * Group2.
      */
     @Test
-    public final void group2(){
+    public void group2(){
         String regexPatternTable = "@Table.*name.*\"(.*?)\".*";
         //		regexPattern = "@Table[(]*\"(.*?)*[)]";
         //		regexPattern = "@Table(.*?)";
@@ -59,7 +59,7 @@ public class RegexUtilTest{
      * Group1.
      */
     @Test
-    public final void group1(){
+    public void group1(){
         String regexPattern = "(.*?)(?:@)(.*?)";
         regexPattern = "(.*?)@(.*?)";
         String email = "venusdrogon@163.com";
@@ -70,7 +70,7 @@ public class RegexUtilTest{
      * Group22.
      */
     @Test
-    public final void group22(){
+    public void group22(){
         String regexPatternColumn = ".*@Column.*name.*\"(.*?)\"((?:.*)|(.*length.*(\\d+).*))";
         //		REGEX_PATTERN_COLUMN = ".*@Column.*name.*\"(.*?)\".*length.*(\\d*).*";
         //		REGEX_PATTERN_COLUMN = ".*@Column.*(\\d+).*";
@@ -84,7 +84,7 @@ public class RegexUtilTest{
      * Test is email.
      */
     @Test
-    public final void testIsEmail(){
+    public void testIsEmail(){
         assertEquals(true, RegexUtil.matches(RegexPattern.EMAIL, "xin.jin@baozun.com"));
         assertEquals(true, RegexUtil.matches(RegexPattern.EMAIL, "venusdrogon@163.com"));
     }
@@ -93,7 +93,7 @@ public class RegexUtilTest{
      * Test mobilephone.
      */
     @Test
-    public final void testMOBILEPHONE(){
+    public void testMOBILEPHONE(){
         assertEquals(true, RegexUtil.matches(RegexPattern.MOBILEPHONE, "18501646315"));
     }
 
@@ -101,7 +101,7 @@ public class RegexUtilTest{
      * Test is ip.
      */
     @Test
-    public final void testIsIP(){
+    public void testIsIP(){
         assertEquals(true, RegexUtil.matches(RegexPattern.IP, "venusdrogon@163.com"));
         assertEquals(true, RegexUtil.matches(RegexPattern.IP, "127.0.0.1"));
         assertEquals(true, RegexUtil.matches(RegexPattern.IP, "127.0.0.*"));
@@ -112,7 +112,7 @@ public class RegexUtilTest{
      * Test match.
      */
     @Test
-    public final void testMatch(){
+    public void testMatch(){
         String iphone = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7";
 
         String pattern = "^(MIDP)|(WAP)|(UP.Browser)|(Smartphone)|(Obigo)|(Mobile)|(AU.Browser)|(wxd.Mms)|(WxdB.Browser)|(CLDC)|(UP.Link)|(KM.Browser)|(UCWEB)|(SEMC\\-Browser)|(Mini)|(Symbian)|(Palm)|(Nokia)|(Panasonic)|(MOT\\-)|(SonyEricsson)|(NEC\\-)|(Alcatel)|(Ericsson)|(BENQ)|(BenQ)|(Amoisonic)|(Amoi\\-)|(Capitel)|(PHILIPS)|(SAMSUNG)|(Lenovo)|(Mitsu)|(Motorola)|(SHARP)|(WAPPER)|(LG\\-)|(LG/)|(EG900)|(CECT)|(Compal)|(kejian)|(Bird)|(BIRD)|(G900/V1.0)|(Arima)|(CTL)|(TDG)|(Daxian)|(DAXIAN)|(DBTEL)|(Eastcom)|(EASTCOM)|(PANTECH)|(Dopod)|(Haier)|(HAIER)|(KONKA)|(KEJIAN)|(LENOVO)|(Soutec)|(SOUTEC)|(SAGEM)|(SEC\\-)|(SED\\-)|(EMOL\\-)|(INNO55)|(ZTE)|(iPhone)|(Android)|(Windows CE)$";
@@ -124,7 +124,7 @@ public class RegexUtilTest{
      * Test match1.
      */
     @Test
-    public final void testMatch1(){
+    public void testMatch1(){
         assertEquals(false, RegexUtil.matches(RegexPattern.NUMBER, "2000.0"));
         assertEquals(true, RegexUtil.matches(RegexPattern.NUMBER, "02125454"));
     }
@@ -133,7 +133,7 @@ public class RegexUtilTest{
      * Test decima l_ tw o_ digit.
      */
     @Test
-    public final void testDecimalTwoDigit(){
+    public void testDecimalTwoDigit(){
         assertEquals(false, RegexUtil.matches(RegexPattern.DECIMAL_TWO_DIGIT, "2000阿.00"));
         assertEquals(false, RegexUtil.matches(RegexPattern.DECIMAL_TWO_DIGIT, "2000.0"));
         assertEquals(true, RegexUtil.matches(RegexPattern.DECIMAL_TWO_DIGIT, "2000.99"));
@@ -143,7 +143,7 @@ public class RegexUtilTest{
      * AN.
      */
     @Test
-    public final void testAN(){
+    public void testAN(){
         assertEquals(true, RegexUtil.matches(RegexPattern.AN, "aa02125454"));
         assertEquals(false, RegexUtil.matches(RegexPattern.AN, "0212545.4"));
         assertEquals(true, RegexUtil.matches(RegexPattern.AN, "02125454"));
@@ -153,7 +153,7 @@ public class RegexUtilTest{
      * ANS.
      */
     @Test
-    public final void testANS(){
+    public void testANS(){
         assertEquals(true, RegexUtil.matches(RegexPattern.ANS, "02125 454"));
     }
 }

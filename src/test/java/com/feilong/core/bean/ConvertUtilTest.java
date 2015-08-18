@@ -64,7 +64,7 @@ public class ConvertUtilTest{
      * Test to iterator.
      */
     @Test
-    public final void testToIterator(){
+    public void testToIterator(){
         // *************************逗号分隔的数组********************************
         LOGGER.info(StringUtils.center("逗号分隔的数组", 60, "*"));
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator("1,2")));
@@ -144,7 +144,7 @@ public class ConvertUtilTest{
      * Test to big decimal.
      */
     @Test
-    public final void testToBigDecimal(){
+    public void testToBigDecimal(){
         assertEquals(null, ConvertUtil.toBigDecimal(null));
         assertEquals(BigDecimal.valueOf(1111), ConvertUtil.toBigDecimal(1111));
         assertEquals(BigDecimal.valueOf(0.1), ConvertUtil.toBigDecimal(0.1));
@@ -223,7 +223,7 @@ public class ConvertUtilTest{
      * Test to integer.
      */
     @Test
-    public final void testToInteger2(){
+    public void testToInteger2(){
         assertEquals(null, ConvertUtil.toInteger(null));
         assertEquals(8, ConvertUtil.toInteger(8L).intValue());
         assertEquals(8, ConvertUtil.toInteger("8").intValue());
@@ -253,7 +253,7 @@ public class ConvertUtilTest{
      * Test to string object.
      */
     @Test
-    public final void testToString(){
+    public void testToString(){
         String[] aaaa = { "aa", "aaa" };
         assertEquals("[aa, aaa]", ConvertUtil.toString(aaaa));
     }
@@ -262,7 +262,7 @@ public class ConvertUtilTest{
      * Test to string2.
      */
     @Test
-    public final void testToString2(){
+    public void testToString2(){
         Integer[] int1 = { 2, null, 1, null };
         LOGGER.debug(ConvertUtil.toString(int1));
 
@@ -277,7 +277,7 @@ public class ConvertUtilTest{
      * Test convert array.
      */
     @Test
-    public final void testConvertArray(){
+    public void testConvertArray(){
         String[] int1 = { "2", "1" };
         LOGGER.debug(JsonUtil.format(ConvertUtil.convert(int1, Long.class)));
     }
@@ -321,7 +321,7 @@ public class ConvertUtilTest{
      * To array.
      */
     @Test
-    public final void toArray(){
+    public void toArray(){
         List<String> testList = new ArrayList<String>();
         //testList.add(null);
         testList.add("xinge");

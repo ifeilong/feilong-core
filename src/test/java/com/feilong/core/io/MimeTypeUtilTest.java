@@ -37,7 +37,7 @@ public class MimeTypeUtilTest{
      * Test get content type by file name.
      */
     @Test
-    public final void testGetContentTypeByFileName(){
+    public void testGetContentTypeByFileName(){
         LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.mkv"));
         LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.oxt"));
         LOGGER.debug(getContentTypeByFileName("E:\\2009 阿凡达 詹姆斯·卡梅隆 178分钟加长收藏版.jpg"));

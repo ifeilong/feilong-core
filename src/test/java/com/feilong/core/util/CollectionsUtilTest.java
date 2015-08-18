@@ -89,7 +89,7 @@ public class CollectionsUtilTest{
      * Test group count.
      */
     @Test
-    public final void testGroupCount(){
+    public void testGroupCount(){
         List<User> testList = new ArrayList<User>();
         testList.add(new User("张飞", 23));
         testList.add(new User("关羽", 24));
@@ -111,7 +111,7 @@ public class CollectionsUtilTest{
      * 
      */
     @Test
-    public final void testGetFieldValueMap(){
+    public void testGetFieldValueMap(){
         List<User> testList = new ArrayList<User>();
         testList.add(new User("张飞", 23));
         testList.add(new User("关羽", 24));
@@ -133,7 +133,7 @@ public class CollectionsUtilTest{
      * Test get field value list.
      */
     @Test
-    public final void testGetFieldValueList(){
+    public void testGetFieldValueList(){
         List<User> testList = new ArrayList<User>();
         testList.add(new User(2L));
         testList.add(new User(5L));
@@ -149,7 +149,7 @@ public class CollectionsUtilTest{
      * Test get field value set.
      */
     @Test
-    public final void testGetFieldValueSet(){
+    public void testGetFieldValueSet(){
         List<User> testList = new ArrayList<User>();
         testList.add(new User(2L));
         testList.add(new User(5L));
@@ -167,7 +167,7 @@ public class CollectionsUtilTest{
      * 
      */
     @Test
-    public final void testGetFieldValueList1(){
+    public void testGetFieldValueList1(){
         List<User> testList = new ArrayList<User>();
 
         User user;

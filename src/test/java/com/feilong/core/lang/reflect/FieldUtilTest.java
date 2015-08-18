@@ -52,7 +52,7 @@ public class FieldUtilTest{
      *             the illegal access exception
      */
     @Test
-    public final void testGetFieldValueMap() throws IllegalAccessException{
+    public void testGetFieldValueMap() throws IllegalAccessException{
         User user = new User(12L);
         LOGGER.info(JsonUtil.format(FieldUtil.getFieldValueMap(user)));
     }

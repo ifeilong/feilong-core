@@ -35,7 +35,7 @@ public class TimeIntervalTest{
      * Test.
      */
     @Test
-    public final void test(){
+    public void test(){
         LOGGER.info("" + TimeInterval.MILLISECOND_PER_YEAR);
         LOGGER.info("" + TimeInterval.MILLISECOND_PER_MONTH);
         LOGGER.info("" + TimeInterval.MILLISECOND_PER_WEEK);
