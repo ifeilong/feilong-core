@@ -35,7 +35,40 @@ public class JsonFormatConfig{
     /** The includes. */
     private String[]                        includes;
 
-    /** The property name and json value processor map. */
+    /**
+     * The property name and json value processor map.
+     * 
+     * <code><pre>
+     *   User user = new User("feilong1", 24);
+     *   user.setPassword("123456");
+     *   user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
+     * 
+     *   Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+     *   propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
+     *   propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
+     * 
+     *   JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     *   jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * 
+     *   LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
+     * </pre></code>
+     * 
+     * 将会输出
+     * 
+     * <code><pre>
+     * {
+     *   "password": "******",
+     *   "age": 24,
+     *   "name": "feilong1",
+     *   "money": "99999999.00"
+     * }
+     * </pre></code>
+     * 
+     * 
+     * @see net.sf.json.processors.JsonValueProcessor
+     * @see com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor
+     * @see com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
+     * */
     private Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap;
 
     /**
@@ -66,8 +99,37 @@ public class JsonFormatConfig{
 
     /**
      * 获得 the property name and json value processor map.
-     *
+     * 
+     * <code><pre>
+     *   User user = new User("feilong1", 24);
+     *   user.setPassword("123456");
+     *   user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
+     * 
+     *   Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+     *   propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
+     *   propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
+     * 
+     *   JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     *   jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * 
+     *   LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
+     * </pre></code>
+     * 
+     * 将会输出
+     * 
+     * <code><pre>
+     * {
+     *   "password": "******",
+     *   "age": 24,
+     *   "name": "feilong1",
+     *   "money": "99999999.00"
+     * }
+     * </pre></code>
+     * 
      * @return the propertyNameAndJsonValueProcessorMap
+     * @see net.sf.json.processors.JsonValueProcessor
+     * @see com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor
+     * @see com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
     public Map<String, JsonValueProcessor> getPropertyNameAndJsonValueProcessorMap(){
         return propertyNameAndJsonValueProcessorMap;
@@ -76,8 +138,37 @@ public class JsonFormatConfig{
     /**
      * 设置 the property name and json value processor map.
      *
+     * <code><pre>
+     *   User user = new User("feilong1", 24);
+     *   user.setPassword("123456");
+     *   user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
+     * 
+     *   Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+     *   propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
+     *   propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
+     * 
+     *   JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     *   jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * 
+     *   LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
+     * </pre></code>
+     * 
+     * 将会输出:
+     * 
+     * <code><pre>
+     * {
+     *   "password": "******",
+     *   "age": 24,
+     *   "name": "feilong1",
+     *   "money": "99999999.00"
+     * }
+     * </pre></code>
+     * 
      * @param propertyNameAndJsonValueProcessorMap
      *            the propertyNameAndJsonValueProcessorMap to set
+     * @see net.sf.json.processors.JsonValueProcessor
+     * @see com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor
+     * @see com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
     public void setPropertyNameAndJsonValueProcessorMap(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
         this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;

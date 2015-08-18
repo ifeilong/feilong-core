@@ -233,7 +233,7 @@ public class ConvertUtilTest{
      * To t test.
      */
     @Test
-    public void toTTest(){
+    public void testConvert(){
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray("6", "_");
 
         LinkedList<Serializable> linkedList = new LinkedList<Serializable>();

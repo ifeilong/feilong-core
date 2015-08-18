@@ -372,10 +372,9 @@ public final class FileUtil{
             String msg = "File [" + absolutePath + "] could not be created";
             LOGGER.error(msg);
             throw new IllegalArgumentException(msg);
-        }else{
-            //创建成功 记录下日志
-            LOGGER.debug("success mkdirs:[{}]~~", absolutePath);
         }
+        //创建成功 记录下日志
+        LOGGER.debug("success mkdirs:[{}]~~", absolutePath);
     }
 
     /**

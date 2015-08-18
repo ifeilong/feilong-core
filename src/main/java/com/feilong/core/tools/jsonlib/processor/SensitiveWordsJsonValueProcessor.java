@@ -63,10 +63,7 @@ public class SensitiveWordsJsonValueProcessor implements JsonValueProcessor{
      *            the value
      * @return the object
      */
-    private Object processValue(Object value){
-        if (null == value){
-            return null;
-        }
-        return DEFAULT_SENSITIVE_WORDS;
+    private static Object processValue(Object value){
+        return null == value ? null : DEFAULT_SENSITIVE_WORDS;
     }
 }
