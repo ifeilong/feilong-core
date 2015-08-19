@@ -23,7 +23,7 @@ import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.tools.slf4j.Slf4jUtil;
 
 /**
- * 使用反射的方式执行调用bean中的方法,原先是自己写的,但是发现未尽全面,因此调用 {@link org.apache.commons.lang3.reflect.MethodUtils}相关方法 .
+ * 使用反射的方式执行调用bean中的方法.
  * 
  * <h3>方法介绍:</h3>
  * 
@@ -45,7 +45,6 @@ import com.feilong.core.tools.slf4j.Slf4jUtil;
  * <li>{@link #invokeStaticMethod(Class, String, Object...)}</li>
  * <li>{@link #invokeStaticMethod(Class, String, Object[], Class[])}</li>
  * </ol>
- * 
  * 
  * <p>
  * 如果你要调用精准的方法,可以使用 {@link org.apache.commons.lang3.reflect.MethodUtils}原生方法:
@@ -74,12 +73,50 @@ import com.feilong.core.tools.slf4j.Slf4jUtil;
  * <p>
  * 当然,您也可以调用 java 原生态, 需要注意的是:
  * </p>
- * <ol>
- * <li>{@link java.lang.Class#getMethods()} 获取全部的public的函数(包括从基类继承的、从接口实现的所有public函数) (return all the (public) member methods inherited from
- * the Object class)</li>
- * <li>{@link java.lang.Class#getDeclaredMethods()} 获得类的所有方法 (This includes public, protected, default (package) access, and private
- * methods, but excludes inherited methods)</li>
- * </ol>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">方法</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link Class#getMethods()}</td>
+ * <td>
+ * 
+ * <p>
+ * 返回一个包含某些 Method 对象的数组，这些对象反映此 Class 对象所表示的类或接口（包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口）的<span style="color:green">公共(public)
+ * member</span>方法。(return all the (public) member methods inherited from the Object class)
+ * </p>
+ * 
+ * <p>
+ * 数组类返回从 Object 类继承的所有（公共）member 方法。
+ * </p>
+ * 
+ * <b>返回数组中的元素没有排序，也没有任何特定的顺序。</b><br>
+ * 
+ * 如果类声明了带有相同参数类型的多个公共成员方法，则它们都会包含在返回的数组中。<br>
+ * 如果此 Class 对象表示没有公共成员方法的类或接口，或者表示一个基本类型或 void，则此方法返回长度为 0 的数组。 <br>
+ * 类初始化方法<code>&lt;clinit&gt;</code> 不包含在返回的数组中。</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link Class#getDeclaredMethods()}</td>
+ * <td>
+ * 返回 Method 对象的一个数组，
+ * <p>
+ * 这些对象反映此 Class 对象表示的类或接口声明的所有方法，包括<span style="color:green">公共(public)、保护(protected)、默认（包）访问(default (package)
+ * access)和私有方法(private)</span>，但 <span style="color:red">不包括继承(inherited)</span>的方法。
+ * </p>
+ * 如果该类声明带有相同参数类型的多个公共成员方法，则它们都包含在返回的数组中。
+ * <p>
+ * <b>返回数组中的元素没有排序，也没有任何特定的顺序。</b>
+ * </p>
+ * 如果该类或接口不声明任何方法，或者此 Class 对象表示一个基本类型、一个数组类或 void，则此方法返回一个长度为 0 的数组。<br>
+ * 类初始化方法<code>&lt;clinit&gt;</code> 包含在返回数组中。<br>
+ * </td>
+ * </tr>
+ * </table>
+ * </blockquote>
  * 
  * @author feilong
  * @version 1.0.7 2014年7月15日 下午1:08:15
