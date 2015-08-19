@@ -16,6 +16,7 @@
 package com.feilong.core.tools.jsonlib;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,13 +40,16 @@ import net.sf.json.xml.XMLSerializer;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
+import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.core.tools.jsonlib.processor.DateJsonValueProcessor;
+import com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.core.tools.jsonlib.util.ArrayContainsPropertyNamesPropertyFilter;
 import com.feilong.core.tools.jsonlib.util.PropertyStrategyWrapper;
 import com.feilong.core.util.Validator;
@@ -131,6 +135,46 @@ public final class JsonUtil{
     //***************************format********************************************************
 
     // [start] format
+
+    /**
+     * 格式化一个对象里面所有的filed 的名字和值.
+     * 
+     * <h3>代码流程:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>如果field上 标识了 {@link SensitiveWords}注解，那么会使用 {@link SensitiveWordsJsonValueProcessor}混淆敏感数据的输出</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param obj
+     *            the obj
+     * @return the string
+     * @see com.feilong.core.lang.reflect.FieldUtil#getAllFieldNameAndValueMap(Object)
+     * @see org.apache.commons.lang3.reflect.FieldUtils#getFieldsListWithAnnotation(Class, Class)
+     * @since 1.4.0
+     */
+    public static String formatObjectFiledsNameAndValueMap(Object obj){
+        Map<String, Object> map = FieldUtil.getAllFieldNameAndValueMap(obj);
+
+        //*****************************************************************************
+        List<Field> fieldsListWithAnnotation = FieldUtils.getFieldsListWithAnnotation(obj.getClass(), SensitiveWords.class);
+
+        JsonFormatConfig jsonFormatConfig = null;
+        if (Validator.isNotNullOrEmpty(fieldsListWithAnnotation)){
+            SensitiveWordsJsonValueProcessor sensitiveWordsJsonValueProcessor = new SensitiveWordsJsonValueProcessor();
+
+            Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+            for (Field field : fieldsListWithAnnotation){
+                propertyNameAndJsonValueProcessorMap.put(field.getName(), sensitiveWordsJsonValueProcessor);
+            }
+
+            jsonFormatConfig = new JsonFormatConfig();
+            jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+        }
+
+        return format(map, jsonFormatConfig);
+    }
 
     /**
      * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.
@@ -507,8 +551,8 @@ public final class JsonUtil{
      * @param json
      *            the json
      * @return the JSON array
-     * @since 1.4.0
      * @see net.sf.json.JSONArray#fromObject(Object)
+     * @since 1.4.0
      */
     private static JSONArray toJSONArray(String json){
         return toJSONArray(json, new JsonConfig());
@@ -537,8 +581,8 @@ public final class JsonUtil{
      * @param json
      *            the json
      * @return the JSON object
-     * @since 1.4.0
      * @see net.sf.json.JSONObject#fromObject(Object)
+     * @since 1.4.0
      */
     private static JSONObject toJSONObject(String json){
         return toJSONObject(json, new JsonConfig());
@@ -552,8 +596,8 @@ public final class JsonUtil{
      * @param useJsonConfig
      *            the use json config
      * @return the JSON object
-     * @since 1.4.0
      * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
+     * @since 1.4.0
      */
     private static JSONObject toJSONObject(Object obj,JsonConfig useJsonConfig){
         //Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.

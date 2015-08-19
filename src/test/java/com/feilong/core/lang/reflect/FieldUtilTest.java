@@ -15,10 +15,14 @@
  */
 package com.feilong.core.lang.reflect;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.date.TimeInterval;
+import com.feilong.core.io.MimeType;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 
@@ -39,8 +43,8 @@ public class FieldUtilTest{
      */
     @Test
     public void testGetStaticProperty(){
-        LOGGER.info("" + FieldUtil.getStaticProperty("com.feilong.core.io.ImageType", "JPG"));
-        LOGGER.info("" + FieldUtil.getStaticProperty("com.feilong.core.io.IOConstants", "GB"));
+        assertEquals(MimeType.JPG.getExtension(), FieldUtil.getStaticProperty("com.feilong.core.io.ImageType", "JPG"));
+        assertEquals(TimeInterval.SECONDS_PER_WEEK, FieldUtil.getStaticProperty("com.feilong.core.date.TimeInterval", "SECONDS_PER_WEEK"));
     }
 
     /**
@@ -54,6 +58,6 @@ public class FieldUtilTest{
     @Test
     public void testGetFieldValueMap() throws IllegalAccessException{
         User user = new User(12L);
-        LOGGER.info(JsonUtil.format(FieldUtil.getFieldValueMap(user)));
+        LOGGER.info(JsonUtil.format(FieldUtil.getAllFieldNameAndValueMap(user)));
     }
 }

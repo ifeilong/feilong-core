@@ -15,9 +15,12 @@
  */
 package com.feilong.core.lang.reflect;
 
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -29,12 +32,63 @@ import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.util.Validator;
 
 /**
- * Utilities for working with Fields by reflection. <br>
+ * Utilities for working with Fields by reflection.
+ * 
+ * <p>
  * Adapted and refactored from the dormant [reflect] Commons sandbox component.
+ * </p>
  * 
  * The ability is provided to break the scoping restrictions coded by the programmer.<br>
  * This can allow fields to be changed that shouldn't be.
  * This facility should be used with care.
+ * 
+ * <h3>和Field相关的几个方法的区别:</h3>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link Class#getDeclaredFields()}</td>
+ * <td>返回 Field 对象的一个数组，这些对象反映此 Class 对象所表示的类或接口所声明的<span style="color:green">所有字段</span>。
+ * <p>
+ * 包括<span style="color:green">公共、保护、默认（包）访问和私有字段</span>， <span style="color:red">但不包括继承的字段</span>。
+ * </p>
+ * <b>返回数组中的元素没有排序，也没有任何特定的顺序。</b><br>
+ * 如果该类或接口不声明任何字段，或者此 Class 对象表示一个基本类型、一个数组类或 void，则此方法返回一个长度为 0 的数组。</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link Class#getFields()}</td>
+ * <td>返回一个包含某些 Field 对象的数组，这些对象反映此 Class 对象所表示的类或接口的所有 <span style="color:red">可访问公共字段</span>。
+ * 
+ * <p>
+ * 特别地，如果该 Class 对象表示一个类，则此方法返回<span style="color:red">该类及其所有超类的公共字段</span>。<br>
+ * 如果该 Class 对象表示一个接口，则此方法返回<span style="color:red">该接口及其所有超接口的公共字段</span>。
+ * </p>
+ * 
+ * <b>返回数组中的元素没有排序，也没有任何特定的顺序。</b><br>
+ * 如果类或接口没有可访问的公共字段，或者表示一个数组类、一个基本类型或 void，则此方法返回长度为 0 的数组。 <br>
+ * 该方法不反映数组类的隐式长度字段。用户代码应使用 Array 类的方法来操作数组。</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link Class#getDeclaredField(String)}</td>
+ * <td>返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段。<br>
+ * name 参数是一个 String，它指定所需字段的简称。<br>
+ * 注意，此方法不反映数组类的 length 字段。</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link Class#getField(String)}</td>
+ * <td>返回一个 Field 对象，它反映此 Class 对象所表示的类或接口的指定公共成员字段。name 参数是一个 String，用于指定所需字段的简称。 <br>
+ * 要反映的字段由下面的算法确定。设 C 为此对象所表示的类： <br>
+ * 如果 C 声明一个带有指定名的公共字段，则它就是要反映的字段。 <br>
+ * 如果在第 1 步中没有找到任何字段，则该算法被递归地应用于 C 的每一个直接超接口。直接超接口按其声明顺序进行搜索。 <br>
+ * 如果在第 1、2 两步没有找到任何字段，且 C 有一个超类 S，则在 S 上递归调用该算法。如果 C 没有超类，则抛出 NoSuchFieldException。<br>
+ * </td>
+ * </tr>
+ * </table>
+ * </blockquote>
  * 
  * @author feilong
  * @version 1.0.7 2014年7月15日 下午1:08:15
@@ -63,13 +117,13 @@ public final class FieldUtil{
      * @param obj
      *            the obj
      * @return the field value map,key是 fieldName，value 是值
-     * @see #getDeclaredFields(Object)
-     * @see #getFieldValueMap(Object, String[])
+     * @see #getAllFields(Object)
+     * @see #getAllFieldNameAndValueMap(Object, String[])
      * @see java.lang.reflect.Modifier#isPrivate(int)
      * @see java.lang.reflect.Modifier#isStatic(int)
      */
-    public static Map<String, Object> getFieldValueMap(Object obj){
-        return getFieldValueMap(obj, null);
+    public static Map<String, Object> getAllFieldNameAndValueMap(Object obj){
+        return getAllFieldNameAndValueMap(obj, null);
     }
 
     /**
@@ -80,16 +134,61 @@ public final class FieldUtil{
      * @param excludeFieldNames
      *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
      * @return the field value map
+     * @see #getAllFieldList(Object, String[])
+     * @see org.apache.commons.lang3.reflect.MemberUtils#setAccessibleWorkaround(AccessibleObject)
      */
-    public static Map<String, Object> getFieldValueMap(Object obj,String[] excludeFieldNames){
-        // 获得一个对象所有的声明字段(包括私有的,继承的)
-        Field[] fields = getDeclaredFields(obj);
+    public static Map<String, Object> getAllFieldNameAndValueMap(Object obj,String[] excludeFieldNames){
+        List<Field> fieldList = getAllFieldList(obj, excludeFieldNames);
 
-        if (Validator.isNullOrEmpty(fields)){
+        if (Validator.isNullOrEmpty(fieldList)){
             return Collections.emptyMap();
         }
-
         Map<String, Object> map = new TreeMap<String, Object>();
+        for (Field field : fieldList){
+            //XXX see org.apache.commons.lang3.reflect.MemberUtils.setAccessibleWorkaround(AccessibleObject)
+            field.setAccessible(true);
+            try{
+                map.put(field.getName(), field.get(obj));
+            }catch (Exception e){
+                LOGGER.error(e.getClass().getName(), e);
+                throw new ReflectException(e);
+            }
+        }
+        return map;
+    }
+
+    /**
+     * 获得这个对象排除某些field之后的字段list.
+     * 
+     * <h3>代码流程:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>{@code if isNullOrEmpty(fields)  return emptyList}</li>
+     * <li>获得一个对象所有的声明字段(包括私有的,继承的) {@link #getAllFields(Object)}</li>
+     * <li>排除掉 <code>excludeFieldNames</code></li>
+     * <li>去掉 {@link Modifier#isPrivate(int)} and {@link Modifier#isStatic(int)}</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param obj
+     *            the obj
+     * @param excludeFieldNames
+     *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
+     * @return the field value map
+     * @see #getAllFields(Object)
+     * @since 1.4.0
+     */
+    public static List<Field> getAllFieldList(Object obj,String[] excludeFieldNames){
+        // 获得一个对象所有的声明字段(包括私有的,继承的)
+        Field[] fields = getAllFields(obj);
+
+        if (Validator.isNullOrEmpty(fields)){
+            return Collections.emptyList();
+        }
+
+        List<Field> fieldList = new ArrayList<Field>();
+
         for (Field field : fields){
             String fieldName = field.getName();
 
@@ -103,17 +202,10 @@ public final class FieldUtil{
             LOGGER.debug("field name:[{}],modifiers:[{}],isPrivateAndStatic:[{}]", fieldName, modifiers, isPrivateAndStatic);
 
             if (!isPrivateAndStatic){
-                //XXX see org.apache.commons.lang3.reflect.MemberUtils.setAccessibleWorkaround(AccessibleObject)
-                field.setAccessible(true);
-                try{
-                    map.put(fieldName, field.get(obj));
-                }catch (Exception e){
-                    LOGGER.error(e.getClass().getName(), e);
-                    throw new ReflectException(e);
-                }
+                fieldList.add(field);
             }
         }
-        return map;
+        return fieldList;
     }
 
     /**
@@ -126,63 +218,25 @@ public final class FieldUtil{
      * @see java.lang.Class#getSuperclass()
      * @see java.lang.reflect.Field
      * @see org.apache.commons.lang3.ArrayUtils#addAll(boolean[], boolean...)
+     * 
+     * @see #getAllFields(Class)
      */
-    private static Field[] getDeclaredFields(Object obj){
+    private static Field[] getAllFields(Object obj){
         Class<?> klass = obj.getClass();
-        Class<?> superClass = klass.getSuperclass();
-
-        //返回Class对象所代表的类或接口中所有成员变量(不限于public)
-        Field[] fields = klass.getDeclaredFields();
-        do{
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("current class:[{}],super class:[{}]", klass.getName(), superClass.getName());
-            }
-            fields = ArrayUtils.addAll(fields, superClass.getDeclaredFields());
-            superClass = superClass.getSuperclass();
-
-        }while (null != superClass && superClass != Object.class);
-
-        return fields;
+        return getAllFields(klass);
     }
 
     /**
-     * 返回 Field 对象的一个数组，这些对象反映此 Class对象所表示的类或接口,声明的所有字段.
-     * 
-     * <pre>
-     * 包括public,protected,默认,private字段，
-     * 但不包括继承的字段.
-     * 
-     * 返回数组中的元素没有排序，也没有任何特定的顺序.
-     * 如果该类或接口不声明任何字段，或者此 Class 对象表示一个基本类型、一个数组类或 void，则此方法返回一个长度为 0 的数组.
-     * </pre>
-     * 
-     * @param clz
-     *            the clz
-     * @return 包括public,protected,默认,private字段，但不包括继承的字段.
-     * @see java.lang.Class#getDeclaredFields()
-     * @see #getFieldsNames(Field[])
+     * Gets all fields of the given class and its parents (if any)..
+     *
+     * @param klass
+     *            the klass
+     * @return the all fields
+     * @see org.apache.commons.lang3.reflect.FieldUtils#getAllFields(Class)
+     * @since 1.4.0
      */
-    public static String[] getDeclaredFieldNames(Class<?> clz){
-        Field[] declaredFields = clz.getDeclaredFields();
-        return getFieldsNames(declaredFields);
-    }
-
-    /**
-     * 反映此 Class 对象所表示的类或接口的所有可访问公共字段(public属性).<br>
-     * 元素没有排序，也没有任何特定的顺序<br>
-     * 如果类或接口没有可访问的公共字段，或者表示一个数组类、一个基本类型或 void，则此方法返回长度为 0 的数组. <br>
-     * 特别地，如果该 Class 对象表示一个类，则此方法返回该类及其所有超类的公共字段.<br>
-     * 如果该 Class 对象表示一个接口，则此方法返回该接口及其所有超接口的公共字段. <br>
-     * 
-     * @param clz
-     *            the clz
-     * @return the field names
-     * @see Class#getFields()
-     * @see #getFieldsNames(Field[])
-     */
-    public static String[] getFieldNames(Class<?> clz){
-        Field[] fields = clz.getFields();
-        return getFieldsNames(fields);
+    private static Field[] getAllFields(Class<?> klass){
+        return org.apache.commons.lang3.reflect.FieldUtils.getAllFields(klass);
     }
 
     /**
@@ -193,7 +247,7 @@ public final class FieldUtil{
      * @return 如果 fields isNullOrEmpty,返回 null;否则取field name,合为数组返回
      * @see java.lang.reflect.Field#getName()
      */
-    private static String[] getFieldsNames(Field[] fields){
+    public static String[] getFieldsNames(Field[] fields){
         if (Validator.isNullOrEmpty(fields)){
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
@@ -283,9 +337,9 @@ public final class FieldUtil{
      * <pre>
      * {@code
      * example1 :
-     * 获得 IOConstants类的 GB静态属性
-     * FieldUtil.getStaticProperty("com.feilong.core.io.IOConstants", "GB")
-     * 返回 :1073741824
+     * 
+     * FieldUtil.getStaticProperty("com.feilong.core.io.ImageType", "JPG")
+     * 返回 :jpg
      * }
      * </pre>
      *
