@@ -88,10 +88,11 @@ public final class ObjectUtil{
     }
 
     /**
-     * <p>
+     * 
      * Compares two objects for equality, where either one or both objects may be {@code null}.
-     * </p>
-     *
+     * 
+     * <p>
+     * 
      * <pre>
      * ObjectUtils.equals(null, null)                  = true
      * ObjectUtils.equals(null, "")                    = false
@@ -102,6 +103,8 @@ public final class ObjectUtil{
      * ObjectUtils.equals(Boolean.TRUE, Boolean.TRUE)  = true
      * ObjectUtils.equals(Boolean.TRUE, Boolean.FALSE) = false
      * </pre>
+     * 
+     * </p>
      *
      * @param object1
      *            the first object, may be {@code null}
