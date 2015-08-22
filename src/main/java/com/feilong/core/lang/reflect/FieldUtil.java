@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -278,11 +279,11 @@ public final class FieldUtil{
     }
 
     // [end]
-
+    //**********************************************************************************************
     // [start] Property
 
     /**
-     * 设置属性.
+     * 设置字段值.
      *
      * @param owner
      *            the owner
@@ -293,8 +294,11 @@ public final class FieldUtil{
      * @see java.lang.Object#getClass()
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#set(Object, Object)
+     * 
+     * @see org.apache.commons.lang3.reflect.FieldUtils#writeField(Field, Object, Object, boolean)
+     * @since 1.4.0
      */
-    public static void setProperty(Object owner,String fieldName,Object value){
+    public static void setFieldValue(Object owner,String fieldName,Object value){
         try{
             Class<?> ownerClass = owner.getClass();
             Field field = ownerClass.getField(fieldName);
@@ -305,8 +309,9 @@ public final class FieldUtil{
         }
     }
 
+    //**********************************************************************************************
     /**
-     * 得到某个对象的公共属性.
+     * 得到某个对象的公共字段值.
      *
      * @param <T>
      *            the generic type
@@ -318,21 +323,23 @@ public final class FieldUtil{
      * @see java.lang.Object#getClass()
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#get(Object)
+     * @since 1.4.0
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getProperty(Object owner,String fieldName){
+    public static <T> T getFieldValue(Object owner,String fieldName){
         try{
             Class<?> ownerClass = owner.getClass();
             Field field = ownerClass.getField(fieldName);
             return (T) field.get(owner);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
-            throw new ReflectException(e);
+            String formatMessage = Slf4jUtil.formatMessage("owner:[{}],fieldName:[{}]", owner, fieldName);
+            LOGGER.error(formatMessage + e.getClass().getName(), e);
+            throw new ReflectException(formatMessage, e);
         }
     }
 
     /**
-     * 得到某类的静态公共属性.
+     * 得到某类的静态公共字段值.
      * 
      * <pre>
      * {@code
@@ -346,23 +353,28 @@ public final class FieldUtil{
      * @param <T>
      *            the generic type
      * @param className
-     *            类名
+     *            类名,e.g com.feilong.core.io.ImageType
      * @param fieldName
-     *            属性名
+     *            字段名
      * @return 该属性对象
-     * @see com.feilong.core.lang.ClassUtil#loadClass(String)
+     * @see ClassUtil#loadClass(String)
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#get(Object)
+     * 
+     * @see org.apache.commons.lang3.reflect.FieldUtils#getField(Class, String)
+     * @since 1.4.0
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getStaticProperty(String className,String fieldName){
+    public static <T> T getStaticFieldValue(String className,String fieldName){
         try{
             Class<?> ownerClass = ClassUtil.loadClass(className);
+            // Field field = org.apache.commons.lang3.reflect.FieldUtils.getField(ownerClass, fieldName);
             Field field = ownerClass.getField(fieldName);
             return (T) field.get(ownerClass);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
-            throw new ReflectException(e);
+            String formatMessage = Slf4jUtil.formatMessage("className:[{}],fieldName:[{}]", className, fieldName);
+            LOGGER.error(formatMessage + e.getClass().getName(), e);
+            throw new ReflectException(formatMessage, e);
         }
     }
 

@@ -38,7 +38,7 @@ import com.feilong.core.util.Validator;
  * 这里使用偷懒的做法,调用了 {@link org.apache.commons.beanutils.ConvertUtilsBean#register(boolean, boolean, int) ConvertUtilsBean.register(boolean,
  * boolean, int)}方法<br>
  * 但是有后遗症,这是beanUtils核心公共的方法,可能会影响其他框架或者其他作者开发的代码<br>
- * 最正确的做法, 自定义的类,自己单独写 {@link org.apache.commons.beanutils.Converter},<br>
+ * 最正确的做法,自定义的类,自己单独写 {@link org.apache.commons.beanutils.Converter},<br>
  * 而 公共的类 比如 下面方法里面的类型:
  * </p>
  * 
@@ -71,7 +71,6 @@ import com.feilong.core.util.Validator;
  * 
  * LOGGER.debug(bub.getProperty(myObject, &quot;name&quot;));
  * LOGGER.debug(bub.getProperty(myObject, &quot;id&quot;));
- * 
  * </pre>
  * 
  * </blockquote>
@@ -128,10 +127,12 @@ public final class BeanUtil{
     }
 
     static{
-        //ConvertUtils.register(new DatePatternConverter(DatePattern.commonWithMillisecond), java.util.Date.class);
-        //ConvertUtils.register(new DatePatternConverter(DatePattern.commonWithMillisecond), java.sql.Date.class);
-        //ConvertUtils.register(new DatePatternConverter(DatePattern.commonWithMillisecond), java.sql.Timestamp.class);
-        //ConvertUtils.register(new BigDecimalConverter(null), java.math.BigDecimal.class);
+        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), java.util.Date.class);
+        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), java.sql.Date.class);
+        //        ConvertUtils.register(
+        //                        new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+        //                        java.sql.Timestamp.class);
+        //        ConvertUtils.register(new BigDecimalConverter(null), java.math.BigDecimal.class);
 
         boolean throwException = false;
         boolean defaultNull = true;
@@ -367,7 +368,7 @@ public final class BeanUtil{
      * ConvertUtils.register(converter, Date.class);
      * 
      * 或者 使用 内置的
-     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class); *
+     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), Date.class);
      * BeanUtil.copyProperty(b, a, &quot;date&quot;);
      * </pre>
      * 
@@ -389,7 +390,6 @@ public final class BeanUtil{
      * 
      * </blockquote>
      * 
-     *
      * @param toObj
      *            目标对象
      * @param fromObj
@@ -485,7 +485,6 @@ public final class BeanUtil{
      * 当然这3种类也可以组合使用啦！
      * //nest
      *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
-     * 
      * }
      * </pre>
      *

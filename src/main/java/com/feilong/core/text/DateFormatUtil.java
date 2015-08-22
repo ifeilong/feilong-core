@@ -24,7 +24,6 @@ import java.util.Locale;
 import com.feilong.core.util.Validator;
 
 /**
- * 
  * {@link DateFormat}是日期/时间格式化子类的抽象类.
  * <p>
  * 直接已知子类：{@link SimpleDateFormat}.
@@ -51,7 +50,7 @@ public class DateFormatUtil{
     // [start] format
 
     /**
-     * format 日期类型 格式化成字符串类型.
+     * format日期类型格式化成字符串类型.
      * 
      * <p>
      * 调用的是 {@link #format(Date, String, Locale)},locale使用 {@link Locale#getDefault()}.
@@ -69,7 +68,7 @@ public class DateFormatUtil{
     }
 
     /**
-     * format 日期类型 格式化成字符串类型.
+     * format日期类型格式化成字符串类型.
      * 
      * @param date
      *            the date
@@ -90,7 +89,7 @@ public class DateFormatUtil{
     // [start]parse
 
     /**
-     * parse 字符串类型转成日期类型.
+     * parse字符串类型转成日期类型.
      * 
      * <p>
      * 调用的是 {@link #parse(String, String, Locale)},locale使用 {@link Locale#getDefault()}
