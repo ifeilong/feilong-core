@@ -38,8 +38,10 @@ public final class ByteUtil{
     }
 
     /**
-     * 字节数组,转成小写的16进制字符串.<br>
-     * md5加密 使用这个.
+     * 字节数组,转成小写的16进制字符串.
+     * <p>
+     * md5加密使用这个.
+     * </p>
      * 
      * @param b
      *            the b
@@ -80,7 +82,9 @@ public final class ByteUtil{
     // XXX UpperCase
     // XXX LowerCase
     /**
-     * 字节转成16进制小写字符串.<br>
+     * 字节转成16进制小写字符串.
+     * 
+     * <p>
      * 
      * <pre>
      * {@code
@@ -90,6 +94,8 @@ public final class ByteUtil{
      *  byteToHexStringLowerCase(new Byte(127))====> 7f
      * }
      * </pre>
+     * 
+     * </p>
      * 
      * @param b
      *            the b

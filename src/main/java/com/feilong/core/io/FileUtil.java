@@ -45,7 +45,7 @@ import com.feilong.core.util.Validator;
  * </blockquote>
  * 
  * 
- * <h3>关于大小</h3>
+ * <h3>关于大小:</h3>
  * 
  * <blockquote>
  * <ul>
