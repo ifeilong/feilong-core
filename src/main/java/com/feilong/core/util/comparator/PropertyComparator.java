@@ -18,8 +18,6 @@ package com.feilong.core.util.comparator;
 import java.io.Serializable;
 import java.util.Comparator;
 
-import org.apache.commons.collections4.comparators.BooleanComparator;
-import org.apache.commons.collections4.comparators.ComparableComparator;
 import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
@@ -51,9 +49,11 @@ import com.feilong.core.bean.PropertyUtil;
  * @param <T>
  *            the generic type
  * @see "org.springframework.beans.support.PropertyComparator"
- * @see BooleanComparator
- * @see ReverseComparator
- * @see ComparableComparator
+ * @see org.apache.commons.collections4.comparators.BooleanComparator
+ * @see org.apache.commons.collections4.comparators.ReverseComparator
+ * @see org.apache.commons.collections4.comparators.ComparableComparator
+ * @see org.apache.commons.beanutils.BeanComparator
+ * @see org.apache.commons.collections.comparators.ComparableComparator
  * @since 1.2.0
  */
 public class PropertyComparator<T> implements Comparator<T>,Serializable{
@@ -64,7 +64,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     /** The Constant LOGGER. */
     private static final Logger LOGGER           = LoggerFactory.getLogger(PropertyComparator.class);
 
-    /** T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口. */
+    /** T对象中的属性名称,该属性的value 必须实现 {@link Comparable}接口. */
     private final String        propertyName;
 
     /**
@@ -91,8 +91,22 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * @see org.apache.commons.lang3.ObjectUtils#compare(Comparable, Comparable, boolean)
      */
     @Override
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     public int compare(T t1,T t2){
+        return innerCompare(t1, t2);
+    }
+
+    /**
+     * Inner compare.
+     *
+     * @param t1
+     *            the t1
+     * @param t2
+     *            the t2
+     * @return the int
+     * @since 1.4.0
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private int innerCompare(T t1,T t2){
         if (t1 == t2){
             return 0;
         }else if (null == t1){
