@@ -85,6 +85,9 @@ public abstract class BaseJsonTest{
         return user;
     }
 
+    /**
+     * Test performance.
+     */
     protected void testPerformance(){
         User user = DEFAULT_USER_FOR_JSON_TEST;
 
@@ -102,6 +105,14 @@ public abstract class BaseJsonTest{
         }
     }
 
+    /**
+     * Performance test.
+     *
+     * @param user
+     *            the user
+     * @param times
+     *            the times
+     */
     private void performanceTest(User user,int times){
         //String type = "jackson2 2";
         String type = getType();
@@ -114,8 +125,18 @@ public abstract class BaseJsonTest{
         LOGGER.info("[{}]{},use time:{}", type, times, DateExtensionUtil.getIntervalForView(beginDate, endDate));
     }
 
+    /**
+     * Performance method.
+     *
+     * @param user
+     *            the user
+     */
     protected abstract void performanceMethod(User user);
 
+    /**
+     * 获得 type.
+     *
+     * @return the type
+     */
     protected abstract String getType();
-
 }

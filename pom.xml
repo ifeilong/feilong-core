@@ -174,7 +174,6 @@
 			仅仅 统一下版本
 			feilong platform 不直接使用这个jar
 		-->
-		<!-- -->
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
@@ -182,21 +181,23 @@
 
 
 		<!-- java.lang.NoClassDefFoundError: nu/xom/Serializer -->
-		<!-- <dependency>
+		<!-- 使用 jsonlib xml功能的时候 需要这个 -->
+		<dependency>
 			<groupId>xom</groupId>
 			<artifactId>xom</artifactId>
 			<version>${version.xom}</version>
+			<optional>true</optional>
 			<exclusions>
-			<exclusion>
-			<artifactId>xml-apis</artifactId>
-			<groupId>xml-apis</groupId>
-			</exclusion>
-			<exclusion>
-			<artifactId>xercesImpl</artifactId>
-			<groupId>xerces</groupId>
-			</exclusion>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>xercesImpl</artifactId>
+					<groupId>xerces</groupId>
+				</exclusion>
 			</exclusions>
-			</dependency> -->
+		</dependency>
 
 		<!-- 这2个包的类在jdk1.6里自带有了，可能有冲突，如果你的运行环境是1.6的话就可以删掉这2个包 -->
 		<!--

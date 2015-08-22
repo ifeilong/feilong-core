@@ -35,7 +35,6 @@ import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.JSONUtils;
 import net.sf.json.util.PropertySetStrategy;
-import net.sf.json.xml.XMLSerializer;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ClassUtils;
@@ -912,79 +911,6 @@ public final class JsonUtil{
     }
 
     // [end]
-
-    //*******************************objectToXML*************************************************
-
-    // [start]objectToXML
-
-    /**
-     * 把json串、数组、集合(collection map)、实体Bean转换成XML<br>
-     * XMLSerializer API： http://json-lib.sourceforge.net/apidocs/net/sf/json/xml/XMLSerializer.html 具体实例请参考：<br>
-     * http://json-lib.sourceforge.net/xref-test/net/sf/json/xml/TestXMLSerializer_writes.html<br>
-     * http://json-lib.sourceforge.net/xref-test/net/sf/json/xml/TestXMLSerializer_writes.html
-     * 
-     * @param object
-     *            the object
-     * @return xml
-     * @see #objectToXML(Object, String)
-     */
-    public static String objectToXML(Object object){
-        return objectToXML(object, null);
-    }
-
-    /**
-     * Object to xml.
-     * <p>
-     * 缺点:
-     * </p>
-     * <ul>
-     * <li>不能去掉 {@code <?xml version="1.0" encoding="UTF-8"? >}</li>
-     * <li>不能格式化输出</li>
-     * <li>对于空元素,不能输出 {@code <additionalData></additionalData>} ,只能输出 {@code <additionalData/>}</li>
-     * </ul>
-     * 
-     * @param object
-     *            the object
-     * @param encoding
-     *            the encoding
-     * @return the string
-     * @see #toJSON(Object)
-     * @see net.sf.json.xml.XMLSerializer#write(JSON)
-     * @see net.sf.json.xml.XMLSerializer#write(JSON, String)
-     */
-    public static String objectToXML(Object object,String encoding){
-        JSON json = toJSON(object);
-        XMLSerializer xmlSerializer = new XMLSerializer();
-        // xmlSerializer.setRootName("outputPaymentPGW");
-        // xmlSerializer.setTypeHintsCompatibility(true);
-        // xmlSerializer.setSkipWhitespace(false);
-        // xmlSerializer.setTypeHintsEnabled(true);//是否保留元素类型标识，默认true
-        // xmlSerializer.setElementName("e");//设置元素标签，默认e
-        // xmlSerializer.setArrayName("a");//设置数组标签，默认a
-        // xmlSerializer.setObjectName("o");//设置对象标签，默认o
-        if (Validator.isNotNullOrEmpty(encoding)){
-            return xmlSerializer.write(json, encoding);
-        }
-        return xmlSerializer.write(json);
-
-    }
-
-    // [end]
-
-    // [start]xmlToJSON
-
-    /**
-     * XML转成json串.
-     * 
-     * @param xml
-     *            the xml
-     * @return String
-     * @see net.sf.json.xml.XMLSerializer#read(String)
-     */
-    public static JSON xmlToJSON(String xml){
-        XMLSerializer xmlSerializer = new XMLSerializer();
-        return xmlSerializer.read(xml);
-    }
 
     // [end]
 

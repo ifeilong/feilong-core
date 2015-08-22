@@ -37,10 +37,10 @@ import com.feilong.test.User;
  * @deprecated
  */
 @Deprecated
-public class JsonUtilXMLTest extends BaseJsonTest{
+public class JsonlibXmlUtilTest extends BaseJsonTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilXMLTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonlibXmlUtilTest.class);
 
     /**
      * list转XML void.
@@ -53,7 +53,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
         List list = new ArrayList();
         list.add(ps);
 
-        LOGGER.info(JsonUtil.objectToXML(list));
+        LOGGER.info(JsonlibXmlUtil.objectToXML(list));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e class="object"> <dateAttr type="string">2009-09-12 07:02:31</dateAttr> <name
          * type="string">get</name> </e> </a>
@@ -71,7 +71,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
         Set set = new LinkedHashSet();
         set.add(ps);
 
-        LOGGER.info(JsonUtil.objectToXML(set));
+        LOGGER.info(JsonlibXmlUtil.objectToXML(set));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e class="object"> <dateAttr type="string">2009-09-12 07:04:38</dateAttr> <name
          * type="string">get</name> </e> </a>
@@ -89,7 +89,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
         Map map = new HashMap();
         map.put("person1", ps);
 
-        LOGGER.info(JsonUtil.objectToXML(map));
+        LOGGER.info(JsonlibXmlUtil.objectToXML(map));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <o> <person1 class="object"> <dateAttr type="string">2009-09-12 07:08:35</dateAttr>
          * <name type="string">get</name> </person1> </o>
@@ -104,7 +104,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
         Person ps = new Person();
         ps.setDateAttr(new Date());
         ps.setName("get");
-        LOGGER.info(JsonUtil.objectToXML(ps));
+        LOGGER.info(JsonlibXmlUtil.objectToXML(ps));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <o> <dateAttr type="string">2009-09-12 07:13:02</dateAttr> <name
          * type="string">get</name> </o>
@@ -118,7 +118,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
     public void xmlToJson1(){
         String xml = "<o><dateAttr type='string'>2009-09-12 07:13:02</dateAttr><name type='string'>get</name></o>";
         // print: {"dateAttr":"2009-09-12 07:13:02","name":"get"}
-        LOGGER.info(JsonUtil.xmlToJSON(xml).toString(4, 4));
+        LOGGER.info(JsonlibXmlUtil.xmlToJSON(xml).toString(4, 4));
     }
 
     /**
@@ -128,7 +128,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
     public void xmlToJson2(){
         String xml = "<a class='array'><e class='object'><dateAttr type='string'>2009-09-12 07:04:38</dateAttr><name type='string'>get</name></e></a>";
         // print: [{"dateAttr":"2009-09-12 07:04:38","name":"get"}]
-        LOGGER.info(JsonUtil.xmlToJSON(xml).toString(4, 4));
+        LOGGER.info(JsonlibXmlUtil.xmlToJSON(xml).toString(4, 4));
     }
 
     /**
@@ -136,7 +136,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
      */
     @Test
     public void testGetXMLFromObj1(){
-        LOGGER.info(JsonUtil.objectToXML("{\"name\":\"json\",\"bool\":true,\"int\":1}"));
+        LOGGER.info(JsonlibXmlUtil.objectToXML("{\"name\":\"json\",\"bool\":true,\"int\":1}"));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <o> <bool type="boolean">true</bool> <int type="number">1</int> <name
          * type="string">json</name> </o>
@@ -148,7 +148,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
      */
     @Test
     public void testGetXMLFromObj2(){
-        LOGGER.info(JsonUtil.objectToXML("[1,2,3]"));
+        LOGGER.info(JsonlibXmlUtil.objectToXML("[1,2,3]"));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e type="number">1</e> <e type="number">2</e> <e type="number">3</e> </a>
          */
@@ -165,7 +165,7 @@ public class JsonUtilXMLTest extends BaseJsonTest{
         Person[] personArr = new Person[2];
         personArr[0] = ps;
 
-        LOGGER.info(JsonUtil.objectToXML(personArr));
+        LOGGER.info(JsonlibXmlUtil.objectToXML(personArr));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e class="object"> <dateAttr type="string">2009-09-12 06:58:55</dateAttr> <name
          * type="string">get</name> </e> </a>
@@ -179,8 +179,6 @@ public class JsonUtilXMLTest extends BaseJsonTest{
      */
     @Override
     protected void performanceMethod(User user){
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -190,7 +188,6 @@ public class JsonUtilXMLTest extends BaseJsonTest{
      */
     @Override
     protected String getType(){
-        // TODO Auto-generated method stub
         return null;
     }
 }
