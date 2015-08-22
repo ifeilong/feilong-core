@@ -18,7 +18,6 @@ package com.feilong.core.tools.jsonlib;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -73,7 +72,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         classMap.put("data", Person.class);
 
         MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
-        LOGGER.info(JsonUtil.toJSON(myBean).toString(4, 4));
+        LOGGER.info(JsonUtil.format(myBean));
     }
 
     /**
@@ -115,21 +114,6 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 把一个json数组串转换成普通数组 void.
-     */
-    @Test
-    public void toArray(){
-        String json = "['get',1,true,null]";
-        Object[] objArr = JsonUtil.toArray(json);
-        for (int i = 0; i < objArr.length; i++){
-            LOGGER.info(objArr[i].getClass() + " " + objArr[i]);
-        }
-        /*
-         * print: class java.lang.String get class java.lang.Integer 1 class java.lang.Boolean true class net.sf.json.JSONNull null
-         */
-    }
-
-    /**
      * 把一个json数组串转换成实体数组 void.
      */
     @Test
@@ -164,22 +148,6 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 把一个json数组串转换成存放普通类型元素的集合 void.
-     */
-    @Test
-    public void toList1(){
-        String json = "['get',1,true,null]";
-        List list = JsonUtil.toList(json);
-        for (int i = 0; i < list.size(); i++){
-            LOGGER.info(list.get(i).getClass() + " " + list.get(i));
-        }
-
-        /*
-         * print: class java.lang.String get class java.lang.Integer 1 class java.lang.Boolean true class net.sf.json.JSONNull null
-         */
-    }
-
-    /**
      * 把一个json数组串转换成集合，且集合里存放的为实例Bean void.
      */
     @Test
@@ -209,35 +177,12 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 把json对象串转换成map对象 void.
-     */
-    @Test
-    public void testGetMapFromJsonObjStr(){
-        String json = "{'name':'get','int':1,'double':1.1,'null':null}";
-
-        //        JSONObject jsonObj = JSONObject.fromObject(json);
-        //        Map<String, Object> map = (Map<String, Object>) JSONObject.toBean(jsonObj, Map.class);
-        Map<String, Object> map = JsonUtil.toMap(json);
-
-        for (Map.Entry<String, Object> entry : map.entrySet()){
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            LOGGER.info(key + ":" + value + ":" + value.getClass().getCanonicalName());
-        }
-        /*
-         * print: class java.lang.Double class net.sf.json.JSONNull class java.lang.Integer class java.lang.String
-         */
-
-    }
-
-    /**
      * 把json对象串转换成map对象，且map对象里存放的为其他实体Bean void.
      */
     @Test
     public void toMap(){
-        String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
+        String json = "{'data1':{'name':'get'},'data2':{'name':'set'},'null':{'name':'set'}}";
         Map<String, Person> map = JsonUtil.toMap(json, Person.class);
-
         LOGGER.info(JsonUtil.toJSON(map).toString(4, 4));
     }
 
@@ -259,7 +204,6 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         map.put("aa", map1);
         map.put("aaa", map1);
         LOGGER.info(JsonUtil.toJSON(map).toString(4, 4));
-        //LOGGER.info(JsonUtil.format(map,"a.b"));
     }
 
     /**
@@ -296,18 +240,11 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toMap3(){
         String json = "{'mybean':{'data':[{'name':'get'}]}}";
-        Map classMap = new HashMap();
+        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
         classMap.put("data", Person.class);
 
-        Map map = JsonUtil.toMap(json, MyBean.class, classMap);
-        for (Iterator iter = map.keySet().iterator(); iter.hasNext();){
-            String key = (String) iter.next();
-            Object o = ((MyBean) map.get(key)).getData().get(0);
-            LOGGER.info(o.getClass() + " name=" + ((Person) o).getName());
-        }
-        /*
-         * print: class comm.test.Person name=get
-         */
+        Map<String, MyBean> map = JsonUtil.toMap(json, MyBean.class, classMap);
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**

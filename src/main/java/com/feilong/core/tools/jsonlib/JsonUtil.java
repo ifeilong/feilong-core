@@ -74,7 +74,7 @@ import com.feilong.core.util.Validator;
  * </blockquote>
  * 
  * 
- * <h3>json-lib format map的时候</h3>
+ * <h3>json-lib format map的时候或者 json转成对象/数组/map等的时候</h3>
  * 
  * <blockquote>
  * <p>
@@ -189,7 +189,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 有些map 值很复杂，比如带有request信息， 这样的map转成json会抛异常
+     * 有些map 值很复杂，比如带有request信息， 这样的map转成json会抛异常.
      * 
      * 
      * <h3>注意:</h3>
@@ -228,8 +228,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 有些map 值很复杂，比如带有request信息， 这样的map转成json会抛异常
-     * 
+     * 有些map值很复杂，比如带有request信息， 这样的map转成json会抛异常.
      * 
      * <h3>注意:</h3>
      * 
@@ -244,8 +243,8 @@ public final class JsonUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>如果value 是isPrimitiveOrWrapper类型， 那么会直接取到值 设置到 新的simpleMap中</li>
-     * <li>否则 使用 {@link String#valueOf(Object)} 转换到simpleMap中</li>
+     * <li>如果value是isPrimitiveOrWrapper类型， 那么会直接取到值设置到新的simpleMap中</li>
+     * <li>否则使用{@link String#valueOf(Object)} 转换到simpleMap中</li>
      * </ul>
      * </blockquote>.
      *
@@ -561,14 +560,14 @@ public final class JsonUtil{
      * To json array.
      *
      * @param obj
-     *            the obj
+     *            Accepts JSON formatted strings, arrays, Collections and Enums.
      * @param useJsonConfig
      *            the use json config
      * @return the JSON array
+     * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
      * @since 1.4.0
      */
     private static JSONArray toJSONArray(Object obj,JsonConfig useJsonConfig){
-        //Accepts JSON formatted strings, arrays, Collections and Enums.
         return JSONArray.fromObject(obj, useJsonConfig);
     }
 
@@ -591,7 +590,7 @@ public final class JsonUtil{
      * To json object.
      *
      * @param obj
-     *            the obj
+     *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans
      * @param useJsonConfig
      *            the use json config
      * @return the JSON object
@@ -599,7 +598,6 @@ public final class JsonUtil{
      * @since 1.4.0
      */
     private static JSONObject toJSONObject(Object obj,JsonConfig useJsonConfig){
-        //Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans.
         return JSONObject.fromObject(obj, useJsonConfig);
     }
 
@@ -615,93 +613,8 @@ public final class JsonUtil{
         return null == jsonConfig ? DEFAULT_JSON_CONFIG : jsonConfig;
     }
 
-    // [start]toBean
-
-    /**
-     * json串,转换成实体对象.
-     *
-     * @param <T>
-     *            the generic type
-     * @param json
-     *            e.g. {'name':'get','dateAttr':'2009-11-12'}<br>
-     *            可以是 json字符串,也可以是JSONObject<br>
-     *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans. <br>
-     *            支持的格式有: {@link JSONObject#fromObject(Object, JsonConfig)}
-     * @param rootClass
-     *            e.g. Person.class
-     * @return the t
-     */
-    public static <T> T toBean(Object json,Class<T> rootClass){
-        return toBean(json, rootClass, null);
-    }
-
-    /**
-     * 从json串转换成实体对象，并且实体集合属性存有另外实体Bean.
-     *
-     * @param <T>
-     *            the generic type
-     * @param json
-     *            e.g. {'data':[{'name':'get'},{'name':'set'}]}
-     * @param rootClass
-     *            e.g. MyBean.class
-     * @param classMap
-     *            e.g. classMap.put("data", Person.class)
-     * @return Object
-     * @see #toBean(Object, JsonConfig)
-     */
-    // TODO
-    @SuppressWarnings("unchecked")
-    public static <T> T toBean(Object json,Class<T> rootClass,Map<String, Class<?>> classMap){
-        JSONObject jsonObject = JSONObject.fromObject(json);
-
-        JsonConfig jsonConfig = getDefaultJsonConfig();
-        jsonConfig.setRootClass(rootClass);
-
-        if (Validator.isNotNullOrEmpty(classMap)){
-            jsonConfig.setClassMap(classMap);
-        }
-        return (T) toBean(jsonObject, jsonConfig);
-    }
-
-    /**
-     * json串,转换成对象.
-     *
-     * @param json
-     *            the json
-     * @param jsonConfig
-     *            the json config
-     * @return the object
-     * @see net.sf.json.JSONObject#toBean(JSONObject, JsonConfig)
-     */
-    public static Object toBean(Object json,JsonConfig jsonConfig){
-        JSONObject jsonObject = JSONObject.fromObject(json);
-
-        // Ignore missing properties with Json-Lib
-
-        // 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class
-        // com.baozun.trade.web.controller.payment.result.command.PaymentResultEntity' 异常
-        jsonConfig.setPropertySetStrategy(new PropertyStrategyWrapper(PropertySetStrategy.DEFAULT));
-        return JSONObject.toBean(jsonObject, jsonConfig);
-    }
-
-    // [end]
-
     // *****************************Array******************************************************
     // [start]toArray
-
-    /**
-     * 把一个json数组串转换成普通数组.
-     *
-     * @param json
-     *            e.g. ['get',1,true,null]
-     * @return Object[]
-     * @see net.sf.json.JSONArray#fromObject(Object)
-     * @see net.sf.json.JSONArray#toArray()
-     */
-    public static Object[] toArray(String json){
-        JSONArray jsonArray = toJSONArray(json);
-        return jsonArray.toArray();
-    }
 
     /**
      * 把一个json数组串,转换成实体数组.
@@ -756,27 +669,6 @@ public final class JsonUtil{
     // [start]toList
 
     /**
-     * 把一个json数组串转换成存放普通类型元素的集合.
-     *
-     * @param json
-     *            e.g. ['get',1,true,null]
-     * @return List
-     * @see net.sf.json.JSONArray#get(int)
-     */
-    public static List<Object> toList(String json){
-        JSONArray jsonArray = toJSONArray(json);
-        int size = jsonArray.size();
-
-        List<Object> list = new ArrayList<Object>();
-
-        for (int i = 0; i < size; i++){
-            Object e = jsonArray.get(i);
-            list.add(e);
-        }
-        return list;
-    }
-
-    /**
      * 把一个json数组串转换成集合，且集合里存放的为实例Bean.
      *
      * @param <T>
@@ -808,13 +700,11 @@ public final class JsonUtil{
      * @see net.sf.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, Class, Map)
      */
-    // TODO
     public static <T> List<T> toList(String json,Class<T> clazz,Map<String, Class<?>> classMap){
-        JSONArray jsonArray = toJSONArray(json);
         List<T> list = new ArrayList<T>();
 
-        int size = jsonArray.size();
-        for (int i = 0; i < size; i++){
+        JSONArray jsonArray = toJSONArray(json);
+        for (int i = 0, j = jsonArray.size(); i < j; i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             list.add(toBean(jsonObject, clazz, classMap));
         }
@@ -826,35 +716,6 @@ public final class JsonUtil{
     // ********************************Map******************************************************
 
     // [start]toMap
-
-    /**
-     * 把json对象串转换成map对象.
-     *
-     * @param json
-     *            e.g. {'name':'get','int':1,'double',1.1,'null':null}
-     * @return Map
-     * @see net.sf.json.JSONObject#get(String)
-     * @see net.sf.json.JSONObject#fromObject(Object)
-     */
-    public static Map<String, Object> toMap(String json){
-        JSONObject jsonObject = toJSONObject(json);
-
-        //TODO 处理不了key 是 null 的情况
-        //java.lang.ClassCastException: net.sf.json.JSONNull cannot be cast to java.lang.String
-        //Map<String, Object> map = (Map<String, Object>) JSONObject.toBean(jsonObject, Map.class);
-
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        @SuppressWarnings("unchecked")
-        Iterator<String> keys = jsonObject.keys();
-
-        while (keys.hasNext()){
-            String key = keys.next();
-            Object value = jsonObject.get(key);
-            map.put(key, value);
-        }
-        return map;
-    }
 
     /**
      * 把json对象串转换成map对象，且map对象里存放的为其他实体Bean.
@@ -887,24 +748,18 @@ public final class JsonUtil{
      * @see net.sf.json.JSONObject#keys()
      * @see #toBean(Object, Class, Map)
      */
-    // TODO
     public static <T> Map<String, T> toMap(String json,Class<T> clazz,Map<String, Class<?>> classMap){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("in json:{}", json);
-        }
-
-        JSONObject jsonObject = toJSONObject(json);
+        LOGGER.debug("in json:{}", json);
 
         Map<String, T> map = new HashMap<String, T>();
+
+        JSONObject jsonObject = toJSONObject(json);
         @SuppressWarnings("unchecked")
         Iterator<String> keys = jsonObject.keys();
-
         while (keys.hasNext()){
             String key = keys.next();
             Object value = jsonObject.get(key);
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("key:{} value:{}", key, value);
-            }
+            LOGGER.debug("key:[{}], value:{}", key, value);
             map.put(key, toBean(value, clazz, classMap));
         }
         return map;
@@ -912,8 +767,79 @@ public final class JsonUtil{
 
     // [end]
 
-    // [end]
+    //***********************************************************************************
+    // [start]toBean
 
+    /**
+     * json串,转换成实体对象.
+     *
+     * @param <T>
+     *            the generic type
+     * @param json
+     *            e.g. {'name':'get','dateAttr':'2009-11-12'}<br>
+     *            可以是 json字符串,也可以是JSONObject<br>
+     *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans. <br>
+     *            支持的格式有: {@link JSONObject#fromObject(Object, JsonConfig)}
+     * @param rootClass
+     *            e.g. Person.class
+     * @return the t
+     */
+    public static <T> T toBean(Object json,Class<T> rootClass){
+        return toBean(json, rootClass, null);
+    }
+
+    /**
+     * 从json串转换成实体对象，并且实体集合属性存有另外实体Bean.
+     *
+     * @param <T>
+     *            the generic type
+     * @param json
+     *            e.g. {'data':[{'name':'get'},{'name':'set'}]}
+     * @param rootClass
+     *            e.g. MyBean.class
+     * @param classMap
+     *            e.g. classMap.put("data", Person.class)
+     * @return Object
+     * @see #toBean(Object, JsonConfig)
+     */
+    public static <T> T toBean(Object json,Class<T> rootClass,Map<String, Class<?>> classMap){
+        JSONObject jsonObject = JSONObject.fromObject(json);
+
+        JsonConfig jsonConfig = getDefaultJsonConfig();
+        jsonConfig.setRootClass(rootClass);
+
+        if (Validator.isNotNullOrEmpty(classMap)){
+            jsonConfig.setClassMap(classMap);
+        }
+        return toBean(jsonObject, jsonConfig);
+    }
+
+    /**
+     * json串,转换成对象.
+     *
+     * @param <T>
+     *            the generic type
+     * @param json
+     *            the json
+     * @param jsonConfig
+     *            the json config
+     * @return the object
+     * @see net.sf.json.JSONObject#toBean(JSONObject, JsonConfig)
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T toBean(Object json,JsonConfig jsonConfig){
+        JSONObject jsonObject = JSONObject.fromObject(json);
+
+        // Ignore missing properties with Json-Lib
+
+        // 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class
+        // com.baozun.trade.web.controller.payment.result.command.PaymentResultEntity' 异常
+        jsonConfig.setPropertySetStrategy(new PropertyStrategyWrapper(PropertySetStrategy.DEFAULT));
+        return (T) JSONObject.toBean(jsonObject, jsonConfig);
+    }
+
+    // [end]
+    //***********************************************************************************
     /**
      * 默认的JsonConfig.
      *
