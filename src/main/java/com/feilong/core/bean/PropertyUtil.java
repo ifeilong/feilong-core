@@ -119,7 +119,7 @@ public final class PropertyUtil{
      *
      * @param bean
      *            Bean whose property is to be modified
-     * @param name
+     * @param propertyName
      *            Possibly indexed and/or nested name of the property to be modified
      * @param value
      *            Value to which this property is to be set
@@ -127,11 +127,11 @@ public final class PropertyUtil{
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
      * @see com.feilong.core.bean.BeanUtil#setProperty(Object, String, Object)
      */
-    public static void setProperty(Object bean,String name,Object value){
+    public static void setProperty(Object bean,String propertyName,Object value){
         try{
             //Set the value of the specified property of the specified bean, no matter which property reference format is used, with no type conversions.
             // PropertyUtils的功能类似于BeanUtils,但在底层不会对传递的数据做转换处理
-            PropertyUtils.setProperty(bean, name, value);
+            PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
@@ -192,7 +192,7 @@ public final class PropertyUtil{
      *            the generic type
      * @param bean
      *            Bean whose property is to be extracted
-     * @param name
+     * @param propertyName
      *            Possibly indexed and/or nested name of the property to be extracted
      * @return 使用{@link PropertyUtils#getProperty(Object, String)} 从对象中取得属性值
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
@@ -201,11 +201,11 @@ public final class PropertyUtil{
      * @see org.apache.commons.beanutils.PropertyUtilsBean
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getProperty(Object bean,String name){
+    public static <T> T getProperty(Object bean,String propertyName){
         //Return the value of the specified property of the specified bean, no matter which property reference format is used, with no type conversions.
         //For more details see PropertyUtilsBean.
         try{
-            return (T) PropertyUtils.getProperty(bean, name);
+            return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
