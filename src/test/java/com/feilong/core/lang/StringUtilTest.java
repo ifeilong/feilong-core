@@ -150,7 +150,7 @@ public class StringUtilTest{
      */
     @Test
     public void toHexStringUpperCase(){
-        LOGGER.info(StringUtil.toHexStringUpperCase(TEXT));
+        LOGGER.info(StringUtil.toHexStringUpperCase(TEXT, CharsetType.UTF8));
     }
 
     /**
@@ -162,7 +162,7 @@ public class StringUtilTest{
         hexStringUpperCase = "5B7B22636F6465223A224B3034383031222C226964223A3730302C226E616D65223A22E697B6E5B09AE6ACBEE992A5E58C99E689A3227D2C7B22636F6465223A2231333433363143222C226964223A35362C226E616D65223A22E58AB2E985B7E688B7E5A496436875636B205461796C6F7220416C6C2053746172204261636B205A6970227D5D";
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
         LOGGER.info(new String(hexBytesToBytes));
-        LOGGER.info(StringUtil.toOriginal(hexStringUpperCase));
+        LOGGER.info(StringUtil.toOriginal(hexStringUpperCase, CharsetType.UTF8));
     }
 
     /**

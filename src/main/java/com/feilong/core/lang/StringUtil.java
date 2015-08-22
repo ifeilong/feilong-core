@@ -995,22 +995,8 @@ public final class StringUtil{
      * 
      * @param original
      *            原始字符串
-     * @return the string
-     * @see #toHexStringUpperCase(String, String)
-     * @deprecated will move
-     */
-    @Deprecated
-    public static String toHexStringUpperCase(String original){
-        return toHexStringUpperCase(original, Charset.defaultCharset().name());
-    }
-
-    /**
-     * 将原始字符串 转成 大写的HexString 网友gdpglc的思路.
-     * 
-     * @param original
-     *            原始字符串
      * @param charsetName
-     *            字符集 {@link CharsetType}
+     *            字符集,you can use {@link CharsetType}
      * @return the string
      * @see ByteUtil#bytesToHexStringUpperCase(byte[])
      * @deprecated will move
@@ -1018,22 +1004,8 @@ public final class StringUtil{
     @Deprecated
     public static String toHexStringUpperCase(String original,String charsetName){
         String hexStringUpperCase = ByteUtil.bytesToHexStringUpperCase(getBytes(original, charsetName));
-        LOGGER.debug("original:{},hexStringUpperCase:{}", original, hexStringUpperCase);
+        LOGGER.debug("original:[{}],hexStringUpperCase:[{}]", original, hexStringUpperCase);
         return hexStringUpperCase;
-    }
-
-    /**
-     * 将 转成 大写的HexString原始字符串.
-     * 
-     * @param hexStringUpperCase
-     *            大写的HexString
-     * @return the string
-     * @see #toOriginal(String, String)
-     * @deprecated will move
-     */
-    @Deprecated
-    public static String toOriginal(String hexStringUpperCase){
-        return toOriginal(hexStringUpperCase, Charset.defaultCharset().name());
     }
 
     /**
@@ -1042,7 +1014,7 @@ public final class StringUtil{
      * @param hexStringUpperCase
      *            the hex string upper case
      * @param charsetName
-     *            指定字符集
+     *            指定字符集,you can use {@link CharsetType}
      * @return the string
      * @see ByteUtil#hexBytesToBytes(byte[])
      * @deprecated will move
@@ -1051,7 +1023,7 @@ public final class StringUtil{
     public static String toOriginal(String hexStringUpperCase,String charsetName){
         byte[] hexBytesToBytes = ByteUtil.hexBytesToBytes(hexStringUpperCase.getBytes());
         String original = newString(hexBytesToBytes, charsetName);
-        LOGGER.debug("hexStringUpperCase:{},original:{}", hexStringUpperCase, original);
+        LOGGER.debug("hexStringUpperCase:[{}],original:[{}]", hexStringUpperCase, original);
         return original;
     }
     // [end]

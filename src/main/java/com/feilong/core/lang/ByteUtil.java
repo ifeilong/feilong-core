@@ -54,8 +54,10 @@ public final class ByteUtil{
     }
 
     /**
-     * 字节数组,转成大写的16进制字符串 .<br>
+     * 字节数组,转成大写的16进制字符串 .
+     * <p>
      * 网友gdpglc的思路.
+     * </p>
      * 
      * @param bytes
      *            the bytes
