@@ -43,7 +43,7 @@ import com.feilong.core.util.Validator;
  * This can allow fields to be changed that shouldn't be.
  * This facility should be used with care.
  * 
- * <h3>和Field相关的几个方法的区别:</h3>
+ * <h3>和 {@link Field} 相关的几个方法的区别:</h3>
  * 
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4">
@@ -97,7 +97,6 @@ import com.feilong.core.util.Validator;
  * @see "org.springframework.util.ReflectionUtils"
  * @since 1.0.7
  */
-//TODO 改写这里面的方法
 public final class FieldUtil{
 
     /** The Constant LOGGER. */
@@ -260,18 +259,20 @@ public final class FieldUtil{
     }
 
     /**
-     * 返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段.
+     * 返回一个 Field对象，该对象反映此 Class对象所表示的类或接口的指定已声明字段.
      *
      * @param clz
      *            clz
-     * @param name
-     *            属性名称
+     * @param fieldName
+     *            字段名称
      * @return 返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段
      * @see java.lang.Class#getDeclaredField(String)
+     * @see org.apache.commons.lang3.reflect.FieldUtils#getDeclaredField(Class, String)
+     * @see org.apache.commons.lang3.reflect.FieldUtils#getDeclaredField(Class, String, boolean)
      */
-    public static Field getDeclaredField(Class<?> clz,String name){
+    public static Field getDeclaredField(Class<?> clz,String fieldName){
         try{
-            return clz.getDeclaredField(name);
+            return clz.getDeclaredField(fieldName);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
@@ -319,7 +320,7 @@ public final class FieldUtil{
      *            the owner
      * @param fieldName
      *            the field name
-     * @return 该属性对象
+     * @return 该字段对象
      * @see java.lang.Object#getClass()
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#get(Object)
@@ -356,7 +357,7 @@ public final class FieldUtil{
      *            类名,e.g com.feilong.core.io.ImageType
      * @param fieldName
      *            字段名
-     * @return 该属性对象
+     * @return 该字段对象
      * @see ClassUtil#loadClass(String)
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#get(Object)
