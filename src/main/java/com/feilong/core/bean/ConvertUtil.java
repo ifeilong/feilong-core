@@ -284,6 +284,8 @@ public final class ConvertUtil{
         return bigDecimalConverter.convert(BigDecimal.class, toBeConvertedValue);
     }
 
+    //*************************************************************************************************
+
     /**
      * 把对象转换成字符串.
      * 
@@ -378,6 +380,77 @@ public final class ConvertUtil{
         Object[] array = toArray(collection, Object.class);
         return toString(toStringConfig, array);
     }
+
+    /**
+     * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
+     * 
+     * <p style="color:green">
+     * 支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays
+     * </p>
+     * 
+     * <code>
+     * <pre>
+     * Example 1:
+     * ArrayUtil.toString(new ToStringConfig(),"a","b")  return "a,b"
+     * 
+     * Example 2:
+     * ToStringConfig toStringConfig=new ToStringConfig(",");
+     * toStringConfig.setIsJoinNullOrEmpty(false);
+     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)  return "a,b"
+     * 
+     * Example 3:
+     * int[] ints = { 2, 1 };
+     * ArrayUtil.toString(new ToStringConfig(),ints) return "2,1"
+     * </pre>
+     * </code>
+     *
+     * @param <T>
+     *            the generic type
+     * @param toStringConfig
+     *            the join string entity
+     * @param arrays
+     *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
+     * @return <ul>
+     *         <li>如果 arrays 是null 或者Empty ,返回null</li>
+     *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
+     *         </ul>
+     * @see org.apache.commons.lang3.builder.ToStringStyle
+     * @since 1.4.0
+     */
+    public static <T> String toString(ToStringConfig toStringConfig,T...arrays){
+        if (Validator.isNullOrEmpty(arrays)){
+            return StringUtils.EMPTY;
+        }
+
+        //************************************************************************
+        ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
+        Object[] operateArray = toObjects(arrays);
+        String connector = useToStringConfig.getConnector();
+        //************************************************************************
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, j = operateArray.length; i < j; ++i){
+            @SuppressWarnings("unchecked")
+            T t = (T) operateArray[i];
+
+            //如果是null 或者 empty，但是参数值是不拼接，那么跳过,继续循环
+            if (Validator.isNullOrEmpty(t) && !useToStringConfig.getIsJoinNullOrEmpty()){
+                continue;
+            }
+            //value转换, 注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            sb.append(null == t ? StringUtils.EMPTY : "" + t); //see StringUtils.defaultString(t)
+
+            if (null != connector){//注意可能传过来的是换行符 不能使用Validator.isNullOrEmpty来判断
+
+                //放心大胆的拼接 connector, 不判断是否是最后一个,最后会截取
+                sb.append(connector);
+            }
+        }
+
+        return StringUtil.substringWithoutLast(sb, connector);
+    }
+
+    //**********************************************************************************************
 
     /**
      * 将集合转成枚举.
@@ -480,75 +553,6 @@ public final class ConvertUtil{
 
         //注意，toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
         return collection.toArray(array);
-    }
-
-    /**
-     * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
-     * 
-     * <p style="color:green">
-     * 支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays
-     * </p>
-     * 
-     * <code>
-     * <pre>
-     * Example 1:
-     * ArrayUtil.toString(new ToStringConfig(),"a","b")  return "a,b"
-     * 
-     * Example 2:
-     * ToStringConfig toStringConfig=new ToStringConfig(",");
-     * toStringConfig.setIsJoinNullOrEmpty(false);
-     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)  return "a,b"
-     * 
-     * Example 3:
-     * int[] ints = { 2, 1 };
-     * ArrayUtil.toString(new ToStringConfig(),ints) return "2,1"
-     * </pre>
-     * </code>
-     *
-     * @param <T>
-     *            the generic type
-     * @param toStringConfig
-     *            the join string entity
-     * @param arrays
-     *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
-     * @return <ul>
-     *         <li>如果 arrays 是null 或者Empty ,返回null</li>
-     *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
-     *         </ul>
-     * @see org.apache.commons.lang3.builder.ToStringStyle
-     * @since 1.4.0
-     */
-    public static <T> String toString(ToStringConfig toStringConfig,T...arrays){
-        if (Validator.isNullOrEmpty(arrays)){
-            return StringUtils.EMPTY;
-        }
-
-        //************************************************************************
-        ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
-        Object[] operateArray = toObjects(arrays);
-        String connector = useToStringConfig.getConnector();
-        //************************************************************************
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0, j = operateArray.length; i < j; ++i){
-            @SuppressWarnings("unchecked")
-            T t = (T) operateArray[i];
-
-            //如果是null 或者 empty，但是参数值是不拼接，那么跳过,继续循环
-            if (Validator.isNullOrEmpty(t) && !useToStringConfig.getIsJoinNullOrEmpty()){
-                continue;
-            }
-            //value转换, 注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(null == t ? StringUtils.EMPTY : "" + t); //see StringUtils.defaultString(t)
-
-            if (null != connector){//注意可能传过来的是换行符 不能使用Validator.isNullOrEmpty来判断
-
-                //放心大胆的拼接 connector, 不判断是否是最后一个,最后会截取
-                sb.append(connector);
-            }
-        }
-
-        return StringUtil.substringWithoutLast(sb, connector);
     }
 
     /**
