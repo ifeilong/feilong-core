@@ -28,6 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -57,6 +58,10 @@ public final class IntrospectorUtil{
      * <p>
      * 这通常意味着将首字符从大写转换成小写,<b>但在（不平常的）特殊情况下,当有多个字符且第一个和第二个字符都是大写字符时,不执行任何操作。</b><br>
      * 因此 "FooBah" 变成 "fooBah","X" 变成 "x",但 "URL" 仍然是 "URL"。<br>
+     * </p>
+     * 
+     * <p>
+     * 注意 和 {@link StringUtil#firstCharToLowerCase(String)} 的区别.
      * </p>
      *
      * @param name

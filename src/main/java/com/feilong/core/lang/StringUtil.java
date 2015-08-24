@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.bean.IntrospectorUtil;
 import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.core.util.Validator;
 
@@ -199,6 +200,16 @@ public final class StringUtil{
      * StringUtils.capitalize(&quot;Jinxin&quot;) = &quot;jinxin&quot;
      * StringUtils.capitalize(&quot;CAt&quot;) = &quot;cAt&quot;
      * </pre>
+     * 
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>和 {@link IntrospectorUtil#decapitalize(String)} 的区别.</li>
+     * <li>如果要使用一段文字,每个单词首字母小写, 可以使用 {@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...)}</li>
+     * </ol>
+     * </blockquote>
      * 
      * @param word
      *            单词
