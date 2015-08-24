@@ -57,6 +57,7 @@ public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
      * 
      * @see org.apache.commons.collections4.Predicate#evaluate(java.lang.Object)
      */
+    @SuppressWarnings("deprecation")
     @Override
     public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
