@@ -135,7 +135,7 @@ commons |`feilong-core` | 核心jar,所有feilong-platform的基础 | 1.6
 
 # About
 
-如果您对feilong core 有任何建议和批评，可以使用下面的联系方式：
+如果您对feilong core 有任何建议和批评,可以使用下面的联系方式：
 
 * 新浪微博:http://weibo.com/venusdrogon 
 * iteye博客:http://feitianbenyue.iteye.com/

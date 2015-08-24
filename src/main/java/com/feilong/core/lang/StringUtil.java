@@ -276,7 +276,7 @@ public final class StringUtil{
      * 使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串.
      * 
      * <p>
-     * 该替换从字符串的开头朝末尾执行，例如，用 "b" 替换字符串 "aaa" 中的 "aa" 将生成 "ba" 而不是 "ab".
+     * 该替换从字符串的开头朝末尾执行,例如,用 "b" 替换字符串 "aaa" 中的 "aa" 将生成 "ba" 而不是 "ab".
      * </p>
      * 
      * <pre>
@@ -345,7 +345,7 @@ public final class StringUtil{
      *            value
      * @param prefix
      *            前缀
-     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀，则返回 true；否则返回 false.还要注意，如果参数是空字符串，或者等于此 String 对象（用 equals(Object) 方法确定），则返回 true.
+     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true；否则返回 false.还要注意,如果参数是空字符串,或者等于此 String 对象（用 equals(Object) 方法确定）,则返回 true.
      */
     public static boolean startsWith(Object value,String prefix){
         return ConvertUtil.toString(value).startsWith(prefix);
@@ -382,7 +382,7 @@ public final class StringUtil{
 
     // ********************************substring************************************************
     /**
-     * [截取]从指定索引处(beginIndex)的字符开始，直到此字符串末尾.
+     * [截取]从指定索引处(beginIndex)的字符开始,直到此字符串末尾.
      * 
      * <p>
      * Gets a substring from the specified String avoiding exceptions.
@@ -626,7 +626,7 @@ public final class StringUtil{
             return StringUtils.EMPTY;
         }
 
-        //由于上面的循环中，最后一个元素可能是null或者empty，判断加还是不加拼接符有点麻烦，因此，循环中统一拼接，但是循环之后做截取处理
+        //由于上面的循环中,最后一个元素可能是null或者empty,判断加还是不加拼接符有点麻烦,因此,循环中统一拼接,但是循环之后做截取处理
         String returnValue = text.toString();
         if (Validator.isNullOrEmpty(lastString)){
             return returnValue;
@@ -688,7 +688,7 @@ public final class StringUtil{
      * 
      * <blockquote>
      * <p>
-     * 注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义，因此我们使用.的时候必须进行转义,<br>
+     * 注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义,因此我们使用.的时候必须进行转义,<br>
      * <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
      * 最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
      * </p>
@@ -699,7 +699,7 @@ public final class StringUtil{
      * @param value
      *            value
      * @param regexSpliter
-     *            分隔符,注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义，因此我们使用.的时候必须进行转义,<br>
+     *            分隔符,注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义,因此我们使用.的时候必须进行转义,<br>
      *            <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
      *            最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
      * @return 如果value 是null,返回null
@@ -814,7 +814,7 @@ public final class StringUtil{
      * </ul>
      * 
      * <p>
-     * %index$开头，index从1开始取值，表示将第index个参数拿进来进行格式化.<br>
+     * %index$开头,index从1开始取值,表示将第index个参数拿进来进行格式化.<br>
      * 对整数进行格式化:格式化字符串由4部分组成:%[index$][标识][最小宽度]转换方式<br>
      * 对浮点数进行格式化:%[index$][标识][最少宽度][.精度]转换方式<br>
      * 转换方式 转换符和标志的说明<br>
@@ -951,7 +951,7 @@ public final class StringUtil{
      * </tr>
      * <tr valign="top">
      * <td>#</td>
-     * <td>如果是浮点数则包含小数点，如果是16进制或8进制则添加0x或0</td>
+     * <td>如果是浮点数则包含小数点,如果是16进制或8进制则添加0x或0</td>
      * <td>("%#x", 99) <br>
      * ("%#o", 99)</td>
      * <td>0x63<br>

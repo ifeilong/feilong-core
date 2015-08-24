@@ -27,12 +27,12 @@ package com.feilong.core.io;
 public final class ImageType{
 
     /**
-     * JPG Joint Photograhic Experts Group（联合图像专家组）,JPEG的文件格式一般有两种文件扩展名：.jpg和.jpeg，这两种扩展名的实质是相同的
+     * JPG Joint Photograhic Experts Group（联合图像专家组）,JPEG的文件格式一般有两种文件扩展名：.jpg和.jpeg,这两种扩展名的实质是相同的
      */
     public static final String JPG  = MimeType.JPG.getExtension();
 
     /**
-     * JPEG Joint Photograhic Experts Group（联合图像专家组）,JPEG的文件格式一般有两种文件扩展名：.jpg和.jpeg，这两种扩展名的实质是相同的
+     * JPEG Joint Photograhic Experts Group（联合图像专家组）,JPEG的文件格式一般有两种文件扩展名：.jpg和.jpeg,这两种扩展名的实质是相同的
      */
     public static final String JPEG = MimeType.JPEG.getExtension();
 
@@ -48,7 +48,7 @@ public final class ImageType{
 
     /**
      * BMP Windows 位图.<br>
-     * 为了保证照片图像的质量，请使用 PNG 、JPEG、TIFF 文件.<br>
+     * 为了保证照片图像的质量,请使用 PNG 、JPEG、TIFF 文件.<br>
      * BMP文件适用于 Windows 中的墙纸 .
      */
     public static final String BMP  = MimeType.BMP.getExtension();

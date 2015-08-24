@@ -216,7 +216,7 @@ public final class IOWriteUtil{
      * 写资源,速度最快的方法,速度比较请看 电脑资料 {@code  <<压缩解压性能探究>>}.
      * 
      * <p span style="color:red">
-     * <b>(注意，本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
+     * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
      * </p>
      * 
      * <p>
@@ -242,7 +242,7 @@ public final class IOWriteUtil{
      * 写资源,速度最快的方法,速度比较请看 电脑资料 {@code  <<压缩解压性能探究>>} .
      * 
      * <p span style="color:red">
-     * <b>(注意，本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
+     * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
      * </p>
      *
      * @param bufferLength
@@ -269,14 +269,14 @@ public final class IOWriteUtil{
      * 
      * <blockquote>
      * <p>
-     * nio是new io的简称，从jdk1.4就被引入了，可以说不是什么新东西了。<br>
+     * nio是new io的简称,从jdk1.4就被引入了,可以说不是什么新东西了。<br>
      * nio的主要作用就是用来解决速度差异的。<br>
      * </p>
      * 
      * <p>
-     * 举个例子：计算机处理的速度，和用户按键盘的速度。这两者的速度相差悬殊。<br>
-     * 如果按照经典的方法：一个用户设定一个线程，专门等待用户的输入，无形中就造成了严重的资源浪费 ：每一个线程都需要珍贵的cpu时间片，由于速度差异造成了在这个交互线程中的cpu都用来等待。 <br>
-     * 在以前的 Java IO 中，都是阻塞式 IO，NIO 引入了非阻塞式 IO。
+     * 举个例子：计算机处理的速度,和用户按键盘的速度。这两者的速度相差悬殊。<br>
+     * 如果按照经典的方法：一个用户设定一个线程,专门等待用户的输入,无形中就造成了严重的资源浪费 ：每一个线程都需要珍贵的cpu时间片,由于速度差异造成了在这个交互线程中的cpu都用来等待。 <br>
+     * 在以前的 Java IO 中,都是阻塞式 IO,NIO 引入了非阻塞式 IO。
      * </p>
      * 
      * <p>

@@ -85,7 +85,7 @@ public class ObjectUtilTest{
     /**
      * 将数组转成转成 {@link java.util.Iterator}.
      * <p>
-     * 如果我们幸运的话，它是一个对象数组,我们可以遍历并with no copying<br>
+     * 如果我们幸运的话,它是一个对象数组,我们可以遍历并with no copying<br>
      * 否则,异常 ClassCastException 中 ,Rats -- 它是一个基本类型数组,循环放入arrayList 转成arrayList.iterator()
      * </p>
      * <p>
@@ -116,7 +116,7 @@ public class ObjectUtilTest{
         }
         List<T> list = null;
         try{
-            // 如果我们幸运的话，它是一个对象数组,我们可以遍历并with no copying
+            // 如果我们幸运的话,它是一个对象数组,我们可以遍历并with no copying
             Object[] objArrays = (Object[]) arrays;
             list = (List<T>) ConvertUtil.toList(objArrays);
         }catch (ClassCastException e){

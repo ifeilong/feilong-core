@@ -17,14 +17,14 @@ package com.feilong.core.lang.reflect;
 
 import com.feilong.core.tools.slf4j.Slf4jUtil;
 
-//Exception又分为两类：一种是CheckedException，一种是UncheckedException.
+//Exception又分为两类：一种是CheckedException,一种是UncheckedException.
 //
-//这两种Exception的区别主要是CheckedException需要用try...catch...显示的捕获，
+//这两种Exception的区别主要是CheckedException需要用try...catch...显示的捕获,
 //而UncheckedException不需要捕获. 通常UncheckedException又叫做RuntimeException.
 //  
 //《effective java》指出：
-//  对于可恢复的条件使用被检查的异常（CheckedException），
-//  对于程序错误（言外之意不可恢复，大错已经酿成）使用运行时异常（RuntimeException）.
+//  对于可恢复的条件使用被检查的异常（CheckedException）,
+//  对于程序错误（言外之意不可恢复,大错已经酿成）使用运行时异常（RuntimeException）.
 
 /**
  * 反射时候出现的异常

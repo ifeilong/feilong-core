@@ -53,9 +53,9 @@ public final class MessageFormatUtil{
      * @param pattern
      *            占位符有三种方式书写方式：
      *            <ul>
-     *            <li>{argumentIndex}: 0-9 之间的数字，表示要格式化对象数据在参数数组中的索引号</li>
+     *            <li>{argumentIndex}: 0-9 之间的数字,表示要格式化对象数据在参数数组中的索引号</li>
      *            <li>{argumentIndex,formatType}: 参数的格式化类型</li>
-     *            <li>{argumentIndex,formatType,FormatStyle}: 格式化的样式，它的值必须是与格式化类型相匹配的合法模式、或表示合法模式的字符串.</li>
+     *            <li>{argumentIndex,formatType,FormatStyle}: 格式化的样式,它的值必须是与格式化类型相匹配的合法模式、或表示合法模式的字符串.</li>
      *            </ul>
      * @param arguments
      *            动态参数

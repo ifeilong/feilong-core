@@ -241,15 +241,15 @@ public class IOWriteUtilTest{
 
         byte[] bytes = new byte[bufferLength];
         try{
-            //从输入流中读取一定数量的字节，并将其存储在缓冲区数组bytes 中。以整数形式返回实际读取的字节数。在输入数据可用、检测到文件末尾或者抛出异常前，此方法一直阻塞。 
-            //如果 bytes 的长度为 0，则不读取任何字节并返回 0；否则，尝试读取至少一个字节。
-            //如果因为流位于文件末尾而没有可用的字节，则返回值 -1；否则，至少读取一个字节并将其存储在 bytes 中。 
-            //将读取的第一个字节存储在元素 bytes[0] 中，下一个存储在 b[1] 中，依次类推。
-            //读取的字节数最多等于 b 的长度。设 k 为实际读取的字节数；这些字节将存储在 b[0] 到 b[k-1] 的元素中，不影响 b[k] 到 b[b.length-1] 的元素。 
+            //从输入流中读取一定数量的字节,并将其存储在缓冲区数组bytes 中。以整数形式返回实际读取的字节数。在输入数据可用、检测到文件末尾或者抛出异常前,此方法一直阻塞。 
+            //如果 bytes 的长度为 0,则不读取任何字节并返回 0；否则,尝试读取至少一个字节。
+            //如果因为流位于文件末尾而没有可用的字节,则返回值 -1；否则,至少读取一个字节并将其存储在 bytes 中。 
+            //将读取的第一个字节存储在元素 bytes[0] 中,下一个存储在 b[1] 中,依次类推。
+            //读取的字节数最多等于 b 的长度。设 k 为实际读取的字节数；这些字节将存储在 b[0] 到 b[k-1] 的元素中,不影响 b[k] 到 b[b.length-1] 的元素。 
             //类 InputStream 的 read(b) 方法的效果等同于：read(b, 0, b.length) 
             while ((j = inputStream.read(bytes)) != -1){
 
-                //迅雷下载会报下面的异常，但是不影响下载效果
+                //迅雷下载会报下面的异常,但是不影响下载效果
                 //ClientAbortException:  java.net.SocketException: Software caused connection abort: socket write error
                 outputStream.write(bytes, 0, j);
                 i++;
@@ -263,7 +263,7 @@ public class IOWriteUtilTest{
                 //                  FileUtil.formatSize(sumSize));
             }
             LOGGER.debug("write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}]", FileUtil.formatSize(sumSize), bufferLength, i);
-            //刷新此输出流并强制写出所有缓冲的输出字节。flush 的常规协定是：如果此输出流的实现已经缓冲了以前写入的任何字节，则调用此方法指示应将这些字节立即写入它们预期的目标。 
+            //刷新此输出流并强制写出所有缓冲的输出字节。flush 的常规协定是：如果此输出流的实现已经缓冲了以前写入的任何字节,则调用此方法指示应将这些字节立即写入它们预期的目标。 
             outputStream.flush();
         }catch (IOException e){
             throw new UncheckedIOException(e);

@@ -46,7 +46,7 @@ import com.feilong.core.util.Validator;
  * <p>
  * {@link java.net.HttpURLConnection}是基于HTTP协议的,其底层通过socket通信实现。<br>
  * <span style="color:red"> 如果不设置超时（timeout）,在网络异常的情况下,可能会导致程序僵死而不继续往下执行。</span> <br>
- * 在JDK1.5- 版本中，只能通过以下两个语句来设置相应的超时：
+ * 在JDK1.5- 版本中,只能通过以下两个语句来设置相应的超时：
  * </p>
  * <ul>
  * <li>System.setProperty("sun.net.client.defaultConnectTimeout", 超时毫秒数字符串);</li>
@@ -67,7 +67,7 @@ import com.feilong.core.util.Validator;
  * 
  * <blockquote>
  * <p>
- * 在JDK5-如果在URLHttpConnection中使用代理服务器的话，只要在URL.openConnection()之前加入以下代码就可以：
+ * 在JDK5-如果在URLHttpConnection中使用代理服务器的话,只要在URL.openConnection()之前加入以下代码就可以：
  * </p>
  * 
  * <pre>
@@ -76,7 +76,7 @@ import com.feilong.core.util.Validator;
  * properties.put(&quot;http.proxyPort&quot;, &quot;1080&quot;);
  * </pre>
  * 
- * 不过JDK5+ URL增加了一个新的方法 {@link URL#openConnection(Proxy)}，这样就可以直接设置代理地址了，代码如下：
+ * 不过JDK5+ URL增加了一个新的方法 {@link URL#openConnection(Proxy)},这样就可以直接设置代理地址了,代码如下：
  * 
  * <pre>
  * URL url = new URL("http://www.javatang.com");
@@ -104,15 +104,15 @@ import com.feilong.core.util.Validator;
  * <tr valign="top">
  * <td>httpUrlConnection.setDoOutput(true);</td>
  * <td>以后就可以使用conn.getOutputStream().write()<br>
- * get请求用不到conn.getOutputStream()，因为参数直接追加在地址后面，因此默认是false<br>
- * post请求（比如：文件上传）需要往服务区传输大量的数据，这些数据是放在http的body里面的，因此需要在建立连接以后，往服务端写数据<br>
- * URL连接可用于输出。如果打算使用URL连接进行输出，则将DoOutput标志设置为true；如果不打算使用，则设置为 false。默认值为 false。</td>
+ * get请求用不到conn.getOutputStream(),因为参数直接追加在地址后面,因此默认是false<br>
+ * post请求（比如：文件上传）需要往服务区传输大量的数据,这些数据是放在http的body里面的,因此需要在建立连接以后,往服务端写数据<br>
+ * URL连接可用于输出。如果打算使用URL连接进行输出,则将DoOutput标志设置为true；如果不打算使用,则设置为 false。默认值为 false。</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>httpUrlConnection.setDoInput(true);</td>
  * <td>以后就可以使用conn.getInputStream().read(); <br>
- * 因为总是使用conn.getInputStream()获取服务端的响应，因此默认值是true<br>
- * URL连接可用于输入。如果打算使用URL连接进行输入，则将DoInput标志设置为true；如果不打算使用，则设置为 false。默认值为 true。 </td>
+ * 因为总是使用conn.getInputStream()获取服务端的响应,因此默认值是true<br>
+ * URL连接可用于输入。如果打算使用URL连接进行输入,则将DoInput标志设置为true；如果不打算使用,则设置为 false。默认值为 true。 </td>
  * </tr>
  * </table>
  * 
@@ -126,8 +126,8 @@ import com.feilong.core.util.Validator;
  * 
  * <blockquote>
  * <p>
- * getOutputStream会隐含的进行connect(即：如同调用上面的connect()方法，所以在开发中不调用 httpURLConnection.connect(); 也可以).<br>
- * 打开到此 URL 引用的资源的通信链接（如果尚未建立这样的连接）.如果在已打开连接（此时 connected 字段的值为 true）的情况下调用 connect 方法，则忽略该调用.<br>
+ * getOutputStream会隐含的进行connect(即：如同调用上面的connect()方法,所以在开发中不调用 httpURLConnection.connect(); 也可以).<br>
+ * 打开到此 URL 引用的资源的通信链接（如果尚未建立这样的连接）.如果在已打开连接（此时 connected 字段的值为 true）的情况下调用 connect 方法,则忽略该调用.<br>
  * 实际上只是建立了一个与服务器的tcp连接,并没有实际发送http请求.<br>
  * 无论是post还是get,http请求实际上直到HttpURLConnection的getInputStream()这个函数里面才正式发送出去. 
  * </p>

@@ -32,9 +32,9 @@ import com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
  * @since 1.4.0
  * @see SensitiveWordsJsonValueProcessor
  */
-//表示产生文档，比如通过javadoc产生文档, 将此注解包含在 javadoc 中, 这个Annotation可以被写入javadoc
+//表示产生文档,比如通过javadoc产生文档, 将此注解包含在 javadoc 中, 这个Annotation可以被写入javadoc
 @Documented
-//在jvm加载class时候有效, VM将在运行期也保留注释，因此可以通过反射机制读取注解的信息
+//在jvm加载class时候有效, VM将在运行期也保留注释,因此可以通过反射机制读取注解的信息
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
 //, ElementType.METHOD 

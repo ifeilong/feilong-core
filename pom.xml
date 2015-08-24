@@ -18,7 +18,7 @@
 
 	<url>https://github.com/venusdrogon/feilong-core</url>
 
-	<!-- 软件配置管理，如cvs 和svn -->
+	<!-- 软件配置管理,如cvs 和svn -->
 	<!-- The scm url must start with 'scm:' -->
 	<scm>
 		<url>https://github.com/venusdrogon/feilong-core</url>
@@ -52,7 +52,7 @@
 		</developer>
 	</developers>
 
-	<!-- 项目的贡献者，但不属于开发小组 -->
+	<!-- 项目的贡献者,但不属于开发小组 -->
 	<contributors>
 		<contributor>
 			<name>bejamin.liu</name>
@@ -199,7 +199,7 @@
 			</exclusions>
 		</dependency>
 
-		<!-- 这2个包的类在jdk1.6里自带有了，可能有冲突，如果你的运行环境是1.6的话就可以删掉这2个包 -->
+		<!-- 这2个包的类在jdk1.6里自带有了,可能有冲突,如果你的运行环境是1.6的话就可以删掉这2个包 -->
 		<!--
 			<dependency>
 			<groupId>xml-apis</groupId>
@@ -210,7 +210,7 @@
 		<!-- 规范下 xercesImpl版本 -->
 		<!-- 解决This parser does not support specification "null" version "null" -->
 
-		<!-- 这2个包的类在jdk1.6里自带有了，可能有冲突，如果你的运行环境是1.6的话就可以删掉这2个包 -->
+		<!-- 这2个包的类在jdk1.6里自带有了,可能有冲突,如果你的运行环境是1.6的话就可以删掉这2个包 -->
 		<!-- <dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>

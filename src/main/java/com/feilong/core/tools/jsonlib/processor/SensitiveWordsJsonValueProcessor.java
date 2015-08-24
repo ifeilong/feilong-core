@@ -19,7 +19,7 @@ import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * 过滤敏感信息，最直接的就是像密码这样的内容，不可以输出在控制台，需要转换成***字眼.
+ * 过滤敏感信息,最直接的就是像密码这样的内容,不可以输出在控制台,需要转换成***字眼.
  *
  * @author feilong
  * @version 1.2.2 2015年7月10日 下午10:54:55

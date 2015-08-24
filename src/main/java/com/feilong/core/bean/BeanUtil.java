@@ -80,9 +80,9 @@ import com.feilong.core.util.Validator;
  * 
  * <blockquote>
  * <p>
- * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的，但返回值不同。 <br>
- * BeanUtils着重于"Bean"，返回值通常是String,<br>
- * 而PropertyUtils着重于属性，它的返回值通常是Object。 
+ * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同。 <br>
+ * BeanUtils着重于"Bean",返回值通常是String,<br>
+ * 而PropertyUtils着重于属性,它的返回值通常是Object。 
  * </p>
  * </blockquote>
  * 
@@ -156,11 +156,11 @@ public final class BeanUtil{
      * 
      * <p>
      * {@link BeanUtils#cloneBean(Object)} 在源码上看是调用了 getPropertyUtils().copyProperties(newBean, bean);<br>
-     * 最后实际上还是<b>复制的引用 ，无法实现深clone</b>
+     * 最后实际上还是<b>复制的引用 ,无法实现深clone</b>
      * </p>
      * 
      * <p>
-     * 但还是可以帮助我们减少工作量的，假如类的属性不是基础类型的话（即自定义类），可以先clone出那个自定义类，在把他付给新的类，覆盖原来类的引用,<br>
+     * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话（即自定义类）,可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用,<br>
      * 是为那些本身没有实现clone方法的类准备的 
      * </p>
      *
@@ -169,7 +169,7 @@ public final class BeanUtil{
      * @param bean
      *            Bean to be cloned
      * @return the cloned bean
-     *         (复制的引用 ，无法实现深clone)
+     *         (复制的引用 ,无法实现深clone)
      * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @since 1.0
@@ -190,10 +190,10 @@ public final class BeanUtil{
     // [start] describe 把Bean的属性值放入到一个Map里面
 
     /**
-     * 返回一个<code>bean</code>中所有的可读属性，并将属性名/属性值放入一个Map中.
+     * 返回一个<code>bean</code>中所有的可读属性,并将属性名/属性值放入一个Map中.
      * 
      * <p>
-     * 另外还有一个名为class的属性，属性值是Object的类名，事实上class是java.lang.Object的一个属性.
+     * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性.
      * </p>
      * <p>
      * <span style="color:red">缺陷:<br>
@@ -252,16 +252,16 @@ public final class BeanUtil{
      * 对象Properties的复制,调用了 {@link BeanUtils#copyProperties(Object, Object)}.
      * 
      * <p>
-     * 注意:这种copy都是浅拷贝，复制后的2个Bean的同一个属性可能拥有同一个对象的ref， 这个在使用时要小心，特别是对于属性为自定义类的情况 .
+     * 注意:这种copy都是浅拷贝,复制后的2个Bean的同一个属性可能拥有同一个对象的ref, 这个在使用时要小心,特别是对于属性为自定义类的情况 .
      * </p>
      * 
      * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
      * 
      * <blockquote>
      * <ul>
-     * <li>{@link BeanUtils#copyProperties(Object, Object)}能给不同的两个成员变量相同的，但类名不同的两个类之间相互赋值</li>
-     * <li>{@link PropertyUtils#copyProperties(Object, Object)} 提供类型转换功能，即发现两个JavaBean的同名属性为不同类型时，在支持的数据类型范围内进行转换，而前者不支持这个功能，但是速度会更快一些.</li>
-     * <li>commons-beanutils v1.9.0以前的版本 BeanUtils 不允许对象的属性值为 null，PropertyUtils 可以拷贝属性值 null 的对象.<br>
+     * <li>{@link BeanUtils#copyProperties(Object, Object)}能给不同的两个成员变量相同的,但类名不同的两个类之间相互赋值</li>
+     * <li>{@link PropertyUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而前者不支持这个功能,但是速度会更快一些.</li>
+     * <li>commons-beanutils v1.9.0以前的版本 BeanUtils 不允许对象的属性值为 null,PropertyUtils 可以拷贝属性值 null 的对象.<br>
      * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
      * of certain data types),具体信息,可以参阅commons-beanutils的
      * {@link <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a>}</li>
@@ -453,21 +453,21 @@ public final class BeanUtil{
      * 
      * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); // 这里的9是String类型
      * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); // 这里的是int类型
-     * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化，后者不能
+     * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化,后者不能
      * </pre>
      * 
      * 
      * <pre>
      * {@code
-     * getProperty和setProperty,它们都只有2个参数，第一个是JavaBean对象，第二个是要操作的属性名.
+     * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
      * Company c = new Company();
      * c.setName("Simple");
      *  
-     * 对于Simple类型，参数二直接是属性名即可
+     * 对于Simple类型,参数二直接是属性名即可
      * //Simple
      * LOGGER.debug(BeanUtils.getProperty(c, "name"));
      *  
-     * 对于Map类型，则需要以“属性名（key值）”的形式
+     * 对于Map类型,则需要以“属性名（key值）”的形式
      * //Map
      *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
      *     HashMap am = new HashMap();
@@ -476,7 +476,7 @@ public final class BeanUtil{
      *     BeanUtils.setProperty(c,"telephone",am);
      * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
      *  
-     * 对于Indexed，则为“属性名[索引值]”，注意这里对于ArrayList和数组都可以用一样的方式进行操作.
+     * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
      * //index
      *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
      *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
@@ -530,15 +530,15 @@ public final class BeanUtil{
      * 
      * <pre>
      * {@code
-     * getProperty和setProperty,它们都只有2个参数，第一个是JavaBean对象，第二个是要操作的属性名.
+     * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
      * Company c = new Company();
      * c.setName("Simple");
      *  
-     * 对于Simple类型，参数二直接是属性名即可
+     * 对于Simple类型,参数二直接是属性名即可
      * //Simple
      * LOGGER.debug(BeanUtils.getProperty(c, "name"));
      *  
-     * 对于Map类型，则需要以“属性名（key值）”的形式
+     * 对于Map类型,则需要以“属性名（key值）”的形式
      * //Map
      *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
      *     HashMap am = new HashMap();
@@ -547,7 +547,7 @@ public final class BeanUtil{
      *     BeanUtils.setProperty(c,"telephone",am);
      * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
      *  
-     * 对于Indexed，则为“属性名[索引值]”，注意这里对于ArrayList和数组都可以用一样的方式进行操作.
+     * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
      * //index
      *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
      *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");

@@ -20,7 +20,7 @@ import org.apache.commons.collections4.Predicate;
 import com.feilong.core.bean.PropertyUtil;
 
 /**
- * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值，判断是否
+ * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,判断是否
  * {@link org.apache.commons.lang3.ArrayUtils#contains(Object[], Object)} 在 <code>values</code>数组中.
  *
  * @author feilong

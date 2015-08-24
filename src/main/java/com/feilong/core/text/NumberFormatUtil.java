@@ -104,7 +104,7 @@ public final class NumberFormatUtil{
             DecimalFormat decimalFormat = new DecimalFormat(numberPattern);
 
             // 如果不设置默认使用的是 RoundingMode.HALF_EVEN
-            // 精确舍入，银行家舍入法.四舍六入，五分两种情况.如果前一位为奇数，则入位，否则舍去.以下例子为保留小数点1位，那么这种舍入方式下的结果.
+            // 精确舍入,银行家舍入法.四舍六入,五分两种情况.如果前一位为奇数,则入位,否则舍去.以下例子为保留小数点1位,那么这种舍入方式下的结果.
             // 1.15>1.2    1.25>1.2 
             if (null != roundingMode){
                 decimalFormat.setRoundingMode(roundingMode);

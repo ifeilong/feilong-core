@@ -40,16 +40,16 @@ import com.feilong.core.text.MessageFormatUtil;
 /**
  * {@link java.util.ResourceBundle} 工具类.
  * 
- * <h3>如果现在多种资源文件一起出现，该如何访问？</h3>
+ * <h3>如果现在多种资源文件一起出现,该如何访问？</h3>
  * 
  * <blockquote>
  * <p>
- * 如果一个项目中同时存在Message.properties、Message_zh_CN.properties、Message_zh_ CN.class 3个类型的文件，那最终使用的是哪一个?<br>
- * 只会使用一个，按照优先级使用。<br>
+ * 如果一个项目中同时存在Message.properties、Message_zh_CN.properties、Message_zh_ CN.class 3个类型的文件,那最终使用的是哪一个?<br>
+ * 只会使用一个,按照优先级使用。<br>
  * 顺序为Message_zh_CN.class、Message_zh_CN.properties、Message.properties。<br>
  * </p>
  * <p>
- * 解析原理，参见:<br>
+ * 解析原理,参见:<br>
  * {@link "java.util.ResourceBundle#loadBundle(CacheKey, List, Control, boolean)"}<br>
  * {@link java.util.ResourceBundle.Control#newBundle(String, Locale, String, ClassLoader, boolean)}
  * </p>

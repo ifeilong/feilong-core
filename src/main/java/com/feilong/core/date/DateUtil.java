@@ -348,15 +348,15 @@ public final class DateUtil{
         calendar.set(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
         calendar.set(Calendar.DAY_OF_WEEK, week);
 
-        //DAY_OF_WEEK_IN_MONTH 指示当前月中的第几个星期。与 DAY_OF_WEEK 字段一起使用时，就可以唯一地指定某月中的某一天。
-        //与 WEEK_OF_MONTH 和 WEEK_OF_YEAR 不同，该字段的值并不 取决于 getFirstDayOfWeek() 或 getMinimalDaysInFirstWeek()。
+        //DAY_OF_WEEK_IN_MONTH 指示当前月中的第几个星期。与 DAY_OF_WEEK 字段一起使用时,就可以唯一地指定某月中的某一天。
+        //与 WEEK_OF_MONTH 和 WEEK_OF_YEAR 不同,该字段的值并不 取决于 getFirstDayOfWeek() 或 getMinimalDaysInFirstWeek()。
 
         //DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1；
-        //8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2，依此类推。
+        //8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2,依此类推。
         //DAY_OF_WEEK_IN_MONTH 0 表示 DAY_OF_WEEK_IN_MONTH 1 之前的那个星期。
-        //负值是从一个月的末尾开始逆向计数，因此，一个月的最后一个星期天被指定为 DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1。
-        //因为负值是逆向计数的，所以它们在月份中的对齐方式通常与正值的不同。
-        //例如，如果一个月有 31 天，那么 DAY_OF_WEEK_IN_MONTH -1 将与 DAY_OF_WEEK_IN_MONTH 5 和 DAY_OF_WEEK_IN_MONTH 4 的末尾相重叠
+        //负值是从一个月的末尾开始逆向计数,因此,一个月的最后一个星期天被指定为 DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1。
+        //因为负值是逆向计数的,所以它们在月份中的对齐方式通常与正值的不同。
+        //例如,如果一个月有 31 天,那么 DAY_OF_WEEK_IN_MONTH -1 将与 DAY_OF_WEEK_IN_MONTH 5 和 DAY_OF_WEEK_IN_MONTH 4 的末尾相重叠
         return CalendarUtil.toDate(calendar);
     }
 
@@ -570,7 +570,7 @@ public final class DateUtil{
     }
 
     /**
-     * 底层操作时间的方法, 根据日历的规则，为给定的日历字段添加或减去指定的时间量.
+     * 底层操作时间的方法, 根据日历的规则,为给定的日历字段添加或减去指定的时间量.
      * 
      * @param currentDate
      *            当前date
@@ -578,7 +578,7 @@ public final class DateUtil{
      *            日历字段
      * @param amount
      *            为字段添加的日期或时间量,可以为负数
-     * @return 底层操作时间的方法 根据日历的规则，为给定的日历字段添加或减去指定的时间量
+     * @return 底层操作时间的方法 根据日历的规则,为给定的日历字段添加或减去指定的时间量
      * @see #addYear(Date, int)
      * @see #addMonth(Date, int)
      * @see #addWeek(Date, int)
@@ -1360,25 +1360,25 @@ public final class DateUtil{
      * 
      * <p>
      * 地球绕太阳运行周期为365天5小时48分46秒（合365.24219天）即一回归年（tropical year）.<br>
-     * 公历的平年只有365日，比回归年短约0.2422日，所余下的时间约为四年累计一天，故四年于2月加1天，使当年的历年长度为366日，这一年就为闰年.<br>
+     * 公历的平年只有365日,比回归年短约0.2422日,所余下的时间约为四年累计一天,故四年于2月加1天,使当年的历年长度为366日,这一年就为闰年.<br>
      * </p>
      * 
      * <p>
-     * 现行公历中每400年有97个闰年.按照每四年一个闰年计算，平均每年就要多算出0.0078天，这样经过四百年就会多算出大约3天来，<br>
-     * 因此，每四百年中要减少三个闰年.
+     * 现行公历中每400年有97个闰年.按照每四年一个闰年计算,平均每年就要多算出0.0078天,这样经过四百年就会多算出大约3天来,<br>
+     * 因此,每四百年中要减少三个闰年.
      * </p>
      * 
      * <p>
-     * 所以规定，公历年份是整百数的，必须是400的倍数的才是闰年，不是400的倍数的,虽然是100的倍数，也是平年,<br>
-     * 这就是通常所说的：四年一闰，百年不闰，四百年再闰.<br>
+     * 所以规定,公历年份是整百数的,必须是400的倍数的才是闰年,不是400的倍数的,虽然是100的倍数,也是平年,<br>
+     * 这就是通常所说的：四年一闰,百年不闰,四百年再闰.<br>
      * 
-     * 例如，2000年是闰年，1900年则是平年.<br>
+     * 例如,2000年是闰年,1900年则是平年.<br>
      * </p>
      * </blockquote>
      * 
      * @param year
      *            年份
-     * @return 四年一闰，百年不闰，四百年再闰
+     * @return 四年一闰,百年不闰,四百年再闰
      * @see GregorianCalendar#isLeapYear(int)
      */
     public static boolean isLeapYear(int year){

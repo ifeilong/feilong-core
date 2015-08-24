@@ -59,7 +59,7 @@ public class PropertiesUtilTest{
 //	}
 //
 //	/**
-//	 * 更新（或插入）一对properties信息(主键及其键值) 如果该主键已经存在，更新该主键的值； 如果该主键不存在，则插件一对键值.
+//	 * 更新（或插入）一对properties信息(主键及其键值) 如果该主键已经存在,更新该主键的值； 如果该主键不存在,则插件一对键值.
 //	 * 
 //	 * @param keyname
 //	 *            键名
@@ -68,11 +68,11 @@ public class PropertiesUtilTest{
 //	 */
 //	public static void writeProperties(String keyname,String keyvalue){
 //		try{
-//			// 调用 Hashtable 的方法 put，使用 getProperty 方法提供并行性.
+//			// 调用 Hashtable 的方法 put,使用 getProperty 方法提供并行性.
 //			// 强制要求为属性的键和值使用字符串.返回值是 Hashtable 调用 put 的结果.
 //			OutputStream fos = new FileOutputStream(profilepath);
 //			props.setProperty(keyname, keyvalue);
-//			// 以适合使用 load 方法加载到 Properties 表中的格式，
+//			// 以适合使用 load 方法加载到 Properties 表中的格式,
 //			// 将此 Properties 表中的属性列表（键和元素对）写入输出流
 //			props.store(fos, "Update '" + keyname + "' value");
 //		}catch (IOException e){
@@ -81,7 +81,7 @@ public class PropertiesUtilTest{
 //	}
 //
 //	/**
-//	 * 更新properties文件的键值对 如果该主键已经存在，更新该主键的值； 如果该主键不存在，则插件一对键值.
+//	 * 更新properties文件的键值对 如果该主键已经存在,更新该主键的值； 如果该主键不存在,则插件一对键值.
 //	 * 
 //	 * @param keyname
 //	 *            键名
@@ -91,11 +91,11 @@ public class PropertiesUtilTest{
 //	public void updateProperties(String keyname,String keyvalue){
 //		try{
 //			props.load(new FileInputStream(profilepath));
-//			// 调用 Hashtable 的方法 put，使用 getProperty 方法提供并行性.
+//			// 调用 Hashtable 的方法 put,使用 getProperty 方法提供并行性.
 //			// 强制要求为属性的键和值使用字符串.返回值是 Hashtable 调用 put 的结果.
 //			OutputStream fos = new FileOutputStream(profilepath);
 //			props.setProperty(keyname, keyvalue);
-//			// 以适合使用 load 方法加载到 Properties 表中的格式，
+//			// 以适合使用 load 方法加载到 Properties 表中的格式,
 //			// 将此 Properties 表中的属性列表（键和元素对）写入输出流
 //			props.store(fos, "Update '" + keyname + "' value");
 //		}catch (IOException e){

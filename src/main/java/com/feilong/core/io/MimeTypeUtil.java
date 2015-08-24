@@ -98,7 +98,7 @@ public final class MimeTypeUtil{
         }
 
         // 1. first use java's build-in utils
-        //从数据文件加载文件名映射（一个 mimetable）。它首先尝试加载由 "content.types.user.table" 属性定义的特定于用户的表。如果加载失败，它会尝试加载位于 java 主目录下的 lib/content-types.properties 中的默认内置表。
+        //从数据文件加载文件名映射（一个 mimetable）。它首先尝试加载由 "content.types.user.table" 属性定义的特定于用户的表。如果加载失败,它会尝试加载位于 java 主目录下的 lib/content-types.properties 中的默认内置表。
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
         String contentType = fileNameMap.getContentTypeFor(fileName);
 

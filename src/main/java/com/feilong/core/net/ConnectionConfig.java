@@ -42,7 +42,7 @@ public final class ConnectionConfig{
      * 
      * <p>
      * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在建立连接之前超时期满，则会引发一个 {@link java.net.SocketTimeoutException}.
+     * 如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
      * </p>
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
@@ -50,11 +50,11 @@ public final class ConnectionConfig{
     private int     connectTimeout = TimeInterval.MILLISECOND_PER_MINUTE;
 
     /**
-     * 将读超时设置为指定的超时值，以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
+     * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
      * 
      * <p>
      * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在数据可读取之前超时期满，则会引发一个 {@link java.net.SocketTimeoutException}.
+     * 如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
      * </p>
      * 
      * @see TimeInterval#MILLISECOND_PER_MINUTE
@@ -69,7 +69,7 @@ public final class ConnectionConfig{
      * 
      * <p>
      * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在建立连接之前超时期满，则会引发一个 {@link java.net.SocketTimeoutException}.
+     * 如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
      * </p>
      *
      * @return the connectTimeout
@@ -84,7 +84,7 @@ public final class ConnectionConfig{
      * 
      * <p>
      * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在建立连接之前超时期满，则会引发一个 {@link java.net.SocketTimeoutException}.
+     * 如果在建立连接之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
      * </p>
      *
      * @param connectTimeout
@@ -96,11 +96,11 @@ public final class ConnectionConfig{
     }
 
     /**
-     * 将读超时设置为指定的超时值，以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
+     * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
      * 
      * <p>
      * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在数据可读取之前超时期满，则会引发一个 {@link java.net.SocketTimeoutException}.
+     * 如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
      * </p>
      *
      * @return the readTimeout
@@ -111,11 +111,11 @@ public final class ConnectionConfig{
     }
 
     /**
-     * 将读超时设置为指定的超时值，以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
+     * 将读超时设置为指定的超时值,以毫秒为单位.用一个非零值指定在建立到资源的连接后从 Input流读入时的超时时间.
      * 
      * <p>
      * 超时时间为零表示无穷大超时.默认 1分钟; <br>
-     * 如果在数据可读取之前超时期满，则会引发一个 {@link java.net.SocketTimeoutException}.
+     * 如果在数据可读取之前超时期满,则会引发一个 {@link java.net.SocketTimeoutException}.
      * </p>
      *
      * @param readTimeout

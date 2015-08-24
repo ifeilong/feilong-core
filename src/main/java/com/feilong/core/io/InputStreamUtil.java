@@ -64,7 +64,7 @@ public final class InputStreamUtil{
 
     /**
      * 将 {@link java.io.InputStream} 转成string.<br>
-     * 读取cmd命令结果时候， 有时候读取的是乱码，需要传递 <code>charsetName</code>字符集.
+     * 读取cmd命令结果时候, 有时候读取的是乱码,需要传递 <code>charsetName</code>字符集.
      *
      * @param inputStream
      *            the input stream

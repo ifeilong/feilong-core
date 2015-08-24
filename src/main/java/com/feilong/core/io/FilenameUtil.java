@@ -38,17 +38,17 @@ public final class FilenameUtil{
     private static final Logger     LOGGER       = LoggerFactory.getLogger(FilenameUtil.class);
 
     /**
-     * 文件名称由文件名和扩展名组成，两者由小黑点分隔，扩展名通常是用来表示文件的类 别.
+     * 文件名称由文件名和扩展名组成,两者由小黑点分隔,扩展名通常是用来表示文件的类 别.
      * <p>
      * Windows 中整个文件名称最长 255 个字符（一个中文字算两个字符）； <br>
-     * DOS 中，文件名最长 8 字符，扩展名最长 3 字符，故又称 DOS 8.3 命名规则. <br>
-     * 文件名称可仅有前半部,即无扩展名，如文件名称最短可以是 “ 1 ” 、 “ C ” 等. <br>
+     * DOS 中,文件名最长 8 字符,扩展名最长 3 字符,故又称 DOS 8.3 命名规则. <br>
+     * 文件名称可仅有前半部,即无扩展名,如文件名称最短可以是 “ 1 ” 、 “ C ” 等. <br>
      * 给文件命名还应注意以下规则：
      * </p>
      * <ul>
      * <li>文件名不能包含下列任何字符之一（共 9 个）： \/:*?"<>|</li>
-     * <li>不能单独使用 “ 设备名 ” 作文件名. “ 设备名 ” 包括： con ， aux ， com0 ~ com9 ， lpt0 ~ lpt9 ， nul ， prn</li>
-     * <li>文件名不区分大小写，如 A.txt 和 a.TxT 表示同一文件</li>
+     * <li>不能单独使用 “ 设备名 ” 作文件名. “ 设备名 ” 包括： con , aux , com0 ~ com9 , lpt0 ~ lpt9 , nul , prn</li>
+     * <li>文件名不区分大小写,如 A.txt 和 a.TxT 表示同一文件</li>
      * </ul>
      * 
      * @see <a href="http://support.microsoft.com/kb/177506/zh-cn">错误消息： 文件名是无效的或不能包含任何以下字符</a>
@@ -263,7 +263,7 @@ public final class FilenameUtil{
      * </pre>
      *
      * @param pathname
-     *            通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例.如果给定字符串是空字符串，那么结果是空抽象路径名.
+     *            通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例.如果给定字符串是空字符串,那么结果是空抽象路径名.
      * @return 如果没有父文件夹,返回自己,比如 E:/ 直接返回 E:/
      * @since 1.0.7
      */

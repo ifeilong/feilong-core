@@ -35,15 +35,15 @@ import java.text.DecimalFormat;
  * <td><code>0</code></td>
  * <td>Number</td>
  * <td>Yes</td>
- * <td>代表阿拉伯数字，每一个0表示一位阿拉伯数字， 如果该位不存在则显示0<br>
- * 如果对应位置上没有数字，则用零代替</td>
+ * <td>代表阿拉伯数字,每一个0表示一位阿拉伯数字, 如果该位不存在则显示0<br>
+ * 如果对应位置上没有数字,则用零代替</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td><code>#</code></td>
  * <td>Number</td>
  * <td>Yes</td>
- * <td>代表阿拉伯数字，每一个#表示一位阿拉伯数字， 如果该位不存在则不显示<br>
- * 如果对应位置上没有数字，则保持原样（不用补）；如果最前、后为0，则保持为空.</td>
+ * <td>代表阿拉伯数字,每一个#表示一位阿拉伯数字, 如果该位不存在则不显示<br>
+ * 如果对应位置上没有数字,则保持原样（不用补）；如果最前、后为0,则保持为空.</td>
  * </tr>
  * <tr valign="top">
  * <td><code>.</code></td>
@@ -93,8 +93,8 @@ import java.text.DecimalFormat;
  * <td>No</td>
  * <td>Currency sign, replaced by currency symbol. If doubled, replaced by international currency symbol. If present in a pattern, the
  * monetary decimal separator is used instead of the decimal separator.<br>
- * 货币记号，由货币号替换.<br>
- * 如果两个同时出现，则用国际货币符号替换； 如果出现在某个模式中，则使用货币小数分隔符，而不使用小数分隔符</td>
+ * 货币记号,由货币号替换.<br>
+ * 如果两个同时出现,则用国际货币符号替换； 如果出现在某个模式中,则使用货币小数分隔符,而不使用小数分隔符</td>
  * </tr>
  * <tr valign="top">
  * <td><code>'</code></td>
@@ -102,8 +102,8 @@ import java.text.DecimalFormat;
  * <td>No</td>
  * <td>Used to quote special characters in a prefix or suffix, for example, <code>"'#'#"</code> formats 123 to <code>"#123"</code>. To
  * create a single quote itself, use two in a row: <code>"# o''clock"</code>. <br>
- * 用于在前缀或后缀中为特殊字符加引号， 例如 "'#'#" 将 123 格式化为 "#123".<br>
- * 要创建单引号本身，则连续使用两个单引号，例如"# o''clock"</td>
+ * 用于在前缀或后缀中为特殊字符加引号, 例如 "'#'#" 将 123 格式化为 "#123".<br>
+ * 要创建单引号本身,则连续使用两个单引号,例如"# o''clock"</td>
  * </tr>
  * </table>
  * </blockquote>

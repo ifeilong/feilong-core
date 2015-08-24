@@ -118,7 +118,7 @@ public final class ParamUtil{
      * @param parameValue
      *            添加的参数值
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
@@ -141,7 +141,7 @@ public final class ParamUtil{
      * @param parameValue
      *            添加的参数值
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
@@ -161,7 +161,7 @@ public final class ParamUtil{
      * @param singleValueMap
      *            singleValueMap param name 和value 的键值对
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -180,7 +180,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the name and array value map
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
@@ -204,7 +204,7 @@ public final class ParamUtil{
      * 添加参数.
      * 
      * <p>
-     * 如果uri包含指定的参数名字,那么会被新的值替换，比如原来是a=1&a=2,现在使用a,[3,4]调用这个方法， 会返回a=3&a=4.
+     * 如果uri包含指定的参数名字,那么会被新的值替换,比如原来是a=1&a=2,现在使用a,[3,4]调用这个方法, 会返回a=3&a=4.
      * </p>
      * 
      * @param uri
@@ -213,7 +213,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            singleValueMap 类似于 request.getParameterMap
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
@@ -241,7 +241,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the name and array value map
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -275,7 +275,7 @@ public final class ParamUtil{
      * @param paramName
      *            the param name
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -298,7 +298,7 @@ public final class ParamUtil{
      * @param paramName
      *            the param name
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -325,7 +325,7 @@ public final class ParamUtil{
      * @param paramNameList
      *            the param name list
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -349,7 +349,7 @@ public final class ParamUtil{
      * @param paramNameList
      *            the param name list
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -376,7 +376,7 @@ public final class ParamUtil{
      * @param paramNameList
      *            the param name list
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -406,7 +406,7 @@ public final class ParamUtil{
      * @param paramNameList
      *            要保留的参数名字list
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -432,7 +432,7 @@ public final class ParamUtil{
      * @param paramNameList
      *            要保留的参数名字list
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -462,7 +462,7 @@ public final class ParamUtil{
      * @param paramNameList
      *            要保留的参数名字list
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -489,7 +489,7 @@ public final class ParamUtil{
      * @param queryString
      *            the query string
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the {@code map<string, string>}
@@ -505,9 +505,9 @@ public final class ParamUtil{
      * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value).
      *
      * @param queryString
-     *            {@code a=1&b=2}类型的数据,支持{@code a=1&a=1}的形式， 返回map的值是数组
+     *            {@code a=1&b=2}类型的数据,支持{@code a=1&a=1}的形式, 返回map的值是数组
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value)
@@ -557,7 +557,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            类似于 request.getParamMap
      * @param charsetType
-     *            {@link CharsetType} 何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
+     *            {@link CharsetType} 何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return if isNullOrEmpty(appendMap) ,return ""
      * @see CharsetType
@@ -620,9 +620,9 @@ public final class ParamUtil{
      * </p>
      * 
      * <ol>
-     * <li>对数组里的每一个值从 a 到 z 的顺序排序，若遇到相同首字母，则看第二个字母， 以此类推。</li>
-     * <li>排序完成之后，再把所有数组值以“&”字符连接起来</li>
-     * <li>没有值的参数无需传递，也无需包含到待签名数据中.</li>
+     * <li>对数组里的每一个值从 a 到 z 的顺序排序,若遇到相同首字母,则看第二个字母, 以此类推。</li>
+     * <li>排序完成之后,再把所有数组值以“&”字符连接起来</li>
+     * <li>没有值的参数无需传递,也无需包含到待签名数据中.</li>
      * <li><span style="color:red">注意: 待签名数据应该是原生值而不是 encoding 之后的值</span></li>
      * </ol>
      * 
@@ -806,7 +806,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the array value map
      * @param charsetType
-     *            何种编码， {@link CharsetType}<br>
+     *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string

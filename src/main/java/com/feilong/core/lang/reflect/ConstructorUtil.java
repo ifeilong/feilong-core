@@ -26,7 +26,7 @@ import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.core.util.Validator;
 
 /**
- * 使用反射方法请求构造函数创建新实例的工具类，可以简化程序中使用反射方式创建对象的代码,focused on constructors.
+ * 使用反射方法请求构造函数创建新实例的工具类,可以简化程序中使用反射方式创建对象的代码,focused on constructors.
  * 
  * <h3>方法介绍:</h3>
  * 

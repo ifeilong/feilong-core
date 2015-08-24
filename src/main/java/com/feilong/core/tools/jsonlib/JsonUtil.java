@@ -118,7 +118,7 @@ public final class JsonUtil{
      * 设置日期转换格式
      */
     static{
-        // 可转换的日期格式，即Json串中可以出现以下格式的日期与时间
+        // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
         DateMorpher dateMorpher = new DateMorpher(new String[] {
             DatePattern.COMMON_DATE_AND_TIME,
             DatePattern.COMMON_TIME,
@@ -142,7 +142,7 @@ public final class JsonUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>如果field上 标识了 {@link SensitiveWords}注解，那么会使用 {@link SensitiveWordsJsonValueProcessor}混淆敏感数据的输出</li>
+     * <li>如果field上 标识了 {@link SensitiveWords}注解,那么会使用 {@link SensitiveWordsJsonValueProcessor}混淆敏感数据的输出</li>
      * </ol>
      * </blockquote>
      * 
@@ -189,7 +189,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 有些map 值很复杂，比如带有request信息， 这样的map转成json会抛异常.
+     * 有些map 值很复杂,比如带有request信息, 这样的map转成json会抛异常.
      * 
      * 
      * <h3>注意:</h3>
@@ -205,7 +205,7 @@ public final class JsonUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>如果value 是isPrimitiveOrWrapper类型， 那么会直接取到值 设置到 新的simpleMap中</li>
+     * <li>如果value 是isPrimitiveOrWrapper类型, 那么会直接取到值 设置到 新的simpleMap中</li>
      * <li>否则 使用 {@link String#valueOf(Object)} 转换到simpleMap中</li>
      * </ul>
      * </blockquote>.
@@ -228,7 +228,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 有些map值很复杂，比如带有request信息， 这样的map转成json会抛异常.
+     * 有些map值很复杂,比如带有request信息, 这样的map转成json会抛异常.
      * 
      * <h3>注意:</h3>
      * 
@@ -243,7 +243,7 @@ public final class JsonUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>如果value是isPrimitiveOrWrapper类型， 那么会直接取到值设置到新的simpleMap中</li>
+     * <li>如果value是isPrimitiveOrWrapper类型, 那么会直接取到值设置到新的simpleMap中</li>
      * <li>否则使用{@link String#valueOf(Object)} 转换到simpleMap中</li>
      * </ul>
      * </blockquote>.
@@ -633,7 +633,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 把一个json数组串转换成实体数组，且数组元素的属性含有另外实例Bean.
+     * 把一个json数组串转换成实体数组,且数组元素的属性含有另外实例Bean.
      *
      * @param <T>
      *            the generic type
@@ -669,7 +669,7 @@ public final class JsonUtil{
     // [start]toList
 
     /**
-     * 把一个json数组串转换成集合，且集合里存放的为实例Bean.
+     * 把一个json数组串转换成集合,且集合里存放的为实例Bean.
      *
      * @param <T>
      *            the generic type
@@ -685,7 +685,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 把一个json数组串转换成集合，且集合里的对象的属性含有另外实例Bean.
+     * 把一个json数组串转换成集合,且集合里的对象的属性含有另外实例Bean.
      *
      * @param <T>
      *            the generic type
@@ -718,7 +718,7 @@ public final class JsonUtil{
     // [start]toMap
 
     /**
-     * 把json对象串转换成map对象，且map对象里存放的为其他实体Bean.
+     * 把json对象串转换成map对象,且map对象里存放的为其他实体Bean.
      *
      * @param <T>
      *            the generic type
@@ -734,7 +734,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 把json对象串转换成map对象，且map对象里存放的其他实体Bean还含有另外实体Bean.
+     * 把json对象串转换成map对象,且map对象里存放的其他实体Bean还含有另外实体Bean.
      *
      * @param <T>
      *            the generic type
@@ -789,7 +789,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 从json串转换成实体对象，并且实体集合属性存有另外实体Bean.
+     * 从json串转换成实体对象,并且实体集合属性存有另外实体Bean.
      *
      * @param <T>
      *            the generic type

@@ -109,10 +109,10 @@ public class JsonlibXmlUtil{
         // xmlSerializer.setRootName("outputPaymentPGW");
         // xmlSerializer.setTypeHintsCompatibility(true);
         // xmlSerializer.setSkipWhitespace(false);
-        // xmlSerializer.setTypeHintsEnabled(true);//是否保留元素类型标识，默认true
-        // xmlSerializer.setElementName("e");//设置元素标签，默认e
-        // xmlSerializer.setArrayName("a");//设置数组标签，默认a
-        // xmlSerializer.setObjectName("o");//设置对象标签，默认o
+        // xmlSerializer.setTypeHintsEnabled(true);//是否保留元素类型标识,默认true
+        // xmlSerializer.setElementName("e");//设置元素标签,默认e
+        // xmlSerializer.setArrayName("a");//设置数组标签,默认a
+        // xmlSerializer.setObjectName("o");//设置对象标签,默认o
 
         return xmlSerializer.write(json, encoding);
     }

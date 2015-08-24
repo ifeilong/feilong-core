@@ -65,7 +65,7 @@ public class IntrospectorUtilTest{
      */
     @Test
     public void testGetBeanInfoSearchPath(){
-        //为了查找 BeanInfo 类而被搜索的包名称数组。此数组的默认值与实现有关，例如 Sun 实现最初设置为 {"sun.beans.infos"}。
+        //为了查找 BeanInfo 类而被搜索的包名称数组。此数组的默认值与实现有关,例如 Sun 实现最初设置为 {"sun.beans.infos"}。
         String[] beanInfoSearchPath = Introspector.getBeanInfoSearchPath();
         LOGGER.debug(JsonUtil.format(beanInfoSearchPath));
     }

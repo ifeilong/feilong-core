@@ -29,9 +29,9 @@ import org.slf4j.LoggerFactory;
  * 
  * <blockquote>
  * <p>
- * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的，但返回值不同。 <br>
- * BeanUtils着重于"Bean"，返回值通常是String,<br>
- * 而PropertyUtils着重于属性，它的返回值通常是Object。 
+ * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同。 <br>
+ * BeanUtils着重于"Bean",返回值通常是String,<br>
+ * 而PropertyUtils着重于属性,它的返回值通常是Object。 
  * </p>
  * </blockquote>
  * 
@@ -53,11 +53,21 @@ public final class PropertyUtil{
     }
 
     /**
-     * 返回一个<code>bean</code>中所有的可读属性，并将属性名/属性值放入一个Map中.
+     * 返回一个<code>bean</code>中所有的 <span style="color:green">可读属性</span>,并将属性名/属性值放入一个Map中.
      * 
      * <p>
-     * 另外还有一个名为class的属性，属性值是Object的类名，事实上class是java.lang.Object的一个属性
+     * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性
      * </p>
+     * 
+     * <h3>原理:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>取到bean class的 {@link java.beans.PropertyDescriptor}数组</li>
+     * <li>循环,找到 {@link java.beans.PropertyDescriptor#getReadMethod()}</li>
+     * <li>将 name and {@link org.apache.commons.beanutils.PropertyUtilsBean#getProperty(Object, String)} 设置到map中</li>
+     * </ol>
+     * </blockquote>
      *
      * @param bean
      *            Bean whose properties are to be extracted
@@ -82,21 +92,21 @@ public final class PropertyUtil{
      * <pre>
      * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); // 这里的9是String类型
      * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); // 这里的是int类型
-     * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化，后者不能
+     * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化,后者不能
      * </pre>
      * 
      * 
      * <pre>
      * {@code
-     * getProperty和setProperty,它们都只有2个参数，第一个是JavaBean对象，第二个是要操作的属性名.
+     * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
      * Company c = new Company();
      * c.setName("Simple");
      *  
-     * 对于Simple类型，参数二直接是属性名即可
+     * 对于Simple类型,参数二直接是属性名即可
      * //Simple
      * LOGGER.debug(BeanUtils.getProperty(c, "name"));
      *  
-     * 对于Map类型，则需要以“属性名（key值）”的形式
+     * 对于Map类型,则需要以“属性名（key值）”的形式
      * //Map
      *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
      *     HashMap am = new HashMap();
@@ -105,7 +115,7 @@ public final class PropertyUtil{
      *     BeanUtils.setProperty(c,"telephone",am);
      * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
      *  
-     * 对于Indexed，则为“属性名[索引值]”，注意这里对于ArrayList和数组都可以用一样的方式进行操作.
+     * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
      * //index
      *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
      *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
@@ -158,15 +168,15 @@ public final class PropertyUtil{
      * 
      * <pre>
      * {@code
-     * getProperty和setProperty,它们都只有2个参数，第一个是JavaBean对象，第二个是要操作的属性名.
+     * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
      * Company c = new Company();
      * c.setName("Simple");
      *  
-     * 对于Simple类型，参数二直接是属性名即可
+     * 对于Simple类型,参数二直接是属性名即可
      * //Simple
      * LOGGER.debug(BeanUtils.getProperty(c, "name"));
      *  
-     * 对于Map类型，则需要以“属性名（key值）”的形式
+     * 对于Map类型,则需要以“属性名（key值）”的形式
      * //Map
      *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
      *     HashMap am = new HashMap();
@@ -175,7 +185,7 @@ public final class PropertyUtil{
      *     BeanUtils.setProperty(c,"telephone",am);
      * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
      *  
-     * 对于Indexed，则为“属性名[索引值]”，注意这里对于ArrayList和数组都可以用一样的方式进行操作.
+     * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
      * //index
      *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
      *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");

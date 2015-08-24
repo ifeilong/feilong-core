@@ -90,7 +90,7 @@ public final class PropertiesUtil{
      * @param propertiesPath
      *            Properties文件路径 如"/WEB-INF/classes/feilong.user.properties"
      * @param key
-     *            用指定的键在此属性列表中搜索属性.如果在此属性列表中未找到该键，则接着递归检查默认属性列表及其默认值.如果未找到属性，则此方法返回 null.
+     *            用指定的键在此属性列表中搜索属性.如果在此属性列表中未找到该键,则接着递归检查默认属性列表及其默认值.如果未找到属性,则此方法返回 null.
      * @return 通过ClassLoader获得properties值
      * @see #getPropertiesWithClassLoader(Class, String)
      * @see java.util.Properties#getProperty(String)
@@ -155,7 +155,7 @@ public final class PropertiesUtil{
      */
     public static Properties getProperties(Class<?> klass,String propertiesPath){
         // klass.getResourceAsStream方法内部会调用classLoader.getResourceAsStream
-        // 之所以这样做无疑还是方便客户端的调用，省的每次获取ClassLoader才能加载资源文件的麻烦.
+        // 之所以这样做无疑还是方便客户端的调用,省的每次获取ClassLoader才能加载资源文件的麻烦.
         InputStream inputStream = klass.getResourceAsStream(propertiesPath);
         return getProperties(inputStream);
     }

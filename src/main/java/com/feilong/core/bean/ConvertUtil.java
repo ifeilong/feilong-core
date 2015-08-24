@@ -261,7 +261,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <p>
-     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>，不建议使用 {@code new BigDecimal(double)}，参见 JDK API<br>
+     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 {@code new BigDecimal(double)},参见 JDK API<br>
      * </p>
      * 
      * <ul>
@@ -433,7 +433,7 @@ public final class ConvertUtil{
             @SuppressWarnings("unchecked")
             T t = (T) operateArray[i];
 
-            //如果是null 或者 empty，但是参数值是不拼接，那么跳过,继续循环
+            //如果是null 或者 empty,但是参数值是不拼接,那么跳过,继续循环
             if (Validator.isNullOrEmpty(t) && !useToStringConfig.getIsJoinNullOrEmpty()){
                 continue;
             }
@@ -490,7 +490,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * 数组转成 ({@link java.util.ArrayList ArrayList})，此方法返回的list可以进行add等操作.
+     * 数组转成 ({@link java.util.ArrayList ArrayList}),此方法返回的list可以进行add等操作.
      * <p>
      * 注意 :{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
      * Collection#add(Object)}等方法<br>
@@ -509,7 +509,7 @@ public final class ConvertUtil{
         if (Validator.isNullOrEmpty(arrays)){
             return Collections.emptyList();
         }
-        //如果直接使用 Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象ArrayList,没有实现AbstractList类的add方法，如果 strList.add("c");导致抛异常! 
+        //如果直接使用 Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象ArrayList,没有实现AbstractList类的add方法,如果 strList.add("c");导致抛异常! 
         return new ArrayList<T>(Arrays.asList(arrays));
     }
 
@@ -551,7 +551,7 @@ public final class ConvertUtil{
         @SuppressWarnings("unchecked")
         T[] array = (T[]) Array.newInstance(arrayComponentType, collection.size());
 
-        //注意，toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
+        //注意,toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
         return collection.toArray(array);
     }
 

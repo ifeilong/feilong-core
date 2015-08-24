@@ -55,8 +55,8 @@ public final class IntrospectorUtil{
     /**
      * 获得一个字符串并将它转换成普通 Java 变量名称大写形式的实用工具方法.
      * <p>
-     * 这通常意味着将首字符从大写转换成小写，<b>但在（不平常的）特殊情况下，当有多个字符且第一个和第二个字符都是大写字符时，不执行任何操作。</b><br>
-     * 因此 "FooBah" 变成 "fooBah"，"X" 变成 "x"，但 "URL" 仍然是 "URL"。<br>
+     * 这通常意味着将首字符从大写转换成小写,<b>但在（不平常的）特殊情况下,当有多个字符且第一个和第二个字符都是大写字符时,不执行任何操作。</b><br>
+     * 因此 "FooBah" 变成 "fooBah","X" 变成 "x",但 "URL" 仍然是 "URL"。<br>
      * </p>
      *
      * @param name
@@ -117,7 +117,7 @@ public final class IntrospectorUtil{
      * @since 1.0.9
      */
     private static List<String> getPropertyDescriptorListForLog(BeanInfo beanInfo){
-        //用于获取该Bean中的所有允许公开的成员属性，以PropertyDescriptor数组的形式返回
+        //用于获取该Bean中的所有允许公开的成员属性,以PropertyDescriptor数组的形式返回
         PropertyDescriptor[] propertyDescriptorArray = beanInfo.getPropertyDescriptors();
         if (Validator.isNullOrEmpty(propertyDescriptorArray)){
             return Collections.emptyList();
@@ -130,7 +130,7 @@ public final class IntrospectorUtil{
             //获得该属性的名字
             String propertyDescriptorName = propertyDescriptor.getName();
 
-            // 获得该属性的数据类型，以Class的形式给出
+            // 获得该属性的数据类型,以Class的形式给出
             Class<?> propertyType = propertyDescriptor.getPropertyType();
             propertyDescriptorList.add(propertyType.getName() + " " + propertyDescriptorName);
         }
@@ -148,7 +148,7 @@ public final class IntrospectorUtil{
      * @since 1.0.9
      */
     private static List<String> getMethodDescriptorForLog(BeanInfo beanInfo){
-        //用于获取该Bean中的所有允许公开的成员方法，以MethodDescriptor数组的形式返回
+        //用于获取该Bean中的所有允许公开的成员方法,以MethodDescriptor数组的形式返回
         MethodDescriptor[] methodDescriptorArray = beanInfo.getMethodDescriptors();
         if (Validator.isNullOrEmpty(methodDescriptorArray)){
             return Collections.emptyList();
@@ -178,7 +178,7 @@ public final class IntrospectorUtil{
         //获得该方法对象   
         Method method = methodDescriptor.getMethod();
 
-        //通过方法对象获得该方法的所有参数，以Class数组的形式返回   
+        //通过方法对象获得该方法的所有参数,以Class数组的形式返回   
         Class<?>[] parameterTypes = method.getParameterTypes();
 
         if (Validator.isNullOrEmpty(parameterTypes)){
@@ -206,7 +206,7 @@ public final class IntrospectorUtil{
      * @since 1.0.9
      */
     private static List<String> getEventSetDescriptorListForLog(BeanInfo beanInfo){
-        //用于获取该Bean中的所有允许公开的成员事件，以EventSetDescriptor数组的形式返回
+        //用于获取该Bean中的所有允许公开的成员事件,以EventSetDescriptor数组的形式返回
         EventSetDescriptor[] eventSetDescriptorArray = beanInfo.getEventSetDescriptors();
         if (Validator.isNullOrEmpty(eventSetDescriptorArray)){
             return Collections.emptyList();
@@ -218,7 +218,7 @@ public final class IntrospectorUtil{
         for (EventSetDescriptor eventSetDescriptor : eventSetDescriptorArray){
             //获得该事件的名字
             String eventName = eventSetDescriptor.getName();
-            //获得该事件所依赖的事件监听器，以Class的形式给出
+            //获得该事件所依赖的事件监听器,以Class的形式给出
             Class<?> listenerType = eventSetDescriptor.getListenerType();
             eventSetDescriptorList.add(eventName + "(" + listenerType.getName() + ")");
         }

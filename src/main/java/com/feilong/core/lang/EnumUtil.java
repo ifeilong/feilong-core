@@ -150,7 +150,7 @@ public final class EnumUtil{
 
         // An enum is a kind of class
         // An annotation is a kind of interface
-        // 如果此 Class 对象不表示枚举类型，则返回枚举类的元素或 null.
+        // 如果此 Class 对象不表示枚举类型,则返回枚举类的元素或 null.
         E[] enumConstants = enumClass.getEnumConstants();
 
         if (LOGGER.isDebugEnabled()){

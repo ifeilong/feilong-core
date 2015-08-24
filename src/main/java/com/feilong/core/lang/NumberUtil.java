@@ -38,7 +38,7 @@ import com.feilong.core.util.Validator;
  * 
  * <blockquote>
  * <p>
- * 对于 double 转成 BigDecimal，推荐使用 BigDecimal.valueOf(double)，不建议使用new BigDecimal(double)，参见 JDK API
+ * 对于 double 转成 BigDecimal,推荐使用 BigDecimal.valueOf(double),不建议使用new BigDecimal(double),参见 JDK API
  * </p>
  * <ol>
  * <li>new BigDecimal(0.1) {@code ==>} 0.1000000000000000055511151231257827021181583404541015625</li>
@@ -59,28 +59,28 @@ import com.feilong.core.util.Validator;
  * </tr>
  * <tr valign="top">
  * <td>{@link RoundingMode#UP}</td>
- * <td>远离零的方向舍入. 向绝对值最大的方向舍入，只要舍弃位非0即进位.</td>
+ * <td>远离零的方向舍入. 向绝对值最大的方向舍入,只要舍弃位非0即进位.</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link RoundingMode#DOWN}</td>
- * <td>靠近零的方向舍入,向绝对值最小的方向输入，所有的位都要舍弃，不存在进位情况.</td>
+ * <td>靠近零的方向舍入,向绝对值最小的方向输入,所有的位都要舍弃,不存在进位情况.</td>
  * </tr>
  * <tr valign="top">
  * <td>{@link RoundingMode#CEILING}</td>
  * <td>靠近正无穷方向舍入  向正无穷方向舍入 向正最大方向靠拢.<br>
- * 若是正数，舍入行为类似于ROUND_UP，<br>
- * 若为负数，舍入行为类似于ROUND_DOWN.<br>
+ * 若是正数,舍入行为类似于ROUND_UP,<br>
+ * 若为负数,舍入行为类似于ROUND_DOWN.<br>
  * <span style="color:red">Math.round()方法就是使用的此模式.</span></td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link RoundingMode#FLOOR}</td>
  * <td>靠近负无穷方向舍入  向负无穷方向舍入 向负无穷方向靠拢.<br>
- * 若是正数，舍入行为类似于ROUND_DOWN；<br>
- * 若为负数，舍入行为类似于ROUND_UP.</td>
+ * 若是正数,舍入行为类似于ROUND_DOWN；<br>
+ * 若为负数,舍入行为类似于ROUND_UP.</td>
  * </tr>
  * <tr valign="top">
  * <td>{@link RoundingMode#HALF_UP}</td>
- * <td>四舍五入，生活中的舍入方法.<br>
+ * <td>四舍五入,生活中的舍入方法.<br>
  * 最近数字舍入(5进).<span style="color:red">这是我们最经典的四舍五入</span>.</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -90,8 +90,8 @@ import com.feilong.core.util.Validator;
  * <tr valign="top">
  * <td>{@link RoundingMode#HALF_EVEN}</td>
  * <td>精确舍入,银行家舍入法. <br>
- * 四舍六入;五分两种情况,如果前一位为奇数，则入位，否则舍去. <br>
- * 以下例子为保留小数点1位，那么这种舍入方式下的结果:  <br>
+ * 四舍六入;五分两种情况,如果前一位为奇数,则入位,否则舍去. <br>
+ * 以下例子为保留小数点1位,那么这种舍入方式下的结果:  <br>
  * {@code 1.15 return 1.2} {@code 1.25 return 1.2}</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -155,8 +155,8 @@ public final class NumberUtil{
         if (Validator.isNullOrEmpty(number)){
             return null;
         }
-        //　将int、long、double、string类型的数值转为BigDecimal.使用double会造成精度丢失，
-        //而使用BigDecimal就是为了解决精度丢失的问题，建议使用String方式转换.
+        //　将int、long、double、string类型的数值转为BigDecimal.使用double会造成精度丢失,
+        //而使用BigDecimal就是为了解决精度丢失的问题,建议使用String方式转换.
         BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
         return setScale(bigDecimal, 0, roundingMode);
     }
@@ -284,7 +284,7 @@ public final class NumberUtil{
      * <p>
      * <b>注意:</b> <span style="color:red">不能直接one.divide(two),避免 exception:Non-terminating decimal expansion; no exact representable decimal
      * result</span><br>
-     * 应该指定scale和roundingMode，保证对于无限小数有足够的范围来表示结果.
+     * 应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
      * </p>
      *
      * @param one
@@ -309,7 +309,7 @@ public final class NumberUtil{
         if (!isSpecificNumber(two, zero)){
             // 不能直接one.divide(two) 
             // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result
-            // 应该指定scale和roundingMode，保证对于无限小数有足够的范围来表示结果.
+            // 应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
             BigDecimal divisor = ConvertUtil.toBigDecimal(two);
             return one.divide(divisor, scale, roundingMode);
         }

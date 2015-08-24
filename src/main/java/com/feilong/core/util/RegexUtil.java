@@ -74,8 +74,8 @@ public final class RegexUtil{
      * 返回在以前匹配操作期间由给定组捕获的输入子序列.
      * 
      * <p>
-     * 对于匹配器 m、输入序列 s 和组索引 g，表达式 m.group(g) 和 s.substring(m.start(g), m.end(g)) 是等效的. <br>
-     * 捕获组是从 1 开始从左到右的索引.组0表示整个模式，因此表达式 m.group(0) 等效于 m.group().
+     * 对于匹配器 m、输入序列 s 和组索引 g,表达式 m.group(g) 和 s.substring(m.start(g), m.end(g)) 是等效的. <br>
+     * 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
      * </p>
      * 
      * <pre>
@@ -112,7 +112,7 @@ public final class RegexUtil{
             if (LOGGER.isDebugEnabled()){
                 LOGGER.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
             }
-            // 捕获组是从 1 开始从左到右的索引.组0表示整个模式，因此表达式 m.group(0) 等效于 m.group().
+            // 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
             groupMap.put(0, matcher.group());
 
             if (LOGGER.isDebugEnabled()){
@@ -147,8 +147,8 @@ public final class RegexUtil{
      * 返回在以前匹配操作期间由给定组捕获的输入子序列.
      * 
      * <p>
-     * 对于匹配器 m、输入序列 s 和组索引 g，表达式 m.group(g) 和 s.substring(m.start(g), m.end(g)) 是等效的. <br>
-     * 捕获组是从 1 开始从左到右的索引.组0表示整个模式，因此表达式 m.group(0) 等效于 m.group().
+     * 对于匹配器 m、输入序列 s 和组索引 g,表达式 m.group(g) 和 s.substring(m.start(g), m.end(g)) 是等效的. <br>
+     * 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
      * </p>
      * 
      * <pre>
@@ -204,12 +204,12 @@ public final class RegexUtil{
      *            如果需要多个组合,可以使用罗辑或
      *            <blockquote>{@code Pattern.compile(regex, CASE_INSENSITIVE | DOTALL);}</blockquote>
      *            <ul>
-     *            <li>{@link Pattern#CASE_INSENSITIVE} 匹配字符时与大小写无关，该标志默认只考虑US ASCII字符.</li>
-     *            <li>{@link Pattern#MULTILINE} ^和$匹配一行的开始和结尾，而不是整个输入</li>
-     *            <li>{@link Pattern#UNICODE_CASE} 当与CASE_INSENSITIVE结合时，使用Unicode字母匹配</li>
+     *            <li>{@link Pattern#CASE_INSENSITIVE} 匹配字符时与大小写无关,该标志默认只考虑US ASCII字符.</li>
+     *            <li>{@link Pattern#MULTILINE} ^和$匹配一行的开始和结尾,而不是整个输入</li>
+     *            <li>{@link Pattern#UNICODE_CASE} 当与CASE_INSENSITIVE结合时,使用Unicode字母匹配</li>
      *            <li>{@link Pattern#CANON_EQ} 考虑Unicode字符的规范等价</li>
-     *            <li>{@link Pattern#DOTALL} 当使用此标志时，.符号匹配包括行终止符在内的所有字符</li>
-     *            <li>{@link Pattern#UNIX_LINES} 当在多行模式下匹配^和$时，只将'\n'看作行终止符</li>
+     *            <li>{@link Pattern#DOTALL} 当使用此标志时,.符号匹配包括行终止符在内的所有字符</li>
+     *            <li>{@link Pattern#UNIX_LINES} 当在多行模式下匹配^和$时,只将'\n'看作行终止符</li>
      *            <li>{@link Pattern#LITERAL} 启用模式的字面值解析.</li>
      *            <li>{@link Pattern#COMMENTS} 模式中允许空白和注释. <br>
      *            此模式将忽略空白和在结束行之前以 # 开头的嵌入式注释. <br>

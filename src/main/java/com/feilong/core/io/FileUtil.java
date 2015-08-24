@@ -40,7 +40,7 @@ import com.feilong.core.util.Validator;
  * <ul>
  * <li>{@link File#getAbsolutePath()} 得到的是全路径</li>
  * <li>{@link File#getPath()} 得到的是构造file的时候的路径</li>
- * <li>{@link File#getCanonicalPath()} 可以看到CanonicalPath不但是全路径，而且把..或者.这样的符号解析出来.</li>
+ * <li>{@link File#getCanonicalPath()} 可以看到CanonicalPath不但是全路径,而且把..或者.这样的符号解析出来.</li>
  * </ul>
  * </blockquote>
  * 
@@ -113,7 +113,7 @@ public final class FileUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            // 为避免内存泄漏，Stream的Close是必须的.即使中途发生了异常，也必须Close，
+            // 为避免内存泄漏,Stream的Close是必须的.即使中途发生了异常,也必须Close,
             IOUtils.closeQuietly(inputStream);
         }
     }
@@ -123,7 +123,7 @@ public final class FileUtil{
     /**
      * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .<br>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
-     * 如果要写入字符流，请考虑使用 {@link java.io.FileWriter}.
+     * 如果要写入字符流,请考虑使用 {@link java.io.FileWriter}.
      *
      * @param filePath
      *            文件路径
@@ -139,7 +139,7 @@ public final class FileUtil{
     /**
      * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .<br>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
-     * 如果要写入字符流，请考虑使用 {@link java.io.FileWriter}.
+     * 如果要写入字符流,请考虑使用 {@link java.io.FileWriter}.
      *
      * @param filePath
      *            the file path
@@ -159,7 +159,7 @@ public final class FileUtil{
      * 
      * <p>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
-     * 如果要写入字符流，请考虑使用 {@link java.io.FileWriter}.
+     * 如果要写入字符流,请考虑使用 {@link java.io.FileWriter}.
      * </p>
      * 
      * @param filePath
@@ -182,7 +182,7 @@ public final class FileUtil{
      * 
      * <p>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
-     * 如果要写入字符流，请考虑使用 {@link java.io.FileWriter}.
+     * 如果要写入字符流,请考虑使用 {@link java.io.FileWriter}.
      * </p>
      *
      * @param file
@@ -206,7 +206,7 @@ public final class FileUtil{
     /**
      * 从文件系统中的某个文件中获得输入字节.哪些文件可用取决于主机环境.<br>
      * {@link java.io.FileInputStream} 用于读取诸如图像数据之类的原始字节流.<br>
-     * 要读取字符流，请考虑使用 {@link java.io.FileReader}
+     * 要读取字符流,请考虑使用 {@link java.io.FileReader}
      *
      * @param fileName
      *            该文件通过文件系统中的路径名 fileName 指定.
@@ -223,11 +223,11 @@ public final class FileUtil{
      * 
      * <p>
      * {@link java.io.FileInputStream} 用于读取诸如图像数据之类的原始字节流.<br>
-     * 要读取字符流，请考虑使用 {@link java.io.FileReader}
+     * 要读取字符流,请考虑使用 {@link java.io.FileReader}
      * </p>
      * 
      * <p>
-     * 如果指定文件不存在;或者它是一个目录，而不是一个常规文件;抑或因为其他某些原因而无法打开进行读取，则抛出 FileNotFoundException
+     * 如果指定文件不存在;或者它是一个目录,而不是一个常规文件;抑或因为其他某些原因而无法打开进行读取,则抛出 FileNotFoundException
      * </p>
      *
      * @param file
@@ -271,7 +271,7 @@ public final class FileUtil{
         }
 
         // Returns an array of strings naming the files and directories in the directory denoted by this abstract pathname.
-        // 如果此抽象路径名不表示一个目录，那么此方法将返回 null
+        // 如果此抽象路径名不表示一个目录,那么此方法将返回 null
 
         // ubuntu 已经 测试ok
         File[] listFiles = file.listFiles();
@@ -434,7 +434,7 @@ public final class FileUtil{
     // ************************************************************
 
     /**
-     * 返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录，则返回 null.
+     * 返回此抽象路径名父目录的路径名字符串；如果此路径名没有指定父目录,则返回 null.
      *
      * @param path
      *            the path
@@ -512,7 +512,7 @@ public final class FileUtil{
      * </p>
      * 
      * <p>
-     * Common-io 2.4{@link org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)}有缺点，显示的是整数GB 不带小数（比如1.99G 显示为1G），apache 论坛上争议比较大
+     * Common-io 2.4{@link org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)}有缺点,显示的是整数GB 不带小数（比如1.99G 显示为1G）,apache 论坛上争议比较大
      * </p>
      * 
      * @param fileSize
@@ -552,9 +552,9 @@ public final class FileUtil{
      * 
      * @param file
      *            文件
-     * @return 此抽象路径名表示的文件的长度，以字节为单位；<br>
-     *         如果文件不存在，则返回 0L.<br>
-     *         对于表示特定于系统的实体（比如设备或管道）的路径名，某些操作系统可能返回 0L.
+     * @return 此抽象路径名表示的文件的长度,以字节为单位；<br>
+     *         如果文件不存在,则返回 0L.<br>
+     *         对于表示特定于系统的实体（比如设备或管道）的路径名,某些操作系统可能返回 0L.
      * @see File#length()
      */
     public static long getFileSize(File file){

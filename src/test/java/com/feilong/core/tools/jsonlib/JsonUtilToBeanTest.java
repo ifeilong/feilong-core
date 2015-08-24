@@ -53,7 +53,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilToBeanTest.class);
 
     /**
-     * 从json串转换成实体对象，且实体中Date属性能正确转换 void.
+     * 从json串转换成实体对象,且实体中Date属性能正确转换 void.
      */
     @Test
     public void toBean1(){
@@ -63,7 +63,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 从json串转换成实体对象，并且实体集合属性存有另外实体Bean void.
+     * 从json串转换成实体对象,并且实体集合属性存有另外实体Bean void.
      */
     @Test
     public void toBean(){
@@ -129,7 +129,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 把一个json数组串转换成实体数组，且数组元素的属性含有另外实例Bean void.
+     * 把一个json数组串转换成实体数组,且数组元素的属性含有另外实例Bean void.
      */
     @Test
     public void toArray3(){
@@ -148,7 +148,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 把一个json数组串转换成集合，且集合里存放的为实例Bean void.
+     * 把一个json数组串转换成集合,且集合里存放的为实例Bean void.
      */
     @Test
     public void toList(){
@@ -159,7 +159,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 把一个json数组串转换成集合，且集合里的对象的属性含有另外实例Bean void.
+     * 把一个json数组串转换成集合,且集合里的对象的属性含有另外实例Bean void.
      */
     @Test
     public void toList3(){
@@ -177,7 +177,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 把json对象串转换成map对象，且map对象里存放的为其他实体Bean void.
+     * 把json对象串转换成map对象,且map对象里存放的为其他实体Bean void.
      */
     @Test
     public void toMap(){
@@ -235,7 +235,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     }
 
     /**
-     * 把json对象串转换成map对象，且map对象里 存放的其他实体Bean还含有另外实体Bean void.
+     * 把json对象串转换成map对象,且map对象里 存放的其他实体Bean还含有另外实体Bean void.
      */
     @Test
     public void toMap3(){

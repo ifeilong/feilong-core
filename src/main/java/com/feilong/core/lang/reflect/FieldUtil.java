@@ -53,39 +53,39 @@ import com.feilong.core.util.Validator;
  * </tr>
  * <tr valign="top">
  * <td>{@link Class#getDeclaredFields()}</td>
- * <td>返回 Field 对象的一个数组，这些对象反映此 Class 对象所表示的类或接口所声明的<span style="color:green">所有字段</span>。
+ * <td>返回 Field 对象的一个数组,这些对象反映此 Class 对象所表示的类或接口所声明的<span style="color:green">所有字段</span>。
  * <p>
- * 包括<span style="color:green">公共、保护、默认（包）访问和私有字段</span>， <span style="color:red">但不包括继承的字段</span>。
+ * 包括<span style="color:green">公共、保护、默认（包）访问和私有字段</span>, <span style="color:red">但不包括继承的字段</span>。
  * </p>
- * <b>返回数组中的元素没有排序，也没有任何特定的顺序。</b><br>
- * 如果该类或接口不声明任何字段，或者此 Class 对象表示一个基本类型、一个数组类或 void，则此方法返回一个长度为 0 的数组。</td>
+ * <b>返回数组中的元素没有排序,也没有任何特定的顺序。</b><br>
+ * 如果该类或接口不声明任何字段,或者此 Class 对象表示一个基本类型、一个数组类或 void,则此方法返回一个长度为 0 的数组。</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link Class#getFields()}</td>
- * <td>返回一个包含某些 Field 对象的数组，这些对象反映此 Class 对象所表示的类或接口的所有 <span style="color:red">可访问公共字段</span>。
+ * <td>返回一个包含某些 Field 对象的数组,这些对象反映此 Class 对象所表示的类或接口的所有 <span style="color:red">可访问公共字段</span>。
  * 
  * <p>
- * 特别地，如果该 Class 对象表示一个类，则此方法返回<span style="color:red">该类及其所有超类的公共字段</span>。<br>
- * 如果该 Class 对象表示一个接口，则此方法返回<span style="color:red">该接口及其所有超接口的公共字段</span>。
+ * 特别地,如果该 Class 对象表示一个类,则此方法返回<span style="color:red">该类及其所有超类的公共字段</span>。<br>
+ * 如果该 Class 对象表示一个接口,则此方法返回<span style="color:red">该接口及其所有超接口的公共字段</span>。
  * </p>
  * 
- * <b>返回数组中的元素没有排序，也没有任何特定的顺序。</b><br>
- * 如果类或接口没有可访问的公共字段，或者表示一个数组类、一个基本类型或 void，则此方法返回长度为 0 的数组。 <br>
+ * <b>返回数组中的元素没有排序,也没有任何特定的顺序。</b><br>
+ * 如果类或接口没有可访问的公共字段,或者表示一个数组类、一个基本类型或 void,则此方法返回长度为 0 的数组。 <br>
  * 该方法不反映数组类的隐式长度字段。用户代码应使用 Array 类的方法来操作数组。</td>
  * </tr>
  * <tr valign="top">
  * <td>{@link Class#getDeclaredField(String)}</td>
- * <td>返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段。<br>
- * name 参数是一个 String，它指定所需字段的简称。<br>
- * 注意，此方法不反映数组类的 length 字段。</td>
+ * <td>返回一个 Field 对象,该对象反映此 Class 对象所表示的类或接口的指定已声明字段。<br>
+ * name 参数是一个 String,它指定所需字段的简称。<br>
+ * 注意,此方法不反映数组类的 length 字段。</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link Class#getField(String)}</td>
- * <td>返回一个 Field 对象，它反映此 Class 对象所表示的类或接口的指定公共成员字段。name 参数是一个 String，用于指定所需字段的简称。 <br>
+ * <td>返回一个 Field 对象,它反映此 Class 对象所表示的类或接口的指定公共成员字段。name 参数是一个 String,用于指定所需字段的简称。 <br>
  * 要反映的字段由下面的算法确定。设 C 为此对象所表示的类： <br>
- * 如果 C 声明一个带有指定名的公共字段，则它就是要反映的字段。 <br>
- * 如果在第 1 步中没有找到任何字段，则该算法被递归地应用于 C 的每一个直接超接口。直接超接口按其声明顺序进行搜索。 <br>
- * 如果在第 1、2 两步没有找到任何字段，且 C 有一个超类 S，则在 S 上递归调用该算法。如果 C 没有超类，则抛出 NoSuchFieldException。<br>
+ * 如果 C 声明一个带有指定名的公共字段,则它就是要反映的字段。 <br>
+ * 如果在第 1 步中没有找到任何字段,则该算法被递归地应用于 C 的每一个直接超接口。直接超接口按其声明顺序进行搜索。 <br>
+ * 如果在第 1、2 两步没有找到任何字段,且 C 有一个超类 S,则在 S 上递归调用该算法。如果 C 没有超类,则抛出 NoSuchFieldException。<br>
  * </td>
  * </tr>
  * </table>
@@ -112,11 +112,11 @@ public final class FieldUtil{
     // [start] Field
 
     /**
-     * 获得这个对象 所有字段的值(不是属性),key是 fieldName，value 是值.
+     * 获得这个对象 所有字段的值(不是属性),key是 fieldName,value 是值.
      *
      * @param obj
      *            the obj
-     * @return the field value map,key是 fieldName，value 是值
+     * @return the field value map,key是 fieldName,value 是值
      * @see #getAllFields(Object)
      * @see #getAllFieldNameAndValueMap(Object, String[])
      * @see java.lang.reflect.Modifier#isPrivate(int)
@@ -127,7 +127,7 @@ public final class FieldUtil{
     }
 
     /**
-     * 获得这个对象 所有字段的值(不是属性),key是 fieldName，value 是值.
+     * 获得这个对象 所有字段的值(不是属性),key是 fieldName,value 是值.
      *
      * @param obj
      *            the obj
@@ -259,13 +259,13 @@ public final class FieldUtil{
     }
 
     /**
-     * 返回一个 Field对象，该对象反映此 Class对象所表示的类或接口的指定已声明字段.
+     * 返回一个 Field对象,该对象反映此 Class对象所表示的类或接口的指定已声明字段.
      *
      * @param clz
      *            clz
      * @param fieldName
      *            字段名称
-     * @return 返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段
+     * @return 返回一个 Field 对象,该对象反映此 Class 对象所表示的类或接口的指定已声明字段
      * @see java.lang.Class#getDeclaredField(String)
      * @see org.apache.commons.lang3.reflect.FieldUtils#getDeclaredField(Class, String)
      * @see org.apache.commons.lang3.reflect.FieldUtils#getDeclaredField(Class, String, boolean)

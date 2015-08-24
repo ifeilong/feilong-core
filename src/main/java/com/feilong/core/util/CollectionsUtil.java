@@ -46,10 +46,10 @@ import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
  * 
  * <blockquote>
  * <ul>
- * <li>天下人都知道Set，Map不能重复</li>
+ * <li>天下人都知道Set,Map不能重复</li>
  * <li>80%人知道hashCode,equals是判断重复的法则 </li>
- * <li>40%人知道Set添加重复元素时，旧元素不会被覆盖</li>
- * <li>20%人知道Map添加重复键时，旧键不会被覆盖，而值会覆盖</li>
+ * <li>40%人知道Set添加重复元素时,旧元素不会被覆盖</li>
+ * <li>20%人知道Map添加重复键时,旧键不会被覆盖,而值会覆盖</li>
  * </ul>
  * </blockquote>
  * 
@@ -170,7 +170,7 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * <p>
-     * 在100W的list当中执行0.546秒，而contains，我则没耐心去等了.顺便贴一下在10W下2段代码的运行时间.<br>
+     * 在100W的list当中执行0.546秒,而contains,我则没耐心去等了.顺便贴一下在10W下2段代码的运行时间.<br>
      * [foo1] 100000 -> 50487 : 48610 ms.<br>
      * [foo2] 100000 -> 50487 : 47 ms.<br>
      * </p>
@@ -307,7 +307,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环objectCollection,调用 {@link PropertyUtil#getProperty(Object, String)} 获得 propertyName的值，塞到 <code>returnCollection</code> 中返回.
+     * 循环objectCollection,调用 {@link PropertyUtil#getProperty(Object, String)} 获得 propertyName的值,塞到 <code>returnCollection</code> 中返回.
      *
      * @param <T>
      *            the generic type
@@ -401,7 +401,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 调用 {@link ArrayContainsPredicate},获得 <code>propertyName</code>的值，判断是否 在<code>values</code>数组中;如果在，将该对象存入list中返回.
+     * 调用 {@link ArrayContainsPredicate},获得 <code>propertyName</code>的值,判断是否 在<code>values</code>数组中;如果在,将该对象存入list中返回.
      * 
      * <p>
      * 具体参见 {@link ArrayContainsPredicate}的使用
@@ -500,7 +500,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 解析对象集合,以 <code>keyPropertyName</code>属性值为key， <code>valuePropertyName</code>属性值为值，组成map返回.
+     * 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回.
      * 
      * <p>
      * 注意:返回的是 {@link LinkedHashMap}
@@ -542,7 +542,7 @@ public final class CollectionsUtil{
      *            the key property name
      * @param valuePropertyName
      *            the value property name
-     * @return 解析对象集合,以 <code>keyPropertyName</code>属性值为key， <code>valuePropertyName</code>属性值为值，组成map返回
+     * @return 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      */
@@ -573,10 +573,10 @@ public final class CollectionsUtil{
     }
 
     /**
-     * Group 对象(如果propertyName 存在相同的值，那么这些值，将会以list的形式 put到map中).
+     * Group 对象(如果propertyName 存在相同的值,那么这些值,将会以list的形式 put到map中).
      *
      * @param <T>
-     *            注意，此处的T其实是 Object 类型， 需要区别对待，比如从excel中读取的类型是String，那么就不能简简单单的使用Integer来接收， 因为不能强制转换
+     *            注意,此处的T其实是 Object 类型, 需要区别对待,比如从excel中读取的类型是String,那么就不能简简单单的使用Integer来接收, 因为不能强制转换
      * @param <O>
      *            the generic type
      * @param objectCollection
@@ -613,7 +613,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>，统计 {@code propertyName}出现的次数.
+     * 循环 <code>objectCollection</code>,统计 {@code propertyName}出现的次数.
      *
      * @param <T>
      *            the generic type
@@ -630,7 +630,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,只选择 符合 <code>includePredicate</code>的对象，统计 {@code propertyName}出现的次数.
+     * 循环 <code>objectCollection</code>,只选择 符合 <code>includePredicate</code>的对象,统计 {@code propertyName}出现的次数.
      *
      * @param <T>
      *            the generic type
@@ -639,7 +639,7 @@ public final class CollectionsUtil{
      * @param objectCollection
      *            the object collection
      * @param includePredicate
-     *            只选择 符合 <code>includePredicate</code>的对象，如果是null 则统计集合中全部的Object
+     *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
      * @param propertyName
      *            the property name
      * @return the map< t, integer>
@@ -758,7 +758,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 总和，计算集合对象内指定的属性的总和.
+     * 总和,计算集合对象内指定的属性的总和.
      *
      * @param <O>
      *            the generic type

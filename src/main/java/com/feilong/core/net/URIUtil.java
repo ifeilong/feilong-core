@@ -48,7 +48,7 @@ import com.feilong.core.util.Validator;
  * <tr valign="top">
  * <td>{@link java.net.URI URI}<br>
  * Uniform Resource Identifier</td>
- * <td>统一资源标识符，用来唯一的标识一个资源<br>
+ * <td>统一资源标识符,用来唯一的标识一个资源<br>
  * There are two types of URIs: URLs and URNs. <br>
  * See RFC 1630: Universal Resource Identifiers in WWW: A Unifying Syntax for the Expression of Names and Addresses of Objects on the
  * Network as used in the WWW.</td>
@@ -57,25 +57,25 @@ import com.feilong.core.util.Validator;
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.net.URL URL}<br>
  * Uniform Resource Locator</td>
- * <td>统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。 <br>
+ * <td>统一资源定位器,它是一种具体的URI,即URL可以用来标识一个资源,而且还指明了如何locate这个资源。 <br>
  * See RFC 1738: Uniform Resource Locators (URL)</td>
  * </tr>
  * 
  * <tr valign="top">
  * <td>URN<br>
  * uniform resource name</td>
- * <td>统一资源命名，是通过名字来标识资源， <br>
+ * <td>统一资源命名,是通过名字来标识资源, <br>
  * 比如mailto:java-net@java.sun.com。</td>
  * </tr>
  * </table>
  * 
  * <p>
- * 也就是说，{@link java.net.URI URI}是以一种抽象的，高层次概念定义统一资源标识，而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。
+ * 也就是说,{@link java.net.URI URI}是以一种抽象的,高层次概念定义统一资源标识,而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。
  * </p>
  * 
  * <p>
- * 一个{@link URI}实例可以代表绝对的，也可以是相对的，只要它符合URI的语法规则;<br>
- * 而{@link URL}类则不仅符合语义，还包含了定位该资源的信息，<span style="color:red">因此它不能是相对的，schema必须被指定</span>。
+ * 一个{@link URI}实例可以代表绝对的,也可以是相对的,只要它符合URI的语法规则;<br>
+ * 而{@link URL}类则不仅符合语义,还包含了定位该资源的信息,<span style="color:red">因此它不能是相对的,schema必须被指定</span>。
  * </p>
  * </blockquote>
  * 
@@ -148,10 +148,10 @@ import com.feilong.core.util.Validator;
  * </p>
  * 
  * <p>
- * 每一个path片段 可以有可选的 path参数 (也叫 matrix参数)，这是在path片段的最后由";"开始的一些字符。每个参数名和值由"="字符分隔，像这样："/file;p=1"，这定义了path片段 "file"有一个 path参数 "p"，其值为"1"。<br>
- * 这些参数并不常用 — 这得清楚 — 但是它们确实是存在，而且从 Yahoo RESTful API 文档我们能找到很好的理由去使用它们： Matrix参数可以让程序在GET请求中可以获取部分的数据集。参考
+ * 每一个path片段 可以有可选的 path参数 (也叫 matrix参数),这是在path片段的最后由";"开始的一些字符。每个参数名和值由"="字符分隔,像这样："/file;p=1",这定义了path片段 "file"有一个 path参数 "p",其值为"1"。<br>
+ * 这些参数并不常用 — 这得清楚 — 但是它们确实是存在,而且从 Yahoo RESTful API 文档我们能找到很好的理由去使用它们： Matrix参数可以让程序在GET请求中可以获取部分的数据集。参考
  * {@link <a href="https://developer.yahoo.com/social/rest_api_guide/partial-resources.html#paging-collection">数据集的分页</a>}
- * 。因为matrix参数可以跟任何数据集的URI格式的path片段，它们可以在内部的path片段中被使用。
+ * 。因为matrix参数可以跟任何数据集的URI格式的path片段,它们可以在内部的path片段中被使用。
  * </p>
  * </blockquote>
  * 
@@ -179,8 +179,8 @@ public final class URIUtil{
      * call {@link java.net.URI#URI(String)}.
      * 
      * <p>
-     * 如果String对象的URI违反了RFC 2396的语法规则，将会产生一个 {@link URISyntaxException}.<br>
-     * 如果知道URI是有效的，不会产生 {@link URISyntaxException}，可以使用静态的 {@link java.net.URI#create(String)}方法
+     * 如果String对象的URI违反了RFC 2396的语法规则,将会产生一个 {@link URISyntaxException}.<br>
+     * 如果知道URI是有效的,不会产生 {@link URISyntaxException},可以使用静态的 {@link java.net.URI#create(String)}方法
      * </p>
      *
      * @param uri
@@ -214,7 +214,7 @@ public final class URIUtil{
      * @param uriString
      *            the uri string
      * @param charsetType
-     *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
+     *            何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return if isNullOrEmpty(uri),return null;<br>
      *         if Exception,throw URIParseException
@@ -265,7 +265,7 @@ public final class URIUtil{
      * @param uriString
      *            the uri string
      * @param charsetType
-     *            何种编码，如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
+     *            何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return the string
      * @see <a
@@ -398,10 +398,10 @@ public final class URIUtil{
      * <li>字母数字字符 "a" 到 "z"、"A" 到 "Z" 和 "0" 到 "9" 保持不变.</li>
      * <li>特殊字符 "."、"-"、"*" 和 "_" 保持不变.</li>
      * <li>空格字符 " " 转换为一个加号 "+".</li>
-     * <li>所有其他字符都是不安全的，因此首先使用一些编码机制将它们转换为一个或多个字节.<br>
-     * 然后每个字节用一个包含 3 个字符的字符串 "%xy" 表示，其中 xy 为该字节的两位十六进制表示形式.<br>
+     * <li>所有其他字符都是不安全的,因此首先使用一些编码机制将它们转换为一个或多个字节.<br>
+     * 然后每个字节用一个包含 3 个字符的字符串 "%xy" 表示,其中 xy 为该字节的两位十六进制表示形式.<br>
      * 推荐的编码机制是 UTF-8.<br>
-     * 但是，出于兼容性考虑，如果未指定一种编码，则使用相应平台的默认编码.</li>
+     * 但是,出于兼容性考虑,如果未指定一种编码,则使用相应平台的默认编码.</li>
      * </ul>
      *
      * @param value
@@ -443,7 +443,7 @@ public final class URIUtil{
      * <p>
      * Not doing so may introduce incompatibilites.<br>
      * <em><strong>Note:</strong> 
-     * 注：<a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>建议指出，UTF-8应该被使用. 不这样做可能会带来兼容性能.</em>
+     * 注：<a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>建议指出,UTF-8应该被使用. 不这样做可能会带来兼容性能.</em>
      * </p>
      *
      * @param value
