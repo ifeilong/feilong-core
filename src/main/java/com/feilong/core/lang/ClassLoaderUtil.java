@@ -384,7 +384,7 @@ public final class ClassLoaderUtil{
      * @return the class loader info map for log
      * @since 1.1.1
      */
-    public static Map<String, Object> getClassLoaderInfoMapForLog(ClassLoader classLoader){
+    private static Map<String, Object> getClassLoaderInfoMapForLog(ClassLoader classLoader){
         Map<String, Object> classLoaderInfoMap = new LinkedHashMap<String, Object>();
         classLoaderInfoMap.put("classLoader", "" + classLoader);
         classLoaderInfoMap.put("classLoader[CanonicalName]", classLoader.getClass().getCanonicalName());

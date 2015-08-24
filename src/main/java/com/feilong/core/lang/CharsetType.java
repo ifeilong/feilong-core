@@ -36,6 +36,55 @@ package com.feilong.core.lang;
 public final class CharsetType{
 
     /**
+     * Eight-bit Unicode Transformation Format. <code>{@value}</code>.
+     *
+     * <p>
+     * Every implementation of the Java platform is required to support this character encoding.
+     * </p>
+     * 
+     * <h3>Unicode编码</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 正如前面前面所提到的一样，世界存在这么多国家，也存在着多种编码风格，像中文的GB232、GBK、GB18030，这样乱搞一套，虽然在本地运行没有问题，但是一旦出现在网络上，由于互不兼容，访问则会出现乱码。
+     * </p>
+     * 
+     * <p>
+     * 为了解决这个问题，伟大的Unicode编码腾空出世。
+     * Unicode编码的作用就是能够使计算机实现夸平台、跨语言的文本转换和处理。它几乎包含了世界上所有的符号，并且每个符号都是独一无二的。在它的编码世界里，每一个数字代表一个符号，每一个符号代表了一个数字，不存在二义性。
+     * </p>
+     * 
+     * <p>
+     * Unicode编码又称统一码、万国码、单一码，它是业界的一种标准，是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。<br>
+     * 同时Unicode是字符集，它存在很多几种实现方式如： UTF-8、UTF-16.
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>UTF-8:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 互联网的普及，强烈要求出现一种统一的编码方式。UTF-8就是在互联网上使用最广的一种unicode的实现方式。其他实现方式还包括UTF-16和UTF-32，不过在互联网上基本不用。<br>
+     * <span style="color:red">重复一遍：UTF-8是Unicode的实现方式之一。</span> <br>
+     * UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。 
+     * </p>
+     * UTF-8的编码规则很简单，只有两条： 
+     * <p>
+     * <ul>
+     * <li>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。 </li>
+     * <li>2）对于n字节的符号（n>1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</li>
+     * </ul>
+     * </p>
+     * </blockquote>
+     * 
+     * @see org.apache.commons.lang3.CharEncoding#UTF_8
+     */
+    public static final String UTF8       = org.apache.commons.lang3.CharEncoding.UTF_8;
+
+    //******************************************************************************************
+
+    /**
      * GB2312只能表示简体中文 <code>{@value}</code>.
      * 
      * <p style="color:red">
@@ -102,52 +151,6 @@ public final class CharsetType{
     public static final String GB18030    = "GB18030";
 
     // *********************************************************************************************
-    /**
-     * Eight-bit Unicode Transformation Format. <code>{@value}</code>.
-     *
-     * <p>
-     * Every implementation of the Java platform is required to support this character encoding.
-     * </p>
-     * 
-     * <h3>Unicode编码</h3>
-     * 
-     * <blockquote>
-     * 
-     * <p>
-     * 正如前面前面所提到的一样，世界存在这么多国家，也存在着多种编码风格，像中文的GB232、GBK、GB18030，这样乱搞一套，虽然在本地运行没有问题，但是一旦出现在网络上，由于互不兼容，访问则会出现乱码。
-     * </p>
-     * 
-     * <p>
-     * 为了解决这个问题，伟大的Unicode编码腾空出世。
-     * Unicode编码的作用就是能够使计算机实现夸平台、跨语言的文本转换和处理。它几乎包含了世界上所有的符号，并且每个符号都是独一无二的。在它的编码世界里，每一个数字代表一个符号，每一个符号代表了一个数字，不存在二义性。
-     * </p>
-     * 
-     * <p>
-     * Unicode编码又称统一码、万国码、单一码，它是业界的一种标准，是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。<br>
-     * 同时Unicode是字符集，它存在很多几种实现方式如： UTF-8、UTF-16.
-     * </p>
-     * </blockquote>
-     * 
-     * <h3>UTF-8:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 互联网的普及，强烈要求出现一种统一的编码方式。UTF-8就是在互联网上使用最广的一种unicode的实现方式。其他实现方式还包括UTF-16和UTF-32，不过在互联网上基本不用。<br>
-     * <span style="color:red">重复一遍：UTF-8是Unicode的实现方式之一。</span> <br>
-     * UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。 
-     * </p>
-     * UTF-8的编码规则很简单，只有两条： 
-     * <p>
-     * <ul>
-     * <li>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。 </li>
-     * <li>2）对于n字节的符号（n>1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</li>
-     * </ul>
-     * </p>
-     * </blockquote>
-     * 
-     * @see org.apache.commons.lang3.CharEncoding#UTF_8
-     */
-    public static final String UTF8       = org.apache.commons.lang3.CharEncoding.UTF_8;
 
     /**
      * ISO/IEC 8859-1，又称Latin-1或“西欧语言”，是国际标准化组织内ISO/IEC 8859的第一个8位字符集 <code>{@value}</code>.
