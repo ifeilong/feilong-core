@@ -16,9 +16,9 @@
 package com.feilong.core.util.predicate;
 
 import org.apache.commons.collections4.Predicate;
+import org.apache.commons.lang3.ObjectUtils;
 
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.lang.ObjectUtil;
 
 /**
  * 调用 {@link com.feilong.core.bean.PropertyUtil#getProperty(Object, String)} 匹配属性值.
@@ -60,6 +60,6 @@ public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
     @Override
     public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
-        return ObjectUtil.equals(property, value);
+        return ObjectUtils.equals(property, value);
     }
 }

@@ -19,12 +19,19 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.lang3.ObjectUtils;
 
 import com.feilong.core.bean.PropertyUtil;
 
 /**
  * {@link Object} 工具类.
+ * 
+ * <h3>判断相等</h3>
+ * 
+ * <blockquote>
+ * <ol>
+ * <li>{@link org.apache.commons.lang3.ObjectUtils#equals(Object, Object)} 支持两个值都是null的情况</li>
+ * </ol>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.0.0 2010-4-5 下午11:00:54
@@ -85,37 +92,6 @@ public final class ObjectUtil{
             }
         }
         return null;
-    }
-
-    /**
-     * 
-     * Compares two objects for equality, where either one or both objects may be {@code null}.
-     * 
-     * <p>
-     * 
-     * <pre>
-     * ObjectUtils.equals(null, null)                  = true
-     * ObjectUtils.equals(null, "")                    = false
-     * ObjectUtils.equals("", null)                    = false
-     * ObjectUtils.equals("", "")                      = true
-     * ObjectUtils.equals(Boolean.TRUE, null)          = false
-     * ObjectUtils.equals(Boolean.TRUE, "true")        = false
-     * ObjectUtils.equals(Boolean.TRUE, Boolean.TRUE)  = true
-     * ObjectUtils.equals(Boolean.TRUE, Boolean.FALSE) = false
-     * </pre>
-     * 
-     * </p>
-     *
-     * @param object1
-     *            the first object, may be {@code null}
-     * @param object2
-     *            the second object, may be {@code null}
-     * @return {@code true} if the values of both objects are the same
-     * @see "java.util.Objects#equals(Object, Object)"
-     * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
-     */
-    public static Boolean equals(Object object1,Object object2){
-        return ObjectUtils.equals(object1, object2);
     }
 
     /**
