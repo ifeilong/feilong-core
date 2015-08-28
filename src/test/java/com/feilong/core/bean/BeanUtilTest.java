@@ -43,6 +43,7 @@ import com.feilong.core.bean.command.SalesOrderDto;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.test.Person;
 import com.feilong.test.User;
 
 /**
@@ -167,26 +168,40 @@ public class BeanUtilTest{
      * Copy property.
      */
     @Test
-    public void copyProperty(){
+    public void testCopyProperty(){
         User a = new User();
         a.setId(5L);
         a.setMoney(new BigDecimal(500000));
         a.setDate(new Date());
         User b = new User();
-        // DateConverter converter = new DateConverter(DatePattern.forToString, Locale.US);
+
         ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
 
         String[] strs = { "date", "money" };
         BeanUtil.copyProperties(b, a, strs);
-        LOGGER.info(b.getDate() + "");
-        LOGGER.info(b.getMoney() + "");
+        LOGGER.info(JsonUtil.format(b));
+    }
+
+    /**
+     * Test copy property1.
+     */
+    @Test
+    public void testCopyProperty1(){
+        User user = new User();
+        user.setId(5L);
+
+        Person person = new Person();
+
+        String[] strs = { "age", "name" };
+        BeanUtil.copyProperties(person, user, strs);
+        LOGGER.info(JsonUtil.format(person));
     }
 
     /**
      * Copy properties.
      */
     @Test
-    public void copyProperties(){
+    public void testCopyProperties(){
         User a = new User();
         a.setId(5L);
         a.setDate(new Date());

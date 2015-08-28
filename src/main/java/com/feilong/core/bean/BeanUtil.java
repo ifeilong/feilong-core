@@ -297,17 +297,29 @@ public final class BeanUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
-     * 如果有java.util.Date 类型的 需要copy,那么 需要先这么着:
-     * DateConverter converter = new DateConverter(DatePattern.forToString, Locale.US);
+     * <ol>
+     * <li>如果传入的includePropertyNames,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
+     * <li>如果传入的includePropertyNames,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
+     * {@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
+     * <li>
+     * 
+     * <p>
+     * 如果有 {@link java.util.Date} 类型的 需要copy,那么 需要先这么着:
+     * </p>
+     * 
+     * <p>
+     * DateConverter converter = new DateConverter(DatePattern.forToString, Locale.US);<br>
      * ConvertUtils.register(converter, Date.class);
+     * </p>
      * 
      * 或者使用内置的:
-     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
-     * 
+     * <p>
+     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class); <br>
      * BeanUtil.copyProperty(b, a, &quot;date&quot;);
-     * </pre>
+     * </p>
      * 
+     * </li>
+     * </ol>
      * </blockquote>
      * 
      * 

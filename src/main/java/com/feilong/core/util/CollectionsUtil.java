@@ -452,6 +452,25 @@ public final class CollectionsUtil{
     }
 
     /**
+     * Select rejected.
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param predicate
+     *            the predicate
+     * @return the list< o>
+     * @since 1.4.0
+     */
+    public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
+        if (Validator.isNullOrEmpty(objectCollection)){
+            throw new NullPointerException("objectCollection can't be null/empty!");
+        }
+        return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
+    }
+
+    /**
      * 循环遍历 <code>objectCollection</code> ,返回 当bean propertyName 属性值不 equals 特定value 时候的list.
      *
      * @param <O>
