@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.feilong.platform</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.4.0</version>
+		<version>1.4.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>feilong-core</artifactId>
@@ -204,7 +204,7 @@
 			<dependency>
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
-			<version>1.4.01</version>
+			<version>${version.xml-apis}</version>
 			</dependency> -->
 
 		<!-- 规范下 xercesImpl版本 -->
@@ -289,7 +289,7 @@
 					<dependency>
 						<groupId>xml-apis</groupId>
 						<artifactId>xml-apis</artifactId>
-						<version>1.4.01</version>
+						<version>${version.xml-apis}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
