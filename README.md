@@ -58,7 +58,7 @@ Reduce development, Release ideas
 			<dependency>
 				<groupId>com.feilong.platform</groupId>
 				<artifactId>feilong-core</artifactId>
-				<version>1.3.0</version>
+				<version>1.4.0</version>
 			</dependency>
 			....
 		</dependencies>
@@ -137,5 +137,5 @@ commons |`feilong-core` | 核心jar,所有feilong-platform的基础 | 1.6
 
 如果您对feilong core 有任何建议和批评,可以使用下面的联系方式：
 
-* 新浪微博:http://weibo.com/venusdrogon 
+* 新浪微博:http://weibo.com/venusdrogon
 * iteye博客:http://feitianbenyue.iteye.com/
