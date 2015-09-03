@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 
 /**
@@ -214,7 +215,8 @@ public final class MapUtil{
      *            the extract property name
      * @param keysClass
      *            map key 的class 类型
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>if Validator.isNullOrEmpty(map) ,NullPointerException</li>
      *         <li>if Validator.isNullOrEmpty(extractPropertyName),NullPointerException</li>
      *         <li>if Validator.isNullOrEmpty(includeKeys), then will extract map total keys</li>
@@ -247,7 +249,8 @@ public final class MapUtil{
      *            待提取的 {@code O} 的属性名称
      * @param keysClass
      *            map key 的class 类型
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>if Validator.isNullOrEmpty(map) ,NullPointerException</li>
      *         <li>if Validator.isNullOrEmpty(extractPropertyName),NullPointerException</li>
      *         <li>if Validator.isNullOrEmpty(includeKeys), then will extract map total keys</li>
@@ -262,7 +265,7 @@ public final class MapUtil{
         if (Validator.isNullOrEmpty(extractPropertyName)){
             throw new NullPointerException("extractPropertyName is null or empty!");
         }
-        //如果excludeKeys 是null ,那么抽取 所有的key
+        //如果excludeKeys是null ,那么抽取所有的key
         K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(map.keySet(), keysClass) : includeKeys;
 
         Map<K, V> returnMap = new HashMap<K, V>();
@@ -272,7 +275,7 @@ public final class MapUtil{
                 V v = PropertyUtil.getProperty(o, extractPropertyName);
                 returnMap.put(key, v);
             }else{
-                LOGGER.warn("map don't contains key:[{}]", key);
+                LOGGER.warn("map:{} don't contains key:[{}]", JsonUtil.format(map), key);
             }
         }
         return returnMap;

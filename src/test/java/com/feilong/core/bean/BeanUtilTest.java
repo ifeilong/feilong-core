@@ -168,7 +168,7 @@ public class BeanUtilTest{
      * Copy property.
      */
     @Test
-    public void testCopyProperty(){
+    public void testCopyProperties1(){
         User a = new User();
         a.setId(5L);
         a.setMoney(new BigDecimal(500000));
@@ -224,6 +224,26 @@ public class BeanUtilTest{
         SalesOrderDto salesOrderDto = new SalesOrderDto();
         //ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
         BeanUtil.copyProperties(salesOrderDto, salesOrder);
+        LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
+    }
+
+    /**
+     * Test set property.
+     */
+    @Test
+    public void testSetProperty(){
+        SalesOrderDto salesOrderDto = new SalesOrderDto();
+        BeanUtil.setProperty(salesOrderDto, "code", "123456");
+        LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
+    }
+
+    /**
+     * Test copy property.
+     */
+    @Test
+    public void testCopyProperty(){
+        SalesOrderDto salesOrderDto = new SalesOrderDto();
+        BeanUtil.copyProperty(salesOrderDto, "code", "123456");
         LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
     }
 

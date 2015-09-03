@@ -526,9 +526,8 @@ public final class JsonUtil{
     public static JSON toJSON(Object obj,JsonConfig jsonConfig){
         JsonConfig useJsonConfig = defaultIfNull(jsonConfig);
 
-        // obj instanceof Collection || obj instanceof Object[]
-        if (JSONUtils.isArray(obj) || //
-                        obj instanceof Enum || // obj.getClass().isEnum()这么些 null会报错// object' is an Enum. Use JSONArray instead
+        if (JSONUtils.isArray(obj) || // obj instanceof Collection || obj instanceof Object[]
+                        obj instanceof Enum || // obj.getClass().isEnum()这么写 null会报错// object' is an Enum. Use JSONArray instead
                         obj instanceof Iterator){
             Object arrayJsonObject = obj;
             if (obj instanceof Iterator){

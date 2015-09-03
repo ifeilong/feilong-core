@@ -15,8 +15,6 @@
  */
 package com.feilong.core.io;
 
-import java.io.IOException;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,12 +34,9 @@ public class IOReaderUtilTest{
 
     /**
      * Testname.
-     *
-     * @throws IOException
-     *             the IO exception
      */
     @Test
-    public void testname() throws IOException{
+    public void testname(){
         String fileName = "F:\\Life 生活\\Job 工作\\淘宝开店\\商家编码.txt";
         String content = IOReaderUtil.getFileContent(fileName, CharsetType.UTF8);
         // 将内容以换行符转成数组
@@ -52,12 +47,9 @@ public class IOReaderUtilTest{
 
     /**
      * Parses the nginx.
-     *
-     * @throws IOException
-     *             the IO exception
      */
     @Test
-    public void parseNginx() throws IOException{
+    public void parseNginx(){
         String fileName = "C:\\Users\\feilong\\Documents\\AJ11\\AJ11\\1.txt";
         String content = IOReaderUtil.getFileContent(fileName, CharsetType.UTF8);
 
@@ -70,12 +62,9 @@ public class IOReaderUtilTest{
 
     /**
      * Gets the file content.
-     *
-     * @throws IOException
-     *             the IO exception
      */
     @Test
-    public void testGetFileContent() throws IOException{
+    public void testGetFileContent(){
         String propertiesPath = "I:/Ebook/book.properties";
         LOGGER.info(IOReaderUtil.getFileContent(propertiesPath, CharsetType.UTF8));
     }

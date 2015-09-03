@@ -18,6 +18,7 @@ package com.feilong.core.util;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -77,6 +78,22 @@ public class MapUtilTest{
     @Test(expected = NullPointerException.class)
     public void testConstructSubMap1(){
         LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(null, "id", Long.class)));
+    }
+
+    /**
+     * TestMapUtilTest.
+     */
+    @Test
+    public void testMapUtilTest1(){
+        Map<String, String> map = new TreeMap<String, String>();
+        map.put(null, "111");
+
+        for (Map.Entry<String, String> entry : map.entrySet()){
+            String key = entry.getKey();
+            String value = entry.getValue();
+            LOGGER.debug("key:{},value:{}", key, value);
+        }
+
     }
 
     /**

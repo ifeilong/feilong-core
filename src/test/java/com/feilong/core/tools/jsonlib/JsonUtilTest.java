@@ -112,6 +112,15 @@ public class JsonUtilTest extends BaseJsonTest{
      * Test json string2.
      */
     @Test
+    public void testJsonMap(){
+        Map<String, String> nullMap = null;
+        LOGGER.info(JsonUtil.format(nullMap));
+    }
+
+    /**
+     * Test json string2.
+     */
+    @Test
     public void testJsonString2(){
         LOGGER.info(JsonUtil.format(1L));
         LOGGER.info(JsonUtil.format(1));

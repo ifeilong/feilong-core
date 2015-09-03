@@ -347,18 +347,15 @@ public final class BeanUtil{
      *            原始对象
      * @param includePropertyNames
      *            包含的属性数组, can't be null/empty!
-     * @see #copyProperty(Object, Object, String)
-     * @see com.feilong.core.bean.BeanUtil#copyProperty(Object, Object, String)
+     * @see #copyProperty(Object, String, Object)
      */
     public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){
         if (Validator.isNullOrEmpty(includePropertyNames)){
             throw new NullPointerException("includePropertyNames can't be null/empty!");
         }
-
-        int length = includePropertyNames.length;
-        for (int i = 0; i < length; ++i){
-            String filedName = includePropertyNames[i];
-            copyProperty(toObj, fromObj, filedName);
+        for (String propertyName : includePropertyNames){
+            String value = getProperty(fromObj, propertyName);
+            copyProperty(toObj, propertyName, value);
         }
     }
 
@@ -367,57 +364,9 @@ public final class BeanUtil{
     // [end]
 
     // [start] copyProperty
-    /**
-     * 对象值的复制 {@code fromObj-->toObj}.
-     * 
-     * <h3>关于 {@link java.util.Date}类型的copy:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre>
-     * 如果有 {@link java.util.Date} 类型的需要copy,那么需要先注册 {@link org.apache.commons.beanutils.converters.DateConverter}
-     * DateConverter converter = new DateConverter(DatePattern.forToString, Locale.US);
-     * ConvertUtils.register(converter, Date.class);
-     * 
-     * 或者 使用 内置的
-     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), Date.class);
-     * BeanUtil.copyProperty(b, a, &quot;date&quot;);
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * 
-     * <h3>用法:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre>
-     * 例如两个pojo:enterpriseSales和enterpriseSales_form 都含有字段&quot;enterpriseName&quot;
-     * 通常写法
-     * enterpriseSales.setEnterpriseName(enterpriseSales_form.getEnterpriseName());
-     * 
-     * 此时,可以使用
-     * BeanUtil.copyProperty(enterpriseSales,enterpriseSales_form,&quot;enterpriseName&quot;);
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param toObj
-     *            目标对象
-     * @param fromObj
-     *            原始对象
-     * @param propertyName
-     *            property名称 (can be nested/indexed/mapped/combo)
-     * @see #getProperty(Object, String)
-     * @see #copyProperty(Object, String, Object)
-     */
-    public static void copyProperty(Object toObj,Object fromObj,String propertyName){
-        Object value = getProperty(fromObj, propertyName);
-        copyProperty(toObj, propertyName, value);
-    }
 
     /**
-     * bean中的成员变量name赋值为value.
+     * bean中的 <code>propertyName</code> 赋值为value.
      * 
      * <pre>
      * 如果有java.util.Date 类型的 需要copy,那么 需要先这么着
@@ -512,8 +461,7 @@ public final class BeanUtil{
      */
     public static void setProperty(Object bean,String propertyName,Object value){
         try{
-            // BeanUtils支持把所有类型的属性都作为字符串处理
-            // 在后台自动进行类型转换(字符串和真实类型的转换)
+            // BeanUtils支持把所有类型的属性都作为字符串处理,在后台自动进行类型转换(字符串和真实类型的转换)
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
@@ -585,7 +533,7 @@ public final class BeanUtil{
         // Return the value of the specified property of the specified bean,
         // no matter which property reference format is used, as a String.
         try{
-            return BeanUtils.getProperty(bean, propertyName);
+            return org.apache.commons.beanutils.BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
