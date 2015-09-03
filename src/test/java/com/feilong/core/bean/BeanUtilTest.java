@@ -204,25 +204,25 @@ public class BeanUtilTest{
      */
     @Test
     public void testCopyProperties(){
-        User a = new User();
-        a.setId(5L);
-        a.setDate(new Date());
+        User user1 = new User();
+        user1.setId(5L);
+        user1.setDate(new Date());
         String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
-        a.setNickName(nickName);
+        user1.setNickName(nickName);
 
-        User b = new User();
+        User user2 = new User();
 
         String[] aStrings = { "date", "id", "nickName" };
         ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
-        BeanUtil.copyProperties(b, a, aStrings);
-        LOGGER.debug(JsonUtil.format(b));
+        BeanUtil.copyProperties(user2, user1, aStrings);
+        LOGGER.debug(JsonUtil.format(user2));
     }
 
     /**
      * Copy properties1.
      */
     @Test
-    public void copyProperties1(){
+    public void testCopyProperties3(){
         SalesOrderDto salesOrderDto = new SalesOrderDto();
         //ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
         BeanUtil.copyProperties(salesOrderDto, salesOrder);

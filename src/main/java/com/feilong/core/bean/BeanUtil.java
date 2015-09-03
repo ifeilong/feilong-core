@@ -78,6 +78,13 @@ import com.feilong.core.util.Validator;
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}区别:</h3>
  * 
  * <blockquote>
+ * 
+ * <pre>
+ * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); // 这里的9是String类型
+ * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); // 这里的是int类型
+ * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化,后者不能
+ * </pre>
+ * 
  * <p>
  * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同。 <br>
  * BeanUtils着重于"Bean",返回值通常是String,<br>
@@ -101,6 +108,44 @@ import com.feilong.core.util.Validator;
  * 如果我们只是为bean的属性赋值的话,使用{@link BeanUtils#copyProperty(Object, String, Object)}就可以了;
  * 而{@link BeanUtils#setProperty(Object, String, Object)}方法是实现  {@link BeanUtils#populate(Object,Map)}机制的基础,也就是说如果我们需要自定义实现populate()方法,那么我们可以override {@link BeanUtils#setProperty(Object, String, Object)}方法.
  * 所以,做为一般的日常使用,{@link BeanUtils#setProperty(Object, String, Object)}方法是不推荐使用的.
+ * </pre>
+ * 
+ * </blockquote>
+ * 
+ * 
+ * <h3>关于propertyName:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <pre>
+ * {@code
+ * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
+ * Company c = new Company();
+ * c.setName("Simple");
+ *  
+ * 对于Simple类型,参数二直接是属性名即可
+ * //Simple
+ * LOGGER.debug(BeanUtils.getProperty(c, "name"));
+ *  
+ * 对于Map类型,则需要以“属性名（key值）”的形式
+ * //Map
+ *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
+ *     HashMap am = new HashMap();
+ *     am.put("1","234-222-1222211");
+ *     am.put("2","021-086-1232323");
+ *     BeanUtils.setProperty(c,"telephone",am);
+ * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
+ *  
+ * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
+ * //index
+ *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
+ *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
+ *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
+ *  
+ * 当然这3种类也可以组合使用啦！
+ * //nest
+ *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
+ * }
  * </pre>
  * 
  * </blockquote>
@@ -229,7 +274,7 @@ public final class BeanUtil{
      * <ul>
      * <li>{@link BeanUtils#copyProperties(Object, Object)}能给不同的两个成员变量相同的,但类名不同的两个类之间相互赋值</li>
      * <li>{@link PropertyUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而前者不支持这个功能,但是速度会更快一些.</li>
-     * <li>commons-beanutils v1.9.0以前的版本 BeanUtils 不允许对象的属性值为 null,PropertyUtils 可以拷贝属性值 null 的对象.<br>
+     * <li>commons-beanutils v1.9.0以前的版本 BeanUtils不允许对象的属性值为 null,PropertyUtils可以拷贝属性值 null的对象.<br>
      * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
      * of certain data types),具体信息,可以参阅commons-beanutils的
      * {@link <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a>}</li>
@@ -277,45 +322,6 @@ public final class BeanUtil{
     /**
      * 使用 {@link BeanUtils#setProperty(Object, String, Object)} 来设置属性值(<b>会进行类型转换</b>).
      * 
-     * <pre>
-     * 
-     * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); // 这里的9是String类型
-     * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); // 这里的是int类型
-     * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化,后者不能
-     * </pre>
-     * 
-     * 
-     * <pre>
-     * {@code
-     * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
-     * Company c = new Company();
-     * c.setName("Simple");
-     *  
-     * 对于Simple类型,参数二直接是属性名即可
-     * //Simple
-     * LOGGER.debug(BeanUtils.getProperty(c, "name"));
-     *  
-     * 对于Map类型,则需要以“属性名（key值）”的形式
-     * //Map
-     *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
-     *     HashMap am = new HashMap();
-     *     am.put("1","234-222-1222211");
-     *     am.put("2","021-086-1232323");
-     *     BeanUtils.setProperty(c,"telephone",am);
-     * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
-     *  
-     * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
-     * //index
-     *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
-     *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
-     *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
-     *  
-     * 当然这3种类也可以组合使用啦！
-     * //nest
-     *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
-     * }
-     * </pre>
-     *
      * @param bean
      *            Bean on which setting is to be performed
      * @param propertyName
@@ -345,50 +351,6 @@ public final class BeanUtil{
 
     /**
      * 使用 {@link BeanUtils#getProperty(Object, String)} 类从对象中取得属性值.
-     * 
-     * <h3>{@link BeanUtils#getProperty(Object, String) BeanUtils.getProperty}&{@link PropertyUtils#getProperty(Object, String)
-     * PropertyUtils.getProperty}的区别:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * {@link BeanUtils#getProperty(Object, String)} 会将结果转成String返回,<br>
-     * {@link PropertyUtils#getProperty(Object, String)} 结果是Object类型,不会做类型转换
-     * </p>
-     * </blockquote>
-     * 
-     * <h3>具体实现:</h3>
-     * 
-     * <pre>
-     * {@code
-     * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
-     * Company c = new Company();
-     * c.setName("Simple");
-     *  
-     * 对于Simple类型,参数二直接是属性名即可
-     * //Simple
-     * LOGGER.debug(BeanUtils.getProperty(c, "name"));
-     *  
-     * 对于Map类型,则需要以“属性名（key值）”的形式
-     * //Map
-     *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
-     *     HashMap am = new HashMap();
-     *     am.put("1","234-222-1222211");
-     *     am.put("2","021-086-1232323");
-     *     BeanUtils.setProperty(c,"telephone",am);
-     * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
-     *  
-     * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
-     * //index
-     *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
-     *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
-     *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
-     *  
-     * 当然这3种类也可以组合使用啦！
-     * //nest
-     *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
-     * 
-     * }
-     * </pre>
      *
      * @param bean
      *            bean

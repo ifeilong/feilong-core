@@ -88,44 +88,6 @@ public final class PropertyUtil{
 
     /**
      * 使用 {@link PropertyUtils#setProperty(Object, String, Object)} 来设置属性值(<b>不会进行类型转换</b>).
-     * 
-     * <pre>
-     * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); // 这里的9是String类型
-     * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); // 这里的是int类型
-     * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化,后者不能
-     * </pre>
-     * 
-     * 
-     * <pre>
-     * {@code
-     * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
-     * Company c = new Company();
-     * c.setName("Simple");
-     *  
-     * 对于Simple类型,参数二直接是属性名即可
-     * //Simple
-     * LOGGER.debug(BeanUtils.getProperty(c, "name"));
-     *  
-     * 对于Map类型,则需要以“属性名（key值）”的形式
-     * //Map
-     *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
-     *     HashMap am = new HashMap();
-     *     am.put("1","234-222-1222211");
-     *     am.put("2","021-086-1232323");
-     *     BeanUtils.setProperty(c,"telephone",am);
-     * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
-     *  
-     * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
-     * //index
-     *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
-     *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
-     *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
-     *  
-     * 当然这3种类也可以组合使用啦！
-     * //nest
-     *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
-     * }
-     * </pre>
      *
      * @param bean
      *            Bean whose property is to be modified
@@ -152,51 +114,6 @@ public final class PropertyUtil{
 
     /**
      * 使用 {@link PropertyUtils#getProperty(Object, String)} 类从对象中取得属性值.
-     * 
-     * <h3>{@link BeanUtils#getProperty(Object, String) BeanUtils.getProperty}& {@link PropertyUtils#getProperty(Object, String)
-     * PropertyUtils.getProperty}的区别:</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>{@link BeanUtils#getProperty(Object, String)} 会将结果转成String返回</li>
-     * <li>{@link PropertyUtils#getProperty(Object, String)} 结果是Object类型,不会做类型转换</li>
-     * </ul>
-     * </blockquote>
-     * 
-     * 
-     * <h3>具体实现:</h3>
-     * 
-     * <pre>
-     * {@code
-     * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
-     * Company c = new Company();
-     * c.setName("Simple");
-     *  
-     * 对于Simple类型,参数二直接是属性名即可
-     * //Simple
-     * LOGGER.debug(BeanUtils.getProperty(c, "name"));
-     *  
-     * 对于Map类型,则需要以“属性名（key值）”的形式
-     * //Map
-     *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
-     *     HashMap am = new HashMap();
-     *     am.put("1","234-222-1222211");
-     *     am.put("2","021-086-1232323");
-     *     BeanUtils.setProperty(c,"telephone",am);
-     * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
-     *  
-     * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
-     * //index
-     *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
-     *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
-     *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
-     *  
-     * 当然这3种类也可以组合使用啦！
-     * //nest
-     *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
-     * 
-     * }
-     * </pre>
      *
      * @param <T>
      *            the generic type
