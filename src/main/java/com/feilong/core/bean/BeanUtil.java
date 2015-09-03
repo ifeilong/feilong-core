@@ -30,7 +30,6 @@ import com.feilong.core.util.Validator;
 /**
  * 封装了 org.apache.commons.beanutils包下面的类.
  * 
- * 
  * <h3>关于类型转换:</h3>
  * 
  * <blockquote>
@@ -86,6 +85,26 @@ import com.feilong.core.util.Validator;
  * </p>
  * </blockquote>
  * 
+ * <h3>关于 {@link BeanUtils#copyProperty(Object, String, Object) copyProperty} 和 {@link BeanUtils#setProperty(Object, String, Object)
+ * setProperty}的区别:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <pre>
+ * 两者功能相似
+ * 
+ * 两者的区别点在于:
+ * copyProperty 不支持目标bean是索引类型,但是支持bean有索引类型的setter方法
+ * copyProperty 不支持目标bean是Map类型,但是支持bean有Map类型的setter方法
+ * 
+ * 
+ * 如果我们只是为bean的属性赋值的话,使用{@link BeanUtils#copyProperty(Object, String, Object)}就可以了;
+ * 而{@link BeanUtils#setProperty(Object, String, Object)}方法是实现  {@link BeanUtils#populate(Object,Map)}机制的基础,也就是说如果我们需要自定义实现populate()方法,那么我们可以override {@link BeanUtils#setProperty(Object, String, Object)}方法.
+ * 所以,做为一般的日常使用,{@link BeanUtils#setProperty(Object, String, Object)}方法是不推荐使用的.
+ * </pre>
+ * 
+ * </blockquote>
+ * 
  * @author feilong
  * @version 1.0.0 2010-7-9 下午02:44:36
  * @version 1.0.2 2012-5-15 15:07
@@ -103,6 +122,7 @@ import com.feilong.core.util.Validator;
  * @see org.apache.commons.beanutils.converters.DateConverter
  * @see org.apache.commons.beanutils.converters.DateTimeConverter
  * @see org.apache.commons.beanutils.converters.AbstractConverter
+ * 
  * @see org.apache.commons.beanutils.ConvertUtils#register(org.apache.commons.beanutils.Converter, Class)
  * 
  * @see org.apache.commons.beanutils.ConvertUtilsBean#registerPrimitives(boolean)
@@ -145,153 +165,14 @@ public final class BeanUtil{
         convertUtils.register(throwException, defaultNull, defaultArraySize);
     }
 
-    // [start] cloneBean
-
-    /**
-     * 调用 {@link BeanUtils#cloneBean(Object)}.
-     * 
-     * <p>
-     * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中
-     * <p>
-     * 
-     * <p>
-     * {@link BeanUtils#cloneBean(Object)} 在源码上看是调用了 getPropertyUtils().copyProperties(newBean, bean);<br>
-     * 最后实际上还是<b>复制的引用 ,无法实现深clone</b>
-     * </p>
-     * 
-     * <p>
-     * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话（即自定义类）,可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用,<br>
-     * 是为那些本身没有实现clone方法的类准备的 
-     * </p>
-     *
-     * @param <T>
-     *            the generic type
-     * @param bean
-     *            Bean to be cloned
-     * @return the cloned bean
-     *         (复制的引用 ,无法实现深clone)
-     * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
-     * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
-     * @since 1.0
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T cloneBean(T bean){
-        try{
-            //Clone a bean based on the available property getters and setters, even if the bean class itself does not implement Cloneable.
-            return (T) BeanUtils.cloneBean(bean);
-        }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
-        }
-    }
-
-    // [end]
-
-    // [start] describe 把Bean的属性值放入到一个Map里面
-
-    /**
-     * 返回一个<code>bean</code>中所有的可读属性,并将属性名/属性值放入一个Map中.
-     * 
-     * <p>
-     * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性.
-     * </p>
-     * <p>
-     * <span style="color:red">缺陷:<br>
-     * 自己手工注册的ConvertUtils.register(dateTimeConverter, java.util.Date.class)不会生效</span><br>
-     * 
-     * 在赋值的时候,虽然调用了 {@link org.apache.commons.beanutils.BeanUtilsBean#getNestedProperty(Object, String)}, 虽然也调用了 ConvertUtilsBean来转换 <br>
-     * 但是 {@link org.apache.commons.beanutils.ConvertUtilsBean#ConvertUtilsBean()} 默认的构造函数 是使用标准的转换
-     * 
-     * </p>
-     *
-     * @param bean
-     *            Bean whose properties are to be extracted
-     * @return Map of property descriptors
-     * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
-     * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
-     * @see PropertyUtil#describe(Object)
-     * @see PropertyDescriptor
-     * @see #populate(Object, Map)
-     */
-    public static Map<String, String> describe(Object bean){
-        try{
-            //Return the entire set of properties for which the specified bean provides a read method.
-            return BeanUtils.describe(bean);
-        }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
-        }
-    }
-
-    // [end]
-
-    // [start] populate 把properties/map里面的值放入bean中
-
-    /**
-     * 把properties/map里面的值放入bean中.
-     *
-     * @param bean
-     *            JavaBean whose properties are being populated
-     * @param properties
-     *            Map keyed by property name, with the corresponding (String or String[]) value(s) to be set
-     * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
-     */
-    public static void populate(Object bean,Map<String, ?> properties){
-        try{
-            BeanUtils.populate(bean, properties);
-        }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
-        }
-    }
-
-    // [end]
-
     // [start] copyProperties
+
     /**
-     * 对象Properties的复制,调用了 {@link BeanUtils#copyProperties(Object, Object)}.
+     * 对象值的复制 {@code fromObj-->toObj}.
      * 
      * <p>
      * 注意:这种copy都是浅拷贝,复制后的2个Bean的同一个属性可能拥有同一个对象的ref, 这个在使用时要小心,特别是对于属性为自定义类的情况 .
      * </p>
-     * 
-     * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>{@link BeanUtils#copyProperties(Object, Object)}能给不同的两个成员变量相同的,但类名不同的两个类之间相互赋值</li>
-     * <li>{@link PropertyUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而前者不支持这个功能,但是速度会更快一些.</li>
-     * <li>commons-beanutils v1.9.0以前的版本 BeanUtils 不允许对象的属性值为 null,PropertyUtils 可以拷贝属性值 null 的对象.<br>
-     * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
-     * of certain data types),具体信息,可以参阅commons-beanutils的
-     * {@link <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a>}</li>
-     * </ul>
-     * </blockquote>
-     *
-     * @param toObj
-     *            目标对象
-     * @param fromObj
-     *            原始对象
-     * @see org.apache.commons.beanutils.BeanUtils#copyProperties(Object, Object)
-     * @see org.apache.commons.beanutils.BeanUtils#copyProperty(Object, String, Object)
-     */
-    public static void copyProperties(Object toObj,Object fromObj){
-        if (null == toObj){
-            throw new NullPointerException("No destination bean/toObj specified");
-        }
-        if (null == fromObj){
-            throw new NullPointerException("No origin bean/fromObj specified");
-        }
-        try{
-            BeanUtils.copyProperties(toObj, fromObj);
-        }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
-        }
-    }
-
-    /**
-     * 对象值的复制 {@code fromObj-->toObj}.
      * 
      * <h3>注意点:</h3>
      * 
@@ -340,66 +221,52 @@ public final class BeanUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * 
+     * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>{@link BeanUtils#copyProperties(Object, Object)}能给不同的两个成员变量相同的,但类名不同的两个类之间相互赋值</li>
+     * <li>{@link PropertyUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而前者不支持这个功能,但是速度会更快一些.</li>
+     * <li>commons-beanutils v1.9.0以前的版本 BeanUtils 不允许对象的属性值为 null,PropertyUtils 可以拷贝属性值 null 的对象.<br>
+     * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
+     * of certain data types),具体信息,可以参阅commons-beanutils的
+     * {@link <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a>}</li>
+     * </ul>
+     * </blockquote>
      *
      * @param toObj
      *            目标对象
      * @param fromObj
      *            原始对象
      * @param includePropertyNames
-     *            包含的属性数组, can't be null/empty!
-     * @see #copyProperty(Object, String, Object)
+     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
+     *            如果 是null or empty ,将会调用 {@link BeanUtils#copyProperties(Object, Object)}
+     * @see #setProperty(Object, String, Object)
+     * @see org.apache.commons.beanutils.BeanUtilsBean#copyProperties(Object, Object)
      */
+    //XXX add excludePropertyNames support
     public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){
+        if (null == toObj){
+            throw new NullPointerException("No destination bean/toObj specified");
+        }
+        if (null == fromObj){
+            throw new NullPointerException("No origin bean/fromObj specified");
+        }
+
         if (Validator.isNullOrEmpty(includePropertyNames)){
-            throw new NullPointerException("includePropertyNames can't be null/empty!");
+            try{
+                BeanUtils.copyProperties(toObj, fromObj);
+                return;
+            }catch (Exception e){
+                LOGGER.error(e.getClass().getName(), e);
+                throw new BeanUtilException(e);
+            }
         }
         for (String propertyName : includePropertyNames){
             String value = getProperty(fromObj, propertyName);
-            copyProperty(toObj, propertyName, value);
-        }
-    }
-
-    //XXX add excludePropertyNames support
-
-    // [end]
-
-    // [start] copyProperty
-
-    /**
-     * bean中的 <code>propertyName</code> 赋值为value.
-     * 
-     * <pre>
-     * 如果有java.util.Date 类型的 需要copy,那么 需要先这么着
-     * DateConverter converter = new DateConverter(DatePattern.forToString, Locale.US);
-     * ConvertUtils.register(converter, Date.class);
-     * BeanUtil.copyProperty(b, a, &quot;date&quot;);
-     * </pre>
-     * 
-     * <pre>
-     * 嵌套赋值: BeanUtils.copyProperty(a, &quot;sample.display&quot;, &quot;second one&quot;);
-     * 
-     * 功能和setProperty一样
-     * 
-     * 如果我们只是为bean的属性赋值的话,使用copyProperty()就可以了;
-     * 而setProperty()方法是实现BeanUtils.populate()(后面会说到)机制的基础,也就是说如果我们需要自定义实现populate()方法,那么我们可以override setProperty()方法.
-     * 所以,做为一般的日常使用,setProperty()方法是不推荐使用的.
-     * 
-     * </pre>
-     *
-     * @param bean
-     *            bean
-     * @param propertyName
-     *            成员Property name (can be nested/indexed/mapped/combo)
-     * @param value
-     *            赋值为value
-     * @see org.apache.commons.beanutils.BeanUtils#copyProperty(Object, String, Object)
-     */
-    public static void copyProperty(Object bean,String propertyName,Object value){
-        try{
-            BeanUtils.copyProperty(bean, propertyName, value);
-        }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
+            setProperty(toObj, propertyName, value);
         }
     }
 
@@ -456,6 +323,9 @@ public final class BeanUtil{
      * @param value
      *            Value to be set
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
+     * 
+     * @see org.apache.commons.beanutils.BeanUtilsBean#setProperty(Object, String, Object)
+     * 
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
      * @see com.feilong.core.bean.PropertyUtil#setProperty(Object, String, Object)
      */
@@ -539,5 +409,106 @@ public final class BeanUtil{
             throw new BeanUtilException(e);
         }
     }
+
+    // [end]
+
+    // [start] cloneBean
+
+    /**
+     * 调用{@link BeanUtils#cloneBean(Object)}.
+     * 
+     * <p>
+     * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中
+     * <p>
+     * 
+     * <p>
+     * {@link BeanUtils#cloneBean(Object)}在源码上看是调用了getPropertyUtils().copyProperties(newBean, bean);<br>
+     * 最后实际上还是<b>复制的引用 ,无法实现深clone</b>
+     * </p>
+     * 
+     * <p>
+     * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话（即自定义类）,可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用,<br>
+     * 是为那些本身没有实现clone方法的类准备的 
+     * </p>
+     *
+     * @param <T>
+     *            the generic type
+     * @param bean
+     *            Bean to be cloned
+     * @return the cloned bean
+     *         (复制的引用 ,无法实现深clone)
+     * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
+     * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T cloneBean(T bean){
+        try{
+            //Clone a bean based on the available property getters and setters, even if the bean class itself does not implement Cloneable.
+            return (T) BeanUtils.cloneBean(bean);
+        }catch (Exception e){
+            LOGGER.error(e.getClass().getName(), e);
+            throw new BeanUtilException(e);
+        }
+    }
+
+    // [end]
+
+    // [start] describe 把Bean的属性值放入到一个Map里面
+
+    /**
+     * 返回一个<code>bean</code>中所有的可读属性(read method),并将属性名/属性值放入一个Map中.
+     * 
+     * <p>
+     * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性.
+     * </p>
+     * <p>
+     * <span style="color:red">缺陷:<br>
+     * 自己手工注册的ConvertUtils.register(dateTimeConverter, java.util.Date.class)不会生效</span><br>
+     * 
+     * 在赋值的时候,虽然调用了 {@link BeanUtilsBean#getNestedProperty(Object, String)}, 虽然也调用了 ConvertUtilsBean来转换 <br>
+     * 但是 {@link ConvertUtilsBean#ConvertUtilsBean()} 默认的构造函数 是使用标准的转换
+     * </p>
+     *
+     * @param bean
+     *            Bean whose properties are to be extracted
+     * @return Map of property descriptors
+     * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
+     * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
+     * @see PropertyUtil#describe(Object)
+     * @see PropertyDescriptor
+     * @see #populate(Object, Map)
+     */
+    public static Map<String, String> describe(Object bean){
+        try{
+            //Return the entire set of properties for which the specified bean provides a read method.
+            return BeanUtils.describe(bean);
+        }catch (Exception e){
+            LOGGER.error(e.getClass().getName(), e);
+            throw new BeanUtilException(e);
+        }
+    }
+
+    // [end]
+
+    // [start] populate(填充) 把properties/map里面的值放入bean中
+
+    /**
+     * 把properties/map里面的值populate(填充) 到bean中.
+     *
+     * @param bean
+     *            JavaBean whose properties are being populated
+     * @param properties
+     *            Map keyed by property name,with the corresponding (String or String[]) value(s) to be set
+     * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
+     */
+    public static void populate(Object bean,Map<String, ?> properties){
+        try{
+            BeanUtils.populate(bean, properties);
+        }catch (Exception e){
+            LOGGER.error(e.getClass().getName(), e);
+            throw new BeanUtilException(e);
+        }
+    }
+
     // [end]
 }

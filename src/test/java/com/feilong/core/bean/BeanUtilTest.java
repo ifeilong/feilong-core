@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BasicDynaBean;
 import org.apache.commons.beanutils.BasicDynaClass;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaProperty;
@@ -233,18 +235,64 @@ public class BeanUtilTest{
     @Test
     public void testSetProperty(){
         SalesOrderDto salesOrderDto = new SalesOrderDto();
+        salesOrderDto.setMember(new Member());
         BeanUtil.setProperty(salesOrderDto, "code", "123456");
+        BeanUtil.setProperty(salesOrderDto, "member.code", "123456");
+        BeanUtil.setProperty(salesOrderDto, "member.loveMap(mobile)", "iphone");
         LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
     }
 
     /**
      * Test copy property.
+     *
+     * @throws IllegalAccessException
+     *             the illegal access exception
+     * @throws InvocationTargetException
+     *             the invocation target exception
      */
     @Test
-    public void testCopyProperty(){
+    public void testCopyProperty() throws IllegalAccessException,InvocationTargetException{
         SalesOrderDto salesOrderDto = new SalesOrderDto();
-        BeanUtil.copyProperty(salesOrderDto, "code", "123456");
+        salesOrderDto.setMember(new Member());
+        BeanUtils.copyProperty(salesOrderDto, "code", "123456");
+        BeanUtils.copyProperty(salesOrderDto, "member.code", "123456");
+        BeanUtils.copyProperty(salesOrderDto, "member.loveMap(mobile)", "iphone");
         LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
+    }
+
+    /**
+     * Test set property map.
+     */
+    @Test
+    public void testSetPropertyMap(){
+        Map<String, String> map = new HashMap<String, String>();
+        BeanUtil.setProperty(map, "code", "123456");
+        LOGGER.debug("map:{}", JsonUtil.format(map));
+
+        String[] strs = new String[1];
+        strs[0] = "";
+        BeanUtil.setProperty(strs, "[0]", "123456");
+        LOGGER.debug("array:{}", JsonUtil.format(strs));
+    }
+
+    /**
+     * Test copy property map.
+     *
+     * @throws IllegalAccessException
+     *             the illegal access exception
+     * @throws InvocationTargetException
+     *             the invocation target exception
+     */
+    @Test
+    public void testCopyPropertyMap() throws IllegalAccessException,InvocationTargetException{
+        Map<String, String> map = new HashMap<String, String>();
+        BeanUtils.copyProperty(map, "code", "123456");
+        LOGGER.debug("map:{}", JsonUtil.format(map));
+
+        String[] strs = new String[1];
+        strs[0] = "";
+        BeanUtils.copyProperty(strs, "[0]", "123456");
+        LOGGER.debug("array:{}", JsonUtil.format(strs));
     }
 
     /**
@@ -258,7 +306,6 @@ public class BeanUtilTest{
         a.setDate(now);
 
         Map<String, String> map = BeanUtil.describe(a);
-
         LOGGER.info("map:{}", JsonUtil.format(map));
     }
 
