@@ -167,24 +167,6 @@ public class BeanUtilTest{
     }
 
     /**
-     * Copy property.
-     */
-    @Test
-    public void testCopyProperties1(){
-        User a = new User();
-        a.setId(5L);
-        a.setMoney(new BigDecimal(500000));
-        a.setDate(new Date());
-        User b = new User();
-
-        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
-
-        String[] strs = { "date", "money" };
-        BeanUtil.copyProperties(b, a, strs);
-        LOGGER.info(JsonUtil.format(b));
-    }
-
-    /**
      * Test copy property1.
      */
     @Test
@@ -200,33 +182,30 @@ public class BeanUtilTest{
     }
 
     /**
-     * Copy properties.
+     * Copy property.
      */
     @Test
-    public void testCopyProperties(){
+    public void testCopyProperties1(){
         User user1 = new User();
         user1.setId(5L);
+        user1.setMoney(new BigDecimal(500000));
         user1.setDate(new Date());
         String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
         user1.setNickName(nickName);
 
         User user2 = new User();
 
-        String[] aStrings = { "date", "id", "nickName" };
+        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), java.util.Date.class);
+        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), java.sql.Date.class);
+        //        ConvertUtils.register(
+        //                        new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+        //                        java.sql.Timestamp.class);
+        //        ConvertUtils.register(new BigDecimalConverter(null), java.math.BigDecimal.class);
         ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
-        BeanUtil.copyProperties(user2, user1, aStrings);
-        LOGGER.debug(JsonUtil.format(user2));
-    }
 
-    /**
-     * Copy properties1.
-     */
-    @Test
-    public void testCopyProperties3(){
-        SalesOrderDto salesOrderDto = new SalesOrderDto();
-        //ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class);
-        BeanUtil.copyProperties(salesOrderDto, salesOrder);
-        LOGGER.debug("salesOrderDto:{}", JsonUtil.format(salesOrderDto));
+        String[] strs = { "date", "money", "nickName" };
+        BeanUtil.copyProperties(user2, user1, strs);
+        LOGGER.info(JsonUtil.format(user2));
     }
 
     /**
@@ -300,13 +279,11 @@ public class BeanUtilTest{
      */
     @Test
     public void describe(){
-        User a = new User();
-        a.setId(5L);
-        Date now = new Date();
-        a.setDate(now);
+        User user = new User();
+        user.setId(5L);
+        user.setDate(new Date());
 
-        Map<String, String> map = BeanUtil.describe(a);
-        LOGGER.info("map:{}", JsonUtil.format(map));
+        LOGGER.info("map:{}", JsonUtil.format(BeanUtil.describe(user)));
     }
 
     /**
@@ -314,17 +291,15 @@ public class BeanUtilTest{
      */
     @Test
     public void populate(){
-        User a = new User();
-        a.setId(5L);
-        Date now = new Date();
-        a.setDate(now);
-        // DateConverter converter = new DateConverter("yyyy");
-        // ConvertUtils.register(converter, Date.class);
+        User user = new User();
+        user.setId(5L);
+        user.setDate(new Date());
+
         Map<String, Object> properties = new HashMap<String, Object>();
         properties.put("id", 8L);
         // properties.put("date", 2010);
-        BeanUtil.populate(a, properties);
-        LOGGER.info(JsonUtil.format(a));
+        BeanUtil.populate(user, properties);
+        LOGGER.info(JsonUtil.format(user));
     }
 
     /**
@@ -332,7 +307,6 @@ public class BeanUtilTest{
      */
     @Test
     public void cloneBean(){
-        SalesOrder salesOrder1 = BeanUtil.cloneBean(salesOrder);
-        LOGGER.debug(JsonUtil.format(salesOrder1));
+        LOGGER.debug(JsonUtil.format(BeanUtil.cloneBean(salesOrder)));
     }
 }

@@ -192,13 +192,6 @@ public final class BeanUtil{
     }
 
     static{
-        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), java.util.Date.class);
-        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), java.sql.Date.class);
-        //        ConvertUtils.register(
-        //                        new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-        //                        java.sql.Timestamp.class);
-        //        ConvertUtils.register(new BigDecimalConverter(null), java.math.BigDecimal.class);
-
         boolean throwException = false;
         boolean defaultNull = true;
         int defaultArraySize = 10;
