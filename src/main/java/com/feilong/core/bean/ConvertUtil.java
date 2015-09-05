@@ -359,7 +359,25 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将集合使用连接符号链接成字符串.
+     * 将集合 <code>collection</code>使用连接符号链接成字符串.
+     * 
+     * <h3>使用示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+     * list.add(&quot;feilong&quot;);
+     * list.add(&quot;&quot;);
+     * list.add(&quot;xinge&quot;);
+     * 
+     * ToStringConfig toStringConfig = new ToStringConfig(&quot;,&quot;);
+     * toStringConfig.setIsJoinNullOrEmpty(false);
+     * 
+     * assertEquals(&quot;feilong,xinge&quot;, ConvertUtil.toString(toStringConfig, list));
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param toStringConfig
      *            连接字符串 实体
@@ -370,14 +388,12 @@ public final class ConvertUtil{
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see #toString(ToStringConfig, Object...)
      * @since 1.4.0
-     * @deprecated
      */
-    @Deprecated
-    public static String toString(ToStringConfig toStringConfig,final Collection collection){
+    public static String toString(ToStringConfig toStringConfig,final Collection<?> collection){
         if (Validator.isNullOrEmpty(collection)){
             return StringUtils.EMPTY;
         }
-        Object[] array = toArray(collection, Object.class);
+        Object[] array = collection.toArray();
         return toString(toStringConfig, array);
     }
 
@@ -404,8 +420,6 @@ public final class ConvertUtil{
      * </pre>
      * </code>
      *
-     * @param <T>
-     *            the generic type
      * @param toStringConfig
      *            the join string entity
      * @param arrays
@@ -417,7 +431,7 @@ public final class ConvertUtil{
      * @see org.apache.commons.lang3.builder.ToStringStyle
      * @since 1.4.0
      */
-    public static <T> String toString(ToStringConfig toStringConfig,T...arrays){
+    public static String toString(ToStringConfig toStringConfig,Object...arrays){
         if (Validator.isNullOrEmpty(arrays)){
             return StringUtils.EMPTY;
         }
@@ -552,7 +566,11 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将数组转成对象型数组, 如果 <code>arrays</code>是原始型的,那么会进行转换.
+     * 将数组转成对象型数组.
+     * 
+     * <p>
+     * 如果 <code>arrays</code>是原始型的,那么会进行转换.
+     * </p>
      *
      * @param <T>
      *            the generic type

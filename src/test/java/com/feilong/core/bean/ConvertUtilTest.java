@@ -369,13 +369,14 @@ public class ConvertUtilTest{
     @Test
     public void testCollectionToString(){
         List<String> list = new ArrayList<String>();
-        list.add("2548");
+        list.add("feilong");
         list.add("");
+        list.add("xinge");
 
         ToStringConfig toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
 
-        assertEquals("2548", ConvertUtil.toString(toStringConfig, list));
+        assertEquals("feilong,xinge", ConvertUtil.toString(toStringConfig, list));
     }
 
     /**
