@@ -18,13 +18,18 @@ package com.feilong.core.io;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.CharsetType;
 import com.feilong.core.util.Validator;
@@ -38,6 +43,9 @@ import com.feilong.core.util.Validator;
  * @since 1.0.6
  */
 public final class IOReaderUtil{
+
+    /** The Constant log. */
+    private static final Logger LOGGER               = LoggerFactory.getLogger(IOReaderUtil.class);
 
     /** 默认编码. */
     private static final String DEFAULT_CHARSET_NAME = CharsetType.UTF8;
@@ -118,6 +126,71 @@ public final class IOReaderUtil{
         }finally{
             // 用完关闭流 是个好习惯,^_^
             IOUtils.closeQuietly(fileInputStream);
+        }
+    }
+
+    /**
+     * 使用 {@link LineNumberReaderResolver}解析文件.
+     *
+     * @param filePath
+     *            the file path
+     * @param lineNumberReaderResolver
+     *            the line number reader resolver
+     * @since 1.4.1
+     */
+    public static void resolverFile(String filePath,LineNumberReaderResolver lineNumberReaderResolver){
+        try{
+            Reader reader = new FileReader(filePath);
+            resolverFile(reader, lineNumberReaderResolver);
+        }catch (FileNotFoundException e){
+            LOGGER.error("", e);
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * 使用 {@link LineNumberReaderResolver}解析文件.
+     *
+     * @param file
+     *            the file
+     * @param lineNumberReaderResolver
+     *            the line number reader resolver
+     * @since 1.4.1
+     */
+    public static void resolverFile(File file,LineNumberReaderResolver lineNumberReaderResolver){
+        try{
+            Reader reader = new FileReader(file);
+            resolverFile(reader, lineNumberReaderResolver);
+        }catch (FileNotFoundException e){
+            LOGGER.error("", e);
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * 使用 {@link LineNumberReaderResolver}解析 {@link Reader}.
+     *
+     * @param reader
+     *            the reader
+     * @param lineNumberReaderResolver
+     *            the line number reader resolver
+     * @since 1.4.1
+     */
+    public static void resolverFile(Reader reader,LineNumberReaderResolver lineNumberReaderResolver){
+        LineNumberReader lineNumberReader = new LineNumberReader(reader);
+        try{
+            String line = null;
+            while ((line = lineNumberReader.readLine()) != null){
+                int lineNumber = lineNumberReader.getLineNumber();
+                //LOGGER.debug("lineNumber:{},line:{}", lineNumber, line);
+                lineNumberReaderResolver.excute(lineNumber, line);
+            }
+        }catch (IOException e){
+            LOGGER.error("", e);
+            throw new UncheckedIOException(e);
+        }finally{
+            IOUtils.closeQuietly(lineNumberReader);
+            IOUtils.closeQuietly(reader);
         }
     }
 }
