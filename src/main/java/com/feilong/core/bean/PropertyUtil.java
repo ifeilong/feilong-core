@@ -291,7 +291,7 @@ public final class PropertyUtil{
     @SuppressWarnings("unchecked")
     public static <T> T findValueOfType(Object obj,Class<T> toBeFindedClassType){
         if (Validator.isNullOrEmpty(obj)){
-            throw new NullPointerException("findValue can't be null/empty!");
+            return null;
         }
 
         if (null == toBeFindedClassType){
