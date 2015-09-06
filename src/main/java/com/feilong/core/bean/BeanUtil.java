@@ -208,9 +208,14 @@ public final class BeanUtil{
     /**
      * 对象值的复制 {@code fromObj-->toObj}.
      * 
-     * <p>
-     * 注意:这种copy都是浅拷贝,复制后的2个Bean的同一个属性可能拥有同一个对象的ref, 这个在使用时要小心,特别是对于属性为自定义类的情况 .
-     * </p>
+     * <h3>注意:</h3> <blockquote>
+     * <ol>
+     * <li>这种copy都是浅拷贝,复制后的2个Bean的同一个属性可能拥有同一个对象的ref, 这个在使用时要小心,特别是对于属性为自定义类的情况 .</li>
+     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)} ,会自动进行Object--->String--->Object类型转换,<br>
+     * 如果需要copy的两个对象属性之间的类型是一样的话,那么调用这个方法会有性能消耗,此时建议调用 {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
+     * </ol>
+     * </blockquote>
+     * 
      * 
      * <h3>注意点:</h3>
      * 
@@ -283,6 +288,8 @@ public final class BeanUtil{
      *            如果 是null or empty ,将会调用 {@link BeanUtils#copyProperties(Object, Object)}
      * @see #setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.BeanUtilsBean#copyProperties(Object, Object)
+     * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
+     *      BeanUtils,Cglib BeanCopier)</a>
      */
     //XXX add excludePropertyNames support
     public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){

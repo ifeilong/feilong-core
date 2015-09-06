@@ -58,6 +58,125 @@ public final class PropertyUtil{
     }
 
     /**
+     * 对象值的复制 {@code fromObj-->toObj}.
+     * 
+     * <p>
+     * 注意:这种copy都是浅拷贝,复制后的2个Bean的同一个属性可能拥有同一个对象的ref, 这个在使用时要小心,特别是对于属性为自定义类的情况 .
+     * </p>
+     * 
+     * <h3>注意点:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>如果传入的includePropertyNames,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
+     * <li>如果传入的includePropertyNames,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
+     * {@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
+     * <li>对于Date类型,不需要先注册converter</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>使用示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <code>
+     * <pre>
+        User oldUser = new User();
+        oldUser.setId(5L);
+        oldUser.setMoney(new BigDecimal(500000));
+        oldUser.setDate(new Date());
+        String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
+        oldUser.setNickName(nickName);
+
+        User newUser = new User();
+
+        String[] strs = { "date", "money", "nickName" };
+        PropertyUtil.copyProperties(newUser, oldUser, strs);
+        LOGGER.info(JsonUtil.format(newUser));s(enterpriseSales,enterpriseSales_form,new String[]{&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;});
+     *
+     * 
+     * 返回 :
+     * 
+     * {
+        "userAddresseList": [],
+        "userAddresses": [],
+        "date": "2015-09-06 13:27:43",
+        "password": "",
+        "id": 0,
+        "nickName":         [
+            "feilong",
+            "飞天奔月",
+            "venusdrogon"
+        ],
+        "age": 0,
+        "name": "feilong",
+        "money": 500000,
+        "attrMap": null,
+        "userInfo": {"age": 0},
+        "loves": []
+    }
+     * 
+     * </pre>
+     * </code>
+     * 
+     * </blockquote>
+     * 
+     * 
+     * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>{@link BeanUtils#copyProperties(Object, Object)}能给不同的两个成员变量相同的,但类名不同的两个类之间相互赋值</li>
+     * <li>{@link PropertyUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而前者不支持这个功能,但是速度会更快一些.</li>
+     * <li>commons-beanutils v1.9.0以前的版本 BeanUtils不允许对象的属性值为 null,PropertyUtils可以拷贝属性值 null的对象.<br>
+     * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
+     * of certain data types),具体信息,可以参阅commons-beanutils的
+     * {@link <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a>}</li>
+     * </ul>
+     * </blockquote>
+     *
+     * @param toObj
+     *            目标对象
+     * @param fromObj
+     *            原始对象
+     * @param includePropertyNames
+     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
+     *            如果 是null or empty ,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}
+     * @see #setProperty(Object, String, Object)
+     * 
+     * @see com.feilong.core.bean.BeanUtil#copyProperties(Object, Object, String...)
+     * 
+     * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
+     * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
+     *      BeanUtils,Cglib BeanCopier)</a>
+     * @since 1.4.1
+     */
+    public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){
+        if (null == toObj){
+            throw new NullPointerException("No destination bean/toObj specified");
+        }
+        if (null == fromObj){
+            throw new NullPointerException("No origin bean/fromObj specified");
+        }
+
+        if (Validator.isNullOrEmpty(includePropertyNames)){
+            try{
+                PropertyUtils.copyProperties(toObj, fromObj);
+                return;
+            }catch (Exception e){
+                LOGGER.error(e.getClass().getName(), e);
+                throw new BeanUtilException(e);
+            }
+        }
+        for (String propertyName : includePropertyNames){
+            Object value = getProperty(fromObj, propertyName);
+            setProperty(toObj, propertyName, value);
+        }
+    }
+
+    /**
      * 返回一个<code>bean</code>中所有的 <span style="color:green">可读属性</span>,并将属性名/属性值放入一个Map中.
      * 
      * <p>

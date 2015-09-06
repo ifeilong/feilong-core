@@ -41,6 +41,25 @@ public class PropertyUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtilTest.class);
 
     /**
+     * Test copy properties1.
+     */
+    @Test
+    public void testCopyProperties1(){
+        User oldUser = new User();
+        oldUser.setId(5L);
+        oldUser.setMoney(new BigDecimal(500000));
+        oldUser.setDate(new Date());
+        String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
+        oldUser.setNickName(nickName);
+
+        User newUser = new User();
+
+        String[] strs = { "date", "money", "nickName" };
+        PropertyUtil.copyProperties(newUser, oldUser, strs);
+        LOGGER.info(JsonUtil.format(newUser));
+    }
+
+    /**
      * Describe.
      */
     @Test
