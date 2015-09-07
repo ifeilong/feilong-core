@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 常用的日期pattern (focus on date pattern).
+ * 常用的日期pattern(focus on date pattern).
  * 
  * <h3>以下是常用的字段说明:</h3>
  * 

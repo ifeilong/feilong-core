@@ -26,7 +26,7 @@ import com.feilong.core.util.Validator;
 /**
  * 日期扩展工具类.
  * <p>
- * 和 DateUtil 的区别在于,DateUtil是纯 操作Date API的工具类,而DateExtensionUtil类 用于个性化 输出结果,针对业务个性化显示.
+ * 和 DateUtil的区别在于,DateUtil是纯操作Date API的工具类,而DateExtensionUtil类用于个性化输出结果,针对业务个性化显示.
  * </p>
  * 
  * <h3>获得两个日期间隔</h3>

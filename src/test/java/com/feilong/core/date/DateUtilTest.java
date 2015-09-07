@@ -259,8 +259,19 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testAddSecond(){
+        logDate(NOW);
         logDate(DateUtil.addSecond(NOW, 180));
         logDate(DateUtil.addSecond(NOW, -180));
+    }
+
+    /**
+     * Test add millisecond.
+     */
+    @Test
+    public void testAddMillisecond(){
+        logDate(NOW);
+        logDate(DateUtil.addMillisecond(NOW, 5000));
+        logDate(DateUtil.addMillisecond(NOW, -5000));
     }
 
     /**

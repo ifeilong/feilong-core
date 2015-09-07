@@ -23,27 +23,35 @@ import com.feilong.core.text.DateFormatUtil;
 import com.feilong.core.util.Validator;
 
 /**
+ * {@link java.util.Date}操作工具类(feilong-core核心类之一).
  * 
- * Date 操作工具类(feilong-core 核心类之一).
- * <p>
- * 包括:
- * </p>
+ * <h3>常用方法:</h3>
  * 
- * <ul>
- * 
- * <li>字符串转日期
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>字符串转日期</td>
+ * <td>
  * <ul>
  * <li>{@link DateUtil#string2Date(String, String)}</li>
  * </ul>
- * </li>
- * 
- * <li>日期转字符串
+ * </td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>日期转字符串</td>
+ * <td>
  * <ul>
  * <li>{@link DateUtil#date2String(Date, String)}</li>
  * </ul>
- * </li>
- * 
- * <li>日期加减
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>日期加减</td>
+ * <td>
  * <ul>
  * <li>{@link DateUtil#addDay(Date, int)}</li>
  * <li>{@link DateUtil#addHour(Date, int)}</li>
@@ -53,9 +61,11 @@ import com.feilong.core.util.Validator;
  * <li>{@link DateUtil#addWeek(Date, int)}</li>
  * <li>{@link DateUtil#addYear(Date, int)}</li>
  * </ul>
- * </li>
- * 
- * <li>获得日期某部值
+ * </td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>获得日期某部值</td>
+ * <td>
  * <ul>
  * <li>{@link DateUtil#getDayOfMonth(Date)}</li>
  * <li>{@link DateUtil#getDayOfWeek(Date)}</li>
@@ -68,9 +78,11 @@ import com.feilong.core.util.Validator;
  * <li>{@link DateUtil#getYear(Date)}</li>
  * <li>{@link DateUtil#getTime(Date)}</li>
  * </ul>
- * </li>
- * 
- * <li>获得两个日期间隔
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>获得两个日期间隔</td>
+ * <td>
  * <ul>
  * <li>{@link DateUtil#getIntervalDay(long)}</li>
  * <li>{@link DateUtil#getIntervalDay(Date, Date)}</li>
@@ -89,69 +101,107 @@ import com.feilong.core.util.Validator;
  * 
  * <li>{@link DateUtil#getIntervalTime(Date, Date)}</li>
  * </ul>
- * </li>
- * 
- * <li>判断闰年 {@link DateUtil#isLeapYear(int)}</li>
- * <li>判断相等 {@link DateUtil#isEquals(Date, Date, String)}</li>
- * 
- * <li>判断早晚
+ * </td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>判断闰年</td>
+ * <td>
+ * <ul>
+ * <li>{@link DateUtil#isLeapYear(int)}</li>
+ * </ul>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>判断相等</td>
+ * <td>
+ * <ul>
+ * <li>{@link DateUtil#isEquals(Date, Date, String)}</li>
+ * </ul>
+ * </td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>判断早晚</td>
+ * <td>
  * <ul>
  * <li>{@link DateUtil#isBefore(Date, String, String)}</li>
  * <li>{@link DateUtil#isBefore(String, String, String)}</li>
  * </ul>
- * </li>
- * 
- * <li>判断日期区间
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>判断日期区间</td>
+ * <td>
  * <ul>
  * <li>{@link DateUtil#isInTime(Date, Date, Date)}</li>
  * <li>{@link DateUtil#isInTime(Date, String, String, String)}</li>
  * </ul>
- * </li>
+ * </td>
+ * </tr>
+ * </table>
+ * </blockquote>
  * 
- * </ul>
+ * <h3>通过这个类,还可以获得以下数据:</h3>
  * 
- * 通过这个类,还可以获得以下数据:
- * 
- * <pre>
- * {@code
- * 获得下一周的第一天时间
- * Date nextWeekDay = addDay(date, 7);
- * return getFirstDateOfThisWeek(nextWeekDay);
- * 
- * 获得下一周的最后一天时间
- * Date nextWeekDay = addDay(date, 7);
- * return getLastDateOfThisWeek(nextWeekDay);
- * 
- * 获得上一周的第一天时间
- * Date nextWeekDay = addDay(date, -7);
- * return getFirstDateOfThisWeek(nextWeekDay);
- * 
- * 获得上一周的最后一天时间
- * Date nextWeekDay = addDay(date, -7);
- * return getLastDateOfThisWeek(nextWeekDay);
- * 
- * 
- * 获得下个月第一天
- * return DateUtil.getFirstDateOfThisMonth(DateUtil.addMonth(now, +1)));
- * 获得下个月最后一天
- * return DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(now, +1)));
- * 获得上个月第一天
- * return DateUtil.getFirstDateOfThisMonth(DateUtil.addMonth(now, -1)));
- * 获得上个月最后一天
- * return DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(now, -1)));
- * 
- * 
- * 获得去年第一天
- * return DateUtil.getFirstDateOfThisYear(DateUtil.addYear(now, -1));
- * 获得去年最后一天
- * return DateUtil.getLastDateOfThisYear(DateUtil.addYear(now, -1)));
- * 获得明年第一天
- * return DateUtil.getFirstDateOfThisYear(DateUtil.addYear(now, +1));
- * 获得明年最后一天
- * return DateUtil.getLastDateOfThisYear(DateUtil.addYear(now, +1)));
- * 
- * }
- * </pre>
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>获得下一周的第一天时间</td>
+ * <td>Date nextWeekDay = addDay(date, 7);<br>
+ * return getFirstDateOfThisWeek(nextWeekDay);</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>获得下一周的最后一天时间</td>
+ * <td>Date nextWeekDay = addDay(date, 7);<br>
+ * return getLastDateOfThisWeek(nextWeekDay);</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>获得上一周的第一天时间</td>
+ * <td>Date nextWeekDay = addDay(date, -7);<br>
+ * return getFirstDateOfThisWeek(nextWeekDay);</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>获得上一周的最后一天时间</td>
+ * <td>Date nextWeekDay = addDay(date, -7);<br>
+ * return getLastDateOfThisWeek(nextWeekDay);</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>获得下个月第一天</td>
+ * <td>return DateUtil.getFirstDateOfThisMonth(DateUtil.addMonth(now, +1)));</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>获得下个月最后一天</td>
+ * <td>return DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(now, +1)));</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>获得上个月第一天</td>
+ * <td>return DateUtil.getFirstDateOfThisMonth(DateUtil.addMonth(now, -1)));</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>获得上个月最后一天</td>
+ * <td>return DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(now, -1)));</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>获得去年第一天</td>
+ * <td>return DateUtil.getFirstDateOfThisYear(DateUtil.addYear(now, -1));</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>获得去年最后一天</td>
+ * <td>return DateUtil.getLastDateOfThisYear(DateUtil.addYear(now, -1)));</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>获得明年第一天</td>
+ * <td>return DateUtil.getFirstDateOfThisYear(DateUtil.addYear(now, +1));</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>获得明年最后一天</td>
+ * <td>return DateUtil.getLastDateOfThisYear(DateUtil.addYear(now, +1)));</td>
+ * </tr>
+ * </table>
+ * </blockquote>
  * 
  * @author feilong
  * @version 1.0.0 2010-1-27 下午01:53:21
@@ -160,7 +210,6 @@ import com.feilong.core.util.Validator;
  * @see DatePattern
  * @see DateFormatUtil
  * @see org.apache.commons.lang3.time.DateUtils
- * @see org.apache.commons.lang.time.DateUtils
  * @since 1.0.0
  */
 public final class DateUtil{
@@ -570,6 +619,37 @@ public final class DateUtil{
     }
 
     /**
+     * 日期加减毫秒 (仅仅{@link java.util.Calendar#MILLISECOND}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * addMillisecond(2015-09-07 13:35:02.769,5000)
+     * return 2015-09-07 13:35:07.769
+     * 
+     * addMillisecond(2015-09-07 13:35:02.769,-5000)
+     * return 2015-09-07 13:34:57.769
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param date
+     *            任意时间
+     * @param millisecond
+     *            加减毫秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
+     * @return the date
+     * @see #operateDate(Date, int, int)
+     * @see Calendar#MILLISECOND
+     * @see org.apache.commons.lang3.time.DateUtils#addMilliseconds(Date, int)
+     * @since 1.4.1
+     */
+    public static Date addMillisecond(Date date,int millisecond){
+        return operateDate(date, Calendar.MILLISECOND, millisecond);
+    }
+
+    /**
      * 底层操作时间的方法, 根据日历的规则,为给定的日历字段添加或减去指定的时间量.
      * 
      * @param currentDate
@@ -586,6 +666,7 @@ public final class DateUtil{
      * @see #addHour(Date, int)
      * @see #addMinute(Date, int)
      * @see #addSecond(Date, int)
+     * @see #addMillisecond(Date, int)
      * @see #toCalendar(Date)
      * @see Calendar#add(int, int)
      * @see org.apache.commons.lang3.time.DateUtils#add(Date, int, int)
