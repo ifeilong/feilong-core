@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.net.HttpMethodType;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.core.util.Validator;
