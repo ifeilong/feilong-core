@@ -93,10 +93,9 @@ public final class ResourceBundleUtil{
      * @see #getValue(String, String)
      * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T getValue(String baseName,String key,Class<?> typeClass){
+    public static <T> T getValue(String baseName,String key,Class<T> typeClass){
         String value = getValue(baseName, key);
-        return (T) ConvertUtil.convert(value, typeClass);
+        return ConvertUtil.convert(value, typeClass);
     }
 
     /**
@@ -116,10 +115,9 @@ public final class ResourceBundleUtil{
      * @see #getValue(ResourceBundle, String)
      * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T getValue(ResourceBundle resourceBundle,String key,Class<?> typeClass){
+    public static <T> T getValue(ResourceBundle resourceBundle,String key,Class<T> typeClass){
         String value = getValue(resourceBundle, key);
-        return (T) ConvertUtil.convert(value, typeClass);
+        return ConvertUtil.convert(value, typeClass);
     }
 
     /**

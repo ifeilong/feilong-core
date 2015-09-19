@@ -78,6 +78,29 @@ import com.feilong.core.util.Validator;
  * <li>在大部分情况下 {@link StringBuilder} {@code >} {@link StringBuffer}</li>
  * </ul>
  * </blockquote>
+ * 
+ * <h3>String s1 = new String("xyz"); 到底创建几个对象?</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 要看虚拟机的实现。而且要联系上下文<br>
+ * 1、假设：HotSpot1.6<br>
+ * 之前没有创建过xyz 则创建2个，之前创建过“xyz”则只创建1个<br>
+ * 2、假设:HotSpot1.7<br>
+ * 之前不管有没有创建过xyz 都创建1个
+ * </p>
+ * </blockquote>
+ * 
+ * <h3>String s3 = s1 + s2; <br>
+ * System.out.println(s3.intern() == s3); 到底想不相等</h3> <blockquote>
+ * <p>
+ * 要看虚拟机的实现<br>
+ * 1、假设：hotspot1.6<br>
+ * 则false不相等<br>
+ * 2、假设：hotspot1.7<br>
+ * 则在之前没有创建过“abcabc”时，true相等
+ * </p>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.4.0 2015年8月3日 上午3:06:20
