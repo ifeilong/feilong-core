@@ -18,6 +18,7 @@ package com.feilong.core.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -84,6 +85,7 @@ public final class CollectionsUtil{
      * @return iterator是否包含某个值,如果iterator为null/empty,则返回false
      * @see Iterator#hasNext()
      * @see Iterator#next()
+     * @see "org.springframework.util.CollectionUtils#contains(Iterator, Object)"
      */
     public static boolean contains(Iterator<?> iterator,Object value){
         if (Validator.isNullOrEmpty(iterator)){
@@ -92,6 +94,35 @@ public final class CollectionsUtil{
         while (iterator.hasNext()){
             Object object = iterator.next();
             if (object.toString().equals(value.toString())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Contains.
+     * 
+     * @param <T>
+     *
+     * @param enumeration
+     *            the enumeration
+     * @param value
+     *            the value
+     * @return true, if contains
+     * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
+     * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
+     * @since 1.4.1
+     */
+    @SuppressWarnings("deprecation")
+    public static <T> boolean contains(Enumeration<T> enumeration,T value){
+        if (Validator.isNullOrEmpty(enumeration)){
+            return false;
+        }
+
+        while (enumeration.hasMoreElements()){
+            T object = enumeration.nextElement();
+            if (org.apache.commons.lang3.ObjectUtils.equals(object, value)){
                 return true;
             }
         }

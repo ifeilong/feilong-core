@@ -58,6 +58,7 @@ import java.util.Map;
  * @see Enumeration#hasMoreElements()
  * @see Iterator#hasNext()
  * @see org.apache.commons.lang3.Validate
+ * @see org.apache.commons.collections4.CollectionUtils#sizeIsEmpty(Object)
  * @since 1.0.0
  */
 public final class Validator{

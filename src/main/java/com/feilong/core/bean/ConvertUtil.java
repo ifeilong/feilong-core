@@ -387,6 +387,7 @@ public final class ConvertUtil{
      *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see #toString(ToStringConfig, Object...)
+     * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @since 1.4.0
      */
     public static String toString(ToStringConfig toStringConfig,final Collection<?> collection){
