@@ -182,7 +182,11 @@ public final class IOReaderUtil{
             String line = null;
             while ((line = lineNumberReader.readLine()) != null){
                 int lineNumber = lineNumberReader.getLineNumber();
-                lineNumberReaderResolver.excute(lineNumber, line);
+                boolean result = lineNumberReaderResolver.excute(lineNumber, line);
+
+                if (!result){
+                    break;
+                }
             }
         }catch (IOException e){
             LOGGER.error("", e);

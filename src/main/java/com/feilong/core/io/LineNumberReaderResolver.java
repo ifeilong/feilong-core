@@ -25,16 +25,17 @@ package com.feilong.core.io;
 public interface LineNumberReaderResolver{
 
     /**
-     * Excute.
+     * 每行读取的时候的操作.
      *
      * @param lineNumber
      *            行号,默认从0开始,但是此处由于在循环内部调用,即上面已经开始读取了,那么此处值最小值是1( see {@link java.io.LineNumberReader#read()}), see
      *            {@link java.io.LineNumberReader#getLineNumber()}
      * @param line
      *            the line {@link java.io.LineNumberReader#readLine()}
+     * @return if return ture ,will go on loop; else will break loop;
      * @see java.io.LineNumberReader#getLineNumber()
      * @see java.io.LineNumberReader#readLine()
      * @see java.io.LineNumberReader#read()
      */
-    void excute(int lineNumber,String line);
+    boolean excute(int lineNumber,String line);
 }
