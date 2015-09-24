@@ -53,14 +53,4 @@ public class UncheckedIOException extends RuntimeException{
     public UncheckedIOException(IOException cause){
         super(cause);
     }
-
-    /**
-     * Returns the cause of this exception.
-     *
-     * @return the {@code IOException} which is the cause of this exception.
-     */
-    @Override
-    public IOException getCause(){
-        return (IOException) super.getCause();
-    }
 }

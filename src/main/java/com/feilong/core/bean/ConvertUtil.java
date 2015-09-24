@@ -580,6 +580,7 @@ public final class ConvertUtil{
      * @return the object[]
      * @since 1.4.0
      */
+    @SafeVarargs
     private static <T> Object[] toObjects(T...arrays){
         if (Validator.isNullOrEmpty(arrays)){
             return ArrayUtils.EMPTY_STRING_ARRAY;

@@ -451,6 +451,7 @@ public final class CollectionsUtil{
      * @return the list< o>
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate#ArrayContainsPredicate(String, Object...)
      */
+    @SafeVarargs
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection can't be null/empty!");
@@ -537,6 +538,7 @@ public final class CollectionsUtil{
      *            the values
      * @return the list< o>
      */
+    @SafeVarargs
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
             throw new NullPointerException("objectCollection can't be null/empty!");
