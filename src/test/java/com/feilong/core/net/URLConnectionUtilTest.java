@@ -40,12 +40,12 @@ public class URLConnectionUtilTest{
     @Test
     public void getResponseBodyAsString(){
         String templateFile = "http://10.8.25.80:6666/template.csv?sign=123456";
+        templateFile = "http://www.suimeng.com/files/article/html/76/76841/";
 
         ConnectionConfig connectionConfig = new ConnectionConfig();
-        connectionConfig.setContentCharset(CharsetType.UTF8);
+        connectionConfig.setContentCharset(CharsetType.GBK);
 
-        String responseBodyAsString = URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig);
-        LOGGER.info(responseBodyAsString);
+        LOGGER.info(URLConnectionUtil.getResponseBodyAsString(templateFile, connectionConfig));
     }
 
     /**
