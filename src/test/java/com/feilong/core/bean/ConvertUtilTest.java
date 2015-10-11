@@ -94,7 +94,6 @@ public class ConvertUtilTest{
         LOGGER.info(StringUtils.center("enumeration", 60, "*"));
         Enumeration<Object> enumeration = new StringTokenizer("this is a test");
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(enumeration)));
-
     }
 
     /**
@@ -136,8 +135,7 @@ public class ConvertUtilTest{
         arrayConverter.setDelimiter(delimiter);
         arrayConverter.setOnlyFirstToString(onlyFirstToString);
 
-        T result = arrayConverter.convert(defaultArrayType, toBeConvertedValue);
-        return result;
+        return arrayConverter.convert(defaultArrayType, toBeConvertedValue);
     }
 
     /**

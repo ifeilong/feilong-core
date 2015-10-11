@@ -15,7 +15,6 @@
  */
 package com.feilong.core.lang;
 
-
 /**
  * {@link Object} 工具类.
  * 

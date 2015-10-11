@@ -139,5 +139,4 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     public void testGetYesterday(){
         logDate(DateExtensionUtil.getYesterday(NOW));
     }
-
 }

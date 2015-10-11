@@ -15,7 +15,6 @@
  */
 package com.feilong.core.util;
 
-
 /**
  * The Class PropertiesUtilTest.
  * 
