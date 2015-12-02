@@ -55,8 +55,8 @@ import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0 Sep 2, 2010 8:08:40 PM
- * @since 1.0.0
+ * @version 1.0.2 Sep 2, 2010 8:08:40 PM
+ * @since 1.0.2
  * @since jdk1.5
  */
 public final class CollectionsUtil{
@@ -624,6 +624,8 @@ public final class CollectionsUtil{
         return map;
     }
 
+    //****************************************************************************************
+
     /**
      * Group 对象(如果propertyName 存在相同的值,那么这些值,将会以list的形式 put到map中).
      *
@@ -635,7 +637,8 @@ public final class CollectionsUtil{
      *            the object list
      * @param propertyName
      *            对面里面属性的名称
-     * @return the map< t, list< o>>
+     * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
+     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.lang.ArrayUtil#group(Object[], String)
      * @see #groupOne(Collection, String)
@@ -643,7 +646,7 @@ public final class CollectionsUtil{
      */
     public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyMap();
         }
         if (Validator.isNullOrEmpty(propertyName)){
             throw new NullPointerException("propertyName is null or empty!");
@@ -675,7 +678,8 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            the property name
-     * @return 返回的是 {@link LinkedHashMap}
+     * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
+     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
         return groupCount(objectCollection, null, propertyName);
@@ -694,12 +698,13 @@ public final class CollectionsUtil{
      *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
      * @param propertyName
      *            the property name
-     * @return the map< t, integer>
+     * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
+     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      * @since 1.2.0
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate<O> includePredicate,String propertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyMap();
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -741,14 +746,15 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            the property name
-     * @return the map< t, o>
+     * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
+     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      * @see #group(Collection, String)
      * @since 1.0.8
      */
     public static <T, O> Map<T, O> groupOne(Collection<O> objectCollection,String propertyName){
 
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyMap();
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -774,6 +780,8 @@ public final class CollectionsUtil{
         }
         return map;
     }
+
+    //************************************************************************************************
 
     /**
      * 算术平均值.

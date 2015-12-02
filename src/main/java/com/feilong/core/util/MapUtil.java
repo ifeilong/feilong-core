@@ -118,12 +118,11 @@ public final class MapUtil{
      *            the map
      * @param keys
      *            指定key,如果key 不在map key 里面 ,则返回的map 中忽略该key
-     * @return the sub map<br>
-     *         if (Validator.isNullOrEmpty(keys)) 返回map<br>
+     * @return if map isNullOrEmpty,will return {@link Collections#emptyMap()}
      */
     public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K[] keys){
         if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("map can't be null/empty!");
+            return Collections.emptyMap();
         }
         if (Validator.isNullOrEmpty(keys)){
             return map;
@@ -151,13 +150,12 @@ public final class MapUtil{
      *            the map
      * @param excludeKeys
      *            the keys
-     * @return the sub map<br>
-     *         if (Validator.isNullOrEmpty(keys)) 返回map<br>
+     * @return if map isNullOrEmpty,will return {@link Collections#emptyMap()}
      * @since 1.0.9
      */
     public static <K, T> Map<K, T> getSubMapExcludeKeys(Map<K, T> map,K[] excludeKeys){
         if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("map can't be null/empty!");
+            return Collections.emptyMap();
         }
         if (Validator.isNullOrEmpty(excludeKeys)){
             return map;
@@ -217,8 +215,8 @@ public final class MapUtil{
      *            map key 的class 类型
      * @return
      *         <ul>
-     *         <li>if Validator.isNullOrEmpty(map) ,NullPointerException</li>
-     *         <li>if Validator.isNullOrEmpty(extractPropertyName),NullPointerException</li>
+     *         <li>if Validator.isNullOrEmpty(map),return {@link Collections#emptyMap()}</li>
+     *         <li>if Validator.isNullOrEmpty(extractPropertyName),throw NullPointerException</li>
      *         <li>if Validator.isNullOrEmpty(includeKeys), then will extract map total keys</li>
      *         <li>抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
@@ -251,8 +249,8 @@ public final class MapUtil{
      *            map key 的class 类型
      * @return
      *         <ul>
-     *         <li>if Validator.isNullOrEmpty(map) ,NullPointerException</li>
-     *         <li>if Validator.isNullOrEmpty(extractPropertyName),NullPointerException</li>
+     *         <li>if Validator.isNullOrEmpty(map),return {@link Collections#emptyMap()}</li>
+     *         <li>if Validator.isNullOrEmpty(extractPropertyName),throw NullPointerException</li>
      *         <li>if Validator.isNullOrEmpty(includeKeys), then will extract map total keys</li>
      *         <li>抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
@@ -260,7 +258,7 @@ public final class MapUtil{
      */
     public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName,Class<K> keysClass){
         if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("map can't be null/empty!");
+            return Collections.emptyMap();
         }
         if (Validator.isNullOrEmpty(extractPropertyName)){
             throw new NullPointerException("extractPropertyName is null or empty!");
