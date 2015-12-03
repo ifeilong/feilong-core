@@ -22,6 +22,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +50,11 @@ public final class InputStreamUtil{
     /**
      * 将 {@link java.io.InputStream} 转成string.<br>
      * 使用默认的编码集 {@link Charset#defaultCharset()}
-     *
+     * 
+     * <p>
+     * 如果需要将 {@link String} 转成 {@link InputStream} 可以调用 {@link IOUtils#toInputStream(String, Charset)}
+     * </p>
+     * 
      * @param inputStream
      *            the input stream
      * @return 将 {@link java.io.InputStream} 转成string
@@ -65,7 +70,11 @@ public final class InputStreamUtil{
     /**
      * 将 {@link java.io.InputStream} 转成string.<br>
      * 读取cmd命令结果时候, 有时候读取的是乱码,需要传递 <code>charsetName</code>字符集.
-     *
+     * 
+     * <p>
+     * 如果需要将 {@link String} 转成 {@link InputStream} 可以调用 {@link IOUtils#toInputStream(String, Charset)}
+     * </p>
+     * 
      * @param inputStream
      *            the input stream
      * @param charsetName
