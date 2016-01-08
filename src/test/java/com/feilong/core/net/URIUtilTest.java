@@ -54,6 +54,15 @@ public class URIUtilTest{
     }
 
     /**
+     * Test encode2.
+     */
+    @Test
+    public void testEncode2(){
+        LOGGER.info(URIUtil.encode("%", CharsetType.UTF8));
+        LOGGER.info(URIUtil.encode("%25", CharsetType.UTF8));
+    }
+
+    /**
      * Decode.
      */
     @Test
@@ -62,6 +71,15 @@ public class URIUtilTest{
                         .decode(
                                         "%E9%87%91%E6%80%BB%EF%BC%8C%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E4%B9%88%EF%BC%8C%E5%B0%B1%E6%80%8E%E4%B9%88%E4%B9%88",
                                         CharsetType.UTF8));
+
+    }
+
+    /**
+     * Decode2.
+     */
+    @Test
+    public void decode2(){
+        LOGGER.info(URIUtil.decode("aaaaa%chu", CharsetType.UTF8));
 
     }
 
@@ -131,6 +149,25 @@ public class URIUtilTest{
         URI uri = URIUtil.create("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3", CharsetType.UTF8);
         LOGGER.info(uri.toString());
         LOGGER.info(JsonUtil.format(uri));
+    }
+
+    /**
+     * Test create3.
+     */
+    @Test
+    public void testCreate3(){
+        String uriString = "http://127.0.0.1/cmens?a=%";
+        LOGGER.info("" + URI.create(uriString));
+    }
+
+    /**
+     * Test create4.
+     */
+    @Test
+    public void testCreate4(){
+        String uriString = "http://127.0.0.1/cmens?a=%";
+        URI uri = URIUtil.create(uriString, CharsetType.UTF8);
+        LOGGER.info(uri.toString());
     }
 
     /**

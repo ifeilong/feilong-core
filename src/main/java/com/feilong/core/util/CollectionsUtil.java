@@ -38,6 +38,7 @@ import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
+import com.feilong.core.util.predicate.CollectionContainsPredicate;
 import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
 
 /**
@@ -56,6 +57,7 @@ import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
  * 
  * @author feilong
  * @version 1.0.2 Sep 2, 2010 8:08:40 PM
+ * @version 1.5.0 2016年1月8日 下午2:08:59
  * @since 1.0.2
  * @since jdk1.5
  */
@@ -102,9 +104,9 @@ public final class CollectionsUtil{
 
     /**
      * Contains.
-     * 
-     * @param <T>
      *
+     * @param <T>
+     *            the generic type
      * @param enumeration
      *            the enumeration
      * @param value
@@ -129,8 +131,10 @@ public final class CollectionsUtil{
         return false;
     }
 
+    //***************************************************************************
+
     /**
-     * 从 <code>collection</code>中 删除 所有的 <code>remove</code>. 返回剩余的集合,返回剩余的集合(原集合对象不变).
+     * 从 <code>collection</code>中 删除 所有的 <code>remove</code>. 返回剩余的集合 <span style="color:red">(原集合对象不变)</span>.
      * 
      * <p>
      * The cardinality of an element <code>e</code> in the returned collection is the same as the cardinality of <code>e</code> in
@@ -147,22 +151,80 @@ public final class CollectionsUtil{
      * 
      * @param <T>
      *            the generic type
-     * @param collection
+     * @param objectCollection
      *            the collection from which items are removed (in the returned collection)
      * @param remove
      *            the items to be removed from the returned <code>collection</code>
      * @return a <code>List</code> containing all the elements of <code>c</code> except
      *         any elements that also occur in <code>remove</code>.
      * @see ListUtils#removeAll(Collection, Collection)
-     * @since Commons Collections 3.2
+     * @since Commons Collections 4
      * @since 1.0.8
      */
-    public static <T> List<T> removeAll(Collection<T> collection,Collection<T> remove){
-        return ListUtils.removeAll(collection, remove);
+    public static <T> List<T> removeAll(Collection<T> objectCollection,Collection<T> remove){
+        return ListUtils.removeAll(objectCollection, remove);
     }
 
     /**
-     * 从 <code>collection</code>中 删除 <code>removeElement</code>,返回剩余的集合(原集合对象不变).
+     * 从 <code>collection</code>中 删除 所有的 <code>propertyName</code> 值在 <code>values</code>集合中的对象. 返回剩余的集合 <span
+     * style="color:red">(原集合对象不变)</span>.
+     * 
+     * <p>
+     * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.removeAll(remove);</code>.
+     * </p>
+     * 
+     * <p>
+     * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * List&lt;User&gt; objectCollection = new ArrayList&lt;User&gt;();
+     * objectCollection.add(new User(&quot;张飞&quot;, 23));
+     * objectCollection.add(new User(&quot;关羽&quot;, 24));
+     * objectCollection.add(new User(&quot;刘备&quot;, 25));
+     * 
+     * List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+     * list.add(&quot;张飞&quot;);
+     * list.add(&quot;刘备&quot;);
+     * 
+     * List&lt;User&gt; removeAll = CollectionsUtil.removeAll(objectCollection, &quot;name&quot;, list);
+     * LOGGER.info(JsonUtil.format(removeAll));
+     * </pre>
+     * 
+     * <p>
+     * 返回的集合中,将只包含 关羽 对象
+     * </p>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            the property name
+     * @param values
+     *            the values
+     * @return a <code>List</code> containing all the elements of <code>c</code> except
+     *         any elements that also occur in <code>remove</code>.
+     * @see #select(Collection, String, Collection)
+     * @see #removeAll(Collection, Collection)
+     * @since Commons Collections 4
+     * @since 1.5.0
+     */
+    public static <T, V> List<T> removeAll(Collection<T> objectCollection,String propertyName,Collection<V> values){
+        Collection<T> removeCollection = select(objectCollection, propertyName, values);
+        return removeAll(objectCollection, removeCollection);
+    }
+
+    /**
+     * 从 <code>collection</code>中 删除 <code>removeElement</code>,返回剩余的集合 <span style="color:red">(原集合对象不变)</span>.
      * 
      * <p>
      * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.remove(removeElement);</code>.
@@ -174,20 +236,20 @@ public final class CollectionsUtil{
      * 
      * @param <T>
      *            the generic type
-     * @param collection
+     * @param objectCollection
      *            the collection from which items are removed (in the returned collection)
      * @param removeElement
      *            the remove element
      * @return a <code>List</code> containing all the elements of <code>c</code> except
      *         any elements that also occur in <code>remove</code>.
      * @see ListUtils#removeAll(Collection, Collection)
-     * @since Commons Collections 3.2
+     * @since Commons Collections 4
      * @since 1.0.8
      */
-    public static <T> List<T> remove(Collection<T> collection,T removeElement){
+    public static <T> List<T> remove(Collection<T> objectCollection,T removeElement){
         Collection<T> remove = new ArrayList<T>();
         remove.add(removeElement);
-        return removeAll(collection, remove);
+        return removeAll(objectCollection, remove);
     }
 
     /**
@@ -209,7 +271,7 @@ public final class CollectionsUtil{
      * 
      * @param <T>
      *            the generic type
-     * @param collection
+     * @param objectCollection
      *            the item src list
      * @return if Validator.isNullOrEmpty(collection) 返回null<br>
      *         else 返回的是 {@link ArrayList}
@@ -218,12 +280,14 @@ public final class CollectionsUtil{
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments</a>
      */
-    public static <T> List<T> removeDuplicate(Collection<T> collection){
-        if (Validator.isNullOrEmpty(collection)){
+    public static <T> List<T> removeDuplicate(Collection<T> objectCollection){
+        if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyList();
         }
-        return new ArrayList<T>(new LinkedHashSet<T>(collection));
+        return new ArrayList<T>(new LinkedHashSet<T>(objectCollection));
     }
+
+    //********************************************************************************************
 
     /**
      * 解析对象集合,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象特殊属性,拼成List(ArrayList).
@@ -385,6 +449,8 @@ public final class CollectionsUtil{
         return returnCollection;
     }
 
+    //*****************************************************************************************
+
     /**
      * Finds the first element in the given collection which matches the given predicate.
      * 
@@ -409,6 +475,8 @@ public final class CollectionsUtil{
         Predicate<O> predicate = new ObjectPropertyEqualsPredicate<O>(propertyName, value);
         return CollectionUtils.find(objectCollection, predicate);
     }
+
+    //*******************************************************************************************
 
     /**
      * 循环遍历 <code>objectCollection</code>,返回 当bean propertyName 属性值 equals 特定value 时候的list.
@@ -462,7 +530,63 @@ public final class CollectionsUtil{
         }
 
         Predicate<O> predicate = new ArrayContainsPredicate<O>(propertyName, values);
-        return (List<O>) CollectionUtils.select(objectCollection, predicate);
+        return select(objectCollection, predicate);
+    }
+
+    /**
+     * 调用 {@link CollectionContainsPredicate},获得 <code>propertyName</code>的值,判断是否 在<code>values</code>集合中;如果在,将该对象存入list中返回.
+     * 
+     * <p>
+     * 具体参见 {@link CollectionContainsPredicate}的使用
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * List&lt;User&gt; objectCollection = new ArrayList&lt;User&gt;();
+     * objectCollection.add(new User(&quot;张飞&quot;, 23));
+     * objectCollection.add(new User(&quot;关羽&quot;, 24));
+     * objectCollection.add(new User(&quot;刘备&quot;, 25));
+     * 
+     * List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+     * list.add(&quot;张飞&quot;);
+     * list.add(&quot;刘备&quot;);
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, &quot;name&quot;, list)));
+     * </pre>
+     * 
+     * <p>
+     * 返回 张飞 和 刘备的对象集合
+     * </p>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            the property name
+     * @param values
+     *            the values
+     * @return the list< o>
+     * @see com.feilong.core.util.predicate.CollectionContainsPredicate
+     * @since 1.5.0
+     */
+    public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,Collection<V> values){
+        if (Validator.isNullOrEmpty(objectCollection)){
+            throw new NullPointerException("objectCollection can't be null/empty!");
+        }
+
+        if (Validator.isNullOrEmpty(propertyName)){
+            throw new NullPointerException("propertyName is null or empty!");
+        }
+
+        Predicate<O> predicate = new CollectionContainsPredicate<O>(propertyName, values);
+        return select(objectCollection, predicate);
     }
 
     /**
@@ -483,24 +607,7 @@ public final class CollectionsUtil{
         return (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
 
-    /**
-     * Select rejected.
-     *
-     * @param <O>
-     *            the generic type
-     * @param objectCollection
-     *            the object collection
-     * @param predicate
-     *            the predicate
-     * @return the list< o>
-     * @since 1.4.0
-     */
-    public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
-        }
-        return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
-    }
+    //************************************************************************************************
 
     /**
      * 循环遍历 <code>objectCollection</code> ,返回 当bean propertyName 属性值不 equals 特定value 时候的list.
@@ -548,9 +655,82 @@ public final class CollectionsUtil{
             throw new NullPointerException("propertyName is null or empty!");
         }
         Predicate<O> predicate = new ArrayContainsPredicate<O>(propertyName, values);
+        return selectRejected(objectCollection, predicate);
+    }
+
+    /**
+     * 调用 {@link CollectionContainsPredicate},获得 <code>propertyName</code>的值,判断是否 不在<code>values</code>集合中;如果不在,将该对象存入list中返回.
+     * 
+     * <p>
+     * 具体参见 {@link CollectionContainsPredicate}的使用
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * List&lt;User&gt; objectCollection = new ArrayList&lt;User&gt;();
+     * objectCollection.add(new User(&quot;张飞&quot;, 23));
+     * objectCollection.add(new User(&quot;关羽&quot;, 24));
+     * objectCollection.add(new User(&quot;刘备&quot;, 25));
+     * 
+     * List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+     * list.add(&quot;张飞&quot;);
+     * list.add(&quot;刘备&quot;);
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, &quot;name&quot;, list)));
+     * </pre>
+     * 
+     * <p>
+     * 返回 关羽 的对象集合
+     * </p>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            the property name
+     * @param values
+     *            the values
+     * @return the list< o>
+     * @see com.feilong.core.util.predicate.CollectionContainsPredicate
+     * @since 1.5.0
+     */
+    public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,Collection<V> values){
+        if (Validator.isNullOrEmpty(objectCollection)){
+            throw new NullPointerException("objectCollection can't be null/empty!");
+        }
+
+        if (Validator.isNullOrEmpty(propertyName)){
+            throw new NullPointerException("propertyName is null or empty!");
+        }
+        Predicate<O> predicate = new CollectionContainsPredicate<O>(propertyName, values);
+        return selectRejected(objectCollection, predicate);
+    }
+
+    /**
+     * Select rejected.
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param predicate
+     *            the predicate
+     * @return the list< o>
+     * @since 1.4.0
+     */
+    public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
+        if (Validator.isNullOrEmpty(objectCollection)){
+            throw new NullPointerException("objectCollection can't be null/empty!");
+        }
         return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
+    //***************************************************************************************************
     /**
      * 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回.
      * 

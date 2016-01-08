@@ -218,7 +218,7 @@ public class ParamUtilTest{
     public void testToSingleValueMap(){
         String queryString = "";
         //queryString = "_input_charset=UTF-8&out_order_no=2015080310000132&partner=2088201564809153&service=close_trade&sign=dc5a40d1d554b2ef115461f0ed6c49fc&sign_type=MD5&trade_role=S";
-        queryString = "sign=837f47398140484b4da0cb70a52a815a&sec_id=MD5&v=2.0&req_data=%3Cdirect_trade_create_req%3E%3Ccall_back_url%3Ehttp%3A%2F%2F203.128.73.211%2Fp%2Fklikpayback%2F010002770003%3Fs%3Dcca0ca41b07759089b8a0c35a2b98a361d3016d8%3C%2Fcall_back_url%3E%3Cseller_account_name%3Ebzalitest%40alitest.com%3C%2Fseller_account_name%3E%3Ctotal_fee%3E0.01%3C%2Ftotal_fee%3E%3Csubject%3ENike%E5%AE%98%E6%96%B9%E5%95%86%E5%9F%8E%E5%95%86%E5%93%81%3C%2Fsubject%3E%3Cmerchant_url%3Enull%3C%2Fmerchant_url%3E%3Cnotify_url%3Ehttp%3A%2F%2F203.128.73.211%2Fp%2Fklikpayback%2F010002770003%3Fs%3Dcca0ca41b07759089b8a0c35a2b98a361d3016d8%3C%2Fnotify_url%3E%3Cout_trade_no%3E20150812181437%3C%2Fout_trade_no%3E%3C%2Fdirect_trade_create_req%3E&service=alipay.wap.trade.create.direct&req_id=1439374477104&format=xml&partern=2088102140099912";
+        queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
         LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
     }
 

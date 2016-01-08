@@ -102,6 +102,47 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(map));
     }
 
+    @Test
+    public void testSelect(){
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+
+        List<String> list = new ArrayList<String>();
+        list.add("张飞");
+        list.add("刘备");
+        LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
+    }
+
+    @Test
+    public void testRemoveAll(){
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+
+        List<String> list = new ArrayList<String>();
+        list.add("张飞");
+        list.add("刘备");
+
+        List<User> removeAll = CollectionsUtil.removeAll(objectCollection, "name", list);
+        LOGGER.info(JsonUtil.format(removeAll));
+    }
+
+    @Test
+    public void testSelectRejected(){
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+
+        List<String> list = new ArrayList<String>();
+        list.add("张飞");
+        list.add("刘备");
+        LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(objectCollection, "name", list)));
+    }
+
     /**
      * To array.
      */
