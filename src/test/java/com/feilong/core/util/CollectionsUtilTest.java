@@ -102,6 +102,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(map));
     }
 
+    /**
+     * Test select.
+     */
     @Test
     public void testSelect(){
         List<User> objectCollection = new ArrayList<User>();
@@ -115,6 +118,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
     }
 
+    /**
+     * Test remove all.
+     */
     @Test
     public void testRemoveAll(){
         List<User> objectCollection = new ArrayList<User>();
@@ -130,6 +136,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(removeAll));
     }
 
+    /**
+     * Test select rejected.
+     */
     @Test
     public void testSelectRejected(){
         List<User> objectCollection = new ArrayList<User>();

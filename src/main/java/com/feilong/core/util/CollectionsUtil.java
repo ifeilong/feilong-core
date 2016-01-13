@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
 import org.slf4j.Logger;
@@ -469,11 +470,11 @@ public final class CollectionsUtil{
      * @param value
      *            the value
      * @return the first element of the collection which matches the predicate or null if none could be found
-     * @see CollectionUtils#find(Iterable, Predicate)
+     * @see IterableUtils#find(Iterable, Predicate)
      */
     public static <O, V> O find(Collection<O> objectCollection,String propertyName,V value){
         Predicate<O> predicate = new ObjectPropertyEqualsPredicate<O>(propertyName, value);
-        return CollectionUtils.find(objectCollection, predicate);
+        return IterableUtils.find(objectCollection, predicate);
     }
 
     //*******************************************************************************************
