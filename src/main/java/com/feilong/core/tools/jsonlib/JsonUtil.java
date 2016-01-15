@@ -717,6 +717,39 @@ public final class JsonUtil{
     // [start]toMap
 
     /**
+     * 这是简单的 将json字符串转成map.
+     * 
+     * <h3>格式示例如下:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * {"brandCode":"UA"}
+     * </p>
+     * </blockquote>
+     *
+     * @param json
+     *            the json
+     * @return the map< string, object>
+     * @since 1.5.0
+     */
+    public static Map<String, Object> toMap(String json){
+        LOGGER.debug("in json:{}", json);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        JSONObject jsonObject = toJSONObject(json);
+        @SuppressWarnings("unchecked")
+        Iterator<String> keys = jsonObject.keys();
+        while (keys.hasNext()){
+            String key = keys.next();
+            Object value = jsonObject.get(key);
+            LOGGER.debug("key:[{}], value:{}", key, value);
+            map.put(key, value);
+        }
+        return map;
+    }
+
+    /**
      * 把json对象串转换成map对象,且map对象里存放的为其他实体Bean.
      *
      * @param <T>
