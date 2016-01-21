@@ -63,31 +63,32 @@ import com.feilong.core.util.Validator;
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4">
  * <tr style="background-color:#ccccff">
- * <th align="left">字段</th>
+ * <th align="left">方法</th>
  * <th align="left">说明</th>
  * </tr>
  * <tr valign="top">
  * <td>{@link ConvertUtils#convert(Object)}</td>
  * <td>将指定的value转成string.<br>
- * 如果value是array, 将会返回数组第一个元素转成string. 将会使用注册的 <code>java.lang.String</code> {@link Converter},允许应用 定制 Object->String conversions (
- * 默认使用简单的使用 toString()) <br>
+ * 如果value是array,将会返回数组第一个元素转成string.<br>
+ * 将会使用注册的 <code>java.lang.String</code>{@link Converter},<br>
+ * 允许应用定制 Object->String conversions(默认使用简单的使用 toString())<br>
  * see {@link ConvertUtilsBean#convert(Object)}</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link ConvertUtils#convert(String, Class)}</td>
- * <td>将String value转成 指定Class 类型的对象 (如果可能),否则返回string. <br>
+ * <td>将String value转成 指定Class 类型的对象 (如果可能),否则返回string.<br>
  * see {@link ConvertUtilsBean#convert(String, Class)}</td>
  * </tr>
  * <tr valign="top">
  * <td>{@link ConvertUtils#convert(String[], Class)}</td>
  * <td>将数组转成指定class类型的对象. <br>
- * 如果指定的Class类型是数组类型, 那么返回值的类型将是数组的类型. 否则将会构造一个指定类型的数组返回. <br>
+ * 如果指定的Class类型是数组类型,那么返回值的类型将是数组的类型.否则将会构造一个指定类型的数组返回.<br>
  * see {@link ConvertUtilsBean#convert(String[], Class)} <br>
  * see {@link #convert(String[], Class)}</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link ConvertUtils#convert(Object, Class)}</td>
- * <td>将value转成指定Class类型的对象,如果Class的转换器没有注册, 那么传入的value原样返回.<br>
+ * <td>将value转成指定Class类型的对象,如果Class的转换器没有注册,那么传入的value原样返回.<br>
  * see {@link ConvertUtilsBean#convert(Object, Class)}<br>
  * see {@link #convert(Object, Class)}</td>
  * </tr>

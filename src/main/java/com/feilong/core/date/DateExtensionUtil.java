@@ -29,7 +29,7 @@ import com.feilong.core.util.Validator;
  * 和 DateUtil的区别在于,DateUtil是纯操作Date API的工具类,而DateExtensionUtil类用于个性化输出结果,针对业务个性化显示.
  * </p>
  * 
- * <h3>获得两个日期间隔</h3>
+ * <h3>获得两个日期间隔:</h3>
  * 
  * <blockquote>
  * <ul>

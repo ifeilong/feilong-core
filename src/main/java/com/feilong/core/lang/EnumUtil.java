@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.net.HttpMethodType;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.core.util.Validator;
@@ -55,7 +54,7 @@ public final class EnumUtil{
      * 适用于这种{@link com.feilong.core.net.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
-     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
+     *  EnumUtil.getEnumByField(com.feilong.core.net.HttpMethodType.class, "method", "get")
      * }
      * </pre>
      *
@@ -84,7 +83,7 @@ public final class EnumUtil{
      * 适用于这种{@link com.feilong.core.net.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
-     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
+     *  EnumUtil.getEnumByField(com.feilong.core.net.HttpMethodType.class, "method", "get")
      * }
      * </pre>
      *
@@ -111,10 +110,10 @@ public final class EnumUtil{
      * 
      * <pre>
      * 
-     * 适用于这种{@link HttpMethodType} 待自定义属性的枚举类型,调用方式:
+     * 适用于这种{@link com.feilong.core.net.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
-     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
+     *  EnumUtil.getEnumByField(com.feilong.core.net.HttpMethodType.class, "method", "get")
      * }
      * </pre>
      *
@@ -123,9 +122,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link HttpMethodType}
+     *            the enum class 比如 {@link com.feilong.core.net.HttpMethodType}
      * @param propertyName
-     *            字段名称,比如 {@link HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 {@link com.feilong.core.net.HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @param ignoreCase

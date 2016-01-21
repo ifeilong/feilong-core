@@ -141,8 +141,6 @@ import java.util.GregorianCalendar;
  * </table>
  * </blockquote>
  * 
- * 
- * 
  * @author feilong
  * @version 1.0.1 Aug 4, 2010 9:06:54 PM
  * @see DateUtil

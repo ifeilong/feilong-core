@@ -183,7 +183,17 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     public void toMap(){
         String json = "{'data1':{'name':'get'},'data2':{'name':'set'},'null':{'name':'set'}}";
         Map<String, Person> map = JsonUtil.toMap(json, Person.class);
-        LOGGER.info(JsonUtil.toJSON(map).toString(4, 4));
+        LOGGER.info(JsonUtil.format(map));
+    }
+
+    /**
+     * To map12.
+     */
+    @Test
+    public void toMap12(){
+        String json = "{\"brandCode\":\"UA\"}";
+        Map<String, Object> map = JsonUtil.toMap(json);
+        LOGGER.info(JsonUtil.format(map));
     }
 
     /**
