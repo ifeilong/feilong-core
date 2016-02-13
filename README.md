@@ -72,8 +72,8 @@ com.feilong.core.`tools.slf4j`  | 调用了`slf4j-api`包下类,来进行字符�
 com.feilong.core.`util`  | 提供了`java.util`包下常用的类的操作 ,比如[CollectionsUtil](src/main/java/com/feilong/core/util/CollectionsUtil.java),[MapUtil](src/main/java/com/feilong/core/util/MapUtil.java),[PropertiesUtil](src/main/java/com/feilong/core/util/PropertiesUtil.java),[Validator](src/main/java/com/feilong/core/util/Validator.java)...etc.
 com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`,最常用的是[PropertyComparator](src/main/java/com/feilong/core/util/comparator/PropertyComparator.java)
 
-# JAVADOC:
-在此,我们提供在线的javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.0-SNAPSHOT/feilong-core/) 
+# Javadoc:
+在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.0-SNAPSHOT/feilong-core/) 
 
 # 类和方法介绍: 
 
