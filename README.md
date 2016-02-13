@@ -76,8 +76,8 @@ Reduce development, Release ideas
 
 Package | Description 
 :---- | :---------
-com.feilong.core.`bean`  | 封装了`commons-beanutils`,最大的特点是使用了`BeanUtilException`(RuntimeException)
-com.feilong.core.`date`  | 提供了常用的日期操作
+com.feilong.core.`bean`  | 封装了`commons-beanutils`,最大的特点是使用了`BeanUtilException`(RuntimeException),常见的类有[BeanUtil](src/main/java/com/feilong/core/bean/BeanUtil.java),[PropertyUtil](src/main/java/com/feilong/core/bean/PropertyUtil.java),[ConvertUtil](src/main/java/com/feilong/core/bean/ConvertUtil.java)
+com.feilong.core.`date`  | 提供了常用的日期操作,常见的类有[DateUtil](src/main/java/com/feilong/core/date/DateUtil.java),[CalendarUtil](src/main/java/com/feilong/core/date/CalendarUtil.java),[TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java),[DateExtensionUtil](src/main/java/com/feilong/core/date/DateExtensionUtil.java)
 com.feilong.core.`io`  | 提供了`java.io`包下常用的类的操作
 com.feilong.core.`lang`  | 提供了`java.lang`包下常用的类的操作
 com.feilong.core.`lang.reflect`  | 提供了常用的`java.lang.reflect`包下类的操作,以及封装了 `org.apache.commons.lang3.reflect`包
@@ -85,7 +85,7 @@ com.feilong.core.`net`  | 提供了`java.net`包下常用的类的操作
 com.feilong.core.`text`  | 提供了`java.text`包下常用的类的操作
 com.feilong.core.`tools.jsonlib`  | 封装了`json-lib-2.4-jdk15`包,提供JSON类型的常见操作,`对象和json的相互转换`,`json数据的format`等等,参见 [JsonUtil](src/main/java/com/feilong/core/tools/jsonlib/JsonUtil.java)
 com.feilong.core.`tools.slf4j`  | 调用了`slf4j-api`包下类,来进行字符串的格式化输出,参见 [Slf4jUtil](src/main/java/com/feilong/core/tools/slf4j/Slf4jUtil.java)
-com.feilong.core.`util`  | 提供了`java.util`包下常用的类的操作 ,比如[CollectionsUtil](src/main/java/com/feilong/core/util/CollectionsUtil.java),[MapUtil](src/main/java/com/feilong/core/util/MapUtil.java)...etc.
+com.feilong.core.`util`  | 提供了`java.util`包下常用的类的操作 ,比如[CollectionsUtil](src/main/java/com/feilong/core/util/CollectionsUtil.java),[MapUtil](src/main/java/com/feilong/core/util/MapUtil.java),[PropertiesUtil](src/main/java/com/feilong/core/util/PropertiesUtil.java),[Validator](src/main/java/com/feilong/core/util/Validator.java)...etc.
 com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`,最常用的是[PropertyComparator](src/main/java/com/feilong/core/util/comparator/PropertyComparator.java)
 
 
