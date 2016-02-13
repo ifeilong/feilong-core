@@ -72,10 +72,10 @@ Reduce development, Release ideas
 	</project>
 ```
 
-# feilong-core package:
+# feilong-core Package介绍:
 
-package | Description 
-:----: | :---------
+Package | Description 
+:---- | :---------
 com.feilong.core.bean  | 封装了`commons-beanutils`,最大的特点是使用了`BeanUtilException`(RuntimeException)
 com.feilong.core.date  | 提供了常用的日期操作
 com.feilong.core.io  | 提供了`java.io`包下常用的类的操作
