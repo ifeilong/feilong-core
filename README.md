@@ -43,7 +43,7 @@ Reduce development, Release ideas
 
 1. 基于`Apache2` 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. 基于`maven3.2`构建;
-1. 1.5.0及以上版本需要`jdk1.7`及以上环境(1.5.0以下版本需要`jdk1.6`及以上环境);
+1. `1.5.0`及以上版本需要`jdk1.7`及以上环境(`1.5.0`以下版本需要`jdk1.6`及以上环境);
 
 
 # Maven使用配置
@@ -72,11 +72,21 @@ Reduce development, Release ideas
 	</project>
 ```
 
-# feilong-platform module:
+# feilong-core package:
 
-Category |Name | Description | JDK编译版本
-:----:|:------------: | :---------|:------------:
-commons |`feilong-core` | 核心jar,所有feilong-platform的基础 | 1.7
+package | Description 
+:----: | :---------
+com.feilong.core.bean  | 封装了`commons-beanutils`,最大的特点是使用了`BeanUtilException`(RuntimeException)
+com.feilong.core.date  | 提供了常用的日期操作
+com.feilong.core.io  | 提供了`java.io`包下常用的类的操作
+com.feilong.core.lang  | 提供了`java.lang`包下常用的类的操作
+com.feilong.core.lang.reflect  | 提供了常用的`java.lang.reflect`包下类的操作,以及封装了 `org.apache.commons.lang3.reflect`包
+com.feilong.core.net  | 提供了`java.net`包下常用的类的操作
+com.feilong.core.text  | 提供了`java.text`包下常用的类的操作
+com.feilong.core.tools.jsonlib  | 封装了`json-lib-2.4-jdk15`包,提供JSON类型的常见操作,`对象和json的相互转换`,`json数据的format`等等
+com.feilong.core.tools.slf4j  | 调用了`slf4j-api`包下类,来进行字符串的格式化输出
+com.feilong.core.util  | 提供了`java.util`包下常用的类的操作 ,比如`CollectionsUtil`,`MapUtil`...etc.
+com.feilong.core.util.comparator  | 提供了常用的`Comparator`
 
 
 # 类和方法介绍: 
