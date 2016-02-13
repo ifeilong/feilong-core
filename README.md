@@ -84,9 +84,9 @@ com.feilong.core.`lang.reflect`  | 提供了常用的`java.lang.reflect`包下�
 com.feilong.core.`net`  | 提供了`java.net`包下常用的类的操作
 com.feilong.core.`text`  | 提供了`java.text`包下常用的类的操作
 com.feilong.core.`tools.jsonlib`  | 封装了`json-lib-2.4-jdk15`包,提供JSON类型的常见操作,`对象和json的相互转换`,`json数据的format`等等
-com.feilong.core.`tools.slf4j`  | 调用了`slf4j-api`包下类,来进行字符串的格式化输出
+com.feilong.core.`tools.slf4j`  | 调用了`slf4j-api`包下类,来进行字符串的格式化输出,参见 [Slf4jUtil](https://github.com/venusdrogon/feilong-core/blob/master/src/main/java/com/feilong/core/tools/slf4j/Slf4jUtil.java)
 com.feilong.core.`util`  | 提供了`java.util`包下常用的类的操作 ,比如`CollectionsUtil`,`MapUtil`...etc.
-com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`
+com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`,最常用的是`PropertyComparator`
 
 
 # 类和方法介绍: 
