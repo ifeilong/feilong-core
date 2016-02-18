@@ -1,4 +1,4 @@
-Reduce development, Release ideas
+Reduce development, Release ideas (减少开发,释放思想)
 
             .--.
            /    \
