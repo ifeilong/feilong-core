@@ -91,22 +91,8 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * @see org.apache.commons.lang3.ObjectUtils#compare(Comparable, Comparable, boolean)
      */
     @Override
-    public int compare(T t1,T t2){
-        return innerCompare(t1, t2);
-    }
-
-    /**
-     * Inner compare.
-     *
-     * @param t1
-     *            the t1
-     * @param t2
-     *            the t2
-     * @return the int
-     * @since 1.4.0
-     */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    private int innerCompare(T t1,T t2){
+    public int compare(T t1,T t2){
         if (t1 == t2){
             return 0;
         }else if (null == t1){
