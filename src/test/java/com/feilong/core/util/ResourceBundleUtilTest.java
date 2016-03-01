@@ -42,14 +42,14 @@ public class ResourceBundleUtilTest{
     /** The resource bundle. */
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName);
 
-    /**
-     * Gets the value.
-     * 
-     */
     @Test
-    // "/WEB-INF/classes/feilong.user.properties"
     public void testGetValue(){
         LOGGER.debug(ResourceBundleUtil.getValue(baseName, "config_test_array"));
+    }
+
+    @Test
+    public void testWithSpaceValue(){
+        LOGGER.debug("@{}@", ResourceBundleUtil.getValue(baseName, "with_space_value"));
     }
 
     /**
