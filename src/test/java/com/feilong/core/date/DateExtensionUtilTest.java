@@ -81,9 +81,8 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testCalendarUtilTest(){
-        List<String> weekDateStringList = DateExtensionUtil.getWeekDateStringList(
-                        Calendar.THURSDAY,
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND);
+        List<String> weekDateStringList = DateExtensionUtil
+                        .getWeekDateStringList(Calendar.THURSDAY, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND);
         LOGGER.debug(JsonUtil.format(weekDateStringList));
     }
 
@@ -130,13 +129,5 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetResetTodayAndTomorrow(){
         LOGGER.debug(JsonUtil.format(DateExtensionUtil.getResetTodayAndTomorrow()));
-    }
-
-    /**
-     * Test get yesterday.
-     */
-    @Test
-    public void testGetYesterday(){
-        logDate(DateExtensionUtil.getYesterday(NOW));
     }
 }

@@ -46,28 +46,28 @@ import com.feilong.core.util.Validator;
 public final class DateExtensionUtil{
 
     /** 昨天. */
-    public static final String    YESTERDAY               = "昨天";
+    private static final String   YESTERDAY               = "昨天";
 
     /** 前天. */
-    public static final String    THEDAY_BEFORE_YESTERDAY = "前天";
+    private static final String   THEDAY_BEFORE_YESTERDAY = "前天";
 
     /** 星期. */
-    public static final String    WEEK                    = "星期";
+    private static final String   WEEK                    = "星期";
 
     /** 天. */
-    public static final String    DAY                     = "天";
+    private static final String   DAY                     = "天";
 
     /** 小时. */
-    public static final String    HOUR                    = "小时";
+    private static final String   HOUR                    = "小时";
 
     /** 分钟. */
-    public static final String    MINUTE                  = "分钟";
+    private static final String   MINUTE                  = "分钟";
 
     /** 秒. */
-    public static final String    SECOND                  = "秒";
+    private static final String   SECOND                  = "秒";
 
     /** 毫秒. */
-    public static final String    MILLISECOND             = "毫秒";
+    private static final String   MILLISECOND             = "毫秒";
 
     /**
      * 中文星期.<br>
@@ -79,7 +79,14 @@ public final class DateExtensionUtil{
      * 英文星期.<br>
      * { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }
      */
-    private static final String[] WEEK_ENGLISHS           = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+    private static final String[] WEEK_ENGLISHS           = {
+                                                              "Sunday",
+                                                              "Monday",
+                                                              "Tuesday",
+                                                              "Wednesday",
+                                                              "Thursday",
+                                                              "Friday",
+                                                              "Saturday" };
 
     /** Don't let anyone instantiate this class. */
     private DateExtensionUtil(){
@@ -154,27 +161,7 @@ public final class DateExtensionUtil{
     public static Date[] getResetYesterdayAndToday(){
         Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
         Date today = calendar.getTime();
-        return new Date[] { getYesterday(today), today };
-    }
-
-    /**
-     * 获得昨天(日期的前一天的<span style="color:red">此时此刻</span>).
-     * 
-     * <pre>
-     * <span style="color:red">仅对天数-1,其余时间部分不做任何处理 </span>
-     * 
-     * 比如 现在 2012-10-16 22:43:06 
-     * return 2012-10-15 22:43:06.169
-     * </pre>
-     * 
-     * @param date
-     *            date
-     * @return 获得昨天/ 日期的前一天
-     * @see DateUtil#addDay(Date, int)
-     * @since 1.4.0
-     */
-    public static Date getYesterday(Date date){
-        return DateUtil.addDay(date, -1);
+        return new Date[] { DateUtil.addDay(today, -1), today };
     }
 
     // [end]
@@ -239,13 +226,19 @@ public final class DateExtensionUtil{
     }
 
     /**
-     * 获得一年中所有的周几集合 例如:getWeekDateStringList(6, "yyyy-MM-dd");.
+     * 获得一年中所有的周几集合.
+     * 
+     * <p>
+     * 例如:getWeekDateStringList(6, "yyyy-MM-dd")
+     * </p>
      * 
      * @param week
-     *            周几 星期天开始为1 依次2 3 4 5 6 7,建议使用 常量 {@link Calendar#SUNDAY}, {@link Calendar#MONDAY}, {@link Calendar#TUESDAY},
+     *            周几<br>
+     *            星期天开始为1 依次2 3 4 5 6 7,<br>
+     *            建议使用 常量 {@link Calendar#SUNDAY}, {@link Calendar#MONDAY}, {@link Calendar#TUESDAY},
      *            {@link Calendar#WEDNESDAY}, {@link Calendar#THURSDAY}, {@link Calendar#FRIDAY}, {@link Calendar#SATURDAY}
      * @param datePattern
-     *            获得集合里面时间字符串模式
+     *            获得集合里面时间字符串模式 see {@link DatePattern}
      * @return 获得一年中所有的周几集合
      * @see org.apache.commons.lang3.time.DateUtils#iterator(Date, int)
      * @see Calendar#SUNDAY
@@ -263,9 +256,8 @@ public final class DateExtensionUtil{
         Calendar calendarEnd = CalendarUtil.resetYearEnd(DateUtil.toCalendar(now));
 
         List<String> list = new ArrayList<String>();
-        for (Calendar calendar = DateUtil.toCalendar(firstWeekOfSpecifyDateYear); calendar.before(calendarEnd); calendar.add(
-                        Calendar.DAY_OF_YEAR,
-                        7)){
+        for (Calendar calendar = DateUtil.toCalendar(firstWeekOfSpecifyDateYear); calendar.before(calendarEnd); calendar
+                        .add(Calendar.DAY_OF_YEAR, 7)){
             list.add(CalendarUtil.toString(calendar, datePattern));
         }
         return list;
@@ -421,7 +413,6 @@ public final class DateExtensionUtil{
      *            日期集合
      * @param datePattern
      *            模式 {@link DatePattern}
-     * 
      * @return 如果 Validator.isNotNullOrEmpty(dateList) return null;<br>
      *         否则循环date转成string,返回{@code List<String>}
      */
