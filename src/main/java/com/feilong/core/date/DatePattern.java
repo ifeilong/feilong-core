@@ -180,7 +180,7 @@ import java.util.Date;
  * </p>
  * 
  * <p>
- * <span style="color:red"> 注意:YYYY是 jdk1.7+支持的格式, jdk1.7-的版本, SimpleDateFormat会抛异常</span>
+ * <span style="color:red">注意:YYYY是 jdk1.7+支持的格式,jdk1.7-的版本,{@link SimpleDateFormat}会抛异常</span>
  * </p>
  * </blockquote>
  * 
@@ -190,7 +190,9 @@ import java.util.Date;
  * @see SimpleDateFormat
  * @see org.apache.commons.lang3.time.DateFormatUtils
  * @see <a
- *      href="http://www.infoq.com/cn/news/2015/01/java-date-format-with-caution?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global">慎用Java日期格式化</a>
+ *      href=
+ *      "http://www.infoq.com/cn/news/2015/01/java-date-format-with-caution?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global">
+ *      慎用Java日期格式化</a>
  * @since 1.0.2
  */
 public final class DatePattern{

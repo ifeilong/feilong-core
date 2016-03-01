@@ -25,9 +25,14 @@ import com.feilong.core.util.Validator;
 
 /**
  * {@link DateFormat}是日期/时间格式化子类的抽象类.
- * <p>
- * 直接已知子类：{@link SimpleDateFormat}.
- * </p>
+ * 
+ * <h3>关于{@link SimpleDateFormat}非线程安全:</h3>
+ * 
+ * <blockquote>
+ * see {@link <a href="http://newslxw.iteye.com/blog/1114851">SimpleDateFormat在多线程下不安全</a>}
+ * <br>
+ * 也可以查看 {@link SimpleDateFormat} Synchronization部分注释内容
+ * </blockquote>
  * 
  * @author feilong
  * @version 1.0.1 2012-3-27 上午1:39:38
@@ -36,6 +41,7 @@ import com.feilong.core.util.Validator;
  * @see java.text.SimpleDateFormat
  * @see org.apache.commons.beanutils.converters.DateConverter
  * @see org.apache.commons.beanutils.locale.converters.DateLocaleConverter
+ * @see <a href="http://newslxw.iteye.com/blog/1114851">SimpleDateFormat在多线程下不安全</a>
  * @since 1.0.1
  */
 public class DateFormatUtil{
