@@ -39,16 +39,13 @@ public class RandomUtilTest{
     /** The Constant NUMBERSANDALLLETTERS. */
     public static final String  NUMBERSANDALLLETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789";
 
-    /**
-     * {@link com.feilong.core.util.RandomUtil#createRandom(Number)} 的测试方法。
-     */
     @Test
     public void testCreateRandom(){
         LOGGER.info(RandomUtil.createRandom(8) + "");
     }
 
     /**
-     * {@link com.feilong.core.util.RandomUtil#createRandomWithLength(int)} 的测试方法。
+     * 创建 random with length.
      */
     @Test
     public void createRandomWithLength(){

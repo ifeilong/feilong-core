@@ -20,7 +20,6 @@ import java.util.Random;
 import com.feilong.core.tools.slf4j.Slf4jUtil;
 
 /**
- * 
  * 随机数工具类.
  * 
  * <ul>
@@ -66,6 +65,14 @@ public final class RandomUtil{
      * 目前内部调用全局随机数{@link #JVM_RANDOM}
      * </p>
      * 
+     * <pre>
+    Example 1: 
+    RandomUtil.createRandom(8)
+    创建一个小于8的随机数
+    
+    生成的结果是可能是 3
+     * </pre>
+     * 
      * @param number
      *            随机数最大值
      * @return 创建0-最大值之间的随机数
@@ -78,6 +85,14 @@ public final class RandomUtil{
 
     /**
      * 创建最小值和最大值之间的随机数.
+     * 
+     * <pre>
+    Example 1: 
+    RandomUtil.createRandom(10, 20)
+    创建一个数值是10-20之间的随机数
+    
+    生成的结果是可能是 12
+     * </pre>
      *
      * @param min
      *            最小值
@@ -104,6 +119,13 @@ public final class RandomUtil{
      * <p>
      * 目前内部调用全局随机数{@link #JVM_RANDOM}
      * </p>
+     * 
+     * <pre>
+    Example 1: 
+    RandomUtil.createRandomWithLength(2)
+    
+    生成的结果是可能是 89
+     * </pre>
      *
      * @param length
      *            设定所取出随机数的长度.length小于11
@@ -130,9 +152,13 @@ public final class RandomUtil{
     /**
      * 随机抽取字符串char,拼接成随机字符串.
      * 
-     * <p>
-     * 取一个字符串里面 随机长度字符
-     * </p>
+     * <pre>
+    Example 1: 
+    RandomUtil.createRandomFromString("0123456789", 8, 20)
+    从0123456789随机抽取字符,组成最小长度是8,最大长度是20的字符串
+    
+    生成的结果是可能是 142853574998970631
+     * </pre>
      *
      * @param str
      *            被抽取的字符串
@@ -161,16 +187,20 @@ public final class RandomUtil{
     }
 
     /**
-     * 随机抽取字符串char,拼接成随机字符串.
+     * 随机抽取字符串char,拼接成指定长度的字符串.
      * 
-     * <p>
-     * 取一个字符串里面 指定长度字符
-     * </p>
+     * <pre>
+    Example 1: 
+    RandomUtil.createRandomFromString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789", 5)
+    
+    从ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789 随机抽取字符,组成长度是5 的字符串
+    生成的结果是可能是  IFSMB
+     * </pre>
      *
      * @param str
      *            被抽取的字符串
      * @param length
-     *            随机字符串长度
+     *            指定字符串长度
      * @return 得到随机字符串
      */
     public static String createRandomFromString(String str,int length){

@@ -28,7 +28,7 @@ import java.util.Map;
  * <li>{@link #isNotNullOrEmpty(Object)}判断对象是否不是null或者不是空</li>
  * </ol>
  * 
- * <h3>对于empty的判断,使用以下逻辑/语法/规则:</h3>
+ * <h3>对于empty的判断,使用以下逻辑:</h3>
  * 
  * <blockquote>
  * <ol>
@@ -71,9 +71,9 @@ public final class Validator{
     }
 
     /**
-     * 判断对象是否为Null或者Empty
+     * 判断对象是否为Null或者Empty.
      * 
-     * <h3>对于empty的判断,使用以下逻辑/语法/规则:</h3>
+     * <h3>对于empty的判断,使用以下逻辑:</h3>
      * 
      * <blockquote>
      * <ol>
@@ -155,9 +155,9 @@ public final class Validator{
     }
 
     /**
-     * 判断对象是否不为Null或者Empty,调用 !{@link #isNullOrEmpty(Object)} 方法 <br>
+     * 判断对象是否不为Null或者Empty,调用 !{@link #isNullOrEmpty(Object)} 方法 .
      * 
-     * <h3>对于empty的判断,使用以下逻辑/语法/规则:</h3>
+     * <h3>对于empty的判断,使用以下逻辑:</h3>
      * 
      * <blockquote>
      * <ol>
