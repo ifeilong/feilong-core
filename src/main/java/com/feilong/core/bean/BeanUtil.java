@@ -208,7 +208,9 @@ public final class BeanUtil{
     /**
      * 对象值的复制 {@code fromObj-->toObj}.
      * 
-     * <h3>注意:</h3> <blockquote>
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
      * <ol>
      * <li>这种copy都是浅拷贝,复制后的2个Bean的同一个属性可能拥有同一个对象的ref, 这个在使用时要小心,特别是对于属性为自定义类的情况 .</li>
      * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)} ,会自动进行Object--->String--->Object类型转换,<br>
@@ -232,13 +234,14 @@ public final class BeanUtil{
      * </p>
      * 
      * <p>
-     * DateConverter converter = new DateConverter(DatePattern.forToString, Locale.US);<br>
+     * DateConverter converter = new DateConverter({@link com.feilong.core.date.DatePattern#TO_STRING_STYLE}, Locale.US);<br>
      * ConvertUtils.register(converter, Date.class);
      * </p>
      * 
      * 或者使用内置的:
      * <p>
-     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.forToString), Date.class); <br>
+     * ConvertUtils.register(new DateLocaleConverter(Locale.US, {@link com.feilong.core.date.DatePattern#TO_STRING_STYLE}), Date.class);
+     * <br>
      * BeanUtil.copyProperty(b, a, &quot;date&quot;);
      * </p>
      * 

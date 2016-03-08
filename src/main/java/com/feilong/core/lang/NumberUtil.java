@@ -221,6 +221,7 @@ public final class NumberUtil{
      *            the number pattern {@link NumberPattern}
      * @return 根据numberPattern 返回 50.5%,100%.....
      * @see NumberPattern
+     * @see #getDivideValue(BigDecimal, Serializable, int)
      * @since 1.0.7
      */
     public static String getProgress(Number current,Number total,String numberPattern){
@@ -395,7 +396,8 @@ public final class NumberUtil{
      *            第一个数
      * @param two
      *            第二个数
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果两个数都是 null,则返回null</li>
      *         <li>第一个数是null,第二个数不是null,则,将第二个数转成BigDecimal 返回</li>
      *         <li>第一个数不是null,第二个数是null,则直接返回第一个数</li>
@@ -403,7 +405,7 @@ public final class NumberUtil{
      *         </ul>
      * @since 1.0
      */
-    public static BigDecimal /* <T> T */getAddValue(Number one,Number two){
+    public static BigDecimal /* <T> T */ getAddValue(Number one,Number two){
         // 如果两个数都是 null,则返回null
         if (Validator.isNullOrEmpty(one) && Validator.isNullOrEmpty(two)){
             return null;

@@ -212,6 +212,64 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(fieldValueCollection));
     }
 
+    @Test
+    public void testAvg(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User(2L));
+        list.add(new User(5L));
+        list.add(new User(5L));
+
+        Number number = CollectionsUtil.avg(list, 2, "id");
+        LOGGER.info("" + number);
+
+    }
+
+    @Test
+    public void testAvg2(){
+        List<User> list = new ArrayList<User>();
+
+        User user1 = new User(2L);
+        user1.setAge(18);
+        list.add(user1);
+
+        User user2 = new User(3L);
+        user2.setAge(30);
+        list.add(user2);
+
+        Map<String, Number> map = CollectionsUtil.avg(list, 2, "id", "age");
+
+        LOGGER.info("{}", JsonUtil.format(map));
+    }
+
+    @Test
+    public void testSum(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User(2L));
+        list.add(new User(5L));
+        list.add(new User(5L));
+
+        Number number = CollectionsUtil.sum(list, "id");
+
+        LOGGER.info("" + number);
+    }
+
+    @Test
+    public void testSum2(){
+        List<User> list = new ArrayList<User>();
+
+        User user1 = new User(2L);
+        user1.setAge(18);
+        list.add(user1);
+
+        User user2 = new User(3L);
+        user2.setAge(30);
+        list.add(user2);
+
+        Map<String, Number> map = CollectionsUtil.sum(list, "id", "age");
+
+        LOGGER.info("{}", JsonUtil.format(map));
+    }
+
     /**
      * Gets the field value list1.
      * 
@@ -327,30 +385,5 @@ public class CollectionsUtilTest{
 
         LOGGER.debug(JsonUtil.format(queue));
         LOGGER.debug("" + queue.peek());
-    }
-
-    /**
-     * Test.
-     */
-    @Test
-    public void test(){
-        //        Class clz = User.class;
-        //        Collection collection = CollectionUtils.typedCollection(new ArrayList(), clz);
-        //        collection.add(clz.newInstance());
-        //
-        //        LOGGER.info(collection.size() + "");
-        //        for (Object object : collection){
-        //            User user = (User) object;
-        //            LOGGER.info(user.getName());
-        //        }
-        //
-        //        LOGGER.info("hahahah");
-        //
-        //        Collection<User> collection2 = collection;
-        //        LOGGER.info(collection2.size() + "");
-        //        for (Object object : collection2){
-        //            User user = (User) object;
-        //            LOGGER.info(user.getName());
-        //        }
     }
 }

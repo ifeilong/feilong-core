@@ -72,7 +72,7 @@ public final class PropertyUtil{
      * <li>如果传入的includePropertyNames,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
      * <li>如果传入的includePropertyNames,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
      * {@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
-     * <li>对于Date类型,不需要先注册converter</li>
+     * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * </ol>
      * </blockquote>
      * 
@@ -89,9 +89,9 @@ public final class PropertyUtil{
         oldUser.setDate(new Date());
         String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
         oldUser.setNickName(nickName);
-
+    
         User newUser = new User();
-
+    
         String[] strs = { "date", "money", "nickName" };
         PropertyUtil.copyProperties(newUser, oldUser, strs);
         LOGGER.info(JsonUtil.format(newUser));s(enterpriseSales,enterpriseSales_form,new String[]{&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;});

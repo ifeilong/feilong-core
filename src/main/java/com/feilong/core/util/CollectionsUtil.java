@@ -279,7 +279,8 @@ public final class CollectionsUtil{
      * @see ArrayList#ArrayList(java.util.Collection)
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see <a
-     *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments</a>
+     *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
+     *      </a>
      */
     public static <T> List<T> removeDuplicate(Collection<T> objectCollection){
         if (Validator.isNullOrEmpty(objectCollection)){
@@ -966,6 +967,33 @@ public final class CollectionsUtil{
 
     /**
      * 算术平均值.
+     * 
+     * <pre>
+     * 
+     * Example 1:
+     * 
+     * List list = new ArrayList();
+     * 
+     * User user1 = new User(2L);
+     * user1.setAge(18);
+     * list.add(user1);
+     * 
+     * User user2 = new User(3L);
+     * user2.setAge(30);
+     * list.add(user2);
+     * 
+     * Map<String, Number> map = CollectionsUtil.avg(list, 2, "id", "age");
+     * 
+     * LOGGER.info("{}", JsonUtil.format(map));
+     * 
+     * 
+     * 返回 :
+     * 
+     * {
+        "id": 2.5,
+        "age": 24
+        }
+     * </pre>
      *
      * @param <O>
      *            the generic type
@@ -999,7 +1027,73 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 算术平均值.
+     * 
+     * <pre>
+     * Example 1:
+     * 
+        List list = new ArrayList();
+        list.add(new User(2L));
+        list.add(new User(5L));
+        list.add(new User(5L));
+    
+        Number number = CollectionsUtil.avg(list, 2, "id");
+        LOGGER.info("" + number);
+        
+        返回 :4.00
+     * </pre>
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param scale
+     *            平均数值的精度
+     * @param propertyName
+     *            需要计算平均值的对象属性名称
+     * @return the map< string, list< o>>
+     * @see #sum(Collection, String...)
+     * 
+     * @since 1.5.0
+     */
+    public static <O> Number avg(Collection<O> objectCollection,int scale,String propertyName){
+        String[] propertyNames = { propertyName };
+        return avg(objectCollection, scale, propertyNames).get(propertyName);
+    }
+
+    /**
      * 总和,计算集合对象内指定的属性的总和.
+     * 
+     * <p>
+     * 如果通过反射某个元素值是null,则使用默认值0 代替
+     * </p>
+     * 
+     * 
+     * <pre>
+     * 
+     * Example 1:
+     * 
+     * List list = new ArrayList();
+     * 
+     * User user1 = new User(2L);
+     * user1.setAge(18);
+     * list.add(user1);
+     * 
+     * User user2 = new User(3L);
+     * user2.setAge(30);
+     * list.add(user2);
+     * 
+     * Map<String, Number> map = CollectionsUtil.sum(list, "id", "age");
+     * 
+     * LOGGER.info("{}", JsonUtil.format(map));
+     * 
+     * 返回:
+     * {
+        "id": 5,
+        "age": 48
+       }
+     * 
+     * </pre>
      *
      * @param <O>
      *            the generic type
@@ -1029,12 +1123,57 @@ public final class CollectionsUtil{
                 Number propertyValue = PropertyUtil.getProperty(o, propertyName);
 
                 Number mapPropertyNameValue = sumMap.get(propertyName);
-                if (null == mapPropertyNameValue){
+                if (null == mapPropertyNameValue){//如果通过反射某个元素值是null,则使用默认值0 代替
                     mapPropertyNameValue = 0;
                 }
                 sumMap.put(propertyName, NumberUtil.getAddValue(mapPropertyNameValue, propertyValue));
             }
         }
         return sumMap;
+    }
+
+    /**
+     * 总和,计算集合对象内指定的属性的总和.
+     * 
+     * <p>
+     * 如果通过反射某个元素值是null,则使用默认值0 代替
+     * </p>
+     * 
+     * <pre>
+     * 
+     * Example 1:
+     * 
+     * List list = new ArrayList();
+     * list.add(new User(2L));
+     * list.add(new User(5L));
+     * list.add(new User(5L));
+     * 
+     * Number number = CollectionsUtil.sum(list, "id");
+     * LOGGER.info("" + number);
+     * 
+     * 返回 12
+     * </pre>
+     * 
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            the property name
+     * @return the number
+     * @see #sum(Collection, String...)
+     * @since 1.5.0
+     */
+    public static <O> Number sum(Collection<O> objectCollection,String propertyName){
+        if (Validator.isNullOrEmpty(objectCollection)){
+            throw new NullPointerException("objectCollection can't be null/empty!");
+        }
+
+        if (Validator.isNullOrEmpty(propertyName)){
+            throw new NullPointerException("propertyName is null or empty!");
+        }
+
+        String[] propertyNames = { propertyName };
+        return sum(objectCollection, propertyNames).get(propertyName);
     }
 }

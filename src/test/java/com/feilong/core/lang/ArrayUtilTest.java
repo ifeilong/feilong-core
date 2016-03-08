@@ -57,11 +57,11 @@ public class ArrayUtilTest{
     @Test
     public void testArrayUtilTest22(){
         String[] strs = {
-                "ppt-coreContent1.png",
-                "ppt-coreContent3.png",
-                "ppt-coreContent10.png",
-                "ppt-coreContent11.png",
-                "ppt-coreContent2.png" };
+                          "ppt-coreContent1.png",
+                          "ppt-coreContent3.png",
+                          "ppt-coreContent10.png",
+                          "ppt-coreContent11.png",
+                          "ppt-coreContent2.png" };
         LOGGER.debug(JsonUtil.format(strs));
     }
 
@@ -111,12 +111,12 @@ public class ArrayUtilTest{
     @Test
     public void testGroupObject(){
         User[] users = {
-                new User("张三", 18),
-                new User("李四", 28),
-                new User("王五", 38),
-                new User("陈二", 18),
-                new User("孔六", 28),
-                new User("飞飞", 58) };
+                         new User("张三", 18),
+                         new User("李四", 28),
+                         new User("王五", 38),
+                         new User("陈二", 18),
+                         new User("孔六", 28),
+                         new User("飞飞", 58) };
 
         Map<Integer, List<User>> group = ArrayUtil.group(users, "age");
 
