@@ -25,9 +25,14 @@ import com.feilong.core.util.Validator;
 
 /**
  * 日期扩展工具类.
+ * 
+ * <h3>和 {@link DateUtil} 的区别:</h3>
+ * 
+ * <blockquote>
  * <p>
- * 和 DateUtil的区别在于,DateUtil是纯操作Date API的工具类,而DateExtensionUtil类用于个性化输出结果,针对业务个性化显示.
+ * {@link DateUtil}是纯操作Date API的工具类,而 {@link DateExtensionUtil}类用于个性化输出结果,针对业务个性化显示.
  * </p>
+ * </blockquote>
  * 
  * <h3>获得两个日期间隔:</h3>
  * 
