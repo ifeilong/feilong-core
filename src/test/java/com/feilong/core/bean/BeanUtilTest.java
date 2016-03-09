@@ -26,6 +26,7 @@ import org.apache.commons.beanutils.BasicDynaBean;
 import org.apache.commons.beanutils.BasicDynaClass;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -152,8 +153,10 @@ public class BeanUtilTest{
         LOGGER.debug(StringUtils.center(" demoDynaBeans ", 40, "="));
 
         // creating a DynaBean  
-        DynaProperty[] dynaBeanProperties = new DynaProperty[] {//DynaProperty  
-        new DynaProperty("name", String.class), new DynaProperty("inPrice", Double.class), new DynaProperty("outPrice", Double.class), };
+        DynaProperty[] dynaBeanProperties = new DynaProperty[] { //DynaProperty  
+                                                                 new DynaProperty("name", String.class),
+                                                                 new DynaProperty("inPrice", Double.class),
+                                                                 new DynaProperty("outPrice", Double.class), };
         BasicDynaClass cargoClass = new BasicDynaClass("Cargo", BasicDynaBean.class, dynaBeanProperties); //BasicDynaClass  BasicDynaBean  
         DynaBean cargo = cargoClass.newInstance();//DynaBean  
 
@@ -178,6 +181,7 @@ public class BeanUtilTest{
 
         String[] strs = { "age", "name" };
         BeanUtil.copyProperties(person, user, strs);
+
         LOGGER.info(JsonUtil.format(person));
     }
 
@@ -193,19 +197,21 @@ public class BeanUtilTest{
         String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
         user1.setNickName(nickName);
 
-        User user2 = new User();
+        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
+        BeanUtil.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
 
-        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), java.util.Date.class);
-        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND), java.sql.Date.class);
-        //        ConvertUtils.register(
-        //                        new DateLocaleConverter(Locale.US, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-        //                        java.sql.Timestamp.class);
-        //        ConvertUtils.register(new BigDecimalConverter(null), java.math.BigDecimal.class);
-        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
+        Converter lookup = ConvertUtils.lookup(Date.class);
+        LOGGER.info("{},{}", lookup.getClass().getSimpleName(), lookup.convert(Date.class, new Date().toString()));
 
         String[] strs = { "date", "money", "nickName" };
+
+        User user2 = new User();
         BeanUtil.copyProperties(user2, user1, strs);
+
         LOGGER.info(JsonUtil.format(user2));
+
+        lookup = ConvertUtils.lookup(Date.class);
+        LOGGER.info("{},{}", lookup.getClass().getSimpleName(), lookup.convert(Date.class, new Date().toString()));
     }
 
     /**
@@ -293,12 +299,19 @@ public class BeanUtilTest{
     public void populate(){
         User user = new User();
         user.setId(5L);
-        user.setDate(new Date());
 
         Map<String, Object> properties = new HashMap<String, Object>();
         properties.put("id", 8L);
-        // properties.put("date", 2010);
+
         BeanUtil.populate(user, properties);
+        LOGGER.info(JsonUtil.format(user));
+
+        //********************************************************
+
+        user = new User();
+        user.setId(5L);
+
+        BeanUtil.copyProperties(user, properties);
         LOGGER.info(JsonUtil.format(user));
     }
 

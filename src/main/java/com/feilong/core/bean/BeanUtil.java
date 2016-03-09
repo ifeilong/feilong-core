@@ -20,8 +20,11 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
+import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -192,6 +195,16 @@ public final class BeanUtil{
     }
 
     static{
+        //初始化注册器.
+        initConverters();
+    }
+
+    /**
+     * 初始化注册器.
+     *
+     * @since 1.5.0
+     */
+    private static void initConverters(){
         boolean throwException = false;
         boolean defaultNull = true;
         int defaultArraySize = 10;
@@ -203,52 +216,63 @@ public final class BeanUtil{
         convertUtils.register(throwException, defaultNull, defaultArraySize);
     }
 
+    /**
+     * 调用{@link ConvertUtils#register(Converter, Class)} 将字符串和指定类型的实例之间进行转换.
+     *  
+     * <h3>特别说明:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 由于,该类的方法都是静态方法,并且static方法块有默认参数的初始化,如果需要自行register converter的地方,<br>
+     * 比如时间转换,如果先使用ConvertUtils原生方法先注册Converter,再第一次调用该类相关方法,<br>
+     * 比如:
+     * </p>
+     * 
+     * <code>
+     * <pre>
+     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class)
+     * 
+     * User user1 = new User();
+     * user1.setDate(new Date());
+     * 
+     * String[] strs = { "date" };
+     * 
+     * User user2 = new User();
+     * BeanUtil.copyProperties(user2, user1, strs);
+     * 
+     * </pre>
+     * </code>
+     * 
+     * <p>
+     * 那么自行注册的 {@link DateLocaleConverter} 将会被当前类里面 static 方法块内部默认的 {@link org.apache.commons.beanutils.converters.DateConverter} 替换掉
+     * </p>
+     * 
+     * <p>
+     * 因此,<span style="color:red">建议使用改方法,而不是使用commons-bean原生的 {@link ConvertUtils#register(Converter, Class)}</span> ,<br>
+     * 这样会先经过static方法块初始默认的注册器,再使用自定义的 {@link Converter} 覆盖相同类型的转换
+     * </p>
+     * </blockquote>
+     *
+     * @param converter
+     *            the converter
+     * @param clazz
+     *            the clazz
+     * @see org.apache.commons.beanutils.ConvertUtils#register(Converter, Class)
+     * @since 1.5.0
+     */
+    public static void register(Converter converter,Class<?> clazz){
+        ConvertUtils.register(converter, clazz);
+    }
+
     // [start] copyProperties
 
     /**
-     * 对象值的复制 {@code fromObj-->toObj}.
-     * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * <ol>
-     * <li>这种copy都是浅拷贝,复制后的2个Bean的同一个属性可能拥有同一个对象的ref, 这个在使用时要小心,特别是对于属性为自定义类的情况 .</li>
-     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)} ,会自动进行Object--->String--->Object类型转换,<br>
-     * 如果需要copy的两个对象属性之间的类型是一样的话,那么调用这个方法会有性能消耗,此时建议调用 {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * 
-     * <h3>注意点:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <ol>
-     * <li>如果传入的includePropertyNames,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
-     * <li>如果传入的includePropertyNames,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
-     * {@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
-     * <li>
+     * 将{@code fromObj}中的属性或者一组属性的值的复制到 {@code toObj}对象中.
      * 
      * <p>
-     * 如果有 {@link java.util.Date} 类型的 需要copy,那么 需要先这么着:
+     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用 {@link BeanUtils#copyProperties(Object, Object)},否则循环 调用
+     * {@link #getProperty(Object, String)} 再 {@link #setProperty(Object, String, Object)}到 {@code toObj}对象中
      * </p>
-     * 
-     * <p>
-     * DateConverter converter = new DateConverter({@link com.feilong.core.date.DatePattern#TO_STRING_STYLE}, Locale.US);<br>
-     * ConvertUtils.register(converter, Date.class);
-     * </p>
-     * 
-     * 或者使用内置的:
-     * <p>
-     * ConvertUtils.register(new DateLocaleConverter(Locale.US, {@link com.feilong.core.date.DatePattern#TO_STRING_STYLE}), Date.class);
-     * <br>
-     * BeanUtil.copyProperty(b, a, &quot;date&quot;);
-     * </p>
-     * 
-     * </li>
-     * </ol>
-     * </blockquote>
-     * 
      * 
      * <h3>使用示例:</h3>
      * 
@@ -257,15 +281,55 @@ public final class BeanUtil{
      * <pre>
      * 例如两个pojo:enterpriseSales和enterpriseSales_form 都含有字段&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;
      * 
-     * 通常写法
+     * 通常写法:
+     * .....
      * enterpriseSales.setEnterpriseName(enterpriseSales_form.getEnterpriseName());
      * enterpriseSales.setLinkMan(enterpriseSales_form.getLinkMan());
      * enterpriseSales.setPhone(enterpriseSales_form.getPhone());
+     * ......
      * 
      * 此时,可以使用
      * BeanUtil.copyProperties(enterpriseSales,enterpriseSales_form,new String[]{&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;});
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * 
+     * <h3>参数说明:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
+     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
+     * {@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,在使用时要小心,特别是对于属性为自定义类的情况 .</li>
+     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行 <code>Object--->String--->Object</code>类型转换,<br>
+     * 如果需要copy的两个对象属性之间的类型是一样的话,那么调用这个方法会有<span style="color:red">性能消耗</span>,此时建议调用
+     * {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>注册自定义 {@link Converter}:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 如果有 {@link java.util.Date} 类型的需要copy,那么需要先使用当前类的 {@link #register(Converter, Class)}方法:<br>
+     * 
+     * <code>BeanUtil.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);</code>
+     * 
+     * <br>
+     * 具体原因,参见 {@link #register(Converter, Class)}方法注释
+     * </p>
      * </blockquote>
      * 
      * 
@@ -325,6 +389,10 @@ public final class BeanUtil{
     /**
      * 使用 {@link BeanUtils#setProperty(Object, String, Object)} 来设置属性值(<b>会进行类型转换</b>).
      * 
+     * <p>
+     * BeanUtils支持把所有类型的属性都作为字符串处理,在后台自动进行类型转换(字符串和真实类型的转换)
+     * </p>
+     * 
      * @param bean
      *            Bean on which setting is to be performed
      * @param propertyName
@@ -340,7 +408,6 @@ public final class BeanUtil{
      */
     public static void setProperty(Object bean,String propertyName,Object value){
         try{
-            // BeanUtils支持把所有类型的属性都作为字符串处理,在后台自动进行类型转换(字符串和真实类型的转换)
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
@@ -426,6 +493,7 @@ public final class BeanUtil{
      * <p>
      * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性.
      * </p>
+     * 
      * <p>
      * <span style="color:red">缺陷:<br>
      * 自己手工注册的ConvertUtils.register(dateTimeConverter, java.util.Date.class)不会生效</span><br>
@@ -458,7 +526,52 @@ public final class BeanUtil{
     // [start] populate(填充) 把properties/map里面的值放入bean中
 
     /**
-     * 把properties/map里面的值populate(填充) 到bean中.
+     * 把properties/map里面的值 <code>populate</code> (填充)到bean中.
+     * 
+     * <p>
+     * 将Map<Key,value>中的以值（String或String[]）转换到目标bean对应的属性中,Key是目标bean的属性名。 
+     * </p>
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * apache的javadoc中,明确指明这个方法是为解析http请求参数特别定义和使用的,在正常的使用中不推荐使用.他们推荐使用 {@link #copyProperties(Object, Object, String...)} 方法
+     * </p>
+     * </blockquote>
+     * 
+     * 
+     * <h3>底层方法原理 {@link BeanUtilsBean#populate(Object, Map)}:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 循环map,调用 {@link BeanUtilsBean#setProperty(Object, String, Object)}方法 ,一一对应设置到 <code>bean</code>对象
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>Example 1:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * User user = new User();
+     * user.setId(5L);
+     * 
+     * Map<String, Object> properties = new HashMap<String, Object>();
+     * properties.put("id", 8L);
+     * 
+     * BeanUtil.populate(user, properties);
+     * LOGGER.info(JsonUtil.format(user));
+     * 
+     * 返回:
+     * {
+        "date": null,
+        "id": 8,
+        "loves": []
+        }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param bean
      *            JavaBean whose properties are being populated
@@ -467,6 +580,14 @@ public final class BeanUtil{
      * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
      */
     public static void populate(Object bean,Map<String, ?> properties){
+        if (Validator.isNullOrEmpty(bean)){
+            throw new NullPointerException("bean can't be null/empty!");
+        }
+
+        if (Validator.isNullOrEmpty(properties)){
+            throw new NullPointerException("properties can't be null/empty!");
+        }
+
         try{
             BeanUtils.populate(bean, properties);
         }catch (Exception e){

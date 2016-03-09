@@ -1226,7 +1226,7 @@ public final class DateUtil{
     // [start]toCalendar
 
     /**
-     * 将date转成Calendar,调用 {@link GregorianCalendar}.
+     * 将 {@link Date} 转成 {@link Calendar},调用 {@link GregorianCalendar}.
      * 
      * <p>
      * {@link Calendar#getInstance()}方法,返回用默认的地区和时区的当前日期和当前时间所初始化的GregorianCalendar（标准日历）,<br>
@@ -1266,13 +1266,11 @@ public final class DateUtil{
     // [start]isBefore 时间早晚
 
     /**
-     * 按照同样格式,转成Date类型,判断 date_before 是否早于date_after.
-     * 
-     * <p>
-     * 如:
-     * </p>
+     * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 <code>dateBefore</code> 是否早于 <code>dateAfter</code>.
      * 
      * <pre>
+     * Example 1:
+     * 
      * isBefore("2011-05-01","2011-04-01",DateUtil.pattern_onlyDate)
      * return true
      * </pre>
@@ -1283,7 +1281,7 @@ public final class DateUtil{
      *            the date after
      * @param datePattern
      *            日期pattern {@link DatePattern}
-     * @return 如果date_before 早于 date_after返回 true
+     * @return 如果dateBefore 早于 dateAfter返回 true
      * @see #string2Date(String, String)
      * @see #isBefore(Date, String, String)
      */
@@ -1293,32 +1291,33 @@ public final class DateUtil{
     }
 
     /**
-     * 按照同样格式,转成Date类型,判断 date_before 是否早于date_after<br>
-     * 如:
+     * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 <code>dateBefore</code> 是否早于 <code>dateAfter</code>.
      * 
      * <pre>
+     * Example 1:
+     * 
      * isBefore("2011-05-01","2011-04-01",DateUtil.pattern_onlyDate)
      * return true
      * </pre>
      * 
-     * @param before
-     *            before
+     * @param dateBefore
+     *            dateBefore
      * @param dateAfter
      *            dateAfter
      * @param datePattern
      *            日期pattern {@link DatePattern}
-     * @return 如果before 早于 dateAfter返回 true
+     * @return 如果dateBefore 早于 dateAfter返回 true
      * @see #string2Date(String, String)
      * @see #isBefore(String, String, String)
      * @see Date#before(Date)
      */
-    public static boolean isBefore(Date before,String dateAfter,String datePattern){
+    public static boolean isBefore(Date dateBefore,String dateAfter,String datePattern){
         Date after = string2Date(dateAfter, datePattern);
-        return isBefore(before, after);
+        return isBefore(dateBefore, after);
     }
 
     /**
-     * Checks if is before.
+     * 判断 <code>before</code>是否 在 <code>when</code>时间之前.
      *
      * @param before
      *            the before
@@ -1333,7 +1332,7 @@ public final class DateUtil{
     }
 
     /**
-     * Checks if is after.
+     * 判断 <code>after</code>是否 在 <code>when</code>时间之后.
      *
      * @param after
      *            the after
@@ -1341,6 +1340,7 @@ public final class DateUtil{
      *            the when
      * @return true, if checks if is after
      * @since 1.2.2
+     * @see java.util.Date#after(Date)
      */
     public static boolean isAfter(Date after,Date when){
         return after.after(when);
@@ -1408,7 +1408,7 @@ public final class DateUtil{
 
     // [start]isEquals
     /**
-     * 在相同格式下,判断两个日期是否相等.
+     * 在相同格式下 <code>datePattern</code>,将两个日期转成字符串判断是否相等.
      * 
      * @param date1
      *            日期1
