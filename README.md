@@ -107,7 +107,23 @@ DateUtil.date2String(new Date(), DatePattern.COMMON_DATE_AND_TIME)
 
 
 
-* [TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java)
+* [TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java) 定义了常见的时间间隔
+
+当需要使用时间间隔的时候, 比如
+
+```JAVA
+HttpURLConnection con = (HttpURLConnection) url.openConnection();
+con.setConnectTimeout(100000);
+```
+
+可以使用  
+
+```JAVA
+HttpURLConnection con = (HttpURLConnection) url.openConnection();
+con.setConnectTimeout(100*TimeInterval.MILLISECOND_PER_SECONDS);
+```
+
+替代,可以有效的避免由于手误带来的不必要的错误,并且代码可读性更高
 
 # 项目依赖
 
