@@ -89,7 +89,7 @@ Class | Description
 [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java)  | 定义了常见的时间Pattern
 [TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java)  | 定义了常见的时间间隔
 
-* [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java)
+* [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java) 内置常用的时间pattern
 
 当需要将时间转成指定格式的字符串的时候, 比如
 
@@ -100,8 +100,10 @@ DateUtil.date2String(new Date(), "yyyy-MM-dd HH:mm:ss")
 可以使用  
 
 ```JAVA
-DateUtil.date2String(new Date(), DatePattern.COMMON_DATE_AND_TIME)替代
+DateUtil.date2String(new Date(), DatePattern.COMMON_DATE_AND_TIME)
 ```
+
+替代,可以有效的避免由于手误带来的不必要的错误
 
 
 
