@@ -79,8 +79,15 @@ com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`,最常用�
 
 ## com.feilong.core.date 包,时间日期操作核心类:
 
-* DateUtil时间工具类  
+* date 包是feilong重要的组成部分,提供了常见的日期操作,包含以下五个class
 
+Class | Description 
+:---- | :---------
+[DateUtil](src/main/java/com/feilong/core/date/DateUtil.java)  | 封装了常见的Date操作
+[CalendarUtil](src/main/java/com/feilong/core/date/CalendarUtil.java)  | 封装了常见的Calendar操作
+[DateExtensionUtil](src/main/java/com/feilong/core/date/DateExtensionUtil.java)  | 日期扩展工具类,重在个性化输出结果,针对业务个性化显示
+[DatePattern](src/main/java/com/feilong/core/date/DatePattern.java)  | 定义了常见的时间Pattern
+[TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java)  | 定义了常见的时间间隔
 
 # 项目依赖
 
