@@ -39,6 +39,22 @@ public class DateUtilTest extends BaseDateUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilTest.class);
 
     /**
+     * Test get first date of this day.
+     */
+    @Test
+    public void testGetFirstDateOfThisDay(){
+        logDate(DateUtil.getFirstDateOfThisDay(NOW));
+    }
+
+    /**
+     * Test get last date of this day.
+     */
+    @Test
+    public void testGetLastDateOfThisDay(){
+        logDate(DateUtil.getLastDateOfThisDay(NOW));
+    }
+
+    /**
      * TestDateUtilTest.
      */
     @Test
@@ -80,13 +96,14 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalHour1(){
-        LOGGER.debug(StringUtil.format(
-                        "%05d",
-                        DateUtil.getIntervalHour(
-                                        DateUtil.string2Date("2014-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
-                                        DateUtil.string2Date("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)))
+        LOGGER.debug(
+                        StringUtil.format(
+                                        "%05d",
+                                        DateUtil.getIntervalHour(
+                                                        DateUtil.string2Date("2014-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
+                                                        DateUtil.string2Date("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)))
 
-                        + "");
+                                        + "");
     }
 
     /**
@@ -202,13 +219,16 @@ public class DateUtilTest extends BaseDateUtilTest{
         Date now3 = DateUtil.getFirstDateOfThisWeek(date);
         LOGGER.debug(DateUtil.date2String(now3, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
 
-        LOGGER.debug("今天所在week 第一天:{}", DateUtil.date2String(
-                        DateUtil.getFirstDateOfThisWeek(new Date()),
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(
+                        "今天所在week 第一天:{}",
+                        DateUtil.date2String(DateUtil.getFirstDateOfThisWeek(NOW), DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
 
-        LOGGER.debug("getFirstDateOfThisWeek:{}", DateUtil.date2String(
-                        DateUtil.getFirstDateOfThisWeek(DateUtil.string2Date("2014-01-01 05:00:00", DatePattern.COMMON_DATE_AND_TIME)),
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(
+                        "getFirstDateOfThisWeek:{}",
+                        DateUtil.date2String(
+                                        DateUtil.getFirstDateOfThisWeek(
+                                                        DateUtil.string2Date("2014-01-01 05:00:00", DatePattern.COMMON_DATE_AND_TIME)),
+                                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
 
     }
 
@@ -218,14 +238,17 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetLastDateOfThisWeek(){
         Date date = DateUtil.addDay(NOW, -2);
-
         LOGGER.debug("the param date:{}", DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+
         Date now3 = DateUtil.getLastDateOfThisWeek(date);
         LOGGER.debug(DateUtil.date2String(now3, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
 
-        LOGGER.debug("getLastDateOfThisWeek:{}", DateUtil.date2String(
-                        DateUtil.getLastDateOfThisWeek(DateUtil.string2Date("2014-12-31 05:00:00", DatePattern.COMMON_DATE_AND_TIME)),
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(
+                        "getLastDateOfThisWeek:{}",
+                        DateUtil.date2String(
+                                        DateUtil.getLastDateOfThisWeek(
+                                                        DateUtil.string2Date("2014-12-31 05:00:00", DatePattern.COMMON_DATE_AND_TIME)),
+                                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 
     /**
@@ -244,14 +267,11 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void addMonth(){
         Date beginDate = DateUtil.string2Date("2013-10-28", DatePattern.COMMON_DATE);
         logDate(DateUtil.addMonth(beginDate, 6));
-        logDate(DateUtil.addMonth(new Date(), 3));
-        logDate(DateUtil.addMonth(new Date(), -3));
+        logDate(DateUtil.addMonth(NOW, 3));
+        logDate(DateUtil.addMonth(NOW, -3));
 
-        Date date = DateUtil.addMonth(new Date(), 5);
-        logDate(date);
-
-        date = DateUtil.addMonth(new Date(), -5);
-        logDate(date);
+        logDate(DateUtil.addMonth(NOW, 5));
+        logDate(DateUtil.addMonth(NOW, -5));
     }
 
     /**
@@ -290,8 +310,7 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void testGetIntervalDay(){
         String fromString = "2008-12-1";
         String toString = "2008-9-29";
-        int intervalDay = DateUtil.getIntervalDay(fromString, toString, DatePattern.COMMON_DATE);
-        LOGGER.debug(intervalDay + "");
+        LOGGER.debug(DateUtil.getIntervalDay(fromString, toString, DatePattern.COMMON_DATE) + "");
     }
 
     /**
@@ -299,14 +318,10 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testString2Date(){
-        Date date = DateUtil.string2Date(FROMSTRING, DatePattern.COMMON_DATE);
-        LOGGER.debug(date.toString());
-        String dateToString = DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME);
-        LOGGER.debug(dateToString);
+        logDate(DateUtil.string2Date(FROMSTRING, DatePattern.COMMON_DATE));
 
-        Date onlineTime = DateUtil.string2Date("20130102140806000", DatePattern.TIMESTAMP_WITH_MILLISECOND);// 商品上线时间
-
-        LOGGER.debug(onlineTime.toString());
+        // 商品上线时间
+        logDate(DateUtil.string2Date("20130102140806000", DatePattern.TIMESTAMP_WITH_MILLISECOND));
     }
 
     /**
@@ -317,8 +332,9 @@ public class DateUtilTest extends BaseDateUtilTest{
         Date startDate = DateUtil.string2Date("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
 
         LOGGER.debug(DateUtil.getIntervalSecond(startDate, NOW) + "");
-        LOGGER.debug(DateUtil.getIntervalSecond(startDate, DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))
-                        + "");
+        LOGGER.debug(
+                        DateUtil.getIntervalSecond(startDate, DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))
+                                        + "");
 
         LOGGER.debug(DateUtil.getIntervalSecond(161986) + "");
         LOGGER.debug(Integer.MAX_VALUE + "");
@@ -329,7 +345,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetDayOfWeek(){
-        LOGGER.debug(DateUtil.getDayOfWeek(new Date()) + "");
+        LOGGER.debug(DateUtil.getDayOfWeek(NOW) + "");
         LOGGER.debug(DateUtil.getDayOfWeek(CURRENT_YEAR_BEGIN) + "");
         LOGGER.debug(DateUtil.getDayOfWeek(CURRENT_YEAR_END) + "");
     }
@@ -339,7 +355,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetMonth(){
-        LOGGER.debug(DateUtil.getMonth(new Date()) + "");
+        LOGGER.debug(DateUtil.getMonth(NOW) + "");
     }
 
     /**
@@ -347,27 +363,33 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetWeekOfYear(){
-        LOGGER.debug(DateUtil.getWeekOfYear(new Date()) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
-                        "2013-12-31 01:30:24.895",
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
+        LOGGER.debug(DateUtil.getWeekOfYear(NOW) + "");
+        LOGGER.debug(
+                        DateUtil.getWeekOfYear(
+                                        DateUtil.string2Date("2013-12-31 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
+                                        + "");
         LOGGER.debug(DateUtil.getWeekOfYear(CURRENT_YEAR_BEGIN) + "");
         LOGGER.debug(DateUtil.getWeekOfYear(CURRENT_YEAR_END) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
-                        "2014-12-31 01:30:24.895",
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
-                        "2014-12-30 01:30:24.895",
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
-                        "2014-12-20 01:30:24.895",
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
-                        "2014-12-26 01:30:24.895",
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(DateUtil.string2Date(
-                        "2011-03-10 01:30:24.895",
-                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
+        LOGGER.debug(
+                        DateUtil.getWeekOfYear(
+                                        DateUtil.string2Date("2014-12-31 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
+                                        + "");
+        LOGGER.debug(
+                        DateUtil.getWeekOfYear(
+                                        DateUtil.string2Date("2014-12-30 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
+                                        + "");
+        LOGGER.debug(
+                        DateUtil.getWeekOfYear(
+                                        DateUtil.string2Date("2014-12-20 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
+                                        + "");
+        LOGGER.debug(
+                        DateUtil.getWeekOfYear(
+                                        DateUtil.string2Date("2014-12-26 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
+                                        + "");
+        LOGGER.debug(
+                        DateUtil.getWeekOfYear(
+                                        DateUtil.string2Date("2011-03-10 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND))
+                                        + "");
     }
 
     /**
@@ -375,7 +397,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetDayOfMonth(){
-        LOGGER.debug(DateUtil.getDayOfMonth(new Date()) + "");
+        LOGGER.debug(DateUtil.getDayOfMonth(NOW) + "");
     }
 
     /**
@@ -383,7 +405,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetYear(){
-        LOGGER.debug(DateUtil.getYear(new Date()) + "");
+        LOGGER.debug(DateUtil.getYear(NOW) + "");
     }
 
     /**
@@ -392,7 +414,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetHourOfDay(){
-        LOGGER.debug(DateUtil.getHourOfDay(new Date()) + "");
+        LOGGER.debug(DateUtil.getHourOfDay(NOW) + "");
     }
 
     /**
@@ -401,7 +423,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetMinute(){
-        LOGGER.debug(DateUtil.getMinute(new Date()) + "");
+        LOGGER.debug(DateUtil.getMinute(NOW) + "");
     }
 
     /**
@@ -410,7 +432,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetSecond(){
-        LOGGER.debug(DateUtil.getSecond(new Date()) + "");
+        LOGGER.debug(DateUtil.getSecond(NOW) + "");
     }
 
     /**
@@ -419,7 +441,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetTime(){
-        LOGGER.debug(DateUtil.getTime(new Date()) + "");
+        LOGGER.debug(DateUtil.getTime(NOW) + "");
     }
 
     /**
@@ -437,11 +459,8 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void addYear(){
-        Date date = DateUtil.addYear(NOW, 5);
-        logDate(date);
-
-        date = DateUtil.addYear(NOW, -5);
-        logDate(date);
+        logDate(DateUtil.addYear(NOW, 5));
+        logDate(DateUtil.addYear(NOW, -5));
     }
 
     /**
@@ -449,15 +468,9 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void addDay(){
-        Date date = DateUtil.addDay(new Date(), 5);
-        logDate(date);
-
-        date = DateUtil.addDay(new Date(), -5);
-        logDate(date);
-
-        date = DateUtil.addDay(DateUtil.string2Date("2014-12-31 02:10:05", DatePattern.COMMON_DATE_AND_TIME), 5);
-        logDate(date);
-
+        logDate(DateUtil.addDay(NOW, 5));
+        logDate(DateUtil.addDay(NOW, -5));
+        logDate(DateUtil.addDay(DateUtil.string2Date("2014-12-31 02:10:05", DatePattern.COMMON_DATE_AND_TIME), 5));
         logDate(DateUtil.addDay(DateUtil.string2Date("2014-01-01 02:10:05", DatePattern.COMMON_DATE_AND_TIME), -5));
     }
 
@@ -466,11 +479,8 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void addWeek(){
-        Date date = DateUtil.addWeek(new Date(), 1);
-        logDate(date);
-
-        date = DateUtil.addWeek(new Date(), -1);
-        logDate(date);
+        logDate(DateUtil.addWeek(NOW, 1));
+        logDate(DateUtil.addWeek(NOW, -1));
     }
 
     /**
@@ -507,8 +517,9 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void testGetIntervalTime(){
         Date startDate = DateUtil.string2Date("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
         LOGGER.debug(DateUtil.getIntervalTime(startDate, NOW) + "");
-        LOGGER.debug(DateUtil.getIntervalTime(startDate, DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))
-                        + "");
+        LOGGER.debug(
+                        DateUtil.getIntervalTime(startDate, DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))
+                                        + "");
 
     }
 
@@ -517,7 +528,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetTimeLength(){
-        LOGGER.debug((new Date().getTime() + "").length() + "");
+        LOGGER.debug((NOW.getTime() + "").length() + "");
     }
 
     /**

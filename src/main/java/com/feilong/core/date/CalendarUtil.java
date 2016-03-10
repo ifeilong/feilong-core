@@ -158,21 +158,6 @@ public final class CalendarUtil{
     /**
      * 获得任意日期的00:00:00.
      * <p>
-     * 例如: {@code 2011-01-01 10:20:20  return 2011-01-01 00:00:00}.
-     * </p>
-     * 
-     * @param date
-     *            the date
-     * @return 获得任意日期的00:00:00
-     */
-    public static Date resetDateByDay(Date date){
-        Calendar calendar = resetCalendarByDay(date);
-        return toDate(calendar);
-    }
-
-    /**
-     * 获得任意日期的00:00:00.
-     * <p>
      * 例如: {@code 2011-01-01 10:20:20 return 2011-01-01 00:00:00}.
      * </p>
      * 
@@ -180,7 +165,7 @@ public final class CalendarUtil{
      *            the date
      * @return 获得任意日期的00:00:00
      */
-    public static Calendar resetCalendarByDay(Date date){
+    public static Calendar resetDayBegin(Date date){
         Calendar calendar = DateUtil.toCalendar(date);
         return resetDayBegin(calendar);
     }
@@ -241,13 +226,56 @@ public final class CalendarUtil{
         calendar.set(Calendar.MONTH, Calendar.DECEMBER);
         calendar.set(Calendar.DAY_OF_MONTH, 31);
         calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        calendar.set(Calendar.MILLISECOND, 999);
-        return calendar;
+        return resetDayEnd(calendar);
     }
 
     // [end]
+
+    //*********************************************************************************************
+
+    /**
+     * 获得阳历中月份的最大天数The days in the month of solar calendar(阳历).
+     * 
+     * @param year
+     *            年
+     * @param month
+     *            月
+     * @return 最大的天数
+     * @see Calendar#getActualMaximum(int)
+     */
+    public static int getMaxDayOfMonth(int year,int month){
+        Calendar calendar = toCalendar(year, month, 1);
+        return getMaxDayOfMonth(calendar);
+    }
+
+    /**
+     * 获得阳历中月份的最大天数The days in the month of solar calendar(阳历).
+     * 
+     * @param calendar
+     *            calendar
+     * @return the max day of month
+     */
+    public static int getMaxDayOfMonth(Calendar calendar){
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+    }
+
+    /**
+     * 获得这一天在这一年中的偏移量 The offset days from New Year and the day when point out in solar calendar.
+     * 
+     * @param year
+     *            年
+     * @param month
+     *            月
+     * @param day
+     *            日
+     * @return 获得这一天在这一年中的偏移量
+     * @see com.feilong.core.date.DateUtil#getDayOfYear(Date)
+     */
+    public static int getDayOfYear(int year,int month,int day){
+        Calendar calendar = toCalendar(year, month, day);
+        return getFieldValue(calendar, Calendar.DAY_OF_YEAR);// - 1
+    }
+
     /**
      * 获得日历字段值.
      *
@@ -303,48 +331,7 @@ public final class CalendarUtil{
         return calendar.get(field);
     }
 
-    /**
-     * 获得阳历中月份的最大天数The days in the month of solar calendar(阳历).
-     * 
-     * @param year
-     *            年
-     * @param month
-     *            月
-     * @return 最大的天数
-     * @see Calendar#getActualMaximum(int)
-     */
-    public static int getMaxDayOfMonth(int year,int month){
-        Calendar calendar = toCalendar(year, month, 1);
-        return getMaxDayOfMonth(calendar);
-    }
-
-    /**
-     * 获得阳历中月份的最大天数The days in the month of solar calendar(阳历).
-     * 
-     * @param calendar
-     *            calendar
-     * @return the max day of month
-     */
-    public static int getMaxDayOfMonth(Calendar calendar){
-        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-    }
-
-    /**
-     * 获得这一天在这一年中的偏移量 The offset days from New Year and the day when point out in solar calendar.
-     * 
-     * @param year
-     *            年
-     * @param month
-     *            月
-     * @param day
-     *            日
-     * @return 获得这一天在这一年中的偏移量
-     * @see com.feilong.core.date.DateUtil#getDayOfYear(Date)
-     */
-    public static int getDayOfYear(int year,int month,int day){
-        Calendar calendar = toCalendar(year, month, day);
-        return calendar.get(Calendar.DAY_OF_YEAR);// - 1
-    }
+    //**************************************************************************************
 
     /**
      * 将calendar转成Date.

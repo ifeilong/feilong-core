@@ -221,6 +221,40 @@ public final class DateUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    /**
+     * 获得当天的开始时间 也就是当天的 <code>00:00:00</code>.
+     * 
+     * <p>
+     * 例如:{@code 2011-01-01 10:20:20  return 2011-01-01 00:00:00}.
+     * </p>
+     * 
+     * @param date
+     *            the date
+     * @return 获得指定日期的 <code>00:00:00</code>
+     * @since 1.5.0
+     */
+    public static Date getFirstDateOfThisDay(Date date){
+        Calendar calendar = CalendarUtil.resetDayBegin(date);
+        return CalendarUtil.toDate(calendar);
+    }
+
+    /**
+     * 获得当天的结束时间 也就是当天的 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 例如:{@code 2011-01-01 10:20:20  return 2011-01-01 23:59:59.999}.
+     * </p>
+     *
+     * @param date
+     *            the date
+     * @return 获得指定日期的 <code>23:59:59.999</code>
+     * @since 1.5.0
+     */
+    public static Date getLastDateOfThisDay(Date date){
+        Calendar calendar = DateUtil.toCalendar(date);
+        return CalendarUtil.toDate(CalendarUtil.resetDayEnd(calendar));
+    }
+
     // *****************************week****************************************************
     /**
      * 获得传入date 所在的<span style="color:red">星期 第一天(周日)</span> <code>00:00:00.000</code> 到毫秒.
@@ -1339,8 +1373,8 @@ public final class DateUtil{
      * @param when
      *            the when
      * @return true, if checks if is after
-     * @since 1.2.2
      * @see java.util.Date#after(Date)
+     * @since 1.2.2
      */
     public static boolean isAfter(Date after,Date when){
         return after.after(when);

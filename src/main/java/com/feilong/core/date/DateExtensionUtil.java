@@ -139,7 +139,7 @@ public final class DateExtensionUtil{
      * @return Date数组 第一个为today 第二个为tomorrow
      */
     public static Date[] getResetTodayAndTomorrow(){
-        Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
+        Calendar calendar = CalendarUtil.resetDayBegin(new Date());
         Date today = calendar.getTime();
         return new Date[] { today, DateUtil.addDay(today, 1) };
     }
@@ -164,7 +164,7 @@ public final class DateExtensionUtil{
      *         第二个为今天00:00
      */
     public static Date[] getResetYesterdayAndToday(){
-        Calendar calendar = CalendarUtil.resetCalendarByDay(new Date());
+        Calendar calendar = CalendarUtil.resetDayBegin(new Date());
         Date today = calendar.getTime();
         return new Date[] { DateUtil.addDay(today, -1), today };
     }
@@ -205,8 +205,8 @@ public final class DateExtensionUtil{
         Date beginDate = DateUtil.string2Date(fromDateString, datePattern);
         Date endDate = DateUtil.string2Date(toDateString, datePattern);
         // ******重置时间********
-        Date beginDateReset = CalendarUtil.resetDateByDay(beginDate);
-        Date endDateReset = CalendarUtil.resetDateByDay(endDate);
+        Date beginDateReset = DateUtil.getFirstDateOfThisDay(beginDate);
+        Date endDateReset = DateUtil.getLastDateOfThisDay(endDate);
         //***************************************************************/
         // 相隔的天数
         int intervalDay = DateUtil.getIntervalDay(beginDateReset, endDateReset);
