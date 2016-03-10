@@ -49,6 +49,21 @@ public class URLConnectionUtilTest{
     }
 
     /**
+     * 获得 response body as string2.
+     */
+    @Test
+    public void getResponseBodyAsString2(){
+
+        ConnectionConfig connectionConfig = new ConnectionConfig();
+        connectionConfig.setContentCharset(CharsetType.GBK);
+
+        HttpRequest request = new HttpRequest();
+        request.setUri("http://www.163.com/");
+
+        LOGGER.info(URLConnectionUtil.getResponseBodyAsString(request, connectionConfig));
+    }
+
+    /**
      * 获得 response body as string1.
      */
     @Test

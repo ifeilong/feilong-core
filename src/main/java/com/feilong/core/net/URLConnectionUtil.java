@@ -211,6 +211,25 @@ public final class URLConnectionUtil{
     }
 
     /**
+     * 获得 response body as string.
+     *
+     * @param httpRequest
+     *            the http request
+     * @param connectionConfig
+     *            the connection config
+     * @return the response body as string
+     * @see #getInputStream(HttpRequest, ConnectionConfig)
+     * @see InputStreamUtil#inputStream2String(InputStream, String)
+     * @since 1.5.0
+     */
+    public static String getResponseBodyAsString(HttpRequest httpRequest,ConnectionConfig connectionConfig){
+        ConnectionConfig useConnectionConfig = null == connectionConfig ? new ConnectionConfig() : connectionConfig;
+        InputStream inputStream = getInputStream(httpRequest, connectionConfig);
+        return InputStreamUtil.inputStream2String(inputStream, useConnectionConfig.getContentCharset());
+
+    }
+
+    /**
      * 获得 input stream.
      *
      * @param urlString
@@ -246,8 +265,8 @@ public final class URLConnectionUtil{
      * @param connectionConfig
      *            the connection config
      * @return the input stream
-     * @since 1.2.0
      * @see "org.springframework.core.io.UrlResource#getInputStream()"
+     * @since 1.2.0
      */
     public static InputStream getInputStream(HttpRequest httpRequest,ConnectionConfig connectionConfig){
         HttpURLConnection httpURLConnection = getHttpURLConnection(httpRequest, connectionConfig);
@@ -303,8 +322,8 @@ public final class URLConnectionUtil{
      *            the use connection config
      * @throws IOException
      *             the IO exception
-     * @since 1.4.0
      * @see "org.springframework.http.client.SimpleClientHttpRequestFactory#prepareConnection(HttpURLConnection, String)"
+     * @since 1.4.0
      */
     private static void prepareConnection(HttpURLConnection httpURLConnection,HttpRequest httpRequest,ConnectionConfig useConnectionConfig)
                     throws IOException{
