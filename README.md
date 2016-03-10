@@ -89,6 +89,14 @@ Class | Description
 [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java)  | 定义了常见的时间Pattern
 [TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java)  | 定义了常见的时间间隔
 
+* [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java)
+
+
+
+
+
+* [TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java)
+
 # 项目依赖
 
 ```XML

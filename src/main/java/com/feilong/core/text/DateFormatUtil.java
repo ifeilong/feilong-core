@@ -59,15 +59,20 @@ public class DateFormatUtil{
      * format日期类型格式化成字符串类型.
      * 
      * <p>
+     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#date2String(Date, String)}替代
+     * </p>
+     * 
+     * <p>
      * 调用的是 {@link #format(Date, String, Locale)},locale使用 {@link Locale#getDefault()}.
      * </p>
      * 
      * @param date
      *            the date
      * @param pattern
-     *            the pattern
+     *            建议使用 {@link com.feilong.core.date.DatePattern} 内置的时间格式
      * @return the string
      * @see #format(Date, String, Locale)
+     * @see com.feilong.core.date.DateUtil#date2String(Date, String)
      */
     public static String format(Date date,String pattern){
         return format(date, pattern, Locale.getDefault());
@@ -76,10 +81,14 @@ public class DateFormatUtil{
     /**
      * format日期类型格式化成字符串类型.
      * 
+     * <p>
+     * 适用于格式化时间,有 {@link Locale}的需求
+     * </p>
+     * 
      * @param date
      *            the date
      * @param pattern
-     *            the pattern
+     *            建议使用 {@link com.feilong.core.date.DatePattern} 内置的时间格式
      * @param locale
      *            the locale
      * @return the string
@@ -98,15 +107,18 @@ public class DateFormatUtil{
      * parse字符串类型转成日期类型.
      * 
      * <p>
+     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#string2Date(String, String)}替代
+     * </p>
+     * 
+     * <p>
      * 调用的是 {@link #parse(String, String, Locale)},locale使用 {@link Locale#getDefault()}
      * </p>
      * 
      * @param dateString
      *            the date string
      * @param pattern
-     *            the pattern
+     *            建议使用 {@link com.feilong.core.date.DatePattern} 内置的时间格式
      * @return the date
-     * @see SimpleDateFormat
      * @see #parse(String, String, Locale)
      */
     public static Date parse(String dateString,String pattern){
@@ -115,11 +127,11 @@ public class DateFormatUtil{
 
     /**
      * 字符串类型转成日期类型.
-     *
+     * 
      * @param dateString
      *            the date string
      * @param pattern
-     *            the pattern
+     *            建议使用 {@link com.feilong.core.date.DatePattern} 内置的时间格式
      * @param locale
      *            the locale
      * @return the date
