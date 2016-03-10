@@ -91,7 +91,17 @@ Class | Description
 
 * [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java)
 
+当需要将时间转成指定格式的字符串的时候, 比如
 
+```JAVA
+DateUtil.date2String(new Date(), "yyyy-MM-dd HH:mm:ss")
+```
+
+可以使用  
+
+```JAVA
+DateUtil.date2String(new Date(), DatePattern.COMMON_DATE_AND_TIME)替代
+```
 
 
 
