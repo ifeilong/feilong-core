@@ -23,6 +23,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 
 /**
@@ -59,13 +60,17 @@ import com.feilong.core.bean.PropertyUtil;
 public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID = -3159374167882773300L;
+    private static final long           serialVersionUID = -3159374167882773300L;
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER           = LoggerFactory.getLogger(PropertyComparator.class);
+    private static final Logger         LOGGER           = LoggerFactory.getLogger(PropertyComparator.class);
 
     /** T对象中的属性名称,该属性的value 必须实现 {@link Comparable}接口. */
-    private final String        propertyName;
+    private final String                propertyName;
+
+    /** 反射提取出来的值,需要类型转成到的类型. */
+    @SuppressWarnings("rawtypes")
+    private Class<? extends Comparable> klass;
 
     /**
      * The Constructor.
@@ -74,8 +79,29 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
      */
     public PropertyComparator(String propertyName){
-        super();
         this.propertyName = propertyName;
+        LOGGER.debug("propertyName:[{}]", propertyName);
+    }
+
+    /**
+     * The Constructor.
+     * 
+     * <h3>使用场景:</h3>
+     * <blockquote>
+     * 诸如需要排序的对象指定属性类型是数字,但是申明类型的时候由于种种原因是字符串,<br>
+     * 此时需要排序,如果不转成Integer比较的话,字符串比较13 将会在 3数字的前面
+     * </blockquote>
+     *
+     * @param propertyName
+     *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
+     * @param klass
+     *            反射提取出来的值,需要类型转成到的类型
+     * @since 1.5.0
+     */
+    @SuppressWarnings("rawtypes")
+    public PropertyComparator(String propertyName, Class<? extends Comparable> klass){
+        this.propertyName = propertyName;
+        this.klass = klass;
         LOGGER.debug("propertyName:[{}]", propertyName);
     }
 
@@ -104,6 +130,13 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         Comparable propertyValue1 = PropertyUtil.getProperty(t1, propertyName);
         Comparable propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
 
+        //如果值需要类型转换
+        if (null != klass){
+            propertyValue1 = ConvertUtil.convert(propertyValue1, klass);
+            propertyValue2 = ConvertUtil.convert(propertyValue2, klass);
+        }
+
+        //NullPointException if propertyValue1.compareTo(propertyValue2);
         int compareTo = ObjectUtils.compare(propertyValue1, propertyValue2);
 
         if (0 == compareTo){
@@ -111,16 +144,12 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             compareTo = ObjectUtils.compare(t1.hashCode(), t2.hashCode());
         }
 
-        //NullPointException if propertyValue1.compareTo(propertyValue2);
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(
-                            "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],compareTo:[{}]",
-                            propertyName,
-                            propertyValue1,
-                            propertyValue2,
-                            compareTo);
-        }
+        LOGGER.debug(
+                        "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],compareTo:[{}]",
+                        propertyName,
+                        propertyValue1,
+                        propertyValue2,
+                        compareTo);
         return compareTo;
     }
 }

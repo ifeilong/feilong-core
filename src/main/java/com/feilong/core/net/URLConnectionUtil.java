@@ -329,14 +329,13 @@ public final class URLConnectionUtil{
                     throws IOException{
         HttpMethodType httpMethodType = httpRequest.getHttpMethodType();
 
-        // 一定要为HttpUrlConnection设置connectTimeout属性以防止连接被阻塞
+        //一定要为HttpUrlConnection设置connectTimeout属性以防止连接被阻塞
         httpURLConnection.setConnectTimeout(useConnectionConfig.getConnectTimeout());
         httpURLConnection.setReadTimeout(useConnectionConfig.getReadTimeout());
 
         httpURLConnection.setRequestMethod(httpMethodType.getMethod().toUpperCase());//这里要大写,否则会报  java.net.ProtocolException: Invalid HTTP method: get
 
-        //设置是否向httpUrlConnection输出，
-        //如果是post请求,参数要放在http正文内,因此需要设为true, 默认情况下是false;
+        //设置是否向httpUrlConnection输出,如果是post请求,参数要放在http正文内,因此需要设为true,默认是false
         httpURLConnection.setDoOutput(HttpMethodType.POST == httpMethodType);
 
         //**********************************************

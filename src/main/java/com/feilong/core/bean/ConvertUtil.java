@@ -426,7 +426,8 @@ public final class ConvertUtil{
      *            the join string entity
      * @param arrays
      *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果 arrays 是null 或者Empty ,返回null</li>
      *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
      *         </ul>
@@ -742,7 +743,8 @@ public final class ConvertUtil{
      *            <li>{@link org.w3c.dom.Node}</li>
      *            <li>{@link org.w3c.dom.NodeList}</li>
      *            </ul>
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果 null == object 返回null,</li>
      *         <li>否则转成 {@link IteratorUtils#getIterator(Object)}</li>
      *         </ul>
@@ -765,15 +767,15 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将value转成指定Class类型的对象,如果Class的转换器没有注册,那么传入的value原样返回..
+     * 将value转成指定Class类型的对象,如果Class的转换器没有注册,那么传入的value原样返回.
      * 
      * <h3>注意:</h3>
      * 
      * <blockquote>
-     * 
      * <ul>
      * <li>如果传的 value是 <code>value.getClass().isArray()</code> 或者 {@link Collection},那么<span style="color:red">会取第一个元素</span>进行转换
      * {@link AbstractConverter#convert(Class, Object)} ,调用的 {@link AbstractConverter#convertArray(Object)} 方法</li>
+     * <li>如果传的 value是 <code>null</code> ,那么返回null</li>
      * </ul>
      * 
      * </blockquote>
@@ -790,11 +792,18 @@ public final class ConvertUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T convert(Object value,Class<T> targetType){
+        if (null == value){
+            return null;
+        }
         return (T) org.apache.commons.beanutils.ConvertUtils.convert(value, targetType);
     }
 
     /**
      * Convert an array of specified values to an array of objects of the specified class (if possible).
+     * 
+     * <p>
+     * 如果传的 value是 <code>null</code> ,那么返回null
+     * </p>
      * 
      * <p>
      * If the specified Java class is itself an array class, this class will be the type of the returned value.<br>
@@ -813,6 +822,9 @@ public final class ConvertUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T[] convert(String[] values,Class<T> targetType){
+        if (null == values){
+            return null;
+        }
         return (T[]) org.apache.commons.beanutils.ConvertUtils.convert(values, targetType);
     }
 }

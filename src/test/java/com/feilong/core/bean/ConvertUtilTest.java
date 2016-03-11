@@ -248,6 +248,15 @@ public class ConvertUtilTest{
     }
 
     /**
+     * To t test.
+     */
+    @Test
+    public void testConvert1(){
+        Serializable t = ConvertUtil.convert(null, Serializable.class);
+        LOGGER.info("{}", t);
+    }
+
+    /**
      * Test to string object.
      */
     @Test
