@@ -60,8 +60,8 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalDayList(){
-        List<Date> dates = DateExtensionUtil.getIntervalDayList(FROMSTRING, TOSTRING, DatePattern.COMMON_DATE_AND_TIME);
-        LOGGER.debug(JsonUtil.format(dates));
+        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(FROMSTRING, TOSTRING, DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(TOSTRING, FROMSTRING, DatePattern.COMMON_DATE_AND_TIME)));
     }
 
     /**

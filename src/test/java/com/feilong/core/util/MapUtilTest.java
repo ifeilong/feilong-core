@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,6 +38,14 @@ public class MapUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
+
+    @Test
+    public void testSimpleEntry(){
+        SimpleEntry<String, String> map = new SimpleEntry<String, String>("name", "jinxin");
+        LOGGER.debug(JsonUtil.format(map));
+        LOGGER.debug(map.getKey());
+        LOGGER.debug(map.getValue());
+    }
 
     /**
      * Test invert map.

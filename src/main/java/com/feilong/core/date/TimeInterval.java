@@ -43,7 +43,7 @@ public final class TimeInterval{
      * 1秒 1s.
      * 
      * @since 1.2.2
-     * */
+     */
     public static final int  SECONDS_PER_SECOND      = 1;
 
     /** 1分钟 60s. */

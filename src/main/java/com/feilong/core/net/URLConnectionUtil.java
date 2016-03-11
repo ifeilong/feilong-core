@@ -335,6 +335,8 @@ public final class URLConnectionUtil{
 
         httpURLConnection.setRequestMethod(httpMethodType.getMethod().toUpperCase());//这里要大写,否则会报  java.net.ProtocolException: Invalid HTTP method: get
 
+        //设置是否向httpUrlConnection输出，
+        //如果是post请求,参数要放在http正文内,因此需要设为true, 默认情况下是false;
         httpURLConnection.setDoOutput(HttpMethodType.POST == httpMethodType);
 
         //**********************************************

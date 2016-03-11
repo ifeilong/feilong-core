@@ -43,6 +43,7 @@ import com.feilong.core.util.comparator.PropertyComparator;
  * @author feilong
  * @version 1.0.0 Sep 8, 2012 8:02:44 PM
  * @see org.apache.commons.collections.MapUtils
+ * @see java.util.AbstractMap.SimpleEntry
  * @since 1.0.0
  */
 public final class MapUtil{

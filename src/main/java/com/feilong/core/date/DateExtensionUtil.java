@@ -173,11 +173,17 @@ public final class DateExtensionUtil{
     /**
      * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表.
      * 
-     * <p>
-     * 每天的日期会被重置清零 <code>00:00:00.000</code>
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>每天的日期会被重置清零 <code>00:00:00.000</code></li>
+     * <li>方法自动辨识 <code>fromDateString</code>和 <code>toDateString</code>哪个是开始时间</li>
+     * </ol>
+     * </blockquote>
      * 
      * <pre>
+     * Example 1:
+     * 
      * getIntervalDayList("2011-03-5 23:31:25.456","2011-03-10 01:30:24.895", DatePattern.commonWithTime)
      * 
      * return
@@ -200,33 +206,26 @@ public final class DateExtensionUtil{
      * @see DateUtil#getIntervalDay(Date, Date)
      */
     public static List<Date> getIntervalDayList(String fromDateString,String toDateString,String datePattern){
-        List<Date> dateList = new ArrayList<Date>();
-        //***************************************************************/
-        Date beginDate = DateUtil.string2Date(fromDateString, datePattern);
-        Date endDate = DateUtil.string2Date(toDateString, datePattern);
+
+        Date fromDate = DateUtil.string2Date(fromDateString, datePattern);
+        Date toDate = DateUtil.string2Date(toDateString, datePattern);
+
+        Date minDate = fromDate.before(toDate) ? fromDate : toDate;
+        Date maxDate = fromDate.before(toDate) ? toDate : fromDate;
+
         // ******重置时间********
-        Date beginDateReset = DateUtil.getFirstDateOfThisDay(beginDate);
-        Date endDateReset = DateUtil.getLastDateOfThisDay(endDate);
-        //***************************************************************/
+        Date beginDateReset = DateUtil.getFirstDateOfThisDay(minDate);
+        Date endDateReset = DateUtil.getLastDateOfThisDay(maxDate);
+
+        List<Date> dateList = new ArrayList<Date>();
+        dateList.add(beginDateReset);
+
         // 相隔的天数
         int intervalDay = DateUtil.getIntervalDay(beginDateReset, endDateReset);
-        //***************************************************************/
-        Date minDate = beginDateReset;
-        if (beginDateReset.equals(endDateReset)){
-            minDate = beginDateReset;
-        }else if (beginDateReset.before(endDateReset)){
-            minDate = beginDateReset;
-        }else{
-            minDate = endDateReset;
+        for (int i = 0; i < intervalDay; ++i){
+            dateList.add(DateUtil.addDay(beginDateReset, i + 1));
         }
-        //***************************************************************/
-        dateList.add(minDate);
-        //***************************************************************/
-        if (intervalDay > 0){
-            for (int i = 0; i < intervalDay; ++i){
-                dateList.add(DateUtil.addDay(minDate, i + 1));
-            }
-        }
+
         return dateList;
     }
 
@@ -268,7 +267,7 @@ public final class DateExtensionUtil{
         return list;
     }
 
-    // [start]转换成特色时间 toHumanizationDateString
+    // [start]转换成特色时间 toPrettyDateString
 
     /**
      * 人性化显示date时间,依据是和现在的时间间隔.
@@ -336,77 +335,6 @@ public final class DateExtensionUtil{
                 }
                 return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
         }
-    }
-
-    /**
-     * Do with one day interval.
-     *
-     * @param inDate
-     *            the in date
-     * @param nowDate
-     *            the now date
-     * @return the string
-     * @since 1.4.0
-     */
-    private static String doWithOneDayInterval(Date inDate,Date nowDate){
-        if (DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)){
-            return YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
-        }
-        return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
-    }
-
-    /**
-     * Do with two days interval.
-     *
-     * @param inDate
-     *            the in date
-     * @param nowDate
-     *            the now date
-     * @param isSameYear
-     *            the is same year
-     * @return the string
-     * @since 1.4.0
-     */
-    private static String doWithTwoDaysInterval(Date inDate,Date nowDate,boolean isSameYear){
-        if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
-            return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
-        }
-        if (isSameYear){
-            return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
-        }
-        return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
-    }
-
-    /**
-     * Do with zero day interval.
-     *
-     * @param inDate
-     *            the in date
-     * @param nowDate
-     *            the now date
-     * @param spaceTime
-     *            the space time
-     * @return the string
-     * @since 1.4.0
-     */
-    private static String doWithZeroDayInterval(Date inDate,Date nowDate,long spaceTime){
-        int spaceHour = DateUtil.getIntervalHour(spaceTime); // 相差小时数
-        if (spaceHour == 0){// 小时间隔
-            int spaceMinute = DateUtil.getIntervalMinute(spaceTime);
-            if (spaceMinute == 0){
-                int spaceSecond = DateUtil.getIntervalSecond(spaceTime);
-                return spaceSecond + SECOND + "前";
-            }
-            return spaceMinute + MINUTE + "前";
-        }
-        // 传过来的日期的日
-        int inDay = DateUtil.getDayOfMonth(inDate);
-        // 当前时间的日
-        int currentDayOfMonth = DateUtil.getDayOfMonth(nowDate);
-        if (inDay == currentDayOfMonth){
-            return spaceHour + HOUR + "前";
-        }
-        return YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
     }
 
     // [end]
@@ -494,8 +422,13 @@ public final class DateExtensionUtil{
      * 获得两日期之间的间隔,并且转换成直观的表示方式.
      * 
      * <pre>
+     * Example 1:
+     * 
      * getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24) 
      * return 转换成2小时59分44秒
+     * 
+     * 
+     * Example 2:
      * 
      * getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)
      * return 1分钟1秒 
@@ -514,5 +447,78 @@ public final class DateExtensionUtil{
     public static String getIntervalForView(Date date1,Date date2){
         long spaceTime = DateUtil.getIntervalTime(date1, date2);
         return getIntervalForView(spaceTime);
+    }
+
+    //******************************************************************************************
+
+    /**
+     * Do with one day interval.
+     *
+     * @param inDate
+     *            the in date
+     * @param nowDate
+     *            the now date
+     * @return the string
+     * @since 1.4.0
+     */
+    private static String doWithOneDayInterval(Date inDate,Date nowDate){
+        if (DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)){
+            return YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+        }
+        return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+    }
+
+    /**
+     * Do with two days interval.
+     *
+     * @param inDate
+     *            the in date
+     * @param nowDate
+     *            the now date
+     * @param isSameYear
+     *            the is same year
+     * @return the string
+     * @since 1.4.0
+     */
+    private static String doWithTwoDaysInterval(Date inDate,Date nowDate,boolean isSameYear){
+        if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
+            return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+        }
+        if (isSameYear){
+            return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
+        }
+        return DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+    }
+
+    /**
+     * Do with zero day interval.
+     *
+     * @param inDate
+     *            the in date
+     * @param nowDate
+     *            the now date
+     * @param spaceTime
+     *            the space time
+     * @return the string
+     * @since 1.4.0
+     */
+    private static String doWithZeroDayInterval(Date inDate,Date nowDate,long spaceTime){
+        int spaceHour = DateUtil.getIntervalHour(spaceTime); // 相差小时数
+        if (spaceHour == 0){// 小时间隔
+            int spaceMinute = DateUtil.getIntervalMinute(spaceTime);
+            if (spaceMinute == 0){
+                int spaceSecond = DateUtil.getIntervalSecond(spaceTime);
+                return spaceSecond + SECOND + "前";
+            }
+            return spaceMinute + MINUTE + "前";
+        }
+        // 传过来的日期的日
+        int inDay = DateUtil.getDayOfMonth(inDate);
+        // 当前时间的日
+        int currentDayOfMonth = DateUtil.getDayOfMonth(nowDate);
+        if (inDay == currentDayOfMonth){
+            return spaceHour + HOUR + "前";
+        }
+        return YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
     }
 }

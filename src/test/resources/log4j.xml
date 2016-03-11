@@ -9,14 +9,11 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
 
 	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
-		<!-- The default target is System.out. -->
-		<!-- <param name="Target" value="System.out" /> -->
 		<param name="Threshold" value="debug" />
 		<param name="encoding" value="UTF-8" />
 
 		<!-- 设置监视器输出方式 -->
 		<layout class="org.apache.log4j.PatternLayout">
-			<!-- <param name="ConversionPattern" value="%d{HH:mm:ss} %-5p (%F:%L) [%M()] %m%n" /> -->
 			<param name="ConversionPattern" value="%d{mm:ss} %-5p (%F:%L) [%M()] %m%n" />
 		</layout>
 		<!--限制输出级别 -->

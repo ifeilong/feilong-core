@@ -16,6 +16,8 @@
 package com.feilong.core.net;
 
 import java.net.HttpURLConnection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -55,10 +57,15 @@ public class URLConnectionUtilTest{
     public void getResponseBodyAsString2(){
 
         ConnectionConfig connectionConfig = new ConnectionConfig();
-        connectionConfig.setContentCharset(CharsetType.GBK);
+        connectionConfig.setContentCharset(CharsetType.UTF8);
 
         HttpRequest request = new HttpRequest();
-        request.setUri("http://www.163.com/");
+        request.setUri("http://www.baidu.com/");
+        request.setHttpMethodType(HttpMethodType.POST);
+
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("name", "jinxin");
+        request.setParamMap(paramMap);
 
         LOGGER.info(URLConnectionUtil.getResponseBodyAsString(request, connectionConfig));
     }

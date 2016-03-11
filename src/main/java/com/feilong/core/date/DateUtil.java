@@ -1195,6 +1195,10 @@ public final class DateUtil{
     /**
      * 计算两个时间相差的的天数.
      * 
+     * <p>
+     * 不管date1是否早于还是晚于date2,均返回 <span style="color:red">绝对值</span>.
+     * </p>
+     * 
      * @param date1
      *            date1
      * @param date2
@@ -1214,6 +1218,10 @@ public final class DateUtil{
 
     /**
      * 计算两个时间相差的的天数.
+     * 
+     * <p>
+     * 不管date1是否早于还是晚于date2,均返回 <span style="color:red">绝对值</span>.
+     * </p>
      * 
      * @param date1
      *            date1
@@ -1241,7 +1249,11 @@ public final class DateUtil{
     }
 
     /**
-     * 两个时间相差的毫秒数,不管date1是否早于还是晚于date2,均返回 <span style="color:red">绝对值</span>.
+     * 两个时间相差的毫秒数.
+     * 
+     * <p>
+     * 不管date1是否早于还是晚于date2,均返回 <span style="color:red">绝对值</span>.
+     * </p>
      * 
      * @param date1
      *            date1
