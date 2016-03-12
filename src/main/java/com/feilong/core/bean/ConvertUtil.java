@@ -795,7 +795,7 @@ public final class ConvertUtil{
         if (null == value){
             return null;
         }
-        return (T) org.apache.commons.beanutils.ConvertUtils.convert(value, targetType);
+        return (T) ConvertUtils.convert(value, targetType);
     }
 
     /**
@@ -825,6 +825,6 @@ public final class ConvertUtil{
         if (null == values){
             return null;
         }
-        return (T[]) org.apache.commons.beanutils.ConvertUtils.convert(values, targetType);
+        return (T[]) ConvertUtils.convert(values, targetType);
     }
 }

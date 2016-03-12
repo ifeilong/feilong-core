@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.Validator;
 
@@ -35,16 +33,16 @@ import com.feilong.core.util.Validator;
  * 
  * <blockquote>
  * <ul>
- * <li>{@link ArrayUtils#contains(boolean[], boolean)}</li>
- * <li>{@link ArrayUtils#contains(byte[], byte)}</li>
- * <li>{@link ArrayUtils#contains(char[], char)}</li>
- * <li>{@link ArrayUtils#contains(double[], double)}</li>
- * <li>{@link ArrayUtils#contains(float[], float)}</li>
- * <li>{@link ArrayUtils#contains(int[], int)}</li>
- * <li>{@link ArrayUtils#contains(long[], long)}</li>
- * <li>{@link ArrayUtils#contains(Object[], Object)}</li>
- * <li>{@link ArrayUtils#contains(short[], short)}</li>
- * <li>{@link ArrayUtils#contains(double[], double, double)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(boolean[], boolean)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(byte[], byte)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(char[], char)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(double[], double)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(float[], float)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(int[], int)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(long[], long)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(Object[], Object)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(short[], short)}</li>
+ * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(double[], double, double)}</li>
  * </ul>
  * </blockquote>
  *

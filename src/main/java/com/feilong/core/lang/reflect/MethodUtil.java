@@ -188,7 +188,7 @@ public final class MethodUtil{
     @SuppressWarnings("unchecked")
     public static <T> T invokeMethod(final Object object,final String methodName,Object[] args,Class<?>[] parameterTypes){
         try{
-            return (T) org.apache.commons.lang3.reflect.MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
+            return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
             String message = Slf4jUtil.formatMessage(
                             "invokeMethod Exception,object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]",
@@ -241,7 +241,7 @@ public final class MethodUtil{
     @SuppressWarnings("unchecked")
     public static <T> T invokeStaticMethod(final Class<?> cls,final String methodName,Object[] args,Class<?>[] parameterTypes){
         try{
-            return (T) org.apache.commons.lang3.reflect.MethodUtils.invokeStaticMethod(cls, methodName, args, parameterTypes);
+            return (T) MethodUtils.invokeStaticMethod(cls, methodName, args, parameterTypes);
         }catch (Exception e){
             String message = Slf4jUtil.formatMessage(
                             "invoke Static Method Exception,cls:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]",

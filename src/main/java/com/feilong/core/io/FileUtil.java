@@ -190,12 +190,13 @@ public final class FileUtil{
      * @param append
      *            if {@code true}, then bytes will be added to the end of the file rather than overwriting
      * @return the file output stream
+     * @see org.apache.commons.io.FileUtils#openOutputStream(File, boolean)
      * @since 1.4.0
      */
     //默认 Access Modifiers 权限修饰符
     static FileOutputStream getFileOutputStream(File file,boolean append){
         try{
-            return org.apache.commons.io.FileUtils.openOutputStream(file, append);
+            return FileUtils.openOutputStream(file, append);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
@@ -237,7 +238,7 @@ public final class FileUtil{
      */
     public static FileInputStream getFileInputStream(File file){
         try{
-            return org.apache.commons.io.FileUtils.openInputStream(file);
+            return FileUtils.openInputStream(file);
         }catch (IOException e){
             LOGGER.error("", e);
             throw new UncheckedIOException(e);
@@ -249,7 +250,8 @@ public final class FileUtil{
      *
      * @param directory
      *            指定一个存在的文件夹
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果directory isNullOrEmpty,throw IllegalArgumentException</li>
      *         <li>如果directory don't exists,throw IllegalArgumentException</li>
      *         <li>如果directory is not Directory,throw IllegalArgumentException</li>
@@ -594,7 +596,7 @@ public final class FileUtil{
         }
         File[] files = ConvertUtil.convert(filePaths, File.class);
         try{
-            return org.apache.commons.io.FileUtils.toURLs(files);
+            return FileUtils.toURLs(files);
         }catch (IOException e){
             LOGGER.error("", e);
             throw new UncheckedIOException(e);

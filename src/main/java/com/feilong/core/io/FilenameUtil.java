@@ -54,17 +54,17 @@ public final class FilenameUtil{
      * @see <a href="http://support.microsoft.com/kb/177506/zh-cn">错误消息： 文件名是无效的或不能包含任何以下字符</a>
      * @since 1.0.7
      */
-    private static final String[][] MICROSOFT_PC = { //
-                                                 //            { "\\", "" }, // \
-            //  { "/", "" }, // /
-            { "\"", "" }, // "
-            { ":", "" }, // :
-            { "*", "" }, // *
-            { "?", "" }, // ?
-            { "<", "" }, // <
-            { ">", "" }, // >
-            { "|", "" }, // |
-                                                 };
+    private static final String[][] MICROSOFT_PC = {                                           //
+                                                     //            { "\\", "" }, // \
+                                                     //  { "/", "" }, // /
+                                                     { "\"", "" },                             // "
+                                                     { ":", "" },                              // :
+                                                     { "*", "" },                              // *
+                                                     { "?", "" },                              // ?
+                                                     { "<", "" },                              // <
+                                                     { ">", "" },                              // >
+                                                     { "|", "" },                              // |
+    };
 
     /** Don't let anyone instantiate this class. */
     private FilenameUtil(){
@@ -175,7 +175,7 @@ public final class FilenameUtil{
      * @since 1.4.0
      */
     public static String getExtension(String fileName){
-        return StringUtils.defaultString(org.apache.commons.io.FilenameUtils.getExtension(fileName));
+        return StringUtils.defaultString(FilenameUtils.getExtension(fileName));
     }
 
     /**

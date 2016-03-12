@@ -55,7 +55,7 @@ public final class ReaderUtil{
      */
     public static String toString(Reader reader){
 
-        BufferedReader bufferedReader = org.apache.commons.io.IOUtils.toBufferedReader(reader);
+        BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
 
         try{
             StringBuilder sb = new StringBuilder();

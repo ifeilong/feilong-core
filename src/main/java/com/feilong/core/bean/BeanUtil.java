@@ -435,7 +435,7 @@ public final class BeanUtil{
         // Return the value of the specified property of the specified bean,
         // no matter which property reference format is used, as a String.
         try{
-            return org.apache.commons.beanutils.BeanUtils.getProperty(bean, propertyName);
+            return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);

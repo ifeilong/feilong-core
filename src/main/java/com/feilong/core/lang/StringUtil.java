@@ -163,7 +163,7 @@ public final class StringUtil{
      * @since 1.0.2
      */
     public static int searchTimes(final CharSequence source,final CharSequence target){
-        return org.apache.commons.lang3.StringUtils.countMatches(source, target);
+        return StringUtils.countMatches(source, target);
     }
 
     // [end]
@@ -255,7 +255,7 @@ public final class StringUtil{
      * @see org.apache.commons.lang3.StringUtils#contains(CharSequence, CharSequence)
      */
     public static boolean contains(final CharSequence seq,final CharSequence searchSeq){
-        return org.apache.commons.lang3.StringUtils.contains(seq, searchSeq);
+        return StringUtils.contains(seq, searchSeq);
     }
 
     /**
@@ -279,7 +279,7 @@ public final class StringUtil{
      *         case or false if not or {@code null} string input
      */
     public static boolean containsIgnoreCase(final CharSequence str,final CharSequence searchStr){
-        return org.apache.commons.lang3.StringUtils.containsIgnoreCase(str, searchStr);
+        return StringUtils.containsIgnoreCase(str, searchStr);
     }
 
     // [end] 
@@ -453,7 +453,7 @@ public final class StringUtil{
      * @see #substringLast(String, int)
      */
     public static String substring(final String text,final int beginIndex){
-        return org.apache.commons.lang3.StringUtils.substring(text, beginIndex);
+        return StringUtils.substring(text, beginIndex);
     }
 
     /**
@@ -476,7 +476,7 @@ public final class StringUtil{
      * @see org.apache.commons.lang3.StringUtils#substring(String, int, int)
      */
     public static String substring(final String textString,int startIndex,int length){
-        return org.apache.commons.lang3.StringUtils.substring(textString, startIndex, startIndex + length);
+        return StringUtils.substring(textString, startIndex, startIndex + length);
     }
 
     /**
@@ -519,7 +519,8 @@ public final class StringUtil{
      *            beginString
      * @param shift
      *            负数表示向前,整数表示向后,0表示依旧从自己的位置开始算起
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>if isNullOrEmpty(text),return null</li>
      *         <li>if isNullOrEmpty(beginString),return null</li>
      *         <li>if text.indexOf(beginString)==-1,return null</li>
@@ -551,7 +552,12 @@ public final class StringUtil{
         }
 
         if (startIndex > textLength){
-            LOGGER.warn("beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}", beginIndex, shift, text, textLength);
+            LOGGER.warn(
+                            "beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}",
+                            beginIndex,
+                            shift,
+                            text,
+                            textLength);
             return StringUtils.EMPTY;
         }
         // 索引从0开始
