@@ -49,7 +49,7 @@ import com.feilong.core.util.Validator;
 public final class MimeTypeUtil{
 
     /** The Constant fileExtensionMap. */
-    private static final Map<String, String> fileExtensionMap;
+    private static final Map<String, String> FILE_EXTENSION_MAP;
 
     /** Don't let anyone instantiate this class. */
     private MimeTypeUtil(){
@@ -59,9 +59,9 @@ public final class MimeTypeUtil{
     }
 
     static{
-        fileExtensionMap = new HashMap<String, String>();
+        FILE_EXTENSION_MAP = new HashMap<String, String>();
         for (MimeType mimeType : MimeType.values()){
-            fileExtensionMap.put(mimeType.getExtension(), mimeType.getMime());
+            FILE_EXTENSION_MAP.put(mimeType.getExtension(), mimeType.getMime());
         }
     }
 
@@ -104,7 +104,7 @@ public final class MimeTypeUtil{
 
         // 2. nothing found -> lookup our in extension map to find types like ".doc" or ".docx"
         if (Validator.isNullOrEmpty(contentType)){
-            contentType = fileExtensionMap.get(extension.toLowerCase());
+            contentType = FILE_EXTENSION_MAP.get(extension.toLowerCase());
         }
 
         return contentType;

@@ -56,6 +56,128 @@ import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
  * </ul>
  * </blockquote>
  * 
+ * <h3>Collections Framework关系图:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * <img src="http://venusdrogon.github.io/feilong-platform/mysource/Collections-Framework.png"/>
+ * </p>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.Collection}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>一组对象的集合,一般不直接使用</li>
+ * <li>有 {@link Collection#add(Object) add},{@link Collection#size() size} ,{@link Collection#clear() clear},
+ * {@link Collection#contains(Object) contains}
+ * ,{@link Collection#remove(Object) remove},{@link Collection#removeAll(Collection) removeAll},{@link Collection#retainAll(Collection)
+ * retainAll},
+ * {@link Collection#toArray() toArray}方法</li>
+ * <li>没有get()方法。只能通过iterator()遍历元素</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * 
+ * <h3>关于 {@link java.util.List}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>An ordered collection</li>
+ * <li>integer index for insert and search.</li>
+ * <li>除了继承Collection接口方法外,有自己的方法定义: get(int) indexOf lastIndexOf listIterator set(int) subList(int,int)</li>
+ * <li>optional:可空,可重复</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.ArrayList}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>Resizable-array implementation of the List interface</li>
+ * <li>元素可空</li>
+ * <li>有自己控制容量(数组大小)的方法</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.LinkedList}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>Linked list implementation,双向链表</li>
+ * <li>元素可空</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.Vector}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>growable array of objects</li>
+ * <li>线程安全的动态数组 synchronized</li>
+ * <li>操作基本和ArrayList相同</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.Stack}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>last-in-first-out (LIFO) stack of objects</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * 
+ * <hr>
+ * 
+ * 
+ * <h3>关于 {@link java.util.Set }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>A collection contains no duplicate elements</li>
+ * <li>Set和Collection拥有一模一样的接口名称</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.HashSet }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>backed by a HashMap instance.</li>
+ * <li>makes no guarantees as to the iteration order of the set; 不保证顺序</li>
+ * <li>permits the null element.允许空元素</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.LinkedHashSet }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>Hash Map and linked list implementation of the Set interface,</li>
+ * <li>with predictable iteration order</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.TreeSet }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>A NavigableSet implementation based on a TreeMap.</li>
+ * <li>ordered using their natural ordering, or by a Comparator provided at set creation time</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.EnumSet }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>A specialized Set implementation for use with enum types.</li>
+ * <li>Null elements are not permitted.</li>
+ * <li>natural order (the order in which the enum constants are declared.</li>
+ * <li>abstract class.</li>
+ * <li>以位向量的形式存储，这种存储形式非常紧凑，高效，占用内存很小，运行效率很好.</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <hr>
+ * 
+ * <h3>关于 {@link java.util.Queue }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>Queues typically, but do not necessarily,order elements in a FIFO (first-in-first-out) manner</li>
+ * </ol>
+ * </blockquote>
+ * 
  * @author feilong
  * @version 1.0.2 Sep 2, 2010 8:08:40 PM
  * @version 1.5.0 2016年1月8日 下午2:08:59

@@ -39,7 +39,92 @@ import com.feilong.core.util.comparator.PropertyComparator;
 
 /**
  * {@link Map}工具类.
- *
+ * 
+ * <h3>关于 {@link java.util.Map }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>An object that maps keys to values.</li>
+ * <li>A map cannot contain duplicate keys</li>
+ * <li>Takes the place of the Dictionary class</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.HashMap }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>Hash table based implementation of the Map interface.</li>
+ * <li>permits null values and the null key.</li>
+ * <li>makes no guarantees as to the order of the map</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.LinkedHashMap }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>Hash table and linked list implementation of the Map interface,</li>
+ * <li>with predictable iteration order.</li>
+ * </ol>
+ * 
+ * Note that: insertion order is not affected if a key is re-inserted into the map.
+ * 
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.TreeMap }:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>A Red-Black tree based NavigableMap implementation</li>
+ * <li>sorted according to the natural ordering of its keys, or by a Comparator.</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.Hashtable}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>This class implements a hashtable, which maps keys to values.</li>
+ * <li>synchronized.</li>
+ * <li>Any non-null object can be used as a key or as a value.</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.Properties}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>The Properties class represents a persistent set of properties.</li>
+ * <li>can be saved to a stream or loaded from a stream.</li>
+ * <li>Each key and its corresponding value in the property list is a string.</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.IdentityHashMap}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>using reference-equality in place of object-equality when comparing keys (and values).</li>
+ * <li>使用==代替equals()对key进行比较的散列表。专为特殊问题而设计的</li>
+ * </ol>
+ * 
+ * <p style="color:red">
+ * 注意:此类不是 通用 Map 实现！它有意违反 Map 的常规协定，此类设计仅用于其中需要引用相等性语义的罕见情况
+ * </p>
+ * </blockquote>
+ * 
+ * <h3>关于 {@link java.util.WeakHashMap}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>A hashtable-based Map implementation with weak keys.</li>
+ * <li>它对key实行“弱引用”，如果一个key不再被外部所引用，那么该key可以被GC回收</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * 
+ * <h3>关于 {@link java.util.EnumMap}:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>A specialized Map implementation for use with enum type keys.</li>
+ * <li>Enum maps are maintained in the natural order of their keys</li>
+ * <li>Null keys are not permitted.不允许空的key</li>
+ * </ol>
+ * </blockquote>
+ * 
  * @author feilong
  * @version 1.0.0 Sep 8, 2012 8:02:44 PM
  * @see org.apache.commons.collections.MapUtils
