@@ -117,15 +117,15 @@ public final class ConstructorUtil{
             throw new NullPointerException("className can't be null/empty!");
         }
 
-        // 装载连接初始化类
-        Class<?> klass = null;
         try{
-            klass = ClassUtil.loadClass(className);
+            // 装载连接初始化类
+            Class<?> klass = ClassUtil.loadClass(className);
+            return (T) newInstance(klass, parameterValues);
         }catch (ClassNotFoundException e){
             LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
-        return (T) newInstance(klass, parameterValues);
+
     }
 
     /**
@@ -166,7 +166,7 @@ public final class ConstructorUtil{
      */
     public static <T> T newInstance(Class<T> klass,Object[] args,Class<?>[] parameterTypes){
         try{
-            return org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor(klass, args, parameterTypes);
+            return ConstructorUtils.invokeConstructor(klass, args, parameterTypes);
         }catch (Exception e){
             String message = Slf4jUtil.formatMessage(
                             "invokeConstructor Exception,input params info: class:[{}].args:[{}],parameterTypes:[{}]",
