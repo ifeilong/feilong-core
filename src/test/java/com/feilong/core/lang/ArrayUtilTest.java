@@ -119,12 +119,7 @@ public class ArrayUtilTest{
                          new User("飞飞", 58) };
 
         Map<Integer, List<User>> group = ArrayUtil.group(users, "age");
-
         LOGGER.debug(JsonUtil.format(group));
-
-        Collection<List<User>> values = group.values();
-        LOGGER.debug(JsonUtil.format(values));
-
     }
 
     /**
@@ -133,9 +128,7 @@ public class ArrayUtilTest{
     @Test
     public void testGetElement(){
         Object array = new String[] { "jinxin", "feilong", "1" };
-        int index = 2;
-        String element = ArrayUtil.getElement(array, index);
-        LOGGER.info("" + element);
+        LOGGER.info("" + ArrayUtil.getElement(array, 2));
     }
 
     /**

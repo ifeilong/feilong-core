@@ -29,7 +29,17 @@ import com.feilong.core.util.Validator;
 /**
  * 数组工具类.
  * 
- * <h3>判断是否包含</h3>
+ * <h3>提供以下方法:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>{@link #getElement(Object, int)},得到数组中的某个元素</li>
+ * <li>{@link #group(Object[])},将array 分组</li>
+ * <li>{@link #group(Object[], String)},将对象数组,按照指定属性的值进行分组</li>
+ * </ol>
+ * </blockquote>
+ * 
+ * 
+ * <h3>判断是否包含:</h3>
  * 
  * <blockquote>
  * <ul>
@@ -67,6 +77,16 @@ public final class ArrayUtil{
      * (Returns the value of the indexed component in the specified array object. <br>
      * The value is automatically wrapped in an object if it has a primitive type.)
      * </p>
+     * 
+     * <pre>
+     * 
+     * Example 1:
+     * 
+     * Object array = new String[] { "jinxin", "feilong", "1" };
+     * LOGGER.info("" + ArrayUtil.getElement(array, 2));
+     * 
+     * 结果:1
+     * </pre>
      *
      * @param <T>
      *            the generic type
@@ -92,7 +112,10 @@ public final class ArrayUtil{
      * <pre>
      * 
      * Example 1:
-     * if Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
+     * 
+     * if 
+     * 
+     *  Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
      * 
      * will return 
      *      {
@@ -119,13 +142,14 @@ public final class ArrayUtil{
      *         ]
      *     }
      * }
-     * </pre></code>
+     * </pre>
+     * </code>
      *
      * @param <T>
      *            the generic type
      * @param array
      *            the array
-     * @return the map< t, list< t>>
+     * @return if null==array,return {@link java.util.Collections#emptyMap()}
      * @since 1.0.8
      */
     public static <T> Map<T, List<T>> group(T[] array){
@@ -146,7 +170,53 @@ public final class ArrayUtil{
     }
 
     /**
-     * Group 对象.
+     * 将对象数组,按照指定属性的值进行分组.
+     * 
+     * <pre>
+     * 
+     * Example 1:
+     * 
+     * User[] users = {
+     *                  new User("张三", 18),
+     *                  new User("李四", 28),
+     *                  new User("王五", 38),
+     *                  new User("陈二", 18),
+     *                  new User("孔六", 28),
+     *                  new User("飞飞", 58) };
+     * 
+     * Map<Integer, List<User>> group = ArrayUtil.group(users, "age");
+     * LOGGER.debug(JsonUtil.format(group));
+     * 
+     * 结果:
+     * 
+     * {
+        "18":[{
+                "age": 18,
+                "name": "张三"
+            },
+             {
+                "age": 18,
+                "name": "陈二"
+            }
+        ],
+        "28":[{
+                "age": 28,
+                "name": "李四"
+            },
+            {
+                "age": 28,
+                "name": "孔六"
+            }],
+        "38": [{
+            "age": 38,
+            "name": "王五"
+        }],
+        "58": [        {
+            "age": 58,
+            "name": "飞飞"
+        }]
+    }
+     * </pre>
      *
      * @param <O>
      *            the generic type
@@ -155,8 +225,8 @@ public final class ArrayUtil{
      * @param objectArray
      *            对象数组
      * @param propertyName
-     *            对面里面属性的名称
-     * @return the map< t, list< o>>
+     *            指定属性的名称
+     * @return if null==objectArray,return {@link java.util.Collections#emptyMap()}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.util.CollectionsUtil#group(java.util.Collection, String)
      * @since 1.0.8
