@@ -56,6 +56,14 @@ import com.feilong.core.util.comparator.PropertyComparator;
  * <li>permits null values and the null key.</li>
  * <li>makes no guarantees as to the order of the map</li>
  * </ol>
+ * 
+ * <h3>扩容:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>HashMap 初始容量 {@link java.util.HashMap#DEFAULT_INITIAL_CAPACITY }是16,DEFAULT_LOAD_FACTOR 是0.75
+ * {@link java.util.HashMap#addEntry } 是 2 * table.length 2倍<br>
+ * </ol>
+ * </blockquote>
  * </blockquote>
  * 
  * <h3>关于 {@link java.util.LinkedHashMap }:</h3>

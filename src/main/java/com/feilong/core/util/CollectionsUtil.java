@@ -95,6 +95,15 @@ import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
  * <li>元素可空</li>
  * <li>有自己控制容量(数组大小)的方法</li>
  * </ol>
+ * 
+ * <h3>扩容:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>see {@link java.util.ArrayList#ensureCapacity(int)},<br>
+ * 在jdk1.6里面,int newCapacity = (oldCapacity * 3)/2 + 1 通常是1.5倍<br>
+ * 在jdk1.7+里面,代码进行了优化</li>
+ * </ol>
+ * </blockquote>
  * </blockquote>
  * 
  * <h3>关于 {@link java.util.LinkedList}:</h3>
