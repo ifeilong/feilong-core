@@ -235,14 +235,22 @@ public final class CollectionsUtil{
     }
 
     /**
-     * Contains.
+     * 判断 <code>enumeration</code> 枚举里面,是否有 指定的元素 <code>value</code>.
+     * 
+     * <h3>代码流程:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@code if isNullOrEmpty(enumeration)---->null}</li>
+     * <li>循环枚举里面的每个元素,调用 {@link org.apache.commons.lang3.ObjectUtils#equals(Object, Object)},如果equals 返回true</li>
+     * </ol>
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param enumeration
      *            the enumeration
      * @param value
-     *            the value
+     *            指定的元素
      * @return true, if contains
      * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
      * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
@@ -256,6 +264,7 @@ public final class CollectionsUtil{
 
         while (enumeration.hasMoreElements()){
             T object = enumeration.nextElement();
+
             if (org.apache.commons.lang3.ObjectUtils.equals(object, value)){
                 return true;
             }
@@ -732,6 +741,7 @@ public final class CollectionsUtil{
      * @param predicate
      *            the predicate
      * @return the list< o>
+     * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
      */
     public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
         if (Validator.isNullOrEmpty(objectCollection)){
@@ -777,6 +787,8 @@ public final class CollectionsUtil{
      * @param values
      *            the values
      * @return the list< o>
+     * @see com.feilong.core.util.predicate.ArrayContainsPredicate
+     * @see #selectRejected(Collection, Predicate)
      */
     @SafeVarargs
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...values){
@@ -830,6 +842,7 @@ public final class CollectionsUtil{
      *            the values
      * @return the list< o>
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
+     * @see #selectRejected(Collection , Predicate)
      * @since 1.5.0
      */
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,Collection<V> values){
@@ -854,6 +867,7 @@ public final class CollectionsUtil{
      * @param predicate
      *            the predicate
      * @return the list< o>
+     * @see org.apache.commons.collections4.CollectionUtils#selectRejected(Iterable, Predicate)
      * @since 1.4.0
      */
     public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
@@ -993,6 +1007,7 @@ public final class CollectionsUtil{
      *            the property name
      * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
      *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
+     * @see #groupCount(Collection , Predicate, String)
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
         return groupCount(objectCollection, null, propertyName);
