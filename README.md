@@ -79,7 +79,7 @@ com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`,最常用�
 
 ## com.feilong.core.date 包,时间日期操作核心类:
 
-* date 包是feilong重要的组成部分,提供了常见的日期操作,包含以下五个class
+### date 包是feilong重要的组成部分,提供了常见的日期操作,包含以下五个class
 
 Class | Description 
 :---- | :---------
@@ -127,7 +127,7 @@ con.setConnectTimeout(100*TimeInterval.MILLISECOND_PER_SECONDS);
 
 
 
-* util 包是feilong重要的组成部分,提供了常见的日期操作,包含以下五个class
+### util 包是feilong重要的组成部分,提供了常见的日期操作,包含以下五个class
 
 Class | Description 
 :---- | :---------
