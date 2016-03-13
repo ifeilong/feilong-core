@@ -135,8 +135,7 @@ public final class NumberUtil{
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      */
     public static BigDecimal toNoScale(Serializable number){
-        RoundingMode roundingMode = RoundingMode.HALF_UP;
-        return toNoScale(number, roundingMode);
+        return toNoScale(number, RoundingMode.HALF_UP);
     }
 
     /**
@@ -270,8 +269,7 @@ public final class NumberUtil{
      * @see java.math.BigDecimal#ROUND_HALF_UP
      */
     public static BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale){
-        RoundingMode roundingMode = RoundingMode.HALF_UP;
-        return getDivideValue(one, two, scale, roundingMode);
+        return getDivideValue(one, two, scale, RoundingMode.HALF_UP);
     }
 
     /**
@@ -405,14 +403,13 @@ public final class NumberUtil{
      *         </ul>
      * @since 1.0
      */
-    public static BigDecimal /* <T> T */ getAddValue(Number one,Number two){
+    public static BigDecimal getAddValue(Number one,Number two){
         // 如果两个数都是 null,则返回null
         if (Validator.isNullOrEmpty(one) && Validator.isNullOrEmpty(two)){
             return null;
         }
         // 第一个数不是null,第二个数是null,则直接返回第一个数
         if (!Validator.isNullOrEmpty(one) && Validator.isNullOrEmpty(two)){
-            // ObjectUtil.toT(value, class1)
             return ConvertUtil.toBigDecimal(one);
         }
 
@@ -547,8 +544,7 @@ public final class NumberUtil{
         // Number /String
         if (value instanceof Number || value instanceof String){
             BigDecimal bigDecimal = ConvertUtil.toBigDecimal(valueString);
-            int i = bigDecimal.compareTo(ConvertUtil.toBigDecimal(specificNumber));
-            return i == 0;
+            return 0 == bigDecimal.compareTo(ConvertUtil.toBigDecimal(specificNumber));
         }
         return false;
     }
@@ -574,8 +570,7 @@ public final class NumberUtil{
      * @see java.math.BigDecimal#ROUND_HALF_UP
      */
     private static BigDecimal setScale(BigDecimal number,int scale){
-        RoundingMode roundingMode = RoundingMode.HALF_UP;
-        return setScale(number, scale, roundingMode);
+        return setScale(number, scale, RoundingMode.HALF_UP);
     }
 
     /**

@@ -53,10 +53,9 @@ public class MapUtilTest{
     @Test
     public void testInvertMap(){
         Map<String, Integer> map = new HashMap<String, Integer>();
-
         map.put("a", 3007);
         map.put("b", 3001);
-        map.put("c", 3002);
+        map.put("c", 3001);
         map.put("d", 3003);
         LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
     }
@@ -133,20 +132,19 @@ public class MapUtilTest{
     @Test
     public void testGetMinValue(){
 
-        Map<String, Integer> object = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
 
-        object.put("a", 3007);
-        object.put("b", 3001);
-        object.put("c", 3002);
-        object.put("d", 3003);
-        object.put("e", 3004);
-        object.put("f", 3005);
-        object.put("g", -1005);
+        map.put("a", 3007);
+        map.put("b", 3001);
+        map.put("c", 3002);
+        map.put("d", 3003);
+        map.put("e", 3004);
+        map.put("f", 3005);
+        map.put("g", -1005);
 
         String[] keys = { "a", "b", "d", "g", "m" };
-        Integer minValue = MapUtil.getMinValue(object, keys);
 
-        LOGGER.info(minValue + "");
+        LOGGER.info(MapUtil.getMinValue(map, keys) + "");
     }
 
     /**

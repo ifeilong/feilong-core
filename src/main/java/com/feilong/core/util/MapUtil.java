@@ -135,7 +135,7 @@ import com.feilong.core.util.comparator.PropertyComparator;
  * 
  * @author feilong
  * @version 1.0.0 Sep 8, 2012 8:02:44 PM
- * @see org.apache.commons.collections.MapUtils
+ * @see org.apache.commons.collections4.MapUtils
  * @see java.util.AbstractMap.SimpleEntry
  * @since 1.0.0
  */
@@ -174,6 +174,26 @@ public final class MapUtil{
 
     /**
      * 指定一个map,指定特定的keys,取得其中的 value 最小值.
+     * 
+     * <pre>
+     * Example 1:
+     * 
+     * Map<String, Integer> map = new HashMap<String, Integer>();
+     * 
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3002);
+     * map.put("d", 3003);
+     * map.put("e", 3004);
+     * map.put("f", 3005);
+     * map.put("g", -1005);
+     * 
+     * String[] keys = { "a", "b", "d", "g", "m" };
+     * 
+     * LOGGER.info(MapUtil.getMinValue(map, keys) + "");
+     * 
+     * 返回 -1005
+     * </pre>
      * 
      * @param <K>
      *            the key type
@@ -235,7 +255,43 @@ public final class MapUtil{
 
     /**
      * 获得 sub map(去除不需要的keys).
-     *
+     * 
+     * <pre>
+     * 
+     * Example 1:
+     * 
+     * Map<String, Integer> map = new HashMap<String, Integer>();
+     * 
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3002);
+     * map.put("d", 3003);
+     * map.put("e", 3004);
+     * map.put("f", 3005);
+     * map.put("g", -1005);
+     * 
+     * String[] keys = { "a", "g", "m" };
+     * Map<String, Integer> subMapExcludeKeys = MapUtil.getSubMapExcludeKeys(map, keys);
+     * 
+     * LOGGER.debug(JsonUtil.format(subMapExcludeKeys));
+     * 
+     * 返回 :
+     * 
+     * {
+        "f": 3005,
+        "d": 3003,
+        "e": 3004,
+        "b": 3001,
+        "c": 3002
+    }
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 如果 <code>excludeKeys</code>中含有 map 中不存在的key,将会输出warn级别的log
+     * </p>
+     * 
+     * 
      * @param <K>
      *            the key type
      * @param <T>
@@ -273,6 +329,27 @@ public final class MapUtil{
      * <p>
      * <span style="color:red">这个操作map预先良好的定义</span>.如果传过来的map,不同的key有相同的value,那么返回的map(key)只会有一个(value),其他重复的key被丢掉了
      * </p>
+     * 
+     * <pre>
+     * Example 1:
+     * 
+     * Map<String, Integer> map = new HashMap<String, Integer>();
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3001);
+     * map.put("d", 3003);
+     * LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
+     * 
+     * 输出 :
+     * 
+     * {
+        "3007": "a",
+        "3001": "c",
+        "3003": "d"
+        }
+     * 
+     * 可以看出 b元素被覆盖了
+     * </pre>
      *
      * @param <K>
      *            the key type

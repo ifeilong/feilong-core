@@ -54,7 +54,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @see org.apache.commons.collections4.comparators.ReverseComparator
  * @see org.apache.commons.collections4.comparators.ComparableComparator
  * @see org.apache.commons.beanutils.BeanComparator
- * @see org.apache.commons.collections.comparators.ComparableComparator
+ * @see org.apache.commons.collections4.comparators.ComparableComparator
  * @since 1.2.0
  */
 public class PropertyComparator<T> implements Comparator<T>,Serializable{

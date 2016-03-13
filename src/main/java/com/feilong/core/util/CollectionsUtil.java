@@ -525,6 +525,31 @@ public final class CollectionsUtil{
 
     /**
      * 获得 property value set.
+     * 
+     * <pre>
+     * Example 1:
+     * 
+     * List<User> testList = new ArrayList<User>();
+     * testList.add(new User(2L));
+     * testList.add(new User(5L));
+     * testList.add(new User(5L));
+     * 
+     * Set<Long> fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
+     * LOGGER.info(JsonUtil.format(fieldValueCollection));
+     * 
+     * 输出:
+     * 
+     * [
+        2,
+        5
+        ]
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 以 {@link LinkedHashSet}存储,一定程度上可以按照元素顺序返回
+     * </p>
+     * 
      *
      * @param <T>
      *            the generic type
@@ -594,10 +619,10 @@ public final class CollectionsUtil{
     //*****************************************************************************************
 
     /**
-     * Finds the first element in the given collection which matches the given predicate.
+     * 找到 <code>objectCollection</code>中,第一个 <code>propertyName</code>属性名称 值是 <code>value</code>对应的元素.
      * 
      * <p>
-     * If the input collection or predicate is null, or no element of the collection matches the predicate, null is returned.
+     * 如果 collection or predicate是null, 或者 collection中没有相关元素匹配 predicate,将返回null.
      * </p>
      *
      * @param <O>
@@ -607,9 +632,9 @@ public final class CollectionsUtil{
      * @param objectCollection
      *            the object collection
      * @param propertyName
-     *            the property name
+     *            指定的属性名称
      * @param value
-     *            the value
+     *            指定的值
      * @return the first element of the collection which matches the predicate or null if none could be found
      * @see IterableUtils#find(Iterable, Predicate)
      */

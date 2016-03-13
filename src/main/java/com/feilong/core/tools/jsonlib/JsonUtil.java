@@ -25,17 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.sf.ezmorph.MorpherRegistry;
-import net.sf.ezmorph.object.DateMorpher;
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.processors.JsonValueProcessor;
-import net.sf.json.util.CycleDetectionStrategy;
-import net.sf.json.util.JSONUtils;
-import net.sf.json.util.PropertySetStrategy;
-
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -52,6 +41,17 @@ import com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
 import com.feilong.core.tools.jsonlib.util.ArrayContainsPropertyNamesPropertyFilter;
 import com.feilong.core.tools.jsonlib.util.PropertyStrategyWrapper;
 import com.feilong.core.util.Validator;
+
+import net.sf.ezmorph.MorpherRegistry;
+import net.sf.ezmorph.object.DateMorpher;
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
+import net.sf.json.util.CycleDetectionStrategy;
+import net.sf.json.util.JSONUtils;
+import net.sf.json.util.PropertySetStrategy;
 
 /**
  * json工具类.
@@ -119,10 +119,8 @@ public final class JsonUtil{
      */
     static{
         // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
-        DateMorpher dateMorpher = new DateMorpher(new String[] {
-            DatePattern.COMMON_DATE_AND_TIME,
-            DatePattern.COMMON_TIME,
-            DatePattern.COMMON_DATE });
+        DateMorpher dateMorpher = new DateMorpher(
+                        new String[] { DatePattern.COMMON_DATE_AND_TIME, DatePattern.COMMON_TIME, DatePattern.COMMON_DATE });
 
         // 注册器
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
@@ -519,8 +517,8 @@ public final class JsonUtil{
      * @see net.sf.json.util.JSONUtils#isArray(Object)
      * @see java.lang.Class#isEnum()
      * @see net.sf.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
-     * @see org.apache.commons.collections.IteratorUtils#toList(Iterator)
-     * @see org.apache.commons.collections.IteratorUtils#toList(Iterator, int)
+     * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator)
+     * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator, int)
      * @see net.sf.json.JSONSerializer#toJSON(Object)
      */
     public static JSON toJSON(Object obj,JsonConfig jsonConfig){

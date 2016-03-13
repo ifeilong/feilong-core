@@ -174,6 +174,7 @@
 			仅仅 统一下版本
 			feilong platform 不直接使用这个jar
 		-->
+		<!-- -->
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>

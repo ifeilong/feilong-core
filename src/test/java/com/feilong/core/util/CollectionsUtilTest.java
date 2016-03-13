@@ -206,9 +206,6 @@ public class CollectionsUtilTest{
         testList.add(new User(5L));
 
         Set<Long> fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
-        fieldValueCollection.add(7L);
-        fieldValueCollection.add(8L);
-        fieldValueCollection.add(5L);
         LOGGER.info(JsonUtil.format(fieldValueCollection));
     }
 

@@ -99,10 +99,11 @@ public final class Validator{
      *         如果是empty也返回true<br>
      *         其他情况返回false<br>
      *         如果不是上述类型,不判断empty,返回false
-     * @see org.apache.commons.collections.CollectionUtils#isEmpty(Collection)
-     * @see org.apache.commons.collections.CollectionUtils#isNotEmpty(Collection)
-     * @see org.apache.commons.collections.MapUtils#isEmpty(Map)
-     * @see org.apache.commons.collections.MapUtils#isNotEmpty(Map)
+     * @see org.apache.commons.collections4.CollectionUtils#sizeIsEmpty(Object)
+     * @see org.apache.commons.collections4.CollectionUtils#isEmpty(Collection)
+     * @see org.apache.commons.collections4.CollectionUtils#isNotEmpty(Collection)
+     * @see org.apache.commons.collections4.MapUtils#isEmpty(Map)
+     * @see org.apache.commons.collections4.MapUtils#isNotEmpty(Map)
      * @see org.apache.commons.lang.ArrayUtils#isEmpty(byte[])
      * @see org.apache.commons.lang.ArrayUtils#isEmpty(boolean[])
      * @see org.apache.commons.lang.ArrayUtils#isEmpty(char[])
@@ -183,10 +184,10 @@ public final class Validator{
      *         如果是空也返回false<br>
      *         其他情况返回true<br>
      *         如果不是上述类型,不判断empty,返回true
-     * @see org.apache.commons.collections.CollectionUtils#isEmpty(Collection)
-     * @see org.apache.commons.collections.CollectionUtils#isNotEmpty(Collection)
-     * @see org.apache.commons.collections.MapUtils#isEmpty(Map)
-     * @see org.apache.commons.collections.MapUtils#isNotEmpty(Map)
+     * @see org.apache.commons.collections4.CollectionUtils#isEmpty(Collection)
+     * @see org.apache.commons.collections4.CollectionUtils#isNotEmpty(Collection)
+     * @see org.apache.commons.collections4.MapUtils#isEmpty(Map)
+     * @see org.apache.commons.collections4.MapUtils#isNotEmpty(Map)
      * @see org.apache.commons.lang.ArrayUtils#isEmpty(byte[])
      * @see org.apache.commons.lang.ArrayUtils#isEmpty(boolean[])
      * @see org.apache.commons.lang.ArrayUtils#isEmpty(char[])
