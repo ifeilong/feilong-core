@@ -77,9 +77,7 @@ com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`,最常用�
 
 # 类和方法介绍: 
 
-## com.feilong.core.date 包,时间日期操作核心类:
-
-### date 包是feilong重要的组成部分,提供了常见的日期操作,包含以下5个class
+## com.feilong.core.date 包,时间日期操作核心类,提供了常见的日期操作,包含以下5个class
 
 Class | Description 
 :---- | :---------
@@ -127,7 +125,7 @@ con.setConnectTimeout(100*TimeInterval.MILLISECOND_PER_SECONDS);
 
 
 
-### util 包是feilong重要的组成部分,提供了常见的日期操作,包含以下8个class
+## com.feilong.core.util 包,提供了常见的日期操作,包含以下8个class
 
 Class | Description 
 :---- | :---------
@@ -136,12 +134,12 @@ Class | Description
 [MapUtil](src/main/java/com/feilong/core/util/MapUtil.java)  |  Map工具类
 [PropertiesUtil](src/main/java/com/feilong/core/util/PropertiesUtil.java)  | 操作properties配置文件
 [RegexUtil](src/main/java/com/feilong/core/util/RegexUtil.java)  | 正则表达式工具类
+[RegexPattern](src/main/java/com/feilong/core/util/RegexPattern.java)  | 正则表达式格式,内置常用正则表达式
 [RandomUtil](src/main/java/com/feilong/core/util/RandomUtil.java)  | 随机数工具类.
 [ResourceBundleUtil](src/main/java/com/feilong/core/util/ResourceBundleUtil.java)  | ResourceBundle 工具类
-[RegexPattern](src/main/java/com/feilong/core/util/RegexPattern.java)  | 正则表达式格式,内置常用正则表达式
 
 
-#### [Validator](src/main/java/com/feilong/core/util/Validator.java)  判断对象是否为null或者Empty
+### [Validator](src/main/java/com/feilong/core/util/Validator.java)  判断对象是否为null或者Empty
 
 当你需要判断字符串是否是null或者empty的时候, 比如
 
