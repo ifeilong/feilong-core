@@ -79,7 +79,7 @@ com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`,最常用�
 
 ## com.feilong.core.date 包,时间日期操作核心类:
 
-### date 包是feilong重要的组成部分,提供了常见的日期操作,包含以下五个class
+### date 包是feilong重要的组成部分,提供了常见的日期操作,包含以下5个class
 
 Class | Description 
 :---- | :---------
@@ -89,7 +89,7 @@ Class | Description
 [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java)  | 定义了常见的时间Pattern
 [TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java)  | 定义了常见的时间间隔
 
-* [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java) 内置常用的时间pattern
+#### [DatePattern](src/main/java/com/feilong/core/date/DatePattern.java) 内置常用的时间pattern
 
 当需要将时间转成指定格式的字符串的时候, 比如
 
@@ -107,7 +107,7 @@ DateUtil.date2String(new Date(), DatePattern.COMMON_DATE_AND_TIME)
 
 
 
-* [TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java) 定义了常见的时间间隔
+#### [TimeInterval](src/main/java/com/feilong/core/date/TimeInterval.java) 定义了常见的时间间隔
 
 当需要使用时间间隔的时候, 比如
 
@@ -127,7 +127,7 @@ con.setConnectTimeout(100*TimeInterval.MILLISECOND_PER_SECONDS);
 
 
 
-### util 包是feilong重要的组成部分,提供了常见的日期操作,包含以下五个class
+### util 包是feilong重要的组成部分,提供了常见的日期操作,包含以下8个class
 
 Class | Description 
 :---- | :---------
@@ -141,7 +141,7 @@ Class | Description
 [RegexPattern](src/main/java/com/feilong/core/util/RegexPattern.java)  | 正则表达式格式,内置常用正则表达式
 
 
-* [Validator](src/main/java/com/feilong/core/util/Validator.java)  判断对象是否为null或者Empty
+#### [Validator](src/main/java/com/feilong/core/util/Validator.java)  判断对象是否为null或者Empty
 
 当你需要判断字符串是否是null或者empty的时候, 比如
 
@@ -162,6 +162,7 @@ Validator除了可以判断字符串之外,还支持判断以下类型:
 
 Type | 判断依据 
 :---- | :---------
+null==Object  | 直接返回true
 `Collection`  | 使用其 `Collection#isEmpty()`
 `Map`  | 使用其 `Map#isEmpty()`
 `String`  |  使用 `String#trim().length()<=0`效率高;
@@ -174,6 +175,8 @@ Type | 判断依据
 `short[]`| 判断length==0
 `float[]`| 判断length==0
 `double[]`| 判断length==0
+
+该类同时还提供  `Validator.isNotNullOrEmpty(Object)`方法,判断对象是否不为Null或者Empty
 
 
 
