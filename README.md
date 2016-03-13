@@ -125,6 +125,58 @@ con.setConnectTimeout(100*TimeInterval.MILLISECOND_PER_SECONDS);
 
 替代,可以有效的避免由于手误带来的不必要的错误,并且代码可读性更高
 
+
+
+* util 包是feilong重要的组成部分,提供了常见的日期操作,包含以下五个class
+
+Class | Description 
+:---- | :---------
+[Validator](src/main/java/com/feilong/core/util/Validator.java)  | 判断对象是否为null或者Empty
+[CollectionsUtil](src/main/java/com/feilong/core/util/CollectionsUtil.java)  | Collection 工具类
+[MapUtil](src/main/java/com/feilong/core/util/MapUtil.java)  |  Map工具类
+[PropertiesUtil](src/main/java/com/feilong/core/util/PropertiesUtil.java)  | 操作properties配置文件
+[RegexUtil](src/main/java/com/feilong/core/util/RegexUtil.java)  | 正则表达式工具类
+[RandomUtil](src/main/java/com/feilong/core/util/RandomUtil.java)  | 随机数工具类.
+[ResourceBundleUtil](src/main/java/com/feilong/core/util/ResourceBundleUtil.java)  | ResourceBundle 工具类
+[RegexPattern](src/main/java/com/feilong/core/util/RegexPattern.java)  | 正则表达式格式,内置常用正则表达式
+
+
+* [Validator](src/main/java/com/feilong/core/util/Validator.java)  判断对象是否为null或者Empty
+
+当你需要判断字符串是否是null或者empty的时候, 比如
+
+```JAVA
+if (path == null || "".equals(path.trim())) return "";
+```
+
+可以使用  
+
+```JAVA
+if (Validator.isNullOrEmpty(path)) return "";
+```
+
+替代,可以有效的避免由于手误带来的不必要的错误,并且代码可读性更高,对于字符串的判断 方法等同于 `org.apache.commons.lang3.StringUtils.isBlank(CharSequence)`
+
+Validator除了可以判断字符串之外,还支持判断以下类型:
+
+
+Type | 判断依据 
+:---- | :---------
+`Collection`  | 使用其 `Collection#isEmpty()`
+`Map`  | 使用其 `Map#isEmpty()`
+`String`  |  使用 `String#trim().length()<=0`效率高;
+`Enumeration`  | 使用 `Enumeration#hasMoreElements()`
+`Iterator`  | 使用 `Iterator#hasNext()`
+`Object[]`  | 判断length==0;注:二维数组不管是primitive 还是包装类型,都instanceof Object[];
+`byte[]`| 判断length==0
+`char[]`| 判断length==0
+`int[]`| 判断length==0
+`short[]`| 判断length==0
+`float[]`| 判断length==0
+`double[]`| 判断length==0
+
+
+
 # 项目依赖
 
 ```XML
