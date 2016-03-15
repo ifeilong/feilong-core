@@ -19,6 +19,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.tools.jsonlib.JsonUtil;
+
 /**
  * The Class FeiLongVersionTest.
  *
@@ -31,10 +33,14 @@ public class FeiLongVersionTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(FeiLongVersionTest.class);
 
     /**
-     * Test get version.
+     * Test method for {@link com.feilong.core.FeiLongVersion#getVersion()}.
      */
     @Test
-    public void testGetVersion(){
+    public final void testGetVersion(){
         LOGGER.info(FeiLongVersion.getVersion());
+        //LOGGER.info(SpringVersion.getVersion());
+
+        Package pkg = FeiLongVersion.class.getPackage();
+        LOGGER.info(JsonUtil.format(pkg));
     }
 }
