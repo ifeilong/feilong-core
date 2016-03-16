@@ -21,11 +21,11 @@ import java.io.Reader;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -375,7 +375,7 @@ public final class ResourceBundleUtil{
      * 
      * @param baseName
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link LinkedHashMap}
+     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
      * @see #readAllPropertiesToMap(String, Locale)
      * @since 1.2.1
      */
@@ -392,7 +392,7 @@ public final class ResourceBundleUtil{
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param locale
      *            the locale 支持国际化
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link LinkedHashMap}
+     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
      * @see MapUtils#toMap(ResourceBundle)
@@ -407,7 +407,7 @@ public final class ResourceBundleUtil{
      *
      * @param resourceBundle
      *            the resource bundle
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link LinkedHashMap}
+     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
      * @see MapUtils#toMap(ResourceBundle)
@@ -418,12 +418,14 @@ public final class ResourceBundleUtil{
             throw new NullPointerException("resourceBundle can't be null/empty!");
         }
 
+        //注意 如果是 java.util.PropertyResourceBundle
+        //内部是使用 hashmap 来存储数据的, 那么这里的key 是乱序的 
         Enumeration<String> enumeration = resourceBundle.getKeys();
         if (Validator.isNullOrEmpty(enumeration)){
             return Collections.emptyMap();
         }
 
-        Map<String, String> propertyMap = new LinkedHashMap<String, String>();
+        Map<String, String> propertyMap = new TreeMap<String, String>();
         while (enumeration.hasMoreElements()){
             String key = enumeration.nextElement();
             String value = resourceBundle.getString(key);
