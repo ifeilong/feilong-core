@@ -60,14 +60,13 @@ import com.feilong.core.text.MessageFormatUtil;
  * <blockquote>
  * 参考 {@link PropertiesUtil}的注释
  * </blockquote>
- * 
+ *
  * @author feilong
+ * @version 1.4.0 2015年8月3日 上午3:18:50
  * @see MessageFormatUtil#format(String, Object...)
  * @see java.util.ResourceBundle
- * 
  * @see java.util.PropertyResourceBundle
  * @see java.util.ListResourceBundle
- * @version 1.4.0 2015年8月3日 上午3:18:50
  * @since 1.4.0
  */
 public final class ResourceBundleUtil{
@@ -399,6 +398,25 @@ public final class ResourceBundleUtil{
      */
     public static Map<String, String> readAllPropertiesToMap(String baseName,Locale locale){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
+        return readAllPropertiesToMap(resourceBundle);
+    }
+
+    /**
+     * 读取配置文件,将k/v 统统转成map(HashMap).
+     *
+     * @param resourceBundle
+     *            the resource bundle
+     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
+     * @see #getResourceBundle(String, Locale)
+     * @see java.util.ResourceBundle#getKeys()
+     * @see MapUtils#toMap(ResourceBundle)
+     * @since 1.5.0
+     */
+    public static Map<String, String> readAllPropertiesToMap(ResourceBundle resourceBundle){
+        if (Validator.isNullOrEmpty(resourceBundle)){
+            throw new NullPointerException("resourceBundle can't be null/empty!");
+        }
+
         Enumeration<String> enumeration = resourceBundle.getKeys();
         if (Validator.isNullOrEmpty(enumeration)){
             return Collections.emptyMap();
@@ -455,9 +473,26 @@ public final class ResourceBundleUtil{
 
     /**
      * 获得ResourceBundle({@link PropertyResourceBundle}),新增这个方法的初衷是为了能读取任意的资源(包括本地file等).
+     * 
+     * <p>
+     * 参数 <code>fileName</code>是路径全地址
+     * </p>
+     * 
+     * 
+     * <pre>
+     * 
+     * Example 1:
+    {@code
+    String mailReadFile = "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties";
+    
+        ResourceBundle resourceBundleRead = ResourceBundleUtil.getResourceBundleByFileName(mailReadFile);
+        String mailServerHost = resourceBundleRead.getString("incoming.pop.hostname");
+    }
+     * </pre>
      *
+     * 
      * @param fileName
-     *            the file name
+     *            Example 1: "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"
      * @return the resource bundle,may be null
      * @see com.feilong.core.io.FileUtil#getFileInputStream(String)
      * @see java.util.PropertyResourceBundle#PropertyResourceBundle(InputStream)
