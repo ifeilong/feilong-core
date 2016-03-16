@@ -21,6 +21,7 @@ import java.io.Reader;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
@@ -370,11 +371,11 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 读取配置文件,将k/v 统统转成map(HashMap).
+     * 读取配置文件,将k/v 统统转成map.
      * 
      * @param baseName
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
+     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link LinkedHashMap}
      * @see #readAllPropertiesToMap(String, Locale)
      * @since 1.2.1
      */
@@ -385,13 +386,13 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 读取配置文件,将k/v 统统转成map(HashMap).
+     * 读取配置文件,将k/v 统统转成map.
      * 
      * @param baseName
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param locale
      *            the locale 支持国际化
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
+     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link LinkedHashMap}
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
      * @see MapUtils#toMap(ResourceBundle)
@@ -402,11 +403,11 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 读取配置文件,将k/v 统统转成map(HashMap).
+     * 读取配置文件,将k/v 统统转成map.
      *
      * @param resourceBundle
      *            the resource bundle
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
+     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link LinkedHashMap}
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
      * @see MapUtils#toMap(ResourceBundle)
@@ -422,7 +423,7 @@ public final class ResourceBundleUtil{
             return Collections.emptyMap();
         }
 
-        Map<String, String> propertyMap = new HashMap<String, String>();
+        Map<String, String> propertyMap = new LinkedHashMap<String, String>();
         while (enumeration.hasMoreElements()){
             String key = enumeration.nextElement();
             String value = resourceBundle.getString(key);
