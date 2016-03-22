@@ -19,13 +19,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.processors.JsonValueProcessor;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,14 +38,16 @@ import com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.processors.JsonValueProcessor;
+
 /**
  * The Class JsonlibTest.
  * 
  * @author feilong
  * @version 1.0.7 2014-6-25 15:31:11
- * @deprecated
  */
-@Deprecated
 public class JsonUtilTest extends BaseJsonTest{
 
     /** The Constant LOGGER. */
@@ -106,6 +105,14 @@ public class JsonUtilTest extends BaseJsonTest{
     @Test
     public void testJsonString(){
         LOGGER.info(JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST));
+    }
+
+    @Test
+    public void testJsonString11(){
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        map.put("ID", 4616189619433466044L);
+
+        LOGGER.info("{}", JsonUtil.format(map));
     }
 
     /**
