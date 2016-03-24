@@ -103,6 +103,34 @@ public class CollectionsUtilTest{
     }
 
     /**
+     * Test group one.
+     */
+    @Test
+    public void testGroupOne(){
+        List<User> testList = new ArrayList<User>();
+        testList.add(new User("张飞", 23));
+        testList.add(new User("刘备", 25));
+        testList.add(new User("刘备", 25));
+
+        Map<String, User> map = CollectionsUtil.groupOne(testList, "name");
+        LOGGER.info(JsonUtil.format(map));
+    }
+
+    /**
+     * Test group.
+     */
+    @Test
+    public void testGroup(){
+        List<User> testList = new ArrayList<User>();
+        testList.add(new User("张飞", 23));
+        testList.add(new User("刘备", 25));
+        testList.add(new User("刘备", 25));
+
+        Map<String, List<User>> map = CollectionsUtil.group(testList, "name");
+        LOGGER.info(JsonUtil.format(map));
+    }
+
+    /**
      * Test select.
      */
     @Test
@@ -209,6 +237,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(fieldValueCollection));
     }
 
+    /**
+     * Test avg.
+     */
     @Test
     public void testAvg(){
         List<User> list = new ArrayList<User>();
@@ -221,6 +252,9 @@ public class CollectionsUtilTest{
 
     }
 
+    /**
+     * Test avg2.
+     */
     @Test
     public void testAvg2(){
         List<User> list = new ArrayList<User>();
@@ -238,6 +272,9 @@ public class CollectionsUtilTest{
         LOGGER.info("{}", JsonUtil.format(map));
     }
 
+    /**
+     * Test sum.
+     */
     @Test
     public void testSum(){
         List<User> list = new ArrayList<User>();
@@ -250,6 +287,9 @@ public class CollectionsUtilTest{
         LOGGER.info("" + number);
     }
 
+    /**
+     * Test sum2.
+     */
     @Test
     public void testSum2(){
         List<User> list = new ArrayList<User>();

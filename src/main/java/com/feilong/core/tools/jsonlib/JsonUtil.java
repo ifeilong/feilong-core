@@ -54,7 +54,25 @@ import net.sf.json.util.JSONUtils;
 import net.sf.json.util.PropertySetStrategy;
 
 /**
- * json工具类.
+ * json处理工具类.
+ * 
+ * <h3>提供以下主要方法:</h3>
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">方法:</th>
+ * <th align="left">说明:</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link #format(Object)}</td>
+ * <td>将对象格式化成json字符串</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link #toJSON(Object)}</td>
+ * <td>把实体Bean、Map对象、数组、列表集合转换成Json串.</td>
+ * </tr>
+ * </table>
+ * </blockquote>
  * 
  * <h3>依赖于下面的jar:</h3>
  * 
@@ -64,11 +82,16 @@ import net.sf.json.util.PropertySetStrategy;
  * {@code
  * <groupId>net.sf.json-lib</groupId>
  * <artifactId>json-lib</artifactId>
+ * }
  * 
- * 如果要使用xml部分功能,需要
+ * 如果要使用 xml部分功能,需要
+ * 
+ * {@code
  * <groupId>xom</groupId> 
  * <artifactId>xom</artifactId>
  * }
+ * 
+ * 目前本工具类不再提供处理XML的方法, 请使用 xstream或者原生的XML来处理
  * </pre>
  * 
  * </blockquote>
@@ -174,8 +197,33 @@ public final class JsonUtil{
     }
 
     /**
-     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.
-     *
+     * 将对象格式化成json字符串.
+     * 
+     * <h3>关于 <code>indent</code>缩进:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 默认使用 toString(4,4) 缩进
+     * </p>
+     * 
+     * <p>
+     * 如果不需要 <code>indent</code>缩进,你可以调用 {@link #format(Object, int, int)}或者 {@link #format(Object, JsonConfig, int, int)}或者
+     * {@link #format(Object, JsonFormatConfig, int, int)}
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>format map的时候或者 json转成对象/数组/map等 注意点:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * see {@link net.sf.json.JSONObject#_fromMap(Map, JsonConfig)}
+     * </p>
+     * <ul>
+     * <li>key不能是null</li>
+     * <li>key也不能是"null" 字符串</li>
+     * </ul>
+     * </blockquote>
+     * 
      * @param obj
      *            任何对象
      * @return the string
@@ -241,8 +289,8 @@ public final class JsonUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>如果value是isPrimitiveOrWrapper类型, 那么会直接取到值设置到新的simpleMap中</li>
-     * <li>否则使用{@link String#valueOf(Object)} 转换到simpleMap中</li>
+     * <li>如果value是isPrimitiveOrWrapper类型,那么会直接取到值设置到新的simpleMap中</li>
+     * <li>否则使用{@link String#valueOf(Object)}转换到simpleMap中</li>
      * </ul>
      * </blockquote>.
      *

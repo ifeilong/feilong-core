@@ -980,6 +980,44 @@ public final class CollectionsUtil{
 
     /**
      * Group 对象(如果propertyName 存在相同的值,那么这些值,将会以list的形式 put到map中).
+     * 
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+      * 
+      * {@code
+        List<User> testList = new ArrayList<User>();
+        testList.add(new User("张飞", 23));
+        testList.add(new User("刘备", 25));
+        testList.add(new User("刘备", 25));
+    
+        Map<String, List<User>> map = CollectionsUtil.group(testList, "name");
+        LOGGER.info(JsonUtil.format(map));
+      * }
+      * 
+      * 返回 :
+      * 
+    {
+        "张飞": [        {
+            "age": 23,
+            "name": "张飞"
+        }],
+        "刘备":         [
+                        {
+                "age": 25,
+                "name": "刘备"
+            },
+                        {
+                "age": 25,
+                "name": "刘备"
+            }
+        ]
+    }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            注意,此处的T其实是 Object 类型, 需要区别对待,比如从excel中读取的类型是String,那么就不能简简单单的使用Integer来接收, 因为不能强制转换
@@ -1090,7 +1128,46 @@ public final class CollectionsUtil{
 
     /**
      * Group one(map只put第一个匹配的元素).
-     *
+     * 
+     * <p>
+     * 返回的map,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象
+     * </p>
+     * 
+     * <p>
+     * 间接的可以做到基于某个属性值去重的效果
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+      * 
+      * {@code
+      *     List<User> testList = new ArrayList<User>();
+      *     testList.add(new User("张飞", 23));
+      *     testList.add(new User("刘备", 25));
+      *     testList.add(new User("刘备", 25));
+      * 
+      *     Map<String, User> map = CollectionsUtil.groupOne(testList, "name");
+      *     LOGGER.info(JsonUtil.format(map));
+      * }
+      * 
+      * 返回 :
+      * 
+      * {
+         "张飞":         {
+             "age": 23,
+             "name": "张飞"
+         },
+         "刘备":         {
+             "age": 25,
+             "name": "刘备"
+         }
+     }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param <O>
@@ -1211,7 +1288,7 @@ public final class CollectionsUtil{
         Number number = CollectionsUtil.avg(list, 2, "id");
         LOGGER.info("" + number);
         
-        返回 :4.00
+                        返回 :4.00
      * </pre>
      *
      * @param <O>
