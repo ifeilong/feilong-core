@@ -113,13 +113,14 @@ import com.feilong.core.util.Validator;
  * </blockquote>
  * 
  * 
- * <h3>关于propertyName:</h3>
+ * <h3><a name="propertyName">关于propertyName</a></h3>
  * 
  * <blockquote>
  * 
  * <pre>
  * {@code
  * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
+ * 
  * Company c = new Company();
  * c.setName("Simple");
  * }
@@ -128,13 +129,12 @@ import com.feilong.core.util.Validator;
  * <ul>
  * <li>
  * <p>
- * Simple类型
+ * <b>Simple类型(简单类型,如String Int)</b>
  * </p>
  * 
  * <pre>
 {@code
  * 对于Simple类型,参数二直接是属性名即可
- * //Simple
  * LOGGER.debug(BeanUtils.getProperty(c, "name"));
 }
  * </pre>
@@ -143,7 +143,7 @@ import com.feilong.core.util.Validator;
  * 
  * <li>
  * <p>
- * Map类型
+ * <b>Map类型</b>
  * </p>
  * 
  * <pre>
@@ -151,7 +151,7 @@ import com.feilong.core.util.Validator;
  * 对于Map类型,则需要以“属性名(key值)”的形式
  * 
  *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
- *     HashMap am = new HashMap();
+ *     Map am = new HashMap();
  *     am.put("1","234-222-1222211");
  *     am.put("2","021-086-1232323");
  *     BeanUtils.setProperty(c,"telephone",am);
@@ -162,13 +162,15 @@ import com.feilong.core.util.Validator;
  * </li>
  * <li>
  * <p>
- * Indexed
+ * <b>索引类型(Indexed),如 数组 arrayList</b>
  * </p>
  * 
  * <pre>
 {@code
  * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
+ * 
  *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
+ *     
  *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
  *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
 }
@@ -178,7 +180,7 @@ import com.feilong.core.util.Validator;
  * 
  * <li>
  * <p>
- * 组合(nest)
+ * <b>组合(nest)</b>
  * </p>
  * 
  * <pre>
@@ -435,7 +437,7 @@ public final class BeanUtil{
      * @param bean
      *            Bean on which setting is to be performed
      * @param propertyName
-     *            Property name (can be nested/indexed/mapped/combo)
+     *            Property name (can be nested/indexed/mapped/combo),参见 {@link <a href="#propertyName">propertyName</a>}
      * @param value
      *            Value to be set
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)

@@ -318,29 +318,39 @@ public final class CollectionsUtil{
      * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
      * </p>
      * 
+     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre>
-     * List&lt;User&gt; objectCollection = new ArrayList&lt;User&gt;();
-     * objectCollection.add(new User(&quot;张飞&quot;, 23));
-     * objectCollection.add(new User(&quot;关羽&quot;, 24));
-     * objectCollection.add(new User(&quot;刘备&quot;, 25));
      * 
-     * List&lt;String&gt; list = new ArrayList&lt;String&gt;();
-     * list.add(&quot;张飞&quot;);
-     * list.add(&quot;刘备&quot;);
+     * {@code
      * 
-     * List&lt;User&gt; removeAll = CollectionsUtil.removeAll(objectCollection, &quot;name&quot;, list);
-     * LOGGER.info(JsonUtil.format(removeAll));
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+    
+        List<String> list = new ArrayList<String>();
+        list.add("张飞");
+        list.add("刘备");
+    
+        List<User> removeAll = CollectionsUtil.removeAll(objectCollection, "name", list);
+        LOGGER.info(JsonUtil.format(removeAll));
+     * }
+     * 
+     * 返回:
+     * 
+    [    {
+        "age": 24,
+        "name": "关羽"
+    }]
+     * 
      * </pre>
      * 
-     * <p>
-     * 返回的集合中,将只包含 关羽 对象
-     * </p>
-     * 
      * </blockquote>
+     * 
      *
      * @param <T>
      *            the generic type
@@ -361,6 +371,78 @@ public final class CollectionsUtil{
      */
     public static <T, V> List<T> removeAll(Collection<T> objectCollection,String propertyName,Collection<V> values){
         Collection<T> removeCollection = select(objectCollection, propertyName, values);
+        return removeAll(objectCollection, removeCollection);
+    }
+
+    /**
+     * 从 <code>collection</code>中 删除所有的 <code>propertyName</code> 值是 <code>value</code>的对象.返回剩余的集合 <span
+     * style="color:red">(原集合对象不变)</span>.
+     * 
+     * <p>
+     * 该方法等同于 {@link #selectRejected(Collection, String, Object)}
+     * </p>
+     * 
+     * <p>
+     * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.removeAll(remove);</code>.
+     * </p>
+     * 
+     * <p>
+     * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * 
+     * {@code
+     * 
+     *     List<User> objectCollection = new ArrayList<User>();
+     *     objectCollection.add(new User("张飞", 23));
+     *     objectCollection.add(new User("关羽", 24));
+     *     objectCollection.add(new User("刘备", 25));
+     * 
+     *     List<User> removeAll = CollectionsUtil.removeAll(objectCollection, "name", "刘备");
+     *     LOGGER.info(JsonUtil.format(removeAll));
+     * }
+     * 
+     * 返回:
+     * 
+     * [
+                {
+            "age": 23,
+            "name": "张飞"
+        },
+                {
+            
+            "age": 24,
+            "name": "关羽"
+        }
+    ]
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            the property name
+     * @param value
+     *            the value
+     * @return a <code>List</code> containing all the elements of <code>c</code> except
+     *         any elements that also occur in <code>remove</code>.
+     * @see #select(Collection, String, Collection)
+     * @see #removeAll(Collection, Collection)
+     * @since Commons Collections 4
+     * @since 1.5.0
+     */
+    public static <T, V> List<T> removeAll(Collection<T> objectCollection,String propertyName,V value){
+        Collection<T> removeCollection = select(objectCollection, propertyName, value);
         return removeAll(objectCollection, removeCollection);
     }
 
