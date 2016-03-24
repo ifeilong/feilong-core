@@ -84,7 +84,7 @@ import com.feilong.core.util.Validator;
  * <blockquote>
  * <ul>
  * <li>getQuery() 返回此 URI 的已解码的查询组成部分。</li>
- * <li>getRawQuery() 返回此 URI 的原始查询组成部分。 URI 的查询组成部分（如果定义了）只包含合法的 URI 字符。</li>
+ * <li>getRawQuery() 返回此 URI 的原始查询组成部分。 URI 的查询组成部分(如果定义了)只包含合法的 URI 字符。</li>
  * </ul>
  * </blockquote>
  * 
@@ -221,7 +221,8 @@ public final class URIUtil{
      * @see URI#create(String)
      * @see #encodeUri(String, String)
      * @see <a
-     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
+     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">
+     *      java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
      */
     public static URI create(String uriString,String charsetType){
         try{
@@ -269,7 +270,8 @@ public final class URIUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return the string
      * @see <a
-     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
+     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">
+     *      java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
      * @see URI#create(String)
      * @see ParamUtil#addParameterArrayValueMap(String, Map, String)
      * @since 1.4.0

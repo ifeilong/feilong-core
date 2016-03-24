@@ -362,7 +362,7 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(paramNameList)){// 如果 paramNameList是null原样返回
             return uriString;
         }
-        String queryString = uri.getRawQuery();// 返回此URI的原始查询组成部分。 URI的查询组成部分（如果定义了）只包含合法的 URI字符。
+        String queryString = uri.getRawQuery();// 返回此URI的原始查询组成部分。 URI的查询组成部分(如果定义了)只包含合法的 URI字符。
         return removeParameterList(uriString, queryString, paramNameList, charsetType);
     }
 
@@ -448,7 +448,7 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(paramNameList)){ // 如果 paramNameList 是null 原样返回
             return uriString;
         }
-        String queryString = uri.getRawQuery(); // 返回此 URI的原始查询组成部分。 URI的查询组成部分（如果定义了）只包含合法的 URI字符。
+        String queryString = uri.getRawQuery(); // 返回此 URI的原始查询组成部分。 URI的查询组成部分(如果定义了)只包含合法的 URI字符。
         return retentionParamList(uriString, queryString, paramNameList, charsetType);
     }
 
@@ -785,7 +785,8 @@ public final class ParamUtil{
      *            the charset type,pls use {@link CharsetType}
      * @return the string
      * @see <a
-     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
+     *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">
+     *      java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
      * @since 1.4.0
      */
     private static String decodeAndEncode(String value,String charsetType){

@@ -90,13 +90,13 @@ public class PropertyUtilTest{
         Date now = new Date();
         a.setDate(now);
 
-        List list = new ArrayList();
+        List<User> list = new ArrayList<User>();
         list.add(a);
         list.add(a);
         list.add(a);
 
         Object property = PropertyUtil.getProperty(list, "[0].id");
-        LOGGER.info("" + property);
+        LOGGER.info("" + PropertyUtil.getProperty(list, "[0].id"));
         LOGGER.info("map:{}", JsonUtil.format(property));
     }
 }

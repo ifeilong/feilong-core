@@ -70,8 +70,8 @@ import com.feilong.core.util.Validator;
  * 
  * <blockquote>
  * <ul>
- * <li>{@link StringBuffer} 字符串变量（线程安全）</li>
- * <li>{@link StringBuilder} 字符串变量（非线程安全）</li>
+ * <li>{@link StringBuffer} 字符串变量(线程安全)</li>
+ * <li>{@link StringBuilder} 字符串变量(非线程安全)</li>
  * <li>{@link String} 字符串常量</li>
  * <li>在大部分情况下 {@link StringBuffer} {@code >} {@link String}</li>
  * <li>在大部分情况下 {@link StringBuilder} {@code >} {@link StringBuffer}</li>
@@ -378,7 +378,7 @@ public final class StringUtil{
      *            value
      * @param prefix
      *            前缀
-     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true；否则返回 false.还要注意,如果参数是空字符串,或者等于此 String 对象（用 equals(Object) 方法确定）,则返回 true.
+     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true；否则返回 false.还要注意,如果参数是空字符串,或者等于此 String 对象(用 equals(Object) 方法确定),则返回 true.
      */
     public static boolean startsWith(Object value,String prefix){
         return ConvertUtil.toString(value).startsWith(prefix);
@@ -885,17 +885,17 @@ public final class StringUtil{
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%d</td>
-     * <td>整数类型（十进制）</td>
+     * <td>整数类型(十进制)</td>
      * <td>99</td>
      * </tr>
      * <tr valign="top">
      * <td>%x</td>
-     * <td>整数类型（十六进制）</td>
+     * <td>整数类型(十六进制)</td>
      * <td>FF</td>
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%o</td>
-     * <td>整数类型（八进制）</td>
+     * <td>整数类型(八进制)</td>
      * <td>77</td>
      * </tr>
      * <tr valign="top">
@@ -915,7 +915,7 @@ public final class StringUtil{
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%g</td>
-     * <td>通用浮点类型（f和e类型中较短的）</td>
+     * <td>通用浮点类型(f和e类型中较短的)</td>
      * <td></td>
      * </tr>
      * <tr valign="top">
@@ -935,7 +935,7 @@ public final class StringUtil{
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%tx</td>
-     * <td>日期与时间类型（x代表不同的日期与时间转换符</td>
+     * <td>日期与时间类型(x代表不同的日期与时间转换符</td>
      * <td></td>
      * </tr>
      * </table>

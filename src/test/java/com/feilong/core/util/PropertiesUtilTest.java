@@ -58,7 +58,7 @@ public class PropertiesUtilTest{
 //	}
 //
 //	/**
-//	 * 更新（或插入）一对properties信息(主键及其键值) 如果该主键已经存在,更新该主键的值； 如果该主键不存在,则插件一对键值.
+//	 * 更新(或插入)一对properties信息(主键及其键值) 如果该主键已经存在,更新该主键的值； 如果该主键不存在,则插件一对键值.
 //	 * 
 //	 * @param keyname
 //	 *            键名
@@ -72,7 +72,7 @@ public class PropertiesUtilTest{
 //			OutputStream fos = new FileOutputStream(profilepath);
 //			props.setProperty(keyname, keyvalue);
 //			// 以适合使用 load 方法加载到 Properties 表中的格式,
-//			// 将此 Properties 表中的属性列表（键和元素对）写入输出流
+//			// 将此 Properties 表中的属性列表(键和元素对)写入输出流
 //			props.store(fos, "Update '" + keyname + "' value");
 //		}catch (IOException e){
 //			throw new UncheckedIOException(e);
@@ -95,7 +95,7 @@ public class PropertiesUtilTest{
 //			OutputStream fos = new FileOutputStream(profilepath);
 //			props.setProperty(keyname, keyvalue);
 //			// 以适合使用 load 方法加载到 Properties 表中的格式,
-//			// 将此 Properties 表中的属性列表（键和元素对）写入输出流
+//			// 将此 Properties 表中的属性列表(键和元素对)写入输出流
 //			props.store(fos, "Update '" + keyname + "' value");
 //		}catch (IOException e){
 //			throw new UncheckedIOException(e);

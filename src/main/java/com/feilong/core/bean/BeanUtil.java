@@ -101,12 +101,9 @@ import com.feilong.core.util.Validator;
  * <blockquote>
  * 
  * <pre>
- * 两者功能相似
- * 
- * 两者的区别点在于:
+ * 两者功能相似,区别点在于:
  * copyProperty 不支持目标bean是索引类型,但是支持bean有索引类型的setter方法
  * copyProperty 不支持目标bean是Map类型,但是支持bean有Map类型的setter方法
- * 
  * 
  * 如果我们只是为bean的属性赋值的话,使用{@link BeanUtils#copyProperty(Object, String, Object)}就可以了;
  * 而{@link BeanUtils#setProperty(Object, String, Object)}方法是实现  {@link BeanUtils#populate(Object,Map)}机制的基础,也就是说如果我们需要自定义实现populate()方法,那么我们可以override {@link BeanUtils#setProperty(Object, String, Object)}方法.
@@ -125,32 +122,74 @@ import com.feilong.core.util.Validator;
  * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
  * Company c = new Company();
  * c.setName("Simple");
- *  
+ * }
+ * </pre>
+ * 
+ * <ul>
+ * <li>
+ * <p>
+ * Simple类型
+ * </p>
+ * 
+ * <pre>
+{@code
  * 对于Simple类型,参数二直接是属性名即可
  * //Simple
  * LOGGER.debug(BeanUtils.getProperty(c, "name"));
- *  
- * 对于Map类型,则需要以“属性名（key值）”的形式
- * //Map
+}
+ * </pre>
+ * 
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * Map类型
+ * </p>
+ * 
+ * <pre>
+{@code
+ * 对于Map类型,则需要以“属性名(key值)”的形式
+ * 
  *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
  *     HashMap am = new HashMap();
  *     am.put("1","234-222-1222211");
  *     am.put("2","021-086-1232323");
  *     BeanUtils.setProperty(c,"telephone",am);
  * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
- *  
+}
+ * </pre>
+ * 
+ * </li>
+ * <li>
+ * <p>
+ * Indexed
+ * </p>
+ * 
+ * <pre>
+{@code
  * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
- * //index
  *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
  *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
  *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
- *  
- * 当然这3种类也可以组合使用啦！
- * //nest
- *     LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
- * }
+}
  * </pre>
  * 
+ * </li>
+ * 
+ * <li>
+ * <p>
+ * 组合(nest)
+ * </p>
+ * 
+ * <pre>
+ * {@code
+ * 当然这3种类也可以组合使用啦！
+ * LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
+    }
+ * </pre>
+ * 
+ * </li>
+ * </ul>
  * </blockquote>
  * 
  * @author feilong
@@ -459,7 +498,7 @@ public final class BeanUtil{
      * </p>
      * 
      * <p>
-     * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话（即自定义类）,可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用,<br>
+     * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话(即自定义类),可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用,<br>
      * 是为那些本身没有实现clone方法的类准备的 
      * </p>
      *
@@ -529,7 +568,7 @@ public final class BeanUtil{
      * 把properties/map里面的值 <code>populate</code> (填充)到bean中.
      * 
      * <p>
-     * 将Map<Key,value>中的以值（String或String[]）转换到目标bean对应的属性中,Key是目标bean的属性名。 
+     * 将Map<Key,value>中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名。 
      * </p>
      * 
      * <h3>注意:</h3>

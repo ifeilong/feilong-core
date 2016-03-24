@@ -15,10 +15,10 @@
  */
 package com.feilong.core.tools.jsonlib;
 
+import com.feilong.core.lang.CharsetType;
+
 import net.sf.json.JSON;
 import net.sf.json.xml.XMLSerializer;
-
-import com.feilong.core.lang.CharsetType;
 
 /**
  * xml功能

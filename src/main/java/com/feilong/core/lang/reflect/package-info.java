@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 /**
- *反射工具包,对 {@code java.lang.reflect}包的封装
- * @author feilong 
- * @version 1.0.7 2014年7月14日 下午5:24:41 
+ * 反射工具包,对 {@code java.lang.reflect}包的封装
+ * 
+ * @author feilong
+ * @version 1.0.7 2014年7月14日 下午5:24:41
  * @see org.apache.commons.lang3.reflect
  * @see "org.springframework.util.ReflectionUtils"
  * @since 1.0.7

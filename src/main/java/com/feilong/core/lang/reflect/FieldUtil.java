@@ -55,7 +55,7 @@ import com.feilong.core.util.Validator;
  * <td>{@link Class#getDeclaredFields()}</td>
  * <td>返回 Field 对象的一个数组,这些对象反映此 Class 对象所表示的类或接口所声明的<span style="color:green">所有字段</span>。
  * <p>
- * 包括<span style="color:green">公共、保护、默认（包）访问和私有字段</span>, <span style="color:red">但不包括继承的字段</span>。
+ * 包括<span style="color:green">公共、保护、默认(包)访问和私有字段</span>, <span style="color:red">但不包括继承的字段</span>。
  * </p>
  * <b>返回数组中的元素没有排序,也没有任何特定的顺序。</b><br>
  * 如果该类或接口不声明任何字段,或者此 Class 对象表示一个基本类型、一个数组类或 void,则此方法返回一个长度为 0 的数组。</td>

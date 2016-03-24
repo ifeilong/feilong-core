@@ -132,10 +132,12 @@ public class FilenameUtilTest{
         assertEquals("E:/", FilenameUtil.getFileTopParentName("E:/"));
         assertEquals(
                         "mp2-product",
-                        FilenameUtil.getFileTopParentName("mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
+                        FilenameUtil.getFileTopParentName(
+                                        "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
         assertEquals(
                         "mp2-product",
-                        FilenameUtil.getFileTopParentName("mp2-product\\mp2-product-impl\\src\\..\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
+                        FilenameUtil.getFileTopParentName(
+                                        "mp2-product\\mp2-product-impl\\src\\..\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
         assertEquals("package-info.java", FilenameUtil.getFileTopParentName("package-info.java"));
     }
 }

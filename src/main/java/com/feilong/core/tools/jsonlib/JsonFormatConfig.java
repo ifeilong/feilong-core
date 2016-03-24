@@ -68,7 +68,7 @@ public class JsonFormatConfig{
      * @see net.sf.json.processors.JsonValueProcessor
      * @see com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor
      * @see com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
-     * */
+     */
     private Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap;
 
     /**

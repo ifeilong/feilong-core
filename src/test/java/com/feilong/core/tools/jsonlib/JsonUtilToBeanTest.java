@@ -24,9 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +35,9 @@ import com.feilong.test.Order;
 import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.test.UserInfo;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 /**
  * JsonUtil测试类 (C) 2009-9-11, jzj.
@@ -139,8 +139,9 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
 
         Object[] objArr = JsonUtil.toArray(json, MyBean.class, classMap);
         for (int i = 0; i < objArr.length; i++){
-            LOGGER.info(((MyBean) objArr[i]).getData().get(0).getClass() + " name = "
-                            + ((Person) ((MyBean) objArr[i]).getData().get(0)).getName());
+            LOGGER.info(
+                            ((MyBean) objArr[i]).getData().get(0).getClass() + " name = "
+                                            + ((Person) ((MyBean) objArr[i]).getData().get(0)).getName());
         }
         /*
          * print: class comm.test.Person name = get class comm.test.Person name = set
@@ -168,8 +169,9 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         classMap.put("data", Person.class);
         List list = JsonUtil.toList(json, MyBean.class, classMap);
         for (int i = 0; i < list.size(); i++){
-            LOGGER.info(((MyBean) list.get(i)).getData().get(0).getClass() + " name = "
-                            + ((Person) ((MyBean) list.get(i)).getData().get(0)).getName());
+            LOGGER.info(
+                            ((MyBean) list.get(i)).getData().get(0).getClass() + " name = "
+                                            + ((Person) ((MyBean) list.get(i)).getData().get(0)).getName());
         }
         /*
          * print: class comm.test.Person name = get class comm.test.Person name = set

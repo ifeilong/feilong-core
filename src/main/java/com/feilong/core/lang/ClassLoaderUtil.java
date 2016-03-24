@@ -81,7 +81,7 @@ import com.feilong.core.tools.jsonlib.JsonUtil;
  * 假设配置文件在 src/main/resources下面,比如 messages/feilong-core-message_en_US.properties,
  * </p>
  * <ul>
- * <li> {@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} 需要这么写
+ * <li>{@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} 需要这么写
  * <b>"/messages/feilong-core-message_en_US.properties"</b>, 路径可以写成相对路径或者绝对路径;<br>
  * 以 / 开头,则这样的路径是指定绝对路径, 如果不以 / 开头, 则路径是相对与这个class所在的包的</li>
  * <li>{@link java.lang.ClassLoader#getResourceAsStream(String) ClassLoader#getResourceAsStream(String)} 需要这么写

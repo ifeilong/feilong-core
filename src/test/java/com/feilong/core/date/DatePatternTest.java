@@ -62,7 +62,7 @@ public class DatePatternTest extends BaseDateUtilTest{
         map.put("yearAndMonth", DateUtil.date2String(NOW, DatePattern.YEAR_AND_MONTH));
 
         //yyyy/yyy/yy/y 显示为 2014/2014/14/4
-        //（3个y与4个y是一样的,为了便于理解多写成4个y）
+        //(3个y与4个y是一样的,为了便于理解多写成4个y)
 
         map.put("y", DateUtil.date2String(NOW, "y"));
         map.put("yy", DateUtil.date2String(NOW, DatePattern.yy));
@@ -70,15 +70,15 @@ public class DatePatternTest extends BaseDateUtilTest{
         map.put("yyyy", DateUtil.date2String(NOW, DatePattern.yyyy));
 
         //MMMM/MMM/MM/M 显示为 一月/一月/01/1
-        //（4个M显示全称,3个M显示缩写,不过中文显示是一样的,英文就是January和Jan）
+        //(4个M显示全称,3个M显示缩写,不过中文显示是一样的,英文就是January和Jan)
         map.put("M", DateUtil.date2String(NOW, "M"));
         map.put("MM", DateUtil.date2String(NOW, DatePattern.MM));
         map.put("MMM", DateUtil.date2String(NOW, "MMM"));
         map.put("MMMM", DateUtil.date2String(NOW, "MMMM"));
 
         //dddd/ddd/dd/d 显示为 星期三/周三(有的语言显示为“三”)/01/1
-        //（在英文中同M一样,4个d是全称,3个是简称；
-        //dddd/ddd表示星期几,dd/d表示几号）
+        //(在英文中同M一样,4个d是全称,3个是简称；
+        //dddd/ddd表示星期几,dd/d表示几号)
         map.put("d", DateUtil.date2String(NOW, "d"));
         map.put("dd", DateUtil.date2String(NOW, "dd"));
         map.put("ddd", DateUtil.date2String(NOW, "ddd"));

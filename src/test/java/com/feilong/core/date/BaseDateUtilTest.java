@@ -48,9 +48,8 @@ abstract class BaseDateUtilTest{
     static final Date           CURRENT_YEAR_END        = DateUtil.getLastDateOfThisYear(NOW);
 
     /** The current year end. */
-    static final Date           TESTDATE_20141231013024 = DateUtil.string2Date(
-                                                                        "2014-12-31 01:30:24.895",
-                                                                        DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND);
+    static final Date           TESTDATE_20141231013024 = DateUtil
+                    .string2Date("2014-12-31 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND);
 
     /**
      * Prints the.

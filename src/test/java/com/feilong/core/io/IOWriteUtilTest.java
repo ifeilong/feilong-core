@@ -59,7 +59,7 @@ public class IOWriteUtilTest{
      */
     @Test
     public void unescapeHtml2() throws Exception{
-        String a = "第572章 三十年后（大结局） *局";
+        String a = "第572章 三十年后(大结局) *局";
         String result = (String) MethodUtils.invokeExactStaticMethod(IOWriteUtil.class, "getFormatFilePath", a);
         LOGGER.info(result);
     }

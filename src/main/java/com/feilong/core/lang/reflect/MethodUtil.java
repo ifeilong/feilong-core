@@ -85,12 +85,12 @@ import com.feilong.core.tools.slf4j.Slf4jUtil;
  * <td>
  * 
  * <p>
- * 返回一个包含某些 Method 对象的数组,这些对象反映此 Class 对象所表示的类或接口（包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口）的<span style="color:green">公共(public)
+ * 返回一个包含某些 Method 对象的数组,这些对象反映此 Class 对象所表示的类或接口(包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口)的<span style="color:green">公共(public)
  * member</span>方法。(return all the (public) member methods inherited from the Object class)
  * </p>
  * 
  * <p>
- * 数组类返回从 Object 类继承的所有（公共）member 方法。
+ * 数组类返回从 Object 类继承的所有(公共)member 方法。
  * </p>
  * 
  * <b>返回数组中的元素没有排序,也没有任何特定的顺序。</b><br>
@@ -104,7 +104,7 @@ import com.feilong.core.tools.slf4j.Slf4jUtil;
  * <td>
  * 返回 Method 对象的一个数组,
  * <p>
- * 这些对象反映此 Class 对象表示的类或接口声明的所有方法,包括<span style="color:green">公共(public)、保护(protected)、默认（包）访问(default (package)
+ * 这些对象反映此 Class 对象表示的类或接口声明的所有方法,包括<span style="color:green">公共(public)、保护(protected)、默认(包)访问(default (package)
  * access)和私有方法(private)</span>,但 <span style="color:red">不包括继承(inherited)</span>的方法。
  * </p>
  * 如果该类声明带有相同参数类型的多个公共成员方法,则它们都包含在返回的数组中。

@@ -105,7 +105,7 @@ public final class InputStreamUtil{
             Reader reader = new InputStreamReader(inputStream, charsetName);
 
             // 缓冲 高效读取  bufferedReader 
-            // 包装所有其 read() 操作可能开销很高的 Reader（如 FileReader 和 InputStreamReader）.
+            // 包装所有其 read() 操作可能开销很高的 Reader(如 FileReader 和 InputStreamReader).
             return IOUtils.toBufferedReader(reader);
         }catch (UnsupportedEncodingException e){
             throw new UncheckedIOException(e);

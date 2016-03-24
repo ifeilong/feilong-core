@@ -17,14 +17,14 @@ package com.feilong.core.tools.jsonlib.processor;
 
 import java.math.BigDecimal;
 
-import net.sf.json.JsonConfig;
-import net.sf.json.processors.JsonValueProcessor;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.lang.NumberPattern;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.core.util.Validator;
+
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * The Class BigDecimalJsonValueProcessor.
@@ -39,7 +39,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
      * The number pattern.
      * 
      * @see com.feilong.core.lang.NumberPattern
-     * */
+     */
     private String numberPattern;
 
     /**

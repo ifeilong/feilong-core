@@ -1275,7 +1275,7 @@ public final class DateUtil{
      * 将 {@link Date} 转成 {@link Calendar},调用 {@link GregorianCalendar}.
      * 
      * <p>
-     * {@link Calendar#getInstance()}方法,返回用默认的地区和时区的当前日期和当前时间所初始化的GregorianCalendar（标准日历）,<br>
+     * {@link Calendar#getInstance()}方法,返回用默认的地区和时区的当前日期和当前时间所初始化的GregorianCalendar(标准日历),<br>
      * 最终会调用 java.util.Calendar.createCalendar(TimeZone, Locale) 方法,<br>
      * 该方法会判断Locale(日本和泰国),其他国家最终会调用 {@link GregorianCalendar#GregorianCalendar(java.util.TimeZone, java.util.Locale)} 方法
      * </p>
@@ -1486,7 +1486,7 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <p>
-     * 地球绕太阳运行周期为365天5小时48分46秒（合365.24219天）即一回归年（tropical year）.<br>
+     * 地球绕太阳运行周期为365天5小时48分46秒(合365.24219天)即一回归年(tropical year).<br>
      * 公历的平年只有365日,比回归年短约0.2422日,所余下的时间约为四年累计一天,故四年于2月加1天,使当年的历年长度为366日,这一年就为闰年.<br>
      * </p>
      * 

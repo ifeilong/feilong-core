@@ -43,7 +43,7 @@ import java.text.DecimalFormat;
  * <td>Number</td>
  * <td>Yes</td>
  * <td>代表阿拉伯数字,每一个#表示一位阿拉伯数字, 如果该位不存在则不显示<br>
- * 如果对应位置上没有数字,则保持原样（不用补）；如果最前、后为0,则保持为空.</td>
+ * 如果对应位置上没有数字,则保持原样(不用补)；如果最前、后为0,则保持为空.</td>
  * </tr>
  * <tr valign="top">
  * <td><code>.</code></td>
@@ -119,14 +119,14 @@ public final class NumberPattern{
      * 整数,不含小数 <code>{@value}</code>.
      * 
      * @since 1.0.7
-     * */
+     */
     public static final String NO_SCALE             = "#";
 
     /**
      * (2位小数点) <code>{@value}</code>.
      * 
      * @since 1.2.2
-     * */
+     */
     public static final String TWO_DECIMAL_POINTS   = "#0.00";
 
     /** 百分数的表达式(不带小数) <code>{@value}</code>. */

@@ -121,7 +121,7 @@ public final class FileUtil{
     //*******************************************************************************
 
     /**
-     * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .<br>
+     * 获得 {@link java.io.FileOutputStream} 文件输出流 (或其他文件写入对象)打开文件进行写入 .<br>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
      * 如果要写入字符流,请考虑使用 {@link java.io.FileWriter}.
      *
@@ -137,7 +137,7 @@ public final class FileUtil{
     }
 
     /**
-     * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .<br>
+     * 获得 {@link java.io.FileOutputStream} 文件输出流 (或其他文件写入对象)打开文件进行写入 .<br>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
      * 如果要写入字符流,请考虑使用 {@link java.io.FileWriter}.
      *
@@ -155,7 +155,7 @@ public final class FileUtil{
     }
 
     /**
-     * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .
+     * 获得 {@link java.io.FileOutputStream} 文件输出流 (或其他文件写入对象)打开文件进行写入 .
      * 
      * <p>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
@@ -178,7 +178,7 @@ public final class FileUtil{
     }
 
     /**
-     * 获得 {@link java.io.FileOutputStream} 文件输出流 （或其他文件写入对象）打开文件进行写入 .
+     * 获得 {@link java.io.FileOutputStream} 文件输出流 (或其他文件写入对象)打开文件进行写入 .
      * 
      * <p>
      * {@link java.io.FileOutputStream} 用于写入诸如图像数据之类的原始字节的流.<br>
@@ -514,7 +514,7 @@ public final class FileUtil{
      * </p>
      * 
      * <p>
-     * Common-io 2.4{@link org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)}有缺点,显示的是整数GB 不带小数（比如1.99G 显示为1G）,apache 论坛上争议比较大
+     * Common-io 2.4{@link org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)}有缺点,显示的是整数GB 不带小数(比如1.99G 显示为1G),apache 论坛上争议比较大
      * </p>
      * 
      * @param fileSize
@@ -556,7 +556,7 @@ public final class FileUtil{
      *            文件
      * @return 此抽象路径名表示的文件的长度,以字节为单位；<br>
      *         如果文件不存在,则返回 0L.<br>
-     *         对于表示特定于系统的实体（比如设备或管道）的路径名,某些操作系统可能返回 0L.
+     *         对于表示特定于系统的实体(比如设备或管道)的路径名,某些操作系统可能返回 0L.
      * @see File#length()
      */
     public static long getFileSize(File file){

@@ -15,10 +15,10 @@
  */
 package com.feilong.core.tools.jsonlib.util;
 
-import net.sf.json.util.PropertySetStrategy;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.util.PropertySetStrategy;
 
 /**
  * The Class PropertyStrategyWrapper.<br>
@@ -26,7 +26,8 @@ import org.slf4j.LoggerFactory;
  * 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class com.baozun.trade.web.controller.payment.result.command.PaymentResultEntity' 异常
  * 
  * @see <a
- *      href="http://javaskeleton.blogspot.com/2011/05/ignore-missing-properties-with-json-lib.html">ignore-missing-properties-with-json-lib</a>
+ *      href="http://javaskeleton.blogspot.com/2011/05/ignore-missing-properties-with-json-lib.html">ignore-missing-properties-with-json-lib
+ *      </a>
  * @see <a href="http://envy2002.iteye.com/blog/1682738">envy2002.iteye.com</a>
  * @see net.sf.json.util.PropertySetStrategy
  * @since 1.0.5

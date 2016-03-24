@@ -60,9 +60,8 @@ public class TypeUtilTest{
     @Test
     public void test3(){
         LOGGER.info("" + new SkuItemRepositoryImpl3());
-        Class<?>[] genericInterfacesParameterizedRawTypes = TypeUtil.getGenericInterfacesParameterizedRawTypes(
-                        SkuItemRepositoryImpl3.class,
-                        BaseSolrRepository.class);
+        Class<?>[] genericInterfacesParameterizedRawTypes = TypeUtil
+                        .getGenericInterfacesParameterizedRawTypes(SkuItemRepositoryImpl3.class, BaseSolrRepository.class);
         LOGGER.debug(JsonUtil.format(genericInterfacesParameterizedRawTypes));
     }
 

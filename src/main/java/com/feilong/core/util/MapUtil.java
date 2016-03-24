@@ -495,7 +495,7 @@ public final class MapUtil{
     }
 
     /**
-     * 根据value 来顺序排序（asc）.
+     * 根据value 来顺序排序(asc).
      *
      * @param <K>
      *            the key type
@@ -514,7 +514,7 @@ public final class MapUtil{
     }
 
     /**
-     * 根据value 来倒序排序（desc）.
+     * 根据value 来倒序排序(desc).
      *
      * @param <K>
      *            the key type
