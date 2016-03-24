@@ -665,7 +665,7 @@ public final class CollectionsUtil{
      *            the property name
      * @param returnCollection
      *            the return collection
-     * @return the property value collection
+     * @return if Validator.isNullOrEmpty(objectCollection),return <code>returnCollection</code>
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
      * @since 1.0.8
@@ -674,16 +674,18 @@ public final class CollectionsUtil{
                     Collection<O> objectCollection,
                     String propertyName,
                     K returnCollection){
+
+        if (null == returnCollection){
+            throw new NullPointerException("returnCollection is null!");
+        }
+
+        //避免null point
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return returnCollection;
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
             throw new NullPointerException("propertyName is null or empty!");
-        }
-
-        if (null == returnCollection){
-            throw new NullPointerException("returnCollection is null!");
         }
 
         try{
@@ -740,7 +742,7 @@ public final class CollectionsUtil{
      *            the property name
      * @param value
      *            the value
-     * @return the property value list
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see CollectionUtils#select(Iterable, Predicate)
      */
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V value){
@@ -765,13 +767,13 @@ public final class CollectionsUtil{
      *            the property name
      * @param values
      *            the values
-     * @return the list< o>
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate#ArrayContainsPredicate(String, Object...)
      */
     @SafeVarargs
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyList();
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -821,13 +823,13 @@ public final class CollectionsUtil{
      *            the property name
      * @param values
      *            the values
-     * @return the list< o>
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
      * @since 1.5.0
      */
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,Collection<V> values){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyList();
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -847,12 +849,12 @@ public final class CollectionsUtil{
      *            the object collection
      * @param predicate
      *            the predicate
-     * @return the list< o>
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
      */
     public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyList();
         }
         return (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
@@ -872,7 +874,7 @@ public final class CollectionsUtil{
      *            the property name
      * @param value
      *            the value
-     * @return the property value list
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see CollectionUtils#selectRejected(Iterable, Predicate)
      */
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V value){
@@ -893,14 +895,14 @@ public final class CollectionsUtil{
      *            the property name
      * @param values
      *            the values
-     * @return the list< o>
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate
      * @see #selectRejected(Collection, Predicate)
      */
     @SafeVarargs
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...values){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyList();
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -947,14 +949,14 @@ public final class CollectionsUtil{
      *            the property name
      * @param values
      *            the values
-     * @return the list< o>
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
      * @see #selectRejected(Collection , Predicate)
      * @since 1.5.0
      */
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,Collection<V> values){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyList();
         }
 
         if (Validator.isNullOrEmpty(propertyName)){
@@ -973,13 +975,13 @@ public final class CollectionsUtil{
      *            the object collection
      * @param predicate
      *            the predicate
-     * @return the list< o>
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see org.apache.commons.collections4.CollectionUtils#selectRejected(Iterable, Predicate)
      * @since 1.4.0
      */
     public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyList();
         }
         return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
@@ -1028,13 +1030,14 @@ public final class CollectionsUtil{
      *            the key property name
      * @param valuePropertyName
      *            the value property name
-     * @return 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回
+     * @return 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回<br>
+     *         if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      */
     public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyMap();
         }
 
         if (Validator.isNullOrEmpty(keyPropertyName)){
@@ -1333,7 +1336,7 @@ public final class CollectionsUtil{
      *            平均数值的精度
      * @param propertyNames
      *            需要计算平均值的对象属性名称
-     * @return the map< string, list< o>>
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
      * @see #sum(Collection, String...)
      */
     public static <O> Map<String, Number> avg(Collection<O> objectCollection,int scale,String...propertyNames){
@@ -1431,12 +1434,12 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyNames
      *            the property names
-     * @return the map< string, list< o>>
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
      */
     public static <O> Map<String, Number> sum(Collection<O> objectCollection,String...propertyNames){
 
         if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
+            return Collections.emptyMap();
         }
 
         if (Validator.isNullOrEmpty(propertyNames)){
@@ -1495,10 +1498,6 @@ public final class CollectionsUtil{
      * @since 1.5.0
      */
     public static <O> Number sum(Collection<O> objectCollection,String propertyName){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            throw new NullPointerException("objectCollection can't be null/empty!");
-        }
-
         if (Validator.isNullOrEmpty(propertyName)){
             throw new NullPointerException("propertyName is null or empty!");
         }
