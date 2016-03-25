@@ -48,7 +48,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 			<dependency>
 				<groupId>com.feilong.platform</groupId>
 				<artifactId>feilong-core</artifactId>
-				<version>1.4.1</version>
+				<version>1.5.0</version>
 			</dependency>
 			....
 		</dependencies>
@@ -73,7 +73,7 @@ com.feilong.core.`util`  | 提供了`java.util`包下常用的类的操作 ,比�
 com.feilong.core.`util.comparator`  | 提供了常用的`Comparator`,最常用的是[PropertyComparator](src/main/java/com/feilong/core/util/comparator/PropertyComparator.java)
 
 # Javadoc:
-在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.0-SNAPSHOT/feilong-core/) 
+在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.0/feilong-core/) 
 
 # 类和方法介绍: 
 
