@@ -163,7 +163,7 @@ public final class MapUtil{
      * @param key
      *            the key
      * @param value
-     *            the value, null converted to ""
+     *            the value
      * @since 1.4.0
      */
     public static <K, V> void putIfValueNotNull(final Map<K, V> map,final K key,final V value){

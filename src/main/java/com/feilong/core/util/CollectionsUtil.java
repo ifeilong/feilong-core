@@ -568,24 +568,24 @@ public final class CollectionsUtil{
      * testList.add(user);
      * 
      * //数组
-     * List&lt;String&gt; fieldValueList1 = ListUtil.getFieldValueList(testList, &quot;loves[1]&quot;);
+     * List&lt;String&gt; fieldValueList1 = CollectionsUtil.getPropertyValueList(testList, &quot;loves[1]&quot;);
      * LOGGER.info(JsonUtil.format(fieldValueList1));
      * 
      * //级联对象
-     * List&lt;Integer&gt; fieldValueList2 = ListUtil.getFieldValueList(testList, &quot;userInfo.age&quot;);
+     * List&lt;Integer&gt; fieldValueList2 = CollectionsUtil.getPropertyValueList(testList, &quot;userInfo.age&quot;);
      * LOGGER.info(JsonUtil.format(fieldValueList2));
      * 
      * //Map
-     * List&lt;Integer&gt; attrList = ListUtil.getFieldValueList(testList, &quot;attrMap(蜀国)&quot;);
+     * List&lt;Integer&gt; attrList = CollectionsUtil.getPropertyValueList(testList, &quot;attrMap(蜀国)&quot;);
      * LOGGER.info(JsonUtil.format(attrList));
      * 
      * //集合
-     * List&lt;String&gt; addressList = ListUtil.getFieldValueList(testList, &quot;userAddresseList[0]&quot;);
+     * List&lt;String&gt; addressList = CollectionsUtil.getPropertyValueList(testList, &quot;userAddresseList[0]&quot;);
      * LOGGER.info(JsonUtil.format(addressList));
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
      * @param <T>
      *            返回集合类型 generic type
      * @param <O>
