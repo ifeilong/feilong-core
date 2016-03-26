@@ -41,12 +41,12 @@ import com.feilong.core.util.RegexUtil;
  * </pre>
  * 
  * @author feilong
- * @see org.apache.commons.io.comparator.NameFileComparator
- * @see org.apache.commons.io.comparator.DirectoryFileComparator
- * @see org.apache.commons.io.comparator.DefaultFileComparator
- * @see org.apache.commons.io.comparator.ExtensionFileComparator
- * @see org.apache.commons.io.comparator.PathFileComparator
- * @see org.apache.commons.io.comparator.SizeFileComparator
+ * @see "org.apache.commons.io.comparator.NameFileComparator"
+ * @see "org.apache.commons.io.comparator.DirectoryFileComparator"
+ * @see "org.apache.commons.io.comparator.DefaultFileComparator"
+ * @see "org.apache.commons.io.comparator.ExtensionFileComparator"
+ * @see "org.apache.commons.io.comparator.PathFileComparator"
+ * @see "org.apache.commons.io.comparator.SizeFileComparator"
  * @version 1.4.0 2015年8月22日 下午11:36:52
  * @since 1.4.0
  */

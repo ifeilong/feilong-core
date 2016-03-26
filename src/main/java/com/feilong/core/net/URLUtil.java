@@ -16,8 +16,6 @@
 package com.feilong.core.net;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -26,7 +24,6 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.io.IOWriteUtil;
 import com.feilong.core.util.Validator;
 
 /**
@@ -68,47 +65,6 @@ public final class URLUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    /**
-     * 将网络文件下载到文件夹.
-     * 
-     * <p>
-     * 取到网络文件的文件名 原样下载到目标文件夹.
-     * </p>
-     *
-     * @param urlString
-     *            网络任意文件<br>
-     *            url 不能带参数
-     * @param directoryName
-     *            目标文件夹
-     * @throws IOException
-     *             the IO exception
-     * @see IOWriteUtil#write(InputStream, String, String)
-     * 
-     * @see org.apache.commons.io.FileUtils#copyURLToFile(URL, File)
-     * @see org.apache.commons.io.FileUtils#copyURLToFile(URL, File, int, int)
-     * 
-     */
-    public static void download(String urlString,String directoryName) throws IOException{
-        if (Validator.isNullOrEmpty(urlString)){
-            throw new NullPointerException("urlString can't be null/empty!");
-        }
-        if (Validator.isNullOrEmpty(directoryName)){
-            throw new NullPointerException("directoryName can't be null/empty!");
-        }
-
-        LOGGER.info("begin download,urlString:[{}],directoryName:[{}]", urlString, directoryName);
-
-        URL url = URLUtil.newURL(urlString);
-        InputStream inputStream = url.openStream();
-
-        File file = new File(urlString);
-        String fileName = file.getName();
-
-        IOWriteUtil.write(inputStream, directoryName, fileName);
-
-        LOGGER.info("end download,url:[{}],directoryName:[{}]", urlString, directoryName);
     }
 
     /**

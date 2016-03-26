@@ -22,7 +22,7 @@ import com.feilong.core.bean.PropertyUtil;
 
 /**
  * 调用 {@link com.feilong.core.bean.PropertyUtil#getProperty(Object, String)} 匹配属性值.
- *
+ * 
  * @author feilong
  * @version 1.2.0 2015年4月27日 下午1:52:29
  * @param <T>
@@ -31,6 +31,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @see org.apache.commons.beanutils.BeanPredicate
  * @see org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate
  */
+//XXX 如果{@link org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate}支持泛型,那么这么类将会废弃
 public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
 
     /** The property name. */

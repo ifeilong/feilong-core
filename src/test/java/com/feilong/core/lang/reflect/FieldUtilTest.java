@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.TimeInterval;
-import com.feilong.core.io.MimeType;
+import com.feilong.core.net.HttpMethodType;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 
@@ -43,11 +43,11 @@ public class FieldUtilTest{
      */
     @Test
     public void testGetStaticProperty(){
-        assertEquals(MimeType.JPG.getExtension(), FieldUtil.getStaticFieldValue("com.feilong.core.io.ImageType", "JPG"));
+        assertEquals(HttpMethodType.POST, FieldUtil.getStaticFieldValue("com.feilong.core.net.HttpMethodType", "POST"));
         assertEquals(
                         TimeInterval.SECONDS_PER_WEEK,
                         FieldUtil.getStaticFieldValue("com.feilong.core.date.TimeInterval", "SECONDS_PER_WEEK"));
-        assertEquals(-1699987643831455524L, FieldUtil.getStaticFieldValue("com.feilong.core.bean.BeanUtilException", "serialVersionUID"));
+        //assertEquals(-1699987643831455524L, FieldUtil.getStaticFieldValue("com.feilong.core.bean.BeanUtilException", "serialVersionUID"));
     }
 
     /**

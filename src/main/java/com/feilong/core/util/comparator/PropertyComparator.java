@@ -70,7 +70,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
     /** 反射提取出来的值,需要类型转成到的类型. */
     @SuppressWarnings("rawtypes")
-    private Class<? extends Comparable> klass;
+    private Class<? extends Comparable> propertyValueConvertToClass;
 
     /**
      * The Constructor.
@@ -94,14 +94,14 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *
      * @param propertyName
      *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
-     * @param klass
+     * @param propertyValueConvertToClass
      *            反射提取出来的值,需要类型转成到的类型
      * @since 1.5.0
      */
     @SuppressWarnings("rawtypes")
-    public PropertyComparator(String propertyName, Class<? extends Comparable> klass){
+    public PropertyComparator(String propertyName, Class<? extends Comparable> propertyValueConvertToClass){
         this.propertyName = propertyName;
-        this.klass = klass;
+        this.propertyValueConvertToClass = propertyValueConvertToClass;
         LOGGER.debug("propertyName:[{}]", propertyName);
     }
 
@@ -131,9 +131,9 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         Comparable propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
 
         //如果值需要类型转换
-        if (null != klass){
-            propertyValue1 = ConvertUtil.convert(propertyValue1, klass);
-            propertyValue2 = ConvertUtil.convert(propertyValue2, klass);
+        if (null != propertyValueConvertToClass){
+            propertyValue1 = ConvertUtil.convert(propertyValue1, propertyValueConvertToClass);
+            propertyValue2 = ConvertUtil.convert(propertyValue2, propertyValueConvertToClass);
         }
 
         //NullPointException if propertyValue1.compareTo(propertyValue2);

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -33,7 +35,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.io.FileUtil;
 import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
@@ -497,7 +498,6 @@ public final class ResourceBundleUtil{
      * @param fileName
      *            Example 1: "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"
      * @return the resource bundle,may be null
-     * @see com.feilong.core.io.FileUtil#getFileInputStream(String)
      * @see java.util.PropertyResourceBundle#PropertyResourceBundle(InputStream)
      * @see ResourceBundleUtil#getResourceBundle(InputStream)
      * @since 1.0.9
@@ -506,8 +506,12 @@ public final class ResourceBundleUtil{
         if (Validator.isNullOrEmpty(fileName)){
             throw new IllegalArgumentException("fileName can't be null/empty!");
         }
-        InputStream inputStream = FileUtil.getFileInputStream(fileName);
-        return getResourceBundle(inputStream);
+        try{
+            InputStream inputStream = new FileInputStream(fileName);
+            return getResourceBundle(inputStream);
+        }catch (FileNotFoundException e){
+            throw new UncheckedIOException(e);
+        }
     }
 
     /**
