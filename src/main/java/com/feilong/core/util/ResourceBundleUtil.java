@@ -459,12 +459,9 @@ public final class ResourceBundleUtil{
      * @see java.util.ResourceBundle#getBundle(String, Locale)
      */
     public static ResourceBundle getResourceBundle(String baseName,Locale locale){
-        if (Validator.isNullOrEmpty(baseName)){
-            throw new IllegalArgumentException("baseName can't be null/empty!");
-        }
-        if (Validator.isNullOrEmpty(locale)){
-            throw new IllegalArgumentException("locale can't be null/empty!");
-        }
+        Validate.notEmpty(baseName, "baseName can't be null/empty!");
+        Validate.notNull(locale, "locale can't be null!");
+
         ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, locale);
         if (null == resourceBundle){
             LOGGER.warn("resourceBundle is null,baseName:{},locale:{}", resourceBundle, baseName, locale);
@@ -502,9 +499,7 @@ public final class ResourceBundleUtil{
      * @since 1.0.9
      */
     public static ResourceBundle getResourceBundleByFileName(String fileName){
-        if (Validator.isNullOrEmpty(fileName)){
-            throw new IllegalArgumentException("fileName can't be null/empty!");
-        }
+        Validate.notEmpty(fileName, "fileName can't be null/empty!");
         try{
             InputStream inputStream = new FileInputStream(fileName);
             return getResourceBundle(inputStream);
@@ -523,9 +518,7 @@ public final class ResourceBundleUtil{
      * @since 1.0.9
      */
     public static ResourceBundle getResourceBundle(InputStream inputStream){
-        if (Validator.isNullOrEmpty(inputStream)){
-            throw new IllegalArgumentException("inputStream can't be null/empty!");
-        }
+        Validate.notNull(inputStream, "inputStream can't be null!");
         try{
             return new PropertyResourceBundle(inputStream);
         }catch (IOException e){
@@ -543,9 +536,7 @@ public final class ResourceBundleUtil{
      * @since 1.0.9
      */
     public static ResourceBundle getResourceBundle(Reader reader){
-        if (Validator.isNullOrEmpty(reader)){
-            throw new IllegalArgumentException("reader can't be null/empty!");
-        }
+        Validate.notNull(reader, "reader can't be null!");
         try{
             return new PropertyResourceBundle(reader);
         }catch (IOException e){

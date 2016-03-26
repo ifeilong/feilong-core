@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -546,18 +547,12 @@ public final class StringUtil{
         int startIndex = beginIndex + shift;
         int textLength = text.length();
 
-        if (startIndex < 0){
-            String pattern = "beginIndex+shift<0,beginIndex:{},shift:{},text:{},text.length:{}";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(pattern, beginIndex, shift, text, textLength));
-        }
+        String message = "beginIndex+shift<0,beginIndex:{},shift:{},text:{},text.length:{}";
+        Validate.isTrue(startIndex >= 0, Slf4jUtil.formatMessage(message, beginIndex, shift, text, textLength));
 
         if (startIndex > textLength){
-            LOGGER.warn(
-                            "beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}",
-                            beginIndex,
-                            shift,
-                            text,
-                            textLength);
+            message = "beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}";
+            LOGGER.warn(message, beginIndex, shift, text, textLength);
             return StringUtils.EMPTY;
         }
         // 索引从0开始

@@ -16,6 +16,7 @@
 package com.feilong.core.lang;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +24,6 @@ import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.tools.slf4j.Slf4jUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * {@link java.lang.Enum} 工具类.
@@ -139,13 +139,8 @@ public final class EnumUtil{
                     T specifiedValue,
                     boolean ignoreCase){
 
-        if (Validator.isNullOrEmpty(enumClass)){
-            throw new IllegalArgumentException("enumClass is null or empty!");
-        }
-
-        if (Validator.isNullOrEmpty(propertyName)){
-            throw new IllegalArgumentException("the fieldName is null or empty!");
-        }
+        Validate.notNull(enumClass, "enumClass can't be null!");
+        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
 
         // An enum is a kind of class
         // An annotation is a kind of interface

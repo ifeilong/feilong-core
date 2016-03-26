@@ -105,10 +105,9 @@ public final class RandomUtil{
     public static long createRandom(Number min,Number max){
         long maxLong = max.longValue();
         long minLong = min.longValue();
-        if (maxLong < minLong){
-            String messagePattern = "maxLong:[{}] can not < minLong:[{}]";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(messagePattern, maxLong, minLong));
-        }
+
+        Validate.isTrue(maxLong >= minLong, Slf4jUtil.formatMessage("maxLong:[{}] can not < minLong:[{}]", maxLong, minLong));
+
         long cha = maxLong - minLong;
         return minLong + createRandom(cha);
     }
