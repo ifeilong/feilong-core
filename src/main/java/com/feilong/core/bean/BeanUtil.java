@@ -25,6 +25,7 @@ import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -401,12 +402,8 @@ public final class BeanUtil{
      */
     //XXX add excludePropertyNames support
     public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){
-        if (null == toObj){
-            throw new NullPointerException("No destination bean/toObj specified");
-        }
-        if (null == fromObj){
-            throw new NullPointerException("No origin bean/fromObj specified");
-        }
+        Validate.notNull(toObj, "No destination bean/toObj specified");
+        Validate.notNull(fromObj, "No origin bean/fromObj specified");
 
         if (Validator.isNullOrEmpty(includePropertyNames)){
             try{
@@ -545,7 +542,7 @@ public final class BeanUtil{
      *
      * @param bean
      *            Bean whose properties are to be extracted
-     * @return Map of property descriptors
+     * @return if null==bean,will return empty map. see {@link org.apache.commons.beanutils.BeanUtilsBean#describe(Object)}
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @see PropertyUtil#describe(Object)
@@ -621,13 +618,8 @@ public final class BeanUtil{
      * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
      */
     public static void populate(Object bean,Map<String, ?> properties){
-        if (Validator.isNullOrEmpty(bean)){
-            throw new NullPointerException("bean can't be null/empty!");
-        }
-
-        if (Validator.isNullOrEmpty(properties)){
-            throw new NullPointerException("properties can't be null/empty!");
-        }
+        Validate.notNull(bean, "bean can't be null/empty!");
+        Validate.notNull(properties, "properties can't be null/empty!");
 
         try{
             BeanUtils.populate(bean, properties);
