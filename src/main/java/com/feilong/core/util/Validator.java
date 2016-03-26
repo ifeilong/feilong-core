@@ -23,6 +23,8 @@ import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import com.feilong.core.lang.ObjectUtil;
+
 /**
  * <b>核心类</b>,判断对象是否为null或者Empty.
  * 
@@ -40,28 +42,35 @@ import org.apache.commons.collections4.CollectionUtils;
  * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
  * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
  * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
- * <li><code>Object[]</code>,判断length==0;注:二维数组不管是primitive 还是包装类型,都instanceof Object[];</li>
- * <li><code>byte[]</code>,判断length==0;</li>
- * <li><code>boolean[]</code>,判断length==0;</li>
- * <li><code>char[]</code>,判断length==0;</li>
- * <li><code>int[]</code>,判断length==0;</li>
- * <li><code>short[]</code>,判断length==0;</li>
- * <li><code>float[]</code>,判断length==0;</li>
- * <li><code>double[]</code>,判断length==0;</li>
+ * <li><code>数组</code> {@link ObjectUtil#isArray(Object)},判断 {@link Array#getLength(Object)} ==0</li>
  * </ol>
  * </blockquote>
  * 
  * @author feilong
  * @version 1.0.0 Sep 2, 2010 8:35:28 PM
  * @version 1.0.1 2012-9-23 21:34 rename method,isNullOrEmpty替代isNull
- * @version 1.0.7 2014-5-22 15:57 add {@link #arrayIsNullOrEmpty(Object)}
  * @see String#trim()
  * @see Map#isEmpty()
  * @see Collection#isEmpty()
  * @see Enumeration#hasMoreElements()
  * @see Iterator#hasNext()
  * @see org.apache.commons.lang3.Validate
+ * @see org.apache.commons.lang.StringUtils#isBlank(String)
+ * @see org.apache.commons.lang.StringUtils#isEmpty(String)
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(byte[])
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(boolean[])
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(char[])
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(int[])
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(long[])
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(short[])
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(float[])
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(double[])
+ * @see org.apache.commons.lang.ArrayUtils#isEmpty(Object[])
  * @see org.apache.commons.collections4.CollectionUtils#sizeIsEmpty(Object)
+ * @see org.apache.commons.collections4.CollectionUtils#isEmpty(Collection)
+ * @see org.apache.commons.collections4.CollectionUtils#isNotEmpty(Collection)
+ * @see org.apache.commons.collections4.MapUtils#isEmpty(Map)
+ * @see org.apache.commons.collections4.MapUtils#isNotEmpty(Map)
  * @since 1.0.0
  */
 public final class Validator{
@@ -85,62 +94,42 @@ public final class Validator{
      * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
      * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
-     * <li><code>Object[]</code>,判断length==0;注:二维数组不管是primitive 还是包装类型,都instanceof Object[];</li>
-     * <li><code>byte[]</code>,判断length==0;</li>
-     * <li><code>boolean[]</code>,判断length==0;</li>
-     * <li><code>char[]</code>,判断length==0;</li>
-     * <li><code>int[]</code>,判断length==0;</li>
-     * <li><code>short[]</code>,判断length==0;</li>
-     * <li><code>float[]</code>,判断length==0;</li>
-     * <li><code>double[]</code>,判断length==0;</li>
+     * <li><code>数组</code> {@link ObjectUtil#isArray(Object)},判断 {@link Array#getLength(Object)} ==0</li>
      * </ol>
      * </blockquote>
      * 
      * @param value
-     *            可以是Collection,Map,String,Enumeration,Iterator,以及所有数组类型
+     *            可以是 {@link Collection},{@link Map},{@link String},{@link Enumeration},{@link Iterator},以及所有数组类型
      * @return 如果是null,返回true<br>
      *         如果是empty也返回true<br>
      *         其他情况返回false<br>
-     *         如果不是上述类型,不判断empty,返回false
+     *         如果不是上述类型,返回false
      * @see org.apache.commons.collections4.CollectionUtils#sizeIsEmpty(Object)
-     * @see org.apache.commons.collections4.CollectionUtils#isEmpty(Collection)
-     * @see org.apache.commons.collections4.CollectionUtils#isNotEmpty(Collection)
-     * @see org.apache.commons.collections4.MapUtils#isEmpty(Map)
-     * @see org.apache.commons.collections4.MapUtils#isNotEmpty(Map)
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(byte[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(boolean[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(char[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(int[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(long[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(short[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(float[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(double[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(Object[])
-     * @see org.apache.commons.lang.StringUtils#isBlank(String)
-     * @see org.apache.commons.lang.StringUtils#isEmpty(String)
      */
     public static boolean isNullOrEmpty(Object value){
         if (null == value){
             return true;
         }
-
         // 字符串
         if (value instanceof String){// 比较字符串长度, 效率高
             return value.toString().trim().length() <= 0;
         }
 
-        if (value instanceof Collection // 集合
+        // collections 支持的类型
+        boolean collectionsSupportType = value instanceof Collection // 集合
                         || value instanceof Map// map
                         || value instanceof Enumeration // 枚举
                         || value instanceof Iterator// Iterator迭代器
-        ){
+        ;
+        if (collectionsSupportType){
             return CollectionUtils.sizeIsEmpty(value);
         }
 
-        boolean arrayFlag = arrayIsNullOrEmpty(value);
-        if (arrayFlag){
-            return true;
+        //判断数组
+        if (ObjectUtil.isArray(value)){
+            return Array.getLength(value) == 0;
         }
+
         // 这里可以扩展
         return false;
     }
@@ -157,85 +146,20 @@ public final class Validator{
      * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
      * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
-     * <li><code>Object[]</code>,判断length==0;注:二维数组不管是primitive 还是包装类型,都instanceof Object[];</li>
-     * <li><code>byte[]</code>,判断length==0;</li>
-     * <li><code>boolean[]</code>,判断length==0;</li>
-     * <li><code>char[]</code>,判断length==0;</li>
-     * <li><code>int[]</code>,判断length==0;</li>
-     * <li><code>short[]</code>,判断length==0;</li>
-     * <li><code>float[]</code>,判断length==0;</li>
-     * <li><code>double[]</code>,判断length==0;</li>
+     * <li><code>数组</code> {@link ObjectUtil#isArray(Object)},判断 {@link Array#getLength(Object)} ==0</li>
      * </ol>
      * </blockquote>
      * 
      * @param value
-     *            可以是Collection,Map,String,Enumeration,Iterator,以及所有数组类型
+     *            可以是 {@link Collection},{@link Map},{@link String},{@link Enumeration},{@link Iterator},以及所有数组类型
      * @return 如果是null,返回false<br>
      *         如果是空也返回false<br>
      *         其他情况返回true<br>
-     *         如果不是上述类型,不判断empty,返回true
-     * @see org.apache.commons.collections4.CollectionUtils#isEmpty(Collection)
-     * @see org.apache.commons.collections4.CollectionUtils#isNotEmpty(Collection)
-     * @see org.apache.commons.collections4.MapUtils#isEmpty(Map)
-     * @see org.apache.commons.collections4.MapUtils#isNotEmpty(Map)
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(byte[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(boolean[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(char[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(int[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(long[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(short[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(float[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(double[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(Object[])
-     * @see org.apache.commons.lang.StringUtils#isBlank(String)
-     * @see org.apache.commons.lang.StringUtils#isEmpty(String)
+     *         如果不是上述类型,返回true
+     * 
+     * @see #isNullOrEmpty(Object)
      */
     public static boolean isNotNullOrEmpty(Object value){
         return !isNullOrEmpty(value);
-    }
-
-    /**
-     * 数组 类型的验证,区分 primitive 和包装类型.
-     * 
-     * @param value
-     *            可以是
-     *            <ul>
-     *            <li>Object[] 二维数组属于这个类型</li>
-     *            <li>byte[]</li>
-     *            <li>boolean[]</li>
-     *            <li>char[]</li>
-     *            <li>int[]</li>
-     *            <li>long[]</li>
-     *            <li>short[]</li>
-     *            <li>float[]</li>
-     *            <li>double[]</li>
-     *            </ul>
-     * @return 如果是数组类型(区分 primitive和包装类型),判断其length==0;<br>
-     *         如果不是 直接返回false
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(byte[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(boolean[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(char[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(int[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(long[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(short[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(float[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(double[])
-     * @see org.apache.commons.lang.ArrayUtils#isEmpty(Object[])
-     * @since 1.0.7
-     */
-    private static boolean arrayIsNullOrEmpty(Object value){
-        if (value instanceof Object[] //Object[] 数组 Integer/String...自定义的对象User.等数组也 instanceof Object[]
-                        || value instanceof byte[] // primitive bytes
-                        || value instanceof boolean[] // primitive booleans
-                        || value instanceof short[] // primitive shorts       
-                        || value instanceof char[]// primitive chars
-                        || value instanceof int[] // primitive ints
-                        || value instanceof long[] // primitive longs
-                        || value instanceof float[]// primitive floats
-                        || value instanceof double[] // primitive doubles
-        ){
-            return Array.getLength(value) == 0;
-        }
-        return false;
     }
 }

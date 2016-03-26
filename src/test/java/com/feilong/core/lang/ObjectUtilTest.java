@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +42,18 @@ public class ObjectUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTest.class);
+
+    /**
+     * Checks if is array.
+     */
+    @Test
+    public void isArray(){
+        int[] i = {};
+        assertEquals(true, ObjectUtil.isArray(i));
+        assertEquals(true, ObjectUtil.isArray(new Integer[0]));
+        assertEquals(true, ObjectUtil.isArray(new String[0]));
+        assertEquals(false, ObjectUtil.isArray(1));
+    }
 
     /**
      * Assert equals.
