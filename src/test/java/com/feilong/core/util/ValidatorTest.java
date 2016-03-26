@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
@@ -42,6 +43,7 @@ public class ValidatorTest{
     @Test
     public void testFilter(){
         int[] i = {};
+        assertEquals(true, CollectionUtils.sizeIsEmpty(i));
         assertEquals(true, Validator.isNullOrEmpty(i));
     }
 
