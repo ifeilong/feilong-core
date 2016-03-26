@@ -17,6 +17,8 @@ package com.feilong.core.util;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.tools.slf4j.Slf4jUtil;
 
 /**
@@ -169,19 +171,11 @@ public final class RandomUtil{
      * @return 得到随机字符串
      */
     public static String createRandomFromString(String str,int minLength,int maxLength){
-        if (Validator.isNullOrEmpty(str)){
-            throw new NullPointerException("the str is null or empty!");
-        }
+        Validate.notEmpty(str, "str can't be null/empty!");
 
-        if (maxLength <= 0){
-            String messagePattern = "maxLength:[{}] can not zero";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(messagePattern, maxLength));
-        }
+        Validate.isTrue(maxLength > 0, Slf4jUtil.formatMessage("maxLength:[{}] can not zero", maxLength));
+        Validate.isTrue(maxLength >= minLength, Slf4jUtil.formatMessage("maxLength:[{}] can not < minLength:[{}]", maxLength, minLength));
 
-        if (maxLength < minLength){
-            String messagePattern = "maxLength:[{}] can not < minLength:[{}]";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(messagePattern, maxLength, minLength));
-        }
         long length = createRandom(minLength, maxLength);
         return createRandomFromString(str, (int) length);
     }
@@ -204,13 +198,8 @@ public final class RandomUtil{
      * @return 得到随机字符串
      */
     public static String createRandomFromString(String str,int length){
-        if (Validator.isNullOrEmpty(str)){
-            throw new NullPointerException("the str is null or empty!");
-        }
-        if (length <= 0){
-            String messagePattern = "length:[{}] can not <=0";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(messagePattern, length));
-        }
+        Validate.notEmpty(str, "str can't be null/empty!");
+        Validate.isTrue(length > 0, Slf4jUtil.formatMessage("length:[{}] can not <=0", length));
 
         char[] ch = new char[length];
         int j = str.length();

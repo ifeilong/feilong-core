@@ -31,6 +31,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -415,9 +416,7 @@ public final class ResourceBundleUtil{
      * @since 1.5.0
      */
     public static Map<String, String> readAllPropertiesToMap(ResourceBundle resourceBundle){
-        if (Validator.isNullOrEmpty(resourceBundle)){
-            throw new NullPointerException("resourceBundle can't be null/empty!");
-        }
+        Validate.notNull(resourceBundle, "resourceBundle can't be null!");
 
         //注意 如果是 java.util.PropertyResourceBundle
         //内部是使用 hashmap 来存储数据的, 那么这里的key 是乱序的 

@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.lang.ClassLoaderUtil;
 
@@ -224,11 +226,9 @@ public final class PropertiesUtil{
      * @see "org.springframework.core.io.support.PropertiesLoaderUtils#loadProperties(Resource)"
      */
     public static Properties getProperties(InputStream inputStream){
-        if (null == inputStream){
-            throw new NullPointerException("the inputStream is null or empty!");
-        }
-        Properties properties = new Properties();
+        Validate.notNull(inputStream, "inputStream can't be null!");
 
+        Properties properties = new Properties();
         try{
             properties.load(inputStream);
             return properties;

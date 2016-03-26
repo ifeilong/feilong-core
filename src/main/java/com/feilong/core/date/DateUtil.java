@@ -19,8 +19,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.text.DateFormatUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * {@link java.util.Date}操作工具类(feilong-core核心类之一).
@@ -1299,9 +1300,8 @@ public final class DateUtil{
      * @see org.apache.commons.lang3.time.DateUtils#toCalendar(Date)
      */
     public static Calendar toCalendar(Date date){
-        if (Validator.isNullOrEmpty(date)){
-            throw new NullPointerException("date can't be null/empty!");
-        }
+        Validate.notNull(date, "date can't be null/empty!");
+
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
         return calendar;

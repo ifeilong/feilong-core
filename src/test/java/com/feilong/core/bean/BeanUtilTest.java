@@ -186,6 +186,15 @@ public class BeanUtilTest{
     }
 
     /**
+     * TestBeanUtilTest.
+     */
+    @Test()
+    //@Test(expected = NullPointerException.class)
+    public void testBeanUtilTest(){
+        BeanUtil.copyProperties(null, null);
+    }
+
+    /**
      * Copy property.
      */
     @Test
@@ -292,6 +301,11 @@ public class BeanUtilTest{
         LOGGER.info("map:{}", JsonUtil.format(BeanUtil.describe(user)));
     }
 
+    @Test
+    public void describe1(){
+        LOGGER.info("map:{}", JsonUtil.format(BeanUtil.describe(null)));
+    }
+
     /**
      * Populate.
      */
@@ -313,6 +327,19 @@ public class BeanUtilTest{
 
         BeanUtil.copyProperties(user, properties);
         LOGGER.info(JsonUtil.format(user));
+    }
+
+    @Test
+    public void populate1(){
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        Map<String, Object> properties = new HashMap<String, Object>();
+        properties.put("id", 8L);
+
+        BeanUtil.populate(map, properties);
+
+        LOGGER.info(JsonUtil.format(map));
     }
 
     /**

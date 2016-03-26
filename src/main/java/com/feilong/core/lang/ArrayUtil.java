@@ -23,8 +23,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * 数组工具类.
@@ -236,9 +237,8 @@ public final class ArrayUtil{
             return Collections.emptyMap();
         }
 
-        if (Validator.isNullOrEmpty(propertyName)){
-            throw new NullPointerException("the propertyName is null or empty!");
-        }
+        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+
         //视需求  可以换成 HashMap 或者TreeMap
         Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectArray.length);
         for (O o : objectArray){

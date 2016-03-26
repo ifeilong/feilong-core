@@ -21,6 +21,7 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -154,12 +155,8 @@ public final class PropertyUtil{
      * @since 1.4.1
      */
     public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){
-        if (null == toObj){
-            throw new NullPointerException("No destination bean/toObj specified");
-        }
-        if (null == fromObj){
-            throw new NullPointerException("No origin bean/fromObj specified");
-        }
+        Validate.notNull(toObj, "No destination bean/toObj specified");
+        Validate.notNull(fromObj, "No origin bean/fromObj specified");
 
         if (Validator.isNullOrEmpty(includePropertyNames)){
             try{
@@ -294,9 +291,7 @@ public final class PropertyUtil{
             return null;
         }
 
-        if (null == toBeFindedClassType){
-            throw new NullPointerException("toBeFindedClassType can't be null/empty!");
-        }
+        Validate.notNull(toBeFindedClassType, "toBeFindedClassType can't be null/empty!");
 
         if (ClassUtil.isInstance(obj, toBeFindedClassType)){
             return (T) obj;

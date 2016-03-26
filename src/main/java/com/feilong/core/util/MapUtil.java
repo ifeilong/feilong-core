@@ -29,6 +29,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.comparators.ReverseComparator;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -431,9 +432,8 @@ public final class MapUtil{
         if (Validator.isNullOrEmpty(map)){
             return Collections.emptyMap();
         }
-        if (Validator.isNullOrEmpty(extractPropertyName)){
-            throw new NullPointerException("extractPropertyName is null or empty!");
-        }
+
+        Validate.notEmpty(extractPropertyName, "extractPropertyName can't be null/empty!");
         //如果excludeKeys是null ,那么抽取所有的key
         K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(map.keySet(), keysClass) : includeKeys;
 
@@ -465,9 +465,7 @@ public final class MapUtil{
      * @since 1.2.0
      */
     public static <K, V> Map<K, V> sortByKeyAsc(Map<K, V> map){
-        if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("map can't be null/empty!");
-        }
+        Validate.notNull(map, "map can't be null!");
         return new TreeMap<K, V>(map);
     }
 
@@ -486,9 +484,7 @@ public final class MapUtil{
      * @since 1.2.0
      */
     public static <K, V> Map<K, V> sortByKeyDesc(Map<K, V> map){
-        if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("map can't be null/empty!");
-        }
+        Validate.notNull(map, "map can't be null!");
         PropertyComparator<Entry<K, V>> propertyComparator = new PropertyComparator<Map.Entry<K, V>>("key");
         Comparator<Entry<K, V>> comparator = new ReverseComparator<Map.Entry<K, V>>(propertyComparator);
         return sort(map, comparator);
@@ -554,14 +550,8 @@ public final class MapUtil{
      * @since 1.2.0
      */
     public static <K, V> Map<K, V> sort(Map<K, V> map,Comparator<Map.Entry<K, V>> mapEntryComparator){
-        if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("map can't be null/empty!");
-        }
-
-        if (Validator.isNullOrEmpty(mapEntryComparator)){
-            throw new NullPointerException("mapEntryComparator is null or empty!");
-        }
-        //**********************************************************
+        Validate.notNull(map, "map can't be null!");
+        Validate.notNull(mapEntryComparator, "mapEntryComparator can't be null!");
 
         final int size = map.size();
         List<Map.Entry<K, V>> mapEntryList = new ArrayList<Map.Entry<K, V>>(size);

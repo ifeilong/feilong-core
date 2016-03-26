@@ -26,6 +26,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -686,9 +687,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String joinValues(Map<String, String> singleValueMap,String...includeKeys){
-        if (Validator.isNullOrEmpty(singleValueMap)){
-            throw new NullPointerException("map can't be null/empty!");
-        }
+        Validate.notNull(singleValueMap, "singleValueMap can't be null!");
         StringBuilder sb = new StringBuilder();
         //有顺序的参数
         for (String key : includeKeys){

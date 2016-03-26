@@ -18,11 +18,11 @@ package com.feilong.core.lang.reflect;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * Utility methods focusing on type inspection, particularly with regard to generics.
@@ -136,10 +136,8 @@ public final class TypeUtil{
      * @since 1.1.1
      */
     private static ParameterizedType getGenericInterfacesParameterizedType(Class<?> klass,Class<?> extractInterfaceClass){
-
-        if (Validator.isNullOrEmpty(klass)){
-            throw new NullPointerException("klass can't be null/empty!");
-        }
+        Validate.notNull(klass, "klass can't be null/empty!");
+        Validate.notNull(extractInterfaceClass, "extractInterfaceClass can't be null/empty!");
 
         Type[] genericInterfaces = klass.getGenericInterfaces();
         for (Type genericInterface : genericInterfaces){
@@ -164,9 +162,7 @@ public final class TypeUtil{
      * @see java.lang.Class#getGenericSuperclass()
      */
     private static ParameterizedType getGenericSuperclassParameterizedType(Class<?> klass){
-        if (Validator.isNullOrEmpty(klass)){
-            throw new NullPointerException("klass can't be null/empty!");
-        }
+        Validate.notNull(klass, "klass can't be null/empty!");
 
         Class<?> useClass = klass;
         Type type = useClass.getGenericSuperclass(); //com.feilong.core.lang.reflect.res.BaseSolrRepositoryImpl<com.feilong.core.lang.reflect.res.SkuItem, java.lang.Long>
@@ -189,28 +185,23 @@ public final class TypeUtil{
      * @since 1.1.1
      */
     private static Class<?>[] extractActualTypeArgumentClassArray(ParameterizedType parameterizedType){
-        if (Validator.isNullOrEmpty(parameterizedType)){
-            throw new NullPointerException("parameterizedType can't be null/empty!");
-        }
+        Validate.notNull(parameterizedType, "parameterizedType can't be null/empty!");
 
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("parameterizedType info:{}", JsonUtil.format(parameterizedType));
         }
 
         Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+        Validate.notNull(actualTypeArguments, "actualTypeArguments can't be null/empty!");
 
-        if (Validator.isNotNullOrEmpty(actualTypeArguments)){
-
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("actualTypeArguments:{}", JsonUtil.format(actualTypeArguments));
-            }
-            int length = actualTypeArguments.length;
-            Class<?>[] klasses = new Class<?>[length];
-            for (int i = 0, j = length; i < j; ++i){
-                klasses[i] = (Class<?>) actualTypeArguments[i];
-            }
-            return klasses;
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("actualTypeArguments:{}", JsonUtil.format(actualTypeArguments));
         }
-        throw new NullPointerException("the actualTypeArguments is null or empty!");
+        int length = actualTypeArguments.length;
+        Class<?>[] klasses = new Class<?>[length];
+        for (int i = 0, j = length; i < j; ++i){
+            klasses[i] = (Class<?>) actualTypeArguments[i];
+        }
+        return klasses;
     }
 }

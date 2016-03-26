@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.NumberFormatUtil;
 import com.feilong.core.util.Validator;
@@ -224,23 +226,13 @@ public final class NumberUtil{
      * @since 1.0.7
      */
     public static String getProgress(Number current,Number total,String numberPattern){
-        if (null == current){
-            throw new NullPointerException("current is null");
-        }
-        if (null == total){
-            throw new NullPointerException("total is null");
-        }
+        Validate.notNull(current, "current can't be null/empty!");
+        Validate.notNull(total, "total can't be null/empty!");
 
-        if (current.intValue() <= 0){
-            throw new IllegalArgumentException("current can not <=0");
-        }
-        if (total.intValue() <= 0){
-            throw new IllegalArgumentException("total can not <=0");
-        }
+        Validate.isTrue(current.intValue() > 0, "current can not <=0");
+        Validate.isTrue(total.intValue() > 0, "total can not <=0");
+        Validate.isTrue(current.doubleValue() <= total.doubleValue(), "current can not > total");
 
-        if (current.doubleValue() > total.doubleValue()){
-            throw new IllegalArgumentException("current can not > total");
-        }
         // XXX
         int scale = 8;
         BigDecimal bigDecimalCurrent = ConvertUtil.toBigDecimal(current);
@@ -300,10 +292,8 @@ public final class NumberUtil{
      * @since 1.0.7
      */
     public static BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale,RoundingMode roundingMode){
+        Validate.notNull(roundingMode, "the roundingMode is null or empty!");
 
-        if (Validator.isNullOrEmpty(roundingMode)){
-            throw new NullPointerException("the roundingMode is null or empty!");
-        }
         String zero = "0";
         if (!isSpecificNumber(two, zero)){
             // 不能直接one.divide(two) 
@@ -456,9 +446,7 @@ public final class NumberUtil{
      * @return 0.0,0.5,1.0,1.5,2.0,2.5.......
      */
     public static String toPointFive(Number value){
-        if (Validator.isNullOrEmpty(value)){
-            throw new NullPointerException("value can't be null/empty!");
-        }
+        Validate.notNull(value, "value can't be null/empty!");
         long avgRankLong = Math.round(Double.parseDouble(value.toString()) * 2);
 
         BigDecimal avgBigDecimal = BigDecimal.valueOf((double) (avgRankLong) / 2);

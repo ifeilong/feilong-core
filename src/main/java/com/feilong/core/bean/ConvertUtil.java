@@ -39,6 +39,7 @@ import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
@@ -552,12 +553,8 @@ public final class ConvertUtil{
      * @since 1.2.2
      */
     public static <T> T[] toArray(Collection<T> collection,Class<T> arrayComponentType){
-        if (null == collection){
-            throw new NullPointerException("collection must not be null");
-        }
-        if (arrayComponentType == null){
-            throw new NullPointerException("Array ComponentType must not be null");
-        }
+        Validate.notNull(collection, "collection must not be null");
+        Validate.notNull(arrayComponentType, "arrayComponentType must not be null");
 
         // 如果采用大家常用的把a的length设为0,就需要反射API来创建一个大小为size的数组,而这对性能有一定的影响.
         // 所以最好的方式就是直接把a的length设为Collection的size从而避免调用反射API来达到一定的性能优化.

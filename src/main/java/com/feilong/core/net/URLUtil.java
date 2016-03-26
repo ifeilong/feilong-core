@@ -21,10 +21,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.core.util.Validator;
 
 /**
  * The Class URLUtil.
@@ -76,10 +75,7 @@ public final class URLUtil{
      * @since 1.2.1
      */
     public static String[] toStringArray(URL[] urls){
-        if (Validator.isNullOrEmpty(urls)){
-            throw new NullPointerException("urls can't be null/empty!");
-        }
-
+        Validate.notNull(urls, "urls can't be null!");
         String[] stringArray = new String[urls.length];
 
         int i = 0;
@@ -196,9 +192,7 @@ public final class URLUtil{
      * @since 1.4.0
      */
     public static URL getFileURL(String filePathName){
-        if (Validator.isNullOrEmpty(filePathName)){
-            throw new NullPointerException("filePathName can't be null/empty!");
-        }
+        Validate.notEmpty(filePathName, "filePathName can't be null/empty!");
         File file = new File(filePathName);
         try{
             // file.toURL() 已经过时,它不会自动转义 URL 中的非法字符

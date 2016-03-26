@@ -94,8 +94,7 @@ public class NumberUtilTest{
      * Gets the progress1.
      * 
      */
-    @Test()
-    //expected = NullPointerException.class
+    @Test(expected = NullPointerException.class)
     public void getProgress1(){
         NumberUtil.getProgress(null, 5, NumberPattern.PERCENT_WITH_NOPOINT);
     }
@@ -115,7 +114,7 @@ public class NumberUtilTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgress3(){
-        NumberUtil.getProgress(-5, 5, NumberPattern.PERCENT_WITH_NOPOINT);
+        LOGGER.info(NumberUtil.getProgress(-5, 5, NumberPattern.PERCENT_WITH_NOPOINT));
     }
 
     /**

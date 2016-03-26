@@ -22,6 +22,7 @@ import java.text.Format;
 import java.text.NumberFormat;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -92,13 +93,8 @@ public final class NumberFormatUtil{
      * @see <a href="../util/NumberUtil.html#RoundingMode">JAVA 8种舍入法</a>
      */
     public static String format(Number value,String numberPattern,RoundingMode roundingMode){
-        if (null == value){
-            throw new NullPointerException("the value is null or empty!");
-        }
-
-        if (null == numberPattern){
-            throw new NullPointerException("the numberPattern is null or empty!");
-        }
+        Validate.notNull(value, "value can't be null!");
+        Validate.notNull(numberPattern, "numberPattern can't be null!");
         try{
             //改构造方法内部 调用了applyPattern(pattern, false)
             DecimalFormat decimalFormat = new DecimalFormat(numberPattern);

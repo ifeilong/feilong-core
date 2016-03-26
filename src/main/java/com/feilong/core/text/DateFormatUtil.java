@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import com.feilong.core.util.Validator;
+import org.apache.commons.lang3.Validate;
 
 /**
  * {@link DateFormat}是日期/时间格式化子类的抽象类.
@@ -140,9 +140,8 @@ public class DateFormatUtil{
      * @see SimpleDateFormat#parse(String, ParsePosition)
      */
     public static Date parse(String dateString,String pattern,Locale locale){
-        if (Validator.isNullOrEmpty(dateString)){
-            throw new NullPointerException("param dateString can not NullOrEmpty");
-        }
+        Validate.notEmpty(dateString, "dateString can't be null/empty!");
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
         ParsePosition parsePosition = new ParsePosition(0);
         return simpleDateFormat.parse(dateString, parsePosition);

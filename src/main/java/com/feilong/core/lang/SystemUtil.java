@@ -19,8 +19,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.util.PropertiesUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * {@link java.lang.System}工具类.
@@ -367,9 +368,7 @@ public final class SystemUtil{
      * @see java.lang.System#setProperty(String, String)
      */
     public static void setPropertiesFromMap(Map<String, String> map){
-        if (Validator.isNullOrEmpty(map)){
-            throw new NullPointerException("map can't be null/empty!");
-        }
+        Validate.notNull(map, "map can't be null!");
         for (Map.Entry<String, String> entry : map.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
@@ -388,9 +387,7 @@ public final class SystemUtil{
      * @see java.lang.System#setProperty(String, String)
      */
     public static void setPropertiesFromProperties(Properties properties){
-        if (Validator.isNullOrEmpty(properties)){
-            throw new NullPointerException("properties can't be null/empty!");
-        }
+        Validate.notNull(properties, "properties can't be null!");
 
         Map<String, String> map = PropertiesUtil.toMap(properties);
         setPropertiesFromMap(map);

@@ -17,13 +17,13 @@ package com.feilong.core.lang.reflect;
 
 import java.lang.reflect.Constructor;
 
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.tools.slf4j.Slf4jUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * 使用反射方法请求构造函数创建新实例的工具类,可以简化程序中使用反射方式创建对象的代码,focused on constructors.
@@ -113,9 +113,7 @@ public final class ConstructorUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T newInstance(String className,Object...parameterValues){
-        if (Validator.isNullOrEmpty(className)){
-            throw new NullPointerException("className can't be null/empty!");
-        }
+        Validate.notEmpty(className, "className can't be null/empty!");
 
         try{
             // 装载连接初始化类

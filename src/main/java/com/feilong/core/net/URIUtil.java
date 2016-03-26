@@ -24,6 +24,7 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -277,9 +278,7 @@ public final class URIUtil{
      * @since 1.4.0
      */
     public static String encodeUri(String uriString,String charsetType){
-        if (Validator.isNullOrEmpty(uriString)){
-            throw new NullPointerException("the url is null or empty!");
-        }
+        Validate.notEmpty(uriString, "uriString can't be null/empty!");
         LOGGER.debug("in uriString:[{}],charsetType:{}", uriString, charsetType);
 
         if (!hasQueryString(uriString)){
