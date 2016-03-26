@@ -225,14 +225,14 @@ public final class Validator{
      */
     private static boolean arrayIsNullOrEmpty(Object value){
         if (value instanceof Object[] //Object[] 数组 Integer/String...自定义的对象User.等数组也 instanceof Object[]
+                        || value instanceof byte[] // primitive bytes
+                        || value instanceof boolean[] // primitive booleans
+                        || value instanceof short[] // primitive shorts       
+                        || value instanceof char[]// primitive chars
                         || value instanceof int[] // primitive ints
                         || value instanceof long[] // primitive longs
                         || value instanceof float[]// primitive floats
                         || value instanceof double[] // primitive doubles
-                        || value instanceof char[]// primitive chars
-                        || value instanceof boolean[] // primitive booleans
-                        || value instanceof byte[] // primitive bytes
-                        || value instanceof short[] // primitive shorts       
         ){
             return Array.getLength(value) == 0;
         }

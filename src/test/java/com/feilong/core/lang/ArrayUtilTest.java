@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,14 +71,14 @@ public class ArrayUtilTest{
      */
     @Test
     public void testContain(){
-        Assert.assertEquals(true, ArrayUtils.contains(new Integer[] { 1, 223 }, 1));
-        Assert.assertEquals(true, ArrayUtils.contains(new Long[] { 1L, 223L }, 1L));
+        assertEquals(true, ArrayUtils.contains(new Integer[] { 1, 223 }, 1));
+        assertEquals(true, ArrayUtils.contains(new Long[] { 1L, 223L }, 1L));
 
         String[] array = new String[] { "1", "223" };
-        Assert.assertEquals(false, ArrayUtils.contains(array, "2"));
+        assertEquals(false, ArrayUtils.contains(array, "2"));
 
         int[] intarray = { 1, 223 };
-        Assert.assertEquals(true, ArrayUtils.contains(intarray, 1));
+        assertEquals(true, ArrayUtils.contains(intarray, 1));
     }
 
     /**

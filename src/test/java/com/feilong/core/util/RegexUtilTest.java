@@ -39,8 +39,8 @@ public class RegexUtilTest{
     public void group(){
         String regexPattern = "(.*?)@(.*?)";
         String email = "venusdrogon@163.com";
-        LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");
-        LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");
+        assertEquals("venusdrogon", RegexUtil.group(regexPattern, email, 1));
+        assertEquals("163.com", RegexUtil.group(regexPattern, email, 2));
     }
 
     /**
@@ -102,22 +102,10 @@ public class RegexUtilTest{
      */
     @Test
     public void testIsIP(){
-        assertEquals(true, RegexUtil.matches(RegexPattern.IP, "venusdrogon@163.com"));
+        assertEquals(false, RegexUtil.matches(RegexPattern.IP, "venusdrogon@163.com"));
         assertEquals(true, RegexUtil.matches(RegexPattern.IP, "127.0.0.1"));
-        assertEquals(true, RegexUtil.matches(RegexPattern.IP, "127.0.0.*"));
-        assertEquals(true, RegexUtil.matches(RegexPattern.IP, "327.0.0.1"));
-    }
-
-    /**
-     * Test match.
-     */
-    @Test
-    public void testMatch(){
-        String iphone = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7";
-
-        String pattern = "^(MIDP)|(WAP)|(UP.Browser)|(Smartphone)|(Obigo)|(Mobile)|(AU.Browser)|(wxd.Mms)|(WxdB.Browser)|(CLDC)|(UP.Link)|(KM.Browser)|(UCWEB)|(SEMC\\-Browser)|(Mini)|(Symbian)|(Palm)|(Nokia)|(Panasonic)|(MOT\\-)|(SonyEricsson)|(NEC\\-)|(Alcatel)|(Ericsson)|(BENQ)|(BenQ)|(Amoisonic)|(Amoi\\-)|(Capitel)|(PHILIPS)|(SAMSUNG)|(Lenovo)|(Mitsu)|(Motorola)|(SHARP)|(WAPPER)|(LG\\-)|(LG/)|(EG900)|(CECT)|(Compal)|(kejian)|(Bird)|(BIRD)|(G900/V1.0)|(Arima)|(CTL)|(TDG)|(Daxian)|(DAXIAN)|(DBTEL)|(Eastcom)|(EASTCOM)|(PANTECH)|(Dopod)|(Haier)|(HAIER)|(KONKA)|(KEJIAN)|(LENOVO)|(Soutec)|(SOUTEC)|(SAGEM)|(SEC\\-)|(SED\\-)|(EMOL\\-)|(INNO55)|(ZTE)|(iPhone)|(Android)|(Windows CE)$";
-
-        assertEquals(true, RegexUtil.matches(pattern, iphone));
+        assertEquals(false, RegexUtil.matches(RegexPattern.IP, "127.0.0.*"));
+        assertEquals(false, RegexUtil.matches(RegexPattern.IP, "327.0.0.1"));
     }
 
     /**
