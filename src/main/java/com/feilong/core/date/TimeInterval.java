@@ -29,7 +29,7 @@ package com.feilong.core.date;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0 2012-5-18 下午2:57:14
+ * @version 1.0.0 2012-5-18 下午2:57:14
  * @version 1.0.5 2014-5-4 14:23 change to interface
  * @version 1.2.2 2015-7-17 01:02 change Integer/Long type to primitive type
  * @since 1.0.0
