@@ -102,32 +102,25 @@ public final class RegexUtil{
      * @since 1.0.7
      */
     public static Map<Integer, String> group(String regexPattern,CharSequence input){
-
         Map<Integer, String> groupMap = new LinkedHashMap<Integer, String>();
 
         Matcher matcher = getMatcher(regexPattern, input);
         boolean matches = matcher.matches();
         if (matches){
 
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
-            }
+            LOGGER.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
             // 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
             groupMap.put(0, matcher.group());
 
-            if (LOGGER.isDebugEnabled()){
-                //匹配的索引
-                LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
-            }
+            //匹配的索引
+            LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
 
             int groupCount = matcher.groupCount();
 
             for (int i = 1; i <= groupCount; ++i){
 
-                if (LOGGER.isDebugEnabled()){
-                    //匹配的索引
-                    LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
-                }
+                //匹配的索引
+                LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
                 String groupValue = matcher.group(i);
                 groupMap.put(i, groupValue);
             }
@@ -136,9 +129,7 @@ public final class RegexUtil{
                 LOGGER.debug("groupMap:{}", JsonUtil.format(groupMap));
             }
         }else{
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
-            }
+            LOGGER.debug("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
         }
         return groupMap;
     }

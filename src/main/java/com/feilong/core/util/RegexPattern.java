@@ -229,8 +229,6 @@ import java.util.regex.Pattern;
  * </table>
  * </blockquote>
  * 
- * 
- * 
  * <pre>
  * {@code
  * 1.字符类是可选自符的集合,用‘[’封装,比如[Jj],[0-9],[A-Za-z]或[^0-9].这里的-表示范围(Unicode落在两个边界之间的所有字符),^表示求补(指定字符外的所有字符 

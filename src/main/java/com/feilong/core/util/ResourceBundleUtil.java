@@ -362,8 +362,7 @@ public final class ResourceBundleUtil{
             String value = entry.getValue();
             // 以 prefix 开头
             if (key.startsWith(prefix)){
-                // 分隔
-                String[] values = key.split(spliter);
+                String[] values = key.split(spliter);// 分隔
                 if (values.length >= 2){
                     result.put(values[1], value);
                 }
