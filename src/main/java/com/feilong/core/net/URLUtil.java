@@ -25,6 +25,8 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
+
 /**
  * The Class URLUtil.
  * 
@@ -73,17 +75,11 @@ public final class URLUtil{
      *            the urls
      * @return the string[]
      * @since 1.2.1
+     * @see com.feilong.core.bean.ConvertUtil#toStrings(Object)
      */
-    public static String[] toStringArray(URL[] urls){
+    public static String[] toStringArray(URL...urls){
         Validate.notNull(urls, "urls can't be null!");
-        String[] stringArray = new String[urls.length];
-
-        int i = 0;
-        for (URL url : urls){
-            stringArray[i] = url.toString();
-            i++;
-        }
-        return stringArray;
+        return ConvertUtil.toStrings(urls);
     }
 
     /**
@@ -189,6 +185,7 @@ public final class URLUtil{
      * @return url
      * @see java.io.File#toURI()
      * @see java.net.URI#toURL()
+     * @see "org.apache.commons.io.FileUtils#toURLs(File[])"
      * @since 1.4.0
      */
     public static URL getFileURL(String filePathName){
