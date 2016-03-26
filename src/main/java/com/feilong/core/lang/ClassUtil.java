@@ -252,7 +252,7 @@ public final class ClassUtil{
      * <tr valign="top">
      * <td>isInstance(Object obj)方法</td>
      * <td>obj是被测试的对象,如果obj是调用这个方法的class或接口 的实例,则返回true。<br>
-     * 这个方法是instanceof运算符的动态等价</td>
+     * 这个方法是instanceof运算符的 <span style="color:red">动态等价</span></td>
      * </tr>
      * </table>
      * 

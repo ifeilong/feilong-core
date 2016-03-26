@@ -30,6 +30,15 @@ import com.feilong.core.bean.PropertyUtil;
 /**
  * 数组工具类.
  * 
+ * <p>
+ * 如果你想detect所有的 array类型,你必须判断一个object is an instanceof boolean[], byte[], short[], char[], int[], long[], float[], double[], or
+ * Object[],
+ * 
+ * <br>
+ * 注:Object[] 数组 Integer/String...自定义的对象User.等数组也 instanceof Object[],二维数组不管是primitive 还是包装类型,都instanceof Object[];<br>
+ * so depending on how you want to handle nested arrays, it can get complicated.
+ * </p>
+ * 
  * <h3>提供以下方法:</h3>
  * <blockquote>
  * <ol>

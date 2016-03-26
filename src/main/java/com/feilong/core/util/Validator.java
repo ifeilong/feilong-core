@@ -116,18 +116,8 @@ public final class Validator{
         }
 
         // collections 支持的类型
-        boolean collectionsSupportType = value instanceof Collection // 集合
-                        || value instanceof Map// map
-                        || value instanceof Enumeration // 枚举
-                        || value instanceof Iterator// Iterator迭代器
-        ;
-        if (collectionsSupportType){
+        if (isCollectionsSupportType(value)){
             return CollectionUtils.sizeIsEmpty(value);
-        }
-
-        //判断数组
-        if (ObjectUtil.isArray(value)){
-            return Array.getLength(value) == 0;
         }
 
         // 这里可以扩展
@@ -161,5 +151,22 @@ public final class Validator{
      */
     public static boolean isNotNullOrEmpty(Object value){
         return !isNullOrEmpty(value);
+    }
+
+    /**
+     * Checks if is collections support type.
+     *
+     * @param value
+     *            the value
+     * @return true, if checks if is collections support type
+     * @since 1.5.2
+     */
+    private static boolean isCollectionsSupportType(Object value){
+        return value instanceof Collection // 集合
+                        || value instanceof Map// map
+                        || value instanceof Enumeration // 枚举
+                        || value instanceof Iterator// Iterator迭代器
+                        || ObjectUtil.isArray(value)//判断数组
+        ;
     }
 }

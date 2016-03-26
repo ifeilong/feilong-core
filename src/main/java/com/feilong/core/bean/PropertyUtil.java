@@ -177,6 +177,10 @@ public final class PropertyUtil{
      * 返回一个<code>bean</code>中所有的 <span style="color:green">可读属性</span>,并将属性名/属性值放入一个Map中.
      * 
      * <p>
+     * Return the entire set of properties for which the specified bean provides a read method.
+     * </p>
+     * 
+     * <p>
      * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性
      * </p>
      * 
@@ -199,7 +203,6 @@ public final class PropertyUtil{
      */
     public static Map<String, Object> describe(Object bean){
         try{
-            //Return the entire set of properties for which the specified bean provides a read method.
             return PropertyUtils.describe(bean);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
@@ -209,6 +212,15 @@ public final class PropertyUtil{
 
     /**
      * 使用 {@link PropertyUtils#setProperty(Object, String, Object)} 来设置属性值(<b>不会进行类型转换</b>).
+     * 
+     * <p>
+     * Set the value of the specified property of the specified bean, <br>
+     * no matter which property reference format is used, with no type conversions.
+     * </p>
+     * 
+     * <p>
+     * PropertyUtils的功能类似于BeanUtils,但在底层不会对传递的数据做转换处理
+     * </p>
      *
      * @param bean
      *            Bean whose property is to be modified
@@ -222,8 +234,6 @@ public final class PropertyUtil{
      */
     public static void setProperty(Object bean,String propertyName,Object value){
         try{
-            //Set the value of the specified property of the specified bean, no matter which property reference format is used, with no type conversions.
-            // PropertyUtils的功能类似于BeanUtils,但在底层不会对传递的数据做转换处理
             PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
@@ -235,6 +245,12 @@ public final class PropertyUtil{
 
     /**
      * 使用 {@link PropertyUtils#getProperty(Object, String)} 类从对象中取得属性值.
+     * 
+     * <p>
+     * Return the value of the specified property of the specified bean, <br>
+     * no matter which property reference format is used, with no type conversions.<br>
+     * For more details see PropertyUtilsBean.
+     * </p>
      *
      * @param <T>
      *            the generic type
@@ -250,8 +266,6 @@ public final class PropertyUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T getProperty(Object bean,String propertyName){
-        //Return the value of the specified property of the specified bean, no matter which property reference format is used, with no type conversions.
-        //For more details see PropertyUtilsBean.
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
@@ -297,15 +311,7 @@ public final class PropertyUtil{
             return (T) obj;
         }
 
-        //一般自定义的command 里面 就是些 string int,list map等对象
-        //这些我们过滤掉,只取类型是 findedClassType的
-        boolean canFindType = !ClassUtils.isPrimitiveOrWrapper(toBeFindedClassType)//
-                        && !ClassUtil.isInstance(obj, CharSequence.class)//
-                        && !ClassUtil.isInstance(obj, Collection.class) //
-                        && !ClassUtil.isInstance(obj, Map.class) //
-        ;
-
-        if (!canFindType){
+        if (!isCanFindType(obj, toBeFindedClassType)){
             return null;
         }
 
@@ -325,5 +331,28 @@ public final class PropertyUtil{
             }
         }
         return null;
+    }
+
+    /**
+     * 一般自定义的command 里面 就是些 string int,list map等对象.<br>
+     * 这些我们过滤掉,只取类型是 findedClassType的
+     *
+     * @param <T>
+     *            the generic type
+     * @param obj
+     *            the obj
+     * @param toBeFindedClassType
+     *            the to be finded class type
+     * @return true, if checks if is can find type
+     * @since 1.5.2
+     */
+    private static <T> boolean isCanFindType(Object obj,Class<T> toBeFindedClassType){
+        //一般自定义的command 里面 就是些 string int,list map等对象
+        //这些我们过滤掉,只取类型是 findedClassType的
+        return !ClassUtils.isPrimitiveOrWrapper(toBeFindedClassType)//
+                        && !ClassUtil.isInstance(obj, CharSequence.class)//
+                        && !ClassUtil.isInstance(obj, Collection.class) //
+                        && !ClassUtil.isInstance(obj, Map.class) //
+        ;
     }
 }

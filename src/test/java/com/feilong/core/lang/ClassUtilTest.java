@@ -45,6 +45,8 @@ public class ClassUtilTest{
     public void testIsInstance(){
         assertEquals(true, ClassUtil.isInstance(new User(), Comparable.class));
         assertEquals(true, ClassUtil.isInstance("1234", CharSequence.class));
+        assertEquals(true, new User() instanceof Comparable);
+        assertEquals(true, "1234" instanceof CharSequence);
     }
 
     /**

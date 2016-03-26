@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * {@link Object} 工具类.
  * 
@@ -64,13 +66,47 @@ public final class ObjectUtil{
 
     /**
      * 是否是数组.
+     * 
+     * <h3><code>instanceof</code>和 {@link java.lang.Class#isArray()}的区别:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 
+     * In general, use the instanceof operator to test whether an object is an array.<br>
+     * 
+     * At the JVM level, the instanceof operator translates to a specific "instanceof" byte code, which is highly optimized in most JVM
+     * implementations.<br>
+     * </p>
+     * 
+     * <p>
+     * The reflective approach (getClass().isArray()) is compiled to two separate "invokevirtual" instructions. The more generic
+     * optimizations applied by the JVM to these may not be as fast as the hand-tuned optimizations inherent in the "instanceof"
+     * instruction.<br>
+     * </p>
+     * 
+     * 
+     * <p>
+     * 有两种特殊情况: null references 和 references to primitive arrays.<br>
+     * 
+     * A null reference will cause instanceof to result false, while the isArray throws a NullPointerException.<br>
+     * </p>
+     * 
+     * <p>
+     * Applied to a primitive array, the instanceof results false, but the isArray returns true.
+     * </p>
+     * </blockquote>
      *
      * @param object
      *            the object
      * @return true, if checks if is array
+     * @see <a href="http://stackoverflow.com/questions/219881/java-array-reflection-isarray-vs-instanceof">Java array reflection: isArray
+     *      vs. instanceof</a>
+     * @see <a href="http://stackoverflow.com/questions/2725533/how-to-see-if-an-object-is-an-array-without-using-reflection">How to see if
+     *      an object is an array without using reflection?</a>
      * @since 1.3.0
      */
     public static Boolean isArray(Object object){
+        Validate.notNull(object, "object can't be null!");
         return object.getClass().isArray();
     }
 }

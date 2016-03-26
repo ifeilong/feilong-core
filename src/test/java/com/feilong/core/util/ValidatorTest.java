@@ -62,17 +62,6 @@ public class ValidatorTest{
         Object aObject = is;
         assertEquals(false, aObject instanceof Object[]);
         assertEquals(true, aObject instanceof int[]);
-
-        //注:二维数组不管是primitive 还是包装类型,都instanceof Object[];
-        //        value instanceof Object[] //Object[] 数组 Integer/String...自定义的对象User.等数组也 instanceof Object[]
-        //                        || value instanceof byte[] // primitive bytes
-        //                        || value instanceof boolean[] // primitive booleans
-        //                        || value instanceof short[] // primitive shorts       
-        //                        || value instanceof char[]// primitive chars
-        //                        || value instanceof int[] // primitive ints
-        //                        || value instanceof long[] // primitive longs
-        //                        || value instanceof float[]// primitive floats
-        //                        || value instanceof double[] // primitive doubles
     }
 
     /**
