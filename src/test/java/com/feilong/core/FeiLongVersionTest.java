@@ -36,7 +36,7 @@ public class FeiLongVersionTest{
      * Test method for {@link com.feilong.core.FeiLongVersion#getVersion()}.
      */
     @Test
-    public final void testGetVersion(){
+    public void testGetVersion(){
         LOGGER.info(FeiLongVersion.getVersion());
         //LOGGER.info(SpringVersion.getVersion());
 
