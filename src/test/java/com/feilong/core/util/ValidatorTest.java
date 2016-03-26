@@ -45,6 +45,9 @@ public class ValidatorTest{
         int[] i = {};
         assertEquals(true, CollectionUtils.sizeIsEmpty(i));
         assertEquals(true, Validator.isNullOrEmpty(i));
+
+        User[] users = {};
+        assertEquals(true, Validator.isNullOrEmpty(users));
     }
 
     /**
