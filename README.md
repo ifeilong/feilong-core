@@ -202,12 +202,6 @@ null==Object  | 直接返回true
     </dependency>
     
     <dependency>
-		<groupId>commons-io</groupId>
-		<artifactId>commons-io</artifactId>
-		<version>2.4</version>
-    </dependency>
-    
-    <dependency>
 		<groupId>net.sf.json-lib</groupId>
 		<artifactId>json-lib</artifactId>
 		<version>2.4</version>
@@ -244,8 +238,6 @@ null==Object  | 直接返回true
 `feilong-core` (V 1.2.0) module 进行了调整:
 * 内部package name 从 `com.feilong.commons.core.xxx`,修改成 `com.feilong.core.xxx`
 * 其他参见 [release log](https://github.com/venusdrogon/feilong-core/releases)
-
-
 
 
 # About
