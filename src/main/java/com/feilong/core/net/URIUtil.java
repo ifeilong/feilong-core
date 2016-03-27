@@ -359,10 +359,10 @@ public final class URIUtil{
     // [start] encode/decode
 
     /**
-     * iso-8859-1的方式去除乱码.
+     * {@link CharsetType#ISO_8859_1} 的方式去除乱码.
      * 
      * <p>
-     * iso-8859-1是JAVA网络传输使用的标准 字符集
+     * {@link CharsetType#ISO_8859_1} 是JAVA网络传输使用的标准 字符集
      * </p>
      * 
      * @param str
