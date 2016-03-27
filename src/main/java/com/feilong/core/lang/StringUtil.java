@@ -30,6 +30,7 @@ import org.apache.commons.lang3.text.StrSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.CharsetType;
 import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;

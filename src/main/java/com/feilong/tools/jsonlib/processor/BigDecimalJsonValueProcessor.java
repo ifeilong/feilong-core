@@ -19,8 +19,8 @@ import java.math.BigDecimal;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.feilong.core.NumberPattern;
 import com.feilong.core.Validator;
-import com.feilong.core.lang.NumberPattern;
 import com.feilong.core.lang.NumberUtil;
 
 import net.sf.json.JsonConfig;
@@ -38,7 +38,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
     /**
      * The number pattern.
      * 
-     * @see com.feilong.core.lang.NumberPattern
+     * @see com.feilong.core.NumberPattern
      */
     private String numberPattern;
 

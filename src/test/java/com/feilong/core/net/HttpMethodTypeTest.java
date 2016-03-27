@@ -20,6 +20,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
+import com.feilong.core.HttpMethodType;
 import com.feilong.core.lang.EnumUtil;
 
 /**

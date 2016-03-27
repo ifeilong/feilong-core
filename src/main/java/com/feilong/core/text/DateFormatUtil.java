@@ -69,7 +69,7 @@ public class DateFormatUtil{
      * @param date
      *            the date
      * @param pattern
-     *            建议使用 {@link com.feilong.core.date.DatePattern} 内置的时间格式
+     *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
      * @return the string
      * @see #format(Date, String, Locale)
      * @see com.feilong.core.date.DateUtil#date2String(Date, String)
@@ -88,7 +88,7 @@ public class DateFormatUtil{
      * @param date
      *            the date
      * @param pattern
-     *            建议使用 {@link com.feilong.core.date.DatePattern} 内置的时间格式
+     *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
      * @param locale
      *            the locale
      * @return the string
@@ -117,7 +117,7 @@ public class DateFormatUtil{
      * @param dateString
      *            the date string
      * @param pattern
-     *            建议使用 {@link com.feilong.core.date.DatePattern} 内置的时间格式
+     *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
      * @return the date
      * @see #parse(String, String, Locale)
      */
@@ -131,7 +131,7 @@ public class DateFormatUtil{
      * @param dateString
      *            the date string
      * @param pattern
-     *            建议使用 {@link com.feilong.core.date.DatePattern} 内置的时间格式
+     *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
      * @param locale
      *            the locale
      * @return the date

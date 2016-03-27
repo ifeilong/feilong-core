@@ -15,7 +15,7 @@
  */
 package com.feilong.tools.jsonlib;
 
-import com.feilong.core.lang.CharsetType;
+import com.feilong.core.CharsetType;
 
 import net.sf.json.JSON;
 import net.sf.json.xml.XMLSerializer;

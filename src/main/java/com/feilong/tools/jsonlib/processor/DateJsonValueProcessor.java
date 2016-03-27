@@ -17,7 +17,7 @@ package com.feilong.tools.jsonlib.processor;
 
 import java.util.Date;
 
-import com.feilong.core.date.DatePattern;
+import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 
 import net.sf.json.JsonConfig;

@@ -37,13 +37,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.DatePattern;
 import com.feilong.core.bean.command.Address;
 import com.feilong.core.bean.command.Customer;
 import com.feilong.core.bean.command.Member;
 import com.feilong.core.bean.command.MemberAddress;
 import com.feilong.core.bean.command.SalesOrder;
 import com.feilong.core.bean.command.SalesOrderDto;
-import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.Person;
 import com.feilong.test.User;

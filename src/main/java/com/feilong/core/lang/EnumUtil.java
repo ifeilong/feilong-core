@@ -51,7 +51,7 @@ public final class EnumUtil{
      * 
      * <pre>
      * 
-     * 适用于这种{@link com.feilong.core.net.HttpMethodType} 待自定义属性的枚举类型,调用方式:
+     * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
      *  EnumUtil.getEnumByField(com.feilong.core.net.HttpMethodType.class, "method", "get")
@@ -63,9 +63,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.net.HttpMethodType}
+     *            the enum class 比如 {@link com.feilong.core.HttpMethodType}
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.net.HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 {@link com.feilong.core.HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @return 获得 enum constant
@@ -80,7 +80,7 @@ public final class EnumUtil{
      * 
      * <pre>
      * 
-     * 适用于这种{@link com.feilong.core.net.HttpMethodType} 待自定义属性的枚举类型,调用方式:
+     * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
      *  EnumUtil.getEnumByField(com.feilong.core.net.HttpMethodType.class, "method", "get")
@@ -92,9 +92,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.net.HttpMethodType}
+     *            the enum class 比如 {@link com.feilong.core.HttpMethodType}
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.net.HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 {@link com.feilong.core.HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @return 获得 enum constant
@@ -110,7 +110,7 @@ public final class EnumUtil{
      * 
      * <pre>
      * 
-     * 适用于这种{@link com.feilong.core.net.HttpMethodType} 待自定义属性的枚举类型,调用方式:
+     * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
      *  EnumUtil.getEnumByField(com.feilong.core.net.HttpMethodType.class, "method", "get")
@@ -122,9 +122,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.net.HttpMethodType}
+     *            the enum class 比如 {@link com.feilong.core.HttpMethodType}
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.net.HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 {@link com.feilong.core.HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @param ignoreCase

@@ -28,8 +28,9 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.CharsetType;
+import com.feilong.core.URIComponents;
 import com.feilong.core.Validator;
-import com.feilong.core.lang.CharsetType;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 

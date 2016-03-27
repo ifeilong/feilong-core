@@ -30,7 +30,7 @@ import com.feilong.core.Validator;
  * 
  * <blockquote>
  * <p>
- * 假设class 是 {@link com.feilong.core.date.DatePattern}
+ * 假设class 是 {@link com.feilong.core.DatePattern}
  * </p>
  * 
  * <table border="1" cellspacing="0" cellpadding="4">

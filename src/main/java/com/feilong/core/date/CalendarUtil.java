@@ -19,6 +19,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import com.feilong.core.DatePattern;
+
 /**
  * 扩展 {@link DateUtil}类,更多人性化的操作及转换 .
  * 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core;
 
 /**
  * 常用时间间隔.
@@ -27,11 +27,12 @@ package com.feilong.core.date;
  * 一年数据为 {@link #SECONDS_PER_YEAR} 31536000,所以 {@link Integer#MAX_VALUE} 为 68.096259734906 年
  * </p>
  * </blockquote>
- * 
+ *
  * @author feilong
  * @version 1.0.0 2012-5-18 下午2:57:14
  * @version 1.0.5 2014-5-4 14:23 change to interface
  * @version 1.2.2 2015-7-17 01:02 change Integer/Long type to primitive type
+ * @see org.apache.commons.lang3.time.DateUtils
  * @since 1.0.0
  */
 public final class TimeInterval{
@@ -80,45 +81,45 @@ public final class TimeInterval{
 
     /**
      * 每秒的毫秒数,1秒 1000ms.
-     * 
-     * @since 1.2.2
+     *
      * @see #SECONDS_PER_SECOND
      * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_SECOND
+     * @since 1.2.2
      */
     public static final int  MILLISECOND_PER_SECONDS = 1000;
 
     /**
      * 每分钟的毫秒数,1分钟 60 000ms.
-     * 
-     * @since 1.2.1
+     *
      * @see #SECONDS_PER_MINUTE
      * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_MINUTE
+     * @since 1.2.1
      */
     public static final int  MILLISECOND_PER_MINUTE  = SECONDS_PER_MINUTE * 1000;
 
     /**
      * 每小时的毫秒数,1小时 3600 000ms.
-     * 
-     * @since 1.2.1
+     *
      * @see #SECONDS_PER_HOUR
      * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_HOUR
+     * @since 1.2.1
      */
     public static final int  MILLISECOND_PER_HOUR    = SECONDS_PER_HOUR * 1000;
 
     /**
      * 每天的毫秒数,1天 86400 000ms.
-     * 
-     * @since 1.2.1
+     *
      * @see #SECONDS_PER_DAY
      * @see org.apache.commons.lang3.time.DateUtils#MILLIS_PER_DAY
+     * @since 1.2.1
      */
     public static final int  MILLISECOND_PER_DAY     = SECONDS_PER_DAY * 1000;
 
     /**
      * 每星期的毫秒数,一个星期 604 800 000ms.
-     * 
-     * @since 1.2.1
+     *
      * @see #SECONDS_PER_WEEK
+     * @since 1.2.1
      */
     public static final int  MILLISECOND_PER_WEEK    = SECONDS_PER_WEEK * 1000;
 
@@ -128,17 +129,17 @@ public final class TimeInterval{
      * <p>
      * 30天一个月 ,估值,没有精确一个月28/29天 还是30 31天.
      * </p>
-     * 
-     * @since 1.2.1
+     *
      * @see #SECONDS_PER_MONTH
+     * @since 1.2.1
      */
     public static final long MILLISECOND_PER_MONTH   = 1000L * SECONDS_PER_MONTH;
 
     /**
-     * 每年的毫秒数, 31536000 000ms,<span style="color:red">大于 {@link Integer#MAX_VALUE}:2147483647</span>
-     * 
-     * @since 1.2.1
+     * 每年的毫秒数, 31536000 000ms,<span style="color:red">大于 {@link Integer#MAX_VALUE}:2147483647</span>.
+     *
      * @see #SECONDS_PER_YEAR
+     * @since 1.2.1
      */
     public static final long MILLISECOND_PER_YEAR    = 1000L * SECONDS_PER_YEAR;
 

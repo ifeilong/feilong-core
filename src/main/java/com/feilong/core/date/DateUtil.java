@@ -21,6 +21,8 @@ import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.Validate;
 
+import com.feilong.core.DatePattern;
+import com.feilong.core.TimeInterval;
 import com.feilong.core.text.DateFormatUtil;
 
 /**
@@ -1184,7 +1186,7 @@ public final class DateUtil{
      * @param spaceTime
      *            the space time
      * @return the interval week
-     * @see com.feilong.core.date.TimeInterval#SECONDS_PER_WEEK
+     * @see com.feilong.core.TimeInterval#SECONDS_PER_WEEK
      * @since 1.2.1
      */
     public static int getIntervalWeek(long spaceTime){

@@ -32,8 +32,8 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.DatePattern;
 import com.feilong.core.Validator;
-import com.feilong.core.date.DatePattern;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.lang.reflect.FieldUtil;

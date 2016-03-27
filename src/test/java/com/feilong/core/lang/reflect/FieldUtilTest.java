@@ -21,8 +21,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.TimeInterval;
-import com.feilong.core.net.HttpMethodType;
+import com.feilong.core.HttpMethodType;
+import com.feilong.core.TimeInterval;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 

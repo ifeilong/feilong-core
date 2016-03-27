@@ -19,8 +19,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.feilong.core.HttpMethodType;
 import com.feilong.core.bean.BeanUtilException;
-import com.feilong.core.net.HttpMethodType;
 
 /**
  * The Class EnumUtilTest.
