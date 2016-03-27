@@ -64,7 +64,6 @@ Package | Description
 com.feilong.core  | 常用工具类, [TimeInterval](src/main/java/com/feilong/core/TimeInterval.java),[Validator](src/main/java/com/feilong/core/Validator.java)
 com.feilong.core.`bean`  | 封装了`commons-beanutils`,最大的特点是使用了`BeanUtilException`(RuntimeException),常见的类有[BeanUtil](src/main/java/com/feilong/core/bean/BeanUtil.java),[PropertyUtil](src/main/java/com/feilong/core/bean/PropertyUtil.java),[ConvertUtil](src/main/java/com/feilong/core/bean/ConvertUtil.java)
 com.feilong.core.`date`  | 提供了常用的日期操作,常见的类有[DateUtil](src/main/java/com/feilong/core/date/DateUtil.java),[CalendarUtil](src/main/java/com/feilong/core/date/CalendarUtil.java),[DateExtensionUtil](src/main/java/com/feilong/core/date/DateExtensionUtil.java)
-com.feilong.core.`io`  | 提供了`java.io`包下常用的类的操作
 com.feilong.core.`lang`  | 提供了`java.lang`包下常用的类的操作
 com.feilong.core.`lang.reflect`  | 提供了常用的`java.lang.reflect`包下类的操作,以及封装了 `org.apache.commons.lang3.reflect`包
 com.feilong.core.`net`  | 提供了`java.net`包下常用的类的操作
@@ -160,7 +159,7 @@ con.setConnectTimeout(100*TimeInterval.MILLISECOND_PER_SECONDS);
 
 替代,可以有效的避免由于手误带来的不必要的错误,并且代码可读性更高
 
-## date包,时间日期操作核心类,提供了常见的日期操作,包含以下5个class
+## date包,时间日期操作核心类,提供了常见的日期操作,包含以下3个class
 
 Class | Description 
 :---- | :---------
@@ -169,7 +168,7 @@ Class | Description
 [DateExtensionUtil](src/main/java/com/feilong/core/date/DateExtensionUtil.java)  | 日期扩展工具类,重在个性化输出结果,针对业务个性化显示
 
 
-## util包,提供了常见的日期操作,包含以下8个class
+## util包,提供了常见的日期操作,包含以下7个class
 
 Class | Description 
 :---- | :---------
