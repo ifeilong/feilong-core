@@ -19,8 +19,8 @@ import java.util.Collection;
 
 import org.apache.commons.collections4.Predicate;
 
+import com.feilong.core.Validator;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,判断是否 {@link java.util.Collection#contains(Object)} 在

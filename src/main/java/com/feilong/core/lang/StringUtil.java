@@ -30,9 +30,9 @@ import org.apache.commons.lang3.text.StrSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.tools.slf4j.Slf4jUtil;
-import com.feilong.core.util.Validator;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link String}工具类,可以 查询,截取,format,转成16进制码.

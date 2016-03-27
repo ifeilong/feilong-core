@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools;
+package com.feilong.tools;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,10 +24,10 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateExtensionUtil;
-import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class BaseJsonTest.

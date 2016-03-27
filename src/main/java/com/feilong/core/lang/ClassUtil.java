@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.feilong.core.util.Validator;
+import com.feilong.core.Validator;
 
 /**
  * {@link java.lang.Class} 工具类.

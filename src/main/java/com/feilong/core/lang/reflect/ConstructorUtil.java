@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.tools.slf4j.Slf4jUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 使用反射方法请求构造函数创建新实例的工具类,可以简化程序中使用反射方式创建对象的代码,focused on constructors.

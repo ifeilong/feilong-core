@@ -28,10 +28,10 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validator;
 import com.feilong.core.lang.CharsetType;
 import com.feilong.core.lang.StringUtil;
-import com.feilong.core.tools.slf4j.Slf4jUtil;
-import com.feilong.core.util.Validator;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 处理{@link java.net.URI}(Uniform Resource Locator) {@link java.net.URL}(Uniform Resource Identifier) 等.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.jsonlib;
+package com.feilong.tools.jsonlib;
 
 import java.util.Map;
 
@@ -66,8 +66,8 @@ public class JsonFormatConfig{
      * 
      * 
      * @see net.sf.json.processors.JsonValueProcessor
-     * @see com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor
-     * @see com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
+     * @see com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor
+     * @see com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
     private Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap;
 
@@ -128,8 +128,8 @@ public class JsonFormatConfig{
      * 
      * @return the propertyNameAndJsonValueProcessorMap
      * @see net.sf.json.processors.JsonValueProcessor
-     * @see com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor
-     * @see com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
+     * @see com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor
+     * @see com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
     public Map<String, JsonValueProcessor> getPropertyNameAndJsonValueProcessorMap(){
         return propertyNameAndJsonValueProcessorMap;
@@ -167,8 +167,8 @@ public class JsonFormatConfig{
      * @param propertyNameAndJsonValueProcessorMap
      *            the propertyNameAndJsonValueProcessorMap to set
      * @see net.sf.json.processors.JsonValueProcessor
-     * @see com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor
-     * @see com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
+     * @see com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor
+     * @see com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
     public void setPropertyNameAndJsonValueProcessorMap(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
         this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;

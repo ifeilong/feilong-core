@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
@@ -22,8 +22,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
-
-import com.feilong.core.lang.ObjectUtil;
 
 /**
  * <b>核心类</b>,判断对象是否为null或者Empty.
@@ -42,7 +40,7 @@ import com.feilong.core.lang.ObjectUtil;
  * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
  * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
  * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
- * <li><code>数组</code> {@link ObjectUtil#isArray(Object)},判断 {@link Array#getLength(Object)} ==0</li>
+ * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
  * </ol>
  * </blockquote>
  * 
@@ -94,7 +92,7 @@ public final class Validator{
      * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
      * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
-     * <li><code>数组</code> {@link ObjectUtil#isArray(Object)},判断 {@link Array#getLength(Object)} ==0</li>
+     * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
      * </ol>
      * </blockquote>
      * 
@@ -136,7 +134,7 @@ public final class Validator{
      * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
      * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
-     * <li><code>数组</code> {@link ObjectUtil#isArray(Object)},判断 {@link Array#getLength(Object)} ==0</li>
+     * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
      * </ol>
      * </blockquote>
      * 
@@ -166,7 +164,7 @@ public final class Validator{
                         || value instanceof Map// map
                         || value instanceof Enumeration // 枚举
                         || value instanceof Iterator// Iterator迭代器
-                        || ObjectUtil.isArray(value)//判断数组
+                        || value.getClass().isArray()//判断数组
         ;
     }
 }

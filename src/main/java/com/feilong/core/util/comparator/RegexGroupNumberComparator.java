@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.comparator;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import com.feilong.core.util.RegexUtil;
@@ -39,21 +40,24 @@ import com.feilong.core.util.RegexUtil;
  * Collections.sort(includedFileUrlList, new RegexGroupNumberComparator(".*ppt-coreContent(\\d*).png"));
  * }
  * </pre>
- * 
+ *
  * @author feilong
+ * @version 1.4.0 2015年8月22日 下午11:36:52
  * @see "org.apache.commons.io.comparator.NameFileComparator"
  * @see "org.apache.commons.io.comparator.DirectoryFileComparator"
  * @see "org.apache.commons.io.comparator.DefaultFileComparator"
  * @see "org.apache.commons.io.comparator.ExtensionFileComparator"
  * @see "org.apache.commons.io.comparator.PathFileComparator"
  * @see "org.apache.commons.io.comparator.SizeFileComparator"
- * @version 1.4.0 2015年8月22日 下午11:36:52
  * @since 1.4.0
  */
-public class RegexGroupNumberComparator implements Comparator<String>{
+public class RegexGroupNumberComparator implements Comparator<String>,Serializable{
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -3400735378238717278L;
 
     /** 文件名称的正则表达式,主要方便提取数字,比如 ".*ppt-coreContent(\\d*).png". */
-    private final String regexPattern;
+    private final String      regexPattern;
 
     /**
      * The Constructor.

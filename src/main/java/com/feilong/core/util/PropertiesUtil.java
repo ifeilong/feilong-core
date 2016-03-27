@@ -23,7 +23,7 @@ import java.util.Properties;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.io.UncheckedIOException;
+import com.feilong.core.UncheckedIOException;
 import com.feilong.core.lang.ClassLoaderUtil;
 
 /**

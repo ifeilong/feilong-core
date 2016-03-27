@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.jsonlib;
+package com.feilong.tools.jsonlib;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,12 +29,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.HttpMethodType;
-import com.feilong.core.tools.BaseJsonTest;
 import com.feilong.test.MyBean;
 import com.feilong.test.Order;
 import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.test.UserInfo;
+import com.feilong.tools.BaseJsonTest;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;

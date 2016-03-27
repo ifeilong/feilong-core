@@ -13,51 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.jsonlib.processor;
-
-import java.math.BigDecimal;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.feilong.core.lang.NumberPattern;
-import com.feilong.core.lang.NumberUtil;
-import com.feilong.core.util.Validator;
+package com.feilong.tools.jsonlib.processor;
 
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * The Class BigDecimalJsonValueProcessor.
+ * 过滤敏感信息,最直接的就是像密码这样的内容,不可以输出在控制台,需要转换成***字眼.
  *
  * @author feilong
- * @version 1.2.2 2015年7月10日 下午11:16:48
+ * @version 1.2.2 2015年7月10日 下午10:54:55
  * @since 1.2.2
  */
-public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
+public class SensitiveWordsJsonValueProcessor implements JsonValueProcessor{
 
-    /**
-     * The number pattern.
-     * 
-     * @see com.feilong.core.lang.NumberPattern
-     */
-    private String numberPattern;
+    /** The default sensitive words. */
+    private static String DEFAULT_SENSITIVE_WORDS = "******";
 
     /**
      * The Constructor.
      */
-    public BigDecimalJsonValueProcessor(){
-        super();
-    }
-
-    /**
-     * The Constructor.
-     *
-     * @param numberPattern
-     *            the number pattern
-     */
-    public BigDecimalJsonValueProcessor(String numberPattern){
-        super();
-        this.numberPattern = numberPattern;
+    public SensitiveWordsJsonValueProcessor(){
     }
 
     /*
@@ -67,7 +43,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
      */
     @Override
     public Object processArrayValue(Object value,JsonConfig jsonConfig){
-        return process(value);
+        return processValue(value);
     }
 
     /*
@@ -77,7 +53,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
      */
     @Override
     public Object processObjectValue(String key,Object value,JsonConfig jsonConfig){
-        return process(value);
+        return processValue(value);
     }
 
     /**
@@ -87,19 +63,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
      *            the value
      * @return the object
      */
-    private Object process(Object value){
-        if (value == null){
-            return StringUtils.EMPTY;
-        }
-        //两位小数点
-        if (value instanceof BigDecimal){
-            if (Validator.isNullOrEmpty(numberPattern)){
-                numberPattern = NumberPattern.TWO_DECIMAL_POINTS;
-            }
-
-            Number number = (Number) value;
-            return NumberUtil.toString(number, numberPattern);
-        }
-        return value;
+    private static Object processValue(Object value){
+        return null == value ? null : DEFAULT_SENSITIVE_WORDS;
     }
 }

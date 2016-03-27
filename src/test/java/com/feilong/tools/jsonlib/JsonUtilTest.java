@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.jsonlib;
+package com.feilong.tools.jsonlib;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -31,12 +31,12 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.tools.BaseJsonTest;
 import com.feilong.core.tools.Menu;
-import com.feilong.core.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
-import com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
+import com.feilong.tools.BaseJsonTest;
+import com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
+import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

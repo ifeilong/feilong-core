@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.jsonlib;
+package com.feilong.tools.jsonlib;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -22,7 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.feilong.core.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
+import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 /**
  * 标识是否是敏感词, 如果是,那么使用json格式化的时候会显示成xxxx.

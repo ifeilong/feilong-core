@@ -19,7 +19,7 @@ import java.util.Random;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.tools.slf4j.Slf4jUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 随机数工具类.

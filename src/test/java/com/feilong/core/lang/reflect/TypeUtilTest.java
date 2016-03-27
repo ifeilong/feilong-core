@@ -24,7 +24,7 @@ import com.feilong.core.lang.reflect.res.SkuItemRepositoryImpl;
 import com.feilong.core.lang.reflect.res.SkuItemRepositoryImpl2;
 import com.feilong.core.lang.reflect.res.SkuItemRepositoryImpl3;
 import com.feilong.core.lang.reflect.res.SkuItemRepositoryImpl4;
-import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class TypeUtilTest.

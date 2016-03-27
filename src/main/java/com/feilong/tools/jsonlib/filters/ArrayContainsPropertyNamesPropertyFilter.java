@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.tools.jsonlib.util;
+package com.feilong.tools.jsonlib.filters;
 
 import net.sf.json.util.PropertyFilter;
 

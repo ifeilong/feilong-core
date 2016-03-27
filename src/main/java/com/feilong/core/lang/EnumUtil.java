@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.core.tools.slf4j.Slf4jUtil;
+import com.feilong.tools.jsonlib.JsonUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.lang.Enum} 工具类.

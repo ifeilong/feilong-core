@@ -29,6 +29,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 1. 在开发中,如果手案上有熟悉使用的工具包,那么开发的速度会如虎添翼,比如如果你熟练使用 `commons-lang`,`commons-collections`,`commons-beanutils`...etc.等工具包;
 1. feilong-core设计的初衷,就是为了提高开发速度,提供一套便捷的开发工具类,目标:`Reduce development, Release ideas`;
 1. 基于`commons-lang`,`commons-collections`,`commons-beanutils`...等工具包,并且基于这些包进行了扩展;
+1. 使用工具包可以让你的代码更精简,设计更优雅,系统更健壮
 
 # Maven使用配置
 

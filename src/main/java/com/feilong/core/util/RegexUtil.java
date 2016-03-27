@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * 正则表达式工具类.

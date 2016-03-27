@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import com.feilong.core.util.Validator;
+import com.feilong.core.Validator;
 
 /**
  * 日期扩展工具类.

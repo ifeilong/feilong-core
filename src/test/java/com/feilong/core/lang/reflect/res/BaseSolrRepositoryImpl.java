@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.reflect.TypeUtil;
-import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class BaseSolrRepositoryImpl.

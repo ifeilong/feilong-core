@@ -41,9 +41,9 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+import com.feilong.core.Validator;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * 转换器.

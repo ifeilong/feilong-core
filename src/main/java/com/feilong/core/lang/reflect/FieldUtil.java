@@ -28,9 +28,9 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validator;
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.tools.slf4j.Slf4jUtil;
-import com.feilong.core.util.Validator;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * Utilities for working with Fields by reflection.

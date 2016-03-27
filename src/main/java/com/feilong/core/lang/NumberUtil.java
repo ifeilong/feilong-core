@@ -21,9 +21,9 @@ import java.math.RoundingMode;
 
 import org.apache.commons.lang3.Validate;
 
+import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.NumberFormatUtil;
-import com.feilong.core.util.Validator;
 
 /**
  * 处理{@link Integer},{@link Long},{@link BigDecimal}等数据类型.

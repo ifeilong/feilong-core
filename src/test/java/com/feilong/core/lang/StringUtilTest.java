@@ -30,8 +30,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
-import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.test.User;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class StringUtilTest.

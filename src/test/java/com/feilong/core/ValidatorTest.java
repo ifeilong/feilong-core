@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,6 +25,7 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 
+import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.User;
 
@@ -65,7 +66,7 @@ public class ValidatorTest{
     }
 
     /**
-     * Test method for {@link com.feilong.core.util.Validator#isNullOrEmpty(java.lang.Object)}.
+     * Test method for {@link com.feilong.core.Validator#isNullOrEmpty(java.lang.Object)}.
      */
     @Test
     public void testIsNullOrEmpty(){
