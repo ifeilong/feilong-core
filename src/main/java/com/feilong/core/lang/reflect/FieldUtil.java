@@ -346,7 +346,7 @@ public final class FieldUtil{
      * {@code
      * example1 :
      * 
-     * FieldUtil.getStaticProperty("com.feilong.core.io.ImageType", "JPG")
+     * FieldUtil.getStaticProperty("com.feilong.io.ImageType", "JPG")
      * 返回 :jpg
      * }
      * </pre>
@@ -354,7 +354,7 @@ public final class FieldUtil{
      * @param <T>
      *            the generic type
      * @param className
-     *            类名,e.g com.feilong.core.io.ImageType
+     *            类名,e.g com.feilong.io.ImageType
      * @param fieldName
      *            字段名
      * @return 该字段对象

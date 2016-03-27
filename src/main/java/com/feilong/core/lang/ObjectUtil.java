@@ -105,7 +105,7 @@ public final class ObjectUtil{
      *      an object is an array without using reflection?</a>
      * @since 1.3.0
      */
-    public static Boolean isArray(Object object){
+    public static boolean isArray(Object object){
         Validate.notNull(object, "object can't be null!");
         return object.getClass().isArray();
     }
