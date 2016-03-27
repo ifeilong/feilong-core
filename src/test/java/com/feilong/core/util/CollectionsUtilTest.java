@@ -164,6 +164,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(removeAll));
     }
 
+    /**
+     * Test remove all1.
+     */
     @Test
     public void testRemoveAll1(){
         List<User> objectCollection = new ArrayList<User>();

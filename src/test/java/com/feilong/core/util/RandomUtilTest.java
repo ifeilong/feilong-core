@@ -39,6 +39,9 @@ public class RandomUtilTest{
     /** The Constant NUMBERSANDALLLETTERS. */
     public static final String  NUMBERSANDALLLETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789";
 
+    /**
+     * Test create random.
+     */
     @Test
     public void testCreateRandom(){
         LOGGER.info(RandomUtil.createRandom(8) + "");

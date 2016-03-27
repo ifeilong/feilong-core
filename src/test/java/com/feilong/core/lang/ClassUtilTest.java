@@ -64,7 +64,6 @@ public class ClassUtilTest{
      */
     @Test
     public void testIsAssignableFrom(){
-
         Class<?>[] klsClasses = { "1234".getClass(), "55555".getClass() };
         assertEquals(true, ClassUtils.isAssignable(klsClasses, CharSequence.class));
 
@@ -74,21 +73,21 @@ public class ClassUtilTest{
     }
 
     /**
+     * Test is interface.
+     */
+    @Test
+    public void testIsInterface(){
+        assertEquals(false, ClassUtil.isInterface(this.getClass()));
+        assertEquals(false, ClassUtil.isInterface(DatePattern.class));
+    }
+
+    /**
      * Test to class.
      */
     @Test
     public void testToClass(){
         LOGGER.info("" + JsonUtil.format(ClassUtil.toClass("a", "a")));
         LOGGER.info("" + JsonUtil.format(ClassUtil.toClass(1, true)));
-    }
-
-    /**
-     * Test is interface.
-     */
-    @Test
-    public void testIsInterface(){
-        LOGGER.info("" + ClassUtil.isInterface(this.getClass()));
-        LOGGER.info("" + ClassUtil.isInterface(DatePattern.class));
     }
 
     /**

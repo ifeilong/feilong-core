@@ -39,6 +39,9 @@ public class MapUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
+    /**
+     * Test simple entry.
+     */
     @Test
     public void testSimpleEntry(){
         SimpleEntry<String, String> map = new SimpleEntry<String, String>("name", "jinxin");

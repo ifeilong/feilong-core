@@ -25,7 +25,6 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.User;
 
@@ -54,6 +53,7 @@ public class ValidatorTest{
     /**
      * Name.
      */
+    @SuppressWarnings("cast")
     @Test
     public void name(){
         assertEquals(true, new Integer[][] {} instanceof Object[]);

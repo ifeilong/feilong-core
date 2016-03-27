@@ -226,11 +226,10 @@
 					<includes>
 						<include>**/DateUtilTest.java</include>
 						<include>**/ValidatorTest.java</include>
-						<include>com.feilong.core.lang.CharsetTypeTest</include>
-						
-						<include>com.feilong.core.date.DateUtilIsLeapYearParameterizedTest</include>
-						
-						<include>com.feilong.core.util.RegexUtilTest</include>
+						<include>**/CharsetTypeTest</include>
+						<include>**/EnumUtilTest</include>
+						<include>**/DateUtilIsLeapYearParameterizedTest</include>
+						<include>**/RegexUtilTest</include>
 					</includes>
 					<skip>false</skip>
 				</configuration>

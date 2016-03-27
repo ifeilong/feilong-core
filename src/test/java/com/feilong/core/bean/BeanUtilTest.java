@@ -301,6 +301,9 @@ public class BeanUtilTest{
         LOGGER.info("map:{}", JsonUtil.format(BeanUtil.describe(user)));
     }
 
+    /**
+     * Describe1.
+     */
     @Test
     public void describe1(){
         LOGGER.info("map:{}", JsonUtil.format(BeanUtil.describe(null)));
@@ -329,6 +332,9 @@ public class BeanUtilTest{
         LOGGER.info(JsonUtil.format(user));
     }
 
+    /**
+     * Populate1.
+     */
     @Test
     public void populate1(){
 
