@@ -290,7 +290,7 @@ public final class BeanUtil{
      * </p>
      * 
      * <p>
-     * 因此,<span style="color:red">建议使用改方法,而不是使用commons-bean原生的 {@link ConvertUtils#register(Converter, Class)}</span> ,<br>
+     * 因此,<span style="color:red">建议使用该方法,而不是使用commons-bean原生的 {@link ConvertUtils#register(Converter, Class)}</span> ,<br>
      * 这样会先经过static方法块初始默认的注册器,再使用自定义的 {@link Converter} 覆盖相同类型的转换
      * </p>
      * </blockquote>

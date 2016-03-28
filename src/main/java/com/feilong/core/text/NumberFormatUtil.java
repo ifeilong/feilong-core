@@ -96,7 +96,7 @@ public final class NumberFormatUtil{
         Validate.notNull(value, "value can't be null!");
         Validate.notNull(numberPattern, "numberPattern can't be null!");
         try{
-            //改构造方法内部 调用了applyPattern(pattern, false)
+            //该构造方法内部 调用了applyPattern(pattern, false)
             DecimalFormat decimalFormat = new DecimalFormat(numberPattern);
 
             // 如果不设置默认使用的是 RoundingMode.HALF_EVEN
