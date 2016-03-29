@@ -83,15 +83,6 @@ public class RegexUtilTest{
     }
 
     /**
-     * Test is email.
-     */
-    @Test
-    public void testIsEmail(){
-        assertEquals(true, RegexUtil.matches(RegexPattern.EMAIL, "xin.jin@baozun.com"));
-        assertEquals(true, RegexUtil.matches(RegexPattern.EMAIL, "venusdrogon@163.com"));
-    }
-
-    /**
      * Test mobilephone.
      */
     @Test

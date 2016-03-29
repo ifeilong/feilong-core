@@ -244,17 +244,34 @@ import java.util.regex.Pattern;
  * </pre>
  * 
  * @author feilong
- * @version 1.0 Apr 2, 2014 6:04:23 PM
+ * @version 1.0.0 Apr 2, 2014 6:04:23 PM
  * @version 1.0.5 2014-5-4 00:37 change to interface
  * @see Pattern
  * @since 1.0.0
  */
 public final class RegexPattern{
 
-    /** email 的正则表达式 <code>{@value}</code>. */
+    /**
+     * email 的正则表达式 <code>{@value}</code>.
+     * 
+     * @see "org.apache.commons.validator.routines.EmailValidator"
+     * @see <a href="http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/">how-to-validate-email
+     *      -address-with-regular-expression</a>
+     * 
+     * @deprecated 建议使用 commons-validator {@link "org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(emailString)"}
+     *             ,验证更加完善,会对user 和domain再次校验
+     */
+    @Deprecated
     public static final String EMAIL             = "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+    //"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
 
-    /** IP 的正则表达式 <code>{@value}</code>. */
+    /**
+     * IP 的正则表达式 <code>{@value}</code>.
+     * 
+     * @deprecated 建议使用 commons-validator
+     *             {@link "org.apache.commons.validator.routines.InetAddressValidator.getInstance().isValid(emailString)"}
+     */
+    @Deprecated
     public static final String IP                = "^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$";
 
     /** 电话号码 <code>{@value}</code>. */
@@ -297,7 +314,12 @@ public final class RegexPattern{
 
     //******************************************************************************
 
-    /** 网址Url 链接 <code>{@value}</code>. */
+    /**
+     * 网址Url 链接 <code>{@value}</code>.
+     * 
+     * @deprecated 建议使用 commons-validator {@link "org.apache.commons.validator.routines.DomainValidator.getInstance().isValid(emailString)"}
+     */
+    @Deprecated
     public static final String URLLINK           = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
 
     /** 邮政编码 <code>{@value}</code>. */
