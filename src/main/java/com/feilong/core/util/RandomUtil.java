@@ -104,7 +104,10 @@ public final class RandomUtil{
      *            最小值
      * @param maxValue
      *            最大值
-     * @return 创建最小值和最大值之间的随机数
+     * @return 创建最小值和最大值之间的随机数<br>
+     *         if minValue null,will {@link java.lang.NullPointerException NullPointerException};<br>
+     *         if maxValue null,will {@link java.lang.NullPointerException NullPointerException};<br>
+     *         if maxLong< minLong will {@link java.lang.IllegalArgumentException IllegalArgumentException}
      */
     public static long createRandom(Number minValue,Number maxValue){
         Validate.notNull(minValue, "min can't be null!");
