@@ -57,6 +57,11 @@ public class RandomUtilTest{
         }
     }
 
+    @Test
+    public void createRandomWithLength1(){
+        LOGGER.info(RandomUtil.createRandomWithLength(18) + "");
+    }
+
     /**
      * Creates the random with length2.
      */

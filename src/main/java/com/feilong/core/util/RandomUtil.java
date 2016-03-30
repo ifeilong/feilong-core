@@ -37,6 +37,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @since 1.0.0
  * @see org.apache.commons.lang3.RandomStringUtils
  * @see org.apache.commons.lang3.RandomUtils
+ * @see java.lang.Math#random()
  */
 public final class RandomUtil{
 
@@ -63,22 +64,21 @@ public final class RandomUtil{
     /**
      * 创建0-最大值之间的随机数.
      * 
-     * <p>
-     * 目前内部调用全局随机数{@link #JVM_RANDOM}
-     * </p>
+     * <h3>Example 1:</h3>
+     * <blockquote>
      * 
      * <pre>
-    Example 1: 
-    RandomUtil.createRandom(8)
-    创建一个小于8的随机数
-    
-    生成的结果是可能是 3
+     * RandomUtil.createRandom(8)
+     * 创建一个小于8的随机数
+     * 
+     * 生成的结果是可能是 3
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param number
      *            随机数最大值
      * @return 创建0-最大值之间的随机数
-     * @see java.lang.Math#random()
      */
     public static long createRandom(Number number){
         double random = JVM_RANDOM.nextDouble();
@@ -86,25 +86,32 @@ public final class RandomUtil{
     }
 
     /**
-     * 创建最小值和最大值之间的随机数.
+     * 创建最小值 {@code min} 和最大值{@code max}之间的随机数.
+     * 
+     * <h3>Example 1:</h3>
+     * <blockquote>
      * 
      * <pre>
-    Example 1: 
-    RandomUtil.createRandom(10, 20)
-    创建一个数值是10-20之间的随机数
-    
-    生成的结果是可能是 12
+     * RandomUtil.createRandom(10, 20)
+     * 创建一个数值是10-20之间的随机数
+     * 
+     * 生成的结果是可能是 12
      * </pre>
-     *
-     * @param min
+     * 
+     * </blockquote>
+     * 
+     * @param minValue
      *            最小值
-     * @param max
+     * @param maxValue
      *            最大值
      * @return 创建最小值和最大值之间的随机数
      */
-    public static long createRandom(Number min,Number max){
-        long maxLong = max.longValue();
-        long minLong = min.longValue();
+    public static long createRandom(Number minValue,Number maxValue){
+        Validate.notNull(minValue, "min can't be null!");
+        Validate.notNull(maxValue, "max can't be null!");
+
+        long maxLong = maxValue.longValue();
+        long minLong = minValue.longValue();
 
         Validate.isTrue(maxLong >= minLong, Slf4jUtil.formatMessage("maxLong:[{}] can not < minLong:[{}]", maxLong, minLong));
 
@@ -115,23 +122,21 @@ public final class RandomUtil{
     // ********************************************************************
 
     /**
-     * 生成一个指定长度大小的随机正整数.
+     * 生成一个指定长度大小 {@code length} 的随机正整数.
      * 
-     * <p>
-     * 目前内部调用全局随机数{@link #JVM_RANDOM}
-     * </p>
+     * <h3>Example 1:</h3>
+     * <blockquote>
      * 
      * <pre>
-    Example 1: 
-    RandomUtil.createRandomWithLength(2)
-    
-    生成的结果是可能是 89
+     * RandomUtil.createRandomWithLength(2)
+     * 生成的结果是可能是 89
      * </pre>
+     * 
+     * </blockquote>
      *
      * @param length
-     *            设定所取出随机数的长度.length小于11
+     *            设定所取出随机数的长度.
      * @return 返回生成的随机数
-     * @see #JVM_RANDOM
      */
     public static long createRandomWithLength(int length){
         // 该值大于等于 0.0 且小于 1.0 正号的 double 值
@@ -151,23 +156,32 @@ public final class RandomUtil{
     // ****************************************************************
 
     /**
-     * 随机抽取字符串char,拼接成随机字符串.
+     * 随机抽取字符串char,拼接最小长度是 {@code minLength},最大长度是{@code maxLength}的字符串随机字符串.
+     * 
+     * <h3>Example 1:</h3>
+     * <blockquote>
      * 
      * <pre>
-    Example 1: 
-    RandomUtil.createRandomFromString("0123456789", 8, 20)
-    从0123456789随机抽取字符,组成最小长度是8,最大长度是20的字符串
-    
-    生成的结果是可能是 142853574998970631
+     * RandomUtil.createRandomFromString("0123456789", 8, 20)
+     * 从0123456789随机抽取字符,组成最小长度是8,最大长度是20的字符串
+     * 
+     * 生成的结果是可能是 142853574998970631
      * </pre>
+     * 
+     * </blockquote>
      *
      * @param str
-     *            被抽取的字符串
+     *            被抽取的字符串,比如示例中的 0123456789
      * @param minLength
-     *            最小长度
+     *            最小长度 ,比如示例中的 8
      * @param maxLength
-     *            最大长度
-     * @return 得到随机字符串
+     *            最大长度,比如示例中的 20
+     * 
+     * @return 随机抽取字符串char,拼接最小长度是 {@code minLength},最大长度是{@code maxLength}的字符串随机字符串. <br>
+     *         如上述示例,可能返回142853574998970631<br>
+     *         if str empty,will {@link java.lang.NullPointerException NullPointerException};<br>
+     *         if maxLength<=0 will {@link java.lang.IllegalArgumentException IllegalArgumentException}<br>
+     *         if maxLength<minLength will {@link java.lang.IllegalArgumentException IllegalArgumentException}
      */
     public static String createRandomFromString(String str,int minLength,int maxLength){
         Validate.notEmpty(str, "str can't be null/empty!");
@@ -182,19 +196,25 @@ public final class RandomUtil{
     /**
      * 随机抽取字符串char,拼接成指定长度的字符串.
      * 
+     * <h3>Example 1:</h3>
+     * <blockquote>
+     * 
      * <pre>
-    Example 1: 
-    RandomUtil.createRandomFromString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789", 5)
-    
-    从ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789 随机抽取字符,组成长度是5 的字符串
-    生成的结果是可能是  IFSMB
+     * RandomUtil.createRandomFromString("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789", 5)
+     * 
+     * 从ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789 随机抽取字符,组成长度是5 的字符串
+     * 生成的结果是可能是 IFSMB
      * </pre>
-     *
+     * 
+     * </blockquote>
+     * 
      * @param str
-     *            被抽取的字符串
+     *            被抽取的字符串,比如 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789
      * @param length
-     *            指定字符串长度
-     * @return 得到随机字符串
+     *            指定字符串长度, 比如 5
+     * @return 得到随机字符串, 如上面给到的参数,可能是 IFSMB <br>
+     *         if str empty,will {@link java.lang.NullPointerException NullPointerException};<br>
+     *         if length<=0 will {@link java.lang.IllegalArgumentException IllegalArgumentException}
      */
     public static String createRandomFromString(String str,int length){
         Validate.notEmpty(str, "str can't be null/empty!");
