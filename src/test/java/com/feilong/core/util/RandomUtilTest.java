@@ -21,6 +21,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Alphabet;
+
 /**
  * The Class RandomUtilTest.
  *
@@ -31,13 +33,7 @@ import org.slf4j.LoggerFactory;
 public class RandomUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER               = LoggerFactory.getLogger(RandomUtilTest.class);
-
-    /** The Constant NUMBERS. */
-    public static final String  NUMBERS              = "0123456789";
-
-    /** The Constant NUMBERSANDALLLETTERS. */
-    public static final String  NUMBERSANDALLLETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy0123456789";
+    private static final Logger LOGGER = LoggerFactory.getLogger(RandomUtilTest.class);
 
     /**
      * Test create random.
@@ -57,6 +53,9 @@ public class RandomUtilTest{
         }
     }
 
+    /**
+     * 创建 random with length1.
+     */
     @Test
     public void createRandomWithLength1(){
         LOGGER.info(RandomUtil.createRandomWithLength(18) + "");
@@ -78,8 +77,8 @@ public class RandomUtilTest{
      */
     @Test
     public void testgetRandomFromString(){
-        LOGGER.info(RandomUtil.createRandomFromString(NUMBERSANDALLLETTERS, 5));
-        LOGGER.info(RandomUtil.createRandomFromString(NUMBERS, 200));
+        LOGGER.info(RandomUtil.createRandomFromString(Alphabet.DECIMAL_AND_LETTERS, 5));
+        LOGGER.info(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 200));
     }
 
     /**
@@ -87,7 +86,7 @@ public class RandomUtilTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testgetRandomFromString1(){
-        LOGGER.info(RandomUtil.createRandomFromString(NUMBERS, 0));
+        LOGGER.info(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 0));
     }
 
     /**
@@ -103,7 +102,7 @@ public class RandomUtilTest{
      */
     @Test
     public void createRandomFromString(){
-        LOGGER.info(RandomUtil.createRandomFromString(NUMBERS, 8, 20));
+        LOGGER.info(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 8, 20));
     }
 
     /**

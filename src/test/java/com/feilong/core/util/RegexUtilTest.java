@@ -127,6 +127,8 @@ public class RegexUtilTest{
     public void testAN(){
         assertEquals(true, RegexUtil.matches(RegexPattern.AN, "aa02125454"));
         assertEquals(false, RegexUtil.matches(RegexPattern.AN, "0212545.4"));
+        assertEquals(false, RegexUtil.matches(RegexPattern.AN, "0212545$4"));
+        assertEquals(false, org.apache.commons.lang3.StringUtils.isAlphanumeric("0212545$4"));
         assertEquals(true, RegexUtil.matches(RegexPattern.AN, "02125454"));
     }
 

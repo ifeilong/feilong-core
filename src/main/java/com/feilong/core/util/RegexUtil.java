@@ -212,8 +212,9 @@ public final class RegexUtil{
      * @return the matcher
      * @see Pattern#compile(String, int)
      * @since 1.0.7
+     * @since 1.5.3 change private to public
      */
-    private static Matcher getMatcher(String regexPattern,CharSequence input,int flags){
+    public static Matcher getMatcher(String regexPattern,CharSequence input,int flags){
         Pattern pattern = Pattern.compile(regexPattern, flags);
         return pattern.matcher(input);
     }
