@@ -34,7 +34,7 @@ public class AlphabetTest{
      * Test.
      */
     @Test
-    public final void test(){
+    public void test(){
         assertEquals("23456789abcdefghijkmnpqrstuvwxyz", Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
     }
 
@@ -42,7 +42,7 @@ public class AlphabetTest{
      * Test1.
      */
     @Test
-    public final void test1(){
+    public void test1(){
         assertSame(Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE, Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
     }
 
@@ -50,7 +50,7 @@ public class AlphabetTest{
      * Test2.
      */
     @Test
-    public final void test2(){
+    public void test2(){
         assertNotSame(
                         new StringBuffer() //
                                         .append("23456789") //
