@@ -327,13 +327,31 @@ public final class RegexPattern{
 
     //******************************************************************************
 
-    /** 所有都是字母 <code>{@value}</code>. */
+    /**
+     * 所有都是字母 <code>{@value}</code>.
+     * 
+     * @see java.lang.Character#isLetter(char)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlpha(CharSequence)}
+     */
+    @Deprecated
     public static final String LETTER            = "^[A-Za-z]+$";
 
-    /** 小写字母 <code>{@value}</code>. */
+    /**
+     * 小写字母 <code>{@value}</code>.
+     * 
+     * @see java.lang.Character#isLowerCase(char)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAllLowerCase(CharSequence)}
+     */
+    @Deprecated
     public static final String LETTER_LOWERCASE  = "^[a-z]+$";
 
-    /** 大写字母 <code>{@value}</code>. */
+    /**
+     * 大写字母 <code>{@value}</code>.
+     * 
+     * @see java.lang.Character#isUpperCase(char)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAllUpperCase(CharSequence)}
+     */
+    @Deprecated
     public static final String LETTER_UPPERCASE  = "^[A-Z]+$";
 
     //******************************************************************************
@@ -346,14 +364,32 @@ public final class RegexPattern{
      */
     public static final String DECIMAL_TWO_DIGIT = "^[0-9]+(.[0-9]{2})?$";
 
-    /** 纯数字 <code>{@value}</code>. */
+    /**
+     * 纯数字 <code>{@value}</code>.
+     *
+     * @see java.lang.Character#isDigit(char)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isNumeric(CharSequence)}
+     */
+    @Deprecated
     public static final String NUMBER            = "^[0-9]*$";
 
     //**************************************************************************************
-    /** 字母和数字 (alpha numeric) <code>{@value}</code>. */
+    /**
+     * 字母和数字 (alpha numeric) <code>{@value}</code>.
+     * 
+     * @see java.lang.Character#isLetterOrDigit(int)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlphanumeric(CharSequence)}
+     */
+    @Deprecated
     public static final String AN                = "^[0-9a-zA-Z]+$";
 
-    /** 字母和数字和空格(alpha numeric space)<code>{@value}</code>. */
+    /**
+     * 字母和数字和空格(alpha numeric space)<code>{@value}</code>.
+     * 
+     * @see java.lang.Character#isLetterOrDigit(int)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlphanumericSpace(CharSequence)}
+     */
+    @Deprecated
     public static final String ANS               = "^[0-9a-zA-Z ]+$";
 
     //******************************************************************************
