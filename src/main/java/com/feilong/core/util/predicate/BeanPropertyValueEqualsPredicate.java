@@ -28,6 +28,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @param <T>
  *            the generic type
  * @since 1.2.0
+ * @since 1.5.3 change `ObjectPropertyEqualsPredicate` to `BeanPropertyValueEqualsPredicate`
  * @see org.apache.commons.beanutils.BeanPredicate
  * @see org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate
  */
