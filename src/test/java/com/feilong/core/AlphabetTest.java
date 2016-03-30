@@ -16,10 +16,10 @@
 package com.feilong.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The Class AlphabetTest.
@@ -30,14 +30,39 @@ import org.slf4j.LoggerFactory;
  */
 public class AlphabetTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(AlphabetTest.class);
-
     /**
      * Test.
      */
     @Test
     public final void test(){
         assertEquals("23456789abcdefghijkmnpqrstuvwxyz", Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
+    }
+
+    /**
+     * Test1.
+     */
+    @Test
+    public final void test1(){
+        assertSame(Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE, Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
+    }
+
+    /**
+     * Test2.
+     */
+    @Test
+    public final void test2(){
+        assertNotSame(
+                        new StringBuffer() //
+                                        .append("23456789") //
+                                        .append("abcdefghijk") //
+                                        .append("mn") //
+                                        .append("pqrstuvwxyz") //
+                                        .toString(),
+                        new StringBuffer() //
+                                        .append("23456789") //
+                                        .append("abcdefghijk") //
+                                        .append("mn") //
+                                        .append("pqrstuvwxyz") //
+                                        .toString());
     }
 }

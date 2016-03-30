@@ -128,7 +128,7 @@ public final class NumberUtil{
      * 四舍五入 {@link RoundingMode#HALF_UP},取整,无小数.
      * 
      * <p style="color:red">
-     * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2
+     * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 {@link Math#round(double) Math.round(-2.5)} 会是-2
      * </p>
      * 
      * @param number

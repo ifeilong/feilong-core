@@ -224,11 +224,15 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<includes>
-						<include>**/DateUtilTest.java</include>
-						<include>**/ValidatorTest.java</include>
+						<include>**/AlphabetTest</include>
 						<include>**/CharsetTypeTest</include>
-						<include>**/EnumUtilTest</include>
+
+						<include>**/ValidatorTest.java</include>
+
+						<include>**/DateUtilTest.java</include>
 						<include>**/DateUtilIsLeapYearParameterizedTest</include>
+
+						<include>**/EnumUtilTest</include>
 						<include>**/RegexUtilTest</include>
 					</includes>
 					<skip>false</skip>
