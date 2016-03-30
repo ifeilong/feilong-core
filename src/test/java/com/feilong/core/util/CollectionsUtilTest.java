@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
+import com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
@@ -98,7 +98,7 @@ public class CollectionsUtilTest{
         Map<String, Integer> map = CollectionsUtil.groupCount(testList, null, "name");
         LOGGER.info(JsonUtil.format(map));
 
-        map = CollectionsUtil.groupCount(testList, new ObjectPropertyEqualsPredicate<User>("name", "刘备"), "name");
+        map = CollectionsUtil.groupCount(testList, new BeanPropertyValueEqualsPredicate<User>("name", "刘备"), "name");
         LOGGER.info(JsonUtil.format(map));
     }
 

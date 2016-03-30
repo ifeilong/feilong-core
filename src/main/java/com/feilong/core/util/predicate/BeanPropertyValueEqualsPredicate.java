@@ -32,7 +32,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @see org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate
  */
 //XXX 如果{@link org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate}支持泛型,那么这么类将会废弃
-public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
+public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
 
     /** The property name. */
     private final String propertyName;
@@ -48,7 +48,7 @@ public class ObjectPropertyEqualsPredicate<T> implements Predicate<T>{
      * @param value
      *            the value
      */
-    public ObjectPropertyEqualsPredicate(String propertyName, Object value){
+    public BeanPropertyValueEqualsPredicate(String propertyName, Object value){
         this.propertyName = propertyName;
         this.value = value;
     }

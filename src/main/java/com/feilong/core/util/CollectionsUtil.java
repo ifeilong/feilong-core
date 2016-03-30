@@ -41,7 +41,7 @@ import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.CollectionContainsPredicate;
-import com.feilong.core.util.predicate.ObjectPropertyEqualsPredicate;
+import com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -721,7 +721,7 @@ public final class CollectionsUtil{
      * @see IterableUtils#find(Iterable, Predicate)
      */
     public static <O, V> O find(Collection<O> objectCollection,String propertyName,V value){
-        Predicate<O> predicate = new ObjectPropertyEqualsPredicate<O>(propertyName, value);
+        Predicate<O> predicate = new BeanPropertyValueEqualsPredicate<O>(propertyName, value);
         return IterableUtils.find(objectCollection, predicate);
     }
 
