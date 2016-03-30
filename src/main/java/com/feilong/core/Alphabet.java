@@ -28,40 +28,40 @@ public final class Alphabet{
     /**
      * 二进制字符 The binary alphabet { 0, 1 }.
      */
-    public static final String BINARY              = "01";
+    public static final String BINARY                                        = "01";
 
     /**
      * 八进制 The octal alphabet { 0, 1, 2, 3, 4, 5, 6, 7 }.
      */
-    public static final String OCTAL               = "01234567";
+    public static final String OCTAL                                         = "01234567";
 
     /**
      * 数字 The decimal alphabet { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }.
      */
-    public static final String DECIMAL             = "0123456789";
+    public static final String DECIMAL                                       = "0123456789";
 
     /**
      * 十六进制 The hexadecimal alphabet { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F }.
      */
-    public static final String HEXADECIMAL         = "0123456789ABCDEF";
+    public static final String HEXADECIMAL                                   = "0123456789ABCDEF";
 
     /**
      * 小写字母 The lowercase alphabet { a, b, c, ..., z }.
      */
-    public static final String LOWERCASE           = "abcdefghijklmnopqrstuvwxyz";
+    public static final String LOWERCASE                                     = "abcdefghijklmnopqrstuvwxyz";
 
     /**
      * 大写字母 The uppercase alphabet { A, B, C, ..., Z }.
      */
-    public static final String UPPERCASE           = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String UPPERCASE                                     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     /** 数字和所有的字母. */
-    public static final String DECIMAL_AND_LETTERS = UPPERCASE + LOWERCASE + DECIMAL;
+    public static final String DECIMAL_AND_LETTERS                           = UPPERCASE + LOWERCASE + DECIMAL;
 
     /**
      * The base-64 alphabet (64 characters).
      */
-    public static final String BASE64              = DECIMAL_AND_LETTERS + "+/";
+    public static final String BASE64                                        = DECIMAL_AND_LETTERS + "+/";
 
     /**
      * 数字和小写的字母,剔除一些难以辨别的数字和字母.
@@ -85,13 +85,7 @@ public final class Alphabet{
      * @see com.feilong.core.util.RandomUtil#createRandomFromString(String, int)
      * @see com.feilong.core.util.RandomUtil#createRandomFromString(String, int, int)
      */
-    public static final String DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE         //
-                                                   = new StringBuffer()              //
-                                    .append("23456789")                              //
-                                    .append("abcdefghijk")                           //
-                                    .append("mn")                                    //
-                                    .append("pqrstuvwxyz")                           //
-                                    .toString();
+    public static final String DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE = "23456789abcdefghijkmnpqrstuvwxyz";
 
     /** Don't let anyone instantiate this class. */
     private Alphabet(){
