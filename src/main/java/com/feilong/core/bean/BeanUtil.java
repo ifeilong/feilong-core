@@ -331,7 +331,7 @@ public final class BeanUtil{
      * ......
      * 
      * 此时,可以使用
-     * BeanUtil.copyProperties(enterpriseSales,enterpriseSales_form,new String[]{&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;});
+     * BeanUtil.copyProperties(enterpriseSales,enterpriseSales_form,&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;);
      * </pre>
      * 
      * </blockquote>
@@ -592,6 +592,8 @@ public final class BeanUtil{
      * <blockquote>
      * 
      * <pre>
+     * 
+     * {@code 
      * User user = new User();
      * user.setId(5L);
      * 
@@ -600,6 +602,7 @@ public final class BeanUtil{
      * 
      * BeanUtil.populate(user, properties);
      * LOGGER.info(JsonUtil.format(user));
+     * }
      * 
      * 返回:
      * {

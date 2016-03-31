@@ -82,24 +82,24 @@ public final class PropertyUtil{
      * 
      * <blockquote>
      * 
-     * <code>
      * <pre>
+     * 
         User oldUser = new User();
         oldUser.setId(5L);
         oldUser.setMoney(new BigDecimal(500000));
         oldUser.setDate(new Date());
         String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
         oldUser.setNickName(nickName);
-    
+        
+        
         User newUser = new User();
     
         String[] strs = { "date", "money", "nickName" };
         PropertyUtil.copyProperties(newUser, oldUser, strs);
-        LOGGER.info(JsonUtil.format(newUser));s(enterpriseSales,enterpriseSales_form,new String[]{&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;});
-     *
+        
+        LOGGER.info(JsonUtil.format(newUser));
      * 
      * 返回 :
-     * 
      * {
         "userAddresseList": [],
         "userAddresses": [],
@@ -120,7 +120,6 @@ public final class PropertyUtil{
     }
      * 
      * </pre>
-     * </code>
      * 
      * </blockquote>
      * 
@@ -238,6 +237,41 @@ public final class PropertyUtil{
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
+        }
+    }
+
+    /**
+     * 如果 <code>value</code>isNotNullOrEmpty,那么才调用 {@link #setProperty(Object, String, Object)}.
+     *
+     * @param bean
+     *            Bean whose property is to be modified
+     * @param propertyName
+     *            Possibly indexed and/or nested name of the property to be modified
+     * @param value
+     *            Value to which this property is to be set
+     * @since 1.5.3
+     */
+    public static void setPropertyIfValueNotNullOrEmpty(Object bean,String propertyName,Object value){
+        if (Validator.isNotNullOrEmpty(value)){
+            setProperty(bean, propertyName, value);
+        }
+    }
+
+    /**
+     * 如果 <code>null != value</code>,那么才调用 {@link #setProperty(Object, String, Object)}.
+     *
+     * @param bean
+     *            Bean whose property is to be modified
+     * @param propertyName
+     *            Possibly indexed and/or nested name of the property to be modified
+     * @param value
+     *            Value to which this property is to be set
+     * @since 1.5.3
+     * @see #setProperty(Object, String, Object)
+     */
+    public static void setPropertyIfValueNotNull(Object bean,String propertyName,Object value){
+        if (null != value){
+            setProperty(bean, propertyName, value);
         }
     }
 
