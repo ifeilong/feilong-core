@@ -113,7 +113,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </ol>
  * 
  * <p style="color:red">
- * 注意:此类不是 通用 Map 实现！它有意违反 Map 的常规协定，此类设计仅用于其中需要引用相等性语义的罕见情况
+ * 注意:此类不是 通用 Map 实现！它有意违反 Map 的常规协定,此类设计仅用于其中需要引用相等性语义的罕见情况
  * </p>
  * </blockquote>
  * 
@@ -121,7 +121,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <blockquote>
  * <ol>
  * <li>A hashtable-based Map implementation with weak keys.</li>
- * <li>它对key实行“弱引用”，如果一个key不再被外部所引用，那么该key可以被GC回收</li>
+ * <li>它对key实行“弱引用”,如果一个key不再被外部所引用,那么该key可以被GC回收</li>
  * </ol>
  * </blockquote>
  * 

@@ -176,7 +176,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <li>Null elements are not permitted.</li>
  * <li>natural order (the order in which the enum constants are declared.</li>
  * <li>abstract class.</li>
- * <li>以位向量的形式存储，这种存储形式非常紧凑，高效，占用内存很小，运行效率很好.</li>
+ * <li>以位向量的形式存储,这种存储形式非常紧凑,高效,占用内存很小,运行效率很好.</li>
  * </ol>
  * </blockquote>
  * 

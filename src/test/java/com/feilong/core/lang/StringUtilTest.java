@@ -48,7 +48,7 @@ public class StringUtilTest{
     private static final String TEXT   = "jinxin.feilong";
 
     /**
-     * 如何计算出所有左右对称的三位数，如232，反过来还是232.
+     * 如何计算出所有左右对称的三位数,如232,反过来还是232.
      */
     @Test
     public void testStringUtilTest(){
