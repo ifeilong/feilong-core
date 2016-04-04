@@ -122,12 +122,14 @@ import net.sf.json.util.PropertySetStrategy;
 public final class JsonUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger     LOGGER = LoggerFactory.getLogger(JsonUtil.class);
+    private static final Logger                           LOGGER                              = LoggerFactory.getLogger(JsonUtil.class);
 
     /** The Constant DEFAULT_JSON_CONFIG. */
-    private static final JsonConfig DEFAULT_JSON_CONFIG;
+    private static final JsonConfig                       DEFAULT_JSON_CONFIG;
 
     //***********************************************************************************
+    /** The Constant SENSITIVE_WORDS_JSONVALUE_PROCESSOR. */
+    private static final SensitiveWordsJsonValueProcessor SENSITIVE_WORDS_JSONVALUE_PROCESSOR = new SensitiveWordsJsonValueProcessor();
 
     /** Don't let anyone instantiate this class. */
     private JsonUtil(){
@@ -182,11 +184,9 @@ public final class JsonUtil{
 
         JsonFormatConfig jsonFormatConfig = null;
         if (Validator.isNotNullOrEmpty(fieldsListWithAnnotation)){
-            SensitiveWordsJsonValueProcessor sensitiveWordsJsonValueProcessor = new SensitiveWordsJsonValueProcessor();
-
             Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
             for (Field field : fieldsListWithAnnotation){
-                propertyNameAndJsonValueProcessorMap.put(field.getName(), sensitiveWordsJsonValueProcessor);
+                propertyNameAndJsonValueProcessorMap.put(field.getName(), SENSITIVE_WORDS_JSONVALUE_PROCESSOR);
             }
 
             jsonFormatConfig = new JsonFormatConfig();
@@ -528,6 +528,7 @@ public final class JsonUtil{
         if (null == obj){
             return StringUtils.EMPTY;
         }
+
         JSON json = toJSON(obj, jsonConfig);
         return json.toString(indentFactor, indent);
     }
@@ -572,6 +573,8 @@ public final class JsonUtil{
     public static JSON toJSON(Object obj,JsonConfig jsonConfig){
         JsonConfig useJsonConfig = defaultIfNull(jsonConfig);
 
+        registerDefaultJsonValueProcessor(useJsonConfig);
+
         if (JSONUtils.isArray(obj) || // obj instanceof Collection || obj instanceof Object[]
                         obj instanceof Enum || // obj.getClass().isEnum()这么写 null会报错// object' is an Enum. Use JSONArray instead
                         obj instanceof Iterator){
@@ -585,6 +588,20 @@ public final class JsonUtil{
     }
 
     // [end]
+
+    /**
+     * 默认的处理器.
+     *
+     * @param jsonConfig
+     *            the json config
+     * @since 1.5.3
+     */
+    private static void registerDefaultJsonValueProcessor(JsonConfig jsonConfig){
+        String[] sensitiveWordsPropertyNames = { "password", "key" };
+        for (String propertyName : sensitiveWordsPropertyNames){
+            jsonConfig.registerJsonValueProcessor(propertyName, SENSITIVE_WORDS_JSONVALUE_PROCESSOR);
+        }
+    }
 
     //********************************************************************************************
 

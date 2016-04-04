@@ -55,6 +55,7 @@ public abstract class BaseJsonTest{
     private static User getUserForJsonTest(){
         User user = new User();
 
+        user.setPassword("123456");
         user.setId(8L);
         user.setName("feilong");
         user.setDate(new Date());
