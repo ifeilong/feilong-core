@@ -451,7 +451,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 从 <code>collection</code>中 删除 <code>removeElement</code>,返回剩余的集合 <span style="color:red">(原集合对象不变)</span>.
+     * 从 <code>collection</code>中 删除<code>removeElement</code>,返回剩余的集合 <span style="color:red">(原集合对象不变)</span>.
      * 
      * <p>
      * 这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用 <code>collection.remove(removeElement);</code>.
@@ -460,6 +460,45 @@ public final class CollectionsUtil{
      * <p>
      * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
      * </p>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        List<String> list = new ArrayList<String>();
+        list.add("xinge");
+        list.add("feilong1");
+        list.add("feilong2");
+        list.add("feilong2");
+    
+        LOGGER.info(JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
+    }
+    
+    返回:
+    [
+        "xinge",
+        "feilong1"
+    ]
+    
+    此时,原来的list不变:
+    {@code
+        LOGGER.info(JsonUtil.format(list));
+    }
+    
+    输出 :
+    
+    [
+        "xinge",
+        "feilong1",
+        "feilong2",
+        "feilong2"
+    ]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param <O>
      *            the generic type
@@ -485,6 +524,32 @@ public final class CollectionsUtil{
      * <p>
      * 如果原 <code>collection</code> 是有序的,那么会保留原 <code>collection</code>元素顺序
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        List<String> list = new ArrayList<String>();
+        list.add("feilong1");
+        list.add("feilong2");
+        list.add("feilong2");
+        list.add("feilong3");
+    
+        LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
+    }
+    
+    返回:
+    
+    [
+        "feilong1",
+        "feilong2",
+        "feilong3"
+    ]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>效率问题？contains的本质就是遍历.</h3>
      * 
@@ -712,6 +777,32 @@ public final class CollectionsUtil{
      * 如果 collection or predicate是null, 或者 collection中没有相关元素匹配 predicate,将返回null.
      * </p>
      *
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+        objectCollection.add(new User("关羽", 24));
+    
+        LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
+    }
+    
+    返回:
+    
+    [
+                {
+            "age": 24,
+            "name": "关羽"
+        }
+    ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <O>
      *            the generic type
      * @param <V>
@@ -736,6 +827,36 @@ public final class CollectionsUtil{
     /**
      * 循环遍历 <code>objectCollection</code>,返回 当bean propertyName 属性值 equals 特定value 时候的list.
      *
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+        objectCollection.add(new User("关羽", 24));
+    
+        LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
+    }
+    
+    返回:
+    
+    [
+                {
+            "age": 24,
+            "name": "关羽"
+        },
+                {
+            "age": 24,
+            "name": "关羽"
+        }
+    ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <O>
      *            the generic type
      * @param <V>
@@ -761,6 +882,36 @@ public final class CollectionsUtil{
      * <p>
      * 具体参见 {@link ArrayContainsPredicate}的使用
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            List<User> objectCollection = new ArrayList<User>();
+            objectCollection.add(new User("张飞", 23));
+            objectCollection.add(new User("关羽", 24));
+            objectCollection.add(new User("刘备", 25));
+    
+            String[] array = }{ "刘备", "关羽" } {@code ;
+            LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", array)));
+    }
+    
+    返回:
+    
+    [
+                {
+            "age": 24,
+            "name": "关羽"
+        },
+                {
+            "age": 25,
+            "name": "刘备"
+        }
+    ]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type

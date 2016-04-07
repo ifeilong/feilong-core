@@ -54,14 +54,9 @@ public class CollectionsUtilTest{
     public void testRemove(){
         List<String> list = new ArrayList<String>();
         list.add("xinge");
-        list.add("feilong5");
         list.add("feilong1");
         list.add("feilong2");
         list.add("feilong2");
-        list.add("feilong3");
-        list.add("feilong4");
-        list.add("feilong4");
-        list.add("feilong5");
 
         LOGGER.info("list:{}", JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
         LOGGER.info("list:{}", JsonUtil.format(list));
@@ -73,17 +68,12 @@ public class CollectionsUtilTest{
     @Test
     public void removeDuplicate(){
         List<String> list = new ArrayList<String>();
-        list.add("xinge");
-        list.add("feilong5");
         list.add("feilong1");
         list.add("feilong2");
         list.add("feilong2");
         list.add("feilong3");
-        list.add("feilong4");
-        list.add("feilong4");
-        list.add("feilong5");
 
-        LOGGER.info("list:{}", JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
+        LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
     }
 
     /**
@@ -145,6 +135,39 @@ public class CollectionsUtilTest{
         list.add("张飞");
         list.add("刘备");
         LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
+    }
+
+    @Test
+    public void testFind(){
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+        objectCollection.add(new User("关羽", 24));
+
+        LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
+    }
+
+    @Test
+    public void testSelectValue(){
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+        objectCollection.add(new User("关羽", 24));
+
+        LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
+    }
+
+    @Test
+    public void testSelectArray(){
+        List<User> objectCollection = new ArrayList<User>();
+        objectCollection.add(new User("张飞", 23));
+        objectCollection.add(new User("关羽", 24));
+        objectCollection.add(new User("刘备", 25));
+
+        String[] array = { "刘备", "关羽" };
+        LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", array)));
     }
 
     /**
