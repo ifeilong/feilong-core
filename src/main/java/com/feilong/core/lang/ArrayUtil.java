@@ -235,7 +235,8 @@ public final class ArrayUtil{
      * @param objectArray
      *            对象数组
      * @param propertyName
-     *            指定属性的名称
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return if null==objectArray,return {@link java.util.Collections#emptyMap()}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.util.CollectionsUtil#group(java.util.Collection, String)

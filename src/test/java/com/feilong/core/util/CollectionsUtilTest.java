@@ -25,6 +25,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
+import org.apache.commons.collections4.functors.EqualPredicate;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,6 +145,19 @@ public class CollectionsUtilTest{
         list.add("张飞");
         list.add("刘备");
         LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
+    }
+
+    /**
+     * Test select1.
+     */
+    @Test
+    public void testSelectPredicate(){
+        List<Long> list = new ArrayList<Long>();
+        list.add(1L);
+        list.add(1L);
+        list.add(2L);
+        list.add(3L);
+        LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
     }
 
     /**
