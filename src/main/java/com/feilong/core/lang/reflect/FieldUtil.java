@@ -15,7 +15,6 @@
  */
 package com.feilong.core.lang.reflect;
 
-import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -135,7 +134,7 @@ public final class FieldUtil{
      *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
      * @return the field value map
      * @see #getAllFieldList(Object, String[])
-     * @see org.apache.commons.lang3.reflect.MemberUtils#setAccessibleWorkaround(AccessibleObject)
+     * @see org.apache.commons.lang3.reflect.MemberUtils#setAccessibleWorkaround(java.lang.reflect.AccessibleObject)
      */
     public static Map<String, Object> getAllFieldNameAndValueMap(Object obj,String[] excludeFieldNames){
         List<Field> fieldList = getAllFieldList(obj, excludeFieldNames);

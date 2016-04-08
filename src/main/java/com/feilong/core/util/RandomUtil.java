@@ -19,7 +19,6 @@ import java.util.Random;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.Alphabet;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -166,8 +165,8 @@ public final class RandomUtil{
      * <blockquote>
      * 
      * <pre>
-     * RandomUtil.createRandomFromString({@link Alphabet#DECIMAL}, 8, 20)
-     * 从{@link Alphabet#DECIMAL}随机抽取字符,组成最小长度是8,最大长度是20的字符串
+     * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL}, 8, 20)
+     * 从{@link com.feilong.core.Alphabet#DECIMAL}随机抽取字符,组成最小长度是8,最大长度是20的字符串
      * 
      * 生成的结果是可能是 142853574998970631
      * </pre>
@@ -175,7 +174,7 @@ public final class RandomUtil{
      * </blockquote>
      *
      * @param str
-     *            被抽取的字符串,比如示例中的 {@link Alphabet#DECIMAL}
+     *            被抽取的字符串,比如示例中的 {@link com.feilong.core.Alphabet#DECIMAL}
      * @param minLength
      *            最小长度 ,比如示例中的 8
      * @param maxLength
@@ -204,16 +203,16 @@ public final class RandomUtil{
      * <blockquote>
      * 
      * <pre>
-     * RandomUtil.createRandomFromString({@link Alphabet#DECIMAL_AND_LETTERS}, 5)
+     * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}, 5)
      * 
-     * 从{@link Alphabet#DECIMAL_AND_LETTERS} 随机抽取字符,组成长度是5 的字符串
+     * 从{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS} 随机抽取字符,组成长度是5 的字符串
      * 生成的结果是可能是 IFSMB
      * </pre>
      * 
      * </blockquote>
      * 
      * @param str
-     *            被抽取的字符串,比如 {@link Alphabet#DECIMAL_AND_LETTERS}
+     *            被抽取的字符串,比如 {@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}
      * @param length
      *            指定字符串长度, 比如 5
      * @return 得到随机字符串, 如上面给到的参数,可能是 IFSMB <br>
