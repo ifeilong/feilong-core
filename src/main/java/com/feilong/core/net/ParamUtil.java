@@ -61,10 +61,16 @@ public final class ParamUtil{
      * <p style="color:green">
      * 返回的是 {@link TreeMap},key自然排序
      * </p>
+     * 
+     * <p>
+     * 和该方法正好相反的是 {@link #toArrayValueMap(Map)}
+     * </p>
      *
      * @param arrayValueMap
      *            the array value map
-     * @return {@link TreeMap}
+     * @return 如果参数arrayValueMap是null或者empty,那么return {@link Collections#emptyMap()},<br>
+     *         如果arrayValueMap其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
+     *         如果arrayValueMap其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
      * @since 1.4.0
      */
     public static Map<String, String> toSingleValueMap(Map<String, String[]> arrayValueMap){//返回 TreeMap 方便log 显示
@@ -83,15 +89,19 @@ public final class ParamUtil{
     }
 
     /**
-     * To array value map.
+     * 将单值的参数map转成多值的参数map.
      * 
      * <p style="color:green">
      * 返回的是 {@link TreeMap},key自然排序
      * </p>
      * 
+     * <p>
+     * 和该方法正好相反的是 {@link #toSingleValueMap(Map)}
+     * </p>
+     * 
      * @param singleValueMap
      *            the name and value map
-     * @return {@link TreeMap}
+     * @return 如果参数arrayValueMap是null或者empty,那么return {@link Collections#emptyMap()}
      * @since 1.4.0
      */
     public static Map<String, String[]> toArrayValueMap(Map<String, String> singleValueMap){
@@ -486,7 +496,30 @@ public final class ParamUtil{
     //*********************************************************************************
 
     /**
-     * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value).
+     * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType不是null或者empty 返回安全的 key和value).
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        String queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
+        LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
+    }
+    
+    返回:
+    {
+        "format": "xml",
+        "partner": "2088011438559510",
+        "req_data": "%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E",
+        "sec_id": "MD5",
+        "service": "alipay.wap.auth.authAndExecute",
+        "sign": "cc945983476d615ca66cee41a883f6c1",
+        "v": "2.0"
+     }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param queryString
      *            the query string
@@ -555,13 +588,41 @@ public final class ParamUtil{
      * <p>
      * 返回的queryString参数顺序,按照传入的singleValueMap key顺序排列,可以考虑传入 {@link TreeMap},{@link LinkedHashMap}等以适应不同业务的需求
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 对于以下的map ,
+     * {@code
+     
+    Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
+    keyAndArrayMap.put("name", new String[] }{ "jim", "feilong","鑫哥" }{@code );
+    keyAndArrayMap.put("age", new String[] }{ "18" }{@code );
+    keyAndArrayMap.put("love", new String[] }{ "sanguo" }{@code );
+        }
+     * 
+     * 如果使用的是{@code LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, CharsetType.UTF8)); }
+     * 
+     * 那么返回:
+     * love=sanguo&age=18&name=jim&name=feilong&name=%E9%91%AB%E5%93%A5
+     * 
+     * 
+     * 如果使用的是{@code LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap,null)); }
+     * 
+     * 那么返回:
+     * love=sanguo&age=18&name=jim&name=feilong&name=鑫哥
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param arrayValueMap
      *            类似于 request.getParamMap
      * @param charsetType
-     *            {@link CharsetType} 何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
-     *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return if isNullOrEmpty(appendMap) ,return ""
+     *            何种编码, {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
+     * @return if isNullOrEmpty(appendMap) ,return {@link StringUtils#EMPTY}
      * @see CharsetType
      * @see #toNaturalOrderingQueryString(Map)
      * @since 1.4.0
@@ -580,8 +641,10 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the array value map
      * @param charsetType
-     *            the charset type
-     * @return if Validator.isNullOrEmpty(arrayValueMap) ,return emptyMap
+     *            何种编码, {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
+     * @return if Validator.isNullOrEmpty(arrayValueMap),return emptyMap
      */
     private static Map<String, String[]> toSafeArrayValueMap(Map<String, String[]> arrayValueMap,String charsetType){
         if (Validator.isNullOrEmpty(arrayValueMap)){
@@ -627,6 +690,32 @@ public final class ParamUtil{
      * <li>没有值的参数无需传递,也无需包含到待签名数据中.</li>
      * <li><span style="color:red">注意: 待签名数据应该是原生值而不是 encoding 之后的值</span></li>
      * </ol>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+    Map<String, String> map = new HashMap<String, String>();
+    map.put("service", "create_salesorder");
+    map.put("_input_charset", "gbk");
+    map.put("totalActual", "210.00");
+    map.put("receiver", "鑫哥");
+    map.put("province", "江苏省");
+    map.put("city", "南通市");
+    map.put("district", "通州区");
+    map.put("address", "江苏南通市通州区888组888号");
+    map.put("lines_data",
+            "[}{\"extentionCode\":\"00887224869169\",\"count\":\"2\",\"unitPrice\":\"400.00\"},{\"extentionCode\":\"00887224869170\",\"count\":\"1\",\"unitPrice\":\"500.00\"} {@code ]");
+    LOGGER.info(ParamUtil.toNaturalOrderingQueryString(map));
+    }
+    
+    返回 :
+    
+    _input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&lines_data=[{"extentionCode":"00887224869169","count":"2","unitPrice":"400.00"},{"extentionCode":"00887224869170","count":"1","unitPrice":"500.00"}]&province=江苏省&receiver=鑫哥&service=create_salesorder&totalActual=210.00
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>代码流程:</h3> <blockquote>
      * <ol>
@@ -782,7 +871,9 @@ public final class ParamUtil{
      * @param value
      *            the value
      * @param charsetType
-     *            the charset type,pls use {@link CharsetType}
+     *            何种编码, {@link CharsetType}<br>
+     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
+     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">
