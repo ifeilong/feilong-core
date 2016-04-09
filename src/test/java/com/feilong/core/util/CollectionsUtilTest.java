@@ -15,6 +15,9 @@
  */
 package com.feilong.core.util;
 
+import static org.junit.Assert.assertEquals;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -300,8 +303,7 @@ public class CollectionsUtilTest{
         list.add(new User(5L));
         list.add(new User(5L));
 
-        Number number = CollectionsUtil.avg(list, 2, "id");
-        LOGGER.info("" + number);
+        assertEquals(new BigDecimal("4.00"), CollectionsUtil.avg(list, 2, "id"));
 
     }
 
@@ -322,7 +324,7 @@ public class CollectionsUtilTest{
 
         Map<String, Number> map = CollectionsUtil.avg(list, 2, "id", "age");
 
-        LOGGER.info("{}", JsonUtil.format(map));
+        LOGGER.info(JsonUtil.format(map));
     }
 
     /**
@@ -335,9 +337,8 @@ public class CollectionsUtilTest{
         list.add(new User(5L));
         list.add(new User(5L));
 
-        Number number = CollectionsUtil.sum(list, "id");
-
-        LOGGER.info("" + number);
+        assertEquals(new BigDecimal(12L), CollectionsUtil.sum(list, "id"));
+        assertEquals(null, CollectionsUtil.sum(null, "id"));
     }
 
     /**
@@ -356,7 +357,6 @@ public class CollectionsUtilTest{
         list.add(user2);
 
         Map<String, Number> map = CollectionsUtil.sum(list, "id", "age");
-
         LOGGER.info("{}", JsonUtil.format(map));
     }
 

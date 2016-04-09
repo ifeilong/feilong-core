@@ -266,7 +266,6 @@ public final class CollectionsUtil{
 
         while (enumeration.hasMoreElements()){
             O object = enumeration.nextElement();
-
             if (org.apache.commons.lang3.ObjectUtils.equals(object, value)){
                 return true;
             }
@@ -746,7 +745,6 @@ public final class CollectionsUtil{
                     Collection<O> objectCollection,
                     String propertyName,
                     K returnCollection){
-
         Validate.notNull(returnCollection, "returnCollection can't be null!");
 
         //避免null point
@@ -1371,7 +1369,6 @@ public final class CollectionsUtil{
             if (null != includePredicate){
                 //跳出循环标记
                 boolean continueFlag = !includePredicate.evaluate(o);
-
                 if (continueFlag){
                     continue;
                 }
@@ -1446,7 +1443,6 @@ public final class CollectionsUtil{
      * @since 1.0.8
      */
     public static <T, O> Map<T, O> groupOne(Collection<O> objectCollection,String propertyName){
-
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
@@ -1478,33 +1474,36 @@ public final class CollectionsUtil{
     /**
      * 算术平均值.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre>
-     * 
-     * Example 1:
-     * 
-     * List list = new ArrayList();
-     * 
-     * User user1 = new User(2L);
-     * user1.setAge(18);
-     * list.add(user1);
-     * 
-     * User user2 = new User(3L);
-     * user2.setAge(30);
-     * list.add(user2);
-     * 
-     * Map<String, Number> map = CollectionsUtil.avg(list, 2, "id", "age");
-     * 
-     * LOGGER.info("{}", JsonUtil.format(map));
-     * 
-     * 
-     * 返回 :
-     * 
-     * {
+    {@code
+            List<User> list = new ArrayList<User>();
+    
+            User user1 = new User(2L);
+            user1.setAge(18);
+            list.add(user1);
+    
+            User user2 = new User(3L);
+            user2.setAge(30);
+            list.add(user2);
+    
+            Map<String, Number> map = CollectionsUtil.avg(list, 2, "id", "age");
+    
+            LOGGER.info(JsonUtil.format(map));
+    }
+    
+    返回:
+    {
         "id": 2.5,
         "age": 24
-        }
+    }
+     * 
      * </pre>
-     *
+     * 
+     * </blockquote>
+     * 
      * @param <O>
      *            the generic type
      * @param objectCollection
@@ -1518,14 +1517,11 @@ public final class CollectionsUtil{
      * @see #sum(Collection, String...)
      */
     public static <O> Map<String, Number> avg(Collection<O> objectCollection,int scale,String...propertyNames){
-
         //总分
         Map<String, Number> sumMap = sum(objectCollection, propertyNames);
 
         int size = objectCollection.size();
-
-        //视需求  可以换成 HashMap 或者TreeMap
-        Map<String, Number> map = new LinkedHashMap<String, Number>(size);
+        Map<String, Number> map = new LinkedHashMap<String, Number>(size);//视需求  可以换成 HashMap 或者TreeMap
 
         for (Map.Entry<String, Number> entry : sumMap.entrySet()){
             String key = entry.getKey();
@@ -1533,26 +1529,27 @@ public final class CollectionsUtil{
 
             map.put(key, NumberUtil.getDivideValue(ConvertUtil.toBigDecimal(value), size, scale));
         }
-
         return map;
     }
 
     /**
      * 算术平均值.
      * 
-     * <pre>
-     * Example 1:
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
-        List list = new ArrayList();
-        list.add(new User(2L));
-        list.add(new User(5L));
-        list.add(new User(5L));
+     * <pre>
+    {@code
+            List<User> list = new ArrayList<User>();
+            list.add(new User(2L));
+            list.add(new User(5L));
+            list.add(new User(5L));
+    }
     
-        Number number = CollectionsUtil.avg(list, 2, "id");
-        LOGGER.info("" + number);
-        
-                        返回 :4.00
+    返回: 4.00
      * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -1574,38 +1571,39 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 总和,计算集合对象内指定的属性的总和.
+     * 总和,计算集合对象内指定的属性名值的总和.
      * 
      * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0 代替
+     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
      * </p>
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre>
-     * 
-     * Example 1:
-     * 
-     * List list = new ArrayList();
-     * 
-     * User user1 = new User(2L);
-     * user1.setAge(18);
-     * list.add(user1);
-     * 
-     * User user2 = new User(3L);
-     * user2.setAge(30);
-     * list.add(user2);
-     * 
-     * Map<String, Number> map = CollectionsUtil.sum(list, "id", "age");
-     * 
-     * LOGGER.info("{}", JsonUtil.format(map));
-     * 
-     * 返回:
-     * {
-        "id": 5,
-        "age": 48
-       }
+    {@code
+            List<User> list = new ArrayList<User>();
+    
+            User user1 = new User(2L);
+            user1.setAge(18);
+            list.add(user1);
+    
+            User user2 = new User(3L);
+            user2.setAge(30);
+            list.add(user2);
+    
+            Map<String, Number> map = CollectionsUtil.sum(list, "id", "age");
+            LOGGER.info(JsonUtil.format(map));
+    }
+    * 返回:
+    * {
+         "id": 5,
+         "age": 48
+      }
      * 
      * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -1617,17 +1615,14 @@ public final class CollectionsUtil{
      * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
      */
     public static <O> Map<String, Number> sum(Collection<O> objectCollection,String...propertyNames){
-
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
 
         Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
 
-        int size = objectCollection.size();
-
         //总分
-        Map<String, Number> sumMap = new LinkedHashMap<String, Number>(size);
+        Map<String, Number> sumMap = new LinkedHashMap<String, Number>(objectCollection.size());
 
         for (O o : objectCollection){
             for (String propertyName : propertyNames){
@@ -1644,25 +1639,60 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 总和,计算集合对象内指定的属性的总和.
+     * 总和,计算集合对象内指定的属性名值的总和.
      * 
      * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0 代替
+     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
      * </p>
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre>
+    {@code
+            List<User> list = new ArrayList<User>();
+            list.add(new User(2L));
+            list.add(new User(5L));
+            list.add(new User(5L));
+            
+         Number number = CollectionsUtil.sum(list, "id");
+         LOGGER.info("" + number);
+    }
+    
+    返回: 12
+     * </pre>
      * 
-     * Example 1:
+     * </blockquote>
      * 
-     * List list = new ArrayList();
-     * list.add(new User(2L));
-     * list.add(new User(5L));
-     * list.add(new User(5L));
+     * <h3>说明:</h3>
+     * 当你需要写这样的代码的时候,
      * 
-     * Number number = CollectionsUtil.sum(list, "id");
-     * LOGGER.info("" + number);
+     * <pre>
+    {@code
+    protected Integer getCookieShoppingCartLinesQty(List<CookieShoppingCartLine> cartLineList)} {  
+    
+    {@code
+        Integer qty = 0;
+        //获取cookie中的购物车行集合
+        if (null != cartLineList && cartLineList.size() > 0)}{  {@code
+            for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();)} {  {@code
+                CookieShoppingCartLine cookieShoppingCartLine = (CookieShoppingCartLine) iterator.next();
+                qty += cookieShoppingCartLine.getQuantity();
+            }}
+        }
+        return qty;
+    }
+    }
+     * </pre>
      * 
-     * 返回 12
+     * 你可以写成:
+     * 
+     * <pre>
+     {@code 
+     protected Integer getCookieShoppingCartLinesQty(List<CookieShoppingCartLine> cartLineList)}{ {@code 
+         return Validator.isNullOrEmpty(cartLineList) ? 0 : CollectionsUtil.sum(cartLineList, "quantity").intValue();
+     }}
+     }
      * </pre>
      * 
      * @param <O>
@@ -1672,7 +1702,7 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return the number
+     * @return 如果 objectCollection is null or empty, 那么返回 <code>null</code>
      * @see #sum(Collection, String...)
      * @since 1.5.0
      */
