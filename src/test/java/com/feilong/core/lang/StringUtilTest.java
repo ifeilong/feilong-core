@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -413,12 +414,8 @@ public class StringUtilTest{
      */
     @Deprecated
     public static int searchTimes(String source,String target){
-        if (null == source){
-            throw new IllegalArgumentException("source can't be null!");
-        }
-        if (null == target){
-            throw new IllegalArgumentException("target can't be null!");
-        }
+        Validate.notNull(source, "source can't be null!");
+        Validate.notNull(target, "target can't be null!");
         // times 计数器
         int count = 0;
         // while 循环 点
