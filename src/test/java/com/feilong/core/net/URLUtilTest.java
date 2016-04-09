@@ -65,6 +65,5 @@ public class URLUtilTest{
 
         LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
         LOGGER.debug(JsonUtil.format(URLUtil.toStringArray(urls)));
-
     }
 }

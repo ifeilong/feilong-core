@@ -16,9 +16,7 @@
 package com.feilong.core.lang;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -48,36 +46,10 @@ public class SystemUtilTest{
 
         //返回以毫秒为单位的当前时间。注意,当返回值的时间单位是毫秒时,值的粒度取决于底层操作系统,并且粒度可能更大。例如,许多操作系统以几十毫秒为单位测量时间。 
         LOGGER.info("" + System.currentTimeMillis());
-
-    }
-
-    /**
-     * Gets the property.
-     * 
-     */
-    @Test
-    public void testGetProperty(){
-        LOGGER.info(System.getProperty("path"));
-
-    }
-
-    /**
-     * Gets the env.
-     * 
-     */
-    @Test
-    public void testGetenv(){
-        Map<String, String> map = System.getenv();
-        Object[] key = map.keySet().toArray();
-        Arrays.sort(key);
-        for (int i = 0; i < key.length; i++){
-            LOGGER.info(key[i] + "======>" + map.get(key[i]));
-        }
     }
 
     /**
      * Gets the env map for LOGGER.
-     * 
      */
     @Test
     public void testGetEnvMapForLog(){
@@ -98,47 +70,11 @@ public class SystemUtilTest{
     }
 
     /**
-     * Test system.
-     */
-    @Test
-    public void testSystem(){
-        System.getProperties().list(System.out);
-
-        Properties properties = System.getProperties();
-        Object[] key = properties.keySet().toArray();
-        Arrays.sort(key);
-        for (int i = 0; i < key.length; i++){
-            LOGGER.debug(key[i] + "======>" + properties.get(key[i]));
-        }
-    }
-
-    /**
      * Gets the properties map for LOGGER.
-     * 
      */
     @Test
     public void testGetPropertiesMapForLog(){
         Map<String, String> propertiesMapForLog = SystemUtil.getPropertiesMapForLog();
         LOGGER.debug(JsonUtil.format(propertiesMapForLog));
-    }
-
-    /**
-     * Test.
-     */
-    @Test
-    public void test(){
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("aaaa", "aaaa");
-        map.put("cccc", "cccc");
-        map.put("bbbb", "bbbb");
-        map.put("dddd", "dddd");
-        LOGGER.debug(JsonUtil.format(map));
-
-        LOGGER.debug("---------------------------");
-        Object[] key = map.keySet().toArray();
-        Arrays.sort(key);
-        for (int i = 0; i < key.length; i++){
-            LOGGER.debug(map.get(key[i]));
-        }
     }
 }

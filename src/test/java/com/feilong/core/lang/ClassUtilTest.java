@@ -86,8 +86,8 @@ public class ClassUtilTest{
      */
     @Test
     public void testToClass(){
-        LOGGER.info("" + JsonUtil.format(ClassUtil.toClass("a", "a")));
-        LOGGER.info("" + JsonUtil.format(ClassUtil.toClass(1, true)));
+        LOGGER.info(JsonUtil.format(ClassUtil.toClass("a", "a")));
+        LOGGER.info(JsonUtil.format(ClassUtil.toClass(1, true)));
     }
 
     /**

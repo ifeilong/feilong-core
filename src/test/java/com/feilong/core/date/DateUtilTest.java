@@ -102,9 +102,7 @@ public class DateUtilTest extends BaseDateUtilTest{
                                         "%05d",
                                         DateUtil.getIntervalHour(
                                                         DateUtil.string2Date("2014-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
-                                                        DateUtil.string2Date("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)))
-
-                                        + "");
+                                                        DateUtil.string2Date("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))));
     }
 
     /**
@@ -489,7 +487,6 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testAddHour(){
-        LOGGER.debug("the param NewConstructorTypeMunger :{}", NOW);
         logDate(DateUtil.addHour(NOW, 5));
         logDate(DateUtil.addHour(NOW, -5));
     }

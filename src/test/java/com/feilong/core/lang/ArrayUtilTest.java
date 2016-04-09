@@ -53,20 +53,6 @@ public class ArrayUtilTest{
     }
 
     /**
-     * Test array util test22.
-     */
-    @Test
-    public void testArrayUtilTest22(){
-        String[] strs = {
-                          "ppt-coreContent1.png",
-                          "ppt-coreContent3.png",
-                          "ppt-coreContent10.png",
-                          "ppt-coreContent11.png",
-                          "ppt-coreContent2.png" };
-        LOGGER.debug(JsonUtil.format(strs));
-    }
-
-    /**
      * Test is contain.
      */
     @Test
@@ -89,7 +75,6 @@ public class ArrayUtilTest{
         Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
 
         Map<Integer, List<Integer>> group = ArrayUtil.group(array);
-
         LOGGER.debug(JsonUtil.format(group));
 
         Collection<List<Integer>> values = group.values();
@@ -99,7 +84,6 @@ public class ArrayUtilTest{
         String[] array1 = { "关羽", "feilong", "关羽", "基友团", "关羽" };
 
         Map<String, List<String>> group1 = ArrayUtil.group(array1);
-
         LOGGER.debug(JsonUtil.format(group1));
 
         Collection<List<String>> values1 = group1.values();
@@ -149,7 +133,6 @@ public class ArrayUtilTest{
      */
     @Test
     public void arrayAndList(){
-
         String aString = "FACTORY_ID,SHOE_NAME,CHANNEL,PRODUCT_CODE,COLOR_CODE,PAYTYPE,FACTORY_CODE,TRACKING_NO_UPS,MH_ID,DEVICE,SUB_TOTAL_PRICE,TAX_PRICE,DELIVERY_PRICE,TOTAL_PRICE,PAY_DATE,REVENUE_DATE,RETURN_DATE,CANCEL_DATE,SHOP_NAME,CALCEL_CODE";
         List<String> asList = Arrays.asList(aString.split(","));
 
@@ -166,7 +149,6 @@ public class ArrayUtilTest{
         }
 
         User[] usersarray = list.toArray(new User[0]);
-
         for (User user : usersarray){
             LOGGER.info(user.getId() + "");
         }

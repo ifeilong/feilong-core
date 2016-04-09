@@ -65,7 +65,6 @@ public class CalendarUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetDayOfYear(){
         LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
-        LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
         LOGGER.debug(CalendarUtil.getDayOfYear(2014, 12, 31) + "");
     }
 

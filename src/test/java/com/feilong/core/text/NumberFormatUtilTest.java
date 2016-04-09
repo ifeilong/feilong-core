@@ -52,12 +52,14 @@ public class NumberFormatUtilTest{
     @Test
     public void testConvertNumberToString2(){
         DecimalFormat decimalFormat = new DecimalFormat("00");
-        BigDecimal number = BigDecimal.valueOf(88.50);
         decimalFormat.setRoundingMode(RoundingMode.CEILING);
         // decimalFormat.setMaximumFractionDigits(2);
         // decimalFormat.setMinimumFractionDigits(2);
         // maxFractionDigits
+
+        BigDecimal number = BigDecimal.valueOf(88.50);
         number.setScale(2, BigDecimal.ROUND_HALF_UP);
+
         LOGGER.info(number.toString());
         LOGGER.info(decimalFormat.format(number));
     }

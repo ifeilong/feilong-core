@@ -67,15 +67,16 @@ public class MessageFormatUtilTest{
                         .format("At {1,time} on {1,date}, there was {2} on planet {0,number,integer}.", planet, new Date(), event);
         LOGGER.info(result);
 
-        MessageFormat form = new MessageFormat("The disk \"{1}\" contains {0}.");
+        MessageFormat messageFormat = new MessageFormat("The disk \"{1}\" contains {0}.");
         double[] filelimits = { 0, 1, 2 };
         String[] filepart = { "no files", "one file", "{0,number} files" };
 
-        ChoiceFormat fileform = new ChoiceFormat(filelimits, filepart);
-        form.setFormatByArgumentIndex(0, fileform);
+        ChoiceFormat choiceFormat = new ChoiceFormat(filelimits, filepart);
+        messageFormat.setFormatByArgumentIndex(0, choiceFormat);
+
         int fileCount = 0;
         String diskName = "MyDisk";
         Object[] testArgs = { new Long(fileCount), diskName };
-        LOGGER.info(form.format(testArgs));
+        LOGGER.info(messageFormat.format(testArgs));
     }
 }
