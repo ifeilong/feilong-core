@@ -33,7 +33,6 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.tools.Menu;
 import com.feilong.test.User;
-import com.feilong.test.UserAddress;
 import com.feilong.tools.BaseJsonTest;
 import com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
 import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
@@ -178,18 +177,6 @@ public class JsonUtilTest extends BaseJsonTest{
     public void testExcludes(){
         String[] excludes = { "name" };
         LOGGER.info(JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST, excludes));
-    }
-
-    /**
-     * To bean.
-     */
-    @Test
-    public void toBean(){
-        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-        classMap.put("userAddresseList", UserAddress.class);
-
-        User user = JsonUtil.toBean(DEFAULT_USER_FOR_JSON_TEST_JSON, User.class, classMap);
-        LOGGER.info(JsonUtil.format(user));
     }
 
     /**

@@ -29,8 +29,6 @@ import net.sf.json.xml.XMLSerializer;
  */
 public class JsonlibXmlUtil{
 
-    //*******************************objectToXML*************************************************
-
     // [start]objectToXML
 
     /**
@@ -144,5 +142,4 @@ public class JsonlibXmlUtil{
         XMLSerializer xmlSerializer = new XMLSerializer();
         return xmlSerializer.read(xml);
     }
-
 }

@@ -18,6 +18,7 @@ package com.feilong.tools.jsonlib;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -680,6 +681,33 @@ public final class JsonUtil{
 
     /**
      * 把一个json数组串,转换成实体数组.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String json = "[}{'name':'get'},{'name':'set'}]"; {@code 
+            Person[] objArr = JsonUtil.toArray(json, Person.class);
+    
+            LOGGER.info(JsonUtil.format(objArr));
+    }
+    
+    返回:
+    [{
+            "dateAttr": null,
+            "name": "get"
+        },
+                {
+            "dateAttr": null,
+            "name": "set"
+        }
+    ]
+     * 
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -696,6 +724,39 @@ public final class JsonUtil{
 
     /**
      * 把一个json数组串转换成实体数组,且数组元素的属性含有另外实例Bean.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String json = "[}{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]"; {@code 
+            Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+            classMap.put("data", Person.class);
+    
+            MyBean[] objArr = JsonUtil.toArray(json, MyBean.class, classMap);
+            LOGGER.info(JsonUtil.format(objArr));
+    }
+    
+    返回:
+    [{
+                "id": 0,
+                "data": [            {
+                    "dateAttr": null,
+                    "name": "get"
+                }]
+            },
+                    {
+                "id": 0,
+                "data": [            {
+                    "dateAttr": null,
+                    "name": "set"
+                }]
+            }
+        ]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -732,6 +793,33 @@ public final class JsonUtil{
 
     /**
      * 把一个json数组串转换成集合,且集合里存放的为实例Bean.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String json = "[}{'name':'get'},{'name':'set'}]"; {@code 
+            List<Person> list = JsonUtil.toList(json, Person.class);
+    
+            LOGGER.info(JsonUtil.format(list));
+    }
+    
+    返回:
+    [{
+            "dateAttr": null,
+            "name": "get"
+        },
+                {
+            "dateAttr": null,
+            "name": "set"
+        }
+    ]
+     * 
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -748,6 +836,42 @@ public final class JsonUtil{
 
     /**
      * 把一个json数组串转换成集合,且集合里的对象的属性含有另外实例Bean.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String json = "[}{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]"; {@code 
+            Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+            classMap.put("data", Person.class);
+    
+            List<MyBean> list = JsonUtil.toList(json, MyBean.class, classMap);
+    
+            LOGGER.debug(JsonUtil.format(list));
+    }
+    
+    返回:
+    [
+                {
+            "id": 0,
+            "data": [            {
+                "dateAttr": null,
+                "name": "get"
+            }]
+        },
+                {
+            "id": 0,
+            "data": [            {
+                "dateAttr": null,
+                "name": "set"
+            }]
+        }
+    ]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -782,46 +906,71 @@ public final class JsonUtil{
     /**
      * 这是简单的 将json字符串转成map.
      * 
-     * <h3>格式示例如下:</h3>
-     * 
+     * <h3>示例:</h3>
      * <blockquote>
-     * <p>
-     * {"brandCode":"UA"}
-     * </p>
+     * 
+     * <pre>
+    {@code
+    
+            String json = "}{'brandCode':'UA'}";{@code 
+            Map<String, Object> map = JsonUtil.toMap(json);
+            LOGGER.info(JsonUtil.format(map));
+    }
+    
+    返回:
+    key是 brandCode,value 是 UA 的map
+     * 
+     * </pre>
+     * 
      * </blockquote>
-     *
+     * 
      * @param json
      *            the json
-     * @return the map< string, object>
+     * @return 如果 Validator.isNullOrEmpty(json),返回 {@link Collections#emptyMap()}
+     * @see #toMap(String, Class)
      * @since 1.5.0
      */
     public static Map<String, Object> toMap(String json){
-        LOGGER.debug("in json:{}", json);
-
-        Map<String, Object> map = new HashMap<String, Object>();
-
-        JSONObject jsonObject = toJSONObject(json);
-        @SuppressWarnings("unchecked")
-        Iterator<String> keys = jsonObject.keys();
-        while (keys.hasNext()){
-            String key = keys.next();
-            Object value = jsonObject.get(key);
-            LOGGER.debug("key:[{}], value:{}", key, value);
-            map.put(key, value);
-        }
-        return map;
+        return toMap(json, null);
     }
 
     /**
      * 把json对象串转换成map对象,且map对象里存放的为其他实体Bean.
-     *
+     * 
+     * <p>
+     * 如果 null==clazz,那么直接将json里面的value 作为map 的value
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String json = "}{'data1':{'name':'get'},'data2':{'name':'set'}}";{@code 
+            Map<String, Person> map = JsonUtil.toMap(json, Person.class);
+            LOGGER.info(JsonUtil.format(map));
+    }
+    
+    返回:
+    {
+            "data1":         {
+                "name": "get"
+            },
+            "data2":         {
+                "name": "set"
+            }
+        }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param json
      *            e.g. {'data1':{'name':'get'}, 'data2':{'name':'set'}}
      * @param clazz
      *            e.g. Person.class
-     * @return Map
+     * @return 如果 Validator.isNullOrEmpty(json),返回 {@link Collections#emptyMap()}
      * @see #toMap(String, Class, Map)
      */
     public static <T> Map<String, T> toMap(String json,Class<T> clazz){
@@ -830,6 +979,36 @@ public final class JsonUtil{
 
     /**
      * 把json对象串转换成map对象,且map对象里存放的其他实体Bean还含有另外实体Bean.
+     * 
+     * <p>
+     * 如果 null==clazz,那么直接将json里面的value 作为map 的value
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String json = "}{'mybean':{'data':[{'name':'get'}]}}"; {@code 
+            Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+            classMap.put("data", Person.class);
+    
+            Map<String, MyBean> map = JsonUtil.toMap(json, MyBean.class, classMap);
+            LOGGER.debug(JsonUtil.format(map));
+    }
+    
+    返回:
+    
+    {"mybean":     {
+            "id": 0,
+            "data": [        {
+                "name": "get"
+            }]
+        }}
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -839,23 +1018,32 @@ public final class JsonUtil{
      *            e.g. MyBean.class
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
-     * @return Map
+     * @return 如果 Validator.isNullOrEmpty(json),返回 {@link Collections#emptyMap()}
      * @see net.sf.json.JSONObject#keys()
      * @see #toBean(Object, Class, Map)
      */
+    @SuppressWarnings("unchecked")
     public static <T> Map<String, T> toMap(String json,Class<T> clazz,Map<String, Class<?>> classMap){
         LOGGER.debug("in json:{}", json);
+
+        if (Validator.isNullOrEmpty(json)){
+            return Collections.emptyMap();
+        }
 
         Map<String, T> map = new HashMap<String, T>();
 
         JSONObject jsonObject = toJSONObject(json);
-        @SuppressWarnings("unchecked")
         Iterator<String> keys = jsonObject.keys();
         while (keys.hasNext()){
             String key = keys.next();
             Object value = jsonObject.get(key);
             LOGGER.debug("key:[{}], value:{}", key, value);
-            map.put(key, toBean(value, clazz, classMap));
+
+            if (null != clazz){
+                map.put(key, toBean(value, clazz, classMap));
+            }else{//如果clazz是null,表示不需要转换
+                map.put(key, (T) value);
+            }
         }
         return map;
     }
@@ -867,6 +1055,24 @@ public final class JsonUtil{
 
     /**
      * json串,转换成实体对象.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String json = "}{'name':'get','dateAttr':'2009-11-12'}"; {@code 
+            LOGGER.debug(JsonUtil.format(JsonUtil.toBean(json, Person.class)));
+    }
+    
+    返回:
+    {
+        "dateAttr": "2009-11-12 00:00:00",
+        "name": "get"
+    }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -885,6 +1091,37 @@ public final class JsonUtil{
 
     /**
      * 从json串转换成实体对象,并且实体集合属性存有另外实体Bean.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String json = "}{'data':[{'name':'get'},{'name':'set'}],'id':5}"; {@code 
+            Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+            classMap.put("data", Person.class);
+    
+            MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
+            LOGGER.info(JsonUtil.format(myBean));
+    }
+    
+    返回:
+    {
+            "id": 5,
+            "data":         [
+                            {
+                    "dateAttr": null,
+                    "name": "get"
+                },
+                            {
+                    "dateAttr": null,
+                    "name": "set"
+                }
+            ]
+        }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -968,7 +1205,6 @@ public final class JsonUtil{
         // java.lang.ClassCastException: JSON keys must be strings
         // see http://feitianbenyue.iteye.com/blog/2046877
         jsonConfig.setAllowNonStringKeys(true);
-
         return jsonConfig;
     }
 }

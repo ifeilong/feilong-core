@@ -33,6 +33,7 @@ import com.feilong.test.MyBean;
 import com.feilong.test.Order;
 import com.feilong.test.Person;
 import com.feilong.test.User;
+import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
 import com.feilong.tools.BaseJsonTest;
 
@@ -73,6 +74,18 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
 
         MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
         LOGGER.info(JsonUtil.format(myBean));
+    }
+
+    /**
+     * To bean.
+     */
+    @Test
+    public void toBean3(){
+        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+        classMap.put("userAddresseList", UserAddress.class);
+
+        User user = JsonUtil.toBean(DEFAULT_USER_FOR_JSON_TEST_JSON, User.class, classMap);
+        LOGGER.info(JsonUtil.format(user));
     }
 
     /**
@@ -121,11 +134,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         String json = "[{'name':'get'},{'name':'set'}]";
         Person[] objArr = JsonUtil.toArray(json, Person.class);
 
-        LOGGER.info(JsonUtil.toJSON(objArr).toString(4, 4));
-
-        /*
-         * print: class comm.test.Person name = get class comm.test.Person name = set
-         */
+        LOGGER.info(JsonUtil.format(objArr));
     }
 
     /**
@@ -134,18 +143,11 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toArray3(){
         String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
-        Map classMap = new HashMap();
+        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
         classMap.put("data", Person.class);
 
-        Object[] objArr = JsonUtil.toArray(json, MyBean.class, classMap);
-        for (int i = 0; i < objArr.length; i++){
-            LOGGER.info(
-                            ((MyBean) objArr[i]).getData().get(0).getClass() + " name = "
-                                            + ((Person) ((MyBean) objArr[i]).getData().get(0)).getName());
-        }
-        /*
-         * print: class comm.test.Person name = get class comm.test.Person name = set
-         */
+        MyBean[] objArr = JsonUtil.toArray(json, MyBean.class, classMap);
+        LOGGER.info(JsonUtil.format(objArr));
     }
 
     /**
@@ -165,17 +167,12 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toList3(){
         String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
-        Map classMap = new HashMap();
+        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
         classMap.put("data", Person.class);
-        List list = JsonUtil.toList(json, MyBean.class, classMap);
-        for (int i = 0; i < list.size(); i++){
-            LOGGER.info(
-                            ((MyBean) list.get(i)).getData().get(0).getClass() + " name = "
-                                            + ((Person) ((MyBean) list.get(i)).getData().get(0)).getName());
-        }
-        /*
-         * print: class comm.test.Person name = get class comm.test.Person name = set
-         */
+
+        List<MyBean> list = JsonUtil.toList(json, MyBean.class, classMap);
+
+        LOGGER.debug(JsonUtil.format(list));
     }
 
     /**
@@ -183,7 +180,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toMap(){
-        String json = "{'data1':{'name':'get'},'data2':{'name':'set'},'null':{'name':'set'}}";
+        String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
         Map<String, Person> map = JsonUtil.toMap(json, Person.class);
         LOGGER.info(JsonUtil.format(map));
     }
@@ -193,7 +190,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toMap12(){
-        String json = "{\"brandCode\":\"UA\"}";
+        String json = "{'brandCode':'UA'}";
         Map<String, Object> map = JsonUtil.toMap(json);
         LOGGER.info(JsonUtil.format(map));
     }
@@ -315,8 +312,6 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Override
     protected void performanceMethod(User user){
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -326,7 +321,6 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Override
     protected String getType(){
-        // TODO Auto-generated method stub
         return null;
     }
 }

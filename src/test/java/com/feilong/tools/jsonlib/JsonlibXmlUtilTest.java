@@ -28,8 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.test.Person;
-import com.feilong.test.User;
-import com.feilong.tools.BaseJsonTest;
 
 /**
  * JsonUtil测试类 (C) 2009-9-11, jzj.
@@ -37,7 +35,7 @@ import com.feilong.tools.BaseJsonTest;
  * @deprecated
  */
 @Deprecated
-public class JsonlibXmlUtilTest extends BaseJsonTest{
+public class JsonlibXmlUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonlibXmlUtilTest.class);
@@ -170,24 +168,5 @@ public class JsonlibXmlUtilTest extends BaseJsonTest{
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e class="object"> <dateAttr type="string">2009-09-12 06:58:55</dateAttr> <name
          * type="string">get</name> </e> </a>
          */
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.tools.BaseJsonTest#performanceMethod(com.feilong.test.User)
-     */
-    @Override
-    protected void performanceMethod(User user){
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.tools.BaseJsonTest#getType()
-     */
-    @Override
-    protected String getType(){
-        return null;
     }
 }
