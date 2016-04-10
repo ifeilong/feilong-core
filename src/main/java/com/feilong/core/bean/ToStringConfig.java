@@ -73,7 +73,6 @@ public final class ToStringConfig implements Serializable{
      * @since 1.4.0
      */
     public ToStringConfig(String connector, boolean isJoinNullOrEmpty){
-        super();
         this.connector = connector;
         this.isJoinNullOrEmpty = isJoinNullOrEmpty;
     }

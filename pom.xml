@@ -139,32 +139,19 @@
 		</dependency>
 
 		<!-- **********************仅仅 统一下版本************************************** -->
-		<!--
-			commons-lang
-			仅仅 统一下版本
-			feilong platform 不直接使用这个jar
-		-->
+		<!-- commons-lang 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
 		<dependency>
 			<artifactId>commons-lang</artifactId>
 			<groupId>commons-lang</groupId>
 		</dependency>
 
-		<!--
-			commons-logging
-			仅仅 统一下版本
-			feilong platform 不直接使用这个jar
-		-->
+		<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 		</dependency>
 
-		<!--
-			commons-collections
-			仅仅 统一下版本
-			feilong platform 不直接使用这个jar
-		-->
-		<!-- -->
+		<!-- commons-collections 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
@@ -191,8 +178,7 @@
 		</dependency>
 
 		<!-- 这2个包的类在jdk1.6里自带有了,可能有冲突,如果你的运行环境是1.6的话就可以删掉这2个包 -->
-		<!--
-			<dependency>
+		<!-- <dependency>
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
 			<version>${version.xml-apis}</version>

@@ -158,14 +158,14 @@ public final class CalendarUtil{
     }
 
     /**
-     * 获得任意日期的00:00:00.
+     * 获得指定日期的00:00:00.
      * <p>
      * 例如: {@code 2011-01-01 10:20:20 return 2011-01-01 00:00:00}.
      * </p>
      * 
      * @param date
      *            the date
-     * @return 获得任意日期的00:00:00
+     * @return 获得指定日期的00:00:00
      */
     public static Calendar resetDayBegin(Date date){
         Calendar calendar = DateUtil.toCalendar(date);

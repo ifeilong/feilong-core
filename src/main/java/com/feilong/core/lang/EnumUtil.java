@@ -47,7 +47,7 @@ public final class EnumUtil{
     }
 
     /**
-     * 通过fieldName的 value(忽视大小写) 获得枚举(equalsIgnoreCase判断).
+     * 通过propertyName的 value(忽视大小写) 获得枚举(equalsIgnoreCase判断).
      * 
      * <pre>
      * 
@@ -76,7 +76,7 @@ public final class EnumUtil{
     }
 
     /**
-     * 通过fieldName的 value 获得枚举(equals判断).
+     * 通过propertyName的 value 获得枚举(equals判断).
      * 
      * <pre>
      * 
@@ -106,7 +106,7 @@ public final class EnumUtil{
     }
 
     /**
-     * 通过fieldName的 value 获得枚举.
+     * 通过propertyName的 value 获得枚举.
      * 
      * <pre>
      * 

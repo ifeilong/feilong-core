@@ -438,9 +438,7 @@ public final class BeanUtil{
      * @param value
      *            Value to be set
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
-     * 
      * @see org.apache.commons.beanutils.BeanUtilsBean#setProperty(Object, String, Object)
-     * 
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
      * @see com.feilong.core.bean.PropertyUtil#setProperty(Object, String, Object)
      */
@@ -505,8 +503,7 @@ public final class BeanUtil{
      *            the generic type
      * @param bean
      *            Bean to be cloned
-     * @return the cloned bean
-     *         (复制的引用 ,无法实现深clone)
+     * @return the cloned bean (复制的引用 ,无法实现深clone)
      * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      */
@@ -528,6 +525,28 @@ public final class BeanUtil{
     /**
      * 返回一个<code>bean</code>中所有的可读属性(read method),并将属性名/属性值放入一个Map中.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            User user = new User();
+            user.setId(5L);
+            user.setDate(new Date());
+    
+            LOGGER.info(JsonUtil.format(BeanUtil.describe(user)));
+    }
+    
+    返回:
+    {
+        "id": "5",
+        "date": "Mon Apr 11 00:37:56 CST 2016"
+    }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * <p>
      * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性.
      * </p>
@@ -542,7 +561,7 @@ public final class BeanUtil{
      *
      * @param bean
      *            Bean whose properties are to be extracted
-     * @return if null==bean,will return empty map. see {@link org.apache.commons.beanutils.BeanUtilsBean#describe(Object)}
+     * @return if null==bean,will return empty map. see {@link BeanUtilsBean#describe(Object)}
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @see PropertyUtil#describe(Object)
@@ -570,29 +589,10 @@ public final class BeanUtil{
      * 将Map<Key,value>中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名。 
      * </p>
      * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * apache的javadoc中,明确指明这个方法是为解析http请求参数特别定义和使用的,在正常的使用中不推荐使用.他们推荐使用 {@link #copyProperties(Object, Object, String...)} 方法
-     * </p>
-     * </blockquote>
-     * 
-     * 
-     * <h3>底层方法原理 {@link BeanUtilsBean#populate(Object, Map)}:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 循环map,调用 {@link BeanUtilsBean#setProperty(Object, String, Object)}方法 ,一一对应设置到 <code>bean</code>对象
-     * </p>
-     * </blockquote>
-     * 
      * <h3>Example 1:</h3>
-     * 
      * <blockquote>
      * 
      * <pre>
-     * 
      * {@code 
      * User user = new User();
      * user.setId(5L);
@@ -613,7 +613,25 @@ public final class BeanUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * apache的javadoc中,明确指明这个方法是为解析http请求参数特别定义和使用的,在正常的使用中不推荐使用.他们推荐使用 {@link #copyProperties(Object, Object, String...)} 方法
+     * </p>
+     * </blockquote>
+     * 
+     * 
+     * <h3>底层方法原理 {@link BeanUtilsBean#populate(Object, Map)}:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 循环map,调用 {@link BeanUtilsBean#setProperty(Object, String, Object)}方法 ,一一对应设置到 <code>bean</code>对象
+     * </p>
+     * </blockquote>
+     * 
      * @param bean
      *            JavaBean whose properties are being populated
      * @param properties

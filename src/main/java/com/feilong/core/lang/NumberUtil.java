@@ -157,8 +157,8 @@ public final class NumberUtil{
         if (Validator.isNullOrEmpty(number)){
             return null;
         }
-        //　将int、long、double、string类型的数值转为BigDecimal.使用double会造成精度丢失,
-        //而使用BigDecimal就是为了解决精度丢失的问题,建议使用String方式转换.
+        //将int、long、double、string类型的数值转为BigDecimal.
+        //使用double会造成精度丢失,而使用BigDecimal就是为了解决精度丢失的问题,建议使用String方式转换.
         BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
         return setScale(bigDecimal, 0, roundingMode);
     }
@@ -297,9 +297,8 @@ public final class NumberUtil{
 
         String zero = "0";
         if (!isSpecificNumber(two, zero)){
-            // 不能直接one.divide(two) 
+            // 不能直接one.divide(two) , 应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
             // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result
-            // 应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
             BigDecimal divisor = ConvertUtil.toBigDecimal(two);
             return one.divide(divisor, scale, roundingMode);
         }
