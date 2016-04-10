@@ -25,7 +25,7 @@ package com.feilong.core;
  * @author feilong
  * @version 1.0 Aug 12, 2013 1:21:20 AM
  */
-public class FeiLongVersion{
+public final class FeiLongVersion{
 
     /** Don't let anyone instantiate this class. */
     private FeiLongVersion(){

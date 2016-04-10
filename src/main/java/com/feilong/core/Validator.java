@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <b>核心类</b>,判断对象是否为null或者Empty.
@@ -35,9 +36,10 @@ import org.apache.commons.collections4.CollectionUtils;
  * 
  * <blockquote>
  * <ol>
+ * <li>{@link CharSequence},支持子类有 {@link String},{@link StringBuffer},{@link StringBuilder},使用
+ * {@link org.apache.commons.lang3.StringUtils#isBlank(CharSequence)};</li>
  * <li>{@link Collection},使用其 {@link Collection#isEmpty()};</li>
  * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
- * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
  * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
  * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
  * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
@@ -47,6 +49,7 @@ import org.apache.commons.collections4.CollectionUtils;
  * @author feilong
  * @version 1.0.0 Sep 2, 2010 8:35:28 PM
  * @version 1.0.1 2012-9-23 21:34 rename method,isNullOrEmpty替代isNull
+ * @version 1.5.3 2016-4-11 02:09 call {@link StringUtils#isBlank(CharSequence)}
  * @see String#trim()
  * @see Map#isEmpty()
  * @see Collection#isEmpty()
@@ -87,9 +90,10 @@ public final class Validator{
      * 
      * <blockquote>
      * <ol>
+     * <li>{@link CharSequence},支持子类有 {@link String},{@link StringBuffer},{@link StringBuilder},使用
+     * {@link org.apache.commons.lang3.StringUtils#isBlank(CharSequence)};</li>
      * <li>{@link Collection},使用其 {@link Collection#isEmpty()};</li>
      * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
-     * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
      * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
      * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
@@ -97,20 +101,23 @@ public final class Validator{
      * </blockquote>
      * 
      * @param value
-     *            可以是 {@link Collection},{@link Map},{@link String},{@link Enumeration},{@link Iterator},以及所有数组类型
+     *            可以是 {@link Collection},{@link Map},{@link Enumeration},{@link Iterator},{@link Iterable},
+     *            {@link CharSequence},
+     *            以及所有数组类型(包括原始类型数组)
      * @return 如果是null,返回true<br>
      *         如果是empty也返回true<br>
      *         其他情况返回false<br>
      *         如果不是上述类型,返回false
      * @see org.apache.commons.collections4.CollectionUtils#sizeIsEmpty(Object)
+     * @see org.apache.commons.lang3.StringUtils#isBlank(CharSequence)
      */
     public static boolean isNullOrEmpty(Object value){
         if (null == value){
             return true;
         }
         // 字符串
-        if (value instanceof String){// 比较字符串长度, 效率高
-            return value.toString().trim().length() <= 0;
+        if (value instanceof CharSequence){
+            return StringUtils.isBlank((CharSequence) value);
         }
 
         // collections 支持的类型
@@ -129,9 +136,10 @@ public final class Validator{
      * 
      * <blockquote>
      * <ol>
+     * <li>{@link CharSequence},支持子类有 {@link String},{@link StringBuffer},{@link StringBuilder},使用
+     * {@link org.apache.commons.lang3.StringUtils#isBlank(CharSequence)};</li>
      * <li>{@link Collection},使用其 {@link Collection#isEmpty()};</li>
      * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
-     * <li>{@link String},使用 {@link String#trim()}{@code .length()<=0}效率高;</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
      * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
      * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
@@ -139,7 +147,9 @@ public final class Validator{
      * </blockquote>
      * 
      * @param value
-     *            可以是 {@link Collection},{@link Map},{@link String},{@link Enumeration},{@link Iterator},以及所有数组类型
+     *            可以是 {@link Collection},{@link Map},{@link Enumeration},{@link Iterator},{@link Iterable},
+     *            {@link CharSequence},
+     *            以及所有数组类型(包括原始类型数组)
      * @return 如果是null,返回false<br>
      *         如果是空也返回false<br>
      *         其他情况返回true<br>

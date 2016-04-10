@@ -44,7 +44,7 @@ import org.apache.commons.lang3.Validate;
  * @see <a href="http://newslxw.iteye.com/blog/1114851">SimpleDateFormat在多线程下不安全</a>
  * @since 1.0.1
  */
-public class DateFormatUtil{
+public final class DateFormatUtil{
 
     /** Don't let anyone instantiate this class. */
     private DateFormatUtil(){
