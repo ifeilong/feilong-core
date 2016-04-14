@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +83,17 @@ public class ParamUtilTest{
         assertEquals(value2 + value, ParamUtil.joinValues(map, "paymentType", "service"));
     }
 
+    @Test
+    public void testJoinValues1(){
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("service", "create_salesorder");
+        map.put("paymentType", "unionpay_mobile");
+
+        LOGGER.info(ParamUtil.joinValues(map, "service", "paymentType"));
+
+    }
+
     /**
      * Adds the parameter1.
      */
@@ -98,7 +110,7 @@ public class ParamUtilTest{
     @Test
     public void addParameter(){
         String pageParamName = "label";
-        Object prePageNo = "2-5-8-12";
+        String prePageNo = "2-5-8-12";
         LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
     }
 
@@ -121,7 +133,6 @@ public class ParamUtilTest{
         List<String> paramNameList = new ArrayList<String>();
         paramNameList.add("label");
         paramNameList.add("keyword");
-
         LOGGER.info(ParamUtil.removeParameterList(uri, paramNameList, CharsetType.UTF8));
     }
 
@@ -137,8 +148,28 @@ public class ParamUtilTest{
         //        map.put("a", "");
         //        map.put("b", null);
         //        map.put("c", "jim");
-
         LOGGER.info(ParamUtil.joinSingleValueMap(map));
+    }
+
+    @Test
+    public void testJoinSingleValueMap1(){
+        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        LOGGER.info(ParamUtil.joinSingleValueMap(singleValueMap));
+    }
+
+    @Test
+    public void testJoinArrayValueMap(){
+
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+
+        keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
+        keyAndArrayMap.put("city", new String[] { "南通市" });
+
+        LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
     }
 
     /**
@@ -211,6 +242,26 @@ public class ParamUtilTest{
         LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
     }
 
+    @Test
+    public void testToSingleValueMap2(){
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+
+        keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
+        keyAndArrayMap.put("city", new String[] { "南通市" });
+
+        LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+    }
+
+    @Test
+    public void testToArrayValueMap(){
+        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
+    }
+
     /**
      * Gets the encoded url by array map.
      * 
@@ -218,14 +269,61 @@ public class ParamUtilTest{
     @Test
     public void testGetEncodedUrlByArrayMap(){
         String beforeUrl = "www.baidu.com";
-        Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
         keyAndArrayMap.put("a", new String[] { "aaaa", "bbbb" });
-        String charsetType = CharsetType.UTF8;
+        keyAndArrayMap.put("name", new String[] { "aaaa", "bbbb" });
+        keyAndArrayMap.put("pa", new String[] { "aaaa" });
 
-        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, charsetType));
-        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, null, charsetType));
+        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, null, CharsetType.UTF8));
         LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, null, null));
         beforeUrl = null;
         LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, null));
     }
+
+    @Test
+    public void testGetEncodedUrlByArrayMap1(){
+        String beforeUrl = "www.baidu.com";
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+
+        keyAndArrayMap.put("receiver", new String[] { "鑫哥", "feilong" });
+        keyAndArrayMap.put("province", new String[] { "江苏省" });
+        keyAndArrayMap.put("city", new String[] { "南通市" });
+
+        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+    }
+
+    @Test
+    public void testGetEncodedUrlByArrayMap2(){
+        String beforeUrl = "www.baidu.com?a=b";
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+
+        keyAndArrayMap.put("province", new String[] { "江苏省" });
+        keyAndArrayMap.put("city", new String[] { "南通市" });
+
+        LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+    }
+
+    @Test
+    public void testAddParameterSingleValueMap(){
+        String beforeUrl = "www.baidu.com";
+        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, CharsetType.UTF8));
+    }
+
+    @Test
+    public void testAddParameterSingleValueMap2(){
+        String beforeUrl = "www.baidu.com?a=b";
+        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, CharsetType.UTF8));
+    }
+
 }
