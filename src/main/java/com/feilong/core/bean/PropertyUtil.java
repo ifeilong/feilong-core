@@ -313,6 +313,11 @@ public final class PropertyUtil{
     /**
      * 从指定的 <code>Object obj</code>中,查找指定类型的值.
      * 
+     * <p>
+     * PS:目前暂不支持从集合里面找到指定类型的值,参见 {@link #isCannotFindType(Object)},如果你有相关需求,可以调用 {@link
+     * "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"}
+     * </p>
+     * 
      * <h3>代码流程:</h3>
      * 
      * <blockquote>
@@ -321,6 +326,28 @@ public final class PropertyUtil{
      * <li>自动过滤{@code isPrimitiveOrWrapper},{@code CharSequence},{@code Collection},{@code Map}类型</li>
      * <li>调用 {@link PropertyUtil#describe(Object)} 再递归查找</li>
      * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            User user = new User();
+            user.setId(5L);
+            Date now = new Date();
+            user.setDate(now);
+    
+            user.getUserInfo().setAge(28);
+    
+            LOGGER.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
+    }
+    
+    返回:
+    {"age": 28}
+     * 
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param <T>
@@ -345,7 +372,8 @@ public final class PropertyUtil{
             return (T) obj;
         }
 
-        if (!isCanFindType(obj, toBeFindedClassType)){
+        if (isCannotFindType(obj)){
+            LOGGER.debug("obj:[{}] not support find toBeFindedClassType:[{}]", obj.getClass().getName(), toBeFindedClassType.getName());
             return null;
         }
 
@@ -368,25 +396,23 @@ public final class PropertyUtil{
     }
 
     /**
-     * 一般自定义的command 里面 就是些 string int,list map等对象.<br>
+     * 一般自定义的command 里面 就是些 string int,list map等对象.
+     * 
+     * <p>
      * 这些我们过滤掉,只取类型是 findedClassType的
-     *
-     * @param <T>
-     *            the generic type
+     * </p>
+     * 
      * @param obj
      *            the obj
-     * @param toBeFindedClassType
-     *            the to be finded class type
      * @return true, if checks if is can find type
-     * @since 1.5.2
+     * @since 1.5.3
      */
-    private static <T> boolean isCanFindType(Object obj,Class<T> toBeFindedClassType){
+    private static boolean isCannotFindType(Object obj){
         //一般自定义的command 里面 就是些 string int,list map等对象
         //这些我们过滤掉,只取类型是 findedClassType的
-        return !ClassUtils.isPrimitiveOrWrapper(toBeFindedClassType)//
-                        && !ClassUtil.isInstance(obj, CharSequence.class)//
-                        && !ClassUtil.isInstance(obj, Collection.class) //
-                        && !ClassUtil.isInstance(obj, Map.class) //
-        ;
+        return ClassUtils.isPrimitiveOrWrapper(obj.getClass())//
+                        || ClassUtil.isInstance(obj, CharSequence.class)//
+                        || ClassUtil.isInstance(obj, Collection.class) //
+                        || ClassUtil.isInstance(obj, Map.class);
     }
 }

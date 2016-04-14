@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
+import com.feilong.test.UserInfo;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -64,15 +65,15 @@ public class PropertyUtilTest{
      */
     @Test
     public void describe(){
-        User a = new User();
-        a.setId(5L);
+        User user = new User();
+        user.setId(5L);
         Date now = new Date();
-        a.setDate(now);
+        user.setDate(now);
 
-        List list = new ArrayList();
-        list.add(a);
+        List<User> list = new ArrayList<User>();
+        list.add(user);
 
-        LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(a)));
+        LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
         LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(new BigDecimal(5L))));
         LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe("123456")));
         LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(list)));
@@ -85,18 +86,31 @@ public class PropertyUtilTest{
      */
     @Test
     public void testGetProperty(){
-        User a = new User();
-        a.setId(5L);
+        User user = new User();
+        user.setId(5L);
         Date now = new Date();
-        a.setDate(now);
+        user.setDate(now);
 
         List<User> list = new ArrayList<User>();
-        list.add(a);
-        list.add(a);
-        list.add(a);
+        list.add(user);
+        list.add(user);
+        list.add(user);
 
         Object property = PropertyUtil.getProperty(list, "[0].id");
         LOGGER.info("" + PropertyUtil.getProperty(list, "[0].id"));
         LOGGER.info("map:{}", JsonUtil.format(property));
+    }
+
+    @Test
+    public void testFindValueOfType(){
+        User user = new User();
+        user.setId(5L);
+        Date now = new Date();
+        user.setDate(now);
+
+        user.getUserInfo().setAge(28);
+
+        LOGGER.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
+        LOGGER.info("" + PropertyUtil.findValueOfType(user, Long.class));
     }
 }
