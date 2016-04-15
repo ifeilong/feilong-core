@@ -233,7 +233,7 @@ public final class MapUtil{
     /**
      * 获得 一个map 中的 按照指定的key 整理成新的map.
      * <p>
-     * 注意:如果循环的 key 不在map key 里面 ,则返回的map中忽略该key
+     * 注意:如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
      * </p>
      * 
      * <p>
@@ -271,12 +271,12 @@ public final class MapUtil{
      * @param map
      *            the map
      * @param keys
-     *            指定keys,如果key 不在map key 里面 ,则返回的map 中忽略该key
+     *            如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
      * @return
      *         <ul>
      *         <li>if map isNullOrEmpty,will return {@link Collections#emptyMap()};</li>
      *         <li>if Validator.isNullOrEmpty(keys), return map</li>
-     *         <li>如果key 不在map key 里面 ,则返回的map 中忽略该key</li>
+     *         <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
      *         </ul>
      */
     @SafeVarargs
