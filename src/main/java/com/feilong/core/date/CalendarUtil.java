@@ -77,10 +77,10 @@ import com.feilong.core.DatePattern;
  * </tr>
  * <tr valign="top">
  * <td>{@link Calendar#DAY_OF_WEEK_IN_MONTH}</td>
- * <td>当前月中的第几个星期. 取值:DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1；8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2,依此类推. <br>
+ * <td>当前月中的第几个星期. 取值:DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1;8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2,依此类推. <br>
  * DAY_OF_WEEK_IN_MONTH 指示当前月中的第几个星期.与 DAY_OF_WEEK 字段一起使用时,就可以唯一地指定某月中的某一天. <br>
  * 与 WEEK_OF_MONTH 和 WEEK_OF_YEAR 不同,该字段的值并不 取决于 getFirstDayOfWeek() 或 getMinimalDaysInFirstWeek(). <br>
- * DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1； <br>
+ * DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1; <br>
  * 8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2,依此类推. <br>
  * DAY_OF_WEEK_IN_MONTH 0 表示 DAY_OF_WEEK_IN_MONTH 1 之前的那个星期. <br>
  * 负值是从一个月的末尾开始逆向计数,因此,一个月的最后一个星期天被指定为 DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1. <br>
@@ -89,7 +89,7 @@ import com.feilong.core.DatePattern;
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link Calendar#AM_PM}</td>
- * <td>上午 还是 下午 取值:可以是AM 或 PM.AM为0,表示上午；PM为1,表示下午.</td>
+ * <td>上午 还是 下午 取值:可以是AM 或 PM.AM为0,表示上午;PM为1,表示下午.</td>
  * </tr>
  * <tr valign="top">
  * <td>{@link Calendar#HOUR}</td>

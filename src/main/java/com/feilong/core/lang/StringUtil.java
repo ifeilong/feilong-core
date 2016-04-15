@@ -381,7 +381,7 @@ public final class StringUtil{
      *            value
      * @param prefix
      *            前缀
-     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true；否则返回 false.还要注意,如果参数是空字符串,或者等于此 String 对象(用 equals(Object) 方法确定),则返回 true.
+     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true;否则返回 false.还要注意,如果参数是空字符串,或者等于此 String 对象(用 equals(Object) 方法确定),则返回 true.
      */
     public static boolean startsWith(Object value,String prefix){
         return ConvertUtil.toString(value).startsWith(prefix);

@@ -78,7 +78,7 @@ public class DatePatternTest extends BaseDateUtilTest{
         map.put("MMMM", DateUtil.date2String(NOW, "MMMM"));
 
         //dddd/ddd/dd/d 显示为 星期三/周三(有的语言显示为"三")/01/1
-        //(在英文中同M一样,4个d是全称,3个是简称；
+        //(在英文中同M一样,4个d是全称,3个是简称;
         //dddd/ddd表示星期几,dd/d表示几号)
         map.put("d", DateUtil.date2String(NOW, "d"));
         map.put("dd", DateUtil.date2String(NOW, "dd"));

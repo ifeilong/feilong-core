@@ -43,7 +43,7 @@ import java.text.DecimalFormat;
  * <td>Number</td>
  * <td>Yes</td>
  * <td>代表阿拉伯数字,每一个#表示一位阿拉伯数字, 如果该位不存在则不显示<br>
- * 如果对应位置上没有数字,则保持原样(不用补)；如果最前、后为0,则保持为空.</td>
+ * 如果对应位置上没有数字,则保持原样(不用补);如果最前、后为0,则保持为空.</td>
  * </tr>
  * <tr valign="top">
  * <td><code>.</code></td>
@@ -94,7 +94,7 @@ import java.text.DecimalFormat;
  * <td>Currency sign, replaced by currency symbol. If doubled, replaced by international currency symbol. If present in a pattern, the
  * monetary decimal separator is used instead of the decimal separator.<br>
  * 货币记号,由货币号替换.<br>
- * 如果两个同时出现,则用国际货币符号替换； 如果出现在某个模式中,则使用货币小数分隔符,而不使用小数分隔符</td>
+ * 如果两个同时出现,则用国际货币符号替换; 如果出现在某个模式中,则使用货币小数分隔符,而不使用小数分隔符</td>
  * </tr>
  * <tr valign="top">
  * <td><code>'</code></td>

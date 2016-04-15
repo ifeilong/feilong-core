@@ -78,7 +78,7 @@ import com.feilong.core.text.NumberFormatUtil;
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link RoundingMode#FLOOR}</td>
  * <td>靠近负无穷方向舍入  向负无穷方向舍入 向负无穷方向靠拢.<br>
- * 若是正数,舍入行为类似于ROUND_DOWN；<br>
+ * 若是正数,舍入行为类似于ROUND_DOWN;<br>
  * 若为负数,舍入行为类似于ROUND_UP.</td>
  * </tr>
  * <tr valign="top">
