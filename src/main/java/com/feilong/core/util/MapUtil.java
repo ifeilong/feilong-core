@@ -177,25 +177,30 @@ public final class MapUtil{
     /**
      * 指定一个map,指定特定的keys,取得其中的 value 最小值.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre>
-     * Example 1:
+    {@code
+            Map<String, Integer> map = new HashMap<String, Integer>();
+    
+            map.put("a", 3007);
+            map.put("b", 3001);
+            map.put("c", 3002);
+            map.put("d", 3003);
+            map.put("e", 3004);
+            map.put("f", 3005);
+            map.put("g", -1005);
+    
+            LOGGER.info("" + MapUtil.getMinValue(map, "a", "b", "d", "g", "m"));
+    }
+    
+    返回:
+    -1005
      * 
-     * Map<String, Integer> map = new HashMap<String, Integer>();
-     * 
-     * map.put("a", 3007);
-     * map.put("b", 3001);
-     * map.put("c", 3002);
-     * map.put("d", 3003);
-     * map.put("e", 3004);
-     * map.put("f", 3005);
-     * map.put("g", -1005);
-     * 
-     * String[] keys = { "a", "b", "d", "g", "m" };
-     * 
-     * LOGGER.info(MapUtil.getMinValue(map, keys) + "");
-     * 
-     * 返回 -1005
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param <K>
      *            the key type
@@ -206,14 +211,16 @@ public final class MapUtil{
      * @param keys
      *            指定特定的key
      * @return 如果 keys 中的所有的key 都不在 map 中出现 ,那么返回null
+     * 
+     * @see #getSubMap(Map, Object...)
      * @see java.util.Collection#toArray()
      * @see java.util.Arrays#sort(Object[])
      */
     @SuppressWarnings("unchecked")
-    public static <K, T extends Number> T getMinValue(Map<K, T> map,K[] keys){
+    public static <K, T extends Number> T getMinValue(Map<K, T> map,K...keys){
         Map<K, T> subMap = getSubMap(map, keys);
 
-        if (null == subMap){
+        if (Validator.isNullOrEmpty(subMap)){
             return null;
         }
 
@@ -225,6 +232,37 @@ public final class MapUtil{
 
     /**
      * 获得 一个map 中的 按照指定的key 整理成新的map.
+     * <p>
+     * 注意:如果循环的 key 不在map key 里面 ,则返回的map中忽略该key
+     * </p>
+     * 
+     * <p>
+     * 返回的map为 {@link LinkedHashMap},key的顺序 按照参数 <code>keys</code>的顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            map.put("a", 3007);
+            map.put("b", 3001);
+            map.put("c", 3001);
+            map.put("d", 3003);
+            LOGGER.debug(JsonUtil.format(MapUtil.getSubMap(map, "a", "c")));
+    }
+    
+    返回:
+    
+    {
+            "a": 3007,
+            "c": 3001
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
@@ -233,17 +271,23 @@ public final class MapUtil{
      * @param map
      *            the map
      * @param keys
-     *            指定key,如果key 不在map key 里面 ,则返回的map 中忽略该key
-     * @return if map isNullOrEmpty,will return {@link Collections#emptyMap()}
+     *            指定keys,如果key 不在map key 里面 ,则返回的map 中忽略该key
+     * @return
+     *         <ul>
+     *         <li>if map isNullOrEmpty,will return {@link Collections#emptyMap()};</li>
+     *         <li>if Validator.isNullOrEmpty(keys), return map</li>
+     *         <li>如果key 不在map key 里面 ,则返回的map 中忽略该key</li>
+     *         </ul>
      */
-    public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K[] keys){
+    @SafeVarargs
+    public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K...keys){
         if (Validator.isNullOrEmpty(map)){
             return Collections.emptyMap();
         }
         if (Validator.isNullOrEmpty(keys)){
             return map;
         }
-        Map<K, T> returnMap = new HashMap<K, T>();
+        Map<K, T> returnMap = new LinkedHashMap<K, T>();
 
         for (K key : keys){
             if (map.containsKey(key)){
@@ -258,41 +302,39 @@ public final class MapUtil{
     /**
      * 获得 sub map(去除不需要的keys).
      * 
+     * <p>
+     * 返回值为 {@link LinkedHashMap},key的顺序 按照参数 <code>map</code>的顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre>
-     * 
-     * Example 1:
-     * 
-     * Map<String, Integer> map = new HashMap<String, Integer>();
-     * 
-     * map.put("a", 3007);
-     * map.put("b", 3001);
-     * map.put("c", 3002);
-     * map.put("d", 3003);
-     * map.put("e", 3004);
-     * map.put("f", 3005);
-     * map.put("g", -1005);
-     * 
-     * String[] keys = { "a", "g", "m" };
-     * Map<String, Integer> subMapExcludeKeys = MapUtil.getSubMapExcludeKeys(map, keys);
-     * 
-     * LOGGER.debug(JsonUtil.format(subMapExcludeKeys));
-     * 
-     * 返回 :
-     * 
-     * {
-        "f": 3005,
-        "d": 3003,
-        "e": 3004,
-        "b": 3001,
-        "c": 3002
+    {@code
+            Map<String, Integer> map = new LinkedHashMap<String, Integer>();
+    
+            map.put("a", 3007);
+            map.put("b", 3001);
+            map.put("c", 3002);
+            map.put("g", -1005);
+    
+            LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, "a", "g", "m")));
     }
+    
+    返回:
+    
+    {
+            "b": 3001,
+            "c": 3002
+        }
      * 
      * </pre>
+     * 
+     * </blockquote>
      * 
      * <p>
      * 如果 <code>excludeKeys</code>中含有 map 中不存在的key,将会输出warn级别的log
      * </p>
-     * 
      * 
      * @param <K>
      *            the key type
@@ -302,10 +344,16 @@ public final class MapUtil{
      *            the map
      * @param excludeKeys
      *            the keys
-     * @return if map isNullOrEmpty,will return {@link Collections#emptyMap()}
+     * @return
+     *         <ul>
+     *         <li>if map isNullOrEmpty,will return {@link Collections#emptyMap()};</li>
+     *         <li>if Validator.isNullOrEmpty(excludeKeys), return map</li>
+     *         </ul>
+     * 
      * @since 1.0.9
      */
-    public static <K, T> Map<K, T> getSubMapExcludeKeys(Map<K, T> map,K[] excludeKeys){
+    @SafeVarargs
+    public static <K, T> Map<K, T> getSubMapExcludeKeys(Map<K, T> map,K...excludeKeys){
         if (Validator.isNullOrEmpty(map)){
             return Collections.emptyMap();
         }
@@ -313,13 +361,15 @@ public final class MapUtil{
             return map;
         }
 
-        Map<K, T> returnMap = new HashMap<K, T>(map);
+        Map<K, T> returnMap = new LinkedHashMap<K, T>(map);
 
         for (K key : excludeKeys){
             if (map.containsKey(key)){
                 returnMap.remove(key);
             }else{
-                LOGGER.warn("map don't contains key:[{}]", key);
+                if (LOGGER.isWarnEnabled()){
+                    LOGGER.warn("map:{} don't contains key:[{}]", JsonUtil.format(map), key);
+                }
             }
         }
         return returnMap;
@@ -332,38 +382,43 @@ public final class MapUtil{
      * <span style="color:red">这个操作map预先良好的定义</span>.如果传过来的map,不同的key有相同的value,那么返回的map(key)只会有一个(value),其他重复的key被丢掉了
      * </p>
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre>
-     * Example 1:
-     * 
-     * Map<String, Integer> map = new HashMap<String, Integer>();
-     * map.put("a", 3007);
-     * map.put("b", 3001);
-     * map.put("c", 3001);
-     * map.put("d", 3003);
-     * LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
-     * 
-     * 输出 :
-     * 
-     * {
-        "3007": "a",
+    {@code
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            map.put("a", 3007);
+            map.put("b", 3001);
+            map.put("c", 3001);
+            map.put("d", 3003);
+            LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
+    }
+    
+    返回:
+    {
         "3001": "c",
+        "3007": "a",
         "3003": "d"
-        }
+    }
+     可以看出 b元素被覆盖了
      * 
-     * 可以看出 b元素被覆盖了
      * </pre>
-     *
+     * 
+     * </blockquote>
+     * 
      * @param <K>
      *            the key type
      * @param <V>
      *            the value type
      * @param map
      *            the map
-     * @return 如果map是nullOrEmpty ,返回 一个empty map
+     * @return 如果map是Empty ,返回 一个empty map
      * @see org.apache.commons.collections4.MapUtils#invertMap(Map)
      * @since 1.2.2
      */
     public static <K, V> Map<V, K> invertMap(Map<K, V> map){
+        //注意,返回的是 {@link HashMap}
         return MapUtils.invertMap(map);
     }
 
@@ -373,6 +428,36 @@ public final class MapUtil{
      * <p>
      * 注意,在抽取的过程中, 如果 <code>map</code> 没有 某个 <code>includeKeys</code>,将会输出 warn log
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            Map<Long, User> map = new LinkedHashMap<Long, User>();
+            map.put(1L, new User(1L));
+            map.put(2L, new User(2L));
+            map.put(53L, new User(3L));
+            map.put(5L, new User(5L));
+            map.put(6L, new User(6L));
+            map.put(4L, new User(4L));
+    
+            LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
+    }
+    
+    返回:
+    {
+            "1": 1,
+            "2": 2,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "53": 3
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param <K>
      *            the key type
@@ -405,6 +490,32 @@ public final class MapUtil{
      * <p>
      * 注意,在抽取的过程中, 如果 <code>map</code> 没有 某个 <code>includeKeys</code>,将会输出 warn log
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            Map<Long, User> map = new LinkedHashMap<Long, User>();
+            map.put(1L, new User(1L));
+            map.put(2L, new User(2L));
+            map.put(53L, new User(3L));
+            map.put(5L, new User(5L));
+            map.put(6L, new User(6L));
+            map.put(4L, new User(4L));
+            Long[] includeKeys = }{ 5L, 4L };
+     {@code       LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
+    }
+    
+    返回:
+     {
+            "4": 4,
+            "5": 5
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
@@ -453,7 +564,32 @@ public final class MapUtil{
 
     //*******************************排序****************************************************
     /**
-     * Sort by key asc.
+     * 按照key asc顺序排序.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            Map<String, Comparable> map = new HashMap<String, Comparable>();
+    
+            map.put("a", 123);
+            map.put("c", 345);
+            map.put("b", 8);
+    
+            LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+    }
+    
+    返回:
+    {
+            "a": 123,
+            "b": 8,
+            "c": 345
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
@@ -461,7 +597,7 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return the map< k, v>
+     * @return if null==map,throw NullPointerException
      * @see java.util.TreeMap#TreeMap(Map)
      * @since 1.2.0
      */
@@ -471,7 +607,32 @@ public final class MapUtil{
     }
 
     /**
-     * Sort by key desc.
+     * 按照key desc 倒序排序.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            Map<String, Comparable> map = new HashMap<String, Comparable>();
+    
+            map.put("a", 123);
+            map.put("c", 345);
+            map.put("b", 8);
+    
+            LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyDesc(map)));
+    }
+    
+    返回:
+    {
+            "c": 345,
+            "b": 8,
+            "a": 123
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
@@ -479,7 +640,7 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return the map< k, v>
+     * @return if null==map,throw NullPointerException
      * @see ReverseComparator#ReverseComparator(Comparator)
      * @see PropertyComparator#PropertyComparator(String)
      * @since 1.2.0
@@ -493,6 +654,30 @@ public final class MapUtil{
 
     /**
      * 根据value 来顺序排序(asc).
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            Map<String, Comparable> map = new HashMap<String, Comparable>();
+            map.put("a", 123);
+            map.put("c", 345);
+            map.put("b", 8);
+            LOGGER.debug(JsonUtil.format(MapUtil.sortByValueAsc(map)));
+    }
+    
+    返回:
+    
+    {
+            "b": 8,
+            "a": 123,
+            "c": 345
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
@@ -512,6 +697,32 @@ public final class MapUtil{
 
     /**
      * 根据value 来倒序排序(desc).
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            Map<String, Comparable> map = new LinkedHashMap<String, Comparable>();
+    
+            map.put("a", 123);
+            map.put("c", 345);
+            map.put("b", 8);
+    
+            LOGGER.debug(JsonUtil.format(MapUtil.sortByValueDesc(map)));
+    }
+    
+    返回:
+    {
+        "c": 345,
+        "a": 123,
+        "b": 8
+    }
+     * 
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type

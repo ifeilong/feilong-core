@@ -63,6 +63,16 @@ public class MapUtilTest{
         LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
     }
 
+    @Test
+    public void testGetSubMap(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("a", 3007);
+        map.put("b", 3001);
+        map.put("c", 3001);
+        map.put("d", 3003);
+        LOGGER.debug(JsonUtil.format(MapUtil.getSubMap(map, "a", "c")));
+    }
+
     /**
      * Test construct sub map.
      */
@@ -75,12 +85,14 @@ public class MapUtilTest{
         map.put(5L, new User(5L));
         map.put(6L, new User(6L));
         map.put(4L, new User(4L));
-
-        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
         Long[] includeKeys = { 5L, 4L };
         LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
+
         Long[] includeKeys1 = { 5L, 4L };
         LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys1, "userInfo.age", Long.class)));
+
+        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
+
     }
 
     /**
@@ -113,20 +125,14 @@ public class MapUtilTest{
     @Test
     public void testGetSubMapExcludeKeys(){
 
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new LinkedHashMap<String, Integer>();
 
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3002);
-        map.put("d", 3003);
-        map.put("e", 3004);
-        map.put("f", 3005);
         map.put("g", -1005);
 
-        String[] keys = { "a", "g", "m" };
-        Map<String, Integer> subMapExcludeKeys = MapUtil.getSubMapExcludeKeys(map, keys);
-
-        LOGGER.debug(JsonUtil.format(subMapExcludeKeys));
+        LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, "a", "g", "m")));
     }
 
     /**
@@ -134,7 +140,6 @@ public class MapUtilTest{
      */
     @Test
     public void testGetMinValue(){
-
         Map<String, Integer> map = new HashMap<String, Integer>();
 
         map.put("a", 3007);
@@ -145,9 +150,7 @@ public class MapUtilTest{
         map.put("f", 3005);
         map.put("g", -1005);
 
-        String[] keys = { "a", "b", "d", "g", "m" };
-
-        LOGGER.info(MapUtil.getMinValue(map, keys) + "");
+        LOGGER.info("" + MapUtil.getMinValue(map, "a", "b", "d", "g", "m"));
     }
 
     /**
@@ -198,7 +201,7 @@ public class MapUtilTest{
      */
     @Test
     public void testSortByValueASC(){
-        Map<String, Comparable> map = new LinkedHashMap<String, Comparable>();
+        Map<String, Comparable> map = new HashMap<String, Comparable>();
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);
@@ -209,7 +212,7 @@ public class MapUtilTest{
      * Test sort by value desc.
      */
     @Test
-    public void testSortByValueDESC(){
+    public void testSortByValueDesc(){
         Map<String, Comparable> map = new LinkedHashMap<String, Comparable>();
 
         map.put("a", 123);
@@ -224,7 +227,7 @@ public class MapUtilTest{
      */
     @Test
     public void testSortByKeyAsc(){
-        Map<String, Comparable> map = new LinkedHashMap<String, Comparable>();
+        Map<String, Comparable> map = new HashMap<String, Comparable>();
 
         map.put("a", 123);
         map.put("c", 345);
@@ -238,7 +241,7 @@ public class MapUtilTest{
      */
     @Test
     public void testSortByKeyDesc(){
-        Map<String, Comparable> map = new LinkedHashMap<String, Comparable>();
+        Map<String, Comparable> map = new HashMap<String, Comparable>();
 
         map.put("a", 123);
         map.put("c", 345);
