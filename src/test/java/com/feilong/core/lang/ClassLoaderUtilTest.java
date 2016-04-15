@@ -32,7 +32,7 @@ public class ClassLoaderUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassLoaderUtilTest.class);
 
     /**
-     * {@link com.feilong.core.lang.ClassLoaderUtil#getResource(java.lang.String)} 的测试方法。
+     * {@link com.feilong.core.lang.ClassLoaderUtil#getResource(java.lang.String)} 的测试方法.
      */
     @Test
     public void testGetResource(){

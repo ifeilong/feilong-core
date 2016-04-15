@@ -84,9 +84,9 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * <blockquote>
  * <p>
- * 要看虚拟机的实现。而且要联系上下文<br>
- * 1、假设：HotSpot1.6<br>
- * 之前没有创建过xyz 则创建2个,之前创建过“xyz”则只创建1个<br>
+ * 要看虚拟机的实现.而且要联系上下文<br>
+ * 1、假设:HotSpot1.6<br>
+ * 之前没有创建过xyz 则创建2个,之前创建过"xyz"则只创建1个<br>
  * 2、假设:HotSpot1.7<br>
  * 之前不管有没有创建过xyz 都创建1个
  * </p>
@@ -96,10 +96,10 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * System.out.println(s3.intern() == s3); 到底想不相等</h3> <blockquote>
  * <p>
  * 要看虚拟机的实现<br>
- * 1、假设：hotspot1.6<br>
+ * 1、假设:hotspot1.6<br>
  * 则false不相等<br>
- * 2、假设：hotspot1.7<br>
- * 则在之前没有创建过“abcabc”时,true相等
+ * 2、假设:hotspot1.7<br>
+ * 则在之前没有创建过"abcabc"时,true相等
  * </p>
  * </blockquote>
  *
@@ -957,7 +957,7 @@ public final class StringUtil{
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>-</td>
-     * <td>左对齐(不可以与“用0填充”同时使用)</td>
+     * <td>左对齐(不可以与"用0填充"同时使用)</td>
      * <td>("%-5d",15)</td>
      * <td>|15 |</td>
      * </tr>
@@ -975,7 +975,7 @@ public final class StringUtil{
      * </tr>
      * <tr valign="top">
      * <td>,</td>
-     * <td>以“,”对数字分组</td>
+     * <td>以","对数字分组</td>
      * <td>("%,f", 9999.99)</td>
      * <td>9,999.990000</td>
      * </tr>

@@ -90,9 +90,9 @@ import com.feilong.core.Validator;
  * </pre>
  * 
  * <p>
- * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同。 <br>
+ * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同. <br>
  * BeanUtils着重于"Bean",返回值通常是String,<br>
- * 而PropertyUtils着重于属性,它的返回值通常是Object。 
+ * 而PropertyUtils着重于属性,它的返回值通常是Object. 
  * </p>
  * </blockquote>
  * 
@@ -149,7 +149,7 @@ import com.feilong.core.Validator;
  * 
  * <pre>
 {@code
- * 对于Map类型,则需要以“属性名(key值)”的形式
+ * 对于Map类型,则需要以"属性名(key值)"的形式
  * 
  *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
  *     Map am = new HashMap();
@@ -168,7 +168,7 @@ import com.feilong.core.Validator;
  * 
  * <pre>
 {@code
- * 对于Indexed,则为“属性名[索引值]”,注意这里对于ArrayList和数组都可以用一样的方式进行操作.
+ * 对于Indexed,则为"属性名[索引值]",注意这里对于ArrayList和数组都可以用一样的方式进行操作.
  * 
  *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
  *     
@@ -586,7 +586,7 @@ public final class BeanUtil{
      * 把properties/map里面的值 <code>populate</code> (填充)到bean中.
      * 
      * <p>
-     * 将Map<Key,value>中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名。 
+     * 将Map<Key,value>中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名. 
      * </p>
      * 
      * <h3>Example 1:</h3>

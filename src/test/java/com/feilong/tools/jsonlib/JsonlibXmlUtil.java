@@ -35,7 +35,7 @@ public class JsonlibXmlUtil{
      * 把json串、数组、集合(collection map)、实体Bean转换成XML.
      * 
      * <p>
-     * {@link <a href="http://json-lib.sourceforge.net/apidocs/net/sf/json/xml/XMLSerializer.html">XMLSerializer API</a>}：
+     * {@link <a href="http://json-lib.sourceforge.net/apidocs/net/sf/json/xml/XMLSerializer.html">XMLSerializer API</a>}:
      * {@link <a href="http://json-lib.sourceforge.net/xref-test/net/sf/json/xml/TestXMLSerializer_writes.html">具体实例请参考</a>}
      * </p>
      * 

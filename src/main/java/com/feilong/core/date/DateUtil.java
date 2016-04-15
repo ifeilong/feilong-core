@@ -434,14 +434,14 @@ public final class DateUtil{
         calendar.set(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
         calendar.set(Calendar.DAY_OF_WEEK, week);
 
-        //DAY_OF_WEEK_IN_MONTH 指示当前月中的第几个星期。与 DAY_OF_WEEK 字段一起使用时,就可以唯一地指定某月中的某一天。
-        //与 WEEK_OF_MONTH 和 WEEK_OF_YEAR 不同,该字段的值并不 取决于 getFirstDayOfWeek() 或 getMinimalDaysInFirstWeek()。
+        //DAY_OF_WEEK_IN_MONTH 指示当前月中的第几个星期.与 DAY_OF_WEEK 字段一起使用时,就可以唯一地指定某月中的某一天.
+        //与 WEEK_OF_MONTH 和 WEEK_OF_YEAR 不同,该字段的值并不 取决于 getFirstDayOfWeek() 或 getMinimalDaysInFirstWeek().
 
         //DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1；
-        //8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2,依此类推。
-        //DAY_OF_WEEK_IN_MONTH 0 表示 DAY_OF_WEEK_IN_MONTH 1 之前的那个星期。
-        //负值是从一个月的末尾开始逆向计数,因此,一个月的最后一个星期天被指定为 DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1。
-        //因为负值是逆向计数的,所以它们在月份中的对齐方式通常与正值的不同。
+        //8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2,依此类推.
+        //DAY_OF_WEEK_IN_MONTH 0 表示 DAY_OF_WEEK_IN_MONTH 1 之前的那个星期.
+        //负值是从一个月的末尾开始逆向计数,因此,一个月的最后一个星期天被指定为 DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1.
+        //因为负值是逆向计数的,所以它们在月份中的对齐方式通常与正值的不同.
         //例如,如果一个月有 31 天,那么 DAY_OF_WEEK_IN_MONTH -1 将与 DAY_OF_WEEK_IN_MONTH 5 和 DAY_OF_WEEK_IN_MONTH 4 的末尾相重叠
         return CalendarUtil.toDate(calendar);
     }
@@ -1499,7 +1499,7 @@ public final class DateUtil{
      * 
      * <p>
      * 所以规定,公历年份是整百数的,必须是400的倍数的才是闰年,不是400的倍数的,虽然是100的倍数,也是平年,<br>
-     * 这就是通常所说的：四年一闰,百年不闰,四百年再闰.<br>
+     * 这就是通常所说的:四年一闰,百年不闰,四百年再闰.<br>
      * 
      * 例如,2000年是闰年,1900年则是平年.<br>
      * </p>

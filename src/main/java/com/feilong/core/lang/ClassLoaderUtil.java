@@ -86,7 +86,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 以 / 开头,则这样的路径是指定绝对路径, 如果不以 / 开头, 则路径是相对与这个class所在的包的</li>
  * <li>{@link java.lang.ClassLoader#getResourceAsStream(String) ClassLoader#getResourceAsStream(String)} 需要这么写
  * <b>"messages/feilong-core-message_en_US.properties"</b>,ClassLoader JVM会使用BootstrapLoader去加载资源文件.<br>
- * 所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" <span style="color:red">不需要“/”</span></li>
+ * 所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" <span style="color:red">不需要"/"</span></li>
  * </ul>
  * 
  * </blockquote>

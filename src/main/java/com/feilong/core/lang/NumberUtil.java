@@ -48,7 +48,7 @@ import com.feilong.core.text.NumberFormatUtil;
  * <li>BigDecimal.valueOf(0.1) {@code ==>} 0.1</li>
  * </ol>
  * <p>
- * 在《Effective Java 》这本书中也提到这个原则,float和double只能用来做科学计算或者是工程计算,在商业计算中我们要用 {@link java.math.BigDecimal}。
+ * 在《Effective Java 》这本书中也提到这个原则,float和double只能用来做科学计算或者是工程计算,在商业计算中我们要用 {@link java.math.BigDecimal}.
  * </p>
  * </blockquote>
  * 

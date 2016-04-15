@@ -523,7 +523,7 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(paramNameList)){// 如果 paramNameList是null原样返回
             return uriString;
         }
-        String queryString = uri.getRawQuery();// 返回此URI的原始查询组成部分。 URI的查询组成部分(如果定义了)只包含合法的 URI字符。
+        String queryString = uri.getRawQuery();// 返回此URI的原始查询组成部分. URI的查询组成部分(如果定义了)只包含合法的 URI字符.
         return removeParameterList(uriString, queryString, paramNameList, charsetType);
     }
 
@@ -609,7 +609,7 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(paramNameList)){ // 如果 paramNameList 是null 原样返回
             return uriString;
         }
-        String queryString = uri.getRawQuery(); // 返回此 URI的原始查询组成部分。 URI的查询组成部分(如果定义了)只包含合法的 URI字符。
+        String queryString = uri.getRawQuery(); // 返回此 URI的原始查询组成部分. URI的查询组成部分(如果定义了)只包含合法的 URI字符.
         return retentionParamList(uriString, queryString, paramNameList, charsetType);
     }
 
@@ -843,8 +843,8 @@ public final class ParamUtil{
      * </p>
      * 
      * <ol>
-     * <li>对数组里的每一个值从 a 到 z 的顺序排序,若遇到相同首字母,则看第二个字母, 以此类推。</li>
-     * <li>排序完成之后,再把所有数组值以“&”字符连接起来</li>
+     * <li>对数组里的每一个值从 a 到 z 的顺序排序,若遇到相同首字母,则看第二个字母, 以此类推.</li>
+     * <li>排序完成之后,再把所有数组值以"&"字符连接起来</li>
      * <li>没有值的参数无需传递,也无需包含到待签名数据中.</li>
      * <li><span style="color:red">注意: 待签名数据应该是原生值而不是 encoding 之后的值</span></li>
      * </ol>

@@ -51,7 +51,7 @@ public final class MessageFormatUtil{
      * </blockquote>
      * 
      * @param pattern
-     *            占位符有三种方式书写方式：
+     *            占位符有三种方式书写方式:
      *            <ul>
      *            <li>{argumentIndex}: 0-9 之间的数字,表示要格式化对象数据在参数数组中的索引号</li>
      *            <li>{argumentIndex,formatType}: 参数的格式化类型</li>

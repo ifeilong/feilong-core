@@ -75,7 +75,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * ,{@link Collection#remove(Object) remove},{@link Collection#removeAll(Collection) removeAll},{@link Collection#retainAll(Collection)
  * retainAll},
  * {@link Collection#toArray() toArray}方法</li>
- * <li>没有get()方法。只能通过iterator()遍历元素</li>
+ * <li>没有get()方法.只能通过iterator()遍历元素</li>
  * </ol>
  * </blockquote>
  * 

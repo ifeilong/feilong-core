@@ -35,9 +35,9 @@ import com.feilong.core.lang.ClassUtil;
  * 
  * <blockquote>
  * <p>
- * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同。 <br>
+ * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同. <br>
  * BeanUtils着重于"Bean",返回值通常是String,<br>
- * 而PropertyUtils着重于属性,它的返回值通常是Object。 
+ * 而PropertyUtils着重于属性,它的返回值通常是Object. 
  * </p>
  * </blockquote>
  * 

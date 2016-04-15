@@ -313,7 +313,7 @@ public class StringUtilTest{
     }
 
     /**
-     * 返回一个随机的字符串。150是基于该程序使用场景的抽样得到的长度。.
+     * 返回一个随机的字符串.150是基于该程序使用场景的抽样得到的长度..
      * 
      * @return the random string
      */

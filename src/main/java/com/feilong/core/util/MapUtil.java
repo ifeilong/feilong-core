@@ -109,7 +109,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <blockquote>
  * <ol>
  * <li>using reference-equality in place of object-equality when comparing keys (and values).</li>
- * <li>使用==代替equals()对key进行比较的散列表。专为特殊问题而设计的</li>
+ * <li>使用==代替equals()对key进行比较的散列表.专为特殊问题而设计的</li>
  * </ol>
  * 
  * <p style="color:red">
@@ -121,7 +121,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <blockquote>
  * <ol>
  * <li>A hashtable-based Map implementation with weak keys.</li>
- * <li>它对key实行“弱引用”,如果一个key不再被外部所引用,那么该key可以被GC回收</li>
+ * <li>它对key实行"弱引用",如果一个key不再被外部所引用,那么该key可以被GC回收</li>
  * </ol>
  * </blockquote>
  * 

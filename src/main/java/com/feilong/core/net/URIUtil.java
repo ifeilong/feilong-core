@@ -59,7 +59,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.net.URL URL}<br>
  * Uniform Resource Locator</td>
- * <td>统一资源定位器,它是一种具体的URI,即URL可以用来标识一个资源,而且还指明了如何locate这个资源。 <br>
+ * <td>统一资源定位器,它是一种具体的URI,即URL可以用来标识一个资源,而且还指明了如何locate这个资源. <br>
  * See RFC 1738: Uniform Resource Locators (URL)</td>
  * </tr>
  * 
@@ -67,17 +67,17 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <td>URN<br>
  * uniform resource name</td>
  * <td>统一资源命名,是通过名字来标识资源, <br>
- * 比如mailto:java-net@java.sun.com。</td>
+ * 比如mailto:java-net@java.sun.com.</td>
  * </tr>
  * </table>
  * 
  * <p>
- * 也就是说,{@link java.net.URI URI}是以一种抽象的,高层次概念定义统一资源标识,而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。
+ * 也就是说,{@link java.net.URI URI}是以一种抽象的,高层次概念定义统一资源标识,而URL和URN则是具体的资源标识的方式.URL和URN都是一种URI.
  * </p>
  * 
  * <p>
  * 一个{@link URI}实例可以代表绝对的,也可以是相对的,只要它符合URI的语法规则;<br>
- * 而{@link URL}类则不仅符合语义,还包含了定位该资源的信息,<span style="color:red">因此它不能是相对的,schema必须被指定</span>。
+ * 而{@link URL}类则不仅符合语义,还包含了定位该资源的信息,<span style="color:red">因此它不能是相对的,schema必须被指定</span>.
  * </p>
  * </blockquote>
  * 
@@ -85,8 +85,8 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * <blockquote>
  * <ul>
- * <li>getQuery() 返回此 URI 的已解码的查询组成部分。</li>
- * <li>getRawQuery() 返回此 URI 的原始查询组成部分。 URI 的查询组成部分(如果定义了)只包含合法的 URI 字符。</li>
+ * <li>getQuery() 返回此 URI 的已解码的查询组成部分.</li>
+ * <li>getRawQuery() 返回此 URI 的原始查询组成部分. URI 的查询组成部分(如果定义了)只包含合法的 URI 字符.</li>
  * </ul>
  * </blockquote>
  * 
@@ -150,10 +150,10 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * 
  * <p>
- * 每一个path片段 可以有可选的 path参数 (也叫 matrix参数),这是在path片段的最后由";"开始的一些字符。每个参数名和值由"="字符分隔,像这样："/file;p=1",这定义了path片段 "file"有一个 path参数 "p",其值为"1"。<br>
- * 这些参数并不常用 — 这得清楚 — 但是它们确实是存在,而且从 Yahoo RESTful API 文档我们能找到很好的理由去使用它们： Matrix参数可以让程序在GET请求中可以获取部分的数据集。参考
+ * 每一个path片段 可以有可选的 path参数 (也叫 matrix参数),这是在path片段的最后由";"开始的一些字符.每个参数名和值由"="字符分隔,像这样:"/file;p=1",这定义了path片段 "file"有一个 path参数 "p",其值为"1".<br>
+ * 这些参数并不常用 — 这得清楚 — 但是它们确实是存在,而且从 Yahoo RESTful API 文档我们能找到很好的理由去使用它们: Matrix参数可以让程序在GET请求中可以获取部分的数据集.参考
  * {@link <a href="https://developer.yahoo.com/social/rest_api_guide/partial-resources.html#paging-collection">数据集的分页</a>}
- * 。因为matrix参数可以跟任何数据集的URI格式的path片段,它们可以在内部的path片段中被使用。
+ * .因为matrix参数可以跟任何数据集的URI格式的path片段,它们可以在内部的path片段中被使用.
  * </p>
  * </blockquote>
  * 
@@ -393,7 +393,7 @@ public final class URIUtil{
      * </p>
      * 
      * <p>
-     * 使用以下规则：
+     * 使用以下规则:
      * </p>
      * 
      * <ul>
@@ -445,7 +445,7 @@ public final class URIUtil{
      * <p>
      * Not doing so may introduce incompatibilites.<br>
      * <em><strong>Note:</strong> 
-     * 注：<a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>建议指出,UTF-8应该被使用. 不这样做可能会带来兼容性能.</em>
+     * 注:<a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>建议指出,UTF-8应该被使用. 不这样做可能会带来兼容性能.</em>
      * </p>
      *
      * @param value
