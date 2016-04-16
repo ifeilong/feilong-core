@@ -761,6 +761,37 @@ public final class StringUtil{
      * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
      * 
      * <p>
+     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},本方法,默认使用参数 trimTokens = true;
+     * ignoreEmptyTokens = true;
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+            String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
+            String delimiters = ";, .";
+            String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
+            LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+    }
+    
+    返回:
+    
+    [
+            "jin",
+            "xin",
+            "feilong",
+            "jinxin",
+            "venusdrogon",
+            "jim"
+        ]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <p>
      * Tokenize the given String into a String array via a StringTokenizer. <br>
      * Trims tokens and omits empty tokens.
      * </p>
@@ -780,6 +811,8 @@ public final class StringUtil{
      * @see String#trim()
      * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
      * @see "org.springframework.util.StringUtils#tokenizeToStringArray"
+     * 
+     * @see #tokenizeToStringArray(String, String, boolean, boolean)
      * @since 1.0.7
      */
     public static String[] tokenizeToStringArray(String str,String delimiters){
@@ -826,10 +859,10 @@ public final class StringUtil{
         //StringTokenizer implements Enumeration<Object>
         //其在 Enumeration接口的基础上,  定义了 hasMoreTokens nextToken两个方法
         //实现的Enumeration接口中的  hasMoreElements nextElement 调用了  hasMoreTokens nextToken
-        StringTokenizer st = new StringTokenizer(str, delimiters);
+        StringTokenizer stringTokenizer = new StringTokenizer(str, delimiters);
         List<String> tokens = new ArrayList<String>();
-        while (st.hasMoreTokens()){
-            String token = st.nextToken();
+        while (stringTokenizer.hasMoreTokens()){
+            String token = stringTokenizer.nextToken();
             if (trimTokens){
                 token = token.trim();
             }

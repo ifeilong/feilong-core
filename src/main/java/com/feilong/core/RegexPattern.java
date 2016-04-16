@@ -257,7 +257,7 @@ public final class RegexPattern{
      * @see "org.apache.commons.validator.routines.EmailValidator"
      * @see <a href="http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/">how-to-validate-email
      *      -address-with-regular-expression</a>
-     * 
+     * @see <a href="https://en.wikipedia.org/wiki/Email_address">Email_address</a>
      * @deprecated 建议使用 commons-validator {@link "org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(emailString)"}
      *             ,验证更加完善,会对user 和domain再次校验
      */
