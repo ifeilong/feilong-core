@@ -79,6 +79,7 @@ public final class CharsetType{
      * </blockquote>
      * 
      * @see org.apache.commons.lang3.CharEncoding#UTF_8
+     * @see java.nio.charset.StandardCharsets#UTF_8
      */
     public static final String UTF8       = org.apache.commons.lang3.CharEncoding.UTF_8;
 
@@ -173,6 +174,7 @@ public final class CharsetType{
      * </p>
      * 
      * @see org.apache.commons.lang3.CharEncoding#ISO_8859_1
+     * @see java.nio.charset.StandardCharsets#ISO_8859_1
      */
     public static final String ISO_8859_1 = org.apache.commons.lang3.CharEncoding.ISO_8859_1;
 
