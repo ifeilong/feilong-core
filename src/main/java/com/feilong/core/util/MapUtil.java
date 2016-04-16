@@ -415,7 +415,7 @@ public final class MapUtil{
      * @since 1.2.2
      */
     public static <K, V> Map<V, K> invertMap(Map<K, V> map){
-        //注意,返回的是 {@link HashMap}
+        //注意,返回的是 HashMap
         return MapUtils.invertMap(map);
     }
 

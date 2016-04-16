@@ -69,6 +69,7 @@ public final class EnumUtil{
      * @param specifiedValue
      *            属性值 比如post
      * @return 获得 enum constant
+     * @see #getEnumByPropertyValue(Class, String, Object, boolean)
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T specifiedValue){
         boolean ignoreCase = true;
@@ -109,7 +110,6 @@ public final class EnumUtil{
      * 通过propertyName的 value 获得枚举.
      * 
      * <pre>
-     * 
      * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code
