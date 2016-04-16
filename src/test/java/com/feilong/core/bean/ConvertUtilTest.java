@@ -153,10 +153,10 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToLongs(){
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", "2", "3" })));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", null, "2", "3" })));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs("1,2,3")));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(null)));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs("1,2,3"), 0, 0));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", "2", "3" }), 0, 0));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", null, "2", "3" }), 0, 0));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(null), 0, 0));
     }
 
     /**
@@ -254,6 +254,11 @@ public class ConvertUtilTest{
     public void testConvert1(){
         Serializable t = ConvertUtil.convert(null, Serializable.class);
         LOGGER.info("{}", t);
+    }
+
+    @Test
+    public void testConvert2(){
+        LOGGER.info("{}", ConvertUtil.convert("1", Integer.class));
     }
 
     /**

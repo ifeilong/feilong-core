@@ -669,6 +669,16 @@ public final class ConvertUtil{
 
     /**
      * To long array.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    ConvertUtil.toLongs("1,2,3")  result [1,2,3]
+    ConvertUtil.toLongs(new String[] { "1", "2", "3" })  result [1,2,3]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param toBeConvertedValue
      *            the to be converted value
