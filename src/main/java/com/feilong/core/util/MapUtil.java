@@ -16,11 +16,9 @@
 package com.feilong.core.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -213,21 +211,18 @@ public final class MapUtil{
      * @return 如果 keys 中的所有的key 都不在 map 中出现 ,那么返回null
      * 
      * @see #getSubMap(Map, Object...)
-     * @see java.util.Collection#toArray()
-     * @see java.util.Arrays#sort(Object[])
+     * @see java.util.Collections#min(Collection)
      */
     @SuppressWarnings("unchecked")
-    public static <K, T extends Number> T getMinValue(Map<K, T> map,K...keys){
+    public static <K, T extends Number & Comparable<? super T>> T getMinValue(Map<K, T> map,K...keys){
         Map<K, T> subMap = getSubMap(map, keys);
 
         if (Validator.isNullOrEmpty(subMap)){
             return null;
         }
-
+        //注意 Number本身 没有实现Comparable接口
         Collection<T> values = subMap.values();
-        Object[] array = values.toArray();
-        Arrays.sort(array);
-        return (T) array[0];
+        return Collections.min(values);
     }
 
     /**
@@ -287,6 +282,7 @@ public final class MapUtil{
         if (Validator.isNullOrEmpty(keys)){
             return map;
         }
+        //保证元素的顺序 ,key的顺序 按照参数 <code>keys</code>的顺序
         Map<K, T> returnMap = new LinkedHashMap<K, T>();
 
         for (K key : keys){
@@ -361,6 +357,7 @@ public final class MapUtil{
             return map;
         }
 
+        //保证元素的顺序 
         Map<K, T> returnMap = new LinkedHashMap<K, T>(map);
 
         for (K key : excludeKeys){
@@ -468,7 +465,8 @@ public final class MapUtil{
      * @param map
      *            the map
      * @param extractPropertyName
-     *            the extract property name
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param keysClass
      *            map key 的class 类型
      * @return
@@ -509,8 +507,8 @@ public final class MapUtil{
     
     返回:
      {
-            "4": 4,
             "5": 5
+            "4": 4
         }
      * 
      * </pre>
@@ -528,7 +526,8 @@ public final class MapUtil{
      * @param includeKeys
      *            the include keys
      * @param extractPropertyName
-     *            待提取的 {@code O} 的属性名称
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param keysClass
      *            map key 的class 类型
      * @return
@@ -549,7 +548,8 @@ public final class MapUtil{
         //如果excludeKeys是null ,那么抽取所有的key
         K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(map.keySet(), keysClass) : includeKeys;
 
-        Map<K, V> returnMap = new HashMap<K, V>();
+        //保证元素的顺序  顺序是参数  includeKeys的顺序
+        Map<K, V> returnMap = new LinkedHashMap<K, V>();
         for (K key : useIncludeKeys){
             if (map.containsKey(key)){
                 O o = map.get(key);
