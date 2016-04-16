@@ -183,6 +183,7 @@ public final class StringUtil{
      * @param text
      *            任意的字符串
      * @return "\"" + text + "\""
+     * @see "org.springframework.util.StringUtils#quote(String)"
      */
     public static String addDoubleQuotes(String text){
         return "\"" + text + "\"";
