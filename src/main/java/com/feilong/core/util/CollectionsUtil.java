@@ -18,7 +18,6 @@ package com.feilong.core.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -211,7 +210,7 @@ public final class CollectionsUtil{
      * iterator是否包含某个值.
      * 
      * <p style="color:red">
-     * 注意,比较的是 {@link java.lang.Object#toString()}
+     * 注意,比较的是 {@link java.lang.Object#toString()},常常用于自定义标签或者el function
      * </p>
      * 
      * @param iterator
@@ -222,6 +221,7 @@ public final class CollectionsUtil{
      * @see Iterator#hasNext()
      * @see Iterator#next()
      * @see "org.springframework.util.CollectionUtils#contains(Iterator, Object)"
+     * @see org.apache.commons.collections4.IteratorUtils#contains(Iterator, Object)
      */
     public static boolean contains(Iterator<?> iterator,Object value){
         if (Validator.isNullOrEmpty(iterator)){
@@ -230,43 +230,6 @@ public final class CollectionsUtil{
         while (iterator.hasNext()){
             Object object = iterator.next();
             if (object.toString().equals(value.toString())){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 判断 <code>enumeration</code> 枚举里面,是否有 指定的元素 <code>value</code>.
-     * 
-     * <h3>代码流程:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>{@code if isNullOrEmpty(enumeration)---->null}</li>
-     * <li>循环枚举里面的每个元素,调用 {@link org.apache.commons.lang3.ObjectUtils#equals(Object, Object)},如果equals 返回true</li>
-     * </ol>
-     * </blockquote>
-     *
-     * @param <O>
-     *            the generic type
-     * @param enumeration
-     *            the enumeration
-     * @param value
-     *            指定的元素
-     * @return true, if contains
-     * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
-     * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
-     * @since 1.4.1
-     */
-    @SuppressWarnings("deprecation")
-    public static <O> boolean contains(Enumeration<O> enumeration,O value){
-        if (Validator.isNullOrEmpty(enumeration)){
-            return false;
-        }
-
-        while (enumeration.hasMoreElements()){
-            O object = enumeration.nextElement();
-            if (org.apache.commons.lang3.ObjectUtils.equals(object, value)){
                 return true;
             }
         }
