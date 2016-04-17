@@ -33,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validator;
-import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
@@ -516,72 +515,106 @@ public final class CollectionsUtil{
     /**
      * 解析对象集合,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象特殊属性,拼成List(ArrayList).
      * 
-     * <p>
-     * 支持属性级联获取,支付获取数组,集合,map,自定义bean等属性
-     * </p>
-     * 
-     * <h3>使用示例:</h3>
-     * 
+     * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre>
-     * List&lt;User&gt; testList = new ArrayList&lt;User&gt;();
+     * {@code
+     *     List<UserAddress> userAddresseList = new ArrayList<UserAddress>();
+     *     UserAddress userAddress = new UserAddress();
+     *     userAddress.setAddress("中南海");
+     *     userAddresseList.add(userAddress);
      * 
-     * User user;
-     * UserInfo userInfo;
+     *     //*******************************************************
+     *     Map<String, String> attrMap = new HashMap<String, String>();
+     *     attrMap.put("蜀国", "赵子龙");
+     *     attrMap.put("魏国", "张文远");
+     *     attrMap.put("吴国", "甘兴霸");
      * 
-     * //*******************************************************
-     * List&lt;UserAddress&gt; userAddresseList = new ArrayList&lt;UserAddress&gt;();
-     * UserAddress userAddress = new UserAddress();
-     * userAddress.setAddress(&quot;中南海&quot;);
-     * userAddresseList.add(userAddress);
+     *     //*******************************************************
+     *     UserInfo userInfo1 = new UserInfo();
+     *     userInfo1.setAge(28);
      * 
-     * //*******************************************************
-     * Map&lt;String, String&gt; attrMap = new HashMap&lt;String, String&gt;();
-     * attrMap.put(&quot;蜀国&quot;, &quot;赵子龙&quot;);
-     * attrMap.put(&quot;魏国&quot;, &quot;张文远&quot;);
-     * attrMap.put(&quot;吴国&quot;, &quot;甘兴霸&quot;);
+     *     User user1 = new User(2L);
+     *     user1.setLoves(new String[] }{ "sanguo1", "xiaoshuo1" }); {@code 
+     *     user1.setUserInfo(userInfo1);
+     *     user1.setAttrMap(attrMap);
+     *     user1.setUserAddresseList(userAddresseList);
      * 
-     * //*******************************************************
-     * String[] lovesStrings1 = { &quot;sanguo1&quot;, &quot;xiaoshuo1&quot; };
-     * userInfo = new UserInfo();
-     * userInfo.setAge(28);
+     *     //*****************************************************
+     *     UserInfo userInfo2 = new UserInfo();
+     *     userInfo2.setAge(null);
      * 
-     * user = new User(2L);
-     * user.setLoves(lovesStrings1);
-     * user.setUserInfo(userInfo);
-     * user.setUserAddresseList(userAddresseList);
+     *     User user2 = new User(3L);
+     *     user2.setLoves(new String[] }{ "sanguo2", "xiaoshuo2" });{@code 
+     *     user2.setUserInfo(userInfo2);
+     *     user2.setAttrMap(attrMap);
+     *     user2.setUserAddresseList(userAddresseList);
      * 
-     * user.setAttrMap(attrMap);
-     * testList.add(user);
+     *     List<User> userList = new ArrayList<User>();
+     *     userList.add(user1);
+     *     userList.add(user2);
+     * }
      * 
-     * //*****************************************************
-     * String[] lovesStrings2 = { &quot;sanguo2&quot;, &quot;xiaoshuo2&quot; };
-     * userInfo = new UserInfo();
-     * userInfo.setAge(30);
+     * 以下情况:
+     * </pre>
      * 
-     * user = new User(3L);
-     * user.setLoves(lovesStrings2);
-     * user.setUserInfo(userInfo);
-     * user.setUserAddresseList(userAddresseList);
-     * user.setAttrMap(attrMap);
-     * testList.add(user);
+     * <pre>
+     * <span style="color:green">//数组</span>
+    {@code
+        List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
+     *     LOGGER.info(JsonUtil.format(fieldValueList1));
+     * }
      * 
-     * //数组
-     * List&lt;String&gt; fieldValueList1 = CollectionsUtil.getPropertyValueList(testList, &quot;loves[1]&quot;);
-     * LOGGER.info(JsonUtil.format(fieldValueList1));
+     * 返回 :
+     * [
+        "xiaoshuo1",
+        "xiaoshuo2"
+        ]
+     * </pre>
      * 
-     * //级联对象
-     * List&lt;Integer&gt; fieldValueList2 = CollectionsUtil.getPropertyValueList(testList, &quot;userInfo.age&quot;);
-     * LOGGER.info(JsonUtil.format(fieldValueList2));
+     * <pre>
+     * <span style="color:green">//级联对象</span>
+    {@code
+        List<Integer> fieldValueList2 = CollectionsUtil.getPropertyValueList(userList, "userInfo.age");
+        LOGGER.info(JsonUtil.format(fieldValueList2));
+     * }
      * 
-     * //Map
-     * List&lt;Integer&gt; attrList = CollectionsUtil.getPropertyValueList(testList, &quot;attrMap(蜀国)&quot;);
-     * LOGGER.info(JsonUtil.format(attrList));
+     * 返回 :
+     * [
+        28,
+        null
+        ]
      * 
-     * //集合
-     * List&lt;String&gt; addressList = CollectionsUtil.getPropertyValueList(testList, &quot;userAddresseList[0]&quot;);
-     * LOGGER.info(JsonUtil.format(addressList));
+     * </pre>
+     * 
+     * <pre>
+     * <span style="color:green">//Map</span>
+    {@code
+        List<Integer> attrList = CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)");
+        LOGGER.info(JsonUtil.format(attrList));
+     * }
+     * 
+     * 返回 :
+    [
+        "赵子龙",
+        "赵子龙"
+    ]
+     * 
+     * </pre>
+     * 
+     * <pre>
+     * <span style="color:green">//集合</span>
+    {@code
+        List<String> addressList = CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]");
+        LOGGER.info(JsonUtil.format(addressList));
+     * }
+     * 
+     * 返回 :
+    [
+        {"address": "中南海"},
+        {"address": "中南海"}
+    ]
      * </pre>
      * 
      * </blockquote>
@@ -609,30 +642,33 @@ public final class CollectionsUtil{
     /**
      * 获得 property value set.
      * 
+     * <p>
+     * 注意:返回的是 {@link LinkedHashSet},顺序是参数 objectCollection 元素的顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre>
-     * Example 1:
-     * 
-     * List<User> testList = new ArrayList<User>();
-     * testList.add(new User(2L));
-     * testList.add(new User(5L));
-     * testList.add(new User(5L));
-     * 
-     * Set<Long> fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
-     * LOGGER.info(JsonUtil.format(fieldValueCollection));
-     * 
-     * 输出:
-     * 
-     * [
-        2,
-        5
+    {@code
+            List<User> testList = new ArrayList<User>();
+            testList.add(new User(2L));
+            testList.add(new User(5L));
+            testList.add(new User(5L));
+    
+            Set<Long> fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
+            LOGGER.info(JsonUtil.format(fieldValueCollection));
+    }
+    
+    返回:
+    [
+            2,
+            5
         ]
      * 
      * </pre>
      * 
-     * <p>
-     * 以 {@link LinkedHashSet}存储,一定程度上可以按照元素顺序返回
-     * </p>
-     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -679,25 +715,88 @@ public final class CollectionsUtil{
                     K returnCollection){
         Validate.notNull(returnCollection, "returnCollection can't be null!");
 
-        //避免null point
-        if (Validator.isNullOrEmpty(objectCollection)){
+        if (Validator.isNullOrEmpty(objectCollection)){//避免null point
             return returnCollection;
         }
 
         Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
 
-        try{
-            for (O bean : objectCollection){
-                @SuppressWarnings("unchecked")
-                T property = (T) PropertyUtil.getProperty(bean, propertyName);
-                returnCollection.add(property);
-            }
-        }catch (BeanUtilException e){
-            LOGGER.error(e.getClass().getName(), e);
+        for (O bean : objectCollection){
+            @SuppressWarnings("unchecked")
+            T property = (T) PropertyUtil.getProperty(bean, propertyName);
+            returnCollection.add(property);
         }
         return returnCollection;
     }
 
+    //******************************getPropertyValueMap*********************************************************************
+    /**
+     * 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回.
+     * 
+     * <p>
+     * 注意:返回的是 {@link LinkedHashMap},顺序是参数 objectCollection 元素的顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        List<User> testList = new ArrayList<User>();
+        testList.add(new User("张飞", 23));
+        testList.add(new User("关羽", 24));
+        testList.add(new User("刘备", 25));
+    
+        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
+        LOGGER.info(JsonUtil.format(map));    
+    }
+    
+    返回:
+     {
+        "张飞": 23,
+        "关羽": 24,
+        "刘备": 25
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param <O>
+     *            可迭代对象类型 generic type
+     * @param objectCollection
+     *            任何可以迭代的对象
+     * @param keyPropertyName
+     *            the key property name
+     * @param valuePropertyName
+     *            the value property name
+     * @return 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回<br>
+     *         if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
+     * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
+     * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
+     */
+    public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
+        if (Validator.isNullOrEmpty(objectCollection)){
+            return Collections.emptyMap();
+        }
+        Validate.notEmpty(keyPropertyName, "keyPropertyName can't be null/empty!");
+        Validate.notEmpty(valuePropertyName, "valuePropertyName can't be null/empty!");
+
+        Map<K, V> map = new LinkedHashMap<K, V>();
+
+        for (O bean : objectCollection){
+            @SuppressWarnings("unchecked")
+            K key = (K) PropertyUtil.getProperty(bean, keyPropertyName);
+            @SuppressWarnings("unchecked")
+            V value = (V) PropertyUtil.getProperty(bean, valuePropertyName);
+
+            map.put(key, value);
+        }
+        return map;
+    }
     //*************************find****************************************************************
 
     /**
@@ -1101,80 +1200,16 @@ public final class CollectionsUtil{
         return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
-    //******************************getPropertyValueMap*********************************************************************
-    /**
-     * 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回.
-     * 
-     * <p>
-     * 注意:返回的是 {@link LinkedHashMap}
-     * </p>
-     * <br>
-     * 使用 {@link PropertyUtil#getProperty(Object, String)}取到对象特殊属性. <br>
-     * 支持属性级联获取,支付获取数组,集合,map,自定义bean等属性
-     * 
-     * <h3>使用示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre>
-     * List&lt;User&gt; testList = new ArrayList&lt;User&gt;();
-     * testList.add(new User(&quot;张飞&quot;, 23));
-     * testList.add(new User(&quot;关羽&quot;, 24));
-     * testList.add(new User(&quot;刘备&quot;, 25));
-     * 
-     * Map&lt;String, Integer&gt; map = CollectionsUtil.getFieldValueMap(testList, &quot;name&quot;, &quot;age&quot;);
-     * 
-     * 返回 :
-     * 
-     * "关羽": 24,
-     * "张飞": 23,
-     * "刘备": 25
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param <O>
-     *            可迭代对象类型 generic type
-     * @param objectCollection
-     *            任何可以迭代的对象
-     * @param keyPropertyName
-     *            the key property name
-     * @param valuePropertyName
-     *            the value property name
-     * @return 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回<br>
-     *         if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
-     * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
-     */
-    public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyMap();
-        }
-        Validate.notEmpty(keyPropertyName, "keyPropertyName can't be null/empty!");
-        Validate.notEmpty(valuePropertyName, "valuePropertyName can't be null/empty!");
-
-        Map<K, V> map = new LinkedHashMap<K, V>();
-
-        for (O bean : objectCollection){
-            @SuppressWarnings("unchecked")
-            K key = (K) PropertyUtil.getProperty(bean, keyPropertyName);
-            @SuppressWarnings("unchecked")
-            V value = (V) PropertyUtil.getProperty(bean, valuePropertyName);
-
-            map.put(key, value);
-        }
-        return map;
-    }
-
     //*******************************group*********************************************************
 
     /**
      * Group 对象(如果propertyName 存在相同的值,那么这些值,将会以list的形式 put到map中).
      * 
+     * <p>
+     * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
+     * <br>
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序
+     * </p>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1194,16 +1229,15 @@ public final class CollectionsUtil{
       * 返回 :
       * 
     {
-        "张飞": [        {
+        "张飞": [{
             "age": 23,
             "name": "张飞"
         }],
-        "刘备":         [
-                        {
+        "刘备": [{
                 "age": 25,
                 "name": "刘备"
             },
-                        {
+             {
                 "age": 25,
                 "name": "刘备"
             }
@@ -1235,7 +1269,6 @@ public final class CollectionsUtil{
         }
         Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
 
-        //视需求  可以换成 HashMap 或者TreeMap
         Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectCollection.size());
 
         for (O o : objectCollection){
@@ -1251,78 +1284,12 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,统计 {@code propertyName}出现的次数.
-     *
-     * @param <T>
-     *            the generic type
-     * @param <O>
-     *            the generic type
-     * @param objectCollection
-     *            the object collection
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
-     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
-     * @see #groupCount(Collection , Predicate, String)
-     */
-    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
-        return groupCount(objectCollection, null, propertyName);
-    }
-
-    /**
-     * 循环 <code>objectCollection</code>,只选择 符合 <code>includePredicate</code>的对象,统计 {@code propertyName}出现的次数.
-     *
-     * @param <T>
-     *            the generic type
-     * @param <O>
-     *            the generic type
-     * @param objectCollection
-     *            the object collection
-     * @param includePredicate
-     *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
-     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
-     * @since 1.2.0
-     */
-    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate<O> includePredicate,String propertyName){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyMap();
-        }
-
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
-
-        Map<T, Integer> map = new LinkedHashMap<T, Integer>();
-
-        for (O o : objectCollection){
-            if (null != includePredicate){
-                //跳出循环标记
-                boolean continueFlag = !includePredicate.evaluate(o);
-                if (continueFlag){
-                    continue;
-                }
-            }
-
-            T t = PropertyUtil.getProperty(o, propertyName);
-            Integer count = map.get(t);
-            if (null == count){
-                count = 0;
-            }
-            count = count + 1;
-
-            map.put(t, count);
-        }
-        return map;
-    }
-
-    /**
-     * Group one(map只put第一个匹配的元素).
+     * Group one(map只put第一个匹配的元素,后面出现相同的元素将会忽略).
      * 
      * <p>
-     * 返回的map,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象
+     * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
+     * <br>
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序
      * </p>
      * 
      * <p>
@@ -1381,7 +1348,6 @@ public final class CollectionsUtil{
 
         Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
 
-        //视需求  可以换成 HashMap 或者TreeMap
         Map<T, O> map = new LinkedHashMap<T, O>(objectCollection.size());
 
         for (O o : objectCollection){
@@ -1391,12 +1357,86 @@ public final class CollectionsUtil{
                 map.put(key, o);
             }else{
                 if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug(
-                                    "Abandoned except the first value outside,map:{},containsKey key:[{}],",
-                                    JsonUtil.format(map.keySet()),
-                                    key);
+                    LOGGER.debug("map:{} already has the key:{},ignore!", JsonUtil.format(map.keySet()), key);
                 }
             }
+        }
+        return map;
+    }
+
+    /**
+     * 循环 <code>objectCollection</code>,统计 {@code propertyName}的值出现的次数.
+     * 
+     * <p>
+     * 返回的LinkedHashMap,key是{@code propertyName}对应的值,value是该值出现的次数;<br>
+     * 顺序是 objectCollection {@code propertyName}的值的顺序
+     * </p>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
+     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
+     * @see #groupCount(Collection , Predicate, String)
+     */
+    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
+        return groupCount(objectCollection, null, propertyName);
+    }
+
+    /**
+     * 循环 <code>objectCollection</code>,只选择 符合 <code>includePredicate</code>的对象,统计 {@code propertyName}的值出现的次数.
+     * 
+     * <p>
+     * 返回的LinkedHashMap,key是{@code propertyName}对应的值,value是该值出现的次数;<br>
+     * 顺序是 objectCollection {@code propertyName}的值的顺序
+     * </p>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param includePredicate
+     *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     * @return if objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
+     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
+     * @since 1.2.0
+     */
+    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate<O> includePredicate,String propertyName){
+        if (Validator.isNullOrEmpty(objectCollection)){
+            return Collections.emptyMap();
+        }
+
+        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+
+        Map<T, Integer> map = new LinkedHashMap<T, Integer>();
+
+        for (O o : objectCollection){
+            if (null != includePredicate){
+                boolean continueFlag = !includePredicate.evaluate(o);
+                if (continueFlag){
+                    continue;
+                }
+            }
+
+            T t = PropertyUtil.getProperty(o, propertyName);
+            Integer count = map.get(t);
+            if (null == count){
+                count = 0;
+            }
+            count = count + 1;
+
+            map.put(t, count);
         }
         return map;
     }

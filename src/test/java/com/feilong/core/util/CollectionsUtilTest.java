@@ -366,12 +366,7 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGetFieldValueList1(){
-        List<User> testList = new ArrayList<User>();
 
-        User user;
-        UserInfo userInfo;
-
-        //*******************************************************
         List<UserAddress> userAddresseList = new ArrayList<UserAddress>();
         UserAddress userAddress = new UserAddress();
         userAddress.setAddress("中南海");
@@ -384,44 +379,43 @@ public class CollectionsUtilTest{
         attrMap.put("吴国", "甘兴霸");
 
         //*******************************************************
-        String[] lovesStrings1 = { "sanguo1", "xiaoshuo1" };
-        userInfo = new UserInfo();
-        userInfo.setAge(28);
+        UserInfo userInfo1 = new UserInfo();
+        userInfo1.setAge(28);
 
-        user = new User(2L);
-        user.setLoves(lovesStrings1);
-        user.setUserInfo(userInfo);
-        user.setUserAddresseList(userAddresseList);
-
-        user.setAttrMap(attrMap);
-        testList.add(user);
+        User user1 = new User(2L);
+        user1.setLoves(new String[] { "sanguo1", "xiaoshuo1" });
+        user1.setUserInfo(userInfo1);
+        user1.setAttrMap(attrMap);
+        user1.setUserAddresseList(userAddresseList);
 
         //*****************************************************
-        String[] lovesStrings2 = { "sanguo2", "xiaoshuo2" };
-        userInfo = new UserInfo();
-        userInfo.setAge(null);
+        UserInfo userInfo2 = new UserInfo();
+        userInfo2.setAge(null);
 
-        user = new User(3L);
-        user.setLoves(lovesStrings2);
-        user.setUserInfo(userInfo);
-        user.setUserAddresseList(userAddresseList);
-        user.setAttrMap(attrMap);
-        testList.add(user);
+        User user2 = new User(3L);
+        user2.setLoves(new String[] { "sanguo2", "xiaoshuo2" });
+        user2.setUserInfo(userInfo2);
+        user2.setAttrMap(attrMap);
+        user2.setUserAddresseList(userAddresseList);
+
+        List<User> userList = new ArrayList<User>();
+        userList.add(user1);
+        userList.add(user2);
 
         //数组
-        List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(testList, "loves[1]");
+        List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
         LOGGER.info(JsonUtil.format(fieldValueList1));
 
         //级联对象
-        List<Integer> fieldValueList2 = CollectionsUtil.getPropertyValueList(testList, "userInfo.age");
+        List<Integer> fieldValueList2 = CollectionsUtil.getPropertyValueList(userList, "userInfo.age");
         LOGGER.info(JsonUtil.format(fieldValueList2));
 
         //Map
-        List<Integer> attrList = CollectionsUtil.getPropertyValueList(testList, "attrMap(蜀国)");
+        List<Integer> attrList = CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)");
         LOGGER.info(JsonUtil.format(attrList));
 
         //集合
-        List<String> addressList = CollectionsUtil.getPropertyValueList(testList, "userAddresseList[0]");
+        List<String> addressList = CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]");
         LOGGER.info(JsonUtil.format(addressList));
     }
 
