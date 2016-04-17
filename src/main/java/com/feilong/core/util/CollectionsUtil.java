@@ -18,7 +18,6 @@ package com.feilong.core.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -206,37 +205,7 @@ public final class CollectionsUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /**
-     * iterator是否包含某个值.
-     * 
-     * <p style="color:red">
-     * 注意,比较的是 {@link java.lang.Object#toString()},常常用于自定义标签或者el function
-     * </p>
-     * 
-     * @param iterator
-     *            iterator
-     * @param value
-     *            value
-     * @return iterator是否包含某个值,如果iterator为null/empty,则返回false
-     * @see Iterator#hasNext()
-     * @see Iterator#next()
-     * @see "org.springframework.util.CollectionUtils#contains(Iterator, Object)"
-     * @see org.apache.commons.collections4.IteratorUtils#contains(Iterator, Object)
-     */
-    public static boolean contains(Iterator<?> iterator,Object value){
-        if (Validator.isNullOrEmpty(iterator)){
-            return false;
-        }
-        while (iterator.hasNext()){
-            Object object = iterator.next();
-            if (object.toString().equals(value.toString())){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //***************************************************************************
+    //***********************删除****************************************************
 
     /**
      * 从 <code>collection</code>中 删除 所有的 <code>remove</code>. 返回剩余的集合 <span style="color:red">(原集合对象不变)</span>.
@@ -542,7 +511,7 @@ public final class CollectionsUtil{
         return new ArrayList<O>(new LinkedHashSet<O>(objectCollection));
     }
 
-    //********************************************************************************************
+    //*************************获得 属性值 *******************************************************************
 
     /**
      * 解析对象集合,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象特殊属性,拼成List(ArrayList).
@@ -729,7 +698,7 @@ public final class CollectionsUtil{
         return returnCollection;
     }
 
-    //*****************************************************************************************
+    //*************************find****************************************************************
 
     /**
      * 找到 <code>objectCollection</code>中,第一个 <code>propertyName</code>属性名称 值是 <code>value</code>对应的元素.
@@ -783,7 +752,7 @@ public final class CollectionsUtil{
         return IterableUtils.find(objectCollection, predicate);
     }
 
-    //*******************************************************************************************
+    //**************************select*****************************************************************
 
     /**
      * 循环遍历 <code>objectCollection</code>,返回 当bean propertyName 属性值 equals 特定value 时候的list.
@@ -1004,7 +973,7 @@ public final class CollectionsUtil{
         return (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
 
-    //************************************************************************************************
+    //***************************selectRejected*********************************************************************
 
     /**
      * 循环遍历 <code>objectCollection</code> ,返回 当bean propertyName 属性值不 equals 特定value 时候的list.
@@ -1132,7 +1101,7 @@ public final class CollectionsUtil{
         return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
-    //***************************************************************************************************
+    //******************************getPropertyValueMap*********************************************************************
     /**
      * 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回.
      * 
@@ -1201,7 +1170,7 @@ public final class CollectionsUtil{
         return map;
     }
 
-    //****************************************************************************************
+    //*******************************group*********************************************************
 
     /**
      * Group 对象(如果propertyName 存在相同的值,那么这些值,将会以list的形式 put到map中).
@@ -1432,7 +1401,7 @@ public final class CollectionsUtil{
         return map;
     }
 
-    //************************************************************************************************
+    //***********************************avg*************************************************************
 
     /**
      * 算术平均值.
@@ -1533,6 +1502,7 @@ public final class CollectionsUtil{
         return avg(objectCollection, scale, propertyNames).get(propertyName);
     }
 
+    //***********************************sum*************************************************************
     /**
      * 总和,计算集合对象内指定的属性名值的总和.
      * 
