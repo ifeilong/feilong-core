@@ -135,8 +135,8 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * @author feilong
  * @version 1.0.0 Sep 8, 2012 8:02:44 PM
- * @see org.apache.commons.collections4.MapUtils
  * @see java.util.AbstractMap.SimpleEntry
+ * @see org.apache.commons.collections4.MapUtils
  * @since 1.0.0
  */
 public final class MapUtil{

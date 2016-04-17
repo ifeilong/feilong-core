@@ -185,10 +185,14 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <li>Queues typically, but do not necessarily,order elements in a FIFO (first-in-first-out) manner</li>
  * </ol>
  * </blockquote>
- * 
+ *
  * @author feilong
  * @version 1.0.2 Sep 2, 2010 8:08:40 PM
  * @version 1.5.0 2016年1月8日 下午2:08:59
+ * @see java.util.Collections
+ * @see org.apache.commons.collections4.ListUtils
+ * @see org.apache.commons.collections4.IterableUtils
+ * @see org.apache.commons.collections4.CollectionUtils
  * @since 1.0.2
  * @since jdk1.5
  */

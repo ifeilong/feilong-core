@@ -24,8 +24,8 @@ import com.feilong.core.Validator;
  *
  * @author feilong
  * @version 1.5.3 2016年4月18日 上午2:50:15
- * @since 1.5.3
  * @see org.apache.commons.collections4.IteratorUtils
+ * @since 1.5.3
  */
 public final class IteratorUtil{
 

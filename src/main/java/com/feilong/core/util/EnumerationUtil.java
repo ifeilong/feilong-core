@@ -24,8 +24,8 @@ import com.feilong.core.Validator;
  *
  * @author feilong
  * @version 1.5.3 2016年4月18日 上午2:34:38
- * @since 1.5.3
  * @see org.apache.commons.collections4.EnumerationUtils
+ * @since 1.5.3
  */
 public final class EnumerationUtil{
 

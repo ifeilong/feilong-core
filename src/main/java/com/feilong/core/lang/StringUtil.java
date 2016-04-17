@@ -105,9 +105,9 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  *
  * @author feilong
  * @version 1.4.0 2015年8月3日 上午3:06:20
+ * @see java.util.StringTokenizer
  * @see "org.springframework.util.StringUtils#tokenizeToStringArray(String, String)"
  * @see "org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#MULTI_VALUE_ATTRIBUTE_DELIMITERS"
- * @see java.util.StringTokenizer
  * @see org.apache.commons.lang3.StringUtils
  * @see "com.google.common.base.Strings"
  * @since 1.4.0
