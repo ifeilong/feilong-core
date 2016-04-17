@@ -26,8 +26,6 @@ import com.feilong.core.util.PropertiesUtil;
 /**
  * {@link java.lang.System}工具类.
  * 
- * <h3>{@link System#getProperties()}</h3>
- * 
  * <h3>常用Properties:</h3>
  * 
  * <blockquote>
