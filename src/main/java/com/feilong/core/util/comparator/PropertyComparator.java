@@ -65,7 +65,10 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     /** The Constant LOGGER. */
     private static final Logger         LOGGER           = LoggerFactory.getLogger(PropertyComparator.class);
 
-    /** T对象中的属性名称,该属性的value 必须实现 {@link Comparable}接口. */
+    /**
+     * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     * {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>},该属性的value 必须实现 {@link Comparable}接口.
+     */
     private final String                propertyName;
 
     /** 反射提取出来的值,需要类型转成到的类型. */
@@ -93,7 +96,8 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * </blockquote>
      *
      * @param propertyName
-     *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>},该属性对应的value 必须实现 {@link Comparable}接口.
      * @param propertyValueConvertToClass
      *            反射提取出来的值,需要类型转成到的类型
      * @since 1.5.0

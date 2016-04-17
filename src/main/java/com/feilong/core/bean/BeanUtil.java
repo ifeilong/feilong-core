@@ -311,31 +311,13 @@ public final class BeanUtil{
     /**
      * 将{@code fromObj}中的属性或者一组属性的值的复制到 {@code toObj}对象中.
      * 
-     * <p>
-     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用 {@link BeanUtils#copyProperties(Object, Object)},否则循环 调用
-     * {@link #getProperty(Object, String)} 再 {@link #setProperty(Object, String, Object)}到 {@code toObj}对象中
-     * </p>
-     * 
-     * <h3>使用示例:</h3>
-     * 
+     * <h3>代码流程:</h3>
      * <blockquote>
-     * 
-     * <pre>
-     * 例如两个pojo:enterpriseSales和enterpriseSales_form 都含有字段&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;
-     * 
-     * 通常写法:
-     * .....
-     * enterpriseSales.setEnterpriseName(enterpriseSales_form.getEnterpriseName());
-     * enterpriseSales.setLinkMan(enterpriseSales_form.getLinkMan());
-     * enterpriseSales.setPhone(enterpriseSales_form.getPhone());
-     * ......
-     * 
-     * 此时,可以使用
-     * BeanUtil.copyProperties(enterpriseSales,enterpriseSales_form,&quot;enterpriseName&quot;,&quot;linkMan&quot;,&quot;phone&quot;);
-     * </pre>
-     * 
+     * <p>
+     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用 {@link BeanUtils#copyProperties(Object, Object)},否则循环调用
+     * {@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到 {@code toObj}对象中
+     * </p>
      * </blockquote>
-     * 
      * 
      * <h3>参数说明:</h3>
      * 
@@ -348,6 +330,30 @@ public final class BeanUtil{
      * </ol>
      * </blockquote>
      * 
+     * 
+     * <h3>使用示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre>
+     * {@code
+     * 
+     * 例如两个pojo: user和userForm 都含有字段"enterpriseName","linkMan","phone"
+     * 
+     * 通常写法:
+     * .....
+     * user.setEnterpriseName(userForm.getEnterpriseName());
+     * user.setLinkMan(userForm.getLinkMan());
+     * user.setPhone(userForm.getPhone());
+     * ......
+     * 
+     * 此时,可以使用
+     * BeanUtil.copyProperties(user,userForm,"enterpriseName","linkMan","phone");
+     * 
+     * }
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>注意:</h3>
      * 
@@ -367,7 +373,7 @@ public final class BeanUtil{
      * <p>
      * 如果有 {@link java.util.Date} 类型的需要copy,那么需要先使用当前类的 {@link #register(Converter, Class)}方法:<br>
      * 
-     * <code>BeanUtil.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);</code>
+     * <code>BeanUtil.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE),Date.class);</code>
      * 
      * <br>
      * 具体原因,参见 {@link #register(Converter, Class)}方法注释
@@ -379,8 +385,8 @@ public final class BeanUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>{@link BeanUtils#copyProperties(Object, Object)}能给不同的两个成员变量相同的,但类名不同的两个类之间相互赋值</li>
-     * <li>{@link PropertyUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而前者不支持这个功能,但是速度会更快一些.</li>
+     * <li>{@link BeanUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而
+     * {@link PropertyUtils#copyProperties(Object, Object)}不支持这个功能,但是速度会更快一些.</li>
      * <li>commons-beanutils v1.9.0以前的版本 BeanUtils不允许对象的属性值为 null,PropertyUtils可以拷贝属性值 null的对象.<br>
      * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
      * of certain data types),具体信息,可以参阅commons-beanutils的
@@ -461,7 +467,7 @@ public final class BeanUtil{
      * @param bean
      *            bean
      * @param propertyName
-     *            属性名称
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="#propertyName">propertyName</a>}
      * @return 使用BeanUtils类从对象中取得属性值
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)

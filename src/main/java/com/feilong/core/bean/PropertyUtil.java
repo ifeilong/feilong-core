@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -123,13 +124,12 @@ public final class PropertyUtil{
      * 
      * </blockquote>
      * 
-     * 
      * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
      * 
      * <blockquote>
      * <ul>
-     * <li>{@link BeanUtils#copyProperties(Object, Object)}能给不同的两个成员变量相同的,但类名不同的两个类之间相互赋值</li>
-     * <li>{@link PropertyUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而前者不支持这个功能,但是速度会更快一些.</li>
+     * <li>{@link BeanUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而
+     * {@link PropertyUtils#copyProperties(Object, Object)}不支持这个功能,但是速度会更快一些.</li>
      * <li>commons-beanutils v1.9.0以前的版本 BeanUtils不允许对象的属性值为 null,PropertyUtils可以拷贝属性值 null的对象.<br>
      * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
      * of certain data types),具体信息,可以参阅commons-beanutils的
@@ -210,10 +210,9 @@ public final class PropertyUtil{
     }
 
     /**
-     * 使用 {@link PropertyUtils#setProperty(Object, String, Object)} 来设置属性值(<b>不会进行类型转换</b>).
+     * 使用 {@link PropertyUtils#setProperty(Object, String, Object)} 来设置指定bean对象中的指定属性的值(<b>不会进行类型转换</b>).
      * 
      * <p>
-     * Set the value of the specified property of the specified bean, <br>
      * no matter which property reference format is used, with no type conversions.
      * </p>
      * 
@@ -224,7 +223,7 @@ public final class PropertyUtil{
      * @param bean
      *            Bean whose property is to be modified
      * @param propertyName
-     *            Possibly indexed and/or nested name of the property to be modified
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
      * @param value
      *            Value to which this property is to be set
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
@@ -246,7 +245,7 @@ public final class PropertyUtil{
      * @param bean
      *            Bean whose property is to be modified
      * @param propertyName
-     *            Possibly indexed and/or nested name of the property to be modified
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
      * @param value
      *            Value to which this property is to be set
      * @since 1.5.3
@@ -263,7 +262,7 @@ public final class PropertyUtil{
      * @param bean
      *            Bean whose property is to be modified
      * @param propertyName
-     *            Possibly indexed and/or nested name of the property to be modified
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
      * @param value
      *            Value to which this property is to be set
      * @since 1.5.3
@@ -278,12 +277,11 @@ public final class PropertyUtil{
     // [start] getProperty
 
     /**
-     * 使用 {@link PropertyUtils#getProperty(Object, String)} 类从对象中取得属性值.
+     * 使用 {@link PropertyUtils#getProperty(Object, String)} 从指定bean对象中取得指定属性名称的值.
      * 
      * <p>
-     * Return the value of the specified property of the specified bean, <br>
      * no matter which property reference format is used, with no type conversions.<br>
-     * For more details see PropertyUtilsBean.
+     * For more details see {@link PropertyUtilsBean}.
      * </p>
      *
      * @param <T>
@@ -291,7 +289,7 @@ public final class PropertyUtil{
      * @param bean
      *            Bean whose property is to be extracted
      * @param propertyName
-     *            Possibly indexed and/or nested name of the property to be extracted
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
      * @return 使用{@link PropertyUtils#getProperty(Object, String)} 从对象中取得属性值
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)

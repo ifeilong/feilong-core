@@ -38,14 +38,18 @@ public class CollectionContainsPredicate<T> implements Predicate<T>{
     /** The value. */
     private final Collection<?> values;
 
-    /** The property name. */
+    /**
+     * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     * {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}.
+     */
     private final String        propertyName;
 
     /**
      * The Constructor.
      *
      * @param propertyName
-     *            the property name
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param values
      *            the values
      */

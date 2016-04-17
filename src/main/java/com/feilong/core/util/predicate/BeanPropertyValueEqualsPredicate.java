@@ -35,7 +35,10 @@ import com.feilong.core.bean.PropertyUtil;
 //XXX 如果{@link org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate}支持泛型,那么这么类将会废弃
 public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
 
-    /** The property name. */
+    /**
+     * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     * {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}.
+     */
     private final String propertyName;
 
     /** The value. */
@@ -45,7 +48,8 @@ public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
      * The Constructor.
      *
      * @param propertyName
-     *            the property name
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param value
      *            the value
      */
