@@ -50,10 +50,9 @@ import com.feilong.core.bean.PropertyUtil;
  * @param <T>
  *            the generic type
  * @see "org.springframework.beans.support.PropertyComparator"
+ * @see org.apache.commons.beanutils.BeanComparator
  * @see org.apache.commons.collections4.comparators.BooleanComparator
  * @see org.apache.commons.collections4.comparators.ReverseComparator
- * @see org.apache.commons.collections4.comparators.ComparableComparator
- * @see org.apache.commons.beanutils.BeanComparator
  * @see org.apache.commons.collections4.comparators.ComparableComparator
  * @since 1.2.0
  */
@@ -71,12 +70,51 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      */
     private final String                propertyName;
 
+    /** The comparator. */
+    @SuppressWarnings("rawtypes")
+    private Comparator                  comparator;
+
     /** 反射提取出来的值,需要类型转成到的类型. */
     @SuppressWarnings("rawtypes")
     private Class<? extends Comparable> propertyValueConvertToClass;
 
     /**
      * The Constructor.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        List<User> list = new ArrayList<User>();
+        list.add(new User(12L, 18));
+        list.add(new User(2L, 36));
+        list.add(new User(5L, 22));
+        list.add(new User(1L, 8));
+        Collections.sort(list, new PropertyComparator<User>("id"));
+        LOGGER.debug(JsonUtil.format(list));
+    }
+    
+    返回:
+    [{
+            "id": 1,
+            "age": 8
+        },
+                {
+            "id": 2,
+            "age": 36
+        },
+                {
+            "id": 5,
+            "age": 22
+        },
+                {
+            "id": 12,
+            "age": 18
+    }]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param propertyName
      *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
@@ -88,11 +126,80 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
     /**
      * The Constructor.
+     *
+     * @param propertyName
+     *            the property name
+     * @param comparator
+     *            the comparator
+     * @since 1.5.4
+     */
+    @SuppressWarnings("rawtypes")
+    public PropertyComparator(String propertyName, Comparator comparator){
+        this.propertyName = propertyName;
+        this.comparator = comparator;
+        LOGGER.debug("propertyName:[{}]", propertyName);
+    }
+
+    /**
+     * The Constructor.
      * 
      * <h3>使用场景:</h3>
      * <blockquote>
      * 诸如需要排序的对象指定属性类型是数字,但是申明类型的时候由于种种原因是字符串,<br>
      * 此时需要排序,如果不转成Integer比较的话,字符串比较13 将会在 3数字的前面
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 
+     * 我们现在有这样的数据, 其中属性 totalNo 是字符串类型的 
+    {@code
+            CourseEntity courseEntity1 = new CourseEntity();
+            courseEntity1.setTotalNo("3");
+    
+            CourseEntity courseEntity2 = new CourseEntity();
+            courseEntity2.setTotalNo("13");
+    
+            List<CourseEntity> courseList = new ArrayList<>();
+            courseList.add(courseEntity1);
+            courseList.add(courseEntity2);
+    }
+    
+    如果 我们只是使用 propertyName进行排序的话
+      {@code
+            Collections.sort(courseList, new PropertyComparator<CourseEntity>("totalNo"));
+            LOGGER.debug(JsonUtil.format(courseList));
+      }
+      
+    那么返回:
+    [{
+            "totalNo": "13",
+            "name": ""
+        },
+                {
+            "totalNo": "3",
+            "name": ""
+        }]
+    
+        如果我们使用 propertyName+ propertyValueConvertToClass进行排序的话
+    {@code
+            Collections.sort(courseList, new PropertyComparator<CourseEntity>("totalNo", Integer.class));
+            LOGGER.debug(JsonUtil.format(courseList));
+    }    
+            返回:
+    [{
+            "totalNo": "3",
+            "name": ""
+        },
+                {
+            "totalNo": "13",
+            "name": ""
+        }]
+     * 
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param propertyName
@@ -110,6 +217,32 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     }
 
     /**
+     * The Constructor.
+     * *
+     * <h3>使用场景:</h3>
+     * <blockquote>
+     * 诸如需要排序的对象指定属性类型是数字,但是申明类型的时候由于种种原因是字符串,<br>
+     * 此时需要排序,如果不转成Integer比较的话,字符串比较13 将会在 3数字的前面
+     * </blockquote>
+     *
+     * @param propertyName
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>},该属性对应的value 必须实现 {@link Comparable}接口.
+     * @param propertyValueConvertToClass
+     *            反射提取出来的值,需要类型转成到的类型
+     * @param comparator
+     *            the comparator
+     * @since 1.5.4
+     */
+    @SuppressWarnings("rawtypes")
+    public PropertyComparator(String propertyName, Class<? extends Comparable> propertyValueConvertToClass, Comparator comparator){
+        this.propertyName = propertyName;
+        this.propertyValueConvertToClass = propertyValueConvertToClass;
+        this.comparator = comparator;
+        LOGGER.debug("propertyName:[{}]", propertyName);
+    }
+
+    /**
      * Compare.
      *
      * @param t1
@@ -120,8 +253,8 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * @see org.apache.commons.lang3.ObjectUtils#compare(Comparable, Comparable)
      * @see org.apache.commons.lang3.ObjectUtils#compare(Comparable, Comparable, boolean)
      */
-    @Override
     @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
     public int compare(T t1,T t2){
         if (t1 == t2){
             return 0;
@@ -140,6 +273,34 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             propertyValue2 = ConvertUtil.convert(propertyValue2, propertyValueConvertToClass);
         }
 
+        if (null != comparator){
+            return comparator.compare(propertyValue1, propertyValue2);
+        }
+
+        return compare(t1, t2, propertyValue1, propertyValue2);
+    }
+
+    /**
+     * 先比较 propertyValue1以及propertyValue2,再比较 t1/t2 .
+     * 
+     * <p>
+     * 由于我们是提取 property的特殊性, 如果只判断值的话, 那么 TreeSet / TreeMap 过滤掉同sort字段但是对象不相同的情况
+     * </p>
+     *
+     * @param t1
+     *            the t1
+     * @param t2
+     *            the t2
+     * @param propertyValue1
+     *            the property value1
+     * @param propertyValue2
+     *            the property value2
+     * @return the int
+     * @see org.apache.commons.collections4.comparators.ComparableComparator
+     * @since 1.5.4
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private int compare(T t1,T t2,Comparable propertyValue1,Comparable propertyValue2){
         //NullPointException if propertyValue1.compareTo(propertyValue2);
         int compareTo = ObjectUtils.compare(propertyValue1, propertyValue2);
 
@@ -147,7 +308,6 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             //避免TreeSet / TreeMap 过滤掉同sort字段但是对象不相同的情况
             compareTo = ObjectUtils.compare(t1.hashCode(), t2.hashCode());
         }
-
         LOGGER.debug(
                         "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],compareTo:[{}]",
                         propertyName,

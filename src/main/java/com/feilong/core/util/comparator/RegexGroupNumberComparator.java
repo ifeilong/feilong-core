@@ -32,7 +32,7 @@ import com.feilong.core.util.RegexUtil;
  * </p>
  * 
  * <p>
- * 针对这种情况, 你可以使用
+ * 针对这种情况,你可以使用
  * </p>
  * 
  * <pre>

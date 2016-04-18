@@ -19,12 +19,15 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.util.comparator.PropertyComparator;
+import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -234,6 +237,22 @@ public class MapUtilTest{
         map.put("b", 8);
 
         LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+    }
+
+    @Test
+    public void testSort(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+
+        map.put("a13", 123);
+        map.put("a2", 345);
+        map.put("a8", 8);
+
+        LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+
+        PropertyComparator<Entry<String, Integer>> propertyComparator = new PropertyComparator<Map.Entry<String, Integer>>(
+                        "key",
+                        new RegexGroupNumberComparator("a(\\d*)"));
+        LOGGER.debug(JsonUtil.format(MapUtil.sort(map, propertyComparator)));
     }
 
     /**

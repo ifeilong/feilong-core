@@ -58,6 +58,17 @@ public class PropertyComparatorTest{
         LOGGER.debug(JsonUtil.format(list));
     }
 
+    @Test
+    public void testPropertyComparator1(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User(12L, 18));
+        list.add(new User(2L, 36));
+        list.add(new User(5L, 22));
+        list.add(new User(1L, 8));
+        Collections.sort(list, new PropertyComparator<User>("id"));
+        LOGGER.debug(JsonUtil.format(list));
+    }
+
     /**
      * Test property comparator2.
      */

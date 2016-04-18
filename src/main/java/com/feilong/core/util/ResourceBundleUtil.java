@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
@@ -338,32 +337,63 @@ public final class ResourceBundleUtil{
 
     // **************************************************************************
     /**
-     * Read prefix as map(HashMap).
+     * Read prefix as map({@link TreeMap}).
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 比如 messages/feilong-core-test.properties 里面有
+     * 
+     * FileType.image=Image
+     * FileType.video=Video
+     * FileType.audio=Audio
+     * 
+     * 配置,
+     * 
+     * 此时调用 
+     * 
+     * {@code 
+     * Map<String, String> map = ResourceBundleUtil.readPrefixAsMap(BASE_NAME, "FileType", ".", Locale.CHINA);
+     * LOGGER.info(JsonUtil.format(map));
+     * }
+     * 
+     * 返回 :
+     * 
+     * {
+     * "audio": "Audio",
+     * "image": "Image",
+     * "video": "Video"
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
      * @param baseName
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param prefix
      *            前缀
-     * @param spliter
-     *            the spliter
+     * @param delimiters
+     *            the delimiters
      * @param locale
      *            the locale
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成HashMap
+     * @return 如果 baseName 没有key value,则返回null,否则解析所有的key和value转成HashMap
      * @see #readAllPropertiesToMap(String, Locale)
      */
-    public static Map<String, String> readPrefixAsMap(String baseName,String prefix,String spliter,Locale locale){
+    public static Map<String, String> readPrefixAsMap(String baseName,String prefix,String delimiters,Locale locale){
         Map<String, String> propertyMap = readAllPropertiesToMap(baseName, locale);
         if (Validator.isNullOrEmpty(propertyMap)){
             return Collections.emptyMap();
         }
 
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = new TreeMap<String, String>();
         for (Map.Entry<String, String> entry : propertyMap.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
             // 以 prefix 开头
             if (key.startsWith(prefix)){
-                String[] values = key.split(spliter);// 分隔
+                String[] values = StringUtil.tokenizeToStringArray(key, delimiters);
                 if (values.length >= 2){
                     result.put(values[1], value);
                 }
@@ -384,7 +414,6 @@ public final class ResourceBundleUtil{
     public static Map<String, String> readAllPropertiesToMap(String baseName){
         final Locale defaultLocale = Locale.getDefault();
         return readAllPropertiesToMap(baseName, defaultLocale);
-
     }
 
     /**
@@ -477,7 +506,6 @@ public final class ResourceBundleUtil{
      * <p>
      * 参数 <code>fileName</code>是路径全地址
      * </p>
-     * 
      * 
      * <pre>
      * 
