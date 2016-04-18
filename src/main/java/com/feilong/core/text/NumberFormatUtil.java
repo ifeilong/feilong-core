@@ -59,6 +59,10 @@ public final class NumberFormatUtil{
     /**
      * 将 {@link Number} 使用 numberPattern格式化.
      * 
+     * <p style="color:red">
+     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.lang.NumberUtil#toString(Number, String)}替代
+     * </p>
+     * 
      * <p>
      * 该方法使用 {@link java.math.RoundingMode#HALF_UP}
      * </p>

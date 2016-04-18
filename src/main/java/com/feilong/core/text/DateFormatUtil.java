@@ -58,7 +58,7 @@ public final class DateFormatUtil{
     /**
      * format日期类型格式化成字符串类型.
      * 
-     * <p>
+     * <p style="color:red">
      * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#date2String(Date, String)}替代
      * </p>
      * 
@@ -106,7 +106,7 @@ public final class DateFormatUtil{
     /**
      * parse字符串类型转成日期类型.
      * 
-     * <p>
+     * <p style="color:red">
      * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#string2Date(String, String)}替代
      * </p>
      * 

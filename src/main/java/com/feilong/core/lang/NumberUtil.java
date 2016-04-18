@@ -463,10 +463,10 @@ public final class NumberUtil{
      * <pre>
      * {@code
      *  
-     *  将数字转成百分数字符串,不带小数点,如 0.24转成24%
+     *  //将数字转成百分数字符串,不带小数点,如 0.24转成24%
      *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT)
      *  
-     *  将数字转成百分数字符串,带两位小数点,如 0.24转成24.00%
+     *  //将数字转成百分数字符串,带两位小数点,如 0.24转成24.00%
      *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT)
      *  }
      * </pre>
@@ -478,7 +478,6 @@ public final class NumberUtil{
      * @param pattern
      *            规则 {@link NumberPattern}
      * @return 格式化后的数字字符串
-     * 
      * @see NumberFormatUtil#format(Number, String)
      */
     public static String toString(Number value,String pattern){
