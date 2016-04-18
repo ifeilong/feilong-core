@@ -51,7 +51,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 			<dependency>
 				<groupId>com.feilong.platform</groupId>
 				<artifactId>feilong-core</artifactId>
-				<version>1.5.2</version>
+				<version>1.5.3</version>
 			</dependency>
 			....
 		</dependencies>
@@ -76,7 +76,7 @@ com.feilong.`tools.jsonlib`  | 封装了`json-lib-2.4-jdk15`包,提供JSON类型
 com.feilong.`tools.slf4j`  | 调用了`slf4j-api`包下类,来进行字符串的格式化输出,参见 [Slf4jUtil](src/main/java/com/feilong/tools/slf4j/Slf4jUtil.java)
 
 # Javadoc:
-在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.2/feilong-core/) 
+在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.3/feilong-core/) 
 
 # 类和方法介绍: 
 
