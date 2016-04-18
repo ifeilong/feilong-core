@@ -85,7 +85,7 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 获取Properties配置文件键值,按照typeClass 返回对应的类型.
+     * 获取Properties配置文件键值,转换成指定的 typeClass 类型返回.
      * 
      * @param <T>
      *            the generic type
@@ -94,12 +94,10 @@ public final class ResourceBundleUtil{
      * @param key
      *            the key
      * @param typeClass
-     *            指明返回类型,<br>
-     *            如果是String.class,则返回的是String <br>
-     *            如果是Integer.class,则返回的是Integer
+     *            指明返回类型, 如果是String.class,则转换成String返回; 如果是Integer.class,则转换成Integer返回
      * @return the value
      * @see #getValue(String, String)
-     * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
+     * @see ConvertUtil#convert(Object, Class)
      */
     public static <T> T getValue(String baseName,String key,Class<T> typeClass){
         String value = getValue(baseName, key);
@@ -138,7 +136,6 @@ public final class ResourceBundleUtil{
      * @return 该键的值
      * @see #getResourceBundle(String)
      * @see #getValue(ResourceBundle, String)
-     * @since 1.0
      */
     public static String getValue(String baseName,String key){
         ResourceBundle resourceBundle = getResourceBundle(baseName);
@@ -157,7 +154,6 @@ public final class ResourceBundleUtil{
      * @return 该键的值
      * @see #getResourceBundle(String, Locale)
      * @see #getValue(ResourceBundle, String)
-     * @since 1.0.5
      */
     public static String getValue(String baseName,String key,Locale locale){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
@@ -257,13 +253,13 @@ public final class ResourceBundleUtil{
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param key
      *            the key
-     * @param spliter
-     *            分隔符
-     * @return 以value.split(spliter),如果 资源值不存在,返回null
+     * @param delimiters
+     *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
+     * @return 如果资源值不存在,返回null
      * @see #getArray(ResourceBundle, String, String, Class)
      */
-    public static String[] getArray(String baseName,String key,String spliter){
-        return getArray(baseName, key, spliter, String.class);
+    public static String[] getArray(String baseName,String key,String delimiters){
+        return getArray(baseName, key, delimiters, String.class);
     }
 
     /**
@@ -276,17 +272,55 @@ public final class ResourceBundleUtil{
      *            the resource bundle
      * @param key
      *            the key
-     * @param spliter
-     *            分隔符
-     * @return 以value.split(spliter),如果 资源值不存在,返回null
+     * @param delimiters
+     *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
+     * @return 如果 资源值不存在,返回null
      * @see #getArray(ResourceBundle, String, String, Class)
      */
-    public static String[] getArray(ResourceBundle resourceBundle,String key,String spliter){
-        return getArray(resourceBundle, key, spliter, String.class);
+    public static String[] getArray(ResourceBundle resourceBundle,String key,String delimiters){
+        return getArray(resourceBundle, key, delimiters, String.class);
     }
 
     /**
      * 读取值,转成数组.
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 
+     * 在 messages/feilong-core-test.properties 配置文件中, 有以下配置
+     * {@code
+         config_test_array=5,8,7,6
+         }
+     * 
+     * 此时调用
+     * {@code    
+         LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
+     }
+     * 
+     * 返回:[
+     * "5",
+     * "8",
+     * "7",
+     * "6"
+     * ]
+     * 
+     * 调用
+     * {@code 
+      LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
+     }
+     * 
+     * 返回:
+     * [
+     * 5,
+     * 8,
+     * 7,
+     * 6
+     * ]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param <T>
      *            the generic type
@@ -294,24 +328,63 @@ public final class ResourceBundleUtil{
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param key
      *            the key
-     * @param spliter
-     *            分隔符
+     * @param delimiters
+     *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
      * @param typeClass
      *            指明返回类型,<br>
      *            如果是String.class,则返回的是String []数组<br>
      *            如果是Integer.class,则返回的是Integer [] 数组
-     * @return 以value.split(spliter),如果 资源值不存在,返回null
+     * @return 如果 资源值不存在,返回null
      * @see #getResourceBundle(String)
      * @see #getArray(ResourceBundle, String, String, Class)
      */
     @SuppressWarnings("unchecked")
-    public static <T> T[] getArray(String baseName,String key,String spliter,Class<?> typeClass){
+    public static <T> T[] getArray(String baseName,String key,String delimiters,Class<?> typeClass){
         ResourceBundle resourceBundle = getResourceBundle(baseName);
-        return (T[]) getArray(resourceBundle, key, spliter, typeClass);
+        return (T[]) getArray(resourceBundle, key, delimiters, typeClass);
     }
 
     /**
      * 读取值,转成数组.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 
+     * 在 messages/feilong-core-test.properties 配置文件中, 有以下配置
+     * {@code
+         config_test_array=5,8,7,6
+         }
+     * 
+     * 此时调用
+     * {@code    
+         LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
+     }
+     * 
+     * 返回:[
+     * "5",
+     * "8",
+     * "7",
+     * "6"
+     * ]
+     * 
+     * 调用
+     * {@code 
+      LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
+     }
+     * 
+     * 返回:
+     * [
+     * 5,
+     * 8,
+     * 7,
+     * 6
+     * ]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param <T>
      *            the generic type
@@ -319,25 +392,30 @@ public final class ResourceBundleUtil{
      *            the resource bundle
      * @param key
      *            the key
-     * @param spliter
-     *            分隔符
+     * @param delimiters
+     *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
      * @param typeClass
      *            指明返回类型,<br>
      *            如果是String.class,则返回的是String []数组<br>
      *            如果是Integer.class,则返回的是Integer [] 数组
-     * @return 以value.split(spliter),如果 资源值不存在,返回null
+     * @return 如果 资源值不存在,返回null
      * @see #getValue(ResourceBundle, String)
-     * @see com.feilong.core.lang.StringUtil#tokenizeToStringArray(String, String)
+     * @see StringUtil#tokenizeToStringArray(String, String)
      */
-    public static <T> T[] getArray(ResourceBundle resourceBundle,String key,String spliter,Class<T> typeClass){
+    public static <T> T[] getArray(ResourceBundle resourceBundle,String key,String delimiters,Class<T> typeClass){
         String value = getValue(resourceBundle, key);
-        String[] array = StringUtil.tokenizeToStringArray(value, spliter);
+        String[] array = StringUtil.tokenizeToStringArray(value, delimiters);
         return ConvertUtil.convert(array, typeClass);
     }
 
     // **************************************************************************
     /**
      * Read prefix as map({@link TreeMap}).
+     * 
+     * <p>
+     * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是TreeMap
+     * </p>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -405,6 +483,11 @@ public final class ResourceBundleUtil{
     /**
      * 读取配置文件,将k/v 统统转成map.
      * 
+     * <p>
+     * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是TreeMap
+     * </p>
+     * 
      * @param baseName
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
@@ -418,6 +501,11 @@ public final class ResourceBundleUtil{
 
     /**
      * 读取配置文件,将k/v 统统转成map.
+     * 
+     * <p>
+     * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是TreeMap
+     * </p>
      * 
      * @param baseName
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
@@ -435,6 +523,11 @@ public final class ResourceBundleUtil{
 
     /**
      * 读取配置文件,将k/v 统统转成map.
+     * 
+     * <p>
+     * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是TreeMap
+     * </p>
      *
      * @param resourceBundle
      *            the resource bundle
@@ -447,8 +540,6 @@ public final class ResourceBundleUtil{
     public static Map<String, String> readAllPropertiesToMap(ResourceBundle resourceBundle){
         Validate.notNull(resourceBundle, "resourceBundle can't be null!");
 
-        //注意 如果是 java.util.PropertyResourceBundle
-        //内部是使用 hashmap 来存储数据的, 那么这里的key 是乱序的 
         Enumeration<String> enumeration = resourceBundle.getKeys();
         if (Validator.isNullOrEmpty(enumeration)){
             return Collections.emptyMap();
@@ -518,7 +609,6 @@ public final class ResourceBundleUtil{
     }
      * </pre>
      *
-     * 
      * @param fileName
      *            Example 1: "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"
      * @return the resource bundle,may be null
