@@ -16,6 +16,9 @@
 package com.feilong.core.util;
 
 import java.util.Iterator;
+import java.util.Objects;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.Validator;
 
@@ -37,10 +40,10 @@ public final class IteratorUtil{
     }
 
     /**
-     * iterator是否包含某个值.
+     * 迭代iterator,判断元素的 字符串格式 是否和传入的值 {@code value} 的字符串格式相等.
      * 
      * <p style="color:red">
-     * 注意,比较的是 {@link java.lang.Object#toString()},常常用于自定义标签或者el function
+     * 注意,比较的是 {@link java.util.Objects#toString(Object, String)},常常用于自定义标签或者el function
      * </p>
      * 
      * @param iterator
@@ -52,16 +55,17 @@ public final class IteratorUtil{
      * @see Iterator#next()
      * @see "org.springframework.util.CollectionUtils#contains(Iterator, Object)"
      * @see org.apache.commons.collections4.IteratorUtils#contains(Iterator, Object)
-     * @deprecated 由于该方法内部实现比较特殊,将可能会移到tag里面去,
      */
-    @Deprecated
-    public static boolean contains(Iterator<?> iterator,Object value){
+    public static boolean containsByStringValue(Iterator<?> iterator,Object value){
         if (Validator.isNullOrEmpty(iterator)){
             return false;
         }
         while (iterator.hasNext()){
             Object object = iterator.next();
-            if (object.toString().equals(value.toString())){
+            //注意: 如果null ,java.util.Objects#toString(Object),返回 "null" 和  java.lang.String#valueOf(Object) 一样
+            //而 org.apache.commons.lang3.ObjectUtils#toString(Object) 返回  ""  empty
+            boolean equals = Objects.toString(object, StringUtils.EMPTY).equals(Objects.toString(value, StringUtils.EMPTY));
+            if (equals){
                 return true;
             }
         }
