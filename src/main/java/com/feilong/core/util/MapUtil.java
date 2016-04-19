@@ -40,6 +40,28 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * {@link Map}工具类.
  * 
+ * <h3>hashCode与equals:</h3>
+ * <blockquote>
+ * 
+ * <p>
+ * hashCode重要么?<br>
+ * 不重要，对于List集合、数组而言，他就是一个累赘,但是对于HashMap、HashSet、HashTable而言，它变得异常重要.
+ * </p>
+ * 
+ * <p>
+ * 在Java中hashCode的实现总是伴随着equals,他们是紧密配合的,你要是自己设计了其中一个,就要设计另外一个。
+ * </p>
+ * <p>
+ * <img src="http://venusdrogon.github.io/feilong-platform/mysource/hashCode-and-equals.jpg"/>
+ * </p>
+ * 
+ * 整个处理流程是：
+ * <ol>
+ * <li>判断两个对象的hashcode是否相等，若不等，则认为两个对象不等，完毕，若相等，则比较equals。</li>
+ * <li>若两个对象的equals不等，则可以认为两个对象不等，否则认为他们相等。</li>
+ * </ol>
+ * </blockquote>
+ * 
  * <h3>关于 {@link java.util.Map }:</h3>
  * <blockquote>
  * <ol>
