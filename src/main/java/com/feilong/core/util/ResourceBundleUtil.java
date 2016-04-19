@@ -503,7 +503,7 @@ public final class ResourceBundleUtil{
      * 
      * <p>
      * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
-     * 本方法出于log以及使用方便,返回的是TreeMap
+     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
      * </p>
      * 
      * @param baseName
