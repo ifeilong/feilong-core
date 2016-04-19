@@ -150,7 +150,7 @@ public final class ResourceBundleUtil{
      * @param key
      *            Properties配置文件键名
      * @param locale
-     *            the locale
+     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @return 该键的值
      * @see #getResourceBundle(String, Locale)
      * @see #getValue(ResourceBundle, String)
@@ -172,7 +172,7 @@ public final class ResourceBundleUtil{
      * @param key
      *            the key
      * @param locale
-     *            the locale
+     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @param arguments
      *            此处可以传递Object[]数组过来
      * @return the value with arguments
@@ -455,7 +455,7 @@ public final class ResourceBundleUtil{
      * @param delimiters
      *            the delimiters
      * @param locale
-     *            the locale
+     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @return 如果 baseName 没有key value,则返回null,否则解析所有的key和value转成HashMap
      * @see #readAllPropertiesToMap(String, Locale)
      */
@@ -495,8 +495,7 @@ public final class ResourceBundleUtil{
      * @since 1.2.1
      */
     public static Map<String, String> readAllPropertiesToMap(String baseName){
-        final Locale defaultLocale = Locale.getDefault();
-        return readAllPropertiesToMap(baseName, defaultLocale);
+        return readAllPropertiesToMap(baseName, null);
     }
 
     /**
@@ -510,7 +509,7 @@ public final class ResourceBundleUtil{
      * @param baseName
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param locale
-     *            the locale 支持国际化
+     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
@@ -564,8 +563,7 @@ public final class ResourceBundleUtil{
      * @see #getResourceBundle(String, Locale)
      */
     public static ResourceBundle getResourceBundle(String baseName){
-        // Locale enLoc = new Locale("en", "US"); // 表示美国地区
-        return getResourceBundle(baseName, Locale.getDefault());
+        return getResourceBundle(baseName, null);
     }
 
     /**
@@ -574,17 +572,19 @@ public final class ResourceBundleUtil{
      * @param baseName
      *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
      * @param locale
-     *            the locale for which a resource bundle is desired
+     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @return the resource bundle,may be null
      * @see java.util.ResourceBundle#getBundle(String, Locale)
      */
     public static ResourceBundle getResourceBundle(String baseName,Locale locale){
         Validate.notEmpty(baseName, "baseName can't be null/empty!");
-        Validate.notNull(locale, "locale can't be null!");
 
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, locale);
+        // Locale enLoc = new Locale("en", "US"); // 表示美国地区
+        Locale useLocale = null == locale ? Locale.getDefault() : locale;
+
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, useLocale);
         if (null == resourceBundle){
-            LOGGER.warn("resourceBundle is null,baseName:{},locale:{}", resourceBundle, baseName, locale);
+            LOGGER.warn("resourceBundle is null,baseName:{},locale:{}", resourceBundle, baseName, useLocale);
         }
         return resourceBundle;
     }
