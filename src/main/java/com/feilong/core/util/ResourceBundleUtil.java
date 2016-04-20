@@ -90,7 +90,9 @@ public final class ResourceBundleUtil{
      * @param <T>
      *            the generic type
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param key
      *            the key
      * @param typeClass
@@ -130,7 +132,9 @@ public final class ResourceBundleUtil{
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      *
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param key
      *            Properties配置文件键名
      * @return 该键的值
@@ -146,7 +150,9 @@ public final class ResourceBundleUtil{
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      *
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param key
      *            Properties配置文件键名
      * @param locale
@@ -168,7 +174,9 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param key
      *            the key
      * @param locale
@@ -250,7 +258,9 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param key
      *            the key
      * @param delimiters
@@ -325,7 +335,9 @@ public final class ResourceBundleUtil{
      * @param <T>
      *            the generic type
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param key
      *            the key
      * @param delimiters
@@ -413,7 +425,7 @@ public final class ResourceBundleUtil{
      * Read prefix as map({@link TreeMap}).
      * 
      * <p>
-     * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
+     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
      * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
      * </p>
      * 
@@ -449,7 +461,9 @@ public final class ResourceBundleUtil{
      * </blockquote>
      *
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param prefix
      *            前缀
      * @param delimiters
@@ -484,12 +498,14 @@ public final class ResourceBundleUtil{
      * 读取配置文件,将k/v 统统转成map.
      * 
      * <p>
-     * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
+     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
      * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
      * </p>
      * 
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
      * @see #readAllPropertiesToMap(String, Locale)
      * @since 1.2.1
@@ -502,12 +518,14 @@ public final class ResourceBundleUtil{
      * 读取配置文件,将k/v 统统转成map.
      * 
      * <p>
-     * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
+     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
      * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
      * </p>
      * 
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
@@ -524,7 +542,7 @@ public final class ResourceBundleUtil{
      * 读取配置文件,将k/v 统统转成map.
      * 
      * <p>
-     * 注意:JDK实现通常是 java.util.PropertyResourceBundle,内部是使用 hashmap来存储数据的,<br>
+     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
      * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
      * </p>
      *
@@ -557,7 +575,9 @@ public final class ResourceBundleUtil{
      * 获得ResourceBundle.
      * 
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @return the resource bundle
      * @see java.util.Locale#getDefault()
      * @see #getResourceBundle(String, Locale)
@@ -570,7 +590,9 @@ public final class ResourceBundleUtil{
      * 获得ResourceBundle.
      * 
      * @param baseName
-     *            配置文件的包+类全名<span style="color:red">(不要尾缀)</span>,the base name of the resource bundle, a fully qualified class name
+     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            ,比如message/feilong-core-test
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @return the resource bundle,may be null

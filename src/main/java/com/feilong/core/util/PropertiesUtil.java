@@ -70,7 +70,7 @@ import com.feilong.core.lang.ClassLoaderUtil;
 name=Hello world \
 My Name is ferreousbox
     
-  那么我们在读取name属性的时其值就变成了:Hello world My Name is ferreousbox.也就解决了在properties文件中换行书写的问题,
+那么我们在读取name属性的时其值就变成了:Hello world My Name is ferreousbox.也就解决了在properties文件中换行书写的问题,
 只需要在每一行的最后增加一个\符号,注意其下一行必须是接着的一行,即中间不能空行,否则也会被忽略的:-).
 
 }
