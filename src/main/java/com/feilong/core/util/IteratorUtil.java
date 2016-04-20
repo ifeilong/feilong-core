@@ -62,10 +62,11 @@ public final class IteratorUtil{
         }
         while (iterator.hasNext()){
             Object object = iterator.next();
-            //注意: 如果null ,java.util.Objects#toString(Object),返回 "null" 和  java.lang.String#valueOf(Object) 一样
+            //注意:如果null,java.util.Objects#toString(Object),返回 "null" 和  java.lang.String#valueOf(Object) 一样
             //而 org.apache.commons.lang3.ObjectUtils#toString(Object) 返回  ""  empty
-            boolean equals = Objects.toString(object, StringUtils.EMPTY).equals(Objects.toString(value, StringUtils.EMPTY));
-            if (equals){
+
+            //如果发现有equals 的,那么就直接返回true
+            if (Objects.toString(object, StringUtils.EMPTY).equals(Objects.toString(value, StringUtils.EMPTY))){
                 return true;
             }
         }
