@@ -17,6 +17,9 @@ package com.feilong.core.util;
 
 import java.util.Enumeration;
 
+import org.apache.commons.collections4.IteratorUtils;
+import org.apache.commons.collections4.iterators.EnumerationIterator;
+
 import com.feilong.core.Validator;
 
 /**
@@ -42,7 +45,7 @@ public final class EnumerationUtil{
      * <h3>代码流程:</h3>
      * <blockquote>
      * <ol>
-     * <li>{@code if isNullOrEmpty(enumeration)---->null}</li>
+     * <li>{@code if isNullOrEmpty(enumeration) return false}</li>
      * <li>循环枚举里面的每个元素,调用 {@link org.apache.commons.lang3.ObjectUtils#equals(Object, Object)},如果equals 返回true</li>
      * </ol>
      * </blockquote>
@@ -56,19 +59,14 @@ public final class EnumerationUtil{
      * @return true, if contains
      * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
      * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
+     * @see org.apache.commons.collections4.iterators#EnumerationIterator
+     * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)
      */
-    @SuppressWarnings("deprecation")
     public static <O> boolean contains(Enumeration<O> enumeration,O value){
         if (Validator.isNullOrEmpty(enumeration)){
             return false;
         }
-
-        while (enumeration.hasMoreElements()){
-            O object = enumeration.nextElement();
-            if (org.apache.commons.lang3.ObjectUtils.equals(object, value)){
-                return true;
-            }
-        }
-        return false;
+        EnumerationIterator<O> iterator = new EnumerationIterator<O>(enumeration);
+        return IteratorUtils.contains(iterator, value);
     }
 }
