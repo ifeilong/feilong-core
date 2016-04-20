@@ -202,27 +202,23 @@ public final class ResourceBundleUtil{
      * @return 该键的值<br>
      *         如果配置文件中,
      *         <ul>
-     *         <li>key不存在,LOGGER.warn 输出警告,然后返回null</li>
-     *         <li>key存在,但value是null 或者 empty,LOGGER.warn 输出警告,然后返回value</li>
+     *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
+     *         <li>key存在,但value是null 或者 empty,返回value</li>
      *         </ul>
      * @see java.util.ResourceBundle#getString(String)
      */
     public static String getValue(ResourceBundle resourceBundle,String key){
+        Validate.notEmpty(key, "key can't be null/empty!");
         if (!resourceBundle.containsKey(key)){
-            LOGGER.debug("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
+            LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
             return StringUtils.EMPTY;
         }
 
-        try{
-            String value = resourceBundle.getString(key);
-            if (Validator.isNullOrEmpty(value)){
-                LOGGER.debug("resourceBundle has key:[{}],but value is null/empty", key);
-            }
-            return value;
-        }catch (Exception e){
-            LOGGER.error(e.getMessage(), e);
+        String value = resourceBundle.getString(key);
+        if (Validator.isNullOrEmpty(value)){
+            LOGGER.debug("resourceBundle has key:[{}],but value is null/empty", key);
         }
-        return StringUtils.EMPTY;
+        return value;
     }
 
     /**
