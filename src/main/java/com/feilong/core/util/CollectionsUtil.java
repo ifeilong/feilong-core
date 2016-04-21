@@ -1635,7 +1635,6 @@ public final class CollectionsUtil{
          Number number = CollectionsUtil.sum(list, "id");
          LOGGER.info("" + number);
     }
-    
     返回: 12
      * </pre>
      * 
@@ -1647,18 +1646,19 @@ public final class CollectionsUtil{
      * <pre>
     {@code
     protected Integer getCookieShoppingCartLinesQty(List<CookieShoppingCartLine> cartLineList)} {  
-    
-    {@code
+        {@code
         Integer qty = 0;
         //获取cookie中的购物车行集合
-        if (null != cartLineList && cartLineList.size() > 0)}{  {@code
-            for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();)} {  {@code
+        if (null != cartLineList && cartLineList.size() > 0)}{  
+            {@code
+            for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();)} {  
+                {@code
                 CookieShoppingCartLine cookieShoppingCartLine = (CookieShoppingCartLine) iterator.next();
                 qty += cookieShoppingCartLine.getQuantity();
             }}
         }
         return qty;
-    }
+        }
     }
      * </pre>
      * 
