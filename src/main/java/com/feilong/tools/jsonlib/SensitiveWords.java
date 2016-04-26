@@ -25,7 +25,11 @@ import java.lang.annotation.Target;
 import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 /**
- * 标识是否是敏感词, 如果是,那么使用json格式化的时候会显示成*****.
+ * 标识是否是敏感词.
+ * 
+ * <p>
+ * 如果是,那么使用 {@link JsonUtil} 格式化的时候会显示成*****.
+ * </p>
  * 
  * @author feilong
  * @version 1.4.0 2015年8月18日 下午9:40:53

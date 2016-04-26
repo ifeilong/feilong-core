@@ -136,6 +136,7 @@ public final class NumberUtil{
      * @return 四舍五入{@link RoundingMode#HALF_UP},取整,无小数<br>
      *         如果 isNotNullOrEmpty(number)返回null
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
+     * @see #toNoScale(Serializable, RoundingMode)
      */
     public static BigDecimal toNoScale(Serializable number){
         return toNoScale(number, RoundingMode.HALF_UP);
@@ -206,11 +207,11 @@ public final class NumberUtil{
      * <pre>
      * {@code
      *   Example 1:  
-     *      NumberUtil.getProgress(5, 5, "##%")
+     *      NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT)
      *      return 100%
      *   
      *   Example 2:
-     *      NumberUtil.getProgress(2, 3, "#0.0%")
+     *      NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)
      *      return 66.7%
      * }
      * </pre>
@@ -454,34 +455,30 @@ public final class NumberUtil{
     }
 
     /**
-     * 数字格式化,和 {@link NumberFormatUtil#format(Number, String)} 方法相等 .
+     * 数字格式化,和 {@link NumberFormatUtil#format(Number, String)}方法相等 .
      * 
      * <h3>示例:</h3>
-     * 
-     * <blockquote>
      * 
      * <pre>
      * {@code
      *  
-     *  //将数字转成百分数字符串,不带小数点,如 0.24转成24%
-     *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT)
+     *  //将数字转成百分数字符串,不带小数点
+     *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT) result 24%
      *  
-     *  //将数字转成百分数字符串,带两位小数点,如 0.24转成24.00%
-     *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT)
+     *  //将数字转成百分数字符串,带两位小数点
+     *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT) result 24.00%
      *  }
      * </pre>
      * 
-     * </blockquote>
-     * 
      * @param value
      *            值
-     * @param pattern
+     * @param numberPattern
      *            规则 {@link NumberPattern}
      * @return 格式化后的数字字符串
      * @see NumberFormatUtil#format(Number, String)
      */
-    public static String toString(Number value,String pattern){
-        return NumberFormatUtil.format(value, pattern);
+    public static String toString(Number value,String numberPattern){
+        return NumberFormatUtil.format(value, numberPattern);
     }
 
     // *****************************************************************************************************
@@ -527,10 +524,9 @@ public final class NumberUtil{
             return false;
         }
 
-        String valueString = value.toString();
         // Number /String
         if (value instanceof Number || value instanceof String){
-            BigDecimal bigDecimal = ConvertUtil.toBigDecimal(valueString);
+            BigDecimal bigDecimal = ConvertUtil.toBigDecimal(value.toString());
             return 0 == bigDecimal.compareTo(ConvertUtil.toBigDecimal(specificNumber));
         }
         return false;

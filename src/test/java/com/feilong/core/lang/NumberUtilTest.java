@@ -186,8 +186,6 @@ public class NumberUtilTest{
 
         assertEquals("C00000008", NumberUtil.toString(8, "C00000000"));
 
-        assertEquals("0%", NumberUtil.toString(0, NumberPattern.PERCENT_WITH_NOPOINT));
-
         assertEquals("24%", NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT));
         assertEquals("24.00%", NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT));
 
@@ -202,6 +200,27 @@ public class NumberUtilTest{
         assertEquals("111112", NumberUtil.toString(111111.5, NumberPattern.NO_SCALE));
         assertEquals("111113", NumberUtil.toString(111112.5, NumberPattern.NO_SCALE));
         assertEquals("88888888", NumberUtil.toString(88888888, NumberPattern.NO_SCALE));
+    }
+
+    @Test
+    public void toPERCENT_WITH_NOPOINT(){
+        assertEquals("0%", NumberUtil.toString(0, NumberPattern.PERCENT_WITH_NOPOINT));
+        assertEquals("100%", NumberUtil.toString(1, NumberPattern.PERCENT_WITH_NOPOINT));
+        assertEquals("10000%", NumberUtil.toString(100, NumberPattern.PERCENT_WITH_NOPOINT));
+    }
+
+    @Test
+    public void toPERCENT_WITH_NOPOINT1(){
+        assertEquals("0.0%", NumberUtil.toString(0, NumberPattern.PERCENT_WITH_1POINT));
+        assertEquals("100.0%", NumberUtil.toString(1, NumberPattern.PERCENT_WITH_1POINT));
+        assertEquals("10000.0%", NumberUtil.toString(100, NumberPattern.PERCENT_WITH_1POINT));
+    }
+
+    @Test
+    public void toPERCENT_WITH_NOPOINT2(){
+        assertEquals("0.00%", NumberUtil.toString(0, NumberPattern.PERCENT_WITH_2POINT));
+        assertEquals("100.00%", NumberUtil.toString(1, NumberPattern.PERCENT_WITH_2POINT));
+        assertEquals("10000.00%", NumberUtil.toString(100, NumberPattern.PERCENT_WITH_2POINT));
     }
 
     /**
@@ -243,6 +262,27 @@ public class NumberUtilTest{
     public void testToString(){
         assertEquals("88.02", NumberUtil.toString(88.02, NumberPattern.TWO_DECIMAL_POINTS));
         assertEquals("88.03", NumberUtil.toString(88.028, NumberPattern.TWO_DECIMAL_POINTS));
+    }
+
+    @Test
+    public void testToString2(){
+        double value = -88.6;
+        LOGGER.debug("" + ConvertUtil.toBigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP));
+        LOGGER.debug(NumberUtil.toString(value, NumberPattern.TWO_DECIMAL_POINTS));
+
+        value = -88.067;
+        LOGGER.debug(NumberUtil.toString(value, NumberPattern.TWO_DECIMAL_POINTS));
+
+        LOGGER.info("******************************");
+
+        value = 88.6;
+        LOGGER.debug("" + ConvertUtil.toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
+        LOGGER.debug(NumberUtil.toString(value, NumberPattern.NO_SCALE));
+
+        value = -88.6;
+        LOGGER.debug("" + ConvertUtil.toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
+        LOGGER.debug(NumberUtil.toString(value, NumberPattern.NO_SCALE));
+
     }
 
     /**

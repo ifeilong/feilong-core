@@ -118,6 +118,16 @@ public final class NumberPattern{
     /**
      * 整数,不含小数 <code>{@value}</code>.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 88.6 会被格式化成 89
+     * -88.6 会被格式化成 -89
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @since 1.0.7
      */
     public static final String NO_SCALE             = "#";
@@ -125,22 +135,73 @@ public final class NumberPattern{
     /**
      * (2位小数点) <code>{@value}</code>.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 88.6 会被格式化成 88.60
+     * -88.067 会被格式化成 -88.07
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @since 1.2.2
      */
     public static final String TWO_DECIMAL_POINTS   = "#0.00";
 
-    /** 百分数的表达式(不带小数) <code>{@value}</code>. */
-    public static final String PERCENT_WITH_NOPOINT = "##%";
+    //********************************************************************************
 
-    /** 百分数的表达式(2位小数点) <code>{@value}</code>. */
-    public static final String PERCENT_WITH_2POINT  = "#0.00%";
+    /**
+     * 百分数的表达式(不带小数) <code>{@value}</code>.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 0 会被格式化成 0%
+     * 1 会被格式化成 100%
+     * 100 会被格式化成 10000%
+     * </pre>
+     * 
+     * </blockquote>
+     */
+    public static final String PERCENT_WITH_NOPOINT = "##%";
 
     /**
      * 百分数的表达式(1位小数点) <code>{@value}</code>.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 0 会被格式化成 0.0%
+     * 1 会被格式化成 100.0%
+     * 100 会被格式化成 10000.0%
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @since 1.0.7
      */
     public static final String PERCENT_WITH_1POINT  = "#0.0%";
+
+    /**
+     * 百分数的表达式(2位小数点) <code>{@value}</code>.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * 0 会被格式化成 0.00%
+     * 1 会被格式化成 100.00%
+     * 100 会被格式化成 10000.00%
+     * </pre>
+     * 
+     * </blockquote>
+     */
+    public static final String PERCENT_WITH_2POINT  = "#0.00%";
+
+    //********************************************************************************
 
     /** Don't let anyone instantiate this class. */
     private NumberPattern(){
