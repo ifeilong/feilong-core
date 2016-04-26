@@ -52,7 +52,7 @@ public final class RandomUtil{
      * @see org.apache.commons.lang.math.RandomUtils
      * @since 1.0.7
      */
-    public static final Random JVM_RANDOM = new Random();
+    private static final Random JVM_RANDOM = new Random();
 
     /** Don't let anyone instantiate this class. */
     private RandomUtil(){
@@ -62,7 +62,7 @@ public final class RandomUtil{
     }
 
     /**
-     * 创建0-最大值之间的随机数.
+     * 创建0-最大值<b>(maxValue)</b>之间的随机数.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -76,17 +76,17 @@ public final class RandomUtil{
      * 
      * </blockquote>
      * 
-     * @param number
+     * @param maxValue
      *            随机数最大值
      * @return 创建0-最大值之间的随机数
      */
-    public static long createRandom(Number number){
+    public static long createRandom(Number maxValue){
         double random = JVM_RANDOM.nextDouble();
-        return (long) Math.floor(random * number.longValue());
+        return (long) Math.floor(random * maxValue.longValue());
     }
 
     /**
-     * 创建最小值 {@code min} 和最大值{@code max}之间的随机数.
+     * 创建最小值 {@code minValue} 和最大值{@code maxValue}之间的随机数.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -125,7 +125,7 @@ public final class RandomUtil{
     // ********************************************************************
 
     /**
-     * 生成一个指定长度大小 {@code length} 的随机正整数.
+     * 生成一个指定长度 {@code length} 的随机正整数.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -156,7 +156,7 @@ public final class RandomUtil{
         return (long) (random * num);
     }
 
-    // ****************************************************************
+    // ******************************createRandomFromString**********************************
 
     /**
      * 随机抽取字符串char,拼接最小长度是 {@code minLength},最大长度是{@code maxLength}的字符串随机字符串.
@@ -166,7 +166,7 @@ public final class RandomUtil{
      * 
      * <pre>
      * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL}, 8, 20)
-     * 从{@link com.feilong.core.Alphabet#DECIMAL}随机抽取字符,组成最小长度是8,最大长度是20的字符串
+     * 从{@link com.feilong.core.Alphabet#DECIMAL}随机抽取字符,组成<b>最小长度是8</b>,<b>最大长度是20</b>的字符串
      * 
      * 生成的结果是可能是 142853574998970631
      * </pre>
@@ -197,7 +197,7 @@ public final class RandomUtil{
     }
 
     /**
-     * 随机抽取字符串char,拼接成指定长度的字符串.
+     * 随机抽取字符串 <code>char</code>,拼接成指定长度 <code>length</code>的字符串.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>

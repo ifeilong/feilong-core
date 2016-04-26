@@ -72,7 +72,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * ,{@link Collection#remove(Object) remove},{@link Collection#removeAll(Collection) removeAll},{@link Collection#retainAll(Collection)
  * retainAll},
  * {@link Collection#toArray() toArray}方法</li>
- * <li>没有get()方法.只能通过iterator()遍历元素</li>
+ * <li><span style="color:green">没有get()方法.只能通过iterator()遍历元素</span></li>
  * </ol>
  * </blockquote>
  * 
@@ -129,9 +129,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </ol>
  * </blockquote>
  * 
- * 
  * <hr>
- * 
  * 
  * <h3>关于 {@link java.util.Set }:</h3>
  * <blockquote>
