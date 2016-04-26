@@ -169,10 +169,12 @@ public final class NumberUtil{
     // [start]Divide
 
     /**
-     * 获得 除法结果one/two,四舍五入 取整,不需要再次toNoScale转换了.
+     * 获得 除法结果one/two,四舍五入取整,不需要再次 {@link #toNoScale(Serializable)} 转换了.
+     * 
      * <p>
-     * 当two 是空或者是0的时候,直接返回one<br>
+     * 当two 是空或者是0的时候,直接返回one;<br>
      * 否则返回除法结果one/two,四舍五入取整.
+     * </p>
      * 
      * @param one
      *            除数
@@ -187,13 +189,23 @@ public final class NumberUtil{
 
     /**
      * 获得进度,默认格式为 {@link NumberPattern#PERCENT_WITH_NOPOINT}.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * NumberUtil.getProgress(2, 3) 返回 67%
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param current
      *            当前量
      * @param total
      *            总量
      * @return 50% 56% 58%不带小数点格式
-     * @see NumberPattern
+     * @see NumberPattern#PERCENT_WITH_NOPOINT
+     * @see #getProgress(Number, Number, String)
      * @since 1.0.7
      */
     public static String getProgress(Number current,Number total){
