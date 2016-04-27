@@ -38,32 +38,39 @@ public class JsonFormatConfig{
     /**
      * The property name and json value processor map.
      * 
-     * <code><pre>
-     *   User user = new User("feilong1", 24);
-     *   user.setPassword("123456");
-     *   user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
-     *   Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
-     *   propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
-     *   propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
+     * <pre>
+    {@code
+     * User user = new User("feilong1", 24);
+     * user.setPassword("123456");
+     * user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
      * 
-     *   JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-     *   jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+     * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
+     * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
-     *   LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
-     * </pre></code>
+     * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
+     * LOGGER.info(JsonUtil.format(user, jsonFormatConfig));    
+    } 
+    
      * 将会输出
      * 
-     * <code><pre>
+     * <code>
      * {
      *   "password": "******",
      *   "age": 24,
      *   "name": "feilong1",
      *   "money": "99999999.00"
      * }
-     * </pre></code>
+     * </code>
      * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @see net.sf.json.processors.JsonValueProcessor
      * @see com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor
@@ -100,31 +107,40 @@ public class JsonFormatConfig{
     /**
      * 获得 the property name and json value processor map.
      * 
-     * <code><pre>
-     *   User user = new User("feilong1", 24);
-     *   user.setPassword("123456");
-     *   user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
-     *   Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
-     *   propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
-     *   propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
+     * <pre>
+    {@code
+     * User user = new User("feilong1", 24);
+     * user.setPassword("123456");
+     * user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
      * 
-     *   JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-     *   jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+     * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
+     * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
-     *   LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
-     * </pre></code>
+     * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
+     * LOGGER.info(JsonUtil.format(user, jsonFormatConfig));    
+    } 
+    
      * 将会输出
      * 
-     * <code><pre>
+     * <code>
      * {
      *   "password": "******",
      *   "age": 24,
      *   "name": "feilong1",
      *   "money": "99999999.00"
      * }
-     * </pre></code>
+     * </code>
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * 
      * @return the propertyNameAndJsonValueProcessorMap
      * @see net.sf.json.processors.JsonValueProcessor
@@ -138,31 +154,39 @@ public class JsonFormatConfig{
     /**
      * 设置 the property name and json value processor map.
      *
-     * <code><pre>
-     *   User user = new User("feilong1", 24);
-     *   user.setPassword("123456");
-     *   user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
-     *   Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
-     *   propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
-     *   propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
+     * <pre>
+    {@code
+     * User user = new User("feilong1", 24);
+     * user.setPassword("123456");
+     * user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
      * 
-     *   JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-     *   jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+     * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
+     * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
-     *   LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
-     * </pre></code>
+     * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * 将会输出:
+     * LOGGER.info(JsonUtil.format(user, jsonFormatConfig));    
+    } 
+    
+     * 将会输出
      * 
-     * <code><pre>
+     * <code>
      * {
      *   "password": "******",
      *   "age": 24,
      *   "name": "feilong1",
      *   "money": "99999999.00"
      * }
-     * </pre></code>
+     * </code>
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param propertyNameAndJsonValueProcessorMap
      *            the propertyNameAndJsonValueProcessorMap to set
@@ -192,5 +216,4 @@ public class JsonFormatConfig{
     public void setIncludes(String[] includes){
         this.includes = includes;
     }
-
 }
