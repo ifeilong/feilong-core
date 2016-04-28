@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net;
 
+import static org.junit.Assert.assertEquals;
+
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,8 +82,13 @@ public class URIUtilTest{
      */
     @Test
     public void decode2(){
-        LOGGER.info(URIUtil.decode("aaaaa%chu", CharsetType.UTF8));
+        LOGGER.info(URIUtil.decode("aaaaa%chu111", CharsetType.UTF8));
 
+    }
+
+    @Test
+    public void decode3(){
+        LOGGER.info(URIUtil.decode("%c", CharsetType.UTF8));
     }
 
     /**
@@ -162,6 +169,17 @@ public class URIUtilTest{
     }
 
     /**
+     * Test get query string.
+     */
+    @Test
+    public void testGetQueryString(){
+        assertEquals("a=1&a=2", URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2"));
+        assertEquals("a=1&a=2?a", URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2?a"));
+        assertEquals("", URIUtil.getQueryString("?"));
+        assertEquals("a", URIUtil.getQueryString("?a"));
+    }
+
+    /**
      * Test create4.
      */
     @Test
@@ -169,16 +187,5 @@ public class URIUtilTest{
         String uriString = "http://127.0.0.1/cmens?a=%";
         URI uri = URIUtil.create(uriString, CharsetType.UTF8);
         LOGGER.info(uri.toString());
-    }
-
-    /**
-     * Test get query string.
-     */
-    @Test
-    public void testGetQueryString(){
-        LOGGER.info(URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2"));
-        LOGGER.info(URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2?a"));
-        LOGGER.info(URIUtil.getQueryString("?"));
-        LOGGER.info(URIUtil.getQueryString("?a"));
     }
 }

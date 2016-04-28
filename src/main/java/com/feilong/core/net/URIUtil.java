@@ -204,13 +204,12 @@ public final class URIUtil{
      * 基于 uri字符串和charset创建 {@link URI}.
      * 
      * <p>
-     * 内部调用 {@link URI#create(String)}方法
+     * 内部调用{@link URI#create(String)}方法
      * </p>
      * 
      * <p>
-     * 如果uriString中不含?等参数,直接调用 {@link URI#create(String)}创建<br>
-     * 如果如果uriString中含?等参数,那么内部会调用 {@link ParamUtil#addParameterArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}
-     * 创建
+     * 如果uriString中不含?等参数,直接调用{@link URI#create(String)}创建<br>
+     * 如果uriString中含?等参数,那么内部会调用{@link ParamUtil#addParameterArrayValueMap(String,Map,String)}获得新的url,再调用{@link URI#create(String)}创建
      * </p>
      *
      * @param uriString
@@ -262,7 +261,7 @@ public final class URIUtil{
      * 
      * <p>
      * 如果uriString中不含?等参数,直接调用{@link URI#create(String)}创建<br>
-     * 如果uriString中含?等参数,那么内部会调用{@link ParamUtil#addParameterArrayValueMap(String, Map, String)}获得新的url,再调用 调用 {@link URI#create(String)}创建
+     * 如果uriString中含?等参数,那么内部会调用{@link ParamUtil#addParameterArrayValueMap(String, Map, String)}获得新的url,再调用 {@link URI#create(String)}创建
      * </p>
      *
      * @param uriString
@@ -321,13 +320,23 @@ public final class URIUtil{
     /**
      * 获得queryString.
      * 
-     * <p>
-     * 如果 uriString isNullOrEmpty,或者 uriString 不含有?,则返回 empty,否则截取第一个出现的?后面内容返回
-     * </p>
-     *
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+    URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2")
+    }
+    
+    返回: a=1&a=2
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param uriString
      *            the uri
-     * @return the query string
+     * @return 如果传入的参数 <code>uriString</code> isNullOrEmpty,或者 <code>uriString</code> 不含有?,则返回 {@link StringUtils#EMPTY},<br>
+     *         否则截取第一个出现的?后面内容返回
      * @since 1.4.0
      */
     public static String getQueryString(String uriString){
@@ -434,7 +443,7 @@ public final class URIUtil{
      * 解码,对参数值进行解码.
      * 
      * <p style="color:red">
-     * 不要用 {@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.
+     * 不要用{@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.
      * </p>
      * 
      * <p>
@@ -447,6 +456,14 @@ public final class URIUtil{
      * <em><strong>Note:</strong> 
      * 注:<a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>建议指出,UTF-8应该被使用. 不这样做可能会带来兼容性能.</em>
      * </p>
+     * 
+     * <h3>URLDecoder: Incomplete trailing escape (%) pattern:</h3>
+     * <blockquote>
+     * 
+     * URLDecoder class throws this exception when last char is "%" sign. <br>
+     * If "%" sign comes in middle of string then it won't throw exception.
+     * 
+     * </blockquote>
      *
      * @param value
      *            需要被解码的值
@@ -456,6 +473,9 @@ public final class URIUtil{
      *         if isNullOrEmpty(charsetType) ,原样返回 value<br>
      * @see URLEncoder#encode(java.lang.String, java.lang.String)
      * @see CharsetType
+     * 
+     * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
+     *      URLDecoder: Incomplete trailing escape (%) pattern</a>
      */
     public static String decode(String value,String charsetType){
         if (Validator.isNullOrEmpty(value)){
