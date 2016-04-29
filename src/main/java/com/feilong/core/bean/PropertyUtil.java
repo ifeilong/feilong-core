@@ -60,11 +60,15 @@ public final class PropertyUtil{
     }
 
     /**
-     * 将{@code fromObj}中的属性或者一组属性的值的复制到 {@code toObj}对象中.
+     * 将{@code fromObj}中的 一组属性的值 复制到 {@code toObj}对象中.
      * 
+     * <h3>代码流程:</h3>
+     * <blockquote>
      * <p>
-     * 注意:这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,这个在使用时要小心,特别是对于属性为自定义类的情况 .
+     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},否则循环调用
+     * {@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到 {@code toObj}对象中
      * </p>
+     * </blockquote>
      * 
      * <h3>注意点:</h3>
      * 
@@ -136,6 +140,10 @@ public final class PropertyUtil{
      * {@link <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a>}</li>
      * </ul>
      * </blockquote>
+     * 
+     * <p>
+     * 注意:这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,这个在使用时要小心,特别是对于属性为自定义类的情况 .
+     * </p>
      *
      * @param toObj
      *            目标对象

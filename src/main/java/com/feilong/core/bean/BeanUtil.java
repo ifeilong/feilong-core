@@ -309,7 +309,7 @@ public final class BeanUtil{
     // [start] copyProperties
 
     /**
-     * 将{@code fromObj}中的属性或者一组属性的值的复制到 {@code toObj}对象中.
+     * 将{@code fromObj}中的 一组属性的值 复制到 {@code toObj}对象中.
      * 
      * <h3>代码流程:</h3>
      * <blockquote>
