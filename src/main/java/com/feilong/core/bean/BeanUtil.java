@@ -462,7 +462,7 @@ public final class BeanUtil{
     // [start] getProperty
 
     /**
-     * 使用 {@link BeanUtils#getProperty(Object, String)} 类从对象中取得属性值.
+     * 使用 {@link BeanUtils#getProperty(Object, String)} 类从对象中取得属性值,不care值原本是什么类型,统统转成 {@link String}返回.
      *
      * @param bean
      *            bean
@@ -474,8 +474,6 @@ public final class BeanUtil{
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      */
     public static String getProperty(Object bean,String propertyName){
-        // Return the value of the specified property of the specified bean,
-        // no matter which property reference format is used, as a String.
         try{
             return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
@@ -492,7 +490,7 @@ public final class BeanUtil{
      * 调用{@link BeanUtils#cloneBean(Object)}.
      * 
      * <p>
-     * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中
+     * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中,即使这个bean没有实现 {@link Cloneable}接口 .
      * <p>
      * 
      * <p>
@@ -516,7 +514,6 @@ public final class BeanUtil{
     @SuppressWarnings("unchecked")
     public static <T> T cloneBean(T bean){
         try{
-            //Clone a bean based on the available property getters and setters, even if the bean class itself does not implement Cloneable.
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);

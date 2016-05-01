@@ -1080,13 +1080,13 @@ public final class DateUtil{
     /**
      * 两个时间相差的分数.
      * 
-     * @param spaceMillisecond
+     * @param spaceMilliseconds
      *            间隔毫秒
      * @return 相差的分数
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      */
-    public static int getIntervalMinute(long spaceMillisecond){
-        return (int) (spaceMillisecond / (TimeInterval.MILLISECOND_PER_MINUTE));
+    public static int getIntervalMinute(long spaceMilliseconds){
+        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_MINUTE));
     }
 
     /**
@@ -1109,12 +1109,12 @@ public final class DateUtil{
     /**
      * 两个时间相差的秒数.
      * 
-     * @param spaceMillisecond
+     * @param spaceMilliseconds
      *            间隔毫秒
      * @return 相差的秒数
      */
-    public static int getIntervalSecond(long spaceMillisecond){
-        return (int) (spaceMillisecond / 1000);
+    public static int getIntervalSecond(long spaceMilliseconds){
+        return (int) (spaceMilliseconds / 1000);
     }
 
     /**
@@ -1136,13 +1136,13 @@ public final class DateUtil{
     /**
      * 两个时间相差的小时数.
      * 
-     * @param spaceMillisecond
+     * @param spaceMilliseconds
      *            间隔毫秒
      * @return 相差的小时数
      * @see TimeInterval#MILLISECOND_PER_HOUR
      */
-    public static int getIntervalHour(long spaceMillisecond){
-        return (int) (spaceMillisecond / (TimeInterval.MILLISECOND_PER_HOUR));
+    public static int getIntervalHour(long spaceMilliseconds){
+        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_HOUR));
     }
 
     /**
@@ -1242,13 +1242,13 @@ public final class DateUtil{
     /**
      * 两个时间相差的天数.
      * 
-     * @param spaceTime
+     * @param spaceMilliseconds
      *            间隔毫秒
      * @return 相差的天数
      * @see TimeInterval#SECONDS_PER_DAY
      */
-    public static int getIntervalDay(long spaceTime){
-        return (int) (spaceTime / (TimeInterval.MILLISECOND_PER_DAY));
+    public static int getIntervalDay(long spaceMilliseconds){
+        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_DAY));
     }
 
     /**

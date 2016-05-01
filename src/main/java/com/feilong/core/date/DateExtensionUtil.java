@@ -21,6 +21,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.DatePattern;
 import com.feilong.core.Validator;
 
@@ -115,8 +117,23 @@ public final class DateExtensionUtil{
     /**
      * 获得中文星期.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+       LOGGER.debug(DateExtensionUtil.getChineseWeek(0));
+    }
+    
+    返回:   星期日
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * 
      * @param week
-     *            星期 日从0开始 1 2 --6
+     *            星期几,从0开始 ,依次1 2 --6
      * @return 如 星期一
      */
     public static String getChineseWeek(int week){
@@ -174,6 +191,27 @@ public final class DateExtensionUtil{
     /**
      * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表.
      * 
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+    getIntervalDayList("2011-03-5 23:31:25.456","2011-03-10 01:30:24.895", DatePattern.commonWithTime)
+    }
+    
+    返回:
+    
+         * 2011-03-05 00:00:00
+         * 2011-03-06 00:00:00
+         * 2011-03-07 00:00:00
+         * 2011-03-08 00:00:00
+         * 2011-03-09 00:00:00
+         * 2011-03-10 00:00:00
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -182,21 +220,6 @@ public final class DateExtensionUtil{
      * </ol>
      * </blockquote>
      * 
-     * <pre>
-     * Example 1:
-     * 
-     * getIntervalDayList("2011-03-5 23:31:25.456","2011-03-10 01:30:24.895", DatePattern.commonWithTime)
-     * 
-     * return
-     * 2011-03-05 00:00:00
-     * 2011-03-06 00:00:00
-     * 2011-03-07 00:00:00
-     * 2011-03-08 00:00:00
-     * 2011-03-09 00:00:00
-     * 2011-03-10 00:00:00
-     * 
-     * </pre>
-     * 
      * @param fromDateString
      *            开始时间
      * @param toDateString
@@ -204,12 +227,64 @@ public final class DateExtensionUtil{
      * @param datePattern
      *            时间模式 {@link DatePattern}
      * @return the interval day list
-     * @see DateUtil#getIntervalDay(Date, Date)
+     * @see #getIntervalDayList(Date, Date)
      */
     public static List<Date> getIntervalDayList(String fromDateString,String toDateString,String datePattern){
+        Validate.notEmpty(fromDateString, "fromDateString can't be null/empty!");
+        Validate.notEmpty(toDateString, "toDateString can't be null/empty!");
+        Validate.notEmpty(datePattern, "datePattern can't be null/empty!");
 
         Date fromDate = DateUtil.string2Date(fromDateString, datePattern);
         Date toDate = DateUtil.string2Date(toDateString, datePattern);
+
+        return getIntervalDayList(fromDate, toDate);
+    }
+
+    /**
+     * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表.
+     * 
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+    {@code
+        Date fromDate = DateUtil.string2Date("2011-03-5 23:31:25.456", DatePattern.COMMON_DATE_AND_TIME);
+        Date toDate = DateUtil.string2Date("2011-03-10 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME);
+        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(fromDate, toDate)));
+    }
+    
+    返回:
+    [
+            "2011-03-05 00:00:00",
+            "2011-03-06 00:00:00",
+            "2011-03-07 00:00:00",
+            "2011-03-08 00:00:00",
+            "2011-03-09 00:00:00",
+            "2011-03-10 00:00:00"
+        ]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>每天的日期会被重置清零 <code>00:00:00.000</code></li>
+     * <li>方法自动辨识 <code>fromDate</code>和 <code>toDate</code>哪个是开始时间</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param fromDate
+     *            the from date
+     * @param toDate
+     *            the to date
+     * @return the interval day list
+     * @see DateUtil#getIntervalDay(Date, Date)
+     * @since 1.5.4
+     */
+    public static List<Date> getIntervalDayList(Date fromDate,Date toDate){
 
         Date minDate = fromDate.before(toDate) ? fromDate : toDate;
         Date maxDate = fromDate.before(toDate) ? toDate : fromDate;
@@ -231,11 +306,80 @@ public final class DateExtensionUtil{
     }
 
     /**
-     * 获得一年中所有的周几集合.
+     * 获得一年中所有的 指定的 <code>week</code> 周几集合.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <p>
-     * 例如:getWeekDateStringList(6, "yyyy-MM-dd")
+     * 如果当前年是 2016 年,那么
      * </p>
+     * 
+     * <pre>
+    {@code
+      getWeekDateStringList(Calendar.THURSDAY, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)
+    }
+    
+    返回:
+    
+    [
+            "2016-01-07 00:00:00.000",
+            "2016-01-14 00:00:00.000",
+            "2016-01-21 00:00:00.000",
+            "2016-01-28 00:00:00.000",
+            "2016-02-04 00:00:00.000",
+            "2016-02-11 00:00:00.000",
+            "2016-02-18 00:00:00.000",
+            "2016-02-25 00:00:00.000",
+            "2016-03-03 00:00:00.000",
+            "2016-03-10 00:00:00.000",
+            "2016-03-17 00:00:00.000",
+            "2016-03-24 00:00:00.000",
+            "2016-03-31 00:00:00.000",
+            "2016-04-07 00:00:00.000",
+            "2016-04-14 00:00:00.000",
+            "2016-04-21 00:00:00.000",
+            "2016-04-28 00:00:00.000",
+            "2016-05-05 00:00:00.000",
+            "2016-05-12 00:00:00.000",
+            "2016-05-19 00:00:00.000",
+            "2016-05-26 00:00:00.000",
+            "2016-06-02 00:00:00.000",
+            "2016-06-09 00:00:00.000",
+            "2016-06-16 00:00:00.000",
+            "2016-06-23 00:00:00.000",
+            "2016-06-30 00:00:00.000",
+            "2016-07-07 00:00:00.000",
+            "2016-07-14 00:00:00.000",
+            "2016-07-21 00:00:00.000",
+            "2016-07-28 00:00:00.000",
+            "2016-08-04 00:00:00.000",
+            "2016-08-11 00:00:00.000",
+            "2016-08-18 00:00:00.000",
+            "2016-08-25 00:00:00.000",
+            "2016-09-01 00:00:00.000",
+            "2016-09-08 00:00:00.000",
+            "2016-09-15 00:00:00.000",
+            "2016-09-22 00:00:00.000",
+            "2016-09-29 00:00:00.000",
+            "2016-10-06 00:00:00.000",
+            "2016-10-13 00:00:00.000",
+            "2016-10-20 00:00:00.000",
+            "2016-10-27 00:00:00.000",
+            "2016-11-03 00:00:00.000",
+            "2016-11-10 00:00:00.000",
+            "2016-11-17 00:00:00.000",
+            "2016-11-24 00:00:00.000",
+            "2016-12-01 00:00:00.000",
+            "2016-12-08 00:00:00.000",
+            "2016-12-15 00:00:00.000",
+            "2016-12-22 00:00:00.000",
+            "2016-12-29 00:00:00.000"
+        ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * 
      * @param week
      *            周几<br>
@@ -363,7 +507,29 @@ public final class DateExtensionUtil{
     }
 
     /**
-     * 将时间(单位毫秒),并且转换成直观的表示方式.
+     * 将间隔毫秒数,转换成直观的表示方式.
+     * 
+     * <p>
+     * 常用于日志输出一段代码执行时长
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+     * Date beginDate = new Date();
+     * 
+     * // do some logic
+     * // balabala logic
+     * 
+     * LOGGER.info("use time:}{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre>
      * getIntervalForView(13516)
@@ -375,30 +541,34 @@ public final class DateExtensionUtil{
      * 自动增加 天,小时,分钟,秒,毫秒中文文字
      * </pre>
      * 
-     * @param spaceTime
-     *            单位毫秒
-     * @return 将时间(单位毫秒),并且转换成直观的表示方式<br>
-     *         如果 space_time 是0 直接返回0
+     * </blockquote>
+     * 
+     * @param spaceMilliseconds
+     *            总共相差的毫秒数
+     * @return 将间隔毫秒数,转换成直观的表示方式.<br>
+     *         如果 spaceMilliseconds 是0 直接返回0
      * @see DateUtil#getIntervalDay(long)
      * @see DateUtil#getIntervalHour(long)
      * @see DateUtil#getIntervalMinute(long)
      * @see DateUtil#getIntervalSecond(long)
      */
-    public static String getIntervalForView(long spaceTime){
-        if (0 == spaceTime){
+    public static String getIntervalForView(long spaceMilliseconds){
+        Validate.isTrue(spaceMilliseconds >= 0, "spaceMilliseconds can't <0");
+
+        if (0 == spaceMilliseconds){
             return "0";
         }
         // **************************************************************************************
         // 间隔天数
-        long spaceDay = DateUtil.getIntervalDay(spaceTime);
+        long spaceDay = DateUtil.getIntervalDay(spaceMilliseconds);
         // 间隔小时 减去间隔天数后,
-        long spaceHour = DateUtil.getIntervalHour(spaceTime) - spaceDay * 24;
+        long spaceHour = DateUtil.getIntervalHour(spaceMilliseconds) - spaceDay * 24;
         // 间隔分钟 减去间隔天数及间隔小时后,
-        long spaceMinute = DateUtil.getIntervalMinute(spaceTime) - (spaceDay * 24 + spaceHour) * 60;
+        long spaceMinute = DateUtil.getIntervalMinute(spaceMilliseconds) - (spaceDay * 24 + spaceHour) * 60;
         // 间隔秒 减去间隔天数及间隔小时,间隔分钟后,
-        long spaceSecond = DateUtil.getIntervalSecond(spaceTime) - ((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60;
-        // 间隔秒 减去间隔天数及间隔小时,间隔分钟后,
-        long spaceMillisecond = spaceTime - (((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60 + spaceSecond) * 1000;
+        long spaceSecond = DateUtil.getIntervalSecond(spaceMilliseconds) - ((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60;
+        // 间隔毫秒 减去间隔天数及间隔小时,间隔分钟,间隔秒后,
+        long spaceMillisecond = spaceMilliseconds - (((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60 + spaceSecond) * 1000;
         // **************************************************************************************
         StringBuilder sb = new StringBuilder();
         if (0 != spaceDay){
@@ -420,28 +590,47 @@ public final class DateExtensionUtil{
     }
 
     /**
-     * 获得两日期之间的间隔,并且转换成直观的表示方式.
+     * 将两日期之间的间隔,转换成直观的表示方式.
+     * 
+     * <p>
+     * 常用于日志输出一段代码执行时长
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre>
-     * Example 1:
+     * Date beginDate = new Date();
      * 
-     * getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24) 
-     * return 转换成2小时59分44秒
+     * // do some logic
+     * // balabala logic
      * 
+     * LOGGER.info("use time:}{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
      * 
-     * Example 2:
-     * 
-     * getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)
-     * return 1分钟1秒 
-     * 
-     * 自动增加 天,小时,分钟,秒,毫秒中文文字
      * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre>
+         * getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24) 
+         * return 2小时59分44秒
+         * 
+         * getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)
+         * return 1分钟1秒 
+         * 
+         * 自动增加 天,小时,分钟,秒,毫秒中文文字
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date1
      *            时间1
      * @param date2
      *            时间2
-     * @return 获得两日期之间的间隔,并且转换成直观的表示方式
+     * @return 将两日期之间的间隔,转换成直观的表示方式
      * @see #getIntervalForView(long)
      * @see DateUtil#getIntervalTime(Date, Date)
      */
