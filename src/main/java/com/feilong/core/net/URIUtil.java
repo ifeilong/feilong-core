@@ -471,11 +471,11 @@ public final class URIUtil{
      *            charsetType {@link CharsetType}
      * @return the newly {@link java.net.URLDecoder#decode(String, String)} 解码之后的值<br>
      *         if isNullOrEmpty(charsetType) ,原样返回 value<br>
-     * @see URLEncoder#encode(java.lang.String, java.lang.String)
-     * @see CharsetType
-     * 
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
      *      URLDecoder: Incomplete trailing escape (%) pattern</a>
+     * 
+     * @see java.net.URLDecoder#decode(String, String)
+     * @see "org.springframework.web.util.UriUtils#decode(String, String)"
      */
     public static String decode(String value,String charsetType){
         if (Validator.isNullOrEmpty(value)){
