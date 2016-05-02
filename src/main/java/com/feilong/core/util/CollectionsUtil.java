@@ -1448,6 +1448,10 @@ public final class CollectionsUtil{
     /**
      * 算术平均值.
      * 
+     * <p>
+     * 返回的 {@link LinkedHashMap},key是 <code>propertyNames</code>的元素,value是基于这个属性名称获得的值的平均值;key的顺序是依照 <code>propertyNames</code>元素的顺序
+     * </p>
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
@@ -1495,7 +1499,7 @@ public final class CollectionsUtil{
         Map<String, Number> sumMap = sum(objectCollection, propertyNames);
 
         int size = objectCollection.size();
-        Map<String, Number> map = new LinkedHashMap<String, Number>(size);//视需求  可以换成 HashMap 或者TreeMap
+        Map<String, Number> map = new LinkedHashMap<String, Number>(size);
 
         for (Map.Entry<String, Number> entry : sumMap.entrySet()){
             String key = entry.getKey();

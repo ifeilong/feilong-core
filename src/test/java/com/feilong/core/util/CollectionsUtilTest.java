@@ -323,7 +323,6 @@ public class CollectionsUtilTest{
         list.add(user2);
 
         Map<String, Number> map = CollectionsUtil.avg(list, 2, "id", "age");
-
         LOGGER.info(JsonUtil.format(map));
     }
 

@@ -77,10 +77,13 @@ public class ArrayUtilTest{
         Map<Integer, List<Integer>> group = ArrayUtil.group(array);
         LOGGER.debug(JsonUtil.format(group));
 
-        Collection<List<Integer>> values = group.values();
-        LOGGER.debug(JsonUtil.format(values));
+    }
 
-        //****************************************************************
+    /**
+     * TestArrayUtilTest.
+     */
+    @Test
+    public void testGroup1(){
         String[] array1 = { "关羽", "feilong", "关羽", "基友团", "关羽" };
 
         Map<String, List<String>> group1 = ArrayUtil.group(array1);

@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import org.apache.commons.lang3.Validate;
 
@@ -118,42 +117,48 @@ public final class ArrayUtil{
     /**
      * 将array 分组.
      * 
-     * <code>
+     * <p>
+     * 返回的 {@link LinkedHashMap} ,key是分组中的值,value是分组值的列表;key的顺序是依照 <code>array</code>元素不同值的顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre>
-     * 
-     * Example 1:
-     * 
-     * if 
-     * 
-     *  Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
-     * 
-     * will return 
-     *      {
-     *         "1":         [
-     *             1,
-     *             1,
-     *             1
-     *         ],
-     *         "2":         [
-     *             2,
-     *             2
-     *         ],
-     *         "3": [3],
-     *         "4": [4],
-     *         "5":         [
-     *             5,
-     *             5
-     *         ],
-     *         "6": [6],
-     *         "7": [7],
-     *         "8":         [
-     *             8,
-     *             8
-     *         ]
-     *     }
-     * }
+    {@code
+            Integer[] array = }{ 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
+    {@code
+            Map<Integer, List<Integer>> group = ArrayUtil.group(array);
+            LOGGER.debug(JsonUtil.format(group));
+    }
+    
+    返回:
+    {
+        "1":         [
+            1,
+            1,
+            1
+        ],
+        "2":         [
+            2,
+            2
+        ],
+        "3": [3],
+        "4": [4],
+        "5":         [
+            5,
+            5
+        ],
+        "6": [6],
+        "7": [7],
+        "8":         [
+            8,
+            8
+        ]
+    }
      * </pre>
-     * </code>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -166,8 +171,7 @@ public final class ArrayUtil{
         if (null == array){
             return Collections.emptyMap();
         }
-        //视需求  可以换成 HashMap 或者TreeMap
-        Map<T, List<T>> map = new WeakHashMap<T, List<T>>(array.length);
+        Map<T, List<T>> map = new LinkedHashMap<T, List<T>>(array.length);
         for (T t : array){
             List<T> valueList = map.get(t);
             if (null == valueList){
@@ -182,42 +186,52 @@ public final class ArrayUtil{
     /**
      * 将对象数组,按照指定属性的值进行分组.
      * 
+     * <p>
+     * 返回的map是 {@link LinkedHashMap},key是指定属性名称的值,value是指定名称值所属对象list,顺序是依照属性名称值顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre>
-     * 
-     * Example 1:
-     * 
-     * User[] users = {
-     *                  new User("张三", 18),
-     *                  new User("李四", 28),
-     *                  new User("王五", 38),
-     *                  new User("陈二", 18),
-     *                  new User("孔六", 28),
-     *                  new User("飞飞", 58) };
-     * 
-     * Map<Integer, List<User>> group = ArrayUtil.group(users, "age");
-     * LOGGER.debug(JsonUtil.format(group));
-     * 
-     * 结果:
-     * 
-     * {
-        "18":[{
+    {@code
+            User[] users = }{
+                             new User("张三", 18),
+                             new User("李四", 28),
+                             new User("王五", 38),
+                             new User("陈二", 18),
+                             new User("孔六", 28),
+                             new User("飞飞", 58) };
+    
+     {@code       Map<Integer, List<User>> group = ArrayUtil.group(users, "age");
+            LOGGER.debug(JsonUtil.format(group));
+    }
+    
+    返回:
+    {
+        "18":         [
+                        {
                 "age": 18,
                 "name": "张三"
             },
-             {
+                        {
+                
                 "age": 18,
                 "name": "陈二"
             }
         ],
-        "28":[{
+        "28":         [
+                        {
+                
                 "age": 28,
                 "name": "李四"
             },
-            {
+                        {
                 "age": 28,
                 "name": "孔六"
-            }],
-        "38": [{
+            }
+        ],
+        "38": [        {
             "age": 38,
             "name": "王五"
         }],
@@ -227,6 +241,8 @@ public final class ArrayUtil{
         }]
     }
      * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -249,7 +265,6 @@ public final class ArrayUtil{
 
         Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
 
-        //视需求  可以换成 HashMap 或者TreeMap
         Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectArray.length);
         for (O o : objectArray){
             T t = PropertyUtil.getProperty(o, propertyName);
