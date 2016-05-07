@@ -124,8 +124,8 @@ import com.feilong.core.Validator;
  * </table>
  * 
  * <p>
- * instanceof :子 -----> 父 <br>
- * isAssignableFrom :父 -----> 子
+ * instanceof :子 {@code ----->} 父 <br>
+ * isAssignableFrom :父 {@code ----->} 子
  * </p>
  * </blockquote>
  *
@@ -257,8 +257,8 @@ public final class ClassUtil{
      * </table>
      * 
      * <p>
-     * instanceof :子 -----> 父 <br>
-     * isAssignableFrom :父 -----> 子
+     * instanceof :子 {@code ----->} 父 <br>
+     * isAssignableFrom :父 {@code ----->} 子
      * </p>
      * </blockquote>
      * 
@@ -303,8 +303,8 @@ public final class ClassUtil{
      * Checks if is assignable from.
      * 
      * <p>
-     * instanceof :子 -----> 父 <br>
-     * isAssignableFrom :父 -----> 子
+     * instanceof :子 {@code ----->} 父 <br>
+     * isAssignableFrom :父 {@code ----->} 子
      * </p>
      *
      * @param klass

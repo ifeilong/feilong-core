@@ -193,7 +193,7 @@ public final class StringUtil{
      * 单词首字母大写.
      * 
      * <p>
-     * Example 1: jinxin ---> Jinxin
+     * Example 1: jinxin {@code --->} Jinxin
      * </p>
      * 
      * <pre class="code">
@@ -217,7 +217,7 @@ public final class StringUtil{
      * 单词首字母小写.
      * 
      * <p>
-     * Example 1: Jinxin ---> jinxin
+     * Example 1: Jinxin {@code --->} jinxin
      * </p>
      * 
      * <pre class="code">

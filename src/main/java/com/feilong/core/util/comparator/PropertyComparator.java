@@ -82,39 +82,40 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * The Constructor.
      * 
      * <h3>示例:</h3>
+     * 
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        List<User> list = new ArrayList<User>();
-        list.add(new User(12L, 18));
-        list.add(new User(2L, 36));
-        list.add(new User(5L, 22));
-        list.add(new User(1L, 8));
-        Collections.sort(list, new PropertyComparator<User>("id"));
-        LOGGER.debug(JsonUtil.format(list));
-    }
-    
-    返回:
-    [{
-            "id": 1,
-            "age": 8
-        },
-                {
-            "id": 2,
-            "age": 36
-        },
-                {
-            "id": 5,
-            "age": 22
-        },
-                {
-            "id": 12,
-            "age": 18
-    }]
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(12L, 18));
+     * list.add(new User(2L, 36));
+     * list.add(new User(5L, 22));
+     * list.add(new User(1L, 8));
+     * Collections.sort(list, new PropertyComparator<User>("id"));
+     * LOGGER.debug(JsonUtil.format(list));
      * </pre>
      * 
-     * </blockquote>
+     * 返回:
+     * 
+     * <pre class="code">
+        [{
+                "id": 1,
+                "age": 8
+            },
+                    {
+                "id": 2,
+                "age": 36
+            },
+                    {
+                "id": 5,
+                "age": 22
+            },
+                    {
+                "id": 12,
+                "age": 18
+        }]
+     * </pre>
+     * 
      *
      * @param propertyName
      *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
