@@ -43,7 +43,7 @@ public final class MessageFormatUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * MessageFormatUtil.format(&quot;name=张三{0}a{1}&quot;, &quot;jin&quot;, &quot;xin&quot;)
      * 返回: name=张三jinaxin
      * </pre>

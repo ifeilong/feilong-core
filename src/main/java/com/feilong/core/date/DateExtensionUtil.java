@@ -120,7 +120,7 @@ public final class DateExtensionUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
        LOGGER.debug(DateExtensionUtil.getChineseWeek(0));
     }
@@ -148,7 +148,7 @@ public final class DateExtensionUtil{
      * 一般用于统计当天数据,between ... and ...
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 比如今天是 2012-10-16 22:18:34
      * 
      * return {2012-10-16 00:00:00.000,2012-10-17 00:00:00.000}
@@ -171,7 +171,7 @@ public final class DateExtensionUtil{
      * 一般用于sql/hql统计昨天数据,between ... and ...
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 比如现在 :2012-10-16 22:46:42
      * 
      * return  {2012-10-15 00:00:00.000,2012-10-16 00:00:00.000}
@@ -195,7 +195,7 @@ public final class DateExtensionUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
     getIntervalDayList("2011-03-5 23:31:25.456","2011-03-10 01:30:24.895", DatePattern.commonWithTime)
     }
@@ -247,7 +247,7 @@ public final class DateExtensionUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         Date fromDate = DateUtil.string2Date("2011-03-5 23:31:25.456", DatePattern.COMMON_DATE_AND_TIME);
         Date toDate = DateUtil.string2Date("2011-03-10 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME);
@@ -315,7 +315,7 @@ public final class DateExtensionUtil{
      * 如果当前年是 2016 年,那么
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
       getWeekDateStringList(Calendar.THURSDAY, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)
     }
@@ -516,7 +516,7 @@ public final class DateExtensionUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * Date beginDate = new Date();
      * 
      * // do some logic
@@ -531,7 +531,7 @@ public final class DateExtensionUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * getIntervalForView(13516)
      * return 13秒516毫秒
      * 
@@ -599,7 +599,7 @@ public final class DateExtensionUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * Date beginDate = new Date();
      * 
      * // do some logic
@@ -614,7 +614,7 @@ public final class DateExtensionUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
          * getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24) 
          * return 2小时59分44秒
          * 

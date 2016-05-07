@@ -148,7 +148,7 @@ public final class URLUtil{
      * 网站地址拼接,请使用这个method
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * 示例: 
      * 

@@ -35,7 +35,7 @@ import com.feilong.core.util.RegexUtil;
  * 针对这种情况,你可以使用
  * </p>
  * 
- * <pre>
+ * <pre class="code">
  * {@code
  * Collections.sort(includedFileUrlList, new RegexGroupNumberComparator(".*ppt-coreContent(\\d*).png"));
  * }
@@ -73,7 +73,7 @@ public class RegexGroupNumberComparator implements Comparator<String>,Serializab
      * 针对这种情况, 你可以使用
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * Collections.sort(includedFileUrlList, new RegexGroupNumberComparator(".*ppt-coreContent(\\d*).png"));
      * }

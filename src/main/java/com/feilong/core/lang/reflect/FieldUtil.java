@@ -341,7 +341,7 @@ public final class FieldUtil{
     /**
      * 得到某类的静态公共字段值.
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * example1 :
      * 

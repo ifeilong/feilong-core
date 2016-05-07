@@ -37,13 +37,13 @@ public final class HtmlConstants{
      * 
      * 比如下面这段html:
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * <h2>10 Most Sought-after Skills in Web Development</h2>
      * }
      * </pre>
      * 
-     * <pre>
+     * <pre class="code">
      * 假设{@code<h2>}的宽度有限,只能容下"10 Most Sought-after Skills in Web", 
      * 由于Web Development之间用的是空格,"Development"就会被移到第二行. 
      * 
@@ -51,7 +51,7 @@ public final class HtmlConstants{
      * 为了到达这个目的,我们可以在Web Development之间用"&nbsp;"来代替空格,这个样它们就会被连在一起.
      * </pre>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * <h2>10 Most Sought-after Skills in Web&nbsp;Development</h2>
      * }

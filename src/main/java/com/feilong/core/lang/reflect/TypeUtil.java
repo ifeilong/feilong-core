@@ -85,7 +85,7 @@ public final class TypeUtil{
      *
      * 获得 某个类,对应的某个接口 上面的泛型参数的类型.
      * 
-     * <pre>
+     * <pre class="code">
      * Example 1:
      * {@code public class SkuItemRepositoryImpl extends BaseSolrRepositoryImpl<SkuItem, Long> implements SkuItemRepository}<br>
      * 这样的类,

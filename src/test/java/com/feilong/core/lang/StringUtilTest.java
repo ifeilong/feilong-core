@@ -393,7 +393,7 @@ public class StringUtilTest{
     /**
      * 查找子字符串在 字符串中出现的次数.
      * 
-     * <pre>
+     * <pre class="code">
      *  StringUtil.searchTimes("xin", "xin")
      *  return  1
      *  

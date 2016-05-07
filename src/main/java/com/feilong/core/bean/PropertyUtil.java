@@ -87,24 +87,26 @@ public final class PropertyUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 
-        User oldUser = new User();
-        oldUser.setId(5L);
-        oldUser.setMoney(new BigDecimal(500000));
-        oldUser.setDate(new Date());
-        String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
-        oldUser.setNickName(nickName);
-        
-        
-        User newUser = new User();
-    
-        String[] strs = { "date", "money", "nickName" };
-        PropertyUtil.copyProperties(newUser, oldUser, strs);
-        
-        LOGGER.info(JsonUtil.format(newUser));
+     * User oldUser = new User();
+     * oldUser.setId(5L);
+     * oldUser.setMoney(new BigDecimal(500000));
+     * oldUser.setDate(new Date());
+     * String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
+     * oldUser.setNickName(nickName);
+     * 
+     * User newUser = new User();
+     * 
+     * String[] strs = { "date", "money", "nickName" };
+     * PropertyUtil.copyProperties(newUser, oldUser, strs);
+     * 
+     * LOGGER.info(JsonUtil.format(newUser));
+     * </pre>
      * 
      * 返回 :
+     * 
+     * <pre class="code">
      * {
         "userAddresseList": [],
         "userAddresses": [],
@@ -123,7 +125,6 @@ public final class PropertyUtil{
         "userInfo": {"age": 0},
         "loves": []
     }
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -337,21 +338,21 @@ public final class PropertyUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
-    {@code
-            User user = new User();
-            user.setId(5L);
-            Date now = new Date();
-            user.setDate(now);
-    
-            user.getUserInfo().setAge(28);
-    
-            LOGGER.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
-    }
-    
-    返回:
-    {"age": 28}
+     * <pre class="code">
+     * User user = new User();
+     * user.setId(5L);
+     * Date now = new Date();
+     * user.setDate(now);
      * 
+     * user.getUserInfo().setAge(28);
+     * 
+     * LOGGER.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {"age": 28}
      * </pre>
      * 
      * </blockquote>

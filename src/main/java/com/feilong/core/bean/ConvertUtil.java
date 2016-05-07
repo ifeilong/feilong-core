@@ -363,20 +363,26 @@ public final class ConvertUtil{
     /**
      * 将集合 <code>collection</code>使用连接符号链接成字符串.
      * 
-     * <h3>使用示例:</h3>
+     * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
-     * <pre>
-     * List&lt;String&gt; list = new ArrayList&lt;String&gt;();
-     * list.add(&quot;feilong&quot;);
-     * list.add(&quot;&quot;);
-     * list.add(&quot;xinge&quot;);
+     * <pre class="code">
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("feilong");
+     * list.add("");
+     * list.add("xinge");
      * 
-     * ToStringConfig toStringConfig = new ToStringConfig(&quot;,&quot;);
+     * ToStringConfig toStringConfig = new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
      * 
-     * assertEquals(&quot;feilong,xinge&quot;, ConvertUtil.toString(toStringConfig, list));
+     * ConvertUtil.toString(toStringConfig, list);
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * feilong,xinge
      * </pre>
      * 
      * </blockquote>
@@ -407,8 +413,7 @@ public final class ConvertUtil{
      * 支持包装类型以及原始类型,比如 Integer [] arrays 以及 int []arrays
      * </p>
      * 
-     * <code>
-     * <pre>
+     * <pre class="code">
      * Example 1:
      * ArrayUtil.toString(new ToStringConfig(),"a","b")  return "a,b"
      * 
@@ -421,7 +426,6 @@ public final class ConvertUtil{
      * int[] ints = { 2, 1 };
      * ArrayUtil.toString(new ToStringConfig(),ints) return "2,1"
      * </pre>
-     * </code>
      *
      * @param toStringConfig
      *            the join string entity
@@ -673,7 +677,7 @@ public final class ConvertUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     ConvertUtil.toLongs("1,2,3")  result [1,2,3]
     ConvertUtil.toLongs(new String[] { "1", "2", "3" })  result [1,2,3]
      * </pre>

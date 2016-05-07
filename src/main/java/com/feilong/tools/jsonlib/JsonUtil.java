@@ -79,7 +79,7 @@ import net.sf.json.util.PropertySetStrategy;
  * 
  * <blockquote>
  * 
- * <pre>
+ * <pre class="code">
  * {@code
  * <groupId>net.sf.json-lib</groupId>
  * <artifactId>json-lib</artifactId>
@@ -685,7 +685,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String json = "[}{'name':'get'},{'name':'set'}]"; {@code 
             Person[] objArr = JsonUtil.toArray(json, Person.class);
@@ -728,7 +728,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String json = "[}{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]"; {@code 
             Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
@@ -797,7 +797,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String json = "[}{'name':'get'},{'name':'set'}]"; {@code 
             List<Person> list = JsonUtil.toList(json, Person.class);
@@ -840,7 +840,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String json = "[}{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]"; {@code 
             Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
@@ -909,7 +909,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
     
             String json = "}{'brandCode':'UA'}";{@code 
@@ -944,7 +944,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String json = "}{'data1':{'name':'get'},'data2':{'name':'set'}}";{@code 
             Map<String, Person> map = JsonUtil.toMap(json, Person.class);
@@ -987,7 +987,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String json = "}{'mybean':{'data':[{'name':'get'}]}}"; {@code 
             Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
@@ -1059,7 +1059,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String json = "}{'name':'get','dateAttr':'2009-11-12'}"; {@code 
             LOGGER.debug(JsonUtil.format(JsonUtil.toBean(json, Person.class)));
@@ -1095,7 +1095,7 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String json = "}{'data':[{'name':'get'},{'name':'set'}],'id':5}"; {@code 
             Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();

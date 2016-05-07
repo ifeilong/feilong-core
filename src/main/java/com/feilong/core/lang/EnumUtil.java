@@ -49,7 +49,7 @@ public final class EnumUtil{
     /**
      * 通过propertyName的 value(忽视大小写) 获得枚举(equalsIgnoreCase判断).
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
@@ -79,7 +79,7 @@ public final class EnumUtil{
     /**
      * 通过propertyName的 value 获得枚举(equals判断).
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
@@ -109,7 +109,7 @@ public final class EnumUtil{
     /**
      * 通过propertyName的 value 获得枚举.
      * 
-     * <pre>
+     * <pre class="code">
      * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
      * 
      * {@code

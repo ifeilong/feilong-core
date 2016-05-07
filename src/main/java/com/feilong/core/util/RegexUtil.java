@@ -80,7 +80,7 @@ public final class RegexUtil{
      * 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * Example 1:
      *      String regexPattern = "(.*?)@(.*?)";
@@ -144,7 +144,7 @@ public final class RegexUtil{
      * 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * Example 1:
      *      String regexPattern = "(.*?)@(.*?)";

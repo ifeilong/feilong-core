@@ -62,7 +62,7 @@ import com.feilong.core.lang.ClassLoaderUtil;
  * 
  * <blockquote>
  * 
- * <pre>
+ * <pre class="code">
 {@code
 我们经常在properties文件中设置属性的时候,如果某一个属性的值太长,那么查看就不太方便,但是又不能直接的换行,否则读取属性的值的时候其换行部分就被忽略了.
 其实我们可以通过增加一个\符号来达到换行的效果.如下:

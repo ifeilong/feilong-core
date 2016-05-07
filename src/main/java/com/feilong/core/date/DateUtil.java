@@ -266,7 +266,7 @@ public final class DateUtil{
      * 注意:会自动跨月,跨年操作
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 如果 现在是 2012-10-11 17:10:30.701(周四),
      * return 2012-10-07 00:00:00.000
      * 
@@ -298,7 +298,7 @@ public final class DateUtil{
      * 注意:会自动跨月,跨年操作
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 如果 现在是 2012-10-11 17:10:30.701 (周四),
      * return 2012-10-13 23:59:59.999
      * 
@@ -354,7 +354,7 @@ public final class DateUtil{
      * 以当前月的实际天数为准,也就是说,2月会自动区分闰年 是28天还是29天
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 如果 现在是 2012-10-11 17:10:30.701,
      * return 2012-10-31 23:59:59.999
      * </pre>
@@ -377,7 +377,7 @@ public final class DateUtil{
     /**
      * 获得指定日期<span style="color:red">所在年的第一天</span>,<code>00:00:00.000</code> 到毫秒.
      * 
-     * <pre>
+     * <pre class="code">
      * 如果 现在是 2012-10-11 17:10:30.701,
      * return 2012-01-01 00:00:00
      * </pre>
@@ -401,7 +401,7 @@ public final class DateUtil{
     /**
      * 获得指定日期所在年的第一个星期 <code>week</code>.
      * 
-     * <pre>
+     * <pre class="code">
      * 如果 现在是 2015-7-29 14:08
      * 
      * DateUtil.getFirstWeekOfSpecifyDateYear(NOW, Calendar.FRIDAY)
@@ -449,7 +449,7 @@ public final class DateUtil{
     /**
      * 获得当天<span style="color:red">所在年的最后一天</span> <code>23:59:59.999</code> 到毫秒<br>
      * 
-     * <pre>
+     * <pre class="code">
      * 如果 现在是 2012-10-11 17:10:30.701,
      * 
      * return 2012-12-31 23:59:59.999
@@ -476,7 +476,7 @@ public final class DateUtil{
     /**
      * 指定时间,加减年份(仅 {@link java.util.Calendar#YEAR}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
      * 
-     * <pre>
+     * <pre class="code">
      * addYear(2012-06-29 00:33:05,5)
      * return 20<span style="color:red">17</span>-06-29 00:33:05
      * 
@@ -500,7 +500,7 @@ public final class DateUtil{
     /**
      * 指定时间加减月份,(仅仅 {@link java.util.Calendar#MONTH}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
      * 
-     * <pre>
+     * <pre class="code">
      * addMonth(2012-10-16 23:12:43,5)
      * return 2013-03-16 23:12:43.932
      * 
@@ -525,7 +525,7 @@ public final class DateUtil{
     /**
      * 指定时间加减天数 (仅仅 {@link java.util.Calendar#DAY_OF_MONTH}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
      * 
-     * <pre>
+     * <pre class="code">
      * addDay(2012-06-29 00:42:26,5)
      * return 2012-07-04 00:42:26
      * 
@@ -556,7 +556,7 @@ public final class DateUtil{
     /**
      * 日期加减星期 (仅仅{@link Calendar#WEEK_OF_YEAR}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
      * 
-     * <pre>
+     * <pre class="code">
      * Example 1:
      * addWeek(2012-06-29 00:45:18,5)
      * return 2012-08-03 00:45:18
@@ -581,7 +581,7 @@ public final class DateUtil{
     /**
      * 日期加减小时 (仅仅{@link Calendar#HOUR_OF_DAY} 24小时制进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
      * 
-     * <pre>
+     * <pre class="code">
      * addHour(2012-06-29 00:46:24,5)
      * return 2012-06-29 05:46:24
      * 
@@ -610,7 +610,7 @@ public final class DateUtil{
     /**
      * 日期加减分钟 (仅仅{@link Calendar#MINUTE}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
      * 
-     * <pre>
+     * <pre class="code">
      * addMinute(2012-10-16 23:20:33,180)
      * return 2012-10-17 02:20:33.669
      * 
@@ -634,7 +634,7 @@ public final class DateUtil{
     /**
      * 日期加减秒 (仅仅{@link java.util.Calendar#SECOND}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
      * 
-     * <pre>
+     * <pre class="code">
      * addSecond(2012-10-16 23:22:02,180)
      * return 2012-10-16 23:25:02.206
      * 
@@ -662,7 +662,7 @@ public final class DateUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * addMillisecond(2015-09-07 13:35:02.769,5000)
      * return 2015-09-07 13:35:07.769
      * 
@@ -720,7 +720,7 @@ public final class DateUtil{
     /**
      * 获得任意日期中的年份 {@link java.util.Calendar#YEAR}部分.
      * 
-     * <pre>
+     * <pre class="code">
      * 2012-06-29
      * return 2012
      * </pre>
@@ -738,7 +738,7 @@ public final class DateUtil{
     /**
      * 获得任意日期中的月份{@link java.util.Calendar#MONTH}<span style="color:red">(已经+1处理)</span>.
      * 
-     * <pre>
+     * <pre class="code">
      * 2012-06-29
      * return 6
      * </pre>
@@ -762,7 +762,7 @@ public final class DateUtil{
      * 2014年的12-28 12-29 12-30 12-31 得出的WEEK_OF_YEAR 也是1
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * Example 1:
      * 2014-06-03
@@ -787,7 +787,7 @@ public final class DateUtil{
      * 
      * {@link Calendar#setMinimalDaysInFirstWeek(int)} 可以来修改第一周最小天数,但是如果设置为7的话
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * Example 1:
      * 2014-01-01
@@ -817,7 +817,7 @@ public final class DateUtil{
     /**
      * 获得任意时间中的天(在当年中).
      * 
-     * <pre>
+     * <pre class="code">
      * 2013-01-01
      * return 1
      * 
@@ -841,7 +841,7 @@ public final class DateUtil{
     /**
      * 获得任意时间中的天{@link Calendar#DAY_OF_MONTH}.
      * 
-     * <pre>
+     * <pre class="code">
      * 2012-06-29
      * return 29
      * </pre>
@@ -863,13 +863,13 @@ public final class DateUtil{
      * 从星期天开始,并且星期天是1.
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * SUNDAY、MONDAY、TUESDAY、WEDNESDAY、THURSDAY、FRIDAY 和 SATURDAY
      * 
      * 分别对应1-7
      * </pre>
      * 
-     * <pre>
+     * <pre class="code">
      * 2012-6-29  是星期5
      * return 6
      * </pre>
@@ -894,7 +894,7 @@ public final class DateUtil{
     /**
      * 获得时间中的小时(24小时制) {@link Calendar#HOUR_OF_DAY}.
      * 
-     * <pre>
+     * <pre class="code">
      * 2012-6-29 00:26:53
      * return 0
      * </pre>
@@ -915,7 +915,7 @@ public final class DateUtil{
      * max value: 8784.
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * 2013-01-01 00:00:05
      * return 0
@@ -945,7 +945,7 @@ public final class DateUtil{
     /**
      * 获得时间中的分钟 {@link java.util.Calendar#MINUTE}.
      * 
-     * <pre>
+     * <pre class="code">
      * 2012-6-29 00:26:53
      * return 26
      * </pre>
@@ -963,7 +963,7 @@ public final class DateUtil{
     /**
      * 获得时间中的秒{@link java.util.Calendar#SECOND}.
      * 
-     * <pre>
+     * <pre class="code">
      * 2012-6-29 00:26:53
      * return 53
      * </pre>
@@ -981,7 +981,7 @@ public final class DateUtil{
     /**
      * 获得时间在当天中的秒数,最大值86400 {@link TimeInterval#SECONDS_PER_DAY}.
      * 
-     * <pre>
+     * <pre class="code">
      * 2013-09-09 16:42:41
      * return 60161
      * </pre>
@@ -1002,7 +1002,7 @@ public final class DateUtil{
     /**
      * 获得时间在当前小时中的秒数,最大值3600 {@link TimeInterval#SECONDS_PER_HOUR}.
      * 
-     * <pre>
+     * <pre class="code">
      * 2013-09-15 01:15:23
      * return 923
      * </pre>
@@ -1023,7 +1023,7 @@ public final class DateUtil{
     /**
      * 返回自 1970 年 1 月 1 日 00:00:00 GMT 以来,此 Date 对象表示的毫秒数.
      * 
-     * <pre>
+     * <pre class="code">
      * 2012-6-29 00:28
      * return 1340900883288
      * </pre>
@@ -1043,7 +1043,7 @@ public final class DateUtil{
     /**
      * 将时间转换成特殊格式的字符串.
      * 
-     * <pre>
+     * <pre class="code">
      * date2String(Tue Oct 16 23:49:21 CST 2012,DatePattern.commonWithMillisecond)
      * return 2012-10-16 23:49:21.525
      * </pre>
@@ -1316,7 +1316,7 @@ public final class DateUtil{
     /**
      * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 <code>dateBefore</code> 是否早于 <code>dateAfter</code>.
      * 
-     * <pre>
+     * <pre class="code">
      * Example 1:
      * 
      * isBefore("2011-05-01","2011-04-01",DateUtil.pattern_onlyDate)
@@ -1341,7 +1341,7 @@ public final class DateUtil{
     /**
      * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 <code>dateBefore</code> 是否早于 <code>dateAfter</code>.
      * 
-     * <pre>
+     * <pre class="code">
      * Example 1:
      * 
      * isBefore("2011-05-01","2011-04-01",DateUtil.pattern_onlyDate)
@@ -1401,7 +1401,7 @@ public final class DateUtil{
     /**
      * 判断当前时间是否在两个时间之间.
      * 
-     * <pre>
+     * <pre class="code">
      * 比如现在是 :2012-10-16 23:00:02
      * 
      * isInTime(date, "2012-10-10 22:59:00", "2012-10-18 22:59:00", DatePattern.commonWithTime)
@@ -1430,7 +1430,7 @@ public final class DateUtil{
     /**
      * 判断当前时间是否在两个时间之间.
      * 
-     * <pre>
+     * <pre class="code">
      * 比如现在是 :2012-10-16 23:00:02
      * 
      * isInTime(date, "2012-10-10 22:59:00", "2012-10-18 22:59:00")

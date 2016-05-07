@@ -84,7 +84,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         List<User> list = new ArrayList<User>();
         list.add(new User(12L, 18));
@@ -152,7 +152,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * 我们现在有这样的数据, 其中属性 totalNo 是字符串类型的 
     {@code

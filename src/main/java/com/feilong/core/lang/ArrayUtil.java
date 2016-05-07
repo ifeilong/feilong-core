@@ -87,7 +87,7 @@ public final class ArrayUtil{
      * The value is automatically wrapped in an object if it has a primitive type.)
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * Example 1:
      * 
@@ -124,7 +124,7 @@ public final class ArrayUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             Integer[] array = }{ 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
     {@code
@@ -193,7 +193,7 @@ public final class ArrayUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             User[] users = }{
                              new User("张三", 18),

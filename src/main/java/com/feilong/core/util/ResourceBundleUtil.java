@@ -292,7 +292,7 @@ public final class ResourceBundleUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * 在 messages/feilong-core-test.properties 配置文件中, 有以下配置
      * {@code
@@ -358,7 +358,7 @@ public final class ResourceBundleUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * 在 messages/feilong-core-test.properties 配置文件中, 有以下配置
      * {@code
@@ -428,7 +428,7 @@ public final class ResourceBundleUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 比如 messages/feilong-core-test.properties 里面有
      * 
      * FileType.image=Image
@@ -616,7 +616,7 @@ public final class ResourceBundleUtil{
      * 参数 <code>fileName</code>是路径全地址
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * Example 1:
     {@code

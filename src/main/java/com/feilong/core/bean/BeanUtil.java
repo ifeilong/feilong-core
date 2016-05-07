@@ -58,7 +58,7 @@ import com.feilong.core.Validator;
  * Example 1:
  * </p>
  * 
- * <pre>
+ * <pre class="code">
  * 
  * MyObject myObject = new MyObject();
  * myObject.setId(3l);
@@ -83,7 +83,7 @@ import com.feilong.core.Validator;
  * 
  * <blockquote>
  * 
- * <pre>
+ * <pre class="code">
  * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); // 这里的9是String类型
  * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); // 这里的是int类型
  * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化,后者不能
@@ -101,7 +101,7 @@ import com.feilong.core.Validator;
  * 
  * <blockquote>
  * 
- * <pre>
+ * <pre class="code">
  * 两者功能相似,区别点在于:
  * copyProperty 不支持目标bean是索引类型,但是支持bean有索引类型的setter方法
  * copyProperty 不支持目标bean是Map类型,但是支持bean有Map类型的setter方法
@@ -118,13 +118,11 @@ import com.feilong.core.Validator;
  * 
  * <blockquote>
  * 
- * <pre>
- * {@code
+ * <pre class="code">
  * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
  * 
  * Company c = new Company();
  * c.setName("Simple");
- * }
  * </pre>
  * 
  * <ul>
@@ -133,11 +131,9 @@ import com.feilong.core.Validator;
  * <b>Simple类型(简单类型,如String Int)</b>
  * </p>
  * 
- * <pre>
-{@code
+ * <pre class="code">
  * 对于Simple类型,参数二直接是属性名即可
  * LOGGER.debug(BeanUtils.getProperty(c, "name"));
-}
  * </pre>
  * 
  * </li>
@@ -147,7 +143,7 @@ import com.feilong.core.Validator;
  * <b>Map类型</b>
  * </p>
  * 
- * <pre>
+ * <pre class="code">
 {@code
  * 对于Map类型,则需要以"属性名(key值)"的形式
  * 
@@ -166,15 +162,13 @@ import com.feilong.core.Validator;
  * <b>索引类型(Indexed),如 数组 arrayList</b>
  * </p>
  * 
- * <pre>
-{@code
+ * <pre class="code">
  * 对于Indexed,则为"属性名[索引值]",注意这里对于ArrayList和数组都可以用一样的方式进行操作.
  * 
  *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
  *     
  *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
  *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
-}
  * </pre>
  * 
  * </li>
@@ -184,11 +178,9 @@ import com.feilong.core.Validator;
  * <b>组合(nest)</b>
  * </p>
  * 
- * <pre>
- * {@code
+ * <pre class="code">
  * 当然这3种类也可以组合使用啦！
  * LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
-    }
  * </pre>
  * 
  * </li>
@@ -270,8 +262,7 @@ public final class BeanUtil{
      * 比如:
      * </p>
      * 
-     * <code>
-     * <pre>
+     * <pre class="code">
      * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class)
      * 
      * User user1 = new User();
@@ -281,9 +272,7 @@ public final class BeanUtil{
      * 
      * User user2 = new User();
      * BeanUtil.copyProperties(user2, user1, strs);
-     * 
      * </pre>
-     * </code>
      * 
      * <p>
      * 那么自行注册的 {@link DateLocaleConverter} 将会被当前类里面 static 方法块内部默认的 {@link org.apache.commons.beanutils.converters.DateConverter} 替换掉
@@ -335,9 +324,7 @@ public final class BeanUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
-     * {@code
-     * 
+     * <pre class="code">
      * 例如两个pojo: user和userForm 都含有字段"enterpriseName","linkMan","phone"
      * 
      * 通常写法:
@@ -349,8 +336,6 @@ public final class BeanUtil{
      * 
      * 此时,可以使用
      * BeanUtil.copyProperties(user,userForm,"enterpriseName","linkMan","phone");
-     * 
-     * }
      * </pre>
      * 
      * </blockquote>
@@ -531,21 +516,21 @@ public final class BeanUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
-    {@code
-            User user = new User();
-            user.setId(5L);
-            user.setDate(new Date());
-    
-            LOGGER.info(JsonUtil.format(BeanUtil.describe(user)));
-    }
-    
-    返回:
-    {
-        "id": "5",
-        "date": "Mon Apr 11 00:37:56 CST 2016"
-    }
+     * <pre class="code">
+     * User user = new User();
+     * user.setId(5L);
+     * user.setDate(new Date());
      * 
+     * LOGGER.info(JsonUtil.format(BeanUtil.describe(user)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {
+         "id": "5",
+         "date": "Mon Apr 11 00:37:56 CST 2016"
+     }
      * </pre>
      * 
      * </blockquote>
@@ -595,8 +580,7 @@ public final class BeanUtil{
      * <h3>Example 1:</h3>
      * <blockquote>
      * 
-     * <pre>
-     * {@code 
+     * <pre class="code">
      * User user = new User();
      * user.setId(5L);
      * 
@@ -605,14 +589,16 @@ public final class BeanUtil{
      * 
      * BeanUtil.populate(user, properties);
      * LOGGER.info(JsonUtil.format(user));
-     * }
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
-        "date": null,
-        "id": 8,
-        "loves": []
-        }
+     * "date": null,
+     * "id": 8,
+     * "loves": []
+     * }
      * </pre>
      * 
      * </blockquote>

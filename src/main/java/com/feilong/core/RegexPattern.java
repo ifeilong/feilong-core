@@ -229,7 +229,7 @@ import java.util.regex.Pattern;
  * </table>
  * </blockquote>
  * 
- * <pre>
+ * <pre class="code">
  * {@code
  * 1.字符类是可选自符的集合,用‘[’封装,比如[Jj],[0-9],[A-Za-z]或[^0-9].这里的-表示范围(Unicode落在两个边界之间的所有字符),^表示求补(指定字符外的所有字符 
  * 2.有许多预定以的字符类,像\d(数字)或\p&#123;Sc&#125;(Unicode货币符号),见表12-8和12-9. 
@@ -280,7 +280,7 @@ public final class RegexPattern{
     /**
      * 手机号码 <code>{@value}</code>.
      * 
-     * <pre>
+     * <pre class="code">
      * 移动:1340-1348、135、136、137、138、139、147、150、151、152、157、158、159、182、183、184、187、188　
      * 联通:130、131、132、145、155、156、185、186
      * 电信:133、1349、153、180、181、189、(1349卫通)
@@ -358,9 +358,9 @@ public final class RegexPattern{
     /**
      * 两位数小数 <code>{@value}</code>
      * 
-     * <pre>
+     * <p>
      * 可以是200 也可以是200.00 不可以是 200.0
-     * </pre>
+     * </p>
      */
     public static final String DECIMAL_TWO_DIGIT = "^[0-9]+(.[0-9]{2})?$";
 

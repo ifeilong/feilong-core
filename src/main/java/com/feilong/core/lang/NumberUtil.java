@@ -193,7 +193,7 @@ public final class NumberUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * NumberUtil.getProgress(2, 3) 返回 67%
      * </pre>
      * 
@@ -216,7 +216,7 @@ public final class NumberUtil{
     /**
      * 计算进度.
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      *   Example 1:  
      *      NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT)
@@ -471,7 +471,7 @@ public final class NumberUtil{
      * 
      * <h3>示例:</h3>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      *  
      *  //将数字转成百分数字符串,不带小数点

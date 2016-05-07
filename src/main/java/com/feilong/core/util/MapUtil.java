@@ -200,7 +200,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
              Map<String, Integer> map = new HashMap<String, Integer>();
      
@@ -260,7 +260,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
              Map<String, Integer> map = new HashMap<String, Integer>();
              map.put("a", 3007);
@@ -327,7 +327,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
              Map<String, Integer> map = new LinkedHashMap<String, Integer>();
      
@@ -404,7 +404,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
              Map<String, Integer> map = new HashMap<String, Integer>();
              map.put("a", 3007);
@@ -451,7 +451,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
              Map<Long, User> map = new LinkedHashMap<Long, User>();
              map.put(1L, new User(1L));
@@ -514,7 +514,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
              Map<Long, User> map = new LinkedHashMap<Long, User>();
              map.put(1L, new User(1L));
@@ -590,7 +590,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
              Map<String, Comparable> map = new HashMap<String, Comparable>();
      
@@ -632,7 +632,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
              Map<String, Comparable> map = new HashMap<String, Comparable>();
      
@@ -677,7 +677,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * {@code
             Map<String, Comparable> map = new HashMap<String, Comparable>();
@@ -719,7 +719,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
             Map<String, Comparable> map = new LinkedHashMap<String, Comparable>();
     
@@ -769,7 +769,7 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * 比如有以下的map
      * {@code

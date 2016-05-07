@@ -69,7 +69,7 @@ public final class ParamUtil{
      * <h3>示例1:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
     
@@ -95,7 +95,7 @@ public final class ParamUtil{
      * <h3>示例2:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
     
@@ -151,7 +151,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
     
@@ -199,7 +199,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String uri= "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page="
             String pageParamName = "label";
@@ -265,7 +265,7 @@ public final class ParamUtil{
      * <h3>示例1:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String beforeUrl = "www.baidu.com";
             Map<String, String> keyAndArrayMap = new LinkedHashMap<String, String>();
@@ -284,7 +284,7 @@ public final class ParamUtil{
      * <h3>示例2:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String beforeUrl = "www.baidu.com?a=b";
             Map<String, String> keyAndArrayMap = new LinkedHashMap<String, String>();
@@ -328,7 +328,7 @@ public final class ParamUtil{
      * <h3>示例1:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String beforeUrl = "www.baidu.com";
             Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
@@ -348,7 +348,7 @@ public final class ParamUtil{
      * <h3>示例2:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         String beforeUrl = "www.baidu.com?a=b";
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
@@ -654,7 +654,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         String queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
         LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
@@ -704,7 +704,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", CharsetType.UTF8)));
     }
@@ -790,7 +790,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 对于以下的map ,
      * {@code
      
@@ -852,7 +852,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
     Map<String, String> map = new HashMap<String, String>();
     map.put("service", "create_salesorder");
@@ -907,7 +907,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
     
@@ -949,7 +949,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             Map<String, String> map = new HashMap<String, String>();
             map.put("service", "create_salesorder");
@@ -1008,7 +1008,7 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
     

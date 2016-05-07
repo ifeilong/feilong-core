@@ -121,7 +121,7 @@ public final class NumberPattern{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 88.6 会被格式化成 89
      * -88.6 会被格式化成 -89
      * </pre>
@@ -138,7 +138,7 @@ public final class NumberPattern{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 88.6 会被格式化成 88.60
      * -88.067 会被格式化成 -88.07
      * </pre>
@@ -157,7 +157,7 @@ public final class NumberPattern{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 0 会被格式化成 0%
      * 1 会被格式化成 100%
      * 100 会被格式化成 10000%
@@ -173,7 +173,7 @@ public final class NumberPattern{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 0 会被格式化成 0.0%
      * 1 会被格式化成 100.0%
      * 100 会被格式化成 10000.0%
@@ -191,7 +191,7 @@ public final class NumberPattern{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 0 会被格式化成 0.00%
      * 1 会被格式化成 100.00%
      * 100 会被格式化成 10000.00%

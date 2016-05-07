@@ -67,7 +67,7 @@ public final class RandomUtil{
      * <h3>Example 1:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * RandomUtil.createRandom(8)
      * 创建一个小于8的随机数
      * 
@@ -91,7 +91,7 @@ public final class RandomUtil{
      * <h3>Example 1:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * RandomUtil.createRandom(10, 20)
      * 创建一个数值是10-20之间的随机数
      * 
@@ -130,7 +130,7 @@ public final class RandomUtil{
      * <h3>Example 1:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * RandomUtil.createRandomWithLength(2)
      * 生成的结果是可能是 89
      * </pre>
@@ -164,7 +164,7 @@ public final class RandomUtil{
      * <h3>Example 1:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL}, 8, 20)
      * 从{@link com.feilong.core.Alphabet#DECIMAL}随机抽取字符,组成<b>最小长度是8</b>,<b>最大长度是20</b>的字符串
      * 
@@ -202,7 +202,7 @@ public final class RandomUtil{
      * <h3>Example 1:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}, 5)
      * 
      * 从{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS} 随机抽取字符,组成长度是5 的字符串

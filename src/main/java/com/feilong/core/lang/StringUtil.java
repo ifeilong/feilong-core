@@ -148,7 +148,7 @@ public final class StringUtil{
     /**
      * 查找子字符串 (<code>target</code>)在 字符串( <code>source</code>)中出现的次数.
      * 
-     * <pre>
+     * <pre class="code">
      *  StringUtil.searchTimes("xin", "xin")
      *  return  1
      *  
@@ -173,7 +173,7 @@ public final class StringUtil{
     /**
      * 给一串字符串前后增加两个引号.
      * 
-     * <pre>
+     * <pre class="code">
      * String text = &quot;jinxin.feilong&quot;;
      * LOGGER.info(StringUtil.addDoubleQuotes(text));
      * 
@@ -196,7 +196,7 @@ public final class StringUtil{
      * Example 1: jinxin ---> Jinxin
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * StringUtils.capitalize(null)  = null
      * StringUtils.capitalize(&quot;&quot;)    = &quot;&quot;
      * StringUtils.capitalize(&quot;cat&quot;) = &quot;Cat&quot;
@@ -220,7 +220,7 @@ public final class StringUtil{
      * Example 1: Jinxin ---> jinxin
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * StringUtils.capitalize(null)  = null
      * StringUtils.capitalize(&quot;&quot;)    = &quot;&quot;
      * StringUtils.capitalize(&quot;Jinxin&quot;) = &quot;jinxin&quot;
@@ -265,7 +265,7 @@ public final class StringUtil{
     /**
      * 忽略 大小写 是否包含.
      * 
-     * <pre>
+     * <pre class="code">
      * StringUtil.containsIgnoreCase(null, &quot;&quot;)  return false
      * StringUtil.containsIgnoreCase(text, null) return false
      * StringUtil.containsIgnoreCase(text, &quot;&quot;) return true
@@ -316,7 +316,7 @@ public final class StringUtil{
      * 该替换从字符串的开头朝末尾执行,例如,用 "b" 替换字符串 "aaa" 中的 "aa" 将生成 "ba" 而不是 "ab".
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * 处理了replacement为空的情况
      * </pre>
      * 
@@ -340,7 +340,7 @@ public final class StringUtil{
     /**
      * The following example demonstrates this:
      * 
-     * <pre>
+     * <pre class="code">
      * Map valuesMap = HashMap();
      * valuesMap.put(&quot;animal&quot;, &quot;quick brown fox&quot;);
      * valuesMap.put(&quot;target&quot;, &quot;lazy dog&quot;);
@@ -352,7 +352,7 @@ public final class StringUtil{
      * 
      * yielding:
      * 
-     * <pre>
+     * <pre class="code">
      *      The quick brown fox jumped over the lazy dog.
      * </pre>
      *
@@ -392,7 +392,7 @@ public final class StringUtil{
     /**
      * 带有数字格式的数字字符串,与数字相加(一般生成流水号使用).
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * stringAddInt("002",2); return 004
      * stringAddInt("000002",1200); return 001202
@@ -433,7 +433,7 @@ public final class StringUtil{
      * A {@code null} String will return {@code null}. An empty ("") String will return "".
      * </p>
      *
-     * <pre>
+     * <pre class="code">
      * StringUtil.substring(null, *)   = null
      * StringUtil.substring("", *)     = ""
      * StringUtil.substring("abc", 0)  = "abc"
@@ -443,7 +443,7 @@ public final class StringUtil{
      * StringUtil.substring("abc", -4) = "abc"
      * </pre>
      * 
-     * <pre>
+     * <pre class="code">
      * substring("jinxin.feilong",6) 
      * return .feilong
      * </pre>
@@ -463,7 +463,7 @@ public final class StringUtil{
     /**
      * [截取]从开始位置(startIndex),截取固定长度(length)字符串.
      * 
-     * <pre>
+     * <pre class="code">
      * StringUtil.substring("jinxin.feilong", 6, 2)
      * 
      * renturn .f
@@ -490,7 +490,7 @@ public final class StringUtil{
      * 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * substring(&quot;jinxin.feilong&quot;,&quot;.&quot;)======&gt;&quot;.feilong&quot;
      * </pre>
      * 
@@ -601,7 +601,7 @@ public final class StringUtil{
      * 调用了 {@link String#substring(int)}
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * Example 1:
      * {@code
      * StringUtil.substringLast("jinxin.feilong", 5)---->ilong
@@ -626,7 +626,7 @@ public final class StringUtil{
      * 调用了 {@link java.lang.String#substring(int, int)}
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * Example 1:
      * {@code
      * StringUtil.substringWithoutLast("jinxin.feilong", 5)---->jinxin.fe
@@ -768,7 +768,7 @@ public final class StringUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
             String delimiters = ";, .";

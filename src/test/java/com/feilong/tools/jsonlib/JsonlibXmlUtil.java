@@ -43,7 +43,7 @@ public class JsonlibXmlUtil{
      * 需要xom jar
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * <groupId>xom</groupId> 
      * <artifactId>xom</artifactId>
@@ -84,7 +84,7 @@ public class JsonlibXmlUtil{
      * 需要xom jar
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * <groupId>xom</groupId> 
      * <artifactId>xom</artifactId>
@@ -126,7 +126,7 @@ public class JsonlibXmlUtil{
      * 需要xom jar
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * <groupId>xom</groupId> 
      * <artifactId>xom</artifactId>

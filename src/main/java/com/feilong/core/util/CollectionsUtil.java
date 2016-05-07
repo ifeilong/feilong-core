@@ -257,7 +257,7 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * {@code
      * 
@@ -329,7 +329,7 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * 
      * {@code
      * 
@@ -397,7 +397,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         List<String> list = new ArrayList<String>();
         list.add("xinge");
@@ -460,7 +460,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         List<String> list = new ArrayList<String>();
         list.add("feilong1");
@@ -520,7 +520,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      *     List<UserAddress> userAddresseList = new ArrayList<UserAddress>();
      *     UserAddress userAddress = new UserAddress();
@@ -561,7 +561,7 @@ public final class CollectionsUtil{
      * 以下情况:
      * </pre>
      * 
-     * <pre>
+     * <pre class="code">
      * <span style="color:green">//数组</span>
     {@code
         List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
@@ -575,7 +575,7 @@ public final class CollectionsUtil{
         ]
      * </pre>
      * 
-     * <pre>
+     * <pre class="code">
      * <span style="color:green">//级联对象</span>
     {@code
         List<Integer> fieldValueList2 = CollectionsUtil.getPropertyValueList(userList, "userInfo.age");
@@ -590,7 +590,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * <pre>
+     * <pre class="code">
      * <span style="color:green">//Map</span>
     {@code
         List<Integer> attrList = CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)");
@@ -605,7 +605,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * <pre>
+     * <pre class="code">
      * <span style="color:green">//集合</span>
     {@code
         List<String> addressList = CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]");
@@ -651,7 +651,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             List<User> testList = new ArrayList<User>();
             testList.add(new User(2L));
@@ -742,7 +742,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         List<User> testList = new ArrayList<User>();
         testList.add(new User("张飞", 23));
@@ -811,7 +811,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         List<User> objectCollection = new ArrayList<User>();
         objectCollection.add(new User("张飞", 23));
@@ -861,7 +861,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
         List<User> objectCollection = new ArrayList<User>();
         objectCollection.add(new User("张飞", 23));
@@ -917,7 +917,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             List<User> objectCollection = new ArrayList<User>();
             objectCollection.add(new User("张飞", 23));
@@ -981,7 +981,7 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * List&lt;User&gt; objectCollection = new ArrayList&lt;User&gt;();
      * objectCollection.add(new User(&quot;张飞&quot;, 23));
      * objectCollection.add(new User(&quot;关羽&quot;, 24));
@@ -1031,7 +1031,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             List<Long> list = new ArrayList<Long>();
             list.add(1L);
@@ -1139,7 +1139,7 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
      * List&lt;User&gt; objectCollection = new ArrayList&lt;User&gt;();
      * objectCollection.add(new User(&quot;张飞&quot;, 23));
      * objectCollection.add(new User(&quot;关羽&quot;, 24));
@@ -1216,7 +1216,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
       * 
       * {@code
         List<User> testList = new ArrayList<User>();
@@ -1301,7 +1301,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
       * 
       * {@code
       *     List<User> testList = new ArrayList<User>();
@@ -1455,7 +1455,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             List<User> list = new ArrayList<User>();
     
@@ -1516,7 +1516,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             List<User> list = new ArrayList<User>();
             list.add(new User(2L));
@@ -1559,7 +1559,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             List<User> list = new ArrayList<User>();
     
@@ -1627,7 +1627,7 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre>
+     * <pre class="code">
     {@code
             List<User> list = new ArrayList<User>();
             list.add(new User(2L));
@@ -1645,7 +1645,7 @@ public final class CollectionsUtil{
      * <h3>说明:</h3>
      * 当你需要写这样的代码的时候,
      * 
-     * <pre>
+     * <pre class="code">
     {@code
     protected Integer getCookieShoppingCartLinesQty(List<CookieShoppingCartLine> cartLineList)} {  
         {@code
@@ -1666,7 +1666,7 @@ public final class CollectionsUtil{
      * 
      * 你可以写成:
      * 
-     * <pre>
+     * <pre class="code">
      {@code 
      protected Integer getCookieShoppingCartLinesQty(List<CookieShoppingCartLine> cartLineList)}{ {@code 
          return Validator.isNullOrEmpty(cartLineList) ? 0 : CollectionsUtil.sum(cartLineList, "quantity").intValue();
