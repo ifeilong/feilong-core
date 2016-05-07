@@ -258,29 +258,26 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
+     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
+     * objectCollection.add(new User("张飞", 23));
+     * objectCollection.add(new User("关羽", 24));
+     * objectCollection.add(new User("刘备", 25));
      * 
-     * {@code
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("张飞");
+     * list.add("刘备");
      * 
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
-    
-        List<String> list = new ArrayList<String>();
-        list.add("张飞");
-        list.add("刘备");
-    
-        List<User> removeAll = CollectionsUtil.removeAll(objectCollection, "name", list);
-        LOGGER.info(JsonUtil.format(removeAll));
-     * }
+     * List{@code <User>} removeAll = CollectionsUtil.removeAll(objectCollection, "name", list);
+     * LOGGER.info(JsonUtil.format(removeAll));
+     * </pre>
      * 
      * 返回:
      * 
-    [    {
-        "age": 24,
-        "name": "关羽"
-    }]
-     * 
+     * <pre class="code">
+        [    {
+            "age": 24,
+            "name": "关羽"
+        }]
      * </pre>
      * 
      * </blockquote>
@@ -330,31 +327,25 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
+     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
+     * objectCollection.add(new User("张飞", 23));
+     * objectCollection.add(new User("关羽", 24));
+     * objectCollection.add(new User("刘备", 25));
      * 
-     * {@code
-     * 
-     *     List<User> objectCollection = new ArrayList<User>();
-     *     objectCollection.add(new User("张飞", 23));
-     *     objectCollection.add(new User("关羽", 24));
-     *     objectCollection.add(new User("刘备", 25));
-     * 
-     *     List<User> removeAll = CollectionsUtil.removeAll(objectCollection, "name", "刘备");
-     *     LOGGER.info(JsonUtil.format(removeAll));
-     * }
+     * List{@code <User>} removeAll = CollectionsUtil.removeAll(objectCollection, "name", "刘备");
+     * LOGGER.info(JsonUtil.format(removeAll));
+     * </pre>
      * 
      * 返回:
      * 
-     * [
-                {
+     * <pre class="code">
+     * [{
             "age": 23,
             "name": "张飞"
-        },
-                {
-            
+        },{
             "age": 24,
             "name": "关羽"
-        }
-    ]
+        }]
      * </pre>
      * 
      * </blockquote>
@@ -461,24 +452,23 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        List<String> list = new ArrayList<String>();
-        list.add("feilong1");
-        list.add("feilong2");
-        list.add("feilong2");
-        list.add("feilong3");
-    
-        LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
-    }
-    
-    返回:
-    
-    [
-        "feilong1",
-        "feilong2",
-        "feilong3"
-    ]
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("feilong1");
+     * list.add("feilong2");
+     * list.add("feilong2");
+     * list.add("feilong3");
      * 
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     [
+         "feilong1",
+         "feilong2",
+         "feilong3"
+     ]
      * </pre>
      * 
      * </blockquote>
