@@ -263,7 +263,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <p>
-     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 {@code new BigDecimal(double)},参见 JDK API<br>
+     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 <code>new BigDecimal(double)</code>,参见 JDK API<br>
      * </p>
      * 
      * <ul>

@@ -57,24 +57,24 @@ import com.feilong.core.lang.ClassLoaderUtil;
  * </ol>
  * </blockquote>
  * 
- * 
  * <h3>关于properties文件 value 换行:</h3>
  * 
  * <blockquote>
  * 
+ * <p>
+ * 我们经常在properties文件中设置属性的时候,如果某一个属性的值太长,那么查看就不太方便,但是又不能直接的换行,否则读取属性的值的时候其换行部分就被忽略了.
+ * 其实我们可以通过增加一个\符号来达到换行的效果.如下:
+ * </p>
+ * 
  * <pre class="code">
-{@code
-我们经常在properties文件中设置属性的时候,如果某一个属性的值太长,那么查看就不太方便,但是又不能直接的换行,否则读取属性的值的时候其换行部分就被忽略了.
-其实我们可以通过增加一个\符号来达到换行的效果.如下:
-
-name=Hello world \
-My Name is ferreousbox
-    
-那么我们在读取name属性的时其值就变成了:Hello world My Name is ferreousbox.也就解决了在properties文件中换行书写的问题,
-只需要在每一行的最后增加一个\符号,注意其下一行必须是接着的一行,即中间不能空行,否则也会被忽略的:-).
-
-}
+    name=Hello world \
+    My Name is ferreousbox
  * </pre>
+ * 
+ * <p>
+ * 那么我们在读取name属性的时其值就变成了:Hello world My Name is ferreousbox.也就解决了在properties文件中换行书写的问题,
+ * 只需要在每一行的最后增加一个\符号,注意其下一行必须是接着的一行,即中间不能空行,否则也会被忽略的:-).
+ * </p>
  * 
  * </blockquote>
  *
@@ -164,10 +164,10 @@ public final class PropertiesUtil{
      *            假设 class是 {@link PropertiesUtil},而配置文件在 src/main/resources下面,比如 messages/feilong-core-message_en_US.properties<br>
      *            <ul>
      *            <li>如果使用 {@link #getProperties(Class, String)} 需要这么写
-     *            {@code getProperties(PropertiesUtil.class,"/messages/feilong-core-message_en_US.properties")} <br>
+     *            <code>getProperties(PropertiesUtil.class,"/messages/feilong-core-message_en_US.properties")</code> <br>
      *            注意此处的propertiesPath 要写成 <b>"/messages/feilong-core-message_en_US.properties"</b>, 路径可以写成相对路径或者绝对路径</li>
      *            <li>如果使用 {@link #getPropertiesWithClassLoader(Class, String)} 需要这么写
-     *            {@code getPropertiesWithClassLoader(PropertiesUtil.class,"messages/feilong-core-message_en_US.properties")}<br>
+     *            <code>getPropertiesWithClassLoader(PropertiesUtil.class,"messages/feilong-core-message_en_US.properties")</code><br>
      *            注意此处的propertiesPath 要写成 <b>"messages/feilong-core-message_en_US.properties"</b>,ClassLoader JVM会使用BootstrapLoader去加载资源文件.
      *            <br>
      *            所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" 不需要"/")</li>
@@ -193,10 +193,10 @@ public final class PropertiesUtil{
      *            假设 class是 {@link PropertiesUtil},而配置文件在 src/main/resources下面,比如 messages/feilong-core-message_en_US.properties<br>
      *            <ul>
      *            <li>如果使用 {@link #getProperties(Class, String)} 需要这么写
-     *            {@code getProperties(PropertiesUtil.class,"/messages/feilong-core-message_en_US.properties")} <br>
+     *            <code>getProperties(PropertiesUtil.class,"/messages/feilong-core-message_en_US.properties")</code> <br>
      *            注意此处的propertiesPath 要写成 <b>"/messages/feilong-core-message_en_US.properties"</b>, 路径可以写成相对路径或者绝对路径</li>
      *            <li>如果使用 {@link #getPropertiesWithClassLoader(Class, String)} 需要这么写
-     *            {@code getPropertiesWithClassLoader(PropertiesUtil.class,"messages/feilong-core-message_en_US.properties")}<br>
+     *            <code>getPropertiesWithClassLoader(PropertiesUtil.class,"messages/feilong-core-message_en_US.properties")</code><br>
      *            注意此处的propertiesPath 要写成 <b>"messages/feilong-core-message_en_US.properties"</b>,ClassLoader JVM会使用BootstrapLoader去加载资源文件.
      *            <br>
      *            所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" 不需要"/")</li>

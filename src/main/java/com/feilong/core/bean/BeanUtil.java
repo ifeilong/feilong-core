@@ -113,14 +113,12 @@ import com.feilong.core.Validator;
  * 
  * </blockquote>
  * 
- * 
  * <h3><a name="propertyName">关于propertyName</a></h3>
  * 
  * <blockquote>
- * 
- * <pre class="code">
  * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
  * 
+ * <pre class="code">
  * Company c = new Company();
  * c.setName("Simple");
  * </pre>
@@ -142,18 +140,15 @@ import com.feilong.core.Validator;
  * <p>
  * <b>Map类型</b>
  * </p>
- * 
- * <pre class="code">
-{@code
  * 对于Map类型,则需要以"属性名(key值)"的形式
  * 
- *     LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
- *     Map am = new HashMap();
- *     am.put("1","234-222-1222211");
- *     am.put("2","021-086-1232323");
- *     BeanUtils.setProperty(c,"telephone",am);
+ * <pre class="code">
+ * LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
+ * Map am = new HashMap();
+ * am.put("1", "234-222-1222211");
+ * am.put("2", "021-086-1232323");
+ * BeanUtils.setProperty(c, "telephone", am);
  * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
-}
  * </pre>
  * 
  * </li>
@@ -162,13 +157,12 @@ import com.feilong.core.Validator;
  * <b>索引类型(Indexed),如 数组 arrayList</b>
  * </p>
  * 
- * <pre class="code">
  * 对于Indexed,则为"属性名[索引值]",注意这里对于ArrayList和数组都可以用一样的方式进行操作.
  * 
- *     LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
- *     
- *     BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
- *     LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
+ * <pre class="code">
+ * LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
+ * BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
+ * LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
  * </pre>
  * 
  * </li>
@@ -298,13 +292,13 @@ public final class BeanUtil{
     // [start] copyProperties
 
     /**
-     * 将{@code fromObj}中的 一组属性的值 复制到 {@code toObj}对象中.
+     * 将<code>fromObj</code>中的 一组属性的值 复制到 <code>toObj</code>对象中.
      * 
      * <h3>代码流程:</h3>
      * <blockquote>
      * <p>
      * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用 {@link BeanUtils#copyProperties(Object, Object)},否则循环调用
-     * {@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到 {@code toObj}对象中
+     * {@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到 <code>toObj</code>对象中
      * </p>
      * </blockquote>
      * 

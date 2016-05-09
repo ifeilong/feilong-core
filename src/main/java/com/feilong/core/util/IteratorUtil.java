@@ -40,7 +40,7 @@ public final class IteratorUtil{
     }
 
     /**
-     * 迭代iterator,判断元素的 字符串格式 是否和传入的值 {@code value} 的字符串格式相等.
+     * 迭代iterator,判断元素的 字符串格式 是否和传入的值 <code>value</code>的字符串格式相等.
      * 
      * <p style="color:red">
      * 注意,比较的是 {@link java.util.Objects#toString(Object, String)},常常用于自定义标签或者el function

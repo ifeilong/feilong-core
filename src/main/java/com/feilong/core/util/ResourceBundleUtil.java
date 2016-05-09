@@ -289,41 +289,38 @@ public final class ResourceBundleUtil{
 
     /**
      * 读取值,转成数组.
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre class="code">
-     * 
      * 在 messages/feilong-core-test.properties 配置文件中, 有以下配置
-     * {@code
-         config_test_array=5,8,7,6
-         }
+     * 
+     * <pre class="code">
+     * config_test_array=5,8,7,6
+     * </pre>
      * 
      * 此时调用
-     * {@code    
-         LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
-     }
      * 
-     * 返回:[
-     * "5",
-     * "8",
-     * "7",
-     * "6"
-     * ]
-     * 
-     * 调用
-     * {@code 
-      LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
-     }
+     * <pre class="code">
+     * LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
+     * </pre>
      * 
      * 返回:
-     * [
-     * 5,
-     * 8,
-     * 7,
-     * 6
-     * ]
      * 
+     * <pre class="code">
+     * ["5","8","7","6"]
+     * </pre>
+     * 
+     * 调用
+     * 
+     * <pre class="code">
+     * LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [5,8,7,6]
      * </pre>
      * 
      * </blockquote>
@@ -358,38 +355,34 @@ public final class ResourceBundleUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre class="code">
-     * 
      * 在 messages/feilong-core-test.properties 配置文件中, 有以下配置
-     * {@code
-         config_test_array=5,8,7,6
-         }
+     * 
+     * <pre class="code">
+     * config_test_array=5,8,7,6
+     * </pre>
      * 
      * 此时调用
-     * {@code    
-         LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
-     }
      * 
-     * 返回:[
-     * "5",
-     * "8",
-     * "7",
-     * "6"
-     * ]
-     * 
-     * 调用
-     * {@code 
-      LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
-     }
+     * <pre class="code">
+     * LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
+     * </pre>
      * 
      * 返回:
-     * [
-     * 5,
-     * 8,
-     * 7,
-     * 6
-     * ]
      * 
+     * <pre class="code">
+     * ["5","8","7","6"]
+     * </pre>
+     * 
+     * 调用
+     * 
+     * <pre class="code">
+     * LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [5,8,7,6]
      * </pre>
      * 
      * </blockquote>
@@ -428,30 +421,29 @@ public final class ResourceBundleUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre class="code">
      * 比如 messages/feilong-core-test.properties 里面有
      * 
+     * <pre class="code">
      * FileType.image=Image
      * FileType.video=Video
      * FileType.audio=Audio
+     * </pre>
      * 
-     * 配置,
+     * 配置,此时调用
      * 
-     * 此时调用 
-     * 
-     * {@code 
-     * Map<String, String> map = ResourceBundleUtil.readPrefixAsMap(BASE_NAME, "FileType", ".", Locale.CHINA);
+     * <pre class="code">
+     * Map{@code <String, String>} map = ResourceBundleUtil.readPrefixAsMap(BASE_NAME, "FileType", ".", Locale.CHINA);
      * LOGGER.info(JsonUtil.format(map));
-     * }
+     * </pre>
      * 
      * 返回 :
      * 
+     * <pre class="code">
      * {
      * "audio": "Audio",
      * "image": "Image",
      * "video": "Video"
      * }
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -616,17 +608,21 @@ public final class ResourceBundleUtil{
      * 参数 <code>fileName</code>是路径全地址
      * </p>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * 
-     * Example 1:
-    {@code
-    String mailReadFile = "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties";
-    
-        ResourceBundle resourceBundleRead = ResourceBundleUtil.getResourceBundleByFileName(mailReadFile);
-        String mailServerHost = resourceBundleRead.getString("incoming.pop.hostname");
-    }
+     * String mailReadFile = "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties";
+     * 
+     * ResourceBundle resourceBundleRead = ResourceBundleUtil.getResourceBundleByFileName(mailReadFile);
+     * 
+     * String mailServerHost = resourceBundleRead.getString("incoming.pop.hostname");
      * </pre>
-     *
+     * 
+     * </blockquote>
+     * 
      * @param fileName
      *            Example 1: "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"
      * @return the resource bundle,may be null

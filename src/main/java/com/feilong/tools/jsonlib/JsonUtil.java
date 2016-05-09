@@ -686,24 +686,23 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String json = "[}{'name':'get'},{'name':'set'}]"; {@code 
-            Person[] objArr = JsonUtil.toArray(json, Person.class);
-    
-            LOGGER.info(JsonUtil.format(objArr));
-    }
-    
-    返回:
-    [{
-            "dateAttr": null,
-            "name": "get"
-        },
-                {
-            "dateAttr": null,
-            "name": "set"
-        }
-    ]
+     * String json = "[{'name':'get'},{'name':'set'}]";
+     * Person[] objArr = JsonUtil.toArray(json, Person.class);
      * 
+     * LOGGER.info(JsonUtil.format(objArr));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+       [{
+               "dateAttr": null,
+               "name": "get"
+           },
+           {
+               "dateAttr": null,
+               "name": "set"
+        }]
      * 
      * </pre>
      * 
@@ -729,31 +728,30 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String json = "[}{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]"; {@code 
-            Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-            classMap.put("data", Person.class);
-    
-            MyBean[] objArr = JsonUtil.toArray(json, MyBean.class, classMap);
-            LOGGER.info(JsonUtil.format(objArr));
-    }
-    
-    返回:
-    [{
-                "id": 0,
-                "data": [            {
-                    "dateAttr": null,
-                    "name": "get"
-                }]
-            },
-                    {
-                "id": 0,
-                "data": [            {
-                    "dateAttr": null,
-                    "name": "set"
-                }]
-            }
-        ]
+     * String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
+     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <String, Class<?>>}();
+     * classMap.put("data", Person.class);
+     * 
+     * MyBean[] objArr = JsonUtil.toArray(json, MyBean.class, classMap);
+     * LOGGER.info(JsonUtil.format(objArr));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+       [{
+                   "id": 0,
+                   "data": [            {
+                       "dateAttr": null,
+                       "name": "get"
+                   }]
+         },{
+                   "id": 0,
+                   "data": [            {
+                       "dateAttr": null,
+                       "name": "set"
+                  }]
+       }]
      * </pre>
      * 
      * </blockquote>
@@ -798,25 +796,24 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String json = "[}{'name':'get'},{'name':'set'}]"; {@code 
-            List<Person> list = JsonUtil.toList(json, Person.class);
-    
-            LOGGER.info(JsonUtil.format(list));
-    }
-    
-    返回:
-    [{
-            "dateAttr": null,
-            "name": "get"
-        },
-                {
-            "dateAttr": null,
-            "name": "set"
-        }
-    ]
+     * String json = "[{'name':'get'},{'name':'set'}]";
+     * List{@code <Person>} list = JsonUtil.toList(json, Person.class);
      * 
+     * LOGGER.info(JsonUtil.format(list));
+     * </pre>
      * 
+     * 返回:
+     * 
+     * <pre class="code">
+       [{
+               "dateAttr": null,
+               "name": "get"
+           },
+                   {
+               "dateAttr": null,
+               "name": "set"
+           }
+       ]
      * </pre>
      * 
      * </blockquote>
@@ -841,34 +838,32 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String json = "[}{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]"; {@code 
-            Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-            classMap.put("data", Person.class);
-    
-            List<MyBean> list = JsonUtil.toList(json, MyBean.class, classMap);
-    
-            LOGGER.debug(JsonUtil.format(list));
-    }
-    
-    返回:
-    [
-                {
-            "id": 0,
-            "data": [            {
-                "dateAttr": null,
-                "name": "get"
-            }]
-        },
-                {
-            "id": 0,
-            "data": [            {
-                "dateAttr": null,
-                "name": "set"
-            }]
-        }
-    ]
+     * String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
+     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <String, Class<?>>}();
+     * classMap.put("data", Person.class);
      * 
+     * List{@code <MyBean>} list = JsonUtil.toList(json, MyBean.class, classMap);
+     * 
+     * LOGGER.debug(JsonUtil.format(list));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     [{
+             "id": 0,
+             "data": [            {
+                 "dateAttr": null,
+                 "name": "get"
+             }]
+         },
+                 {
+             "id": 0,
+             "data": [            {
+                 "dateAttr": null,
+                 "name": "set"
+             }]
+      }]
      * </pre>
      * 
      * </blockquote>
@@ -910,16 +905,15 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-    
-            String json = "}{'brandCode':'UA'}";{@code 
-            Map<String, Object> map = JsonUtil.toMap(json);
-            LOGGER.info(JsonUtil.format(map));
-    }
-    
-    返回:
-    key是 brandCode,value 是 UA 的map
+     * String json = "{'brandCode':'UA'}";
+     * Map{@code <String, Object>} map = JsonUtil.toMap(json);
+     * LOGGER.info(JsonUtil.format(map));
+     * </pre>
      * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * key是 brandCode,value 是 UA 的map
      * </pre>
      * 
      * </blockquote>
@@ -945,21 +939,20 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String json = "}{'data1':{'name':'get'},'data2':{'name':'set'}}";{@code 
-            Map<String, Person> map = JsonUtil.toMap(json, Person.class);
-            LOGGER.info(JsonUtil.format(map));
-    }
-    
-    返回:
-    {
-            "data1":         {
-                "name": "get"
-            },
-            "data2":         {
-                "name": "set"
-            }
-        }
+     * String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
+     * Map{@code <String, Person>} map = JsonUtil.toMap(json, Person.class);
+     * LOGGER.info(JsonUtil.format(map));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {"data1":{
+                 "name": "get"
+             },
+      "data2":{
+                 "name": "set"
+     }}
      * </pre>
      * 
      * </blockquote>
@@ -988,24 +981,24 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String json = "}{'mybean':{'data':[{'name':'get'}]}}"; {@code 
-            Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-            classMap.put("data", Person.class);
-    
-            Map<String, MyBean> map = JsonUtil.toMap(json, MyBean.class, classMap);
-            LOGGER.debug(JsonUtil.format(map));
-    }
-    
-    返回:
-    
-    {"mybean":     {
-            "id": 0,
-            "data": [        {
-                "name": "get"
-            }]
-        }}
+     * String json = "{'mybean':{'data':[{'name':'get'}]}}";
+     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <String, Class<?>>}();
+     * classMap.put("data", Person.class);
      * 
+     * Map{@code <String, MyBean>} map = JsonUtil.toMap(json, MyBean.class, classMap);
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+       {"mybean":{
+                 "id": 0,
+                 "data": [{
+                     "name": "get"
+                 }]
+       }}
      * </pre>
      * 
      * </blockquote>
@@ -1060,16 +1053,17 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String json = "}{'name':'get','dateAttr':'2009-11-12'}"; {@code 
-            LOGGER.debug(JsonUtil.format(JsonUtil.toBean(json, Person.class)));
-    }
-    
-    返回:
-    {
-        "dateAttr": "2009-11-12 00:00:00",
-        "name": "get"
-    }
+     * String json = "{'name':'get','dateAttr':'2009-11-12'}";
+     * LOGGER.debug(JsonUtil.format(JsonUtil.toBean(json, Person.class)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+      {
+          "dateAttr": "2009-11-12 00:00:00",
+          "name": "get"
+      }
      * </pre>
      * 
      * </blockquote>
@@ -1096,29 +1090,28 @@ public final class JsonUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String json = "}{'data':[{'name':'get'},{'name':'set'}],'id':5}"; {@code 
-            Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-            classMap.put("data", Person.class);
-    
-            MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
-            LOGGER.info(JsonUtil.format(myBean));
-    }
-    
-    返回:
-    {
-            "id": 5,
-            "data":         [
-                            {
-                    "dateAttr": null,
-                    "name": "get"
-                },
-                            {
-                    "dateAttr": null,
-                    "name": "set"
-                }
-            ]
-        }
+     * String json = "{'data':[{'name':'get'},{'name':'set'}],'id':5}";
+     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <String, Class<?>>}();
+     * classMap.put("data", Person.class);
+     * 
+     * MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
+     * LOGGER.info(JsonUtil.format(myBean));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {
+             "id": 5,
+             "data":[{
+                     "dateAttr": null,
+                     "name": "get"
+                 },{
+                     "dateAttr": null,
+                     "name": "set"
+                 }
+             ]
+      }
      * </pre>
      * 
      * </blockquote>

@@ -228,7 +228,7 @@ public final class DateUtil{
      * 获得当天的开始时间 也就是当天的 <code>00:00:00</code>.
      * 
      * <p>
-     * 例如:{@code 2011-01-01 10:20:20  return 2011-01-01 00:00:00}.
+     * 例如:<code>2011-01-01 10:20:20  return 2011-01-01 00:00:00</code>
      * </p>
      * 
      * @param date
@@ -245,7 +245,7 @@ public final class DateUtil{
      * 获得当天的结束时间 也就是当天的 <code>23:59:59.999</code>.
      * 
      * <p>
-     * 例如:{@code 2011-01-01 10:20:20  return 2011-01-01 23:59:59.999}.
+     * 例如: <code>2011-01-01 10:20:20  return 2011-01-01 23:59:59.999</code>
      * </p>
      *
      * @param date
@@ -1417,7 +1417,7 @@ public final class DateUtil{
      *            结束时间
      * @param datePattern
      *            开始时间和结束时间的格式{@link DatePattern}
-     * @return {@code 如果 date after beginTimeDate&&当前时间before endTimeDate,返回true}
+     * @return 如果 date after beginTimeDate&&当前时间before endTimeDate,返回true
      * @see #string2Date(String, String)
      * @see #isInTime(Date, Date, Date)
      */
@@ -1444,7 +1444,7 @@ public final class DateUtil{
      *            the begin time date
      * @param endTimeDate
      *            the end time date
-     * @return {@code 如果 date after beginTimeDate&&当前时间before endTimeDate,返回true}
+     * @return 如果 date after beginTimeDate&&当前时间before endTimeDate,返回true
      * @see Date#after(Date)
      * @see Date#before(Date)
      */
@@ -1480,7 +1480,7 @@ public final class DateUtil{
      * 判断某年是否为闰年 .
      * 
      * <p>
-     * 规则: {@code (year % 4 == 0 && year % 100 != 0) || year % 400 == 0}
+     * 规则: <code>(year % 4 == 0 && year % 100 != 0) || year % 400 == 0</code>
      * </p>
      * 
      * <h3>闰年原因:</h3>

@@ -92,13 +92,17 @@ public final class ConstructorUtil{
      * 示例:
      * 
      * <pre class="code">
-     * {@code
-     * User user = ConstructorUtil.newInstance("com.feilong.test.User") 将返回user 对象
-     * 
-     * 你还可以 
-     * User user1 = ConstructorUtil.newInstance("com.feilong.test.User", 100L); 返回 id 是100的构造函数
-     * }
+     * User user = ConstructorUtil.newInstance("com.feilong.test.User")
      * </pre>
+     * 
+     * 将返回user对象,你还可以:
+     * 
+     * <pre class="code">
+     * 
+     * User user1 = ConstructorUtil.newInstance("com.feilong.test.User", 100L);
+     * </pre>
+     * 
+     * 返回 id 是100的user对象构造函数
      *
      * @param <T>
      *            t

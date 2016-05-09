@@ -217,7 +217,6 @@ public final class NumberUtil{
      * 计算进度.
      * 
      * <pre class="code">
-     * {@code
      *   Example 1:  
      *      NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT)
      *      return 100%
@@ -225,7 +224,6 @@ public final class NumberUtil{
      *   Example 2:
      *      NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)
      *      return 66.7%
-     * }
      * </pre>
      *
      * @param current
@@ -472,14 +470,11 @@ public final class NumberUtil{
      * <h3>示例:</h3>
      * 
      * <pre class="code">
-     * {@code
-     *  
      *  //将数字转成百分数字符串,不带小数点
      *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT) result 24%
      *  
      *  //将数字转成百分数字符串,带两位小数点
      *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT) result 24.00%
-     *  }
      * </pre>
      * 
      * @param value

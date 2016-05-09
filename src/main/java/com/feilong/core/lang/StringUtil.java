@@ -128,11 +128,11 @@ public final class StringUtil{
      * Constructs a new <code>String</code> by decoding the specified array of bytes using the given charset.
      *
      * @param bytes
-     *            The bytes to be decoded into characters, may be {@code null}
+     *            The bytes to be decoded into characters, may be <code>null</code>
      * @param charsetType
      *            {@link CharsetType}
      * @return A new <code>String</code> decoded from the specified array of bytes using the given charset,
-     *         or {@code null} if the input byte array was {@code null}.
+     *         or <code>null</code> if the input byte array was <code>null</code>.
      * @see String#String(byte[], String)
      * @see org.apache.commons.lang3.StringUtils#toString(byte[], String)
      * @see org.apache.commons.lang3.StringUtils#toEncodedString(byte[], Charset)
@@ -280,7 +280,7 @@ public final class StringUtil{
      * @param searchStr
      *            the CharSequence to find, may be null
      * @return true if the CharSequence contains the search CharSequence irrespective of
-     *         case or false if not or {@code null} string input
+     *         case or false if not or <code>null</code> string input
      */
     public static boolean containsIgnoreCase(final CharSequence str,final CharSequence searchStr){
         return StringUtils.containsIgnoreCase(str, searchStr);
@@ -393,10 +393,8 @@ public final class StringUtil{
      * 带有数字格式的数字字符串,与数字相加(一般生成流水号使用).
      * 
      * <pre class="code">
-     * {@code
      * stringAddInt("002",2); return 004
      * stringAddInt("000002",1200); return 001202
-     * }
      * </pre>
      * 
      * @param str
@@ -430,7 +428,7 @@ public final class StringUtil{
      * </p>
      *
      * <p>
-     * A {@code null} String will return {@code null}. An empty ("") String will return "".
+     * A <code>null</code> String will return <code>null</code>. An empty ("") String will return "".
      * </p>
      *
      * <pre class="code">
@@ -452,7 +450,7 @@ public final class StringUtil{
      *            内容 the String to get the substring from, may be null
      * @param beginIndex
      *            从指定索引处 the position to start from,negative means count back from the end of the String by this many characters
-     * @return substring from start position, {@code null} if null String input
+     * @return substring from start position, <code>null</code> if null String input
      * @see org.apache.commons.lang3.StringUtils#substring(String, int)
      * @see #substringLast(String, int)
      */
@@ -601,12 +599,15 @@ public final class StringUtil{
      * 调用了 {@link String#substring(int)}
      * </p>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
-     * Example 1:
-     * {@code
-     * StringUtil.substringLast("jinxin.feilong", 5)---->ilong
-     * }
+     * StringUtil.substringLast("jinxin.feilong", 5) //ilong
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param text
      *            文字
@@ -626,12 +627,15 @@ public final class StringUtil{
      * 调用了 {@link java.lang.String#substring(int, int)}
      * </p>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
-     * Example 1:
-     * {@code
-     * StringUtil.substringWithoutLast("jinxin.feilong", 5)---->jinxin.fe
-     * }
+     * StringUtil.substringWithoutLast("jinxin.feilong", 5) //jinxin.fe
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param text
      *            文字
@@ -769,24 +773,23 @@ public final class StringUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
-            String delimiters = ";, .";
-            String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
-            LOGGER.info(JsonUtil.format(tokenizeToStringArray));
-    }
-    
-    返回:
-    
-    [
-            "jin",
-            "xin",
-            "feilong",
-            "jinxin",
-            "venusdrogon",
-            "jim"
-        ]
+     * String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
+     * String delimiters = ";, .";
+     * String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
+     * LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+     * </pre>
      * 
+     * 返回:
+     * 
+     * <pre class="code">
+     [
+             "jin",
+             "xin",
+             "feilong",
+             "jinxin",
+             "venusdrogon",
+             "jim"
+         ]
      * </pre>
      * 
      * </blockquote>
@@ -799,7 +802,7 @@ public final class StringUtil{
      * <p>
      * The given delimiters string is supposed to consist of any number of delimiter characters. Each of those characters can be used to
      * separate tokens. A delimiter is always a single character; for multi-character delimiters, consider using
-     * {@code delimitedListToStringArray}
+     * <code>delimitedListToStringArray</code>
      * 
      * @param str
      *            the String to tokenize
@@ -830,7 +833,7 @@ public final class StringUtil{
      * The given delimiters string is supposed to consist of any number of delimiter characters. <br>
      * Each of those characters can be used to separate tokens. <br>
      * A delimiter is always a single character; <br>
-     * for multi-character delimiters, consider using {@code delimitedListToStringArray}
+     * for multi-character delimiters, consider using <code>delimitedListToStringArray</code>
      * 
      * @param str
      *            the String to tokenize
@@ -844,8 +847,7 @@ public final class StringUtil{
      *            omit empty tokens from the result array
      *            (only applies to tokens that are empty after trimming; StringTokenizer
      *            will not consider subsequent delimiters as token in the first place).
-     * @return an array of the tokens ({@code null} if the input String
-     *         was {@code null})
+     * @return an array of the tokens (<code>null</code> if the input String was <code>null</code>)
      * @see java.util.StringTokenizer
      * @see String#trim()
      * @see "org.springframework.util.StringUtils#delimitedListToStringArray"

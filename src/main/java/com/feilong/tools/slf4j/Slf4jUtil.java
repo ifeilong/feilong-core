@@ -50,16 +50,19 @@ public final class Slf4jUtil{
      * 
      * <br>
      * 因此,你可以在代码中出现这样的写法:
+     * 比如
      * 
      * <pre class="code">
-     * 比如
      * throw new IllegalArgumentException(Slf4jUtil.formatMessage(
      *  "callbackUrl:[{}] ,length:[{}] can't {@code >}{}",
      *  callbackUrl,
      *  callbackUrlLength,
      *  callbackUrlMaxLength)
+     * </pre>
      * 
      * 又或者
+     * 
+     * <pre class="code">
      * return Slf4jUtil.formatMessage(" {} [{}]", encode, encode.length());
      * </pre>
      * 

@@ -38,7 +38,7 @@ public class UncheckedIOException extends RuntimeException{
      * @param message
      *            the detail message, can be null
      * @param cause
-     *            the {@code IOException}
+     *            the <code>IOException</code>
      */
     public UncheckedIOException(String message, IOException cause){
         super(message, cause);
@@ -48,7 +48,7 @@ public class UncheckedIOException extends RuntimeException{
      * Constructs an instance of this class.
      *
      * @param cause
-     *            the {@code IOException}
+     *            the <code>IOException</code>
      */
     public UncheckedIOException(IOException cause){
         super(cause);

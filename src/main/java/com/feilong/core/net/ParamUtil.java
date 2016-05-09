@@ -70,20 +70,20 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
-    
-            keyAndArrayMap.put("province", new String[] }{ "江苏省" });
-            keyAndArrayMap.put("city", new String[] { "南通市" });
-    {@code
-            LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
-    }
-    
-    返回:
-    {
-            "province": "江苏省",
-            "city": "南通市"
-        }
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * 
+     * keyAndArrayMap.put("province", new String[] { "江苏省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": "江苏省",
+     * "city": "南通市"
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -96,20 +96,20 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
-    
-        keyAndArrayMap.put("province", new String[] }{ "浙江省", "江苏省" });
-        keyAndArrayMap.put("city", new String[] { "南通市" });
-    {@code
-        LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
-    }
-    
-    返回:
-    {
-            "province": "浙江省",
-            "city": "南通市"
-        }
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * 
+     * keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": "浙江省",
+     * "city": "南通市"
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -152,21 +152,21 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
-    
-            singleValueMap.put("province", "江苏省");
-            singleValueMap.put("city", "南通市");
-    
-            LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
-    }
-    
-    返回:
-    {
-            "province": ["江苏省"],
-            "city": ["南通市"]
-        }
+     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <String, String>}();
      * 
+     * singleValueMap.put("province", "江苏省");
+     * singleValueMap.put("city", "南通市");
+     * 
+     * LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": ["江苏省"],
+     * "city": ["南通市"]
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -200,16 +200,16 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String uri= "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page="
-            String pageParamName = "label";
-            String prePageNo = "2-5-8-12";
-            LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
-    }
-    
-    返回:
-    
-    http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=&label=2-5-8-12
+     * String uri = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
+     * String pageParamName = "label";
+     * String prePageNo = "2-5-8-12";
+     * LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=&label=2-5-8-12
      * </pre>
      * 
      * </blockquote>
@@ -266,18 +266,19 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String beforeUrl = "www.baidu.com";
-            Map<String, String> keyAndArrayMap = new LinkedHashMap<String, String>();
-    
-            keyAndArrayMap.put("province", "江苏省");
-            keyAndArrayMap.put("city", "南通市");
-    
-            LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
-    }
-    
-    返回:
-    www.baidu.com?province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
+     * String beforeUrl = "www.baidu.com";
+     * Map{@code <String, String>} keyAndArrayMap = new LinkedHashMap{@code <String, String>}();
+     * 
+     * keyAndArrayMap.put("province", "江苏省");
+     * keyAndArrayMap.put("city", "南通市");
+     * 
+     * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * www.baidu.com?province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
      * </pre>
      * 
      * </blockquote>
@@ -285,18 +286,19 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String beforeUrl = "www.baidu.com?a=b";
-            Map<String, String> keyAndArrayMap = new LinkedHashMap<String, String>();
-    
-            keyAndArrayMap.put("province", "江苏省");
-            keyAndArrayMap.put("city", "南通市");
-    
-            LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
-    }
-    
-    返回:
-    www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
+     * String beforeUrl = "www.baidu.com?a=b";
+     * Map{@code <String, String>} keyAndArrayMap = new LinkedHashMap{@code <String, String>}();
+     * 
+     * keyAndArrayMap.put("province", "江苏省");
+     * keyAndArrayMap.put("city", "南通市");
+     * 
+     * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
      * </pre>
      * 
      * </blockquote>
@@ -329,40 +331,39 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            String beforeUrl = "www.baidu.com";
-            Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
-    
-            keyAndArrayMap.put("receiver", new String[] }{ "鑫哥", "feilong" });
-            keyAndArrayMap.put("province", new String[] { "江苏省" });
-            keyAndArrayMap.put("city", new String[] { "南通市" });
-    {@code
-            LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
-    }
-    
-    返回:
-     www.baidu.com?receiver=%E9%91%AB%E5%93%A5&receiver=feilong&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
+     * String beforeUrl = "www.baidu.com";
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * 
+     * keyAndArrayMap.put("receiver", new String[] { "鑫哥", "feilong" });
+     * keyAndArrayMap.put("province", new String[] { "江苏省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * www.baidu.com?receiver=%E9%91%AB%E5%93%A5&receiver=feilong&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
      * </pre>
      * 
      * </blockquote>
+     * 
+     * 
      * <h3>示例2:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        String beforeUrl = "www.baidu.com?a=b";
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
-    
-        keyAndArrayMap.put("province", new String[] }{ "江苏省" });
-        keyAndArrayMap.put("city", new String[] { "南通市" });
-    
-    {@code
-            LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
-    }
-    
-    返回:
-    www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
+     * String beforeUrl = "www.baidu.com?a=b";
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * keyAndArrayMap.put("province", new String[] { "江苏省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+     * </pre>
      * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
      * </pre>
      * 
      * </blockquote>
@@ -645,7 +646,7 @@ public final class ParamUtil{
     //*********************************************************************************
 
     /**
-     * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType不是null或者empty 返回安全的 key和value).
+     * 将<code>a=1&b=2</code>这样格式的数据转换成map (如果charsetType不是null或者empty 返回安全的 key和value).
      * 
      * <p>
      * 内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序
@@ -655,22 +656,23 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        String queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
-        LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
-    }
-    
-    返回:
-    {
-        "sec_id": "MD5",
-        "format": "xml",
-        "sign": "cc945983476d615ca66cee41a883f6c1",
-        "v": "2.0",
-        "req_data": "%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E",
-        "service": "alipay.wap.auth.authAndExecute",
-        "partner": "2088011438559510"
-    }
+     * String queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
+     * </pre>
      * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "sec_id": "MD5",
+     * "format": "xml",
+     * "sign": "cc945983476d615ca66cee41a883f6c1",
+     * "v": "2.0",
+     * "req_data":
+     * "%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E",
+     * "service": "alipay.wap.auth.authAndExecute",
+     * "partner": "2088011438559510"
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -691,7 +693,7 @@ public final class ParamUtil{
     }
 
     /**
-     * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value).
+     * 将<code>a=1&b=2</code>这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value).
      * 
      * <p>
      * 内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序
@@ -705,44 +707,46 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", CharsetType.UTF8)));
-    }
-    
-    返回:
-    {
-            "a":         [
-                "1",
-                "5"
-            ],
-            "b": ["2"]
-        }
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", CharsetType.UTF8)));
+     * </pre>
      * 
+     * 返回:
      * 
-     * 参数和参数之间是以 & 分隔  参数的key和value 是以 = 号分隔
-    {@code
-           LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", CharsetType.UTF8)));
-    }
-    
-    返回:
-    {
-        "a":         [
-            "",
-            ""
-        ],
-        "b": ["2"]
-    }
+     * <pre class="code">
+     {"a": [
+                 "1",
+                 "5"
+             ],
+             "b": ["2"]
+      }
+     * </pre>
+     * 
+     * 参数和参数之间是以 & 分隔 参数的key和value 是以 = 号分隔
+     * 
+     * <pre class="code">
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", CharsetType.UTF8)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {"a": [
+             "",
+             ""
+         ],
+      "b": ["2"]
+     }
      * </pre>
      * 
      * </blockquote>
      *
      * @param queryString
-     *            {@code a=1&b=2}类型的数据,支持{@code a=1&a=1}的形式, 返回map的值是数组
+     *            <code>a=1&b=2</code>类型的数据,支持<code>a=1&a=1</code>的形式, 返回map的值是数组
      * @param charsetType
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value)
+     * @return 将<code>a=1&b=2</code>这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value)
      * @since 1.4.0
      */
     public static Map<String, String[]> toSafeArrayValueMap(String queryString,String charsetType){
@@ -790,25 +794,36 @@ public final class ParamUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
+     * 对于以下的map,
+     * 
      * <pre class="code">
-     * 对于以下的map ,
-     * {@code
-     
-    Map<String, String[]> keyAndArrayMap = new HashMap<String, String[]>();
-    keyAndArrayMap.put("name", new String[] }{ "jim", "feilong","鑫哥" }{@code );
-    keyAndArrayMap.put("age", new String[] }{ "18" }{@code );
-    keyAndArrayMap.put("love", new String[] }{ "sanguo" }{@code );
-        }
+     * Map{@code <String, String[]>} keyAndArrayMap = new HashMap{@code <String, String[]>}();
+     * keyAndArrayMap.put("name", new String[] { "jim", "feilong", "鑫哥" });
+     * keyAndArrayMap.put("age", new String[] { "18" });
+     * keyAndArrayMap.put("love", new String[] { "sanguo" });
+     * </pre>
      * 
-     * 如果使用的是{@code LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, CharsetType.UTF8)); }
+     * 如果使用的是:
+     * 
+     * <pre class="code">
+     * LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, CharsetType.UTF8));
+     * </pre>
      * 
      * 那么返回:
+     * 
+     * <pre class="code">
      * love=sanguo&age=18&name=jim&name=feilong&name=%E9%91%AB%E5%93%A5
+     * </pre>
      * 
+     * 如果使用的是:
      * 
-     * 如果使用的是{@code LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap,null)); }
+     * <pre class="code">
+     * LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, null));
+     * </pre>
      * 
      * 那么返回:
+     * 
+     * <pre class="code">
      * love=sanguo&age=18&name=jim&name=feilong&name=鑫哥
      * </pre>
      * 
@@ -839,7 +854,7 @@ public final class ParamUtil{
      * 转成自然排序的字符串,生成待签名的字符串.
      * 
      * <p style="color:red">
-     * 该方法不会执行encode操作, <b>使用原生值进行拼接</b>,一般用于和第三方对接数据, 比如支付宝
+     * 该方法不会执行encode操作,<b>使用原生值进行拼接</b>,一般用于和第三方对接数据, 比如支付宝
      * </p>
      * 
      * <ol>
@@ -853,29 +868,34 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-    Map<String, String> map = new HashMap<String, String>();
-    map.put("service", "create_salesorder");
-    map.put("_input_charset", "gbk");
-    map.put("totalActual", "210.00");
-    map.put("receiver", "鑫哥");
-    map.put("province", "江苏省");
-    map.put("city", "南通市");
-    map.put("district", "通州区");
-    map.put("address", "江苏南通市通州区888组888号");
-    map.put("lines_data",
-            "[}{\"extentionCode\":\"00887224869169\",\"count\":\"2\",\"unitPrice\":\"400.00\"},{\"extentionCode\":\"00887224869170\",\"count\":\"1\",\"unitPrice\":\"500.00\"} {@code ]");
-    LOGGER.info(ParamUtil.toNaturalOrderingQueryString(map));
-    }
-    
-    返回 :
-    
+     * Map{@code <String, String>} map = new HashMap{@code <String, String>}();
+     * map.put("service", "create_salesorder");
+     * map.put("_input_charset", "gbk");
+     * map.put("totalActual", "210.00");
+     * map.put("receiver", "鑫哥");
+     * map.put("province", "江苏省");
+     * map.put("city", "南通市");
+     * map.put("district", "通州区");
+     * map.put("address", "江苏南通市通州区888组888号");
+     * map.put(
+     *                 "lines_data",
+     *                 "[{\"extentionCode\":\"00887224869169\",\"count\":\"2\",\"unitPrice\":\"400.00\"},{\"extentionCode\":\"00887224869170\",\"count\":\"1\",\"unitPrice\":\"500.00\"}]");
+     * LOGGER.info(ParamUtil.toNaturalOrderingQueryString(map));
+     * </pre>
+     * 
+     * 返回 :
+     * 
+     * <pre class="code">
     _input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&lines_data=[{"extentionCode":"00887224869169","count":"2","unitPrice":"400.00"},{"extentionCode":"00887224869170","count":"1","unitPrice":"500.00"}]&province=江苏省&receiver=鑫哥&service=create_salesorder&totalActual=210.00
      * </pre>
      * 
      * </blockquote>
      * 
-     * <h3>代码流程:</h3> <blockquote>
+     * 
+     * <h3>代码流程:</h3>
+     * 
+     * <blockquote>
+     * 
      * <ol>
      * <li>{@code if isNullOrEmpty(filePath)---->} return {@link StringUtils#EMPTY}</li>
      * <li>singleValueMap to naturalOrderingMap(TreeMap)</li>
@@ -901,25 +921,25 @@ public final class ParamUtil{
      * 只是简单的将map的key value 链接起来,最终格式类似于 url 的queryString.
      * 
      * <p>
-     * 比如,参数名字 {@code paramName=name}, {@code paramValues 为 zhangfei},那么返回值是{@code name=zhangfei}
+     * 比如,参数名字<code>paramName=name</code>, {@code paramValues 为 zhangfei},那么返回值是 <code>name=zhangfei</code>
      * </p>
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
-    
-            singleValueMap.put("province", "江苏省");
-            singleValueMap.put("city", "南通市");
-    
-            LOGGER.info(ParamUtil.joinSingleValueMap(singleValueMap));
-    }
-    
-    返回:
-     *  province=江苏省&city=南通市
+     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <String, String>}();
      * 
+     * singleValueMap.put("province", "江苏省");
+     * singleValueMap.put("city", "南通市");
+     * 
+     * LOGGER.info(ParamUtil.joinSingleValueMap(singleValueMap));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * province=江苏省&city=南通市
      * </pre>
      * 
      * </blockquote>
@@ -950,17 +970,17 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            Map<String, String> map = new HashMap<String, String>();
-            map.put("service", "create_salesorder");
-            map.put("paymentType", "unionpay_mobile");
-    
-            LOGGER.info(ParamUtil.joinValues(map, "service", "paymentType"));
-    }
-    
-    返回:
-           create_salesorderunionpay_mobile
+     * Map{@code <String, String>} map = new HashMap{@code <String, String>}();
+     * map.put("service", "create_salesorder");
+     * map.put("paymentType", "unionpay_mobile");
      * 
+     * LOGGER.info(ParamUtil.joinValues(map, "service", "paymentType"));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * create_salesorderunionpay_mobile
      * </pre>
      * 
      * </blockquote>
@@ -1009,18 +1029,17 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
-    
-            keyAndArrayMap.put("province", new String[] }{ "江苏省", "浙江省" });
-            keyAndArrayMap.put("city", new String[] { "南通市" });
-    {@code
-            LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
-    }
-    
-    返回:
-    province=江苏省&province=浙江省&city=南通市
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
      * 
+     * keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * province=江苏省&province=浙江省&city=南通市
      * </pre>
      * 
      * </blockquote>

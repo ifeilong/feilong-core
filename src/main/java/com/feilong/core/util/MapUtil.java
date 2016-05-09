@@ -174,7 +174,7 @@ public final class MapUtil{
     }
 
     /**
-     * 仅当 {@code null != map && null != value} 才将key/value put到map中.
+     * 仅当 <code>null != map && null != value</code> 才将key/value put到map中.
      *
      * @param <K>
      *            the key type
@@ -201,24 +201,21 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-             Map<String, Integer> map = new HashMap<String, Integer>();
-     
-             map.put("a", 3007);
-             map.put("b", 3001);
-             map.put("c", 3002);
-             map.put("d", 3003);
-             map.put("e", 3004);
-             map.put("f", 3005);
-             map.put("g", -1005);
-     
-             LOGGER.info("" + MapUtil.getMinValue(map, "a", "b", "d", "g", "m"));
-     }
+     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * 
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3002);
+     * map.put("d", 3003);
+     * map.put("e", 3004);
+     * map.put("f", 3005);
+     * map.put("g", -1005);
+     * 
+     * LOGGER.info("" + MapUtil.getMinValue(map, "a", "b", "d", "g", "m"));
+     * </pre>
      * 
      * 返回:
      * -1005
-     * 
-     * </pre>
      * 
      * </blockquote>
      * 
@@ -261,22 +258,21 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-             Map<String, Integer> map = new HashMap<String, Integer>();
-             map.put("a", 3007);
-             map.put("b", 3001);
-             map.put("c", 3001);
-             map.put("d", 3003);
-             LOGGER.debug(JsonUtil.format(MapUtil.getSubMap(map, "a", "c")));
-     }
+     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3001);
+     * map.put("d", 3003);
+     * LOGGER.debug(JsonUtil.format(MapUtil.getSubMap(map, "a", "c")));
+     * </pre>
      * 
      * 返回:
      * 
+     * <pre class="code">
      * {
      * "a": 3007,
      * "c": 3001
      * }
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -328,19 +324,19 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-             Map<String, Integer> map = new LinkedHashMap<String, Integer>();
-     
-             map.put("a", 3007);
-             map.put("b", 3001);
-             map.put("c", 3002);
-             map.put("g", -1005);
-     
-             LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, "a", "g", "m")));
-     }
+     * Map{@code <String, Integer>} map = new LinkedHashMap{@code <String, Integer>}();
+     * 
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3002);
+     * map.put("g", -1005);
+     * 
+     * LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, "a", "g", "m")));
+     * </pre>
      * 
      * 返回:
      * 
+     * <pre class="code">
      * {
      * "b": 3001,
      * "c": 3002
@@ -405,24 +401,25 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-             Map<String, Integer> map = new HashMap<String, Integer>();
-             map.put("a", 3007);
-             map.put("b", 3001);
-             map.put("c", 3001);
-             map.put("d", 3003);
-             LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
-     }
+     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3001);
+     * map.put("d", 3003);
+     * LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "3001": "c",
      * "3007": "a",
      * "3003": "d"
      * }
-     * 可以看出 b元素被覆盖了
-     * 
      * </pre>
+     * 
+     * 可以看出 b元素被覆盖了
      * 
      * </blockquote>
      * 
@@ -452,19 +449,20 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-             Map<Long, User> map = new LinkedHashMap<Long, User>();
-             map.put(1L, new User(1L));
-             map.put(2L, new User(2L));
-             map.put(53L, new User(3L));
-             map.put(5L, new User(5L));
-             map.put(6L, new User(6L));
-             map.put(4L, new User(4L));
-     
-             LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
-     }
+     * Map{@code <Long, User>} map = new LinkedHashMap{@code <Long, User>}();
+     * map.put(1L, new User(1L));
+     * map.put(2L, new User(2L));
+     * map.put(53L, new User(3L));
+     * map.put(5L, new User(5L));
+     * map.put(6L, new User(6L));
+     * map.put(4L, new User(4L));
+     * 
+     * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "1": 1,
      * "2": 2,
@@ -515,19 +513,20 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-             Map<Long, User> map = new LinkedHashMap<Long, User>();
-             map.put(1L, new User(1L));
-             map.put(2L, new User(2L));
-             map.put(53L, new User(3L));
-             map.put(5L, new User(5L));
-             map.put(6L, new User(6L));
-             map.put(4L, new User(4L));
-             Long[] includeKeys = }{ 5L, 4L };
-     * {@code       LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
-    }
+     * Map{@code <Long, User>} map = new LinkedHashMap{@code <Long, User>}();
+     * map.put(1L, new User(1L));
+     * map.put(2L, new User(2L));
+     * map.put(53L, new User(3L));
+     * map.put(5L, new User(5L));
+     * map.put(6L, new User(6L));
+     * map.put(4L, new User(4L));
+     * Long[] includeKeys = { 5L, 4L };
+     * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "5": 5
      * "4": 4
@@ -591,17 +590,18 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-             Map<String, Comparable> map = new HashMap<String, Comparable>();
-     
-             map.put("a", 123);
-             map.put("c", 345);
-             map.put("b", 8);
-     
-             LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
-     }
+     * Map{@code <String, Comparable>} map = new HashMap{@code <String, Comparable>}();
+     * 
+     * map.put("a", 123);
+     * map.put("c", 345);
+     * map.put("b", 8);
+     * 
+     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "a": 123,
      * "b": 8,
@@ -633,17 +633,18 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-             Map<String, Comparable> map = new HashMap<String, Comparable>();
-     
-             map.put("a", 123);
-             map.put("c", 345);
-             map.put("b", 8);
-     
-             LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyDesc(map)));
-     }
+     * Map{@code <String, Comparable>} map = new HashMap{@code <String, Comparable>}();
+     * 
+     * map.put("a", 123);
+     * map.put("c", 345);
+     * map.put("b", 8);
+     * 
+     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyDesc(map)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "c": 345,
      * "b": 8,
@@ -678,16 +679,16 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
-     * {@code
-            Map<String, Comparable> map = new HashMap<String, Comparable>();
-            map.put("a", 123);
-            map.put("c", 345);
-            map.put("b", 8);
-            LOGGER.debug(JsonUtil.format(MapUtil.sortByValueAsc(map)));
-    }
+     * Map{@code <String, Comparable>} map = new HashMap{@code <String, Comparable>}();
+     * map.put("a", 123);
+     * map.put("c", 345);
+     * map.put("b", 8);
+     * LOGGER.debug(JsonUtil.format(MapUtil.sortByValueAsc(map)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "b": 8,
      * "a": 123,
@@ -720,23 +721,23 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-            Map<String, Comparable> map = new LinkedHashMap<String, Comparable>();
-    
-            map.put("a", 123);
-            map.put("c", 345);
-            map.put("b", 8);
-    
-            LOGGER.debug(JsonUtil.format(MapUtil.sortByValueDesc(map)));
-    }
+     * Map{@code <String, Comparable>} map = new LinkedHashMap{@code <String, Comparable>}();
+     * 
+     * map.put("a", 123);
+     * map.put("c", 345);
+     * map.put("b", 8);
+     * 
+     * LOGGER.debug(JsonUtil.format(MapUtil.sortByValueDesc(map)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "c": 345,
      * "a": 123,
      * "b": 8
      * }
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -769,38 +770,44 @@ public final class MapUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre class="code">
-     * 
      * 比如有以下的map
-     * {@code
-             Map<String, Integer> map = new HashMap<String, Integer>();
-     
-             map.put("a13", 123);
-             map.put("a2", 345);
-             map.put("a8", 8);
-     }
+     * 
+     * <pre class="code">
+     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * 
+     * map.put("a13", 123);
+     * map.put("a2", 345);
+     * map.put("a8", 8);
+     * </pre>
      * 
      * 如果我们只是使用 :
      * 
-     * {@code  LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));}
+     * <pre class="code">
+     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "a13": 123,
      * "a2": 345,
      * "a8": 8
      * }
+     * </pre>
      * 
      * 此时可以看出 a13是以字符串的形式进行比较的,我们可以使用以下的自定义的 Comparator,来达到排序的效果
      * 
-     * {@code    
-         PropertyComparator<Entry<String, Integer>> propertyComparator = new PropertyComparator<Map.Entry<String, Integer>>(
-             "key",
-             new RegexGroupNumberComparator("a(\\d*)"));
-         LOGGER.debug(JsonUtil.format(MapUtil.sort(map, propertyComparator)));
-      }
+     * <pre class="code">
+     * PropertyComparator{@code <Entry<String, Integer>>} propertyComparator = new PropertyComparator{@code <Map.Entry<String, Integer>>}(
+     *                 "key",
+     *                 new RegexGroupNumberComparator("a(\\d*)"));
+     * LOGGER.debug(JsonUtil.format(MapUtil.sort(map, propertyComparator)));
+     * </pre>
      * 
      * 返回:
+     * 
+     * <pre class="code">
      * {
      * "a2": 345,
      * "a8": 8,

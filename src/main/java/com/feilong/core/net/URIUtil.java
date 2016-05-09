@@ -239,7 +239,7 @@ public final class URIUtil{
      * 验证path是不是绝对路径.
      * 
      * <p>
-     * (调用了 {@link java.net.URI#isAbsolute()},原理是{@code url's scheme !=null} ).
+     * (调用了 {@link java.net.URI#isAbsolute()},原理是 <code>url's scheme !=null</code>).
      * </p>
      *
      * @param uriString
@@ -324,13 +324,10 @@ public final class URIUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-    URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2")
-    }
-    
-    返回: a=1&a=2
+     * URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2")
      * </pre>
      * 
+     * 返回: a=1&a=2
      * </blockquote>
      * 
      * @param uriString

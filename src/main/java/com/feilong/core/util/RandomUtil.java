@@ -86,7 +86,7 @@ public final class RandomUtil{
     }
 
     /**
-     * 创建最小值 {@code minValue} 和最大值{@code maxValue}之间的随机数.
+     * 创建最小值 <code>minValue</code> 和最大值 <code>maxValue</code>之间的随机数.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -125,7 +125,7 @@ public final class RandomUtil{
     // ********************************************************************
 
     /**
-     * 生成一个指定长度 {@code length} 的随机正整数.
+     * 生成一个指定长度 <code>length</code>的随机正整数.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -159,7 +159,7 @@ public final class RandomUtil{
     // ******************************createRandomFromString**********************************
 
     /**
-     * 随机抽取字符串char,拼接最小长度是 {@code minLength},最大长度是{@code maxLength}的字符串随机字符串.
+     * 随机抽取字符串char,拼接最小长度是 <code>minLength</code>,最大长度是 <code>maxLength</code>的字符串随机字符串.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -180,7 +180,7 @@ public final class RandomUtil{
      * @param maxLength
      *            最大长度,比如示例中的 20
      * 
-     * @return 随机抽取字符串char,拼接最小长度是 {@code minLength},最大长度是{@code maxLength}的字符串随机字符串. <br>
+     * @return 随机抽取字符串char,拼接最小长度是 <code>minLength</code>,最大长度是<code>maxLength</code>的字符串随机字符串. <br>
      *         如上述示例,可能返回142853574998970631<br>
      *         if str empty,will {@link java.lang.NullPointerException NullPointerException};<br>
      *         if maxLength<=0 will {@link java.lang.IllegalArgumentException IllegalArgumentException}<br>

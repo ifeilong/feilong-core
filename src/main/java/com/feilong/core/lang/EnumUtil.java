@@ -49,14 +49,14 @@ public final class EnumUtil{
     /**
      * 通过propertyName的 value(忽视大小写) 获得枚举(equalsIgnoreCase判断).
      * 
+     * <p>
+     * 适用于这种{@link com.feilong.core.HttpMethodType}带自定义属性的枚举类型,调用方式:
+     * 
      * <pre class="code">
-     * 
-     * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
-     * 
-     * {@code
-     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
-     * }
+     * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
+     * 
+     * </p>
      *
      * @param <E>
      *            the element type
@@ -77,16 +77,16 @@ public final class EnumUtil{
     }
 
     /**
-     * 通过propertyName的 value 获得枚举(equals判断).
+     * 通过propertyName的 value 获得枚举(equals判断,区分大小写).
+     * 
+     * <p>
+     * 适用于这种{@link com.feilong.core.HttpMethodType}带自定义属性的枚举类型,调用方式:
      * 
      * <pre class="code">
-     * 
-     * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
-     * 
-     * {@code
-     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
-     * }
+     * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
+     * 
+     * </p>
      *
      * @param <E>
      *            the element type
@@ -109,13 +109,13 @@ public final class EnumUtil{
     /**
      * 通过propertyName的 value 获得枚举.
      * 
-     * <pre class="code">
-     * 适用于这种{@link com.feilong.core.HttpMethodType} 待自定义属性的枚举类型,调用方式:
+     * <p>
+     * 适用于这种{@link com.feilong.core.HttpMethodType} 带自定义属性的枚举类型,调用方式:
      * 
-     * {@code
-     *  EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
-     * }
+     * <pre class="code">
+     * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
+     * </p>
      *
      * @param <E>
      *            the element type

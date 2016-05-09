@@ -60,13 +60,13 @@ public final class PropertyUtil{
     }
 
     /**
-     * 将{@code fromObj}中的 一组属性的值 复制到 {@code toObj}对象中.
+     * 将 <code>fromObj</code> 中的 一组属性的值 复制到 <code>toObj</code>对象中.
      * 
      * <h3>代码流程:</h3>
      * <blockquote>
      * <p>
      * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},否则循环调用
-     * {@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到 {@code toObj}对象中
+     * {@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中
      * </p>
      * </blockquote>
      * 
@@ -329,8 +329,8 @@ public final class PropertyUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>{@code if ClassUtil.isInstance(findValue, toBeFindedClassType) 直接返回 findValue}</li>
-     * <li>自动过滤{@code isPrimitiveOrWrapper},{@code CharSequence},{@code Collection},{@code Map}类型</li>
+     * <li>if <code>ClassUtil.isInstance(findValue, toBeFindedClassType)</code> 直接返回 findValue</li>
+     * <li>自动过滤<code>isPrimitiveOrWrapper</code>,<code>CharSequence</code>,<code>Collection</code>,<code>Map</code>类型</li>
      * <li>调用 {@link PropertyUtil#describe(Object)} 再递归查找</li>
      * </ol>
      * </blockquote>
@@ -363,7 +363,7 @@ public final class PropertyUtil{
      *            要被查找的对象
      * @param toBeFindedClassType
      *            the to be finded class type
-     * @return a value of the given type found if there is a clear match,or {@code null} if none such value found
+     * @return a value of the given type found if there is a clear match,or <code>null</code> if none such value found
      * @see "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"
      * @since 1.4.1
      */

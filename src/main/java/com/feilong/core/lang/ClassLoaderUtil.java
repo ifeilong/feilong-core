@@ -57,12 +57,12 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <th align="left">在web环境中(即使打成jar的情形)</th>
  * </tr>
  * <tr valign="top">
- * <td>{@code getResource("")}</td>
+ * <td><code>getResource("")</code></td>
  * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
  * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>{@code getResource("com")}</td>
+ * <td><code>getResource("com")</code></td>
  * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
  * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
  * </tr>
@@ -125,12 +125,12 @@ public final class ClassLoaderUtil{
      * <th align="left">在web环境中,(即使打成jar的情形)</th>
      * </tr>
      * <tr valign="top">
-     * <td>{@code getResource("")}</td>
+     * <td><code>getResource("")</code></td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
-     * <td>{@code getResource("com")}</td>
+     * <td><code>getResource("com")</code></td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
      * </tr>
@@ -255,12 +255,12 @@ public final class ClassLoaderUtil{
      * <th align="left">在web环境中,(即使打成jar的情形)</th>
      * </tr>
      * <tr valign="top">
-     * <td>{@code getResource("")}</td>
+     * <td><code>getResource("")</code></td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
-     * <td>{@code getResource("com")}</td>
+     * <td><code>getResource("com")</code></td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
      * </tr>

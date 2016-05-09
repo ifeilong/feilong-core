@@ -153,52 +153,58 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * <h3>示例:</h3>
      * <blockquote>
      * 
+     * <p>
+     * 我们现在有这样的数据,其中属性 totalNo是字符串类型的
+     * </p>
+     * 
      * <pre class="code">
+     * CourseEntity courseEntity1 = new CourseEntity();
+     * courseEntity1.setTotalNo("3");
      * 
-     * 我们现在有这样的数据, 其中属性 totalNo 是字符串类型的 
-    {@code
-            CourseEntity courseEntity1 = new CourseEntity();
-            courseEntity1.setTotalNo("3");
-    
-            CourseEntity courseEntity2 = new CourseEntity();
-            courseEntity2.setTotalNo("13");
-    
-            List<CourseEntity> courseList = new ArrayList<>();
-            courseList.add(courseEntity1);
-            courseList.add(courseEntity2);
-    }
-    
-    如果 我们只是使用 propertyName进行排序的话
-      {@code
-            Collections.sort(courseList, new PropertyComparator<CourseEntity>("totalNo"));
-            LOGGER.debug(JsonUtil.format(courseList));
-      }
-      
-    那么返回:
-    [{
-            "totalNo": "13",
-            "name": ""
-        },
-                {
-            "totalNo": "3",
-            "name": ""
-        }]
-    
-        如果我们使用 propertyName+ propertyValueConvertToClass进行排序的话
-    {@code
-            Collections.sort(courseList, new PropertyComparator<CourseEntity>("totalNo", Integer.class));
-            LOGGER.debug(JsonUtil.format(courseList));
-    }    
-            返回:
-    [{
-            "totalNo": "3",
-            "name": ""
-        },
-                {
-            "totalNo": "13",
-            "name": ""
-        }]
+     * CourseEntity courseEntity2 = new CourseEntity();
+     * courseEntity2.setTotalNo("13");
      * 
+     * List<CourseEntity> courseList = new ArrayList<>();
+     * courseList.add(courseEntity1);
+     * courseList.add(courseEntity2);
+     * </pre>
+     * 
+     * 如果 我们只是使用 propertyName进行排序的话:
+     * 
+     * <pre class="code">
+     * Collections.sort(courseList, new PropertyComparator{@code <CourseEntity>}("totalNo"));
+     * LOGGER.debug(JsonUtil.format(courseList));
+     * </pre>
+     * 
+     * 那么返回:
+     * 
+     * <pre class="code">
+     * [{
+     * "totalNo": "13",
+     * "name": ""
+     * },{
+     * "totalNo": "3",
+     * "name": ""
+     * }]
+     * </pre>
+     * 
+     * 如果我们使用 propertyName+ propertyValueConvertToClass进行排序的话:
+     * 
+     * <pre class="code">
+     * Collections.sort(courseList, new PropertyComparator{@code <CourseEntity>}("totalNo", Integer.class));
+     * LOGGER.debug(JsonUtil.format(courseList));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [{
+     * "totalNo": "3",
+     * "name": ""
+     * },{
+     * "totalNo": "13",
+     * "name": ""
+     * }]
      * </pre>
      * 
      * </blockquote>

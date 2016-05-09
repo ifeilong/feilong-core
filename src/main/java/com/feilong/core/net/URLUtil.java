@@ -148,18 +148,19 @@ public final class URLUtil{
      * 网站地址拼接,请使用这个method
      * </p>
      * 
-     * <pre class="code">
-     * {@code
-     * 示例: 
+     * <h3>示例:</h3>
      * 
-     * URIUtil.getUnionUrl("E:\\test", "sanguo")------------->file:/E:/test/sanguo
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * URIUtil.getUnionUrl("E:\\test", "sanguo"){@code --->}file:/E:/test/sanguo
      * 
      * URL url = new URL("http://www.exiaoshuo.com/jinyiyexing/");
-     * result = URIUtil.getUnionUrl(url, "/jinyiyexing/1173348/");
-     * http://www.exiaoshuo.com/jinyiyexing/1173348/
-     * }
+     * URIUtil.getUnionUrl(url, "/jinyiyexing/1173348/") {@code ------->} http://www.exiaoshuo.com/jinyiyexing/1173348/
      * </pre>
-     *
+     * 
+     * </blockquote>
+     * 
      * @param context
      *            要解析规范的上下文
      * @param spec

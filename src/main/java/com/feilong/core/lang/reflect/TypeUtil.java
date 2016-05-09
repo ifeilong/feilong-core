@@ -82,17 +82,27 @@ public final class TypeUtil{
 
     /**
      * 获得 generic superclass parameterized raw types.
-     *
+     * 
+     * <p>
      * 获得 某个类,对应的某个接口 上面的泛型参数的类型.
+     * </p>
+     * 
+     * <p>
+     * Example 1:
      * 
      * <pre class="code">
-     * Example 1:
-     * {@code public class SkuItemRepositoryImpl extends BaseSolrRepositoryImpl<SkuItem, Long> implements SkuItemRepository}<br>
+     * public class SkuItemRepositoryImpl extends BaseSolrRepositoryImpl{@code <SkuItem, Long>} implements SkuItemRepository
+     * </pre>
+     * 
      * 这样的类,
      * 
-     * 调用 {@link TypeUtil#getGenericSuperclassParameterizedRawTypes(Class)} , 使用{@code TypeUtil.getGenericSuperclassParameterizedRawTypes(SkuItemRepositoryImpl.class)}
+     * <p>
+     * 调用 {@link TypeUtil#getGenericSuperclassParameterizedRawTypes(Class)},使用
+     * <code>TypeUtil.getGenericSuperclassParameterizedRawTypes(SkuItemRepositoryImpl.class)</code>
      * 取到泛型里面 参数 [SkuItem.class,Long.class]
-     * </pre>
+     * </p>
+     * 
+     * </p>
      * 
      * @param klass
      *            the klass

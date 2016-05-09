@@ -80,20 +80,26 @@ public final class RegexUtil{
      * 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
      * </p>
      * 
-     * <pre class="code">
-     * {@code
-     * Example 1:
-     *      String regexPattern = "(.*?)@(.*?)";
-     *      String email = "venusdrogon@163.com";
-     *      RegexUtil.group(regexPattern, email);
+     * <h3>示例:</h3>
      * 
-     * 返回 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String regexPattern = "(.*?)@(.*?)";
+     * String email = "venusdrogon@163.com";
+     * RegexUtil.group(regexPattern, email);
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
      *    0 venusdrogon@163.com
      *    1 venusdrogon
      *    2 163.com
-     * }
      * </pre>
-     *
+     * 
+     * </blockquote>
+     * 
      * @param regexPattern
      *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
@@ -144,15 +150,20 @@ public final class RegexUtil{
      * 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
      * </p>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
-     * {@code
-     * Example 1:
-     *      String regexPattern = "(.*?)@(.*?)";
-     *      String email = "venusdrogon@163.com";
-     *      LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");--->venusdrogon
-     *      LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");--->163.com
-     * }
+     * 
+     * String regexPattern = "(.*?)@(.*?)";
+     * String email = "venusdrogon@163.com";
+     * LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");//venusdrogon
+     * LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");//163.com
+     * 
      * </pre>
+     * 
+     * </blockquote>
      *
      * @param regexPattern
      *            正则表达式字符串,pls use {@link RegexPattern}
@@ -195,7 +206,7 @@ public final class RegexUtil{
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @param flags
      *            如果需要多个组合,可以使用罗辑或
-     *            <blockquote>{@code Pattern.compile(regex, CASE_INSENSITIVE | DOTALL);}</blockquote>
+     *            <blockquote><code>Pattern.compile(regex, CASE_INSENSITIVE | DOTALL);</code></blockquote>
      *            <ul>
      *            <li>{@link Pattern#CASE_INSENSITIVE} 匹配字符时与大小写无关,该标志默认只考虑US ASCII字符.</li>
      *            <li>{@link Pattern#MULTILINE} ^和$匹配一行的开始和结尾,而不是整个输入</li>

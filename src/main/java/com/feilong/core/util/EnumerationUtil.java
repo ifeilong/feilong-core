@@ -45,7 +45,7 @@ public final class EnumerationUtil{
      * <h3>代码流程:</h3>
      * <blockquote>
      * <ol>
-     * <li>{@code if isNullOrEmpty(enumeration) return false}</li>
+     * <li><code>if isNullOrEmpty(enumeration) return false</code></li>
      * <li>循环枚举里面的每个元素,调用 {@link org.apache.commons.lang3.ObjectUtils#equals(Object, Object)},如果equals 返回true</li>
      * </ol>
      * </blockquote>

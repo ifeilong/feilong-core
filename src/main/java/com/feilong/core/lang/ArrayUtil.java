@@ -125,37 +125,37 @@ public final class ArrayUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            Integer[] array = }{ 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
-    {@code
-            Map<Integer, List<Integer>> group = ArrayUtil.group(array);
-            LOGGER.debug(JsonUtil.format(group));
-    }
-    
-    返回:
-    {
-        "1":         [
-            1,
-            1,
-            1
-        ],
-        "2":         [
-            2,
-            2
-        ],
-        "3": [3],
-        "4": [4],
-        "5":         [
-            5,
-            5
-        ],
-        "6": [6],
-        "7": [7],
-        "8":         [
-            8,
-            8
-        ]
-    }
+     * Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
+     * Map{@code <Integer, List<Integer>>} group = ArrayUtil.group(array);
+     * LOGGER.debug(JsonUtil.format(group));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {
+         "1":         [
+             1,
+             1,
+             1
+         ],
+         "2":         [
+             2,
+             2
+         ],
+         "3": [3],
+         "4": [4],
+         "5":         [
+             5,
+             5
+         ],
+         "6": [6],
+         "7": [7],
+         "8":         [
+             8,
+             8
+         ]
+     }
      * </pre>
      * 
      * </blockquote>
@@ -194,52 +194,53 @@ public final class ArrayUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            User[] users = }{
-                             new User("张三", 18),
-                             new User("李四", 28),
-                             new User("王五", 38),
-                             new User("陈二", 18),
-                             new User("孔六", 28),
-                             new User("飞飞", 58) };
-    
-     {@code       Map<Integer, List<User>> group = ArrayUtil.group(users, "age");
-            LOGGER.debug(JsonUtil.format(group));
-    }
-    
-    返回:
-    {
-        "18":         [
-                        {
-                "age": 18,
-                "name": "张三"
-            },
-                        {
-                
-                "age": 18,
-                "name": "陈二"
-            }
-        ],
-        "28":         [
-                        {
-                
-                "age": 28,
-                "name": "李四"
-            },
-                        {
-                "age": 28,
-                "name": "孔六"
-            }
-        ],
-        "38": [        {
-            "age": 38,
-            "name": "王五"
-        }],
-        "58": [        {
-            "age": 58,
-            "name": "飞飞"
-        }]
-    }
+     * User[] users = {
+     *                  new User("张三", 18),
+     *                  new User("李四", 28),
+     *                  new User("王五", 38),
+     *                  new User("陈二", 18),
+     *                  new User("孔六", 28),
+     *                  new User("飞飞", 58) };
+     * 
+     * Map{@code <Integer, List<User>>} group = ArrayUtil.group(users, "age");
+     * LOGGER.debug(JsonUtil.format(group));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {
+         "18":         [
+                         {
+                 "age": 18,
+                 "name": "张三"
+             },
+                         {
+                 
+                 "age": 18,
+                 "name": "陈二"
+             }
+         ],
+         "28":         [
+                         {
+                 
+                 "age": 28,
+                 "name": "李四"
+             },
+                         {
+                 "age": 28,
+                 "name": "孔六"
+             }
+         ],
+         "38": [        {
+             "age": 38,
+             "name": "王五"
+         }],
+         "58": [        {
+             "age": 58,
+             "name": "飞飞"
+         }]
+     }
      * </pre>
      * 
      * </blockquote>

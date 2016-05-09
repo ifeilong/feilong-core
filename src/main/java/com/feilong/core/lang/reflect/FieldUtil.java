@@ -163,7 +163,7 @@ public final class FieldUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>{@code if isNullOrEmpty(fields)  return emptyList}</li>
+     * <li><code>if isNullOrEmpty(fields) return emptyList</code></li>
      * <li>获得一个对象所有的声明字段(包括私有的,继承的) {@link #getAllFields(Object)}</li>
      * <li>排除掉 <code>excludeFieldNames</code></li>
      * <li>去掉 {@link Modifier#isPrivate(int)} and {@link Modifier#isStatic(int)}</li>
@@ -341,15 +341,16 @@ public final class FieldUtil{
     /**
      * 得到某类的静态公共字段值.
      * 
-     * <pre class="code">
-     * {@code
-     * example1 :
+     * <p>
+     * example1:
      * 
+     * <pre class="code">
      * FieldUtil.getStaticProperty("com.feilong.io.ImageType", "JPG")
-     * 返回 :jpg
-     * }
      * </pre>
-     *
+     * 
+     * 返回 :jpg
+     * </p>
+     * 
      * @param <T>
      *            the generic type
      * @param className

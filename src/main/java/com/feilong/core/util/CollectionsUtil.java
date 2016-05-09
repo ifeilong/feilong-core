@@ -389,36 +389,36 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        List<String> list = new ArrayList<String>();
-        list.add("xinge");
-        list.add("feilong1");
-        list.add("feilong2");
-        list.add("feilong2");
-    
-        LOGGER.info(JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
-    }
-    
-    返回:
-    [
-        "xinge",
-        "feilong1"
-    ]
-    
-    此时,原来的list不变:
-    {@code
-        LOGGER.info(JsonUtil.format(list));
-    }
-    
-    输出 :
-    
-    [
-        "xinge",
-        "feilong1",
-        "feilong2",
-        "feilong2"
-    ]
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("xinge");
+     * list.add("feilong1");
+     * list.add("feilong2");
+     * list.add("feilong2");
      * 
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * ["xinge","feilong1"]
+     * </pre>
+     * 
+     * 此时,原来的list不变:
+     * 
+     * <pre class="code">
+     * LOGGER.info(JsonUtil.format(list));
+     * </pre>
+     * 
+     * 输出 :
+     * 
+     * <pre class="code">
+     * [
+     * "xinge",
+     * "feilong1",
+     * "feilong2",
+     * "feilong2"
+     * ]
      * </pre>
      * 
      * </blockquote>
@@ -508,105 +508,99 @@ public final class CollectionsUtil{
      * 解析对象集合,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象特殊属性,拼成List(ArrayList).
      * 
      * <h3>示例:</h3>
+     * 
      * <blockquote>
      * 
      * <pre class="code">
-     * {@code
-     *     List<UserAddress> userAddresseList = new ArrayList<UserAddress>();
-     *     UserAddress userAddress = new UserAddress();
-     *     userAddress.setAddress("中南海");
-     *     userAddresseList.add(userAddress);
+     * List{@code <UserAddress>} userAddresseList = new ArrayList{@code <UserAddress>}();
+     * UserAddress userAddress = new UserAddress();
+     * userAddress.setAddress("中南海");
+     * userAddresseList.add(userAddress);
      * 
-     *     //*******************************************************
-     *     Map<String, String> attrMap = new HashMap<String, String>();
-     *     attrMap.put("蜀国", "赵子龙");
-     *     attrMap.put("魏国", "张文远");
-     *     attrMap.put("吴国", "甘兴霸");
+     * //*******************************************************
+     * Map{@code <String, String>} attrMap = new HashMap{@code <String, String>}();
+     * attrMap.put("蜀国", "赵子龙");
+     * attrMap.put("魏国", "张文远");
+     * attrMap.put("吴国", "甘兴霸");
      * 
-     *     //*******************************************************
-     *     UserInfo userInfo1 = new UserInfo();
-     *     userInfo1.setAge(28);
+     * //*******************************************************
+     * UserInfo userInfo1 = new UserInfo();
+     * userInfo1.setAge(28);
      * 
-     *     User user1 = new User(2L);
-     *     user1.setLoves(new String[] }{ "sanguo1", "xiaoshuo1" }); {@code 
-     *     user1.setUserInfo(userInfo1);
-     *     user1.setAttrMap(attrMap);
-     *     user1.setUserAddresseList(userAddresseList);
+     * User user1 = new User(2L);
+     * user1.setLoves(new String[] { "sanguo1", "xiaoshuo1" });
+     * user1.setUserInfo(userInfo1);
+     * user1.setAttrMap(attrMap);
+     * user1.setUserAddresseList(userAddresseList);
      * 
-     *     //*****************************************************
-     *     UserInfo userInfo2 = new UserInfo();
-     *     userInfo2.setAge(null);
+     * //*****************************************************
+     * UserInfo userInfo2 = new UserInfo();
+     * userInfo2.setAge(null);
      * 
-     *     User user2 = new User(3L);
-     *     user2.setLoves(new String[] }{ "sanguo2", "xiaoshuo2" });{@code 
-     *     user2.setUserInfo(userInfo2);
-     *     user2.setAttrMap(attrMap);
-     *     user2.setUserAddresseList(userAddresseList);
+     * User user2 = new User(3L);
+     * user2.setLoves(new String[] { "sanguo2", "xiaoshuo2" });
+     * user2.setUserInfo(userInfo2);
+     * user2.setAttrMap(attrMap);
+     * user2.setUserAddresseList(userAddresseList);
      * 
-     *     List<User> userList = new ArrayList<User>();
-     *     userList.add(user1);
-     *     userList.add(user2);
-     * }
+     * List{@code <User>} userList = new ArrayList{@code <User>}();
+     * userList.add(user1);
+     * userList.add(user2);
+     * 
+     * </pre>
      * 
      * 以下情况:
-     * </pre>
      * 
-     * <pre class="code">
      * <span style="color:green">//数组</span>
-    {@code
-        List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
-     *     LOGGER.info(JsonUtil.format(fieldValueList1));
-     * }
-     * 
-     * 返回 :
-     * [
-        "xiaoshuo1",
-        "xiaoshuo2"
-        ]
-     * </pre>
      * 
      * <pre class="code">
+     * List{@code <String>} fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
+     * LOGGER.info(JsonUtil.format(fieldValueList1));
+     * </pre>
+     * 
+     * 返回 :
+     * 
+     * <pre class="code">
+     * ["xiaoshuo1","xiaoshuo2"]
+     * </pre>
+     * 
      * <span style="color:green">//级联对象</span>
-    {@code
-        List<Integer> fieldValueList2 = CollectionsUtil.getPropertyValueList(userList, "userInfo.age");
-        LOGGER.info(JsonUtil.format(fieldValueList2));
-     * }
-     * 
-     * 返回 :
-     * [
-        28,
-        null
-        ]
-     * 
-     * </pre>
      * 
      * <pre class="code">
+     * List{@code <Integer>} fieldValueList2 = CollectionsUtil.getPropertyValueList(userList, "userInfo.age");
+     * LOGGER.info(JsonUtil.format(fieldValueList2));
+     * </pre>
+     * 
+     * 返回 :
+     * 
+     * <pre class="code">
+     * [28,null]
+     * </pre>
+     * 
      * <span style="color:green">//Map</span>
-    {@code
-        List<Integer> attrList = CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)");
-        LOGGER.info(JsonUtil.format(attrList));
-     * }
-     * 
-     * 返回 :
-    [
-        "赵子龙",
-        "赵子龙"
-    ]
-     * 
-     * </pre>
      * 
      * <pre class="code">
-     * <span style="color:green">//集合</span>
-    {@code
-        List<String> addressList = CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]");
-        LOGGER.info(JsonUtil.format(addressList));
-     * }
+     * List{@code <Integer>} attrList = CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)");
+     * LOGGER.info(JsonUtil.format(attrList));
+     * </pre>
      * 
      * 返回 :
-    [
-        {"address": "中南海"},
-        {"address": "中南海"}
-    ]
+     * 
+     * <pre class="code">
+        ["赵子龙","赵子龙"]
+     * </pre>
+     * 
+     * <span style="color:green">//集合</span>
+     * 
+     * <pre class="code">
+     * List{@code <String>} addressList = CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]");
+     * LOGGER.info(JsonUtil.format(addressList));
+     * </pre>
+     * 
+     * 返回 :
+     * 
+     * <pre class="code">
+     * [{"address": "中南海"},{"address": "中南海"}]
      * </pre>
      * 
      * </blockquote>
@@ -642,22 +636,19 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            List<User> testList = new ArrayList<User>();
-            testList.add(new User(2L));
-            testList.add(new User(5L));
-            testList.add(new User(5L));
-    
-            Set<Long> fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
-            LOGGER.info(JsonUtil.format(fieldValueCollection));
-    }
-    
-    返回:
-    [
-            2,
-            5
-        ]
+     * List{@code <User>} testList = new ArrayList{@code <User>}();
+     * testList.add(new User(2L));
+     * testList.add(new User(5L));
+     * testList.add(new User(5L));
      * 
+     * Set{@code <Long>} fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
+     * LOGGER.info(JsonUtil.format(fieldValueCollection));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     [2,5]
      * </pre>
      * 
      * </blockquote>
@@ -733,22 +724,23 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        List<User> testList = new ArrayList<User>();
-        testList.add(new User("张飞", 23));
-        testList.add(new User("关羽", 24));
-        testList.add(new User("刘备", 25));
-    
-        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
-        LOGGER.info(JsonUtil.format(map));    
-    }
-    
-    返回:
-     {
-        "张飞": 23,
-        "关羽": 24,
-        "刘备": 25
-    }
+     * List{@code <User>} testList = new ArrayList{@code <User>}();
+     * testList.add(new User("张飞", 23));
+     * testList.add(new User("关羽", 24));
+     * testList.add(new User("刘备", 25));
+     * 
+     * Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
+     * LOGGER.info(JsonUtil.format(map));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": 23,
+     * "关羽": 24,
+     * "刘备": 25
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -802,24 +794,22 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
-        objectCollection.add(new User("关羽", 24));
-    
-        LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
-    }
-    
-    返回:
-    
-    [
-                {
-            "age": 24,
-            "name": "关羽"
-        }
-    ]
+     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
+     * objectCollection.add(new User("张飞", 23));
+     * objectCollection.add(new User("关羽", 24));
+     * objectCollection.add(new User("刘备", 25));
+     * objectCollection.add(new User("关羽", 24));
+     * 
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [{
+     * "age": 24,
+     * "name": "关羽"
+     * }]
      * </pre>
      * 
      * </blockquote>
@@ -852,28 +842,25 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
-        objectCollection.add(new User("关羽", 24));
-    
-        LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
-    }
-    
-    返回:
-    
-    [
-                {
-            "age": 24,
-            "name": "关羽"
-        },
-                {
-            "age": 24,
-            "name": "关羽"
-        }
-    ]
+     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
+     * objectCollection.add(new User("张飞", 23));
+     * objectCollection.add(new User("关羽", 24));
+     * objectCollection.add(new User("刘备", 25));
+     * objectCollection.add(new User("关羽", 24));
+     * 
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     [{
+             "age": 24,
+             "name": "关羽"
+         },{
+             "age": 24,
+             "name": "关羽"
+         }]
      * </pre>
      * 
      * </blockquote>
@@ -905,31 +892,30 @@ public final class CollectionsUtil{
      * </p>
      * 
      * <h3>示例:</h3>
+     * 
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            List<User> objectCollection = new ArrayList<User>();
-            objectCollection.add(new User("张飞", 23));
-            objectCollection.add(new User("关羽", 24));
-            objectCollection.add(new User("刘备", 25));
-    
-            String[] array = }{ "刘备", "关羽" } {@code ;
-            LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", array)));
-    }
-    
-    返回:
-    
-    [
-                {
-            "age": 24,
-            "name": "关羽"
-        },
-                {
-            "age": 25,
-            "name": "刘备"
-        }
-    ]
+     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
+     * objectCollection.add(new User("张飞", 23));
+     * objectCollection.add(new User("关羽", 24));
+     * objectCollection.add(new User("刘备", 25));
+     * 
+     * String[] array = { "刘备", "关羽" };
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", array)));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+       [{
+               "age": 24,
+               "name": "关羽"
+           },{
+               "age": 25,
+               "name": "刘备"
+       }]
      * </pre>
      * 
      * </blockquote>
@@ -1022,21 +1008,18 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            List<Long> list = new ArrayList<Long>();
-            list.add(1L);
-            list.add(1L);
-            list.add(2L);
-            list.add(3L);
-            LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
-    }
-    
-    返回:
-    
-    [
-        1,
-        1
-    ]
+     * List{@code <Long>} list = new ArrayList{@code <Long>}();
+     * list.add(1L);
+     * list.add(1L);
+     * list.add(2L);
+     * list.add(3L);
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     [1,1]
      * </pre>
      * 
      * </blockquote>
@@ -1207,34 +1190,31 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-      * 
-      * {@code
-        List<User> testList = new ArrayList<User>();
-        testList.add(new User("张飞", 23));
-        testList.add(new User("刘备", 25));
-        testList.add(new User("刘备", 25));
-    
-        Map<String, List<User>> map = CollectionsUtil.group(testList, "name");
-        LOGGER.info(JsonUtil.format(map));
-      * }
-      * 
-      * 返回 :
-      * 
-    {
-        "张飞": [{
-            "age": 23,
-            "name": "张飞"
-        }],
-        "刘备": [{
-                "age": 25,
-                "name": "刘备"
-            },
-             {
-                "age": 25,
-                "name": "刘备"
-            }
-        ]
-    }
+     * List{@code <User>} testList = new ArrayList{@code <User>}();
+     * testList.add(new User("张飞", 23));
+     * testList.add(new User("刘备", 25));
+     * testList.add(new User("刘备", 25));
+     * 
+     * Map<String, List<User>> map = CollectionsUtil.group(testList, "name");
+     * LOGGER.info(JsonUtil.format(map));
+     * </pre>
+     * 
+     * 返回 :
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": [{
+     * "age": 23,
+     * "name": "张飞"
+     * }],
+     * "刘备": [{
+     * "age": 25,
+     * "name": "刘备"
+     * },{
+     * "age": 25,
+     * "name": "刘备"
+     * }]
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1292,29 +1272,28 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-      * 
-      * {@code
-      *     List<User> testList = new ArrayList<User>();
-      *     testList.add(new User("张飞", 23));
-      *     testList.add(new User("刘备", 25));
-      *     testList.add(new User("刘备", 25));
-      * 
-      *     Map<String, User> map = CollectionsUtil.groupOne(testList, "name");
-      *     LOGGER.info(JsonUtil.format(map));
-      * }
-      * 
-      * 返回 :
-      * 
-      * {
-         "张飞":         {
-             "age": 23,
-             "name": "张飞"
-         },
-         "刘备":         {
-             "age": 25,
-             "name": "刘备"
-         }
-     }
+     * List{@code <User>} testList = new ArrayList{@code <User>}();
+     * testList.add(new User("张飞", 23));
+     * testList.add(new User("刘备", 25));
+     * testList.add(new User("刘备", 25));
+     * 
+     * Map{@code <String, User>} map = CollectionsUtil.groupOne(testList, "name");
+     * LOGGER.info(JsonUtil.format(map));
+     * </pre>
+     * 
+     * 返回 :
+     * 
+     * <pre class="code">
+     * {
+        "张飞":         {
+            "age": 23,
+            "name": "张飞"
+        },
+        "刘备":         {
+            "age": 25,
+            "name": "刘备"
+        }
+    }
      * </pre>
      * 
      * </blockquote>
@@ -1357,11 +1336,11 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,统计 {@code propertyName}的值出现的次数.
+     * 循环 <code>objectCollection</code>,统计<code>propertyName</code>的值出现的次数.
      * 
      * <p>
-     * 返回的LinkedHashMap,key是{@code propertyName}对应的值,value是该值出现的次数;<br>
-     * 顺序是 objectCollection {@code propertyName}的值的顺序
+     * 返回的LinkedHashMap,key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 顺序是 objectCollection <code>propertyName</code>的值的顺序
      * </p>
      *
      * @param <T>
@@ -1382,11 +1361,11 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,只选择 符合 <code>includePredicate</code>的对象,统计 {@code propertyName}的值出现的次数.
+     * 循环 <code>objectCollection</code>,只选择 符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
      * 
      * <p>
-     * 返回的LinkedHashMap,key是{@code propertyName}对应的值,value是该值出现的次数;<br>
-     * 顺序是 objectCollection {@code propertyName}的值的顺序
+     * 返回的LinkedHashMap,key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 顺序是 objectCollection<code>propertyName</code>的值的顺序
      * </p>
      *
      * @param <T>
@@ -1446,28 +1425,28 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            List<User> list = new ArrayList<User>();
-    
-            User user1 = new User(2L);
-            user1.setAge(18);
-            list.add(user1);
-    
-            User user2 = new User(3L);
-            user2.setAge(30);
-            list.add(user2);
-    
-            Map<String, Number> map = CollectionsUtil.avg(list, 2, "id", "age");
-    
-            LOGGER.info(JsonUtil.format(map));
-    }
-    
-    返回:
-    {
-        "id": 2.5,
-        "age": 24
-    }
+     * List{@code <User>} list = new ArrayList{@code <User>}();
      * 
+     * User user1 = new User(2L);
+     * user1.setAge(18);
+     * list.add(user1);
+     * 
+     * User user2 = new User(3L);
+     * user2.setAge(30);
+     * list.add(user2);
+     * 
+     * Map{@code <String, Number>} map = CollectionsUtil.avg(list, 2, "id", "age");
+     * 
+     * LOGGER.info(JsonUtil.format(map));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {
+         "id": 2.5,
+         "age": 24
+     }
      * </pre>
      * 
      * </blockquote>
@@ -1507,16 +1486,13 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            List<User> list = new ArrayList<User>();
-            list.add(new User(2L));
-            list.add(new User(5L));
-            list.add(new User(5L));
-    }
-    
-    返回: 4.00
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(5L));
+     * list.add(new User(5L));
      * </pre>
      * 
+     * 返回: 4.00
      * </blockquote>
      *
      * @param <O>
@@ -1550,26 +1526,27 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            List<User> list = new ArrayList<User>();
-    
-            User user1 = new User(2L);
-            user1.setAge(18);
-            list.add(user1);
-    
-            User user2 = new User(3L);
-            user2.setAge(30);
-            list.add(user2);
-    
-            Map<String, Number> map = CollectionsUtil.sum(list, "id", "age");
-            LOGGER.info(JsonUtil.format(map));
-    }
-    * 返回:
-    * {
-         "id": 5,
-         "age": 48
-      }
+     * List{@code <User>} list = new ArrayList{@code <User>}();
      * 
+     * User user1 = new User(2L);
+     * user1.setAge(18);
+     * list.add(user1);
+     * 
+     * User user2 = new User(3L);
+     * user2.setAge(30);
+     * list.add(user2);
+     * 
+     * Map{@code <String, Number>} map = CollectionsUtil.sum(list, "id", "age");
+     * LOGGER.info(JsonUtil.format(map));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "id": 5,
+     * "age": 48
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1618,17 +1595,16 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    {@code
-            List<User> list = new ArrayList<User>();
-            list.add(new User(2L));
-            list.add(new User(5L));
-            list.add(new User(5L));
-            
-         Number number = CollectionsUtil.sum(list, "id");
-         LOGGER.info("" + number);
-    }
-    返回: 12
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(5L));
+     * list.add(new User(5L));
+     * 
+     * Number number = CollectionsUtil.sum(list, "id");
+     * LOGGER.info("" + number);
      * </pre>
+     * 
+     * 返回: 12
      * 
      * </blockquote>
      * 
@@ -1636,32 +1612,27 @@ public final class CollectionsUtil{
      * 当你需要写这样的代码的时候,
      * 
      * <pre class="code">
-    {@code
-    protected Integer getCookieShoppingCartLinesQty(List<CookieShoppingCartLine> cartLineList)} {  
-        {@code
-        Integer qty = 0;
-        //获取cookie中的购物车行集合
-        if (null != cartLineList && cartLineList.size() > 0)}{  
-            {@code
-            for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();)} {  
-                {@code
-                CookieShoppingCartLine cookieShoppingCartLine = (CookieShoppingCartLine) iterator.next();
-                qty += cookieShoppingCartLine.getQuantity();
-            }}
-        }
-        return qty;
-        }
-    }
+     * 
+     * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
+     *     Integer qty = 0;
+     *     //获取cookie中的购物车行集合
+     *     if (null != cartLineList && cartLineList.size() > 0){
+     *         for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();){
+     *             CookieShoppingCartLine cookieShoppingCartLine = (CookieShoppingCartLine) iterator.next();
+     *             qty += cookieShoppingCartLine.getQuantity();
+     *         }
+     *     }
+     *     return qty;
+     * }
      * </pre>
      * 
      * 你可以写成:
      * 
      * <pre class="code">
-     {@code 
-     protected Integer getCookieShoppingCartLinesQty(List<CookieShoppingCartLine> cartLineList)}{ {@code 
-         return Validator.isNullOrEmpty(cartLineList) ? 0 : CollectionsUtil.sum(cartLineList, "quantity").intValue();
-     }}
-     }
+     * 
+     * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
+     *     return Validator.isNullOrEmpty(cartLineList) ? 0 : CollectionsUtil.sum(cartLineList, "quantity").intValue();
+     * }
      * </pre>
      * 
      * @param <O>
