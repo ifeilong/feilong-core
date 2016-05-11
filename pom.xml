@@ -211,6 +211,7 @@
 				<configuration>
 					<includes>
 						<include>**/AlphabetTest</include>
+						<include>**/HttpMethodTypeTest</include>
 						<include>**/CharsetTypeTest</include>
 
 						<include>**/ValidatorTest.java</include>
@@ -220,6 +221,8 @@
 
 						<include>**/EnumUtilTest</include>
 						<include>**/RegexUtilTest</include>
+						
+						<include>**/NumberUtilTest</include>
 					</includes>
 					<skip>false</skip>
 				</configuration>

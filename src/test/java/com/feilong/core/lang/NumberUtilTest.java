@@ -231,7 +231,7 @@ public class NumberUtilTest{
         assertEquals(new BigDecimal(123), NumberUtil.toNoScale(new BigDecimal(123.02)));
         assertEquals(new BigDecimal(123), NumberUtil.toNoScale(new BigDecimal(123.49)));
         assertEquals(new BigDecimal(124), NumberUtil.toNoScale(new BigDecimal(123.51)));
-        assertEquals(new BigDecimal(-123), NumberUtil.toNoScale(new BigDecimal(-123.51)));
+        assertEquals(new BigDecimal(-124), NumberUtil.toNoScale(new BigDecimal(-123.51)));
     }
 
     /**
@@ -244,7 +244,7 @@ public class NumberUtilTest{
         assertEquals(new BigDecimal(89), NumberUtil.toNoScale(88.820f));
         assertEquals(new BigDecimal(88), NumberUtil.toNoScale(88.4999f));
         assertEquals(new BigDecimal(88), NumberUtil.toNoScale(88.4999d));
-        assertEquals(new BigDecimal(-88), NumberUtil.toNoScale(-88.5999d));
+        assertEquals(new BigDecimal(-89), NumberUtil.toNoScale(-88.5999d));
         // ***********************************************************************
         assertEquals(new BigDecimal(0), NumberUtil.toNoScale(0.1));
         assertEquals(new BigDecimal(1), NumberUtil.toNoScale(0.5));
@@ -311,9 +311,9 @@ public class NumberUtilTest{
      */
     @Test
     public void getDivideValue(){
-        assertEquals("3.33", NumberUtil.getDivideValue(new BigDecimal(10), 3, 2));
-        assertEquals("1.67", NumberUtil.getDivideValue(new BigDecimal(5), 3, 2));
-        assertEquals("5", NumberUtil.getDivideValue(new BigDecimal(5), "0", 2));
+        assertEquals("3.33", NumberUtil.getDivideValue(new BigDecimal(10), 3, 2).toString());
+        assertEquals("1.67", NumberUtil.getDivideValue(new BigDecimal(5), 3, 2).toString());
+        assertEquals("5", NumberUtil.getDivideValue(new BigDecimal(5), "0", 2).toString());
     }
 
     /**
@@ -336,7 +336,7 @@ public class NumberUtilTest{
         assertEquals(true, NumberUtil.isSpecificNumber(0.0000, "0"));
         assertEquals(false, NumberUtil.isSpecificNumber(-0.0001, "-0"));
         assertEquals(true, NumberUtil.isSpecificNumber("-0.0000", "0"));
-        assertEquals(true, NumberUtil.isSpecificNumber("0.0001", "-0.0001"));
+        assertEquals(false, NumberUtil.isSpecificNumber("0.0001", "-0.0001"));
     }
 
     /**
@@ -346,9 +346,9 @@ public class NumberUtilTest{
     @Test
     public void getAddValue(){
         assertEquals(null, NumberUtil.getAddValue(null, null));
-        assertEquals(5, NumberUtil.getAddValue(null, 5));
-        assertEquals(6, NumberUtil.getAddValue(new BigDecimal(6), null));
-        assertEquals(11, NumberUtil.getAddValue(new BigDecimal(6), 5));
+        assertEquals(5, NumberUtil.getAddValue(null, 5).intValue());
+        assertEquals(6, NumberUtil.getAddValue(new BigDecimal(6), null).intValue());
+        assertEquals(11, NumberUtil.getAddValue(new BigDecimal(6), 5).intValue());
     }
 
     /**
