@@ -487,8 +487,8 @@ public final class CollectionsUtil{
      *            the generic type
      * @param objectCollection
      *            the item src list
-     * @return if Validator.isNullOrEmpty(collection) 返回null<br>
-     *         else 返回的是 {@link ArrayList}
+     * @return 如果传入的参数 <code>objectCollection</code> 是Null或者Empty,返回{@link Collections#emptyList()}<br>
+     *         else 先转换成 {@link LinkedHashSet},再转换成{@link ArrayList}返回
      * @see ArrayList#ArrayList(java.util.Collection)
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see <a
@@ -549,7 +549,9 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
+     * <p>
      * 以下情况:
+     * </p>
      * 
      * <span style="color:green">//数组</span>
      * 
