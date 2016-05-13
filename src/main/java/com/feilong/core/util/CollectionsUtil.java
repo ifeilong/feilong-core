@@ -505,7 +505,7 @@ public final class CollectionsUtil{
     //*************************获得 属性值 *******************************************************************
 
     /**
-     * 解析对象集合,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象特殊属性,拼成List(ArrayList).
+     * 解析对象集合,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象指定的属性 <code>propertyName</code>的值,拼成List(ArrayList).
      * 
      * <h3>示例:</h3>
      * 
@@ -615,8 +615,8 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成List(ArrayList),<br>
-     *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;<br>
-     *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty ArrayList
+     *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty ArrayList<br>
+     *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see #getPropertyValueCollection(Collection, String, Collection)
@@ -628,7 +628,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 获得 property value set.
+     * 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成Set.
      * 
      * <p>
      * 注意:返回的是 {@link LinkedHashSet},顺序是参数 objectCollection 元素的顺序
@@ -665,8 +665,8 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成Set(LinkedHashSet),<br>
-     *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;<br>
-     *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty LinkedHashSet
+     *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty LinkedHashSet<br>
+     *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;
      * @see #getPropertyValueCollection(Collection, String, Collection)
      * @since 1.0.8
      */
