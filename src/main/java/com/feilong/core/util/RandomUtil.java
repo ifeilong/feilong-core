@@ -25,10 +25,10 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 随机数工具类.
  * 
  * <ul>
- * <li>{@link java.lang.Math#random()} 底层也是调用的 new Random(),值＝Random nextDouble()</li>
- * <li>把 {@link java.util.Random} 对象作为一个全局实例(static)来使用.Java中 {@link java.util.Random} 是线程安全的(内部进行了加锁处理);</li>
+ * <li>{@link java.lang.Math#random()}底层也是调用的 new Random(),值＝Random nextDouble()</li>
+ * <li>把 {@link java.util.Random}对象作为一个全局实例(static)来使用.Java中 {@link java.util.Random} 是线程安全的(内部进行了加锁处理);</li>
  * <li>伪随机数</li>
- * <li>生成随机数的算法有很多种,最简单也是最常用的就是 "线性同余法":  第n+1个数=(第n个数*29+37) % 1000,其中%是"求余数"运算符.</li>
+ * <li>生成随机数的算法有很多种,最简单也是最常用的就是 "线性同余法":第n+1个数=(第n个数*29+37) % 1000,其中%是"求余数"运算符.</li>
  * </ul>
  *
  * @author feilong
@@ -86,7 +86,7 @@ public final class RandomUtil{
     }
 
     /**
-     * 创建最小值 <code>minValue</code> 和最大值 <code>maxValue</code>之间的随机数.
+     * 创建最小值<code>minValue</code>和最大值<code>maxValue</code>之间的随机数.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -125,7 +125,7 @@ public final class RandomUtil{
     // ********************************************************************
 
     /**
-     * 生成一个指定长度 <code>length</code>的随机正整数.
+     * 生成一个指定长度<code>length</code>的随机正整数.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -159,7 +159,7 @@ public final class RandomUtil{
     // ******************************createRandomFromString**********************************
 
     /**
-     * 随机抽取字符串char,拼接最小长度是 <code>minLength</code>,最大长度是 <code>maxLength</code>的字符串随机字符串.
+     * 随机抽取字符串char,拼接最小长度是<code>minLength</code>,最大长度是<code>maxLength</code>的字符串随机字符串.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -197,7 +197,7 @@ public final class RandomUtil{
     }
 
     /**
-     * 随机抽取字符串 <code>char</code>,拼接成指定长度 <code>length</code>的字符串.
+     * 随机抽取字符串<code>char</code>,拼接成指定长度<code>length</code>的字符串.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -205,17 +205,17 @@ public final class RandomUtil{
      * <pre class="code">
      * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}, 5)
      * 
-     * 从{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS} 随机抽取字符,组成长度是5 的字符串
-     * 生成的结果是可能是 IFSMB
+     * 从{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}随机抽取字符,组成长度是5的字符串
+     * 生成的结果是可能是IFSMB
      * </pre>
      * 
      * </blockquote>
      * 
      * @param str
-     *            被抽取的字符串,比如 {@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}
+     *            被抽取的字符串,比如{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}
      * @param length
-     *            指定字符串长度, 比如 5
-     * @return 得到随机字符串, 如上面给到的参数,可能是 IFSMB <br>
+     *            指定字符串长度,比如 5
+     * @return 得到随机字符串,如上面给到的参数,可能是IFSMB<br>
      *         if str empty,will {@link java.lang.NullPointerException NullPointerException};<br>
      *         if length<=0 will {@link java.lang.IllegalArgumentException IllegalArgumentException}
      */

@@ -45,7 +45,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * <p>
  * hashCode重要么?<br>
- * 不重要，对于List集合、数组而言，他就是一个累赘,但是对于HashMap、HashSet、HashTable而言，它变得异常重要.
+ * 不重要,对于List集合、数组而言,他就是一个累赘,但是对于HashMap、HashSet、HashTable而言,它变得异常重要.
  * </p>
  * 
  * <p>
@@ -57,8 +57,8 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * 整个处理流程是：
  * <ol>
- * <li>判断两个对象的hashcode是否相等，若不等，则认为两个对象不等，完毕，若相等，则比较equals。</li>
- * <li>若两个对象的equals不等，则可以认为两个对象不等，否则认为他们相等。</li>
+ * <li>判断两个对象的hashcode是否相等,若不等,则认为两个对象不等,完毕,若相等,则比较equals。</li>
+ * <li>若两个对象的equals不等,则可以认为两个对象不等,否则认为他们相等。</li>
  * </ol>
  * </blockquote>
  * 
@@ -503,10 +503,10 @@ public final class MapUtil{
     }
 
     /**
-     * 抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回.
+     * 抽取map value<code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回.
      * 
      * <p>
-     * 注意,在抽取的过程中, 如果 <code>map</code> 没有 某个 <code>includeKeys</code>,将会输出 warn log
+     * 注意,在抽取的过程中,如果 <code>map</code>没有某个<code>includeKeys</code>,将会输出 warn log
      * </p>
      * 
      * <h3>示例:</h3>

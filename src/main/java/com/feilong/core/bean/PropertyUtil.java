@@ -30,13 +30,13 @@ import com.feilong.core.Validator;
 import com.feilong.core.lang.ClassUtil;
 
 /**
- * 封装了 {@link PropertyUtils}.
+ * 封装了{@link PropertyUtils}.
  * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}:</h3>
  * 
  * <blockquote>
  * <p>
- * {@link PropertyUtils}类和 {@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同. <br>
+ * {@link PropertyUtils}类和{@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同.<br>
  * BeanUtils着重于"Bean",返回值通常是String,<br>
  * 而PropertyUtils着重于属性,它的返回值通常是Object. 
  * </p>
@@ -60,13 +60,13 @@ public final class PropertyUtil{
     }
 
     /**
-     * 将 <code>fromObj</code> 中的 一组属性的值 复制到 <code>toObj</code>对象中.
+     * 将<code>fromObj</code>中的一组属性的值复制到<code>toObj</code>对象中.
      * 
      * <h3>代码流程:</h3>
      * <blockquote>
      * <p>
      * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},否则循环调用
-     * {@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中
+     * {@link #getProperty(Object, String)}再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中
      * </p>
      * </blockquote>
      * 
@@ -154,9 +154,7 @@ public final class PropertyUtil{
      *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
      *            如果 是null or empty ,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}
      * @see #setProperty(Object, String, Object)
-     * 
-     * @see com.feilong.core.bean.BeanUtil#copyProperties(Object, Object, String...)
-     * 
+     * @see BeanUtil#copyProperties(Object, Object, String...)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
      *      BeanUtils,Cglib BeanCopier)</a>
@@ -182,7 +180,7 @@ public final class PropertyUtil{
     }
 
     /**
-     * 返回一个<code>bean</code>中所有的 <span style="color:green">可读属性</span>,并将属性名/属性值放入一个Map中.
+     * 返回一个<code>bean</code>中所有的<span style="color:green">可读属性</span>,并将属性名/属性值放入一个Map中.
      * 
      * <p>
      * Return the entire set of properties for which the specified bean provides a read method.
@@ -207,7 +205,7 @@ public final class PropertyUtil{
      * @return The set of properties for the bean
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
-     * @see com.feilong.core.bean.BeanUtil#describe(Object)
+     * @see BeanUtil#describe(Object)
      */
     public static Map<String, Object> describe(Object bean){
         try{
@@ -237,7 +235,7 @@ public final class PropertyUtil{
      *            Value to which this property is to be set
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
-     * @see com.feilong.core.bean.BeanUtil#setProperty(Object, String, Object)
+     * @see BeanUtil#setProperty(Object, String, Object)
      */
     public static void setProperty(Object bean,String propertyName,Object value){
         try{
@@ -300,7 +298,7 @@ public final class PropertyUtil{
      * @param propertyName
      *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
      * @return 使用{@link PropertyUtils#getProperty(Object, String)} 从对象中取得属性值
-     * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
+     * @see BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtilsBean

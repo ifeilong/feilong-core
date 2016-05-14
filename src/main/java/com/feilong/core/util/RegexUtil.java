@@ -52,10 +52,10 @@ public final class RegexUtil{
     }
 
     /**
-     * 编译给定正则表达式并尝试将给定输入与其匹配, 调用了 {@link Pattern#matches(String, CharSequence)}方法.
+     * 编译给定正则表达式并尝试将给定输入与其匹配,调用了{@link Pattern#matches(String, CharSequence)}方法.
      * 
      * <p>
-     * 这里是等价于 {@link #getMatcher(String, CharSequence)}.matches();
+     * 这里是等价于{@link #getMatcher(String, CharSequence)}.matches();
      * </p>
      *
      * @param regexPattern
@@ -76,8 +76,8 @@ public final class RegexUtil{
      * 返回在以前匹配操作期间由给定组捕获的输入子序列.
      * 
      * <p>
-     * 对于匹配器 m、输入序列 s 和组索引 g,表达式 m.group(g) 和 s.substring(m.start(g), m.end(g)) 是等效的. <br>
-     * 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
+     * 对于匹配器 m、输入序列 s 和组索引 g,表达式 m.group(g) 和 s.substring(m.start(g), m.end(g))是等效的.<br>
+     * 捕获组是从 1开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0)等效于 m.group().
      * </p>
      * 
      * <h3>示例:</h3>
@@ -146,8 +146,8 @@ public final class RegexUtil{
      * 返回在以前匹配操作期间由给定组捕获的输入子序列.
      * 
      * <p>
-     * 对于匹配器 m、输入序列 s 和组索引 g,表达式 m.group(g) 和 s.substring(m.start(g), m.end(g)) 是等效的. <br>
-     * 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
+     * 对于匹配器 m、输入序列 s 和组索引 g,表达式 m.group(g) 和 s.substring(m.start(g), m.end(g))是等效的.<br>
+     * 捕获组是从 1开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0)等效于 m.group().
      * </p>
      * 
      * <h3>示例:</h3>

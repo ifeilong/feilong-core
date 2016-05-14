@@ -24,6 +24,15 @@ import com.feilong.core.Validator;
 
 /**
  * {@link Iterator} 工具类.
+ * 
+ * <h3>迭代器{@link Iterator}与枚举有两点不同:</h3>
+ * 
+ * <blockquote>
+ * <ol>
+ * <li>迭代器{@link Iterator}允许调用者利用定义良好的语义在迭代期间从迭代器所指向的 collection 移除元素。</li>
+ * <li>方法名称得到了改进。</li>
+ * </ol>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.5.3 2016年4月18日 上午2:50:15
@@ -40,10 +49,10 @@ public final class IteratorUtil{
     }
 
     /**
-     * 迭代iterator,判断元素的 字符串格式 是否和传入的值 <code>value</code>的字符串格式相等.
+     * 迭代{@link Iterator},判断元素的字符串格式是否和传入的值<code>value</code>的字符串格式相等.
      * 
      * <p style="color:red">
-     * 注意,比较的是 {@link java.util.Objects#toString(Object, String)},常常用于自定义标签或者el function
+     * 注意,比较的是{@link java.util.Objects#toString(Object, String)},常常用于自定义标签或者el function
      * </p>
      * 
      * @param iterator

@@ -119,7 +119,7 @@ public final class PropertiesUtil{
     /**
      * 获取Properties配置文件键值.
      * 
-     * @param clz
+     * @param klass
      *            当前类
      * @param propertiesPath
      *            Properties文件路径 如"/WEB-INF/classes/feilong.user.properties"
@@ -128,15 +128,15 @@ public final class PropertiesUtil{
      * @return 获取Properties配置文件键值
      * @see #getProperties(Class, String)
      */
-    public static String getPropertiesValue(Class<?> clz,String propertiesPath,String key){
-        Properties properties = getProperties(clz, propertiesPath);
+    public static String getPropertiesValue(Class<?> klass,String propertiesPath,String key){
+        Properties properties = getProperties(klass, propertiesPath);
         return properties.getProperty(key);
     }
 
     /**
      * 通过ClassLoader获得properties值.
      * 
-     * @param clz
+     * @param klass
      *            当前Class
      * @param propertiesPath
      *            Properties文件路径 如"/WEB-INF/classes/feilong.user.properties"
@@ -146,8 +146,8 @@ public final class PropertiesUtil{
      * @see #getPropertiesWithClassLoader(Class, String)
      * @see java.util.Properties#getProperty(String)
      */
-    public static String getPropertiesValueWithClassLoader(Class<?> clz,String propertiesPath,String key){
-        Properties properties = getPropertiesWithClassLoader(clz, propertiesPath);
+    public static String getPropertiesValueWithClassLoader(Class<?> klass,String propertiesPath,String key){
+        Properties properties = getPropertiesWithClassLoader(klass, propertiesPath);
         return properties.getProperty(key);
     }
 

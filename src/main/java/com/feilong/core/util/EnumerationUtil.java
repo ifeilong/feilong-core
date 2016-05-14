@@ -16,6 +16,7 @@
 package com.feilong.core.util;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
@@ -23,7 +24,28 @@ import org.apache.commons.collections4.iterators.EnumerationIterator;
 import com.feilong.core.Validator;
 
 /**
- * {@link Enumeration} 工具类.
+ * {@link Enumeration}工具类.
+ * 
+ * <p>
+ * {@link Enumeration}接口是JDK 1.0时就推出的,是最早的迭代输出接口,最早使用Vector时就是使用{@link Enumeration}接口进行输出的。<br>
+ * 虽然{@link Enumeration}是一个旧的类,但是在JDK1.5之后为Enumeration类进行了扩充,增加了泛型的操作应用
+ * </p>
+ * 
+ * <h3>为什么还要继续使用{@link Enumeration}?</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * {@link Enumeration}和Iterator接口的功能非常类似,而且{@link Enumeration}接口中方法的名称也比 接口中的方法名称长很多,那为什么还要继续使用{@link Enumeration}呢？
+ * </p>
+ * <p>
+ * 在旧的操作中依然会使用{@link Enumeration}接口。<br>
+ * 实际上Java的发展经历了很长的时间,一些比较古老的系统或是类库的方法中(例如,本系列的下一步Web开发中就存在这样的操作方法)还在使用{@link Enumeration}接口,所以掌握其操作也是很有必要的。
+ * </p>
+ * <p>
+ * 而Iterator是JDK1.2才添加的接口,它也是为了HashMap、ArrayList等集合提供遍历接口。<br>
+ * Iterator是支持fail-fast机制的：当多个线程对同一个集合的内容进行操作时,就可能会产生fail-fast事件。
+ * </p>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.5.3 2016年4月18日 上午2:34:38
@@ -40,13 +62,13 @@ public final class EnumerationUtil{
     }
 
     /**
-     * 判断 <code>enumeration</code> 枚举里面,是否有 指定的元素 <code>value</code>.
+     * 判断<code>enumeration</code>枚举里面,是否有指定的元素<code>value</code>.
      * 
      * <h3>代码流程:</h3>
      * <blockquote>
      * <ol>
      * <li><code>if isNullOrEmpty(enumeration) return false</code></li>
-     * <li>循环枚举里面的每个元素,调用 {@link org.apache.commons.lang3.ObjectUtils#equals(Object, Object)},如果equals 返回true</li>
+     * <li>调用 {@link IteratorUtils#contains(Iterator, Object)},如果contains 返回true</li>
      * </ol>
      * </blockquote>
      *
@@ -56,9 +78,8 @@ public final class EnumerationUtil{
      *            the enumeration
      * @param value
      *            指定的元素
-     * @return true, if contains
+     * @return true,if contains
      * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
-     * @see org.apache.commons.lang3.ObjectUtils#equals(Object, Object)
      * @see org.apache.commons.collections4.iterators#EnumerationIterator
      * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)
      */

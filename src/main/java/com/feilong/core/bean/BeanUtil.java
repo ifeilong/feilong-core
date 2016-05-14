@@ -245,13 +245,13 @@ public final class BeanUtil{
     }
 
     /**
-     * 调用{@link ConvertUtils#register(Converter, Class)} 将字符串和指定类型的实例之间进行转换.
+     * 调用{@link ConvertUtils#register(Converter, Class)}将字符串和指定类型的实例之间进行转换.
      *  
      * <h3>特别说明:</h3>
      * 
      * <blockquote>
      * <p>
-     * 由于,该类的方法都是静态方法,并且static方法块有默认参数的初始化,如果需要自行register converter的地方,<br>
+     * 由于该类的方法都是静态方法,并且static方法块有默认参数的初始化,如果需要自行register converter的地方,<br>
      * 比如时间转换,如果先使用ConvertUtils原生方法先注册Converter,再第一次调用该类相关方法,<br>
      * 比如:
      * </p>

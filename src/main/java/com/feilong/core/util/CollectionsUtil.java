@@ -1037,7 +1037,7 @@ public final class CollectionsUtil{
      * @param objectCollection
      *            the object collection
      * @param predicate
-     *            接口封装了对输入对象的判断，返回true或者false,可用的实现类有
+     *            接口封装了对输入对象的判断,返回true或者false,可用的实现类有
      *            <ul>
      *            <li>{@link org.apache.commons.collections.functors.EqualPredicate}</li>
      *            <li>{@link org.apache.commons.collections4.functors.IdentityPredicate}</li>

@@ -91,7 +91,7 @@ public final class ResourceBundleUtil{
      *            the generic type
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param key
      *            the key
@@ -133,7 +133,7 @@ public final class ResourceBundleUtil{
      *
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param key
      *            Properties配置文件键名
@@ -151,7 +151,7 @@ public final class ResourceBundleUtil{
      *
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param key
      *            Properties配置文件键名
@@ -175,7 +175,7 @@ public final class ResourceBundleUtil{
      * 
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param key
      *            the key
@@ -255,7 +255,7 @@ public final class ResourceBundleUtil{
      * 
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param key
      *            the key
@@ -329,7 +329,7 @@ public final class ResourceBundleUtil{
      *            the generic type
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param key
      *            the key
@@ -450,7 +450,7 @@ public final class ResourceBundleUtil{
      *
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param prefix
      *            前缀
@@ -492,7 +492,7 @@ public final class ResourceBundleUtil{
      * 
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
      * @see #readAllPropertiesToMap(String, Locale)
@@ -512,7 +512,7 @@ public final class ResourceBundleUtil{
      * 
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
@@ -564,7 +564,7 @@ public final class ResourceBundleUtil{
      * 
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @return the resource bundle
      * @see java.util.Locale#getDefault()
@@ -579,7 +579,7 @@ public final class ResourceBundleUtil{
      * 
      * @param baseName
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查，可通过指定路径名（使用 "/"）而不是完全限定类名（使用 "."）来访问 {@link PropertyResourceBundle}
+     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
