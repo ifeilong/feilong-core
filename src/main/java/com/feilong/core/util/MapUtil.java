@@ -55,7 +55,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <img src="http://venusdrogon.github.io/feilong-platform/mysource/hashCode-and-equals.jpg"/>
  * </p>
  * 
- * 整个处理流程是：
+ * 整个处理流程是:
  * <ol>
  * <li>判断两个对象的hashcode是否相等,若不等,则认为两个对象不等,完毕,若相等,则比较equals。</li>
  * <li>若两个对象的equals不等,则可以认为两个对象不等,否则认为他们相等。</li>

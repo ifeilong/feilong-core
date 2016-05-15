@@ -43,7 +43,7 @@ import com.feilong.core.Validator;
  * </p>
  * <p>
  * 而Iterator是JDK1.2才添加的接口,它也是为了HashMap、ArrayList等集合提供遍历接口。<br>
- * Iterator是支持fail-fast机制的：当多个线程对同一个集合的内容进行操作时,就可能会产生fail-fast事件。
+ * Iterator是支持fail-fast机制的:当多个线程对同一个集合的内容进行操作时,就可能会产生fail-fast事件。
  * </p>
  * </blockquote>
  *
