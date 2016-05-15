@@ -36,7 +36,7 @@ package com.feilong.core;
 public final class CharsetType{
 
     /**
-     * Eight-bit Unicode Transformation Format. <code>{@value}</code>.
+     * <code>{@value}</code>,Eight-bit (Unicode Transformation Format).
      *
      * <p>
      * Every implementation of the Java platform is required to support this character encoding.
@@ -86,20 +86,20 @@ public final class CharsetType{
     //******************************************************************************************
 
     /**
-     * GB2312只能表示简体中文 <code>{@value}</code>.
+     * <code>{@value}</code>,<span style="color:red">只能表示简体中文</span> .
      * 
      * <p style="color:red">
      * if you want to use {@link #GB2312},may be use {@link #GB18030} is better
      * </p>
      * 
      * <p>
-     * GB2312码是中华人民共和国国家汉字信息交换用编码,全称《信息交换用汉字编码字符集——基本集》,<br>
-     * 由国家标准总局发布,<span style="color:green">1981年5月1日实施</span>,通行于大陆. 新加坡等地也使用此编码.<br>
-     * 基本集共收入 <span style="color:green">汉字6763个和非汉字图形字符682个</span>
+     * ASCII码的提出,有效的解决了西文文字的信息化问题,但对于汉字字符却完全不适用。<br>
+     * 为了满足国内在计算机中使用汉字的需要,中国国家标准总局发布了一系列的汉字字符集国家标准编码,统称为<b>GB码</b>,或<b>国标码</b>。<br>
+     * 其中最有影响的是于1980年发布的《信息交换用汉字编码字符集 基本集》,标准号为GB2312-1980,因其使用非常普遍,也常被通称为国标码。<br>
      * </p>
      * 
      * <p>
-     * 在GB2312中,共收录6763个汉字,其中一级汉字3755个,二级汉字3008个,还收录了拉丁字母、希腊字母、日文等682个全角字符.<br>
+     * 共收录6763个汉字,其中一级汉字3755个,二级汉字3008个,还收录了拉丁字母、希腊字母、日文等682个全角字符.<br>
      * 由于GB2312的出现,它基本上解决了我们日常的需要,它所收录的汉子已经覆盖了中国大陆99.75%的使用平率. <br>
      * 但是我国文化博大精深,对于人名、古汉语等方面出现的罕用字,GB2312还是不能处理,于是后面的GBK和GB18030汉字字符集出现了.
      * </p>
@@ -107,30 +107,30 @@ public final class CharsetType{
     public static final String GB2312     = "GB2312";
 
     /**
-     * GBK,全称《汉字内码扩展规范》,<span style="color:green">1995年12月1日制订</span>,K为扩展的汉语拼音中"扩"字的声母.,GBK可以表示简体中文和繁体中文 <code>{@value}</code>.
+     * <code>{@value}</code>(Chinese Internal Code Specification),全称《汉字内码扩展规范》,<span style="color:green">1995年12月1日制订</span>
+     * ,K为扩展的汉语拼音中"扩"字的声母.<span style="color:green">可以表示简体中文和繁体中文</span>.
      * 
      * <p style="color:red">
      * if you want to use {@link #GBK},may be use {@link #GB18030} is better
      * </p>
      * 
      * <p>
-     * 英文全称Chinese Internal Code Specification.<br>
      * GBK编码标准兼容GB2312,共收录<span style="color:green">汉字21003个、符号883个,并提供1894个造字码位</span>,简、繁体字融于一库.
      * </p>
      */
     public static final String GBK        = "GBK";
 
     /**
-     * 国家标准GB18030-2000《信息交换用汉字编码字符集基本集的扩充》 <code>{@value}</code>.
+     * <code>{@value}</code> 国家标准GB18030-2000《信息交换用汉字编码字符集基本集的扩充》 .
      * 
      * <p>
-     * 是我国继GB2312-1980和GB13000-1993之后最重要的汉字编码标准,是我国计算机系统必须遵循的基础性标准之一.<br>
+     * 是继GB2312-1980和GB13000-1993之后最重要的汉字编码标准,是我国计算机系统必须遵循的基础性标准之一.<br>
      * 目前,GB18030有两个版本:GB18030-2000和GB18030-2005.
      * </p>
      * 
      * <p>
      * 其中GB18030-2000仅规定了常用<span style="color:green">非汉字符号和27533个汉字(包括部首、部件等)的编码</span>,<br>
-     * 而GB18030-2005是全文强制性标准,市场上销售的产品必须符合,它是<span style="color:green">GB18030-2000的基础上增加了42711个汉字和多种我国少数民族文字的编码</span>.
+     * 而GB18030-2005是全文强制性标准,市场上销售的产品必须符合,是<span style="color:green">GB18030-2000的基础上增加了42711个汉字和多种我国少数民族文字的编码</span>.
      * </p>
      * 
      * <p>
