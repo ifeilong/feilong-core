@@ -196,7 +196,7 @@ public final class MapUtil{
     }
 
     /**
-     * 如果map中存在key,那么累加value值;如果不存在那么直接put
+     * 如果map中存在key,那么累加value值;如果不存在那么直接put.
      * 
      * <p>
      * 如果map是null,那么抛出异常
