@@ -174,7 +174,7 @@ public final class MapUtil{
     }
 
     /**
-     * 仅当 <code>null != map && null != value</code> 才将key/value put到map中.
+     * 仅当 <code>null != map && null != value</code>才将key/value put到map中.
      *
      * @param <K>
      *            the key type
@@ -186,12 +186,68 @@ public final class MapUtil{
      *            the key
      * @param value
      *            the value
+     * @see org.apache.commons.collections4.MapUtils#safeAddToMap(Map, Object, Object)
      * @since 1.4.0
      */
     public static <K, V> void putIfValueNotNull(final Map<K, V> map,final K key,final V value){
         if (null != map && null != value){
             map.put(key, value);
         }
+    }
+
+    /**
+     * 如果map中存在key,那么累加value值;如果不存在那么直接put
+     * 
+     * <p>
+     * 如果map是null,那么抛出异常
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * MapUtil.putSumValue(map, "1000001", 5);
+     * MapUtil.putSumValue(map, "1000002", 5);
+     * MapUtil.putSumValue(map, "1000002", 5);
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+        "1000001": 5,
+        "1000002": 10
+        }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     *            the key type
+     * @param map
+     *            the map
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @see org.apache.commons.lang3.mutable.MutableInt
+     * @see <a href="http://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java">most-efficient-way-to-
+     *      increment-a-map-value-in-java</a>
+     * @see "java.util.Map#getOrDefault(Object, Object)"
+     * @see org.apache.commons.collections4.bag.HashBag
+     * @since 1.5.5
+     */
+    public static <K> void putSumValue(Map<K, Integer> map,K key,Integer value){
+        Validate.notNull(map, "map can't be null!");
+        Validate.notNull(value, "value can't be null!");
+
+        Integer v = map.get(key);//这里不要使用 map.containsKey(key),否则会有2次  two potentially expensive operations
+        map.put(key, null == v ? value : value + v);//Suggestion: you should care about code readability more than little performance gain in most of the time.
     }
 
     /**

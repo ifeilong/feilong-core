@@ -43,6 +43,18 @@ public class MapUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
     /**
+     * Test put sum value.
+     */
+    @Test
+    public void testPutSumValue(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        MapUtil.putSumValue(map, "1000001", 5);
+        MapUtil.putSumValue(map, "1000002", 5);
+        MapUtil.putSumValue(map, "1000002", 5);
+        LOGGER.debug(JsonUtil.format(map));
+    }
+
+    /**
      * Test simple entry.
      */
     @Test
@@ -66,6 +78,9 @@ public class MapUtilTest{
         LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
     }
 
+    /**
+     * Test get sub map.
+     */
     @Test
     public void testGetSubMap(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -127,7 +142,6 @@ public class MapUtilTest{
      */
     @Test
     public void testGetSubMapExcludeKeys(){
-
         Map<String, Integer> map = new LinkedHashMap<String, Integer>();
 
         map.put("a", 3007);
@@ -161,7 +175,6 @@ public class MapUtilTest{
      */
     @Test
     public void testMapUtilTest(){
-
         Map<String, String> object = new LinkedHashMap<String, String>();
 
         object.put("1", "1");
@@ -180,7 +193,6 @@ public class MapUtilTest{
      */
     @Test
     public void testLinkedHashMap(){
-
         Map<String, String> object = new LinkedHashMap<String, String>();
 
         object.put("a", "123");
@@ -239,6 +251,9 @@ public class MapUtilTest{
         LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
     }
 
+    /**
+     * Test sort.
+     */
     @Test
     public void testSort(){
         Map<String, Integer> map = new HashMap<String, Integer>();
