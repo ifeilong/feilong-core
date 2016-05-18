@@ -146,15 +146,11 @@ public final class StringUtil{
     // [start] search
 
     /**
-     * 查找子字符串 (<code>target</code>)在 字符串( <code>source</code>)中出现的次数.
+     * 查找子字符串 (<code>target</code>)在字符串( <code>source</code>)中出现的次数.
      * 
      * <pre class="code">
-     *  StringUtil.searchTimes("xin", "xin")
-     *  return  1
-     *  
-     * StringUtil.searchTimes("xiiiin", "ii")
-     *  return  2
-     * 
+     *StringUtil.searchTimes("xin", "xin")      = 1
+     *StringUtil.searchTimes("xiiiin", "ii")    = 2
      * </pre>
      *
      * @param source
@@ -174,10 +170,7 @@ public final class StringUtil{
      * 给一串字符串前后增加两个引号.
      * 
      * <pre class="code">
-     * String text = &quot;jinxin.feilong&quot;;
-     * LOGGER.info(StringUtil.addDoubleQuotes(text));
-     * 
-     * 结果:  "jinxin.feilong"
+     * StringUtil.addDoubleQuotes("jinxin.feilong") = "jinxin.feilong"
      * </pre>
      * 
      * @param text
@@ -193,14 +186,14 @@ public final class StringUtil{
      * 单词首字母大写.
      * 
      * <p>
-     * Example 1: jinxin {@code --->} Jinxin
+     * StringUtil.firstCharToUpperCase("jinxin") = "Jinxin"
      * </p>
      * 
      * <pre class="code">
-     * StringUtils.capitalize(null)  = null
-     * StringUtils.capitalize(&quot;&quot;)    = &quot;&quot;
-     * StringUtils.capitalize(&quot;cat&quot;) = &quot;Cat&quot;
-     * StringUtils.capitalize(&quot;cAt&quot;) = &quot;CAt&quot;
+     * StringUtils.capitalize(null)             = null
+     * StringUtils.capitalize("")     = ""
+     * StringUtils.capitalize("cat")  = "Cat"
+     * StringUtils.capitalize("cAt")  = "CAt"
      * </pre>
      * 
      * @param word
@@ -217,23 +210,22 @@ public final class StringUtil{
      * 单词首字母小写.
      * 
      * <p>
-     * Example 1: Jinxin {@code --->} jinxin
+     * StringUtil.firstCharToUpperCase("Jinxin") = "jinxin"
      * </p>
      * 
      * <pre class="code">
-     * StringUtils.capitalize(null)  = null
-     * StringUtils.capitalize(&quot;&quot;)    = &quot;&quot;
-     * StringUtils.capitalize(&quot;Jinxin&quot;) = &quot;jinxin&quot;
-     * StringUtils.capitalize(&quot;CAt&quot;) = &quot;cAt&quot;
+     * StringUtils.capitalize(null)                 = null
+     * StringUtils.capitalize("")         = ""
+     * StringUtils.capitalize("Jinxin")   = "jinxin"
+     * StringUtils.capitalize("CAt")      = "cAt"
      * </pre>
-     * 
      * 
      * <h3>注意:</h3>
      * 
      * <blockquote>
      * <ol>
      * <li>和 {@link "IntrospectorUtil#decapitalize(String)"} 的区别.</li>
-     * <li>如果要使用一段文字,每个单词首字母小写, 可以使用 {@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...)}</li>
+     * <li>如果要使用一段文字,每个单词首字母小写,可以使用 {@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...)}</li>
      * </ol>
      * </blockquote>
      * 
@@ -246,10 +238,10 @@ public final class StringUtil{
         return StringUtils.uncapitalize(word);
     }
 
-    // [start]Contain
+    // [start]contains
 
     /**
-     * 判断 <code>seq</code> 内是否包含 指定的 <code>searchSeq</code>.
+     * 判断 <code>seq</code>内是否包含指定的<code>searchSeq</code>.
      * 
      * @param seq
      *            原始字符串 jinxin,the CharSequence to check, may be null
@@ -266,13 +258,12 @@ public final class StringUtil{
      * 忽略 大小写 是否包含.
      * 
      * <pre class="code">
-     * StringUtil.containsIgnoreCase(null, &quot;&quot;)  return false
-     * StringUtil.containsIgnoreCase(text, null) return false
-     * StringUtil.containsIgnoreCase(text, &quot;&quot;) return true
-     * StringUtil.containsIgnoreCase(text, &quot;feilong&quot;) return true
-     * StringUtil.containsIgnoreCase(text, &quot;feilong1&quot;)  return false
-     * StringUtil.containsIgnoreCase(text, &quot;feiLong&quot;)  return true
-     * 
+     * StringUtil.containsIgnoreCase(null, "")            = false
+     * StringUtil.containsIgnoreCase(text, null)                    = false
+     * StringUtil.containsIgnoreCase(text, "")            = true
+     * StringUtil.containsIgnoreCase(text, "feilong")     = true
+     * StringUtil.containsIgnoreCase(text, "feilong1")    = false
+     * StringUtil.containsIgnoreCase(text, "feiLong")     = true
      * </pre>
      * 
      * @param str
@@ -292,7 +283,11 @@ public final class StringUtil{
 
     // ********************************replace************************************************
     /**
-     * 使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串..
+     * 使用给定的replacement替换此字符串所有匹配给定的正则表达式的子字符串.
+     * 
+     * <p>
+     * 注意,此方法底层调用的是 {@link java.util.regex.Matcher#replaceAll(String)}
+     * </p>
      * 
      * @param content
      *            需要被替换的字符串
@@ -300,13 +295,10 @@ public final class StringUtil{
      *            用来匹配此字符串的正则表达式
      * @param replacement
      *            用来替换每个匹配项的字符串
-     * @return 所得String,如果传过来的内容是空,则返回""
+     * @return 所得String,如果传过来的内容是空,则返回 {@link org.apache.commons.lang3.StringUtils#EMPTY}
      */
-    public static String replaceAll(Object content,String regex,String replacement){
-        if (null == content){
-            return StringUtils.EMPTY;
-        }
-        return content.toString().replaceAll(regex, replacement);
+    public static String replaceAll(CharSequence content,String regex,String replacement){
+        return null == content ? StringUtils.EMPTY : content.toString().replaceAll(regex, replacement);
     }
 
     /**
@@ -320,6 +312,10 @@ public final class StringUtil{
      * 处理了replacement为空的情况
      * </pre>
      * 
+     * <p>
+     * 注意,底层调用了 {@link java.util.regex.Matcher#replaceAll(String)}
+     * </p>
+     * 
      * @param content
      *            内容
      * @param target
@@ -327,13 +323,14 @@ public final class StringUtil{
      * @param replacement
      *            char 值的替换序列
      * @return 所有匹配字面值目标序列的子字符串
+     * @see java.lang.String#replace(CharSequence, CharSequence)
      */
-    public static String replace(Object content,String target,Object replacement){
+    public static String replace(CharSequence content,String target,Object replacement){
         if (null == content){
             return StringUtils.EMPTY;
         }
         // 替换序列是null
-        String useReplacement = Validator.isNullOrEmpty(replacement) ? StringUtils.EMPTY : replacement.toString();
+        String useReplacement = null == replacement ? StringUtils.EMPTY : replacement.toString();
         return content.toString().replace(target, useReplacement);
     }
 
@@ -342,11 +339,11 @@ public final class StringUtil{
      * 
      * <pre class="code">
      * Map valuesMap = HashMap();
-     * valuesMap.put(&quot;animal&quot;, &quot;quick brown fox&quot;);
-     * valuesMap.put(&quot;target&quot;, &quot;lazy dog&quot;);
+     * valuesMap.put("animal", "quick brown fox");
+     * valuesMap.put("target", "lazy dog");
      * 
      * StrSubstitutor sub = new StrSubstitutor(valuesMap);
-     * String templateString = &quot;The ${animal} jumped over the ${target}.&quot;;
+     * String templateString = "The ${animal} jumped over the ${target}.";
      * String resolvedString = sub.replace(templateString);
      * </pre>
      * 
@@ -393,8 +390,8 @@ public final class StringUtil{
      * 带有数字格式的数字字符串,与数字相加(一般生成流水号使用).
      * 
      * <pre class="code">
-     * stringAddInt("002",2); return 004
-     * stringAddInt("000002",1200); return 001202
+     * stringAddInt("002",2)            =   004
+     * stringAddInt("000002",1200)      =   001202
      * </pre>
      * 
      * @param str
@@ -462,9 +459,7 @@ public final class StringUtil{
      * [截取]从开始位置(startIndex),截取固定长度(length)字符串.
      * 
      * <pre class="code">
-     * StringUtil.substring("jinxin.feilong", 6, 2)
-     * 
-     * renturn .f
+     * StringUtil.substring("jinxin.feilong", 6, 2)     =   .f
      * </pre>
      *
      * @param textString
@@ -489,7 +484,7 @@ public final class StringUtil{
      * </p>
      * 
      * <pre class="code">
-     * substring(&quot;jinxin.feilong&quot;,&quot;.&quot;)======&gt;&quot;.feilong&quot;
+     * substring("jinxin.feilong",".")  =.feilong
      * </pre>
      * 
      * @param text
@@ -510,8 +505,8 @@ public final class StringUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,0)======&gt;&quot;.feilong&quot;</li>
-     * <li>substring(&quot;jinxin.feilong&quot;,&quot;.&quot;,1)======&gt;&quot;feilong&quot;</li>
+     * <li>substring("jinxin.feilong",".",0)======&gt;".feilong"</li>
+     * <li>substring("jinxin.feilong",".",1)======&gt;"feilong"</li>
      * </ul>
      * </blockquote>
      *

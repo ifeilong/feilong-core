@@ -333,9 +333,7 @@ public final class SystemUtil{
      * 
      * @return the properties map for log
      * @see System#getProperties()
-     * @see System#getProperty(String)
-     * @see System#getProperty(String, String)
-     * @see java.util.TreeMap
+     * @see PropertiesUtil#toMap(Properties)
      * @see "org.springframework.core.env.AbstractEnvironment#getSystemProperties()"
      */
     public static Map<String, String> getPropertiesMapForLog(){
@@ -348,8 +346,6 @@ public final class SystemUtil{
      * 
      * @return the env map for log
      * @see System#getenv()
-     * @see System#getenv(String)
-     * @see java.util.TreeMap
      * @see "org.springframework.core.env.AbstractEnvironment#getSystemEnvironment()"
      */
     public static Map<String, String> getEnvMapForLog(){
@@ -380,13 +376,12 @@ public final class SystemUtil{
      * @param properties
      *            the properties from properties
      * @since 1.2.0
-     * @see com.feilong.core.util.PropertiesUtil#toMap(Properties)
-     * @see com.feilong.core.lang.SystemUtil#setPropertiesFromMap(Map)
-     * @see java.lang.System#setProperty(String, String)
+     * @see PropertiesUtil#toMap(Properties)
+     * @see #setPropertiesFromMap(Map)
+     * @see java.lang.System#setProperties(Properties)
      */
     public static void setPropertiesFromProperties(Properties properties){
         Validate.notNull(properties, "properties can't be null!");
-
         Map<String, String> map = PropertiesUtil.toMap(properties);
         setPropertiesFromMap(map);
     }
