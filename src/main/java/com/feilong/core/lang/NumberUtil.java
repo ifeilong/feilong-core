@@ -15,14 +15,12 @@
  */
 package com.feilong.core.lang;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.NumberPattern;
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.NumberFormatUtil;
 
@@ -124,196 +122,60 @@ public final class NumberUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /**
-     * 四舍五入 {@link RoundingMode#HALF_UP},取整,无小数.
-     * 
-     * <p style="color:red">
-     * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 {@link Math#round(double) Math.round(-2.5)} 会是-2
-     * </p>
-     * 
-     * @param number
-     *            number,可以是字符串类型的数字,也可以是任一number类型
-     * @return 四舍五入{@link RoundingMode#HALF_UP},取整,无小数<br>
-     *         如果 isNotNullOrEmpty(number)返回null
-     * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
-     * @see #toNoScale(Serializable, RoundingMode)
-     */
-    public static BigDecimal toNoScale(Serializable number){
-        return toNoScale(number, RoundingMode.HALF_UP);
-    }
-
-    /**
-     * To no scale.
-     * 
-     * @param number
-     *            number,可以是字符串类型的数字,也可以是任一number类型
-     * @param roundingMode
-     *            舍入法 {@link RoundingMode}
-     * @return {@link RoundingMode},取整,无小数<br>
-     *         如果 isNotNullOrEmpty(number)返回null {@link RoundingMode},取整,无小数
-     * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
-     * @since 1.0.7
-     */
-    public static BigDecimal toNoScale(Serializable number,RoundingMode roundingMode){
-        if (Validator.isNullOrEmpty(number)){
-            return null;
-        }
-        //将int、long、double、string类型的数值转为BigDecimal.
-        //使用double会造成精度丢失,而使用BigDecimal就是为了解决精度丢失的问题,建议使用String方式转换.
-        BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
-        return setScale(bigDecimal, 0, roundingMode);
-    }
-
-    // ***********************************************************************************
-
     // [start]Divide
 
     /**
-     * 获得 除法结果one/two,四舍五入取整,不需要再次 {@link #toNoScale(Serializable)} 转换了.
-     * 
-     * <p>
-     * 当two 是空或者是0的时候,直接返回one;<br>
-     * 否则返回除法结果one/two,四舍五入取整.
-     * </p>
-     * 
-     * @param one
-     *            除数
-     * @param two
-     *            被除数,自动转成BigDecimal做除法运算
-     * @return 当two 是空或者是0的时候,直接返回one<br>
-     *         否则返回除法结果one/two,四舍五入 取整
-     */
-    public static BigDecimal getDivideNoScaleValue(BigDecimal one,Serializable two){
-        return getDivideValue(one, two, 0);
-    }
-
-    /**
-     * 获得进度,默认格式为 {@link NumberPattern#PERCENT_WITH_NOPOINT}.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * NumberUtil.getProgress(2, 3) 返回 67%
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param current
-     *            当前量
-     * @param total
-     *            总量
-     * @return 50% 56% 58%不带小数点格式
-     * @see NumberPattern#PERCENT_WITH_NOPOINT
-     * @see #getProgress(Number, Number, String)
-     * @since 1.0.7
-     */
-    public static String getProgress(Number current,Number total){
-        String numberPattern = NumberPattern.PERCENT_WITH_NOPOINT;
-        return getProgress(current, total, numberPattern);
-    }
-
-    /**
-     * 计算进度.
-     * 
-     * <pre class="code">
-     *   Example 1:  
-     *      NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT)
-     *      return 100%
-     *   
-     *   Example 2:
-     *      NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)
-     *      return 66.7%
-     * </pre>
-     *
-     * @param current
-     *            当前量
-     * @param total
-     *            总量
-     * @param numberPattern
-     *            the number pattern {@link NumberPattern}
-     * @return 根据numberPattern 返回 50.5%,100%.....
-     * @see NumberPattern
-     * @see #getDivideValue(BigDecimal, Serializable, int)
-     * @since 1.0.7
-     */
-    public static String getProgress(Number current,Number total,String numberPattern){
-        Validate.notNull(current, "current can't be null/empty!");
-        Validate.notNull(total, "total can't be null/empty!");
-
-        Validate.isTrue(current.intValue() > 0, "current can not <=0");
-        Validate.isTrue(total.intValue() > 0, "total can not <=0");
-        Validate.isTrue(current.doubleValue() <= total.doubleValue(), "current can not > total");
-
-        // XXX
-        int scale = 8;
-        BigDecimal bigDecimalCurrent = ConvertUtil.toBigDecimal(current);
-        BigDecimal divideValue = getDivideValue(bigDecimalCurrent, total, scale);
-        return toString(divideValue, numberPattern);
-    }
-
-    /**
-     * 获得 除法结果one/two,四舍五入 {@link RoundingMode#HALF_UP},小数位数指定.
-     * 
-     * <p>
-     * 当two是空或者是0的时候,直接返回one<br>
-     * 否则返回除法结果one/two,四舍五入,小数位数指定.
-     * </p>
+     * 获得 除法结果one/two,四舍五入{@link RoundingMode#HALF_UP},小数位数指定.
      * 
      * @param one
      *            除数
      * @param two
      *            被除数,自动转成BigDecimal做除法运算
      * @param scale
-     *            要返回的 BigDecimal 商的标度,小数的位数
-     * @return 当two 是空或者是0的时候,直接返回one<br>
-     *         否则返回除法结果one/two,四舍五入 {@link RoundingMode#HALF_UP},小数位数指定
+     *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
+     * @return if <code>one</code> is null,throw NullPointerException<br>
+     *         if <code>two</code> is null,throw NullPointerException<br>
+     *         if <code>two</code> is 0,throw IllegalArgumentException<br>
+     *         否则转换成BigDecimal 返回除法结果one/two,四舍五入 {@link RoundingMode#HALF_UP},小数位数指定
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.RoundingMode#HALF_UP
      * @see java.math.BigDecimal#ROUND_HALF_UP
+     * @see #getDivideValue(Number, Number, int, RoundingMode)
+     * @since 1.5.5
      */
-    public static BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale){
+    public static BigDecimal getDivideValue(Number one,Number two,int scale){
         return getDivideValue(one, two, scale, RoundingMode.HALF_UP);
     }
 
     /**
      * 获得 除法结果one/two,四舍五入,小数位数指定.
      * 
-     * <p>
-     * 当two 是空或者是0的时候,直接返回one<br>
-     * 否则返回除法结果one/two,四舍五入,小数位数指定.
-     * </p>
-     * 
-     * <p>
-     * <b>注意:</b> <span style="color:red">不能直接one.divide(two),避免 exception:Non-terminating decimal expansion; no exact representable decimal
-     * result</span><br>
-     * 应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
-     * </p>
-     *
      * @param one
      *            除数
      * @param two
      *            被除数,自动转成BigDecimal做除法运算
      * @param scale
-     *            要返回的 BigDecimal 商的标度,小数的位数
+     *            标度,小数的位数,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @param roundingMode
      *            舍入法 {@link RoundingMode}
-     * @return 当two 是空或者是0的时候,直接返回one<br>
-     *         否则返回除法结果one/two,依据舍入法 {@link RoundingMode},小数位数指定
+     * @return if <code>one</code> is null,throw NullPointerException<br>
+     *         if <code>two</code> is null,throw NullPointerException<br>
+     *         if <code>two</code> is 0,throw IllegalArgumentException<br>
+     *         否则转换成BigDecimal 返回除法结果one/two,依据舍入法 {@link RoundingMode},小数位数指定
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
-     * @since 1.0.7
+     * @see java.math.BigDecimal#divide(BigDecimal, int, RoundingMode)
+     * @since 1.5.5
      */
-    public static BigDecimal getDivideValue(BigDecimal one,Serializable two,int scale,RoundingMode roundingMode){
-        Validate.notNull(roundingMode, "the roundingMode is null or empty!");
+    public static BigDecimal getDivideValue(Number one,Number two,int scale,RoundingMode roundingMode){
+        Validate.notNull(one, "one can't be null!");
+        Validate.notNull(two, "two can't be null!");
 
-        String zero = "0";
-        if (!isSpecificNumber(two, zero)){
-            // 不能直接one.divide(two) , 应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
-            // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result
-            BigDecimal divisor = ConvertUtil.toBigDecimal(two);
-            return one.divide(divisor, scale, roundingMode);
-        }
-        return one;
+        BigDecimal divisor = ConvertUtil.toBigDecimal(two);
+        Validate.isTrue(!divisor.equals(new BigDecimal(0)), "two can't be zero!");
+
+        // 不能直接one.divide(two),应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
+        // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result
+        return ConvertUtil.toBigDecimal(one).divide(divisor, scale, roundingMode);
     }
 
     // [end]
@@ -321,124 +183,70 @@ public final class NumberUtil{
     // [start]Multiply
 
     /**
-     * 获得两个数的乘积.
+     * 获得两个数字的乘积,并转成BigDecimal返回.
+     * 
+     * <p>
+     * 返回的精度: (this.scale() + multiplicand.scale()).
+     * </p>
+     * 
+     * @param one
+     *            乘数
+     * @param two
+     *            被乘数
+     * @return if <code>one</code> is null,throw NullPointerException<br>
+     *         if <code>two</code> is null,throw NullPointerException<br>
+     *         else convert to BigDecimal and multiply each other
+     * @see com.feilong.core.bean.ConvertUtil#toBigDecimal(Object)
+     * @see "org.apache.velocity.runtime.parser.node.MathUtils#multiply(Number, Number)"
+     * @since 1.5.5
+     */
+    public static BigDecimal getMultiplyValue(Number one,Number two){
+        Validate.notNull(one, "one can't be null!");
+        Validate.notNull(two, "two can't be null!");
+        return ConvertUtil.toBigDecimal(one).multiply(ConvertUtil.toBigDecimal(two));
+    }
+
+    /**
+     * 获得两个数字的乘积,并转成BigDecimal返回.
      * 
      * @param one
      *            乘数
      * @param two
      *            被乘数
      * @param scale
-     *            标度,小数的位数,四舍五入
-     * @return 获得两个数的乘积 <br>
-     *         if isNotNullOrEmpty(two) return one
-     * @see #getMultiplyValue(BigDecimal, Serializable)
+     *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
+     * @return if <code>one</code> is null,throw NullPointerException<br>
+     *         if <code>two</code> is null,throw NullPointerException<br>
+     *         else convert to BigDecimal and multiply each other
+     * @see #getMultiplyValue(Number, Number)
      * @see #setScale(BigDecimal, int)
+     * @since 1.5.5
      */
-    public static BigDecimal getMultiplyValue(BigDecimal one,Serializable two,int scale){
-        BigDecimal result = getMultiplyValue(one, two);
-        return setScale(result, scale);
+    public static BigDecimal getMultiplyValue(Number one,Number two,int scale){
+        BigDecimal multiplyValue = getMultiplyValue(one, two);
+        return setScale(multiplyValue, scale);
     }
-
-    /**
-     * 获得 multiply value.
-     * 
-     * <p>
-     * scale: (this.scale() + multiplicand.scale()).
-     * </p>
-     *
-     * @param one
-     *            乘数
-     * @param two
-     *            被乘数
-     * @return 获得两个数的乘积 <br>
-     *         if isNotNullOrEmpty(two) return one
-     * @see java.math.BigDecimal#multiply(BigDecimal)
-     * @since 1.0.8
-     */
-    public static BigDecimal getMultiplyValue(BigDecimal one,Serializable two){
-        if (Validator.isNullOrEmpty(two)){
-            return one;
-        }
-
-        BigDecimal multiplicand = ConvertUtil.toBigDecimal(two);
-        return one.multiply(multiplicand);
-    }
-
-    /**
-     * 获得 multiply value.
-     * 
-     * <p>
-     * scale: (this.scale() + multiplicand.scale()).
-     * </p>
-     * 
-     * @param one
-     *            乘数
-     * @param two
-     *            被乘数
-     * @return 获得两个数的乘积 <br>
-     *         if isNotNullOrEmpty(two) return one
-     * @see #getMultiplyValue(BigDecimal, Serializable)
-     * @since 1.2.1
-     */
-    public static BigDecimal getMultiplyValue(Number one,Serializable two){
-        return getMultiplyValue(ConvertUtil.toBigDecimal(one), two);
-    }
-
     // [end]
 
     // [start]Add
 
     /**
-     * 获得两个数的和,自动判断null的情况.
-     * 
-     * @param one
-     *            第一个数
-     * @param two
-     *            第二个数
-     * @return
-     *         <ul>
-     *         <li>如果两个数都是 null,则返回null</li>
-     *         <li>第一个数是null,第二个数不是null,则,将第二个数转成BigDecimal 返回</li>
-     *         <li>第一个数不是null,第二个数是null,则直接返回第一个数</li>
-     *         <li>其他情况(两个数都不为空),返回 第一个数+第二个数</li>
-     *         </ul>
-     * @since 1.0
-     */
-    public static BigDecimal getAddValue(Number one,Number two){
-        // 如果两个数都是 null,则返回null
-        if (Validator.isNullOrEmpty(one) && Validator.isNullOrEmpty(two)){
-            return null;
-        }
-        // 第一个数不是null,第二个数是null,则直接返回第一个数
-        if (!Validator.isNullOrEmpty(one) && Validator.isNullOrEmpty(two)){
-            return ConvertUtil.toBigDecimal(one);
-        }
-
-        BigDecimal augend = ConvertUtil.toBigDecimal(two);
-        // 第一个数是null,第二个数不是null,则,将第二个数转成BigDecimal 返回
-        if (Validator.isNullOrEmpty(one) && !Validator.isNullOrEmpty(two)){
-            return augend;
-        }
-
-        // 其他情况其他情况(两个数都不为空),返回 第一个数+第二个数
-        return ConvertUtil.toBigDecimal(one).add(augend);
-    }
-
-    /**
-     * 所有数加起来(剔除null的值).
+     * 所有数加起来.
      *
      * @param numbers
      *            the numbers
-     * @return the 添加 value
-     * @since 1.2.1
+     * @return 如果 null== numbers,throw NullPointerException<br>
+     *         如果有元素是null,throw IllegalArgumentException<br>
+     *         else,将每个元素转换成BigDecimal,并进行累加操作
+     * @since 1.5.5
      */
     public static BigDecimal getAddValue(Number...numbers){
+        Validate.noNullElements(numbers, "numbers can't be null!");
+
         BigDecimal returnValue = BigDecimal.ZERO;
         for (Number number : numbers){
-            if (Validator.isNotNullOrEmpty(number)){
-                BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
-                returnValue = returnValue.add(bigDecimal);
-            }
+            BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
+            returnValue = returnValue.add(bigDecimal);
         }
         return returnValue;
     }
@@ -489,6 +297,116 @@ public final class NumberUtil{
     }
 
     // *****************************************************************************************************
+
+    /**
+     * 获得进度,默认格式为 {@link NumberPattern#PERCENT_WITH_NOPOINT}.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.getProgress(2, 3) 返回 67%
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param current
+     *            当前量
+     * @param total
+     *            总量
+     * @return 50% 56% 58%不带小数点格式
+     * @see NumberPattern#PERCENT_WITH_NOPOINT
+     * @see #getProgress(Number, Number, String)
+     * @since 1.0.7
+     */
+    public static String getProgress(Number current,Number total){
+        String numberPattern = NumberPattern.PERCENT_WITH_NOPOINT;
+        return getProgress(current, total, numberPattern);
+    }
+
+    /**
+     * 计算进度.
+     * 
+     * <pre class="code">
+     *   Example 1:  
+     *      NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT)
+     *      return 100%
+     *   
+     *   Example 2:
+     *      NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)
+     *      return 66.7%
+     * </pre>
+     *
+     * @param current
+     *            当前量
+     * @param total
+     *            总量
+     * @param numberPattern
+     *            the number pattern {@link NumberPattern}
+     * @return 根据numberPattern 返回 50.5%,100%.....
+     * @see NumberPattern
+     * @see #getDivideValue(Number, Number, int)
+     * @since 1.0.7
+     */
+    public static String getProgress(Number current,Number total,String numberPattern){
+        Validate.notNull(current, "current can't be null/empty!");
+        Validate.notNull(total, "total can't be null/empty!");
+
+        Validate.isTrue(current.intValue() > 0, "current can not <=0");
+        Validate.isTrue(total.intValue() > 0, "total can not <=0");
+        Validate.isTrue(current.doubleValue() <= total.doubleValue(), "current can not > total");
+
+        // XXX
+        int scale = 8;
+        BigDecimal bigDecimalCurrent = ConvertUtil.toBigDecimal(current);
+        BigDecimal divideValue = getDivideValue(bigDecimalCurrent, total, scale);
+        return toString(divideValue, numberPattern);
+    }
+
+    /**
+     * 四舍五入 {@link RoundingMode#HALF_UP},取整,无小数.
+     * 
+     * <p style="color:red">
+     * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 {@link Math#round(double) Math.round(-2.5)} 会是-2
+     * </p>
+     *
+     * @param value
+     *            the value
+     * @return 四舍五入{@link RoundingMode#HALF_UP},取整,无小数<br>
+     *         如果 isNotNullOrEmpty(number)返回null
+     * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
+     * @see #toNoScale(Number, RoundingMode)
+     */
+    public static BigDecimal toNoScale(Number value){
+        return toNoScale(value, RoundingMode.HALF_UP);
+    }
+
+    /**
+     * To no scale.
+     * 
+     * <p style="color:red">
+     * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 {@link Math#round(double) Math.round(-2.5)} 会是-2
+     * </p>
+     * 
+     * @param value
+     *            the value
+     * @param roundingMode
+     *            舍入法 {@link RoundingMode}
+     * @return 如果 value是null,throw NullPointerException<br>
+     *         如果 roundingMode是null,throw NullPointerException<br>
+     *         {@link RoundingMode},取整,无小数<br>
+     * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
+     * @since 1.5.5
+     */
+    public static BigDecimal toNoScale(Number value,RoundingMode roundingMode){
+        Validate.notNull(value, "value can't be null!");
+        Validate.notNull(roundingMode, "roundingMode can't be null!");
+
+        //将int、long、double、string类型的数值转为BigDecimal.
+        //使用double会造成精度丢失,而使用BigDecimal就是为了解决精度丢失的问题,建议使用String方式转换.
+        return setScale(ConvertUtil.toBigDecimal(value), 0, roundingMode);
+    }
+
     /**
      * int类型转换成16进制字符串.
      * 
@@ -510,34 +428,7 @@ public final class NumberUtil{
     public static int hexStringToInt(String hexString){
         return Integer.parseInt(hexString, 16);
     }
-
-    /**
-     * 判断一个Object 类型的 value,是否是一个特定的数.
-     * 
-     * <p>
-     * 系统自动将value 装成BigDecimal,并将specificNumber 也装成BigDecimal ,两个BigDecimal 进行compareTo,<br>
-     * 如果是0 ,则返回true.
-     * </p>
-     * 
-     * @param value
-     *            Object 类型的 value,类型必须是 Number 或者 String
-     * @param specificNumber
-     *            一个特定的数
-     * @return 系统自动将value 装成BigDecimal,并将specificNumber 也装成BigDecimal ,两个BigDecimal 进行compareTo,<br>
-     *         如果是0 ,则返回true
-     */
-    public static boolean isSpecificNumber(Serializable value,String specificNumber){
-        if (Validator.isNullOrEmpty(value)){
-            return false;
-        }
-
-        // Number /String
-        if (value instanceof Number || value instanceof String){
-            BigDecimal bigDecimal = ConvertUtil.toBigDecimal(value.toString());
-            return 0 == bigDecimal.compareTo(ConvertUtil.toBigDecimal(specificNumber));
-        }
-        return false;
-    }
+    //************************************************************************************************
 
     /**
      * 小学学的 四舍五入的方式四舍五入 {@link RoundingMode#HALF_UP} 设置小数点位数.
@@ -550,32 +441,35 @@ public final class NumberUtil{
      * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2
      * </p>
      * 
-     * @param number
+     * @param value
      *            number
      * @param scale
-     *            小数点位数
-     * @return the big decimal
+     *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
+     * @return 如果 value是null,throw NullPointerException
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.RoundingMode#HALF_UP
      * @see java.math.BigDecimal#ROUND_HALF_UP
      */
-    private static BigDecimal setScale(BigDecimal number,int scale){
-        return setScale(number, scale, RoundingMode.HALF_UP);
+    private static BigDecimal setScale(BigDecimal value,int scale){
+        return setScale(value, scale, RoundingMode.HALF_UP);
     }
 
     /**
      * 设置精度.
      * 
-     * @param number
+     * @param value
      *            number
      * @param scale
-     *            小数点位数
+     *            标度,小数的位数,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @param roundingMode
-     *            舍入法 {@link RoundingMode} 参考: {@link <a href="#RoundingMode">JAVA 8种舍入法</a>}
-     * @return the big decimal
+     *            舍入法 {@link RoundingMode} 参考:{@link <a href="#RoundingMode">JAVA 8种舍入法</a>}
+     * @return 如果 value是null,throw NullPointerException<br>
+     *         如果 roundingMode是null,throw NullPointerException
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      */
-    private static BigDecimal setScale(BigDecimal number,int scale,RoundingMode roundingMode){
-        return number.setScale(scale, roundingMode);
+    private static BigDecimal setScale(BigDecimal value,int scale,RoundingMode roundingMode){
+        Validate.notNull(value, "value can't be null!");
+        Validate.notNull(roundingMode, "roundingMode can't be null!");
+        return value.setScale(scale, roundingMode);
     }
 }

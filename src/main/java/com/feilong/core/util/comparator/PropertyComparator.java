@@ -54,6 +54,12 @@ import com.feilong.core.bean.PropertyUtil;
  * @see org.apache.commons.collections4.comparators.BooleanComparator
  * @see org.apache.commons.collections4.comparators.ReverseComparator
  * @see org.apache.commons.collections4.comparators.ComparableComparator
+ * @see <a href=
+ *      "http://stackoverflow.com/questions/19325256/java-lang-illegalargumentexception-comparison-method-violates-its-general-contr">java-
+ *      lang-illegalargumentexception-comparison-method-violates-its-general-contr</a>
+ * @see <a href=
+ *      "http://stackoverflow.com/questions/11441666/java-error-comparison-method-violates-its-general-contract">Java error: Comparison
+ *      method violates its general contract</a>
  * @since 1.2.0
  */
 public class PropertyComparator<T> implements Comparator<T>,Serializable{
