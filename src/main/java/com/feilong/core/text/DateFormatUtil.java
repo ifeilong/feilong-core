@@ -75,6 +75,8 @@ public final class DateFormatUtil{
      * @see com.feilong.core.date.DateUtil#date2String(Date, String)
      */
     public static String format(Date date,String pattern){
+        Validate.notNull(date, "date can't be null!");
+        Validate.notEmpty(pattern, "pattern can't be null/empty!");
         return format(date, pattern, Locale.getDefault());
     }
 
@@ -95,6 +97,10 @@ public final class DateFormatUtil{
      * @see SimpleDateFormat#format(Date)
      */
     public static String format(Date date,String pattern,Locale locale){
+        Validate.notNull(date, "date can't be null!");
+        Validate.notEmpty(pattern, "pattern can't be null/empty!");
+        Validate.notNull(locale, "locale can't be null!");
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
         return simpleDateFormat.format(date);
     }
@@ -122,6 +128,8 @@ public final class DateFormatUtil{
      * @see #parse(String, String, Locale)
      */
     public static Date parse(String dateString,String pattern){
+        Validate.notEmpty(dateString, "dateString can't be null/empty!");
+        Validate.notEmpty(pattern, "pattern can't be null/empty!");
         return parse(dateString, pattern, Locale.getDefault());
     }
 
@@ -141,6 +149,8 @@ public final class DateFormatUtil{
      */
     public static Date parse(String dateString,String pattern,Locale locale){
         Validate.notEmpty(dateString, "dateString can't be null/empty!");
+        Validate.notEmpty(pattern, "pattern can't be null/empty!");
+        Validate.notNull(locale, "locale can't be null!");
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
         ParsePosition parsePosition = new ParsePosition(0);
