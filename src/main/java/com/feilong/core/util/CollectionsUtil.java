@@ -64,38 +64,58 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </blockquote>
  * 
  * <h3>关于 {@link java.util.Collection}:</h3>
+ * 
  * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link java.util.Collection Collection}</td>
+ * <td>
  * <ol>
  * <li>一组对象的集合,一般不直接使用</li>
- * <li>有 {@link Collection#add(Object) add},{@link Collection#size() size} ,{@link Collection#clear() clear},
- * {@link Collection#contains(Object) contains}
- * ,{@link Collection#remove(Object) remove},{@link Collection#removeAll(Collection) removeAll},{@link Collection#retainAll(Collection)
- * retainAll},
- * {@link Collection#toArray() toArray}方法</li>
- * <li><span style="color:green">没有get()方法.只能通过iterator()遍历元素</span></li>
+ * <li>有 {@link Collection#add(Object) add},{@link Collection#size() size},{@link Collection#clear() clear},
+ * {@link Collection#contains(Object) contains} ,{@link Collection#remove(Object) remove},{@link Collection#removeAll(Collection) removeAll}
+ * ,{@link Collection#retainAll(Collection) retainAll}, {@link Collection#toArray() toArray}方法</li>
+ * <li><span style="color:red">没有get()方法.只能通过iterator()遍历元素</span></li>
  * </ol>
+ * </td>
+ * </tr>
+ * </table>
  * </blockquote>
  * 
- * 
  * <h3>关于 {@link java.util.List}:</h3>
+ * 
  * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">interface/class</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link java.util.List List}</td>
+ * <td>
  * <ol>
  * <li>An ordered collection</li>
  * <li>integer index for insert and search.</li>
  * <li>除了继承Collection接口方法外,有自己的方法定义: get(int) indexOf lastIndexOf listIterator set(int) subList(int,int)</li>
  * <li>optional:可空,可重复</li>
  * </ol>
- * </blockquote>
- * 
- * <h3>关于 {@link java.util.ArrayList}:</h3>
- * <blockquote>
+ * </td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link java.util.ArrayList ArrayList}</td>
+ * <td>
  * <ol>
  * <li>Resizable-array implementation of the List interface</li>
  * <li>元素可空</li>
  * <li>有自己控制容量(数组大小)的方法</li>
  * </ol>
- * 
- * <h3>扩容:</h3>
+ * <p>
+ * 扩容:
+ * </p>
  * <blockquote>
  * <ol>
  * <li>see {@link java.util.ArrayList#ensureCapacity(int)},<br>
@@ -103,69 +123,88 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 在jdk1.7+里面,代码进行了优化</li>
  * </ol>
  * </blockquote>
- * </blockquote>
- * 
- * <h3>关于 {@link java.util.LinkedList}:</h3>
- * <blockquote>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link java.util.LinkedList LinkedList}</td>
+ * <td>
  * <ol>
  * <li>Linked list implementation,双向链表</li>
  * <li>元素可空</li>
  * </ol>
- * </blockquote>
- * 
- * <h3>关于 {@link java.util.Vector}:</h3>
- * <blockquote>
+ * </td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link java.util.Vector Vector}</td>
+ * <td>
  * <ol>
  * <li>growable array of objects</li>
  * <li>线程安全的动态数组 synchronized</li>
  * <li>操作基本和ArrayList相同</li>
  * </ol>
- * </blockquote>
- * 
- * <h3>关于 {@link java.util.Stack}:</h3>
- * <blockquote>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link java.util.Stack Stack}</td>
+ * <td>
  * <ol>
  * <li>last-in-first-out (LIFO) stack of objects</li>
  * </ol>
+ * </td>
+ * </tr>
+ * </table>
  * </blockquote>
  * 
  * <hr>
  * 
- * <h3>关于 {@link java.util.Set }:</h3>
+ * <h3>关于 {@link Set }:</h3>
+ * 
  * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">interface/class</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link java.util.Set Set}</td>
+ * <td>
  * <ol>
  * <li>A collection contains no duplicate elements</li>
  * <li>Set和Collection拥有一模一样的接口名称</li>
  * </ol>
- * </blockquote>
- * 
- * <h3>关于 {@link java.util.HashSet }:</h3>
- * <blockquote>
+ * </td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link java.util.HashSet HashSet}</td>
+ * <td>
  * <ol>
  * <li>backed by a HashMap instance.</li>
  * <li>makes no guarantees as to the iteration order of the set; 不保证顺序</li>
  * <li>permits the null element.允许空元素</li>
  * </ol>
- * </blockquote>
- * 
- * <h3>关于 {@link java.util.LinkedHashSet }:</h3>
- * <blockquote>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link java.util.LinkedHashSet LinkedHashSet}</td>
+ * <td>
  * <ol>
  * <li>Hash Map and linked list implementation of the Set interface,</li>
  * <li>with predictable iteration order</li>
  * </ol>
- * </blockquote>
- * 
- * <h3>关于 {@link java.util.TreeSet }:</h3>
- * <blockquote>
+ * </td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link java.util.TreeSet TreeSet}</td>
+ * <td>
  * <ol>
  * <li>A NavigableSet implementation based on a TreeMap.</li>
  * <li>ordered using their natural ordering, or by a Comparator provided at set creation time</li>
  * </ol>
- * </blockquote>
- * 
- * <h3>关于 {@link java.util.EnumSet }:</h3>
- * <blockquote>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link java.util.EnumSet EnumSet}</td>
+ * <td>
  * <ol>
  * <li>A specialized Set implementation for use with enum types.</li>
  * <li>Null elements are not permitted.</li>
@@ -173,17 +212,32 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <li>abstract class.</li>
  * <li>以位向量的形式存储,这种存储形式非常紧凑,高效,占用内存很小,运行效率很好.</li>
  * </ol>
+ * </td>
+ * </tr>
+ * </table>
  * </blockquote>
  * 
  * <hr>
  * 
- * <h3>关于 {@link java.util.Queue }:</h3>
+ * <h3>关于 {@link java.util.Queue Queue}:</h3>
+ * 
  * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link java.util.Queue Queue}</td>
+ * <td>
  * <ol>
  * <li>Queues typically, but do not necessarily,order elements in a FIFO (first-in-first-out) manner</li>
  * </ol>
+ * </td>
+ * </tr>
+ * </table>
  * </blockquote>
- *
+ * 
  * @author feilong
  * @version 1.0.2 Sep 2, 2010 8:08:40 PM
  * @version 1.5.0 2016年1月8日 下午2:08:59
