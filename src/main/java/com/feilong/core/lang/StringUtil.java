@@ -102,6 +102,42 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 则在之前没有创建过"abcabc"时,true相等
  * </p>
  * </blockquote>
+ * 
+ * <h3>{@link StringUtil#replace(CharSequence, String, Object)} and {@link #replaceAll(CharSequence, String, String)} and
+ * 区别:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link StringUtil#replace(CharSequence, String, Object)}</td>
+ * <td>将字符串中出现的target替换成replacement</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link #replaceAll(CharSequence, String, String)}</td>
+ * <td>regex是一个正则表达式，将字符串中匹配的子字符串替换为replacement</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link String#replaceFirst(String, String)}</td>
+ * <td>和{@link StringUtil#replace(CharSequence, String, Object)}类似，只不过只替换第一个出现的地方。</td>
+ * </tr>
+ * </table>
+ * 
+ * <p>
+ * 对比以下代码:
+ * </p>
+ * 
+ * <pre class="code">
+ * StringUtil.replaceAll("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'")  ='SH1265','SH5951'
+ * StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'")     =SH1265,SH5951
+ * "SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'")            ='SH1265',SH5951
+ * </pre>
+ * 
+ * </blockquote>
  *
  * @author feilong
  * @version 1.4.0 2015年8月3日 上午3:06:20
@@ -255,11 +291,11 @@ public final class StringUtil{
     }
 
     /**
-     * 忽略 大小写 是否包含.
+     * 忽略大小写,判断是否包含.
      * 
      * <pre class="code">
      * StringUtil.containsIgnoreCase(null, "")            = false
-     * StringUtil.containsIgnoreCase(text, null)                    = false
+     * StringUtil.containsIgnoreCase(text, null)          = false
      * StringUtil.containsIgnoreCase(text, "")            = true
      * StringUtil.containsIgnoreCase(text, "feilong")     = true
      * StringUtil.containsIgnoreCase(text, "feilong1")    = false
@@ -283,11 +319,72 @@ public final class StringUtil{
 
     // ********************************replace************************************************
     /**
-     * 使用给定的replacement替换此字符串所有匹配给定的正则表达式的子字符串.
+     * 使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串.
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>该替换从字符串的开头朝末尾执行,例如,用 "b" 替换字符串 "aaa" 中的 "aa" 将生成 "ba" 而不是 "ab".</li>
+     * <li>虽然底层调用了{@link java.util.regex.Matcher#replaceAll(String) Matcher.replaceAll()},但是使用了
+     * {@link java.util.regex.Matcher#quoteReplacement(String) Matcher.quoteReplacement()} 处理了特殊字符</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param content
+     *            内容
+     * @param target
+     *            要被替换的 char 值序列
+     * @param replacement
+     *            char 值的替换序列
+     * @return 如果 null==content,return {@link StringUtils#EMPTY} <br>
+     *         所有匹配字面值目标序列的子字符串
+     * @see java.lang.String#replace(CharSequence, CharSequence)
+     * @since jdk 1.5
+     */
+    public static String replace(CharSequence content,CharSequence target,CharSequence replacement){
+        return null == content ? StringUtils.EMPTY
+                        : content.toString().replace(target, null == replacement ? StringUtils.EMPTY : replacement);
+    }
+
+    /**
+     * 使用给定的<code>replacement</code>替换此字符串所有匹配给定的正则表达式 <code>regex</code>的子字符串.
      * 
      * <p>
-     * 注意,此方法底层调用的是 {@link java.util.regex.Matcher#replaceAll(String)}
+     * 注意,此方法底层调用的是 {@link java.util.regex.Matcher#replaceAll(String)},same as
+     * <code>Pattern.compile(regex).matcher(str).replaceAll(repl)</code>
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * StringUtil.replaceAll("SH1265,SH5951,SH6766,SH7235,SH1265,SH5951,SH6766,SH7235", "([a-zA-Z]+[0-9]+)", "'$1'")
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * 'SH1265','SH5951','SH6766','SH7235','SH1265','SH5951','SH6766','SH7235'
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>请注意:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 在替代字符串<code>replacement</code>中,使用 backslashes反斜杆(<tt>\</tt>)和 dollar signs美元符号 (<tt>$</tt>)与将其视为字面值替代字符串所得的结果可能不同.
+     * <br>
+     * 请参阅 {@link java.util.regex.Matcher#replaceAll Matcher.replaceAll};如有需要,可使用 {@link java.util.regex.Matcher#quoteReplacement
+     * Matcher.quoteReplacement}取消这些字符的特殊含义
+     * <br>
+     * Dollar signs may be treated as references to captured subsequences as described above,$这个特殊的字符，因为替换串使用这个引用正则表达式匹配的组，
+     * $0代表匹配项，$1代表第1个匹配分组，$1代表第2个匹配分组
+     * <br>
+     * and backslashes are used to escape literal characters in the replacement string. 
+     * </p>
+     * </blockquote>
      * 
      * @param content
      *            需要被替换的字符串
@@ -296,42 +393,12 @@ public final class StringUtil{
      * @param replacement
      *            用来替换每个匹配项的字符串
      * @return 所得String,如果传过来的内容是空,则返回 {@link org.apache.commons.lang3.StringUtils#EMPTY}
+     * @see <a href="http://stamen.iteye.com/blog/2028256">String字符串替换的一个诡异问题</a>
+     * @see java.lang.String#replaceAll(String, String)
+     * @since jdk 1.4
      */
     public static String replaceAll(CharSequence content,String regex,String replacement){
         return null == content ? StringUtils.EMPTY : content.toString().replaceAll(regex, replacement);
-    }
-
-    /**
-     * 使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串.
-     * 
-     * <p>
-     * 该替换从字符串的开头朝末尾执行,例如,用 "b" 替换字符串 "aaa" 中的 "aa" 将生成 "ba" 而不是 "ab".
-     * </p>
-     * 
-     * <pre class="code">
-     * 处理了replacement为空的情况
-     * </pre>
-     * 
-     * <p>
-     * 注意,底层调用了 {@link java.util.regex.Matcher#replaceAll(String)}
-     * </p>
-     * 
-     * @param content
-     *            内容
-     * @param target
-     *            要被替换的 char 值序列
-     * @param replacement
-     *            char 值的替换序列
-     * @return 所有匹配字面值目标序列的子字符串
-     * @see java.lang.String#replace(CharSequence, CharSequence)
-     */
-    public static String replace(CharSequence content,String target,Object replacement){
-        if (null == content){
-            return StringUtils.EMPTY;
-        }
-        // 替换序列是null
-        String useReplacement = null == replacement ? StringUtils.EMPTY : replacement.toString();
-        return content.toString().replace(target, useReplacement);
     }
 
     /**
@@ -373,15 +440,16 @@ public final class StringUtil{
     // [start]startsWith
 
     /**
-     * 测试此字符串是否以指定的前缀开始..
+     * 测试此字符串是否以指定的前缀 <code>prefix</code>开始.
      * 
      * @param value
      *            value
      * @param prefix
      *            前缀
-     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true;否则返回 false.还要注意,如果参数是空字符串,或者等于此 String 对象(用 equals(Object) 方法确定),则返回 true.
+     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true;否则返回 false.<br>
+     *         还要注意,如果参数是空字符串,或者等于此 String对象(用 equals(Object) 方法确定),则返回 true.
      */
-    public static boolean startsWith(Object value,String prefix){
+    public static boolean startsWith(CharSequence value,String prefix){
         return ConvertUtil.toString(value).startsWith(prefix);
     }
 
@@ -821,14 +889,27 @@ public final class StringUtil{
 
     /**
      * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
+     * 
      * <p>
      * Tokenize the given String into a String array via a StringTokenizer.
      * </p>
+     * 
      * <p>
      * The given delimiters string is supposed to consist of any number of delimiter characters. <br>
      * Each of those characters can be used to separate tokens. <br>
      * A delimiter is always a single character; <br>
      * for multi-character delimiters, consider using <code>delimitedListToStringArray</code>
+     * </p>
+     * 
+     * <h3>about {@link StringTokenizer}:</h3>
+     * 
+     * <blockquote>
+     * 
+     * {@link StringTokenizer} implements {@code Enumeration<Object>}<br>
+     * 其在 Enumeration接口的基础上,定义了 hasMoreTokens nextToken两个方法<br>
+     * 实现的Enumeration接口中的 hasMoreElements nextElement,调用了 hasMoreTokens nextToken<br>
+     * 
+     * </blockquote>
      * 
      * @param str
      *            the String to tokenize
@@ -853,9 +934,7 @@ public final class StringUtil{
         if (null == str){
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
-        //StringTokenizer implements Enumeration<Object>
-        //其在 Enumeration接口的基础上,  定义了 hasMoreTokens nextToken两个方法
-        //实现的Enumeration接口中的  hasMoreElements nextElement 调用了  hasMoreTokens nextToken
+
         StringTokenizer stringTokenizer = new StringTokenizer(str, delimiters);
         List<String> tokens = new ArrayList<String>();
         while (stringTokenizer.hasMoreTokens()){
@@ -871,6 +950,7 @@ public final class StringUtil{
     }
 
     // [end]
+
     // [start]format
 
     /**
@@ -884,7 +964,10 @@ public final class StringUtil{
      * %index$开头,index从1开始取值,表示将第index个参数拿进来进行格式化.<br>
      * 对整数进行格式化:格式化字符串由4部分组成:%[index$][标识][最小宽度]转换方式<br>
      * 对浮点数进行格式化:%[index$][标识][最少宽度][.精度]转换方式<br>
-     * 转换方式 转换符和标志的说明<br>
+     * </p>
+     * 
+     * <p>
+     * 转换符和标志的说明
      * </p>
      * 
      * <h3>转换符</h3>
@@ -969,7 +1052,6 @@ public final class StringUtil{
      * </table>
      * </blockquote>
      * 
-     * 
      * <h3>标志</h3>
      * 
      * <blockquote>
@@ -1043,14 +1125,14 @@ public final class StringUtil{
      *            the format
      * @param args
      *            the args
-     * @return A formatted string
+     * @return if null ==format,return {@link StringUtils#EMPTY},else return {@link String#format(String, Object...)}
      * @see java.util.Formatter
      * @see String#format(String, Object...)
      * @see String#format(java.util.Locale, String, Object...)
      * @since JDK 1.5
      */
     public static String format(String format,Object...args){
-        return String.format(format, args);
+        return null == format ? StringUtils.EMPTY : String.format(format, args);
     }
     // [end]
 }

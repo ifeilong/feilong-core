@@ -20,10 +20,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -47,30 +45,6 @@ public class StringUtilTest{
 
     /** <code>{@value}</code>. */
     private static final String TEXT   = "jinxin.feilong";
-
-    /**
-     * 如何计算出所有左右对称的三位数,如232,反过来还是232.
-     */
-    @Test
-    public void testStringUtilTest(){
-        for (int i = 100; i <= 999; ++i){
-            if (i / 100 == i % 10){
-                System.out.println(i);
-            }
-        }
-    }
-
-    /**
-     * Length.
-     */
-    @Test
-    public void length(){
-        String string = "我的新浪微博:http://weibo.com/venusdrogon,关注我哦[url=http://bbs.guqu.net/Query.asp?keyword=%B6%C5%B4%CF%D7%A8%BC%AD&boardid=0&sType=2]sssss[/url][url=http://weibo.com/venusdrogon][img]http://service.t.sina.com.cn/widget/qmd/1903991210/1c853142/5.png[/img][/url]";
-        LOGGER.info(string.length() + "");
-
-        // 运单号
-        LOGGER.info("3999e85461ce7271dd5292c88f18567e".length() + "");
-    }
 
     /**
      * String add int.
@@ -115,7 +89,6 @@ public class StringUtilTest{
         assertEquals(2, StringUtil.searchTimes(source, "in"));
         assertEquals(3, StringUtil.searchTimes(source, "ii"));
         assertEquals(1, StringUtil.searchTimes(source, "xin"));
-
         assertEquals(1, StringUtil.searchTimes("xin", "xin"));
         assertEquals(1, StringUtil.searchTimes("xin", "i"));
         assertEquals(2, StringUtil.searchTimes("xiin", "i"));
@@ -138,7 +111,7 @@ public class StringUtilTest{
      */
     @Test
     public void addDoubleQuotes(){
-        LOGGER.info(StringUtil.addDoubleQuotes(TEXT));
+        assertEquals("\"" + "jinxin.feilong" + "\"", StringUtil.addDoubleQuotes(TEXT));
     }
 
     /**
@@ -179,9 +152,7 @@ public class StringUtilTest{
      */
     @Test
     public void replace(){
-        String target = "/";
-        Object replacement = "_";
-        LOGGER.info(StringUtil.replace("黑色/黄色/蓝色", target, replacement));
+        assertEquals("黑色_黄色_蓝色", StringUtil.replace("黑色/黄色/蓝色", "/", "_"));
     }
 
     /**
@@ -189,9 +160,28 @@ public class StringUtilTest{
      */
     @Test
     public void replaceAll(){
-        String target = "/";
-        String replacement = "_";
-        LOGGER.info(StringUtil.replaceAll("黑色/黄色/蓝色", target, replacement));
+        assertEquals("黑色_黄色_蓝色", StringUtil.replaceAll("黑色/黄色/蓝色", "/", "_"));
+        LOGGER.info(StringUtil.replaceAll("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
+        LOGGER.info(StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
+        LOGGER.info("SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'"));
+    }
+
+    /**
+     * 分隔字符串并添加引号.
+     */
+    @Test
+    public void splitAndAddYinHao(){
+        String a = "12345,56789,1123456";
+        String[] aStrings = a.split(",");
+        StringBuilder sb = new StringBuilder();
+        int size = aStrings.length;
+        for (int i = 0; i < size; i++){
+            sb.append("'" + aStrings[i] + "'");
+            if (i != size - 1){
+                sb.append(",");
+            }
+        }
+        LOGGER.info(sb.toString());
     }
 
     /**
@@ -287,47 +277,6 @@ public class StringUtilTest{
     }
 
     /**
-     * Test replace all.
-     */
-    @Test
-    public void testReplaceAll(){
-        LOGGER.info("SH1265,SH5951,SH6766,SH7235,SH1265,SH5951,SH6766,SH7235".replaceAll("([a-zA-Z]+[0-9]+)", "'$1'"));
-    }
-
-    /**
-     * 分隔字符串并添加引号.
-     */
-    @Test
-    public void splitAndAddYinHao(){
-        String a = "12345,56789,1123456";
-        String[] aStrings = a.split(",");
-        StringBuilder sb = new StringBuilder();
-        int size = aStrings.length;
-        for (int i = 0; i < size; i++){
-            sb.append("'" + aStrings[i] + "'");
-            if (i != size - 1){
-                sb.append(",");
-            }
-        }
-        LOGGER.info(sb.toString());
-    }
-
-    /**
-     * 返回一个随机的字符串.150是基于该程序使用场景的抽样得到的长度..
-     * 
-     * @return the random string
-     */
-    private static String getRandomString(){
-        StringBuilder sb = new StringBuilder();
-        Random r = new Random();
-        int length = 150 + r.nextInt(50);
-        for (int i = 0; i < length; i++){
-            sb.append('a' + r.nextInt(26));
-        }
-        return sb.toString();
-    }
-
-    /**
      * Tokenize to string array2.
      */
     @Test
@@ -339,21 +288,6 @@ public class StringUtilTest{
     }
 
     /**
-     * Tokenize to string array.
-     */
-    @Test
-    public void tokenizeToStringArray(){
-        Date beginDate = new Date();
-
-        for (int i = 0; i < 100000; ++i){
-            tokenizeToStringArray1();
-        }
-
-        Date endDate = new Date();
-        LOGGER.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
-    }
-
-    /**
      * Tokenize to string array1.
      */
     @Test
@@ -362,82 +296,5 @@ public class StringUtilTest{
         String delimiters = ";, .";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
         LOGGER.info(JsonUtil.format(tokenizeToStringArray));
-    }
-
-    /**
-     * Split to string array.
-     */
-    @Test
-    public void splitToStringArray(){
-        String str = "jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 1; ++i){
-            sb.append(str);
-        }
-        str = sb.toString();
-
-        String regexSpliter = "[;, \\.]";
-        String[] tokenizeToStringArray = StringUtil.split(str, regexSpliter);
-        LOGGER.info(JsonUtil.format(tokenizeToStringArray));
-
-        Date beginDate = new Date();
-
-        for (int i = 0; i < 100000; ++i){
-            StringUtil.split(str, regexSpliter);
-        }
-
-        Date endDate = new Date();
-        LOGGER.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
-    }
-
-    /**
-     * 查找子字符串在 字符串中出现的次数.
-     * 
-     * <pre class="code">
-     *  StringUtil.searchTimes("xin", "xin")
-     *  return  1
-     *  
-     * StringUtil.searchTimes("xiiiin", "ii")
-     *  return  2
-     * 
-     * </pre>
-     *
-     * @param source
-     *            查找的源字符串
-     * @param target
-     *            目标子串
-     * @return count of target string in source
-     * @see org.apache.commons.lang3.StringUtils#countMatches(CharSequence, CharSequence)
-     * @since 1.0.2
-     * @deprecated 使用 {@link org.apache.commons.lang3.StringUtils#countMatches(CharSequence, CharSequence)}
-     */
-    @Deprecated
-    public static int searchTimes(String source,String target){
-        Validate.notNull(source, "source can't be null!");
-        Validate.notNull(target, "target can't be null!");
-        // times 计数器
-        int count = 0;
-        // while 循环 点
-        int j = 0;
-        // 开始搜索的索引位置
-        int fromIndex = 0;
-        int sourceLength = source.length();
-        // 刚开始从 0的地方查找起
-        while (j != sourceLength){
-            // 从指定的索引开始 返回索引位置
-            int i = source.indexOf(target, fromIndex);
-            if (i != -1){
-                int targetLength = target.length();
-                // 一旦发现 查找到,下次 循环从找到的地方开始循环
-                // 查找 从 找到的地方 开始查找
-                j = i + targetLength;
-                fromIndex = i + targetLength;
-                count++;
-            }else{
-                // 如果发现找不到了 就退出循环
-                break;
-            }
-        }
-        return count;
     }
 }

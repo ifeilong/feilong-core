@@ -211,18 +211,18 @@
 				<configuration>
 					<includes>
 						<include>**/AlphabetTest</include>
-						<include>**/HttpMethodTypeTest</include>
 						<include>**/CharsetTypeTest</include>
-
-						<include>**/ValidatorTest.java</include>
-
 						<include>**/DateUtilTest.java</include>
 						<include>**/DateUtilIsLeapYearParameterizedTest</include>
-
 						<include>**/EnumUtilTest</include>
+
+						<include>**/HttpMethodTypeTest</include>
+
 						<include>**/RegexUtilTest</include>
-						
 						<include>**/NumberUtilTest</include>
+						<include>**/StringUtilTest</include>
+						
+						<include>**/ValidatorTest.java</include>
 					</includes>
 					<skip>false</skip>
 				</configuration>
