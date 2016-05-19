@@ -17,8 +17,10 @@ package com.feilong.core.lang;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +30,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -42,6 +45,41 @@ public class ArrayUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ArrayUtilTest.class);
+
+    /**
+     * 一筐鸡蛋：
+     * 1个1个拿，正好拿完。
+     * 2个2个拿，还剩1个。
+     * 3个3个拿，正好拿完。
+     * 4个4个拿，还剩1个。
+     * 5个5个拿，还剩1个
+     * 6个6个拿，还剩3个。
+     * 7个7个拿，正好拿完。
+     * 8个8个拿，还剩1个。
+     * 9个9个拿，正好拿完。
+     * 
+     * 问筐里有多少鸡蛋？
+     * 
+     * @since 1.5.5
+     */
+    @Test
+    public void testArrayUtilTest2(){
+        Date beginDate = new Date();
+
+        int j = 1;
+        int z = 7 * 9;
+
+        int total = 100000000;
+        List<Integer> list = new ArrayList<Integer>(total / z / 5);
+        for (int i = z; i < total; i = z * j){
+            //LOGGER.debug("i:{},j={}", i, j);
+            if (i % 5 == 1 && i % 4 == 1 && i % 6 == 3 && i % 8 == 1){
+                list.add(i);
+            }
+            ++j;
+        }
+        LOGGER.debug("loop count j={},use time:{},\nlist:{}", j, DateExtensionUtil.getIntervalForView(beginDate, new Date()), list);
+    }
 
     /**
      * TestArrayUtilTest.
