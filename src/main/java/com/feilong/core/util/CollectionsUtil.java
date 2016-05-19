@@ -224,7 +224,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4">
  * <tr style="background-color:#ccccff">
- * <th align="left">字段</th>
+ * <th align="left">interface/class</th>
  * <th align="left">说明</th>
  * </tr>
  * <tr valign="top">
