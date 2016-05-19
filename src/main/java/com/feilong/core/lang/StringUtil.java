@@ -103,7 +103,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * </blockquote>
  * 
- * <h3>{@link StringUtil#replace(CharSequence, String, Object)} and {@link #replaceAll(CharSequence, String, String)} and
+ * <h3>{@link StringUtil#replace(CharSequence, CharSequence, CharSequence)} and {@link #replaceAll(CharSequence, String, String)} and
  * 区别:</h3>
  * 
  * <blockquote>
@@ -114,7 +114,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <th align="left">说明</th>
  * </tr>
  * <tr valign="top">
- * <td>{@link StringUtil#replace(CharSequence, String, Object)}</td>
+ * <td>{@link StringUtil#replace(CharSequence, CharSequence, CharSequence)}</td>
  * <td>将字符串中出现的target替换成replacement</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -123,7 +123,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </tr>
  * <tr valign="top">
  * <td>{@link String#replaceFirst(String, String)}</td>
- * <td>和{@link StringUtil#replace(CharSequence, String, Object)}类似，只不过只替换第一个出现的地方。</td>
+ * <td>和{@link StringUtil#replace(CharSequence, CharSequence, CharSequence)}类似，只不过只替换第一个出现的地方。</td>
  * </tr>
  * </table>
  * 
