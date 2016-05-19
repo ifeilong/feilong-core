@@ -489,11 +489,7 @@ public final class StringUtil{
      * </p>
      *
      * <p>
-     * 如果 beginIndex 是负数,那么表示倒过来截取,从结尾开始截取长度,此时等同于 {@link #substringLast(String, int)}
-     * </p>
-     *
-     * <p>
-     * A <code>null</code> String will return <code>null</code>. An empty ("") String will return "".
+     * 如果 beginIndex是负数,那么表示倒过来截取,从结尾开始截取长度,此时等同于 {@link #substringLast(String, int)}
      * </p>
      *
      * <pre class="code">
@@ -507,15 +503,16 @@ public final class StringUtil{
      * </pre>
      * 
      * <pre class="code">
-     * substring("jinxin.feilong",6) 
-     * return .feilong
+     * substring("jinxin.feilong",6)    =.feilong
      * </pre>
      * 
      * @param text
      *            内容 the String to get the substring from, may be null
      * @param beginIndex
      *            从指定索引处 the position to start from,negative means count back from the end of the String by this many characters
-     * @return substring from start position, <code>null</code> if null String input
+     * @return A <code>null</code> String will return <code>null</code>. <br>
+     *         An empty ("") String will return "".<br>
+     *         substring from start position, <code>null</code> if null String input
      * @see org.apache.commons.lang3.StringUtils#substring(String, int)
      * @see #substringLast(String, int)
      */
@@ -704,15 +701,12 @@ public final class StringUtil{
      *            文字
      * @param lastLenth
      *            最后的位数
-     * @return 去除最后几位,如果text是空,则返回""
+     * @return 去除最后几位,如果text是空,则返回 {@link StringUtils#EMPTY}
      * @see java.lang.String#substring(int, int)
      * @see org.apache.commons.lang3.StringUtils#left(String, int)
      */
     public static String substringWithoutLast(final String text,final int lastLenth){
-        if (Validator.isNullOrEmpty(text)){
-            return StringUtils.EMPTY;
-        }
-        return text.substring(0, text.length() - lastLenth);
+        return null == text ? StringUtils.EMPTY : text.substring(0, text.length() - lastLenth);
     }
 
     /**
