@@ -20,7 +20,6 @@ import java.math.BigDecimal;
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.NumberPattern;
-import com.feilong.core.Validator;
 import com.feilong.core.lang.NumberUtil;
 
 import net.sf.json.JsonConfig;
@@ -40,7 +39,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
      * 
      * @see com.feilong.core.NumberPattern
      */
-    private String numberPattern;
+    private String numberPattern = NumberPattern.TWO_DECIMAL_POINTS;
 
     /**
      * The Constructor.
@@ -88,18 +87,7 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
      * @return the object
      */
     private Object process(Object value){
-        if (value == null){
-            return StringUtils.EMPTY;
-        }
-        //两位小数点
-        if (value instanceof BigDecimal){
-            if (Validator.isNullOrEmpty(numberPattern)){
-                numberPattern = NumberPattern.TWO_DECIMAL_POINTS;
-            }
-
-            Number number = (Number) value;
-            return NumberUtil.toString(number, numberPattern);
-        }
-        return value;
+        return value == null ? StringUtils.EMPTY
+                        : (value instanceof BigDecimal ? NumberUtil.toString((Number) value, numberPattern) : value);
     }
 }

@@ -267,11 +267,8 @@ public final class JsonUtil{
      * @since 1.3.0
      */
     public static <K, V> String formatSimpleMap(Map<K, V> inputMap){
-        if (null == inputMap){
-            return StringUtils.EMPTY;
-        }
         Class<?> allowClassTypes = null;
-        return formatSimpleMap(inputMap, allowClassTypes);
+        return null == inputMap ? StringUtils.EMPTY : formatSimpleMap(inputMap, allowClassTypes);
     }
 
     /**
@@ -316,11 +313,7 @@ public final class JsonUtil{
             K key = entry.getKey();
             V value = entry.getValue();
 
-            if (isAllowFormatType(value, allowFormatClassTypes)){
-                simpleMap.put(key, value);
-            }else{
-                simpleMap.put(key, String.valueOf(value));//注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
-            }
+            simpleMap.put(key, isAllowFormatType(value, allowFormatClassTypes) ? value : String.valueOf(value)); //注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
         }
         return format(simpleMap);
     }
@@ -526,12 +519,7 @@ public final class JsonUtil{
      * @since 1.0.8
      */
     public static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent){
-        if (null == obj){
-            return StringUtils.EMPTY;
-        }
-
-        JSON json = toJSON(obj, jsonConfig);
-        return json.toString(indentFactor, indent);
+        return null == obj ? StringUtils.EMPTY : toJSON(obj, jsonConfig).toString(indentFactor, indent);
     }
 
     // [end]
@@ -579,10 +567,7 @@ public final class JsonUtil{
         if (JSONUtils.isArray(obj) || // obj instanceof Collection || obj instanceof Object[]
                         obj instanceof Enum || // obj.getClass().isEnum()这么写 null会报错// object' is an Enum. Use JSONArray instead
                         obj instanceof Iterator){
-            Object arrayJsonObject = obj;
-            if (obj instanceof Iterator){
-                arrayJsonObject = IteratorUtils.toList((Iterator<?>) obj);
-            }
+            Object arrayJsonObject = obj instanceof Iterator ? IteratorUtils.toList((Iterator<?>) obj) : obj;
             return toJSONArray(arrayJsonObject, useJsonConfig);
         }
         return toJSONObject(obj, useJsonConfig);
@@ -1031,12 +1016,7 @@ public final class JsonUtil{
             String key = keys.next();
             Object value = jsonObject.get(key);
             LOGGER.debug("key:[{}], value:{}", key, value);
-
-            if (null != clazz){
-                map.put(key, toBean(value, clazz, classMap));
-            }else{//如果clazz是null,表示不需要转换
-                map.put(key, (T) value);
-            }
+            map.put(key, null == clazz ? (T) value : toBean(value, clazz, classMap));//如果clazz是null,表示不需要转换
         }
         return map;
     }

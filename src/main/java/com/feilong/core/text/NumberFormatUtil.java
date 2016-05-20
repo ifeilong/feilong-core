@@ -112,12 +112,11 @@ public final class NumberFormatUtil{
             String format = decimalFormat.format(value);
             if (LOGGER.isDebugEnabled()){
                 LOGGER.debug(
-                                "value:[{}], pattern:[{}],return:[{}],decimalFormat.toLocalizedPattern():[{}]",
+                                "value:[{}],pattern:[{}],return:[{}],decimalFormat.toLocalizedPattern():[{}]",
                                 value,
                                 numberPattern,
                                 format,
-                                decimalFormat.toLocalizedPattern()//合成一个表示此 Format 对象当前状态的、已本地化的模式字符串. 
-                );
+                                decimalFormat.toLocalizedPattern());//合成一个表示此 Format对象当前状态的、已本地化的模式字符串. 
             }
             return format;
         }catch (Exception e){

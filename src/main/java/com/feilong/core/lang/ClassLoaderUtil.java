@@ -213,7 +213,7 @@ public final class ClassLoaderUtil{
         URL url = classLoader.getResource(resourceName);
         if (url == null){
             LOGGER.warn(
-                            "In ClassLoader:[{}],not found the resourceName:[{}]",
+                            "In ClassLoader:[{}],not found resourceName:[{}]",
                             JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
                             resourceName);
 
@@ -222,21 +222,23 @@ public final class ClassLoaderUtil{
 
             if (url == null){
                 LOGGER.warn(
-                                "In ClassLoader:[{}],not found the resourceName:[{}]",
+                                "In ClassLoader:[{}],not found resourceName:[{}]",
                                 JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
                                 resourceName);
                 classLoader = getClassLoaderByClass(callingClass);
                 url = getResource(classLoader, resourceName);
             }
         }
+
         if (url == null){
             LOGGER.warn("resourceName:[{}] in all ClassLoader not found", resourceName);
-        }else{
-            LOGGER.debug(
-                            "found the resourceName:[{}],In ClassLoader :[{}] ",
-                            resourceName,
-                            JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
+            return null;
         }
+
+        LOGGER.debug(
+                        "found resourceName:[{}],In ClassLoader :[{}] ",
+                        resourceName,
+                        JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
         return url;
     }
 
@@ -303,12 +305,13 @@ public final class ClassLoaderUtil{
         }
         if (urls == null){
             LOGGER.warn("resourceName:[{}] in all ClassLoader not found!", resourceName);
-        }else{
-            LOGGER.debug(
-                            "In ClassLoader :[{}] found the resourceName:[{}]",
-                            JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
-                            resourceName);
+            return null;
         }
+
+        LOGGER.debug(
+                        "In ClassLoader :[{}] found the resourceName:[{}]",
+                        JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
+                        resourceName);
         return urls;
     }
 

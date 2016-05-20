@@ -763,23 +763,24 @@ public final class ParamUtil{
         Map<String, String[]> map = new LinkedHashMap<String, String[]>();
         for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
             String nameAndValue = nameAndValueArray[i];
-            if (null != nameAndValue){
-                String[] tempArray = nameAndValue.split("=", 2);
-
-                String key = tempArray[0];
-                String value = tempArray.length == 2 ? tempArray[1] : StringUtils.EMPTY;//有可能 参数中 只有名字没有值 或者值是空,处理的时候不能遗失掉
-
-                if (Validator.isNotNullOrEmpty(charsetType)){
-                    key = decodeAndEncode(key, charsetType);
-                    value = decodeAndEncode(value, charsetType);
-                }
-                String[] valuesArrayInMap = map.get(key);
-
-                List<String> list = null == valuesArrayInMap ? new ArrayList<String>() : ConvertUtil.toList(valuesArrayInMap);
-                list.add(value);
-
-                map.put(key, ConvertUtil.toArray(list, String.class));
+            if (null == nameAndValue){
+                continue;
             }
+            String[] tempArray = nameAndValue.split("=", 2);
+
+            String key = tempArray[0];
+            String value = tempArray.length == 2 ? tempArray[1] : StringUtils.EMPTY;//有可能 参数中 只有名字没有值 或者值是空,处理的时候不能遗失掉
+
+            if (Validator.isNotNullOrEmpty(charsetType)){
+                key = decodeAndEncode(key, charsetType);
+                value = decodeAndEncode(value, charsetType);
+            }
+            String[] valuesArrayInMap = map.get(key);
+
+            List<String> list = null == valuesArrayInMap ? new ArrayList<String>() : ConvertUtil.toList(valuesArrayInMap);
+            list.add(value);
+
+            map.put(key, ConvertUtil.toArray(list, String.class));
         }
         return map;
     }
@@ -841,11 +842,8 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toSafeQueryString(Map<String, String[]> arrayValueMap,String charsetType){
-        if (Validator.isNullOrEmpty(arrayValueMap)){
-            return StringUtils.EMPTY;
-        }
-        Map<String, String[]> safeArrayValueMap = toSafeArrayValueMap(arrayValueMap, charsetType);
-        return joinArrayValueMap(safeArrayValueMap);
+        return Validator.isNullOrEmpty(arrayValueMap) ? StringUtils.EMPTY
+                        : joinArrayValueMap(toSafeArrayValueMap(arrayValueMap, charsetType));
     }
 
     //*********************************************************************************************
@@ -910,11 +908,8 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
-        if (Validator.isNullOrEmpty(singleValueMap)){
-            return StringUtils.EMPTY;
-        }
-        Map<String, String> naturalParamsMapMap = new TreeMap<String, String>(singleValueMap);
-        return joinSingleValueMap(naturalParamsMapMap);
+        return Validator.isNullOrEmpty(singleValueMap) ? StringUtils.EMPTY
+                        : joinSingleValueMap(new TreeMap<String, String>(singleValueMap));
     }
 
     /**

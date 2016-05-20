@@ -300,21 +300,18 @@ public final class URIUtil{
     /**
      * 获得不含queryString的path,即链接?前面的连接( <span style="color:red">不包含?</span>).
      *
-     * @param uri
+     * @param uriString
      *            the uri
      * @return if isNullOrEmpty(url),renturn {@link StringUtils#EMPTY}
      * @since 1.4.0
      */
-    public static String getFullPathWithoutQueryString(String uri){
-        if (Validator.isNullOrEmpty(uri)){
+    public static String getFullPathWithoutQueryString(String uriString){
+        if (Validator.isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
         // 判断url中是否含有?  XXX 有待严谨
-        int index = uri.indexOf(URIComponents.QUESTIONMARK);
-        if (index == -1){
-            return uri;
-        }
-        return uri.substring(0, index);
+        int index = uriString.indexOf(URIComponents.QUESTIONMARK);
+        return index == -1 ? uriString : uriString.substring(0, index);
     }
 
     /**
@@ -342,10 +339,7 @@ public final class URIUtil{
         }
         // 判断url中是否含有?  XXX 有待严谨
         int index = uriString.indexOf(URIComponents.QUESTIONMARK);
-        if (index == -1){
-            return StringUtils.EMPTY;
-        }
-        return StringUtil.substring(uriString, index + 1);
+        return index == -1 ? StringUtils.EMPTY : StringUtil.substring(uriString, index + 1);
     }
 
     /**
@@ -379,11 +373,8 @@ public final class URIUtil{
      * @see "org.apache.commons.codec.net.URLCodec#encode(String, String)"
      */
     public static String decodeISO88591String(String str,String charsetType){
-        if (Validator.isNullOrEmpty(str)){
-            return StringUtils.EMPTY;
-        }
-        byte[] bytes = StringUtil.getBytes(str, CharsetType.ISO_8859_1);
-        return StringUtil.newString(bytes, charsetType);
+        return Validator.isNullOrEmpty(str) ? StringUtils.EMPTY
+                        : StringUtil.newString(StringUtil.getBytes(str, CharsetType.ISO_8859_1), charsetType);
     }
 
     /**

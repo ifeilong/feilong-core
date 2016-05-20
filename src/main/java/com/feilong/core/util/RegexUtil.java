@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -104,40 +105,37 @@ public final class RegexUtil{
      *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
-     * @return if 匹配不了,返回
+     * @return if 匹配不了,返回 {@link java.util.Collections#emptyMap()}
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#group(int)
      * @since 1.0.7
      */
     public static Map<Integer, String> group(String regexPattern,CharSequence input){
-        Map<Integer, String> groupMap = new LinkedHashMap<Integer, String>();
-
         Matcher matcher = getMatcher(regexPattern, input);
-        boolean matches = matcher.matches();
-        if (matches){
-
-            LOGGER.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
-            // 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
-            groupMap.put(0, matcher.group());
-
-            //匹配的索引
-            LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
-
-            int groupCount = matcher.groupCount();
-
-            for (int i = 1; i <= groupCount; ++i){
-
-                //匹配的索引
-                LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
-                String groupValue = matcher.group(i);
-                groupMap.put(i, groupValue);
-            }
-
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("groupMap:{}", JsonUtil.format(groupMap));
-            }
-        }else{
+        if (!matcher.matches()){
             LOGGER.debug("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
+            return Collections.emptyMap();
+        }
+
+        Map<Integer, String> groupMap = new LinkedHashMap<Integer, String>();
+        LOGGER.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
+        // 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
+        groupMap.put(0, matcher.group());
+
+        //匹配的索引
+        LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
+
+        int groupCount = matcher.groupCount();
+
+        for (int i = 1; i <= groupCount; ++i){
+            //匹配的索引
+            LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
+            String groupValue = matcher.group(i);
+            groupMap.put(i, groupValue);
+        }
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("groupMap:{}", JsonUtil.format(groupMap));
         }
         return groupMap;
     }

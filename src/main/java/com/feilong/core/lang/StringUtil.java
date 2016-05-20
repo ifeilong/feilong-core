@@ -729,12 +729,7 @@ public final class StringUtil{
         if (Validator.isNullOrEmpty(lastString)){
             return returnValue;
         }
-
-        if (returnValue.endsWith(lastString)){
-            //去掉最后的拼接符
-            return substringWithoutLast(returnValue, lastString.length());
-        }
-        return returnValue;
+        return returnValue.endsWith(lastString) ? substringWithoutLast(returnValue, lastString.length()) : returnValue;
     }
 
     // [end]
@@ -808,10 +803,7 @@ public final class StringUtil{
      * @see #tokenizeToStringArray(String, String)
      */
     public static String[] split(String value,String regexSpliter){
-        if (Validator.isNullOrEmpty(value)){
-            return ArrayUtils.EMPTY_STRING_ARRAY;
-        }
-        return value.split(regexSpliter);
+        return Validator.isNullOrEmpty(value) ? ArrayUtils.EMPTY_STRING_ARRAY : value.split(regexSpliter);
     }
 
     // [end]

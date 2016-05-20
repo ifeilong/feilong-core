@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1103,10 +1104,8 @@ public final class CollectionsUtil{
      * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
      */
     public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyList();
-        }
-        return (List<O>) CollectionUtils.select(objectCollection, predicate);
+        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+                        : (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
 
     //***************************selectRejected*********************************************************************
@@ -1455,21 +1454,12 @@ public final class CollectionsUtil{
         Map<T, Integer> map = new LinkedHashMap<T, Integer>();
 
         for (O o : objectCollection){
-            if (null != includePredicate){
-                boolean continueFlag = !includePredicate.evaluate(o);
-                if (continueFlag){
-                    continue;
-                }
+            if (null != includePredicate && !includePredicate.evaluate(o)){
+                continue;
             }
-
             T t = PropertyUtil.getProperty(o, propertyName);
             Integer count = map.get(t);
-            if (null == count){
-                count = 0;
-            }
-            count = count + 1;
-
-            map.put(t, count);
+            map.put(t, null == count ? 1 : count + 1);
         }
         return map;
     }
@@ -1637,10 +1627,9 @@ public final class CollectionsUtil{
                 Number propertyValue = PropertyUtil.getProperty(o, propertyName);
 
                 Number mapPropertyNameValue = sumMap.get(propertyName);
-                if (null == mapPropertyNameValue){//如果通过反射某个元素值是null,则使用默认值0 代替
-                    mapPropertyNameValue = 0;
-                }
-                sumMap.put(propertyName, NumberUtil.getAddValue(mapPropertyNameValue, propertyValue));
+                //如果通过反射某个元素值是null,则使用默认值0 代替
+                BigDecimal addValue = NumberUtil.getAddValue(null == mapPropertyNameValue ? 0 : mapPropertyNameValue, propertyValue);
+                sumMap.put(propertyName, addValue);
             }
         }
         return sumMap;

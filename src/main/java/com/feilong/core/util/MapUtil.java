@@ -315,13 +315,8 @@ public final class MapUtil{
     @SuppressWarnings("unchecked")
     public static <K, T extends Number & Comparable<? super T>> T getMinValue(Map<K, T> map,K...keys){
         Map<K, T> subMap = getSubMap(map, keys);
-
-        if (Validator.isNullOrEmpty(subMap)){
-            return null;
-        }
         //注意 Number本身 没有实现Comparable接口
-        Collection<T> values = subMap.values();
-        return Collections.min(values);
+        return Validator.isNullOrEmpty(subMap) ? null : Collections.min(subMap.values());
     }
 
     /**

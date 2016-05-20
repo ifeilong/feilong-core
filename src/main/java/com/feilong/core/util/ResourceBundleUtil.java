@@ -239,11 +239,7 @@ public final class ResourceBundleUtil{
      */
     public static String getValueWithArguments(ResourceBundle resourceBundle,String key,Object...arguments){
         String value = getValue(resourceBundle, key);
-        if (Validator.isNullOrEmpty(value)){
-            return StringUtils.EMPTY;
-        }
-        // 支持 arguments 为null,原样返回
-        return MessageFormatUtil.format(value, arguments);
+        return Validator.isNullOrEmpty(value) ? StringUtils.EMPTY : MessageFormatUtil.format(value, arguments);// 支持 arguments 为null,原样返回
     }
 
     // *****************************************************************************

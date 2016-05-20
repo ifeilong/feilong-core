@@ -285,12 +285,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             propertyValue1 = ConvertUtil.convert(propertyValue1, propertyValueConvertToClass);
             propertyValue2 = ConvertUtil.convert(propertyValue2, propertyValueConvertToClass);
         }
-
-        if (null != comparator){
-            return comparator.compare(propertyValue1, propertyValue2);
-        }
-
-        return compare(t1, t2, propertyValue1, propertyValue2);
+        return null != comparator ? comparator.compare(propertyValue1, propertyValue2) : compare(t1, t2, propertyValue1, propertyValue2);
     }
 
     /**

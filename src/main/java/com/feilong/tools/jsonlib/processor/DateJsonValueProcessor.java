@@ -73,12 +73,6 @@ public class DateJsonValueProcessor implements JsonValueProcessor{
      * @return the object
      */
     private Object process(Object value){
-        if (null == value){
-            return null;
-        }
-        if (value instanceof Date){
-            return DateUtil.date2String((Date) value, datePattern);
-        }
-        return value.toString();
+        return null == value ? null : (value instanceof Date ? DateUtil.date2String((Date) value, datePattern) : value.toString());
     }
 }

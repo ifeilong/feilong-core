@@ -270,10 +270,7 @@ public final class ClassUtil{
      * @see java.lang.Class#isInstance(Object)
      */
     public static boolean isInstance(Object obj,Class<?> klass){
-        if (null == klass){
-            return false;
-        }
-        return klass.isInstance(obj);
+        return null == klass ? false : klass.isInstance(obj);
     }
 
     /**

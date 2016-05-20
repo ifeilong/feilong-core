@@ -65,10 +65,6 @@ public class CollectionContainsPredicate<T> implements Predicate<T>{
      */
     @Override
     public boolean evaluate(T object){
-        if (Validator.isNullOrEmpty(values)){
-            return false;
-        }
-        Object property = PropertyUtil.getProperty(object, propertyName);
-        return values.contains(property);
+        return Validator.isNullOrEmpty(values) ? false : values.contains(PropertyUtil.getProperty(object, propertyName));
     }
 }

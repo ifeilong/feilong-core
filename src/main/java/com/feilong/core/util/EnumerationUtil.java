@@ -84,10 +84,6 @@ public final class EnumerationUtil{
      * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)
      */
     public static <O> boolean contains(Enumeration<O> enumeration,O value){
-        if (Validator.isNullOrEmpty(enumeration)){
-            return false;
-        }
-        EnumerationIterator<O> iterator = new EnumerationIterator<O>(enumeration);
-        return IteratorUtils.contains(iterator, value);
+        return Validator.isNullOrEmpty(enumeration) ? false : IteratorUtils.contains(new EnumerationIterator<O>(enumeration), value);
     }
 }

@@ -399,11 +399,7 @@ public final class ConvertUtil{
      * @since 1.4.0
      */
     public static String toString(ToStringConfig toStringConfig,final Collection<?> collection){
-        if (Validator.isNullOrEmpty(collection)){
-            return StringUtils.EMPTY;
-        }
-        Object[] array = collection.toArray();
-        return toString(toStringConfig, array);
+        return Validator.isNullOrEmpty(collection) ? StringUtils.EMPTY : toString(toStringConfig, collection.toArray());
     }
 
     /**
@@ -593,10 +589,7 @@ public final class ConvertUtil{
         }
 
         Object o = arrays[0];
-        if (isPrimitiveArray(o)){
-            return primitiveArrayToObjectArray(o);
-        }
-        return arrays;
+        return isPrimitiveArray(o) ? primitiveArrayToObjectArray(o) : arrays;
     }
 
     /**
@@ -803,10 +796,7 @@ public final class ConvertUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T convert(Object value,Class<T> targetType){
-        if (null == value){
-            return null;
-        }
-        return (T) ConvertUtils.convert(value, targetType);
+        return null == value ? null : (T) ConvertUtils.convert(value, targetType);
     }
 
     /**
@@ -833,9 +823,6 @@ public final class ConvertUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T[] convert(String[] values,Class<T> targetType){
-        if (null == values){
-            return null;
-        }
-        return (T[]) ConvertUtils.convert(values, targetType);
+        return null == values ? null : (T[]) ConvertUtils.convert(values, targetType);
     }
 }
