@@ -355,8 +355,7 @@ public class ConvertUtilTest{
         LOGGER.info(JsonUtil.format(list2));
 
         enumeration = null;
-        list2 = ConvertUtil.toList(enumeration);
-        LOGGER.info(JsonUtil.format(list2));
+        LOGGER.info(JsonUtil.format(ConvertUtil.toList(enumeration)));
     }
 
     /**
@@ -370,9 +369,10 @@ public class ConvertUtilTest{
         user2.setId(2L);
 
         User[] users = { user1, user2 };
+        LOGGER.info(JsonUtil.format(ConvertUtil.toList(users)));
 
-        List<User> list = ConvertUtil.toList(users);
-        LOGGER.info(JsonUtil.format(list));
+        users = null;
+        LOGGER.info(JsonUtil.format(ConvertUtil.toList(users)));
     }
 
     /**

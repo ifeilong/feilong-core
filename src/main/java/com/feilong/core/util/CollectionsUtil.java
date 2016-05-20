@@ -550,11 +550,10 @@ public final class CollectionsUtil{
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
      */
+    @SuppressWarnings("unchecked")
     public static <O> List<O> removeDuplicate(Collection<O> objectCollection){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyList();
-        }
-        return new ArrayList<O>(new LinkedHashSet<O>(objectCollection));
+        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+                        : new ArrayList<O>(new LinkedHashSet<O>(objectCollection));
     }
 
     //*************************获得 属性值 *******************************************************************

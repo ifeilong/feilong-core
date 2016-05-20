@@ -496,11 +496,9 @@ public final class ConvertUtil{
      * @see EnumerationUtils#toList(Enumeration)
      * @since 1.0.7
      */
+    @SuppressWarnings("unchecked")
     public static <T> List<T> toList(final Enumeration<T> enumeration){
-        if (Validator.isNullOrEmpty(enumeration)){
-            return Collections.emptyList();
-        }
-        return Collections.list(enumeration);
+        return Validator.isNullOrEmpty(enumeration) ? (List<T>) Collections.emptyList() : Collections.list(enumeration);
     }
 
     /**
@@ -519,12 +517,10 @@ public final class ConvertUtil{
      *         if Validator.isNullOrEmpty(arrays), return null,else return {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
      */
+    @SuppressWarnings("unchecked")
     public static <T> List<T> toList(T[] arrays){
-        if (Validator.isNullOrEmpty(arrays)){
-            return Collections.emptyList();
-        }
         //如果直接使用 Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象ArrayList,没有实现AbstractList类的add方法,如果 strList.add("c");导致抛异常! 
-        return new ArrayList<T>(Arrays.asList(arrays));
+        return null == arrays ? (List<T>) Collections.emptyList() : new ArrayList<T>(Arrays.asList(arrays));
     }
 
     /**
@@ -604,14 +600,8 @@ public final class ConvertUtil{
     private static boolean isPrimitiveArray(Object o){
         // Allocate a new Array
         Class<? extends Object> klass = o.getClass();
-
-        if (!klass.isArray()){
-            return false;
-        }
-
-        Class<?> componentType = klass.getComponentType();
         //原始型的
-        return componentType.isPrimitive();
+        return !klass.isArray() ? false : klass.getComponentType().isPrimitive();
     }
 
     /**

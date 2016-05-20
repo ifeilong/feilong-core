@@ -77,6 +77,7 @@ public class CollectionsUtilTest{
         list.add("feilong3");
 
         LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
+        LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(null)));
     }
 
     /**
@@ -184,6 +185,7 @@ public class CollectionsUtilTest{
         list.add(2L);
         list.add(3L);
         LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
+        LOGGER.info(JsonUtil.format(CollectionsUtil.select(null, new EqualPredicate<Long>(1L))));
     }
 
     /**
