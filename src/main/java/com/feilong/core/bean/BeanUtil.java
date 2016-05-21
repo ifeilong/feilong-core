@@ -481,7 +481,15 @@ public final class BeanUtil{
      * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话(即自定义类),可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用,<br>
      * 是为那些本身没有实现clone方法的类准备的 
      * </p>
-     *
+     * 
+     * <h3>深度clone:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 如果需要深度clone,可以使用 {@link org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable) SerializationUtils.clone},但是它的性能要慢很多倍
+     * </p>
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param bean
@@ -489,6 +497,7 @@ public final class BeanUtil{
      * @return the cloned bean (复制的引用 ,无法实现深clone)
      * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
+     * @see org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable)
      */
     @SuppressWarnings("unchecked")
     public static <T> T cloneBean(T bean){
