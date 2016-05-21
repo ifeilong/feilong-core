@@ -261,6 +261,47 @@ public final class CollectionsUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    /**
+     * 在list中,查找 第一个 属性 <code>propertyName</code> 值是 指定值 <code>value</code>的 索引位置.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     * 
+     * assertEquals(0, CollectionsUtil.indexOf(list, "name", "张飞"));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <T>
+     *            the generic type
+     * @param list
+     *            the list
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     * @param value
+     *            the value
+     * @return 在list中,查找 第一个 属性 <code>propertyName</code> 值是 指定值 <code>value</code>的 索引位置<br>
+     *         如果 list是null 或者 empty,返回 -1<br>
+     *         如果指定属性<code>propertyName</code>的值 <code>value</code>在 list 查找不到也返回 -1<br>
+     * @see org.apache.commons.collections4.ListUtils#indexOf(List, Predicate)
+     * @see com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate
+     * @since 1.5.5
+     */
+    public static <O, T> int indexOf(List<O> list,String propertyName,T value){
+        return ListUtils.indexOf(list, new BeanPropertyValueEqualsPredicate<O>(propertyName, value));
+    }
     //***********************删除****************************************************
 
     /**

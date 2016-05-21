@@ -98,6 +98,19 @@ public class CollectionsUtilTest{
     }
 
     /**
+     * Test remove.
+     */
+    @Test
+    public void testIndexOf(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
+
+        assertEquals(0, CollectionsUtil.indexOf(list, "name", "张飞"));
+    }
+
+    /**
      * Test group one.
      */
     @Test
