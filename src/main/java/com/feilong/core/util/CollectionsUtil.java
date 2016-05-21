@@ -821,8 +821,7 @@ public final class CollectionsUtil{
      *         如果 参数 <code>objectCollection</code> 是null or empty,return {@link Collections#emptyMap()}<br>
      *         如果 参数 <code>keyPropertyName</code> 是null or empty,将会出现异常;<br>
      *         如果 参数 <code>valuePropertyName</code> 是null or empty,将会出现异常;<br>
-     * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
+     * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      */
     public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
         if (Validator.isNullOrEmpty(objectCollection)){
