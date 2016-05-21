@@ -337,7 +337,6 @@ public class BeanUtilTest{
      */
     @Test
     public void populate1(){
-
         Map<String, Object> map = new HashMap<String, Object>();
 
         Map<String, Object> properties = new HashMap<String, Object>();
