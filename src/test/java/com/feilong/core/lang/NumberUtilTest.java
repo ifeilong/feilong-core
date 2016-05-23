@@ -280,7 +280,7 @@ public class NumberUtilTest{
         value = -88.067;
         LOGGER.debug(NumberUtil.toString(value, NumberPattern.TWO_DECIMAL_POINTS));
 
-        LOGGER.info("******************************");
+        LOGGER.debug("******************************");
 
         value = 88.6;
         LOGGER.debug("" + ConvertUtil.toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
@@ -289,7 +289,6 @@ public class NumberUtilTest{
         value = -88.6;
         LOGGER.debug("" + ConvertUtil.toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
         LOGGER.debug(NumberUtil.toString(value, NumberPattern.NO_SCALE));
-
     }
 
     /**

@@ -357,7 +357,7 @@ public class CollectionsUtilTest{
         user2.setAge(30);
         list.add(user2);
 
-        Map<String, Number> map = CollectionsUtil.avg(list, 2, "id", "age");
+        Map<String, BigDecimal> map = CollectionsUtil.avg(list, 2, "id", "age");
         LOGGER.info(JsonUtil.format(map));
     }
 
@@ -390,7 +390,7 @@ public class CollectionsUtilTest{
         user2.setAge(30);
         list.add(user2);
 
-        Map<String, Number> map = CollectionsUtil.sum(list, "id", "age");
+        Map<String, BigDecimal> map = CollectionsUtil.sum(list, "id", "age");
         LOGGER.info("{}", JsonUtil.format(map));
     }
 

@@ -1620,8 +1620,7 @@ public final class CollectionsUtil{
      * user2.setAge(30);
      * list.add(user2);
      * 
-     * Map{@code <String, Number>} map = CollectionsUtil.avg(list, 2, "id", "age");
-     * 
+     * Map{@code <String, BigDecimal>} map = CollectionsUtil.avg(list, 2, "id", "age");
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
@@ -1648,16 +1647,16 @@ public final class CollectionsUtil{
      * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
      * @see #sum(Collection, String...)
      */
-    public static <O> Map<String, Number> avg(Collection<O> objectCollection,int scale,String...propertyNames){
+    public static <O> Map<String, BigDecimal> avg(Collection<O> objectCollection,int scale,String...propertyNames){
         //总分
-        Map<String, Number> sumMap = sum(objectCollection, propertyNames);
+        Map<String, BigDecimal> sumMap = sum(objectCollection, propertyNames);
 
         int size = objectCollection.size();
-        Map<String, Number> map = new LinkedHashMap<String, Number>(size);
+        Map<String, BigDecimal> map = new LinkedHashMap<String, BigDecimal>(size);
 
-        for (Map.Entry<String, Number> entry : sumMap.entrySet()){
+        for (Map.Entry<String, BigDecimal> entry : sumMap.entrySet()){
             String key = entry.getKey();
-            Number value = entry.getValue();
+            BigDecimal value = entry.getValue();
 
             map.put(key, NumberUtil.getDivideValue(ConvertUtil.toBigDecimal(value), size, scale));
         }
@@ -1694,7 +1693,7 @@ public final class CollectionsUtil{
      * 
      * @since 1.5.0
      */
-    public static <O> Number avg(Collection<O> objectCollection,int scale,String propertyName){
+    public static <O> BigDecimal avg(Collection<O> objectCollection,int scale,String propertyName){
         String[] propertyNames = { propertyName };
         return avg(objectCollection, scale, propertyNames).get(propertyName);
     }
@@ -1721,7 +1720,7 @@ public final class CollectionsUtil{
      * user2.setAge(30);
      * list.add(user2);
      * 
-     * Map{@code <String, Number>} map = CollectionsUtil.sum(list, "id", "age");
+     * Map{@code <String, BigDecimal>} map = CollectionsUtil.sum(list, "id", "age");
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
@@ -1745,7 +1744,7 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
      */
-    public static <O> Map<String, Number> sum(Collection<O> objectCollection,String...propertyNames){
+    public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String...propertyNames){
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
@@ -1753,13 +1752,13 @@ public final class CollectionsUtil{
         Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
 
         //总分
-        Map<String, Number> sumMap = new LinkedHashMap<String, Number>(objectCollection.size());
+        Map<String, BigDecimal> sumMap = new LinkedHashMap<String, BigDecimal>(objectCollection.size());
 
         for (O o : objectCollection){
             for (String propertyName : propertyNames){
                 Number propertyValue = PropertyUtil.getProperty(o, propertyName);
 
-                Number mapPropertyNameValue = sumMap.get(propertyName);
+                BigDecimal mapPropertyNameValue = sumMap.get(propertyName);
                 //如果通过反射某个元素值是null,则使用默认值0 代替
                 BigDecimal addValue = NumberUtil.getAddValue(null == mapPropertyNameValue ? 0 : mapPropertyNameValue, propertyValue);
                 sumMap.put(propertyName, addValue);
@@ -1784,8 +1783,7 @@ public final class CollectionsUtil{
      * list.add(new User(5L));
      * list.add(new User(5L));
      * 
-     * Number number = CollectionsUtil.sum(list, "id");
-     * LOGGER.info("" + number);
+     * LOGGER.info("" + CollectionsUtil.sum(list, "id"));
      * </pre>
      * 
      * 返回: 12
@@ -1830,7 +1828,7 @@ public final class CollectionsUtil{
      * @see #sum(Collection, String...)
      * @since 1.5.0
      */
-    public static <O> Number sum(Collection<O> objectCollection,String propertyName){
+    public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName){
         Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
 
         String[] propertyNames = { propertyName };
