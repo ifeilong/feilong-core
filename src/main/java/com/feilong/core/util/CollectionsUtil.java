@@ -1743,8 +1743,78 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
+     * @see #sum(Collection, Predicate, String...)
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String...propertyNames){
+        return sum(objectCollection, null, propertyNames);
+    }
+
+    /**
+     * 总和,计算集合对象内指定的属性名值的总和.
+     * 
+     * <p>
+     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
+     * </p>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * 
+     * User user1 = new User(10L);
+     * user1.setName("刘备");
+     * user1.setAge(50);
+     * list.add(user1);
+     * 
+     * User user2 = new User(20L);
+     * user1.setName("关羽");
+     * user2.setAge(50);
+     * list.add(user2);
+     * 
+     * User user3 = new User(100L);
+     * user3.setName("张飞");
+     * user3.setAge(100);
+     * list.add(user3);
+     * 
+     * Map{@code <String, BigDecimal>} map = CollectionsUtil.sum(list, new Predicate{@code <User>}(){
+     * 
+     *     {@code @Override}
+     *     public boolean evaluate(User user){
+     *         return !"张飞".equals(user.getName());
+     *     }
+     * }, "id", "age");
+     * LOGGER.info("{}", JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     *         "id": 30,
+     *         "age": 100
+     *     }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param includePredicate
+     *            the include predicate
+     * @param propertyNames
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
+     * @since 1.5.5
+     */
+    public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,Predicate<O> includePredicate,String...propertyNames){
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
@@ -1755,6 +1825,10 @@ public final class CollectionsUtil{
         Map<String, BigDecimal> sumMap = new LinkedHashMap<String, BigDecimal>(objectCollection.size());
 
         for (O o : objectCollection){
+            if (null != includePredicate && !includePredicate.evaluate(o)){
+                continue;
+            }
+
             for (String propertyName : propertyNames){
                 Number propertyValue = PropertyUtil.getProperty(o, propertyName);
 
@@ -1824,14 +1898,62 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 objectCollection is null or empty, 那么返回 <code>null</code>
+     * @return 如果 propertyName 是null或者 empty,会抛出异常<br>
+     *         如果 objectCollection 是null或者 empty,返回 null
      * @see #sum(Collection, String...)
      * @since 1.5.0
      */
     public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName){
+        return sum(objectCollection, propertyName, null);
+    }
+
+    /**
+     * 总和,计算集合对象内指定的属性名值的总和.
+     * 
+     * <p>
+     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(50L));
+     * list.add(new User(50L));
+     * 
+     * assertEquals(new BigDecimal(100L), CollectionsUtil.sum(list, "id", new Predicate{@code <User>}(){
+     * 
+     *     {@code @Override}
+     *     public boolean evaluate(User user){
+     *         return user.getId() > 10L;
+     *     }
+     * }));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     * @param includePredicate
+     *            the include predicate
+     * @return 如果 propertyName 是null或者 empty,会抛出异常<br>
+     *         如果 objectCollection 是null或者 empty,返回 null
+     * @since 1.5.5
+     */
+    public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
 
         String[] propertyNames = { propertyName };
-        return sum(objectCollection, propertyNames).get(propertyName);
+        return sum(objectCollection, includePredicate, propertyNames).get(propertyName);
     }
 }

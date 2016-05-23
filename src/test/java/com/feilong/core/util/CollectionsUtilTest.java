@@ -288,14 +288,6 @@ public class CollectionsUtilTest{
 
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
         LOGGER.info(JsonUtil.format(map));
-
-        //        Map<Long, List<User>> map2 = new HashMap<Long, List<User>>();
-        //        map2.put(1L, testList);
-        //        map2.put(2L, testList);
-        //
-        //        Map<String, List<String>> map3 = CollectionsUtil.getPropertyValueMap(map2, "key", "value.name");
-        //        LOGGER.info(JsonUtil.format(map2));
-
     }
 
     /**
@@ -375,6 +367,22 @@ public class CollectionsUtilTest{
         assertEquals(null, CollectionsUtil.sum(null, "id"));
     }
 
+    @Test
+    public void testSum4(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User(2L));
+        list.add(new User(50L));
+        list.add(new User(50L));
+
+        assertEquals(new BigDecimal(100L), CollectionsUtil.sum(list, "id", new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getId() > 10L;
+            }
+        }));
+    }
+
     /**
      * Test sum2.
      */
@@ -391,6 +399,35 @@ public class CollectionsUtilTest{
         list.add(user2);
 
         Map<String, BigDecimal> map = CollectionsUtil.sum(list, "id", "age");
+        LOGGER.info("{}", JsonUtil.format(map));
+    }
+
+    @Test
+    public void testSum3(){
+        List<User> list = new ArrayList<User>();
+
+        User user1 = new User(10L);
+        user1.setName("刘备");
+        user1.setAge(50);
+        list.add(user1);
+
+        User user2 = new User(20L);
+        user1.setName("关羽");
+        user2.setAge(50);
+        list.add(user2);
+
+        User user3 = new User(100L);
+        user3.setName("张飞");
+        user3.setAge(100);
+        list.add(user3);
+
+        Map<String, BigDecimal> map = CollectionsUtil.sum(list, new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return !"张飞".equals(user.getName());
+            }
+        }, "id", "age");
         LOGGER.info("{}", JsonUtil.format(map));
     }
 
