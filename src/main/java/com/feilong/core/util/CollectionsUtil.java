@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate;
@@ -509,12 +510,7 @@ public final class CollectionsUtil{
      * 输出 :
      * 
      * <pre class="code">
-     * [
-     * "xinge",
-     * "feilong1",
-     * "feilong2",
-     * "feilong2"
-     * ]
+     * ["xinge","feilong1","feilong2","feilong2"]
      * </pre>
      * 
      * </blockquote>
@@ -560,11 +556,7 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-     [
-         "feilong1",
-         "feilong2",
-         "feilong3"
-     ]
+     ["feilong1","feilong2","feilong3"]
      * </pre>
      * 
      * </blockquote>
@@ -740,8 +732,7 @@ public final class CollectionsUtil{
      * testList.add(new User(5L));
      * testList.add(new User(5L));
      * 
-     * Set{@code <Long>} fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
-     * LOGGER.info(JsonUtil.format(fieldValueCollection));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(testList, "id")));
      * </pre>
      * 
      * 返回:
@@ -830,8 +821,7 @@ public final class CollectionsUtil{
      * testList.add(new User("关羽", 24));
      * testList.add(new User("刘备", 25));
      * 
-     * Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
-     * LOGGER.info(JsonUtil.format(map));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(testList, "name", "age")));
      * </pre>
      * 
      * 返回:
@@ -956,8 +946,7 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-     [{
-             "age": 24,
+     [{"age": 24,
              "name": "关羽"
          },{
              "age": 24,
@@ -1060,23 +1049,34 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List&lt;User&gt; objectCollection = new ArrayList&lt;User&gt;();
-     * objectCollection.add(new User(&quot;张飞&quot;, 23));
-     * objectCollection.add(new User(&quot;关羽&quot;, 24));
-     * objectCollection.add(new User(&quot;刘备&quot;, 25));
+     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
+     * objectCollection.add(new User("张飞", 23));
+     * objectCollection.add(new User("关羽", 24));
+     * objectCollection.add(new User("刘备", 25));
      * 
-     * List&lt;String&gt; list = new ArrayList&lt;String&gt;();
-     * list.add(&quot;张飞&quot;);
-     * list.add(&quot;刘备&quot;);
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, &quot;name&quot;, list)));
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("张飞");
+     * list.add("刘备");
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
      * </pre>
      * 
-     * <p>
-     * 返回 张飞 和 刘备的对象集合
-     * </p>
+     * 返回:
+     * 
+     * <pre class="code">
+    [{
+                "age": 23,
+                "name": "张飞"
+            },
+                    {
+                "age": 25,
+                "name": "刘备"
+            }
+        ]
+     * 
+     * </pre>
      * 
      * </blockquote>
-     *
+     * 
      * @param <O>
      *            the generic type
      * @param <V>
@@ -1213,20 +1213,29 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List&lt;User&gt; objectCollection = new ArrayList&lt;User&gt;();
-     * objectCollection.add(new User(&quot;张飞&quot;, 23));
-     * objectCollection.add(new User(&quot;关羽&quot;, 24));
-     * objectCollection.add(new User(&quot;刘备&quot;, 25));
      * 
-     * List&lt;String&gt; list = new ArrayList&lt;String&gt;();
-     * list.add(&quot;张飞&quot;);
-     * list.add(&quot;刘备&quot;);
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, &quot;name&quot;, list)));
+     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
+     * objectCollection.add(new User("张飞", 23));
+     * objectCollection.add(new User("关羽", 24));
+     * objectCollection.add(new User("刘备", 25));
+     * 
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("张飞");
+     * list.add("刘备");
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(objectCollection, "name", list)));
+     * 
      * </pre>
      * 
-     * <p>
-     * 返回 关羽 的对象集合
-     * </p>
+     * 返回:
+     * 
+     * <pre class="code">
+    [    {
+        "age": 24,
+        "name": "关羽"
+    }]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -1295,7 +1304,7 @@ public final class CollectionsUtil{
      * testList.add(new User("刘备", 25));
      * testList.add(new User("刘备", 25));
      * 
-     * Map<String, List<User>> map = CollectionsUtil.group(testList, "name");
+     * Map{@code <String, List<User>>} map = CollectionsUtil.group(testList, "name");
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
@@ -1332,10 +1341,88 @@ public final class CollectionsUtil{
      *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.lang.ArrayUtil#group(Object[], String)
-     * @see #groupOne(Collection, String)
+     * @see #group(Collection, String, Predicate)
      * @since 1.0.8
      */
     public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName){
+        return group(objectCollection, propertyName, null);
+    }
+
+    /**
+     * 循环 <code>objectCollection</code>,找到符合条件的 <code>includePredicate</code>的元素,(如果propertyName存在相同的值,那么这些值,将会以list的形式 put到map中).
+     * 
+     * <p>
+     * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
+     * <br>
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+        List{@code <User>} list = new ArrayList{@code <User>}();
+        list.add(new User("张飞", 10));
+        list.add(new User("张飞", 28));
+        list.add(new User("刘备", 32));
+        list.add(new User("刘备", 30));
+        list.add(new User("刘备", 10));
+    
+        Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name", new Predicate{@code <User>}(){
+    
+            {@code @Override}
+            public boolean evaluate(User user){
+                return user.getAge() > 20;
+            }
+        });
+        LOGGER.info(JsonUtil.format(map));
+     * </pre>
+     * 
+     * 返回 :
+     * 
+     * <pre class="code">
+    {
+        "张飞": [        {
+    
+            "age": 28,
+            "name": "张飞"
+        }],
+        "刘备":         [
+                        {
+                "age": 32,
+                "name": "刘备"
+            },
+                        {
+                "age": 30,
+                "name": "刘备"
+            }
+        ]
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            注意,此处的T其实是 Object 类型, 需要区别对待,比如从excel中读取的类型是String,那么就不能简简单单的使用Integer来接收, 因为不能强制转换
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object list
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     * @param includePredicate
+     *            the include predicate
+     * @return 如果 objectCollection isNullOrEmpty ,will return {@link Collections#emptyMap()}; <br>
+     *         如果 propertyName isNullOrEmpty,will throw {@link NullPointerException}<br>
+     *         如果没有任何element match <code>includePredicate</code>,,will return empty LinkedHashMap<br>
+     *         如果 includePredicate 是null,那么以所有的元素进行分组
+     * @see PropertyUtil#getProperty(Object, String)
+     * @see ArrayUtil#group(Object[], String)
+     * @see #groupOne(Collection, String)
+     * @since 1.5.5
+     */
+    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
@@ -1344,6 +1431,11 @@ public final class CollectionsUtil{
         Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectCollection.size());
 
         for (O o : objectCollection){
+
+            if (null != includePredicate && !includePredicate.evaluate(o)){
+                continue;
+            }
+
             T t = PropertyUtil.getProperty(o, propertyName);
             List<O> valueList = map.get(t);
             if (null == valueList){
@@ -1434,6 +1526,8 @@ public final class CollectionsUtil{
         }
         return map;
     }
+
+    //***********************************************************************************************
 
     /**
      * 循环 <code>objectCollection</code>,统计<code>propertyName</code>的值出现的次数.

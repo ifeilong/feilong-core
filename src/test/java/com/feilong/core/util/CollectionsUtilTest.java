@@ -28,6 +28,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
+import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.functors.EqualPredicate;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -135,6 +136,25 @@ public class CollectionsUtilTest{
         testList.add(new User("刘备", 25));
 
         Map<String, List<User>> map = CollectionsUtil.group(testList, "name");
+        LOGGER.info(JsonUtil.format(map));
+    }
+
+    @Test
+    public void testGroup2(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 10));
+        list.add(new User("张飞", 28));
+        list.add(new User("刘备", 32));
+        list.add(new User("刘备", 30));
+        list.add(new User("刘备", 10));
+
+        Map<String, List<User>> map = CollectionsUtil.group(list, "name", new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getAge() > 20;
+            }
+        });
         LOGGER.info(JsonUtil.format(map));
     }
 
