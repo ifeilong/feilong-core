@@ -36,7 +36,15 @@ Reduce development, Release ideas (减少开发,释放思想)
 # Maven使用配置
 
 ```XML
+
 	<project>
+	
+		....
+		<properties>
+			<version.feilong-platform>1.5.4</version.feilong-platform>
+			....
+		</properties>
+		
 		....
 		<repositories>
 			<repository>
@@ -51,7 +59,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 			<dependency>
 				<groupId>com.feilong.platform</groupId>
 				<artifactId>feilong-core</artifactId>
-				<version>1.5.4</version>
+				<version>${version.feilong-platform}</version>
 			</dependency>
 			....
 		</dependencies>
