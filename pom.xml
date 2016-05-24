@@ -218,10 +218,12 @@
 
 						<include>**/HttpMethodTypeTest</include>
 
+						<include>**/RandomUtilTest</include>
 						<include>**/RegexUtilTest</include>
+						
 						<include>**/NumberUtilTest</include>
 						<include>**/StringUtilTest</include>
-						
+
 						<include>**/ValidatorTest.java</include>
 					</includes>
 					<skip>false</skip>

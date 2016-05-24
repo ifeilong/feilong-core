@@ -351,8 +351,8 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * {
-     * "a": 3007,
-     * "c": 3001
+     *      "a": 3007,
+     *      "c": 3001
      * }
      * </pre>
      * 

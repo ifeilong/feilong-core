@@ -17,6 +17,8 @@ package com.feilong.core.util;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -78,9 +80,11 @@ public final class RandomUtil{
      * 
      * @param maxValue
      *            随机数最大值
-     * @return 创建0-最大值之间的随机数
+     * @return 创建0-最大值之间的随机数<br>
+     *         如果 <code>maxValue</code> 是null,那么抛出 {@link java.lang.NullPointerException NullPointerException}
      */
     public static long createRandom(Number maxValue){
+        Validate.notNull(maxValue, "maxValue can't be null!");
         double random = JVM_RANDOM.nextDouble();
         return (long) Math.floor(random * maxValue.longValue());
     }
@@ -104,28 +108,33 @@ public final class RandomUtil{
      *            最小值
      * @param maxValue
      *            最大值
-     * @return 创建最小值和最大值之间的随机数<br>
-     *         if minValue null,will {@link java.lang.NullPointerException NullPointerException};<br>
-     *         if maxValue null,will {@link java.lang.NullPointerException NullPointerException};<br>
-     *         if maxLong< minLong will {@link java.lang.IllegalArgumentException IllegalArgumentException}
+     * @return 创建最小值 <code>minValue</code> 和最大值 <code>maxValue</code> 之间的随机数<br>
+     *         如果 <code>minValue</code>是 null,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
+     *         如果 <code>maxValue</code>是 null,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
+     *         如果 <code>maxLong</code>{@code <} <code>minLong</code>, 抛出 {@link java.lang.IllegalArgumentException
+     *         IllegalArgumentException}<br>
+     *         如果 <code>maxLong</code>{@code =} <code>minLong</code> ,直接返回 minLong
+     * 
+     * @see org.apache.commons.lang3.RandomUtils#nextInt(int, int)
+     * @see org.apache.commons.lang3.RandomUtils#nextLong(long, long)
+     * @see org.apache.commons.lang3.RandomUtils#nextFloat(float, float)
+     * @see org.apache.commons.lang3.RandomUtils#nextDouble(double, double)
      */
     public static long createRandom(Number minValue,Number maxValue){
         Validate.notNull(minValue, "min can't be null!");
         Validate.notNull(maxValue, "max can't be null!");
 
-        long maxLong = maxValue.longValue();
         long minLong = minValue.longValue();
+        long maxLong = maxValue.longValue();
 
         Validate.isTrue(maxLong >= minLong, Slf4jUtil.formatMessage("maxLong:[{}] can not < minLong:[{}]", maxLong, minLong));
-
-        long cha = maxLong - minLong;
-        return minLong + createRandom(cha);
+        return RandomUtils.nextLong(minLong, maxLong);
     }
 
     // ********************************************************************
 
     /**
-     * 生成一个指定长度<code>length</code>的随机正整数.
+     * 生成一个指定长度<code>length</code>的 <b>随机正整数</b>.
      * 
      * <h3>Example 1:</h3>
      * <blockquote>
@@ -139,9 +148,11 @@ public final class RandomUtil{
      *
      * @param length
      *            设定所取出随机数的长度.
-     * @return 返回生成的随机数
+     * @return 返回生成的随机数<br>
+     *         如果 <code>length</code> {@code <=0} ,抛出 {@link IllegalArgumentException}
      */
     public static long createRandomWithLength(int length){
+        Validate.isTrue(length > 0, "length:[%s] must >0", length);
         long num = 1;
         for (int i = 0; i < length; ++i){
             num = num * 10;
@@ -162,8 +173,8 @@ public final class RandomUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL}, 8, 20)
-     * 从{@link com.feilong.core.Alphabet#DECIMAL}随机抽取字符,组成<b>最小长度是8</b>,<b>最大长度是20</b>的字符串
+     * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL Alphabet.DECIMAL}, 8, 20)
+     * 从{@link com.feilong.core.Alphabet#DECIMAL Alphabet.DECIMAL}随机抽取字符,组成<b>最小长度是8</b>,<b>最大长度是20</b>的字符串
      * 
      * 生成的结果是可能是 142853574998970631
      * </pre>
@@ -179,12 +190,15 @@ public final class RandomUtil{
      * 
      * @return 随机抽取字符串char,拼接最小长度是 <code>minLength</code>,最大长度是<code>maxLength</code>的字符串随机字符串. <br>
      *         如上述示例,可能返回142853574998970631<br>
-     *         if str empty,will {@link java.lang.NullPointerException NullPointerException};<br>
-     *         if maxLength<=0 will {@link java.lang.IllegalArgumentException IllegalArgumentException}<br>
-     *         if maxLength<minLength will {@link java.lang.IllegalArgumentException IllegalArgumentException}
+     *         如果 <code>str</code> 是null,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
+     *         如果 <code>str</code> 是 is blank,抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException};<br>
+     *         如果 <code>maxLength</code> {@code <=}0 ,抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException}<br>
+     *         如果 <code>maxLength</code> {@code <} minLength,抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException}
+     * 
+     * @see #createRandomFromString(String, int)
      */
     public static String createRandomFromString(String str,int minLength,int maxLength){
-        Validate.notEmpty(str, "str can't be null/empty!");
+        Validate.notBlank(str, "str can't be null/empty!");
 
         Validate.isTrue(maxLength > 0, Slf4jUtil.formatMessage("maxLength:[{}] can not zero", maxLength));
         Validate.isTrue(maxLength >= minLength, Slf4jUtil.formatMessage("maxLength:[{}] can not < minLength:[{}]", maxLength, minLength));
@@ -200,9 +214,9 @@ public final class RandomUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}, 5)
+     * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS Alphabet.DECIMAL_AND_LETTERS}, 5)
      * 
-     * 从{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}随机抽取字符,组成长度是5的字符串
+     * 从 {@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS  Alphabet.DECIMAL_AND_LETTERS} 随机抽取字符,组成长度是5的字符串
      * 生成的结果是可能是IFSMB
      * </pre>
      * 
@@ -212,20 +226,16 @@ public final class RandomUtil{
      *            被抽取的字符串,比如{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}
      * @param length
      *            指定字符串长度,比如 5
-     * @return 得到随机字符串,如上面给到的参数,可能是IFSMB<br>
-     *         if str empty,will {@link java.lang.NullPointerException NullPointerException};<br>
-     *         if length<=0 will {@link java.lang.IllegalArgumentException IllegalArgumentException}
+     * @return 得到随机字符串;<br>
+     *         如果 <code>str</code> 是null 或者 empty,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
+     *         如果 <code>str</code> 是isBlank,抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException};<br>
+     *         如果 <code>length</code> {@code <=0}, 抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException}
+     * 
+     * @see org.apache.commons.lang3.RandomStringUtils#random(int, String)
      */
     public static String createRandomFromString(String str,int length){
-        Validate.notEmpty(str, "str can't be null/empty!");
+        Validate.notBlank(str, "str can't be null/empty!");
         Validate.isTrue(length > 0, Slf4jUtil.formatMessage("length:[{}] can not <=0", length));
-
-        char[] ch = new char[length];
-        int j = str.length();
-        for (int i = 0; i < length; ++i){
-            int index = JVM_RANDOM.nextInt(j);// 随机取个字符
-            ch[i] = str.charAt(index);
-        }
-        return new String(ch);
+        return RandomStringUtils.random(length, str);
     }
 }

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Random;
 
 import org.junit.Test;
@@ -40,7 +42,7 @@ public class RandomUtilTest{
      */
     @Test
     public void testCreateRandom(){
-        LOGGER.info(RandomUtil.createRandom(8) + "");
+        LOGGER.debug(RandomUtil.createRandom(800) + "");
     }
 
     /**
@@ -49,7 +51,7 @@ public class RandomUtilTest{
     @Test
     public void createRandomWithLength(){
         for (int i = 0, j = 100; i < j; ++i){
-            LOGGER.info(RandomUtil.createRandomWithLength(2) + "");
+            LOGGER.debug(RandomUtil.createRandomWithLength(2) + "");
         }
     }
 
@@ -58,7 +60,15 @@ public class RandomUtilTest{
      */
     @Test
     public void createRandomWithLength1(){
-        LOGGER.info(RandomUtil.createRandomWithLength(18) + "");
+        LOGGER.debug(RandomUtil.createRandomWithLength(18) + "");
+    }
+
+    /**
+     * Test create random with length.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateRandomWithLength(){
+        RandomUtil.createRandomWithLength(-1);
     }
 
     /**
@@ -68,7 +78,7 @@ public class RandomUtilTest{
     public void createRandomWithLength2(){
         for (int i = 0, j = 100; i < j; ++i){
             Random rand = new Random();
-            LOGGER.info("" + rand.nextDouble());
+            LOGGER.debug("" + rand.nextDouble());
         }
     }
 
@@ -77,8 +87,8 @@ public class RandomUtilTest{
      */
     @Test
     public void testgetRandomFromString(){
-        LOGGER.info(RandomUtil.createRandomFromString(Alphabet.DECIMAL_AND_LETTERS, 5));
-        LOGGER.info(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 200));
+        LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL_AND_LETTERS, 5));
+        LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 200));
     }
 
     /**
@@ -86,15 +96,15 @@ public class RandomUtilTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testgetRandomFromString1(){
-        LOGGER.info(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 0));
+        RandomUtil.createRandomFromString(Alphabet.DECIMAL, 0);
     }
 
     /**
      * Testget random from string2.
      */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testgetRandomFromString2(){
-        LOGGER.info(RandomUtil.createRandomFromString("", 5));
+        RandomUtil.createRandomFromString("", 5);
     }
 
     /**
@@ -102,7 +112,7 @@ public class RandomUtilTest{
      */
     @Test
     public void createRandomFromString(){
-        LOGGER.info(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 8, 20));
+        LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 8, 20));
     }
 
     /**
@@ -110,6 +120,9 @@ public class RandomUtilTest{
      */
     @Test
     public void createRandom(){
-        LOGGER.info("" + RandomUtil.createRandom(10, 20));
+        LOGGER.debug("" + RandomUtil.createRandom(10, 20));
+        LOGGER.debug("" + RandomUtil.createRandom(0, 800));
+
+        assertEquals(800L, RandomUtil.createRandom(800, 800));
     }
 }
