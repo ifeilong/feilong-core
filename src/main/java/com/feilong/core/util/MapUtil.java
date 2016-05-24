@@ -514,10 +514,10 @@ public final class MapUtil{
     }
 
     /**
-     * 抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回.
+     * 以参数 <code>map</code>的key为key,以参数 <code>map</code> value的 指定<code>extractPropertyName</code>属性值为值,拼装成新的map返回.
      * 
      * <p>
-     * 注意,在抽取的过程中, 如果 <code>map</code> 没有 某个 <code>includeKeys</code>,将会输出 warn log
+     * 如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log
      * </p>
      * 
      * <h3>示例:</h3>
@@ -566,10 +566,9 @@ public final class MapUtil{
      *            map key 的class 类型
      * @return
      *         <ul>
-     *         <li>if Validator.isNullOrEmpty(map),return {@link Collections#emptyMap()}</li>
-     *         <li>if Validator.isNullOrEmpty(extractPropertyName),throw NullPointerException</li>
-     *         <li>if Validator.isNullOrEmpty(includeKeys), then will extract map total keys</li>
-     *         <li>抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
+     *         <li>如果 <code>map</code> isNullOrEmpty,return {@link Collections#emptyMap()}</li>
+     *         <li>如果 <code>extractPropertyName</code> isNullOrEmpty,throw NullPointerException</li>
+     *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
      * @since 1.3.0
      */
@@ -578,10 +577,11 @@ public final class MapUtil{
     }
 
     /**
-     * 抽取map value<code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回.
+     * 以参数 <code>map</code>的key为key(key需要在 <code>includeKeys</code>范围内),以参数 <code>map</code> value的 指定<code>extractPropertyName</code>
+     * 属性值为值,拼装成新的map返回.
      * 
      * <p>
-     * 注意,在抽取的过程中,如果 <code>map</code>没有某个<code>includeKeys</code>,将会输出 warn log
+     * 如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log
      * </p>
      * 
      * <h3>示例:</h3>
@@ -627,10 +627,10 @@ public final class MapUtil{
      *            map key 的class 类型
      * @return
      *         <ul>
-     *         <li>if Validator.isNullOrEmpty(map),return {@link Collections#emptyMap()}</li>
-     *         <li>if Validator.isNullOrEmpty(extractPropertyName),throw NullPointerException</li>
-     *         <li>if Validator.isNullOrEmpty(includeKeys), then will extract map total keys</li>
-     *         <li>抽取map value <code>T</code>的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
+     *         <li>如果 <code>map</code> isNullOrEmpty,return {@link Collections#emptyMap()}</li>
+     *         <li>如果 <code>extractPropertyName</code> isNullOrEmpty,throw NullPointerException</li>
+     *         <li>如果 <code>includeKeys</code>, then will extract map total keys</li>
+     *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
      * @since 1.3.0
      */
@@ -640,7 +640,7 @@ public final class MapUtil{
         }
 
         Validate.notEmpty(extractPropertyName, "extractPropertyName can't be null/empty!");
-        //如果excludeKeys是null ,那么抽取所有的key
+        //如果excludeKeys是null,那么抽取所有的key
         K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(map.keySet(), keysClass) : includeKeys;
 
         //保证元素的顺序  顺序是参数  includeKeys的顺序
