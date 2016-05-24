@@ -877,7 +877,7 @@ public final class CollectionsUtil{
      * 找到 <code>objectCollection</code>中,第一个 <code>propertyName</code>属性名称 值是 <code>value</code>对应的元素.
      * 
      * <p>
-     * 如果 collection or predicate是null, 或者 collection中没有相关元素匹配 predicate,将返回null.
+     * 如果 collection是null, 或者 collection中没有相关元素匹配 predicate,将返回null.
      * </p>
      *
      * <h3>示例:</h3>
@@ -908,7 +908,7 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <V>
      *            the value type
-     * @param objectCollection
+     * @param iterable
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
@@ -916,11 +916,61 @@ public final class CollectionsUtil{
      * @param value
      *            指定的值
      * @return the first element of the collection which matches the predicate or null if none could be found
-     * @see IterableUtils#find(Iterable, Predicate)
+     * @see #find(Iterable, Predicate)
      */
-    public static <O, V> O find(Collection<O> objectCollection,String propertyName,V value){
+    public static <O, V> O find(Iterable<O> iterable,String propertyName,V value){
         Predicate<O> predicate = new BeanPropertyValueEqualsPredicate<O>(propertyName, value);
-        return IterableUtils.find(objectCollection, predicate);
+        return find(iterable, predicate);
+    }
+
+    /**
+     * Finds the first element in the given iterable which matches the given predicate.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     * list.add(new User("关羽", 24));
+     * 
+     * User user = CollectionsUtil.find(
+     *                 list,
+     *                 PredicateUtils.andPredicate(
+     *                                 new BeanPropertyValueEqualsPredicate{@code <User>}("name", "刘备"),
+     *                                 new BeanPropertyValueEqualsPredicate{@code <User>}("age", 25)));
+     * LOGGER.info(JsonUtil.format(user));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+        "age": 25,
+        "name": "刘备"
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param iterable
+     *            the iterable to search, may be null
+     * @param predicate
+     *            the predicate to use, may not be null
+     * @return 如果 predicate 是 null,将抛出NullPointerException <br>
+     *         迭代查找 匹配predicate 的第一个元素并返回,如果找不到匹配的返回null
+     * @see IterableUtils#find(Iterable, Predicate)
+     * @since 1.5.5
+     */
+    public static <O> O find(Iterable<O> iterable,Predicate<O> predicate){
+        return IterableUtils.find(iterable, predicate);
     }
 
     //**************************select*****************************************************************

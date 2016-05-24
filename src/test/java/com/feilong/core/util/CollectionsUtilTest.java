@@ -29,6 +29,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.apache.commons.collections4.Predicate;
+import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.functors.EqualPredicate;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -183,6 +184,22 @@ public class CollectionsUtilTest{
         objectCollection.add(new User("关羽", 24));
 
         LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
+    }
+
+    @Test
+    public void testFind2(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
+        list.add(new User("关羽", 24));
+
+        User user = CollectionsUtil.find(
+                        list,
+                        PredicateUtils.andPredicate(
+                                        new BeanPropertyValueEqualsPredicate<User>("name", "刘备"),
+                                        new BeanPropertyValueEqualsPredicate<User>("age", 25)));
+        LOGGER.info(JsonUtil.format(user));
     }
 
     @Test
