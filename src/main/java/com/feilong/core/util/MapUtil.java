@@ -307,7 +307,13 @@ public final class MapUtil{
      *            指定一个map
      * @param keys
      *            指定特定的key
-     * @return 如果 keys 中的所有的key 都不在 map 中出现 ,那么返回null
+     * @return
+     *         <ul>
+     *         <li>如果 <code>map</code> 是null或者empty,return null;</li>
+     *         <li>如果 <code>keys</code> 是null或者empty,返回<code>map</code>所有value的最小值</li>
+     *         <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
+     *         <li>如果 keys 中的所有的key 都不在 map 中出现 ,那么返回null</li>
+     *         </ul>
      * 
      * @see #getSubMap(Map, Object...)
      * @see java.util.Collections#min(Collection)
@@ -362,8 +368,8 @@ public final class MapUtil{
      *            如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
      * @return
      *         <ul>
-     *         <li>if map isNullOrEmpty,will return {@link Collections#emptyMap()};</li>
-     *         <li>if Validator.isNullOrEmpty(keys), return map</li>
+     *         <li>如果 <code>map</code> 是null或者empty,return {@link Collections#emptyMap()};</li>
+     *         <li>如果 <code>keys</code> 是null或者empty,return <code>map</code></li>
      *         <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
      *         </ul>
      */
@@ -435,8 +441,8 @@ public final class MapUtil{
      *            the keys
      * @return
      *         <ul>
-     *         <li>if map isNullOrEmpty,will return {@link Collections#emptyMap()};</li>
-     *         <li>if Validator.isNullOrEmpty(excludeKeys), return map</li>
+     *         <li>如果 <code>map</code> 是null或者empty,return {@link Collections#emptyMap()};</li>
+     *         <li>如果 <code>excludeKeys</code> 是null或者empty, return <code>map</code></li>
      *         </ul>
      * 
      * @since 1.0.9
@@ -504,7 +510,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果map是Empty ,返回 一个empty map
+     * @return 如果map是null,抛出异常<br>
+     *         如果map是empty,返回 一个 new HashMap
      * @see org.apache.commons.collections4.MapUtils#invertMap(Map)
      * @since 1.2.2
      */
@@ -566,8 +573,8 @@ public final class MapUtil{
      *            map key 的class 类型
      * @return
      *         <ul>
-     *         <li>如果 <code>map</code> isNullOrEmpty,return {@link Collections#emptyMap()}</li>
-     *         <li>如果 <code>extractPropertyName</code> isNullOrEmpty,throw NullPointerException</li>
+     *         <li>如果 <code>map</code> 是null或者empty,return {@link Collections#emptyMap()}</li>
+     *         <li>如果 <code>extractPropertyName</code> 是null或者empty,throw NullPointerException</li>
      *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
      * @since 1.3.0
@@ -627,9 +634,9 @@ public final class MapUtil{
      *            map key 的class 类型
      * @return
      *         <ul>
-     *         <li>如果 <code>map</code> isNullOrEmpty,return {@link Collections#emptyMap()}</li>
-     *         <li>如果 <code>extractPropertyName</code> isNullOrEmpty,throw NullPointerException</li>
-     *         <li>如果 <code>includeKeys</code>, then will extract map total keys</li>
+     *         <li>如果 <code>map</code> 是null或者empty,return {@link Collections#emptyMap()}</li>
+     *         <li>如果 <code>extractPropertyName</code> 是null或者empty,throw NullPointerException</li>
+     *         <li>如果 <code>includeKeys</code> 是null或者empty, then will extract map total keys</li>
      *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
      * @since 1.3.0
@@ -692,7 +699,7 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return if null==map,throw NullPointerException
+     * @return 如果 map 是null,throw NullPointerException
      * @see java.util.TreeMap#TreeMap(Map)
      * @since 1.2.0
      */
@@ -735,7 +742,7 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return if null==map,throw NullPointerException
+     * @return 如果 map是 null,throw NullPointerException
      * @see ReverseComparator#ReverseComparator(Comparator)
      * @see PropertyComparator#PropertyComparator(String)
      * @since 1.2.0
@@ -836,10 +843,10 @@ public final class MapUtil{
     }
 
     /**
-     * 使用 基于 {@link java.util.Map.Entry} 的 <code>mapEntryComparator</code> 来对 <code>map</code>进行排序.
+     * 使用 基于 {@link java.util.Map.Entry Entry} 的 <code>mapEntryComparator</code> 来对 <code>map</code>进行排序.
      * 
      * <p>
-     * 由于是对{@link java.util.Map.Entry}排序的, 既可以按照key来排序,也可以按照value来排序哦
+     * 由于是对{@link java.util.Map.Entry Entry}排序的, 既可以按照key来排序,也可以按照value来排序哦
      * </p>
      * 
      * <h3>示例:</h3>
@@ -899,8 +906,9 @@ public final class MapUtil{
      * @param map
      *            the map
      * @param mapEntryComparator
-     *            基于 {@link java.util.Map.Entry} 的 {@link Comparator}
-     * @return 排序之后的map
+     *            基于 {@link java.util.Map.Entry Entry} 的 {@link Comparator}
+     * @return 如果<code>map</code>是null,抛出异常<br>
+     *         如果<code>mapEntryComparator</code>是null,抛出异常
      * @see java.util.Collections#sort(List, Comparator)
      * @since 1.2.0
      */
