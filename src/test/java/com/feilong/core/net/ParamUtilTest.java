@@ -77,21 +77,19 @@ public class ParamUtilTest{
         map.put("service", value);
         map.put("paymentType", value2);
 
-        assertEquals(StringUtils.EMPTY, ParamUtil.joinValues(map, "a", "b"));
-        assertEquals(value, ParamUtil.joinValues(map, "service"));
-        assertEquals(value + value2, ParamUtil.joinValues(map, "service", "paymentType"));
-        assertEquals(value2 + value, ParamUtil.joinValues(map, "paymentType", "service"));
+        assertEquals(StringUtils.EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, "a", "b"));
+        assertEquals(value, ParamUtil.joinValuesOrderByIncludeKeys(map, "service"));
+        assertEquals(value + value2, ParamUtil.joinValuesOrderByIncludeKeys(map, "service", "paymentType"));
+        assertEquals(value2 + value, ParamUtil.joinValuesOrderByIncludeKeys(map, "paymentType", "service"));
     }
 
     @Test
-    public void testJoinValues1(){
-
+    public void testJoinValuesOrderByIncludeKeys(){
         Map<String, String> map = new HashMap<String, String>();
         map.put("service", "create_salesorder");
         map.put("paymentType", "unionpay_mobile");
 
-        LOGGER.info(ParamUtil.joinValues(map, "service", "paymentType"));
-
+        LOGGER.info(ParamUtil.joinValuesOrderByIncludeKeys(map, "service", "paymentType"));
     }
 
     /**
@@ -148,7 +146,7 @@ public class ParamUtilTest{
         //        map.put("a", "");
         //        map.put("b", null);
         //        map.put("c", "jim");
-        LOGGER.info(ParamUtil.joinSingleValueMap(map));
+        LOGGER.info(ParamUtil.toQueryStringUseSingleValueMap(map));
     }
 
     @Test
@@ -158,7 +156,7 @@ public class ParamUtilTest{
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        LOGGER.info(ParamUtil.joinSingleValueMap(singleValueMap));
+        LOGGER.info(ParamUtil.toQueryStringUseSingleValueMap(singleValueMap));
     }
 
     @Test
@@ -169,7 +167,7 @@ public class ParamUtilTest{
         keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+        LOGGER.info(ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
     }
 
     /**

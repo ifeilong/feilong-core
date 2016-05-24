@@ -837,13 +837,12 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return if isNullOrEmpty(appendMap) ,return {@link StringUtils#EMPTY}
-     * @see CharsetType
-     * @see #toNaturalOrderingQueryString(Map)
+     * @see #toQueryStringUseArrayValueMap(Map)
      * @since 1.4.0
      */
     public static String toSafeQueryString(Map<String, String[]> arrayValueMap,String charsetType){
         return Validator.isNullOrEmpty(arrayValueMap) ? StringUtils.EMPTY
-                        : joinArrayValueMap(toSafeArrayValueMap(arrayValueMap, charsetType));
+                        : toQueryStringUseArrayValueMap(toSafeArrayValueMap(arrayValueMap, charsetType));
     }
 
     //*********************************************************************************************
@@ -909,14 +908,15 @@ public final class ParamUtil{
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
         return Validator.isNullOrEmpty(singleValueMap) ? StringUtils.EMPTY
-                        : joinSingleValueMap(new TreeMap<String, String>(singleValueMap));
+                        : toQueryStringUseSingleValueMap(new TreeMap<String, String>(singleValueMap));
     }
 
     /**
-     * 只是简单的将map的key value 链接起来,最终格式类似于 url 的queryString.
+     * 将<code>singleValueMap</code>转成 queryString.
      * 
      * <p>
-     * 比如,参数名字<code>paramName=name</code>, {@code paramValues 为 zhangfei},那么返回值是 <code>name=zhangfei</code>
+     * 只是简单的将map的key value 按照 <code>singleValueMap</code>的顺序 链接起来,最终格式类似于 url 的queryString,
+     * 比如,参数名字<code>param Name=name</code>,<code>param Value=zhangfei</code>,那么返回值是 <code>name=zhangfei</code>
      * </p>
      * 
      * <h3>示例:</h3>
@@ -941,24 +941,80 @@ public final class ParamUtil{
      *
      * @param singleValueMap
      *            the params map
-     * @return the string
+     * @return 如果<code>singleValueMap</code>是 null或者empty,返回 {@link StringUtils#EMPTY} <br>
+     *         否则 将 <code>singleValueMap</code> 转成 {@link #toArrayValueMap(Map)},再调用 {@link #toQueryStringUseArrayValueMap(Map)}
      * @see #toArrayValueMap(Map)
-     * @see #joinArrayValueMap(Map)
-     * @since 1.4.0
+     * @see #toQueryStringUseArrayValueMap(Map)
+     * @since 1.5.5
      */
-    public static String joinSingleValueMap(Map<String, String> singleValueMap){
-        if (Validator.isNullOrEmpty(singleValueMap)){
-            return StringUtils.EMPTY;
-        }
-        Map<String, String[]> arrayValueMap = toArrayValueMap(singleValueMap);
-        return joinArrayValueMap(arrayValueMap);
+    public static String toQueryStringUseSingleValueMap(Map<String, String> singleValueMap){
+        return Validator.isNullOrEmpty(singleValueMap) ? StringUtils.EMPTY
+                        : toQueryStringUseArrayValueMap(toArrayValueMap(singleValueMap));
     }
 
     /**
-     * 取到指定keys的value,连接起来.
+     * 只是简单的将map的key value 链接起来,最终格式类似于 url 的queryString.
+     * 
+     * <h3>注意点:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>该方法<span style="color:red">不会执行encode操作</span>,使用原生值进行拼接</li>
+     * <li>按照传入的map key顺序进行排序,不会自行自动排序转换;如有有业务需求,先行排序完传入进来</li>
+     * </ul>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * 
+     * keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * province=江苏省&province=浙江省&city=南通市
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param arrayValueMap
+     *            the array value map
+     * @return 如果 <code>arrayValueMap</code> 是 Null或者Empty,返回 {@link StringUtils#EMPTY}<br>
+     *         否则循环 <code>arrayValueMap</code> 拼接成QueryString
+     * @see #joinParamNameAndValues(String, String[])
+     * @since 1.5.5
+     */
+    public static String toQueryStringUseArrayValueMap(Map<String, String[]> arrayValueMap){
+        if (Validator.isNullOrEmpty(arrayValueMap)){
+            return StringUtils.EMPTY;
+        }
+
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
+            String key = entry.getKey();
+            String[] paramValues = entry.getValue();
+            sb.append(joinParamNameAndValues(key, paramValues));
+
+            if (i != arrayValueMap.size() - 1){// 最后一个& 不拼接
+                sb.append(URIComponents.AMPERSAND);
+            }
+            ++i;
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 取到指定keys的value,连接起来(<span style="color:red">不使用任何连接符</span>).
      * 
      * <p>
-     * 会按照includeKeys的顺序拼接,目前适用于 个别银行 需要将值拼接起来加密,比如汇付天下
+     * 会按照includeKeys的顺序拼接,目前适用于 个别银行(比如汇付天下) 需要将值拼接起来加密
      * </p>
      * 
      * <h3>示例:</h3>
@@ -986,12 +1042,15 @@ public final class ParamUtil{
      *            包含的key
      * @return
      *         <ul>
-     *         <li>if (Validator.isNullOrEmpty(includeKeys)),return {@link StringUtils#EMPTY};</li>
+     *         <li>如果 (Validator.isNullOrEmpty(<code>singleValueMap</code>)),抛出异常;</li>
+     *         <li>如果 (Validator.isNullOrEmpty(<code>includeKeys</code>)),return {@link StringUtils#EMPTY};</li>
+     *         <li>否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;(如果 <code>singleValueMap</code>指定key的值是null,会使用
+     *         {@link StringUtils#defaultString(String)} 转成{@link StringUtils#EMPTY}拼接)</li>
      *         </ul>
      * @see org.apache.commons.lang3.StringUtils#defaultString(String)
-     * @since 1.4.0
+     * @since 1.5.5
      */
-    public static String joinValues(Map<String, String> singleValueMap,String...includeKeys){
+    public static String joinValuesOrderByIncludeKeys(Map<String, String> singleValueMap,String...includeKeys){
         Validate.notNull(singleValueMap, "singleValueMap can't be null!");
 
         if (Validator.isNullOrEmpty(includeKeys)){
@@ -1002,69 +1061,11 @@ public final class ParamUtil{
         for (String key : includeKeys){
             String value = singleValueMap.get(key);
 
-            //value转换,注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            //value转换,注意:如果 value是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
             sb.append(StringUtils.defaultString(value));
         }
         return sb.toString();
     }
-
-    /**
-     * 只是简单的将map的key value 链接起来,最终格式类似于 url 的queryString.
-     * 
-     * <h3>注意点:</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>该方法不会执行encode操作,使用原生值进行拼接</li>
-     * <li>按照传入的map key顺序进行排序,不会自行自动排序转换;如有有业务需求,先行排序完传入进来</li>
-     * </ul>
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
-     * 
-     * keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
-     * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * province=江苏省&province=浙江省&city=南通市
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param arrayValueMap
-     *            the array value map
-     * @return the string
-     * @see #joinParamNameAndValues(String, String[])
-     * @since 1.4.0
-     */
-    public static String joinArrayValueMap(Map<String, String[]> arrayValueMap){
-        if (Validator.isNullOrEmpty(arrayValueMap)){
-            return StringUtils.EMPTY;
-        }
-
-        int i = 0;
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
-            String key = entry.getKey();
-            String[] paramValues = entry.getValue();
-            sb.append(joinParamNameAndValues(key, paramValues));
-
-            if (i != arrayValueMap.size() - 1){// 最后一个& 不拼接
-                sb.append(URIComponents.AMPERSAND);
-            }
-            ++i;
-        }
-        return sb.toString();
-    }
-
     //*******************************************************************************************
 
     /**
@@ -1157,6 +1158,13 @@ public final class ParamUtil{
      * <p>
      * 比如,参数名字 {@code paramName=name}, {@code paramValues 为 zhangfei,guanyu},那么返回值是{@code name=zhangfei&name=guanyu}
      * </p>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>paramName 和每个值 都会调用 {@link StringUtils#defaultString(String)}转换后才进行拼接</li>
+     * </ol>
+     * </blockquote>
      *
      * @param paramName
      *            参数名字
@@ -1198,7 +1206,9 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>value</code>是 null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果charsetType是 null或者empty,直接返回 <code>value</code><br>
+     *         否则先 {@link URIUtil#decode(String, String)} 再 {@link URIUtil#encode(String, String)}值
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">
      *      java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
@@ -1208,10 +1218,7 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(value)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(charsetType)){
-            return value;
-        }
-        return URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
+        return Validator.isNullOrEmpty(charsetType) ? value : URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
     }
 
     /**
