@@ -46,17 +46,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.<br>
  * 
- * <h3>{@link <a href="http://stamen.iteye.com/blog/2003458">SET-MAP现代诗一首</a>}</h3>
- * 
- * <blockquote>
- * <ul>
- * <li>天下人都知道Set,Map不能重复</li>
- * <li>80%人知道hashCode,equals是判断重复的法则 </li>
- * <li>40%人知道Set添加重复元素时,旧元素不会被覆盖</li>
- * <li>20%人知道Map添加重复键时,旧键不会被覆盖,而值会覆盖</li>
- * </ul>
- * </blockquote>
- * 
  * <h3>Collections Framework关系图:</h3>
  * 
  * <blockquote>
@@ -238,6 +227,17 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </td>
  * </tr>
  * </table>
+ * </blockquote>
+ * 
+ * <h3>{@link <a href="http://stamen.iteye.com/blog/2003458">SET-MAP现代诗一首</a>}</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>天下人都知道Set,Map不能重复</li>
+ * <li>80%人知道hashCode,equals是判断重复的法则 </li>
+ * <li>40%人知道Set添加重复元素时,旧元素不会被覆盖</li>
+ * <li>20%人知道Map添加重复键时,旧键不会被覆盖,而值会覆盖</li>
+ * </ul>
  * </blockquote>
  * 
  * @author feilong
@@ -706,8 +706,6 @@ public final class CollectionsUtil{
      * @return 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成List(ArrayList),<br>
      *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty ArrayList<br>
      *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;
-     * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see #getPropertyValueCollection(Collection, String, Collection)
      * @since jdk1.5
      */
@@ -780,7 +778,7 @@ public final class CollectionsUtil{
      * @param returnCollection
      *            the return collection
      * @return if Validator.isNullOrEmpty(objectCollection),return <code>returnCollection</code>
-     * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
+     * @see PropertyUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
      * @since 1.0.8
      */
