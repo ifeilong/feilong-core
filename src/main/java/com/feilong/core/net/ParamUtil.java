@@ -131,8 +131,7 @@ public final class ParamUtil{
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             String key = entry.getKey();
             String[] values = entry.getValue();
-            String singleValue = Validator.isNotNullOrEmpty(values) ? values[0] : StringUtils.EMPTY;
-            singleValueMap.put(key, singleValue);
+            singleValueMap.put(key, Validator.isNotNullOrEmpty(values) ? values[0] : StringUtils.EMPTY);
         }
         return singleValueMap;
     }
@@ -173,7 +172,7 @@ public final class ParamUtil{
      * 
      * @param singleValueMap
      *            the name and value map
-     * @return 如果参数arrayValueMap是null或者empty,那么return {@link Collections#emptyMap()}
+     * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么return {@link Collections#emptyMap()}
      * @since 1.4.0
      */
     public static Map<String, String[]> toArrayValueMap(Map<String, String> singleValueMap){
@@ -948,8 +947,7 @@ public final class ParamUtil{
      * @since 1.5.5
      */
     public static String toQueryStringUseSingleValueMap(Map<String, String> singleValueMap){
-        return Validator.isNullOrEmpty(singleValueMap) ? StringUtils.EMPTY
-                        : toQueryStringUseArrayValueMap(toArrayValueMap(singleValueMap));
+        return Validator.isNullOrEmpty(singleValueMap) ? StringUtils.EMPTY : toQueryStringUseArrayValueMap(toArrayValueMap(singleValueMap));
     }
 
     /**
