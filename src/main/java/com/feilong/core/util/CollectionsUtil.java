@@ -792,7 +792,7 @@ public final class CollectionsUtil{
             return returnCollection;
         }
 
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         for (O bean : objectCollection){
             @SuppressWarnings("unchecked")
@@ -1079,7 +1079,7 @@ public final class CollectionsUtil{
             return Collections.emptyList();
         }
 
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Predicate<O> predicate = new ArrayContainsPredicate<O>(propertyName, values);
         return select(objectCollection, predicate);
@@ -1145,7 +1145,7 @@ public final class CollectionsUtil{
             return Collections.emptyList();
         }
 
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Predicate<O> predicate = new CollectionContainsPredicate<O>(propertyName, values);
         return select(objectCollection, predicate);
@@ -1243,7 +1243,7 @@ public final class CollectionsUtil{
             return Collections.emptyList();
         }
 
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Predicate<O> predicate = new ArrayContainsPredicate<O>(propertyName, values);
         return selectRejected(objectCollection, predicate);
@@ -1306,7 +1306,7 @@ public final class CollectionsUtil{
             return Collections.emptyList();
         }
 
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Predicate<O> predicate = new CollectionContainsPredicate<O>(propertyName, values);
         return selectRejected(objectCollection, predicate);
@@ -1474,7 +1474,7 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectCollection.size());
 
@@ -1557,7 +1557,7 @@ public final class CollectionsUtil{
             return Collections.emptyMap();
         }
 
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, O> map = new LinkedHashMap<T, O>(objectCollection.size());
 
@@ -1630,7 +1630,7 @@ public final class CollectionsUtil{
             return Collections.emptyMap();
         }
 
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, Integer> map = new LinkedHashMap<T, Integer>();
 
@@ -1798,7 +1798,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 总和,计算集合对象内指定的属性名值的总和.
+     * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素 的指定 <code>propertyNames</code> 元素的值 ,累计总和.
      * 
      * <p>
      * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
@@ -1859,7 +1859,9 @@ public final class CollectionsUtil{
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyMap()}<br>
+     *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
+     *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
      * @since 1.5.5
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,Predicate<O> includePredicate,String...propertyNames){
@@ -1867,7 +1869,7 @@ public final class CollectionsUtil{
             return Collections.emptyMap();
         }
 
-        Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
+        Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
         //总分
         Map<String, BigDecimal> sumMap = new LinkedHashMap<String, BigDecimal>(objectCollection.size());
@@ -1956,7 +1958,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 总和,计算集合对象内指定的属性名值的总和.
+     * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素 的指定 <code>propertyName</code> 元素的值 ,累计总和..
      * 
      * <p>
      * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
@@ -1994,12 +1996,12 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param includePredicate
      *            the include predicate
-     * @return 如果 propertyName 是null或者 empty,会抛出异常<br>
-     *         如果 objectCollection 是null或者 empty,返回 null
+     * @return 如果 <code>propertyName</code> 是null或者 empty,会抛出异常<br>
+     *         如果 <code>objectCollection</code> 是null或者 empty,返回 null
      * @since 1.5.5
      */
     public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         String[] propertyNames = { propertyName };
         return sum(objectCollection, includePredicate, propertyNames).get(propertyName);

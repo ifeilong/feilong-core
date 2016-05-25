@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 
+import com.feilong.core.Validator;
 import com.feilong.core.bean.PropertyUtil;
 
 /**
@@ -254,17 +255,19 @@ public final class ArrayUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if null==objectArray,return {@link java.util.Collections#emptyMap()}
+     * @return 如果 <code>objectArray</code> 是 null或者empty,返回 {@link java.util.Collections#emptyMap()} <br>
+     *         如果 <code>propertyName</code>是 null 抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code>是 blank 抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.util.CollectionsUtil#group(java.util.Collection, String)
      * @since 1.0.8
      */
     public static <O, T> Map<T, List<O>> group(O[] objectArray,String propertyName){
-        if (null == objectArray){
+        if (Validator.isNullOrEmpty(objectArray)){
             return Collections.emptyMap();
         }
 
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectArray.length);
         for (O o : objectArray){

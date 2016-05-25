@@ -50,7 +50,7 @@ public final class EnumUtil{
      * 通过propertyName的 value(忽视大小写) 获得枚举(equalsIgnoreCase判断).
      * 
      * <p>
-     * 适用于这种{@link com.feilong.core.HttpMethodType}带自定义属性的枚举类型,调用方式:
+     * 适用于这种{@link com.feilong.core.HttpMethodType HttpMethodType}带自定义属性的枚举类型,调用方式:
      * 
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
@@ -63,9 +63,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.HttpMethodType}
+     *            the enum class 比如 {@link com.feilong.core.HttpMethodType HttpMethodType}
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 {@link com.feilong.core.HttpMethodType HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @return 获得 enum constant
@@ -80,7 +80,7 @@ public final class EnumUtil{
      * 通过propertyName的 value 获得枚举(equals判断,区分大小写).
      * 
      * <p>
-     * 适用于这种{@link com.feilong.core.HttpMethodType}带自定义属性的枚举类型,调用方式:
+     * 适用于这种{@link com.feilong.core.HttpMethodType HttpMethodType}带自定义属性的枚举类型,调用方式:
      * 
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
@@ -93,9 +93,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.HttpMethodType}
+     *            the enum class 比如 {@link com.feilong.core.HttpMethodType HttpMethodType}
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 {@link com.feilong.core.HttpMethodType HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @return 获得 enum constant
@@ -110,7 +110,7 @@ public final class EnumUtil{
      * 通过propertyName的 value 获得枚举.
      * 
      * <p>
-     * 适用于这种{@link com.feilong.core.HttpMethodType} 带自定义属性的枚举类型,调用方式:
+     * 适用于这种{@link com.feilong.core.HttpMethodType HttpMethodType} 带自定义属性的枚举类型,调用方式:
      * 
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
@@ -122,14 +122,16 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.HttpMethodType}
+     *            the enum class 比如 {@link com.feilong.core.HttpMethodType HttpMethodType}
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 {@link com.feilong.core.HttpMethodType HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @param ignoreCase
      *            是否忽视大小写
-     * @return 获得 enum constant
+     * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
      * @since 1.0.8
      */
@@ -140,7 +142,7 @@ public final class EnumUtil{
                     boolean ignoreCase){
 
         Validate.notNull(enumClass, "enumClass can't be null!");
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         // An enum is a kind of class
         // An annotation is a kind of interface
