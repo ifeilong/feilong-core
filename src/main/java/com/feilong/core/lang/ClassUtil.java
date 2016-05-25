@@ -266,7 +266,8 @@ public final class ClassUtil{
      *            实例
      * @param klass
      *            类
-     * @return 如果 obj 是此类的实例,则返回 true; if <code>null == klass</code> return false
+     * @return 如果 obj 是此类的实例,则返回 true;<br>
+     *         如果 <code>null == klass</code> 返回 false
      * @see java.lang.Class#isInstance(Object)
      */
     public static boolean isInstance(Object obj,Class<?> klass){
@@ -308,13 +309,15 @@ public final class ClassUtil{
      *            the klass
      * @param cls
      *            the cls
-     * @return true, if checks if is assignable from
+     * @return true, if checks if is assignable from <br>
+     *         如果 <code>klass</code> 是null,返回false<br>
+     *         如果 <code>cls</code> 是null,返回false
      * @see java.lang.Class#isAssignableFrom(Class)
      * @see org.apache.commons.lang3.ClassUtils#isAssignable(Class, Class)
      * @since 1.4.0
      */
     public static boolean isAssignableFrom(Class<?> klass,Class<?> cls){
-        return klass.isAssignableFrom(cls);
+        return (null == klass || null == cls) ? false : klass.isAssignableFrom(cls);
     }
 
     /**
@@ -322,13 +325,17 @@ public final class ClassUtil{
      * 
      * @param ownerClass
      *            对象class
-     * @return 是返回true
+     * @return 是返回true<br>
+     *         如果 <code>ownerClass</code> 是null,返回false
      * @see java.lang.Class#getModifiers()
      * @see java.lang.reflect.Modifier#isInterface(int)
      */
     public static boolean isInterface(Class<?> ownerClass){
-        int flag = ownerClass.getModifiers();// 返回此类或接口以整数编码的 Java 语言修饰符
-        return Modifier.isInterface(flag);// 对类和成员访问修饰符进行解码
+        if (null == ownerClass){
+            return false;
+        }
+        int modifiers = ownerClass.getModifiers();// 返回此类或接口以整数编码的 Java 语言修饰符
+        return Modifier.isInterface(modifiers);// 对类和成员访问修饰符进行解码
     }
 
     /**

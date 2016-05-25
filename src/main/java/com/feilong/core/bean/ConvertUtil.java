@@ -433,6 +433,8 @@ public final class ConvertUtil{
      *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
      *         </ul>
      * @see org.apache.commons.lang3.builder.ToStringStyle
+     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
+     * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
      * @since 1.4.0
      */
     public static String toString(ToStringConfig toStringConfig,Object...arrays){

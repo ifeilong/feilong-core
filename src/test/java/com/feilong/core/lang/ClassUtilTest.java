@@ -64,11 +64,16 @@ public class ClassUtilTest{
      */
     @Test
     public void testIsAssignableFrom(){
-        Class<?>[] klsClasses = { "1234".getClass(), "55555".getClass() };
-        assertEquals(true, ClassUtils.isAssignable(klsClasses, CharSequence.class));
-
         assertEquals(true, ClassUtil.isAssignableFrom(Comparable.class, new User().getClass()));
+        assertEquals(false, ClassUtil.isAssignableFrom(null, new User().getClass()));
         assertEquals(true, ClassUtil.isAssignableFrom(CharSequence.class, "1234".getClass()));
+        assertEquals(false, ClassUtil.isAssignableFrom(CharSequence.class, null));
+    }
+
+    @Test
+    public void testIsAssignableFrom1(){
+        //        Class<?>[] klsClasses = { "1234".getClass(), "55555".getClass() };
+        //        assertEquals(true, ClassUtils.isAssignable(klsClasses, CharSequence.class));
         assertEquals(true, ClassUtils.isAssignable("1234".getClass(), CharSequence.class));
     }
 
@@ -77,6 +82,7 @@ public class ClassUtilTest{
      */
     @Test
     public void testIsInterface(){
+        assertEquals(false, ClassUtil.isInterface(null));
         assertEquals(false, ClassUtil.isInterface(this.getClass()));
         assertEquals(false, ClassUtil.isInterface(DatePattern.class));
     }
