@@ -154,55 +154,51 @@ import com.feilong.core.text.DateFormatUtil;
  * </tr>
  * <tr valign="top">
  * <td>获得下一周的第一天时间</td>
- * <td>Date nextWeekDay = addDay(date, 7);<br>
- * return getFirstDateOfThisWeek(nextWeekDay);</td>
+ * <td>DateUtil.<b>getFirstDateOfThisWeek</b>(DateUtil.addDay(date, 7));</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>获得下一周的最后一天时间</td>
- * <td>Date nextWeekDay = addDay(date, 7);<br>
- * return getLastDateOfThisWeek(nextWeekDay);</td>
+ * <td>DateUtil.<b>getLastDateOfThisWeek</b>(DateUtil.addDay(date, 7));</td>
  * </tr>
  * <tr valign="top">
  * <td>获得上一周的第一天时间</td>
- * <td>Date nextWeekDay = addDay(date, -7);<br>
- * return getFirstDateOfThisWeek(nextWeekDay);</td>
+ * <td>DateUtil.<b>getFirstDateOfThisWeek</b>(DateUtil.addDay(date, -7));</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>获得上一周的最后一天时间</td>
- * <td>Date nextWeekDay = addDay(date, -7);<br>
- * return getLastDateOfThisWeek(nextWeekDay);</td>
+ * <td>DateUtil.<b>getLastDateOfThisWeek</b>(DateUtil.addDay(date, -7));</td>
  * </tr>
  * <tr valign="top">
  * <td>获得下个月第一天</td>
- * <td>return DateUtil.getFirstDateOfThisMonth(DateUtil.addMonth(now, +1)));</td>
+ * <td>DateUtil.<b>getFirstDateOfThisMonth</b>(DateUtil.addMonth(now, +1)));</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>获得下个月最后一天</td>
- * <td>return DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(now, +1)));</td>
+ * <td>DateUtil.<b>getLastDateOfThisMonth</b>(DateUtil.addMonth(now, +1)));</td>
  * </tr>
  * <tr valign="top">
  * <td>获得上个月第一天</td>
- * <td>return DateUtil.getFirstDateOfThisMonth(DateUtil.addMonth(now, -1)));</td>
+ * <td>DateUtil.<b>getFirstDateOfThisMonth</b>(DateUtil.addMonth(now, -1)));</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>获得上个月最后一天</td>
- * <td>return DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(now, -1)));</td>
+ * <td>DateUtil.<b>getLastDateOfThisMonth</b>(DateUtil.addMonth(now, -1)));</td>
  * </tr>
  * <tr valign="top">
  * <td>获得去年第一天</td>
- * <td>return DateUtil.getFirstDateOfThisYear(DateUtil.addYear(now, -1));</td>
+ * <td>DateUtil.<b>getFirstDateOfThisYear</b>(DateUtil.addYear(now, -1));</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>获得去年最后一天</td>
- * <td>return DateUtil.getLastDateOfThisYear(DateUtil.addYear(now, -1)));</td>
+ * <td>DateUtil.<b>getLastDateOfThisYear</b>(DateUtil.addYear(now, -1)));</td>
  * </tr>
  * <tr valign="top">
  * <td>获得明年第一天</td>
- * <td>return DateUtil.getFirstDateOfThisYear(DateUtil.addYear(now, +1));</td>
+ * <td>DateUtil.<b>getFirstDateOfThisYear</b>(DateUtil.addYear(now, +1));</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>获得明年最后一天</td>
- * <td>return DateUtil.getLastDateOfThisYear(DateUtil.addYear(now, +1)));</td>
+ * <td>DateUtil.<b>getLastDateOfThisYear</b>(DateUtil.addYear(now, +1)));</td>
  * </tr>
  * </table>
  * </blockquote>
