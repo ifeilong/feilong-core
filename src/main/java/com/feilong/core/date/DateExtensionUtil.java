@@ -121,12 +121,10 @@ public final class DateExtensionUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * LOGGER.debug(DateExtensionUtil.getChineseWeek(0));
+     * DateExtensionUtil.getChineseWeek(0)  return 星期日
      * </pre>
      * 
-     * 返回: 星期日
      * </blockquote>
-     * 
      * 
      * @param week
      *            星期几,从0开始 ,依次1 2 --6
