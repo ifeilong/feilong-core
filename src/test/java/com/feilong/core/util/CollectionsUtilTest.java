@@ -30,6 +30,8 @@ import java.util.Stack;
 
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
+import org.apache.commons.collections4.Transformer;
+import org.apache.commons.collections4.TransformerUtils;
 import org.apache.commons.collections4.functors.EqualPredicate;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -65,6 +67,53 @@ public class CollectionsUtilTest{
 
         LOGGER.info("list:{}", JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
         LOGGER.info("list:{}", JsonUtil.format(list));
+    }
+
+    @Test
+    public void testCollect(){
+        List<String> list = new ArrayList<String>();
+        list.add("xinge");
+        list.add("feilong1");
+        list.add("feilong2");
+        list.add("feilong2");
+
+        Transformer<String, Object> nullTransformer = TransformerUtils.nullTransformer();
+        List<Object> collect = CollectionsUtil.collect(list, nullTransformer);
+        LOGGER.info("list:{}", JsonUtil.format(collect, 0, 0));
+
+    }
+
+    @Test
+    public void testCollect1(){
+        List<Long> list = new ArrayList<Long>();
+        list.add(1L);
+        list.add(100L);
+
+        List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
+        LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
+    }
+
+    @Test
+    public void testCollect2(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
+
+        Transformer<User, String> invokerTransformer = TransformerUtils.invokerTransformer("getName");
+        List<String> collect1 = CollectionsUtil.collect(list, invokerTransformer);
+        LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
+    }
+
+    @Test
+    public void testCollect3(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
+
+        List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.constantTransformer("jintian"));
+        LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
     }
 
     /**
