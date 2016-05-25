@@ -52,14 +52,15 @@ public final class IteratorUtil{
      * 迭代{@link Iterator},判断元素的字符串格式是否和传入的值<code>value</code>的字符串格式相等.
      * 
      * <p style="color:red">
-     * 注意,比较的是{@link java.util.Objects#toString(Object, String)},常常用于自定义标签或者el function
+     * 注意,比较的是{@link java.util.Objects#toString(Object, String)},常用于自定义标签或者el function
      * </p>
      * 
      * @param iterator
      *            iterator
      * @param value
      *            value
-     * @return iterator是否包含某个值,如果iterator为null/empty,则返回false
+     * @return 如果iterator为null/empty,则返回false<br>
+     *         否则迭代 <code>iterator</code>,将元素转成String,和传入参数 <code>value</code>的String值进行比较,如果相等直接返回true
      * @see Iterator#hasNext()
      * @see Iterator#next()
      * @see "org.springframework.util.CollectionUtils#contains(Iterator, Object)"

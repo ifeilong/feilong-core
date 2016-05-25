@@ -21,6 +21,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +47,7 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetFirstDateOfThisDay(){
         logDate(DateUtil.getFirstDateOfThisDay(NOW));
+        logDate(DateUtils.truncate(NOW, Calendar.DAY_OF_MONTH));
     }
 
     /**
@@ -53,6 +56,15 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetLastDateOfThisDay(){
         logDate(DateUtil.getLastDateOfThisDay(NOW));
+        LOGGER.debug(StringUtils.repeat("*", 20));
+
+        logDate(DateUtils.ceiling(NOW, Calendar.DAY_OF_MONTH));
+        logDate(DateUtils.round(NOW, Calendar.DAY_OF_MONTH));
+        logDate(DateUtils.truncate(NOW, Calendar.DAY_OF_MONTH));
+        LOGGER.debug(StringUtils.repeat("*", 20));
+        logDate(DateUtils.ceiling(NOW, Calendar.MONTH));
+        logDate(DateUtils.round(NOW, Calendar.MONTH));
+        logDate(DateUtils.truncate(NOW, Calendar.MONTH));
     }
 
     /**
@@ -459,7 +471,11 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void addYear(){
         logDate(DateUtil.addYear(NOW, 5));
+        logDate(NOW);
+        logDate(DateUtils.addYears(NOW, 5));
+        logDate(NOW);
         logDate(DateUtil.addYear(NOW, -5));
+        logDate(NOW);
     }
 
     /**

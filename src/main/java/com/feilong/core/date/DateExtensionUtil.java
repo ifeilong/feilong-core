@@ -276,6 +276,7 @@ public final class DateExtensionUtil{
      *            the to date
      * @return the interval day list
      * @see DateUtil#getIntervalDay(Date, Date)
+     * @see org.apache.commons.lang3.time.DateUtils#iterator(Calendar, int)
      * @since 1.5.4
      */
     public static List<Date> getIntervalDayList(Date fromDate,Date toDate){
@@ -543,6 +544,7 @@ public final class DateExtensionUtil{
      * @see DateUtil#getIntervalHour(long)
      * @see DateUtil#getIntervalMinute(long)
      * @see DateUtil#getIntervalSecond(long)
+     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      */
     public static String getIntervalForView(long spaceMilliseconds){
         Validate.isTrue(spaceMilliseconds >= 0, "spaceMilliseconds can't <0");

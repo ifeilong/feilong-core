@@ -111,9 +111,9 @@ public final class RandomUtil{
      * @return 创建最小值 <code>minValue</code> 和最大值 <code>maxValue</code> 之间的随机数<br>
      *         如果 <code>minValue</code>是 null,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
      *         如果 <code>maxValue</code>是 null,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
-     *         如果 <code>maxLong</code>{@code <} <code>minLong</code>, 抛出 {@link java.lang.IllegalArgumentException
+     *         如果 <code>maxLong</code>{@code <} <code>minLong</code>,抛出 {@link java.lang.IllegalArgumentException
      *         IllegalArgumentException}<br>
-     *         如果 <code>maxLong</code>{@code =} <code>minLong</code> ,直接返回 minLong
+     *         如果 <code>minLong</code>{@code =} <code>maxLong</code>,直接返回 <code>minLong</code>
      * 
      * @see org.apache.commons.lang3.RandomUtils#nextInt(int, int)
      * @see org.apache.commons.lang3.RandomUtils#nextLong(long, long)

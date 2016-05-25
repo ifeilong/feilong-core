@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.time.DateUtils;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.TimeInterval;
@@ -230,10 +231,11 @@ public final class DateUtil{
      * <pre class="code">
      * DateUtil.getFirstDateOfThisDay(2011-01-01 10:20:20)  =2011-01-01 00:00:00
      * </pre>
-     * 
+     *
      * @param date
      *            the date
      * @return 获得指定日期的 <code>00:00:00</code>
+     * @see org.apache.commons.lang3.time.DateUtils#truncate(Date, int)
      * @since 1.5.0
      */
     public static Date getFirstDateOfThisDay(Date date){
@@ -256,7 +258,7 @@ public final class DateUtil{
      */
     public static Date getLastDateOfThisDay(Date date){
         Validate.notNull(date, "date can't be null!");
-        Calendar calendar = DateUtil.toCalendar(date);
+        Calendar calendar = toCalendar(date);
         return CalendarUtil.toDate(CalendarUtil.resetDayEnd(calendar));
     }
 
@@ -481,48 +483,76 @@ public final class DateUtil{
     /**
      * 指定日期 <code>date</code>,加减年份(仅 {@link java.util.Calendar#YEAR}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
      * 
+     * <p>
+     * 传入的参数<code>date</code>不会改变
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.addYear(2012-06-29 00:33:05,5)   =20<span style="color:red">17</span>-06-29 00:33:05
      * DateUtil.addYear(2012-06-29 00:33:05,-5)  =20<span style="color:red">07</span>-06-29 00:33:05
      * </pre>
      * 
+     * </blockquote>
+     * 
      * @param date
      *            指定时间
      * @param year
      *            增加年份 可以是负数 表示前面多少
-     * @return 加减年份后的时间
-     * @see #operateDate(Date, int, int)
+     * @return 指定日期 <code>date</code>,加减年份<br>
+     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see Calendar#YEAR
      * @see org.apache.commons.lang3.time.DateUtils#addYears(Date, int)
      */
     public static Date addYear(Date date,int year){
-        return operateDate(date, Calendar.YEAR, year);
+        return DateUtils.addYears(date, year);
     }
 
     /**
      * 指定日期 <code>date</code>加减月份,(仅仅 {@link java.util.Calendar#MONTH}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 
+     * <p>
+     * 传入的参数<code>date</code>不会改变
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.addMonth(2012-10-16 23:12:43,5)  =2013-03-16 23:12:43.932
      * DateUtil.addMonth(2012-10-16 23:12:43,-5) =2012-05-16 23:12:43.943
      * </pre>
      * 
+     * </blockquote>
+     * 
      * @param date
      *            指定时间
      * @param month
      *            加减月份, <span style="color:red">可以是负数</span>,表示前面多少<br>
      *            比如-3 表示 3个月之前
-     * @return 加减月份后的时间
-     * @see #operateDate(Date, int, int)
+     * @return 指定日期 <code>date</code>加减月份<br>
+     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see Calendar#MONTH
      * @see org.apache.commons.lang3.time.DateUtils#addMonths(Date, int)
      */
     public static Date addMonth(Date date,int month){
-        return operateDate(date, Calendar.MONTH, month);
+        return DateUtils.addMonths(date, month);
     }
 
     /**
      * 指定日期 <code>date</code>加减天数 (仅仅 {@link java.util.Calendar#DAY_OF_MONTH}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 
+     * <p>
+     * 传入的参数<code>date</code>不会改变
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.addDay(2012-06-29 00:42:26,5)    =2012-07-04 00:42:26
@@ -531,48 +561,68 @@ public final class DateUtil{
      * DateUtil.addDay(2014-01-01 02:10:05,-5)   =2013-12-27 02:10:05.000
      * </pre>
      * 
+     * </blockquote>
+     * 
      * @param date
      *            指定时间
      * @param day
      *            需要加减的天数,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 日期加减天数
-     * @see #operateDate(Date, int, int)
+     * @return 指定日期 <code>date</code>加减天数<br>
+     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see Calendar#DAY_OF_MONTH
      * @see org.apache.commons.lang3.time.DateUtils#addDays(Date, int)
      */
     public static Date addDay(Date date,int day){
         // Calendar.DAY_OF_MONTH 它与 Calendar.DATE 是同义词.一个月中第一天的值为 1.
-        return operateDate(date, Calendar.DAY_OF_MONTH, day);
+        return DateUtils.addDays(date, day);
     }
 
     /**
      * 指定日期 <code>date</code>加减星期 (仅仅{@link Calendar#WEEK_OF_YEAR}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * <p>
+     * 传入的参数<code>date</code>不会改变
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.addWeek(2012-06-29 00:45:18,5)   =2012-08-03 00:45:18
      * DateUtil.addWeek(2012-06-29 00:45:18,-5)  =2012-05-25 00:45:18
      * </pre>
      * 
+     * </blockquote>
+     * 
      * @param date
      *            指定时间
      * @param week
      *            需要加减的星期数,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 指定时间加减星期
-     * @see #operateDate(Date, int, int)
-     * @see Calendar#WEEK_OF_YEAR
+     * @return 指定日期 <code>date</code>加减星期<br>
+     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @see org.apache.commons.lang3.time.DateUtils#addWeeks(Date, int)
      */
     public static Date addWeek(Date date,int week){
-        return operateDate(date, Calendar.WEEK_OF_YEAR, week);
+        return DateUtils.addWeeks(date, week);
     }
 
     /**
      * 指定日期 <code>date</code>加减小时 (仅仅{@link Calendar#HOUR_OF_DAY} 24小时制进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 
+     * <p>
+     * 传入的参数<code>date</code>不会改变
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.addHour(2012-06-29 00:46:24,5)   =2012-06-29 05:46:24
      * DateUtil.addHour(2012-06-29 00:46:24,-5)  =2012-06-28 19:46:24
      * </pre>
      * 
+     * </blockquote>
      * <p>
      * {@link Calendar#HOUR}:12小时制的小时数 <br>
      * {@link Calendar#HOUR_OF_DAY}:24小时制的小时数
@@ -582,59 +632,80 @@ public final class DateUtil{
      *            the date
      * @param hour
      *            the hour,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return the date
-     * @see #operateDate(Date, int, int)
-     * @see Calendar#HOUR_OF_DAY
+     * @return 指定日期 <code>date</code>加减小时<br>
+     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addHours(Date, int)
      */
     public static Date addHour(Date date,int hour){
-        return operateDate(date, Calendar.HOUR_OF_DAY, hour);
+        return DateUtils.addHours(date, hour);
     }
 
     /**
      * 指定日期 <code>date</code>加减分钟 (仅仅{@link Calendar#MINUTE}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 
+     * <p>
+     * 传入的参数<code>date</code>不会改变
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.addMinute(2012-10-16 23:20:33,180)   =2012-10-17 02:20:33.669
      * DateUtil.addMinute(2012-10-16 23:20:33,-180)  =2012-10-16 20:20:33.669
      * </pre>
      * 
+     * </blockquote>
+     * 
      * @param date
      *            the date
      * @param minute
      *            the minute,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return the date
-     * @see #operateDate(Date, int, int)
-     * @see Calendar#MINUTE
+     * @return 指定日期 <code>date</code>加减分钟<br>
+     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addMinutes(Date, int)
      */
     public static Date addMinute(Date date,int minute){
-        return operateDate(date, Calendar.MINUTE, minute);
+        return DateUtils.addMinutes(date, minute);
     }
 
     /**
      * 指定日期 <code>date</code>加减秒 (仅仅{@link java.util.Calendar#SECOND}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 
+     * <p>
+     * 传入的参数<code>date</code>不会改变
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.addSecond(2012-10-16 23:22:02,180)   =2012-10-16 23:25:02.206
      * DateUtil.addSecond(2012-10-16 23:22:02,-180)  =2012-10-16 23:19:02.206
      * </pre>
      * 
+     * </blockquote>
+     * 
      * @param date
      *            任意时间
      * @param second
      *            加减秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return the date
-     * @see #operateDate(Date, int, int)
-     * @see Calendar#SECOND
+     * @return 指定日期 <code>date</code>加减秒<br>
+     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addSeconds(Date, int)
      */
     public static Date addSecond(Date date,int second){
-        return operateDate(date, Calendar.SECOND, second);
+        return DateUtils.addSeconds(date, second);
     }
 
     /**
      * 指定日期 <code>date</code>加减毫秒 (仅仅{@link java.util.Calendar#MILLISECOND}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 
+     * <p>
+     * 传入的参数<code>date</code>不会改变
+     * </p>
      * 
      * <h3>示例:</h3>
      * 
@@ -651,43 +722,13 @@ public final class DateUtil{
      *            任意时间
      * @param millisecond
      *            加减毫秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return the date
-     * @see #operateDate(Date, int, int)
-     * @see Calendar#MILLISECOND
+     * @return 指定日期 <code>date</code>加减毫秒<br>
+     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addMilliseconds(Date, int)
      * @since 1.4.1
      */
     public static Date addMillisecond(Date date,int millisecond){
-        return operateDate(date, Calendar.MILLISECOND, millisecond);
-    }
-
-    /**
-     * 底层操作时间的方法,根据日历的规则,为给定的日历字段添加或减去指定的时间量.
-     *
-     * @param date
-     *            the date
-     * @param field
-     *            日历字段
-     * @param amount
-     *            为字段添加的日期或时间量,可以为负数
-     * @return 底层操作时间的方法 根据日历的规则,为给定的日历字段添加或减去指定的时间量
-     * @see #addYear(Date, int)
-     * @see #addMonth(Date, int)
-     * @see #addWeek(Date, int)
-     * @see #addDay(Date, int)
-     * @see #addHour(Date, int)
-     * @see #addMinute(Date, int)
-     * @see #addSecond(Date, int)
-     * @see #addMillisecond(Date, int)
-     * @see #toCalendar(Date)
-     * @see Calendar#add(int, int)
-     * @see org.apache.commons.lang3.time.DateUtils#add(Date, int, int)
-     */
-    public static Date operateDate(Date date,int field,int amount){
-        Validate.notNull(date, "date can't be null!");
-        Calendar calendar = toCalendar(date);
-        calendar.add(field, amount);
-        return CalendarUtil.toDate(calendar);
+        return DateUtils.addMilliseconds(date, millisecond);
     }
 
     // [end]
@@ -997,6 +1038,7 @@ public final class DateUtil{
      *            模式,时间字符串的模式{@link DatePattern}
      * @return 将string字符串转换成date类型
      * @see DateFormatUtil#parse(String, String)
+     * @see org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)
      */
     public static Date string2Date(String dateString,String datePattern){
         return DateFormatUtil.parse(dateString, datePattern);
@@ -1222,7 +1264,7 @@ public final class DateUtil{
      *
      * @param date
      *            date
-     * @return Calendar
+     * @return 如果date 是null,抛出 {@link NullPointerException}
      * @see Calendar#getInstance()
      * @see GregorianCalendar
      * @see Calendar#setTime(Date)
@@ -1231,11 +1273,7 @@ public final class DateUtil{
      * @see org.apache.commons.lang3.time.DateUtils#toCalendar(Date)
      */
     public static Calendar toCalendar(Date date){
-        Validate.notNull(date, "date can't be null/empty!");
-
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return calendar;
+        return DateUtils.toCalendar(date);
     }
 
     // [end]

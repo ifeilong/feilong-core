@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetIntervalForViewLong(){
         LOGGER.debug(DateExtensionUtil.getIntervalForView(25841));
+        LOGGER.debug(DurationFormatUtils.formatDurationWords(25841, true, true));
         LOGGER.debug(DateExtensionUtil.getIntervalForView(0));
     }
 

@@ -78,7 +78,8 @@ public final class EnumerationUtil{
      *            the enumeration
      * @param value
      *            指定的元素
-     * @return true,if contains
+     * @return 如果enumeration 是null或者Empty,返回false;<br>
+     *         否则 如果 contains 返回true,其他返回false
      * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
      * @see org.apache.commons.collections4.iterators#EnumerationIterator
      * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)

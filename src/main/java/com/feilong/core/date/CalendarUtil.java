@@ -185,6 +185,7 @@ public final class CalendarUtil{
      * @see Calendar#MINUTE
      * @see Calendar#SECOND
      * @see Calendar#MILLISECOND
+     * @see org.apache.commons.lang3.time.DateUtils#truncate(Calendar, int)
      * @since 1.3.0
      */
     public static Calendar resetDayBegin(Calendar calendar){
