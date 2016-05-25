@@ -107,71 +107,71 @@ import com.feilong.core.lang.StringUtil;
  * <th align="left">说明</th>
  * </tr>
  * <tr valign="top">
- * <td>java.lang.BigDecimal</td>
+ * <td>{@link java.math.BigDecimal}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>java.lang.BigInteger</td>
+ * <td>{@link java.math.BigInteger}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
  * <tr valign="top">
- * <td>boolean and java.lang.Boolean</td>
+ * <td>boolean and {@link java.lang.Boolean}</td>
  * <td>default to false</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>byte and java.lang.Byte</td>
+ * <td>byte and {@link java.lang.Byte}</td>
  * <td>default to zero</td>
  * </tr>
  * <tr valign="top">
- * <td>char and java.lang.Character</td>
+ * <td>char and {@link java.lang.Character}</td>
  * <td>default to a space</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>java.lang.Class</td>
+ * <td>{@link java.lang.Class}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
  * <tr valign="top">
- * <td>double and java.lang.Double</td>
+ * <td>double and {@link java.lang.Double}</td>
  * <td>default to zero</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>float and java.lang.Float</td>
+ * <td>float and {@link java.lang.Float}</td>
  * <td>default to zero</td>
  * </tr>
  * <tr valign="top">
- * <td>int and java.lang.Integer</td>
+ * <td>int and {@link java.lang.Integer}</td>
  * <td>default to zero</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>long and java.lang.Long</td>
+ * <td>long and {@link java.lang.Long}</td>
  * <td>default to zero</td>
  * </tr>
  * <tr valign="top">
- * <td>short and java.lang.Short</td>
+ * <td>short and {@link java.lang.Short}</td>
  * <td>default to zero</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>java.lang.String</td>
+ * <td>{@link java.lang.String}</td>
  * <td>default to null</td>
  * </tr>
  * <tr valign="top">
- * <td>java.io.File</td>
+ * <td>{@link java.io.File}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>java.net.URL</td>
+ * <td>{@link java.net.URL}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
  * <tr valign="top">
- * <td>java.sql.Date</td>
+ * <td>{@link java.sql.Date}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
- * <td>java.sql.Time</td>
+ * <td>{@link java.sql.Time}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
  * <tr valign="top">
- * <td>java.sql.Timestamp</td>
+ * <td>{@link java.sql.Timestamp}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
  * </table>
