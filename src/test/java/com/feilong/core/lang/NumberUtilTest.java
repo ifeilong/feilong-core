@@ -151,7 +151,7 @@ public class NumberUtilTest{
         int scale = 8;
         for (int i = 0; i < j; ++i){
             temp = NumberUtil.getDivideValue(a.add(temp), 2, scale);
-            LOGGER.info("{}次:{}", i, temp);
+            LOGGER.debug("{}次:{}", i, temp);
         }
 
     }

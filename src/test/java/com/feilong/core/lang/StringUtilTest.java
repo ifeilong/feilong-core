@@ -71,12 +71,12 @@ public class StringUtilTest{
     @Test
     public void testReplace(){
         String source = "jiiiiiinxin.feilong";
-        LOGGER.info(StringUtil.replace(source, null) + "");
+        LOGGER.debug(StringUtil.replace(source, null) + "");
 
         Map<String, Object> valuesMap = new HashMap<String, Object>();
         valuesMap.put("today", DateUtil.date2String(new Date(), DatePattern.COMMON_DATE));
         valuesMap.put("user", new User(1L));
-        LOGGER.info(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
+        LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
     }
 
     /**
@@ -100,10 +100,10 @@ public class StringUtilTest{
      */
     @Test
     public void compareTo(){
-        LOGGER.info("" + "8".compareTo("13"));
+        LOGGER.debug("" + "8".compareTo("13"));
         Integer parseInt = Integer.parseInt("8");
-        LOGGER.info("" + parseInt.compareTo(Integer.parseInt("13")));
-        LOGGER.info("" + "12".compareTo("13"));
+        LOGGER.debug("" + parseInt.compareTo(Integer.parseInt("13")));
+        LOGGER.debug("" + "12".compareTo("13"));
     }
 
     /**
@@ -119,12 +119,12 @@ public class StringUtilTest{
      */
     @Test
     public void testContainsIgnoreCase(){
-        LOGGER.info(StringUtil.containsIgnoreCase(null, "") + "");
-        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, null) + "");
-        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "") + "");
-        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feilong") + "");
-        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feilong1") + "");
-        LOGGER.info(StringUtil.containsIgnoreCase(TEXT, "feiLong") + "");
+        LOGGER.debug(StringUtil.containsIgnoreCase(null, "") + "");
+        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, null) + "");
+        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "") + "");
+        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "feilong") + "");
+        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "feilong1") + "");
+        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "feiLong") + "");
         assertEquals(true, StringUtil.containsIgnoreCase("jiiiiiinxin.feilong", "Xin"));
     }
 
@@ -133,18 +133,18 @@ public class StringUtilTest{
      */
     @Test
     public void format(){
-        LOGGER.info(StringUtil.format("%03d", 1));
-        LOGGER.info(StringUtil.format("%s%n%s%h", 1.2d, 2, "feilong"));
-        LOGGER.info(StringUtil.format("%+d", -5));
-        LOGGER.info(StringUtil.format("%-5d", -5));
-        LOGGER.info(StringUtil.format("%05d", -5));
-        LOGGER.info(StringUtil.format("% 5d", -5));
-        LOGGER.info(StringUtil.format("%,f", 5585458.254f));
-        LOGGER.info(StringUtil.format("%(f", -5585458.254f));
-        LOGGER.info(StringUtil.format("%#f", -5585458.254f));
-        LOGGER.info(StringUtil.format("%f和%<3.3f", 9.45));
-        LOGGER.info(StringUtil.format("%2$s,%1$s", 99, "abc"));
-        LOGGER.info(StringUtil.format("%1$s,%1$s", 99));
+        LOGGER.debug(StringUtil.format("%03d", 1));
+        LOGGER.debug(StringUtil.format("%s%n%s%h", 1.2d, 2, "feilong"));
+        LOGGER.debug(StringUtil.format("%+d", -5));
+        LOGGER.debug(StringUtil.format("%-5d", -5));
+        LOGGER.debug(StringUtil.format("%05d", -5));
+        LOGGER.debug(StringUtil.format("% 5d", -5));
+        LOGGER.debug(StringUtil.format("%,f", 5585458.254f));
+        LOGGER.debug(StringUtil.format("%(f", -5585458.254f));
+        LOGGER.debug(StringUtil.format("%#f", -5585458.254f));
+        LOGGER.debug(StringUtil.format("%f和%<3.3f", 9.45));
+        LOGGER.debug(StringUtil.format("%2$s,%1$s", 99, "abc"));
+        LOGGER.debug(StringUtil.format("%1$s,%1$s", 99));
     }
 
     /**
@@ -161,9 +161,9 @@ public class StringUtilTest{
     @Test
     public void replaceAll(){
         assertEquals("黑色_黄色_蓝色", StringUtil.replaceAll("黑色/黄色/蓝色", "/", "_"));
-        LOGGER.info(StringUtil.replaceAll("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
-        LOGGER.info(StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
-        LOGGER.info("SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'"));
+        LOGGER.debug(StringUtil.replaceAll("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
+        LOGGER.debug(StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
+        LOGGER.debug("SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'"));
     }
 
     /**
@@ -181,7 +181,7 @@ public class StringUtilTest{
                 sb.append(",");
             }
         }
-        LOGGER.info(sb.toString());
+        LOGGER.debug(sb.toString());
     }
 
     /**
@@ -189,8 +189,8 @@ public class StringUtilTest{
      */
     @Test
     public void testSubString(){
-        LOGGER.info(StringUtil.substring(TEXT, "i", "g"));
-        LOGGER.info(StringUtils.substringBetween(TEXT, "i", "g"));
+        LOGGER.debug(StringUtil.substring(TEXT, "i", "g"));
+        LOGGER.debug(StringUtils.substringBetween(TEXT, "i", "g"));
     }
 
     /**
@@ -198,13 +198,13 @@ public class StringUtilTest{
      */
     @Test
     public void substring2(){
-        LOGGER.info(StringUtil.substring(null, 6, 8));
-        LOGGER.info(StringUtil.substring(TEXT, TEXT.length(), 8));
-        LOGGER.info(StringUtil.substring(TEXT, TEXT.length() - 1, 8));
-        LOGGER.info(StringUtil.substring(TEXT, 1, 0));
-        LOGGER.info(StringUtil.substring(TEXT, 0, 5));
+        LOGGER.debug(StringUtil.substring(null, 6, 8));
+        LOGGER.debug(StringUtil.substring(TEXT, TEXT.length(), 8));
+        LOGGER.debug(StringUtil.substring(TEXT, TEXT.length() - 1, 8));
+        LOGGER.debug(StringUtil.substring(TEXT, 1, 0));
+        LOGGER.debug(StringUtil.substring(TEXT, 0, 5));
         Assert.assertEquals(".f", StringUtil.substring(TEXT, 6, 2));
-        LOGGER.info(StringUtil.substring(TEXT, 6, 20));
+        LOGGER.debug(StringUtil.substring(TEXT, 6, 20));
     }
 
     /**
@@ -212,15 +212,15 @@ public class StringUtilTest{
      */
     @Test
     public void substring3(){
-        LOGGER.info(StringUtil.substring(null, "in", 8));
-        LOGGER.info(StringUtil.substring(TEXT, null, 8));
-        LOGGER.info(StringUtil.substring(TEXT, "sin", 8));
-        LOGGER.info(StringUtil.substring(TEXT, "in", 0));
-        LOGGER.info(StringUtil.substring(TEXT, "in", 5));
-        // LOGGER.info(StringUtil.substring(text, "in", -2));
-        LOGGER.info(StringUtil.substring(TEXT, "in", 20));
-        LOGGER.info(StringUtil.substring(TEXT, "j", TEXT.length() - 1));
-        LOGGER.info(StringUtil.substring(TEXT, "jinxin.", 1));
+        LOGGER.debug(StringUtil.substring(null, "in", 8));
+        LOGGER.debug(StringUtil.substring(TEXT, null, 8));
+        LOGGER.debug(StringUtil.substring(TEXT, "sin", 8));
+        LOGGER.debug(StringUtil.substring(TEXT, "in", 0));
+        LOGGER.debug(StringUtil.substring(TEXT, "in", 5));
+        // LOGGER.debug(StringUtil.substring(text, "in", -2));
+        LOGGER.debug(StringUtil.substring(TEXT, "in", 20));
+        LOGGER.debug(StringUtil.substring(TEXT, "j", TEXT.length() - 1));
+        LOGGER.debug(StringUtil.substring(TEXT, "jinxin.", 1));
     }
 
     /**
@@ -228,12 +228,12 @@ public class StringUtilTest{
      */
     @Test
     public void testSubstring3(){
-        LOGGER.info(StringUtil.substring(null, "in"));
-        LOGGER.info(StringUtil.substring(TEXT, null));
-        LOGGER.info(StringUtil.substring(TEXT, "sin"));
-        LOGGER.info(StringUtil.substring(TEXT, "."));
-        LOGGER.info(StringUtil.substring(TEXT, "j"));
-        LOGGER.info(StringUtil.substring(TEXT, "jinxin."));
+        LOGGER.debug(StringUtil.substring(null, "in"));
+        LOGGER.debug(StringUtil.substring(TEXT, null));
+        LOGGER.debug(StringUtil.substring(TEXT, "sin"));
+        LOGGER.debug(StringUtil.substring(TEXT, "."));
+        LOGGER.debug(StringUtil.substring(TEXT, "j"));
+        LOGGER.debug(StringUtil.substring(TEXT, "jinxin."));
     }
 
     /**
@@ -284,7 +284,7 @@ public class StringUtilTest{
         String str = "jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong";
         String delimiters = "h";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters, false, false);
-        LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+        LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
     }
 
     /**
@@ -295,6 +295,6 @@ public class StringUtilTest{
         String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
         String delimiters = ";, .";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
-        LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+        LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
     }
 }
