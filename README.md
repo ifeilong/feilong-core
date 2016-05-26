@@ -70,56 +70,57 @@ Reduce development, Release ideas (减少开发,释放思想)
 # Javadoc:
 在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.4/feilong-core/) 
 
-# WiKi:
-更多内容,你可以参见 [WiKi](wiki) 
+# wiki:
+更多内容,你可以参见 [WiKi](https://github.com/venusdrogon/feilong-core/wiki) 
 
 
 # 项目依赖
 
 ```XML
-<dependencies>
 
-    <dependency>
-		<groupId>org.apache.commons</groupId>
-		<artifactId>commons-lang3</artifactId>
-		<version>3.4</version>
-    </dependency>
-    
-    <dependency>
-		<groupId>org.apache.commons</groupId>
-		<artifactId>commons-collections4</artifactId>
-		<version>4.1</version>
-    </dependency>
-    
-    <dependency>
-		<groupId>commons-beanutils</groupId>
-		<artifactId>commons-beanutils</artifactId>
-		<version>1.9.2</version>
-    </dependency>
-    
-    <dependency>
-		<groupId>net.sf.json-lib</groupId>
-		<artifactId>json-lib</artifactId>
-		<version>2.4</version>
-		<classifier>jdk15</classifier>
-    </dependency>
-    
-    <dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.12</version>
-		<scope>test</scope>
-    </dependency>
-    
-    <dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-log4j12</artifactId>
-		<version>1.7.12</version>
-		<scope>compile</scope>
-		<optional>true</optional>
-	</dependency>
-    
-  </dependencies>
+	<dependencies>
+	
+	    <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+	    
+	  </dependencies>
 ```
 
 
