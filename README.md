@@ -128,7 +128,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 
 1. 基于`Apache2` 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. 基于`maven3.3`构建;
-1. [need jdk version](https://github.com/venusdrogon/feilong-core/wiki/jdk-version)
+1. [require-jdk-version](https://github.com/venusdrogon/feilong-core/wiki/require-jdk-version)
 
 
 # 其他说明
