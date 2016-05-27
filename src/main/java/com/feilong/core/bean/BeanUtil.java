@@ -34,51 +34,6 @@ import com.feilong.core.Validator;
 /**
  * 封装了 org.apache.commons.beanutils包下面的类.
  * 
- * <h3>关于类型转换:</h3>
- * 
- * <blockquote>
- * <p>
- * 这里使用偷懒的做法,调用了 {@link org.apache.commons.beanutils.ConvertUtilsBean#register(boolean, boolean, int) ConvertUtilsBean.register(boolean,
- * boolean, int)}方法<br>
- * 但是有后遗症,这是beanUtils核心公共的方法,可能会影响其他框架或者其他作者开发的代码<br>
- * 最正确的做法,自定义的类,自己单独写 {@link org.apache.commons.beanutils.Converter},<br>
- * 而 公共的类 比如 下面方法里面的类型:
- * </p>
- * 
- * <ul>
- * <li>{@link ConvertUtilsBean#registerPrimitives(boolean) registerPrimitives(boolean throwException)}</li>
- * <li>{@link ConvertUtilsBean#registerStandard(boolean,boolean) registerStandard(boolean throwException, boolean defaultNull);}</li>
- * <li>{@link ConvertUtilsBean#registerOther(boolean) registerOther(boolean throwException);}</li>
- * <li>{@link ConvertUtilsBean#registerArrays(boolean,int) registerArrays(boolean throwException, int defaultArraySize);}</li>
- * </ul>
- * 
- * 最好在用的时候 自行register,{@link org.apache.commons.beanutils.ConvertUtilsBean#deregister(Class) ConvertUtilsBean.deregister(Class)}
- * 
- * <p>
- * Example 1:
- * </p>
- * 
- * <pre class="code">
- * 
- * MyObject myObject = new MyObject();
- * myObject.setId(3l);
- * myObject.setName(&quot;My Name&quot;);
- * 
- * ConvertUtilsBean cub = new ConvertUtilsBean();
- * cub.deregister(Long.class);
- * cub.register(new MyLongConverter(), Long.class);
- * 
- * LOGGER.debug(cub.lookup(Long.class));
- * 
- * BeanUtilsBean bub = new BeanUtilsBean(cub, new PropertyUtilsBean());
- * 
- * LOGGER.debug(bub.getProperty(myObject, &quot;name&quot;));
- * LOGGER.debug(bub.getProperty(myObject, &quot;id&quot;));
- * </pre>
- * 
- * </blockquote>
- * 
- * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}区别:</h3>
  * 
  * <blockquote>
@@ -229,6 +184,50 @@ public final class BeanUtil{
 
     /**
      * 初始化注册器.
+     * 
+     * <h3>关于类型转换:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 这里使用偷懒的做法,调用了 {@link org.apache.commons.beanutils.ConvertUtilsBean#register(boolean, boolean, int) ConvertUtilsBean.register(boolean,
+     * boolean, int)}方法<br>
+     * 但是有后遗症,这是beanUtils核心公共的方法,可能会影响其他框架或者其他作者开发的代码<br>
+     * 最正确的做法,自定义的类,自己单独写 {@link org.apache.commons.beanutils.Converter},<br>
+     * 而 公共的类 比如 下面方法里面的类型:
+     * </p>
+     * 
+     * <ul>
+     * <li>{@link ConvertUtilsBean#registerPrimitives(boolean) registerPrimitives(boolean throwException)}</li>
+     * <li>{@link ConvertUtilsBean#registerStandard(boolean,boolean) registerStandard(boolean throwException, boolean defaultNull);}</li>
+     * <li>{@link ConvertUtilsBean#registerOther(boolean) registerOther(boolean throwException);}</li>
+     * <li>{@link ConvertUtilsBean#registerArrays(boolean,int) registerArrays(boolean throwException, int defaultArraySize);}</li>
+     * </ul>
+     * 
+     * 最好在用的时候 自行register,{@link org.apache.commons.beanutils.ConvertUtilsBean#deregister(Class) ConvertUtilsBean.deregister(Class)}
+     * 
+     * <p>
+     * Example 1:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * MyObject myObject = new MyObject();
+     * myObject.setId(3l);
+     * myObject.setName(&quot;My Name&quot;);
+     * 
+     * ConvertUtilsBean cub = new ConvertUtilsBean();
+     * cub.deregister(Long.class);
+     * cub.register(new MyLongConverter(), Long.class);
+     * 
+     * LOGGER.debug(cub.lookup(Long.class));
+     * 
+     * BeanUtilsBean bub = new BeanUtilsBean(cub, new PropertyUtilsBean());
+     * 
+     * LOGGER.debug(bub.getProperty(myObject, &quot;name&quot;));
+     * LOGGER.debug(bub.getProperty(myObject, &quot;id&quot;));
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @since 1.5.0
      */
