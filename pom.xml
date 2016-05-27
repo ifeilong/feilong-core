@@ -213,7 +213,8 @@
 						<include>**/AlphabetTest</include>
 						<include>**/CharsetTypeTest</include>
 						<include>**/ClassUtilTest</include>
-						<include>**/DateUtilTest.java</include>
+						<include>**/ConvertUtilTest</include>
+						<include>**/DateUtilTest</include>
 						<include>**/DateUtilIsLeapYearParameterizedTest</include>
 						<include>**/EnumUtilTest</include>
 

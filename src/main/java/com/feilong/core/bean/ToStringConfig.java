@@ -23,6 +23,7 @@ import java.io.Serializable;
  * @author feilong
  * @version 1.4.0 2015年8月3日 上午3:06:20
  * @see org.apache.commons.lang3.builder.ToStringStyle
+ * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
  * @since 1.4.0
  */
 public final class ToStringConfig implements Serializable{

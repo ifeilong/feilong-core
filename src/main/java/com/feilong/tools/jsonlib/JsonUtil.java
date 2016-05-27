@@ -349,7 +349,7 @@ public final class JsonUtil{
      *            对象
      * @param excludes
      *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
-     * @return if null==obj will return {@code null}; {@link #format(Object, JsonConfig)}
+     * @return if null==obj 返回 {@code null}; {@link #format(Object, JsonConfig)}
      * @see #format(Object, JsonConfig)
      * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">java.lang.ClassCastException: JSON keys must be strings</a>
      */
@@ -386,7 +386,7 @@ public final class JsonUtil{
      *            the obj
      * @param jsonConfig
      *            the json config
-     * @return if null==obj will return {@code null}; else return toJSON(obj, jsonConfig).toString(4, 4)
+     * @return if null==obj 返回 {@code null}; else return toJSON(obj, jsonConfig).toString(4, 4)
      * @see net.sf.json.JsonConfig
      * @see #toJSON(Object, JsonConfig)
      * @see net.sf.json.JSON#toString(int, int)

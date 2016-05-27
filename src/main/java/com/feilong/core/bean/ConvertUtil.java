@@ -201,11 +201,11 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <ul>
-     * <li>if "true", "yes", "y", "on", "1", will return true</li>
-     * <li>if "false", "no", "n", "off", "0", will return false</li>
+     * <li>if "true", "yes", "y", "on", "1", 返回 true</li>
+     * <li>if "false", "no", "n", "off", "0", 返回 false</li>
      * <li>else will throw conversionException, but in
      * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
-     * Throwable)} method will return default value, {@link BooleanConverter} defaultValue pls see
+     * Throwable)} method 返回 default value, {@link BooleanConverter} defaultValue pls see
      * {@link org.apache.commons.beanutils.ConvertUtilsBean#registerStandard(boolean, boolean) registerStandard(boolean, boolean)}</li>
      * </ul>
      * 
@@ -228,6 +228,7 @@ public final class ConvertUtil{
      * @return boolean
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.BooleanConverter
+     * @see org.apache.commons.lang3.BooleanUtils
      * @see java.lang.Boolean#parseBoolean(String)
      */
     public static Boolean toBoolean(Object toBeConvertedValue){
@@ -298,17 +299,16 @@ public final class ConvertUtil{
      * <p>
      * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object) ArrayConverter#convertToString(Object)} <br>
      * 
-     * 在转换的过程中, 如果发现 object 是数组,将使用 {@link java.lang.reflect.Array#get(Object, int) Array#get(Object, int)} 来获得数据,<br>
+     * 在转换的过程中, 如果发现 object是数组,将使用 {@link java.lang.reflect.Array#get(Object, int) Array#get(Object, int)} 来获得数据,<br>
      * 如果发现不是数组, 将会将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
-     * ArrayConverter#convertToCollection(Class, Object)} 再转成 迭代器 {@link java.util.Collection#iterator()}
+     * ArrayConverter#convertToCollection(Class, Object)} 再转成 迭代器 {@link java.util.Collection#iterator() Collection.iterator()}
      * </p>
      * 
      * <p>
      * 在将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
      * ArrayConverter#convertToCollection(Class, Object)}时候,有以下规则:
      * </p>
-     * </blockquote>
-     * 
+     *
      * <ul>
      * <li>The string is expected to be a comma-separated list of values.</li>
      * <li>字符串可以被'{' and '}'分隔符包裹.</li>
@@ -345,7 +345,8 @@ public final class ConvertUtil{
      * </tr>
      * </table>
      * </blockquote>
-     *
+     * </blockquote>
+     * 
      * @param toBeConvertedValue
      *            参数值
      * @return the string
@@ -391,8 +392,8 @@ public final class ConvertUtil{
      *            连接字符串 实体
      * @param collection
      *            集合, 建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
-     * @return 如果 collection isNullOrEmpty,返回null<br>
-     *         如果 toStringConfig 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
+     * @return 如果 <code>collection</code> isNullOrEmpty,返回null<br>
+     *         如果 <code>toStringConfig</code> 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see #toString(ToStringConfig, Object...)
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
@@ -403,24 +404,24 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将数组 通过 {@link ToStringConfig} 拼接成 字符串.
+     * 将数组通过{@link ToStringConfig} 拼接成字符串.
      * 
      * <p style="color:green">
-     * 支持包装类型以及原始类型,比如 Integer [] arrays 以及 int []arrays
+     * 支持包装类型以及原始类型,比如 Integer [] arrays 或者 int []arrays
      * </p>
      * 
      * <pre class="code">
      * Example 1:
-     * ArrayUtil.toString(new ToStringConfig(),"a","b")  return "a,b"
+     * ArrayUtil.toString(new ToStringConfig(),"a","b")  返回 "a,b"
      * 
      * Example 2:
      * ToStringConfig toStringConfig=new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
-     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)  return "a,b"
+     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)  返回 "a,b"
      * 
      * Example 3:
      * int[] ints = { 2, 1 };
-     * ArrayUtil.toString(new ToStringConfig(),ints) return "2,1"
+     * ArrayUtil.toString(new ToStringConfig(),ints) 返回 "2,1"
      * </pre>
      *
      * @param toStringConfig
@@ -429,7 +430,7 @@ public final class ConvertUtil{
      *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
      * @return
      *         <ul>
-     *         <li>如果 arrays 是null 或者Empty ,返回null</li>
+     *         <li>如果 arrays 是null 或者Empty ,返回 {@link StringUtils#EMPTY}</li>
      *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
      *         </ul>
      * @see org.apache.commons.lang3.builder.ToStringStyle
@@ -447,9 +448,9 @@ public final class ConvertUtil{
 
         ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
         String connector = useToStringConfig.getConnector();
+
         //************************************************************************
         StringBuilder sb = new StringBuilder();
-
         for (Object obj : operateArray){
             //如果是null或者empty,但是参数值是不拼接,那么跳过,继续循环
             if (Validator.isNullOrEmpty(obj) && !useToStringConfig.getIsJoinNullOrEmpty()){
@@ -475,12 +476,13 @@ public final class ConvertUtil{
      *            the generic type
      * @param collection
      *            集合
-     * @return Enumeration
+     * @return 如果 <code>collection</code> 是null,返回 {@link Collections#emptyEnumeration()}<br>
+     *         否则返回{@link Collections#enumeration(Collection)}
      * @see Collections#enumeration(Collection)
      * @since 1.4.0
      */
     public static <T> Enumeration<T> toEnumeration(final Collection<T> collection){
-        return Collections.enumeration(collection);
+        return null == collection ? (Enumeration<T>) Collections.emptyEnumeration() : Collections.enumeration(collection);
     }
 
     /**

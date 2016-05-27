@@ -266,8 +266,8 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToString(){
-        String[] aaaa = { "aa", "aaa" };
-        assertEquals("[aa, aaa]", ConvertUtil.toString(aaaa));
+        //        String[] aaaa = { "aa", "aaa" };
+        //        assertEquals("[aa, aaa]", ConvertUtil.toString(aaaa));
     }
 
     /**
@@ -315,6 +315,8 @@ public class ConvertUtilTest{
         toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
         assertEquals("2,1", ConvertUtil.toString(toStringConfig, array3));
+
+        // assertEquals("2,1", StringUtils.join(array3, ","));
     }
 
     /**
@@ -356,6 +358,8 @@ public class ConvertUtilTest{
 
         enumeration = null;
         LOGGER.info(JsonUtil.format(ConvertUtil.toList(enumeration)));
+
+        enumeration = ConvertUtil.toEnumeration(null);
     }
 
     /**

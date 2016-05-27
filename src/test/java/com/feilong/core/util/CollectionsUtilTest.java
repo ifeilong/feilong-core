@@ -28,6 +28,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.Transformer;
@@ -67,6 +68,16 @@ public class CollectionsUtilTest{
 
         LOGGER.info("list:{}", JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
         LOGGER.info("list:{}", JsonUtil.format(list));
+    }
+
+    @Test
+    public void testPartition(){
+        List<String> list = new ArrayList<String>();
+        list.add("xinge");
+        list.add("feilong1");
+        list.add("feilong2");
+
+        LOGGER.info("list:{}", JsonUtil.format(ListUtils.partition(list, 2)));
     }
 
     @Test

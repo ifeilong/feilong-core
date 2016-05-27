@@ -510,8 +510,8 @@ public final class StringUtil{
      *            内容 the String to get the substring from, may be null
      * @param beginIndex
      *            从指定索引处 the position to start from,negative means count back from the end of the String by this many characters
-     * @return A <code>null</code> String will return <code>null</code>. <br>
-     *         An empty ("") String will return "".<br>
+     * @return A <code>null</code> String 返回 <code>null</code>. <br>
+     *         An empty ("") String 返回 "".<br>
      *         substring from start position, <code>null</code> if null String input
      * @see org.apache.commons.lang3.StringUtils#substring(String, int)
      * @see #substringLast(String, int)
