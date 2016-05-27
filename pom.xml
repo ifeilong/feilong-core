@@ -220,6 +220,8 @@
 
 						<include>**/HttpMethodTypeTest</include>
 
+						<include>**/ObjectUtilTest</include>
+						
 						<include>**/RandomUtilTest</include>
 						<include>**/RegexUtilTest</include>
 						

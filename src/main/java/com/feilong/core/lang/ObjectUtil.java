@@ -43,29 +43,31 @@ public final class ObjectUtil{
     }
 
     /**
-     * 判断对象是不是boolean类型数据.
+     * 判断指定的对象 <code>object</code>是不是boolean类型数据.
      * 
      * @param object
      *            对象
-     * @return 是返回true
+     * @return 是返回true <br>
+     *         如果 <code>object</code> 是null,返回false
      */
-    public static Boolean isBoolean(Object object){
+    public static boolean isBoolean(Object object){
         return object instanceof Boolean;
     }
 
     /**
-     * 判断对象是不是Integer类型.
+     * 判断指定的对象 <code>object</code>是不是Integer类型.
      * 
      * @param object
      *            对象
-     * @return 是返回true
+     * @return 是返回true <br>
+     *         如果 <code>object</code> 是null,返回false
      */
-    public static Boolean isInteger(Object object){
+    public static boolean isInteger(Object object){
         return object instanceof Integer;
     }
 
     /**
-     * 是否是数组.
+     * 判断指定的对象 <code>object</code>是否是数组.
      * 
      * <h3><code>instanceof</code>和 {@link java.lang.Class#isArray()}的区别:</h3>
      * 

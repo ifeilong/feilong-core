@@ -55,6 +55,20 @@ public class ObjectUtilTest{
         assertEquals(false, ObjectUtil.isArray(1));
     }
 
+    @Test
+    public void isBoolean(){
+        assertEquals(false, ObjectUtil.isBoolean(null));
+        assertEquals(true, ObjectUtil.isBoolean(false));
+    }
+
+    @Test
+    public void isInteger(){
+        assertEquals(false, ObjectUtil.isInteger(null));
+        assertEquals(false, ObjectUtil.isInteger(false));
+        assertEquals(true, ObjectUtil.isInteger(1));
+        assertEquals(false, ObjectUtil.isInteger(5.56));
+    }
+
     /**
      * Assert equals.
      */
@@ -93,7 +107,7 @@ public class ObjectUtilTest{
         LOGGER.debug(JsonUtil.format(toIterator(arrays)));
         LOGGER.debug(JsonUtil.format(new ArrayIterator(arrays)));
         LOGGER.debug(JsonUtil.format(new ArrayIterator(array)));
-        LOGGER.debug(JsonUtil.format(new ArrayIterator(null)));
+        //LOGGER.debug(JsonUtil.format(new ArrayIterator(null)));
     }
 
     /**
