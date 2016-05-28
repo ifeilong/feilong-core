@@ -51,12 +51,11 @@ public final class EnumUtil{
      * 
      * <p>
      * 适用于这种{@link com.feilong.core.HttpMethodType HttpMethodType}带自定义属性的枚举类型,调用方式:
+     * </p>
      * 
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
-     * 
-     * </p>
      *
      * @param <E>
      *            the element type
@@ -81,12 +80,11 @@ public final class EnumUtil{
      * 
      * <p>
      * 适用于这种{@link com.feilong.core.HttpMethodType HttpMethodType}带自定义属性的枚举类型,调用方式:
+     * </p>
      * 
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
-     * 
-     * </p>
      *
      * @param <E>
      *            the element type

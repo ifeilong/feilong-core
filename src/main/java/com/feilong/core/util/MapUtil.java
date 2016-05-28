@@ -65,7 +65,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <h3>关于 {@link java.util.Map }:</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">interface/class</th>
  * <th align="left">说明</th>

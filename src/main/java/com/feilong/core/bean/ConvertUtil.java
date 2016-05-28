@@ -62,7 +62,7 @@ import com.feilong.core.lang.StringUtil;
  * <h3>{@link ConvertUtils} 几个方法的区别:</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">方法</th>
  * <th align="left">说明</th>
@@ -72,7 +72,7 @@ import com.feilong.core.lang.StringUtil;
  * <td>将指定的value转成string.<br>
  * 如果value是array,将会返回数组第一个元素转成string.<br>
  * 将会使用注册的 <code>java.lang.String</code>{@link Converter},<br>
- * 允许应用定制 Object->String conversions(默认使用简单的使用 toString())<br>
+ * 允许应用定制 Object{@code ->}String conversions(默认使用简单的使用 toString())<br>
  * see {@link ConvertUtilsBean#convert(Object)}</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -101,7 +101,7 @@ import com.feilong.core.lang.StringUtil;
  * </p>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -322,7 +322,7 @@ public final class ConvertUtil{
      * </p>
      * 
      * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4">
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">字段</th>
      * <th align="left">说明</th>

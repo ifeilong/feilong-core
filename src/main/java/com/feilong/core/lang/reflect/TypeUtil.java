@@ -94,14 +94,14 @@ public final class TypeUtil{
      * public class SkuItemRepositoryImpl extends BaseSolrRepositoryImpl{@code <SkuItem, Long>} implements SkuItemRepository
      * </pre>
      * 
+     * </p>
+     * 
      * 这样的类,
      * 
      * <p>
      * 调用 {@link TypeUtil#getGenericSuperclassParameterizedRawTypes(Class)},使用
      * <code>TypeUtil.getGenericSuperclassParameterizedRawTypes(SkuItemRepositoryImpl.class)</code>
-     * 取到泛型里面 参数 [SkuItem.class,Long.class]
-     * </p>
-     * 
+     * 取到泛型里面参数 [SkuItem.class,Long.class]
      * </p>
      * 
      * @param klass

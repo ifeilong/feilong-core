@@ -33,7 +33,7 @@ import com.feilong.core.Validator;
  * 假设class 是 {@link com.feilong.core.DatePattern}
  * </p>
  * 
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -69,7 +69,7 @@ import com.feilong.core.Validator;
  * 
  * <blockquote>
  * 
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -98,7 +98,7 @@ import com.feilong.core.Validator;
  * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -149,7 +149,7 @@ public final class ClassUtil{
      * 
      * <blockquote>
      * 
-     * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">字段</th>
      * <th align="left">说明</th>
@@ -192,7 +192,7 @@ public final class ClassUtil{
      * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
      * 
      * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">字段</th>
      * <th align="left">说明</th>

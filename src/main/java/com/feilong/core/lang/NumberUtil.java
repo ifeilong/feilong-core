@@ -53,7 +53,7 @@ import com.feilong.core.text.NumberFormatUtil;
  * <h3><a name="RoundingMode">JAVA 8种舍入法:</a></h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>

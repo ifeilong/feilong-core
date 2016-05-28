@@ -75,7 +75,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">方法</th>
  * <th align="left">说明</th>

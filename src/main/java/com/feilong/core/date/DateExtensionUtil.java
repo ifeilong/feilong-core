@@ -396,7 +396,7 @@ public final class DateExtensionUtil{
      * 
      * @param inDate
      *            任意日期<br>
-     *            warn:<code>一般inDate<=当前时间</code> ,暂时不支持大于当前时间
+     *            warn:一般inDate{@code <=}当前时间 ,暂时不支持大于当前时间
      * @return 人性化显示date时间<br>
      *         如果 <code>inDate</code> 是null,抛出 {@link NullPointerException}<br>
      * @see DateUtil#date2String(Date, String)

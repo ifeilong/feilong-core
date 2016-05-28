@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  * <h3>开始结束</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -49,7 +49,7 @@ import java.util.regex.Pattern;
  * <h3>次数</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -77,7 +77,7 @@ import java.util.regex.Pattern;
  * <h3>简写</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -115,7 +115,7 @@ import java.util.regex.Pattern;
  * <h3>特殊</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -147,7 +147,7 @@ import java.util.regex.Pattern;
  * <h3>全部符号解释</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>

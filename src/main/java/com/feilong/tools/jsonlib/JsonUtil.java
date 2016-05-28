@@ -59,7 +59,7 @@ import net.sf.json.util.PropertySetStrategy;
  * 
  * <h3>提供以下主要方法:</h3>
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">方法:</th>
  * <th align="left">说明:</th>

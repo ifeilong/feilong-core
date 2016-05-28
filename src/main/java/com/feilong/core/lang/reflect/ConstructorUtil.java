@@ -41,7 +41,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * {@link ConstructorUtils#getMatchingAccessibleConstructor(Class, Class...)} 自动根据类型活动最匹配的构造函数,并且将异常转成了 {@link ReflectException} 以便调用的时候使用
  * 
  * <p>
- * 因此,不用担心 int-->Integer 原始类型参数和包装类型参数,以及父类/子类 这样的参数不匹配带来的问题
+ * 因此,不用担心 int{@code -->}Integer 原始类型参数和包装类型参数,以及父类/子类 这样的参数不匹配带来的问题
  * </p>
  * </blockquote>
  * 

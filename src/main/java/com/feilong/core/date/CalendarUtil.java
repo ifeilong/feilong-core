@@ -31,7 +31,7 @@ import com.feilong.core.DatePattern;
  * <blockquote>
  * 我们使用Calendar,无非是就是使用这17个字段,参见 {@link java.util.Calendar#FIELD_COUNT}
  * 
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -127,7 +127,7 @@ import com.feilong.core.DatePattern;
  * <h3>{@link Calendar#getActualMaximum(int)} VS {@link Calendar#getMaximum(int)}</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>

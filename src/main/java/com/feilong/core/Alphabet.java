@@ -62,11 +62,12 @@ public final class Alphabet{
      * 
      * <p>
      * 剔除了以下数字/字母:
+     * </p>
+     * 
      * <ul>
      * <li>数字 1 和 字母 l</li>
      * <li>数字 0 和 字母 o</li>
      * </ul>
-     * </p>
      * 
      * <p>
      * 返回 :23456789abcdefghijkmnpqrstuvwxyz

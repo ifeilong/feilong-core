@@ -108,7 +108,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * <blockquote>
  * 
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -963,7 +963,7 @@ public final class StringUtil{
      * <h3>转换符</h3>
      * 
      * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">转换符</th>
      * <th align="left">说明</th>
@@ -1045,7 +1045,7 @@ public final class StringUtil{
      * <h3>标志</h3>
      * 
      * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">标志</th>
      * <th align="left">说明</th>

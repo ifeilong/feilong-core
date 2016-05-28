@@ -41,7 +41,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * <blockquote>
  * 
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -118,7 +118,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * task. Therefore:
  * </p>
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">characters</th>
  * <th align="left">说明</th>

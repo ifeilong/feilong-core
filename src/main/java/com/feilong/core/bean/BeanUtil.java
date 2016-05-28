@@ -338,7 +338,7 @@ public final class BeanUtil{
      * <blockquote>
      * <ol>
      * <li>这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,在使用时要小心,特别是对于属性为自定义类的情况 .</li>
-     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行 <code>Object--->String--->Object</code>类型转换,<br>
+     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行{@code Object--->String--->Object}类型转换,<br>
      * 如果需要copy的两个对象属性之间的类型是一样的话,那么调用这个方法会有<span style="color:red">性能消耗</span>,此时建议调用
      * {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
      * </ol>
@@ -469,7 +469,7 @@ public final class BeanUtil{
      * 
      * <p>
      * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中,即使这个bean没有实现 {@link Cloneable}接口 .
-     * <p>
+     * </p>
      * 
      * <p>
      * {@link BeanUtils#cloneBean(Object)}在源码上看是调用了getPropertyUtils().copyProperties(newBean, bean);<br>
@@ -576,7 +576,7 @@ public final class BeanUtil{
      * 把properties/map里面的值 <code>populate</code> (填充)到bean中.
      * 
      * <p>
-     * 将Map<Key,value>中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名. 
+     * 将Map{@code <Key,value>}中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名. 
      * </p>
      * 
      * <h3>Example 1:</h3>
@@ -586,7 +586,7 @@ public final class BeanUtil{
      * User user = new User();
      * user.setId(5L);
      * 
-     * Map<String, Object> properties = new HashMap<String, Object>();
+     * Map{@code <String, Object>} properties = new HashMap{@code <String, Object>}();
      * properties.put("id", 8L);
      * 
      * BeanUtil.populate(user, properties);

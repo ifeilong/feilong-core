@@ -59,7 +59,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <h3>关于 {@link java.util.Collection}:</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -82,7 +82,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <h3>关于 {@link java.util.List}:</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">interface/class</th>
  * <th align="left">说明</th>
@@ -153,7 +153,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <h3>关于 {@link Set }:</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">interface/class</th>
  * <th align="left">说明</th>
@@ -215,7 +215,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <h3>关于 {@link java.util.Queue Queue}:</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">interface/class</th>
  * <th align="left">说明</th>
@@ -637,8 +637,8 @@ public final class CollectionsUtil{
      * <blockquote>
      * <p>
      * 在100W的list当中执行0.546秒,而contains,我则没耐心去等了.顺便贴一下在10W下2段代码的运行时间.<br>
-     * [foo1] 100000 -> 50487 : 48610 ms.<br>
-     * [foo2] 100000 -> 50487 : 47 ms.<br>
+     * [foo1] 100000 {@code ->} 50487 : 48610 ms.<br>
+     * [foo2] 100000 {@code ->} 50487 : 47 ms.<br>
      * </p>
      * </blockquote>
      * 

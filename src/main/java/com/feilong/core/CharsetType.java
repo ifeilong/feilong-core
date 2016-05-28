@@ -69,13 +69,13 @@ public final class CharsetType{
      * <span style="color:red">重复一遍:UTF-8是Unicode的实现方式之一.</span> <br>
      * UTF-8最大的一个特点,就是它是一种变长的编码方式.它可以使用1~4个字节表示一个符号,根据不同的符号而变化字节长度. 
      * </p>
+     * 
      * UTF-8的编码规则很简单,只有两条: 
-     * <p>
+     * 
      * <ul>
      * <li>1)对于单字节的符号,字节的第一位设为0,后面7位为这个符号的unicode码.因此对于英语字母,UTF-8编码和ASCII码是相同的. </li>
-     * <li>2)对于n字节的符号(n>1),第一个字节的前n位都设为1,第n+1位设为0,后面字节的前两位一律设为10.剩下的没有提及的二进制位,全部为这个符号的unicode码.</li>
+     * <li>2)对于n字节的符号({@code n>1}),第一个字节的前n位都设为1,第n+1位设为0,后面字节的前两位一律设为10.剩下的没有提及的二进制位,全部为这个符号的unicode码.</li>
      * </ul>
-     * </p>
      * </blockquote>
      * 
      * @see org.apache.commons.lang3.CharEncoding#UTF_8

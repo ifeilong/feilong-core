@@ -32,7 +32,7 @@ import com.feilong.core.text.DateFormatUtil;
  * <h3>常用方法:</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -147,7 +147,7 @@ import com.feilong.core.text.DateFormatUtil;
  * <h3>通过这个类,还可以获得以下数据:</h3>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
@@ -1451,7 +1451,7 @@ public final class DateUtil{
      * 判断某年是否为闰年 .
      * 
      * <p>
-     * 规则: <code>(year % 4 == 0 && year % 100 != 0) || year % 400 == 0</code>
+     * 规则: {@code (year % 4 == 0 && year % 100 != 0) || year % 400 == 0}
      * </p>
      * 
      * <h3>闰年原因:</h3>

@@ -50,7 +50,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * e.q:<br>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left"></th>
  * <th align="left">(maven)测试</th>
@@ -118,7 +118,7 @@ public final class ClassLoaderUtil{
      * e.q:<br>
      * 
      * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left"></th>
      * <th align="left">(maven)测试</th>
@@ -250,7 +250,7 @@ public final class ClassLoaderUtil{
      * e.q:<br>
      * 
      * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left"></th>
      * <th align="left">(maven)测试</th>
