@@ -51,14 +51,6 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * Test get chinese week.
-     */
-    @Test
-    public void testGetChineseWeek(){
-        LOGGER.debug(DateExtensionUtil.getChineseWeek(0));
-    }
-
-    /**
      * Test get interval day list.
      */
     @Test
@@ -67,6 +59,9 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(TOSTRING, FROMSTRING, DatePattern.COMMON_DATE_AND_TIME)));
     }
 
+    /**
+     * Test get interval day list1.
+     */
     @Test
     public void testGetIntervalDayList1(){
         Date fromDate = DateUtil.string2Date(FROMSTRING, DatePattern.COMMON_DATE_AND_TIME);

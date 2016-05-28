@@ -54,84 +54,31 @@ import com.feilong.core.Validator;
 public final class DateExtensionUtil{
 
     /** 昨天. */
-    private static final String   YESTERDAY               = "昨天";
+    private static final String YESTERDAY               = "昨天";
 
     /** 前天. */
-    private static final String   THEDAY_BEFORE_YESTERDAY = "前天";
-
-    /** 星期. */
-    private static final String   WEEK                    = "星期";
+    private static final String THEDAY_BEFORE_YESTERDAY = "前天";
 
     /** 天. */
-    private static final String   DAY                     = "天";
+    private static final String DAY                     = "天";
 
     /** 小时. */
-    private static final String   HOUR                    = "小时";
+    private static final String HOUR                    = "小时";
 
     /** 分钟. */
-    private static final String   MINUTE                  = "分钟";
+    private static final String MINUTE                  = "分钟";
 
     /** 秒. */
-    private static final String   SECOND                  = "秒";
+    private static final String SECOND                  = "秒";
 
     /** 毫秒. */
-    private static final String   MILLISECOND             = "毫秒";
-
-    /**
-     * 中文星期.<br>
-     * { "日", "一", "二", "三", "四", "五", "六" }
-     */
-    private static final String[] WEEK_CHINESES           = { "日", "一", "二", "三", "四", "五", "六" };
-
-    /**
-     * 英文星期.<br>
-     * { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }
-     */
-    private static final String[] WEEK_ENGLISHS           = {
-                                                              "Sunday",
-                                                              "Monday",
-                                                              "Tuesday",
-                                                              "Wednesday",
-                                                              "Thursday",
-                                                              "Friday",
-                                                              "Saturday" };
+    private static final String MILLISECOND             = "毫秒";
 
     /** Don't let anyone instantiate this class. */
     private DateExtensionUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    /**
-     * 获得英文星期.
-     * 
-     * @param week
-     *            星期 日从0开始 1 2 --6
-     * @return 如 Sunday { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" } 中一个
-     */
-    public static String getEnglishWeek(int week){
-        return WEEK_ENGLISHS[week];
-    }
-
-    /**
-     * 获得中文星期.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * DateExtensionUtil.getChineseWeek(0)  return 星期日
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param week
-     *            星期几,从0开始 ,依次1 2 --6
-     * @return 如 星期一
-     */
-    public static String getChineseWeek(int week){
-        return WEEK + WEEK_CHINESES[week];
     }
 
     // [start] 获得时间 /时间数组,可以用于sql查询
