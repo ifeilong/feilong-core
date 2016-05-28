@@ -402,7 +402,11 @@ public final class StringUtil{
     }
 
     /**
+     * 使用给定的字符串作为模板,替换所有the occurrences of variables with their matching values from the resolver .
+     * 
+     * <p>
      * The following example demonstrates this:
+     * </p>
      * 
      * <pre class="code">
      * Map valuesMap = HashMap();
