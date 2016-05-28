@@ -37,10 +37,12 @@ import com.feilong.core.bean.ConvertUtil;
 
 /**
  * 处理参数相关.
- * 
+ *
  * @author feilong
  * @version 1.0.0 2010-4-15 下午04:01:29
  * @version 1.4.0 2015-8-1 22:08
+ * @see "org.springframework.web.util.UriComponentsBuilder"
+ * @see "org.apache.http.client.utils.URIBuilder"
  * @since 1.0.0
  */
 public final class ParamUtil{
@@ -944,6 +946,7 @@ public final class ParamUtil{
      *         否则 将 <code>singleValueMap</code> 转成 {@link #toArrayValueMap(Map)},再调用 {@link #toQueryStringUseArrayValueMap(Map)}
      * @see #toArrayValueMap(Map)
      * @see #toQueryStringUseArrayValueMap(Map)
+     * @see <a href="http://www.leveluplunch.com/java/examples/build-convert-map-to-query-string/">build-convert-map-to-query-string</a>
      * @since 1.5.5
      */
     public static String toQueryStringUseSingleValueMap(Map<String, String> singleValueMap){
@@ -986,6 +989,7 @@ public final class ParamUtil{
      * @return 如果 <code>arrayValueMap</code> 是 Null或者Empty,返回 {@link StringUtils#EMPTY}<br>
      *         否则循环 <code>arrayValueMap</code> 拼接成QueryString
      * @see #joinParamNameAndValues(String, String[])
+     * @see <a href="http://www.leveluplunch.com/java/examples/build-convert-map-to-query-string/">build-convert-map-to-query-string</a>
      * @since 1.5.5
      */
     public static String toQueryStringUseArrayValueMap(Map<String, String[]> arrayValueMap){
@@ -996,9 +1000,7 @@ public final class ParamUtil{
         int i = 0;
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
-            String key = entry.getKey();
-            String[] paramValues = entry.getValue();
-            sb.append(joinParamNameAndValues(key, paramValues));
+            sb.append(joinParamNameAndValues(entry.getKey(), entry.getValue()));
 
             if (i != arrayValueMap.size() - 1){// 最后一个& 不拼接
                 sb.append(URIComponents.AMPERSAND);
