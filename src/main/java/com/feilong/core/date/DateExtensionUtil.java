@@ -167,13 +167,19 @@ public final class DateExtensionUtil{
      *            结束时间
      * @param datePattern
      *            时间模式 {@link DatePattern}
-     * @return the interval day list
+     * @return the interval day list<br>
+     *         如果 <code>fromDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fromDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>toDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>toDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #getIntervalDayList(Date, Date)
      */
     public static List<Date> getIntervalDayList(String fromDateString,String toDateString,String datePattern){
-        Validate.notEmpty(fromDateString, "fromDateString can't be null/empty!");
-        Validate.notEmpty(toDateString, "toDateString can't be null/empty!");
-        Validate.notEmpty(datePattern, "datePattern can't be null/empty!");
+        Validate.notBlank(fromDateString, "fromDateString can't be null/empty!");
+        Validate.notBlank(toDateString, "toDateString can't be null/empty!");
+        Validate.notBlank(datePattern, "datePattern can't be null/empty!");
 
         Date fromDate = DateUtil.string2Date(fromDateString, datePattern);
         Date toDate = DateUtil.string2Date(toDateString, datePattern);
@@ -197,11 +203,11 @@ public final class DateExtensionUtil{
      * 
      * <pre class="code">
      ["2011-03-05 00:00:00",
-             "2011-03-06 00:00:00",
-             "2011-03-07 00:00:00",
-             "2011-03-08 00:00:00",
-             "2011-03-09 00:00:00",
-             "2011-03-10 00:00:00"
+      "2011-03-06 00:00:00",
+      "2011-03-07 00:00:00",
+      "2011-03-08 00:00:00",
+      "2011-03-09 00:00:00",
+      "2011-03-10 00:00:00"
       ]
      * </pre>
      * 
@@ -219,12 +225,16 @@ public final class DateExtensionUtil{
      *            the from date
      * @param toDate
      *            the to date
-     * @return the interval day list
+     * @return the interval day list <br>
+     *         如果 <code>fromDate</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>toDate</code> 是null,抛出 {@link NullPointerException}
      * @see DateUtil#getIntervalDay(Date, Date)
      * @see org.apache.commons.lang3.time.DateUtils#iterator(Calendar, int)
      * @since 1.5.4
      */
     public static List<Date> getIntervalDayList(Date fromDate,Date toDate){
+        Validate.notNull(fromDate, "fromDate can't be null!");
+        Validate.notNull(toDate, "toDate can't be null!");
 
         Date minDate = fromDate.before(toDate) ? fromDate : toDate;
         Date maxDate = fromDate.before(toDate) ? toDate : fromDate;
@@ -328,7 +338,9 @@ public final class DateExtensionUtil{
      *            {@link Calendar#WEDNESDAY}, {@link Calendar#THURSDAY}, {@link Calendar#FRIDAY}, {@link Calendar#SATURDAY}
      * @param datePattern
      *            获得集合里面时间字符串模式 see {@link DatePattern}
-     * @return 获得一年中所有的周几集合
+     * @return 获得一年中所有的周几集合<br>
+     *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#iterator(Date, int)
      * @see Calendar#SUNDAY
      * @see Calendar#MONDAY
@@ -339,14 +351,15 @@ public final class DateExtensionUtil{
      * @see Calendar#SATURDAY
      */
     public static List<String> getWeekDateStringList(int week,String datePattern){
+        Validate.notBlank(datePattern, "datePattern can't be blank!");
         Date now = new Date();
         Date firstWeekOfSpecifyDateYear = DateUtil.getFirstWeekOfSpecifyDateYear(now, week);
         //当年最后一天
         Calendar calendarEnd = CalendarUtil.resetYearEnd(DateUtil.toCalendar(now));
 
         List<String> list = new ArrayList<String>();
-        for (Calendar calendar = DateUtil.toCalendar(firstWeekOfSpecifyDateYear); calendar.before(calendarEnd); calendar
-                        .add(Calendar.DAY_OF_YEAR, 7)){
+        Calendar firstWeekOfSpecifyDateYearCalendar = DateUtil.toCalendar(firstWeekOfSpecifyDateYear);
+        for (Calendar calendar = firstWeekOfSpecifyDateYearCalendar; calendar.before(calendarEnd); calendar.add(Calendar.DAY_OF_YEAR, 7)){
             list.add(CalendarUtil.toString(calendar, datePattern));
         }
         return list;
@@ -384,7 +397,8 @@ public final class DateExtensionUtil{
      * @param inDate
      *            任意日期<br>
      *            warn:<code>一般inDate<=当前时间</code> ,暂时不支持大于当前时间
-     * @return 人性化显示date时间
+     * @return 人性化显示date时间<br>
+     *         如果 <code>inDate</code> 是null,抛出 {@link NullPointerException}<br>
      * @see DateUtil#date2String(Date, String)
      * @see DateUtil#getYear(Date)
      * @see DateUtil#getDayOfMonth(Date)
@@ -397,6 +411,8 @@ public final class DateExtensionUtil{
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      */
     public static String toPrettyDateString(Date inDate){
+        Validate.notNull(inDate, "inDate can't be null!");
+
         Date nowDate = new Date();
 
         // 传过来的日期的年份
@@ -429,13 +445,15 @@ public final class DateExtensionUtil{
      *            日期集合
      * @param datePattern
      *            模式 {@link DatePattern}
-     * @return 如果 Validator.isNotNullOrEmpty(dateList) return null;<br>
+     * @return 如果 <code>dateList</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则循环date转成string,返回{@code List<String>}
      */
     public static List<String> toStringList(List<Date> dateList,String datePattern){
         if (Validator.isNullOrEmpty(dateList)){
             return Collections.emptyList();
         }
+
+        Validate.notBlank(datePattern, "datePattern can't be blank!");
 
         List<String> stringList = new ArrayList<String>();
         for (Date date : dateList){
@@ -455,26 +473,8 @@ public final class DateExtensionUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Date beginDate = new Date();
-     * 
-     * // do some logic
-     * // balabala logic
-     * 
-     * LOGGER.info("use time:}{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
-     * 
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * getIntervalForView(13516)
-     * return 13秒516毫秒
-     * 
-     * getIntervalForView(0)
-     * return 0
+     * DateExtensionUtil.getIntervalForView(13516)    return 13秒516毫秒
+     * DateExtensionUtil.getIntervalForView(0)        return 0
      * 
      * 自动增加 天,小时,分钟,秒,毫秒中文文字
      * </pre>
@@ -484,7 +484,8 @@ public final class DateExtensionUtil{
      * @param spaceMilliseconds
      *            总共相差的毫秒数
      * @return 将间隔毫秒数,转换成直观的表示方式.<br>
-     *         如果 spaceMilliseconds 是0 直接返回0
+     *         如果 spaceMilliseconds 是0 直接返回0<br>
+     *         如果 {@code spaceMilliseconds<0},抛出 {@link IllegalArgumentException}
      * @see DateUtil#getIntervalDay(long)
      * @see DateUtil#getIntervalHour(long)
      * @see DateUtil#getIntervalMinute(long)
@@ -554,27 +555,24 @@ public final class DateExtensionUtil{
      * <blockquote>
      * 
      * <pre class="code">
-         * getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24) 
-         * return 2小时59分44秒
-         * 
-         * getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)
-         * return 1分钟1秒 
-         * 
-         * 自动增加 天,小时,分钟,秒,毫秒中文文字
+     * DateExtensionUtil.getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24)             return 2小时59分44秒
+     * DateExtensionUtil.getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)    return 1分钟1秒
+     * 
+     * 自动增加 天,小时,分钟,秒,毫秒中文文字
      * </pre>
      * 
      * </blockquote>
      * 
-     * @param date1
-     *            时间1
-     * @param date2
-     *            时间2
+     * @param beginDate
+     *            开始日期
+     * @param endDate
+     *            结束日期
      * @return 将两日期之间的间隔,转换成直观的表示方式
      * @see #getIntervalForView(long)
      * @see DateUtil#getIntervalTime(Date, Date)
      */
-    public static String getIntervalForView(Date date1,Date date2){
-        long spaceTime = DateUtil.getIntervalTime(date1, date2);
+    public static String getIntervalForView(Date beginDate,Date endDate){
+        long spaceTime = DateUtil.getIntervalTime(beginDate, endDate);
         return getIntervalForView(spaceTime);
     }
 

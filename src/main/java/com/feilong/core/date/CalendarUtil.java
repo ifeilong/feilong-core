@@ -19,6 +19,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.DatePattern;
 
 /**
@@ -179,7 +181,8 @@ public final class CalendarUtil{
      *
      * @param calendar
      *            the calendar
-     * @return the calendar
+     * @return the calendar<br>
+     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      * @see Calendar#set(int, int)
      * @see Calendar#HOUR_OF_DAY
      * @see Calendar#MINUTE
@@ -189,6 +192,7 @@ public final class CalendarUtil{
      * @since 1.3.0
      */
     public static Calendar resetDayBegin(Calendar calendar){
+        Validate.notNull(calendar, "calendar can't be null!");
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -201,7 +205,8 @@ public final class CalendarUtil{
      *
      * @param calendar
      *            the calendar
-     * @return the calendar
+     * @return the calendar<br>
+     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      * @see Calendar#set(int, int)
      * @see Calendar#HOUR_OF_DAY
      * @see Calendar#MINUTE
@@ -210,6 +215,7 @@ public final class CalendarUtil{
      * @since 1.3.0
      */
     public static Calendar resetDayEnd(Calendar calendar){
+        Validate.notNull(calendar, "calendar can't be null!");
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
@@ -222,10 +228,12 @@ public final class CalendarUtil{
      *
      * @param calendar
      *            the calendar
-     * @return the calendar
+     * @return the calendar<br>
+     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      * @since 1.3.0
      */
     public static Calendar resetYearEnd(Calendar calendar){
+        Validate.notNull(calendar, "calendar can't be null!");
         calendar.set(Calendar.MONTH, Calendar.DECEMBER);
         calendar.set(Calendar.DAY_OF_MONTH, 31);
         calendar.set(Calendar.HOUR_OF_DAY, 23);
@@ -239,44 +247,14 @@ public final class CalendarUtil{
     /**
      * 获得阳历中月份的最大天数The days in the month of solar calendar(阳历).
      * 
-     * @param year
-     *            年
-     * @param month
-     *            月
-     * @return 最大的天数
-     * @see Calendar#getActualMaximum(int)
-     */
-    public static int getMaxDayOfMonth(int year,int month){
-        Calendar calendar = toCalendar(year, month, 1);
-        return getMaxDayOfMonth(calendar);
-    }
-
-    /**
-     * 获得阳历中月份的最大天数The days in the month of solar calendar(阳历).
-     * 
      * @param calendar
      *            calendar
-     * @return the max day of month
+     * @return the max day of month<br>
+     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      */
     public static int getMaxDayOfMonth(Calendar calendar){
+        Validate.notNull(calendar, "calendar can't be null!");
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-    }
-
-    /**
-     * 获得这一天在这一年中的偏移量 The offset days from New Year and the day when point out in solar calendar.
-     * 
-     * @param year
-     *            年
-     * @param month
-     *            月
-     * @param day
-     *            日
-     * @return 获得这一天在这一年中的偏移量
-     * @see com.feilong.core.date.DateUtil#getDayOfYear(Date)
-     */
-    public static int getDayOfYear(int year,int month,int day){
-        Calendar calendar = toCalendar(year, month, day);
-        return getFieldValue(calendar, Calendar.DAY_OF_YEAR);// - 1
     }
 
     /**
@@ -341,9 +319,11 @@ public final class CalendarUtil{
      * 
      * @param calendar
      *            calendar
-     * @return Date
+     * @return Date<br>
+     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      */
     public static Date toDate(Calendar calendar){
+        Validate.notNull(calendar, "calendar can't be null!");
         return calendar.getTime();
     }
 
@@ -378,14 +358,11 @@ public final class CalendarUtil{
 
     /**
      * 设置日历字段 YEAR、MONTH 和 DAY_OF_MONTH 的值.
-     * <p>
-     * 保留其他日历字段以前的值.如果不需要这样做,则先调用 {@link java.util.Calendar#clear()}
-     * </p>
      * 
      * @param year
      *            用来设置 YEAR 日历字段的值
      * @param month
-     *            用来设置 MONTH 日历字段的值.此处传递是我们口头意义上的月份, 内部自动进行-1的操作<br>
+     *            用来设置 MONTH 日历字段的值.此处传递是我们口头意义上的月份,内部自动进行-1的操作<br>
      *            比如 8月就传递 8 ; 9月就传9 <br>
      *            注:Java 的date Month 值是基于 0 的.例如,0 表示 January.
      * @param day

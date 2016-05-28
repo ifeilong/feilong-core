@@ -37,19 +37,6 @@ public class CalendarUtilTest extends BaseDateUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(CalendarUtilTest.class);
 
     /**
-     * Gets the max day of month.
-     * 
-     */
-    @Test
-    public void testGetMaxDayOfMonth(){
-        int year = 2012;
-        int month = 2;
-
-        Object[] objects = { year, month, CalendarUtil.getMaxDayOfMonth(year, month) };
-        LOGGER.debug("{} 年 {}月, 最大天:{}", objects);
-    }
-
-    /**
      * Gets the actual maximum.
      * 
      */
@@ -57,15 +44,6 @@ public class CalendarUtilTest extends BaseDateUtilTest{
     public void testGetActualMaximum(){
         Calendar calendar = CalendarUtil.toCalendar("2007-02-20", DatePattern.COMMON_DATE);
         LOGGER.debug("the param objects:{}", calendar.getActualMaximum(Calendar.DAY_OF_YEAR));
-    }
-
-    /**
-     * Test get day of year.
-     */
-    @Test
-    public void testGetDayOfYear(){
-        LOGGER.debug(CalendarUtil.getDayOfYear(2013, 9, 5) + "");
-        LOGGER.debug(CalendarUtil.getDayOfYear(2014, 12, 31) + "");
     }
 
     /**

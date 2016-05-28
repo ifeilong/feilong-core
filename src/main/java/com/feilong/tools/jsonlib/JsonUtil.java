@@ -338,7 +338,7 @@ public final class JsonUtil{
         return ClassUtils.isPrimitiveOrWrapper(klassClass) //
                         || String.class == klassClass //
                         || ObjectUtil.isArray(value)//XXX 数组一般 是可以转换的 
-                        || ClassUtil.isInstance(value, allowClassTypes)//
+                        || ClassUtil.isInstanceAnyClass(value, allowClassTypes)//
         ;
     }
 

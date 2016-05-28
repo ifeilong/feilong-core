@@ -220,8 +220,7 @@ public final class RegexUtil{
      *            </ul>
      * @return the matcher
      * @see Pattern#compile(String, int)
-     * @since 1.0.7
-     * @since 1.5.3 change private to public
+     * @since 1.5.3
      */
     public static Matcher getMatcher(String regexPattern,CharSequence input,int flags){
         Pattern pattern = Pattern.compile(regexPattern, flags);

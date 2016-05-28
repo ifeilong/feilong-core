@@ -230,7 +230,8 @@ public final class DateUtil{
      *
      * @param date
      *            任意时间
-     * @return 获得指定日期的 <code>00:00:00</code>
+     * @return 获得指定日期的 <code>00:00:00</code> <br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see org.apache.commons.lang3.time.DateUtils#truncate(Date, int)
      * @since 1.5.0
      */
@@ -249,7 +250,8 @@ public final class DateUtil{
      *
      * @param date
      *            任意时间
-     * @return 获得指定日期的 <code>23:59:59.999</code>
+     * @return 获得指定日期的 <code>23:59:59.999</code><br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @since 1.5.0
      */
     public static Date getLastDateOfThisDay(Date date){
@@ -273,7 +275,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 传入date 所在星期的第一天 <code>00:00:00.000</code> 到毫秒
+     * @return 传入date 所在星期的第一天 <code>00:00:00.000</code> 到毫秒<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayBegin(Calendar)
@@ -303,7 +306,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 传入date 所在星期的最后一天 <code>23:59:59.999</code> 到毫秒
+     * @return 传入date 所在星期的最后一天 <code>23:59:59.999</code> 到毫秒<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayEnd(Calendar)
@@ -330,7 +334,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return Date
+     * @return Date<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayBegin(Calendar)
@@ -358,7 +363,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return Date
+     * @return Date<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayEnd(Calendar)
@@ -382,7 +388,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return date
+     * @return date<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayBegin(Calendar)
@@ -426,7 +433,8 @@ public final class DateUtil{
      * @param week
      *            周几 星期天开始为1 依次2 3 4 5 6 7,建议使用 常量 {@link Calendar#SUNDAY}, {@link Calendar#MONDAY}, {@link Calendar#TUESDAY},
      *            {@link Calendar#WEDNESDAY}, {@link Calendar#THURSDAY}, {@link Calendar#FRIDAY}, {@link Calendar#SATURDAY}
-     * @return the first week of specify date year
+     * @return the first week of specify date year<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see Calendar#SUNDAY
      * @see Calendar#MONDAY
      * @see Calendar#TUESDAY
@@ -458,7 +466,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return Date
+     * @return Date<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayEnd(Calendar)
@@ -815,7 +824,6 @@ public final class DateUtil{
      * @param date
      *            任意时间
      * @return 获得任意时间中的天(在当年中)
-     * @see com.feilong.core.date.CalendarUtil#getDayOfYear(int, int, int)
      * @see #getFirstDateOfThisYear(Date)
      * @see #getIntervalDay(Date, Date)
      * @since 1.0.2

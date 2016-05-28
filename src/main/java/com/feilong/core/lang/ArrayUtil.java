@@ -165,7 +165,7 @@ public final class ArrayUtil{
      *            the generic type
      * @param array
      *            the array
-     * @return if null==array,return {@link java.util.Collections#emptyMap()}
+     * @return 如果 null==array,返回 {@link java.util.Collections#emptyMap()}
      * @since 1.0.8
      */
     public static <T> Map<T, List<T>> group(T[] array){
