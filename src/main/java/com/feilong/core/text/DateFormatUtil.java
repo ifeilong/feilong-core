@@ -70,13 +70,14 @@ public final class DateFormatUtil{
      *            the date
      * @param pattern
      *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
-     * @return the string
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则使用 {@link Locale#getDefault()},调用 {@link #format(Date, String, Locale)}
      * @see #format(Date, String, Locale)
      * @see com.feilong.core.date.DateUtil#date2String(Date, String)
      */
     public static String format(Date date,String pattern){
-        Validate.notNull(date, "date can't be null!");
-        Validate.notEmpty(pattern, "pattern can't be null/empty!");
         return format(date, pattern, Locale.getDefault());
     }
 
@@ -84,7 +85,7 @@ public final class DateFormatUtil{
      * format日期类型格式化成字符串类型.
      * 
      * <p>
-     * 适用于格式化时间,有 {@link Locale}的需求
+     * 适用于格式化时间,有{@link Locale}的需求
      * </p>
      * 
      * @param date
@@ -92,16 +93,18 @@ public final class DateFormatUtil{
      * @param pattern
      *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
      * @param locale
-     *            the locale
-     * @return the string
+     *            语言,如果是 null,那么使用 系统默认的{@link Locale#getDefault()}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则调用 {@link java.text.DateFormat#format(Date)}
      * @see SimpleDateFormat#format(Date)
      */
     public static String format(Date date,String pattern,Locale locale){
         Validate.notNull(date, "date can't be null!");
-        Validate.notEmpty(pattern, "pattern can't be null/empty!");
-        Validate.notNull(locale, "locale can't be null!");
+        Validate.notBlank(pattern, "pattern can't be null/empty!");
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, null == locale ? Locale.getDefault() : locale);
         return simpleDateFormat.format(date);
     }
 
@@ -124,12 +127,14 @@ public final class DateFormatUtil{
      *            the date string
      * @param pattern
      *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
-     * @return the date
+     * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则使用 {@link Locale#getDefault()},调用 {@link #parse(String, String, Locale)}
      * @see #parse(String, String, Locale)
      */
     public static Date parse(String dateString,String pattern){
-        Validate.notEmpty(dateString, "dateString can't be null/empty!");
-        Validate.notEmpty(pattern, "pattern can't be null/empty!");
         return parse(dateString, pattern, Locale.getDefault());
     }
 
@@ -141,18 +146,20 @@ public final class DateFormatUtil{
      * @param pattern
      *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
      * @param locale
-     *            the locale
-     * @return the date
-     * @see SimpleDateFormat
+     *            语言,如果是 null,那么使用 系统默认的{@link Locale#getDefault()}
+     * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则调用 {@link java.text.SimpleDateFormat#parse(String, ParsePosition)}
      * @see SimpleDateFormat#parse(String)
      * @see SimpleDateFormat#parse(String, ParsePosition)
      */
     public static Date parse(String dateString,String pattern,Locale locale){
-        Validate.notEmpty(dateString, "dateString can't be null/empty!");
-        Validate.notEmpty(pattern, "pattern can't be null/empty!");
-        Validate.notNull(locale, "locale can't be null!");
+        Validate.notBlank(dateString, "dateString can't be null/empty!");
+        Validate.notBlank(pattern, "pattern can't be null/empty!");
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, null == locale ? Locale.getDefault() : locale);
         ParsePosition parsePosition = new ParsePosition(0);
         return simpleDateFormat.parse(dateString, parsePosition);
     }

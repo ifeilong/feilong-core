@@ -229,7 +229,7 @@ public final class DateUtil{
      * </pre>
      *
      * @param date
-     *            the date
+     *            任意时间
      * @return 获得指定日期的 <code>00:00:00</code>
      * @see org.apache.commons.lang3.time.DateUtils#truncate(Date, int)
      * @since 1.5.0
@@ -248,7 +248,7 @@ public final class DateUtil{
      * </pre>
      *
      * @param date
-     *            the date
+     *            任意时间
      * @return 获得指定日期的 <code>23:59:59.999</code>
      * @since 1.5.0
      */
@@ -272,7 +272,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return 传入date 所在星期的第一天 <code>00:00:00.000</code> 到毫秒
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
@@ -302,7 +302,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            任意date
+     *            任意时间
      * @return 传入date 所在星期的最后一天 <code>23:59:59.999</code> 到毫秒
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
@@ -329,7 +329,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return Date
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
@@ -357,7 +357,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return Date
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
@@ -381,7 +381,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            指定日期
+     *            任意时间
      * @return date
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
@@ -457,7 +457,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            任意date
+     *            任意时间
      * @return Date
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
@@ -495,7 +495,7 @@ public final class DateUtil{
      * </blockquote>
      * 
      * @param date
-     *            指定时间
+     *            任意时间
      * @param year
      *            增加年份 可以是负数 表示前面多少
      * @return 指定日期 <code>date</code>,加减年份<br>
@@ -526,7 +526,7 @@ public final class DateUtil{
      * </blockquote>
      * 
      * @param date
-     *            指定时间
+     *            任意时间
      * @param month
      *            加减月份, <span style="color:red">可以是负数</span>,表示前面多少<br>
      *            比如-3 表示 3个月之前
@@ -560,7 +560,7 @@ public final class DateUtil{
      * </blockquote>
      * 
      * @param date
-     *            指定时间
+     *            任意时间
      * @param day
      *            需要加减的天数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 指定日期 <code>date</code>加减天数<br>
@@ -591,7 +591,7 @@ public final class DateUtil{
      * </blockquote>
      * 
      * @param date
-     *            指定时间
+     *            任意时间
      * @param week
      *            需要加减的星期数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 指定日期 <code>date</code>加减星期<br>
@@ -625,7 +625,7 @@ public final class DateUtil{
      * </p>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @param hour
      *            the hour,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 指定日期 <code>date</code>加减小时<br>
@@ -655,7 +655,7 @@ public final class DateUtil{
      * </blockquote>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @param minute
      *            the minute,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 指定日期 <code>date</code>加减分钟<br>
@@ -738,7 +738,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return 获得任意日期中的年份部分
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#YEAR
@@ -755,7 +755,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return 获得任意日期中的月份
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MONTH
@@ -791,7 +791,7 @@ public final class DateUtil{
      * 可以看出,如果从1月1号算开始第一周的话,这年第一周时间不够我们设置的7天,那么1月1号算上一年的星期
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return 指定日期 <code>date</code>年中的星期数
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#WEEK_OF_YEAR
@@ -813,7 +813,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return 获得任意时间中的天(在当年中)
      * @see com.feilong.core.date.CalendarUtil#getDayOfYear(int, int, int)
      * @see #getFirstDateOfThisYear(Date)
@@ -833,7 +833,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return 获得任意时间中的天
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#DAY_OF_MONTH
@@ -854,7 +854,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            the date
+     *            任意时间
      * @return 指定日期 <code>date</code>星期几
      * @see Calendar#SUNDAY
      * @see Calendar#MONDAY
@@ -878,7 +878,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            date
+     *            任意时间
      * @return 获得时间中的小时
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#HOUR_OF_DAY
@@ -902,7 +902,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            date
+     *            任意时间
      * @return 获得date 在它一年中的 小时数
      * @see #getFirstDateOfThisYear(Date)
      * @see #getIntervalHour(Date, Date)
@@ -921,7 +921,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            date
+     *            任意时间
      * @return 获得时间中的分钟
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MINUTE
@@ -938,7 +938,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            date
+     *            任意时间
      * @return 获得时间中的秒
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#SECOND
@@ -955,7 +955,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            date
+     *            任意时间
      * @return 获得指定日期 <code>date</code>时间在当天中的秒数
      * @see TimeInterval#SECONDS_PER_DAY
      * @see TimeInterval#SECONDS_PER_HOUR
@@ -975,7 +975,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            date
+     *            任意时间
      * @return 获得时间在当前小时中的秒数
      * @see TimeInterval#SECONDS_PER_MINUTE
      * @see TimeInterval#SECONDS_PER_HOUR
@@ -995,8 +995,9 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            date
-     * @return date.getTime()
+     *            任意时间
+     * @return {@link Date#getTime()} <br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static long getTime(Date date){
         Validate.notNull(date, "date can't be null!");
@@ -1018,7 +1019,10 @@ public final class DateUtil{
      *            任意时间
      * @param datePattern
      *            模式 {@link DatePattern}
-     * @return string
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则使用 {@link java.util.Locale#getDefault()},调用{@link java.text.DateFormat#format(Date)}
      * @see DateFormatUtil#format(Date, String)
      */
     public static String date2String(Date date,String datePattern){
@@ -1032,7 +1036,11 @@ public final class DateUtil{
      *            时间字符串
      * @param datePattern
      *            模式,时间字符串的模式{@link DatePattern}
-     * @return 将string字符串转换成date类型
+     * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则使用 {@link java.util.Locale#getDefault()},调用 {@link java.text.SimpleDateFormat#parse(String, java.text.ParsePosition)}
      * @see DateFormatUtil#parse(String, String)
      * @see org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)
      */
@@ -1259,7 +1267,7 @@ public final class DateUtil{
      * </blockquote>
      *
      * @param date
-     *            date
+     *            任意时间
      * @return 如果date 是null,抛出 {@link NullPointerException}
      * @see Calendar#getInstance()
      * @see GregorianCalendar
@@ -1328,14 +1336,15 @@ public final class DateUtil{
      *            the before
      * @param when
      *            the after
-     * @return true, if checks if is before
+     * @return 如果 <code>before</code> 是null,返回false<br>
+     *         如果 <code>when</code> 是null,抛出异常<br>
+     *         否则返回 <code>before.before(when)</code>
      * @see java.util.Date#before(Date)
      * @since 1.2.2
      */
     public static boolean isBefore(Date before,Date when){
-        Validate.notNull(before, "before can't be null!");
         Validate.notNull(when, "when can't be null!");
-        return before.before(when);
+        return null == before ? false : before.before(when);
     }
 
     /**
@@ -1345,14 +1354,15 @@ public final class DateUtil{
      *            the after
      * @param when
      *            the when
-     * @return true, if checks if is after
+     * @return 如果 <code>after</code> 是null,返回false<br>
+     *         如果 <code>when</code> 是null,抛出异常<br>
+     *         否则返回 <code>after.after(when)</code>
      * @see java.util.Date#after(Date)
      * @since 1.2.2
      */
     public static boolean isAfter(Date after,Date when){
-        Validate.notNull(after, "after can't be null!");
         Validate.notNull(when, "when can't be null!");
-        return after.after(when);
+        return null == after ? false : after.after(when);
     }
 
     // [end]
