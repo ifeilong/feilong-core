@@ -1071,13 +1071,15 @@ public final class DateUtil{
     }
 
     /**
-     * 两个时间相差的秒数.
+     * 两个时间相差的秒数(<span style="color:red">绝对值</span>).
      * 
      * @param date1
      *            the date1
      * @param date2
      *            the date2
-     * @return 相差的秒数
+     * @return 相差的秒数 <br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalSecond(long)
      * @since 1.0.2
@@ -1099,13 +1101,15 @@ public final class DateUtil{
     }
 
     /**
-     * 两个时间相差的的小时数.
+     * 两个时间相差的的小时数(<span style="color:red">绝对值</span>).
      * 
      * @param date1
      *            date1
      * @param date2
      *            date2
-     * @return 相差的小时数
+     * @return 相差的小时数<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalHour(long)
      */
@@ -1127,7 +1131,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得相差的星期数.
+     * 获得相差的星期数(<span style="color:red">绝对值</span>).
      *
      * @param date1
      *            the date1
@@ -1146,13 +1150,15 @@ public final class DateUtil{
     }
 
     /**
-     * 获得相差的星期数.
+     * 获得相差的星期数(<span style="color:red">绝对值</span>).
      *
      * @param date1
      *            the date1
      * @param date2
      *            the date2
-     * @return the interval week
+     * @return the interval week<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalWeek(long)
      * @since 1.2.1
      */
@@ -1177,11 +1183,7 @@ public final class DateUtil{
     //-******************getIntervalDay***************************************
 
     /**
-     * 计算两个时间相差的的天数.
-     * 
-     * <p>
-     * 不管date1是否早于还是晚于date2,均返回 <span style="color:red">绝对值</span>.
-     * </p>
+     * 计算两个时间相差的的天数 (<span style="color:red">绝对值</span>).
      * 
      * @param date1
      *            date1
@@ -1201,17 +1203,15 @@ public final class DateUtil{
     }
 
     /**
-     * 计算两个时间相差的的天数.
-     * 
-     * <p>
-     * 不管date1是否早于还是晚于date2,均返回 <span style="color:red">绝对值</span>.
-     * </p>
+     * 计算两个时间相差的的天数(<span style="color:red">绝对值</span>).
      * 
      * @param date1
      *            date1
      * @param date2
      *            date2
-     * @return 相差的天数
+     * @return 相差的天数<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalDay(long)
      */
@@ -1233,21 +1233,21 @@ public final class DateUtil{
     }
 
     /**
-     * 两个时间相差的毫秒数.
-     * 
-     * <p>
-     * 不管date1是否早于还是晚于date2,均返回 <span style="color:red">绝对值</span>.
-     * </p>
+     * 两个时间相差的毫秒数(<span style="color:red">绝对值</span>).
      * 
      * @param date1
      *            date1
      * @param date2
      *            date2
-     * @return 两个时间相差的毫秒数,不管date1是否早于还是晚于date2,均返回绝对值
+     * @return 两个时间相差的毫秒数,不管date1是否早于还是晚于date2,均返回绝对值<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getTime(Date)
      * @see Math#abs(long)
      */
     public static long getIntervalTime(Date date1,Date date2){
+        Validate.notNull(date1, "date1 can't be null!");
+        Validate.notNull(date2, "date2 can't be null!");
         return Math.abs(getTime(date2) - getTime(date1));
     }
 
@@ -1291,37 +1291,37 @@ public final class DateUtil{
     // [start]isBefore 时间早晚
 
     /**
-     * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 <code>dateBefore</code> 是否早于 <code>dateAfter</code>.
+     * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 指定日期<code>dateString</code>是否早于 <code>whenDateString</code>.
      * 
      * <pre class="code">
-     * DateUtil.isBefore("2011-05-01", "2011-04-01", DatePattern.COMMON_DATE) = true
+     * DateUtil.isBefore("2011-05-01", "2011-04-01", DatePattern.COMMON_DATE) = false
      * </pre>
      *
-     * @param dateBefore
-     *            the date before
-     * @param dateAfter
-     *            the date after
+     * @param dateString
+     *            指定日期
+     * @param whenDateString
+     *            对照日期
      * @param datePattern
      *            日期pattern {@link DatePattern}
-     * @return 如果dateBefore 早于 dateAfter返回 true
+     * @return 如果dateString 早于 whenDateString 返回 true
      * @see #string2Date(String, String)
      * @see #isBefore(Date, String, String)
      */
-    public static boolean isBefore(String dateBefore,String dateAfter,String datePattern){
-        Date before = string2Date(dateBefore, datePattern);
-        return isBefore(before, dateAfter, datePattern);
+    public static boolean isBefore(String dateString,String whenDateString,String datePattern){
+        Date before = string2Date(dateString, datePattern);
+        return isBefore(before, whenDateString, datePattern);
     }
 
     /**
-     * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 <code>dateBefore</code>是否早于 <code>dateAfter</code>.
+     * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 指定日期<code>date</code>是否早于 <code>whenDateString</code>.
      * 
      * <pre class="code">
-     * DateUtil.isBefore("2011-05-01", "2011-04-01", DatePattern.COMMON_DATE) = true
+     * DateUtil.isBefore("2011-05-01", "2011-04-01", DatePattern.COMMON_DATE) = false
      * </pre>
      * 
-     * @param dateBefore
-     *            dateBefore
-     * @param dateAfter
+     * @param date
+     *            指定日期
+     * @param whenDateString
      *            dateAfter
      * @param datePattern
      *            日期pattern {@link DatePattern}
@@ -1330,45 +1330,45 @@ public final class DateUtil{
      * @see #isBefore(String, String, String)
      * @see Date#before(Date)
      */
-    public static boolean isBefore(Date dateBefore,String dateAfter,String datePattern){
-        Date after = string2Date(dateAfter, datePattern);
-        return isBefore(dateBefore, after);
+    public static boolean isBefore(Date date,String whenDateString,String datePattern){
+        Date after = string2Date(whenDateString, datePattern);
+        return isBefore(date, after);
     }
 
     /**
-     * 判断 <code>before</code>是否 在 <code>when</code>时间之前.
+     * 判断指定日期 <code>date</code>是否 在 <code>whenDate</code>时间之前.
      *
-     * @param before
-     *            the before
-     * @param when
-     *            the after
-     * @return 如果 <code>before</code> 是null,返回false<br>
-     *         如果 <code>when</code> 是null,抛出异常<br>
-     *         否则返回 <code>before.before(when)</code>
+     * @param date
+     *            指定日期
+     * @param whenDate
+     *            比照日期
+     * @return 如果 <code>date</code> 是null,返回false<br>
+     *         如果 <code>whenDate</code> 是null,抛出异常<br>
+     *         否则返回 <code>date.before(when)</code>
      * @see java.util.Date#before(Date)
      * @since 1.2.2
      */
-    public static boolean isBefore(Date before,Date when){
-        Validate.notNull(when, "when can't be null!");
-        return null == before ? false : before.before(when);
+    public static boolean isBefore(Date date,Date whenDate){
+        Validate.notNull(whenDate, "whenDate can't be null!");
+        return null == date ? false : date.before(whenDate);
     }
 
     /**
-     * 判断 <code>after</code>是否 在 <code>when</code>时间之后.
+     * 判断指定日期 <code>date</code>是否 在 <code>whenDate</code>时间之后.
      *
-     * @param after
-     *            the after
-     * @param when
-     *            the when
-     * @return 如果 <code>after</code> 是null,返回false<br>
+     * @param date
+     *            指定的日期
+     * @param whenDate
+     *            比照日期
+     * @return 如果 <code>date</code> 是null,返回false<br>
      *         如果 <code>when</code> 是null,抛出异常<br>
-     *         否则返回 <code>after.after(when)</code>
+     *         否则返回 <code>date.after(when)</code>
      * @see java.util.Date#after(Date)
      * @since 1.2.2
      */
-    public static boolean isAfter(Date after,Date when){
-        Validate.notNull(when, "when can't be null!");
-        return null == after ? false : after.after(when);
+    public static boolean isAfter(Date date,Date whenDate){
+        Validate.notNull(whenDate, "whenDate can't be null!");
+        return null == date ? false : date.after(whenDate);
     }
 
     // [end]
@@ -1408,7 +1408,7 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            需要判断的日期
+     *            指定日期
      * @param beginTimeDate
      *            the begin time date
      * @param endTimeDate
