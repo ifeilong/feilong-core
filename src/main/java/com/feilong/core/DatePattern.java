@@ -395,7 +395,7 @@ public final class DatePattern{
     public static final String HH                                           = "HH";
 
     /**
-     * 系统 {@link Date#toString()} 使用的格式,并且 {@link java.util.Locale#US}. <span style="color:green"><code>{@value}</code></span>.
+     * 系统 {@link Date#toString()}使用的格式,并且{@link java.util.Locale#US} <span style="color:green"><code>{@value}</code></span>.
      * 
      * <p>
      * example: <span style="color:green">星期五 十二月 27 22:13:55 CST 2013</span>
