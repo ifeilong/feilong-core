@@ -925,8 +925,8 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
-        Validate.notEmpty(keyPropertyName, "keyPropertyName can't be null/empty!");
-        Validate.notEmpty(valuePropertyName, "valuePropertyName can't be null/empty!");
+        Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
+        Validate.notBlank(valuePropertyName, "valuePropertyName can't be null/empty!");
 
         Map<K, V> map = new LinkedHashMap<K, V>();
 
@@ -1455,7 +1455,7 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
+     *         如果 propertyName isNullOrEmpty,抛出 {@link NullPointerException}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.lang.ArrayUtil#group(Object[], String)
      * @see #group(Collection, String, Predicate)
@@ -1531,7 +1531,7 @@ public final class CollectionsUtil{
      * @param includePredicate
      *            the include predicate
      * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         如果 propertyName isNullOrEmpty,will throw {@link NullPointerException}<br>
+     *         如果 propertyName isNullOrEmpty,抛出 {@link NullPointerException}<br>
      *         如果没有任何element match <code>includePredicate</code>,,返回 empty LinkedHashMap<br>
      *         如果 includePredicate 是null,那么以所有的元素进行分组
      * @see PropertyUtil#getProperty(Object, String)
@@ -1617,7 +1617,7 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
+     *         如果 propertyName isNullOrEmpty,抛出 {@link NullPointerException}
      * @see #group(Collection, String)
      * @since 1.0.8
      */
@@ -1664,7 +1664,7 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
+     *         如果 propertyName isNullOrEmpty,抛出 {@link NullPointerException}
      * @see #groupCount(Collection , Predicate, String)
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
@@ -1690,8 +1690,8 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
+     * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     *         如果 <code>propertyName</code> isNullOrEmpty,抛出 {@link NullPointerException}
      * @since 1.2.0
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate<O> includePredicate,String propertyName){

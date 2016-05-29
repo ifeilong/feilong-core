@@ -182,14 +182,15 @@ public final class URLUtil{
      *
      * @param filePathName
      *            字符串路径
-     * @return url
+     * @return 如果 <code>filePathName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>filePathName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.File#toURI()
      * @see java.net.URI#toURL()
      * @see "org.apache.commons.io.FileUtils#toURLs(File[])"
      * @since 1.4.0
      */
     public static URL getFileURL(String filePathName){
-        Validate.notEmpty(filePathName, "filePathName can't be null/empty!");
+        Validate.notBlank(filePathName, "filePathName can't be null/empty!");
         File file = new File(filePathName);
         try{
             // file.toURL() 已经过时,它不会自动转义 URL 中的非法字符

@@ -186,11 +186,14 @@ public final class URIUtil{
      *
      * @param uri
      *            the uri
-     * @return {@link java.net.URI#URI(String)}
+     * @return {@link java.net.URI#URI(String)} <br>
+     *         如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see java.net.URI#URI(String)
      * @since 1.3.0
      */
     public static URI newURI(String uri){
+        Validate.notBlank(uri, "uri can't be blank!");
         try{
             return new URI(uri);
         }catch (URISyntaxException e){
@@ -216,8 +219,9 @@ public final class URIUtil{
      * @param charsetType
      *            何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return 如果 isNullOrEmpty(uri),返回 null;<br>
-     *         if Exception,throw URIParseException
+     * @return 如果 <code>uriString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uriString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 Exception,抛出 {@link URIParseException}
      * @see URI#create(String)
      * @see #encodeUri(String, String)
      * @see <a
@@ -268,7 +272,8 @@ public final class URIUtil{
      * @param charsetType
      *            何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return the string
+     * @return 如果 <code>uriString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>uriString</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">
      *      java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
@@ -277,7 +282,7 @@ public final class URIUtil{
      * @since 1.4.0
      */
     public static String encodeUri(String uriString,String charsetType){
-        Validate.notEmpty(uriString, "uriString can't be null/empty!");
+        Validate.notBlank(uriString, "uriString can't be null/empty!");
         LOGGER.debug("in uriString:[{}],charsetType:{}", uriString, charsetType);
 
         if (!hasQueryString(uriString)){
@@ -328,7 +333,8 @@ public final class URIUtil{
      * 
      * @param uriString
      *            the uri
-     * @return 如果传入的参数 <code>uriString</code> isNullOrEmpty,或者 <code>uriString</code> 不含有?,则返回 {@link StringUtils#EMPTY},<br>
+     * @return 如果传入的参数 <code>uriString</code> isNullOrEmpty,返回 {@link StringUtils#EMPTY};<br>
+     *         如果传入的参数 <code>uriString</code> 不含有?,返回 {@link StringUtils#EMPTY};<br>
      *         否则截取第一个出现的?后面内容返回
      * @since 1.4.0
      */
@@ -346,12 +352,11 @@ public final class URIUtil{
      *
      * @param uriString
      *            the uri string
-     * @return true, if checks for query string
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}
      * @since 1.4.0
      */
     // XXX 有待严谨
     public static boolean hasQueryString(String uriString){
-        // 判断url中是否含有? 
         return Validator.isNullOrEmpty(uriString) ? false : -1 != uriString.indexOf(URIComponents.QUESTIONMARK);
     }
 
@@ -368,7 +373,8 @@ public final class URIUtil{
      *            字符串
      * @param charsetType
      *            使用的编码,see {@link CharsetType}
-     * @return 原来的字符串,if isNullOrEmpty(str) return ""
+     * @return 原来的字符串<br>
+     *         如果 isNullOrEmpty(str),返回 {@link StringUtils#EMPTY}
      * @see "org.apache.commons.codec.net.URLCodec#encode(String, String)"
      */
     public static String decodeISO88591String(String str,String charsetType){
@@ -407,7 +413,7 @@ public final class URIUtil{
      * @param charsetType
      *            charsetType {@link CharsetType}
      * @return {@link java.net.URLEncoder#encode(String, String)}<br>
-     *         if isNullOrEmpty(charsetType), 原样返回 value<br>
+     *         \* 如果 isNullOrEmpty(charsetType), 原样返回 value<br>
      * @see URLEncoder#encode(String, String)
      * @see CharsetType
      */
@@ -457,7 +463,7 @@ public final class URIUtil{
      * @param charsetType
      *            charsetType {@link CharsetType}
      * @return the newly {@link java.net.URLDecoder#decode(String, String)} 解码之后的值<br>
-     *         if isNullOrEmpty(charsetType) ,原样返回 value<br>
+     *         如果 isNullOrEmpty(charsetType) ,原样返回 value<br>
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
      *      URLDecoder: Incomplete trailing escape (%) pattern</a>
      * 

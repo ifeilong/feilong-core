@@ -573,7 +573,7 @@ public final class MapUtil{
      * @return
      *         <ul>
      *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}</li>
-     *         <li>如果 <code>extractPropertyName</code> 是null或者empty,throw NullPointerException</li>
+     *         <li>如果 <code>extractPropertyName</code> 是null或者empty,抛出 NullPointerException</li>
      *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
      * @since 1.3.0
@@ -634,7 +634,7 @@ public final class MapUtil{
      * @return
      *         <ul>
      *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}</li>
-     *         <li>如果 <code>extractPropertyName</code> 是null或者empty,throw NullPointerException</li>
+     *         <li>如果 <code>extractPropertyName</code> 是null或者empty,抛出 NullPointerException</li>
      *         <li>如果 <code>includeKeys</code> 是null或者empty, then will extract map total keys</li>
      *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
@@ -645,7 +645,7 @@ public final class MapUtil{
             return Collections.emptyMap();
         }
 
-        Validate.notEmpty(extractPropertyName, "extractPropertyName can't be null/empty!");
+        Validate.notBlank(extractPropertyName, "extractPropertyName can't be null/empty!");
         //如果excludeKeys是null,那么抽取所有的key
         K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(map.keySet(), keysClass) : includeKeys;
 
@@ -698,7 +698,7 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 map 是null,throw NullPointerException
+     * @return 如果 map 是null,抛出 NullPointerException
      * @see java.util.TreeMap#TreeMap(Map)
      * @since 1.2.0
      */
@@ -741,7 +741,7 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 map是 null,throw NullPointerException
+     * @return 如果 map是 null,抛出 NullPointerException
      * @see ReverseComparator#ReverseComparator(Comparator)
      * @see PropertyComparator#PropertyComparator(String)
      * @since 1.2.0

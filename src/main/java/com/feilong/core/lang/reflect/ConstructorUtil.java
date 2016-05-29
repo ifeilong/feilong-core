@@ -107,14 +107,16 @@ public final class ConstructorUtil{
      *            类得名称,比如 com.feilong.test.User
      * @param parameterValues
      *            构造函数的参数
-     * @return 新建的实例,如果结果不能转成T 会抛出异常
+     * @return 新建的实例,如果结果不能转成T 会抛出异常<br>
+     *         如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>className</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see ClassUtil#loadClass(String)
      * @see #newInstance(Class, Object...)
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     @SuppressWarnings("unchecked")
     public static <T> T newInstance(String className,Object...parameterValues){
-        Validate.notEmpty(className, "className can't be null/empty!");
+        Validate.notBlank(className, "className can't be null/empty!");
 
         try{
             // 装载连接初始化类

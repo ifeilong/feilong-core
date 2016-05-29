@@ -198,7 +198,8 @@ public final class ResourceBundleUtil{
      *            配置文件的包+类全名(不要尾缀)
      * @param key
      *            Properties配置文件键名
-     * @return 该键的值<br>
+     * @return 如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果配置文件中,
      *         <ul>
      *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
@@ -207,7 +208,8 @@ public final class ResourceBundleUtil{
      * @see java.util.ResourceBundle#getString(String)
      */
     public static String getValue(ResourceBundle resourceBundle,String key){
-        Validate.notEmpty(key, "key can't be null/empty!");
+        Validate.notBlank(key, "key can't be null/empty!");
+
         if (!resourceBundle.containsKey(key)){
             LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
             return StringUtils.EMPTY;

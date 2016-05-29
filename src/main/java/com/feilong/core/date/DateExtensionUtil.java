@@ -15,6 +15,8 @@
  */
 package com.feilong.core.date;
 
+import static com.feilong.core.date.DateUtil.date2String;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -136,18 +138,18 @@ public final class DateExtensionUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * getIntervalDayList("2011-03-5 23:31:25.456", "2011-03-10 01:30:24.895", DatePattern.commonWithTime)
+     * DateExtensionUtil.getIntervalDayList("2011-03-5 23:31:25.456", "2011-03-10 01:30:24.895", DatePattern.commonWithTime)
      * </pre>
      * 
      * 返回:
      * 
      * <pre class="code">
-    2011-03-05 00:00:00
-    2011-03-06 00:00:00
-    2011-03-07 00:00:00
-    2011-03-08 00:00:00
-    2011-03-09 00:00:00
-    2011-03-10 00:00:00
+     * 2011-03-05 00:00:00
+     * 2011-03-06 00:00:00
+     * 2011-03-07 00:00:00
+     * 2011-03-08 00:00:00
+     * 2011-03-09 00:00:00
+     * 2011-03-10 00:00:00
      * </pre>
      * 
      * </blockquote>
@@ -201,13 +203,13 @@ public final class DateExtensionUtil{
      * 返回:
      * 
      * <pre class="code">
-     ["2011-03-05 00:00:00",
-      "2011-03-06 00:00:00",
-      "2011-03-07 00:00:00",
-      "2011-03-08 00:00:00",
-      "2011-03-09 00:00:00",
-      "2011-03-10 00:00:00"
-      ]
+     * ["2011-03-05 00:00:00",
+     * "2011-03-06 00:00:00",
+     * "2011-03-07 00:00:00",
+     * "2011-03-08 00:00:00",
+     * "2011-03-09 00:00:00",
+     * "2011-03-10 00:00:00"
+     * ]
      * </pre>
      * 
      * </blockquote>
@@ -329,7 +331,6 @@ public final class DateExtensionUtil{
      * 
      * </blockquote>
      * 
-     * 
      * @param week
      *            周几<br>
      *            星期天开始为1 依次2 3 4 5 6 7,<br>
@@ -378,19 +379,25 @@ public final class DateExtensionUtil{
      * 如果小时间隔等于0,如果分钟间隔为0,则显示间隔秒 + "秒钟前"<br>
      * 如果小时间隔等于0,如果分钟间隔不为0,则显示间隔分钟 + "分钟前"<br>
      * </li>
+     * 
      * <li>如果时间差为0天,<br>
      * 如果小时间隔不等于0,如果inDate的day 和current的day 相等,则显示space_hour + "小时前"<br>
      * 如果小时间隔不等于0,如果inDate的day 和current的day不相等,则显示"昨天 " + date2String(inDate, "HH:mm")<br>
      * </li>
+     * 
      * <li>如果时间差为1天,且inDate的day+1和currentDate的day 相等,则显示"昨天 HH:mm"</li>
      * <li>如果时间差为1天,且inDate的day+1和currentDate的day 不相等,则显示"前天 HH:mm"</li>
      * <li>如果时间差为2天,且inDate的day+2和currentDate的day 相等,则显示"前天 HH:mm"</li>
      * <li>如果时间差为2天,且inDate的day+2和currentDate的day 不相等,<br>
      * 1).如果inDate的year和currentDate的year相等,则显示"MM-dd HH:mm"<br>
-     * 2).如果inDate的year和currentDate的year不相等,则显示"yyyy-MM-dd HH:mm"</li>
+     * 2).如果inDate的year和currentDate的year不相等,则显示"yyyy-MM-dd HH:mm"
+     * </li>
+     * 
      * <li>如果时间差大于2天<br>
      * 1).如果inDate的year和currentDate的year相等,则显示"MM-dd HH:mm"<br>
-     * 2).如果inDate的year和currentDate的year不相等,则显示"yyyy-MM-dd HH:mm"</li>
+     * 2).如果inDate的year和currentDate的year不相等,则显示"yyyy-MM-dd HH:mm"
+     * </li>
+     * 
      * </ul>
      * 
      * @param inDate
@@ -430,8 +437,8 @@ public final class DateExtensionUtil{
             case 2: // 间隔2天
                 return doWithTwoDaysInterval(inDate, nowDate, isSameYear);
             default://spaceDay > 2     // 间隔大于2天
-                return isSameYear ? DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
-                                : DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+                return isSameYear ? date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
+                                : date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
         }
     }
 
@@ -456,7 +463,7 @@ public final class DateExtensionUtil{
 
         List<String> stringList = new ArrayList<String>();
         for (Date date : dateList){
-            stringList.add(DateUtil.date2String(date, datePattern));
+            stringList.add(date2String(date, datePattern));
         }
         return stringList;
     }
@@ -472,8 +479,8 @@ public final class DateExtensionUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalForView(13516)    return 13秒516毫秒
-     * DateExtensionUtil.getIntervalForView(0)        return 0
+     * DateExtensionUtil.getIntervalForView(13516)    = 13秒516毫秒
+     * DateExtensionUtil.getIntervalForView(0)        = 0
      * 
      * 自动增加 天,小时,分钟,秒,毫秒中文文字
      * </pre>
@@ -589,8 +596,8 @@ public final class DateExtensionUtil{
      */
     private static String doWithOneDayInterval(Date inDate,Date nowDate){
         return DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)
-                        ? YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND)
-                        : THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                        ? YESTERDAY + " " + date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND)
+                        : THEDAY_BEFORE_YESTERDAY + " " + date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
     }
 
     /**
@@ -607,10 +614,10 @@ public final class DateExtensionUtil{
      */
     private static String doWithTwoDaysInterval(Date inDate,Date nowDate,boolean isSameYear){
         if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
-            return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+            return THEDAY_BEFORE_YESTERDAY + " " + date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
         }
-        return isSameYear ? DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
-                        : DateUtil.date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+        return isSameYear ? date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
+                        : date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
     /**
@@ -636,6 +643,6 @@ public final class DateExtensionUtil{
         // 当前时间的日
         int currentDayOfMonth = DateUtil.getDayOfMonth(nowDate);
         return inDay == currentDayOfMonth ? spaceHour + HOUR + "前"
-                        : YESTERDAY + " " + DateUtil.date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                        : YESTERDAY + " " + date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
     }
 }
