@@ -308,7 +308,7 @@ public final class MapUtil{
      *            指定特定的key
      * @return
      *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,return null;</li>
+     *         <li>如果 <code>map</code> 是null或者empty,返回 null;</li>
      *         <li>如果 <code>keys</code> 是null或者empty,返回<code>map</code>所有value的最小值</li>
      *         <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
      *         <li>如果 keys 中的所有的key 都不在 map 中出现 ,那么返回null</li>
@@ -367,8 +367,8 @@ public final class MapUtil{
      *            如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
      * @return
      *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,return {@link Collections#emptyMap()};</li>
-     *         <li>如果 <code>keys</code> 是null或者empty,return <code>map</code></li>
+     *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};</li>
+     *         <li>如果 <code>keys</code> 是null或者empty,返回 <code>map</code></li>
      *         <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
      *         </ul>
      */
@@ -440,7 +440,7 @@ public final class MapUtil{
      *            the keys
      * @return
      *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,return {@link Collections#emptyMap()};</li>
+     *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};</li>
      *         <li>如果 <code>excludeKeys</code> 是null或者empty, return <code>map</code></li>
      *         </ul>
      * 
@@ -572,7 +572,7 @@ public final class MapUtil{
      *            map key 的class 类型
      * @return
      *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,return {@link Collections#emptyMap()}</li>
+     *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}</li>
      *         <li>如果 <code>extractPropertyName</code> 是null或者empty,throw NullPointerException</li>
      *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
      *         </ul>
@@ -633,7 +633,7 @@ public final class MapUtil{
      *            map key 的class 类型
      * @return
      *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,return {@link Collections#emptyMap()}</li>
+     *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}</li>
      *         <li>如果 <code>extractPropertyName</code> 是null或者empty,throw NullPointerException</li>
      *         <li>如果 <code>includeKeys</code> 是null或者empty, then will extract map total keys</li>
      *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>

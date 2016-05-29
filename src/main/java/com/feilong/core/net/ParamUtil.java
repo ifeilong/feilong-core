@@ -840,7 +840,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 isNullOrEmpty(appendMap) ,return {@link StringUtils#EMPTY}
+     * @return 如果 isNullOrEmpty(appendMap) ,返回 {@link StringUtils#EMPTY}
      * @see #toQueryStringUseArrayValueMap(Map)
      * @since 1.4.0
      */
@@ -1046,7 +1046,7 @@ public final class ParamUtil{
      * @return
      *         <ul>
      *         <li>如果 (Validator.isNullOrEmpty(<code>singleValueMap</code>)),抛出异常;</li>
-     *         <li>如果 (Validator.isNullOrEmpty(<code>includeKeys</code>)),return {@link StringUtils#EMPTY};</li>
+     *         <li>如果 (Validator.isNullOrEmpty(<code>includeKeys</code>)),返回 {@link StringUtils#EMPTY};</li>
      *         <li>否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;(如果 <code>singleValueMap</code>指定key的值是null,会使用
      *         {@link StringUtils#defaultString(String)} 转成{@link StringUtils#EMPTY}拼接)</li>
      *         </ul>
@@ -1123,7 +1123,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 Validator.isNullOrEmpty(arrayValueMap),return emptyMap
+     * @return 如果 Validator.isNullOrEmpty(arrayValueMap),返回 emptyMap
      */
     private static Map<String, String[]> toSafeArrayValueMap(Map<String, String[]> arrayValueMap,String charsetType){
         if (Validator.isNullOrEmpty(arrayValueMap)){

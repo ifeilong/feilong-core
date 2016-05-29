@@ -535,7 +535,7 @@ public final class ConvertUtil{
      *            collection
      * @param arrayComponentType
      *            数组组件类型的 Class
-     * @return 数组,if null == collection or arrayClass == null,return NullPointerException
+     * @return 数组,if null == collection or arrayClass == null,返回 NullPointerException
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
      * @see java.util.Collection#toArray()

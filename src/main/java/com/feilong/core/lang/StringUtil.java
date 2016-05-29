@@ -335,7 +335,7 @@ public final class StringUtil{
      *            要被替换的 char 值序列
      * @param replacement
      *            char 值的替换序列
-     * @return 如果 null==content,return {@link StringUtils#EMPTY} <br>
+     * @return 如果 null==content,返回 {@link StringUtils#EMPTY} <br>
      *         所有匹配字面值目标序列的子字符串
      * @see java.lang.String#replace(CharSequence, CharSequence)
      * @since jdk 1.5
@@ -586,11 +586,11 @@ public final class StringUtil{
      *            负数表示向前,整数表示向后,0表示依旧从自己的位置开始算起
      * @return
      *         <ul>
-     *         <li>如果 isNullOrEmpty(text),return null</li>
-     *         <li>如果 isNullOrEmpty(beginString),return null</li>
-     *         <li>如果 text.indexOf(beginString)==-1,return null</li>
-     *         <li>{@code  beginIndex + shift > text.length()},return null</li>
-     *         <li>else,return text.substring(beginIndex + shift)</li>
+     *         <li>如果 isNullOrEmpty(text),返回 null</li>
+     *         <li>如果 isNullOrEmpty(beginString),返回 null</li>
+     *         <li>如果 text.indexOf(beginString)==-1,返回 null</li>
+     *         <li>{@code  beginIndex + shift > text.length()},返回 null</li>
+     *         <li>else,返回 text.substring(beginIndex + shift)</li>
      *         </ul>
      * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
      */
@@ -636,11 +636,8 @@ public final class StringUtil{
      *            开始的字符串,null表示从开头开始截取
      * @param endString
      *            结束的字符串
-     * @return
-     *         <ul>
-     *         <li>Validator.isNullOrEmpty(text),return null;</li>
-     *         <li>Validator.isNullOrEmpty(startString),return text.substring(0, text.indexOf(endString))</li>
-     *         </ul>
+     * @return 如果Validator.isNullOrEmpty(text),返回 null;<br>
+     *         如果Validator.isNullOrEmpty(startString),返回 text.substring(0, text.indexOf(endString))
      * @see org.apache.commons.lang3.StringUtils#substringBetween(String, String, String)
      */
     public static String substring(final String text,final String startString,final String endString){
@@ -1114,7 +1111,7 @@ public final class StringUtil{
      *            the format
      * @param args
      *            the args
-     * @return 如果 null ==format,return {@link StringUtils#EMPTY},else return {@link String#format(String, Object...)}
+     * @return 如果 null ==format,返回 {@link StringUtils#EMPTY},else return {@link String#format(String, Object...)}
      * @see java.util.Formatter
      * @see String#format(String, Object...)
      * @see String#format(java.util.Locale, String, Object...)
