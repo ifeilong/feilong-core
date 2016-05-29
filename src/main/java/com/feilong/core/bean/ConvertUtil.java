@@ -491,8 +491,8 @@ public final class ConvertUtil{
      *            the generic type
      * @param enumeration
      *            the enumeration
-     * @return 如果 Validator.isNullOrEmpty(enumeration), return {@link Collections#emptyList()},该emptyList不可以操作<br>
-     *         else return {@link Collections#list(Enumeration)}
+     * @return 如果 <code>enumeration</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         否则返回 {@link Collections#list(Enumeration)}
      * @see Collections#emptyList()
      * @see Collections#EMPTY_LIST
      * @see Collections#list(Enumeration)
@@ -506,9 +506,11 @@ public final class ConvertUtil{
 
     /**
      * 数组转成 ({@link java.util.ArrayList ArrayList}),此方法返回的list可以进行add等操作.
+     * 
      * <p>
-     * 注意 :{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
-     * Collection#add(Object)}等方法<br>
+     * 注意 :如果直接使用{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
+     * Collection#add(Object)}等方法,如果使用返回的list执行list.add("c");操作的话会导致异常!<br>
+     * 
      * 因此,使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回
      * </p>
      * 
@@ -517,17 +519,43 @@ public final class ConvertUtil{
      * @param arrays
      *            T数组
      * @return 数组转成 List(ArrayList)<br>
-     *         if Validator.isNullOrEmpty(arrays), return null,else return {@code new ArrayList<T>(Arrays.asList(arrays));}
+     *         如果 <code>arrays</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         否则返回 {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
      */
     @SuppressWarnings("unchecked")
-    public static <T> List<T> toList(T[] arrays){
-        //如果直接使用 Arrays.asList(arrays)方法 返回的是Arrays类的内部类的对象ArrayList,没有实现AbstractList类的add方法,如果 strList.add("c");导致抛异常! 
-        return null == arrays ? (List<T>) Collections.emptyList() : new ArrayList<T>(Arrays.asList(arrays));
+    public static <T> List<T> toList(T...arrays){
+        return Validator.isNullOrEmpty(arrays) ? (List<T>) Collections.emptyList() : new ArrayList<T>(Arrays.asList(arrays));
     }
 
     /**
-     * 集合转成数组.
+     * 将集合转成数组.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <String>} testList = new ArrayList{@code <String>}();
+     * testList.add("xinge");
+     * testList.add("feilong");
+     * 
+     * String[] array = ConvertUtil.toArray(testList, String.class);
+     * LOGGER.info(JsonUtil.format(array));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [
+     * "xinge",
+     * "feilong"
+     * ]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -535,7 +563,8 @@ public final class ConvertUtil{
      *            collection
      * @param arrayComponentType
      *            数组组件类型的 Class
-     * @return 数组,if null == collection or arrayClass == null,返回 NullPointerException
+     * @return 如果 <code>collection</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>arrayComponentType</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
      * @see java.util.Collection#toArray()
@@ -646,7 +675,17 @@ public final class ConvertUtil{
 
     /**
      * 任意的数组转成Integer 数组.
-     *
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toIntegers("1,2,3")                        = [1,2,3]
+     * ConvertUtil.toIntegers(new String[] { "1", "2", "3" }) = [1,2,3]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param toBeConvertedValue
      *            the to be converted value
      * @return the integer[]
@@ -664,8 +703,8 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-    ConvertUtil.toLongs("1,2,3")  result [1,2,3]
-    ConvertUtil.toLongs(new String[] { "1", "2", "3" })  result [1,2,3]
+     * ConvertUtil.toLongs("1,2,3")                        = [1,2,3]
+     * ConvertUtil.toLongs(new String[] { "1", "2", "3" }) = [1,2,3]
      * </pre>
      * 
      * </blockquote>

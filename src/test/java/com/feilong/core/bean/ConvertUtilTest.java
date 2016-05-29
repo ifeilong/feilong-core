@@ -174,10 +174,10 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToIntegers(){
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(null)));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", "2", "3" })));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", null, "2", "3" })));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers("1,2,3")));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(null), 0, 0));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", "2", "3" }), 0, 0));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", null, "2", "3" }), 0, 0));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers("1,2,3"), 0, 0));
     }
 
     /**
@@ -336,7 +336,6 @@ public class ConvertUtilTest{
     @Test
     public void toArray(){
         List<String> testList = new ArrayList<String>();
-        //testList.add(null);
         testList.add("xinge");
         testList.add("feilong");
 
@@ -371,11 +370,9 @@ public class ConvertUtilTest{
         User user2 = new User();
         user2.setId(2L);
 
-        User[] users = { user1, user2 };
-        LOGGER.info(JsonUtil.format(ConvertUtil.toList(users)));
+        LOGGER.info(JsonUtil.format(ConvertUtil.toList(user1, user2)));
 
-        users = null;
-        LOGGER.info(JsonUtil.format(ConvertUtil.toList(users)));
+        LOGGER.info(JsonUtil.format(ConvertUtil.toList((User) null)));
     }
 
     /**
