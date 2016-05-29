@@ -25,11 +25,15 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * <b>核心类</b>,判断对象是否为null或者Empty.
+ * 判断给定的对象是否是null或者empty.
+ * 
+ * <p>
+ * 更多说明,参见 wiki {@link <a href="https://github.com/venusdrogon/feilong-core/wiki/Validator">Validator wiki</a>}
+ * </p>
  * 
  * <ol>
- * <li>{@link #isNullOrEmpty(Object)} 判断对象是否是null或者空</li>
- * <li>{@link #isNotNullOrEmpty(Object)}判断对象是否不是null或者不是空</li>
+ * <li>{@link #isNullOrEmpty(Object)} 判断对象是否是null或者empty</li>
+ * <li>{@link #isNotNullOrEmpty(Object)} 判断对象是否不是null或者不是empty</li>
  * </ol>
  * 
  * <h3>对于empty的判断,使用以下逻辑:</h3>
@@ -42,7 +46,7 @@ import org.apache.commons.lang3.StringUtils;
  * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
  * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
  * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
- * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
+ * <li><code>数组</code>{@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
  * </ol>
  * </blockquote>
  * 
@@ -81,7 +85,7 @@ public final class Validator{
     }
 
     /**
-     * 判断对象是否为Null或者Empty.
+     * 判断对象是否为null或者empty.
      * 
      * <h3>对于empty的判断,使用以下逻辑:</h3>
      * 
@@ -93,13 +97,12 @@ public final class Validator{
      * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
      * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
-     * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
+     * <li><code>数组</code>{@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
      * </ol>
      * </blockquote>
      * 
      * @param value
-     *            可以是 {@link Collection},{@link Map},{@link Enumeration},{@link Iterator},{@link Iterable},
-     *            {@link CharSequence},
+     *            可以是{@link Collection},{@link Map},{@link Enumeration},{@link Iterator},{@link Iterable},{@link CharSequence},
      *            以及所有数组类型(包括原始类型数组)
      * @return 如果是null,返回true<br>
      *         如果是empty也返回true<br>
@@ -121,13 +124,11 @@ public final class Validator{
         if (isCollectionsSupportType(value)){
             return CollectionUtils.sizeIsEmpty(value);
         }
-
-        // 这里可以扩展
         return false;
     }
 
     /**
-     * 判断对象是否不为Null或者Empty,调用 !{@link #isNullOrEmpty(Object)} 方法 .
+     * 判断对象是否不为null或者empty,调用 !{@link #isNullOrEmpty(Object)} 方法 .
      * 
      * <h3>对于empty的判断,使用以下逻辑:</h3>
      * 
@@ -139,14 +140,13 @@ public final class Validator{
      * <li>{@link Map},使用其 {@link Map#isEmpty()};</li>
      * <li>{@link Enumeration},使用 {@link Enumeration#hasMoreElements()};</li>
      * <li>{@link Iterator},使用 {@link Iterator#hasNext()};</li>
-     * <li><code>数组</code> {@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
+     * <li><code>数组</code>{@link java.lang.Class#isArray()},判断 {@link Array#getLength(Object)} ==0</li>
      * </ol>
      * </blockquote>
      * 
      * @param value
-     *            可以是 {@link Collection},{@link Map},{@link Enumeration},{@link Iterator},{@link Iterable},
-     *            {@link CharSequence},
-     *            以及所有数组类型(包括原始类型数组)
+     *            可以是{@link Collection},{@link Map},{@link Enumeration},{@link Iterator},{@link Iterable},{@link CharSequence}
+     *            ,以及所有数组类型(包括原始类型数组)
      * @return 如果是null,返回false<br>
      *         如果是空也返回false<br>
      *         其他情况返回true<br>
