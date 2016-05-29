@@ -1390,7 +1390,7 @@ public final class DateUtil{
      *            结束时间
      * @param datePattern
      *            开始时间和结束时间的格式{@link DatePattern}
-     * @return 如果 date after beginTimeDate&& 指定日期 <code>date</code> before endTimeDate,返回true
+     * @return 如果 指定日期 <code>date</code> after <code>beginTime</code>, 并且 指定日期 <code>date</code> before <code>endTime</code>,返回true
      * @see #string2Date(String, String)
      * @see #isInTime(Date, Date, Date)
      */
@@ -1436,6 +1436,7 @@ public final class DateUtil{
      * @return 相等返回true,不相等则为false
      * @see #date2String(Date, String)
      * @since 1.0.5 change name from isEqual to isEquals
+     * @see org.apache.commons.lang3.time.DateUtils#isSameDay(Date, Date)
      */
     public static boolean isEquals(Date date1,Date date2,String datePattern){
         return date2String(date1, datePattern).equals(date2String(date2, datePattern));
