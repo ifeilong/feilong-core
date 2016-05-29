@@ -41,15 +41,16 @@ public final class Slf4jUtil{
      * <br>
      * slf4j的log支持格式化输出log,比如:<br>
      * </p>
+     * 
      * <ul>
      * <li>LOGGER.error("{}","feilong");</li>
      * <li>LOGGER.info("{},{}","feilong","hello");</li>
      * </ul>
+     * 
      * 这些写法非常简洁且有效,不易出错
      * 
      * <br>
      * 因此,你可以在代码中出现这样的写法:
-     * 比如
      * 
      * <pre class="code">
      * throw new IllegalArgumentException(Slf4jUtil.formatMessage(
@@ -62,7 +63,7 @@ public final class Slf4jUtil{
      * 又或者
      * 
      * <pre class="code">
-     * return Slf4jUtil.formatMessage(" {} [{}]", encode, encode.length());
+     * return Slf4jUtil.formatMessage("{} [{}]", encode, encode.length());
      * </pre>
      * 
      * @param messagePattern
