@@ -453,7 +453,8 @@ public final class ResourceBundleUtil{
      *            the delimiters
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果 baseName 没有key value,则返回null,否则解析所有的key和value转成HashMap
+     * @return 如果 baseName 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     *         否则解析所有的key和value转成HashMap
      * @see #readAllPropertiesToMap(String, Locale)
      */
     public static Map<String, String> readPrefixAsMap(String baseName,String prefix,String delimiters,Locale locale){
@@ -489,7 +490,8 @@ public final class ResourceBundleUtil{
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
+     * @return 如果 baseName 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     *         否则,解析所有的key和value转成 {@link TreeMap}
      * @see #readAllPropertiesToMap(String, Locale)
      * @since 1.2.1
      */
@@ -511,7 +513,10 @@ public final class ResourceBundleUtil{
      *            ,比如message/feilong-core-test
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 baseName 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     *         否则,解析所有的key和value转成 {@link TreeMap}<br>
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
      * @see MapUtils#toMap(ResourceBundle)
@@ -531,7 +536,9 @@ public final class ResourceBundleUtil{
      *
      * @param resourceBundle
      *            the resource bundle
-     * @return 如果 baseName 没有key value,则返回null,否则,解析所有的key和value转成 {@link TreeMap}
+     * @return 如果 <code>resourceBundle</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 baseName 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     *         否则,解析所有的key和value转成 {@link TreeMap}<br>
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
      * @see MapUtils#toMap(ResourceBundle)
@@ -540,14 +547,14 @@ public final class ResourceBundleUtil{
     public static Map<String, String> readAllPropertiesToMap(ResourceBundle resourceBundle){
         Validate.notNull(resourceBundle, "resourceBundle can't be null!");
 
-        Enumeration<String> enumeration = resourceBundle.getKeys();
-        if (Validator.isNullOrEmpty(enumeration)){
+        Enumeration<String> keysEnumeration = resourceBundle.getKeys();
+        if (Validator.isNullOrEmpty(keysEnumeration)){
             return Collections.emptyMap();
         }
 
         Map<String, String> propertyMap = new TreeMap<String, String>();
-        while (enumeration.hasMoreElements()){
-            String key = enumeration.nextElement();
+        while (keysEnumeration.hasMoreElements()){
+            String key = keysEnumeration.nextElement();
             String value = resourceBundle.getString(key);
             propertyMap.put(key, value);
         }
@@ -561,7 +568,9 @@ public final class ResourceBundleUtil{
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
-     * @return the resource bundle
+     * @return the resource bundle <br>
+     *         如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see java.util.Locale#getDefault()
      * @see #getResourceBundle(String, Locale)
      */
@@ -578,13 +587,14 @@ public final class ResourceBundleUtil{
      *            ,比如message/feilong-core-test
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return the resource bundle,may be null
+     * @return the resource bundle,may be null<br>
+     *         如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see java.util.ResourceBundle#getBundle(String, Locale)
      */
     public static ResourceBundle getResourceBundle(String baseName,Locale locale){
-        Validate.notEmpty(baseName, "baseName can't be null/empty!");
+        Validate.notBlank(baseName, "baseName can't be null/empty!");
 
-        // Locale enLoc = new Locale("en", "US"); // 表示美国地区
         Locale useLocale = null == locale ? Locale.getDefault() : locale;
 
         ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, useLocale);
@@ -620,13 +630,15 @@ public final class ResourceBundleUtil{
      * 
      * @param fileName
      *            Example 1: "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"
-     * @return the resource bundle,may be null
+     * @return the resource bundle,may be null<br>
+     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.util.PropertyResourceBundle#PropertyResourceBundle(InputStream)
      * @see ResourceBundleUtil#getResourceBundle(InputStream)
      * @since 1.0.9
      */
     public static ResourceBundle getResourceBundleByFileName(String fileName){
-        Validate.notEmpty(fileName, "fileName can't be null/empty!");
+        Validate.notBlank(fileName, "fileName can't be null/empty!");
         try{
             InputStream inputStream = new FileInputStream(fileName);
             return getResourceBundle(inputStream);
@@ -640,7 +652,8 @@ public final class ResourceBundleUtil{
      *
      * @param inputStream
      *            the input stream
-     * @return the resource bundle,may be null
+     * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     *         否则返回 {@link java.util.PropertyResourceBundle#PropertyResourceBundle(InputStream)}
      * @see java.util.PropertyResourceBundle#PropertyResourceBundle(InputStream)
      * @since 1.0.9
      */
@@ -658,7 +671,8 @@ public final class ResourceBundleUtil{
      *
      * @param reader
      *            the reader
-     * @return the resource bundle
+     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     *         否则返回 {@link java.util.PropertyResourceBundle#PropertyResourceBundle(Reader)}
      * @see java.util.PropertyResourceBundle#PropertyResourceBundle(Reader)
      * @since 1.0.9
      */
