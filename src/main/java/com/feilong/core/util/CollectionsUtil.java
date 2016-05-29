@@ -312,7 +312,7 @@ public final class CollectionsUtil{
      * 循环 <code>inputIterator</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
      * 
      * <p>
-     * If the input iterator or transformer is null, the result is an empty list.
+     * If the input iterator or transformer 是 null, the result is an empty list.
      *
      * @param <O>
      *            the type of object in the output collection

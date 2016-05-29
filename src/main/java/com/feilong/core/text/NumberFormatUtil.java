@@ -27,13 +27,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.NumberPattern;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link NumberFormat}是所有数值格式的抽象基类,此类提供格式化和解析数值的接口.
  * 
  * <p>
  * 直接已知子类: {@link ChoiceFormat}, {@link DecimalFormat}.<br>
- * 注意:<span style="color:red">{@link DecimalFormat}不是同步的 </span>,建议为每个线程创建独立的格式实例. (见JAVA API 文档)
+ * 注意:<span style="color:red">{@link DecimalFormat}不是同步的 </span>,建议为每个线程创建独立的格式实例.(见JAVA API 文档)
  * </p>
  * 
  * @author feilong
@@ -70,10 +71,14 @@ public final class NumberFormatUtil{
      *            the value
      * @param numberPattern
      *            the pattern {@link NumberPattern}
-     * @return 如果有异常 将返回null
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果有异常,返回 {@link StringUtils#EMPTY}
      * @see NumberPattern
      * @see DecimalFormat
      * @see RoundingMode#HALF_UP
+     * @see #format(Number, String, RoundingMode)
      */
     public static String format(Number value,String numberPattern){
         // 如果不设置, DecimalFormat默认使用的是 RoundingMode.HALF_EVEN
@@ -90,14 +95,17 @@ public final class NumberFormatUtil{
      *            the pattern {@link NumberPattern}
      * @param roundingMode
      *            四舍五入的方法{@link RoundingMode}
-     * @return 如果有异常 将返回null
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果有异常,返回 {@link StringUtils#EMPTY}
      * @see NumberPattern
      * @see DecimalFormat
      * @see <a href="../util/NumberUtil.html#RoundingMode">JAVA 8种舍入法</a>
      */
     public static String format(Number value,String numberPattern,RoundingMode roundingMode){
         Validate.notNull(value, "value can't be null!");
-        Validate.notNull(numberPattern, "numberPattern can't be null!");
+        Validate.notBlank(numberPattern, "numberPattern can't be null!");
         try{
             //该构造方法内部 调用了applyPattern(pattern, false)
             DecimalFormat decimalFormat = new DecimalFormat(numberPattern);
@@ -110,18 +118,13 @@ public final class NumberFormatUtil{
             }
             String format = decimalFormat.format(value);
             if (LOGGER.isDebugEnabled()){
-                LOGGER.debug(
-                                "value:[{}],pattern:[{}],return:[{}],decimalFormat.toLocalizedPattern():[{}]",
-                                value,
-                                numberPattern,
-                                format,
-                                decimalFormat.toLocalizedPattern());//合成一个表示此 Format对象当前状态的、已本地化的模式字符串. 
+                String pattern = "value:[{}],pattern:[{}],return:[{}],decimalFormat.toLocalizedPattern():[{}]";
+                LOGGER.debug(pattern, value, numberPattern, format, decimalFormat.toLocalizedPattern());//合成一个表示此 Format对象当前状态的、已本地化的模式字符串. 
             }
             return format;
         }catch (Exception e){
-            Object[] objects = { e.getMessage(), value, numberPattern };
-            LOGGER.error("{},value:[{}],pattern:[{}]", objects);
-            LOGGER.error(e.getClass().getName(), e);
+            String message = Slf4jUtil.formatMessage("value:[{}],pattern:[{}],roundingMode:[{}]", value, numberPattern, roundingMode);
+            LOGGER.error(message, e);
         }
         return StringUtils.EMPTY;
     }
