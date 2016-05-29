@@ -572,7 +572,9 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>paramNameList</code> 是null或者empty,返回 <code>uriString</code><br>
+     *         否则调用 {@link #retentionParamList(URI, List, String)}
      * @see #retentionParamList(URI, List, String)
      */
     public static String retentionParamList(String uriString,List<String> paramNameList,String charsetType){
@@ -628,10 +630,15 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>queryString</code> 是null或者empty,返回 <code>uriString</code>
      * @since 1.4.0
      */
     private static String retentionParamList(String uriString,String queryString,List<String> paramNameList,String charsetType){
+        if (Validator.isNullOrEmpty(uriString)){
+            return StringUtils.EMPTY;
+        }
+
         if (Validator.isNullOrEmpty(queryString)){
             return uriString; //不带参数原样返回
         }
@@ -1234,8 +1241,8 @@ public final class ParamUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return
      *         <ul>
-     *         <li>if (Validator.isNullOrEmpty(beforePathWithoutQueryString)),return {@link StringUtils#EMPTY}</li>
-     *         <li>if (Validator.isNullOrEmpty(arrayValueMap)),return beforePathWithoutQueryString</li>
+     *         <li>如果 (Validator.isNullOrEmpty(beforePathWithoutQueryString)),返回 {@link StringUtils#EMPTY}</li>
+     *         <li>如果 (Validator.isNullOrEmpty(arrayValueMap)),返回 beforePathWithoutQueryString</li>
      *         </ul>
      * @since 1.4.0
      */

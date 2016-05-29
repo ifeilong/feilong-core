@@ -587,9 +587,9 @@ public final class StringUtil{
      *            负数表示向前,整数表示向后,0表示依旧从自己的位置开始算起
      * @return
      *         <ul>
-     *         <li>if isNullOrEmpty(text),return null</li>
-     *         <li>if isNullOrEmpty(beginString),return null</li>
-     *         <li>if text.indexOf(beginString)==-1,return null</li>
+     *         <li>如果 isNullOrEmpty(text),return null</li>
+     *         <li>如果 isNullOrEmpty(beginString),return null</li>
+     *         <li>如果 text.indexOf(beginString)==-1,return null</li>
      *         <li>{@code  beginIndex + shift > text.length()},return null</li>
      *         <li>else,return text.substring(beginIndex + shift)</li>
      *         </ul>

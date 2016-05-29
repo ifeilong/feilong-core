@@ -201,8 +201,8 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <ul>
-     * <li>if "true", "yes", "y", "on", "1", 返回 true</li>
-     * <li>if "false", "no", "n", "off", "0", 返回 false</li>
+     * <li>如果 "true", "yes", "y", "on", "1", 返回 true</li>
+     * <li>如果 "false", "no", "n", "off", "0", 返回 false</li>
      * <li>else will throw conversionException, but in
      * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
      * Throwable)} method 返回 default value, {@link BooleanConverter} defaultValue pls see

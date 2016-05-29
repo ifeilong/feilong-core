@@ -327,7 +327,7 @@ public final class PropertyUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>if <code>ClassUtil.isInstance(findValue, toBeFindedClassType)</code> 直接返回 findValue</li>
+     * <li>如果 <code>ClassUtil.isInstance(findValue, toBeFindedClassType)</code> 直接返回 findValue</li>
      * <li>自动过滤<code>isPrimitiveOrWrapper</code>,<code>CharSequence</code>,<code>Collection</code>,<code>Map</code>类型</li>
      * <li>调用 {@link PropertyUtil#describe(Object)} 再递归查找</li>
      * </ol>
