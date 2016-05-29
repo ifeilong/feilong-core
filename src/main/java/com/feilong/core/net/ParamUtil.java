@@ -118,9 +118,9 @@ public final class ParamUtil{
      *
      * @param arrayValueMap
      *            the array value map
-     * @return 如果参数arrayValueMap是null或者empty,那么return {@link Collections#emptyMap()},<br>
-     *         如果arrayValueMap其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
-     *         如果arrayValueMap其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
+     * @return 如果参数<code>arrayValueMap</code>是null或者empty,那么return {@link Collections#emptyMap()},<br>
+     *         如果<code>arrayValueMap</code>其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
+     *         如果<code>arrayValueMap</code>其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
      * @since 1.4.0
      */
     public static Map<String, String> toSingleValueMap(Map<String, String[]> arrayValueMap){
@@ -131,9 +131,8 @@ public final class ParamUtil{
         //保证顺序和 参数 arrayValueMap 顺序相同
         Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
-            String key = entry.getKey();
             String[] values = entry.getValue();
-            singleValueMap.put(key, Validator.isNotNullOrEmpty(values) ? values[0] : StringUtils.EMPTY);
+            singleValueMap.put(entry.getKey(), Validator.isNotNullOrEmpty(values) ? values[0] : StringUtils.EMPTY);
         }
         return singleValueMap;
     }
@@ -174,7 +173,8 @@ public final class ParamUtil{
      * 
      * @param singleValueMap
      *            the name and value map
-     * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么return {@link Collections#emptyMap()}
+     * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么return {@link Collections#emptyMap()}<br>
+     *         否则 迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
      * @since 1.4.0
      */
     public static Map<String, String[]> toArrayValueMap(Map<String, String> singleValueMap){
@@ -185,9 +185,7 @@ public final class ParamUtil{
         //保证顺序和 参数 singleValueMap顺序相同
         Map<String, String[]> arrayValueMap = new LinkedHashMap<String, String[]>();
         for (Map.Entry<String, String> entry : singleValueMap.entrySet()){
-            String key = entry.getKey();
-            String value = entry.getValue();
-            arrayValueMap.put(key, new String[] { value });
+            arrayValueMap.put(entry.getKey(), new String[] { entry.getValue() });
         }
         return arrayValueMap;
     }
@@ -844,7 +842,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return if isNullOrEmpty(appendMap) ,return {@link StringUtils#EMPTY}
+     * @return 如果 isNullOrEmpty(appendMap) ,return {@link StringUtils#EMPTY}
      * @see #toQueryStringUseArrayValueMap(Map)
      * @since 1.4.0
      */
@@ -1127,7 +1125,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return if Validator.isNullOrEmpty(arrayValueMap),return emptyMap
+     * @return 如果 Validator.isNullOrEmpty(arrayValueMap),return emptyMap
      */
     private static Map<String, String[]> toSafeArrayValueMap(Map<String, String[]> arrayValueMap,String charsetType){
         if (Validator.isNullOrEmpty(arrayValueMap)){

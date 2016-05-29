@@ -848,7 +848,7 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param returnCollection
      *            the return collection
-     * @return if Validator.isNullOrEmpty(objectCollection),return <code>returnCollection</code>
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return <code>returnCollection</code>
      * @see PropertyUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
      * @since 1.0.8
@@ -1086,7 +1086,7 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param value
      *            the value
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see CollectionUtils#select(Iterable, Predicate)
      */
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V value){
@@ -1141,7 +1141,7 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param values
      *            the values
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate#ArrayContainsPredicate(String, Object...)
      */
     @SafeVarargs
@@ -1207,7 +1207,7 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param values
      *            the values
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
      * @since 1.5.0
      */
@@ -1258,7 +1258,7 @@ public final class CollectionsUtil{
      *            <li>{@link org.apache.commons.collections4.functors.TruePredicate}</li>
      *            <li>....</li>
      *            </ul>
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
      */
     public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
@@ -1282,7 +1282,7 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param value
      *            the value
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see CollectionUtils#selectRejected(Iterable, Predicate)
      */
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V value){
@@ -1304,7 +1304,7 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param values
      *            the values
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate
      * @see #selectRejected(Collection, Predicate)
      */
@@ -1367,7 +1367,7 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param values
      *            the values
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
      * @see #selectRejected(Collection , Predicate)
      * @since 1.5.0
@@ -1392,7 +1392,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param predicate
      *            the predicate
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyList()}
      * @see org.apache.commons.collections4.CollectionUtils#selectRejected(Iterable, Predicate)
      * @since 1.4.0
      */
@@ -1456,7 +1456,7 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.lang.ArrayUtil#group(Object[], String)
@@ -1618,7 +1618,7 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      * @see #group(Collection, String)
      * @since 1.0.8
@@ -1665,7 +1665,7 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      * @see #groupCount(Collection , Predicate, String)
      */
@@ -1692,7 +1692,7 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         if propertyName isNullOrEmpty,will throw {@link NullPointerException}
      * @since 1.2.0
      */
@@ -1763,7 +1763,7 @@ public final class CollectionsUtil{
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
      * @see #sum(Collection, String...)
      */
     public static <O> Map<String, BigDecimal> avg(Collection<O> objectCollection,int scale,String...propertyNames){
@@ -1861,7 +1861,7 @@ public final class CollectionsUtil{
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return if Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),return {@link Collections#emptyMap()}
      * @see #sum(Collection, Predicate, String...)
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String...propertyNames){

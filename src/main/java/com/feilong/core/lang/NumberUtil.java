@@ -133,9 +133,9 @@ public final class NumberUtil{
      *            被除数,自动转成BigDecimal做除法运算
      * @param scale
      *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
-     * @return if <code>one</code> is null,throw NullPointerException<br>
-     *         if <code>two</code> is null,throw NullPointerException<br>
-     *         if <code>two</code> is 0,throw IllegalArgumentException<br>
+     * @return 如果 <code>one</code> is null,throw NullPointerException<br>
+     *         如果 <code>two</code> is null,throw NullPointerException<br>
+     *         如果 <code>two</code> is 0,throw IllegalArgumentException<br>
      *         否则转换成BigDecimal 返回除法结果one/two,四舍五入 {@link RoundingMode#HALF_UP},小数位数指定
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.RoundingMode#HALF_UP
@@ -158,9 +158,9 @@ public final class NumberUtil{
      *            标度,小数的位数,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @param roundingMode
      *            舍入法 {@link RoundingMode}
-     * @return if <code>one</code> is null,throw NullPointerException<br>
-     *         if <code>two</code> is null,throw NullPointerException<br>
-     *         if <code>two</code> is 0,throw IllegalArgumentException<br>
+     * @return 如果 <code>one</code> is null,throw NullPointerException<br>
+     *         如果 <code>two</code> is null,throw NullPointerException<br>
+     *         如果 <code>two</code> is 0,throw IllegalArgumentException<br>
      *         否则转换成BigDecimal 返回除法结果one/two,依据舍入法 {@link RoundingMode},小数位数指定
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.BigDecimal#divide(BigDecimal, int, RoundingMode)
@@ -193,8 +193,8 @@ public final class NumberUtil{
      *            乘数
      * @param two
      *            被乘数
-     * @return if <code>one</code> is null,throw NullPointerException<br>
-     *         if <code>two</code> is null,throw NullPointerException<br>
+     * @return 如果 <code>one</code> is null,throw NullPointerException<br>
+     *         如果 <code>two</code> is null,throw NullPointerException<br>
      *         else convert to BigDecimal and multiply each other
      * @see com.feilong.core.bean.ConvertUtil#toBigDecimal(Object)
      * @see "org.apache.velocity.runtime.parser.node.MathUtils#multiply(Number, Number)"
@@ -215,8 +215,8 @@ public final class NumberUtil{
      *            被乘数
      * @param scale
      *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
-     * @return if <code>one</code> is null,throw NullPointerException<br>
-     *         if <code>two</code> is null,throw NullPointerException<br>
+     * @return 如果 <code>one</code> is null,throw NullPointerException<br>
+     *         如果 <code>two</code> is null,throw NullPointerException<br>
      *         else convert to BigDecimal and multiply each other
      * @see #getMultiplyValue(Number, Number)
      * @see #setScale(BigDecimal, int)

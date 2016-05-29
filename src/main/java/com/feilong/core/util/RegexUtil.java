@@ -105,7 +105,7 @@ public final class RegexUtil{
      *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
-     * @return if 匹配不了,返回 {@link java.util.Collections#emptyMap()}
+     * @return 如果 匹配不了,返回 {@link java.util.Collections#emptyMap()}
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#group(int)
      * @since 1.0.7

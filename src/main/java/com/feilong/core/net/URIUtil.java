@@ -217,7 +217,7 @@ public final class URIUtil{
      * @param charsetType
      *            何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
-     * @return if isNullOrEmpty(uri),return null;<br>
+     * @return 如果 isNullOrEmpty(uri),return null;<br>
      *         if Exception,throw URIParseException
      * @see URI#create(String)
      * @see #encodeUri(String, String)
@@ -302,7 +302,7 @@ public final class URIUtil{
      *
      * @param uriString
      *            the uri
-     * @return if isNullOrEmpty(url),renturn {@link StringUtils#EMPTY}
+     * @return 如果 isNullOrEmpty(url),返回 {@link StringUtils#EMPTY}
      * @since 1.4.0
      */
     public static String getFullPathWithoutQueryString(String uriString){

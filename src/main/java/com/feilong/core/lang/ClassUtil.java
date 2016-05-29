@@ -242,7 +242,7 @@ public final class ClassUtil{
      *            the obj
      * @param klasses
      *            the klasses
-     * @return true, if checks if is instance; if <code>null == klasses</code> return false
+     * @return true, if checks if is instance; 如果 <code>null == klasses</code> return false
      * @since 1.5.6
      */
     public static boolean isInstanceAnyClass(Object obj,Class<?>[] klasses){

@@ -1115,7 +1115,7 @@ public final class StringUtil{
      *            the format
      * @param args
      *            the args
-     * @return if null ==format,return {@link StringUtils#EMPTY},else return {@link String#format(String, Object...)}
+     * @return 如果 null ==format,return {@link StringUtils#EMPTY},else return {@link String#format(String, Object...)}
      * @see java.util.Formatter
      * @see String#format(String, Object...)
      * @see String#format(java.util.Locale, String, Object...)

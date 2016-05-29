@@ -492,7 +492,7 @@ public final class ConvertUtil{
      *            the generic type
      * @param enumeration
      *            the enumeration
-     * @return if Validator.isNullOrEmpty(enumeration), return {@link Collections#emptyList()},该emptyList不可以操作<br>
+     * @return 如果 Validator.isNullOrEmpty(enumeration), return {@link Collections#emptyList()},该emptyList不可以操作<br>
      *         else return {@link Collections#list(Enumeration)}
      * @see Collections#emptyList()
      * @see Collections#EMPTY_LIST
