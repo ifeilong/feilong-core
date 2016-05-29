@@ -27,7 +27,6 @@ import com.feilong.core.bean.PropertyUtil;
  * <code>values</code>集合中.
  *
  * @author feilong
- * @version 1.5.0 2016年1月7日 下午8:39:13
  * @param <T>
  *            the generic type
  * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)

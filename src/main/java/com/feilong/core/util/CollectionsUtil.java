@@ -243,8 +243,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.2 Sep 2, 2010 8:08:40 PM
- * @version 1.5.0 2016年1月8日 下午2:08:59
  * @see java.util.Collections
  * @see org.apache.commons.collections4.ListUtils
  * @see org.apache.commons.collections4.IterableUtils
@@ -316,10 +314,10 @@ public final class CollectionsUtil{
      * <p>
      * If the input iterator or transformer is null, the result is an empty list.
      *
-     * @param <T>
-     *            the type of object in the input collection
      * @param <O>
      *            the type of object in the output collection
+     * @param <T>
+     *            the type of object in the input collection
      * @param inputIterator
      *            the iterator to get the input from
      * @param transformer

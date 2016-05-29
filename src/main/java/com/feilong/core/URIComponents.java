@@ -19,7 +19,6 @@ package com.feilong.core;
  * uri使用的常量.
  * 
  * @author feilong
- * @version 1.0 Apr 23, 2014 1:36:16 PM
  * @see "org.springframework.web.util.HierarchicalUriComponents.Type"
  * @see "org.springframework.web.util.UriComponentsBuilder"
  * @see "org.springframework.web.util.UriComponents"

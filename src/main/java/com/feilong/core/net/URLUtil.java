@@ -53,7 +53,6 @@ import com.feilong.core.bean.ConvertUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.2.1 2015年6月21日 上午12:54:15
  * @since 1.2.1
  */
 public final class URLUtil{

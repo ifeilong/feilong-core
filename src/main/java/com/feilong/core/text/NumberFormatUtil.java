@@ -37,7 +37,6 @@ import com.feilong.core.NumberPattern;
  * </p>
  * 
  * @author feilong
- * @version 1.0.2 2012-3-27 上午1:39:53
  * @see Format
  * @see NumberFormat
  * @see DecimalFormat

@@ -35,7 +35,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class ParamUtilTest.
  *
  * @author feilong
- * @version 1.0 2012-3-15 下午3:48:51
  */
 public class ParamUtilTest{
 

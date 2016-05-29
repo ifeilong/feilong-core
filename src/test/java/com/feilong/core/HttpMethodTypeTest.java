@@ -27,7 +27,6 @@ import com.feilong.core.lang.EnumUtil;
  * The Class HttpMethodTypeTest.
  * 
  * @author feilong
- * @version 1.0.6 2014年5月8日 上午3:20:26
  * @since 1.0.6
  */
 public class HttpMethodTypeTest{

@@ -34,7 +34,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * 
  * @author feilong
- * @version 1.0.8 2014年7月21日 下午5:34:50
  * @since 1.0.8
  * @see "org.springframework.beans.BeansException"
  */

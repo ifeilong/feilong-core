@@ -39,8 +39,6 @@ import com.feilong.core.bean.ConvertUtil;
  * 处理参数相关.
  *
  * @author feilong
- * @version 1.0.0 2010-4-15 下午04:01:29
- * @version 1.4.0 2015-8-1 22:08
  * @see "org.springframework.web.util.UriComponentsBuilder"
  * @see "org.apache.http.client.utils.URIBuilder"
  * @since 1.0.0

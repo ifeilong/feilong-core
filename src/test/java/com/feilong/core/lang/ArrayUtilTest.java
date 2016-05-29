@@ -38,7 +38,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class ArrayUtilTest.
  *
  * @author feilong
- * @version 1.0 2011-5-12 上午11:29:02
  * @since 1.0
  */
 public class ArrayUtilTest{

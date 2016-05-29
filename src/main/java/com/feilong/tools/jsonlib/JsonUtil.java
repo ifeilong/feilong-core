@@ -111,7 +111,6 @@ import net.sf.json.util.PropertySetStrategy;
  * </blockquote>
  *
  * @author feilong
- * @version 1.0.5 Jan 26, 2013 8:02:09 PM
  * @see net.sf.json.JSONSerializer#toJSON(Object, JsonConfig)
  * 
  * @see net.sf.json.JSONObject

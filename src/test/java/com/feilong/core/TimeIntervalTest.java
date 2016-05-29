@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
  * The Class TimeIntervalTest.
  *
  * @author feilong
- * @version 1.2.1 2015年6月25日 上午11:04:59
  * @since 1.2.1
  */
 public class TimeIntervalTest{

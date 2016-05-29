@@ -31,8 +31,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 正则表达式工具类.
  *
  * @author feilong
- * @version 1.0.0 2010-1-13 下午02:33:11
- * @version 1.0.7 2014-5-27 14:21 规范了注释
  * @see RegexPattern
  * @see java.util.regex.Pattern
  * @see java.util.regex.Matcher

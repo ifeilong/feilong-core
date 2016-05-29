@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
  * The Class ClassLoaderUtilTest.
  * 
  * @author feilong
- * @version 1.0 2011-4-27 上午12:42:55
  */
 public class ClassLoaderUtilTest{
 

@@ -25,7 +25,6 @@ import org.junit.Test;
  * The Class CharsetTypeTest.
  * 
  * @author feilong
- * @version 1.0 2012-4-5 下午5:27:11
  */
 public class CharsetTypeTest{
 

@@ -140,7 +140,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.4.0 2015年8月3日 上午3:06:20
  * @see java.util.StringTokenizer
  * @see "org.springframework.util.StringUtils#tokenizeToStringArray(String, String)"
  * @see "org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#MULTI_VALUE_ATTRIBUTE_DELIMITERS"
@@ -963,7 +962,7 @@ public final class StringUtil{
      * <h3>转换符</h3>
      * 
      * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">转换符</th>
      * <th align="left">说明</th>
@@ -1045,7 +1044,7 @@ public final class StringUtil{
      * <h3>标志</h3>
      * 
      * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">标志</th>
      * <th align="left">说明</th>

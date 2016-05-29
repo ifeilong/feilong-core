@@ -33,7 +33,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class BaseJsonTest.
  *
  * @author feilong
- * @version 1.2.2 2015年7月8日 上午1:54:27
  * @since 1.2.2
  */
 public abstract class BaseJsonTest{

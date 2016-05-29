@@ -33,7 +33,6 @@ import com.feilong.test.User;
  * The Class ValidatorTest.
  *
  * @author feilong
- * @version 1.0.7 2014年5月22日 下午1:25:51
  * @since 1.0.7
  */
 public class ValidatorTest{

@@ -27,7 +27,6 @@ import com.feilong.core.RegexPattern;
  * The Class RegexUtilTest.
  * 
  * @author feilong
- * @version 1.0 Mar 29, 2013 6:54:30 PM
  */
 public class RegexUtilTest{
 

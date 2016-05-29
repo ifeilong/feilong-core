@@ -48,7 +48,6 @@ import com.feilong.core.Validator;
  * </blockquote>
  *
  * @author feilong
- * @version 1.5.3 2016年4月18日 上午2:34:38
  * @see org.apache.commons.collections4.EnumerationUtils
  * @since 1.5.3
  */

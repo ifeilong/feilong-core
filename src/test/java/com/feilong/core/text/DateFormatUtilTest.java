@@ -28,7 +28,6 @@ import com.feilong.core.DatePattern;
  * The Class DateFormatUtilTest.
  * 
  * @author feilong
- * @version 1.0 2012-5-15 上午11:36:29
  */
 public class DateFormatUtilTest{
 

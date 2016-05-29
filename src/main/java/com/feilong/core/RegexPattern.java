@@ -244,8 +244,6 @@ import java.util.regex.Pattern;
  * </pre>
  * 
  * @author feilong
- * @version 1.0.0 Apr 2, 2014 6:04:23 PM
- * @version 1.0.5 2014-5-4 00:37 change to interface
  * @see Pattern
  * @since 1.0.0
  */

@@ -19,7 +19,6 @@ package com.feilong.core.util;
  * The Class PropertiesUtilTest.
  * 
  * @author feilong
- * @version 1.0 2011-5-19 下午03:41:14
  * @since 1.0
  */
 public class PropertiesUtilTest{

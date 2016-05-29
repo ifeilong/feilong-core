@@ -35,7 +35,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class MapUtilTest.
  *
  * @author feilong
- * @version 1.0 Sep 8, 2012 8:55:30 PM
  */
 public class MapUtilTest{
 

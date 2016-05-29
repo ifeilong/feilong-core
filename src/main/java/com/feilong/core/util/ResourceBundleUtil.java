@@ -65,7 +65,6 @@ import com.feilong.core.text.MessageFormatUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.4.0 2015年8月3日 上午3:18:50
  * @see MessageFormatUtil#format(String, Object...)
  * @see java.util.ResourceBundle
  * @see java.util.PropertyResourceBundle

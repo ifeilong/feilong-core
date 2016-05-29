@@ -18,8 +18,7 @@
  * {@link com.feilong.core.util.CollectionsUtil#groupCount(java.util.Collection, org.apache.commons.collections4.Predicate, String)} 等地方.
  * 
  * @author feilong
- * @version 1.2.0 2015年4月27日 下午1:47:11
- * @since 1.2.0
+ * 
  * @see org.apache.commons.collections4.PredicateUtils
  * @see org.apache.commons.collections4.functors.AllPredicate
  * @see org.apache.commons.collections4.functors.AndPredicate
@@ -43,5 +42,7 @@
  * @see org.apache.commons.collections4.functors.TransformerPredicate
  * @see org.apache.commons.collections4.functors.TruePredicate
  * @see org.apache.commons.collections4.functors.UniquePredicate
+ * 
+ * @since 1.2.0
  */
 package com.feilong.core.util.predicate;

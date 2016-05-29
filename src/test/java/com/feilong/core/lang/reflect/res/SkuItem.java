@@ -6,7 +6,6 @@ import java.io.Serializable;
  * Sku Item for solr.
  * 
  * @author feilong
- * @version 1.0 2012-2-18 下午8:01:33
  */
 public class SkuItem implements Serializable{
 

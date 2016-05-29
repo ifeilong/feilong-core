@@ -30,11 +30,10 @@ import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
  * <p>
  * 如果是,那么使用 {@link JsonUtil} 格式化的时候会显示成*****.
  * </p>
- * 
+ *
  * @author feilong
- * @version 1.4.0 2015年8月18日 下午9:40:53
- * @since 1.4.0
  * @see SensitiveWordsJsonValueProcessor
+ * @since 1.4.0
  */
 //表示产生文档,比如通过javadoc产生文档, 将此注解包含在 javadoc 中, 这个Annotation可以被写入javadoc
 @Documented

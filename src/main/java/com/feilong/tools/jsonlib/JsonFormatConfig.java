@@ -23,7 +23,6 @@ import net.sf.json.processors.JsonValueProcessor;
  * The Class JsonFormatConfig.
  *
  * @author feilong
- * @version 1.2.2 2015年7月10日 下午10:24:17
  * @see net.sf.json.JsonConfig
  * @since 1.2.2
  */

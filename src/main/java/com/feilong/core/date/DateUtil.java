@@ -204,8 +204,6 @@ import com.feilong.core.text.DateFormatUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.0 2010-1-27 下午01:53:21
- * @version 1.0.5 2014-5-6 10:04
  * @see CalendarUtil
  * @see DatePattern
  * @see DateFormatUtil

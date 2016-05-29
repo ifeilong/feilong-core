@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
  * The Class AnnotationTest.
  * 
  * @author feilong
- * @version 1.0.7 2014-5-30 0:25:27
  */
 @MyAnnotation(name = "feilong",sex = 0,loveStrings = { "胡伟立", "三国" })
 public class AnnotationTest{

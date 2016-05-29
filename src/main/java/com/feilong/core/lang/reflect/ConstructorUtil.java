@@ -66,10 +66,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.7 2014年7月15日 下午1:08:15
- * @version 1.1.0 2015-4-14 18:59
  * @see org.apache.commons.lang3.reflect.ConstructorUtils
- * 
  * @see "org.springframework.beans.BeanUtils.instantiateClass"
  * @since 1.0.7
  */

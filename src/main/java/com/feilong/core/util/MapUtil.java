@@ -180,7 +180,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.0 Sep 8, 2012 8:02:44 PM
  * @see java.util.AbstractMap.SimpleEntry
  * @see org.apache.commons.collections4.MapUtils
  * @since 1.0.0

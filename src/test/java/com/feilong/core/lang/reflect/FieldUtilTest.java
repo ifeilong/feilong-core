@@ -30,7 +30,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class FieldUtilTest.
  * 
  * @author feilong
- * @version 1.0.7 2014年7月15日 下午1:23:59
  * @since 1.0.7
  */
 public class FieldUtilTest{

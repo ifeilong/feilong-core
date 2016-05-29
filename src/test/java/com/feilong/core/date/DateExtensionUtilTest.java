@@ -32,7 +32,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class DateExtensionUtilTest.
  *
  * @author feilong
- * @version 1.0.8 2014年7月31日 下午2:48:22
  * @since 1.0.8
  */
 public class DateExtensionUtilTest extends BaseDateUtilTest{

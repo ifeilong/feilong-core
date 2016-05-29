@@ -25,7 +25,6 @@ import org.junit.Test;
  * The Class AlphabetTest.
  *
  * @author feilong
- * @version 1.5.3 2016年3月31日 上午12:42:43
  * @since 1.5.3
  */
 public class AlphabetTest{

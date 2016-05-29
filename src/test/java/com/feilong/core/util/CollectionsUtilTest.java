@@ -48,7 +48,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class CollectionUtilTest.
  * 
  * @author feilong
- * @version 1.0.7 2014-5-22 21:55:38
  */
 public class CollectionsUtilTest{
 

@@ -158,7 +158,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.0 2010-6-11 上午02:06:43
  * @see java.net.URI
  * @see java.net.URL
  * @see URIComponents

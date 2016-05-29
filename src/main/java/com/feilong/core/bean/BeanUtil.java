@@ -137,11 +137,6 @@ import com.feilong.core.Validator;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.0 2010-7-9 下午02:44:36
- * @version 1.0.2 2012-5-15 15:07
- * @version 1.0.7 2014年5月21日 下午12:24:53 move to om.feilong.commons.core.bean package
- * @version 1.0.8 2014-7-22 12:37 将异常转成 BeanUtilException 抛出
- * 
  * @see com.feilong.core.bean.PropertyUtil
  * 
  * @see java.beans.BeanInfo

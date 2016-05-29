@@ -30,7 +30,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class TypeUtilTest.
  *
  * @author feilong
- * @version 1.1.1 2015年4月15日 下午1:34:51
  * @since 1.1.1
  */
 public class TypeUtilTest{

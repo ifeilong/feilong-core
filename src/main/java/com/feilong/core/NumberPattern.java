@@ -20,11 +20,10 @@ import java.text.DecimalFormat;
 /**
  * 数字格式,内置常用数字格式.
  * 
- * 
  * <h3>常用数字格式:</h3>
  * 
  * <blockquote>
- * <table border=1 cellspacing=0 cellpadding=4 summary="Chart showing symbol, * location, localized, and meaning.">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="Chart showing symbol,location, localized, and meaning.">
  * <tr style="background-color:#ccccff">
  * <th align="left">Symbol</th>
  * <th align="left">Location</th>
@@ -109,9 +108,8 @@ import java.text.DecimalFormat;
  * </blockquote>
  *
  * @author feilong
- * @version 1.4.0 2015年8月3日 上午3:06:20
  * @see DecimalFormat
- * @since 1.4.0
+ * @since 1.0.2
  */
 public final class NumberPattern{
 

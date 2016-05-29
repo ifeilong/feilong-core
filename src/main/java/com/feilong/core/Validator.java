@@ -47,9 +47,6 @@ import org.apache.commons.lang3.StringUtils;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.0 Sep 2, 2010 8:35:28 PM
- * @version 1.0.1 2012-9-23 21:34 rename method,isNullOrEmpty替代isNull
- * @version 1.5.3 2016-4-11 02:09 call {@link StringUtils#isBlank(CharSequence)}
  * @see String#trim()
  * @see Map#isEmpty()
  * @see Collection#isEmpty()

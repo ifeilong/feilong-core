@@ -92,7 +92,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.0 2011-4-27 上午12:40:08
  * @see java.lang.ClassLoader
  * @see java.net.URLClassLoader
  * @since 1.0.0
@@ -118,7 +117,7 @@ public final class ClassLoaderUtil{
      * e.q:<br>
      * 
      * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left"></th>
      * <th align="left">(maven)测试</th>
@@ -250,7 +249,7 @@ public final class ClassLoaderUtil{
      * e.q:<br>
      * 
      * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left"></th>
      * <th align="left">(maven)测试</th>

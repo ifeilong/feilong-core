@@ -43,9 +43,9 @@ import com.feilong.core.lang.ClassUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.8 2014-7-21 17:45:30
  * @see org.apache.commons.beanutils.PropertyUtils
  * @see com.feilong.core.bean.BeanUtil
+ * @since 1.0.0
  */
 public final class PropertyUtil{
 

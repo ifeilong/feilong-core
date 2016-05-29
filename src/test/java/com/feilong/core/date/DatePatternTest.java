@@ -29,7 +29,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class DatePatternTest.
  *
  * @author feilong
- * @version 1.2.2 2015年7月17日 下午3:31:43
  * @since 1.2.2
  */
 public class DatePatternTest extends BaseDateUtilTest{

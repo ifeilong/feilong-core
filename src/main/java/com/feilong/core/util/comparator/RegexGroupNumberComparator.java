@@ -40,7 +40,6 @@ import com.feilong.core.util.RegexUtil;
  * </pre>
  *
  * @author feilong
- * @version 1.4.0 2015年8月22日 下午11:36:52
  * @see "org.apache.commons.io.comparator.NameFileComparator"
  * @see "org.apache.commons.io.comparator.DirectoryFileComparator"
  * @see "org.apache.commons.io.comparator.DefaultFileComparator"

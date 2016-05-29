@@ -32,7 +32,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class PropertyComparatorTest.
  *
  * @author feilong
- * @version 1.2.1 2015年6月26日 下午8:28:21
  * @since 1.2.1
  */
 public class PropertyComparatorTest{

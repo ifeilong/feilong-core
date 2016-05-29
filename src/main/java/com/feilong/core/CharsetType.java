@@ -23,9 +23,6 @@ package com.feilong.core;
  * </p>
  * 
  * @author feilong
- * @version 1.0.2 2012-4-5 下午4:51:08
- * @version 1.0.5 2014-5-4 14:35 改成interface
- * @version 1.4.0 2015-8-3 05:11 move from io package
  * @see org.apache.commons.lang3.CharEncoding
  * @see org.apache.commons.lang3.CharEncoding#isSupported(String)
  * @see java.nio.charset.Charset#availableCharsets()

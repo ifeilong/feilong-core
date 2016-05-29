@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
  * The Class DateExtensionUtilTest.
  *
  * @author feilong
- * @version 1.0.8 2014年7月31日 下午2:48:22
  * @since 1.0.8
  */
 public class DateExtensionUtilTest2 extends BaseDateUtilTest{

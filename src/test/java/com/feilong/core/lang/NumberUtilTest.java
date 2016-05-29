@@ -31,7 +31,6 @@ import com.feilong.core.bean.ConvertUtil;
  * The Class NumberUtilTest.
  * 
  * @author feilong
- * @version 1.0 2011-1-24 下午02:54:39
  */
 public class NumberUtilTest{
 

@@ -36,7 +36,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class ObjectUtilTest.
  * 
  * @author feilong
- * @version 1.0 Jan 4, 2013 1:58:05 PM
  */
 public class ObjectUtilTest{
 

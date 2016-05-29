@@ -44,7 +44,6 @@ import net.sf.json.JsonConfig;
  * JsonUtil测试类 (C) 2009-9-11, jzj.
  * 
  * @author feilong
- * @version 1.0.7 2014-6-25 15:31:51
  * @deprecated
  */
 @Deprecated

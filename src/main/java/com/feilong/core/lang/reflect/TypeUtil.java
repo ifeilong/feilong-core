@@ -55,7 +55,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.8 2014年7月21日 上午11:01:31
  * @see org.apache.commons.lang3.reflect.TypeUtils
  * @see "org.springframework.core.GenericTypeResolver"
  * @see "org.springframework.core.GenericTypeResolver#getTypeVariableMap(Class<?>)"

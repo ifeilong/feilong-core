@@ -26,7 +26,6 @@ import com.feilong.core.DatePattern;
  * The Class BaseDateUtil.
  *
  * @author feilong
- * @version 1.0.7 2014年6月3日 下午11:37:43
  * @since 1.0.7
  */
 abstract class BaseDateUtilTest{

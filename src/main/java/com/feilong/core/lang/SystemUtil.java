@@ -308,7 +308,6 @@ import com.feilong.core.util.PropertiesUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.7 2014年6月3日 下午1:44:28
  * @see java.lang.System
  * @see org.apache.commons.lang3.SystemUtils
  * @see org.apache.commons.lang3.SystemUtils#USER_HOME

@@ -24,7 +24,6 @@ import net.sf.json.xml.XMLSerializer;
  * xml功能
  * 
  * @author feilong
- * @version 1.4.0 2015年8月23日 上午12:05:11
  * @since 1.4.0
  */
 public class JsonlibXmlUtil{

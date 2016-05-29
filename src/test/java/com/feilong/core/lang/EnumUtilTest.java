@@ -26,7 +26,6 @@ import com.feilong.core.bean.BeanUtilException;
  * The Class EnumUtilTest.
  * 
  * @author feilong
- * @version 1.0.6 2014年5月12日 下午11:00:42
  * @since 1.0.6
  */
 public class EnumUtilTest{

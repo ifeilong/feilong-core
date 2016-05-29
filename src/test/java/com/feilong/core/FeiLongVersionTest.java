@@ -25,7 +25,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class FeiLongVersionTest.
  *
  * @author feilong
- * @version 1.0 Aug 12, 2013 1:22:08 AM
  */
 public class FeiLongVersionTest{
 

@@ -35,7 +35,6 @@ import org.apache.commons.lang3.Validate;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.1 2012-3-27 上午1:39:38
  * @see java.text.Format
  * @see java.text.DateFormat
  * @see java.text.SimpleDateFormat

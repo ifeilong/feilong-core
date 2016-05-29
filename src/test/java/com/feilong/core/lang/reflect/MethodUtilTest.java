@@ -29,7 +29,6 @@ import com.feilong.test.User;
  * The Class MethodUtilTest.
  * 
  * @author feilong
- * @version 1.0.7 2014年7月15日 下午2:47:29
  * @since 1.0.7
  */
 public class MethodUtilTest{

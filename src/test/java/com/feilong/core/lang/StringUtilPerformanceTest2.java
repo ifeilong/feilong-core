@@ -28,7 +28,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class StringUtilTest.
  * 
  * @author feilong
- * @version 1.0 2011-1-7 下午02:41:08
  */
 public class StringUtilPerformanceTest2{
 

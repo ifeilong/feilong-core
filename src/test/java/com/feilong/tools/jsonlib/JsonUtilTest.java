@@ -45,7 +45,6 @@ import net.sf.json.processors.JsonValueProcessor;
  * The Class JsonlibTest.
  * 
  * @author feilong
- * @version 1.0.7 2014-6-25 15:31:11
  */
 public class JsonUtilTest extends BaseJsonTest{
 

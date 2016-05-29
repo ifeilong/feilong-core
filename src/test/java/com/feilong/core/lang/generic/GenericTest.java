@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
  * 泛型.
  * 
  * @author feilong
- * @version 1.0 2011-6-22 下午03:45:36
  * @since 1.0
  */
 public class GenericTest{

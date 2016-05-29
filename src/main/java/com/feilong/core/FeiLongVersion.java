@@ -16,14 +16,24 @@
 package com.feilong.core;
 
 /**
- * Class that exposes the Spring version. Fetches the "Implementation-Version" manifest attribute from the jar file.
+ * 暴露Feilong version.
+ * 
  * <p>
- * Note that some ClassLoaders do not expose the package metadata, hence this class might not be able to determine the Spring version in all
- * environments. Consider using a reflection-based check instead: For example, checking for the presence of a specific Spring 2.0 method
- * that you intend to call.
+ * 从jar里面提取 "Implementation-Version" manifest属性.
+ * </p>
+ * 
+ * <h3>注意:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 一些ClassLoaders不会expose the package metadata,因此这个类可能不能判断所有环境的Feilong version.<br>
+ * Consider using a reflection-based check instead: <br>
+ * 比如, checking for the presence of a specific Feilong 1.0 method that you intend to call.
+ * </p>
+ * </blockquote>
  * 
  * @author feilong
- * @version 1.0 Aug 12, 2013 1:21:20 AM
+ * @since 1.0.8
  */
 public final class FeiLongVersion{
 
@@ -35,7 +45,7 @@ public final class FeiLongVersion{
     }
 
     /**
-     * Return the full version feilong of the present feilong codebase, or <code>null</code> if it cannot be determined.
+     * 返回当前feilong代码的 version,如果不能determined返回 <code>null</code>.
      * 
      * @return the version
      * @see java.lang.Package#getImplementationVersion()

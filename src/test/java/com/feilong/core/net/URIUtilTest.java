@@ -33,7 +33,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class URIUtilTest.
  * 
  * @author feilong
- * @version 1.0 2012-4-5 下午4:11:17
  */
 public class URIUtilTest{
 

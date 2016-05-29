@@ -52,7 +52,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class ConvertUtilTest.
  *
  * @author feilong
- * @version 1.3.0 2015年7月25日 上午1:57:56
  * @since 1.3.0
  */
 public class ConvertUtilTest{

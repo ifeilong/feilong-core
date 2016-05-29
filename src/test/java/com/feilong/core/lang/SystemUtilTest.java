@@ -28,7 +28,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class SystemUtilTest.
  * 
  * @author feilong
- * @version 1.0.7 2014年6月3日 下午2:31:50
  * @since 1.0.7
  */
 public class SystemUtilTest{

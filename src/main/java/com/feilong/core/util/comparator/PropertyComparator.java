@@ -46,7 +46,6 @@ import com.feilong.core.bean.PropertyUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.2.0 2015年5月21日 上午11:02:42
  * @param <T>
  *            the generic type
  * @see "org.springframework.beans.support.PropertyComparator"

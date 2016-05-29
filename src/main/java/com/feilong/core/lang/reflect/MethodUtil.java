@@ -119,7 +119,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.7 2014年7月15日 下午1:08:15
  * @see org.apache.commons.lang3.reflect.MethodUtils
  * @see org.apache.commons.lang3.ClassUtils#getPublicMethod(Class, String, Class...)
  * @see java.util.ServiceLoader jdk1.6 ServiceLoader

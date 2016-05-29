@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
  * The Class Slf4jUtilTest.
  * 
  * @author feilong
- * @version 1.0 Dec 30, 2013 2:26:38 AM
  */
 public class Slf4jUtilTest{
 

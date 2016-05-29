@@ -17,13 +17,12 @@ package com.feilong.core;
 
 /**
  * html相关常量.
- * 
+ *
  * @author feilong
- * @version 1.2.1 2015年6月1日 下午2:10:04
- * @since 1.2.1
  * @see "org.springframework.web.util.HtmlUtils"
  * @see "org.springframework.web.util.HtmlCharacterEntityDecoder"
  * @see "weibo4j.http.HTMLEntity"
+ * @since 1.2.1
  */
 public final class HtmlConstants{
 

@@ -53,7 +53,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class BeanUtilTest.
  *
  * @author feilong
- * @version 1.0 2012-5-15 上午10:45:34
  */
 public class BeanUtilTest{
 

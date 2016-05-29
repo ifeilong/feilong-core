@@ -21,7 +21,6 @@ import net.sf.json.util.PropertyFilter;
  * The Class ArrayContainsPropertyFilter.
  *
  * @author feilong
- * @version 1.2.2 2015年7月10日 下午7:13:28
  * @since 1.2.2
  */
 public class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{

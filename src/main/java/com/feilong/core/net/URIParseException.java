@@ -30,7 +30,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 解析url/uri出现异常.
  *
  * @author feilong
- * @version 1.0.8 2014年11月26日 下午6:33:10
  * @since 1.0.8
  */
 public final class URIParseException extends RuntimeException{

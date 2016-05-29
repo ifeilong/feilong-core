@@ -67,7 +67,6 @@ import com.feilong.core.bean.PropertyUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.4.0 2015年8月3日 上午3:06:20
  * @see org.apache.commons.lang3.ArrayUtils
  * @since 1.4.0
  */

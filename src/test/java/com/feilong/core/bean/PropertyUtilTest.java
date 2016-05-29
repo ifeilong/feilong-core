@@ -33,7 +33,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class PropertyUtilTest.
  *
  * @author feilong
- * @version 1.2.2 2015年7月14日 下午10:07:59
  * @since 1.2.2
  */
 public class PropertyUtilTest{

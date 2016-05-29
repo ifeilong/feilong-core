@@ -31,7 +31,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class ResourceBundleUtilTest.
  * 
  * @author feilong
- * @version 1.0.7 2014-6-25 15:21:15
  */
 public class ResourceBundleUtilTest{
 

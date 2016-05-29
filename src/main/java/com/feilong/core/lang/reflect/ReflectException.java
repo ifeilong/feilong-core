@@ -27,10 +27,9 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 //  对于程序错误(言外之意不可恢复,大错已经酿成)使用运行时异常(RuntimeException).
 
 /**
- * 反射时候出现的异常
- * 
+ * 反射时候出现的异常.
+ *
  * @author feilong
- * @version 1.0.7 2014-7-14 17:38
  * @since 1.0.7
  */
 public final class ReflectException extends RuntimeException{

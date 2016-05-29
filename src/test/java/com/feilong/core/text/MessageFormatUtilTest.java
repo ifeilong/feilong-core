@@ -31,7 +31,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class MessageFormatUtilTest.
  * 
  * @author feilong
- * @version 1.0 2012-3-27 上午1:36:55
  */
 public class MessageFormatUtilTest{
 

@@ -21,7 +21,6 @@ import java.io.Serializable;
  * 用于 连接object 成为字符串.
  *
  * @author feilong
- * @version 1.4.0 2015年8月3日 上午3:06:20
  * @see org.apache.commons.lang3.builder.ToStringStyle
  * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
  * @since 1.4.0

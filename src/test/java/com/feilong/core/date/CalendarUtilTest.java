@@ -29,7 +29,6 @@ import com.feilong.core.DatePattern;
  * The Class CalendarUtilTest.
  * 
  * @author feilong
- * @version 1.0 2012-2-19 下午4:16:30
  */
 public class CalendarUtilTest extends BaseDateUtilTest{
 

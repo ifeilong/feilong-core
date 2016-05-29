@@ -103,7 +103,6 @@ import com.feilong.core.text.NumberFormatUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.4.0 2015年8月3日 上午3:06:20
  * @see Integer
  * @see Long
  * @see BigDecimal

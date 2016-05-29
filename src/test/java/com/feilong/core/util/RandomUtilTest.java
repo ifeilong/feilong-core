@@ -29,7 +29,6 @@ import com.feilong.core.Alphabet;
  * The Class RandomUtilTest.
  *
  * @author feilong
- * @version 1.0 2011-7-25 下午04:24:50
  * @since 1.0
  */
 public class RandomUtilTest{

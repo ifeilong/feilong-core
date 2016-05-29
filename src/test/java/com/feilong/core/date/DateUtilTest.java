@@ -34,7 +34,6 @@ import com.feilong.core.lang.StringUtil;
  * The Class DateUtilTest.
  * 
  * @author feilong
- * @version 1.0 2012-2-19 下午4:17:03
  */
 public class DateUtilTest extends BaseDateUtilTest{
 

@@ -130,8 +130,6 @@ import com.feilong.core.Validator;
  * </blockquote>
  *
  * @author feilong
- * @version 1.0.0 2012-6-1 下午7:19:47
- * @version 1.2.1 2015-6-21 20:50 update javadoc
  * @see org.apache.commons.lang3.ClassUtils
  * @since 1.0.0
  */
@@ -149,7 +147,7 @@ public final class ClassUtil{
      * 
      * <blockquote>
      * 
- * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">字段</th>
      * <th align="left">说明</th>
@@ -192,7 +190,7 @@ public final class ClassUtil{
      * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
      * 
      * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">字段</th>
      * <th align="left">说明</th>

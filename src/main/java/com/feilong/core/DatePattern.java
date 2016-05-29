@@ -185,8 +185,6 @@ import java.util.Date;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.2 2012 1 21 04:18:00
- * @version 1.0.5 2014-5-4 14:23
  * @see SimpleDateFormat
  * @see org.apache.commons.lang3.time.DateFormatUtils
  * @see <a

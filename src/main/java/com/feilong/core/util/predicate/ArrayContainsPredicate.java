@@ -24,7 +24,6 @@ import com.feilong.core.bean.PropertyUtil;
  * {@link org.apache.commons.lang3.ArrayUtils#contains(Object[], Object)} 在 <code>values</code>数组中.
  *
  * @author feilong
- * @version 1.2.0 2015年4月27日 下午3:12:32
  * @param <T>
  *            the generic type
  * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)

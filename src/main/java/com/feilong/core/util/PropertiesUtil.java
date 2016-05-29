@@ -84,7 +84,6 @@ import com.feilong.core.lang.ClassLoaderUtil;
  * @see "org.springframework.core.io.support.PropertiesLoaderUtils"
  * @see "org.springframework.core.io.support.PropertiesLoaderSupport"
  * @see "org.apache.commons.configuration.PropertiesConfiguration"
- * @version 1.4.0 2015年8月3日 上午3:18:50
  * @since 1.4.0
  */
 public final class PropertiesUtil{

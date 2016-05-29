@@ -30,7 +30,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class ClassUtilTest.
  *
  * @author feilong
- * @version 1.0.8 2014年7月21日 下午3:01:52
  * @since 1.0.8
  */
 public class ClassUtilTest{

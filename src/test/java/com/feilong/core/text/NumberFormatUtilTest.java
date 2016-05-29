@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
  * The Class NumberFormatUtilTest.
  *
  * @author feilong
- * @version 1.0.7 2014年5月22日 下午11:31:15
  * @since 1.0.7
  */
 public class NumberFormatUtilTest{

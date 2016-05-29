@@ -178,7 +178,6 @@ import com.feilong.core.lang.StringUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.3.0 2015年7月24日 下午7:43:33
  * @see org.apache.commons.beanutils.ConvertUtils
  * @see org.apache.commons.beanutils.converters.AbstractConverter#handleMissing(Class)
  * @see org.apache.commons.beanutils.locale.LocaleConvertUtils

@@ -32,7 +32,6 @@ import com.feilong.core.util.RegexUtil;
 /**
  *
  * @author feilong
- * @version 1.5.3 2016年3月29日 下午6:31:29
  * @since 1.5.3
  */
 @RunWith(Parameterized.class)

@@ -26,7 +26,6 @@ import java.lang.annotation.Target;
  * The Interface MyAnnotation.
  * 
  * @author feilong
- * @version 1.0.7 2014-5-30 0:25:36
  */
 // 这个Annotation可以被写入javadoc
 @Documented

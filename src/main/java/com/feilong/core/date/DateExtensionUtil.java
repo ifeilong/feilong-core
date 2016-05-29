@@ -48,7 +48,6 @@ import com.feilong.core.Validator;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.8 2014年7月31日 下午2:34:33
  * @since 1.0.8
  */
 public final class DateExtensionUtil{
