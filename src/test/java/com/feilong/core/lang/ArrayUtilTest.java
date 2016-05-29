@@ -68,7 +68,7 @@ public class ArrayUtilTest{
         int j = 1;
         int z = 7 * 9;
 
-        int total = 100000000;
+        int total = 10000;
         List<Integer> list = new ArrayList<Integer>(total / z / 5);
         for (int i = z; i < total; i = z * j){
             //LOGGER.debug("i:{},j={}", i, j);

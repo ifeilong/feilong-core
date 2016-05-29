@@ -211,6 +211,7 @@
 				<configuration>
 					<includes>
 						<include>**/AlphabetTest</include>
+						<include>**/ArrayUtilTest</include>
 						<include>**/CharsetTypeTest</include>
 						<include>**/ClassUtilTest</include>
 						<include>**/ConvertUtilTest</include>
@@ -224,6 +225,7 @@
 						
 						<include>**/RandomUtilTest</include>
 						<include>**/RegexUtilTest</include>
+						<include>**/ResourceBundleUtilTest</include>
 						
 						<include>**/NumberUtilTest</include>
 						<include>**/StringUtilTest</include>
