@@ -425,23 +425,43 @@ public final class ParamUtil{
 
     /**
      * 删除参数.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+     * String pageParamName = "label";
+     * LOGGER.info(ParamUtil.removeParameter(uriString, pageParamName, CharsetType.UTF8));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * http://www.feilong.com:8888/search.htm?keyword=%E4%B8%AD%E5%9B%BD&page=&categoryCode=2-5-3-11
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param uriString
      *            the uri string
      * @param paramName
-     *            the param name
+     *            参数名称
      * @param charsetType
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>paramName</code> 是null或者empty,返回 <code>uriString</code><br>
+     *         否则 构造 list ,调用 {@link #removeParameterList(String, List, String)}
      * @see #removeParameterList(String, List, String)
      */
     public static String removeParameter(String uriString,String paramName,String charsetType){
         if (Validator.isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
-        if (null == paramName){
+        if (Validator.isNullOrEmpty(paramName)){
             return uriString;
         }
         List<String> list = new ArrayList<String>();
@@ -455,7 +475,7 @@ public final class ParamUtil{
      * @param uri
      *            the uri
      * @param paramName
-     *            the param name
+     *            参数名称
      * @param charsetType
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
@@ -479,10 +499,32 @@ public final class ParamUtil{
     /**
      * 删除参数.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+     * List{@code <String>} paramNameList = new ArrayList{@code <String>}();
+     * paramNameList.add("label");
+     * paramNameList.add("keyword");
+     * LOGGER.info(ParamUtil.removeParameterList(uriString, paramNameList, CharsetType.UTF8));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * http://www.feilong.com:8888/search.htm?page=&categoryCode=2-5-3-11
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param uriString
      *            the url
      * @param paramNameList
-     *            the param name list
+     *            参数名称 list
      * @param charsetType
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
@@ -506,7 +548,7 @@ public final class ParamUtil{
      * @param uri
      *            the uri
      * @param paramNameList
-     *            the param name list
+     *            参数名称 list
      * @param charsetType
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
@@ -522,7 +564,7 @@ public final class ParamUtil{
             return uriString;
         }
         String queryString = uri.getRawQuery();// 返回此URI的原始查询组成部分. URI的查询组成部分(如果定义了)只包含合法的 URI字符.
-        return removeParameterList(uriString, queryString, paramNameList, charsetType);
+        return removeParameterList(uri.toString(), queryString, paramNameList, charsetType);
     }
 
     /**
@@ -533,12 +575,14 @@ public final class ParamUtil{
      * @param queryString
      *            the query string
      * @param paramNameList
-     *            the param name list
+     *            参数名称 list
      * @param charsetType
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>queryString</code> 是null或者empty,返回 <code>uriString</code><br>
+     *         如果 <code>paramNameList</code> 是null或者empty,返回 <code>uriString</code>
      * @since 1.4.0
      */
     private static String removeParameterList(String uriString,String queryString,List<String> paramNameList,String charsetType){
@@ -547,6 +591,9 @@ public final class ParamUtil{
         }
         if (Validator.isNullOrEmpty(queryString)){
             return uriString;// 不带参数原样返回
+        }
+        if (Validator.isNullOrEmpty(paramNameList)){
+            return uriString;
         }
         Map<String, String[]> singleValueMap = toSafeArrayValueMap(queryString, null);
         for (String paramName : paramNameList){
@@ -559,6 +606,28 @@ public final class ParamUtil{
 
     /**
      * url里面仅保留指定的参数.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+     * List{@code <String>} paramNameList = new ArrayList{@code <String>}();
+     * paramNameList.add("label");
+     * paramNameList.add("keyword");
+     * LOGGER.info(ParamUtil.retentionParamList(uriString, paramNameList, CharsetType.UTF8));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * http://www.feilong.com:8888/search.htm?label=TopSeller&keyword=%E4%B8%AD%E5%9B%BD
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param uriString
      *            the uri string
@@ -1043,13 +1112,10 @@ public final class ParamUtil{
      *            the map
      * @param includeKeys
      *            包含的key
-     * @return
-     *         <ul>
-     *         <li>如果 (Validator.isNullOrEmpty(<code>singleValueMap</code>)),抛出异常;</li>
-     *         <li>如果 (Validator.isNullOrEmpty(<code>includeKeys</code>)),返回 {@link StringUtils#EMPTY};</li>
-     *         <li>否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;(如果 <code>singleValueMap</code>指定key的值是null,会使用
-     *         {@link StringUtils#defaultString(String)} 转成{@link StringUtils#EMPTY}拼接)</li>
-     *         </ul>
+     * @return 如果 (Validator.isNullOrEmpty(<code>singleValueMap</code>)),抛出异常;<br>
+     *         如果 (Validator.isNullOrEmpty(<code>includeKeys</code>)),返回 {@link StringUtils#EMPTY};<br>
+     *         否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;(如果 <code>singleValueMap</code>指定key的值是null,会使用
+     *         {@link StringUtils#defaultString(String)} 转成{@link StringUtils#EMPTY}拼接)<br>
      * @see org.apache.commons.lang3.StringUtils#defaultString(String)
      * @since 1.5.5
      */
@@ -1235,11 +1301,8 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return
-     *         <ul>
-     *         <li>如果 (Validator.isNullOrEmpty(beforePathWithoutQueryString)),返回 {@link StringUtils#EMPTY}</li>
-     *         <li>如果 (Validator.isNullOrEmpty(arrayValueMap)),返回 beforePathWithoutQueryString</li>
-     *         </ul>
+     * @return 如果 (Validator.isNullOrEmpty(beforePathWithoutQueryString)),返回 {@link StringUtils#EMPTY}<br>
+     *         如果 (Validator.isNullOrEmpty(arrayValueMap)),返回 beforePathWithoutQueryString
      * @since 1.4.0
      */
     private static String combineUrl(String beforePathWithoutQueryString,Map<String, String[]> arrayValueMap,String charsetType){

@@ -39,10 +39,10 @@ import com.feilong.tools.jsonlib.JsonUtil;
 public class ParamUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtilTest.class);
+    private static final Logger LOGGER    = LoggerFactory.getLogger(ParamUtilTest.class);
 
     /** <code>{@value}</code> */
-    private static String       uri    = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
+    private static String       uriString = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
 
     /**
      * Test to natural ordering string.
@@ -98,7 +98,7 @@ public class ParamUtilTest{
     public void addParameter1(){
         String pageParamName = "page";
         Object prePageNo = "";
-        LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
+        LOGGER.info(ParamUtil.addParameter(uriString, pageParamName, prePageNo, CharsetType.UTF8));
     }
 
     /**
@@ -108,7 +108,7 @@ public class ParamUtilTest{
     public void addParameter(){
         String pageParamName = "label";
         String prePageNo = "2-5-8-12";
-        LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
+        LOGGER.info(ParamUtil.addParameter(uriString, pageParamName, prePageNo, CharsetType.UTF8));
     }
 
     /**
@@ -116,9 +116,9 @@ public class ParamUtilTest{
      */
     @Test
     public void removeParameter(){
-        uri = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+        uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
         String pageParamName = "label";
-        LOGGER.info(ParamUtil.removeParameter(uri, pageParamName, CharsetType.ISO_8859_1));
+        LOGGER.info(ParamUtil.removeParameter(uriString, pageParamName, CharsetType.UTF8));
     }
 
     /**
@@ -126,11 +126,11 @@ public class ParamUtilTest{
      */
     @Test
     public void removeParameterList(){
-        uri = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+        uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
         List<String> paramNameList = new ArrayList<String>();
         paramNameList.add("label");
         paramNameList.add("keyword");
-        LOGGER.info(ParamUtil.removeParameterList(uri, paramNameList, CharsetType.UTF8));
+        LOGGER.info(ParamUtil.removeParameterList(uriString, paramNameList, CharsetType.UTF8));
     }
 
     /**
@@ -174,11 +174,11 @@ public class ParamUtilTest{
      */
     @Test
     public void retentionParamList(){
-        uri = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+        uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
         List<String> paramNameList = new ArrayList<String>();
         paramNameList.add("label");
         paramNameList.add("keyword");
-        LOGGER.info(ParamUtil.retentionParamList(uri, paramNameList, CharsetType.UTF8));
+        LOGGER.info(ParamUtil.retentionParamList(uriString, paramNameList, CharsetType.UTF8));
     }
 
     /**

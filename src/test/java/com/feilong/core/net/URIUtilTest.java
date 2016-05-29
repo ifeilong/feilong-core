@@ -55,6 +55,15 @@ public class URIUtilTest{
         LOGGER.info(URIUtil.encode("Lifestyle / Graphic,", CharsetType.UTF8));
     }
 
+    @Test
+    public void testToString(){
+        String value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time DESC&search_page&areaid=2&server_id=63&act=search_browse&equip_type_ids&search_text=斩妖剑";
+        value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time";
+        URI uri = URIUtil.newURI(value);
+        LOGGER.debug("{}", uri.toString());
+
+    }
+
     /**
      * Test encode2.
      */
