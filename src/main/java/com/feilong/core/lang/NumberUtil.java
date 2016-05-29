@@ -265,8 +265,8 @@ public final class NumberUtil{
      */
     public static String toPointFive(Number value){
         Validate.notNull(value, "value can't be null/empty!");
-        long avgRankLong = Math.round(Double.parseDouble(value.toString()) * 2);
 
+        long avgRankLong = Math.round(Double.parseDouble(value.toString()) * 2);
         BigDecimal avgBigDecimal = BigDecimal.valueOf((double) (avgRankLong) / 2);
         return setScale(avgBigDecimal, 1).toString();
     }

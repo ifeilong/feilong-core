@@ -30,7 +30,11 @@ import com.feilong.core.Validator;
 import com.feilong.core.lang.ClassUtil;
 
 /**
- * 封装了{@link PropertyUtils}.
+ * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
+ * 
+ * <p>
+ * 目的是将 原来的 checkedException 异常 转换成 {@link BeanUtilException}
+ * </p>
  * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}:</h3>
  * 

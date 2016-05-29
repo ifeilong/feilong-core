@@ -27,7 +27,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * Utility methods focusing on type inspection, particularly with regard to generics.
  * 
- * 
  * <h3>关于获取Class泛型说明:</h3>
  * 
  * <blockquote>

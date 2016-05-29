@@ -18,7 +18,7 @@ package com.feilong.core.bean;
 import java.io.Serializable;
 
 /**
- * 用于 连接object 成为字符串.
+ * 设置 连接object成为字符串 的配置.
  *
  * @author feilong
  * @see org.apache.commons.lang3.builder.ToStringStyle

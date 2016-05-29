@@ -32,7 +32,11 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validator;
 
 /**
- * 封装了 org.apache.commons.beanutils包下面的类.
+ * 对 {@link org.apache.commons.beanutils.BeanUtils}的再次封装.
+ * 
+ * <p>
+ * 目的是将 原来的 checkedException 异常 转换成 {@link BeanUtilException}
+ * </p>
  * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}区别:</h3>
  * 

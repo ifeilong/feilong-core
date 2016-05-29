@@ -27,15 +27,15 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 //  对于程序错误(言外之意不可恢复,大错已经酿成)使用运行时异常(RuntimeException).
 
 /**
- * 使用 beanutil出现的异常.
+ * 使用<code>org.apache.commons.beanutils</code>包下的类 出现的异常.
  * 
  * <p>
  * Note that: this is a runtime (unchecked) exception. Beans exceptions are usually fatal; there is no reason for them to be checked.
  * </p>
- * 
+ *
  * @author feilong
- * @since 1.0.8
  * @see "org.springframework.beans.BeansException"
+ * @since 1.0.8
  */
 public final class BeanUtilException extends RuntimeException{
 

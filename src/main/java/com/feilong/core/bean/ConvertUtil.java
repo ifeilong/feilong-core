@@ -46,7 +46,7 @@ import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
 
 /**
- * 转换器.
+ * 常用类型转换处理.
  * 
  * <h3>关于类型转换:</h3>
  * 

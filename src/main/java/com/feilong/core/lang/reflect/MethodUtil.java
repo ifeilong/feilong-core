@@ -16,8 +16,6 @@
 package com.feilong.core.lang.reflect;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -126,9 +124,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  */
 public final class MethodUtil{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(MethodUtil.class);
-
     /** Don't let anyone instantiate this class. */
     private MethodUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -189,13 +184,8 @@ public final class MethodUtil{
         try{
             return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
-            String message = Slf4jUtil.formatMessage(
-                            "invokeMethod Exception,object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]",
-                            object,
-                            methodName,
-                            args,
-                            parameterTypes);
-            LOGGER.error(message, e);
+            String pattern = "invokeMethod Exception,object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.formatMessage(pattern, object, methodName, args, parameterTypes);
             throw new ReflectException(message, e);
         }
     }
@@ -242,13 +232,8 @@ public final class MethodUtil{
         try{
             return (T) MethodUtils.invokeStaticMethod(cls, methodName, args, parameterTypes);
         }catch (Exception e){
-            String message = Slf4jUtil.formatMessage(
-                            "invoke Static Method Exception,cls:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]",
-                            cls.getName(),
-                            methodName,
-                            args,
-                            parameterTypes);
-            LOGGER.error(message, e);
+            String pattern = "invoke Static Method Exception,cls:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.formatMessage(pattern, cls.getName(), methodName, args, parameterTypes);
             throw new ReflectException(message, e);
         }
     }
