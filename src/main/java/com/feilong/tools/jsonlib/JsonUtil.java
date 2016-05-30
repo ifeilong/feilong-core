@@ -975,6 +975,22 @@ public final class JsonUtil{
      }}
      * </pre>
      * 
+     * <hr>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
+     * LOGGER.info(JsonUtil.format(map1));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    {
+        "data1": {"name": "get"},
+        "data2": {"name": "set"}
+    }
+     * </pre>
+     * 
      * </blockquote>
      * 
      * @param <T>
