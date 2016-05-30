@@ -44,9 +44,7 @@ import net.sf.json.JsonConfig;
  * JsonUtil测试类 (C) 2009-9-11, jzj.
  * 
  * @author feilong
- * @deprecated
  */
-@Deprecated
 public class JsonUtilToBeanTest extends BaseJsonTest{
 
     /** The Constant LOGGER. */
@@ -190,8 +188,14 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toMap12(){
         String json = "{'brandCode':'UA'}";
-        Map<String, Object> map = JsonUtil.toMap(json);
+        Map<String, String> map = JsonUtil.toMap(json);
         LOGGER.info(JsonUtil.format(map));
+
+        Map<String, Integer> map2 = JsonUtil.toMap("{'brandCode':55555}");
+        LOGGER.info(JsonUtil.format(map2));
+
+        Map<String, Long> map3 = JsonUtil.toMap("{'brandCode':55.555}");
+        LOGGER.info(JsonUtil.format(map3));
     }
 
     /**

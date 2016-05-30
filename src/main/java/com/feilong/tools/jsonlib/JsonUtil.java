@@ -902,13 +902,15 @@ public final class JsonUtil{
      * 
      * </blockquote>
      * 
+     * @param <T>
+     * 
      * @param json
      *            the json
-     * @return 如果 Validator.isNullOrEmpty(json),返回 {@link Collections#emptyMap()}
+     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}
      * @see #toMap(String, Class)
      * @since 1.5.0
      */
-    public static Map<String, Object> toMap(String json){
+    public static <T> Map<String, T> toMap(String json){
         return toMap(json, null);
     }
 
@@ -947,7 +949,7 @@ public final class JsonUtil{
      *            e.g. {'data1':{'name':'get'}, 'data2':{'name':'set'}}
      * @param clazz
      *            e.g. Person.class
-     * @return 如果 Validator.isNullOrEmpty(json),返回 {@link Collections#emptyMap()}
+     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}
      * @see #toMap(String, Class, Map)
      */
     public static <T> Map<String, T> toMap(String json,Class<T> clazz){
@@ -995,7 +997,7 @@ public final class JsonUtil{
      *            e.g. MyBean.class
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
-     * @return 如果 Validator.isNullOrEmpty(json),返回 {@link Collections#emptyMap()}
+     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @see net.sf.json.JSONObject#keys()
      * @see #toBean(Object, Class, Map)
      */
@@ -1014,7 +1016,7 @@ public final class JsonUtil{
         while (keys.hasNext()){
             String key = keys.next();
             Object value = jsonObject.get(key);
-            LOGGER.debug("key:[{}], value:{}", key, value);
+            LOGGER.debug("key:[{}], value:[{}]", key, value);
             map.put(key, null == clazz ? (T) value : toBean(value, clazz, classMap));//如果clazz是null,表示不需要转换
         }
         return map;
