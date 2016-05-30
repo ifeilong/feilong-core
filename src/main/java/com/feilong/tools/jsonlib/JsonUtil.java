@@ -140,7 +140,7 @@ public final class JsonUtil{
 
     //***********************************************************************************
     /**
-     * 设置日期转换格式
+     * 设置日期转换格式.
      */
     static{
         // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
@@ -159,7 +159,7 @@ public final class JsonUtil{
     // [start] format
 
     /**
-     * 格式化一个对象里面所有的filed 的名字和值.
+     * 格式化一个对象里面所有的field 的名字和值.
      * 
      * <h3>代码流程:</h3>
      * 
@@ -171,12 +171,18 @@ public final class JsonUtil{
      * 
      * @param obj
      *            the obj
-     * @return the string
-     * @see com.feilong.core.lang.reflect.FieldUtil#getAllFieldNameAndValueMap(Object)
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         否则取到该对象 所有field 的name 和value值 map {@link FieldUtil#getAllFieldNameAndValueMap(Object)} 调用
+     *         {@link #format(Object, JsonFormatConfig)},再次过程中,会处理 {@link SensitiveWords}
+     * @see FieldUtil#getAllFieldNameAndValueMap(Object)
      * @see org.apache.commons.lang3.reflect.FieldUtils#getFieldsListWithAnnotation(Class, Class)
-     * @since 1.4.0
+     * @since 1.5.6
      */
-    public static String formatObjectFiledsNameAndValueMap(Object obj){
+    public static String formatObjectFieldsNameAndValueMap(Object obj){
+        if (null == obj){
+            return StringUtils.EMPTY;
+        }
+
         Map<String, Object> map = FieldUtil.getAllFieldNameAndValueMap(obj);
 
         //*****************************************************************************
@@ -935,9 +941,9 @@ public final class JsonUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param <T>
-     * 
+     *            the generic type
      * @param json
      *            the json
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}
