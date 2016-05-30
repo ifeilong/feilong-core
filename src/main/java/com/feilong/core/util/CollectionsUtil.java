@@ -1238,7 +1238,7 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-     [1,1]
+     * [1,1]
      * </pre>
      * 
      * </blockquote>
@@ -1250,13 +1250,14 @@ public final class CollectionsUtil{
      * @param predicate
      *            接口封装了对输入对象的判断,返回true或者false,可用的实现类有
      *            <ul>
-     *            <li>{@link org.apache.commons.collections.functors.EqualPredicate}</li>
-     *            <li>{@link org.apache.commons.collections4.functors.IdentityPredicate}</li>
-     *            <li>{@link org.apache.commons.collections4.functors.FalsePredicate}</li>
-     *            <li>{@link org.apache.commons.collections4.functors.TruePredicate}</li>
+     *            <li>{@link org.apache.commons.collections4.functors.EqualPredicate EqualPredicate}</li>
+     *            <li>{@link org.apache.commons.collections4.functors.IdentityPredicate IdentityPredicate}</li>
+     *            <li>{@link org.apache.commons.collections4.functors.FalsePredicate FalsePredicate}</li>
+     *            <li>{@link org.apache.commons.collections4.functors.TruePredicate TruePredicate}</li>
      *            <li>....</li>
      *            </ul>
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         否则返回 {@link CollectionUtils#select(Iterable, Predicate)}
      * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
      */
     public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
@@ -1302,7 +1303,9 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param values
      *            the values
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate
      * @see #selectRejected(Collection, Predicate)
      */
@@ -1346,10 +1349,10 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-    [    {
-        "age": 24,
-        "name": "关羽"
-    }]
+     * [ {
+     * "age": 24,
+     * "name": "关羽"
+     * }]
      * </pre>
      * 
      * </blockquote>
@@ -1365,7 +1368,9 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param values
      *            the values
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
+     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
      * @see #selectRejected(Collection , Predicate)
      * @since 1.5.0
@@ -1455,7 +1460,8 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         如果 propertyName isNullOrEmpty,抛出 {@link NullPointerException}
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see com.feilong.core.lang.ArrayUtil#group(Object[], String)
      * @see #group(Collection, String, Predicate)
@@ -1617,7 +1623,8 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         如果 propertyName isNullOrEmpty,抛出 {@link NullPointerException}
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #group(Collection, String)
      * @since 1.0.8
      */
@@ -1691,7 +1698,8 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         如果 <code>propertyName</code> isNullOrEmpty,抛出 {@link NullPointerException}
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @since 1.2.0
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate<O> includePredicate,String propertyName){
@@ -1744,10 +1752,10 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-     {
-         "id": 2.5,
-         "age": 24
-     }
+     * {
+     * "id": 2.5,
+     * "age": 24
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1912,9 +1920,9 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * {
-     *         "id": 30,
-     *         "age": 100
-     *     }
+     * "id": 30,
+     * "age": 100
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -2017,7 +2025,8 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 propertyName 是null或者 empty,会抛出异常<br>
+     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 objectCollection 是null或者 empty,返回 null
      * @see #sum(Collection, String...)
      * @since 1.5.0
@@ -2065,7 +2074,8 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param includePredicate
      *            the include predicate
-     * @return 如果 <code>propertyName</code> 是null或者 empty,会抛出异常<br>
+     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>objectCollection</code> 是null或者 empty,返回 null
      * @since 1.5.5
      */
