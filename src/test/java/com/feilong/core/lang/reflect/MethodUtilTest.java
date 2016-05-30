@@ -28,7 +28,7 @@ import com.feilong.test.User;
 /**
  * The Class MethodUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
 public class MethodUtilTest{

@@ -65,7 +65,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ol>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.reflect.ConstructorUtils
  * @see "org.springframework.beans.BeanUtils.instantiateClass"
  * @since 1.0.7

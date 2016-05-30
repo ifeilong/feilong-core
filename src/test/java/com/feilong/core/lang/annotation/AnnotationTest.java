@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 /**
  * The Class AnnotationTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @MyAnnotation(name = "feilong",sex = 0,loveStrings = { "胡伟立", "三国" })
 public class AnnotationTest{

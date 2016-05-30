@@ -91,7 +91,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.lang.ClassLoader
  * @see java.net.URLClassLoader
  * @since 1.0.0

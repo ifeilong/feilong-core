@@ -177,7 +177,7 @@ import com.feilong.core.lang.StringUtil;
  * </table>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.beanutils.ConvertUtils
  * @see org.apache.commons.beanutils.converters.AbstractConverter#handleMissing(Class)
  * @see org.apache.commons.beanutils.locale.LocaleConvertUtils

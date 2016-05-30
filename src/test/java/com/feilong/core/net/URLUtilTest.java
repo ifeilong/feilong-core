@@ -27,7 +27,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class URLUtilTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
 public class URLUtilTest{

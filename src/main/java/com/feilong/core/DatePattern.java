@@ -184,7 +184,7 @@ import java.util.Date;
  * </p>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see SimpleDateFormat
  * @see org.apache.commons.lang3.time.DateFormatUtils
  * @see <a

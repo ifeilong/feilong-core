@@ -27,7 +27,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class SystemUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
 public class SystemUtilTest{

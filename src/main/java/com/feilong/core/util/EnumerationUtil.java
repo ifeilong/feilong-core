@@ -47,7 +47,7 @@ import com.feilong.core.Validator;
  * </p>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.collections4.EnumerationUtils
  * @since 1.5.3
  */

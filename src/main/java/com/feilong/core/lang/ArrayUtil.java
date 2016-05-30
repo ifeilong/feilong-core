@@ -66,7 +66,7 @@ import com.feilong.core.bean.PropertyUtil;
  * </ul>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.ArrayUtils
  * @since 1.4.0
  */

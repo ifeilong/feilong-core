@@ -20,7 +20,7 @@ package com.feilong.core.lang.reflect.res;
 /**
  * 通过索引方式实现的查询商品的Dao.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class SkuItemRepositoryImpl3 implements BaseSolrRepository<SkuItem, Long>{
 

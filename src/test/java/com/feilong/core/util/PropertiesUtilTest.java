@@ -18,7 +18,7 @@ package com.feilong.core.util;
 /**
  * The Class PropertiesUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0
  */
 public class PropertiesUtilTest{

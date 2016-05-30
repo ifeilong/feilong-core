@@ -31,7 +31,7 @@ import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
  * 如果是,那么使用 {@link JsonUtil} 格式化的时候会显示成*****.
  * </p>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see SensitiveWordsJsonValueProcessor
  * @since 1.4.0
  */

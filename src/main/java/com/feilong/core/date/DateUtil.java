@@ -203,7 +203,7 @@ import com.feilong.core.text.DateFormatUtil;
  * </table>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see CalendarUtil
  * @see DatePattern
  * @see DateFormatUtil

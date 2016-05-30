@@ -307,7 +307,7 @@ import com.feilong.core.util.PropertiesUtil;
  * </table>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.lang.System
  * @see org.apache.commons.lang3.SystemUtils
  * @see org.apache.commons.lang3.SystemUtils#USER_HOME

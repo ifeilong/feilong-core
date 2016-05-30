@@ -157,7 +157,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.net.URI
  * @see java.net.URL
  * @see URIComponents

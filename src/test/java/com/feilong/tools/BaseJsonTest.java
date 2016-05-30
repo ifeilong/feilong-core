@@ -32,7 +32,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class BaseJsonTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
 public abstract class BaseJsonTest{

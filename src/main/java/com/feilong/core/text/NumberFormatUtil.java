@@ -37,7 +37,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 注意:<span style="color:red">{@link DecimalFormat}不是同步的 </span>,建议为每个线程创建独立的格式实例.(见JAVA API 文档)
  * </p>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see Format
  * @see NumberFormat
  * @see DecimalFormat

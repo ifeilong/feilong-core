@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 /**
  * The Class StringUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class StringUtilTemp{
 

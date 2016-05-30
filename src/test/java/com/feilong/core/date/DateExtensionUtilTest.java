@@ -31,7 +31,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class DateExtensionUtilTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.8
  */
 public class DateExtensionUtilTest extends BaseDateUtilTest{

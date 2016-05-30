@@ -21,7 +21,7 @@ import java.text.MessageFormat;
 /**
  * {@link MessageFormat}工具类,常用于国际化 .
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see MessageFormat
  * @see Format
  * @since 1.0.2

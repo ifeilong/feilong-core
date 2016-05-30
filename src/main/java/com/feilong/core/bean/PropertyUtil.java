@@ -46,7 +46,7 @@ import com.feilong.core.lang.ClassUtil;
  * </p>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.beanutils.PropertyUtils
  * @see com.feilong.core.bean.BeanUtil
  * @since 1.0.0

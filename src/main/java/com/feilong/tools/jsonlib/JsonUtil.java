@@ -110,7 +110,7 @@ import net.sf.json.util.PropertySetStrategy;
  * </ul>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see net.sf.json.JSONSerializer#toJSON(Object, JsonConfig)
  * 
  * @see net.sf.json.JSONObject

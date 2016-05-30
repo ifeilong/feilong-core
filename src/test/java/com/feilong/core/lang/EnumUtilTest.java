@@ -25,7 +25,7 @@ import com.feilong.core.bean.BeanUtilException;
 /**
  * The Class EnumUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.6
  */
 public class EnumUtilTest{

@@ -52,7 +52,7 @@ import com.feilong.core.bean.ConvertUtil;
  * </ul>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.1
  */
 public final class URLUtil{

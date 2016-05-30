@@ -26,7 +26,7 @@ import com.feilong.core.lang.EnumUtil;
 /**
  * The Class HttpMethodTypeTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.6
  */
 public class HttpMethodTypeTest{

@@ -102,7 +102,7 @@ import com.feilong.core.text.NumberFormatUtil;
  * </table>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see Integer
  * @see Long
  * @see BigDecimal

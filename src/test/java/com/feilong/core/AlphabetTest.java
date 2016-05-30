@@ -24,7 +24,7 @@ import org.junit.Test;
 /**
  * The Class AlphabetTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3
  */
 public class AlphabetTest{

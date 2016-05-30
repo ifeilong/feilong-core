@@ -16,7 +16,7 @@
 /**
  * 反射工具包,对 <code>java.lang.reflect</code>包的封装.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.reflect
  * @see "org.springframework.util.ReflectionUtils"
  * @since 1.0.7

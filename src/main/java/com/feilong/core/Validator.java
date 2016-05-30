@@ -50,7 +50,7 @@ import org.apache.commons.lang3.StringUtils;
  * </ol>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see String#trim()
  * @see Map#isEmpty()
  * @see Collection#isEmpty()

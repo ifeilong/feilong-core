@@ -139,7 +139,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.util.StringTokenizer
  * @see "org.springframework.util.StringUtils#tokenizeToStringArray(String, String)"
  * @see "org.springframework.beans.factory.xml.BeanDefinitionParserDelegate#MULTI_VALUE_ATTRIBUTE_DELIMITERS"

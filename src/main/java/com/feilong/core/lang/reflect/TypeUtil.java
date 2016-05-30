@@ -53,7 +53,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </ol>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.reflect.TypeUtils
  * @see "org.springframework.core.GenericTypeResolver"
  * @see "org.springframework.core.GenericTypeResolver#getTypeVariableMap(Class<?>)"

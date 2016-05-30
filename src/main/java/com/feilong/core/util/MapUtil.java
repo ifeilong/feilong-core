@@ -179,7 +179,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </table>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.util.AbstractMap.SimpleEntry
  * @see org.apache.commons.collections4.MapUtils
  * @since 1.0.0

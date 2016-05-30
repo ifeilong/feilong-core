@@ -20,7 +20,7 @@ import net.sf.json.util.PropertyFilter;
 /**
  * The Class ArrayContainsPropertyFilter.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
 public class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{

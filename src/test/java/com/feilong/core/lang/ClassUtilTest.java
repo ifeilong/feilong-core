@@ -29,7 +29,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class ClassUtilTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.8
  */
 public class ClassUtilTest{

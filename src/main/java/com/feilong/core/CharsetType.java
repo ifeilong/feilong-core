@@ -22,7 +22,7 @@ package com.feilong.core;
  * 建议不要自己硬编码,直接调用这里预声明的常量.
  * </p>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.CharEncoding
  * @see org.apache.commons.lang3.CharEncoding#isSupported(String)
  * @see java.nio.charset.Charset#availableCharsets()

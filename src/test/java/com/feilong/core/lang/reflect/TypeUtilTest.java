@@ -29,7 +29,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class TypeUtilTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.1.1
  */
 public class TypeUtilTest{

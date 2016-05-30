@@ -28,7 +28,7 @@ import net.sf.json.processors.JsonValueProcessor;
 /**
  * The Class BigDecimalJsonValueProcessor.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
 public class BigDecimalJsonValueProcessor implements JsonValueProcessor{

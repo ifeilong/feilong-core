@@ -28,7 +28,7 @@ import org.apache.commons.lang3.Validate;
  * </ol>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.ObjectUtils
  * @since 1.0.0
  */

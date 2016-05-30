@@ -18,7 +18,7 @@ package com.feilong.core;
 /**
  * 常用字母表.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see <a href="http://algs4.cs.princeton.edu/50strings/Alphabet.java.html">Alphabet.java</a>
  * @since 1.5.3
  */

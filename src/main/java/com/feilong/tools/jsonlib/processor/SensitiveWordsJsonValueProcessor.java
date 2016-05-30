@@ -21,7 +21,7 @@ import net.sf.json.processors.JsonValueProcessor;
 /**
  * 过滤敏感信息,最直接的就是像密码这样的内容,不可以输出在控制台,需要转换成***字眼.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
 public class SensitiveWordsJsonValueProcessor implements JsonValueProcessor{

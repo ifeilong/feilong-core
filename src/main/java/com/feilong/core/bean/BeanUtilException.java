@@ -33,7 +33,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * Note that: this is a runtime (unchecked) exception. Beans exceptions are usually fatal; there is no reason for them to be checked.
  * </p>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.beans.BeansException"
  * @since 1.0.8
  */

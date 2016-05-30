@@ -23,7 +23,7 @@ import java.io.IOException;
  * 注:jdk1.8 自带了 {@link "java.io.UncheckedIOException"}
  * </p>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
  */
 public class UncheckedIOException extends RuntimeException{

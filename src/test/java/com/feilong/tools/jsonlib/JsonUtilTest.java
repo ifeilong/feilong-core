@@ -44,7 +44,7 @@ import net.sf.json.processors.JsonValueProcessor;
 /**
  * The Class JsonlibTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class JsonUtilTest extends BaseJsonTest{
 

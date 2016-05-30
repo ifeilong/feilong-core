@@ -45,7 +45,7 @@ import com.feilong.core.bean.PropertyUtil;
  * </p>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
  * @see "org.springframework.beans.support.PropertyComparator"

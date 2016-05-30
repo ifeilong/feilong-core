@@ -30,7 +30,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * 正则表达式工具类.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see RegexPattern
  * @see java.util.regex.Pattern
  * @see java.util.regex.Matcher

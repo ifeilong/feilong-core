@@ -242,7 +242,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </ul>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.util.Collections
  * @see org.apache.commons.collections4.ListUtils
  * @see org.apache.commons.collections4.IterableUtils

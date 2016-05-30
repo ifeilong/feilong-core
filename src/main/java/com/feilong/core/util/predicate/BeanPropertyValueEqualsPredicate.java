@@ -23,7 +23,7 @@ import com.feilong.core.bean.PropertyUtil;
 /**
  * 调用 {@link com.feilong.core.bean.PropertyUtil#getProperty(Object, String)} 匹配属性值.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
  * @see org.apache.commons.beanutils.BeanPredicate

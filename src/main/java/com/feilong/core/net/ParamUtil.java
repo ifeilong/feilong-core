@@ -38,7 +38,7 @@ import com.feilong.core.bean.ConvertUtil;
 /**
  * 处理参数相关.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.web.util.UriComponentsBuilder"
  * @see "org.apache.http.client.utils.URIBuilder"
  * @since 1.0.0

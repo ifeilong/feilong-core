@@ -26,7 +26,7 @@ import com.feilong.core.bean.PropertyUtil;
  * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,判断是否 {@link java.util.Collection#contains(Object)} 在
  * <code>values</code>集合中.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
  * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)

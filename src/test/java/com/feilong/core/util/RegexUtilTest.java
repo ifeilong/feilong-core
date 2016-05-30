@@ -26,7 +26,7 @@ import com.feilong.core.RegexPattern;
 /**
  * The Class RegexUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class RegexUtilTest{
 

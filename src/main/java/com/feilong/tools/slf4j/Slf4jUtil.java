@@ -21,7 +21,7 @@ import org.slf4j.helpers.MessageFormatter;
 /**
  * 对 slf4j 的封装提取.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
 public final class Slf4jUtil{

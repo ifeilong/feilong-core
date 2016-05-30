@@ -28,7 +28,7 @@ import com.feilong.core.Alphabet;
 /**
  * The Class RandomUtilTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0
  */
 public class RandomUtilTest{

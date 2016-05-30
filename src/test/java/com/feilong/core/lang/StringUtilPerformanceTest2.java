@@ -27,7 +27,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class StringUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class StringUtilPerformanceTest2{
 

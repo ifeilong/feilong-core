@@ -140,7 +140,7 @@ import com.feilong.core.Validator;
  * </ul>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see com.feilong.core.bean.PropertyUtil
  * 
  * @see java.beans.BeanInfo

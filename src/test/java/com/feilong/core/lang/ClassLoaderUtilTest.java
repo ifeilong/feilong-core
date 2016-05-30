@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 /**
  * The Class ClassLoaderUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ClassLoaderUtilTest{
 

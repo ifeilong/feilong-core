@@ -51,7 +51,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class ConvertUtilTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.3.0
  */
 public class ConvertUtilTest{

@@ -28,7 +28,7 @@ import com.feilong.core.DatePattern;
 /**
  * The Class CalendarUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class CalendarUtilTest extends BaseDateUtilTest{
 

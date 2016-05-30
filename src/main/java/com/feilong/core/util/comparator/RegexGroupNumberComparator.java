@@ -39,7 +39,7 @@ import com.feilong.core.util.RegexUtil;
  * Collections.sort(includedFileUrlList, new RegexGroupNumberComparator(".*ppt-coreContent(\\d*).png"));
  * </pre>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.apache.commons.io.comparator.NameFileComparator"
  * @see "org.apache.commons.io.comparator.DirectoryFileComparator"
  * @see "org.apache.commons.io.comparator.DefaultFileComparator"

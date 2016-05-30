@@ -34,7 +34,7 @@ import org.apache.commons.lang3.Validate;
  * 也可以查看 {@link SimpleDateFormat} Synchronization部分注释内容
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.text.Format
  * @see java.text.DateFormat
  * @see java.text.SimpleDateFormat

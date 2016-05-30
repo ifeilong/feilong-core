@@ -18,7 +18,7 @@ package com.feilong.core;
 /**
  * html相关常量.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.web.util.HtmlUtils"
  * @see "org.springframework.web.util.HtmlCharacterEntityDecoder"
  * @see "weibo4j.http.HTMLEntity"

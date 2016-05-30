@@ -30,7 +30,7 @@ import com.feilong.core.bean.ConvertUtil;
 /**
  * The Class NumberUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class NumberUtilTest{
 

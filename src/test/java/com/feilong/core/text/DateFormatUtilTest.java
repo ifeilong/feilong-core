@@ -27,7 +27,7 @@ import com.feilong.core.DatePattern;
 /**
  * The Class DateFormatUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateFormatUtilTest{
 

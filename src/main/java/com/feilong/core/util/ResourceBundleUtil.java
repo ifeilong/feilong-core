@@ -64,7 +64,7 @@ import com.feilong.core.text.MessageFormatUtil;
  * 参考 {@link PropertiesUtil}的注释
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see MessageFormatUtil#format(String, Object...)
  * @see java.util.ResourceBundle
  * @see java.util.PropertyResourceBundle

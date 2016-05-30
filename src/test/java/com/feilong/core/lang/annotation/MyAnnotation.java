@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * The Interface MyAnnotation.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 // 这个Annotation可以被写入javadoc
 @Documented

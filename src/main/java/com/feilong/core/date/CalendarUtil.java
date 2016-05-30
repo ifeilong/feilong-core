@@ -145,7 +145,7 @@ import com.feilong.core.DatePattern;
  * </table>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see DateUtil
  * @since 1.0.1
  */

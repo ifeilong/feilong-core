@@ -33,7 +33,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <li>生成随机数的算法有很多种,最简单也是最常用的就是 "线性同余法":第n+1个数=(第n个数*29+37) % 1000,其中%是"求余数"运算符.</li>
  * </ul>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.lang.Math#random()
  * @see org.apache.commons.lang3.RandomUtils
  * @see org.apache.commons.lang3.RandomStringUtils

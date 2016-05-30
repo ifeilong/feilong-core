@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 /**
  * The Class Slf4jUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class Slf4jUtilTest{
 

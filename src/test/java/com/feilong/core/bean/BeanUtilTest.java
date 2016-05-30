@@ -52,7 +52,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class BeanUtilTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class BeanUtilTest{
 

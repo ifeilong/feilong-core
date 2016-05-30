@@ -78,7 +78,7 @@ import com.feilong.core.lang.ClassLoaderUtil;
  * 
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.apache.velocity.texen.util.PropertiesUtil"
  * @see "org.apache.cxf.common.util.PropertiesLoaderUtils"
  * @see "org.springframework.core.io.support.PropertiesLoaderUtils"

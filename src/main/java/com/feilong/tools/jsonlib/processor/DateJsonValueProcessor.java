@@ -26,7 +26,7 @@ import net.sf.json.processors.JsonValueProcessor;
 /**
  * 时间转换 日期值处理器实现.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.5
  */
 public class DateJsonValueProcessor implements JsonValueProcessor{

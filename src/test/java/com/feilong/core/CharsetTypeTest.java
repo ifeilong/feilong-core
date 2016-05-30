@@ -24,7 +24,7 @@ import org.junit.Test;
 /**
  * The Class CharsetTypeTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class CharsetTypeTest{
 

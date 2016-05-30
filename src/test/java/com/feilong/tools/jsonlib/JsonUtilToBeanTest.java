@@ -43,7 +43,7 @@ import net.sf.json.JsonConfig;
 /**
  * JsonUtil测试类 (C) 2009-9-11, jzj.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class JsonUtilToBeanTest extends BaseJsonTest{
 

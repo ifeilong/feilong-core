@@ -116,7 +116,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </table>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.reflect.MethodUtils
  * @see org.apache.commons.lang3.ClassUtils#getPublicMethod(Class, String, Class...)
  * @see java.util.ServiceLoader jdk1.6 ServiceLoader

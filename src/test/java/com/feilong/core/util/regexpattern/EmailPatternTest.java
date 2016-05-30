@@ -31,7 +31,7 @@ import com.feilong.core.util.RegexUtil;
 
 /**
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3
  */
 @RunWith(Parameterized.class)

@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * 设置 连接object成为字符串 的配置.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.builder.ToStringStyle
  * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
  * @since 1.4.0

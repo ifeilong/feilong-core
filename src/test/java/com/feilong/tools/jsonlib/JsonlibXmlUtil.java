@@ -23,7 +23,7 @@ import net.sf.json.xml.XMLSerializer;
 /**
  * xml功能
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
 public class JsonlibXmlUtil{

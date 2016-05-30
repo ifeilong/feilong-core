@@ -28,7 +28,7 @@ package com.feilong.core;
  * </p>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.time.DateUtils
  * @since 1.0.0
  */

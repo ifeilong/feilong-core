@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Sku Item for solr.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class SkuItem implements Serializable{
 
