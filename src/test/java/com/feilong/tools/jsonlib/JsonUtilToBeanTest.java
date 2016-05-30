@@ -180,7 +180,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         Map<String, Person> map = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", Person.class);
         LOGGER.info(JsonUtil.format(map));
 
-        Map<String, String> map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", String.class);
+        Map<String, String> map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
         LOGGER.info(JsonUtil.format(map1));
     }
 
