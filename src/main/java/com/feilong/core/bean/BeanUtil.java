@@ -278,13 +278,13 @@ public final class BeanUtil{
      *
      * @param converter
      *            the converter
-     * @param clazz
-     *            the clazz
+     * @param klass
+     *            the klass
      * @see org.apache.commons.beanutils.ConvertUtils#register(Converter, Class)
      * @since 1.5.0
      */
-    public static void register(Converter converter,Class<?> clazz){
-        ConvertUtils.register(converter, clazz);
+    public static void register(Converter converter,Class<?> klass){
+        ConvertUtils.register(converter, klass);
     }
 
     // [start] copyProperties

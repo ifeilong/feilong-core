@@ -177,9 +177,11 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toMap(){
-        String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
-        Map<String, Person> map = JsonUtil.toMap(json, Person.class);
+        Map<String, Person> map = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", Person.class);
         LOGGER.info(JsonUtil.format(map));
+
+        Map<String, String> map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", String.class);
+        LOGGER.info(JsonUtil.format(map1));
     }
 
     /**
@@ -187,8 +189,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toMap12(){
-        String json = "{'brandCode':'UA'}";
-        Map<String, String> map = JsonUtil.toMap(json);
+        Map<String, String> map = JsonUtil.toMap("{'brandCode':'UA'}");
         LOGGER.info(JsonUtil.format(map));
 
         Map<String, Integer> map2 = JsonUtil.toMap("{'brandCode':55555}");

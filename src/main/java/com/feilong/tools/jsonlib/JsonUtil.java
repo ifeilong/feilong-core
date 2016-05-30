@@ -696,13 +696,13 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. [{'name':'get'},{'name':'set'}]
-     * @param clazz
-     *            e.g. Person.class
+     * @param rootClass
+     *            e.g. Person.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @return Object[]
      * @see #toArray(String, Class, Map)
      */
-    public static <T> T[] toArray(String json,Class<T> clazz){
-        return toArray(json, clazz, null);
+    public static <T> T[] toArray(String json,Class<T> rootClass){
+        return toArray(json, rootClass, null);
     }
 
     /**
@@ -744,8 +744,8 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. [{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]
-     * @param clazz
-     *            e.g. MyBean.class
+     * @param rootClass
+     *            e.g. MyBean.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return T[]
@@ -754,16 +754,16 @@ public final class JsonUtil{
      * @see #toBean(Object, Class, Map)
      * @see java.lang.reflect.Array#newInstance(Class, int)
      */
-    public static <T> T[] toArray(String json,Class<T> clazz,Map<String, Class<?>> classMap){
+    public static <T> T[] toArray(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
         JSONArray jsonArray = toJSONArray(json);
         int size = jsonArray.size();
 
         @SuppressWarnings("unchecked")
-        T[] t = (T[]) Array.newInstance(clazz, size);
+        T[] t = (T[]) Array.newInstance(rootClass, size);
 
         for (int i = 0; i < size; i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            t[i] = toBean(jsonObject, clazz, classMap);
+            t[i] = toBean(jsonObject, rootClass, classMap);
         }
         return t;
     }
@@ -806,13 +806,13 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. [{'name':'get'},{'name':'set'}]
-     * @param clazz
-     *            the clazz
+     * @param rootClass
+     *            the klass,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @return List
      * @see #toList(String, Class, Map)
      */
-    public static <T> List<T> toList(String json,Class<T> clazz){
-        return toList(json, clazz, null);
+    public static <T> List<T> toList(String json,Class<T> rootClass){
+        return toList(json, rootClass, null);
     }
 
     /**
@@ -856,8 +856,8 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. [{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]
-     * @param clazz
-     *            e.g. MyBean.class
+     * @param rootClass
+     *            e.g. MyBean.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return List
@@ -865,13 +865,13 @@ public final class JsonUtil{
      * @see net.sf.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, Class, Map)
      */
-    public static <T> List<T> toList(String json,Class<T> clazz,Map<String, Class<?>> classMap){
+    public static <T> List<T> toList(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
         List<T> list = new ArrayList<T>();
 
         JSONArray jsonArray = toJSONArray(json);
         for (int i = 0, j = jsonArray.size(); i < j; i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            list.add(toBean(jsonObject, clazz, classMap));
+            list.add(toBean(jsonObject, rootClass, classMap));
         }
         return list;
     }
@@ -900,6 +900,40 @@ public final class JsonUtil{
      * key是 brandCode,value 是 UA 的map
      * </pre>
      * 
+     * <hr>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Integer>} map2 = JsonUtil.toMap("{'brandCode':55555}");
+     * LOGGER.info(JsonUtil.format(map2));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {"brandCode": 55555}
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <p>
+     * 由于泛型 unchecked,所以可能返回的结果泛型里面有其他类型的值
+     * </p>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Long>} map3 = JsonUtil.toMap("{'brandCode':55.555}");
+     * LOGGER.info(JsonUtil.format(map3));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {"brandCode": 55.555}
+     * </pre>
+     * 
      * </blockquote>
      * 
      * @param <T>
@@ -918,7 +952,7 @@ public final class JsonUtil{
      * 把json对象串转换成map对象,且map对象里存放的为其他实体Bean.
      * 
      * <p>
-     * 如果 null==clazz,那么直接将json里面的value 作为map 的value
+     * 如果 null==klass,那么直接将json里面的value 作为map 的value
      * </p>
      * 
      * <h3>示例:</h3>
@@ -947,20 +981,20 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. {'data1':{'name':'get'}, 'data2':{'name':'set'}}
-     * @param clazz
-     *            e.g. Person.class
+     * @param rootClass
+     *            e.g. Person.class ,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}
      * @see #toMap(String, Class, Map)
      */
-    public static <T> Map<String, T> toMap(String json,Class<T> clazz){
-        return toMap(json, clazz, null);
+    public static <T> Map<String, T> toMap(String json,Class<T> rootClass){
+        return toMap(json, rootClass, null);
     }
 
     /**
      * 把json对象串转换成map对象,且map对象里存放的其他实体Bean还含有另外实体Bean.
      * 
      * <p>
-     * 如果 null==clazz,那么直接将json里面的value 作为map 的value
+     * 如果 null==klass,那么直接将json里面的value 作为map 的value
      * </p>
      * 
      * <h3>示例:</h3>
@@ -973,7 +1007,6 @@ public final class JsonUtil{
      * 
      * Map{@code <String, MyBean>} map = JsonUtil.toMap(json, MyBean.class, classMap);
      * LOGGER.debug(JsonUtil.format(map));
-     * 
      * </pre>
      * 
      * 返回:
@@ -993,8 +1026,8 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. {'mybean':{'data':[{'name':'get'}]}}
-     * @param clazz
-     *            e.g. MyBean.class
+     * @param rootClass
+     *            e.g. MyBean.class ,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
@@ -1002,8 +1035,8 @@ public final class JsonUtil{
      * @see #toBean(Object, Class, Map)
      */
     @SuppressWarnings("unchecked")
-    public static <T> Map<String, T> toMap(String json,Class<T> clazz,Map<String, Class<?>> classMap){
-        LOGGER.debug("in json:{}", json);
+    public static <T> Map<String, T> toMap(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
+        LOGGER.debug("in json:[{}],klass:[{}]", json, rootClass);
 
         if (Validator.isNullOrEmpty(json)){
             return Collections.emptyMap();
@@ -1016,8 +1049,8 @@ public final class JsonUtil{
         while (keys.hasNext()){
             String key = keys.next();
             Object value = jsonObject.get(key);
-            LOGGER.debug("key:[{}], value:[{}]", key, value);
-            map.put(key, null == clazz ? (T) value : toBean(value, clazz, classMap));//如果clazz是null,表示不需要转换
+            LOGGER.debug("key:[{}], value:[{}],value type is:[{}]", key, value, value.getClass().getName());
+            map.put(key, null == rootClass ? (T) value : toBean(value, rootClass, classMap));//如果klass是null,表示不需要转换
         }
         return map;
     }
@@ -1057,7 +1090,7 @@ public final class JsonUtil{
      *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans. <br>
      *            支持的格式有: {@link JSONObject#fromObject(Object, JsonConfig)}
      * @param rootClass
-     *            e.g. Person.class
+     *            e.g. Person.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @return the t
      */
     public static <T> T toBean(Object json,Class<T> rootClass){
@@ -1102,7 +1135,7 @@ public final class JsonUtil{
      * @param json
      *            e.g. {'data':[{'name':'get'},{'name':'set'}]}
      * @param rootClass
-     *            e.g. MyBean.class
+     *            e.g. MyBean.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return Object
