@@ -286,7 +286,7 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-    list:[null,null,null,null]
+     * list:[null,null,null,null]
      * </pre>
      * 
      * </blockquote>
