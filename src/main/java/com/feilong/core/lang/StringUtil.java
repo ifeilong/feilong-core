@@ -93,7 +93,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </blockquote>
  * 
  * <h3>String s3 = s1 + s2; <br>
- * System.out.println(s3.intern() == s3); 到底想不相等</h3> <blockquote>
+ * System.out.println(s3.intern() == s3); 到底相不相等</h3> <blockquote>
  * <p>
  * 要看虚拟机的实现<br>
  * 1、假设:hotspot1.6<br>

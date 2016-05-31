@@ -456,7 +456,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code><span style="color:red">所在年的最后一天</span> <code>23:59:59.999</code> 到毫秒<br>
+     * 获得指定日期 <code>date</code><span style="color:red">所在年的最后一天</span> <code>23:59:59.999</code> 到毫秒.
      * 
      * <pre class="code">
      * DateUtil.getLastDateOfThisYear(2012-10-11 17:10:30.701)=2012-12-31 23:59:59.999

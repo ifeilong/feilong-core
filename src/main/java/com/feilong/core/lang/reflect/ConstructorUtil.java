@@ -85,8 +85,9 @@ public final class ConstructorUtil{
     // [start] newInstance
 
     /**
-     * 新建实例,返回 a new instance of the specified class choosing the right constructor from the list of parameter types.<br>
-     * 示例:
+     * 新建实例,返回 a new instance of the specified class choosing the right constructor from the list of parameter types.
+     * 
+     * <h3>示例:</h3>
      * 
      * <pre class="code">
      * User user = ConstructorUtil.newInstance("com.feilong.test.User")
