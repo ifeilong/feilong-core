@@ -480,6 +480,10 @@ public final class BeanUtil{
      * 是为那些本身没有实现clone方法的类准备的 
      * </p>
      * 
+     * <p>
+     * 由于内部实现是通过 {@link java.lang.Class#newInstance()}来构造新的对象,所以需要被clone的对象必须存在默认无参构造函数,否则会出现 异常 {@link java.lang.InstantiationException}
+     * </p>
+     * 
      * <h3>深度clone:</h3>
      * 
      * <blockquote>
