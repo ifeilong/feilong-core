@@ -1011,6 +1011,7 @@ public final class DateUtil{
 
     /**
      * 将指定日期 <code>date</code>转换成特殊格式的字符串.
+     * 
      *
      * @param date
      *            the date
