@@ -15,10 +15,7 @@
  */
 package com.feilong.core.date;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.junit.Test;
@@ -78,45 +75,6 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         Date date = DateUtil.string2Date("2012-12-03 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
         LOGGER.debug(DateExtensionUtil.getIntervalForView(now, date));
         LOGGER.debug(DateUtil.getIntervalTime(now, date) + "");
-    }
-
-    /**
-     * TestCalendarUtilTest.
-     */
-    @Test
-    public void testCalendarUtilTest(){
-        List<String> weekDateStringList = DateExtensionUtil
-                        .getWeekDateStringList(Calendar.THURSDAY, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND);
-        LOGGER.debug(JsonUtil.format(weekDateStringList));
-    }
-
-    /**
-     * Test to humanization date string.
-     */
-    @Test
-    public void testToPrettyDateString(){
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-18 13:55:00", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-18 14:14:22", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-18 14:15:22", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-17 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-16 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-10-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2012-09-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2015-08-02 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateExtensionUtil.toPrettyDateString(DateUtil.string2Date("2015-7-30 13:00:00", DatePattern.COMMON_DATE_AND_TIME)));
-    }
-
-    /**
-     * TestDateUtilTest.
-     */
-    @Test
-    public void testDateUtilTest(){
-        List<Date> dateList = new ArrayList<Date>();
-        dateList.add(new Date());
-        dateList.add(new Date());
-        dateList.add(new Date());
-        dateList.add(new Date());
-        LOGGER.debug(JsonUtil.format(DateExtensionUtil.toStringList(dateList, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
     }
 
     /**
