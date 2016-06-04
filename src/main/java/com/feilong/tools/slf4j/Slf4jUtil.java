@@ -53,7 +53,7 @@ public final class Slf4jUtil{
      * 因此,你可以在代码中出现这样的写法:
      * 
      * <pre class="code">
-     * throw new IllegalArgumentException(Slf4jUtil.formatMessage(
+     * throw new IllegalArgumentException(Slf4jUtil.format(
      *  "callbackUrl:[{}] ,length:[{}] can't {@code >}{}",
      *  callbackUrl,
      *  callbackUrlLength,
@@ -63,7 +63,7 @@ public final class Slf4jUtil{
      * 又或者
      * 
      * <pre class="code">
-     * return Slf4jUtil.formatMessage("{} [{}]", encode, encode.length());
+     * return Slf4jUtil.format("{} [{}]", encode, encode.length());
      * </pre>
      * 
      * @param messagePattern
@@ -75,9 +75,25 @@ public final class Slf4jUtil{
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
      * @see org.slf4j.helpers.FormattingTuple#getMessage()
+     * @since 1.5.7
      */
-    public static String formatMessage(String messagePattern,Object...args){
+    public static String format(String messagePattern,Object...args){
         FormattingTuple formattingTuple = MessageFormatter.arrayFormat(messagePattern, args);
         return formattingTuple.getMessage();
+    }
+
+    /**
+     * Format message.
+     *
+     * @param messagePattern
+     *            the message pattern
+     * @param args
+     *            the args
+     * @return the string
+     * @deprecated pls use {@link #format(String, Object...)}
+     */
+    @Deprecated
+    public static String formatMessage(String messagePattern,Object...args){
+        return format(messagePattern, args);
     }
 }

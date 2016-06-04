@@ -34,11 +34,11 @@ public class Slf4jUtilTest{
      */
     @Test
     public void test(){
-        LOGGER.info(Slf4jUtil.formatMessage("{},{}", "今天", "aaaa"));
-        LOGGER.info(Slf4jUtil.formatMessage(null, "今天", "aaaa"));
-        LOGGER.info(Slf4jUtil.formatMessage("", "今天", "aaaa"));
+        LOGGER.info(Slf4jUtil.format("{},{}", "今天", "aaaa"));
+        LOGGER.info(Slf4jUtil.format(null, "今天", "aaaa"));
+        LOGGER.info(Slf4jUtil.format("", "今天", "aaaa"));
         Object arg = null;
-        LOGGER.info(Slf4jUtil.formatMessage("", arg));
-        LOGGER.info(Slf4jUtil.formatMessage("", ""));
+        LOGGER.info(Slf4jUtil.format("", arg));
+        LOGGER.info(Slf4jUtil.format("", ""));
     }
 }
