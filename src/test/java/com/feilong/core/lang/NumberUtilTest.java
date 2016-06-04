@@ -358,17 +358,6 @@ public class NumberUtilTest{
     }
 
     /**
-     * Test.
-     */
-    @Test
-    public void test(){
-        BigDecimal a = ConvertUtil.toBigDecimal("1.000000");
-        BigDecimal b = new BigDecimal(1);
-        LOGGER.debug(a.compareTo(b) + "");
-        LOGGER.debug(a.equals(b) + "");
-    }
-
-    /**
      * Gets the adds the value.
      * 
      */

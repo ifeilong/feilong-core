@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 /**
- * 自定义的 Predicate,常用在 {@link com.feilong.core.util.CollectionsUtil#select(java.util.Collection, org.apache.commons.collections4.Predicate)},
- * {@link com.feilong.core.util.CollectionsUtil#groupCount(java.util.Collection, org.apache.commons.collections4.Predicate, String)} 等地方.
+ * 自定义{@link org.apache.commons.collections4.Predicate}.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * 

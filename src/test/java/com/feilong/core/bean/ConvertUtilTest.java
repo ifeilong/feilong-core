@@ -148,6 +148,17 @@ public class ConvertUtilTest{
     }
 
     /**
+     * Test.
+     */
+    @Test
+    public void test(){
+        BigDecimal a = ConvertUtil.toBigDecimal("1.000000");
+        BigDecimal b = new BigDecimal(1);
+        LOGGER.debug(a.compareTo(b) + "");
+        LOGGER.debug(a.equals(b) + "");
+    }
+
+    /**
      * Test to longs.
      */
     @Test
@@ -251,13 +262,15 @@ public class ConvertUtilTest{
      */
     @Test
     public void testConvert1(){
-        Serializable t = ConvertUtil.convert(null, Serializable.class);
+        String[] strings = null;
+        Serializable t = ConvertUtil.toArray(strings, Serializable.class);
         LOGGER.info("{}", t);
     }
 
     @Test
     public void testConvert2(){
         LOGGER.info("{}", ConvertUtil.convert("1", Integer.class));
+        LOGGER.info("{}", ConvertUtil.convert("1", Long.class));
     }
 
     /**
@@ -290,7 +303,7 @@ public class ConvertUtilTest{
     @Test
     public void testConvertArray(){
         String[] int1 = { "2", "1" };
-        LOGGER.debug(JsonUtil.format(ConvertUtil.convert(int1, Long.class)));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toArray(int1, Long.class)));
     }
 
     /**
@@ -341,6 +354,18 @@ public class ConvertUtilTest{
 
         String[] array = ConvertUtil.toArray(testList, String.class);
         LOGGER.info(JsonUtil.format(array));
+    }
+
+    @Test
+    public void toArray2(){
+        String[] array = ConvertUtil.toArray("xinge", "feilong");
+        LOGGER.info(JsonUtil.format(array));
+
+        User user1 = new User();
+        user1.setId(1L);
+        User user2 = new User();
+        user2.setId(2L);
+        LOGGER.info(JsonUtil.format(ConvertUtil.toArray(user1, user2)));
     }
 
     /**

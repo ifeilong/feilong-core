@@ -403,7 +403,7 @@ public final class ResourceBundleUtil{
     public static <T> T[] getArray(ResourceBundle resourceBundle,String key,String delimiters,Class<T> typeClass){
         String value = getValue(resourceBundle, key);
         String[] array = StringUtil.tokenizeToStringArray(value, delimiters);
-        return ConvertUtil.convert(array, typeClass);
+        return ConvertUtil.toArray(array, typeClass);
     }
 
     // **************************************************************************

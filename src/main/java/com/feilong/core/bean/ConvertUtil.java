@@ -85,7 +85,7 @@ import com.feilong.core.lang.StringUtil;
  * <td>将数组转成指定class类型的对象. <br>
  * 如果指定的Class类型是数组类型,那么返回值的类型将是数组的类型.否则将会构造一个指定类型的数组返回.<br>
  * see {@link ConvertUtilsBean#convert(String[], Class)} <br>
- * see {@link #convert(String[], Class)}</td>
+ * see {@link #toArray(String[], Class)}</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link ConvertUtils#convert(Object, Class)}</td>
@@ -253,6 +253,16 @@ public final class ConvertUtil{
 
     /**
      * object类型转换成 {@link java.math.BigDecimal}.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toBigDecimal(1111) = BigDecimal.valueOf(1111)
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <p>
      * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
@@ -529,6 +539,20 @@ public final class ConvertUtil{
     }
 
     /**
+     * To array.
+     *
+     * @param <T>
+     *            the generic type
+     * @param arrays
+     *            the arrays
+     * @return the t[]
+     * @since 1.5.6
+     */
+    public static <T> T[] toArray(T...arrays){
+        return arrays;
+    }
+
+    /**
      * 将集合转成数组.
      * 
      * <h3>示例:</h3>
@@ -592,6 +616,33 @@ public final class ConvertUtil{
         //注意,toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
         return collection.toArray(array);
     }
+
+    /**
+     * Convert an array of specified values to an array of objects of the specified class (if possible).
+     * 
+     * <p>
+     * If the specified Java class is itself an array class, this class will be the type of the returned value.<br>
+     * Otherwise, an array will be constructed whose component type is the specified class.
+     * </p>
+     *
+     * @param <T>
+     *            the generic type
+     * @param values
+     *            the values
+     * @param targetType
+     *            the target type
+     * @return 如果传的 value是 <code>null</code>,那么返回null <br>
+     *         否则调用 {@link ConvertUtils#convert(String[], Class)}
+     * @see org.apache.commons.beanutils.ConvertUtils#convert(String[], Class)
+     * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(String[], Class)
+     * @since 1.5.6
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T[] toArray(String[] values,Class<T> targetType){
+        return null == values ? null : (T[]) ConvertUtils.convert(values, targetType);
+    }
+
+    //********************************************************************************
 
     /**
      * 将数组转成对象型数组.
@@ -734,6 +785,32 @@ public final class ConvertUtil{
      * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
      * valid.</li>
      * </ul>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings("{5,4, 8,2;8 9_5@3`a}")));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [
+        "5",
+        "4",
+        "8",
+        "2",
+        "8",
+        "9",
+        "5",
+        "3",
+        "a"
+    ]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param toBeConvertedValue
      *            the to be converted value
@@ -803,18 +880,29 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将value转成指定Class类型的对象,如果Class的转换器没有注册,那么传入的value原样返回.
+     * 将<code>value</code>转成指定<code>targetType</code>类型的对象.
+     * 
+     * <p>
+     * 如果<code>targetType</code>的转换器没有注册,那么传入的value原样返回.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.convert("1", Integer.class) 返回 1
+     * ConvertUtil.convert("1", Long.class) 返回 1
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>注意:</h3>
      * 
-     * <blockquote>
-     * <ul>
-     * <li>如果传的 value是 <code>value.getClass().isArray()</code> 或者 {@link Collection},那么<span style="color:red">会取第一个元素</span>进行转换
-     * {@link AbstractConverter#convert(Class, Object)} ,调用的 {@link AbstractConverter#convertArray(Object)} 方法</li>
-     * <li>如果传的 value是 <code>null</code> ,那么返回null</li>
-     * </ul>
-     * 
-     * </blockquote>
+     * <p>
+     * 如果传的 value是 <code>value.getClass().isArray()</code> 或者 {@link Collection},那么<span style="color:red">会取第一个元素</span>进行转换,<br>
+     * 参见{@link AbstractConverter#convert(Class, Object)},调用的 {@link AbstractConverter#convertArray(Object)} 方法
+     * </p>
      *
      * @param <T>
      *            the generic type
@@ -822,39 +910,16 @@ public final class ConvertUtil{
      *            the value
      * @param targetType
      *            the target type
-     * @return the t
+     * @return 如果 <code>value</code> 是null,返回null<br>
+     *         如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         否则返回 {@link org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)}
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)
      */
     @SuppressWarnings("unchecked")
     public static <T> T convert(Object value,Class<T> targetType){
+        Validate.notNull(targetType, "targetType can't be null!");
         return null == value ? null : (T) ConvertUtils.convert(value, targetType);
     }
 
-    /**
-     * Convert an array of specified values to an array of objects of the specified class (if possible).
-     * 
-     * <p>
-     * 如果传的 value是 <code>null</code> ,那么返回null
-     * </p>
-     * 
-     * <p>
-     * If the specified Java class is itself an array class, this class will be the type of the returned value.<br>
-     * Otherwise, an array will be constructed whose component type is the specified class.
-     * </p>
-     *
-     * @param <T>
-     *            the generic type
-     * @param values
-     *            the values
-     * @param targetType
-     *            the target type
-     * @return the t[]
-     * @see org.apache.commons.beanutils.ConvertUtils#convert(String[], Class)
-     * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(String[], Class)
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T[] convert(String[] values,Class<T> targetType){
-        return null == values ? null : (T[]) ConvertUtils.convert(values, targetType);
-    }
 }

@@ -38,6 +38,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
@@ -59,11 +60,15 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testRemove(){
-        List<String> list = new ArrayList<String>();
-        list.add("xinge");
-        list.add("feilong1");
-        list.add("feilong2");
-        list.add("feilong2");
+        List<String> list = new ArrayList<String>(){
+
+            {
+                add("xinge");
+                add("feilong1");
+                add("feilong2");
+                add("feilong2");
+            }
+        };
 
         LOGGER.info("list:{}", JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
         LOGGER.info("list:{}", JsonUtil.format(list));
@@ -71,11 +76,7 @@ public class CollectionsUtilTest{
 
     @Test
     public void testPartition(){
-        List<String> list = new ArrayList<String>();
-        list.add("xinge");
-        list.add("feilong1");
-        list.add("feilong2");
-
+        List<String> list = ConvertUtil.toList("xinge", "feilong1", "feilong2");
         LOGGER.info("list:{}", JsonUtil.format(ListUtils.partition(list, 2)));
     }
 

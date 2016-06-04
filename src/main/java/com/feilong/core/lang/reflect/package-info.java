@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * 反射工具包,对 <code>java.lang.reflect</code>包的封装.
+ * 对 <code>java.lang.reflect</code>包常用类的封装.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.reflect
