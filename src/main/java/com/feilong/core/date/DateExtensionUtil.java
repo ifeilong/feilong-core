@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.DatePattern;
+import com.feilong.core.TimeInterval;
 
 /**
  * 日期扩展工具类.
@@ -43,6 +44,41 @@ import com.feilong.core.DatePattern;
  * <li>{@link #getIntervalForView(long)}</li>
  * <li>{@link #getIntervalForView(Date, Date)}</li>
  * </ul>
+ * </blockquote>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
+ * 
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>获得两个日期间隔</td>
+ * <td>
+ * <ul>
+ * <li>{@link #getIntervalDay(long)}</li>
+ * <li>{@link #getIntervalDay(Date, Date)}</li>
+ * <li>{@link #getIntervalDay(String, String, String)}</li>
+ * 
+ * <li>{@link #getIntervalWeek(long)}</li>
+ * <li>{@link #getIntervalWeek(Date, Date)}</li>
+ * <li>{@link #getIntervalWeek(String, String, String)}</li>
+ * 
+ * <li>{@link #getIntervalHour(long)}</li>
+ * <li>{@link #getIntervalHour(Date, Date)}</li>
+ * 
+ * <li>{@link #getIntervalMinute(long)}</li>
+ * <li>{@link #getIntervalSecond(long)}</li>
+ * <li>{@link #getIntervalSecond(Date, Date)}</li>
+ * 
+ * <li>{@link #getIntervalTime(Date, Date)}</li>
+ * </ul>
+ * </td>
+ * </tr>
+ * 
+ * </table>
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -219,7 +255,7 @@ public final class DateExtensionUtil{
      * @return the interval day list <br>
      *         如果 <code>fromDate</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>toDate</code> 是null,抛出 {@link NullPointerException}
-     * @see DateUtil#getIntervalDay(Date, Date)
+     * @see #getIntervalDay(Date, Date)
      * @see org.apache.commons.lang3.time.DateUtils#iterator(Calendar, int)
      * @since 1.5.4
      */
@@ -238,7 +274,7 @@ public final class DateExtensionUtil{
         dateList.add(beginDateReset);
 
         // 相隔的天数
-        int intervalDay = DateUtil.getIntervalDay(beginDateReset, endDateReset);
+        int intervalDay = getIntervalDay(beginDateReset, endDateReset);
         for (int i = 0; i < intervalDay; ++i){
             dateList.add(DateUtil.addDay(beginDateReset, i + 1));
         }
@@ -286,10 +322,10 @@ public final class DateExtensionUtil{
      *            结束日期
      * @return 将两日期之间的间隔,转换成直观的表示方式
      * @see #getIntervalForView(long)
-     * @see DateUtil#getIntervalTime(Date, Date)
+     * @see #getIntervalTime(Date, Date)
      */
     public static String getIntervalForView(Date beginDate,Date endDate){
-        long spaceTime = DateUtil.getIntervalTime(beginDate, endDate);
+        long spaceTime = getIntervalTime(beginDate, endDate);
         return getIntervalForView(spaceTime);
     }
 
@@ -317,10 +353,10 @@ public final class DateExtensionUtil{
      * @return 将间隔毫秒数,转换成直观的表示方式.<br>
      *         如果 spaceMilliseconds 是0 直接返回0<br>
      *         如果 {@code spaceMilliseconds<0},抛出 {@link IllegalArgumentException}
-     * @see DateUtil#getIntervalDay(long)
-     * @see DateUtil#getIntervalHour(long)
-     * @see DateUtil#getIntervalMinute(long)
-     * @see DateUtil#getIntervalSecond(long)
+     * @see #getIntervalDay(long)
+     * @see #getIntervalHour(long)
+     * @see #getIntervalMinute(long)
+     * @see #getIntervalSecond(long)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      */
     public static String getIntervalForView(long spaceMilliseconds){
@@ -331,13 +367,13 @@ public final class DateExtensionUtil{
         }
         // **************************************************************************************
         // 间隔天数
-        long spaceDay = DateUtil.getIntervalDay(spaceMilliseconds);
+        long spaceDay = getIntervalDay(spaceMilliseconds);
         // 间隔小时 减去间隔天数后,
-        long spaceHour = DateUtil.getIntervalHour(spaceMilliseconds) - spaceDay * 24;
+        long spaceHour = getIntervalHour(spaceMilliseconds) - spaceDay * 24;
         // 间隔分钟 减去间隔天数及间隔小时后,
-        long spaceMinute = DateUtil.getIntervalMinute(spaceMilliseconds) - (spaceDay * 24 + spaceHour) * 60;
+        long spaceMinute = getIntervalMinute(spaceMilliseconds) - (spaceDay * 24 + spaceHour) * 60;
         // 间隔秒 减去间隔天数及间隔小时,间隔分钟后,
-        long spaceSecond = DateUtil.getIntervalSecond(spaceMilliseconds) - ((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60;
+        long spaceSecond = getIntervalSecond(spaceMilliseconds) - ((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60;
         // 间隔毫秒 减去间隔天数及间隔小时,间隔分钟,间隔秒后,
         long spaceMillisecond = spaceMilliseconds - (((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60 + spaceSecond) * 1000;
         // **************************************************************************************
@@ -359,5 +395,210 @@ public final class DateExtensionUtil{
         }
         return sb.toString();
     }
+
+    // [start]interval时间间隔
+
+    /**
+     * 两个时间相差的分数.
+     * 
+     * @param spaceMilliseconds
+     *            间隔毫秒
+     * @return 相差的分数
+     * @see TimeInterval#MILLISECOND_PER_MINUTE
+     * @since 1.5.6
+     */
+    public static int getIntervalMinute(long spaceMilliseconds){
+        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_MINUTE));
+    }
+
+    /**
+     * 两个时间相差的秒数(<span style="color:red">绝对值</span>).
+     * 
+     * @param date1
+     *            the date1
+     * @param date2
+     *            the date2
+     * @return 相差的秒数 <br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
+     * @see #getIntervalTime(Date, Date)
+     * @see #getIntervalSecond(long)
+     * @since 1.5.6
+     */
+    public static int getIntervalSecond(Date date1,Date date2){
+        long intervalTime = getIntervalTime(date1, date2);
+        return getIntervalSecond(intervalTime);
+    }
+
+    /**
+     * 两个时间相差的秒数.
+     * 
+     * @param spaceMilliseconds
+     *            间隔毫秒
+     * @return 相差的秒数
+     * @since 1.5.6
+     */
+    public static int getIntervalSecond(long spaceMilliseconds){
+        return (int) (spaceMilliseconds / 1000);
+    }
+
+    /**
+     * 两个时间相差的的小时数(<span style="color:red">绝对值</span>).
+     * 
+     * @param date1
+     *            date1
+     * @param date2
+     *            date2
+     * @return 相差的小时数<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
+     * @see #getIntervalTime(Date, Date)
+     * @see #getIntervalHour(long)
+     * @since 1.5.6
+     */
+    public static int getIntervalHour(Date date1,Date date2){
+        long intervalTime = getIntervalTime(date1, date2);
+        return getIntervalHour(intervalTime);
+    }
+
+    /**
+     * 两个时间相差的小时数.
+     * 
+     * @param spaceMilliseconds
+     *            间隔毫秒
+     * @return 相差的小时数
+     * @see TimeInterval#MILLISECOND_PER_HOUR
+     * @since 1.5.6
+     */
+    public static int getIntervalHour(long spaceMilliseconds){
+        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_HOUR));
+    }
+
+    /**
+     * 获得相差的星期数(<span style="color:red">绝对值</span>).
+     *
+     * @param date1
+     *            the date1
+     * @param date2
+     *            the date2
+     * @param datePattern
+     *            日期pattern {@link DatePattern}
+     * @return the interval week
+     * @see #getIntervalWeek(Date, Date)
+     * @since 1.5.6
+     */
+    public static int getIntervalWeek(String date1,String date2,String datePattern){
+        Date dateOne = DateUtil.string2Date(date1, datePattern);
+        Date dateTwo = DateUtil.string2Date(date2, datePattern);
+        return getIntervalWeek(dateOne, dateTwo);
+    }
+
+    /**
+     * 获得相差的星期数(<span style="color:red">绝对值</span>).
+     *
+     * @param date1
+     *            the date1
+     * @param date2
+     *            the date2
+     * @return the interval week<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
+     * @see #getIntervalWeek(long)
+     * @since 1.5.6
+     */
+    public static int getIntervalWeek(Date date1,Date date2){
+        long intervalTime = getIntervalTime(date1, date2);
+        return getIntervalWeek(intervalTime);
+    }
+
+    /**
+     * 获得相差的星期数.
+     *
+     * @param spaceTime
+     *            the space time
+     * @return the interval week
+     * @see com.feilong.core.TimeInterval#SECONDS_PER_WEEK
+     * @since 1.5.6
+     */
+    public static int getIntervalWeek(long spaceTime){
+        return (int) (spaceTime / (TimeInterval.MILLISECOND_PER_WEEK));
+    }
+
+    //-******************getIntervalDay***************************************
+
+    /**
+     * 计算两个时间相差的的天数 (<span style="color:red">绝对值</span>).
+     * 
+     * @param date1
+     *            date1
+     * @param date2
+     *            date2
+     * @param datePattern
+     *            时间模式 {@link DatePattern}
+     * @return 相差的天数
+     * @see DateUtil#string2Date(String, String)
+     * @see #getIntervalTime(Date, Date)
+     * @see #getIntervalDay(long)
+     * @since 1.5.6
+     */
+    public static int getIntervalDay(String date1,String date2,String datePattern){
+        Date dateOne = DateUtil.string2Date(date1, datePattern);
+        Date dateTwo = DateUtil.string2Date(date2, datePattern);
+        return getIntervalDay(dateOne, dateTwo);
+    }
+
+    /**
+     * 计算两个时间相差的的天数(<span style="color:red">绝对值</span>).
+     * 
+     * @param date1
+     *            date1
+     * @param date2
+     *            date2
+     * @return 相差的天数<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
+     * @see #getIntervalTime(Date, Date)
+     * @see #getIntervalDay(long)
+     * @since 1.5.6
+     */
+    public static int getIntervalDay(Date date1,Date date2){
+        long intervalTime = getIntervalTime(date1, date2);
+        return getIntervalDay(intervalTime);
+    }
+
+    /**
+     * 两个时间相差的天数.
+     * 
+     * @param spaceMilliseconds
+     *            间隔毫秒
+     * @return 相差的天数
+     * @see TimeInterval#SECONDS_PER_DAY
+     * @since 1.5.6
+     */
+    public static int getIntervalDay(long spaceMilliseconds){
+        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_DAY));
+    }
+
+    /**
+     * 两个时间相差的毫秒数(<span style="color:red">绝对值</span>).
+     * 
+     * @param date1
+     *            date1
+     * @param date2
+     *            date2
+     * @return 两个时间相差的毫秒数,不管date1是否早于还是晚于date2,均返回绝对值<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
+     * @see DateUtil#getTime(Date)
+     * @see Math#abs(long)
+     * @since 1.5.6
+     */
+    public static long getIntervalTime(Date date1,Date date2){
+        Validate.notNull(date1, "date1 can't be null!");
+        Validate.notNull(date2, "date2 can't be null!");
+        return Math.abs(DateUtil.getTime(date2) - DateUtil.getTime(date1));
+    }
+
+    // [end]
 
 }

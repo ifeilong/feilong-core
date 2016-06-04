@@ -328,7 +328,7 @@ public final class FieldUtil{
             Field field = ownerClass.getField(fieldName);
             return (T) field.get(owner);
         }catch (Exception e){
-            String formatMessage = Slf4jUtil.formatMessage("owner:[{}],fieldName:[{}]", owner, fieldName);
+            String formatMessage = Slf4jUtil.format("owner:[{}],fieldName:[{}]", owner, fieldName);
             throw new ReflectException(formatMessage, e);
         }
     }
@@ -367,7 +367,7 @@ public final class FieldUtil{
             Field field = ownerClass.getField(fieldName);
             return (T) field.get(ownerClass);
         }catch (Exception e){
-            String formatMessage = Slf4jUtil.formatMessage("className:[{}],fieldName:[{}]", className, fieldName);
+            String formatMessage = Slf4jUtil.format("className:[{}],fieldName:[{}]", className, fieldName);
             throw new ReflectException(formatMessage, e);
         }
     }

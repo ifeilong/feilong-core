@@ -123,7 +123,7 @@ public final class NumberFormatUtil{
             }
             return format;
         }catch (Exception e){
-            String message = Slf4jUtil.formatMessage("value:[{}],pattern:[{}],roundingMode:[{}]", value, numberPattern, roundingMode);
+            String message = Slf4jUtil.format("value:[{}],pattern:[{}],roundingMode:[{}]", value, numberPattern, roundingMode);
             LOGGER.error(message, e);
         }
         return StringUtils.EMPTY;

@@ -68,7 +68,7 @@ public final class BeanUtilException extends RuntimeException{
      *            the args
      */
     public BeanUtilException(String messagePattern, Object...args){
-        super(Slf4jUtil.formatMessage(messagePattern, args));
+        super(Slf4jUtil.format(messagePattern, args));
     }
 
     /**

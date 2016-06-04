@@ -63,7 +63,7 @@ public final class URIParseException extends RuntimeException{
      *            the args
      */
     public URIParseException(String messagePattern, Object...args){
-        super(Slf4jUtil.formatMessage(messagePattern, args));
+        super(Slf4jUtil.format(messagePattern, args));
     }
 
     /**

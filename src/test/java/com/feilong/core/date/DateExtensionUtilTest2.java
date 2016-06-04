@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.Validator;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -263,11 +264,11 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      * @see DateUtil#getYear(Date)
      * @see DateUtil#getDayOfMonth(Date)
      * @see DateUtil#getYear(Date)
-     * @see DateUtil#getIntervalTime(Date, Date)
-     * @see DateUtil#getIntervalDay(long)
-     * @see DateUtil#getIntervalHour(long)
-     * @see DateUtil#getIntervalMinute(long)
-     * @see DateUtil#getIntervalSecond(long)
+     * @see DateExtensionUtil#getIntervalTime(Date, Date)
+     * @see DateExtensionUtil#getIntervalDay(long)
+     * @see DateExtensionUtil#getIntervalHour(long)
+     * @see DateExtensionUtil#getIntervalMinute(long)
+     * @see DateExtensionUtil#getIntervalSecond(long)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      */
     public static String toPrettyDateString(Date inDate){
@@ -280,8 +281,8 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
         //**************************************************************************************/
         int currentYear = DateUtil.getYear(nowDate);// 当前时间的年
         boolean isSameYear = currentYear == inYear;//是否是同一年
-        long spaceTime = DateUtil.getIntervalTime(inDate, nowDate);// 任意日期和现在相差的毫秒数
-        int spaceDay = DateUtil.getIntervalDay(spaceTime);// 相差天数
+        long spaceTime = DateExtensionUtil.getIntervalTime(inDate, nowDate);// 任意日期和现在相差的毫秒数
+        int spaceDay = DateExtensionUtil.getIntervalDay(spaceTime);// 相差天数
         //**************************************************************************************/
         switch (spaceDay) {
             case 0: // 间隔0天
@@ -384,10 +385,10 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      * @since 1.4.0
      */
     private static String doWithZeroDayInterval(Date inDate,Date nowDate,long spaceTime){
-        int spaceHour = DateUtil.getIntervalHour(spaceTime); // 相差小时数
+        int spaceHour = DateExtensionUtil.getIntervalHour(spaceTime); // 相差小时数
         if (spaceHour == 0){// 小时间隔
-            int spaceMinute = DateUtil.getIntervalMinute(spaceTime);
-            return spaceMinute == 0 ? DateUtil.getIntervalSecond(spaceTime) + SECOND + "前" : spaceMinute + MINUTE + "前";
+            int spaceMinute = DateExtensionUtil.getIntervalMinute(spaceTime);
+            return spaceMinute == 0 ? DateExtensionUtil.getIntervalSecond(spaceTime) + SECOND + "前" : spaceMinute + MINUTE + "前";
         }
         // 传过来的日期的日
         int inDay = DateUtil.getDayOfMonth(inDate);
@@ -428,6 +429,99 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     @Test
     public void testGetChineseWeek(){
         LOGGER.debug(getChineseWeek(0));
+    }
+
+    /**
+     * Test get interval hour.
+     */
+    @Test
+    public void testGetIntervalHour(){
+        Date beginDate = DateUtil.string2Date("2013-12-21 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
+        Date endDate = DateUtil.string2Date("2013-12-21 05:00:00", DatePattern.COMMON_DATE_AND_TIME);
+
+        // 相差小时
+        int ihour = DateExtensionUtil.getIntervalHour(beginDate, endDate);
+
+        for (int i = 0; i < ihour; ++i){
+            for (int j = 0; j < 60; ++j){
+                LOGGER.debug("0" + i + ":" + StringUtil.format("%02d", j));
+            }
+        }
+    }
+
+    /**
+     * Test get interval day.
+     */
+    @Test
+    public void testGetIntervalDay(){
+        String fromString = "2008-12-1";
+        String toString = "2008-9-29";
+        LOGGER.debug(DateExtensionUtil.getIntervalDay(fromString, toString, DatePattern.COMMON_DATE) + "");
+    }
+
+    /**
+     * Test get interval second.
+     */
+    @Test
+    public void testGetIntervalSecond(){
+        Date startDate = DateUtil.string2Date("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
+
+        LOGGER.debug(DateExtensionUtil.getIntervalSecond(startDate, NOW) + "");
+        LOGGER.debug(
+                        DateExtensionUtil.getIntervalSecond(
+                                        startDate,
+                                        DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
+
+        LOGGER.debug(DateExtensionUtil.getIntervalSecond(161986) + "");
+        LOGGER.debug(Integer.MAX_VALUE + "");
+    }
+
+    /**
+     * Test get interval week.
+     */
+    @Test
+    public void testGetIntervalWeek(){
+        LOGGER.debug(
+                        "" + DateExtensionUtil
+                                        .getIntervalWeek("2014-01-01 00:00:00", "2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME));
+        LOGGER.debug(
+                        "" + DateExtensionUtil
+                                        .getIntervalWeek("2014-10-28 00:00:00", "2015-06-25 00:00:00", DatePattern.COMMON_DATE_AND_TIME));
+    }
+
+    /**
+     * Test get interval time.
+     */
+    @Test
+    public void testGetIntervalTime(){
+        Date startDate = DateUtil.string2Date("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
+        LOGGER.debug(DateExtensionUtil.getIntervalTime(startDate, NOW) + "");
+        LOGGER.debug(
+                        DateExtensionUtil.getIntervalTime(
+                                        startDate,
+                                        DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
+
+    }
+
+    /**
+     * Test get interval day2.
+     */
+    @Test
+    public void testGetIntervalDay2(){
+        LOGGER.debug("" + DateExtensionUtil.getIntervalDay("2008-08-24", "2008-08-27", "yyyy-MM-dd"));
+    }
+
+    /**
+     * Test get interval hour1.
+     */
+    @Test
+    public void testGetIntervalHour1(){
+        LOGGER.debug(
+                        StringUtil.format(
+                                        "%05d",
+                                        DateExtensionUtil.getIntervalHour(
+                                                        DateUtil.string2Date("2014-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
+                                                        DateUtil.string2Date("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))));
     }
 
 }

@@ -197,7 +197,7 @@ public final class URIUtil{
         try{
             return new URI(uri);
         }catch (URISyntaxException e){
-            throw new URIParseException(Slf4jUtil.formatMessage("uri:[{}]", uri), e);
+            throw new URIParseException(Slf4jUtil.format("uri:[{}]", uri), e);
         }
     }
 
@@ -232,7 +232,7 @@ public final class URIUtil{
             String encodeUrl = encodeUri(uriString, charsetType);
             return URI.create(encodeUrl);
         }catch (Exception e){
-            throw new URIParseException(Slf4jUtil.formatMessage("uriString:[{}],charsetType:[{}]", uriString, charsetType), e);
+            throw new URIParseException(Slf4jUtil.format("uriString:[{}],charsetType:[{}]", uriString, charsetType), e);
         }
     }
 

@@ -15,6 +15,8 @@
  */
 package com.feilong.tools.slf4j;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +36,18 @@ public class Slf4jUtilTest{
      */
     @Test
     public void test(){
-        LOGGER.info(Slf4jUtil.format("{},{}", "今天", "aaaa"));
         LOGGER.info(Slf4jUtil.format(null, "今天", "aaaa"));
-        LOGGER.info(Slf4jUtil.format("", "今天", "aaaa"));
         Object arg = null;
         LOGGER.info(Slf4jUtil.format("", arg));
         LOGGER.info(Slf4jUtil.format("", ""));
+    }
+
+    /**
+     * Test.
+     */
+    @Test
+    public void test1(){
+        assertEquals("今天,aaaa", Slf4jUtil.format("{},{}", "今天", "aaaa"));
+        assertEquals("", Slf4jUtil.format("", "今天", "aaaa"));
     }
 }

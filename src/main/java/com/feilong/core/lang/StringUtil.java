@@ -612,7 +612,7 @@ public final class StringUtil{
         int textLength = text.length();
 
         String message = "beginIndex+shift<0,beginIndex:{},shift:{},text:{},text.length:{}";
-        Validate.isTrue(startIndex >= 0, Slf4jUtil.formatMessage(message, beginIndex, shift, text, textLength));
+        Validate.isTrue(startIndex >= 0, Slf4jUtil.format(message, beginIndex, shift, text, textLength));
 
         if (startIndex > textLength){
             message = "beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}";

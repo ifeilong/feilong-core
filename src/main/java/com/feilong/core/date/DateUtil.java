@@ -84,29 +84,6 @@ import com.feilong.core.text.DateFormatUtil;
  * </ul>
  * </td>
  * </tr>
- * <tr valign="top">
- * <td>获得两个日期间隔</td>
- * <td>
- * <ul>
- * <li>{@link DateUtil#getIntervalDay(long)}</li>
- * <li>{@link DateUtil#getIntervalDay(Date, Date)}</li>
- * <li>{@link DateUtil#getIntervalDay(String, String, String)}</li>
- * 
- * <li>{@link DateUtil#getIntervalWeek(long)}</li>
- * <li>{@link DateUtil#getIntervalWeek(Date, Date)}</li>
- * <li>{@link DateUtil#getIntervalWeek(String, String, String)}</li>
- * 
- * <li>{@link DateUtil#getIntervalHour(long)}</li>
- * <li>{@link DateUtil#getIntervalHour(Date, Date)}</li>
- * 
- * <li>{@link DateUtil#getIntervalMinute(long)}</li>
- * <li>{@link DateUtil#getIntervalSecond(long)}</li>
- * <li>{@link DateUtil#getIntervalSecond(Date, Date)}</li>
- * 
- * <li>{@link DateUtil#getIntervalTime(Date, Date)}</li>
- * </ul>
- * </td>
- * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>判断闰年</td>
  * <td>
@@ -746,11 +723,13 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得任意日期中的年份部分
+     * @return 获得任意日期中的年份部分<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#YEAR
      */
     public static int getYear(Date date){
+        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.YEAR);
     }
 
@@ -763,11 +742,13 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得任意日期中的月份
+     * @return 获得任意日期中的月份<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MONTH
      */
     public static int getMonth(Date date){
+        Validate.notNull(date, "date can't be null!");
         return 1 + CalendarUtil.getFieldValue(date, Calendar.MONTH);
     }
 
@@ -799,7 +780,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 指定日期 <code>date</code>年中的星期数
+     * @return 指定日期 <code>date</code>年中的星期数<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#WEEK_OF_YEAR
      * @see Calendar#getFirstDayOfWeek()
@@ -808,6 +790,7 @@ public final class DateUtil{
      * @since 1.0.7
      */
     public static int getWeekOfYear(Date date){
+        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.WEEK_OF_YEAR);
     }
 
@@ -820,15 +803,14 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            任意时间
+     *            任意时间<br>
+     *            如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @return 获得任意时间中的天(在当年中)
-     * @see #getFirstDateOfThisYear(Date)
-     * @see #getIntervalDay(Date, Date)
      * @since 1.0.2
      */
     public static int getDayOfYear(Date date){
-        Date firstDateOfThisYear = getFirstDateOfThisYear(date);
-        return getIntervalDay(date, firstDateOfThisYear) + 1;
+        Validate.notNull(date, "date can't be null!");
+        return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_YEAR);
     }
 
     /**
@@ -840,11 +822,13 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得任意时间中的天
+     * @return 获得任意时间中的天<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#DAY_OF_MONTH
      */
     public static int getDayOfMonth(Date date){
+        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_MONTH);
     }
 
@@ -861,7 +845,8 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 指定日期 <code>date</code>星期几
+     * @return 指定日期 <code>date</code>星期几<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see Calendar#SUNDAY
      * @see Calendar#MONDAY
      * @see Calendar#TUESDAY
@@ -873,6 +858,7 @@ public final class DateUtil{
      * @see Calendar#DAY_OF_WEEK
      */
     public static int getDayOfWeek(Date date){
+        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_WEEK);
     }
 
@@ -885,11 +871,13 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得时间中的小时
+     * @return 获得时间中的小时<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#HOUR_OF_DAY
      */
     public static int getHourOfDay(Date date){
+        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.HOUR_OF_DAY);
     }
 
@@ -909,14 +897,13 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得date 在它一年中的 小时数
-     * @see #getFirstDateOfThisYear(Date)
-     * @see #getIntervalHour(Date, Date)
+     * @return 获得date 在它一年中的 小时数<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.0.2
      */
     public static int getHourOfYear(Date date){
-        Date firstDateOfThisYear = getFirstDateOfThisYear(date);
-        return getIntervalHour(firstDateOfThisYear, date);
+        Validate.notNull(date, "date can't be null!");
+        return (getDayOfYear(date) - 1) * 24 + CalendarUtil.getFieldValue(date, Calendar.HOUR_OF_DAY);
     }
 
     /**
@@ -928,11 +915,13 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得时间中的分钟
+     * @return 获得时间中的分钟<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MINUTE
      */
     public static int getMinute(Date date){
+        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.MINUTE);
     }
 
@@ -945,11 +934,13 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得时间中的秒
+     * @return 获得时间中的秒<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#SECOND
      */
     public static int getSecond(Date date){
+        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.SECOND);
     }
 
@@ -962,13 +953,15 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得指定日期 <code>date</code>时间在当天中的秒数
+     * @return 获得指定日期 <code>date</code>时间在当天中的秒数<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see TimeInterval#SECONDS_PER_DAY
      * @see TimeInterval#SECONDS_PER_HOUR
      * @see #getSecondOfHour(Date)
      * @since 1.0.2
      */
     public static int getSecondOfDay(Date date){
+        Validate.notNull(date, "date can't be null!");
         int hour = getHourOfDay(date);
         return hour * TimeInterval.SECONDS_PER_HOUR + getSecondOfHour(date);
     }
@@ -982,12 +975,14 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得时间在当前小时中的秒数
+     * @return 获得时间在当前小时中的秒数<br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see TimeInterval#SECONDS_PER_MINUTE
      * @see TimeInterval#SECONDS_PER_HOUR
      * @since 1.0.2
      */
     public static int getSecondOfHour(Date date){
+        Validate.notNull(date, "date can't be null!");
         int minute = getMinute(date);
         int second = getSecond(date);
         return second + minute * TimeInterval.SECONDS_PER_MINUTE;
@@ -1052,203 +1047,6 @@ public final class DateUtil{
      */
     public static Date string2Date(String dateString,String datePattern){
         return DateFormatUtil.parse(dateString, datePattern);
-    }
-
-    // [end]
-
-    // [start]interval时间间隔
-
-    /**
-     * 两个时间相差的分数.
-     * 
-     * @param spaceMilliseconds
-     *            间隔毫秒
-     * @return 相差的分数
-     * @see TimeInterval#MILLISECOND_PER_MINUTE
-     */
-    public static int getIntervalMinute(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_MINUTE));
-    }
-
-    /**
-     * 两个时间相差的秒数(<span style="color:red">绝对值</span>).
-     * 
-     * @param date1
-     *            the date1
-     * @param date2
-     *            the date2
-     * @return 相差的秒数 <br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
-     * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalSecond(long)
-     * @since 1.0.2
-     */
-    public static int getIntervalSecond(Date date1,Date date2){
-        long intervalTime = getIntervalTime(date1, date2);
-        return getIntervalSecond(intervalTime);
-    }
-
-    /**
-     * 两个时间相差的秒数.
-     * 
-     * @param spaceMilliseconds
-     *            间隔毫秒
-     * @return 相差的秒数
-     */
-    public static int getIntervalSecond(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / 1000);
-    }
-
-    /**
-     * 两个时间相差的的小时数(<span style="color:red">绝对值</span>).
-     * 
-     * @param date1
-     *            date1
-     * @param date2
-     *            date2
-     * @return 相差的小时数<br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
-     * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalHour(long)
-     */
-    public static int getIntervalHour(Date date1,Date date2){
-        long intervalTime = getIntervalTime(date1, date2);
-        return getIntervalHour(intervalTime);
-    }
-
-    /**
-     * 两个时间相差的小时数.
-     * 
-     * @param spaceMilliseconds
-     *            间隔毫秒
-     * @return 相差的小时数
-     * @see TimeInterval#MILLISECOND_PER_HOUR
-     */
-    public static int getIntervalHour(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_HOUR));
-    }
-
-    /**
-     * 获得相差的星期数(<span style="color:red">绝对值</span>).
-     *
-     * @param date1
-     *            the date1
-     * @param date2
-     *            the date2
-     * @param datePattern
-     *            日期pattern {@link DatePattern}
-     * @return the interval week
-     * @see #getIntervalWeek(Date, Date)
-     * @since 1.2.1
-     */
-    public static int getIntervalWeek(String date1,String date2,String datePattern){
-        Date dateOne = string2Date(date1, datePattern);
-        Date dateTwo = string2Date(date2, datePattern);
-        return getIntervalWeek(dateOne, dateTwo);
-    }
-
-    /**
-     * 获得相差的星期数(<span style="color:red">绝对值</span>).
-     *
-     * @param date1
-     *            the date1
-     * @param date2
-     *            the date2
-     * @return the interval week<br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
-     * @see #getIntervalWeek(long)
-     * @since 1.2.1
-     */
-    public static int getIntervalWeek(Date date1,Date date2){
-        long intervalTime = getIntervalTime(date1, date2);
-        return getIntervalWeek(intervalTime);
-    }
-
-    /**
-     * 获得相差的星期数.
-     *
-     * @param spaceTime
-     *            the space time
-     * @return the interval week
-     * @see com.feilong.core.TimeInterval#SECONDS_PER_WEEK
-     * @since 1.2.1
-     */
-    public static int getIntervalWeek(long spaceTime){
-        return (int) (spaceTime / (TimeInterval.MILLISECOND_PER_WEEK));
-    }
-
-    //-******************getIntervalDay***************************************
-
-    /**
-     * 计算两个时间相差的的天数 (<span style="color:red">绝对值</span>).
-     * 
-     * @param date1
-     *            date1
-     * @param date2
-     *            date2
-     * @param datePattern
-     *            时间模式 {@link DatePattern}
-     * @return 相差的天数
-     * @see #string2Date(String, String)
-     * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalDay(long)
-     */
-    public static int getIntervalDay(String date1,String date2,String datePattern){
-        Date dateOne = string2Date(date1, datePattern);
-        Date dateTwo = string2Date(date2, datePattern);
-        return getIntervalDay(dateOne, dateTwo);
-    }
-
-    /**
-     * 计算两个时间相差的的天数(<span style="color:red">绝对值</span>).
-     * 
-     * @param date1
-     *            date1
-     * @param date2
-     *            date2
-     * @return 相差的天数<br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
-     * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalDay(long)
-     */
-    public static int getIntervalDay(Date date1,Date date2){
-        long intervalTime = getIntervalTime(date1, date2);
-        return getIntervalDay(intervalTime);
-    }
-
-    /**
-     * 两个时间相差的天数.
-     * 
-     * @param spaceMilliseconds
-     *            间隔毫秒
-     * @return 相差的天数
-     * @see TimeInterval#SECONDS_PER_DAY
-     */
-    public static int getIntervalDay(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_DAY));
-    }
-
-    /**
-     * 两个时间相差的毫秒数(<span style="color:red">绝对值</span>).
-     * 
-     * @param date1
-     *            date1
-     * @param date2
-     *            date2
-     * @return 两个时间相差的毫秒数,不管date1是否早于还是晚于date2,均返回绝对值<br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
-     * @see #getTime(Date)
-     * @see Math#abs(long)
-     */
-    public static long getIntervalTime(Date date1,Date date2){
-        Validate.notNull(date1, "date1 can't be null!");
-        Validate.notNull(date2, "date2 can't be null!");
-        return Math.abs(getTime(date2) - getTime(date1));
     }
 
     // [end]

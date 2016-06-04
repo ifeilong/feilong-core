@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DateUtil;
+import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -46,7 +46,7 @@ public class StringUtilPerformanceTest2{
         }
 
         Date endDate = new Date();
-        LOGGER.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("time:{}", DateExtensionUtil.getIntervalTime(beginDate, endDate));
     }
 
     /**
@@ -83,6 +83,6 @@ public class StringUtilPerformanceTest2{
         }
 
         Date endDate = new Date();
-        LOGGER.info("time:{}", DateUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("time:{}", DateExtensionUtil.getIntervalTime(beginDate, endDate));
     }
 }

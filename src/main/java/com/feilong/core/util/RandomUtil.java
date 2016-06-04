@@ -125,7 +125,7 @@ public final class RandomUtil{
         long minLong = minValue.longValue();
         long maxLong = maxValue.longValue();
 
-        Validate.isTrue(maxLong >= minLong, Slf4jUtil.formatMessage("maxLong:[{}] can not < minLong:[{}]", maxLong, minLong));
+        Validate.isTrue(maxLong >= minLong, Slf4jUtil.format("maxLong:[{}] can not < minLong:[{}]", maxLong, minLong));
         return RandomUtils.nextLong(minLong, maxLong);
     }
 
@@ -198,8 +198,8 @@ public final class RandomUtil{
     public static String createRandomFromString(String str,int minLength,int maxLength){
         Validate.notBlank(str, "str can't be null/empty!");
 
-        Validate.isTrue(maxLength > 0, Slf4jUtil.formatMessage("maxLength:[{}] can not zero", maxLength));
-        Validate.isTrue(maxLength >= minLength, Slf4jUtil.formatMessage("maxLength:[{}] can not < minLength:[{}]", maxLength, minLength));
+        Validate.isTrue(maxLength > 0, Slf4jUtil.format("maxLength:[{}] can not zero", maxLength));
+        Validate.isTrue(maxLength >= minLength, Slf4jUtil.format("maxLength:[{}] can not < minLength:[{}]", maxLength, minLength));
 
         long length = createRandom(minLength, maxLength);
         return createRandomFromString(str, (int) length);
@@ -233,7 +233,7 @@ public final class RandomUtil{
      */
     public static String createRandomFromString(String str,int length){
         Validate.notBlank(str, "str can't be null/empty!");
-        Validate.isTrue(length > 0, Slf4jUtil.formatMessage("length:[{}] can not <=0", length));
+        Validate.isTrue(length > 0, Slf4jUtil.format("length:[{}] can not <=0", length));
         return RandomStringUtils.random(length, str);
     }
 }

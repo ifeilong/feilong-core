@@ -74,7 +74,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         now = new Date();
         Date date = DateUtil.string2Date("2012-12-03 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
         LOGGER.debug(DateExtensionUtil.getIntervalForView(now, date));
-        LOGGER.debug(DateUtil.getIntervalTime(now, date) + "");
+        LOGGER.debug(DateExtensionUtil.getIntervalTime(now, date) + "");
     }
 
     /**

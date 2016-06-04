@@ -155,7 +155,7 @@ public final class EnumUtil{
             }
         }
         String messagePattern = "can not found the enum constants,enumClass:[{}],propertyName:[{}],value:[{}],ignoreCase:[{}]";
-        throw new BeanUtilException(Slf4jUtil.formatMessage(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
+        throw new BeanUtilException(Slf4jUtil.format(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
     }
 
     /**
