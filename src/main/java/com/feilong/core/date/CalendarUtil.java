@@ -17,7 +17,6 @@ package com.feilong.core.date;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.Validate;
 
@@ -244,19 +243,6 @@ public final class CalendarUtil{
     //*********************************************************************************************
 
     /**
-     * 获得阳历中月份的最大天数The days in the month of solar calendar(阳历).
-     * 
-     * @param calendar
-     *            calendar
-     * @return the max day of month<br>
-     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
-     */
-    public static int getMaxDayOfMonth(Calendar calendar){
-        Validate.notNull(calendar, "calendar can't be null!");
-        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-    }
-
-    /**
      * 获得日历字段值.
      *
      * @param date
@@ -338,44 +324,5 @@ public final class CalendarUtil{
     public static String toString(Calendar calendar,String datePattern){
         Date date = toDate(calendar);
         return DateUtil.date2String(date, datePattern);
-    }
-
-    /**
-     * 将日期字符串转成Calendar.
-     *
-     * @param dateString
-     *            将日期字符串
-     * @param datePattern
-     *            日期pattern {@link DatePattern}
-     * @return Calendar
-     * @since 1.3.0
-     */
-    public static Calendar toCalendar(String dateString,String datePattern){
-        Date date = DateUtil.string2Date(dateString, datePattern);
-        return DateUtil.toCalendar(date);
-    }
-
-    /**
-     * 设置日历字段 YEAR、MONTH 和 DAY_OF_MONTH 的值.
-     * 
-     * @param year
-     *            用来设置 YEAR 日历字段的值
-     * @param month
-     *            用来设置 MONTH 日历字段的值.此处传递是我们口头意义上的月份,内部自动进行-1的操作<br>
-     *            比如 8月就传递 8 ; 9月就传9 <br>
-     *            注:Java 的date Month 值是基于 0 的.例如,0 表示 January.
-     * @param day
-     *            用来设置 DAY_OF_MONTH 日历字段的值.
-     * @return the calendar
-     * @see Calendar#clear()
-     */
-    public static Calendar toCalendar(int year,int month,int day){
-        Calendar calendar = new GregorianCalendar();
-
-        // 在使用set方法之前,必须先clear一下,否则很多信息会继承自系统当前时间
-        calendar.clear();
-
-        calendar.set(year, month - 1, day);
-        return calendar;
     }
 }

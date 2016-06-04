@@ -36,16 +36,6 @@ public class CalendarUtilTest extends BaseDateUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(CalendarUtilTest.class);
 
     /**
-     * Gets the actual maximum.
-     * 
-     */
-    @Test
-    public void testGetActualMaximum(){
-        Calendar calendar = CalendarUtil.toCalendar("2007-02-20", DatePattern.COMMON_DATE);
-        LOGGER.debug("the param objects:{}", calendar.getActualMaximum(Calendar.DAY_OF_YEAR));
-    }
-
-    /**
      * Test reset year end.
      */
     @Test
