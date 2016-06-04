@@ -41,7 +41,7 @@ import com.feilong.core.text.DateFormatUtil;
  * <td>字符串转日期</td>
  * <td>
  * <ul>
- * <li>{@link DateUtil#string2Date(String, String)}</li>
+ * <li>{@link DateUtil#toDate(String, String)}</li>
  * </ul>
  * </td>
  * </tr>
@@ -49,7 +49,7 @@ import com.feilong.core.text.DateFormatUtil;
  * <td>日期转字符串</td>
  * <td>
  * <ul>
- * <li>{@link DateUtil#date2String(Date, String)}</li>
+ * <li>{@link DateUtil#toString(Date, String)}</li>
  * </ul>
  * </td>
  * </tr>
@@ -1007,13 +1007,28 @@ public final class DateUtil{
 
     // [end]
 
-    // [start]date2String/string2Date 类型转换
+    // [start]toString/toDate 类型转换
+
+    /**
+     * 将指定日期 <code>date</code>转换成特殊格式的字符串.
+     *
+     * @param date
+     *            the date
+     * @param datePattern
+     *            the date pattern
+     * @return the string
+     * @deprecated Use {@link #toString(Date,String)} instead
+     */
+    @Deprecated
+    public static String date2String(Date date,String datePattern){
+        return toString(date, datePattern);
+    }
 
     /**
      * 将指定日期 <code>date</code>转换成特殊格式的字符串.
      * 
      * <pre class="code">
-     * DateUtil.date2String(Tue Oct 16 23:49:21 CST 2012,DatePattern.commonWithMillisecond) =2012-10-16 23:49:21.525
+     * DateUtil.toString(Tue Oct 16 23:49:21 CST 2012,DatePattern.commonWithMillisecond) =2012-10-16 23:49:21.525
      * </pre>
      * 
      * @param date
@@ -1025,9 +1040,29 @@ public final class DateUtil{
      *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      *         否则使用 {@link java.util.Locale#getDefault()},调用{@link java.text.DateFormat#format(Date)}
      * @see DateFormatUtil#format(Date, String)
+     * @see org.apache.commons.lang3.time.DateFormatUtils#format(Date, String)
+     * @see "org.joda.time.base.AbstractDateTime#toString(String)"
+     * @see <a href="http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string">convert-java-util-date-to-string</a>
+     * @see <a href="http://stackoverflow.com/questions/4772425/change-date-format-in-a-java-string">change-date-format-in-a-java-string</a>
+     * @since 1.5.7
      */
-    public static String date2String(Date date,String datePattern){
+    public static String toString(Date date,String datePattern){
         return DateFormatUtil.format(date, datePattern);
+    }
+
+    /**
+     * 将时间string字符串转换成date类型.
+     *
+     * @param dateString
+     *            时间字符串
+     * @param datePattern
+     *            模式,时间字符串的模式{@link DatePattern}
+     * @return the date
+     * @deprecated Use {@link #toDate(String,String)} instead
+     */
+    @Deprecated
+    public static Date string2Date(String dateString,String datePattern){
+        return toDate(dateString, datePattern);
     }
 
     /**
@@ -1044,8 +1079,13 @@ public final class DateUtil{
      *         否则使用 {@link java.util.Locale#getDefault()},调用 {@link java.text.SimpleDateFormat#parse(String, java.text.ParsePosition)}
      * @see DateFormatUtil#parse(String, String)
      * @see org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)
+     * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/">java-string-to-date-conversion</a>
+     * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/22180505#22180505">java-string-to-date-
+     *      conversion/22180505#22180505</a>
+     * @see <a href="http://stackoverflow.com/questions/2735023/convert-string-to-java-util-date">convert-string-to-java-util-date</a>
+     * @since 1.5.7
      */
-    public static Date string2Date(String dateString,String datePattern){
+    public static Date toDate(String dateString,String datePattern){
         return DateFormatUtil.parse(dateString, datePattern);
     }
 
@@ -1102,11 +1142,11 @@ public final class DateUtil{
      * @param datePattern
      *            日期pattern {@link DatePattern}
      * @return 如果dateString 早于 whenDateString 返回 true
-     * @see #string2Date(String, String)
+     * @see #toDate(String, String)
      * @see #isBefore(Date, String, String)
      */
     public static boolean isBefore(String dateString,String whenDateString,String datePattern){
-        Date before = string2Date(dateString, datePattern);
+        Date before = toDate(dateString, datePattern);
         return isBefore(before, whenDateString, datePattern);
     }
 
@@ -1124,12 +1164,12 @@ public final class DateUtil{
      * @param datePattern
      *            日期pattern {@link DatePattern}
      * @return 如果dateBefore 早于 dateAfter返回 true
-     * @see #string2Date(String, String)
+     * @see #toDate(String, String)
      * @see #isBefore(String, String, String)
      * @see Date#before(Date)
      */
     public static boolean isBefore(Date date,String whenDateString,String datePattern){
-        Date after = string2Date(whenDateString, datePattern);
+        Date after = toDate(whenDateString, datePattern);
         return isBefore(date, after);
     }
 
@@ -1189,12 +1229,12 @@ public final class DateUtil{
      * @param datePattern
      *            开始时间和结束时间的格式{@link DatePattern}
      * @return 如果 指定日期 <code>date</code> after <code>beginTime</code>, 并且 指定日期 <code>date</code> before <code>endTime</code>,返回true
-     * @see #string2Date(String, String)
+     * @see #toDate(String, String)
      * @see #isInTime(Date, Date, Date)
      */
     public static boolean isInTime(Date date,String beginTime,String endTime,String datePattern){
-        Date beginTimeDate = string2Date(beginTime, datePattern);
-        Date endTimeDate = string2Date(endTime, datePattern);
+        Date beginTimeDate = toDate(beginTime, datePattern);
+        Date endTimeDate = toDate(endTime, datePattern);
         return isInTime(date, beginTimeDate, endTimeDate);
     }
 
@@ -1224,7 +1264,7 @@ public final class DateUtil{
     // [start]isEquals
     /**
      * 在相同格式下 <code>datePattern</code>,将两个日期转成字符串判断是否相等.
-     * 
+     *
      * @param date1
      *            日期1
      * @param date2
@@ -1232,12 +1272,12 @@ public final class DateUtil{
      * @param datePattern
      *            格式 {@link DatePattern}
      * @return 相等返回true,不相等则为false
-     * @see #date2String(Date, String)
-     * @since 1.0.5 change name from isEqual to isEquals
+     * @see #toString(Date, String)
      * @see org.apache.commons.lang3.time.DateUtils#isSameDay(Date, Date)
+     * @since 1.0.5 change name from isEqual to isEquals
      */
     public static boolean isEquals(Date date1,Date date2,String datePattern){
-        return date2String(date1, datePattern).equals(date2String(date2, datePattern));
+        return toString(date1, datePattern).equals(toString(date2, datePattern));
     }
 
     // [end]

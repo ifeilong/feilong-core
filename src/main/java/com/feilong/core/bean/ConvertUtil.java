@@ -546,7 +546,7 @@ public final class ConvertUtil{
      * @param arrays
      *            the arrays
      * @return the t[]
-     * @since 1.5.6
+     * @since 1.5.7
      */
     public static <T> T[] toArray(T...arrays){
         return arrays;
@@ -635,7 +635,7 @@ public final class ConvertUtil{
      *         否则调用 {@link ConvertUtils#convert(String[], Class)}
      * @see org.apache.commons.beanutils.ConvertUtils#convert(String[], Class)
      * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(String[], Class)
-     * @since 1.5.6
+     * @since 1.5.7
      */
     @SuppressWarnings("unchecked")
     public static <T> T[] toArray(String[] values,Class<T> targetType){

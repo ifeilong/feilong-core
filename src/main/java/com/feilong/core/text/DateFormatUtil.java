@@ -58,7 +58,7 @@ public final class DateFormatUtil{
      * format日期类型格式化成字符串类型.
      * 
      * <p style="color:red">
-     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#date2String(Date, String)}替代
+     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#toString(Date, String)}替代
      * </p>
      * 
      * <p>
@@ -74,7 +74,7 @@ public final class DateFormatUtil{
      *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      *         否则使用 {@link Locale#getDefault()},调用 {@link #format(Date, String, Locale)}
      * @see #format(Date, String, Locale)
-     * @see com.feilong.core.date.DateUtil#date2String(Date, String)
+     * @see com.feilong.core.date.DateUtil#toString(Date, String)
      */
     public static String format(Date date,String pattern){
         return format(date, pattern, Locale.getDefault());
@@ -115,7 +115,7 @@ public final class DateFormatUtil{
      * parse字符串类型转成日期类型.
      * 
      * <p style="color:red">
-     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#string2Date(String, String)}替代
+     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#toDate(String, String)}替代
      * </p>
      * 
      * <p>

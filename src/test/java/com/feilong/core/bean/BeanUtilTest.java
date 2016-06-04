@@ -87,13 +87,13 @@ public class BeanUtilTest{
 
         MemberAddress memberAddress1 = new MemberAddress();
         memberAddress1.setAddress("上海市宝山区真大路333弄22号1503室");
-        memberAddress1.setAddTime(DateUtil.string2Date("20140615", DatePattern.yyyyMMdd));
+        memberAddress1.setAddTime(DateUtil.toDate("20140615", DatePattern.yyyyMMdd));
         memberAddress1.setId(1L);
         memberAddress1.setMemberId(memberId);
 
         MemberAddress memberAddress2 = new MemberAddress();
         memberAddress2.setAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
-        memberAddress2.setAddTime(DateUtil.string2Date("20101001", DatePattern.yyyyMMdd));
+        memberAddress2.setAddTime(DateUtil.toDate("20101001", DatePattern.yyyyMMdd));
         memberAddress2.setId(1L);
         memberAddress2.setMemberId(memberId);
 

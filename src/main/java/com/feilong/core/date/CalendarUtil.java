@@ -323,6 +323,6 @@ public final class CalendarUtil{
      */
     public static String toString(Calendar calendar,String datePattern){
         Date date = toDate(calendar);
-        return DateUtil.date2String(date, datePattern);
+        return DateUtil.toString(date, datePattern);
     }
 }

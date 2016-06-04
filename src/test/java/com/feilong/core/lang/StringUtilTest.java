@@ -73,7 +73,7 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.replace(source, null) + "");
 
         Map<String, Object> valuesMap = new HashMap<String, Object>();
-        valuesMap.put("today", DateUtil.date2String(new Date(), DatePattern.COMMON_DATE));
+        valuesMap.put("today", DateUtil.toString(new Date(), DatePattern.COMMON_DATE));
         valuesMap.put("user", new User(1L));
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
     }
@@ -144,6 +144,14 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.format("%f和%<3.3f", 9.45));
         LOGGER.debug(StringUtil.format("%2$s,%1$s", 99, "abc"));
         LOGGER.debug(StringUtil.format("%1$s,%1$s", 99));
+    }
+
+    @Test
+    public void format1(){
+        Date date = new Date();
+        LOGGER.debug(String.format("The date: %tY-%tm-%td", date, date, date));
+        LOGGER.debug(String.format("The date: %1$tY-%1$tm-%1$td", date));
+        LOGGER.debug(String.format("Time with tz: %1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS.%1$tL%1$tz", date));
     }
 
     /**

@@ -15,8 +15,6 @@
  */
 package com.feilong.core.date;
 
-import static com.feilong.core.date.DateUtil.date2String;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -237,7 +235,7 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      * 
      * <li>如果时间差为0天,<br>
      * 如果小时间隔不等于0,如果inDate的day 和current的day 相等,则显示space_hour + "小时前"<br>
-     * 如果小时间隔不等于0,如果inDate的day 和current的day不相等,则显示"昨天 " + date2String(inDate, "HH:mm")<br>
+     * 如果小时间隔不等于0,如果inDate的day 和current的day不相等,则显示"昨天 " + toString(inDate, "HH:mm")<br>
      * </li>
      * 
      * <li>如果时间差为1天,且inDate的day+1和currentDate的day 相等,则显示"昨天 HH:mm"</li>
@@ -260,7 +258,7 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      *            warn:一般inDate{@code <=}当前时间 ,暂时不支持大于当前时间
      * @return 人性化显示date时间<br>
      *         如果 <code>inDate</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see DateUtil#date2String(Date, String)
+     * @see DateUtil#toString(Date, String)
      * @see DateUtil#getYear(Date)
      * @see DateUtil#getDayOfMonth(Date)
      * @see DateUtil#getYear(Date)
@@ -292,8 +290,8 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
             case 2: // 间隔2天
                 return doWithTwoDaysInterval(inDate, nowDate, isSameYear);
             default://spaceDay > 2     // 间隔大于2天
-                return isSameYear ? date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
-                                : date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+                return isSameYear ? DateUtil.toString(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
+                                : DateUtil.toString(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
         }
     }
 
@@ -317,7 +315,7 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
 
         List<String> stringList = new ArrayList<String>();
         for (Date date : dateList){
-            stringList.add(date2String(date, datePattern));
+            stringList.add(DateUtil.toString(date, datePattern));
         }
         return stringList;
     }
@@ -348,8 +346,8 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     private static String doWithOneDayInterval(Date inDate,Date nowDate){
         return DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)
-                        ? YESTERDAY + " " + date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND)
-                        : THEDAY_BEFORE_YESTERDAY + " " + date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                        ? YESTERDAY + " " + DateUtil.toString(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND)
+                        : THEDAY_BEFORE_YESTERDAY + " " + DateUtil.toString(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
     }
 
     /**
@@ -366,10 +364,10 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     private static String doWithTwoDaysInterval(Date inDate,Date nowDate,boolean isSameYear){
         if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
-            return THEDAY_BEFORE_YESTERDAY + " " + date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+            return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.toString(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
         }
-        return isSameYear ? date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
-                        : date2String(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+        return isSameYear ? DateUtil.toString(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
+                        : DateUtil.toString(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
     /**
@@ -395,7 +393,7 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
         // 当前时间的日
         int currentDayOfMonth = DateUtil.getDayOfMonth(nowDate);
         return inDay == currentDayOfMonth ? spaceHour + HOUR + "前"
-                        : YESTERDAY + " " + date2String(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                        : YESTERDAY + " " + DateUtil.toString(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
     }
 
     /**
@@ -403,15 +401,15 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     @Test
     public void testToPrettyDateString(){
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2012-10-18 13:55:00", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2012-10-18 14:14:22", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2012-10-18 14:15:22", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2012-10-17 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2012-10-16 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2012-10-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2012-09-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2015-08-02 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.string2Date("2015-7-30 13:00:00", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 13:55:00", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 14:14:22", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 14:15:22", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-17 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-16 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-09-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2015-08-02 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2015-7-30 13:00:00", DatePattern.COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -436,8 +434,8 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalHour(){
-        Date beginDate = DateUtil.string2Date("2013-12-21 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
-        Date endDate = DateUtil.string2Date("2013-12-21 05:00:00", DatePattern.COMMON_DATE_AND_TIME);
+        Date beginDate = DateUtil.toDate("2013-12-21 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
+        Date endDate = DateUtil.toDate("2013-12-21 05:00:00", DatePattern.COMMON_DATE_AND_TIME);
 
         // 相差小时
         int ihour = DateExtensionUtil.getIntervalHour(beginDate, endDate);
@@ -464,13 +462,13 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalSecond(){
-        Date startDate = DateUtil.string2Date("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
+        Date startDate = DateUtil.toDate("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
 
         LOGGER.debug(DateExtensionUtil.getIntervalSecond(startDate, NOW) + "");
         LOGGER.debug(
                         DateExtensionUtil.getIntervalSecond(
                                         startDate,
-                                        DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
+                                        DateUtil.toDate("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
 
         LOGGER.debug(DateExtensionUtil.getIntervalSecond(161986) + "");
         LOGGER.debug(Integer.MAX_VALUE + "");
@@ -494,12 +492,12 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalTime(){
-        Date startDate = DateUtil.string2Date("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
+        Date startDate = DateUtil.toDate("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
         LOGGER.debug(DateExtensionUtil.getIntervalTime(startDate, NOW) + "");
         LOGGER.debug(
                         DateExtensionUtil.getIntervalTime(
                                         startDate,
-                                        DateUtil.string2Date("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
+                                        DateUtil.toDate("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
 
     }
 
@@ -520,8 +518,8 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
                         StringUtil.format(
                                         "%05d",
                                         DateExtensionUtil.getIntervalHour(
-                                                        DateUtil.string2Date("2014-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
-                                                        DateUtil.string2Date("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))));
+                                                        DateUtil.toDate("2014-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
+                                                        DateUtil.toDate("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))));
     }
 
 }
