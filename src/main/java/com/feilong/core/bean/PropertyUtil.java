@@ -64,13 +64,13 @@ public final class PropertyUtil{
     }
 
     /**
-     * 将<code>fromObj</code>中的一组属性的值复制到<code>toObj</code>对象中.
+     * 将<code>fromObj</code>中的一组属性的值,复制到<code>toObj</code>对象中.
      * 
      * <h3>代码流程:</h3>
      * <blockquote>
      * <p>
-     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},否则循环调用
-     * {@link #getProperty(Object, String)}再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中
+     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},<br>
+     * 否则循环调用 {@link #getProperty(Object, String)}再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中
      * </p>
      * </blockquote>
      * 
@@ -79,9 +79,11 @@ public final class PropertyUtil{
      * <blockquote>
      * 
      * <ol>
+     * <li>如果 <code>toObj</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>fromObj</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
-     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
-     * {@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
+     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,会抛出异常,see
+     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * </ol>
      * </blockquote>
@@ -173,7 +175,6 @@ public final class PropertyUtil{
                 PropertyUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                LOGGER.error(e.getClass().getName(), e);
                 throw new BeanUtilException(e);
             }
         }
@@ -215,7 +216,6 @@ public final class PropertyUtil{
         try{
             return PropertyUtils.describe(bean);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -227,9 +227,45 @@ public final class PropertyUtil{
      * no matter which property reference format is used, with no type conversions.
      * </p>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User newUser = new User();
+     * PropertyUtil.setProperty(newUser, "name", "feilong");
+     * LOGGER.info(JsonUtil.format(newUser));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "age": 0,
+     * "name": "feilong"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * <p>
      * PropertyUtils的功能类似于BeanUtils,但在底层不会对传递的数据做转换处理
      * </p>
+     * 
+     * <h3>注意点:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>如果 <code>bean</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
+     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
+     * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
+     * </ol>
+     * </blockquote>
      *
      * @param bean
      *            Bean whose property is to be modified
@@ -242,10 +278,11 @@ public final class PropertyUtil{
      * @see BeanUtil#setProperty(Object, String, Object)
      */
     public static void setProperty(Object bean,String propertyName,Object value){
+        Validate.notNull(bean, "bean can't be null!");
+        Validate.notNull(propertyName, "propertyName can't be null!");
         try{
             PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -312,7 +349,6 @@ public final class PropertyUtil{
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }

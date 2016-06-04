@@ -110,7 +110,6 @@ public final class URLUtil{
         try{
             return new URL(spec);
         }catch (MalformedURLException e){
-            LOGGER.error("MalformedURLException:", e);
             throw new URIParseException(e);
         }
     }
@@ -172,7 +171,6 @@ public final class URLUtil{
             URL unionUrl = new URL(context, spec);
             return unionUrl.toString();
         }catch (MalformedURLException e){
-            LOGGER.error("MalformedURLException:", e);
             throw new URIParseException(e);
         }
     }
@@ -196,7 +194,6 @@ public final class URLUtil{
             // file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
             return file.toURI().toURL();
         }catch (MalformedURLException e){
-            LOGGER.error("MalformedURLException:", e);
             throw new URIParseException(e);
         }
     }

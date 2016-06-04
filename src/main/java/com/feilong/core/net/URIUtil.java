@@ -197,8 +197,7 @@ public final class URIUtil{
         try{
             return new URI(uri);
         }catch (URISyntaxException e){
-            LOGGER.error(Slf4jUtil.formatMessage("uri:[{}]", uri), e);
-            throw new URIParseException(e);
+            throw new URIParseException(Slf4jUtil.formatMessage("uri:[{}]", uri), e);
         }
     }
 
@@ -233,8 +232,7 @@ public final class URIUtil{
             String encodeUrl = encodeUri(uriString, charsetType);
             return URI.create(encodeUrl);
         }catch (Exception e){
-            LOGGER.error("Exception:", e);
-            throw new URIParseException(e);
+            throw new URIParseException(Slf4jUtil.formatMessage("uriString:[{}],charsetType:[{}]", uriString, charsetType), e);
         }
     }
 
@@ -427,7 +425,6 @@ public final class URIUtil{
         try{
             return URLEncoder.encode(value, charsetType);
         }catch (UnsupportedEncodingException e){
-            LOGGER.error("UnsupportedEncodingException:", e);
             throw new URIParseException(e);
         }
     }
@@ -480,7 +477,6 @@ public final class URIUtil{
         try{
             return URLDecoder.decode(value, charsetType);
         }catch (UnsupportedEncodingException e){
-            LOGGER.error("UnsupportedEncodingException:", e);
             throw new URIParseException(e);
         }
     }

@@ -43,7 +43,7 @@ public final class Slf4jUtil{
      * </p>
      * 
      * <ul>
-     * <li>LOGGER.error("{}","feilong");</li>
+     * <li>LOGGER.debug("{}","feilong");</li>
      * <li>LOGGER.info("{},{}","feilong","hello");</li>
      * </ul>
      * 

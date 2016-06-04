@@ -59,6 +59,20 @@ public class PropertyUtilTest{
         LOGGER.info(JsonUtil.format(newUser));
     }
 
+    @Test
+    public void testSetProperty(){
+        User newUser = new User();
+        PropertyUtil.setProperty(newUser, "name", "feilong");
+        LOGGER.info(JsonUtil.format(newUser));
+    }
+
+    @Test(expected = BeanUtilException.class)
+    public void testSetProperty1(){
+        User newUser = new User();
+        PropertyUtil.setProperty(newUser, "name1", "feilong");
+        LOGGER.info(JsonUtil.format(newUser));
+    }
+
     /**
      * Describe.
      */

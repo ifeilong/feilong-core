@@ -148,7 +148,6 @@ public final class FieldUtil{
             try{
                 map.put(field.getName(), field.get(obj));
             }catch (Exception e){
-                LOGGER.error(e.getClass().getName(), e);
                 throw new ReflectException(e);
             }
         }
@@ -272,7 +271,6 @@ public final class FieldUtil{
         try{
             return clz.getDeclaredField(fieldName);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
     }
@@ -303,7 +301,6 @@ public final class FieldUtil{
             Field field = ownerClass.getField(fieldName);
             field.set(ownerClass, value);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
     }
@@ -332,7 +329,6 @@ public final class FieldUtil{
             return (T) field.get(owner);
         }catch (Exception e){
             String formatMessage = Slf4jUtil.formatMessage("owner:[{}],fieldName:[{}]", owner, fieldName);
-            LOGGER.error(formatMessage + e.getClass().getName(), e);
             throw new ReflectException(formatMessage, e);
         }
     }
@@ -372,7 +368,6 @@ public final class FieldUtil{
             return (T) field.get(ownerClass);
         }catch (Exception e){
             String formatMessage = Slf4jUtil.formatMessage("className:[{}],fieldName:[{}]", className, fieldName);
-            LOGGER.error(formatMessage + e.getClass().getName(), e);
             throw new ReflectException(formatMessage, e);
         }
     }

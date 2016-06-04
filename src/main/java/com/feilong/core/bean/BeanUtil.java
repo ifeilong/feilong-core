@@ -290,13 +290,13 @@ public final class BeanUtil{
     // [start] copyProperties
 
     /**
-     * 将<code class="code">fromObj</code>中的 一组属性的值 复制到 <code>toObj</code>对象中.
+     * 将<code class="code">fromObj</code>中的一组属性的值,复制到 <code>toObj</code>对象中.
      * 
      * <h3>代码流程:</h3>
      * <blockquote>
      * <p>
-     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用 {@link BeanUtils#copyProperties(Object, Object)},否则循环调用
-     * {@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到 <code>toObj</code>对象中
+     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用 {@link BeanUtils#copyProperties(Object, Object)}<br>
+     * 否则循环调用{@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到 <code>toObj</code>对象中
      * </p>
      * </blockquote>
      * 
@@ -305,9 +305,11 @@ public final class BeanUtil{
      * <blockquote>
      * 
      * <ol>
+     * <li>如果 <code>toObj</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>fromObj</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
-     * {@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
+     * {@link BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
      * </ol>
      * </blockquote>
      * 
@@ -566,7 +568,6 @@ public final class BeanUtil{
             //Return the entire set of properties for which the specified bean provides a read method.
             return BeanUtils.describe(bean);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }
@@ -639,7 +640,6 @@ public final class BeanUtil{
         try{
             BeanUtils.populate(bean, properties);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new BeanUtilException(e);
         }
     }

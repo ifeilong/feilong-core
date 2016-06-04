@@ -124,7 +124,6 @@ public final class ConstructorUtil{
             Class<?> klass = ClassUtil.loadClass(className);
             return (T) newInstance(klass, parameterValues);
         }catch (ClassNotFoundException e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new ReflectException(e);
         }
 
