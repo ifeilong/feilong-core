@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import com.feilong.core.DatePattern;
@@ -1011,7 +1012,6 @@ public final class DateUtil{
 
     /**
      * 将指定日期 <code>date</code>转换成特殊格式的字符串.
-     * 
      *
      * @param date
      *            the date
@@ -1048,7 +1048,7 @@ public final class DateUtil{
      * @since 1.5.7
      */
     public static String toString(Date date,String datePattern){
-        return DateFormatUtil.format(date, datePattern);
+        return DateFormatUtils.format(date, datePattern);
     }
 
     /**
