@@ -405,7 +405,7 @@ public final class DateExtensionUtil{
      *            间隔毫秒
      * @return 相差的分数
      * @see TimeInterval#MILLISECOND_PER_MINUTE
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalMinute(long spaceMilliseconds){
         return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_MINUTE));
@@ -423,7 +423,7 @@ public final class DateExtensionUtil{
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalSecond(long)
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalSecond(Date date1,Date date2){
         long intervalTime = getIntervalTime(date1, date2);
@@ -436,7 +436,7 @@ public final class DateExtensionUtil{
      * @param spaceMilliseconds
      *            间隔毫秒
      * @return 相差的秒数
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalSecond(long spaceMilliseconds){
         return (int) (spaceMilliseconds / 1000);
@@ -454,7 +454,7 @@ public final class DateExtensionUtil{
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalHour(long)
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalHour(Date date1,Date date2){
         long intervalTime = getIntervalTime(date1, date2);
@@ -468,7 +468,7 @@ public final class DateExtensionUtil{
      *            间隔毫秒
      * @return 相差的小时数
      * @see TimeInterval#MILLISECOND_PER_HOUR
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalHour(long spaceMilliseconds){
         return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_HOUR));
@@ -485,7 +485,7 @@ public final class DateExtensionUtil{
      *            日期pattern {@link DatePattern}
      * @return the interval week
      * @see #getIntervalWeek(Date, Date)
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalWeek(String date1,String date2,String datePattern){
         Date dateOne = DateUtil.toDate(date1, datePattern);
@@ -504,7 +504,7 @@ public final class DateExtensionUtil{
      *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalWeek(long)
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalWeek(Date date1,Date date2){
         long intervalTime = getIntervalTime(date1, date2);
@@ -518,7 +518,7 @@ public final class DateExtensionUtil{
      *            the space time
      * @return the interval week
      * @see com.feilong.core.TimeInterval#SECONDS_PER_WEEK
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalWeek(long spaceTime){
         return (int) (spaceTime / (TimeInterval.MILLISECOND_PER_WEEK));
@@ -539,7 +539,7 @@ public final class DateExtensionUtil{
      * @see DateUtil#toDate(String, String)
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalDay(long)
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalDay(String date1,String date2,String datePattern){
         Date dateOne = DateUtil.toDate(date1, datePattern);
@@ -559,7 +559,7 @@ public final class DateExtensionUtil{
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalDay(long)
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalDay(Date date1,Date date2){
         long intervalTime = getIntervalTime(date1, date2);
@@ -573,7 +573,7 @@ public final class DateExtensionUtil{
      *            间隔毫秒
      * @return 相差的天数
      * @see TimeInterval#SECONDS_PER_DAY
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static int getIntervalDay(long spaceMilliseconds){
         return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_DAY));
@@ -591,7 +591,7 @@ public final class DateExtensionUtil{
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see DateUtil#getTime(Date)
      * @see Math#abs(long)
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static long getIntervalTime(Date date1,Date date2){
         Validate.notNull(date1, "date1 can't be null!");

@@ -75,7 +75,7 @@ public final class Slf4jUtil{
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
      * @see org.slf4j.helpers.FormattingTuple#getMessage()
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static String format(String messagePattern,Object...args){
         FormattingTuple formattingTuple = MessageFormatter.arrayFormat(messagePattern, args);

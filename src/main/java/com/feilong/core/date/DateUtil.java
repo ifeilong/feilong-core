@@ -1045,7 +1045,7 @@ public final class DateUtil{
      * @see "org.joda.time.base.AbstractDateTime#toString(String)"
      * @see <a href="http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string">convert-java-util-date-to-string</a>
      * @see <a href="http://stackoverflow.com/questions/4772425/change-date-format-in-a-java-string">change-date-format-in-a-java-string</a>
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static String toString(Date date,String datePattern){
         return DateFormatUtils.format(date, datePattern);
@@ -1084,7 +1084,7 @@ public final class DateUtil{
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/22180505#22180505">java-string-to-date-
      *      conversion/22180505#22180505</a>
      * @see <a href="http://stackoverflow.com/questions/2735023/convert-string-to-java-util-date">convert-string-to-java-util-date</a>
-     * @since 1.5.7
+     * @since 1.6.0
      */
     public static Date toDate(String dateString,String datePattern){
         return DateFormatUtil.parse(dateString, datePattern);
