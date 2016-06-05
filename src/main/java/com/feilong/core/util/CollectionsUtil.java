@@ -799,8 +799,7 @@ public final class CollectionsUtil{
      * @since jdk1.5
      */
     public static <T, O> List<T> getPropertyValueList(Collection<O> objectCollection,String propertyName){
-        List<T> list = new ArrayList<T>();
-        return getPropertyValueCollection(objectCollection, propertyName, list);
+        return getPropertyValueCollection(objectCollection, propertyName, new ArrayList<T>());
     }
 
     /**
@@ -846,8 +845,7 @@ public final class CollectionsUtil{
      * @since 1.0.8
      */
     public static <T, O> Set<T> getPropertyValueSet(Collection<O> objectCollection,String propertyName){
-        Set<T> set = new LinkedHashSet<T>();
-        return getPropertyValueCollection(objectCollection, propertyName, set);
+        return getPropertyValueCollection(objectCollection, propertyName, new LinkedHashSet<T>());
     }
 
     /**
@@ -1008,8 +1006,7 @@ public final class CollectionsUtil{
      * @see #find(Iterable, Predicate)
      */
     public static <O, V> O find(Iterable<O> iterable,String propertyName,V propertyValue){
-        Predicate<O> predicate = new BeanPropertyValueEqualsPredicate<O>(propertyName, propertyValue);
-        return find(iterable, predicate);
+        return find(iterable, new BeanPropertyValueEqualsPredicate<O>(propertyName, propertyValue));
     }
 
     /**
@@ -1114,16 +1111,11 @@ public final class CollectionsUtil{
      * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate#ArrayContainsPredicate(String, Object...)
      */
+    @SuppressWarnings("unchecked")
     @SafeVarargs
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...propertyValues){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyList();
-        }
-
-        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-
-        Predicate<O> predicate = new ArrayContainsPredicate<O>(propertyName, propertyValues);
-        return select(objectCollection, predicate);
+        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+                        : select(objectCollection, new ArrayContainsPredicate<O>(propertyName, propertyValues));
     }
 
     /**
@@ -1181,15 +1173,10 @@ public final class CollectionsUtil{
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
      * @since 1.5.0
      */
+    @SuppressWarnings("unchecked")
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,Collection<V> propertyValueList){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyList();
-        }
-
-        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-
-        Predicate<O> predicate = new CollectionContainsPredicate<O>(propertyName, propertyValueList);
-        return select(objectCollection, predicate);
+        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+                        : select(objectCollection, new CollectionContainsPredicate<O>(propertyName, propertyValueList));
     }
 
     /**
@@ -1260,16 +1247,11 @@ public final class CollectionsUtil{
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate
      * @see #selectRejected(Collection, Predicate)
      */
+    @SuppressWarnings("unchecked")
     @SafeVarargs
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...propertyValues){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyList();
-        }
-
-        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-
-        Predicate<O> predicate = new ArrayContainsPredicate<O>(propertyName, propertyValues);
-        return selectRejected(objectCollection, predicate);
+        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+                        : selectRejected(objectCollection, new ArrayContainsPredicate<O>(propertyName, propertyValues));
     }
 
     /**
@@ -1326,15 +1308,10 @@ public final class CollectionsUtil{
      * @see #selectRejected(Collection , Predicate)
      * @since 1.5.0
      */
+    @SuppressWarnings("unchecked")
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,Collection<V> propertyValueList){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyList();
-        }
-
-        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-
-        Predicate<O> predicate = new CollectionContainsPredicate<O>(propertyName, propertyValueList);
-        return selectRejected(objectCollection, predicate);
+        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+                        : selectRejected(objectCollection, new CollectionContainsPredicate<O>(propertyName, propertyValueList));
     }
 
     /**
@@ -1350,11 +1327,10 @@ public final class CollectionsUtil{
      * @see org.apache.commons.collections4.CollectionUtils#selectRejected(Iterable, Predicate)
      * @since 1.4.0
      */
+    @SuppressWarnings("unchecked")
     public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
-        if (Validator.isNullOrEmpty(objectCollection)){
-            return Collections.emptyList();
-        }
-        return (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
+        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+                        : (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
     //*******************************group*********************************************************
@@ -1505,7 +1481,6 @@ public final class CollectionsUtil{
         Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectCollection.size());
 
         for (O o : objectCollection){
-
             if (null != includePredicate && !includePredicate.evaluate(o)){
                 continue;
             }
@@ -1899,7 +1874,6 @@ public final class CollectionsUtil{
 
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
-        //总分
         Map<String, BigDecimal> sumMap = new LinkedHashMap<String, BigDecimal>(objectCollection.size());
 
         for (O o : objectCollection){
