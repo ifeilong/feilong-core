@@ -19,8 +19,6 @@ import java.lang.reflect.Constructor;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -71,9 +69,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @since 1.0.7
  */
 public final class ConstructorUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConstructorUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private ConstructorUtil(){

@@ -22,8 +22,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 
@@ -56,9 +54,6 @@ import com.feilong.core.bean.ConvertUtil;
  * @since 1.2.1
  */
 public final class URLUtil{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URLUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private URLUtil(){
