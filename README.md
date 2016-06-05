@@ -105,21 +105,6 @@ Reduce development, Release ideas (减少开发,释放思想)
 			<classifier>jdk15</classifier>
 	    </dependency>
 	    
-	    <dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-	    </dependency>
-	    
-	    <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.12</version>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-	    
 	  </dependencies>
 ```
 
