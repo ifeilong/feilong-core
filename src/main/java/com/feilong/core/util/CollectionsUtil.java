@@ -473,11 +473,10 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 从 <code>collection</code>中 删除所有的 <code>propertyName</code> 值是 <code>value</code>的对象.返回剩余的集合 <span
-     * style="color:red">(原集合对象不变)</span>.
+     * 从 <code>collection</code>中 删除所有的 <code>propertyName</code> 值是在 <code>propertyValues</code>中的对象.
      * 
      * <p>
-     * 该方法等同于 {@link #selectRejected(Collection, String, Object)}
+     * 返回剩余的集合 <span style="color:red">(原集合对象不变)</span>,该方法等同于 {@link #selectRejected(Collection, String, Object...)}
      * </p>
      * 
      * <p>
@@ -514,6 +513,22 @@ public final class CollectionsUtil{
         }]
      * </pre>
      * 
+     * <hr>
+     * 
+     * <pre class="code">
+     * List{@code <User>} removeAll = CollectionsUtil.removeAll(objectCollection, "name", "刘备","关羽");
+     * LOGGER.info(JsonUtil.format(removeAll));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [{
+            "age": 23,
+            "name": "张飞"
+        }]
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param <O>
@@ -525,17 +540,17 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @param value
-     *            the value
+     * @param propertyValues
+     *            the values
      * @return a <code>List</code> containing all the elements of <code>c</code> except
      *         any elements that also occur in <code>remove</code>.
-     * @see #select(Collection, String, Collection)
+     * @see #select(Collection, String, Object...)
      * @see #removeAll(Collection, Collection)
-     * @since Commons Collections 4
-     * @since 1.5.0
+     * @since 1.6.0
      */
-    public static <O, V> List<O> removeAll(Collection<O> objectCollection,String propertyName,V value){
-        Collection<O> removeCollection = select(objectCollection, propertyName, value);
+    @SafeVarargs
+    public static <O, V> List<O> removeAll(Collection<O> objectCollection,String propertyName,V...propertyValues){
+        Collection<O> removeCollection = select(objectCollection, propertyName, propertyValues);
         return removeAll(objectCollection, removeCollection);
     }
 
@@ -1045,54 +1060,6 @@ public final class CollectionsUtil{
     //**************************select*****************************************************************
 
     /**
-     * 循环遍历 <code>objectCollection</code>,返回 当bean propertyName 属性值 equals 特定value 时候的list.
-     *
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
-     * objectCollection.add(new User("张飞", 23));
-     * objectCollection.add(new User("关羽", 24));
-     * objectCollection.add(new User("刘备", 25));
-     * objectCollection.add(new User("关羽", 24));
-     * 
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     [{"age": 24,
-             "name": "关羽"
-         },{
-             "age": 24,
-             "name": "关羽"
-         }]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param <O>
-     *            the generic type
-     * @param <V>
-     *            the value type
-     * @param objectCollection
-     *            the object list
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @param value
-     *            the value
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
-     * @see CollectionUtils#select(Iterable, Predicate)
-     */
-    public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V value){
-        Object[] values = { value };
-        return select(objectCollection, propertyName, values);
-    }
-
-    /**
      * 调用 {@link ArrayContainsPredicate},获得 <code>propertyName</code>的值,判断是否 在<code>values</code>数组中;如果在,将该对象存入list中返回.
      * 
      * <p>
@@ -1266,28 +1233,6 @@ public final class CollectionsUtil{
     }
 
     //***************************selectRejected*********************************************************************
-
-    /**
-     * 循环遍历 <code>objectCollection</code> ,返回 当bean propertyName 属性值不 equals 特定value 时候的list.
-     *
-     * @param <O>
-     *            the generic type
-     * @param <V>
-     *            the value type
-     * @param objectCollection
-     *            the object list
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @param value
-     *            the value
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
-     * @see CollectionUtils#selectRejected(Iterable, Predicate)
-     */
-    public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V value){
-        Object[] values = { value };
-        return selectRejected(objectCollection, propertyName, values);
-    }
 
     /**
      * 循环遍历 <code>objectCollection</code> ,返回 当bean propertyName 属性值 都不在values 时候的list.
