@@ -1040,7 +1040,6 @@ public final class DateUtil{
      *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      *         否则使用 {@link java.util.Locale#getDefault()},调用{@link java.text.DateFormat#format(Date)}
-     * @see DateFormatUtil#format(Date, String)
      * @see org.apache.commons.lang3.time.DateFormatUtils#format(Date, String)
      * @see "org.joda.time.base.AbstractDateTime#toString(String)"
      * @see <a href="http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string">convert-java-util-date-to-string</a>
