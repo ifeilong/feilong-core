@@ -32,14 +32,14 @@ import com.feilong.core.bean.PropertyUtil;
  */
 public class ArrayContainsPredicate<T> implements Predicate<T>{
 
-    /** The value. */
-    private final Object[] values;
-
     /**
      * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      * {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}.
      */
     private final String   propertyName;
+
+    /** The value. */
+    private final Object[] propertyValues;
 
     /**
      * The Constructor.
@@ -47,11 +47,11 @@ public class ArrayContainsPredicate<T> implements Predicate<T>{
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @param values
+     * @param propertyValues
      *            the values
      */
-    public ArrayContainsPredicate(String propertyName, Object...values){
-        this.values = values;
+    public ArrayContainsPredicate(String propertyName, Object...propertyValues){
+        this.propertyValues = propertyValues;
         this.propertyName = propertyName;
     }
 
@@ -63,6 +63,6 @@ public class ArrayContainsPredicate<T> implements Predicate<T>{
     @Override
     public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
-        return org.apache.commons.lang3.ArrayUtils.contains(values, property);
+        return org.apache.commons.lang3.ArrayUtils.contains(propertyValues, property);
     }
 }

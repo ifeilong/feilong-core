@@ -40,7 +40,7 @@ public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
     private final String propertyName;
 
     /** The value. */
-    private final Object value;
+    private final Object propertyValue;
 
     /**
      * The Constructor.
@@ -48,12 +48,12 @@ public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @param value
+     * @param propertyValue
      *            the value
      */
-    public BeanPropertyValueEqualsPredicate(String propertyName, Object value){
+    public BeanPropertyValueEqualsPredicate(String propertyName, Object propertyValue){
         this.propertyName = propertyName;
-        this.value = value;
+        this.propertyValue = propertyValue;
     }
 
     /*
@@ -65,6 +65,6 @@ public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
     @Override
     public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
-        return ObjectUtils.equals(property, value);
+        return ObjectUtils.equals(property, propertyValue);
     }
 }

@@ -34,14 +34,14 @@ import com.feilong.core.bean.PropertyUtil;
  */
 public class CollectionContainsPredicate<T> implements Predicate<T>{
 
-    /** The value. */
-    private final Collection<?> values;
-
     /**
      * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      * {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}.
      */
     private final String        propertyName;
+
+    /** The value. */
+    private final Collection<?> propertyValueList;
 
     /**
      * The Constructor.
@@ -49,11 +49,11 @@ public class CollectionContainsPredicate<T> implements Predicate<T>{
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @param values
+     * @param propertyValueList
      *            the values
      */
-    public CollectionContainsPredicate(String propertyName, Collection<?> values){
-        this.values = values;
+    public CollectionContainsPredicate(String propertyName, Collection<?> propertyValueList){
+        this.propertyValueList = propertyValueList;
         this.propertyName = propertyName;
     }
 
@@ -64,6 +64,7 @@ public class CollectionContainsPredicate<T> implements Predicate<T>{
      */
     @Override
     public boolean evaluate(T object){
-        return Validator.isNullOrEmpty(values) ? false : values.contains(PropertyUtil.getProperty(object, propertyName));
+        return Validator.isNullOrEmpty(propertyValueList) ? false
+                        : propertyValueList.contains(PropertyUtil.getProperty(object, propertyName));
     }
 }

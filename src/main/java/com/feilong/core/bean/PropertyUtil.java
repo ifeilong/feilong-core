@@ -338,7 +338,10 @@ public final class PropertyUtil{
      *            Bean whose property is to be extracted
      * @param propertyName
      *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
-     * @return 使用{@link PropertyUtils#getProperty(Object, String)} 从对象中取得属性值
+     * @return 如果 <code>bean</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         否则 使用{@link PropertyUtils#getProperty(Object, String)} 从对象中取得属性值
      * @see BeanUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
@@ -346,6 +349,8 @@ public final class PropertyUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T getProperty(Object bean,String propertyName){
+        Validate.notNull(bean, "bean can't be null!");
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
