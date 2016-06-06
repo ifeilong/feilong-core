@@ -354,14 +354,18 @@ public final class SystemUtil{
 
     /**
      * 设置 properties from map.
+     * 
+     * <p>
+     * 如果 <code>map</code> 是null或者empty,抛出 {@link NullPointerException}<br>
+     * </p>
      *
      * @param map
      *            the properties from map
-     * @since 1.2.0
      * @see java.lang.System#setProperty(String, String)
+     * @since 1.2.0
      */
     public static void setPropertiesFromMap(Map<String, String> map){
-        Validate.notNull(map, "map can't be null!");
+        Validate.notEmpty(map, "map can't be null/empty!");
         for (Map.Entry<String, String> entry : map.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
@@ -371,13 +375,17 @@ public final class SystemUtil{
 
     /**
      * 设置 properties from properties.
+     * 
+     * <p>
+     * 如果 <code>properties</code> 是null,抛出 {@link NullPointerException}<br>
+     * </p>
      *
      * @param properties
      *            the properties from properties
-     * @since 1.2.0
      * @see PropertiesUtil#toMap(Properties)
      * @see #setPropertiesFromMap(Map)
      * @see java.lang.System#setProperties(Properties)
+     * @since 1.2.0
      */
     public static void setPropertiesFromProperties(Properties properties){
         Validate.notNull(properties, "properties can't be null!");
