@@ -455,7 +455,7 @@ public final class ResourceBundleUtil{
      *            the delimiters
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果 baseName 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     * @return 如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则解析所有的key和value转成HashMap
      * @see #readAllPropertiesToMap(String, Locale)
      */
@@ -492,7 +492,7 @@ public final class ResourceBundleUtil{
      *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
      *            ,比如message/feilong-core-test
-     * @return 如果 baseName 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     * @return 如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则,解析所有的key和value转成 {@link TreeMap}
      * @see #readAllPropertiesToMap(String, Locale)
      * @since 1.2.1
@@ -517,7 +517,7 @@ public final class ResourceBundleUtil{
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 baseName 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     *         如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则,解析所有的key和value转成 {@link TreeMap}<br>
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()

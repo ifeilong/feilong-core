@@ -1378,7 +1378,7 @@ public final class CollectionsUtil{
      * </blockquote>
      *
      * @param <T>
-     *            注意,此处的T其实是 Object 类型, 需要区别对待,比如从excel中读取的类型是String,那么就不能简简单单的使用Integer来接收, 因为不能强制转换
+     *            注意,此处的T是属性值,Object类型,如果从excel中读取的类型是String,那么不能简简单单的使用Integer来接收,不能强制转换
      * @param <O>
      *            the generic type
      * @param objectCollection
@@ -1453,7 +1453,7 @@ public final class CollectionsUtil{
      * </blockquote>
      *
      * @param <T>
-     *            注意,此处的T其实是 Object 类型, 需要区别对待,比如从excel中读取的类型是String,那么就不能简简单单的使用Integer来接收, 因为不能强制转换
+     *            注意,此处的T是属性值,Object类型,如果从excel中读取的类型是String,那么不能简简单单的使用Integer来接收,不能强制转换
      * @param <O>
      *            the generic type
      * @param objectCollection

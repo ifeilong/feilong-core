@@ -566,8 +566,7 @@ public final class ConvertUtil{
      *            the generic type
      * @param arrays
      *            T数组
-     * @return 数组转成 List(ArrayList)<br>
-     *         如果 <code>arrays</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则返回 {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
      * @see java.util.Collections#addAll(Collection, Object...)
