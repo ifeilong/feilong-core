@@ -47,6 +47,11 @@ public class MessageFormatUtilTest{
         LOGGER.info(MessageFormatUtil.format("name=张三{0,date}a{1}", 15, "xin"));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void format1(){
+        LOGGER.info(MessageFormatUtil.format(null, "jin", "xin"));
+    }
+
     /**
      * Test get value with arguments1.
      */

@@ -28,11 +28,15 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validator;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateExtensionUtil;
+import com.feilong.core.util.CollectionsUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -145,7 +149,7 @@ public class ArrayUtilTest{
                          new User("孔六", 28),
                          new User("飞飞", 58) };
 
-        Map<Integer, List<User>> group = ArrayUtil.group(users, "age");
+        Map<Integer, List<User>> group = group(users, "age");
         LOGGER.debug(JsonUtil.format(group));
     }
 
@@ -155,7 +159,7 @@ public class ArrayUtilTest{
     @Test
     public void testGetElement(){
         Object array = new String[] { "jinxin", "feilong", "1" };
-        LOGGER.info("" + ArrayUtil.getElement(array, 2));
+        assertEquals("1", ArrayUtil.getElement(array, 2));
     }
 
     /**
@@ -275,5 +279,85 @@ public class ArrayUtilTest{
             map.put(t, valueList);
         }
         return map;
+    }
+
+    /**
+     * 将对象数组 <code>array</code>,按照指定属性的值 <code>propertyName</code> 进行分组.
+     * 
+     * <p>
+     * 返回的map是 {@link LinkedHashMap},key是指定属性名称的值,value是指定名称值所属对象list,顺序是依照属性名称值顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * User[] users = {
+     *                  new User("张三", 18),
+     *                  new User("李四", 28),
+     *                  new User("王五", 38),
+     *                  new User("陈二", 18),
+     *                  new User("孔六", 28),
+     *                  new User("飞飞", 58) };
+     * 
+     * Map{@code <Integer, List<User>>} group = ArrayUtil.group(users, "age");
+     * LOGGER.debug(JsonUtil.format(group));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {
+         "18": [{
+                 "age": 18,
+                 "name": "张三"
+             },{
+                 "age": 18,
+                 "name": "陈二"
+             }
+         ],
+         "28": [{
+                 "age": 28,
+                 "name": "李四"
+             },{
+                 "age": 28,
+                 "name": "孔六"
+             }
+         ],
+         "38": [{
+             "age": 38,
+             "name": "王五"
+         }],
+         "58": [{
+             "age": 58,
+             "name": "飞飞"
+         }]
+     }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <T>
+     *            the generic type
+     * @param array
+     *            对象数组
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     * @return 如果 <code>objectArray</code> 是 null或者empty,返回 {@link java.util.Collections#emptyMap()} <br>
+     *         如果 <code>propertyName</code>是 null 抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code>是 blank 抛出 {@link IllegalArgumentException}<br>
+     * @see com.feilong.core.bean.ConvertUtil#toList(Object...)
+     * @see com.feilong.core.util.CollectionsUtil#group(java.util.Collection, String)
+     * @since 1.0.8
+     */
+    public static <O, T> Map<T, List<O>> group(O[] array,String propertyName){
+        if (Validator.isNullOrEmpty(array)){
+            return Collections.emptyMap();
+        }
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
+        return CollectionsUtil.group(ConvertUtil.toList(array), propertyName);
     }
 }

@@ -18,6 +18,8 @@ package com.feilong.core.text;
 import java.text.Format;
 import java.text.MessageFormat;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * {@link MessageFormat}工具类,常用于国际化 .
  * 
@@ -58,9 +60,10 @@ public final class MessageFormatUtil{
      *            </ul>
      * @param arguments
      *            动态参数
-     * @return the string
+     * @return 如果 <code>pattern</code> 是null,抛出 {@link NullPointerException}<br>
      */
     public static String format(String pattern,Object...arguments){
+        Validate.notNull(pattern, "pattern can't be null!");
         return MessageFormat.format(pattern, arguments);
     }
 }

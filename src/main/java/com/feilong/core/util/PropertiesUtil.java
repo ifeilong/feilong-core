@@ -213,14 +213,12 @@ public final class PropertiesUtil{
     }
 
     /**
-     * 获取Properties.
+     * 获取{@link Properties}.
      *
      * @param inputStream
      *            inputStream
-     * @return
-     *         <ul>
-     *         <li>正常情况,返回 {@link java.util.Properties#load(InputStream)}</li>
-     *         </ul>
+     * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     *         正常情况,返回 {@link java.util.Properties#load(InputStream)}
      * @see java.util.Properties#load(InputStream)
      * @see "org.springframework.core.io.support.PropertiesLoaderUtils#loadProperties(Resource)"
      */

@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.core.util.predicate.ArrayContainsPredicate;
 import com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate;
@@ -1390,7 +1389,6 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
-     * @see com.feilong.core.lang.ArrayUtil#group(Object[], String)
      * @see #group(Collection, String, Predicate)
      * @since 1.0.8
      */
@@ -1469,7 +1467,6 @@ public final class CollectionsUtil{
      *         如果没有任何element match <code>includePredicate</code>,返回 empty {@link LinkedHashMap}<br>
      *         如果 includePredicate 是null,那么以所有的元素进行分组
      * @see PropertyUtil#getProperty(Object, String)
-     * @see ArrayUtil#group(Object[], String)
      * @see #groupOne(Collection, String)
      * @since 1.5.5
      */

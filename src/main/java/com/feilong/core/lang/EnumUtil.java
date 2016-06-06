@@ -45,7 +45,7 @@ public final class EnumUtil{
     }
 
     /**
-     * 通过propertyName的 value(忽视大小写) 获得枚举(equalsIgnoreCase判断).
+     * 通过<code>propertyName</code>的 <code>specifiedValue</code>(忽视大小写) 获得枚举(equalsIgnoreCase判断).
      * 
      * <p>
      * 适用于这种{@link com.feilong.core.HttpMethodType HttpMethodType}带自定义属性的枚举类型,调用方式:
@@ -69,12 +69,11 @@ public final class EnumUtil{
      * @see #getEnumByPropertyValue(Class, String, Object, boolean)
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T specifiedValue){
-        boolean ignoreCase = true;
-        return getEnumByPropertyValue(enumClass, propertyName, specifiedValue, ignoreCase);
+        return getEnumByPropertyValue(enumClass, propertyName, specifiedValue, true);
     }
 
     /**
-     * 通过propertyName的 value 获得枚举(equals判断,区分大小写).
+     * 通过<code>propertyName</code>的 <code>specifiedValue</code> 获得枚举(equals判断,区分大小写).
      * 
      * <p>
      * 适用于这种{@link com.feilong.core.HttpMethodType HttpMethodType}带自定义属性的枚举类型,调用方式:
@@ -94,24 +93,25 @@ public final class EnumUtil{
      *            字段名称,比如 {@link com.feilong.core.HttpMethodType HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
-     * @return 获得 enum constant
+     * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @since 1.0.8
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T specifiedValue){
-        boolean ignoreCase = false;
-        return getEnumByPropertyValue(enumClass, propertyName, specifiedValue, ignoreCase);
+        return getEnumByPropertyValue(enumClass, propertyName, specifiedValue, false);
     }
 
     /**
-     * 通过propertyName的 value 获得枚举.
+     * 通过<code>propertyName</code>的 <code>specifiedValue</code> 获得枚举.
      * 
      * <p>
      * 适用于这种{@link com.feilong.core.HttpMethodType HttpMethodType} 带自定义属性的枚举类型,调用方式:
+     * </p>
      * 
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
-     * </p>
      *
      * @param <E>
      *            the element type
@@ -142,7 +142,7 @@ public final class EnumUtil{
 
         // An enum is a kind of class
         // An annotation is a kind of interface
-        // 如果此 Class 对象不表示枚举类型,则返回枚举类的元素或 null.
+        // 如果Class 对象不表示枚举类型,则返回枚举类的元素或 null.
         E[] enumConstants = enumClass.getEnumConstants();
 
         if (LOGGER.isDebugEnabled()){

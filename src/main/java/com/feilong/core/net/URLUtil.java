@@ -68,8 +68,8 @@ public final class URLUtil{
      * @param urls
      *            the urls
      * @return the string[]
-     * @since 1.2.1
      * @see com.feilong.core.bean.ConvertUtil#toStrings(Object)
+     * @since 1.2.1
      */
     public static String[] toStringArray(URL...urls){
         Validate.notNull(urls, "urls can't be null!");

@@ -99,7 +99,6 @@ public final class NumberFormatUtil{
      *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果有异常,返回 {@link StringUtils#EMPTY}
-     * @see NumberPattern
      * @see DecimalFormat
      * @see <a href="../util/NumberUtil.html#RoundingMode">JAVA 8种舍入法</a>
      */

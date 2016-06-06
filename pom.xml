@@ -228,6 +228,7 @@
 						<include>**/ResourceBundleUtilTest</include>
 						
 						<include>**/NumberUtilTest</include>
+						<include>**/MessageFormatUtilTest</include>
 						<include>**/Slf4jUtilTest</include>
 						<include>**/StringUtilTest</include>
 

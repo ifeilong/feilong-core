@@ -143,7 +143,7 @@ public final class ClassUtil{
     }
 
     /**
-     * 返回一个类.
+     * JVM查找并加载指定的类.
      * 
      * <blockquote>
      * 
@@ -172,20 +172,21 @@ public final class ClassUtil{
      * </tr>
      * </table>
      * </blockquote>
-     * 
+     *
      * @param className
      *            包名+类名 "org.jfree.chart.ChartFactory"
      * @return the class
      * @throws ClassNotFoundException
      *             the class not found exception
+     * @see java.lang.Class#forName(String)
      * @since 1.0.7
      */
     public static Class<?> loadClass(String className) throws ClassNotFoundException{
-        return Class.forName(className);// JVM查找并加载指定的类
+        return Class.forName(className);
     }
 
     /**
-     * 是不是某个类的实例.
+     * 判断一个对象是不是某个类的实例.
      * 
      * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
      * 
@@ -240,7 +241,8 @@ public final class ClassUtil{
      *            the obj
      * @param klasses
      *            the klasses
-     * @return true, if checks if is instance; 如果 <code>null == klasses</code> return false
+     * @return 如果 <code>null == klasses</code> ,返回 false<br>
+     *         true, if checks if is instance;
      * @since 1.5.6
      */
     public static boolean isInstanceAnyClass(Object obj,Class<?>[] klasses){

@@ -84,7 +84,7 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 获取Properties配置文件键值,转换成指定的 typeClass 类型返回.
+     * 获取Properties配置文件键值,转换成指定的 <code>typeClass</code> 类型返回.
      * 
      * @param <T>
      *            the generic type
@@ -96,7 +96,7 @@ public final class ResourceBundleUtil{
      *            the key
      * @param typeClass
      *            指明返回类型, 如果是String.class,则转换成String返回; 如果是Integer.class,则转换成Integer返回
-     * @return the value
+     * @return 如果 <code>typeClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getValue(String, String)
      * @see ConvertUtil#convert(Object, Class)
      */
@@ -118,7 +118,7 @@ public final class ResourceBundleUtil{
      *            指明返回类型,<br>
      *            如果是String.class,则返回的是String <br>
      *            如果是Integer.class,则返回的是Integer
-     * @return the value
+     * @return 如果 <code>typeClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getValue(ResourceBundle, String)
      * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
      */
@@ -224,6 +224,7 @@ public final class ResourceBundleUtil{
 
     /**
      * 带参数的 配置文件.
+     * 
      * <p>
      * 格式如:name={0}.
      * </p>
@@ -235,7 +236,6 @@ public final class ResourceBundleUtil{
      * @param arguments
      *            此处可以传递Object[]数组过来
      * @return 支持 arguments 为null,原样返回
-     * @see MessageFormatUtil
      * @see MessageFormatUtil#format(String, Object...)
      */
     public static String getValueWithArguments(ResourceBundle resourceBundle,String key,Object...arguments){
@@ -246,6 +246,7 @@ public final class ResourceBundleUtil{
     // *****************************************************************************
     /**
      * 读取值,转成数组.
+     * 
      * <p>
      * 默认调用 {@link #getArray(ResourceBundle, String, String, Class)} 形式
      * </p>
