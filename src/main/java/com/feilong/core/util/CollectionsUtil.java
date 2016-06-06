@@ -961,12 +961,8 @@ public final class CollectionsUtil{
     //*************************find****************************************************************
 
     /**
-     * 找到 <code>objectCollection</code>中,第一个 <code>propertyName</code>属性名称 值是 <code>value</code>对应的元素.
+     * 找到 <code>iterable</code>中,第一个 <code>propertyName</code>属性名称值是 <code>value</code>对应的元素.
      * 
-     * <p>
-     * 如果 collection是null, 或者 collection中没有相关元素匹配 predicate,将返回null.
-     * </p>
-     *
      * <h3>示例:</h3>
      * <blockquote>
      * 
@@ -990,19 +986,20 @@ public final class CollectionsUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param <O>
      *            the generic type
      * @param <V>
      *            the value type
      * @param iterable
-     *            the object collection
+     *            the iterable
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param propertyValue
      *            指定的值
-     * @return the first element of the collection which matches the predicate or null if none could be found
+     * @return 如果 <code>iterable</code>是null, 返回null<br>
+     *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回null
      * @see #find(Iterable, Predicate)
      */
     public static <O, V> O find(Iterable<O> iterable,String propertyName,V propertyValue){
@@ -1010,7 +1007,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * Finds the first element in the given iterable which matches the given predicate.
+     * 迭代查找匹配predicate 的第一个元素并返回.
      * 
      * <h3>示例:</h3>
      * 
@@ -1037,9 +1034,9 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * {
-        "age": 25,
-        "name": "刘备"
-    }
+     * "age": 25,
+     * "name": "刘备"
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1050,8 +1047,9 @@ public final class CollectionsUtil{
      *            the iterable to search, may be null
      * @param predicate
      *            the predicate to use, may not be null
-     * @return 如果 predicate 是 null,将抛出NullPointerException <br>
-     *         迭代查找 匹配predicate 的第一个元素并返回,如果找不到匹配的返回null
+     * @return 如果 <code>predicate</code> 是 null,将抛出{@link NullPointerException} <br>
+     *         如果 <code>iterable</code>是null, 返回null<br>
+     *         如果 <code>iterable</code>中没有相关元素匹配 <code>predicate</code>,返回null
      * @see IterableUtils#find(Iterable, Predicate)
      * @since 1.5.5
      */
@@ -1169,8 +1167,10 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param propertyValueList
      *            the values
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         否则调用 {@link #select(Collection, Predicate)}
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
+     * @see #select(Collection, Predicate)
      * @since 1.5.0
      */
     @SuppressWarnings("unchecked")
