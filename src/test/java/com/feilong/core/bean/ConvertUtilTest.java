@@ -171,6 +171,12 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(null), 0, 0));
     }
 
+    @Test
+    public void testToLongs1(){
+        Long[] longs = ConvertUtil.toLongs(ConvertUtil.toList("1", "2", "8"));
+        LOGGER.debug(JsonUtil.format(longs, 0, 0));
+    }
+
     /**
      * Test to strings.
      */
@@ -191,6 +197,11 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", "2", "3" }), 0, 0));
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", null, "2", "3" }), 0, 0));
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers("1,2,3"), 0, 0));
+    }
+
+    @Test
+    public void testToIntegers1(){
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(ConvertUtil.toList("1", "2", "8")), 0, 0));
     }
 
     /**

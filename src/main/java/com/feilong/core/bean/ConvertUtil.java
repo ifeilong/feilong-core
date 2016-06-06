@@ -667,7 +667,7 @@ public final class ConvertUtil{
      *
      * @param <T>
      *            the generic type
-     * @param values
+     * @param toBeConvertedValue
      *            the values
      * @param targetType
      *            the target type
@@ -678,8 +678,8 @@ public final class ConvertUtil{
      * @since 1.6.0
      */
     @SuppressWarnings("unchecked")
-    public static <T> T[] toArray(String[] values,Class<T> targetType){
-        return null == values ? null : (T[]) ConvertUtils.convert(values, targetType);
+    public static <T> T[] toArray(String[] toBeConvertedValue,Class<T> targetType){
+        return null == toBeConvertedValue ? null : (T[]) ConvertUtils.convert(toBeConvertedValue, targetType);
     }
 
     //********************************************************************************
@@ -771,9 +771,22 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * ConvertUtil.toIntegers("1,2,3")                        = [1,2,3]
-     * ConvertUtil.toIntegers(new String[] { "1", "2", "3" }) = [1,2,3]
+     * ConvertUtil.toIntegers("1,2,3")                              = [1,2,3]
+     * ConvertUtil.toIntegers(new String[] { "1", "2", "3" })       = [1,2,3]
+     * ConvertUtil.toIntegers(ConvertUtil.toList("1", "2", "3"))    = [1,2,3]
      * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>value.getClass().isArray()</code> 或者 {@link Collection}</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
+     * Object)} 会基于targetType 构造一个<code>Integer</code>数组对象, 大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代
+     * <code>toBeConvertedValue</code>
+     * 依次进行转换
+     * </p>
      * 
      * </blockquote>
      * 
@@ -794,9 +807,21 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * ConvertUtil.toLongs("1,2,3")                        = [1,2,3]
-     * ConvertUtil.toLongs(new String[] { "1", "2", "3" }) = [1,2,3]
+     * ConvertUtil.toLongs("1,2,3")                             = [1,2,3]
+     * ConvertUtil.toLongs(new String[] { "1", "2", "3" })      = [1,2,3]
+     * ConvertUtil.toLongs(ConvertUtil.toList("1", "2", "3"))   = [1,2,3]
      * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>value.getClass().isArray()</code> 或者 {@link Collection}</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
+     * Object)} 会基于targetType 构造一个<code>Long</code>数组对象, 大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代 <code>toBeConvertedValue</code>
+     * 依次进行转换
+     * </p>
      * 
      * </blockquote>
      *
@@ -884,7 +909,7 @@ public final class ConvertUtil{
      *
      * @param <T>
      *            the generic type
-     * @param object
+     * @param toBeConvertedValue
      *            <ul>
      *            <li>逗号分隔的字符串,{@link ConvertUtil#toStrings(Object)} 转成数组</li>
      *            <li>数组</li>
@@ -908,15 +933,15 @@ public final class ConvertUtil{
      * @since Commons Collections4.0
      */
     @SuppressWarnings("unchecked")
-    public static <T> Iterator<T> toIterator(Object object){
-        if (null == object){
+    public static <T> Iterator<T> toIterator(Object toBeConvertedValue){
+        if (null == toBeConvertedValue){
             return null;
         }
         // 逗号分隔的字符串
-        if (object instanceof String){
-            return toIterator(toStrings(object));
+        if (toBeConvertedValue instanceof String){
+            return toIterator(toStrings(toBeConvertedValue));
         }
-        return (Iterator<T>) IteratorUtils.getIterator(object);
+        return (Iterator<T>) IteratorUtils.getIterator(toBeConvertedValue);
     }
 
     /**
@@ -931,22 +956,35 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * ConvertUtil.convert("1", Integer.class) 返回 1
-     * ConvertUtil.convert("1", Long.class) 返回 1
+     * ConvertUtil.convert("1", Integer.class)      =1
+     * ConvertUtil.convert("1", Long.class)         =1
      * </pre>
      * 
      * </blockquote>
      * 
-     * <h3>注意:</h3>
+     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>toBeConvertedValue.getClass().isArray()</code> 或者 {@link Collection}</h3>
+     * <blockquote>
      * 
+     * <dl>
+     * <dt>如果 <code>targetType</code> 不是数组</dt>
+     * <dd>
      * <p>
-     * 如果传的 value是 <code>value.getClass().isArray()</code> 或者 {@link Collection},那么<span style="color:red">会取第一个元素</span>进行转换,<br>
+     * 那么<span style="color:red">会取第一个元素</span>进行转换,<br>
      * 参见{@link AbstractConverter#convert(Class, Object)},调用的 {@link AbstractConverter#convertArray(Object)} 方法
      * </p>
+     * </dd>
+     * 
+     * <dt>如果 <code>targetType</code> 是数组</dt>
+     * <dd>参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
+     * Object)} 会基于targetType 构造一个数组对象,大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代 <code>toBeConvertedValue</code> 依次进行转换</dd>
+     * 
+     * </dl>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
-     * @param value
+     * @param toBeConvertedValue
      *            the value
      * @param targetType
      *            the target type
@@ -955,11 +993,12 @@ public final class ConvertUtil{
      *         否则返回 {@link org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)}
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)
+     * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object)
      */
     @SuppressWarnings("unchecked")
-    public static <T> T convert(Object value,Class<T> targetType){
+    public static <T> T convert(Object toBeConvertedValue,Class<T> targetType){
         Validate.notNull(targetType, "targetType can't be null!");
-        return null == value ? null : (T) ConvertUtils.convert(value, targetType);
+        return null == toBeConvertedValue ? null : (T) ConvertUtils.convert(toBeConvertedValue, targetType);
     }
 
 }
