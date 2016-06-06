@@ -1422,7 +1422,7 @@ public final class CollectionsUtil{
     
             {@code @Override}
             public boolean evaluate(User user){
-                return user.getAge() > 20;
+                return user.getAge() {@code >} 20;
             }
         });
         LOGGER.info(JsonUtil.format(map));
@@ -1463,9 +1463,10 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param includePredicate
      *            the include predicate
-     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         如果 propertyName isNullOrEmpty,抛出 {@link NullPointerException}<br>
-     *         如果没有任何element match <code>includePredicate</code>,,返回 empty LinkedHashMap<br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果没有任何element match <code>includePredicate</code>,返回 empty {@link LinkedHashMap}<br>
      *         如果 includePredicate 是null,那么以所有的元素进行分组
      * @see PropertyUtil#getProperty(Object, String)
      * @see ArrayUtil#group(Object[], String)
@@ -1548,7 +1549,7 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #group(Collection, String)
@@ -1583,7 +1584,7 @@ public final class CollectionsUtil{
      * 循环 <code>objectCollection</code>,统计<code>propertyName</code>的值出现的次数.
      * 
      * <p>
-     * 返回的LinkedHashMap,key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
      * 顺序是 objectCollection <code>propertyName</code>的值的顺序
      * </p>
      *
@@ -1596,8 +1597,9 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
-     *         如果 propertyName isNullOrEmpty,抛出 {@link NullPointerException}
+     * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #groupCount(Collection , Predicate, String)
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
@@ -1608,8 +1610,8 @@ public final class CollectionsUtil{
      * 循环 <code>objectCollection</code>,只选择 符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
      * 
      * <p>
-     * 返回的LinkedHashMap,key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
-     * 顺序是 objectCollection<code>propertyName</code>的值的顺序
+     * 返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 顺序是 objectCollection <code>propertyName</code>的值的顺序
      * </p>
      *
      * @param <T>
