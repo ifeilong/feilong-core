@@ -902,9 +902,7 @@ public final class MapUtil{
         Validate.notNull(mapEntryComparator, "mapEntryComparator can't be null!");
 
         List<Map.Entry<K, V>> mapEntryList = ConvertUtil.toList(map.entrySet());
-
         Collections.sort(mapEntryList, mapEntryComparator);
-
         return toMap(mapEntryList);
     }
 
@@ -919,6 +917,7 @@ public final class MapUtil{
      *            the map entry list
      * @return the map< k, v>
      * @since 1.6.1
+     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
      */
     private static <V, K> Map<K, V> toMap(List<Map.Entry<K, V>> mapEntryList){
         Map<K, V> returnMap = new LinkedHashMap<K, V>(mapEntryList.size());

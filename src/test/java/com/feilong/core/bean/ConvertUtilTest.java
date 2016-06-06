@@ -379,6 +379,22 @@ public class ConvertUtilTest{
         User user2 = new User();
         user2.setId(2L);
         LOGGER.info(JsonUtil.format(ConvertUtil.toArray(user1, user2)));
+
+    }
+
+    @Test
+    public void testToArray4(){
+        String[] array1 = ConvertUtil.<String> toArray();
+        LOGGER.info(JsonUtil.format(array1));
+    }
+
+    /**
+     * TestConvertUtilTest.
+     */
+    @Test
+    public void testToArray3(){
+        String[] array2 = ConvertUtil.toArray(null);
+        LOGGER.info(JsonUtil.format(array2));
     }
 
     /**

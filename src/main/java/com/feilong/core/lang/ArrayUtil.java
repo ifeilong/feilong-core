@@ -16,7 +16,6 @@
 package com.feilong.core.lang;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -44,7 +43,6 @@ import com.feilong.core.util.CollectionsUtil;
  * <blockquote>
  * <ol>
  * <li>{@link #getElement(Object, int)},得到数组中的某个元素</li>
- * <li>{@link #group(Object[])},将array 分组</li>
  * <li>{@link #group(Object[], String)},将对象数组,按照指定属性的值进行分组</li>
  * </ol>
  * </blockquote>
@@ -110,75 +108,6 @@ public final class ArrayUtil{
     @SuppressWarnings("unchecked")
     public static <T> T getElement(Object array,int index){
         return (T) Array.get(array, index);
-    }
-
-    /**
-     * 将<code>array</code> 分组.
-     * 
-     * <p>
-     * 返回的 {@link LinkedHashMap} ,key是分组中的值,value是分组值的列表;key的顺序是依照 <code>array</code>元素不同值的顺序
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
-     * Map{@code <Integer, List<Integer>>} group = ArrayUtil.group(array);
-     * LOGGER.debug(JsonUtil.format(group));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     {
-         "1":         [
-             1,
-             1,
-             1
-         ],
-         "2":         [
-             2,
-             2
-         ],
-         "3": [3],
-         "4": [4],
-         "5":         [
-             5,
-             5
-         ],
-         "6": [6],
-         "7": [7],
-         "8":         [
-             8,
-             8
-         ]
-     }
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <T>
-     *            the generic type
-     * @param array
-     *            the array
-     * @return 如果 <code>array</code> 是null,返回 {@link Collections#emptyMap()}<br>
-     * @since 1.0.8
-     */
-    public static <T> Map<T, List<T>> group(T[] array){
-        if (null == array){
-            return Collections.emptyMap();
-        }
-        Map<T, List<T>> map = new LinkedHashMap<T, List<T>>(array.length);
-        for (T t : array){
-            List<T> valueList = map.get(t);
-            if (null == valueList){
-                valueList = new ArrayList<T>();
-            }
-            valueList.add(t);
-            map.put(t, valueList);
-        }
-        return map;
     }
 
     /**

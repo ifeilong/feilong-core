@@ -20,7 +20,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,7 +113,7 @@ public class ArrayUtilTest{
     public void testGroup(){
         Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
 
-        Map<Integer, List<Integer>> group = ArrayUtil.group(array);
+        Map<Integer, List<Integer>> group = group(array);
         LOGGER.debug(JsonUtil.format(group));
 
     }
@@ -123,7 +125,7 @@ public class ArrayUtilTest{
     public void testGroup1(){
         String[] array1 = { "关羽", "feilong", "关羽", "基友团", "关羽" };
 
-        Map<String, List<String>> group1 = ArrayUtil.group(array1);
+        Map<String, List<String>> group1 = group(array1);
         LOGGER.debug(JsonUtil.format(group1));
 
         Collection<List<String>> values1 = group1.values();
@@ -204,5 +206,74 @@ public class ArrayUtilTest{
         LOGGER.info(array.toString());
         LOGGER.info(Arrays.toString(array));
         LOGGER.info(StringUtils.join(array, ","));
+    }
+
+    /**
+     * 将<code>array</code> 分组.
+     * 
+     * <p>
+     * 返回的 {@link LinkedHashMap} ,key是分组中的值,value是分组值的列表;key的顺序是依照 <code>array</code>元素不同值的顺序
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Integer[] array = { 1, 1, 1, 2, 2, 3, 4, 5, 5, 6, 7, 8, 8 };
+     * Map{@code <Integer, List<Integer>>} group = ArrayUtil.group(array);
+     * LOGGER.debug(JsonUtil.format(group));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     {
+         "1":         [
+             1,
+             1,
+             1
+         ],
+         "2":         [
+             2,
+             2
+         ],
+         "3": [3],
+         "4": [4],
+         "5":         [
+             5,
+             5
+         ],
+         "6": [6],
+         "7": [7],
+         "8":         [
+             8,
+             8
+         ]
+     }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param array
+     *            the array
+     * @return 如果 <code>array</code> 是null,返回 {@link Collections#emptyMap()}<br>
+     * @since 1.0.8
+     */
+    public static <T> Map<T, List<T>> group(T[] array){
+        if (null == array){
+            return Collections.emptyMap();
+        }
+        Map<T, List<T>> map = new LinkedHashMap<T, List<T>>(array.length);
+        for (T t : array){
+            List<T> valueList = map.get(t);
+            if (null == valueList){
+                valueList = new ArrayList<T>();
+            }
+            valueList.add(t);
+            map.put(t, valueList);
+        }
+        return map;
     }
 }

@@ -578,17 +578,30 @@ public final class ConvertUtil{
 
     /**
      * To array.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String[] array = ConvertUtil.toArray("1", "2");                  =["1", "2"]
+     * String[] emptyArray = ConvertUtil.{@code <String>}toArray();     =[]
+     * String[] nullArray = ConvertUtil.toArray(null)                   = null
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param arrays
      *            the arrays
-     * @return the t[]
+     * @return 如果 <code>arrays</code> 是null,返回null<br>
+     * @see org.apache.commons.lang3.ArrayUtils#toArray(T...)
      * @since 1.6.0
      */
     @SafeVarargs
     public static <T> T[] toArray(T...arrays){
-        return arrays;
+        return ArrayUtils.toArray(arrays);
     }
 
     /**
