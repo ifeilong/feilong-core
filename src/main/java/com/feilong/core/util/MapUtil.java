@@ -916,8 +916,8 @@ public final class MapUtil{
      * @param mapEntryList
      *            the map entry list
      * @return the map< k, v>
-     * @since 1.6.1
      * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @since 1.6.1
      */
     private static <V, K> Map<K, V> toMap(List<Map.Entry<K, V>> mapEntryList){
         Map<K, V> returnMap = new LinkedHashMap<K, V>(mapEntryList.size());

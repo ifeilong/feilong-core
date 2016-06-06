@@ -515,11 +515,11 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     @Test
     public void testGetIntervalHour1(){
         LOGGER.debug(
-                        StringUtil.format(
-                                        "%05d",
-                                        DateExtensionUtil.getIntervalHour(
-                                                        DateUtil.toDate("2014-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
-                                                        DateUtil.toDate("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))));
+                        StringUtil.format("%05d", DateExtensionUtil.getIntervalHour(
+                                        DateUtil.toDate(
+                                                        "2014-01-01 00:00:00",
+                                                        DatePattern.COMMON_DATE_AND_TIME),
+                                        DateUtil.toDate("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME))));
     }
 
 }
