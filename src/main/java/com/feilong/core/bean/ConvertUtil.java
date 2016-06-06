@@ -593,7 +593,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将集合转成数组.
+     * 将集合 <code>collection</code> 转成数组.
      * 
      * <h3>示例:</h3>
      * 

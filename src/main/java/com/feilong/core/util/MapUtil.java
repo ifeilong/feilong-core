@@ -15,7 +15,6 @@
  */
 package com.feilong.core.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -222,7 +221,8 @@ public final class MapUtil{
      * 如果map中存在key,那么累加value值;如果不存在那么直接put.
      * 
      * <p>
-     * 如果map是null,那么抛出异常
+     * 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * </p>
      * 
      * <h3>示例:</h3>
@@ -243,9 +243,9 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * {
-        "1000001": 5,
-        "1000002": 10
-        }
+     * "1000001": 5,
+     * "1000002": 10
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -306,14 +306,10 @@ public final class MapUtil{
      *            指定一个map
      * @param keys
      *            指定特定的key
-     * @return
-     *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,返回 null;</li>
-     *         <li>如果 <code>keys</code> 是null或者empty,返回<code>map</code>所有value的最小值</li>
-     *         <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
-     *         <li>如果 keys 中的所有的key 都不在 map 中出现 ,那么返回null</li>
-     *         </ul>
-     * 
+     * @return 如果 <code>map</code> 是null或者empty,返回 null;<br>
+     *         如果 <code>keys</code> 是null或者empty,返回<code>map</code>所有value的最小值<br>
+     *         如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log<br>
+     *         如果 keys 中的所有的key 都不在 map 中出现 ,那么返回null
      * @see #getSubMap(Map, Object...)
      * @see java.util.Collections#min(Collection)
      */
@@ -325,7 +321,8 @@ public final class MapUtil{
     }
 
     /**
-     * 获得 一个map 中的 按照指定的key 整理成新的map.
+     * 获得一个map 中的按照指定的key 整理成新的map.
+     * 
      * <p>
      * 注意:如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
      * </p>
@@ -350,8 +347,8 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * {
-     *      "a": 3007,
-     *      "c": 3001
+     * "a": 3007,
+     * "c": 3001
      * }
      * </pre>
      * 
@@ -365,12 +362,9 @@ public final class MapUtil{
      *            the map
      * @param keys
      *            如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
-     * @return
-     *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};</li>
-     *         <li>如果 <code>keys</code> 是null或者empty,返回 <code>map</code></li>
-     *         <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
-     *         </ul>
+     * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};<br>
+     *         如果 <code>keys</code> 是null或者empty,返回 <code>map</code><br>
+     *         如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
      */
     @SafeVarargs
     public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K...keys){
@@ -438,12 +432,8 @@ public final class MapUtil{
      *            the map
      * @param excludeKeys
      *            the keys
-     * @return
-     *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};</li>
-     *         <li>如果 <code>excludeKeys</code> 是null或者empty, return <code>map</code></li>
-     *         </ul>
-     * 
+     * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};<br>
+     *         如果 <code>excludeKeys</code> 是null或者empty,直接返回 <code>map</code>
      * @since 1.0.9
      */
     @SafeVarargs
@@ -509,18 +499,17 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果map是null,抛出异常<br>
-     *         如果map是empty,返回 一个 new HashMap
+     * @return 如果<code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果<code>map</code> 是empty,返回 一个 new HashMap
      * @see org.apache.commons.collections4.MapUtils#invertMap(Map)
      * @since 1.2.2
      */
     public static <K, V> Map<V, K> invertMap(Map<K, V> map){
-        //注意,返回的是 HashMap
-        return MapUtils.invertMap(map);
+        return MapUtils.invertMap(map);//返回的是 HashMap
     }
 
     /**
-     * 以参数 <code>map</code>的key为key,以参数 <code>map</code> value的 指定<code>extractPropertyName</code>属性值为值,拼装成新的map返回.
+     * 以参数 <code>map</code>的key为key,以参数 <code>map</code> value的指定<code>extractPropertyName</code>属性值为值,拼装成新的map返回.
      * 
      * <p>
      * 如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log
@@ -570,12 +559,11 @@ public final class MapUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param keysClass
      *            map key 的class 类型
-     * @return
-     *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}</li>
-     *         <li>如果 <code>extractPropertyName</code> 是null或者empty,抛出 NullPointerException</li>
-     *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
-     *         </ul>
+     * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keysClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>extractPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>extractPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回
      * @since 1.3.0
      */
     public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,String extractPropertyName,Class<K> keysClass){
@@ -631,13 +619,12 @@ public final class MapUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param keysClass
      *            map key 的class 类型
-     * @return
-     *         <ul>
-     *         <li>如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}</li>
-     *         <li>如果 <code>extractPropertyName</code> 是null或者empty,抛出 NullPointerException</li>
-     *         <li>如果 <code>includeKeys</code> 是null或者empty, then will extract map total keys</li>
-     *         <li>抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回</li>
-     *         </ul>
+     * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keysClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>extractPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>extractPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>includeKeys</code> 是null或者empty, then will extract map total keys<br>
+     *         抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回
      * @since 1.3.0
      */
     public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName,Class<K> keysClass){
@@ -646,6 +633,8 @@ public final class MapUtil{
         }
 
         Validate.notBlank(extractPropertyName, "extractPropertyName can't be null/empty!");
+        Validate.notNull(keysClass, "keysClass can't be null!");
+
         //如果excludeKeys是null,那么抽取所有的key
         K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(map.keySet(), keysClass) : includeKeys;
 
@@ -698,7 +687,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 map 是null,抛出 NullPointerException
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     *         否则直接构造 {@link TreeMap}返回
      * @see java.util.TreeMap#TreeMap(Map)
      * @since 1.2.0
      */
@@ -741,16 +731,16 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果 map是 null,抛出 NullPointerException
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @see ReverseComparator#ReverseComparator(Comparator)
      * @see PropertyComparator#PropertyComparator(String)
+     * @see #sort(Map, Comparator)
      * @since 1.2.0
      */
     public static <K, V> Map<K, V> sortByKeyDesc(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
         PropertyComparator<Entry<K, V>> propertyComparator = new PropertyComparator<Map.Entry<K, V>>("key");
-        Comparator<Entry<K, V>> comparator = new ReverseComparator<Map.Entry<K, V>>(propertyComparator);
-        return sort(map, comparator);
+        return sort(map, new ReverseComparator<Map.Entry<K, V>>(propertyComparator));
     }
 
     /**
@@ -785,10 +775,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return the map< k, v>
-     * @see PropertyComparator#PropertyComparator(String)
-     * @see java.util.Map.Entry
-     * @see #sortByValueDesc(Map)
+     * @return 如果<code>map</code>是null,抛出异常<br>
+     * @see #sort(Map, Comparator)
      * @since 1.2.0
      */
     public static <K, V extends Comparable<V>> Map<K, V> sortByValueAsc(Map<K, V> map){
@@ -829,10 +817,8 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return the map< k, v>
-     * @see ReverseComparator#ReverseComparator(Comparator)
-     * @see PropertyComparator#PropertyComparator(String)
-     * @see #sortByValueAsc(Map)
+     * @return 如果<code>map</code>是null,抛出异常<br>
+     * @see #sort(Map, Comparator)
      * @since 1.2.0
      */
     public static <K, V extends Comparable<V>> Map<K, V> sortByValueDesc(Map<K, V> map){
@@ -915,22 +901,30 @@ public final class MapUtil{
         Validate.notNull(map, "map can't be null!");
         Validate.notNull(mapEntryComparator, "mapEntryComparator can't be null!");
 
-        final int size = map.size();
-        List<Map.Entry<K, V>> mapEntryList = new ArrayList<Map.Entry<K, V>>(size);
-        for (Map.Entry<K, V> entry : map.entrySet()){
-            mapEntryList.add(entry);
-        }
+        List<Map.Entry<K, V>> mapEntryList = ConvertUtil.toList(map.entrySet());
 
-        //**********************排序************************************
         Collections.sort(mapEntryList, mapEntryComparator);
 
-        //**********************************************************
-        Map<K, V> returnMap = new LinkedHashMap<K, V>(size);
+        return toMap(mapEntryList);
+    }
+
+    /**
+     * To map.
+     *
+     * @param <V>
+     *            the value type
+     * @param <K>
+     *            the key type
+     * @param mapEntryList
+     *            the map entry list
+     * @return the map< k, v>
+     * @since 1.6.1
+     */
+    private static <V, K> Map<K, V> toMap(List<Map.Entry<K, V>> mapEntryList){
+        Map<K, V> returnMap = new LinkedHashMap<K, V>(mapEntryList.size());
 
         for (Map.Entry<K, V> entry : mapEntryList){
-            K key = entry.getKey();
-            V value = entry.getValue();
-            returnMap.put(key, value);
+            returnMap.put(entry.getKey(), entry.getValue());
         }
         return returnMap;
     }
