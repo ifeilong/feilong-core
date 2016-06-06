@@ -561,7 +561,7 @@ public final class BeanUtil{
      *
      * @param bean
      *            Bean whose properties are to be extracted
-     * @return 如果 null==bean,返回 empty map. see {@link BeanUtilsBean#describe(Object)}
+     * @return 如果 <code>bean</code> 是null,返回 empty HashMap,see {@link BeanUtilsBean#describe(Object)}
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @see PropertyUtil#describe(Object)

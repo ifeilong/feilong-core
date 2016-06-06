@@ -1323,7 +1323,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param predicate
      *            the predicate
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @see org.apache.commons.collections4.CollectionUtils#selectRejected(Iterable, Predicate)
      * @since 1.4.0
      */
@@ -1655,6 +1655,42 @@ public final class CollectionsUtil{
     /**
      * 算术平均值.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(5L));
+     * list.add(new User(5L));
+     * </pre>
+     * 
+     * 返回: 4.00
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param scale
+     *            平均数值的精度
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see #sum(Collection, String...)
+     * @since 1.5.0
+     */
+    public static <O> BigDecimal avg(Collection<O> objectCollection,int scale,String propertyName){
+        String[] propertyNames = { propertyName };
+        return avg(objectCollection, scale, propertyNames).get(propertyName);
+    }
+
+    /**
+     * 算术平均值.
+     * 
      * <p>
      * 返回的 {@link LinkedHashMap},key是 <code>propertyNames</code>的元素,value是基于这个属性名称获得的值的平均值;key的顺序是依照 <code>propertyNames</code>元素的顺序
      * </p>
@@ -1697,11 +1733,12 @@ public final class CollectionsUtil{
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyMap()}
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
+     *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
      * @see #sum(Collection, String...)
      */
     public static <O> Map<String, BigDecimal> avg(Collection<O> objectCollection,int scale,String...propertyNames){
-        //总分
         Map<String, BigDecimal> sumMap = sum(objectCollection, propertyNames);
 
         int size = objectCollection.size();
@@ -1714,41 +1751,6 @@ public final class CollectionsUtil{
             map.put(key, NumberUtil.getDivideValue(ConvertUtil.toBigDecimal(value), size, scale));
         }
         return map;
-    }
-
-    /**
-     * 算术平均值.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * list.add(new User(2L));
-     * list.add(new User(5L));
-     * list.add(new User(5L));
-     * </pre>
-     * 
-     * 返回: 4.00
-     * </blockquote>
-     *
-     * @param <O>
-     *            the generic type
-     * @param objectCollection
-     *            the object collection
-     * @param scale
-     *            平均数值的精度
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return the map< string, list< o>>
-     * @see #sum(Collection, String...)
-     * 
-     * @since 1.5.0
-     */
-    public static <O> BigDecimal avg(Collection<O> objectCollection,int scale,String propertyName){
-        String[] propertyNames = { propertyName };
-        return avg(objectCollection, scale, propertyNames).get(propertyName);
     }
 
     //***********************************sum*************************************************************
@@ -1795,7 +1797,9 @@ public final class CollectionsUtil{
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyMap()}
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
+     *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
      * @see #sum(Collection, Predicate, String...)
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String...propertyNames){
@@ -1864,7 +1868,7 @@ public final class CollectionsUtil{
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
      * @since 1.5.5
@@ -1952,9 +1956,9 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
-     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 objectCollection 是null或者 empty,返回 null
+     * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #sum(Collection, String...)
      * @since 1.5.0
      */
@@ -2001,9 +2005,9 @@ public final class CollectionsUtil{
      *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
      * @param includePredicate
      *            the include predicate
-     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>objectCollection</code> 是null或者 empty,返回 null
+     * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @since 1.5.5
      */
     public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
