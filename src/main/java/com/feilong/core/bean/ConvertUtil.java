@@ -515,6 +515,44 @@ public final class ConvertUtil{
     }
 
     /**
+     * 将 集合 <code>collection</code> 转成 list.
+     * 
+     * <p>
+     * 此方法很适合 快速的将 set转成list这样的操作
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Set{@code <String>} set = new HashSet{@code <String>}();
+     * Collections.addAll(set, "a", "a", "b", "b");
+     * LOGGER.debug("{}", ConvertUtil.toList(set));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [b, a]
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param collection
+     *            the collection
+     * @return 如果 <code>collection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         否则返回 <code>new ArrayList(collection)</code>
+     * @since 1.6.1
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> List<T> toList(final Collection<T> collection){
+        return Validator.isNullOrEmpty(collection) ? (List<T>) Collections.emptyList() : new ArrayList<T>(collection);
+    }
+
+    /**
      * 数组转成 ({@link java.util.ArrayList ArrayList}),此方法返回的list可以进行add等操作.
      * 
      * <p>
@@ -532,6 +570,7 @@ public final class ConvertUtil{
      *         如果 <code>arrays</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则返回 {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
+     * @see java.util.Collections#addAll(Collection, Object...)
      */
     @SuppressWarnings("unchecked")
     public static <T> List<T> toList(T...arrays){
@@ -548,6 +587,7 @@ public final class ConvertUtil{
      * @return the t[]
      * @since 1.6.0
      */
+    @SafeVarargs
     public static <T> T[] toArray(T...arrays){
         return arrays;
     }

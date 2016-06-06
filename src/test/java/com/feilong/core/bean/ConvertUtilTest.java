@@ -24,12 +24,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils.ConvertUtils;
@@ -383,6 +385,16 @@ public class ConvertUtilTest{
         LOGGER.info(JsonUtil.format(ConvertUtil.toList(enumeration)));
 
         enumeration = ConvertUtil.toEnumeration(null);
+    }
+
+    /**
+     * To list.
+     */
+    @Test
+    public void toList2(){
+        Set<String> set = new HashSet<String>();
+        Collections.addAll(set, "a", "a", "b", "b");
+        LOGGER.debug("{}", ConvertUtil.toList(set));
     }
 
     /**
