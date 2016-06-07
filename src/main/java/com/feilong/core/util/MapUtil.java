@@ -313,7 +313,7 @@ public final class MapUtil{
      * @see #getSubMap(Map, Object...)
      * @see java.util.Collections#min(Collection)
      */
-    @SuppressWarnings("unchecked")
+    @SafeVarargs
     public static <K, T extends Number & Comparable<? super T>> T getMinValue(Map<K, T> map,K...keys){
         Map<K, T> subMap = getSubMap(map, keys);
         //注意 Number本身 没有实现Comparable接口
