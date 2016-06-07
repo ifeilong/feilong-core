@@ -490,6 +490,7 @@ public final class ConvertUtil{
      * @see Collections#enumeration(Collection)
      * @since 1.4.0
      */
+    @SuppressWarnings("unchecked")
     public static <T> Enumeration<T> toEnumeration(final Collection<T> collection){
         return null == collection ? (Enumeration<T>) Collections.emptyEnumeration() : Collections.enumeration(collection);
     }
