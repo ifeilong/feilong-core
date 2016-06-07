@@ -406,7 +406,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
+     * @return 如果 <code>uri</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      */
     public static String addParameterArrayValueMap(URI uri,Map<String, String[]> arrayValueMap,String charsetType){
         if (null == uri){
@@ -480,7 +480,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uri</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see #removeParameterList(URI, List, String)
      */
     public static String removeParameter(URI uri,String paramName,String charsetType){
@@ -529,7 +529,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      */
     public static String removeParameterList(String uriString,List<String> paramNameList,String charsetType){
         if (Validator.isNullOrEmpty(uriString)){
@@ -553,7 +553,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uri</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      */
     public static String removeParameterList(URI uri,List<String> paramNameList,String charsetType){
         if (null == uri){
@@ -665,7 +665,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uri</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see #toSafeArrayValueMap(String, String)
      */
     public static String retentionParamList(URI uri,List<String> paramNameList,String charsetType){
@@ -756,7 +756,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the {@code map<string, string>}
+     * @return 如果 <code>queryString</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @see #toSafeArrayValueMap(String, String)
      * @since 1.4.0
      */
@@ -819,7 +819,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 将<code>a=1&b=2</code>这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value)
+     * @return 如果 <code>queryString</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @since 1.4.0
      */
     public static Map<String, String[]> toSafeArrayValueMap(String queryString,String charsetType){
@@ -1115,10 +1115,10 @@ public final class ParamUtil{
      *            the map
      * @param includeKeys
      *            包含的key
-     * @return 如果 (Validator.isNullOrEmpty(<code>singleValueMap</code>)),抛出异常;<br>
-     *         如果 (Validator.isNullOrEmpty(<code>includeKeys</code>)),返回 {@link StringUtils#EMPTY};<br>
-     *         否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;(如果 <code>singleValueMap</code>指定key的值是null,会使用
-     *         {@link StringUtils#defaultString(String)} 转成{@link StringUtils#EMPTY}拼接)<br>
+     * @return 如果 <code>singleValueMap</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>includeKeys</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;<br>
+     *         (如果 <code>singleValueMap</code>指定key的值是null,会使用{@link StringUtils#defaultString(String)} 转成{@link StringUtils#EMPTY}拼接)<br>
      * @see org.apache.commons.lang3.StringUtils#defaultString(String)
      * @since 1.5.5
      */
