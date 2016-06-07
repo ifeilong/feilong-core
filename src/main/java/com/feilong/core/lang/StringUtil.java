@@ -701,7 +701,7 @@ public final class StringUtil{
      *            文字
      * @param lastLenth
      *            最后的位数
-     * @return 去除最后几位,如果text是空,则返回 {@link StringUtils#EMPTY}
+     * @return 如果 <code>text</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see java.lang.String#substring(int, int)
      * @see org.apache.commons.lang3.StringUtils#left(String, int)
      */
@@ -710,26 +710,38 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]:去除最后的字符串(<code>text</code>必须以 <code>lastString</code>结尾).
+     * [截取]:去除最后的字符串.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * StringUtil.substringWithoutLast(null, "222")                     = ""
+     * StringUtil.substringWithoutLast("jinxin.feilong", "ng")          = "jinxin.feilo"
+     * StringUtil.substringWithoutLast("jinxin.feilong     ", "     ")  = "jinxin.feilong"
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param text
      *            the text
      * @param lastString
      *            the last string
-     * @return the string
+     * @return 如果 <code>text</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>lastString</code> 是null,返回 <code>text.toString()</code><br>
      * @since 1.4.0
      */
     public static String substringWithoutLast(final CharSequence text,final String lastString){
-        if (Validator.isNullOrEmpty(text)){
+        if (null == text){
             return StringUtils.EMPTY;
         }
 
-        //由于上面的循环中,最后一个元素可能是null或者empty,判断加还是不加拼接符有点麻烦,因此,循环中统一拼接,但是循环之后做截取处理
-        String returnValue = text.toString();
-        if (Validator.isNullOrEmpty(lastString)){
-            return returnValue;
+        String textString = text.toString();
+        if (null == lastString){
+            return textString;
         }
-        return returnValue.endsWith(lastString) ? substringWithoutLast(returnValue, lastString.length()) : returnValue;
+        return textString.endsWith(lastString) ? substringWithoutLast(textString, lastString.length()) : textString;
     }
 
     // [end]
@@ -739,29 +751,31 @@ public final class StringUtil{
     // ********************************************************************************
     /**
      * 字符串转换成byte数组.
-     * 
+     *
      * @param value
      *            字符串
-     * @return byte数组
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see java.lang.String#getBytes()
      * @since 1.3.0
      */
     public static byte[] getBytes(String value){
+        Validate.notNull(value, "value can't be null!");
         return value.getBytes();
     }
 
     /**
-     * 字符串转换成byte数组.
+     * 字符串 <code>value</code> 转换成byte数组.
      * 
      * @param value
      *            字符串
      * @param charsetName
      *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
-     * @return 所得 byte 数组
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see String#getBytes(String)
-     * @see CharsetType
      * @since 1.3.0
      */
     public static byte[] getBytes(String value,String charsetName){
+        Validate.notNull(value, "value can't be null!");
         try{
             return value.getBytes(charsetName);
         }catch (UnsupportedEncodingException e){
@@ -831,14 +845,14 @@ public final class StringUtil{
      * 返回:
      * 
      * <pre class="code">
-     [
-             "jin",
-             "xin",
-             "feilong",
-             "jinxin",
-             "venusdrogon",
-             "jim"
-         ]
+     * [
+     * "jin",
+     * "xin",
+     * "feilong",
+     * "jinxin",
+     * "venusdrogon",
+     * "jim"
+     * ]
      * </pre>
      * 
      * </blockquote>
@@ -1111,7 +1125,8 @@ public final class StringUtil{
      *            the format
      * @param args
      *            the args
-     * @return 如果 null ==format,返回 {@link StringUtils#EMPTY},else return {@link String#format(String, Object...)}
+     * @return 如果 <code>format</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         否则返回 {@link String#format(String, Object...)}
      * @see java.util.Formatter
      * @see String#format(String, Object...)
      * @see String#format(java.util.Locale, String, Object...)

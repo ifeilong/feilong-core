@@ -492,12 +492,19 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalTime(){
-        Date startDate = DateUtil.toDate("2013-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
+        Date startDate = DateUtil.toDate("2016-06-01 15:21:00", DatePattern.COMMON_DATE_AND_TIME);
         LOGGER.debug(DateExtensionUtil.getIntervalTime(startDate, NOW) + "");
         LOGGER.debug(
                         DateExtensionUtil.getIntervalTime(
                                         startDate,
                                         DateUtil.toDate("2113-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)) + "");
+
+    }
+
+    @Test
+    public void testGetIntervalTime2(){
+        Date startDate = DateUtil.toDate("2016-06-01", DatePattern.COMMON_DATE_AND_TIME);
+        LOGGER.debug(DateExtensionUtil.getIntervalTime(startDate, NOW) + "");
 
     }
 

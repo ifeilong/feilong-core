@@ -421,16 +421,16 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * Example 1:
-     * ArrayUtil.toString(new ToStringConfig(),"a","b")  返回 "a,b"
+     * ConvertUtil.toString(new ToStringConfig(),"a","b")  =     "a,b"
      * 
      * Example 2:
      * ToStringConfig toStringConfig=new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
-     * ArrayUtil.toString(new ToStringConfig(),"a","b",null)  返回 "a,b"
+     * ConvertUtil.toString(new ToStringConfig(),"a","b",null)  返回 "a,b"
      * 
      * Example 3:
      * int[] ints = { 2, 1 };
-     * ArrayUtil.toString(new ToStringConfig(),ints) 返回 "2,1"
+     * ConvertUtil.toString(new ToStringConfig(),ints)      = "2,1"
      * </pre>
      *
      * @param toStringConfig
@@ -473,6 +473,7 @@ public final class ConvertUtil{
                 sb.append(connector);//放心大胆的拼接 connector, 不判断是否是最后一个,最后会截取
             }
         }
+
         return StringUtil.substringWithoutLast(sb, connector);
     }
 
@@ -750,8 +751,7 @@ public final class ConvertUtil{
 
         Object[] returnStringArray = new Object[length];
         for (int i = 0; i < length; ++i){
-            Object element = ArrayUtil.getElement(primitiveArray, i);
-            returnStringArray[i] = element;
+            returnStringArray[i] = ArrayUtil.getElement(primitiveArray, i);
         }
         return returnStringArray;
     }
