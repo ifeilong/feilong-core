@@ -79,12 +79,18 @@ public class CollectionsUtilTest{
         LOGGER.info("list:{}", JsonUtil.format(list));
     }
 
+    /**
+     * Test partition.
+     */
     @Test
     public void testPartition(){
         List<String> list = ConvertUtil.toList("xinge", "feilong1", "feilong2");
         LOGGER.info("list:{}", JsonUtil.format(ListUtils.partition(list, 2)));
     }
 
+    /**
+     * Test collect.
+     */
     @Test
     public void testCollect(){
         List<String> list = new ArrayList<String>();
@@ -99,16 +105,26 @@ public class CollectionsUtilTest{
 
     }
 
+    /**
+     * Test collect1.
+     */
     @Test
     public void testCollect1(){
-        List<Long> list = new ArrayList<Long>();
-        list.add(1L);
-        list.add(100L);
-
+        List<Long> list = null;
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
         LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
     }
 
+    @Test
+    public void testCollect5(){
+        List<Long> list = new ArrayList<Long>();
+        List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
+        LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
+    }
+
+    /**
+     * Test collect2.
+     */
     @Test
     public void testCollect2(){
         List<User> list = new ArrayList<User>();
@@ -121,6 +137,9 @@ public class CollectionsUtilTest{
         LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
     }
 
+    /**
+     * Test collect3.
+     */
     @Test
     public void testCollect3(){
         List<User> list = new ArrayList<User>();
@@ -205,6 +224,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(map));
     }
 
+    /**
+     * Test group2.
+     */
     @Test
     public void testGroup2(){
         List<User> list = new ArrayList<User>();
@@ -240,6 +262,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
     }
 
+    /**
+     * Test find.
+     */
     @Test
     public void testFind(){
         List<User> objectCollection = new ArrayList<User>();
@@ -251,6 +276,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
     }
 
+    /**
+     * Test find2.
+     */
     @Test
     public void testFind2(){
         List<User> list = new ArrayList<User>();
@@ -267,6 +295,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(user));
     }
 
+    /**
+     * Test select value.
+     */
     @Test
     public void testSelectValue(){
         List<User> objectCollection = new ArrayList<User>();
@@ -278,6 +309,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
     }
 
+    /**
+     * Test select array.
+     */
     @Test
     public void testSelectArray(){
         List<User> objectCollection = new ArrayList<User>();
@@ -335,6 +369,9 @@ public class CollectionsUtilTest{
         LOGGER.info(JsonUtil.format(CollectionsUtil.removeAll(objectCollection, "name", "刘备", "关羽")));
     }
 
+    /**
+     * Test select rejected1.
+     */
     @Test
     public void testSelectRejected1(){
         List<User> objectCollection = new ArrayList<User>();
@@ -457,6 +494,9 @@ public class CollectionsUtilTest{
         assertEquals(null, CollectionsUtil.sum(null, "id"));
     }
 
+    /**
+     * Test sum4.
+     */
     @Test
     public void testSum4(){
         List<User> list = new ArrayList<User>();
@@ -492,6 +532,9 @@ public class CollectionsUtilTest{
         LOGGER.info("{}", JsonUtil.format(map));
     }
 
+    /**
+     * Test sum3.
+     */
     @Test
     public void testSum3(){
         List<User> list = new ArrayList<User>();

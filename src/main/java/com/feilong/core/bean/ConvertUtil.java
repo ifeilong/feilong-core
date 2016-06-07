@@ -490,9 +490,8 @@ public final class ConvertUtil{
      * @see Collections#enumeration(Collection)
      * @since 1.4.0
      */
-    @SuppressWarnings("unchecked")
     public static <T> Enumeration<T> toEnumeration(final Collection<T> collection){
-        return null == collection ? (Enumeration<T>) Collections.emptyEnumeration() : Collections.enumeration(collection);
+        return null == collection ? Collections.<T> emptyEnumeration() : Collections.enumeration(collection);
     }
 
     /**
@@ -510,9 +509,8 @@ public final class ConvertUtil{
      * @see EnumerationUtils#toList(Enumeration)
      * @since 1.0.7
      */
-    @SuppressWarnings("unchecked")
     public static <T> List<T> toList(final Enumeration<T> enumeration){
-        return Validator.isNullOrEmpty(enumeration) ? (List<T>) Collections.emptyList() : Collections.list(enumeration);
+        return Validator.isNullOrEmpty(enumeration) ? Collections.<T> emptyList() : Collections.list(enumeration);
     }
 
     /**
@@ -548,9 +546,8 @@ public final class ConvertUtil{
      *         否则返回 <code>new ArrayList(collection)</code>
      * @since 1.6.1
      */
-    @SuppressWarnings("unchecked")
     public static <T> List<T> toList(final Collection<T> collection){
-        return Validator.isNullOrEmpty(collection) ? (List<T>) Collections.emptyList() : new ArrayList<T>(collection);
+        return Validator.isNullOrEmpty(collection) ? Collections.<T> emptyList() : new ArrayList<T>(collection);
     }
 
     /**
@@ -572,9 +569,9 @@ public final class ConvertUtil{
      * @see java.util.Arrays#asList(Object...)
      * @see java.util.Collections#addAll(Collection, Object...)
      */
-    @SuppressWarnings("unchecked")
+    @SafeVarargs
     public static <T> List<T> toList(T...arrays){
-        return Validator.isNullOrEmpty(arrays) ? (List<T>) Collections.emptyList() : new ArrayList<T>(Arrays.asList(arrays));
+        return Validator.isNullOrEmpty(arrays) ? Collections.<T> emptyList() : new ArrayList<T>(Arrays.asList(arrays));
     }
 
     /**

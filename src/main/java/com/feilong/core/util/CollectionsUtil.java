@@ -298,14 +298,13 @@ public final class CollectionsUtil{
      *            the inputIterable to get the input from
      * @param transformer
      *            the transformer to use, may be null
-     * @return 如果 inputIterable 是null,返回 {@link Collections#emptyList()}<br>
-     *         如果 transformer 是null,返回 empty list
+     * @return 如果 <code>inputIterable</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>transformer</code> 是null,返回 empty list
      * @see org.apache.commons.collections4.CollectionUtils#collect(Iterable, Transformer)
      * @since 1.5.5
      */
-    @SuppressWarnings("unchecked")
     public static <O, T> List<T> collect(final Iterable<O> inputIterable,final Transformer<? super O, ? extends T> transformer){
-        return null == inputIterable ? (List<T>) Collections.emptyList() : (List<T>) CollectionUtils.collect(inputIterable, transformer);
+        return null == inputIterable ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterable, transformer);
     }
 
     /**
@@ -327,9 +326,8 @@ public final class CollectionsUtil{
      * @see org.apache.commons.collections4.CollectionUtils#collect(java.util.Iterator, Transformer)
      * @since 1.5.5
      */
-    @SuppressWarnings("unchecked")
     public static <O, T> List<T> collect(final Iterator<O> inputIterator,final Transformer<? super O, ? extends T> transformer){
-        return null == inputIterator ? (List<T>) Collections.emptyList() : (List<T>) CollectionUtils.collect(inputIterator, transformer);
+        return null == inputIterator ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterator, transformer);
     }
 
     /**
@@ -671,9 +669,8 @@ public final class CollectionsUtil{
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
      */
-    @SuppressWarnings("unchecked")
     public static <O> List<O> removeDuplicate(Collection<O> objectCollection){
-        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : new ArrayList<O>(new LinkedHashSet<O>(objectCollection));
     }
 
@@ -1108,10 +1105,9 @@ public final class CollectionsUtil{
      * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate#ArrayContainsPredicate(String, Object...)
      */
-    @SuppressWarnings("unchecked")
     @SafeVarargs
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...propertyValues){
-        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : select(objectCollection, new ArrayContainsPredicate<O>(propertyName, propertyValues));
     }
 
@@ -1172,9 +1168,8 @@ public final class CollectionsUtil{
      * @see #select(Collection, Predicate)
      * @since 1.5.0
      */
-    @SuppressWarnings("unchecked")
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,Collection<V> propertyValueList){
-        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : select(objectCollection, new CollectionContainsPredicate<O>(propertyName, propertyValueList));
     }
 
@@ -1218,9 +1213,8 @@ public final class CollectionsUtil{
      *         否则返回 {@link CollectionUtils#select(Iterable, Predicate)}
      * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
      */
-    @SuppressWarnings("unchecked")
     public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
-        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
 
@@ -1246,10 +1240,9 @@ public final class CollectionsUtil{
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate
      * @see #selectRejected(Collection, Predicate)
      */
-    @SuppressWarnings("unchecked")
     @SafeVarargs
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...propertyValues){
-        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : selectRejected(objectCollection, new ArrayContainsPredicate<O>(propertyName, propertyValues));
     }
 
@@ -1307,9 +1300,8 @@ public final class CollectionsUtil{
      * @see #selectRejected(Collection , Predicate)
      * @since 1.5.0
      */
-    @SuppressWarnings("unchecked")
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,Collection<V> propertyValueList){
-        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : selectRejected(objectCollection, new CollectionContainsPredicate<O>(propertyName, propertyValueList));
     }
 
@@ -1326,9 +1318,8 @@ public final class CollectionsUtil{
      * @see org.apache.commons.collections4.CollectionUtils#selectRejected(Iterable, Predicate)
      * @since 1.4.0
      */
-    @SuppressWarnings("unchecked")
     public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
-        return Validator.isNullOrEmpty(objectCollection) ? (List<O>) Collections.emptyList()
+        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
