@@ -507,6 +507,8 @@ public final class BeanUtil{
      * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @see org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable)
+     * @see org.apache.commons.lang3.ObjectUtils#clone(Object)
+     * @see org.apache.commons.lang3.ObjectUtils#cloneIfPossible(Object)
      */
     @SuppressWarnings("unchecked")
     public static <T> T cloneBean(T bean){

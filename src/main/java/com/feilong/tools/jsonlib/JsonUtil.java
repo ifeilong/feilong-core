@@ -15,7 +15,6 @@
  */
 package com.feilong.tools.jsonlib;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.Validator;
+import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
@@ -765,8 +765,7 @@ public final class JsonUtil{
         JSONArray jsonArray = toJSONArray(json);
         int size = jsonArray.size();
 
-        @SuppressWarnings("unchecked")
-        T[] t = (T[]) Array.newInstance(rootClass, size);
+        T[] t = ArrayUtil.newArray(rootClass, size);
 
         for (int i = 0; i < size; i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);

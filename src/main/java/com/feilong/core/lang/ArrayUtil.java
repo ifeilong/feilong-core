@@ -99,4 +99,24 @@ public final class ArrayUtil{
         return (T) Array.get(array, index);
     }
 
+    /**
+     * Returns a new array of the given length with the specified component type.
+     *
+     * @param <T>
+     *            the generic type
+     * @param componentType
+     *            the component type
+     * @param length
+     *            the length of the new array
+     * @return the t[]
+     * @see java.lang.reflect.Array#newInstance(Class, int)
+     * @see java.lang.reflect.Array#newInstance(Class, int...)
+     * @see "com.google.common.collect#newArray(Class, int)"
+     * @since 1.6.1
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T[] newArray(Class<T> componentType,int length){
+        return (T[]) Array.newInstance(componentType, length);
+    }
+
 }

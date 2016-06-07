@@ -341,10 +341,9 @@ public final class ResourceBundleUtil{
      * @see #getResourceBundle(String)
      * @see #getArray(ResourceBundle, String, String, Class)
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T[] getArray(String baseName,String key,String delimiters,Class<?> typeClass){
+    public static <T> T[] getArray(String baseName,String key,String delimiters,Class<T> typeClass){
         ResourceBundle resourceBundle = getResourceBundle(baseName);
-        return (T[]) getArray(resourceBundle, key, delimiters, typeClass);
+        return getArray(resourceBundle, key, delimiters, typeClass);
     }
 
     /**

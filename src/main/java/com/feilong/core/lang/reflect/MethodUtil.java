@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.reflect;
 
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import com.feilong.core.lang.ClassUtil;
@@ -134,7 +135,7 @@ public final class MethodUtil{
     // [start]
 
     /**
-     * 执行某对象的某个方法.
+     * 指定指定对象 <code>object</code> 的指定方法名称 <code>methodName</code>.
      * 
      * <h3>使用场景:</h3>
      * 
@@ -152,7 +153,7 @@ public final class MethodUtil{
      *            方法名
      * @param params
      *            参数
-     * @return 方法执行之后的结果值
+     * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.lang.reflect.Method#invoke(Object, Object...)
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object...)
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
@@ -163,7 +164,7 @@ public final class MethodUtil{
     }
 
     /**
-     * Invoke method.
+     * 指定指定对象 <code>object</code> 的指定方法名称 <code>methodName</code>.
      *
      * @param <T>
      *            the generic type
@@ -175,12 +176,13 @@ public final class MethodUtil{
      *            the args
      * @param parameterTypes
      *            the parameter types
-     * @return the t
+     * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[])
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")
     public static <T> T invokeMethod(final Object object,final String methodName,Object[] args,Class<?>[] parameterTypes){
+        Validate.notNull(object, "object can't be null!");
         try{
             return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
@@ -201,7 +203,9 @@ public final class MethodUtil{
      *            方法名
      * @param params
      *            动态参数
-     * @return 方法执行之后的结果值
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.lang.reflect.Method#invoke(Object, Object...)
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object...)
      */
@@ -215,25 +219,29 @@ public final class MethodUtil{
      *
      * @param <T>
      *            the generic type
-     * @param cls
-     *            the cls
+     * @param klass
+     *            the klass
      * @param methodName
      *            the method name
      * @param args
      *            the args
      * @param parameterTypes
      *            the parameter types
-     * @return the t
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")
-    public static <T> T invokeStaticMethod(final Class<?> cls,final String methodName,Object[] args,Class<?>[] parameterTypes){
+    public static <T> T invokeStaticMethod(final Class<?> klass,final String methodName,Object[] args,Class<?>[] parameterTypes){
+        Validate.notNull(klass, "klass can't be null!");
+        Validate.notBlank(methodName, "methodName can't be blank!");
         try{
-            return (T) MethodUtils.invokeStaticMethod(cls, methodName, args, parameterTypes);
+            return (T) MethodUtils.invokeStaticMethod(klass, methodName, args, parameterTypes);
         }catch (Exception e){
-            String pattern = "invoke Static Method Exception,cls:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, cls.getName(), methodName, args, parameterTypes);
+            String pattern = "invoke Static Method Exception,klass:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.format(pattern, klass.getName(), methodName, args, parameterTypes);
             throw new ReflectException(message, e);
         }
     }

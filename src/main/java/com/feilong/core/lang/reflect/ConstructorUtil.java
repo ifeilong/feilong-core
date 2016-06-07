@@ -151,7 +151,7 @@ public final class ConstructorUtil{
      * @param <T>
      *            the generic type
      * @param klass
-     *            the cls
+     *            the klass
      * @param args
      *            the args
      * @param parameterTypes

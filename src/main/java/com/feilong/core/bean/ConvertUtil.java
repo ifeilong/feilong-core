@@ -15,7 +15,6 @@
  */
 package com.feilong.core.bean;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -658,11 +657,8 @@ public final class ConvertUtil{
      *            the join string entity
      * @param arrays
      *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
-     * @return
-     *         <ul>
-     *         <li>如果 arrays 是null 或者Empty ,返回 {@link StringUtils#EMPTY}</li>
-     *         <li>否则循环,拼接 {@link ToStringConfig#getConnector()}</li>
-     *         </ul>
+     * @return 如果 arrays 是null 或者Empty ,返回 {@link StringUtils#EMPTY}<br>
+     *         否则循环,拼接 {@link ToStringConfig#getConnector()}
      * @see org.apache.commons.lang3.builder.ToStringStyle
      * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
      * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
@@ -884,8 +880,7 @@ public final class ConvertUtil{
 
         // 如果采用大家常用的把a的length设为0,就需要反射API来创建一个大小为size的数组,而这对性能有一定的影响.
         // 所以最好的方式就是直接把a的length设为Collection的size从而避免调用反射API来达到一定的性能优化.
-        @SuppressWarnings("unchecked")
-        T[] array = (T[]) Array.newInstance(arrayComponentType, collection.size());
+        T[] array = ArrayUtil.newArray(arrayComponentType, collection.size());
 
         //注意,toArray(new Object[0]) 和 toArray() 在功能上是相同的. 
         return collection.toArray(array);
