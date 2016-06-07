@@ -208,6 +208,7 @@ public final class ConvertUtil{
      * ConvertUtil.toBoolean("1,2,3")   =   false
      * </pre>
      * 
+     * </blockquote>
      * 
      * <h3>逻辑或者规则:</h3>
      * 
@@ -232,7 +233,7 @@ public final class ConvertUtil{
      * 
      * <blockquote>
      * <p>
-     * {@link Boolean#parseBoolean(String)},仅当 <code>(String != null) && String.equalsIgnoreCase("true")</code> 返回 true
+     * {@link Boolean#parseBoolean(String)},仅当 <code>(String != null) 并且 String.equalsIgnoreCase("true")</code> 返回 true
      * </p>
      * </blockquote>
      * 
@@ -817,7 +818,7 @@ public final class ConvertUtil{
      * @param arrays
      *            the arrays
      * @return 如果 <code>arrays</code> 是null,返回null<br>
-     * @see org.apache.commons.lang3.ArrayUtils#toArray(T...)
+     * @see org.apache.commons.lang3.ArrayUtils#toArray(Object...)
      * @since 1.6.0
      */
     @SafeVarargs

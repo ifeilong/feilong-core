@@ -54,7 +54,7 @@ import com.feilong.core.Validator;
  * </table>
  * 
  * <p>
- * {@link java.lang.Class#getCanonicalName() getCanonicalName()} && {@link java.lang.Class#getName() getName()} 其实这两个方法,对于大部分class来说,没有什么不同的
+ * {@link java.lang.Class#getCanonicalName() getCanonicalName()} 和 {@link java.lang.Class#getName() getName()} 其实这两个方法,对于大部分class来说,没有什么不同的
  * <br>
  * 但是对于array就显示出来了.
  * </p>

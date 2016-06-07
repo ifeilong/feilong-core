@@ -1251,7 +1251,7 @@ public final class DateUtil{
      *            the begin time date
      * @param endTimeDate
      *            the end time date
-     * @return 如果 date after beginTimeDate&&指定日期 <code>date</code> before endTimeDate,返回true
+     * @return 如果 <code>date</code> 在 <code>beginTimeDate</code>之后, 并且 指定日期 <code>date</code> 在 <code>endTimeDate</code>之前,返回true
      * @see Date#after(Date)
      * @see Date#before(Date)
      */

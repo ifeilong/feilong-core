@@ -336,15 +336,9 @@ public final class FieldUtil{
     /**
      * 得到某类的静态公共字段值.
      * 
-     * <p>
-     * example1:
-     * 
      * <pre class="code">
-     * FieldUtil.getStaticProperty("com.feilong.io.ImageType", "JPG")
+     * FieldUtil.getStaticProperty("com.feilong.io.ImageType", "JPG")   返回 :jpg
      * </pre>
-     * 
-     * 返回 :jpg
-     * </p>
      * 
      * @param <T>
      *            the generic type

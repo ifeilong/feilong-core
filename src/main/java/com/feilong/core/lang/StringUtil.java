@@ -68,7 +68,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * </blockquote>
  * 
- * <h3>{@link StringBuffer} && {@link StringBuilder} && {@link String} 对比</h3>
+ * <h3>{@link StringBuffer} 和 {@link StringBuilder} 和 {@link String} 对比</h3>
  * 
  * <blockquote>
  * <ul>

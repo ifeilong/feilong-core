@@ -909,7 +909,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 isNullOrEmpty(appendMap) ,返回 {@link StringUtils#EMPTY}
+     * @return 如果 <code>arrayValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see #toQueryStringUseArrayValueMap(Map)
      * @since 1.4.0
      */
@@ -956,7 +956,9 @@ public final class ParamUtil{
      * 返回 :
      * 
      * <pre class="code">
-    _input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&lines_data=[{"extentionCode":"00887224869169","count":"2","unitPrice":"400.00"},{"extentionCode":"00887224869170","count":"1","unitPrice":"500.00"}]&province=江苏省&receiver=鑫哥&service=create_salesorder&totalActual=210.00
+     * _input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&lines_data=[{"extentionCode":"00887224869169","count":"2",
+     * "unitPrice":"400.00"},{"extentionCode":"00887224869170","count":"1","unitPrice":"500.00"}]&province=江苏省&receiver=鑫哥&service=
+     * create_salesorder&totalActual=210.00
      * </pre>
      * 
      * </blockquote>
@@ -969,13 +971,14 @@ public final class ParamUtil{
      * <ol>
      * <li>{@code if isNullOrEmpty(filePath)---->} return {@link StringUtils#EMPTY}</li>
      * <li>singleValueMap to naturalOrderingMap(TreeMap)</li>
-     * <li>for naturalOrderingMap's entrySet(),join key and value use =,join each entry use &</li>
+     * <li>for naturalOrderingMap's entrySet(),join key and value use =,join each entry use {@code &}</li>
      * </ol>
      * </blockquote>
      *
      * @param singleValueMap
      *            用于拼接签名的参数
-     * @return the string
+     * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         否则调用 {@link #toQueryStringUseSingleValueMap(Map)}
      * @see #toSafeQueryString(Map, String)
      * @since 1.4.0
      */
@@ -1189,7 +1192,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 Validator.isNullOrEmpty(arrayValueMap),返回 emptyMap
+     * @return 如果 <code>arrayValueMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      */
     private static Map<String, String[]> toSafeArrayValueMap(Map<String, String[]> arrayValueMap,String charsetType){
         if (Validator.isNullOrEmpty(arrayValueMap)){
@@ -1276,7 +1279,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>value</code>是 null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果charsetType是 null或者empty,直接返回 <code>value</code><br>
+     *         如果<code>charsetType</code>是 null或者empty,直接返回 <code>value</code><br>
      *         否则先 {@link URIUtil#decode(String, String)} 再 {@link URIUtil#encode(String, String)}值
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">

@@ -155,7 +155,7 @@ import java.util.Date;
  * </blockquote>
  * 
  * 
- * <h3>关于yyyy && YYYY:</h3>
+ * <h3>关于yyyy 和 YYYY:</h3>
  * 
  * <blockquote>
  * <p>
