@@ -193,7 +193,21 @@ public final class ConvertUtil{
     }
 
     /**
-     * object 类型转换成boolean类型.
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link Boolean}类型.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * ConvertUtil.toBoolean(1L)        =   true
+     * ConvertUtil.toBoolean("1")       =   true
+     * ConvertUtil.toBoolean("9")       =   false
+     * ConvertUtil.toBoolean(null)      =   null
+     * ConvertUtil.toBoolean("1,2,3")   =   false
+     * </pre>
+     * 
      * 
      * <h3>逻辑或者规则:</h3>
      * 
@@ -202,15 +216,15 @@ public final class ConvertUtil{
      * <ul>
      * <li>如果 "true", "yes", "y", "on", "1", 返回 true</li>
      * <li>如果 "false", "no", "n", "off", "0", 返回 false</li>
-     * <li>else will throw conversionException, but in
+     * <li>其他抛出 conversionException, 但是在
      * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
-     * Throwable)} method 返回 default value, {@link BooleanConverter} defaultValue pls see
+     * Throwable)} 方法里面返回默认值, {@link BooleanConverter} 的默认值,参见
      * {@link org.apache.commons.beanutils.ConvertUtilsBean#registerStandard(boolean, boolean) registerStandard(boolean, boolean)}</li>
      * </ul>
      * 
      * <p>
-     * you also can call {@link org.apache.commons.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
-     * BooleanConverter(String[], String[], Object)} set trueStrings and falseStrings
+     * 你也可以调用 {@link org.apache.commons.beanutils.converters.BooleanConverter#BooleanConverter(String[], String[], Object)
+     * BooleanConverter(String[], String[], Object)} 设置 trueStrings 和 falseStrings
      * </p>
      * </blockquote>
      * 
@@ -218,13 +232,13 @@ public final class ConvertUtil{
      * 
      * <blockquote>
      * <p>
-     * {@link Boolean#parseBoolean(String)}, 仅当 <code>(String != null) && String.equalsIgnoreCase("true")</code> 返回 true
+     * {@link Boolean#parseBoolean(String)},仅当 <code>(String != null) && String.equalsIgnoreCase("true")</code> 返回 true
      * </p>
      * </blockquote>
      * 
      * @param toBeConvertedValue
      *            object
-     * @return boolean
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.BooleanConverter
      * @see org.apache.commons.lang3.BooleanUtils
@@ -235,24 +249,141 @@ public final class ConvertUtil{
     }
 
     /**
-     * object转成integer类型.
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link Integer}类型.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * ConvertUtil.toInteger(null)                  = null
+     * ConvertUtil.toInteger("aaaa")                = null
+     * ConvertUtil.toInteger(8L)                    = 8
+     * ConvertUtil.toInteger("8")                   = 8
+     * ConvertUtil.toInteger(new BigDecimal("8"))   = 8
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <p>
-     * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
+     * 该方法十分适用于 获取请求的分页参数
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 原来的写法:
+     * 
+     * <pre class="code">
+     * 
+     * public static Integer getCurrentPageNo(HttpServletRequest request,String pageParamName){
+     *     String pageNoString = RequestUtil.getParameter(request, pageParamName);
+     *     try{
+     *         int pageNo = Integer.parseInt(pageNoString);
+     *         return pageNo;
+     *     }catch (Exception e){
+     *         LOGGER.error(e.getClass().getName(), e);
+     *     }
+     *     return 1; // 不带这个参数 或者转换异常 返回1
+     * }
+     * 
+     * </pre>
+     * 
+     * 现在可以更改成:
+     * 
+     * <pre class="code">
+     * 
+     * public static Integer getCurrentPageNo(HttpServletRequest request,String pageParamName){
+     *     String pageNoString = RequestUtil.getParameter(request, pageParamName);
+     *     Integer pageNo = ConvertUtil.toInteger(pageNoString);
+     *     return null == pageNo ? 1 : pageNo;
+     * }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param toBeConvertedValue
      *            值
-     * @return the integer
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see org.apache.commons.beanutils.converters.IntegerConverter
      */
     public static Integer toInteger(Object toBeConvertedValue){
-        IntegerConverter integerConverter = new IntegerConverter(null);
-        return integerConverter.convert(Integer.class, toBeConvertedValue);
+        return new IntegerConverter(null).convert(Integer.class, toBeConvertedValue);
     }
 
     /**
-     * object类型转换成 {@link java.math.BigDecimal}.
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link Integer}类型,如果转换不了返回默认值 <code>defaultValue</code>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * ConvertUtil.toInteger(null,1)                  = 1
+     * ConvertUtil.toInteger("aaaa",1)                = 1
+     * ConvertUtil.toInteger(8L,1)                    = 8
+     * ConvertUtil.toInteger("8",1)                   = 8
+     * ConvertUtil.toInteger(new BigDecimal("8"),1)   = 8
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <p>
+     * 该方法十分适用于 获取请求的分页参数
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 原来的写法:
+     * 
+     * <pre class="code">
+     * 
+     * public static Integer getCurrentPageNo(HttpServletRequest request,String pageParamName){
+     *     String pageNoString = RequestUtil.getParameter(request, pageParamName);
+     *     try{
+     *         int pageNo = Integer.parseInt(pageNoString);
+     *         return pageNo;
+     *     }catch (Exception e){
+     *         LOGGER.error(e.getClass().getName(), e);
+     *     }
+     *     return 1; // 不带这个参数 或者转换异常 返回1
+     * }
+     * 
+     * </pre>
+     * 
+     * 现在可以更改成:
+     * 
+     * <pre class="code">
+     * 
+     * public static Integer getCurrentPageNo(HttpServletRequest request,String pageParamName){
+     *     String pageNoString = RequestUtil.getParameter(request, pageParamName);
+     *     return ConvertUtil.toInteger(pageNoString, 1);
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param toBeConvertedValue
+     *            值
+     * @param defaultValue
+     *            默认值
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 <code>defaultValue</code> <br>
+     *         如果找不到转换器或者转换的时候出现了异常,返回 <code>defaultValue</code>
+     * @see org.apache.commons.beanutils.converters.IntegerConverter
+     * @since 1.6.1
+     */
+    public static Integer toInteger(Object toBeConvertedValue,Integer defaultValue){
+        return new IntegerConverter(defaultValue).convert(Integer.class, toBeConvertedValue);
+    }
+
+    /**
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link java.math.BigDecimal}.
      * 
      * <h3>示例:</h3>
      * 
@@ -299,7 +430,7 @@ public final class ConvertUtil{
     //*************************************************************************************************
 
     /**
-     * 把对象转换成字符串.
+     * 把对象 <code>toBeConvertedValue</code> 转换成字符串.
      * 
      * <h3>对于 Array 转成 String</h3>
      * 
@@ -496,13 +627,13 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将枚举转成集合.
+     * 将枚举 <code>enumeration</code> 转成集合.
      * 
      * @param <T>
      *            the generic type
      * @param enumeration
      *            the enumeration
-     * @return 如果 <code>enumeration</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>enumeration</code> 是null,返回 {@link Collections#emptyList()}<br>
      *         否则返回 {@link Collections#list(Enumeration)}
      * @see Collections#emptyList()
      * @see Collections#EMPTY_LIST
@@ -511,7 +642,7 @@ public final class ConvertUtil{
      * @since 1.0.7
      */
     public static <T> List<T> toList(final Enumeration<T> enumeration){
-        return Validator.isNullOrEmpty(enumeration) ? Collections.<T> emptyList() : Collections.list(enumeration);
+        return null == enumeration ? Collections.<T> emptyList() : Collections.list(enumeration);
     }
 
     /**
@@ -543,12 +674,14 @@ public final class ConvertUtil{
      *            the generic type
      * @param collection
      *            the collection
-     * @return 如果 <code>collection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>collection</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>collection instanceof List</code>,那么强转成 list返回<br>
      *         否则返回 <code>new ArrayList(collection)</code>
      * @since 1.6.1
      */
     public static <T> List<T> toList(final Collection<T> collection){
-        return Validator.isNullOrEmpty(collection) ? Collections.<T> emptyList() : new ArrayList<T>(collection);
+        return null == collection ? Collections.<T> emptyList()
+                        : (collection instanceof List ? (List<T>) collection : new ArrayList<T>(collection));
     }
 
     /**

@@ -221,11 +221,13 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToBoolean(){
-        LOGGER.debug("" + ConvertUtil.toBoolean("1"));
-        LOGGER.debug("" + ConvertUtil.toBoolean(null));
-        LOGGER.debug("" + ConvertUtil.toBoolean(new String[] { "1", "2", "3" }));
-        LOGGER.debug("" + ConvertUtil.toBoolean(new String[] { "1", null, "2", "3" }));
-        LOGGER.debug("" + ConvertUtil.toBoolean("1,2,3"));
+        assertEquals(true, ConvertUtil.toBoolean(1L));
+        assertEquals(true, ConvertUtil.toBoolean("1"));
+        assertEquals(null, ConvertUtil.toBoolean(null));
+        assertEquals(false, ConvertUtil.toBoolean("9"));
+        assertEquals(false, ConvertUtil.toBoolean(new String[] { "0", "1", "2", "3" }));
+        assertEquals(true, ConvertUtil.toBoolean(new String[] { "1", null, "2", "3" }));
+        assertEquals(false, ConvertUtil.toBoolean("1,2,3"));
     }
 
     /**
@@ -248,6 +250,25 @@ public class ConvertUtilTest{
         assertEquals(null, ConvertUtil.toInteger(null));
         assertEquals(8, ConvertUtil.toInteger(8L).intValue());
         assertEquals(8, ConvertUtil.toInteger("8").intValue());
+        assertEquals(8, ConvertUtil.toInteger(new BigDecimal("8")).intValue());
+    }
+
+    @Test
+    public void testToInteger3(){
+        assertEquals(1, ConvertUtil.toInteger(null, 1).intValue());
+        assertEquals(8, ConvertUtil.toInteger(8L, 1).intValue());
+        assertEquals(8, ConvertUtil.toInteger("8", 1).intValue());
+        assertEquals(8, ConvertUtil.toInteger(new BigDecimal("8"), 1).intValue());
+    }
+
+    @Test
+    public void testToIntege4(){
+        assertEquals(null, ConvertUtil.toInteger("aaaa"));
+    }
+
+    @Test
+    public void testToIntege5(){
+        assertEquals(1, ConvertUtil.toInteger("aaaa", 1).intValue());
     }
 
     /**
@@ -422,6 +443,11 @@ public class ConvertUtilTest{
         Set<String> set = new HashSet<String>();
         Collections.addAll(set, "a", "a", "b", "b");
         LOGGER.debug("{}", ConvertUtil.toList(set));
+    }
+
+    @Test
+    public void toList3(){
+        LOGGER.debug("{}", ConvertUtil.toList(ConvertUtil.toList("a", "a", "b", "b")));
     }
 
     /**
