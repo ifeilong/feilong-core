@@ -427,6 +427,95 @@ public final class ConvertUtil{
         return new BigDecimalConverter(null).convert(BigDecimal.class, toBeConvertedValue);
     }
 
+    /**
+     * 把对象转换为long类型.
+     * 
+     * <p>
+     * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
+     * </p>
+     *
+     * @param toBeConvertedValue
+     *            包含数字的对象.
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果找不到转换器或者转换的时候出现了异常,返回 null
+     * @see #convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.LongConverter
+     */
+    public static Long toLong(Object toBeConvertedValue){
+        return new LongConverter(null).convert(Long.class, toBeConvertedValue);
+    }
+
+    /**
+     * 任意的数组转成Integer 数组.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toIntegers("1,2,3")                              = [1,2,3]
+     * ConvertUtil.toIntegers(new String[] { "1", "2", "3" })       = [1,2,3]
+     * ConvertUtil.toIntegers(ConvertUtil.toList("1", "2", "3"))    = [1,2,3]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>value.getClass().isArray()</code> 或者 {@link Collection}</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
+     * Object)} 会基于targetType 构造一个<code>Integer</code>数组对象, 大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代
+     * <code>toBeConvertedValue</code>
+     * 依次进行转换
+     * </p>
+     * 
+     * </blockquote>
+     * 
+     * @param toBeConvertedValue
+     *            the to be converted value
+     * @return the integer[]
+     * @see #convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.ArrayConverter
+     */
+    public static Integer[] toIntegers(Object toBeConvertedValue){
+        return convert(toBeConvertedValue, Integer[].class);
+    }
+
+    /**
+     * To long array.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLongs("1,2,3")                             = [1,2,3]
+     * ConvertUtil.toLongs(new String[] { "1", "2", "3" })      = [1,2,3]
+     * ConvertUtil.toLongs(ConvertUtil.toList("1", "2", "3"))   = [1,2,3]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>value.getClass().isArray()</code> 或者 {@link Collection}</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
+     * Object)} 会基于targetType 构造一个<code>Long</code>数组对象, 大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代 <code>toBeConvertedValue</code>
+     * 依次进行转换
+     * </p>
+     * 
+     * </blockquote>
+     *
+     * @param toBeConvertedValue
+     *            the to be converted value
+     * @return the long[]
+     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.ArrayConverter
+     * @see #convert(Object, Class)
+     */
+    public static Long[] toLongs(Object toBeConvertedValue){
+        return convert(toBeConvertedValue, Long[].class);
+    }
     //*************************************************************************************************
 
     /**
@@ -888,96 +977,6 @@ public final class ConvertUtil{
             returnStringArray[i] = ArrayUtil.getElement(primitiveArray, i);
         }
         return returnStringArray;
-    }
-
-    /**
-     * 把对象转换为long类型.
-     * 
-     * <p>
-     * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
-     * </p>
-     *
-     * @param toBeConvertedValue
-     *            包含数字的对象.
-     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
-     *         如果找不到转换器或者转换的时候出现了异常,返回 null
-     * @see #convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.LongConverter
-     */
-    public static Long toLong(Object toBeConvertedValue){
-        return new LongConverter(null).convert(Long.class, toBeConvertedValue);
-    }
-
-    /**
-     * 任意的数组转成Integer 数组.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toIntegers("1,2,3")                              = [1,2,3]
-     * ConvertUtil.toIntegers(new String[] { "1", "2", "3" })       = [1,2,3]
-     * ConvertUtil.toIntegers(ConvertUtil.toList("1", "2", "3"))    = [1,2,3]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>value.getClass().isArray()</code> 或者 {@link Collection}</h3>
-     * <blockquote>
-     * 
-     * <p>
-     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
-     * Object)} 会基于targetType 构造一个<code>Integer</code>数组对象, 大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代
-     * <code>toBeConvertedValue</code>
-     * 依次进行转换
-     * </p>
-     * 
-     * </blockquote>
-     * 
-     * @param toBeConvertedValue
-     *            the to be converted value
-     * @return the integer[]
-     * @see #convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.ArrayConverter
-     */
-    public static Integer[] toIntegers(Object toBeConvertedValue){
-        return convert(toBeConvertedValue, Integer[].class);
-    }
-
-    /**
-     * To long array.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toLongs("1,2,3")                             = [1,2,3]
-     * ConvertUtil.toLongs(new String[] { "1", "2", "3" })      = [1,2,3]
-     * ConvertUtil.toLongs(ConvertUtil.toList("1", "2", "3"))   = [1,2,3]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>value.getClass().isArray()</code> 或者 {@link Collection}</h3>
-     * <blockquote>
-     * 
-     * <p>
-     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
-     * Object)} 会基于targetType 构造一个<code>Long</code>数组对象, 大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代 <code>toBeConvertedValue</code>
-     * 依次进行转换
-     * </p>
-     * 
-     * </blockquote>
-     *
-     * @param toBeConvertedValue
-     *            the to be converted value
-     * @return the long[]
-     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.ArrayConverter
-     * @see #convert(Object, Class)
-     */
-    public static Long[] toLongs(Object toBeConvertedValue){
-        return convert(toBeConvertedValue, Long[].class);
     }
 
     /**
