@@ -301,6 +301,12 @@ public class ConvertUtilTest{
         LOGGER.info("{}", t);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testConvert3(){
+        String[] strings = ConvertUtil.toArray("");
+        ConvertUtil.toArray(strings, null);
+    }
+
     @Test
     public void testConvert2(){
         LOGGER.info("{}", ConvertUtil.convert("1", Integer.class));

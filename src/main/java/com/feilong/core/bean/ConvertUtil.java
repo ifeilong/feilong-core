@@ -417,14 +417,14 @@ public final class ConvertUtil{
      * 
      * @param toBeConvertedValue
      *            值
-     * @return BigDecimal
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
      * @see org.apache.commons.beanutils.converters.BigDecimalConverter
      */
     public static BigDecimal toBigDecimal(Object toBeConvertedValue){
-        BigDecimalConverter bigDecimalConverter = new BigDecimalConverter(null);
-        return bigDecimalConverter.convert(BigDecimal.class, toBeConvertedValue);
+        return new BigDecimalConverter(null).convert(BigDecimal.class, toBeConvertedValue);
     }
 
     //*************************************************************************************************
@@ -611,7 +611,7 @@ public final class ConvertUtil{
     //**********************************************************************************************
 
     /**
-     * 将集合转成枚举.
+     * 将集合 <code>collection</code> 转成枚举.
      * 
      * @param <T>
      *            the generic type
@@ -815,7 +815,8 @@ public final class ConvertUtil{
      *            the values
      * @param targetType
      *            the target type
-     * @return 如果传的 value是 <code>null</code>,那么返回null <br>
+     * @return 如果 <code>toBeConvertedValue</code> 是null,那么返回null<br>
+     *         如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
      *         否则调用 {@link ConvertUtils#convert(String[], Class)}
      * @see org.apache.commons.beanutils.ConvertUtils#convert(String[], Class)
      * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(String[], Class)
@@ -898,13 +899,13 @@ public final class ConvertUtil{
      *
      * @param toBeConvertedValue
      *            包含数字的对象.
-     * @return the long
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.LongConverter
      */
     public static Long toLong(Object toBeConvertedValue){
-        LongConverter longConverter = new LongConverter(null);
-        return longConverter.convert(Long.class, toBeConvertedValue);
+        return new LongConverter(null).convert(Long.class, toBeConvertedValue);
     }
 
     /**
@@ -1006,16 +1007,16 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * [
-        "5",
-        "4",
-        "8",
-        "2",
-        "8",
-        "9",
-        "5",
-        "3",
-        "a"
-    ]
+     * "5",
+     * "4",
+     * "8",
+     * "2",
+     * "8",
+     * "9",
+     * "5",
+     * "3",
+     * "a"
+     * ]
      * </pre>
      * 
      * </blockquote>
