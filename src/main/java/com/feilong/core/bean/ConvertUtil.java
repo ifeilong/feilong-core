@@ -395,10 +395,6 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <p>
-     * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
-     * </p>
-     * 
      * <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
      * 
      * <blockquote>

@@ -84,14 +84,14 @@ public class StringUtilTest{
     @Test
     public void testSearchCount(){
         String source = "jiiiiiinxin.feilong";
-        assertEquals(8, StringUtil.searchTimes(source, "i"));
-        assertEquals(2, StringUtil.searchTimes(source, "in"));
-        assertEquals(3, StringUtil.searchTimes(source, "ii"));
-        assertEquals(1, StringUtil.searchTimes(source, "xin"));
-        assertEquals(1, StringUtil.searchTimes("xin", "xin"));
-        assertEquals(1, StringUtil.searchTimes("xin", "i"));
-        assertEquals(2, StringUtil.searchTimes("xiin", "i"));
-        assertEquals(2, StringUtil.searchTimes("xiiiin", "ii"));
+        assertEquals(8, StringUtils.countMatches(source, "i"));
+        assertEquals(2, StringUtils.countMatches(source, "in"));
+        assertEquals(3, StringUtils.countMatches(source, "ii"));
+        assertEquals(1, StringUtils.countMatches(source, "xin"));
+        assertEquals(1, StringUtils.countMatches("xin", "xin"));
+        assertEquals(1, StringUtils.countMatches("xin", "i"));
+        assertEquals(2, StringUtils.countMatches("xiin", "i"));
+        assertEquals(2, StringUtils.countMatches("xiiiin", "ii"));
     }
 
     /**

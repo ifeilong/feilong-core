@@ -46,7 +46,9 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ul>
  * </blockquote>
  * 
- * <h3>分隔(tokenize)</h3> <blockquote>
+ * <h3>分隔(tokenize)</h3>
+ * 
+ * <blockquote>
  * <ul>
  * <li>{@link #tokenizeToStringArray(String, String)}</li>
  * <li>{@link #tokenizeToStringArray(String, String, boolean, boolean)}</li>
@@ -57,6 +59,26 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * StringTokenizer更高<br>
  * 因此,在注重性能的场景,还是建议使用{@link StringTokenizer}
  * </p>
+ * 
+ * </blockquote>
+ * 
+ * <h3>查询(search)</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>{@link StringUtils#countMatches(CharSequence, CharSequence)} 查询出现的次数</li>
+ * </ul>
+ * </blockquote>
+ * 
+ * <h3>其他</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>{@link StringUtils#capitalize(String)} 首字母大写</li>
+ * <li>{@link StringUtils#uncapitalize(String)} 单词首字母小写</li>
+ * <li>{@linkplain "IntrospectorUtil#decapitalize(String)"}</li>
+ * <li>{@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...)} 如果要使用一段文字,每个单词首字母小写</li>
+ * </ul>
  * </blockquote>
  * 
  * <h3>{@link String#String(byte[] )} 和 {@link String#String(byte[], Charset)} 区别</h3>
@@ -178,29 +200,6 @@ public final class StringUtil{
         return StringUtils.toEncodedString(bytes, Charset.forName(charsetType));
     }
 
-    // [start] search
-
-    /**
-     * 查找子字符串 (<code>target</code>)在字符串( <code>source</code>)中出现的次数.
-     * 
-     * <pre class="code">
-     *StringUtil.searchTimes("xin", "xin")      = 1
-     *StringUtil.searchTimes("xiiiin", "ii")    = 2
-     * </pre>
-     *
-     * @param source
-     *            查找的源字符串
-     * @param target
-     *            目标子串
-     * @return count of target string in source
-     * @see org.apache.commons.lang3.StringUtils#countMatches(CharSequence, CharSequence)
-     * @since 1.0.2
-     */
-    public static int searchTimes(final CharSequence source,final CharSequence target){
-        return StringUtils.countMatches(source, target);
-    }
-
-    // [end]
     /**
      * 给一串字符串前后增加两个引号.
      * 
@@ -215,62 +214,6 @@ public final class StringUtil{
      */
     public static String addDoubleQuotes(String text){
         return "\"" + text + "\"";
-    }
-
-    /**
-     * 单词首字母大写.
-     * 
-     * <p>
-     * StringUtil.firstCharToUpperCase("jinxin") = "Jinxin"
-     * </p>
-     * 
-     * <pre class="code">
-     * StringUtils.capitalize(null)   = null
-     * StringUtils.capitalize("")     = ""
-     * StringUtils.capitalize("cat")  = "Cat"
-     * StringUtils.capitalize("cAt")  = "CAt"
-     * </pre>
-     * 
-     * @param word
-     *            单词
-     * @return 单词首字母大写
-     * @see org.apache.commons.lang3.StringUtils#swapCase(String)
-     * @see org.apache.commons.lang3.StringUtils#capitalize(String)
-     */
-    public static String firstCharToUpperCase(String word){
-        return StringUtils.capitalize(word);
-    }
-
-    /**
-     * 单词首字母小写.
-     * 
-     * <p>
-     * StringUtil.firstCharToUpperCase("Jinxin") = "jinxin"
-     * </p>
-     * 
-     * <pre class="code">
-     * StringUtils.capitalize(null)       = null
-     * StringUtils.capitalize("")         = ""
-     * StringUtils.capitalize("Jinxin")   = "jinxin"
-     * StringUtils.capitalize("CAt")      = "cAt"
-     * </pre>
-     * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * <ol>
-     * <li>和 {@linkplain "IntrospectorUtil#decapitalize(String)"} 的区别.</li>
-     * <li>如果要使用一段文字,每个单词首字母小写,可以使用 {@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...)}</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * @param word
-     *            单词
-     * @return 单词首字母小写
-     * @see org.apache.commons.lang3.StringUtils#uncapitalize(String)
-     */
-    public static String firstCharToLowerCase(String word){
-        return StringUtils.uncapitalize(word);
     }
 
     // [start]contains
