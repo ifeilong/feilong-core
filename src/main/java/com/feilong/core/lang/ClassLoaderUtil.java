@@ -40,7 +40,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <ul>
  * <li>{@link #getResource(String)}</li>
  * <li>{@link #getRootClassPath()}</li>
- * <li>{@link #getClassPath(ClassLoader)}</li>
+ * <li>{@link #getRootClassPath(ClassLoader)}</li>
  * <li>{@link #getResourceInAllClassLoader(String, Class)}</li>
  * <li>{@link #getResource(ClassLoader, String)}</li>
  * </ul>
@@ -146,6 +146,44 @@ public final class ClassLoaderUtil{
     }
 
     /**
+     * 查找具有给定名称的资源.
+     * <p>
+     * "",表示classes 的根目录
+     * </p>
+     * e.q:<br>
+     * 
+     * <blockquote>
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * <tr style="background-color:#ccccff">
+     * <th align="left"></th>
+     * <th align="left">(maven)测试</th>
+     * <th align="left">在web环境中,(即使打成jar的情形)</th>
+     * </tr>
+     * <tr valign="top">
+     * <td><code>getResource("")</code></td>
+     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
+     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td><code>getResource("com")</code></td>
+     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
+     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
+     * </tr>
+     * </table>
+     * </blockquote>
+     *
+     * @param classLoader
+     *            the class loader
+     * @param resourceName
+     *            the resource name
+     * @return the resource
+     * @since 1.2.1
+     */
+    public static URL getResource(ClassLoader classLoader,String resourceName){
+        return classLoader.getResource(resourceName);
+    }
+
+    /**
      * 获得 项目的 classpath,及classes编译的根目录.
      * 
      * @return 获得 项目的 classpath
@@ -153,7 +191,7 @@ public final class ClassLoaderUtil{
      * @since 1.6.1
      */
     public static URL getRootClassPath(){
-        return getClassPath(getClassLoaderByClass(ClassLoaderUtil.class));
+        return getRootClassPath(getClassLoaderByClass(ClassLoaderUtil.class));
     }
 
     /**
@@ -163,8 +201,9 @@ public final class ClassLoaderUtil{
      *            the class loader
      * @return the class path
      * @see #getResource(ClassLoader, String)
+     * @since 1.6.1
      */
-    public static URL getClassPath(ClassLoader classLoader){
+    public static URL getRootClassPath(ClassLoader classLoader){
         return getResource(classLoader, "");
     }
 
@@ -222,46 +261,8 @@ public final class ClassLoaderUtil{
                 return url;
             }
         }
-        LOGGER.warn("resourceName:[{}] in all ClassLoader not found", resourceName);
+        LOGGER.warn("resourceName:[{}] in all ClassLoader not found,return null", resourceName);
         return null;
-    }
-
-    /**
-     * 查找具有给定名称的资源.
-     * <p>
-     * "",表示classes 的根目录
-     * </p>
-     * e.q:<br>
-     * 
-     * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4" summary="">
-     * <tr style="background-color:#ccccff">
-     * <th align="left"></th>
-     * <th align="left">(maven)测试</th>
-     * <th align="left">在web环境中,(即使打成jar的情形)</th>
-     * </tr>
-     * <tr valign="top">
-     * <td><code>getResource("")</code></td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
-     * </tr>
-     * <tr valign="top" style="background-color:#eeeeff">
-     * <td><code>getResource("com")</code></td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
-     * </tr>
-     * </table>
-     * </blockquote>
-     *
-     * @param classLoader
-     *            the class loader
-     * @param resourceName
-     *            the resource name
-     * @return the resource
-     * @since 1.2.1
-     */
-    public static URL getResource(ClassLoader classLoader,String resourceName){
-        return classLoader.getResource(resourceName);
     }
 
     /**
@@ -335,7 +336,7 @@ public final class ClassLoaderUtil{
         Map<String, Object> classLoaderInfoMap = new LinkedHashMap<String, Object>();
         classLoaderInfoMap.put("classLoader", "" + classLoader);
         classLoaderInfoMap.put("classLoader[CanonicalName]", classLoader.getClass().getCanonicalName());
-        classLoaderInfoMap.put("classLoader[Root Classpath]", "" + getClassPath(classLoader));
+        classLoaderInfoMap.put("classLoader[Root Classpath]", "" + getRootClassPath(classLoader));
         return JsonUtil.format(classLoaderInfoMap);
     }
 }
