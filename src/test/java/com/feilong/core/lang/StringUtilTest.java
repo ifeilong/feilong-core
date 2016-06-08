@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
@@ -78,6 +79,42 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
     }
 
+    @Test
+    public void testReplace1(){
+
+        assertEquals("", StringUtil.replace(null, null));
+    }
+
+    @Test
+    public void testReplace2(){
+        String template = "/home/webuser/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
+        Date date = new Date();
+        Map<String, String> valuesMap = new HashMap<String, String>();
+        valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
+        valuesMap.put("expressDeliveryType", "sf");
+        valuesMap.put("fileName", DateUtil.toString(date, DatePattern.TIMESTAMP));
+        LOGGER.debug(StringUtil.replace(template, valuesMap));
+
+        assertEquals(template, StringUtil.replace(template, null));
+
+    }
+    // [start]startsWith
+
+    /**
+     * 测试此字符串是否以指定的前缀 <code>prefix</code>开始.
+     * 
+     * @param value
+     *            value
+     * @param prefix
+     *            前缀
+     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true;否则返回 false.<br>
+     *         还要注意,如果参数是空字符串,或者等于此 String对象(用 equals(Object) 方法确定),则返回 true.
+     */
+    public static boolean startsWith(CharSequence value,String prefix){
+        return ConvertUtil.toString(value).startsWith(prefix);
+    }
+
+    // [end]
     /**
      * Search count.
      */
@@ -225,9 +262,18 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.substring(TEXT, "in", 0));
         LOGGER.debug(StringUtil.substring(TEXT, "in", 5));
         // LOGGER.debug(StringUtil.substring(text, "in", -2));
-        LOGGER.debug(StringUtil.substring(TEXT, "in", 20));
         LOGGER.debug(StringUtil.substring(TEXT, "j", TEXT.length() - 1));
         LOGGER.debug(StringUtil.substring(TEXT, "jinxin.", 1));
+    }
+
+    @Test
+    public void substring33(){
+        LOGGER.debug(StringUtil.substring(TEXT, "in", 20));
+    }
+
+    @Test
+    public void substring333(){
+        LOGGER.debug(StringUtil.substring(TEXT, "in", -200));
     }
 
     /**

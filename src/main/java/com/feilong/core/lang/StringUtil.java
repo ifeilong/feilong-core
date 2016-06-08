@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -334,7 +335,7 @@ public final class StringUtil{
      *            用来匹配此字符串的正则表达式
      * @param replacement
      *            用来替换每个匹配项的字符串
-     * @return 所得String,如果传过来的内容是空,则返回 {@link org.apache.commons.lang3.StringUtils#EMPTY}
+     * @return 如果 <code>content</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see <a href="http://stamen.iteye.com/blog/2028256">String字符串替换的一个诡异问题</a>
      * @see java.lang.String#replaceAll(String, String)
      * @since jdk 1.4
@@ -344,27 +345,30 @@ public final class StringUtil{
     }
 
     /**
-     * 使用给定的字符串作为模板,替换所有the occurrences of variables with their matching values from the resolver .
+     * 使用给定的字符串作为模板,解析匹配的变量 .
      * 
-     * <p>
-     * The following example demonstrates this:
-     * </p>
+     * <h3>示例:</h3>
      * 
-     * <pre class="code">
-     * Map valuesMap = HashMap();
-     * valuesMap.put("animal", "quick brown fox");
-     * valuesMap.put("target", "lazy dog");
-     * 
-     * StrSubstitutor sub = new StrSubstitutor(valuesMap);
-     * String templateString = "The ${animal} jumped over the ${target}.";
-     * String resolvedString = sub.replace(templateString);
-     * </pre>
-     * 
-     * yielding:
+     * <blockquote>
      * 
      * <pre class="code">
-     *      The quick brown fox jumped over the lazy dog.
+     * String template = "/home/webuser/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
+     * Date date = new Date();
+     * 
+     * Map{@code <String, String>} valuesMap = new HashMap{@code <String, String>}();
+     * valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
+     * valuesMap.put("expressDeliveryType", "sf");
+     * valuesMap.put("fileName", DateUtil.toString(date, DatePattern.TIMESTAMP));
+     * LOGGER.debug(StringUtil.replace(template, valuesMap));
      * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * /home/webuser/expressdelivery/2016-06/sf/vipQuery_20160608214846.log
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <V>
      *            the value type
@@ -372,40 +376,24 @@ public final class StringUtil{
      *            the template string
      * @param valuesMap
      *            the values map
-     * @return the string
+     * @return 如果 <code>templateString</code> 是 <code>StringUtils.isEmpty(templateString)</code>,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>valuesMap</code> 是null或者empty,原样返回 <code>templateString</code><br>
      * @see org.apache.commons.lang3.text.StrSubstitutor#replace(String)
+     * @see org.apache.commons.lang3.text.StrSubstitutor#replace(Object, Map)
      * @since 1.1.1
      */
-    public static <V> String replace(String templateString,Map<String, V> valuesMap){
-        StrSubstitutor strSubstitutor = new StrSubstitutor(valuesMap);
-        return strSubstitutor.replace(templateString);
+    public static <V> String replace(CharSequence templateString,Map<String, V> valuesMap){
+        return StringUtils.isEmpty(templateString) ? StringUtils.EMPTY : StrSubstitutor.replace(templateString, valuesMap);
     }
 
     // [end]
 
-    // [start]startsWith
-
-    /**
-     * 测试此字符串是否以指定的前缀 <code>prefix</code>开始.
-     * 
-     * @param value
-     *            value
-     * @param prefix
-     *            前缀
-     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true;否则返回 false.<br>
-     *         还要注意,如果参数是空字符串,或者等于此 String对象(用 equals(Object) 方法确定),则返回 true.
-     */
-    public static boolean startsWith(CharSequence value,String prefix){
-        return ConvertUtil.toString(value).startsWith(prefix);
-    }
-
-    // [end]
     /**
      * 带有数字格式的数字字符串,与数字相加(一般生成流水号使用).
      * 
      * <pre class="code">
-     * stringAddInt("002",2)            =   004
-     * stringAddInt("000002",1200)      =   001202
+     * StringUtil.stringAddInt("002",2)            =   004
+     * StringUtil.stringAddInt("000002",1200)      =   001202
      * </pre>
      * 
      * @param str
@@ -416,9 +404,8 @@ public final class StringUtil{
      * @see NumberUtil#toString(Number, String)
      */
     public static String stringAddInt(String str,int i){
-        int length = str.length();
         String pattern = "";
-        for (int j = 0; j < length; ++j){
+        for (int j = 0, z = str.length(); j < z; ++j){
             pattern += "0";
         }
         return NumberUtil.toString(Integer.parseInt(str) + i, pattern);
@@ -456,9 +443,8 @@ public final class StringUtil{
      *            内容 the String to get the substring from, may be null
      * @param beginIndex
      *            从指定索引处 the position to start from,negative means count back from the end of the String by this many characters
-     * @return A <code>null</code> String 返回 <code>null</code>. <br>
+     * @return 如果 <code>text</code> 是null,返回 null<br>
      *         An empty ("") String 返回 "".<br>
-     *         substring from start position, <code>null</code> if null String input
      * @see org.apache.commons.lang3.StringUtils#substring(String, int)
      * @see #substringLast(String, int)
      */
@@ -473,18 +459,18 @@ public final class StringUtil{
      * StringUtil.substring("jinxin.feilong", 6, 2)     =   .f
      * </pre>
      *
-     * @param textString
+     * @param text
      *            被截取文字
      * @param startIndex
      *            索引开始位置,0开始
      * @param length
      *            长度 {@code >=1} 1个 即本身 <br>
      *            正常情况下,即返回出来的字符串长度
-     * @return the string
+     * @return 如果 <code>text</code> 是null,返回 null<br>
      * @see org.apache.commons.lang3.StringUtils#substring(String, int, int)
      */
-    public static String substring(final String textString,int startIndex,int length){
-        return StringUtils.substring(textString, startIndex, startIndex + length);
+    public static String substring(final String text,int startIndex,int length){
+        return StringUtils.substring(text, startIndex, startIndex + length);
     }
 
     /**
@@ -515,10 +501,12 @@ public final class StringUtil{
      * <h3>示例:</h3>
      * 
      * <blockquote>
-     * <ul>
-     * <li>substring("jinxin.feilong",".",0)======&gt;".feilong"</li>
-     * <li>substring("jinxin.feilong",".",1)======&gt;"feilong"</li>
-     * </ul>
+     * 
+     * <pre class="code">
+     * StringUtil.substring("jinxin.feilong",".",0)     =   ".feilong"
+     * StringUtil.substring("jinxin.feilong",".",1)     =   "feilong"
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param text
@@ -527,24 +515,18 @@ public final class StringUtil{
      *            beginString
      * @param shift
      *            负数表示向前,整数表示向后,0表示依旧从自己的位置开始算起
-     * @return
-     *         <ul>
-     *         <li>如果 isNullOrEmpty(text),返回 null</li>
-     *         <li>如果 isNullOrEmpty(beginString),返回 null</li>
-     *         <li>如果 text.indexOf(beginString)==-1,返回 null</li>
-     *         <li>{@code  beginIndex + shift > text.length()},返回 null</li>
-     *         <li>else,返回 text.substring(beginIndex + shift)</li>
-     *         </ul>
+     * @return 如果 <code>text</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>beginString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 text.indexOf(beginString)==-1,返回 {@link StringUtils#EMPTY}<br>
+     *         如果{@code  beginIndex + shift > text.length()},返回 {@link StringUtils#EMPTY}<br>
+     *         否则返回 text.substring(beginIndex + shift)<br>
      * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
      */
     public static String substring(final String text,String beginString,int shift){
-        if (Validator.isNullOrEmpty(text)){
+        if (Validator.isNullOrEmpty(text) || Validator.isNullOrEmpty(beginString)){
             return StringUtils.EMPTY;
         }
 
-        if (Validator.isNullOrEmpty(beginString)){
-            return StringUtils.EMPTY;
-        }
         //****************************************************
         int beginIndex = text.indexOf(beginString);
         if (beginIndex == -1){// 查不到指定的字符串
@@ -553,17 +535,13 @@ public final class StringUtil{
         //****************************************************
         int startIndex = beginIndex + shift;
         int textLength = text.length();
-
-        String message = "beginIndex+shift<0,beginIndex:{},shift:{},text:{},text.length:{}";
-        Validate.isTrue(startIndex >= 0, Slf4jUtil.format(message, beginIndex, shift, text, textLength));
+        Validate.isTrue(startIndex >= 0, Slf4jUtil.format("[{}] index[{}]+shift[{}]<0,text[{}]", beginString, beginIndex, shift, text));
 
         if (startIndex > textLength){
-            message = "beginIndex+shift>text.length(),beginIndex:{},shift:{},text:{},text.length:{}";
-            LOGGER.warn(message, beginIndex, shift, text, textLength);
+            LOGGER.warn("beginString [{}] index[{}]+shift[{}]>text[{}].length()[{}]", beginString, beginIndex, shift, text, textLength);
             return StringUtils.EMPTY;
         }
-        // 索引从0开始
-        return text.substring(startIndex);
+        return text.substring(startIndex);// 索引从0开始
     }
 
     /**
@@ -579,20 +557,13 @@ public final class StringUtil{
      *            开始的字符串,null表示从开头开始截取
      * @param endString
      *            结束的字符串
-     * @return 如果Validator.isNullOrEmpty(text),返回 null;<br>
+     * @return 如果 <code>text</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果Validator.isNullOrEmpty(startString),返回 text.substring(0, text.indexOf(endString))
      * @see org.apache.commons.lang3.StringUtils#substringBetween(String, String, String)
      */
     public static String substring(final String text,final String startString,final String endString){
-        if (Validator.isNullOrEmpty(text)){
-            return StringUtils.EMPTY;
-        }
-        if (Validator.isNullOrEmpty(startString)){
-            return text.substring(0, text.indexOf(endString));
-        }
-        int beginIndex = text.indexOf(startString);
-        int endIndex = text.indexOf(endString);
-        return text.substring(beginIndex, endIndex);
+        return Validator.isNullOrEmpty(text) ? StringUtils.EMPTY
+                        : text.substring(Validator.isNullOrEmpty(startString) ? 0 : text.indexOf(startString), text.indexOf(endString));
     }
 
     /**
@@ -679,12 +650,9 @@ public final class StringUtil{
         if (null == text){
             return StringUtils.EMPTY;
         }
-
         String textString = text.toString();
-        if (null == lastString){
-            return textString;
-        }
-        return textString.endsWith(lastString) ? substringWithoutLast(textString, lastString.length()) : textString;
+        return null == lastString ? textString
+                        : textString.endsWith(lastString) ? substringWithoutLast(textString, lastString.length()) : textString;
     }
 
     // [end]
@@ -722,9 +690,8 @@ public final class StringUtil{
         try{
             return value.getBytes(charsetName);
         }catch (UnsupportedEncodingException e){
-            LOGGER.error(e.getClass().getName(), e);
+            throw new UncheckedIOException(e);
         }
-        return ArrayUtils.EMPTY_BYTE_ARRAY;
     }
 
     // [end]
@@ -732,32 +699,31 @@ public final class StringUtil{
     // [start]splitToT
 
     /**
-     * 将字符串分隔成 字符串数组.
+     * 将字符串 <code>value</code> 使用分隔符 <code>regexSpliter</code> 分隔成 字符串数组.
      * 
-     * <h3>注意</h3>
+     * <h3>注意:</h3>
      * 
      * <blockquote>
      * <p>
-     * 注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义,因此我们使用.的时候必须进行转义,<br>
-     * <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
+     * 此处不是简单的分隔符,是正则表达式,<b>.$|()[{^?*+\\</b> 有特殊的含义,因此我们使用.的时候必须进行转义, <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
      * 最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
      * </p>
-     * </blockquote>
      * 
+     * <p>
      * 建议使用 {@link #tokenizeToStringArray(String, String)} 或者 {@link StringUtils#split(String)}
-     * 
+     * </p>
+     * </blockquote>
+     *
      * @param value
      *            value
      * @param regexSpliter
-     *            分隔符,注意此处不是简单的分隔符是正则表达式, .$|()[{^?*+\\ 在正则表达式中有特殊的含义,因此我们使用.的时候必须进行转义,<br>
-     *            <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
+     *            此处不是简单的分隔符,是正则表达式,<b>.$|()[{^?*+\\</b> 有特殊的含义,因此我们使用.的时候必须进行转义, <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
      *            最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
-     * @return 如果value 是null,返回null
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
      * @see String#split(String)
      * @see String#split(String, int)
      * @see java.util.regex.Pattern#split(CharSequence)
      * @see StringUtils#split(String)
-     * @see #tokenizeToStringArray(String, String)
      */
     public static String[] split(String value,String regexSpliter){
         return Validator.isNullOrEmpty(value) ? ArrayUtils.EMPTY_STRING_ARRAY : value.split(regexSpliter);
@@ -815,7 +781,7 @@ public final class StringUtil{
      * @param delimiters
      *            the delimiter characters, assembled as String<br>
      *            参数中的所有字符都是分隔标记的分隔符,比如这里可以设置成 ";, " ,spring就是使用这样的字符串来分隔数组/集合的
-     * @return an array of the tokens
+     * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
      * @see java.util.StringTokenizer
      * @see String#trim()
      * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
@@ -866,7 +832,7 @@ public final class StringUtil{
      *            omit empty tokens from the result array
      *            (only applies to tokens that are empty after trimming; StringTokenizer
      *            will not consider subsequent delimiters as token in the first place).
-     * @return an array of the tokens (<code>null</code> if the input String was <code>null</code>)
+     * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
      * @see java.util.StringTokenizer
      * @see String#trim()
      * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
@@ -882,7 +848,7 @@ public final class StringUtil{
         List<String> tokens = new ArrayList<String>();
         while (stringTokenizer.hasMoreTokens()){
             String token = stringTokenizer.nextToken();
-            if (trimTokens){
+            if (trimTokens){//去空
                 token = token.trim();
             }
             if (!ignoreEmptyTokens || token.length() > 0){
