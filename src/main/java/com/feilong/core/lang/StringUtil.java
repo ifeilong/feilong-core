@@ -225,7 +225,7 @@ public final class StringUtil{
      * </p>
      * 
      * <pre class="code">
-     * StringUtils.capitalize(null)             = null
+     * StringUtils.capitalize(null)   = null
      * StringUtils.capitalize("")     = ""
      * StringUtils.capitalize("cat")  = "Cat"
      * StringUtils.capitalize("cAt")  = "CAt"
@@ -249,7 +249,7 @@ public final class StringUtil{
      * </p>
      * 
      * <pre class="code">
-     * StringUtils.capitalize(null)                 = null
+     * StringUtils.capitalize(null)       = null
      * StringUtils.capitalize("")         = ""
      * StringUtils.capitalize("Jinxin")   = "jinxin"
      * StringUtils.capitalize("CAt")      = "cAt"
@@ -259,7 +259,7 @@ public final class StringUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>和 {@link "IntrospectorUtil#decapitalize(String)"} 的区别.</li>
+     * <li>和 {@linkplain "IntrospectorUtil#decapitalize(String)"} 的区别.</li>
      * <li>如果要使用一段文字,每个单词首字母小写,可以使用 {@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...)}</li>
      * </ol>
      * </blockquote>

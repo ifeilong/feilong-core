@@ -41,7 +41,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 	
 		....
 		<properties>
-			<version.feilong-platform>1.6.0</version.feilong-platform>
+			<version.feilong-platform>1.6.1</version.feilong-platform>
 			....
 		</properties>
 		
@@ -68,7 +68,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 ```
 
 # Javadoc:
-在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.6.0/feilong-core/) 
+在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.6.1/feilong-core/) 
 
 # wiki:
 更多内容,你可以参见 [WiKi](https://github.com/venusdrogon/feilong-core/wiki) 

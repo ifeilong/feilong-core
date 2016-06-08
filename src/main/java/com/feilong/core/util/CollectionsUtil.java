@@ -1185,7 +1185,7 @@ public final class CollectionsUtil{
      * list.add(1L);
      * list.add(2L);
      * list.add(3L);
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate{@code <Long>}(1L))));
      * </pre>
      * 
      * 返回:

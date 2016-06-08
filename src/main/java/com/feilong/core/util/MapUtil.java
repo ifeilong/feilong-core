@@ -95,7 +95,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <blockquote>
  * <ol>
  * <li>{@link java.util.HashMap HashMap} 初始容量 {@link java.util.HashMap#DEFAULT_INITIAL_CAPACITY }是16,DEFAULT_LOAD_FACTOR 是0.75
- * {@link java.util.HashMap#addEntry } 是 2 * table.length 2倍<br>
+ * <code>java.util.HashMap#addEntry</code> 是 2 * table.length 2倍<br>
  * </ol>
  * </blockquote>
  * </td>

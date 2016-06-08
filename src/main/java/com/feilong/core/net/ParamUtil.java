@@ -766,7 +766,7 @@ public final class ParamUtil{
     }
 
     /**
-     * 将<code>a=1&b=2</code>这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value).
+     * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value).
      * 
      * <p>
      * 内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序
@@ -814,7 +814,7 @@ public final class ParamUtil{
      * </blockquote>
      *
      * @param queryString
-     *            <code>a=1&b=2</code>类型的数据,支持<code>a=1&a=1</code>的形式, 返回map的值是数组
+     *            {@code a=1&b=2}类型的数据,支持{@code a=1&a=1}的形式, 返回map的值是数组
      * @param charsetType
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
