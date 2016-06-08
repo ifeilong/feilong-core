@@ -17,6 +17,8 @@ package com.feilong.core.lang;
 
 import java.lang.reflect.Array;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * 数组工具类.
  * 
@@ -108,7 +110,8 @@ public final class ArrayUtil{
      *            the component type
      * @param length
      *            the length of the new array
-     * @return the t[]
+     * @return 如果 <code>componentType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>length{@code <}0</code>,抛出 {@link IllegalArgumentException}<br>
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
      * @see "com.google.common.collect#newArray(Class, int)"
@@ -116,6 +119,8 @@ public final class ArrayUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T[] newArray(Class<T> componentType,int length){
+        Validate.notNull(componentType, "componentType can't be null!");
+        Validate.isTrue(length >= 0, "length:[%s],must >=0", length);
         return (T[]) Array.newInstance(componentType, length);
     }
 

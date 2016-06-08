@@ -86,6 +86,21 @@ public class ArrayUtilTest{
         LOGGER.debug("loop count j={},use time:{},\nlist:{}", j, DateExtensionUtil.getIntervalForView(beginDate, new Date()), list);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testNewArray(){
+        ArrayUtil.newArray(null, 5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNewArray1(){
+        ArrayUtil.newArray(Integer.class, -5);
+    }
+
+    @Test
+    public void testNewArray4(){
+        LOGGER.debug(JsonUtil.format(ArrayUtil.newArray(Integer.class, 0)));
+    }
+
     /**
      * TestArrayUtilTest.
      */
