@@ -21,7 +21,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
@@ -44,7 +43,8 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * <p>
  * hashCode重要么?<br>
- * 不重要,对于List集合、数组而言,他就是一个累赘,但是对于HashMap、HashSet、HashTable而言,它变得异常重要.
+ * 对于{@link java.util.List List}集合、数组而言,不重要,他就是一个累赘; <br>
+ * 但是对于{@link java.util.HashMap HashMap}、{@link java.util.HashSet HashSet}、 {@link java.util.Hashtable Hashtable} 而言,它变得异常重要.
  * </p>
  * 
  * <p>
@@ -94,7 +94,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </p>
  * <blockquote>
  * <ol>
- * <li>HashMap 初始容量 {@link java.util.HashMap#DEFAULT_INITIAL_CAPACITY }是16,DEFAULT_LOAD_FACTOR 是0.75
+ * <li>{@link java.util.HashMap HashMap} 初始容量 {@link java.util.HashMap#DEFAULT_INITIAL_CAPACITY }是16,DEFAULT_LOAD_FACTOR 是0.75
  * {@link java.util.HashMap#addEntry } 是 2 * table.length 2倍<br>
  * </ol>
  * </blockquote>
@@ -196,14 +196,20 @@ public final class MapUtil{
     }
 
     /**
-     * 仅当 <code>null != map && null != value</code>才将key/value put到map中.
+     * 仅当 <code>null != map 并且 null != value</code>才将key/value put到map中.
+     * 
+     * <p>
+     * 如果 <code>map</code> 是null,什么都不做<br>
+     * 如果 <code>value</code> 是null,也什么都不做<br>
+     * 如果 <code>key</code> 是null,依照<code>map</code>的<code>key</code>是否允许是null的 规则<br>
+     * </p>
      *
      * @param <K>
      *            the key type
      * @param <V>
      *            the value type
      * @param map
-     *            the map to add to, may not be null
+     *            the map to add to
      * @param key
      *            the key
      * @param value
@@ -218,12 +224,7 @@ public final class MapUtil{
     }
 
     /**
-     * 如果map中存在key,那么累加value值;如果不存在那么直接put.
-     * 
-     * <p>
-     * 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     * </p>
+     * 如果<code>map</code>中存在<code>key</code>,那么累加<code>value</code>值;如果不存在那么直接put.
      * 
      * <h3>示例:</h3>
      * 
@@ -250,6 +251,11 @@ public final class MapUtil{
      * 
      * </blockquote>
      * 
+     * <p>
+     * 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     * </p>
+     * 
      * @param <K>
      *            the key type
      * @param map
@@ -258,11 +264,11 @@ public final class MapUtil{
      *            the key
      * @param value
      *            the value
+     * @see org.apache.commons.collections4.bag.HashBag
      * @see org.apache.commons.lang3.mutable.MutableInt
+     * @see "java.util.Map#getOrDefault(Object, Object)"
      * @see <a href="http://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java">most-efficient-way-to-
      *      increment-a-map-value-in-java</a>
-     * @see "java.util.Map#getOrDefault(Object, Object)"
-     * @see org.apache.commons.collections4.bag.HashBag
      * @since 1.5.5
      */
     public static <K> void putSumValue(Map<K, Integer> map,K key,Integer value){
@@ -274,7 +280,7 @@ public final class MapUtil{
     }
 
     /**
-     * 指定一个map,指定特定的keys,取得其中的 value 最小值.
+     * 指定一个<code>map</code>,指定特定的keys,取得其中的 value 最小值.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -321,7 +327,7 @@ public final class MapUtil{
     }
 
     /**
-     * 获得一个map 中的按照指定的key 整理成新的map.
+     * 获得一个<code>map</code> 中的按照指定的<code>key</code> 整理成新的map.
      * 
      * <p>
      * 注意:如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
@@ -363,7 +369,7 @@ public final class MapUtil{
      * @param keys
      *            如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
      * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};<br>
-     *         如果 <code>keys</code> 是null或者empty,返回 <code>map</code><br>
+     *         如果 <code>keys</code> 是null或者empty,直接返回 <code>map</code><br>
      *         如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
      */
     @SafeVarargs
@@ -461,10 +467,11 @@ public final class MapUtil{
     }
 
     /**
-     * map的key和value互转.
+     * 将<code>map</code>的key和value互转.
      * 
      * <p>
-     * <span style="color:red">这个操作map预先良好的定义</span>.如果传过来的map,不同的key有相同的value,那么返回的map(key)只会有一个(value),其他重复的key被丢掉了
+     * <span style="color:red">这个操作map预先良好的定义</span>.<br>
+     * 如果传过来的map,不同的key有相同的value,那么返回的map(key)只会有一个(value),其他重复的key被丢掉了
      * </p>
      * 
      * <h3>示例:</h3>
@@ -739,8 +746,7 @@ public final class MapUtil{
      */
     public static <K, V> Map<K, V> sortByKeyDesc(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
-        PropertyComparator<Entry<K, V>> propertyComparator = new PropertyComparator<Map.Entry<K, V>>("key");
-        return sort(map, new ReverseComparator<Map.Entry<K, V>>(propertyComparator));
+        return sort(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("key")));
     }
 
     /**
@@ -817,14 +823,13 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果<code>map</code>是null,抛出异常<br>
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #sort(Map, Comparator)
      * @since 1.2.0
      */
     public static <K, V extends Comparable<V>> Map<K, V> sortByValueDesc(Map<K, V> map){
-        PropertyComparator<Entry<K, V>> propertyComparator = new PropertyComparator<Map.Entry<K, V>>("value");
-        Comparator<Entry<K, V>> comparator = new ReverseComparator<Map.Entry<K, V>>(propertyComparator);
-        return sort(map, comparator);
+        Validate.notNull(map, "map can't be null!");
+        return sort(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("value")));
     }
 
     /**
@@ -892,8 +897,8 @@ public final class MapUtil{
      *            the map
      * @param mapEntryComparator
      *            基于 {@link java.util.Map.Entry Entry} 的 {@link Comparator}
-     * @return 如果<code>map</code>是null,抛出异常<br>
-     *         如果<code>mapEntryComparator</code>是null,抛出异常
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>mapEntryComparator</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.util.Collections#sort(List, Comparator)
      * @since 1.2.0
      */
@@ -921,7 +926,6 @@ public final class MapUtil{
      */
     private static <V, K> Map<K, V> toMap(List<Map.Entry<K, V>> mapEntryList){
         Map<K, V> returnMap = new LinkedHashMap<K, V>(mapEntryList.size());
-
         for (Map.Entry<K, V> entry : mapEntryList){
             returnMap.put(entry.getKey(), entry.getValue());
         }
