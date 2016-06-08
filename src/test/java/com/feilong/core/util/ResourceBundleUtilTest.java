@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.junit.Test;
@@ -60,7 +61,7 @@ public class ResourceBundleUtilTest{
         assertEquals("a ", ResourceBundleUtil.getValue(BASE_NAME, "with_space_value"));
     }
 
-    @Test
+    @Test(expected = MissingResourceException.class)
     public void testBaseNameNotExits(){
         assertEquals("", ResourceBundleUtil.getValue("file_wo_bu_cun_zai", "wo_bu_cun_zai"));
     }
@@ -77,7 +78,8 @@ public class ResourceBundleUtilTest{
 
     @Test
     public void testGetValue11(){
-        assertEquals(null, ResourceBundleUtil.getValue(BASE_NAME, "wo_bu_cun_zai", Integer.class));
+        Integer parseInt = Integer.parseInt("0");
+        assertEquals(parseInt, ResourceBundleUtil.getValue(BASE_NAME, "wo_bu_cun_zai", Integer.class));
     }
 
     /**
