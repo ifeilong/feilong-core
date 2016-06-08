@@ -97,7 +97,7 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getChineseWeek(0)  return 星期日
+     * DateExtensionUtil.getChineseWeek(0) = 星期日
      * </pre>
      * 
      * </blockquote>

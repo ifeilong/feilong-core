@@ -60,12 +60,8 @@ public class StringUtilTemp{
      * 查找子字符串在 字符串中出现的次数.
      * 
      * <pre class="code">
-     *  StringUtil.searchTimes("xin", "xin")
-     *  return  1
-     *  
-     * StringUtil.searchTimes("xiiiin", "ii")
-     *  return  2
-     * 
+     * StringUtil.searchTimes("xin", "xin")     = 1
+     * StringUtil.searchTimes("xiiiin", "ii")   = 2
      * </pre>
      *
      * @param source

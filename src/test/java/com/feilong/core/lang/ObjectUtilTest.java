@@ -125,7 +125,7 @@ public class ObjectUtilTest{
      *            the generic type
      * @param arrays
      *            数组,可以是 对象数组,或者是 基本类型数组
-     * @return 如果 (null == arrays) return null;<br>
+     * @return 如果 (null == arrays) 返回 null;<br>
      *         否则会先将arrays转成Object[]数组,调用 {@link Arrays#asList(Object...)}转成list,再调用 {@link List#iterator()
      *         t}<br>
      *         对于基本类型的数组,由于不是 Object[],会有类型转换异常,此时先通过 {@link Array#getLength(Object)}取到数组长度,循环调用 {@link Array#get(Object, int)}设置到 list中

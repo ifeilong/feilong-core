@@ -160,7 +160,7 @@ public final class CalendarUtil{
     /**
      * 获得指定日期的00:00:00.
      * <p>
-     * 例如: <code>2011-01-01 10:20:20 return 2011-01-01 00:00:00</code>
+     * 例如: <code>2011-01-01 10:20:20 返回 2011-01-01 00:00:00</code>
      * </p>
      * 
      * @param date

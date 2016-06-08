@@ -119,7 +119,7 @@ public final class DateExtensionUtil{
      * <pre class="code">
      * 比如今天是 2012-10-16 22:18:34
      * 
-     * return {2012-10-16 00:00:00.000,2012-10-17 00:00:00.000}
+     * 返回 {2012-10-16 00:00:00.000,2012-10-17 00:00:00.000}
      * </pre>
      * 
      * @return Date数组 第一个为today 第二个为tomorrow
@@ -142,7 +142,7 @@ public final class DateExtensionUtil{
      * <pre class="code">
      * 比如现在 :2012-10-16 22:46:42
      * 
-     * return  {2012-10-15 00:00:00.000,2012-10-16 00:00:00.000}
+     * 返回  {2012-10-15 00:00:00.000,2012-10-16 00:00:00.000}
      * </pre>
      * 
      * @return Date数组 <br>
@@ -308,8 +308,8 @@ public final class DateExtensionUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateExtensionUtil.getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24)             return 2小时59分44秒
-     * DateExtensionUtil.getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)    return 1分钟1秒
+     * DateExtensionUtil.getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24)             = 2小时59分44秒
+     * DateExtensionUtil.getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)    = 1分钟1秒
      * 
      * 自动增加 天,小时,分钟,秒,毫秒中文文字
      * </pre>

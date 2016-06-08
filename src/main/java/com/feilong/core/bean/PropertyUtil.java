@@ -188,7 +188,7 @@ public final class PropertyUtil{
      * 返回一个<code>bean</code>中所有的<span style="color:green">可读属性</span>,并将属性名/属性值放入一个Map中.
      * 
      * <p>
-     * Return the entire set of properties for which the specified bean provides a read method.
+     * 返回 the entire set of properties for which the specified bean provides a read method.
      * </p>
      * 
      * <p>

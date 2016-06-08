@@ -963,18 +963,6 @@ public final class ParamUtil{
      * 
      * </blockquote>
      * 
-     * 
-     * <h3>代码流程:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <ol>
-     * <li>{@code if isNullOrEmpty(filePath)---->} return {@link StringUtils#EMPTY}</li>
-     * <li>singleValueMap to naturalOrderingMap(TreeMap)</li>
-     * <li>for naturalOrderingMap's entrySet(),join key and value use =,join each entry use {@code &}</li>
-     * </ol>
-     * </blockquote>
-     *
      * @param singleValueMap
      *            用于拼接签名的参数
      * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>

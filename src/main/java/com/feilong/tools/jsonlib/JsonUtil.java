@@ -305,7 +305,7 @@ public final class JsonUtil{
      *            the input map
      * @param allowFormatClassTypes
      *            除了基本类型,数组之外允许的类型,请确保该类型可以被json format输出
-     * @return 如果 <code>inputMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>inputMap</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @since 1.3.0
      */
     public static <K, V> String formatSimpleMap(Map<K, V> inputMap,Class<?>...allowFormatClassTypes){
@@ -354,7 +354,7 @@ public final class JsonUtil{
      *            对象
      * @param excludes
      *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
-     * @return 如果 null==obj 返回 {@code null}; {@link #format(Object, JsonConfig)}
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see #format(Object, JsonConfig)
      * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">java.lang.ClassCastException: JSON keys must be strings</a>
      */
@@ -369,7 +369,7 @@ public final class JsonUtil{
      *            the obj
      * @param includes
      *            the includes
-     * @return 如果 <code>obj</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @since 1.0.8
      */
     public static String formatWithIncludes(Object obj,final String...includes){
@@ -391,7 +391,8 @@ public final class JsonUtil{
      *            the obj
      * @param jsonConfig
      *            the json config
-     * @return 如果 null==obj 返回 {@code null}; else return toJSON(obj, jsonConfig).toString(4, 4)
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         否则返回 toJSON(obj, jsonConfig).toString(4, 4)
      * @see net.sf.json.JsonConfig
      * @see #toJSON(Object, JsonConfig)
      * @see net.sf.json.JSON#toString(int, int)
@@ -430,7 +431,7 @@ public final class JsonUtil{
      *            the indent factor
      * @param indent
      *            the indent
-     * @return 如果 <code>obj</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      */
     public static String format(Object obj,String[] excludes,Integer indentFactor,Integer indent){
         if (null == obj){
@@ -519,7 +520,7 @@ public final class JsonUtil{
      *            The number of spaces to add to each level of indentation.
      * @param indent
      *            The indentation of the top level.
-     * @return 如果 <code>obj</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      *         a printable,displayable,transmittable representation of the object,<br>
      *         beginning with{ (left brace) and ending with }(right brace).
      * @since 1.0.8

@@ -155,24 +155,13 @@ public final class FieldUtil{
     }
 
     /**
-     * 获得这个对象排除某些field之后的字段list.
+     * 获得这个对象 <code>obj</code> 排除某些 <code>excludeFieldNames</code> 之后的字段list.
      * 
-     * <h3>代码流程:</h3>
-     * 
-     * <blockquote>
-     * <ol>
-     * <li><code>if isNullOrEmpty(fields) return emptyList</code></li>
-     * <li>获得一个对象所有的声明字段(包括私有的,继承的) {@link #getAllFields(Object)}</li>
-     * <li>排除掉 <code>excludeFieldNames</code></li>
-     * <li>去掉 {@link Modifier#isPrivate(int)} and {@link Modifier#isStatic(int)}</li>
-     * </ol>
-     * </blockquote>
-     *
      * @param obj
      *            the obj
      * @param excludeFieldNames
      *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
-     * @return the field value map
+     * @return 如果 <code>getAllFields(obj)</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see #getAllFields(Object)
      * @since 1.4.0
      */
@@ -188,7 +177,6 @@ public final class FieldUtil{
 
         for (Field field : fields){
             String fieldName = field.getName();
-
             if (Validator.isNotNullOrEmpty(excludeFieldNames) && ArrayUtils.contains(excludeFieldNames, fieldName)){
                 continue;
             }
@@ -215,7 +203,6 @@ public final class FieldUtil{
      * @see java.lang.Class#getSuperclass()
      * @see java.lang.reflect.Field
      * @see org.apache.commons.lang3.ArrayUtils#addAll(boolean[], boolean...)
-     * 
      * @see #getAllFields(Class)
      */
     private static Field[] getAllFields(Object obj){
