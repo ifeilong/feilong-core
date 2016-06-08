@@ -719,7 +719,7 @@ public final class ParamUtil{
     //*********************************************************************************
 
     /**
-     * 将<code>a=1&b=2</code>这样格式的数据转换成map (如果charsetType不是null或者empty 返回安全的 key和value).
+     * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType不是null或者empty 返回安全的 key和value).
      * 
      * <p>
      * 内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序

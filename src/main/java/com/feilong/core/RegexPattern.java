@@ -256,7 +256,8 @@ public final class RegexPattern{
      * @see <a href="http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/">how-to-validate-email
      *      -address-with-regular-expression</a>
      * @see <a href="https://en.wikipedia.org/wiki/Email_address">Email_address</a>
-     * @deprecated 建议使用 commons-validator {@link "org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(emailString)"}
+     * @deprecated 建议使用 commons-validator
+     *             {@linkplain "org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(emailString)"}
      *             ,验证更加完善,会对user 和domain再次校验
      */
     @Deprecated
@@ -267,7 +268,7 @@ public final class RegexPattern{
      * IP 的正则表达式 <code>{@value}</code>.
      * 
      * @deprecated 建议使用 commons-validator
-     *             {@link "org.apache.commons.validator.routines.InetAddressValidator.getInstance().isValid(emailString)"}
+     *             {@linkplain "org.apache.commons.validator.routines.InetAddressValidator.getInstance().isValid(emailString)"}
      */
     @Deprecated
     public static final String IP                = "^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$";
@@ -315,7 +316,8 @@ public final class RegexPattern{
     /**
      * 网址Url 链接 <code>{@value}</code>.
      * 
-     * @deprecated 建议使用 commons-validator {@link "org.apache.commons.validator.routines.DomainValidator.getInstance().isValid(emailString)"}
+     * @deprecated 建议使用 commons-validator
+     *             {@linkplain "org.apache.commons.validator.routines.DomainValidator.getInstance().isValid(emailString)"}
      */
     @Deprecated
     public static final String URLLINK           = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
