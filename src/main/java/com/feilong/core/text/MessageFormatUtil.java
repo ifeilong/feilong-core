@@ -45,8 +45,9 @@ public final class MessageFormatUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * MessageFormatUtil.format(&quot;name=张三{0}a{1}&quot;, &quot;jin&quot;, &quot;xin&quot;)
-     * 返回: name=张三jinaxin
+     * MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin")                                             =   "name=张三jinaxin"
+     * MessageFormatUtil.format("name=张三{0,number}a{1}", 5, "xin")                                          =   "name=张三5axin"
+     * MessageFormatUtil.format("name=张三{0,date}a{1}", DateUtil.toDate("2000", DatePattern.yyyy), "xin")    =   "name=张三2000-1-1axin"
      * </pre>
      * 
      * </blockquote>

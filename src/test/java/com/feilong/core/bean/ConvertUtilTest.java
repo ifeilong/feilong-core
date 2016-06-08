@@ -309,8 +309,9 @@ public class ConvertUtilTest{
 
     @Test
     public void testConvert2(){
-        LOGGER.info("{}", ConvertUtil.convert("1", Integer.class));
-        LOGGER.info("{}", ConvertUtil.convert("1", Long.class));
+        assertEquals(1, ConvertUtil.convert("1", Integer.class).intValue());
+        assertEquals(1, ConvertUtil.convert("1", Long.class).intValue());
+        assertEquals(0, ConvertUtil.convert("", Integer.class).intValue());
     }
 
     /**

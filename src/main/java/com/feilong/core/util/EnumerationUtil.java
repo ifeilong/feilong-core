@@ -16,7 +16,6 @@
 package com.feilong.core.util;
 
 import java.util.Enumeration;
-import java.util.Iterator;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
@@ -62,14 +61,6 @@ public final class EnumerationUtil{
 
     /**
      * 判断<code>enumeration</code>枚举里面,是否有指定的元素<code>value</code>.
-     * 
-     * <h3>代码流程:</h3>
-     * <blockquote>
-     * <ol>
-     * <li><code>if isNullOrEmpty(enumeration) return false</code></li>
-     * <li>调用 {@link IteratorUtils#contains(Iterator, Object)},如果contains 返回true</li>
-     * </ol>
-     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -77,8 +68,9 @@ public final class EnumerationUtil{
      *            the enumeration
      * @param value
      *            指定的元素
-     * @return 如果enumeration 是null或者Empty,返回false;<br>
-     *         否则 如果 contains 返回true,其他返回false
+     * @return 如果 <code>enumeration</code> 是null或者empty,返回 false<br>
+     *         否则如果 contains 返回true,<br>
+     *         其他返回false
      * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
      * @see org.apache.commons.collections4.iterators#EnumerationIterator
      * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)

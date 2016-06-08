@@ -60,6 +60,26 @@ public class ResourceBundleUtilTest{
         assertEquals("a ", ResourceBundleUtil.getValue(BASE_NAME, "with_space_value"));
     }
 
+    @Test
+    public void testBaseNameNotExits(){
+        assertEquals("", ResourceBundleUtil.getValue("file_wo_bu_cun_zai", "wo_bu_cun_zai"));
+    }
+
+    @Test
+    public void testNull(){
+        assertEquals("", ResourceBundleUtil.getValue(BASE_NAME, "wo_bu_cun_zai"));
+    }
+
+    @Test
+    public void testEmpty(){
+        assertEquals("", ResourceBundleUtil.getValue("messages.empty", "wo_bu_cun_zai"));
+    }
+
+    @Test
+    public void testGetValue11(){
+        assertEquals(null, ResourceBundleUtil.getValue(BASE_NAME, "wo_bu_cun_zai", Integer.class));
+    }
+
     /**
      * Gets the value with arguments.
      * 

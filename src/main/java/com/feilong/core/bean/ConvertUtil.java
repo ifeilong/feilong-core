@@ -1060,11 +1060,9 @@ public final class ConvertUtil{
      *            <li>{@link org.w3c.dom.Node}</li>
      *            <li>{@link org.w3c.dom.NodeList}</li>
      *            </ul>
-     * @return
-     *         <ul>
-     *         <li>如果 null == object 返回null,</li>
-     *         <li>否则转成 {@link IteratorUtils#getIterator(Object)}</li>
-     *         </ul>
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
+     *         如果 <code>toBeConvertedValue</code> 是字符串,先转成数组,再转成迭代器<br>
+     *         否则转成 {@link IteratorUtils#getIterator(Object)}
      * @see Collection#iterator()
      * @see EnumerationIterator#EnumerationIterator(Enumeration)
      * @see IteratorUtils#getIterator(Object)
@@ -1084,10 +1082,11 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将<code>value</code>转成指定<code>targetType</code>类型的对象.
+     * 将<code>toBeConvertedValue</code>转成指定<code>targetType</code>类型的对象.
      * 
      * <p>
-     * 如果<code>targetType</code>的转换器没有注册,那么传入的value原样返回.
+     * 如果<code>targetType</code>的转换器没有注册,那么传入的value原样返回.<br>
+     * 如果转换不了,会使用默认值
      * </p>
      * 
      * <h3>示例:</h3>
@@ -1096,6 +1095,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * ConvertUtil.convert("1", Integer.class)      =1
+     * ConvertUtil.convert("", Integer.class)       =0
      * ConvertUtil.convert("1", Long.class)         =1
      * </pre>
      * 
@@ -1127,7 +1127,7 @@ public final class ConvertUtil{
      *            the value
      * @param targetType
      *            the target type
-     * @return 如果 <code>value</code> 是null,返回null<br>
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
      *         如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
      *         否则返回 {@link org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)}
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)

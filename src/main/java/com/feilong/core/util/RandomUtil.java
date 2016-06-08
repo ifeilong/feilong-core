@@ -78,8 +78,7 @@ public final class RandomUtil{
      * 
      * @param maxValue
      *            随机数最大值
-     * @return 创建0-最大值之间的随机数<br>
-     *         如果 <code>maxValue</code> 是null,那么抛出 {@link java.lang.NullPointerException NullPointerException}
+     * @return 如果 <code>maxValue</code> 是null,那么抛出 {@link NullPointerException}
      */
     public static long createRandom(Number maxValue){
         Validate.notNull(maxValue, "maxValue can't be null!");
@@ -106,12 +105,10 @@ public final class RandomUtil{
      *            最小值
      * @param maxValue
      *            最大值
-     * @return 创建最小值 <code>minValue</code> 和最大值 <code>maxValue</code> 之间的随机数<br>
-     *         如果 <code>minValue</code>是 null,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
-     *         如果 <code>maxValue</code>是 null,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
-     *         如果 <code>maxLong</code>{@code <} <code>minLong</code>,抛出 {@link java.lang.IllegalArgumentException
-     *         IllegalArgumentException}<br>
-     *         如果 <code>minLong</code>{@code =} <code>maxLong</code>,直接返回 <code>minLong</code>
+     * @return 如果 <code>minValue</code>是 null,抛出 {@link NullPointerException};<br>
+     *         如果 <code>maxValue</code>是 null,抛出 {@link NullPointerException};<br>
+     *         如果 <code>maxLong</code>{@code <}<code>minLong</code>,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>minLong</code>{@code =}<code>maxLong</code>,直接返回 <code>minLong</code>
      * 
      * @see org.apache.commons.lang3.RandomUtils#nextInt(int, int)
      * @see org.apache.commons.lang3.RandomUtils#nextLong(long, long)
@@ -146,8 +143,7 @@ public final class RandomUtil{
      *
      * @param length
      *            设定所取出随机数的长度.
-     * @return 返回生成的随机数<br>
-     *         如果 <code>length</code> {@code <=0} ,抛出 {@link IllegalArgumentException}
+     * @return 如果 <code>length</code> {@code <=0} ,抛出 {@link IllegalArgumentException}
      */
     public static long createRandomWithLength(int length){
         Validate.isTrue(length > 0, "length:[%s] must >0", length);
@@ -186,12 +182,10 @@ public final class RandomUtil{
      * @param maxLength
      *            最大长度,比如示例中的 20
      * 
-     * @return 随机抽取字符串char,拼接最小长度是 <code>minLength</code>,最大长度是<code>maxLength</code>的字符串随机字符串. <br>
-     *         如上述示例,可能返回142853574998970631<br>
-     *         如果 <code>str</code> 是null,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
-     *         如果 <code>str</code> 是 is blank,抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException};<br>
-     *         如果 <code>maxLength</code> {@code <=}0 ,抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException}<br>
-     *         如果 <code>maxLength</code> {@code <} minLength,抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException}
+     * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>str</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>maxLength</code> {@code <=}0 ,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>maxLength</code> {@code <} minLength,抛出 {@link IllegalArgumentException}
      * 
      * @see #createRandomFromString(String, int)
      */
@@ -224,10 +218,9 @@ public final class RandomUtil{
      *            被抽取的字符串,比如{@link com.feilong.core.Alphabet#DECIMAL_AND_LETTERS}
      * @param length
      *            指定字符串长度,比如 5
-     * @return 得到随机字符串;<br>
-     *         如果 <code>str</code> 是null 或者 empty,抛出 {@link java.lang.NullPointerException NullPointerException};<br>
-     *         如果 <code>str</code> 是isBlank,抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException};<br>
-     *         如果 <code>length</code> {@code <=0}, 抛出 {@link java.lang.IllegalArgumentException IllegalArgumentException}
+     * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>str</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>length</code> {@code <=0}, 抛出 {@link IllegalArgumentException}
      * 
      * @see org.apache.commons.lang3.RandomStringUtils#random(int, String)
      */

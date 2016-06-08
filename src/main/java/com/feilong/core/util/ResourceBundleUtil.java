@@ -83,20 +83,27 @@ public final class ResourceBundleUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    // ****************************getValue*************************************************
     /**
      * 获取Properties配置文件键值,转换成指定的 <code>typeClass</code> 类型返回.
      * 
      * @param <T>
      *            the generic type
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param key
      *            the key
      * @param typeClass
-     *            指明返回类型, 如果是String.class,则转换成String返回; 如果是Integer.class,则转换成Integer返回
-     * @return 如果 <code>typeClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *            指明返回类型,<br>
+     *            如果是String.class,则转换成String返回;<br>
+     *            如果是Integer.class,则转换成Integer返回
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     *         如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>typeClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getValue(String, String)
      * @see ConvertUtil#convert(Object, Class)
      */
@@ -118,7 +125,9 @@ public final class ResourceBundleUtil{
      *            指明返回类型,<br>
      *            如果是String.class,则返回的是String <br>
      *            如果是Integer.class,则返回的是Integer
-     * @return 如果 <code>typeClass</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>typeClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getValue(ResourceBundle, String)
      * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
      */
@@ -131,12 +140,20 @@ public final class ResourceBundleUtil{
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      *
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param key
      *            Properties配置文件键名
-     * @return 该键的值
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     *         如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果配置文件中,
+     *         <ul>
+     *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
+     *         <li>key存在,但value是null 或者 empty,返回value</li>
+     *         </ul>
      * @see #getResourceBundle(String)
      * @see #getValue(ResourceBundle, String)
      */
@@ -149,14 +166,22 @@ public final class ResourceBundleUtil{
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      *
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param key
      *            Properties配置文件键名
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 该键的值
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     *         如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果配置文件中,
+     *         <ul>
+     *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
+     *         <li>key存在,但value是null 或者 empty,返回value</li>
+     *         </ul>
      * @see #getResourceBundle(String, Locale)
      * @see #getValue(ResourceBundle, String)
      */
@@ -166,36 +191,10 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 带参数的 配置文件.
-     * 
-     * <p>
-     * 格式如:name={0}.
-     * </p>
-     * 
-     * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
-     * @param key
-     *            the key
-     * @param locale
-     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @param arguments
-     *            此处可以传递Object[]数组过来
-     * @return the value with arguments
-     * @see #getResourceBundle(String, Locale)
-     * @see #getValueWithArguments(ResourceBundle, String, Object...)
-     */
-    public static String getValueWithArguments(String baseName,String key,Locale locale,Object...arguments){
-        ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
-        return getValueWithArguments(resourceBundle, key, arguments);
-    }
-
-    /**
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
-     * 
+     *
      * @param resourceBundle
-     *            配置文件的包+类全名(不要尾缀)
+     *            the resource bundle
      * @param key
      *            Properties配置文件键名
      * @return 如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
@@ -220,6 +219,34 @@ public final class ResourceBundleUtil{
             LOGGER.debug("resourceBundle has key:[{}],but value is null/empty", key);
         }
         return value;
+    }
+
+    // ****************************with Arguments*************************************************
+    /**
+     * 带参数的 配置文件.
+     * 
+     * <p>
+     * 格式如:name={0}.
+     * </p>
+     * 
+     * @param baseName
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
+     * @param key
+     *            the key
+     * @param locale
+     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
+     * @param arguments
+     *            此处可以传递Object[]数组过来
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     * @see #getResourceBundle(String, Locale)
+     * @see #getValueWithArguments(ResourceBundle, String, Object...)
+     */
+    public static String getValueWithArguments(String baseName,String key,Locale locale,Object...arguments){
+        ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
+        return getValueWithArguments(resourceBundle, key, arguments);
     }
 
     /**
@@ -252,14 +279,15 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param key
      *            the key
      * @param delimiters
      *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
-     * @return 如果资源值不存在,返回null
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
      * @see #getArray(ResourceBundle, String, String, Class)
      */
     public static String[] getArray(String baseName,String key,String delimiters){
@@ -326,9 +354,8 @@ public final class ResourceBundleUtil{
      * @param <T>
      *            the generic type
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param key
      *            the key
      * @param delimiters
@@ -337,7 +364,9 @@ public final class ResourceBundleUtil{
      *            指明返回类型,<br>
      *            如果是String.class,则返回的是String []数组<br>
      *            如果是Integer.class,则返回的是Integer [] 数组
-     * @return 如果 资源值不存在,返回null
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
      * @see #getResourceBundle(String)
      * @see #getArray(ResourceBundle, String, String, Class)
      */
@@ -446,16 +475,18 @@ public final class ResourceBundleUtil{
      * </blockquote>
      *
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param prefix
      *            前缀
      * @param delimiters
      *            the delimiters
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     *         如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则解析所有的key和value转成HashMap
      * @see #readAllPropertiesToMap(String, Locale)
      */
@@ -489,10 +520,12 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
-     * @return 如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     *         如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则,解析所有的key和value转成 {@link TreeMap}
      * @see #readAllPropertiesToMap(String, Locale)
      * @since 1.2.1
@@ -510,13 +543,13 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
      *         如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则,解析所有的key和value转成 {@link TreeMap}<br>
      * @see #getResourceBundle(String, Locale)
@@ -563,16 +596,18 @@ public final class ResourceBundleUtil{
         return propertyMap;
     }
 
+    //********************************getResourceBundle**********************************************
+
     /**
-     * 获得ResourceBundle.
+     * 使用 {@link Locale#getDefault()} 获得{@link ResourceBundle}.
      * 
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
-     * @return the resource bundle <br>
-     *         如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     *         如果资源文件 <code>baseName</code> 里面没有任何内容,返回不是null的 {@link ResourceBundle}
      * @see java.util.Locale#getDefault()
      * @see #getResourceBundle(String, Locale)
      */
@@ -581,29 +616,23 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 获得ResourceBundle.
+     * 获得{@link ResourceBundle}.
      * 
      * @param baseName
-     *            是一个完全限定类名,配置文件的包+类全名,比如 message.feilong-core-test <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了与早期的版本兼容,Sun的 JRE并不对此进行检查,可通过指定路径名(使用 "/")而不是完全限定类名(使用 ".")来访问 {@link PropertyResourceBundle}
-     *            ,比如message/feilong-core-test
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return the resource bundle,may be null<br>
-     *         如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     *         如果资源文件 <code>baseName</code> 里面没有任何内容,返回不是null的 {@link ResourceBundle}
      * @see java.util.ResourceBundle#getBundle(String, Locale)
      */
     public static ResourceBundle getResourceBundle(String baseName,Locale locale){
         Validate.notBlank(baseName, "baseName can't be null/empty!");
-
         Locale useLocale = null == locale ? Locale.getDefault() : locale;
-
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(baseName, useLocale);
-        if (null == resourceBundle){
-            LOGGER.warn("resourceBundle is null,baseName:{},locale:{}", resourceBundle, baseName, useLocale);
-        }
-        return resourceBundle;
+        return ResourceBundle.getBundle(baseName, useLocale);
     }
 
     //*****************************************************************************
