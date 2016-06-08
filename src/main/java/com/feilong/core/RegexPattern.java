@@ -296,7 +296,7 @@ public final class RegexPattern{
      * </p>
      * </blockquote>
      * 
-     * <h3>{@link <a href="http://www.dvbcn.com/2014/09/23-113699.html">176、177、178段</a>}</h3>
+     * <h3><a href="http://www.dvbcn.com/2014/09/23-113699.html">176、177、178段</a></h3>
      * 
      * <blockquote>
      * <p>

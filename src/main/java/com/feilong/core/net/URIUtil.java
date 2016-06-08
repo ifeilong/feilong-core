@@ -90,7 +90,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ul>
  * </blockquote>
  * 
- * <h3>关于 URI path parameter(Matrix URIs) {@link <a href="http://www.w3.org/DesignIssues/MatrixURIs.html">MatrixURIs</a>}:</h3>
+ * <h3>关于 URI path parameter(Matrix URIs) <a href="http://www.w3.org/DesignIssues/MatrixURIs.html">MatrixURIs</a>:</h3>
  * 
  * <blockquote>
  * 
@@ -152,7 +152,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <p>
  * 每一个path片段 可以有可选的 path参数 (也叫 matrix参数),这是在path片段的最后由";"开始的一些字符.每个参数名和值由"="字符分隔,像这样:"/file;p=1",这定义了path片段 "file"有一个 path参数 "p",其值为"1".<br>
  * 这些参数并不常用 — 这得清楚 — 但是它们确实是存在,而且从 Yahoo RESTful API 文档我们能找到很好的理由去使用它们: Matrix参数可以让程序在GET请求中可以获取部分的数据集.参考
- * {@link <a href="https://developer.yahoo.com/social/rest_api_guide/partial-resources.html#paging-collection">数据集的分页</a>}
+ * <a href="https://developer.yahoo.com/social/rest_api_guide/partial-resources.html#paging-collection">数据集的分页</a>
  * .因为matrix参数可以跟任何数据集的URI格式的path片段,它们可以在内部的path片段中被使用.
  * </p>
  * </blockquote>

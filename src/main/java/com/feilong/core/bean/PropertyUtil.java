@@ -144,7 +144,7 @@ public final class PropertyUtil{
      * <li>commons-beanutils v1.9.0以前的版本 BeanUtils不允许对象的属性值为 null,PropertyUtils可以拷贝属性值 null的对象.<br>
      * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
      * of certain data types),具体信息,可以参阅commons-beanutils的
-     * {@link <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a>}</li>
+     * <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a></li>
      * </ul>
      * </blockquote>
      * 
@@ -270,7 +270,7 @@ public final class PropertyUtil{
      * @param bean
      *            Bean whose property is to be modified
      * @param propertyName
-     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="../BeanUtil.html#propertyName">propertyName</a>
      * @param value
      *            Value to which this property is to be set
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
@@ -293,7 +293,7 @@ public final class PropertyUtil{
      * @param bean
      *            Bean whose property is to be modified
      * @param propertyName
-     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="../BeanUtil.html#propertyName">propertyName</a>
      * @param value
      *            Value to which this property is to be set
      * @since 1.5.3
@@ -310,7 +310,7 @@ public final class PropertyUtil{
      * @param bean
      *            Bean whose property is to be modified
      * @param propertyName
-     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="../BeanUtil.html#propertyName">propertyName</a>
      * @param value
      *            Value to which this property is to be set
      * @since 1.5.3
@@ -337,7 +337,7 @@ public final class PropertyUtil{
      * @param bean
      *            Bean whose property is to be extracted
      * @param propertyName
-     *            属性名称 (can be nested/indexed/mapped/combo),参见 {@link <a href="../BeanUtil.html#propertyName">propertyName</a>}
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="../BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>bean</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>

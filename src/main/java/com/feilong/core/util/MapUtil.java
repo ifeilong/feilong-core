@@ -563,7 +563,7 @@ public final class MapUtil{
      *            the map
      * @param extractPropertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param keysClass
      *            map key 的class 类型
      * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
@@ -623,7 +623,7 @@ public final class MapUtil{
      *            the include keys
      * @param extractPropertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param keysClass
      *            map key 的class 类型
      * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>

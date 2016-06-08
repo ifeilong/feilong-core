@@ -71,7 +71,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
     /**
      * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     * {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>},该属性的value 必须实现 {@link Comparable}接口.
+     * <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性的value 必须实现 {@link Comparable}接口.
      */
     private final String                propertyName;
 
@@ -96,7 +96,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * list.add(new User(2L, 36));
      * list.add(new User(5L, 22));
      * list.add(new User(1L, 8));
-     * Collections.sort(list, new PropertyComparator<User>("id"));
+     * Collections.sort(list, new PropertyComparator{@code <User>}("id"));
      * LOGGER.debug(JsonUtil.format(list));
      * </pre>
      * 
@@ -121,6 +121,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         }]
      * </pre>
      * 
+     * </blockquote>
      *
      * @param propertyName
      *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
@@ -169,7 +170,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * CourseEntity courseEntity2 = new CourseEntity();
      * courseEntity2.setTotalNo("13");
      * 
-     * List<CourseEntity> courseList = new ArrayList<>();
+     * List{@code <CourseEntity>} courseList = new ArrayList{@code <>}();
      * courseList.add(courseEntity1);
      * courseList.add(courseEntity2);
      * </pre>
@@ -216,7 +217,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>},该属性对应的value 必须实现 {@link Comparable}接口.
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性对应的value 必须实现 {@link Comparable}接口.
      * @param propertyValueConvertToClass
      *            反射提取出来的值,需要类型转成到的类型
      * @since 1.5.0
@@ -239,7 +240,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>},该属性对应的value 必须实现 {@link Comparable}接口.
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性对应的value 必须实现 {@link Comparable}接口.
      * @param propertyValueConvertToClass
      *            反射提取出来的值,需要类型转成到的类型
      * @param comparator

@@ -35,7 +35,7 @@ public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
 
     /**
      * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     * {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}.
+     * <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>.
      */
     private final String propertyName;
 
@@ -47,7 +47,7 @@ public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
      *
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValue
      *            the value
      */

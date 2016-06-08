@@ -230,7 +230,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </table>
  * </blockquote>
  * 
- * <h3>{@link <a href="http://stamen.iteye.com/blog/2003458">SET-MAP现代诗一首</a>}</h3>
+ * <h3><a href="http://stamen.iteye.com/blog/2003458">SET-MAP现代诗一首</a></h3>
  * 
  * <blockquote>
  * <ul>
@@ -358,7 +358,7 @@ public final class CollectionsUtil{
      *            the list
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValue
      *            the value
      * @return 在list中,查找 第一个 属性 <code>propertyName</code> 值是 指定值 <code>value</code>的 索引位置<br>
@@ -457,7 +457,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
      *            the values
      * @return a <code>List</code> containing all the elements of <code>c</code> except
@@ -540,7 +540,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the values
      * @return a <code>List</code> containing all the elements of <code>c</code> except
@@ -787,7 +787,7 @@ public final class CollectionsUtil{
      *            任何可以迭代的对象
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成List(ArrayList),<br>
      *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty ArrayList<br>
      *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;
@@ -833,7 +833,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成Set(LinkedHashSet),<br>
      *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty LinkedHashSet<br>
      *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;
@@ -857,7 +857,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param returnCollection
      *            the return collection
      * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 <code>returnCollection</code>
@@ -991,7 +991,7 @@ public final class CollectionsUtil{
      *            the iterable
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValue
      *            指定的值
      * @return 如果 <code>iterable</code>是null, 返回null<br>
@@ -1099,7 +1099,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the values
      * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
@@ -1159,7 +1159,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
      *            the values
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
@@ -1231,7 +1231,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the values
      * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}<br>
@@ -1290,7 +1290,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
      *            the values
      * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}<br>
@@ -1375,7 +1375,7 @@ public final class CollectionsUtil{
      *            the object list
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
@@ -1449,7 +1449,7 @@ public final class CollectionsUtil{
      *            the object list
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param includePredicate
      *            the include predicate
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
@@ -1536,7 +1536,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
@@ -1584,7 +1584,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
@@ -1612,7 +1612,7 @@ public final class CollectionsUtil{
      *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
@@ -1664,7 +1664,7 @@ public final class CollectionsUtil{
      *            平均数值的精度
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -1720,7 +1720,7 @@ public final class CollectionsUtil{
      *            平均数值的精度
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
@@ -1784,7 +1784,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
@@ -1855,7 +1855,7 @@ public final class CollectionsUtil{
      *            the include predicate
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
@@ -1918,7 +1918,7 @@ public final class CollectionsUtil{
      * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
      *     Integer qty = 0;
      *     //获取cookie中的购物车行集合
-     *     if (null != cartLineList && cartLineList.size() > 0){
+     *     if ({@code null != cartLineList && cartLineList.size() > 0}){
      *         for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();){
      *             CookieShoppingCartLine cookieShoppingCartLine = (CookieShoppingCartLine) iterator.next();
      *             qty += cookieShoppingCartLine.getQuantity();
@@ -1943,7 +1943,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
@@ -1976,7 +1976,7 @@ public final class CollectionsUtil{
      * 
      *     {@code @Override}
      *     public boolean evaluate(User user){
-     *         return user.getId() > 10L;
+     *         return user.getId() {@code >} 10L;
      *     }
      * }));
      * 
@@ -1990,7 +1990,7 @@ public final class CollectionsUtil{
      *            the object collection
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param includePredicate
      *            the include predicate
      * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>

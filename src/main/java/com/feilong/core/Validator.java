@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
  * 判断给定的对象是否是null或者empty.
  * 
  * <p>
- * 更多说明,参见 wiki {@link <a href="https://github.com/venusdrogon/feilong-core/wiki/Validator">Validator wiki</a>}
+ * 更多说明,参见 wiki <a href="https://github.com/venusdrogon/feilong-core/wiki/Validator">Validator wiki</a>
  * </p>
  * 
  * <ol>

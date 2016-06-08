@@ -443,7 +443,7 @@ public final class NumberUtil{
      * @param scale
      *            标度,小数的位数,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @param roundingMode
-     *            舍入法 {@link RoundingMode} 参考:{@link <a href="#RoundingMode">JAVA 8种舍入法</a>}
+     *            舍入法 {@link RoundingMode} 参考:<a href="#RoundingMode">JAVA 8种舍入法</a>
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>roundingMode</code>是null,抛出 {@link NullPointerException}
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>

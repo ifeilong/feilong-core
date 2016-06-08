@@ -29,7 +29,7 @@ import org.apache.commons.lang3.Validate;
  * <h3>关于{@link SimpleDateFormat}非线程安全:</h3>
  * 
  * <blockquote>
- * see {@link <a href="http://newslxw.iteye.com/blog/1114851">SimpleDateFormat在多线程下不安全</a>}
+ * see <a href="http://newslxw.iteye.com/blog/1114851">SimpleDateFormat在多线程下不安全</a>
  * <br>
  * 也可以查看 {@link SimpleDateFormat} Synchronization部分注释内容
  * </blockquote>
