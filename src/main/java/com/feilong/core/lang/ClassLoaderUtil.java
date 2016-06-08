@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -176,10 +177,11 @@ public final class ClassLoaderUtil{
      *            the class loader
      * @param resourceName
      *            the resource name
-     * @return the resource
+     * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.2.1
      */
     public static URL getResource(ClassLoader classLoader,String resourceName){
+        Validate.notNull(classLoader, "classLoader can't be null!");
         return classLoader.getResource(resourceName);
     }
 
@@ -247,12 +249,15 @@ public final class ClassLoaderUtil{
      *            The name of the resource to load
      * @param callingClass
      *            The Class object of the calling object
-     * @return the resource
+     * @return 如果在所有的{@link ClassLoader}里面都查不到资源,那么返回null
      * @since 1.6.1
      */
     public static URL getResourceInAllClassLoader(String resourceName,Class<?> callingClass){
         List<ClassLoader> classLoaderList = getAllClassLoaderList(callingClass);
         for (ClassLoader classLoader : classLoaderList){
+            if (null == classLoader){
+                continue;
+            }
             URL url = getResource(classLoader, resourceName);
             if (null == url){
                 LOGGER.warn(getLogInfo(resourceName, classLoader, false));
@@ -261,7 +266,7 @@ public final class ClassLoaderUtil{
                 return url;
             }
         }
-        LOGGER.warn("resourceName:[{}] in all ClassLoader not found,return null", resourceName);
+        LOGGER.warn("not found:[{}] in all ClassLoader,return null", resourceName);
         return null;
     }
 
@@ -281,10 +286,11 @@ public final class ClassLoaderUtil{
      * 
      * @param callingClass
      *            the calling class
-     * @return the class loader by class
+     * @return 如果 <code>callingClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.lang.Class#getClassLoader()
      */
     public static ClassLoader getClassLoaderByClass(Class<?> callingClass){
+        Validate.notNull(callingClass, "callingClass can't be null!");
         ClassLoader classLoader = callingClass.getClassLoader();
         LOGGER.debug("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
         return classLoader;
@@ -304,7 +310,7 @@ public final class ClassLoaderUtil{
         return ConvertUtil.toList(
                         getClassLoaderByCurrentThread(),
                         getClassLoaderByClass(ClassLoaderUtil.class),
-                        getClassLoaderByClass(callingClass));
+                        null == callingClass ? null : getClassLoaderByClass(callingClass));
     }
 
     /**

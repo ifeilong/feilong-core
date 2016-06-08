@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +38,29 @@ public class ClassLoaderUtilTest{
     public void testGetResource(){
         LOGGER.debug(ClassLoaderUtil.getResource("") + "");
         LOGGER.debug("" + ClassLoaderUtil.getResource("com"));
-        ClassLoaderUtil.getResourceInAllClassLoader("jstl-1.2", this.getClass());
+
+    }
+
+    @Test
+    public void testGetResource1(){
+        assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("jstl-1.2", this.getClass()));
+    }
+
+    @Test
+    public void testGetResource2(){
+        assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("slf4j-log4j12-1.7.21", this.getClass()));
+    }
+
+    @Test
+    public void testGetResource23(){
+        assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("slf4j-log4j12-1.7.21.jar", this.getClass()));
+    }
+
+    @Test
+    public void testGetResource232(){
+        assertEquals(
+                        "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class",
+                        ClassLoaderUtil.getResourceInAllClassLoader("com/feilong/core/lang/ArrayUtil.class", this.getClass()).toString());
     }
 
     /**
