@@ -409,27 +409,6 @@ public final class NumberUtil{
         return setScale(ConvertUtil.toBigDecimal(value), 0, roundingMode);
     }
 
-    /**
-     * int类型转换成16进制字符串.
-     * 
-     * @param i
-     *            int值
-     * @return int类型转换成16进制字符串
-     */
-    public static String intToHexString(int i){
-        return Integer.toHexString(i);
-    }
-
-    /**
-     * 16进制字符串转成int类型.
-     * 
-     * @param hexString
-     *            16进制字符串
-     * @return int类型
-     */
-    public static int hexStringToInt(String hexString){
-        return Integer.parseInt(hexString, 16);
-    }
     //************************************************************************************************
 
     /**
