@@ -218,15 +218,16 @@
 						<include>**/DateUtilTest</include>
 						<include>**/DateUtilIsLeapYearParameterizedTest</include>
 						<include>**/EnumUtilTest</include>
+						<include>**/FieldUtilTest</include>
 
 						<include>**/HttpMethodTypeTest</include>
 
 						<include>**/ObjectUtilTest</include>
-						
+
 						<include>**/RandomUtilTest</include>
 						<include>**/RegexUtilTest</include>
 						<include>**/ResourceBundleUtilTest</include>
-						
+
 						<include>**/NumberUtilTest</include>
 						<include>**/MessageFormatUtilTest</include>
 						<include>**/Slf4jUtilTest</include>

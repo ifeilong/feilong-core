@@ -113,15 +113,8 @@ public final class ConstructorUtil{
     @SuppressWarnings("unchecked")
     public static <T> T newInstance(String className,Object...parameterValues){
         Validate.notBlank(className, "className can't be null/empty!");
-
-        try{
-            // 装载连接初始化类
-            Class<?> klass = ClassUtil.loadClass(className);
-            return (T) newInstance(klass, parameterValues);
-        }catch (ClassNotFoundException e){
-            throw new ReflectException(e);
-        }
-
+        Class<?> klass = ClassUtil.loadClass(className);
+        return (T) newInstance(klass, parameterValues);
     }
 
     /**

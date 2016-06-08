@@ -20,7 +20,10 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.Validator;
+import com.feilong.core.lang.reflect.ReflectException;
 
 /**
  * {@link java.lang.Class} 工具类.
@@ -143,49 +146,6 @@ public final class ClassUtil{
     }
 
     /**
-     * JVM查找并加载指定的类.
-     * 
-     * <blockquote>
-     * 
-     * <table border="1" cellspacing="0" cellpadding="4" summary="">
-     * <tr style="background-color:#ccccff">
-     * <th align="left">字段</th>
-     * <th align="left">说明</th>
-     * </tr>
-     * <tr valign="top">
-     * <td><code>Class klass=对象引用o.getClass();</code></td>
-     * <td>返回引用o运行时真正所指的对象(因为:儿子对象的引用可能会赋给父对象的引用变量中)所属的类O的Class的对象.<br>
-     * 谈不上对类O做什么操作.</td>
-     * </tr>
-     * <tr valign="top" style="background-color:#eeeeff">
-     * <td><code>Class klass=A.class;</code></td>
-     * <td>JVM将使用类A的类装载器,将类A装入内存(前提:类A还没有装入内存),不对类A做类的初始化工作.<br>
-     * 返回类A的Class的对象.</td>
-     * </tr>
-     * <tr valign="top">
-     * <td><code>Class klass=Class.forName("类全名");</code></td>
-     * <td>装载连接初始化类.</td>
-     * </tr>
-     * <tr valign="top" style="background-color:#eeeeff">
-     * <td><code>Class klass=ClassLoader.loadClass("类全名");</code></td>
-     * <td>装载类,不连接不初始化.</td>
-     * </tr>
-     * </table>
-     * </blockquote>
-     *
-     * @param className
-     *            包名+类名 "org.jfree.chart.ChartFactory"
-     * @return the class
-     * @throws ClassNotFoundException
-     *             the class not found exception
-     * @see java.lang.Class#forName(String)
-     * @since 1.0.7
-     */
-    public static Class<?> loadClass(String className) throws ClassNotFoundException{
-        return Class.forName(className);
-    }
-
-    /**
      * 判断一个对象是不是某个类的实例.
      * 
      * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
@@ -296,16 +256,16 @@ public final class ClassUtil{
     }
 
     /**
-     * 解析参数,获得参数类型,如果参数 paramValues 是null 返回 null.
+     * 解析参数,获得参数类型.
      * 
      * @param paramValues
      *            参数值
-     * @return 如果参数 paramValues 是null 返回 null
+     * @return 如果 <code>paramValues</code> 是null,返回 null<br>
      * @see org.apache.commons.lang3.ClassUtils#toClass(Object...)
      * @since 1.1.1
      */
     public static Class<?>[] toClass(Object...paramValues){
-        return org.apache.commons.lang3.ClassUtils.toClass(paramValues);
+        return null == paramValues ? null : org.apache.commons.lang3.ClassUtils.toClass(paramValues);
     }
 
     /**
@@ -327,9 +287,9 @@ public final class ClassUtil{
      * 
      * @param className
      *            The name of the class to load
-     * @return the class
-     * @throws ClassNotFoundException
-     *             If the class cannot be found anywhere.
+     * @return 如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>className</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>className</code> 找不到相关类,那么抛出 {@link ReflectException}
      * @see java.lang.ClassLoader#loadClass(String)
      * @see java.lang.Class#forName(String)
      * @see java.lang.Class#forName(String, boolean, ClassLoader)
@@ -338,15 +298,68 @@ public final class ClassUtil{
      * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
      * @since 1.6.1
      */
-    public static Class<?> getClass(String className) throws ClassNotFoundException{
-        return org.apache.commons.lang3.ClassUtils.getClass(className);
+    public static Class<?> getClass(String className){
+        Validate.notBlank(className, "className can't be blank!");
+        try{
+            return org.apache.commons.lang3.ClassUtils.getClass(className);
+        }catch (ClassNotFoundException e){
+            throw new ReflectException(e);
+        }
+    }
+
+    /**
+     * JVM查找并加载指定的类.
+     * 
+     * <blockquote>
+     * 
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * <tr style="background-color:#ccccff">
+     * <th align="left">字段</th>
+     * <th align="left">说明</th>
+     * </tr>
+     * <tr valign="top">
+     * <td><code>Class klass=对象引用o.getClass();</code></td>
+     * <td>返回引用o运行时真正所指的对象(因为:儿子对象的引用可能会赋给父对象的引用变量中)所属的类O的Class的对象.<br>
+     * 谈不上对类O做什么操作.</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td><code>Class klass=A.class;</code></td>
+     * <td>JVM将使用类A的类装载器,将类A装入内存(前提:类A还没有装入内存),不对类A做类的初始化工作.<br>
+     * 返回类A的Class的对象.</td>
+     * </tr>
+     * <tr valign="top">
+     * <td><code>Class klass=Class.forName("类全名");</code></td>
+     * <td>装载连接初始化类.</td>
+     * </tr>
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td><code>Class klass=ClassLoader.loadClass("类全名");</code></td>
+     * <td>装载类,不连接不初始化.</td>
+     * </tr>
+     * </table>
+     * </blockquote>
+     *
+     * @param className
+     *            包名+类名 "org.jfree.chart.ChartFactory"
+     * @return 如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>className</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>className</code> 找不到相关类,那么抛出 {@link ReflectException}
+     * @see java.lang.Class#forName(String)
+     * @since 1.0.7
+     */
+    public static Class<?> loadClass(String className){
+        Validate.notBlank(className, "className can't be blank!");
+        try{
+            return Class.forName(className);
+        }catch (ClassNotFoundException e){
+            throw new ReflectException(e);
+        }
     }
 
     /**
      * 获得 class info map for LOGGER.
      *
      * @param klass
-     *            the clz
+     *            the klass
      * @return the map for log
      */
     public static Map<String, Object> getClassInfoMapForLog(Class<?> klass){

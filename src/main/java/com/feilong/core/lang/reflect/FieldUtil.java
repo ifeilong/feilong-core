@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,7 +111,7 @@ public final class FieldUtil{
     // [start] Field
 
     /**
-     * 获得这个对象 所有字段的值(不是属性),key是 fieldName,value 是值.
+     * 获得这个对象 <code>obj</code> 所有字段的值(不是属性),key是 fieldName,value 是值.
      *
      * @param obj
      *            the obj
@@ -161,11 +162,13 @@ public final class FieldUtil{
      *            the obj
      * @param excludeFieldNames
      *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
-     * @return 如果 <code>getAllFields(obj)</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>getAllFields(obj)</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see #getAllFields(Object)
      * @since 1.4.0
      */
     public static List<Field> getAllFieldList(Object obj,String[] excludeFieldNames){
+        Validate.notNull(obj, "obj can't be null!");
         // 获得一个对象所有的声明字段(包括私有的,继承的)
         Field[] fields = getAllFields(obj);
 
@@ -174,7 +177,6 @@ public final class FieldUtil{
         }
 
         List<Field> fieldList = new ArrayList<Field>();
-
         for (Field field : fields){
             String fieldName = field.getName();
             if (Validator.isNotNullOrEmpty(excludeFieldNames) && ArrayUtils.contains(excludeFieldNames, fieldName)){
@@ -198,7 +200,7 @@ public final class FieldUtil{
      * 
      * @param obj
      *            the obj
-     * @return the declared fields
+     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.lang.Class#getDeclaredFields()
      * @see java.lang.Class#getSuperclass()
      * @see java.lang.reflect.Field
@@ -206,8 +208,8 @@ public final class FieldUtil{
      * @see #getAllFields(Class)
      */
     private static Field[] getAllFields(Object obj){
-        Class<?> klass = obj.getClass();
-        return getAllFields(klass);
+        Validate.notNull(obj, "obj can't be null!");
+        return getAllFields(obj.getClass());
     }
 
     /**
@@ -215,11 +217,12 @@ public final class FieldUtil{
      *
      * @param klass
      *            the klass
-     * @return the all fields
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.lang3.reflect.FieldUtils#getAllFields(Class)
      * @since 1.4.0
      */
     private static Field[] getAllFields(Class<?> klass){
+        Validate.notNull(klass, "klass can't be null!");
         return org.apache.commons.lang3.reflect.FieldUtils.getAllFields(klass);
     }
 
@@ -228,7 +231,7 @@ public final class FieldUtil{
      * 
      * @param fields
      *            the fields
-     * @return 如果 fields isNullOrEmpty,返回 null;否则取field name,合为数组返回
+     * @return 如果 <code>fields</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
      * @see java.lang.reflect.Field#getName()
      */
     public static String[] getFieldsNames(Field[] fields){
@@ -245,18 +248,22 @@ public final class FieldUtil{
     /**
      * 返回一个 Field对象,该对象反映此 Class对象所表示的类或接口的指定已声明字段.
      *
-     * @param clz
-     *            clz
+     * @param klass
+     *            the klass
      * @param fieldName
      *            字段名称
-     * @return 返回一个 Field 对象,该对象反映此 Class 对象所表示的类或接口的指定已声明字段
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fieldName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.lang.Class#getDeclaredField(String)
      * @see org.apache.commons.lang3.reflect.FieldUtils#getDeclaredField(Class, String)
      * @see org.apache.commons.lang3.reflect.FieldUtils#getDeclaredField(Class, String, boolean)
      */
-    public static Field getDeclaredField(Class<?> clz,String fieldName){
+    public static Field getDeclaredField(Class<?> klass,String fieldName){
+        Validate.notNull(klass, "klass can't be null!");
+        Validate.notEmpty(fieldName, "fieldName can't be null/empty!");
         try{
-            return clz.getDeclaredField(fieldName);
+            return klass.getDeclaredField(fieldName);
         }catch (Exception e){
             throw new ReflectException(e);
         }
@@ -294,7 +301,7 @@ public final class FieldUtil{
 
     //**********************************************************************************************
     /**
-     * 得到某个对象的公共字段值.
+     * 得到某个对象 <code>owner</code> 的公共字段 <code>fieldName</code> 值.
      *
      * @param <T>
      *            the generic type
@@ -302,29 +309,25 @@ public final class FieldUtil{
      *            the owner
      * @param fieldName
      *            the field name
-     * @return 该字段对象
+     * @return 如果 <code>owner</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fieldName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.lang.Object#getClass()
-     * @see java.lang.Class#getField(String)
-     * @see java.lang.reflect.Field#get(Object)
+     * @see #getClassFieldValue(Class, String, Object)
      * @since 1.4.0
      */
-    @SuppressWarnings("unchecked")
     public static <T> T getFieldValue(Object owner,String fieldName){
-        try{
-            Class<?> ownerClass = owner.getClass();
-            Field field = ownerClass.getField(fieldName);
-            return (T) field.get(owner);
-        }catch (Exception e){
-            String formatMessage = Slf4jUtil.format("owner:[{}],fieldName:[{}]", owner, fieldName);
-            throw new ReflectException(formatMessage, e);
-        }
+        Validate.notNull(owner, "owner can't be null!");
+        Validate.notBlank(fieldName, "fieldName can't be blank!");
+        Class<?> ownerClass = owner.getClass();
+        return getClassFieldValue(ownerClass, fieldName, owner);
     }
 
     /**
-     * 得到某类的静态公共字段值.
+     * 得到指定类 <code>className</code> 的静态公共字段 <code>fieldName</code> 值.
      * 
      * <pre class="code">
-     * FieldUtil.getStaticProperty("com.feilong.io.ImageType", "JPG")   返回 :jpg
+     * FieldUtil.getStaticFieldValue("com.feilong.core.HttpMethodType", "POST") = HttpMethodType.POST
      * </pre>
      * 
      * @param <T>
@@ -333,25 +336,46 @@ public final class FieldUtil{
      *            类名,e.g com.feilong.io.ImageType
      * @param fieldName
      *            字段名
-     * @return 该字段对象
+     * @return 如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fieldName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see ClassUtil#loadClass(String)
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#get(Object)
-     * 
      * @see org.apache.commons.lang3.reflect.FieldUtils#getField(Class, String)
      * @since 1.4.0
      */
-    @SuppressWarnings("unchecked")
     public static <T> T getStaticFieldValue(String className,String fieldName){
+        Validate.notNull(className, "className can't be null!");
+        Validate.notBlank(fieldName, "fieldName can't be blank!");
+        Class<?> ownerClass = ClassUtil.loadClass(className);
+        return getClassFieldValue(ownerClass, fieldName, ownerClass);
+    }
+    // [end]
+
+    /**
+     * 获得指定类 <code>ownerClass</code> 指定字段 <code>fieldName</code>的 值.
+     *
+     * @param <T>
+     *            the generic type
+     * @param ownerClass
+     *            the owner class
+     * @param fieldName
+     *            the field name
+     * @param object
+     *            the object
+     * @return the class field value
+     * @see java.lang.Class#getField(String)
+     * @see java.lang.reflect.Field#get(Object)
+     * @since 1.6.1
+     */
+    @SuppressWarnings("unchecked")
+    private static <T> T getClassFieldValue(Class<?> ownerClass,String fieldName,Object object){
         try{
-            Class<?> ownerClass = ClassUtil.loadClass(className);
             Field field = ownerClass.getField(fieldName);
-            return (T) field.get(ownerClass);
+            return (T) field.get(object);
         }catch (Exception e){
-            String formatMessage = Slf4jUtil.format("className:[{}],fieldName:[{}]", className, fieldName);
-            throw new ReflectException(formatMessage, e);
+            throw new ReflectException(Slf4jUtil.format("className:[{}],fieldName:[{}]", ownerClass.getName(), fieldName), e);
         }
     }
-
-    // [end]
 }

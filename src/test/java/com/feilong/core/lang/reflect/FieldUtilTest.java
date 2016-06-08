@@ -38,28 +38,44 @@ public class FieldUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(FieldUtilTest.class);
 
     /**
-     * Test get static property.
+     * Test get static property1.
      */
     @Test
-    public void testGetStaticProperty(){
-        assertEquals(HttpMethodType.POST, FieldUtil.getStaticFieldValue("com.feilong.core.net.HttpMethodType", "POST"));
-        assertEquals(
-                        TimeInterval.SECONDS_PER_WEEK,
-                        FieldUtil.getStaticFieldValue("com.feilong.core.date.TimeInterval", "SECONDS_PER_WEEK"));
-        //assertEquals(-1699987643831455524L, FieldUtil.getStaticFieldValue("com.feilong.core.bean.BeanUtilException", "serialVersionUID"));
+    public void testGetStaticProperty1(){
+        assertEquals(HttpMethodType.POST, FieldUtil.getStaticFieldValue("com.feilong.core.HttpMethodType", "POST"));
+        assertEquals(TimeInterval.SECONDS_PER_WEEK, FieldUtil.getStaticFieldValue(TimeInterval.class.getName(), "SECONDS_PER_WEEK"));
+    }
+
+    /**
+     * Test get static property2.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetStaticProperty2(){
+        FieldUtil.getStaticFieldValue(null, "POST");
+    }
+
+    /**
+     * Test get static property3.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetStaticProperty3(){
+        FieldUtil.getStaticFieldValue("com.feilong.core.HttpMethodType", null);
+    }
+
+    /**
+     * Test get static property4.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetStaticProperty4(){
+        FieldUtil.getStaticFieldValue("com.feilong.core.HttpMethodType", "  ");
     }
 
     /**
      * Creates the payment form.
-     * 
-     * @throws IllegalArgumentException
-     *             the illegal argument exception
-     * @throws IllegalAccessException
-     *             the illegal access exception
      */
     @Test
-    public void testGetFieldValueMap() throws IllegalAccessException{
+    public void testGetFieldValueMap(){
         User user = new User(12L);
-        LOGGER.info(JsonUtil.format(FieldUtil.getAllFieldNameAndValueMap(user)));
+        LOGGER.debug(JsonUtil.format(FieldUtil.getAllFieldNameAndValueMap(user)));
     }
 }

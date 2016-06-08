@@ -153,12 +153,16 @@ public final class MethodUtil{
      *            方法名
      * @param params
      *            参数
-     * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.lang.reflect.Method#invoke(Object, Object...)
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object...)
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
      */
     public static <T> T invokeMethod(Object obj,String methodName,Object...params){
+        Validate.notNull(obj, "obj can't be null!");
+        Validate.notBlank(methodName, "methodName can't be blank!");
         final Class<?>[] parameterTypes = ClassUtil.toClass(params);
         return invokeMethod(obj, methodName, params, parameterTypes);
     }
@@ -177,18 +181,20 @@ public final class MethodUtil{
      * @param parameterTypes
      *            the parameter types
      * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[])
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")
     public static <T> T invokeMethod(final Object object,final String methodName,Object[] args,Class<?>[] parameterTypes){
         Validate.notNull(object, "object can't be null!");
+        Validate.notBlank(methodName, "methodName can't be blank!");
         try{
             return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
             String pattern = "invokeMethod Exception,object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, object, methodName, args, parameterTypes);
-            throw new ReflectException(message, e);
+            throw new ReflectException(Slf4jUtil.format(pattern, object, methodName, args, parameterTypes), e);
         }
     }
 
@@ -241,8 +247,7 @@ public final class MethodUtil{
             return (T) MethodUtils.invokeStaticMethod(klass, methodName, args, parameterTypes);
         }catch (Exception e){
             String pattern = "invoke Static Method Exception,klass:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, klass.getName(), methodName, args, parameterTypes);
-            throw new ReflectException(message, e);
+            throw new ReflectException(Slf4jUtil.format(pattern, klass.getName(), methodName, args, parameterTypes), e);
         }
     }
 }

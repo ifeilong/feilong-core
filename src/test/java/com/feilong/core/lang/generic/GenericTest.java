@@ -35,17 +35,17 @@ public class GenericTest{
 
     /**
      * Gets the value.
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param a
      *            the a
-     * @param clz
-     *            the clz
+     * @param klass
+     *            the klass
      * @return the value
      */
-    public static <T> T getValue(String a,Class<?> clz){
-        LOGGER.info(a + "" + (clz == String.class));
+    public static <T> T getValue(String a,Class<?> klass){
+        LOGGER.info(a + "" + (klass == String.class));
         T aT = null;
         try{
             Method method = GenericTest.class.getMethod("getValue", String.class, Class.class);
