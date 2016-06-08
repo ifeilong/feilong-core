@@ -292,11 +292,7 @@ public final class ClassUtil{
      * @see java.lang.reflect.Modifier#isInterface(int)
      */
     public static boolean isInterface(Class<?> ownerClass){
-        if (null == ownerClass){
-            return false;
-        }
-        int modifiers = ownerClass.getModifiers();// 返回此类或接口以整数编码的 Java 语言修饰符
-        return Modifier.isInterface(modifiers);// 对类和成员访问修饰符进行解码
+        return null == ownerClass ? false : Modifier.isInterface(ownerClass.getModifiers());// 对类和成员访问修饰符进行解码
     }
 
     /**
@@ -310,6 +306,40 @@ public final class ClassUtil{
      */
     public static Class<?>[] toClass(Object...paramValues){
         return org.apache.commons.lang3.ClassUtils.toClass(paramValues);
+    }
+
+    /**
+     * Load a class with a given name.
+     * 
+     * <p>
+     * It will try to load the class in the following order:
+     * </p>
+     * <ul>
+     * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
+     * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
+     * </ul>
+     * 
+     * <p>
+     * Returns the class represented by {@code className} using the {@code classLoader}. <br>
+     * This implementation supports the syntaxes " {@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}", "
+     * {@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;} ".
+     * </p>
+     * 
+     * @param className
+     *            The name of the class to load
+     * @return the class
+     * @throws ClassNotFoundException
+     *             If the class cannot be found anywhere.
+     * @see java.lang.ClassLoader#loadClass(String)
+     * @see java.lang.Class#forName(String)
+     * @see java.lang.Class#forName(String, boolean, ClassLoader)
+     * @see org.apache.commons.lang3.ClassUtils#getClass(String)
+     * @see org.apache.commons.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
+     * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
+     * @since 1.6.1
+     */
+    public static Class<?> getClass(String className) throws ClassNotFoundException{
+        return org.apache.commons.lang3.ClassUtils.getClass(className);
     }
 
     /**

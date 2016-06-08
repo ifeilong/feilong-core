@@ -18,15 +18,17 @@ package com.feilong.core.lang;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.lang.ClassLoader}工具类.
@@ -37,11 +39,10 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * <ul>
  * <li>{@link #getResource(String)}</li>
- * <li>{@link #getClassPath()}</li>
+ * <li>{@link #getRootClassPath()}</li>
  * <li>{@link #getClassPath(ClassLoader)}</li>
- * <li>{@link #getResource(String, Class)}</li>
+ * <li>{@link #getResourceInAllClassLoader(String, Class)}</li>
  * <li>{@link #getResource(ClassLoader, String)}</li>
- * <li>{@link #getResources(String, Class)}</li>
  * </ul>
  * 
  * <p>
@@ -141,8 +142,7 @@ public final class ClassLoaderUtil{
      * @return 查找具有给定名称的资源
      */
     public static URL getResource(String resourceName){
-        ClassLoader classLoader = getClassLoaderByClass(ClassLoaderUtil.class);
-        return getResource(classLoader, resourceName);
+        return getResource(getClassLoaderByClass(ClassLoaderUtil.class), resourceName);
     }
 
     /**
@@ -150,10 +150,10 @@ public final class ClassLoaderUtil{
      * 
      * @return 获得 项目的 classpath
      * @see #getResource(String)
+     * @since 1.6.1
      */
-    public static URL getClassPath(){
-        ClassLoader classLoader = getClassLoaderByClass(ClassLoaderUtil.class);
-        return getClassPath(classLoader);
+    public static URL getRootClassPath(){
+        return getClassPath(getClassLoaderByClass(ClassLoaderUtil.class));
     }
 
     /**
@@ -170,19 +170,21 @@ public final class ClassLoaderUtil{
 
     // *****************************************************
     /**
-     * This is a convenience method to load a resource as a stream. <br>
+     * This is a convenience method to load a resource as a stream.
+     * <p>
      * The algorithm used to find the resource is given in getResource()
+     * </p>
      * 
      * @param resourceName
      *            The name of the resource to load
      * @param callingClass
      *            The Class object of the calling object
      * @return the resource as stream
-     * @see #getResource(String, Class)
+     * @see #getResourceInAllClassLoader(String, Class)
      * @see "org.apache.velocity.util.ClassUtils#getResourceAsStream(Class, String)"
      */
     public static InputStream getResourceAsStream(String resourceName,Class<?> callingClass){
-        URL url = getResource(resourceName, callingClass);
+        URL url = getResourceInAllClassLoader(resourceName, callingClass);
         try{
             return (url != null) ? url.openStream() : null;
         }catch (IOException e){
@@ -192,13 +194,14 @@ public final class ClassLoaderUtil{
 
     /**
      * Load a given resource.
+     * 
      * <p>
      * This method will try to load the resource using the following methods (in order):
      * </p>
      * <ul>
      * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
      * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
-     * <li>From the {@link Class#getClassLoader() callingClass.getClassLoader() }
+     * <li>From {@link Class#getClassLoader() callingClass.getClassLoader() }
      * </ul>
      * 
      * @param resourceName
@@ -206,39 +209,21 @@ public final class ClassLoaderUtil{
      * @param callingClass
      *            The Class object of the calling object
      * @return the resource
+     * @since 1.6.1
      */
-    public static URL getResource(String resourceName,Class<?> callingClass){
-        ClassLoader classLoader = getClassLoaderByCurrentThread();
-        URL url = classLoader.getResource(resourceName);
-        if (url == null){
-            LOGGER.warn(
-                            "In ClassLoader:[{}],not found resourceName:[{}]",
-                            JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
-                            resourceName);
-
-            classLoader = getClassLoaderByClass(ClassLoaderUtil.class);
-            url = getResource(classLoader, resourceName);
-
-            if (url == null){
-                LOGGER.warn(
-                                "In ClassLoader:[{}],not found resourceName:[{}]",
-                                JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
-                                resourceName);
-                classLoader = getClassLoaderByClass(callingClass);
-                url = getResource(classLoader, resourceName);
+    public static URL getResourceInAllClassLoader(String resourceName,Class<?> callingClass){
+        List<ClassLoader> classLoaderList = getAllClassLoaderList(callingClass);
+        for (ClassLoader classLoader : classLoaderList){
+            URL url = getResource(classLoader, resourceName);
+            if (null == url){
+                LOGGER.warn(getLogInfo(resourceName, classLoader, false));
+            }else{
+                LOGGER.debug(getLogInfo(resourceName, classLoader, true));
+                return url;
             }
         }
-
-        if (url == null){
-            LOGGER.warn("resourceName:[{}] in all ClassLoader not found", resourceName);
-            return null;
-        }
-
-        LOGGER.debug(
-                        "found resourceName:[{}],In ClassLoader :[{}] ",
-                        resourceName,
-                        JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
-        return url;
+        LOGGER.warn("resourceName:[{}] in all ClassLoader not found", resourceName);
+        return null;
     }
 
     /**
@@ -280,85 +265,13 @@ public final class ClassLoaderUtil{
     }
 
     /**
-     * Load resources.
-     * 
-     * @param resourceName
-     *            the resource name
-     * @param callingClass
-     *            the calling class
-     * @return the resources
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     * @see java.lang.ClassLoader#getResources(String)
-     */
-    public static Enumeration<URL> getResources(String resourceName,Class<?> callingClass) throws IOException{
-        ClassLoader classLoader = getClassLoaderByCurrentThread();
-        Enumeration<URL> urls = classLoader.getResources(resourceName);
-        if (urls == null){
-            classLoader = getClassLoaderByClass(ClassLoaderUtil.class);
-            urls = classLoader.getResources(resourceName);
-            if (urls == null){
-                classLoader = getClassLoaderByClass(callingClass);
-                urls = classLoader.getResources(resourceName);
-            }
-        }
-        if (urls == null){
-            LOGGER.warn("resourceName:[{}] in all ClassLoader not found!", resourceName);
-            return null;
-        }
-
-        LOGGER.debug(
-                        "In ClassLoader :[{}] found the resourceName:[{}]",
-                        JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)),
-                        resourceName);
-        return urls;
-    }
-
-    /**
-     * Load a class with a given name.
-     * 
-     * <p>
-     * It will try to load the class in the following order:
-     * </p>
-     * <ul>
-     * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
-     * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
-     * </ul>
-     * 
-     * <p>
-     * Returns the class represented by {@code className} using the {@code classLoader}. <br>
-     * This implementation supports the syntaxes " {@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}", "
-     * {@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;} ".
-     * </p>
-     * 
-     * @param className
-     *            The name of the class to load
-     * @return the class
-     * @throws ClassNotFoundException
-     *             If the class cannot be found anywhere.
-     * @see java.lang.ClassLoader#loadClass(String)
-     * @see java.lang.Class#forName(String)
-     * @see java.lang.Class#forName(String, boolean, ClassLoader)
-     * @see org.apache.commons.lang3.ClassUtils#getClass(String)
-     * @see org.apache.commons.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
-     * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
-     * @since 1.4.0
-     */
-    public static Class<?> getClass(String className) throws ClassNotFoundException{
-        return org.apache.commons.lang3.ClassUtils.getClass(className);
-    }
-
-    /**
      * 通过 {@link Thread#getContextClassLoader()} 获得 {@link ClassLoader}.
      * 
      * @return the class loader by current thread
      */
     public static ClassLoader getClassLoaderByCurrentThread(){
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("Thread.currentThread().getContextClassLoader:{}", JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
-        }
+        LOGGER.debug("[Thread.currentThread()].getContextClassLoader:{}", formatClassLoader(classLoader));
         return classLoader;
     }
 
@@ -372,25 +285,57 @@ public final class ClassLoaderUtil{
      */
     public static ClassLoader getClassLoaderByClass(Class<?> callingClass){
         ClassLoader classLoader = callingClass.getClassLoader();
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("{}.getClassLoader():{}", callingClass.getSimpleName(), JsonUtil.format(getClassLoaderInfoMapForLog(classLoader)));
-        }
+        LOGGER.debug("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
         return classLoader;
     }
 
+    //**************************************************************************************************
+
     /**
-     * 获得 {@link ClassLoader} info map for LOGGER.
+     * 获得 all class loader list.
+     *
+     * @param callingClass
+     *            the calling class
+     * @return the all class loader
+     * @since 1.6.1
+     */
+    private static List<ClassLoader> getAllClassLoaderList(Class<?> callingClass){
+        return ConvertUtil.toList(
+                        getClassLoaderByCurrentThread(),
+                        getClassLoaderByClass(ClassLoaderUtil.class),
+                        getClassLoaderByClass(callingClass));
+    }
+
+    /**
+     * 获得 log info.
+     *
+     * @param resourceName
+     *            the resource name
+     * @param classLoader
+     *            the class loader
+     * @param isFouned
+     *            the is founed
+     * @return the log info
+     * @since 1.6.1
+     */
+    private static String getLogInfo(String resourceName,ClassLoader classLoader,boolean isFouned){
+        String message = "{}found [{}],in ClassLoader:[{}]";
+        return Slf4jUtil.format(message, isFouned ? "" : "not ", resourceName, formatClassLoader(classLoader));
+    }
+
+    /**
+     * Format class loader.
      *
      * @param classLoader
      *            the class loader
-     * @return the class loader info map for log
-     * @since 1.1.1
+     * @return the string
+     * @since 1.6.1
      */
-    private static Map<String, Object> getClassLoaderInfoMapForLog(ClassLoader classLoader){
+    private static String formatClassLoader(ClassLoader classLoader){
         Map<String, Object> classLoaderInfoMap = new LinkedHashMap<String, Object>();
         classLoaderInfoMap.put("classLoader", "" + classLoader);
         classLoaderInfoMap.put("classLoader[CanonicalName]", classLoader.getClass().getCanonicalName());
         classLoaderInfoMap.put("classLoader[Root Classpath]", "" + getClassPath(classLoader));
-        return classLoaderInfoMap;
+        return JsonUtil.format(classLoaderInfoMap);
     }
 }

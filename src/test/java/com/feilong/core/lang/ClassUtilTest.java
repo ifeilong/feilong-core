@@ -38,6 +38,18 @@ public class ClassUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtilTest.class);
 
     /**
+     * Test get class.
+     *
+     * @throws ClassNotFoundException
+     *             the class not found exception
+     */
+    @Test
+    public void testGetClass() throws ClassNotFoundException{
+        LOGGER.info("" + ClassUtil.getClass("com.feilong.core.FeiLongVersion"));
+        LOGGER.info("" + ClassUtils.getClass("com.feilong.core.FeiLongVersion"));
+    }
+
+    /**
      * Test is instance.
      */
     @Test

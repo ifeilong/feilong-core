@@ -15,7 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,9 +34,9 @@ public class ClassLoaderUtilTest{
      */
     @Test
     public void testGetResource(){
-        LOGGER.info(ClassLoaderUtil.getResource("") + "");
-        LOGGER.info("" + ClassLoaderUtil.getResource("com"));
-        ClassLoaderUtil.getResource("jstl-1.2", this.getClass());
+        LOGGER.debug(ClassLoaderUtil.getResource("") + "");
+        LOGGER.debug("" + ClassLoaderUtil.getResource("com"));
+        ClassLoaderUtil.getResourceInAllClassLoader("jstl-1.2", this.getClass());
     }
 
     /**
@@ -45,19 +44,7 @@ public class ClassLoaderUtilTest{
      */
     @Test
     public void testGetClassPath(){
-        LOGGER.info("" + ClassLoaderUtil.getClassPath());
-    }
-
-    /**
-     * Test get class.
-     *
-     * @throws ClassNotFoundException
-     *             the class not found exception
-     */
-    @Test
-    public void testGetClass() throws ClassNotFoundException{
-        LOGGER.info("" + ClassLoaderUtil.getClass("com.feilong.core.FeiLongVersion"));
-        LOGGER.info("" + ClassUtils.getClass("com.feilong.core.FeiLongVersion"));
+        LOGGER.debug("" + ClassLoaderUtil.getRootClassPath());
     }
 
     /**
@@ -81,4 +68,42 @@ public class ClassLoaderUtilTest{
         LOGGER.info(c);
         LOGGER.info(d);
     }
+
+    /**
+     * Load resources.
+     * 
+     * <p>
+     * This method will try to load the resource using the following methods (in order):
+     * </p>
+     * <ul>
+     * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
+     * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
+     * <li>From {@link Class#getClassLoader() callingClass.getClassLoader() }
+     * </ul>
+     * 
+     * @param resourceName
+     *            the resource name
+     * @param callingClass
+     *            the calling class
+     * @return the resources
+     * @see java.lang.ClassLoader#getResources(String)
+     */
+    //    public static Enumeration<URL> getResources(String resourceName,Class<?> callingClass){
+    //        try{
+    //            List<ClassLoader> classLoaderList = getAllClassLoaderList(callingClass);
+    //            for (ClassLoader classLoader : classLoaderList){
+    //                Enumeration<URL> resourcesEnumeration = classLoader.getResources(resourceName);
+    //                if (null == resourcesEnumeration){
+    //                    LOGGER.warn(getLogInfo(resourceName, classLoader, false));
+    //                }else{
+    //                    LOGGER.debug(getLogInfo(resourceName, classLoader, true));
+    //                    return resourcesEnumeration;
+    //                }
+    //            }
+    //            LOGGER.warn("resourceName:[{}] in all ClassLoader not found", resourceName);
+    //            return null;
+    //        }catch (IOException e){
+    //            throw new UncheckedIOException(e);
+    //        }
+    //    }
 }
