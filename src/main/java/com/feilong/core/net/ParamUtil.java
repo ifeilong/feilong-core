@@ -794,10 +794,10 @@ public final class ParamUtil{
       }
      * </pre>
      * 
-     * 参数和参数之间是以 & 分隔 参数的key和value 是以 = 号分隔
+     * 参数和参数之间是以{@code  &}分隔,参数的key和value 是以 = 号分隔
      * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", CharsetType.UTF8)));
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=&b=2&a}", CharsetType.UTF8)));
      * </pre>
      * 
      * 返回:
@@ -929,7 +929,7 @@ public final class ParamUtil{
      * 
      * <ol>
      * <li>对数组里的每一个值从 a 到 z 的顺序排序,若遇到相同首字母,则看第二个字母, 以此类推.</li>
-     * <li>排序完成之后,再把所有数组值以"&"字符连接起来</li>
+     * <li>排序完成之后,再把所有数组值以{@code "&"}字符连接起来</li>
      * <li>没有值的参数无需传递,也无需包含到待签名数据中.</li>
      * <li><span style="color:red">注意: 待签名数据应该是原生值而不是 encoding 之后的值</span></li>
      * </ol>
@@ -966,7 +966,7 @@ public final class ParamUtil{
      * @param singleValueMap
      *            用于拼接签名的参数
      * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         否则调用 {@link #toQueryStringUseSingleValueMap(Map)}
+     *         否则将<code>singleValueMap</code>排序之后,调用 {@link #toQueryStringUseSingleValueMap(Map)}
      * @see #toSafeQueryString(Map, String)
      * @since 1.4.0
      */
@@ -1042,7 +1042,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * province=江苏省&province=浙江省&city=南通市
+     * {@code province=江苏省&province=浙江省&city=南通市}
      * </pre>
      * 
      * </blockquote>
@@ -1064,7 +1064,6 @@ public final class ParamUtil{
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             sb.append(joinParamNameAndValues(entry.getKey(), entry.getValue()));
-
             if (i != arrayValueMap.size() - 1){// 最后一个& 不拼接
                 sb.append(URIComponents.AMPERSAND);
             }
