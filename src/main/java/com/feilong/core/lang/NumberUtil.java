@@ -18,6 +18,7 @@ package com.feilong.core.lang;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.NumberPattern;
@@ -194,7 +195,7 @@ public final class NumberUtil{
      *            被乘数
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         else convert to BigDecimal and multiply each other
+     *         否则 convert to BigDecimal and multiply each other
      * @see com.feilong.core.bean.ConvertUtil#toBigDecimal(Object)
      * @see "org.apache.velocity.runtime.parser.node.MathUtils#multiply(Number, Number)"
      * @since 1.5.5
@@ -216,7 +217,7 @@ public final class NumberUtil{
      *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         else convert to BigDecimal and multiply each other
+     *         否则 convert to BigDecimal and multiply each other
      * @see #getMultiplyValue(Number, Number)
      * @see #setScale(BigDecimal, int)
      * @since 1.5.5
@@ -234,20 +235,19 @@ public final class NumberUtil{
      *
      * @param numbers
      *            the numbers
-     * @return 如果 null== numbers,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>numbers</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果有元素是null,抛出 {@link IllegalArgumentException}<br>
-     *         else,将每个元素转换成BigDecimal,并进行累加操作
+     *         否则将每个元素转换成BigDecimal,并进行累加操作
      * @since 1.5.5
      */
     public static BigDecimal getAddValue(Number...numbers){
         Validate.noNullElements(numbers, "numbers can't be null!");
 
-        BigDecimal returnValue = BigDecimal.ZERO;
+        BigDecimal sum = BigDecimal.ZERO;
         for (Number number : numbers){
-            BigDecimal bigDecimal = ConvertUtil.toBigDecimal(number);
-            returnValue = returnValue.add(bigDecimal);
+            sum = sum.add(ConvertUtil.toBigDecimal(number));
         }
-        return returnValue;
+        return sum;
     }
 
     // [end]
@@ -261,8 +261,7 @@ public final class NumberUtil{
      *
      * @param value
      *            数字
-     * @return 0.0,0.5,1.0,1.5,2.0,2.5.......<br>
-     *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}
      */
     public static String toPointFive(Number value){
         Validate.notNull(value, "value can't be null/empty!");
@@ -278,18 +277,21 @@ public final class NumberUtil{
      * <h3>示例:</h3>
      * 
      * <pre class="code">
-     *  //将数字转成百分数字符串,不带小数点
-     *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT) result 24%
-     *  
-     *  //将数字转成百分数字符串,带两位小数点
-     *  NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT) result 24.00%
+     * //将数字转成百分数字符串,不带小数点
+     * NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT)   = 24%
+     * 
+     * //将数字转成百分数字符串,带两位小数点
+     * NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT)    = 24.00%
      * </pre>
      * 
      * @param value
      *            值
      * @param numberPattern
      *            规则 {@link NumberPattern}
-     * @return 格式化后的数字字符串
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果有异常,返回 {@link StringUtils#EMPTY}
      * @see NumberFormatUtil#format(Number, String)
      */
     public static String toString(Number value,String numberPattern){
@@ -305,7 +307,7 @@ public final class NumberUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * NumberUtil.getProgress(2, 3) 返回 67%
+     * NumberUtil.getProgress(2, 3)     = 67%
      * </pre>
      * 
      * </blockquote>
@@ -314,27 +316,25 @@ public final class NumberUtil{
      *            当前量
      * @param total
      *            总量
-     * @return 50% 56% 58%不带小数点格式
+     * @return 如果 <code>current</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>total</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 {@code current<=0},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code total<=0},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code current>total},抛出 {@link IllegalArgumentException}<br>
      * @see NumberPattern#PERCENT_WITH_NOPOINT
      * @see #getProgress(Number, Number, String)
      * @since 1.0.7
      */
     public static String getProgress(Number current,Number total){
-        String numberPattern = NumberPattern.PERCENT_WITH_NOPOINT;
-        return getProgress(current, total, numberPattern);
+        return getProgress(current, total, NumberPattern.PERCENT_WITH_NOPOINT);
     }
 
     /**
      * 计算进度.
      * 
      * <pre class="code">
-     *   Example 1:  
-     *      NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT)
-     *      return 100%
-     *   
-     *   Example 2:
-     *      NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)
-     *      return 66.7%
+     * NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT) =   100%
+     * NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)  =   66.7%
      * </pre>
      *
      * @param current
@@ -343,7 +343,11 @@ public final class NumberUtil{
      *            总量
      * @param numberPattern
      *            the number pattern {@link NumberPattern}
-     * @return 根据numberPattern 返回 50.5%,100%.....
+     * @return 如果 <code>current</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>total</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 {@code current<=0},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code total<=0},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code current>total},抛出 {@link IllegalArgumentException}<br>
      * @see NumberPattern
      * @see #getDivideValue(Number, Number, int)
      * @since 1.0.7
@@ -372,8 +376,7 @@ public final class NumberUtil{
      *
      * @param value
      *            the value
-     * @return 四舍五入{@link RoundingMode#HALF_UP},取整,无小数<br>
-     *         如果 isNotNullOrEmpty(number)返回null
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see #toNoScale(Number, RoundingMode)
      */
@@ -382,19 +385,18 @@ public final class NumberUtil{
     }
 
     /**
-     * To no scale.
+     * 取整,无小数.
      * 
      * <p style="color:red">
-     * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 {@link Math#round(double) Math.round(-2.5)} 会是-2
+     * 注意:{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 {@link Math#round(double) Math.round(-2.5)} 会是-2
      * </p>
      * 
      * @param value
      *            the value
      * @param roundingMode
      *            舍入法 {@link RoundingMode}
-     * @return 如果 value是null,抛出 {@link NullPointerException}<br>
-     *         如果 roundingMode是null,抛出 {@link NullPointerException}<br>
-     *         {@link RoundingMode},取整,无小数<br>
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>roundingMode</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @since 1.5.5
      */
@@ -445,7 +447,7 @@ public final class NumberUtil{
      *            number
      * @param scale
      *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
-     * @return 如果 value是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.RoundingMode#HALF_UP
      * @see java.math.BigDecimal#ROUND_HALF_UP
@@ -463,8 +465,8 @@ public final class NumberUtil{
      *            标度,小数的位数,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @param roundingMode
      *            舍入法 {@link RoundingMode} 参考:{@link <a href="#RoundingMode">JAVA 8种舍入法</a>}
-     * @return 如果 value是null,抛出 {@link NullPointerException}<br>
-     *         如果 roundingMode是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>roundingMode</code>是null,抛出 {@link NullPointerException}
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      */
     private static BigDecimal setScale(BigDecimal value,int scale,RoundingMode roundingMode){
