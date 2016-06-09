@@ -365,8 +365,7 @@ public final class URIUtil{
      *            字符串
      * @param charsetType
      *            使用的编码,see {@link CharsetType}
-     * @return 原来的字符串<br>
-     *         如果 <code>str</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>str</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see "org.apache.commons.codec.net.URLCodec#encode(String, String)"
      */
     public static String decodeISO88591String(String str,String charsetType){
@@ -407,7 +406,6 @@ public final class URIUtil{
      * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see URLEncoder#encode(String, String)
-     * @see CharsetType
      */
     public static String encode(String value,String charsetType){
         return encodeOrDecode(value, charsetType, true);
@@ -447,7 +445,6 @@ public final class URIUtil{
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
      *      URLDecoder: Incomplete trailing escape (%) pattern</a>
-     * 
      * @see java.net.URLDecoder#decode(String, String)
      * @see "org.springframework.web.util.UriUtils#decode(String, String)"
      */
