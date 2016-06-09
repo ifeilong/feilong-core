@@ -310,9 +310,6 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>inputIterator</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
      * 
-     * <p>
-     * If the input iterator or transformer 是 null, the result is an empty list.
-     *
      * @param <O>
      *            the type of object in the output collection
      * @param <T>
@@ -321,8 +318,8 @@ public final class CollectionsUtil{
      *            the iterator to get the input from
      * @param transformer
      *            the transformer to use, may be null
-     * @return 如果 inputCollection 是null,返回 {@link Collections#emptyList()}<br>
-     *         如果 transformer 是null,返回 empty list
+     * @return 如果 <code>inputIterator</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>transformer</code> 是null,返回 empty list
      * @see org.apache.commons.collections4.CollectionUtils#collect(java.util.Iterator, Transformer)
      * @since 1.5.5
      */
@@ -331,7 +328,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 在list中,查找 第一个 属性 <code>propertyName</code> 值是 指定值 <code>value</code>的 索引位置.
+     * 在list中,查找第一个属性 <code>propertyName</code> 值是指定值 <code>value</code>的索引位置.
      * 
      * <h3>示例:</h3>
      * 
@@ -345,7 +342,6 @@ public final class CollectionsUtil{
      * list.add(new User("刘备", 25));
      * 
      * assertEquals(0, CollectionsUtil.indexOf(list, "name", "张飞"));
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -440,7 +436,7 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-        [    {
+        [{
             "age": 24,
             "name": "关羽"
         }]
@@ -657,8 +653,8 @@ public final class CollectionsUtil{
      *            the generic type
      * @param objectCollection
      *            the item src list
-     * @return 如果传入的参数 <code>objectCollection</code> 是Null或者Empty,返回{@link Collections#emptyList()}<br>
-     *         else 先转换成 {@link LinkedHashSet},再转换成{@link ArrayList}返回
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         否则先转换成 {@link LinkedHashSet},再转换成{@link ArrayList}返回
      * @see ArrayList#ArrayList(java.util.Collection)
      * @see LinkedHashSet#LinkedHashSet(Collection)
      * @see <a
@@ -757,7 +753,7 @@ public final class CollectionsUtil{
      * 返回 :
      * 
      * <pre class="code">
-        ["赵子龙","赵子龙"]
+     * ["赵子龙","赵子龙"]
      * </pre>
      * 
      * <span style="color:green">//集合</span>
@@ -1094,7 +1090,7 @@ public final class CollectionsUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the values
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate#ArrayContainsPredicate(String, Object...)
      */
     @SafeVarargs
@@ -1132,12 +1128,10 @@ public final class CollectionsUtil{
     [{
                 "age": 23,
                 "name": "张飞"
-            },
-                    {
+            },{
                 "age": 25,
                 "name": "刘备"
-            }
-        ]
+     }]
      * 
      * </pre>
      * 
@@ -1213,7 +1207,34 @@ public final class CollectionsUtil{
     //***************************selectRejected*********************************************************************
 
     /**
-     * 循环遍历 <code>objectCollection</code> ,返回 当bean <code>propertyName</code> 属性值 都不在 <code>propertyValues</code> 时候的list.
+     * 循环遍历 <code>objectCollection</code> ,返回 当bean <code>propertyName</code> 属性值都不在 <code>propertyValues</code> 时候的list.
+     *
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     * 
+     * List{@code <User>} selectRejected = CollectionsUtil.selectRejected(list, "name", "刘备", "张飞");
+     * LOGGER.info(JsonUtil.format(selectRejected));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [{
+     * "age": 24,
+     * "name": "关羽"
+     * }]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -1285,7 +1306,7 @@ public final class CollectionsUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
      *            the values
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see com.feilong.core.util.predicate.CollectionContainsPredicate
@@ -1564,7 +1585,7 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * 
-     * Lis{@code t<User>} testList = new ArrayList{@code <User>}();
+     * List{@code <User>} testList = new ArrayList{@code <User>}();
      * testList.add(new User("张飞"));
      * testList.add(new User("关羽"));
      * testList.add(new User("刘备"));
@@ -1578,11 +1599,11 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-    {
-            "张飞": 1,
-            "关羽": 1,
-            "刘备": 2
-        }
+     * {
+     * "张飞": 1,
+     * "关羽": 1,
+     * "刘备": 2
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1638,10 +1659,10 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-    {
-        "刘备": 1,
-        "赵云": 1
-    }
+     * {
+     * "刘备": 1,
+     * "赵云": 1
+     * }
      * 
      * </pre>
      * 
@@ -1674,8 +1695,7 @@ public final class CollectionsUtil{
             if (null != includePredicate && !includePredicate.evaluate(o)){
                 continue;
             }
-            T t = PropertyUtil.getProperty(o, propertyName);
-            MapUtil.putSumValue(map, t, 1);
+            MapUtil.putSumValue(map, PropertyUtil.<T> getProperty(o, propertyName), 1);
         }
         return map;
     }
@@ -1693,6 +1713,7 @@ public final class CollectionsUtil{
      * list.add(new User(2L));
      * list.add(new User(5L));
      * list.add(new User(5L));
+     * CollectionsUtil.avg(list, "id", 2)
      * </pre>
      * 
      * 返回: 4.00
@@ -1702,19 +1723,19 @@ public final class CollectionsUtil{
      *            the generic type
      * @param objectCollection
      *            the object collection
-     * @param scale
-     *            平均数值的精度
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param scale
+     *            平均数值的精度
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #sum(Collection, String...)
-     * @since 1.5.0
+     * @since 1.6.1
      */
-    public static <O> BigDecimal avg(Collection<O> objectCollection,int scale,String propertyName){
-        return avg(objectCollection, scale, ConvertUtil.toArray(propertyName)).get(propertyName);
+    public static <O> BigDecimal avg(Collection<O> objectCollection,String propertyName,int scale){
+        return avg(objectCollection, ConvertUtil.toArray(propertyName), scale).get(propertyName);
     }
 
     /**
@@ -1728,17 +1749,14 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * 
      * User user1 = new User(2L);
      * user1.setAge(18);
-     * list.add(user1);
      * 
      * User user2 = new User(3L);
      * user2.setAge(30);
-     * list.add(user2);
      * 
-     * Map{@code <String, BigDecimal>} map = CollectionsUtil.avg(list, 2, "id", "age");
+     * List{@code <User>} list = ConvertUtil.toList(user1, user2);
+     * Map{@code <String, BigDecimal>} map = CollectionsUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
@@ -1757,17 +1775,17 @@ public final class CollectionsUtil{
      *            the generic type
      * @param objectCollection
      *            the object collection
-     * @param scale
-     *            平均数值的精度
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param scale
+     *            平均数值的精度
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
      * @see #sum(Collection, String...)
      */
-    public static <O> Map<String, BigDecimal> avg(Collection<O> objectCollection,int scale,String...propertyNames){
+    public static <O> Map<String, BigDecimal> avg(Collection<O> objectCollection,String[] propertyNames,int scale){
         Map<String, BigDecimal> sumMap = sum(objectCollection, propertyNames);
 
         int size = objectCollection.size();
@@ -1780,7 +1798,7 @@ public final class CollectionsUtil{
 
     //***********************************sum*************************************************************
     /**
-     * 总和,计算集合对象内指定的属性名值的总和.
+     * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyNames</code> 值的总和.
      * 
      * <p>
      * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
@@ -1832,7 +1850,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素 的指定 <code>propertyNames</code> 元素的值 ,累计总和.
+     * 迭代<code>objectCollection</code>,提取符合 <code>includePredicate</code>的元素 的指定 <code>propertyNames</code> 元素的值 ,累计总和.
      * 
      * <p>
      * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
@@ -1923,7 +1941,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 总和,计算集合对象内指定的属性名值的总和.
+     * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyName</code> 值的总和.
      * 
      * <p>
      * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
