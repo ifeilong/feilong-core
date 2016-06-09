@@ -360,7 +360,7 @@ public class ArrayUtilTest{
      *            对象数组
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            {@link <a href="../bean/BeanUtil.html#propertyName">propertyName</a>}
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectArray</code> 是 null或者empty,返回 {@link java.util.Collections#emptyMap()} <br>
      *         如果 <code>propertyName</code>是 null 抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code>是 blank 抛出 {@link IllegalArgumentException}<br>

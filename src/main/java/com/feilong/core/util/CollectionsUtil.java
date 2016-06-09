@@ -1843,7 +1843,7 @@ public final class CollectionsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
-     * @see #sum(Collection, String..., Predicate)
+     * @see #sum(Collection, String[], Predicate)
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String...propertyNames){
         return sum(objectCollection, propertyNames, null);
