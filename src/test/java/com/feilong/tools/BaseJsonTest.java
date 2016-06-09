@@ -44,7 +44,7 @@ public abstract class BaseJsonTest{
     protected static final User   DEFAULT_USER_FOR_JSON_TEST      = getUserForJsonTest();
 
     /** The Constant DEFAULT_USER_FOR_JSON_TEST_JSON. */
-    protected static final String DEFAULT_USER_FOR_JSON_TEST_JSON = JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST);
+    protected static final String DEFAULT_USER_FOR_JSON_TEST_JSON = JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST, 0, 0);
 
     /**
      * Gets the json string.

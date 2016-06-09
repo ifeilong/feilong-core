@@ -15,6 +15,8 @@
  */
 package com.feilong.tools.jsonlib;
 
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +80,7 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Override
     protected void performanceMethod(User user){
-        JsonUtil.toJSON(user, null);
+        JsonUtil.toJSON(user);
     }
 
     /**
@@ -102,7 +103,10 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void testJsonString(){
-        LOGGER.info(JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST));
+        LOGGER.info(
+                        "DEFAULT_USER_FOR_JSON_TEST_JSON:{}--->{}",
+                        DEFAULT_USER_FOR_JSON_TEST_JSON,
+                        JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST_JSON));
     }
 
     @Test
@@ -150,13 +154,13 @@ public class JsonUtilTest extends BaseJsonTest{
         JSONObject jsonObject = JSONObject.fromObject(json_test);
         Object bean = JSONObject.toBean(jsonObject);
 
-        Assert.assertEquals(jsonObject.get("name"), PropertyUtil.getProperty(bean, "name"));
-        Assert.assertEquals(jsonObject.get("bool"), PropertyUtil.getProperty(bean, "bool"));
-        Assert.assertEquals(jsonObject.get("int"), PropertyUtil.getProperty(bean, "int"));
-        Assert.assertEquals(jsonObject.get("double"), PropertyUtil.getProperty(bean, "double"));
-        Assert.assertEquals(jsonObject.get("func"), PropertyUtil.getProperty(bean, "func"));
+        assertEquals(jsonObject.get("name"), PropertyUtil.getProperty(bean, "name"));
+        assertEquals(jsonObject.get("bool"), PropertyUtil.getProperty(bean, "bool"));
+        assertEquals(jsonObject.get("int"), PropertyUtil.getProperty(bean, "int"));
+        assertEquals(jsonObject.get("double"), PropertyUtil.getProperty(bean, "double"));
+        assertEquals(jsonObject.get("func"), PropertyUtil.getProperty(bean, "func"));
         List<?> expected = JSONArray.toList(jsonObject.getJSONArray("array"));
-        Assert.assertEquals(expected, PropertyUtil.getProperty(bean, "array"));
+        assertEquals(expected, PropertyUtil.getProperty(bean, "array"));
     }
 
     /**

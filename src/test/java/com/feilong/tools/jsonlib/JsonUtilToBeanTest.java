@@ -90,7 +90,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toBeanNUll(){
-        LOGGER.info(JsonUtil.toJSON(null, null).toString(4, 4));
+        LOGGER.info(JsonUtil.toJSON(null).toString(4, 4));
         LOGGER.info(new JSONObject().toString(4));
     }
 
@@ -100,7 +100,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toJSON(){
         HttpMethodType httpMethodType = HttpMethodType.GET;
-        LOGGER.info(JsonUtil.toJSON(httpMethodType, null).toString(4, 4));
+        LOGGER.info(JsonUtil.toJSON(httpMethodType).toString(4, 4));
     }
 
     /**

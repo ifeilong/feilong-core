@@ -75,6 +75,19 @@ import net.sf.json.util.PropertySetStrategy;
  * </table>
  * </blockquote>
  * 
+ * <h3>json-lib format map的时候或者 json转成对象/数组/map等的时候</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * see {@link net.sf.json.JSONObject#_fromMap(Map, JsonConfig)}
+ * </p>
+ * <ul>
+ * <li>key不能是null</li>
+ * <li>key也不能是"null" 字符串</li>
+ * </ul>
+ * </blockquote>
+ * 
+ * 
  * <h3>依赖于下面的jar:</h3>
  * 
  * <blockquote>
@@ -97,19 +110,6 @@ import net.sf.json.util.PropertySetStrategy;
  * 
  * </blockquote>
  * 
- * 
- * <h3>json-lib format map的时候或者 json转成对象/数组/map等的时候</h3>
- * 
- * <blockquote>
- * <p>
- * see {@link net.sf.json.JSONObject#_fromMap(Map, JsonConfig)}
- * </p>
- * <ul>
- * <li>key不能是null</li>
- * <li>key也不能是"null" 字符串</li>
- * </ul>
- * </blockquote>
- *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see net.sf.json.JSONSerializer#toJSON(Object, JsonConfig)
  * 
@@ -159,7 +159,287 @@ public final class JsonUtil{
     // [start] format
 
     /**
-     * 格式化一个对象里面所有的field 的名字和值.
+     * 将对象 <code>obj</code> 格式化成json字符串.
+     * 
+     * <p>
+     * 该方法还可以格式化json字符串成缩进形式的格式
+     * </p>
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+    {"userAddresseList":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"userAddresses":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"date":"2016-06-09 17:40:28","password":"******","id":8,"nickName":[],"age":0,"name":"feilong","money":99999999,"attrMap":null,"userInfo":{"age":10},"loves":["桔子","香蕉"]}
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    {
+            "userAddresseList":         [
+                {"address": "上海市闸北区万荣路1188号H座109-118室"},
+                {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+            ],
+            "userAddresses":         [
+                {"address": "上海市闸北区万荣路1188号H座109-118室"},
+                {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+            ],
+            "date": "2016-06-09 17:40:28",
+            "password": "******",
+            "id": 8,
+            "nickName": [],
+            "age": 0,
+            "name": "feilong",
+            "money": 99999999,
+            "attrMap": null,
+            "userInfo": {"age": 10},
+            "loves":         [
+                "桔子",
+                "香蕉"
+            ]
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>关于 <code>indent</code>缩进:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 默认使用 toString(4,4) 缩进
+     * </p>
+     * 
+     * <p>
+     * 如果不需要 <code>indent</code>缩进,你可以调用 {@link #format(Object, int, int)}或者 {@link #format(Object, JsonConfig, int, int)}或者
+     * {@link #format(Object, JsonFormatConfig, int, int)}
+     * </p>
+     * </blockquote>
+     * 
+     * @param obj
+     *            任何对象
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @see #format(Object, JsonFormatConfig)
+     */
+    public static String format(Object obj){
+        return format(obj, (JsonFormatConfig) null);
+    }
+
+    /**
+     * 有些map 值很复杂,比如带有request信息, 这样的map转成json很可能由于一些级联关系而抛异常.
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>此方法 将inputMap转成 simpleMap(<span style="color:red">原始inputMap不会变更</span>)</li>
+     * <li>此方法转换的simpleMap是 {@link TreeMap}类型,转换的json key经过排序的</li>
+     * </ul>
+     * </blockquote>
+     * 
+     * <h3>转换规则:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>如果value 是isPrimitiveOrWrapper类型, 那么会直接取到值 设置到 新的simpleMap中</li>
+     * <li>否则 使用 {@link String#valueOf(Object)} 转换到simpleMap中</li>
+     * </ul>
+     * </blockquote>.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param inputMap
+     *            the input map
+     * @return 如果 <code>inputMap</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @since 1.3.0
+     */
+    public static <K, V> String formatSimpleMap(Map<K, V> inputMap){
+        return null == inputMap ? StringUtils.EMPTY : formatSimpleMap(inputMap, (Class<?>) null);
+    }
+
+    /**
+     * 有些map 值很复杂,比如带有request信息, 这样的map转成json很可能由于一些级联关系而抛异常.
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>此方法 将inputMap转成 simpleMap(<span style="color:red">原始inputMap不会变更</span>)</li>
+     * <li>此方法转换的simpleMap是 {@link TreeMap}类型,转换的json key经过排序的</li>
+     * </ul>
+     * </blockquote>
+     * 
+     * <h3>转换规则:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>如果value是isPrimitiveOrWrapper类型,那么会直接取到值设置到新的simpleMap中</li>
+     * <li>否则使用{@link String#valueOf(Object)}转换到simpleMap中</li>
+     * </ul>
+     * </blockquote>.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param inputMap
+     *            the input map
+     * @param allowFormatClassTypes
+     *            除了基本类型,数组之外允许的类型,请确保该类型可以被json format输出
+     * @return 如果 <code>inputMap</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @since 1.3.0
+     */
+    public static <K, V> String formatSimpleMap(Map<K, V> inputMap,Class<?>...allowFormatClassTypes){
+        if (null == inputMap){
+            return StringUtils.EMPTY;
+        }
+        Map<K, Object> simpleMap = new TreeMap<K, Object>();
+        for (Map.Entry<K, V> entry : inputMap.entrySet()){
+            K key = entry.getKey();
+            V value = entry.getValue();
+            simpleMap.put(key, isAllowFormatType(value, allowFormatClassTypes) ? value : String.valueOf(value)); //注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
+        }
+        return format(simpleMap);
+    }
+
+    /**
+     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.
+     *
+     * @param obj
+     *            对象
+     * @param excludes
+     *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">java.lang.ClassCastException: JSON keys must be strings</a>
+     */
+    public static String format(Object obj,String[] excludes){
+        return format(obj, excludes, 4, 4);
+    }
+
+    /**
+     * Format.
+     *
+     * @param obj
+     *            the obj
+     * @param excludes
+     *            the excludes
+     * @param indentFactor
+     *            the indent factor
+     * @param indent
+     *            the indent
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     */
+    public static String format(Object obj,String[] excludes,Integer indentFactor,Integer indent){
+        if (null == obj){
+            return StringUtils.EMPTY;
+        }
+        JsonFormatConfig jsonFormatConfig = null;
+        if (Validator.isNotNullOrEmpty(excludes)){
+            jsonFormatConfig = new JsonFormatConfig();
+            jsonFormatConfig.setExcludes(excludes);
+        }
+        return format(obj, jsonFormatConfig, indentFactor, indent);
+    }
+
+    /**
+     * 只包含这些key才被format出json格式.
+     *
+     * @param obj
+     *            the obj
+     * @param includes
+     *            the includes
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @since 1.0.8
+     */
+    public static String formatWithIncludes(Object obj,final String...includes){
+        if (null == obj){
+            return StringUtils.EMPTY;
+        }
+        JsonFormatConfig jsonFormatConfig = null;
+        if (Validator.isNotNullOrEmpty(includes)){
+            jsonFormatConfig = new JsonFormatConfig();
+            jsonFormatConfig.setIncludes(includes);
+        }
+        return format(obj, jsonFormatConfig);
+    }
+
+    /**
+     * Format.
+     *
+     * @param obj
+     *            the obj
+     * @param indentFactor
+     *            the indent factor
+     * @param indent
+     *            the indent
+     * @return the string
+     * @since 1.2.2
+     */
+    public static String format(Object obj,int indentFactor,int indent){
+        return format(obj, (JsonConfig) null, indentFactor, indent);
+    }
+
+    /**
+     * Format.
+     *
+     * @param obj
+     *            the obj
+     * @param jsonFormatConfig
+     *            the json format config
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @since 1.2.2
+     */
+    public static String format(Object obj,JsonFormatConfig jsonFormatConfig){
+        return format(obj, jsonFormatConfig, 4, 4);
+    }
+
+    /**
+     * Format.
+     *
+     * @param obj
+     *            the obj
+     * @param jsonFormatConfig
+     *            the json format config
+     * @param indentFactor
+     *            the indent factor
+     * @param indent
+     *            the indent
+     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @since 1.2.2
+     */
+    public static String format(Object obj,JsonFormatConfig jsonFormatConfig,int indentFactor,int indent){
+        if (null == jsonFormatConfig){
+            return format(obj, (JsonConfig) null, indentFactor, indent);
+        }
+
+        JsonConfig jsonConfig = getDefaultJsonConfig();
+
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = jsonFormatConfig.getPropertyNameAndJsonValueProcessorMap();
+
+        if (Validator.isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
+            for (Map.Entry<String, JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
+                String propertyName = entry.getKey();
+                JsonValueProcessor jsonValueProcessor = entry.getValue();
+                jsonConfig.registerJsonValueProcessor(propertyName, jsonValueProcessor);
+            }
+        }
+
+        String[] excludes = jsonFormatConfig.getExcludes();
+        if (Validator.isNotNullOrEmpty(excludes)){
+            jsonConfig.setExcludes(excludes);
+        }
+
+        String[] includes = jsonFormatConfig.getIncludes();
+        if (Validator.isNotNullOrEmpty(includes)){
+            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(includes));
+        }
+
+        return format(obj, jsonConfig, indentFactor, indent);
+    }
+
+    /**
+     * 格式化一个对象 <code>obj</code> 里面所有的field 的名字和值.
      * 
      * <h3>代码流程:</h3>
      * 
@@ -203,309 +483,6 @@ public final class JsonUtil{
     }
 
     /**
-     * 将对象格式化成json字符串.
-     * 
-     * <h3>关于 <code>indent</code>缩进:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 默认使用 toString(4,4) 缩进
-     * </p>
-     * 
-     * <p>
-     * 如果不需要 <code>indent</code>缩进,你可以调用 {@link #format(Object, int, int)}或者 {@link #format(Object, JsonConfig, int, int)}或者
-     * {@link #format(Object, JsonFormatConfig, int, int)}
-     * </p>
-     * </blockquote>
-     * 
-     * <h3>format map的时候或者 json转成对象/数组/map等 注意点:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * see {@link net.sf.json.JSONObject#_fromMap(Map, JsonConfig)}
-     * </p>
-     * <ul>
-     * <li>key不能是null</li>
-     * <li>key也不能是"null" 字符串</li>
-     * </ul>
-     * </blockquote>
-     * 
-     * @param obj
-     *            任何对象
-     * @return the string
-     * @see #format(Object, JsonFormatConfig)
-     */
-    public static String format(Object obj){
-        JsonFormatConfig jsonFormatConfig = null;
-        return format(obj, jsonFormatConfig);
-    }
-
-    /**
-     * 有些map 值很复杂,比如带有request信息, 这样的map转成json会抛异常.
-     * 
-     * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>此方法 将inputMap转成 simpleMap(<span style="color:red">原始inputMap不会变更</span>)</li>
-     * <li>此方法转换的simpleMap是 {@link TreeMap}类型,转换的json key经过排序的</li>
-     * </ul>
-     * </blockquote>
-     * 
-     * <h3>转换规则:</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>如果value 是isPrimitiveOrWrapper类型, 那么会直接取到值 设置到 新的simpleMap中</li>
-     * <li>否则 使用 {@link String#valueOf(Object)} 转换到simpleMap中</li>
-     * </ul>
-     * </blockquote>.
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param inputMap
-     *            the input map
-     * @return 如果 <code>inputMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     * @since 1.3.0
-     */
-    public static <K, V> String formatSimpleMap(Map<K, V> inputMap){
-        Class<?> allowClassTypes = null;
-        return null == inputMap ? StringUtils.EMPTY : formatSimpleMap(inputMap, allowClassTypes);
-    }
-
-    /**
-     * 有些map值很复杂,比如带有request信息, 这样的map转成json会抛异常.
-     * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>此方法 将inputMap转成 simpleMap(<span style="color:red">原始inputMap不会变更</span>)</li>
-     * <li>此方法转换的simpleMap是 {@link TreeMap}类型,转换的json key经过排序的</li>
-     * </ul>
-     * </blockquote>
-     * 
-     * <h3>转换规则:</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>如果value是isPrimitiveOrWrapper类型,那么会直接取到值设置到新的simpleMap中</li>
-     * <li>否则使用{@link String#valueOf(Object)}转换到simpleMap中</li>
-     * </ul>
-     * </blockquote>.
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param inputMap
-     *            the input map
-     * @param allowFormatClassTypes
-     *            除了基本类型,数组之外允许的类型,请确保该类型可以被json format输出
-     * @return 如果 <code>inputMap</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @since 1.3.0
-     */
-    public static <K, V> String formatSimpleMap(Map<K, V> inputMap,Class<?>...allowFormatClassTypes){
-        if (null == inputMap){
-            return StringUtils.EMPTY;
-        }
-        Map<K, Object> simpleMap = new TreeMap<K, Object>();
-
-        for (Map.Entry<K, V> entry : inputMap.entrySet()){
-            K key = entry.getKey();
-            V value = entry.getValue();
-
-            simpleMap.put(key, isAllowFormatType(value, allowFormatClassTypes) ? value : String.valueOf(value)); //注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
-        }
-        return format(simpleMap);
-    }
-
-    /**
-     * 是否是可以被json format的类型.
-     *
-     * @param <V>
-     *            the value type
-     * @param value
-     *            the value
-     * @param allowClassTypes
-     *            the allow class types
-     * @return true, if checks if is allow format type
-     * @since 1.4.0
-     */
-    private static <V> boolean isAllowFormatType(V value,Class<?>...allowClassTypes){
-        if (null == value){//null 是可以 format的
-            return true;
-        }
-        Class<?> klassClass = value.getClass();
-        return ClassUtils.isPrimitiveOrWrapper(klassClass) //
-                        || String.class == klassClass //
-                        || ObjectUtil.isArray(value)//XXX 数组一般 是可以转换的 
-                        || ClassUtil.isInstanceAnyClass(value, allowClassTypes)//
-        ;
-    }
-
-    /**
-     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.
-     *
-     * @param obj
-     *            对象
-     * @param excludes
-     *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @see #format(Object, JsonConfig)
-     * @see <a href="http://feitianbenyue.iteye.com/blog/2046877">java.lang.ClassCastException: JSON keys must be strings</a>
-     */
-    public static String format(Object obj,String[] excludes){
-        return format(obj, excludes, 4, 4);
-    }
-
-    /**
-     * 只包含这些key才被format出json格式.
-     *
-     * @param obj
-     *            the obj
-     * @param includes
-     *            the includes
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @since 1.0.8
-     */
-    public static String formatWithIncludes(Object obj,final String...includes){
-        if (null == obj){
-            return StringUtils.EMPTY;
-        }
-        JsonFormatConfig jsonFormatConfig = null;
-        if (Validator.isNotNullOrEmpty(includes)){
-            jsonFormatConfig = new JsonFormatConfig();
-            jsonFormatConfig.setIncludes(includes);
-        }
-        return format(obj, jsonFormatConfig);
-    }
-
-    /**
-     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.
-     *
-     * @param obj
-     *            the obj
-     * @param jsonConfig
-     *            the json config
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     *         否则返回 toJSON(obj, jsonConfig).toString(4, 4)
-     * @see net.sf.json.JsonConfig
-     * @see #toJSON(Object, JsonConfig)
-     * @see net.sf.json.JSON#toString(int, int)
-     * @see #format(Object, JsonConfig, int, int)
-     * @since 1.0.7
-     */
-    public static String format(Object obj,JsonConfig jsonConfig){
-        return format(obj, jsonConfig, 4, 4);
-    }
-
-    /**
-     * Format.
-     *
-     * @param obj
-     *            the obj
-     * @param indentFactor
-     *            the indent factor
-     * @param indent
-     *            the indent
-     * @return the string
-     * @since 1.2.2
-     */
-    public static String format(Object obj,int indentFactor,int indent){
-        JsonConfig jsonConfig = null;
-        return format(obj, jsonConfig, indentFactor, indent);
-    }
-
-    /**
-     * Format.
-     *
-     * @param obj
-     *            the obj
-     * @param excludes
-     *            the excludes
-     * @param indentFactor
-     *            the indent factor
-     * @param indent
-     *            the indent
-     * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     */
-    public static String format(Object obj,String[] excludes,Integer indentFactor,Integer indent){
-        if (null == obj){
-            return StringUtils.EMPTY;
-        }
-        JsonFormatConfig jsonFormatConfig = null;
-        if (Validator.isNotNullOrEmpty(excludes)){
-            jsonFormatConfig = new JsonFormatConfig();
-            jsonFormatConfig.setExcludes(excludes);
-        }
-        return format(obj, jsonFormatConfig, indentFactor, indent);
-    }
-
-    /**
-     * Format.
-     *
-     * @param obj
-     *            the obj
-     * @param jsonFormatConfig
-     *            the json format config
-     * @return the string
-     * @since 1.2.2
-     */
-    public static String format(Object obj,JsonFormatConfig jsonFormatConfig){
-        return format(obj, jsonFormatConfig, 4, 4);
-    }
-
-    /**
-     * Format.
-     *
-     * @param obj
-     *            the obj
-     * @param jsonFormatConfig
-     *            the json format config
-     * @param indentFactor
-     *            the indent factor
-     * @param indent
-     *            the indent
-     * @return the string
-     * @since 1.2.2
-     */
-    public static String format(Object obj,JsonFormatConfig jsonFormatConfig,int indentFactor,int indent){
-        JsonConfig jsonConfig = null;
-
-        if (null == jsonFormatConfig){
-            return format(obj, jsonConfig);
-        }
-
-        jsonConfig = getDefaultJsonConfig();
-
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = jsonFormatConfig.getPropertyNameAndJsonValueProcessorMap();
-
-        if (Validator.isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
-            for (Map.Entry<String, JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
-                String propertyName = entry.getKey();
-                JsonValueProcessor jsonValueProcessor = entry.getValue();
-                jsonConfig.registerJsonValueProcessor(propertyName, jsonValueProcessor);
-            }
-        }
-
-        String[] excludes = jsonFormatConfig.getExcludes();
-        if (Validator.isNotNullOrEmpty(excludes)){
-            jsonConfig.setExcludes(excludes);
-        }
-
-        String[] includes = jsonFormatConfig.getIncludes();
-        if (Validator.isNotNullOrEmpty(includes)){
-            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(includes));
-        }
-
-        return format(obj, jsonConfig, indentFactor, indent);
-    }
-
-    /**
      * Make a prettyprinted JSON text.
      * 
      * <p>
@@ -525,7 +502,7 @@ public final class JsonUtil{
      *         beginning with{ (left brace) and ending with }(right brace).
      * @since 1.0.8
      */
-    public static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent){
+    private static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent){
         return null == obj ? StringUtils.EMPTY : toJSON(obj, jsonConfig).toString(indentFactor, indent);
     }
 
@@ -1236,5 +1213,29 @@ public final class JsonUtil{
         // see http://feitianbenyue.iteye.com/blog/2046877
         jsonConfig.setAllowNonStringKeys(true);
         return jsonConfig;
+    }
+
+    /**
+     * 是否是可以被json format的类型.
+     *
+     * @param <V>
+     *            the value type
+     * @param value
+     *            the value
+     * @param allowClassTypes
+     *            the allow class types
+     * @return true, if checks if is allow format type
+     * @since 1.4.0
+     */
+    private static <V> boolean isAllowFormatType(V value,Class<?>...allowClassTypes){
+        if (null == value){//null 是可以 format的
+            return true;
+        }
+        Class<?> klassClass = value.getClass();
+        return ClassUtils.isPrimitiveOrWrapper(klassClass) //
+                        || String.class == klassClass //
+                        || ObjectUtil.isArray(value)//XXX 数组一般 是可以转换的 
+                        || ClassUtil.isInstanceAnyClass(value, allowClassTypes)//
+        ;
     }
 }
