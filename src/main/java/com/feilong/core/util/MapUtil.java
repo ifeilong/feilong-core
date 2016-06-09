@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -259,7 +260,7 @@ public final class MapUtil{
      *            the key type
      * @param arrayValueMap
      *            the array value map
-     * @return 如果参数<code>arrayValueMap</code>是null或者empty,那么返回 {@link Collections#emptyMap()},<br>
+     * @return 如果<code>arrayValueMap</code>是null或者empty,那么返回 {@link Collections#emptyMap()},<br>
      *         如果<code>arrayValueMap</code>其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
      *         如果<code>arrayValueMap</code>其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
      * @since 1.6.1
@@ -314,7 +315,7 @@ public final class MapUtil{
      * @param singleValueMap
      *            the name and value map
      * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么返回 {@link Collections#emptyMap()}<br>
-     *         否则 迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
+     *         否则迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
      * @since 1.6.1
      */
     public static <K> Map<K, String[]> toArrayValueMap(Map<K, String> singleValueMap){
@@ -384,11 +385,6 @@ public final class MapUtil{
      * 
      * </blockquote>
      * 
-     * <p>
-     * 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     * </p>
-     * 
      * @param <K>
      *            the key type
      * @param map
@@ -397,6 +393,8 @@ public final class MapUtil{
      *            the key
      * @param value
      *            the value
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.collections4.bag.HashBag
      * @see org.apache.commons.lang3.mutable.MutableInt
      * @see "java.util.Map#getOrDefault(Object, Object)"
@@ -404,12 +402,46 @@ public final class MapUtil{
      *      increment-a-map-value-in-java</a>
      * @since 1.5.5
      */
-    public static <K> void putSumValue(Map<K, Integer> map,K key,Integer value){
+    public static <K> Map<K, Integer> putSumValue(Map<K, Integer> map,K key,Integer value){
         Validate.notNull(map, "map can't be null!");
         Validate.notNull(value, "value can't be null!");
 
         Integer v = map.get(key);//这里不要使用 map.containsKey(key),否则会有2次  two potentially expensive operations
         map.put(key, null == v ? value : value + v);//Suggestion: you should care about code readability more than little performance gain in most of the time.
+        return map;
+    }
+
+    /**
+     * Put multi value.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see "com.google.common.collect.ArrayListMultimap"
+     * @see org.apache.commons.collections4.MultiMap
+     * @see org.apache.commons.collections4.IterableMap
+     * @see org.apache.commons.collections4.MultiMapUtils
+     * @see org.apache.commons.collections4.multimap.AbstractMultiValuedMap#put(Object, Object)
+     * @since 1.6.1
+     */
+    public static <K, V> Map<K, List<V>> putMultiValue(Map<K, List<V>> map,K key,V value){
+        Validate.notNull(map, "map can't be null!");
+
+        List<V> mapValue = map.get(key);
+
+        List<V> valueList = null == mapValue ? new ArrayList<V>() : mapValue;
+        valueList.add(value);
+
+        map.put(key, valueList);
+        return map;
     }
 
     /**

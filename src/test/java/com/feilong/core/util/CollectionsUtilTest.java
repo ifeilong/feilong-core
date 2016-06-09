@@ -15,7 +15,9 @@
  */
 package com.feilong.core.util;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -62,11 +64,6 @@ public class CollectionsUtilTest{
     public void testRemove(){
         List<String> list = new ArrayList<String>(){
 
-            /**
-             * 
-             */
-            private static final long serialVersionUID = -9002323146501447769L;
-
             {
                 add("xinge");
                 add("feilong1");
@@ -75,8 +72,9 @@ public class CollectionsUtilTest{
             }
         };
 
-        LOGGER.info("list:{}", JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
-        LOGGER.info("list:{}", JsonUtil.format(list));
+        List<String> removeList = CollectionsUtil.remove(list, "feilong2");
+        assertArrayEquals(ConvertUtil.toArray("xinge", "feilong1"), ConvertUtil.toArray(removeList, String.class));
+        assertArrayEquals(ConvertUtil.toArray("xinge", "feilong1", "feilong2", "feilong2"), ConvertUtil.toArray(list, String.class));
     }
 
     /**
@@ -115,6 +113,9 @@ public class CollectionsUtilTest{
         LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
     }
 
+    /**
+     * Test collect5.
+     */
     @Test
     public void testCollect5(){
         List<Long> list = new ArrayList<Long>();
@@ -171,15 +172,34 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroupCount(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 20));
+        list.add(new User("关羽", 30));
+        list.add(new User("刘备", 40));
+        list.add(new User("赵云", 50));
+
+        Map<String, Integer> map = CollectionsUtil.groupCount(list, "name", new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getAge() > 30;
+            }
+        });
+        LOGGER.debug(JsonUtil.format(map));
+    }
+
+    /**
+     * Test group count1.
+     */
+    @Test
+    public void testGroupCount1(){
         List<User> testList = new ArrayList<User>();
-        testList.add(new User("张飞", 23));
-        testList.add(new User("关羽", 24));
-        testList.add(new User("刘备", 25));
+        testList.add(new User("张飞"));
+        testList.add(new User("关羽"));
+        testList.add(new User("刘备"));
+        testList.add(new User("刘备"));
 
-        Map<String, Integer> map = CollectionsUtil.groupCount(testList, null, "name");
-        LOGGER.info(JsonUtil.format(map));
-
-        map = CollectionsUtil.groupCount(testList, new BeanPropertyValueEqualsPredicate<User>("name", "刘备"), "name");
+        Map<String, Integer> map = CollectionsUtil.groupCount(testList, "name");
         LOGGER.info(JsonUtil.format(map));
     }
 
@@ -244,6 +264,8 @@ public class CollectionsUtilTest{
             }
         });
         LOGGER.info(JsonUtil.format(map));
+
+        assertSame(2, map.size());
     }
 
     /**
@@ -399,12 +421,7 @@ public class CollectionsUtilTest{
     }
 
     /**
-     * To array.
-     */
-
-    /**
-     * Convert list to string replace brackets.
-     * 
+     * Test get field value map.
      */
     @Test
     public void testGetFieldValueMap(){
@@ -415,6 +432,8 @@ public class CollectionsUtilTest{
 
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
         LOGGER.info(JsonUtil.format(map));
+
+        assertSame(testList.size(), map.size());
     }
 
     /**

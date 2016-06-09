@@ -396,13 +396,13 @@ public final class CollectionsUtil{
      *            the collection from which items are removed (in the returned collection)
      * @param removeCollection
      *            the items to be removed from the returned <code>collection</code>
-     * @return a <code>List</code> containing all the elements of <code>c</code> except
-     *         any elements that also occur in <code>remove</code>.
+     * @return 如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
      * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 4
      * @since 1.0.8
      */
     public static <O> List<O> removeAll(Collection<O> objectCollection,Collection<O> removeCollection){
+        Validate.notNull(objectCollection, "objectCollection can't be null!");
         return ListUtils.removeAll(objectCollection, removeCollection);
     }
 
@@ -567,7 +567,6 @@ public final class CollectionsUtil{
      * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
      * </p>
      * 
-     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
@@ -607,16 +606,13 @@ public final class CollectionsUtil{
      *            the collection from which items are removed (in the returned collection)
      * @param removeElement
      *            the remove element
-     * @return a <code>List</code> containing all the elements of <code>c</code> except
-     *         any elements that also occur in <code>remove</code>.
+     * @return a <code>List</code> containing all the elements of <code>c</code> except any elements that also occur in <code>remove</code>.
      * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 4
      * @since 1.0.8
      */
     public static <O> List<O> remove(Collection<O> objectCollection,O removeElement){
-        Collection<O> remove = new ArrayList<O>();
-        remove.add(removeElement);
-        return removeAll(objectCollection, remove);
+        return removeAll(objectCollection, ConvertUtil.toList(removeElement));
     }
 
     /**
@@ -799,10 +795,10 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成Set.
+     * 解析迭代集合 <code>objectCollection</code> ,取到对象指定的属性 <code>propertyName</code>的值,拼成{@link Set}.
      * 
      * <p>
-     * 注意:返回的是 {@link LinkedHashSet},顺序是参数 objectCollection 元素的顺序
+     * 注意:返回的是 {@link LinkedHashSet},顺序是参数 <code>objectCollection</code> 元素的顺序
      * </p>
      * 
      * <h3>示例:</h3>
@@ -820,7 +816,7 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-     [2,5]
+     * [2,5]
      * </pre>
      * 
      * </blockquote>
@@ -834,9 +830,9 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成Set(LinkedHashSet),<br>
-     *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty LinkedHashSet<br>
-     *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;
+     * @return 如果参数 <code>objectCollection</code>是null或者empty,会返回empty {@link LinkedHashSet}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getPropertyValueCollection(Collection, String, Collection)
      * @since 1.0.8
      */
@@ -860,7 +856,10 @@ public final class CollectionsUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param returnCollection
      *            the return collection
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 <code>returnCollection</code>
+     * @return 如果 <code>returnCollection</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>objectCollection</code> 是null或者empty,返回 <code>returnCollection</code><br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see PropertyUtil#getProperty(Object, String)
      * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
      * @since 1.0.8
@@ -870,17 +869,13 @@ public final class CollectionsUtil{
                     String propertyName,
                     K returnCollection){
         Validate.notNull(returnCollection, "returnCollection can't be null!");
-
         if (Validator.isNullOrEmpty(objectCollection)){//避免null point
             return returnCollection;
         }
 
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-
         for (O bean : objectCollection){
-            @SuppressWarnings("unchecked")
-            T property = (T) PropertyUtil.getProperty(bean, propertyName);
-            returnCollection.add(property);
+            returnCollection.add(PropertyUtil.<T> getProperty(bean, propertyName));
         }
         return returnCollection;
     }
@@ -926,13 +921,16 @@ public final class CollectionsUtil{
      * @param objectCollection
      *            任何可以迭代的对象
      * @param keyPropertyName
-     *            the key property name
+     *            泛型O对象指定的属性名称,取到的值将作为返回的map的key,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param valuePropertyName
-     *            the value property name
-     * @return 解析对象集合,以 <code>keyPropertyName</code>属性值为key,<code>valuePropertyName</code>属性值为值,组成map返回<br>
-     *         如果 参数 <code>objectCollection</code> 是null or empty,返回 {@link Collections#emptyMap()}<br>
-     *         如果 参数 <code>keyPropertyName</code> 是null or empty,将会出现异常;<br>
-     *         如果 参数 <code>valuePropertyName</code> 是null or empty,将会出现异常;<br>
+     *            泛型O对象指定的属性名称,取到的值将作为返回的map的value,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keyPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>keyPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>valuePropertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>valuePropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      */
     public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
@@ -943,14 +941,8 @@ public final class CollectionsUtil{
         Validate.notBlank(valuePropertyName, "valuePropertyName can't be null/empty!");
 
         Map<K, V> map = new LinkedHashMap<K, V>();
-
         for (O bean : objectCollection){
-            @SuppressWarnings("unchecked")
-            K key = (K) PropertyUtil.getProperty(bean, keyPropertyName);
-            @SuppressWarnings("unchecked")
-            V value = (V) PropertyUtil.getProperty(bean, valuePropertyName);
-
-            map.put(key, value);
+            map.put(PropertyUtil.<K> getProperty(bean, keyPropertyName), PropertyUtil.<V> getProperty(bean, valuePropertyName));
         }
         return map;
     }
@@ -1234,7 +1226,7 @@ public final class CollectionsUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the values
-     * @return 如果 Validator.isNullOrEmpty(objectCollection),返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.core.util.predicate.ArrayContainsPredicate
@@ -1274,7 +1266,7 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-     * [ {
+     * [{
      * "age": 24,
      * "name": "关羽"
      * }]
@@ -1376,7 +1368,7 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 objectCollection isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
@@ -1391,9 +1383,10 @@ public final class CollectionsUtil{
      * 循环 <code>objectCollection</code>,找到符合条件的 <code>includePredicate</code>的元素,(如果propertyName存在相同的值,那么这些值,将会以list的形式 put到map中).
      * 
      * <p>
-     * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
+     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>
+     * 中的元素对象;
      * <br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值顺序
      * </p>
      * 
      * <h3>示例:</h3>
@@ -1421,17 +1414,14 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
     {
-        "张飞": [        {
-    
+        "张飞": [{
             "age": 28,
             "name": "张飞"
         }],
-        "刘备":         [
-                        {
+        "刘备": [{
                 "age": 32,
                 "name": "刘备"
-            },
-                        {
+            },{
                 "age": 30,
                 "name": "刘备"
             }
@@ -1456,7 +1446,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果没有任何element match <code>includePredicate</code>,返回 empty {@link LinkedHashMap}<br>
-     *         如果 includePredicate 是null,那么以所有的元素进行分组
+     *         如果 <code>includePredicate</code> 是null,那么以所有的元素进行分组
      * @see PropertyUtil#getProperty(Object, String)
      * @see #groupOne(Collection, String)
      * @since 1.5.5
@@ -1468,19 +1458,11 @@ public final class CollectionsUtil{
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectCollection.size());
-
         for (O o : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(o)){
                 continue;
             }
-
-            T t = PropertyUtil.getProperty(o, propertyName);
-            List<O> valueList = map.get(t);
-            if (null == valueList){
-                valueList = new ArrayList<O>();
-            }
-            valueList.add(o);
-            map.put(t, valueList);
+            MapUtil.putMultiValue(map, PropertyUtil.<T> getProperty(o, propertyName), o);
         }
         return map;
     }
@@ -1569,12 +1551,41 @@ public final class CollectionsUtil{
     //***********************************************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,统计<code>propertyName</code>的值出现的次数.
+     * 循环 <code>objectCollection</code>,统计 <code>propertyName</code> 的值出现的次数.
      * 
      * <p>
      * 返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
-     * 顺序是 objectCollection <code>propertyName</code>的值的顺序
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值的顺序
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Lis{@code t<User>} testList = new ArrayList{@code <User>}();
+     * testList.add(new User("张飞"));
+     * testList.add(new User("关羽"));
+     * testList.add(new User("刘备"));
+     * testList.add(new User("刘备"));
+     * 
+     * Map{@code <String, Integer>} map = CollectionsUtil.groupCount(testList, "name");
+     * LOGGER.info(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    {
+            "张飞": 1,
+            "关羽": 1,
+            "刘备": 2
+        }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -1588,19 +1599,53 @@ public final class CollectionsUtil{
      * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #groupCount(Collection , Predicate, String)
+     * @see #groupCount(Collection , String, Predicate)
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
-        return groupCount(objectCollection, null, propertyName);
+        return groupCount(objectCollection, propertyName, null);
     }
 
     /**
-     * 循环 <code>objectCollection</code>,只选择 符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
+     * 循环 <code>objectCollection</code>,只选择符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
      * 
      * <p>
      * 返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
      * 顺序是 objectCollection <code>propertyName</code>的值的顺序
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞", 20));
+     * list.add(new User("关羽", 30));
+     * list.add(new User("刘备", 40));
+     * list.add(new User("赵云", 50));
+     * 
+     * Map{@code <String, Integer>} map = CollectionsUtil.groupCount(list, "name", new Predicate{@code <User>}(){
+     *     {@code @Override}
+     *     public boolean evaluate(User user){
+     *         return user.getAge() {@code >} 30;
+     *     }
+     * });
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    {
+        "刘备": 1,
+        "赵云": 1
+    }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -1608,23 +1653,22 @@ public final class CollectionsUtil{
      *            the generic type
      * @param objectCollection
      *            the object collection
-     * @param includePredicate
-     *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param includePredicate
+     *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
      * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @since 1.2.0
+     * @since 1.6.1
      */
-    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,Predicate<O> includePredicate,String propertyName){
+    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
 
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-
         Map<T, Integer> map = new LinkedHashMap<T, Integer>();
 
         for (O o : objectCollection){
@@ -1632,8 +1676,7 @@ public final class CollectionsUtil{
                 continue;
             }
             T t = PropertyUtil.getProperty(o, propertyName);
-            Integer count = map.get(t);
-            map.put(t, null == count ? 1 : count + 1);
+            MapUtil.putSumValue(map, t, 1);
         }
         return map;
     }
