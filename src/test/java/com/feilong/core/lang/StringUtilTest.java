@@ -271,7 +271,7 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.substring(TEXT, "in", 20));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void substring333(){
         LOGGER.debug(StringUtil.substring(TEXT, "in", -200));
     }

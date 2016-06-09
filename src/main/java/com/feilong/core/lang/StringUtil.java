@@ -518,6 +518,7 @@ public final class StringUtil{
      * @return 如果 <code>text</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>beginString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 text.indexOf(beginString)==-1,返回 {@link StringUtils#EMPTY}<br>
+     *         如果{@code  beginIndex + shift < 0},抛出 {@link IllegalArgumentException}<br>
      *         如果{@code  beginIndex + shift > text.length()},返回 {@link StringUtils#EMPTY}<br>
      *         否则返回 text.substring(beginIndex + shift)<br>
      * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
