@@ -52,63 +52,6 @@ public final class DateFormatUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    // [start] format
-
-    /**
-     * format日期类型格式化成字符串类型.
-     * 
-     * <p style="color:red">
-     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#toString(Date, String)}替代
-     * </p>
-     * 
-     * <p>
-     * 调用的是 {@link #format(Date, String, Locale)},locale使用 {@link Locale#getDefault()}.
-     * </p>
-     * 
-     * @param date
-     *            the date
-     * @param pattern
-     *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
-     *         否则使用 {@link Locale#getDefault()},调用 {@link #format(Date, String, Locale)}
-     * @see #format(Date, String, Locale)
-     * @see com.feilong.core.date.DateUtil#toString(Date, String)
-     */
-    public static String format(Date date,String pattern){
-        return format(date, pattern, Locale.getDefault());
-    }
-
-    /**
-     * format日期类型格式化成字符串类型.
-     * 
-     * <p>
-     * 适用于格式化时间,有{@link Locale}的需求
-     * </p>
-     * 
-     * @param date
-     *            the date
-     * @param pattern
-     *            建议使用 {@link com.feilong.core.DatePattern} 内置的时间格式
-     * @param locale
-     *            语言,如果是 null,那么使用 系统默认的{@link Locale#getDefault()}
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
-     *         否则调用 {@link java.text.DateFormat#format(Date)}
-     * @see SimpleDateFormat#format(Date)
-     */
-    public static String format(Date date,String pattern,Locale locale){
-        Validate.notNull(date, "date can't be null!");
-        Validate.notBlank(pattern, "pattern can't be null/empty!");
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, null == locale ? Locale.getDefault() : locale);
-        return simpleDateFormat.format(date);
-    }
-
-    // [end]
-
     // [start]parse
 
     /**

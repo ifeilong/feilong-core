@@ -22,8 +22,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.DatePattern;
-
 /**
  * The Class DateFormatUtilTest.
  * 
@@ -33,20 +31,6 @@ public class DateFormatUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DateFormatUtilTest.class);
-
-    /**
-     * Format.
-     */
-    @Test
-    public void format(){
-        Date now = new Date();
-        LOGGER.info(now.toString());
-        String pattern = DatePattern.COMMON_DATE;
-        pattern = "EEE MMM dd HH:mm:ss zzz yyyy";
-        String nowString = DateFormatUtil.format(now, pattern, Locale.ENGLISH);
-        LOGGER.info(nowString);
-        LOGGER.info(now.toString().equals(nowString) + "");
-    }
 
     /**
      * Parses the.
