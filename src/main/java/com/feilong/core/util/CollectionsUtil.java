@@ -1658,7 +1658,7 @@ public final class CollectionsUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param includePredicate
      *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
-     * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @since 1.6.1
@@ -1667,10 +1667,9 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
-
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-        Map<T, Integer> map = new LinkedHashMap<T, Integer>();
 
+        Map<T, Integer> map = new LinkedHashMap<T, Integer>();
         for (O o : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(o)){
                 continue;
@@ -1715,8 +1714,7 @@ public final class CollectionsUtil{
      * @since 1.5.0
      */
     public static <O> BigDecimal avg(Collection<O> objectCollection,int scale,String propertyName){
-        String[] propertyNames = { propertyName };
-        return avg(objectCollection, scale, propertyNames).get(propertyName);
+        return avg(objectCollection, scale, ConvertUtil.toArray(propertyName)).get(propertyName);
     }
 
     /**
@@ -1774,12 +1772,8 @@ public final class CollectionsUtil{
 
         int size = objectCollection.size();
         Map<String, BigDecimal> map = new LinkedHashMap<String, BigDecimal>(size);
-
         for (Map.Entry<String, BigDecimal> entry : sumMap.entrySet()){
-            String key = entry.getKey();
-            BigDecimal value = entry.getValue();
-
-            map.put(key, NumberUtil.getDivideValue(ConvertUtil.toBigDecimal(value), size, scale));
+            map.put(entry.getKey(), NumberUtil.getDivideValue(ConvertUtil.toBigDecimal(entry.getValue()), size, scale));
         }
         return map;
     }
@@ -1908,11 +1902,9 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
-
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
         Map<String, BigDecimal> sumMap = new LinkedHashMap<String, BigDecimal>(objectCollection.size());
-
         for (O o : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(o)){
                 continue;
@@ -2043,8 +2035,6 @@ public final class CollectionsUtil{
      */
     public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-
-        String[] propertyNames = { propertyName };
-        return sum(objectCollection, includePredicate, propertyNames).get(propertyName);
+        return sum(objectCollection, includePredicate, ConvertUtil.toArray(propertyName)).get(propertyName);
     }
 }
