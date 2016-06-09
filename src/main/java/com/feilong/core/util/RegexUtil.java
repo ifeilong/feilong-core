@@ -52,10 +52,10 @@ public final class RegexUtil{
     }
 
     /**
-     * 编译给定正则表达式并尝试将给定输入与其匹配,调用了{@link Pattern#matches(String, CharSequence)}方法.
+     * 编译给定正则表达式 <code>regexPattern</code> 并尝试将给定输入 <code>input</code> 与其匹配.
      * 
      * <p>
-     * 这里是等价于{@link #getMatcher(String, CharSequence)}.matches();
+     * {@link Pattern#matches(String, CharSequence)} 等价于{@link #getMatcher(String, CharSequence)}.matches();
      * </p>
      *
      * @param regexPattern
