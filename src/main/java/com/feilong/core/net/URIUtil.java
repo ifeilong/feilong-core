@@ -287,15 +287,9 @@ public final class URIUtil{
             return uriString;// 不带参数 一般不需要处理
         }
 
-        // XXX 暂不处理 这种路径报错的情况
-        // cmens/t-b-f-a-c-s-f-p400-600,0-200,200-400,600-up-gCold Gear-eBase Layer-i1-o.htm
-
-        // 问号前面的部分
-        String queryString = StringUtil.substring(uriString, URIComponents.QUESTIONMARK, 1);
-
-        Map<String, String[]> map = ParamUtil.toSafeArrayValueMap(queryString, charsetType);
-        String encodeUrl = ParamUtil.addParameterArrayValueMap(uriString, map, charsetType);
-        LOGGER.debug("after url:{}", encodeUrl);
+        Map<String, String[]> safeArrayValueMap = ParamUtil.toSafeArrayValueMap(getQueryString(uriString), charsetType);
+        String encodeUrl = ParamUtil.addParameterArrayValueMap(uriString, safeArrayValueMap, charsetType);
+        LOGGER.debug("input:[{}],after url:[{}]", uriString, encodeUrl);
         return encodeUrl;
     }
 
@@ -372,7 +366,7 @@ public final class URIUtil{
      * @param charsetType
      *            使用的编码,see {@link CharsetType}
      * @return 原来的字符串<br>
-     *         如果 isNullOrEmpty(str),返回 {@link StringUtils#EMPTY}
+     *         如果 <code>str</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see "org.apache.commons.codec.net.URLCodec#encode(String, String)"
      */
     public static String decodeISO88591String(String str,String charsetType){
@@ -410,23 +404,13 @@ public final class URIUtil{
      *            the value
      * @param charsetType
      *            charsetType {@link CharsetType}
-     * @return {@link java.net.URLEncoder#encode(String, String)}<br>
-     *         \* 如果 isNullOrEmpty(charsetType), 原样返回 value<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see URLEncoder#encode(String, String)
      * @see CharsetType
      */
     public static String encode(String value,String charsetType){
-        if (Validator.isNullOrEmpty(value)){
-            return StringUtils.EMPTY;
-        }
-        if (Validator.isNullOrEmpty(charsetType)){
-            return value;
-        }
-        try{
-            return URLEncoder.encode(value, charsetType);
-        }catch (UnsupportedEncodingException e){
-            throw new URIParseException(e);
-        }
+        return encodeOrDecode(value, charsetType, true);
     }
 
     /**
@@ -459,8 +443,8 @@ public final class URIUtil{
      *            需要被解码的值
      * @param charsetType
      *            charsetType {@link CharsetType}
-     * @return the newly {@link java.net.URLDecoder#decode(String, String)} 解码之后的值<br>
-     *         如果 isNullOrEmpty(charsetType) ,原样返回 value<br>
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
      *      URLDecoder: Incomplete trailing escape (%) pattern</a>
      * 
@@ -468,14 +452,28 @@ public final class URIUtil{
      * @see "org.springframework.web.util.UriUtils#decode(String, String)"
      */
     public static String decode(String value,String charsetType){
+        return encodeOrDecode(value, charsetType, false);
+    }
+
+    /**
+     * Encode or decode.
+     *
+     * @param value
+     *            the value
+     * @param charsetType
+     *            the charset type
+     * @param encodeOrDecode
+     *            true 为encode,false为 decode
+     * @return the string
+     * @since 1.6.1
+     */
+    private static String encodeOrDecode(String value,String charsetType,boolean encodeOrDecode){
         if (Validator.isNullOrEmpty(value)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(charsetType)){
-            return value;
-        }
         try{
-            return URLDecoder.decode(value, charsetType);
+            return Validator.isNullOrEmpty(charsetType) ? value
+                            : (encodeOrDecode ? URLEncoder.encode(value, charsetType) : URLDecoder.decode(value, charsetType));
         }catch (UnsupportedEncodingException e){
             throw new URIParseException(e);
         }
