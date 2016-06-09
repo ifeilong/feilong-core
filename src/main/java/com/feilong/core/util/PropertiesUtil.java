@@ -114,7 +114,7 @@ public final class PropertiesUtil{
      *            <br>
      *            所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" 不需要"/")</li>
      *            </ul>
-     * @return Properties
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see ClassLoaderUtil#getClassLoaderByClass(Class)
      * @see java.lang.ClassLoader#getResourceAsStream(String)
      * @see #getProperties(InputStream)
@@ -143,12 +143,13 @@ public final class PropertiesUtil{
      *            <br>
      *            所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" 不需要"/")</li>
      *            </ul>
-     * @return 获取Properties
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.lang.Class#getResourceAsStream(String)
      * @see #getProperties(InputStream)
      * @see #getPropertiesWithClassLoader(Class, String)
      */
     public static Properties getProperties(Class<?> klass,String propertiesPath){
+        Validate.notNull(klass, "klass can't be null!");
         // klass.getResourceAsStream方法内部会调用classLoader.getResourceAsStream
         // 之所以这样做无疑还是方便客户端的调用,省的每次获取ClassLoader才能加载资源文件的麻烦.
         InputStream inputStream = klass.getResourceAsStream(propertiesPath);
@@ -165,11 +166,12 @@ public final class PropertiesUtil{
      * 
      * @param properties
      *            the properties
-     * @return the map
+     * @return 如果 <code>properties</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Map<String, String> toMap(Properties properties){
+        Validate.notEmpty(properties, "properties can't be null/empty!");
         return new HashMap<String, String>((Map) properties);
     }
 
