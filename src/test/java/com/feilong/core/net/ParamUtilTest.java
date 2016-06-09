@@ -160,9 +160,7 @@ public class ParamUtilTest{
      */
     @Test
     public void testJoinSingleValueMap(){
-
         Map<String, String> map = new HashMap<String, String>();
-
         map.put(null, null);
         //        map.put("a", "");
         //        map.put("b", null);
@@ -177,12 +175,11 @@ public class ParamUtilTest{
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        LOGGER.info(ParamUtil.toQueryStringUseSingleValueMap(singleValueMap));
+        assertEquals("province=江苏省&city=南通市", ParamUtil.toQueryStringUseSingleValueMap(singleValueMap));
     }
 
     @Test
     public void testJoinArrayValueMap(){
-
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
 
         keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
@@ -248,6 +245,17 @@ public class ParamUtilTest{
         LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a", CharsetType.UTF8)));
         LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", CharsetType.UTF8)));
         LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", CharsetType.UTF8)));
+        LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1=2&b=2&a=5", CharsetType.UTF8)));
+    }
+
+    @Test
+    public void testToSafeArrayValueMap1(){
+        LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a& &", CharsetType.UTF8)));
+    }
+
+    @Test
+    public void testToSafeArrayValueMap2(){
+        LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a", CharsetType.UTF8)));
     }
 
     /**

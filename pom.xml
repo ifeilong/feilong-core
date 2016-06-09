@@ -223,6 +223,7 @@
 						<include>**/HttpMethodTypeTest</include>
 
 						<include>**/ObjectUtilTest</include>
+						<include>**/ParamUtilTest</include>
 
 						<include>**/RandomUtilTest</include>
 						<include>**/RegexUtilTest</include>

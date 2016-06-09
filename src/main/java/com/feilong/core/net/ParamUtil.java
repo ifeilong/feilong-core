@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
 import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 
 /**
@@ -467,7 +469,8 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uri</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @see #toSafeArrayValueMap(String, String)
+     *         否则调用 {@link #retentionParamList(String, String, List, String)}
+     * @see #retentionParamList(String, String, List, String)
      */
     public static String retentionParamList(URI uri,List<String> paramNameList,String charsetType){
         return null == uri ? StringUtils.EMPTY : retentionParamList(uri.toString(), uri.getRawQuery(), paramNameList, charsetType);
@@ -515,7 +518,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * String queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
+     * String queryString = "{@code sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510}";
      * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
      * </pre>
      * 
@@ -527,8 +530,7 @@ public final class ParamUtil{
      * "format": "xml",
      * "sign": "cc945983476d615ca66cee41a883f6c1",
      * "v": "2.0",
-     * "req_data":
-     * "%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E",
+     * "req_data":"%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E",
      * "service": "alipay.wap.auth.authAndExecute",
      * "partner": "2088011438559510"
      * }
@@ -558,14 +560,14 @@ public final class ParamUtil{
      * </p>
      * 
      * <p>
-     * 解析方式:参数和参数之间是以 & 分隔 参数的key和value 是以 = 号分隔
+     * 解析方式:参数和参数之间是以 {@code &} 分隔, 参数的key和value 是以 = 号分隔
      * </p>
      * 
-     * <h3>示例:</h3>
+     * <h3>示例1:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", CharsetType.UTF8)));
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=1&b=2&a=5}", CharsetType.UTF8)));
      * </pre>
      * 
      * 返回:
@@ -579,7 +581,7 @@ public final class ParamUtil{
       }
      * </pre>
      * 
-     * 参数和参数之间是以{@code  &}分隔,参数的key和value 是以 = 号分隔
+     * <hr>
      * 
      * <pre class="code">
      * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=&b=2&a}", CharsetType.UTF8)));
@@ -605,40 +607,26 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>queryString</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @see org.apache.commons.lang3.ArrayUtils#add(String[], String)
+     * @see com.feilong.core.lang.StringUtil#split(String, String)
      * @since 1.4.0
      */
     public static Map<String, String[]> toSafeArrayValueMap(String queryString,String charsetType){
         if (Validator.isNullOrEmpty(queryString)){
             return Collections.emptyMap();
         }
+        boolean needEncode = Validator.isNotNullOrEmpty(charsetType);
 
-        String[] nameAndValueArray = queryString.split(URIComponents.AMPERSAND);
-        if (Validator.isNullOrEmpty(nameAndValueArray)){
-            return Collections.emptyMap();
-        }
-
-        //使用 LinkedHashMap 保证元素的顺序
-        Map<String, String[]> map = new LinkedHashMap<String, String[]>();
+        String[] nameAndValueArray = StringUtil.split(queryString, URIComponents.AMPERSAND);
+        Map<String, String[]> map = new LinkedHashMap<String, String[]>();//使用 LinkedHashMap 保证元素的顺序
         for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
-            String nameAndValue = nameAndValueArray[i];
-            if (null == nameAndValue){
-                continue;
-            }
-            String[] tempArray = nameAndValue.split("=", 2);
+            String[] tempArray = nameAndValueArray[i].split("=", 2);
 
-            String key = tempArray[0];
-            String value = tempArray.length == 2 ? tempArray[1] : StringUtils.EMPTY;//有可能 参数中 只有名字没有值 或者值是空,处理的时候不能遗失掉
+            String key = needEncode ? decodeAndEncode(tempArray[0], charsetType) : tempArray[0];
+            String value = tempArray.length == 2 ? tempArray[1] : StringUtils.EMPTY;//有可能参数中,只有名字没有值或者值是空,处理的时候不能遗失掉
 
-            if (Validator.isNotNullOrEmpty(charsetType)){
-                key = decodeAndEncode(key, charsetType);
-                value = decodeAndEncode(value, charsetType);
-            }
-            String[] valuesArrayInMap = map.get(key);
-
-            List<String> list = null == valuesArrayInMap ? new ArrayList<String>() : ConvertUtil.toList(valuesArrayInMap);
-            list.add(value);
-
-            map.put(key, ConvertUtil.toArray(list, String.class));
+            value = needEncode ? decodeAndEncode(value, charsetType) : value;
+            map.put(key, ArrayUtils.add(map.get(key), value));
         }
         return map;
     }
@@ -671,7 +659,7 @@ public final class ParamUtil{
      * 那么返回:
      * 
      * <pre class="code">
-     * love=sanguo&age=18&name=jim&name=feilong&name=%E9%91%AB%E5%93%A5
+     * {@code love=sanguo&age=18&name=jim&name=feilong&name=%E9%91%AB%E5%93%A5}
      * </pre>
      * 
      * 如果使用的是:
@@ -683,7 +671,7 @@ public final class ParamUtil{
      * 那么返回:
      * 
      * <pre class="code">
-     * love=sanguo&age=18&name=jim&name=feilong&name=鑫哥
+     * {@code love=sanguo&age=18&name=jim&name=feilong&name=鑫哥}
      * </pre>
      * 
      * </blockquote>
@@ -699,8 +687,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toSafeQueryString(Map<String, String[]> arrayValueMap,String charsetType){
-        return Validator.isNullOrEmpty(arrayValueMap) ? StringUtils.EMPTY
-                        : toQueryStringUseArrayValueMap(toSafeArrayValueMap(arrayValueMap, charsetType));
+        return toQueryStringUseArrayValueMap(toSafeArrayValueMap(arrayValueMap, charsetType));
     }
 
     //*********************************************************************************************
@@ -756,8 +743,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
-        return Validator.isNullOrEmpty(singleValueMap) ? StringUtils.EMPTY
-                        : toQueryStringUseSingleValueMap(new TreeMap<String, String>(singleValueMap));
+        return toQueryStringUseSingleValueMap(new TreeMap<String, String>(singleValueMap));
     }
 
     /**
@@ -783,7 +769,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * province=江苏省&city=南通市
+     * {@code province=江苏省&city=南通市}
      * </pre>
      * 
      * </blockquote>
@@ -798,8 +784,7 @@ public final class ParamUtil{
      * @since 1.5.5
      */
     public static String toQueryStringUseSingleValueMap(Map<String, String> singleValueMap){
-        return Validator.isNullOrEmpty(singleValueMap) ? StringUtils.EMPTY
-                        : toQueryStringUseArrayValueMap(MapUtil.toArrayValueMap(singleValueMap));
+        return toQueryStringUseArrayValueMap(MapUtil.toArrayValueMap(singleValueMap));
     }
 
     /**
@@ -862,7 +847,8 @@ public final class ParamUtil{
      * 取到指定keys的value,连接起来(<span style="color:red">不使用任何连接符</span>).
      * 
      * <p>
-     * 会按照includeKeys的顺序拼接,目前适用于 个别银行(比如汇付天下) 需要将值拼接起来加密
+     * 会按照includeKeys的顺序拼接,目前适用于 个别银行(比如汇付天下) 需要将值拼接起来加密<br>
+     * 如果map中的value是null,那么会以{@link StringUtils#EMPTY}替代
      * </p>
      * 
      * <h3>示例:</h3>
@@ -883,6 +869,8 @@ public final class ParamUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * @param <K>
      *
      * @param singleValueMap
      *            the map
@@ -895,19 +883,16 @@ public final class ParamUtil{
      * @see org.apache.commons.lang3.StringUtils#defaultString(String)
      * @since 1.5.5
      */
-    public static String joinValuesOrderByIncludeKeys(Map<String, String> singleValueMap,String...includeKeys){
+    @SafeVarargs
+    public static <K> String joinValuesOrderByIncludeKeys(Map<K, String> singleValueMap,K...includeKeys){
         Validate.notNull(singleValueMap, "singleValueMap can't be null!");
-
         if (Validator.isNullOrEmpty(includeKeys)){
             return StringUtils.EMPTY;
         }
         StringBuilder sb = new StringBuilder();
-        //有顺序的参数
-        for (String key : includeKeys){
-            String value = singleValueMap.get(key);
-
-            //value转换,注意:如果 value是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(StringUtils.defaultString(value));
+        for (K key : includeKeys){//有顺序的参数
+            //注意:如果 value是null,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            sb.append(StringUtils.defaultString(singleValueMap.get(key)));
         }
         return sb.toString();
     }
@@ -939,16 +924,13 @@ public final class ParamUtil{
                     String queryString,
                     Map<String, String[]> arrayValueMap,
                     String charsetType){
-        Map<String, String[]> arrayParamValuesMap = new LinkedHashMap<String, String[]>(arrayValueMap.size());
+        Map<String, String[]> safeArrayValueMap = ObjectUtils.defaultIfNull(arrayValueMap, Collections.<String, String[]> emptyMap());
+        Map<String, String[]> arrayParamValuesMap = new LinkedHashMap<String, String[]>(safeArrayValueMap.size());
         //先提取queryString map
         if (Validator.isNotNullOrEmpty(queryString)){
-            // 注意 action before 可能带参数
-            // "action": "https://202.6.215.230:8081/purchasing/purchase.do?action=loginRequest",
-            // "fullEncodedUrl":"https://202.6.215.230:8081/purchasing/purchase.do?action=loginRequest?miscFee=0&descp=&klikPayCode=03BELAV220&transactionDate=23%2F03%2F2014+02%3A40%3A19&currency=IDR",
-            Map<String, String[]> originalMap = toSafeArrayValueMap(queryString, null);
-            arrayParamValuesMap.putAll(originalMap);
+            arrayParamValuesMap.putAll(toSafeArrayValueMap(queryString, null));
         }
-        arrayParamValuesMap.putAll(arrayValueMap);
+        arrayParamValuesMap.putAll(safeArrayValueMap);
         return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), arrayParamValuesMap, charsetType);
     }
 
@@ -1024,9 +1006,8 @@ public final class ParamUtil{
     private static String joinParamNameAndValues(String paramName,String[] paramValues){
         StringBuilder sb = new StringBuilder();
         for (int i = 0, j = paramValues.length; i < j; ++i){
-            String value = paramValues[i];
-            //value转换, 注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(StringUtils.defaultString(paramName)).append("=").append(StringUtils.defaultString(value));
+            //注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            sb.append(StringUtils.defaultString(paramName)).append("=").append(StringUtils.defaultString(paramValues[i]));
             if (i != j - 1){// 最后一个& 不拼接
                 sb.append(URIComponents.AMPERSAND);
             }

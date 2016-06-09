@@ -702,29 +702,20 @@ public final class StringUtil{
     /**
      * 将字符串 <code>value</code> 使用分隔符 <code>regexSpliter</code> 分隔成 字符串数组.
      * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 此处不是简单的分隔符,是正则表达式,<b>.$|()[{^?*+\\</b> 有特殊的含义,因此我们使用.的时候必须进行转义, <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
-     * 最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
-     * </p>
-     * 
      * <p>
      * 建议使用 {@link #tokenizeToStringArray(String, String)} 或者 {@link StringUtils#split(String)}
      * </p>
-     * </blockquote>
      *
      * @param value
      *            value
      * @param regexSpliter
-     *            此处不是简单的分隔符,是正则表达式,<b>.$|()[{^?*+\\</b> 有特殊的含义,因此我们使用.的时候必须进行转义, <span style="color:red">"\"转义时要写成"\\\\"</span> <br>
+     *            此处不是简单的分隔符,是正则表达式,<b>.$|()[{^?*+\\</b> 有特殊的含义,因此我们使用.的时候必须进行转义,<span style="color:red">"\"转义时要写成"\\\\"</span> <br>
      *            最终调用了 {@link java.util.regex.Pattern#split(CharSequence)}
      * @return 如果 <code>value</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
      * @see String#split(String)
      * @see String#split(String, int)
-     * @see java.util.regex.Pattern#split(CharSequence)
      * @see StringUtils#split(String)
+     * @see java.util.regex.Pattern#split(CharSequence)
      */
     public static String[] split(String value,String regexSpliter){
         return Validator.isNullOrEmpty(value) ? ArrayUtils.EMPTY_STRING_ARRAY : value.split(regexSpliter);

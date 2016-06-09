@@ -310,7 +310,6 @@ public final class MapUtil{
      * </blockquote>
      * 
      * @param <K>
-     * @param <V>
      * 
      * @param singleValueMap
      *            the name and value map
@@ -318,13 +317,13 @@ public final class MapUtil{
      *         否则 迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
      * @since 1.6.1
      */
-    public static <K, V> Map<K, V[]> toArrayValueMap(Map<K, V> singleValueMap){
+    public static <K> Map<K, String[]> toArrayValueMap(Map<K, String> singleValueMap){
         if (Validator.isNullOrEmpty(singleValueMap)){
             return Collections.emptyMap();
         }
-        Map<K, V[]> arrayValueMap = new LinkedHashMap<K, V[]>();//保证顺序和 参数 singleValueMap顺序相同
-        for (Map.Entry<K, V> entry : singleValueMap.entrySet()){
-            arrayValueMap.put(entry.getKey(), ConvertUtil.toArray(entry.getValue()));
+        Map<K, String[]> arrayValueMap = new LinkedHashMap<K, String[]>();//保证顺序和参数singleValueMap顺序相同
+        for (Map.Entry<K, String> entry : singleValueMap.entrySet()){
+            arrayValueMap.put(entry.getKey(), ConvertUtil.toArray(entry.getValue()));//注意此处的Value不要声明成V,否则会变成Object数组
         }
         return arrayValueMap;
     }

@@ -107,7 +107,6 @@ public final class Validator{
      * @return 如果是null,返回true<br>
      *         如果是empty也返回true<br>
      *         其他情况返回false<br>
-     *         如果不是上述类型,返回false
      * @see org.apache.commons.collections4.CollectionUtils#sizeIsEmpty(Object)
      * @see org.apache.commons.lang3.StringUtils#isBlank(CharSequence)
      */
@@ -150,8 +149,6 @@ public final class Validator{
      * @return 如果是null,返回false<br>
      *         如果是空也返回false<br>
      *         其他情况返回true<br>
-     *         如果不是上述类型,返回true
-     * 
      * @see #isNullOrEmpty(Object)
      */
     public static boolean isNotNullOrEmpty(Object value){
