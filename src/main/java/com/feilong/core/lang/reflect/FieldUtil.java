@@ -115,7 +115,8 @@ public final class FieldUtil{
      *
      * @param obj
      *            the obj
-     * @return the field value map,key是 fieldName,value 是值
+     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fieldList</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @see #getAllFields(Object)
      * @see #getAllFieldNameAndValueMap(Object, String[])
      * @see java.lang.reflect.Modifier#isPrivate(int)
@@ -132,7 +133,8 @@ public final class FieldUtil{
      *            the obj
      * @param excludeFieldNames
      *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
-     * @return the field value map
+     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fieldList</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @see #getAllFieldList(Object, String[])
      * @see org.apache.commons.lang3.reflect.MemberUtils#setAccessibleWorkaround(java.lang.reflect.AccessibleObject)
      */
@@ -227,25 +229,6 @@ public final class FieldUtil{
     }
 
     /**
-     * 获得Field[] fields,每个field name 拼成数组.
-     * 
-     * @param fields
-     *            the fields
-     * @return 如果 <code>fields</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
-     * @see java.lang.reflect.Field#getName()
-     */
-    public static String[] getFieldsNames(Field[] fields){
-        if (Validator.isNullOrEmpty(fields)){
-            return ArrayUtils.EMPTY_STRING_ARRAY;
-        }
-        String[] fieldNames = new String[fields.length];
-        for (int j = 0; j < fields.length; ++j){
-            fieldNames[j] = fields[j].getName();
-        }
-        return fieldNames;
-    }
-
-    /**
      * 返回一个 Field对象,该对象反映此 Class对象所表示的类或接口的指定已声明字段.
      *
      * @param klass
@@ -275,6 +258,12 @@ public final class FieldUtil{
 
     /**
      * 设置字段值.
+     * 
+     * <p>
+     * 如果 <code>owner</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>fieldName</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
      *
      * @param owner
      *            the owner
@@ -290,6 +279,8 @@ public final class FieldUtil{
      * @since 1.4.0
      */
     public static void setFieldValue(Object owner,String fieldName,Object value){
+        Validate.notNull(owner, "owner can't be null!");
+        Validate.notBlank(fieldName, "fieldName can't be blank!");
         try{
             Class<?> ownerClass = owner.getClass();
             Field field = ownerClass.getField(fieldName);

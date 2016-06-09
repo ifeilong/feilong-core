@@ -17,12 +17,16 @@ package com.feilong.core.lang.reflect;
 
 import static org.junit.Assert.assertEquals;
 
+import java.lang.reflect.Field;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.HttpMethodType;
 import com.feilong.core.TimeInterval;
+import com.feilong.core.Validator;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -77,5 +81,24 @@ public class FieldUtilTest{
     public void testGetFieldValueMap(){
         User user = new User(12L);
         LOGGER.debug(JsonUtil.format(FieldUtil.getAllFieldNameAndValueMap(user)));
+    }
+
+    /**
+     * 获得Field[] fields,每个field name 拼成数组.
+     * 
+     * @param fields
+     *            the fields
+     * @return 如果 <code>fields</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
+     * @see java.lang.reflect.Field#getName()
+     */
+    public static String[] getFieldsNames(Field[] fields){
+        if (Validator.isNullOrEmpty(fields)){
+            return ArrayUtils.EMPTY_STRING_ARRAY;
+        }
+        String[] fieldNames = new String[fields.length];
+        for (int j = 0; j < fields.length; ++j){
+            fieldNames[j] = fields[j].getName();
+        }
+        return fieldNames;
     }
 }
