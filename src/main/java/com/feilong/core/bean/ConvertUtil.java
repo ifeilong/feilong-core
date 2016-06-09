@@ -656,7 +656,7 @@ public final class ConvertUtil{
      *            the join string entity
      * @param arrays
      *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
-     * @return 如果 arrays 是null 或者Empty ,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
      *         否则循环,拼接 {@link ToStringConfig#getConnector()}
      * @see org.apache.commons.lang3.builder.ToStringStyle
      * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
@@ -711,6 +711,7 @@ public final class ConvertUtil{
         return null == collection ? Collections.<T> emptyEnumeration() : Collections.enumeration(collection);
     }
 
+    //*************************************toList*********************************************************
     /**
      * 将枚举 <code>enumeration</code> 转成集合.
      * 
@@ -793,6 +794,7 @@ public final class ConvertUtil{
         return Validator.isNullOrEmpty(arrays) ? Collections.<T> emptyList() : new ArrayList<T>(Arrays.asList(arrays));
     }
 
+    //*************************************toArray*********************************************************
     /**
      * To array.
      * 

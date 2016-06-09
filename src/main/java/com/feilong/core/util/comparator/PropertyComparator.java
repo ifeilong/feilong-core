@@ -312,16 +312,11 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         //NullPointException if propertyValue1.compareTo(propertyValue2);
         int compareTo = ObjectUtils.compare(propertyValue1, propertyValue2);
 
-        if (0 == compareTo){
-            //避免TreeSet / TreeMap 过滤掉同sort字段但是对象不相同的情况
-            compareTo = ObjectUtils.compare(t1.hashCode(), t2.hashCode());
-        }
-        LOGGER.debug(
-                        "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],compareTo:[{}]",
-                        propertyName,
-                        propertyValue1,
-                        propertyValue2,
-                        compareTo);
+        //避免TreeSet / TreeMap 过滤掉同sort字段但是对象不相同的情况
+        compareTo = 0 == compareTo ? ObjectUtils.compare(t1.hashCode(), t2.hashCode()) : compareTo;
+
+        String pattern = "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],compareTo:[{}]";
+        LOGGER.debug(pattern, propertyName, propertyValue1, propertyValue2, compareTo);
         return compareTo;
     }
 }

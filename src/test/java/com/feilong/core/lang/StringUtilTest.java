@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +52,11 @@ public class StringUtilTest{
     public void stringAddInt(){
         assertEquals("004", StringUtil.stringAddInt("002", 2));
         assertEquals("001202", StringUtil.stringAddInt("000002", 1200));
+    }
+
+    @Test
+    public void testJoinNull(){
+        // assertEquals("", "" + null);
     }
 
     /**

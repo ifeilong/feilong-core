@@ -15,8 +15,9 @@
  */
 package com.feilong.core.util.predicate;
 
+import java.util.Objects;
+
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.lang3.ObjectUtils;
 
 import com.feilong.core.bean.PropertyUtil;
 
@@ -61,10 +62,9 @@ public class BeanPropertyValueEqualsPredicate<T> implements Predicate<T>{
      * 
      * @see org.apache.commons.collections4.Predicate#evaluate(java.lang.Object)
      */
-    @SuppressWarnings("deprecation")
     @Override
     public boolean evaluate(T object){
         Object property = PropertyUtil.getProperty(object, propertyName);
-        return ObjectUtils.equals(property, propertyValue);
+        return Objects.equals(property, propertyValue);
     }
 }

@@ -1043,7 +1043,7 @@ public final class JsonUtil{
         while (keys.hasNext()){
             String key = keys.next();
             Object value = jsonObject.get(key);
-            LOGGER.debug("key:[{}], value:[{}],value type is:[{}]", key, value, value.getClass().getName());
+            LOGGER.debug("key:[{}],value:[{}],value type is:[{}]", key, value, value.getClass().getName());
             map.put(key, null == rootClass ? (T) value : toBean(value, rootClass, classMap));//如果klass是null,表示不需要转换
         }
         return map;
