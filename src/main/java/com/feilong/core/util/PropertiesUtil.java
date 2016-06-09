@@ -95,63 +95,6 @@ public final class PropertiesUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /**
-     * 转换成map.
-     * 
-     * <p>
-     * Create a new HashMap and pass an instance of Properties.<br>
-     * Properties is an implementation of a Map which keys and values stored as in a string.
-     * </p>
-     * 
-     * @param properties
-     *            the properties
-     * @return the map
-     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
-     */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public static Map<String, String> toMap(Properties properties){
-        return new HashMap<String, String>((Map) properties);
-    }
-
-    // [start] getPropertiesValue
-
-    /**
-     * 获取Properties配置文件键值.
-     * 
-     * @param klass
-     *            当前类
-     * @param propertiesPath
-     *            Properties文件路径 如"/WEB-INF/classes/feilong.user.properties"
-     * @param key
-     *            键
-     * @return 获取Properties配置文件键值
-     * @see #getProperties(Class, String)
-     */
-    public static String getPropertiesValue(Class<?> klass,String propertiesPath,String key){
-        Properties properties = getProperties(klass, propertiesPath);
-        return properties.getProperty(key);
-    }
-
-    /**
-     * 通过ClassLoader获得properties值.
-     * 
-     * @param klass
-     *            当前Class
-     * @param propertiesPath
-     *            Properties文件路径 如"/WEB-INF/classes/feilong.user.properties"
-     * @param key
-     *            用指定的键在此属性列表中搜索属性.如果在此属性列表中未找到该键,则接着递归检查默认属性列表及其默认值.如果未找到属性,则此方法返回 null.
-     * @return 通过ClassLoader获得properties值
-     * @see #getPropertiesWithClassLoader(Class, String)
-     * @see java.util.Properties#getProperty(String)
-     */
-    public static String getPropertiesValueWithClassLoader(Class<?> klass,String propertiesPath,String key){
-        Properties properties = getPropertiesWithClassLoader(klass, propertiesPath);
-        return properties.getProperty(key);
-    }
-
-    // [end]
-
     // [start] getProperties
 
     /**
@@ -213,6 +156,24 @@ public final class PropertiesUtil{
     }
 
     /**
+     * 转换成map.
+     * 
+     * <p>
+     * Create a new HashMap and pass an instance of Properties.<br>
+     * Properties is an implementation of a Map which keys and values stored as in a string.
+     * </p>
+     * 
+     * @param properties
+     *            the properties
+     * @return the map
+     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static Map<String, String> toMap(Properties properties){
+        return new HashMap<String, String>((Map) properties);
+    }
+
+    /**
      * 获取{@link Properties}.
      *
      * @param inputStream
@@ -224,7 +185,6 @@ public final class PropertiesUtil{
      */
     public static Properties getProperties(InputStream inputStream){
         Validate.notNull(inputStream, "inputStream can't be null!");
-
         Properties properties = new Properties();
         try{
             properties.load(inputStream);
@@ -233,6 +193,5 @@ public final class PropertiesUtil{
             throw new UncheckedIOException(e);
         }
     }
-
     // [end]
 }

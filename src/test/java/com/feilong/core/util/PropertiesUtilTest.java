@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import java.util.Properties;
+
 /**
  * The Class PropertiesUtilTest.
  * 
@@ -23,6 +25,44 @@ package com.feilong.core.util;
  */
 public class PropertiesUtilTest{
 
+    // [start] getPropertiesValue
+
+    /**
+     * 获取Properties配置文件键值.
+     * 
+     * @param klass
+     *            当前类
+     * @param propertiesPath
+     *            Properties文件路径 如"/WEB-INF/classes/feilong.user.properties"
+     * @param key
+     *            键
+     * @return 获取Properties配置文件键值
+     * @see PropertiesUtil#getProperties(Class, String)
+     */
+    public static String getPropertiesValue(Class<?> klass,String propertiesPath,String key){
+        Properties properties = PropertiesUtil.getProperties(klass, propertiesPath);
+        return properties.getProperty(key);
+    }
+
+    /**
+     * 通过ClassLoader获得properties值.
+     * 
+     * @param klass
+     *            当前Class
+     * @param propertiesPath
+     *            Properties文件路径 如"/WEB-INF/classes/feilong.user.properties"
+     * @param key
+     *            用指定的键在此属性列表中搜索属性.如果在此属性列表中未找到该键,则接着递归检查默认属性列表及其默认值.如果未找到属性,则此方法返回 null.
+     * @return 通过ClassLoader获得properties值
+     * @see PropertiesUtil#getPropertiesWithClassLoader(Class, String)
+     * @see java.util.Properties#getProperty(String)
+     */
+    public static String getPropertiesValueWithClassLoader(Class<?> klass,String propertiesPath,String key){
+        Properties properties = PropertiesUtil.getPropertiesWithClassLoader(klass, propertiesPath);
+        return properties.getProperty(key);
+    }
+
+    // [end]
     // @formatter:off
 
 //	public static boolean write(String fileName){
