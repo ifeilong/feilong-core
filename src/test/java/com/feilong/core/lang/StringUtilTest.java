@@ -247,7 +247,7 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.substring(TEXT, TEXT.length() - 1, 8));
         LOGGER.debug(StringUtil.substring(TEXT, 1, 0));
         LOGGER.debug(StringUtil.substring(TEXT, 0, 5));
-        Assert.assertEquals(".f", StringUtil.substring(TEXT, 6, 2));
+        assertEquals(".f", StringUtil.substring(TEXT, 6, 2));
         LOGGER.debug(StringUtil.substring(TEXT, 6, 20));
     }
 
