@@ -45,6 +45,28 @@ public class ParamUtilTest{
     private static String       uriString = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
 
     /**
+     * Sub.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param originalArrayValueMap
+     *            the original array value map
+     * @param paramNameList
+     *            the param name list
+     * @return the map< k, v>
+     * @since 1.6.1
+     */
+    private static <K, V> Map<K, V> sub(Map<K, V> originalArrayValueMap,List<K> paramNameList){
+        Map<K, V> singleValueMap = new LinkedHashMap<K, V>();
+        for (K paramName : paramNameList){
+            singleValueMap.put(paramName, originalArrayValueMap.get(paramName));
+        }
+        return singleValueMap;
+    }
+
+    /**
      * Test to natural ordering string.
      */
     @Test
@@ -237,26 +259,6 @@ public class ParamUtilTest{
         //queryString = "_input_charset=UTF-8&out_order_no=2015080310000132&partner=2088201564809153&service=close_trade&sign=dc5a40d1d554b2ef115461f0ed6c49fc&sign_type=MD5&trade_role=S";
         queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
         LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
-    }
-
-    @Test
-    public void testToSingleValueMap2(){
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
-
-        keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
-        keyAndArrayMap.put("city", new String[] { "南通市" });
-
-        LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
-    }
-
-    @Test
-    public void testToArrayValueMap(){
-        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
-
-        singleValueMap.put("province", "江苏省");
-        singleValueMap.put("city", "南通市");
-
-        LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
     }
 
     /**

@@ -41,6 +41,25 @@ public class MapUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
+    @Test
+    public void testToSingleValueMap2(){
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+
+        keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
+        keyAndArrayMap.put("city", new String[] { "南通市" });
+
+        LOGGER.info(JsonUtil.format(MapUtil.toSingleValueMap(keyAndArrayMap)));
+    }
+
+    @Test
+    public void testToArrayValueMap(){
+        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        LOGGER.info(JsonUtil.format(MapUtil.toArrayValueMap(singleValueMap)));
+    }
+
     /**
      * Test put sum value.
      */

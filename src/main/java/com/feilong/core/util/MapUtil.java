@@ -25,6 +25,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.comparators.ReverseComparator;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -196,6 +197,139 @@ public final class MapUtil{
     }
 
     /**
+     * 将多值的参数map转成单值的参数map.
+     * 
+     * <p style="color:green">
+     * 返回的是 {@link LinkedHashMap},保证顺序和 参数 <code>arrayValueMap</code>顺序相同
+     * </p>
+     * 
+     * <p>
+     * 和该方法正好相反的是 {@link #toArrayValueMap(Map)}
+     * </p>
+     * 
+     * <h3>示例1:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * 
+     * keyAndArrayMap.put("province", new String[] { "江苏省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": "江苏省",
+     * "city": "南通市"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <p>
+     * 如果arrayValueMap其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,
+     * </p>
+     * 
+     * <h3>示例2:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * 
+     * keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": "浙江省",
+     * "city": "南通市"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     *
+     * @param arrayValueMap
+     *            the array value map
+     * @return 如果参数<code>arrayValueMap</code>是null或者empty,那么返回 {@link Collections#emptyMap()},<br>
+     *         如果<code>arrayValueMap</code>其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
+     *         如果<code>arrayValueMap</code>其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
+     * @since 1.6.1
+     */
+    public static <K> Map<K, String> toSingleValueMap(Map<K, String[]> arrayValueMap){
+        if (Validator.isNullOrEmpty(arrayValueMap)){
+            return Collections.emptyMap();
+        }
+        Map<K, String> singleValueMap = new LinkedHashMap<K, String>();//保证顺序和 参数 arrayValueMap 顺序相同
+        for (Map.Entry<K, String[]> entry : arrayValueMap.entrySet()){
+            singleValueMap.put(entry.getKey(), Validator.isNotNullOrEmpty(entry.getValue()) ? entry.getValue()[0] : StringUtils.EMPTY);
+        }
+        return singleValueMap;
+    }
+
+    /**
+     * 将单值的参数map转成多值的参数map.
+     * 
+     * <p style="color:green">
+     * 返回的是 {@link LinkedHashMap},保证顺序和 参数 <code>singleValueMap</code>顺序相同
+     * </p>
+     * 
+     * <p>
+     * 和该方法正好相反的是 {@link #toSingleValueMap(Map)}
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <String, String>}();
+     * 
+     * singleValueMap.put("province", "江苏省");
+     * singleValueMap.put("city", "南通市");
+     * 
+     * LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": ["江苏省"],
+     * "city": ["南通市"]
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     * @param <V>
+     * 
+     * @param singleValueMap
+     *            the name and value map
+     * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么返回 {@link Collections#emptyMap()}<br>
+     *         否则 迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
+     * @since 1.6.1
+     */
+    public static <K, V> Map<K, V[]> toArrayValueMap(Map<K, V> singleValueMap){
+        if (Validator.isNullOrEmpty(singleValueMap)){
+            return Collections.emptyMap();
+        }
+        Map<K, V[]> arrayValueMap = new LinkedHashMap<K, V[]>();//保证顺序和 参数 singleValueMap顺序相同
+        for (Map.Entry<K, V> entry : singleValueMap.entrySet()){
+            arrayValueMap.put(entry.getKey(), ConvertUtil.toArray(entry.getValue()));
+        }
+        return arrayValueMap;
+    }
+
+    /**
      * 仅当 <code>null != map 并且 null != value</code>才将key/value put到map中.
      * 
      * <p>
@@ -322,8 +456,7 @@ public final class MapUtil{
     @SafeVarargs
     public static <K, T extends Number & Comparable<? super T>> T getMinValue(Map<K, T> map,K...keys){
         Map<K, T> subMap = getSubMap(map, keys);
-        //注意 Number本身 没有实现Comparable接口
-        return Validator.isNullOrEmpty(subMap) ? null : Collections.min(subMap.values());
+        return Validator.isNullOrEmpty(subMap) ? null : Collections.min(subMap.values()); //注意 Number本身 没有实现Comparable接口
     }
 
     /**
