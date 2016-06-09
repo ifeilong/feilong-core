@@ -309,6 +309,7 @@ public final class ConvertUtil{
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see org.apache.commons.beanutils.converters.IntegerConverter
+     * @see org.apache.commons.lang3.math.NumberUtils#toInt(String)
      */
     public static Integer toInteger(Object toBeConvertedValue){
         return new IntegerConverter(null).convert(Integer.class, toBeConvertedValue);
@@ -376,6 +377,7 @@ public final class ConvertUtil{
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 <code>defaultValue</code> <br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 <code>defaultValue</code>
      * @see org.apache.commons.beanutils.converters.IntegerConverter
+     * @see org.apache.commons.lang3.ObjectUtils#defaultIfNull(Object, Object)
      * @since 1.6.1
      */
     public static Integer toInteger(Object toBeConvertedValue,Integer defaultValue){
@@ -436,6 +438,7 @@ public final class ConvertUtil{
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.LongConverter
+     * @see org.apache.commons.lang3.math.NumberUtils#toLong(String)
      */
     public static Long toLong(Object toBeConvertedValue){
         return new LongConverter(null).convert(Long.class, toBeConvertedValue);

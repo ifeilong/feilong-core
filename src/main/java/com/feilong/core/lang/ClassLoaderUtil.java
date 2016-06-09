@@ -140,7 +140,10 @@ public final class ClassLoaderUtil{
      *
      * @param resourceName
      *            the resource name
-     * @return 查找具有给定名称的资源
+     * @return the resource
+     * @see org.apache.commons.lang3.ClassPathUtils#toFullyQualifiedPath(Package, String)
+     * @see #getResource(ClassLoader, String)
+     * @see #getClassLoaderByClass(Class)
      */
     public static URL getResource(String resourceName){
         return getResource(getClassLoaderByClass(ClassLoaderUtil.class), resourceName);
@@ -201,11 +204,12 @@ public final class ClassLoaderUtil{
      *
      * @param classLoader
      *            the class loader
-     * @return the class path
+     * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getResource(ClassLoader, String)
      * @since 1.6.1
      */
     public static URL getRootClassPath(ClassLoader classLoader){
+        Validate.notNull(classLoader, "classLoader can't be null!");
         return getResource(classLoader, "");
     }
 
