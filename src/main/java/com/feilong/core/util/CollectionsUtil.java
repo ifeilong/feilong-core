@@ -1843,10 +1843,10 @@ public final class CollectionsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
-     * @see #sum(Collection, Predicate, String...)
+     * @see #sum(Collection, String..., Predicate)
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String...propertyNames){
-        return sum(objectCollection, null, propertyNames);
+        return sum(objectCollection, propertyNames, null);
     }
 
     /**
@@ -1862,32 +1862,27 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * 
      * User user1 = new User(10L);
      * user1.setName("刘备");
      * user1.setAge(50);
-     * list.add(user1);
      * 
      * User user2 = new User(20L);
      * user1.setName("关羽");
      * user2.setAge(50);
-     * list.add(user2);
      * 
      * User user3 = new User(100L);
      * user3.setName("张飞");
      * user3.setAge(100);
-     * list.add(user3);
      * 
-     * Map{@code <String, BigDecimal>} map = CollectionsUtil.sum(list, new Predicate{@code <User>}(){
+     * List{@code <User>} list = ConvertUtil.toList(user1, user2, user3);
+     * Map{@code <String, BigDecimal>} map = CollectionsUtil.sum(list, ConvertUtil.toArray("id", "age"), new Predicate{@code <User>}(){
      * 
      *     {@code @Override}
      *     public boolean evaluate(User user){
      *         return !"张飞".equals(user.getName());
      *     }
-     * }, "id", "age");
-     * LOGGER.info("{}", JsonUtil.format(map));
+     * });
+     * LOGGER.debug(JsonUtil.format(map));
      * 
      * </pre>
      * 
@@ -1906,17 +1901,17 @@ public final class CollectionsUtil{
      *            the generic type
      * @param objectCollection
      *            the object collection
-     * @param includePredicate
-     *            the include predicate
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param includePredicate
+     *            the include predicate
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
-     * @since 1.5.5
+     * @since 1.6.1
      */
-    public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,Predicate<O> includePredicate,String...propertyNames){
+    public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String[] propertyNames,Predicate<O> includePredicate){
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
@@ -2053,6 +2048,6 @@ public final class CollectionsUtil{
      */
     public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-        return sum(objectCollection, includePredicate, ConvertUtil.toArray(propertyName)).get(propertyName);
+        return sum(objectCollection, ConvertUtil.toArray(propertyName), includePredicate).get(propertyName);
     }
 }

@@ -396,12 +396,15 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectRejected1(){
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
 
-        LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(objectCollection, "name", "刘备")));
+        List<User> selectRejected = CollectionsUtil.selectRejected(list, "name", "刘备", "张飞");
+        LOGGER.info(JsonUtil.format(selectRejected));
+
+        assertSame(1, selectRejected.size());
     }
 
     /**
@@ -476,7 +479,7 @@ public class CollectionsUtilTest{
         list.add(new User(5L));
         list.add(new User(5L));
 
-        assertEquals(new BigDecimal("4.00"), CollectionsUtil.avg(list, 2, "id"));
+        assertEquals(new BigDecimal("4.00"), CollectionsUtil.avg(list, "id", 2));
 
     }
 
@@ -485,17 +488,14 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testAvg2(){
-        List<User> list = new ArrayList<User>();
-
         User user1 = new User(2L);
         user1.setAge(18);
-        list.add(user1);
 
         User user2 = new User(3L);
         user2.setAge(30);
-        list.add(user2);
 
-        Map<String, BigDecimal> map = CollectionsUtil.avg(list, 2, "id", "age");
+        List<User> list = ConvertUtil.toList(user1, user2);
+        Map<String, BigDecimal> map = CollectionsUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
         LOGGER.info(JsonUtil.format(map));
     }
 
@@ -556,31 +556,27 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSum3(){
-        List<User> list = new ArrayList<User>();
-
         User user1 = new User(10L);
         user1.setName("刘备");
         user1.setAge(50);
-        list.add(user1);
 
         User user2 = new User(20L);
         user1.setName("关羽");
         user2.setAge(50);
-        list.add(user2);
 
         User user3 = new User(100L);
         user3.setName("张飞");
         user3.setAge(100);
-        list.add(user3);
 
-        Map<String, BigDecimal> map = CollectionsUtil.sum(list, new Predicate<User>(){
+        List<User> list = ConvertUtil.toList(user1, user2, user3);
+        Map<String, BigDecimal> map = CollectionsUtil.sum(list, ConvertUtil.toArray("id", "age"), new Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
                 return !"张飞".equals(user.getName());
             }
-        }, "id", "age");
-        LOGGER.info("{}", JsonUtil.format(map));
+        });
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
