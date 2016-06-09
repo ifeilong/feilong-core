@@ -429,7 +429,7 @@ public final class ConvertUtil{
      * 把对象转换为long类型.
      * 
      * <p>
-     * converted is missing or an error occurs converting the value,<span style="color:red">return null</span>
+     * converted is missing or an error occurs converting the value,返回<span style="color:red"> null</span>
      * </p>
      *
      * @param toBeConvertedValue

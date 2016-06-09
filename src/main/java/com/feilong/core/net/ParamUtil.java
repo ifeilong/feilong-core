@@ -55,139 +55,6 @@ public final class ParamUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /**
-     * 将多值的参数map转成单值的参数map.
-     * 
-     * <p style="color:green">
-     * 返回的是 {@link LinkedHashMap},保证顺序和 参数 <code>arrayValueMap</code>顺序相同
-     * </p>
-     * 
-     * <p>
-     * 和该方法正好相反的是 {@link #toArrayValueMap(Map)}
-     * </p>
-     * 
-     * <h3>示例1:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
-     * 
-     * keyAndArrayMap.put("province", new String[] { "江苏省" });
-     * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "province": "江苏省",
-     * "city": "南通市"
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <p>
-     * 如果arrayValueMap其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,
-     * </p>
-     * 
-     * <h3>示例2:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
-     * 
-     * keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
-     * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "province": "浙江省",
-     * "city": "南通市"
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param arrayValueMap
-     *            the array value map
-     * @return 如果参数<code>arrayValueMap</code>是null或者empty,那么return {@link Collections#emptyMap()},<br>
-     *         如果<code>arrayValueMap</code>其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
-     *         如果<code>arrayValueMap</code>其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
-     * @since 1.4.0
-     */
-    public static Map<String, String> toSingleValueMap(Map<String, String[]> arrayValueMap){
-        if (Validator.isNullOrEmpty(arrayValueMap)){
-            return Collections.emptyMap();
-        }
-
-        //保证顺序和 参数 arrayValueMap 顺序相同
-        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
-        for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
-            String[] values = entry.getValue();
-            singleValueMap.put(entry.getKey(), Validator.isNotNullOrEmpty(values) ? values[0] : StringUtils.EMPTY);
-        }
-        return singleValueMap;
-    }
-
-    /**
-     * 将单值的参数map转成多值的参数map.
-     * 
-     * <p style="color:green">
-     * 返回的是 {@link LinkedHashMap},保证顺序和 参数 <code>singleValueMap</code>顺序相同
-     * </p>
-     * 
-     * <p>
-     * 和该方法正好相反的是 {@link #toSingleValueMap(Map)}
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <String, String>}();
-     * 
-     * singleValueMap.put("province", "江苏省");
-     * singleValueMap.put("city", "南通市");
-     * 
-     * LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "province": ["江苏省"],
-     * "city": ["南通市"]
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param singleValueMap
-     *            the name and value map
-     * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么return {@link Collections#emptyMap()}<br>
-     *         否则 迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
-     * @since 1.4.0
-     */
-    public static Map<String, String[]> toArrayValueMap(Map<String, String> singleValueMap){
-        if (Validator.isNullOrEmpty(singleValueMap)){
-            return Collections.emptyMap();
-        }
-
-        //保证顺序和 参数 singleValueMap顺序相同
-        Map<String, String[]> arrayValueMap = new LinkedHashMap<String, String[]>();
-        for (Map.Entry<String, String> entry : singleValueMap.entrySet()){
-            arrayValueMap.put(entry.getKey(), new String[] { entry.getValue() });
-        }
-        return arrayValueMap;
-    }
-
     // ************************************addParameter******************************************************
 
     /**
@@ -206,7 +73,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=&label=2-5-8-12
+     * {@code http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=&label=2-5-8-12}
      * </pre>
      * 
      * </blockquote>
@@ -222,12 +89,12 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
+     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换<br>
+     *         如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see #addParameterSingleValueMap(String, Map, String)
      */
     public static String addParameter(String uriString,String paramName,Object parameValue,String charsetType){
-        //反正这里就一个值, 所以没有必要声明为 LinkedHashMap
-        Map<String, String> singleValueMap = new HashMap<String, String>();
+        Map<String, String> singleValueMap = new HashMap<String, String>();//反正这里就一个值, 所以没有必要声明为 LinkedHashMap
         singleValueMap.put(paramName, "" + parameValue);
         return addParameterSingleValueMap(uriString, singleValueMap, charsetType);
     }
@@ -246,12 +113,12 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
+     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换<br>
+     *         如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see #addParameterArrayValueMap(URI, Map, String)
      */
     public static String addParameter(URI uri,String paramName,Object parameValue,String charsetType){
-        //反正这里就一个值, 所以没有必要声明为 LinkedHashMap
-        Map<String, String[]> map = new HashMap<String, String[]>();
+        Map<String, String[]> map = new HashMap<String, String[]>();//反正这里就一个值, 所以没有必要声明为 LinkedHashMap
         map.put(paramName, new String[] { "" + parameValue });
         return addParameterArrayValueMap(uri, map, charsetType);
     }
@@ -275,7 +142,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * www.baidu.com?province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
+     * {@code www.baidu.com?province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82}
      * </pre>
      * 
      * </blockquote>
@@ -295,7 +162,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
+     * {@code www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82}
      * </pre>
      * 
      * </blockquote>
@@ -308,7 +175,7 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return the string
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      * @see #addParameterArrayValueMap(String, Map, String)
      */
     public static String addParameterSingleValueMap(String uriString,Map<String, String> singleValueMap,String charsetType){
@@ -340,7 +207,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * www.baidu.com?receiver=%E9%91%AB%E5%93%A5&receiver=feilong&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
+     * {@code www.baidu.com?receiver=%E9%91%AB%E5%93%A5&receiver=feilong&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82}
      * </pre>
      * 
      * </blockquote>
@@ -360,7 +227,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82
+     * {@code www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82}
      * </pre>
      * 
      * </blockquote>
@@ -373,7 +240,9 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换
+     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换<br>
+     *         如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>arrayValueMap</code> 是null或者empty,直接返回 <code>uriString</code><br>
      * @see #addParameterArrayValueMap(URI, Map, String)
      * @since 1.4.0
      */
@@ -382,19 +251,15 @@ public final class ParamUtil{
         if (null == uriString){
             return StringUtils.EMPTY;
         }
-
-        if (Validator.isNullOrEmpty(arrayValueMap)){
-            return uriString;
-        }
-        String queryString = URIUtil.getQueryString(uriString);
-        return addParameterArrayValueMap(uriString, queryString, arrayValueMap, charsetType);
+        return Validator.isNullOrEmpty(arrayValueMap) ? uriString
+                        : addParameterArrayValueMap(uriString, URIUtil.getQueryString(uriString), arrayValueMap, charsetType);
     }
 
     /**
      * 添加参数.
      * 
      * <p>
-     * 如果uri包含指定的参数名字,那么会被新的值替换,比如原来是a=1&a=2,现在使用a,[3,4]调用这个方法,会返回a=3&a=4.
+     * 如果uri包含指定的参数名字,那么会被新的值替换,比如原来是{@code a=1&a=2},现在使用a,[3,4]调用这个方法,会返回{@code a=3&a=4}.
      * </p>
      * 
      * @param uri
@@ -412,13 +277,8 @@ public final class ParamUtil{
         if (null == uri){
             return StringUtils.EMPTY;
         }
-
-        String uriString = uri.toString();
-        if (Validator.isNullOrEmpty(arrayValueMap)){
-            return uriString;
-        }
-        String queryString = uri.getRawQuery();
-        return addParameterArrayValueMap(uriString, queryString, arrayValueMap, charsetType);
+        return Validator.isNullOrEmpty(arrayValueMap) ? uri.toString()
+                        : addParameterArrayValueMap(uri.toString(), uri.getRawQuery(), arrayValueMap, charsetType);
     }
 
     // ********************************removeParameter*********************************************************************
@@ -454,19 +314,14 @@ public final class ParamUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>paramName</code> 是null或者empty,返回 <code>uriString</code><br>
-     *         否则 构造 list ,调用 {@link #removeParameterList(String, List, String)}
+     *         否则 构造 list,调用 {@link #removeParameterList(String, List, String)}
      * @see #removeParameterList(String, List, String)
      */
     public static String removeParameter(String uriString,String paramName,String charsetType){
         if (Validator.isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(paramName)){
-            return uriString;
-        }
-        List<String> list = new ArrayList<String>();
-        list.add(paramName);
-        return removeParameterList(uriString, list, charsetType);
+        return Validator.isNullOrEmpty(paramName) ? uriString : removeParameterList(uriString, ConvertUtil.toList(paramName), charsetType);
     }
 
     /**
@@ -487,13 +342,7 @@ public final class ParamUtil{
         if (null == uri){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(paramName)){// 如果 paramNameList 是null 原样返回
-            return uri.toString();
-        }
-        List<String> paramNameList = new ArrayList<String>();
-        paramNameList.add(paramName);
-
-        return removeParameterList(uri, paramNameList, charsetType);
+        return Validator.isNullOrEmpty(paramName) ? uri.toString() : removeParameterList(uri, ConvertUtil.toList(paramName), charsetType);
     }
 
     /**
@@ -530,16 +379,14 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>paramNameList</code> 是null或者empty,返回 <code>uriString</code><br>
      */
     public static String removeParameterList(String uriString,List<String> paramNameList,String charsetType){
         if (Validator.isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(paramNameList)){// 如果 paramNameList 是null 原样返回
-            return uriString;
-        }
-        String queryString = URIUtil.getQueryString(uriString);
-        return removeParameterList(uriString, queryString, paramNameList, charsetType);
+        return Validator.isNullOrEmpty(paramNameList) ? uriString
+                        : removeParameterList(uriString, URIUtil.getQueryString(uriString), paramNameList, charsetType);
     }
 
     /**
@@ -554,17 +401,14 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uri</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>paramNameList</code> 是null或者empty,返回 <code>uri.toString()</code><br>
      */
     public static String removeParameterList(URI uri,List<String> paramNameList,String charsetType){
         if (null == uri){
             return StringUtils.EMPTY;
         }
-        String uriString = uri.toString();
-        if (Validator.isNullOrEmpty(paramNameList)){// 如果 paramNameList是null原样返回
-            return uriString;
-        }
-        String queryString = uri.getRawQuery();// 返回此URI的原始查询组成部分. URI的查询组成部分(如果定义了)只包含合法的 URI字符.
-        return removeParameterList(uri.toString(), queryString, paramNameList, charsetType);
+        return Validator.isNullOrEmpty(paramNameList) ? uri.toString()
+                        : removeParameterList(uri.toString(), uri.getRawQuery(), paramNameList, charsetType);
     }
 
     /**
@@ -638,7 +482,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果 <code>paramNameList</code> 是null或者empty,返回 <code>uriString</code><br>
+     *         如果 <code>paramNameList</code> 是null或者empty,直接返回 <code>uriString</code><br>
      *         否则调用 {@link #retentionParamList(URI, List, String)}
      * @see #retentionParamList(URI, List, String)
      */
@@ -646,12 +490,8 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
-
-        if (Validator.isNullOrEmpty(paramNameList)){ // 如果 paramNameList 是null 原样返回
-            return uriString;
-        }
-        String queryString = URIUtil.getQueryString(uriString);
-        return retentionParamList(uriString, queryString, paramNameList, charsetType);
+        return Validator.isNullOrEmpty(paramNameList) ? uriString
+                        : retentionParamList(uriString, URIUtil.getQueryString(uriString), paramNameList, charsetType);
     }
 
     /**
@@ -666,20 +506,15 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uri</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>paramNameList</code> 是null或者empty,直接返回 <code>uri.toString()</code><br>
      * @see #toSafeArrayValueMap(String, String)
      */
     public static String retentionParamList(URI uri,List<String> paramNameList,String charsetType){
         if (null == uri){
             return StringUtils.EMPTY;
         }
-
-        String uriString = uri.toString();
-
-        if (Validator.isNullOrEmpty(paramNameList)){ // 如果 paramNameList 是null 原样返回
-            return uriString;
-        }
-        String queryString = uri.getRawQuery(); // 返回此 URI的原始查询组成部分. URI的查询组成部分(如果定义了)只包含合法的 URI字符.
-        return retentionParamList(uriString, queryString, paramNameList, charsetType);
+        return Validator.isNullOrEmpty(paramNameList) ? uri.toString()
+                        : retentionParamList(uri.toString(), uri.getRawQuery(), paramNameList, charsetType);
     }
 
     /**
@@ -703,7 +538,6 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
-
         if (Validator.isNullOrEmpty(queryString)){
             return uriString; //不带参数原样返回
         }
@@ -717,6 +551,134 @@ public final class ParamUtil{
     }
 
     //*********************************************************************************
+
+    /**
+     * 将多值的参数map转成单值的参数map.
+     * 
+     * <p style="color:green">
+     * 返回的是 {@link LinkedHashMap},保证顺序和 参数 <code>arrayValueMap</code>顺序相同
+     * </p>
+     * 
+     * <p>
+     * 和该方法正好相反的是 {@link #toArrayValueMap(Map)}
+     * </p>
+     * 
+     * <h3>示例1:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * 
+     * keyAndArrayMap.put("province", new String[] { "江苏省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": "江苏省",
+     * "city": "南通市"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <p>
+     * 如果arrayValueMap其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,
+     * </p>
+     * 
+     * <h3>示例2:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * 
+     * keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": "浙江省",
+     * "city": "南通市"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param arrayValueMap
+     *            the array value map
+     * @return 如果参数<code>arrayValueMap</code>是null或者empty,那么返回 {@link Collections#emptyMap()},<br>
+     *         如果<code>arrayValueMap</code>其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
+     *         如果<code>arrayValueMap</code>其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
+     * @since 1.4.0
+     */
+    public static Map<String, String> toSingleValueMap(Map<String, String[]> arrayValueMap){
+        if (Validator.isNullOrEmpty(arrayValueMap)){
+            return Collections.emptyMap();
+        }
+        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();//保证顺序和 参数 arrayValueMap 顺序相同
+        for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
+            singleValueMap.put(entry.getKey(), Validator.isNotNullOrEmpty(entry.getValue()) ? entry.getValue()[0] : StringUtils.EMPTY);
+        }
+        return singleValueMap;
+    }
+
+    /**
+     * 将单值的参数map转成多值的参数map.
+     * 
+     * <p style="color:green">
+     * 返回的是 {@link LinkedHashMap},保证顺序和 参数 <code>singleValueMap</code>顺序相同
+     * </p>
+     * 
+     * <p>
+     * 和该方法正好相反的是 {@link #toSingleValueMap(Map)}
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <String, String>}();
+     * 
+     * singleValueMap.put("province", "江苏省");
+     * singleValueMap.put("city", "南通市");
+     * 
+     * LOGGER.info(JsonUtil.format(ParamUtil.toArrayValueMap(singleValueMap)));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "province": ["江苏省"],
+     * "city": ["南通市"]
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param singleValueMap
+     *            the name and value map
+     * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么返回 {@link Collections#emptyMap()}<br>
+     *         否则 迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
+     * @since 1.4.0
+     */
+    public static Map<String, String[]> toArrayValueMap(Map<String, String> singleValueMap){
+        if (Validator.isNullOrEmpty(singleValueMap)){
+            return Collections.emptyMap();
+        }
+        Map<String, String[]> arrayValueMap = new LinkedHashMap<String, String[]>();//保证顺序和 参数 singleValueMap顺序相同
+        for (Map.Entry<String, String> entry : singleValueMap.entrySet()){
+            arrayValueMap.put(entry.getKey(), ConvertUtil.toArray(entry.getValue()));
+        }
+        return arrayValueMap;
+    }
 
     /**
      * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType不是null或者empty 返回安全的 key和value).
