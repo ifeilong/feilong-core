@@ -317,7 +317,7 @@ public final class URIUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2")
+     * URIUtil.getQueryString({@code "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2"})
      * </pre>
      * 
      * 返回: {@code a=1&a=2}

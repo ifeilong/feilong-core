@@ -254,9 +254,9 @@ public final class MapUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
-     * @param <K>
      *
+     * @param <K>
+     *            the key type
      * @param arrayValueMap
      *            the array value map
      * @return 如果参数<code>arrayValueMap</code>是null或者empty,那么返回 {@link Collections#emptyMap()},<br>
@@ -308,9 +308,9 @@ public final class MapUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param <K>
-     * 
+     *            the key type
      * @param singleValueMap
      *            the name and value map
      * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么返回 {@link Collections#emptyMap()}<br>
