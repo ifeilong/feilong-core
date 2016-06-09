@@ -45,6 +45,21 @@ public class NumberFormatUtilTest{
         assertEquals("RP 26", NumberFormatUtil.format(25.5, "RP #####"));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testFormat1(){
+        NumberFormatUtil.format(null, "#####");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testFormat2(){
+        NumberFormatUtil.format(25, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFormat3(){
+        NumberFormatUtil.format(25, " ");
+    }
+
     /**
      * Convert number to string2.
      */

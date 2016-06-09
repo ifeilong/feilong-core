@@ -21,13 +21,11 @@ import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.NumberFormat;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.NumberPattern;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link NumberFormat}是所有数值格式的抽象基类,此类提供格式化和解析数值的接口.
@@ -60,7 +58,7 @@ public final class NumberFormatUtil{
      * 将 {@link Number} 使用 numberPattern格式化.
      * 
      * <p style="color:red">
-     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.lang.NumberUtil#toString(Number, String)}替代
+     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.lang.NumberUtil#toString(Number, String) NumberUtil.toString(Number, String)}替代
      * </p>
      * 
      * <p>
@@ -74,20 +72,18 @@ public final class NumberFormatUtil{
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果有异常,返回 {@link StringUtils#EMPTY}
      * @see NumberPattern
      * @see DecimalFormat
      * @see RoundingMode#HALF_UP
      * @see #format(Number, String, RoundingMode)
      */
     public static String format(Number value,String numberPattern){
-        // 如果不设置, DecimalFormat默认使用的是 RoundingMode.HALF_EVEN
         RoundingMode roundingMode = RoundingMode.HALF_UP;
         return format(value, numberPattern, roundingMode);
     }
 
     /**
-     * 将 {@link Number} 使用 {@link RoundingMode} numberPattern格式化.
+     * 将 {@link Number} 使用 {@link RoundingMode} <code>numberPattern</code>格式化.
      *
      * @param value
      *            the value
@@ -98,33 +94,23 @@ public final class NumberFormatUtil{
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果有异常,返回 {@link StringUtils#EMPTY}
      * @see DecimalFormat
      * @see <a href="../util/NumberUtil.html#RoundingMode">JAVA 8种舍入法</a>
      */
     public static String format(Number value,String numberPattern,RoundingMode roundingMode){
         Validate.notNull(value, "value can't be null!");
         Validate.notBlank(numberPattern, "numberPattern can't be null!");
-        try{
-            //该构造方法内部 调用了applyPattern(pattern, false)
-            DecimalFormat decimalFormat = new DecimalFormat(numberPattern);
 
-            // 如果不设置默认使用的是 RoundingMode.HALF_EVEN
-            // 精确舍入,银行家舍入法.四舍六入,五分两种情况.如果前一位为奇数,则入位,否则舍去.以下例子为保留小数点1位,那么这种舍入方式下的结果.
-            // 1.15>1.2    1.25>1.2 
-            if (null != roundingMode){
-                decimalFormat.setRoundingMode(roundingMode);
-            }
-            String format = decimalFormat.format(value);
-            if (LOGGER.isDebugEnabled()){
-                String pattern = "value:[{}],pattern:[{}],return:[{}],decimalFormat.toLocalizedPattern():[{}]";
-                LOGGER.debug(pattern, value, numberPattern, format, decimalFormat.toLocalizedPattern());//合成一个表示此 Format对象当前状态的、已本地化的模式字符串. 
-            }
-            return format;
-        }catch (Exception e){
-            String message = Slf4jUtil.format("value:[{}],pattern:[{}],roundingMode:[{}]", value, numberPattern, roundingMode);
-            LOGGER.error(message, e);
+        //该构造方法内部 调用了applyPattern(pattern, false)
+        DecimalFormat decimalFormat = new DecimalFormat(numberPattern);
+
+        // 如果不设置默认使用的是 RoundingMode.HALF_EVEN  精确舍入,银行家舍入法.四舍六入,五分两种情况.如果前一位为奇数,则入位,否则舍去.以下例子为保留小数点1位,那么这种舍入方式下的结果.
+        // 1.15>1.2    1.25>1.2 
+        if (null != roundingMode){
+            decimalFormat.setRoundingMode(roundingMode);
         }
-        return StringUtils.EMPTY;
+        String result = decimalFormat.format(value);
+        LOGGER.debug("input:[{}],with:[{}]=[{}],localizedPattern:[{}]", value, numberPattern, result, decimalFormat.toLocalizedPattern());
+        return result;
     }
 }
