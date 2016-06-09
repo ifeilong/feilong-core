@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,14 +62,16 @@ public final class RegexUtil{
      *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
-     * @return 如果input 符合 regex的正则表达式格式,返回true, 否则返回 false;
+     * @return 如果input 符合 regex的正则表达式格式,返回true, 否则返回 false;<br>
+     *         如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#matches()
      * @see Pattern#matches(String, CharSequence)
      * @since 1.0.7
      */
     public static boolean matches(String regexPattern,CharSequence input){
-        return Pattern.matches(regexPattern, input);
+        return getMatcher(regexPattern, input).matches();
     }
 
     /**
@@ -103,7 +106,9 @@ public final class RegexUtil{
      *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
-     * @return 如果 匹配不了,返回 {@link java.util.Collections#emptyMap()}
+     * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 匹配不了,返回 {@link java.util.Collections#emptyMap()}
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#group(int)
      * @since 1.0.7
@@ -124,12 +129,10 @@ public final class RegexUtil{
         LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
 
         int groupCount = matcher.groupCount();
-
         for (int i = 1; i <= groupCount; ++i){
             //匹配的索引
             LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
-            String groupValue = matcher.group(i);
-            groupMap.put(i, groupValue);
+            groupMap.put(i, matcher.group(i));//groupValue
         }
 
         if (LOGGER.isDebugEnabled()){
@@ -167,7 +170,8 @@ public final class RegexUtil{
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @param group
      *            the group
-     * @return the map
+     * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#group(int)
      * @since 1.0.7
@@ -185,7 +189,8 @@ public final class RegexUtil{
      *            正则表达式字符串,pls use {@link RegexPattern}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
-     * @return the matcher
+     * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
      * @see Pattern#compile(String)
      * @since 1.0.7
      */
@@ -216,11 +221,14 @@ public final class RegexUtil{
      *            通过嵌入式标志表达式 (?x) 也可以启用注释模式. <br>
      *            </li>
      *            </ul>
-     * @return the matcher
+     * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
      * @see Pattern#compile(String, int)
      * @since 1.5.3
      */
     private static Matcher getMatcher(String regexPattern,CharSequence input,int flags){
+        Validate.notNull(regexPattern, "regexPattern can't be null!");
+        Validate.notNull(input, "input can't be null!");
         Pattern pattern = Pattern.compile(regexPattern, flags);
         return pattern.matcher(input);
     }
