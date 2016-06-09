@@ -412,11 +412,10 @@ public final class JsonUtil{
         if (null == jsonFormatConfig){
             return format(obj, (JsonConfig) null, indentFactor, indent);
         }
-
         JsonConfig jsonConfig = getDefaultJsonConfig();
 
+        //value处理器
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = jsonFormatConfig.getPropertyNameAndJsonValueProcessorMap();
-
         if (Validator.isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
             for (Map.Entry<String, JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
                 String propertyName = entry.getKey();
@@ -424,12 +423,12 @@ public final class JsonUtil{
                 jsonConfig.registerJsonValueProcessor(propertyName, jsonValueProcessor);
             }
         }
-
+        //排除
         String[] excludes = jsonFormatConfig.getExcludes();
         if (Validator.isNotNullOrEmpty(excludes)){
             jsonConfig.setExcludes(excludes);
         }
-
+        //包含
         String[] includes = jsonFormatConfig.getIncludes();
         if (Validator.isNotNullOrEmpty(includes)){
             jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(includes));
@@ -465,7 +464,6 @@ public final class JsonUtil{
 
         Map<String, Object> map = FieldUtil.getAllFieldNameAndValueMap(obj);
 
-        //*****************************************************************************
         List<Field> fieldsListWithAnnotation = FieldUtils.getFieldsListWithAnnotation(obj.getClass(), SensitiveWords.class);
 
         JsonFormatConfig jsonFormatConfig = null;
@@ -744,10 +742,8 @@ public final class JsonUtil{
         int size = jsonArray.size();
 
         T[] t = ArrayUtil.newArray(rootClass, size);
-
         for (int i = 0; i < size; i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            t[i] = toBean(jsonObject, rootClass, classMap);
+            t[i] = toBean(jsonArray.getJSONObject(i), rootClass, classMap);
         }
         return t;
     }
@@ -851,11 +847,9 @@ public final class JsonUtil{
      */
     public static <T> List<T> toList(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
         List<T> list = new ArrayList<T>();
-
         JSONArray jsonArray = toJSONArray(json);
         for (int i = 0, j = jsonArray.size(); i < j; i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            list.add(toBean(jsonObject, rootClass, classMap));
+            list.add(toBean(jsonArray.getJSONObject(i), rootClass, classMap));
         }
         return list;
     }
@@ -969,10 +963,10 @@ public final class JsonUtil{
      * 返回:
      * 
      * <pre class="code">
-    {
-        "data1": {"name": "get"},
-        "data2": {"name": "set"}
-    }
+     * {
+     * "data1": {"name": "get"},
+     * "data2": {"name": "set"}
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1074,10 +1068,10 @@ public final class JsonUtil{
      * 返回:
      * 
      * <pre class="code">
-      {
-          "dateAttr": "2009-11-12 00:00:00",
-          "name": "get"
-      }
+     * {
+     * "dateAttr": "2009-11-12 00:00:00",
+     * "name": "get"
+     * }
      * </pre>
      * 
      * </blockquote>
