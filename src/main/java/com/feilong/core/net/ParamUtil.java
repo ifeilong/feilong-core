@@ -615,17 +615,16 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(queryString)){
             return Collections.emptyMap();
         }
-        boolean needEncode = Validator.isNotNullOrEmpty(charsetType);
 
         String[] nameAndValueArray = StringUtil.split(queryString, URIComponents.AMPERSAND);
         Map<String, String[]> map = new LinkedHashMap<String, String[]>();//使用 LinkedHashMap 保证元素的顺序
         for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
             String[] tempArray = nameAndValueArray[i].split("=", 2);
 
-            String key = needEncode ? decodeAndEncode(tempArray[0], charsetType) : tempArray[0];
+            String key = decodeAndEncode(tempArray[0], charsetType);
             String value = tempArray.length == 2 ? tempArray[1] : StringUtils.EMPTY;//有可能参数中,只有名字没有值或者值是空,处理的时候不能遗失掉
+            value = decodeAndEncode(value, charsetType);
 
-            value = needEncode ? decodeAndEncode(value, charsetType) : value;
             map.put(key, ArrayUtils.add(map.get(key), value));
         }
         return map;
@@ -677,7 +676,7 @@ public final class ParamUtil{
      * </blockquote>
      *
      * @param arrayValueMap
-     *            类似于 request.getParamMap
+     *            类似于 <code>request.getParamMap</code>
      * @param charsetType
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
@@ -743,7 +742,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
-        return toQueryStringUseSingleValueMap(new TreeMap<String, String>(singleValueMap));
+        return null == singleValueMap ? StringUtils.EMPTY : toQueryStringUseSingleValueMap(MapUtil.sortByKeyAsc(singleValueMap));
     }
 
     /**
@@ -869,9 +868,9 @@ public final class ParamUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
-     * @param <K>
      *
+     * @param <K>
+     *            the key type
      * @param singleValueMap
      *            the map
      * @param includeKeys
@@ -925,6 +924,7 @@ public final class ParamUtil{
                     Map<String, String[]> arrayValueMap,
                     String charsetType){
         Map<String, String[]> safeArrayValueMap = ObjectUtils.defaultIfNull(arrayValueMap, Collections.<String, String[]> emptyMap());
+
         Map<String, String[]> arrayParamValuesMap = new LinkedHashMap<String, String[]>(safeArrayValueMap.size());
         //先提取queryString map
         if (Validator.isNotNullOrEmpty(queryString)){
@@ -953,10 +953,7 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(arrayValueMap)){
             return Collections.emptyMap();
         }
-
-        //内部使用 LinkedHashMap,保持map元素顺序
-        Map<String, String[]> safeArrayValueMap = new LinkedHashMap<String, String[]>(arrayValueMap.size());
-
+        Map<String, String[]> safeArrayValueMap = new LinkedHashMap<String, String[]>(arrayValueMap.size());//使用 LinkedHashMap,保持map元素顺序
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             String key = entry.getKey();
             String[] paramValues = entry.getValue();
@@ -964,19 +961,30 @@ public final class ParamUtil{
                 LOGGER.warn("the param key:[{}] value is null", key);
                 paramValues = ArrayUtils.EMPTY_STRING_ARRAY;//赋予 empty数组,为了下面的转换
             }
-
-            if (Validator.isNotNullOrEmpty(charsetType)){
-                key = decodeAndEncode(key, charsetType);
-                List<String> paramValueList = new ArrayList<String>();
-                for (String value : paramValues){
-                    paramValueList.add(Validator.isNotNullOrEmpty(value) ? decodeAndEncode(value, charsetType) : StringUtils.EMPTY);
-                }
-                safeArrayValueMap.put(key, ConvertUtil.toArray(paramValueList, String.class));
-            }else{
-                safeArrayValueMap.put(key, paramValues);
-            }
+            safeArrayValueMap.put(decodeAndEncode(key, charsetType), toSafeValueArray(paramValues, charsetType));
         }
         return safeArrayValueMap;
+    }
+
+    /**
+     * To safe value array.
+     *
+     * @param paramValues
+     *            the param values
+     * @param charsetType
+     *            the charset type
+     * @return the string[]
+     * @since 1.6.1
+     */
+    private static String[] toSafeValueArray(String[] paramValues,String charsetType){
+        if (Validator.isNullOrEmpty(charsetType)){
+            return paramValues;
+        }
+        List<String> paramValueList = new ArrayList<String>();
+        for (String value : paramValues){
+            paramValueList.add(decodeAndEncode(value, charsetType));
+        }
+        return ConvertUtil.toArray(paramValueList, String.class);
     }
 
     /**
@@ -1058,8 +1066,8 @@ public final class ParamUtil{
      *            何种编码, {@link CharsetType}<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 (Validator.isNullOrEmpty(beforePathWithoutQueryString)),返回 {@link StringUtils#EMPTY}<br>
-     *         如果 (Validator.isNullOrEmpty(arrayValueMap)),返回 beforePathWithoutQueryString
+     * @return 如果 <code>beforePathWithoutQueryString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果<code>arrayValueMap</code> 是null或者empty,返回 <code>beforePathWithoutQueryString</code>
      * @since 1.4.0
      */
     private static String combineUrl(String beforePathWithoutQueryString,Map<String, String[]> arrayValueMap,String charsetType){
