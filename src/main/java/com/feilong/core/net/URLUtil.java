@@ -67,7 +67,7 @@ public final class URLUtil{
      *
      * @param urls
      *            the urls
-     * @return the string[]
+     * @return 如果 <code>urls</code> 是null,抛出 {@link NullPointerException}<br>
      * @see com.feilong.core.bean.ConvertUtil#toStrings(Object)
      * @since 1.2.1
      */
@@ -81,11 +81,13 @@ public final class URLUtil{
      *
      * @param url
      *            the url
-     * @return the uri
+     * @return 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "org.springframework.util.ResourceUtils#toURI(URL)"
+     * @see java.net.URL#toURI()
      * @since 1.2.2
      */
     public static URI toURI(URL url){
+        Validate.notNull(url, "url can't be null!");
         try{
             return url.toURI();
         }catch (URISyntaxException e){
@@ -98,10 +100,13 @@ public final class URLUtil{
      *
      * @param spec
      *            the <code>String</code> to parse as a URL.
-     * @return the url
+     * @return 如果 <code>spec</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>spec</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see java.net.URL#URL(String)
      * @since 1.3.0
      */
     public static URL newURL(String spec){
+        Validate.notBlank(spec, "spec can't be blank!");
         try{
             return new URL(spec);
         }catch (MalformedURLException e){
@@ -110,21 +115,22 @@ public final class URLUtil{
     }
 
     /**
-     * 获取联合url,通过在指定的上下文中对给定的 spec进行解析创建 URL. 新的 URL从给定的上下文 URL和 spec参数创建.
+     * 获取联合url,通过在指定的上下文中对给定的 spec进行解析创建 URL,新的 URL从给定的上下文 URL和 spec参数创建.
      * 
      * <p style="color:red">
      * 网站地址拼接,请使用{@link #getUnionUrl(URL, String)}
      * </p>
      * 
      * <p>
-     * 示例: URIUtil.getUnionUrl("E:\\test", "sanguo")-------------{@code >}file:/E:/test/sanguo
+     * URIUtil.getUnionUrl("E:\\test", "sanguo") = file:/E:/test/sanguo
      * </p>
      * 
      * @param context
      *            要解析规范的上下文
      * @param spec
      *            the <code>String</code> to parse as a URL.
-     * @return 获取联合url
+     * @return 如果 <code>context</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>context</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getFileURL(String)
      * @see #getUnionUrl(URL, String)
      * @since 1.4.0
@@ -135,7 +141,7 @@ public final class URLUtil{
     }
 
     /**
-     * 获取联合url,通过在指定的上下文中对给定的 spec 进行解析创建 URL. 新的 URL 从给定的上下文 URL 和 spec 参数创建.
+     * 获取联合url,通过在指定的上下文中对给定的 spec 进行解析创建 URL,新的 URL 从给定的上下文 URL 和 spec 参数创建.
      * 
      * <p style="color:red">
      * 网站地址拼接,请使用这个method
@@ -146,10 +152,10 @@ public final class URLUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * URIUtil.getUnionUrl("E:\\test", "sanguo"){@code --->}file:/E:/test/sanguo
+     * URIUtil.getUnionUrl("E:\\test", "sanguo")            =   file:/E:/test/sanguo
      * 
      * URL url = new URL("http://www.exiaoshuo.com/jinyiyexing/");
-     * URIUtil.getUnionUrl(url, "/jinyiyexing/1173348/") {@code ------->} http://www.exiaoshuo.com/jinyiyexing/1173348/
+     * URIUtil.getUnionUrl(url, "/jinyiyexing/1173348/")    =  http://www.exiaoshuo.com/jinyiyexing/1173348/
      * </pre>
      * 
      * </blockquote>
@@ -158,10 +164,11 @@ public final class URLUtil{
      *            要解析规范的上下文
      * @param spec
      *            the <code>String</code> to parse as a URL.
-     * @return 获取联合url
+     * @return 如果 <code>spec</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.4.0
      */
     public static String getUnionUrl(URL context,String spec){
+        Validate.notNull(spec, "spec can't be null!");
         try{
             URL unionUrl = new URL(context, spec);
             return unionUrl.toString();
@@ -171,7 +178,7 @@ public final class URLUtil{
     }
 
     /**
-     * 将字符串路径转成url.
+     * 将字符串路径 <code>filePathName</code> 转成url.
      *
      * @param filePathName
      *            字符串路径
@@ -186,8 +193,7 @@ public final class URLUtil{
         Validate.notBlank(filePathName, "filePathName can't be null/empty!");
         File file = new File(filePathName);
         try{
-            // file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
-            return file.toURI().toURL();
+            return file.toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
         }catch (MalformedURLException e){
             throw new URIParseException(e);
         }
