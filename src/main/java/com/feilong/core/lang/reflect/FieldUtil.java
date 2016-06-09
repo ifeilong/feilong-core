@@ -358,7 +358,7 @@ public final class FieldUtil{
      * @return the class field value
      * @see java.lang.Class#getField(String)
      * @see java.lang.reflect.Field#get(Object)
-     * @since 1.6.1
+     * @since 1.6.2
      */
     @SuppressWarnings("unchecked")
     private static <T> T getClassFieldValue(Class<?> ownerClass,String fieldName,Object object){

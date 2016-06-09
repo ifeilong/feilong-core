@@ -296,7 +296,7 @@ public final class ClassUtil{
      * @see org.apache.commons.lang3.ClassUtils#getClass(String)
      * @see org.apache.commons.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
      * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static Class<?> getClass(String className){
         Validate.notBlank(className, "className can't be blank!");

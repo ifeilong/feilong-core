@@ -193,7 +193,7 @@ public final class ClassLoaderUtil{
      * 
      * @return 获得 项目的 classpath
      * @see #getResource(String)
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static URL getRootClassPath(){
         return getRootClassPath(getClassLoaderByClass(ClassLoaderUtil.class));
@@ -206,7 +206,7 @@ public final class ClassLoaderUtil{
      *            the class loader
      * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getResource(ClassLoader, String)
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static URL getRootClassPath(ClassLoader classLoader){
         Validate.notNull(classLoader, "classLoader can't be null!");
@@ -254,7 +254,7 @@ public final class ClassLoaderUtil{
      * @param callingClass
      *            The Class object of the calling object
      * @return 如果在所有的{@link ClassLoader}里面都查不到资源,那么返回null
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static URL getResourceInAllClassLoader(String resourceName,Class<?> callingClass){
         List<ClassLoader> classLoaderList = getAllClassLoaderList(callingClass);
@@ -308,7 +308,7 @@ public final class ClassLoaderUtil{
      * @param callingClass
      *            the calling class
      * @return the all class loader
-     * @since 1.6.1
+     * @since 1.6.2
      */
     private static List<ClassLoader> getAllClassLoaderList(Class<?> callingClass){
         return ConvertUtil.toList(
@@ -327,7 +327,7 @@ public final class ClassLoaderUtil{
      * @param isFouned
      *            the is founed
      * @return the log info
-     * @since 1.6.1
+     * @since 1.6.2
      */
     private static String getLogInfo(String resourceName,ClassLoader classLoader,boolean isFouned){
         String message = "{}found [{}],in ClassLoader:[{}]";
@@ -340,7 +340,7 @@ public final class ClassLoaderUtil{
      * @param classLoader
      *            the class loader
      * @return the string
-     * @since 1.6.1
+     * @since 1.6.2
      */
     private static String formatClassLoader(ClassLoader classLoader){
         Map<String, Object> classLoaderInfoMap = new LinkedHashMap<String, Object>();

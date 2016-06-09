@@ -263,7 +263,7 @@ public final class MapUtil{
      * @return 如果<code>arrayValueMap</code>是null或者empty,那么返回 {@link Collections#emptyMap()},<br>
      *         如果<code>arrayValueMap</code>其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
      *         如果<code>arrayValueMap</code>其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static <K> Map<K, String> toSingleValueMap(Map<K, String[]> arrayValueMap){
         if (Validator.isNullOrEmpty(arrayValueMap)){
@@ -316,7 +316,7 @@ public final class MapUtil{
      *            the name and value map
      * @return 如果参数 <code>singleValueMap</code> 是null或者empty,那么返回 {@link Collections#emptyMap()}<br>
      *         否则迭代 <code>singleValueMap</code> 将value转成数组,返回新的 <code>arrayValueMap</code>
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static <K> Map<K, String[]> toArrayValueMap(Map<K, String> singleValueMap){
         if (Validator.isNullOrEmpty(singleValueMap)){
@@ -430,7 +430,7 @@ public final class MapUtil{
      * @see org.apache.commons.collections4.IterableMap
      * @see org.apache.commons.collections4.MultiMapUtils
      * @see org.apache.commons.collections4.multimap.AbstractMultiValuedMap#put(Object, Object)
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static <K, V> Map<K, List<V>> putMultiValue(Map<K, List<V>> map,K key,V value){
         Validate.notNull(map, "map can't be null!");
@@ -1086,7 +1086,7 @@ public final class MapUtil{
      *            the map entry list
      * @return the map< k, v>
      * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
-     * @since 1.6.1
+     * @since 1.6.2
      */
     private static <V, K> Map<K, V> toMap(List<Map.Entry<K, V>> mapEntryList){
         Map<K, V> returnMap = new LinkedHashMap<K, V>(mapEntryList.size());

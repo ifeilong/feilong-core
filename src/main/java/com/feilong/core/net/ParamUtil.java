@@ -974,7 +974,7 @@ public final class ParamUtil{
      * @param charsetType
      *            the charset type
      * @return the string[]
-     * @since 1.6.1
+     * @since 1.6.2
      */
     private static String[] toSafeValueArray(String[] paramValues,String charsetType){
         if (Validator.isNullOrEmpty(charsetType)){
@@ -1099,7 +1099,7 @@ public final class ParamUtil{
      *            the value
      * @return the map< k, v>
      * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
-     * @since 1.6.1
+     * @since 1.6.2
      */
     private static <K, V> Map<K, V> toMap(K key,V value){
         Map<K, V> map = new LinkedHashMap<K, V>();
@@ -1119,7 +1119,7 @@ public final class ParamUtil{
      * @param keyList
      *            the param name list
      * @return the map< k, v>
-     * @since 1.6.1
+     * @since 1.6.2
      */
     private static <K, V> Map<K, V> removeKeys(Map<K, V> map,List<K> keyList){
         Validate.notNull(map, "map can't be null!");

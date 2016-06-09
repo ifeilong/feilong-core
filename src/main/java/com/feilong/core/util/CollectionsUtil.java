@@ -1682,7 +1682,7 @@ public final class CollectionsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         if (Validator.isNullOrEmpty(objectCollection)){
@@ -1732,7 +1732,7 @@ public final class CollectionsUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #sum(Collection, String...)
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static <O> BigDecimal avg(Collection<O> objectCollection,String propertyName,int scale){
         return avg(objectCollection, ConvertUtil.toArray(propertyName), scale).get(propertyName);
@@ -1909,7 +1909,7 @@ public final class CollectionsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
-     * @since 1.6.1
+     * @since 1.6.2
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String[] propertyNames,Predicate<O> includePredicate){
         if (Validator.isNullOrEmpty(objectCollection)){

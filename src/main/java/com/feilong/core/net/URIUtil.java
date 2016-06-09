@@ -462,7 +462,7 @@ public final class URIUtil{
      * @param encodeOrDecode
      *            true 为encode,false为 decode
      * @return the string
-     * @since 1.6.1
+     * @since 1.6.2
      */
     private static String encodeOrDecode(String value,String charsetType,boolean encodeOrDecode){
         if (Validator.isNullOrEmpty(value)){
