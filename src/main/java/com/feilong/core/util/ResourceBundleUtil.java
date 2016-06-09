@@ -671,8 +671,7 @@ public final class ResourceBundleUtil{
     public static ResourceBundle getResourceBundleByFileName(String fileName){
         Validate.notBlank(fileName, "fileName can't be null/empty!");
         try{
-            InputStream inputStream = new FileInputStream(fileName);
-            return getResourceBundle(inputStream);
+            return getResourceBundle(new FileInputStream(fileName));
         }catch (FileNotFoundException e){
             throw new UncheckedIOException(e);
         }
