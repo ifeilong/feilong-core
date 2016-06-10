@@ -274,6 +274,46 @@ public final class CollectionsUtil{
      * CollectionsUtil.addAllIgnoreNull(list, null); = false
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * 对于以下代码:
+     * 
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
+     *     Set{@code <String>} set = new HashSet{@code <String>}();
+     *     if (null != lines && lines.size() > 0){
+     *         for (ShoppingCartLineCommand line : lines){
+     *             if (line.getComboIds() != null){
+     *                 set.addAll(line.getComboIds());
+     *             }
+     *         }
+     *     }
+     *     return set;
+     * }
+     * 
+     * </pre>
+     * 
+     * 可以重构成:
+     * 
+     * <pre class="code">
+     * 
+     * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
+     *     if (Validator.isNullOrEmpty(lines)){
+     *         return Collections.emptySet();
+     *     }
+     *     Set{@code <String>} set = new HashSet{@code <String>}();
+     *     for (ShoppingCartLineCommand line : lines){
+     *         CollectionsUtil.addAllIgnoreNull(set, line.getComboIds());
+     *     }
+     *     return set;
+     * }
+     * </pre>
+     * 
+     * 重构之后,方法额复杂度会更小
      * 
      * </blockquote>
      *
@@ -283,14 +323,17 @@ public final class CollectionsUtil{
      *            the collection to add to, 不能为null
      * @param iterable
      *            the iterable of elements to add
-     * @return a boolean 标识 collection 是否改变.
+     * @return a boolean 标识 collection 是否改变.<br>
+     *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>iterable</code> 是null,直接返回false<br>
+     *         否则调用{@link CollectionUtils#addAll(Collection, Iterable)}
      * @see org.apache.commons.collections4.CollectionUtils#addIgnoreNull(Collection, Object)
      * @see org.apache.commons.collections4.CollectionUtils#addAll(Collection, Iterable)
      * @see org.apache.commons.collections4.CollectionUtils#addAll(Collection, Iterator)
      * @since 1.6.3
      */
     public static <O> boolean addAllIgnoreNull(final Collection<O> objectCollection,final Iterable<? extends O> iterable){
-        Validate.notNull(objectCollection, "collection can't be null!");
+        Validate.notNull(objectCollection, "objectCollection can't be null!");
         return null == iterable ? false : CollectionUtils.addAll(objectCollection, iterable);
     }
 
