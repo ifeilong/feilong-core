@@ -262,6 +262,39 @@ public final class CollectionsUtil{
     }
 
     /**
+     * 添加所有的{@link Iterable}元素到指定的<code>objectCollection</code>,如果 {@code iterable}是null将忽略.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <String>} list = ConvertUtil.toList("xinge", "feilong1");
+     * CollectionsUtil.addAllIgnoreNull(list, null); = false
+     * </pre>
+     * 
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the type of object the {@link Collection} contains
+     * @param objectCollection
+     *            the collection to add to, 不能为null
+     * @param iterable
+     *            the iterable of elements to add
+     * @return a boolean 标识 collection 是否改变.
+     * @see org.apache.commons.collections4.CollectionUtils#addIgnoreNull(Collection, Object)
+     * @see org.apache.commons.collections4.CollectionUtils#addAll(Collection, Iterable)
+     * @see org.apache.commons.collections4.CollectionUtils#addAll(Collection, Iterator)
+     * @since 1.6.3
+     */
+    public static <O> boolean addAllIgnoreNull(final Collection<O> objectCollection,final Iterable<? extends O> iterable){
+        Validate.notNull(objectCollection, "collection can't be null!");
+        return null == iterable ? false : CollectionUtils.addAll(objectCollection, iterable);
+    }
+
+    /**
      * 循环 <code>inputIterable</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
      * 
      * <h3>示例:</h3>

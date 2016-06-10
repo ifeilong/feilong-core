@@ -77,6 +77,25 @@ public class CollectionsUtilTest{
         assertArrayEquals(ConvertUtil.toArray("xinge", "feilong1", "feilong2", "feilong2"), ConvertUtil.toArray(list, String.class));
     }
 
+    @Test
+    public void testAddAllIgnoreNull(){
+        List<String> list = ConvertUtil.toList("xinge", "feilong1");
+        assertEquals(false, CollectionsUtil.addAllIgnoreNull(list, null));
+    }
+
+    @Test
+    public void testAddAllIgnoreNull2(){
+        List<String> list = ConvertUtil.toList("xinge", "feilong1");
+        boolean addAllIgnoreNull = CollectionsUtil.addAllIgnoreNull(list, ConvertUtil.toList("xinge", "feilong1"));
+        assertEquals(true, addAllIgnoreNull);
+        assertSame(4, list.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAddAllIgnoreNull1(){
+        CollectionsUtil.addAllIgnoreNull(null, null);
+    }
+
     /**
      * Test partition.
      */
