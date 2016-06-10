@@ -338,72 +338,6 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>inputIterable</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * 
-     * List{@code <String>} list = new ArrayList{@code <String>}();
-     * list.add("xinge");
-     * list.add("feilong1");
-     * list.add("feilong2");
-     * list.add("feilong2");
-     * 
-     * Transformer{@code <String, Object>} nullTransformer = TransformerUtils.nullTransformer();
-     * List{@code <Object>} collect = CollectionsUtil.collect(list, nullTransformer);
-     * LOGGER.info("list:{}", JsonUtil.format(collect, 0, 0));
-     * 
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * list:[null,null,null,null]
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <O>
-     *            the type of object in the input collection
-     * @param <T>
-     *            the type of object in the output collection
-     * @param inputIterable
-     *            the inputIterable to get the input from
-     * @param transformer
-     *            the transformer to use, may be null
-     * @return 如果 <code>inputIterable</code> 是null,返回 {@link Collections#emptyList()}<br>
-     *         如果 <code>transformer</code> 是null,返回 empty list
-     * @see org.apache.commons.collections4.CollectionUtils#collect(Iterable, Transformer)
-     * @since 1.5.5
-     */
-    public static <O, T> List<T> collect(final Iterable<O> inputIterable,final Transformer<? super O, ? extends T> transformer){
-        return null == inputIterable ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterable, transformer);
-    }
-
-    /**
-     * 循环 <code>inputIterator</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
-     * 
-     * @param <O>
-     *            the type of object in the output collection
-     * @param <T>
-     *            the type of object in the input collection
-     * @param inputIterator
-     *            the iterator to get the input from
-     * @param transformer
-     *            the transformer to use, may be null
-     * @return 如果 <code>inputIterator</code> 是null,返回 {@link Collections#emptyList()}<br>
-     *         如果 <code>transformer</code> 是null,返回 empty list
-     * @see org.apache.commons.collections4.CollectionUtils#collect(java.util.Iterator, Transformer)
-     * @since 1.5.5
-     */
-    public static <O, T> List<T> collect(final Iterator<O> inputIterator,final Transformer<? super O, ? extends T> transformer){
-        return null == inputIterator ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterator, transformer);
-    }
-
-    /**
      * 在list中,查找第一个属性 <code>propertyName</code> 值是指定值 <code>value</code>的索引位置.
      * 
      * <h3>示例:</h3>
@@ -1412,6 +1346,71 @@ public final class CollectionsUtil{
                         : (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
+    /**
+     * 循环 <code>inputIterable</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("xinge");
+     * list.add("feilong1");
+     * list.add("feilong2");
+     * list.add("feilong2");
+     * 
+     * Transformer{@code <String, Object>} nullTransformer = TransformerUtils.nullTransformer();
+     * List{@code <Object>} collect = CollectionsUtil.collect(list, nullTransformer);
+     * LOGGER.info("list:{}", JsonUtil.format(collect, 0, 0));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * list:[null,null,null,null]
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the type of object in the input collection
+     * @param <T>
+     *            the type of object in the output collection
+     * @param inputIterable
+     *            the inputIterable to get the input from
+     * @param transformer
+     *            the transformer to use, may be null
+     * @return 如果 <code>inputIterable</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>transformer</code> 是null,返回 empty list
+     * @see org.apache.commons.collections4.CollectionUtils#collect(Iterable, Transformer)
+     * @since 1.5.5
+     */
+    public static <O, T> List<T> collect(final Iterable<O> inputIterable,final Transformer<? super O, ? extends T> transformer){
+        return null == inputIterable ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterable, transformer);
+    }
+
+    /**
+     * 循环 <code>inputIterator</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
+     * 
+     * @param <O>
+     *            the type of object in the output collection
+     * @param <T>
+     *            the type of object in the input collection
+     * @param inputIterator
+     *            the iterator to get the input from
+     * @param transformer
+     *            the transformer to use, may be null
+     * @return 如果 <code>inputIterator</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>transformer</code> 是null,返回 empty list
+     * @see org.apache.commons.collections4.CollectionUtils#collect(java.util.Iterator, Transformer)
+     * @since 1.5.5
+     */
+    public static <O, T> List<T> collect(final Iterator<O> inputIterator,final Transformer<? super O, ? extends T> transformer){
+        return null == inputIterator ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterator, transformer);
+    }
     //*******************************group*********************************************************
 
     /**
