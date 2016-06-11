@@ -110,7 +110,7 @@ public final class DateExtensionUtil{
 
     // [start] 获得时间 /时间数组,可以用于sql查询
     /**
-     * 获得重置清零的今天和明天,当天0:00:00及下一天0:00:00.
+     * 获得重置清零的今天和明天,当天 <code>00:00:00</code> 及下一天 <code>00:00:00</code>.
      * 
      * <p>
      * 一般用于统计当天数据,between ... and ...
@@ -119,14 +119,17 @@ public final class DateExtensionUtil{
      * <pre class="code">
      * 比如今天是 2012-10-16 22:18:34
      * 
-     * 返回 {2012-10-16 00:00:00.000,2012-10-17 00:00:00.000}
+     * 返回:
+     * {
+     * 2012-10-16 00:00:00.000,
+     * 2012-10-17 00:00:00.000
+     * }
      * </pre>
      * 
      * @return Date数组 第一个为today 第二个为tomorrow
      */
     public static Date[] getResetTodayAndTomorrow(){
-        Calendar calendar = CalendarUtil.resetDayBegin(new Date());
-        Date today = calendar.getTime();
+        Date today = DateUtil.getFirstDateOfThisDay(new Date());
         return new Date[] { today, DateUtil.addDay(today, 1) };
     }
 
@@ -150,8 +153,7 @@ public final class DateExtensionUtil{
      *         第二个为今天00:00
      */
     public static Date[] getResetYesterdayAndToday(){
-        Calendar calendar = CalendarUtil.resetDayBegin(new Date());
-        Date today = calendar.getTime();
+        Date today = DateUtil.getFirstDateOfThisDay(new Date());
         return new Date[] { DateUtil.addDay(today, -1), today };
     }
 

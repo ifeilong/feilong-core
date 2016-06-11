@@ -36,10 +36,9 @@ public class Slf4jUtilTest{
      */
     @Test
     public void test(){
-        LOGGER.info(Slf4jUtil.format(null, "今天", "aaaa"));
-        Object arg = null;
-        LOGGER.info(Slf4jUtil.format("", arg));
-        LOGGER.info(Slf4jUtil.format("", ""));
+        LOGGER.debug(Slf4jUtil.format(null, "今天", "aaaa"));
+        LOGGER.debug(Slf4jUtil.format("", (Object) null));
+        LOGGER.debug(Slf4jUtil.format("", ""));
     }
 
     /**

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.date;
 
+import static org.junit.Assert.assertArrayEquals;
+
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -23,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -82,7 +85,9 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetResetYesterdayAndToday(){
-        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getResetYesterdayAndToday()));
+        assertArrayEquals(
+                        ConvertUtil.toArray(DateUtil.getFirstDateOfThisDay(DateUtil.addDay(NOW, -1)), DateUtil.getFirstDateOfThisDay(NOW)),
+                        DateExtensionUtil.getResetYesterdayAndToday());
     }
 
     /**
@@ -90,6 +95,8 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetResetTodayAndTomorrow(){
-        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getResetTodayAndTomorrow()));
+        assertArrayEquals(
+                        ConvertUtil.toArray(DateUtil.getFirstDateOfThisDay(NOW), DateUtil.getFirstDateOfThisDay(DateUtil.addDay(NOW, 1))),
+                        DateExtensionUtil.getResetTodayAndTomorrow());
     }
 }

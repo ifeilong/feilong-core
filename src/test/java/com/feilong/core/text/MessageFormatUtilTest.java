@@ -54,7 +54,7 @@ public class MessageFormatUtilTest{
 
     @Test(expected = NullPointerException.class)
     public void format1(){
-        LOGGER.info(MessageFormatUtil.format(null, "jin", "xin"));
+        LOGGER.debug(MessageFormatUtil.format(null, "jin", "xin"));
     }
 
     /**
@@ -66,7 +66,7 @@ public class MessageFormatUtilTest{
         String forParsing = "x, y, z";
         Object[] objs = messageFormat.parse(forParsing, new ParsePosition(0));
         // result now equals {new String("z")}
-        LOGGER.info(Arrays.toString(objs));
+        LOGGER.debug(Arrays.toString(objs));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class MessageFormatUtilTest{
         String event = "a disturbance in the Force";
         String string = "At {1,time} on {1,date}, there was {2} on planet {0,number,integer}.";
         String result = MessageFormatUtil.format(string, planet, new Date(), event);
-        LOGGER.info(result);
+        LOGGER.debug(result);
     }
 
     @Test
@@ -90,6 +90,6 @@ public class MessageFormatUtilTest{
         int fileCount = 0;
         String diskName = "MyDisk";
         Object[] testArgs = { new Long(fileCount), diskName };
-        LOGGER.info(messageFormat.format(testArgs));
+        LOGGER.debug(messageFormat.format(testArgs));
     }
 }

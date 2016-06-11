@@ -185,8 +185,8 @@ public class ArrayUtilTest{
         String[] aStrings = new String[2];
         aStrings[0] = "a";
         aStrings[1] = "b";
-        LOGGER.info(Arrays.toString(aStrings));
-        LOGGER.info(ArrayUtils.toString(aStrings));
+        LOGGER.debug(Arrays.toString(aStrings));
+        LOGGER.debug(ArrayUtils.toString(aStrings));
     }
 
     /**
@@ -200,18 +200,18 @@ public class ArrayUtilTest{
         String[] array = asList.toArray(new String[0]);
 
         for (String string : array){
-            LOGGER.info(string);
+            LOGGER.debug(string);
         }
 
         User[] users = { new User(5L), new User(6L) };
         List<User> list = Arrays.asList(users);
         for (User user : list){
-            LOGGER.info(user.getId() + "");
+            LOGGER.debug(user.getId() + "");
         }
 
         User[] usersarray = list.toArray(new User[0]);
         for (User user : usersarray){
-            LOGGER.info(user.getId() + "");
+            LOGGER.debug(user.getId() + "");
         }
     }
 
@@ -222,9 +222,9 @@ public class ArrayUtilTest{
     public void convertListToStringReplaceBrackets(){
         String[] array = new String[] { "1", "223" };
         //Use "Arrays.toString(array)" instead.
-        LOGGER.info(array.toString());
-        LOGGER.info(Arrays.toString(array));
-        LOGGER.info(StringUtils.join(array, ","));
+        LOGGER.debug(array.toString());
+        LOGGER.debug(Arrays.toString(array));
+        LOGGER.debug(StringUtils.join(array, ","));
     }
 
     /**

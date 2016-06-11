@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
@@ -26,6 +27,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -96,8 +98,12 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void readPropertiesAsArray(){
-        LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
-        LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
+        assertArrayEquals(
+                        ConvertUtil.toStrings("5,8,7,6"),
+                        ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class));
+        assertArrayEquals(
+                        ConvertUtil.toIntegers("5,8,7,6"),
+                        ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class));
     }
 
     /**
@@ -106,7 +112,7 @@ public class ResourceBundleUtilTest{
     @Test
     public void readPrefixAsMap(){
         Map<String, String> map = ResourceBundleUtil.readPrefixAsMap(BASE_NAME, "FileType", ".", Locale.CHINA);
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
@@ -115,7 +121,7 @@ public class ResourceBundleUtilTest{
     @Test
     public void readAllPropertiesToMap(){
         Map<String, String> map = ResourceBundleUtil.readAllPropertiesToMap(BASE_NAME, Locale.CHINA);
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
@@ -124,6 +130,6 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void testGetValue1(){
-        LOGGER.info(ResourceBundleUtil.getValue(BASE_NAME, "config_date_hour", Locale.ENGLISH));
+        LOGGER.debug(ResourceBundleUtil.getValue(BASE_NAME, "config_date_hour", Locale.ENGLISH));
     }
 }

@@ -77,8 +77,8 @@ public class ObjectUtilTest{
         Long a = new Long(1L);
         Long b = new Long(1L);
 
-        LOGGER.info((a == b) + "");
-        LOGGER.info(a.equals(b) + "");
+        LOGGER.debug((a == b) + "");
+        LOGGER.debug(a.equals(b) + "");
 
         User user = new User(1L);
         List<User> list = new ArrayList<User>();
@@ -90,7 +90,7 @@ public class ObjectUtilTest{
         list.add(new User(new Long(1L)));
 
         for (User user2 : list){
-            LOGGER.info((user2.getId() == user.getId()) + "");
+            LOGGER.debug((user2.getId() == user.getId()) + "");
         }
     }
 

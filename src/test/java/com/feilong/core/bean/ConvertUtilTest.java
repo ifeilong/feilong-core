@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.io.Serializable;
@@ -67,11 +68,11 @@ public class ConvertUtilTest{
     @Test
     public void testToIterator(){
         // *************************逗号分隔的数组********************************
-        LOGGER.info(StringUtils.center("逗号分隔的数组", 60, "*"));
+        LOGGER.debug(StringUtils.center("逗号分隔的数组", 60, "*"));
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator("1,2")));
 
         // ************************map*********************************
-        LOGGER.info(StringUtils.center("map", 60, "*"));
+        LOGGER.debug(StringUtils.center("map", 60, "*"));
         Map<String, String> map = new HashMap<String, String>();
 
         map.put("a", "1");
@@ -80,11 +81,11 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(map)));
 
         // ***************************array******************************
-        LOGGER.info(StringUtils.center("array", 60, "*"));
+        LOGGER.debug(StringUtils.center("array", 60, "*"));
         Object[] array = { "5", 8 };
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(array)));
         // ***************************collection******************************
-        LOGGER.info(StringUtils.center("collection", 60, "*"));
+        LOGGER.debug(StringUtils.center("collection", 60, "*"));
         Collection<String> collection = new ArrayList<String>();
         collection.add("aaaa");
         collection.add("nnnnn");
@@ -92,7 +93,7 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(collection)));
 
         // **********************enumeration***********************************
-        LOGGER.info(StringUtils.center("enumeration", 60, "*"));
+        LOGGER.debug(StringUtils.center("enumeration", 60, "*"));
         Enumeration<Object> enumeration = new StringTokenizer("this is a test");
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIterator(enumeration)));
     }
@@ -171,6 +172,9 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(null), 0, 0));
     }
 
+    /**
+     * Test to longs1.
+     */
     @Test
     public void testToLongs1(){
         Long[] longs = ConvertUtil.toLongs(ConvertUtil.toList("1", "2", "8"));
@@ -199,9 +203,20 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers("1,2,3"), 0, 0));
     }
 
+    /**
+     * Test to integers1.
+     */
     @Test
     public void testToIntegers1(){
         LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(ConvertUtil.toList("1", "2", "8")), 0, 0));
+    }
+
+    /**
+     * Test to integers2.
+     */
+    @Test
+    public void testToIntegers2(){
+        assertArrayEquals(null, ConvertUtil.toIntegers(null));
     }
 
     /**
@@ -253,6 +268,9 @@ public class ConvertUtilTest{
         assertEquals(8, ConvertUtil.toInteger(new BigDecimal("8")).intValue());
     }
 
+    /**
+     * Test to integer3.
+     */
     @Test
     public void testToInteger3(){
         assertEquals(1, ConvertUtil.toInteger(null, 1).intValue());
@@ -261,11 +279,17 @@ public class ConvertUtilTest{
         assertEquals(8, ConvertUtil.toInteger(new BigDecimal("8"), 1).intValue());
     }
 
+    /**
+     * Test to intege4.
+     */
     @Test
     public void testToIntege4(){
         assertEquals(null, ConvertUtil.toInteger("aaaa"));
     }
 
+    /**
+     * Test to intege5.
+     */
     @Test
     public void testToIntege5(){
         assertEquals(1, ConvertUtil.toInteger("aaaa", 1).intValue());
@@ -288,7 +312,7 @@ public class ConvertUtilTest{
 
         Serializable l = 6L;
 
-        LOGGER.info("linkedList:{},contains:{},{}", linkedList, l, linkedList.contains(l));
+        LOGGER.debug("linkedList:{},contains:{},{}", linkedList, l, linkedList.contains(l));
     }
 
     /**
@@ -298,15 +322,21 @@ public class ConvertUtilTest{
     public void testConvert1(){
         String[] strings = null;
         Serializable t = ConvertUtil.toArray(strings, Serializable.class);
-        LOGGER.info("{}", t);
+        LOGGER.debug("{}", t);
     }
 
+    /**
+     * Test convert3.
+     */
     @Test(expected = NullPointerException.class)
     public void testConvert3(){
         String[] strings = ConvertUtil.toArray("");
         ConvertUtil.toArray(strings, null);
     }
 
+    /**
+     * Test convert2.
+     */
     @Test
     public void testConvert2(){
         assertEquals(1, ConvertUtil.convert("1", Integer.class).intValue());
@@ -394,26 +424,32 @@ public class ConvertUtilTest{
         testList.add("feilong");
 
         String[] array = ConvertUtil.toArray(testList, String.class);
-        LOGGER.info(JsonUtil.format(array));
+        LOGGER.debug(JsonUtil.format(array));
     }
 
+    /**
+     * To array2.
+     */
     @Test
     public void toArray2(){
         String[] array = ConvertUtil.toArray("xinge", "feilong");
-        LOGGER.info(JsonUtil.format(array));
+        LOGGER.debug(JsonUtil.format(array));
 
         User user1 = new User();
         user1.setId(1L);
         User user2 = new User();
         user2.setId(2L);
-        LOGGER.info(JsonUtil.format(ConvertUtil.toArray(user1, user2)));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toArray(user1, user2)));
 
     }
 
+    /**
+     * Test to array4.
+     */
     @Test
     public void testToArray4(){
         String[] array1 = ConvertUtil.<String> toArray();
-        LOGGER.info(JsonUtil.format(array1));
+        LOGGER.debug(JsonUtil.format(array1));
     }
 
     /**
@@ -422,7 +458,7 @@ public class ConvertUtilTest{
     @Test
     public void testToArray3(){
         String[] array2 = ConvertUtil.toArray(null);
-        LOGGER.info(JsonUtil.format(array2));
+        LOGGER.debug(JsonUtil.format(array2));
     }
 
     /**
@@ -434,10 +470,10 @@ public class ConvertUtilTest{
         Collections.addAll(list, "a", "b");
         Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);
         List<String> list2 = ConvertUtil.toList(enumeration);
-        LOGGER.info(JsonUtil.format(list2));
+        LOGGER.debug(JsonUtil.format(list2));
 
         enumeration = null;
-        LOGGER.info(JsonUtil.format(ConvertUtil.toList(enumeration)));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toList(enumeration)));
 
         enumeration = ConvertUtil.toEnumeration(null);
     }
@@ -452,6 +488,9 @@ public class ConvertUtilTest{
         LOGGER.debug("{}", ConvertUtil.toList(set));
     }
 
+    /**
+     * To list3.
+     */
     @Test
     public void toList3(){
         LOGGER.debug("{}", ConvertUtil.toList(ConvertUtil.toList("a", "a", "b", "b")));
@@ -467,9 +506,9 @@ public class ConvertUtilTest{
         User user2 = new User();
         user2.setId(2L);
 
-        LOGGER.info(JsonUtil.format(ConvertUtil.toList(user1, user2)));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toList(user1, user2)));
 
-        LOGGER.info(JsonUtil.format(ConvertUtil.toList((User) null)));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toList((User) null)));
     }
 
     /**
@@ -521,7 +560,7 @@ public class ConvertUtilTest{
         map.put(41, 4);
         Enumeration<Object> enumeration = ConvertUtil.toEnumeration(map.keySet());
         while (enumeration.hasMoreElements()){
-            LOGGER.info("" + enumeration.nextElement());
+            LOGGER.debug("" + enumeration.nextElement());
         }
     }
 

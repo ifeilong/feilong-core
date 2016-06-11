@@ -426,7 +426,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * 把对象转换为long类型.
+     * 把对象转换为{@link Long}类型.
      * 
      * <p>
      * converted is missing or an error occurs converting the value,返回<span style="color:red"> null</span>
@@ -445,7 +445,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * 任意的数组转成Integer 数组.
+     * 任意的数组转成{@link Integer} 数组.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -472,7 +472,7 @@ public final class ConvertUtil{
      * 
      * @param toBeConvertedValue
      *            the to be converted value
-     * @return the integer[]
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.ArrayConverter
      */
@@ -507,7 +507,7 @@ public final class ConvertUtil{
      *
      * @param toBeConvertedValue
      *            the to be converted value
-     * @return the long[]
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.ArrayConverter
      * @see #convert(Object, Class)

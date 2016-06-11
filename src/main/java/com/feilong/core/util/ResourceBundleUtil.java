@@ -272,11 +272,23 @@ public final class ResourceBundleUtil{
 
     // *****************************************************************************
     /**
-     * 读取值,转成数组.
+     * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 转成字符串数组.
      * 
-     * <p>
-     * 默认调用 {@link #getArray(ResourceBundle, String, String, Class)} 形式
-     * </p>
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 在 <code>messages/feilong-core-test.properties</code> 配置文件中, 有以下配置
+     * 
+     * <pre class="code">
+     * config_test_array=5,8,7,6
+     * </pre>
+     * 
+     * <pre class="code">
+     * ResourceBundleUtil.getArray("messages.feilong-core-test", "config_test_array", ",");    =   ["5","8","7","6"]
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
@@ -295,10 +307,23 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 读取值,转成数组.
-     * <p>
-     * 默认调用 {@link #getArray(ResourceBundle, String, String, Class)} 形式
-     * </p>
+     * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 转成字符串数组.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 在 <code>messages/feilong-core-test.properties</code> 配置文件中, 有以下配置
+     * 
+     * <pre class="code">
+     * config_test_array=5,8,7,6
+     * </pre>
+     * 
+     * <pre class="code">
+     * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",");    =   ["5","8","7","6"]
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param resourceBundle
      *            the resource bundle
@@ -314,39 +339,21 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 读取值,转成数组.
+     * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 以及指定的转换类型 <code>typeClass</code> 转成数组.
      * 
      * <h3>示例:</h3>
+     * 
      * <blockquote>
      * 
-     * 在 messages/feilong-core-test.properties 配置文件中, 有以下配置
+     * 在 <code>messages/feilong-core-test.properties</code> 配置文件中, 有以下配置
      * 
      * <pre class="code">
      * config_test_array=5,8,7,6
      * </pre>
      * 
-     * 此时调用
-     * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * ["5","8","7","6"]
-     * </pre>
-     * 
-     * 调用
-     * 
-     * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * [5,8,7,6]
+     * ResourceBundleUtil.getArray("messages.feilong-core-test", "config_test_array", ",", String.class);    =   ["5","8","7","6"]
+     * ResourceBundleUtil.getArray("messages.feilong-core-test", "config_test_array", ",", Integer.class);   =   [5,8,7,6]
      * </pre>
      * 
      * </blockquote>
@@ -376,39 +383,21 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 读取值,转成数组.
+     * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 以及指定的转换类型 <code>typeClass</code> 转成数组.
      * 
      * <h3>示例:</h3>
+     * 
      * <blockquote>
      * 
-     * 在 messages/feilong-core-test.properties 配置文件中, 有以下配置
+     * 在 <code>messages/feilong-core-test.properties</code> 配置文件中, 有以下配置
      * 
      * <pre class="code">
      * config_test_array=5,8,7,6
      * </pre>
      * 
-     * 此时调用
-     * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * ["5","8","7","6"]
-     * </pre>
-     * 
-     * 调用
-     * 
-     * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * [5,8,7,6]
+     * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class);    =   ["5","8","7","6"]
+     * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class);   =   [5,8,7,6]
      * </pre>
      * 
      * </blockquote>

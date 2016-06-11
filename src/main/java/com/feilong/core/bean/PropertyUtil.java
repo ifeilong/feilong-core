@@ -33,7 +33,7 @@ import com.feilong.core.lang.ClassUtil;
  * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
  * 
  * <p>
- * 目的是将 原来的 checkedException 异常 转换成 {@link BeanUtilException}
+ * 目的是将原来的 checkedException 异常 转换成 {@link BeanUtilException}
  * </p>
  * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}:</h3>
@@ -41,8 +41,8 @@ import com.feilong.core.lang.ClassUtil;
  * <blockquote>
  * <p>
  * {@link PropertyUtils}类和{@link BeanUtils}类很多的方法在参数上都是相同的,但返回值不同.<br>
- * BeanUtils着重于"Bean",返回值通常是String,<br>
- * 而PropertyUtils着重于属性,它的返回值通常是Object. 
+ * {@link BeanUtils}着重于"Bean",返回值通常是{@link String},<br>
+ * 而{@link PropertyUtils}着重于属性,它的返回值通常是{@link Object}. 
  * </p>
  * </blockquote>
  * 
@@ -207,12 +207,13 @@ public final class PropertyUtil{
      *
      * @param bean
      *            Bean whose properties are to be extracted
-     * @return The set of properties for the bean
+     * @return 如果 <code>bean</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @see BeanUtil#describe(Object)
      */
     public static Map<String, Object> describe(Object bean){
+        Validate.notNull(bean, "bean can't be null!");
         try{
             return PropertyUtils.describe(bean);
         }catch (Exception e){
@@ -250,10 +251,6 @@ public final class PropertyUtil{
      * 
      * </blockquote>
      * 
-     * <p>
-     * PropertyUtils的功能类似于BeanUtils,但在底层不会对传递的数据做转换处理
-     * </p>
-     * 
      * <h3>注意点:</h3>
      * 
      * <blockquote>
@@ -261,6 +258,7 @@ public final class PropertyUtil{
      * <ol>
      * <li>如果 <code>bean</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
      * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
      * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
@@ -279,7 +277,7 @@ public final class PropertyUtil{
      */
     public static void setProperty(Object bean,String propertyName,Object value){
         Validate.notNull(bean, "bean can't be null!");
-        Validate.notNull(propertyName, "propertyName can't be null!");
+        Validate.notBlank(propertyName, "propertyName can't be null!");
         try{
             PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
@@ -288,7 +286,21 @@ public final class PropertyUtil{
     }
 
     /**
-     * 如果 <code>value</code>isNotNullOrEmpty,那么才调用 {@link #setProperty(Object, String, Object)}.
+     * 如果 <code>value</code> isNotNullOrEmpty,那么才调用 {@link #setProperty(Object, String, Object)}.
+     * 
+     * <h3>注意点:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>如果 <code>bean</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
+     * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
+     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
+     * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
+     * </ol>
+     * </blockquote>
      *
      * @param bean
      *            Bean whose property is to be modified
@@ -306,6 +318,20 @@ public final class PropertyUtil{
 
     /**
      * 如果 <code>null != value</code>,那么才调用 {@link #setProperty(Object, String, Object)}.
+     * 
+     * <h3>注意点:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>如果 <code>bean</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
+     * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
+     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
+     * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
+     * </ol>
+     * </blockquote>
      *
      * @param bean
      *            Bean whose property is to be modified
@@ -313,8 +339,8 @@ public final class PropertyUtil{
      *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="../BeanUtil.html#propertyName">propertyName</a>
      * @param value
      *            Value to which this property is to be set
-     * @since 1.5.3
      * @see #setProperty(Object, String, Object)
+     * @since 1.5.3
      */
     public static void setPropertyIfValueNotNull(Object bean,String propertyName,Object value){
         if (null != value){
@@ -363,20 +389,7 @@ public final class PropertyUtil{
     /**
      * 从指定的 <code>Object obj</code>中,查找指定类型的值.
      * 
-     * <p>
-     * PS:目前暂不支持从集合里面找到指定类型的值,参见 {@link #isCannotFindType(Object)},如果你有相关需求,可以调用 {@link
-     * "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"}
-     * </p>
      * 
-     * <h3>代码流程:</h3>
-     * 
-     * <blockquote>
-     * <ol>
-     * <li>如果 <code>ClassUtil.isInstance(findValue, toBeFindedClassType)</code> 直接返回 findValue</li>
-     * <li>自动过滤<code>isPrimitiveOrWrapper</code>,<code>CharSequence</code>,<code>Collection</code>,<code>Map</code>类型</li>
-     * <li>调用 {@link PropertyUtil#describe(Object)} 再递归查找</li>
-     * </ol>
-     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -395,10 +408,25 @@ public final class PropertyUtil{
      * 返回:
      * 
      * <pre class="code">
-     {"age": 28}
+     * {"age": 28}
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <h3>代码流程:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>如果 <code>ClassUtil.isInstance(findValue, toBeFindedClassType)</code> 直接返回 findValue</li>
+     * <li>自动过滤<code>isPrimitiveOrWrapper</code>,<code>CharSequence</code>,<code>Collection</code>,<code>Map</code>类型</li>
+     * <li>调用 {@link PropertyUtil#describe(Object)} 再递归查找</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <p>
+     * PS:目前暂不支持从集合里面找到指定类型的值,参见 {@link #isCannotFindType(Object)},如果你有相关需求,可以调用 {@link
+     * "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"}
+     * </p>
      *
      * @param <T>
      *            the generic type
@@ -406,7 +434,10 @@ public final class PropertyUtil{
      *            要被查找的对象
      * @param toBeFindedClassType
      *            the to be finded class type
-     * @return a value of the given type found if there is a clear match,or <code>null</code> if none such value found
+     * @return 从对象中查找匹配的类型,如果找不到返回 <code>null</code><br>
+     *         如果 <code>obj</code> 是null,返回null<br>
+     *         如果 <code>toBeFindedClassType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>ClassUtil.isInstance(obj, toBeFindedClassType)</code>,直接返回 <code>obj</code><br>
      * @see "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"
      * @since 1.4.1
      */
