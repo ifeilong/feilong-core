@@ -492,8 +492,6 @@ public final class PropertyUtil{
         //一般自定义的command 里面 就是些 string int,list map等对象
         //这些我们过滤掉,只取类型是 findedClassType的
         return ClassUtils.isPrimitiveOrWrapper(obj.getClass())//
-                        || ClassUtil.isInstance(obj, CharSequence.class)//
-                        || ClassUtil.isInstance(obj, Collection.class) //
-                        || ClassUtil.isInstance(obj, Map.class);
+                        || ClassUtil.isInstanceAnyClass(obj, CharSequence.class, Collection.class, Map.class);
     }
 }

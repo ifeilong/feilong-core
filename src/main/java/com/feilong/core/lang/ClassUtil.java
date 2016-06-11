@@ -205,7 +205,7 @@ public final class ClassUtil{
      *         true, if checks if is instance;
      * @since 1.5.6
      */
-    public static boolean isInstanceAnyClass(Object obj,Class<?>[] klasses){
+    public static boolean isInstanceAnyClass(Object obj,Class<?>...klasses){
         if (null == klasses){
             return false;
         }
