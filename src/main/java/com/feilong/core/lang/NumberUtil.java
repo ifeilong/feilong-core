@@ -125,18 +125,31 @@ public final class NumberUtil{
     // [start]Divide
 
     /**
-     * 获得 除法结果one/two,四舍五入{@link RoundingMode#HALF_UP},小数位数指定.
+     * 获得除法结果<code>one/two</code>,四舍五入{@link RoundingMode#HALF_UP},小数位数 <code>scale</code> 指定.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.getDivideValue(0, 2, 0)   =   0
+     * NumberUtil.getDivideValue(6, 4, 0)   =   2
+     * NumberUtil.getDivideValue(10, 3, 2)  =   3.33
+     * NumberUtil.getDivideValue(5, 3, 2)   =   1.67
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param one
      *            除数
      * @param two
-     *            被除数,自动转成BigDecimal做除法运算
+     *            被除数,自动转成{@link BigDecimal}做除法运算
      * @param scale
      *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 0,抛出 {@link IllegalArgumentException}<br>
-     *         否则转换成BigDecimal 返回除法结果one/two,四舍五入 {@link RoundingMode#HALF_UP},小数位数指定
+     *         否则转换成{@link BigDecimal} 返回除法结果one/two,四舍五入 {@link RoundingMode#HALF_UP},小数位数 <code>scale</code> 指定
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.RoundingMode#HALF_UP
      * @see java.math.BigDecimal#ROUND_HALF_UP
@@ -148,12 +161,25 @@ public final class NumberUtil{
     }
 
     /**
-     * 获得 除法结果one/two,四舍五入,小数位数指定.
+     * 获得除法结果<code>one/two</code>,指定舍入方式 <code>roundingMode</code> 以及 小数位数 <code>scale</code>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.getDivideValue(0, 2, 0,RoundingMode.HALF_UP)   =   0
+     * NumberUtil.getDivideValue(6, 4, 0,RoundingMode.HALF_UP)   =   2
+     * NumberUtil.getDivideValue(10, 3, 2,RoundingMode.HALF_UP)  =   3.33
+     * NumberUtil.getDivideValue(5, 3, 2,RoundingMode.HALF_UP)   =   1.67
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param one
      *            除数
      * @param two
-     *            被除数,自动转成BigDecimal做除法运算
+     *            被除数,自动转成{@link BigDecimal}做除法运算
      * @param scale
      *            标度,小数的位数,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @param roundingMode
@@ -161,7 +187,7 @@ public final class NumberUtil{
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 0,抛出 {@link IllegalArgumentException}<br>
-     *         否则转换成BigDecimal 返回除法结果one/two,依据舍入法 {@link RoundingMode},小数位数指定
+     *         否则转换成{@link BigDecimal} 返回除法结果one/two,依据舍入法 <code>roundingMode</code>,小数位数 <code>scale</code> 指定
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.BigDecimal#divide(BigDecimal, int, RoundingMode)
      * @since 1.5.5
@@ -183,11 +209,21 @@ public final class NumberUtil{
     // [start]Multiply
 
     /**
-     * 获得两个数字的乘积,并转成BigDecimal返回.
+     * 获得两个数字的乘积,并转成{@link BigDecimal}返回.
      * 
      * <p>
      * 返回的精度: (this.scale() + multiplicand.scale()).
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.getMultiplyValue(5, 2) = 10
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param one
      *            乘数
@@ -195,7 +231,7 @@ public final class NumberUtil{
      *            被乘数
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         否则 convert to BigDecimal and multiply each other
+     *         否则 convert to {@link BigDecimal} and multiply each other
      * @see com.feilong.core.bean.ConvertUtil#toBigDecimal(Object)
      * @see "org.apache.velocity.runtime.parser.node.MathUtils#multiply(Number, Number)"
      * @since 1.5.5
@@ -207,7 +243,18 @@ public final class NumberUtil{
     }
 
     /**
-     * 获得两个数字的乘积,并转成BigDecimal返回.
+     * 获得两个数字的乘积,并转成{@link BigDecimal}返回.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.getMultiplyValue(5, 2, 5)                         =   10.00000
+     * NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5)   =   7.31250
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param one
      *            乘数
@@ -217,7 +264,7 @@ public final class NumberUtil{
      *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         否则 convert to BigDecimal and multiply each other
+     *         否则 convert to {@link BigDecimal} and multiply each other
      * @see #getMultiplyValue(Number, Number)
      * @see #setScale(BigDecimal, int)
      * @since 1.5.5
@@ -232,12 +279,23 @@ public final class NumberUtil{
 
     /**
      * 所有数加起来.
-     *
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.getAddValue(2, 4, 5)              =   11
+     * NumberUtil.getAddValue(new BigDecimal(6), 5) =   11
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param numbers
      *            the numbers
      * @return 如果 <code>numbers</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果有元素是null,抛出 {@link IllegalArgumentException}<br>
-     *         否则将每个元素转换成BigDecimal,并进行累加操作
+     *         否则将每个元素转换成{@link BigDecimal},并进行累加操作
      * @since 1.5.5
      */
     public static BigDecimal getAddValue(Number...numbers){
