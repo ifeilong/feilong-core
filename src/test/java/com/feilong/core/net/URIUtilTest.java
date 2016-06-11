@@ -48,13 +48,16 @@ public class URIUtilTest{
         value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time DESC&search_page&areaid=2&server_id=63&act=search_browse&equip_type_ids&search_text=斩妖剑";
         value = "斩妖剑";
         value = "风花雪月";
-        LOGGER.info(URIUtil.encode(value, CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode(value, CharsetType.UTF8));
         value = "景儿,么么哒";
-        LOGGER.info(URIUtil.encode(value, CharsetType.UTF8));
-        LOGGER.info(URIUtil.encode("白色/黑色/纹理浅麻灰", CharsetType.UTF8));
-        LOGGER.info(URIUtil.encode("Lifestyle / Graphic,", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode(value, CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode("白色/黑色/纹理浅麻灰", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode("Lifestyle / Graphic,", CharsetType.UTF8));
     }
 
+    /**
+     * Test to string.
+     */
     @Test
     public void testToString(){
         String value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time DESC&search_page&areaid=2&server_id=63&act=search_browse&equip_type_ids&search_text=斩妖剑";
@@ -69,8 +72,8 @@ public class URIUtilTest{
      */
     @Test
     public void testEncode2(){
-        LOGGER.info(URIUtil.encode("%", CharsetType.UTF8));
-        LOGGER.info(URIUtil.encode("%25", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode("%", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode("%25", CharsetType.UTF8));
     }
 
     /**
@@ -78,7 +81,7 @@ public class URIUtilTest{
      */
     @Test
     public void decode(){
-        LOGGER.info(
+        LOGGER.debug(
                         URIUtil.decode(
                                         "%E9%87%91%E6%80%BB%EF%BC%8C%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E4%B9%88%EF%BC%8C%E5%B0%B1%E6%80%8E%E4%B9%88%E4%B9%88",
                                         CharsetType.UTF8));
@@ -90,13 +93,16 @@ public class URIUtilTest{
      */
     @Test
     public void decode2(){
-        LOGGER.info(URIUtil.decode("aaaaa%chu111", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.decode("aaaaa%chu111", CharsetType.UTF8));
 
     }
 
+    /**
+     * Decode3.
+     */
     @Test
     public void decode3(){
-        LOGGER.info(URIUtil.decode("%c", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.decode("%c", CharsetType.UTF8));
     }
 
     /**
@@ -104,7 +110,7 @@ public class URIUtilTest{
      */
     @Test
     public void specialCharToHexString(){
-        LOGGER.info(specialCharToHexString(" "));
+        LOGGER.debug(specialCharToHexString(" "));
     }
 
     /**
@@ -147,14 +153,14 @@ public class URIUtilTest{
         // queryString = "'%22--%3E%3C/style%3E%3C/script%3E%3Cscript%3Enetsparker(0x0000E1)%3C/script%3E=";
 
         // url = url + "?" + queryString;
-        LOGGER.info(url);
+        LOGGER.debug(url);
         // URIEditor uriEditor = new URIEditor();
         // uriEditor.setAsText(url);
-        // LOGGER.info(URIEditor);
+        // LOGGER.debug(URIEditor);
         // URL url1 = new URL(url);
-        // LOGGER.info(url1.toString());
+        // LOGGER.debug(url1.toString());
         URI uri = URIUtil.create(url, CharsetType.UTF8);
-        LOGGER.info(uri.toString());
+        LOGGER.debug(uri.toString());
     }
 
     /**
@@ -163,8 +169,8 @@ public class URIUtilTest{
     @Test
     public void testCreate2(){
         URI uri = URIUtil.create("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3", CharsetType.UTF8);
-        LOGGER.info(uri.toString());
-        LOGGER.info(JsonUtil.format(uri));
+        LOGGER.debug(uri.toString());
+        LOGGER.debug(JsonUtil.format(uri));
     }
 
     /**
@@ -173,7 +179,7 @@ public class URIUtilTest{
     @Test
     public void testCreate3(){
         String uriString = "http://127.0.0.1/cmens?a=%";
-        LOGGER.info("" + URI.create(uriString));
+        LOGGER.debug("" + URI.create(uriString));
     }
 
     /**
@@ -194,6 +200,6 @@ public class URIUtilTest{
     public void testCreate4(){
         String uriString = "http://127.0.0.1/cmens?a=%";
         URI uri = URIUtil.create(uriString, CharsetType.UTF8);
-        LOGGER.info(uri.toString());
+        LOGGER.debug(uri.toString());
     }
 }

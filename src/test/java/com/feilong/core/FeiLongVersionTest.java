@@ -36,10 +36,10 @@ public class FeiLongVersionTest{
      */
     @Test
     public void testGetVersion(){
-        LOGGER.info(FeiLongVersion.getVersion());
-        //LOGGER.info(SpringVersion.getVersion());
+        LOGGER.debug(FeiLongVersion.getVersion());
+        //LOGGER.debug(SpringVersion.getVersion());
 
         Package pkg = FeiLongVersion.class.getPackage();
-        LOGGER.info(JsonUtil.format(pkg));
+        LOGGER.debug(JsonUtil.format(pkg));
     }
 }

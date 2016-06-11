@@ -127,7 +127,7 @@ public class NumberUtilTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgress3(){
-        LOGGER.info(NumberUtil.getProgress(-5, 5, NumberPattern.PERCENT_WITH_NOPOINT));
+        LOGGER.debug(NumberUtil.getProgress(-5, 5, NumberPattern.PERCENT_WITH_NOPOINT));
     }
 
     /**
@@ -275,6 +275,9 @@ public class NumberUtilTest{
 
     }
 
+    /**
+     * To no scale3.
+     */
     @Test(expected = NullPointerException.class)
     public void toNoScale3(){
         NumberUtil.toNoScale(null);
@@ -325,11 +328,17 @@ public class NumberUtilTest{
         assertEquals("1.67", NumberUtil.getDivideValue(5, 3, 2).toString());
     }
 
+    /**
+     * 获得 divide value1.
+     */
     @Test(expected = NullPointerException.class)
     public void getDivideValue1(){
         NumberUtil.getDivideValue(null, 0, 0);
     }
 
+    /**
+     * 获得 divide value2.
+     */
     @Test(expected = NullPointerException.class)
     public void getDivideValue2(){
         NumberUtil.getDivideValue(0, null, 0);
@@ -388,21 +397,33 @@ public class NumberUtilTest{
         assertEquals(11, NumberUtil.getAddValue(new BigDecimal(6), 5).intValue());
     }
 
+    /**
+     * Test get add value.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetAddValue(){
         NumberUtil.getAddValue(null, null);
     }
 
+    /**
+     * Test get add value3.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetAddValue3(){
         NumberUtil.getAddValue(null, 5);
     }
 
+    /**
+     * Test get add value4.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetAddValue4(){
         NumberUtil.getAddValue(new BigDecimal(6), null);
     }
 
+    /**
+     * Test get add value1.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetAddValue1(){
         NumberUtil.getAddValue(null);
@@ -416,6 +437,9 @@ public class NumberUtilTest{
         assertEquals(new BigDecimal(11), NumberUtil.getAddValue(2, 4, 5));
     }
 
+    /**
+     * 获得 add value3.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void getAddValue3(){
         NumberUtil.getAddValue(2, 4, null);

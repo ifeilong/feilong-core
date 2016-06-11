@@ -81,6 +81,9 @@ public class ClassUtilTest{
         assertEquals(false, ClassUtil.isAssignableFrom(CharSequence.class, null));
     }
 
+    /**
+     * Test is assignable from1.
+     */
     @Test
     public void testIsAssignableFrom1(){
         //        Class<?>[] klsClasses = { "1234".getClass(), "55555".getClass() };

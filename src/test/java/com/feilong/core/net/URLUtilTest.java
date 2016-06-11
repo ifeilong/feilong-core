@@ -40,7 +40,7 @@ public class URLUtilTest{
      */
     @Test
     public void testGetUnionUrl(){
-        LOGGER.info(URLUtil.getUnionFileUrl("E:\\test", "sanguo"));
+        LOGGER.debug(URLUtil.getUnionFileUrl("E:\\test", "sanguo"));
     }
 
     /**
@@ -49,7 +49,7 @@ public class URLUtilTest{
     @Test
     public void testGetUnionUrl2(){
         URL url = URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing/");
-        LOGGER.info(URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/"));
+        LOGGER.debug(URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/"));
     }
 
     /**

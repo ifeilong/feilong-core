@@ -70,7 +70,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         classMap.put("data", Person.class);
 
         MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
-        LOGGER.info(JsonUtil.format(myBean));
+        LOGGER.debug(JsonUtil.format(myBean));
     }
 
     /**
@@ -82,7 +82,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         classMap.put("userAddresseList", UserAddress.class);
 
         User user = JsonUtil.toBean(DEFAULT_USER_FOR_JSON_TEST_JSON, User.class, classMap);
-        LOGGER.info(JsonUtil.format(user));
+        LOGGER.debug(JsonUtil.format(user));
     }
 
     /**
@@ -90,8 +90,8 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toBeanNUll(){
-        LOGGER.info(JsonUtil.toJSON(null).toString(4, 4));
-        LOGGER.info(new JSONObject().toString(4));
+        LOGGER.debug(JsonUtil.toJSON(null).toString(4, 4));
+        LOGGER.debug(new JSONObject().toString(4));
     }
 
     /**
@@ -100,7 +100,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toJSON(){
         HttpMethodType httpMethodType = HttpMethodType.GET;
-        LOGGER.info(JsonUtil.toJSON(httpMethodType).toString(4, 4));
+        LOGGER.debug(JsonUtil.toJSON(httpMethodType).toString(4, 4));
     }
 
     /**
@@ -120,7 +120,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         Class<UserInfo> target = UserInfo.class;
         String[] properties = { "age" };
         jsonConfig.registerPropertyExclusions(target, properties);
-        LOGGER.info(JsonUtil.toJSON(user, jsonConfig).toString(4, 4));
+        LOGGER.debug(JsonUtil.toJSON(user, jsonConfig).toString(4, 4));
     }
 
     /**
@@ -131,7 +131,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         String json = "[{'name':'get'},{'name':'set'}]";
         Person[] objArr = JsonUtil.toArray(json, Person.class);
 
-        LOGGER.info(JsonUtil.format(objArr));
+        LOGGER.debug(JsonUtil.format(objArr));
     }
 
     /**
@@ -144,7 +144,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         classMap.put("data", Person.class);
 
         MyBean[] objArr = JsonUtil.toArray(json, MyBean.class, classMap);
-        LOGGER.info(JsonUtil.format(objArr));
+        LOGGER.debug(JsonUtil.format(objArr));
     }
 
     /**
@@ -155,7 +155,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         String json = "[{'name':'get'},{'name':'set'}]";
         List<Person> list = JsonUtil.toList(json, Person.class);
 
-        LOGGER.info(JsonUtil.format(list));
+        LOGGER.debug(JsonUtil.format(list));
     }
 
     /**
@@ -178,10 +178,10 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toMap(){
         Map<String, Person> map = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", Person.class);
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
 
         Map<String, String> map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
-        LOGGER.info(JsonUtil.format(map1));
+        LOGGER.debug(JsonUtil.format(map1));
     }
 
     /**
@@ -190,13 +190,13 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toMap12(){
         Map<String, String> map = JsonUtil.toMap("{'brandCode':'UA'}");
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
 
         Map<String, Integer> map2 = JsonUtil.toMap("{'brandCode':55555}");
-        LOGGER.info(JsonUtil.format(map2));
+        LOGGER.debug(JsonUtil.format(map2));
 
         Map<String, Long> map3 = JsonUtil.toMap("{'brandCode':55.555}");
-        LOGGER.info(JsonUtil.format(map3));
+        LOGGER.debug(JsonUtil.format(map3));
     }
 
     /**
@@ -216,7 +216,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         map.put("a", map1);
         map.put("aa", map1);
         map.put("aaa", map1);
-        LOGGER.info(JsonUtil.toJSON(map).toString(4, 4));
+        LOGGER.debug(JsonUtil.toJSON(map).toString(4, 4));
     }
 
     /**
@@ -225,7 +225,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
     @Test
     public void toMap1(){
 
-        LOGGER.info("status_deliveried".length() + "");
+        LOGGER.debug("status_deliveried".length() + "");
 
         List<Order> list = new ArrayList<Order>();
 
@@ -243,7 +243,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         list.add(a);
         list.add(a1);
 
-        LOGGER.info(JsonUtil.format(list));
+        LOGGER.debug(JsonUtil.format(list));
 
     }
 
@@ -274,7 +274,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
 
         myBean.setData(list);
         // print: {"data":[{"dateAttr":"2009-09-12 07:24:54","name":"get"}]}
-        LOGGER.info("" + JsonUtil.toJSON(myBean));
+        LOGGER.debug("" + JsonUtil.toJSON(myBean));
     }
 
     /**
@@ -289,24 +289,24 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         list.add(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:49","name":"get"}]
-        LOGGER.info("" + JsonUtil.toJSON(list));
+        LOGGER.debug("" + JsonUtil.toJSON(list));
 
         Set set = new LinkedHashSet();
         set.add(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:16","name":"get"}]
-        LOGGER.info("" + JsonUtil.toJSON(set));
+        LOGGER.debug("" + JsonUtil.toJSON(set));
 
         Person[] personArr = new Person[1];
         personArr[0] = ps;
         // print: [{"dateAttr":"2009-09-12 07:23:54","name":"get"}]
-        LOGGER.info("" + JsonUtil.toJSON(personArr));
+        LOGGER.debug("" + JsonUtil.toJSON(personArr));
 
         Map map = new LinkedHashMap();
         map.put("person1", ps);
 
         // print: {"person1":{"dateAttr":"2009-09-12 07:24:27","name":"get"}}
-        LOGGER.info("" + JsonUtil.toJSON(map));
+        LOGGER.debug("" + JsonUtil.toJSON(map));
     }
 
     /*

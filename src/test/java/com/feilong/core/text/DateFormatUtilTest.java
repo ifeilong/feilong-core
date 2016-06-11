@@ -38,8 +38,8 @@ public class DateFormatUtilTest{
     @Test
     public void parse(){
         Date now = new Date();
-        LOGGER.info(now.toString());
+        LOGGER.debug(now.toString());
         Date now1 = DateFormatUtil.parse(now.toString(), "EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-        LOGGER.info(now1.toString());
+        LOGGER.debug(now1.toString());
     }
 }

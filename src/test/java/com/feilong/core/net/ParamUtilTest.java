@@ -41,7 +41,7 @@ public class ParamUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER    = LoggerFactory.getLogger(ParamUtilTest.class);
 
-    /** <code>{@value}</code> */
+    /** <code>{@value}</code>. */
     private static String       uriString = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
 
     /**
@@ -104,6 +104,9 @@ public class ParamUtilTest{
         assertEquals(value2 + value, ParamUtil.joinValuesOrderByIncludeKeys(map, "paymentType", "service"));
     }
 
+    /**
+     * Test join values order by include keys.
+     */
     @Test
     public void testJoinValuesOrderByIncludeKeys(){
         Map<String, String> map = new HashMap<String, String>();
@@ -168,6 +171,9 @@ public class ParamUtilTest{
         LOGGER.debug(ParamUtil.toQueryStringUseSingleValueMap(map));
     }
 
+    /**
+     * Test join single value map1.
+     */
     @Test
     public void testJoinSingleValueMap1(){
         Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
@@ -178,6 +184,9 @@ public class ParamUtilTest{
         assertEquals("province=江苏省&city=南通市", ParamUtil.toQueryStringUseSingleValueMap(singleValueMap));
     }
 
+    /**
+     * Test join array value map.
+     */
     @Test
     public void testJoinArrayValueMap(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
@@ -248,11 +257,17 @@ public class ParamUtilTest{
         LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1=2&b=2&a=5", CharsetType.UTF8)));
     }
 
+    /**
+     * Test to safe array value map1.
+     */
     @Test
     public void testToSafeArrayValueMap1(){
         LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a& &", CharsetType.UTF8)));
     }
 
+    /**
+     * Test to safe array value map2.
+     */
     @Test
     public void testToSafeArrayValueMap2(){
         LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a", CharsetType.UTF8)));
@@ -288,6 +303,9 @@ public class ParamUtilTest{
         LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, null));
     }
 
+    /**
+     * Test get encoded url by array map1.
+     */
     @Test
     public void testGetEncodedUrlByArrayMap1(){
         String beforeUrl = "www.baidu.com";
@@ -300,6 +318,9 @@ public class ParamUtilTest{
         LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
     }
 
+    /**
+     * Test get encoded url by array map2.
+     */
     @Test
     public void testGetEncodedUrlByArrayMap2(){
         String beforeUrl = "www.baidu.com?a=b";
@@ -311,6 +332,9 @@ public class ParamUtilTest{
         LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
     }
 
+    /**
+     * Test add parameter single value map.
+     */
     @Test
     public void testAddParameterSingleValueMap(){
         String beforeUrl = "www.baidu.com";
@@ -322,6 +346,9 @@ public class ParamUtilTest{
         LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, CharsetType.UTF8));
     }
 
+    /**
+     * Test add parameter single value map2.
+     */
     @Test
     public void testAddParameterSingleValueMap2(){
         String beforeUrl = "www.baidu.com?a=b";

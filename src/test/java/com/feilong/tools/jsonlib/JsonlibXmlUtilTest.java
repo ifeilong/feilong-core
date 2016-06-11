@@ -51,7 +51,7 @@ public class JsonlibXmlUtilTest{
         List list = new ArrayList();
         list.add(ps);
 
-        LOGGER.info(JsonlibXmlUtil.objectToXML(list));
+        LOGGER.debug(JsonlibXmlUtil.objectToXML(list));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e class="object"> <dateAttr type="string">2009-09-12 07:02:31</dateAttr> <name
          * type="string">get</name> </e> </a>
@@ -69,7 +69,7 @@ public class JsonlibXmlUtilTest{
         Set set = new LinkedHashSet();
         set.add(ps);
 
-        LOGGER.info(JsonlibXmlUtil.objectToXML(set));
+        LOGGER.debug(JsonlibXmlUtil.objectToXML(set));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e class="object"> <dateAttr type="string">2009-09-12 07:04:38</dateAttr> <name
          * type="string">get</name> </e> </a>
@@ -87,7 +87,7 @@ public class JsonlibXmlUtilTest{
         Map map = new HashMap();
         map.put("person1", ps);
 
-        LOGGER.info(JsonlibXmlUtil.objectToXML(map));
+        LOGGER.debug(JsonlibXmlUtil.objectToXML(map));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <o> <person1 class="object"> <dateAttr type="string">2009-09-12 07:08:35</dateAttr>
          * <name type="string">get</name> </person1> </o>
@@ -102,7 +102,7 @@ public class JsonlibXmlUtilTest{
         Person ps = new Person();
         ps.setDateAttr(new Date());
         ps.setName("get");
-        LOGGER.info(JsonlibXmlUtil.objectToXML(ps));
+        LOGGER.debug(JsonlibXmlUtil.objectToXML(ps));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <o> <dateAttr type="string">2009-09-12 07:13:02</dateAttr> <name
          * type="string">get</name> </o>
@@ -116,7 +116,7 @@ public class JsonlibXmlUtilTest{
     public void xmlToJson1(){
         String xml = "<o><dateAttr type='string'>2009-09-12 07:13:02</dateAttr><name type='string'>get</name></o>";
         // print: {"dateAttr":"2009-09-12 07:13:02","name":"get"}
-        LOGGER.info(JsonlibXmlUtil.xmlToJSON(xml).toString(4, 4));
+        LOGGER.debug(JsonlibXmlUtil.xmlToJSON(xml).toString(4, 4));
     }
 
     /**
@@ -126,7 +126,7 @@ public class JsonlibXmlUtilTest{
     public void xmlToJson2(){
         String xml = "<a class='array'><e class='object'><dateAttr type='string'>2009-09-12 07:04:38</dateAttr><name type='string'>get</name></e></a>";
         // print: [{"dateAttr":"2009-09-12 07:04:38","name":"get"}]
-        LOGGER.info(JsonlibXmlUtil.xmlToJSON(xml).toString(4, 4));
+        LOGGER.debug(JsonlibXmlUtil.xmlToJSON(xml).toString(4, 4));
     }
 
     /**
@@ -134,7 +134,7 @@ public class JsonlibXmlUtilTest{
      */
     @Test
     public void testGetXMLFromObj1(){
-        LOGGER.info(JsonlibXmlUtil.objectToXML("{\"name\":\"json\",\"bool\":true,\"int\":1}"));
+        LOGGER.debug(JsonlibXmlUtil.objectToXML("{\"name\":\"json\",\"bool\":true,\"int\":1}"));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <o> <bool type="boolean">true</bool> <int type="number">1</int> <name
          * type="string">json</name> </o>
@@ -146,7 +146,7 @@ public class JsonlibXmlUtilTest{
      */
     @Test
     public void testGetXMLFromObj2(){
-        LOGGER.info(JsonlibXmlUtil.objectToXML("[1,2,3]"));
+        LOGGER.debug(JsonlibXmlUtil.objectToXML("[1,2,3]"));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e type="number">1</e> <e type="number">2</e> <e type="number">3</e> </a>
          */
@@ -163,7 +163,7 @@ public class JsonlibXmlUtilTest{
         Person[] personArr = new Person[2];
         personArr[0] = ps;
 
-        LOGGER.info(JsonlibXmlUtil.objectToXML(personArr));
+        LOGGER.debug(JsonlibXmlUtil.objectToXML(personArr));
         /*
          * print: <?xml version="1.0" encoding="UTF-8"?> <a> <e class="object"> <dateAttr type="string">2009-09-12 06:58:55</dateAttr> <name
          * type="string">get</name> </e> </a>

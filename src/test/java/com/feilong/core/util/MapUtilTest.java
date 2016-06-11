@@ -41,6 +41,9 @@ public class MapUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
+    /**
+     * Test to single value map2.
+     */
     @Test
     public void testToSingleValueMap2(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
@@ -48,16 +51,19 @@ public class MapUtilTest{
         keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        LOGGER.info(JsonUtil.format(MapUtil.toSingleValueMap(keyAndArrayMap)));
+        LOGGER.debug(JsonUtil.format(MapUtil.toSingleValueMap(keyAndArrayMap)));
     }
 
+    /**
+     * Test to array value map.
+     */
     @Test
     public void testToArrayValueMap(){
         Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        LOGGER.info(JsonUtil.format(MapUtil.toArrayValueMap(singleValueMap)));
+        LOGGER.debug(JsonUtil.format(MapUtil.toArrayValueMap(singleValueMap)));
     }
 
     /**
@@ -185,7 +191,7 @@ public class MapUtilTest{
         map.put("f", 3005);
         map.put("g", -1005);
 
-        LOGGER.info("" + MapUtil.getMinValue(map, "a", "b", "d", "g", "m"));
+        LOGGER.debug("" + MapUtil.getMinValue(map, "a", "b", "d", "g", "m"));
     }
 
     /**

@@ -77,12 +77,18 @@ public class CollectionsUtilTest{
         assertArrayEquals(ConvertUtil.toArray("xinge", "feilong1", "feilong2", "feilong2"), ConvertUtil.toArray(list, String.class));
     }
 
+    /**
+     * Test add all ignore null.
+     */
     @Test
     public void testAddAllIgnoreNull(){
         List<String> list = ConvertUtil.toList("xinge", "feilong1");
         assertEquals(false, CollectionsUtil.addAllIgnoreNull(list, null));
     }
 
+    /**
+     * Test add all ignore null2.
+     */
     @Test
     public void testAddAllIgnoreNull2(){
         List<String> list = ConvertUtil.toList("xinge", "feilong1");
@@ -91,6 +97,9 @@ public class CollectionsUtilTest{
         assertSame(4, list.size());
     }
 
+    /**
+     * Test add all ignore null1.
+     */
     @Test(expected = NullPointerException.class)
     public void testAddAllIgnoreNull1(){
         CollectionsUtil.addAllIgnoreNull(null, null);
@@ -102,7 +111,7 @@ public class CollectionsUtilTest{
     @Test
     public void testPartition(){
         List<String> list = ConvertUtil.toList("xinge", "feilong1", "feilong2");
-        LOGGER.info("list:{}", JsonUtil.format(ListUtils.partition(list, 2)));
+        LOGGER.debug("list:{}", JsonUtil.format(ListUtils.partition(list, 2)));
     }
 
     /**
@@ -118,7 +127,7 @@ public class CollectionsUtilTest{
 
         Transformer<String, Object> nullTransformer = TransformerUtils.nullTransformer();
         List<Object> collect = CollectionsUtil.collect(list, nullTransformer);
-        LOGGER.info("list:{}", JsonUtil.format(collect, 0, 0));
+        LOGGER.debug("list:{}", JsonUtil.format(collect, 0, 0));
 
     }
 
@@ -129,7 +138,7 @@ public class CollectionsUtilTest{
     public void testCollect1(){
         List<Long> list = null;
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
-        LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
+        LOGGER.debug("list:{}", JsonUtil.format(collect1, 0, 0));
     }
 
     /**
@@ -139,7 +148,7 @@ public class CollectionsUtilTest{
     public void testCollect5(){
         List<Long> list = new ArrayList<Long>();
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
-        LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
+        LOGGER.debug("list:{}", JsonUtil.format(collect1, 0, 0));
     }
 
     /**
@@ -154,7 +163,7 @@ public class CollectionsUtilTest{
 
         Transformer<User, String> invokerTransformer = TransformerUtils.invokerTransformer("getName");
         List<String> collect1 = CollectionsUtil.collect(list, invokerTransformer);
-        LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
+        LOGGER.debug("list:{}", JsonUtil.format(collect1, 0, 0));
     }
 
     /**
@@ -168,7 +177,7 @@ public class CollectionsUtilTest{
         list.add(new User("刘备", 25));
 
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.constantTransformer("jintian"));
-        LOGGER.info("list:{}", JsonUtil.format(collect1, 0, 0));
+        LOGGER.debug("list:{}", JsonUtil.format(collect1, 0, 0));
     }
 
     /**
@@ -182,8 +191,8 @@ public class CollectionsUtilTest{
         list.add("feilong2");
         list.add("feilong3");
 
-        LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
-        LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(null)));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeDuplicate(null)));
     }
 
     /**
@@ -219,7 +228,7 @@ public class CollectionsUtilTest{
         testList.add(new User("刘备"));
 
         Map<String, Integer> map = CollectionsUtil.groupCount(testList, "name");
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
@@ -246,7 +255,7 @@ public class CollectionsUtilTest{
         testList.add(new User("刘备", 25));
 
         Map<String, User> map = CollectionsUtil.groupOne(testList, "name");
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
@@ -260,7 +269,7 @@ public class CollectionsUtilTest{
         testList.add(new User("刘备", 25));
 
         Map<String, List<User>> map = CollectionsUtil.group(testList, "name");
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
@@ -282,7 +291,7 @@ public class CollectionsUtilTest{
                 return user.getAge() > 20;
             }
         });
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
 
         assertSame(2, map.size());
     }
@@ -300,7 +309,7 @@ public class CollectionsUtilTest{
         List<String> list = new ArrayList<String>();
         list.add("张飞");
         list.add("刘备");
-        LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
     }
 
     /**
@@ -314,7 +323,7 @@ public class CollectionsUtilTest{
         objectCollection.add(new User("刘备", 25));
         objectCollection.add(new User("关羽", 24));
 
-        LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
     }
 
     /**
@@ -333,7 +342,7 @@ public class CollectionsUtilTest{
                         PredicateUtils.andPredicate(
                                         new BeanPropertyValueEqualsPredicate<User>("name", "刘备"),
                                         new BeanPropertyValueEqualsPredicate<User>("age", 25)));
-        LOGGER.info(JsonUtil.format(user));
+        LOGGER.debug(JsonUtil.format(user));
     }
 
     /**
@@ -347,7 +356,7 @@ public class CollectionsUtilTest{
         objectCollection.add(new User("刘备", 25));
         objectCollection.add(new User("关羽", 24));
 
-        LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
     }
 
     /**
@@ -361,7 +370,7 @@ public class CollectionsUtilTest{
         objectCollection.add(new User("刘备", 25));
 
         String[] array = { "刘备", "关羽" };
-        LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", array)));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", array)));
     }
 
     /**
@@ -374,8 +383,8 @@ public class CollectionsUtilTest{
         list.add(1L);
         list.add(2L);
         list.add(3L);
-        LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
-        LOGGER.info(JsonUtil.format(CollectionsUtil.select(null, new EqualPredicate<Long>(1L))));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(null, new EqualPredicate<Long>(1L))));
     }
 
     /**
@@ -393,7 +402,7 @@ public class CollectionsUtilTest{
         list.add("刘备");
 
         List<User> removeAll = CollectionsUtil.removeAll(objectCollection, "name", list);
-        LOGGER.info(JsonUtil.format(removeAll));
+        LOGGER.debug(JsonUtil.format(removeAll));
     }
 
     /**
@@ -406,8 +415,8 @@ public class CollectionsUtilTest{
         objectCollection.add(new User("关羽", 24));
         objectCollection.add(new User("刘备", 25));
 
-        LOGGER.info(JsonUtil.format(CollectionsUtil.removeAll(objectCollection, "name", "刘备")));
-        LOGGER.info(JsonUtil.format(CollectionsUtil.removeAll(objectCollection, "name", "刘备", "关羽")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(objectCollection, "name", "刘备")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(objectCollection, "name", "刘备", "关羽")));
     }
 
     /**
@@ -421,7 +430,7 @@ public class CollectionsUtilTest{
         list.add(new User("刘备", 25));
 
         List<User> selectRejected = CollectionsUtil.selectRejected(list, "name", "刘备", "张飞");
-        LOGGER.info(JsonUtil.format(selectRejected));
+        LOGGER.debug(JsonUtil.format(selectRejected));
 
         assertSame(1, selectRejected.size());
     }
@@ -439,7 +448,7 @@ public class CollectionsUtilTest{
         List<String> list = new ArrayList<String>();
         list.add("张飞");
         list.add("刘备");
-        LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(objectCollection, "name", list)));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.selectRejected(objectCollection, "name", list)));
     }
 
     /**
@@ -453,7 +462,7 @@ public class CollectionsUtilTest{
         testList.add(new User("刘备", 25));
 
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
 
         assertSame(testList.size(), map.size());
     }
@@ -471,7 +480,7 @@ public class CollectionsUtilTest{
         List<Long> fieldValueCollection = CollectionsUtil.getPropertyValueList(testList, "id");
         fieldValueCollection.add(7L);
         fieldValueCollection.add(8L);
-        LOGGER.info(JsonUtil.format(fieldValueCollection));
+        LOGGER.debug(JsonUtil.format(fieldValueCollection));
     }
 
     /**
@@ -485,7 +494,7 @@ public class CollectionsUtilTest{
         testList.add(new User(5L));
 
         Set<Long> fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
-        LOGGER.info(JsonUtil.format(fieldValueCollection));
+        LOGGER.debug(JsonUtil.format(fieldValueCollection));
     }
 
     /**
@@ -515,7 +524,7 @@ public class CollectionsUtilTest{
 
         List<User> list = ConvertUtil.toList(user1, user2);
         Map<String, BigDecimal> map = CollectionsUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
@@ -567,7 +576,7 @@ public class CollectionsUtilTest{
         list.add(user2);
 
         Map<String, BigDecimal> map = CollectionsUtil.sum(list, "id", "age");
-        LOGGER.info("{}", JsonUtil.format(map));
+        LOGGER.debug("{}", JsonUtil.format(map));
     }
 
     /**
@@ -642,19 +651,19 @@ public class CollectionsUtilTest{
 
         //数组
         List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
-        LOGGER.info(JsonUtil.format(fieldValueList1));
+        LOGGER.debug(JsonUtil.format(fieldValueList1));
 
         //级联对象
         List<Integer> fieldValueList2 = CollectionsUtil.getPropertyValueList(userList, "userInfo.age");
-        LOGGER.info(JsonUtil.format(fieldValueList2));
+        LOGGER.debug(JsonUtil.format(fieldValueList2));
 
         //Map
         List<Integer> attrList = CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)");
-        LOGGER.info(JsonUtil.format(attrList));
+        LOGGER.debug(JsonUtil.format(attrList));
 
         //集合
         List<String> addressList = CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]");
-        LOGGER.info(JsonUtil.format(addressList));
+        LOGGER.debug(JsonUtil.format(addressList));
     }
 
     /**

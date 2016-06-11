@@ -56,21 +56,21 @@ public class PropertyUtilTest{
 
         String[] strs = { "date", "money", "nickName" };
         PropertyUtil.copyProperties(newUser, oldUser, strs);
-        LOGGER.info(JsonUtil.format(newUser));
+        LOGGER.debug(JsonUtil.format(newUser));
     }
 
     @Test
     public void testSetProperty(){
         User newUser = new User();
         PropertyUtil.setProperty(newUser, "name", "feilong");
-        LOGGER.info(JsonUtil.format(newUser));
+        LOGGER.debug(JsonUtil.format(newUser));
     }
 
     @Test(expected = BeanUtilException.class)
     public void testSetProperty1(){
         User newUser = new User();
         PropertyUtil.setProperty(newUser, "name1", "feilong");
-        LOGGER.info(JsonUtil.format(newUser));
+        LOGGER.debug(JsonUtil.format(newUser));
     }
 
     /**
@@ -86,12 +86,12 @@ public class PropertyUtilTest{
         List<User> list = new ArrayList<User>();
         list.add(user);
 
-        LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
-        LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(new BigDecimal(5L))));
-        LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe("123456")));
-        LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(list)));
-        LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(new HashMap())));
-        LOGGER.info("map:{}", JsonUtil.format(PropertyUtil.describe(User.class)));
+        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
+        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(new BigDecimal(5L))));
+        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe("123456")));
+        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(list)));
+        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(new HashMap())));
+        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(User.class)));
     }
 
     /**
@@ -110,8 +110,8 @@ public class PropertyUtilTest{
         list.add(user);
 
         Object property = PropertyUtil.getProperty(list, "[0].id");
-        LOGGER.info("" + PropertyUtil.getProperty(list, "[0].id"));
-        LOGGER.info("map:{}", JsonUtil.format(property));
+        LOGGER.debug("" + PropertyUtil.getProperty(list, "[0].id"));
+        LOGGER.debug("map:{}", JsonUtil.format(property));
     }
 
     @Test
@@ -123,7 +123,7 @@ public class PropertyUtilTest{
 
         user.getUserInfo().setAge(28);
 
-        LOGGER.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
-        LOGGER.info("" + PropertyUtil.findValueOfType(user, Long.class));
+        LOGGER.debug(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
+        LOGGER.debug("" + PropertyUtil.findValueOfType(user, Long.class));
     }
 }

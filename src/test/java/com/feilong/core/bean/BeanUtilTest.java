@@ -181,7 +181,7 @@ public class BeanUtilTest{
         String[] strs = { "age", "name" };
         BeanUtil.copyProperties(person, user, strs);
 
-        LOGGER.info(JsonUtil.format(person));
+        LOGGER.debug(JsonUtil.format(person));
     }
 
     /**
@@ -209,17 +209,17 @@ public class BeanUtilTest{
         BeanUtil.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
 
         Converter lookup = ConvertUtils.lookup(Date.class);
-        LOGGER.info("{},{}", lookup.getClass().getSimpleName(), lookup.convert(Date.class, new Date().toString()));
+        LOGGER.debug("{},{}", lookup.getClass().getSimpleName(), lookup.convert(Date.class, new Date().toString()));
 
         String[] strs = { "date", "money", "nickName" };
 
         User user2 = new User();
         BeanUtil.copyProperties(user2, user1, strs);
 
-        LOGGER.info(JsonUtil.format(user2));
+        LOGGER.debug(JsonUtil.format(user2));
 
         lookup = ConvertUtils.lookup(Date.class);
-        LOGGER.info("{},{}", lookup.getClass().getSimpleName(), lookup.convert(Date.class, new Date().toString()));
+        LOGGER.debug("{},{}", lookup.getClass().getSimpleName(), lookup.convert(Date.class, new Date().toString()));
     }
 
     /**
@@ -297,7 +297,7 @@ public class BeanUtilTest{
         user.setId(5L);
         user.setDate(new Date());
 
-        LOGGER.info(JsonUtil.format(BeanUtil.describe(user)));
+        LOGGER.debug(JsonUtil.format(BeanUtil.describe(user)));
     }
 
     /**
@@ -305,7 +305,7 @@ public class BeanUtilTest{
      */
     @Test
     public void describe1(){
-        LOGGER.info(JsonUtil.format(BeanUtil.describe(null)));
+        LOGGER.debug(JsonUtil.format(BeanUtil.describe(null)));
     }
 
     /**
@@ -320,7 +320,7 @@ public class BeanUtilTest{
         properties.put("id", 8L);
 
         BeanUtil.populate(user, properties);
-        LOGGER.info(JsonUtil.format(user));
+        LOGGER.debug(JsonUtil.format(user));
 
         //********************************************************
 
@@ -328,7 +328,7 @@ public class BeanUtilTest{
         user.setId(5L);
 
         BeanUtil.copyProperties(user, properties);
-        LOGGER.info(JsonUtil.format(user));
+        LOGGER.debug(JsonUtil.format(user));
     }
 
     /**
@@ -343,7 +343,7 @@ public class BeanUtilTest{
 
         BeanUtil.populate(map, properties);
 
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**

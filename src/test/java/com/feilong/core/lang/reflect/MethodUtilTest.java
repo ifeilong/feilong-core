@@ -63,8 +63,8 @@ public class MethodUtilTest{
      */
     @Test
     public void testInvokeMethod1(){
-        LOGGER.info("" + MethodUtil.invokeMethod(ConstructorUtil.newInstance(MethodUtilTest.class), "name", 5));
-        LOGGER.info("" + MethodUtil.invokeMethod(new MethodUtilTest(), "name", Integer.parseInt("5")));
+        LOGGER.debug("" + MethodUtil.invokeMethod(ConstructorUtil.newInstance(MethodUtilTest.class), "name", 5));
+        LOGGER.debug("" + MethodUtil.invokeMethod(new MethodUtilTest(), "name", Integer.parseInt("5")));
     }
 
     /**
@@ -75,8 +75,8 @@ public class MethodUtilTest{
         User user = new User();
         String methodName = "getId";
         Object[] params = new Object[0];
-        LOGGER.info("" + MethodUtil.invokeMethod(user, methodName, params));
-        LOGGER.info("" + MethodUtil.invokeMethod(user, methodName));
+        LOGGER.debug("" + MethodUtil.invokeMethod(user, methodName, params));
+        LOGGER.debug("" + MethodUtil.invokeMethod(user, methodName));
     }
 
     /**

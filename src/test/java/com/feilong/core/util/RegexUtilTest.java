@@ -53,7 +53,7 @@ public class RegexUtilTest{
         //		regexPattern = "@Table[(]*\"(.*?)*[)]";
         //		regexPattern = "@Table(.*?)";
         String email = "@Table(name = \"T_MEM_MEMBER_ADDRESS\")";
-        LOGGER.info(RegexUtil.group(regexPatternTable, email) + "");
+        LOGGER.debug(RegexUtil.group(regexPatternTable, email) + "");
     }
 
     /**

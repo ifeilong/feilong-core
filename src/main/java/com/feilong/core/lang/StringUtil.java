@@ -456,6 +456,7 @@ public final class StringUtil{
      * [截取]从开始位置(startIndex),截取固定长度(length)字符串.
      * 
      * <pre class="code">
+     * StringUtil.substring(null, 6, 8)                 =   null
      * StringUtil.substring("jinxin.feilong", 6, 2)     =   .f
      * </pre>
      *

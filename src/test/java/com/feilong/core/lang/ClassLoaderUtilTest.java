@@ -41,21 +41,33 @@ public class ClassLoaderUtilTest{
 
     }
 
+    /**
+     * Test get resource1.
+     */
     @Test
     public void testGetResource1(){
         assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("jstl-1.2", this.getClass()));
     }
 
+    /**
+     * Test get resource2.
+     */
     @Test
     public void testGetResource2(){
         assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("slf4j-log4j12-1.7.21", this.getClass()));
     }
 
+    /**
+     * Test get resource23.
+     */
     @Test
     public void testGetResource23(){
         assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("slf4j-log4j12-1.7.21.jar", this.getClass()));
     }
 
+    /**
+     * Test get resource232.
+     */
     @Test
     public void testGetResource232(){
         assertEquals(
@@ -87,10 +99,10 @@ public class ClassLoaderUtilTest{
         String d = this.getClass().getResource("/").getPath();
         // 获得应用程序完整路径
         // E:\Workspaces\eclipse3.5\feilong-platform\feilong-common
-        LOGGER.info(a);
-        LOGGER.info(b);
-        LOGGER.info(c);
-        LOGGER.info(d);
+        LOGGER.debug(a);
+        LOGGER.debug(b);
+        LOGGER.debug(c);
+        LOGGER.debug(d);
     }
 
     /**

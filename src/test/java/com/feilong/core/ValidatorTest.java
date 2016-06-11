@@ -50,6 +50,9 @@ public class ValidatorTest{
         assertEquals(true, Validator.isNullOrEmpty(users));
     }
 
+    /**
+     * Test filter1.
+     */
     @Test
     public void testFilter1(){
         assertEquals(true, StringUtils.isBlank(new StringBuilder("  ")));

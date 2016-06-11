@@ -15,9 +15,9 @@
  */
 package com.feilong.core;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The Class TimeIntervalTest.
@@ -27,17 +27,31 @@ import org.slf4j.LoggerFactory;
  */
 public class TimeIntervalTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(TimeIntervalTest.class);
-
     /**
      * Test.
      */
     @Test
     public void test(){
-        LOGGER.info("" + TimeInterval.MILLISECOND_PER_YEAR);
-        LOGGER.info("" + TimeInterval.MILLISECOND_PER_MONTH);
-        LOGGER.info("" + TimeInterval.MILLISECOND_PER_WEEK);
-        LOGGER.info("" + TimeInterval.MILLISECOND_PER_SECONDS);
+        assertTrue(31536000 == TimeInterval.SECONDS_PER_YEAR);
+        assertTrue(2592000 == TimeInterval.SECONDS_PER_MONTH);
+        assertTrue(604800 == TimeInterval.SECONDS_PER_WEEK);
+        assertTrue(86400 == TimeInterval.SECONDS_PER_DAY);
+        assertTrue(3600 == TimeInterval.SECONDS_PER_HOUR);
+        assertTrue(60 == TimeInterval.SECONDS_PER_MINUTE);
+        assertTrue(1 == TimeInterval.SECONDS_PER_SECOND);
+    }
+
+    /**
+     * Test1.
+     */
+    @Test
+    public void test1(){
+        assertTrue(31536000000L == TimeInterval.MILLISECOND_PER_YEAR);
+        assertTrue(2592000000L == TimeInterval.MILLISECOND_PER_MONTH);
+        assertTrue(604800000 == TimeInterval.MILLISECOND_PER_WEEK);
+        assertTrue(86400000 == TimeInterval.MILLISECOND_PER_DAY);
+        assertTrue(3600000 == TimeInterval.MILLISECOND_PER_HOUR);
+        assertTrue(60000 == TimeInterval.MILLISECOND_PER_MINUTE);
+        assertTrue(1000 == TimeInterval.MILLISECOND_PER_SECONDS);
     }
 }

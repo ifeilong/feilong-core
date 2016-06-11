@@ -54,6 +54,9 @@ public class StringUtilTest{
         assertEquals("001202", StringUtil.stringAddInt("000002", 1200));
     }
 
+    /**
+     * Test join null.
+     */
     @Test
     public void testJoinNull(){
         // assertEquals("", "" + null);
@@ -83,15 +86,21 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
     }
 
+    /**
+     * Test replace1.
+     */
     @Test
     public void testReplace1(){
-
         assertEquals("", StringUtil.replace(null, null));
     }
 
+    /**
+     * Test replace2.
+     */
     @Test
     public void testReplace2(){
         String template = "/home/webuser/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
+
         Date date = new Date();
         Map<String, String> valuesMap = new HashMap<String, String>();
         valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
@@ -159,7 +168,7 @@ public class StringUtilTest{
      */
     @Test
     public void testContainsIgnoreCase(){
-        LOGGER.debug(StringUtil.containsIgnoreCase(null, "") + "");
+        assertEquals(false, StringUtil.containsIgnoreCase(null, ""));
         LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, null) + "");
         LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "") + "");
         LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "feilong") + "");
@@ -187,6 +196,9 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.format("%1$s,%1$s", 99));
     }
 
+    /**
+     * Format1.
+     */
     @Test
     public void format1(){
         Date date = new Date();
@@ -246,7 +258,7 @@ public class StringUtilTest{
      */
     @Test
     public void substring2(){
-        LOGGER.debug(StringUtil.substring(null, 6, 8));
+        assertEquals(null, StringUtil.substring(null, 6, 8));
         LOGGER.debug(StringUtil.substring(TEXT, TEXT.length(), 8));
         LOGGER.debug(StringUtil.substring(TEXT, TEXT.length() - 1, 8));
         LOGGER.debug(StringUtil.substring(TEXT, 1, 0));
@@ -270,14 +282,20 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.substring(TEXT, "jinxin.", 1));
     }
 
+    /**
+     * Substring33.
+     */
     @Test
     public void substring33(){
         LOGGER.debug(StringUtil.substring(TEXT, "in", 20));
     }
 
+    /**
+     * Substring333.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void substring333(){
-        LOGGER.debug(StringUtil.substring(TEXT, "in", -200));
+        StringUtil.substring(TEXT, "in", -200);
     }
 
     /**

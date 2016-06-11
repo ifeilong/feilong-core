@@ -57,6 +57,9 @@ public class PropertyComparatorTest{
         LOGGER.debug(JsonUtil.format(list));
     }
 
+    /**
+     * Test property comparator1.
+     */
     @Test
     public void testPropertyComparator1(){
         List<User> list = new ArrayList<User>();

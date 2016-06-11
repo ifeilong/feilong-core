@@ -955,8 +955,7 @@ public final class ConvertUtil{
     private static boolean isPrimitiveArray(Object o){
         // Allocate a new Array
         Class<? extends Object> klass = o.getClass();
-        //原始型的
-        return !klass.isArray() ? false : klass.getComponentType().isPrimitive();
+        return !klass.isArray() ? false : klass.getComponentType().isPrimitive();//原始型的
     }
 
     /**

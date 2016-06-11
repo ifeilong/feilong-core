@@ -122,7 +122,7 @@ public abstract class BaseJsonTest{
 
         }
         Date endDate = new Date();
-        LOGGER.info("[{}]{},use time:{}", type, times, DateExtensionUtil.getIntervalForView(beginDate, endDate));
+        LOGGER.debug("[{}]{},use time:{}", type, times, DateExtensionUtil.getIntervalForView(beginDate, endDate));
     }
 
     /**

@@ -54,12 +54,18 @@ public class ObjectUtilTest{
         assertEquals(false, ObjectUtil.isArray(1));
     }
 
+    /**
+     * Checks if is boolean.
+     */
     @Test
     public void isBoolean(){
         assertEquals(false, ObjectUtil.isBoolean(null));
         assertEquals(true, ObjectUtil.isBoolean(false));
     }
 
+    /**
+     * Checks if is integer.
+     */
     @Test
     public void isInteger(){
         assertEquals(false, ObjectUtil.isInteger(null));

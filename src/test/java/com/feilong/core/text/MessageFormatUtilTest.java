@@ -52,6 +52,9 @@ public class MessageFormatUtilTest{
                         MessageFormatUtil.format("name=张三{0,date}a{1}", DateUtil.toDate("2000", DatePattern.yyyy), "xin"));
     }
 
+    /**
+     * Format1.
+     */
     @Test(expected = NullPointerException.class)
     public void format1(){
         LOGGER.debug(MessageFormatUtil.format(null, "jin", "xin"));
@@ -69,6 +72,9 @@ public class MessageFormatUtilTest{
         LOGGER.debug(Arrays.toString(objs));
     }
 
+    /**
+     * Test get value with arguments3.
+     */
     @Test
     public void testGetValueWithArguments3(){
         int planet = 7;
@@ -78,6 +84,9 @@ public class MessageFormatUtilTest{
         LOGGER.debug(result);
     }
 
+    /**
+     * Test get value with arguments2.
+     */
     @Test
     public void testGetValueWithArguments2(){
         MessageFormat messageFormat = new MessageFormat("The disk \"{1}\" contains {0}.");

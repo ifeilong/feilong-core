@@ -45,16 +45,25 @@ public class NumberFormatUtilTest{
         assertEquals("RP 26", NumberFormatUtil.format(25.5, "RP #####"));
     }
 
+    /**
+     * Test format1.
+     */
     @Test(expected = NullPointerException.class)
     public void testFormat1(){
         NumberFormatUtil.format(null, "#####");
     }
 
+    /**
+     * Test format2.
+     */
     @Test(expected = NullPointerException.class)
     public void testFormat2(){
         NumberFormatUtil.format(25, null);
     }
 
+    /**
+     * Test format3.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testFormat3(){
         NumberFormatUtil.format(25, " ");
@@ -74,7 +83,7 @@ public class NumberFormatUtilTest{
         BigDecimal number = BigDecimal.valueOf(88.50);
         number.setScale(2, BigDecimal.ROUND_HALF_UP);
 
-        LOGGER.info(number.toString());
-        LOGGER.info(decimalFormat.format(number));
+        LOGGER.debug(number.toString());
+        LOGGER.debug(decimalFormat.format(number));
     }
 }

@@ -95,7 +95,7 @@ public class JsonUtilTest extends BaseJsonTest{
         menu.setChildren(children);
 
         String json = JsonUtil.format(menu);
-        LOGGER.info(json);
+        LOGGER.debug(json);
     }
 
     /**
@@ -103,7 +103,7 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void testJsonString(){
-        LOGGER.info(
+        LOGGER.debug(
                         "DEFAULT_USER_FOR_JSON_TEST_JSON:{}--->{}",
                         DEFAULT_USER_FOR_JSON_TEST_JSON,
                         JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST_JSON));
@@ -114,7 +114,7 @@ public class JsonUtilTest extends BaseJsonTest{
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("ID", 4616189619433466044L);
 
-        LOGGER.info("{}", JsonUtil.format(map));
+        LOGGER.debug("{}", JsonUtil.format(map));
     }
 
     /**
@@ -123,7 +123,7 @@ public class JsonUtilTest extends BaseJsonTest{
     @Test
     public void testJsonMap(){
         Map<String, String> nullMap = null;
-        LOGGER.info(JsonUtil.format(nullMap));
+        LOGGER.debug(JsonUtil.format(nullMap));
     }
 
     /**
@@ -131,8 +131,8 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void testJsonString2(){
-        LOGGER.info(JsonUtil.format(1L));
-        LOGGER.info(JsonUtil.format(1));
+        LOGGER.debug(JsonUtil.format(1L));
+        LOGGER.debug(JsonUtil.format(1));
     }
 
     /**
@@ -141,7 +141,7 @@ public class JsonUtilTest extends BaseJsonTest{
     @Test
     public void testJsonString1(){
         BigDecimal[] aBigDecimals = { ConvertUtil.toBigDecimal("99999999.00") };
-        LOGGER.info(JsonUtil.format(aBigDecimals));
+        LOGGER.debug(JsonUtil.format(aBigDecimals));
     }
 
     /**
@@ -170,7 +170,7 @@ public class JsonUtilTest extends BaseJsonTest{
     public void format(){
         User user = JsonUtil.toBean(DEFAULT_USER_FOR_JSON_TEST_JSON, User.class);
         user.setId(10L);
-        LOGGER.info(JsonUtil.format(user));
+        LOGGER.debug(JsonUtil.format(user));
     }
 
     /**
@@ -179,7 +179,7 @@ public class JsonUtilTest extends BaseJsonTest{
     @Test
     public void testExcludes(){
         String[] excludes = { "name" };
-        LOGGER.info(JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST, excludes));
+        LOGGER.debug(JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST, excludes));
     }
 
     /**
@@ -198,7 +198,7 @@ public class JsonUtilTest extends BaseJsonTest{
         JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
 
-        LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
+        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }
 
     /**
@@ -218,18 +218,18 @@ public class JsonUtilTest extends BaseJsonTest{
         list.add(user2);
 
         String[] array = { "id", "name" };
-        LOGGER.info(JsonUtil.formatWithIncludes(list, array));
+        LOGGER.debug(JsonUtil.formatWithIncludes(list, array));
 
         User[] users = { user1, user2 };
-        LOGGER.info(JsonUtil.formatWithIncludes(users, array));
+        LOGGER.debug(JsonUtil.formatWithIncludes(users, array));
 
         List<String> list3 = new ArrayList<String>();
 
         list3.add("2,5,8");
         list3.add("2,5,9");
 
-        LOGGER.info(JsonUtil.formatWithIncludes(list3));
-        LOGGER.info(JsonUtil.formatWithIncludes(user1));
+        LOGGER.debug(JsonUtil.formatWithIncludes(list3));
+        LOGGER.debug(JsonUtil.formatWithIncludes(user1));
     }
 
     /**
@@ -238,7 +238,7 @@ public class JsonUtilTest extends BaseJsonTest{
     @Test
     public void testFormatWithIncludes(){
         Object[][] objects = { { "nike shoe", "500", 1 }, { "nike shoe2", "5000", 1 } };
-        LOGGER.info(JsonUtil.formatWithIncludes(objects));
+        LOGGER.debug(JsonUtil.formatWithIncludes(objects));
     }
 
     /**
@@ -251,8 +251,8 @@ public class JsonUtilTest extends BaseJsonTest{
         vector.add(2222);
         vector.add(3333);
         vector.add(55555);
-        LOGGER.info("vector:{}", JsonUtil.format(vector));
-        LOGGER.info("" + vector.get(0));
+        LOGGER.debug("vector:{}", JsonUtil.format(vector));
+        LOGGER.debug("" + vector.get(0));
     }
 
     /**
@@ -263,6 +263,6 @@ public class JsonUtilTest extends BaseJsonTest{
         Hashtable<String, Object> hashtable = new Hashtable<String, Object>();
         hashtable.put("a", "a");
         // hashtable.put("a", null);
-        LOGGER.info("hashtable:{}", JsonUtil.format(hashtable));
+        LOGGER.debug("hashtable:{}", JsonUtil.format(hashtable));
     }
 }

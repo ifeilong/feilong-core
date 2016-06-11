@@ -233,6 +233,7 @@
 						<include>**/MessageFormatUtilTest</include>
 						<include>**/Slf4jUtilTest</include>
 						<include>**/StringUtilTest</include>
+						<include>**/TimeIntervalTest</include>
 
 						<include>**/ValidatorTest.java</include>
 					</includes>

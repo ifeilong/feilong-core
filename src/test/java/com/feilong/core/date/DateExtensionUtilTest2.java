@@ -501,6 +501,9 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
 
     }
 
+    /**
+     * Test get interval time2.
+     */
     @Test
     public void testGetIntervalTime2(){
         Date startDate = DateUtil.toDate("2016-06-01", DatePattern.COMMON_DATE_AND_TIME);

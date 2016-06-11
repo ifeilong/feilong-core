@@ -55,18 +55,18 @@ public class AnnotationTest{
      */
     @Test
     public void testAnnotationTest(){
-        LOGGER.info("" + AnnotationTest.class.isAnnotationPresent(MyAnnotation.class));
+        LOGGER.debug("" + AnnotationTest.class.isAnnotationPresent(MyAnnotation.class));
 
         MyAnnotation myAnnotation = AnnotationTest.class.getAnnotation(MyAnnotation.class);
-        LOGGER.info(myAnnotation.name());
+        LOGGER.debug(myAnnotation.name());
 
         // *************************************************************
         Method[] methods = AnnotationTest.class.getDeclaredMethods();
         for (Method method : methods){
             if (method.isAnnotationPresent(MyAnnotation.class)){
-                LOGGER.info("[Test." + method.getName() + "].annotation:");
+                LOGGER.debug("[Test." + method.getName() + "].annotation:");
                 MyAnnotation fieldAnnotation = method.getAnnotation(MyAnnotation.class);
-                LOGGER.info(ArrayUtils.toString(fieldAnnotation.loveStrings()));
+                LOGGER.debug(ArrayUtils.toString(fieldAnnotation.loveStrings()));
             }
         }
     }

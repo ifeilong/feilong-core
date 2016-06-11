@@ -63,8 +63,8 @@ public class ArrayUtilTest{
      * 8个8个拿，还剩1个。
      * 9个9个拿，正好拿完。
      * 
-     * 问筐里有多少鸡蛋？
-     * 
+     * 问筐里有多少鸡蛋？.
+     *
      * @since 1.5.5
      */
     @Test
@@ -86,16 +86,25 @@ public class ArrayUtilTest{
         LOGGER.debug("loop count j={},use time:{},\nlist:{}", j, DateExtensionUtil.getIntervalForView(beginDate, new Date()), list);
     }
 
+    /**
+     * Test new array.
+     */
     @Test(expected = NullPointerException.class)
     public void testNewArray(){
         ArrayUtil.newArray(null, 5);
     }
 
+    /**
+     * Test new array1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testNewArray1(){
         ArrayUtil.newArray(Integer.class, -5);
     }
 
+    /**
+     * Test new array4.
+     */
     @Test
     public void testNewArray4(){
         LOGGER.debug(JsonUtil.format(ArrayUtil.newArray(Integer.class, 0)));

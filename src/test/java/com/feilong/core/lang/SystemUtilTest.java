@@ -41,10 +41,10 @@ public class SystemUtilTest{
     @Test
     public void nanoTime(){
         //返回最准确的可用系统计时器的当前值,以毫微秒为单位.
-        LOGGER.info("" + System.nanoTime());
+        LOGGER.debug("" + System.nanoTime());
 
         //返回以毫秒为单位的当前时间.注意,当返回值的时间单位是毫秒时,值的粒度取决于底层操作系统,并且粒度可能更大.例如,许多操作系统以几十毫秒为单位测量时间. 
-        LOGGER.info("" + System.currentTimeMillis());
+        LOGGER.debug("" + System.currentTimeMillis());
     }
 
     /**
@@ -53,7 +53,7 @@ public class SystemUtilTest{
     @Test
     public void testGetEnvMapForLog(){
         Map<String, String> envMapForLog = SystemUtil.getEnvMapForLog();
-        LOGGER.info(JsonUtil.format(envMapForLog));
+        LOGGER.debug(JsonUtil.format(envMapForLog));
     }
 
     /**

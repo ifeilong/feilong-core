@@ -46,7 +46,7 @@ public class StringUtilPerformanceTest2{
         }
 
         Date endDate = new Date();
-        LOGGER.info("time:{}", DateExtensionUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.debug("time:{}", DateExtensionUtil.getIntervalTime(beginDate, endDate));
     }
 
     /**
@@ -57,7 +57,7 @@ public class StringUtilPerformanceTest2{
         String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
         String delimiters = ";, .";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
-        LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+        LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
     }
 
     /**
@@ -74,7 +74,7 @@ public class StringUtilPerformanceTest2{
 
         String regexSpliter = "[;, \\.]";
         String[] tokenizeToStringArray = StringUtil.split(str, regexSpliter);
-        LOGGER.info(JsonUtil.format(tokenizeToStringArray));
+        LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
 
         Date beginDate = new Date();
 
@@ -83,6 +83,6 @@ public class StringUtilPerformanceTest2{
         }
 
         Date endDate = new Date();
-        LOGGER.info("time:{}", DateExtensionUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.debug("time:{}", DateExtensionUtil.getIntervalTime(beginDate, endDate));
     }
 }
