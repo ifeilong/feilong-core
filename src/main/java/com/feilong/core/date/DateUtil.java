@@ -1012,21 +1012,6 @@ public final class DateUtil{
 
     /**
      * 将指定日期 <code>date</code>转换成特殊格式的字符串.
-     *
-     * @param date
-     *            the date
-     * @param datePattern
-     *            the date pattern
-     * @return the string
-     * @deprecated Use {@link #toString(Date,String)} instead
-     */
-    @Deprecated
-    public static String date2String(Date date,String datePattern){
-        return toString(date, datePattern);
-    }
-
-    /**
-     * 将指定日期 <code>date</code>转换成特殊格式的字符串.
      * 
      * <pre class="code">
      * DateUtil.toString(Tue Oct 16 23:49:21 CST 2012,DatePattern.commonWithMillisecond) =2012-10-16 23:49:21.525
@@ -1048,21 +1033,6 @@ public final class DateUtil{
      */
     public static String toString(Date date,String datePattern){
         return DateFormatUtils.format(date, datePattern);
-    }
-
-    /**
-     * 将时间string字符串转换成date类型.
-     *
-     * @param dateString
-     *            时间字符串
-     * @param datePattern
-     *            模式,时间字符串的模式{@link DatePattern}
-     * @return the date
-     * @deprecated Use {@link #toDate(String,String)} instead
-     */
-    @Deprecated
-    public static Date string2Date(String dateString,String datePattern){
-        return toDate(dateString, datePattern);
     }
 
     /**
@@ -1323,4 +1293,34 @@ public final class DateUtil{
     }
 
     // [end]
+
+    /**
+     * 将时间string字符串转换成date类型.
+     *
+     * @param dateString
+     *            时间字符串
+     * @param datePattern
+     *            模式,时间字符串的模式{@link DatePattern}
+     * @return the date
+     * @deprecated Use {@link #toDate(String,String)} instead
+     */
+    @Deprecated
+    public static Date string2Date(String dateString,String datePattern){
+        return toDate(dateString, datePattern);
+    }
+
+    /**
+     * 将指定日期 <code>date</code>转换成特殊格式的字符串.
+     *
+     * @param date
+     *            the date
+     * @param datePattern
+     *            the date pattern
+     * @return the string
+     * @deprecated Use {@link #toString(Date,String)} instead
+     */
+    @Deprecated
+    public static String date2String(Date date,String datePattern){
+        return toString(date, datePattern);
+    }
 }

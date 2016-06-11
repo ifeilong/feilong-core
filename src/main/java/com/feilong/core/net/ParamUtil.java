@@ -607,7 +607,7 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>queryString</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     * @see org.apache.commons.lang3.ArrayUtils#add(String[], String)
+     * @see org.apache.commons.lang3.ArrayUtils#add(Object[], Object)
      * @see com.feilong.core.lang.StringUtil#split(String, String)
      * @since 1.4.0
      */

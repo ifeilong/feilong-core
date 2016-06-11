@@ -72,7 +72,7 @@ public final class EnumerationUtil{
      *         否则如果 contains 返回true,<br>
      *         其他返回false
      * @see "org.springframework.util.CollectionUtils#contains(Enumeration, Object)"
-     * @see org.apache.commons.collections4.iterators#EnumerationIterator
+     * @see org.apache.commons.collections4.iterators.EnumerationIterator
      * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)
      */
     public static <O> boolean contains(Enumeration<O> enumeration,O value){

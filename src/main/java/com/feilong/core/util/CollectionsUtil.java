@@ -286,7 +286,7 @@ public final class CollectionsUtil{
      * 
      * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
      *     Set{@code <String>} set = new HashSet{@code <String>}();
-     *     if (null != lines && lines.size() > 0){
+     *     if ({@code null != lines && lines.size() > 0}){
      *         for (ShoppingCartLineCommand line : lines){
      *             if (line.getComboIds() != null){
      *                 set.addAll(line.getComboIds());

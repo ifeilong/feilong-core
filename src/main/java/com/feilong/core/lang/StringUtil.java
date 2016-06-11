@@ -87,7 +87,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <blockquote>
  * <p>
  * {@link String#String(byte[] )} 其实调用了{@link String#String(byte[], Charset)}; 先使用 {@link Charset#defaultCharset()},如果有异常 再用 ISO-8859-1,
- * 具体参见 {@link java.lang.StringCoding#decode(byte[], int, int)}
+ * 具体参见 {@link "java.lang.StringCoding#decode(byte[], int, int)"}
  * </p>
  * </blockquote>
  * 

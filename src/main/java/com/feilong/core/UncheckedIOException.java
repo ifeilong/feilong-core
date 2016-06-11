@@ -20,7 +20,7 @@ import java.io.IOException;
 /**
  * Wraps an {@link IOException} with an unchecked exception.
  * <p>
- * 注:jdk1.8 自带了 {@link "java.io.UncheckedIOException"}
+ * 注:jdk1.8 自带了 <code>java.io.UncheckedIOException</code>
  * </p>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
