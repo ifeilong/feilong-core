@@ -130,7 +130,7 @@ public final class EnumUtil{
      * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see com.feilong.core.bean.BeanUtil#getProperty(Object, String)
+     * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @since 1.0.8
      */
     private static <E extends Enum<?>, T> E getEnumByPropertyValue(
