@@ -348,8 +348,7 @@ public final class SystemUtil{
      * @see "org.springframework.core.env.AbstractEnvironment#getSystemEnvironment()"
      */
     public static Map<String, String> getEnvMapForLog(){
-        Map<String, String> envMap = System.getenv();
-        return new TreeMap<String, String>(envMap);
+        return new TreeMap<String, String>(System.getenv());
     }
 
     /**
@@ -367,9 +366,7 @@ public final class SystemUtil{
     public static void setPropertiesFromMap(Map<String, String> map){
         Validate.notEmpty(map, "map can't be null/empty!");
         for (Map.Entry<String, String> entry : map.entrySet()){
-            String key = entry.getKey();
-            String value = entry.getValue();
-            System.setProperty(key, value);
+            System.setProperty(entry.getKey(), entry.getValue());
         }
     }
 
@@ -389,7 +386,6 @@ public final class SystemUtil{
      */
     public static void setPropertiesFromProperties(Properties properties){
         Validate.notNull(properties, "properties can't be null!");
-        Map<String, String> map = PropertiesUtil.toMap(properties);
-        setPropertiesFromMap(map);
+        setPropertiesFromMap(PropertiesUtil.toMap(properties));
     }
 }

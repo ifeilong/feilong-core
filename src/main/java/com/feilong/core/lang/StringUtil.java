@@ -841,9 +841,8 @@ public final class StringUtil{
         List<String> tokens = new ArrayList<String>();
         while (stringTokenizer.hasMoreTokens()){
             String token = stringTokenizer.nextToken();
-            if (trimTokens){//去空
-                token = token.trim();
-            }
+            token = trimTokens ? token.trim() : token;//去空
+
             if (!ignoreEmptyTokens || token.length() > 0){
                 tokens.add(token);
             }

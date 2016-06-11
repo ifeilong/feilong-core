@@ -25,11 +25,13 @@ import org.apache.commons.lang3.Validate;
  * <blockquote>
  * <ol>
  * <li>{@link org.apache.commons.lang3.ObjectUtils#equals(Object, Object)} 支持两个值都是null的情况</li>
+ * <li>{@link java.util.Objects#equals(Object, Object)} 也支持两个值都是null的情况</li>
  * </ol>
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.ObjectUtils
+ * @see java.util.Objects
  * @since 1.0.0
  */
 public final class ObjectUtil{
