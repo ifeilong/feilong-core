@@ -246,6 +246,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * @see org.apache.commons.collections4.ListUtils
  * @see org.apache.commons.collections4.IterableUtils
  * @see org.apache.commons.collections4.CollectionUtils
+ * @see "org.springframework.util.CollectionUtils"
  * @since 1.0.2
  * @since jdk1.5
  */
@@ -446,10 +447,10 @@ public final class CollectionsUtil{
      * 返回:
      * 
      * <pre class="code">
-        [{
-            "age": 24,
-            "name": "关羽"
-        }]
+     * [{
+     * "age": 24,
+     * "name": "关羽"
+     * }]
      * </pre>
      * 
      * </blockquote>
@@ -531,9 +532,9 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * [{
-            "age": 23,
-            "name": "张飞"
-        }]
+     * "age": 23,
+     * "name": "张飞"
+     * }]
      * </pre>
      * 
      * </blockquote>
@@ -679,7 +680,8 @@ public final class CollectionsUtil{
     //*************************获得 属性值 *******************************************************************
 
     /**
-     * 解析对象集合,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象指定的属性 <code>propertyName</code>的值,拼成List(ArrayList).
+     * 解析对象集合 <code>objectCollection</code>,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象指定的属性 <code>propertyName</code>的值,拼成List(
+     * {@link ArrayList}).
      * 
      * <h3>示例:</h3>
      * 
@@ -720,18 +722,17 @@ public final class CollectionsUtil{
      * List{@code <User>} userList = new ArrayList{@code <User>}();
      * userList.add(user1);
      * userList.add(user2);
-     * 
      * </pre>
      * 
      * <p>
      * 以下情况:
      * </p>
      * 
+     * <hr>
      * <span style="color:green">//数组</span>
      * 
      * <pre class="code">
-     * List{@code <String>} fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
-     * LOGGER.info(JsonUtil.format(fieldValueList1));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "loves[1]")));
      * </pre>
      * 
      * 返回 :
@@ -740,40 +741,40 @@ public final class CollectionsUtil{
      * ["xiaoshuo1","xiaoshuo2"]
      * </pre>
      * 
+     * <hr>
      * <span style="color:green">//级联对象</span>
      * 
      * <pre class="code">
-     * List{@code <Integer>} fieldValueList2 = CollectionsUtil.getPropertyValueList(userList, "userInfo.age");
-     * LOGGER.info(JsonUtil.format(fieldValueList2));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "userInfo.age")));
      * </pre>
      * 
-     * 返回 :
+     * 结果 :
      * 
      * <pre class="code">
      * [28,null]
      * </pre>
      * 
+     * <hr>
      * <span style="color:green">//Map</span>
      * 
      * <pre class="code">
-     * List{@code <Integer>} attrList = CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)");
-     * LOGGER.info(JsonUtil.format(attrList));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)")));
      * </pre>
      * 
-     * 返回 :
+     * 结果 :
      * 
      * <pre class="code">
      * ["赵子龙","赵子龙"]
      * </pre>
      * 
+     * <hr>
      * <span style="color:green">//集合</span>
      * 
      * <pre class="code">
-     * List{@code <String>} addressList = CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]");
-     * LOGGER.info(JsonUtil.format(addressList));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]")));
      * </pre>
      * 
-     * 返回 :
+     * 结果 :
      * 
      * <pre class="code">
      * [{"address": "中南海"},{"address": "中南海"}]

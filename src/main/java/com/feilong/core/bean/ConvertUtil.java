@@ -788,6 +788,7 @@ public final class ConvertUtil{
      *         否则返回 {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
      * @see java.util.Collections#addAll(Collection, Object...)
+     * @see "org.springframework.util.CollectionUtils#arrayToList(Object)"
      */
     @SafeVarargs
     public static <T> List<T> toList(T...arrays){
