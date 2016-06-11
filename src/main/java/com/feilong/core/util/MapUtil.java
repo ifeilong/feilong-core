@@ -26,6 +26,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.comparators.ReverseComparator;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -434,10 +435,9 @@ public final class MapUtil{
      */
     public static <K, V> Map<K, List<V>> putMultiValue(Map<K, List<V>> map,K key,V value){
         Validate.notNull(map, "map can't be null!");
-
         List<V> mapValue = map.get(key);
 
-        List<V> valueList = null == mapValue ? new ArrayList<V>() : mapValue;
+        List<V> valueList = ObjectUtils.defaultIfNull(mapValue, new ArrayList<V>());
         valueList.add(value);
 
         map.put(key, valueList);

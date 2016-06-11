@@ -37,6 +37,7 @@ import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -671,14 +672,31 @@ public final class ConvertUtil{
         //************************************************************************
         Object[] operateArray = toObjects(arrays);
 
-        ToStringConfig useToStringConfig = null == toStringConfig ? new ToStringConfig() : toStringConfig;
+        ToStringConfig useToStringConfig = ObjectUtils.defaultIfNull(toStringConfig, new ToStringConfig());
         String connector = useToStringConfig.getConnector();
+        boolean isJoinNullOrEmpty = useToStringConfig.getIsJoinNullOrEmpty();
 
+        return join(operateArray, connector, isJoinNullOrEmpty);
+    }
+
+    /**
+     * Join.
+     *
+     * @param operateArray
+     *            the operate array
+     * @param connector
+     *            the connector
+     * @param isJoinNullOrEmpty
+     *            the is join null or empty
+     * @return the string
+     * @since 1.6.3
+     */
+    private static String join(Object[] operateArray,String connector,boolean isJoinNullOrEmpty){
         //************************************************************************
         StringBuilder sb = new StringBuilder();
         for (Object obj : operateArray){
             //如果是null或者empty,但是参数值是不拼接,那么跳过,继续循环
-            if (Validator.isNullOrEmpty(obj) && !useToStringConfig.getIsJoinNullOrEmpty()){
+            if (Validator.isNullOrEmpty(obj) && !isJoinNullOrEmpty){
                 continue;
             }
 

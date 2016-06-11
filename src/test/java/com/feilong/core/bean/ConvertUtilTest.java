@@ -398,8 +398,6 @@ public class ConvertUtilTest{
         toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
         assertEquals("2,1", ConvertUtil.toString(toStringConfig, array3));
-
-        // assertEquals("2,1", StringUtils.join(array3, ","));
     }
 
     /**
