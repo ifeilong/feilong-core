@@ -359,6 +359,33 @@ public final class MapUtil{
     }
 
     /**
+     * 仅当 <code>null != map 并且 Validator.isNotNullOrEmpty(value)</code>才将key/value put到map中.
+     * 
+     * <p>
+     * 如果 <code>map</code> 是null,什么都不做<br>
+     * 如果 <code>value</code> 是null或者empty,也什么都不做<br>
+     * 如果 <code>key</code> 是null,依照<code>map</code>的<code>key</code>是否允许是null的 规则<br>
+     * </p>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @since 1.6.3
+     */
+    public static <K, V> void putIfValueNotNullOrEmpty(final Map<K, V> map,final K key,final V value){
+        if (null != map && Validator.isNotNullOrEmpty(value)){
+            map.put(key, value);
+        }
+    }
+
+    /**
      * 如果<code>map</code>中存在<code>key</code>,那么累加<code>value</code>值;如果不存在那么直接put.
      * 
      * <h3>示例:</h3>
@@ -427,7 +454,7 @@ public final class MapUtil{
      *            the value
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      * @see "com.google.common.collect.ArrayListMultimap"
-     * @see org.apache.commons.collections4.MultiMap
+     * @see org.apache.commons.collections4.MultiValuedMap
      * @see org.apache.commons.collections4.IterableMap
      * @see org.apache.commons.collections4.MultiMapUtils
      * @see org.apache.commons.collections4.multimap.AbstractMultiValuedMap#put(Object, Object)
@@ -435,9 +462,8 @@ public final class MapUtil{
      */
     public static <K, V> Map<K, List<V>> putMultiValue(Map<K, List<V>> map,K key,V value){
         Validate.notNull(map, "map can't be null!");
-        List<V> mapValue = map.get(key);
 
-        List<V> valueList = ObjectUtils.defaultIfNull(mapValue, new ArrayList<V>());
+        List<V> valueList = ObjectUtils.defaultIfNull(map.get(key), new ArrayList<V>());
         valueList.add(value);
 
         map.put(key, valueList);
@@ -617,14 +643,11 @@ public final class MapUtil{
 
         //保证元素的顺序 
         Map<K, T> returnMap = new LinkedHashMap<K, T>(map);
-
         for (K key : excludeKeys){
             if (map.containsKey(key)){
                 returnMap.remove(key);
             }else{
-                if (LOGGER.isWarnEnabled()){
-                    LOGGER.warn("map:{} don't contains key:[{}]", JsonUtil.format(map), key);
-                }
+                LOGGER.warn("map:{} don't contains key:[{}]", JsonUtil.format(map), key);
             }
         }
         return returnMap;
@@ -814,8 +837,7 @@ public final class MapUtil{
         for (K key : useIncludeKeys){
             if (map.containsKey(key)){
                 O o = map.get(key);
-                V v = PropertyUtil.getProperty(o, extractPropertyName);
-                returnMap.put(key, v);
+                returnMap.put(key, PropertyUtil.<V> getProperty(o, extractPropertyName));
             }else{
                 LOGGER.warn("map:{} don't contains key:[{}]", JsonUtil.format(map), key);
             }
