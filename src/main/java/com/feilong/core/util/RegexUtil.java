@@ -128,8 +128,7 @@ public final class RegexUtil{
         //匹配的索引
         LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
 
-        int groupCount = matcher.groupCount();
-        for (int i = 1; i <= groupCount; ++i){
+        for (int i = 1, j = matcher.groupCount(); i <= j; ++i){
             //匹配的索引
             LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
             groupMap.put(i, matcher.group(i));//groupValue

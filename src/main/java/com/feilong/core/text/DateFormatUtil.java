@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 
 /**
@@ -101,7 +102,7 @@ public final class DateFormatUtil{
         Validate.notBlank(dateString, "dateString can't be null/empty!");
         Validate.notBlank(pattern, "pattern can't be null/empty!");
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, null == locale ? Locale.getDefault() : locale);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, ObjectUtils.defaultIfNull(locale, Locale.getDefault()));
         ParsePosition parsePosition = new ParsePosition(0);
         return simpleDateFormat.parse(dateString, parsePosition);
     }

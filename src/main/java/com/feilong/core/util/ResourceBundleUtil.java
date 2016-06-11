@@ -29,6 +29,7 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -579,8 +580,7 @@ public final class ResourceBundleUtil{
         Map<String, String> propertyMap = new TreeMap<String, String>();
         while (keysEnumeration.hasMoreElements()){
             String key = keysEnumeration.nextElement();
-            String value = resourceBundle.getString(key);
-            propertyMap.put(key, value);
+            propertyMap.put(key, resourceBundle.getString(key));
         }
         return propertyMap;
     }
@@ -620,8 +620,7 @@ public final class ResourceBundleUtil{
      */
     public static ResourceBundle getResourceBundle(String baseName,Locale locale){
         Validate.notBlank(baseName, "baseName can't be null/empty!");
-        Locale useLocale = null == locale ? Locale.getDefault() : locale;
-        return ResourceBundle.getBundle(baseName, useLocale);
+        return ResourceBundle.getBundle(baseName, ObjectUtils.defaultIfNull(locale, Locale.getDefault()));
     }
 
     //*****************************************************************************

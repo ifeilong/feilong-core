@@ -27,6 +27,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
@@ -542,8 +543,7 @@ public final class JsonUtil{
      * @see net.sf.json.JSONSerializer#toJSON(Object)
      */
     public static JSON toJSON(Object obj,JsonConfig jsonConfig){
-        JsonConfig useJsonConfig = defaultIfNull(jsonConfig);
-
+        JsonConfig useJsonConfig = ObjectUtils.defaultIfNull(jsonConfig, DEFAULT_JSON_CONFIG);
         registerDefaultJsonValueProcessor(useJsonConfig);
 
         if (JSONUtils.isArray(obj) || // obj instanceof Collection || obj instanceof Object[]
@@ -629,18 +629,6 @@ public final class JsonUtil{
      */
     private static JSONObject toJSONObject(Object obj,JsonConfig useJsonConfig){
         return JSONObject.fromObject(obj, useJsonConfig);
-    }
-
-    /**
-     * Default if null.
-     *
-     * @param jsonConfig
-     *            the json config
-     * @return the json config
-     * @since 1.4.0
-     */
-    private static JsonConfig defaultIfNull(JsonConfig jsonConfig){
-        return null == jsonConfig ? DEFAULT_JSON_CONFIG : jsonConfig;
     }
 
     // *****************************Array******************************************************
