@@ -424,7 +424,7 @@ public final class PropertyUtil{
      * </blockquote>
      * 
      * <p>
-     * PS:目前暂不支持从集合里面找到指定类型的值,参见 {@link #isCannotFindType(Object)},如果你有相关需求,可以调用 {@link
+     * PS:目前暂不支持从集合里面找到指定类型的值,参见 {@link #isDonotSupportFindType(Object)},如果你有相关需求,可以调用 {@link
      * "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"}
      * </p>
      *
@@ -453,7 +453,7 @@ public final class PropertyUtil{
             return (T) obj;
         }
 
-        if (isCannotFindType(obj)){
+        if (isDonotSupportFindType(obj)){
             LOGGER.debug("obj:[{}] not support find toBeFindedClassType:[{}]", obj.getClass().getName(), toBeFindedClassType.getName());
             return null;
         }
@@ -486,9 +486,9 @@ public final class PropertyUtil{
      * @param obj
      *            the obj
      * @return true, if checks if is can find type
-     * @since 1.5.3
+     * @since 1.6.3
      */
-    private static boolean isCannotFindType(Object obj){
+    private static boolean isDonotSupportFindType(Object obj){
         //一般自定义的command 里面 就是些 string int,list map等对象
         //这些我们过滤掉,只取类型是 findedClassType的
         return ClassUtils.isPrimitiveOrWrapper(obj.getClass())//
