@@ -668,15 +668,9 @@ public final class ConvertUtil{
         if (Validator.isNullOrEmpty(arrays)){
             return StringUtils.EMPTY;
         }
-
-        //************************************************************************
         Object[] operateArray = toObjects(arrays);
-
         ToStringConfig useToStringConfig = ObjectUtils.defaultIfNull(toStringConfig, new ToStringConfig());
-        String connector = useToStringConfig.getConnector();
-        boolean isJoinNullOrEmpty = useToStringConfig.getIsJoinNullOrEmpty();
-
-        return join(operateArray, connector, isJoinNullOrEmpty);
+        return join(operateArray, useToStringConfig.getConnector(), useToStringConfig.getIsJoinNullOrEmpty());
     }
 
     /**
@@ -692,7 +686,6 @@ public final class ConvertUtil{
      * @since 1.6.3
      */
     private static String join(Object[] operateArray,String connector,boolean isJoinNullOrEmpty){
-        //************************************************************************
         StringBuilder sb = new StringBuilder();
         for (Object obj : operateArray){
             //如果是null或者empty,但是参数值是不拼接,那么跳过,继续循环

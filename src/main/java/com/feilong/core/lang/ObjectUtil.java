@@ -101,7 +101,8 @@ public final class ObjectUtil{
      *
      * @param object
      *            the object
-     * @return true, if checks if is array
+     * @return true, if checks if is array<br>
+     *         如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="http://stackoverflow.com/questions/219881/java-array-reflection-isarray-vs-instanceof">Java array reflection: isArray
      *      vs. instanceof</a>
      * @see <a href="http://stackoverflow.com/questions/2725533/how-to-see-if-an-object-is-an-array-without-using-reflection">How to see if

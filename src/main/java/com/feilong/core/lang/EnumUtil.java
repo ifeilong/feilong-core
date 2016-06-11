@@ -65,7 +65,9 @@ public final class EnumUtil{
      *            字段名称,比如 {@link com.feilong.core.HttpMethodType HttpMethodType}的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
-     * @return 获得 enum constant
+     * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #getEnumByPropertyValue(Class, String, Object, boolean)
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T specifiedValue){
@@ -136,7 +138,6 @@ public final class EnumUtil{
                     String propertyName,
                     T specifiedValue,
                     boolean ignoreCase){
-
         Validate.notNull(enumClass, "enumClass can't be null!");
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 

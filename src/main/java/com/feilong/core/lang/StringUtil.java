@@ -222,6 +222,19 @@ public final class StringUtil{
     /**
      * 判断 <code>seq</code>内是否包含指定的<code>searchSeq</code>.
      * 
+     * <p>
+     * A {@code null} CharSequence will return {@code false}.
+     * </p>
+     *
+     * <pre>
+     * StringUtils.contains(null, *)     = false
+     * StringUtils.contains(*, null)     = false
+     * StringUtils.contains("", "")      = true
+     * StringUtils.contains("abc", "")   = true
+     * StringUtils.contains("abc", "a")  = true
+     * StringUtils.contains("abc", "z")  = false
+     * </pre>
+     * 
      * @param seq
      *            原始字符串 jinxin,the CharSequence to check, may be null
      * @param searchSeq

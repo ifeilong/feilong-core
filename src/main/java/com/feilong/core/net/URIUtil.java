@@ -349,7 +349,7 @@ public final class URIUtil{
      */
     // XXX 有待严谨
     public static boolean hasQueryString(String uriString){
-        return Validator.isNullOrEmpty(uriString) ? false : -1 != uriString.indexOf(URIComponents.QUESTIONMARK);
+        return Validator.isNullOrEmpty(uriString) ? false : StringUtil.contains(uriString, URIComponents.QUESTIONMARK);
     }
 
     // [start] encode/decode
