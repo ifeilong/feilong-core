@@ -572,7 +572,6 @@ public final class MapUtil{
         }
         //保证元素的顺序 ,key的顺序 按照参数 <code>keys</code>的顺序
         Map<K, T> returnMap = new LinkedHashMap<K, T>();
-
         for (K key : keys){
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
@@ -637,20 +636,34 @@ public final class MapUtil{
         if (Validator.isNullOrEmpty(map)){
             return Collections.emptyMap();
         }
-        if (Validator.isNullOrEmpty(excludeKeys)){
-            return map;
-        }
+        return Validator.isNullOrEmpty(excludeKeys) ? map : removeKeys(new LinkedHashMap<K, T>(map), excludeKeys); //保证元素的顺序 
+    }
 
-        //保证元素的顺序 
-        Map<K, T> returnMap = new LinkedHashMap<K, T>(map);
-        for (K key : excludeKeys){
+    /**
+     * 删除.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param keys
+     *            the keys
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.6.3
+     */
+    @SafeVarargs
+    public static <K, V> Map<K, V> removeKeys(Map<K, V> map,K...keys){
+        Validate.notNull(map, "map can't be null!");
+        for (K key : keys){
             if (map.containsKey(key)){
-                returnMap.remove(key);
+                map.remove(key);
             }else{
-                LOGGER.warn("map:{} don't contains key:[{}]", JsonUtil.format(map), key);
+                LOGGER.warn("map:[{}] don't contains key:[{}]", JsonUtil.format(map.keySet()), key);
             }
         }
-        return returnMap;
+        return map;
     }
 
     /**

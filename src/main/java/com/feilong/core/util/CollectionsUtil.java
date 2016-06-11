@@ -1626,14 +1626,11 @@ public final class CollectionsUtil{
         if (Validator.isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
-
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, O> map = new LinkedHashMap<T, O>(objectCollection.size());
-
         for (O o : objectCollection){
             T key = PropertyUtil.getProperty(o, propertyName);
-
             if (!map.containsKey(key)){
                 map.put(key, o);
             }else{

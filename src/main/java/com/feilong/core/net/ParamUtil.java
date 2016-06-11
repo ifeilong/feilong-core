@@ -410,7 +410,8 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(queryString) || Validator.isNullOrEmpty(paramNameList)){
             return uriString;// 不带参数原样返回
         }
-        Map<String, String[]> map = removeKeys(toSafeArrayValueMap(queryString, null), paramNameList);
+        Map<String, String[]> map = MapUtil
+                        .removeKeys(toSafeArrayValueMap(queryString, null), ConvertUtil.toArray(paramNameList, String.class));
         return combineUrl(URIUtil.getFullPathWithoutQueryString(uriString), map, charsetType);
     }
 
@@ -1104,28 +1105,6 @@ public final class ParamUtil{
     private static <K, V> Map<K, V> toMap(K key,V value){
         Map<K, V> map = new LinkedHashMap<K, V>();
         map.put(key, value);
-        return map;
-    }
-
-    /**
-     * 删除.
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the single value map
-     * @param keyList
-     *            the param name list
-     * @return the map< k, v>
-     * @since 1.6.2
-     */
-    private static <K, V> Map<K, V> removeKeys(Map<K, V> map,List<K> keyList){
-        Validate.notNull(map, "map can't be null!");
-        for (K paramName : keyList){
-            map.remove(paramName);
-        }
         return map;
     }
 }

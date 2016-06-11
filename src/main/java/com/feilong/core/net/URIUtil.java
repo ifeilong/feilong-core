@@ -229,8 +229,7 @@ public final class URIUtil{
      */
     public static URI create(String uriString,String charsetType){
         try{
-            String encodeUrl = encodeUri(uriString, charsetType);
-            return URI.create(encodeUrl);
+            return URI.create(encodeUri(uriString, charsetType));
         }catch (Exception e){
             throw new URIParseException(Slf4jUtil.format("uriString:[{}],charsetType:[{}]", uriString, charsetType), e);
         }

@@ -131,12 +131,12 @@ public final class URLUtil{
      *            the <code>String</code> to parse as a URL.
      * @return 如果 <code>context</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>context</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see #getFileURL(String)
+     * @see #toFileURL(String)
      * @see #getUnionUrl(URL, String)
      * @since 1.4.0
      */
     public static String getUnionFileUrl(String context,String spec){
-        URL parentUrl = getFileURL(context);
+        URL parentUrl = toFileURL(context);
         return getUnionUrl(parentUrl, spec);
     }
 
@@ -170,15 +170,14 @@ public final class URLUtil{
     public static String getUnionUrl(URL context,String spec){
         Validate.notNull(spec, "spec can't be null!");
         try{
-            URL unionUrl = new URL(context, spec);
-            return unionUrl.toString();
+            return new URL(context, spec).toString();
         }catch (MalformedURLException e){
             throw new URIParseException(e);
         }
     }
 
     /**
-     * 将字符串路径 <code>filePathName</code> 转成url.
+     * 将字符串路径 <code>filePathName</code> 转成{@link URL}.
      *
      * @param filePathName
      *            字符串路径
@@ -187,13 +186,12 @@ public final class URLUtil{
      * @see java.io.File#toURI()
      * @see java.net.URI#toURL()
      * @see "org.apache.commons.io.FileUtils#toURLs(File[])"
-     * @since 1.4.0
+     * @since 1.6.3
      */
-    public static URL getFileURL(String filePathName){
+    public static URL toFileURL(String filePathName){
         Validate.notBlank(filePathName, "filePathName can't be null/empty!");
-        File file = new File(filePathName);
         try{
-            return file.toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
+            return new File(filePathName).toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
         }catch (MalformedURLException e){
             throw new URIParseException(e);
         }
