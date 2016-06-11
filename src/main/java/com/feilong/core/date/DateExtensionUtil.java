@@ -196,8 +196,7 @@ public final class DateExtensionUtil{
      *            结束时间
      * @param datePattern
      *            时间模式 {@link DatePattern}
-     * @return the interval day list<br>
-     *         如果 <code>fromDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>fromDateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fromDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>toDateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>toDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -209,11 +208,7 @@ public final class DateExtensionUtil{
         Validate.notBlank(fromDateString, "fromDateString can't be null/empty!");
         Validate.notBlank(toDateString, "toDateString can't be null/empty!");
         Validate.notBlank(datePattern, "datePattern can't be null/empty!");
-
-        Date fromDate = DateUtil.toDate(fromDateString, datePattern);
-        Date toDate = DateUtil.toDate(toDateString, datePattern);
-
-        return getIntervalDayList(fromDate, toDate);
+        return getIntervalDayList(DateUtil.toDate(fromDateString, datePattern), DateUtil.toDate(toDateString, datePattern));
     }
 
     /**
@@ -254,8 +249,7 @@ public final class DateExtensionUtil{
      *            the from date
      * @param toDate
      *            the to date
-     * @return the interval day list <br>
-     *         如果 <code>fromDate</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>fromDate</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>toDate</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalDay(Date, Date)
      * @see org.apache.commons.lang3.time.DateUtils#iterator(Calendar, int)
@@ -272,16 +266,16 @@ public final class DateExtensionUtil{
         Date beginDateReset = DateUtil.getFirstDateOfThisDay(minDate);
         Date endDateReset = DateUtil.getLastDateOfThisDay(maxDate);
 
-        List<Date> dateList = new ArrayList<Date>();
-        dateList.add(beginDateReset);
+        List<Date> list = new ArrayList<Date>();
+        list.add(beginDateReset);
 
         // 相隔的天数
         int intervalDay = getIntervalDay(beginDateReset, endDateReset);
         for (int i = 0; i < intervalDay; ++i){
-            dateList.add(DateUtil.addDay(beginDateReset, i + 1));
+            list.add(DateUtil.addDay(beginDateReset, i + 1));
         }
 
-        return dateList;
+        return list;
     }
 
     /**
@@ -322,13 +316,14 @@ public final class DateExtensionUtil{
      *            开始日期
      * @param endDate
      *            结束日期
-     * @return 将两日期之间的间隔,转换成直观的表示方式
+     * @return 将两日期之间的间隔,转换成直观的表示方式<br>
+     *         如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>endDate</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalForView(long)
      * @see #getIntervalTime(Date, Date)
      */
     public static String getIntervalForView(Date beginDate,Date endDate){
-        long spaceTime = getIntervalTime(beginDate, endDate);
-        return getIntervalForView(spaceTime);
+        return getIntervalForView(getIntervalTime(beginDate, endDate));
     }
 
     /**
@@ -420,16 +415,14 @@ public final class DateExtensionUtil{
      *            the date1
      * @param date2
      *            the date2
-     * @return 相差的秒数 <br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalSecond(long)
      * @since 1.6.0
      */
     public static int getIntervalSecond(Date date1,Date date2){
-        long intervalTime = getIntervalTime(date1, date2);
-        return getIntervalSecond(intervalTime);
+        return getIntervalSecond(getIntervalTime(date1, date2));
     }
 
     /**
@@ -451,16 +444,14 @@ public final class DateExtensionUtil{
      *            date1
      * @param date2
      *            date2
-     * @return 相差的小时数<br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalHour(long)
      * @since 1.6.0
      */
     public static int getIntervalHour(Date date1,Date date2){
-        long intervalTime = getIntervalTime(date1, date2);
-        return getIntervalHour(intervalTime);
+        return getIntervalHour(getIntervalTime(date1, date2));
     }
 
     /**
@@ -485,14 +476,17 @@ public final class DateExtensionUtil{
      *            the date2
      * @param datePattern
      *            日期pattern {@link DatePattern}
-     * @return the interval week
+     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date1</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getIntervalWeek(Date, Date)
      * @since 1.6.0
      */
     public static int getIntervalWeek(String date1,String date2,String datePattern){
-        Date dateOne = DateUtil.toDate(date1, datePattern);
-        Date dateTwo = DateUtil.toDate(date2, datePattern);
-        return getIntervalWeek(dateOne, dateTwo);
+        return getIntervalWeek(DateUtil.toDate(date1, datePattern), DateUtil.toDate(date2, datePattern));
     }
 
     /**
@@ -502,15 +496,13 @@ public final class DateExtensionUtil{
      *            the date1
      * @param date2
      *            the date2
-     * @return the interval week<br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalWeek(long)
      * @since 1.6.0
      */
     public static int getIntervalWeek(Date date1,Date date2){
-        long intervalTime = getIntervalTime(date1, date2);
-        return getIntervalWeek(intervalTime);
+        return getIntervalWeek(getIntervalTime(date1, date2));
     }
 
     /**
@@ -522,7 +514,7 @@ public final class DateExtensionUtil{
      * @see com.feilong.core.TimeInterval#SECONDS_PER_WEEK
      * @since 1.6.0
      */
-    public static int getIntervalWeek(long spaceTime){
+    private static int getIntervalWeek(long spaceTime){
         return (int) (spaceTime / (TimeInterval.MILLISECOND_PER_WEEK));
     }
 
@@ -537,16 +529,19 @@ public final class DateExtensionUtil{
      *            date2
      * @param datePattern
      *            时间模式 {@link DatePattern}
-     * @return 相差的天数
+     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date1</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      * @see DateUtil#toDate(String, String)
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalDay(long)
      * @since 1.6.0
      */
     public static int getIntervalDay(String date1,String date2,String datePattern){
-        Date dateOne = DateUtil.toDate(date1, datePattern);
-        Date dateTwo = DateUtil.toDate(date2, datePattern);
-        return getIntervalDay(dateOne, dateTwo);
+        return getIntervalDay(DateUtil.toDate(date1, datePattern), DateUtil.toDate(date2, datePattern));
     }
 
     /**
@@ -556,16 +551,14 @@ public final class DateExtensionUtil{
      *            date1
      * @param date2
      *            date2
-     * @return 相差的天数<br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
      * @see #getIntervalDay(long)
      * @since 1.6.0
      */
     public static int getIntervalDay(Date date1,Date date2){
-        long intervalTime = getIntervalTime(date1, date2);
-        return getIntervalDay(intervalTime);
+        return getIntervalDay(getIntervalTime(date1, date2));
     }
 
     /**
@@ -588,8 +581,7 @@ public final class DateExtensionUtil{
      *            date1
      * @param date2
      *            date2
-     * @return 两个时间相差的毫秒数,不管date1是否早于还是晚于date2,均返回绝对值<br>
-     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see DateUtil#getTime(Date)
      * @see Math#abs(long)

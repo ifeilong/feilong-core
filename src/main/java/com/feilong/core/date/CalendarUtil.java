@@ -158,14 +158,14 @@ public final class CalendarUtil{
     }
 
     /**
-     * 获得指定日期的00:00:00.
+     * 获得指定日期的<code>00:00:00</code>.
      * <p>
      * 例如: <code>2011-01-01 10:20:20 返回 2011-01-01 00:00:00</code>
      * </p>
      * 
      * @param date
      *            the date
-     * @return 获得指定日期的00:00:00
+     * @return 获得指定日期的<code>00:00:00</code>
      */
     public static Calendar resetDayBegin(Date date){
         Calendar calendar = DateUtil.toCalendar(date);
@@ -179,8 +179,7 @@ public final class CalendarUtil{
      *
      * @param calendar
      *            the calendar
-     * @return the calendar<br>
-     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      * @see Calendar#set(int, int)
      * @see Calendar#HOUR_OF_DAY
      * @see Calendar#MINUTE
@@ -203,8 +202,7 @@ public final class CalendarUtil{
      *
      * @param calendar
      *            the calendar
-     * @return the calendar<br>
-     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      * @see Calendar#set(int, int)
      * @see Calendar#HOUR_OF_DAY
      * @see Calendar#MINUTE
@@ -226,9 +224,9 @@ public final class CalendarUtil{
      *
      * @param calendar
      *            the calendar
-     * @return the calendar<br>
-     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      * @since 1.3.0
+     * @see #resetDayEnd(Calendar)
      */
     public static Calendar resetYearEnd(Calendar calendar){
         Validate.notNull(calendar, "calendar can't be null!");
@@ -249,20 +247,12 @@ public final class CalendarUtil{
      *            date
      * @param field
      *            Calendar字段:<br>
-     *            月份:Calendar.MONTH(真实值需要加1处理),<br>
-     *            日:Calendar.DAY_OF_MONTH,<br>
-     *            年份:Calendar.YEAR<br>
+     *            月份:{@link Calendar#MONTH}(真实值需要加1处理),<br>
+     *            日:{@link Calendar#DAY_OF_MONTH},<br>
+     *            年份:{@link Calendar#YEAR}<br>
      *            ...
-     * @return 获得日历字段值
-     * @see Calendar#YEAR
-     * @see Calendar#MONTH
-     * @see Calendar#DAY_OF_MONTH
-     * @see Calendar#DATE
-     * @see Calendar#HOUR
-     * @see Calendar#HOUR_OF_DAY
-     * @see Calendar#MINUTE
-     * @see Calendar#SECOND
-     * @see Calendar#DAY_OF_WEEK
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see #getFieldValue(Calendar, int)
      * @since 1.3.0
      */
     public static int getFieldValue(Date date,int field){
@@ -277,35 +267,28 @@ public final class CalendarUtil{
      *            the calendar
      * @param field
      *            Calendar字段:<br>
-     *            月份:Calendar.MONTH(真实值需要加1处理),<br>
-     *            日:Calendar.DAY_OF_MONTH,<br>
-     *            年份:Calendar.YEAR<br>
+     *            月份:{@link Calendar#MONTH}(真实值需要加1处理),<br>
+     *            日:{@link Calendar#DAY_OF_MONTH},<br>
+     *            年份:{@link Calendar#YEAR}<br>
      *            ...
-     * @return 获得日历字段值
-     * @see Calendar#YEAR
-     * @see Calendar#MONTH
-     * @see Calendar#DAY_OF_MONTH
-     * @see Calendar#DATE
-     * @see Calendar#HOUR
-     * @see Calendar#HOUR_OF_DAY
-     * @see Calendar#MINUTE
-     * @see Calendar#SECOND
-     * @see Calendar#DAY_OF_WEEK
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see java.util.Calendar#get(int)
      * @since 1.3.0
      */
     public static int getFieldValue(Calendar calendar,int field){
+        Validate.notNull(calendar, "calendar can't be null!");
         return calendar.get(field);
     }
 
     //**************************************************************************************
 
     /**
-     * 将calendar转成Date.
+     * 将 {@link Calendar} 转成 {@link Date}.
      * 
      * @param calendar
      *            calendar
-     * @return Date<br>
-     *         如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
+     * @see java.util.Calendar#getTime()
      */
     public static Date toDate(Calendar calendar){
         Validate.notNull(calendar, "calendar can't be null!");
@@ -313,13 +296,14 @@ public final class CalendarUtil{
     }
 
     /**
-     * 将Calendar转成string.
+     * 将{@link Calendar}转成{@link String}.
      * 
      * @param calendar
      *            calendar
      * @param datePattern
      *            日期pattern {@link DatePattern}
-     * @return string
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
+     * @see com.feilong.core.date.DateUtil#toString(Date, String)
      */
     public static String toString(Calendar calendar,String datePattern){
         Date date = toDate(calendar);

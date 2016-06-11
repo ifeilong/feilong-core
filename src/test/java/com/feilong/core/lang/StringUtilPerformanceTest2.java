@@ -45,8 +45,7 @@ public class StringUtilPerformanceTest2{
             tokenizeToStringArray1();
         }
 
-        Date endDate = new Date();
-        LOGGER.debug("time:{}", DateExtensionUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.debug("time:{}", DateExtensionUtil.getIntervalTime(beginDate, new Date()));
     }
 
     /**
@@ -82,7 +81,6 @@ public class StringUtilPerformanceTest2{
             StringUtil.split(str, regexSpliter);
         }
 
-        Date endDate = new Date();
-        LOGGER.debug("time:{}", DateExtensionUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.debug("time:{}", DateExtensionUtil.getIntervalTime(beginDate, new Date()));
     }
 }
