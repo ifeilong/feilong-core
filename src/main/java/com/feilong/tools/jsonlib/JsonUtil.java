@@ -297,9 +297,8 @@ public final class JsonUtil{
         }
         Map<K, Object> simpleMap = new TreeMap<K, Object>();
         for (Map.Entry<K, V> entry : inputMap.entrySet()){
-            K key = entry.getKey();
             V value = entry.getValue();
-            simpleMap.put(key, isAllowFormatType(value, allowFormatClassTypes) ? value : String.valueOf(value)); //注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
+            simpleMap.put(entry.getKey(), isAllowFormatType(value, allowFormatClassTypes) ? value : String.valueOf(value)); //注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
         }
         return format(simpleMap);
     }
@@ -330,17 +329,11 @@ public final class JsonUtil{
      * @param indent
      *            the indent
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @see #format(Object, JsonFormatConfig)
+     * @see #buildJsonFormatConfig(String[], String[])
      */
     public static String format(Object obj,String[] excludes,Integer indentFactor,Integer indent){
-        if (null == obj){
-            return StringUtils.EMPTY;
-        }
-        JsonFormatConfig jsonFormatConfig = null;
-        if (Validator.isNotNullOrEmpty(excludes)){
-            jsonFormatConfig = new JsonFormatConfig();
-            jsonFormatConfig.setExcludes(excludes);
-        }
-        return format(obj, jsonFormatConfig, indentFactor, indent);
+        return null == obj ? StringUtils.EMPTY : format(obj, buildJsonFormatConfig(excludes, null), indentFactor, indent);
     }
 
     /**
@@ -351,18 +344,27 @@ public final class JsonUtil{
      * @param includes
      *            the includes
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     * @see #format(Object, JsonFormatConfig)
+     * @see #buildJsonFormatConfig(String[], String[])
      * @since 1.0.8
      */
     public static String formatWithIncludes(Object obj,final String...includes){
-        if (null == obj){
-            return StringUtils.EMPTY;
-        }
-        JsonFormatConfig jsonFormatConfig = null;
-        if (Validator.isNotNullOrEmpty(includes)){
-            jsonFormatConfig = new JsonFormatConfig();
-            jsonFormatConfig.setIncludes(includes);
-        }
-        return format(obj, jsonFormatConfig);
+        return null == obj ? StringUtils.EMPTY : format(obj, buildJsonFormatConfig(null, includes));
+    }
+
+    /**
+     * Builds the json format config.
+     *
+     * @param excludes
+     *            the excludes
+     * @param includes
+     *            the includes
+     * @return the json format config
+     * @since 1.6.3
+     */
+    private static JsonFormatConfig buildJsonFormatConfig(String[] excludes,String[] includes){
+        boolean noNeedBuild = Validator.isNullOrEmpty(excludes) && Validator.isNullOrEmpty(includes);
+        return noNeedBuild ? null : new JsonFormatConfig(excludes, includes);
     }
 
     /**
@@ -419,20 +421,16 @@ public final class JsonUtil{
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = jsonFormatConfig.getPropertyNameAndJsonValueProcessorMap();
         if (Validator.isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
             for (Map.Entry<String, JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
-                String propertyName = entry.getKey();
-                JsonValueProcessor jsonValueProcessor = entry.getValue();
-                jsonConfig.registerJsonValueProcessor(propertyName, jsonValueProcessor);
+                jsonConfig.registerJsonValueProcessor(entry.getKey(), entry.getValue());
             }
         }
         //排除
-        String[] excludes = jsonFormatConfig.getExcludes();
-        if (Validator.isNotNullOrEmpty(excludes)){
-            jsonConfig.setExcludes(excludes);
+        if (Validator.isNotNullOrEmpty(jsonFormatConfig.getExcludes())){
+            jsonConfig.setExcludes(jsonFormatConfig.getExcludes());
         }
         //包含
-        String[] includes = jsonFormatConfig.getIncludes();
-        if (Validator.isNotNullOrEmpty(includes)){
-            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(includes));
+        if (Validator.isNotNullOrEmpty(jsonFormatConfig.getIncludes())){
+            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(jsonFormatConfig.getIncludes()));
         }
 
         return format(obj, jsonConfig, indentFactor, indent);
@@ -459,26 +457,27 @@ public final class JsonUtil{
      * @since 1.5.6
      */
     public static String formatObjectFieldsNameAndValueMap(Object obj){
-        if (null == obj){
-            return StringUtils.EMPTY;
-        }
+        return null == obj ? StringUtils.EMPTY : format(FieldUtil.getAllFieldNameAndValueMap(obj), buildJsonFormatConfig(obj));
+    }
 
-        Map<String, Object> map = FieldUtil.getAllFieldNameAndValueMap(obj);
-
+    /**
+     * Builds the json format config.
+     *
+     * @param obj
+     *            the obj
+     * @return the json format config
+     * @since 1.6.3
+     */
+    private static JsonFormatConfig buildJsonFormatConfig(Object obj){
         List<Field> fieldsListWithAnnotation = FieldUtils.getFieldsListWithAnnotation(obj.getClass(), SensitiveWords.class);
-
-        JsonFormatConfig jsonFormatConfig = null;
         if (Validator.isNotNullOrEmpty(fieldsListWithAnnotation)){
             Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
             for (Field field : fieldsListWithAnnotation){
                 propertyNameAndJsonValueProcessorMap.put(field.getName(), SENSITIVE_WORDS_JSONVALUE_PROCESSOR);
             }
-
-            jsonFormatConfig = new JsonFormatConfig();
-            jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+            return new JsonFormatConfig(propertyNameAndJsonValueProcessorMap);
         }
-
-        return format(map, jsonFormatConfig);
+        return null;
     }
 
     /**
@@ -727,8 +726,8 @@ public final class JsonUtil{
      */
     public static <T> T[] toArray(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
         JSONArray jsonArray = toJSONArray(json);
-        int size = jsonArray.size();
 
+        int size = jsonArray.size();
         T[] t = ArrayUtil.newArray(rootClass, size);
         for (int i = 0; i < size; i++){
             t[i] = toBean(jsonArray.getJSONObject(i), rootClass, classMap);
@@ -834,8 +833,8 @@ public final class JsonUtil{
      * @see #toBean(Object, Class, Map)
      */
     public static <T> List<T> toList(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
-        List<T> list = new ArrayList<T>();
         JSONArray jsonArray = toJSONArray(json);
+        List<T> list = new ArrayList<T>();
         for (int i = 0, j = jsonArray.size(); i < j; i++){
             list.add(toBean(jsonArray.getJSONObject(i), rootClass, classMap));
         }

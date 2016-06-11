@@ -79,7 +79,29 @@ public class JsonFormatConfig{
      * The Constructor.
      */
     public JsonFormatConfig(){
-        super();
+    }
+
+    /**
+     * The Constructor.
+     *
+     * @param propertyNameAndJsonValueProcessorMap
+     *            the property name and json value processor map
+     */
+    public JsonFormatConfig(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
+        this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;
+    }
+
+    /**
+     * The Constructor.
+     *
+     * @param excludes
+     *            the excludes
+     * @param includes
+     *            the includes
+     */
+    public JsonFormatConfig(String[] excludes, String[] includes){
+        this.excludes = excludes;
+        this.includes = includes;
     }
 
     /**

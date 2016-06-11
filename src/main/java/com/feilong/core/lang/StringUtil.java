@@ -239,7 +239,8 @@ public final class StringUtil{
      *            原始字符串 jinxin,the CharSequence to check, may be null
      * @param searchSeq
      *            被包含的字符串 in,the CharSequence to find, may be null
-     * @return 包含返回true,如果text 为null 返回false
+     * @return 包含返回true,<br>
+     *         如果text 为null 返回false
      * @see org.apache.commons.lang3.StringUtils#contains(CharSequence, CharSequence)
      */
     public static boolean contains(final CharSequence seq,final CharSequence searchSeq){
@@ -542,16 +543,15 @@ public final class StringUtil{
             return StringUtils.EMPTY;
         }
 
-        //****************************************************
         int beginIndex = text.indexOf(beginString);
         if (beginIndex == -1){// 查不到指定的字符串
             return StringUtils.EMPTY;
         }
         //****************************************************
         int startIndex = beginIndex + shift;
-        int textLength = text.length();
         Validate.isTrue(startIndex >= 0, Slf4jUtil.format("[{}] index[{}]+shift[{}]<0,text[{}]", beginString, beginIndex, shift, text));
 
+        int textLength = text.length();
         if (startIndex > textLength){
             LOGGER.warn("beginString [{}] index[{}]+shift[{}]>text[{}].length()[{}]", beginString, beginIndex, shift, text, textLength);
             return StringUtils.EMPTY;
