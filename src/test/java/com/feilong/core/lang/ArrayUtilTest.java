@@ -37,6 +37,7 @@ import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.MapUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -295,12 +296,7 @@ public class ArrayUtilTest{
         }
         Map<T, List<T>> map = new LinkedHashMap<T, List<T>>(array.length);
         for (T t : array){
-            List<T> valueList = map.get(t);
-            if (null == valueList){
-                valueList = new ArrayList<T>();
-            }
-            valueList.add(t);
-            map.put(t, valueList);
+            MapUtil.putMultiValue(map, t, t);
         }
         return map;
     }

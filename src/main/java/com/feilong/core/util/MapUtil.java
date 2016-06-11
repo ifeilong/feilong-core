@@ -359,6 +359,26 @@ public final class MapUtil{
     }
 
     /**
+     * Put all if not null.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param m
+     *            mappings to be stored in this map
+     * @see java.util.Map#putAll(Map)
+     * @since 1.6.3
+     */
+    public static <K, V> void putAllIfNotNull(final Map<K, V> map,Map<? extends K, ? extends V> m){
+        if (null != map && null != m){
+            map.putAll(m);//// m如果是null 会报错
+        }
+    }
+
+    /**
      * 仅当 <code>null != map 并且 Validator.isNotNullOrEmpty(value)</code>才将key/value put到map中.
      * 
      * <p>
@@ -366,6 +386,28 @@ public final class MapUtil{
      * 如果 <code>value</code> 是null或者empty,也什么都不做<br>
      * 如果 <code>key</code> 是null,依照<code>map</code>的<code>key</code>是否允许是null的 规则<br>
      * </p>
+     *
+     * <p>
+     * 如果你有以下代码,
+     * </p>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * if (Validator.isNotNullOrEmpty(taoBaoOAuthLoginForCodeEntity.getState())){
+     *     nameAndValueMap.put("state", taoBaoOAuthLoginForCodeEntity.getState());
+     * }
+     * 
+     * </pre>
+     * 
+     * 此时可以重构成:
+     * 
+     * <pre class="code">
+     * MapUtil.putIfValueNotNullOrEmpty(nameAndValueMap, "state", taoBaoOAuthLoginForCodeEntity.getState());
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
@@ -409,6 +451,28 @@ public final class MapUtil{
      * "1000001": 5,
      * "1000002": 10
      * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * 该方法特别适合于以下的方法:
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * if (disadvantageMap.containsKey(disadvantageToken)){
+     *     disadvantageMap.put(disadvantageToken, disadvantageMap.get(disadvantageToken) + 1);
+     * }else{
+     *     disadvantageMap.put(disadvantageToken, 1);
+     * }
+     * 
+     * </pre>
+     * 
+     * 此时可以重构成:
+     * 
+     * <pre class="code">
+     * MapUtil.putSumValue(disadvantageMap, disadvantageToken, 1);
      * </pre>
      * 
      * </blockquote>
@@ -463,10 +527,10 @@ public final class MapUtil{
     public static <K, V> Map<K, List<V>> putMultiValue(Map<K, List<V>> map,K key,V value){
         Validate.notNull(map, "map can't be null!");
 
-        List<V> valueList = ObjectUtils.defaultIfNull(map.get(key), new ArrayList<V>());
-        valueList.add(value);
+        List<V> list = ObjectUtils.defaultIfNull(map.get(key), new ArrayList<V>());
+        list.add(value);
 
-        map.put(key, valueList);
+        map.put(key, list);
         return map;
     }
 
@@ -641,6 +705,10 @@ public final class MapUtil{
 
     /**
      * 删除.
+     * 
+     * <p>
+     * 注意,直接操作的是参数<code>map</code>,迭代 <code>keys</code>,如果 <code>map</code>包含key 那么直接调用 {@link Map#remove(Object)},如果不包含,那么输出warn级别日志
+     * </p>
      *
      * @param <K>
      *            the key type
