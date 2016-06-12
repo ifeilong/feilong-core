@@ -211,40 +211,6 @@ public final class NumberUtil{
     /**
      * 获得两个数字的乘积,并转成{@link BigDecimal}返回.
      * 
-     * <p>
-     * 返回的精度: (this.scale() + multiplicand.scale()).
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * NumberUtil.getMultiplyValue(5, 2) = 10
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param one
-     *            乘数
-     * @param two
-     *            被乘数
-     * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         否则 convert to {@link BigDecimal} and multiply each other
-     * @see com.feilong.core.bean.ConvertUtil#toBigDecimal(Object)
-     * @see "org.apache.velocity.runtime.parser.node.MathUtils#multiply(Number, Number)"
-     * @since 1.5.5
-     */
-    public static BigDecimal getMultiplyValue(Number one,Number two){
-        Validate.notNull(one, "one can't be null!");
-        Validate.notNull(two, "two can't be null!");
-        return ConvertUtil.toBigDecimal(one).multiply(ConvertUtil.toBigDecimal(two));
-    }
-
-    /**
-     * 获得两个数字的乘积,并转成{@link BigDecimal}返回.
-     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -265,12 +231,13 @@ public final class NumberUtil{
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
      *         否则 convert to {@link BigDecimal} and multiply each other
-     * @see #getMultiplyValue(Number, Number)
      * @see #setScale(BigDecimal, int)
      * @since 1.5.5
      */
     public static BigDecimal getMultiplyValue(Number one,Number two,int scale){
-        BigDecimal multiplyValue = getMultiplyValue(one, two);
+        Validate.notNull(one, "one can't be null!");
+        Validate.notNull(two, "two can't be null!");
+        BigDecimal multiplyValue = ConvertUtil.toBigDecimal(one).multiply(ConvertUtil.toBigDecimal(two));
         return setScale(multiplyValue, scale);
     }
     // [end]
