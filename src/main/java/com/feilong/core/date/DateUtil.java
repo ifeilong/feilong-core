@@ -213,7 +213,8 @@ public final class DateUtil{
      */
     public static Date getFirstDateOfThisDay(Date date){
         Validate.notNull(date, "date can't be null!");
-        Calendar calendar = CalendarUtil.resetDayBegin(date);
+        Calendar calendar = DateUtil.toCalendar(date);
+        CalendarUtil.resetDayBegin(calendar);
         return CalendarUtil.toDate(calendar);
     }
 

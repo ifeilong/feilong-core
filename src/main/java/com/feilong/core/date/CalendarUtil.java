@@ -157,22 +157,7 @@ public final class CalendarUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /**
-     * 获得指定日期的<code>00:00:00</code>.
-     * <p>
-     * 例如: <code>2011-01-01 10:20:20 返回 2011-01-01 00:00:00</code>
-     * </p>
-     * 
-     * @param date
-     *            the date
-     * @return 获得指定日期的<code>00:00:00</code>
-     */
-    public static Calendar resetDayBegin(Date date){
-        Calendar calendar = DateUtil.toCalendar(date);
-        return resetDayBegin(calendar);
-    }
-
-    // [start]private
+    // [start]
 
     /**
      * 一天开始,<code>00:00:00.000</code>
@@ -237,48 +222,6 @@ public final class CalendarUtil{
 
     // [end]
 
-    //*********************************************************************************************
-
-    /**
-     * 获得日历字段值.
-     *
-     * @param date
-     *            date
-     * @param field
-     *            Calendar字段:<br>
-     *            月份:{@link Calendar#MONTH}(真实值需要加1处理),<br>
-     *            日:{@link Calendar#DAY_OF_MONTH},<br>
-     *            年份:{@link Calendar#YEAR}<br>
-     *            ...
-     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #getFieldValue(Calendar, int)
-     * @since 1.3.0
-     */
-    public static int getFieldValue(Date date,int field){
-        Calendar calendar = DateUtil.toCalendar(date);
-        return getFieldValue(calendar, field);
-    }
-
-    /**
-     * 获得日历字段值.
-     *
-     * @param calendar
-     *            the calendar
-     * @param field
-     *            Calendar字段:<br>
-     *            月份:{@link Calendar#MONTH}(真实值需要加1处理),<br>
-     *            日:{@link Calendar#DAY_OF_MONTH},<br>
-     *            年份:{@link Calendar#YEAR}<br>
-     *            ...
-     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see java.util.Calendar#get(int)
-     * @since 1.3.0
-     */
-    public static int getFieldValue(Calendar calendar,int field){
-        Validate.notNull(calendar, "calendar can't be null!");
-        return calendar.get(field);
-    }
-
     //**************************************************************************************
 
     /**
@@ -307,5 +250,47 @@ public final class CalendarUtil{
     public static String toString(Calendar calendar,String datePattern){
         Date date = toDate(calendar);
         return DateUtil.toString(date, datePattern);
+    }
+
+    //*********************************************************************************************
+
+    /**
+     * 获得日历字段值.
+     *
+     * @param date
+     *            date
+     * @param field
+     *            Calendar字段:<br>
+     *            月份:{@link Calendar#MONTH}(真实值需要加1处理),<br>
+     *            日:{@link Calendar#DAY_OF_MONTH},<br>
+     *            年份:{@link Calendar#YEAR}<br>
+     *            ...
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see #getFieldValue(Calendar, int)
+     * @since 1.3.0
+     */
+    static int getFieldValue(Date date,int field){
+        Calendar calendar = DateUtil.toCalendar(date);
+        return getFieldValue(calendar, field);
+    }
+
+    /**
+     * 获得日历字段值.
+     *
+     * @param calendar
+     *            the calendar
+     * @param field
+     *            Calendar字段:<br>
+     *            月份:{@link Calendar#MONTH}(真实值需要加1处理),<br>
+     *            日:{@link Calendar#DAY_OF_MONTH},<br>
+     *            年份:{@link Calendar#YEAR}<br>
+     *            ...
+     * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see java.util.Calendar#get(int)
+     * @since 1.3.0
+     */
+    static int getFieldValue(Calendar calendar,int field){
+        Validate.notNull(calendar, "calendar can't be null!");
+        return calendar.get(field);
     }
 }
