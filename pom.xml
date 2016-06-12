@@ -217,6 +217,8 @@
 						<include>**/ClassUtilTest</include>
 						<include>**/ConvertUtilTest</include>
 						<include>**/DateUtilTest</include>
+						<include>**/DateExtensionUtilTest</include>
+						<include>**/DateExtensionUtilTest2</include>
 						<include>**/DateUtilIsLeapYearParameterizedTest</include>
 						<include>**/EnumUtilTest</include>
 						<include>**/FieldUtilTest</include>

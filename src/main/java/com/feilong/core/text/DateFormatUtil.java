@@ -82,7 +82,7 @@ public final class DateFormatUtil{
     }
 
     /**
-     * 字符串类型转成日期类型.
+     * 时间字符串 <code>dateString</code> 转成日期类型.
      * 
      * @param dateString
      *            the date string
@@ -101,11 +101,8 @@ public final class DateFormatUtil{
     public static Date parse(String dateString,String pattern,Locale locale){
         Validate.notBlank(dateString, "dateString can't be null/empty!");
         Validate.notBlank(pattern, "pattern can't be null/empty!");
-
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, ObjectUtils.defaultIfNull(locale, Locale.getDefault()));
-        ParsePosition parsePosition = new ParsePosition(0);
-        return simpleDateFormat.parse(dateString, parsePosition);
+        return simpleDateFormat.parse(dateString, new ParsePosition(0));//如果发生错误，则返回 null
     }
-
     // [end]
 }

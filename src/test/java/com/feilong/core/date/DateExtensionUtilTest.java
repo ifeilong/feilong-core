@@ -54,8 +54,16 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalDayList(){
-        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(FROMSTRING, TOSTRING, DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(TOSTRING, FROMSTRING, DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(
+                        JsonUtil.format(
+                                        DateExtensionUtil.getIntervalDayList(
+                                                        DateUtil.toDate(FROMSTRING, DatePattern.COMMON_DATE_AND_TIME),
+                                                        DateUtil.toDate(TOSTRING, DatePattern.COMMON_DATE_AND_TIME))));
+        LOGGER.debug(
+                        JsonUtil.format(
+                                        DateExtensionUtil.getIntervalDayList(
+                                                        DateUtil.toDate(TOSTRING, DatePattern.COMMON_DATE_AND_TIME),
+                                                        DateUtil.toDate(FROMSTRING, DatePattern.COMMON_DATE_AND_TIME))));
     }
 
     /**
@@ -99,4 +107,5 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
                         ConvertUtil.toArray(DateUtil.getFirstDateOfThisDay(NOW), DateUtil.getFirstDateOfThisDay(DateUtil.addDay(NOW, 1))),
                         DateExtensionUtil.getResetTodayAndTomorrow());
     }
+
 }

@@ -148,7 +148,7 @@ import com.feilong.core.DatePattern;
  * @see DateUtil
  * @since 1.0.1
  */
-public final class CalendarUtil{
+final class CalendarUtil{
 
     /** Don't let anyone instantiate this class. */
     private CalendarUtil(){
@@ -173,7 +173,7 @@ public final class CalendarUtil{
      * @see org.apache.commons.lang3.time.DateUtils#truncate(Calendar, int)
      * @since 1.3.0
      */
-    public static Calendar resetDayBegin(Calendar calendar){
+    static Calendar resetDayBegin(Calendar calendar){
         Validate.notNull(calendar, "calendar can't be null!");
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -195,7 +195,7 @@ public final class CalendarUtil{
      * @see Calendar#MILLISECOND
      * @since 1.3.0
      */
-    public static Calendar resetDayEnd(Calendar calendar){
+    static Calendar resetDayEnd(Calendar calendar){
         Validate.notNull(calendar, "calendar can't be null!");
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
@@ -213,7 +213,7 @@ public final class CalendarUtil{
      * @since 1.3.0
      * @see #resetDayEnd(Calendar)
      */
-    public static Calendar resetYearEnd(Calendar calendar){
+    static Calendar resetYearEnd(Calendar calendar){
         Validate.notNull(calendar, "calendar can't be null!");
         calendar.set(Calendar.MONTH, Calendar.DECEMBER);
         calendar.set(Calendar.DAY_OF_MONTH, 31);
@@ -232,7 +232,7 @@ public final class CalendarUtil{
      * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      * @see java.util.Calendar#getTime()
      */
-    public static Date toDate(Calendar calendar){
+    static Date toDate(Calendar calendar){
         Validate.notNull(calendar, "calendar can't be null!");
         return calendar.getTime();
     }
@@ -247,7 +247,7 @@ public final class CalendarUtil{
      * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
      * @see com.feilong.core.date.DateUtil#toString(Date, String)
      */
-    public static String toString(Calendar calendar,String datePattern){
+    static String toString(Calendar calendar,String datePattern){
         Date date = toDate(calendar);
         return DateUtil.toString(date, datePattern);
     }

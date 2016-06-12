@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.TimeInterval;
 
 /**
@@ -158,58 +157,6 @@ public final class DateExtensionUtil{
     }
 
     // [end]
-    /**
-     * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表.
-     * 
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * DateExtensionUtil.getIntervalDayList("2011-03-5 23:31:25.456", "2011-03-10 01:30:24.895", DatePattern.commonWithTime)
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * 2011-03-05 00:00:00
-     * 2011-03-06 00:00:00
-     * 2011-03-07 00:00:00
-     * 2011-03-08 00:00:00
-     * 2011-03-09 00:00:00
-     * 2011-03-10 00:00:00
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>每天的日期会被重置清零 <code>00:00:00.000</code></li>
-     * <li>方法自动辨识 <code>fromDateString</code>和 <code>toDateString</code>哪个是开始时间</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * @param fromDateString
-     *            开始时间
-     * @param toDateString
-     *            结束时间
-     * @param datePattern
-     *            时间模式 {@link DatePattern}
-     * @return 如果 <code>fromDateString</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>fromDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>toDateString</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>toDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #getIntervalDayList(Date, Date)
-     */
-    public static List<Date> getIntervalDayList(String fromDateString,String toDateString,String datePattern){
-        Validate.notBlank(fromDateString, "fromDateString can't be null/empty!");
-        Validate.notBlank(toDateString, "toDateString can't be null/empty!");
-        Validate.notBlank(datePattern, "datePattern can't be null/empty!");
-        return getIntervalDayList(DateUtil.toDate(fromDateString, datePattern), DateUtil.toDate(toDateString, datePattern));
-    }
 
     /**
      * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表.
@@ -474,28 +421,6 @@ public final class DateExtensionUtil{
      *            the date1
      * @param date2
      *            the date2
-     * @param datePattern
-     *            日期pattern {@link DatePattern}
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date1</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date2</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
-     * @see #getIntervalWeek(Date, Date)
-     * @since 1.6.0
-     */
-    public static int getIntervalWeek(String date1,String date2,String datePattern){
-        return getIntervalWeek(DateUtil.toDate(date1, datePattern), DateUtil.toDate(date2, datePattern));
-    }
-
-    /**
-     * 获得相差的星期数(<span style="color:red">绝对值</span>).
-     *
-     * @param date1
-     *            the date1
-     * @param date2
-     *            the date2
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalWeek(long)
@@ -521,31 +446,21 @@ public final class DateExtensionUtil{
     //-******************getIntervalDay***************************************
 
     /**
-     * 计算两个时间相差的的天数 (<span style="color:red">绝对值</span>).
-     * 
-     * @param date1
-     *            date1
-     * @param date2
-     *            date2
-     * @param datePattern
-     *            时间模式 {@link DatePattern}
-     * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date1</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>date2</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
-     * @see DateUtil#toDate(String, String)
-     * @see #getIntervalTime(Date, Date)
-     * @see #getIntervalDay(long)
-     * @since 1.6.0
-     */
-    public static int getIntervalDay(String date1,String date2,String datePattern){
-        return getIntervalDay(DateUtil.toDate(date1, datePattern), DateUtil.toDate(date2, datePattern));
-    }
-
-    /**
      * 计算两个时间相差的的天数(<span style="color:red">绝对值</span>).
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateExtensionUtil.getIntervalDay(
+     *                 DateUtil.toDate("2008-08-24", DatePattern.COMMON_DATE),
+     *                 DateUtil.toDate("2008-08-27", DatePattern.COMMON_DATE))
+     * </pre>
+     * 
+     * 返回: 3
+     * 
+     * </blockquote>
      * 
      * @param date1
      *            date1

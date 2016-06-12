@@ -15,6 +15,8 @@
  */
 package com.feilong.core.date;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -448,16 +450,6 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     }
 
     /**
-     * Test get interval day.
-     */
-    @Test
-    public void testGetIntervalDay(){
-        String fromString = "2008-12-1";
-        String toString = "2008-9-29";
-        LOGGER.debug(DateExtensionUtil.getIntervalDay(fromString, toString, DatePattern.COMMON_DATE) + "");
-    }
-
-    /**
      * Test get interval second.
      */
     @Test
@@ -480,11 +472,25 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     @Test
     public void testGetIntervalWeek(){
         LOGGER.debug(
-                        "" + DateExtensionUtil
-                                        .getIntervalWeek("2014-01-01 00:00:00", "2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME));
+                        "" + DateExtensionUtil.getIntervalWeek(
+                                        DateUtil.toDate("2014-01-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
+                                        DateUtil.toDate("2014-02-01 00:00:00", DatePattern.COMMON_DATE_AND_TIME)));
         LOGGER.debug(
-                        "" + DateExtensionUtil
-                                        .getIntervalWeek("2014-10-28 00:00:00", "2015-06-25 00:00:00", DatePattern.COMMON_DATE_AND_TIME));
+                        "" + DateExtensionUtil.getIntervalWeek(
+                                        DateUtil.toDate("2014-10-28 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
+                                        DateUtil.toDate("2015-06-25 00:00:00", DatePattern.COMMON_DATE_AND_TIME)));
+
+    }
+
+    /**
+     * Test get interval day.
+     */
+    @Test
+    public void testGetIntervalDay(){
+        LOGGER.debug(
+                        "" + DateExtensionUtil.getIntervalDay(
+                                        DateUtil.toDate("2008-12-1", DatePattern.COMMON_DATE),
+                                        DateUtil.toDate("2008-9-29", DatePattern.COMMON_DATE)));
     }
 
     /**
@@ -502,21 +508,15 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     }
 
     /**
-     * Test get interval time2.
-     */
-    @Test
-    public void testGetIntervalTime2(){
-        Date startDate = DateUtil.toDate("2016-06-01", DatePattern.COMMON_DATE_AND_TIME);
-        LOGGER.debug(DateExtensionUtil.getIntervalTime(startDate, NOW) + "");
-
-    }
-
-    /**
      * Test get interval day2.
      */
     @Test
     public void testGetIntervalDay2(){
-        LOGGER.debug("" + DateExtensionUtil.getIntervalDay("2008-08-24", "2008-08-27", "yyyy-MM-dd"));
+        assertSame(
+                        3,
+                        DateExtensionUtil.getIntervalDay(
+                                        DateUtil.toDate("2008-08-24", DatePattern.COMMON_DATE),
+                                        DateUtil.toDate("2008-08-27", DatePattern.COMMON_DATE)));
     }
 
     /**
