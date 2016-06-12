@@ -360,7 +360,7 @@ public class NumberUtilTest{
     public void testGetMultiplyValue(){
         assertEquals(ConvertUtil.toBigDecimal("7.31250"), NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
         assertEquals(ConvertUtil.toBigDecimal("10.00000"), NumberUtil.getMultiplyValue(5, 2, 5));
-        assertEquals(ConvertUtil.toBigDecimal("10"), NumberUtil.getMultiplyValue(5, 2));
+        assertEquals(ConvertUtil.toBigDecimal("10"), NumberUtil.getMultiplyValue(5, 2, 2));
     }
 
     /**
@@ -369,7 +369,7 @@ public class NumberUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetMultiplyValue1(){
-        NumberUtil.getMultiplyValue(null, 1);
+        NumberUtil.getMultiplyValue(null, 1, 2);
     }
 
     /**
@@ -377,7 +377,7 @@ public class NumberUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetMultiplyValue2(){
-        NumberUtil.getMultiplyValue(1, null);
+        NumberUtil.getMultiplyValue(1, null, 2);
     }
 
     /**
@@ -385,7 +385,7 @@ public class NumberUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetMultiplyValue3(){
-        NumberUtil.getMultiplyValue(null, null);
+        NumberUtil.getMultiplyValue(null, null, 2);
     }
 
     /**
