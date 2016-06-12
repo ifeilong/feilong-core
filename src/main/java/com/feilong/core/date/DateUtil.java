@@ -206,16 +206,13 @@ public final class DateUtil{
      *
      * @param date
      *            任意时间
-     * @return 获得指定日期的 <code>00:00:00</code> <br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see org.apache.commons.lang3.time.DateUtils#truncate(Date, int)
      * @since 1.5.0
      */
     public static Date getFirstDateOfThisDay(Date date){
-        Validate.notNull(date, "date can't be null!");
-        Calendar calendar = DateUtil.toCalendar(date);
-        CalendarUtil.resetDayBegin(calendar);
-        return CalendarUtil.toDate(calendar);
+        Calendar calendar = toCalendar(date);
+        return CalendarUtil.toDate(CalendarUtil.resetDayBegin(calendar));
     }
 
     /**
@@ -232,7 +229,6 @@ public final class DateUtil{
      * @since 1.5.0
      */
     public static Date getLastDateOfThisDay(Date date){
-        Validate.notNull(date, "date can't be null!");
         Calendar calendar = toCalendar(date);
         return CalendarUtil.toDate(CalendarUtil.resetDayEnd(calendar));
     }
@@ -260,12 +256,9 @@ public final class DateUtil{
      * @see Calendar#getTime()
      */
     public static Date getFirstDateOfThisWeek(Date date){
-        Validate.notNull(date, "date can't be null!");
-
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        CalendarUtil.resetDayBegin(calendar);
-        return CalendarUtil.toDate(calendar);
+        return CalendarUtil.toDate(CalendarUtil.resetDayBegin(calendar));
     }
 
     /**
@@ -292,12 +285,9 @@ public final class DateUtil{
      * @since 1.0.1
      */
     public static Date getLastDateOfThisWeek(Date date){
-        Validate.notNull(date, "date can't be null!");
-
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-        CalendarUtil.resetDayEnd(calendar);
-        return CalendarUtil.toDate(calendar);
+        return CalendarUtil.toDate(CalendarUtil.resetDayEnd(calendar));
     }
 
     // *********************************************************************************
@@ -319,12 +309,9 @@ public final class DateUtil{
      * @see Calendar#getTime()
      */
     public static Date getFirstDateOfThisMonth(Date date){
-        Validate.notNull(date, "date can't be null!");
-
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-        CalendarUtil.resetDayBegin(calendar);
-        return CalendarUtil.toDate(calendar);
+        return CalendarUtil.toDate(CalendarUtil.resetDayBegin(calendar));
     }
 
     /**
@@ -348,12 +335,9 @@ public final class DateUtil{
      * @see Calendar#getTime()
      */
     public static Date getLastDateOfThisMonth(Date date){
-        Validate.notNull(date, "date can't be null!");
-
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        CalendarUtil.resetDayEnd(calendar);
-        return CalendarUtil.toDate(calendar);
+        return CalendarUtil.toDate(CalendarUtil.resetDayEnd(calendar));
     }
 
     /**
@@ -373,13 +357,10 @@ public final class DateUtil{
      * @see Calendar#getTime()
      */
     public static Date getFirstDateOfThisYear(Date date){
-        Validate.notNull(date, "date can't be null!");
-
         Calendar calendar = toCalendar(date);
         calendar.set(Calendar.MONTH, Calendar.JANUARY);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-        CalendarUtil.resetDayBegin(calendar);
-        return CalendarUtil.toDate(calendar);
+        return CalendarUtil.toDate(CalendarUtil.resetDayBegin(calendar));
     }
 
     /**
@@ -410,8 +391,7 @@ public final class DateUtil{
      * @param week
      *            周几 星期天开始为1 依次2 3 4 5 6 7,建议使用 常量 {@link Calendar#SUNDAY}, {@link Calendar#MONDAY}, {@link Calendar#TUESDAY},
      *            {@link Calendar#WEDNESDAY}, {@link Calendar#THURSDAY}, {@link Calendar#FRIDAY}, {@link Calendar#SATURDAY}
-     * @return the first week of specify date year<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see Calendar#SUNDAY
      * @see Calendar#MONDAY
      * @see Calendar#TUESDAY
@@ -422,15 +402,12 @@ public final class DateUtil{
      * @since 1.3.0
      */
     public static Date getFirstWeekOfSpecifyDateYear(Date date,int week){
-        Validate.notNull(date, "date can't be null!");
-
         Calendar calendar = toCalendar(date);
         calendar.clear();
         calendar.set(Calendar.YEAR, getYear(date));
         calendar.set(Calendar.MONTH, Calendar.JANUARY);
         calendar.set(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
         calendar.set(Calendar.DAY_OF_WEEK, week);
-
         return CalendarUtil.toDate(calendar);
     }
 
@@ -451,10 +428,8 @@ public final class DateUtil{
      * @see Calendar#getTime()
      */
     public static Date getLastDateOfThisYear(Date date){
-        Validate.notNull(date, "date can't be null!");
         Calendar calendar = toCalendar(date);
-        CalendarUtil.resetYearEnd(calendar);
-        return CalendarUtil.toDate(calendar);
+        return CalendarUtil.toDate(CalendarUtil.resetYearEnd(calendar));
     }
 
     // [start]operate 时间操作(加减)
@@ -728,7 +703,6 @@ public final class DateUtil{
      * @see Calendar#YEAR
      */
     public static int getYear(Date date){
-        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.YEAR);
     }
 
@@ -747,7 +721,6 @@ public final class DateUtil{
      * @see Calendar#MONTH
      */
     public static int getMonth(Date date){
-        Validate.notNull(date, "date can't be null!");
         return 1 + CalendarUtil.getFieldValue(date, Calendar.MONTH);
     }
 
@@ -789,7 +762,6 @@ public final class DateUtil{
      * @since 1.0.7
      */
     public static int getWeekOfYear(Date date){
-        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.WEEK_OF_YEAR);
     }
 
@@ -808,7 +780,6 @@ public final class DateUtil{
      * @since 1.0.2
      */
     public static int getDayOfYear(Date date){
-        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_YEAR);
     }
 
@@ -827,7 +798,6 @@ public final class DateUtil{
      * @see Calendar#DAY_OF_MONTH
      */
     public static int getDayOfMonth(Date date){
-        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_MONTH);
     }
 
@@ -857,7 +827,6 @@ public final class DateUtil{
      * @see Calendar#DAY_OF_WEEK
      */
     public static int getDayOfWeek(Date date){
-        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_WEEK);
     }
 
@@ -876,7 +845,6 @@ public final class DateUtil{
      * @see Calendar#HOUR_OF_DAY
      */
     public static int getHourOfDay(Date date){
-        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.HOUR_OF_DAY);
     }
 
@@ -901,7 +869,6 @@ public final class DateUtil{
      * @since 1.0.2
      */
     public static int getHourOfYear(Date date){
-        Validate.notNull(date, "date can't be null!");
         return (getDayOfYear(date) - 1) * 24 + CalendarUtil.getFieldValue(date, Calendar.HOUR_OF_DAY);
     }
 
@@ -920,7 +887,6 @@ public final class DateUtil{
      * @see Calendar#MINUTE
      */
     public static int getMinute(Date date){
-        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.MINUTE);
     }
 
@@ -939,7 +905,6 @@ public final class DateUtil{
      * @see Calendar#SECOND
      */
     public static int getSecond(Date date){
-        Validate.notNull(date, "date can't be null!");
         return CalendarUtil.getFieldValue(date, Calendar.SECOND);
     }
 
@@ -960,7 +925,6 @@ public final class DateUtil{
      * @since 1.0.2
      */
     public static int getSecondOfDay(Date date){
-        Validate.notNull(date, "date can't be null!");
         int hour = getHourOfDay(date);
         return hour * TimeInterval.SECONDS_PER_HOUR + getSecondOfHour(date);
     }
@@ -981,7 +945,6 @@ public final class DateUtil{
      * @since 1.0.2
      */
     public static int getSecondOfHour(Date date){
-        Validate.notNull(date, "date can't be null!");
         int minute = getMinute(date);
         int second = getSecond(date);
         return second + minute * TimeInterval.SECONDS_PER_MINUTE;
