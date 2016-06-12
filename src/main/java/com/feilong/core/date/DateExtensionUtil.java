@@ -39,7 +39,7 @@ import com.feilong.core.TimeInterval;
  * 
  * <blockquote>
  * <ul>
- * <li>{@link #getIntervalDayList(String, String, String)}</li>
+ * <li>{@link #getIntervalDayList(Date, Date)}</li>
  * <li>{@link #getIntervalForView(long)}</li>
  * <li>{@link #getIntervalForView(Date, Date)}</li>
  * </ul>
@@ -59,11 +59,9 @@ import com.feilong.core.TimeInterval;
  * <ul>
  * <li>{@link #getIntervalDay(long)}</li>
  * <li>{@link #getIntervalDay(Date, Date)}</li>
- * <li>{@link #getIntervalDay(String, String, String)}</li>
  * 
  * <li>{@link #getIntervalWeek(long)}</li>
  * <li>{@link #getIntervalWeek(Date, Date)}</li>
- * <li>{@link #getIntervalWeek(String, String, String)}</li>
  * 
  * <li>{@link #getIntervalHour(long)}</li>
  * <li>{@link #getIntervalHour(Date, Date)}</li>
@@ -351,7 +349,7 @@ public final class DateExtensionUtil{
      * @see TimeInterval#MILLISECOND_PER_MINUTE
      * @since 1.6.0
      */
-    public static int getIntervalMinute(long spaceMilliseconds){
+    static int getIntervalMinute(long spaceMilliseconds){
         return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_MINUTE));
     }
 
@@ -380,7 +378,7 @@ public final class DateExtensionUtil{
      * @return 相差的秒数
      * @since 1.6.0
      */
-    public static int getIntervalSecond(long spaceMilliseconds){
+    static int getIntervalSecond(long spaceMilliseconds){
         return (int) (spaceMilliseconds / 1000);
     }
 
@@ -410,7 +408,7 @@ public final class DateExtensionUtil{
      * @see TimeInterval#MILLISECOND_PER_HOUR
      * @since 1.6.0
      */
-    public static int getIntervalHour(long spaceMilliseconds){
+    static int getIntervalHour(long spaceMilliseconds){
         return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_HOUR));
     }
 
@@ -485,7 +483,7 @@ public final class DateExtensionUtil{
      * @see TimeInterval#SECONDS_PER_DAY
      * @since 1.6.0
      */
-    public static int getIntervalDay(long spaceMilliseconds){
+    static int getIntervalDay(long spaceMilliseconds){
         return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_DAY));
     }
 
