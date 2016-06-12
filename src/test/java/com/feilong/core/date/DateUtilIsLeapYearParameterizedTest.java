@@ -20,25 +20,14 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+
+import com.feilong.core.BaseParameterizedTest;
 
 /**
  * The Class DateUtilIsLeapYearTest.
  */
-@RunWith(Parameterized.class)
-public class DateUtilIsLeapYearParameterizedTest extends BaseDateUtilTest{
-
-    /** The f input. */
-    @Parameter
-    // first data value (0) is default
-    public int     year;
-
-    /** The f expected. */
-    @Parameter(value = 1)
-    public boolean expectedValue;
+public class DateUtilIsLeapYearParameterizedTest extends BaseParameterizedTest<Integer, Boolean>{
 
     /**
      * Data.
@@ -56,14 +45,7 @@ public class DateUtilIsLeapYearParameterizedTest extends BaseDateUtilTest{
      */
     @Test
     public void isLeapYear(){
-        assertEquals(expectedValue, DateUtil.isLeapYear(year));
+        assertEquals(expectedValue, DateUtil.isLeapYear(input));
     }
 
-    /**
-     * Checks if is leap year1.
-     */
-    @Test
-    public void isLeapYear1(){
-        assertEquals(1, 1);
-    }
 }

@@ -239,6 +239,9 @@
 						<include>**/TimeIntervalTest</include>
 
 						<include>**/ValidatorTest.java</include>
+
+						<include>**/TelephonePatternTest.java</include>
+						<include>**/TelephoneMustAreaCodePatternTest.java</include>
 					</includes>
 					<skip>false</skip>
 				</configuration>

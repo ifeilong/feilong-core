@@ -250,31 +250,109 @@ import java.util.regex.Pattern;
 public final class RegexPattern{
 
     /**
-     * email 的正则表达式 <code>{@value}</code>.
+     * 大陆的电话号码 <code>{@value}</code>.
      * 
-     * @see "org.apache.commons.validator.routines.EmailValidator"
-     * @see <a href="http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/">how-to-validate-email
-     *      -address-with-regular-expression</a>
-     * @see <a href="https://en.wikipedia.org/wiki/Email_address">Email_address</a>
-     * @deprecated 建议使用 commons-validator
-     *             {@linkplain "org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(emailString)"}
-     *             ,验证更加完善,会对user 和domain再次校验
+     * <p>
+     * 支持 区号(option)+电话+分机号(option) 的组合
+     * </p>
+     * 
+     * <h3>有效的:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ul>
+     * <li>86771588</li>
+     * <li>021-86771588</li>
+     * <li>021-867715</li>
+     * <li>86771588-888</li>
+     * </ul>
+     * 
+     * </blockquote>
+     * 
+     * <h3>无效的:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * "",
+     * "   ",
+     * "02021-86771588-888", //区号3-4位 太长了
+     * "020-86771588888", //电话号码6-8位 太长了
+     * "021-86775" //电话号码 需要 6-8位
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>关于分机号(extension number):</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 分机号是相对总机号说的，一般公司或企事业单位为了节省外线电话，会购置一台集团电话或电话交换机，外线或叫直线电话接到交换机上，可以设一部总机，外线的电话全部接入总机，通过总机代转，<br>
+     * 一般一个电话交换机能接入外线和分出的分机是由交换机的型号决定，各分机可以设1-6位分机号，各分机之间可通过分机号任打电话，接打外线由电话交换机自动调配线路。
+     * </p>
+     * 
+     * <p>
+     * 分机号比较理想的位数为4位，第一位可以设置成部门识别号，其他的可以根据需要设置。
+     * 千万别用三位的紧急服务号码来做分机号，如果有人用直线电话误操作的话，会带来不必要的麻烦
+     * </p>
+     * </blockquote>
+     * 
+     * @see <a href="https://en.wikipedia.org/wiki/Extension_(telephone)">Extension_(telephone)</a>
+     * @see <a href="http://regexlib.com/Search.aspx?k=phone+number&c=7&m=5&ps=20">regexlib</a>
      */
-    @Deprecated
-    public static final String EMAIL             = "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
-    //"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+    public static final String TELEPHONE               = "^(\\d{3,4}-)?\\d{6,8}(-\\d{1,6})?$";
 
     /**
-     * IP 的正则表达式 <code>{@value}</code>.
+     * 大陆的电话号码(必须要有区号) <code>{@value}</code>.
      * 
-     * @deprecated 建议使用 commons-validator
-     *             {@linkplain "org.apache.commons.validator.routines.InetAddressValidator.getInstance().isValid(emailString)"}
+     * <p>
+     * 支持 区号(must)+电话+分机号(option) 的组合
+     * </p>
+     * 
+     * <h3>有效的:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ul>
+     * <li>021-86771588</li>
+     * <li>021-867715</li>
+     * <li>021-86771588-888</li>
+     * </ul>
+     * 
+     * </blockquote>
+     * 
+     * <h3>无效的:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * "",
+     * "   ",
+     * "86771588", //没有区号
+     * "02021-86771588-888", //区号3-4位 太长了
+     * "86771588-888", //没有区号
+     * "020-86771588888", //电话号码6-8位 太长了
+     * "021-86775" //电话号码 需要 6-8位
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>区号</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 是指世界各大城市所属行政区域常用电话区划号码，这些号码主要用于国内、国际长途电话接入。<br>
+     * 比如，中国大陆国际区号86，北京区号010、广州区号020等。<br>
+     * 而在使用国内长途电话时，区号前要加拨0。<br>
+     * 值得一提的是，人们往往容易混淆概念，误以为区号本身前面有一个0。也就是说，由于0是唯一的国内长途接入码，经常和后面的区号并列使用，所以形成了习惯。<br>
+     * 实际上在境外打电话回境内某城市时，当地国际长途电话接入码加在中国国家号86之后，该城市区号前没有0。比如，成都区号应是28，而非028。
+     * </p>
+     * </blockquote>
+     * 
+     * @see <a href="http://baike.baidu.com/view/103379.htm">区号</a>
+     * @since 1.7.1
      */
-    @Deprecated
-    public static final String IP                = "^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$";
-
-    /** 电话号码 <code>{@value}</code>. */
-    public static final String TELEPHONE         = "^(\\d{3,4}-)?\\d{6,8}$";
+    public static final String TELEPHONE_MUST_AREACODE = "^\\d{3,4}-\\d{6,8}(-\\d{1,6})?$";
 
     /**
      * 手机号码 <code>{@value}</code>.
@@ -309,21 +387,75 @@ public final class RegexPattern{
      * 
      * @see <a href="http://liaojuncai.iteye.com/blog/1986310">严格的手机号码正则表达式写法</a>
      */
-    public static final String MOBILEPHONE       = "^((13[0-9])|(15[^4,\\D])|(17[0-9])|(18[0-9]))\\d{8}$";
+    public static final String MOBILEPHONE             = "^((13[0-9])|(15[^4,\\D])|(17[0-9])|(18[0-9]))\\d{8}$";
 
     //******************************************************************************
 
+    /** 邮政编码 <code>{@value}</code>. */
+    public static final String ZIPCODE                 = "^\\d{6}$";
+
+    //******************************************************************************
     /**
-     * 网址Url 链接 <code>{@value}</code>.
+     * 两位数小数 <code>{@value}</code>
      * 
-     * @deprecated 建议使用 commons-validator
-     *             {@linkplain "org.apache.commons.validator.routines.DomainValidator.getInstance().isValid(emailString)"}
+     * <p>
+     * 可以是200 也可以是200.00 不可以是 200.0
+     * </p>
+     */
+    public static final String DECIMAL_TWO_DIGIT       = "^[0-9]+(.[0-9]{2})?$";
+
+    /**
+     * 纯数字 <code>{@value}</code>.
+     *
+     * @see java.lang.Character#isDigit(char)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isNumeric(CharSequence)}
      */
     @Deprecated
-    public static final String URLLINK           = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
+    public static final String NUMBER                  = "^[0-9]*$";
 
-    /** 邮政编码 <code>{@value}</code>. */
-    public static final String ZIPCODE           = "^\\d{6}$";
+    //**************************************************************************************
+    /**
+     * 字母和数字 (alpha numeric) <code>{@value}</code>.
+     * 
+     * @see java.lang.Character#isLetterOrDigit(int)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlphanumeric(CharSequence)}
+     */
+    @Deprecated
+    public static final String AN                      = "^[0-9a-zA-Z]+$";
+
+    /**
+     * 字母和数字和空格(alpha numeric space)<code>{@value}</code>.
+     * 
+     * @see java.lang.Character#isLetterOrDigit(int)
+     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlphanumericSpace(CharSequence)}
+     */
+    @Deprecated
+    public static final String ANS                     = "^[0-9a-zA-Z ]+$";
+
+    //******************************************************************************
+    /**
+     * email 的正则表达式 <code>{@value}</code>.
+     * 
+     * @see "org.apache.commons.validator.routines.EmailValidator"
+     * @see <a href="http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/">how-to-validate-email
+     *      -address-with-regular-expression</a>
+     * @see <a href="https://en.wikipedia.org/wiki/Email_address">Email_address</a>
+     * @deprecated 建议使用 commons-validator
+     *             {@linkplain "org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(emailString)"}
+     *             ,验证更加完善,会对user 和domain再次校验
+     */
+    @Deprecated
+    public static final String EMAIL                   = "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+    //"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+
+    /**
+     * IP 的正则表达式 <code>{@value}</code>.
+     * 
+     * @deprecated 建议使用 commons-validator
+     *             {@linkplain "org.apache.commons.validator.routines.InetAddressValidator.getInstance().isValid(emailString)"}
+     */
+    @Deprecated
+    public static final String IP                      = "^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$";
 
     //******************************************************************************
 
@@ -334,7 +466,7 @@ public final class RegexPattern{
      * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlpha(CharSequence)}
      */
     @Deprecated
-    public static final String LETTER            = "^[A-Za-z]+$";
+    public static final String LETTER                  = "^[A-Za-z]+$";
 
     /**
      * 小写字母 <code>{@value}</code>.
@@ -343,7 +475,7 @@ public final class RegexPattern{
      * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAllLowerCase(CharSequence)}
      */
     @Deprecated
-    public static final String LETTER_LOWERCASE  = "^[a-z]+$";
+    public static final String LETTER_LOWERCASE        = "^[a-z]+$";
 
     /**
      * 大写字母 <code>{@value}</code>.
@@ -352,47 +484,17 @@ public final class RegexPattern{
      * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAllUpperCase(CharSequence)}
      */
     @Deprecated
-    public static final String LETTER_UPPERCASE  = "^[A-Z]+$";
+    public static final String LETTER_UPPERCASE        = "^[A-Z]+$";
 
-    //******************************************************************************
     /**
-     * 两位数小数 <code>{@value}</code>
+     * 网址Url 链接 <code>{@value}</code>.
      * 
-     * <p>
-     * 可以是200 也可以是200.00 不可以是 200.0
-     * </p>
-     */
-    public static final String DECIMAL_TWO_DIGIT = "^[0-9]+(.[0-9]{2})?$";
-
-    /**
-     * 纯数字 <code>{@value}</code>.
-     *
-     * @see java.lang.Character#isDigit(char)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isNumeric(CharSequence)}
+     * @deprecated 建议使用 commons-validator
+     *             {@linkplain "org.apache.commons.validator.routines.DomainValidator.getInstance().isValid(emailString)"}
      */
     @Deprecated
-    public static final String NUMBER            = "^[0-9]*$";
+    public static final String URLLINK                 = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
 
-    //**************************************************************************************
-    /**
-     * 字母和数字 (alpha numeric) <code>{@value}</code>.
-     * 
-     * @see java.lang.Character#isLetterOrDigit(int)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlphanumeric(CharSequence)}
-     */
-    @Deprecated
-    public static final String AN                = "^[0-9a-zA-Z]+$";
-
-    /**
-     * 字母和数字和空格(alpha numeric space)<code>{@value}</code>.
-     * 
-     * @see java.lang.Character#isLetterOrDigit(int)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlphanumericSpace(CharSequence)}
-     */
-    @Deprecated
-    public static final String ANS               = "^[0-9a-zA-Z ]+$";
-
-    //******************************************************************************
     /** Don't let anyone instantiate this class. */
     private RegexPattern(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
