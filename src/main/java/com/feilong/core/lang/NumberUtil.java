@@ -237,6 +237,7 @@ public final class NumberUtil{
     public static BigDecimal getMultiplyValue(Number one,Number two,int scale){
         Validate.notNull(one, "one can't be null!");
         Validate.notNull(two, "two can't be null!");
+        //默认返回的精度: (this.scale() + multiplicand.scale()).
         BigDecimal multiplyValue = ConvertUtil.toBigDecimal(one).multiply(ConvertUtil.toBigDecimal(two));
         return setScale(multiplyValue, scale);
     }

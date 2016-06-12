@@ -360,7 +360,7 @@ public class NumberUtilTest{
     public void testGetMultiplyValue(){
         assertEquals(ConvertUtil.toBigDecimal("7.31250"), NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
         assertEquals(ConvertUtil.toBigDecimal("10.00000"), NumberUtil.getMultiplyValue(5, 2, 5));
-        assertEquals(ConvertUtil.toBigDecimal("10"), NumberUtil.getMultiplyValue(5, 2, 2));
+        assertEquals(ConvertUtil.toBigDecimal("10"), NumberUtil.getMultiplyValue(5, 2, 0));
     }
 
     /**
