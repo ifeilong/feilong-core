@@ -16,6 +16,7 @@
 package com.feilong.core.date;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -290,8 +291,16 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testIsBefore(){
-        assertEquals(true, DateUtil.isBefore(FROMSTRING, TOSTRING, DatePattern.COMMON_DATE));
-        assertEquals(false, DateUtil.isBefore("2011-05-01", "2011-04-01", DatePattern.COMMON_DATE));
+        assertEquals(
+                        true,
+                        DateUtil.isBefore(
+                                        DateUtil.toDate(FROMSTRING, DatePattern.COMMON_DATE),
+                                        DateUtil.toDate(TOSTRING, DatePattern.COMMON_DATE)));
+        assertEquals(
+                        false,
+                        DateUtil.isBefore(
+                                        DateUtil.toDate("2011-05-01", DatePattern.COMMON_DATE),
+                                        DateUtil.toDate("2011-04-01", DatePattern.COMMON_DATE)));
     }
 
     /**
@@ -466,7 +475,29 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testIsInTime(){
-        LOGGER.debug("{}", DateUtil.isInTime(NOW, "2012-10-10 22:59:00", "2012-10-16 22:59:00", DatePattern.COMMON_DATE_AND_TIME));
+        assertSame(
+                        false,
+                        DateUtil.isInTime(
+                                        NOW,
+                                        DateUtil.toDate("2012-10-10 22:59:00", DatePattern.COMMON_DATE_AND_TIME),
+                                        DateUtil.toDate("2012-10-16 22:59:00", DatePattern.COMMON_DATE_AND_TIME)));
+        assertSame(
+                        true,
+                        DateUtil.isInTime(
+                                        DateUtil.toDate("2016-06-12", DatePattern.COMMON_DATE),
+                                        DateUtil.toDate("2016-06-11 22:59:00", DatePattern.COMMON_DATE_AND_TIME),
+                                        DateUtil.toDate("2016-06-16 22:59:00", DatePattern.COMMON_DATE_AND_TIME)));
+
+    }
+
+    @Test
+    public void testIsInTime2(){
+        assertSame(
+                        false,
+                        DateUtil.isInTime(
+                                        DateUtil.toDate("2016-06-12", DatePattern.COMMON_DATE),
+                                        DateUtil.toDate("2016-06-12 00:00:00", DatePattern.COMMON_DATE_AND_TIME),
+                                        DateUtil.toDate("2016-06-16 22:59:00", DatePattern.COMMON_DATE_AND_TIME)));
     }
 
     /**

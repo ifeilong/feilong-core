@@ -1061,51 +1061,6 @@ public final class DateUtil{
     // [start]isBefore 时间早晚
 
     /**
-     * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 指定日期<code>dateString</code>是否早于 <code>whenDateString</code>.
-     * 
-     * <pre class="code">
-     * DateUtil.isBefore("2011-05-01", "2011-04-01", DatePattern.COMMON_DATE) = false
-     * </pre>
-     *
-     * @param dateString
-     *            指定日期
-     * @param whenDateString
-     *            对照日期
-     * @param datePattern
-     *            日期pattern {@link DatePattern}
-     * @return 如果dateString 早于 whenDateString 返回 true
-     * @see #toDate(String, String)
-     * @see #isBefore(Date, String, String)
-     */
-    public static boolean isBefore(String dateString,String whenDateString,String datePattern){
-        Date before = toDate(dateString, datePattern);
-        return isBefore(before, whenDateString, datePattern);
-    }
-
-    /**
-     * 按照同样格式 <code>datePattern</code>,转成Date类型,判断 指定日期<code>date</code>是否早于 <code>whenDateString</code>.
-     * 
-     * <pre class="code">
-     * DateUtil.isBefore("2011-05-01", "2011-04-01", DatePattern.COMMON_DATE) = false
-     * </pre>
-     * 
-     * @param date
-     *            指定日期
-     * @param whenDateString
-     *            dateAfter
-     * @param datePattern
-     *            日期pattern {@link DatePattern}
-     * @return 如果dateBefore 早于 dateAfter返回 true
-     * @see #toDate(String, String)
-     * @see #isBefore(String, String, String)
-     * @see Date#before(Date)
-     */
-    public static boolean isBefore(Date date,String whenDateString,String datePattern){
-        Date after = toDate(whenDateString, datePattern);
-        return isBefore(date, after);
-    }
-
-    /**
      * 判断指定日期 <code>date</code>是否 在 <code>whenDate</code>时间之前.
      *
      * @param date
@@ -1144,31 +1099,6 @@ public final class DateUtil{
     // [end]
 
     // [start]isInTime 时间区间内
-
-    /**
-     * 判断指定日期 <code>date</code>是否在两个时间之间.
-     * 
-     * <pre class="code">
-     * DateUtil.isInTime("2012-10-16 23:00:02", "2012-10-10 22:59:00", "2012-10-18 22:59:00", DatePattern.commonWithTime) = true
-     * </pre>
-     * 
-     * @param date
-     *            需要判断的日期
-     * @param beginTime
-     *            开始时间
-     * @param endTime
-     *            结束时间
-     * @param datePattern
-     *            开始时间和结束时间的格式{@link DatePattern}
-     * @return 如果 指定日期 <code>date</code> after <code>beginTime</code>, 并且 指定日期 <code>date</code> before <code>endTime</code>,返回true
-     * @see #toDate(String, String)
-     * @see #isInTime(Date, Date, Date)
-     */
-    public static boolean isInTime(Date date,String beginTime,String endTime,String datePattern){
-        Date beginTimeDate = toDate(beginTime, datePattern);
-        Date endTimeDate = toDate(endTime, datePattern);
-        return isInTime(date, beginTimeDate, endTimeDate);
-    }
 
     /**
      * 判断指定日期 <code>date</code> 是否在两个时间之间.
