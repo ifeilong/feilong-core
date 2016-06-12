@@ -16,12 +16,12 @@
 
 package com.feilong.core.date;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
 
@@ -32,15 +32,13 @@ import com.feilong.core.DatePattern;
  */
 public class CalendarUtilTest extends BaseDateUtilTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CalendarUtilTest.class);
-
     /**
      * Test reset year end.
      */
     @Test
     public void testResetYearEnd(){
-        Calendar resetYearEnd = CalendarUtil.resetYearEnd(DateUtil.toCalendar(new Date()));
-        LOGGER.debug(CalendarUtil.toString(resetYearEnd, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        Date date = DateUtil.toDate("2016", DatePattern.yyyy);
+        Calendar resetYearEnd = CalendarUtil.resetYearEnd(DateUtil.toCalendar(date));
+        assertEquals("2016-12-31 23:59:59.999", CalendarUtil.toString(resetYearEnd, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 }

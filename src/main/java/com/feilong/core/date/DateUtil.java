@@ -451,11 +451,8 @@ public final class DateUtil{
      */
     public static Date getLastDateOfThisYear(Date date){
         Validate.notNull(date, "date can't be null!");
-
         Calendar calendar = toCalendar(date);
-        calendar.set(Calendar.MONTH, Calendar.DECEMBER);
-        calendar.set(Calendar.DAY_OF_MONTH, 31);
-        CalendarUtil.resetDayEnd(calendar);
+        CalendarUtil.resetYearEnd(calendar);
         return CalendarUtil.toDate(calendar);
     }
 
@@ -1091,6 +1088,7 @@ public final class DateUtil{
      * @see org.apache.commons.lang3.time.DateUtils#toCalendar(Date)
      */
     public static Calendar toCalendar(Date date){
+        Validate.notNull(date, "date can't be null!");
         return DateUtils.toCalendar(date);
     }
 
