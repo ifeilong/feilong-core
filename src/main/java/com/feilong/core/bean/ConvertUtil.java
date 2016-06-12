@@ -1031,7 +1031,7 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            the to be converted value
      * @return the string[]
-     * @see org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String)
+     * @see "org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String)"
      * @see #convert(Object, Class)
      * @since 1.4.0
      */

@@ -192,7 +192,7 @@ public final class StringUtil{
      * @return A new <code>String</code> decoded from the specified array of bytes using the given charset,
      *         or <code>null</code> if the input byte array was <code>null</code>.
      * @see String#String(byte[], String)
-     * @see org.apache.commons.lang3.StringUtils#toString(byte[], String)
+     * @see "org.apache.commons.lang3.StringUtils#toString(byte[], String)"
      * @see org.apache.commons.lang3.StringUtils#toEncodedString(byte[], Charset)
      * @see "org.apache.commons.codec.binary.StringUtils#newString(byte[], String)"
      * @since 1.3.0
