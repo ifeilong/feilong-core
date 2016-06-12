@@ -82,18 +82,4 @@ public final class Slf4jUtil{
         return formattingTuple.getMessage();
     }
 
-    /**
-     * Format message.
-     *
-     * @param messagePattern
-     *            the message pattern
-     * @param args
-     *            the args
-     * @return the string
-     * @deprecated pls use {@link #format(String, Object...)}
-     */
-    @Deprecated
-    public static String formatMessage(String messagePattern,Object...args){
-        return format(messagePattern, args);
-    }
 }
