@@ -105,8 +105,8 @@ import com.feilong.core.text.DateFormatUtil;
  * <td>判断早晚</td>
  * <td>
  * <ul>
- * <li>{@link DateUtil#isBefore(Date, String, String)}</li>
- * <li>{@link DateUtil#isBefore(String, String, String)}</li>
+ * <li>{@link DateUtil#isBefore(Date, Date)}</li>
+ * <li>{@link DateUtil#isBefore(Date, Date)}</li>
  * </ul>
  * </td>
  * </tr>
@@ -115,7 +115,6 @@ import com.feilong.core.text.DateFormatUtil;
  * <td>
  * <ul>
  * <li>{@link DateUtil#isInTime(Date, Date, Date)}</li>
- * <li>{@link DateUtil#isInTime(Date, String, String, String)}</li>
  * </ul>
  * </td>
  * </tr>

@@ -490,6 +490,9 @@ public class DateUtilTest extends BaseDateUtilTest{
 
     }
 
+    /**
+     * Test is in time2.
+     */
     @Test
     public void testIsInTime2(){
         assertSame(

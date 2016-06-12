@@ -183,7 +183,7 @@ public final class ClassLoaderUtil{
      * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.2.1
      */
-    public static URL getResource(ClassLoader classLoader,String resourceName){
+    private static URL getResource(ClassLoader classLoader,String resourceName){
         Validate.notNull(classLoader, "classLoader can't be null!");
         return classLoader.getResource(resourceName);
     }
@@ -208,7 +208,7 @@ public final class ClassLoaderUtil{
      * @see #getResource(ClassLoader, String)
      * @since 1.6.2
      */
-    public static URL getRootClassPath(ClassLoader classLoader){
+    private static URL getRootClassPath(ClassLoader classLoader){
         Validate.notNull(classLoader, "classLoader can't be null!");
         return getResource(classLoader, "");
     }
@@ -279,7 +279,7 @@ public final class ClassLoaderUtil{
      * 
      * @return the class loader by current thread
      */
-    public static ClassLoader getClassLoaderByCurrentThread(){
+    private static ClassLoader getClassLoaderByCurrentThread(){
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         LOGGER.debug("[Thread.currentThread()].getContextClassLoader:{}", formatClassLoader(classLoader));
         return classLoader;
