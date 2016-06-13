@@ -432,10 +432,6 @@ public final class StringUtil{
      * [截取]从指定索引处(beginIndex)的字符开始,直到此字符串末尾.
      * 
      * <p>
-     * Gets a substring from the specified String avoiding exceptions.
-     * </p>
-     *
-     * <p>
      * 如果 beginIndex是负数,那么表示倒过来截取,从结尾开始截取长度,此时等同于 {@link #substringLast(String, int)}
      * </p>
      *
