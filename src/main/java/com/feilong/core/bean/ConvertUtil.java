@@ -482,7 +482,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * To long array.
+     * 将 <code>toBeConvertedValue</code> 转成Long 数组.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -491,6 +491,36 @@ public final class ConvertUtil{
      * ConvertUtil.toLongs("1,2,3")                             = [1,2,3]
      * ConvertUtil.toLongs(new String[] { "1", "2", "3" })      = [1,2,3]
      * ConvertUtil.toLongs(ConvertUtil.toList("1", "2", "3"))   = [1,2,3]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>特别适合以下形式的代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * protected long[] getOrderIdLongs(String orderIds){
+     *     // 确认交易时候插入数据库的时候,不应该会出现 空的情况
+     *     String[] orderIdArray = orderIds.split(",");
+     *     int orderLength = orderIdArray.length;
+     *     long[] ids = new long[orderLength];
+     *     for (int i = 0, j = orderLength; i < j; ++i){
+     *         ids[i] = Long.parseLong(orderIdArray[i]);
+     *     }
+     *     return ids;
+     * }
+     * 
+     * </pre>
+     * 
+     * 可以重构成:
+     * 
+     * <pre class="code">
+     * 
+     * protected long[] getOrderIdLongs(String orderIds){
+     *     return ConvertUtil.toLongs(orderIds);
+     * }
      * </pre>
      * 
      * </blockquote>

@@ -17,6 +17,7 @@ package com.feilong.core.bean;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -166,10 +167,11 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToLongs(){
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs("1,2,3"), 0, 0));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", "2", "3" }), 0, 0));
+        assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), ConvertUtil.toLongs("1,2,3"));
+        assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), ConvertUtil.toLongs(new String[] { "1", "2", "3" }));
         LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", null, "2", "3" }), 0, 0));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(null), 0, 0));
+
+        assertSame(null, ConvertUtil.toLongs(null));
     }
 
     /**
