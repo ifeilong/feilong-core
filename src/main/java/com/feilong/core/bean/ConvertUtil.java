@@ -713,6 +713,8 @@ public final class ConvertUtil{
      * @param isJoinNullOrEmpty
      *            the is join null or empty
      * @return the string
+     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
+     * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
      * @since 1.6.3
      */
     private static String join(Object[] operateArray,String connector,boolean isJoinNullOrEmpty){
