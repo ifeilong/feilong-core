@@ -758,10 +758,11 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将 {@link Pair}数组转成map ({@link LinkedHashMap}).
+     * 将 <code>mapEntryCollection</code> 转成map ({@link LinkedHashMap}).
      * 
      * <p>
-     * 注意,返回是的是 {@link LinkedHashMap},顺序依照 参数 <code>pairs</code>,key是 {@link Pair#getLeft()},value 是{@link Pair#getRight()}
+     * 注意,返回是的是 {@link LinkedHashMap},顺序依照参数 <code>mapEntryCollection</code>,key是 {@link java.util.Map.Entry#getKey()},value 是
+     * {@link java.util.Map.Entry#getValue()}
      * </p>
      * 
      * <h3>示例:</h3>
@@ -770,8 +771,110 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * Map<String, String> map = ConvertUtil
-     *                 .toMap(Pair.of("张飞", "丈八蛇矛"), Pair.of("关羽", "青龙偃月刀"), Pair.of("赵云", "龙胆枪"), Pair.of("刘备", "双股剑"));
+     * Map<String, String> map = ConvertUtil.toMap(
+     *                 ConvertUtil.toList(
+     *                                 new SimpleEntry<>("张飞", "丈八蛇矛"),
+     *                                 new SimpleEntry<>("关羽", "青龙偃月刀"),
+     *                                 new SimpleEntry<>("赵云", "龙胆枪"),
+     *                                 new SimpleEntry<>("刘备", "双股剑")));
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": "丈八蛇矛",
+     * "关羽": "青龙偃月刀",
+     * "赵云": "龙胆枪",
+     * "刘备": "双股剑"
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <V>
+     *            the value type
+     * @param <K>
+     *            the key type
+     * @param <E>
+     *            the element type
+     * @param mapEntryCollection
+     *            the map entry collection
+     * @return 如果 <code>mapEntryCollection</code> 是null,返回 {@link Collections#emptyMap()}<br>
+     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @since 1.7.1
+     */
+    public static <V, K, E extends Map.Entry<K, V>> Map<K, V> toMap(Collection<E> mapEntryCollection){
+        if (null == mapEntryCollection){
+            return Collections.emptyMap();
+        }
+        Map<K, V> map = new LinkedHashMap<K, V>(mapEntryCollection.size());
+        for (Map.Entry<K, V> entry : mapEntryCollection){
+            map.put(entry.getKey(), entry.getValue());
+        }
+        return map;
+    }
+
+    /**
+     * 将 {@link java.util.Map.Entry}数组转成map ({@link LinkedHashMap}).
+     * 
+     * <p>
+     * 注意,返回是的是 {@link LinkedHashMap},顺序依照参数 {@link java.util.Map.Entry}数组顺序,key是 {@link java.util.Map.Entry#getKey()},value 是
+     * {@link java.util.Map.Entry#getValue()}
+     * </p>
+     * 
+     * <h3>{@link java.util.Map.Entry} 已知实现类</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 你可以使用 {@link Pair},或者 {@link java.util.AbstractMap.SimpleEntry}
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>{@link Pair} 示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map<String, String> map = ConvertUtil.toMap(
+     * 
+     *                 Pair.of("张飞", "丈八蛇矛"),
+     *                 Pair.of("关羽", "青龙偃月刀"),
+     *                 Pair.of("赵云", "龙胆枪"),
+     *                 Pair.of("刘备", "双股剑"));
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": "丈八蛇矛",
+     * "关羽": "青龙偃月刀",
+     * "赵云": "龙胆枪",
+     * "刘备": "双股剑"
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>{@link java.util.AbstractMap.SimpleEntry} 示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map<String, String> map = ConvertUtil.toMap(
+     *                 new SimpleEntry<>("张飞", "丈八蛇矛"),
+     *                 new SimpleEntry<>("关羽", "青龙偃月刀"),
+     *                 new SimpleEntry<>("赵云", "龙胆枪"),
+     *                 new SimpleEntry<>("刘备", "双股剑"));
      * LOGGER.debug(JsonUtil.format(map));
      * 
      * </pre>
@@ -826,53 +929,24 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      *
-     * @param <K>
-     *            the key type
      * @param <V>
      *            the value type
-     * @param pairs
-     *            the pairs
-     * @return 如果 <code>pairs</code> 是null,返回 {@link Collections#emptyMap()}<br>
+     * @param <K>
+     *            the key type
+     * @param mapEntrys
+     *            the entrys
+     * @return 如果 <code>entrys</code> 是null,返回 {@link Collections#emptyMap()}<br>
      * @see org.apache.commons.lang3.tuple.ImmutablePair#ImmutablePair(Object, Object)
      * @see org.apache.commons.lang3.tuple.Pair#of(Object, Object)
      * @since 1.7.1
      */
     @SafeVarargs
-    public static <K, V> Map<K, V> toMap(Pair<K, V>...pairs){
-        if (null == pairs){
+    public static <V, K> Map<K, V> toMap(Map.Entry<K, V>...mapEntrys){
+        if (null == mapEntrys){
             return Collections.emptyMap();
         }
-        Map<K, V> map = new LinkedHashMap<K, V>(pairs.length);
-        for (Pair<K, V> pair : pairs){
-            map.put(pair.getLeft(), pair.getRight());
-        }
-        return map;
-    }
-
-    /**
-     * 将 <code>mapEntryCollection</code> 转成map ({@link LinkedHashMap}).
-     * 
-     * <p>
-     * 注意,返回是的是 {@link LinkedHashMap},顺序依照参数 <code>mapEntryCollection</code>,key是 {@link java.util.Map.Entry#getKey()},value 是
-     * {@link java.util.Map.Entry#getValue()}
-     * </p>
-     *
-     * @param <V>
-     *            the value type
-     * @param <K>
-     *            the key type
-     * @param mapEntryCollection
-     *            the map entry collection
-     * @return 如果 <code>mapEntryCollection</code> 是null,返回 {@link Collections#emptyMap()}<br>
-     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
-     * @since 1.7.1
-     */
-    public static <V, K> Map<K, V> toMap(Collection<Map.Entry<K, V>> mapEntryCollection){
-        if (null == mapEntryCollection){
-            return Collections.emptyMap();
-        }
-        Map<K, V> map = new LinkedHashMap<K, V>(mapEntryCollection.size());
-        for (Map.Entry<K, V> entry : mapEntryCollection){
+        Map<K, V> map = new LinkedHashMap<K, V>(mapEntrys.length);
+        for (Map.Entry<K, V> entry : mapEntrys){
             map.put(entry.getKey(), entry.getValue());
         }
         return map;
