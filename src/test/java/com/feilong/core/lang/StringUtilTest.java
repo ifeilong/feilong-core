@@ -168,13 +168,13 @@ public class StringUtilTest{
      */
     @Test
     public void testContainsIgnoreCase(){
-        assertEquals(false, StringUtil.containsIgnoreCase(null, ""));
-        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, null) + "");
-        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "") + "");
-        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "feilong") + "");
-        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "feilong1") + "");
-        LOGGER.debug(StringUtil.containsIgnoreCase(TEXT, "feiLong") + "");
-        assertEquals(true, StringUtil.containsIgnoreCase("jiiiiiinxin.feilong", "Xin"));
+        assertEquals(false, StringUtils.containsIgnoreCase(null, ""));
+        LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, null) + "");
+        LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, "") + "");
+        LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, "feilong") + "");
+        LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, "feilong1") + "");
+        LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, "feiLong") + "");
+        assertEquals(true, StringUtils.containsIgnoreCase("jiiiiiinxin.feilong", "Xin"));
     }
 
     /**

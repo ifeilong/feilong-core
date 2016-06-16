@@ -242,7 +242,9 @@ public final class StringUtil{
      * @return 包含返回true,<br>
      *         如果text 为null 返回false
      * @see org.apache.commons.lang3.StringUtils#contains(CharSequence, CharSequence)
+     * @deprecated pls call {@link org.apache.commons.lang3.StringUtils#contains(CharSequence, CharSequence)}
      */
+    @Deprecated
     public static boolean contains(final CharSequence seq,final CharSequence searchSeq){
         return StringUtils.contains(seq, searchSeq);
     }
@@ -258,14 +260,17 @@ public final class StringUtil{
      * StringUtil.containsIgnoreCase(text, "feilong1")    = false
      * StringUtil.containsIgnoreCase(text, "feiLong")     = true
      * </pre>
-     * 
+     *
      * @param str
      *            the CharSequence to check, may be null
      * @param searchStr
      *            the CharSequence to find, may be null
      * @return true if the CharSequence contains the search CharSequence irrespective of
      *         case or false if not or <code>null</code> string input
+     * @see org.apache.commons.lang3.StringUtils#containsIgnoreCase(CharSequence, CharSequence)
+     * @deprecated pls call {@link StringUtils#containsIgnoreCase(CharSequence, CharSequence)}
      */
+    @Deprecated
     public static boolean containsIgnoreCase(final CharSequence str,final CharSequence searchStr){
         return StringUtils.containsIgnoreCase(str, searchStr);
     }
