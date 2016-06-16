@@ -17,7 +17,6 @@ package com.feilong.core.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -161,25 +160,6 @@ public final class PropertiesUtil{
     }
 
     /**
-     * 转换成map.
-     * 
-     * <p>
-     * Create a new HashMap and pass an instance of Properties.<br>
-     * Properties is an implementation of a Map which keys and values stored as in a string.
-     * </p>
-     * 
-     * @param properties
-     *            the properties
-     * @return 如果 <code>properties</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
-     */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public static Map<String, String> toMap(Properties properties){
-        Validate.notEmpty(properties, "properties can't be null/empty!");
-        return new HashMap<String, String>((Map) properties);
-    }
-
-    /**
      * 获取{@link Properties}.
      *
      * @param inputStream
@@ -200,4 +180,18 @@ public final class PropertiesUtil{
         }
     }
     // [end]
+
+    /**
+     * 转换成map.
+     * 
+     * @param properties
+     *            the properties
+     * @return 如果 <code>properties</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
+     * @deprecated pls use {@link com.feilong.core.bean.ConvertUtil#toMap(Properties)}
+     */
+    @Deprecated
+    public static Map<String, String> toMap(Properties properties){
+        return com.feilong.core.bean.ConvertUtil.toMap(properties);
+    }
 }

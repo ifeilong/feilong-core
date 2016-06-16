@@ -343,10 +343,10 @@ public final class ClassLoaderUtil{
      * @since 1.6.2
      */
     private static String formatClassLoader(ClassLoader classLoader){
-        Map<String, Object> classLoaderInfoMap = new LinkedHashMap<String, Object>();
-        classLoaderInfoMap.put("classLoader", "" + classLoader);
-        classLoaderInfoMap.put("classLoader[CanonicalName]", classLoader.getClass().getCanonicalName());
-        classLoaderInfoMap.put("classLoader[Root Classpath]", "" + getRootClassPath(classLoader));
-        return JsonUtil.format(classLoaderInfoMap);
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        map.put("classLoader", "" + classLoader);
+        map.put("classLoader[CanonicalName]", classLoader.getClass().getCanonicalName());
+        map.put("classLoader[Root Classpath]", "" + getRootClassPath(classLoader));
+        return JsonUtil.format(map);
     }
 }

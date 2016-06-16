@@ -493,6 +493,12 @@ public class ConvertUtilTest{
     }
 
     @Test
+    public void toMap5(){
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toMap("张飞", "丈八蛇矛")));
+        System.out.println(ConvertUtil.toMap(null, "丈八蛇矛"));//TODO:remove
+    }
+
+    @Test
     public void toMap1(){
         Map<String, String> map = ConvertUtil.toMap(
                         ConvertUtil.toList(

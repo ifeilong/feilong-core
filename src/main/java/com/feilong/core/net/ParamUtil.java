@@ -96,7 +96,7 @@ public final class ParamUtil{
      * @see #addParameterSingleValueMap(String, Map, String)
      */
     public static String addParameter(String uriString,String paramName,Object parameValue,String charsetType){
-        return addParameterSingleValueMap(uriString, toMap(paramName, "" + parameValue), charsetType);
+        return addParameterSingleValueMap(uriString, ConvertUtil.toMap(paramName, "" + parameValue), charsetType);
     }
 
     /**
@@ -118,7 +118,7 @@ public final class ParamUtil{
      * @see #addParameterArrayValueMap(URI, Map, String)
      */
     public static String addParameter(URI uri,String paramName,Object parameValue,String charsetType){
-        return addParameterArrayValueMap(uri, toMap(paramName, new String[] { "" + parameValue }), charsetType);
+        return addParameterArrayValueMap(uri, ConvertUtil.toMap(paramName, new String[] { "" + parameValue }), charsetType);
     }
 
     /**
@@ -1087,24 +1087,4 @@ public final class ParamUtil{
         return sb.toString();
     }
 
-    /**
-     * To map.
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     * @return the map< k, v>
-     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
-     * @since 1.6.2
-     */
-    private static <K, V> Map<K, V> toMap(K key,V value){
-        Map<K, V> map = new LinkedHashMap<K, V>();
-        map.put(key, value);
-        return map;
-    }
 }

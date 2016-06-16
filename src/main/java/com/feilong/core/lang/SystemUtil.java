@@ -21,7 +21,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.util.PropertiesUtil;
+import com.feilong.core.bean.ConvertUtil;
 
 /**
  * {@link java.lang.System}工具类.
@@ -332,12 +332,12 @@ public final class SystemUtil{
      * 
      * @return the properties map for log
      * @see System#getProperties()
-     * @see PropertiesUtil#toMap(Properties)
+     * @see ConvertUtil#toMap(Properties)
      * @see "org.springframework.core.env.AbstractEnvironment#getSystemProperties()"
      */
     public static Map<String, String> getPropertiesMapForLog(){
         Properties properties = System.getProperties();
-        return new TreeMap<String, String>(PropertiesUtil.toMap(properties));
+        return new TreeMap<String, String>(ConvertUtil.toMap(properties));
     }
 
     /**
@@ -379,13 +379,13 @@ public final class SystemUtil{
      *
      * @param properties
      *            the properties from properties
-     * @see PropertiesUtil#toMap(Properties)
+     * @see ConvertUtil#toMap(Properties)
      * @see #setPropertiesFromMap(Map)
      * @see java.lang.System#setProperties(Properties)
      * @since 1.2.0
      */
     public static void setPropertiesFromProperties(Properties properties){
         Validate.notNull(properties, "properties can't be null!");
-        setPropertiesFromMap(PropertiesUtil.toMap(properties));
+        setPropertiesFromMap(ConvertUtil.toMap(properties));
     }
 }

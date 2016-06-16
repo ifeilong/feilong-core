@@ -21,10 +21,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
@@ -950,6 +952,95 @@ public final class ConvertUtil{
             map.put(entry.getKey(), entry.getValue());
         }
         return map;
+    }
+
+    /**
+     * 将 <code>key</code> 和 <code>value</code> 直接转成map.
+     * 
+     * <p>
+     * 注意,返回是的是 {@link LinkedHashMap}}
+     * </p>
+     * 
+     * <p>
+     * 非常适合单key的场景,比如
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * private List{@code <ShopCommand>} loadShopCommandList(){
+     *     Map{@code <String, Object>} paraMap = new HashMap{@code <String, Object>}();
+     *     paraMap.put("orgTypeId", OrgType.ID_SHOP_TYPE);
+     * 
+     *     Sort[] sorts = Sort.parse("s.id asc");
+     *     return shopCommandDao.findShopListByOrgaTypeId(paraMap, sorts);
+     * }
+     * </pre>
+     * 
+     * 可以改写成 :
+     * 
+     * <pre class="code">
+     * 
+     * private List{@code <ShopCommand>} loadShopCommandList(){
+     *     return shopCommandDao
+     *                     .findShopListByOrgaTypeId(ConvertUtil.toMap("orgTypeId", (Object) OrgType.ID_SHOP_TYPE), Sort.parse("s.id asc"));
+     * }
+     * </pre>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * LOGGER.debug(JsonUtil.format(ConvertUtil.toMap("张飞", "丈八蛇矛")));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {"张飞": "丈八蛇矛"}
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @return the map< k, v>
+     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @since 1.7.1
+     */
+    public static <K, V> Map<K, V> toMap(K key,V value){
+        Map<K, V> map = new LinkedHashMap<K, V>();
+        map.put(key, value);
+        return map;
+    }
+
+    /**
+     * 转换成map.
+     * 
+     * <p>
+     * Create a new HashMap and pass an instance of Properties.<br>
+     * Properties is an implementation of a Map which keys and values stored as in a string.
+     * </p>
+     * 
+     * @param properties
+     *            the properties
+     * @return 如果 <code>properties</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
+     * @since 1.7.1
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static Map<String, String> toMap(Properties properties){
+        Validate.notEmpty(properties, "properties can't be null/empty!");
+        return new HashMap<String, String>((Map) properties);
     }
 
     //*************************************toList*********************************************************
