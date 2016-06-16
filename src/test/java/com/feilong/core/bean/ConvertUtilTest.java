@@ -44,6 +44,7 @@ import org.apache.commons.beanutils.converters.LongConverter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -476,6 +477,15 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(ConvertUtil.toList(enumeration)));
 
         enumeration = ConvertUtil.toEnumeration(null);
+    }
+
+    @Test
+    public void toMap(){
+        Map<String, String> map = ConvertUtil
+                        .toMap(Pair.of("张飞", "丈八蛇矛"), Pair.of("关羽", "青龙偃月刀"), Pair.of("赵云", "龙胆枪"), Pair.of("刘备", "双股剑"));
+        LOGGER.debug(JsonUtil.format(map));
+
+        Integer[][] ints = { { 1, 2 }, { 2, 3 } };
     }
 
     /**

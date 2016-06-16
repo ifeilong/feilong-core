@@ -1175,27 +1175,6 @@ public final class MapUtil{
 
         List<Map.Entry<K, V>> mapEntryList = ConvertUtil.toList(map.entrySet());
         Collections.sort(mapEntryList, mapEntryComparator);
-        return toMap(mapEntryList);
-    }
-
-    /**
-     * To map.
-     *
-     * @param <V>
-     *            the value type
-     * @param <K>
-     *            the key type
-     * @param mapEntryList
-     *            the map entry list
-     * @return the map< k, v>
-     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
-     * @since 1.6.2
-     */
-    private static <V, K> Map<K, V> toMap(List<Map.Entry<K, V>> mapEntryList){
-        Map<K, V> returnMap = new LinkedHashMap<K, V>(mapEntryList.size());
-        for (Map.Entry<K, V> entry : mapEntryList){
-            returnMap.put(entry.getKey(), entry.getValue());
-        }
-        return returnMap;
+        return ConvertUtil.toMap(mapEntryList);
     }
 }
