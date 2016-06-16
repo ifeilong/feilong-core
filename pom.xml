@@ -210,38 +210,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<includes>
-						<include>**/AlphabetTest</include>
-						<include>**/ArrayUtilTest</include>
-						<include>**/CalendarUtilTest</include>
-						<include>**/CharsetTypeTest</include>
-						<include>**/ClassUtilTest</include>
-						<include>**/ConvertUtilTest</include>
-						<include>**/DateUtilTest</include>
-						<include>**/DateExtensionUtilTest</include>
-						<include>**/DateExtensionUtilTest2</include>
-						<include>**/DateUtilIsLeapYearParameterizedTest</include>
-						<include>**/EnumUtilTest</include>
-						<include>**/FieldUtilTest</include>
-
-						<include>**/HttpMethodTypeTest</include>
-
-						<include>**/ObjectUtilTest</include>
-						<include>**/ParamUtilTest</include>
-
-						<include>**/RandomUtilTest</include>
-						<include>**/RegexUtilTest</include>
-						<include>**/ResourceBundleUtilTest</include>
-
-						<include>**/NumberUtilTest</include>
-						<include>**/MessageFormatUtilTest</include>
-						<include>**/Slf4jUtilTest</include>
-						<include>**/StringUtilTest</include>
-						<include>**/TimeIntervalTest</include>
-
-						<include>**/ValidatorTest.java</include>
-
-						<include>**/TelephonePatternTest.java</include>
-						<include>**/TelephoneMustAreaCodePatternTest.java</include>
+						<include>**/FeiLongSuiteTests</include>
 					</includes>
 					<skip>false</skip>
 				</configuration>
