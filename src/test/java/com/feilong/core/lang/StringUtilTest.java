@@ -69,7 +69,7 @@ public class StringUtilTest{
     public void testContains(){
         assertEquals(false, StringUtils.contains(null, ""));
         assertEquals(true, StringUtils.contains("", ""));
-        assertEquals(true, StringUtil.contains("jiiiiiinxin.feilong", "xin"));
+        assertEquals(true, StringUtils.contains("jiiiiiinxin.feilong", "xin"));
     }
 
     /**
