@@ -217,66 +217,6 @@ public final class StringUtil{
         return "\"" + text + "\"";
     }
 
-    // [start]contains
-
-    /**
-     * 判断 <code>seq</code>内是否包含指定的<code>searchSeq</code>.
-     * 
-     * <p>
-     * A {@code null} CharSequence will return {@code false}.
-     * </p>
-     *
-     * <pre>
-     * StringUtils.contains(null, *)     = false
-     * StringUtils.contains(*, null)     = false
-     * StringUtils.contains("", "")      = true
-     * StringUtils.contains("abc", "")   = true
-     * StringUtils.contains("abc", "a")  = true
-     * StringUtils.contains("abc", "z")  = false
-     * </pre>
-     * 
-     * @param seq
-     *            原始字符串 jinxin,the CharSequence to check, may be null
-     * @param searchSeq
-     *            被包含的字符串 in,the CharSequence to find, may be null
-     * @return 包含返回true,<br>
-     *         如果text 为null 返回false
-     * @see org.apache.commons.lang3.StringUtils#contains(CharSequence, CharSequence)
-     * @deprecated pls call {@link org.apache.commons.lang3.StringUtils#contains(CharSequence, CharSequence)}
-     */
-    @Deprecated
-    public static boolean contains(final CharSequence seq,final CharSequence searchSeq){
-        return StringUtils.contains(seq, searchSeq);
-    }
-
-    /**
-     * 忽略大小写,判断是否包含.
-     * 
-     * <pre class="code">
-     * StringUtil.containsIgnoreCase(null, "")            = false
-     * StringUtil.containsIgnoreCase(text, null)          = false
-     * StringUtil.containsIgnoreCase(text, "")            = true
-     * StringUtil.containsIgnoreCase(text, "feilong")     = true
-     * StringUtil.containsIgnoreCase(text, "feilong1")    = false
-     * StringUtil.containsIgnoreCase(text, "feiLong")     = true
-     * </pre>
-     *
-     * @param str
-     *            the CharSequence to check, may be null
-     * @param searchStr
-     *            the CharSequence to find, may be null
-     * @return true if the CharSequence contains the search CharSequence irrespective of
-     *         case or false if not or <code>null</code> string input
-     * @see org.apache.commons.lang3.StringUtils#containsIgnoreCase(CharSequence, CharSequence)
-     * @deprecated pls call {@link StringUtils#containsIgnoreCase(CharSequence, CharSequence)}
-     */
-    @Deprecated
-    public static boolean containsIgnoreCase(final CharSequence str,final CharSequence searchStr){
-        return StringUtils.containsIgnoreCase(str, searchStr);
-    }
-
-    // [end] 
-
     // [start]replace
 
     // ********************************replace************************************************
