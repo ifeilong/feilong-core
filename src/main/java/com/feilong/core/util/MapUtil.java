@@ -1187,6 +1187,27 @@ public final class MapUtil{
      * without growth.
      * This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.7. It also can't be guaranteed that the
      * method isn't inadvertently <i>oversizing</i> the returned map.
+     * 
+     * <h3>以前你可能需要这么写代码:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new HashMap{@code <String, Map<Long, List<String>>>}(16);
+     * </pre>
+     * 
+     * 如果你是使用JDK1.7或者以上,你可以使用 钻石符:
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new HashMap{@code <>}(16);
+     * </pre>
+     * 
+     * 不过只要你是使用1.5+,你都可以写成:
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.newHashMap(16);
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
@@ -1237,10 +1258,24 @@ public final class MapUtil{
      * @see <a href=
      *      "http://stackoverflow.com/questions/30220820/difference-between-new-hashmapint-and-guava-maps-newhashmapwithexpectedsizein">
      *      Difference between new HashMap(int) and guava Maps.newHashMapWithExpectedSize(int)</a>
+     * @see <a href="http://stackoverflow.com/questions/15844035/best-hashmap-initial-capacity-while-indexing-a-list">Best HashMap initial
+     *      capacity while indexing a List</a>
      * @see java.util.HashMap#HashMap(Map)
+     * @see "com.google.common.collect.Maps#capacity(int)"
+     * @see java.util.HashMap#inflateTable(int)
      * @since 1.7.1
      */
     private static int toInitialCapacity(int size){
-        return (int) (size / 0.75f) + 1;
+        Validate.isTrue(size >= 0, "size :[%s] must >=0", size);
+
+        //借鉴了 google guava 的实现,不过 guava 不同版本实现不同
+        //guava 19 (int) (expectedSize / 0.75F + 1.0F)
+        //guava 18  expectedSize + expectedSize / 3;
+        //google-collections 1.0  Math.max(expectedSize * 2, 16)
+
+        //This is the calculation used in JDK8 to resize when a putAll happens; 
+        //it seems to be the most conservative calculation we can make.  
+        return (int) (size / 0.75f) + 1;//0.75 is the default load factor.
     }
+
 }
