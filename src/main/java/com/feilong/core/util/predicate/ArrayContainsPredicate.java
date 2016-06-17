@@ -43,6 +43,8 @@ public class ArrayContainsPredicate<T> implements Predicate<T>{
 
     /**
      * The Constructor.
+     * 
+     * @param <V>
      *
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
@@ -50,9 +52,10 @@ public class ArrayContainsPredicate<T> implements Predicate<T>{
      * @param propertyValues
      *            the values
      */
-    public ArrayContainsPredicate(String propertyName, Object...propertyValues){
-        this.propertyValues = propertyValues;
+    @SafeVarargs
+    public <V> ArrayContainsPredicate(String propertyName, V...propertyValues){
         this.propertyName = propertyName;
+        this.propertyValues = propertyValues;
     }
 
     /*

@@ -450,9 +450,9 @@ public final class JsonUtil{
      * @param obj
      *            the obj
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     *         否则取到该对象 所有field 的name 和value值 map {@link FieldUtil#getAllFieldNameAndValueMap(Object)} 调用
+     *         否则取到该对象 所有field 的name 和value值 map {@link FieldUtil#getAllFieldNameAndValueMap(Object, String...)} 调用
      *         {@link #format(Object, JsonFormatConfig)},再次过程中,会处理 {@link SensitiveWords}
-     * @see FieldUtil#getAllFieldNameAndValueMap(Object)
+     * @see FieldUtil#getAllFieldNameAndValueMap(Object, String...)
      * @see org.apache.commons.lang3.reflect.FieldUtils#getFieldsListWithAnnotation(Class, Class)
      * @since 1.5.6
      */
