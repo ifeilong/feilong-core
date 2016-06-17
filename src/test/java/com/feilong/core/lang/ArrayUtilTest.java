@@ -294,7 +294,7 @@ public class ArrayUtilTest{
         if (null == array){
             return Collections.emptyMap();
         }
-        Map<T, List<T>> map = new LinkedHashMap<T, List<T>>(array.length);
+        Map<T, List<T>> map = MapUtil.newLinkedHashMap(array.length);
         for (T t : array){
             MapUtil.putMultiValue(map, t, t);
         }

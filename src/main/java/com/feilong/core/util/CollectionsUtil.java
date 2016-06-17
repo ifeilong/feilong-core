@@ -1554,7 +1554,7 @@ public final class CollectionsUtil{
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
-        Map<T, List<O>> map = new LinkedHashMap<T, List<O>>(objectCollection.size());
+        Map<T, List<O>> map = MapUtil.newLinkedHashMap(objectCollection.size());
         for (O o : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(o)){
                 continue;
@@ -1628,7 +1628,8 @@ public final class CollectionsUtil{
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
-        Map<T, O> map = new LinkedHashMap<T, O>(objectCollection.size());
+        Map<T, O> map = MapUtil.newLinkedHashMap(objectCollection.size());
+
         for (O o : objectCollection){
             T key = PropertyUtil.getProperty(o, propertyName);
             if (!map.containsKey(key)){
@@ -1862,7 +1863,7 @@ public final class CollectionsUtil{
         Map<String, BigDecimal> sumMap = sum(objectCollection, propertyNames);
 
         int size = objectCollection.size();
-        Map<String, BigDecimal> map = new LinkedHashMap<String, BigDecimal>(size);
+        Map<String, BigDecimal> map = MapUtil.newLinkedHashMap(size);
         for (Map.Entry<String, BigDecimal> entry : sumMap.entrySet()){
             map.put(entry.getKey(), NumberUtil.getDivideValue(ConvertUtil.toBigDecimal(entry.getValue()), size, scale));
         }
@@ -1990,7 +1991,8 @@ public final class CollectionsUtil{
         }
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
-        Map<String, BigDecimal> sumMap = new LinkedHashMap<String, BigDecimal>(objectCollection.size());
+        Map<String, BigDecimal> sumMap = MapUtil.newLinkedHashMap(objectCollection.size());
+
         for (O o : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(o)){
                 continue;

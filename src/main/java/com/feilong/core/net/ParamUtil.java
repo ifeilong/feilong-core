@@ -926,7 +926,7 @@ public final class ParamUtil{
                     String charsetType){
         Map<String, String[]> safeArrayValueMap = ObjectUtils.defaultIfNull(arrayValueMap, Collections.<String, String[]> emptyMap());
 
-        Map<String, String[]> arrayParamValuesMap = new LinkedHashMap<String, String[]>(safeArrayValueMap.size());
+        Map<String, String[]> arrayParamValuesMap = MapUtil.newLinkedHashMap(safeArrayValueMap.size());
         //先提取queryString map
         if (Validator.isNotNullOrEmpty(queryString)){
             arrayParamValuesMap.putAll(toSafeArrayValueMap(queryString, null));
@@ -954,7 +954,7 @@ public final class ParamUtil{
         if (Validator.isNullOrEmpty(arrayValueMap)){
             return Collections.emptyMap();
         }
-        Map<String, String[]> safeArrayValueMap = new LinkedHashMap<String, String[]>(arrayValueMap.size());//使用 LinkedHashMap,保持map元素顺序
+        Map<String, String[]> safeArrayValueMap = MapUtil.newLinkedHashMap(arrayValueMap.size()); //使用 LinkedHashMap,保持map元素顺序
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             String key = entry.getKey();
             String[] paramValues = entry.getValue();

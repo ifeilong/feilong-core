@@ -49,6 +49,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.feilong.core.Validator;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.core.util.MapUtil;
 
 /**
  * 常用类型转换处理.
@@ -813,7 +814,7 @@ public final class ConvertUtil{
         if (null == mapEntryCollection){
             return Collections.emptyMap();
         }
-        Map<K, V> map = new LinkedHashMap<K, V>(mapEntryCollection.size());
+        Map<K, V> map = MapUtil.newLinkedHashMap(mapEntryCollection.size());
         for (Map.Entry<K, V> entry : mapEntryCollection){
             map.put(entry.getKey(), entry.getValue());
         }
@@ -947,7 +948,7 @@ public final class ConvertUtil{
         if (null == mapEntrys){
             return Collections.emptyMap();
         }
-        Map<K, V> map = new LinkedHashMap<K, V>(mapEntrys.length);
+        Map<K, V> map = MapUtil.newLinkedHashMap(mapEntrys.length);
         for (Map.Entry<K, V> entry : mapEntrys){
             map.put(entry.getKey(), entry.getValue());
         }

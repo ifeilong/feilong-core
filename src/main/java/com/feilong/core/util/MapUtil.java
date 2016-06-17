@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -1177,5 +1178,69 @@ public final class MapUtil{
         List<Map.Entry<K, V>> mapEntryList = ConvertUtil.toList(map.entrySet());
         Collections.sort(mapEntryList, mapEntryComparator);
         return ConvertUtil.toMap(mapEntryList);
+    }
+
+    //*************************************************************************************************
+
+    /**
+     * Creates a {@code HashMap} instance, with a high enough "initial capacity" that it <i>should</i> hold {@code expectedSize} elements
+     * without growth.
+     * This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.7. It also can't be guaranteed that the
+     * method isn't inadvertently <i>oversizing</i> the returned map.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param expectedSize
+     *            the number of entries you expect to add to the returned map
+     * @return a new, empty {@code HashMap} with enough capacity to hold {@code expectedSize} entries without resizing
+     * @see "com.google.common.collect.Maps#newHashMapWithExpectedSize(int)"
+     * @see java.util.HashMap#HashMap(int)
+     * @since 1.7.1
+     */
+    public static <K, V> HashMap<K, V> newHashMap(int expectedSize){
+        return new HashMap<K, V>(toInitialCapacity(expectedSize));
+    }
+
+    /**
+     * Creates a {@code LinkedHashMap} instance, with a high enough "initial capacity" that it <i>should</i> hold {@code expectedSize}
+     * elements without growth. This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.7. <br>
+     * It also can't be guaranteed that the method isn't inadvertently <i>oversizing</i> the returned map.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param expectedSize
+     *            the number of entries you expect to add to the returned map
+     * @return a new, empty {@code LinkedHashMap} with enough capacity to hold {@code expectedSize} entries without resizing
+     * @see "com.google.common.collect.Maps#newLinkedHashMapWithExpectedSize(int)"
+     * @see java.util.LinkedHashMap#LinkedHashMap(int)
+     * @since 1.7.1
+     */
+    public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize){
+        return new LinkedHashMap<K, V>(toInitialCapacity(expectedSize));
+    }
+
+    /**
+     * 将<code>size</code>转成 <code>initialCapacity</code> (for {@link java.util.HashMap}).
+     * 
+     * <p>
+     * 适合于明确知道 hashmap size,现在需要初始化的情况
+     * </p>
+     *
+     * @param size
+     *            map的 size
+     * @return the int
+     * @see <a href="http://www.iteye.com/topic/1134016">java hashmap，如果确定只装载100个元素，new HashMap(?)多少是最佳的，why？ </a>
+     * @see <a href=
+     *      "http://stackoverflow.com/questions/30220820/difference-between-new-hashmapint-and-guava-maps-newhashmapwithexpectedsizein">
+     *      Difference between new HashMap(int) and guava Maps.newHashMapWithExpectedSize(int)</a>
+     * @see java.util.HashMap#HashMap(Map)
+     * @since 1.7.1
+     */
+    private static int toInitialCapacity(int size){
+        return (int) (size / 0.75f) + 1;
     }
 }
