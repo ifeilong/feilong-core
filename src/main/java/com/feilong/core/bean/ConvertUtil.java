@@ -1018,7 +1018,7 @@ public final class ConvertUtil{
      * @since 1.7.1
      */
     public static <K, V> Map<K, V> toMap(K key,V value){
-        Map<K, V> map = new LinkedHashMap<K, V>();
+        Map<K, V> map = new LinkedHashMap<K, V>();//不设置初始值 ,可能调用再PUT 这样浪费性能
         map.put(key, value);
         return map;
     }

@@ -184,6 +184,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.util.AbstractMap.SimpleEntry
  * @see org.apache.commons.collections4.MapUtils
+ * @see "com.google.common.collect.Maps"
  * @since 1.0.0
  */
 public final class MapUtil{
