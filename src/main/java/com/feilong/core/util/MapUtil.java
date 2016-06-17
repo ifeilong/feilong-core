@@ -1270,12 +1270,12 @@ public final class MapUtil{
 
         //借鉴了 google guava 的实现,不过 guava 不同版本实现不同
         //guava 19 (int) (expectedSize / 0.75F + 1.0F)
-        //guava 18  expectedSize + expectedSize / 3;
+        //guava 18  expectedSize + expectedSize / 3
         //google-collections 1.0  Math.max(expectedSize * 2, 16)
 
-        //This is the calculation used in JDK8 to resize when a putAll happens; 
+        //This is the calculation used in JDK8 to resize when a putAll happens 
         //it seems to be the most conservative calculation we can make.  
-        return (int) (size / 0.75f) + 1;//0.75 is the default load factor.
+        return (int) (size / 0.75f) + 1;//0.75 is the default load factor
     }
 
 }
