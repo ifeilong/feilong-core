@@ -260,10 +260,8 @@ public final class BeanUtil{
      * User user1 = new User();
      * user1.setDate(new Date());
      * 
-     * String[] strs = { "date" };
-     * 
      * User user2 = new User();
-     * BeanUtil.copyProperties(user2, user1, strs);
+     * BeanUtil.copyProperties(user2, user1, "date");
      * </pre>
      * 
      * <p>
@@ -305,8 +303,6 @@ public final class BeanUtil{
      * <blockquote>
      * 
      * <ol>
-     * <li>如果 <code>toObj</code> 是null,抛出 {@link NullPointerException}</li>
-     * <li>如果 <code>fromObj</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
      * {@link BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
@@ -380,6 +376,10 @@ public final class BeanUtil{
      * @param includePropertyNames
      *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
      *            如果 是null or empty ,将会调用 {@link BeanUtils#copyProperties(Object, Object)}
+     * @throws NullPointerException
+     *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
+     * @throws BeanUtilException
+     *             其他调用api有任何异常,转成{@link BeanUtilException}返回
      * @see #setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.BeanUtilsBean#copyProperties(Object, Object)
      * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
@@ -415,13 +415,15 @@ public final class BeanUtil{
      * <p>
      * BeanUtils支持把所有类型的属性都作为字符串处理,在后台自动进行类型转换(字符串和真实类型的转换)
      * </p>
-     * 
+     *
      * @param bean
      *            Bean on which setting is to be performed
      * @param propertyName
      *            Property name (can be nested/indexed/mapped/combo),参见<a href="#propertyName">propertyName</a>
      * @param value
      *            Value to be set
+     * @throws BeanUtilException
+     *             有任何异常,转成{@link BeanUtilException}返回
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.BeanUtilsBean#setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
@@ -447,10 +449,13 @@ public final class BeanUtil{
      *            bean
      * @param propertyName
      *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="#propertyName">propertyName</a>
-     * @return 如果 <code>bean</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         否则 使用{@link BeanUtils#getProperty(Object, String)} 从对象中取得属性值
+     * @return 使用{@link BeanUtils#getProperty(Object, String)} 从对象中取得属性值
+     * @throws NullPointerException
+     *             如果 <code>bean</code> 是null,或者如果 <code>propertyName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
+     * @throws BeanUtilException
+     *             在调用 {@link BeanUtils#getProperty(Object, String)}过程中有任何异常,转成{@link BeanUtilException}返回
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
@@ -498,12 +503,16 @@ public final class BeanUtil{
      * 如果需要深度clone,可以使用 {@link org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable) SerializationUtils.clone},但是它的性能要慢很多倍
      * </p>
      * </blockquote>
-     * 
+     *
      * @param <T>
      *            the generic type
      * @param bean
      *            Bean to be cloned
      * @return the cloned bean (复制的引用 ,无法实现深clone)
+     * @throws NullPointerException
+     *             如果 <code>bean</code> 是null
+     * @throws BeanUtilException
+     *             在调用api有任何异常,转成{@link BeanUtilException}返回
      * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @see org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable)
@@ -512,6 +521,7 @@ public final class BeanUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T cloneBean(T bean){
+        Validate.notNull(bean, "bean can't be null!");
         try{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
@@ -541,10 +551,10 @@ public final class BeanUtil{
      * 返回:
      * 
      * <pre class="code">
-     {
-         "id": "5",
-         "date": "Mon Apr 11 00:37:56 CST 2016"
-     }
+     * {
+     * "id": "5",
+     * "date": "Mon Apr 11 00:37:56 CST 2016"
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -564,6 +574,8 @@ public final class BeanUtil{
      * @param bean
      *            Bean whose properties are to be extracted
      * @return 如果 <code>bean</code> 是null,返回 empty HashMap,see {@link BeanUtilsBean#describe(Object)}
+     * @throws BeanUtilException
+     *             有任何异常,转成{@link BeanUtilException}返回
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @see PropertyUtil#describe(Object)
@@ -621,7 +633,7 @@ public final class BeanUtil{
      * 
      * <blockquote>
      * <p>
-     * apache的javadoc中,明确指明这个方法是为解析http请求参数特别定义和使用的,在正常的使用中不推荐使用.他们推荐使用 {@link #copyProperties(Object, Object, String...)} 方法
+     * apache的javadoc中,明确指明这个方法是为解析http请求参数特别定义和使用的,在正常使用中不推荐使用.推荐使用 {@link #copyProperties(Object, Object, String...)}方法
      * </p>
      * </blockquote>
      * 
@@ -633,11 +645,15 @@ public final class BeanUtil{
      * 循环map,调用 {@link BeanUtilsBean#setProperty(Object, String, Object)}方法 ,一一对应设置到 <code>bean</code>对象
      * </p>
      * </blockquote>
-     * 
+     *
      * @param bean
      *            JavaBean whose properties are being populated
      * @param properties
      *            Map keyed by property name,with the corresponding (String or String[]) value(s) to be set
+     * @throws NullPointerException
+     *             如果 <code>bean</code> 是null,或者如果 <code>properties</code> 是null
+     * @throws BeanUtilException
+     *             在调用{@link BeanUtils#populate(Object, Map)}过程中有任何异常,转成{@link BeanUtilException}返回
      * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
      */
     public static void populate(Object bean,Map<String, ?> properties){
