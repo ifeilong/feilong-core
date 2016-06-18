@@ -512,7 +512,7 @@ public final class ConvertUtil{
      *     String[] orderIdArray = orderIds.split(",");
      *     int orderLength = orderIdArray.length;
      *     long[] ids = new long[orderLength];
-     *     for (int i = 0, j = orderLength; i < j; ++i){
+     *     for (int i = 0, j = orderLength; i {@code <} j; ++i){
      *         ids[i] = Long.parseLong(orderIdArray[i]);
      *     }
      *     return ids;
@@ -774,12 +774,12 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * Map<String, String> map = ConvertUtil.toMap(
+     * Map{@code <String, String>} map = ConvertUtil.toMap(
      *                 ConvertUtil.toList(
-     *                                 new SimpleEntry<>("张飞", "丈八蛇矛"),
-     *                                 new SimpleEntry<>("关羽", "青龙偃月刀"),
-     *                                 new SimpleEntry<>("赵云", "龙胆枪"),
-     *                                 new SimpleEntry<>("刘备", "双股剑")));
+     *                                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
+     *                                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
+     *                                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
+     *                                 new SimpleEntry{@code <>}("刘备", "双股剑")));
      * LOGGER.debug(JsonUtil.format(map));
      * 
      * </pre>
@@ -843,7 +843,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * Map<String, String> map = ConvertUtil.toMap(
+     * Map{@code <String, String>} map = ConvertUtil.toMap(
      * 
      *                 Pair.of("张飞", "丈八蛇矛"),
      *                 Pair.of("关羽", "青龙偃月刀"),
@@ -873,11 +873,11 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * Map<String, String> map = ConvertUtil.toMap(
-     *                 new SimpleEntry<>("张飞", "丈八蛇矛"),
-     *                 new SimpleEntry<>("关羽", "青龙偃月刀"),
-     *                 new SimpleEntry<>("赵云", "龙胆枪"),
-     *                 new SimpleEntry<>("刘备", "双股剑"));
+     * Map{@code <String, String>} map = ConvertUtil.toMap(
+     *                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
+     *                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
+     *                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
+     *                 new SimpleEntry{@code <>}("刘备", "双股剑"));
      * LOGGER.debug(JsonUtil.format(map));
      * 
      * </pre>
@@ -906,7 +906,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * 
      * // 除数和单位的map,必须是有顺序的 从大到小.
-     * private static final Map<Long, String> DIVISOR_AND_UNIT_MAP = new LinkedHashMap<>();
+     * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = new LinkedHashMap{@code <>}();
      * 
      * static{
      *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");//(Terabyte，太字节，或百万兆字节)=1024GB，其中1024=2^10 ( 2 的10次方)。 
@@ -922,7 +922,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * 
      * // 除数和单位的map,必须是有顺序的 从大到小.
-     * private static final Map<Long, String> DIVISOR_AND_UNIT_MAP = ConvertUtil.toMap(
+     * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = ConvertUtil.toMap(
      *                 Pair.of(FileUtils.ONE_TB, "TB"), //(Terabyte，太字节，或百万兆字节)=1024GB，其中1024=2^10 ( 2 的10次方)。 
      *                 Pair.of(FileUtils.ONE_GB, "GB"), //(Gigabyte，吉字节，又称“千兆”)=1024MB， 
      *                 Pair.of(FileUtils.ONE_MB, "MB"), //(Megabyte，兆字节，简称“兆”)=1024KB， 
@@ -1014,7 +1014,7 @@ public final class ConvertUtil{
      *            the key
      * @param value
      *            the value
-     * @return the map< k, v>
+     * @return 将 <code>key</code> 和 <code>value</code> 直接转成map
      * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
      * @since 1.7.1
      */

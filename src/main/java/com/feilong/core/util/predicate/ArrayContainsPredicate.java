@@ -43,9 +43,9 @@ public class ArrayContainsPredicate<T> implements Predicate<T>{
 
     /**
      * The Constructor.
-     * 
-     * @param <V>
      *
+     * @param <V>
+     *            the value type
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>

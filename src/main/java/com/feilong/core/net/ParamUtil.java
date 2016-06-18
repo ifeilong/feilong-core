@@ -66,7 +66,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * String uri = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
+     * String uri = "http://www.feilong.com:8888/esprit-frontend/search.htm?{@code keyword=%E6%81%A4&page=}";
      * String pageParamName = "label";
      * String prePageNo = "2-5-8-12";
      * LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
@@ -279,7 +279,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+     * String uriString = "http://www.feilong.com:8888/search.htm?{@code keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller"};
      * String pageParamName = "label";
      * LOGGER.info(ParamUtil.removeParameter(uriString, pageParamName, CharsetType.UTF8));
      * </pre>
@@ -287,7 +287,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * http://www.feilong.com:8888/search.htm?keyword=%E4%B8%AD%E5%9B%BD&page=&categoryCode=2-5-3-11
+     * http://www.feilong.com:8888/search.htm?keyword={@code %E4%B8%AD%E5%9B%BD&page=&categoryCode=2-5-3-11}
      * </pre>
      * 
      * </blockquote>
@@ -336,7 +336,7 @@ public final class ParamUtil{
      * 
      * <pre class="code">
      * 
-     * String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+     * String uriString = "http://www.feilong.com:8888/search.htm?{@code keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller"};
      * List{@code <String>} paramNameList = new ArrayList{@code <String>}();
      * paramNameList.add("label");
      * paramNameList.add("keyword");
@@ -347,7 +347,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * http://www.feilong.com:8888/search.htm?page=&categoryCode=2-5-3-11
+     * http://www.feilong.com:8888/search.htm?{@code page=&categoryCode=2-5-3-11}
      * </pre>
      * 
      * </blockquote>
@@ -426,7 +426,7 @@ public final class ParamUtil{
      * 
      * <pre class="code">
      * 
-     * String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
+     * String uriString = "http://www.feilong.com:8888/search.htm?{@code keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller}";
      * List{@code <String>} paramNameList = new ArrayList{@code <String>}();
      * paramNameList.add("label");
      * paramNameList.add("keyword");
@@ -437,7 +437,7 @@ public final class ParamUtil{
      * 返回:
      * 
      * <pre class="code">
-     * {@code http://www.feilong.com:8888/search.htm?label=TopSeller&keyword=%E4%B8%AD%E5%9B%BD}
+     * http://www.feilong.com:8888/search.htm?{@code label=TopSeller&keyword=%E4%B8%AD%E5%9B%BD}
      * </pre>
      * 
      * </blockquote>

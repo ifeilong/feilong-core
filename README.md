@@ -43,7 +43,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 	
 		....
 		<properties>
-			<version.feilong-platform>1.7.0</version.feilong-platform>
+			<version.feilong-platform>1.7.1</version.feilong-platform>
 			....
 		</properties>
 		
