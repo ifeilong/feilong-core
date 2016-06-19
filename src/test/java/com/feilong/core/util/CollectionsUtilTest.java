@@ -594,9 +594,13 @@ public class CollectionsUtilTest{
 
         User user3 = new User(100L);
         user3.setName("张飞");
-        user3.setAge(100);
+        user3.setAge(null);
 
-        List<User> list = ConvertUtil.toList(user1, user2, user3);
+        User user4 = new User((Long) null);
+        user4.setName("赵云");
+        user4.setAge(100);
+
+        List<User> list = ConvertUtil.toList(user1, user2, user3, user4);
         Map<String, BigDecimal> map = CollectionsUtil.sum(list, ConvertUtil.toArray("id", "age"), new Predicate<User>(){
 
             @Override

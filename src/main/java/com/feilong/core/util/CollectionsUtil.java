@@ -31,6 +31,7 @@ import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +46,7 @@ import com.feilong.core.util.predicate.CollectionContainsPredicate;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
- * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.<br>
+ * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
  * 
  * <h3>Collections Framework关系图:</h3>
  * 
@@ -247,6 +248,11 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * @see org.apache.commons.collections4.IterableUtils
  * @see org.apache.commons.collections4.CollectionUtils
  * @see "org.springframework.util.CollectionUtils"
+ * @see "com.google.common.collect.Sets"
+ * @see "com.google.common.collect.Lists"
+ * @see "com.google.common.collect.Queues"
+ * @see "com.google.common.collect.Iterators"
+ * @see "com.google.common.collect.Iterables"
  * @since 1.0.2
  * @since jdk1.5
  */
@@ -947,7 +953,7 @@ public final class CollectionsUtil{
         Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
         Validate.notBlank(valuePropertyName, "valuePropertyName can't be null/empty!");
 
-        Map<K, V> map = new LinkedHashMap<K, V>();
+        Map<K, V> map = MapUtil.newLinkedHashMap(objectCollection.size());
         for (O bean : objectCollection){
             map.put(PropertyUtil.<K> getProperty(bean, keyPropertyName), PropertyUtil.<V> getProperty(bean, valuePropertyName));
         }
@@ -1629,7 +1635,6 @@ public final class CollectionsUtil{
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, O> map = MapUtil.newLinkedHashMap(objectCollection.size());
-
         for (O o : objectCollection){
             T key = PropertyUtil.getProperty(o, propertyName);
             if (!map.containsKey(key)){
@@ -1992,18 +1997,16 @@ public final class CollectionsUtil{
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
         Map<String, BigDecimal> sumMap = MapUtil.newLinkedHashMap(objectCollection.size());
-
-        for (O o : objectCollection){
-            if (null != includePredicate && !includePredicate.evaluate(o)){
+        for (O obj : objectCollection){
+            if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
             }
 
             for (String propertyName : propertyNames){
-                Number propertyValue = PropertyUtil.getProperty(o, propertyName);
-
-                BigDecimal mapPropertyNameValue = sumMap.get(propertyName);
                 //如果通过反射某个元素值是null,则使用默认值0 代替
-                BigDecimal addValue = NumberUtil.getAddValue(null == mapPropertyNameValue ? 0 : mapPropertyNameValue, propertyValue);
+                BigDecimal addValue = NumberUtil.getAddValue(
+                                ObjectUtils.defaultIfNull(sumMap.get(propertyName), 0),
+                                ObjectUtils.defaultIfNull(PropertyUtil.<Number> getProperty(obj, propertyName), 0));
                 sumMap.put(propertyName, addValue);
             }
         }

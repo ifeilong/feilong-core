@@ -23,12 +23,12 @@ import com.feilong.core.util.RegexUtil;
 /**
  * 正则表达式分组 number group 比较器.
  * 
- * <p style="color:red">
- * 默认会提取正则表达式中的第一个group 转成int 类型进行比较
- * </p>
+ * <h3>背景:</h3>
  * 
+ * <blockquote>
  * <p>
- * 比如 要比较 "ppt-coreContent2","ppt-coreContent13","ppt-coreContent12",默认直接使用字符串比较的话, ppt-coreContent13会排在 ppt-coreContent2前面
+ * 如果要比较 "ppt-coreContent2","ppt-coreContent13","ppt-coreContent12",<br>
+ * 默认直接使用字符串比较的话, ppt-coreContent<b>13</b> 会排在 ppt-coreContent<b>2</b> 前面
  * </p>
  * 
  * <p>
@@ -38,7 +38,13 @@ import com.feilong.core.util.RegexUtil;
  * <pre class="code">
  * Collections.sort(includedFileUrlList, new RegexGroupNumberComparator(".*ppt-coreContent(\\d*).png"));
  * </pre>
- *
+ * 
+ * </blockquote>
+ * 
+ * <p>
+ * 默认会提取正则表达式中的 <span style="color:red">第一个group 转成int 类型</span> 进行比较
+ * </p>
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.apache.commons.io.comparator.NameFileComparator"
  * @see "org.apache.commons.io.comparator.DirectoryFileComparator"

@@ -22,7 +22,7 @@ import org.apache.commons.collections4.Predicate;
 import com.feilong.core.bean.PropertyUtil;
 
 /**
- * 调用 {@link com.feilong.core.bean.PropertyUtil#getProperty(Object, String)} 匹配属性值.
+ * 调用 {@link PropertyUtil#getProperty(Object, String)} 匹配属性值.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>

@@ -732,13 +732,12 @@ public final class ConvertUtil{
             }
 
             //value转换,注意:如果 value是null,StringBuilder将拼接 "null" 字符串,详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(null == obj ? StringUtils.EMPTY : "" + obj); //see StringUtils.defaultString(t)
+            sb.append(ObjectUtils.defaultIfNull(obj, StringUtils.EMPTY)); //see StringUtils.defaultString(t)
 
             if (null != connector){//注意可能传过来的是换行符 不能使用Validator.isNullOrEmpty来判断
                 sb.append(connector);//放心大胆的拼接 connector, 不判断是否是最后一个,最后会截取
             }
         }
-
         return StringUtil.substringWithoutLast(sb, connector);
     }
 

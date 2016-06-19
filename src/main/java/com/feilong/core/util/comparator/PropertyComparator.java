@@ -27,13 +27,13 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 
 /**
- * 属性比较器,自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值,进行比较,不用自己每个需要排序的类都创建 {@link Comparator}类.
+ * 属性比较器,自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值,进行比较,不用每个需要排序的字段创建 {@link Comparator}类.
  * 
  * <h3>关于 {@link #propertyName}:</h3>
  * 
  * <blockquote>
  * <p>
- * {@link #propertyName}取出来的值,必须实现 {@link Comparable}接口, 比如 {@link Integer}, {@link String}等类型
+ * {@link #propertyName} 取出来的值,必须实现 {@link Comparable}接口,比如 {@link Integer}, {@link String}等类型
  * </p>
  * </blockquote>
  * 
@@ -48,6 +48,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
+ * @see org.apache.commons.collections4.ComparatorUtils
  * @see "org.springframework.beans.support.PropertyComparator"
  * @see org.apache.commons.beanutils.BeanComparator
  * @see org.apache.commons.collections4.comparators.BooleanComparator
