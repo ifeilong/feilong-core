@@ -618,8 +618,10 @@ public final class ParamUtil{
         }
 
         String[] nameAndValueArray = StringUtil.split(queryString, URIComponents.AMPERSAND);
-        Map<String, String[]> safeArrayValueMap = new LinkedHashMap<String, String[]>();//使用 LinkedHashMap 保证元素的顺序
-        for (int i = 0, j = nameAndValueArray.length; i < j; ++i){
+        int length = nameAndValueArray.length;
+
+        Map<String, String[]> safeArrayValueMap = MapUtil.newLinkedHashMap(length);//使用 LinkedHashMap 保证元素的顺序
+        for (int i = 0; i < length; ++i){
             String[] tempArray = nameAndValueArray[i].split("=", 2);
 
             String key = decodeAndEncode(tempArray[0], charsetType);
