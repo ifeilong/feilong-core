@@ -27,14 +27,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrSubstitutor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link String}工具类,可以 查询,截取,format,转成16进制码.
@@ -171,9 +168,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @since 1.4.0
  */
 public final class StringUtil{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(StringUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private StringUtil(){
@@ -420,8 +414,7 @@ public final class StringUtil{
      * @param startIndex
      *            索引开始位置,0开始
      * @param length
-     *            长度 {@code >=1} 1个 即本身 <br>
-     *            正常情况下,即返回出来的字符串长度
+     *            长度 {@code >=1}
      * @return 如果 <code>text</code> 是null,返回 null<br>
      * @see org.apache.commons.lang3.StringUtils#substring(String, int, int)
      */
@@ -430,111 +423,14 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]:从第一次出现字符串位置开始(包含)截取到最后.
-     * 
-     * <p>
-     * 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
-     * </p>
-     * 
-     * <pre class="code">
-     * substring("jinxin.feilong",".")  =.feilong
-     * </pre>
-     * 
-     * @param text
-     *            text
-     * @param beginString
-     *            beginString开始截取的字符串
-     * @return 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
-     * @see #substring(String, String, int)
-     */
-    public static String substring(final String text,String beginString){
-        return substring(text, beginString, 0);
-    }
-
-    /**
-     * [截取]:从第一次出现字符串位置开始(包含)截取到最后,shift表示向前或者向后挪动位数.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * StringUtil.substring("jinxin.feilong",".",0)     =   ".feilong"
-     * StringUtil.substring("jinxin.feilong",".",1)     =   "feilong"
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param text
-     *            text
-     * @param beginString
-     *            beginString
-     * @param shift
-     *            负数表示向前,整数表示向后,0表示依旧从自己的位置开始算起
-     * @return 如果 <code>text</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果 <code>beginString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果 text.indexOf(beginString)==-1,返回 {@link StringUtils#EMPTY}<br>
-     *         如果{@code  beginIndex + shift < 0},抛出 {@link IllegalArgumentException}<br>
-     *         如果{@code  beginIndex + shift > text.length()},返回 {@link StringUtils#EMPTY}<br>
-     *         否则返回 text.substring(beginIndex + shift)<br>
-     * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
-     */
-    public static String substring(final String text,String beginString,int shift){
-        if (Validator.isNullOrEmpty(text) || Validator.isNullOrEmpty(beginString)){
-            return StringUtils.EMPTY;
-        }
-
-        int beginIndex = text.indexOf(beginString);
-        if (beginIndex == StringUtils.INDEX_NOT_FOUND){// 查不到指定的字符串
-            return StringUtils.EMPTY;
-        }
-        //****************************************************
-        int startIndex = beginIndex + shift;
-        Validate.isTrue(startIndex >= 0, Slf4jUtil.format("[{}] index[{}]+shift[{}]<0,text[{}]", beginString, beginIndex, shift, text));
-
-        int textLength = text.length();
-        if (startIndex > textLength){
-            LOGGER.warn("beginString [{}] index[{}]+shift[{}]>text[{}].length()[{}]", beginString, beginIndex, shift, text, textLength);
-            return StringUtils.EMPTY;
-        }
-        return text.substring(startIndex);// 索引从0开始
-    }
-
-    /**
-     * [截取]:从开始的字符串到结束的字符串中间的字符串.
-     * 
-     * <p>
-     * 包含开始的字符串startString,不包含结束的endString.
-     * </p>
-     * 
-     * @param text
-     *            文字
-     * @param startString
-     *            开始的字符串,null表示从开头开始截取
-     * @param endString
-     *            结束的字符串
-     * @return 如果 <code>text</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果Validator.isNullOrEmpty(startString),返回 text.substring(0, text.indexOf(endString))
-     * @see org.apache.commons.lang3.StringUtils#substringBetween(String, String, String)
-     */
-    public static String substring(final String text,final String startString,final String endString){
-        return Validator.isNullOrEmpty(text) ? StringUtils.EMPTY
-                        : text.substring(Validator.isNullOrEmpty(startString) ? 0 : text.indexOf(startString), text.indexOf(endString));
-    }
-
-    /**
      * [截取]:获取文字最后位数的字符串.
      * 
-     * <p>
-     * 调用了 {@link String#substring(int)}
-     * </p>
-     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * StringUtil.substringLast("jinxin.feilong", 5) //ilong
+     * StringUtil.substringLast("jinxin.feilong", 5) = ilong
      * </pre>
      * 
      * </blockquote>
@@ -543,11 +439,14 @@ public final class StringUtil{
      *            文字
      * @param lastLenth
      *            最后的位数
-     * @return 截取文字最后几个字符串
-     * @see java.lang.String#substring(int)
+     * @return 如果 <code>text</code> 是null,返回 null<br>
+     *         如果 {@code lastLenth<0},返回 {@link StringUtils#EMPTY}<br>
+     *         如果 {@code text.length() <= lastLenth},返回text<br>
+     *         否则返回<code> text.substring(text.length() - lastLenth)</code>
+     * @see org.apache.commons.lang3.StringUtils#right(String, int)
      */
     public static String substringLast(final String text,int lastLenth){
-        return text.substring(text.length() - lastLenth);
+        return StringUtils.right(text, lastLenth);
     }
 
     /**
@@ -812,7 +711,7 @@ public final class StringUtil{
      * 格式化字符串.
      * 
      * <ul>
-     * <li>StringUtil.format("%03d", 1)不能写成 StringUtil.format("%03d", "1")</li>
+     * <li>StringUtil.format("%03d", 1) 不能写成 StringUtil.format("%03d", "1")</li>
      * </ul>
      * 
      * <p>

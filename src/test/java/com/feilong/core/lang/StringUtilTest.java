@@ -22,15 +22,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
+import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class StringUtilTest.
@@ -245,15 +248,6 @@ public class StringUtilTest{
     }
 
     /**
-     * Test sub string.
-     */
-    @Test
-    public void testSubString(){
-        LOGGER.debug(StringUtil.substring(TEXT, "i", "g"));
-        LOGGER.debug(StringUtils.substringBetween(TEXT, "i", "g"));
-    }
-
-    /**
      * Substring2.
      */
     @Test
@@ -265,50 +259,6 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.substring(TEXT, 0, 5));
         assertEquals(".f", StringUtil.substring(TEXT, 6, 2));
         LOGGER.debug(StringUtil.substring(TEXT, 6, 20));
-    }
-
-    /**
-     * Substring3.
-     */
-    @Test
-    public void substring3(){
-        LOGGER.debug(StringUtil.substring(null, "in", 8));
-        LOGGER.debug(StringUtil.substring(TEXT, null, 8));
-        LOGGER.debug(StringUtil.substring(TEXT, "sin", 8));
-        LOGGER.debug(StringUtil.substring(TEXT, "in", 0));
-        LOGGER.debug(StringUtil.substring(TEXT, "in", 5));
-        // LOGGER.debug(StringUtil.substring(text, "in", -2));
-        LOGGER.debug(StringUtil.substring(TEXT, "j", TEXT.length() - 1));
-        LOGGER.debug(StringUtil.substring(TEXT, "jinxin.", 1));
-    }
-
-    /**
-     * Substring33.
-     */
-    @Test
-    public void substring33(){
-        LOGGER.debug(StringUtil.substring(TEXT, "in", 20));
-    }
-
-    /**
-     * Substring333.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void substring333(){
-        StringUtil.substring(TEXT, "in", -200);
-    }
-
-    /**
-     * Test substring3.
-     */
-    @Test
-    public void testSubstring3(){
-        LOGGER.debug(StringUtil.substring(null, "in"));
-        LOGGER.debug(StringUtil.substring(TEXT, null));
-        LOGGER.debug(StringUtil.substring(TEXT, "sin"));
-        LOGGER.debug(StringUtil.substring(TEXT, "."));
-        LOGGER.debug(StringUtil.substring(TEXT, "j"));
-        LOGGER.debug(StringUtil.substring(TEXT, "jinxin."));
     }
 
     /**
@@ -330,6 +280,7 @@ public class StringUtilTest{
     @Test
     public void testSubstringLast(){
         assertEquals("ilong", StringUtil.substringLast(TEXT, 5));
+        assertEquals(TEXT, StringUtil.substringLast(TEXT, -50));
     }
 
     /**
@@ -372,5 +323,76 @@ public class StringUtilTest{
         String delimiters = ";, .";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
         LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
+    }
+
+    /**
+     * [截取]:从第一次出现字符串位置开始(包含)截取到最后.
+     * 
+     * <p>
+     * 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
+     * </p>
+     * 
+     * <pre class="code">
+     * substring("jinxin.feilong",".")  =.feilong
+     * </pre>
+     * 
+     * @param text
+     *            text
+     * @param beginString
+     *            beginString开始截取的字符串
+     * @return 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
+     * @see #substring(String, String, int)
+     */
+    public static String substring(final String text,String beginString){
+        return substring(text, beginString, 0);
+    }
+
+    /**
+     * [截取]:从第一次出现字符串位置开始(包含)截取到最后,shift表示向前或者向后挪动位数.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * StringUtil.substring("jinxin.feilong",".",0)     =   ".feilong"
+     * StringUtil.substring("jinxin.feilong",".",1)     =   "feilong"
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param text
+     *            text
+     * @param beginString
+     *            beginString
+     * @param shift
+     *            负数表示向前,整数表示向后,0表示依旧从自己的位置开始算起
+     * @return 如果 <code>text</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>beginString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 text.indexOf(beginString)==-1,返回 {@link StringUtils#EMPTY}<br>
+     *         如果{@code  beginIndex + shift < 0},抛出 {@link IllegalArgumentException}<br>
+     *         如果{@code  beginIndex + shift > text.length()},返回 {@link StringUtils#EMPTY}<br>
+     *         否则返回 text.substring(beginIndex + shift)<br>
+     * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
+     */
+    public static String substring(final String text,String beginString,int shift){
+        if (Validator.isNullOrEmpty(text) || Validator.isNullOrEmpty(beginString)){
+            return StringUtils.EMPTY;
+        }
+
+        int beginIndex = text.indexOf(beginString);
+        if (beginIndex == StringUtils.INDEX_NOT_FOUND){// 查不到指定的字符串
+            return StringUtils.EMPTY;
+        }
+        //****************************************************
+        int startIndex = beginIndex + shift;
+        Validate.isTrue(startIndex >= 0, Slf4jUtil.format("[{}] index[{}]+shift[{}]<0,text[{}]", beginString, beginIndex, shift, text));
+
+        int textLength = text.length();
+        if (startIndex > textLength){
+            LOGGER.warn("beginString [{}] index[{}]+shift[{}]>text[{}].length()[{}]", beginString, beginIndex, shift, text, textLength);
+            return StringUtils.EMPTY;
+        }
+        return text.substring(startIndex);// 索引从0开始
     }
 }
