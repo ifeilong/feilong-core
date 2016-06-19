@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
@@ -272,7 +273,7 @@ public final class MapUtil{
         if (Validator.isNullOrEmpty(arrayValueMap)){
             return Collections.emptyMap();
         }
-        Map<K, String> singleValueMap = new LinkedHashMap<K, String>();//保证顺序和 参数 arrayValueMap 顺序相同
+        Map<K, String> singleValueMap = newLinkedHashMap(arrayValueMap.size());//保证顺序和 参数 arrayValueMap 顺序相同
         for (Map.Entry<K, String[]> entry : arrayValueMap.entrySet()){
             singleValueMap.put(entry.getKey(), Validator.isNotNullOrEmpty(entry.getValue()) ? entry.getValue()[0] : StringUtils.EMPTY);
         }
@@ -325,7 +326,7 @@ public final class MapUtil{
         if (Validator.isNullOrEmpty(singleValueMap)){
             return Collections.emptyMap();
         }
-        Map<K, String[]> arrayValueMap = new LinkedHashMap<K, String[]>();//保证顺序和参数singleValueMap顺序相同
+        Map<K, String[]> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
         for (Map.Entry<K, String> entry : singleValueMap.entrySet()){
             arrayValueMap.put(entry.getKey(), ConvertUtil.toArray(entry.getValue()));//注意此处的Value不要声明成V,否则会变成Object数组
         }
@@ -637,7 +638,7 @@ public final class MapUtil{
             return map;
         }
         //保证元素的顺序 ,key的顺序 按照参数 <code>keys</code>的顺序
-        Map<K, T> returnMap = new LinkedHashMap<K, T>();
+        Map<K, T> returnMap = newLinkedHashMap(keys.length);
         for (K key : keys){
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
@@ -913,16 +914,17 @@ public final class MapUtil{
         Validate.notNull(keysClass, "keysClass can't be null!");
 
         //如果excludeKeys是null,那么抽取所有的key
-        K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(map.keySet(), keysClass) : includeKeys;
+        Set<K> mapKeys = map.keySet();
+        K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(mapKeys, keysClass) : includeKeys;
 
         //保证元素的顺序  顺序是参数  includeKeys的顺序
-        Map<K, V> returnMap = new LinkedHashMap<K, V>();
+        Map<K, V> returnMap = newLinkedHashMap(useIncludeKeys.length);
         for (K key : useIncludeKeys){
             if (map.containsKey(key)){
                 O o = map.get(key);
                 returnMap.put(key, PropertyUtil.<V> getProperty(o, extractPropertyName));
             }else{
-                LOGGER.warn("map:{} don't contains key:[{}]", JsonUtil.format(map), key);
+                LOGGER.warn("map:[{}] don't contains key:[{}]", JsonUtil.format(mapKeys, 0, 0), key);
             }
         }
         return returnMap;
@@ -1274,8 +1276,7 @@ public final class MapUtil{
         //guava 18  expectedSize + expectedSize / 3
         //google-collections 1.0  Math.max(expectedSize * 2, 16)
 
-        //This is the calculation used in JDK8 to resize when a putAll happens 
-        //it seems to be the most conservative calculation we can make.  
+        //This is the calculation used in JDK8 to resize when a putAll happens it seems to be the most conservative calculation we can make.  
         return (int) (size / 0.75f) + 1;//0.75 is the default load factor
     }
 
