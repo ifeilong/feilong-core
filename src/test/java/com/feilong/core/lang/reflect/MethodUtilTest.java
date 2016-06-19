@@ -90,7 +90,7 @@ public class MethodUtilTest{
     /**
      * Test invoke static method.
      */
-    @Test()
+    @Test
     public void testInvokeStaticMethod1(){
         assertEquals("eilong", MethodUtil.invokeStaticMethod(StringUtil.class, "substring", "feilong", "ei"));
     }
@@ -101,7 +101,7 @@ public class MethodUtilTest{
      * @throws Exception
      *             the exception
      */
-    @Test()
+    @Test
     public void testInvokeStaticMethod2() throws Exception{
         assertEquals("fjinxinlong", MethodUtils.invokeStaticMethod(StringUtil.class, "replace", "feilong", "ei", "jinxin"));
     }

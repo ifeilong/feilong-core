@@ -111,7 +111,6 @@ public class BeanUtilTest{
      */
     @Test
     public void testDemoNormalJavaBeans() throws Exception{
-
         LOGGER.debug(StringUtils.center(" demoNormalJavaBeans ", 40, "="));
 
         // data setup  

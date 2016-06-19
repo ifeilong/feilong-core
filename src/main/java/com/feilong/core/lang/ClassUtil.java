@@ -146,7 +146,7 @@ public final class ClassUtil{
     }
 
     /**
-     * 判断一个对象是不是某个类的实例.
+     * 判断一个对象 <code>obj</code> 是不是某个类 <code>klass</code> 的实例.
      * 
      * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
      * 
@@ -195,7 +195,7 @@ public final class ClassUtil{
     }
 
     /**
-     * 判断 obj 是否isInstance 任意的一个 <code>klasses</code>.
+     * 判断 <code>obj</code> 是否isInstance 任意的一个 <code>klasses</code>.
      *
      * @param obj
      *            the obj
@@ -242,7 +242,7 @@ public final class ClassUtil{
     }
 
     /**
-     * 判断对象是否是接口.
+     * 判断类 <code>ownerClass</code> 是否是接口.
      * 
      * @param ownerClass
      *            对象class
@@ -257,6 +257,17 @@ public final class ClassUtil{
 
     /**
      * 解析参数,获得参数类型.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * assertArrayEquals(new Class[] { String.class, String.class }, ClassUtil.toClass("a", "a"));
+     * assertArrayEquals(new Class[] { Integer.class, Boolean.class }, ClassUtil.toClass(1, true));
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param paramValues
      *            参数值

@@ -60,9 +60,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.HttpMethodType HttpMethodType}
+     *            枚举类 比如 <code>HttpMethodType</code>
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.HttpMethodType HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 <code>HttpMethodType</code> 的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
@@ -90,9 +90,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.HttpMethodType HttpMethodType}
+     *            枚举类 比如 <code>HttpMethodType</code>
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.HttpMethodType HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 <code>HttpMethodType</code> 的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
@@ -120,9 +120,9 @@ public final class EnumUtil{
      * @param <T>
      *            the generic type
      * @param enumClass
-     *            the enum class 比如 {@link com.feilong.core.HttpMethodType HttpMethodType}
+     *            枚举类 比如 <code>HttpMethodType</code>
      * @param propertyName
-     *            字段名称,比如 {@link com.feilong.core.HttpMethodType HttpMethodType}的method,按照javabean 规范
+     *            字段名称,比如 <code>HttpMethodType</code> 的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
      * @param ignoreCase

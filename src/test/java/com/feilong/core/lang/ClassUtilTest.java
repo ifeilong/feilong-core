@@ -15,7 +15,9 @@
  */
 package com.feilong.core.lang;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
@@ -23,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
+import com.feilong.core.FeiLongVersion;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -45,8 +48,8 @@ public class ClassUtilTest{
      */
     @Test
     public void testGetClass() throws ClassNotFoundException{
-        LOGGER.debug("" + ClassUtil.getClass("com.feilong.core.FeiLongVersion"));
-        LOGGER.debug("" + ClassUtils.getClass("com.feilong.core.FeiLongVersion"));
+        assertSame(FeiLongVersion.class, ClassUtil.getClass("com.feilong.core.FeiLongVersion"));
+        assertSame(FeiLongVersion.class, ClassUtils.getClass("com.feilong.core.FeiLongVersion"));
     }
 
     /**
@@ -106,8 +109,8 @@ public class ClassUtilTest{
      */
     @Test
     public void testToClass(){
-        LOGGER.debug(JsonUtil.format(ClassUtil.toClass("a", "a")));
-        LOGGER.debug(JsonUtil.format(ClassUtil.toClass(1, true)));
+        assertArrayEquals(new Class[] { String.class, String.class }, ClassUtil.toClass("a", "a"));
+        assertArrayEquals(new Class[] { Integer.class, Boolean.class }, ClassUtil.toClass(1, true));
     }
 
     /**
