@@ -485,7 +485,7 @@ public final class StringUtil{
         }
 
         int beginIndex = text.indexOf(beginString);
-        if (beginIndex == -1){// 查不到指定的字符串
+        if (beginIndex == StringUtils.INDEX_NOT_FOUND){// 查不到指定的字符串
             return StringUtils.EMPTY;
         }
         //****************************************************

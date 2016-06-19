@@ -17,6 +17,7 @@ package com.feilong.core.lang;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -88,7 +89,7 @@ public class StringUtilTemp{
         while (j != sourceLength){
             // 从指定的索引开始 返回索引位置
             int i = source.indexOf(target, fromIndex);
-            if (i != -1){
+            if (i != StringUtils.INDEX_NOT_FOUND){
                 int targetLength = target.length();
                 // 一旦发现 查找到,下次 循环从找到的地方开始循环
                 // 查找 从 找到的地方 开始查找

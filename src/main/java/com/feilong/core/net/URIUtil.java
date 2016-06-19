@@ -306,7 +306,7 @@ public final class URIUtil{
         }
         // 判断url中是否含有?  XXX 有待严谨
         int index = uriString.indexOf(URIComponents.QUESTIONMARK);
-        return index == -1 ? uriString : uriString.substring(0, index);
+        return index == StringUtils.INDEX_NOT_FOUND ? uriString : uriString.substring(0, index);
     }
 
     /**
@@ -335,7 +335,7 @@ public final class URIUtil{
         }
         // 判断url中是否含有?  XXX 有待严谨
         int index = uriString.indexOf(URIComponents.QUESTIONMARK);
-        return index == -1 ? StringUtils.EMPTY : StringUtil.substring(uriString, index + 1);
+        return index == StringUtils.INDEX_NOT_FOUND ? StringUtils.EMPTY : StringUtil.substring(uriString, index + 1);
     }
 
     /**
