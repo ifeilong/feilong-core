@@ -1316,6 +1316,7 @@ public final class ConvertUtil{
      * Parse an incoming String of the form similar to an array initializer in the Java language into a <code>List</code> individual Strings
      * for each element, according to the following rules.
      * </p>
+     * 
      * <ul>
      * <li>The string is expected to be a comma-separated list of values.</li>
      * <li>The string may optionally have matching '{' and '}' delimiters around the list.</li>
@@ -1335,24 +1336,14 @@ public final class ConvertUtil{
      * 返回:
      * 
      * <pre class="code">
-     * [
-     * "5",
-     * "4",
-     * "8",
-     * "2",
-     * "8",
-     * "9",
-     * "5",
-     * "3",
-     * "a"
-     * ]
+     * ["5","4","8","2","8","9","5","3","a"]
      * </pre>
      * 
      * </blockquote>
      *
      * @param toBeConvertedValue
      *            the to be converted value
-     * @return the string[]
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
      * @see "org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String)"
      * @see #convert(Object, Class)
      * @since 1.4.0

@@ -23,6 +23,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validator;
+import com.feilong.core.bean.ConvertUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
+
 /**
  * The Class StringUtilTest.
  * 
@@ -117,5 +121,94 @@ public class StringUtilTemp{
             sb.append('a' + r.nextInt(26));
         }
         return sb.toString();
+    }
+
+    // [start]startsWith
+
+    /**
+     * 测试此字符串是否以指定的前缀 <code>prefix</code>开始.
+     * 
+     * @param value
+     *            value
+     * @param prefix
+     *            前缀
+     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true;否则返回 false.<br>
+     *         还要注意,如果参数是空字符串,或者等于此 String对象(用 equals(Object) 方法确定),则返回 true.
+     */
+    public static boolean startsWith(CharSequence value,String prefix){
+        return ConvertUtil.toString(value).startsWith(prefix);
+    }
+
+    // [end]
+
+    /**
+     * [截取]:从第一次出现字符串位置开始(包含)截取到最后.
+     * 
+     * <p>
+     * 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
+     * </p>
+     * 
+     * <pre class="code">
+     * substring("jinxin.feilong",".")  =.feilong
+     * </pre>
+     * 
+     * @param text
+     *            text
+     * @param beginString
+     *            beginString开始截取的字符串
+     * @return 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
+     * @see #substring(String, String, int)
+     */
+    public static String substring(final String text,String beginString){
+        return substring(text, beginString, 0);
+    }
+
+    /**
+     * [截取]:从第一次出现字符串位置开始(包含)截取到最后,shift表示向前或者向后挪动位数.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * StringUtil.substring("jinxin.feilong",".",0)     =   ".feilong"
+     * StringUtil.substring("jinxin.feilong",".",1)     =   "feilong"
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param text
+     *            text
+     * @param beginString
+     *            beginString
+     * @param shift
+     *            负数表示向前,整数表示向后,0表示依旧从自己的位置开始算起
+     * @return 如果 <code>text</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>beginString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 text.indexOf(beginString)==-1,返回 {@link StringUtils#EMPTY}<br>
+     *         如果{@code  beginIndex + shift < 0},抛出 {@link IllegalArgumentException}<br>
+     *         如果{@code  beginIndex + shift > text.length()},返回 {@link StringUtils#EMPTY}<br>
+     *         否则返回 text.substring(beginIndex + shift)<br>
+     * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
+     */
+    public static String substring(final String text,String beginString,int shift){
+        if (Validator.isNullOrEmpty(text) || Validator.isNullOrEmpty(beginString)){
+            return StringUtils.EMPTY;
+        }
+
+        int beginIndex = text.indexOf(beginString);
+        if (beginIndex == StringUtils.INDEX_NOT_FOUND){// 查不到指定的字符串
+            return StringUtils.EMPTY;
+        }
+        //****************************************************
+        int startIndex = beginIndex + shift;
+        Validate.isTrue(startIndex >= 0, Slf4jUtil.format("[{}] index[{}]+shift[{}]<0,text[{}]", beginString, beginIndex, shift, text));
+
+        int textLength = text.length();
+        if (startIndex > textLength){
+            LOGGER.warn("beginString [{}] index[{}]+shift[{}]>text[{}].length()[{}]", beginString, beginIndex, shift, text, textLength);
+            return StringUtils.EMPTY;
+        }
+        return text.substring(startIndex);// 索引从0开始
     }
 }

@@ -16,6 +16,7 @@
 package com.feilong.core.date;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
@@ -44,9 +45,9 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalForViewLong(){
-        LOGGER.debug(DateExtensionUtil.getIntervalForView(25841));
+        assertEquals("25秒841毫秒", DateExtensionUtil.getIntervalForView(25841));
+        assertEquals("0", DateExtensionUtil.getIntervalForView(0));
         LOGGER.debug(DurationFormatUtils.formatDurationWords(25841, true, true));
-        LOGGER.debug(DateExtensionUtil.getIntervalForView(0));
     }
 
     /**

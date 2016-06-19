@@ -168,7 +168,7 @@ public class NumberUtilTest{
 
         BigDecimal temp = b;
 
-        int j = 50;
+        int j = 5;
         int scale = 8;
         for (int i = 0; i < j; ++i){
             temp = NumberUtil.getDivideValue(a.add(temp), 2, scale);

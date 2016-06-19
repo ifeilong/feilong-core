@@ -17,8 +17,6 @@ package com.feilong.core.util;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Random;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,8 +47,8 @@ public class RandomUtilTest{
      */
     @Test
     public void createRandomWithLength(){
-        for (int i = 0, j = 100; i < j; ++i){
-            LOGGER.debug(RandomUtil.createRandomWithLength(2) + "");
+        for (int i = 0, j = 5; i < j; ++i){
+            LOGGER.debug("{} ==> {}", i, RandomUtil.createRandomWithLength(2));
         }
     }
 
@@ -68,17 +66,6 @@ public class RandomUtilTest{
     @Test(expected = IllegalArgumentException.class)
     public void testCreateRandomWithLength(){
         RandomUtil.createRandomWithLength(-1);
-    }
-
-    /**
-     * Creates the random with length2.
-     */
-    @Test
-    public void createRandomWithLength2(){
-        for (int i = 0, j = 100; i < j; ++i){
-            Random rand = new Random();
-            LOGGER.debug("" + rand.nextDouble());
-        }
     }
 
     /**

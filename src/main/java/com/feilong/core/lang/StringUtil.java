@@ -226,6 +226,22 @@ public final class StringUtil{
      * </ol>
      * </blockquote>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * LOGGER.debug(StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
+     * </pre>
+     * 
+     * 返回(注意和 {@link #replaceAll(CharSequence, String, String)} 的区别):
+     * 
+     * <pre class="code">
+     * SH1265,SH5951
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param content
      *            内容
      * @param target
@@ -280,6 +296,43 @@ public final class StringUtil{
      * <br>
      * and backslashes are used to escape literal characters in the replacement string. 
      * </p>
+     * </blockquote>
+     * 
+     * <h3>对于以下代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * //分隔字符串并添加引号.
+     * public void splitAndAddYinHao(){
+     *     String a = "12345,56789,1123456";
+     *     String[] aStrings = a.split(",");
+     *     StringBuilder sb = new StringBuilder();
+     *     int size = aStrings.length;
+     *     for (int i = 0; i < size; i++){
+     *         sb.append("'" + aStrings[i] + "'");
+     *         if (i != size - 1){
+     *             sb.append(",");
+     *         }
+     *     }
+     *     LOGGER.debug(sb.toString());
+     * }
+     * 
+     * </pre>
+     * 
+     * 可以重构成:
+     * 
+     * <pre class="code">
+     * StringUtil.replaceAll("12345,56789,1123456", "([0-9]+)", "'$1'")
+     * </pre>
+     * 
+     * 结果都是:
+     * 
+     * <pre class="code">
+     * '12345','56789','1123456'
+     * </pre>
+     * 
      * </blockquote>
      * 
      * @param content

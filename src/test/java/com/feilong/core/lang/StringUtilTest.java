@@ -22,18 +22,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
-import com.feilong.core.Validator;
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class StringUtilTest.
@@ -49,20 +45,23 @@ public class StringUtilTest{
     private static final String TEXT   = "jinxin.feilong";
 
     /**
+     * Compare to.
+     */
+    @Test
+    public void compareTo(){
+        LOGGER.debug("" + "8".compareTo("13"));
+        Integer parseInt = Integer.parseInt("8");
+        LOGGER.debug("" + parseInt.compareTo(Integer.parseInt("13")));
+        LOGGER.debug("" + "12".compareTo("13"));
+    }
+
+    /**
      * String add int.
      */
     @Test
     public void stringAddInt(){
         assertEquals("004", StringUtil.stringAddInt("002", 2));
         assertEquals("001202", StringUtil.stringAddInt("000002", 1200));
-    }
-
-    /**
-     * Test join null.
-     */
-    @Test
-    public void testJoinNull(){
-        // assertEquals("", "" + null);
     }
 
     /**
@@ -80,13 +79,16 @@ public class StringUtilTest{
      */
     @Test
     public void testReplace(){
-        String source = "jiiiiiinxin.feilong";
-        LOGGER.debug(StringUtil.replace(source, null) + "");
-
         Map<String, Object> valuesMap = new HashMap<String, Object>();
         valuesMap.put("today", DateUtil.toString(new Date(), DatePattern.COMMON_DATE));
         valuesMap.put("user", new User(1L));
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
+    }
+
+    @Test
+    public void testReplace22(){
+        String source = "jiiiiiinxin.feilong";
+        assertEquals(source, StringUtil.replace(source, null));
     }
 
     /**
@@ -114,23 +116,7 @@ public class StringUtilTest{
         assertEquals(template, StringUtil.replace(template, null));
 
     }
-    // [start]startsWith
 
-    /**
-     * 测试此字符串是否以指定的前缀 <code>prefix</code>开始.
-     * 
-     * @param value
-     *            value
-     * @param prefix
-     *            前缀
-     * @return 如果参数表示的字符序列是此字符串表示的字符序列的前缀,则返回 true;否则返回 false.<br>
-     *         还要注意,如果参数是空字符串,或者等于此 String对象(用 equals(Object) 方法确定),则返回 true.
-     */
-    public static boolean startsWith(CharSequence value,String prefix){
-        return ConvertUtil.toString(value).startsWith(prefix);
-    }
-
-    // [end]
     /**
      * Search count.
      */
@@ -145,17 +131,6 @@ public class StringUtilTest{
         assertEquals(1, StringUtils.countMatches("xin", "i"));
         assertEquals(2, StringUtils.countMatches("xiin", "i"));
         assertEquals(2, StringUtils.countMatches("xiiiin", "ii"));
-    }
-
-    /**
-     * Compare to.
-     */
-    @Test
-    public void compareTo(){
-        LOGGER.debug("" + "8".compareTo("13"));
-        Integer parseInt = Integer.parseInt("8");
-        LOGGER.debug("" + parseInt.compareTo(Integer.parseInt("13")));
-        LOGGER.debug("" + "12".compareTo("13"));
     }
 
     /**
@@ -174,9 +149,9 @@ public class StringUtilTest{
         assertEquals(false, StringUtils.containsIgnoreCase(null, ""));
         LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, null) + "");
         LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, "") + "");
-        LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, "feilong") + "");
-        LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, "feilong1") + "");
-        LOGGER.debug(StringUtils.containsIgnoreCase(TEXT, "feiLong") + "");
+        assertEquals(true, StringUtils.containsIgnoreCase(TEXT, "feilong"));
+        assertEquals(false, StringUtils.containsIgnoreCase(TEXT, "feilong1"));
+        assertEquals(true, StringUtils.containsIgnoreCase(TEXT, "feiLong"));
         assertEquals(true, StringUtils.containsIgnoreCase("jiiiiiinxin.feilong", "Xin"));
     }
 
@@ -224,27 +199,11 @@ public class StringUtilTest{
     @Test
     public void replaceAll(){
         assertEquals("黑色_黄色_蓝色", StringUtil.replaceAll("黑色/黄色/蓝色", "/", "_"));
-        LOGGER.debug(StringUtil.replaceAll("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
-        LOGGER.debug(StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
-        LOGGER.debug("SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'"));
-    }
 
-    /**
-     * 分隔字符串并添加引号.
-     */
-    @Test
-    public void splitAndAddYinHao(){
-        String a = "12345,56789,1123456";
-        String[] aStrings = a.split(",");
-        StringBuilder sb = new StringBuilder();
-        int size = aStrings.length;
-        for (int i = 0; i < size; i++){
-            sb.append("'" + aStrings[i] + "'");
-            if (i != size - 1){
-                sb.append(",");
-            }
-        }
-        LOGGER.debug(sb.toString());
+        assertEquals("'SH1265','SH5951'", StringUtil.replaceAll("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
+        assertEquals("'12345','56789','1123456'", StringUtil.replaceAll("12345,56789,1123456", "([0-9]+)", "'$1'"));
+        assertEquals("SH1265,SH5951", StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
+        assertEquals("'SH1265',SH5951", "SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'"));
     }
 
     /**
@@ -256,7 +215,7 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.substring(TEXT, TEXT.length(), 8));
         LOGGER.debug(StringUtil.substring(TEXT, TEXT.length() - 1, 8));
         LOGGER.debug(StringUtil.substring(TEXT, 1, 0));
-        LOGGER.debug(StringUtil.substring(TEXT, 0, 5));
+        assertEquals("jinxi", StringUtil.substring(TEXT, 0, 5));
         assertEquals(".f", StringUtil.substring(TEXT, 6, 2));
         LOGGER.debug(StringUtil.substring(TEXT, 6, 20));
     }
@@ -280,7 +239,6 @@ public class StringUtilTest{
     @Test
     public void testSubstringLast(){
         assertEquals("ilong", StringUtil.substringLast(TEXT, 5));
-        assertEquals(TEXT, StringUtil.substringLast(TEXT, -50));
     }
 
     /**
@@ -308,7 +266,7 @@ public class StringUtilTest{
      */
     @Test
     public void tokenizeToStringArray2(){
-        String str = "jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong;jin.xin  h hhaha ,lala;feilong";
+        String str = "jin.xin  h hhaha ,lala;feilong;jin.xin  h haha ,lala;feilong";
         String delimiters = "h";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters, false, false);
         LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
@@ -325,74 +283,4 @@ public class StringUtilTest{
         LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
     }
 
-    /**
-     * [截取]:从第一次出现字符串位置开始(包含)截取到最后.
-     * 
-     * <p>
-     * 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
-     * </p>
-     * 
-     * <pre class="code">
-     * substring("jinxin.feilong",".")  =.feilong
-     * </pre>
-     * 
-     * @param text
-     *            text
-     * @param beginString
-     *            beginString开始截取的字符串
-     * @return 调用{@link #substring(String, String, int)}, 默认 shift=0 包含当前 beginString.
-     * @see #substring(String, String, int)
-     */
-    public static String substring(final String text,String beginString){
-        return substring(text, beginString, 0);
-    }
-
-    /**
-     * [截取]:从第一次出现字符串位置开始(包含)截取到最后,shift表示向前或者向后挪动位数.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * StringUtil.substring("jinxin.feilong",".",0)     =   ".feilong"
-     * StringUtil.substring("jinxin.feilong",".",1)     =   "feilong"
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param text
-     *            text
-     * @param beginString
-     *            beginString
-     * @param shift
-     *            负数表示向前,整数表示向后,0表示依旧从自己的位置开始算起
-     * @return 如果 <code>text</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果 <code>beginString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果 text.indexOf(beginString)==-1,返回 {@link StringUtils#EMPTY}<br>
-     *         如果{@code  beginIndex + shift < 0},抛出 {@link IllegalArgumentException}<br>
-     *         如果{@code  beginIndex + shift > text.length()},返回 {@link StringUtils#EMPTY}<br>
-     *         否则返回 text.substring(beginIndex + shift)<br>
-     * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
-     */
-    public static String substring(final String text,String beginString,int shift){
-        if (Validator.isNullOrEmpty(text) || Validator.isNullOrEmpty(beginString)){
-            return StringUtils.EMPTY;
-        }
-
-        int beginIndex = text.indexOf(beginString);
-        if (beginIndex == StringUtils.INDEX_NOT_FOUND){// 查不到指定的字符串
-            return StringUtils.EMPTY;
-        }
-        //****************************************************
-        int startIndex = beginIndex + shift;
-        Validate.isTrue(startIndex >= 0, Slf4jUtil.format("[{}] index[{}]+shift[{}]<0,text[{}]", beginString, beginIndex, shift, text));
-
-        int textLength = text.length();
-        if (startIndex > textLength){
-            LOGGER.warn("beginString [{}] index[{}]+shift[{}]>text[{}].length()[{}]", beginString, beginIndex, shift, text, textLength);
-            return StringUtils.EMPTY;
-        }
-        return text.substring(startIndex);// 索引从0开始
-    }
 }

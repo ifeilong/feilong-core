@@ -72,17 +72,19 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testDateUtil(){
         Calendar calendar = Calendar.getInstance();
-
         calendar.set(2014, Calendar.DECEMBER, 29);
         Date time = calendar.getTime();
 
         assertEquals("2014-12-29", DateUtil.toString(time, "yyyy-MM-dd"));
-        try{
-            //jdk7- throw exception
-            assertEquals("2015-12-29", DateUtil.toString(time, "YYYY-MM-dd"));
-        }catch (Exception e){
-            LOGGER.error("", e);
-        }
+    }
+
+    /**
+     * TestDateUtilTest.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testDateUtilTest8(){
+        //jdk7- throw exception
+        assertEquals("2015-12-29", DateUtil.toString(NOW, "YYYY-MM-dd"));
     }
 
     /**

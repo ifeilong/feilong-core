@@ -147,7 +147,7 @@ public final class EnumUtil{
         E[] enumConstants = enumClass.getEnumConstants();
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants));
+            LOGGER.debug("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants, 0, 0));
         }
         for (E e : enumConstants){
             Object propertyValue = PropertyUtil.getProperty(e, propertyName);
