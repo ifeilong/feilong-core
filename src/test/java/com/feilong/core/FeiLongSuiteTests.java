@@ -34,6 +34,7 @@ import com.feilong.core.lang.StringUtilTest;
 import com.feilong.core.lang.reflect.FieldUtilTest;
 import com.feilong.core.net.ParamUtilTest;
 import com.feilong.core.text.MessageFormatUtilTest;
+import com.feilong.core.text.NumberFormatUtilTest;
 import com.feilong.core.util.RandomUtilTest;
 import com.feilong.core.util.RegexUtilTest;
 import com.feilong.core.util.ResourceBundleUtilTest;
@@ -67,6 +68,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 RegexUtilTest.class,
                 ResourceBundleUtilTest.class,
                 NumberUtilTest.class,
+                NumberFormatUtilTest.class,
                 MessageFormatUtilTest.class,
                 Slf4jUtilTest.class,
                 StringUtilTest.class,

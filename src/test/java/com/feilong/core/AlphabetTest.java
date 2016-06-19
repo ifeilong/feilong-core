@@ -16,8 +16,6 @@
 package com.feilong.core;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
@@ -37,31 +35,4 @@ public class AlphabetTest{
         assertEquals("23456789abcdefghijkmnpqrstuvwxyz", Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
     }
 
-    /**
-     * Test1.
-     */
-    @Test
-    public void test1(){
-        assertSame(Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE, Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
-    }
-
-    /**
-     * Test2.
-     */
-    @Test
-    public void test2(){
-        assertNotSame(
-                        new StringBuffer() //
-                                        .append("23456789") //
-                                        .append("abcdefghijk") //
-                                        .append("mn") //
-                                        .append("pqrstuvwxyz") //
-                                        .toString(),
-                        new StringBuffer() //
-                                        .append("23456789") //
-                                        .append("abcdefghijk") //
-                                        .append("mn") //
-                                        .append("pqrstuvwxyz") //
-                                        .toString());
-    }
 }

@@ -23,10 +23,13 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 
 /**
- * 
+ * The Class BaseParameterizedTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <I>
+ *            the generic type
  * @param <E>
+ *            the element type
  * @since 1.6.4
  */
 @RunWith(Parameterized.class)
@@ -47,9 +50,13 @@ public abstract class BaseParameterizedTest<I, E> {
     public E expectedValue;
 
     /**
+     * To list.
+     *
      * @param valids
+     *            the valids
      * @param invalids
-     * @return
+     *            the invalids
+     * @return the list
      * @since 1.6.4
      */
     protected static List<Object[]> toList(Object[] valids,Object[] invalids){
