@@ -34,7 +34,7 @@ import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 
 /**
- * {@link String}工具类,可以 查询,截取,format,转成16进制码.
+ * {@link String}工具类,可以查询,截取,format.
  * 
  * <h3>分隔(split)</h3>
  * 

@@ -1561,11 +1561,11 @@ public final class CollectionsUtil{
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, List<O>> map = MapUtil.newLinkedHashMap(objectCollection.size());
-        for (O o : objectCollection){
-            if (null != includePredicate && !includePredicate.evaluate(o)){
+        for (O obj : objectCollection){
+            if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
             }
-            MapUtil.putMultiValue(map, PropertyUtil.<T> getProperty(o, propertyName), o);
+            MapUtil.putMultiValue(map, PropertyUtil.<T> getProperty(obj, propertyName), obj);
         }
         return map;
     }
@@ -1770,11 +1770,11 @@ public final class CollectionsUtil{
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, Integer> map = new LinkedHashMap<T, Integer>();
-        for (O o : objectCollection){
-            if (null != includePredicate && !includePredicate.evaluate(o)){
+        for (O obj : objectCollection){
+            if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
             }
-            MapUtil.putSumValue(map, PropertyUtil.<T> getProperty(o, propertyName), 1);
+            MapUtil.putSumValue(map, PropertyUtil.<T> getProperty(obj, propertyName), 1);
         }
         return map;
     }

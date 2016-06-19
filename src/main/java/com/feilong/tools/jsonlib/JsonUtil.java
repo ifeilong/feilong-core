@@ -132,6 +132,8 @@ public final class JsonUtil{
     /** The Constant SENSITIVE_WORDS_JSONVALUE_PROCESSOR. */
     private static final SensitiveWordsJsonValueProcessor SENSITIVE_WORDS_JSONVALUE_PROCESSOR = new SensitiveWordsJsonValueProcessor();
 
+    private static final String[]                         SENSITIVE_WORDS_PROPERTY_NAMES      = { "password", "key" };
+
     /** Don't let anyone instantiate this class. */
     private JsonUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -144,13 +146,11 @@ public final class JsonUtil{
      * 设置日期转换格式.
      */
     static{
-        // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
-        DateMorpher dateMorpher = new DateMorpher(
-                        new String[] { DatePattern.COMMON_DATE_AND_TIME, DatePattern.COMMON_TIME, DatePattern.COMMON_DATE });
-
         // 注册器
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
-        morpherRegistry.registerMorpher(dateMorpher);
+        // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
+        morpherRegistry.registerMorpher(new DateMorpher(
+                        new String[] { DatePattern.COMMON_DATE_AND_TIME, DatePattern.COMMON_TIME, DatePattern.COMMON_DATE }));
 
         DEFAULT_JSON_CONFIG = getDefaultJsonConfig();
     }
@@ -564,8 +564,7 @@ public final class JsonUtil{
      * @since 1.5.3
      */
     private static void registerDefaultJsonValueProcessor(JsonConfig jsonConfig){
-        String[] sensitiveWordsPropertyNames = { "password", "key" };
-        for (String propertyName : sensitiveWordsPropertyNames){
+        for (String propertyName : SENSITIVE_WORDS_PROPERTY_NAMES){
             jsonConfig.registerJsonValueProcessor(propertyName, SENSITIVE_WORDS_JSONVALUE_PROCESSOR);
         }
     }

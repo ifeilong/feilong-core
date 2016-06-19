@@ -44,7 +44,7 @@ public final class ObjectUtil{
     }
 
     /**
-     * 判断指定的对象 <code>object</code>是不是boolean类型数据.
+     * 判断指定的对象 <code>object</code>是不是 {@link Boolean} 类型数据.
      * 
      * @param object
      *            对象
@@ -56,7 +56,7 @@ public final class ObjectUtil{
     }
 
     /**
-     * 判断指定的对象 <code>object</code>是不是Integer类型.
+     * 判断指定的对象 <code>object</code>是不是{@link Integer}类型.
      * 
      * @param object
      *            对象
