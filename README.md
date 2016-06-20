@@ -4,7 +4,6 @@ Reduce development, Release ideas (减少开发,释放思想)
 ![build](https://img.shields.io/wercker/ci/wercker/docs.svg "build") 
 ![doc](https://img.shields.io/badge/docs-78.1%25-green.svg "doc") 
 ![tests](https://img.shields.io/badge/tests-275%20%2F%20275-green.svg "tests") 
-[![Codacy grade](https://img.shields.io/codacy/grade/e27821fb6289410b8f58338c7e0bc686.svg?maxAge=2592000?style=flat-square)](A)
 
 
 #Welcome to feilong-core
