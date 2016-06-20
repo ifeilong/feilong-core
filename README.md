@@ -35,7 +35,7 @@ Reduce development, Release ideas (减少开发,释放思想)
 1. 基于`commons-lang`,`commons-collections`,`commons-beanutils`...等工具包,并且基于这些包进行了扩展;
 
 
-# Maven使用配置
+# :dragon: Maven使用配置
 
 ```XML
 
@@ -111,14 +111,14 @@ Reduce development, Release ideas (减少开发,释放思想)
 ```
 
 
-#说明
+# :memo: 说明
 
 1. 基于`Apache2` 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. 基于`maven3.3`构建;
 1. [require-jdk-version](https://github.com/venusdrogon/feilong-core/wiki/require-jdk-version)
 
 
-# About
+# :panda_face: About
 
 如果您对feilong core 有任何建议和批评,可以使用下面的联系方式：
 
