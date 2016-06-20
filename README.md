@@ -1,17 +1,12 @@
 feilong core
 ================
 
-Reduce development, Release ideas (减少开发,释放思想)
-
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![build](https://img.shields.io/wercker/ci/wercker/docs.svg "build") 
 ![doc](https://img.shields.io/badge/docs-78.1%25-green.svg "doc") 
 ![tests](https://img.shields.io/badge/tests-275%20%2F%20275-green.svg "tests") 
 
-
-#Welcome to feilong-core
-
-`核心jar,所有feilong-platform的基础`
+`核心jar,所有feilong platform的基础` Reduce development, Release ideas (减少开发,释放思想)
 
 # 简介:
 
@@ -20,7 +15,6 @@ Reduce development, Release ideas (减少开发,释放思想)
 1. 可以帮助你的代码更简短精炼，更重要是它增强了代码的可读性
 1. 可以简化你的代码，使它易写、易读、易于维护。它能提高你的工作效率，让你从大量重复的底层代码中脱身。
 1. 基于`commons-lang`,`commons-collections`,`commons-beanutils`...等工具包,并且基于这些包进行了扩展;
-
 
 # :dragon: Maven使用配置
 
