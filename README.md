@@ -2,26 +2,6 @@ Reduce development, Release ideas (减少开发,释放思想)
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-            .--.
-           /    \
-          ## a  a
-          (   '._)
-           |'-- |
-         _.\___/_    __feilong__
-       ."\> \Y/|<'.  '._.-'
-      /  \ \_\/ /  '-' /
-      | --'\_/|/ |   _/
-      |___.-' |  |`'`
-        |     |  |
-        |    / './
-       /__./` | |
-          \   | |
-           \  | |
-           ;  | |
-           /  | |
-          |___\_.\_
-          `-"--'---'
-
 #Welcome to feilong-core
 
 `核心jar,所有feilong-platform的基础`
