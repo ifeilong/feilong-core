@@ -2,7 +2,7 @@ feilong core
 ================
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-![build](https://img.shields.io/wercker/ci/wercker/docs.svg "build") 
+![build](https://img.shields.io/jenkins/s/https/jenkins.qa.ubuntu.com/precise-desktop-amd64_default.svg "build") 
 ![doc](https://img.shields.io/badge/docs-78.1%25-green.svg "doc") 
 ![tests](https://img.shields.io/badge/tests-275%20%2F%20275-green.svg "tests") 
 
