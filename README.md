@@ -1,6 +1,7 @@
 Reduce development, Release ideas (减少开发,释放思想)
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![doc](https://img.shields.io/badge/docs-78.1%25-green.svg)]
 
 #Welcome to feilong-core
 
