@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.test.UserInfo;
 import com.feilong.tools.jsonlib.JsonUtil;
@@ -39,6 +40,16 @@ public class PropertyUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtilTest.class);
+
+    @Test(expected = NullPointerException.class)
+    public void testBeanUtilTest(){
+        PropertyUtil.copyProperties(null, new Person());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBeanUtilTest1(){
+        PropertyUtil.copyProperties(new Person(), null);
+    }
 
     /**
      * Test copy properties1.

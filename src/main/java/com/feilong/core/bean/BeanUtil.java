@@ -387,8 +387,8 @@ public final class BeanUtil{
      */
     //XXX add excludePropertyNames support
     public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){
-        Validate.notNull(toObj, "No destination bean/toObj specified");
-        Validate.notNull(fromObj, "No origin bean/fromObj specified");
+        Validate.notNull(toObj, "toObj [destination bean] not specified!");
+        Validate.notNull(fromObj, "fromObj [origin bean] not specified!");
 
         if (Validator.isNullOrEmpty(includePropertyNames)){
             try{
@@ -482,19 +482,20 @@ public final class BeanUtil{
      * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中,即使这个bean没有实现 {@link Cloneable}接口 .
      * </p>
      * 
-     * <p>
-     * {@link BeanUtils#cloneBean(Object)}在源码上看是调用了getPropertyUtils().copyProperties(newBean, bean);<br>
-     * 最后实际上还是<b>复制的引用 ,无法实现深clone</b>
-     * </p>
+     * <h3>注意:</h3>
+     * <blockquote>
      * 
-     * <p>
-     * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话(即自定义类),可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用,<br>
-     * 是为那些本身没有实现clone方法的类准备的 
-     * </p>
-     * 
-     * <p>
-     * 由于内部实现是通过 {@link java.lang.Class#newInstance()}来构造新的对象,所以需要被clone的对象必须存在默认无参构造函数,否则会出现 异常 {@link java.lang.InstantiationException}
-     * </p>
+     * <ol>
+     * <li>是为那些本身没有实现clone方法的类准备的</li>
+     * <li>在源码上看是调用了 <b>getPropertyUtils().copyProperties(newBean, bean)</b>;最后实际上还是<b>复制的引用,无法实现深clone</b><br>
+     * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话(即自定义类),可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用
+     * </li>
+     * <li>由于内部实现是通过 {@link java.lang.Class#newInstance() Class.newInstance()}来构造新的对象,所以需要被clone的对象<b>必须存在默认无参构造函数</b>,否则会出现异常
+     * {@link java.lang.InstantiationException InstantiationException}</li>
+     * <li>目前无法clone list,总是返回empty list,参见
+     * <a href="https://issues.apache.org/jira/browse/BEANUTILS-471">BeanUtils.cloneBean with List is broken</a></li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>深度clone:</h3>
      * 

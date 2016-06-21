@@ -167,8 +167,8 @@ public final class PropertyUtil{
      * @since 1.4.1
      */
     public static void copyProperties(Object toObj,Object fromObj,String...includePropertyNames){
-        Validate.notNull(toObj, "No destination bean/toObj specified");
-        Validate.notNull(fromObj, "No origin bean/fromObj specified");
+        Validate.notNull(toObj, "toObj [destination bean] not specified!");
+        Validate.notNull(fromObj, "fromObj [origin bean] not specified!");
 
         if (Validator.isNullOrEmpty(includePropertyNames)){
             try{

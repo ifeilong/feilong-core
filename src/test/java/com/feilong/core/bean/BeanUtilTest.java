@@ -15,10 +15,14 @@
  */
 package com.feilong.core.bean;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -31,6 +35,7 @@ import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +47,7 @@ import com.feilong.core.bean.command.Address;
 import com.feilong.core.bean.command.Customer;
 import com.feilong.core.bean.command.Member;
 import com.feilong.core.bean.command.MemberAddress;
+import com.feilong.core.bean.command.OrderLine;
 import com.feilong.core.bean.command.SalesOrder;
 import com.feilong.core.bean.command.SalesOrderDto;
 import com.feilong.core.date.DateUtil;
@@ -72,7 +78,14 @@ public class BeanUtilTest{
         salesOrder.setCode("258415-002");
         salesOrder.setId(5L);
         salesOrder.setPrice(new BigDecimal(566));
+        salesOrder.setMember(buildMember());
+    }
 
+    /**
+     * @return
+     * @since 1.7.2
+     */
+    private Member buildMember(){
         Member member = new Member();
         member.setCode("222222");
         long memberId = 888L;
@@ -99,8 +112,7 @@ public class BeanUtilTest{
 
         MemberAddress[] memberAddresses = { memberAddress1, memberAddress2 };
         member.setMemberAddresses(memberAddresses);
-
-        salesOrder.setMember(member);
+        return member;
     }
 
     /**
@@ -147,7 +159,6 @@ public class BeanUtilTest{
      */
     @Test
     public void demoDynaBeans() throws Exception{
-
         LOGGER.debug(StringUtils.center(" demoDynaBeans ", 40, "="));
 
         // creating a DynaBean  
@@ -186,10 +197,14 @@ public class BeanUtilTest{
     /**
      * TestBeanUtilTest.
      */
-    @Test()
-    //@Test(expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testBeanUtilTest(){
-        BeanUtil.copyProperties(null, null);
+        BeanUtil.copyProperties(null, new Person());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBeanUtilTest1(){
+        BeanUtil.copyProperties(new Person(), null);
     }
 
     /**
@@ -345,11 +360,41 @@ public class BeanUtilTest{
         LOGGER.debug(JsonUtil.format(map));
     }
 
-    /**
-     * Clone bean.
-     */
     @Test
-    public void cloneBean(){
-        LOGGER.debug(JsonUtil.format(BeanUtil.cloneBean(salesOrder)));
+    public void cloneBean1(){
+        SalesOrder newSalesOrder = salesOrder;
+        newSalesOrder.setPrice(ConvertUtil.toBigDecimal(599));
+        assertEquals(ConvertUtil.toBigDecimal(599), salesOrder.getPrice());
+    }
+
+    @Test
+    public void cloneBean2(){
+        OrderLine orderLine = new OrderLine();
+        orderLine.setCount(8);
+        orderLine.setSalePrice(ConvertUtil.toBigDecimal(599));
+
+        List<OrderLine> list = ConvertUtil.toList(orderLine);
+
+        //*******************************************************************
+
+        List<OrderLine> list1 = list;
+        // List<OrderLine> cloneList = BeanUtil.cloneBean(list);
+
+        String format = JsonUtil.format(list, ConvertUtil.toArray("MSRP"), 0, 0);
+        LOGGER.debug("the param format:{}", format);
+
+        List<OrderLine> serializelist = (List<OrderLine>) SerializationUtils.clone((Serializable) list);
+
+        //******************************************************************
+        for (OrderLine perOrderLine : list){
+            perOrderLine.setSalePrice(ConvertUtil.toBigDecimal(200));
+        }
+        //******************************************************************
+        List<OrderLine> jsonList = JsonUtil.toList(format, OrderLine.class);
+
+        assertEquals(ConvertUtil.toBigDecimal(200), list1.get(0).getSalePrice());
+        //assertEquals(ConvertUtil.toBigDecimal(599), cloneList.get(0).getSalePrice());
+        assertEquals(ConvertUtil.toBigDecimal(599), serializelist.get(0).getSalePrice());
+        assertEquals(ConvertUtil.toBigDecimal(599), jsonList.get(0).getSalePrice());
     }
 }
