@@ -30,7 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.HttpMethodType;
 import com.feilong.test.MyBean;
-import com.feilong.test.Order;
 import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
@@ -217,34 +216,6 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         map.put("aa", map1);
         map.put("aaa", map1);
         LOGGER.debug(JsonUtil.toJSON(map).toString(4, 4));
-    }
-
-    /**
-     * To map1.
-     */
-    @Test
-    public void toMap1(){
-
-        LOGGER.debug("status_deliveried".length() + "");
-
-        List<Order> list = new ArrayList<Order>();
-
-        Order a = new Order();
-        a.setCode("137214341849121");
-
-        a.setMemberID("325465");
-        a.setMerchant_order_code("216888");
-        Order a1 = new Order();
-        a1.setCode("137214341888888");
-
-        a1.setMemberID("3240088");
-        a1.setMerchant_order_code("288888");
-
-        list.add(a);
-        list.add(a1);
-
-        LOGGER.debug(JsonUtil.format(list));
-
     }
 
     /**
