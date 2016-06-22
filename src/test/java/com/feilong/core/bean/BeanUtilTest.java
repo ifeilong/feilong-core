@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -378,7 +379,17 @@ public class BeanUtilTest{
         //*******************************************************************
 
         List<OrderLine> list1 = list;
+        List<OrderLine> copyList = new ArrayList<>();
+
+        for (OrderLine orderLineTemp : list){
+            copyList.add(BeanUtil.cloneBean(orderLineTemp));
+        }
+        //PropertyUtil.copyProperties(copyList, list);
+        //************************************************************
+
         // List<OrderLine> cloneList = BeanUtil.cloneBean(list);
+
+        //************************************************************
 
         String format = JsonUtil.format(list, ConvertUtil.toArray("MSRP"), 0, 0);
         LOGGER.debug("the param format:{}", format);
@@ -396,5 +407,6 @@ public class BeanUtilTest{
         //assertEquals(ConvertUtil.toBigDecimal(599), cloneList.get(0).getSalePrice());
         assertEquals(ConvertUtil.toBigDecimal(599), serializelist.get(0).getSalePrice());
         assertEquals(ConvertUtil.toBigDecimal(599), jsonList.get(0).getSalePrice());
+        assertEquals(ConvertUtil.toBigDecimal(599), copyList.get(0).getSalePrice());
     }
 }
