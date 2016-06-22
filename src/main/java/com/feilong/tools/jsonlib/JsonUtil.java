@@ -132,6 +132,7 @@ public final class JsonUtil{
     /** The Constant SENSITIVE_WORDS_JSONVALUE_PROCESSOR. */
     private static final SensitiveWordsJsonValueProcessor SENSITIVE_WORDS_JSONVALUE_PROCESSOR = new SensitiveWordsJsonValueProcessor();
 
+    /** The Constant SENSITIVE_WORDS_PROPERTY_NAMES. */
     private static final String[]                         SENSITIVE_WORDS_PROPERTY_NAMES      = { "password", "key" };
 
     /** Don't let anyone instantiate this class. */
@@ -545,13 +546,32 @@ public final class JsonUtil{
         JsonConfig useJsonConfig = ObjectUtils.defaultIfNull(jsonConfig, DEFAULT_JSON_CONFIG);
         registerDefaultJsonValueProcessor(useJsonConfig);
 
-        if (JSONUtils.isArray(obj) || // obj instanceof Collection || obj instanceof Object[]
-                        obj instanceof Enum || // obj.getClass().isEnum()这么写 null会报错// object' is an Enum. Use JSONArray instead
-                        obj instanceof Iterator){
+        if (isNeedConvertToJSONArray(obj)){
             Object arrayJsonObject = obj instanceof Iterator ? IteratorUtils.toList((Iterator<?>) obj) : obj;
             return toJSONArray(arrayJsonObject, useJsonConfig);
         }
         return toJSONObject(obj, useJsonConfig);
+    }
+
+    /**
+     * 是否需要转成 JSONArray类型.
+     *
+     * @param obj
+     *            the obj
+     * @return true, if is array
+     * @see net.sf.json.JSONArray#_fromJSONTokener(net.sf.json.util.JSONTokener, JsonConfig)
+     * @since 1.7.2
+     */
+    private static boolean isNeedConvertToJSONArray(Object obj){
+        if (obj instanceof String){
+            String str = (String) obj;
+            if (str.startsWith("[") && str.endsWith("]")){// [] 格式的字符串 
+                return true;
+            }
+        }
+        return JSONUtils.isArray(obj) || //obj.getClass().isArray() || obj instanceof Collection || obj instanceof Object[]
+                        obj instanceof Enum || // obj.getClass().isEnum()这么写 null会报错// object' is an Enum. Use JSONArray instead
+                        obj instanceof Iterator;
     }
 
     // [end]

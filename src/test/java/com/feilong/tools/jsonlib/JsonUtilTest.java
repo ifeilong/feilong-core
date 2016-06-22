@@ -173,6 +173,12 @@ public class JsonUtilTest extends BaseJsonTest{
         LOGGER.debug(JsonUtil.format(user));
     }
 
+    @Test
+    public void formatArray2(){
+        String json = "[{'name':'get'},{'name':'set'}]";
+        LOGGER.debug(JsonUtil.format(json));
+    }
+
     /**
      * Name1.
      */
