@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -41,6 +42,7 @@ import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -1233,7 +1235,7 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            the values
      * @param targetType
-     *            the target type
+     *            要被转换的目标类型
      * @return 如果 <code>toBeConvertedValue</code> 是null,那么返回null<br>
      *         如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
      *         否则调用 {@link ConvertUtils#convert(String[], Class)}
@@ -1245,7 +1247,6 @@ public final class ConvertUtil{
     public static <T> T[] toArray(String[] toBeConvertedValue,Class<T> targetType){
         return null == toBeConvertedValue ? null : (T[]) ConvertUtils.convert(toBeConvertedValue, targetType);
     }
-
     //********************************************************************************
 
     /**
@@ -1406,12 +1407,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将<code>toBeConvertedValue</code>转成指定<code>targetType</code>类型的对象.
-     * 
-     * <p>
-     * 如果<code>targetType</code>的转换器没有注册,那么传入的value原样返回.<br>
-     * 如果转换不了,会使用默认值
-     * </p>
+     * 将 <code>toBeConvertedValue</code> 转成指定 <code>targetType</code> 类型的对象.
      * 
      * <h3>示例:</h3>
      * 
@@ -1425,7 +1421,19 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>toBeConvertedValue.getClass().isArray()</code> 或者 {@link Collection}</h3>
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ol>
+     * 
+     * <li>如果<code>targetType</code>的转换器没有注册,<b>那么传入的value原样返回</b>,<br>
+     * 比如<code>ConvertUtil.convert("zh_CN", Locale.class)</code> 由于找不到converter,那么返回"zh_CN".
+     * </li>
+     * 
+     * <li>如果转换不了,会使用默认值</li>
+     * 
+     * <li>如果传的 <code>toBeConvertedValue</code>是 <code>toBeConvertedValue.getClass().isArray()</code> 或者 {@link Collection}
      * <blockquote>
      * 
      * <dl>
@@ -1444,13 +1452,16 @@ public final class ConvertUtil{
      * </dl>
      * 
      * </blockquote>
+     * </li>
+     * </ol>
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param toBeConvertedValue
-     *            the value
+     *            需要被转换的对象/值
      * @param targetType
-     *            the target type
+     *            要被转换的目标类型
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
      *         如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
      *         否则返回 {@link org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)}
@@ -1464,4 +1475,39 @@ public final class ConvertUtil{
         return null == toBeConvertedValue ? null : (T) ConvertUtils.convert(toBeConvertedValue, targetType);
     }
 
+    /**
+     * 转成 {@link Locale}.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLocale(null)       = null
+     * ConvertUtil.toLocale("zh_CN")    = Locale.CHINA
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param locale
+     *            可以是null,字符串或者直接的 {@link Locale}对象
+     * @return 如果 <code>locale</code> 是null,返回 null<br>
+     *         如果 <code>locale instanceof Locale</code>,返回 <code>(Locale) locale</code><br>
+     *         如果 <code>locale instanceof String</code>,返回 {@link LocaleUtils#toLocale(String)}<br>
+     *         其他情况,抛出 {@link UnsupportedOperationException}
+     * @see org.apache.commons.lang3.LocaleUtils#toLocale(String)
+     * @since 1.7.2
+     */
+    public static Locale toLocale(Object locale){
+        if (null == locale){
+            return null;
+        }
+        if (locale instanceof Locale){
+            return (Locale) locale;
+        }
+        if (locale instanceof String){
+            return LocaleUtils.toLocale((String) locale);
+        }
+        throw new UnsupportedOperationException("locale2 not support!");
+    }
 }

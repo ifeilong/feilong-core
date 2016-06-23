@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -565,13 +566,21 @@ public class ConvertUtilTest{
         }
     }
 
-    /**
-     * TestConvertUtilsTest.
-     */
     @Test
-    public void testConvertUtilsTest(){
-        System.out.println(ConvertUtils.convert(888.000f));
-        System.out.println(ConvertUtils.convert(888.000f, BigDecimal.class));
+    public void testConvertUtilsTest22(){
+        LOGGER.debug(ConvertUtils.convert(888.000f));
+        LOGGER.debug("{}", ConvertUtils.convert(888.000f, BigDecimal.class));
+    }
+
+    @Test
+    public void testConvert5(){
+        assertEquals("zh_CN", ConvertUtil.convert("zh_CN", Locale.class));
+    }
+
+    @Test
+    public void testToLocale(){
+        assertEquals(null, ConvertUtil.toLocale(null));
+        assertEquals(Locale.CHINA, ConvertUtil.toLocale("zh_CN"));
     }
 
 }
