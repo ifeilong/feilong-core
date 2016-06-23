@@ -15,7 +15,10 @@
  */
 package com.feilong.core.lang;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
+
+import com.feilong.core.Validator;
 
 /**
  * {@link Object} 工具类.
@@ -41,6 +44,36 @@ public final class ObjectUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * 如果 <code>object</code> 是null或者empty,返回 默认值 <code>defaultValue</code>.
+     * 
+     * <p>
+     * {@link ObjectUtils#defaultIfNull(Object, Object)} 只判断null的情况
+     * </p>
+     *
+     * <pre>
+     * ObjectUtil.defaultIfNullOrEmpty(null, null)      = null
+     * ObjectUtil.defaultIfNullOrEmpty(null, "")        = ""
+     * ObjectUtil.defaultIfNullOrEmpty(null, "zz")      = "zz"
+     * ObjectUtil.defaultIfNullOrEmpty("abc", *)        = "abc"
+     * ObjectUtil.defaultIfNullOrEmpty(Boolean.TRUE, *) = Boolean.TRUE
+     * </pre>
+     *
+     * @param <T>
+     *            the type of the object
+     * @param object
+     *            the {@code Object} to test, may be {@code null}
+     * @param defaultValue
+     *            the default value to return, may be {@code null}
+     * @return 如果 <code>object</code> 是null或者empty,返回 <code>defaultValue</code><br>
+     *         否则返回 <code>object</code>
+     * @see org.apache.commons.lang3.ObjectUtils#defaultIfNull(Object, Object)
+     * @since 1.7.2
+     */
+    public static <T> T defaultIfNullOrEmpty(final T object,final T defaultValue){
+        return Validator.isNotNullOrEmpty(object) ? object : defaultValue;
     }
 
     /**

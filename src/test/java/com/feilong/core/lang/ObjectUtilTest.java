@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,16 @@ public class ObjectUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTest.class);
+
+    @Test
+    public void testDefaultIfNullOrEmpty(){
+        assertEquals(1, ObjectUtil.defaultIfNullOrEmpty(new ArrayList<>(), 1));
+
+        assertEquals("feilong", ObjectUtil.defaultIfNullOrEmpty("  ", "feilong"));
+        assertEquals("  ", ObjectUtils.defaultIfNull("  ", "feilong"));
+
+        assertEquals("fl", ObjectUtil.defaultIfNullOrEmpty("fl", "feilong"));
+    }
 
     /**
      * Checks if is array.
