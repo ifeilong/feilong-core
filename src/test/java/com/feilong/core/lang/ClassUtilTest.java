@@ -19,6 +19,8 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -61,6 +63,12 @@ public class ClassUtilTest{
         assertEquals(true, ClassUtil.isInstance("1234", CharSequence.class));
         assertEquals(true, new User() instanceof Comparable);
         assertEquals(true, "1234" instanceof CharSequence);
+    }
+
+    @Test
+    public void testIsInstance22(){
+        Object object = 1;
+        assertEquals(true, object instanceof Serializable);
     }
 
     /**
