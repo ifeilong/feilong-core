@@ -17,7 +17,6 @@ package com.feilong.core.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang3.Validate;
@@ -180,18 +179,4 @@ public final class PropertiesUtil{
         }
     }
     // [end]
-
-    /**
-     * 转换成map.
-     * 
-     * @param properties
-     *            the properties
-     * @return 如果 <code>properties</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
-     * @deprecated pls use {@link com.feilong.core.bean.ConvertUtil#toMap(Properties)}
-     */
-    @Deprecated
-    public static Map<String, String> toMap(Properties properties){
-        return com.feilong.core.bean.ConvertUtil.toMap(properties);
-    }
 }
