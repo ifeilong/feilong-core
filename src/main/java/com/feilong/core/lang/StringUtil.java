@@ -310,7 +310,7 @@ public final class StringUtil{
      *     String[] aStrings = a.split(",");
      *     StringBuilder sb = new StringBuilder();
      *     int size = aStrings.length;
-     *     for (int i = 0; i < size; i++){
+     *     for (int i = 0; i {@code <} size; i++){
      *         sb.append("'" + aStrings[i] + "'");
      *         if (i != size - 1){
      *             sb.append(",");
