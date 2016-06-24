@@ -27,6 +27,18 @@ import org.junit.Test;
  */
 public class AlphabetTest{
 
+    /** 二进制字符 The binary alphabet { 0, 1 }. */
+    public static final String BINARY      = "01";
+
+    /** 八进制The octal alphabet { 0, 1, 2, 3, 4, 5, 6, 7 }. */
+    public static final String OCTAL       = "01234567";
+
+    /** 十六进制The hexadecimal alphabet { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F }. */
+    public static final String HEXADECIMAL = "0123456789ABCDEF";
+
+    /** The base-64 alphabet (64 characters). */
+    public static final String BASE64      = Alphabet.DECIMAL_AND_LETTERS + "+/";
+
     /**
      * Test.
      */

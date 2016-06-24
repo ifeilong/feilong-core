@@ -24,17 +24,8 @@ package com.feilong.core;
  */
 public final class Alphabet{
 
-    /** 二进制字符 The binary alphabet { 0, 1 }. */
-    public static final String BINARY                                        = "01";
-
-    /** 八进制The octal alphabet { 0, 1, 2, 3, 4, 5, 6, 7 }. */
-    public static final String OCTAL                                         = "01234567";
-
     /** 数字The decimal alphabet { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }. */
     public static final String DECIMAL                                       = "0123456789";
-
-    /** 十六进制The hexadecimal alphabet { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F }. */
-    public static final String HEXADECIMAL                                   = "0123456789ABCDEF";
 
     /** 小写字母The lowercase alphabet { a, b, c, ..., z }. */
     public static final String LOWERCASE                                     = "abcdefghijklmnopqrstuvwxyz";
@@ -48,9 +39,6 @@ public final class Alphabet{
      * @see org.apache.commons.lang3.RandomStringUtils#randomAlphanumeric(int)
      */
     public static final String DECIMAL_AND_LETTERS                           = UPPERCASE + LOWERCASE + DECIMAL;
-
-    /** The base-64 alphabet (64 characters). */
-    public static final String BASE64                                        = DECIMAL_AND_LETTERS + "+/";
 
     /**
      * 数字和小写的字母,剔除一些难以辨别的数字和字母.
