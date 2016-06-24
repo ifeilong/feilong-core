@@ -1107,12 +1107,46 @@ public final class ConvertUtil{
     /**
      * 数组转成 ({@link java.util.ArrayList ArrayList}),此方法返回的list可以进行add等操作.
      * 
-     * <p>
-     * 注意 :如果直接使用{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list,没有实现 {@link java.util.Collection#add(Object)
-     * Collection#add(Object)}等方法,如果使用返回的list执行list.add("c");操作的话会导致异常!<br>
+     * <h3>特别适合:</h3>
      * 
-     * 因此,使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回
+     * <blockquote>
+     * 
+     * <p>
+     * 如果你要通过以下方式来构造list:
      * </p>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("feilong1");
+     * list.add("feilong2");
+     * list.add("feilong2");
+     * list.add("feilong3");
+     * 
+     * </pre>
+     * 
+     * 此时你可以使用:
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <String>} list = ConvertUtil.toList("feilong1", "feilong2", "feilong2", "feilong3");
+     * </pre>
+     * 
+     * <p>
+     * 代码会更简洁
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>注意 :</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 如果直接使用{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list没有实现 {@link java.util.Collection#add(Object)
+     * Collection#add(Object)}等方法,执行<code>list.add("c")</code>;操作的话会导致异常!<br>
+     * 
+     * 而本方法使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回,可以执行正常的list操作
+     * </p>
+     * </blockquote>
      * 
      * @param <T>
      *            the generic type

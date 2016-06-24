@@ -374,8 +374,7 @@ public final class CollectionsUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValue
      *            the value
-     * @return 在list中,查找 第一个 属性 <code>propertyName</code> 值是 指定值 <code>value</code>的 索引位置<br>
-     *         如果 list是null 或者 empty,返回 -1<br>
+     * @return 如果 list是null 或者 empty,返回 -1<br>
      *         如果指定属性<code>propertyName</code>的值 <code>value</code>在 list 查找不到也返回 -1<br>
      * @see org.apache.commons.collections4.ListUtils#indexOf(List, Predicate)
      * @see com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate
@@ -631,10 +630,6 @@ public final class CollectionsUtil{
     /**
      * 去重.
      * 
-     * <p>
-     * 如果原 <code>collection</code> 是有序的,那么会保留原 <code>collection</code>元素顺序
-     * </p>
-     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
@@ -654,6 +649,14 @@ public final class CollectionsUtil{
      * ["feilong1","feilong2","feilong3"]
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果原 <code>collection</code> 是有序的,那么会保留原 <code>collection</code>元素顺序</li>
+     * <li>原 <code>collection</code>不变</li>
+     * </ol>
      * </blockquote>
      * 
      * <h3>效率问题？contains的本质就是遍历.</h3>
