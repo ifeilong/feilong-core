@@ -66,7 +66,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 DateUtilIsLeapYearParameterizedTest.class,
                 EnumUtilTest.class,
                 FieldUtilTest.class,
-                HttpMethodTypeTest.class,
+                //HttpMethodTypeTest.class,
                 ObjectUtilTest.class,
                 ParamUtilTest.class,
                 PropertyUtilTest.class,

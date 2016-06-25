@@ -19,11 +19,13 @@ import com.feilong.core.lang.EnumUtil;
 
 /**
  * http请求方法,目前仅支持通用的get和post 其他不支持.
- * 
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.0
  * @see "org.springframework.http.HttpMethod"
+ * @since 1.7.3 move from feilong-core
+ * @deprecated 目前只做测试使用
  */
+@Deprecated
 public enum HttpMethodType{
 
     /** get方式. */
