@@ -32,7 +32,7 @@ public class FeiLongVersionTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(FeiLongVersionTest.class);
 
     /**
-     * Test method for {@link com.feilong.core.FeiLongVersion#getVersion()}.
+     * Test get version.
      */
     @Test
     public void testGetVersion(){

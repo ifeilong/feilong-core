@@ -380,7 +380,7 @@ public final class MapUtil{
      */
     public static <K, V> void putAllIfNotNull(final Map<K, V> map,Map<? extends K, ? extends V> m){
         if (null != map && null != m){
-            map.putAll(m);//// m如果是null 会报错
+            map.putAll(m);// m 如果是null 会报错
         }
     }
 

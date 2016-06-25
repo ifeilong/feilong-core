@@ -16,7 +16,6 @@
 package com.feilong.core.util;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -119,25 +118,26 @@ public final class RegexUtil{
             LOGGER.debug("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
             return Collections.emptyMap();
         }
+        int groupCount = matcher.groupCount();
 
-        Map<Integer, String> groupMap = new LinkedHashMap<Integer, String>();
+        Map<Integer, String> map = MapUtil.newLinkedHashMap(groupCount + 1);
         LOGGER.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
-        // 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
-        groupMap.put(0, matcher.group());
+
+        map.put(0, matcher.group());// 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
 
         //匹配的索引
         LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
 
-        for (int i = 1, j = matcher.groupCount(); i <= j; ++i){
+        for (int i = 1; i <= groupCount; ++i){
             //匹配的索引
             LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
-            groupMap.put(i, matcher.group(i));//groupValue
+            map.put(i, matcher.group(i));//groupValue
         }
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("groupMap:{}", JsonUtil.format(groupMap));
+            LOGGER.debug("groupMap:{}", JsonUtil.format(map));
         }
-        return groupMap;
+        return map;
     }
 
     /**
