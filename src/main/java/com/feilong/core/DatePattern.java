@@ -279,7 +279,7 @@ public final class DatePattern{
      */
     public static final String COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND = "MM-dd HH:mm";
 
-    // *******************************************************************
+    // *****************************************************************************************************
 
     /**
      * 时间戳, 一般用于拼接文件名称<span style="color:green"><code>{@value}</code></span>.
@@ -299,7 +299,7 @@ public final class DatePattern{
      */
     public static final String TIMESTAMP_WITH_MILLISECOND                   = "yyyyMMddHHmmssSSS";
 
-    //*******************************************************************************
+    //******************************************************************************************************
 
     /**
      * 年月 带水平线,一般用于分类日志,将众多日志按月分类 <span style="color:green"><code>{@value}</code></span>.

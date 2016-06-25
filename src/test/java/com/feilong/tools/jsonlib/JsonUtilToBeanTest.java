@@ -98,8 +98,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toJSON(){
-        HttpMethodType httpMethodType = HttpMethodType.GET;
-        LOGGER.debug(JsonUtil.toJSON(httpMethodType).toString(4, 4));
+        LOGGER.debug(JsonUtil.toJSON(HttpMethodType.GET).toString(4, 4));
     }
 
     /**
