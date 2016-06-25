@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.lang.Enum} 工具类.
@@ -156,7 +155,7 @@ public final class EnumUtil{
             }
         }
         String messagePattern = "can not found the enum constants,enumClass:[{}],propertyName:[{}],value:[{}],ignoreCase:[{}]";
-        throw new BeanUtilException(Slf4jUtil.format(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
+        throw new BeanUtilException(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase);
     }
 
     /**

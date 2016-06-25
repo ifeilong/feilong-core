@@ -44,23 +44,6 @@ public final class BeanUtilException extends RuntimeException{
 
     /**
      * Instantiates a new bean util exception.
-     */
-    public BeanUtilException(){
-        super();
-    }
-
-    /**
-     * Instantiates a new bean util exception.
-     * 
-     * @param message
-     *            the message
-     */
-    public BeanUtilException(String message){
-        super(message);
-    }
-
-    /**
-     * Instantiates a new bean util exception.
      * 
      * @param messagePattern
      *            the message pattern
