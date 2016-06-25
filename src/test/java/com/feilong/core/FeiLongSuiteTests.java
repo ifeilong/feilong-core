@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.bean.BeanUtilTest;
 import com.feilong.core.bean.ConvertUtilTest;
 import com.feilong.core.bean.PropertyUtilTest;
 import com.feilong.core.date.CalendarUtilTest;
@@ -55,7 +54,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
 @SuiteClasses({
                 AlphabetTest.class,
                 ArrayUtilTest.class,
-                BeanUtilTest.class,
+                //BeanUtilTest.class,
                 CalendarUtilTest.class,
                 CharsetTypeTest.class,
                 ClassUtilTest.class,
