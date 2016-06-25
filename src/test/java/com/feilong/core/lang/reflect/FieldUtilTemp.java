@@ -26,7 +26,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.HttpMethodType;
+import com.feilong.core.HttpMethodTestType;
 import com.feilong.core.TimeInterval;
 import com.feilong.core.Validator;
 import com.feilong.core.lang.ClassUtil;
@@ -48,7 +48,7 @@ public class FieldUtilTemp{
      */
     @Test
     public void testGetStaticProperty1(){
-        assertEquals(HttpMethodType.POST, getStaticFieldValue(HttpMethodType.class.getName(), "POST"));
+        assertEquals(HttpMethodTestType.POST, getStaticFieldValue(HttpMethodTestType.class.getName(), "POST"));
         assertEquals(TimeInterval.SECONDS_PER_WEEK, getStaticFieldValue(TimeInterval.class.getName(), "SECONDS_PER_WEEK"));
     }
 
@@ -65,7 +65,7 @@ public class FieldUtilTemp{
      */
     @Test(expected = NullPointerException.class)
     public void testGetStaticProperty3(){
-        getStaticFieldValue(HttpMethodType.class.getName(), null);
+        getStaticFieldValue(HttpMethodTestType.class.getName(), null);
     }
 
     /**
@@ -73,7 +73,7 @@ public class FieldUtilTemp{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetStaticProperty4(){
-        getStaticFieldValue(HttpMethodType.class.getName(), "  ");
+        getStaticFieldValue(HttpMethodTestType.class.getName(), "  ");
     }
 
     /**

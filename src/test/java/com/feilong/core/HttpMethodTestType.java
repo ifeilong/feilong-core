@@ -23,10 +23,8 @@ import com.feilong.core.lang.EnumUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.http.HttpMethod"
  * @since 1.7.3 move from feilong-core
- * @deprecated 目前只做测试使用
  */
-@Deprecated
-public enum HttpMethodType{
+public enum HttpMethodTestType{
 
     /** get方式. */
     GET("get"),
@@ -45,7 +43,7 @@ public enum HttpMethodType{
      * @param method
      *            the method
      */
-    private HttpMethodType(String method){
+    private HttpMethodTestType(String method){
         this.method = method;
     }
 
@@ -58,9 +56,9 @@ public enum HttpMethodType{
      * @see EnumUtil#getEnumByPropertyValueIgnoreCase(Class, String, Object)
      * @since 1.0.8
      */
-    public static HttpMethodType getByMethodValueIgnoreCase(String methodValue){
+    public static HttpMethodTestType getByMethodValueIgnoreCase(String methodValue){
         String propertyName = "method";
-        return EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, propertyName, methodValue);
+        return EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, propertyName, methodValue);
     }
 
     /**

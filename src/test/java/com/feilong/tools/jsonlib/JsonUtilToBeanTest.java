@@ -28,7 +28,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.HttpMethodType;
+import com.feilong.core.HttpMethodTestType;
 import com.feilong.test.MyBean;
 import com.feilong.test.Person;
 import com.feilong.test.User;
@@ -98,7 +98,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toJSON(){
-        LOGGER.debug(JsonUtil.toJSON(HttpMethodType.GET).toString(4, 4));
+        LOGGER.debug(JsonUtil.toJSON(HttpMethodTestType.GET).toString(4, 4));
     }
 
     /**

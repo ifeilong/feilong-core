@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.HttpMethodType;
+import com.feilong.core.HttpMethodTestType;
 import com.feilong.core.bean.BeanUtilException;
 
 /**
@@ -35,7 +35,7 @@ public class EnumUtilTest{
      */
     @Test
     public void testGetEnum(){
-        assertEquals(HttpMethodType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "get"));
+        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "get"));
     }
 
     /**
@@ -43,14 +43,14 @@ public class EnumUtilTest{
      */
     @Test
     public void testGetHttpMethodType(){
-        assertEquals(HttpMethodType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "post"));
-        assertEquals(HttpMethodType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "pOst"));
-        assertEquals(HttpMethodType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "POST"));
-        assertEquals(HttpMethodType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "posT"));
-        assertEquals(HttpMethodType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "get"));
-        assertEquals(HttpMethodType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "gEt"));
-        assertEquals(HttpMethodType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "geT"));
-        assertEquals(HttpMethodType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "GET"));
+        assertEquals(HttpMethodTestType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "post"));
+        assertEquals(HttpMethodTestType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "pOst"));
+        assertEquals(HttpMethodTestType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "POST"));
+        assertEquals(HttpMethodTestType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "posT"));
+        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "get"));
+        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "gEt"));
+        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "geT"));
+        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "GET"));
 
     }
 
@@ -59,7 +59,7 @@ public class EnumUtilTest{
      */
     @Test(expected = BeanUtilException.class)
     public void testGetHttpMethodType1(){
-        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "post111"));
+        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "post111"));
     }
 
     /**
@@ -67,7 +67,7 @@ public class EnumUtilTest{
      */
     @Test(expected = BeanUtilException.class)
     public void testGetHttpMethodType2(){
-        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", ""));
+        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", ""));
     }
 
     /**
@@ -75,7 +75,7 @@ public class EnumUtilTest{
      */
     @Test(expected = BeanUtilException.class)
     public void testGetHttpMethodType3(){
-        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", null));
+        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", null));
     }
 
     /**
@@ -83,6 +83,6 @@ public class EnumUtilTest{
      */
     @Test(expected = BeanUtilException.class)
     public void testGetHttpMethodType4(){
-        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method2222", null));
+        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method2222", null));
     }
 }
