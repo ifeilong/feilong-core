@@ -15,12 +15,16 @@
  */
 package com.feilong.core.util;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -73,8 +77,8 @@ public class CollectionsUtilTest{
         };
 
         List<String> removeList = CollectionsUtil.remove(list, "feilong2");
-        assertArrayEquals(ConvertUtil.toArray("xinge", "feilong1"), ConvertUtil.toArray(removeList, String.class));
-        assertArrayEquals(ConvertUtil.toArray("xinge", "feilong1", "feilong2", "feilong2"), ConvertUtil.toArray(list, String.class));
+        assertThat(removeList, hasItems("xinge", "feilong1"));
+        assertThat(list, hasItems("xinge", "feilong1", "feilong2", "feilong2"));
     }
 
     /**
@@ -94,7 +98,7 @@ public class CollectionsUtilTest{
         List<String> list = ConvertUtil.toList("xinge", "feilong1");
         boolean addAllIgnoreNull = CollectionsUtil.addAllIgnoreNull(list, ConvertUtil.toList("xinge", "feilong1"));
         assertEquals(true, addAllIgnoreNull);
-        assertSame(4, list.size());
+        assertThat(list, hasItems("xinge", "feilong1", "xinge", "feilong1"));
     }
 
     /**
@@ -127,7 +131,9 @@ public class CollectionsUtilTest{
 
         Transformer<String, Object> nullTransformer = TransformerUtils.nullTransformer();
         List<Object> collect = CollectionsUtil.collect(list, nullTransformer);
-        LOGGER.debug("list:{}", JsonUtil.format(collect, 0, 0));
+
+        Object[] objects = { null, null, null, null };
+        assertThat(collect, hasItems(objects));
 
     }
 
@@ -136,9 +142,8 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testCollect1(){
-        List<Long> list = null;
-        List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
-        LOGGER.debug("list:{}", JsonUtil.format(collect1, 0, 0));
+        List<String> collect1 = CollectionsUtil.collect((List<Long>) null, TransformerUtils.stringValueTransformer());
+        assertEquals(Collections.emptyList(), collect1);
     }
 
     /**
@@ -148,7 +153,7 @@ public class CollectionsUtilTest{
     public void testCollect5(){
         List<Long> list = new ArrayList<Long>();
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
-        LOGGER.debug("list:{}", JsonUtil.format(collect1, 0, 0));
+        assertEquals(Collections.emptyList(), collect1);
     }
 
     /**
@@ -163,7 +168,8 @@ public class CollectionsUtilTest{
 
         Transformer<User, String> invokerTransformer = TransformerUtils.invokerTransformer("getName");
         List<String> collect1 = CollectionsUtil.collect(list, invokerTransformer);
-        LOGGER.debug("list:{}", JsonUtil.format(collect1, 0, 0));
+
+        assertThat(collect1, hasItems("张飞", "关羽", "刘备"));
     }
 
     /**
@@ -177,7 +183,7 @@ public class CollectionsUtilTest{
         list.add(new User("刘备", 25));
 
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.constantTransformer("jintian"));
-        LOGGER.debug("list:{}", JsonUtil.format(collect1, 0, 0));
+        assertThat(collect1, hasItems("jintian", "jintian", "jintian"));
     }
 
     /**
@@ -185,14 +191,17 @@ public class CollectionsUtilTest{
      */
     @Test
     public void removeDuplicate(){
-        List<String> list = new ArrayList<String>();
-        list.add("feilong1");
-        list.add("feilong2");
-        list.add("feilong2");
-        list.add("feilong3");
+        List<String> list = ConvertUtil.toList("feilong1", "feilong2", "feilong2", "feilong3");
 
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeDuplicate(null)));
+        List<String> removeDuplicate = CollectionsUtil.removeDuplicate(list);
+
+        assertSame(3, removeDuplicate.size());
+        assertThat(removeDuplicate, hasItems("feilong1", "feilong2", "feilong3"));
+
+        assertSame(4, list.size());
+        assertThat(list, hasItems("feilong1", "feilong2", "feilong2", "feilong3"));
+
+        assertEquals(Collections.emptyList(), CollectionsUtil.removeDuplicate(null));
     }
 
     /**
@@ -200,11 +209,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroupCount(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 20));
-        list.add(new User("关羽", 30));
-        list.add(new User("刘备", 40));
-        list.add(new User("赵云", 50));
+        List<User> list = ConvertUtil.toList(//
+                        new User("张飞", 20),
+                        new User("关羽", 30),
+                        new User("刘备", 40),
+                        new User("赵云", 50));
 
         Map<String, Integer> map = CollectionsUtil.groupCount(list, "name", new Predicate<User>(){
 
@@ -213,7 +222,8 @@ public class CollectionsUtilTest{
                 return user.getAge() > 30;
             }
         });
-        LOGGER.debug(JsonUtil.format(map));
+
+        assertThat(map, allOf(hasEntry("刘备", 1), hasEntry("赵云", 1)));
     }
 
     /**
@@ -221,14 +231,14 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroupCount1(){
-        List<User> testList = new ArrayList<User>();
-        testList.add(new User("张飞"));
-        testList.add(new User("关羽"));
-        testList.add(new User("刘备"));
-        testList.add(new User("刘备"));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞"));
+        list.add(new User("关羽"));
+        list.add(new User("刘备"));
+        list.add(new User("刘备"));
 
-        Map<String, Integer> map = CollectionsUtil.groupCount(testList, "name");
-        LOGGER.debug(JsonUtil.format(map));
+        Map<String, Integer> map = CollectionsUtil.groupCount(list, "name");
+        assertThat(map, allOf(hasEntry("刘备", 2), hasEntry("张飞", 1), hasEntry("关羽", 1)));
     }
 
     /**
@@ -242,6 +252,9 @@ public class CollectionsUtilTest{
         list.add(new User("刘备", 25));
 
         assertEquals(0, CollectionsUtil.indexOf(list, "name", "张飞"));
+        assertEquals(1, CollectionsUtil.indexOf(list, "age", 24));
+        assertEquals(-1, CollectionsUtil.indexOf(null, "age", 24));
+        assertEquals(-1, CollectionsUtil.indexOf(new ArrayList<User>(), "age", 24));
     }
 
     /**

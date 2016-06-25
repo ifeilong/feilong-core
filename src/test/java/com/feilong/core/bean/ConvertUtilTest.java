@@ -15,6 +15,10 @@
  */
 package com.feilong.core.bean;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -46,7 +50,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -448,19 +451,22 @@ public class ConvertUtilTest{
                         Pair.of("关羽", "青龙偃月刀"),
                         Pair.of("赵云", "龙胆枪"),
                         Pair.of("刘备", "双股剑"));
-        LOGGER.debug(JsonUtil.format(map));
+
+        assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
 
     }
 
     @Test
     public void toMap5(){
         Map<String, String> map = ConvertUtil.toMap("张飞", "丈八蛇矛");
-        LOGGER.debug(JsonUtil.format(map));
+        assertThat(map, allOf(notNullValue(), hasEntry("张飞", "丈八蛇矛")));
+
     }
 
     @Test
     public void toMap6(){
-        System.out.println(ConvertUtil.toMap(null, "丈八蛇矛"));//TODO:remove
+        Map<String, String> map = ConvertUtil.toMap(null, "丈八蛇矛");
+        assertThat(map, allOf(notNullValue(), hasEntry(null, "丈八蛇矛")));
     }
 
     @Test
@@ -471,7 +477,8 @@ public class ConvertUtilTest{
                                         new SimpleEntry<>("关羽", "青龙偃月刀"),
                                         new SimpleEntry<>("赵云", "龙胆枪"),
                                         new SimpleEntry<>("刘备", "双股剑")));
-        LOGGER.debug(JsonUtil.format(map));
+        assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
+
     }
 
     @Test
@@ -481,7 +488,8 @@ public class ConvertUtilTest{
                         new SimpleEntry<>("关羽", "青龙偃月刀"),
                         new SimpleEntry<>("赵云", "龙胆枪"),
                         new SimpleEntry<>("刘备", "双股剑"));
-        LOGGER.debug(JsonUtil.format(map));
+        assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
+
     }
 
     /**
@@ -491,7 +499,7 @@ public class ConvertUtilTest{
     public void toList2(){
         Set<String> set = new HashSet<String>();
         Collections.addAll(set, "a", "a", "b", "b");
-        assertThat(ConvertUtil.toList(set), CoreMatchers.hasItems("a", "b", "b", "b"));
+        assertThat(ConvertUtil.toList(set), hasItems("a", "b", "b", "b"));
     }
 
     /**

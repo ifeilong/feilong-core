@@ -35,6 +35,7 @@ import com.feilong.core.lang.reflect.FieldUtilTest;
 import com.feilong.core.net.ParamUtilTest;
 import com.feilong.core.text.MessageFormatUtilTest;
 import com.feilong.core.text.NumberFormatUtilTest;
+import com.feilong.core.util.CollectionsUtilTest;
 import com.feilong.core.util.RandomUtilTest;
 import com.feilong.core.util.RegexUtilTest;
 import com.feilong.core.util.ResourceBundleUtilTest;
@@ -54,6 +55,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 CalendarUtilTest.class,
                 CharsetTypeTest.class,
                 ClassUtilTest.class,
+                CollectionsUtilTest.class,
                 ConvertUtilTest.class,
                 DateUtilTest.class,
                 DateExtensionUtilTest.class,
