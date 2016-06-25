@@ -719,7 +719,7 @@ public final class ConvertUtil{
      * @param connector
      *            the connector
      * @param isJoinNullOrEmpty
-     *            the is join null or empty
+     *            the is join null或者empty
      * @return the string
      * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
      * @see org.apache.commons.lang3.StringUtils#join(Object[], String)

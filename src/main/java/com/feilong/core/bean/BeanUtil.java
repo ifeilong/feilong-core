@@ -375,7 +375,7 @@ public final class BeanUtil{
      *            原始对象
      * @param includePropertyNames
      *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
-     *            如果 是null or empty ,将会调用 {@link BeanUtils#copyProperties(Object, Object)}
+     *            如果是null或者empty ,将会调用 {@link BeanUtils#copyProperties(Object, Object)}
      * @throws NullPointerException
      *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
      * @throws BeanUtilException

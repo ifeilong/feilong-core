@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.bean.ConvertUtil.toLong;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.hasEntry;
@@ -206,7 +207,7 @@ public class ConvertUtilTest{
     @Test
     public void testToLong(){
         assertEquals((Object) 1L, ConvertUtil.toLong("1"));
-        assertEquals(null, ConvertUtil.toLong(null));
+        assertEquals(null, toLong(null));
         LOGGER.debug("" + ConvertUtil.toLong(new String[] { "1", "2", "3" }));
         LOGGER.debug("" + ConvertUtil.toLong(new String[] { "1", null, "2", "3" }));
         LOGGER.debug("" + ConvertUtil.toLong("1,2,3"));
@@ -388,10 +389,8 @@ public class ConvertUtilTest{
      * To array.
      */
     @Test
-    public void toArray(){
-        List<String> list = new ArrayList<String>();
-        list.add("xinge");
-        list.add("feilong");
+    public void testToArray0(){
+        List<String> list = ConvertUtil.toList("xinge", "feilong");
         assertArrayEquals(new String[] { "xinge", "feilong" }, ConvertUtil.toArray(list, String.class));
     }
 
@@ -399,7 +398,7 @@ public class ConvertUtilTest{
      * To array2.
      */
     @Test
-    public void toArray2(){
+    public void testToArray(){
         User user1 = new User();
         user1.setId(1L);
         User user2 = new User();
@@ -408,8 +407,11 @@ public class ConvertUtilTest{
 
     }
 
+    /**
+     * Test to array1.
+     */
     @Test
-    public void toArray3(){
+    public void testToArray1(){
         assertArrayEquals(new String[] { "xinge", "feilong" }, ConvertUtil.toArray("xinge", "feilong"));
     }
 
@@ -426,7 +428,7 @@ public class ConvertUtilTest{
      * To list.
      */
     @Test
-    public void toList1(){
+    public void testToList(){
         List<String> list = new ArrayList<String>();
         Collections.addAll(list, "a", "b");
         Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);
@@ -438,13 +440,19 @@ public class ConvertUtilTest{
         assertEquals(Collections.emptyList(), ConvertUtil.toList(enumeration));
     }
 
+    /**
+     * Test to enumeration.
+     */
     @Test
     public void testToEnumeration(){
         assertEquals(Collections.emptyEnumeration(), ConvertUtil.toEnumeration(null));
     }
 
+    /**
+     * Test to map.
+     */
     @Test
-    public void toMap(){
+    public void testToMap(){
         Map<String, String> map = ConvertUtil.toMap(
 
                         Pair.of("张飞", "丈八蛇矛"),
@@ -456,21 +464,30 @@ public class ConvertUtilTest{
 
     }
 
+    /**
+     * Test to map1.
+     */
     @Test
-    public void toMap5(){
+    public void testToMap1(){
         Map<String, String> map = ConvertUtil.toMap("张飞", "丈八蛇矛");
         assertThat(map, allOf(notNullValue(), hasEntry("张飞", "丈八蛇矛")));
 
     }
 
+    /**
+     * Test to map2.
+     */
     @Test
-    public void toMap6(){
+    public void testToMap2(){
         Map<String, String> map = ConvertUtil.toMap(null, "丈八蛇矛");
         assertThat(map, allOf(notNullValue(), hasEntry(null, "丈八蛇矛")));
     }
 
+    /**
+     * Test to map3.
+     */
     @Test
-    public void toMap1(){
+    public void testToMap3(){
         Map<String, String> map = ConvertUtil.toMap(
                         ConvertUtil.toList(
                                         new SimpleEntry<>("张飞", "丈八蛇矛"),
@@ -481,8 +498,11 @@ public class ConvertUtilTest{
 
     }
 
+    /**
+     * Test to map4.
+     */
     @Test
-    public void toMap2(){
+    public void testToMap4(){
         Map<String, String> map = ConvertUtil.toMap(
                         new SimpleEntry<>("张飞", "丈八蛇矛"),
                         new SimpleEntry<>("关羽", "青龙偃月刀"),
@@ -496,7 +516,7 @@ public class ConvertUtilTest{
      * To list.
      */
     @Test
-    public void toList2(){
+    public void testToList2(){
         Set<String> set = new HashSet<String>();
         Collections.addAll(set, "a", "a", "b", "b");
         assertThat(ConvertUtil.toList(set), hasItems("a", "b", "b", "b"));
@@ -506,7 +526,7 @@ public class ConvertUtilTest{
      * To list3.
      */
     @Test
-    public void toList3(){
+    public void testToList3(){
         LOGGER.debug("{}", ConvertUtil.toList(ConvertUtil.toList("a", "a", "b", "b")));
     }
 
@@ -514,7 +534,7 @@ public class ConvertUtilTest{
      * To list.
      */
     @Test
-    public void toList(){
+    public void testToList4(){
         User user1 = new User();
         user1.setId(1L);
         User user2 = new User();
@@ -574,17 +594,26 @@ public class ConvertUtilTest{
         }
     }
 
+    /**
+     * Test convert utils test22.
+     */
     @Test
     public void testConvertUtilsTest22(){
         LOGGER.debug(ConvertUtils.convert(888.000f));
         LOGGER.debug("{}", ConvertUtils.convert(888.000f, BigDecimal.class));
     }
 
+    /**
+     * Test convert5.
+     */
     @Test
     public void testConvert5(){
         assertEquals("zh_CN", ConvertUtil.convert("zh_CN", Locale.class));
     }
 
+    /**
+     * Test to locale.
+     */
     @Test
     public void testToLocale(){
         assertEquals(null, ConvertUtil.toLocale(null));

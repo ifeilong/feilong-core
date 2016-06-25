@@ -15,12 +15,17 @@
  */
 package com.feilong.core.bean;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.junit.Assert.assertThat;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,11 +46,17 @@ public class PropertyUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtilTest.class);
 
+    /**
+     * Test bean util test.
+     */
     @Test(expected = NullPointerException.class)
     public void testBeanUtilTest(){
         PropertyUtil.copyProperties(null, new Person());
     }
 
+    /**
+     * Test bean util test1.
+     */
     @Test(expected = NullPointerException.class)
     public void testBeanUtilTest1(){
         PropertyUtil.copyProperties(new Person(), null);
@@ -60,48 +71,55 @@ public class PropertyUtilTest{
         oldUser.setId(5L);
         oldUser.setMoney(new BigDecimal(500000));
         oldUser.setDate(new Date());
-        String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
-        oldUser.setNickName(nickName);
+        oldUser.setNickName(ConvertUtil.toArray("feilong", "飞天奔月", "venusdrogon"));
 
         User newUser = new User();
+        PropertyUtil.copyProperties(newUser, oldUser, "date", "money", "nickName");
 
-        String[] strs = { "date", "money", "nickName" };
-        PropertyUtil.copyProperties(newUser, oldUser, strs);
+        assertThat(newUser, allOf(hasProperty("money", equalTo(new BigDecimal(500000)))));
         LOGGER.debug(JsonUtil.format(newUser));
     }
 
+    /**
+     * Test set property.
+     */
     @Test
     public void testSetProperty(){
-        User newUser = new User();
-        PropertyUtil.setProperty(newUser, "name", "feilong");
-        LOGGER.debug(JsonUtil.format(newUser));
+        User user = new User();
+        PropertyUtil.setProperty(user, "name", "feilong");
+        assertThat(user, hasProperty("name", equalTo("feilong")));
     }
 
+    /**
+     * Test set property1.
+     */
     @Test(expected = BeanUtilException.class)
     public void testSetProperty1(){
-        User newUser = new User();
-        PropertyUtil.setProperty(newUser, "name1", "feilong");
-        LOGGER.debug(JsonUtil.format(newUser));
+        User user = new User();
+        PropertyUtil.setProperty(user, "name1", "feilong");
     }
 
     /**
      * Describe.
      */
     @Test
-    public void describe(){
+    public void testDescribe(){
         User user = new User();
         user.setId(5L);
-        Date now = new Date();
-        user.setDate(now);
+        user.setDate(new Date());
 
-        List<User> list = new ArrayList<User>();
-        list.add(user);
+        List<User> list = ConvertUtil.toList(user);
 
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(new BigDecimal(5L))));
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe("123456")));
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(list)));
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(new HashMap())));
+    }
+
+    @Test
+    @Ignore
+    public void testDescribe1(){
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(User.class)));
     }
 
@@ -112,25 +130,23 @@ public class PropertyUtilTest{
     public void testGetProperty(){
         User user = new User();
         user.setId(5L);
-        Date now = new Date();
-        user.setDate(now);
+        user.setDate(new Date());
 
-        List<User> list = new ArrayList<User>();
-        list.add(user);
-        list.add(user);
-        list.add(user);
+        List<User> list = ConvertUtil.toList(user, user, user);
 
         Object property = PropertyUtil.getProperty(list, "[0].id");
         LOGGER.debug("" + PropertyUtil.getProperty(list, "[0].id"));
         LOGGER.debug("map:{}", JsonUtil.format(property));
     }
 
+    /**
+     * Test find value of type.
+     */
     @Test
     public void testFindValueOfType(){
         User user = new User();
         user.setId(5L);
-        Date now = new Date();
-        user.setDate(now);
+        user.setDate(new Date());
 
         user.getUserInfo().setAge(28);
 

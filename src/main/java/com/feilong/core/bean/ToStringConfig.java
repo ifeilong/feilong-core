@@ -69,7 +69,7 @@ public final class ToStringConfig implements Serializable{
      * @param connector
      *            the connector
      * @param isJoinNullOrEmpty
-     *            the is join null or empty
+     *            the is join null或者empty
      * @since 1.4.0
      */
     public ToStringConfig(String connector, boolean isJoinNullOrEmpty){

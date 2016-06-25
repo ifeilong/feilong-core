@@ -83,41 +83,33 @@ public final class PropertyUtil{
      * <li>如果 <code>fromObj</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,会抛出异常,see
-     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
+     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) copyProperties} Line2078</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
+     * <li>这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,这个在使用时要小心,特别是对于属性为自定义类的情况 .</li>
      * </ol>
      * </blockquote>
-     * 
      * 
      * <h3>使用示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * User oldUser = new User();
      * oldUser.setId(5L);
      * oldUser.setMoney(new BigDecimal(500000));
      * oldUser.setDate(new Date());
-     * String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
-     * oldUser.setNickName(nickName);
+     * oldUser.setNickName(ConvertUtil.toArray("feilong", "飞天奔月", "venusdrogon"));
      * 
      * User newUser = new User();
-     * 
-     * String[] strs = { "date", "money", "nickName" };
-     * PropertyUtil.copyProperties(newUser, oldUser, strs);
-     * 
-     * LOGGER.info(JsonUtil.format(newUser));
+     * PropertyUtil.copyProperties(newUser, oldUser, "date", "money", "nickName");
+     * LOGGER.debug(JsonUtil.format(newUser));
      * </pre>
      * 
      * 返回 :
      * 
      * <pre class="code">
      * {
-        "userAddresseList": [],
-        "userAddresses": [],
         "date": "2015-09-06 13:27:43",
-        "password": "",
         "id": 0,
         "nickName":         [
             "feilong",
@@ -127,9 +119,7 @@ public final class PropertyUtil{
         "age": 0,
         "name": "feilong",
         "money": 500000,
-        "attrMap": null,
-        "userInfo": {"age": 0},
-        "loves": []
+        "userInfo": {"age": 0}
     }
      * </pre>
      * 
@@ -139,26 +129,22 @@ public final class PropertyUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>{@link BeanUtils#copyProperties(Object, Object)} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,而
-     * {@link PropertyUtils#copyProperties(Object, Object)}不支持这个功能,但是速度会更快一些.</li>
+     * <li>{@link BeanUtils#copyProperties(Object, Object) BeanUtils} 提供类型转换功能,即发现两个JavaBean的同名属性为不同类型时,在支持的数据类型范围内进行转换,<br>
+     * 而 {@link PropertyUtils#copyProperties(Object, Object) PropertyUtils}不支持这个功能,但是速度会更快一些.</li>
      * <li>commons-beanutils v1.9.0以前的版本 BeanUtils不允许对象的属性值为 null,PropertyUtils可以拷贝属性值 null的对象.<br>
      * (<b>注:</b>commons-beanutils v1.9.0+修复了这个情况,BeanUtilsBean.copyProperties() no longer throws a ConversionException for null properties
-     * of certain data types),具体信息,可以参阅commons-beanutils的
+     * of certain data types),具体参阅commons-beanutils的
      * <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a></li>
      * </ul>
      * </blockquote>
      * 
-     * <p>
-     * 注意:这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,这个在使用时要小心,特别是对于属性为自定义类的情况 .
-     * </p>
-     *
      * @param toObj
      *            目标对象
      * @param fromObj
      *            原始对象
      * @param includePropertyNames
      *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
-     *            如果 是null or empty ,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}
+     *            如果是null或者empty,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}
      * @see #setProperty(Object, String, Object)
      * @see BeanUtil#copyProperties(Object, Object, String...)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
@@ -260,7 +246,7 @@ public final class PropertyUtil{
      * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
      * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
-     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)} Line2078</li>
+     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) setSimpleProperty} Line2078</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * </ol>
      * </blockquote>
