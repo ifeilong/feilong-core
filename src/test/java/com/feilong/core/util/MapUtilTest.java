@@ -15,17 +15,29 @@
  */
 package com.feilong.core.util;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
 import java.util.AbstractMap.SimpleEntry;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 import com.feilong.test.User;
@@ -42,16 +54,17 @@ public class MapUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
     /**
-     * Test to single value map2.
+     * Test to single value map.
      */
     @Test
-    public void testToSingleValueMap2(){
+    public void testToSingleValueMap(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
 
         keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        LOGGER.debug(JsonUtil.format(MapUtil.toSingleValueMap(keyAndArrayMap)));
+        Map<String, String> singleValueMap = MapUtil.toSingleValueMap(keyAndArrayMap);
+        assertThat(singleValueMap, allOf(hasEntry("province", "浙江省"), hasEntry("city", "南通市")));
     }
 
     /**
@@ -63,7 +76,8 @@ public class MapUtilTest{
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        LOGGER.debug(JsonUtil.format(MapUtil.toArrayValueMap(singleValueMap)));
+        Map<String, String[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap);
+        LOGGER.debug(JsonUtil.format(arrayValueMap));
     }
 
     /**
@@ -75,7 +89,8 @@ public class MapUtilTest{
         MapUtil.putSumValue(map, "1000001", 5);
         MapUtil.putSumValue(map, "1000002", 5);
         MapUtil.putSumValue(map, "1000002", 5);
-        LOGGER.debug(JsonUtil.format(map));
+
+        assertThat(map, allOf(hasEntry("1000001", 5), hasEntry("1000002", 10)));
     }
 
     /**
@@ -94,12 +109,13 @@ public class MapUtilTest{
      */
     @Test
     public void testInvertMap(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("a", 3007);
-        map.put("b", 3001);
-        map.put("c", 3001);
-        map.put("d", 3003);
-        LOGGER.debug(JsonUtil.format(MapUtil.invertMap(map)));
+        Map<String, Integer> map = ConvertUtil.toMap(
+                        new SimpleEntry<>("a", 3007),
+                        new SimpleEntry<>("b", 3001),
+                        new SimpleEntry<>("c", 3001),
+                        new SimpleEntry<>("d", 3003));
+        Map<Integer, String> invertMap = MapUtil.invertMap(map);
+        assertThat(invertMap, allOf(hasEntry(3007, "a"), hasEntry(3001, "c"), hasEntry(3003, "d"), not(hasEntry(3001, "b"))));
     }
 
     /**
@@ -112,7 +128,8 @@ public class MapUtilTest{
         map.put("b", 3001);
         map.put("c", 3001);
         map.put("d", 3003);
-        LOGGER.debug(JsonUtil.format(MapUtil.getSubMap(map, "a", "c")));
+        Map<String, Integer> subMap = MapUtil.getSubMap(map, "a", "c");
+        assertThat(subMap, allOf(hasEntry("a", 3007), hasEntry("c", 3001), not(hasKey("b")), not(hasKey("d"))));
     }
 
     /**
@@ -140,9 +157,20 @@ public class MapUtilTest{
     /**
      * Test construct sub map1.
      */
+    @Test
+    public void testExtractSubMap(){
+        assertEquals(Collections.emptyMap(), MapUtil.extractSubMap(null, "id", Long.class));
+    }
+
+    /**
+     * Test extract sub map1.
+     */
     @Test(expected = NullPointerException.class)
-    public void testConstructSubMap1(){
-        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(null, "id", Long.class)));
+    public void testExtractSubMap1(){
+        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        map.put(1L, new User(1L));
+        map.put(2L, new User(2L));
+        MapUtil.extractSubMap(map, "id", null);
     }
 
     /**
@@ -150,15 +178,22 @@ public class MapUtilTest{
      */
     @Test
     public void testMapUtilTest1(){
-        Map<String, String> map = new TreeMap<String, String>();
+        Comparator<String> naturalComparator = ComparatorUtils.naturalComparator();
+        Comparator<String> nullLowComparator = ComparatorUtils.nullLowComparator(naturalComparator);
+        Map<String, String> map = new TreeMap<String, String>(nullLowComparator);
         map.put(null, "111");
 
-        for (Map.Entry<String, String> entry : map.entrySet()){
-            String key = entry.getKey();
-            String value = entry.getValue();
-            LOGGER.debug("key:{},value:{}", key, value);
-        }
+        assertThat(map, hasEntry(null, "111"));
 
+    }
+
+    /**
+     * Test map util test3.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testMapUtilTest3(){
+        Map<String, String> map = new TreeMap<String, String>();
+        map.put(null, "111");
     }
 
     /**
@@ -252,7 +287,7 @@ public class MapUtilTest{
      */
     @Test
     public void testSortByValueDesc(){
-        Map<String, Comparable> map = new LinkedHashMap<String, Comparable>();
+        Map<String, Integer> map = new LinkedHashMap<String, Integer>();
 
         map.put("a", 123);
         map.put("c", 345);
@@ -266,7 +301,7 @@ public class MapUtilTest{
      */
     @Test
     public void testSortByKeyAsc(){
-        Map<String, Comparable> map = new HashMap<String, Comparable>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
 
         map.put("a", 123);
         map.put("c", 345);
@@ -313,7 +348,6 @@ public class MapUtilTest{
      */
     @Test
     public void testMapUtilTest2(){
-
         LOGGER.debug("{}", Integer.highestOneBit((125 - 1) << 1));
 
         for (int i = 0, j = 10; i < j; ++i){
@@ -325,6 +359,10 @@ public class MapUtilTest{
      * Returns a capacity that is sufficient to keep the map from being resized as
      * long as it grows no larger than expectedSize and the load factor is >= its
      * default (0.75).
+     *
+     * @param expectedSize
+     *            the expected size
+     * @return the int
      */
     static int capacity(int expectedSize){
         if (expectedSize < 3){
@@ -345,7 +383,7 @@ public class MapUtilTest{
     @Test
     public void testNewHashMap(){
         Map<Object, Object> newHashMap = MapUtil.newHashMap(100);
-        LOGGER.debug("{}", newHashMap.size());
+        assertThat(newHashMap.size(), is(0));
     }
 
     /**

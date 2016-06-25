@@ -123,9 +123,11 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <ol>
  * <li>A Red-Black tree based NavigableMap implementation</li>
  * <li>sorted according to the natural ordering of its keys, or by a Comparator.</li>
+ * <li>默认情况 key不能为null,如果传入了 <code>NullComparator</code>那么key 可以为null.</li>
  * </ol>
  * </td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link java.util.Hashtable Hashtable}</td>
  * <td>
@@ -136,6 +138,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </ol>
  * </td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.util.Properties Properties}</td>
  * <td>
