@@ -23,7 +23,6 @@ import com.feilong.core.NumberPattern;
 import com.feilong.core.lang.NumberUtil;
 
 import net.sf.json.JsonConfig;
-import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * The Class BigDecimalJsonValueProcessor.
@@ -31,7 +30,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
-public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
+public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
 
     /**
      * The number pattern.
@@ -44,48 +43,25 @@ public class BigDecimalJsonValueProcessor implements JsonValueProcessor{
      * The Constructor.
      */
     public BigDecimalJsonValueProcessor(){
-        super();
     }
 
     /**
      * The Constructor.
      *
      * @param numberPattern
-     *            the number pattern
+     *            你可以使用 {@link com.feilong.core.NumberPattern}
      */
     public BigDecimalJsonValueProcessor(String numberPattern){
-        super();
         this.numberPattern = numberPattern;
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see net.sf.json.processors.JsonValueProcessor#processArrayValue(java.lang.Object, net.sf.json.JsonConfig)
+     * @see com.feilong.tools.jsonlib.processor.AbstractJsonValueProcessor#processValue(java.lang.Object, net.sf.json.JsonConfig)
      */
     @Override
-    public Object processArrayValue(Object value,JsonConfig jsonConfig){
-        return process(value);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see net.sf.json.processors.JsonValueProcessor#processObjectValue(java.lang.String, java.lang.Object, net.sf.json.JsonConfig)
-     */
-    @Override
-    public Object processObjectValue(String key,Object value,JsonConfig jsonConfig){
-        return process(value);
-    }
-
-    /**
-     * Process.
-     *
-     * @param value
-     *            the value
-     * @return the object
-     */
-    private Object process(Object value){
+    protected Object processValue(Object value,JsonConfig jsonConfig){
         return value == null ? StringUtils.EMPTY
                         : (value instanceof BigDecimal ? NumberUtil.toString((Number) value, numberPattern) : value);
     }

@@ -21,7 +21,6 @@ import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 
 import net.sf.json.JsonConfig;
-import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * 时间转换 日期值处理器实现.
@@ -29,7 +28,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.5
  */
-public class DateJsonValueProcessor implements JsonValueProcessor{
+public class DateJsonValueProcessor extends AbstractJsonValueProcessor{
 
     /** The date pattern. */
     private String datePattern = DatePattern.COMMON_DATE_AND_TIME;
@@ -38,7 +37,7 @@ public class DateJsonValueProcessor implements JsonValueProcessor{
      * The Constructor.
      *
      * @param datePattern
-     *            the date pattern
+     *            你可以使用 {@link com.feilong.core.DatePattern}
      */
     public DateJsonValueProcessor(String datePattern){
         this.datePattern = datePattern;
@@ -47,31 +46,10 @@ public class DateJsonValueProcessor implements JsonValueProcessor{
     /*
      * (non-Javadoc)
      * 
-     * @see net.sf.json.processors.JsonValueProcessor#processArrayValue(java.lang.Object, net.sf.json.JsonConfig)
+     * @see com.feilong.tools.jsonlib.processor.AbstractJsonValueProcessor#processValue(java.lang.Object, net.sf.json.JsonConfig)
      */
     @Override
-    public Object processArrayValue(Object value,JsonConfig jsonConfig){
-        return process(value);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see net.sf.json.processors.JsonValueProcessor#processObjectValue(java.lang.String, java.lang.Object, net.sf.json.JsonConfig)
-     */
-    @Override
-    public Object processObjectValue(String key,Object value,JsonConfig jsonConfig){
-        return process(value);
-    }
-
-    /**
-     * Process.
-     *
-     * @param value
-     *            the value
-     * @return the object
-     */
-    private Object process(Object value){
+    protected Object processValue(Object value,JsonConfig jsonConfig){
         return null == value ? null : (value instanceof Date ? DateUtil.toString((Date) value, datePattern) : value.toString());
     }
 }

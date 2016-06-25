@@ -16,7 +16,6 @@
 package com.feilong.tools.jsonlib.processor;
 
 import net.sf.json.JsonConfig;
-import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * 过滤敏感信息,最直接的就是像密码这样的内容,不可以输出在控制台,需要转换成***字眼.
@@ -24,45 +23,18 @@ import net.sf.json.processors.JsonValueProcessor;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
-public class SensitiveWordsJsonValueProcessor implements JsonValueProcessor{
+public class SensitiveWordsJsonValueProcessor extends AbstractJsonValueProcessor{
 
     /** The default sensitive words. */
     private static String DEFAULT_SENSITIVE_WORDS = "******";
 
-    /**
-     * The Constructor.
-     */
-    public SensitiveWordsJsonValueProcessor(){
-    }
-
     /*
      * (non-Javadoc)
      * 
-     * @see net.sf.json.processors.JsonValueProcessor#processArrayValue(java.lang.Object, net.sf.json.JsonConfig)
+     * @see com.feilong.tools.jsonlib.processor.AbstractJsonValueProcessor#processValue(java.lang.Object, net.sf.json.JsonConfig)
      */
     @Override
-    public Object processArrayValue(Object value,JsonConfig jsonConfig){
-        return processValue(value);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see net.sf.json.processors.JsonValueProcessor#processObjectValue(java.lang.String, java.lang.Object, net.sf.json.JsonConfig)
-     */
-    @Override
-    public Object processObjectValue(String key,Object value,JsonConfig jsonConfig){
-        return processValue(value);
-    }
-
-    /**
-     * Process.
-     *
-     * @param value
-     *            the value
-     * @return the object
-     */
-    private static Object processValue(Object value){
+    protected Object processValue(Object value,JsonConfig jsonConfig){
         return null == value ? null : DEFAULT_SENSITIVE_WORDS;
     }
 }
