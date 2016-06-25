@@ -119,23 +119,16 @@ public final class RegexUtil{
             return Collections.emptyMap();
         }
         int groupCount = matcher.groupCount();
-
         Map<Integer, String> map = MapUtil.newLinkedHashMap(groupCount + 1);
-        LOGGER.debug("\n\tregexPattern:[{}],\n\tinput:[{}]", regexPattern, input);
-
-        map.put(0, matcher.group());// 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
-
-        //匹配的索引
-        LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", 0, matcher.start(0), 0, matcher.end(0));
-
-        for (int i = 1; i <= groupCount; ++i){
+        for (int i = 0; i <= groupCount; ++i){
             //匹配的索引
-            LOGGER.debug("matcher.start({}):[{}],matcher.end({}):[{}]", i, matcher.start(i), i, matcher.end(i));
-            map.put(i, matcher.group(i));//groupValue
+            String groupValue = matcher.group(i); //map.put(0, matcher.group());// 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().
+            LOGGER.debug("matcher group[{}],start-end:[{}-{}],groupValue:[{}]", i, matcher.start(i), matcher.end(i), groupValue);
+            map.put(i, groupValue);//groupValue
         }
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("groupMap:{}", JsonUtil.format(map));
+            LOGGER.debug("regexPattern:[{}],input:[{}],groupMap:{}", regexPattern, input, JsonUtil.format(map));
         }
         return map;
     }
