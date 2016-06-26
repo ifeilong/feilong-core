@@ -37,7 +37,6 @@ public class FeiLongVersionTest{
     @Test
     public void testGetVersion(){
         LOGGER.debug(FeiLongVersion.getVersion());
-        //LOGGER.debug(SpringVersion.getVersion());
 
         Package pkg = FeiLongVersion.class.getPackage();
         LOGGER.debug(JsonUtil.format(pkg));

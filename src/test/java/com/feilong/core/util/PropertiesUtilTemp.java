@@ -23,7 +23,7 @@ import java.util.Properties;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0
  */
-public class PropertiesUtilTest{
+public class PropertiesUtilTemp{
 
     // [start] getPropertiesValue
 

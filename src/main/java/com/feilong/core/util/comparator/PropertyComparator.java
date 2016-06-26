@@ -320,12 +320,12 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             compareTo = ObjectUtils.compare(hashCode1, hashCode2);
 
             String pattern = "propertyName:[{}],same propertyValue:[{}],hashCode1:[{}],hashCode2:[{}],result:[{}]";
-            LOGGER.debug(pattern, propertyName, propertyValue1, hashCode1, hashCode2, compareTo);
+            LOGGER.trace(pattern, propertyName, propertyValue1, hashCode1, hashCode2, compareTo);
             return compareTo;
         }
 
         String pattern = "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],result:[{}]";
-        LOGGER.debug(pattern, propertyName, propertyValue1, propertyValue2, compareTo);
+        LOGGER.trace(pattern, propertyName, propertyValue1, propertyValue2, compareTo);
         return compareTo;
     }
 }

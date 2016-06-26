@@ -168,15 +168,15 @@ public class BeanUtilTest{
                                                                  new DynaProperty("inPrice", Double.class),
                                                                  new DynaProperty("outPrice", Double.class), };
         BasicDynaClass cargoClass = new BasicDynaClass("Cargo", BasicDynaBean.class, dynaBeanProperties); //BasicDynaClass  BasicDynaBean  
-        DynaBean cargo = cargoClass.newInstance();//DynaBean  
+        DynaBean cargoDynaBean = cargoClass.newInstance();//DynaBean  
 
         // accessing a DynaBean  
-        cargo.set("name", "Instant Noodles");
-        cargo.set("inPrice", new Double(21.3));
-        cargo.set("outPrice", new Double(23.8));
-        LOGGER.debug("name: " + cargo.get("name"));
-        LOGGER.debug("inPrice: " + cargo.get("inPrice"));
-        LOGGER.debug("outPrice: " + cargo.get("outPrice"));
+        cargoDynaBean.set("name", "Instant Noodles");
+        cargoDynaBean.set("inPrice", new Double(21.3));
+        cargoDynaBean.set("outPrice", new Double(23.8));
+        LOGGER.debug("name: " + cargoDynaBean.get("name"));
+        LOGGER.debug("inPrice: " + cargoDynaBean.get("inPrice"));
+        LOGGER.debug("outPrice: " + cargoDynaBean.get("outPrice"));
     }
 
     /**
