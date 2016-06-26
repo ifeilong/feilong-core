@@ -258,7 +258,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      * 添加 month.
      */
     @Test
-    public void addMonth(){
+    public void testAddMonth(){
         Date beginDate = DateUtil.toDate("2013-10-28", DatePattern.COMMON_DATE);
         logDate(DateUtil.addMonth(beginDate, 6));
         logDate(DateUtil.addMonth(NOW, 3));
@@ -434,7 +434,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      * Adds the year.
      */
     @Test
-    public void addYear(){
+    public void testAddYear(){
         logDate(DateUtil.addYear(NOW, 5));
         logDate(NOW);
         logDate(DateUtils.addYears(NOW, 5));
@@ -447,7 +447,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      * Adds the day.
      */
     @Test
-    public void addDay(){
+    public void testAddDay(){
         logDate(DateUtil.addDay(NOW, 5));
         logDate(DateUtil.addDay(NOW, -5));
         logDate(DateUtil.addDay(DateUtil.toDate("2014-12-31 02:10:05", DatePattern.COMMON_DATE_AND_TIME), 5));
@@ -458,7 +458,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      * Adds the week.
      */
     @Test
-    public void addWeek(){
+    public void testAddWeek(){
         logDate(DateUtil.addWeek(NOW, 1));
         logDate(DateUtil.addWeek(NOW, -1));
     }

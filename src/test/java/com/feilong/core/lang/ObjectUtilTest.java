@@ -37,6 +37,9 @@ public class ObjectUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTest.class);
 
+    /**
+     * Test default if null or empty.
+     */
     @Test
     public void testDefaultIfNullOrEmpty(){
         assertEquals(1, ObjectUtil.defaultIfNullOrEmpty(new ArrayList<>(), 1));
@@ -51,7 +54,7 @@ public class ObjectUtilTest{
      * Checks if is array.
      */
     @Test
-    public void isArray(){
+    public void testIsArray(){
         int[] i = {};
         assertEquals(true, ObjectUtil.isArray(i));
         assertEquals(true, ObjectUtil.isArray(new Integer[0]));
@@ -63,7 +66,7 @@ public class ObjectUtilTest{
      * Checks if is boolean.
      */
     @Test
-    public void isBoolean(){
+    public void testIsBoolean(){
         assertEquals(false, ObjectUtil.isBoolean(null));
         assertEquals(true, ObjectUtil.isBoolean(false));
     }
@@ -72,7 +75,7 @@ public class ObjectUtilTest{
      * Checks if is integer.
      */
     @Test
-    public void isInteger(){
+    public void testIsInteger(){
         assertEquals(false, ObjectUtil.isInteger(null));
         assertEquals(false, ObjectUtil.isInteger(false));
         assertEquals(true, ObjectUtil.isInteger(1));

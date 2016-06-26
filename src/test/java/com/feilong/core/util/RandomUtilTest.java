@@ -43,10 +43,21 @@ public class RandomUtilTest{
     }
 
     /**
+     * Creates the random.
+     */
+    @Test
+    public void testCreateRandom2(){
+        LOGGER.debug("" + RandomUtil.createRandom(10, 20));
+        LOGGER.debug("" + RandomUtil.createRandom(0, 800));
+
+        assertEquals(800L, RandomUtil.createRandom(800, 800));
+    }
+
+    /**
      * 创建 random with length.
      */
     @Test
-    public void createRandomWithLength(){
+    public void testCreateRandomWithLength1(){
         for (int i = 0, j = 5; i < j; ++i){
             LOGGER.debug("{} ==> {}", i, RandomUtil.createRandomWithLength(2));
         }
@@ -56,7 +67,7 @@ public class RandomUtilTest{
      * 创建 random with length1.
      */
     @Test
-    public void createRandomWithLength1(){
+    public void testCreateRandomWithLength2(){
         LOGGER.debug(RandomUtil.createRandomWithLength(18) + "");
     }
 
@@ -72,7 +83,7 @@ public class RandomUtilTest{
      * Testget random from string.
      */
     @Test
-    public void testgetRandomFromString(){
+    public void testGetRandomFromString(){
         LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL_AND_LETTERS, 5));
         LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 200));
     }
@@ -81,7 +92,7 @@ public class RandomUtilTest{
      * Testget random from string1.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testgetRandomFromString1(){
+    public void testGetRandomFromString1(){
         RandomUtil.createRandomFromString(Alphabet.DECIMAL, 0);
     }
 
@@ -89,7 +100,7 @@ public class RandomUtilTest{
      * Testget random from string2.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testgetRandomFromString2(){
+    public void testGetRandomFromString2(){
         RandomUtil.createRandomFromString("", 5);
     }
 
@@ -97,18 +108,7 @@ public class RandomUtilTest{
      * Creates the random from string.
      */
     @Test
-    public void createRandomFromString(){
+    public void testCreateRandomFromString(){
         LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 8, 20));
-    }
-
-    /**
-     * Creates the random.
-     */
-    @Test
-    public void createRandom(){
-        LOGGER.debug("" + RandomUtil.createRandom(10, 20));
-        LOGGER.debug("" + RandomUtil.createRandom(0, 800));
-
-        assertEquals(800L, RandomUtil.createRandom(800, 800));
     }
 }

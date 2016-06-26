@@ -190,7 +190,7 @@ public class CollectionsUtilTest{
      * Removes the duplicate.
      */
     @Test
-    public void removeDuplicate(){
+    public void testRemoveDuplicate(){
         List<String> list = ConvertUtil.toList("feilong1", "feilong2", "feilong2", "feilong3");
 
         List<String> removeDuplicate = CollectionsUtil.removeDuplicate(list);
