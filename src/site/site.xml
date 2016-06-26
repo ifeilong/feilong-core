@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/DECORATION/1.7.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd">
+
+	<!-- <url>https://github.com/venusdrogon/feilong-platform</url> -->
+
+	<custom>
+		<!-- http://maven.apache.org/skins/maven-fluido-skin/ -->
+		<fluidoSkin>
+			<gitHub>
+				<projectId>venusdrogon/feilong-core</projectId>
+				<ribbonOrientation>right</ribbonOrientation>
+				<ribbonColor>orange</ribbonColor><!-- it is the the ribbon color, red/green/black/darkblue/orange/gray only accepted only accepted (red by default) -->
+			</gitHub>
+
+			<!-- <googleSearch>
+				<sitesearch />
+				</googleSearch> -->
+
+			<leftColumnClass>span3</leftColumnClass>
+			<bodyColumnClass>span9</bodyColumnClass>
+
+			<sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+
+			<!-- <profile>pre-release</profile> --><!-- (pre-release|sandbox|retired) -->
+			<breadcrumbDivider>»</breadcrumbDivider>
+			<copyrightClass>pull-right</copyrightClass>
+			<fluidoSkin>
+				<topBarEnabled>true</topBarEnabled>
+				<sideBarEnabled>true</sideBarEnabled>
+			</fluidoSkin>
+		</fluidoSkin>
+	</custom>
+
+	<body>
+		<breadcrumbs>
+			<item name="feilong-platform" href="https://github.com/venusdrogon/feilong-platform" />
+			<item name="feilong-core" href="https://github.com/venusdrogon/feilong-core" />
+		</breadcrumbs>
+
+		<menu name="Overview">
+			<item name="Introduction" href="index.html" />
+			<item name="project-info" href="project-info.html" />
+			<item name="source-repository" href="source-repository.html" />
+			<item name="License" href="license.html" />
+			<!-- <item name="Download" href="download.html" /> -->
+		</menu>
+
+		<menu ref="modules" />
+		<menu ref="reports" />
+
+		<menu name="feilong projects">
+			<item name="feilong-platform" href="https://github.com/venusdrogon/feilong-platform" />
+			<item name="feilong-core" href="https://github.com/venusdrogon/feilong-core" />
+			<item name="feilong-servlet" href="https://github.com/venusdrogon/feilong-servlet" />
+			<item name="feilong-taglib" href="https://github.com/venusdrogon/feilong-taglib" />
+			<item name="feilong-spring" href="https://github.com/venusdrogon/feilong-spring" />
+			<item name="feilong-io" href="https://github.com/venusdrogon/feilong-io" />
+		</menu>
+
+		<!-- <links>
+			<item name="Apache" href="http://www.apache.org" />
+			<item name="Maven" href="http://maven.apache.org" />
+			</links> -->
+
+		<!-- <head>head</head>
+			<footer>foter</footer> -->
+
+	</body>
+
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.5</version>
+	</skin>
+
+	<publishDate position="right" format="yyyy-MM-dd" />
+	<version position="right" />
+</project>
