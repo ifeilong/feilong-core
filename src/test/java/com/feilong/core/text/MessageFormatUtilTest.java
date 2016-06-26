@@ -57,7 +57,7 @@ public class MessageFormatUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void format1(){
-        LOGGER.debug(MessageFormatUtil.format(null, "jin", "xin"));
+        MessageFormatUtil.format(null, "jin", "xin");
     }
 
     /**
@@ -80,8 +80,7 @@ public class MessageFormatUtilTest{
         int planet = 7;
         String event = "a disturbance in the Force";
         String string = "At {1,time} on {1,date}, there was {2} on planet {0,number,integer}.";
-        String result = MessageFormatUtil.format(string, planet, new Date(), event);
-        LOGGER.debug(result);
+        LOGGER.debug(MessageFormatUtil.format(string, planet, new Date(), event));
     }
 
     /**

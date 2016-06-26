@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -89,18 +90,15 @@ public class ObjectUtilTest{
     public void assertEquals2(){
         Long a = new Long(1L);
         Long b = new Long(1L);
-
-        LOGGER.debug((a == b) + "");
-        LOGGER.debug(a.equals(b) + "");
+        assertEquals(false, a == b);
+        assertEquals(true, a.equals(b));
 
         User user = new User(1L);
-        List<User> list = new ArrayList<User>();
 
-        list.add(user);
-        list.add(new User(1L));
-        list.add(new User(new Long(1L)));
-        list.add(new User(new Long(1L)));
-        list.add(new User(new Long(1L)));
+        List<User> list = toList(//
+                        user,
+                        new User(1L),
+                        new User(new Long(1L)));
 
         for (User user2 : list){
             LOGGER.debug((user2.getId() == user.getId()) + "");

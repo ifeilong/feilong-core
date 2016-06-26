@@ -18,6 +18,7 @@ package com.feilong.core.bean;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
@@ -134,9 +135,8 @@ public class PropertyUtilTest{
 
         List<User> list = ConvertUtil.toList(user, user, user);
 
-        Object property = PropertyUtil.getProperty(list, "[0].id");
-        LOGGER.debug("" + PropertyUtil.getProperty(list, "[0].id"));
-        LOGGER.debug("map:{}", JsonUtil.format(property));
+        Long id = PropertyUtil.getProperty(list, "[0].id");
+        assertThat(id, is(equalTo(5L)));
     }
 
     /**

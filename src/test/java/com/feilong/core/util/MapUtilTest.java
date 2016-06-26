@@ -15,9 +15,12 @@
  */
 package com.feilong.core.util;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
@@ -29,7 +32,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.ComparatorUtils;
@@ -50,7 +52,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  */
 public class MapUtilTest{
 
-    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
 
     /**
@@ -99,9 +100,9 @@ public class MapUtilTest{
     @Test
     public void testSimpleEntry(){
         SimpleEntry<String, String> map = new SimpleEntry<String, String>("name", "jinxin");
-        LOGGER.debug(JsonUtil.format(map));
-        LOGGER.debug(map.getKey());
-        LOGGER.debug(map.getValue());
+        assertThat(map, allOf(hasProperty("key"), hasProperty("value")));
+        assertThat(map.getKey(), is(equalTo("name")));
+        assertThat(map.getValue(), is(equalTo("jinxin")));
     }
 
     /**
@@ -235,11 +236,12 @@ public class MapUtilTest{
      */
     @Test
     public void testSortByValueASC(){
-        Map<String, Comparable> map = new HashMap<String, Comparable>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);
-        LOGGER.debug(JsonUtil.format(MapUtil.sortByValueAsc(map)));
+        Map<String, Integer> sortByValueAsc = MapUtil.sortByValueAsc(map);
+        assertThat(sortByValueAsc.keySet(), contains("b", "a", "c"));
     }
 
     /**
@@ -248,12 +250,12 @@ public class MapUtilTest{
     @Test
     public void testSortByValueDesc(){
         Map<String, Integer> map = new LinkedHashMap<String, Integer>();
-
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);
 
-        LOGGER.debug(JsonUtil.format(MapUtil.sortByValueDesc(map)));
+        Map<String, Integer> sortByValueDesc = MapUtil.sortByValueDesc(map);
+        assertThat(sortByValueDesc.keySet(), contains("c", "a", "b"));
     }
 
     /**
@@ -267,7 +269,8 @@ public class MapUtilTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+        Map<String, Integer> sortByKeyAsc = MapUtil.sortByKeyAsc(map);
+        assertThat(sortByKeyAsc.keySet(), contains("a", "b", "c"));
     }
 
     /**
@@ -277,16 +280,16 @@ public class MapUtilTest{
     public void testSort(){
         Map<String, Integer> map = new HashMap<String, Integer>();
 
+        map.put("a8", 8);
         map.put("a13", 123);
         map.put("a2", 345);
-        map.put("a8", 8);
 
-        LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+        Map<String, Integer> sortByKeyAsc = MapUtil.sortByKeyAsc(map);
+        assertThat(sortByKeyAsc.keySet(), contains("a13", "a2", "a8"));
 
-        PropertyComparator<Entry<String, Integer>> propertyComparator = new PropertyComparator<Map.Entry<String, Integer>>(
-                        "key",
-                        new RegexGroupNumberComparator("a(\\d*)"));
-        LOGGER.debug(JsonUtil.format(MapUtil.sort(map, propertyComparator)));
+        Map<String, Integer> sort = MapUtil
+                        .sort(map, new PropertyComparator<Map.Entry<String, Integer>>("key", new RegexGroupNumberComparator("a(\\d*)")));
+        assertThat(sort.keySet(), contains("a2", "a8", "a13"));
     }
 
     /**
@@ -294,13 +297,14 @@ public class MapUtilTest{
      */
     @Test
     public void testSortByKeyDesc(){
-        Map<String, Comparable> map = new HashMap<String, Comparable>();
+        Map<String, Integer> map = new HashMap<String, Integer>();
 
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);
 
-        LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyDesc(map)));
+        Map<String, Integer> sortByKeyDesc = MapUtil.sortByKeyDesc(map);
+        assertThat(sortByKeyDesc.keySet(), contains("c", "b", "a"));
     }
 
     /**

@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -123,11 +124,7 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testCollect(){
-        List<String> list = new ArrayList<String>();
-        list.add("xinge");
-        list.add("feilong1");
-        list.add("feilong2");
-        list.add("feilong2");
+        List<String> list = toList("xinge", "feilong1", "feilong2", "feilong2");
 
         Transformer<String, Object> nullTransformer = TransformerUtils.nullTransformer();
         List<Object> collect = CollectionsUtil.collect(list, nullTransformer);
@@ -535,7 +532,7 @@ public class CollectionsUtilTest{
         User user2 = new User(3L);
         user2.setAge(30);
 
-        List<User> list = ConvertUtil.toList(user1, user2);
+        List<User> list = toList(user1, user2);
         Map<String, BigDecimal> map = CollectionsUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
         LOGGER.debug(JsonUtil.format(map));
     }

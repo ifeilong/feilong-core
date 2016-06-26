@@ -68,9 +68,6 @@ public class SystemUtilTest{
         LOGGER.debug(JsonUtil.format(strings));
     }
 
-    /**
-     * Gets the properties map for LOGGER.
-     */
     @Test
     public void testGetPropertiesMapForLog(){
         Map<String, String> propertiesMapForLog = SystemUtil.getPropertiesMapForLog();
