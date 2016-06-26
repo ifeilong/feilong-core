@@ -145,8 +145,8 @@ public final class EnumUtil{
         // 如果Class 对象不表示枚举类型,则返回枚举类的元素或 null.
         E[] enumConstants = enumClass.getEnumConstants();
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants, 0, 0));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants, 0, 0));
         }
         for (E e : enumConstants){
             Object propertyValue = PropertyUtil.getProperty(e, propertyName);

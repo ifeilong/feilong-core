@@ -129,7 +129,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      */
     public PropertyComparator(String propertyName){
         this.propertyName = propertyName;
-        LOGGER.debug("propertyName:[{}]", propertyName);
+        LOGGER.trace("propertyName:[{}]", propertyName);
     }
 
     /**
@@ -145,7 +145,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     public PropertyComparator(String propertyName, Comparator comparator){
         this.propertyName = propertyName;
         this.comparator = comparator;
-        LOGGER.debug("propertyName:[{}]", propertyName);
+        LOGGER.trace("propertyName:[{}]", propertyName);
     }
 
     /**
@@ -227,7 +227,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     public PropertyComparator(String propertyName, Class<? extends Comparable> propertyValueConvertToClass){
         this.propertyName = propertyName;
         this.propertyValueConvertToClass = propertyValueConvertToClass;
-        LOGGER.debug("propertyName:[{}]", propertyName);
+        LOGGER.trace("propertyName:[{}]", propertyName);
     }
 
     /**
@@ -253,7 +253,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         this.propertyName = propertyName;
         this.propertyValueConvertToClass = propertyValueConvertToClass;
         this.comparator = comparator;
-        LOGGER.debug("propertyName:[{}]", propertyName);
+        LOGGER.trace("propertyName:[{}]", propertyName);
     }
 
     /**

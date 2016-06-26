@@ -192,15 +192,15 @@ public final class TypeUtil{
     private static Class<?>[] extractActualTypeArgumentClassArray(ParameterizedType parameterizedType){
         Validate.notNull(parameterizedType, "parameterizedType can't be null/empty!");
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("parameterizedType info:{}", JsonUtil.format(parameterizedType));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("parameterizedType info:{}", JsonUtil.format(parameterizedType));
         }
 
         Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
         Validate.notNull(actualTypeArguments, "actualTypeArguments can't be null/empty!");
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("actualTypeArguments:{}", JsonUtil.format(actualTypeArguments));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("actualTypeArguments:{}", JsonUtil.format(actualTypeArguments));
         }
         int length = actualTypeArguments.length;
         Class<?>[] klasses = new Class<?>[length];

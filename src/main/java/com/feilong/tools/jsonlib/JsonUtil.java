@@ -1036,7 +1036,7 @@ public final class JsonUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> Map<String, T> toMap(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
-        LOGGER.debug("in json:[{}],klass:[{}]", json, rootClass);
+        LOGGER.trace("input json:[{}],rootClass:[{}]", json, rootClass);
 
         if (Validator.isNullOrEmpty(json)){
             return Collections.emptyMap();

@@ -266,7 +266,7 @@ public final class ClassLoaderUtil{
             if (null == url){
                 LOGGER.warn(getLogInfo(resourceName, classLoader, false));
             }else{
-                LOGGER.debug(getLogInfo(resourceName, classLoader, true));
+                LOGGER.trace(getLogInfo(resourceName, classLoader, true));
                 return url;
             }
         }
@@ -281,7 +281,7 @@ public final class ClassLoaderUtil{
      */
     private static ClassLoader getClassLoaderByCurrentThread(){
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        LOGGER.debug("[Thread.currentThread()].getContextClassLoader:{}", formatClassLoader(classLoader));
+        LOGGER.trace("[Thread.currentThread()].getContextClassLoader:{}", formatClassLoader(classLoader));
         return classLoader;
     }
 
@@ -296,7 +296,7 @@ public final class ClassLoaderUtil{
     public static ClassLoader getClassLoaderByClass(Class<?> callingClass){
         Validate.notNull(callingClass, "callingClass can't be null!");
         ClassLoader classLoader = callingClass.getClassLoader();
-        LOGGER.debug("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
+        LOGGER.trace("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
         return classLoader;
     }
 

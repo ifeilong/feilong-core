@@ -235,7 +235,7 @@ public final class BeanUtil{
         boolean defaultNull = true;
         int defaultArraySize = 10;
 
-        //XXX 
+        //XXX initConverters不是最优方案
         BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
         ConvertUtilsBean convertUtils = beanUtilsBean.getConvertUtils();
 

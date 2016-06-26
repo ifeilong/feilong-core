@@ -18,7 +18,7 @@
 		</layout>
 		<!--限制输出级别 -->
 		<filter class="org.apache.log4j.varia.LevelRangeFilter">
-			<param name="LevelMin" value="debug" />
+			<param name="LevelMin" value="trace" />
 			<param name="LevelMax" value="ERROR" />
 		</filter>
 	</appender>
@@ -44,17 +44,13 @@
 		priority已经由level代替 
 		category已经由logger代替。 
 	-->
-	<logger name="com.feilong">
-		<level value="debug" />
-	</logger>
-
 	<category name="org.apache.commons.beanutils">
 		<priority value="info" />
 	</category>
 
 	<!-- 设置接收所有输出的通道 -->
 	<root>
-		<level value="debug" />
+		<level value="trace" />
 		<appender-ref ref="stdout" />
 		<appender-ref ref="htmlFile" />
 		<appender-ref ref="logFile" />

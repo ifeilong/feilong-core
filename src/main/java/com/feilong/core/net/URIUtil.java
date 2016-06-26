@@ -280,7 +280,7 @@ public final class URIUtil{
      */
     public static String encodeUri(String uriString,String charsetType){
         Validate.notBlank(uriString, "uriString can't be null/empty!");
-        LOGGER.debug("in uriString:[{}],charsetType:{}", uriString, charsetType);
+        LOGGER.trace("input uriString:[{}],charsetType:{}", uriString, charsetType);
 
         if (!hasQueryString(uriString)){
             return uriString;// 不带参数 一般不需要处理
@@ -288,7 +288,7 @@ public final class URIUtil{
 
         Map<String, String[]> safeArrayValueMap = ParamUtil.toSafeArrayValueMap(getQueryString(uriString), charsetType);
         String encodeUrl = ParamUtil.addParameterArrayValueMap(uriString, safeArrayValueMap, charsetType);
-        LOGGER.debug("input:[{}],after url:[{}]", uriString, encodeUrl);
+        LOGGER.trace("input uriString:[{}],after url:[{}]", uriString, encodeUrl);
         return encodeUrl;
     }
 

@@ -194,7 +194,7 @@ public final class FieldUtil{
                 boolean isStatic = Modifier.isStatic(modifiers);
 
                 String pattern = "[{}.{}],modifiers:[{}]{}";
-                LOGGER.debug(pattern, klass.getSimpleName(), field.getName(), modifiers, isStatic ? " [isStatic]" : StringUtils.EMPTY);
+                LOGGER.trace(pattern, klass.getSimpleName(), field.getName(), modifiers, isStatic ? " [isStatic]" : StringUtils.EMPTY);
                 return isStatic;
             }
         };

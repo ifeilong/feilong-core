@@ -110,7 +110,7 @@ public final class NumberFormatUtil{
             decimalFormat.setRoundingMode(roundingMode);
         }
         String result = decimalFormat.format(value);
-        LOGGER.debug("input:[{}],with:[{}]=[{}],localizedPattern:[{}]", value, numberPattern, result, decimalFormat.toLocalizedPattern());
+        LOGGER.trace("input:[{}],with:[{}]=[{}],localizedPattern:[{}]", value, numberPattern, result, decimalFormat.toLocalizedPattern());
         return result;
     }
 }

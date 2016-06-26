@@ -386,7 +386,7 @@ public final class NumberUtil{
         Validate.isTrue(total.intValue() > 0, "total can not <=0");
         Validate.isTrue(current.doubleValue() <= total.doubleValue(), "current can not > total");
 
-        // XXX
+        // XXX  scale = 8不是最优方案
         int scale = 8;
         BigDecimal bigDecimalCurrent = ConvertUtil.toBigDecimal(current);
         BigDecimal divideValue = getDivideValue(bigDecimalCurrent, total, scale);

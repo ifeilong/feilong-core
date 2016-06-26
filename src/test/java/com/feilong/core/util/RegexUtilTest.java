@@ -15,11 +15,12 @@
  */
 package com.feilong.core.util;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.RegexPattern;
 
@@ -30,14 +31,11 @@ import com.feilong.core.RegexPattern;
  */
 public class RegexUtilTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RegexUtilTest.class);
-
     /**
      * Group.
      */
     @Test
-    public void group(){
+    public void testGroup(){
         String regexPattern = "(.*?)@(.*?)";
         String email = "venusdrogon@163.com";
         assertEquals("venusdrogon", RegexUtil.group(regexPattern, email, 1));
@@ -45,26 +43,28 @@ public class RegexUtilTest{
     }
 
     /**
-     * Group2.
+     * Test group1.
      */
     @Test
-    public void group2(){
-        String regexPatternTable = "@Table.*name.*\"(.*?)\".*";
-        //		regexPattern = "@Table[(]*\"(.*?)*[)]";
-        //		regexPattern = "@Table(.*?)";
-        String email = "@Table(name = \"T_MEM_MEMBER_ADDRESS\")";
-        LOGGER.debug(RegexUtil.group(regexPatternTable, email) + "");
+    public void testGroup1(){
+        String regexPattern = "(.*?)@(.*?)";
+        String email = "venusdrogon@163.com";
+        assertThat(
+                        RegexUtil.group(regexPattern, email),
+                        allOf(hasEntry(0, "venusdrogon@163.com"), hasEntry(1, "venusdrogon"), hasEntry(2, "163.com")));
     }
 
     /**
-     * Group1.
+     * Test group2.
      */
     @Test
-    public void group1(){
-        String regexPattern = "(.*?)(?:@)(.*?)";
-        regexPattern = "(.*?)@(.*?)";
-        String email = "venusdrogon@163.com";
-        RegexUtil.group(regexPattern, email);
+    public void testGroup2(){
+        String regexPattern = "@Table.*name.*\"(.*?)\".*";
+        String input = "@Table(name = \"T_MEM_MEMBER_ADDRESS\")";
+        assertThat(
+                        RegexUtil.group(regexPattern, input),
+                        allOf(hasEntry(0, "@Table(name = \"T_MEM_MEMBER_ADDRESS\")"), hasEntry(1, "T_MEM_MEMBER_ADDRESS")));
+
     }
 
     /**
@@ -72,13 +72,15 @@ public class RegexUtilTest{
      */
     @Test
     public void group22(){
-        String regexPatternColumn = ".*@Column.*name.*\"(.*?)\"((?:.*)|(.*length.*(\\d+).*))";
-        //		REGEX_PATTERN_COLUMN = ".*@Column.*name.*\"(.*?)\".*length.*(\\d*).*";
-        //		REGEX_PATTERN_COLUMN = ".*@Column.*(\\d+).*";
-        regexPatternColumn = ".*@Column.*?name\\s*=\\s*\"(.*?)\"(?:.*?length\\s*=\\s*(\\d+))?";
-        regexPatternColumn = ".*@Column.*name.*\"(.*?)\".*length\\s*=\\s*(\\d+).*";
-        String email = "@Column(name = \"NAME\", length=80)";
-        RegexUtil.group(regexPatternColumn, email);
+        String regexPattern = ".*@Column.*name.*\"(.*?)\"((?:.*)|(.*length.*(\\d+).*))";
+        regexPattern = ".*@Column.*?name\\s*=\\s*\"(.*?)\"(?:.*?length\\s*=\\s*(\\d+))?";
+        regexPattern = ".*@Column.*name.*\"(.*?)\".*length\\s*=\\s*(\\d+).*";
+        String input = "@Column(name = \"NAME\", length=80)";
+
+        assertThat(
+                        RegexUtil.group(regexPattern, input),
+                        allOf(hasEntry(0, "@Column(name = \"NAME\", length=80)"), hasEntry(1, "NAME"), hasEntry(2, "80")));
+
     }
 
     /**

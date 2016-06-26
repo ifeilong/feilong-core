@@ -208,7 +208,8 @@ public class MapUtilTest{
         map.put("c", 3002);
         map.put("g", -1005);
 
-        LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, "a", "g", "m")));
+        Map<String, Integer> subMapExcludeKeys = MapUtil.getSubMapExcludeKeys(map, "a", "g", "m");
+        assertThat(subMapExcludeKeys, allOf(hasEntry("b", 3001), hasEntry("c", 3002), not(hasKey("a")), not(hasKey("g"))));
     }
 
     /**
@@ -226,48 +227,7 @@ public class MapUtilTest{
         map.put("f", 3005);
         map.put("g", -1005);
 
-        LOGGER.debug("" + MapUtil.getMinValue(map, "a", "b", "d", "g", "m"));
-    }
-
-    /**
-     * TestMapUtilTest.
-     */
-    @Test
-    public void testMapUtilTest(){
-        Map<String, String> object = new LinkedHashMap<String, String>();
-
-        object.put("1", "1");
-        object.put("2", "2");
-        object.put("3", "3");
-        object.put("3", "4");
-        object.put("2", "7");
-        object.put("3", "6");
-        object.put("4", "8");
-
-        LOGGER.debug(JsonUtil.format(object));
-    }
-
-    /**
-     * Test linked hash map.
-     */
-    @Test
-    public void testLinkedHashMap(){
-        Map<String, String> object = new LinkedHashMap<String, String>();
-
-        object.put("a", "123");
-        object.put("b", "234");
-        object.put("c", "345");
-        object.put("b", "8910");
-
-        //2
-        //a
-        //c
-        //b 8910
-
-        //a
-        //b 8910
-        //c
-        LOGGER.debug(JsonUtil.format(object));
+        assertThat(MapUtil.getMinValue(map, "a", "b", "d", "g", "m"), is(-1005));
     }
 
     /**

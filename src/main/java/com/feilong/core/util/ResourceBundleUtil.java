@@ -217,7 +217,7 @@ public final class ResourceBundleUtil{
 
         String value = resourceBundle.getString(key);
         if (Validator.isNullOrEmpty(value)){
-            LOGGER.debug("resourceBundle has key:[{}],but value is null/empty", key);
+            LOGGER.trace("resourceBundle has key:[{}],but value is null/empty", key);
         }
         return value;
     }
