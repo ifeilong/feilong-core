@@ -223,8 +223,7 @@ public final class DateUtil{
      *
      * @param date
      *            任意时间
-     * @return 获得指定日期的 <code>23:59:59.999</code><br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @since 1.5.0
      */
     public static Date getLastDateOfThisDay(Date date){
@@ -235,20 +234,23 @@ public final class DateUtil{
     // *****************************week****************************************************
     /**
      * 获得传入date 所在的<span style="color:red">星期 第一天(周日)</span> <code>00:00:00.000</code> 到毫秒.
-     * <p>
-     * 注意:按照外国制,<span style="color:red">周日为一个星期第一天,周六为最后一天</span><br>
-     * 注意:会自动跨月,跨年操作
-     * </p>
      * 
      * <pre class="code">
      * DateUtil.getFirstDateOfThisWeek(2012-10-11 17:10:30.701)  =2012-10-07 00:00:00.000
      * DateUtil.getFirstDateOfThisWeek(2014-01-01 05:00:00)      =2013-12-29 00:00:00.000 //跨年
      * </pre>
      * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>按照外国制,<span style="color:red">周日为一个星期第一天,周六为最后一天</span></li>
+     * <li>会自动跨月,跨年操作</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param date
      *            任意时间
-     * @return 传入date 所在星期的第一天 <code>00:00:00.000</code> 到毫秒<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayBegin(Calendar)
@@ -263,20 +265,22 @@ public final class DateUtil{
     /**
      * 获得传入date 所在<span style="color:red">星期的最后一天(周六)</span> <code>23:59:59.999</code> 到毫秒.
      * 
-     * <p>
-     * 注意:按照外国制,<span style="color:red">周日为一个星期第一天,周六为最后一天</span><br>
-     * 注意:会自动跨月,跨年操作
-     * </p>
-     * 
      * <pre class="code">
      * DateUtil.getLastDateOfThisWeek(2012-10-11 17:10:30.701)   =2012-10-13 23:59:59.999
      * DateUtil.getLastDateOfThisWeek(2014-12-31 05:00:00)       =2015-01-03 23:59:59.999 //跨年
      * </pre>
      * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>按照外国制,<span style="color:red">周日为一个星期第一天,周六为最后一天</span></li>
+     * <li>会自动跨月,跨年操作</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param date
      *            任意时间
-     * @return 传入date 所在星期的最后一天 <code>23:59:59.999</code> 到毫秒<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayEnd(Calendar)
@@ -300,8 +304,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return Date<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayBegin(Calendar)
@@ -326,8 +329,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return Date<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayEnd(Calendar)
@@ -348,8 +350,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return date<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayBegin(Calendar)
@@ -419,8 +420,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return Date<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
      * @see #toCalendar(Date)
      * @see Calendar#set(int, int)
      * @see CalendarUtil#resetDayEnd(Calendar)
@@ -455,8 +455,7 @@ public final class DateUtil{
      *            任意时间
      * @param year
      *            增加年份 可以是负数 表示前面多少
-     * @return 指定日期 <code>date</code>,加减年份<br>
-     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see Calendar#YEAR
      * @see org.apache.commons.lang3.time.DateUtils#addYears(Date, int)
      */
@@ -487,8 +486,7 @@ public final class DateUtil{
      * @param month
      *            加减月份, <span style="color:red">可以是负数</span>,表示前面多少<br>
      *            比如-3 表示 3个月之前
-     * @return 指定日期 <code>date</code>加减月份<br>
-     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see Calendar#MONTH
      * @see org.apache.commons.lang3.time.DateUtils#addMonths(Date, int)
      */
@@ -520,8 +518,7 @@ public final class DateUtil{
      *            任意时间
      * @param day
      *            需要加减的天数,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 指定日期 <code>date</code>加减天数<br>
-     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see Calendar#DAY_OF_MONTH
      * @see org.apache.commons.lang3.time.DateUtils#addDays(Date, int)
      */
@@ -551,8 +548,7 @@ public final class DateUtil{
      *            任意时间
      * @param week
      *            需要加减的星期数,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 指定日期 <code>date</code>加减星期<br>
-     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addWeeks(Date, int)
      */
     public static Date addWeek(Date date,int week){
@@ -585,8 +581,7 @@ public final class DateUtil{
      *            任意时间
      * @param hour
      *            the hour,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 指定日期 <code>date</code>加减小时<br>
-     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addHours(Date, int)
      */
     public static Date addHour(Date date,int hour){
@@ -615,8 +610,7 @@ public final class DateUtil{
      *            任意时间
      * @param minute
      *            the minute,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 指定日期 <code>date</code>加减分钟<br>
-     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addMinutes(Date, int)
      */
     public static Date addMinute(Date date,int minute){
@@ -645,8 +639,7 @@ public final class DateUtil{
      *            任意时间
      * @param second
      *            加减秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 指定日期 <code>date</code>加减秒<br>
-     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addSeconds(Date, int)
      */
     public static Date addSecond(Date date,int second){
@@ -675,8 +668,7 @@ public final class DateUtil{
      *            任意时间
      * @param millisecond
      *            加减毫秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
-     * @return 指定日期 <code>date</code>加减毫秒<br>
-     *         如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
      * @see org.apache.commons.lang3.time.DateUtils#addMilliseconds(Date, int)
      * @since 1.4.1
      */
@@ -696,8 +688,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得任意日期中的年份部分<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#YEAR
      */
@@ -714,8 +705,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得任意日期中的月份<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MONTH
      */
@@ -751,8 +741,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 指定日期 <code>date</code>年中的星期数<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#WEEK_OF_YEAR
      * @see Calendar#getFirstDayOfWeek()
@@ -773,9 +762,8 @@ public final class DateUtil{
      * </pre>
      * 
      * @param date
-     *            任意时间<br>
-     *            如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
-     * @return 获得任意时间中的天(在当年中)
+     *            任意时间
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.0.2
      */
     public static int getDayOfYear(Date date){
@@ -791,8 +779,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得任意时间中的天<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#DAY_OF_MONTH
      */
@@ -813,8 +800,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 指定日期 <code>date</code>星期几<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see Calendar#SUNDAY
      * @see Calendar#MONDAY
      * @see Calendar#TUESDAY
@@ -838,8 +824,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得时间中的小时<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#HOUR_OF_DAY
      */
@@ -863,8 +848,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得date 在它一年中的 小时数<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.0.2
      */
     public static int getHourOfYear(Date date){
@@ -880,8 +864,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得时间中的分钟<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#MINUTE
      */
@@ -898,8 +881,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得时间中的秒<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see CalendarUtil#getFieldValue(Date, int)
      * @see Calendar#SECOND
      */
@@ -916,8 +898,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得指定日期 <code>date</code>时间在当天中的秒数<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see TimeInterval#SECONDS_PER_DAY
      * @see TimeInterval#SECONDS_PER_HOUR
      * @see #getSecondOfHour(Date)
@@ -937,8 +918,7 @@ public final class DateUtil{
      * 
      * @param date
      *            任意时间
-     * @return 获得时间在当前小时中的秒数<br>
-     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      * @see TimeInterval#SECONDS_PER_MINUTE
      * @see TimeInterval#SECONDS_PER_HOUR
      * @since 1.0.2
@@ -974,7 +954,7 @@ public final class DateUtil{
      * 将指定日期 <code>date</code>转换成特殊格式的字符串.
      * 
      * <pre class="code">
-     * DateUtil.toString(Tue Oct 16 23:49:21 CST 2012,DatePattern.commonWithMillisecond) =2012-10-16 23:49:21.525
+     * DateUtil.toString(Tue Oct 16 23:49:21 CST 2012,DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND) =2012-10-16 23:49:21.525
      * </pre>
      * 
      * @param date
@@ -1072,7 +1052,6 @@ public final class DateUtil{
      * @see GregorianCalendar
      * @see Calendar#setTime(Date)
      * @see Calendar#setTimeInMillis(long)
-     * 
      * @see org.apache.commons.lang3.time.DateUtils#toCalendar(Date)
      */
     public static Calendar toCalendar(Date date){
