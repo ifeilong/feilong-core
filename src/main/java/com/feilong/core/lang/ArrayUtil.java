@@ -102,7 +102,18 @@ public final class ArrayUtil{
     }
 
     /**
-     * Returns a new array of the given length with the specified component type.
+     * 构造一个指定类型 <code>componentType</code> 以及 指定长度 <code>length</code>的数组.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * assertArrayEquals(new Integer[] {}, ArrayUtil.newArray(Integer.class, 0));
+     * assertArrayEquals(new Integer[] { null, null, null }, ArrayUtil.newArray(Integer.class, 3));
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -111,7 +122,7 @@ public final class ArrayUtil{
      * @param length
      *            the length of the new array
      * @return 如果 <code>componentType</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 {@code length<0} ,抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code length < 0} ,抛出 {@link IllegalArgumentException}<br>
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
      * @see "com.google.common.collect#newArray(Class, int)"

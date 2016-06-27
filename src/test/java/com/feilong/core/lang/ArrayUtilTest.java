@@ -60,6 +60,7 @@ public class ArrayUtilTest{
     @Test
     public void testNewArray4(){
         assertArrayEquals(new Integer[] {}, ArrayUtil.newArray(Integer.class, 0));
+        assertArrayEquals(new Integer[] { null, null, null }, ArrayUtil.newArray(Integer.class, 3));
     }
 
     /**
