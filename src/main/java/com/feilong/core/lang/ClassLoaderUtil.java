@@ -32,7 +32,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * {@link java.lang.ClassLoader}工具类.
+ * {@link java.lang.ClassLoader ClassLoader}工具类.
  * 
  * <h3>关于查找资源:</h3>
  * 
@@ -84,11 +84,14 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * <ul>
  * <li>{@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} 需要这么写
- * <b>"/messages/feilong-core-message_en_US.properties"</b>, 路径可以写成相对路径或者绝对路径;<br>
- * 以 / 开头,则这样的路径是指定绝对路径, 如果不以 / 开头, 则路径是相对与这个class所在的包的</li>
+ * <b>"/messages/feilong-core-message_en_US.properties"</b>,<br>
+ * 路径可以写成相对路径或者绝对路径; 以 / 开头,则这样的路径是指定绝对路径, 如果不以 / 开头, 则路径是相对与这个class所在的包的</li>
  * <li>{@link java.lang.ClassLoader#getResourceAsStream(String) ClassLoader#getResourceAsStream(String)} 需要这么写
- * <b>"messages/feilong-core-message_en_US.properties"</b>,ClassLoader JVM会使用BootstrapLoader去加载资源文件.<br>
+ * <b>"messages/feilong-core-message_en_US.properties"</b>,<br>
+ * {@link ClassLoader} JVM会使用BootstrapLoader去加载资源文件.<br>
  * 所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" <span style="color:red">不需要"/"</span></li>
+ * <li>如果你的项目使用了spring,建议条件允许的话,使用 <code>org.springframework.core.io.ClassPathResource</code>,这个类是基于{@link ClassLoader}的,同时会
+ * <code>org.springframework.util.StringUtils#cleanPath(String)</code>,并且如果发现首字符是/斜杆, 会去掉,这样使用起来很方便</li>
  * </ul>
  * 
  * </blockquote>
@@ -96,6 +99,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.lang.ClassLoader
  * @see java.net.URLClassLoader
+ * @see "org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)"
  * @since 1.0.0
  */
 public final class ClassLoaderUtil{
@@ -181,10 +185,12 @@ public final class ClassLoaderUtil{
      * @param resourceName
      *            the resource name
      * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.2.1
      */
     private static URL getResource(ClassLoader classLoader,String resourceName){
         Validate.notNull(classLoader, "classLoader can't be null!");
+        Validate.notNull(resourceName, "resourceName can't be null!");
         return classLoader.getResource(resourceName);
     }
 
@@ -216,15 +222,21 @@ public final class ClassLoaderUtil{
     // *****************************************************
     /**
      * This is a convenience method to load a resource as a stream.
-     * <p>
-     * The algorithm used to find the resource is given in getResource()
-     * </p>
+     * 
+     * <h3>代码流程:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>首先会从所有的classLoader中查找资源{@code #getResourceInAllClassLoader(String, Class)}</li>
+     * <li>如果查找不到资源,那么返回 null</li>
+     * <li>如果找到资源,那么返回 {@link URL#openStream()}</li>
+     * </ol>
+     * </blockquote>
      * 
      * @param resourceName
      *            The name of the resource to load
      * @param callingClass
      *            The Class object of the calling object
-     * @return the resource as stream
+     * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #getResourceInAllClassLoader(String, Class)
      * @see "org.apache.velocity.util.ClassUtils#getResourceAsStream(Class, String)"
      */
@@ -253,7 +265,8 @@ public final class ClassLoaderUtil{
      *            The name of the resource to load
      * @param callingClass
      *            The Class object of the calling object
-     * @return 如果在所有的{@link ClassLoader}里面都查不到资源,那么返回null
+     * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果在所有的{@link ClassLoader}里面都查不到资源,那么返回null
      * @since 1.6.2
      */
     public static URL getResourceInAllClassLoader(String resourceName,Class<?> callingClass){
