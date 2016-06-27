@@ -354,38 +354,6 @@ public final class URIUtil{
     // [start] encode/decode
 
     /**
-     * {@link CharsetType#ISO_8859_1} 的方式去除乱码.
-     * 
-     * <p>
-     * {@link CharsetType#ISO_8859_1} 是JAVA网络传输使用的标准 字符集
-     * </p>
-     * 
-     * <h3></h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>tomcat server.xml Connector URIEncoding="UTF-8"</li>
-     * <li>{@code <fmt:requestEncoding value="UTF-8"/>}</li>
-     * </ul>
-     * </blockquote>
-     *
-     * @param str
-     *            字符串
-     * @param charsetType
-     *            使用的编码,see {@link CharsetType}
-     * @return 如果 <code>str</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     * @see "org.apache.commons.codec.net.URLCodec#encode(String, String)"
-     * @see "org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport"
-     * @see "org.apache.catalina.filters.SetCharacterEncodingFilter"
-     * @deprecated 一般不需要这个方法 @since 1.7.3
-     */
-    @Deprecated
-    public static String decodeISO88591String(String str,String charsetType){
-        return Validator.isNullOrEmpty(str) ? StringUtils.EMPTY
-                        : StringUtil.newString(StringUtil.getBytes(str, CharsetType.ISO_8859_1), charsetType);
-    }
-
-    /**
      * 加码,对参数值进行编码 .
      * 
      * <p style="color:red">
