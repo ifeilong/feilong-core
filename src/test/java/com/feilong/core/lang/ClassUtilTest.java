@@ -50,8 +50,8 @@ public class ClassUtilTest{
      */
     @Test
     public void testGetClass() throws ClassNotFoundException{
-        assertSame(FeiLongVersion.class, ClassUtil.getClass("com.feilong.core.FeiLongVersion"));
-        assertSame(FeiLongVersion.class, ClassUtils.getClass("com.feilong.core.FeiLongVersion"));
+        assertSame(FeiLongVersion.class, ClassUtil.getClass(FeiLongVersion.class.getName()));
+        assertSame(FeiLongVersion.class, ClassUtils.getClass(FeiLongVersion.class.getName()));
     }
 
     /**
@@ -129,4 +129,5 @@ public class ClassUtilTest{
         LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(this.getClass())));
         LOGGER.debug(JsonUtil.format(ClassUtil.getClassInfoMapForLog(DatePattern.class)));
     }
+
 }

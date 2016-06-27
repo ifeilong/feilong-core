@@ -68,36 +68,6 @@ import com.feilong.core.lang.reflect.ReflectException;
  * 
  * </blockquote>
  * 
- * <h3>关于装载类 {@link #loadClass(String)}:</h3>
- * 
- * <blockquote>
- * 
- * <table border="1" cellspacing="0" cellpadding="4" summary="">
- * <tr style="background-color:#ccccff">
- * <th align="left">字段</th>
- * <th align="left">说明</th>
- * </tr>
- * <tr valign="top">
- * <td><code>Class klass=对象引用o.{@link java.lang.Object#getClass() getClass()};</code></td>
- * <td>返回引用o运行时真正所指的对象(因为:儿子对象的引用可能会赋给父对象的引用变量中)所属的类O的Class的对象.<br>
- * 谈不上对类O做什么操作.</td>
- * </tr>
- * <tr valign="top" style="background-color:#eeeeff">
- * <td><code>Class klass=A.class;</code></td>
- * <td>JVM将使用类A的类装载器,将类A装入内存(前提:类A还没有装入内存),不对类A做类的初始化工作.<br>
- * 返回类A的Class的对象.</td>
- * </tr>
- * <tr valign="top">
- * <td><code>Class klass={@link java.lang.Class#forName(String) Class.forName}("类全名");</code></td>
- * <td>装载连接初始化类.</td>
- * </tr>
- * <tr valign="top" style="background-color:#eeeeff">
- * <td><code>Class klass={@link java.lang.ClassLoader#loadClass(String) ClassLoader.loadClass}("类全名");</code></td>
- * <td>装载类,不连接不初始化.</td>
- * </tr>
- * </table>
- * </blockquote>
- * 
  * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
  * 
  * <blockquote>
@@ -280,8 +250,26 @@ public final class ClassUtil{
     }
 
     /**
-     * Load a class with a given name.
+     * JVM查找并加载指定的类.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * FeiLongVersion feiLongVersion = ClassUtil.loadClass("com.feilong.core.FeiLongVersion");
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>和直接调用 {@link Class#forName(String)}的区别:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>Returns the class represented by {@code className} using the {@code classLoader}. <br>
+     * This implementation supports the syntaxes " {@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}", "
+     * {@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;} ".</li>
+     * <li>
      * <p>
      * It will try to load the class in the following order:
      * </p>
@@ -289,38 +277,11 @@ public final class ClassUtil{
      * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
      * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
      * </ul>
+     * </li>
+     * </ol>
+     * </blockquote>
      * 
-     * <p>
-     * Returns the class represented by {@code className} using the {@code classLoader}. <br>
-     * This implementation supports the syntaxes " {@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}", "
-     * {@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;} ".
-     * </p>
-     * 
-     * @param className
-     *            The name of the class to load
-     * @return 如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>className</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>className</code> 找不到相关类,那么抛出 {@link ReflectException}
-     * @see java.lang.ClassLoader#loadClass(String)
-     * @see java.lang.Class#forName(String)
-     * @see java.lang.Class#forName(String, boolean, ClassLoader)
-     * @see org.apache.commons.lang3.ClassUtils#getClass(String)
-     * @see org.apache.commons.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
-     * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
-     * @since 1.6.2
-     */
-    public static Class<?> getClass(String className){
-        Validate.notBlank(className, "className can't be blank!");
-        try{
-            return org.apache.commons.lang3.ClassUtils.getClass(className);
-        }catch (ClassNotFoundException e){
-            throw new ReflectException(e);
-        }
-    }
-
-    /**
-     * JVM查找并加载指定的类.
-     * 
+     * <h3>几点区别:</h3>
      * <blockquote>
      * 
      * <table border="1" cellspacing="0" cellpadding="4" summary="">
@@ -348,19 +309,24 @@ public final class ClassUtil{
      * </tr>
      * </table>
      * </blockquote>
-     *
+     * 
      * @param className
-     *            包名+类名 "org.jfree.chart.ChartFactory"
+     *            包名+类名,比如 "com.feilong.core.FeiLongVersion"
      * @return 如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>className</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>className</code> 找不到相关类,那么抛出 {@link ReflectException}
+     * @see java.lang.ClassLoader#loadClass(String)
      * @see java.lang.Class#forName(String)
-     * @since 1.0.7
+     * @see java.lang.Class#forName(String, boolean, ClassLoader)
+     * @see org.apache.commons.lang3.ClassUtils#getClass(String)
+     * @see org.apache.commons.lang3.ClassUtils#getClass(ClassLoader, String, boolean)
+     * @see "org.springframework.util.ClassUtils#forName(String, ClassLoader)"
+     * @since 1.6.2
      */
-    public static Class<?> loadClass(String className){
+    public static Class<?> getClass(String className){
         Validate.notBlank(className, "className can't be blank!");
         try{
-            return Class.forName(className);
+            return org.apache.commons.lang3.ClassUtils.getClass(className);
         }catch (ClassNotFoundException e){
             throw new ReflectException(e);
         }

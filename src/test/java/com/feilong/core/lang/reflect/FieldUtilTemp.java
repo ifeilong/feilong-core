@@ -178,7 +178,7 @@ public class FieldUtilTemp{
         Validate.notNull(className, "className can't be null!");
         Validate.notBlank(fieldName, "fieldName can't be blank!");
 
-        Class<?> ownerClass = ClassUtil.loadClass(className);
+        Class<?> ownerClass = ClassUtil.getClass(className);
         return getFieldValue(ownerClass, fieldName, ownerClass);
     }
 
