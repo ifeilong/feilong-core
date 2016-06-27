@@ -6,7 +6,9 @@ feilong core
 [![docs](http://progressed.io/bar/78?title=docs "docs")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
 ![tests](https://img.shields.io/badge/tests-353%20%2F%20353-green.svg "tests") 
 
-`核心jar,所有feilong platform的基础` Reduce development, Release ideas (减少开发,释放思想)
+> Reduce development, Release ideas (减少开发,释放思想)
+
+`核心jar,所有feilong platform的基础` 
 
 # 简介:
 
