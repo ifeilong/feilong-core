@@ -200,8 +200,7 @@ public final class ClassUtil{
      *            the klass
      * @param cls
      *            the cls
-     * @return true, if checks if is assignable from <br>
-     *         如果 <code>klass</code> 是null,返回false<br>
+     * @return 如果 <code>klass</code> 是null,返回false<br>
      *         如果 <code>cls</code> 是null,返回false
      * @see java.lang.Class#isAssignableFrom(Class)
      * @see org.apache.commons.lang3.ClassUtils#isAssignable(Class, Class)
@@ -266,17 +265,23 @@ public final class ClassUtil{
      * <h3>和直接调用 {@link Class#forName(String)}的区别:</h3>
      * <blockquote>
      * <ol>
+     * 
+     * <li>一般情况下 = {@link Class#forName(String)}</li>
+     * 
      * <li>Returns the class represented by {@code className} using the {@code classLoader}. <br>
-     * This implementation supports the syntaxes " {@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}", "
-     * {@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;} ".</li>
+     * 支持 " {@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}", "{@code [Ljava.util.Map.Entry;}", and
+     * "{@code [Ljava.util.Map$Entry;}".</li>
+     * 
      * <li>
      * <p>
-     * It will try to load the class in the following order:
+     * 会尝试从下面的顺序加载class:
      * </p>
+     * 
      * <ul>
-     * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
-     * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
+     * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}</li>
+     * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}</li>
      * </ul>
+     * 
      * </li>
      * </ol>
      * </blockquote>
@@ -290,8 +295,8 @@ public final class ClassUtil{
      * <th align="left">说明</th>
      * </tr>
      * <tr valign="top">
-     * <td><code>Class klass=对象引用o.getClass();</code></td>
-     * <td>返回引用o运行时真正所指的对象(因为:儿子对象的引用可能会赋给父对象的引用变量中)所属的类O的Class的对象.<br>
+     * <td><code>Class klass=对象引用o.{@link java.lang.Object#getClass() getClass()};</code></td>
+     * <td>返回引用o运行时<b>真正所指的对象</b>(因为:儿子对象的引用可能会赋给父对象的引用变量中)所属的类O的Class的对象.<br>
      * 谈不上对类O做什么操作.</td>
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
@@ -300,11 +305,11 @@ public final class ClassUtil{
      * 返回类A的Class的对象.</td>
      * </tr>
      * <tr valign="top">
-     * <td><code>Class klass=Class.forName("类全名");</code></td>
-     * <td>装载连接初始化类.</td>
+     * <td><code>Class klass={@link java.lang.Class#forName(String) Class.forName}("类全名");</code></td>
+     * <td>装载连接<b>初始化类</b>.</td>
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
-     * <td><code>Class klass=ClassLoader.loadClass("类全名");</code></td>
+     * <td><code>Class klass={@link java.lang.ClassLoader#loadClass(String) ClassLoader.loadClass}("类全名");</code></td>
      * <td>装载类,不连接不初始化.</td>
      * </tr>
      * </table>
@@ -337,7 +342,7 @@ public final class ClassUtil{
      *
      * @param klass
      *            the klass
-     * @return the map for log
+     * @return 如果 <code>klass</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      */
     public static Map<String, Object> getClassInfoMapForLog(Class<?> klass){
         if (Validator.isNullOrEmpty(klass)){
