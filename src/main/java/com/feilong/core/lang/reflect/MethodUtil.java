@@ -35,8 +35,10 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <li>{@link #invokeMethod(Object, String, Object[], Class[])}</li>
  * </ol>
  * <br>
- * 注意,底层调用的是 {@link org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[])},这个方法会调用
- * {@link org.apache.commons.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)}获得最佳匹配方法
+ * 注意,底层调用的是 {@link org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[]) MethodUtils.invokeMethod}
+ * ,这个方法会调用
+ * {@link org.apache.commons.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
+ * MethodUtils.getMatchingAccessibleMethod}获得最佳匹配方法
  * <p>
  * 下面两个是调用静态方法的:
  * </p>
@@ -44,9 +46,12 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <li>{@link #invokeStaticMethod(Class, String, Object...)}</li>
  * <li>{@link #invokeStaticMethod(Class, String, Object[], Class[])}</li>
  * </ol>
+ * </blockquote>
  * 
+ * <h3>关于 {@link org.apache.commons.lang3.reflect.MethodUtils MethodUtils}:</h3>
+ * <blockquote>
  * <p>
- * 如果你要调用精准的方法,可以使用 {@link org.apache.commons.lang3.reflect.MethodUtils}原生方法:
+ * 如果你要调用精准的方法,可以使用 {@link org.apache.commons.lang3.reflect.MethodUtils MethodUtils}原生方法:
  * </p>
  * <ol>
  * <li>{@link MethodUtils#invokeExactMethod(Object, String)}</li>
@@ -57,7 +62,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </ol>
  * 
  * <p>
- * 当然,你还可以调用 {@link org.apache.commons.lang3.reflect.MethodUtils}其他方法:
+ * 当然,你还可以调用 {@link org.apache.commons.lang3.reflect.MethodUtils MethodUtils}其他方法:
  * </p>
  * <ol>
  * <li>{@link MethodUtils#getAccessibleMethod(java.lang.reflect.Method)}</li>
@@ -82,22 +87,18 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <tr valign="top">
  * <td>{@link Class#getMethods()}</td>
  * <td>
- * 
+ * 返回一个包含某些 Method 对象的数组,
  * <p>
- * 返回一个包含某些 Method 对象的数组,这些对象反映此 Class 对象所表示的类或接口(包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口)的<span style="color:green">公共(public)
- * member</span>方法.(return all the (public) member methods inherited from the Object class)
+ * 这些对象反映此 Class 对象所表示的类或接口(包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口)的<span style="color:green">公共(public) member</span>方法.<br>
  * </p>
  * 
- * <p>
- * 数组类返回从 Object 类继承的所有(公共)member 方法.
- * </p>
- * 
- * <b>返回数组中的元素没有排序,也没有任何特定的顺序.</b><br>
+ * <b>返回数组中的元素没有排序.</b><br>
  * 
  * 如果类声明了带有相同参数类型的多个公共成员方法,则它们都会包含在返回的数组中.<br>
  * 如果此 Class 对象表示没有公共成员方法的类或接口,或者表示一个基本类型或 void,则此方法返回长度为 0 的数组. <br>
  * 类初始化方法<code>&lt;clinit&gt;</code> 不包含在返回的数组中.</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link Class#getDeclaredMethods()}</td>
  * <td>
@@ -108,12 +109,15 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * 如果该类声明带有相同参数类型的多个公共成员方法,则它们都包含在返回的数组中.
  * <p>
- * <b>返回数组中的元素没有排序,也没有任何特定的顺序.</b>
+ * 
+ * <b>返回数组中的元素没有排序.</b>
+ * 
  * </p>
  * 如果该类或接口不声明任何方法,或者此 Class 对象表示一个基本类型、一个数组类或 void,则此方法返回一个长度为 0 的数组.<br>
  * 类初始化方法<code>&lt;clinit&gt;</code> 包含在返回数组中.<br>
  * </td>
  * </tr>
+ * 
  * </table>
  * </blockquote>
  * 
@@ -221,7 +225,7 @@ public final class MethodUtil{
     }
 
     /**
-     * Invoke static method.
+     * 执行静态方法.
      *
      * @param <T>
      *            the generic type
@@ -246,7 +250,7 @@ public final class MethodUtil{
         try{
             return (T) MethodUtils.invokeStaticMethod(klass, methodName, args, parameterTypes);
         }catch (Exception e){
-            String pattern = "invoke Static Method Exception,klass:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
+            String pattern = "invoke Static Method Exception,class:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
             throw new ReflectException(Slf4jUtil.format(pattern, klass.getName(), methodName, args, parameterTypes), e);
         }
     }

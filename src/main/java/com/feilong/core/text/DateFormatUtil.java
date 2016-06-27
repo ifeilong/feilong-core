@@ -43,7 +43,9 @@ import org.apache.commons.lang3.Validate;
  * @see org.apache.commons.beanutils.locale.converters.DateLocaleConverter
  * @see <a href="http://newslxw.iteye.com/blog/1114851">SimpleDateFormat在多线程下不安全</a>
  * @since 1.0.1
+ * @deprecated parse 的功能可以直接使用{@link org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)}
  */
+@Deprecated
 public final class DateFormatUtil{
 
     /** Don't let anyone instantiate this class. */
@@ -52,8 +54,6 @@ public final class DateFormatUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
-
-    // [start]parse
 
     /**
      * parse字符串类型转成日期类型.
@@ -102,7 +102,7 @@ public final class DateFormatUtil{
         Validate.notBlank(dateString, "dateString can't be null/empty!");
         Validate.notBlank(pattern, "pattern can't be null/empty!");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, ObjectUtils.defaultIfNull(locale, Locale.getDefault()));
+        //虽然可以直接调用 java.text.DateFormat#parse(String) 但是他会抛出 ParseException 是checked Exception
         return simpleDateFormat.parse(dateString, new ParsePosition(0));//如果发生错误，则返回 null
     }
-    // [end]
 }
