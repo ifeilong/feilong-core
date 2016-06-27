@@ -1003,8 +1003,9 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Date date = DateUtil.toDate("2016-02-33", DatePattern.COMMON_DATE)   = 2016-03-04
-     * 
+     * DateUtil.toDate("2016-02-33", DatePattern.COMMON_DATE)                   = 2016-03-04
+     * DateUtil.toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ")    = 2016-06-28 17:21:12
+     * DateUtil.toDate("2016-06-28T01:21:12+0800", "yyyy-MM-dd'T'HH:mm:ssZ")    = 2016-06-28 01:21:12
      * </pre>
      * 
      * </blockquote>
