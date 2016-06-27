@@ -297,8 +297,8 @@ public class DateUtilTest extends BaseDateUtilTest{
         assertEquals(
                         true,
                         DateUtil.isBefore(
-                                        DateUtil.toDate(FROMSTRING, DatePattern.COMMON_DATE),
-                                        DateUtil.toDate(TOSTRING, DatePattern.COMMON_DATE)));
+                                        DateUtil.toDate("2011-03-05", DatePattern.COMMON_DATE),
+                                        DateUtil.toDate("2011-03-10", DatePattern.COMMON_DATE)));
         assertEquals(
                         false,
                         DateUtil.isBefore(

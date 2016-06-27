@@ -19,6 +19,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.junit.Test;
@@ -55,26 +56,15 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalDayList(){
-        LOGGER.debug(
-                        JsonUtil.format(
-                                        DateExtensionUtil.getIntervalDayList(
-                                                        DateUtil.toDate(FROMSTRING, DatePattern.COMMON_DATE_AND_TIME),
-                                                        DateUtil.toDate(TOSTRING, DatePattern.COMMON_DATE_AND_TIME))));
-        LOGGER.debug(
-                        JsonUtil.format(
-                                        DateExtensionUtil.getIntervalDayList(
-                                                        DateUtil.toDate(TOSTRING, DatePattern.COMMON_DATE_AND_TIME),
-                                                        DateUtil.toDate(FROMSTRING, DatePattern.COMMON_DATE_AND_TIME))));
-    }
+        String pattern = DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+        String begin = "2011-03-05 23:31:25.456";
+        String end = "2011-03-10 01:30:24.895";
 
-    /**
-     * Test get interval day list1.
-     */
-    @Test
-    public void testGetIntervalDayList1(){
-        Date fromDate = DateUtil.toDate(FROMSTRING, DatePattern.COMMON_DATE_AND_TIME);
-        Date toDate = DateUtil.toDate(TOSTRING, DatePattern.COMMON_DATE_AND_TIME);
-        LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(fromDate, toDate)));
+        List<Date> intervalDayList = DateExtensionUtil.getIntervalDayList(DateUtil.toDate(begin, pattern), DateUtil.toDate(end, pattern));
+        LOGGER.debug(JsonUtil.format(intervalDayList));
+
+        List<Date> intervalDayList2 = DateExtensionUtil.getIntervalDayList(DateUtil.toDate(end, pattern), DateUtil.toDate(begin, pattern));
+        LOGGER.debug(JsonUtil.format(intervalDayList2));
     }
 
     /**
@@ -82,8 +72,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalForView(){
-        Date now = DateUtil.toDate("2011-05-19 11:31:25.456", DatePattern.COMMON_DATE_AND_TIME);
-        now = new Date();
+        Date now = new Date();
         Date date = DateUtil.toDate("2012-12-03 00:00:00", DatePattern.COMMON_DATE_AND_TIME);
         LOGGER.debug(DateExtensionUtil.getIntervalForView(now, date));
         LOGGER.debug(DateExtensionUtil.getIntervalTime(now, date) + "");
