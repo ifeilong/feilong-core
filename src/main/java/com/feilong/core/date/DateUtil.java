@@ -15,6 +15,7 @@
  */
 package com.feilong.core.date;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -25,7 +26,7 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.TimeInterval;
-import com.feilong.core.text.DateFormatUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.util.Date}操作工具类(feilong-core核心类之一).
@@ -42,7 +43,7 @@ import com.feilong.core.text.DateFormatUtil;
  * <td>字符串转日期</td>
  * <td>
  * <ul>
- * <li>{@link DateUtil#toDate(String, String)}</li>
+ * <li>{@link DateUtil#toDate(String, String...)}</li>
  * </ul>
  * </td>
  * </tr>
@@ -183,7 +184,6 @@ import com.feilong.core.text.DateFormatUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see CalendarUtil
  * @see DatePattern
- * @see DateFormatUtil
  * @see org.apache.commons.lang3.time.DateUtils
  * @since 1.0.0
  */
@@ -996,27 +996,51 @@ public final class DateUtil{
     }
 
     /**
-     * 将时间string字符串转换成date类型.
+     * 将时间字符串 <code>dateString</code> 使用一个或者多个不同的 <code>datePattern</code> 模式按照顺序转换成date类型.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Date date = DateUtil.toDate("2016-02-33", DatePattern.COMMON_DATE)   = 2016-03-04
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>转换的时候,使用日历的宽松模式 参见 {@link java.text.DateFormat#setLenient(boolean)},即支持传入"2016-02-33",会转换成 2016-03-04</li>
+     * <li>如果能解析所有的字符串,那么视为成功</li>
+     * <li>如果没有任何的模式匹配,将会抛出异常</li>
+     * </ol>
+     * </blockquote>
      * 
      * @param dateString
      *            时间字符串
-     * @param datePattern
+     * @param parsePatterns
      *            模式,时间字符串的模式{@link DatePattern}
      * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
-     *         否则使用 {@link java.util.Locale#getDefault()},调用 {@link java.text.SimpleDateFormat#parse(String, java.text.ParsePosition)}
-     * @see DateFormatUtil#parse(String, String)
+     *         如果 <code>parsePatterns</code> 是 null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/">java-string-to-date-conversion</a>
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/22180505#22180505">java-string-to-date-
      *      conversion/22180505#22180505</a>
      * @see <a href="http://stackoverflow.com/questions/2735023/convert-string-to-java-util-date">convert-string-to-java-util-date</a>
-     * @since 1.6.0
+     * @since 1.7.3 change param to parsePatterns array
      */
-    public static Date toDate(String dateString,String datePattern){
-        return DateFormatUtil.parse(dateString, datePattern);
+    public static Date toDate(String dateString,String...parsePatterns){
+        Validate.notBlank(dateString, "dateString can't be blank!");
+        Validate.notNull(parsePatterns, "parsePatterns can't be null!");
+        try{
+            return DateUtils.parseDate(dateString, parsePatterns);
+        }catch (ParseException e){
+            String pattern = "input dateString:[{}],parsePatterns:[{}] parseDate exception";
+            throw new IllegalArgumentException(Slf4jUtil.format(pattern, dateString, parsePatterns), e);
+        }
     }
 
     // [end]

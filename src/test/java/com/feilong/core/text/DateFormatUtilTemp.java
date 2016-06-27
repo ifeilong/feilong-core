@@ -46,10 +46,10 @@ import org.apache.commons.lang3.Validate;
  * @deprecated parse 的功能可以直接使用{@link org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)}
  */
 @Deprecated
-public final class DateFormatUtil{
+public final class DateFormatUtilTemp{
 
     /** Don't let anyone instantiate this class. */
-    private DateFormatUtil(){
+    private DateFormatUtilTemp(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
