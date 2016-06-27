@@ -29,7 +29,6 @@ import com.feilong.core.util.RegexUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3
  */
-
 public class TelephoneMustAreaCodePatternTest extends BaseParameterizedTest<String, Boolean>{
 
     /**
