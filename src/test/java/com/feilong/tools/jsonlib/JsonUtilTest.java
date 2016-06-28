@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.tools.Menu;
+import com.feilong.store.system.Menu;
 import com.feilong.test.User;
 import com.feilong.tools.BaseJsonTest;
 import com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
