@@ -821,12 +821,12 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} testList = new ArrayList{@code <User>}();
-     * testList.add(new User(2L));
-     * testList.add(new User(5L));
-     * testList.add(new User(5L));
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(5L));
+     * list.add(new User(5L));
      * 
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(testList, "id")));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, "id")));
      * </pre>
      * 
      * 返回:

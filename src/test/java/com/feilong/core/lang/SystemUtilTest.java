@@ -48,7 +48,7 @@ public class SystemUtilTest{
     }
 
     /**
-     * Gets the env map for LOGGER.
+     * Test get env map for log.
      */
     @Test
     public void testGetEnvMapForLog(){
@@ -68,6 +68,9 @@ public class SystemUtilTest{
         LOGGER.debug(JsonUtil.format(strings));
     }
 
+    /**
+     * Test get properties map for log.
+     */
     @Test
     public void testGetPropertiesMapForLog(){
         Map<String, String> propertiesMapForLog = SystemUtil.getPropertiesMapForLog();

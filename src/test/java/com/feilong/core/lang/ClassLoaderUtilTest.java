@@ -76,10 +76,10 @@ public class ClassLoaderUtilTest{
     }
 
     /**
-     * Test get class path.
+     * Test get root class path.
      */
     @Test
-    public void testGetClassPath(){
+    public void testGetRootClassPath(){
         LOGGER.debug("" + ClassLoaderUtil.getRootClassPath());
     }
 
@@ -88,58 +88,13 @@ public class ClassLoaderUtilTest{
      */
     @Test
     public void testPrint(){
-        // /E:/Workspaces/eclipse3.5/feilong-platform/feilong-common/target/classes/
-        String a = this.getClass().getClassLoader().getResource(".").getPath();
-        // /E:/Workspaces/eclipse3.5/feilong-platform/feilong-common/target/classes/temple/io/
-        String b = this.getClass().getResource("").getPath();
-        // /E:/Workspaces/eclipse3.5/feilong-platform/feilong-common/target/classes/temple/io/%20
-        String c = this.getClass().getResource(" ").getPath();
+        Class<? extends ClassLoaderUtilTest> klass = this.getClass();
+        LOGGER.debug(klass.getClassLoader().getResource(".").getPath()); ///E:/Workspaces/feilong/feilong-core/target/test-classes/
+        LOGGER.debug(klass.getResource("").getPath());///E:/Workspaces/feilong/feilong-core/target/test-classes/com/feilong/core/lang/
+        LOGGER.debug(klass.getResource(" ").getPath());///E:/Workspaces/feilong/feilong-core/target/test-classes/com/feilong/core/lang/%20
+
         // 获得编译类根目录
-        // /E:/Workspaces/eclipse3.5/feilong-platform/feilong-common/target/classes/
-        String d = this.getClass().getResource("/").getPath();
-        // 获得应用程序完整路径
-        // E:\Workspaces\eclipse3.5\feilong-platform\feilong-common
-        LOGGER.debug(a);
-        LOGGER.debug(b);
-        LOGGER.debug(c);
-        LOGGER.debug(d);
+        LOGGER.debug(klass.getResource("/").getPath());///E:/Workspaces/feilong/feilong-core/target/test-classes/
     }
 
-    /**
-     * Load resources.
-     * 
-     * <p>
-     * This method will try to load the resource using the following methods (in order):
-     * </p>
-     * <ul>
-     * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
-     * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
-     * <li>From {@link Class#getClassLoader() callingClass.getClassLoader() }
-     * </ul>
-     * 
-     * @param resourceName
-     *            the resource name
-     * @param callingClass
-     *            the calling class
-     * @return the resources
-     * @see java.lang.ClassLoader#getResources(String)
-     */
-    //    public static Enumeration<URL> getResources(String resourceName,Class<?> callingClass){
-    //        try{
-    //            List<ClassLoader> classLoaderList = getAllClassLoaderList(callingClass);
-    //            for (ClassLoader classLoader : classLoaderList){
-    //                Enumeration<URL> resourcesEnumeration = classLoader.getResources(resourceName);
-    //                if (null == resourcesEnumeration){
-    //                    LOGGER.warn(getLogInfo(resourceName, classLoader, false));
-    //                }else{
-    //                    LOGGER.debug(getLogInfo(resourceName, classLoader, true));
-    //                    return resourcesEnumeration;
-    //                }
-    //            }
-    //            LOGGER.warn("resourceName:[{}] in all ClassLoader not found", resourceName);
-    //            return null;
-    //        }catch (IOException e){
-    //            throw new UncheckedIOException(e);
-    //        }
-    //    }
 }

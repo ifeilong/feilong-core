@@ -148,17 +148,6 @@ public class URIUtilTest{
     @Test
     public void create(){
         String url = "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2";
-        // url = "/cmens/t-b-f-a-c-s-f-p400-600,0-200,200-400,600-up-gCold Gear-eBase Layer-i1-o.htm";
-        //		queryString = "'\"--></style></script><script>netsparker(0x0000E1)</script>=";
-        // queryString = "'%22--%3E%3C/style%3E%3C/script%3E%3Cscript%3Enetsparker(0x0000E1)%3C/script%3E=";
-
-        // url = url + "?" + queryString;
-        LOGGER.debug(url);
-        // URIEditor uriEditor = new URIEditor();
-        // uriEditor.setAsText(url);
-        // LOGGER.debug(URIEditor);
-        // URL url1 = new URL(url);
-        // LOGGER.debug(url1.toString());
         URI uri = URIUtil.create(url, CharsetType.UTF8);
         LOGGER.debug(uri.toString());
     }
@@ -169,7 +158,6 @@ public class URIUtilTest{
     @Test
     public void testCreate2(){
         URI uri = URIUtil.create("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3", CharsetType.UTF8);
-        LOGGER.debug(uri.toString());
         LOGGER.debug(JsonUtil.format(uri));
     }
 

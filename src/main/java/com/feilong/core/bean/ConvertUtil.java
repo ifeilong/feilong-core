@@ -1137,6 +1137,33 @@ public final class ConvertUtil{
      * </p>
      * </blockquote>
      * 
+     * <h3>甚至于:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 有很多时候,参数需要一个对象list,构造的时候,你需要这样
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <UserAddress>} userAddresseList = new ArrayList{@code <UserAddress>}();
+     * UserAddress userAddress = new UserAddress();
+     * userAddress.setAddress("上海");
+     * userAddresseList.add(userAddress);
+     * 
+     * </pre>
+     * 
+     * 你可以重构成:
+     * 
+     * <pre class="code">
+     * UserAddress userAddress = new UserAddress();
+     * userAddress.setAddress("上海");
+     * List{@code <UserAddress>} userAddresseList = toList(userAddress);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * <h3>注意 :</h3>
      * 
      * <blockquote>

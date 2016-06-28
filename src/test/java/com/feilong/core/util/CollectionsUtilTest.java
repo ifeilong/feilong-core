@@ -15,10 +15,15 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
@@ -311,15 +316,12 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelect(){
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
 
-        List<String> list = new ArrayList<String>();
-        list.add("张飞");
-        list.add("刘备");
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", toList("张飞", "刘备"))));
     }
 
     /**
@@ -327,13 +329,13 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testFind(){
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
-        objectCollection.add(new User("关羽", 24));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
+        list.add(new User("关羽", 24));
 
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.find(list, "name", "关羽")));
     }
 
     /**
@@ -360,13 +362,13 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectValue(){
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
-        objectCollection.add(new User("关羽", 24));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
+        list.add(new User("关羽", 24));
 
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", "关羽")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", "关羽")));
     }
 
     /**
@@ -374,13 +376,13 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectArray(){
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
 
         String[] array = { "刘备", "关羽" };
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", array)));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", array)));
     }
 
     /**
@@ -402,17 +404,15 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testRemoveAll(){
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
 
-        List<String> list = new ArrayList<String>();
-        list.add("张飞");
-        list.add("刘备");
+        List<User> removeAll = CollectionsUtil.removeAll(list, "name", toList("张飞", "刘备"));
 
-        List<User> removeAll = CollectionsUtil.removeAll(objectCollection, "name", list);
-        LOGGER.debug(JsonUtil.format(removeAll));
+        assertThat(removeAll, hasSize(1));
+        assertThat(removeAll.get(0), hasProperty("name", equalTo("关羽")));
     }
 
     /**
@@ -420,13 +420,13 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testRemoveAll1(){
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
 
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(objectCollection, "name", "刘备")));
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(objectCollection, "name", "刘备", "关羽")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备", "关羽")));
     }
 
     /**
@@ -434,15 +434,13 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectRejected1(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
-
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
         List<User> selectRejected = CollectionsUtil.selectRejected(list, "name", "刘备", "张飞");
-        LOGGER.debug(JsonUtil.format(selectRejected));
-
         assertSame(1, selectRejected.size());
+        assertThat(selectRejected.get(0), hasProperty("name", equalTo("关羽")));
     }
 
     /**
@@ -450,15 +448,12 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectRejected(){
-        List<User> objectCollection = new ArrayList<User>();
-        objectCollection.add(new User("张飞", 23));
-        objectCollection.add(new User("关羽", 24));
-        objectCollection.add(new User("刘备", 25));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
 
-        List<String> list = new ArrayList<String>();
-        list.add("张飞");
-        list.add("刘备");
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.selectRejected(objectCollection, "name", list)));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", toList("张飞", "刘备"))));
     }
 
     /**
@@ -466,15 +461,15 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGetFieldValueMap(){
-        List<User> testList = new ArrayList<User>();
-        testList.add(new User("张飞", 23));
-        testList.add(new User("关羽", 24));
-        testList.add(new User("刘备", 25));
+        List<User> list = new ArrayList<User>();
+        list.add(new User("张飞", 23));
+        list.add(new User("关羽", 24));
+        list.add(new User("刘备", 25));
 
-        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(testList, "name", "age");
+        Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, "name", "age");
         LOGGER.debug(JsonUtil.format(map));
 
-        assertSame(testList.size(), map.size());
+        assertSame(list.size(), map.size());
     }
 
     /**
@@ -482,15 +477,16 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGetFieldValueList(){
-        List<User> testList = new ArrayList<User>();
-        testList.add(new User(2L));
-        testList.add(new User(5L));
-        testList.add(new User(5L));
+        List<User> list = toList(//
+                        new User(2L),
+                        new User(5L),
+                        new User(5L));
 
-        List<Long> fieldValueCollection = CollectionsUtil.getPropertyValueList(testList, "id");
+        List<Long> fieldValueCollection = CollectionsUtil.getPropertyValueList(list, "id");
         fieldValueCollection.add(7L);
         fieldValueCollection.add(8L);
-        LOGGER.debug(JsonUtil.format(fieldValueCollection));
+
+        assertThat(fieldValueCollection, contains(2L, 5L, 5L, 7L, 8L));
     }
 
     /**
@@ -498,13 +494,13 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGetFieldValueSet(){
-        List<User> testList = new ArrayList<User>();
-        testList.add(new User(2L));
-        testList.add(new User(5L));
-        testList.add(new User(5L));
+        List<User> list = toList(//
+                        new User(2L),
+                        new User(5L),
+                        new User(5L));
 
-        Set<Long> fieldValueCollection = CollectionsUtil.getPropertyValueSet(testList, "id");
-        LOGGER.debug(JsonUtil.format(fieldValueCollection));
+        Set<Long> set = CollectionsUtil.getPropertyValueSet(list, "id");
+        assertThat(set, contains(2L, 5L));
     }
 
     /**
@@ -512,13 +508,12 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testAvg(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User(2L));
-        list.add(new User(5L));
-        list.add(new User(5L));
+        List<User> list = toList(//
+                        new User(2L),
+                        new User(5L),
+                        new User(5L));
 
         assertEquals(new BigDecimal("4.00"), CollectionsUtil.avg(list, "id", 2));
-
     }
 
     /**
@@ -532,9 +527,8 @@ public class CollectionsUtilTest{
         User user2 = new User(3L);
         user2.setAge(30);
 
-        List<User> list = toList(user1, user2);
-        Map<String, BigDecimal> map = CollectionsUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
-        LOGGER.debug(JsonUtil.format(map));
+        Map<String, BigDecimal> map = CollectionsUtil.avg(toList(user1, user2), ConvertUtil.toArray("id", "age"), 2);
+        assertThat(map, allOf(hasEntry("id", toBigDecimal("2.50")), hasEntry("age", toBigDecimal("24.00"))));
     }
 
     /**
@@ -542,10 +536,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSum(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User(2L));
-        list.add(new User(5L));
-        list.add(new User(5L));
+        List<User> list = toList(//
+                        new User(2L),
+                        new User(5L),
+                        new User(5L));
 
         assertEquals(new BigDecimal(12L), CollectionsUtil.sum(list, "id"));
         assertEquals(null, CollectionsUtil.sum(null, "id"));
@@ -575,18 +569,14 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSum2(){
-        List<User> list = new ArrayList<User>();
-
         User user1 = new User(2L);
         user1.setAge(18);
-        list.add(user1);
 
         User user2 = new User(3L);
         user2.setAge(30);
-        list.add(user2);
 
-        Map<String, BigDecimal> map = CollectionsUtil.sum(list, "id", "age");
-        LOGGER.debug("{}", JsonUtil.format(map));
+        Map<String, BigDecimal> map = CollectionsUtil.sum(toList(user1, user2), "id", "age");
+        assertThat(map, allOf(hasEntry("id", toBigDecimal(5)), hasEntry("age", toBigDecimal(48))));
     }
 
     /**
@@ -627,11 +617,9 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGetFieldValueList1(){
-
-        List<UserAddress> userAddresseList = new ArrayList<UserAddress>();
         UserAddress userAddress = new UserAddress();
         userAddress.setAddress("中南海");
-        userAddresseList.add(userAddress);
+        List<UserAddress> userAddresseList = toList(userAddress);
 
         //*******************************************************
         Map<String, String> attrMap = new HashMap<String, String>();
@@ -659,9 +647,7 @@ public class CollectionsUtilTest{
         user2.setAttrMap(attrMap);
         user2.setUserAddresseList(userAddresseList);
 
-        List<User> userList = new ArrayList<User>();
-        userList.add(user1);
-        userList.add(user2);
+        List<User> userList = toList(user1, user2);
 
         //数组
         List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
@@ -685,8 +671,8 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testCollectionsUtilTest(){
-
         Set<String> set = new LinkedHashSet<String>();
+
         set.add("1");
         set.add("2");
         set.add("3");

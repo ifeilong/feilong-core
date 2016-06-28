@@ -39,7 +39,12 @@ abstract class BaseDateUtilTest{
     /** The to string. */
     static final String         TOSTRING                = "2011-03-10 01:30:24.895";
 
-    /** The now. */
+    /**
+     * The now.
+     * 
+     * @deprecated
+     */
+    @Deprecated
     static final Date           NOW                     = new Date();
 
     /** The current year begin. */

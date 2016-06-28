@@ -65,6 +65,9 @@ public class ClassUtilTest{
         assertEquals(true, "1234" instanceof CharSequence);
     }
 
+    /**
+     * Test is instance22.
+     */
     @Test
     public void testIsInstance22(){
         Object object = 1;
@@ -122,7 +125,7 @@ public class ClassUtilTest{
     }
 
     /**
-     * Test get class info map for LOGGER.
+     * Test get class info map for log.
      */
     @Test
     public void testGetClassInfoMapForLog(){

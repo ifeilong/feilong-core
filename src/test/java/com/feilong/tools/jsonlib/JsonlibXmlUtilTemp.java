@@ -35,10 +35,10 @@ import com.feilong.test.Person;
  * @deprecated
  */
 @Deprecated
-public class JsonlibXmlUtilTest{
+public class JsonlibXmlUtilTemp{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonlibXmlUtilTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonlibXmlUtilTemp.class);
 
     /**
      * list转XML void.

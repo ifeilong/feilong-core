@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertEquals;
 
 import java.io.Serializable;
@@ -129,25 +130,23 @@ public class BeanUtilTest{
         // data setup  
         Address addr1 = new Address("CA1234", "xxx", "Los Angeles", "USA");
         Address addr2 = new Address("100000", "xxx", "Beijing", "China");
-        Address[] addrs = new Address[2];
-        addrs[0] = addr1;
-        addrs[1] = addr2;
-        Customer cust = new Customer(123, "John Smith", addrs);
+
+        Customer customer = new Customer(123, "John Smith", toArray(addr1, addr2));
 
         // accessing the city of first address  
-        String cityPattern = "addresses[0].city";
-        String name = (String) PropertyUtils.getSimpleProperty(cust, "name");
-        String city = (String) PropertyUtils.getProperty(cust, cityPattern);
+        String name = (String) PropertyUtils.getSimpleProperty(customer, "name");
+        String city = (String) PropertyUtils.getProperty(customer, "addresses[0].city");
+
         Object[] rawOutput1 = new Object[] { "The city of customer ", name, "'s first address is ", city, "." };
         LOGGER.debug(StringUtils.join(rawOutput1));
 
         // setting the zipcode of customer's second address  
         String zipPattern = "addresses[1].zipCode";
-        if (PropertyUtils.isWriteable(cust, zipPattern)){//PropertyUtils  
+        if (PropertyUtils.isWriteable(customer, zipPattern)){//PropertyUtils  
             LOGGER.debug("Setting zipcode ...");
-            PropertyUtils.setProperty(cust, zipPattern, "200000");//PropertyUtils  
+            PropertyUtils.setProperty(customer, zipPattern, "200000");//PropertyUtils  
         }
-        String zip = (String) PropertyUtils.getProperty(cust, zipPattern);//PropertyUtils  
+        String zip = (String) PropertyUtils.getProperty(customer, zipPattern);//PropertyUtils  
         Object[] rawOutput2 = new Object[] { "The zipcode of customer ", name, "'s second address is now ", zip, "." };
         LOGGER.debug(StringUtils.join(rawOutput2));
     }
@@ -163,10 +162,11 @@ public class BeanUtilTest{
         LOGGER.debug(StringUtils.center(" demoDynaBeans ", 40, "="));
 
         // creating a DynaBean  
-        DynaProperty[] dynaBeanProperties = new DynaProperty[] { //DynaProperty  
-                                                                 new DynaProperty("name", String.class),
-                                                                 new DynaProperty("inPrice", Double.class),
-                                                                 new DynaProperty("outPrice", Double.class), };
+        DynaProperty[] dynaBeanProperties = toArray(
+                        new DynaProperty("name", String.class),
+                        new DynaProperty("inPrice", Double.class),
+                        new DynaProperty("outPrice", Double.class));
+
         BasicDynaClass cargoClass = new BasicDynaClass("Cargo", BasicDynaBean.class, dynaBeanProperties); //BasicDynaClass  BasicDynaBean  
         DynaBean cargoDynaBean = cargoClass.newInstance();//DynaBean  
 
@@ -174,6 +174,7 @@ public class BeanUtilTest{
         cargoDynaBean.set("name", "Instant Noodles");
         cargoDynaBean.set("inPrice", new Double(21.3));
         cargoDynaBean.set("outPrice", new Double(23.8));
+
         LOGGER.debug("name: " + cargoDynaBean.get("name"));
         LOGGER.debug("inPrice: " + cargoDynaBean.get("inPrice"));
         LOGGER.debug("outPrice: " + cargoDynaBean.get("outPrice"));
@@ -213,28 +214,27 @@ public class BeanUtilTest{
      */
     @Test
     public void testCopyProperties1(){
-        User user1 = new User();
-        user1.setId(5L);
-        user1.setMoney(new BigDecimal(500000));
-        user1.setDate(new Date());
-        String[] nickName = { "feilong", "飞天奔月", "venusdrogon" };
-        user1.setNickName(nickName);
+        User user = new User();
+        user.setId(5L);
+        user.setMoney(new BigDecimal(500000));
+        user.setDate(new Date());
+        user.setNickNames(toArray("feilong", "飞天奔月", "venusdrogon"));
 
         //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
         BeanUtil.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
 
-        Converter lookup = ConvertUtils.lookup(Date.class);
-        LOGGER.debug("{},{}", lookup.getClass().getSimpleName(), lookup.convert(Date.class, new Date().toString()));
+        Converter converter = ConvertUtils.lookup(Date.class);
+        LOGGER.debug("{},{}", converter.getClass().getSimpleName(), converter.convert(Date.class, new Date().toString()));
 
-        String[] strs = { "date", "money", "nickName" };
+        String[] strs = { "date", "money", "nickNames" };
 
         User user2 = new User();
-        BeanUtil.copyProperties(user2, user1, strs);
+        BeanUtil.copyProperties(user2, user, strs);
 
         LOGGER.debug(JsonUtil.format(user2));
 
-        lookup = ConvertUtils.lookup(Date.class);
-        LOGGER.debug("{},{}", lookup.getClass().getSimpleName(), lookup.convert(Date.class, new Date().toString()));
+        converter = ConvertUtils.lookup(Date.class);
+        LOGGER.debug("{},{}", converter.getClass().getSimpleName(), converter.convert(Date.class, new Date().toString()));
     }
 
     /**

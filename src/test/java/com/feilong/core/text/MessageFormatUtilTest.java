@@ -97,6 +97,7 @@ public class MessageFormatUtilTest{
 
         int fileCount = 0;
         String diskName = "MyDisk";
+
         Object[] testArgs = { new Long(fileCount), diskName };
         LOGGER.debug(messageFormat.format(testArgs));
     }

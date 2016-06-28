@@ -15,8 +15,10 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -72,13 +74,13 @@ public class PropertyUtilTest{
         oldUser.setId(5L);
         oldUser.setMoney(new BigDecimal(500000));
         oldUser.setDate(new Date());
-        oldUser.setNickName(ConvertUtil.toArray("feilong", "飞天奔月", "venusdrogon"));
+        oldUser.setNickNames(toArray("feilong", "飞天奔月", "venusdrogon"));
 
         User newUser = new User();
-        PropertyUtil.copyProperties(newUser, oldUser, "date", "money", "nickName");
+        PropertyUtil.copyProperties(newUser, oldUser, "date", "money", "nickNames");
 
         assertThat(newUser, allOf(hasProperty("money", equalTo(new BigDecimal(500000)))));
-        LOGGER.debug(JsonUtil.format(newUser));
+        LOGGER.debug("newUser:{}", JsonUtil.format(newUser));
     }
 
     /**
@@ -105,13 +107,16 @@ public class PropertyUtilTest{
      */
     @Test
     public void testDescribe(){
+        Date now = new Date();
+
         User user = new User();
         user.setId(5L);
-        user.setDate(new Date());
+        user.setDate(now);
+
+        assertThat(PropertyUtil.describe(user), allOf(hasEntry("id", (Object) 5L), hasEntry("date", (Object) now)));
+        //LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
 
         List<User> list = ConvertUtil.toList(user);
-
-        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(new BigDecimal(5L))));
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe("123456")));
         LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(list)));
@@ -150,7 +155,8 @@ public class PropertyUtilTest{
 
         user.getUserInfo().setAge(28);
 
-        LOGGER.debug(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
-        LOGGER.debug("" + PropertyUtil.findValueOfType(user, Long.class));
+        UserInfo userInfo = PropertyUtil.findValueOfType(user, UserInfo.class);
+        assertThat(userInfo, hasProperty("age", is(28)));
+        assertThat(PropertyUtil.findValueOfType(user, Long.class), is(5L));
     }
 }
