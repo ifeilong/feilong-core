@@ -27,6 +27,7 @@ import com.feilong.core.date.DateExtensionUtilTest2;
 import com.feilong.core.date.DateUtilIsLeapYearParameterizedTest;
 import com.feilong.core.date.DateUtilTest;
 import com.feilong.core.lang.ArrayUtilTest;
+import com.feilong.core.lang.ClassLoaderUtilTest;
 import com.feilong.core.lang.ClassUtilTest;
 import com.feilong.core.lang.EnumUtilTest;
 import com.feilong.core.lang.NumberUtilTest;
@@ -58,6 +59,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 CalendarUtilTest.class,
                 CharsetTypeTest.class,
                 ClassUtilTest.class,
+                ClassLoaderUtilTest.class,
                 CollectionsUtilTest.class,
                 ConvertUtilTest.class,
                 DateUtilTest.class,

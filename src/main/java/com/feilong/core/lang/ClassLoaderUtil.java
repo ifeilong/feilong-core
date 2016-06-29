@@ -39,37 +39,10 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <blockquote>
  * 
  * <ul>
- * <li>{@link #getResource(String)}</li>
  * <li>{@link #getRootClassPath()}</li>
- * <li>{@link #getRootClassPath(ClassLoader)}</li>
+ * <li>{@link #getResource(String)}</li>
  * <li>{@link #getResourceInAllClassLoader(String, Class)}</li>
- * <li>{@link #getResource(ClassLoader, String)}</li>
  * </ul>
- * 
- * <p>
- * "",表示classes 的根目录
- * </p>
- * e.q:<br>
- * 
- * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4" summary="">
- * <tr style="background-color:#ccccff">
- * <th align="left"></th>
- * <th align="left">(maven)测试</th>
- * <th align="left">在web环境中(即使打成jar的情形)</th>
- * </tr>
- * <tr valign="top">
- * <td><code>getResource("")</code></td>
- * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
- * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
- * </tr>
- * <tr valign="top" style="background-color:#eeeeff">
- * <td><code>getResource("com")</code></td>
- * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
- * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
- * </tr>
- * </table>
- * </blockquote>
  * </blockquote>
  * 
  * <h3>关于 {@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} VS
@@ -82,7 +55,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <p>
  * 假设配置文件在 src/main/resources下面,比如 messages/feilong-core-message_en_US.properties,
  * </p>
- * <ul>
+ * <ol>
  * <li>{@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} 需要这么写
  * <b>"/messages/feilong-core-message_en_US.properties"</b>,<br>
  * 路径可以写成相对路径或者绝对路径; 以 / 开头,则这样的路径是指定绝对路径, 如果不以 / 开头, 则路径是相对与这个class所在的包的</li>
@@ -92,7 +65,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 所以路径还是这种相对于工程的根目录即"messages/feilong-core-message_en_US.properties" <span style="color:red">不需要"/"</span></li>
  * <li>如果你的项目使用了spring,建议条件允许的话,使用 <code>org.springframework.core.io.ClassPathResource</code>,这个类是基于{@link ClassLoader}的,同时会
  * <code>org.springframework.util.StringUtils#cleanPath(String)</code>,并且如果发现首字符是/斜杆, 会去掉,这样使用起来很方便</li>
- * </ul>
+ * </ol>
  * 
  * </blockquote>
  *
@@ -115,36 +88,65 @@ public final class ClassLoaderUtil{
     }
 
     /**
-     * 查找具有给定名称的资源.
+     * 查找具有给定名称的资源,资源是可以通过类代码以与代码基无关的方式访问的一些数据（图像、声音、文本等）.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <p>
-     * "",表示classes 的根目录
+     * 比如,在<code> src/test/resources</code> 目录下面有 <code>messages/feilong-core-test.properties</code> 资源文件,编译之后,地址会出现在
+     * <code>target/test-classes/messages/feilong-core-test.properties</code>
      * </p>
-     * e.q:<br>
+     * 
+     * <pre class="code">
+     * ClassLoaderUtil.getResource("/messages/feilong-core-test.properties") 
+     * 或者 ClassLoaderUtil.getResource("messages/feilong-core-test.properties")
+     * </pre>
+     * 
+     * 返回相同的结果
+     * 
+     * <pre class="code">
+     * file:/E:/Workspaces/feilong/feilong-core/target/test-classes/messages/feilong-core-test.properties
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果 <code>resourceName</code> 是以斜杆 "/" 开头,那么会被截取,因为 ClassLoader解析方式不需要开头的斜杆, 请参见
+     * <code>org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)</code></li>
+     * <li>"",表示classes 的根目录</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>不同环境结果不一样:</h3>
      * 
      * <blockquote>
      * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
-     * <th align="left"></th>
+     * <th align="left">示例</th>
      * <th align="left">(maven)测试</th>
      * <th align="left">在web环境中,(即使打成jar的情形)</th>
      * </tr>
      * <tr valign="top">
      * <td><code>getResource("")</code></td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
+     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-core/target/test-classes/</td>
+     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-web-test/src/main/webapp/WEB-INF/classes/</td>
      * </tr>
      * <tr valign="top" style="background-color:#eeeeff">
      * <td><code>getResource("com")</code></td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
+     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-core/target/test-classes/com</td>
+     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-web-test/src/main/webapp/WEB-INF/classes/com/</td>
      * </tr>
      * </table>
      * </blockquote>
      *
      * @param resourceName
      *            the resource name
-     * @return the resource
+     * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果找不到该资源，或者调用者没有足够的权限获取该资源，则返回 null
      * @see org.apache.commons.lang3.ClassPathUtils#toFullyQualifiedPath(Package, String)
      * @see #getResource(ClassLoader, String)
      * @see #getClassLoaderByClass(Class)
@@ -154,30 +156,15 @@ public final class ClassLoaderUtil{
     }
 
     /**
-     * 查找具有给定名称的资源.
-     * <p>
-     * "",表示classes 的根目录
-     * </p>
-     * e.q:<br>
+     * 查找具有给定名称的资源,资源是可以通过类代码以与代码基无关的方式访问的一些数据（图像、声音、文本等）.
      * 
+     * <h3>注意:</h3>
      * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4" summary="">
-     * <tr style="background-color:#ccccff">
-     * <th align="left"></th>
-     * <th align="left">(maven)测试</th>
-     * <th align="left">在web环境中,(即使打成jar的情形)</th>
-     * </tr>
-     * <tr valign="top">
-     * <td><code>getResource("")</code></td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/</td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/</td>
-     * </tr>
-     * <tr valign="top" style="background-color:#eeeeff">
-     * <td><code>getResource("com")</code></td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-common/target/test-classes/com</td>
-     * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-spring-test-2.5/src/main/webapp/WEB-INF/classes/com/</td>
-     * </tr>
-     * </table>
+     * <ol>
+     * <li>如果 <code>resourceName</code> 是以 斜杆 "/" 开头,那么会被截取, 因为 ClassLoader解析方式不需要 开头的斜杆, 请参见
+     * <code>org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)</code></li>
+     * <li>"",表示classes 的根目录</li>
+     * </ol>
      * </blockquote>
      *
      * @param classLoader
@@ -186,16 +173,33 @@ public final class ClassLoaderUtil{
      *            the resource name
      * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果找不到该资源，或者调用者没有足够的权限获取该资源，则返回 null
      * @since 1.2.1
      */
     private static URL getResource(ClassLoader classLoader,String resourceName){
         Validate.notNull(classLoader, "classLoader can't be null!");
         Validate.notNull(resourceName, "resourceName can't be null!");
-        return classLoader.getResource(resourceName);
+
+        boolean startsWithSlash = resourceName.startsWith("/");
+        String usePath = startsWithSlash ? StringUtil.substring(resourceName, 1) : resourceName;
+        URL result = classLoader.getResource(usePath);
+
+        LOGGER.info("search resource:[\"{}\"] in [{}],result:[{}]", resourceName, classLoader, result);
+        return result;
     }
 
     /**
      * 获得 项目的 classpath,及classes编译的根目录.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ClassLoaderUtil.getRootClassPath()   = file:/E:/Workspaces/feilong/feilong-core/target/test-classes/
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @return 获得 项目的 classpath
      * @see #getResource(String)
@@ -223,12 +227,12 @@ public final class ClassLoaderUtil{
     /**
      * This is a convenience method to load a resource as a stream.
      * 
-     * <h3>代码流程:</h3>
+     * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>首先会从所有的classLoader中查找资源{@code #getResourceInAllClassLoader(String, Class)}</li>
-     * <li>如果查找不到资源,那么返回 null</li>
-     * <li>如果找到资源,那么返回 {@link URL#openStream()}</li>
+     * <li>如果 <code>resourceName</code> 是以 斜杆 "/" 开头,那么会被截取, 因为 ClassLoader解析方式不需要 开头的斜杆, 请参见
+     * <code>org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)</code></li>
+     * <li>"",表示classes 的根目录</li>
      * </ol>
      * </blockquote>
      * 
@@ -237,20 +241,32 @@ public final class ClassLoaderUtil{
      * @param callingClass
      *            The Class object of the calling object
      * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果查找不到资源,那么返回 null
      * @see #getResourceInAllClassLoader(String, Class)
      * @see "org.apache.velocity.util.ClassUtils#getResourceAsStream(Class, String)"
      */
     public static InputStream getResourceAsStream(String resourceName,Class<?> callingClass){
         URL url = getResourceInAllClassLoader(resourceName, callingClass);
         try{
-            return (url != null) ? url.openStream() : null;
+            return url == null ? null : url.openStream();
         }catch (IOException e){
-            throw new UncheckedIOException(e);
+            String message = Slf4jUtil.format("can not open resourceName:[{}]", resourceName);
+            LOGGER.error(message, e);
+            throw new UncheckedIOException(message, e);
         }
     }
 
     /**
      * Load a given resource.
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果 <code>resourceName</code> 是以 斜杆 "/" 开头,那么会被截取, 因为 ClassLoader解析方式不需要 开头的斜杆, 请参见
+     * <code>org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)</code></li>
+     * <li>"",表示classes 的根目录</li>
+     * </ol>
+     * </blockquote>
      * 
      * <p>
      * This method will try to load the resource using the following methods (in order):
@@ -279,7 +295,9 @@ public final class ClassLoaderUtil{
             if (null == url){
                 LOGGER.warn(getLogInfo(resourceName, classLoader, false));
             }else{
-                LOGGER.trace(getLogInfo(resourceName, classLoader, true));
+                if (LOGGER.isTraceEnabled()){
+                    LOGGER.trace(getLogInfo(resourceName, classLoader, true));
+                }
                 return url;
             }
         }
@@ -294,7 +312,9 @@ public final class ClassLoaderUtil{
      */
     private static ClassLoader getClassLoaderByCurrentThread(){
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        LOGGER.trace("[Thread.currentThread()].getContextClassLoader:{}", formatClassLoader(classLoader));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("[Thread.currentThread()].getContextClassLoader:{}", formatClassLoader(classLoader));
+        }
         return classLoader;
     }
 
@@ -309,7 +329,9 @@ public final class ClassLoaderUtil{
     public static ClassLoader getClassLoaderByClass(Class<?> callingClass){
         Validate.notNull(callingClass, "callingClass can't be null!");
         ClassLoader classLoader = callingClass.getClassLoader();
-        LOGGER.trace("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
+        }
         return classLoader;
     }
 

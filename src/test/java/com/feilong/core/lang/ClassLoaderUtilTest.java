@@ -15,7 +15,10 @@
  */
 package com.feilong.core.lang;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -31,22 +34,16 @@ public class ClassLoaderUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassLoaderUtilTest.class);
 
-    /**
-     * {@link com.feilong.core.lang.ClassLoaderUtil#getResource(java.lang.String)} 的测试方法.
-     */
     @Test
     public void testGetResource(){
         LOGGER.debug(ClassLoaderUtil.getResource("") + "");
         LOGGER.debug("" + ClassLoaderUtil.getResource("com"));
-
     }
 
-    /**
-     * Test get resource1.
-     */
     @Test
-    public void testGetResource1(){
-        assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("jstl-1.2", this.getClass()));
+    public void testGetResource3(){
+        assertEquals(null, ClassLoaderUtil.getResource("feilong-core-test.properties"));
+        assertThat(ClassLoaderUtil.getResource("/messages/feilong-core-test.properties"), is(notNullValue()));
     }
 
     /**
@@ -55,13 +52,6 @@ public class ClassLoaderUtilTest{
     @Test
     public void testGetResource2(){
         assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("slf4j-log4j12-1.7.21", this.getClass()));
-    }
-
-    /**
-     * Test get resource23.
-     */
-    @Test
-    public void testGetResource23(){
         assertEquals(null, ClassLoaderUtil.getResourceInAllClassLoader("slf4j-log4j12-1.7.21.jar", this.getClass()));
     }
 
@@ -70,9 +60,10 @@ public class ClassLoaderUtilTest{
      */
     @Test
     public void testGetResource232(){
-        assertEquals(
-                        "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class",
-                        ClassLoaderUtil.getResourceInAllClassLoader("com/feilong/core/lang/ArrayUtil.class", this.getClass()).toString());
+        String path = "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class";
+        String resourceName = "com/feilong/core/lang/ArrayUtil.class";
+        assertEquals(path, ClassLoaderUtil.getResourceInAllClassLoader(resourceName, this.getClass()).toString());
+        assertEquals(path, ClassLoaderUtil.getResourceInAllClassLoader("/" + resourceName, this.getClass()).toString());
     }
 
     /**
@@ -80,7 +71,7 @@ public class ClassLoaderUtilTest{
      */
     @Test
     public void testGetRootClassPath(){
-        LOGGER.debug("" + ClassLoaderUtil.getRootClassPath());
+        assertEquals("file:/E:/Workspaces/feilong/feilong-core/target/test-classes/", ClassLoaderUtil.getRootClassPath().toString());
     }
 
     /**
@@ -88,7 +79,7 @@ public class ClassLoaderUtilTest{
      */
     @Test
     public void testPrint(){
-        Class<? extends ClassLoaderUtilTest> klass = this.getClass();
+        Class klass = this.getClass();
         LOGGER.debug(klass.getClassLoader().getResource(".").getPath()); ///E:/Workspaces/feilong/feilong-core/target/test-classes/
         LOGGER.debug(klass.getResource("").getPath());///E:/Workspaces/feilong/feilong-core/target/test-classes/com/feilong/core/lang/
         LOGGER.debug(klass.getResource(" ").getPath());///E:/Workspaces/feilong/feilong-core/target/test-classes/com/feilong/core/lang/%20
