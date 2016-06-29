@@ -42,7 +42,7 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
 
 /**
- * {@link java.util.ResourceBundle} 工具类.
+ * {@link java.util.ResourceBundle ResourceBundle} 工具类.
  * 
  * <h3>如果现在多种资源文件一起出现,该如何访问？</h3>
  * 
@@ -52,6 +52,7 @@ import com.feilong.core.text.MessageFormatUtil;
  * 只会使用一个,按照优先级使用.<br>
  * 顺序为Message_zh_CN.class、Message_zh_CN.properties、Message.properties.<br>
  * </p>
+ * 
  * <p>
  * 解析原理,参见:<br>
  * {@link "java.util.ResourceBundle#loadBundle(CacheKey, List, Control, boolean)"}<br>
@@ -70,6 +71,7 @@ import com.feilong.core.text.MessageFormatUtil;
  * @see java.util.ResourceBundle
  * @see java.util.PropertyResourceBundle
  * @see java.util.ListResourceBundle
+ * @see "org.springframework.core.io.support.LocalizedResourceHelper"
  * @since 1.4.0
  */
 public final class ResourceBundleUtil{
