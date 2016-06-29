@@ -47,5 +47,4 @@ public class DateUtilIsLeapYearParameterizedTest extends BaseParameterizedTest<I
     public void isLeapYear(){
         assertEquals(expectedValue, DateUtil.isLeapYear(input));
     }
-
 }

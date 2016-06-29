@@ -15,6 +15,13 @@
  */
 package com.feilong.core.date;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.DatePattern.COMMON_TIME_WITHOUT_SECOND;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -127,7 +134,7 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
         list.add(new Date());
         list.add(new Date());
         list.add(new Date());
-        LOGGER.debug(JsonUtil.format(toStringList(list, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
+        LOGGER.debug(JsonUtil.format(toStringList(list, COMMON_DATE_AND_TIME_WITH_MILLISECOND)));
     }
 
     /**
@@ -135,15 +142,15 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
      */
     @Test
     public void testToPrettyDateString(){
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 13:55:00", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 14:14:22", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 14:15:22", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-17 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-16 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-09-15 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2015-08-02 14:15:02", DatePattern.COMMON_DATE_AND_TIME)));
-        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2015-7-30 13:00:00", DatePattern.COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 13:55:00", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 14:14:22", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-18 14:15:22", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-17 14:15:02", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-16 14:15:02", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-10-15 14:15:02", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2012-09-15 14:15:02", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2015-08-02 14:15:02", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(toPrettyDateString(DateUtil.toDate("2015-7-30 13:00:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -151,7 +158,7 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
      */
     @Test
     public void testCalendarUtilTest(){
-        List<String> weekDateStringList = getWeekDateStringList(Calendar.THURSDAY, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND);
+        List<String> weekDateStringList = getWeekDateStringList(Calendar.THURSDAY, COMMON_DATE_AND_TIME_WITH_MILLISECOND);
         LOGGER.debug(JsonUtil.format(weekDateStringList));
     }
 
@@ -190,7 +197,7 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
      * </p>
      * 
      * <pre class="code">
-     * getWeekDateStringList(Calendar.THURSDAY, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND)
+     * getWeekDateStringList(Calendar.THURSDAY, COMMON_DATE_AND_TIME_WITH_MILLISECOND)
      * </pre>
      * 
      * 返回:
@@ -360,8 +367,8 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
             case 2: // 间隔2天
                 return doWithTwoDaysInterval(inDate, nowDate, isSameYear);
             default://spaceDay > 2     // 间隔大于2天
-                return isSameYear ? DateUtil.toString(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
-                                : DateUtil.toString(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+                return isSameYear ? DateUtil.toString(inDate, COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
+                                : DateUtil.toString(inDate, COMMON_DATE_AND_TIME_WITHOUT_SECOND);
         }
     }
 
@@ -380,9 +387,9 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
      * @since 1.4.0
      */
     private static String doWithOneDayInterval(Date inDate,Date nowDate){
-        return DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, DatePattern.COMMON_DATE)
-                        ? YESTERDAY + " " + DateUtil.toString(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND)
-                        : THEDAY_BEFORE_YESTERDAY + " " + DateUtil.toString(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+        return DateUtil.isEquals(DateUtil.addDay(inDate, 1), nowDate, COMMON_DATE)
+                        ? YESTERDAY + " " + DateUtil.toString(inDate, COMMON_TIME_WITHOUT_SECOND)
+                        : THEDAY_BEFORE_YESTERDAY + " " + DateUtil.toString(inDate, COMMON_TIME_WITHOUT_SECOND);
     }
 
     /**
@@ -398,11 +405,11 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
      * @since 1.4.0
      */
     private static String doWithTwoDaysInterval(Date inDate,Date nowDate,boolean isSameYear){
-        if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, DatePattern.COMMON_DATE)){
-            return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.toString(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+        if (DateUtil.isEquals(DateUtil.addDay(inDate, 2), nowDate, COMMON_DATE)){
+            return THEDAY_BEFORE_YESTERDAY + " " + DateUtil.toString(inDate, COMMON_TIME_WITHOUT_SECOND);
         }
-        return isSameYear ? DateUtil.toString(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
-                        : DateUtil.toString(inDate, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+        return isSameYear ? DateUtil.toString(inDate, COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND)
+                        : DateUtil.toString(inDate, COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
     /**
@@ -428,6 +435,6 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
         // 当前时间的日
         int currentDayOfMonth = DateUtil.getDayOfMonth(nowDate);
         return inDay == currentDayOfMonth ? spaceHour + HOUR + "前"
-                        : YESTERDAY + " " + DateUtil.toString(inDate, DatePattern.COMMON_TIME_WITHOUT_SECOND);
+                        : YESTERDAY + " " + DateUtil.toString(inDate, COMMON_TIME_WITHOUT_SECOND);
     }
 }

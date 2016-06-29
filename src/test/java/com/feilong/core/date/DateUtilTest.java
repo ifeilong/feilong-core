@@ -18,6 +18,7 @@ package com.feilong.core.date;
 import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.date.DateUtil.addMonth;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.isBefore;
@@ -265,12 +266,12 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testAddMonth(){
         Date beginDate = DateUtil.toDate("2013-10-28", COMMON_DATE);
-        logDate(DateUtil.addMonth(beginDate, 6));
-        logDate(DateUtil.addMonth(NOW, 3));
-        logDate(DateUtil.addMonth(NOW, -3));
+        logDate(addMonth(beginDate, 6));
+        logDate(addMonth(NOW, 3));
+        logDate(addMonth(NOW, -3));
 
-        logDate(DateUtil.addMonth(NOW, 5));
-        logDate(DateUtil.addMonth(NOW, -5));
+        logDate(addMonth(NOW, 5));
+        logDate(addMonth(NOW, -5));
     }
 
     /**
