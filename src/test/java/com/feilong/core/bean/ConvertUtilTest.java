@@ -26,7 +26,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.StreamTokenizer;
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -71,6 +74,35 @@ public class ConvertUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ConvertUtilTest.class);
+
+    /**
+     * TestConvertUtilTest.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public void testConvertUtilTest5() throws IOException{
+        StreamTokenizer streamTokenizer = new StreamTokenizer(new StringReader("abaBc^babac^cb//ab/*test*/"));
+        streamTokenizer.whitespaceChars('^', '^'); // Set the delimiters
+        streamTokenizer.lowerCaseMode(true);
+
+        streamTokenizer.slashSlashComments(false);
+        streamTokenizer.slashStarComments(false);
+        // Split comma-delimited tokens into a List
+        List<String> list = new ArrayList<String>();
+        while (true){
+            int ttype = streamTokenizer.nextToken();
+            if ((ttype == StreamTokenizer.TT_WORD) || (ttype > 0)){
+                if (streamTokenizer.sval != null){
+                    list.add(streamTokenizer.sval);
+                }
+            }else if (ttype == StreamTokenizer.TT_EOF){
+                break;
+            }
+        }
+
+        LOGGER.debug(JsonUtil.format(list));
+    }
 
     /**
      * Test to iterator.

@@ -24,6 +24,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.ResourceBundle.Control;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,9 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void testResourceBundleUtilTest(){
-        ResourceBundle bundle = ResourceBundle.getBundle(BASE_NAME, Control.getControl(Control.FORMAT_PROPERTIES));
+        Control control = Control.getControl(Control.FORMAT_PROPERTIES);
+        //control.needsReload(baseName, locale, format, loader, bundle, loadTime)     ;
+        ResourceBundle bundle = ResourceBundle.getBundle(BASE_NAME, control);
         LOGGER.debug(JsonUtil.format(toMap(bundle)));
     }
 
@@ -110,8 +113,16 @@ public class ResourceBundleUtilTest{
      * 
      */
     @Test
+    @Ignore
     public void testGetValueWithArguments(){
-        //assertEquals("今天 2", ResourceBundleUtil.getValueWithArguments(resourceBundle, "test", "2", "22"));
+        assertEquals("今天 2", ResourceBundleUtil.getValueWithArguments(resourceBundle, "test", "2", "22"));
+    }
+
+    @Test
+    public void testGetValueWithArguments1(){
+        assertEquals(
+                        "my name is feilong,age is 18",
+                        ResourceBundleUtil.getValueWithArguments(resourceBundle, "test.arguments", "feilong", "18"));
     }
 
     /**

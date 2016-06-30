@@ -1408,18 +1408,23 @@ public final class ConvertUtil{
     /**
      * 转成string数组.
      * 
+     * <h3>规则:</h3>
+     * 
+     * <blockquote>
+     * 
      * <p>
-     * Parse an incoming String of the form similar to an array initializer in the Java language into a <code>List</code> individual Strings
-     * for each element, according to the following rules.
+     * 解析传入的字符串成数组 in the Java language into a <code>List</code> individual Strings for each element, 根据以下规则:
      * </p>
      * 
      * <ul>
      * <li>The string is expected to be a comma-separated list of values.</li>
-     * <li>The string may optionally have matching '{' and '}' delimiters around the list.</li>
-     * <li>Whitespace before and after each element is stripped.</li>
-     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
-     * valid.</li>
+     * <li>自动去除开头的 '{' 和 结束的'}'.</li>
+     * <li>每个元素前后的空格将会去除.</li>
+     * <li>Elements in the list may be delimited by single or double quotes.
+     * Within a quoted elements, the normal Java escape sequences are valid.</li>
      * </ul>
+     * 
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -1440,7 +1445,8 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            the to be converted value
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
-     * @see "org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String)"
+     * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     * @see org.apache.commons.beanutils.converters.ArrayConverter#parseElements(Class, String)
      * @see #convert(Object, Class)
      * @since 1.4.0
      */
@@ -1449,7 +1455,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * 支持将对象转成Iterator.
+     * 转成Iterator类型.
      * 
      * <h3>支持以下类型:</h3>
      * 

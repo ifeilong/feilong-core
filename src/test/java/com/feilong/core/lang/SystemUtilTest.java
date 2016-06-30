@@ -16,7 +16,6 @@
 package com.feilong.core.lang;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -52,8 +51,7 @@ public class SystemUtilTest{
      */
     @Test
     public void testGetEnvMapForLog(){
-        Map<String, String> envMapForLog = SystemUtil.getEnvMapForLog();
-        LOGGER.debug(JsonUtil.format(envMapForLog));
+        LOGGER.debug(JsonUtil.format(SystemUtil.getEnvMapForLog()));
     }
 
     /**
@@ -73,7 +71,6 @@ public class SystemUtilTest{
      */
     @Test
     public void testGetPropertiesMapForLog(){
-        Map<String, String> propertiesMapForLog = SystemUtil.getPropertiesMapForLog();
-        LOGGER.debug(JsonUtil.format(propertiesMapForLog));
+        LOGGER.debug(JsonUtil.format(SystemUtil.getPropertiesMapForLog()));
     }
 }

@@ -228,9 +228,31 @@ public final class ResourceBundleUtil{
     /**
      * 带参数的 配置文件.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <p>
-     * 格式如:name={0}.
+     * 如果有配置文件 messages\feilong-core-test.properties ,内容如下:
      * </p>
+     * 
+     * <pre class="code">
+     * test.arguments=my name is {0},age is {1}
+     * </pre>
+     * 
+     * 此时调用方法:
+     * 
+     * <pre class="code">
+     * ResourceBundleUtil.getValueWithArguments("messages.feilong-core-test", "test.arguments", "feilong", "18")
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * my name is feilong,age is 18
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
@@ -255,9 +277,31 @@ public final class ResourceBundleUtil{
     /**
      * 带参数的 配置文件.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <p>
-     * 格式如:name={0}.
+     * 如果有配置文件 messages\feilong-core-test.properties ,内容如下:
      * </p>
+     * 
+     * <pre class="code">
+     * test.arguments=my name is {0},age is {1}
+     * </pre>
+     * 
+     * 此时调用方法:
+     * 
+     * <pre class="code">
+     * ResourceBundleUtil.getValueWithArguments(resourceBundle, "test.arguments", "feilong", "18")
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * my name is feilong,age is 18
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param resourceBundle
      *            the resource bundle
@@ -323,7 +367,7 @@ public final class ResourceBundleUtil{
      * </pre>
      * 
      * <pre class="code">
-     * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",");    =   ["5","8","7","6"]
+     * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",") =   ["5","8","7","6"]
      * </pre>
      * 
      * </blockquote>
@@ -353,6 +397,10 @@ public final class ResourceBundleUtil{
      * <pre class="code">
      * config_test_array=5,8,7,6
      * </pre>
+     * 
+     * <p>
+     * 解析:
+     * </p>
      * 
      * <pre class="code">
      * ResourceBundleUtil.getArray("messages.feilong-core-test", "config_test_array", ",", String.class);    =   ["5","8","7","6"]
@@ -397,6 +445,10 @@ public final class ResourceBundleUtil{
      * <pre class="code">
      * config_test_array=5,8,7,6
      * </pre>
+     * 
+     * <p>
+     * 解析:
+     * </p>
      * 
      * <pre class="code">
      * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class);    =   ["5","8","7","6"]
