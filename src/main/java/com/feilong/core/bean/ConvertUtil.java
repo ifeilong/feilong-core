@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
@@ -40,6 +42,7 @@ import org.apache.commons.beanutils.converters.LongConverter;
 import org.apache.commons.beanutils.converters.NumberConverter;
 import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.LocaleUtils;
@@ -1043,6 +1046,38 @@ public final class ConvertUtil{
     public static Map<String, String> toMap(Properties properties){
         Validate.notEmpty(properties, "properties can't be null/empty!");
         return new HashMap<String, String>((Map) properties);
+    }
+
+    /**
+     * 读取配置文件,将k/v 统统转成map.
+     * 
+     * <p>
+     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
+     * </p>
+     *
+     * @param resourceBundle
+     *            the resource bundle
+     * @return 如果 <code>resourceBundle</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>resourceBundle</code> 没有key,则返回{@link java.util.Collections#emptyMap()}<br>
+     *         否则,解析所有的key和value转成 {@link TreeMap}<br>
+     * @see MapUtils#toMap(ResourceBundle)
+     * @since 1.7.3
+     */
+    public static Map<String, String> toMap(ResourceBundle resourceBundle){
+        Validate.notNull(resourceBundle, "resourceBundle can't be null!");
+
+        Enumeration<String> keysEnumeration = resourceBundle.getKeys();
+        if (Validator.isNullOrEmpty(keysEnumeration)){
+            return Collections.emptyMap();
+        }
+
+        Map<String, String> map = new TreeMap<String, String>();
+        while (keysEnumeration.hasMoreElements()){
+            String key = keysEnumeration.nextElement();
+            map.put(key, resourceBundle.getString(key));
+        }
+        return map;
     }
 
     //*************************************toList*********************************************************

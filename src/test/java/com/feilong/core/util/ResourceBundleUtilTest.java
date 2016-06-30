@@ -15,13 +15,14 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
-import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.ResourceBundle.Control;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -45,6 +46,15 @@ public class ResourceBundleUtilTest{
 
     /** The resource bundle. */
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle(BASE_NAME);
+
+    /**
+     * TestResourceBundleUtilTest.
+     */
+    @Test
+    public void testResourceBundleUtilTest(){
+        ResourceBundle bundle = ResourceBundle.getBundle(BASE_NAME, Control.getControl(Control.FORMAT_PROPERTIES));
+        LOGGER.debug(JsonUtil.format(toMap(bundle)));
+    }
 
     /**
      * Test get value.
@@ -92,8 +102,7 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void testGetValue11(){
-        Integer parseInt = Integer.parseInt("0");
-        assertEquals(parseInt, ResourceBundleUtil.getValue(BASE_NAME, "wo_bu_cun_zai", Integer.class));
+        assertEquals((Integer) Integer.parseInt("0"), ResourceBundleUtil.getValue(BASE_NAME, "wo_bu_cun_zai", Integer.class));
     }
 
     /**
@@ -123,13 +132,11 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void readAllPropertiesToMap(){
-        Map<String, String> map = ResourceBundleUtil.readAllPropertiesToMap(BASE_NAME, Locale.CHINA);
-        LOGGER.debug(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(ResourceBundleUtil.readAllPropertiesToMap(BASE_NAME, Locale.CHINA)));
     }
 
     /**
      * Read all properties to map.
-     * 
      */
     @Test
     public void testGetValue1(){

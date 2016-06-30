@@ -16,6 +16,7 @@
 package com.feilong.core.bean;
 
 import static com.feilong.core.bean.ConvertUtil.toLong;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.hasEntry;
@@ -40,6 +41,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -618,6 +620,26 @@ public class ConvertUtilTest{
     public void testToLocale(){
         assertEquals(null, ConvertUtil.toLocale(null));
         assertEquals(Locale.CHINA, ConvertUtil.toLocale("zh_CN"));
+    }
+
+    @Test
+    public void test1(){
+        Map<String, Object> map = new LinkedHashMap<>();
+
+        map.put("name", "feilong");
+        map.put("age", 18);
+        map.put("country", "china");
+
+        Properties properties = org.apache.commons.collections4.MapUtils.toProperties(map);
+
+        LOGGER.debug("" + properties.get("age"));
+        LOGGER.debug(properties.getProperty("age"));
+        LOGGER.debug(JsonUtil.format(properties));
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(toMap(properties)));
+        }
+
     }
 
 }

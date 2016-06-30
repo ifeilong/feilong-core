@@ -15,13 +15,13 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
@@ -476,41 +476,7 @@ public final class ResourceBundleUtil{
      */
     public static Map<String, String> readAllPropertiesToMap(String baseName,Locale locale){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
-        return readAllPropertiesToMap(resourceBundle);
-    }
-
-    /**
-     * 读取配置文件,将k/v 统统转成map.
-     * 
-     * <p>
-     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
-     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
-     * </p>
-     *
-     * @param resourceBundle
-     *            the resource bundle
-     * @return 如果 <code>resourceBundle</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 baseName 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
-     *         否则,解析所有的key和value转成 {@link TreeMap}<br>
-     * @see #getResourceBundle(String, Locale)
-     * @see java.util.ResourceBundle#getKeys()
-     * @see MapUtils#toMap(ResourceBundle)
-     * @since 1.5.0
-     */
-    public static Map<String, String> readAllPropertiesToMap(ResourceBundle resourceBundle){
-        Validate.notNull(resourceBundle, "resourceBundle can't be null!");
-
-        Enumeration<String> keysEnumeration = resourceBundle.getKeys();
-        if (Validator.isNullOrEmpty(keysEnumeration)){
-            return Collections.emptyMap();
-        }
-
-        Map<String, String> propertyMap = new TreeMap<String, String>();
-        while (keysEnumeration.hasMoreElements()){
-            String key = keysEnumeration.nextElement();
-            propertyMap.put(key, resourceBundle.getString(key));
-        }
-        return propertyMap;
+        return toMap(resourceBundle);
     }
 
     //********************************getResourceBundle**********************************************
