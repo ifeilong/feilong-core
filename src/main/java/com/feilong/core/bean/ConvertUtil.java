@@ -1080,6 +1080,23 @@ public final class ConvertUtil{
         return map;
     }
 
+    /**
+     * 将map转成 {@link Properties}.
+     * 
+     * <p>
+     * 由于 Properties 只能保存 非空的 key和value,因此如果map 有key或者 value是null,将会抛出 {@link NullPointerException}
+     * </p>
+     * 
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,返回 empty Properties<br>
+     * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
+     * @since 1.7.3
+     */
+    public static Properties toProperties(final Map<String, String> map){
+        return MapUtils.toProperties(map);
+    }
+
     //*************************************toList*********************************************************
     /**
      * 将枚举 <code>enumeration</code> 转成集合.

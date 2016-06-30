@@ -373,8 +373,9 @@ public final class DateUtil{
      * </pre>
      * 
      * <p>
-     * DAY_OF_WEEK_IN_MONTH 指示当前月中的第几个星期.与 DAY_OF_WEEK 字段一起使用时,就可以唯一地指定某月中的某一天.<br>
-     * 与 WEEK_OF_MONTH 和 WEEK_OF_YEAR 不同,该字段的值并不取决于 getFirstDayOfWeek() 或 getMinimalDaysInFirstWeek().
+     * {@link Calendar#DAY_OF_WEEK_IN_MONTH} 指示当前月中的第几个星期.与 DAY_OF_WEEK 字段一起使用时,就可以唯一地指定某月中的某一天.<br>
+     * 与 {@link Calendar#WEEK_OF_MONTH} 和 {@link Calendar#WEEK_OF_YEAR} 不同,该字段的值并不取决于 {@link Calendar#getFirstDayOfWeek()} 或
+     * {@link Calendar#getMinimalDaysInFirstWeek()}.
      * </p>
      * 
      * <p>
