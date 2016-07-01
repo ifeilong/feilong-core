@@ -60,6 +60,9 @@ feilong core
 # Release notes:
 参见 [Release notes](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/) 
 
+# Site:
+参见 [Site](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/) 
+
 # 项目依赖
 
 ```XML
