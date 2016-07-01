@@ -5,6 +5,18 @@
 
 	<!-- <url>https://github.com/venusdrogon/feilong-platform</url> -->
 
+	<bannerLeft>
+		<name>${project.name}</name>
+		<src>http://venusdrogon.github.io/feilong-platform/mysource/feilong-font.png</src>
+		<href>${url}</href>
+		<!-- <width>140</width> -->
+	</bannerLeft>
+	
+	<bannerRight>
+		<src>http://venusdrogon.github.io/feilong-platform/mysource/feilong.png</src>
+		<width>140</width>
+	</bannerRight>
+
 	<custom>
 		<!-- http://maven.apache.org/skins/maven-fluido-skin/ -->
 		<fluidoSkin>
