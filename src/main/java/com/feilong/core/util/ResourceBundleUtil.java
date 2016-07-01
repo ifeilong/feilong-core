@@ -60,12 +60,6 @@ import com.feilong.core.text.MessageFormatUtil;
  * </p>
  * </blockquote>
  * 
- * <h3>关于配置文件格式问题</h3>
- * 
- * <blockquote>
- * 参考 {@link PropertiesUtil}的注释
- * </blockquote>
- *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see MessageFormatUtil#format(String, Object...)
  * @see java.util.ResourceBundle
