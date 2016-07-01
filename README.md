@@ -57,6 +57,8 @@ feilong core
 # wiki:
 更多内容,你可以参见 [WiKi](https://github.com/venusdrogon/feilong-core/wiki) 
 
+# Release notes:
+参见 [Release notes](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/) 
 
 # 项目依赖
 
