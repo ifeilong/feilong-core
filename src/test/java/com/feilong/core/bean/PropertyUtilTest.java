@@ -16,6 +16,7 @@
 package com.feilong.core.bean;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
@@ -138,7 +139,7 @@ public class PropertyUtilTest{
         user.setId(5L);
         user.setDate(new Date());
 
-        List<User> list = ConvertUtil.toList(user, user, user);
+        List<User> list = toList(user, user, user);
 
         Long id = PropertyUtil.getProperty(list, "[0].id");
         assertThat(id, is(equalTo(5L)));

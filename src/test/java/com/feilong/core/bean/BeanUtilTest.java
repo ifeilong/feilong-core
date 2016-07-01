@@ -16,6 +16,8 @@
 package com.feilong.core.bean;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.junit.Assert.assertEquals;
 
 import java.io.Serializable;
@@ -128,17 +130,16 @@ public class BeanUtilTest{
         LOGGER.debug(StringUtils.center(" demoNormalJavaBeans ", 40, "="));
 
         // data setup  
-        Address addr1 = new Address("CA1234", "xxx", "Los Angeles", "USA");
-        Address addr2 = new Address("100000", "xxx", "Beijing", "China");
-
-        Customer customer = new Customer(123, "John Smith", toArray(addr1, addr2));
+        Customer customer = new Customer(
+                        123,
+                        "John Smith",
+                        toArray(new Address("CA1234", "xxx", "Los Angeles", "USA"), new Address("100000", "xxx", "Beijing", "China")));
 
         // accessing the city of first address  
         String name = (String) PropertyUtils.getSimpleProperty(customer, "name");
         String city = (String) PropertyUtils.getProperty(customer, "addresses[0].city");
 
-        Object[] rawOutput1 = new Object[] { "The city of customer ", name, "'s first address is ", city, "." };
-        LOGGER.debug(StringUtils.join(rawOutput1));
+        LOGGER.debug(StringUtils.join(new Object[] { "The city of customer ", name, "'s first address is ", city, "." }));
 
         // setting the zipcode of customer's second address  
         String zipPattern = "addresses[1].zipCode";
@@ -147,8 +148,8 @@ public class BeanUtilTest{
             PropertyUtils.setProperty(customer, zipPattern, "200000");//PropertyUtils  
         }
         String zip = (String) PropertyUtils.getProperty(customer, zipPattern);//PropertyUtils  
-        Object[] rawOutput2 = new Object[] { "The zipcode of customer ", name, "'s second address is now ", zip, "." };
-        LOGGER.debug(StringUtils.join(rawOutput2));
+
+        LOGGER.debug(StringUtils.join(new Object[] { "The zipcode of customer ", name, "'s second address is now ", zip, "." }));
     }
 
     /**
@@ -189,9 +190,7 @@ public class BeanUtilTest{
         user.setId(5L);
 
         Person person = new Person();
-
-        String[] strs = { "age", "name" };
-        BeanUtil.copyProperties(person, user, strs);
+        BeanUtil.copyProperties(person, user, "age", "name");
 
         LOGGER.debug(JsonUtil.format(person));
     }
@@ -226,10 +225,8 @@ public class BeanUtilTest{
         Converter converter = ConvertUtils.lookup(Date.class);
         LOGGER.debug("{},{}", converter.getClass().getSimpleName(), converter.convert(Date.class, new Date().toString()));
 
-        String[] strs = { "date", "money", "nickNames" };
-
         User user2 = new User();
-        BeanUtil.copyProperties(user2, user, strs);
+        BeanUtil.copyProperties(user2, user, "date", "money", "nickNames");
 
         LOGGER.debug(JsonUtil.format(user2));
 
@@ -331,14 +328,12 @@ public class BeanUtilTest{
         User user = new User();
         user.setId(5L);
 
-        Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("id", 8L);
+        Map<String, Long> properties = toMap("id", 8L);
 
         BeanUtil.populate(user, properties);
         LOGGER.debug(JsonUtil.format(user));
 
         //********************************************************
-
         user = new User();
         user.setId(5L);
 
@@ -353,8 +348,7 @@ public class BeanUtilTest{
     public void populate1(){
         Map<String, Object> map = new HashMap<String, Object>();
 
-        Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("id", 8L);
+        Map<String, Long> properties = toMap("id", 8L);
 
         BeanUtil.populate(map, properties);
 
@@ -403,10 +397,10 @@ public class BeanUtilTest{
         //******************************************************************
         List<OrderLine> jsonList = JsonUtil.toList(format, OrderLine.class);
 
-        assertEquals(ConvertUtil.toBigDecimal(200), list1.get(0).getSalePrice());
+        assertEquals(toBigDecimal(200), list1.get(0).getSalePrice());
         //assertEquals(ConvertUtil.toBigDecimal(599), cloneList.get(0).getSalePrice());
-        assertEquals(ConvertUtil.toBigDecimal(599), serializelist.get(0).getSalePrice());
-        assertEquals(ConvertUtil.toBigDecimal(599), jsonList.get(0).getSalePrice());
-        assertEquals(ConvertUtil.toBigDecimal(599), copyList.get(0).getSalePrice());
+        assertEquals(toBigDecimal(599), serializelist.get(0).getSalePrice());
+        assertEquals(toBigDecimal(599), jsonList.get(0).getSalePrice());
+        assertEquals(toBigDecimal(599), copyList.get(0).getSalePrice());
     }
 }
