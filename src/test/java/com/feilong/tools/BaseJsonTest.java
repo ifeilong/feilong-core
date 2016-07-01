@@ -15,6 +15,8 @@
  */
 package com.feilong.tools;
 
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
@@ -122,7 +123,7 @@ public abstract class BaseJsonTest{
 
         }
         Date endDate = new Date();
-        LOGGER.debug("[{}]{},use time:{}", type, times, DateExtensionUtil.getIntervalForView(beginDate, endDate));
+        LOGGER.debug("[{}]{},use time:{}", type, times, getIntervalForView(beginDate, endDate));
     }
 
     /**

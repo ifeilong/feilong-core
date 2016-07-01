@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +32,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.test.User;
@@ -79,7 +80,7 @@ public class ArrayUtilTemp{
             }
             ++j;
         }
-        LOGGER.debug("loop count j=[{}],use time:[{}],\nlist:{}", j, DateExtensionUtil.getIntervalForView(beginDate, new Date()), list);
+        LOGGER.debug("loop count j=[{}],use time:[{}],\nlist:{}", j, getIntervalForView(beginDate, new Date()), list);
     }
 
     /**

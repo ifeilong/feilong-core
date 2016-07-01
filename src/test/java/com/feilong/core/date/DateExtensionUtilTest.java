@@ -17,6 +17,11 @@ package com.feilong.core.date;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalDayList;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
+import static com.feilong.core.date.DateExtensionUtil.getResetTodayAndTomorrow;
+import static com.feilong.core.date.DateExtensionUtil.getResetYesterdayAndToday;
 import static com.feilong.core.date.DateUtil.addDay;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 import static com.feilong.core.date.DateUtil.toDate;
@@ -50,8 +55,8 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalForViewLong(){
-        assertEquals("25秒841毫秒", DateExtensionUtil.getIntervalForView(25841));
-        assertEquals("0", DateExtensionUtil.getIntervalForView(0));
+        assertEquals("25秒841毫秒", getIntervalForView(25841));
+        assertEquals("0", getIntervalForView(0));
         LOGGER.debug(DurationFormatUtils.formatDurationWords(25841, true, true));
     }
 
@@ -64,10 +69,10 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         String begin = "2011-03-05 23:31:25.456";
         String end = "2011-03-10 01:30:24.895";
 
-        List<Date> intervalDayList = DateExtensionUtil.getIntervalDayList(toDate(begin, pattern), toDate(end, pattern));
+        List<Date> intervalDayList = getIntervalDayList(toDate(begin, pattern), toDate(end, pattern));
         LOGGER.debug(JsonUtil.format(intervalDayList));
 
-        List<Date> intervalDayList2 = DateExtensionUtil.getIntervalDayList(toDate(end, pattern), toDate(begin, pattern));
+        List<Date> intervalDayList2 = getIntervalDayList(toDate(end, pattern), toDate(begin, pattern));
         LOGGER.debug(JsonUtil.format(intervalDayList2));
     }
 
@@ -78,8 +83,8 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     public void testGetIntervalForView(){
         Date now = new Date();
         Date date = toDate("2012-12-03 00:00:00", COMMON_DATE_AND_TIME);
-        LOGGER.debug(DateExtensionUtil.getIntervalForView(now, date));
-        LOGGER.debug(DateExtensionUtil.getIntervalTime(now, date) + "");
+        LOGGER.debug(getIntervalForView(now, date));
+        LOGGER.debug(getIntervalTime(now, date) + "");
     }
 
     /**
@@ -89,7 +94,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     public void testGetResetYesterdayAndToday(){
         assertArrayEquals(
                         ConvertUtil.toArray(getFirstDateOfThisDay(addDay(NOW, -1)), getFirstDateOfThisDay(NOW)),
-                        DateExtensionUtil.getResetYesterdayAndToday());
+                        getResetYesterdayAndToday());
     }
 
     /**
@@ -99,7 +104,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     public void testGetResetTodayAndTomorrow(){
         assertArrayEquals(
                         ConvertUtil.toArray(getFirstDateOfThisDay(NOW), getFirstDateOfThisDay(addDay(NOW, 1))),
-                        DateExtensionUtil.getResetTodayAndTomorrow());
+                        getResetTodayAndTomorrow());
     }
 
 }
