@@ -35,7 +35,7 @@ import com.feilong.core.HttpMethodTestType;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.store.system.Menu;
 import com.feilong.test.User;
-import com.feilong.tools.BaseJsonTest;
+import com.feilong.tools.AbstractJsonTest;
 import com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
 import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
@@ -48,41 +48,10 @@ import net.sf.json.processors.JsonValueProcessor;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class JsonUtilTest extends BaseJsonTest{
+public class JsonUtilTest extends AbstractJsonTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilTest.class);
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.tools.BaseJsonTest#testPerformance()
-     */
-    @Override
-    @Test
-    public void testPerformance(){
-        super.testPerformance();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.tools.BaseJsonTest#getType()
-     */
-    @Override
-    protected String getType(){
-        return "json-lib";
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.tools.BaseJsonTest#performanceMethod(com.feilong.test.User)
-     */
-    @Override
-    protected void performanceMethod(User user){
-        JsonUtil.toJSON(user);
-    }
 
     /**
      * Test json menu.

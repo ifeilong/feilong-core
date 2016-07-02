@@ -1166,7 +1166,7 @@ public final class JsonUtil{
      * @see net.sf.json.JSONObject#toBean(JSONObject, JsonConfig)
      */
     @SuppressWarnings("unchecked")
-    public static <T> T toBean(Object json,JsonConfig jsonConfig){
+    private static <T> T toBean(Object json,JsonConfig jsonConfig){
         JSONObject jsonObject = JSONObject.fromObject(json);
 
         // Ignore missing properties with Json-Lib

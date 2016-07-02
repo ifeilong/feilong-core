@@ -18,13 +18,8 @@ package com.feilong.tools;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 import java.util.Date;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
@@ -37,12 +32,9 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
-public abstract class BaseJsonTest{
+public abstract class AbstractJsonTest{
 
-    /** The Constant log. */
-    private static final Logger   LOGGER                          = LoggerFactory.getLogger(BaseJsonTest.class);
-
-    protected static final User   USER                            = getUserForJsonTest();
+    protected static final User   USER             = getUserForJsonTest();
 
     /** The Constant DEFAULT_USER_FOR_JSON_TEST_JSON. */
     protected static final String USER_JSON_STRING = JsonUtil.format(USER, 0, 0);
@@ -73,44 +65,4 @@ public abstract class BaseJsonTest{
         return user;
     }
 
-    /**
-     * Test performance.
-     */
-    protected void testPerformance(){
-        List<Integer> list = toList(1, 10, 100, 1000, 10000, 100000, 1000000);
-        for (Integer times : list){
-            performanceTest(USER, times);
-        }
-    }
-
-    /**
-     * Performance test.
-     *
-     * @param user
-     *            the user
-     * @param times
-     *            the times
-     */
-    private void performanceTest(User user,int times){
-        Date beginDate = new Date();
-        for (int i = 0; i < times; ++i){
-            performanceMethod(user);
-        }
-        LOGGER.debug("[{}]{},use time:{}", getType(), times, getIntervalForView(beginDate, new Date()));
-    }
-
-    /**
-     * Performance method.
-     *
-     * @param user
-     *            the user
-     */
-    protected abstract void performanceMethod(User user);
-
-    /**
-     * 获得 type.
-     *
-     * @return the type
-     */
-    protected abstract String getType();
 }

@@ -30,11 +30,10 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.HttpMethodTestType;
 import com.feilong.test.Person;
-import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
-import com.feilong.tools.BaseJsonTest;
+import com.feilong.tools.AbstractJsonTest;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -44,7 +43,7 @@ import net.sf.json.JsonConfig;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class JsonUtilToBeanTest extends BaseJsonTest{
+public class JsonUtilToBeanTest extends AbstractJsonTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilToBeanTest.class);
@@ -175,11 +174,8 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
      */
     @Test
     public void toMap(){
-        Map<String, Person> map = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", Person.class);
-        LOGGER.debug(JsonUtil.format(map));
-
-        Map<String, String> map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
-        LOGGER.debug(JsonUtil.format(map1));
+        LOGGER.debug(JsonUtil.format(JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", Person.class)));
+        LOGGER.debug(JsonUtil.format(JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null)));
     }
 
     /**
@@ -279,22 +275,4 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         LOGGER.debug("" + JsonUtil.toJSON(map));
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.tools.BaseJsonTest#performanceMethod(com.feilong.test.User)
-     */
-    @Override
-    protected void performanceMethod(User user){
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.tools.BaseJsonTest#getType()
-     */
-    @Override
-    protected String getType(){
-        return null;
-    }
 }
