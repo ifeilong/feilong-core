@@ -17,6 +17,7 @@ package com.feilong.core.bean;
 
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.hasEntry;
@@ -471,7 +472,7 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(list2, 0, 0));
 
         enumeration = null;
-        assertEquals(Collections.emptyList(), ConvertUtil.toList(enumeration));
+        assertEquals(emptyList(), ConvertUtil.toList(enumeration));
     }
 
     /**

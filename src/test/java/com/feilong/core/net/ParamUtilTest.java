@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,28 +41,6 @@ public class ParamUtilTest{
 
     /** <code>{@value}</code>. */
     private static String       uriString = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
-
-    /**
-     * Sub.
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param originalArrayValueMap
-     *            the original array value map
-     * @param paramNameList
-     *            the param name list
-     * @return the map< k, v>
-     * @since 1.6.2
-     */
-    private static <K, V> Map<K, V> sub(Map<K, V> originalArrayValueMap,List<K> paramNameList){
-        Map<K, V> singleValueMap = new LinkedHashMap<K, V>();
-        for (K paramName : paramNameList){
-            singleValueMap.put(paramName, originalArrayValueMap.get(paramName));
-        }
-        return singleValueMap;
-    }
 
     /**
      * Test to natural ordering string.

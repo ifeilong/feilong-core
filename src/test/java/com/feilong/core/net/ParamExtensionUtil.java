@@ -16,6 +16,7 @@
 package com.feilong.core.net;
 
 import java.net.URI;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -326,5 +327,25 @@ public final class ParamExtensionUtil{
     }
 
     //*********************************************************************************
-
+    /**
+     * Sub.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param originalArrayValueMap
+     *            the original array value map
+     * @param paramNameList
+     *            the param name list
+     * @return the map< k, v>
+     * @since 1.6.2
+     */
+    private static <K, V> Map<K, V> sub(Map<K, V> originalArrayValueMap,List<K> paramNameList){
+        Map<K, V> singleValueMap = new LinkedHashMap<K, V>();
+        for (K paramName : paramNameList){
+            singleValueMap.put(paramName, originalArrayValueMap.get(paramName));
+        }
+        return singleValueMap;
+    }
 }
