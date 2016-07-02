@@ -15,16 +15,17 @@
  */
 package com.feilong.tools;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
@@ -41,11 +42,10 @@ public abstract class BaseJsonTest{
     /** The Constant log. */
     private static final Logger   LOGGER                          = LoggerFactory.getLogger(BaseJsonTest.class);
 
-    /** The Constant DEFAULT_USER_FOR_JSON_TEST. */
-    protected static final User   DEFAULT_USER_FOR_JSON_TEST      = getUserForJsonTest();
+    protected static final User   USER                            = getUserForJsonTest();
 
     /** The Constant DEFAULT_USER_FOR_JSON_TEST_JSON. */
-    protected static final String DEFAULT_USER_FOR_JSON_TEST_JSON = JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST, 0, 0);
+    protected static final String USER_JSON_STRING = JsonUtil.format(USER, 0, 0);
 
     /**
      * Gets the json string.
@@ -59,29 +59,16 @@ public abstract class BaseJsonTest{
         user.setId(8L);
         user.setName("feilong");
         user.setDate(new Date());
-        user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
+        user.setMoney(toBigDecimal("99999999.00"));
 
-        String[] loves = { "桔子", "香蕉" };
-        user.setLoves(loves);
+        user.setLoves(toArray("桔子", "香蕉"));
+        user.setUserInfo(new UserInfo(10));
 
-        UserInfo userInfo = new UserInfo();
+        UserAddress userAddress1 = new UserAddress("上海市闸北区万荣路1188号H座109-118室");
+        UserAddress userAddress2 = new UserAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
 
-        userInfo.setAge(10);
-        user.setUserInfo(userInfo);
-
-        UserAddress userAddress1 = new UserAddress();
-        userAddress1.setAddress("上海市闸北区万荣路1188号H座109-118室");
-
-        UserAddress userAddress2 = new UserAddress();
-        userAddress2.setAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
-
-        UserAddress[] userAddresses = { userAddress1, userAddress2 };
-        user.setUserAddresses(userAddresses);
-
-        List<UserAddress> userAddresseList = new ArrayList<UserAddress>();
-        userAddresseList.add(userAddress1);
-        userAddresseList.add(userAddress2);
-        user.setUserAddresseList(userAddresseList);
+        user.setUserAddresses(toArray(userAddress1, userAddress2));
+        user.setUserAddresseList(toList(userAddress1, userAddress2));
 
         return user;
     }
@@ -90,19 +77,9 @@ public abstract class BaseJsonTest{
      * Test performance.
      */
     protected void testPerformance(){
-        User user = DEFAULT_USER_FOR_JSON_TEST;
-
-        List<Integer> list = new ArrayList<Integer>();
-        list.add(1);
-        list.add(10);
-        list.add(100);
-        list.add(1000);
-        list.add(10000);
-        list.add(100000);
-        list.add(1000000);
-
+        List<Integer> list = toList(1, 10, 100, 1000, 10000, 100000, 1000000);
         for (Integer times : list){
-            performanceTest(user, times);
+            performanceTest(USER, times);
         }
     }
 
@@ -115,15 +92,11 @@ public abstract class BaseJsonTest{
      *            the times
      */
     private void performanceTest(User user,int times){
-        //String type = "jackson2 2";
-        String type = getType();
         Date beginDate = new Date();
         for (int i = 0; i < times; ++i){
             performanceMethod(user);
-
         }
-        Date endDate = new Date();
-        LOGGER.debug("[{}]{},use time:{}", type, times, getIntervalForView(beginDate, endDate));
+        LOGGER.debug("[{}]{},use time:{}", getType(), times, getIntervalForView(beginDate, new Date()));
     }
 
     /**

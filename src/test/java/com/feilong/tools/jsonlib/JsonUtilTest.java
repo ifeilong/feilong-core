@@ -15,13 +15,14 @@
  */
 package com.feilong.tools.jsonlib;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.junit.Assert.assertEquals;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -30,7 +31,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.HttpMethodTestType;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.store.system.Menu;
 import com.feilong.test.User;
@@ -89,13 +90,9 @@ public class JsonUtilTest extends BaseJsonTest{
     @Test
     public void testJsonMenu(){
         Menu menu = new Menu(4L);
-        List<Menu> children = new ArrayList<Menu>();
+        menu.setChildren(toList(new Menu(5L)));
 
-        children.add(new Menu(5L));
-        menu.setChildren(children);
-
-        String json = JsonUtil.format(menu);
-        LOGGER.debug(json);
+        LOGGER.debug(JsonUtil.format(menu));
     }
 
     /**
@@ -103,17 +100,12 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void testJsonString(){
-        LOGGER.debug(
-                        "DEFAULT_USER_FOR_JSON_TEST_JSON:{}--->{}",
-                        DEFAULT_USER_FOR_JSON_TEST_JSON,
-                        JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST_JSON));
+        LOGGER.debug("DEFAULT_USER_FOR_JSON_TEST_JSON:{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
     }
 
     @Test
     public void testJsonString11(){
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("ID", 4616189619433466044L);
-
+        Map<String, Object> map = toMap("ID", (Object) 4616189619433466044L);
         LOGGER.debug("{}", JsonUtil.format(map));
     }
 
@@ -140,8 +132,7 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void testJsonString1(){
-        BigDecimal[] aBigDecimals = { ConvertUtil.toBigDecimal("99999999.00") };
-        LOGGER.debug(JsonUtil.format(aBigDecimals));
+        LOGGER.debug(JsonUtil.format(toArray(toBigDecimal("99999999.00"))));
     }
 
     /**
@@ -168,7 +159,7 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void format(){
-        User user = JsonUtil.toBean(DEFAULT_USER_FOR_JSON_TEST_JSON, User.class);
+        User user = JsonUtil.toBean(USER_JSON_STRING, User.class);
         user.setId(10L);
         LOGGER.debug(JsonUtil.format(user));
     }
@@ -179,13 +170,17 @@ public class JsonUtilTest extends BaseJsonTest{
         LOGGER.debug(JsonUtil.format(json));
     }
 
+    @Test
+    public void formatEnum(){
+        LOGGER.debug(JsonUtil.format(HttpMethodTestType.GET));
+    }
+
     /**
      * Name1.
      */
     @Test
     public void testExcludes(){
-        String[] excludes = { "name" };
-        LOGGER.debug(JsonUtil.format(DEFAULT_USER_FOR_JSON_TEST, excludes));
+        LOGGER.debug(JsonUtil.format(USER, toArray("name")));
     }
 
     /**
@@ -195,7 +190,7 @@ public class JsonUtilTest extends BaseJsonTest{
     public void testSensitiveWordsJsonValueProcessor(){
         User user = new User("feilong1", 24);
         user.setPassword("123456");
-        user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
+        user.setMoney(toBigDecimal("99999999.00"));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
         propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
@@ -212,29 +207,18 @@ public class JsonUtilTest extends BaseJsonTest{
      */
     @Test
     public void testFormatWithIncludes1(){
-
         User user1 = new User("feilong1", 24);
         user1.setId(8L);
 
         User user2 = new User("feilong2", 240);
 
-        List<User> list = new ArrayList<User>();
-
-        list.add(user1);
-        list.add(user2);
+        List<User> list = toList(user1, user2);
 
         String[] array = { "id", "name" };
         LOGGER.debug(JsonUtil.formatWithIncludes(list, array));
+        LOGGER.debug(JsonUtil.formatWithIncludes(toArray(user1, user2), array));
 
-        User[] users = { user1, user2 };
-        LOGGER.debug(JsonUtil.formatWithIncludes(users, array));
-
-        List<String> list3 = new ArrayList<String>();
-
-        list3.add("2,5,8");
-        list3.add("2,5,9");
-
-        LOGGER.debug(JsonUtil.formatWithIncludes(list3));
+        LOGGER.debug(JsonUtil.formatWithIncludes(toList("2,5,8", "2,5,9")));
         LOGGER.debug(JsonUtil.formatWithIncludes(user1));
     }
 

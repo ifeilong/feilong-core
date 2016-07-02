@@ -668,10 +668,6 @@ public class ConvertUtilTest{
         LOGGER.debug(properties.getProperty("age"));
         LOGGER.debug(JsonUtil.format(properties));
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(toMap(properties)));
-        }
-
+        LOGGER.debug(JsonUtil.format(toMap(properties)));
     }
-
 }

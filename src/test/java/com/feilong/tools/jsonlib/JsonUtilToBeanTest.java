@@ -80,7 +80,7 @@ public class JsonUtilToBeanTest extends BaseJsonTest{
         Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
         classMap.put("userAddresseList", UserAddress.class);
 
-        User user = JsonUtil.toBean(DEFAULT_USER_FOR_JSON_TEST_JSON, User.class, classMap);
+        User user = JsonUtil.toBean(USER_JSON_STRING, User.class, classMap);
         LOGGER.debug(JsonUtil.format(user));
     }
 

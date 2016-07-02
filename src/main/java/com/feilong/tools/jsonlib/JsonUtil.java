@@ -517,7 +517,7 @@ public final class JsonUtil{
      * @return the jSON
      * @see #toJSON(Object, JsonConfig)
      */
-    public static JSON toJSON(Object obj){
+    static JSON toJSON(Object obj){
         return toJSON(obj, null);
     }
 
@@ -542,7 +542,7 @@ public final class JsonUtil{
      * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator, int)
      * @see net.sf.json.JSONSerializer#toJSON(Object)
      */
-    public static JSON toJSON(Object obj,JsonConfig jsonConfig){
+    static JSON toJSON(Object obj,JsonConfig jsonConfig){
         JsonConfig useJsonConfig = ObjectUtils.defaultIfNull(jsonConfig, DEFAULT_JSON_CONFIG);
         registerDefaultJsonValueProcessor(useJsonConfig);
 
