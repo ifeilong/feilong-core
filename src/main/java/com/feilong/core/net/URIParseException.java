@@ -15,8 +15,6 @@
  */
 package com.feilong.core.net;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
-
 /**
  * 解析url/uri出现异常.
  *
@@ -27,18 +25,6 @@ public final class URIParseException extends RuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
-
-    /**
-     * The Constructor.
-     *
-     * @param messagePattern
-     *            the message pattern
-     * @param args
-     *            the args
-     */
-    public URIParseException(String messagePattern, Object...args){
-        super(Slf4jUtil.format(messagePattern, args));
-    }
 
     /**
      * The Constructor.

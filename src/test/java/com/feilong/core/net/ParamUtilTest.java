@@ -17,7 +17,6 @@ package com.feilong.core.net;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -137,28 +136,6 @@ public class ParamUtilTest{
     }
 
     /**
-     * Removes the parameter.
-     */
-    @Test
-    public void removeParameter(){
-        uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
-        String pageParamName = "label";
-        LOGGER.debug(ParamUtil.removeParameter(uriString, pageParamName, CharsetType.UTF8));
-    }
-
-    /**
-     * Removes the parameter list.
-     */
-    @Test
-    public void removeParameterList(){
-        uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
-        List<String> paramNameList = new ArrayList<String>();
-        paramNameList.add("label");
-        paramNameList.add("keyword");
-        LOGGER.debug(ParamUtil.removeParameterList(uriString, paramNameList, CharsetType.UTF8));
-    }
-
-    /**
      * Test join single value map.
      */
     @Test
@@ -195,18 +172,6 @@ public class ParamUtilTest{
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
         LOGGER.debug(ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
-    }
-
-    /**
-     * Retention param list.
-     */
-    @Test
-    public void retentionParamList(){
-        uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
-        List<String> paramNameList = new ArrayList<String>();
-        paramNameList.add("label");
-        paramNameList.add("keyword");
-        LOGGER.debug(ParamUtil.retentionParamList(uriString, paramNameList, CharsetType.UTF8));
     }
 
     /**
