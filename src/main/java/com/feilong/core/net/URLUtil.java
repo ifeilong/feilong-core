@@ -23,8 +23,6 @@ import java.net.URL;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.bean.ConvertUtil;
-
 /**
  * The Class URLUtil.
  * 
@@ -60,20 +58,6 @@ public final class URLUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    /**
-     * To string array.
-     *
-     * @param urls
-     *            the urls
-     * @return 如果 <code>urls</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see com.feilong.core.bean.ConvertUtil#toStrings(Object)
-     * @since 1.2.1
-     */
-    public static String[] toStringArray(URL...urls){
-        Validate.notNull(urls, "urls can't be null!");
-        return ConvertUtil.toStrings(urls);
     }
 
     /**
@@ -193,7 +177,7 @@ public final class URLUtil{
         try{
             return new File(filePathName).toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
         }catch (MalformedURLException e){
-            throw new URIParseException(e);
+            throw new URIParseException("filePathName:" + filePathName, e);
         }
     }
 }

@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,6 +63,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
+import com.feilong.core.net.URLUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -670,5 +672,19 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(properties));
 
         LOGGER.debug(JsonUtil.format(toMap(properties)));
+    }
+
+    /**
+     * Test get union url3.
+     */
+    @Test
+    public void testGetUnionUrl3(){
+        URL[] urls = {
+                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing0/"),
+                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing1/"),
+                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing2/"),
+                       null };
+
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
     }
 }

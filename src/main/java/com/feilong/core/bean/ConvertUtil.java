@@ -1458,6 +1458,35 @@ public final class ConvertUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <h3>也可以解析其他的数组成字符串数组哦:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * URL[] urls = {
+     *                URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing0/"),
+     *                URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing1/"),
+     *                URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing2/"),
+     *                null };
+     * 
+     * LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [
+     * "http://www.exiaoshuo.com/jinyiyexing0/",
+     * "http://www.exiaoshuo.com/jinyiyexing1/",
+     * "http://www.exiaoshuo.com/jinyiyexing2/",
+     * null
+     * ]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param toBeConvertedValue
      *            the to be converted value

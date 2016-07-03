@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -177,26 +179,29 @@ public final class URIUtil{
     }
 
     /**
-     * call {@link java.net.URI#URI(String)}.
+     * 直接调用 {@link java.net.URI#create(String)} 创造一个URI,异常信息更丰富.
      * 
+     * <h3>{@link URI#URI(String)} 和 {@link URI#create(String)}的区别:</h3>
+     * <blockquote>
      * <p>
-     * 如果String对象的URI违反了RFC 2396的语法规则,将会产生一个 {@link URISyntaxException}.<br>
+     * {@link URI#URI(String)},如果String对象的URI违反了RFC 2396的语法规则,将会产生一个 {@link URISyntaxException}.<br>
      * 如果知道URI是有效的,不会产生 {@link URISyntaxException},可以使用静态的 {@link java.net.URI#create(String)}方法
      * </p>
-     *
+     * </blockquote>
+     * 
      * @param uri
      *            the uri
      * @return {@link java.net.URI#URI(String)} <br>
      *         如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see java.net.URI#URI(String)
-     * @since 1.3.0
+     * @since 1.8.0
      */
-    public static URI newURI(String uri){
+    public static URI create(String uri){
         Validate.notBlank(uri, "uri can't be blank!");
         try{
-            return new URI(uri);
-        }catch (URISyntaxException e){
+            return URI.create(uri);
+        }catch (Exception e){
             throw new URIParseException(Slf4jUtil.format("uri:[{}]", uri), e);
         }
     }
@@ -204,15 +209,6 @@ public final class URIUtil{
     /**
      * 基于 uri字符串和charset创建 {@link URI}.
      * 
-     * <p>
-     * 内部调用{@link URI#create(String)}方法
-     * </p>
-     * 
-     * <p>
-     * 如果uriString中不含?等参数,直接调用{@link URI#create(String)}创建<br>
-     * 如果uriString中含?等参数,那么内部会调用{@link ParamUtil#addParameterArrayValueMap(String,Map,String)}获得新的url,再调用{@link URI#create(String)}创建
-     * </p>
-     *
      * @param uriString
      *            the uri string
      * @param charsetType
@@ -228,11 +224,7 @@ public final class URIUtil{
      *      java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
      */
     public static URI create(String uriString,String charsetType){
-        try{
-            return URI.create(encodeUri(uriString, charsetType));
-        }catch (Exception e){
-            throw new URIParseException(Slf4jUtil.format("uriString:[{}],charsetType:[{}]", uriString, charsetType), e);
-        }
+        return create(encodeUri(uriString, charsetType));
     }
 
     /**
@@ -248,22 +240,13 @@ public final class URIUtil{
      * @see java.net.URI#isAbsolute()
      */
     public static boolean isAbsolutePath(String uriString){
-        URI uri = newURI(uriString);
+        URI uri = create(uriString);
         return null == uri ? false : uri.isAbsolute();
     }
 
     /**
      * 基于 uriString和charset创建 {@link URI}.
      * 
-     * <p>
-     * 内部调用 {@link URI#create(String)}方法
-     * </p>
-     * 
-     * <p>
-     * 如果uriString中不含?等参数,直接调用{@link URI#create(String)}创建<br>
-     * 如果uriString中含?等参数,那么内部会调用{@link ParamUtil#addParameterArrayValueMap(String, Map, String)}获得新的url,再调用 {@link URI#create(String)}创建
-     * </p>
-     *
      * @param uriString
      *            the uri string
      * @param charsetType
@@ -282,13 +265,13 @@ public final class URIUtil{
         Validate.notBlank(uriString, "uriString can't be null/empty!");
         LOGGER.trace("input uriString:[{}],charsetType:{}", uriString, charsetType);
 
-        if (!hasQueryString(uriString)){
+        if (!hasQueryString(uriString) || isNullOrEmpty(charsetType)){
             return uriString;// 不带参数 一般不需要处理
         }
 
         Map<String, String[]> safeArrayValueMap = ParamUtil.toSafeArrayValueMap(getQueryString(uriString), charsetType);
         String encodeUrl = ParamUtil.addParameterArrayValueMap(uriString, safeArrayValueMap, charsetType);
-        LOGGER.trace("input uriString:[{}],after url:[{}]", uriString, encodeUrl);
+        LOGGER.trace("input uriString:[{}],charsetType:[{}],after url:[{}]", uriString, charsetType, encodeUrl);
         return encodeUrl;
     }
 
@@ -298,9 +281,9 @@ public final class URIUtil{
      * @param uriString
      *            the uri
      * @return 如果 isNullOrEmpty(url),返回 {@link StringUtils#EMPTY}
-     * @since 1.4.0
+     * @since 1.8.0 change to default
      */
-    public static String getFullPathWithoutQueryString(String uriString){
+    static String getFullPathWithoutQueryString(String uriString){
         if (Validator.isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
@@ -327,9 +310,9 @@ public final class URIUtil{
      * @return 如果传入的参数 <code>uriString</code> isNullOrEmpty,返回 {@link StringUtils#EMPTY};<br>
      *         如果传入的参数 <code>uriString</code> 不含有?,返回 {@link StringUtils#EMPTY};<br>
      *         否则截取第一个出现的?后面内容返回
-     * @since 1.4.0
+     * @since 1.8.0 change to default
      */
-    public static String getQueryString(String uriString){
+    static String getQueryString(String uriString){
         if (Validator.isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
@@ -344,10 +327,10 @@ public final class URIUtil{
      * @param uriString
      *            the uri string
      * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}
-     * @since 1.4.0
+     * @since 1.8.0 change to private
      */
     // XXX 有待严谨
-    public static boolean hasQueryString(String uriString){
+    private static boolean hasQueryString(String uriString){
         return Validator.isNullOrEmpty(uriString) ? false : StringUtils.contains(uriString, URIComponents.QUESTIONMARK);
     }
 

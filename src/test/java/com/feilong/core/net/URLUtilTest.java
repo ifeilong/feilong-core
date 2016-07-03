@@ -21,9 +21,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
-
 /**
  * The Class URLUtilTest.
  *
@@ -52,17 +49,4 @@ public class URLUtilTest{
         LOGGER.debug(URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/"));
     }
 
-    /**
-     * Test get union url3.
-     */
-    @Test
-    public void testGetUnionUrl3(){
-        URL[] urls = {
-                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing0/"),
-                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing1/"),
-                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing2/") };
-
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
-        LOGGER.debug(JsonUtil.format(URLUtil.toStringArray(urls)));
-    }
 }
