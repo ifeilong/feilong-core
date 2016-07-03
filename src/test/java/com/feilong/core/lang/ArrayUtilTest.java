@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -80,8 +81,7 @@ public class ArrayUtilTest{
         assertEquals(true, ArrayUtils.contains(new Integer[] { 1, 223 }, 1));
         assertEquals(true, ArrayUtils.contains(new Long[] { 1L, 223L }, 1L));
 
-        String[] array = new String[] { "1", "223" };
-        assertEquals(false, ArrayUtils.contains(array, "2"));
+        assertEquals(false, ArrayUtils.contains(toArray("1", "223"), "2"));
 
         int[] intarray = { 1, 223 };
         assertEquals(true, ArrayUtils.contains(intarray, 1));
@@ -92,8 +92,7 @@ public class ArrayUtilTest{
      */
     @Test
     public void testGetElement(){
-        Object array = new String[] { "jinxin", "feilong", "1" };
-        assertEquals("1", ArrayUtil.getElement(array, 2));
+        assertEquals("1", ArrayUtil.getElement(toArray("jinxin", "feilong", "1"), 2));
     }
 
     /**
@@ -101,7 +100,7 @@ public class ArrayUtilTest{
      */
     @Test
     public void convertListToStringReplaceBrackets(){
-        String[] array = new String[] { "1", "223" };
+        String[] array = toArray("1", "223");
         //Use "Arrays.toString(array)" instead.
         LOGGER.debug(array.toString());
         LOGGER.debug(Arrays.toString(array));

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
@@ -39,7 +41,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 import com.feilong.test.User;
@@ -60,9 +61,8 @@ public class MapUtilTest{
     @Test
     public void testToSingleValueMap(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
-
-        keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
-        keyAndArrayMap.put("city", new String[] { "南通市" });
+        keyAndArrayMap.put("province", toArray("浙江省", "江苏省"));
+        keyAndArrayMap.put("city", toArray("南通市"));
 
         Map<String, String> singleValueMap = MapUtil.toSingleValueMap(keyAndArrayMap);
         assertThat(singleValueMap, allOf(hasEntry("province", "浙江省"), hasEntry("city", "南通市")));
@@ -110,7 +110,7 @@ public class MapUtilTest{
      */
     @Test
     public void testInvertMap(){
-        Map<String, Integer> map = ConvertUtil.toMap(
+        Map<String, Integer> map = toMap(
                         new SimpleEntry<>("a", 3007),
                         new SimpleEntry<>("b", 3001),
                         new SimpleEntry<>("c", 3001),
@@ -145,12 +145,9 @@ public class MapUtilTest{
         map.put(5L, new User(5L));
         map.put(6L, new User(6L));
         map.put(4L, new User(4L));
-        Long[] includeKeys = { 5L, 4L };
-        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
 
-        Long[] includeKeys1 = { 5L, 4L };
-        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys1, "userInfo.age", Long.class)));
-
+        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, toArray(5L, 4L), "id", Long.class)));
+        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, toArray(5L, 4L), "userInfo.age", Long.class)));
         LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
 
     }

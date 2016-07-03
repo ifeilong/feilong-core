@@ -153,8 +153,7 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testCollect5(){
-        List<Long> list = new ArrayList<Long>();
-        List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
+        List<String> collect1 = CollectionsUtil.collect(new ArrayList<Long>(), TransformerUtils.stringValueTransformer());
         assertEquals(emptyList(), collect1);
     }
 
@@ -163,10 +162,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testCollect2(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
 
         Transformer<User, String> invokerTransformer = TransformerUtils.invokerTransformer("getName");
         List<String> collect1 = CollectionsUtil.collect(list, invokerTransformer);
@@ -179,10 +178,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testCollect3(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
 
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.constantTransformer("jintian"));
         assertThat(collect1, hasItems("jintian", "jintian", "jintian"));
@@ -211,7 +210,7 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroupCount(){
-        List<User> list = ConvertUtil.toList(//
+        List<User> list = toList(//
                         new User("张飞", 20),
                         new User("关羽", 30),
                         new User("刘备", 40),
@@ -224,7 +223,6 @@ public class CollectionsUtilTest{
                 return user.getAge() > 30;
             }
         });
-
         assertThat(map, allOf(hasEntry("刘备", 1), hasEntry("赵云", 1)));
     }
 
@@ -233,11 +231,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroupCount1(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞"));
-        list.add(new User("关羽"));
-        list.add(new User("刘备"));
-        list.add(new User("刘备"));
+        List<User> list = toList(//
+                        new User("张飞"),
+                        new User("关羽"),
+                        new User("刘备"),
+                        new User("刘备"));
 
         Map<String, Integer> map = CollectionsUtil.groupCount(list, "name");
         assertThat(map, allOf(hasEntry("刘备", 2), hasEntry("张飞", 1), hasEntry("关羽", 1)));
@@ -248,10 +246,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testIndexOf(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
 
         assertEquals(0, CollectionsUtil.indexOf(list, "name", "张飞"));
         assertEquals(1, CollectionsUtil.indexOf(list, "age", 24));
@@ -264,12 +262,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroupOne(){
-        List<User> testList = new ArrayList<User>();
-        testList.add(new User("张飞", 23));
-        testList.add(new User("刘备", 25));
-        testList.add(new User("刘备", 25));
-
-        Map<String, User> map = CollectionsUtil.groupOne(testList, "name");
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("刘备", 25),
+                        new User("刘备", 25));
+        Map<String, User> map = CollectionsUtil.groupOne(list, "name");
         LOGGER.debug(JsonUtil.format(map));
     }
 
@@ -278,12 +275,12 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroup(){
-        List<User> testList = new ArrayList<User>();
-        testList.add(new User("张飞", 23));
-        testList.add(new User("刘备", 25));
-        testList.add(new User("刘备", 25));
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("刘备", 25),
+                        new User("刘备", 25));
 
-        Map<String, List<User>> map = CollectionsUtil.group(testList, "name");
+        Map<String, List<User>> map = CollectionsUtil.group(list, "name");
         LOGGER.debug(JsonUtil.format(map));
     }
 
@@ -292,12 +289,12 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroup2(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 10));
-        list.add(new User("张飞", 28));
-        list.add(new User("刘备", 32));
-        list.add(new User("刘备", 30));
-        list.add(new User("刘备", 10));
+        List<User> list = toList(//
+                        new User("张飞", 10),
+                        new User("张飞", 28),
+                        new User("刘备", 32),
+                        new User("刘备", 30),
+                        new User("刘备", 10));
 
         Map<String, List<User>> map = CollectionsUtil.group(list, "name", new Predicate<User>(){
 
@@ -316,10 +313,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelect(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
 
         LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", toList("张飞", "刘备"))));
     }
@@ -329,12 +326,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testFind(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
-        list.add(new User("关羽", 24));
-
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25),
+                        new User("关羽", 24));
         LOGGER.debug(JsonUtil.format(CollectionsUtil.find(list, "name", "关羽")));
     }
 
@@ -343,17 +339,15 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testFind2(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
-        list.add(new User("关羽", 24));
-
-        User user = CollectionsUtil.find(
-                        list,
-                        PredicateUtils.andPredicate(
-                                        new BeanPropertyValueEqualsPredicate<User>("name", "刘备"),
-                                        new BeanPropertyValueEqualsPredicate<User>("age", 25)));
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25),
+                        new User("关羽", 24));
+        Predicate<User> predicate = PredicateUtils.andPredicate(
+                        new BeanPropertyValueEqualsPredicate<User>("name", "刘备"),
+                        new BeanPropertyValueEqualsPredicate<User>("age", 25));
+        User user = CollectionsUtil.find(list, predicate);
         LOGGER.debug(JsonUtil.format(user));
     }
 
@@ -362,12 +356,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectValue(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
-        list.add(new User("关羽", 24));
-
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25),
+                        new User("关羽", 24));
         LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", "关羽")));
     }
 
@@ -376,13 +369,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectArray(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
-
-        String[] array = { "刘备", "关羽" };
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", array)));
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", "刘备", "关羽")));
     }
 
     /**
@@ -390,11 +381,7 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectPredicate(){
-        List<Long> list = new ArrayList<Long>();
-        list.add(1L);
-        list.add(1L);
-        list.add(2L);
-        list.add(3L);
+        List<Long> list = toList(1L, 1L, 2L, 3L);
         LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
         LOGGER.debug(JsonUtil.format(CollectionsUtil.select(null, new EqualPredicate<Long>(1L))));
     }
@@ -420,11 +407,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testRemoveAll1(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
-
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
         LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备")));
         LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备", "关羽")));
     }
@@ -448,11 +434,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectRejected(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
-
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
         LOGGER.debug(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", toList("张飞", "刘备"))));
     }
 
@@ -461,11 +446,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGetFieldValueMap(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User("张飞", 23));
-        list.add(new User("关羽", 24));
-        list.add(new User("刘备", 25));
-
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, "name", "age");
         LOGGER.debug(JsonUtil.format(map));
 
@@ -550,11 +534,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSum4(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User(2L));
-        list.add(new User(50L));
-        list.add(new User(50L));
-
+        List<User> list = toList(//
+                        new User(2L),
+                        new User(50L),
+                        new User(50L));
         assertEquals(new BigDecimal(100L), CollectionsUtil.sum(list, "id", new Predicate<User>(){
 
             @Override
