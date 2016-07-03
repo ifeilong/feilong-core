@@ -52,7 +52,7 @@ public class StringUtilTest{
         LOGGER.debug("" + "8".compareTo("13"));
         Integer parseInt = Integer.parseInt("8");
         LOGGER.debug("" + parseInt.compareTo(Integer.parseInt("13")));
-        LOGGER.debug("" + "12".compareTo("13"));
+        LOGGER.debug("" + "10".compareTo("13"));
     }
 
     /**

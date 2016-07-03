@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.generic;
+package com.feilong.core.lang.reflect;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
@@ -33,43 +33,27 @@ public class GenericTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(GenericTest.class);
 
-    /**
-     * Gets the value.
-     *
-     * @param <T>
-     *            the generic type
-     * @param a
-     *            the a
-     * @param klass
-     *            the klass
-     * @return the value
-     */
+    @Test
+    public void testGenericTest(){
+        LOGGER.debug((String) getValue("jinxin", String.class));
+        LOGGER.debug((String) getValue("jinxin", Integer.class));
+    }
+
     public static <T> T getValue(String a,Class<?> klass){
-        LOGGER.debug(a + "" + (klass == String.class));
-        T aT = null;
         try{
             Method method = GenericTest.class.getMethod("getValue", String.class, Class.class);
             TypeVariable<?> typeVariable = (TypeVariable<?>) method.getGenericReturnType();
+
             LOGGER.debug(typeVariable.toString());
             LOGGER.debug(typeVariable.getName());
             LOGGER.debug("" + typeVariable.getBounds()[0]);
             LOGGER.debug(typeVariable.getGenericDeclaration().toString());
             LOGGER.debug(method.toGenericString());
             LOGGER.debug(method.toString());
-        }catch (SecurityException e){
-            LOGGER.error(e.getClass().getName(), e);
-        }catch (NoSuchMethodException e){
+        }catch (SecurityException | NoSuchMethodException e){
             LOGGER.error(e.getClass().getName(), e);
         }
-        return aT;
+        return null;
     }
 
-    /**
-     * TestGenericTest.
-     */
-    @Test
-    public void testGenericTest(){
-        LOGGER.debug((String) getValue("jinxin", String.class));
-        LOGGER.debug((String) getValue("jinxin", Integer.class));
-    }
 }
