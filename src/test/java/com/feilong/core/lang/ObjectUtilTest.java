@@ -64,26 +64,6 @@ public class ObjectUtilTest{
     }
 
     /**
-     * Checks if is boolean.
-     */
-    @Test
-    public void testIsBoolean(){
-        assertEquals(false, ObjectUtil.isBoolean(null));
-        assertEquals(true, ObjectUtil.isBoolean(false));
-    }
-
-    /**
-     * Checks if is integer.
-     */
-    @Test
-    public void testIsInteger(){
-        assertEquals(false, ObjectUtil.isInteger(null));
-        assertEquals(false, ObjectUtil.isInteger(false));
-        assertEquals(true, ObjectUtil.isInteger(1));
-        assertEquals(false, ObjectUtil.isInteger(5.56));
-    }
-
-    /**
      * Assert equals.
      */
     @Test

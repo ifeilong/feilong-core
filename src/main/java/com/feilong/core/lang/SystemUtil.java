@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
@@ -330,24 +332,142 @@ public final class SystemUtil{
     /**
      * 取到 {@link System#getProperty(String)},转成 {@link java.util.TreeMap},以遍输出log的时候,会顺序显示.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * LOGGER.debug(JsonUtil.format(SystemUtil.getPropertiesMap()));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+        "file.encoding": "UTF-8",
+        "file.encoding.pkg": "sun.io",
+        "file.separator": "\\",
+        "java.class.path": "E:\\Workspaces\\feilong\\feilong-core\\target\\test-classes;E:\\Workspaces\\feilong\\feilong-core\\target\\classes;D:\\FeiLong Soft\\Essential\\Development\\repository\\org\\apache\\commons\\commons-lang3\\3.4\\commons-lang3-3.4.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\org\\apache\\commons\\commons-collections4\\4.1\\commons-collections4-4.1.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\commons-beanutils\\commons-beanutils\\1.9.2\\commons-beanutils-1.9.2.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\net\\sf\\json-lib\\json-lib\\2.4\\json-lib-2.4-jdk15.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\net\\sf\\ezmorph\\ezmorph\\1.0.6\\ezmorph-1.0.6.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\org\\slf4j\\slf4j-log4j12\\1.7.21\\slf4j-log4j12-1.7.21.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\log4j\\log4j\\1.2.17\\log4j-1.2.17.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\commons-lang\\commons-lang\\2.6\\commons-lang-2.6.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\commons-logging\\commons-logging\\1.2\\commons-logging-1.2.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\commons-collections\\commons-collections\\3.2.2\\commons-collections-3.2.2.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\org\\hamcrest\\hamcrest-library\\1.3\\hamcrest-library-1.3.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\org\\hamcrest\\hamcrest-core\\1.3\\hamcrest-core-1.3.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\xom\\xom\\1.2.5\\xom-1.2.5.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\xalan\\xalan\\2.7.0\\xalan-2.7.0.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\org\\slf4j\\slf4j-api\\1.7.21\\slf4j-api-1.7.21.jar;D:\\FeiLong Soft\\Essential\\Development\\repository\\junit\\junit\\4.12\\junit-4.12.jar;E:\\Workspaces\\feilong\\feilong-resource\\feilong-common-test\\target\\classes;/D:/FeiLong Soft/Essential/Development/eclipse-jee-mars-2-win32/configuration/org.eclipse.osgi/425/0/.cp/;/D:/FeiLong Soft/Essential/Development/eclipse-jee-mars-2-win32/configuration/org.eclipse.osgi/424/0/.cp/",
+        "java.class.version": "51.0",
+        "java.endorsed.dirs": "D:\\Program Files\\Java\\jdk1.7.0_60\\jre\\lib\\endorsed",
+        "java.ext.dirs": "D:\\Program Files\\Java\\jdk1.7.0_60\\jre\\lib\\ext;C:\\Windows\\Sun\\Java\\lib\\ext",
+        "java.home": "D:\\Program Files\\Java\\jdk1.7.0_60\\jre",
+        "java.io.tmpdir": "C:\\Users\\feilong\\AppData\\Local\\Temp\\",
+        "java.library.path": "D:\\Program Files\\Java\\jdk1.7.0_60\\bin;C:\\Windows\\Sun\\Java\\bin;C:\\Windows\\system32;C:\\Windows;D:/Program Files/Java/jre1.8.0_45/bin/client;D:/Program Files/Java/jre1.8.0_45/bin;D:/Program Files/Java/jre1.8.0_45/lib/i386;C:\\ProgramData\\Oracle\\Java\\javapath;D:\\Goto;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\Common Files\\NetSarang;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\ATI Technologies\\ATI.ACE\\Core-Static;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\TortoiseGit\\bin;D:\\Program Files\\Java\\jdk1.8.0_45\\bin;D:\\FeiLong Soft;D:\\FeiLong Soft\\Essential\\run;D:\\FeiLong Soft\\StaticDevelopment\\apache-ant-1.9.3\\bin;D:\\FeiLong Soft\\StaticDevelopment\\apache-maven-3.3.3\\bin;D:\\FeiLong Soft\\Datebase\\postgresql\\postgresql-9.4.0-1-windows-x64-binaries\\bin;C:\\Program Files (x86)\\Git\\bin;C:\\Program Files (x86)\\Git\\libexec\\git-core;D:\\FeiLong Soft\\Essential\\Development\\redis-2.8.19;D:\\FeiLong Soft\\Essential\\Development\\eclipse-jee-mars-2-win32;;.",
+        "java.runtime.name": "Java(TM) SE Runtime Environment",
+        "java.runtime.version": "1.7.0_60-b19",
+        "java.specification.name": "Java Platform API Specification",
+        "java.specification.vendor": "Oracle Corporation",
+        "java.specification.version": "1.7",
+        "java.vendor": "Oracle Corporation",
+        "java.vendor.url": "http://java.oracle.com/",
+        "java.vendor.url.bug": "http://bugreport.sun.com/bugreport/",
+        "java.version": "1.7.0_60",
+        "java.vm.info": "mixed mode, sharing",
+        "java.vm.name": "Java HotSpot(TM) Client VM",
+        "java.vm.specification.name": "Java Virtual Machine Specification",
+        "java.vm.specification.vendor": "Oracle Corporation",
+        "java.vm.specification.version": "1.7",
+        "java.vm.vendor": "Oracle Corporation",
+        "java.vm.version": "24.60-b09",
+        "line.separator": "\r\n",
+        "os.arch": "x86",
+        "os.name": "Windows 7",
+        "os.version": "6.1",
+        "path.separator": ";",
+        "sun.desktop": "windows",
+        "user.country": "CN",
+        "user.dir": "E:\\Workspaces\\feilong\\feilong-core",
+        "user.home": "C:\\Users\\feilong",
+        "user.language": "zh",
+        "user.name": "feilong",
+        "user.script": "",
+        "user.timezone": "Asia/Shanghai",
+        "user.variant": ""
+    }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @return the properties map for log
      * @see System#getProperties()
      * @see ConvertUtil#toMap(Properties)
      * @see "org.springframework.core.env.AbstractEnvironment#getSystemProperties()"
+     * @since 1.8.0 change name
      */
-    public static Map<String, String> getPropertiesMapForLog(){
-        Properties properties = System.getProperties();
-        return new TreeMap<String, String>(ConvertUtil.toMap(properties));
+    public static Map<String, String> getPropertiesMap(){
+        return new TreeMap<String, String>(toMap(System.getProperties()));
     }
 
     /**
      * 取到 {@link System#getenv()},转成 {@link java.util.TreeMap},以遍输出log的时候,会顺序显示.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * LOGGER.debug(JsonUtil.format(SystemUtil.getEnvMap()));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+        "=::": "::\\",
+        "ALLUSERSPROFILE": "C:\\ProgramData",
+        "ANT_HOME": "D:\\FeiLong Soft\\StaticDevelopment\\apache-ant-1.9.3",
+        "APPDATA": "C:\\Users\\feilong\\AppData\\Roaming",
+        "APP_ENCRYPTION_PASSWORD_SPEEDO": "speedodev",
+        "COMPUTERNAME": "FEILONG-PC",
+        "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+        "FP_NO_HOST_CHECK": "NO",
+        "HOME": "C:\\Users\\feilong",
+        "HOMEDRIVE": "C:",
+        "HOMEPATH": "\\Users\\feilong",
+        "LOCALAPPDATA": "C:\\Users\\feilong\\AppData\\Local",
+        "LOGONSERVER": "\\\\FEILONG-PC",
+        "NUMBER_OF_PROCESSORS": "4",
+        "OS": "Windows_NT",
+        "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+        "PROCESSOR_ARCHITECTURE": "x86",
+        "PROCESSOR_ARCHITEW6432": "AMD64",
+        "PROCESSOR_LEVEL": "6",
+        "PROCESSOR_REVISION": "3a09",
+        "PSModulePath": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\",
+        "PUBLIC": "C:\\Users\\Public",
+        "Path": "D:/Program Files/Java/jre1.8.0_45/bin/client;D:/Program Files/Java/jre1.8.0_45/bin;D:/Program Files/Java/jre1.8.0_45/lib/i386;C:\\ProgramData\\Oracle\\Java\\javapath;D:\\Goto;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\Common Files\\NetSarang;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\ATI Technologies\\ATI.ACE\\Core-Static;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\TortoiseGit\\bin;D:\\Program Files\\Java\\jdk1.8.0_45\\bin;D:\\FeiLong Soft;D:\\FeiLong Soft\\Essential\\run;D:\\FeiLong Soft\\StaticDevelopment\\apache-ant-1.9.3\\bin;D:\\FeiLong Soft\\StaticDevelopment\\apache-maven-3.3.3\\bin;D:\\FeiLong Soft\\Datebase\\postgresql\\postgresql-9.4.0-1-windows-x64-binaries\\bin;C:\\Program Files (x86)\\Git\\bin;C:\\Program Files (x86)\\Git\\libexec\\git-core;D:\\FeiLong Soft\\Essential\\Development\\redis-2.8.19;D:\\FeiLong Soft\\Essential\\Development\\eclipse-jee-mars-2-win32;",
+        "ProgramData": "C:\\ProgramData",
+        "ProgramFiles": "C:\\Program Files (x86)",
+        "ProgramFiles(x86)": "C:\\Program Files (x86)",
+        "SESSIONNAME": "Console",
+        "SystemDrive": "C:",
+        "SystemRoot": "C:\\Windows",
+        "TEMP": "C:\\Users\\feilong\\AppData\\Local\\Temp",
+        "TMP": "C:\\Users\\feilong\\AppData\\Local\\Temp",
+        "USERDOMAIN": "feilong-PC",
+        "USERNAME": "feilong",
+        "USERPROFILE": "C:\\Users\\feilong",
+        "windir": "C:\\Windows",
+        "windows_tracing_flags": "3",
+        "windows_tracing_logfile": "C:\\BVTBin\\Tests\\installpackage\\csilogfile.log"
+    }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @return the env map for log
      * @see System#getenv()
      * @see "org.springframework.core.env.AbstractEnvironment#getSystemEnvironment()"
+     * @since 1.8.0 change name
      */
-    public static Map<String, String> getEnvMapForLog(){
+    public static Map<String, String> getEnvMap(){
         return new TreeMap<String, String>(System.getenv());
     }
 
@@ -386,6 +506,6 @@ public final class SystemUtil{
      */
     public static void setPropertiesFromProperties(Properties properties){
         Validate.notNull(properties, "properties can't be null!");
-        setPropertiesFromMap(ConvertUtil.toMap(properties));
+        setPropertiesFromMap(toMap(properties));
     }
 }

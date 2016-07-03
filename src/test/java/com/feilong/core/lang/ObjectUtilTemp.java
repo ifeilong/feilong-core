@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +40,50 @@ public class ObjectUtilTemp{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTemp.class);
+
+    /**
+     * Checks if is boolean.
+     */
+    @Test
+    public void testIsBoolean(){
+        assertEquals(false, isBoolean(null));
+        assertEquals(true, isBoolean(false));
+    }
+
+    /**
+     * Checks if is integer.
+     */
+    @Test
+    public void testIsInteger(){
+        assertEquals(false, isInteger(null));
+        assertEquals(false, isInteger(false));
+        assertEquals(true, isInteger(1));
+        assertEquals(false, isInteger(5.56));
+    }
+
+    /**
+     * 判断指定的对象 <code>object</code>是不是 {@link Boolean} 类型数据.
+     * 
+     * @param object
+     *            对象
+     * @return 是返回true <br>
+     *         如果 <code>object</code> 是null,返回false
+     */
+    public static boolean isBoolean(Object object){
+        return object instanceof Boolean;
+    }
+
+    /**
+     * 判断指定的对象 <code>object</code>是不是{@link Integer}类型.
+     * 
+     * @param object
+     *            对象
+     * @return 是返回true <br>
+     *         如果 <code>object</code> 是null,返回false
+     */
+    public static boolean isInteger(Object object){
+        return object instanceof Integer;
+    }
 
     /**
      * To iterator.

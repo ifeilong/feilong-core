@@ -39,19 +39,8 @@ public class SystemUtilTest{
      */
     @Test
     public void nanoTime(){
-        //返回最准确的可用系统计时器的当前值,以毫微秒为单位.
-        LOGGER.debug("" + System.nanoTime());
-
-        //返回以毫秒为单位的当前时间.注意,当返回值的时间单位是毫秒时,值的粒度取决于底层操作系统,并且粒度可能更大.例如,许多操作系统以几十毫秒为单位测量时间. 
-        LOGGER.debug("" + System.currentTimeMillis());
-    }
-
-    /**
-     * Test get env map for log.
-     */
-    @Test
-    public void testGetEnvMapForLog(){
-        LOGGER.debug(JsonUtil.format(SystemUtil.getEnvMapForLog()));
+        LOGGER.debug("" + System.nanoTime()); //返回最准确的可用系统计时器的当前值,以毫微秒为单位.
+        LOGGER.debug("" + System.currentTimeMillis()); //返回以毫秒为单位的当前时间.注意,当返回值的时间单位是毫秒时,值的粒度取决于底层操作系统,并且粒度可能更大.例如,许多操作系统以几十毫秒为单位测量时间. 
     }
 
     /**
@@ -67,10 +56,18 @@ public class SystemUtilTest{
     }
 
     /**
+     * Test get env map for log.
+     */
+    @Test
+    public void testGetEnvMap(){
+        LOGGER.debug(JsonUtil.format(SystemUtil.getEnvMap()));
+    }
+
+    /**
      * Test get properties map for log.
      */
     @Test
-    public void testGetPropertiesMapForLog(){
-        LOGGER.debug(JsonUtil.format(SystemUtil.getPropertiesMapForLog()));
+    public void testGetPropertiesMap(){
+        LOGGER.debug(JsonUtil.format(SystemUtil.getPropertiesMap()));
     }
 }
