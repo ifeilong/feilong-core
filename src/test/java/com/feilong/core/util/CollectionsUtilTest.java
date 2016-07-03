@@ -17,6 +17,7 @@ package com.feilong.core.util;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
@@ -30,7 +31,6 @@ import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -145,7 +145,7 @@ public class CollectionsUtilTest{
     @Test
     public void testCollect1(){
         List<String> collect1 = CollectionsUtil.collect((List<Long>) null, TransformerUtils.stringValueTransformer());
-        assertEquals(Collections.emptyList(), collect1);
+        assertEquals(emptyList(), collect1);
     }
 
     /**
@@ -155,7 +155,7 @@ public class CollectionsUtilTest{
     public void testCollect5(){
         List<Long> list = new ArrayList<Long>();
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.stringValueTransformer());
-        assertEquals(Collections.emptyList(), collect1);
+        assertEquals(emptyList(), collect1);
     }
 
     /**
@@ -203,7 +203,7 @@ public class CollectionsUtilTest{
         assertSame(4, list.size());
         assertThat(list, hasItems("feilong1", "feilong2", "feilong2", "feilong3"));
 
-        assertEquals(Collections.emptyList(), CollectionsUtil.removeDuplicate(null));
+        assertEquals(emptyList(), CollectionsUtil.removeDuplicate(null));
     }
 
     /**

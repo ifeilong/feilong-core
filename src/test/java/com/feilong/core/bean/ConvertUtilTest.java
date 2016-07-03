@@ -674,11 +674,8 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(toMap(properties)));
     }
 
-    /**
-     * Test get union url3.
-     */
     @Test
-    public void testGetUnionUrl3(){
+    public void testToStringsURLs(){
         URL[] urls = {
                        URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing0/"),
                        URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing1/"),
@@ -686,5 +683,9 @@ public class ConvertUtilTest{
                        null };
 
         LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
+
+        URL[] urls1 = {};
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls1)));
+        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(null)));
     }
 }
