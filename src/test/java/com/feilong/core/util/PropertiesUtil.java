@@ -129,7 +129,9 @@ public final class PropertiesUtil{
      */
     public static Properties getPropertiesWithClassLoader(Class<?> klass,String propertiesPath){
         Validate.notBlank(propertiesPath, "propertiesPath can't be blank!");
-        ClassLoader classLoader = ClassLoaderUtil.getClassLoaderByClass(klass);
+        ClassLoader classLoader = null;
+
+        //ClassLoaderUtil.getClassLoaderByClass(klass);
         return getProperties(classLoader.getResourceAsStream(propertiesPath));
     }
 

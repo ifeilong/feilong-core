@@ -231,14 +231,13 @@ public final class BeanUtil{
      * @since 1.5.0
      */
     private static void initConverters(){
-        boolean throwException = false;
-        boolean defaultNull = true;
-        int defaultArraySize = 10;
-
         //XXX initConverters不是最优方案
         BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
         ConvertUtilsBean convertUtils = beanUtilsBean.getConvertUtils();
 
+        boolean throwException = false;
+        boolean defaultNull = true;
+        int defaultArraySize = 10;
         convertUtils.register(throwException, defaultNull, defaultArraySize);
     }
 

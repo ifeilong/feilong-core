@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -27,7 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -326,7 +327,7 @@ public final class ClassLoaderUtil{
      * @return 如果 <code>callingClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.lang.Class#getClassLoader()
      */
-    public static ClassLoader getClassLoaderByClass(Class<?> callingClass){
+    private static ClassLoader getClassLoaderByClass(Class<?> callingClass){
         Validate.notNull(callingClass, "callingClass can't be null!");
         ClassLoader classLoader = callingClass.getClassLoader();
         if (LOGGER.isTraceEnabled()){
@@ -346,7 +347,7 @@ public final class ClassLoaderUtil{
      * @since 1.6.2
      */
     private static List<ClassLoader> getAllClassLoaderList(Class<?> callingClass){
-        return ConvertUtil.toList(
+        return toList(
                         getClassLoaderByCurrentThread(),
                         getClassLoaderByClass(ClassLoaderUtil.class),
                         null == callingClass ? null : getClassLoaderByClass(callingClass));
