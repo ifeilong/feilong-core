@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang.reflect;
 
+import static com.feilong.core.bean.ConvertUtil.convert;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -30,7 +32,9 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <h3>关于获取Class泛型说明:</h3>
  * 
  * <blockquote>
+ * 
  * <ol>
+ * 
  * <li>{@link Class#getGenericSuperclass()} 返回表示此 Class 所表示的实体(类、接口、基本类型或 void)的直接超类的 Type.
  * <ol>
  * <li>如果超类是参数化类型,则返回的 Type 对象必须准确反映源代码中所使用的实际类型参数.</li>
@@ -39,6 +43,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <li>如果此对象表示一个数组类,则返回表示 Object 类的 Class 对象.</li>
  * </ol>
  * </li>
+ * 
  * <li>{@link Class#getGenericInterfaces()}
  * <ol>
  * <li>返回表示某些接口的 Type,这些接口由此对象所表示的类或接口直接实现.</li>
@@ -50,6 +55,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * <li>如果此对象表示一个基本类型或 void,则此方法返回一个长度为 0 的数组.</li>
  * </ol>
  * </li>
+ * 
  * </ol>
  * </blockquote>
  * 
@@ -191,22 +197,15 @@ public final class TypeUtil{
      */
     private static Class<?>[] extractActualTypeArgumentClassArray(ParameterizedType parameterizedType){
         Validate.notNull(parameterizedType, "parameterizedType can't be null/empty!");
-
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("parameterizedType info:{}", JsonUtil.format(parameterizedType));
         }
-
         Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
         Validate.notNull(actualTypeArguments, "actualTypeArguments can't be null/empty!");
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("actualTypeArguments:{}", JsonUtil.format(actualTypeArguments));
+            LOGGER.trace("actualTypeArguments:[{}]", JsonUtil.format(actualTypeArguments));
         }
-        int length = actualTypeArguments.length;
-        Class<?>[] klasses = new Class<?>[length];
-        for (int i = 0, j = length; i < j; ++i){
-            klasses[i] = (Class<?>) actualTypeArguments[i];
-        }
-        return klasses;
+        return convert(actualTypeArguments, Class[].class);
     }
 }

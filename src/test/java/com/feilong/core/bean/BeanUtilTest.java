@@ -114,8 +114,7 @@ public class BeanUtilTest{
         memberAddress2.setId(1L);
         memberAddress2.setMemberId(memberId);
 
-        MemberAddress[] memberAddresses = { memberAddress1, memberAddress2 };
-        member.setMemberAddresses(memberAddresses);
+        member.setMemberAddresses(toArray(memberAddress1, memberAddress2));
         return member;
     }
 

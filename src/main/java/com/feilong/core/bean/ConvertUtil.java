@@ -1570,6 +1570,34 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
+     * <h3>此外,该方法特别适合数组类型的转换,比如 Type[] 转成 Class []:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 原来的写法:
+     * 
+     * <pre class="code">
+     * 
+     * Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+     * int length = actualTypeArguments.length;
+     * Class{@code <?>}[] klasses = new Class{@code <?>}[length];
+     * for (int i = 0, j = length; i < j; ++i){
+     *     klasses[i] = (Class{@code <?>}) actualTypeArguments[i];
+     * }
+     * 
+     * return klasses;
+     * 
+     * </pre>
+     * 
+     * 现在可以重构成:
+     * 
+     * <pre class="code">
+     * Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+     * return convert(actualTypeArguments, Class[].class);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * <h3>注意:</h3>
      * 
      * <blockquote>

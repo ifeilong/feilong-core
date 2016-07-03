@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.Validator;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
@@ -151,7 +152,7 @@ public final class JsonUtil{
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
         // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
         morpherRegistry.registerMorpher(new DateMorpher(
-                        new String[] { DatePattern.COMMON_DATE_AND_TIME, DatePattern.COMMON_TIME, DatePattern.COMMON_DATE }));
+                        ConvertUtil.toArray(DatePattern.COMMON_DATE_AND_TIME, DatePattern.COMMON_TIME, DatePattern.COMMON_DATE)));
 
         DEFAULT_JSON_CONFIG = getDefaultJsonConfig();
     }

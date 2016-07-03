@@ -15,6 +15,8 @@
  */
 package com.feilong.core.date;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -127,7 +129,7 @@ public final class DateExtensionUtil{
      */
     public static Date[] getResetTodayAndTomorrow(){
         Date today = DateUtil.getFirstDateOfThisDay(new Date());
-        return new Date[] { today, DateUtil.addDay(today, 1) };
+        return toArray(today, DateUtil.addDay(today, 1));
     }
 
     /**
@@ -151,7 +153,7 @@ public final class DateExtensionUtil{
      */
     public static Date[] getResetYesterdayAndToday(){
         Date today = DateUtil.getFirstDateOfThisDay(new Date());
-        return new Date[] { DateUtil.addDay(today, -1), today };
+        return toArray(DateUtil.addDay(today, -1), today);
     }
 
     // [end]

@@ -73,7 +73,6 @@ public final class Slf4jUtil{
      * @return format之后的结果
      * @see org.slf4j.helpers.FormattingTuple
      * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
-     * @see org.slf4j.helpers.MessageFormatter#arrayFormat(String, Object[])
      * @see org.slf4j.helpers.FormattingTuple#getMessage()
      * @since 1.6.0
      */
