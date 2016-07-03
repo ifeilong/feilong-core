@@ -47,7 +47,7 @@ public final class EnumUtil{
      * 通过<code>propertyName</code>的 <code>specifiedValue</code>(忽视大小写) 获得枚举(equalsIgnoreCase判断).
      * 
      * <p>
-     * 适用于这种{@link com.feilong.net.HttpMethodType HttpMethodType}带自定义属性的枚举类型,调用方式:
+     * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,调用方式:
      * </p>
      * 
      * <pre class="code">
@@ -77,7 +77,7 @@ public final class EnumUtil{
      * 通过<code>propertyName</code>的 <code>specifiedValue</code> 获得枚举(equals判断,区分大小写).
      * 
      * <p>
-     * 适用于这种{@link com.feilong.net.HttpMethodType HttpMethodType}带自定义属性的枚举类型,调用方式:
+     * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,调用方式:
      * </p>
      * 
      * <pre class="code">
