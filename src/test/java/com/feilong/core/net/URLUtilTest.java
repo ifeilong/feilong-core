@@ -32,12 +32,35 @@ public class URLUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(URLUtilTest.class);
 
-    /**
-     * Test get union url.
-     */
     @Test
-    public void testGetUnionUrl(){
-        LOGGER.debug(URLUtil.getUnionFileUrl("E:\\test", "sanguo"));
+    public void testGetUnionUrl1(){
+        LOGGER.debug(getUnionFileUrl("E:\\test", "sanguo"));
+    }
+
+    /**
+     * 获取联合url,通过在指定的上下文中对给定的 spec进行解析创建 URL,新的 URL从给定的上下文 URL和 spec参数创建.
+     * 
+     * <p style="color:red">
+     * 网站地址拼接,请使用{@link #getUnionUrl(URL, String)}
+     * </p>
+     * 
+     * <p>
+     * URIUtil.getUnionUrl("E:\\test", "sanguo") = file:/E:/test/sanguo
+     * </p>
+     * 
+     * @param context
+     *            要解析规范的上下文
+     * @param spec
+     *            the <code>String</code> to parse as a URL.
+     * @return 如果 <code>context</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>context</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see #toFileURL(String)
+     * @see #getUnionUrl(URL, String)
+     * @since 1.4.0
+     */
+    public static String getUnionFileUrl(String context,String spec){
+        URL parentUrl = URLUtil.toFileURL(context);
+        return URLUtil.getUnionUrl(parentUrl, spec);
     }
 
     /**
@@ -47,6 +70,13 @@ public class URLUtilTest{
     public void testGetUnionUrl2(){
         URL url = URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing/");
         LOGGER.debug(URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/"));
+    }
+
+    @Test
+    public void testNewURL(){
+        String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
+        URL url = URLUtil.newURL(spec);
+        LOGGER.debug("the param url:{}", url);
     }
 
 }

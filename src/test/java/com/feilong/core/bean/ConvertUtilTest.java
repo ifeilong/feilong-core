@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyList;
@@ -50,6 +51,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
@@ -687,5 +689,13 @@ public class ConvertUtilTest{
         URL[] urls1 = {};
         LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls1)));
         LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(null)));
+    }
+
+    @Test(expected = ConversionException.class)
+    public void testToURL(){
+        String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
+        URL url = convert(spec, URL.class); //异常
+
+        //MalformedURLException ConversionException
     }
 }
