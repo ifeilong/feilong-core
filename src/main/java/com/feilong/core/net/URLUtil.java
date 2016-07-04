@@ -26,27 +26,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Class URLUtil.
+ * {@link URL} 工具类.
  * 
  * <h3>URL 的长度上限</h3>
  * 
  * <blockquote>
  * 
  * <p>
- * URL 的最大长度是多少？W3C 的 HTTP 协议 并没有限定,然而,在实际应用中,经过试验,不同浏览器和 Web 服务器有不同的约定:
+ * URL 的最大长度是多少？W3C 的 HTTP 协议 并没有限定; 然而经过试验,不同浏览器和 Web 服务器有不同的约定:
  * </p>
  * 
  * <ul>
- * <li>IE 的 URL 长度上限是 2083 字节,其中纯路径部分不能超过 2048 字节.</li>
- * <li>Firefox 浏览器的地址栏中超过 65536 字符后就不再显示.</li>
- * <li>Safari 浏览器一致测试到 80000 字符还工作得好好的.</li>
- * <li>Opera 浏览器测试到 190000 字符的时候,还正常工作.</li>
+ * <li><b>IE</b> 长度上限是 <b>2083</b> 字节,其中纯路径部分不能超过 <b>2048</b> 字节.</li>
+ * <li><b>Firefox</b> 地址栏中超过 <b>65536</b> 字符后就不再显示.</li>
+ * <li><b>Safari</b> 测试到 <b>80000</b> 字符还工作得好好的.</li>
+ * <li><b>Opera</b> 测试到 <b>190000</b> 字符还工作得好好的.</li>
  * </ul>
  * 
+ * <p>
  * Web 服务器:
+ * </p>
+ * 
  * <ul>
- * <li>Apache Web 服务器在接收到大约 4000 字符长的 URL 时候产生 413 Entity Too Large" 错误.</li>
- * <li>IIS 默认接收的最大 URL 是 16384 字符.</li>
+ * <li><b>Apache Web</b> 服务器在接收到大约 <b>4000</b> 字符长的 URL 时候产生 <b>"413 Entity Too Large"</b> 错误.</li>
+ * <li><b>IIS</b> 默认接收的最大 URL 是 <b>16384</b> 字符.</li>
  * </ul>
  * </blockquote>
  *
@@ -104,8 +107,6 @@ public final class URLUtil{
      * </pre>
      * 
      * 也就是说,此方法必须要有协议 支持 (file URI scheme),如果你是文件需要转成 url的话,建议直接调用 {@link #toFileURL(String)}
-     * 
-     * 
      * </blockquote>
      * 
      * 
@@ -233,10 +234,11 @@ public final class URLUtil{
      * @param spec
      *            the <code>String</code> to parse as a URL.
      * @return 如果 <code>spec</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>spec</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.4.0
      */
     public static String getUnionUrl(URL context,String spec){
-        Validate.notNull(spec, "spec can't be null!");
+        Validate.notBlank(spec, "spec can't be null!");
         try{
             return new URL(context, spec).toString();
         }catch (MalformedURLException e){
