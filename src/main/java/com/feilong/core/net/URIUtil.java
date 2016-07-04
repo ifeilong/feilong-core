@@ -228,23 +228,6 @@ public final class URIUtil{
     }
 
     /**
-     * 验证path是不是绝对路径.
-     * 
-     * <p>
-     * (调用了 {@link java.net.URI#isAbsolute()},原理是 <code>url's scheme !=null</code>).
-     * </p>
-     *
-     * @param uriString
-     *            路径
-     * @return <tt>true</tt> if, and only if, this URI is absolute
-     * @see java.net.URI#isAbsolute()
-     */
-    public static boolean isAbsolutePath(String uriString){
-        URI uri = create(uriString);
-        return null == uri ? false : uri.isAbsolute();
-    }
-
-    /**
      * 基于 uriString和charset创建 {@link URI}.
      * 
      * @param uriString

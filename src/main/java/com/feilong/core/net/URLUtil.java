@@ -123,8 +123,9 @@ public final class URLUtil{
      * @return 如果 <code>spec</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>spec</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.net.URL#URL(String)
-     * @see <a href="https://en.wikipedia.org/wiki/File_URI_scheme">File_URI_scheme</a>
      * @see "org.apache.cxf.common.util.StringUtils#getURL(String)"
+     * @see "org.springframework.util.ResourceUtils#getURL(String)"
+     * @see <a href="https://en.wikipedia.org/wiki/File_URI_scheme">File_URI_scheme</a>
      * @see "org.apache.xml.resolver.readers.TextCatalogReader#readCatalog(Catalog, String)"
      * @see <a href="https://docs.oracle.com/javase/tutorial/networking/urls/creatingUrls.html">Creating a URL</a>
      * @since 1.3.0
@@ -134,6 +135,7 @@ public final class URLUtil{
         try{
             return new URL(spec);
         }catch (MalformedURLException e){
+            // no URL -> treat as file path
             LOGGER.info("[new URL(\"{}\")] exception,cause by :[{}],will try call [toFileURL(\"{}\")]", spec, e.getMessage(), spec);
             return toFileURL(spec);
         }
