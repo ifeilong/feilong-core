@@ -60,6 +60,28 @@ public final class ObjectUtil{
      * ObjectUtil.defaultIfNullOrEmpty("abc", *)        = "abc"
      * ObjectUtil.defaultIfNullOrEmpty(Boolean.TRUE, *) = Boolean.TRUE
      * </pre>
+     * 
+     * <h3>对下面的代码重构:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * if (Validator.isNotNullOrEmpty(defaultReturnResult.getReturnObject())){
+     *     return (String) defaultReturnResult.getReturnObject();
+     * }else{
+     *     return "redirect:/";
+     * }
+     * 
+     * </pre>
+     * 
+     * 可以重构成:
+     * 
+     * <pre class="code">
+     * return ObjectUtil.defaultIfNullOrEmpty((String) defaultReturnResult.getReturnObject(), "redirect:/");
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the type of the object
