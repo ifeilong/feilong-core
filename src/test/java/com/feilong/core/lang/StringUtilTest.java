@@ -56,15 +56,6 @@ public class StringUtilTest{
     }
 
     /**
-     * String add int.
-     */
-    @Test
-    public void stringAddInt(){
-        assertEquals("004", StringUtil.stringAddInt("002", 2));
-        assertEquals("001202", StringUtil.stringAddInt("000002", 1200));
-    }
-
-    /**
      * Test contains.
      */
     @Test
@@ -131,14 +122,6 @@ public class StringUtilTest{
         assertEquals(1, StringUtils.countMatches("xin", "i"));
         assertEquals(2, StringUtils.countMatches("xiin", "i"));
         assertEquals(2, StringUtils.countMatches("xiiiin", "ii"));
-    }
-
-    /**
-     * Adds the double quotes.
-     */
-    @Test
-    public void addDoubleQuotes(){
-        assertEquals("\"" + "jinxin.feilong" + "\"", StringUtil.addDoubleQuotes(TEXT));
     }
 
     /**

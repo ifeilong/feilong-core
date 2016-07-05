@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
@@ -210,5 +212,61 @@ public class StringUtilTemp{
             return StringUtils.EMPTY;
         }
         return text.substring(startIndex);// 索引从0开始
+    }
+
+    /**
+     * 给一串字符串前后增加两个引号.
+     * 
+     * <pre class="code">
+     * StringUtil.addDoubleQuotes("jinxin.feilong") = "jinxin.feilong"
+     * </pre>
+     * 
+     * @param text
+     *            任意的字符串
+     * @return "\"" + text + "\""
+     * @see "org.springframework.util.StringUtils#quote(String)"
+     */
+    public static String addDoubleQuotes(String text){
+        return "\"" + text + "\"";
+    }
+
+    /**
+     * 带有数字格式的数字字符串,与数字相加(一般生成流水号使用).
+     * 
+     * <pre class="code">
+     * StringUtil.stringAddInt("002",2)            =   004
+     * StringUtil.stringAddInt("000002",1200)      =   001202
+     * </pre>
+     * 
+     * @param str
+     *            带有数字格式的数字字符串 比如 002
+     * @param i
+     *            数字
+     * @return 带有数字格式的数字字符串,与数字相加(一般生成流水号使用).
+     * @see NumberUtil#toString(Number, String)
+     */
+    public static String stringAddInt(String str,int i){
+        String pattern = "";
+        for (int j = 0, z = str.length(); j < z; ++j){
+            pattern += "0";
+        }
+        return NumberUtil.toString(Integer.parseInt(str) + i, pattern);
+    }
+
+    /**
+     * String add int.
+     */
+    @Test
+    public void stringAddInt(){
+        assertEquals("004", stringAddInt("002", 2));
+        assertEquals("001202", stringAddInt("000002", 1200));
+    }
+
+    /**
+     * Adds the double quotes.
+     */
+    @Test
+    public void addDoubleQuotes(){
+        assertEquals("\"" + "jinxin.feilong" + "\"", addDoubleQuotes("jinxin.feilong"));
     }
 }
