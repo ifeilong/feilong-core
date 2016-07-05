@@ -202,8 +202,7 @@ public final class ClassLoaderUtil{
      * 
      * </blockquote>
      * 
-     * @return 获得 项目的 classpath
-     * @see #getResource(String)
+     * @return 获得项目的 classpath
      * @since 1.6.2
      */
     public static URL getRootClassPath(){
