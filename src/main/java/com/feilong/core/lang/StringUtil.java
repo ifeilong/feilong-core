@@ -735,7 +735,7 @@ public final class StringUtil{
      * </p>
      * 
      * <p>
-     * 转换符和标志的说明
+     * 转换符和标志的说明:
      * </p>
      * 
      * <h3>转换符</h3>
@@ -747,71 +747,85 @@ public final class StringUtil{
      * <th align="left">说明</th>
      * <th align="left">示例</th>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>%s</td>
      * <td>字符串类型</td>
      * <td>"mingrisoft"</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%c</td>
      * <td>字符类型</td>
      * <td>'m'</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>%b</td>
      * <td>布尔类型</td>
      * <td>true</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%d</td>
      * <td>整数类型(十进制)</td>
      * <td>99</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>%x</td>
      * <td>整数类型(十六进制)</td>
      * <td>FF</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%o</td>
      * <td>整数类型(八进制)</td>
      * <td>77</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>%f</td>
      * <td>浮点类型</td>
      * <td>99.99</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%a</td>
      * <td>十六进制浮点类型</td>
      * <td>FF.35AE</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>%e</td>
      * <td>指数类型</td>
      * <td>9.38e+5</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%g</td>
      * <td>通用浮点类型(f和e类型中较短的)</td>
      * <td></td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>%h</td>
      * <td>散列码</td>
      * <td></td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%%</td>
      * <td>百分比类型</td>
      * <td>％</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>%n</td>
      * <td>换行符</td>
      * <td></td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>%tx</td>
      * <td>日期与时间类型(x代表不同的日期与时间转换符</td>
@@ -830,42 +844,49 @@ public final class StringUtil{
      * <th align="left">示例</th>
      * <th align="left">结果</th>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>+</td>
      * <td>为正数或者负数添加符号</td>
      * <td>("%+d",15)</td>
      * <td>+15</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>-</td>
      * <td>左对齐(不可以与"用0填充"同时使用)</td>
      * <td>("%-5d",15)</td>
      * <td>|15 |</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>0</td>
      * <td>数字前面补0</td>
      * <td>("%04d", 99)</td>
      * <td>0099</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>空格</td>
      * <td>在整数之前添加指定数量的空格</td>
      * <td>("% 4d", 99)</td>
      * <td>| 99|</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>,</td>
      * <td>以","对数字分组</td>
      * <td>("%,f", 9999.99)</td>
      * <td>9,999.990000</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>(</td>
      * <td>使用括号包含负数</td>
      * <td>("%(f", -99.99)</td>
      * <td>(99.990000)</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>#</td>
      * <td>如果是浮点数则包含小数点,如果是16进制或8进制则添加0x或0</td>
@@ -874,18 +895,21 @@ public final class StringUtil{
      * <td>0x63<br>
      * 0143</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@code <}</td>
      * <td>格式化前一个转换符所描述的参数</td>
      * <td>("%f和%{@code <}3.2f", 99.45)</td>
      * <td>99.450000和99.45</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>$</td>
      * <td>被格式化的参数索引</td>
      * <td>("%1$d,%2$s", 99,"abc")</td>
      * <td>99,abc</td>
      * </tr>
+     * 
      * </table>
      * </blockquote>
      * 
