@@ -152,14 +152,14 @@ public final class StatisticsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * 
      * User user1 = new User(2L);
      * user1.setAge(18);
-     * list.add(user1);
      * 
      * User user2 = new User(3L);
      * user2.setAge(30);
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(user1);
      * list.add(user2);
      * 
      * Map{@code <String, BigDecimal>} map = StatisticsUtil.sum(list, "id", "age");

@@ -1433,31 +1433,35 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} testList = new ArrayList{@code <User>}();
-     * testList.add(new User("张飞", 23));
-     * testList.add(new User("刘备", 25));
-     * testList.add(new User("刘备", 25));
+     * List{@code <User>} list = toList(
+     *                 new User("张飞", 23),
+     *                 new User("刘备", 25),
+     *                 new User("刘备", 25));
      * 
-     * Map{@code <String, List<User>>} map = CollectionsUtil.group(testList, "name");
-     * LOGGER.info(JsonUtil.format(map));
+     * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name");
+     * LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
      * 返回 :
      * 
      * <pre class="code">
-     * {
-     * "张飞": [{
-     * "age": 23,
-     * "name": "张飞"
-     * }],
-     * "刘备": [{
-     * "age": 25,
-     * "name": "刘备"
-     * },{
-     * "age": 25,
-     * "name": "刘备"
-     * }]
-     * }
+    {
+        "张飞": [ {
+            "age": 23,
+            "name": "张飞",
+        }],
+        "刘备": [
+            {
+                "age": 25,
+                "name": "刘备",
+            },
+            {
+                "age": 25,
+                "name": "刘备",
+            }
+        ]
+    }
+     * 
      * </pre>
      * 
      * </blockquote>
