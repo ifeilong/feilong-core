@@ -16,6 +16,9 @@
 package com.feilong.core.bean;
 
 import static com.feilong.core.bean.ConvertUtil.convert;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyList;
@@ -370,14 +373,25 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToString2(){
-        Integer[] int1 = { 2, null, 1, null };
-        LOGGER.debug(ConvertUtil.toString(int1));
+        assertEquals("2", ConvertUtil.toString(toArray(2, null, 1, null)));
 
         ArrayConverter arrayConverter = new ArrayConverter(ArrayUtils.EMPTY_INT_ARRAY.getClass(), new IntegerConverter());
         arrayConverter.setOnlyFirstToString(false);
         arrayConverter.setDelimiter(',');
         arrayConverter.setAllowedChars(new char[] { '.', '-' });
-        LOGGER.debug(arrayConverter.convert(String.class, int1));
+        LOGGER.debug(arrayConverter.convert(String.class, toArray(2, null, 1, null)));
+    }
+
+    @Test
+    public void testToString3(){
+        assertEquals("张飞", ConvertUtil.toString(toList("张飞", "关羽", "", "赵云")));
+    }
+
+    @Test
+    public void testToString5(){
+        assertEquals("1", ConvertUtil.toString(1));
+        assertEquals("1.0", ConvertUtil.toString(toBigDecimal(1.0)));
+        assertEquals("8", ConvertUtil.toString(toLong(8L)));
     }
 
     /**

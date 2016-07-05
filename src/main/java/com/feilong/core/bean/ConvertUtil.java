@@ -279,7 +279,7 @@ public final class ConvertUtil{
      * </blockquote>
      * 
      * <p>
-     * 该方法十分适用于 获取请求的分页参数
+     * 该方法非常适用于获取请求的分页参数
      * </p>
      * 
      * <h3>示例:</h3>
@@ -322,9 +322,10 @@ public final class ConvertUtil{
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see org.apache.commons.beanutils.converters.IntegerConverter
      * @see org.apache.commons.lang3.math.NumberUtils#toInt(String)
+     * @see #toInteger(Object, Integer)
      */
     public static Integer toInteger(Object toBeConvertedValue){
-        return new IntegerConverter(null).convert(Integer.class, toBeConvertedValue);
+        return toInteger(toBeConvertedValue, null);
     }
 
     /**
@@ -346,7 +347,7 @@ public final class ConvertUtil{
      * </blockquote>
      * 
      * <p>
-     * 该方法十分适用于 获取请求的分页参数
+     * 该方法非常适用于获取请求的分页参数
      * </p>
      * 
      * <h3>示例:</h3>
@@ -562,6 +563,43 @@ public final class ConvertUtil{
     /**
      * 把对象 <code>toBeConvertedValue</code> 转换成字符串.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * assertEquals("1", ConvertUtil.toString(1));
+     * assertEquals("1.0", ConvertUtil.toString(toBigDecimal(1.0)));
+     * assertEquals("8", ConvertUtil.toString(toLong(8L)));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 该方法<b>不适合</b> list转换成字符串,请使用 {@link #toString(ToStringConfig, Collection)}
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toString(toList("张飞", "关羽", "", "赵云")) = "张飞"
+     * </pre>
+     * 
+     * <p>
+     * 该方法也<b>不适合</b> array 转换成字符串,请使用 {@link #toString(ToStringConfig, Object...)}
+     * </p>
+     * 
+     * <pre class="code">
+     * Integer[] int1 = { 2, null, 1, null };
+     * LOGGER.debug(ConvertUtil.toString(int1));        = 2
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * <h3>对于 Array 转成 String</h3>
      * 
      * <blockquote>
@@ -682,16 +720,16 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * Example 1:
-     * ConvertUtil.toString(new ToStringConfig(),"a","b")  =     "a,b"
+     * ConvertUtil.toString(new ToStringConfig(),"a","b")       =   "a,b"
      * 
      * Example 2:
      * ToStringConfig toStringConfig=new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
-     * ConvertUtil.toString(new ToStringConfig(),"a","b",null)  返回 "a,b"
+     * ConvertUtil.toString(new ToStringConfig(),"a","b",null)  =   "a,b"
      * 
      * Example 3:
      * int[] ints = { 2, 1 };
-     * ConvertUtil.toString(new ToStringConfig(),ints)      = "2,1"
+     * ConvertUtil.toString(new ToStringConfig(),ints)          =   "2,1"
      * </pre>
      *
      * @param toStringConfig
