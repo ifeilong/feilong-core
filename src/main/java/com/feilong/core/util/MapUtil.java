@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -656,10 +658,10 @@ public final class MapUtil{
      */
     @SafeVarargs
     public static <K, T> Map<K, T> getSubMapExcludeKeys(Map<K, T> map,K...excludeKeys){
-        if (Validator.isNullOrEmpty(map)){
+        if (isNullOrEmpty(map)){
             return Collections.emptyMap();
         }
-        return Validator.isNullOrEmpty(excludeKeys) ? map : removeKeys(new LinkedHashMap<K, T>(map), excludeKeys); //保证元素的顺序 
+        return isNullOrEmpty(excludeKeys) ? map : removeKeys(new LinkedHashMap<K, T>(map), excludeKeys); //保证元素的顺序 
     }
 
     /**
