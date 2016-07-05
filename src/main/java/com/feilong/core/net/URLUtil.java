@@ -71,6 +71,14 @@ public final class URLUtil{
     /**
      * 将字符串转成url.
      * 
+     * <h3>该方法特点:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>处理 check exception,转成 uncheck exception</li>
+     * <li>如果使用new URL 出现异常,会尝试使用 {@link #toFileURL(String)}</li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>注意:</h3>
      * 
      * <blockquote>
@@ -86,14 +94,13 @@ public final class URLUtil{
      * URL newURL = new URL(spec);
      * </pre>
      * 
-     * 此时会抛出异常,
+     * 会抛出异常,
      * 
      * <pre class="code">
-     * Caused by: java.net.MalformedURLException: unknown protocol: c
+     * Caused by: java.net.MalformedURLException: <span style="color:red"><b>unknown protocol: c</b></span>
      * at java.net.URL.<init>(URL.java:593)
      * at java.net.URL.<init>(URL.java:483)
      * at java.net.URL.<init>(URL.java:432)
-     * at com.feilong.core.net.URLUtil.newURL(URLUtil.java:95)
      * ... 24 more
      * </pre>
      * 
@@ -106,16 +113,7 @@ public final class URLUtil{
      * URL newURL = new URL(spec);
      * </pre>
      * 
-     * 也就是说,此方法必须要有协议 支持 (file URI scheme),如果你是文件需要转成 url的话,建议直接调用 {@link #toFileURL(String)}
-     * </blockquote>
-     * 
-     * 
-     * <h3>而本方法有以下特点:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>处理 check exception,转成 uncheck exception</li>
-     * <li>如果使用new URL 出现异常,会尝试使用 {@link #toFileURL(String)}</li>
-     * </ol>
+     * 也就是说,此方法必须要有协议支持 (file URI scheme),如果你是文件需要转成 url的话,建议直接调用 {@link #toFileURL(String)}
      * </blockquote>
      * 
      * @param spec
@@ -128,9 +126,9 @@ public final class URLUtil{
      * @see <a href="https://en.wikipedia.org/wiki/File_URI_scheme">File_URI_scheme</a>
      * @see "org.apache.xml.resolver.readers.TextCatalogReader#readCatalog(Catalog, String)"
      * @see <a href="https://docs.oracle.com/javase/tutorial/networking/urls/creatingUrls.html">Creating a URL</a>
-     * @since 1.3.0
+     * @since 1.8.0
      */
-    public static URL newURL(String spec){
+    public static URL toURL(String spec){
         Validate.notBlank(spec, "spec can't be blank!");
         try{
             return new URL(spec);
@@ -142,7 +140,7 @@ public final class URLUtil{
     }
 
     /**
-     * 将字符串路径 <code>filePathName</code> 转成{@link URL}.
+     * 将字符串路径 <code>filePath</code> 转成{@link URL}.
      * 
      * <h3>示例:</h3>
      * 
@@ -152,7 +150,7 @@ public final class URLUtil{
      * 
      * String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
      * 
-     * URL newURL = URLUtil.toFileURL(spec);
+     * URL newURL = toFileURL(spec);
      * </pre>
      * 
      * </blockquote>
@@ -163,7 +161,7 @@ public final class URLUtil{
      * Paths#get(string).toUri().toURL();
      * 
      * <p>
-     * However, you probably want to get a URI. <br>
+     * However, you probably want to get a URI.<br>
      * Eg, a URI begins with file:/// but a URL with file:/ (at least, that's what toString produces).
      * </p>
      * 
@@ -174,19 +172,17 @@ public final class URLUtil{
      *
      * @param filePath
      *            字符串路径
-     * @return 如果 <code>filePathName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>filePathName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @return the url
      * @see java.io.File#toURI()
      * @see java.net.URI#toURL()
      * @see "org.apache.commons.io.FileUtils#toURLs(File[])"
-     * @since 1.6.3
+     * @since 1.8.0 change Access Modifiers
      */
-    public static URL toFileURL(String filePath){
-        Validate.notBlank(filePath, "filePath can't be null/empty!");
+    private static URL toFileURL(String filePath){
         try{
             return new File(filePath).toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
         }catch (MalformedURLException e){
-            throw new URIParseException("filePathName:" + filePath, e);
+            throw new URIParseException("filePath:" + filePath, e);
         }
     }
 

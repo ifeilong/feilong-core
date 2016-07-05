@@ -679,9 +679,9 @@ public class ConvertUtilTest{
     @Test
     public void testToStringsURLs(){
         URL[] urls = {
-                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing0/"),
-                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing1/"),
-                       URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing2/"),
+                       URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing0/"),
+                       URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing1/"),
+                       URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing2/"),
                        null };
 
         LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
