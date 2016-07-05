@@ -19,10 +19,12 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -185,5 +187,23 @@ public class StatisticsUtilTest{
 
         Map<String, Integer> map = StatisticsUtil.groupCount(list, "name");
         assertThat(map, allOf(hasEntry("刘备", 2), hasEntry("张飞", 1), hasEntry("关羽", 1)));
+    }
+
+    /**
+     * Test get min value.
+     */
+    @Test
+    public void testGetMinValue(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+
+        map.put("a", 3007);
+        map.put("b", 3001);
+        map.put("c", 3002);
+        map.put("d", 3003);
+        map.put("e", 3004);
+        map.put("f", 3005);
+        map.put("g", -1005);
+
+        assertThat(StatisticsUtil.getMinValue(map, "a", "b", "d", "g", "m"), is(-1005));
     }
 }
