@@ -27,6 +27,7 @@ import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -134,7 +135,6 @@ public class CollectionsUtilTest{
 
         Object[] objects = { null, null, null, null };
         assertThat(collect, hasItems(objects));
-
     }
 
     /**
@@ -224,12 +224,17 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroupOne(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("刘备", 25),
-                        new User("刘备", 25));
+        User zhangfei = new User("张飞", 23);
+        User liubei25 = new User("刘备", 25);
+        User liubei30 = new User("刘备", 30);
+        List<User> list = toList(zhangfei, liubei25, liubei30);
         Map<String, User> map = CollectionsUtil.groupOne(list, "name");
-        LOGGER.debug(JsonUtil.format(map));
+
+        assertThat(map.keySet(), is(hasSize(2)));
+        assertThat(map, allOf(//
+                        hasEntry("张飞", zhangfei),
+                        hasEntry("刘备", liubei25),
+                        not(hasEntry("刘备", liubei30))));
     }
 
     /**
@@ -412,7 +417,12 @@ public class CollectionsUtilTest{
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", toList("张飞", "刘备"))));
+        List<User> selectRejected = CollectionsUtil.selectRejected(list, "name", toList("张飞", "刘备"));
+        assertThat(selectRejected, hasSize(1));
+        assertThat(selectRejected, allOf(//
+                        hasItem(guanyu),
+                        not(hasItem(zhangfei)),
+                        not(hasItem(liubei))));
     }
 
     //******************************************************************************************************
@@ -428,9 +438,11 @@ public class CollectionsUtilTest{
         List<User> list = toList(zhangfei, guanyu, liubei);
 
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, "name", "age");
-        LOGGER.debug(JsonUtil.format(map));
 
-        assertSame(list.size(), map.size());
+        assertThat(map, allOf(//
+                        hasEntry("张飞", 23),
+                        hasEntry("关羽", 24),
+                        hasEntry("刘备", 25)));
     }
 
     /**

@@ -1603,7 +1603,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * Group one(map只put第一个匹配的元素,后面出现相同的元素将会忽略).
+     * Group one(map只put第一个匹配的元素,<b>后面出现相同的元素将会忽略</b>).
      * 
      * <p>
      * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
@@ -1622,7 +1622,7 @@ public final class CollectionsUtil{
      * List{@code <User>} list = new ArrayList{@code <User>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("刘备", 25));
-     * list.add(new User("刘备", 25));
+     * list.add(new User("刘备", 30));
      * 
      * Map{@code <String, User>} map = CollectionsUtil.groupOne(list, "name");
      * LOGGER.info(JsonUtil.format(map));
@@ -1672,8 +1672,8 @@ public final class CollectionsUtil{
             if (!map.containsKey(key)){
                 map.put(key, o);
             }else{
-                if (LOGGER.isDebugEnabled()){
-                    LOGGER.debug("map:{} already has the key:{},ignore!", JsonUtil.format(map.keySet()), key);
+                if (LOGGER.isTraceEnabled()){
+                    LOGGER.trace("map:{} already has the key:[{}],ignore!", JsonUtil.format(map.keySet()), key);
                 }
             }
         }
