@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -31,13 +32,9 @@ import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Set;
-import java.util.Stack;
 
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
@@ -410,11 +407,13 @@ public class CollectionsUtilTest{
         LOGGER.debug(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", toList("张飞", "刘备"))));
     }
 
+    //******************************************************************************************************
+
     /**
-     * Test get field value map.
+     * Test get property value map.
      */
     @Test
-    public void testGetFieldValueMap(){
+    public void testGetPropertyValueMap(){
         User zhangfei = new User("张飞", 23);
         User guanyu = new User("关羽", 24);
         User liubei = new User("刘备", 25);
@@ -427,42 +426,29 @@ public class CollectionsUtilTest{
     }
 
     /**
-     * Test get field value list.
+     * Test get property value list.
      */
     @Test
-    public void testGetFieldValueList(){
+    public void testGetPropertyValueList(){
         List<User> list = toList(//
                         new User(2L),
                         new User(5L),
                         new User(5L));
 
-        List<Long> fieldValueCollection = CollectionsUtil.getPropertyValueList(list, "id");
-        fieldValueCollection.add(7L);
-        fieldValueCollection.add(8L);
+        List<Long> resultList = CollectionsUtil.getPropertyValueList(list, "id");
+        assertThat(resultList, contains(2L, 5L, 5L));
 
-        assertThat(fieldValueCollection, contains(2L, 5L, 5L, 7L, 8L));
+        resultList.add(7L);
+        resultList.add(8L);
+
+        assertThat(resultList, contains(2L, 5L, 5L, 7L, 8L));
     }
 
     /**
-     * Test get field value set.
+     * Test get property value list1.
      */
     @Test
-    public void testGetFieldValueSet(){
-        List<User> list = toList(//
-                        new User(2L),
-                        new User(5L),
-                        new User(5L));
-
-        Set<Long> set = CollectionsUtil.getPropertyValueSet(list, "id");
-        assertThat(set, contains(2L, 5L));
-    }
-
-    /**
-     * Gets the field value list1.
-     * 
-     */
-    @Test
-    public void testGetFieldValueList1(){
+    public void testGetPropertyValueList1(){
         UserAddress userAddress = new UserAddress();
         userAddress.setAddress("中南海");
         List<UserAddress> userAddresseList = toList(userAddress);
@@ -477,8 +463,11 @@ public class CollectionsUtilTest{
         UserInfo userInfo1 = new UserInfo();
         userInfo1.setAge(28);
 
+        //*******************************************************
+
         User user1 = new User(2L);
-        user1.setLoves(new String[] { "sanguo1", "xiaoshuo1" });
+
+        user1.setLoves(toArray("sanguo1", "xiaoshuo1"));
         user1.setUserInfo(userInfo1);
         user1.setAttrMap(attrMap);
         user1.setUserAddresseList(userAddresseList);
@@ -488,7 +477,7 @@ public class CollectionsUtilTest{
         userInfo2.setAge(null);
 
         User user2 = new User(3L);
-        user2.setLoves(new String[] { "sanguo2", "xiaoshuo2" });
+        user2.setLoves(toArray("sanguo2", "xiaoshuo2"));
         user2.setUserInfo(userInfo2);
         user2.setAttrMap(attrMap);
         user2.setUserAddresseList(userAddresseList);
@@ -513,54 +502,16 @@ public class CollectionsUtilTest{
     }
 
     /**
-     * TestCollectionsUtilTest.
+     * Test get property value set.
      */
     @Test
-    public void testCollectionsUtilTest(){
-        Set<String> set = new LinkedHashSet<String>();
+    public void testGetPropertyValueSet(){
+        List<User> list = toList(//
+                        new User(2L),
+                        new User(5L),
+                        new User(5L));
 
-        set.add("1");
-        set.add("2");
-        set.add("3");
-        set.add("4");
-        set.add("5");
-        set.add("1");
-
-        LOGGER.debug(JsonUtil.format(set));
-    }
-
-    /**
-     * TestCollectionsUtilTest.
-     */
-    @Test
-    public void testCollectionsUtilTest2(){
-        Stack<Object> stack = new Stack<Object>();
-
-        stack.add("1");
-        stack.add("2");
-        stack.add("3");
-        stack.add("4");
-        LOGGER.debug("" + stack.firstElement());
-        LOGGER.debug("" + stack.peek());
-        LOGGER.debug("" + stack.pop());
-        LOGGER.debug(JsonUtil.format(stack));
-    }
-
-    /**
-     * TestCollectionsUtilTest.
-     */
-    @Test
-    public void testCollectionsUtilTest33(){
-        Queue<Object> queue = new PriorityQueue<Object>();
-
-        queue.add(1);
-        queue.add(2);
-        queue.add(3);
-        queue.add(4);
-        queue.add(5);
-        queue.add(6);
-
-        LOGGER.debug(JsonUtil.format(queue));
-        LOGGER.debug("" + queue.peek());
+        Set<Long> set = CollectionsUtil.getPropertyValueSet(list, "id");
+        assertThat(set, contains(2L, 5L));
     }
 }

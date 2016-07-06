@@ -685,10 +685,37 @@ public final class CollectionsUtil{
     //*************************获得 属性值 *******************************************************************
 
     /**
-     * 解析对象集合 <code>objectCollection</code>,使用 {@link PropertyUtil#getProperty(Object, String)}取到对象指定的属性 <code>propertyName</code>的值,拼成List(
-     * {@link ArrayList}).
+     * 循环集合 <code>objectCollection</code>,取到对象指定的属性 <code>propertyName</code>的值,拼成List({@link ArrayList}).
      * 
      * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = toList(//
+     *                 new User(2L),
+     *                 new User(5L),
+     *                 new User(5L));
+     * 
+     * List{@code <Long>} resultList = CollectionsUtil.getPropertyValueList(list, "id");
+     * LOGGER.debug(JsonUtil.format(resultList));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [
+        2,
+        5,
+        5
+    ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>当然,你还可以使用更加丰富的组合模式:</h3>
      * 
      * <blockquote>
      * 
@@ -894,7 +921,7 @@ public final class CollectionsUtil{
 
     //******************************getPropertyValueMap*********************************************************************
     /**
-     * 解析对象集合,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回.
+     * 循环 <code>objectCollection</code> ,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回.
      * 
      * <p>
      * 注意:返回的是 {@link LinkedHashMap},顺序是参数 objectCollection 元素的顺序
