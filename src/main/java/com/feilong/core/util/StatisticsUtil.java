@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Collections;
@@ -402,10 +404,11 @@ public final class StatisticsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @see #sum(Collection, String[], Predicate)
      */
     public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-        return sum(objectCollection, ConvertUtil.toArray(propertyName), includePredicate).get(propertyName);
+        return sum(objectCollection, toArray(propertyName), includePredicate).get(propertyName);
     }
 
     //***********************************************************************************************

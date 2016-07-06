@@ -1030,19 +1030,15 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * list.add(new User("张飞", 23));
-     * list.add(new User("关羽", 24));
-     * list.add(new User("刘备", 25));
-     * list.add(new User("关羽", 24));
-     * 
-     * User user = CollectionsUtil.find(
-     *                 list,
-     *                 PredicateUtils.andPredicate(
-     *                                 new BeanPropertyValueEqualsPredicate{@code <User>}("name", "刘备"),
-     *                                 new BeanPropertyValueEqualsPredicate{@code <User>}("age", 25)));
-     * LOGGER.info(JsonUtil.format(user));
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 23),
+     *                 new User("关羽", 24),
+     *                 new User("刘备", 25),
+     *                 new User("关羽", 30));
+     * Predicate{@code <User>} predicate = PredicateUtils
+     *                 .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
+     * User user = CollectionsUtil.find(list, predicate);
+     * LOGGER.debug(JsonUtil.format(user));
      * 
      * </pre>
      * 
@@ -1050,8 +1046,8 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * {
-     * "age": 25,
-     * "name": "刘备"
+        "age": 30,
+        "name": "关羽"
      * }
      * </pre>
      * 
@@ -1501,7 +1497,6 @@ public final class CollectionsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @see #group(Collection, String, Predicate)
      * @since 1.0.8
      */
@@ -1558,6 +1553,16 @@ public final class CollectionsUtil{
         ]
     }
      * </pre>
+     * 
+     * 当然，对于上述代码，你还可以优化成:
+     * 
+     * <pre class="code">
+     * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+     * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name", comparatorPredicate);
+     * </pre>
+     * 
+     * 参见
+     * {@link com.feilong.core.util.predicate.BeanPredicateUtil#comparatorPredicate(String, Comparable, org.apache.commons.collections4.functors.ComparatorPredicate.Criterion)}
      * 
      * </blockquote>
      *

@@ -18,9 +18,13 @@ package com.feilong.core.util.predicate;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
 import java.util.Collection;
+import java.util.Comparator;
 
+import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
+import org.apache.commons.collections4.functors.ComparatorPredicate;
+import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 
 import com.feilong.core.bean.PropertyUtil;
 
@@ -46,12 +50,15 @@ public final class BeanPredicateUtil{
      * @param <T>
      *            the generic type
      * @param <V>
+     *            the value type
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValue
      *            the property value
-     * @return the predicate
+     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see org.apache.commons.collections4.PredicateUtils#equalPredicate(Object)
      */
     public static <T, V> Predicate<T> equalPredicate(String propertyName,V propertyValue){
         return new BeanPredicate<T>(propertyName, PredicateUtils.equalPredicate(propertyValue));
@@ -74,7 +81,9 @@ public final class BeanPredicateUtil{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the property values
-     * @return the predicate
+     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see org.apache.commons.lang3.ArrayUtils#contains(Object[], Object)
      */
     @SafeVarargs
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final V...propertyValues){
@@ -98,12 +107,15 @@ public final class BeanPredicateUtil{
      * @param <T>
      *            the generic type
      * @param <V>
+     *            the value type
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
      *            the property value list
-     * @return the predicate
+     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see java.util.Collection#contains(Object)
      */
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final Collection<V> propertyValueList){
         return new BeanPredicate<T>(propertyName, new Predicate<V>(){
@@ -113,5 +125,97 @@ public final class BeanPredicateUtil{
                 return isNullOrEmpty(propertyValueList) ? false : propertyValueList.contains(propertyValue);
             }
         });
+    }
+
+    /**
+     * Comparator predicate.
+     * 
+     * <h3>通常对于以下代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 10),
+     *                 new User("张飞", 28),
+     *                 new User("刘备", 32),
+     *                 new User("刘备", 30),
+     *                 new User("刘备", 10));
+     * 
+     * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name", new Predicate{@code <User>}(){
+     * 
+     *     {@code @Override}
+     *     public boolean evaluate(User user){
+     *         return user.getAge() {@code >} 20;
+     *     }
+     * });
+     * 
+     * </pre>
+     * 
+     * 你可以简化成:
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 10),
+     *                 new User("张飞", 28),
+     *                 new User("刘备", 32),
+     *                 new User("刘备", 30),
+     *                 new User("刘备", 10));
+     * 
+     * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param propertyName
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param valueToCompare
+     *            the value to compare
+     * @param criterion
+     *            the criterion
+     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see ComparatorUtils#naturalComparator()
+     * @see #comparatorPredicate(String, Comparable, Comparator, Criterion)
+     */
+    public static <T, V extends Comparable<? super V>> Predicate<T> comparatorPredicate(
+                    String propertyName,
+                    V valueToCompare,
+                    Criterion criterion){
+        return comparatorPredicate(propertyName, valueToCompare, ComparatorUtils.<V> naturalComparator(), criterion);
+    }
+
+    /**
+     * Comparator predicate.
+     *
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     *            the value type
+     * @param propertyName
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param valueToCompare
+     *            the value to compare
+     * @param comparator
+     *            the comparator
+     * @param criterion
+     *            the criterion
+     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see org.apache.commons.collections4.functors.ComparatorPredicate
+     */
+    public static <T, V extends Comparable<? super V>> Predicate<T> comparatorPredicate(
+                    String propertyName,
+                    V valueToCompare,
+                    Comparator<V> comparator,
+                    Criterion criterion){
+        return new BeanPredicate<T>(propertyName, new ComparatorPredicate<V>(valueToCompare, comparator, criterion));
     }
 }

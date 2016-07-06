@@ -23,7 +23,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
@@ -41,6 +43,7 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.TransformerUtils;
+import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 import org.apache.commons.collections4.functors.EqualPredicate;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -248,23 +251,27 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGroup2(){
+        User zhangfei28 = new User("张飞", 28);
+        User liubei32 = new User("刘备", 32);
+        User liubei30 = new User("刘备", 30);
         List<User> list = toList(//
                         new User("张飞", 10),
-                        new User("张飞", 28),
-                        new User("刘备", 32),
-                        new User("刘备", 30),
+                        zhangfei28,
+                        liubei32,
+                        liubei30,
                         new User("刘备", 10));
 
-        Map<String, List<User>> map = CollectionsUtil.group(list, "name", new Predicate<User>(){
-
-            @Override
-            public boolean evaluate(User user){
-                return user.getAge() > 20;
-            }
-        });
+        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+        Map<String, List<User>> map = CollectionsUtil.group(list, "name", comparatorPredicate);
         LOGGER.debug(JsonUtil.format(map));
 
+        assertThat(map, allOf(//
+                        hasKey("张飞"),
+                        hasKey("刘备"),
+                        hasEntry(is("张飞"), hasItem(zhangfei28)),
+                        hasEntry(is("刘备"), hasItems(liubei32, liubei30))));
         assertSame(2, map.size());
+
     }
 
     /**
@@ -300,15 +307,16 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testFind2(){
+        User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//
                         new User("张飞", 23),
                         new User("关羽", 24),
                         new User("刘备", 25),
-                        new User("关羽", 24));
+                        guanyu30);
         Predicate<User> predicate = PredicateUtils
-                        .andPredicate(BeanPredicateUtil.equalPredicate("name", "刘备"), BeanPredicateUtil.equalPredicate("age", 25));
-        User user = CollectionsUtil.find(list, predicate);
-        LOGGER.debug(JsonUtil.format(user));
+                        .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
+
+        assertEquals(guanyu30, CollectionsUtil.find(list, predicate));
     }
 
     /**
