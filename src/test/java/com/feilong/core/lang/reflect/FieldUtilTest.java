@@ -15,12 +15,17 @@
  */
 package com.feilong.core.lang.reflect;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertThat;
+
+import java.util.Map;
+
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class FieldUtilTest.
@@ -30,15 +35,14 @@ import com.feilong.tools.jsonlib.JsonUtil;
  */
 public class FieldUtilTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(FieldUtilTest.class);
-
     /**
-     * Creates the payment form.
+     * Test get all field name and value map.
      */
     @Test
-    public void testGetFieldValueMap(){
+    public void testGetAllFieldNameAndValueMap(){
         User user = new User(12L);
-        LOGGER.debug(JsonUtil.format(FieldUtil.getAllFieldNameAndValueMap(user, "date")));
+        Map<String, Object> map = FieldUtil.getAllFieldNameAndValueMap(user, "date");
+
+        assertThat(map, allOf(hasEntry("id", (Object) 12L), hasKey("nickNames"), not(hasKey("date"))));
     }
 }

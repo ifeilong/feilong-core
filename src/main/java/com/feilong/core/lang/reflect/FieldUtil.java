@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validator;
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.core.util.predicate.ArrayContainsPredicate;
+import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -184,7 +184,7 @@ public final class FieldUtil{
             return Collections.emptyList();
         }
         //**********************************************************************************************
-        Predicate<Field> excludeFieldPredicate = new ArrayContainsPredicate<Field>("name", excludeFieldNames);
+        Predicate<Field> excludeFieldPredicate = BeanPredicateUtil.containsPredicate("name", excludeFieldNames);
         Predicate<Field> staticPredicate = new Predicate<Field>(){
 
             @Override

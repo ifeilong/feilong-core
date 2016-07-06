@@ -371,6 +371,23 @@ public final class StatisticsUtil{
      * 
      * </pre>
      * 
+     * <p>
+     * 当然这段代码,你还可以优化成:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(50L));
+     * list.add(new User(50L));
+     * 
+     * Predicate{@code <Long>} predicate = new ComparatorPredicate{@code <Long>}(10L, ComparatorUtils.{@code <Long>} naturalComparator(), Criterion.LESS);
+     * BigDecimal sum = StatisticsUtil.sum(list, "id", new BeanPredicate{@code <User>}("id", predicate));
+     * assertEquals(new BigDecimal(100L), sum);
+     * 
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param <O>

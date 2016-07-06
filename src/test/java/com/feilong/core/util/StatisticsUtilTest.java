@@ -24,16 +24,22 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.Predicate;
+import org.apache.commons.collections4.comparators.FixedOrderComparator;
+import org.apache.commons.collections4.functors.ComparatorPredicate;
+import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.util.predicate.BeanPredicate;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -97,13 +103,41 @@ public class StatisticsUtilTest{
                         new User(2L),
                         new User(50L),
                         new User(50L));
-        assertEquals(new BigDecimal(100L), StatisticsUtil.sum(list, "id", new Predicate<User>(){
+
+        BigDecimal expected = new BigDecimal(100L);
+        assertEquals(expected, StatisticsUtil.sum(list, "id", new Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
                 return user.getId() > 10L;
             }
         }));
+
+        //*****************************************************************
+
+        Predicate<Long> predicate = new ComparatorPredicate<Long>(10L, ComparatorUtils.<Long> naturalComparator(), Criterion.LESS);
+        BigDecimal sum = StatisticsUtil.sum(list, "id", new BeanPredicate<User>("id", predicate));
+        assertEquals(new BigDecimal(100L), sum);
+    }
+
+    /**
+     * TestStatisticsUtilTest.
+     */
+    @Test
+    public void testStatisticsUtilTest(){
+        String[] planets = { "Mercury", "Venus", "Earth", "Mars" };
+        Comparator<String> distanceFromSun = new FixedOrderComparator<>(planets);
+        Predicate<String> predicate = new ComparatorPredicate<String>("Venus", distanceFromSun, Criterion.GREATER);
+
+        LOGGER.debug("{}", predicate.evaluate("Earth"));
+    }
+
+    @Test
+    public void testStatisticsUtilTest1(){
+        Predicate<Integer> predicate = new ComparatorPredicate<Integer>(10, ComparatorUtils.<Integer> naturalComparator(), Criterion.LESS);
+
+        List<Integer> select = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
+        LOGGER.debug(JsonUtil.format(select, 0, 0));
     }
 
     /**

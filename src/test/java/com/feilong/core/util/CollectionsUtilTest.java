@@ -18,10 +18,13 @@ package com.feilong.core.util;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
@@ -46,8 +49,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate;
+import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
@@ -88,7 +90,7 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testAddAllIgnoreNull(){
-        List<String> list = ConvertUtil.toList("xinge", "feilong1");
+        List<String> list = toList("xinge", "feilong1");
         assertEquals(false, CollectionsUtil.addAllIgnoreNull(list, null));
     }
 
@@ -97,8 +99,8 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testAddAllIgnoreNull2(){
-        List<String> list = ConvertUtil.toList("xinge", "feilong1");
-        boolean addAllIgnoreNull = CollectionsUtil.addAllIgnoreNull(list, ConvertUtil.toList("xinge", "feilong1"));
+        List<String> list = toList("xinge", "feilong1");
+        boolean addAllIgnoreNull = CollectionsUtil.addAllIgnoreNull(list, toList("xinge", "feilong1"));
         assertEquals(true, addAllIgnoreNull);
         assertThat(list, hasItems("xinge", "feilong1", "xinge", "feilong1"));
     }
@@ -116,7 +118,7 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testPartition(){
-        List<String> list = ConvertUtil.toList("xinge", "feilong1", "feilong2");
+        List<String> list = toList("xinge", "feilong1", "feilong2");
         LOGGER.debug("list:{}", JsonUtil.format(ListUtils.partition(list, 2)));
     }
 
@@ -188,7 +190,7 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testRemoveDuplicate(){
-        List<String> list = ConvertUtil.toList("feilong1", "feilong2", "feilong2", "feilong3");
+        List<String> list = toList("feilong1", "feilong2", "feilong2", "feilong3");
 
         List<String> removeDuplicate = CollectionsUtil.removeDuplicate(list);
 
@@ -273,12 +275,13 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelect(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25));
-
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", toList("张飞", "刘备"))));
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+        assertThat(
+                        CollectionsUtil.select(list, "name", toList("张飞", "刘备")),
+                        allOf(hasItem(zhangfei), hasItem(liubei), not(hasItem(guanyu))));
     }
 
     /**
@@ -286,12 +289,13 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testFind(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25),
-                        new User("关羽", 24));
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.find(list, "name", "关羽")));
+        User zhangfei = new User("张飞", 23);
+        User guanyu24 = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        User guanyu50 = new User("关羽", 50);
+        List<User> list = toList(zhangfei, guanyu24, liubei, guanyu50);
+
+        assertThat(CollectionsUtil.find(list, "name", "关羽"), is(equalTo(guanyu24)));
     }
 
     /**
@@ -304,9 +308,8 @@ public class CollectionsUtilTest{
                         new User("关羽", 24),
                         new User("刘备", 25),
                         new User("关羽", 24));
-        Predicate<User> predicate = PredicateUtils.andPredicate(
-                        new BeanPropertyValueEqualsPredicate<User>("name", "刘备"),
-                        new BeanPropertyValueEqualsPredicate<User>("age", 25));
+        Predicate<User> predicate = PredicateUtils
+                        .andPredicate(BeanPredicateUtil.equalPredicate("name", "刘备"), BeanPredicateUtil.equalPredicate("age", 25));
         User user = CollectionsUtil.find(list, predicate);
         LOGGER.debug(JsonUtil.format(user));
     }
@@ -316,12 +319,14 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectValue(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25),
-                        new User("关羽", 24));
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", "关羽")));
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei, guanyu);
+
+        assertThat(
+                        CollectionsUtil.select(list, "name", "关羽"),
+                        allOf(hasItem(guanyu), hasItem(guanyu), not(hasItem(zhangfei)), not(hasItem(liubei))));
     }
 
     /**
@@ -329,11 +334,12 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectArray(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25));
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, "name", "刘备", "关羽")));
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+
+        assertThat(CollectionsUtil.select(list, "name", "刘备", "关羽"), allOf(hasItem(liubei), hasItem(guanyu), not(hasItem(zhangfei))));
     }
 
     /**
@@ -351,15 +357,16 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testRemoveAll(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25));
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
 
         List<User> removeAll = CollectionsUtil.removeAll(list, "name", toList("张飞", "刘备"));
 
-        assertThat(removeAll, hasSize(1));
-        assertThat(removeAll.get(0), hasProperty("name", equalTo("关羽")));
+        assertThat(removeAll, allOf(hasItem(guanyu), not(hasItem(zhangfei)), not(hasItem(liubei))));
+        assertThat(list, allOf(hasItem(zhangfei), hasItem(liubei), hasItem(guanyu)));
+
     }
 
     /**
@@ -367,10 +374,10 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testRemoveAll1(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25));
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
         LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备")));
         LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备", "关羽")));
     }
@@ -380,10 +387,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectRejected1(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25));
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+
         List<User> selectRejected = CollectionsUtil.selectRejected(list, "name", "刘备", "张飞");
         assertSame(1, selectRejected.size());
         assertThat(selectRejected.get(0), hasProperty("name", equalTo("关羽")));
@@ -394,10 +402,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testSelectRejected(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25));
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+
         LOGGER.debug(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", toList("张飞", "刘备"))));
     }
 
@@ -406,10 +415,11 @@ public class CollectionsUtilTest{
      */
     @Test
     public void testGetFieldValueMap(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25));
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, "name", "age");
         LOGGER.debug(JsonUtil.format(map));
 

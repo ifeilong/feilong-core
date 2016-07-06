@@ -22,6 +22,7 @@
  * @see org.apache.commons.collections4.functors.AllPredicate
  * @see org.apache.commons.collections4.functors.AndPredicate
  * @see org.apache.commons.collections4.functors.AnyPredicate
+ * @see org.apache.commons.collections4.functors.ComparatorPredicate
  * @see org.apache.commons.collections4.functors.EqualPredicate
  * @see org.apache.commons.collections4.functors.ExceptionPredicate
  * @see org.apache.commons.collections4.functors.FalsePredicate

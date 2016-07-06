@@ -15,33 +15,34 @@
  */
 package com.feilong.core.util.predicate;
 
-import java.util.Collection;
-
 import org.apache.commons.collections4.Predicate;
+import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.PropertyUtil;
 
 /**
- * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,使用{@link java.util.Collection#contains(Object)
- * Collection.contains} 判断是否在<code>values</code>集合中.
+ * 调用 {@link PropertyUtil#getProperty(Object, String)} 匹配属性值.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
- * @since 1.5.0
+ * @see org.apache.commons.beanutils.BeanPredicate
+ * @see org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate
+ * @see org.apache.commons.collections4.functors.ComparatorPredicate
+ * @since 1.8.0
  */
-public class CollectionContainsPredicate<T> implements Predicate<T>{
+//XXX 如果{@link org.apache.commons.beanutils.BeanPredicate}支持泛型且支持 commons-collections4之后,那么这么类将会废弃
+public class BeanPredicate<T> implements Predicate<T>{
 
     /**
      * 泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      * <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>.
      */
-    private final String        propertyName;
+    private final String    propertyName;
 
-    /** The value. */
-    private final Collection<?> propertyValueList;
+    /** The predicate. */
+    @SuppressWarnings("rawtypes")
+    private final Predicate predicate;
 
     /**
      * The Constructor.
@@ -49,12 +50,15 @@ public class CollectionContainsPredicate<T> implements Predicate<T>{
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @param propertyValueList
-     *            the values
+     * @param predicate
+     *            the predicate
      */
-    public CollectionContainsPredicate(String propertyName, Collection<?> propertyValueList){
-        this.propertyValueList = propertyValueList;
+    public BeanPredicate(String propertyName, @SuppressWarnings("rawtypes") Predicate predicate){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
+        Validate.notNull(predicate, "predicate can't be null!");
+
         this.propertyName = propertyName;
+        this.predicate = predicate;
     }
 
     /*
@@ -62,9 +66,10 @@ public class CollectionContainsPredicate<T> implements Predicate<T>{
      * 
      * @see org.apache.commons.collections4.Predicate#evaluate(java.lang.Object)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public boolean evaluate(T object){
-        return Validator.isNullOrEmpty(propertyValueList) ? false
-                        : propertyValueList.contains(PropertyUtil.getProperty(object, propertyName));
+        Object currentPropertyValue = PropertyUtil.getProperty(object, propertyName);
+        return predicate.evaluate(currentPropertyValue);
     }
 }

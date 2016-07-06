@@ -15,6 +15,9 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toList;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -35,11 +38,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validator;
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.util.predicate.ArrayContainsPredicate;
-import com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate;
-import com.feilong.core.util.predicate.CollectionContainsPredicate;
+import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -362,7 +362,7 @@ public final class CollectionsUtil{
      *
      * @param <O>
      *            the generic type
-     * @param <T>
+     * @param <V>
      *            the generic type
      * @param list
      *            the list
@@ -374,11 +374,11 @@ public final class CollectionsUtil{
      * @return 如果 list是null 或者 empty,返回 -1<br>
      *         如果指定属性<code>propertyName</code>的值 <code>value</code>在 list 查找不到也返回 -1<br>
      * @see org.apache.commons.collections4.ListUtils#indexOf(List, Predicate)
-     * @see com.feilong.core.util.predicate.BeanPropertyValueEqualsPredicate
+     * @see BeanPredicateUtil#equalPredicate(String, Object)
      * @since 1.5.5
      */
-    public static <O, T> int indexOf(List<O> list,String propertyName,T propertyValue){
-        return ListUtils.indexOf(list, new BeanPropertyValueEqualsPredicate<O>(propertyName, propertyValue));
+    public static <O, V> int indexOf(List<O> list,String propertyName,V propertyValue){
+        return ListUtils.indexOf(list, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
     }
     //***********************删除****************************************************
 
@@ -621,7 +621,7 @@ public final class CollectionsUtil{
      * @since 1.0.8
      */
     public static <O> List<O> remove(Collection<O> objectCollection,O removeElement){
-        return removeAll(objectCollection, ConvertUtil.toList(removeElement));
+        return removeAll(objectCollection, toList(removeElement));
     }
 
     /**
@@ -679,8 +679,7 @@ public final class CollectionsUtil{
      *      </a>
      */
     public static <O> List<O> removeDuplicate(Collection<O> objectCollection){
-        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : new ArrayList<O>(new LinkedHashSet<O>(objectCollection));
+        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList() : toList(new LinkedHashSet<O>(objectCollection));
     }
 
     //*************************获得 属性值 *******************************************************************
@@ -905,12 +904,12 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} testList = new ArrayList{@code <User>}();
-     * testList.add(new User("张飞", 23));
-     * testList.add(new User("关羽", 24));
-     * testList.add(new User("刘备", 25));
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
      * 
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(testList, "name", "age")));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
      * </pre>
      * 
      * 返回:
@@ -1002,9 +1001,10 @@ public final class CollectionsUtil{
      * @return 如果 <code>iterable</code>是null, 返回null<br>
      *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回null
      * @see #find(Iterable, Predicate)
+     * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
      */
     public static <O, V> O find(Iterable<O> iterable,String propertyName,V propertyValue){
-        return find(iterable, new BeanPropertyValueEqualsPredicate<O>(propertyName, propertyValue));
+        return find(iterable, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
     }
 
     /**
@@ -1061,11 +1061,7 @@ public final class CollectionsUtil{
     //**************************select*****************************************************************
 
     /**
-     * 调用 {@link ArrayContainsPredicate},获得 <code>propertyName</code>的值,判断是否 在<code>values</code>数组中;如果在,将该对象存入list中返回.
-     * 
-     * <p>
-     * 具体参见 {@link ArrayContainsPredicate}的使用
-     * </p>
+     * 循环 <code>objectCollection</code>,获得元素 <code>O</code> 的 <code>propertyName</code>的值,判断是否 在<code>values</code>数组中;如果在,将该对象存入list中返回.
      * 
      * <h3>示例:</h3>
      * 
@@ -1108,20 +1104,17 @@ public final class CollectionsUtil{
      * @param propertyValues
      *            the values
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
-     * @see com.feilong.core.util.predicate.ArrayContainsPredicate#ArrayContainsPredicate(String, Object...)
+     * @see BeanPredicateUtil#containsPredicate(String, Object...)
      */
     @SafeVarargs
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...propertyValues){
-        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : select(objectCollection, new ArrayContainsPredicate<O>(propertyName, propertyValues));
+        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList() : select(
+                        objectCollection,
+                        BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValues));
     }
 
     /**
-     * 调用 {@link CollectionContainsPredicate},获得 <code>propertyName</code>的值,判断是否 在<code>values</code>集合中;如果在,将该对象存入list中返回.
-     * 
-     * <p>
-     * 具体参见 {@link CollectionContainsPredicate}的使用
-     * </p>
+     * 循环 <code>objectCollection</code>,获得元素 <code>O</code> 的<code>propertyName</code>的值,判断是否 在<code>values</code>集合中;如果在,将该对象存入list中返回.
      * 
      * <h3>示例:</h3>
      * 
@@ -1167,19 +1160,20 @@ public final class CollectionsUtil{
      *            the values
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则调用 {@link #select(Collection, Predicate)}
-     * @see com.feilong.core.util.predicate.CollectionContainsPredicate
      * @see #select(Collection, Predicate)
+     * @see BeanPredicateUtil#containsPredicate(String, Collection)
      * @since 1.5.0
      */
     public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,Collection<V> propertyValueList){
-        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : select(objectCollection, new CollectionContainsPredicate<O>(propertyName, propertyValueList));
+        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList() : select(
+                        objectCollection,
+                        BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
     }
 
     /**
      * 按照指定的 {@link Predicate},返回查询出来的集合.
      * 
-     * <h3>示例:</h3>
+     * <h3>示例1:</h3>
      * <blockquote>
      * 
      * <pre class="code">
@@ -1195,6 +1189,25 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * [1,1]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例2:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Comparator{@code <Integer>} comparator = ComparatorUtils.naturalComparator();
+     * Predicate{@code <Integer>} predicate = new ComparatorPredicate{@code <Integer>}(10, comparator, Criterion.LESS);
+     * 
+     * List{@code <Integer>} select = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
+     * LOGGER.debug(JsonUtil.format(select, 0, 0));
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [30,55,88,12]
      * </pre>
      * 
      * </blockquote>
@@ -1217,14 +1230,14 @@ public final class CollectionsUtil{
      * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
      */
     public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
-        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
+        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : (List<O>) CollectionUtils.select(objectCollection, predicate);
     }
 
     //***************************selectRejected*********************************************************************
 
     /**
-     * 循环遍历 <code>objectCollection</code> ,返回 当bean <code>propertyName</code> 属性值都不在 <code>propertyValues</code> 时候的list.
+     * 循环 <code>objectCollection</code>,获得元素 <code>O</code> 的 <code>propertyName</code> 属性值都不在 <code>propertyValues</code> 时候的list.
      *
      * <h3>示例:</h3>
      * 
@@ -1267,21 +1280,17 @@ public final class CollectionsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see com.feilong.core.util.predicate.ArrayContainsPredicate
+     * @see BeanPredicateUtil#containsPredicate(String, Object...)
      * @see #selectRejected(Collection, Predicate)
      */
     @SafeVarargs
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...propertyValues){
-        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : selectRejected(objectCollection, new ArrayContainsPredicate<O>(propertyName, propertyValues));
+        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
+                        : selectRejected(objectCollection, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValues));
     }
 
     /**
-     * 调用 {@link CollectionContainsPredicate},获得 <code>propertyName</code>的值,判断是否 不在<code>values</code>集合中;如果不在,将该对象存入list中返回.
-     * 
-     * <p>
-     * 具体参见 {@link CollectionContainsPredicate}的使用
-     * </p>
+     * 循环 <code>objectCollection</code>,获得元素 <code>O</code> 的 <code>propertyName</code>的值,判断是否 不在<code>values</code>集合中;如果不在,将该对象存入list中返回.
      * 
      * <h3>示例:</h3>
      * 
@@ -1326,13 +1335,13 @@ public final class CollectionsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see com.feilong.core.util.predicate.CollectionContainsPredicate
+     * @see BeanPredicateUtil#containsPredicate(String, Collection)
      * @see #selectRejected(Collection , Predicate)
      * @since 1.5.0
      */
     public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,Collection<V> propertyValueList){
-        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : selectRejected(objectCollection, new CollectionContainsPredicate<O>(propertyName, propertyValueList));
+        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
+                        : selectRejected(objectCollection, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
     }
 
     /**
@@ -1349,7 +1358,7 @@ public final class CollectionsUtil{
      * @since 1.4.0
      */
     public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
-        return Validator.isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
+        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
 
@@ -1461,7 +1470,6 @@ public final class CollectionsUtil{
             }
         ]
     }
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -1591,12 +1599,12 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} testList = new ArrayList{@code <User>}();
-     * testList.add(new User("张飞", 23));
-     * testList.add(new User("刘备", 25));
-     * testList.add(new User("刘备", 25));
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("刘备", 25));
+     * list.add(new User("刘备", 25));
      * 
-     * Map{@code <String, User>} map = CollectionsUtil.groupOne(testList, "name");
+     * Map{@code <String, User>} map = CollectionsUtil.groupOne(list, "name");
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
