@@ -703,11 +703,46 @@ public final class MapUtil{
     }
 
     /**
-     * 删除.
+     * 删除 <code>map</code> 的指定的 <code>keys</code>.
      * 
+     * <h3>注意</h3>
+     * 
+     * <blockquote>
      * <p>
-     * 注意,直接操作的是参数<code>map</code>,迭代 <code>keys</code>,如果 <code>map</code>包含key 那么直接调用 {@link Map#remove(Object)},如果不包含,那么输出warn级别日志
+     * 直接操作的是参数<code>map</code>,迭代 <code>keys</code>,<br>
+     * 如果 <code>map</code>包含key,那么直接调用 {@link Map#remove(Object)},<br>
+     * 如果不包含,那么输出warn级别日志
      * </p>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = MapUtil.newLinkedHashMap(3);
+     * 
+     * map.put("name", "feilong");
+     * map.put("age", "18");
+     * map.put("country", "china");
+     * 
+     * LOGGER.debug(JsonUtil.format(MapUtil.removeKeys(map, "country")));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    {
+            "name": "feilong",
+            "age": "18"
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
@@ -734,7 +769,7 @@ public final class MapUtil{
     }
 
     /**
-     * 将<code>map</code>的key和value互转.
+     * 将 <code>map</code> 的key和value互转.
      * 
      * <p>
      * <span style="color:red">这个操作map预先良好的定义</span>.<br>

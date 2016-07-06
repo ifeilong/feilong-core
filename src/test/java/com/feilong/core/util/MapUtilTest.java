@@ -66,6 +66,17 @@ public class MapUtilTest{
         LOGGER.debug(JsonUtil.format(mutiMap));
     }
 
+    @Test
+    public void testRemoveKeys(){
+        Map<String, String> map = MapUtil.newLinkedHashMap(3);
+
+        map.put("name", "feilong");
+        map.put("age", "18");
+        map.put("country", "china");
+
+        LOGGER.debug(JsonUtil.format(MapUtil.removeKeys(map, "country")));
+    }
+
     /**
      * Test to single value map.
      */
