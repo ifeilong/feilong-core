@@ -16,13 +16,9 @@
 package com.feilong.core.lang;
 
 import java.lang.reflect.Modifier;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.Validator;
 import com.feilong.core.lang.reflect.ReflectException;
 
 /**
@@ -337,42 +333,4 @@ public final class ClassUtil{
         }
     }
 
-    /**
-     * 获得 class info map for LOGGER.
-     *
-     * @param klass
-     *            the klass
-     * @return 如果 <code>klass</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     */
-    public static Map<String, Object> getClassInfoMapForLog(Class<?> klass){
-        if (Validator.isNullOrEmpty(klass)){
-            return Collections.emptyMap();
-        }
-
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
-
-        map.put("clz.getCanonicalName()", klass.getCanonicalName());//"com.feilong.core.date.DatePattern"
-        map.put("clz.getName()", klass.getName());//"com.feilong.core.date.DatePattern"
-        map.put("clz.getSimpleName()", klass.getSimpleName());//"DatePattern"
-
-        map.put("clz.getComponentType()", klass.getComponentType());
-        // 类是不是"基本类型". 基本类型,包括void和boolean、byte、char、short、int、long、float 和 double这几种类型.
-        map.put("clz.isPrimitive()", klass.isPrimitive());
-
-        // 类是不是"本地类".本地类,就是定义在方法内部的类.
-        map.put("clz.isLocalClass()", klass.isLocalClass());
-        // 类是不是"成员类".成员类,是内部类的一种,但是它不是"内部类"或"匿名类".
-        map.put("clz.isMemberClass()", klass.isMemberClass());
-
-        //isSynthetic()是用来判断Class是不是"复合类".这在java应用程序中只会返回false,不会返回true.因为,JVM中才会产生复合类,在java应用程序中不存在"复合类"！
-        map.put("clz.isSynthetic()", klass.isSynthetic());
-        map.put("clz.isArray()", klass.isArray());
-        map.put("clz.isAnnotation()", klass.isAnnotation());
-
-        //当且仅当这个类是匿名类此方法返回true.
-        map.put("clz.isAnonymousClass()", klass.isAnonymousClass());
-        map.put("clz.isEnum()", klass.isEnum());
-
-        return map;
-    }
 }
