@@ -427,7 +427,6 @@ public final class CollectionsUtil{
      * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
      * </p>
      * 
-     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -656,16 +655,6 @@ public final class CollectionsUtil{
      * </ol>
      * </blockquote>
      * 
-     * <h3>效率问题？contains的本质就是遍历.</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 在100W的list当中执行0.546秒,而contains,我则没耐心去等了.顺便贴一下在10W下2段代码的运行时间.<br>
-     * [foo1] 100000 {@code ->} 50487 : 48610 ms.<br>
-     * [foo2] 100000 {@code ->} 50487 : 47 ms.<br>
-     * </p>
-     * </blockquote>
-     * 
      * @param <O>
      *            the generic type
      * @param objectCollection
@@ -823,8 +812,7 @@ public final class CollectionsUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 解析迭代集合,取到对象指定的属性 <code>propertyName</code>的值,拼成List(ArrayList),<br>
-     *         如果参数 <code>objectCollection</code>是null或者empty,会返回empty ArrayList<br>
+     * @return 如果参数 <code>objectCollection</code>是null或者empty,会返回empty ArrayList<br>
      *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;
      * @see #getPropertyValueCollection(Collection, String, Collection)
      * @since jdk1.5

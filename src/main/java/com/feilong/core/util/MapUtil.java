@@ -511,7 +511,45 @@ public final class MapUtil{
     }
 
     /**
-     * Put multi value.
+     * 往 map 中put 指定 key value(多值形式).
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, List<String>>} mutiMap = MapUtil.newLinkedHashMap(2);
+     * MapUtil.putMultiValue(mutiMap, "name", "张飞");
+     * MapUtil.putMultiValue(mutiMap, "name", "关羽");
+     * MapUtil.putMultiValue(mutiMap, "age", "30");
+     * 
+     * LOGGER.debug(JsonUtil.format(mutiMap));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    {
+            "name":         [
+                "张飞",
+                "关羽"
+            ],
+            "age": ["30"]
+        }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>map已经存在相同名称的key,那么value以list的形式累加.</li>
+     * <li>如果map中不存在指定名称的key,那么会构建一个ArrayList</li>
+     * </ol>
+     * </blockquote>
      *
      * @param <K>
      *            the key type

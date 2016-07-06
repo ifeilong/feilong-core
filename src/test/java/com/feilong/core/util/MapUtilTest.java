@@ -33,6 +33,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -54,6 +55,16 @@ import com.feilong.tools.jsonlib.JsonUtil;
 public class MapUtilTest{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
+
+    @Test
+    public void testPutMultiValue(){
+        Map<String, List<String>> mutiMap = MapUtil.newLinkedHashMap(2);
+        MapUtil.putMultiValue(mutiMap, "name", "张飞");
+        MapUtil.putMultiValue(mutiMap, "name", "关羽");
+        MapUtil.putMultiValue(mutiMap, "age", "30");
+
+        LOGGER.debug(JsonUtil.format(mutiMap));
+    }
 
     /**
      * Test to single value map.
