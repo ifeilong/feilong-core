@@ -23,7 +23,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 
 /**
- * The Class BaseParameterizedTest.
+ * The Class AbstractBooleanParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <I>
@@ -33,7 +33,7 @@ import org.junit.runners.Parameterized.Parameter;
  * @since 1.6.4
  */
 @RunWith(Parameterized.class)
-public abstract class BaseParameterizedTest<I, E> {
+public abstract class AbstractBooleanParameterizedTest<I, E> {
     //java.lang.IllegalAccessException: 
     //Class org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters can not access a member of class 
     //com.feilong.core.BaseParameterizedTest with modifiers "protected"

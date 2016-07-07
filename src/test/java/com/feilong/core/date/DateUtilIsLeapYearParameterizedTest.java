@@ -22,12 +22,12 @@ import java.util.Arrays;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.BaseParameterizedTest;
+import com.feilong.core.AbstractBooleanParameterizedTest;
 
 /**
  * The Class DateUtilIsLeapYearTest.
  */
-public class DateUtilIsLeapYearParameterizedTest extends BaseParameterizedTest<Integer, Boolean>{
+public class DateUtilIsLeapYearParameterizedTest extends AbstractBooleanParameterizedTest<Integer, Boolean>{
 
     /**
      * Data.

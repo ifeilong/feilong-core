@@ -17,12 +17,10 @@ package com.feilong.core.util.regexpattern;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.BaseParameterizedTest;
+import com.feilong.core.AbstractBooleanParameterizedTest;
 import com.feilong.core.RegexPattern;
 import com.feilong.core.util.RegexUtil;
 
@@ -31,7 +29,7 @@ import com.feilong.core.util.RegexUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3
  */
-public class EmailPatternTest extends BaseParameterizedTest<String, Boolean>{
+public class EmailPatternTest extends AbstractBooleanParameterizedTest<String, Boolean>{
 
     /**
      * Data.
@@ -67,10 +65,7 @@ public class EmailPatternTest extends BaseParameterizedTest<String, Boolean>{
                               "mkyong@mkyong@gmail.com",
                               "mkyong@gmail.com.1a" };
 
-        List<Object[]> list = toList(valids, invalids);
-        //list.add(new Object[] { "blahblah#3@gmail.com", true });
-        //list.add(new Object[] { "adnamariqq@gmail", false });
-        return list;
+        return toList(valids, invalids);
     }
 
     /**
@@ -87,7 +82,6 @@ public class EmailPatternTest extends BaseParameterizedTest<String, Boolean>{
      */
     //@Test
     public void testenclosing_type(){
-        //assertEquals(expectedValue, RegexUtil.matches("^\\s*?(.+)@(.+?)\\s*$", pattern));
         assertEquals(
                         expectedValue,
                         RegexUtil.matches(

@@ -123,7 +123,7 @@ import com.feilong.core.bean.ConvertUtil;
  * </p>
  * </blockquote>
  * 
- * <h3>{@link StringUtil#replace(CharSequence, CharSequence, CharSequence)} and {@link #replaceAll(CharSequence, String, String)} and
+ * <h3>{@link StringUtil#replace(String, String, String)} and {@link #replaceAll(CharSequence, String, String)} and
  * 区别:</h3>
  * 
  * <blockquote>
@@ -134,7 +134,7 @@ import com.feilong.core.bean.ConvertUtil;
  * <th align="left">说明</th>
  * </tr>
  * <tr valign="top">
- * <td>{@link StringUtil#replace(CharSequence, CharSequence, CharSequence)}</td>
+ * <td>{@link StringUtil#replace(String, String, String)}</td>
  * <td>将字符串中出现的target替换成replacement</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -143,7 +143,7 @@ import com.feilong.core.bean.ConvertUtil;
  * </tr>
  * <tr valign="top">
  * <td>{@link String#replaceFirst(String, String)}</td>
- * <td>和{@link StringUtil#replace(CharSequence, CharSequence, CharSequence)}类似，只不过只替换第一个出现的地方。</td>
+ * <td>和{@link StringUtil#replace(String, String, String)}类似，只不过只替换第一个出现的地方。</td>
  * </tr>
  * </table>
  * 
@@ -199,7 +199,40 @@ public final class StringUtil{
 
     // ********************************replace************************************************
     /**
-     * 使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串.
+     * 将 <code>text</code> 中的 <code>searchString</code> 替换成 <code>replacement</code>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * A {@code null} reference passed to this method is a no-op.
+     * </p>
+     *
+     * <pre>
+     * StringUtil.replace(null, *, *) = null
+     * StringUtil.replace("", *, *) = ""
+     * StringUtil.replace("any", null, *) = "any"
+     * StringUtil.replace("any", *, null) = "any"
+     * StringUtil.replace("any", "", *) = "any"
+     * StringUtil.replace("aba", "a", null) = "aba"
+     * StringUtil.replace("aba", "a", "") = "b"
+     * StringUtil.replace("aba", "a", "z") = "zbz"
+     * 
+     * StringUtil.replace("黑色/黄色/蓝色", "/", "_")         =   "黑色_黄色_蓝色"
+     * StringUtil.replace(null, "/", "_")               =   null
+     * StringUtil.replace("黑色/黄色/蓝色", "/", null)        =   "黑色/黄色/蓝色"
+     * </pre>
+     * 
+     * 此外注意的是:
+     * 
+     * <pre class="code">
+     * StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'") = SH1265,SH5951
+     * </pre>
+     * 
+     * (注意和 {@link #replaceAll(CharSequence, String, String)} 的区别)
+     * 
+     * </blockquote>
      * 
      * <h3>注意:</h3>
      * <blockquote>
@@ -210,36 +243,21 @@ public final class StringUtil{
      * </ol>
      * </blockquote>
      * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * LOGGER.debug(StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
-     * </pre>
-     * 
-     * 返回(注意和 {@link #replaceAll(CharSequence, String, String)} 的区别):
-     * 
-     * <pre class="code">
-     * SH1265,SH5951
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param content
-     *            内容
-     * @param target
-     *            要被替换的 char 值序列
+     * @param text
+     *            text to search and replace in, may be null
+     * @param searchString
+     *            the String to search for, may be null
      * @param replacement
-     *            char 值的替换序列
-     * @return 如果 null==content,返回 {@link StringUtils#EMPTY} <br>
-     *         所有匹配字面值目标序列的子字符串
+     *            the String to replace it with, may be null
+     * @return 如果 <code>text</code> 是null,返回 null<br>
+     *         如果 <code>searchString</code> 是null,原样返回 <code>text</code><br>
+     *         如果 <code>replacement</code> 是null,原样返回 <code>text</code><br>
      * @see java.lang.String#replace(CharSequence, CharSequence)
+     * @see org.apache.commons.lang3.StringUtils#replace(String, String, String)
      * @since jdk 1.5
      */
-    public static String replace(CharSequence content,CharSequence target,CharSequence replacement){
-        return null == content ? StringUtils.EMPTY
-                        : content.toString().replace(target, null == replacement ? StringUtils.EMPTY : replacement);
+    public static String replace(final String text,final String searchString,final String replacement){
+        return StringUtils.replace(text, searchString, replacement);
     }
 
     /**

@@ -32,6 +32,7 @@ import com.feilong.core.lang.ClassUtilTest;
 import com.feilong.core.lang.EnumUtilTest;
 import com.feilong.core.lang.NumberUtilTest;
 import com.feilong.core.lang.ObjectUtilTest;
+import com.feilong.core.lang.StringReplaceParameterizedTest;
 import com.feilong.core.lang.StringUtilTest;
 import com.feilong.core.lang.reflect.FieldUtilTest;
 import com.feilong.core.net.ParamUtilTest;
@@ -83,6 +84,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 Slf4jUtilTest.class,
                 StatisticsUtilTest.class,
                 StringUtilTest.class,
+                StringReplaceParameterizedTest.class,
                 TimeIntervalTest.class,
                 ValidatorTest.class,
                 TelephonePatternTest.class,

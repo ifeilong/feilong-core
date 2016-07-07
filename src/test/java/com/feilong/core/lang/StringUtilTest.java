@@ -169,14 +169,6 @@ public class StringUtilTest{
     }
 
     /**
-     * Replace.
-     */
-    @Test
-    public void replace(){
-        assertEquals("黑色_黄色_蓝色", StringUtil.replace("黑色/黄色/蓝色", "/", "_"));
-    }
-
-    /**
      * Replace all.
      */
     @Test
@@ -185,7 +177,6 @@ public class StringUtilTest{
 
         assertEquals("'SH1265','SH5951'", StringUtil.replaceAll("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
         assertEquals("'12345','56789','1123456'", StringUtil.replaceAll("12345,56789,1123456", "([0-9]+)", "'$1'"));
-        assertEquals("SH1265,SH5951", StringUtil.replace("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
         assertEquals("'SH1265',SH5951", "SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'"));
     }
 

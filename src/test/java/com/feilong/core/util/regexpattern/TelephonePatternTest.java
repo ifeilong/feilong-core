@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.BaseParameterizedTest;
+import com.feilong.core.AbstractBooleanParameterizedTest;
 import com.feilong.core.RegexPattern;
 import com.feilong.core.util.RegexUtil;
 
@@ -30,7 +30,7 @@ import com.feilong.core.util.RegexUtil;
  * @since 1.5.3
  */
 
-public class TelephonePatternTest extends BaseParameterizedTest<String, Boolean>{
+public class TelephonePatternTest extends AbstractBooleanParameterizedTest<String, Boolean>{
 
     /**
      * Data.
