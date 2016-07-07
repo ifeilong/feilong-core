@@ -1020,8 +1020,8 @@ public final class DateUtil{
         try{
             return DateUtils.parseDate(dateString, parsePatterns);
         }catch (ParseException e){
-            String pattern = "input dateString:[{}],parsePatterns:[{}] parseDate exception";
-            throw new IllegalArgumentException(Slf4jUtil.format(pattern, dateString, parsePatterns), e);
+            String pattern = "parse dateString [{}] use patterns:[{}] to date exception,message:[{}]";
+            throw new IllegalArgumentException(Slf4jUtil.format(pattern, dateString, parsePatterns, e.getMessage()), e);
         }
     }
 

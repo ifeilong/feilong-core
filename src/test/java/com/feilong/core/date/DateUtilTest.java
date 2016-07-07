@@ -309,7 +309,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      * @throws ParseException
      */
     @Test
-    public void testToDate() throws ParseException{
+    public void testToDate(){
         logDate(DateUtil.toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
         logDate(DateUtil.toDate("2016-06-28T01:21:12+0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
 
@@ -317,6 +317,16 @@ public class DateUtilTest extends BaseDateUtilTest{
 
         // 商品上线时间
         logDate(DateUtil.toDate("20130102140806000", DatePattern.TIMESTAMP_WITH_MILLISECOND));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testToDate1(){
+        DateUtil.toDate("2016-06-30 15:36 ", DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+    }
+
+    @Test()
+    public void testToDate2(){
+        DateUtil.toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
     /**
