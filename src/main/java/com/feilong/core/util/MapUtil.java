@@ -989,6 +989,14 @@ public final class MapUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <p>
+     * 由于排序使用的是 {@link java.util.TreeMap#TreeMap(Map)},而TreeMap是不允许 key是null, 如果传入的参数 <code>map</code>中,如果有key是null,那么将会抛出
+     * {@link NullPointerException}
+     * </p>
+     * </blockquote>
      *
      * @param <K>
      *            the key type

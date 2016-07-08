@@ -98,9 +98,9 @@ public final class URLUtil{
      * 
      * <pre class="code">
      * Caused by: java.net.MalformedURLException: <span style="color:red"><b>unknown protocol: c</b></span>
-     * at java.net.URL.<init>(URL.java:593)
-     * at java.net.URL.<init>(URL.java:483)
-     * at java.net.URL.<init>(URL.java:432)
+     * at java.net.URL.{@code <init>}(URL.java:593)
+     * at java.net.URL.{@code <init>}(URL.java:483)
+     * at java.net.URL.{@code <init>}(URL.java:432)
      * ... 24 more
      * </pre>
      * 

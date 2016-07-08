@@ -51,15 +51,30 @@ public class ParamUtilTest{
         map.put("service", "create_salesorder");
         map.put("_input_charset", "gbk");
         map.put("totalActual", "210.00");
-        map.put("receiver", "鑫哥");
         map.put("province", "江苏省");
         map.put("city", "南通市");
         map.put("district", "通州区");
         map.put("address", "江苏南通市通州区888组888号");
-        map.put(
-                        "lines_data",
-                        "[{\"extentionCode\":\"00887224869169\",\"count\":\"2\",\"unitPrice\":\"400.00\"},{\"extentionCode\":\"00887224869170\",\"count\":\"1\",\"unitPrice\":\"500.00\"}]");
+
+        assertEquals(
+                        "_input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&province=江苏省&service=create_salesorder&totalActual=210.00",
+                        ParamUtil.toNaturalOrderingQueryString(map));
+    }
+
+    @Test
+    public void testToNaturalOrderingString3(){
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("service", null);
+        map.put("totalActual", "210.00");
+        map.put("province", "江苏省");
+
         LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
+    }
+
+    @Test
+    public void testToNaturalOrderingString1(){
+        assertEquals(StringUtils.EMPTY, ParamUtil.toNaturalOrderingQueryString(null));
+        assertEquals(StringUtils.EMPTY, ParamUtil.toNaturalOrderingQueryString(new HashMap<String, String>()));
     }
 
     /**

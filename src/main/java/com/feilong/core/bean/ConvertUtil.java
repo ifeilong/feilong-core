@@ -1619,7 +1619,7 @@ public final class ConvertUtil{
      * Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
      * int length = actualTypeArguments.length;
      * Class{@code <?>}[] klasses = new Class{@code <?>}[length];
-     * for (int i = 0, j = length; i < j; ++i){
+     * for (int i = 0, j = length; i {@code <} j; ++i){
      *     klasses[i] = (Class{@code <?>}) actualTypeArguments[i];
      * }
      * 

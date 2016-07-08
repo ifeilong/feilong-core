@@ -411,21 +411,20 @@ public final class ParamUtil{
     //*********************************************************************************************
 
     /**
-     * 转成<code>自然排序</code>的字符串.
+     * 将 <code>singleValueMap</code> 转成<code>自然排序</code>的 <code>queryString</code> 字符串.
      * 
      * <p style="color:red">
-     * 常用于 <b>待签名的字符串</b>,该方法不会执行encode操作,<b>使用原生值进行拼接</b>,一般用于和第三方对接数据, 比如支付宝
+     * 常用于和第三方对接数据(比如支付宝),生成 <b>待签名的字符串</b>,该方法不会执行encode操作,<b>使用原生值进行拼接</b>
      * </p>
      * 
      * <h3>规则:</h3>
      * 
      * <blockquote>
-     * <ol>
-     * <li>对数组里的每一个值从 a 到 z 的顺序排序,若遇到相同首字母,则看第二个字母, 以此类推.</li>
-     * <li>排序完成之后,再把所有数组值以{@code "&"}字符连接起来</li>
-     * <li>没有值的参数无需传递,也无需包含到待签名数据中.</li>
-     * <li>待签名数据是原生值而不是 encoding 之后的值</li>
-     * </ol>
+     * <p>
+     * 首先将<code>singleValueMap</code> 使用 {@link MapUtil#sortByKeyAsc(Map) } 进行排序,<br>
+     * 然后将map的key和value 使用= 符号 连接,<br>
+     * 不同的entry之间再使用{@code &} 符号进行连接,最终格式类似于 url 的queryString,
+     * </p>
      * 
      * </blockquote>
      * 
@@ -437,23 +436,52 @@ public final class ParamUtil{
      * map.put("service", "create_salesorder");
      * map.put("_input_charset", "gbk");
      * map.put("totalActual", "210.00");
-     * map.put("receiver", "鑫哥");
      * map.put("province", "江苏省");
      * map.put("city", "南通市");
      * map.put("district", "通州区");
      * map.put("address", "江苏南通市通州区888组888号");
-     * map.put(
-     *                 "lines_data",
-     *                 "[{\"extentionCode\":\"00887224869169\",\"count\":\"2\",\"unitPrice\":\"400.00\"},{\"extentionCode\":\"00887224869170\",\"count\":\"1\",\"unitPrice\":\"500.00\"}]");
-     * LOGGER.info(ParamUtil.toNaturalOrderingQueryString(map));
+     * LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
      * </pre>
      * 
      * 返回 :
      * 
      * <pre class="code">
-     * _input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&lines_data=[{"extentionCode":"00887224869169","count":"2",
-     * "unitPrice":"400.00"},{"extentionCode":"00887224869170","count":"1","unitPrice":"500.00"}]&province=江苏省&receiver=鑫哥&service=
-     * create_salesorder&totalActual=210.00
+     * {@code _input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&province=江苏省&service=create_salesorder&totalActual=210.00}
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>对于 空 key或者空 value的处理:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 如果 <code>singleValueMap</code> 中,如果有key是<code>null</code>,那么会抛出 {@link NullPointerException},这是因为 在使用
+     * {@link MapUtil#sortByKeyAsc(Map) } 进行排序, {@link TreeMap} 不允许有null 的key;<br>
+     * 
+     * 如果有value是 <code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接
+     * </p>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = new HashMap{@code <String, String>}();
+     * map.put("service", null);
+     * map.put("totalActual", "210.00");
+     * map.put("province", "江苏省");
+     * 
+     * LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {@code province=江苏省&service=&totalActual=210.00}
      * </pre>
      * 
      * </blockquote>
@@ -473,7 +501,7 @@ public final class ParamUtil{
      * 将<code>singleValueMap</code>转成 queryString.
      * 
      * <p>
-     * 只是简单的将map的key value 按照 <code>singleValueMap</code>的顺序 链接起来,最终格式类似于 url 的queryString,
+     * 只是简单的将map的key value 按照 <code>singleValueMap</code>的顺序 连接起来,最终格式类似于 url 的queryString,
      * 比如,参数名字<code>param Name=name</code>,<code>param Value=zhangfei</code>,那么返回值是 <code>name=zhangfei</code>
      * </p>
      * 
@@ -511,7 +539,7 @@ public final class ParamUtil{
     }
 
     /**
-     * 只是简单的将map的key value 链接起来,最终格式类似于 url 的queryString.
+     * 只是简单的将map的key value 连接起来,最终格式类似于 url 的queryString.
      * 
      * <h3>注意点:</h3>
      * 
@@ -708,7 +736,7 @@ public final class ParamUtil{
     }
 
     /**
-     * 将参数和多值链接起来.
+     * 将参数和多值连接起来.
      * 
      * <p>
      * 比如,参数名字 {@code paramName=name}, {@code paramValues 为 zhangfei,guanyu},那么返回值是{@code name=zhangfei&name=guanyu}

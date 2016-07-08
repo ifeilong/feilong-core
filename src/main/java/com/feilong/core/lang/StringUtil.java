@@ -74,7 +74,6 @@ import com.feilong.core.bean.ConvertUtil;
  * <ul>
  * <li>{@link StringUtils#capitalize(String)} 首字母大写</li>
  * <li>{@link StringUtils#uncapitalize(String)} 单词首字母小写</li>
- * <li>{@linkplain "IntrospectorUtil#decapitalize(String)"}</li>
  * <li>{@link org.apache.commons.lang3.text.WordUtils#uncapitalize(String, char...)} 如果要使用一段文字,每个单词首字母小写</li>
  * </ul>
  * </blockquote>
@@ -83,8 +82,8 @@ import com.feilong.core.bean.ConvertUtil;
  * 
  * <blockquote>
  * <p>
- * {@link String#String(byte[] )} 其实调用了{@link String#String(byte[], Charset)}; 先使用 {@link Charset#defaultCharset()},如果有异常 再用 ISO-8859-1,
- * 具体参见 {@link "java.lang.StringCoding#decode(byte[], int, int)"}
+ * {@link String#String(byte[] )} 其实调用了{@link String#String(byte[], Charset)};<br>
+ * 先使用 {@link Charset#defaultCharset()},如果有异常再用 ISO-8859-1, 具体参见 {@link java.lang.StringCoding#decode(byte[], int, int) }
  * </p>
  * </blockquote>
  * 
