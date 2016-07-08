@@ -103,6 +103,6 @@ public final class DateFormatUtilTemp{
         Validate.notBlank(pattern, "pattern can't be null/empty!");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, ObjectUtils.defaultIfNull(locale, Locale.getDefault()));
         //虽然可以直接调用 java.text.DateFormat#parse(String) 但是他会抛出 ParseException 是checked Exception
-        return simpleDateFormat.parse(dateString, new ParsePosition(0));//如果发生错误，则返回 null
+        return simpleDateFormat.parse(dateString, new ParsePosition(0));//如果发生错误,则返回 null
     }
 }

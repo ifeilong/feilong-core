@@ -1312,7 +1312,7 @@ public final class MapUtil{
      * @param size
      *            map的 size
      * @return the int
-     * @see <a href="http://www.iteye.com/topic/1134016">java hashmap，如果确定只装载100个元素，new HashMap(?)多少是最佳的，why？ </a>
+     * @see <a href="http://www.iteye.com/topic/1134016">java hashmap,如果确定只装载100个元素,new HashMap(?)多少是最佳的,why？ </a>
      * @see <a href=
      *      "http://stackoverflow.com/questions/30220820/difference-between-new-hashmapint-and-guava-maps-newhashmapwithexpectedsizein">
      *      Difference between new HashMap(int) and guava Maps.newHashMapWithExpectedSize(int)</a>

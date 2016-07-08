@@ -1554,7 +1554,7 @@ public final class CollectionsUtil{
     }
      * </pre>
      * 
-     * 当然，对于上述代码，你还可以优化成:
+     * 当然,对于上述代码,你还可以优化成:
      * 
      * <pre class="code">
      * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);

@@ -15,19 +15,66 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.tools.jsonlib.JsonUtil;
+
 public class MapUtilTemp{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTemp.class);
+
+    @Test
+    public void testToArrayValueMap1(){
+        Map<String, String> singleValueMap = MapUtil.newLinkedHashMap(2);
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        Map<String, String[]> arrayValueMap = toArrayValueMap1(singleValueMap);
+
+        // java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.String;
+        String[] strings = arrayValueMap.get("province");
+    }
+
+    public static <K, V> Map<K, V[]> toArrayValueMap1(Map<K, V> singleValueMap){
+        Map<K, V[]> arrayValueMap = MapUtil.newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
+        for (Map.Entry<K, V> entry : singleValueMap.entrySet()){
+            //V[] array = toArray(entry.getValue());
+            V[] array = (V[]) (toList(entry.getValue()).toArray());
+            arrayValueMap.put(entry.getKey(), array);//注意此处的Value不要声明成V,否则会变成Object数组
+        }
+        return arrayValueMap;
+    }
+
+    @Test
+    public void testToListValueMap(){
+        Map<String, String> singleValueMap = MapUtil.newLinkedHashMap(2);
+        singleValueMap.put("province", "江苏省");
+        singleValueMap.put("city", "南通市");
+
+        Map<String, List<String>> arrayValueMap = toListValueMap(singleValueMap);
+        List<String> strings = arrayValueMap.get("province");
+
+        System.out.println(JsonUtil.format(arrayValueMap));//TODO:remove
+
+    }
+
+    public static <K, V> Map<K, List<V>> toListValueMap(Map<K, V> singleValueMap){
+        Map<K, List<V>> arrayValueMap = MapUtil.newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
+        for (Map.Entry<K, V> entry : singleValueMap.entrySet()){
+            arrayValueMap.put(entry.getKey(), toList(entry.getValue()));
+        }
+        return arrayValueMap;
+    }
 
     /**
      * TestMapUtilTest.

@@ -21,9 +21,12 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toBoolean;
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toIntegers;
+import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLong;
+import static com.feilong.core.bean.ConvertUtil.toLongs;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.bean.ConvertUtil.toStrings;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -159,7 +162,7 @@ public class ConvertUtilTest{
         int[] i2 = { 1, 2 };
         LOGGER.debug(JsonUtil.format(IteratorUtils.getIterator(i2), 0, 0));
 
-        Iterator<Integer> iterator = ConvertUtil.toIterator(i2);
+        Iterator<Integer> iterator = toIterator(i2);
         LOGGER.debug(JsonUtil.format(iterator, 0, 0));
     }
 
@@ -168,9 +171,9 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToBigDecimal(){
-        assertEquals(null, ConvertUtil.toBigDecimal(null));
-        assertEquals(BigDecimal.valueOf(1111), ConvertUtil.toBigDecimal(1111));
-        assertEquals(BigDecimal.valueOf(0.1), ConvertUtil.toBigDecimal(0.1));
+        assertEquals(null, toBigDecimal(null));
+        assertEquals(BigDecimal.valueOf(1111), toBigDecimal(1111));
+        assertEquals(BigDecimal.valueOf(0.1), toBigDecimal(0.1));
     }
 
     /**
@@ -178,7 +181,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void test(){
-        BigDecimal a = ConvertUtil.toBigDecimal("1.000000");
+        BigDecimal a = toBigDecimal("1.000000");
         BigDecimal b = new BigDecimal(1);
         LOGGER.debug(a.compareTo(b) + "");
         LOGGER.debug(a.equals(b) + "");
@@ -189,8 +192,8 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToLongs(){
-        assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), ConvertUtil.toLongs("1,2,3"));
-        assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), ConvertUtil.toLongs(new String[] { "1", "2", "3" }));
+        assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), toLongs("1,2,3"));
+        assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), toLongs(new String[] { "1", "2", "3" }));
         LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", null, "2", "3" }), 0, 0));
 
         assertSame(null, ConvertUtil.toLongs(null));
@@ -201,7 +204,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToLongs1(){
-        assertArrayEquals(new Long[] { 1L, 2L, 8L }, ConvertUtil.toLongs(ConvertUtil.toList("1", "2", "8")));
+        assertArrayEquals(new Long[] { 1L, 2L, 8L }, toLongs(ConvertUtil.toList("1", "2", "8")));
     }
 
     /**
@@ -209,7 +212,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToStrings(){
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings("{5,4, 8,2;8 9_5@3`a}"), 0, 0));
+        LOGGER.debug(JsonUtil.format(toStrings("{5,4, 8,2;8 9_5@3`a}"), 0, 0));
 
         assertArrayEquals(new String[] { "1", "2", "5" }, ConvertUtil.toStrings(new Integer[] { 1, 2, 5 }));
         assertArrayEquals(null, ConvertUtil.toStrings(null));
@@ -366,9 +369,9 @@ public class ConvertUtilTest{
      */
     @Test
     public void testConvert2(){
-        assertEquals(1, ConvertUtil.convert("1", Integer.class).intValue());
-        assertEquals(1, ConvertUtil.convert("1", Long.class).intValue());
-        assertEquals(0, ConvertUtil.convert("", Integer.class).intValue());
+        assertEquals(1, convert("1", Integer.class).intValue());
+        assertEquals(1, convert("1", Long.class).intValue());
+        assertEquals(0, convert("", Integer.class).intValue());
     }
 
     /**

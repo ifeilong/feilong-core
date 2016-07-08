@@ -951,9 +951,9 @@ public final class ConvertUtil{
      * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = new LinkedHashMap{@code <>}();
      * 
      * static{
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");//(Terabyte，太字节，或百万兆字节)=1024GB，其中1024=2^10 ( 2 的10次方)。 
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_GB, "GB");//(Gigabyte，吉字节，又称“千兆”)=1024MB， 
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_MB, "MB");//(Megabyte，兆字节，简称“兆”)=1024KB， 
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_GB, "GB");//(Gigabyte,吉字节,又称“千兆”)=1024MB, 
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_MB, "MB");//(Megabyte,兆字节,简称“兆”)=1024KB, 
      *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_KB, "KB");//(Kilobyte 千字节)=1024B
      * }
      * 
@@ -965,9 +965,9 @@ public final class ConvertUtil{
      * 
      * // 除数和单位的map,必须是有顺序的 从大到小.
      * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = ConvertUtil.toMap(
-     *                 Pair.of(FileUtils.ONE_TB, "TB"), //(Terabyte，太字节，或百万兆字节)=1024GB，其中1024=2^10 ( 2 的10次方)。 
-     *                 Pair.of(FileUtils.ONE_GB, "GB"), //(Gigabyte，吉字节，又称“千兆”)=1024MB， 
-     *                 Pair.of(FileUtils.ONE_MB, "MB"), //(Megabyte，兆字节，简称“兆”)=1024KB， 
+     *                 Pair.of(FileUtils.ONE_TB, "TB"), //(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
+     *                 Pair.of(FileUtils.ONE_GB, "GB"), //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
+     *                 Pair.of(FileUtils.ONE_MB, "MB"), //(Megabyte,兆字节,简称“兆”)=1024KB, 
      *                 Pair.of(FileUtils.ONE_KB, "KB")); //(Kilobyte 千字节)=1024B
      * 
      * </pre>
@@ -1296,6 +1296,60 @@ public final class ConvertUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 数组是具体化的(reified),而泛型在运行时是被擦除的(erasure)。<br>
+     * 数组是在运行时才去判断数组元素的类型约束,而泛型正好相反,在运行时,泛型的类型信息是会被擦除的,只有编译的时候才会对类型进行强化。
+     * </p>
+     * 
+     * <b>泛型擦除的规则:</b>
+     * 
+     * <ol>
+     * <li>所有参数化容器类都被擦除成非参数化的（raw type）; 如 List{@code <E>}、List{@code <List<E>>}都被擦除成 List</li>
+     * <li>所有参数化数组都被擦除成非参数化的数组;如 List{@code <E>}[],被擦除成 List[]</li>
+     * <li>Raw type 的容器类,被擦除成其自身,如 List{@code <E>}被擦 除成 List</li>
+     * <li>原生类型（int,String 还有 wrapper 类）都擦除成他们的自身</li>
+     * <li>参数类型 E,如果没有上限,则被擦除成 Object</li>
+     * <li>所有约束参数如{@code <? Extends E>}、{@code <X extends E>}都被擦 除成 E</li>
+     * <li>如果有多个约束,擦除成第一个,如{@code <T extends Object & E>},则擦除成 Object</li>
+     * </ol>
+     * 
+     * <p>
+     * 这将会导致下面的代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public static {@code <K, V>} Map<K, V[]> toArrayValueMap(Map{@code <K, V>} singleValueMap){
+     *     Map{@code <K, V[]>} arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
+     *     for (Map.Entry{@code <K, V>} entry : singleValueMap.entrySet()){
+     *         arrayValueMap.put(entry.getKey(), toArray(entry.getValue()));//注意此处的Value不要声明成V,否则会变成Object数组
+     *     }
+     *     return arrayValueMap;
+     * }
+     * </pre>
+     * 
+     * 调用的时候,
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} singleValueMap = MapUtil.newLinkedHashMap(2);
+     * singleValueMap.put("province", "江苏省");
+     * singleValueMap.put("city", "南通市");
+     * 
+     * Map{@code <String, String[]>} arrayValueMap = MapUtil.toArrayValueMap(singleValueMap);
+     * String[] strings = arrayValueMap.get("province");//此时返回的是 Object[]
+     * </pre>
+     * 
+     * 会出现异常
+     * 
+     * <pre class="code">
+     * java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.String;
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -1303,6 +1357,7 @@ public final class ConvertUtil{
      *            the arrays
      * @return 如果 <code>arrays</code> 是null,返回null<br>
      * @see org.apache.commons.lang3.ArrayUtils#toArray(Object...)
+     * @since commons-lang 3
      * @since 1.6.0
      */
     @SafeVarargs

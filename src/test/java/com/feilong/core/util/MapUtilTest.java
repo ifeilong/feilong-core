@@ -113,6 +113,7 @@ public class MapUtilTest{
         singleValueMap.put("city", "南通市");
 
         Map<String, String[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap);
+        String[] strings = arrayValueMap.get("province");
         assertThat(arrayValueMap, allOf(hasEntry("province", toArray("江苏省")), hasEntry("city", toArray("南通市"))));
     }
 

@@ -138,11 +138,11 @@ import com.feilong.core.bean.ConvertUtil;
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link #replaceAll(CharSequence, String, String)}</td>
- * <td>regex是一个正则表达式，将字符串中匹配的子字符串替换为replacement</td>
+ * <td>regex是一个正则表达式,将字符串中匹配的子字符串替换为replacement</td>
  * </tr>
  * <tr valign="top">
  * <td>{@link String#replaceFirst(String, String)}</td>
- * <td>和{@link StringUtil#replace(String, String, String)}类似，只不过只替换第一个出现的地方。</td>
+ * <td>和{@link StringUtil#replace(String, String, String)}类似,只不过只替换第一个出现的地方。</td>
  * </tr>
  * </table>
  * 
@@ -292,8 +292,8 @@ public final class StringUtil{
      * 请参阅 {@link java.util.regex.Matcher#replaceAll Matcher.replaceAll};如有需要,可使用 {@link java.util.regex.Matcher#quoteReplacement
      * Matcher.quoteReplacement}取消这些字符的特殊含义
      * <br>
-     * Dollar signs may be treated as references to captured subsequences as described above,$这个特殊的字符，因为替换串使用这个引用正则表达式匹配的组，
-     * $0代表匹配项，$1代表第1个匹配分组，$1代表第2个匹配分组
+     * Dollar signs may be treated as references to captured subsequences as described above,$这个特殊的字符,因为替换串使用这个引用正则表达式匹配的组,
+     * $0代表匹配项,$1代表第1个匹配分组,$1代表第2个匹配分组
      * <br>
      * and backslashes are used to escape literal characters in the replacement string. 
      * </p>

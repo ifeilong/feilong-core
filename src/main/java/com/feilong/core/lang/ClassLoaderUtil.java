@@ -147,7 +147,7 @@ public final class ClassLoaderUtil{
      * @param resourceName
      *            the resource name
      * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果找不到该资源，或者调用者没有足够的权限获取该资源，则返回 null
+     *         如果找不到该资源,或者调用者没有足够的权限获取该资源,则返回 null
      * @see org.apache.commons.lang3.ClassPathUtils#toFullyQualifiedPath(Package, String)
      * @see #getResource(ClassLoader, String)
      * @see #getClassLoaderByClass(Class)
@@ -174,7 +174,7 @@ public final class ClassLoaderUtil{
      *            the resource name
      * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果找不到该资源，或者调用者没有足够的权限获取该资源，则返回 null
+     *         如果找不到该资源,或者调用者没有足够的权限获取该资源,则返回 null
      * @since 1.2.1
      */
     private static URL getResource(ClassLoader classLoader,String resourceName){
