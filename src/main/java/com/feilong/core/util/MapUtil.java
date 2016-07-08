@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
@@ -735,10 +734,10 @@ public final class MapUtil{
      * 返回:
      * 
      * <pre class="code">
-    {
-            "name": "feilong",
-            "age": "18"
-        }
+     * {
+     * "name": "feilong",
+     * "age": "18"
+     * }
      * 
      * </pre>
      * 
@@ -820,37 +819,36 @@ public final class MapUtil{
     /**
      * 以参数 <code>map</code>的key为key,以参数 <code>map</code> value的指定<code>extractPropertyName</code>属性值为值,拼装成新的map返回.
      * 
-     * <p>
-     * 如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log</li>
+     * <li>返回map的顺序,按照参数 map key的顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
      * Map{@code <Long, User>} map = new LinkedHashMap{@code <Long, User>}();
-     * map.put(1L, new User(1L));
-     * map.put(2L, new User(2L));
-     * map.put(53L, new User(3L));
-     * map.put(5L, new User(5L));
-     * map.put(6L, new User(6L));
-     * map.put(4L, new User(4L));
+     * map.put(1L, new User(100L));
+     * map.put(2L, new User(200L));
+     * map.put(5L, new User(500L));
+     * map.put(4L, new User(400L));
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
+     * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id")));
      * </pre>
      * 
      * 返回:
      * 
      * <pre class="code">
-     * {
-     * "1": 1,
-     * "2": 2,
-     * "4": 4,
-     * "5": 5,
-     * "6": 6,
-     * "53": 3
-     * }
-     * 
+    {
+        "1": 100,
+        "2": 200,
+        "5": 500,
+        "4": 400
+    }
      * </pre>
      * 
      * </blockquote>
@@ -866,26 +864,27 @@ public final class MapUtil{
      * @param extractPropertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @param keysClass
-     *            map key 的class 类型
      * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     *         如果 <code>keysClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>extractPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>extractPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回
-     * @since 1.3.0
+     * @since 1.8.0 remove class param
      */
-    public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,String extractPropertyName,Class<K> keysClass){
-        return extractSubMap(map, null, extractPropertyName, keysClass);
+    public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,String extractPropertyName){
+        return extractSubMap(map, null, extractPropertyName);
     }
 
     /**
      * 以参数 <code>map</code>的key为key(key需要在 <code>includeKeys</code>范围内),以参数 <code>map</code> value的 指定<code>extractPropertyName</code>
      * 属性值为值,拼装成新的map返回.
      * 
-     * <p>
-     * 如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log</li>
+     * <li>如果参数 <code>includeKeys</code>是null,那么会抽取map所有的key</li>
+     * <li>返回map的顺序,按照参数includeKeys的顺序(如果includeKeys是null,那么按照map key的顺序)</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -900,7 +899,7 @@ public final class MapUtil{
      * map.put(4L, new User(400L));
      * 
      * Long[] includeKeys = { 5L, 4L };
-     * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
+     * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id")));
      * </pre>
      * 
      * 返回:
@@ -926,7 +925,7 @@ public final class MapUtil{
      *     Long[] itemPropertiesIds = StoCommonUtil.toItemPropertiesIdLongs(properties);
      * 
      *     Map{@code <Long, Long>} itemPropertiesIdAndPropertyIdMap = MapUtil
-     *                     .extractSubMap(itemPropertiesIdAndPropertyValueSubViewCommandMap, itemPropertiesIds, "propertyId", Long.class);
+     *                     .extractSubMap(itemPropertiesIdAndPropertyValueSubViewCommandMap, itemPropertiesIds, "propertyId");
      * 
      *     return MapUtil.invertMap(itemPropertiesIdAndPropertyIdMap);
      * }
@@ -948,36 +947,30 @@ public final class MapUtil{
      * @param extractPropertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @param keysClass
-     *            map key 的class 类型
      * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     *         如果 <code>keysClass</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>extractPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>extractPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>includeKeys</code> 是null或者empty, then will extract map total keys<br>
-     *         抽取map value 的 <code>extractPropertyName</code>属性值,拼装成新的map返回
-     * @since 1.3.0
+     * @since 1.8.0 remove class param
      */
-    public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName,Class<K> keysClass){
+    public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName){
         if (Validator.isNullOrEmpty(map)){
             return Collections.emptyMap();
         }
 
         Validate.notBlank(extractPropertyName, "extractPropertyName can't be null/empty!");
-        Validate.notNull(keysClass, "keysClass can't be null!");
 
         //如果excludeKeys是null,那么抽取所有的key
-        Set<K> mapKeys = map.keySet();
-        K[] useIncludeKeys = isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(mapKeys, keysClass) : includeKeys;
+        @SuppressWarnings("unchecked") // NOPMD - false positive for generics
+        K[] useIncludeKeys = isNullOrEmpty(includeKeys) ? (K[]) map.keySet().toArray() : includeKeys;
 
-        //保证元素的顺序  顺序是参数  includeKeys的顺序
+        //保证元素的顺序,顺序是参数  includeKeys的顺序
         Map<K, V> returnMap = newLinkedHashMap(useIncludeKeys.length);
         for (K key : useIncludeKeys){
             if (map.containsKey(key)){
-                O o = map.get(key);
-                returnMap.put(key, PropertyUtil.<V> getProperty(o, extractPropertyName));
+                returnMap.put(key, PropertyUtil.<V> getProperty(map.get(key), extractPropertyName));
             }else{
-                LOGGER.warn("map:[{}] don't contains key:[{}]", JsonUtil.format(mapKeys, 0, 0), key);
+                LOGGER.warn("map:[{}] don't contains key:[{}]", JsonUtil.format(map.keySet(), 0, 0), key);
             }
         }
         return returnMap;

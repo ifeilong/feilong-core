@@ -48,6 +48,13 @@
 		<priority value="info" />
 	</category>
 
+	<category name="com.feilong.core.util.comparator.PropertyComparator">
+		<priority value="info" />
+	</category>
+	<category name="com.feilong.core.util.RegexUtil">
+		<priority value="info" />
+	</category>
+
 	<!-- 设置接收所有输出的通道 -->
 	<root>
 		<level value="trace" />

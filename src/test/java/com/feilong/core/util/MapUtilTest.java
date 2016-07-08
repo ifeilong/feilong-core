@@ -16,6 +16,7 @@
 package com.feilong.core.util;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
@@ -39,13 +40,10 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class MapUtilTest.
@@ -54,8 +52,9 @@ import com.feilong.tools.jsonlib.JsonUtil;
  */
 public class MapUtilTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MapUtilTest.class);
-
+    /**
+     * Test put multi value.
+     */
     @Test
     public void testPutMultiValue(){
         Map<String, List<String>> mutiMap = MapUtil.newLinkedHashMap(2);
@@ -63,9 +62,12 @@ public class MapUtilTest{
         MapUtil.putMultiValue(mutiMap, "name", "关羽");
         MapUtil.putMultiValue(mutiMap, "age", "30");
 
-        LOGGER.debug(JsonUtil.format(mutiMap));
+        assertThat(mutiMap, allOf(hasEntry("name", toList("张飞", "关羽")), hasEntry("age", toList("30"))));
     }
 
+    /**
+     * Test remove keys.
+     */
     @Test
     public void testRemoveKeys(){
         Map<String, String> map = MapUtil.newLinkedHashMap(3);
@@ -74,7 +76,8 @@ public class MapUtilTest{
         map.put("age", "18");
         map.put("country", "china");
 
-        LOGGER.debug(JsonUtil.format(MapUtil.removeKeys(map, "country")));
+        Map<String, String> removeKeys = MapUtil.removeKeys(map, "country");
+        assertThat(removeKeys, allOf(hasEntry("name", "feilong"), hasEntry("age", "18"), not(hasEntry("country", "china"))));
     }
 
     /**
@@ -95,12 +98,12 @@ public class MapUtilTest{
      */
     @Test
     public void testToArrayValueMap(){
-        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+        Map<String, String> singleValueMap = MapUtil.newLinkedHashMap(2);
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
         Map<String, String[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap);
-        LOGGER.debug(JsonUtil.format(arrayValueMap));
+        assertThat(arrayValueMap, allOf(hasEntry("province", toArray("江苏省")), hasEntry("city", toArray("南通市"))));
     }
 
     /**
@@ -155,11 +158,25 @@ public class MapUtilTest{
         assertThat(subMap, allOf(hasEntry("a", 3007), hasEntry("c", 3001), not(hasKey("b")), not(hasKey("d"))));
     }
 
+    //*********************************************************************************************
+    @Test
+    public void testExtractSubMap(){
+        assertEquals(Collections.emptyMap(), MapUtil.extractSubMap(null, "id"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testExtractSubMap1(){
+        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        map.put(1L, new User(1L));
+        map.put(2L, new User(2L));
+        MapUtil.extractSubMap(map, null);
+    }
+
     /**
-     * Test construct sub map.
+     * Test extract sub map2.
      */
     @Test
-    public void testConstructSubMap(){
+    public void testExtractSubMap2(){
         Map<Long, User> map = new LinkedHashMap<Long, User>();
         map.put(1L, new User(100L));
         map.put(2L, new User(200L));
@@ -168,29 +185,24 @@ public class MapUtilTest{
         map.put(6L, new User(600L));
         map.put(4L, new User(400L));
 
-        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, toArray(5L, 4L), "id", Long.class)));
-        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, toArray(5L, 4L), "userInfo.age", Long.class)));
-        LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, "id", Long.class)));
+        Map<Long, Long> extractSubMap = MapUtil.extractSubMap(map, toArray(5L, 4L), "id");
+        assertThat(extractSubMap, allOf(hasEntry(5L, 500L), hasEntry(4L, 400L)));
+
+        Map<Long, Long> extractSubMap2 = MapUtil.extractSubMap(map, toArray(5L, 4L), "userInfo.age");
+        assertThat(extractSubMap2, allOf(hasEntry(5L, null), hasEntry(4L, null)));
 
     }
 
-    /**
-     * Test construct sub map1.
-     */
     @Test
-    public void testExtractSubMap(){
-        assertEquals(Collections.emptyMap(), MapUtil.extractSubMap(null, "id", Long.class));
-    }
-
-    /**
-     * Test extract sub map1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testExtractSubMap1(){
+    public void testExtractSubMap3(){
         Map<Long, User> map = new LinkedHashMap<Long, User>();
-        map.put(1L, new User(1L));
-        map.put(2L, new User(2L));
-        MapUtil.extractSubMap(map, "id", null);
+        map.put(1L, new User(100L));
+        map.put(2L, new User(200L));
+        map.put(5L, new User(500L));
+        map.put(4L, new User(400L));
+
+        Map<Long, Long> extractSubMap = MapUtil.extractSubMap(map, "id");
+        assertThat(extractSubMap, allOf(hasEntry(1L, 100L), hasEntry(2L, 200L), hasEntry(5L, 500L), hasEntry(4L, 400L)));
     }
 
     /**
@@ -306,64 +318,5 @@ public class MapUtilTest{
 
         Map<String, Integer> sortByKeyDesc = MapUtil.sortByKeyDesc(map);
         assertThat(sortByKeyDesc.keySet(), contains("c", "b", "a"));
-    }
-
-    /**
-     * TestMapUtilTest.
-     */
-    @Test
-    public void testMapUtilTest2(){
-        LOGGER.debug("{}", Integer.highestOneBit((125 - 1) << 1));
-
-        for (int i = 0, j = 10; i < j; ++i){
-            LOGGER.debug("{},{},{}", i, capacity(i), (int) (i / 0.75f) + 1);
-        }
-    }
-
-    /**
-     * Returns a capacity that is sufficient to keep the map from being resized as
-     * long as it grows no larger than expectedSize and the load factor is >= its
-     * default (0.75).
-     *
-     * @param expectedSize
-     *            the expected size
-     * @return the int
-     */
-    static int capacity(int expectedSize){
-        if (expectedSize < 3){
-            return expectedSize + 1;
-        }
-        if (expectedSize < 1073741824){
-            // This is the calculation used in JDK8 to resize when a putAll happens; 
-            //it seems to be the most conservative calculation we can make.  
-            //0.75 is the default load factor.
-            return (int) (expectedSize / 0.75F + 1.0F);
-        }
-        return Integer.MAX_VALUE; // any large value
-    }
-
-    /**
-     * TestMapUtilTest.
-     */
-    @Test
-    public void testNewHashMap(){
-        Map<Object, Object> newHashMap = MapUtil.newHashMap(100);
-        assertThat(newHashMap.size(), is(0));
-    }
-
-    /**
-     * TestMapUtilTest.
-     */
-    @Test
-    public void testNewHashMap1(){
-        Map<Integer, Integer> map = MapUtil.newHashMap(100);
-        for (int i = 0, j = 100; i < j; ++i){
-            map.put(i, i);
-        }
-
-        //  Map<Object, Object> newHashMap = MapUtil.newHashMap(map.size());
-        Map<Object, Object> newHashMap = new HashMap<>(256);
-        newHashMap.putAll(map);
-        LOGGER.debug("{}", newHashMap.size());
     }
 }
