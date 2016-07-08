@@ -68,39 +68,6 @@ feilong-core jar 你可以在这里 https://github.com/venusdrogon/feilong-platf
 # Site:
 参见 [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/) 
 
-# 项目依赖
-
-```XML
-
-	<dependencies>
-	
-	    <dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-	    </dependency>
-	    
-	    <dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-			<version>4.1</version>
-	    </dependency>
-	    
-	    <dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.2</version>
-	    </dependency>
-	    
-	    <dependency>
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>2.4</version>
-			<classifier>jdk15</classifier>
-	    </dependency>
-	    
-	  </dependencies>
-```
 
 
 # :memo: 说明
@@ -108,6 +75,7 @@ feilong-core jar 你可以在这里 https://github.com/venusdrogon/feilong-platf
 1. 基于`Apache2` 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. 基于`maven3.3`构建;
 1. [require-jdk-version](https://github.com/venusdrogon/feilong-core/wiki/require-jdk-version)
+1. [dependencies](https://github.com/venusdrogon/feilong-core/wiki/dependencies)
 
 
 # :panda_face: About
