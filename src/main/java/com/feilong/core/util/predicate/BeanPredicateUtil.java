@@ -29,7 +29,7 @@ import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 import com.feilong.core.bean.PropertyUtil;
 
 /**
- * The Class BeanPredicateUtil.
+ * 专门针对bean,提供的 BeanPredicateUtil.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.collections4.PredicateUtils

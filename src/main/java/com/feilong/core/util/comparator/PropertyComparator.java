@@ -97,6 +97,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * list.add(new User(2L, 36));
      * list.add(new User(5L, 22));
      * list.add(new User(1L, 8));
+     * 
      * Collections.sort(list, new PropertyComparator{@code <User>}("id"));
      * LOGGER.debug(JsonUtil.format(list));
      * </pre>

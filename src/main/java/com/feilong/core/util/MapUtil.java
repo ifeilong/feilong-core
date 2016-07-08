@@ -892,12 +892,13 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * Map{@code <Long, User>} map = new LinkedHashMap{@code <Long, User>}();
-     * map.put(1L, new User(1L));
-     * map.put(2L, new User(2L));
-     * map.put(53L, new User(3L));
-     * map.put(5L, new User(5L));
-     * map.put(6L, new User(6L));
-     * map.put(4L, new User(4L));
+     * map.put(1L, new User(100L));
+     * map.put(2L, new User(200L));
+     * map.put(53L, new User(300L));
+     * map.put(5L, new User(500L));
+     * map.put(6L, new User(600L));
+     * map.put(4L, new User(400L));
+     * 
      * Long[] includeKeys = { 5L, 4L };
      * LOGGER.debug(JsonUtil.format(MapUtil.extractSubMap(map, includeKeys, "id", Long.class)));
      * </pre>
@@ -906,9 +907,30 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * {
-     * "5": 5
-     * "4": 4
+     * "5": 500,
+     * "4": 400
      * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>典型示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * private Map{@code <Long, Long>} constructPropertyIdAndItemPropertiesIdMap(
+     *                 String properties,
+     *                 Map{@code <Long, PropertyValueSubViewCommand>} itemPropertiesIdAndPropertyValueSubViewCommandMap){
+     *     Long[] itemPropertiesIds = StoCommonUtil.toItemPropertiesIdLongs(properties);
+     * 
+     *     Map{@code <Long, Long>} itemPropertiesIdAndPropertyIdMap = MapUtil
+     *                     .extractSubMap(itemPropertiesIdAndPropertyValueSubViewCommandMap, itemPropertiesIds, "propertyId", Long.class);
+     * 
+     *     return MapUtil.invertMap(itemPropertiesIdAndPropertyIdMap);
+     * }
+     * 
      * </pre>
      * 
      * </blockquote>
@@ -946,7 +968,7 @@ public final class MapUtil{
 
         //如果excludeKeys是null,那么抽取所有的key
         Set<K> mapKeys = map.keySet();
-        K[] useIncludeKeys = Validator.isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(mapKeys, keysClass) : includeKeys;
+        K[] useIncludeKeys = isNullOrEmpty(includeKeys) ? ConvertUtil.toArray(mapKeys, keysClass) : includeKeys;
 
         //保证元素的顺序  顺序是参数  includeKeys的顺序
         Map<K, V> returnMap = newLinkedHashMap(useIncludeKeys.length);
