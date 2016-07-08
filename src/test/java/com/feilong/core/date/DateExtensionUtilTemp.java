@@ -163,7 +163,7 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
     }
 
     /**
-     * 将日期集合装成特定pattern的字符串集合.
+     * 将日期集合转成特定pattern的字符串集合.
      * 
      * @param dateList
      *            日期集合

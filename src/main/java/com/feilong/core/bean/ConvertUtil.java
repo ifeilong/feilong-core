@@ -1283,16 +1283,16 @@ public final class ConvertUtil{
 
     //*************************************toArray*********************************************************
     /**
-     * To array.
+     * 将动态数组转成数组.
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * String[] array = ConvertUtil.toArray("1", "2");                  =["1", "2"]
-     * String[] emptyArray = ConvertUtil.{@code <String>}toArray();     =[]
-     * String[] nullArray = ConvertUtil.toArray(null)                   = null
+     * String[] array = ConvertUtil.toArray("1", "2");                  =   ["1", "2"]
+     * String[] emptyArray = ConvertUtil.{@code <String>}toArray();     =   []
+     * String[] nullArray = ConvertUtil.toArray(null)                   =   null
      * </pre>
      * 
      * </blockquote>

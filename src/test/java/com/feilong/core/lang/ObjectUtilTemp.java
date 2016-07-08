@@ -41,9 +41,15 @@ public class ObjectUtilTemp{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTemp.class);
 
-    /**
-     * Checks if is boolean.
-     */
+    @Test
+    public void test(){
+        //Object[] objects =  { "a", "b" }; //这个不行  
+        Object[] objects = new String[] { "a", "b" };
+        String[] strings = (String[]) objects;
+
+        LOGGER.debug(JsonUtil.format(strings));
+    }
+
     @Test
     public void testIsBoolean(){
         assertEquals(false, isBoolean(null));

@@ -18,6 +18,9 @@ package com.feilong.core.bean;
 import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toBoolean;
+import static com.feilong.core.bean.ConvertUtil.toInteger;
+import static com.feilong.core.bean.ConvertUtil.toIntegers;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.bean.ConvertUtil.toMap;
@@ -219,12 +222,12 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToIntegers(){
-        assertEquals(null, ConvertUtil.toIntegers(null));
+        assertEquals(null, toIntegers(null));
 
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", "2", "3" }), 0, 0));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(new String[] { "1", null, "2", "3" }), 0, 0));
+        LOGGER.debug(JsonUtil.format(toIntegers(new String[] { "1", "2", "3" }), 0, 0));
+        LOGGER.debug(JsonUtil.format(toIntegers(new String[] { "1", null, "2", "3" }), 0, 0));
 
-        assertArrayEquals(new Integer[] { 1, 2, 3 }, ConvertUtil.toIntegers("1,2,3"));
+        assertArrayEquals(new Integer[] { 1, 2, 3 }, toIntegers("1,2,3"));
     }
 
     /**
@@ -232,7 +235,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToIntegers1(){
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toIntegers(ConvertUtil.toList("1", "2", "8")), 0, 0));
+        LOGGER.debug(JsonUtil.format(toIntegers(toList("1", "2", "8")), 0, 0));
     }
 
     /**
@@ -240,7 +243,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToIntegers2(){
-        assertArrayEquals(null, ConvertUtil.toIntegers(null));
+        assertArrayEquals(null, toIntegers(null));
     }
 
     /**
@@ -248,11 +251,11 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToLong(){
-        assertEquals((Object) 1L, ConvertUtil.toLong("1"));
+        assertEquals((Object) 1L, toLong("1"));
         assertEquals(null, toLong(null));
-        LOGGER.debug("" + ConvertUtil.toLong(new String[] { "1", "2", "3" }));
-        LOGGER.debug("" + ConvertUtil.toLong(new String[] { "1", null, "2", "3" }));
-        LOGGER.debug("" + ConvertUtil.toLong("1,2,3"));
+        LOGGER.debug("" + toLong(new String[] { "1", "2", "3" }));
+        LOGGER.debug("" + toLong(new String[] { "1", null, "2", "3" }));
+        LOGGER.debug("" + toLong("1,2,3"));
     }
 
     /**
@@ -260,13 +263,13 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToBoolean(){
-        assertEquals(true, ConvertUtil.toBoolean(1L));
-        assertEquals(true, ConvertUtil.toBoolean("1"));
-        assertEquals(null, ConvertUtil.toBoolean(null));
-        assertEquals(false, ConvertUtil.toBoolean("9"));
-        assertEquals(false, ConvertUtil.toBoolean(new String[] { "0", "1", "2", "3" }));
-        assertEquals(true, ConvertUtil.toBoolean(new String[] { "1", null, "2", "3" }));
-        assertEquals(false, ConvertUtil.toBoolean("1,2,3"));
+        assertEquals(true, toBoolean(1L));
+        assertEquals(true, toBoolean("1"));
+        assertEquals(null, toBoolean(null));
+        assertEquals(false, toBoolean("9"));
+        assertEquals(false, toBoolean(new String[] { "0", "1", "2", "3" }));
+        assertEquals(true, toBoolean(new String[] { "1", null, "2", "3" }));
+        assertEquals(false, toBoolean("1,2,3"));
     }
 
     /**
@@ -274,11 +277,11 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToInteger(){
-        LOGGER.debug("" + ConvertUtil.toInteger(new String[] { "1", "2", "3" }));
-        assertEquals((Object) 1, ConvertUtil.toInteger("1"));
-        assertEquals(null, ConvertUtil.toInteger(null));
-        LOGGER.debug("" + ConvertUtil.toInteger(new String[] { "1", null, "2", "3" }));
-        LOGGER.debug("" + ConvertUtil.toInteger("1,2,3"));
+        LOGGER.debug("" + toInteger(new String[] { "1", "2", "3" }));
+        assertEquals((Object) 1, toInteger("1"));
+        assertEquals(null, toInteger(null));
+        LOGGER.debug("" + toInteger(new String[] { "1", null, "2", "3" }));
+        LOGGER.debug("" + toInteger("1,2,3"));
     }
 
     /**
@@ -286,10 +289,10 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToInteger2(){
-        assertEquals(null, ConvertUtil.toInteger(null));
-        assertEquals(8, ConvertUtil.toInteger(8L).intValue());
-        assertEquals(8, ConvertUtil.toInteger("8").intValue());
-        assertEquals(8, ConvertUtil.toInteger(new BigDecimal("8")).intValue());
+        assertEquals(null, toInteger(null));
+        assertEquals(8, toInteger(8L).intValue());
+        assertEquals(8, toInteger("8").intValue());
+        assertEquals(8, toInteger(new BigDecimal("8")).intValue());
     }
 
     /**
@@ -297,10 +300,10 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToInteger3(){
-        assertEquals(1, ConvertUtil.toInteger(null, 1).intValue());
-        assertEquals(8, ConvertUtil.toInteger(8L, 1).intValue());
-        assertEquals(8, ConvertUtil.toInteger("8", 1).intValue());
-        assertEquals(8, ConvertUtil.toInteger(new BigDecimal("8"), 1).intValue());
+        assertEquals(1, toInteger(null, 1).intValue());
+        assertEquals(8, toInteger(8L, 1).intValue());
+        assertEquals(8, toInteger("8", 1).intValue());
+        assertEquals(8, toInteger(new BigDecimal("8"), 1).intValue());
     }
 
     /**
@@ -308,7 +311,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToIntege4(){
-        assertEquals(null, ConvertUtil.toInteger("aaaa"));
+        assertEquals(null, toInteger("aaaa"));
     }
 
     /**
@@ -316,7 +319,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToIntege5(){
-        assertEquals(1, ConvertUtil.toInteger("aaaa", 1).intValue());
+        assertEquals(1, toInteger("aaaa", 1).intValue());
     }
 
     /**
@@ -354,7 +357,7 @@ public class ConvertUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testConvert3(){
-        String[] strings = ConvertUtil.toArray("");
+        String[] strings = toArray("");
         ConvertUtil.toArray(strings, null);
     }
 
@@ -400,7 +403,7 @@ public class ConvertUtilTest{
     @Test
     public void testConvertArray(){
         String[] int1 = { "2", "1" };
-        assertArrayEquals(new Long[] { 2L, 1L }, ConvertUtil.toArray(int1, Long.class));
+        assertArrayEquals(new Long[] { 2L, 1L }, toArray(int1, Long.class));
     }
 
     /**
@@ -443,8 +446,8 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToArray0(){
-        List<String> list = ConvertUtil.toList("xinge", "feilong");
-        assertArrayEquals(new String[] { "xinge", "feilong" }, ConvertUtil.toArray(list, String.class));
+        List<String> list = toList("xinge", "feilong");
+        assertArrayEquals(new String[] { "xinge", "feilong" }, toArray(list, String.class));
     }
 
     /**
@@ -456,7 +459,7 @@ public class ConvertUtilTest{
         user1.setId(1L);
         User user2 = new User();
         user2.setId(2L);
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toArray(user1, user2)));
+        LOGGER.debug(JsonUtil.format(toArray(user1, user2)));
 
     }
 
@@ -465,8 +468,17 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToArray1(){
-        assertArrayEquals(new String[] { "xinge", "feilong" }, ConvertUtil.toArray("xinge", "feilong"));
+        assertArrayEquals(new String[] { "xinge", "feilong" }, toArray("xinge", "feilong"));
     }
+
+    //    @Test
+    //    public void testToArray5(){
+    //        Object[] array = toArray("xinge", "feilong");
+    //        String[] strings = (String[]) array;
+    //
+    //        LOGGER.debug("the param strings:{}", JsonUtil.format(strings));
+    //
+    //    }
 
     /**
      * Test to array4.
@@ -522,7 +534,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToMap1(){
-        Map<String, String> map = ConvertUtil.toMap("张飞", "丈八蛇矛");
+        Map<String, String> map = toMap("张飞", "丈八蛇矛");
         assertThat(map, allOf(notNullValue(), hasEntry("张飞", "丈八蛇矛")));
 
     }
@@ -532,7 +544,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToMap2(){
-        Map<String, String> map = ConvertUtil.toMap(null, "丈八蛇矛");
+        Map<String, String> map = toMap(null, "丈八蛇矛");
         assertThat(map, allOf(notNullValue(), hasEntry(null, "丈八蛇矛")));
     }
 
@@ -541,12 +553,11 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToMap3(){
-        Map<String, String> map = ConvertUtil.toMap(
-                        ConvertUtil.toList(
-                                        new SimpleEntry<>("张飞", "丈八蛇矛"),
-                                        new SimpleEntry<>("关羽", "青龙偃月刀"),
-                                        new SimpleEntry<>("赵云", "龙胆枪"),
-                                        new SimpleEntry<>("刘备", "双股剑")));
+        Map<String, String> map = toMap(toList(
+                        new SimpleEntry<>("张飞", "丈八蛇矛"),
+                        new SimpleEntry<>("关羽", "青龙偃月刀"),
+                        new SimpleEntry<>("赵云", "龙胆枪"),
+                        new SimpleEntry<>("刘备", "双股剑")));
         assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
 
     }
@@ -556,7 +567,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToMap4(){
-        Map<String, String> map = ConvertUtil.toMap(
+        Map<String, String> map = toMap(
                         new SimpleEntry<>("张飞", "丈八蛇矛"),
                         new SimpleEntry<>("关羽", "青龙偃月刀"),
                         new SimpleEntry<>("赵云", "龙胆枪"),
@@ -580,7 +591,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToList3(){
-        LOGGER.debug("{}", ConvertUtil.toList(ConvertUtil.toList("a", "a", "b", "b")));
+        LOGGER.debug("{}", toList(ConvertUtil.toList("a", "a", "b", "b")));
     }
 
     /**
@@ -593,8 +604,8 @@ public class ConvertUtilTest{
         User user2 = new User();
         user2.setId(2L);
 
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toList(user1, user2)));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toList((User) null)));
+        LOGGER.debug(JsonUtil.format(toList(user1, user2)));
+        LOGGER.debug(JsonUtil.format(toList((User) null)));
     }
 
     /**
@@ -602,7 +613,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testCollectionToString(){
-        List<String> list = ConvertUtil.toList("feilong", "", "xinge");
+        List<String> list = toList("feilong", "", "xinge");
 
         ToStringConfig toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
