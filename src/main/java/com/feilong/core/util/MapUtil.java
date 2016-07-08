@@ -16,6 +16,7 @@
 package com.feilong.core.util;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +30,6 @@ import java.util.TreeMap;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -205,25 +205,26 @@ public final class MapUtil{
     }
 
     /**
-     * 将多值的参数map转成单值的参数map.
+     * 将多值的参数<code>arrayValueMap</code> 转成单值的参数map.
      * 
-     * <p style="color:green">
-     * 返回的是 {@link LinkedHashMap},保证顺序和 参数 <code>arrayValueMap</code>顺序相同
-     * </p>
-     * 
-     * <p>
-     * 和该方法正好相反的是 {@link #toArrayValueMap(Map)}
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的map是 提取参数 <code>arrayValueMap</code>的key做为key,value数组的第一个元素做<code>value</code></li>
+     * <li>返回的是 {@link LinkedHashMap},保证顺序和参数 <code>arrayValueMap</code>顺序相同</li>
+     * <li>和该方法正好相反的是 {@link #toArrayValueMap(Map)}</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例1:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * Map{@code <String, String[]>} arrayValueMap = new LinkedHashMap{@code <String, String[]>}();
      * 
-     * keyAndArrayMap.put("province", new String[] { "江苏省" });
-     * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+     * arrayValueMap.put("province", new String[] { "江苏省" });
+     * arrayValueMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(arrayValueMap)));
      * </pre>
      * 
      * 返回:
@@ -245,11 +246,11 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * Map{@code <String, String[]>} arrayValueMap = new LinkedHashMap{@code <String, String[]>}();
      * 
-     * keyAndArrayMap.put("province", new String[] { "浙江省", "江苏省" });
-     * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(keyAndArrayMap)));
+     * arrayValueMap.put("province", new String[] { "浙江省", "江苏省" });
+     * arrayValueMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(arrayValueMap)));
      * </pre>
      * 
      * 返回:
@@ -265,20 +266,21 @@ public final class MapUtil{
      *
      * @param <K>
      *            the key type
+     * @param <V>
      * @param arrayValueMap
      *            the array value map
      * @return 如果<code>arrayValueMap</code>是null或者empty,那么返回 {@link Collections#emptyMap()},<br>
      *         如果<code>arrayValueMap</code>其中有key的值是多值的数组,那么转换到新的map中的时候,value取第一个值,<br>
-     *         如果<code>arrayValueMap</code>其中有key的值是null或者empty,那么转换到新的map中的时候,value以 {@link StringUtils#EMPTY}替代
-     * @since 1.6.2
+     *         如果<code>arrayValueMap</code>其中有key的value是null,那么转换到新的map中的时候,value以 null替代
+     * @since 1.8.0 change type to generics
      */
-    public static <K> Map<K, String> toSingleValueMap(Map<K, String[]> arrayValueMap){
+    public static <K, V> Map<K, V> toSingleValueMap(Map<K, V[]> arrayValueMap){
         if (Validator.isNullOrEmpty(arrayValueMap)){
             return Collections.emptyMap();
         }
-        Map<K, String> singleValueMap = newLinkedHashMap(arrayValueMap.size());//保证顺序和 参数 arrayValueMap 顺序相同
-        for (Map.Entry<K, String[]> entry : arrayValueMap.entrySet()){
-            singleValueMap.put(entry.getKey(), Validator.isNotNullOrEmpty(entry.getValue()) ? entry.getValue()[0] : StringUtils.EMPTY);
+        Map<K, V> singleValueMap = newLinkedHashMap(arrayValueMap.size());//保证顺序和 参数 arrayValueMap 顺序相同
+        for (Map.Entry<K, V[]> entry : arrayValueMap.entrySet()){
+            singleValueMap.put(entry.getKey(), null == entry.getValue() ? null : entry.getValue()[0]);
         }
         return singleValueMap;
     }
@@ -331,7 +333,7 @@ public final class MapUtil{
         }
         Map<K, String[]> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
         for (Map.Entry<K, String> entry : singleValueMap.entrySet()){
-            arrayValueMap.put(entry.getKey(), ConvertUtil.toArray(entry.getValue()));//注意此处的Value不要声明成V,否则会变成Object数组
+            arrayValueMap.put(entry.getKey(), toArray(entry.getValue()));//注意此处的Value不要声明成V,否则会变成Object数组
         }
         return arrayValueMap;
     }
