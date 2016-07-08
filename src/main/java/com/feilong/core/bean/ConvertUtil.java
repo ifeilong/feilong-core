@@ -1318,14 +1318,22 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
+     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * list.add("xinge");
+     * list.add("feilong");
+     * </pre>
      * 
-     * List{@code <String>} testList = new ArrayList{@code <String>}();
-     * testList.add("xinge");
-     * testList.add("feilong");
+     * 以前你需要写成:
      * 
-     * String[] array = ConvertUtil.toArray(testList, String.class);
+     * <pre class="code">
+     * list.toArray(new String[list.size()]);
+     * </pre>
+     * 
+     * 现在你只需要写成:
+     * 
+     * <pre class="code">
+     * String[] array = ConvertUtil.toArray(list, String.class);
      * LOGGER.info(JsonUtil.format(array));
-     * 
      * </pre>
      * 
      * 返回:
@@ -1360,6 +1368,7 @@ public final class ConvertUtil{
      * @see java.util.ArrayList#toArray()
      * @see java.util.ArrayList#toArray(Object[])
      * @see org.apache.commons.collections4.IteratorUtils#toArray(Iterator,Class)
+     * @see "org.springframework.util.StringUtils#toStringArray(Collection)"
      * @since 1.2.2
      */
     public static <T> T[] toArray(Collection<T> collection,Class<T> arrayComponentType){

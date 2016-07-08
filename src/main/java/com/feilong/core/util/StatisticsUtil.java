@@ -427,13 +427,13 @@ public final class StatisticsUtil{
      * 
      * <pre class="code">
      * 
-     * List{@code <User>} testList = new ArrayList{@code <User>}();
-     * testList.add(new User("张飞"));
-     * testList.add(new User("关羽"));
-     * testList.add(new User("刘备"));
-     * testList.add(new User("刘备"));
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞"));
+     * list.add(new User("关羽"));
+     * list.add(new User("刘备"));
+     * list.add(new User("刘备"));
      * 
-     * Map{@code <String, Integer>} map = StatisticsUtil.groupCount(testList, "name");
+     * Map{@code <String, Integer>} map = StatisticsUtil.groupCount(list, "name");
      * LOGGER.info(JsonUtil.format(map));
      * 
      * </pre>
