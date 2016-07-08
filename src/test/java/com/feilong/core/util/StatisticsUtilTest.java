@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.Matchers.allOf;
@@ -31,6 +32,7 @@ import java.util.Map;
 
 import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.Predicate;
+import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.comparators.FixedOrderComparator;
 import org.apache.commons.collections4.functors.ComparatorPredicate;
 import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
@@ -40,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.predicate.BeanPredicate;
+import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -160,31 +163,28 @@ public class StatisticsUtilTest{
      */
     @Test
     public void testSum3(){
-        User user1 = new User(10L);
-        user1.setName("刘备");
-        user1.setAge(50);
+        User liubei = new User(10L);
+        liubei.setName("刘备");
+        liubei.setAge(50);
 
-        User user2 = new User(20L);
-        user1.setName("关羽");
-        user2.setAge(50);
+        User guanyu = new User(20L);
+        liubei.setName("关羽");
+        guanyu.setAge(50);
 
-        User user3 = new User(100L);
-        user3.setName("张飞");
-        user3.setAge(null);
+        User zhangfei = new User(100L);
+        zhangfei.setName("张飞");
+        zhangfei.setAge(null);
 
-        User user4 = new User((Long) null);
-        user4.setName("赵云");
-        user4.setAge(100);
+        User zhaoyun = new User((Long) null);
+        zhaoyun.setName("赵云");
+        zhaoyun.setAge(100);
 
-        List<User> list = toList(user1, user2, user3, user4);
-        Map<String, BigDecimal> map = StatisticsUtil.sum(list, ConvertUtil.toArray("id", "age"), new Predicate<User>(){
+        List<User> list = toList(liubei, guanyu, zhangfei, zhaoyun);
 
-            @Override
-            public boolean evaluate(User user){
-                return !"张飞".equals(user.getName());
-            }
-        });
-        LOGGER.debug(JsonUtil.format(map));
+        Predicate<User> notPredicate = PredicateUtils.notPredicate(BeanPredicateUtil.equalPredicate("name", "张飞"));
+        Map<String, BigDecimal> map = StatisticsUtil.sum(list, toArray("id", "age"), notPredicate);
+
+        assertThat(map, allOf(hasEntry("id", toBigDecimal(30)), hasEntry("age", toBigDecimal(200))));
     }
 
     /**
@@ -195,17 +195,14 @@ public class StatisticsUtilTest{
         List<User> list = toList(//
                         new User("张飞", 20),
                         new User("关羽", 30),
+                        new User("赵云", 50),
                         new User("刘备", 40),
+                        new User("刘备", 30),
                         new User("赵云", 50));
 
-        Map<String, Integer> map = StatisticsUtil.groupCount(list, "name", new Predicate<User>(){
-
-            @Override
-            public boolean evaluate(User user){
-                return user.getAge() > 30;
-            }
-        });
-        assertThat(map, allOf(hasEntry("刘备", 1), hasEntry("赵云", 1)));
+        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+        Map<String, Integer> map = StatisticsUtil.groupCount(list, "name", comparatorPredicate);
+        assertThat(map, allOf(hasEntry("刘备", 1), hasEntry("赵云", 2)));
     }
 
     /**

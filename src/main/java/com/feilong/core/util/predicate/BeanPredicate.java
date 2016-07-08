@@ -40,25 +40,31 @@ public class BeanPredicate<T> implements Predicate<T>{
      */
     private final String    propertyName;
 
-    /** The predicate. */
+    /** The value predicate. */
     @SuppressWarnings("rawtypes")
-    private final Predicate predicate;
+    private final Predicate valuePredicate;
 
     /**
      * The Constructor.
+     * 
+     * <p>
+     * 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>valuePredicate</code> 是null,抛出 {@link NullPointerException}<br>
+     * </p>
      *
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @param predicate
+     * @param valuePredicate
      *            the predicate
      */
-    public BeanPredicate(String propertyName, @SuppressWarnings("rawtypes") Predicate predicate){
+    public BeanPredicate(String propertyName, @SuppressWarnings("rawtypes") Predicate valuePredicate){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        Validate.notNull(predicate, "predicate can't be null!");
+        Validate.notNull(valuePredicate, "predicate can't be null!");
 
         this.propertyName = propertyName;
-        this.predicate = predicate;
+        this.valuePredicate = valuePredicate;
     }
 
     /*
@@ -70,6 +76,6 @@ public class BeanPredicate<T> implements Predicate<T>{
     @Override
     public boolean evaluate(T object){
         Object currentPropertyValue = PropertyUtil.getProperty(object, propertyName);
-        return predicate.evaluate(currentPropertyValue);
+        return valuePredicate.evaluate(currentPropertyValue);
     }
 }

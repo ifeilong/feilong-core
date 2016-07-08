@@ -33,6 +33,7 @@ import com.feilong.core.bean.PropertyUtil;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.collections4.PredicateUtils
+ * @see com.feilong.core.util.predicate.BeanPredicate
  * @since 1.8.0
  */
 public final class BeanPredicateUtil{
@@ -46,7 +47,11 @@ public final class BeanPredicateUtil{
 
     /**
      * Equal predicate.
-     *
+     * 
+     * <p>
+     * 用来指定 <code>T</code> 对象的 特定属性 <code>propertyName</code> equals 指定的 propertyValue
+     * </p>
+     * 
      * @param <T>
      *            the generic type
      * @param <V>
@@ -127,8 +132,55 @@ public final class BeanPredicateUtil{
         });
     }
 
+    //**************************************************************************************************
+
     /**
      * Comparator predicate.
+     * 
+     * <p>
+     * 拿<code>valueToCompare</code> 和 提取t对象的属性<code>propertyName</code>的值,进行比较(使用 {@link ComparatorUtils#naturalComparator()} 自然排序比较器)<br>
+     * 注意,比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>
+     * </p>
+     * 
+     * <h3>关于 {@link Criterion}:</h3>
+     * 
+     * <blockquote>
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * 
+     * <tr style="background-color:#ccccff">
+     * <th align="left">字段</th>
+     * <th align="left">说明</th>
+     * </tr>
+     * 
+     * 
+     * <tr valign="top">
+     * <td>{@link Criterion#EQUAL}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) == 0</td>
+     * </tr>
+     * 
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>{@link Criterion#LESS}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) < 0</td>
+     * </tr>
+     * 
+     * <tr valign="top">
+     * <td>{@link Criterion#GREATER}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) > 0</td>
+     * </tr>
+     * 
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>{@link Criterion#GREATER_OR_EQUAL}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) >= 0</td>
+     * </tr>
+     * 
+     * <tr valign="top">
+     * <td>{@link Criterion#LESS_OR_EQUAL}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) <= 0</td>
+     * </tr>
+     * 
+     * </table>
+     * </blockquote>
+     * 
      * 
      * <h3>通常对于以下代码:</h3>
      * 
@@ -183,6 +235,7 @@ public final class BeanPredicateUtil{
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see ComparatorUtils#naturalComparator()
      * @see #comparatorPredicate(String, Comparable, Comparator, Criterion)
+     * @since commons-collections 4
      */
     public static <T, V extends Comparable<? super V>> Predicate<T> comparatorPredicate(
                     String propertyName,
@@ -193,6 +246,50 @@ public final class BeanPredicateUtil{
 
     /**
      * Comparator predicate.
+     * 
+     * <p>
+     * 拿<code>valueToCompare</code> 和 提取t对象的属性<code>propertyName</code>的值,进行比较(使用 <code>comparator</code> 比较器)<br>
+     * 注意,比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>
+     * </p>
+     * 
+     * <h3>关于 {@link Criterion}:</h3>
+     * 
+     * <blockquote>
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * 
+     * <tr style="background-color:#ccccff">
+     * <th align="left">字段</th>
+     * <th align="left">说明</th>
+     * </tr>
+     * 
+     * 
+     * <tr valign="top">
+     * <td>{@link Criterion#EQUAL}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) == 0</td>
+     * </tr>
+     * 
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>{@link Criterion#LESS}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) < 0</td>
+     * </tr>
+     * 
+     * <tr valign="top">
+     * <td>{@link Criterion#GREATER}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) > 0</td>
+     * </tr>
+     * 
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>{@link Criterion#GREATER_OR_EQUAL}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) >= 0</td>
+     * </tr>
+     * 
+     * <tr valign="top">
+     * <td>{@link Criterion#LESS_OR_EQUAL}</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) <= 0</td>
+     * </tr>
+     * 
+     * </table>
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -210,6 +307,7 @@ public final class BeanPredicateUtil{
      * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see org.apache.commons.collections4.functors.ComparatorPredicate
+     * @since commons-collections 4
      */
     public static <T, V extends Comparable<? super V>> Predicate<T> comparatorPredicate(
                     String propertyName,
