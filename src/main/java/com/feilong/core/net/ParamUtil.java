@@ -68,7 +68,7 @@ public final class ParamUtil{
      * String uri = "http://www.feilong.com:8888/esprit-frontend/search.htm?{@code keyword=%E6%81%A4&page=}";
      * String pageParamName = "label";
      * String prePageNo = "2-5-8-12";
-     * LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, UTF8));
      * </pre>
      * 
      * 返回:
@@ -111,7 +111,7 @@ public final class ParamUtil{
      * keyAndArrayMap.put("province", "江苏省");
      * keyAndArrayMap.put("city", "南通市");
      * 
-     * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
      * 返回:
@@ -131,7 +131,7 @@ public final class ParamUtil{
      * keyAndArrayMap.put("province", "江苏省");
      * keyAndArrayMap.put("city", "南通市");
      * 
-     * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
      * 返回:
@@ -175,7 +175,7 @@ public final class ParamUtil{
      * keyAndArrayMap.put("receiver", new String[] { "鑫哥", "feilong" });
      * keyAndArrayMap.put("province", new String[] { "江苏省" });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
      * 返回:
@@ -195,7 +195,7 @@ public final class ParamUtil{
      * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
      * keyAndArrayMap.put("province", new String[] { "江苏省" });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
-     * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
      * 返回:
@@ -236,7 +236,7 @@ public final class ParamUtil{
      * 
      * <pre class="code">
      * String queryString = "{@code sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510}";
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, UTF8)));
      * </pre>
      * 
      * 返回:
@@ -284,7 +284,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=1&b=2&a=5}", CharsetType.UTF8)));
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=1&b=2&a=5}", UTF8)));
      * </pre>
      * 
      * 返回:
@@ -301,7 +301,7 @@ public final class ParamUtil{
      * <hr>
      * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=&b=2&a}", CharsetType.UTF8)));
+     * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=&b=2&a}", UTF8)));
      * </pre>
      * 
      * 返回:
@@ -371,7 +371,7 @@ public final class ParamUtil{
      * 如果使用的是:
      * 
      * <pre class="code">
-     * LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, UTF8));
      * </pre>
      * 
      * 那么返回:

@@ -15,17 +15,6 @@
  */
 package com.feilong.core.date;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalDayList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
-import static com.feilong.core.date.DateExtensionUtil.getResetTodayAndTomorrow;
-import static com.feilong.core.date.DateExtensionUtil.getResetYesterdayAndToday;
-import static com.feilong.core.date.DateUtil.addDay;
-import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
-import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -37,8 +26,20 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalDayList;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
+import static com.feilong.core.date.DateExtensionUtil.getResetTodayAndTomorrow;
+import static com.feilong.core.date.DateExtensionUtil.getResetYesterdayAndToday;
+import static com.feilong.core.date.DateUtil.addDay;
+import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
+import static com.feilong.core.date.DateUtil.toDate;
+
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  * The Class DateExtensionUtilTest.
@@ -109,9 +110,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetResetTodayAndTomorrow(){
-        assertArrayEquals(
-                        ConvertUtil.toArray(getFirstDateOfThisDay(NOW), getFirstDateOfThisDay(addDay(NOW, 1))),
-                        getResetTodayAndTomorrow());
+        assertArrayEquals(toArray(getFirstDateOfThisDay(NOW), getFirstDateOfThisDay(addDay(NOW, 1))), getResetTodayAndTomorrow());
     }
 
 }

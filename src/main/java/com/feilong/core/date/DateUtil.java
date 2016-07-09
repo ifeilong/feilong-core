@@ -1117,11 +1117,16 @@ public final class DateUtil{
      *            the begin time date
      * @param endTimeDate
      *            the end time date
-     * @return 如果 <code>date</code> 在 <code>beginTimeDate</code>之后, 并且 指定日期 <code>date</code> 在 <code>endTimeDate</code>之前,返回true
+     * @return 如果 <code>date</code> 在 <code>beginTimeDate</code>之后, 并且 指定日期 <code>date</code> 在 <code>endTimeDate</code>之前,返回true<br>
+     * @throws NullPointerException
+     *             如果 <code>date</code> 是null,或者 <code>beginTimeDate</code> 是null 或者 <code>endTimeDate</code> 是null
      * @see Date#after(Date)
      * @see Date#before(Date)
      */
     public static boolean isInTime(Date date,Date beginTimeDate,Date endTimeDate){
+        Validate.notNull(date, "date can't be null!");
+        Validate.notNull(beginTimeDate, "beginTimeDate can't be null!");
+        Validate.notNull(endTimeDate, "endTimeDate can't be null!");
         return date.after(beginTimeDate) && date.before(endTimeDate);
     }
 

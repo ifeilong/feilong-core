@@ -242,17 +242,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * TestDateUtilTest.
-     */
-    @Test
-    public void testDateUtilTest(){
-        Date test = new Date();
-        String dayString = test.toString();
-        String timeString = dayString.substring(11, 19);
-        LOGGER.debug(timeString);
-    }
-
-    /**
      * Test get add minute.
      */
     @Test

@@ -101,7 +101,7 @@ public final class ParamExtensionUtil{
      * <pre class="code">
      * String uriString = "http://www.feilong.com:8888/search.htm?{@code keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller"};
      * String pageParamName = "label";
-     * LOGGER.info(ParamUtil.removeParameter(uriString, pageParamName, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.removeParameter(uriString, pageParamName, UTF8));
      * </pre>
      * 
      * 返回:
@@ -160,7 +160,7 @@ public final class ParamExtensionUtil{
      * List{@code <String>} paramNameList = new ArrayList{@code <String>}();
      * paramNameList.add("label");
      * paramNameList.add("keyword");
-     * LOGGER.info(ParamUtil.removeParameterList(uriString, paramNameList, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.removeParameterList(uriString, paramNameList, UTF8));
      * 
      * </pre>
      * 
@@ -250,7 +250,7 @@ public final class ParamExtensionUtil{
      * List{@code <String>} paramNameList = new ArrayList{@code <String>}();
      * paramNameList.add("label");
      * paramNameList.add("keyword");
-     * LOGGER.info(ParamUtil.retentionParamList(uriString, paramNameList, CharsetType.UTF8));
+     * LOGGER.info(ParamUtil.retentionParamList(uriString, paramNameList, UTF8));
      * 
      * </pre>
      * 
