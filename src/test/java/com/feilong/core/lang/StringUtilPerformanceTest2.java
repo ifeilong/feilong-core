@@ -15,13 +15,14 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+
 import java.util.Date;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -45,7 +46,7 @@ public class StringUtilPerformanceTest2{
             tokenizeToStringArray1();
         }
 
-        LOGGER.debug("time:{}", DateExtensionUtil.getIntervalTime(beginDate, new Date()));
+        LOGGER.debug("time:{}", getIntervalForView(beginDate));
     }
 
     /**
@@ -81,6 +82,6 @@ public class StringUtilPerformanceTest2{
             StringUtil.split(str, regexSpliter);
         }
 
-        LOGGER.debug("time:{}", DateExtensionUtil.getIntervalTime(beginDate, new Date()));
+        LOGGER.debug("time:{}", getIntervalForView(beginDate));
     }
 }

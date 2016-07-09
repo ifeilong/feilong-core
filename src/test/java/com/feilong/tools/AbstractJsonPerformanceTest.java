@@ -64,7 +64,7 @@ public abstract class AbstractJsonPerformanceTest extends AbstractJsonTest{
         for (int i = 0; i < times; ++i){
             performanceMethod(user);
         }
-        LOGGER.debug("[{}]{},use time:{}", getType(), times, getIntervalForView(beginDate, new Date()));
+        LOGGER.debug("[{}]{},use time:{}", getType(), times, getIntervalForView(beginDate));
     }
 
     /**

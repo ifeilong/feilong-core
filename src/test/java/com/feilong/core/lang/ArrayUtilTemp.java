@@ -80,7 +80,7 @@ public class ArrayUtilTemp{
             }
             ++j;
         }
-        LOGGER.debug("loop count j=[{}],use time:[{}],\nlist:{}", j, getIntervalForView(beginDate, new Date()), list);
+        LOGGER.debug("loop count j=[{}],use time:[{}],\nlist:{}", j, getIntervalForView(beginDate), list);
     }
 
     /**
