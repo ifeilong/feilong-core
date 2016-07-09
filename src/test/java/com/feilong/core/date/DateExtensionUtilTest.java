@@ -17,6 +17,7 @@ package com.feilong.core.date;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalDayList;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
@@ -76,9 +77,6 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         LOGGER.debug(JsonUtil.format(intervalDayList2));
     }
 
-    /**
-     * Test get interval for view.
-     */
     @Test
     public void testGetIntervalForView(){
         Date now = new Date();
@@ -87,14 +85,23 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         LOGGER.debug(getIntervalTime(now, date) + "");
     }
 
+    @Test
+    public void testGetIntervalForView1(){
+        Date date = toDate("2016-07-03 00:00:00", COMMON_DATE_AND_TIME);
+        LOGGER.debug(getIntervalForView(date));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetIntervalForView2(){
+        getIntervalForView(null);
+    }
+
     /**
      * Test get extent yesterday.
      */
     @Test
     public void testGetResetYesterdayAndToday(){
-        assertArrayEquals(
-                        ConvertUtil.toArray(getFirstDateOfThisDay(addDay(NOW, -1)), getFirstDateOfThisDay(NOW)),
-                        getResetYesterdayAndToday());
+        assertArrayEquals(toArray(getFirstDateOfThisDay(addDay(NOW, -1)), getFirstDateOfThisDay(NOW)), getResetYesterdayAndToday());
     }
 
     /**

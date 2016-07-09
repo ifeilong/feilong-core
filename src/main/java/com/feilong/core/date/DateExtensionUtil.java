@@ -225,12 +225,77 @@ public final class DateExtensionUtil{
         return list;
     }
 
+    //****************************************************************************************************
+
     /**
-     * 将两日期之间的间隔,转换成直观的表示方式.
+     * 将 开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,转换成直观的表示方式.
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>常用于日志输出一段代码执行时长</li>
+     * <li>计算的是开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
+     * <li>间隔时间转成 天,小时,分钟,秒,毫秒 中文文字</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Date beginDate = new Date();
+     * 
+     * // do some logic
+     * // balabala logic
+     * 
+     * LOGGER.info("use time:}{}", DateExtensionUtil.getIntervalForView(beginDate));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * <p>
-     * 常用于日志输出一段代码执行时长
+     * 如果当前时间是 2016-07-09 13:03:53.259
      * </p>
+     * 
+     * <pre class="code">
+     * Date date = toDate("2016-07-03 00:00:00", COMMON_DATE_AND_TIME);
+     * LOGGER.debug(getIntervalForView(date));
+     * </pre>
+     * 
+     * 返回 :
+     * 
+     * <pre class="code">
+     * 6天13小时3分钟53秒259毫秒
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param beginDate
+     *            开始日期
+     * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see #getIntervalForView(Date, Date)
+     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @since 1.8.0
+     */
+    public static String getIntervalForView(Date beginDate){
+        return getIntervalForView(beginDate, new Date());
+    }
+
+    /**
+     * 将<code>beginDate</code>和 <code>endDate</code> 两日期之间的<span style="color:red">绝对值</span>间隔,转换成直观的表示方式.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>常用于日志输出一段代码执行时长</li>
+     * <li>计算的是开始时间 <code>beginDate</code> 到结束时间 <code>endDate</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
+     * <li>间隔时间转成 天,小时,分钟,秒,毫秒 中文文字</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -253,8 +318,6 @@ public final class DateExtensionUtil{
      * <pre class="code">
      * DateExtensionUtil.getIntervalForView(2011-05-19 8:30:40,2011-05-19 11:30:24)             = 2小时59分44秒
      * DateExtensionUtil.getIntervalForView(2011-05-19 11:31:25.456,2011-05-19 11:30:24.895)    = 1分钟1秒
-     * 
-     * 自动增加 天,小时,分钟,秒,毫秒中文文字
      * </pre>
      * 
      * </blockquote>
@@ -263,22 +326,26 @@ public final class DateExtensionUtil{
      *            开始日期
      * @param endDate
      *            结束日期
-     * @return 将两日期之间的间隔,转换成直观的表示方式<br>
-     *         如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>endDate</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalForView(long)
      * @see #getIntervalTime(Date, Date)
+     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      */
     public static String getIntervalForView(Date beginDate,Date endDate){
         return getIntervalForView(getIntervalTime(beginDate, endDate));
     }
 
     /**
-     * 将间隔毫秒数,转换成直观的表示方式.
+     * 将间隔毫秒数 <code>spaceMilliseconds</code> ,转换成直观的表示方式.
      * 
-     * <p>
-     * 常用于日志输出一段代码执行时长
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>常用于日志输出一段代码执行时长</li>
+     * <li>间隔时间转成 天,小时,分钟,秒,毫秒 中文文字</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -286,17 +353,14 @@ public final class DateExtensionUtil{
      * <pre class="code">
      * DateExtensionUtil.getIntervalForView(13516)    = 13秒516毫秒
      * DateExtensionUtil.getIntervalForView(0)        = 0
-     * 
-     * 自动增加 天,小时,分钟,秒,毫秒中文文字
      * </pre>
      * 
      * </blockquote>
      * 
      * @param spaceMilliseconds
      *            总共相差的毫秒数
-     * @return 将间隔毫秒数,转换成直观的表示方式.<br>
-     *         如果 spaceMilliseconds 是0 直接返回0<br>
-     *         如果 {@code spaceMilliseconds<0},抛出 {@link IllegalArgumentException}
+     * @return 如果 spaceMilliseconds 是0 直接返回0<br>
+     *         如果 {@code spaceMilliseconds < 0},抛出 {@link IllegalArgumentException}
      * @see #getIntervalDay(long)
      * @see #getIntervalHour(long)
      * @see #getIntervalMinute(long)
