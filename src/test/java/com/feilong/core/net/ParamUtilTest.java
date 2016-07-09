@@ -26,8 +26,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.CharsetType;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class ParamUtilTest.
@@ -114,7 +115,7 @@ public class ParamUtilTest{
     public void addParameter1(){
         String pageParamName = "page";
         Object prePageNo = "";
-        LOGGER.debug(ParamUtil.addParameter(uriString, pageParamName, prePageNo, CharsetType.UTF8));
+        LOGGER.debug(ParamUtil.addParameter(uriString, pageParamName, prePageNo, UTF8));
     }
 
     /**
@@ -124,7 +125,7 @@ public class ParamUtilTest{
     public void addParameter(){
         String pageParamName = "label";
         String prePageNo = "2-5-8-12";
-        LOGGER.debug(ParamUtil.addParameter(uriString, pageParamName, prePageNo, CharsetType.UTF8));
+        LOGGER.debug(ParamUtil.addParameter(uriString, pageParamName, prePageNo, UTF8));
     }
 
     /**
@@ -175,8 +176,8 @@ public class ParamUtilTest{
         keyAndArrayMap.put("name", new String[] { "jim", "feilong", "鑫哥" });
         keyAndArrayMap.put("age", new String[] { "18" });
         keyAndArrayMap.put("love", new String[] { "sanguo" });
-        LOGGER.debug(ParamUtil.toSafeQueryString(keyAndArrayMap, CharsetType.UTF8));
-        LOGGER.debug(ParamUtil.toSafeQueryString(null, CharsetType.UTF8));
+        LOGGER.debug(ParamUtil.toSafeQueryString(keyAndArrayMap, UTF8));
+        LOGGER.debug(ParamUtil.toSafeQueryString(null, UTF8));
         LOGGER.debug(ParamUtil.toSafeQueryString(null, null));
         LOGGER.debug(ParamUtil.toSafeQueryString(keyAndArrayMap, null));
     }
@@ -186,10 +187,10 @@ public class ParamUtilTest{
      */
     @Test
     public void parseQueryToValueMap(){
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("a=1&b=2&a=3", CharsetType.UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("a=", CharsetType.UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("a=1&", CharsetType.UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("", CharsetType.UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("a=1&b=2&a=3", UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("a=", UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("a=1&", UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("", UTF8)));
 
     }
 
@@ -200,7 +201,7 @@ public class ParamUtilTest{
     public void parseQueryToValueMap12(){
         String queryString = "subject=%E4%B8%8A%E6%B5%B7%E5%AE%9D%E5%B0%8A%E7%94%B5%E5%95%86&sign_type=MD5&notify_url=http%3A%2F%2Fstage.gymboshop.com%2Fpay%2FdoNotify%2F1.htm&out_trade_no=2015090210099910&return_url=http%3A%2F%2Fstage.gymboshop.com%2Fpay%2FdoReturn%2F1.htm&sign=309d124e35d574c5b5f230dac93e8221&_input_charset=UTF-8&it_b_pay=120m&total_fee=0.01&error_notify_url=http%3A%2F%2Fstage.gymboshop.com%2Fpay%2FnotifyError.htm%3Ftype%3D1&service=create_direct_pay_by_user&paymethod=directPay&partner=2088511258288082&anti_phishing_key=KP3B51bszcIOjOoNpw%3D%3D&seller_email=pay%40gymboree.com.cn&payment_type=1";
         queryString = "subject=CalvinKlein&sign_type=MD5&notify_url=http%3A%2F%2Fstaging-cn.puma.com%2Fpayment%2Falipay%2FaSynReturn.htm&out_trade_no=2015091410000044&return_url=http%3A%2F%2Fstaging-cn.puma.com%2Fpayment%2Falipay%2FsynReturn.htm&sign=c7703845019c2e0bce63cf4b0282f293&_input_charset=UTF-8&it_b_pay=24m&total_fee=0.01&error_notify_url=http%3A%2F%2Fstaging-cn.puma.com%2Fpayment%2Falipay%2FsynReturn.htm&service=create_direct_pay_by_user&paymethod=directPay&partner=2088201564862550&anti_phishing_key=KP3B5KV254mjRM_m-Q%3D%3D&seller_email=alipay-test14%40alipay.com&payment_type=1";
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, UTF8)));
     }
 
     /**
@@ -208,10 +209,10 @@ public class ParamUtilTest{
      */
     @Test
     public void testToSafeArrayValueMap(){
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a", CharsetType.UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", CharsetType.UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", CharsetType.UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1=2&b=2&a=5", CharsetType.UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a", UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1=2&b=2&a=5", UTF8)));
     }
 
     /**
@@ -219,7 +220,7 @@ public class ParamUtilTest{
      */
     @Test
     public void testToSafeArrayValueMap1(){
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a& &", CharsetType.UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a& &", UTF8)));
     }
 
     /**
@@ -227,7 +228,7 @@ public class ParamUtilTest{
      */
     @Test
     public void testToSafeArrayValueMap2(){
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a", CharsetType.UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a", UTF8)));
     }
 
     /**
@@ -238,7 +239,7 @@ public class ParamUtilTest{
         String queryString = "";
         //queryString = "_input_charset=UTF-8&out_order_no=2015080310000132&partner=2088201564809153&service=close_trade&sign=dc5a40d1d554b2ef115461f0ed6c49fc&sign_type=MD5&trade_role=S";
         queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, CharsetType.UTF8)));
+        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, UTF8)));
     }
 
     /**
@@ -253,8 +254,8 @@ public class ParamUtilTest{
         keyAndArrayMap.put("name", new String[] { "aaaa", "bbbb" });
         keyAndArrayMap.put("pa", new String[] { "aaaa" });
 
-        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
-        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, null, CharsetType.UTF8));
+        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
+        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, null, UTF8));
         LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, null, null));
         beforeUrl = null;
         LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, null));
@@ -272,7 +273,7 @@ public class ParamUtilTest{
         keyAndArrayMap.put("province", new String[] { "江苏省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
     }
 
     /**
@@ -286,7 +287,7 @@ public class ParamUtilTest{
         keyAndArrayMap.put("province", new String[] { "江苏省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, CharsetType.UTF8));
+        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
     }
 
     /**
@@ -300,7 +301,7 @@ public class ParamUtilTest{
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, CharsetType.UTF8));
+        LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
     }
 
     /**
@@ -314,7 +315,7 @@ public class ParamUtilTest{
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, CharsetType.UTF8));
+        LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
     }
 
 }

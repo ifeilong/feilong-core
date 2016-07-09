@@ -25,9 +25,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class URIUtilTest.
@@ -48,11 +49,11 @@ public class URIUtilTest{
         value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time DESC&search_page&areaid=2&server_id=63&act=search_browse&equip_type_ids&search_text=斩妖剑";
         value = "斩妖剑";
         value = "风花雪月";
-        LOGGER.debug(URIUtil.encode(value, CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode(value, UTF8));
         value = "景儿,么么哒";
-        LOGGER.debug(URIUtil.encode(value, CharsetType.UTF8));
-        LOGGER.debug(URIUtil.encode("白色/黑色/纹理浅麻灰", CharsetType.UTF8));
-        LOGGER.debug(URIUtil.encode("Lifestyle / Graphic,", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode(value, UTF8));
+        LOGGER.debug(URIUtil.encode("白色/黑色/纹理浅麻灰", UTF8));
+        LOGGER.debug(URIUtil.encode("Lifestyle / Graphic,", UTF8));
     }
 
     /**
@@ -72,8 +73,8 @@ public class URIUtilTest{
      */
     @Test
     public void testEncode2(){
-        LOGGER.debug(URIUtil.encode("%", CharsetType.UTF8));
-        LOGGER.debug(URIUtil.encode("%25", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.encode("%", UTF8));
+        LOGGER.debug(URIUtil.encode("%25", UTF8));
     }
 
     /**
@@ -84,7 +85,7 @@ public class URIUtilTest{
         LOGGER.debug(
                         URIUtil.decode(
                                         "%E9%87%91%E6%80%BB%EF%BC%8C%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E4%B9%88%EF%BC%8C%E5%B0%B1%E6%80%8E%E4%B9%88%E4%B9%88",
-                                        CharsetType.UTF8));
+                                        UTF8));
 
     }
 
@@ -99,7 +100,7 @@ public class URIUtilTest{
      */
     @Test
     public void decode2(){
-        LOGGER.debug(URIUtil.decode("aaaaa%chu111", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.decode("aaaaa%chu111", UTF8));
 
     }
 
@@ -108,7 +109,7 @@ public class URIUtilTest{
      */
     @Test
     public void decode3(){
-        LOGGER.debug(URIUtil.decode("%c", CharsetType.UTF8));
+        LOGGER.debug(URIUtil.decode("%c", UTF8));
     }
 
     /**
@@ -154,7 +155,7 @@ public class URIUtilTest{
     @Test
     public void create(){
         String url = "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2";
-        URI uri = URIUtil.create(url, CharsetType.UTF8);
+        URI uri = URIUtil.create(url, UTF8);
         LOGGER.debug(uri.toString());
     }
 
@@ -163,7 +164,7 @@ public class URIUtilTest{
      */
     @Test
     public void testCreate2(){
-        URI uri = URIUtil.create("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3", CharsetType.UTF8);
+        URI uri = URIUtil.create("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3", UTF8);
         LOGGER.debug(JsonUtil.format(uri));
     }
 
@@ -193,7 +194,7 @@ public class URIUtilTest{
     @Test
     public void testCreate4(){
         String uriString = "http://127.0.0.1/cmens?a=%";
-        URI uri = URIUtil.create(uriString, CharsetType.UTF8);
+        URI uri = URIUtil.create(uriString, UTF8);
         LOGGER.debug(uri.toString());
     }
 }

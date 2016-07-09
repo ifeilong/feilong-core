@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.DatePattern.TO_STRING_STYLE;
+import static com.feilong.core.DatePattern.yyyyMMdd;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toMap;
@@ -46,7 +48,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.store.member.Address;
 import com.feilong.store.member.Customer;
@@ -104,13 +105,13 @@ public class BeanUtilTest{
 
         MemberAddress memberAddress1 = new MemberAddress();
         memberAddress1.setAddress("上海市宝山区真大路333弄22号1503室");
-        memberAddress1.setAddTime(DateUtil.toDate("20140615", DatePattern.yyyyMMdd));
+        memberAddress1.setAddTime(DateUtil.toDate("20140615", yyyyMMdd));
         memberAddress1.setId(1L);
         memberAddress1.setMemberId(memberId);
 
         MemberAddress memberAddress2 = new MemberAddress();
         memberAddress2.setAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
-        memberAddress2.setAddTime(DateUtil.toDate("20101001", DatePattern.yyyyMMdd));
+        memberAddress2.setAddTime(DateUtil.toDate("20101001", yyyyMMdd));
         memberAddress2.setId(1L);
         memberAddress2.setMemberId(memberId);
 
@@ -219,7 +220,7 @@ public class BeanUtilTest{
         user.setNickNames(toArray("feilong", "飞天奔月", "venusdrogon"));
 
         //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
-        BeanUtil.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
+        BeanUtil.register(new DateLocaleConverter(Locale.US, TO_STRING_STYLE), Date.class);
 
         Converter converter = ConvertUtils.lookup(Date.class);
         LOGGER.debug("{},{}", converter.getClass().getSimpleName(), converter.convert(Date.class, new Date().toString()));

@@ -21,6 +21,12 @@ import java.nio.charset.Charset;
 
 import org.junit.Test;
 
+import static com.feilong.core.CharsetType.GB18030;
+import static com.feilong.core.CharsetType.GB2312;
+import static com.feilong.core.CharsetType.GBK;
+import static com.feilong.core.CharsetType.ISO_8859_1;
+import static com.feilong.core.CharsetType.UTF8;
+
 /**
  * The Class CharsetTypeTest.
  * 
@@ -33,10 +39,10 @@ public class CharsetTypeTest{
      */
     @Test
     public void isSupported(){
-        assertEquals(true, Charset.isSupported(CharsetType.ISO_8859_1));
-        assertEquals(true, Charset.isSupported(CharsetType.GB18030));
-        assertEquals(true, Charset.isSupported(CharsetType.GB2312));
-        assertEquals(true, Charset.isSupported(CharsetType.GBK));
-        assertEquals(true, Charset.isSupported(CharsetType.UTF8));
+        assertEquals(true, Charset.isSupported(ISO_8859_1));
+        assertEquals(true, Charset.isSupported(GB18030));
+        assertEquals(true, Charset.isSupported(GB2312));
+        assertEquals(true, Charset.isSupported(GBK));
+        assertEquals(true, Charset.isSupported(UTF8));
     }
 }

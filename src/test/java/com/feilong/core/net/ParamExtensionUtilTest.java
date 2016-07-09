@@ -15,15 +15,14 @@
  */
 package com.feilong.core.net;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 import java.util.List;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.CharsetType;
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * 
@@ -41,7 +40,7 @@ public class ParamExtensionUtilTest{
     public void removeParameter(){
         String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
         String pageParamName = "label";
-        LOGGER.debug(ParamExtensionUtil.removeParameter(uriString, pageParamName, CharsetType.UTF8));
+        LOGGER.debug(ParamExtensionUtil.removeParameter(uriString, pageParamName, UTF8));
     }
 
     /**
@@ -51,7 +50,7 @@ public class ParamExtensionUtilTest{
     public void removeParameterList(){
         String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
         List<String> paramNameList = toList("label", "keyword");
-        LOGGER.debug(ParamExtensionUtil.removeParameterList(uriString, paramNameList, CharsetType.UTF8));
+        LOGGER.debug(ParamExtensionUtil.removeParameterList(uriString, paramNameList, UTF8));
     }
 
     /**
@@ -61,6 +60,6 @@ public class ParamExtensionUtilTest{
     public void retentionParamList(){
         String uriString = "http://www.feilong.com:8888/search.htm?keyword=中国&page=&categoryCode=2-5-3-11&label=TopSeller";
         List<String> paramNameList = toList("label", "keyword");
-        LOGGER.debug(ParamExtensionUtil.retentionParamList(uriString, paramNameList, CharsetType.UTF8));
+        LOGGER.debug(ParamExtensionUtil.retentionParamList(uriString, paramNameList, UTF8));
     }
 }

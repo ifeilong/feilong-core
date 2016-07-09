@@ -21,6 +21,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 import static com.feilong.core.DatePattern.COMMON_TIME_WITHOUT_SECOND;
+import static com.feilong.core.date.DateUtil.toCalendar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -285,10 +286,10 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
         Date now = new Date();
         Date firstWeekOfSpecifyDateYear = DateUtil.getFirstWeekOfSpecifyDateYear(now, week);
         //当年最后一天
-        Calendar calendarEnd = CalendarUtil.resetYearEnd(DateUtil.toCalendar(now));
+        Calendar calendarEnd = CalendarUtil.resetYearEnd(toCalendar(now));
 
         List<String> list = new ArrayList<String>();
-        Calendar firstWeekOfSpecifyDateYearCalendar = DateUtil.toCalendar(firstWeekOfSpecifyDateYear);
+        Calendar firstWeekOfSpecifyDateYearCalendar = toCalendar(firstWeekOfSpecifyDateYear);
         for (Calendar calendar = firstWeekOfSpecifyDateYearCalendar; calendar.before(calendarEnd); calendar.add(Calendar.DAY_OF_YEAR, 7)){
             list.add(CalendarUtil.toString(calendar, datePattern));
         }

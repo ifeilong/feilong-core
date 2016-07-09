@@ -26,10 +26,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.TIMESTAMP;
+import static com.feilong.core.DatePattern.YEAR_AND_MONTH;
 
 /**
  * The Class StringUtilTest.
@@ -71,7 +74,7 @@ public class StringUtilTest{
     @Test
     public void testReplace(){
         Map<String, Object> valuesMap = new HashMap<String, Object>();
-        valuesMap.put("today", DateUtil.toString(new Date(), DatePattern.COMMON_DATE));
+        valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
         valuesMap.put("user", new User(1L));
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
     }
@@ -99,9 +102,9 @@ public class StringUtilTest{
 
         Date date = new Date();
         Map<String, String> valuesMap = new HashMap<String, String>();
-        valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
+        valuesMap.put("yearMonth", DateUtil.toString(date, YEAR_AND_MONTH));
         valuesMap.put("expressDeliveryType", "sf");
-        valuesMap.put("fileName", DateUtil.toString(date, DatePattern.TIMESTAMP));
+        valuesMap.put("fileName", DateUtil.toString(date, TIMESTAMP));
         LOGGER.debug(StringUtil.replace(template, valuesMap));
 
         assertEquals(template, StringUtil.replace(template, null));

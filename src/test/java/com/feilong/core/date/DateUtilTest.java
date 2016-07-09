@@ -15,19 +15,9 @@
  */
 package com.feilong.core.date;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
-import static com.feilong.core.date.DateUtil.addMonth;
-import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
-import static com.feilong.core.date.DateUtil.getLastDateOfThisWeek;
-import static com.feilong.core.date.DateUtil.isBefore;
-import static com.feilong.core.date.DateUtil.isInTime;
-import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -38,7 +28,18 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.DatePattern;
+import static com.feilong.core.date.DateUtil.addMonth;
+import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
+import static com.feilong.core.date.DateUtil.getLastDateOfThisWeek;
+import static com.feilong.core.date.DateUtil.isBefore;
+import static com.feilong.core.date.DateUtil.isInTime;
+import static com.feilong.core.date.DateUtil.toDate;
+
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.DatePattern.TIMESTAMP_WITH_MILLISECOND;
 
 /**
  * The Class DateUtilTest.
@@ -130,7 +131,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetDayOfYear(){
-        assertEquals(1, DateUtil.getDayOfYear(toDate("2013-01-01", DatePattern.COMMON_DATE)));
+        assertEquals(1, DateUtil.getDayOfYear(toDate("2013-01-01", COMMON_DATE)));
         LOGGER.debug(DateUtil.getDayOfYear(NOW) + "");
     }
 
@@ -167,7 +168,7 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetLastDateOfThisMonth(){
         logDate(DateUtil.getLastDateOfThisMonth(NOW));
-        logDate(DateUtil.getLastDateOfThisMonth(toDate("2012-02-01", DatePattern.COMMON_DATE)));
+        logDate(DateUtil.getLastDateOfThisMonth(toDate("2012-02-01", COMMON_DATE)));
         logDate(DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(NOW, +1)));
         logDate(DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(NOW, -1)));
     }
@@ -306,27 +307,26 @@ public class DateUtilTest extends BaseDateUtilTest{
     /**
      * Test string2 date.
      * 
-     * @throws ParseException
      */
     @Test
     public void testToDate(){
         logDate(DateUtil.toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
         logDate(DateUtil.toDate("2016-06-28T01:21:12+0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
 
-        logDate(DateUtil.toDate("2016-02-33", DatePattern.COMMON_DATE));
+        logDate(DateUtil.toDate("2016-02-33", COMMON_DATE));
 
         // 商品上线时间
-        logDate(DateUtil.toDate("20130102140806000", DatePattern.TIMESTAMP_WITH_MILLISECOND));
+        logDate(DateUtil.toDate("20130102140806000", TIMESTAMP_WITH_MILLISECOND));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testToDate1(){
-        DateUtil.toDate("2016-06-30 15:36 ", DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+        DateUtil.toDate("2016-06-30 15:36 ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
     @Test()
     public void testToDate2(){
-        DateUtil.toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+        DateUtil.toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
     /**
@@ -476,8 +476,8 @@ public class DateUtilTest extends BaseDateUtilTest{
                         false,
                         isInTime(
                                         NOW,
-                                        toDate("2012-10-10 22:59:00", DatePattern.COMMON_DATE_AND_TIME),
-                                        toDate("2012-10-16 22:59:00", DatePattern.COMMON_DATE_AND_TIME)));
+                                        toDate("2012-10-10 22:59:00", COMMON_DATE_AND_TIME),
+                                        toDate("2012-10-16 22:59:00", COMMON_DATE_AND_TIME)));
         assertSame(
                         true,
                         isInTime(

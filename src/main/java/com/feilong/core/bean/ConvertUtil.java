@@ -1009,35 +1009,48 @@ public final class ConvertUtil{
      * </p>
      * 
      * <pre class="code">
+     * Map{@code <String, String>} paramMap = new HashMap{@code <String, String>}();
+     * paramMap.put("name", "jinxin");
+     * request.setParamMap(paramMap);
+     * </pre>
      * 
+     * 上面的3行代码可以重写成
+     * 
+     * <pre class="code">
+     * request.setParamMap(toMap("name", "jinxin"));
+     * </pre>
+     * 
+     * <p>
+     * 一行代码就搞定了,很简洁,有木有~~
+     * </p>
+     * 
+     * <p>
+     * 还有:
+     * </p>
+     * 
+     * <pre class="code">
      * private List{@code <ShopCommand>} loadShopCommandList(){
      *     Map{@code <String, Object>} paraMap = new HashMap{@code <String, Object>}();
      *     paraMap.put("orgTypeId", OrgType.ID_SHOP_TYPE);
      * 
-     *     Sort[] sorts = Sort.parse("s.id asc");
-     *     return shopCommandDao.findShopListByOrgaTypeId(paraMap, sorts);
+     *     return shopCommandDao.findShopListByOrgaTypeId(paraMap);
      * }
      * </pre>
      * 
      * 可以改写成 :
      * 
      * <pre class="code">
-     * 
      * private List{@code <ShopCommand>} loadShopCommandList(){
-     *     return shopCommandDao
-     *                     .findShopListByOrgaTypeId(ConvertUtil.toMap("orgTypeId", (Object) OrgType.ID_SHOP_TYPE), Sort.parse("s.id asc"));
+     *     return shopCommandDao.findShopListByOrgaTypeId(ConvertUtil.toMap("orgTypeId", (Object) OrgType.ID_SHOP_TYPE));
      * }
      * </pre>
-     * 
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * LOGGER.debug(JsonUtil.format(ConvertUtil.toMap("张飞", "丈八蛇矛")));
-     * 
      * </pre>
      * 
      * 返回:

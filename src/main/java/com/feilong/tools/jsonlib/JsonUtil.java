@@ -15,6 +15,10 @@
  */
 package com.feilong.tools.jsonlib;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_TIME;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +37,6 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
@@ -151,8 +154,7 @@ public final class JsonUtil{
         // 注册器
         MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
         // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
-        morpherRegistry.registerMorpher(new DateMorpher(
-                        ConvertUtil.toArray(DatePattern.COMMON_DATE_AND_TIME, DatePattern.COMMON_TIME, DatePattern.COMMON_DATE)));
+        morpherRegistry.registerMorpher(new DateMorpher(ConvertUtil.toArray(COMMON_DATE_AND_TIME, COMMON_TIME, COMMON_DATE)));
 
         DEFAULT_JSON_CONFIG = getDefaultJsonConfig();
     }
@@ -1208,7 +1210,7 @@ public final class JsonUtil{
         //jsonConfig.setIgnorePublicFields(false);
 
         // 注册日期处理器
-        jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor(DatePattern.COMMON_DATE_AND_TIME));
+        jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor(COMMON_DATE_AND_TIME));
 
         // java.lang.ClassCastException: JSON keys must be strings
         // see http://feitianbenyue.iteye.com/blog/2046877

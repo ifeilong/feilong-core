@@ -15,12 +15,12 @@
  */
 package com.feilong.core.date;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+
 import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.core.DatePattern;
 
 /**
  * The Class BaseDateUtil.
@@ -54,8 +54,7 @@ abstract class BaseDateUtilTest{
     static final Date           CURRENT_YEAR_END        = DateUtil.getLastDateOfThisYear(NOW);
 
     /** The current year end. */
-    static final Date           TESTDATE_20141231013024 = DateUtil
-                    .toDate("2014-12-31 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND);
+    static final Date           TESTDATE_20141231013024 = DateUtil.toDate("2014-12-31 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND);
 
     /**
      * Prints the.
@@ -64,6 +63,6 @@ abstract class BaseDateUtilTest{
      *            the date
      */
     protected void logDate(Date date){
-        LOGGER.debug(DateUtil.toString(date, DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(date, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 }
