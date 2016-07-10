@@ -30,8 +30,9 @@ import org.apache.commons.lang3.text.StrSubstitutor;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * {@link String}工具类,可以查询,截取,format.
@@ -193,7 +194,44 @@ public final class StringUtil{
     public static String newString(byte[] bytes,String charsetType){
         return StringUtils.toEncodedString(bytes, Charset.forName(charsetType));
     }
+    // [start]toBytes
 
+    // ********************************************************************************
+    /**
+     * 字符串转换成byte数组.
+     *
+     * @param value
+     *            字符串
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see String#getBytes()
+     * @since 1.3.0
+     */
+    public static byte[] getBytes(String value){
+        Validate.notNull(value, "value can't be null!");
+        return value.getBytes();
+    }
+
+    /**
+     * 字符串 <code>value</code> 转换成byte数组.
+     * 
+     * @param value
+     *            字符串
+     * @param charsetName
+     *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
+     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see String#getBytes(String)
+     * @since 1.3.0
+     */
+    public static byte[] getBytes(String value,String charsetName){
+        Validate.notNull(value, "value can't be null!");
+        try{
+            return value.getBytes(charsetName);
+        }catch (UnsupportedEncodingException e){
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    // [end]
     // [start]replace
 
     // ********************************replace************************************************
@@ -352,7 +390,7 @@ public final class StringUtil{
     }
 
     /**
-     * 使用给定的字符串作为模板,解析匹配的变量 .
+     * 使用给定的字符串 <code>templateString</code> 作为模板,解析匹配的变量 .
      * 
      * <h3>示例:</h3>
      * 
@@ -399,10 +437,10 @@ public final class StringUtil{
 
     // ********************************substring************************************************
     /**
-     * [截取]从指定索引处(beginIndex)的字符开始,直到此字符串末尾.
+     * [截取]从指定索引处(<code>beginIndex</code>)的字符开始,直到此字符串末尾.
      * 
      * <p>
-     * 如果 beginIndex是负数,那么表示倒过来截取,从结尾开始截取长度,此时等同于 {@link #substringLast(String, int)}
+     * 如果 <code>beginIndex</code>是负数,那么表示倒过来截取,从结尾开始截取长度,此时等同于 {@link #substringLast(String, int)}
      * </p>
      *
      * <pre class="code">
@@ -413,10 +451,7 @@ public final class StringUtil{
      * StringUtil.substring("abc", 4)  = ""
      * StringUtil.substring("abc", -2) = "bc"
      * StringUtil.substring("abc", -4) = "abc"
-     * </pre>
-     * 
-     * <pre class="code">
-     * substring("jinxin.feilong",6)    =.feilong
+     * StringUtil.substring("jinxin.feilong",6)    =.feilong
      * </pre>
      * 
      * @param text
@@ -433,7 +468,7 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]从开始位置(startIndex),截取固定长度(length)字符串.
+     * [截取]从开始位置(<code>startIndex</code>),截取固定长度(<code>length</code>)字符串.
      * 
      * <pre class="code">
      * StringUtil.substring(null, 6, 8)                 =   null
@@ -454,7 +489,7 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]:获取文字最后位数的字符串.
+     * [截取]:获取文字最后位数 <code>lastLenth</code> 的字符串.
      * 
      * <h3>示例:</h3>
      * 
@@ -481,7 +516,7 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]:去除最后几位.
+     * [截取]:去除最后几位 <code>lastLenth</code> .
      * 
      * <p>
      * 调用了 {@link java.lang.String#substring(int, int)}
@@ -510,7 +545,7 @@ public final class StringUtil{
     }
 
     /**
-     * [截取]:去除最后的字符串.
+     * [截取]:去除最后的字符串 <code>lastString</code>.
      * 
      * <h3>示例:</h3>
      * 
@@ -537,47 +572,10 @@ public final class StringUtil{
             return StringUtils.EMPTY;
         }
         String textString = text.toString();
-        return null == lastString ? textString
-                        : textString.endsWith(lastString) ? substringWithoutLast(textString, lastString.length()) : textString;
-    }
-
-    // [end]
-
-    // [start]toBytes
-
-    // ********************************************************************************
-    /**
-     * 字符串转换成byte数组.
-     *
-     * @param value
-     *            字符串
-     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see java.lang.String#getBytes()
-     * @since 1.3.0
-     */
-    public static byte[] getBytes(String value){
-        Validate.notNull(value, "value can't be null!");
-        return value.getBytes();
-    }
-
-    /**
-     * 字符串 <code>value</code> 转换成byte数组.
-     * 
-     * @param value
-     *            字符串
-     * @param charsetName
-     *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
-     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see String#getBytes(String)
-     * @since 1.3.0
-     */
-    public static byte[] getBytes(String value,String charsetName){
-        Validate.notNull(value, "value can't be null!");
-        try{
-            return value.getBytes(charsetName);
-        }catch (UnsupportedEncodingException e){
-            throw new UncheckedIOException(e);
+        if (null == lastString){
+            return textString;
         }
+        return textString.endsWith(lastString) ? substringWithoutLast(textString, lastString.length()) : textString;
     }
 
     // [end]
@@ -603,7 +601,7 @@ public final class StringUtil{
      * @see java.util.regex.Pattern#split(CharSequence)
      */
     public static String[] split(String value,String regexSpliter){
-        return Validator.isNullOrEmpty(value) ? ArrayUtils.EMPTY_STRING_ARRAY : value.split(regexSpliter);
+        return isNullOrEmpty(value) ? ArrayUtils.EMPTY_STRING_ARRAY : value.split(regexSpliter);
     }
 
     // [end]
@@ -741,15 +739,15 @@ public final class StringUtil{
     /**
      * 格式化字符串.
      * 
-     * <ul>
+     * <h3>规则:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>%index$开头,index从1开始取值,表示将第index个参数拿进来进行格式化.</li>
+     * <li>对整数进行格式化:格式化字符串由4部分组成:%[index$][标识][最小宽度]转换方式</li>
      * <li>StringUtil.format("%03d", 1) 不能写成 StringUtil.format("%03d", "1")</li>
-     * </ul>
-     * 
-     * <p>
-     * %index$开头,index从1开始取值,表示将第index个参数拿进来进行格式化.<br>
-     * 对整数进行格式化:格式化字符串由4部分组成:%[index$][标识][最小宽度]转换方式<br>
-     * 对浮点数进行格式化:%[index$][标识][最少宽度][.精度]转换方式<br>
-     * </p>
+     * <li>对浮点数进行格式化:%[index$][标识][最少宽度][.精度]转换方式</li>
+     * </ol>
+     * </blockquote>
      * 
      * <p>
      * 转换符和标志的说明:

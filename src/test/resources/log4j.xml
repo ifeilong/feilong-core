@@ -51,6 +51,9 @@
 	<category name="com.feilong.core.util.comparator.PropertyComparator">
 		<priority value="info" />
 	</category>
+	<category name="com.feilong.core.text.NumberFormatUtil">
+		<priority value="info" />
+	</category>
 	<category name="com.feilong.core.util.RegexUtil">
 		<priority value="info" />
 	</category>

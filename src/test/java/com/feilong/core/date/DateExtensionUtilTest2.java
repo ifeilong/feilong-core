@@ -15,9 +15,6 @@
  */
 package com.feilong.core.date;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertSame;
 
 import java.util.Date;
@@ -27,6 +24,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
+
+import static com.feilong.core.date.DateExtensionUtil.getIntervalDay;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalHour;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalSecond;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalWeek;
+import static com.feilong.core.date.DateUtil.toDate;
+
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
  * The Class DateExtensionUtilTest.
@@ -64,10 +71,10 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     public void testGetIntervalSecond(){
         Date startDate = toDate("2013-01-01 00:00:00", COMMON_DATE_AND_TIME);
 
-        LOGGER.debug(DateExtensionUtil.getIntervalSecond(startDate, NOW) + "");
-        LOGGER.debug(DateExtensionUtil.getIntervalSecond(startDate, toDate("2113-01-01 00:00:00", COMMON_DATE_AND_TIME)) + "");
+        LOGGER.debug(getIntervalSecond(startDate, NOW) + "");
+        LOGGER.debug(getIntervalSecond(startDate, toDate("2113-01-01 00:00:00", COMMON_DATE_AND_TIME)) + "");
 
-        LOGGER.debug(DateExtensionUtil.getIntervalSecond(161986) + "");
+        LOGGER.debug(getIntervalSecond(161986) + "");
         LOGGER.debug(Integer.MAX_VALUE + "");
     }
 
@@ -77,11 +84,11 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     @Test
     public void testGetIntervalWeek(){
         LOGGER.debug(
-                        "" + DateExtensionUtil.getIntervalWeek(
+                        "" + getIntervalWeek(
                                         toDate("2014-01-01 00:00:00", COMMON_DATE_AND_TIME),
                                         toDate("2014-02-01 00:00:00", COMMON_DATE_AND_TIME)));
         LOGGER.debug(
-                        "" + DateExtensionUtil.getIntervalWeek(
+                        "" + getIntervalWeek(
                                         toDate("2014-10-28 00:00:00", COMMON_DATE_AND_TIME),
                                         toDate("2015-06-25 00:00:00", COMMON_DATE_AND_TIME)));
 
@@ -92,7 +99,7 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalDay(){
-        LOGGER.debug("" + DateExtensionUtil.getIntervalDay(toDate("2008-12-1", COMMON_DATE), toDate("2008-9-29", COMMON_DATE)));
+        LOGGER.debug("" + getIntervalDay(toDate("2008-12-1", COMMON_DATE), toDate("2008-9-29", COMMON_DATE)));
     }
 
     /**
@@ -101,8 +108,8 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     @Test
     public void testGetIntervalTime(){
         Date startDate = toDate("2016-06-01 15:21:00", COMMON_DATE_AND_TIME);
-        LOGGER.debug(DateExtensionUtil.getIntervalTime(startDate, NOW) + "");
-        LOGGER.debug(DateExtensionUtil.getIntervalTime(startDate, toDate("2113-01-01 00:00:00", COMMON_DATE_AND_TIME)) + "");
+        LOGGER.debug(getIntervalTime(startDate, NOW) + "");
+        LOGGER.debug(getIntervalTime(startDate, toDate("2113-01-01 00:00:00", COMMON_DATE_AND_TIME)) + "");
 
     }
 
@@ -111,7 +118,7 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
      */
     @Test
     public void testGetIntervalDay2(){
-        assertSame(3, DateExtensionUtil.getIntervalDay(toDate("2008-08-24", COMMON_DATE), toDate("2008-08-27", COMMON_DATE)));
+        assertSame(3, getIntervalDay(toDate("2008-08-24", COMMON_DATE), toDate("2008-08-27", COMMON_DATE)));
     }
 
     /**
@@ -120,11 +127,9 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     @Test
     public void testGetIntervalHour1(){
         LOGGER.debug(
-                        StringUtil.format(
-                                        "%05d",
-                                        DateExtensionUtil.getIntervalHour(
-                                                        toDate("2014-01-01 00:00:00", COMMON_DATE_AND_TIME),
-                                                        toDate("2014-02-01 00:00:00", COMMON_DATE_AND_TIME))));
+                        StringUtil.format("%05d", getIntervalHour(
+                                        toDate("2014-01-01 00:00:00", COMMON_DATE_AND_TIME),
+                                        toDate("2014-02-01 00:00:00", COMMON_DATE_AND_TIME))));
     }
 
 }

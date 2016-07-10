@@ -160,6 +160,37 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.format("%1$s,%1$s", 99));
     }
 
+    @Test
+    public void format3(){
+        LOGGER.debug(buildMessageLog(4, 30, "第三十二章 手段", 450));
+        LOGGER.debug(buildMessageLog(14, 30, "第三十三章 王允的计谋", 6100));
+        LOGGER.debug(buildMessageLog(1, 30, "第二十一章 恰似无情却有情", 60));
+    }
+
+    /**
+     * TestStringUtilTest.
+     */
+    @Test
+    public void testStringUtilTest(){
+
+        String format = "|%1$-50s|%2$-10s|%3$-20s|";
+
+        LOGGER.debug(StringUtil.format(format, "FirstName", "Init.", "LastName"));
+        LOGGER.debug(StringUtil.format(format, "Real", "", "Gagnon"));
+        LOGGER.debug(StringUtil.format(format, "Real2", "D", "Doe"));
+        LOGGER.debug(StringUtil.format(format, "John", "F.", "Kennedy"));
+    }
+
+    private static String buildMessageLog(int writeIndex,int bookSectionUrlMapSize,String sectionName,int contentLength){
+        //进度,百分比
+        String progress = NumberUtil.getProgress(writeIndex + 1, bookSectionUrlMapSize);
+        String format = "%1$-20s %2$-6s %3$-3s";
+
+        return StringUtil.format(format, sectionName, "" + contentLength, progress).replace(" ", "\u3000");
+        //String padStr = "-";
+        //return StringUtils.rightPad(sectionName, 40, padStr) + StringUtils.rightPad("" + contentLength, 6, padStr) + progress;
+    }
+
     /**
      * Format1.
      */

@@ -1105,7 +1105,7 @@ public final class DateUtil{
     // [start]isInTime 时间区间内
 
     /**
-     * 判断指定日期 <code>date</code> 是否在两个时间之间.
+     * 判断指定日期 <code>date</code> 是否在 <code>beginTimeDate</code> 和 <code>endTimeDate</code>两个时间之间.
      * 
      * <pre class="code">
      * DateUtil.isInTime("2012-10-16 23:00:02", "2012-10-10 22:59:00", "2012-10-18 22:59:00") = true
