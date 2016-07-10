@@ -15,9 +15,6 @@
  */
 package com.feilong.core.util;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -41,6 +38,9 @@ import com.feilong.core.Validator;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
@@ -472,6 +472,8 @@ public final class CollectionsUtil{
      *         any elements that also occur in <code>remove</code>.
      * @see #select(Collection, String, Collection)
      * @see #removeAll(Collection, Collection)
+     * @see org.apache.commons.collections4.CollectionUtils#filter(Iterable, Predicate)
+     * @see org.apache.commons.collections4.CollectionUtils#filterInverse(Iterable, Predicate)
      * @since Commons Collections 4
      * @since 1.5.0
      */
@@ -555,6 +557,8 @@ public final class CollectionsUtil{
      *         any elements that also occur in <code>remove</code>.
      * @see #select(Collection, String, Object...)
      * @see #removeAll(Collection, Collection)
+     * @see org.apache.commons.collections4.CollectionUtils#filterInverse(Iterable, Predicate)
+     * @see org.apache.commons.collections4.CollectionUtils#filter(Iterable, Predicate)
      * @since 1.6.0
      */
     @SafeVarargs
@@ -661,8 +665,9 @@ public final class CollectionsUtil{
      *            the item src list
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则先转换成 {@link LinkedHashSet},再转换成{@link ArrayList}返回
-     * @see ArrayList#ArrayList(java.util.Collection)
      * @see LinkedHashSet#LinkedHashSet(Collection)
+     * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
+     * @see org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
@@ -1023,7 +1028,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 迭代查找匹配predicate 的第一个元素并返回.
+     * 迭代查找匹配<code>predicate</code> 的第一个元素并返回.
      * 
      * <h3>示例:</h3>
      * 
@@ -1413,6 +1418,7 @@ public final class CollectionsUtil{
      * @return 如果 <code>inputIterable</code> 是null,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>transformer</code> 是null,返回 empty list
      * @see org.apache.commons.collections4.CollectionUtils#collect(Iterable, Transformer)
+     * @see org.apache.commons.collections4.CollectionUtils#transform(Collection, Transformer)
      * @since 1.5.5
      */
     public static <O, T> List<T> collect(final Iterable<O> inputIterable,final Transformer<? super O, ? extends T> transformer){

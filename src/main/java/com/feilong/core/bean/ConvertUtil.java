@@ -707,6 +707,7 @@ public final class ConvertUtil{
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see #toString(ToStringConfig, Object...)
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
+     * @see org.apache.commons.collections4.IteratorUtils#toString(Iterator)
      * @since 1.4.0
      */
     public static String toString(ToStringConfig toStringConfig,final Collection<?> collection){
@@ -1201,6 +1202,8 @@ public final class ConvertUtil{
      * @return 如果 <code>collection</code> 是null,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>collection instanceof List</code>,那么强转成 list返回<br>
      *         否则返回 <code>new ArrayList(collection)</code>
+     * @see org.apache.commons.collections4.IterableUtils#toList(Iterable)
+     * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator)
      * @since 1.6.1
      */
     public static <T> List<T> toList(final Collection<T> collection){
@@ -1436,6 +1439,7 @@ public final class ConvertUtil{
      * @see java.util.LinkedList#toArray(Object[])
      * @see java.util.ArrayList#toArray()
      * @see java.util.ArrayList#toArray(Object[])
+     * 
      * @see org.apache.commons.collections4.IteratorUtils#toArray(Iterator,Class)
      * @see "org.springframework.util.StringUtils#toStringArray(Collection)"
      * @since 1.2.2
@@ -1655,6 +1659,7 @@ public final class ConvertUtil{
      *         否则转成 {@link IteratorUtils#getIterator(Object)}
      * @see Collection#iterator()
      * @see EnumerationIterator#EnumerationIterator(Enumeration)
+     * @see IteratorUtils#asIterator(Enumeration)
      * @see IteratorUtils#getIterator(Object)
      * @see "org.apache.taglibs.standard.tag.common.core.ForEachSupport#supportedTypeForEachIterator(Object)"
      * @since Commons Collections4.0

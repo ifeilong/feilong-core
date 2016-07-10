@@ -18,7 +18,7 @@ package com.feilong.core.lang;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.Validator;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 /**
  * {@link Object} 工具类.
@@ -96,7 +96,7 @@ public final class ObjectUtil{
      * @since 1.7.2
      */
     public static <T> T defaultIfNullOrEmpty(final T object,final T defaultValue){
-        return Validator.isNotNullOrEmpty(object) ? object : defaultValue;
+        return isNotNullOrEmpty(object) ? object : defaultValue;
     }
 
     /**

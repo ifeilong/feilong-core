@@ -15,8 +15,6 @@
  */
 package com.feilong.core.util;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Collections;
@@ -31,6 +29,8 @@ import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * 专门用来统计数据的.
@@ -463,6 +463,7 @@ public final class StatisticsUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #groupCount(Collection , String, Predicate)
+     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
         return groupCount(objectCollection, propertyName, null);
@@ -524,6 +525,7 @@ public final class StatisticsUtil{
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         if (Validator.isNullOrEmpty(objectCollection)){

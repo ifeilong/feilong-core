@@ -238,6 +238,7 @@ public final class ClassUtil{
      *            参数值
      * @return 如果 <code>paramValues</code> 是null,返回 null<br>
      * @see org.apache.commons.lang3.ClassUtils#toClass(Object...)
+     * @see org.apache.commons.lang3.ClassUtils#convertClassNamesToClasses(java.util.List)
      * @since 1.1.1
      */
     public static Class<?>[] toClass(Object...paramValues){
