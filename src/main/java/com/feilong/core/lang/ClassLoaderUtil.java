@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -32,6 +30,8 @@ import com.feilong.core.UncheckedIOException;
 import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+
 /**
  * {@link java.lang.ClassLoader ClassLoader}工具类.
  * 
@@ -40,7 +40,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <blockquote>
  * 
  * <ul>
- * <li>{@link #getRootClassPath()}</li>
  * <li>{@link #getResource(String)}</li>
  * <li>{@link #getResourceInAllClassLoader(String, Class)}</li>
  * </ul>
@@ -187,26 +186,6 @@ public final class ClassLoaderUtil{
 
         LOGGER.info("search resource:[\"{}\"] in [{}],result:[{}]", resourceName, classLoader, result);
         return result;
-    }
-
-    /**
-     * 获得 项目的 classpath,及classes编译的根目录.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * ClassLoaderUtil.getRootClassPath()   = file:/E:/Workspaces/feilong/feilong-core/target/test-classes/
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @return 获得项目的 classpath
-     * @since 1.6.2
-     */
-    public static URL getRootClassPath(){
-        return getRootClassPath(getClassLoaderByClass(ClassLoaderUtil.class));
     }
 
     /**

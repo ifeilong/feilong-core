@@ -67,14 +67,6 @@ public class ClassLoaderUtilTest{
     }
 
     /**
-     * Test get root class path.
-     */
-    @Test
-    public void testGetRootClassPath(){
-        assertEquals("file:/E:/Workspaces/feilong/feilong-core/target/test-classes/", ClassLoaderUtil.getRootClassPath().toString());
-    }
-
-    /**
      * Prints the.
      */
     @Test

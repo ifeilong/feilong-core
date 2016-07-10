@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,33 @@ public class ClassLoaderUtilTemp{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassLoaderUtilTemp.class);
 
+    /**
+     * Test get root class path.
+     */
+    @Test
+    public void testGetRootClassPath(){
+        //assertEquals("file:/E:/Workspaces/feilong/feilong-core/target/test-classes/", ClassLoaderUtil.getRootClassPath().toString());
+    }
+
+    /**
+     * 获得 项目的 classpath,及classes编译的根目录.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ClassLoaderUtil.getRootClassPath()   = file:/E:/Workspaces/feilong/feilong-core/target/test-classes/
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @return 获得项目的 classpath
+     * @since 1.6.2
+     */
+    //    public static URL getRootClassPath(){
+    //        return getRootClassPath(ClassLoaderUtil.getClassLoaderByClass(ClassLoaderUtil.class));
+    //    }
     /**
      * Load resources.
      * 
