@@ -188,20 +188,6 @@ public final class ClassLoaderUtil{
         return result;
     }
 
-    /**
-     * 获得 class path.
-     *
-     * @param classLoader
-     *            the class loader
-     * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #getResource(ClassLoader, String)
-     * @since 1.6.2
-     */
-    private static URL getRootClassPath(ClassLoader classLoader){
-        Validate.notNull(classLoader, "classLoader can't be null!");
-        return getResource(classLoader, "");
-    }
-
     // *****************************************************
     /**
      * This is a convenience method to load a resource as a stream.
@@ -284,6 +270,23 @@ public final class ClassLoaderUtil{
         return null;
     }
 
+    //**************************************************************************************************
+
+    /**
+     * 获得 all class loader list.
+     *
+     * @param callingClass
+     *            the calling class
+     * @return the all class loader
+     * @since 1.6.2
+     */
+    private static List<ClassLoader> getAllClassLoaderList(Class<?> callingClass){
+        return toList(
+                        getClassLoaderByCurrentThread(),
+                        getClassLoaderByClass(ClassLoaderUtil.class),
+                        null == callingClass ? null : getClassLoaderByClass(callingClass));
+    }
+
     /**
      * 通过 {@link Thread#getContextClassLoader()} 获得 {@link ClassLoader}.
      * 
@@ -312,23 +315,6 @@ public final class ClassLoaderUtil{
             LOGGER.trace("[{}].getClassLoader():{}", callingClass.getSimpleName(), formatClassLoader(classLoader));
         }
         return classLoader;
-    }
-
-    //**************************************************************************************************
-
-    /**
-     * 获得 all class loader list.
-     *
-     * @param callingClass
-     *            the calling class
-     * @return the all class loader
-     * @since 1.6.2
-     */
-    private static List<ClassLoader> getAllClassLoaderList(Class<?> callingClass){
-        return toList(
-                        getClassLoaderByCurrentThread(),
-                        getClassLoaderByClass(ClassLoaderUtil.class),
-                        null == callingClass ? null : getClassLoaderByClass(callingClass));
     }
 
     /**
@@ -363,4 +349,19 @@ public final class ClassLoaderUtil{
         map.put("classLoader[Root Classpath]", "" + getRootClassPath(classLoader));
         return JsonUtil.format(map);
     }
+
+    /**
+     * 获得 class path.
+     *
+     * @param classLoader
+     *            the class loader
+     * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see #getResource(ClassLoader, String)
+     * @since 1.6.2
+     */
+    private static URL getRootClassPath(ClassLoader classLoader){
+        Validate.notNull(classLoader, "classLoader can't be null!");
+        return getResource(classLoader, "");
+    }
+
 }

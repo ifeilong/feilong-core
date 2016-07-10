@@ -56,6 +56,8 @@ import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 /**
  * 常用类型转换处理.
  * 
@@ -708,7 +710,7 @@ public final class ConvertUtil{
      * @since 1.4.0
      */
     public static String toString(ToStringConfig toStringConfig,final Collection<?> collection){
-        return Validator.isNullOrEmpty(collection) ? StringUtils.EMPTY : toString(toStringConfig, collection.toArray());
+        return isNullOrEmpty(collection) ? StringUtils.EMPTY : toString(toStringConfig, collection.toArray());
     }
 
     /**
@@ -747,9 +749,8 @@ public final class ConvertUtil{
         if (Validator.isNullOrEmpty(arrays)){
             return StringUtils.EMPTY;
         }
-        Object[] operateArray = toObjects(arrays);
         ToStringConfig useToStringConfig = ObjectUtils.defaultIfNull(toStringConfig, new ToStringConfig());
-        return join(operateArray, useToStringConfig.getConnector(), useToStringConfig.getIsJoinNullOrEmpty());
+        return join(toObjects(arrays), useToStringConfig.getConnector(), useToStringConfig.getIsJoinNullOrEmpty());
     }
 
     /**
@@ -1291,7 +1292,7 @@ public final class ConvertUtil{
      */
     @SafeVarargs
     public static <T> List<T> toList(T...arrays){
-        return Validator.isNullOrEmpty(arrays) ? Collections.<T> emptyList() : new ArrayList<T>(Arrays.asList(arrays));
+        return isNullOrEmpty(arrays) ? Collections.<T> emptyList() : new ArrayList<T>(Arrays.asList(arrays));
     }
 
     //*************************************toArray*********************************************************
@@ -1494,7 +1495,7 @@ public final class ConvertUtil{
      */
     @SafeVarargs
     private static <T> Object[] toObjects(T...arrays){
-        if (Validator.isNullOrEmpty(arrays)){
+        if (isNullOrEmpty(arrays)){
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
         if (arrays.length > 1){
