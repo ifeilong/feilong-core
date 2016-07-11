@@ -18,11 +18,15 @@ package com.feilong.core.bean;
 import java.beans.PropertyDescriptor;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BasicDynaClass;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
+import org.apache.commons.beanutils.DynaBean;
+import org.apache.commons.beanutils.DynaClass;
+import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.lang3.Validate;
@@ -668,4 +672,89 @@ public final class BeanUtil{
     }
 
     // [end]
+
+    /**
+     * 创建 dyna bean.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, Class<?>>} typeMap = new HashMap<>();
+     * typeMap.put("address", java.util.Map.class);
+     * typeMap.put("firstName", String.class);
+     * typeMap.put("lastName", String.class);
+     * 
+     * Map{@code <String, Object>} valueMap = new HashMap<>();
+     * valueMap.put("address", new HashMap());
+     * valueMap.put("firstName", "Fred");
+     * valueMap.put("lastName", "Flintstone");
+     * 
+     * DynaBean dynaBean = BeanUtil.createDynaBean(typeMap, valueMap);
+     * LOGGER.debug(JsonUtil.format(dynaBean));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * {
+     *         "lastName": "Flintstone",
+     *         "address": {},
+     *         "firstName": "Fred"
+     *     }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param typeMap
+     *            属性名称 和类型的 map
+     * @param valueMap
+     *            属性名称 和 值 的map
+     * @return the dyna bean
+     * @throws NullPointerException
+     *             如果 <code>typeMap </code> 或者 <code>valueMap</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>typeMap.size() != valueMap.size()</code>
+     * @since 1.8.0
+     */
+    public static DynaBean createDynaBean(Map<String, Class<?>> typeMap,Map<String, Object> valueMap){
+        Validate.notNull(typeMap, "typeMap can't be null!");
+        Validate.notNull(valueMap, "valueMap can't be null!");
+        Validate.isTrue(typeMap.size() == valueMap.size(), "typeMap size:[%s] != valueMap size:[%s]", typeMap.size(), valueMap.size());
+
+        //*********************************************************************************
+        try{
+            DynaClass dynaClass = new BasicDynaClass(null, null, toDynaPropertyArray(typeMap));
+
+            DynaBean dynaBean = dynaClass.newInstance();
+            for (Map.Entry<String, Object> entry : valueMap.entrySet()){
+                dynaBean.set(entry.getKey(), entry.getValue());
+            }
+            return dynaBean;
+        }catch (IllegalAccessException | InstantiationException e){
+            LOGGER.error("", e);
+            throw new BeanUtilException(e);
+        }
+    }
+
+    /**
+     * To dyna property array.
+     *
+     * @param typeMap
+     *            the type map
+     * @return the dyna property[]
+     * @since 1.8.0
+     */
+    private static DynaProperty[] toDynaPropertyArray(Map<String, Class<?>> typeMap){
+        DynaProperty[] dynaPropertys = new DynaProperty[typeMap.size()];
+        int i = 0;
+        for (Map.Entry<String, Class<?>> entry : typeMap.entrySet()){
+            dynaPropertys[i] = new DynaProperty(entry.getKey(), entry.getValue());
+            i++;
+        }
+        return dynaPropertys;
+    }
 }

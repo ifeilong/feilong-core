@@ -15,11 +15,6 @@
  */
 package com.feilong.core.bean;
 
-import static com.feilong.core.DatePattern.TO_STRING_STYLE;
-import static com.feilong.core.DatePattern.yyyyMMdd;
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.junit.Assert.assertEquals;
 
 import java.io.Serializable;
@@ -32,13 +27,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BasicDynaBean;
-import org.apache.commons.beanutils.BasicDynaClass;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.DynaBean;
-import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.lang3.SerializationUtils;
@@ -59,6 +51,13 @@ import com.feilong.store.order.SalesOrderDto;
 import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+
+import static com.feilong.core.DatePattern.TO_STRING_STYLE;
+import static com.feilong.core.DatePattern.yyyyMMdd;
 
 /**
  * The Class BeanUtilTest.
@@ -150,35 +149,6 @@ public class BeanUtilTest{
         String zip = (String) PropertyUtils.getProperty(customer, zipPattern);//PropertyUtils  
 
         LOGGER.debug(StringUtils.join(new Object[] { "The zipcode of customer ", name, "'s second address is now ", zip, "." }));
-    }
-
-    /**
-     * Demo dyna beans.
-     *
-     * @throws Exception
-     *             the exception
-     */
-    @Test
-    public void demoDynaBeans() throws Exception{
-        LOGGER.debug(StringUtils.center(" demoDynaBeans ", 40, "="));
-
-        // creating a DynaBean  
-        DynaProperty[] dynaBeanProperties = toArray(
-                        new DynaProperty("name", String.class),
-                        new DynaProperty("inPrice", Double.class),
-                        new DynaProperty("outPrice", Double.class));
-
-        BasicDynaClass cargoClass = new BasicDynaClass("Cargo", BasicDynaBean.class, dynaBeanProperties); //BasicDynaClass  BasicDynaBean  
-        DynaBean cargoDynaBean = cargoClass.newInstance();//DynaBean  
-
-        // accessing a DynaBean  
-        cargoDynaBean.set("name", "Instant Noodles");
-        cargoDynaBean.set("inPrice", new Double(21.3));
-        cargoDynaBean.set("outPrice", new Double(23.8));
-
-        LOGGER.debug("name: " + cargoDynaBean.get("name"));
-        LOGGER.debug("inPrice: " + cargoDynaBean.get("inPrice"));
-        LOGGER.debug("outPrice: " + cargoDynaBean.get("outPrice"));
     }
 
     /**
@@ -403,4 +373,67 @@ public class BeanUtilTest{
         assertEquals(toBigDecimal(599), jsonList.get(0).getSalePrice());
         assertEquals(toBigDecimal(599), copyList.get(0).getSalePrice());
     }
+
+    //    @Test
+    //    public void testCreateDynaBean2(){
+    //
+    //        String name = "employee";
+    //
+    //        DynaBean dynaBean = BeanUtil.createDynaBean(name, toList(
+    //                        Triple.of("address", java.util.Map.class, new HashMap()),
+    //                        Triple.of("firstName", String.class, "Fred"),
+    //                        Triple.of("lastName", String.class, "Flintstone")));
+    //        LOGGER.debug(JsonUtil.format(dynaBean));
+    //    }
+
+    @Test
+    public void testBasicDynaClass(){
+        Map<String, Class<?>> typeMap = new HashMap<>();
+        typeMap.put("address", java.util.Map.class);
+        typeMap.put("firstName", String.class);
+        typeMap.put("lastName", String.class);
+
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("address", new HashMap());
+        valueMap.put("firstName", "Fred");
+        valueMap.put("lastName", "Flintstone");
+
+        DynaBean dynaBean = BeanUtil.createDynaBean(typeMap, valueMap);
+        LOGGER.debug(JsonUtil.format(dynaBean));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBasicDynaClass1(){
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("address", new HashMap());
+        valueMap.put("firstName", "Fred");
+        valueMap.put("lastName", "Flintstone");
+
+        BeanUtil.createDynaBean(null, valueMap);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBasicDynaClass2(){
+        Map<String, Class<?>> typeMap = new HashMap<>();
+        typeMap.put("address", java.util.Map.class);
+        typeMap.put("firstName", String.class);
+        typeMap.put("lastName", String.class);
+
+        BeanUtil.createDynaBean(typeMap, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testBasicDynaClass4(){
+        Map<String, Class<?>> typeMap = new HashMap<>();
+        typeMap.put("address", java.util.Map.class);
+        typeMap.put("firstName", String.class);
+        typeMap.put("lastName", String.class);
+
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("address", new HashMap());
+        valueMap.put("firstName", "Fred");
+
+        BeanUtil.createDynaBean(typeMap, valueMap);
+    }
+
 }
