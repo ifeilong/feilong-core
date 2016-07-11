@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static java.math.RoundingMode.HALF_UP;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -22,8 +24,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.NumberPattern;
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.NumberFormatUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 
 /**
  * 处理{@link Integer},{@link Long},{@link BigDecimal}等数据类型.
@@ -157,7 +160,7 @@ public final class NumberUtil{
      * @since 1.5.5
      */
     public static BigDecimal getDivideValue(Number one,Number two,int scale){
-        return getDivideValue(one, two, scale, RoundingMode.HALF_UP);
+        return getDivideValue(one, two, scale, HALF_UP);
     }
 
     /**
@@ -196,12 +199,12 @@ public final class NumberUtil{
         Validate.notNull(one, "one can't be null!");
         Validate.notNull(two, "two can't be null!");
 
-        BigDecimal divisor = ConvertUtil.toBigDecimal(two);
+        BigDecimal divisor = toBigDecimal(two);
         Validate.isTrue(!divisor.equals(new BigDecimal(0)), "two can't be zero!");
 
         // 不能直接one.divide(two),应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
         // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result
-        return ConvertUtil.toBigDecimal(one).divide(divisor, scale, roundingMode);
+        return toBigDecimal(one).divide(divisor, scale, roundingMode);
     }
 
     // [end]
@@ -238,7 +241,7 @@ public final class NumberUtil{
         Validate.notNull(one, "one can't be null!");
         Validate.notNull(two, "two can't be null!");
         //默认返回的精度: (this.scale() + multiplicand.scale()).
-        BigDecimal multiplyValue = ConvertUtil.toBigDecimal(one).multiply(ConvertUtil.toBigDecimal(two));
+        BigDecimal multiplyValue = toBigDecimal(one).multiply(toBigDecimal(two));
         return setScale(multiplyValue, scale);
     }
     // [end]
@@ -271,7 +274,7 @@ public final class NumberUtil{
 
         BigDecimal sum = BigDecimal.ZERO;
         for (Number number : numbers){
-            sum = sum.add(ConvertUtil.toBigDecimal(number));
+            sum = sum.add(toBigDecimal(number));
         }
         return sum;
     }
@@ -388,7 +391,7 @@ public final class NumberUtil{
 
         // XXX  scale = 8不是最优方案
         int scale = 8;
-        BigDecimal bigDecimalCurrent = ConvertUtil.toBigDecimal(current);
+        BigDecimal bigDecimalCurrent = toBigDecimal(current);
         BigDecimal divideValue = getDivideValue(bigDecimalCurrent, total, scale);
         return toString(divideValue, numberPattern);
     }
@@ -407,7 +410,7 @@ public final class NumberUtil{
      * @see #toNoScale(Number, RoundingMode)
      */
     public static BigDecimal toNoScale(Number value){
-        return toNoScale(value, RoundingMode.HALF_UP);
+        return toNoScale(value, HALF_UP);
     }
 
     /**
@@ -432,7 +435,7 @@ public final class NumberUtil{
 
         //将int、long、double、string类型的数值转为BigDecimal.
         //使用double会造成精度丢失,而使用BigDecimal就是为了解决精度丢失的问题,建议使用String方式转换.
-        return setScale(ConvertUtil.toBigDecimal(value), 0, roundingMode);
+        return setScale(toBigDecimal(value), 0, roundingMode);
     }
 
     //************************************************************************************************
@@ -458,7 +461,7 @@ public final class NumberUtil{
      * @see java.math.BigDecimal#ROUND_HALF_UP
      */
     private static BigDecimal setScale(BigDecimal value,int scale){
-        return setScale(value, scale, RoundingMode.HALF_UP);
+        return setScale(value, scale, HALF_UP);
     }
 
     /**
