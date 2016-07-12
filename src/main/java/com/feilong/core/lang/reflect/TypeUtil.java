@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang.reflect;
 
-import static com.feilong.core.bean.ConvertUtil.convert;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -25,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.bean.ConvertUtil.convert;
 
 /**
  * Utility methods focusing on type inspection, particularly with regard to generics.

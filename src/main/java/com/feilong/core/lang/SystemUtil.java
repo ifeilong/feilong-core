@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
-
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
@@ -24,6 +22,8 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.ConvertUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * {@link java.lang.System}工具类.

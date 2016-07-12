@@ -15,8 +15,6 @@
  */
 package com.feilong.core.util.predicate;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
-
 import java.util.Collection;
 import java.util.Comparator;
 
@@ -27,6 +25,8 @@ import org.apache.commons.collections4.functors.ComparatorPredicate;
 import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 
 import com.feilong.core.bean.PropertyUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 专门针对bean,提供的 BeanPredicateUtil.

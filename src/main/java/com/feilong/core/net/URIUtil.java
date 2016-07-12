@@ -15,8 +15,6 @@
  */
 package com.feilong.core.net;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -32,9 +30,10 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
-import com.feilong.core.Validator;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 处理{@link java.net.URI}(Uniform Resource Locator) {@link java.net.URL}(Uniform Resource Identifier) 等.
