@@ -31,6 +31,7 @@ import com.feilong.core.TimeInterval;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
+import static com.feilong.core.TimeInterval.SECONDS_PER_WEEK;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
@@ -50,7 +51,7 @@ public class FieldUtilTemp{
     @Test
     public void testGetStaticProperty1(){
         assertEquals(HttpMethodTestType.POST, getStaticFieldValue(HttpMethodTestType.class.getName(), "POST"));
-        assertEquals(TimeInterval.SECONDS_PER_WEEK, getStaticFieldValue(TimeInterval.class.getName(), "SECONDS_PER_WEEK"));
+        assertEquals(SECONDS_PER_WEEK, getStaticFieldValue(TimeInterval.class.getName(), "SECONDS_PER_WEEK"));
     }
 
     /**

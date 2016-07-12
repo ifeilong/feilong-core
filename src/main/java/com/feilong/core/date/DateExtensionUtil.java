@@ -15,8 +15,6 @@
  */
 package com.feilong.core.date;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +23,12 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.TimeInterval;
+
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_DAY;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_HOUR;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_WEEK;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * 日期扩展工具类.
@@ -417,7 +421,7 @@ public final class DateExtensionUtil{
      * @since 1.6.0
      */
     static int getIntervalMinute(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_MINUTE));
+        return (int) (spaceMilliseconds / (MILLISECOND_PER_MINUTE));
     }
 
     /**
@@ -476,7 +480,7 @@ public final class DateExtensionUtil{
      * @since 1.6.0
      */
     static int getIntervalHour(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_HOUR));
+        return (int) (spaceMilliseconds / (MILLISECOND_PER_HOUR));
     }
 
     /**
@@ -505,7 +509,7 @@ public final class DateExtensionUtil{
      * @since 1.6.0
      */
     private static int getIntervalWeek(long spaceTime){
-        return (int) (spaceTime / (TimeInterval.MILLISECOND_PER_WEEK));
+        return (int) (spaceTime / (MILLISECOND_PER_WEEK));
     }
 
     //-******************getIntervalDay***************************************
@@ -551,7 +555,7 @@ public final class DateExtensionUtil{
      * @since 1.6.0
      */
     static int getIntervalDay(long spaceMilliseconds){
-        return (int) (spaceMilliseconds / (TimeInterval.MILLISECOND_PER_DAY));
+        return (int) (spaceMilliseconds / (MILLISECOND_PER_DAY));
     }
 
     /**

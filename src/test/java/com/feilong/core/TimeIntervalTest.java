@@ -19,6 +19,21 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_DAY;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_HOUR;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_MONTH;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_WEEK;
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_YEAR;
+import static com.feilong.core.TimeInterval.SECONDS_PER_DAY;
+import static com.feilong.core.TimeInterval.SECONDS_PER_HOUR;
+import static com.feilong.core.TimeInterval.SECONDS_PER_MINUTE;
+import static com.feilong.core.TimeInterval.SECONDS_PER_MONTH;
+import static com.feilong.core.TimeInterval.SECONDS_PER_SECOND;
+import static com.feilong.core.TimeInterval.SECONDS_PER_WEEK;
+import static com.feilong.core.TimeInterval.SECONDS_PER_YEAR;
+
 /**
  * The Class TimeIntervalTest.
  *
@@ -32,13 +47,13 @@ public class TimeIntervalTest{
      */
     @Test
     public void test(){
-        assertTrue(31536000 == TimeInterval.SECONDS_PER_YEAR);
-        assertTrue(2592000 == TimeInterval.SECONDS_PER_MONTH);
-        assertTrue(604800 == TimeInterval.SECONDS_PER_WEEK);
-        assertTrue(86400 == TimeInterval.SECONDS_PER_DAY);
-        assertTrue(3600 == TimeInterval.SECONDS_PER_HOUR);
-        assertTrue(60 == TimeInterval.SECONDS_PER_MINUTE);
-        assertTrue(1 == TimeInterval.SECONDS_PER_SECOND);
+        assertTrue(31536000 == SECONDS_PER_YEAR);
+        assertTrue(2592000 == SECONDS_PER_MONTH);
+        assertTrue(604800 == SECONDS_PER_WEEK);
+        assertTrue(86400 == SECONDS_PER_DAY);
+        assertTrue(3600 == SECONDS_PER_HOUR);
+        assertTrue(60 == SECONDS_PER_MINUTE);
+        assertTrue(1 == SECONDS_PER_SECOND);
     }
 
     /**
@@ -46,12 +61,12 @@ public class TimeIntervalTest{
      */
     @Test
     public void test1(){
-        assertTrue(31536000000L == TimeInterval.MILLISECOND_PER_YEAR);
-        assertTrue(2592000000L == TimeInterval.MILLISECOND_PER_MONTH);
-        assertTrue(604800000 == TimeInterval.MILLISECOND_PER_WEEK);
-        assertTrue(86400000 == TimeInterval.MILLISECOND_PER_DAY);
-        assertTrue(3600000 == TimeInterval.MILLISECOND_PER_HOUR);
-        assertTrue(60000 == TimeInterval.MILLISECOND_PER_MINUTE);
-        assertTrue(1000 == TimeInterval.MILLISECOND_PER_SECONDS);
+        assertTrue(31536000000L == MILLISECOND_PER_YEAR);
+        assertTrue(2592000000L == MILLISECOND_PER_MONTH);
+        assertTrue(604800000 == MILLISECOND_PER_WEEK);
+        assertTrue(86400000 == MILLISECOND_PER_DAY);
+        assertTrue(3600000 == MILLISECOND_PER_HOUR);
+        assertTrue(60000 == MILLISECOND_PER_MINUTE);
+        assertTrue(1000 == MILLISECOND_PER_SECONDS);
     }
 }

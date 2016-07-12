@@ -28,6 +28,9 @@ import com.feilong.core.DatePattern;
 import com.feilong.core.TimeInterval;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
+import static com.feilong.core.TimeInterval.SECONDS_PER_HOUR;
+import static com.feilong.core.TimeInterval.SECONDS_PER_MINUTE;
+
 /**
  * {@link java.util.Date}操作工具类(feilong-core核心类之一).
  * 
@@ -907,7 +910,7 @@ public final class DateUtil{
      */
     public static int getSecondOfDay(Date date){
         int hour = getHourOfDay(date);
-        return hour * TimeInterval.SECONDS_PER_HOUR + getSecondOfHour(date);
+        return hour * SECONDS_PER_HOUR + getSecondOfHour(date);
     }
 
     /**
@@ -927,7 +930,7 @@ public final class DateUtil{
     public static int getSecondOfHour(Date date){
         int minute = getMinute(date);
         int second = getSecond(date);
-        return second + minute * TimeInterval.SECONDS_PER_MINUTE;
+        return second + minute * SECONDS_PER_MINUTE;
     }
 
     /**
