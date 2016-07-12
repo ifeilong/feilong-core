@@ -267,7 +267,7 @@ public final class URIUtil{
      * @since 1.8.0 change to default
      */
     static String getFullPathWithoutQueryString(String uriString){
-        if (Validator.isNullOrEmpty(uriString)){
+        if (isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
         // 判断url中是否含有?  XXX 有待严谨
@@ -296,7 +296,7 @@ public final class URIUtil{
      * @since 1.8.0 change to default
      */
     static String getQueryString(String uriString){
-        if (Validator.isNullOrEmpty(uriString)){
+        if (isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
         // 判断url中是否含有?  XXX 有待严谨
@@ -314,7 +314,7 @@ public final class URIUtil{
      */
     // XXX 有待严谨
     private static boolean hasQueryString(String uriString){
-        return Validator.isNullOrEmpty(uriString) ? false : StringUtils.contains(uriString, URIComponents.QUESTIONMARK);
+        return isNullOrEmpty(uriString) ? false : StringUtils.contains(uriString, URIComponents.QUESTIONMARK);
     }
 
     // [start] encode/decode
@@ -411,11 +411,11 @@ public final class URIUtil{
      * @since 1.6.2
      */
     private static String encodeOrDecode(String value,String charsetType,boolean encodeOrDecode){
-        if (Validator.isNullOrEmpty(value)){
+        if (isNullOrEmpty(value)){
             return StringUtils.EMPTY;
         }
         try{
-            return Validator.isNullOrEmpty(charsetType) ? value
+            return isNullOrEmpty(charsetType) ? value
                             : (encodeOrDecode ? URLEncoder.encode(value, charsetType) : URLDecoder.decode(value, charsetType));
         }catch (UnsupportedEncodingException e){
             throw new URIParseException(e);

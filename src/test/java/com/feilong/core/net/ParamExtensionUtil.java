@@ -23,9 +23,10 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.MapUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 处理参数相关.
@@ -224,10 +225,10 @@ public final class ParamExtensionUtil{
      * @since 1.4.0
      */
     private static String removeParameterList(String uriString,String queryString,List<String> paramNameList,String charsetType){
-        if (Validator.isNullOrEmpty(uriString)){
+        if (isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(queryString) || Validator.isNullOrEmpty(paramNameList)){
+        if (isNullOrEmpty(queryString) || isNullOrEmpty(paramNameList)){
             return uriString;// 不带参数原样返回
         }
         Map<String, String[]> map = MapUtil
@@ -315,10 +316,10 @@ public final class ParamExtensionUtil{
      * @since 1.4.0
      */
     private static String retentionParamList(String uriString,String queryString,List<String> paramNameList,String charsetType){
-        if (Validator.isNullOrEmpty(uriString)){
+        if (isNullOrEmpty(uriString)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(queryString)){
+        if (isNullOrEmpty(queryString)){
             return uriString; //不带参数原样返回
         }
         Map<String, String[]> originalArrayValueMap = ParamUtil.toSafeArrayValueMap(queryString, null);

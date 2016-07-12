@@ -15,8 +15,6 @@
  */
 package com.feilong.core.util;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,10 +34,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * {@link java.util.ResourceBundle ResourceBundle} 工具类.
@@ -212,7 +212,7 @@ public final class ResourceBundleUtil{
         }
 
         String value = resourceBundle.getString(key);
-        if (Validator.isNullOrEmpty(value)){
+        if (isNullOrEmpty(value)){
             LOGGER.trace("resourceBundle has key:[{}],but value is null/empty", key);
         }
         return value;
@@ -308,7 +308,7 @@ public final class ResourceBundleUtil{
      */
     public static String getValueWithArguments(ResourceBundle resourceBundle,String key,Object...arguments){
         String value = getValue(resourceBundle, key);
-        return Validator.isNullOrEmpty(value) ? StringUtils.EMPTY : MessageFormatUtil.format(value, arguments);// 支持 arguments 为null,原样返回
+        return isNullOrEmpty(value) ? StringUtils.EMPTY : MessageFormatUtil.format(value, arguments);// 支持 arguments 为null,原样返回
     }
 
     // *****************************************************************************

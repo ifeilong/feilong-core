@@ -28,9 +28,10 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.HttpMethodTestType;
 import com.feilong.core.TimeInterval;
-import com.feilong.core.Validator;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class FieldUtilTest.
@@ -85,7 +86,7 @@ public class FieldUtilTemp{
      * @see java.lang.reflect.Field#getName()
      */
     public static String[] getFieldsNames(Field[] fields){
-        if (Validator.isNullOrEmpty(fields)){
+        if (isNullOrEmpty(fields)){
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
         String[] fieldNames = new String[fields.length];

@@ -51,7 +51,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.feilong.core.Validator;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
@@ -747,7 +746,7 @@ public final class ConvertUtil{
      * @since 1.4.0
      */
     public static String toString(ToStringConfig toStringConfig,Object...arrays){
-        if (Validator.isNullOrEmpty(arrays)){
+        if (isNullOrEmpty(arrays)){
             return StringUtils.EMPTY;
         }
         ToStringConfig useToStringConfig = ObjectUtils.defaultIfNull(toStringConfig, new ToStringConfig());
@@ -772,7 +771,7 @@ public final class ConvertUtil{
         StringBuilder sb = new StringBuilder();
         for (Object obj : operateArray){
             //如果是null或者empty,但是参数值是不拼接,那么跳过,继续循环
-            if (Validator.isNullOrEmpty(obj) && !isJoinNullOrEmpty){
+            if (isNullOrEmpty(obj) && !isJoinNullOrEmpty){
                 continue;
             }
 
@@ -1121,7 +1120,7 @@ public final class ConvertUtil{
         Validate.notNull(resourceBundle, "resourceBundle can't be null!");
 
         Enumeration<String> keysEnumeration = resourceBundle.getKeys();
-        if (Validator.isNullOrEmpty(keysEnumeration)){
+        if (isNullOrEmpty(keysEnumeration)){
             return Collections.emptyMap();
         }
 

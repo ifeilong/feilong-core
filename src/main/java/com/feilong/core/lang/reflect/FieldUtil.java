@@ -29,10 +29,11 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * focus on {@link Field} 反射工具类
@@ -154,7 +155,7 @@ public final class FieldUtil{
      */
     public static Map<String, Object> getAllFieldNameAndValueMap(Object obj,String...excludeFieldNames){
         List<Field> fieldList = getAllFieldList(obj.getClass(), excludeFieldNames);
-        if (Validator.isNullOrEmpty(fieldList)){
+        if (isNullOrEmpty(fieldList)){
             return Collections.emptyMap();
         }
         Map<String, Object> map = new TreeMap<String, Object>();
@@ -180,7 +181,7 @@ public final class FieldUtil{
     public static List<Field> getAllFieldList(final Class<?> klass,String...excludeFieldNames){
         //获得给定类的所有声明字段 {@link Field},包括所有的parents,包括 public/protect/private/inherited...
         List<Field> fieldList = FieldUtils.getAllFieldsList(klass);
-        if (Validator.isNullOrEmpty(fieldList)){
+        if (isNullOrEmpty(fieldList)){
             return Collections.emptyList();
         }
         //**********************************************************************************************

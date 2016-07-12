@@ -15,14 +15,6 @@
  */
 package com.feilong.core.date;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
-import static com.feilong.core.DatePattern.COMMON_TIME_WITHOUT_SECOND;
-import static com.feilong.core.date.DateUtil.toCalendar;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -35,8 +27,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
-import com.feilong.core.Validator;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.date.DateUtil.toCalendar;
+
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.DatePattern.COMMON_TIME_WITHOUT_SECOND;
 
 /**
  * The Class DateExtensionUtilTest.
@@ -174,7 +175,7 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
      *         否则循环date转成string,返回{@code List<String>}
      */
     public static List<String> toStringList(List<Date> dateList,String datePattern){
-        if (Validator.isNullOrEmpty(dateList)){
+        if (isNullOrEmpty(dateList)){
             return Collections.emptyList();
         }
 

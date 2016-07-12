@@ -15,9 +15,6 @@
  */
 package com.feilong.core.util;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,11 +31,14 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * {@link Map}工具类.
@@ -275,7 +275,7 @@ public final class MapUtil{
      * @since 1.8.0 change type to generics
      */
     public static <K, V> Map<K, V> toSingleValueMap(Map<K, V[]> arrayValueMap){
-        if (Validator.isNullOrEmpty(arrayValueMap)){
+        if (isNullOrEmpty(arrayValueMap)){
             return Collections.emptyMap();
         }
         Map<K, V> singleValueMap = newLinkedHashMap(arrayValueMap.size());//保证顺序和 参数 arrayValueMap 顺序相同
@@ -328,7 +328,7 @@ public final class MapUtil{
      * @since 1.6.2
      */
     public static <K> Map<K, String[]> toArrayValueMap(Map<K, String> singleValueMap){
-        if (Validator.isNullOrEmpty(singleValueMap)){
+        if (isNullOrEmpty(singleValueMap)){
             return Collections.emptyMap();
         }
         Map<K, String[]> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
@@ -387,7 +387,7 @@ public final class MapUtil{
     }
 
     /**
-     * 仅当 <code>null != map 并且 Validator.isNotNullOrEmpty(value)</code>才将key/value put到map中.
+     * 仅当 <code>null != map 并且 isNotNullOrEmpty(value)</code>才将key/value put到map中.
      * 
      * <p>
      * 如果 <code>map</code> 是null,什么都不做<br>
@@ -403,7 +403,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * 
-     * if (Validator.isNotNullOrEmpty(taoBaoOAuthLoginForCodeEntity.getState())){
+     * if (isNotNullOrEmpty(taoBaoOAuthLoginForCodeEntity.getState())){
      *     nameAndValueMap.put("state", taoBaoOAuthLoginForCodeEntity.getState());
      * }
      * 
@@ -430,7 +430,7 @@ public final class MapUtil{
      * @since 1.6.3
      */
     public static <K, V> void putIfValueNotNullOrEmpty(final Map<K, V> map,final K key,final V value){
-        if (null != map && Validator.isNotNullOrEmpty(value)){
+        if (null != map && isNotNullOrEmpty(value)){
             map.put(key, value);
         }
     }
@@ -514,6 +514,14 @@ public final class MapUtil{
     /**
      * 往 map 中put 指定 key value(多值形式).
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>map已经存在相同名称的key,那么value以list的形式累加.</li>
+     * <li>如果map中不存在指定名称的key,那么会构建一个ArrayList</li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -544,12 +552,33 @@ public final class MapUtil{
      * 
      * </blockquote>
      * 
-     * <h3>注意:</h3>
+     * <h3>对于下面的代码:</h3>
+     * 
      * <blockquote>
-     * <ol>
-     * <li>map已经存在相同名称的key,那么value以list的形式累加.</li>
-     * <li>如果map中不存在指定名称的key,那么会构建一个ArrayList</li>
-     * </ol>
+     * 
+     * <pre class="code">
+     * 
+     * private void putItemToMap(Map{@code <String, List<Item>>} map,String tagName,Item item){
+     *     List{@code <Item>} itemList = map.get(tagName);
+     * 
+     *     if (isNullOrEmpty(itemList)){
+     *         itemList = new ArrayList{@code <Item>}();
+     *     }
+     *     itemList.add(item);
+     *     map.put(tagName, itemList);
+     * }
+     * 
+     * </pre>
+     * 
+     * 可以重构成:
+     * 
+     * <pre class="code">
+     * 
+     * private void putItemToMap(Map{@code <String, List<Item>>} map,String tagName,Item item){
+     *     com.feilong.core.util.MapUtil.putMultiValue(map, tagName, item);
+     * }
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param <K>
@@ -628,10 +657,10 @@ public final class MapUtil{
      */
     @SafeVarargs
     public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K...keys){
-        if (Validator.isNullOrEmpty(map)){
+        if (isNullOrEmpty(map)){
             return Collections.emptyMap();
         }
-        if (Validator.isNullOrEmpty(keys)){
+        if (isNullOrEmpty(keys)){
             return map;
         }
         //保证元素的顺序 ,key的顺序 按照参数 <code>keys</code>的顺序
@@ -956,7 +985,7 @@ public final class MapUtil{
      * @since 1.8.0 remove class param
      */
     public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName){
-        if (Validator.isNullOrEmpty(map)){
+        if (isNullOrEmpty(map)){
             return Collections.emptyMap();
         }
 

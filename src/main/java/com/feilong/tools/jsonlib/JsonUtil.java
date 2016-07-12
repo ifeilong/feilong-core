@@ -15,10 +15,6 @@
  */
 package com.feilong.tools.jsonlib;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_TIME;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +33,6 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ClassUtil;
@@ -47,6 +42,13 @@ import com.feilong.tools.jsonlib.filters.ArrayContainsPropertyNamesPropertyFilte
 import com.feilong.tools.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import com.feilong.tools.jsonlib.util.PropertyStrategyWrapper;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_TIME;
 
 import net.sf.ezmorph.MorpherRegistry;
 import net.sf.ezmorph.object.DateMorpher;
@@ -367,7 +369,7 @@ public final class JsonUtil{
      * @since 1.6.3
      */
     private static JsonFormatConfig buildJsonFormatConfig(String[] excludes,String[] includes){
-        boolean noNeedBuild = Validator.isNullOrEmpty(excludes) && Validator.isNullOrEmpty(includes);
+        boolean noNeedBuild = isNullOrEmpty(excludes) && isNullOrEmpty(includes);
         return noNeedBuild ? null : new JsonFormatConfig(excludes, includes);
     }
 
@@ -423,17 +425,17 @@ public final class JsonUtil{
 
         //value处理器
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = jsonFormatConfig.getPropertyNameAndJsonValueProcessorMap();
-        if (Validator.isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
+        if (isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
             for (Map.Entry<String, JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
                 jsonConfig.registerJsonValueProcessor(entry.getKey(), entry.getValue());
             }
         }
         //排除
-        if (Validator.isNotNullOrEmpty(jsonFormatConfig.getExcludes())){
+        if (isNotNullOrEmpty(jsonFormatConfig.getExcludes())){
             jsonConfig.setExcludes(jsonFormatConfig.getExcludes());
         }
         //包含
-        if (Validator.isNotNullOrEmpty(jsonFormatConfig.getIncludes())){
+        if (isNotNullOrEmpty(jsonFormatConfig.getIncludes())){
             jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(jsonFormatConfig.getIncludes()));
         }
 
@@ -474,7 +476,7 @@ public final class JsonUtil{
      */
     private static JsonFormatConfig buildJsonFormatConfig(Object obj){
         List<Field> fieldsListWithAnnotation = FieldUtils.getFieldsListWithAnnotation(obj.getClass(), SensitiveWords.class);
-        if (Validator.isNotNullOrEmpty(fieldsListWithAnnotation)){
+        if (isNotNullOrEmpty(fieldsListWithAnnotation)){
             Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
             for (Field field : fieldsListWithAnnotation){
                 propertyNameAndJsonValueProcessorMap.put(field.getName(), SENSITIVE_WORDS_JSONVALUE_PROCESSOR);
@@ -1041,7 +1043,7 @@ public final class JsonUtil{
     public static <T> Map<String, T> toMap(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
         LOGGER.trace("input json:[{}],rootClass:[{}]", json, rootClass);
 
-        if (Validator.isNullOrEmpty(json)){
+        if (isNullOrEmpty(json)){
             return Collections.emptyMap();
         }
 
@@ -1150,7 +1152,7 @@ public final class JsonUtil{
         JsonConfig jsonConfig = getDefaultJsonConfig();
         jsonConfig.setRootClass(rootClass);
 
-        if (Validator.isNotNullOrEmpty(classMap)){
+        if (isNotNullOrEmpty(classMap)){
             jsonConfig.setClassMap(classMap);
         }
         return toBean(jsonObject, jsonConfig);

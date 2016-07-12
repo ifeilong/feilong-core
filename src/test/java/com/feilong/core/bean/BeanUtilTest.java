@@ -31,6 +31,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.DynaBean;
+import org.apache.commons.beanutils.LazyDynaBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.lang3.SerializationUtils;
@@ -399,6 +400,26 @@ public class BeanUtilTest{
         valueMap.put("lastName", "Flintstone");
 
         DynaBean dynaBean = BeanUtil.createDynaBean(typeMap, valueMap);
+        LOGGER.debug(JsonUtil.format(dynaBean));
+    }
+
+    @Test
+    public void testBasicDynaClass0(){
+        DynaBean dynaBean = new LazyDynaBean();
+        dynaBean.set("first", "1"); //simple
+        dynaBean.set("num", "second", "2"); //map
+        dynaBean.set("num", "third", "3"); //map
+        dynaBean.set("name", 0, "one"); //indexed
+        dynaBean.set("name", 1, "two"); //indexed
+        LOGGER.debug(JsonUtil.format(dynaBean));
+    }
+
+    @Test
+    public void testBasicDynaClass00(){
+        DynaBean dynaBean = new LazyDynaBean();
+        dynaBean.set("address", new HashMap());
+        dynaBean.set("firstName", "Fred");
+        dynaBean.set("lastName", "Flintstone");
         LOGGER.debug(JsonUtil.format(dynaBean));
     }
 

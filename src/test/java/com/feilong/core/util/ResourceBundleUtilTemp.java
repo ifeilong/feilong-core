@@ -25,9 +25,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class ResourceBundleUtilTest.
@@ -102,7 +103,7 @@ public class ResourceBundleUtilTemp{
      */
     public static Map<String, String> readPrefixAsMap(String baseName,String prefix,String delimiters,Locale locale){
         Map<String, String> propertyMap = ResourceBundleUtil.readAllPropertiesToMap(baseName, locale);
-        if (Validator.isNullOrEmpty(propertyMap)){
+        if (isNullOrEmpty(propertyMap)){
             return Collections.emptyMap();
         }
 

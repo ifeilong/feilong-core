@@ -31,9 +31,10 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.FeiLongVersion;
-import com.feilong.core.Validator;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class ClassUtilTest.
@@ -145,7 +146,7 @@ public class ClassUtilTest{
      * @return 如果 <code>klass</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      */
     public static Map<String, Object> getClassInfoMapForLog(Class<?> klass){
-        if (Validator.isNullOrEmpty(klass)){
+        if (isNullOrEmpty(klass)){
             return Collections.emptyMap();
         }
 

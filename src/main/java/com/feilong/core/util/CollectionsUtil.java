@@ -306,7 +306,7 @@ public final class CollectionsUtil{
      * <pre class="code">
      * 
      * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
-     *     if (Validator.isNullOrEmpty(lines)){
+     *     if (isNullOrEmpty(lines)){
      *         return Collections.emptySet();
      *     }
      *     Set{@code <String>} set = new HashSet{@code <String>}();
@@ -901,7 +901,7 @@ public final class CollectionsUtil{
                     String propertyName,
                     K returnCollection){
         Validate.notNull(returnCollection, "returnCollection can't be null!");
-        if (Validator.isNullOrEmpty(objectCollection)){//避免null point
+        if (isNullOrEmpty(objectCollection)){//避免null point
             return returnCollection;
         }
 
@@ -966,7 +966,7 @@ public final class CollectionsUtil{
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      */
     public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
-        if (Validator.isNullOrEmpty(objectCollection)){
+        if (isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
         Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
@@ -1593,7 +1593,7 @@ public final class CollectionsUtil{
      * @since 1.5.5
      */
     public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
-        if (Validator.isNullOrEmpty(objectCollection)){
+        if (isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
@@ -1667,7 +1667,7 @@ public final class CollectionsUtil{
      * @since 1.0.8
      */
     public static <T, O> Map<T, O> groupOne(Collection<O> objectCollection,String propertyName){
-        if (Validator.isNullOrEmpty(objectCollection)){
+        if (isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");

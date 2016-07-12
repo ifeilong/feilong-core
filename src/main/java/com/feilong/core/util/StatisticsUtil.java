@@ -25,11 +25,11 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
@@ -257,7 +257,7 @@ public final class StatisticsUtil{
      *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String[] propertyNames,Predicate<O> includePredicate){
-        if (Validator.isNullOrEmpty(objectCollection)){
+        if (isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
@@ -325,7 +325,7 @@ public final class StatisticsUtil{
      * <pre class="code">
      * 
      * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
-     *     return Validator.isNullOrEmpty(cartLineList) ? 0 : StatisticsUtil.sum(cartLineList, "quantity").intValue();
+     *     return isNullOrEmpty(cartLineList) ? 0 : StatisticsUtil.sum(cartLineList, "quantity").intValue();
      * }
      * </pre>
      * 
@@ -528,7 +528,7 @@ public final class StatisticsUtil{
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
-        if (Validator.isNullOrEmpty(objectCollection)){
+        if (isNullOrEmpty(objectCollection)){
             return Collections.emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
@@ -586,6 +586,6 @@ public final class StatisticsUtil{
     @SafeVarargs
     public static <K, T extends Number & Comparable<? super T>> T getMinValue(Map<K, T> map,K...keys){
         Map<K, T> subMap = MapUtil.getSubMap(map, keys);
-        return Validator.isNullOrEmpty(subMap) ? null : Collections.min(subMap.values()); //注意 Number本身 没有实现Comparable接口
+        return isNullOrEmpty(subMap) ? null : Collections.min(subMap.values()); //注意 Number本身 没有实现Comparable接口
     }
 }

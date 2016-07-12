@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,12 +28,14 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
  * The Class ArrayUtilTest.
@@ -262,7 +262,7 @@ public class ArrayUtilTemp{
      * @since 1.0.8
      */
     public static <O, T> Map<T, List<O>> group(O[] array,String propertyName){
-        if (Validator.isNullOrEmpty(array)){
+        if (isNullOrEmpty(array)){
             return Collections.emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");

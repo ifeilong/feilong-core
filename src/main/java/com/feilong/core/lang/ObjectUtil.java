@@ -49,10 +49,10 @@ public final class ObjectUtil{
     /**
      * 如果 <code>object</code> 是null或者empty,返回 默认值 <code>defaultValue</code>.
      * 
-     * <p>
-     * {@link ObjectUtils#defaultIfNull(Object, Object)} 只判断null的情况
-     * </p>
-     *
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre>
      * ObjectUtil.defaultIfNullOrEmpty(null, null)      = null
      * ObjectUtil.defaultIfNullOrEmpty(null, "")        = ""
@@ -61,13 +61,25 @@ public final class ObjectUtil{
      * ObjectUtil.defaultIfNullOrEmpty(Boolean.TRUE, *) = Boolean.TRUE
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果你只需要判断 null的场景,你可以使用 {@link ObjectUtils#defaultIfNull(Object, Object)}</li>
+     * <li>使用该方法,可以简化你的代码</li>
+     * <li>如果使用 import static 的特性,代码会更加简洁</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
      * <h3>对下面的代码重构:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
      * 
-     * if (Validator.isNotNullOrEmpty(defaultReturnResult.getReturnObject())){
+     * if (isNotNullOrEmpty(defaultReturnResult.getReturnObject())){
      *     return (String) defaultReturnResult.getReturnObject();
      * }else{
      *     return "redirect:/";
@@ -82,13 +94,47 @@ public final class ObjectUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * <h3>再比如:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * private void putItemToMap(Map<String, List<Item>> map,String categoryName,Item item){
+     *     List{@code <Item>} itemList = map.get(categoryName);
+     * 
+     *     if (isNullOrEmpty(itemList)){
+     *         itemList = new ArrayList{@code <Item>}();
+     *     }
+     *     itemList.add(item);
+     *     map.put(categoryName, itemList);
+     * }
+     * 
+     * </pre>
+     * 
+     * 可以重构成:
+     * 
+     * <pre class="code">
+     * 
+     * private void putItemToMap(Map<String, List<Item>> map,String categoryName,Item item){
+     *     List{@code <Item>} itemList = ObjectUtil.defaultIfNullOrEmpty(map.get(categoryName), new ArrayList{@code <Item>}());
+     *     itemList.add(item);
+     *     map.put(categoryName, itemList);
+     * }
+     * </pre>
+     * 
+     * 当然对于上面的case,你可以直接调用 {@link com.feilong.core.util.MapUtil#putMultiValue(java.util.Map, Object, Object)}
+     * 
+     * </blockquote>
+     * 
+     * 
      * @param <T>
      *            the type of the object
      * @param object
-     *            the {@code Object} to test, may be {@code null}
+     *            the {@code Object} to test, 可以是 {@code null} or empty
      * @param defaultValue
-     *            the default value to return, may be {@code null}
+     *            the default value to return, 可以是 {@code null} or empty
      * @return 如果 <code>object</code> 是null或者empty,返回 <code>defaultValue</code><br>
      *         否则返回 <code>object</code>
      * @see org.apache.commons.lang3.ObjectUtils#defaultIfNull(Object, Object)

@@ -33,7 +33,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 对 {@link org.apache.commons.beanutils.BeanUtils}的再次封装.
@@ -393,7 +393,7 @@ public final class BeanUtil{
         Validate.notNull(toObj, "toObj [destination bean] not specified!");
         Validate.notNull(fromObj, "fromObj [origin bean] not specified!");
 
-        if (Validator.isNullOrEmpty(includePropertyNames)){
+        if (isNullOrEmpty(includePropertyNames)){
             try{
                 BeanUtils.copyProperties(toObj, fromObj);
                 return;

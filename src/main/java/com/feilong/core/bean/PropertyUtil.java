@@ -26,8 +26,10 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.lang.ClassUtil;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
@@ -156,7 +158,7 @@ public final class PropertyUtil{
         Validate.notNull(toObj, "toObj [destination bean] not specified!");
         Validate.notNull(fromObj, "fromObj [origin bean] not specified!");
 
-        if (Validator.isNullOrEmpty(includePropertyNames)){
+        if (isNullOrEmpty(includePropertyNames)){
             try{
                 PropertyUtils.copyProperties(toObj, fromObj);
                 return;
@@ -297,7 +299,7 @@ public final class PropertyUtil{
      * @since 1.5.3
      */
     public static void setPropertyIfValueNotNullOrEmpty(Object bean,String propertyName,Object value){
-        if (Validator.isNotNullOrEmpty(value)){
+        if (isNotNullOrEmpty(value)){
             setProperty(bean, propertyName, value);
         }
     }
@@ -429,7 +431,7 @@ public final class PropertyUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T findValueOfType(Object obj,Class<T> toBeFindedClassType){
-        if (Validator.isNullOrEmpty(obj)){
+        if (isNullOrEmpty(obj)){
             return null;
         }
 

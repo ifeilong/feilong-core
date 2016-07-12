@@ -25,9 +25,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class StringUtilTest.
@@ -194,7 +195,7 @@ public class StringUtilTemp{
      * @see org.apache.commons.lang3.StringUtils#substringAfter(String, String)
      */
     public static String substring(final String text,String beginString,int shift){
-        if (Validator.isNullOrEmpty(text) || Validator.isNullOrEmpty(beginString)){
+        if (isNullOrEmpty(text) || isNullOrEmpty(beginString)){
             return StringUtils.EMPTY;
         }
 

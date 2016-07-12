@@ -31,10 +31,12 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 处理参数相关.
@@ -329,7 +331,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     static Map<String, String[]> toSafeArrayValueMap(String queryString,String charsetType){
-        if (Validator.isNullOrEmpty(queryString)){
+        if (isNullOrEmpty(queryString)){
             return Collections.emptyMap();
         }
 
@@ -578,7 +580,7 @@ public final class ParamUtil{
      * @since 1.5.5
      */
     public static String toQueryStringUseArrayValueMap(Map<String, String[]> arrayValueMap){
-        if (Validator.isNullOrEmpty(arrayValueMap)){
+        if (isNullOrEmpty(arrayValueMap)){
             return StringUtils.EMPTY;
         }
 
@@ -637,7 +639,7 @@ public final class ParamUtil{
     @SafeVarargs
     public static <K> String joinValuesOrderByIncludeKeys(Map<K, String> singleValueMap,K...includeKeys){
         Validate.notNull(singleValueMap, "singleValueMap can't be null!");
-        if (Validator.isNullOrEmpty(includeKeys)){
+        if (isNullOrEmpty(includeKeys)){
             return StringUtils.EMPTY;
         }
         StringBuilder sb = new StringBuilder();
@@ -675,7 +677,7 @@ public final class ParamUtil{
 
         Map<String, String[]> arrayParamValuesMap = MapUtil.newLinkedHashMap(safeArrayValueMap.size());
         //先提取queryString map
-        if (Validator.isNotNullOrEmpty(queryString)){
+        if (isNotNullOrEmpty(queryString)){
             arrayParamValuesMap.putAll(toSafeArrayValueMap(queryString, null));
         }
         arrayParamValuesMap.putAll(safeArrayValueMap);
@@ -698,14 +700,14 @@ public final class ParamUtil{
      * @return 如果 <code>arrayValueMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      */
     private static Map<String, String[]> toSafeArrayValueMap(Map<String, String[]> arrayValueMap,String charsetType){
-        if (Validator.isNullOrEmpty(arrayValueMap)){
+        if (isNullOrEmpty(arrayValueMap)){
             return Collections.emptyMap();
         }
         Map<String, String[]> safeArrayValueMap = MapUtil.newLinkedHashMap(arrayValueMap.size()); //使用 LinkedHashMap,保持map元素顺序
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             String key = entry.getKey();
             String[] paramValues = entry.getValue();
-            if (Validator.isNullOrEmpty(paramValues)){
+            if (isNullOrEmpty(paramValues)){
                 LOGGER.warn("the param key:[{}] value is null", key);
                 paramValues = ArrayUtils.EMPTY_STRING_ARRAY;//赋予 empty数组,为了下面的转换
             }
@@ -725,7 +727,7 @@ public final class ParamUtil{
      * @since 1.6.2
      */
     private static String[] toSafeValueArray(String[] paramValues,String charsetType){
-        if (Validator.isNullOrEmpty(charsetType)){
+        if (isNullOrEmpty(charsetType)){
             return paramValues;
         }
         List<String> paramValueList = new ArrayList<String>();
@@ -797,10 +799,10 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     private static String decodeAndEncode(String value,String charsetType){
-        if (Validator.isNullOrEmpty(value)){
+        if (isNullOrEmpty(value)){
             return StringUtils.EMPTY;
         }
-        return Validator.isNullOrEmpty(charsetType) ? value : URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
+        return isNullOrEmpty(charsetType) ? value : URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
     }
 
     /**
@@ -819,10 +821,10 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     static String combineUrl(String beforePathWithoutQueryString,Map<String, String[]> arrayValueMap,String charsetType){
-        if (Validator.isNullOrEmpty(beforePathWithoutQueryString)){
+        if (isNullOrEmpty(beforePathWithoutQueryString)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(arrayValueMap)){//没有参数 直接return
+        if (isNullOrEmpty(arrayValueMap)){//没有参数 直接return
             return beforePathWithoutQueryString;
         }
 

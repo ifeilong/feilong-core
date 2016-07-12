@@ -20,7 +20,7 @@ import java.util.Enumeration;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 
-import com.feilong.core.Validator;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * {@link Enumeration}工具类.
@@ -76,6 +76,6 @@ public final class EnumerationUtil{
      * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)
      */
     public static <O> boolean contains(Enumeration<O> enumeration,O value){
-        return Validator.isNullOrEmpty(enumeration) ? false : IteratorUtils.contains(new EnumerationIterator<O>(enumeration), value);
+        return isNullOrEmpty(enumeration) ? false : IteratorUtils.contains(new EnumerationIterator<O>(enumeration), value);
     }
 }
