@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.lang.Enum} 工具类.
@@ -53,6 +54,14 @@ public final class EnumUtil{
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 如果遍历所有枚举值,找不到枚举值的属性<code>propertyName</code>的值是 <code>specifiedValue</code>,那么返回null
+     * </p>
+     * </blockquote>
      *
      * @param <E>
      *            the element type
@@ -64,9 +73,13 @@ public final class EnumUtil{
      *            字段名称,比如 <code>HttpMethodType</code> 的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
-     * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @return the enum by property value ignore case
+     * @throws NullPointerException
+     *             如果 <code>enumClass</code> 是null,或者 <code>propertyName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
+     * @throws BeanUtilException
+     *             如果枚举值没有相关 <code>propertyName</code> 属性,比如 <code>HttpMethodType</code> 有 <b>"method"</b> 属性,但是没有 <b>"method2222"</b> 属性
      * @see #getEnumByPropertyValue(Class, String, Object, boolean)
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValueIgnoreCase(Class<E> enumClass,String propertyName,T specifiedValue){
@@ -83,6 +96,14 @@ public final class EnumUtil{
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 如果遍历所有枚举值,找不到枚举值的属性<code>propertyName</code>的值是 <code>specifiedValue</code>,那么返回null
+     * </p>
+     * </blockquote>
      *
      * @param <E>
      *            the element type
@@ -94,9 +115,15 @@ public final class EnumUtil{
      *            字段名称,比如 <code>HttpMethodType</code> 的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
-     * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @return the enum by property value
+     * @throws NullPointerException
+     *             如果 <code>enumClass</code> 是null,或者 <code>propertyName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
+     * @throws BeanUtilException
+     *             如果枚举值没有相关 <code>propertyName</code> 属性,比如 <code>HttpMethodType</code> 有 <b>"method"</b> 属性,但是没有 <b>"method2222"</b> 属性
+     * 
+     * 
      * @since 1.0.8
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T specifiedValue){
@@ -107,12 +134,20 @@ public final class EnumUtil{
      * 通过<code>propertyName</code>的 <code>specifiedValue</code> 获得枚举.
      * 
      * <p>
-     * 适用于这种{@link com.feilong.net.HttpMethodType HttpMethodType} 带自定义属性的枚举类型,调用方式:
+     * 适用于 <code>HttpMethodType</code> 这种带自定义属性的枚举类型,调用方式:
      * </p>
      * 
      * <pre class="code">
      * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
      * </pre>
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 如果遍历所有枚举值,找不到枚举值的属性<code>propertyName</code>的值是 <code>specifiedValue</code>,那么返回null
+     * </p>
+     * </blockquote>
      *
      * @param <E>
      *            the element type
@@ -126,9 +161,13 @@ public final class EnumUtil{
      *            属性值 比如post
      * @param ignoreCase
      *            是否忽视大小写
-     * @return 如果 <code>enumClass</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @return the enum by property value
+     * @throws NullPointerException
+     *             如果 <code>enumClass</code> 是null,或者 <code>propertyName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
+     * @throws BeanUtilException
+     *             如果枚举值没有相关 <code>propertyName</code> 属性,比如 <code>HttpMethodType</code> 有 <b>"method"</b> 属性,但是没有 <b>"method2222"</b> 属性
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @since 1.0.8
      */
@@ -140,22 +179,32 @@ public final class EnumUtil{
         Validate.notNull(enumClass, "enumClass can't be null!");
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
+        //*************************************************************************
+
         // An enum is a kind of class
         // An annotation is a kind of interface
+
         // 如果Class 对象不表示枚举类型,则返回枚举类的元素或 null.
         E[] enumConstants = enumClass.getEnumConstants();
 
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants, 0, 0));
         }
+
+        //*************************************************************************
         for (E e : enumConstants){
             Object propertyValue = PropertyUtil.getProperty(e, propertyName);
             if (isEquals(propertyValue, specifiedValue, ignoreCase)){
                 return e;
             }
         }
-        String messagePattern = "can not found the enum constants,enumClass:[{}],propertyName:[{}],value:[{}],ignoreCase:[{}]";
-        throw new BeanUtilException(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase);
+
+        //*************************************************************************
+        if (LOGGER.isInfoEnabled()){
+            String messagePattern = "[{}],propertyName:[{}],value:[{}],ignoreCase:[{}],constants not found";
+            LOGGER.info(Slf4jUtil.format(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
+        }
+        return null;
     }
 
     /**

@@ -15,8 +15,6 @@
  */
 package com.feilong.core.bean;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
-
 //Exception又分为两类:一种是CheckedException,一种是UncheckedException.
 //
 //这两种Exception的区别主要是CheckedException需要用try...catch...显示的捕获,
@@ -41,18 +39,6 @@ public final class BeanUtilException extends RuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
-
-    /**
-     * Instantiates a new bean util exception.
-     * 
-     * @param messagePattern
-     *            the message pattern
-     * @param args
-     *            the args
-     */
-    public BeanUtilException(String messagePattern, Object...args){
-        super(Slf4jUtil.format(messagePattern, args));
-    }
 
     /**
      * Instantiates a new bean util exception.

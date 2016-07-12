@@ -54,10 +54,7 @@ public class EnumUtilTest{
 
     }
 
-    /**
-     * Test get http method type1.
-     */
-    @Test(expected = BeanUtilException.class)
+    @Test
     public void testGetHttpMethodType1(){
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "post111"));
     }
@@ -65,7 +62,7 @@ public class EnumUtilTest{
     /**
      * Test get http method type2.
      */
-    @Test(expected = BeanUtilException.class)
+    @Test
     public void testGetHttpMethodType2(){
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", ""));
     }
@@ -73,7 +70,7 @@ public class EnumUtilTest{
     /**
      * Test get http method type3.
      */
-    @Test(expected = BeanUtilException.class)
+    @Test
     public void testGetHttpMethodType3(){
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", null));
     }
