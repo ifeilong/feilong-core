@@ -292,32 +292,35 @@ public final class SortUtil{
      * 返回:
      * 
      * <pre class="code">
-    [{
-            "id": 2,
-            "age": 2
-        },
-                {
-            "id": 1,
-            "age": 8
-        },
-                {
-            "id": 12,
-            "age": 18
-        },
-                {
-            "id": 2,
-            "age": 30
-        },
-                {
-            "id": 2,
-            "age": 36
-        }]
+     *     [{
+     *             "id": 2,
+     *             "age": 2
+     *         },
+     *                 {
+     *             "id": 1,
+     *             "age": 8
+     *         },
+     *                 {
+     *             "id": 12,
+     *             "age": 18
+     *         },
+     *                 {
+     *             "id": 2,
+     *             "age": 30
+     *         },
+     *                 {
+     *             "id": 2,
+     *             "age": 36
+     *         }]
      * 
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
+     * @param <O>
+     *            the generic type
      * @param list
+     *            the list
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
@@ -414,6 +417,48 @@ public final class SortUtil{
 
     /**
      * 对 集合 <code>list</code>,属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code> 进行排序.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User zhangfei = new User("张飞", 23);
+     * User guanyu = new User("关羽", 30);
+     * User liubei = new User("刘备", 25);
+     * List{@code <User>} list = toList(zhangfei, guanyu, liubei);
+     * 
+     * List{@code <User>} select = CollectionsUtil.select(list, "name", "刘备", "关羽");
+     * Collections.sort(select, new PropertyComparator{@code <User>}("name", new FixedOrderComparator{@code <>}("刘备", "关羽")));
+     * LOGGER.debug(JsonUtil.formatWithIncludes(select, "name", "age"));
+     * 
+     * </pre>
+     * 
+     * 此时你可以直接调用:
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} select2 = CollectionsUtil.select(list, "name", "刘备", "关羽");
+     * LOGGER.debug(JsonUtil.formatWithIncludes(SortUtil.sortByFixedOrder(select2, "name", "刘备", "关羽"), "name", "age"));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    [{
+                "age": 25,
+                "name": "刘备"
+            },
+                    {
+                "age": 30,
+                "name": "关羽"
+            }
+        ]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type

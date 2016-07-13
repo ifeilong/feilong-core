@@ -15,8 +15,6 @@
  */
 package com.feilong.core.util;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -55,6 +53,9 @@ import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionUtilTest.
@@ -345,11 +346,12 @@ public class CollectionsUtilTest{
     @Test
     public void testSelectArray(){
         User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 24);
+        User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        assertThat(CollectionsUtil.select(list, "name", "刘备", "关羽"), allOf(hasItem(liubei), hasItem(guanyu), not(hasItem(zhangfei))));
+        List<User> select = CollectionsUtil.select(list, "name", "刘备", "关羽");
+        assertThat(select, allOf(hasItem(liubei), hasItem(guanyu), not(hasItem(zhangfei))));
     }
 
     /**

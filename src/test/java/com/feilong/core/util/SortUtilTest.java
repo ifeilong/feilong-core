@@ -22,11 +22,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.comparators.FixedOrderComparator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -39,6 +41,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sort;
+import static com.feilong.core.util.SortUtil.sortByFixedOrder;
 import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 import static com.feilong.core.util.SortUtil.sortByKeyDesc;
 import static com.feilong.core.util.SortUtil.sortByValueAsc;
@@ -88,6 +91,22 @@ public class SortUtilTest{
     @Test
     public final void testSortListOfTStringListOfV(){
         assertEquals(emptyList(), sort((List) null, "name", "age"));
+    }
+
+    @Test
+    public void testSelectArray(){
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 30);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+
+        String[] names = { "刘备", "关羽" };
+        List<User> select = CollectionsUtil.select(list, "name", names);
+        Collections.sort(select, new PropertyComparator<User>("name", new FixedOrderComparator<>(names)));
+        LOGGER.debug(JsonUtil.formatWithIncludes(select, "name", "age"));
+
+        List<User> select2 = CollectionsUtil.select(list, "name", names);
+        LOGGER.debug(JsonUtil.formatWithIncludes(sortByFixedOrder(select2, "name", names), "name", "age"));
     }
 
     /**
