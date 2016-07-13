@@ -101,7 +101,7 @@ public final class StatisticsUtil{
      * User user2 = new User(3L);
      * user2.setAge(30);
      * 
-     * List{@code <User>} list = ConvertUtil.toList(user1, user2);
+     * List{@code <User>} list = toList(user1, user2);
      * Map{@code <String, BigDecimal>} map = StatisticsUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
@@ -220,7 +220,7 @@ public final class StatisticsUtil{
      * user3.setName("张飞");
      * user3.setAge(100);
      * 
-     * List{@code <User>} list = ConvertUtil.toList(user1, user2, user3);
+     * List{@code <User>} list = toList(user1, user2, user3);
      * Map{@code <String, BigDecimal>} map = StatisticsUtil.sum(list, ConvertUtil.toArray("id", "age"), new Predicate{@code <User>}(){
      * 
      *     {@code @Override}

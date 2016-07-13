@@ -467,7 +467,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * ConvertUtil.toIntegers("1,2,3")                              = [1,2,3]
      * ConvertUtil.toIntegers(new String[] { "1", "2", "3" })       = [1,2,3]
-     * ConvertUtil.toIntegers(ConvertUtil.toList("1", "2", "3"))    = [1,2,3]
+     * ConvertUtil.toIntegers(toList("1", "2", "3"))    = [1,2,3]
      * </pre>
      * 
      * </blockquote>
@@ -501,9 +501,9 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * ConvertUtil.toLongs("1,2,3")                             = [1,2,3]
-     * ConvertUtil.toLongs(new String[] { "1", "2", "3" })      = [1,2,3]
-     * ConvertUtil.toLongs(ConvertUtil.toList("1", "2", "3"))   = [1,2,3]
+     * toLongs("1,2,3")                             = [1,2,3]
+     * toLongs(new String[] { "1", "2", "3" })      = [1,2,3]
+     * toLongs(toList("1", "2", "3"))   = [1,2,3]
      * </pre>
      * 
      * </blockquote>
@@ -532,7 +532,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * 
      * protected long[] getOrderIdLongs(String orderIds){
-     *     return ConvertUtil.toLongs(orderIds);
+     *     return toLongs(orderIds);
      * }
      * </pre>
      * 
@@ -818,7 +818,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * 
      * Map{@code <String, String>} map = ConvertUtil.toMap(
-     *                 ConvertUtil.toList(
+     *                 toList(
      *                                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
      *                                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
      *                                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
@@ -1183,7 +1183,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * Set{@code <String>} set = new HashSet{@code <String>}();
      * Collections.addAll(set, "a", "a", "b", "b");
-     * LOGGER.debug("{}", ConvertUtil.toList(set));
+     * LOGGER.debug("{}", toList(set));
      * </pre>
      * 
      * 返回:
@@ -1235,7 +1235,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * List{@code <String>} list = ConvertUtil.toList("feilong1", "feilong2", "feilong2", "feilong3");
+     * List{@code <String>} list = toList("feilong1", "feilong2", "feilong2", "feilong3");
      * </pre>
      * 
      * <p>

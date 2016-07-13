@@ -194,9 +194,9 @@ public class ConvertUtilTest{
     public void testToLongs(){
         assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), toLongs("1,2,3"));
         assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), toLongs(new String[] { "1", "2", "3" }));
-        LOGGER.debug(JsonUtil.format(ConvertUtil.toLongs(new String[] { "1", null, "2", "3" }), 0, 0));
+        LOGGER.debug(JsonUtil.format(toLongs(new String[] { "1", null, "2", "3" }), 0, 0));
 
-        assertSame(null, ConvertUtil.toLongs(null));
+        assertSame(null, toLongs(null));
     }
 
     /**
@@ -204,7 +204,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToLongs1(){
-        assertArrayEquals(new Long[] { 1L, 2L, 8L }, toLongs(ConvertUtil.toList("1", "2", "8")));
+        assertArrayEquals(new Long[] { 1L, 2L, 8L }, toLongs(toList("1", "2", "8")));
     }
 
     /**
@@ -501,11 +501,11 @@ public class ConvertUtilTest{
         Collections.addAll(list, "a", "b");
         Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);
 
-        List<String> list2 = ConvertUtil.toList(enumeration);
+        List<String> list2 = toList(enumeration);
         LOGGER.debug(JsonUtil.format(list2, 0, 0));
 
         enumeration = null;
-        assertEquals(emptyList(), ConvertUtil.toList(enumeration));
+        assertEquals(emptyList(), toList(enumeration));
     }
 
     /**
@@ -586,7 +586,7 @@ public class ConvertUtilTest{
     public void testToList2(){
         Set<String> set = new HashSet<String>();
         Collections.addAll(set, "a", "a", "b", "b");
-        assertThat(ConvertUtil.toList(set), hasItems("a", "b", "b", "b"));
+        assertThat(toList(set), hasItems("a", "b", "b", "b"));
     }
 
     /**
@@ -594,7 +594,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToList3(){
-        LOGGER.debug("{}", toList(ConvertUtil.toList("a", "a", "b", "b")));
+        LOGGER.debug("{}", toList(toList("a", "a", "b", "b")));
     }
 
     /**

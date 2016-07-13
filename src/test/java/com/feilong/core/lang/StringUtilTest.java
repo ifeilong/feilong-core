@@ -172,8 +172,7 @@ public class StringUtilTest{
      */
     @Test
     public void testStringUtilTest(){
-
-        String format = "|%1$-50s|%2$-10s|%3$-20s|";
+        String format = "|%1$-20s|%2$-10s|%3$-10s|";
 
         LOGGER.debug(StringUtil.format(format, "FirstName", "Init.", "LastName"));
         LOGGER.debug(StringUtil.format(format, "Real", "", "Gagnon"));

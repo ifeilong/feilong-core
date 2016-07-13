@@ -28,8 +28,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ObjectUtilTest.
@@ -142,7 +143,7 @@ public class ObjectUtilTemp{
         try{
             // 如果我们幸运的话,它是一个对象数组,我们可以遍历并with no copying
             Object[] objArrays = (Object[]) arrays;
-            list = (List<T>) ConvertUtil.toList(objArrays);
+            list = (List<T>) toList(objArrays);
         }catch (ClassCastException e){
             LOGGER.debug("arrays can not cast to Object[],maybe primitive type,values is:{},{}", arrays, e.getMessage());
             // Rats -- 它是一个基本类型数组

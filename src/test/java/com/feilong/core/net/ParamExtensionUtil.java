@@ -27,6 +27,7 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.MapUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * 处理参数相关.
@@ -127,7 +128,7 @@ public final class ParamExtensionUtil{
      * @see #removeParameterList(String, List, String)
      */
     public static String removeParameter(String uriString,String paramName,String charsetType){
-        return removeParameterList(uriString, ConvertUtil.toList(paramName), charsetType);
+        return removeParameterList(uriString, toList(paramName), charsetType);
     }
 
     /**
@@ -145,7 +146,7 @@ public final class ParamExtensionUtil{
      * @see #removeParameterList(URI, List, String)
      */
     public static String removeParameter(URI uri,String paramName,String charsetType){
-        return removeParameterList(uri, ConvertUtil.toList(paramName), charsetType);
+        return removeParameterList(uri, toList(paramName), charsetType);
     }
 
     /**

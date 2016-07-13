@@ -28,13 +28,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
@@ -266,6 +266,6 @@ public class ArrayUtilTemp{
             return Collections.emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-        return CollectionsUtil.group(ConvertUtil.toList(array), propertyName);
+        return CollectionsUtil.group(toList(array), propertyName);
     }
 }

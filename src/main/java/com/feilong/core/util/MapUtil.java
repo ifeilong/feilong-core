@@ -39,6 +39,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * {@link Map}工具类.
@@ -1262,7 +1263,7 @@ public final class MapUtil{
         Validate.notNull(map, "map can't be null!");
         Validate.notNull(mapEntryComparator, "mapEntryComparator can't be null!");
 
-        List<Map.Entry<K, V>> mapEntryList = ConvertUtil.toList(map.entrySet());
+        List<Map.Entry<K, V>> mapEntryList = toList(map.entrySet());
         Collections.sort(mapEntryList, mapEntryComparator);
         return ConvertUtil.toMap(mapEntryList);
     }
