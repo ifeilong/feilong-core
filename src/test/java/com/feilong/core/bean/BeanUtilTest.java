@@ -310,15 +310,15 @@ public class BeanUtilTest{
     @Test
     public void cloneBean1(){
         SalesOrder newSalesOrder = salesOrder;
-        newSalesOrder.setPrice(ConvertUtil.toBigDecimal(599));
-        assertEquals(ConvertUtil.toBigDecimal(599), salesOrder.getPrice());
+        newSalesOrder.setPrice(toBigDecimal(599));
+        assertEquals(toBigDecimal(599), salesOrder.getPrice());
     }
 
     @Test
     public void cloneBean2(){
         OrderLine orderLine = new OrderLine();
         orderLine.setCount(8);
-        orderLine.setSalePrice(ConvertUtil.toBigDecimal(599));
+        orderLine.setSalePrice(toBigDecimal(599));
 
         List<OrderLine> list = toList(orderLine);
 
@@ -344,13 +344,13 @@ public class BeanUtilTest{
 
         //******************************************************************
         for (OrderLine perOrderLine : list){
-            perOrderLine.setSalePrice(ConvertUtil.toBigDecimal(200));
+            perOrderLine.setSalePrice(toBigDecimal(200));
         }
         //******************************************************************
         List<OrderLine> jsonList = JsonUtil.toList(format, OrderLine.class);
 
         assertEquals(toBigDecimal(200), list1.get(0).getSalePrice());
-        //assertEquals(ConvertUtil.toBigDecimal(599), cloneList.get(0).getSalePrice());
+        //assertEquals(toBigDecimal(599), cloneList.get(0).getSalePrice());
         assertEquals(toBigDecimal(599), serializelist.get(0).getSalePrice());
         assertEquals(toBigDecimal(599), jsonList.get(0).getSalePrice());
         assertEquals(toBigDecimal(599), copyList.get(0).getSalePrice());

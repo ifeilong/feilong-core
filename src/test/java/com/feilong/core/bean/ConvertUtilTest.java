@@ -15,18 +15,6 @@
  */
 package com.feilong.core.bean;
 
-import static com.feilong.core.bean.ConvertUtil.convert;
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toBoolean;
-import static com.feilong.core.bean.ConvertUtil.toInteger;
-import static com.feilong.core.bean.ConvertUtil.toIntegers;
-import static com.feilong.core.bean.ConvertUtil.toIterator;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toLong;
-import static com.feilong.core.bean.ConvertUtil.toLongs;
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.bean.ConvertUtil.toStrings;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -77,6 +65,20 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.bean.ConvertUtil.convert;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toBoolean;
+import static com.feilong.core.bean.ConvertUtil.toInteger;
+import static com.feilong.core.bean.ConvertUtil.toIntegers;
+import static com.feilong.core.bean.ConvertUtil.toIterator;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toLocale;
+import static com.feilong.core.bean.ConvertUtil.toLong;
+import static com.feilong.core.bean.ConvertUtil.toLongs;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.bean.ConvertUtil.toStrings;
 
 /**
  * The Class ConvertUtilTest.
@@ -683,8 +685,8 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToLocale(){
-        assertEquals(null, ConvertUtil.toLocale(null));
-        assertEquals(Locale.CHINA, ConvertUtil.toLocale("zh_CN"));
+        assertEquals(null, toLocale(null));
+        assertEquals(Locale.CHINA, toLocale("zh_CN"));
     }
 
     @Test

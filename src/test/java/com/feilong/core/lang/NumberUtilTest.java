@@ -25,7 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.NumberPattern;
-import com.feilong.core.bean.ConvertUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 
 /**
  * The Class NumberUtilTest.
@@ -298,7 +299,7 @@ public class NumberUtilTest{
     @Test
     public void testToString2(){
         double value = -88.6;
-        LOGGER.debug("" + ConvertUtil.toBigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP));
+        LOGGER.debug("" + toBigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP));
         LOGGER.debug(NumberUtil.toString(value, NumberPattern.TWO_DECIMAL_POINTS));
 
         value = -88.067;
@@ -307,11 +308,11 @@ public class NumberUtilTest{
         LOGGER.debug("******************************");
 
         value = 88.6;
-        LOGGER.debug("" + ConvertUtil.toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
+        LOGGER.debug("" + toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
         LOGGER.debug(NumberUtil.toString(value, NumberPattern.NO_SCALE));
 
         value = -88.6;
-        LOGGER.debug("" + ConvertUtil.toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
+        LOGGER.debug("" + toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
         LOGGER.debug(NumberUtil.toString(value, NumberPattern.NO_SCALE));
     }
 
@@ -358,9 +359,9 @@ public class NumberUtilTest{
      */
     @Test
     public void testGetMultiplyValue(){
-        assertEquals(ConvertUtil.toBigDecimal("7.31250"), NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
-        assertEquals(ConvertUtil.toBigDecimal("10.00000"), NumberUtil.getMultiplyValue(5, 2, 5));
-        assertEquals(ConvertUtil.toBigDecimal("10"), NumberUtil.getMultiplyValue(5, 2, 0));
+        assertEquals(toBigDecimal("7.31250"), NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5));
+        assertEquals(toBigDecimal("10.00000"), NumberUtil.getMultiplyValue(5, 2, 5));
+        assertEquals(toBigDecimal("10"), NumberUtil.getMultiplyValue(5, 2, 0));
     }
 
     /**
