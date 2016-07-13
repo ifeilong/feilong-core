@@ -15,12 +15,8 @@
  */
 package com.feilong.core.util;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasProperty;
@@ -41,9 +37,11 @@ import java.util.TreeMap;
 import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
 
-import com.feilong.core.util.comparator.PropertyComparator;
-import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 import com.feilong.test.User;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class MapUtilTest.
@@ -255,79 +253,4 @@ public class MapUtilTest{
         assertThat(subMapExcludeKeys, allOf(hasEntry("b", 3001), hasEntry("c", 3002), not(hasKey("a")), not(hasKey("g"))));
     }
 
-    /**
-     * Test sort by value asc.
-     */
-    @Test
-    public void testSortByValueASC(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("a", 123);
-        map.put("c", 345);
-        map.put("b", 8);
-        Map<String, Integer> sortByValueAsc = MapUtil.sortByValueAsc(map);
-        assertThat(sortByValueAsc.keySet(), contains("b", "a", "c"));
-    }
-
-    /**
-     * Test sort by value desc.
-     */
-    @Test
-    public void testSortByValueDesc(){
-        Map<String, Integer> map = new LinkedHashMap<String, Integer>();
-        map.put("a", 123);
-        map.put("c", 345);
-        map.put("b", 8);
-
-        Map<String, Integer> sortByValueDesc = MapUtil.sortByValueDesc(map);
-        assertThat(sortByValueDesc.keySet(), contains("c", "a", "b"));
-    }
-
-    /**
-     * Test sort by key asc.
-     */
-    @Test
-    public void testSortByKeyAsc(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
-
-        map.put("a", 123);
-        map.put("c", 345);
-        map.put("b", 8);
-
-        Map<String, Integer> sortByKeyAsc = MapUtil.sortByKeyAsc(map);
-        assertThat(sortByKeyAsc.keySet(), contains("a", "b", "c"));
-    }
-
-    /**
-     * Test sort.
-     */
-    @Test
-    public void testSort(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
-
-        map.put("a8", 8);
-        map.put("a13", 123);
-        map.put("a2", 345);
-
-        Map<String, Integer> sortByKeyAsc = MapUtil.sortByKeyAsc(map);
-        assertThat(sortByKeyAsc.keySet(), contains("a13", "a2", "a8"));
-
-        Map<String, Integer> sort = MapUtil
-                        .sort(map, new PropertyComparator<Map.Entry<String, Integer>>("key", new RegexGroupNumberComparator("a(\\d*)")));
-        assertThat(sort.keySet(), contains("a2", "a8", "a13"));
-    }
-
-    /**
-     * Test sort by key desc.
-     */
-    @Test
-    public void testSortByKeyDesc(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
-
-        map.put("a", 123);
-        map.put("c", 345);
-        map.put("b", 8);
-
-        Map<String, Integer> sortByKeyDesc = MapUtil.sortByKeyDesc(map);
-        assertThat(sortByKeyDesc.keySet(), contains("c", "b", "a"));
-    }
 }

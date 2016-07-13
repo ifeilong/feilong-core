@@ -34,9 +34,12 @@ import com.feilong.core.URIComponents;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
+import com.feilong.core.util.SortUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 
 /**
  * 处理参数相关.
@@ -97,7 +100,7 @@ public final class ParamUtil{
      * @see #addParameterSingleValueMap(String, Map, String)
      */
     public static String addParameter(String uriString,String paramName,Object parameValue,String charsetType){
-        return addParameterSingleValueMap(uriString, ConvertUtil.toMap(paramName, "" + parameValue), charsetType);
+        return addParameterSingleValueMap(uriString, toMap(paramName, "" + parameValue), charsetType);
     }
 
     /**
@@ -423,7 +426,7 @@ public final class ParamUtil{
      * 
      * <blockquote>
      * <p>
-     * 首先将<code>singleValueMap</code> 使用 {@link MapUtil#sortByKeyAsc(Map) } 进行排序,<br>
+     * 首先将<code>singleValueMap</code> 使用 {@link SortUtil#sortByKeyAsc(Map)} 进行排序,<br>
      * 然后将map的key和value 使用= 符号 连接,<br>
      * 不同的entry之间再使用{@code &} 符号进行连接,最终格式类似于 url 的queryString,
      * </p>
@@ -458,7 +461,7 @@ public final class ParamUtil{
      * <blockquote>
      * <p>
      * 如果 <code>singleValueMap</code> 中,如果有key是<code>null</code>,那么会抛出 {@link NullPointerException},这是因为 在使用
-     * {@link MapUtil#sortByKeyAsc(Map) } 进行排序, {@link TreeMap} 不允许有null 的key;<br>
+     * {@link SortUtil#sortByKeyAsc(Map)} 进行排序, {@link TreeMap} 不允许有null 的key;<br>
      * 
      * 如果有value是 <code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接
      * </p>
@@ -496,7 +499,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
-        return null == singleValueMap ? StringUtils.EMPTY : toQueryStringUseSingleValueMap(MapUtil.sortByKeyAsc(singleValueMap));
+        return null == singleValueMap ? StringUtils.EMPTY : toQueryStringUseSingleValueMap(sortByKeyAsc(singleValueMap));
     }
 
     /**

@@ -31,6 +31,7 @@ import com.feilong.core.lang.NumberUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 
 /**
  * 专门用来统计数据的.
@@ -137,7 +138,7 @@ public final class StatisticsUtil{
         int size = objectCollection.size();
         Map<String, BigDecimal> map = MapUtil.newLinkedHashMap(size);
         for (Map.Entry<String, BigDecimal> entry : sumMap.entrySet()){
-            map.put(entry.getKey(), NumberUtil.getDivideValue(ConvertUtil.toBigDecimal(entry.getValue()), size, scale));
+            map.put(entry.getKey(), NumberUtil.getDivideValue(toBigDecimal(entry.getValue()), size, scale));
         }
         return map;
     }

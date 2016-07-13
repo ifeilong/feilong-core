@@ -17,29 +17,23 @@ package com.feilong.core.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * {@link Map}工具类.
@@ -1006,266 +1000,6 @@ public final class MapUtil{
             }
         }
         return returnMap;
-    }
-
-    //*******************************排序****************************************************
-    /**
-     * 按照key asc顺序排序.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, Comparable>} map = new HashMap{@code <String, Comparable>}();
-     * 
-     * map.put("a", 123);
-     * map.put("c", 345);
-     * map.put("b", 8);
-     * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "a": 123,
-     * "b": 8,
-     * "c": 345
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>注意:</h3>
-     * <blockquote>
-     * <p>
-     * 由于排序使用的是 {@link java.util.TreeMap#TreeMap(Map)},而TreeMap是不允许 key是null, 如果传入的参数 <code>map</code>中,如果有key是null,那么将会抛出
-     * {@link NullPointerException}
-     * </p>
-     * </blockquote>
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the map
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     *         否则直接构造 {@link TreeMap}返回
-     * @see java.util.TreeMap#TreeMap(Map)
-     * @since 1.2.0
-     */
-    public static <K, V> Map<K, V> sortByKeyAsc(Map<K, V> map){
-        Validate.notNull(map, "map can't be null!");
-        return new TreeMap<K, V>(map);
-    }
-
-    /**
-     * 按照key desc 倒序排序.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, Comparable>} map = new HashMap{@code <String, Comparable>}();
-     * 
-     * map.put("a", 123);
-     * map.put("c", 345);
-     * map.put("b", 8);
-     * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyDesc(map)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "c": 345,
-     * "b": 8,
-     * "a": 123
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the map
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see ReverseComparator#ReverseComparator(Comparator)
-     * @see PropertyComparator#PropertyComparator(String)
-     * @see #sort(Map, Comparator)
-     * @since 1.2.0
-     */
-    public static <K, V> Map<K, V> sortByKeyDesc(Map<K, V> map){
-        Validate.notNull(map, "map can't be null!");
-        return sort(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("key")));
-    }
-
-    /**
-     * 根据value 来顺序排序(asc).
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, Comparable>} map = new HashMap{@code <String, Comparable>}();
-     * map.put("a", 123);
-     * map.put("c", 345);
-     * map.put("b", 8);
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByValueAsc(map)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "b": 8,
-     * "a": 123,
-     * "c": 345
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the map
-     * @return 如果<code>map</code>是null,抛出异常<br>
-     * @see #sort(Map, Comparator)
-     * @since 1.2.0
-     */
-    public static <K, V extends Comparable<V>> Map<K, V> sortByValueAsc(Map<K, V> map){
-        return sort(map, new PropertyComparator<Map.Entry<K, V>>("value"));
-    }
-
-    /**
-     * 根据value 来倒序排序(desc).
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, Comparable>} map = new LinkedHashMap{@code <String, Comparable>}();
-     * 
-     * map.put("a", 123);
-     * map.put("c", 345);
-     * map.put("b", 8);
-     * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByValueDesc(map)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "c": 345,
-     * "a": 123,
-     * "b": 8
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the map
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #sort(Map, Comparator)
-     * @since 1.2.0
-     */
-    public static <K, V extends Comparable<V>> Map<K, V> sortByValueDesc(Map<K, V> map){
-        Validate.notNull(map, "map can't be null!");
-        return sort(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("value")));
-    }
-
-    /**
-     * 使用 基于 {@link java.util.Map.Entry Entry} 的 <code>mapEntryComparator</code> 来对 <code>map</code>进行排序.
-     * 
-     * <p>
-     * 由于是对{@link java.util.Map.Entry Entry}排序的, 既可以按照key来排序,也可以按照value来排序哦
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * 比如有以下的map
-     * 
-     * <pre class="code">
-     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
-     * 
-     * map.put("a13", 123);
-     * map.put("a2", 345);
-     * map.put("a8", 8);
-     * </pre>
-     * 
-     * 如果我们只是使用 :
-     * 
-     * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "a13": 123,
-     * "a2": 345,
-     * "a8": 8
-     * }
-     * </pre>
-     * 
-     * 此时可以看出 a13是以字符串的形式进行比较的,我们可以使用以下的自定义的 Comparator,来达到排序的效果
-     * 
-     * <pre class="code">
-     * PropertyComparator{@code <Entry<String, Integer>>} propertyComparator = new PropertyComparator{@code <Map.Entry<String, Integer>>}(
-     *                 "key",
-     *                 new RegexGroupNumberComparator("a(\\d*)"));
-     * LOGGER.debug(JsonUtil.format(MapUtil.sort(map, propertyComparator)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "a2": 345,
-     * "a8": 8,
-     * "a13": 123
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <K>
-     *            the key type
-     * @param <V>
-     *            the value type
-     * @param map
-     *            the map
-     * @param mapEntryComparator
-     *            基于 {@link java.util.Map.Entry Entry} 的 {@link Comparator}
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>mapEntryComparator</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see java.util.Collections#sort(List, Comparator)
-     * @since 1.2.0
-     */
-    public static <K, V> Map<K, V> sort(Map<K, V> map,Comparator<Map.Entry<K, V>> mapEntryComparator){
-        Validate.notNull(map, "map can't be null!");
-        Validate.notNull(mapEntryComparator, "mapEntryComparator can't be null!");
-
-        List<Map.Entry<K, V>> mapEntryList = toList(map.entrySet());
-        Collections.sort(mapEntryList, mapEntryComparator);
-        return ConvertUtil.toMap(mapEntryList);
     }
 
     //*************************************************************************************************

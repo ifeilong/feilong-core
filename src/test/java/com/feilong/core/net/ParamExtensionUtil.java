@@ -28,6 +28,7 @@ import com.feilong.core.util.MapUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * 处理参数相关.
@@ -65,7 +66,7 @@ public final class ParamExtensionUtil{
      * @see #addParameterArrayValueMap(URI, Map, String)
      */
     public static String addParameter(URI uri,String paramName,Object parameValue,String charsetType){
-        return addParameterArrayValueMap(uri, ConvertUtil.toMap(paramName, new String[] { "" + parameValue }), charsetType);
+        return addParameterArrayValueMap(uri, toMap(paramName, new String[] { "" + parameValue }), charsetType);
     }
 
     /**
