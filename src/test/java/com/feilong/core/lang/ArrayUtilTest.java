@@ -15,7 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -27,6 +26,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class ArrayUtilTest.

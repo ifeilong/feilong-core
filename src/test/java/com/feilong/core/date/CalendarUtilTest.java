@@ -16,14 +16,15 @@
 
 package com.feilong.core.date;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
-import static com.feilong.core.DatePattern.yyyy;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
+
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.DatePattern.yyyy;
 
 /**
  * The Class CalendarUtilTest.

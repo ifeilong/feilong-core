@@ -15,7 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -27,6 +26,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
+
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ObjectUtilTest.

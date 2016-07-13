@@ -15,9 +15,6 @@
  */
 package com.feilong.tools;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +22,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
+
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
  * 

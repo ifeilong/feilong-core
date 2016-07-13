@@ -15,10 +15,6 @@
  */
 package com.feilong.tools.jsonlib;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
@@ -38,6 +34,11 @@ import com.feilong.test.User;
 import com.feilong.tools.AbstractJsonTest;
 import com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
 import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

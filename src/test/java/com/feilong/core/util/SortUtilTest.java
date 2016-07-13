@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -102,7 +101,7 @@ public class SortUtilTest{
 
         String[] names = { "刘备", "关羽" };
         List<User> select = CollectionsUtil.select(list, "name", names);
-        Collections.sort(select, new PropertyComparator<User>("name", new FixedOrderComparator<>(names)));
+        sort(select, new PropertyComparator<User>("name", new FixedOrderComparator<>(names)));
         LOGGER.debug(JsonUtil.formatWithIncludes(select, "name", "age"));
 
         List<User> select2 = CollectionsUtil.select(list, "name", names);

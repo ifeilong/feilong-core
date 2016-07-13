@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-
 import java.util.Date;
 
 import org.junit.Test;
@@ -24,6 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
  * The Class StringUtilTest.
