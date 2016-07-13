@@ -74,12 +74,58 @@ public final class SortUtil{
 
     //*****************************************************************************************
     /**
-     * 对 数组 <code>array</code> 进行排序.
+     * 对 数组 <code>arrays</code> 进行排序.
+     * 
+     * <h3>以前代码需要写成:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * public static String toSalesPropertiesIdsJson(Long...itemPropertiesIdLongs){
+     *     Arrays.sort(itemPropertiesIdLongs);
+     *     return JsonUtil.format(itemPropertiesIdLongs, 0, 0);
+     * }
+     * 
+     * </pre>
+     * 
+     * 现在可以重构成:
+     * 
+     * <pre class="code">
+     * 
+     * public static String toSalesPropertiesIdsJson(Long...itemPropertiesIdLongs){
+     *     return JsonUtil.format(sort(itemPropertiesIdLongs), 0, 0);
+     * }
+     * </pre>
+     * 
+     * <b>再如:</b>
+     * 
+     * <pre class="code">
+     * 
+     * <span style="color:green">// 得到默认分类,目前是最小的</span>
+     * private Long getDefaultCategoryId(Long[] categoriesIds){
+     *     Arrays.sort(categoriesIds);
+     *     return categoriesIds[0];
+     * }
+     * 
+     * </pre>
+     * 
+     * 可以重构成:
+     * 
+     * <pre class="code">
+     * 
+     * <span style="color:green">// 得到默认分类,目前是最小的</span>
+     * private Long getDefaultCategoryId(Long[] categoriesIds){
+     *     return sort(categoriesIds)[0];
+     * }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param arrays
-     *            the array
+     *            the arrays
      * @return 如果 <code>array</code> 是null,返回 empty array<br>
      * @see java.util.Arrays#sort(Object[])
      */
@@ -92,10 +138,53 @@ public final class SortUtil{
         return arrays;
     }
 
+    /**
+     * 对 数组 <code>arrays</code>使用 <code>comparator</code> 进行排序.
+     *
+     * @param <T>
+     *            the generic type
+     * @param arrays
+     *            the arrays
+     * @param comparator
+     *            the comparator
+     * @return 如果 <code>array</code> 是null,返回 empty array<br>
+     * @see java.util.Arrays#sort(Object[], Comparator)
+     */
+    public static <T> T[] sort(T[] arrays,Comparator<? super T> comparator){
+        if (null == arrays){
+            return toArray();
+        }
+        Arrays.sort(arrays, comparator);
+        return arrays;
+    }
+
     //*****************************************************************************************
 
     /**
      * 对 集合 <code>list</code> 进行排序.
+     * 
+     * <p>
+     * {@link java.util.Collections#sort(List) Collections.sort} 底层就是调用的是 {@link java.util.Arrays#sort(Object[]) Arrays.sort}
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <Integer>} list = toList(5, 10, 3, 2);
+     * LOGGER.debug(JsonUtil.format(sort(list), 0, 0));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [2,3,5,10]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -109,6 +198,27 @@ public final class SortUtil{
             return emptyList();
         }
         Collections.sort(list);
+        return list;
+    }
+
+    /**
+     * 对 集合 <code>list</code>,使用指定的 <code>comparator</code> 进行排序.
+     *
+     * @param <O>
+     *            the generic type
+     * @param list
+     *            the list
+     * @param comparator
+     *            the comparator
+     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
+     * @see java.util.Collections#sort(List, Comparator)
+     */
+    public static <O> List<O> sort(List<O> list,Comparator<? super O> comparator){
+        if (null == list){
+            return emptyList();
+        }
+
+        Collections.sort(list, comparator);
         return list;
     }
 
@@ -139,8 +249,7 @@ public final class SortUtil{
         Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
         Validate.noNullElements(propertyNames, "propertyName:%s has empty value", propertyNames);
 
-        Collections.sort(list, BeanComparatorUtil.chainedComparator(propertyNames));
-        return list;
+        return sort(list, BeanComparatorUtil.chainedComparator(propertyNames));
     }
 
     //*************************************************************************************************
@@ -172,9 +281,7 @@ public final class SortUtil{
             return emptyList();
         }
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-
-        Collections.sort(list, BeanComparatorUtil.propertyComparator(propertyName, propertyValues));
-        return list;
+        return sort(list, BeanComparatorUtil.propertyComparator(propertyName, propertyValues));
     }
 
     /**
@@ -203,9 +310,7 @@ public final class SortUtil{
             return emptyList();
         }
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-
-        Collections.sort(list, BeanComparatorUtil.propertyComparator(propertyName, propertyValues));
-        return list;
+        return sort(list, BeanComparatorUtil.propertyComparator(propertyName, propertyValues));
     }
 
     //*******************************排序****************************************************
@@ -222,7 +327,7 @@ public final class SortUtil{
      * map.put("c", 345);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
      * </pre>
      * 
      * 返回:
@@ -276,7 +381,7 @@ public final class SortUtil{
      * map.put("c", 345);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyDesc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyDesc(map)));
      * </pre>
      * 
      * 返回:
@@ -321,7 +426,7 @@ public final class SortUtil{
      * map.put("a", 123);
      * map.put("c", 345);
      * map.put("b", 8);
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByValueAsc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortByValueAsc(map)));
      * </pre>
      * 
      * 返回:
@@ -366,7 +471,7 @@ public final class SortUtil{
      * map.put("c", 345);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByValueDesc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortByValueDesc(map)));
      * </pre>
      * 
      * 返回:
@@ -421,7 +526,7 @@ public final class SortUtil{
      * 如果我们只是使用 :
      * 
      * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(MapUtil.sortByKeyAsc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
      * </pre>
      * 
      * 返回:
@@ -440,7 +545,7 @@ public final class SortUtil{
      * PropertyComparator{@code <Entry<String, Integer>>} propertyComparator = new PropertyComparator{@code <Map.Entry<String, Integer>>}(
      *                 "key",
      *                 new RegexGroupNumberComparator("a(\\d*)"));
-     * LOGGER.debug(JsonUtil.format(MapUtil.sort(map, propertyComparator)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sort(map, propertyComparator)));
      * </pre>
      * 
      * 返回:
@@ -475,8 +580,7 @@ public final class SortUtil{
         Validate.notNull(mapEntryComparator, "mapEntryComparator can't be null!");
 
         List<Map.Entry<K, V>> mapEntryList = toList(map.entrySet());
-        Collections.sort(mapEntryList, mapEntryComparator);
-        return toMap(mapEntryList);
+        return toMap(sort(mapEntryList, mapEntryComparator));
     }
 
 }

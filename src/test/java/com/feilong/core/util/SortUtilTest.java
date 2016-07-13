@@ -32,6 +32,7 @@ import org.junit.Test;
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sort;
 import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 import static com.feilong.core.util.SortUtil.sortByKeyDesc;
@@ -48,6 +49,12 @@ public class SortUtilTest{
     @Test
     public final void testSortTArray(){
         assertEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sort((Object[]) null));
+    }
+
+    @Test
+    public void testSortList(){
+        List<Integer> list = toList(5, 10, 3, 2);
+        assertThat(sort(list), contains(2, 3, 5, 10));
     }
 
     @Test

@@ -15,13 +15,13 @@
  */
 package com.feilong.core.lang;
 
-import java.util.Arrays;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.util.SortUtil.sort;
 
 /**
  * The Class SystemUtilTest.
@@ -50,9 +50,7 @@ public class SystemUtilTest{
     public void path(){
         String path = System.getenv("Path");
         String[] strings = path.split(";");
-        Arrays.sort(strings);
-
-        LOGGER.debug(JsonUtil.format(strings));
+        LOGGER.debug(JsonUtil.format(sort(strings)));
     }
 
     /**
