@@ -55,6 +55,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import static com.feilong.core.DatePattern.TO_STRING_STYLE;
@@ -319,7 +320,7 @@ public class BeanUtilTest{
         orderLine.setCount(8);
         orderLine.setSalePrice(ConvertUtil.toBigDecimal(599));
 
-        List<OrderLine> list = ConvertUtil.toList(orderLine);
+        List<OrderLine> list = toList(orderLine);
 
         //*******************************************************************
 

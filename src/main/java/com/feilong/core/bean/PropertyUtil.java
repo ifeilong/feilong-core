@@ -30,6 +30,7 @@ import com.feilong.core.lang.ClassUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
@@ -173,15 +174,70 @@ public final class PropertyUtil{
     }
 
     /**
-     * 返回一个<code>bean</code>中所有的<span style="color:green">可读属性</span>,并将属性名/属性值放入一个 {@link java.util.HashMap} 中.
+     * 返回一个 <code>bean</code>中指定属性 <code>propertyNames</code><span style="color:green">可读属性</span>,并将属性名/属性值放入一个
+     * {@link java.util.LinkedHashMap LinkedHashMap} 中.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User user = new User();
+     * user.setId(5L);
+     * user.setDate(new Date());
+     * 
+     * LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    {
+            "id": 5,
+            "name": "feilong",
+            "age": null,
+            "date": "2016-07-13 22:18:26"
+        }
+     * </pre>
+     * 
+     * <hr>
      * 
      * <p>
-     * 返回 the entire set of properties for which the specified bean provides a read method.
+     * 提取指定的属性:
      * </p>
      * 
-     * <p>
-     * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性
-     * </p>
+     * <pre class="code">
+     * 
+     * User user = new User();
+     * user.setId(5L);
+     * user.setDate(new Date());
+     * 
+     * LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user, "date", "id")));
+     * 
+     * </pre>
+     * 
+     * 返回的结果按照参数名称顺序:
+     * 
+     * <pre class="code">
+    {
+        "date": "2016-07-13 22:21:24",
+        "id": 5
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回 the entire set of properties for which the specified bean provides a read method.</li>
+     * <li>另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性</li>
+     * <li>如果 <code>propertyNames</code>是null或者 empty,那么获取所有属性的值</li>
+     * <li>map的key按照 <code>propertyNames</code> 的顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>原理:</h3>
      * 
@@ -195,18 +251,29 @@ public final class PropertyUtil{
      *
      * @param bean
      *            Bean whose properties are to be extracted
-     * @return 如果 <code>bean</code> 是null,抛出 {@link NullPointerException}<br>
+     * @param propertyNames
+     *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="../BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>propertyNames</code> 是null或者empty,返回 {@link PropertyUtils#describe(Object)}<br>
+     * @throws NullPointerException
+     *             如果 <code>bean</code> 是null
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
-     * @see BeanUtil#describe(Object)
+     * @since 1.8.0
      */
-    public static Map<String, Object> describe(Object bean){
+    public static Map<String, Object> describe(Object bean,String...propertyNames){
         Validate.notNull(bean, "bean can't be null!");
-        try{
-            return PropertyUtils.describe(bean);
-        }catch (Exception e){
-            throw new BeanUtilException(e);
+        if (isNullOrEmpty(propertyNames)){
+            try{
+                return PropertyUtils.describe(bean);
+            }catch (Exception e){
+                throw new BeanUtilException(e);
+            }
         }
+        Map<String, Object> map = newLinkedHashMap(propertyNames.length);
+        for (String propertyName : propertyNames){
+            map.put(propertyName, getProperty(bean, propertyName));
+        }
+        return map;
     }
 
     /**
@@ -377,8 +444,6 @@ public final class PropertyUtil{
     /**
      * 从指定的 <code>Object obj</code>中,查找指定类型的值.
      * 
-     * 
-     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
@@ -407,7 +472,7 @@ public final class PropertyUtil{
      * <ol>
      * <li>如果 <code>ClassUtil.isInstance(findValue, toBeFindedClassType)</code> 直接返回 findValue</li>
      * <li>自动过滤<code>isPrimitiveOrWrapper</code>,<code>CharSequence</code>,<code>Collection</code>,<code>Map</code>类型</li>
-     * <li>调用 {@link PropertyUtil#describe(Object)} 再递归查找</li>
+     * <li>调用 {@link PropertyUtil#describe(Object, String...)} 再递归查找</li>
      * </ol>
      * </blockquote>
      * 

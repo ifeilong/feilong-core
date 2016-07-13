@@ -15,8 +15,6 @@
  */
 package com.feilong.core.bean;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
@@ -38,6 +36,9 @@ import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.test.UserInfo;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class PropertyUtilTest.
@@ -115,13 +116,29 @@ public class PropertyUtilTest{
         user.setDate(now);
 
         assertThat(PropertyUtil.describe(user), allOf(hasEntry("id", (Object) 5L), hasEntry("date", (Object) now)));
-        //LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
+        assertThat(PropertyUtil.describe(user, "date", "id"), allOf(hasEntry("date", (Object) now), hasEntry("id", (Object) 5L)));
+        assertThat(PropertyUtil.describe(user, "date"), hasEntry("date", (Object) now));
+    }
 
-        List<User> list = ConvertUtil.toList(user);
-        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(new BigDecimal(5L))));
-        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe("123456")));
-        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(list)));
-        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(new HashMap())));
+    @Test(expected = NullPointerException.class)
+    public void testDescribe3(){
+        PropertyUtil.describe(null);
+    }
+
+    /**
+     * TestPropertyUtilTest.
+     */
+    @Test
+    public void testPropertyUtilTest(){
+        Date now = new Date();
+        User user = new User();
+        user.setId(5L);
+        user.setDate(now);
+        List<User> list = toList(user);
+        LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe(new BigDecimal(5L))));
+        LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe("123456")));
+        LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe(list)));
+        LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe(new HashMap())));
     }
 
     @Test
