@@ -21,6 +21,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.RegexPattern;
 
@@ -30,6 +32,9 @@ import com.feilong.core.RegexPattern;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class RegexUtilTest{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegexUtilTest.class);
 
     /**
      * Group.

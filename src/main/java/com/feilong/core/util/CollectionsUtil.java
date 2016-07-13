@@ -273,7 +273,7 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * 
-     * List{@code <String>} list = ConvertUtil.toList("xinge", "feilong1");
+     * List{@code <String>} list = toList("xinge", "feilong1");
      * CollectionsUtil.addAllIgnoreNull(list, null); = false
      * </pre>
      * 
@@ -1076,7 +1076,15 @@ public final class CollectionsUtil{
     //**************************select*****************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>O</code> 的 <code>propertyName</code>的值,判断是否 在<code>values</code>数组中;如果在,将该对象存入list中返回.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否 在<code>values</code>数组中;如果在,将该对象存入list中返回.
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValues</code> 无关
+     * </p>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -1129,7 +1137,15 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>O</code> 的<code>propertyName</code>的值,判断是否 在<code>values</code>集合中;如果在,将该对象存入list中返回.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否 在<code>values</code>集合中;如果在,将该对象存入list中返回.
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关
+     * </p>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -1252,7 +1268,7 @@ public final class CollectionsUtil{
     //***************************selectRejected*********************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>O</code> 的 <code>propertyName</code> 属性值都不在 <code>propertyValues</code> 时候的list.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code> 属性值都不在 <code>propertyValues</code> 时候的list.
      *
      * <h3>示例:</h3>
      * 
@@ -1305,7 +1321,8 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>O</code> 的 <code>propertyName</code>的值,判断是否 不在<code>values</code>集合中;如果不在,将该对象存入list中返回.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否 不在<code>values</code>
+     * 集合中;如果不在,将该对象存入list中返回.
      * 
      * <h3>示例:</h3>
      * 
