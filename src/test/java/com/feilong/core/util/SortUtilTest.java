@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,9 +29,13 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
+import com.feilong.test.User;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sort;
@@ -45,6 +50,9 @@ import static com.feilong.core.util.SortUtil.sortByValueDesc;
  * @since 1.8.0
  */
 public class SortUtilTest{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(SortUtilTest.class);
 
     @Test
     public final void testSortTArray(){
@@ -80,6 +88,73 @@ public class SortUtilTest{
     @Test
     public final void testSortListOfTStringListOfV(){
         assertEquals(emptyList(), sort((List) null, "name", "age"));
+    }
+
+    /**
+     * Test property comparator.
+     */
+    @Test
+    public void testPropertyComparator(){
+        List<User> list = new ArrayList<User>();
+        Long id = null;
+        list.add(new User(id));
+        list.add(new User(12L));
+        list.add(new User(2L));
+        list.add(new User(5L));
+        list.add(null);
+        list.add(new User(1L));
+        list.add(new User(id));
+        sort(list, new PropertyComparator<User>("id"));
+        LOGGER.debug(JsonUtil.format(list));
+    }
+
+    /**
+     * Test property comparator1.
+     */
+    @Test
+    public void testPropertyComparator1(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User(12L, 18));
+        list.add(new User(2L, 36));
+        list.add(new User(5L, 22));
+        list.add(new User(1L, 8));
+        sort(list, new PropertyComparator<User>("id"));
+        LOGGER.debug(JsonUtil.format(list));
+    }
+
+    @Test
+    public void testPropertyComparator2(){
+        List<User> list = new ArrayList<User>();
+        list.add(new User(12L, 18));
+        list.add(new User(2L, 36));
+        list.add(new User(5L, 22));
+        list.add(new User(1L, 8));
+        sort(list, "id");
+        LOGGER.debug(JsonUtil.format(list));
+    }
+
+    @Test
+    public void testPropertyComparator3(){
+        List<User> list = toList(//
+                        new User(12L, 18),
+                        new User(2L, 36),
+                        new User(2L, 2),
+                        new User(2L, 30),
+                        new User(1L, 8));
+        sort(list, "id", "age");
+        LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
+    }
+
+    @Test
+    public void testPropertyComparator4(){
+        List<User> list = toList(//
+                        new User(12L, 18),
+                        new User(2L, 36),
+                        new User(2L, 2),
+                        new User(2L, 30),
+                        new User(1L, 8));
+        sort(list, "age");
+        LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
     }
 
     /**

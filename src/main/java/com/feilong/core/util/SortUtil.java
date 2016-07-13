@@ -203,6 +203,51 @@ public final class SortUtil{
 
     /**
      * 对 集合 <code>list</code>,使用指定的 <code>comparator</code> 进行排序.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(12L, 18));
+     * list.add(new User(2L, 36));
+     * list.add(new User(5L, 22));
+     * list.add(new User(1L, 8));
+     * SortUtil.sort(list, new PropertyComparator{@code <User>}("id"));
+     * LOGGER.debug(JsonUtil.format(list));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [{
+            "id": 1,
+            "age": 8
+        },
+                {
+            "id": 2,
+            "age": 36
+        },
+                {
+            "id": 5,
+            "age": 22
+        },
+                {
+            "id": 12,
+            "age": 18
+        }]
+     * </pre>
+     * 
+     * 当然对于上述示例,你可以直接调用:
+     * 
+     * <pre class="code">
+     * SortUtil.sort(list, "id");
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -225,7 +270,119 @@ public final class SortUtil{
     //*****************************************************************************************
 
     /**
+     * 对 集合 <code>list</code>,指定属性 <code>propertyName</code> 进行排序.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = toList(//
+     *                 new User(12L, 18),
+     *                 new User(2L, 36),
+     *                 new User(2L, 2),
+     *                 new User(2L, 30),
+     *                 new User(1L, 8));
+     * SortUtil.sort(list, "age");
+     * LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    [{
+            "id": 2,
+            "age": 2
+        },
+                {
+            "id": 1,
+            "age": 8
+        },
+                {
+            "id": 12,
+            "age": 18
+        },
+                {
+            "id": 2,
+            "age": 30
+        },
+                {
+            "id": 2,
+            "age": 36
+        }]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param list
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
+     * @throws NullPointerException
+     *             如果 <code>propertyNames</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyNames</code> 是empty
+     * @see BeanComparatorUtil#propertyComparator(String)
+     * @see #sort(List, Comparator)
+     */
+    public static <O> List<O> sort(List<O> list,String propertyName){
+        if (null == list){
+            return emptyList();
+        }
+        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
+        return sort(list, BeanComparatorUtil.propertyComparator(propertyName));
+    }
+
+    /**
      * 对 集合 <code>list</code>,指定属性(组合)进行排序.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(12L, 18));
+     * list.add(new User(2L, 36));
+     * list.add(new User(2L, 2));
+     * list.add(new User(2L, 30));
+     * list.add(new User(1L, 8));
+     * SortUtil.sort(list, "id", "age");
+     * LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+    [{
+                "id": 1,
+                "age": 8
+            },
+                    {
+                "id": 2,
+                "age": 2
+            },
+                    {
+                "id": 2,
+                "age": 30
+            },
+                    {
+                "id": 2,
+                "age": 36
+            },
+                    {
+                "id": 12,
+                "age": 18
+            }]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -241,6 +398,7 @@ public final class SortUtil{
      *             如果 <code>propertyNames</code> 是empty ,或者有 null元素
      * @see BeanComparatorUtil#chainedComparator(String...)
      * @see org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Comparator...)
+     * @see #sort(List, Comparator)
      */
     public static <O> List<O> sort(List<O> list,String...propertyNames){
         if (null == list){
@@ -274,6 +432,7 @@ public final class SortUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @see BeanComparatorUtil#propertyComparator(String, Object...)
+     * @see #sort(List, Comparator)
      */
     @SafeVarargs
     public static <O, V> List<O> sortByFixedOrder(List<O> list,String propertyName,V...propertyValues){
@@ -304,6 +463,7 @@ public final class SortUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @see BeanComparatorUtil#propertyComparator(String, List)
+     * @see #sort(List, Comparator)
      */
     public static <O, V> List<O> sortByFixedOrder(List<O> list,String propertyName,List<V> propertyValues){
         if (null == list){

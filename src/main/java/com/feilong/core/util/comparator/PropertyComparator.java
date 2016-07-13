@@ -20,6 +20,7 @@ import java.util.Comparator;
 
 import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,6 +130,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *            T对象中的属性名称,该属性对应的value 必须实现 {@link Comparable}接口.
      */
     public PropertyComparator(String propertyName){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         LOGGER.trace("propertyName:[{}]", propertyName);
     }
@@ -144,6 +146,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      */
     @SuppressWarnings("rawtypes")
     public PropertyComparator(String propertyName, Comparator comparator){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         this.comparator = comparator;
         LOGGER.trace("propertyName:[{}]", propertyName);
@@ -226,6 +229,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      */
     @SuppressWarnings("rawtypes")
     public PropertyComparator(String propertyName, Class<? extends Comparable> propertyValueConvertToClass){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         this.propertyValueConvertToClass = propertyValueConvertToClass;
         LOGGER.trace("propertyName:[{}]", propertyName);
@@ -251,6 +255,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      */
     @SuppressWarnings("rawtypes")
     public PropertyComparator(String propertyName, Class<? extends Comparable> propertyValueConvertToClass, Comparator comparator){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         this.propertyValueConvertToClass = propertyValueConvertToClass;
         this.comparator = comparator;

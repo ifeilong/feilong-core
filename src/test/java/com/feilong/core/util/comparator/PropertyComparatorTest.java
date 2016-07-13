@@ -15,9 +15,6 @@
  */
 package com.feilong.core.util.comparator;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -38,38 +35,6 @@ public class PropertyComparatorTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyComparatorTest.class);
-
-    /**
-     * Test property comparator.
-     */
-    @Test
-    public void testPropertyComparator(){
-        List<User> list = new ArrayList<User>();
-        Long id = null;
-        list.add(new User(id));
-        list.add(new User(12L));
-        list.add(new User(2L));
-        list.add(new User(5L));
-        list.add(null);
-        list.add(new User(1L));
-        list.add(new User(id));
-        Collections.sort(list, new PropertyComparator<User>("id"));
-        LOGGER.debug(JsonUtil.format(list));
-    }
-
-    /**
-     * Test property comparator1.
-     */
-    @Test
-    public void testPropertyComparator1(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User(12L, 18));
-        list.add(new User(2L, 36));
-        list.add(new User(5L, 22));
-        list.add(new User(1L, 8));
-        Collections.sort(list, new PropertyComparator<User>("id"));
-        LOGGER.debug(JsonUtil.format(list));
-    }
 
     /**
      * Test property comparator2.

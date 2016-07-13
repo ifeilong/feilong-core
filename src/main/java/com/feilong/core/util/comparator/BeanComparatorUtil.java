@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.comparators.FixedOrderComparator;
 import org.apache.commons.lang3.Validate;
@@ -62,8 +63,9 @@ public final class BeanComparatorUtil{
         for (String propertyName : propertyNames){
             Validate.notBlank(propertyName, "propertyName can't be blank!");
 
-            Comparator<T> comparator = propertyComparator(propertyName);
-            comparators.add(comparator);
+            //注意此处不要使用 propertyComparator(propertyName)  PropertyComparator
+            //因为,上述 PropertyComparator 如果属性值相同 会比较 hashcode值(为了map), 也就是说通常而言会比较出顺序 
+            comparators.add(new BeanComparator<T>(propertyName));
         }
         return ComparatorUtils.chainedComparator(comparators);
     }
