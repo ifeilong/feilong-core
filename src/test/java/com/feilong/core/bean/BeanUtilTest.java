@@ -272,26 +272,6 @@ public class BeanUtilTest{
     }
 
     /**
-     * Describe.
-     */
-    @Test
-    public void describe(){
-        User user = new User();
-        user.setId(5L);
-        user.setDate(new Date());
-
-        LOGGER.debug(JsonUtil.format(BeanUtil.describe(user)));
-    }
-
-    /**
-     * Describe1.
-     */
-    @Test
-    public void describe1(){
-        LOGGER.debug(JsonUtil.format(BeanUtil.describe(null)));
-    }
-
-    /**
      * Populate.
      */
     @Test

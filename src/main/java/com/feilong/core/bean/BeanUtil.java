@@ -15,7 +15,6 @@
  */
 package com.feilong.core.bean;
 
-import java.beans.PropertyDescriptor;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BasicDynaClass;
@@ -530,67 +529,6 @@ public final class BeanUtil{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
-        }
-    }
-
-    // [end]
-
-    // [start] describe 把Bean的属性值放入到一个Map里面
-
-    /**
-     * 返回一个<code>bean</code>中所有的可读属性(read method),并将属性名/属性值放入一个Map中.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * User user = new User();
-     * user.setId(5L);
-     * user.setDate(new Date());
-     * 
-     * LOGGER.info(JsonUtil.format(BeanUtil.describe(user)));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * {
-     * "id": "5",
-     * "date": "Mon Apr 11 00:37:56 CST 2016"
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <p>
-     * 另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性.
-     * </p>
-     * 
-     * <p>
-     * <span style="color:red">缺陷:<br>
-     * 自己手工注册的ConvertUtils.register(dateTimeConverter, java.util.Date.class)不会生效</span><br>
-     * 
-     * 在赋值的时候,虽然调用了 {@link BeanUtilsBean#getNestedProperty(Object, String)}, 虽然也调用了 ConvertUtilsBean来转换 <br>
-     * 但是 {@link ConvertUtilsBean#ConvertUtilsBean()} 默认的构造函数 是使用标准的转换
-     * </p>
-     *
-     * @param bean
-     *            Bean whose properties are to be extracted
-     * @return 如果 <code>bean</code> 是null,返回 empty HashMap,see {@link BeanUtilsBean#describe(Object)}
-     * @throws BeanUtilException
-     *             有任何异常,转成{@link BeanUtilException}返回
-     * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
-     * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
-     * @see PropertyUtil#describe(Object)
-     * @see PropertyDescriptor
-     * @see #populate(Object, Map)
-     */
-    public static Map<String, String> describe(Object bean){
-        try{
-            //Return the entire set of properties for which the specified bean provides a read method.
-            return BeanUtils.describe(bean);
-        }catch (Exception e){
             throw new BeanUtilException(e);
         }
     }
