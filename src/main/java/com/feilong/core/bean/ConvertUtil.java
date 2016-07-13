@@ -1306,9 +1306,11 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * String[] array = ConvertUtil.toArray("1", "2");                  =   ["1", "2"]
-     * String[] emptyArray = ConvertUtil.{@code <String>}toArray();     =   []
-     * String[] nullArray = ConvertUtil.toArray(null)                   =   null
+     * String[] array = ConvertUtil.toArray("1", "2");                  =   ["1", "2"];
+     * String[] emptyArray = ConvertUtil.{@code <String>}toArray();     =   [] ; //= new String[] {};
+     * Integer[] emptyArray = ConvertUtil.{@code <Integer>}toArray();   =   [] ; //= new Integer[] {};
+     * String[] nullArray = ConvertUtil.toArray(null)                   =   null;
+     * 
      * </pre>
      * 
      * </blockquote>

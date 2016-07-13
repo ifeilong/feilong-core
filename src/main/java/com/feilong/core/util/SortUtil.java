@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 
 import java.util.Arrays;
@@ -30,6 +31,7 @@ import org.apache.commons.lang3.Validate;
 import com.feilong.core.util.comparator.BeanComparatorUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
@@ -76,17 +78,18 @@ public final class SortUtil{
      *
      * @param <T>
      *            the generic type
-     * @param array
+     * @param arrays
      *            the array
-     * @return 如果 <code>array</code> 是null,返回 null<br>
+     * @return 如果 <code>array</code> 是null,返回 empty array<br>
      * @see java.util.Arrays#sort(Object[])
      */
-    public static <T> T[] sort(T[] array){
-        if (null == array){
-            return null;
+    @SafeVarargs
+    public static <T> T[] sort(T...arrays){
+        if (null == arrays){
+            return toArray();
         }
-        Arrays.sort(array);
-        return array;
+        Arrays.sort(arrays);
+        return arrays;
     }
 
     //*****************************************************************************************
@@ -98,12 +101,12 @@ public final class SortUtil{
      *            the generic type
      * @param list
      *            the list
-     * @return 如果 <code>list</code> 是null,返回 null<br>
+     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @see java.util.Collections#sort(List)
      */
     public static <T extends Comparable<? super T>> List<T> sort(List<T> list){
         if (null == list){
-            return null;
+            return emptyList();
         }
         Collections.sort(list);
         return list;
@@ -121,7 +124,7 @@ public final class SortUtil{
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>list</code> 是null,返回 null<br>
+     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @throws NullPointerException
      *             如果 <code>propertyNames</code> 是null
      * @throws IllegalArgumentException
@@ -131,7 +134,7 @@ public final class SortUtil{
      */
     public static <O> List<O> sort(List<O> list,String...propertyNames){
         if (null == list){
-            return null;
+            return emptyList();
         }
         Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
         Validate.noNullElements(propertyNames, "propertyName:%s has empty value", propertyNames);
@@ -156,7 +159,7 @@ public final class SortUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the property values
-     * @return 如果 <code>list</code> 是null,返回 null<br>
+     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @throws NullPointerException
      *             如果 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
@@ -166,7 +169,7 @@ public final class SortUtil{
     @SafeVarargs
     public static <O, V> List<O> sortByFixedOrder(List<O> list,String propertyName,V...propertyValues){
         if (null == list){
-            return null;
+            return emptyList();
         }
         Validate.notBlank(propertyName, "propertyName can't be blank!");
 
@@ -188,7 +191,7 @@ public final class SortUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the property values
-     * @return 如果 <code>list</code> 是null,返回 null<br>
+     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @throws NullPointerException
      *             如果 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
@@ -197,7 +200,7 @@ public final class SortUtil{
      */
     public static <O, V> List<O> sortByFixedOrder(List<O> list,String propertyName,List<V> propertyValues){
         if (null == list){
-            return null;
+            return emptyList();
         }
         Validate.notBlank(propertyName, "propertyName can't be blank!");
 

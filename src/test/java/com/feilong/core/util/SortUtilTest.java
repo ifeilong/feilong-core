@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -24,12 +26,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 
 import static com.feilong.core.util.SortUtil.sort;
+import static com.feilong.core.util.SortUtil.sortByKeyAsc;
+import static com.feilong.core.util.SortUtil.sortByKeyDesc;
+import static com.feilong.core.util.SortUtil.sortByValueAsc;
+import static com.feilong.core.util.SortUtil.sortByValueDesc;
 
 /**
  * 
@@ -40,32 +47,32 @@ public class SortUtilTest{
 
     @Test
     public final void testSortTArray(){
-        assertEquals(null, sort((Object[]) null));
+        assertEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sort((Object[]) null));
     }
 
     @Test
     public final void testSortListOfT(){
-        assertEquals(null, sort((List) null));
+        assertEquals(emptyList(), sort((List) null));
     }
 
     @Test
     public final void testSortListOfTString(){
-        assertEquals(null, sort((List) null, "name"));
+        assertEquals(emptyList(), sort((List) null, "name"));
     }
 
     @Test
     public final void testSortListOfTStringArray(){
-        assertEquals(null, sort((List) null, "name", "age"));
+        assertEquals(emptyList(), sort((List) null, "name", "age"));
     }
 
     @Test
     public final void testSortListOfTStringVArray(){
-        assertEquals(null, sort((List) null, "name", "age"));
+        assertEquals(emptyList(), sort((List) null, "name", "age"));
     }
 
     @Test
     public final void testSortListOfTStringListOfV(){
-        assertEquals(null, sort((List) null, "name", "age"));
+        assertEquals(emptyList(), sort((List) null, "name", "age"));
     }
 
     /**
@@ -77,8 +84,13 @@ public class SortUtilTest{
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);
-        Map<String, Integer> sortByValueAsc = SortUtil.sortByValueAsc(map);
+        Map<String, Integer> sortByValueAsc = sortByValueAsc(map);
         assertThat(sortByValueAsc.keySet(), contains("b", "a", "c"));
+    }
+
+    @Test
+    public void testSortByValueASC1(){
+        assertEquals(emptyMap(), sortByValueAsc(null));
     }
 
     /**
@@ -91,8 +103,12 @@ public class SortUtilTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        Map<String, Integer> sortByValueDesc = SortUtil.sortByValueDesc(map);
-        assertThat(sortByValueDesc.keySet(), contains("c", "a", "b"));
+        assertThat(sortByValueDesc(map).keySet(), contains("c", "a", "b"));
+    }
+
+    @Test
+    public void testSortByValueDesc1(){
+        assertEquals(emptyMap(), sortByValueDesc(null));
     }
 
     /**
@@ -106,8 +122,13 @@ public class SortUtilTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        Map<String, Integer> sortByKeyAsc = SortUtil.sortByKeyAsc(map);
+        Map<String, Integer> sortByKeyAsc = sortByKeyAsc(map);
         assertThat(sortByKeyAsc.keySet(), contains("a", "b", "c"));
+    }
+
+    @Test
+    public void testSortByKeyAsc1(){
+        assertEquals(emptyMap(), sortByKeyAsc(null));
     }
 
     /**
@@ -121,7 +142,7 @@ public class SortUtilTest{
         map.put("a13", 123);
         map.put("a2", 345);
 
-        Map<String, Integer> sortByKeyAsc = SortUtil.sortByKeyAsc(map);
+        Map<String, Integer> sortByKeyAsc = sortByKeyAsc(map);
         assertThat(sortByKeyAsc.keySet(), contains("a13", "a2", "a8"));
 
         Map<String, Integer> sort = sort(
@@ -141,7 +162,12 @@ public class SortUtilTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        Map<String, Integer> sortByKeyDesc = SortUtil.sortByKeyDesc(map);
+        Map<String, Integer> sortByKeyDesc = sortByKeyDesc(map);
         assertThat(sortByKeyDesc.keySet(), contains("c", "b", "a"));
+    }
+
+    @Test
+    public void testSortByKeyDesc1(){
+        assertEquals(emptyMap(), sortByKeyDesc(null));
     }
 }

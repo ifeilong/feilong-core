@@ -476,21 +476,13 @@ public class ConvertUtilTest{
         assertArrayEquals(new String[] { "xinge", "feilong" }, toArray("xinge", "feilong"));
     }
 
-    //    @Test
-    //    public void testToArray5(){
-    //        Object[] array = toArray("xinge", "feilong");
-    //        String[] strings = (String[]) array;
-    //
-    //        LOGGER.debug("the param strings:{}", JsonUtil.format(strings));
-    //
-    //    }
-
     /**
      * Test to array4.
      */
     @Test
     public void testToArray4(){
         assertArrayEquals(new String[] {}, ConvertUtil.<String> toArray());
+        assertArrayEquals(new Integer[] {}, ConvertUtil.<Integer> toArray());
         assertArrayEquals(null, ConvertUtil.<String> toArray(null));
     }
 
@@ -523,7 +515,7 @@ public class ConvertUtilTest{
      */
     @Test
     public void testToMap(){
-        Map<String, String> map = ConvertUtil.toMap(
+        Map<String, String> map = toMap(
 
                         Pair.of("张飞", "丈八蛇矛"),
                         Pair.of("关羽", "青龙偃月刀"),
