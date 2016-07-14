@@ -56,14 +56,12 @@ feilong-core jar 你可以在这里 https://github.com/venusdrogon/feilong-platf
 	</project>
 ```
 
-# 资料
+# 帮助:
 
-类目				| 地址 										
-:---- 			| :---------										
-Javadoc			| [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
-wiki			| [WiKi](https://github.com/venusdrogon/feilong-core/wiki) 
-Release notes	| [Release notes](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/) 
-Site			| [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/) 
+- [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
+- [Release notes](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/) 
+- [WiKi](https://github.com/venusdrogon/feilong-core/wiki) 
+- [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/) 
 
 
 # :memo: 说明
