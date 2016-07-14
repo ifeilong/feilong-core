@@ -1072,6 +1072,7 @@ public final class ConvertUtil{
      *            the value
      * @return 将 <code>key</code> 和 <code>value</code> 直接转成map
      * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @see java.util.Collections#singletonMap(Object, Object)
      * @since 1.7.1
      */
     public static <K, V> Map<K, V> toMap(K key,V value){
@@ -1288,6 +1289,7 @@ public final class ConvertUtil{
      * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则返回 {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
+     * @see java.util.Collections#singleton(Object)
      * @see java.util.Collections#addAll(Collection, Object...)
      * @see java.util.Collections#singletonList(Object)
      * @see "org.springframework.util.CollectionUtils#arrayToList(Object)"
