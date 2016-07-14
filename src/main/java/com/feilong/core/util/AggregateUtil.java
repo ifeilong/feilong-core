@@ -37,13 +37,19 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 /**
  * 专门用来统计数据的.
  * 
+ * <p>
+ * 类似于sql里面的 统计函数 <a href="http://www.sqlcourse2.com/agg_functions.html">(Aggregate functions)</a>
+ * </p>
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see "java.util.stream.Collectors"
  * @since 1.8.0
  */
-public final class StatisticsUtil{
+//Aggregate Functions
+public final class AggregateUtil{
 
     /** Don't let anyone instantiate this class. */
-    private StatisticsUtil(){
+    private AggregateUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");

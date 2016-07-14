@@ -52,9 +52,9 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
-public class StatisticsUtilTest{
+public class AggregateUtilTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StatisticsUtilTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AggregateUtilTest.class);
 
     /**
      * Test avg.
@@ -66,7 +66,7 @@ public class StatisticsUtilTest{
                         new User(5L),
                         new User(5L));
 
-        assertEquals(new BigDecimal("4.00"), StatisticsUtil.avg(list, "id", 2));
+        assertEquals(new BigDecimal("4.00"), AggregateUtil.avg(list, "id", 2));
     }
 
     /**
@@ -80,7 +80,7 @@ public class StatisticsUtilTest{
         User user2 = new User(3L);
         user2.setAge(30);
 
-        Map<String, BigDecimal> map = StatisticsUtil.avg(toList(user1, user2), ConvertUtil.toArray("id", "age"), 2);
+        Map<String, BigDecimal> map = AggregateUtil.avg(toList(user1, user2), ConvertUtil.toArray("id", "age"), 2);
         assertThat(map, allOf(hasEntry("id", toBigDecimal("2.50")), hasEntry("age", toBigDecimal("24.00"))));
     }
 
@@ -94,8 +94,8 @@ public class StatisticsUtilTest{
                         new User(5L),
                         new User(5L));
 
-        assertEquals(new BigDecimal(12L), StatisticsUtil.sum(list, "id"));
-        assertEquals(null, StatisticsUtil.sum(null, "id"));
+        assertEquals(new BigDecimal(12L), AggregateUtil.sum(list, "id"));
+        assertEquals(null, AggregateUtil.sum(null, "id"));
     }
 
     /**
@@ -109,7 +109,7 @@ public class StatisticsUtilTest{
                         new User(50L));
 
         BigDecimal expected = new BigDecimal(100L);
-        assertEquals(expected, StatisticsUtil.sum(list, "id", new Predicate<User>(){
+        assertEquals(expected, AggregateUtil.sum(list, "id", new Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
@@ -120,7 +120,7 @@ public class StatisticsUtilTest{
         //*****************************************************************
 
         Predicate<Long> predicate = new ComparatorPredicate<Long>(10L, ComparatorUtils.<Long> naturalComparator(), Criterion.LESS);
-        BigDecimal sum = StatisticsUtil.sum(list, "id", new BeanPredicate<User>("id", predicate));
+        BigDecimal sum = AggregateUtil.sum(list, "id", new BeanPredicate<User>("id", predicate));
         assertEquals(new BigDecimal(100L), sum);
     }
 
@@ -155,7 +155,7 @@ public class StatisticsUtilTest{
         User user2 = new User(3L);
         user2.setAge(30);
 
-        Map<String, BigDecimal> map = StatisticsUtil.sum(toList(user1, user2), "id", "age");
+        Map<String, BigDecimal> map = AggregateUtil.sum(toList(user1, user2), "id", "age");
         assertThat(map, allOf(hasEntry("id", toBigDecimal(5)), hasEntry("age", toBigDecimal(48))));
     }
 
@@ -183,7 +183,7 @@ public class StatisticsUtilTest{
         List<User> list = toList(liubei, guanyu, zhangfei, zhaoyun);
 
         Predicate<User> notPredicate = PredicateUtils.notPredicate(BeanPredicateUtil.equalPredicate("name", "张飞"));
-        Map<String, BigDecimal> map = StatisticsUtil.sum(list, toArray("id", "age"), notPredicate);
+        Map<String, BigDecimal> map = AggregateUtil.sum(list, toArray("id", "age"), notPredicate);
 
         assertThat(map, allOf(hasEntry("id", toBigDecimal(30)), hasEntry("age", toBigDecimal(200))));
     }
@@ -202,7 +202,7 @@ public class StatisticsUtilTest{
                         new User("赵云", 50));
 
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
-        Map<String, Integer> map = StatisticsUtil.groupCount(list, "name", comparatorPredicate);
+        Map<String, Integer> map = AggregateUtil.groupCount(list, "name", comparatorPredicate);
         assertThat(map, allOf(hasEntry("刘备", 1), hasEntry("赵云", 2)));
     }
 
@@ -217,7 +217,7 @@ public class StatisticsUtilTest{
                         new User("刘备"),
                         new User("刘备"));
 
-        Map<String, Integer> map = StatisticsUtil.groupCount(list, "name");
+        Map<String, Integer> map = AggregateUtil.groupCount(list, "name");
         assertThat(map, allOf(hasEntry("刘备", 2), hasEntry("张飞", 1), hasEntry("关羽", 1)));
     }
 
@@ -236,6 +236,6 @@ public class StatisticsUtilTest{
         map.put("f", 3005);
         map.put("g", -1005);
 
-        assertThat(StatisticsUtil.getMinValue(map, "a", "b", "d", "g", "m"), is(-1005));
+        assertThat(AggregateUtil.getMinValue(map, "a", "b", "d", "g", "m"), is(-1005));
     }
 }

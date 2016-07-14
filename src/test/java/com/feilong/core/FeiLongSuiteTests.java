@@ -44,7 +44,7 @@ import com.feilong.core.util.RandomUtilTest;
 import com.feilong.core.util.RegexUtilTest;
 import com.feilong.core.util.ResourceBundleUtilTest;
 import com.feilong.core.util.SortUtilTest;
-import com.feilong.core.util.StatisticsUtilTest;
+import com.feilong.core.util.AggregateUtilTest;
 import com.feilong.core.util.regexpattern.IpPatternTest;
 import com.feilong.core.util.regexpattern.MobilephonePatternTest;
 import com.feilong.core.util.regexpattern.TelephoneMustAreaCodePatternTest;
@@ -88,7 +88,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 MessageFormatUtilTest.class,
                 Slf4jUtilTest.class,
                 SortUtilTest.class,
-                StatisticsUtilTest.class,
+                AggregateUtilTest.class,
                 StringUtilTest.class,
                 StringReplaceParameterizedTest.class,
                 TimeIntervalTest.class,
