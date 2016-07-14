@@ -312,40 +312,6 @@ public final class ResourceBundleUtil{
     }
 
     // *****************************************************************************
-    /**
-     * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 转成字符串数组.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * 在 <code>messages/feilong-core-test.properties</code> 配置文件中, 有以下配置
-     * 
-     * <pre class="code">
-     * config_test_array=5,8,7,6
-     * </pre>
-     * 
-     * <pre class="code">
-     * ResourceBundleUtil.getArray("messages.feilong-core-test", "config_test_array", ",");    =   ["5","8","7","6"]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @param key
-     *            the key
-     * @param delimiters
-     *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     * @see #getArray(ResourceBundle, String, String, Class)
-     */
-    public static String[] getArray(String baseName,String key,String delimiters){
-        return getArray(baseName, key, delimiters, String.class);
-    }
 
     /**
      * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 转成字符串数组.
@@ -377,54 +343,6 @@ public final class ResourceBundleUtil{
      */
     public static String[] getArray(ResourceBundle resourceBundle,String key,String delimiters){
         return getArray(resourceBundle, key, delimiters, String.class);
-    }
-
-    /**
-     * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 以及指定的转换类型 <code>typeClass</code> 转成数组.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * 在 <code>messages/feilong-core-test.properties</code> 配置文件中, 有以下配置
-     * 
-     * <pre class="code">
-     * config_test_array=5,8,7,6
-     * </pre>
-     * 
-     * <p>
-     * 解析:
-     * </p>
-     * 
-     * <pre class="code">
-     * ResourceBundleUtil.getArray("messages.feilong-core-test", "config_test_array", ",", String.class);    =   ["5","8","7","6"]
-     * ResourceBundleUtil.getArray("messages.feilong-core-test", "config_test_array", ",", Integer.class);   =   [5,8,7,6]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param <T>
-     *            the generic type
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @param key
-     *            the key
-     * @param delimiters
-     *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
-     * @param typeClass
-     *            指明返回类型,<br>
-     *            如果是String.class,则返回的是String []数组<br>
-     *            如果是Integer.class,则返回的是Integer [] 数组
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     * @see #getResourceBundle(String)
-     * @see #getArray(ResourceBundle, String, String, Class)
-     */
-    public static <T> T[] getArray(String baseName,String key,String delimiters,Class<T> typeClass){
-        ResourceBundle resourceBundle = getResourceBundle(baseName);
-        return getArray(resourceBundle, key, delimiters, typeClass);
     }
 
     /**
