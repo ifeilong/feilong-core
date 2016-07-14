@@ -21,8 +21,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.RegexPattern;
 
@@ -32,9 +30,6 @@ import com.feilong.core.RegexPattern;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class RegexUtilTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RegexUtilTest.class);
 
     /**
      * Group.
@@ -69,7 +64,6 @@ public class RegexUtilTest{
         assertThat(
                         RegexUtil.group(regexPattern, input),
                         allOf(hasEntry(0, "@Table(name = \"T_MEM_MEMBER_ADDRESS\")"), hasEntry(1, "T_MEM_MEMBER_ADDRESS")));
-
     }
 
     /**
@@ -81,30 +75,9 @@ public class RegexUtilTest{
         regexPattern = ".*@Column.*?name\\s*=\\s*\"(.*?)\"(?:.*?length\\s*=\\s*(\\d+))?";
         regexPattern = ".*@Column.*name.*\"(.*?)\".*length\\s*=\\s*(\\d+).*";
         String input = "@Column(name = \"NAME\", length=80)";
-
         assertThat(
                         RegexUtil.group(regexPattern, input),
                         allOf(hasEntry(0, "@Column(name = \"NAME\", length=80)"), hasEntry(1, "NAME"), hasEntry(2, "80")));
-
-    }
-
-    /**
-     * Test mobilephone.
-     */
-    @Test
-    public void testMOBILEPHONE(){
-        assertEquals(true, RegexUtil.matches(RegexPattern.MOBILEPHONE, "18501646315"));
-    }
-
-    /**
-     * Test is ip.
-     */
-    @Test
-    public void testIsIP(){
-        assertEquals(false, RegexUtil.matches(RegexPattern.IP, "venusdrogon@163.com"));
-        assertEquals(true, RegexUtil.matches(RegexPattern.IP, "127.0.0.1"));
-        assertEquals(false, RegexUtil.matches(RegexPattern.IP, "127.0.0.*"));
-        assertEquals(false, RegexUtil.matches(RegexPattern.IP, "327.0.0.1"));
     }
 
     /**
