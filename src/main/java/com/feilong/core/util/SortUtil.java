@@ -440,7 +440,7 @@ public final class SortUtil{
      * <pre class="code">
      * 
      * List{@code <User>} select2 = CollectionsUtil.select(list, "name", "刘备", "关羽");
-     * LOGGER.debug(JsonUtil.formatWithIncludes(SortUtil.sortByFixedOrder(select2, "name", "刘备", "关羽"), "name", "age"));
+     * LOGGER.debug(JsonUtil.formatWithIncludes(SortUtil.sortByFixedOrderPropertyValues(select2, "name", "刘备", "关羽"), "name", "age"));
      * 
      * </pre>
      * 
