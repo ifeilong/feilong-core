@@ -480,7 +480,7 @@ public final class SortUtil{
      * @see #sort(List, Comparator)
      */
     @SafeVarargs
-    public static <O, V> List<O> sortByFixedOrder(List<O> list,String propertyName,V...propertyValues){
+    public static <O, V> List<O> sortByFixedOrderPropertyValues(List<O> list,String propertyName,V...propertyValues){
         if (null == list){
             return emptyList();
         }
@@ -510,7 +510,7 @@ public final class SortUtil{
      * @see BeanComparatorUtil#propertyComparator(String, List)
      * @see #sort(List, Comparator)
      */
-    public static <O, V> List<O> sortByFixedOrder(List<O> list,String propertyName,List<V> propertyValues){
+    public static <O, V> List<O> sortByFixedOrderPropertyValues(List<O> list,String propertyName,List<V> propertyValues){
         if (null == list){
             return emptyList();
         }

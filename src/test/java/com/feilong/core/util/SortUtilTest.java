@@ -40,7 +40,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sort;
-import static com.feilong.core.util.SortUtil.sortByFixedOrder;
+import static com.feilong.core.util.SortUtil.sortByFixedOrderPropertyValues;
 import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 import static com.feilong.core.util.SortUtil.sortByKeyDesc;
 import static com.feilong.core.util.SortUtil.sortByValueAsc;
@@ -105,7 +105,7 @@ public class SortUtilTest{
         LOGGER.debug(JsonUtil.formatWithIncludes(select, "name", "age"));
 
         List<User> select2 = CollectionsUtil.select(list, "name", names);
-        LOGGER.debug(JsonUtil.formatWithIncludes(sortByFixedOrder(select2, "name", names), "name", "age"));
+        LOGGER.debug(JsonUtil.formatWithIncludes(sortByFixedOrderPropertyValues(select2, "name", names), "name", "age"));
     }
 
     /**
