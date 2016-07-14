@@ -68,7 +68,7 @@ public final class AggregateUtil{
      * list.add(new User(2L));
      * list.add(new User(5L));
      * list.add(new User(5L));
-     * StatisticsUtil.avg(list, "id", 2)
+     * AggregateUtil.avg(list, "id", 2)
      * </pre>
      * 
      * 返回: 4.00
@@ -110,7 +110,7 @@ public final class AggregateUtil{
      * user2.setAge(30);
      * 
      * List{@code <User>} list = toList(user1, user2);
-     * Map{@code <String, BigDecimal>} map = StatisticsUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
+     * Map{@code <String, BigDecimal>} map = AggregateUtil.avg(list, ConvertUtil.toArray("id", "age"), 2);
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
@@ -172,7 +172,7 @@ public final class AggregateUtil{
      * list.add(user1);
      * list.add(user2);
      * 
-     * Map{@code <String, BigDecimal>} map = StatisticsUtil.sum(list, "id", "age");
+     * Map{@code <String, BigDecimal>} map = AggregateUtil.sum(list, "id", "age");
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
@@ -229,7 +229,7 @@ public final class AggregateUtil{
      * user3.setAge(100);
      * 
      * List{@code <User>} list = toList(user1, user2, user3);
-     * Map{@code <String, BigDecimal>} map = StatisticsUtil.sum(list, ConvertUtil.toArray("id", "age"), new Predicate{@code <User>}(){
+     * Map{@code <String, BigDecimal>} map = AggregateUtil.sum(list, ConvertUtil.toArray("id", "age"), new Predicate{@code <User>}(){
      * 
      *     {@code @Override}
      *     public boolean evaluate(User user){
@@ -303,7 +303,7 @@ public final class AggregateUtil{
      * list.add(new User(5L));
      * list.add(new User(5L));
      * 
-     * LOGGER.info("" + StatisticsUtil.sum(list, "id"));
+     * LOGGER.info("" + AggregateUtil.sum(list, "id"));
      * </pre>
      * 
      * 返回: 12
@@ -333,7 +333,7 @@ public final class AggregateUtil{
      * <pre class="code">
      * 
      * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
-     *     return isNullOrEmpty(cartLineList) ? 0 : StatisticsUtil.sum(cartLineList, "quantity").intValue();
+     *     return isNullOrEmpty(cartLineList) ? 0 : AggregateUtil.sum(cartLineList, "quantity").intValue();
      * }
      * </pre>
      * 
@@ -371,7 +371,7 @@ public final class AggregateUtil{
      * list.add(new User(50L));
      * list.add(new User(50L));
      * 
-     * assertEquals(new BigDecimal(100L), StatisticsUtil.sum(list, "id", new Predicate{@code <User>}(){
+     * assertEquals(new BigDecimal(100L), AggregateUtil.sum(list, "id", new Predicate{@code <User>}(){
      * 
      *     {@code @Override}
      *     public boolean evaluate(User user){
@@ -393,7 +393,7 @@ public final class AggregateUtil{
      * list.add(new User(50L));
      * 
      * Predicate{@code <Long>} predicate = new ComparatorPredicate{@code <Long>}(10L, ComparatorUtils.{@code <Long>} naturalComparator(), Criterion.LESS);
-     * BigDecimal sum = StatisticsUtil.sum(list, "id", new BeanPredicate{@code <User>}("id", predicate));
+     * BigDecimal sum = AggregateUtil.sum(list, "id", new BeanPredicate{@code <User>}("id", predicate));
      * assertEquals(new BigDecimal(100L), sum);
      * 
      * </pre>
@@ -441,7 +441,7 @@ public final class AggregateUtil{
      * list.add(new User("刘备"));
      * list.add(new User("刘备"));
      * 
-     * Map{@code <String, Integer>} map = StatisticsUtil.groupCount(list, "name");
+     * Map{@code <String, Integer>} map = AggregateUtil.groupCount(list, "name");
      * LOGGER.info(JsonUtil.format(map));
      * 
      * </pre>
@@ -497,7 +497,7 @@ public final class AggregateUtil{
      * list.add(new User("刘备", 40));
      * list.add(new User("赵云", 50));
      * 
-     * Map{@code <String, Integer>} map = StatisticsUtil.groupCount(list, "name", new Predicate{@code <User>}(){
+     * Map{@code <String, Integer>} map = AggregateUtil.groupCount(list, "name", new Predicate{@code <User>}(){
      *     {@code @Override}
      *     public boolean evaluate(User user){
      *         return user.getAge() {@code >} 30;
@@ -568,7 +568,7 @@ public final class AggregateUtil{
      * map.put("f", 3005);
      * map.put("g", -1005);
      * 
-     * LOGGER.info("" + MapUtil.getMinValue(map, "a", "b", "d", "g", "m"));
+     * LOGGER.info("" + AggregateUtil.getMinValue(map, "a", "b", "d", "g", "m"));
      * </pre>
      * 
      * 返回:
