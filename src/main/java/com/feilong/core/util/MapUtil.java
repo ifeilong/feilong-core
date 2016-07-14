@@ -262,6 +262,7 @@ public final class MapUtil{
      * @param <K>
      *            the key type
      * @param <V>
+     *            the value type
      * @param arrayValueMap
      *            the array value map
      * @return 如果<code>arrayValueMap</code>是null或者empty,那么返回 {@link Collections#emptyMap()},<br>
@@ -900,12 +901,13 @@ public final class MapUtil{
     }
 
     /**
-     * 以参数 <code>map</code>的key为key(key需要在 <code>includeKeys</code>范围内),以参数 <code>map</code> value的 指定<code>extractPropertyName</code>
+     * 以参数 <code>map</code>的key为key,以参数 <code>map</code>value的指定<code>extractPropertyName</code>
      * 属性值为值,拼装成新的map返回.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
+     * <li>key需要在 <code>includeKeys</code>范围内</li>
      * <li>如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log</li>
      * <li>如果参数 <code>includeKeys</code>是null,那么会抽取map所有的key</li>
      * <li>返回map的顺序,按照参数includeKeys的顺序(如果includeKeys是null,那么按照map key的顺序)</li>
