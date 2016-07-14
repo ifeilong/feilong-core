@@ -524,7 +524,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * 
-     * Map{@code <String, List<String>>} mutiMap = MapUtil.newLinkedHashMap(2);
+     * Map{@code <String, List<String>>} mutiMap = newLinkedHashMap(2);
      * MapUtil.putMultiValue(mutiMap, "name", "张飞");
      * MapUtil.putMultiValue(mutiMap, "name", "关羽");
      * MapUtil.putMultiValue(mutiMap, "age", "30");
@@ -748,7 +748,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * 
-     * Map{@code <String, String>} map = MapUtil.newLinkedHashMap(3);
+     * Map{@code <String, String>} map = newLinkedHashMap(3);
      * 
      * map.put("name", "feilong");
      * map.put("age", "18");

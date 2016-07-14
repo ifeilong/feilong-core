@@ -29,6 +29,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 public class MapUtilTemp{
 
@@ -36,7 +38,7 @@ public class MapUtilTemp{
 
     @Test
     public void testToArrayValueMap1(){
-        Map<String, String> singleValueMap = MapUtil.newLinkedHashMap(2);
+        Map<String, String> singleValueMap = newLinkedHashMap(2);
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
@@ -47,7 +49,7 @@ public class MapUtilTemp{
     }
 
     public static <K, V> Map<K, V[]> toArrayValueMap1(Map<K, V> singleValueMap){
-        Map<K, V[]> arrayValueMap = MapUtil.newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
+        Map<K, V[]> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
         for (Map.Entry<K, V> entry : singleValueMap.entrySet()){
             //V[] array = toArray(entry.getValue());
             V[] array = (V[]) (toList(entry.getValue()).toArray());
@@ -58,7 +60,7 @@ public class MapUtilTemp{
 
     @Test
     public void testToListValueMap(){
-        Map<String, String> singleValueMap = MapUtil.newLinkedHashMap(2);
+        Map<String, String> singleValueMap = newLinkedHashMap(2);
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
@@ -70,7 +72,7 @@ public class MapUtilTemp{
     }
 
     public static <K, V> Map<K, List<V>> toListValueMap(Map<K, V> singleValueMap){
-        Map<K, List<V>> arrayValueMap = MapUtil.newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
+        Map<K, List<V>> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
         for (Map.Entry<K, V> entry : singleValueMap.entrySet()){
             arrayValueMap.put(entry.getKey(), toList(entry.getValue()));
         }
@@ -125,12 +127,12 @@ public class MapUtilTemp{
      */
     @Test
     public void testNewHashMap1(){
-        Map<Integer, Integer> map = MapUtil.newHashMap(100);
+        Map<Integer, Integer> map = newHashMap(100);
         for (int i = 0, j = 100; i < j; ++i){
             map.put(i, i);
         }
 
-        //  Map<Object, Object> newHashMap = MapUtil.newHashMap(map.size());
+        //  Map<Object, Object> newHashMap = newHashMap(map.size());
         Map<Object, Object> newHashMap = new HashMap<>(256);
         newHashMap.putAll(map);
         LOGGER.debug("{}", newHashMap.size());

@@ -32,6 +32,7 @@ import com.feilong.core.lang.NumberUtil;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * 专门用来统计数据的.
@@ -136,7 +137,7 @@ public final class StatisticsUtil{
         Map<String, BigDecimal> sumMap = sum(objectCollection, propertyNames);
 
         int size = objectCollection.size();
-        Map<String, BigDecimal> map = MapUtil.newLinkedHashMap(size);
+        Map<String, BigDecimal> map = newLinkedHashMap(size);
         for (Map.Entry<String, BigDecimal> entry : sumMap.entrySet()){
             map.put(entry.getKey(), NumberUtil.getDivideValue(toBigDecimal(entry.getValue()), size, scale));
         }
@@ -263,7 +264,7 @@ public final class StatisticsUtil{
         }
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
-        Map<String, BigDecimal> sumMap = MapUtil.newLinkedHashMap(objectCollection.size());
+        Map<String, BigDecimal> sumMap = newLinkedHashMap(objectCollection.size());
         for (O obj : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;

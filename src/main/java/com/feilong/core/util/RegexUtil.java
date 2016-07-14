@@ -27,6 +27,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.RegexPattern;
 import com.feilong.tools.jsonlib.JsonUtil;
 
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+
 /**
  * 正则表达式工具类.
  *
@@ -119,7 +121,7 @@ public final class RegexUtil{
             return Collections.emptyMap();
         }
         int groupCount = matcher.groupCount();
-        Map<Integer, String> map = MapUtil.newLinkedHashMap(groupCount + 1);
+        Map<Integer, String> map = newLinkedHashMap(groupCount + 1);
         for (int i = 0; i <= groupCount; ++i){
             //匹配的索引
             String groupValue = matcher.group(i); //map.put(0, matcher.group());// 捕获组是从 1 开始从左到右的索引.组0表示整个模式,因此表达式 m.group(0) 等效于 m.group().

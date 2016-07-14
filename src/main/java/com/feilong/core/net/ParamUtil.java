@@ -39,6 +39,7 @@ import com.feilong.core.util.SortUtil;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 
 /**
@@ -341,7 +342,7 @@ public final class ParamUtil{
         String[] nameAndValueArray = StringUtil.split(queryString, URIComponents.AMPERSAND);
         int length = nameAndValueArray.length;
 
-        Map<String, String[]> safeArrayValueMap = MapUtil.newLinkedHashMap(length);//使用 LinkedHashMap 保证元素的顺序
+        Map<String, String[]> safeArrayValueMap = newLinkedHashMap(length);//使用 LinkedHashMap 保证元素的顺序
         for (int i = 0; i < length; ++i){
             String[] tempArray = nameAndValueArray[i].split("=", 2);
 
@@ -678,7 +679,7 @@ public final class ParamUtil{
     static String addParameterArrayValueMap(String uriString,String queryString,Map<String, String[]> arrayValueMap,String charsetType){
         Map<String, String[]> safeArrayValueMap = ObjectUtils.defaultIfNull(arrayValueMap, Collections.<String, String[]> emptyMap());
 
-        Map<String, String[]> arrayParamValuesMap = MapUtil.newLinkedHashMap(safeArrayValueMap.size());
+        Map<String, String[]> arrayParamValuesMap = newLinkedHashMap(safeArrayValueMap.size());
         //先提取queryString map
         if (isNotNullOrEmpty(queryString)){
             arrayParamValuesMap.putAll(toSafeArrayValueMap(queryString, null));
@@ -706,7 +707,7 @@ public final class ParamUtil{
         if (isNullOrEmpty(arrayValueMap)){
             return Collections.emptyMap();
         }
-        Map<String, String[]> safeArrayValueMap = MapUtil.newLinkedHashMap(arrayValueMap.size()); //使用 LinkedHashMap,保持map元素顺序
+        Map<String, String[]> safeArrayValueMap = newLinkedHashMap(arrayValueMap.size()); //使用 LinkedHashMap,保持map元素顺序
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             String key = entry.getKey();
             String[] paramValues = entry.getValue();

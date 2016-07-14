@@ -42,6 +42,7 @@ import com.feilong.test.User;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * The Class MapUtilTest.
@@ -55,7 +56,7 @@ public class MapUtilTest{
      */
     @Test
     public void testPutMultiValue(){
-        Map<String, List<String>> mutiMap = MapUtil.newLinkedHashMap(2);
+        Map<String, List<String>> mutiMap = newLinkedHashMap(2);
         MapUtil.putMultiValue(mutiMap, "name", "张飞");
         MapUtil.putMultiValue(mutiMap, "name", "关羽");
         MapUtil.putMultiValue(mutiMap, "age", "30");
@@ -68,7 +69,7 @@ public class MapUtilTest{
      */
     @Test
     public void testRemoveKeys(){
-        Map<String, String> map = MapUtil.newLinkedHashMap(3);
+        Map<String, String> map = newLinkedHashMap(3);
 
         map.put("name", "feilong");
         map.put("age", "18");
@@ -83,7 +84,7 @@ public class MapUtilTest{
      */
     @Test
     public void testToSingleValueMap(){
-        Map<String, String[]> arrayValueMap = MapUtil.newLinkedHashMap(2);
+        Map<String, String[]> arrayValueMap = newLinkedHashMap(2);
         arrayValueMap.put("province", toArray("浙江省", "江苏省"));
         arrayValueMap.put("city", toArray("南通市"));
 
@@ -93,7 +94,7 @@ public class MapUtilTest{
 
     @Test
     public void testToSingleValueMap1(){
-        Map<String, String[]> arrayValueMap = MapUtil.newLinkedHashMap(2);
+        Map<String, String[]> arrayValueMap = newLinkedHashMap(2);
         arrayValueMap.put("province", null);
         arrayValueMap.put("city", toArray("南通市"));
 
@@ -106,7 +107,7 @@ public class MapUtilTest{
      */
     @Test
     public void testToArrayValueMap(){
-        Map<String, String> singleValueMap = MapUtil.newLinkedHashMap(2);
+        Map<String, String> singleValueMap = newLinkedHashMap(2);
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 

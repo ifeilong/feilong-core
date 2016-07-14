@@ -36,6 +36,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * The Class ArrayUtilTest.
@@ -182,7 +183,7 @@ public class ArrayUtilTemp{
         if (null == array){
             return Collections.emptyMap();
         }
-        Map<T, List<T>> map = MapUtil.newLinkedHashMap(array.length);
+        Map<T, List<T>> map = newLinkedHashMap(array.length);
         for (T t : array){
             MapUtil.putMultiValue(map, t, t);
         }

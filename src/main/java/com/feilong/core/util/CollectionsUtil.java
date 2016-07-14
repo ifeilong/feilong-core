@@ -40,6 +40,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
@@ -971,7 +972,7 @@ public final class CollectionsUtil{
         Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
         Validate.notBlank(valuePropertyName, "valuePropertyName can't be null/empty!");
 
-        Map<K, V> map = MapUtil.newLinkedHashMap(objectCollection.size());
+        Map<K, V> map = newLinkedHashMap(objectCollection.size());
         for (O bean : objectCollection){
             map.put(PropertyUtil.<K> getProperty(bean, keyPropertyName), PropertyUtil.<V> getProperty(bean, valuePropertyName));
         }
@@ -1614,7 +1615,7 @@ public final class CollectionsUtil{
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
-        Map<T, List<O>> map = MapUtil.newLinkedHashMap(objectCollection.size());
+        Map<T, List<O>> map = newLinkedHashMap(objectCollection.size());
         for (O obj : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
@@ -1688,7 +1689,7 @@ public final class CollectionsUtil{
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
-        Map<T, O> map = MapUtil.newLinkedHashMap(objectCollection.size());
+        Map<T, O> map = newLinkedHashMap(objectCollection.size());
         for (O o : objectCollection){
             T key = PropertyUtil.getProperty(o, propertyName);
             if (!map.containsKey(key)){
