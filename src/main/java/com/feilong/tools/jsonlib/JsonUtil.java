@@ -178,7 +178,7 @@ public final class JsonUtil{
     {"userAddresseList":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"userAddresses":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"date":"2016-06-09 17:40:28","password":"******","id":8,"nickName":[],"age":0,"name":"feilong","money":99999999,"attrMap":null,"userInfo":{"age":10},"loves":["桔子","香蕉"]}
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
     {
@@ -670,7 +670,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(objArr));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
        [{
@@ -714,7 +714,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(objArr));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
        [{
@@ -777,7 +777,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(list));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
        [{
@@ -822,7 +822,7 @@ public final class JsonUtil{
      * LOGGER.debug(JsonUtil.format(list));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      [{
@@ -883,7 +883,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * key是 brandCode,value 是 UA 的map
@@ -896,7 +896,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(map2));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {"brandCode": 55555}
@@ -917,7 +917,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(map3));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {"brandCode": 55.555}
@@ -953,7 +953,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      {"data1":{
@@ -971,7 +971,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(map1));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -1014,7 +1014,7 @@ public final class JsonUtil{
      * LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
        {"mybean":{
@@ -1076,7 +1076,7 @@ public final class JsonUtil{
      * LOGGER.debug(JsonUtil.format(JsonUtil.toBean(json, Person.class)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -1117,7 +1117,7 @@ public final class JsonUtil{
      * LOGGER.info(JsonUtil.format(myBean));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      {

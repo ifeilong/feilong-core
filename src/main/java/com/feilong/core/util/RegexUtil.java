@@ -93,7 +93,7 @@ public final class RegexUtil{
      * RegexUtil.group(regexPattern, email);
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      *    0 venusdrogon@163.com

@@ -103,7 +103,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * LOGGER.debug(JsonUtil.format(list));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
         [{
@@ -187,7 +187,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * LOGGER.debug(JsonUtil.format(courseList));
      * </pre>
      * 
-     * 那么返回:
+     * 那么<b>返回:</b>
      * 
      * <pre class="code">
      * [{
@@ -206,7 +206,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * LOGGER.debug(JsonUtil.format(courseList));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [{

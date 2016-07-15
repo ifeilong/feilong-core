@@ -445,7 +445,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(removeAll));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [{
@@ -512,7 +512,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(removeAll));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [{
@@ -531,7 +531,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(removeAll));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [{
@@ -592,7 +592,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(CollectionsUtil.remove(list, "feilong2")));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * ["xinge","feilong1"]
@@ -643,7 +643,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(CollectionsUtil.removeDuplicate(list)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * ["feilong1","feilong2","feilong3"]
@@ -697,7 +697,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [
@@ -845,7 +845,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueSet(list, "id")));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [2,5]
@@ -932,7 +932,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -996,7 +996,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [{
@@ -1047,7 +1047,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -1102,7 +1102,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
        [{
@@ -1164,7 +1164,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
     [{
@@ -1217,7 +1217,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate{@code <Long>}(1L))));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [1,1]
@@ -1236,7 +1236,7 @@ public final class CollectionsUtil{
      * LOGGER.debug(JsonUtil.format(select, 0, 0));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [30,55,88,12]
@@ -1287,7 +1287,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [{
@@ -1343,7 +1343,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [{
@@ -1416,7 +1416,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * list:[null,null,null,null]

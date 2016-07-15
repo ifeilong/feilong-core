@@ -202,7 +202,7 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
      * getWeekDateStringList(Calendar.THURSDAY, COMMON_DATE_AND_TIME_WITH_MILLISECOND)
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [

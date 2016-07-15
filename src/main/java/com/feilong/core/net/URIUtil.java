@@ -123,7 +123,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * <tr style="background-color:#ccccff">
  * <th align="left">characters</th>
  * <th align="left">说明</th>
- * <th align="left">example</th>
+ * <th align="left">示例</th>
  * </tr>
  * <tr valign="top">
  * <td>semicolon ;</td>
@@ -284,7 +284,7 @@ public final class URIUtil{
      * URIUtil.getQueryString({@code "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2"})
      * </pre>
      * 
-     * 返回: {@code a=1&a=2}
+     * <b>返回:</b> {@code a=1&a=2}
      * </blockquote>
      * 
      * @param uriString

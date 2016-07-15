@@ -313,7 +313,7 @@ public final class StringUtil{
      * StringUtil.replaceAll("SH1265,SH5951,SH6766,SH7235,SH1265,SH5951,SH6766,SH7235", "([a-zA-Z]+[0-9]+)", "'$1'")
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * 'SH1265','SH5951','SH6766','SH7235','SH1265','SH5951','SH6766','SH7235'
@@ -407,7 +407,7 @@ public final class StringUtil{
      * LOGGER.debug(StringUtil.replace(template, valuesMap));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * /home/webuser/expressdelivery/2016-06/sf/vipQuery_20160608214846.log
@@ -626,7 +626,7 @@ public final class StringUtil{
      * LOGGER.info(JsonUtil.format(tokenizeToStringArray));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [

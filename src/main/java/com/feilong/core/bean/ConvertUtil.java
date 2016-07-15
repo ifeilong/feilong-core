@@ -569,11 +569,9 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * assertEquals("1", ConvertUtil.toString(1));
      * assertEquals("1.0", ConvertUtil.toString(toBigDecimal(1.0)));
      * assertEquals("8", ConvertUtil.toString(toLong(8L)));
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -583,7 +581,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <p>
-     * 该方法<b>不适合</b> list转换成字符串,请使用 {@link #toString(ToStringConfig, Collection)}
+     * 该方法<b>不适合</b> list转换成字符串,比如:
      * </p>
      * 
      * <pre class="code">
@@ -591,13 +589,23 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 该方法也<b>不适合</b> array 转换成字符串,请使用 {@link #toString(ToStringConfig, Object...)}
+     * ,请使用 {@link #toString(ToStringConfig, Collection)}
+     * </p>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * 该方法也<b>不适合</b> array 转换成字符串,比如:
      * </p>
      * 
      * <pre class="code">
      * Integer[] int1 = { 2, null, 1, null };
      * LOGGER.debug(ConvertUtil.toString(int1));        = 2
      * </pre>
+     * 
+     * <p>
+     * 请使用 {@link #toString(ToStringConfig, Object...)}
+     * </p>
      * 
      * </blockquote>
      * 
@@ -632,26 +640,32 @@ public final class ConvertUtil{
      * 
      * <blockquote>
      * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * 
      * <tr style="background-color:#ccccff">
      * <th align="left">字段</th>
      * <th align="left">说明</th>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>int defaultSize</td>
      * <td>指定构建的默认数组的大小 or if less than zero indicates that a <code>null</code> default value should be used.</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>char delimiter = ','</td>
      * <td>分隔符,转成的string中的元素分隔符</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>char[] allowedChars = new char[] {'.', '-'}</td>
      * <td>用于{@link java.io.StreamTokenizer}分隔字符串</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>boolean onlyFirstToString = true;</td>
      * <td>只转第一个值</td>
      * </tr>
+     * 
      * </table>
      * </blockquote>
      * </blockquote>
@@ -689,7 +703,7 @@ public final class ConvertUtil{
      * ConvertUtil.toString(toStringConfig, list);
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * feilong,xinge
@@ -827,7 +841,7 @@ public final class ConvertUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -896,7 +910,7 @@ public final class ConvertUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -925,7 +939,7 @@ public final class ConvertUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -1054,7 +1068,7 @@ public final class ConvertUtil{
      * LOGGER.debug(JsonUtil.format(ConvertUtil.toMap("张飞", "丈八蛇矛")));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {"张飞": "丈八蛇矛"}
@@ -1187,7 +1201,7 @@ public final class ConvertUtil{
      * LOGGER.debug("{}", toList(set));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [b, a]
@@ -1411,7 +1425,7 @@ public final class ConvertUtil{
      * LOGGER.info(JsonUtil.format(array));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [
@@ -1549,46 +1563,14 @@ public final class ConvertUtil{
     /**
      * 转成{@link String}数组.
      * 
-     * <h3>规则:</h3>
+     * <h3>说明:</h3>
      * 
      * <blockquote>
-     * 
      * <p>
-     * 解析传入的字符串成数组 in the Java language into a <code>List</code> individual Strings for each element, 根据以下规则:
+     * 该方法很适合将 <b>非字符串数组的数组</b> 转换成 <b>字符串数组</b>,比如
      * </p>
      * 
-     * <ul>
-     * <li>The string is expected to be a comma-separated list of values.</li>
-     * <li>自动去除开头的 '{' 和 结束的'}'.</li>
-     * <li>每个元素前后的空格将会去除.</li>
-     * <li>Elements in the list may be delimited by single or double quotes.
-     * Within a quoted elements, the normal Java escape sequences are valid.</li>
-     * </ul>
-     * 
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
      * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings("{5,4, 8,2;8 9_5@3`a}")));
-     * </pre>
-     * 
-     * 返回:
-     * 
-     * <pre class="code">
-     * ["5","4","8","2","8","9","5","3","a"]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>也可以解析其他的数组成字符串数组哦:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * 
      * URL[] urls = {
      *                URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing0/"),
      *                URLUtil.newURL("http://www.exiaoshuo.com/jinyiyexing1/"),
@@ -1596,10 +1578,9 @@ public final class ConvertUtil{
      *                null };
      * 
      * LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(urls)));
-     * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [
@@ -1611,7 +1592,38 @@ public final class ConvertUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * <p>
+     * 也可以将字符串 解析成数组 in the Java language into a <code>List</code> individual Strings for each element, 根据以下规则:
+     * </p>
+     * 
+     * <h3>字符串转成数组的规则:</h3>
+     * 
+     * <blockquote>
+     * <ul>
+     * <li>The string is expected to be a comma-separated list of values.</li>
+     * <li>自动去除开头的 <b>'{'</b> 和 结束的<b>'}'</b>.</li>
+     * <li>每个元素前后的<b>空格将会去除</b>.</li>
+     * <li>Elements in the list may be delimited by single or double quotes.
+     * Within a quoted elements, the normal Java escape sequences are valid.</li>
+     * </ul>
+     * 
+     * <p>
+     * 示例:
+     * </p>
+     * 
+     * <pre class="code">
+     * LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings("{5,4, 8,2;8 9_5@3`a}")));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * ["5","4","8","2","8","9","5","3","a"]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param toBeConvertedValue
      *            the to be converted value
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>

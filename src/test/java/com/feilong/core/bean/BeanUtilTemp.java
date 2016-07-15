@@ -74,7 +74,7 @@ public class BeanUtilTemp{
      * LOGGER.info(JsonUtil.format(BeanUtil.describe(user)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {

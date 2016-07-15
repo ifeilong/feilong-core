@@ -77,7 +77,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.addParameter(uri, pageParamName, prePageNo, UTF8));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {@code http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=&label=2-5-8-12}
@@ -120,7 +120,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {@code www.baidu.com?province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82}
@@ -140,7 +140,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.addParameterSingleValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {@code www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82}
@@ -184,7 +184,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {@code www.baidu.com?receiver=%E9%91%AB%E5%93%A5&receiver=feilong&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82}
@@ -204,7 +204,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {@code www.baidu.com?a=b&province=%E6%B1%9F%E8%8B%8F%E7%9C%81&city=%E5%8D%97%E9%80%9A%E5%B8%82}
@@ -245,7 +245,7 @@ public final class ParamUtil{
      * LOGGER.info(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, UTF8)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -293,7 +293,7 @@ public final class ParamUtil{
      * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=1&b=2&a=5}", UTF8)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      {"a": [
@@ -310,7 +310,7 @@ public final class ParamUtil{
      * LOGGER.info(JsonUtil.format(ParamUtil.toSafeArrayValueMap("{@code a=&b=2&a}", UTF8)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      {"a": [
@@ -380,7 +380,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, UTF8));
      * </pre>
      * 
-     * 那么返回:
+     * 那么<b>返回:</b>
      * 
      * <pre class="code">
      * {@code love=sanguo&age=18&name=jim&name=feilong&name=%E9%91%AB%E5%93%A5}
@@ -392,7 +392,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, null));
      * </pre>
      * 
-     * 那么返回:
+     * 那么<b>返回:</b>
      * 
      * <pre class="code">
      * {@code love=sanguo&age=18&name=jim&name=feilong&name=鑫哥}
@@ -484,7 +484,7 @@ public final class ParamUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {@code province=江苏省&service=&totalActual=210.00}
@@ -523,7 +523,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.joinSingleValueMap(singleValueMap));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {@code province=江苏省&city=南通市}
@@ -567,7 +567,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {@code province=江苏省&province=浙江省&city=南通市}
@@ -619,7 +619,7 @@ public final class ParamUtil{
      * LOGGER.info(ParamUtil.joinValues(map, "service", "paymentType"));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * create_salesorderunionpay_mobile

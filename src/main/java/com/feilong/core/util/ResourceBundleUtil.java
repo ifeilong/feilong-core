@@ -145,7 +145,7 @@ public final class ResourceBundleUtil{
      * ResourceBundleUtil.getValueWithArguments("messages.feilong-core-test", "test.arguments", "feilong", "18")
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * my name is feilong,age is 18
@@ -211,7 +211,7 @@ public final class ResourceBundleUtil{
      * ResourceBundleUtil.getValueWithArguments(resourceBundle, "test.arguments", "feilong", "18")
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * my name is feilong,age is 18
@@ -383,7 +383,7 @@ public final class ResourceBundleUtil{
      * </blockquote>
      * 
      * @param fileName
-     *            Example 1: "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"
+     *            文件地址,比如: "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"
      * @return the resource bundle,may be null<br>
      *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>

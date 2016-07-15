@@ -122,7 +122,7 @@ public final class DateExtensionUtil{
      * <pre class="code">
      * 比如今天是 2012-10-16 22:18:34
      * 
-     * 返回:
+     * <b>返回:</b>
      * {
      * 2012-10-16 00:00:00.000,
      * 2012-10-17 00:00:00.000
@@ -174,7 +174,7 @@ public final class DateExtensionUtil{
      * LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(fromDate, toDate)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * ["2011-03-05 00:00:00",
@@ -527,7 +527,7 @@ public final class DateExtensionUtil{
      *                 DateUtil.toDate("2008-08-27", DatePattern.COMMON_DATE))
      * </pre>
      * 
-     * 返回: 3
+     * <b>返回:</b> 3
      * 
      * </blockquote>
      * 

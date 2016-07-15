@@ -107,7 +107,7 @@ public final class ParamExtensionUtil{
      * LOGGER.info(ParamUtil.removeParameter(uriString, pageParamName, UTF8));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * http://www.feilong.com:8888/search.htm?keyword={@code %E4%B8%AD%E5%9B%BD&page=&categoryCode=2-5-3-11}
@@ -167,7 +167,7 @@ public final class ParamExtensionUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * http://www.feilong.com:8888/search.htm?{@code page=&categoryCode=2-5-3-11}
@@ -257,7 +257,7 @@ public final class ParamExtensionUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * http://www.feilong.com:8888/search.htm?{@code label=TopSeller&keyword=%E4%B8%AD%E5%9B%BD}

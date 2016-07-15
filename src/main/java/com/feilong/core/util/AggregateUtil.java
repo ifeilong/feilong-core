@@ -71,7 +71,7 @@ public final class AggregateUtil{
      * AggregateUtil.avg(list, "id", 2)
      * </pre>
      * 
-     * 返回: 4.00
+     * <b>返回:</b> 4.00
      * </blockquote>
      *
      * @param <O>
@@ -114,7 +114,7 @@ public final class AggregateUtil{
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -176,7 +176,7 @@ public final class AggregateUtil{
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -240,7 +240,7 @@ public final class AggregateUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -306,7 +306,7 @@ public final class AggregateUtil{
      * LOGGER.info("" + AggregateUtil.sum(list, "id"));
      * </pre>
      * 
-     * 返回: 12
+     * <b>返回:</b> 12
      * 
      * </blockquote>
      * 
@@ -446,7 +446,7 @@ public final class AggregateUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -507,7 +507,7 @@ public final class AggregateUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -571,7 +571,7 @@ public final class AggregateUtil{
      * LOGGER.info("" + AggregateUtil.getMinValue(map, "a", "b", "d", "g", "m"));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * -1005
      * 
      * </blockquote>

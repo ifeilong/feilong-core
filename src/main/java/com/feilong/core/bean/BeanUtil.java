@@ -206,10 +206,11 @@ public final class BeanUtil{
      * </ul>
      * 
      * 最好在用的时候 自行register,{@link org.apache.commons.beanutils.ConvertUtilsBean#deregister(Class) ConvertUtilsBean.deregister(Class)}
+     * </blockquote>
      * 
-     * <p>
-     * Example 1:
-     * </p>
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * 
@@ -227,6 +228,7 @@ public final class BeanUtil{
      * 
      * LOGGER.debug(bub.getProperty(myObject, &quot;name&quot;));
      * LOGGER.debug(bub.getProperty(myObject, &quot;id&quot;));
+     * 
      * </pre>
      * 
      * </blockquote>
@@ -544,7 +546,7 @@ public final class BeanUtil{
      * 将Map{@code <Key,value>}中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名. 
      * </p>
      * 
-     * <h3>Example 1:</h3>
+     * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
@@ -558,7 +560,7 @@ public final class BeanUtil{
      * LOGGER.info(JsonUtil.format(user));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -635,7 +637,7 @@ public final class BeanUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {

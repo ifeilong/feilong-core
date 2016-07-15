@@ -64,7 +64,7 @@ public final class RandomUtil{
     /**
      * 创建0-最大值<b>(maxValue)</b>之间的随机数.
      * 
-     * <h3>Example 1:</h3>
+     * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
@@ -89,7 +89,7 @@ public final class RandomUtil{
     /**
      * 创建最小值<code>minValue</code>和最大值<code>maxValue</code>之间的随机数.
      * 
-     * <h3>Example 1:</h3>
+     * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
@@ -131,7 +131,7 @@ public final class RandomUtil{
     /**
      * 生成一个指定长度<code>length</code>的 <b>随机正整数</b>.
      * 
-     * <h3>Example 1:</h3>
+     * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
@@ -163,7 +163,7 @@ public final class RandomUtil{
     /**
      * 随机抽取字符串char,拼接最小长度是<code>minLength</code>,最大长度是<code>maxLength</code>的字符串随机字符串.
      * 
-     * <h3>Example 1:</h3>
+     * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
@@ -202,7 +202,7 @@ public final class RandomUtil{
     /**
      * 随机抽取字符串<code>char</code>,拼接成指定长度<code>length</code>的字符串.
      * 
-     * <h3>Example 1:</h3>
+     * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">

@@ -178,7 +178,7 @@ public final class SortUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [2,3,5,10]
@@ -220,7 +220,7 @@ public final class SortUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * [{
@@ -289,7 +289,7 @@ public final class SortUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      *     [{
@@ -360,7 +360,7 @@ public final class SortUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
     [{
@@ -444,7 +444,7 @@ public final class SortUtil{
      * 
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
     [{
@@ -535,7 +535,7 @@ public final class SortUtil{
      * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -589,7 +589,7 @@ public final class SortUtil{
      * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyDesc(map)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -634,7 +634,7 @@ public final class SortUtil{
      * LOGGER.debug(JsonUtil.format(SortUtil.sortByValueAsc(map)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -679,7 +679,7 @@ public final class SortUtil{
      * LOGGER.debug(JsonUtil.format(SortUtil.sortByValueDesc(map)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -734,7 +734,7 @@ public final class SortUtil{
      * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
@@ -753,7 +753,7 @@ public final class SortUtil{
      * LOGGER.debug(JsonUtil.format(SortUtil.sort(map, propertyComparator)));
      * </pre>
      * 
-     * 返回:
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
