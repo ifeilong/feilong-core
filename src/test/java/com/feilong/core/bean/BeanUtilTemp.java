@@ -106,7 +106,7 @@ public class BeanUtilTemp{
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @see PropertyUtil#describe(Object, String...)
      * @see PropertyDescriptor
-     * @see #populate(Object, Map)
+     * @see BeanUtil#populate(Object, Map)
      */
     public static Map<String, String> describe(Object bean){
         try{

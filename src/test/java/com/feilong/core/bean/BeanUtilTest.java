@@ -15,7 +15,10 @@
  */
 package com.feilong.core.bean;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -282,8 +285,7 @@ public class BeanUtilTest{
 
         Map<String, Long> properties = toMap("id", 8L);
 
-        BeanUtil.populate(user, properties);
-        LOGGER.debug(JsonUtil.format(user));
+        LOGGER.debug(JsonUtil.format(BeanUtil.populate(user, properties)));
 
         //********************************************************
         user = new User();
@@ -298,13 +300,10 @@ public class BeanUtilTest{
      */
     @Test
     public void populate1(){
-        Map<String, Object> map = new HashMap<String, Object>();
-
+        Map<String, Object> map = new HashMap<>();
         Map<String, Long> properties = toMap("id", 8L);
 
-        BeanUtil.populate(map, properties);
-
-        LOGGER.debug(JsonUtil.format(map));
+        assertThat(BeanUtil.populate(map, properties), allOf(hasEntry("id", (Object) 8L)));
     }
 
     @Test

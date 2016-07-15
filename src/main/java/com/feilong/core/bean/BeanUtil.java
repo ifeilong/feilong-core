@@ -540,7 +540,7 @@ public final class BeanUtil{
     // [start] populate(填充) 把properties/map里面的值放入bean中
 
     /**
-     * 把properties/map里面的值 <code>populate</code> (填充)到bean中.
+     * 把properties/map里面的值 <code>populate</code> <b>(填充)</b>到bean中.
      * 
      * <p>
      * 将Map{@code <Key,value>}中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名. 
@@ -590,22 +590,26 @@ public final class BeanUtil{
      * </p>
      * </blockquote>
      *
+     * @param <T>
+     *            the generic type
      * @param bean
      *            JavaBean whose properties are being populated
      * @param properties
      *            Map keyed by property name,with the corresponding (String or String[]) value(s) to be set
+     * @return the t
      * @throws NullPointerException
      *             如果 <code>bean</code> 是null,或者如果 <code>properties</code> 是null
      * @throws BeanUtilException
      *             在调用{@link BeanUtils#populate(Object, Map)}过程中有任何异常,转成{@link BeanUtilException}返回
      * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
      */
-    public static void populate(Object bean,Map<String, ?> properties){
+    public static <T> T populate(T bean,Map<String, ?> properties){
         Validate.notNull(bean, "bean can't be null/empty!");
         Validate.notNull(properties, "properties can't be null/empty!");
 
         try{
             BeanUtils.populate(bean, properties);
+            return bean;
         }catch (Exception e){
             throw new BeanUtilException(e);
         }
