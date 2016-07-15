@@ -1791,11 +1791,11 @@ public final class ConvertUtil{
      * </blockquote>
      *
      * @param locale
-     *            可以是null,字符串或者直接的 {@link Locale}对象
+     *            可以是 <b>null</b> ,<b>字符串</b> 或者 直接的 {@link Locale}对象
      * @return 如果 <code>locale</code> 是null,返回 null<br>
-     *         如果 <code>locale instanceof Locale</code>,返回 <code>(Locale) locale</code><br>
-     *         如果 <code>locale instanceof String</code>,返回 {@link LocaleUtils#toLocale(String)}<br>
-     *         其他情况,抛出 {@link UnsupportedOperationException}
+     *         如果 <code>locale instanceof <span style="color:green">Locale</span></code>,返回 <code>(Locale) locale</code><br>
+     *         如果 <code>locale instanceof <span style="color:green">String</span></code>,返回 {@link LocaleUtils#toLocale(String)}<br>
+     *         其他的类型,将抛出 {@link UnsupportedOperationException}
      * @see org.apache.commons.lang3.LocaleUtils#toLocale(String)
      * @since 1.7.2
      */
@@ -1809,6 +1809,6 @@ public final class ConvertUtil{
         if (locale instanceof String){
             return LocaleUtils.toLocale((String) locale);
         }
-        throw new UnsupportedOperationException("locale2 not support!");
+        throw new UnsupportedOperationException("input param [locale] type is:[" + locale.getClass().getName() + "] not support!");
     }
 }

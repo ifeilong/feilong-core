@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -35,7 +36,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -43,6 +43,10 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * {@link java.util.ResourceBundle ResourceBundle} 工具类.
+ * 
+ * <p>
+ * 该类专注于解析配置文件,至于解析到的结果你可以使用 {@link ConvertUtil}来进行转换成你需要的类型
+ * </p>
  * 
  * <h3>如果现在多种资源文件一起出现,该如何访问？</h3>
  * 
@@ -81,153 +85,54 @@ public final class ResourceBundleUtil{
     }
 
     // ****************************getValue*************************************************
-    /**
-     * 获取Properties配置文件键值,转换成指定的 <code>typeClass</code> 类型返回.
-     * 
-     * @param <T>
-     *            the generic type
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @param key
-     *            the key
-     * @param typeClass
-     *            指明返回类型,<br>
-     *            如果是String.class,则转换成String返回;<br>
-     *            如果是Integer.class,则转换成Integer返回
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     *         如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>typeClass</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #getValue(String, String)
-     * @see ConvertUtil#convert(Object, Class)
-     */
-    public static <T> T getValue(String baseName,String key,Class<T> typeClass){
-        String value = getValue(baseName, key);
-        return ConvertUtil.convert(value, typeClass);
-    }
-
-    /**
-     * 获取Properties配置文件键值,按照typeClass 返回对应的类型.
-     * 
-     * @param <T>
-     *            the generic type
-     * @param resourceBundle
-     *            the resource bundle
-     * @param key
-     *            the key
-     * @param typeClass
-     *            指明返回类型,<br>
-     *            如果是String.class,则返回的是String <br>
-     *            如果是Integer.class,则返回的是Integer
-     * @return 如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>typeClass</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #getValue(ResourceBundle, String)
-     * @see com.feilong.core.bean.ConvertUtil#convert(Object, Class)
-     */
-    public static <T> T getValue(ResourceBundle resourceBundle,String key,Class<T> typeClass){
-        String value = getValue(resourceBundle, key);
-        return ConvertUtil.convert(value, typeClass);
-    }
 
     /**
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
+     * 
+     * <p>
+     * 支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析
+     * </p>
      *
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param key
      *            Properties配置文件键名
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     *         如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果配置文件中,
+     * @param arguments
+     *            the arguments
+     * @return 如果配置文件中,
      *         <ul>
      *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
      *         <li>key存在,但value是null 或者 empty,返回value</li>
      *         </ul>
+     * @throws NullPointerException
+     *             如果 <code>baseName</code> 或者 <code>key</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>baseName</code> 是 blank,或者 <code>key</code> 是blank
+     * @throws MissingResourceException
+     *             如果资源文件 <code>baseName</code> 不存在
      * @see #getResourceBundle(String)
-     * @see #getValue(ResourceBundle, String)
+     * @see #getValue(ResourceBundle, String, Object...)
+     * @since 1.8.1 support arguments param
      */
-    public static String getValue(String baseName,String key){
+    public static String getValue(String baseName,String key,Object...arguments){
         ResourceBundle resourceBundle = getResourceBundle(baseName);
-        return getValue(resourceBundle, key);
+        return getValue(resourceBundle, key, arguments);
     }
 
     /**
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
-     *
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @param key
-     *            Properties配置文件键名
-     * @param locale
-     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     *         如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果配置文件中,
-     *         <ul>
-     *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
-     *         <li>key存在,但value是null 或者 empty,返回value</li>
-     *         </ul>
-     * @see #getResourceBundle(String, Locale)
-     * @see #getValue(ResourceBundle, String)
-     */
-    public static String getValue(String baseName,String key,Locale locale){
-        ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
-        return getValue(resourceBundle, key);
-    }
-
-    /**
-     * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
-     *
-     * @param resourceBundle
-     *            the resource bundle
-     * @param key
-     *            Properties配置文件键名
-     * @return 如果 <code>key</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果配置文件中,
-     *         <ul>
-     *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
-     *         <li>key存在,但value是null 或者 empty,返回value</li>
-     *         </ul>
-     * @see java.util.ResourceBundle#getString(String)
-     */
-    public static String getValue(ResourceBundle resourceBundle,String key){
-        Validate.notBlank(key, "key can't be null/empty!");
-
-        if (!resourceBundle.containsKey(key)){
-            LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
-            return StringUtils.EMPTY;
-        }
-
-        String value = resourceBundle.getString(key);
-        if (isNullOrEmpty(value)){
-            LOGGER.trace("resourceBundle has key:[{}],but value is null/empty", key);
-        }
-        return value;
-    }
-
-    // ****************************with Arguments*************************************************
-    /**
-     * 带参数的 配置文件.
+     * 
+     * <p>
+     * 支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析
+     * </p>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <p>
-     * 如果有配置文件 messages\feilong-core-test.properties ,内容如下:
+     * 如果有配置文件 <b>messages\feilong-core-test.properties</b> ,内容如下:
      * </p>
      * 
      * <pre class="code">
@@ -247,29 +152,46 @@ public final class ResourceBundleUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param key
-     *            the key
+     *            Properties配置文件键名
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
      * @param arguments
      *            此处可以传递Object[]数组过来
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
+     * @return 如果配置文件中,
+     *         <ul>
+     *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
+     *         <li>key存在,但value是null 或者 empty,返回value</li>
+     *         </ul>
+     *         如果配置文件中,
+     *         <ul>
+     *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
+     *         <li>key存在,但value是null 或者 empty,返回value</li>
+     *         </ul>
+     * @throws NullPointerException
+     *             如果 <code>baseName</code> 或者 <code>key</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>baseName</code> 是 blank,或者 <code>key</code> 是blank
+     * @throws MissingResourceException
+     *             如果资源文件 <code>baseName</code> 不存在
      * @see #getResourceBundle(String, Locale)
-     * @see #getValueWithArguments(ResourceBundle, String, Object...)
+     * @see #getValue(ResourceBundle, String, Object...)
      */
-    public static String getValueWithArguments(String baseName,String key,Locale locale,Object...arguments){
+    public static String getValue(String baseName,String key,Locale locale,Object...arguments){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
-        return getValueWithArguments(resourceBundle, key, arguments);
+        return getValue(resourceBundle, key, arguments);
     }
 
     /**
-     * 带参数的 配置文件.
+     * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
+     * 
+     * <p>
+     * 支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析
+     * </p>
      * 
      * <h3>示例:</h3>
      * 
@@ -296,99 +218,40 @@ public final class ResourceBundleUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param resourceBundle
      *            the resource bundle
      * @param key
-     *            如上面的 name
+     *            Properties配置文件键名
      * @param arguments
      *            此处可以传递Object[]数组过来
-     * @return 支持 arguments 为null,原样返回
+     * @return 如果配置文件中,
+     *         <ul>
+     *         <li>key不存在,LOGGER.warn 输出警告,然后返回 {@link StringUtils#EMPTY}</li>
+     *         <li>key存在,但value是null 或者 empty,返回value</li>
+     *         </ul>
+     * @throws NullPointerException
+     *             如果 <code>resourceBundle</code> 或者 <code>key</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>key</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @see java.util.ResourceBundle#getString(String)
      * @see MessageFormatUtil#format(String, Object...)
+     * @since 1.8.1 support arguments param
      */
-    public static String getValueWithArguments(ResourceBundle resourceBundle,String key,Object...arguments){
-        String value = getValue(resourceBundle, key);
+    public static String getValue(ResourceBundle resourceBundle,String key,Object...arguments){
+        Validate.notNull(resourceBundle, "resourceBundle can't be null!");
+        Validate.notBlank(key, "key can't be null/empty!");
+
+        if (!resourceBundle.containsKey(key)){
+            LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
+            return StringUtils.EMPTY;
+        }
+
+        String value = resourceBundle.getString(key);
+        if (isNullOrEmpty(value)){
+            LOGGER.trace("resourceBundle has key:[{}],but value is null/empty", key);
+        }
         return isNullOrEmpty(value) ? StringUtils.EMPTY : MessageFormatUtil.format(value, arguments);// 支持 arguments 为null,原样返回
-    }
-
-    // *****************************************************************************
-
-    /**
-     * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 转成字符串数组.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * 在 <code>messages/feilong-core-test.properties</code> 配置文件中, 有以下配置
-     * 
-     * <pre class="code">
-     * config_test_array=5,8,7,6
-     * </pre>
-     * 
-     * <pre class="code">
-     * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",") =   ["5","8","7","6"]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param resourceBundle
-     *            the resource bundle
-     * @param key
-     *            the key
-     * @param delimiters
-     *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
-     * @return 如果 资源值不存在,返回null
-     * @see #getArray(ResourceBundle, String, String, Class)
-     */
-    public static String[] getArray(ResourceBundle resourceBundle,String key,String delimiters){
-        return getArray(resourceBundle, key, delimiters, String.class);
-    }
-
-    /**
-     * 读取指定 <code>key</code> 的值,使用分隔符 <code>delimiters</code> 以及指定的转换类型 <code>typeClass</code> 转成数组.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * 在 <code>messages/feilong-core-test.properties</code> 配置文件中, 有以下配置
-     * 
-     * <pre class="code">
-     * config_test_array=5,8,7,6
-     * </pre>
-     * 
-     * <p>
-     * 解析:
-     * </p>
-     * 
-     * <pre class="code">
-     * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class);    =   ["5","8","7","6"]
-     * ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class);   =   [5,8,7,6]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param <T>
-     *            the generic type
-     * @param resourceBundle
-     *            the resource bundle
-     * @param key
-     *            the key
-     * @param delimiters
-     *            分隔符,参见 {@link StringUtil#tokenizeToStringArray(String, String)} <code>delimiters</code> 参数
-     * @param typeClass
-     *            指明返回类型,<br>
-     *            如果是String.class,则返回的是String []数组<br>
-     *            如果是Integer.class,则返回的是Integer [] 数组
-     * @return 如果 资源值不存在,返回null
-     * @see #getValue(ResourceBundle, String)
-     * @see StringUtil#tokenizeToStringArray(String, String)
-     */
-    public static <T> T[] getArray(ResourceBundle resourceBundle,String key,String delimiters,Class<T> typeClass){
-        String value = getValue(resourceBundle, key);
-        String[] array = StringUtil.tokenizeToStringArray(value, delimiters);
-        return ConvertUtil.toArray(array, typeClass);
     }
 
     //***************************************************************************
@@ -404,11 +267,14 @@ public final class ResourceBundleUtil{
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     *         如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     * @return 如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则,解析所有的key和value转成 {@link TreeMap}
+     * @throws NullPointerException
+     *             如果 <code>baseName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>baseName</code> 是 blank
+     * @throws MissingResourceException
+     *             如果资源文件 <code>baseName</code> 不存在
      * @see #readAllPropertiesToMap(String, Locale)
      * @since 1.2.1
      */
@@ -429,11 +295,15 @@ public final class ResourceBundleUtil{
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     *         如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     * @return 如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则,解析所有的key和value转成 {@link TreeMap}<br>
+     * 
+     * @throws NullPointerException
+     *             如果 <code>baseName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>baseName</code> 是 blank
+     * @throws MissingResourceException
+     *             如果资源文件 <code>baseName</code> 不存在
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
      * @see MapUtils#toMap(ResourceBundle)
@@ -451,10 +321,13 @@ public final class ResourceBundleUtil{
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     *         如果资源文件 <code>baseName</code> 里面没有任何内容,返回不是null的 {@link ResourceBundle}
+     * @return 如果资源文件 <code>baseName</code> 里面没有任何内容,返回不是null的 {@link ResourceBundle}
+     * @throws NullPointerException
+     *             如果 <code>baseName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>baseName</code> 是 blank
+     * @throws MissingResourceException
+     *             如果资源文件 <code>baseName</code> 不存在
      * @see java.util.Locale#getDefault()
      * @see #getResourceBundle(String, Locale)
      */
@@ -470,10 +343,13 @@ public final class ResourceBundleUtil{
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果 <code>baseName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>baseName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
-     *         如果资源文件 <code>baseName</code> 里面没有任何内容,返回不是null的 {@link ResourceBundle}
+     * @return 如果资源文件 <code>baseName</code> 里面没有任何内容,返回不是null的 {@link ResourceBundle}
+     * @throws NullPointerException
+     *             如果 <code>baseName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>baseName</code> 是 blank
+     * @throws MissingResourceException
+     *             如果资源文件 <code>baseName</code> 不存在
      * @see java.util.ResourceBundle#getBundle(String, Locale)
      */
     public static ResourceBundle getResourceBundle(String baseName,Locale locale){

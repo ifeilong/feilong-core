@@ -15,7 +15,6 @@
  */
 package com.feilong.core.util;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
@@ -28,10 +27,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.ResourceBundleUtil.getValue;
+import static com.feilong.core.util.ResourceBundleUtil.readAllPropertiesToMap;
 
 /**
  * The Class ResourceBundleUtilTest.
@@ -49,6 +49,8 @@ public class ResourceBundleUtilTest{
     /** The resource bundle. */
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle(BASE_NAME);
 
+    //************************************************************************************************
+
     /**
      * TestResourceBundleUtilTest.
      */
@@ -65,8 +67,8 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void testGetValue(){
-        assertEquals("5,8,7,6", ResourceBundleUtil.getValue(BASE_NAME, "config_test_array"));
-        assertEquals("5,8,7,6", ResourceBundleUtil.getValue("messages.feilong-core-test", "config_test_array"));
+        assertEquals("5,8,7,6", getValue(BASE_NAME, "config_test_array"));
+        assertEquals("5,8,7,6", getValue("messages.feilong-core-test", "config_test_array"));
     }
 
     /**
@@ -74,7 +76,7 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void testWithSpaceValue(){
-        assertEquals("a ", ResourceBundleUtil.getValue(BASE_NAME, "with_space_value"));
+        assertEquals("a ", getValue(BASE_NAME, "with_space_value"));
     }
 
     /**
@@ -82,7 +84,7 @@ public class ResourceBundleUtilTest{
      */
     @Test(expected = MissingResourceException.class)
     public void testBaseNameNotExits(){
-        assertEquals("", ResourceBundleUtil.getValue("file_wo_bu_cun_zai", "wo_bu_cun_zai"));
+        assertEquals("", getValue("file_wo_bu_cun_zai", "wo_bu_cun_zai"));
     }
 
     /**
@@ -90,7 +92,7 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void testNull(){
-        assertEquals("", ResourceBundleUtil.getValue(BASE_NAME, "wo_bu_cun_zai"));
+        assertEquals("", getValue(BASE_NAME, "wo_bu_cun_zai"));
     }
 
     /**
@@ -98,61 +100,34 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void testEmpty(){
-        assertEquals("", ResourceBundleUtil.getValue("messages.empty", "wo_bu_cun_zai"));
-    }
-
-    /**
-     * Test get value11.
-     */
-    @Test
-    public void testGetValue11(){
-        assertEquals((Integer) Integer.parseInt("0"), ResourceBundleUtil.getValue(BASE_NAME, "wo_bu_cun_zai", Integer.class));
+        assertEquals("", getValue("messages.empty", "wo_bu_cun_zai"));
     }
 
     /**
      * Gets the value with arguments.
-     * 
      */
     @Test
     @Ignore
     public void testGetValueWithArguments(){
-        assertEquals("今天 2", ResourceBundleUtil.getValueWithArguments(resourceBundle, "test", "2", "22"));
+        assertEquals("今天 2", getValue(resourceBundle, "test", "2", "22"));
     }
 
     @Test
     public void testGetValueWithArguments1(){
-        assertEquals(
-                        "my name is feilong,age is 18",
-                        ResourceBundleUtil.getValueWithArguments(resourceBundle, "test.arguments", "feilong", "18"));
-    }
-
-    /**
-     * Read properties as array.
-     */
-    @Test
-    public void readPropertiesAsArray(){
-        assertArrayEquals(
-                        ConvertUtil.toStrings("5,8,7,6"),
-                        ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", String.class));
-        assertArrayEquals(
-                        ConvertUtil.toIntegers("5,8,7,6"),
-                        ResourceBundleUtil.getArray(resourceBundle, "config_test_array", ",", Integer.class));
+        assertEquals("my name is feilong,age is 18", getValue(resourceBundle, "test.arguments", "feilong", "18"));
     }
 
     /**
      * Read all properties to map.
      */
     @Test
-    public void readAllPropertiesToMap(){
-        LOGGER.debug(JsonUtil.format(ResourceBundleUtil.readAllPropertiesToMap(BASE_NAME, Locale.CHINA)));
+    public void testReadAllPropertiesToMap(){
+        LOGGER.debug(JsonUtil.format(readAllPropertiesToMap(BASE_NAME, Locale.CHINA)));
     }
 
-    /**
-     * Read all properties to map.
-     */
     @Test
     public void testGetValue1(){
-        LOGGER.debug(ResourceBundleUtil.getValue(BASE_NAME, "config_date_hour", Locale.ENGLISH));
+        LOGGER.debug(getValue(BASE_NAME, "config_date_hour", Locale.ENGLISH));
     }
 
 }

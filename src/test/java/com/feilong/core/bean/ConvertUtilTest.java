@@ -679,6 +679,12 @@ public class ConvertUtilTest{
     public void testToLocale(){
         assertEquals(null, toLocale(null));
         assertEquals(Locale.CHINA, toLocale("zh_CN"));
+        assertEquals(Locale.CHINA, toLocale(Locale.CHINA));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testToLocale1(){
+        toLocale(new User());
     }
 
     @Test
