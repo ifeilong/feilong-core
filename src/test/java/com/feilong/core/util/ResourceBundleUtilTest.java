@@ -31,7 +31,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.ResourceBundleUtil.getValue;
-import static com.feilong.core.util.ResourceBundleUtil.readAllPropertiesToMap;
+import static com.feilong.core.util.ResourceBundleUtil.readPropertiesToMap;
 
 /**
  * The Class ResourceBundleUtilTest.
@@ -122,7 +122,7 @@ public class ResourceBundleUtilTest{
      */
     @Test
     public void testReadAllPropertiesToMap(){
-        LOGGER.debug(JsonUtil.format(readAllPropertiesToMap(BASE_NAME, Locale.CHINA)));
+        LOGGER.debug(JsonUtil.format(readPropertiesToMap(BASE_NAME, Locale.CHINA)));
     }
 
     @Test

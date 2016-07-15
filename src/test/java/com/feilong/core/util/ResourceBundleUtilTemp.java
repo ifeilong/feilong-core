@@ -127,10 +127,10 @@ public class ResourceBundleUtilTemp{
      *         如果资源文件 <code>baseName</code> 不存在,抛出 <code>MissingResourceException</code><br>
      *         如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则解析所有的key和value转成HashMap
-     * @see #readAllPropertiesToMap(String, Locale)
+     * @see #readPropertiesToMap(String, Locale)
      */
     public static Map<String, String> readPrefixAsMap(String baseName,String prefix,String delimiters,Locale locale){
-        Map<String, String> propertyMap = ResourceBundleUtil.readAllPropertiesToMap(baseName, locale);
+        Map<String, String> propertyMap = ResourceBundleUtil.readPropertiesToMap(baseName, locale);
         if (isNullOrEmpty(propertyMap)){
             return Collections.emptyMap();
         }

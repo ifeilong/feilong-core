@@ -275,11 +275,11 @@ public final class ResourceBundleUtil{
      *             如果 <code>baseName</code> 是 blank
      * @throws MissingResourceException
      *             如果资源文件 <code>baseName</code> 不存在
-     * @see #readAllPropertiesToMap(String, Locale)
-     * @since 1.2.1
+     * @see #readPropertiesToMap(String, Locale)
+     * @since 1.8.1 change name
      */
-    public static Map<String, String> readAllPropertiesToMap(String baseName){
-        return readAllPropertiesToMap(baseName, null);
+    public static Map<String, String> readPropertiesToMap(String baseName){
+        return readPropertiesToMap(baseName, null);
     }
 
     /**
@@ -307,8 +307,9 @@ public final class ResourceBundleUtil{
      * @see #getResourceBundle(String, Locale)
      * @see java.util.ResourceBundle#getKeys()
      * @see MapUtils#toMap(ResourceBundle)
+     * @since 1.8.1 change name
      */
-    public static Map<String, String> readAllPropertiesToMap(String baseName,Locale locale){
+    public static Map<String, String> readPropertiesToMap(String baseName,Locale locale){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
         return toMap(resourceBundle);
     }
