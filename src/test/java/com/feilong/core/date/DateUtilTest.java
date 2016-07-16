@@ -313,7 +313,7 @@ public class DateUtilTest extends BaseDateUtilTest{
         DateUtil.toDate("2016-06-30 15:36 ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
-    @Test()
+    @Test
     public void testToDate2(){
         DateUtil.toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
@@ -365,16 +365,24 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetYear(){
-        LOGGER.debug(DateUtil.getYear(NOW) + "");
+        assertEquals(2012, DateUtil.getYear(toDate("2012-06-29 00:26:53", COMMON_DATE_AND_TIME)));
+        assertEquals(2016, DateUtil.getYear(toDate("2016-07-16", COMMON_DATE)));
+        assertEquals(2017, DateUtil.getYear(toDate("2016-13-16", COMMON_DATE)));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetYear1(){
+        DateUtil.getYear(null);
     }
 
     /**
      * Gets the hour of day.
-     * 
      */
     @Test
     public void testGetHourOfDay(){
-        LOGGER.debug(DateUtil.getHourOfDay(NOW) + "");
+        assertEquals(0, DateUtil.getHourOfDay(toDate("2012-06-29 00:26:53", COMMON_DATE_AND_TIME)));
+        assertEquals(22, DateUtil.getHourOfDay(toDate("2016-07-16 22:34:00", COMMON_DATE_AND_TIME)));
+        assertEquals(0, DateUtil.getHourOfDay(toDate("2016-07-16 24:34:00", COMMON_DATE_AND_TIME)));
     }
 
     /**

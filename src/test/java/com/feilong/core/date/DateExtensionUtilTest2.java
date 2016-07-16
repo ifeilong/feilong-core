@@ -15,6 +15,7 @@
  */
 package com.feilong.core.date;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import java.util.Date;
@@ -25,6 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
 
+import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalDay;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalHour;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalSecond;
@@ -102,17 +104,47 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
         LOGGER.debug("" + getIntervalDay(toDate("2008-12-1", COMMON_DATE), toDate("2008-9-29", COMMON_DATE)));
     }
 
+    //*****************************************************************************************************
+
     /**
-     * Test get interval time.
+     * Test get interval time0.
      */
     @Test
-    public void testGetIntervalTime(){
-        Date startDate = toDate("2016-06-01 15:21:00", COMMON_DATE_AND_TIME);
-        LOGGER.debug(getIntervalTime(startDate, NOW) + "");
-        LOGGER.debug(getIntervalTime(startDate, toDate("2113-01-01 00:00:00", COMMON_DATE_AND_TIME)) + "");
-
+    public void testGetIntervalTime0(){
+        assertEquals(
+                        1 * MILLISECOND_PER_MINUTE,
+                        getIntervalTime(
+                                        toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME),
+                                        toDate("2016-07-16 15:22:00", COMMON_DATE_AND_TIME)));
+        assertEquals(
+                        61 * MILLISECOND_PER_MINUTE,
+                        getIntervalTime(
+                                        toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME),
+                                        toDate("2016-07-16 16:22:00", COMMON_DATE_AND_TIME)));
+        assertEquals(
+                        61 * MILLISECOND_PER_MINUTE,
+                        getIntervalTime(
+                                        toDate("2016-07-16 16:22:00", COMMON_DATE_AND_TIME),
+                                        toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME)));
     }
 
+    /**
+     * Test get interval time1.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetIntervalTime1(){
+        getIntervalTime(null, toDate("2016-07-16 15:51:00", COMMON_DATE_AND_TIME));
+    }
+
+    /**
+     * Test get interval time2.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetIntervalTime2(){
+        getIntervalTime(toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME), null);
+    }
+
+    //*****************************************************************************************************
     /**
      * Test get interval day2.
      */

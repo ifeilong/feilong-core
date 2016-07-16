@@ -292,27 +292,29 @@ public final class SortUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     *     [{
-     *             "id": 2,
-     *             "age": 2
-     *         },
-     *                 {
-     *             "id": 1,
-     *             "age": 8
-     *         },
-     *                 {
-     *             "id": 12,
-     *             "age": 18
-     *         },
-     *                 {
-     *             "id": 2,
-     *             "age": 30
-     *         },
-     *                 {
-     *             "id": 2,
-     *             "age": 36
-     *         }]
+     * [
+     * {"id": 2,"age": 2},
+     * {"id": 1,"age": 8},
+     * {"id": 12,"age": 18}, 
+     * {"id": 2,"age": 30},
+     * {"id": 2,"age": 36}
+     * ]
+     * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>示例2:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * User id12 = new User(12L, 18);
+     * User id2 = new User(2L, 36);
+     * User id5 = new User(5L, 22);
+     * User id1 = new User(1L, 8);
+     * List<User> list = toList(id12, id2, id5, id1);
+     * sort(list, "id");
+     * assertThat(list, contains(id1, id2, id5, id12));
      * </pre>
      * 
      * </blockquote>
@@ -363,26 +365,11 @@ public final class SortUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    [{
-                "id": 1,
-                "age": 8
-            },
-                    {
-                "id": 2,
-                "age": 2
-            },
-                    {
-                "id": 2,
-                "age": 30
-            },
-                    {
-                "id": 2,
-                "age": 36
-            },
-                    {
-                "id": 12,
-                "age": 18
-            }]
+        [{"id": 1,"age": 8},
+        {"id": 2,"age": 2},
+        {"id": 2,"age": 30},
+        {"id": 2,"age": 36},
+        {"id": 12,"age": 18}]
      * </pre>
      * 
      * </blockquote>

@@ -559,7 +559,39 @@ public final class DateExtensionUtil{
     }
 
     /**
-     * 两个时间相差的毫秒数(<span style="color:red">绝对值</span>).
+     * 两个时间相差的<b>毫秒数</b> (<span style="color:red">绝对值</span>).
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateExtensionUtil.getIntervalTime(
+     *                 toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME),
+     *                 toDate("2016-07-16 15:21:01", COMMON_DATE_AND_TIME));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * 1000
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <pre class="code">
+     * DateExtensionUtil.getIntervalTime(
+     *                 toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME),
+     *                 toDate("2016-07-16 15:22:00", COMMON_DATE_AND_TIME));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * 60000
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date1
      *            date1

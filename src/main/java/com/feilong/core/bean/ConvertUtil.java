@@ -1600,6 +1600,11 @@ public final class ConvertUtil{
      * <h3>字符串转成数组的规则:</h3>
      * 
      * <blockquote>
+     * 
+     * <p>
+     * 参加 {@link org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String) parseElements}
+     * </p>
+     * 
      * <ul>
      * <li>The string is expected to be a comma-separated list of values.</li>
      * <li>自动去除开头的 <b>'{'</b> 和 结束的<b>'}'</b>.</li>

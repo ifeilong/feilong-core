@@ -21,7 +21,6 @@ import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -113,17 +112,17 @@ public class SortUtilTest{
      */
     @Test
     public void testPropertyComparator(){
-        List<User> list = new ArrayList<User>();
-        Long id = null;
-        list.add(new User(id));
-        list.add(new User(12L));
-        list.add(new User(2L));
-        list.add(new User(5L));
-        list.add(null);
-        list.add(new User(1L));
-        list.add(new User(id));
-        sort(list, new PropertyComparator<User>("id"));
-        LOGGER.debug(JsonUtil.format(list));
+        User u_null_id = new User((Long) null);
+        User id12 = new User(12L);
+        User id2 = new User(2L);
+        User u_null = null;
+        User id1 = new User(1L);
+
+        List<User> list = toList(u_null_id, id12, id2, u_null, id1, u_null_id);
+        sort(list, "id");
+
+        //        LOGGER.debug(JsonUtil.format(list));
+        assertThat(list, contains(u_null_id, u_null_id, id1, id2, id12, u_null));
     }
 
     /**
@@ -131,48 +130,38 @@ public class SortUtilTest{
      */
     @Test
     public void testPropertyComparator1(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User(12L, 18));
-        list.add(new User(2L, 36));
-        list.add(new User(5L, 22));
-        list.add(new User(1L, 8));
-        sort(list, new PropertyComparator<User>("id"));
-        LOGGER.debug(JsonUtil.format(list));
-    }
-
-    @Test
-    public void testPropertyComparator2(){
-        List<User> list = new ArrayList<User>();
-        list.add(new User(12L, 18));
-        list.add(new User(2L, 36));
-        list.add(new User(5L, 22));
-        list.add(new User(1L, 8));
+        User id12 = new User(12L, 18);
+        User id2 = new User(2L, 36);
+        User id5 = new User(5L, 22);
+        User id1 = new User(1L, 8);
+        List<User> list = toList(id12, id2, id5, id1);
         sort(list, "id");
-        LOGGER.debug(JsonUtil.format(list));
+        assertThat(list, contains(id1, id2, id5, id12));
     }
 
     @Test
     public void testPropertyComparator3(){
-        List<User> list = toList(//
-                        new User(12L, 18),
-                        new User(2L, 36),
-                        new User(2L, 2),
-                        new User(2L, 30),
-                        new User(1L, 8));
+        User id12_age18 = new User(12L, 18);
+        User id1_age8 = new User(1L, 8);
+        User id2_age30 = new User(2L, 30);
+        User id2_age2 = new User(2L, 2);
+        User id2_age36 = new User(2L, 36);
+        List<User> list = toList(id12_age18, id2_age36, id2_age2, id2_age30, id1_age8);
         sort(list, "id", "age");
-        LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
+        assertThat(list, contains(id1_age8, id2_age2, id2_age30, id2_age36, id12_age18));
     }
 
     @Test
     public void testPropertyComparator4(){
-        List<User> list = toList(//
-                        new User(12L, 18),
-                        new User(2L, 36),
-                        new User(2L, 2),
-                        new User(2L, 30),
-                        new User(1L, 8));
+        User id12_age18 = new User(12L, 18);
+        User id1_age8 = new User(1L, 8);
+        User id2_age30 = new User(2L, 30);
+        User id2_age2 = new User(2L, 2);
+        User id2_age36 = new User(2L, 36);
+        List<User> list = toList(id12_age18, id2_age36, id2_age2, id2_age30, id1_age8);
+
         sort(list, "age");
-        LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
+        assertThat(list, contains(id2_age2, id1_age8, id12_age18, id2_age30, id2_age36));
     }
 
     /**

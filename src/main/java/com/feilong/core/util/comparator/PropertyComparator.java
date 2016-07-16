@@ -278,7 +278,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     public int compare(T t1,T t2){
         if (t1 == t2){
             return 0;
-        }else if (null == t1){
+        }else if (null == t1){//null 排在后面
             return 1;
         }else if (null == t2){
             return -1;

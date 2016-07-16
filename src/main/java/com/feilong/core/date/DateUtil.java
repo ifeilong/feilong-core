@@ -687,7 +687,8 @@ public final class DateUtil{
      * 获得任意指定日期 <code>date</code>中的年份 {@link java.util.Calendar#YEAR}部分.
      * 
      * <pre class="code">
-     * DateUtil.getYear(<code>2012-06-29</code>) = 2012
+     * DateUtil.getYear(toDate("2012-06-29 00:26:53", COMMON_DATE_AND_TIME))    = 2012
+     * DateUtil.getYear(toDate("2016-07-16", COMMON_DATE))                      = 2016
      * </pre>
      * 
      * @param date
@@ -823,7 +824,8 @@ public final class DateUtil{
      * 获得指定日期 <code>date</code>中的小时(24小时制){@link Calendar#HOUR_OF_DAY}.
      * 
      * <pre class="code">
-     * DateUtil.getHourOfDay(2012-6-29 00:26:53) =0
+     * DateUtil.getHourOfDay(toDate("2012-06-29 00:26:53", COMMON_DATE_AND_TIME)) =0
+     * DateUtil.getHourOfDay(toDate("2016-07-16 22:34:00", COMMON_DATE_AND_TIME)) =22
      * </pre>
      * 
      * @param date
@@ -997,7 +999,7 @@ public final class DateUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>转换的时候,使用日历的宽松模式 参见 {@link java.text.DateFormat#setLenient(boolean)},即支持传入"2016-02-33",会转换成 2016-03-04</li>
+     * <li>转换的时候,使用日历的<b>宽松模式</b>,参见 {@link java.text.DateFormat#setLenient(boolean)},即支持传入"2016-02-33",会转换成 2016-03-04</li>
      * <li>如果能解析所有的字符串,那么视为成功</li>
      * <li>如果没有任何的模式匹配,将会抛出异常</li>
      * </ol>
