@@ -48,22 +48,12 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DateExtensionUtilTest2.class);
 
-    /**
-     * Test get interval hour.
-     */
     @Test
     public void testGetIntervalHour(){
-        Date beginDate = toDate("2013-12-21 00:00:00", COMMON_DATE_AND_TIME);
-        Date endDate = toDate("2013-12-21 01:00:00", COMMON_DATE_AND_TIME);
-
-        // 相差小时
-        int ihour = DateExtensionUtil.getIntervalHour(beginDate, endDate);
-
-        for (int i = 0; i < ihour; ++i){
-            for (int j = 0; j < 60; ++j){
-                LOGGER.debug("0" + i + ":" + StringUtil.format("%02d", j));
-            }
-        }
+        LOGGER.debug(
+                        StringUtil.format("%05d", getIntervalHour(
+                                        toDate("2014-01-01 00:00:00", COMMON_DATE_AND_TIME),
+                                        toDate("2014-02-01 00:00:00", COMMON_DATE_AND_TIME))));
     }
 
     /**
@@ -151,17 +141,6 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     @Test
     public void testGetIntervalDay2(){
         assertSame(3, getIntervalDay(toDate("2008-08-24", COMMON_DATE), toDate("2008-08-27", COMMON_DATE)));
-    }
-
-    /**
-     * Test get interval hour1.
-     */
-    @Test
-    public void testGetIntervalHour1(){
-        LOGGER.debug(
-                        StringUtil.format("%05d", getIntervalHour(
-                                        toDate("2014-01-01 00:00:00", COMMON_DATE_AND_TIME),
-                                        toDate("2014-02-01 00:00:00", COMMON_DATE_AND_TIME))));
     }
 
 }

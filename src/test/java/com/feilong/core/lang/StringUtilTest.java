@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
@@ -28,7 +29,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.TIMESTAMP;
@@ -79,6 +81,17 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
     }
 
+    @Test
+    public void testReplace3(){
+        Map<String, Object> valuesMap = new HashMap<String, Object>();
+        valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
+        valuesMap.put("user", 1L);
+        LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
+    }
+
+    /**
+     * Test replace22.
+     */
     @Test
     public void testReplace22(){
         String source = "jiiiiiinxin.feilong";
@@ -160,6 +173,9 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.format("%1$s,%1$s", 99));
     }
 
+    /**
+     * Format3.
+     */
     @Test
     public void format3(){
         LOGGER.debug(buildMessageLog(4, 30, "第三十二章 手段", 450));
@@ -180,6 +196,19 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.format(format, "John", "F.", "Kennedy"));
     }
 
+    /**
+     * Builds the message log.
+     *
+     * @param writeIndex
+     *            the write index
+     * @param bookSectionUrlMapSize
+     *            the book section url map size
+     * @param sectionName
+     *            the section name
+     * @param contentLength
+     *            the content length
+     * @return the string
+     */
     private static String buildMessageLog(int writeIndex,int bookSectionUrlMapSize,String sectionName,int contentLength){
         //进度,百分比
         String progress = NumberUtil.getProgress(writeIndex + 1, bookSectionUrlMapSize);
@@ -273,10 +302,10 @@ public class StringUtilTest{
      */
     @Test
     public void tokenizeToStringArray2(){
-        String str = "jin.xin  h hhaha ,lala;feilong;jin.xin  h haha ,lala;feilong";
-        String delimiters = "h";
+        String str = "jin.xin  @ @aha ,@ala;";
+        String delimiters = "@";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters, false, false);
-        LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
+        assertArrayEquals(toArray("jin.xin  ", " ", "aha ,", "ala;"), tokenizeToStringArray);
     }
 
     /**
@@ -287,7 +316,8 @@ public class StringUtilTest{
         String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
         String delimiters = ";, .";
         String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
-        LOGGER.debug(JsonUtil.format(tokenizeToStringArray));
+
+        assertArrayEquals(toArray("jin", "xin", "feilong", "jinxin", "venusdrogon", "jim"), tokenizeToStringArray);
     }
 
 }

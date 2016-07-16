@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -414,6 +416,29 @@ public final class StringUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <p>
+     * 注意:此方法只能替换字符串,而不能像el表达式一样使用对象属性之类的来替换
+     * </p>
+     * 
+     * <h3>比如:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Object>} valuesMap = new HashMap{@code <String, Object>}();
+     * valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
+     * valuesMap.put("user", new User(1L));
+     * LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * 2016-07-16${today1}${user.id}com.feilong.test.User@16f9a31
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <V>
      *            the value type
@@ -428,7 +453,7 @@ public final class StringUtil{
      * @since 1.1.1
      */
     public static <V> String replace(CharSequence templateString,Map<String, V> valuesMap){
-        return StringUtils.isEmpty(templateString) ? StringUtils.EMPTY : StrSubstitutor.replace(templateString, valuesMap);
+        return StringUtils.isEmpty(templateString) ? EMPTY : StrSubstitutor.replace(templateString, valuesMap);
     }
 
     // [end]

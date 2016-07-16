@@ -30,7 +30,7 @@ public class Slf4jUtilTest{
      * Test.
      */
     @Test
-    public void test(){
+    public void testFormat(){
         assertEquals(null, Slf4jUtil.format(null, "今天", "aaaa"));
         assertEquals("", Slf4jUtil.format("", (Object) null));
         assertEquals("", Slf4jUtil.format(""));
@@ -41,7 +41,7 @@ public class Slf4jUtilTest{
      * Test.
      */
     @Test
-    public void test1(){
+    public void testFormat1(){
         assertEquals("今天,aaaa", Slf4jUtil.format("{},{}", "今天", "aaaa"));
         assertEquals("", Slf4jUtil.format("", "今天", "aaaa"));
     }

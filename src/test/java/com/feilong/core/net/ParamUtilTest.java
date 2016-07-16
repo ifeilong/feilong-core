@@ -15,7 +15,10 @@
  */
 package com.feilong.core.net;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -236,10 +239,17 @@ public class ParamUtilTest{
      */
     @Test
     public void testToSingleValueMap(){
-        String queryString = "";
-        //queryString = "_input_charset=UTF-8&out_order_no=2015080310000132&partner=2088201564809153&service=close_trade&sign=dc5a40d1d554b2ef115461f0ed6c49fc&sign_type=MD5&trade_role=S";
-        queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap(queryString, UTF8)));
+        String queryString = "sec_id=MD5&format=xml&sign=cc945983476d615ca66cee41a883f6c1&v=2.0&req_data=%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E&service=alipay.wap.auth.authAndExecute&partner=2088011438559510";
+        assertThat(ParamUtil.toSingleValueMap(queryString, UTF8), allOf(//
+                        hasEntry("sec_id", "MD5"),
+                        hasEntry("format", "xml"),
+                        hasEntry("sign", "cc945983476d615ca66cee41a883f6c1"),
+                        hasEntry("v", "2.0"),
+                        hasEntry(
+                                        "req_data",
+                                        "%3Cauth_and_execute_req%3E%3Crequest_token%3E201511191eb5762bd0150ab33ed73976f7639893%3C%2Frequest_token%3E%3C%2Fauth_and_execute_req%3E"),
+                        hasEntry("service", "alipay.wap.auth.authAndExecute"),
+                        hasEntry("partner", "2088011438559510")));
     }
 
     /**

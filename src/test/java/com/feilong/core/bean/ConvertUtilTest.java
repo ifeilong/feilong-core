@@ -18,6 +18,7 @@ package com.feilong.core.bean;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertArrayEquals;
@@ -494,9 +495,7 @@ public class ConvertUtilTest{
         List<String> list = new ArrayList<String>();
         Collections.addAll(list, "a", "b");
         Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);
-
-        List<String> list2 = toList(enumeration);
-        LOGGER.debug(JsonUtil.format(list2, 0, 0));
+        assertThat(toList(enumeration), contains("a", "b"));
 
         enumeration = null;
         assertEquals(emptyList(), toList(enumeration));

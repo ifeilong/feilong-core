@@ -15,60 +15,76 @@
  */
 package com.feilong.core.util;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Alphabet;
+import com.feilong.core.Repeat;
+import com.feilong.core.RepeatRule;
 
-/**
- * The Class RandomUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0
- */
 public class RandomUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RandomUtilTest.class);
+    private static final Logger LOGGER     = LoggerFactory.getLogger(RandomUtilTest.class);
+
+    @Rule
+    public RepeatRule           repeatRule = new RepeatRule();
 
     /**
      * Test create random.
      */
     @Test
+    @Repeat(20000)
     public void testCreateRandom(){
-        LOGGER.debug(RandomUtil.createRandom(800) + "");
+        assertThat(RandomUtil.createRandom(800), allOf(greaterThanOrEqualTo(0L), lessThan(800L)));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateRandom1(){
+        RandomUtil.createRandom(null);
     }
 
     /**
      * Creates the random.
      */
     @Test
+    @Repeat(20000)
     public void testCreateRandom2(){
-        LOGGER.debug("" + RandomUtil.createRandom(10, 20));
-        LOGGER.debug("" + RandomUtil.createRandom(0, 800));
+        assertThat(RandomUtil.createRandom(10, 20), allOf(greaterThanOrEqualTo(10L), lessThan(20L)));
+        assertThat(RandomUtil.createRandom(0, 800), allOf(greaterThanOrEqualTo(0L), lessThan(800L)));
+    }
 
+    @Test
+    public void testCreateRandom3(){
         assertEquals(800L, RandomUtil.createRandom(800, 800));
     }
 
-    /**
-     * 创建 random with length.
-     */
     @Test
-    public void testCreateRandomWithLength1(){
-        for (int i = 0, j = 5; i < j; ++i){
-            LOGGER.debug("{} ==> {}", i, RandomUtil.createRandomWithLength(2));
-        }
+    @Repeat(20000)
+    public void testCreateRandomWithLength0(){
+        assertThat(RandomUtil.createRandomWithLength(1), allOf(greaterThan(0L), lessThan(10L)));
     }
 
-    /**
-     * 创建 random with length1.
-     */
     @Test
+    @Repeat(20000)
+    public void testCreateRandomWithLength1(){
+        assertThat(RandomUtil.createRandomWithLength(2), allOf(greaterThanOrEqualTo(10L), lessThan(100L)));
+    }
+
+    @Test
+    @Repeat(20000)
     public void testCreateRandomWithLength2(){
-        LOGGER.debug(RandomUtil.createRandomWithLength(18) + "");
+        assertThat(RandomUtil.createRandomWithLength(18), allOf(greaterThanOrEqualTo(100000000000000000L), lessThan(1000000000000000000L)));
     }
 
     /**
@@ -77,15 +93,6 @@ public class RandomUtilTest{
     @Test(expected = IllegalArgumentException.class)
     public void testCreateRandomWithLength(){
         RandomUtil.createRandomWithLength(-1);
-    }
-
-    /**
-     * Testget random from string.
-     */
-    @Test
-    public void testGetRandomFromString(){
-        LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL_AND_LETTERS, 5));
-        LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 200));
     }
 
     /**
@@ -105,10 +112,28 @@ public class RandomUtilTest{
     }
 
     /**
+     * Testget random from string.
+     */
+    @Test
+    @Repeat(20000)
+    public void testGetRandomFromString(){
+        assertThat(RandomUtil.createRandomFromString(Alphabet.DECIMAL_AND_LETTERS, 5).length(), equalTo(5));
+
+    }
+
+    @Test
+    @Repeat(20000)
+    public void testGetRandomFromString3(){
+        assertThat(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 200).length(), equalTo(200));
+    }
+
+    /**
      * Creates the random from string.
      */
     @Test
+    @Repeat(20000)
     public void testCreateRandomFromString(){
-        LOGGER.debug(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 8, 20));
+        assertThat(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 8, 20).length(), allOf(greaterThanOrEqualTo(8), lessThan(20)));
     }
+
 }

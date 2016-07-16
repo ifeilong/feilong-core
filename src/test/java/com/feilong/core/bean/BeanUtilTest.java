@@ -45,6 +45,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateUtil;
+import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.store.member.Address;
 import com.feilong.store.member.Customer;
 import com.feilong.store.member.Member;
@@ -279,7 +280,7 @@ public class BeanUtilTest{
      * Populate.
      */
     @Test
-    public void populate(){
+    public void testPopulate(){
         User user = new User();
         user.setId(5L);
 
@@ -293,6 +294,14 @@ public class BeanUtilTest{
 
         BeanUtil.copyProperties(user, properties);
         LOGGER.debug(JsonUtil.format(user));
+    }
+
+    @Test
+    public void testPopulateVarName(){
+        Map<String, String> readPropertiesToMap = ResourceBundleUtil.readPropertiesToMap("messages.feilong-core-test");
+
+        VarBean varBean = new VarBean();
+        LOGGER.debug(JsonUtil.format(BeanUtil.populateVarNameBean(varBean, readPropertiesToMap)));
     }
 
     /**
