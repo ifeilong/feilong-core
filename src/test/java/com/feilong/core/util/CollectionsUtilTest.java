@@ -359,14 +359,11 @@ public class CollectionsUtilTest{
         assertThat(select, allOf(hasItem(liubei), hasItem(guanyu), not(hasItem(zhangfei))));
     }
 
-    /**
-     * Test select1.
-     */
     @Test
-    public void testSelectPredicate(){
+    public void testSelectPredicate1(){
         List<Long> list = toList(1L, 1L, 2L, 3L);
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(list, new EqualPredicate<Long>(1L))));
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.select(null, new EqualPredicate<Long>(1L))));
+        assertThat(CollectionsUtil.select(list, new EqualPredicate<Long>(1L)), contains(1L, 1L));
+        assertEquals(emptyList(), CollectionsUtil.select(null, new EqualPredicate<Long>(1L)));
     }
 
     /**
