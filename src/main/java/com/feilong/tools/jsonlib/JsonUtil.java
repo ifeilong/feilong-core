@@ -173,6 +173,7 @@ public final class JsonUtil{
      * <p>
      * 该方法还可以格式化json字符串成缩进形式的格式
      * </p>
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
@@ -502,7 +503,46 @@ public final class JsonUtil{
     }
 
     /**
-     * Format.
+     * 将对象格式化 成json字符串,并且按照指定的缩进(<code>indentFactor</code>和 <code>indent</code>) 输出.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * //查询 >10 的元素
+     * Predicate<Integer> predicate = new ComparatorPredicate<Integer>(10, ComparatorUtils.<Integer> naturalComparator(), Criterion.LESS);
+     * 
+     * List<Integer> result = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
+     * LOGGER.debug(JsonUtil.format(result, 0, 0));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [30,55,88,12]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <pre class="code">
+     * LOGGER.debug(JsonUtil.format(result, 4, 4));// = LOGGER.debug(JsonUtil.format(result))
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [
+        30,
+        55,
+        88,
+        12
+    ]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param obj
      *            the obj
@@ -518,7 +558,53 @@ public final class JsonUtil{
     }
 
     /**
-     * Format.
+     * 使用配置 <code>JsonFormatConfig</code> 来格式化成json字符串.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User user = new User("feilong1", 24);
+     * user.setPassword("123456");
+     * user.setMoney(toBigDecimal("99999999.00"));
+     * 
+     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <String, JsonValueProcessor>}();
+     * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
+     * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
+     * 
+     * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * 
+     * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+        "userAddresseList": [],
+        "userAddresses": [],
+        "date": null,
+        "password": "******",
+        "id": 0,
+        "age": 24,
+        "name": "feilong1",
+        "money": "99999999.00",
+        "attrMap": null,
+        "userInfo": {"age": 0},
+        "nickNames": [],
+        "loves": []
+    }
+     * </pre>
+     * 
+     * <p>
+     * 当然上述示例中,<code>password</code>属性默认就是由 {@link SensitiveWordsJsonValueProcessor} 来处理
+     * </p>
+     * 
+     * </blockquote>
      *
      * @param obj
      *            the obj

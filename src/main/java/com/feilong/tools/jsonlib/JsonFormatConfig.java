@@ -20,7 +20,7 @@ import java.util.Map;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * The Class JsonFormatConfig.
+ * 格式化成json的一些配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see net.sf.json.JsonConfig
@@ -28,14 +28,14 @@ import net.sf.json.processors.JsonValueProcessor;
  */
 public class JsonFormatConfig{
 
-    /** The excludes. */
+    /** 排除属性名称的数组. */
     private String[]                        excludes;
 
-    /** The includes. */
+    /** 包含属性名称的数组. */
     private String[]                        includes;
 
     /**
-     * The property name and json value processor map.
+     * 指定属性名称使用的处理器.
      * 
      * <h3>示例:</h3>
      * 
@@ -75,6 +75,8 @@ public class JsonFormatConfig{
      */
     private Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap;
 
+    //***************************************************************************
+
     /**
      * The Constructor.
      */
@@ -104,27 +106,48 @@ public class JsonFormatConfig{
         this.includes = includes;
     }
 
+    //***************************************************************************
+
     /**
-     * 获得 the excludes.
+     * 获得 排除属性名称的数组.
      *
-     * @return the excludes
+     * @return the 排除属性名称的数组
      */
     public String[] getExcludes(){
         return excludes;
     }
 
     /**
-     * 设置 the excludes.
+     * 设置 排除属性名称的数组.
      *
      * @param excludes
-     *            the excludes to set
+     *            the new 排除属性名称的数组
      */
     public void setExcludes(String[] excludes){
         this.excludes = excludes;
     }
 
     /**
-     * 获得 the property name and json value processor map.
+     * 获得 包含属性名称的数组.
+     *
+     * @return the 包含属性名称的数组
+     */
+    public String[] getIncludes(){
+        return includes;
+    }
+
+    /**
+     * 设置 包含属性名称的数组.
+     *
+     * @param includes
+     *            the new 包含属性名称的数组
+     */
+    public void setIncludes(String[] includes){
+        this.includes = includes;
+    }
+
+    /**
+     * 指定属性名称使用的处理器.
      * 
      * <h3>示例:</h3>
      * 
@@ -168,7 +191,7 @@ public class JsonFormatConfig{
     }
 
     /**
-     * 设置 the property name and json value processor map.
+     * 指定属性名称使用的处理器.
      *
      * <h3>示例:</h3>
      * 
@@ -212,22 +235,4 @@ public class JsonFormatConfig{
         this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;
     }
 
-    /**
-     * 获得 includes.
-     *
-     * @return the includes
-     */
-    public String[] getIncludes(){
-        return includes;
-    }
-
-    /**
-     * 设置 includes.
-     *
-     * @param includes
-     *            the includes to set
-     */
-    public void setIncludes(String[] includes){
-        this.includes = includes;
-    }
 }

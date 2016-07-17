@@ -138,10 +138,12 @@ public class AggregateUtilTest{
 
     @Test
     public void testStatisticsUtilTest1(){
+
+        //查询 >10 的元素
         Predicate<Integer> predicate = new ComparatorPredicate<Integer>(10, ComparatorUtils.<Integer> naturalComparator(), Criterion.LESS);
 
-        List<Integer> select = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
-        LOGGER.debug(JsonUtil.format(select, 0, 0));
+        List<Integer> result = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
+        LOGGER.debug(JsonUtil.format(result, 0, 0));
     }
 
     /**
