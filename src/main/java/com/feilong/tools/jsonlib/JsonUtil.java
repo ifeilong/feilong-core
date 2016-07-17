@@ -15,6 +15,8 @@
  */
 package com.feilong.tools.jsonlib;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -262,7 +264,7 @@ public final class JsonUtil{
      * @since 1.3.0
      */
     public static <K, V> String formatSimpleMap(Map<K, V> inputMap){
-        return null == inputMap ? StringUtils.EMPTY : formatSimpleMap(inputMap, (Class<?>) null);
+        return null == inputMap ? EMPTY : formatSimpleMap(inputMap, (Class<?>) null);
     }
 
     /**
@@ -299,7 +301,7 @@ public final class JsonUtil{
      */
     public static <K, V> String formatSimpleMap(Map<K, V> inputMap,Class<?>...allowFormatClassTypes){
         if (null == inputMap){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         Map<K, Object> simpleMap = new TreeMap<K, Object>();
         for (Map.Entry<K, V> entry : inputMap.entrySet()){
@@ -310,7 +312,53 @@ public final class JsonUtil{
     }
 
     /**
-     * 格式化输出,将对象转成toJSON,并且 toString(4, 4) 输出.
+     * 将对象格式化 成json字符串(排除指定名称的属性 <code>excludes</code>),并且 toString(4, 4) 输出.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User user = new User();
+     * 
+     * user.setPassword("123456");
+     * user.setId(8L);
+     * user.setName("feilong");
+     * user.setDate(new Date());
+     * user.setMoney(toBigDecimal("99999999.00"));
+     * 
+     * user.setLoves(toArray("桔子", "香蕉"));
+     * user.setUserInfo(new UserInfo(10));
+     * 
+     * UserAddress userAddress1 = new UserAddress("上海市闸北区万荣路1188号H座109-118室");
+     * UserAddress userAddress2 = new UserAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
+     * 
+     * user.setUserAddresses(toArray(userAddress1, userAddress2));
+     * user.setUserAddresseList(toList(userAddress1, userAddress2));
+     * 
+     * LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     *  {
+        "userAddresseList":         [
+            {"address": "上海市闸北区万荣路1188号H座109-118室"},
+            {"address": "上海市闸北区阳城路280弄25号802室(阳城贵都)"}
+        ],
+        "date": "2016-07-17 16:04:35",
+        "password": "******",
+        "id": 8,
+        "age": 0,
+        "money": 99999999,
+        "nickNames": []
+    }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param obj
      *            对象
@@ -324,12 +372,46 @@ public final class JsonUtil{
     }
 
     /**
-     * Format.
+     * 将对象格式化 成json字符串(排除指定名称的属性 <code>excludes</code>),并且 按照指定的缩进(<code>indentFactor</code>和 <code>indent</code>) 输出.
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User user = new User();
+     * 
+     * user.setPassword("123456");
+     * user.setId(8L);
+     * user.setName("feilong");
+     * user.setDate(new Date());
+     * user.setMoney(toBigDecimal("99999999.00"));
+     * 
+     * user.setLoves(toArray("桔子", "香蕉"));
+     * user.setUserInfo(new UserInfo(10));
+     * 
+     * UserAddress userAddress1 = new UserAddress("上海市闸北区万荣路1188号H座109-118室");
+     * UserAddress userAddress2 = new UserAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
+     * 
+     * user.setUserAddresses(toArray(userAddress1, userAddress2));
+     * user.setUserAddresseList(toList(userAddress1, userAddress2));
+     * 
+     * LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 0, 0));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {"userAddresseList":[{"address":"上海市闸北区万荣路1188号H座109-118室"},{"address":"上海市闸北区阳城路280弄25号802室(阳城贵都)"}],"date":"2016-07-17 16:05:34","password":"******","id":8,"age":0,"money":99999999,"nickNames":[]}
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param obj
      *            the obj
      * @param excludes
-     *            the excludes
+     *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
      * @param indentFactor
      *            the indent factor
      * @param indent
@@ -339,11 +421,44 @@ public final class JsonUtil{
      * @see #buildJsonFormatConfig(String[], String[])
      */
     public static String format(Object obj,String[] excludes,Integer indentFactor,Integer indent){
-        return null == obj ? StringUtils.EMPTY : format(obj, buildJsonFormatConfig(excludes, null), indentFactor, indent);
+        return null == obj ? EMPTY : format(obj, buildJsonFormatConfig(excludes, null), indentFactor, indent);
     }
 
     /**
-     * 只包含这些key才被format出json格式.
+     * 只包含这些key才被format 成 json格式.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User user1 = new User("feilong1", 24);
+     * user1.setNickNames(toArray("xin.jin", "shuai.ge"));
+     * User user2 = new User("feilong2", 240);
+     * user2.setNickNames(toArray("xin.jin", "shuai.ge"));
+     * 
+     * List{@code <User>} list = toList(user1, user2);
+     * 
+     * LOGGER.debug(JsonUtil.formatWithIncludes(list, "name", "age"));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    [{
+                "age": 24,
+                "name": "feilong1"
+            },
+                    {
+                "age": 240,
+                "name": "feilong2"
+            }
+        ]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param obj
      *            the obj
@@ -355,7 +470,7 @@ public final class JsonUtil{
      * @since 1.0.8
      */
     public static String formatWithIncludes(Object obj,final String...includes){
-        return null == obj ? StringUtils.EMPTY : format(obj, buildJsonFormatConfig(null, includes));
+        return null == obj ? EMPTY : format(obj, buildJsonFormatConfig(null, includes));
     }
 
     /**
@@ -463,7 +578,7 @@ public final class JsonUtil{
      * @since 1.5.6
      */
     public static String formatObjectFieldsNameAndValueMap(Object obj){
-        return null == obj ? StringUtils.EMPTY : format(FieldUtil.getAllFieldNameAndValueMap(obj), buildJsonFormatConfig(obj));
+        return null == obj ? EMPTY : format(FieldUtil.getAllFieldNameAndValueMap(obj), buildJsonFormatConfig(obj));
     }
 
     /**
@@ -507,7 +622,7 @@ public final class JsonUtil{
      * @since 1.0.8
      */
     private static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent){
-        return null == obj ? StringUtils.EMPTY : toJSON(obj, jsonConfig).toString(indentFactor, indent);
+        return null == obj ? EMPTY : toJSON(obj, jsonConfig).toString(indentFactor, indent);
     }
 
     // [end]
