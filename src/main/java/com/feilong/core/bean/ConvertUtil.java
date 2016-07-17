@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -1099,9 +1098,21 @@ public final class ConvertUtil{
      * 转换成map.
      * 
      * <p>
+     * 注意,返回的是 {@link TreeMap}
+     * </p>
+     * 
+     * <h3>关于 <code>Properties</code></h3>
+     * 
+     * <blockquote>
+     * <p>
      * Create a new HashMap and pass an instance of Properties.<br>
      * Properties is an implementation of a Map which keys and values stored as in a string.
      * </p>
+     * 
+     * <p>
+     * 因此Properties 可以强制转换成map
+     * </p>
+     * </blockquote>
      * 
      * @param properties
      *            the properties
@@ -1112,7 +1123,7 @@ public final class ConvertUtil{
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Map<String, String> toMap(Properties properties){
         Validate.notEmpty(properties, "properties can't be null/empty!");
-        return new HashMap<String, String>((Map) properties);
+        return new TreeMap<String, String>((Map) properties);//为了log方便,使用 treeMap
     }
 
     /**
@@ -1139,7 +1150,7 @@ public final class ConvertUtil{
             return Collections.emptyMap();
         }
 
-        Map<String, String> map = new TreeMap<String, String>();
+        Map<String, String> map = new TreeMap<String, String>();//为了log方便,使用 treeMap
         while (keysEnumeration.hasMoreElements()){
             String key = keysEnumeration.nextElement();
             map.put(key, resourceBundle.getString(key));

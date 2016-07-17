@@ -17,13 +17,13 @@ package com.feilong.core.lang;
 
 import java.util.Map;
 import java.util.Properties;
-import java.util.TreeMap;
 
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.ConvertUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 
 /**
  * {@link java.lang.System}工具类.
@@ -337,9 +337,7 @@ public final class SystemUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * LOGGER.debug(JsonUtil.format(SystemUtil.getPropertiesMap()));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
@@ -399,7 +397,7 @@ public final class SystemUtil{
      * @since 1.8.0 change name
      */
     public static Map<String, String> getPropertiesMap(){
-        return new TreeMap<String, String>(toMap(System.getProperties()));
+        return toMap(System.getProperties());
     }
 
     /**
@@ -468,7 +466,7 @@ public final class SystemUtil{
      * @since 1.8.0 change name
      */
     public static Map<String, String> getEnvMap(){
-        return new TreeMap<String, String>(System.getenv());
+        return sortByKeyAsc(System.getenv());
     }
 
     /**
