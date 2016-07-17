@@ -299,7 +299,7 @@ public class BeanUtilTest{
 
     @Test
     public void testPopulateAlias(){
-        Map<String, String> readPropertiesToMap = ResourceBundleUtil.readPropertiesToMap("messages.feilong-core-test");
+        Map<String, String> readPropertiesToMap = ResourceBundleUtil.readToMap("messages.feilong-core-test");
 
         VarBean varBean = new VarBean();
         LOGGER.debug(JsonUtil.format(BeanUtil.populateAliasBean(varBean, readPropertiesToMap)));

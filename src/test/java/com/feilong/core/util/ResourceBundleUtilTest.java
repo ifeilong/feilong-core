@@ -34,7 +34,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.ResourceBundleUtil.getValue;
-import static com.feilong.core.util.ResourceBundleUtil.readPropertiesToMap;
+import static com.feilong.core.util.ResourceBundleUtil.readToMap;
 
 /**
  * The Class ResourceBundleUtilTest.
@@ -127,8 +127,8 @@ public class ResourceBundleUtilTest{
      * Read all properties to map.
      */
     @Test
-    public void testReadAllPropertiesToMap(){
-        LOGGER.debug(JsonUtil.format(readPropertiesToMap(BASE_NAME, Locale.CHINA)));
+    public void testReadToMap(){
+        LOGGER.debug(JsonUtil.format(readToMap(BASE_NAME, Locale.CHINA)));
     }
 
     /**
@@ -144,9 +144,8 @@ public class ResourceBundleUtilTest{
      * Test read properties to alias bean.
      */
     @Test
-    public void testReadPropertiesToAliasBean(){
-        DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil
-                        .readPropertiesToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+    public void testReadToAliasBean(){
+        DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.readToAliasBean("messages.memcached", DangaMemCachedConfig.class);
         LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
     }
 
@@ -154,15 +153,14 @@ public class ResourceBundleUtilTest{
      * Test read properties to alias bean1.
      */
     @Test
-    public void testReadPropertiesToAliasBean1(){
+    public void testReadToAliasBean1(){
         ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
         char[] allowedChars = { ':' };
         arrayConverter.setAllowedChars(allowedChars);
 
         BeanUtil.register(arrayConverter, String[].class);
 
-        DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil
-                        .readPropertiesToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+        DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.readToAliasBean("messages.memcached", DangaMemCachedConfig.class);
         LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
     }
 
@@ -172,32 +170,32 @@ public class ResourceBundleUtilTest{
      * Test read properties to alias bean nullpoint.
      */
     @Test(expected = NullPointerException.class)
-    public void testReadPropertiesToAliasBeanNullpoint(){
-        ResourceBundleUtil.readPropertiesToAliasBean(null, DangaMemCachedConfig.class);
+    public void testReadToAliasBeanNullpoint(){
+        ResourceBundleUtil.readToAliasBean(null, DangaMemCachedConfig.class);
     }
 
     /**
      * Test read properties to alias bean illegal argument exception.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testReadPropertiesToAliasBeanIllegalArgumentException(){
-        ResourceBundleUtil.readPropertiesToAliasBean("   ", DangaMemCachedConfig.class);
+    public void testReadToAliasBeanIllegalArgumentException(){
+        ResourceBundleUtil.readToAliasBean("   ", DangaMemCachedConfig.class);
     }
 
     /**
      * Test read properties to alias bean nullpoint1.
      */
     @Test(expected = NullPointerException.class)
-    public void testReadPropertiesToAliasBeanNullpoint1(){
-        ResourceBundleUtil.readPropertiesToAliasBean("messages.memcached", null);
+    public void testReadToAliasBeanNullpoint1(){
+        ResourceBundleUtil.readToAliasBean("messages.memcached", null);
     }
 
     /**
      * Test read properties to alias bean nullpoint4.
      */
     @Test(expected = MissingResourceException.class)
-    public void testReadPropertiesToAliasBeanNullpoint4(){
-        ResourceBundleUtil.readPropertiesToAliasBean("messages.memcached111", DangaMemCachedConfig.class);
+    public void testReadToAliasBeanNullpoint4(){
+        ResourceBundleUtil.readToAliasBean("messages.memcached111", DangaMemCachedConfig.class);
     }
 
 }

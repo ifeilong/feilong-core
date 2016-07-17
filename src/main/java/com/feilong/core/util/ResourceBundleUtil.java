@@ -280,11 +280,11 @@ public final class ResourceBundleUtil{
      *             如果 <code>baseName</code> 是 blank
      * @throws MissingResourceException
      *             如果资源文件 <code>baseName</code> 不存在
-     * @see #readPropertiesToMap(String, Locale)
+     * @see #readToMap(String, Locale)
      * @since 1.8.1 change name
      */
-    public static Map<String, String> readPropertiesToMap(String baseName){
-        return readPropertiesToMap(baseName, null);
+    public static Map<String, String> readToMap(String baseName){
+        return readToMap(baseName, null);
     }
 
     /**
@@ -314,7 +314,7 @@ public final class ResourceBundleUtil{
      * @see MapUtils#toMap(ResourceBundle)
      * @since 1.8.1 change name
      */
-    public static Map<String, String> readPropertiesToMap(String baseName,Locale locale){
+    public static Map<String, String> readToMap(String baseName,Locale locale){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
         return toMap(resourceBundle);
     }
@@ -513,10 +513,10 @@ public final class ResourceBundleUtil{
      * @see com.feilong.core.bean.BeanUtil#populateAliasBean(Object, Map)
      * @since 1.8.1
      */
-    public static <T> T readPropertiesToAliasBean(String baseName,Class<T> aliasBeanClass){
+    public static <T> T readToAliasBean(String baseName,Class<T> aliasBeanClass){
         Validate.notBlank(baseName, "baseName can't be null/empty!");
         Validate.notNull(aliasBeanClass, "aliasBeanClass can't be null!");
-        return BeanUtil.populateAliasBean(newInstance(aliasBeanClass), readPropertiesToMap(baseName));
+        return BeanUtil.populateAliasBean(newInstance(aliasBeanClass), readToMap(baseName));
     }
 
     //********************************getResourceBundle**********************************************
