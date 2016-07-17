@@ -388,7 +388,7 @@ public class BeanUtilTest{
         valueMap.put("firstName", "Fred");
         valueMap.put("lastName", "Flintstone");
 
-        DynaBean dynaBean = BeanUtil.createDynaBean(typeMap, valueMap);
+        DynaBean dynaBean = BeanUtil.newDynaBean(typeMap, valueMap);
         LOGGER.debug(JsonUtil.format(dynaBean));
     }
 
@@ -419,7 +419,7 @@ public class BeanUtilTest{
         valueMap.put("firstName", "Fred");
         valueMap.put("lastName", "Flintstone");
 
-        BeanUtil.createDynaBean(null, valueMap);
+        BeanUtil.newDynaBean(null, valueMap);
     }
 
     @Test(expected = NullPointerException.class)
@@ -429,7 +429,7 @@ public class BeanUtilTest{
         typeMap.put("firstName", String.class);
         typeMap.put("lastName", String.class);
 
-        BeanUtil.createDynaBean(typeMap, null);
+        BeanUtil.newDynaBean(typeMap, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -443,7 +443,7 @@ public class BeanUtilTest{
         valueMap.put("address", new HashMap());
         valueMap.put("firstName", "Fred");
 
-        BeanUtil.createDynaBean(typeMap, valueMap);
+        BeanUtil.newDynaBean(typeMap, valueMap);
     }
 
 }

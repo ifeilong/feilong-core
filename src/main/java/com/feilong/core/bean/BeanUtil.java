@@ -877,7 +877,7 @@ public final class BeanUtil{
      * valueMap.put("firstName", "Fred");
      * valueMap.put("lastName", "Flintstone");
      * 
-     * DynaBean dynaBean = BeanUtil.createDynaBean(typeMap, valueMap);
+     * DynaBean dynaBean = BeanUtil.newDynaBean(typeMap, valueMap);
      * LOGGER.debug(JsonUtil.format(dynaBean));
      * 
      * </pre>
@@ -903,9 +903,9 @@ public final class BeanUtil{
      *             如果 <code>typeMap </code> 或者 <code>valueMap</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>typeMap.size() != valueMap.size()</code>
-     * @since 1.8.0
+     * @since 1.8.1 change name
      */
-    public static DynaBean createDynaBean(Map<String, Class<?>> typeMap,Map<String, Object> valueMap){
+    public static DynaBean newDynaBean(Map<String, Class<?>> typeMap,Map<String, Object> valueMap){
         Validate.notNull(typeMap, "typeMap can't be null!");
         Validate.notNull(valueMap, "valueMap can't be null!");
         Validate.isTrue(typeMap.size() == valueMap.size(), "typeMap size:[%s] != valueMap size:[%s]", typeMap.size(), valueMap.size());
