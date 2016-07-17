@@ -312,7 +312,11 @@ public final class JsonUtil{
     }
 
     /**
-     * 将对象格式化 成json字符串(排除指定名称的属性 <code>excludes</code>),并且 toString(4, 4) 输出.
+     * 将对象格式化 成json字符串(<b>排除</b>指定名称的属性 <code>excludes</code>),并且 toString(4, 4) 输出.
+     * 
+     * <p>
+     * 和该方法对应的有,仅仅<b>包含</b>某些属性,see {@link #formatWithIncludes(Object, String...)}
+     * </p>
      * 
      * <h3>示例:</h3>
      * 
@@ -372,7 +376,12 @@ public final class JsonUtil{
     }
 
     /**
-     * 将对象格式化 成json字符串(排除指定名称的属性 <code>excludes</code>),并且 按照指定的缩进(<code>indentFactor</code>和 <code>indent</code>) 输出.
+     * 将对象格式化 成json字符串(<b>排除</b>指定名称的属性 <code>excludes</code>),并且按照指定的缩进(<code>indentFactor</code>和 <code>indent</code>) 输出.
+     * 
+     * <p>
+     * 和该方法对应的有,仅仅<b>包含</b>某些属性,see {@link #formatWithIncludes(Object, String...)}
+     * </p>
+     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -425,7 +434,11 @@ public final class JsonUtil{
     }
 
     /**
-     * 只包含这些key才被format 成 json格式.
+     * 将对象格式化 成json字符串(<b>仅仅包含</b>指定名称的属性 <code>includes</code>).
+     * 
+     * <p>
+     * 和该方法对应的有,仅仅<b>排除</b>某些属性,see {@link #format(Object, String[])}以及 {@link #format(Object, String[], Integer, Integer)}
+     * </p>
      * 
      * <h3>示例:</h3>
      * 
