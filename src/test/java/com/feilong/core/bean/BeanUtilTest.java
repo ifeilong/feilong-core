@@ -297,11 +297,11 @@ public class BeanUtilTest{
     }
 
     @Test
-    public void testPopulateVarName(){
+    public void testPopulateAlias(){
         Map<String, String> readPropertiesToMap = ResourceBundleUtil.readPropertiesToMap("messages.feilong-core-test");
 
         VarBean varBean = new VarBean();
-        LOGGER.debug(JsonUtil.format(BeanUtil.populateVarNameBean(varBean, readPropertiesToMap)));
+        LOGGER.debug(JsonUtil.format(BeanUtil.populateAliasBean(varBean, readPropertiesToMap)));
     }
 
     /**

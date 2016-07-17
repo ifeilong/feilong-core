@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,6 +29,7 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
+import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -35,11 +38,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
+import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.MessageFormatUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
 
 /**
  * {@link java.util.ResourceBundle ResourceBundle} 工具类.
@@ -244,14 +249,14 @@ public final class ResourceBundleUtil{
 
         if (!resourceBundle.containsKey(key)){
             LOGGER.warn("resourceBundle:[{}] don't containsKey:[{}]", resourceBundle, key);
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         String value = resourceBundle.getString(key);
         if (isNullOrEmpty(value)){
             LOGGER.trace("resourceBundle has key:[{}],but value is null/empty", key);
         }
-        return isNullOrEmpty(value) ? StringUtils.EMPTY : MessageFormatUtil.format(value, arguments);// 支持 arguments 为null,原样返回
+        return isNullOrEmpty(value) ? EMPTY : MessageFormatUtil.format(value, arguments);// 支持 arguments 为null,原样返回
     }
 
     //***************************************************************************
@@ -312,6 +317,206 @@ public final class ResourceBundleUtil{
     public static Map<String, String> readPropertiesToMap(String baseName,Locale locale){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
         return toMap(resourceBundle);
+    }
+
+    /**
+     * 读取properties配置文件,直接转换成aliasBean.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 在 classpath messages 目录下面有 memcached.properties,内容如下:
+     * </p>
+     * 
+     * <pre class="code">
+     * #expiretime period in minutes
+     * #逗号 分隔
+     * 
+     * # 注意此处 ip出现 - 横杆 仅作测试使用
+     * memcached.serverlist=172.20.3-1.23:11211,172.20.31.22:11211 
+     * memcached.poolname=sidsock2
+     * #单位分钟
+     * memcached.expiretime=180
+     * 
+     * memcached.serverweight=2
+     * 
+     * memcached.initconnection=10
+     * memcached.minconnection=5
+     * memcached.maxconnection=250
+     * 
+     * #设置主线程睡眠时间，每30秒苏醒一次，维持连接池大小
+     * memcached.maintSleep=30
+     * 
+     * #关闭套接字缓存
+     * memcached.nagle=false
+     * 
+     * #连接建立后的超时时间
+     * memcached.socketto=3000
+     * memcached.alivecheck=false
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 有以下<b>aliasBean</b>信息:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class DangaMemCachedConfig{
+     * 
+     *     <span style="color:green">//** The serverlist.</span>
+     *     &#64;Alias(name = "memcached.serverlist",sampleValue = "172.20.31.23:11211,172.20.31.22:11211")
+     *     private String[] serverList;
+     * 
+     *     <span style="color:green">//@Alias(name = "memcached.poolname",sampleValue = "sidsock2")</span>
+     *     private String poolName;
+     * 
+     *     <span style="color:green">//** The expire time 单位分钟.</span>
+     *     &#64;Alias(name = "memcached.expiretime",sampleValue = "180")
+     *     private Integer expireTime;
+     * 
+     *     <span style="color:green">//** 权重. </span>
+     *     &#64;Alias(name = "memcached.serverweight",sampleValue = "2,1")
+     *     private Integer[] weight;
+     * 
+     *     <span style="color:green">//** The init connection. </span>
+     *     &#64;Alias(name = "memcached.initconnection",sampleValue = "10")
+     *     private Integer initConnection;
+     * 
+     *     <span style="color:green">//** The min connection.</span>
+     *     &#64;Alias(name = "memcached.minconnection",sampleValue = "5")
+     *     private Integer minConnection;
+     * 
+     *     <span style="color:green">//** The max connection. </span>
+     *     &#64;Alias(name = "memcached.maxconnection",sampleValue = "250")
+     *     private Integer maxConnection;
+     * 
+     *     <span style="color:green">//** 设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小.</span>
+     *     &#64;Alias(name = "memcached.maintSleep",sampleValue = "30")
+     *     private Integer maintSleep;
+     * 
+     *     <span style="color:green">//** 关闭套接字缓存. </span>
+     *     &#64;Alias(name = "memcached.nagle",sampleValue = "false")
+     *     private Boolean nagle;
+     * 
+     *     <span style="color:green">//** 连接建立后的超时时间.</span>
+     *     &#64;Alias(name = "memcached.socketto",sampleValue = "3000")
+     *     private Integer socketTo;
+     * 
+     *     <span style="color:green">//** The alive check.</span>
+     *     &#64;Alias(name = "memcached.alivecheck",sampleValue = "false")
+     *     private Boolean aliveCheck;
+     * 
+     *     <span style="color:green">//setter getter 略</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>
+     * 此时你可以如此调用代码:
+     * </b>
+     * 
+     * <pre class="code">
+     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil
+     *                 .readPropertiesToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "maxConnection": 250,
+        "expireTime": 180,
+        "serverList":         [
+            "172.20.3-1.23",
+            "11211",
+            "172.20.31.22",
+            "11211"
+        ],
+        "weight": [2],
+        "nagle": false,
+        "initConnection": 10,
+        "aliveCheck": false,
+        "poolName": "sidsock2",
+        "maintSleep": 30,
+        "socketTo": 3000,
+        "minConnection": 5
+    }
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 你会发现类型会自动转换, 虽然properties里面存储key和value都是string,但是使用该方法, 可以自动类型转换,转成bean里面声明的类型
+     * </p>
+     * 
+     * <p>
+     * 但是同时,你也会发现,上面的 serverList 期望值是 ["172.20.3-1.23:11211","172.20.31.22:11211"],但是和你的期望值不符合,<br>
+     * 因为, {@link ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
+     * </p>
+     * 
+     * <p>
+     * 你需要如此这般:
+     * </p>
+     *
+     * <pre class="code">
+     * ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
+     * char[] allowedChars = { ':' };
+     * arrayConverter.setAllowedChars(allowedChars);
+     * 
+     * BeanUtil.register(arrayConverter, String[].class);
+     * 
+     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil
+     *                 .readPropertiesToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "maxConnection": 250,
+        "expireTime": 180,
+        "serverList":         [
+            "172.20.3-1.23:11211",
+            "172.20.31.22:11211"
+        ],
+        "weight": [2],
+        "nagle": false,
+        "initConnection": 10,
+        "aliveCheck": false,
+        "poolName": "sidsock2",
+        "maintSleep": 30,
+        "socketTo": 3000,
+        "minConnection": 5
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param baseName
+     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
+     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
+     * @param aliasBeanClass
+     *            the alias bean class
+     * @return the t
+     * @throws NullPointerException
+     *             如果 <code>baseName</code>或者 <code>aliasBean</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>baseName</code> 是 blank
+     * @throws MissingResourceException
+     *             如果资源文件 <code>baseName</code> 不存在
+     * @see com.feilong.core.bean.BeanUtil#populateAliasBean(Object, Map)
+     * @since 1.8.1
+     */
+    public static <T> T readPropertiesToAliasBean(String baseName,Class<T> aliasBeanClass){
+        Validate.notBlank(baseName, "baseName can't be null/empty!");
+        Validate.notNull(aliasBeanClass, "aliasBeanClass can't be null!");
+        return BeanUtil.populateAliasBean(newInstance(aliasBeanClass), readPropertiesToMap(baseName));
     }
 
     //********************************getResourceBundle**********************************************

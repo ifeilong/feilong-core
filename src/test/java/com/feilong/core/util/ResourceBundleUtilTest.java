@@ -22,11 +22,14 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.ResourceBundle.Control;
 
+import org.apache.commons.beanutils.converters.ArrayConverter;
+import org.apache.commons.beanutils.converters.StringConverter;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.BeanUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
@@ -112,6 +115,9 @@ public class ResourceBundleUtilTest{
         assertEquals("今天 2", getValue(resourceBundle, "test", "2", "22"));
     }
 
+    /**
+     * Test get value with arguments1.
+     */
     @Test
     public void testGetValueWithArguments1(){
         assertEquals("my name is feilong,age is 18", getValue(resourceBundle, "test.arguments", "feilong", "18"));
@@ -125,9 +131,73 @@ public class ResourceBundleUtilTest{
         LOGGER.debug(JsonUtil.format(readPropertiesToMap(BASE_NAME, Locale.CHINA)));
     }
 
+    /**
+     * Test get value1.
+     */
     @Test
     public void testGetValue1(){
         LOGGER.debug(getValue(BASE_NAME, "config_date_hour", Locale.ENGLISH));
+    }
+
+    //**********************************************************************************************
+    /**
+     * Test read properties to alias bean.
+     */
+    @Test
+    public void testReadPropertiesToAliasBean(){
+        DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil
+                        .readPropertiesToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+        LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+    }
+
+    /**
+     * Test read properties to alias bean1.
+     */
+    @Test
+    public void testReadPropertiesToAliasBean1(){
+        ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
+        char[] allowedChars = { ':' };
+        arrayConverter.setAllowedChars(allowedChars);
+
+        BeanUtil.register(arrayConverter, String[].class);
+
+        DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil
+                        .readPropertiesToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+        LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+    }
+
+    //**********************************************************************************************
+
+    /**
+     * Test read properties to alias bean nullpoint.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testReadPropertiesToAliasBeanNullpoint(){
+        ResourceBundleUtil.readPropertiesToAliasBean(null, DangaMemCachedConfig.class);
+    }
+
+    /**
+     * Test read properties to alias bean illegal argument exception.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testReadPropertiesToAliasBeanIllegalArgumentException(){
+        ResourceBundleUtil.readPropertiesToAliasBean("   ", DangaMemCachedConfig.class);
+    }
+
+    /**
+     * Test read properties to alias bean nullpoint1.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testReadPropertiesToAliasBeanNullpoint1(){
+        ResourceBundleUtil.readPropertiesToAliasBean("messages.memcached", null);
+    }
+
+    /**
+     * Test read properties to alias bean nullpoint4.
+     */
+    @Test(expected = MissingResourceException.class)
+    public void testReadPropertiesToAliasBeanNullpoint4(){
+        ResourceBundleUtil.readPropertiesToAliasBean("messages.memcached111", DangaMemCachedConfig.class);
     }
 
 }
