@@ -22,15 +22,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BasicDynaClass;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.DynaBean;
-import org.apache.commons.beanutils.DynaClass;
-import org.apache.commons.beanutils.DynaProperty;
+import org.apache.commons.beanutils.LazyDynaBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
@@ -859,7 +857,14 @@ public final class BeanUtil{
     // [end]
 
     /**
-     * 创建 dyna bean.
+     * New dyna bean.
+     * 
+     * <p>
+     * {@link LazyDynaBean}不需要首先创建一个包含期望的数据结构的DynaClass，就能向LazyDynaBean中填充我们任意想填充的数据。<br>
+     * {@link LazyDynaBean}内部会根据我们填充进的数据（即使是一个map中的一个key-value pair，LazyDynaBean也会创建一个map的metadata），创建metadata的。<br>
+     * 
+     * 程序内部,默认使用的是 {@link org.apache.commons.beanutils.LazyDynaClass}
+     * </p>
      * 
      * <h3>示例:</h3>
      * 
@@ -867,18 +872,11 @@ public final class BeanUtil{
      * 
      * <pre class="code">
      * 
-     * Map{@code <String, Class<?>>} typeMap = new HashMap<>();
-     * typeMap.put("address", java.util.Map.class);
-     * typeMap.put("firstName", String.class);
-     * typeMap.put("lastName", String.class);
-     * 
-     * Map{@code <String, Object>} valueMap = new HashMap<>();
-     * valueMap.put("address", new HashMap());
-     * valueMap.put("firstName", "Fred");
-     * valueMap.put("lastName", "Flintstone");
-     * 
-     * DynaBean dynaBean = BeanUtil.newDynaBean(typeMap, valueMap);
-     * LOGGER.debug(JsonUtil.format(dynaBean));
+     * DynaBean newDynaBean = BeanUtil.newDynaBean(toMap(//
+     *                 Pair.of("address", (Object) new HashMap()),
+     *                 Pair.of("firstName", (Object) "Fred"),
+     *                 Pair.of("lastName", (Object) "Flintstone")));
+     * LOGGER.debug(JsonUtil.format(newDynaBean));
      * 
      * </pre>
      * 
@@ -886,60 +884,30 @@ public final class BeanUtil{
      * 
      * <pre class="code">
      * {
-     *         "lastName": "Flintstone",
-     *         "address": {},
-     *         "firstName": "Fred"
-     *     }
+        "address": {},
+        "firstName": "Fred",
+        "lastName": "Flintstone"
+    }
      * </pre>
      * 
      * </blockquote>
      *
-     * @param typeMap
-     *            属性名称 和类型的 map
      * @param valueMap
-     *            属性名称 和 值 的map
+     *            the value map
      * @return the dyna bean
+     * @see org.apache.commons.beanutils.LazyDynaBean
      * @throws NullPointerException
-     *             如果 <code>typeMap </code> 或者 <code>valueMap</code> 是null
-     * @throws IllegalArgumentException
-     *             如果 <code>typeMap.size() != valueMap.size()</code>
-     * @since 1.8.1 change name
+     *             如果 <code>valueMap</code> 是null,或者 map中有key是null
+     * @since 1.8.1
      */
-    public static DynaBean newDynaBean(Map<String, Class<?>> typeMap,Map<String, Object> valueMap){
-        Validate.notNull(typeMap, "typeMap can't be null!");
+    public static DynaBean newDynaBean(Map<String, ?> valueMap){
         Validate.notNull(valueMap, "valueMap can't be null!");
-        Validate.isTrue(typeMap.size() == valueMap.size(), "typeMap size:[%s] != valueMap size:[%s]", typeMap.size(), valueMap.size());
 
-        //*********************************************************************************
-        try{
-            DynaClass dynaClass = new BasicDynaClass(null, null, toDynaPropertyArray(typeMap));
-
-            DynaBean dynaBean = dynaClass.newInstance();
-            for (Map.Entry<String, Object> entry : valueMap.entrySet()){
-                dynaBean.set(entry.getKey(), entry.getValue());
-            }
-            return dynaBean;
-        }catch (IllegalAccessException | InstantiationException e){
-            LOGGER.error("", e);
-            throw new BeanUtilException(e);
+        LazyDynaBean lazyDynaBean = new LazyDynaBean();
+        for (Map.Entry<String, ?> entry : valueMap.entrySet()){
+            Validate.notBlank(entry.getKey(), "entry.getKey() can't be blank!");
+            lazyDynaBean.set(entry.getKey(), entry.getValue());
         }
-    }
-
-    /**
-     * To dyna property array.
-     *
-     * @param typeMap
-     *            the type map
-     * @return the dyna property[]
-     * @since 1.8.0
-     */
-    private static DynaProperty[] toDynaPropertyArray(Map<String, Class<?>> typeMap){
-        DynaProperty[] dynaPropertys = new DynaProperty[typeMap.size()];
-        int i = 0;
-        for (Map.Entry<String, Class<?>> entry : typeMap.entrySet()){
-            dynaPropertys[i] = new DynaProperty(entry.getKey(), entry.getValue());
-            i++;
-        }
-        return dynaPropertys;
+        return lazyDynaBean;
     }
 }

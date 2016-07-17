@@ -39,6 +39,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -364,37 +365,10 @@ public class BeanUtilTest{
         assertEquals(toBigDecimal(599), copyList.get(0).getSalePrice());
     }
 
-    //    @Test
-    //    public void testCreateDynaBean2(){
-    //
-    //        String name = "employee";
-    //
-    //        DynaBean dynaBean = BeanUtil.createDynaBean(name, toList(
-    //                        Triple.of("address", java.util.Map.class, new HashMap()),
-    //                        Triple.of("firstName", String.class, "Fred"),
-    //                        Triple.of("lastName", String.class, "Flintstone")));
-    //        LOGGER.debug(JsonUtil.format(dynaBean));
-    //    }
-
     @Test
-    public void testBasicDynaClass(){
-        Map<String, Class<?>> typeMap = new HashMap<>();
-        typeMap.put("address", java.util.Map.class);
-        typeMap.put("firstName", String.class);
-        typeMap.put("lastName", String.class);
-
-        Map<String, Object> valueMap = new HashMap<>();
-        valueMap.put("address", new HashMap());
-        valueMap.put("firstName", "Fred");
-        valueMap.put("lastName", "Flintstone");
-
-        DynaBean dynaBean = BeanUtil.newDynaBean(typeMap, valueMap);
-        LOGGER.debug(JsonUtil.format(dynaBean));
-    }
-
-    @Test
-    public void testBasicDynaClass0(){
+    public void testLazyDynaBean(){
         DynaBean dynaBean = new LazyDynaBean();
+
         dynaBean.set("first", "1"); //simple
         dynaBean.set("num", "second", "2"); //map
         dynaBean.set("num", "third", "3"); //map
@@ -405,45 +379,11 @@ public class BeanUtilTest{
 
     @Test
     public void testBasicDynaClass00(){
-        DynaBean dynaBean = new LazyDynaBean();
-        dynaBean.set("address", new HashMap());
-        dynaBean.set("firstName", "Fred");
-        dynaBean.set("lastName", "Flintstone");
-        LOGGER.debug(JsonUtil.format(dynaBean));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testBasicDynaClass1(){
-        Map<String, Object> valueMap = new HashMap<>();
-        valueMap.put("address", new HashMap());
-        valueMap.put("firstName", "Fred");
-        valueMap.put("lastName", "Flintstone");
-
-        BeanUtil.newDynaBean(null, valueMap);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testBasicDynaClass2(){
-        Map<String, Class<?>> typeMap = new HashMap<>();
-        typeMap.put("address", java.util.Map.class);
-        typeMap.put("firstName", String.class);
-        typeMap.put("lastName", String.class);
-
-        BeanUtil.newDynaBean(typeMap, null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testBasicDynaClass4(){
-        Map<String, Class<?>> typeMap = new HashMap<>();
-        typeMap.put("address", java.util.Map.class);
-        typeMap.put("firstName", String.class);
-        typeMap.put("lastName", String.class);
-
-        Map<String, Object> valueMap = new HashMap<>();
-        valueMap.put("address", new HashMap());
-        valueMap.put("firstName", "Fred");
-
-        BeanUtil.newDynaBean(typeMap, valueMap);
+        DynaBean newDynaBean = BeanUtil.newDynaBean(toMap(//
+                        Pair.of("address", (Object) new HashMap()),
+                        Pair.of("firstName", (Object) "Fred"),
+                        Pair.of("lastName", (Object) "Flintstone")));
+        LOGGER.debug(JsonUtil.format(newDynaBean));
     }
 
 }
