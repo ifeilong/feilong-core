@@ -15,6 +15,11 @@
  */
 package com.feilong.core.bean;
 
+import static java.util.Collections.emptyMap;
+
+import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BasicDynaClass;
@@ -27,12 +32,16 @@ import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.DynaClass;
 import org.apache.commons.beanutils.DynaProperty;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newHashMap;
 
 /**
  * 对 {@link org.apache.commons.beanutils.BeanUtils}的再次封装.
@@ -613,6 +622,238 @@ public final class BeanUtil{
         }catch (Exception e){
             throw new BeanUtilException(e);
         }
+    }
+
+    /**
+     * 将 alias 和value 的map <code>populate</code> <b>(填充)</b>到 <code>aliasBean</code>.
+     * 
+     * <h3>背景:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * {@link BeanUtil} 有标准的populate功能,{@link #populate(Object, Map)} ,但是要求 map的key 和 bean的属性名称必须是一一对应<br>
+     * 有很多情况,比如 map 的key是 <b>"memcached.alivecheck"</b> 这样的字符串(常见于properties 的配置文件),或者是大写的 <b>"ALIVECHECK"</b> 的字符串(常见于第三方接口 xml属性名称)<br>
+     * 而我们的bean里面的属性名称是标准的 java bean 规范的名字,比如 <b>"aliveCheck"</b>,这时就没有办法直接使用 {@link #populate(Object, Map)} 方法了<br>
+     * </p>
+     * 
+     * <p>
+     * 你可以使用 {@link #populateAliasBean(Object, Map)}方法~~
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 有以下<b>aliasAndValueMap</b>信息:
+     * </p>
+     * 
+     * <pre class="code">
+     * {
+     * "memcached.alivecheck": "false",
+     * "memcached.expiretime": "180",
+     * "memcached.initconnection": "10",
+     * "memcached.maintSleep": "30",
+     * "memcached.maxconnection": "250",
+     * "memcached.minconnection": "5",
+     * "memcached.nagle": "false",
+     * "memcached.poolname": "sidsock2",
+     * "memcached.serverlist": "172.20.31.23:11211,172.20.31.22:11211",
+     * "memcached.serverweight": "2",
+     * "memcached.socketto": "3000"
+     * }
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 有以下<b>aliasBean</b>信息:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class DangaMemCachedConfig{
+     * 
+     *     <span style="color:green">//** The serverlist.</span>
+     *     &#64;Alias(name = "memcached.serverlist",sampleValue = "172.20.31.23:11211,172.20.31.22:11211")
+     *     private String[] serverList;
+     * 
+     *     <span style="color:green">//@Alias(name = "memcached.poolname",sampleValue = "sidsock2")</span>
+     *     private String poolName;
+     * 
+     *     <span style="color:green">//** The expire time 单位分钟.</span>
+     *     &#64;Alias(name = "memcached.expiretime",sampleValue = "180")
+     *     private Integer expireTime;
+     * 
+     *     <span style="color:green">//** 权重. </span>
+     *     &#64;Alias(name = "memcached.serverweight",sampleValue = "2,1")
+     *     private Integer[] weight;
+     * 
+     *     <span style="color:green">//** The init connection. </span>
+     *     &#64;Alias(name = "memcached.initconnection",sampleValue = "10")
+     *     private Integer initConnection;
+     * 
+     *     <span style="color:green">//** The min connection.</span>
+     *     &#64;Alias(name = "memcached.minconnection",sampleValue = "5")
+     *     private Integer minConnection;
+     * 
+     *     <span style="color:green">//** The max connection. </span>
+     *     &#64;Alias(name = "memcached.maxconnection",sampleValue = "250")
+     *     private Integer maxConnection;
+     * 
+     *     <span style="color:green">//** 设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小.</span>
+     *     &#64;Alias(name = "memcached.maintSleep",sampleValue = "30")
+     *     private Integer maintSleep;
+     * 
+     *     <span style="color:green">//** 关闭套接字缓存. </span>
+     *     &#64;Alias(name = "memcached.nagle",sampleValue = "false")
+     *     private Boolean nagle;
+     * 
+     *     <span style="color:green">//** 连接建立后的超时时间.</span>
+     *     &#64;Alias(name = "memcached.socketto",sampleValue = "3000")
+     *     private Integer socketTo;
+     * 
+     *     <span style="color:green">//** The alive check.</span>
+     *     &#64;Alias(name = "memcached.alivecheck",sampleValue = "false")
+     *     private Boolean aliveCheck;
+     * 
+     *     <span style="color:green">//setter getter 略</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>
+     * 此时你可以如此调用代码:
+     * </b>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} readPropertiesToMap = ResourceBundleUtil.readPropertiesToMap("memcached");
+     * 
+     * DangaMemCachedConfig dangaMemCachedConfig = new DangaMemCachedConfig();
+     * BeanUtil.populateAliasBean(dangaMemCachedConfig, readPropertiesToMap);
+     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "maxConnection": 250,
+        "expireTime": 180,
+        "serverList":         [
+            "172.20.31.23",
+            "11211",
+            "172.20.31.22",
+            "11211"
+        ],
+        "weight": [2],
+        "nagle": false,
+        "initConnection": 10,
+        "aliveCheck": false,
+        "poolName": "sidsock2",
+        "maintSleep": 30,
+        "socketTo": 3000,
+        "minConnection": 5
+    }
+     * </pre>
+     * 
+     * <p>
+     * 此时你会发现,上面的 serverList 期望值是 ["172.20.31.23:11211","172.20.31.22:11211"],但是和你的期望值不符合,<br>
+     * 因为, {@link ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
+     * </p>
+     * 
+     * <p>
+     * 你需要如此这般:
+     * </p>
+     *
+     * <pre class="code">
+     * Map{@code <String, String>} readPropertiesToMap = ResourceBundleUtil.readPropertiesToMap("memcached");
+     * 
+     * DangaMemCachedConfig dangaMemCachedConfig = new DangaMemCachedConfig();
+     * 
+     * <span style="color:blue">ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);</span>
+     * <span style="color:blue">char[] allowedChars = { ':' };</span>
+     * <span style="color:blue">arrayConverter.setAllowedChars(allowedChars);</span>
+     * <span style="color:blue">BeanUtil.register(arrayConverter, String[].class);</span>
+     * 
+     * BeanUtil.populateAliasBean(dangaMemCachedConfig, readPropertiesToMap);
+     * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "maxConnection": 250,
+        "expireTime": 180,
+        "serverList":         [
+            "172.20.31.23:11211",
+            "172.20.31.22:11211"
+        ],
+        "weight": [2],
+        "nagle": false,
+        "initConnection": 10,
+        "aliveCheck": false,
+        "poolName": "sidsock2",
+        "maintSleep": 30,
+        "socketTo": 3000,
+        "minConnection": 5
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <T>
+     *            the generic type
+     * @param aliasBean
+     *            the bean
+     * @param aliasAndValueMap
+     *            the key and value map
+     * @return 如果 <code>aliasAndValueMap</code> 是null或者empty,返回 <code>bean</code><br>
+     *         如果 <code>alias name</code> 不在<code>aliasAndValueMap</code>中,或者值是emty,那么不会设置 <code>aliasBean</code>对象值
+     * @throws NullPointerException
+     *             如果 <code>bean</code> 是null
+     * @since 1.8.1
+     */
+    public static <T> T populateAliasBean(T aliasBean,Map<String, ?> aliasAndValueMap){
+        Validate.notNull(aliasBean, "aliasBean can't be null!");
+        if (isNullOrEmpty(aliasAndValueMap)){
+            return aliasBean;
+        }
+        Map<String, String> propertyNameAndAliasMap = buildPropertyNameAndAliasMap(aliasBean.getClass());
+        for (Map.Entry<String, String> entry : propertyNameAndAliasMap.entrySet()){
+            String alias = entry.getValue();
+            Object value = aliasAndValueMap.get(alias);
+            if (isNotNullOrEmpty(value)){
+                setProperty(aliasBean, entry.getKey(), value);
+            }
+        }
+        return aliasBean;
+    }
+
+    /**
+     * 提取 klass {@link Alias} 注释,将 属性名字和 {@link Alias#name()} 组成map 返回.
+     *
+     * @param klass
+     *            the klass
+     * @return 如果<code>klass</code> 没有 {@link Alias} 注释,返回 {@link Collections#emptyMap()}
+     * @throws NullPointerException
+     *             如果 <code>klass</code> 是null
+     * @since 1.8.1
+     */
+    private static Map<String, String> buildPropertyNameAndAliasMap(Class<?> klass){
+        Validate.notNull(klass, "klass can't be null!");
+        List<Field> aliasFieldsList = FieldUtils.getFieldsListWithAnnotation(klass, Alias.class);
+        if (isNullOrEmpty(aliasFieldsList)){
+            return emptyMap();
+        }
+        //属性名字和key的对应关系
+        Map<String, String> propertyNameAndAliasMap = newHashMap(aliasFieldsList.size());
+        for (Field field : aliasFieldsList){
+            Alias alias = field.getAnnotation(Alias.class);
+            propertyNameAndAliasMap.put(field.getName(), alias.name());
+        }
+        return propertyNameAndAliasMap;
     }
 
     // [end]
