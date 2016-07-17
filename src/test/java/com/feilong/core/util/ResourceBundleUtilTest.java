@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
 import java.util.MissingResourceException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.ResourceBundle.Control;
 
@@ -137,6 +138,28 @@ public class ResourceBundleUtilTest{
     @Test
     public void testGetValue1(){
         LOGGER.debug(getValue(BASE_NAME, "config_date_hour", Locale.ENGLISH));
+    }
+
+    //**********************************************************************************************
+    @Test
+    public void testReadToProperties(){
+        Properties properties = ResourceBundleUtil.readToProperties("messages.memcached");
+        LOGGER.debug(JsonUtil.format(properties));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testReadToPropertiesNullpoint(){
+        ResourceBundleUtil.readToProperties(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testReadToPropertiesIllegalArgumentException(){
+        ResourceBundleUtil.readToProperties("   ");
+    }
+
+    @Test(expected = MissingResourceException.class)
+    public void testReadToPropertiesMissingResourceException(){
+        ResourceBundleUtil.readToProperties("messages.memcached111");
     }
 
     //**********************************************************************************************
