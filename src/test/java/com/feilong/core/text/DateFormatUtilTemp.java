@@ -59,7 +59,7 @@ public final class DateFormatUtilTemp{
      * parse字符串类型转成日期类型.
      * 
      * <p style="color:red">
-     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#toDate(String, String)}替代
+     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.date.DateUtil#toDate(String, String...)}替代
      * </p>
      * 
      * <p>

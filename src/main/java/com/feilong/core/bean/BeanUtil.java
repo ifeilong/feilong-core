@@ -301,6 +301,17 @@ public final class BeanUtil{
     /**
      * 将<code class="code">fromObj</code>中的一组属性的值,复制到 <code>toObj</code>对象中.
      * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,在使用时要小心,特别是对于属性为自定义类的情况 .</li>
+     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行{@code Object--->String--->Object}类型转换,<br>
+     * 如果需要copy的两个对象属性之间的类型是一样的话,那么调用这个方法会有<span style="color:red">性能消耗</span>,此时建议调用
+     * {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>代码流程:</h3>
      * <blockquote>
      * <p>
@@ -339,17 +350,6 @@ public final class BeanUtil{
      * BeanUtil.copyProperties(user,userForm,"enterpriseName","linkMan","phone");
      * </pre>
      * 
-     * </blockquote>
-     * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * <ol>
-     * <li>这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,在使用时要小心,特别是对于属性为自定义类的情况 .</li>
-     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行{@code Object--->String--->Object}类型转换,<br>
-     * 如果需要copy的两个对象属性之间的类型是一样的话,那么调用这个方法会有<span style="color:red">性能消耗</span>,此时建议调用
-     * {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
-     * </ol>
      * </blockquote>
      * 
      * 

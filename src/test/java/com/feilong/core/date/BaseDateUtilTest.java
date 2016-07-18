@@ -20,6 +20,8 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.feilong.core.date.DateUtil.toDate;
+
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
@@ -54,7 +56,7 @@ abstract class BaseDateUtilTest{
     static final Date           CURRENT_YEAR_END        = DateUtil.getLastDateOfThisYear(NOW);
 
     /** The current year end. */
-    static final Date           TESTDATE_20141231013024 = DateUtil.toDate("2014-12-31 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND);
+    static final Date           TESTDATE_20141231013024 = toDate("2014-12-31 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND);
 
     /**
      * Prints the.

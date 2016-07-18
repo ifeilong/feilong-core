@@ -27,7 +27,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DateUtil;
+import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.yyyy;
 
@@ -48,7 +48,7 @@ public class MessageFormatUtilTest{
     public void format(){
         assertEquals("name=张三jinaxin", MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin"));
         assertEquals("name=张三5axin", MessageFormatUtil.format("name=张三{0,number}a{1}", 5, "xin"));
-        assertEquals("name=张三2000-1-1axin", MessageFormatUtil.format("name=张三{0,date}a{1}", DateUtil.toDate("2000", yyyy), "xin"));
+        assertEquals("name=张三2000-1-1axin", MessageFormatUtil.format("name=张三{0,date}a{1}", toDate("2000", yyyy), "xin"));
     }
 
     /**

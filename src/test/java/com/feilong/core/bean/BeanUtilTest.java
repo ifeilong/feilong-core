@@ -45,7 +45,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DateUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.store.member.Address;
 import com.feilong.store.member.Customer;
@@ -62,6 +61,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.TO_STRING_STYLE;
 import static com.feilong.core.DatePattern.yyyyMMdd;
@@ -111,13 +111,13 @@ public class BeanUtilTest{
 
         MemberAddress memberAddress1 = new MemberAddress();
         memberAddress1.setAddress("上海市宝山区真大路333弄22号1503室");
-        memberAddress1.setAddTime(DateUtil.toDate("20140615", yyyyMMdd));
+        memberAddress1.setAddTime(toDate("20140615", yyyyMMdd));
         memberAddress1.setId(1L);
         memberAddress1.setMemberId(memberId);
 
         MemberAddress memberAddress2 = new MemberAddress();
         memberAddress2.setAddress("上海市闸北区阳城路280弄25号802室(阳城贵都)");
-        memberAddress2.setAddTime(DateUtil.toDate("20101001", yyyyMMdd));
+        memberAddress2.setAddTime(toDate("20101001", yyyyMMdd));
         memberAddress2.setId(1L);
         memberAddress2.setMemberId(memberId);
 

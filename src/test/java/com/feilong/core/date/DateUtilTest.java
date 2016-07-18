@@ -255,7 +255,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testAddMonth(){
-        Date beginDate = DateUtil.toDate("2013-10-28", COMMON_DATE);
+        Date beginDate = toDate("2013-10-28", COMMON_DATE);
         logDate(addMonth(beginDate, 6));
         logDate(addMonth(NOW, 3));
         logDate(addMonth(NOW, -3));
@@ -299,13 +299,13 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testToDate(){
-        logDate(DateUtil.toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
-        logDate(DateUtil.toDate("2016-06-28T01:21:12+0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
+        logDate(toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
+        logDate(toDate("2016-06-28T01:21:12+0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
 
-        logDate(DateUtil.toDate("2016-02-33", COMMON_DATE));
+        logDate(toDate("2016-02-33", COMMON_DATE));
 
         // 商品上线时间
-        logDate(DateUtil.toDate("20130102140806000", TIMESTAMP_WITH_MILLISECOND));
+        logDate(toDate("20130102140806000", TIMESTAMP_WITH_MILLISECOND));
     }
 
     @Test(expected = IllegalArgumentException.class)
