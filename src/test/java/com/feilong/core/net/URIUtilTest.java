@@ -25,10 +25,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.URIComponents;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.URIComponents.AMPERSAND;
+import static com.feilong.core.URIComponents.QUESTIONMARK;
 
 /**
  * The Class URIUtilTest.
@@ -136,10 +137,10 @@ public class URIUtilTest{
         specialCharacterMap.put("+", "%2B");// URL 中+号表示空格
         specialCharacterMap.put(" ", "%20");// URL中的空格可以用+号或者编码
         specialCharacterMap.put("/", "%2F");// 分隔目录和子目录
-        specialCharacterMap.put(URIComponents.QUESTIONMARK, "%3F");// 分隔实际的 URL 和参数
+        specialCharacterMap.put(QUESTIONMARK, "%3F");// 分隔实际的 URL 和参数
         specialCharacterMap.put("%", "%25");// 指定特殊字符
         specialCharacterMap.put("#", "%23");// 表示书签
-        specialCharacterMap.put(URIComponents.AMPERSAND, "%26");// URL 中指定的参数间的分隔符
+        specialCharacterMap.put(AMPERSAND, "%26");// URL 中指定的参数间的分隔符
         specialCharacterMap.put("=", "%3D");// URL 中指定参数的值
 
         if (specialCharacterMap.containsKey(specialCharacter)){

@@ -28,9 +28,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Alphabet;
 import com.feilong.core.Repeat;
 import com.feilong.core.RepeatRule;
+
+import static com.feilong.core.Alphabet.DECIMAL;
+import static com.feilong.core.Alphabet.DECIMAL_AND_LETTERS;
 
 public class RandomUtilTest{
 
@@ -100,7 +102,7 @@ public class RandomUtilTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetRandomFromString1(){
-        RandomUtil.createRandomFromString(Alphabet.DECIMAL, 0);
+        RandomUtil.createRandomFromString(DECIMAL, 0);
     }
 
     /**
@@ -117,14 +119,14 @@ public class RandomUtilTest{
     @Test
     @Repeat(20000)
     public void testGetRandomFromString(){
-        assertThat(RandomUtil.createRandomFromString(Alphabet.DECIMAL_AND_LETTERS, 5).length(), equalTo(5));
+        assertThat(RandomUtil.createRandomFromString(DECIMAL_AND_LETTERS, 5).length(), equalTo(5));
 
     }
 
     @Test
     @Repeat(20000)
     public void testGetRandomFromString3(){
-        assertThat(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 200).length(), equalTo(200));
+        assertThat(RandomUtil.createRandomFromString(DECIMAL, 200).length(), equalTo(200));
     }
 
     /**
@@ -133,7 +135,7 @@ public class RandomUtilTest{
     @Test
     @Repeat(20000)
     public void testCreateRandomFromString(){
-        assertThat(RandomUtil.createRandomFromString(Alphabet.DECIMAL, 8, 20).length(), allOf(greaterThanOrEqualTo(8), lessThan(20)));
+        assertThat(RandomUtil.createRandomFromString(DECIMAL, 8, 20).length(), allOf(greaterThanOrEqualTo(8), lessThan(20)));
     }
 
 }

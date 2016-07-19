@@ -22,7 +22,10 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.feilong.core.RegexPattern;
+import static com.feilong.core.RegexPattern.AN;
+import static com.feilong.core.RegexPattern.ANS;
+import static com.feilong.core.RegexPattern.DECIMAL_TWO_DIGIT;
+import static com.feilong.core.RegexPattern.NUMBER;
 
 /**
  * The Class RegexUtilTest.
@@ -85,8 +88,8 @@ public class RegexUtilTest{
      */
     @Test
     public void testMatch1(){
-        assertEquals(false, RegexUtil.matches(RegexPattern.NUMBER, "2000.0"));
-        assertEquals(true, RegexUtil.matches(RegexPattern.NUMBER, "02125454"));
+        assertEquals(false, RegexUtil.matches(NUMBER, "2000.0"));
+        assertEquals(true, RegexUtil.matches(NUMBER, "02125454"));
     }
 
     /**
@@ -94,9 +97,9 @@ public class RegexUtilTest{
      */
     @Test
     public void testDecimalTwoDigit(){
-        assertEquals(false, RegexUtil.matches(RegexPattern.DECIMAL_TWO_DIGIT, "2000阿.00"));
-        assertEquals(false, RegexUtil.matches(RegexPattern.DECIMAL_TWO_DIGIT, "2000.0"));
-        assertEquals(true, RegexUtil.matches(RegexPattern.DECIMAL_TWO_DIGIT, "2000.99"));
+        assertEquals(false, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000阿.00"));
+        assertEquals(false, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000.0"));
+        assertEquals(true, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000.99"));
     }
 
     /**
@@ -104,11 +107,11 @@ public class RegexUtilTest{
      */
     @Test
     public void testAN(){
-        assertEquals(true, RegexUtil.matches(RegexPattern.AN, "aa02125454"));
-        assertEquals(false, RegexUtil.matches(RegexPattern.AN, "0212545.4"));
-        assertEquals(false, RegexUtil.matches(RegexPattern.AN, "0212545$4"));
+        assertEquals(true, RegexUtil.matches(AN, "aa02125454"));
+        assertEquals(false, RegexUtil.matches(AN, "0212545.4"));
+        assertEquals(false, RegexUtil.matches(AN, "0212545$4"));
         assertEquals(false, org.apache.commons.lang3.StringUtils.isAlphanumeric("0212545$4"));
-        assertEquals(true, RegexUtil.matches(RegexPattern.AN, "02125454"));
+        assertEquals(true, RegexUtil.matches(AN, "02125454"));
     }
 
     /**
@@ -116,6 +119,6 @@ public class RegexUtilTest{
      */
     @Test
     public void testANS(){
-        assertEquals(true, RegexUtil.matches(RegexPattern.ANS, "02125 454"));
+        assertEquals(true, RegexUtil.matches(ANS, "02125 454"));
     }
 }

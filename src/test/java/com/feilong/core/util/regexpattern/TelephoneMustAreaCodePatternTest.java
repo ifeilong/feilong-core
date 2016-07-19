@@ -21,8 +21,9 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
-import com.feilong.core.RegexPattern;
 import com.feilong.core.util.RegexUtil;
+
+import static com.feilong.core.RegexPattern.TELEPHONE_MUST_AREACODE;
 
 /**
  *
@@ -55,6 +56,6 @@ public class TelephoneMustAreaCodePatternTest extends AbstractBooleanParameteriz
 
     @Test
     public void matches(){
-        assertEquals(expectedValue, RegexUtil.matches(RegexPattern.TELEPHONE_MUST_AREACODE, input));
+        assertEquals(expectedValue, RegexUtil.matches(TELEPHONE_MUST_AREACODE, input));
     }
 }

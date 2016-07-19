@@ -15,6 +15,9 @@
  */
 package com.feilong.core.net;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.INDEX_NOT_FOUND;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,6 +36,7 @@ import com.feilong.core.URIComponents;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
+import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
@@ -267,11 +271,11 @@ public final class URIUtil{
      */
     static String getFullPathWithoutQueryString(String uriString){
         if (isNullOrEmpty(uriString)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         // 判断url中是否含有?  XXX 有待严谨
-        int index = uriString.indexOf(URIComponents.QUESTIONMARK);
-        return index == StringUtils.INDEX_NOT_FOUND ? uriString : uriString.substring(0, index);
+        int index = uriString.indexOf(QUESTIONMARK);
+        return index == INDEX_NOT_FOUND ? uriString : uriString.substring(0, index);
     }
 
     /**
@@ -296,11 +300,11 @@ public final class URIUtil{
      */
     static String getQueryString(String uriString){
         if (isNullOrEmpty(uriString)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         // 判断url中是否含有?  XXX 有待严谨
-        int index = uriString.indexOf(URIComponents.QUESTIONMARK);
-        return index == StringUtils.INDEX_NOT_FOUND ? StringUtils.EMPTY : StringUtil.substring(uriString, index + 1);
+        int index = uriString.indexOf(QUESTIONMARK);
+        return index == INDEX_NOT_FOUND ? EMPTY : StringUtil.substring(uriString, index + 1);
     }
 
     /**
@@ -313,7 +317,7 @@ public final class URIUtil{
      */
     // XXX 有待严谨
     private static boolean hasQueryString(String uriString){
-        return isNullOrEmpty(uriString) ? false : StringUtils.contains(uriString, URIComponents.QUESTIONMARK);
+        return isNullOrEmpty(uriString) ? false : StringUtils.contains(uriString, QUESTIONMARK);
     }
 
     // [start] encode/decode
@@ -411,7 +415,7 @@ public final class URIUtil{
      */
     private static String encodeOrDecode(String value,String charsetType,boolean encodeOrDecode){
         if (isNullOrEmpty(value)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         try{
             return isNullOrEmpty(charsetType) ? value

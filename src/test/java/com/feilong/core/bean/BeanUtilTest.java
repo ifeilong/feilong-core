@@ -196,7 +196,7 @@ public class BeanUtilTest{
         user.setDate(new Date());
         user.setNickNames(toArray("feilong", "飞天奔月", "venusdrogon"));
 
-        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class);
+        //        ConvertUtils.register(new DateLocaleConverter(Locale.US, TO_STRING_STYLE), Date.class);
         BeanUtil.register(new DateLocaleConverter(Locale.US, TO_STRING_STYLE), Date.class);
 
         Converter converter = ConvertUtils.lookup(Date.class);

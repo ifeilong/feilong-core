@@ -15,6 +15,9 @@
  */
 package com.feilong.core.net;
 
+import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -30,12 +33,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.URIComponents;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
 
+import static com.feilong.core.URIComponents.AMPERSAND;
+import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
@@ -339,7 +343,7 @@ public final class ParamUtil{
             return Collections.emptyMap();
         }
 
-        String[] nameAndValueArray = StringUtil.split(queryString, URIComponents.AMPERSAND);
+        String[] nameAndValueArray = StringUtil.split(queryString, AMPERSAND);
         int length = nameAndValueArray.length;
 
         Map<String, String[]> safeArrayValueMap = newLinkedHashMap(length);//使用 LinkedHashMap 保证元素的顺序
@@ -347,7 +351,7 @@ public final class ParamUtil{
             String[] tempArray = nameAndValueArray[i].split("=", 2);
 
             String key = decodeAndEncode(tempArray[0], charsetType);
-            String value = tempArray.length == 2 ? tempArray[1] : StringUtils.EMPTY;//有可能参数中,只有名字没有值或者值是空,处理的时候不能遗失掉
+            String value = tempArray.length == 2 ? tempArray[1] : EMPTY;//有可能参数中,只有名字没有值或者值是空,处理的时候不能遗失掉
             value = decodeAndEncode(value, charsetType);
 
             safeArrayValueMap.put(key, ArrayUtils.add(safeArrayValueMap.get(key), value));
@@ -500,7 +504,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
-        return null == singleValueMap ? StringUtils.EMPTY : toQueryStringUseSingleValueMap(sortByKeyAsc(singleValueMap));
+        return null == singleValueMap ? EMPTY : toQueryStringUseSingleValueMap(sortByKeyAsc(singleValueMap));
     }
 
     /**
@@ -585,7 +589,7 @@ public final class ParamUtil{
      */
     public static String toQueryStringUseArrayValueMap(Map<String, String[]> arrayValueMap){
         if (isNullOrEmpty(arrayValueMap)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         int i = 0;
@@ -593,7 +597,7 @@ public final class ParamUtil{
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             sb.append(joinParamNameAndValues(entry.getKey(), entry.getValue()));
             if (i != arrayValueMap.size() - 1){// 最后一个& 不拼接
-                sb.append(URIComponents.AMPERSAND);
+                sb.append(AMPERSAND);
             }
             ++i;
         }
@@ -644,7 +648,7 @@ public final class ParamUtil{
     public static <K> String joinValuesOrderByIncludeKeys(Map<K, String> singleValueMap,K...includeKeys){
         Validate.notNull(singleValueMap, "singleValueMap can't be null!");
         if (isNullOrEmpty(includeKeys)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         StringBuilder sb = new StringBuilder();
         for (K key : includeKeys){//有顺序的参数
@@ -713,7 +717,7 @@ public final class ParamUtil{
             String[] paramValues = entry.getValue();
             if (isNullOrEmpty(paramValues)){
                 LOGGER.warn("the param key:[{}] value is null", key);
-                paramValues = ArrayUtils.EMPTY_STRING_ARRAY;//赋予 empty数组,为了下面的转换
+                paramValues = EMPTY_STRING_ARRAY;//赋予 empty数组,为了下面的转换
             }
             safeArrayValueMap.put(decodeAndEncode(key, charsetType), toSafeValueArray(paramValues, charsetType));
         }
@@ -771,7 +775,7 @@ public final class ParamUtil{
             //注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
             sb.append(StringUtils.defaultString(paramName)).append("=").append(StringUtils.defaultString(paramValues[i]));
             if (i != j - 1){// 最后一个& 不拼接
-                sb.append(URIComponents.AMPERSAND);
+                sb.append(AMPERSAND);
             }
         }
         return sb.toString();
@@ -826,7 +830,7 @@ public final class ParamUtil{
      */
     static String combineUrl(String beforePathWithoutQueryString,Map<String, String[]> arrayValueMap,String charsetType){
         if (isNullOrEmpty(beforePathWithoutQueryString)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         if (isNullOrEmpty(arrayValueMap)){//没有参数 直接return
             return beforePathWithoutQueryString;
@@ -834,7 +838,7 @@ public final class ParamUtil{
 
         StringBuilder sb = new StringBuilder();
         sb.append(beforePathWithoutQueryString);
-        sb.append(URIComponents.QUESTIONMARK);
+        sb.append(QUESTIONMARK);
         sb.append(toSafeQueryString(arrayValueMap, charsetType));
 
         return sb.toString();

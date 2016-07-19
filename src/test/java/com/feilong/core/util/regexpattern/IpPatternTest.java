@@ -21,8 +21,9 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
-import com.feilong.core.RegexPattern;
 import com.feilong.core.util.RegexUtil;
+
+import static com.feilong.core.RegexPattern.IP;
 
 /**
  * 
@@ -48,7 +49,7 @@ public class IpPatternTest extends AbstractBooleanParameterizedTest<String, Bool
 
     @Test
     public void matches(){
-        assertEquals(expectedValue, RegexUtil.matches(RegexPattern.IP, input));
+        assertEquals(expectedValue, RegexUtil.matches(IP, input));
     }
 
 }

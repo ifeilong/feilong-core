@@ -21,8 +21,9 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
-import com.feilong.core.RegexPattern;
 import com.feilong.core.util.RegexUtil;
+
+import static com.feilong.core.RegexPattern.MOBILEPHONE;
 
 /**
  * 
@@ -46,6 +47,6 @@ public class MobilephonePatternTest extends AbstractBooleanParameterizedTest<Str
 
     @Test
     public void matches(){
-        assertEquals(expectedValue, RegexUtil.matches(RegexPattern.MOBILEPHONE, input));
+        assertEquals(expectedValue, RegexUtil.matches(MOBILEPHONE, input));
     }
 }

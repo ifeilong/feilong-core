@@ -19,6 +19,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import static com.feilong.core.Alphabet.DECIMAL_AND_LETTERS;
+import static com.feilong.core.Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE;
+
 /**
  * The Class AlphabetTest.
  *
@@ -37,14 +40,14 @@ public class AlphabetTest{
     public static final String HEXADECIMAL = "0123456789ABCDEF";
 
     /** The base-64 alphabet (64 characters). */
-    public static final String BASE64      = Alphabet.DECIMAL_AND_LETTERS + "+/";
+    public static final String BASE64      = DECIMAL_AND_LETTERS + "+/";
 
     /**
      * Test.
      */
     @Test
     public void test(){
-        assertEquals("23456789abcdefghijkmnpqrstuvwxyz", Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
+        assertEquals("23456789abcdefghijkmnpqrstuvwxyz", DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
     }
 
 }
