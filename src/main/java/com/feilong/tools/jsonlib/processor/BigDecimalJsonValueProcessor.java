@@ -15,9 +15,9 @@
  */
 package com.feilong.tools.jsonlib.processor;
 
-import java.math.BigDecimal;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import org.apache.commons.lang3.StringUtils;
+import java.math.BigDecimal;
 
 import com.feilong.core.NumberPattern;
 import com.feilong.core.lang.NumberUtil;
@@ -62,7 +62,6 @@ public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
      */
     @Override
     protected Object processValue(Object value,JsonConfig jsonConfig){
-        return value == null ? StringUtils.EMPTY
-                        : (value instanceof BigDecimal ? NumberUtil.toString((Number) value, numberPattern) : value);
+        return value == null ? EMPTY : (value instanceof BigDecimal ? NumberUtil.toString((Number) value, numberPattern) : value);
     }
 }

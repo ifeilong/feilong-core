@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Random;
@@ -196,12 +197,12 @@ public class StringUtilTemp{
      */
     public static String substring(final String text,String beginString,int shift){
         if (isNullOrEmpty(text) || isNullOrEmpty(beginString)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         int beginIndex = text.indexOf(beginString);
         if (beginIndex == StringUtils.INDEX_NOT_FOUND){// 查不到指定的字符串
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         //****************************************************
         int startIndex = beginIndex + shift;
@@ -210,7 +211,7 @@ public class StringUtilTemp{
         int textLength = text.length();
         if (startIndex > textLength){
             LOGGER.warn("beginString [{}] index[{}]+shift[{}]>text[{}].length()[{}]", beginString, beginIndex, shift, text, textLength);
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         return text.substring(startIndex);// 索引从0开始
     }

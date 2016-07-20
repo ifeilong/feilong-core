@@ -388,7 +388,7 @@ public final class StringUtil{
      * @since jdk 1.4
      */
     public static String replaceAll(CharSequence content,String regex,String replacement){
-        return null == content ? StringUtils.EMPTY : content.toString().replaceAll(regex, replacement);
+        return null == content ? EMPTY : content.toString().replaceAll(regex, replacement);
     }
 
     /**
@@ -566,7 +566,7 @@ public final class StringUtil{
      * @see org.apache.commons.lang3.StringUtils#left(String, int)
      */
     public static String substringWithoutLast(final String text,final int lastLenth){
-        return null == text ? StringUtils.EMPTY : text.substring(0, text.length() - lastLenth);
+        return null == text ? EMPTY : text.substring(0, text.length() - lastLenth);
     }
 
     /**
@@ -594,7 +594,7 @@ public final class StringUtil{
      */
     public static String substringWithoutLast(final CharSequence text,final String lastString){
         if (null == text){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         String textString = text.toString();
         if (null == lastString){
@@ -965,7 +965,7 @@ public final class StringUtil{
      * @since JDK 1.5
      */
     public static String format(String format,Object...args){
-        return null == format ? StringUtils.EMPTY : String.format(format, args);
+        return null == format ? EMPTY : String.format(format, args);
     }
     // [end]
 }

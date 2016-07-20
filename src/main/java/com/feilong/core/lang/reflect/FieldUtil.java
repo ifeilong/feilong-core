@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang.reflect;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Collections;
@@ -24,7 +26,6 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -195,7 +196,7 @@ public final class FieldUtil{
                 boolean isStatic = Modifier.isStatic(modifiers);
 
                 String pattern = "[{}.{}],modifiers:[{}]{}";
-                LOGGER.trace(pattern, klass.getSimpleName(), field.getName(), modifiers, isStatic ? " [isStatic]" : StringUtils.EMPTY);
+                LOGGER.trace(pattern, klass.getSimpleName(), field.getName(), modifiers, isStatic ? " [isStatic]" : EMPTY);
                 return isStatic;
             }
         };

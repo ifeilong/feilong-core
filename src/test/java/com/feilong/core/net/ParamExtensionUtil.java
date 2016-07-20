@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -88,8 +90,7 @@ public final class ParamExtensionUtil{
      * @return 如果 <code>uri</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      */
     public static String addParameterArrayValueMap(URI uri,Map<String, String[]> arrayValueMap,String charsetType){
-        return null == uri ? StringUtils.EMPTY
-                        : ParamUtil.addParameterArrayValueMap(uri.toString(), uri.getRawQuery(), arrayValueMap, charsetType);
+        return null == uri ? EMPTY : ParamUtil.addParameterArrayValueMap(uri.toString(), uri.getRawQuery(), arrayValueMap, charsetType);
     }
 
     // ********************************removeParameter*********************************************************************
@@ -205,7 +206,7 @@ public final class ParamExtensionUtil{
      *         如果 <code>paramNameList</code> 是null或者empty,返回 <code>uri.toString()</code><br>
      */
     public static String removeParameterList(URI uri,List<String> paramNameList,String charsetType){
-        return null == uri ? StringUtils.EMPTY : removeParameterList(uri.toString(), uri.getRawQuery(), paramNameList, charsetType);
+        return null == uri ? EMPTY : removeParameterList(uri.toString(), uri.getRawQuery(), paramNameList, charsetType);
     }
 
     /**
@@ -228,7 +229,7 @@ public final class ParamExtensionUtil{
      */
     private static String removeParameterList(String uriString,String queryString,List<String> paramNameList,String charsetType){
         if (isNullOrEmpty(uriString)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         if (isNullOrEmpty(queryString) || isNullOrEmpty(paramNameList)){
             return uriString;// 不带参数原样返回
@@ -297,7 +298,7 @@ public final class ParamExtensionUtil{
      * @see #retentionParamList(String, String, List, String)
      */
     public static String retentionParamList(URI uri,List<String> paramNameList,String charsetType){
-        return null == uri ? StringUtils.EMPTY : retentionParamList(uri.toString(), uri.getRawQuery(), paramNameList, charsetType);
+        return null == uri ? EMPTY : retentionParamList(uri.toString(), uri.getRawQuery(), paramNameList, charsetType);
     }
 
     /**
@@ -319,7 +320,7 @@ public final class ParamExtensionUtil{
      */
     private static String retentionParamList(String uriString,String queryString,List<String> paramNameList,String charsetType){
         if (isNullOrEmpty(uriString)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         if (isNullOrEmpty(queryString)){
             return uriString; //不带参数原样返回

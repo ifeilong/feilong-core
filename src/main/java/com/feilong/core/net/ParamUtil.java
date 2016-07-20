@@ -808,7 +808,7 @@ public final class ParamUtil{
      */
     private static String decodeAndEncode(String value,String charsetType){
         if (isNullOrEmpty(value)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         return isNullOrEmpty(charsetType) ? value : URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
     }

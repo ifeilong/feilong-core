@@ -15,6 +15,7 @@
  */
 package com.feilong.core.net;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
@@ -24,7 +25,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,8 +77,8 @@ public class ParamUtilTest{
 
     @Test
     public void testToNaturalOrderingString1(){
-        assertEquals(StringUtils.EMPTY, ParamUtil.toNaturalOrderingQueryString(null));
-        assertEquals(StringUtils.EMPTY, ParamUtil.toNaturalOrderingQueryString(new HashMap<String, String>()));
+        assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(null));
+        assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(new HashMap<String, String>()));
     }
 
     /**
@@ -93,7 +93,7 @@ public class ParamUtilTest{
         map.put("service", value);
         map.put("paymentType", value2);
 
-        assertEquals(StringUtils.EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, "a", "b"));
+        assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, "a", "b"));
         assertEquals(value, ParamUtil.joinValuesOrderByIncludeKeys(map, "service"));
         assertEquals(value + value2, ParamUtil.joinValuesOrderByIncludeKeys(map, "service", "paymentType"));
         assertEquals(value2 + value, ParamUtil.joinValuesOrderByIncludeKeys(map, "paymentType", "service"));
