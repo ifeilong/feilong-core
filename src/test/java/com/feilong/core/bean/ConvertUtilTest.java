@@ -16,6 +16,7 @@
 package com.feilong.core.bean;
 
 import static java.util.Collections.emptyList;
+import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.contains;
@@ -56,7 +57,6 @@ import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -630,7 +630,7 @@ public class ConvertUtilTest{
         list.add("2548");
         list.add("2548");
 
-        ToStringConfig toStringConfig = new ToStringConfig(SystemUtils.LINE_SEPARATOR);
+        ToStringConfig toStringConfig = new ToStringConfig(LINE_SEPARATOR);
         LOGGER.debug(ConvertUtil.toString(toStringConfig, list));
     }
 
