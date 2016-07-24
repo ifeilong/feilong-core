@@ -22,7 +22,10 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.comparators.FixedOrderComparator;
+import org.apache.commons.collections4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import org.apache.commons.lang3.Validate;
+
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * 专注于 bean 属性值的排序.
@@ -42,7 +45,7 @@ public final class BeanComparatorUtil{
     //*************************************************************************************************
 
     /**
-     * Chained comparator.
+     * 按照不同指定属性 <code>propertyName</code> 排序的 {@link Comparator}.
      *
      * @param <T>
      *            the generic type
@@ -70,8 +73,9 @@ public final class BeanComparatorUtil{
         return ComparatorUtils.chainedComparator(comparators);
     }
 
+    //*************************************************************************************************
     /**
-     * Property comparator.
+     * 指定属性 <code>propertyName</code> ,按照自然顺序 排序的 {@link Comparator}.
      *
      * @param <T>
      *            the generic type
@@ -91,7 +95,7 @@ public final class BeanComparatorUtil{
     }
 
     /**
-     * Property comparator.
+     * 指定属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code> 排序的 {@link Comparator}.
      *
      * @param <V>
      *            the value type
@@ -107,18 +111,21 @@ public final class BeanComparatorUtil{
      *             如果 <code>propertyName</code> 是null,或者<code>propertyValues</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @see PropertyComparator#PropertyComparator(String, Comparator)
-     * @see FixedOrderComparator#FixedOrderComparator(Object...)
+     * @see #propertyComparator(String, List)
      */
     @SafeVarargs
     public static <V, T> Comparator<T> propertyComparator(String propertyName,V...propertyValues){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         Validate.notNull(propertyValues, "propertyValues can't be null!");
-        return new PropertyComparator<>(propertyName, new FixedOrderComparator<>(propertyValues));
+        return propertyComparator(propertyName, toList(propertyValues));
     }
 
     /**
-     * Property comparator.
+     * 指定属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code> 排序的 {@link Comparator}.
+     * 
+     * <p>
+     * 调用 {@link #propertyComparator(String, List, UnknownObjectBehavior)},默认 {@link UnknownObjectBehavior#AFTER}
+     * </p>
      *
      * @param <V>
      *            the value type
@@ -130,16 +137,50 @@ public final class BeanComparatorUtil{
      * @param propertyValues
      *            the property values
      * @return the comparator
+     * @throws NullPointerException
+     *             如果 <code>propertyName</code> 是null,或者<code>propertyValues</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
+     * @see #propertyComparator(String, List, UnknownObjectBehavior)
+     */
+    public static <V, T> Comparator<T> propertyComparator(String propertyName,List<V> propertyValues){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
+        Validate.notNull(propertyValues, "propertyValues can't be null!");
+        return propertyComparator(propertyName, propertyValues, UnknownObjectBehavior.AFTER);
+    }
+
+    /**
+     * 指定属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code>,并且可以指定 <code>unknownObjectBehavior</code> 排序的 {@link Comparator}.
+     *
+     * @param <V>
+     *            the value type
+     * @param <T>
+     *            the generic type
+     * @param propertyName
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性对应的value 必须实现 {@link Comparable}接口.
+     * @param propertyValues
+     *            the property values
+     * @param unknownObjectBehavior
+     *            the unknown object behavior
+     * @return the comparator
+     * 
      * @throws NullPointerException
      *             如果 <code>propertyName</code> 是null,或者<code>propertyValues</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @see PropertyComparator#PropertyComparator(String, Comparator)
      * @see FixedOrderComparator#FixedOrderComparator(List)
+     * @since 1.8.2
      */
-    public static <V, T> Comparator<T> propertyComparator(String propertyName,List<V> propertyValues){
+    public static <V, T> Comparator<T> propertyComparator(
+                    String propertyName,
+                    List<V> propertyValues,
+                    UnknownObjectBehavior unknownObjectBehavior){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         Validate.notNull(propertyValues, "propertyValues can't be null!");
-        return new PropertyComparator<>(propertyName, new FixedOrderComparator<>(propertyValues));
+        FixedOrderComparator<V> fixedOrderComparator = new FixedOrderComparator<>(propertyValues);
+        fixedOrderComparator.setUnknownObjectBehavior(unknownObjectBehavior);
+        return new PropertyComparator<>(propertyName, fixedOrderComparator);
     }
 }
