@@ -25,12 +25,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.util.comparator.BeanComparatorUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
@@ -145,16 +147,22 @@ public final class SortUtil{
      *            the generic type
      * @param arrays
      *            the arrays
-     * @param comparator
-     *            the comparator
+     * @param comparators
+     *            the comparators
      * @return 如果 <code>array</code> 是null,返回 empty array<br>
+     *         如果 <code>comparators</code> 是null或者empty,返回 <code>arrays</code><br>
      * @see java.util.Arrays#sort(Object[], Comparator)
+     * @since 1.8.2 change to varargs parameter comparator
      */
-    public static <T> T[] sort(T[] arrays,Comparator<? super T> comparator){
+    @SafeVarargs
+    public static <T> T[] sort(T[] arrays,Comparator<T>...comparators){
         if (null == arrays){
             return toArray();
         }
-        Arrays.sort(arrays, comparator);
+        if (isNullOrEmpty(comparators)){
+            return arrays;
+        }
+        Arrays.sort(arrays, toComparator(comparators));
         return arrays;
     }
 
@@ -223,22 +231,10 @@ public final class SortUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * [{
-            "id": 1,
-            "age": 8
-        },
-                {
-            "id": 2,
-            "age": 36
-        },
-                {
-            "id": 5,
-            "age": 22
-        },
-                {
-            "id": 12,
-            "age": 18
-        }]
+     * [{"id": 1,"age": 8},
+     * {"id": 2,"age": 36},
+     * {"id": 5,"age": 22},
+     * {"id": 12,"age": 18}]
      * </pre>
      * 
      * 当然对于上述示例,你可以直接调用:
@@ -253,18 +249,38 @@ public final class SortUtil{
      *            the generic type
      * @param list
      *            the list
-     * @param comparator
-     *            the comparator
+     * @param comparators
+     *            the comparators
      * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @see java.util.Collections#sort(List, Comparator)
+     * @since 1.8.2
      */
-    public static <O> List<O> sort(List<O> list,Comparator<? super O> comparator){
+    @SafeVarargs
+    public static <O> List<O> sort(List<O> list,Comparator<O>...comparators){
         if (null == list){
             return emptyList();
         }
 
-        Collections.sort(list, comparator);
+        if (isNullOrEmpty(comparators)){
+            return list;
+        }
+        Collections.sort(list, toComparator(comparators));
         return list;
+    }
+
+    /**
+     * 如果 <code>comparators length ==1</code>,返回 comparators[0]; 否则返回 {@link ComparatorUtils#chainedComparator(Comparator...)};
+     *
+     * @param <O>
+     *            the generic type
+     * @param comparators
+     *            the comparators
+     * @return the comparator
+     * @since 1.8.2
+     */
+    @SafeVarargs
+    private static <O> Comparator<O> toComparator(Comparator<O>...comparators){
+        return 1 == comparators.length ? comparators[0] : ComparatorUtils.chainedComparator(comparators);
     }
 
     //*****************************************************************************************
@@ -332,14 +348,14 @@ public final class SortUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyNames</code> 是empty
      * @see BeanComparatorUtil#propertyComparator(String)
-     * @see #sort(List, Comparator)
+     * @see #sort(List, Comparator...)
      */
     public static <O> List<O> sort(List<O> list,String propertyName){
         if (null == list){
             return emptyList();
         }
         Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
-        return sort(list, BeanComparatorUtil.propertyComparator(propertyName));
+        return sort(list, BeanComparatorUtil.<O> propertyComparator(propertyName));
     }
 
     /**
@@ -388,7 +404,7 @@ public final class SortUtil{
      *             如果 <code>propertyNames</code> 是empty ,或者有 null元素
      * @see BeanComparatorUtil#chainedComparator(String...)
      * @see org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Comparator...)
-     * @see #sort(List, Comparator)
+     * @see #sort(List, Comparator...)
      */
     public static <O> List<O> sort(List<O> list,String...propertyNames){
         if (null == list){
@@ -397,7 +413,8 @@ public final class SortUtil{
         Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
         Validate.noNullElements(propertyNames, "propertyName:%s has empty value", propertyNames);
 
-        return sort(list, BeanComparatorUtil.chainedComparator(propertyNames));
+        Comparator<O> chainedComparator = BeanComparatorUtil.chainedComparator(propertyNames);
+        return sort(list, chainedComparator);
     }
 
     //*************************************************************************************************
@@ -437,12 +454,10 @@ public final class SortUtil{
     [{
                 "age": 25,
                 "name": "刘备"
-            },
-                    {
+            },{
                 "age": 30,
                 "name": "关羽"
-            }
-        ]
+     }]
      * </pre>
      * 
      * </blockquote>
@@ -464,7 +479,7 @@ public final class SortUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @see BeanComparatorUtil#propertyComparator(String, Object...)
-     * @see #sort(List, Comparator)
+     * @see #sort(List, Comparator...)
      */
     @SafeVarargs
     public static <O, V> List<O> sortByFixedOrderPropertyValues(List<O> list,String propertyName,V...propertyValues){
@@ -472,7 +487,8 @@ public final class SortUtil{
             return emptyList();
         }
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return sort(list, BeanComparatorUtil.propertyComparator(propertyName, propertyValues));
+        Comparator<O> propertyComparator = BeanComparatorUtil.propertyComparator(propertyName, propertyValues);
+        return sort(list, propertyComparator);
     }
 
     /**
@@ -495,14 +511,16 @@ public final class SortUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @see BeanComparatorUtil#propertyComparator(String, List)
-     * @see #sort(List, Comparator)
+     * @see #sort(List, Comparator...)
      */
     public static <O, V> List<O> sortByFixedOrderPropertyValues(List<O> list,String propertyName,List<V> propertyValues){
         if (null == list){
             return emptyList();
         }
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return sort(list, BeanComparatorUtil.propertyComparator(propertyName, propertyValues));
+
+        Comparator<O> propertyComparator = BeanComparatorUtil.propertyComparator(propertyName, propertyValues);
+        return sort(list, propertyComparator);
     }
 
     //*******************************排序****************************************************
