@@ -57,6 +57,7 @@ import com.feilong.core.lang.StringUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 
 /**
  * 常用类型转换处理.
@@ -1125,7 +1126,7 @@ public final class ConvertUtil{
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Map<String, String> toMap(Properties properties){
         Validate.notEmpty(properties, "properties can't be null/empty!");
-        return new TreeMap<String, String>((Map) properties);//为了log方便,使用 treeMap
+        return sortByKeyAsc((Map) properties);//为了log方便,使用 treeMap
     }
 
     /**

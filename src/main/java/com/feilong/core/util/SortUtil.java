@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.comparators.ReverseComparator;
@@ -484,8 +483,12 @@ public final class SortUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <p>
-     * 由于排序使用的是 {@link java.util.TreeMap#TreeMap(Map)},而TreeMap是不允许 key是null, 如果传入的参数 <code>map</code>中,如果有key是null,那么将会抛出
+     * 如果直接使用 {@link java.util.TreeMap#TreeMap(Map)},TreeMap 不允许 key是null, 如果传入的参数 <code>map</code>中,如果有key是null,那么将会抛出
      * {@link NullPointerException}
+     * </p>
+     * 
+     * <p>
+     * 而此方法使用了 {@link PropertyComparator},允许 null key,null key将排在最前面
      * </p>
      * </blockquote>
      *
@@ -496,7 +499,6 @@ public final class SortUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,返回 {@link Collections#emptyMap()}<br>
-     *         否则直接构造 {@link TreeMap}返回
      * @see java.util.TreeMap#TreeMap(Map)
      * @since 1.8.0 move from MapUtil
      */
@@ -504,7 +506,7 @@ public final class SortUtil{
         if (null == map){
             return emptyMap();
         }
-        return new TreeMap<K, V>(map);
+        return sort(map, new PropertyComparator<Map.Entry<K, V>>("key"));
     }
 
     /**

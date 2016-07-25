@@ -18,7 +18,9 @@ package com.feilong.core.util;
 import static com.feilong.tools.formatter.FormatterUtil.formatToSimpleTable;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -219,11 +221,16 @@ public class SortUtilTest{
         Map<String, Integer> map = new HashMap<String, Integer>();
 
         map.put("a", 123);
+        map.put("d", 3455);
+        map.put(null, 1345);
         map.put("c", 345);
         map.put("b", 8);
 
         Map<String, Integer> sortByKeyAsc = sortByKeyAsc(map);
-        assertThat(sortByKeyAsc.keySet(), contains("a", "b", "c"));
+        assertThat(sortByKeyAsc.keySet(), contains(null, "a", "b", "c", "d"));
+        assertThat(
+                        sortByKeyAsc,
+                        allOf(hasEntry("a", 123), hasEntry("b", 8), hasEntry("c", 345), hasEntry("d", 3455), hasEntry(null, 1345)));
     }
 
     @Test
@@ -257,13 +264,15 @@ public class SortUtilTest{
     @Test
     public void testSortByKeyDesc(){
         Map<String, Integer> map = new HashMap<String, Integer>();
-
         map.put("a", 123);
+        map.put(null, 8);
         map.put("c", 345);
         map.put("b", 8);
 
         Map<String, Integer> sortByKeyDesc = sortByKeyDesc(map);
-        assertThat(sortByKeyDesc.keySet(), contains("c", "b", "a"));
+        LOGGER.debug(formatToSimpleTable(sortByKeyDesc));
+
+        assertThat(map, allOf(hasEntry("c", 345), hasEntry("b", 8), hasEntry("a", 123), hasEntry(null, 8)));
     }
 
     @Test
