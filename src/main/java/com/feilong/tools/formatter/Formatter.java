@@ -16,6 +16,7 @@
 package com.feilong.tools.formatter;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,6 +29,30 @@ import com.feilong.core.bean.ConvertUtil;
  * @since 1.8.2
  */
 public interface Formatter{
+
+    /**
+     * Format.
+     *
+     * @param <T>
+     *            the generic type
+     * @param bean
+     *            the bean
+     * @return 如果 <code>bean</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     */
+    <T> String format(T bean);
+
+    /**
+     * Format.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     */
+    <K, V> String format(Map<K, V> map);
 
     /**
      * 将迭代对象格式化.

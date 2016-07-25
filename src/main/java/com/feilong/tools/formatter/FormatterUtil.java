@@ -16,6 +16,9 @@
 package com.feilong.tools.formatter;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.tools.formatter.table.SimpleTableFormatter;
 
@@ -75,7 +78,7 @@ public final class FormatterUtil{
      *            the generic type
      * @param iterable
      *            the iterable
-     * @return the string
+     * @return 如果 <code>iterable</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      */
     public static final <T> String formatToSimpleTable(Iterable<T> iterable){
         return SIMPLE_TABLE_FORMATTER.format(iterable);
@@ -124,7 +127,7 @@ public final class FormatterUtil{
      *            the iterable
      * @param beanFormatterConfig
      *            the bean formatter config
-     * @return the string
+     * @return 如果 <code>iterable</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      */
     public static final <T> String formatToSimpleTable(Iterable<T> iterable,BeanFormatterConfig<T> beanFormatterConfig){
         return SIMPLE_TABLE_FORMATTER.format(iterable, beanFormatterConfig);
@@ -172,5 +175,107 @@ public final class FormatterUtil{
      */
     public static final String formatToSimpleTable(String[] columnTitles,List<Object[]> dataList){
         return SIMPLE_TABLE_FORMATTER.format(columnTitles, dataList);
+    }
+
+    /**
+     * 格式化成简单的table格式.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap(//
+     *                 Pair.of("Loading entityengine.xml from", "file:/opt/atlassian/jira/atlassian-jira/WEB-INF/classes/entityengine.xml"),
+     *                 Pair.of("Entity model field type name", "postgres72"),
+     *                 Pair.of("Entity model schema name", "public"),
+     *                 Pair.of("Database Version", "PostgreSQL - 9.2.8"),
+     *                 Pair.of("Database Driver", "PostgreSQL Native Driver - PostgreSQL 9.0 JDBC4 (build 801)"),
+     *                 Pair.of("Database Version", "PostgreSQL - 9.2.8"),
+     *                 Pair.of((String) null, "PostgreSQL - 9.2.8"),
+     *                 Pair.of("Database URL", "jdbc:postgresql://127.0.0.1:5432/db_feilong_jira"),
+     *                 Pair.of("Database JDBC config", "postgres72 jdbc:postgresql://127.0.0.1:5432/db_feilong_jira"));
+     * 
+     * LOGGER.debug(formatToSimpleTable(map));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+                              : PostgreSQL - 9.2.8                                                       
+    Database Driver               : PostgreSQL Native Driver - PostgreSQL 9.0 JDBC4 (build 801)              
+    Database JDBC config          : postgres72 jdbc:postgresql://127.0.0.1:5432/db_feilong_jira              
+    Database URL                  : jdbc:postgresql://127.0.0.1:5432/db_feilong_jira                         
+    Database Version              : PostgreSQL - 9.2.8                                                       
+    Entity model field type name  : postgres72                                                               
+    Entity model schema name      : public                                                                   
+    Loading entityengine.xml from : file:/opt/atlassian/jira/atlassian-jira/WEB-INF/classes/entityengine.xml
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     */
+    public static final <K, V> String formatToSimpleTable(Map<K, V> map){
+        return SIMPLE_TABLE_FORMATTER.format(map);
+    }
+
+    /**
+     * 格式化成简单的table格式.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * User user = new User();
+     * user.setAge(15);
+     * user.setId(88L);
+     * user.setAttrMap(toMap("love", "sanguo"));
+     * user.setDate(new Date());
+     * user.setMoney(toBigDecimal(999));
+     * user.setName("xinge");
+     * user.setNickNames(toArray("jinxin", "feilong"));
+     * LOGGER.debug(formatToSimpleTable(user));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    age              : 15                                
+    attrMap          : {love=sanguo}                     
+    class            : com.feilong.test.User             
+    date             : Tue Jul 26 00:02:16 CST 2016      
+    id               : 88                                
+    loves            :                                   
+    money            : 999                               
+    name             : xinge                             
+    nickNames        : jinxin                            
+    password         :                                   
+    userAddresseList :                                   
+    userAddresses    :                                   
+    userInfo         : com.feilong.test.UserInfo@1c21535
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param bean
+     *            the bean
+     * @return 如果 <code>bean</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     */
+    public static final <T> String formatToSimpleTable(T bean){
+        return SIMPLE_TABLE_FORMATTER.format(bean);
     }
 }

@@ -25,18 +25,22 @@ import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.bean.PropertyUtil;
 import com.feilong.tools.formatter.AbstractFormatter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 import static com.feilong.core.lang.ArrayUtil.newArray;
 import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
+import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 
 /**
  * The Class SimpleTableFormatter.
@@ -48,6 +52,49 @@ public class SimpleTableFormatter extends AbstractFormatter{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleTableFormatter.class);
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.tools.formatter.Formatter#format(java.lang.Object)
+     */
+    @Override
+    public <T> String format(T bean){
+        if (isNullOrEmpty(bean)){
+            return EMPTY;
+        }
+        return format(PropertyUtil.describe(bean));
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.tools.formatter.Formatter#format(java.util.Map)
+     */
+    @Override
+    public <K, V> String format(Map<K, V> map){
+        if (isNullOrEmpty(map)){
+            return EMPTY;
+        }
+        //*******************************************************
+        int maxKeyLength = -1;
+        for (K key : map.keySet()){
+            maxKeyLength = max(maxKeyLength, StringUtils.length(ConvertUtil.toString(key)));
+        }
+
+        List<Object[]> dataList = new ArrayList<>(map.size());
+
+        map = sortByKeyAsc(map);
+
+        //*******************************************************
+        for (Map.Entry<K, V> entry : map.entrySet()){
+            K key = entry.getKey();
+            V value = entry.getValue();
+            //StringUtils.leftPad(ConvertUtil.toString(key), maxKeyLength)
+            dataList.add(toArray(ConvertUtil.toString(key), ":", value));
+        }
+        return format(null, dataList);
+    }
 
     /*
      * (non-Javadoc)
@@ -64,12 +111,14 @@ public class SimpleTableFormatter extends AbstractFormatter{
         }
         int[] colWidths = buildColumnMaxWidths(rows);
 
-        //**********模拟 分隔符*******************************************
-        String[] borders = newArray(String.class, columnTitles.length);
-        for (int i = 0; i < borders.length; ++i){
-            borders[i] = StringUtils.repeat("-", colWidths[i]);
+        if (null != columnTitles){
+            //**********模拟 分隔符*******************************************
+            String[] borders = newArray(String.class, columnTitles.length);
+            for (int i = 0; i < borders.length; ++i){
+                borders[i] = StringUtils.repeat("-", colWidths[i]);
+            }
+            rows.add(1, borders);
         }
-        rows.add(1, borders);
 
         //***********************************************************************************
         StringBuilder sb = new StringBuilder();
@@ -140,4 +189,5 @@ public class SimpleTableFormatter extends AbstractFormatter{
     private static String toStringValue(Object[] row,int colNum){
         return ConvertUtil.toString(row[colNum]);
     }
+
 }
