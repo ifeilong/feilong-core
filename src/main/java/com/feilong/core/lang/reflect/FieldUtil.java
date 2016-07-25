@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang.reflect;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.lang.reflect.Field;
@@ -157,7 +159,7 @@ public final class FieldUtil{
     public static Map<String, Object> getAllFieldNameAndValueMap(Object obj,String...excludeFieldNames){
         List<Field> fieldList = getAllFieldList(obj.getClass(), excludeFieldNames);
         if (isNullOrEmpty(fieldList)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Map<String, Object> map = new TreeMap<String, Object>();
         for (Field field : fieldList){
@@ -168,7 +170,7 @@ public final class FieldUtil{
 
     /**
      * 获得 <code>klass</code> 排除某些 <code>excludeFieldNames</code> 之后的字段list.
-     *
+     * 
      * @param klass
      *            the klass
      * @param excludeFieldNames
@@ -183,7 +185,7 @@ public final class FieldUtil{
         //获得给定类的所有声明字段 {@link Field},包括所有的parents,包括 public/protect/private/inherited...
         List<Field> fieldList = FieldUtils.getAllFieldsList(klass);
         if (isNullOrEmpty(fieldList)){
-            return Collections.emptyList();
+            return emptyList();
         }
         //**********************************************************************************************
         Predicate<Field> excludeFieldPredicate = BeanPredicateUtil.containsPredicate("name", excludeFieldNames);

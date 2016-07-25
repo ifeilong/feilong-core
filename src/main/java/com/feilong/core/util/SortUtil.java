@@ -286,79 +286,6 @@ public final class SortUtil{
     //*****************************************************************************************
 
     /**
-     * 对 集合 <code>list</code>,指定属性 <code>propertyName</code> 进行排序.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * 
-     * List{@code <User>} list = toList(//
-     *                 new User(12L, 18),
-     *                 new User(2L, 36),
-     *                 new User(2L, 2),
-     *                 new User(2L, 30),
-     *                 new User(1L, 8));
-     * SortUtil.sort(list, "age");
-     * LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
-     * 
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * [
-     * {"id": 2,"age": 2},
-     * {"id": 1,"age": 8},
-     * {"id": 12,"age": 18}, 
-     * {"id": 2,"age": 30},
-     * {"id": 2,"age": 36}
-     * ]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>示例2:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * User id12 = new User(12L, 18);
-     * User id2 = new User(2L, 36);
-     * User id5 = new User(5L, 22);
-     * User id1 = new User(1L, 8);
-     * List<User> list = toList(id12, id2, id5, id1);
-     * sort(list, "id");
-     * assertThat(list, contains(id1, id2, id5, id12));
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <O>
-     *            the generic type
-     * @param list
-     *            the list
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
-     * @throws NullPointerException
-     *             如果 <code>propertyNames</code> 是null
-     * @throws IllegalArgumentException
-     *             如果 <code>propertyNames</code> 是empty
-     * @see BeanComparatorUtil#propertyComparator(String)
-     * @see #sort(List, Comparator...)
-     */
-    public static <O> List<O> sort(List<O> list,String propertyName){
-        if (null == list){
-            return emptyList();
-        }
-        Validate.notEmpty(propertyName, "propertyName can't be null/empty!");
-        return sort(list, BeanComparatorUtil.<O> propertyComparator(propertyName));
-    }
-
-    /**
      * 对 集合 <code>list</code>,指定属性(组合)进行排序.
      * 
      * <h3>示例:</h3>
@@ -413,8 +340,10 @@ public final class SortUtil{
         Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
         Validate.noNullElements(propertyNames, "propertyName:%s has empty value", propertyNames);
 
-        Comparator<O> chainedComparator = BeanComparatorUtil.chainedComparator(propertyNames);
-        return sort(list, chainedComparator);
+        return sort(
+                        list,
+                        1 == propertyNames.length ? BeanComparatorUtil.<O> propertyComparator(propertyNames[0])
+                                        : BeanComparatorUtil.<O> chainedComparator(propertyNames));
     }
 
     //*************************************************************************************************
