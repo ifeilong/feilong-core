@@ -5,6 +5,7 @@ feilong core
 ![build](https://img.shields.io/jenkins/s/https/jenkins.qa.ubuntu.com/precise-desktop-amd64_default.svg "build") 
 [![docs](http://progressed.io/bar/79?title=docs "docs")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
 ![tests](https://img.shields.io/badge/tests-401%20%2F%20401-green.svg "tests") 
+![JDK](https://img.shields.io/badge/JDK-1.7-green.svg "JDK") 
 
 > Reduce development, Release ideas (减少开发,释放思想)
 
