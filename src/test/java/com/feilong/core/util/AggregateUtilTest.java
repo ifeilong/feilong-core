@@ -124,6 +124,22 @@ public class AggregateUtilTest{
         assertEquals(new BigDecimal(100L), sum);
     }
 
+    @Test
+    public void testSum5(){
+        List<User> list = toList(//
+                        new User(2L),
+                        new User(50L),
+                        new User(50L));
+
+        assertEquals(null, AggregateUtil.sum(list, "id", new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getId() > 100L;
+            }
+        }));
+    }
+
     /**
      * TestStatisticsUtilTest.
      */

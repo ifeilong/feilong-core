@@ -206,11 +206,6 @@ public final class AggregateUtil{
     /**
      * 迭代<code>objectCollection</code>,提取符合 <code>includePredicate</code>的元素 的指定 <code>propertyNames</code> 元素的值 ,累计总和.
      * 
-     * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
-     * </p>
-     * 
-     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -261,8 +256,12 @@ public final class AggregateUtil{
      * @param includePredicate
      *            the include predicate
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
-     *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
+     *         如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     *         如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>new LinkedHashMap</code>
+     * @throws NullPointerException
+     *             如果<code>propertyNames</code> 是null
+     * @throws IllegalArgumentException
+     *             果<code>propertyNames</code> 有元素 是null <br>
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String[] propertyNames,Predicate<O> includePredicate){
         if (isNullOrEmpty(objectCollection)){
@@ -357,7 +356,8 @@ public final class AggregateUtil{
      * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素 的指定 <code>propertyName</code> 元素的值 ,累计总和..
      * 
      * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
+     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     * 如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>null</code>
      * </p>
      * 
      * <h3>示例:</h3>
