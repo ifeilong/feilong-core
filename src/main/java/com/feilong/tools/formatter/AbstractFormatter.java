@@ -77,10 +77,10 @@ public abstract class AbstractFormatter implements Formatter{
 
         List<Object[]> dataList = new ArrayList<>(map.size());
 
-        map = sortByKeyAsc(map);
+        Map<K, V> useMap = sortByKeyAsc(map);//不影响原map
 
         //*******************************************************
-        for (Map.Entry<K, V> entry : map.entrySet()){
+        for (Map.Entry<K, V> entry : useMap.entrySet()){
             K key = entry.getKey();
             V value = entry.getValue();
             //StringUtils.leftPad(ConvertUtil.toString(key), maxKeyLength)

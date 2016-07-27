@@ -243,14 +243,17 @@ public class SortUtilTest{
      */
     @Test
     public void testSort(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new LinkedHashMap<>();
 
         map.put("a8", 8);
         map.put("a13", 123);
         map.put("a2", 345);
 
+        assertThat(map.keySet(), contains("a8", "a13", "a2"));
+
         Map<String, Integer> sortByKeyAsc = sortByKeyAsc(map);
         assertThat(sortByKeyAsc.keySet(), contains("a13", "a2", "a8"));
+        assertThat(map.keySet(), contains("a8", "a13", "a2"));
 
         Map<String, Integer> sort = sort(
                         map,
