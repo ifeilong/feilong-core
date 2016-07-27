@@ -38,6 +38,7 @@ import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -317,7 +318,7 @@ public final class CollectionsUtil{
      * }
      * </pre>
      * 
-     * 重构之后,方法额复杂度会更小
+     * 重构之后,方法的复杂度会更小,阅读性更高
      * 
      * </blockquote>
      *
@@ -327,7 +328,7 @@ public final class CollectionsUtil{
      *            the collection to add to, 不能为null
      * @param iterable
      *            the iterable of elements to add
-     * @return a boolean 标识 collection 是否改变.<br>
+     * @return a boolean 标识 <code>objectCollection</code> 是否改变,如果改变了,返回true.<br>
      *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>iterable</code> 是null,直接返回false<br>
      *         否则调用{@link CollectionUtils#addAll(Collection, Iterable)}
@@ -339,6 +340,61 @@ public final class CollectionsUtil{
     public static <O> boolean addAllIgnoreNull(final Collection<O> objectCollection,final Iterable<? extends O> iterable){
         Validate.notNull(objectCollection, "objectCollection can't be null!");
         return null == iterable ? false : CollectionUtils.addAll(objectCollection, iterable);
+    }
+
+    /**
+     * 添加 <code>object</code>元素到指定的<code>objectCollection</code>,如果 <code>object</code> 是null或者 empty将忽略.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 对于以下代码:
+     * 
+     * <pre class="code">
+     * 
+     * List<Object[]> dataList = new ArrayList<>();
+     * for (T bean : iterable){
+     *     Object[] objectArray = toObjectArray(bean, propertyNameList);
+     *     if (isNotNullOrEmpty(objectArray)){
+     *         dataList.add(objectArray);
+     *     }
+     * }
+     * return dataList;
+     * 
+     * </pre>
+     * 
+     * 可以重构成:
+     * 
+     * <pre class="code">
+     * 
+     * List<Object[]> dataList = new ArrayList<>();
+     * for (T bean : iterable){
+     *     addIgnoreNullOrEmpty(dataList, toObjectArray(bean, propertyNameList));
+     * }
+     * return dataList;
+     * </pre>
+     * 
+     * 重构之后,方法的复杂度会更小,阅读性更高
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param objectCollection
+     *            the collection to add to, 不能为null
+     * @param element
+     *            element to add
+     * @return a boolean 标识 <code>objectCollection</code> 是否改变,如果改变了,返回true.<br>
+     *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>element</code> 是null or empty,直接返回false<br>
+     *         否则调用<code>objectCollection.add(object)</code>
+     * @see org.apache.commons.collections4.CollectionUtils#addIgnoreNull(Collection, Object)
+     * @since 1.8.2
+     */
+    public static <T> boolean addIgnoreNullOrEmpty(final Collection<T> objectCollection,final T element){
+        Validate.notNull(objectCollection, "objectCollection can't be null!");
+        return isNotNullOrEmpty(element) && objectCollection.add(element);
     }
 
     /**

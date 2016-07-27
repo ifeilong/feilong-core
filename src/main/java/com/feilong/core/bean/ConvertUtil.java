@@ -674,7 +674,7 @@ public final class ConvertUtil{
      * 
      * @param toBeConvertedValue
      *            参数值
-     * @return the string
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回null
      * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
      * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(Object)

@@ -398,6 +398,7 @@ public class ConvertUtilTest{
 
     @Test
     public void testToString5(){
+        assertEquals(null, ConvertUtil.toString(null));
         assertEquals("1", ConvertUtil.toString(1));
         assertEquals("1.0", ConvertUtil.toString(toBigDecimal(1.0)));
         assertEquals("8", ConvertUtil.toString(toLong(8L)));

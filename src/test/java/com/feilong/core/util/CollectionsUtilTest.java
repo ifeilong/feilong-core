@@ -92,6 +92,8 @@ public class CollectionsUtilTest{
         assertThat(list, hasItems("xinge", "feilong1", "feilong2", "feilong2"));
     }
 
+    //************************************************************************************************
+
     /**
      * Test add all ignore null.
      */
@@ -118,6 +120,36 @@ public class CollectionsUtilTest{
     @Test(expected = NullPointerException.class)
     public void testAddAllIgnoreNull1(){
         CollectionsUtil.addAllIgnoreNull(null, null);
+    }
+
+    //*************************************************************************************
+
+    @Test(expected = NullPointerException.class)
+    public void testAddIgnoreNullOrEmpty(){
+        CollectionsUtil.addIgnoreNullOrEmpty(null, null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAddIgnoreNullOrEmpty1(){
+        CollectionsUtil.addIgnoreNullOrEmpty(null, "");
+    }
+
+    @Test
+    public void testAddIgnoreNullOrEmpty2(){
+        List<String> list = toList("xinge", "feilong1");
+        boolean addIgnoreNullOrEmpty = CollectionsUtil.addIgnoreNullOrEmpty(list, "xinge");
+        assertEquals(true, addIgnoreNullOrEmpty);
+
+        assertThat(list, contains("xinge", "feilong1", "xinge"));
+    }
+
+    @Test
+    public void testAddIgnoreNullOrEmpty3(){
+        List<String> list = toList("xinge", "feilong1");
+        boolean addIgnoreNullOrEmpty = CollectionsUtil.addIgnoreNullOrEmpty(list, "  ");
+        assertEquals(false, addIgnoreNullOrEmpty);
+
+        assertThat(list, contains("xinge", "feilong1"));
     }
 
     /**

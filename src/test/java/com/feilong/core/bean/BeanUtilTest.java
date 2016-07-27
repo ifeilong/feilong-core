@@ -139,7 +139,7 @@ public class BeanUtilTest{
         Customer customer = new Customer(
                         123,
                         "John Smith",
-                        toArray(new Address("CA1234", "xxx", "Los Angeles", "USA"), new Address("100000", "xxx", "Beijing", "China")));
+                        toArray(new Address("USA", "Los Angeles", "CA1234", "xxx"), new Address("China", "Beijing", "100000", "xxx")));
 
         // accessing the city of first address  
         String name = (String) PropertyUtils.getSimpleProperty(customer, "name");
