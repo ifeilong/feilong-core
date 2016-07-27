@@ -24,13 +24,16 @@ import java.lang.annotation.Target;
 
 /**
  * Is used to specify the mapped column for a persistent property or field.
- * If no <code>Column</code> annotation is specified, the default values apply.
- *
+ * 
+ * <p>
+ * 可以使用这个注解来 修改显示每列的顺序以及标题的名字
+ * </p>
+ * 
+ * <h3>使用示例:</h3>
+ * 
  * <blockquote>
  * 
  * <pre>
- *    Example 1:
- *
  *    {@code @}FormatterColumn(name="DESC",order=1)
  *    public String getDescription() { return description; }
  *
@@ -41,10 +44,7 @@ import java.lang.annotation.Target;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
  */
-//表示产生文档,比如通过javadoc产生文档, 将此注解包含在 javadoc 中, 这个Annotation可以被写入javadoc
-//在默认情况下,注释 不包括在 Javadoc 中
 @Documented
-//在jvm加载class时候有效, VM将在运行期也保留注释,因此可以通过反射机制读取注解的信息
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ FIELD })
 public @interface FormatterColumn{
@@ -55,7 +55,7 @@ public @interface FormatterColumn{
     String name() default "";
 
     /**
-     * (Optional) 排序 数值从小到大排序.
+     * (Optional) 排序,数值从小到大排序.
      */
     int order() default 0;
 }

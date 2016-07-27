@@ -13,26 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.formatter;
-
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+package com.feilong.tools.formatter.util;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.comparator.BeanComparatorUtil;
+import com.feilong.tools.formatter.FormatterColumn;
+import com.feilong.tools.formatter.entity.BeanFormatterConfig;
+import com.feilong.tools.formatter.entity.FormatterColumnEntity;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
@@ -40,18 +37,18 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.SortUtil.sort;
 
 /**
- * The Class PropertyValueMapExtractor.
+ * {@link FormatterColumnEntity} 提取器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
  */
-class PropertyValueMapExtractor{
+public class FormatterColumnEntityExtractor{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyValueMapExtractor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FormatterColumnEntityExtractor.class);
 
     /** Don't let anyone instantiate this class. */
-    private PropertyValueMapExtractor(){
+    private FormatterColumnEntityExtractor(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -60,18 +57,17 @@ class PropertyValueMapExtractor{
     //********************************************************************************************************
 
     /**
-     * Gets the formatter column entity list.
+     * 从 <code>BeanFormatterConfig</code> 来提取 FormatterColumnEntity list.
      *
      * @param <T>
      *            the generic type
      * @param beanFormatterConfig
-     *            the bean csv config
+     *            the bean formatter config
      * @return the formatter column entity list
-     * @see com.feilong.core.lang.reflect.FieldUtil#getAllFieldList(Object, String[])
      * @see org.apache.commons.lang3.reflect.FieldUtils#getAllFieldsList(Class)
      */
-    static <T> List<FormatterColumnEntity> getFormatterColumnEntityList(BeanFormatterConfig<T> beanFormatterConfig){
-        Validate.notNull(beanFormatterConfig, "beanCsvConfig can't be null!");
+    public static <T> List<FormatterColumnEntity> getFormatterColumnEntityList(BeanFormatterConfig<T> beanFormatterConfig){
+        Validate.notNull(beanFormatterConfig, "beanFormatterConfig can't be null!");
 
         List<FormatterColumnEntity> formatterColumnEntityList = buildFormatterColumnEntityList(beanFormatterConfig);
         if (isNotNullOrEmpty(beanFormatterConfig.getIncludePropertyNames())){
@@ -123,7 +119,7 @@ class PropertyValueMapExtractor{
      * @param <T>
      *            the generic type
      * @param beanFormatterConfig
-     *            the bean csv config
+     *            the bean formatter config
      * @return the list
      */
     private static <T> List<FormatterColumnEntity> buildFormatterColumnEntityList(BeanFormatterConfig<T> beanFormatterConfig){
@@ -149,70 +145,13 @@ class PropertyValueMapExtractor{
         return new FormatterColumnEntity(getName(field, formatterColumn), field.getName(), getOrder(formatterColumn));
     }
 
-    /**
-     * Builds the data list.
-     *
-     * @param <T>
-     *            the generic type
-     * @param iterable
-     *            the iterable
-     * @param formatterColumnEntityList
-     *            the csv column entity list
-     * @return the list
-     */
-    static <T> List<Object[]> buildDataList(Iterable<T> iterable,List<FormatterColumnEntity> formatterColumnEntityList){
-        List<String> propertyNameList = CollectionsUtil.getPropertyValueList(formatterColumnEntityList, "propertyName");
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyNameList:{}", JsonUtil.format(propertyNameList, 0, 0));
-        }
-
-        List<Object[]> dataList = new ArrayList<>();
-        for (T bean : iterable){
-            Object[] objectArray = toObjectArray(bean, propertyNameList);
-
-            if (isNotNullOrEmpty(objectArray)){
-                dataList.add(objectArray);
-            }
-        }
-        return dataList;
-    }
-
-    /**
-     * To object array.
-     *
-     * @param <T>
-     *            the generic type
-     * @param bean
-     *            the t
-     * @param propertyNameList
-     *            the property name list
-     * @return the object[]
-     */
-    private static <T> Object[] toObjectArray(T bean,List<String> propertyNameList){
-        Map<String, Object> propertyValueMap = new LinkedHashMap<>();
-        PropertyUtil.copyProperties(propertyValueMap, bean, ConvertUtil.toStrings(propertyNameList));
-
-        if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("propertyValueMap:{}", JsonUtil.format(propertyValueMap, 0, 0));
-        }
-
-        int j = 0;
-        Object[] rowData = new Object[propertyNameList.size()];
-        for (Map.Entry<String, Object> entry : propertyValueMap.entrySet()){
-            Object value = entry.getValue();
-            rowData[j] = isNullOrEmpty(value) ? EMPTY : ConvertUtil.toString(value);
-            j++;
-        }
-        return rowData;
-    }
-
     //*********************************************************************************************
 
     /**
      * 获得 order.
      *
      * @param formatterColumn
-     *            the csv column
+     *            the formatter column
      * @return the order
      */
     private static int getOrder(FormatterColumn formatterColumn){
@@ -225,7 +164,7 @@ class PropertyValueMapExtractor{
      * @param field
      *            the field
      * @param formatterColumn
-     *            the csv column
+     *            the formatter column
      * @return the name
      */
     private static String getName(Field field,FormatterColumn formatterColumn){

@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.feilong.tools.formatter.entity.BeanFormatterConfig;
 import com.feilong.tools.formatter.table.SimpleTableFormatter;
 
 /**

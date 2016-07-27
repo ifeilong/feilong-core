@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.formatter;
+package com.feilong.tools.formatter.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.feilong.tools.formatter.FormatterColumn;
+
 /**
- * The Class CsvColumnEntity.
- * 
+ * The Class FormatterColumnEntity.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
  */
@@ -43,7 +45,7 @@ public class FormatterColumnEntity{
     //***************************************************************************
 
     /**
-     * Instantiates a new csv column entity.
+     * Instantiates a new formatter column entity.
      *
      * @param name
      *            the name

@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.store.order.OrderLine;
+import com.feilong.tools.formatter.entity.BeanFormatterConfig;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;

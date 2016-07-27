@@ -18,6 +18,7 @@ package com.feilong.tools.formatter;
 import static com.feilong.tools.formatter.FormatterUtil.formatToSimpleTable;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -25,10 +26,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.store.member.Address;
 import com.feilong.test.User;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
@@ -69,5 +73,17 @@ public class FormatterUtilTest{
         user.setName("xinge");
         user.setNickNames(toArray("jinxin", "feilong"));
         LOGGER.debug(formatToSimpleTable(user));
+    }
+
+    @Test
+    public final void testFormatToSimpleTable2(){
+        List<Address> list = toList(
+                        new Address("china", "shanghai", "wenshui wanrong.lu 888", "216000"),
+                        new Address("china", "beijing", "wenshui wanrong.lu 666", "216001"),
+                        new Address("china", "nantong", "wenshui wanrong.lu 222", "216002"),
+                        new Address("china", "tianjing", "wenshui wanrong.lu 999", "216600"));
+
+        LOGGER.debug(JsonUtil.format(list));
+        LOGGER.debug(formatToSimpleTable(list));
     }
 }

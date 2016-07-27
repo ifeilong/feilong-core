@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 import com.feilong.test.User;
-import com.feilong.tools.formatter.BeanFormatterConfig;
+import com.feilong.tools.formatter.entity.BeanFormatterConfig;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
