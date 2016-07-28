@@ -23,7 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 用来标识 bean 字段和 map的key 一对一的关系,简化 减少hard coding.
+ * 用来标识 bean 字段和 map的key一对一的关系,简化减少hard coding.
+ * 
+ * <p>
+ * 很多时候,map 不能直接 {@link BeanUtil#populate(Object, java.util.Map)}
+ * 到bean里面去,需要配置key和propertyName的对应关系,此时可以在bean里面使用{@link Alias}来配置对应关系,然后使用 {@link BeanUtil#populateAliasBean(Object, java.util.Map)}
+ * </p>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.1

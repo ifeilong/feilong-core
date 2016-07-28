@@ -964,7 +964,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * // 除数和单位的map,必须是有顺序的 从大到小.
+     * <span style="color:green">// 除数和单位的map,必须是有顺序的 从大到小.</span>
      * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = new LinkedHashMap{@code <>}();
      * 
      * static{
@@ -980,7 +980,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * // 除数和单位的map,必须是有顺序的 从大到小.
+     * <span style="color:green">// 除数和单位的map,必须是有顺序的 从大到小.</span>
      * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = ConvertUtil.toMap(
      *                 Pair.of(FileUtils.ONE_TB, "TB"), //(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
      *                 Pair.of(FileUtils.ONE_GB, "GB"), //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
@@ -1040,6 +1040,8 @@ public final class ConvertUtil{
      * <p>
      * 一行代码就搞定了,很简洁,有木有~~
      * </p>
+     * 
+     * <hr>
      * 
      * <p>
      * 还有:
