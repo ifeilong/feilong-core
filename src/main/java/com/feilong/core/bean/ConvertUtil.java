@@ -1371,7 +1371,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * public static {@code <K, V>} Map<K, V[]> toArrayValueMap(Map{@code <K, V>} singleValueMap){
+     * public static {@code <K, V>} Map{@code <K, V[]>} toArrayValueMap(Map{@code <K, V>} singleValueMap){
      *     Map{@code <K, V[]>} arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
      *     for (Map.Entry{@code <K, V>} entry : singleValueMap.entrySet()){
      *         arrayValueMap.put(entry.getKey(), toArray(entry.getValue()));//注意此处的Value不要声明成V,否则会变成Object数组

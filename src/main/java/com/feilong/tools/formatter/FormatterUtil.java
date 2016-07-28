@@ -145,8 +145,8 @@ public final class FormatterUtil{
      * 
      * String[] columnTitles = { "name", "age", "address" };
      * 
-     * List<Object[]> list = new ArrayList<>();
-     * for (int i = 0; i < 5; i++){
+     * List{@code <Object[]>} list = new ArrayList{@code <>}();
+     * for (int i = 0; i {@code <} 5; i++){
      *     list.add(ConvertUtil.toArray("feilong" + i, 18 + i, "shanghai"));
      * }
      * 

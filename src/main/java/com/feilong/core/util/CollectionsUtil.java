@@ -353,7 +353,7 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * 
-     * List<Object[]> dataList = new ArrayList<>();
+     * List{@code <Object[]>} dataList = new ArrayList{@code <>}();
      * for (T bean : iterable){
      *     Object[] objectArray = toObjectArray(bean, propertyNameList);
      *     if (isNotNullOrEmpty(objectArray)){
@@ -368,7 +368,7 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * 
-     * List<Object[]> dataList = new ArrayList<>();
+     * List{@code <Object[]>} dataList = new ArrayList{@code <>}();
      * for (T bean : iterable){
      *     addIgnoreNullOrEmpty(dataList, toObjectArray(bean, propertyNameList));
      * }

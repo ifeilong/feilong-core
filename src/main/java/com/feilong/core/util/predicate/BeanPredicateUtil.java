@@ -160,22 +160,22 @@ public final class BeanPredicateUtil{
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link Criterion#LESS}</td>
-     * <td>comparator.compare(valueToCompare, propertyValue) < 0</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) {@code <} 0</td>
      * </tr>
      * 
      * <tr valign="top">
      * <td>{@link Criterion#GREATER}</td>
-     * <td>comparator.compare(valueToCompare, propertyValue) > 0</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) {@code >} 0</td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link Criterion#GREATER_OR_EQUAL}</td>
-     * <td>comparator.compare(valueToCompare, propertyValue) >= 0</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) {@code >=} 0</td>
      * </tr>
      * 
      * <tr valign="top">
      * <td>{@link Criterion#LESS_OR_EQUAL}</td>
-     * <td>comparator.compare(valueToCompare, propertyValue) <= 0</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) {@code <=} 0</td>
      * </tr>
      * 
      * </table>
@@ -270,22 +270,22 @@ public final class BeanPredicateUtil{
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link Criterion#LESS}</td>
-     * <td>comparator.compare(valueToCompare, propertyValue) < 0</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) {@code <} 0</td>
      * </tr>
      * 
      * <tr valign="top">
      * <td>{@link Criterion#GREATER}</td>
-     * <td>comparator.compare(valueToCompare, propertyValue) > 0</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) {@code >} 0</td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link Criterion#GREATER_OR_EQUAL}</td>
-     * <td>comparator.compare(valueToCompare, propertyValue) >= 0</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) {@code >=} 0</td>
      * </tr>
      * 
      * <tr valign="top">
      * <td>{@link Criterion#LESS_OR_EQUAL}</td>
-     * <td>comparator.compare(valueToCompare, propertyValue) <= 0</td>
+     * <td>comparator.compare(valueToCompare, propertyValue) {@code <=} 0</td>
      * </tr>
      * 
      * </table>

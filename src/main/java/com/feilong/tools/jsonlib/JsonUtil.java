@@ -511,10 +511,10 @@ public final class JsonUtil{
      * 
      * <pre class="code">
      * 
-     * //查询 >10 的元素
-     * Predicate<Integer> predicate = new ComparatorPredicate<Integer>(10, ComparatorUtils.<Integer> naturalComparator(), Criterion.LESS);
+     * //查询{@code  >10} 的元素
+     * Predicate{@code <Integer>} predicate = new ComparatorPredicate{@code <Integer>}(10, ComparatorUtils.{@code <Integer>} naturalComparator(), Criterion.LESS);
      * 
-     * List<Integer> result = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
+     * List{@code <Integer>} result = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
      * LOGGER.debug(JsonUtil.format(result, 0, 0));
      * 
      * </pre>

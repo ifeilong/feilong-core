@@ -101,7 +101,7 @@ public final class ObjectUtil{
      * 
      * <pre class="code">
      * 
-     * private void putItemToMap(Map<String, List<Item>> map,String categoryName,Item item){
+     * private void putItemToMap(Map{@code <String, List<Item>>} map,String categoryName,Item item){
      *     List{@code <Item>} itemList = map.get(categoryName);
      * 
      *     if (isNullOrEmpty(itemList)){
@@ -117,7 +117,7 @@ public final class ObjectUtil{
      * 
      * <pre class="code">
      * 
-     * private void putItemToMap(Map<String, List<Item>> map,String categoryName,Item item){
+     * private void putItemToMap(Map{@code <String, List<Item>>} map,String categoryName,Item item){
      *     List{@code <Item>} itemList = ObjectUtil.defaultIfNullOrEmpty(map.get(categoryName), new ArrayList{@code <Item>}());
      *     itemList.add(item);
      *     map.put(categoryName, itemList);
