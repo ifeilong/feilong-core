@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -240,6 +241,14 @@ public class StringUtilTest{
         assertEquals("'SH1265','SH5951'", StringUtil.replaceAll("SH1265,SH5951", "([a-zA-Z]+[0-9]+)", "'$1'"));
         assertEquals("'12345','56789','1123456'", StringUtil.replaceAll("12345,56789,1123456", "([0-9]+)", "'$1'"));
         assertEquals("'SH1265',SH5951", "SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'"));
+    }
+
+    @Test
+    public void replaceAll1(){
+        String regex = "(_[A-Za-z0-9]+){0,2}\\.(properties|xml)";
+        LOGGER.debug(StringUtil.replaceAll("help_mes_mes_sss_age_en_GB.properties", regex, EMPTY));
+        LOGGER.debug(StringUtil.replaceAll("help_message_en_GB.properties", regex, EMPTY));
+        LOGGER.debug(StringUtil.replaceAll("help_en_GB.properties", regex, EMPTY));
     }
 
     /**

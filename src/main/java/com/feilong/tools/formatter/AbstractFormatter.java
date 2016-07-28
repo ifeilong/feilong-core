@@ -17,6 +17,7 @@ package com.feilong.tools.formatter;
 
 import static java.lang.Math.max;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.SPACE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,10 +54,7 @@ public abstract class AbstractFormatter implements Formatter{
      */
     @Override
     public <T> String format(T bean){
-        if (isNullOrEmpty(bean)){
-            return EMPTY;
-        }
-        return format(PropertyUtil.describe(bean));
+        return isNullOrEmpty(bean) ? EMPTY : format(PropertyUtil.describe(bean));
     }
 
     /*
@@ -69,22 +67,26 @@ public abstract class AbstractFormatter implements Formatter{
         if (isNullOrEmpty(map)){
             return EMPTY;
         }
+
         //*******************************************************
         int maxKeyLength = -1;
         for (K key : map.keySet()){
             maxKeyLength = max(maxKeyLength, StringUtils.length(ConvertUtil.toString(key)));
         }
+        //*******************************************************
 
         List<Object[]> dataList = new ArrayList<>(map.size());
 
         Map<K, V> useMap = sortByKeyAsc(map);//不影响原map
+
+        String separator = SPACE + ":" + SPACE;
 
         //*******************************************************
         for (Map.Entry<K, V> entry : useMap.entrySet()){
             K key = entry.getKey();
             V value = entry.getValue();
             //StringUtils.leftPad(ConvertUtil.toString(key), maxKeyLength)
-            dataList.add(toArray(ConvertUtil.toString(key), ":", value));
+            dataList.add(toArray(ConvertUtil.toString(key), separator, value));
         }
         return format(null, dataList);
     }
