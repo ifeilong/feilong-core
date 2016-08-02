@@ -77,6 +77,22 @@ public final class SortUtil{
     /**
      * 对 数组 <code>arrays</code> 进行排序.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * LOGGER.debug(JsonUtil.format(sort(5, 10, 3, 2), 0, 0));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [2,3,5,10]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * <h3>以前代码需要写成:</h3>
      * 
      * <blockquote>
