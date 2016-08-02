@@ -54,7 +54,7 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
  * {@link java.util.Collections#sort(List)}
  * </pre>
  * 
- * 由于 这些方法是 void类型的,通常我们需要写2至3行代码
+ * 由于这些方法是 void类型的,通常我们需要写2至3行代码
  * 
  * </li>
  * <li>第二,该类对bean list的排序更加简单便捷</li>
@@ -165,7 +165,7 @@ public final class SortUtil{
      * @param comparators
      *            the comparators
      * @return 如果 <code>array</code> 是null,返回 empty array<br>
-     *         如果 <code>comparators</code> 是null或者empty,返回 <code>arrays</code><br>
+     *         如果 <code>comparators</code> 是null或者empty,直接返回 <code>arrays</code><br>
      * @see java.util.Arrays#sort(Object[], Comparator)
      * @since 1.8.2 change to varargs parameter comparator
      */
@@ -225,7 +225,7 @@ public final class SortUtil{
     }
 
     /**
-     * 对 集合 <code>list</code>,使用指定的 <code>comparator</code> 进行排序.
+     * 对集合 <code>list</code>,使用指定的 <code>comparator</code> 进行排序.
      * 
      * <h3>示例:</h3>
      * 
@@ -267,6 +267,7 @@ public final class SortUtil{
      * @param comparators
      *            the comparators
      * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>comparators</code> 是null或者empty,直接返回 <code>list</code><br>
      * @see java.util.Collections#sort(List, Comparator)
      * @since 1.8.2
      */
