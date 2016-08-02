@@ -327,5 +327,4 @@ public class ParamUtilTest{
 
         LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
     }
-
 }

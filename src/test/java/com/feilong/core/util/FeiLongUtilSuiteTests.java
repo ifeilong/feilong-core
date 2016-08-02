@@ -19,10 +19,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.util.regexpattern.IpPatternTest;
-import com.feilong.core.util.regexpattern.MobilephonePatternTest;
-import com.feilong.core.util.regexpattern.TelephoneMustAreaCodePatternTest;
-import com.feilong.core.util.regexpattern.TelephonePatternTest;
+import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
 
 /**
  * 
@@ -31,17 +28,14 @@ import com.feilong.core.util.regexpattern.TelephonePatternTest;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+                AggregateUtilTest.class,
                 CollectionsUtilTest.class,
-                IpPatternTest.class,
+                MapUtilTest.class,
                 RandomUtilTest.class,
                 RegexUtilTest.class,
                 ResourceBundleUtilTest.class,
-                MobilephonePatternTest.class,
-                MapUtilTest.class,
                 SortUtilTest.class,
-                AggregateUtilTest.class,
-                TelephonePatternTest.class,
-                TelephoneMustAreaCodePatternTest.class, })
+                FeiLongRegexPatternSuiteTests.class })
 public class FeiLongUtilSuiteTests{
 
 }

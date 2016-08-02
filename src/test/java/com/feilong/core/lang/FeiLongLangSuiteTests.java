@@ -33,10 +33,10 @@ import com.feilong.core.lang.reflect.FieldUtilTest;
                 ClassLoaderUtilTest.class,
                 EnumUtilTest.class,
                 FieldUtilTest.class,
+                NumberUtilTest.class,
                 ObjectUtilTest.class,
                 ObjectUtilIsArrayParameterizedTest.class,
                 //ObjectUtilDefaultIfNullOrEmptyParameterizedTest.class,
-                NumberUtilTest.class,
                 StringUtilTest.class,
                 StringReplaceParameterizedTest.class, })
 public class FeiLongLangSuiteTests{

@@ -29,9 +29,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
 @RunWith(Suite.class)
 @SuiteClasses({
                 AlphabetTest.class,
-                //BeanUtilTest.class,
                 CharsetTypeTest.class,
-
                 //HttpMethodTypeTest.class,
                 Slf4jUtilTest.class,
                 TimeIntervalTest.class,

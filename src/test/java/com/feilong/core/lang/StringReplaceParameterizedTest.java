@@ -18,10 +18,10 @@ package com.feilong.core.lang;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+
+import com.feilong.core.AbstractParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -31,8 +31,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
-@RunWith(Parameterized.class)
-public class StringReplaceParameterizedTest{
+public class StringReplaceParameterizedTest extends AbstractParameterizedTest{
 
     //必须是 public 访问修饰符
 

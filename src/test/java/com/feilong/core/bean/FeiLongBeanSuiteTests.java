@@ -25,7 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * @since 1.8.3
  */
 @RunWith(Suite.class)
-@SuiteClasses({
+@SuiteClasses({ //BeanUtilTest.class,
                 ConvertUtilTest.class, //
                 PropertyUtilTest.class, })
 public class FeiLongBeanSuiteTests{
