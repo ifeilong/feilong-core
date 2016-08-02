@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static java.util.Collections.emptyMap;
+
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Collections;
@@ -83,13 +85,14 @@ public final class AggregateUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param scale
      *            平均数值的精度
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 null<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #sum(Collection, String...)
      */
     public static <O> BigDecimal avg(Collection<O> objectCollection,String propertyName,int scale){
-        return avg(objectCollection, ConvertUtil.toArray(propertyName), scale).get(propertyName);
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
+        return isNullOrEmpty(objectCollection) ? null : avg(objectCollection, ConvertUtil.toArray(propertyName), scale).get(propertyName);
     }
 
     /**
@@ -136,11 +139,15 @@ public final class AggregateUtil{
      *            平均数值的精度
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
-     *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
+     *         如果<code>propertyNames</code> 有元素是null 抛出 {@link IllegalArgumentException}<br>
      * @see #sum(Collection, String...)
      */
     public static <O> Map<String, BigDecimal> avg(Collection<O> objectCollection,String[] propertyNames,int scale){
-        Map<String, BigDecimal> sumMap = sum(objectCollection, propertyNames);
+        if (isNullOrEmpty(objectCollection)){
+            return emptyMap();
+        }
+
+        Map<String, BigDecimal> sumMap = sum(objectCollection, propertyNames);//先求和
 
         int size = objectCollection.size();
         Map<String, BigDecimal> map = newLinkedHashMap(size);

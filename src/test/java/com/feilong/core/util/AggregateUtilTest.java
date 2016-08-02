@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.is;
@@ -56,6 +57,8 @@ public class AggregateUtilTest{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AggregateUtilTest.class);
 
+    //*******************AggregateUtil.avg(Collection<User>, String, int)********************************
+
     /**
      * Test avg.
      */
@@ -68,6 +71,46 @@ public class AggregateUtilTest{
 
         assertEquals(new BigDecimal("4.00"), AggregateUtil.avg(list, "id", 2));
     }
+
+    @Test
+    public void testAvg1(){
+        assertEquals(null, AggregateUtil.avg(null, "id", 2));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAvg11(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        User user2 = new User(3L);
+        user2.setAge(30);
+
+        AggregateUtil.avg(toList(user1, user2), (String) null, 2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAvg111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        User user2 = new User(3L);
+        user2.setAge(30);
+
+        AggregateUtil.avg(toList(user1, user2), "   ", 2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAvg1111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        User user2 = new User(3L);
+        user2.setAge(30);
+
+        AggregateUtil.avg(toList(user1, user2), "", 2);
+    }
+
+    //****************AggregateUtil.avg(Collection<User>, String[], int)*******************************
 
     /**
      * Test avg2.
@@ -83,6 +126,40 @@ public class AggregateUtilTest{
         Map<String, BigDecimal> map = AggregateUtil.avg(toList(user1, user2), ConvertUtil.toArray("id", "age"), 2);
         assertThat(map, allOf(hasEntry("id", toBigDecimal("2.50")), hasEntry("age", toBigDecimal("24.00"))));
     }
+
+    @Test
+    public void testAvg3(){
+        assertEquals(emptyMap(), AggregateUtil.avg(null, ConvertUtil.toArray("id", "age"), 2));
+    }
+
+    @Test
+    public void testAvg32(){
+        assertEquals(emptyMap(), AggregateUtil.avg(toList(), ConvertUtil.toArray("id", "age"), 2));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testAvg4(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        User user2 = new User(3L);
+        user2.setAge(30);
+
+        AggregateUtil.avg(toList(user1, user2), (String[]) null, 2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAvg44(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        User user2 = new User(3L);
+        user2.setAge(30);
+
+        AggregateUtil.avg(toList(user1, user2), toArray("id", null), 2);
+    }
+
+    //***************AggregateUtil.sum(Collection<User>, String)*******************************
 
     /**
      * Test sum.
