@@ -17,11 +17,8 @@ package com.feilong.core.util;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
@@ -657,46 +654,6 @@ public final class ResourceBundleUtil{
 
     /**
      * 获得ResourceBundle({@link PropertyResourceBundle}),新增这个方法的初衷是为了能读取任意的资源(包括本地file等).
-     * 
-     * <p>
-     * 参数 <code>fileName</code>是路径全地址
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * 
-     * String mailReadFile = "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties";
-     * 
-     * ResourceBundle resourceBundleRead = ResourceBundleUtil.getResourceBundleByFileName(mailReadFile);
-     * 
-     * String mailServerHost = resourceBundleRead.getString("incoming.pop.hostname");
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param fileName
-     *            文件地址,比如: "E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"
-     * @return the resource bundle,may be null<br>
-     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see java.util.PropertyResourceBundle#PropertyResourceBundle(InputStream)
-     * @see ResourceBundleUtil#getResourceBundle(InputStream)
-     * @since 1.0.9
-     */
-    public static ResourceBundle getResourceBundleByFileName(String fileName){
-        Validate.notBlank(fileName, "fileName can't be null/empty!");
-        try{
-            return getResourceBundle(new FileInputStream(fileName));
-        }catch (FileNotFoundException e){
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    /**
-     * 获得ResourceBundle({@link PropertyResourceBundle}),新增这个方法的初衷是为了能读取任意的资源(包括本地file等).
      *
      * @param inputStream
      *            the input stream
@@ -714,22 +671,4 @@ public final class ResourceBundleUtil{
         }
     }
 
-    /**
-     * 获得 resource bundle({@link PropertyResourceBundle}),新增这个方法的初衷是为了能读取任意的资源(包括本地file等).
-     *
-     * @param reader
-     *            the reader
-     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
-     *         否则返回 {@link java.util.PropertyResourceBundle#PropertyResourceBundle(Reader)}
-     * @see java.util.PropertyResourceBundle#PropertyResourceBundle(Reader)
-     * @since 1.0.9
-     */
-    public static ResourceBundle getResourceBundle(Reader reader){
-        Validate.notNull(reader, "reader can't be null!");
-        try{
-            return new PropertyResourceBundle(reader);
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
-        }
-    }
 }
