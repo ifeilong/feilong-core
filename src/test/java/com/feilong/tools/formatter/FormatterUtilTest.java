@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.store.member.Address;
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
@@ -78,12 +77,11 @@ public class FormatterUtilTest{
     @Test
     public final void testFormatToSimpleTable2(){
         List<Address> list = toList(
-                        new Address("china", "shanghai", "wenshui wanrong.lu 888", "216000"),
-                        new Address("china", "beijing", "wenshui wanrong.lu 666", "216001"),
-                        new Address("china", "nantong", "wenshui wanrong.lu 222", "216002"),
-                        new Address("china", "tianjing", "wenshui wanrong.lu 999", "216600"));
+                        new Address("china", "shanghai", "216000", "wenshui wanrong.lu 888"),
+                        new Address("china", "beijing", "216001", "wenshui wanrong.lu 666"),
+                        new Address("china", "nantong", "216002", "wenshui wanrong.lu 222"),
+                        new Address("china", "tianjing", "216600", "wenshui wanrong.lu 999"));
 
-        LOGGER.debug(JsonUtil.format(list));
         LOGGER.debug(formatToSimpleTable(list));
     }
 }

@@ -15,12 +15,10 @@
  */
 package com.feilong.tools.formatter;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.formatter.entity.BeanFormatterConfig;
 import com.feilong.tools.formatter.table.SimpleTableFormatter;
 
@@ -181,17 +179,4 @@ public interface Formatter{
      */
     <T> String format(Iterable<T> iterable,BeanFormatterConfig<T> beanFormatterConfig);
 
-    //**********************array***************************************************************
-
-    /**
-     * 格式化.
-     *
-     * @param columnTitles
-     *            列标题, columnTitles和dataList 不能同时为null或者empty
-     * @param dataList
-     *            数据数组list, columnTitles和dataList 不能同时为null或者empty;<br>
-     *            object对象会调用 {@link ConvertUtil#toString(Object)} 转成字符串输出
-     * @return the string
-     */
-    String format(String[] columnTitles,List<Object[]> dataList);
 }

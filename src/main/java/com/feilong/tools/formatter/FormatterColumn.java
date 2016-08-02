@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * Is used to specify the mapped column for a persistent property or field.
  * 
  * <p>
- * 可以使用这个注解来 修改显示每列的顺序以及标题的名字
+ * 可以使用这个注解来修改显示每列的顺序以及标题的名字
  * </p>
  * 
  * <h3>使用示例:</h3>

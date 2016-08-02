@@ -40,6 +40,10 @@ import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
 
 /**
  * 简单的格式化成table的实现.
+ * 
+ * <p>
+ * 简单的table 会渲染标题 和分隔符,不包含 padding margin等设定,也不支持复杂的组合表格设置
+ * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @version 1.8.2 2016-7-21 18:30:09
@@ -58,30 +62,22 @@ public class SimpleTableFormatter extends AbstractFormatter{
     public String format(String[] columnTitles,List<Object[]> dataList){
         Date beginDate = new Date();
 
-        List<Object[]> rows = buildRows(columnTitles, dataList);
+        //***********************************************************************************
+        List<Object[]> rows = combinRowsData(columnTitles, dataList);
         if (isNullOrEmpty(rows)){
             return EMPTY;
         }
         int[] colWidths = buildColumnMaxWidths(rows);
 
         if (null != columnTitles){
-            //**********模拟 分隔符*******************************************
-            String[] borders = newArray(String.class, columnTitles.length);
-            for (int i = 0; i < borders.length; ++i){
-                borders[i] = StringUtils.repeat("-", colWidths[i]);
-            }
-            rows.add(1, borders);
+            insertSplitorLine(rows, colWidths);
         }
 
         //***********************************************************************************
         StringBuilder sb = new StringBuilder();
 
-        for (Object[] row : rows){
-            for (int colNum = 0; colNum < row.length; colNum++){
-                sb.append(StringUtils.rightPad(defaultString(toStringValue(row, colNum)), colWidths[colNum]));
-                sb.append(SPACE);
-            }
-            sb.append(LINE_SEPARATOR);
+        for (Object[] cells : rows){
+            sb.append(formatRowInfo(cells, colWidths)).append(LINE_SEPARATOR);
         }
 
         LOGGER.debug("use time:{}", getIntervalForView(beginDate));
@@ -90,16 +86,54 @@ public class SimpleTableFormatter extends AbstractFormatter{
     }
 
     /**
-     * Builds the rows.
+     * Format row info.
+     *
+     * @param cells
+     *            所有的单元格
+     * @param colWidths
+     *            the col widths
+     * @return the string builder
+     * @since 1.8.3
+     */
+    private static StringBuilder formatRowInfo(Object[] cells,int[] colWidths){
+        StringBuilder sb = new StringBuilder();
+        for (int colNum = 0; colNum < cells.length; colNum++){
+            sb.append(StringUtils.rightPad(defaultString(ConvertUtil.toString(cells[colNum])), colWidths[colNum]));
+            sb.append(SPACE);
+        }
+        return sb;
+    }
+
+    /**
+     * 插入分隔符行.
+     *
+     * @param rows
+     *            the rows
+     * @param colWidths
+     *            the col widths
+     * @since 1.8.3
+     */
+    private static void insertSplitorLine(List<Object[]> rows,int[] colWidths){
+        //**********模拟 分隔符*******************************************
+        String[] borders = newArray(String.class, colWidths.length);
+        for (int i = 0; i < borders.length; ++i){
+            borders[i] = StringUtils.repeat("-", colWidths[i]);
+        }
+        rows.add(1, borders);
+    }
+
+    /**
+     * 组合头和数据行.
      *
      * @param columnTitles
      *            the column titles
      * @param dataList
      *            the data list
-     * @return the list
+     * @return 如果 null==columnTitles,将忽略<br>
+     *         如果 null==dataList,将忽略<br>
      * @since 1.8.2
      */
-    private static List<Object[]> buildRows(String[] columnTitles,List<Object[]> dataList){
+    private static List<Object[]> combinRowsData(String[] columnTitles,List<Object[]> dataList){
         List<Object[]> rows = new ArrayList<>();
         addIgnoreNull(rows, columnTitles);
         addAllIgnoreNull(rows, dataList);
@@ -124,23 +158,9 @@ public class SimpleTableFormatter extends AbstractFormatter{
         for (Object[] row : rows){
             for (int colNum = 0; colNum < row.length; colNum++){
                 //双层循环,定位每列最大的宽度
-                columnMaxWidths[colNum] = max(columnMaxWidths[colNum], StringUtils.length(toStringValue(row, colNum)));
+                columnMaxWidths[colNum] = max(columnMaxWidths[colNum], StringUtils.length(ConvertUtil.toString(row[colNum])));
             }
         }
         return columnMaxWidths;
     }
-
-    /**
-     * To string value.
-     *
-     * @param row
-     *            the row
-     * @param colNum
-     *            the col num
-     * @return the string
-     */
-    private static String toStringValue(Object[] row,int colNum){
-        return ConvertUtil.toString(row[colNum]);
-    }
-
 }

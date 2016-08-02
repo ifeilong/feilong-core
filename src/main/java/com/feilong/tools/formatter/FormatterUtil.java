@@ -15,7 +15,6 @@
  */
 package com.feilong.tools.formatter;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +24,10 @@ import com.feilong.tools.formatter.table.SimpleTableFormatter;
 
 /**
  * 处理将对象格式化的工具类.
+ * 
+ * <p>
+ * 提供静态的方法,方便调用或者方便使用 import static
+ * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
@@ -42,7 +45,7 @@ public final class FormatterUtil{
     }
 
     /**
-     * Format to simple table.
+     * 使用 {@link SimpleTableFormatter}来格式化.
      * 
      * <h3>示例:</h3>
      * 
@@ -86,7 +89,7 @@ public final class FormatterUtil{
     }
 
     /**
-     * Format to simple table.
+     * 使用 {@link SimpleTableFormatter}来格式化.
      * 
      * <h3>示例:</h3>
      * 
@@ -132,50 +135,6 @@ public final class FormatterUtil{
      */
     public static final <T> String formatToSimpleTable(Iterable<T> iterable,BeanFormatterConfig<T> beanFormatterConfig){
         return SIMPLE_TABLE_FORMATTER.format(iterable, beanFormatterConfig);
-    }
-
-    /**
-     * 格式化成简单的table格式.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * 
-     * String[] columnTitles = { "name", "age", "address" };
-     * 
-     * List{@code <Object[]>} list = new ArrayList{@code <>}();
-     * for (int i = 0; i {@code <} 5; i++){
-     *     list.add(ConvertUtil.toArray("feilong" + i, 18 + i, "shanghai"));
-     * }
-     * 
-     * LOGGER.debug(FormatterUtil.formatToSimpleTable(columnTitles, list));
-     * 
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-    name     age      address  
-    -------- -------- -------- 
-    feilong0 18       shanghai 
-    feilong1 19       shanghai 
-    feilong2 20       shanghai 
-    feilong3 21       shanghai 
-    feilong4 22       shanghai
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param columnTitles
-     *            标题行
-     * @param dataList
-     *            数据集
-     * @return 格式化之后的字符串
-     */
-    public static final String formatToSimpleTable(String[] columnTitles,List<Object[]> dataList){
-        return SIMPLE_TABLE_FORMATTER.format(columnTitles, dataList);
     }
 
     /**

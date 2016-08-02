@@ -40,7 +40,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 
 /**
- * The Class AbstractFormatter.
+ * Formatter 的base 实现.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.2
@@ -123,6 +123,21 @@ public abstract class AbstractFormatter implements Formatter{
         List<Object[]> dataList = DataListBuilder.buildDataList(iterable, formatterColumnEntityList);
         return format(columnTitles, dataList);
     }
+
+    //**********************array****************************************
+
+    /**
+     * 格式化.
+     *
+     * @param columnTitles
+     *            列标题, columnTitles和dataList 不能同时为null或者empty
+     * @param dataList
+     *            数据数组list, columnTitles和dataList 不能同时为null或者empty;<br>
+     *            object对象会调用 {@link ConvertUtil#toString(Object)} 转成字符串输出
+     * @return the string
+     * @since 1.8.3
+     */
+    protected abstract String format(String[] columnTitles,List<Object[]> dataList);
 
     /**
      * Builds the bean formatter config.
