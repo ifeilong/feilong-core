@@ -37,11 +37,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.TransformerUtils;
+import org.apache.commons.collections4.functors.ComparatorPredicate;
 import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 import org.apache.commons.collections4.functors.EqualPredicate;
 import org.junit.Test;
@@ -329,6 +331,15 @@ public class CollectionsUtilTest{
         assertThat(
                         CollectionsUtil.select(list, "name", toList("张飞", "刘备")),
                         allOf(hasItem(zhangfei), hasItem(liubei), not(hasItem(guanyu))));
+    }
+
+    @Test
+    public void testSelect1(){
+        //查询 >10 的元素
+        Predicate<Integer> predicate = new ComparatorPredicate<Integer>(10, ComparatorUtils.<Integer> naturalComparator(), Criterion.LESS);
+
+        List<Integer> result = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
+        LOGGER.debug(JsonUtil.format(result, 0, 0));
     }
 
     /**

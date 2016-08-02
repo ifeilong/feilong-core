@@ -23,7 +23,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,6 @@ import java.util.Map;
 import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
-import org.apache.commons.collections4.comparators.FixedOrderComparator;
 import org.apache.commons.collections4.functors.ComparatorPredicate;
 import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 import org.junit.Test;
@@ -42,8 +40,8 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.predicate.BeanPredicate;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonUtil;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -170,11 +168,25 @@ public class AggregateUtilTest{
                         new User(2L),
                         new User(5L),
                         new User(5L));
-
         assertEquals(new BigDecimal(12L), AggregateUtil.sum(list, "id"));
+    }
+
+    @Test
+    public void testSum1(){
         assertEquals(null, AggregateUtil.sum(null, "id"));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testSum11(){
+        AggregateUtil.sum(toList(new User(2L), new User(5L), new User(5L)), (String) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSum111(){
+        AggregateUtil.sum(toList(new User(2L), new User(5L), new User(5L)), "");
+    }
+
+    //**************AggregateUtil.sum(Collection<User>, String, Predicate<User>)*******************************
     /**
      * Test sum4.
      */
@@ -185,8 +197,7 @@ public class AggregateUtilTest{
                         new User(50L),
                         new User(50L));
 
-        BigDecimal expected = new BigDecimal(100L);
-        assertEquals(expected, AggregateUtil.sum(list, "id", new Predicate<User>(){
+        assertEquals(new BigDecimal(100L), AggregateUtil.sum(list, "id", new Predicate<User>(){
 
             @Override
             public boolean evaluate(User user){
@@ -194,11 +205,64 @@ public class AggregateUtilTest{
             }
         }));
 
-        //*****************************************************************
-
         Predicate<Long> predicate = new ComparatorPredicate<Long>(10L, ComparatorUtils.<Long> naturalComparator(), Criterion.LESS);
         BigDecimal sum = AggregateUtil.sum(list, "id", new BeanPredicate<User>("id", predicate));
         assertEquals(new BigDecimal(100L), sum);
+    }
+
+    @Test
+    public void testSum41(){
+        assertEquals(null, AggregateUtil.sum(null, "id", new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getId() > 10L;
+            }
+        }));
+    }
+
+    @Test
+    public void testSum42(){
+        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), "id", new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getId() > 10L;
+            }
+        }));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSum423(){
+        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), (String) null, new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getId() > 10L;
+            }
+        }));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSum4231(){
+        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), "", new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getId() > 10L;
+            }
+        }));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSum42311(){
+        assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), " ", new Predicate<User>(){
+
+            @Override
+            public boolean evaluate(User user){
+                return user.getId() > 10L;
+            }
+        }));
     }
 
     @Test
@@ -217,28 +281,7 @@ public class AggregateUtilTest{
         }));
     }
 
-    /**
-     * TestStatisticsUtilTest.
-     */
-    @Test
-    public void testStatisticsUtilTest(){
-        String[] planets = { "Mercury", "Venus", "Earth", "Mars" };
-        Comparator<String> distanceFromSun = new FixedOrderComparator<>(planets);
-        Predicate<String> predicate = new ComparatorPredicate<String>("Venus", distanceFromSun, Criterion.GREATER);
-
-        LOGGER.debug("{}", predicate.evaluate("Earth"));
-    }
-
-    @Test
-    public void testStatisticsUtilTest1(){
-
-        //查询 >10 的元素
-        Predicate<Integer> predicate = new ComparatorPredicate<Integer>(10, ComparatorUtils.<Integer> naturalComparator(), Criterion.LESS);
-
-        List<Integer> result = CollectionsUtil.select(toList(1, 5, 10, 30, 55, 88, 1, 12, 3), predicate);
-        LOGGER.debug(JsonUtil.format(result, 0, 0));
-    }
-
+    //*************AggregateUtil.sum(Collection<User>, String...)*******************************
     /**
      * Test sum2.
      */
@@ -253,6 +296,32 @@ public class AggregateUtilTest{
         Map<String, BigDecimal> map = AggregateUtil.sum(toList(user1, user2), "id", "age");
         assertThat(map, allOf(hasEntry("id", toBigDecimal(5)), hasEntry("age", toBigDecimal(48))));
     }
+
+    @Test
+    public void testSum21(){
+        assertEquals(emptyMap(), AggregateUtil.sum(null, "id", "age"));
+    }
+
+    @Test
+    public void testSum211(){
+        assertEquals(emptyMap(), AggregateUtil.sum(toList(), "id", "age"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSum2111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+        AggregateUtil.sum(toList(user1), (String[]) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSum21111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+        AggregateUtil.sum(toList(user1), "id", (String) null);
+    }
+
+    //************AggregateUtil.sum(Collection<User>, String[], Predicate<User>)*****************************
 
     /**
      * Test sum3.
@@ -283,6 +352,82 @@ public class AggregateUtilTest{
         assertThat(map, allOf(hasEntry("id", toBigDecimal(30)), hasEntry("age", toBigDecimal(200))));
     }
 
+    @Test
+    public void testSum31(){
+        assertEquals(emptyMap(), AggregateUtil.sum(null, toArray("id", "age"), BeanPredicateUtil.equalPredicate("name", "张飞")));
+    }
+
+    @Test
+    public void testSum311(){
+        assertEquals(emptyMap(), AggregateUtil.sum(toList(), toArray("id", "age"), BeanPredicateUtil.equalPredicate("name", "张飞")));
+    }
+
+    @Test
+    public void testSum3111(){
+        User zhangfei = new User(100L);
+        zhangfei.setName("张飞");
+        zhangfei.setAge(null);
+
+        List<User> list = toList(zhangfei);
+
+        Predicate<User> notPredicate = PredicateUtils.notPredicate(BeanPredicateUtil.equalPredicate("name", "张飞"));
+        Map<String, BigDecimal> map = AggregateUtil.sum(list, toArray("id", "age"), notPredicate);
+
+        assertEquals(true, isNullOrEmpty(map));
+    }
+
+    //***************AggregateUtil.groupCount(Collection<User>, String)*****************************************************************
+
+    /**
+     * Test group count1.
+     */
+    @Test
+    public void testGroupCount1(){
+        List<User> list = toList(//
+                        new User("张飞"),
+                        new User("关羽"),
+                        new User("刘备"),
+                        new User("刘备"));
+
+        Map<String, Integer> map = AggregateUtil.groupCount(list, "name");
+        assertThat(map, allOf(hasEntry("刘备", 2), hasEntry("张飞", 1), hasEntry("关羽", 1)));
+    }
+
+    @Test
+    public void testGroupCount11(){
+        assertEquals(emptyMap(), AggregateUtil.groupCount(null, "name"));
+    }
+
+    @Test
+    public void testGroupCount111(){
+        assertEquals(emptyMap(), AggregateUtil.groupCount(toList(), "name"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGroupCount1111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        AggregateUtil.groupCount(toList(user1), (String) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGroupCount111111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        AggregateUtil.groupCount(toList(user1), "   ");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGroupCount1111111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        AggregateUtil.groupCount(toList(user1), "");
+    }
+
+    //********************AggregateUtil.groupCount(Collection<User>, String, Predicate<User>)******************************************************************
     /**
      * Test group count.
      */
@@ -301,20 +446,46 @@ public class AggregateUtilTest{
         assertThat(map, allOf(hasEntry("刘备", 1), hasEntry("赵云", 2)));
     }
 
-    /**
-     * Test group count1.
-     */
     @Test
-    public void testGroupCount1(){
-        List<User> list = toList(//
-                        new User("张飞"),
-                        new User("关羽"),
-                        new User("刘备"),
-                        new User("刘备"));
-
-        Map<String, Integer> map = AggregateUtil.groupCount(list, "name");
-        assertThat(map, allOf(hasEntry("刘备", 2), hasEntry("张飞", 1), hasEntry("关羽", 1)));
+    public void testGroupCount21(){
+        assertEquals(emptyMap(), AggregateUtil.groupCount(null, "name", BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS)));
     }
+
+    @Test
+    public void testGroupCount211(){
+        assertEquals(
+                        emptyMap(),
+                        AggregateUtil.groupCount(toList(), "name", BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS)));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGroupCount2111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+        AggregateUtil.groupCount(toList(user1), (String) null, comparatorPredicate);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGroupCount211111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+        AggregateUtil.groupCount(toList(user1), "   ", comparatorPredicate);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGroupCount2111111(){
+        User user1 = new User(2L);
+        user1.setAge(18);
+
+        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+        AggregateUtil.groupCount(toList(user1), "", comparatorPredicate);
+    }
+
+    //*************************************************************************************************************
 
     /**
      * Test get min value.
@@ -332,5 +503,68 @@ public class AggregateUtilTest{
         map.put("g", -1005);
 
         assertThat(AggregateUtil.getMinValue(map, "a", "b", "d", "g", "m"), is(-1005));
+    }
+
+    @Test
+    public void testGetMinValue1(){
+        assertEquals(null, AggregateUtil.getMinValue(null, "a", "b", "d", "g", "m"));
+    }
+
+    @Test
+    public void testGetMinValue11(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        assertEquals(null, AggregateUtil.getMinValue(map, "a", "b", "d", "g", "m"));
+    }
+
+    @Test
+    public void testGetMinValue2(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("a", 3007);
+        map.put("b", 3001);
+        map.put("c", 3002);
+        map.put("d", 3003);
+        map.put("e", 3004);
+        map.put("f", 3005);
+
+        assertThat(AggregateUtil.getMinValue(map), is(3001));
+    }
+
+    @Test
+    public void testGetMinValue21(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("a", 3007);
+        map.put("b", 3001);
+        map.put("c", 3002);
+        map.put("d", 3003);
+        map.put("e", 3004);
+        map.put("f", 3005);
+
+        assertThat(AggregateUtil.getMinValue(map, null), is(3001));
+    }
+
+    @Test
+    public void testGetMinValue211(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("a", 3007);
+        map.put("b", 3001);
+        map.put("c", 3002);
+        map.put("d", 3003);
+        map.put("e", 3004);
+        map.put("f", 3005);
+
+        assertThat(AggregateUtil.getMinValue(map, new String[] {}), is(3001));
+    }
+
+    @Test
+    public void testGetMinValue311(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("a", 3007);
+        map.put("b", 3001);
+        map.put("c", 3002);
+        map.put("d", 3003);
+        map.put("e", 3004);
+        map.put("f", 3005);
+
+        assertEquals(null, AggregateUtil.getMinValue(map, "c1"));
     }
 }

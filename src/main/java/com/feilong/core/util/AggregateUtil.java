@@ -16,6 +16,7 @@
 package com.feilong.core.util;
 
 import static java.util.Collections.emptyMap;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -24,7 +25,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.ConvertUtil;
@@ -158,6 +158,146 @@ public final class AggregateUtil{
     }
 
     //***********************************sum*************************************************************
+
+    /**
+     * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyName</code> 值的总和.
+     * 
+     * <p>
+     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(5L));
+     * list.add(new User(5L));
+     * 
+     * LOGGER.info("" + AggregateUtil.sum(list, "id"));
+     * </pre>
+     * 
+     * <b>返回:</b> 12
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * 当你需要写这样的代码的时候,
+     * 
+     * <pre class="code">
+     * 
+     * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
+     *     Integer qty = 0;
+     *     //获取cookie中的购物车行集合
+     *     if ({@code null != cartLineList && cartLineList.size() > 0}){
+     *         for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();){
+     *             CookieShoppingCartLine cookieShoppingCartLine = (CookieShoppingCartLine) iterator.next();
+     *             qty += cookieShoppingCartLine.getQuantity();
+     *         }
+     *     }
+     *     return qty;
+     * }
+     * </pre>
+     * 
+     * 你可以写成:
+     * 
+     * <pre class="code">
+     * 
+     * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
+     *     return isNullOrEmpty(cartLineList) ? 0 : AggregateUtil.sum(cartLineList, "quantity").intValue();
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @see #sum(Collection, String...)
+     */
+    public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
+        return sum(objectCollection, propertyName, null);
+    }
+
+    /**
+     * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素 的指定 <code>propertyName</code> 元素的值 ,累计总和..
+     * 
+     * <p>
+     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     * 如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>null</code>
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(50L));
+     * list.add(new User(50L));
+     * 
+     * assertEquals(new BigDecimal(100L), AggregateUtil.sum(list, "id", new Predicate{@code <User>}(){
+     * 
+     *     {@code @Override}
+     *     public boolean evaluate(User user){
+     *         return user.getId() {@code >} 10L;
+     *     }
+     * }));
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 当然这段代码,你还可以优化成:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User(2L));
+     * list.add(new User(50L));
+     * list.add(new User(50L));
+     * 
+     * Predicate{@code <Long>} predicate = new ComparatorPredicate{@code <Long>}(10L, ComparatorUtils.{@code <Long>} naturalComparator(), Criterion.LESS);
+     * BigDecimal sum = AggregateUtil.sum(list, "id", new BeanPredicate{@code <User>}("id", predicate));
+     * assertEquals(new BigDecimal(100L), sum);
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param includePredicate
+     *            the include predicate
+     * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
+     * @see #sum(Collection, String[], Predicate)
+     */
+    public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
+        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
+        return sum(objectCollection, toArray(propertyName), includePredicate).get(propertyName);
+    }
+
     /**
      * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyNames</code> 值的总和.
      * 
@@ -264,6 +404,7 @@ public final class AggregateUtil{
      *            the include predicate
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
      *         如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>new LinkedHashMap</code>
      * @throws NullPointerException
      *             如果<code>propertyNames</code> 是null
@@ -285,145 +426,12 @@ public final class AggregateUtil{
             for (String propertyName : propertyNames){
                 //如果通过反射某个元素值是null,则使用默认值0 代替
                 BigDecimal addValue = NumberUtil.getAddValue(
-                                ObjectUtils.defaultIfNull(sumMap.get(propertyName), 0),
-                                ObjectUtils.defaultIfNull(PropertyUtil.<Number> getProperty(obj, propertyName), 0));
+                                defaultIfNull(sumMap.get(propertyName), 0),
+                                defaultIfNull(PropertyUtil.<Number> getProperty(obj, propertyName), 0));
                 sumMap.put(propertyName, addValue);
             }
         }
         return sumMap;
-    }
-
-    /**
-     * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyName</code> 值的总和.
-     * 
-     * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * list.add(new User(2L));
-     * list.add(new User(5L));
-     * list.add(new User(5L));
-     * 
-     * LOGGER.info("" + AggregateUtil.sum(list, "id"));
-     * </pre>
-     * 
-     * <b>返回:</b> 12
-     * 
-     * </blockquote>
-     * 
-     * <h3>说明:</h3>
-     * 当你需要写这样的代码的时候,
-     * 
-     * <pre class="code">
-     * 
-     * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
-     *     Integer qty = 0;
-     *     //获取cookie中的购物车行集合
-     *     if ({@code null != cartLineList && cartLineList.size() > 0}){
-     *         for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();){
-     *             CookieShoppingCartLine cookieShoppingCartLine = (CookieShoppingCartLine) iterator.next();
-     *             qty += cookieShoppingCartLine.getQuantity();
-     *         }
-     *     }
-     *     return qty;
-     * }
-     * </pre>
-     * 
-     * 你可以写成:
-     * 
-     * <pre class="code">
-     * 
-     * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
-     *     return isNullOrEmpty(cartLineList) ? 0 : AggregateUtil.sum(cartLineList, "quantity").intValue();
-     * }
-     * </pre>
-     * 
-     * @param <O>
-     *            the generic type
-     * @param objectCollection
-     *            the object collection
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
-     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #sum(Collection, String...)
-     */
-    public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName){
-        return sum(objectCollection, propertyName, null);
-    }
-
-    /**
-     * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素 的指定 <code>propertyName</code> 元素的值 ,累计总和..
-     * 
-     * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
-     * 如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>null</code>
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * list.add(new User(2L));
-     * list.add(new User(50L));
-     * list.add(new User(50L));
-     * 
-     * assertEquals(new BigDecimal(100L), AggregateUtil.sum(list, "id", new Predicate{@code <User>}(){
-     * 
-     *     {@code @Override}
-     *     public boolean evaluate(User user){
-     *         return user.getId() {@code >} 10L;
-     *     }
-     * }));
-     * 
-     * </pre>
-     * 
-     * <p>
-     * 当然这段代码,你还可以优化成:
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * list.add(new User(2L));
-     * list.add(new User(50L));
-     * list.add(new User(50L));
-     * 
-     * Predicate{@code <Long>} predicate = new ComparatorPredicate{@code <Long>}(10L, ComparatorUtils.{@code <Long>} naturalComparator(), Criterion.LESS);
-     * BigDecimal sum = AggregateUtil.sum(list, "id", new BeanPredicate{@code <User>}("id", predicate));
-     * assertEquals(new BigDecimal(100L), sum);
-     * 
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <O>
-     *            the generic type
-     * @param objectCollection
-     *            the object collection
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @param includePredicate
-     *            the include predicate
-     * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
-     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #sum(Collection, String[], Predicate)
-     */
-    public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
-        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-        return sum(objectCollection, toArray(propertyName), includePredicate).get(propertyName);
     }
 
     //***********************************************************************************************
@@ -474,7 +482,7 @@ public final class AggregateUtil{
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>objectCollection</code> isNullOrEmpty ,返回 {@link Collections#emptyMap()}; <br>
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see #groupCount(Collection , String, Predicate)

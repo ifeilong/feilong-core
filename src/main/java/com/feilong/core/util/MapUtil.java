@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static java.util.Collections.emptyMap;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -654,7 +656,7 @@ public final class MapUtil{
     @SafeVarargs
     public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K...keys){
         if (isNullOrEmpty(map)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         if (isNullOrEmpty(keys)){
             return map;
