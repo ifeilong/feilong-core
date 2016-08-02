@@ -31,6 +31,7 @@ import com.feilong.core.lang.ClassLoaderUtilTest;
 import com.feilong.core.lang.ClassUtilTest;
 import com.feilong.core.lang.EnumUtilTest;
 import com.feilong.core.lang.NumberUtilTest;
+import com.feilong.core.lang.ObjectUtilIsArrayParameterizedTest;
 import com.feilong.core.lang.ObjectUtilTest;
 import com.feilong.core.lang.StringReplaceParameterizedTest;
 import com.feilong.core.lang.StringUtilTest;
@@ -75,6 +76,8 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 FieldUtilTest.class,
                 //HttpMethodTypeTest.class,
                 ObjectUtilTest.class,
+                ObjectUtilIsArrayParameterizedTest.class,
+                //ObjectUtilDefaultIfNullOrEmptyParameterizedTest.class,
                 IpPatternTest.class,
                 ParamUtilTest.class,
                 PropertyUtilTest.class,

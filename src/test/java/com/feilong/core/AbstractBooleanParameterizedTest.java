@@ -18,8 +18,6 @@ package com.feilong.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 
 /**
@@ -32,8 +30,7 @@ import org.junit.runners.Parameterized.Parameter;
  *            the element type
  * @since 1.6.4
  */
-@RunWith(Parameterized.class)
-public abstract class AbstractBooleanParameterizedTest<I, E> {
+public abstract class AbstractBooleanParameterizedTest<I, E> extends AbstractParameterizedTest{
     //java.lang.IllegalAccessException: 
     //Class org.junit.runners.parameterized.BlockJUnit4ClassRunnerWithParameters can not access a member of class 
     //com.feilong.core.BaseParameterizedTest with modifiers "protected"

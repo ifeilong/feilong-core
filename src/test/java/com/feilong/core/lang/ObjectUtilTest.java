@@ -52,16 +52,9 @@ public class ObjectUtilTest{
         assertEquals("fl", ObjectUtil.defaultIfNullOrEmpty("fl", "feilong"));
     }
 
-    /**
-     * Checks if is array.
-     */
-    @Test
-    public void testIsArray(){
-        int[] i = {};
-        assertEquals(true, ObjectUtil.isArray(i));
-        assertEquals(true, ObjectUtil.isArray(new Integer[0]));
-        assertEquals(true, ObjectUtil.isArray(new String[0]));
-        assertEquals(false, ObjectUtil.isArray(1));
+    @Test(expected = NullPointerException.class)
+    public void testIsArray1(){
+        ObjectUtil.isArray(null);
     }
 
     /**
