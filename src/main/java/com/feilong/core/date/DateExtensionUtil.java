@@ -15,10 +15,7 @@
  */
 package com.feilong.core.date;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.lang3.Validate;
 
@@ -45,7 +42,6 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
  * 
  * <blockquote>
  * <ul>
- * <li>{@link #getIntervalDayList(Date, Date)}</li>
  * <li>{@link #getIntervalForView(long)}</li>
  * <li>{@link #getIntervalForView(Date, Date)}</li>
  * </ul>
@@ -162,73 +158,6 @@ public final class DateExtensionUtil{
 
     // [end]
 
-    /**
-     * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Date fromDate = DateUtil.toDate("2011-03-5 23:31:25.456", DatePattern.COMMON_DATE_AND_TIME);
-     * Date toDate = DateUtil.toDate("2011-03-10 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME);
-     * LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(fromDate, toDate)));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * ["2011-03-05 00:00:00",
-     * "2011-03-06 00:00:00",
-     * "2011-03-07 00:00:00",
-     * "2011-03-08 00:00:00",
-     * "2011-03-09 00:00:00",
-     * "2011-03-10 00:00:00"
-     * ]
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>每天的日期会被重置清零 <code>00:00:00.000</code></li>
-     * <li>方法自动辨识 <code>fromDate</code>和 <code>toDate</code>哪个是开始时间</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * @param fromDate
-     *            the from date
-     * @param toDate
-     *            the to date
-     * @return 如果 <code>fromDate</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>toDate</code> 是null,抛出 {@link NullPointerException}
-     * @see #getIntervalDay(Date, Date)
-     * @see org.apache.commons.lang3.time.DateUtils#iterator(Calendar, int)
-     * @since 1.5.4
-     */
-    public static List<Date> getIntervalDayList(Date fromDate,Date toDate){
-        Validate.notNull(fromDate, "fromDate can't be null!");
-        Validate.notNull(toDate, "toDate can't be null!");
-
-        Date minDate = fromDate.before(toDate) ? fromDate : toDate;
-        Date maxDate = fromDate.before(toDate) ? toDate : fromDate;
-
-        // ******重置时间********
-        Date beginDateReset = DateUtil.getFirstDateOfThisDay(minDate);
-        Date endDateReset = DateUtil.getLastDateOfThisDay(maxDate);
-
-        List<Date> list = new ArrayList<>();
-        list.add(beginDateReset);
-
-        // 相隔的天数
-        int intervalDay = getIntervalDay(beginDateReset, endDateReset);
-        for (int i = 0; i < intervalDay; ++i){
-            list.add(DateUtil.addDay(beginDateReset, i + 1));
-        }
-
-        return list;
-    }
-
     //****************************************************************************************************
 
     /**
@@ -240,7 +169,7 @@ public final class DateExtensionUtil{
      * <ol>
      * <li>常用于日志输出一段代码执行时长</li>
      * <li>计算的是开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
-     * <li>间隔时间转成 天,小时,分钟,秒,毫秒 中文文字</li>
+     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字</li>
      * </ol>
      * </blockquote>
      * 
@@ -250,10 +179,10 @@ public final class DateExtensionUtil{
      * <pre class="code">
      * Date beginDate = new Date();
      * 
-     * // do some logic
-     * // balabala logic
+     * <span style="color:green">// do some logic</span>
+     * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time:}{}", DateExtensionUtil.getIntervalForView(beginDate));
+     * LOGGER.info("use time:{}", DateExtensionUtil.getIntervalForView(beginDate));
      * 
      * </pre>
      * 
@@ -298,7 +227,7 @@ public final class DateExtensionUtil{
      * <ol>
      * <li>常用于日志输出一段代码执行时长</li>
      * <li>计算的是开始时间 <code>beginDate</code> 到结束时间 <code>endDate</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
-     * <li>间隔时间转成 天,小时,分钟,秒,毫秒 中文文字</li>
+     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字</li>
      * </ol>
      * </blockquote>
      * 
@@ -308,10 +237,10 @@ public final class DateExtensionUtil{
      * <pre class="code">
      * Date beginDate = new Date();
      * 
-     * // do some logic
-     * // balabala logic
+     * <span style="color:green">// do some logic</span>
+     * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time:}{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+     * LOGGER.info("use time:{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
      * 
      * </pre>
      * 
@@ -348,7 +277,7 @@ public final class DateExtensionUtil{
      * <blockquote>
      * <ol>
      * <li>常用于日志输出一段代码执行时长</li>
-     * <li>间隔时间转成 天,小时,分钟,秒,毫秒 中文文字</li>
+     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字</li>
      * </ol>
      * </blockquote>
      * 

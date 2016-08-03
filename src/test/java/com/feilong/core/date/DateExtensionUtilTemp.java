@@ -440,4 +440,88 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
         return inDay == currentDayOfMonth ? spaceHour + HOUR + "前"
                         : YESTERDAY + " " + DateUtil.toString(inDate, COMMON_TIME_WITHOUT_SECOND);
     }
+
+    /**
+     * 获得两个日期时间的日期间隔时间集合(包含最小和最大值),用于统计日报表.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Date fromDate = DateUtil.toDate("2011-03-5 23:31:25.456", DatePattern.COMMON_DATE_AND_TIME);
+     * Date toDate = DateUtil.toDate("2011-03-10 01:30:24.895", DatePattern.COMMON_DATE_AND_TIME);
+     * LOGGER.debug(JsonUtil.format(DateExtensionUtil.getIntervalDayList(fromDate, toDate)));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * ["2011-03-05 00:00:00",
+     * "2011-03-06 00:00:00",
+     * "2011-03-07 00:00:00",
+     * "2011-03-08 00:00:00",
+     * "2011-03-09 00:00:00",
+     * "2011-03-10 00:00:00"
+     * ]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>每天的日期会被重置清零 <code>00:00:00.000</code></li>
+     * <li>方法自动辨识 <code>fromDate</code>和 <code>toDate</code>哪个是开始时间</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param fromDate
+     *            the from date
+     * @param toDate
+     *            the to date
+     * @return 如果 <code>fromDate</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>toDate</code> 是null,抛出 {@link NullPointerException}
+     * @see #getIntervalDay(Date, Date)
+     * @see org.apache.commons.lang3.time.DateUtils#iterator(Calendar, int)
+     * @since 1.5.4
+     */
+    public static List<Date> getIntervalDayList(Date fromDate,Date toDate){
+        Validate.notNull(fromDate, "fromDate can't be null!");
+        Validate.notNull(toDate, "toDate can't be null!");
+
+        Date minDate = fromDate.before(toDate) ? fromDate : toDate;
+        Date maxDate = fromDate.before(toDate) ? toDate : fromDate;
+
+        // ******重置时间********
+        Date beginDateReset = DateUtil.getFirstDateOfThisDay(minDate);
+        Date endDateReset = DateUtil.getLastDateOfThisDay(maxDate);
+
+        List<Date> list = new ArrayList<>();
+        list.add(beginDateReset);
+
+        // 相隔的天数
+        int intervalDay = DateExtensionUtil.getIntervalDay(beginDateReset, endDateReset);
+        for (int i = 0; i < intervalDay; ++i){
+            list.add(DateUtil.addDay(beginDateReset, i + 1));
+        }
+
+        return list;
+    }
+
+    /**
+     * Test get interval day list.
+     */
+    @Test
+    public void testGetIntervalDayList(){
+        String pattern = COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+        String begin = "2011-03-05 23:31:25.456";
+        String end = "2011-03-10 01:30:24.895";
+
+        List<Date> intervalDayList = getIntervalDayList(toDate(begin, pattern), toDate(end, pattern));
+        LOGGER.debug(JsonUtil.format(intervalDayList));
+
+        List<Date> intervalDayList2 = getIntervalDayList(toDate(end, pattern), toDate(begin, pattern));
+        LOGGER.debug(JsonUtil.format(intervalDayList2));
+    }
+
 }

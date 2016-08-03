@@ -19,17 +19,13 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.tools.jsonlib.JsonUtil;
-
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalDayList;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
 import static com.feilong.core.date.DateExtensionUtil.getResetTodayAndTomorrow;
@@ -39,7 +35,6 @@ import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  * The Class DateExtensionUtilTest.
@@ -60,22 +55,6 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         assertEquals("25秒841毫秒", getIntervalForView(25841));
         assertEquals("0", getIntervalForView(0));
         LOGGER.debug(DurationFormatUtils.formatDurationWords(25841, true, true));
-    }
-
-    /**
-     * Test get interval day list.
-     */
-    @Test
-    public void testGetIntervalDayList(){
-        String pattern = COMMON_DATE_AND_TIME_WITH_MILLISECOND;
-        String begin = "2011-03-05 23:31:25.456";
-        String end = "2011-03-10 01:30:24.895";
-
-        List<Date> intervalDayList = getIntervalDayList(toDate(begin, pattern), toDate(end, pattern));
-        LOGGER.debug(JsonUtil.format(intervalDayList));
-
-        List<Date> intervalDayList2 = getIntervalDayList(toDate(end, pattern), toDate(begin, pattern));
-        LOGGER.debug(JsonUtil.format(intervalDayList2));
     }
 
     @Test
