@@ -31,7 +31,7 @@ feilong-core jar 你可以在这里 https://github.com/venusdrogon/feilong-platf
 	
 		....
 		<properties>
-			<version.feilong-platform>1.8.2</version.feilong-platform>
+			<version.feilong-platform>1.8.3</version.feilong-platform>
 			....
 		</properties>
 		
