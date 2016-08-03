@@ -15,6 +15,20 @@
  */
 package com.feilong.core.date;
 
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.DAY_OF_WEEK_IN_MONTH;
+import static java.util.Calendar.DAY_OF_YEAR;
+import static java.util.Calendar.HOUR_OF_DAY;
+import static java.util.Calendar.JANUARY;
+import static java.util.Calendar.MINUTE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.SATURDAY;
+import static java.util.Calendar.SECOND;
+import static java.util.Calendar.SUNDAY;
+import static java.util.Calendar.WEEK_OF_YEAR;
+import static java.util.Calendar.YEAR;
+
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,6 +44,9 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 
 import static com.feilong.core.TimeInterval.SECONDS_PER_HOUR;
 import static com.feilong.core.TimeInterval.SECONDS_PER_MINUTE;
+import static com.feilong.core.date.CalendarUtil.resetDayBegin;
+import static com.feilong.core.date.CalendarUtil.resetDayEnd;
+import static com.feilong.core.date.CalendarUtil.resetYearEnd;
 
 /**
  * {@link java.util.Date}操作工具类(feilong-core核心类之一).
@@ -214,7 +231,7 @@ public final class DateUtil{
      */
     public static Date getFirstDateOfThisDay(Date date){
         Calendar calendar = toCalendar(date);
-        return CalendarUtil.toDate(CalendarUtil.resetDayBegin(calendar));
+        return CalendarUtil.toDate(resetDayBegin(calendar));
     }
 
     /**
@@ -231,7 +248,7 @@ public final class DateUtil{
      */
     public static Date getLastDateOfThisDay(Date date){
         Calendar calendar = toCalendar(date);
-        return CalendarUtil.toDate(CalendarUtil.resetDayEnd(calendar));
+        return CalendarUtil.toDate(resetDayEnd(calendar));
     }
 
     // *****************************week****************************************************
@@ -261,8 +278,8 @@ public final class DateUtil{
      */
     public static Date getFirstDateOfThisWeek(Date date){
         Calendar calendar = toCalendar(date);
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        return CalendarUtil.toDate(CalendarUtil.resetDayBegin(calendar));
+        calendar.set(DAY_OF_WEEK, SUNDAY);
+        return CalendarUtil.toDate(resetDayBegin(calendar));
     }
 
     /**
@@ -292,8 +309,8 @@ public final class DateUtil{
      */
     public static Date getLastDateOfThisWeek(Date date){
         Calendar calendar = toCalendar(date);
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-        return CalendarUtil.toDate(CalendarUtil.resetDayEnd(calendar));
+        calendar.set(DAY_OF_WEEK, SATURDAY);
+        return CalendarUtil.toDate(resetDayEnd(calendar));
     }
 
     // *********************************************************************************
@@ -315,8 +332,8 @@ public final class DateUtil{
      */
     public static Date getFirstDateOfThisMonth(Date date){
         Calendar calendar = toCalendar(date);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        return CalendarUtil.toDate(CalendarUtil.resetDayBegin(calendar));
+        calendar.set(DAY_OF_MONTH, 1);
+        return CalendarUtil.toDate(resetDayBegin(calendar));
     }
 
     /**
@@ -340,8 +357,8 @@ public final class DateUtil{
      */
     public static Date getLastDateOfThisMonth(Date date){
         Calendar calendar = toCalendar(date);
-        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        return CalendarUtil.toDate(CalendarUtil.resetDayEnd(calendar));
+        calendar.set(DAY_OF_MONTH, calendar.getActualMaximum(DAY_OF_MONTH));
+        return CalendarUtil.toDate(resetDayEnd(calendar));
     }
 
     /**
@@ -361,9 +378,9 @@ public final class DateUtil{
      */
     public static Date getFirstDateOfThisYear(Date date){
         Calendar calendar = toCalendar(date);
-        calendar.set(Calendar.MONTH, Calendar.JANUARY);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        return CalendarUtil.toDate(CalendarUtil.resetDayBegin(calendar));
+        calendar.set(MONTH, JANUARY);
+        calendar.set(DAY_OF_MONTH, 1);
+        return CalendarUtil.toDate(resetDayBegin(calendar));
     }
 
     /**
@@ -408,10 +425,10 @@ public final class DateUtil{
     public static Date getFirstWeekOfSpecifyDateYear(Date date,int week){
         Calendar calendar = toCalendar(date);
         calendar.clear();
-        calendar.set(Calendar.YEAR, getYear(date));
-        calendar.set(Calendar.MONTH, Calendar.JANUARY);
-        calendar.set(Calendar.DAY_OF_WEEK_IN_MONTH, 1);
-        calendar.set(Calendar.DAY_OF_WEEK, week);
+        calendar.set(YEAR, getYear(date));
+        calendar.set(MONTH, JANUARY);
+        calendar.set(DAY_OF_WEEK_IN_MONTH, 1);
+        calendar.set(DAY_OF_WEEK, week);
         return CalendarUtil.toDate(calendar);
     }
 
@@ -432,7 +449,7 @@ public final class DateUtil{
      */
     public static Date getLastDateOfThisYear(Date date){
         Calendar calendar = toCalendar(date);
-        return CalendarUtil.toDate(CalendarUtil.resetYearEnd(calendar));
+        return CalendarUtil.toDate(resetYearEnd(calendar));
     }
 
     // [start]operate 时间操作(加减)
@@ -698,7 +715,7 @@ public final class DateUtil{
      * @see Calendar#YEAR
      */
     public static int getYear(Date date){
-        return CalendarUtil.getFieldValue(date, Calendar.YEAR);
+        return CalendarUtil.getFieldValue(date, YEAR);
     }
 
     /**
@@ -715,7 +732,7 @@ public final class DateUtil{
      * @see Calendar#MONTH
      */
     public static int getMonth(Date date){
-        return 1 + CalendarUtil.getFieldValue(date, Calendar.MONTH);
+        return 1 + CalendarUtil.getFieldValue(date, MONTH);
     }
 
     /**
@@ -755,7 +772,7 @@ public final class DateUtil{
      * @since 1.0.7
      */
     public static int getWeekOfYear(Date date){
-        return CalendarUtil.getFieldValue(date, Calendar.WEEK_OF_YEAR);
+        return CalendarUtil.getFieldValue(date, WEEK_OF_YEAR);
     }
 
     /**
@@ -772,7 +789,7 @@ public final class DateUtil{
      * @since 1.0.2
      */
     public static int getDayOfYear(Date date){
-        return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_YEAR);
+        return CalendarUtil.getFieldValue(date, DAY_OF_YEAR);
     }
 
     /**
@@ -789,7 +806,7 @@ public final class DateUtil{
      * @see Calendar#DAY_OF_MONTH
      */
     public static int getDayOfMonth(Date date){
-        return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_MONTH);
+        return CalendarUtil.getFieldValue(date, DAY_OF_MONTH);
     }
 
     /**
@@ -817,7 +834,7 @@ public final class DateUtil{
      * @see Calendar#DAY_OF_WEEK
      */
     public static int getDayOfWeek(Date date){
-        return CalendarUtil.getFieldValue(date, Calendar.DAY_OF_WEEK);
+        return CalendarUtil.getFieldValue(date, DAY_OF_WEEK);
     }
 
     /**
@@ -835,7 +852,7 @@ public final class DateUtil{
      * @see Calendar#HOUR_OF_DAY
      */
     public static int getHourOfDay(Date date){
-        return CalendarUtil.getFieldValue(date, Calendar.HOUR_OF_DAY);
+        return CalendarUtil.getFieldValue(date, HOUR_OF_DAY);
     }
 
     /**
@@ -858,7 +875,7 @@ public final class DateUtil{
      * @since 1.0.2
      */
     public static int getHourOfYear(Date date){
-        return (getDayOfYear(date) - 1) * 24 + CalendarUtil.getFieldValue(date, Calendar.HOUR_OF_DAY);
+        return (getDayOfYear(date) - 1) * 24 + CalendarUtil.getFieldValue(date, HOUR_OF_DAY);
     }
 
     /**
@@ -875,7 +892,7 @@ public final class DateUtil{
      * @see Calendar#MINUTE
      */
     public static int getMinute(Date date){
-        return CalendarUtil.getFieldValue(date, Calendar.MINUTE);
+        return CalendarUtil.getFieldValue(date, MINUTE);
     }
 
     /**
@@ -892,7 +909,7 @@ public final class DateUtil{
      * @see Calendar#SECOND
      */
     public static int getSecond(Date date){
-        return CalendarUtil.getFieldValue(date, Calendar.SECOND);
+        return CalendarUtil.getFieldValue(date, SECOND);
     }
 
     /**
@@ -1059,8 +1076,9 @@ public final class DateUtil{
      * @see Calendar#setTime(Date)
      * @see Calendar#setTimeInMillis(long)
      * @see org.apache.commons.lang3.time.DateUtils#toCalendar(Date)
+     * @since 1.8.3 remove public
      */
-    public static Calendar toCalendar(Date date){
+    static Calendar toCalendar(Date date){
         Validate.notNull(date, "date can't be null!");
         return DateUtils.toCalendar(date);
     }

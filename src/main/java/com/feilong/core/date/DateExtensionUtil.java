@@ -217,7 +217,7 @@ public final class DateExtensionUtil{
         Date beginDateReset = DateUtil.getFirstDateOfThisDay(minDate);
         Date endDateReset = DateUtil.getLastDateOfThisDay(maxDate);
 
-        List<Date> list = new ArrayList<Date>();
+        List<Date> list = new ArrayList<>();
         list.add(beginDateReset);
 
         // 相隔的天数
