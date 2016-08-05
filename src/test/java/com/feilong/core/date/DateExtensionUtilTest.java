@@ -55,6 +55,7 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
     public void testFormatDurationLong(){
         assertEquals("25秒841毫秒", formatDuration(25841));
 
+        LOGGER.debug(String.format("%d:%02d:%02d", 25841000 / 3600, (25841000 % 3600) / 60, (25841000 % 60)));
         //25 seconds
         LOGGER.debug(DurationFormatUtils.formatDurationWords(25841, true, false));
         //43 minutes 4 seconds

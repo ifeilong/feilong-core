@@ -217,6 +217,8 @@ public final class DateExtensionUtil{
      * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #formatDuration(Date, Date)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
+     *      in-java-e-g-format-hmmss</a>
      * @since 1.8.0
      * @since 1.8.4 change name from getIntervalForView
      */
@@ -282,6 +284,8 @@ public final class DateExtensionUtil{
      * @see #formatDuration(long)
      * @see #getIntervalTime(Date, Date)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
+     *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
      */
     public static String formatDuration(Date beginDate,Date endDate){
@@ -330,6 +334,8 @@ public final class DateExtensionUtil{
      * @see #getIntervalMinute(long)
      * @see #getIntervalSecond(long)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
+     *      in-java-e-g-format-hmmss</a>
      * @since 1.8.4 change name from getIntervalForView
      */
     public static String formatDuration(long spaceMilliseconds){
