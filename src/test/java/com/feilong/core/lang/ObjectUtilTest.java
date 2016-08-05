@@ -15,12 +15,12 @@
  */
 package com.feilong.core.lang;
 
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
  * The Class ObjectUtilTest.
@@ -44,12 +45,12 @@ public class ObjectUtilTest{
      */
     @Test
     public void testDefaultIfNullOrEmpty(){
-        assertEquals(1, ObjectUtil.defaultIfNullOrEmpty(new ArrayList<>(), 1));
+        assertEquals(1, defaultIfNullOrEmpty(new ArrayList<>(), 1));
 
-        assertEquals("feilong", ObjectUtil.defaultIfNullOrEmpty("  ", "feilong"));
-        assertEquals("  ", ObjectUtils.defaultIfNull("  ", "feilong"));
+        assertEquals("feilong", defaultIfNullOrEmpty("  ", "feilong"));
+        assertEquals("  ", defaultIfNull("  ", "feilong"));
 
-        assertEquals("fl", ObjectUtil.defaultIfNullOrEmpty("fl", "feilong"));
+        assertEquals("fl", defaultIfNullOrEmpty("fl", "feilong"));
     }
 
     @Test(expected = NullPointerException.class)
