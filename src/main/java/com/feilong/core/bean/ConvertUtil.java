@@ -704,7 +704,7 @@ public final class ConvertUtil{
      * ToStringConfig toStringConfig = new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
      * 
-     * ConvertUtil.toString(toStringConfig, list);
+     * ConvertUtil.toString(list,toStringConfig);
      * </pre>
      * 
      * <b>返回:</b>
@@ -716,7 +716,7 @@ public final class ConvertUtil{
      * </blockquote>
      * 
      * @param collection
-     *            集合,建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
+     *            集合,建议元素泛型不要使用自定义的对象(比如UserCommand等),因为这个方法是迭代collection,拿每个元素的字符串格式 进行拼接
      * @param toStringConfig
      *            连接字符串 实体
      * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
