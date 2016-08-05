@@ -608,7 +608,7 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * 请使用 {@link #toString(ToStringConfig, Object...)}
+     * 请使用 {@link #toString(Object[], ToStringConfig)}
      * </p>
      * 
      * </blockquote>
@@ -757,17 +757,17 @@ public final class ConvertUtil{
      * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
-     * @see #toString(ToStringConfig, Object...)
+     * @see #toString(Object..., ToStringConfig)
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see org.apache.commons.collections4.IteratorUtils#toString(Iterator)
      * @since 1.8.4 change param order
      */
     public static String toString(final Collection<?> collection,ToStringConfig toStringConfig){
-        return isNullOrEmpty(collection) ? EMPTY : toString(toStringConfig, collection.toArray());
+        return isNullOrEmpty(collection) ? EMPTY : toString(collection.toArray(), toStringConfig);
     }
 
     /**
-     * 将数组通过{@link ToStringConfig} 拼接成字符串.
+     * 将数组 <code>arrays</code> 通过{@link ToStringConfig} 拼接成字符串.
      * 
      * <p style="color:green">
      * 支持包装类型以及原始类型,比如 Integer [] arrays 或者 int []arrays
@@ -775,16 +775,16 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * Example 1:
-     * ConvertUtil.toString(new ToStringConfig(),"a","b")       =   "a,b"
+     * ConvertUtil.toString(toArray("a","b"),new ToStringConfig())       =   "a,b"
      * 
      * Example 2:
      * ToStringConfig toStringConfig=new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
-     * ConvertUtil.toString(new ToStringConfig(),"a","b",null)  =   "a,b"
+     * ConvertUtil.toString(toArray("a","b",null),new ToStringConfig())  =   "a,b"
      * 
      * Example 3:
      * int[] ints = { 2, 1 };
-     * ConvertUtil.toString(new ToStringConfig(),ints)          =   "2,1"
+     * ConvertUtil.toString(toArray(ints),new ToStringConfig())          =   "2,1"
      * </pre>
      * 
      * <h3>关于 default {@link ToStringConfig}:</h3>
@@ -801,20 +801,20 @@ public final class ConvertUtil{
      * <li>最后一个元素后面不拼接拼接符</li>
      * </ol>
      * </blockquote>
-     *
-     * @param toStringConfig
-     *            the join string entity
+     * 
      * @param arrays
      *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
+     * @param toStringConfig
+     *            the join string entity
      * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         否则循环,拼接 {@link ToStringConfig#getConnector()}
      * @see org.apache.commons.lang3.builder.ToStringStyle
      * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
      * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
-     * @since 1.4.0
+     * @since 1.8.4 change param order
      */
-    public static String toString(ToStringConfig toStringConfig,Object...arrays){
+    public static String toString(Object[] arrays,ToStringConfig toStringConfig){
         if (isNullOrEmpty(arrays)){
             return EMPTY;
         }
@@ -1147,7 +1147,7 @@ public final class ConvertUtil{
      * @since 1.7.1
      */
     public static <K, V> Map<K, V> toMap(K key,V value){
-        Map<K, V> map = new LinkedHashMap<K, V>();//不设置初始值 ,可能调用再PUT 这样浪费性能
+        Map<K, V> map = new LinkedHashMap<>();//不设置初始值 ,可能调用再PUT 这样浪费性能
         map.put(key, value);
         return map;
     }
@@ -1205,10 +1205,10 @@ public final class ConvertUtil{
 
         Enumeration<String> keysEnumeration = resourceBundle.getKeys();
         if (isNullOrEmpty(keysEnumeration)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
 
-        Map<String, String> map = new TreeMap<String, String>();//为了log方便,使用 treeMap
+        Map<String, String> map = new TreeMap<>();//为了log方便,使用 treeMap
         while (keysEnumeration.hasMoreElements()){
             String key = keysEnumeration.nextElement();
             map.put(key, resourceBundle.getString(key));
@@ -1580,7 +1580,7 @@ public final class ConvertUtil{
      *            the generic type
      * @param arrays
      *            the arrays
-     * @return the object[]
+     * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
      * @since 1.4.0
      */
     @SafeVarargs
@@ -1593,7 +1593,19 @@ public final class ConvertUtil{
         }
 
         Object o = arrays[0];
-        return isPrimitiveArray(o) ? primitiveArrayToObjectArray(o) : arrays;
+
+        if (!isPrimitiveArray(o)){
+            return arrays;
+        }
+
+        //*************************************************************************
+        int length = ArrayUtils.getLength(o);
+
+        Object[] returnStringArray = new Object[length];
+        for (int i = 0; i < length; ++i){
+            returnStringArray[i] = ArrayUtil.getElement(o, i);
+        }
+        return returnStringArray;
     }
 
     /**
@@ -1602,31 +1614,12 @@ public final class ConvertUtil{
      * @param o
      *            the o
      * @return true, if checks if is primitive array
-     * 
      * @since 1.4.0
      */
     private static boolean isPrimitiveArray(Object o){
         // Allocate a new Array
         Class<? extends Object> klass = o.getClass();
         return !klass.isArray() ? false : klass.getComponentType().isPrimitive();//原始型的
-    }
-
-    /**
-     * To objects.
-     *
-     * @param primitiveArray
-     *            the o
-     * @return the object[]
-     * @since 1.4.0
-     */
-    private static Object[] primitiveArrayToObjectArray(Object primitiveArray){
-        int length = ArrayUtils.getLength(primitiveArray);
-
-        Object[] returnStringArray = new Object[length];
-        for (int i = 0; i < length; ++i){
-            returnStringArray[i] = ArrayUtil.getElement(primitiveArray, i);
-        }
-        return returnStringArray;
     }
 
     /**

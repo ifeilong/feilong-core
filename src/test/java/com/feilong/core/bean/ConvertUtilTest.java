@@ -389,20 +389,20 @@ public class ConvertUtilTest{
     public void testToString33(){
         ToStringConfig toStringConfig = new ToStringConfig(",");
         Object[] arrays = { "222", "1111" };
-        assertEquals("222,1111", ConvertUtil.toString(toStringConfig, arrays));
+        assertEquals("222,1111", ConvertUtil.toString(arrays, toStringConfig));
 
         Integer[] array1 = { 2, 1 };
-        assertEquals("2,1", ConvertUtil.toString(toStringConfig, array1));
+        assertEquals("2,1", ConvertUtil.toString(array1, toStringConfig));
 
         Integer[] array2 = { 2, 1, null };
         toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
-        assertEquals("2,1", ConvertUtil.toString(toStringConfig, array2));
+        assertEquals("2,1", ConvertUtil.toString(array2, toStringConfig));
 
         Integer[] array3 = { 2, null, 1, null };
         toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
-        assertEquals("2,1", ConvertUtil.toString(toStringConfig, array3));
+        assertEquals("2,1", ConvertUtil.toString(array3, toStringConfig));
     }
 
     /**
@@ -411,10 +411,16 @@ public class ConvertUtilTest{
     @Test
     public void testToString22(){
         int[] int1 = { 2, 1 };
-        assertEquals("2,1", ConvertUtil.toString(new ToStringConfig(","), int1));
-        assertEquals("2", ConvertUtil.toString(new ToStringConfig(","), 2));
-        assertEquals(",,,", ConvertUtil.toString(new ToStringConfig(",", true), ",", ","));
-        assertEquals("2,", ConvertUtil.toString(new ToStringConfig(",", true), new Integer(2), null));
+        assertEquals("2,1", ConvertUtil.toString(toArray(int1), null));
+        assertEquals("2", ConvertUtil.toString(toArray(2), new ToStringConfig(",")));
+        assertEquals(",,,", ConvertUtil.toString(toArray(",", ","), new ToStringConfig(",", true)));
+        assertEquals("2,", ConvertUtil.toString(toArray(new Integer(2), null), new ToStringConfig(",", true)));
+    }
+
+    @Test
+    public void testToString221(){
+        assertEquals(EMPTY, ConvertUtil.toString((String[]) null, new ToStringConfig(",")));
+        assertEquals(EMPTY, ConvertUtil.toString(toArray(), new ToStringConfig(",")));
     }
 
     /**
@@ -581,7 +587,7 @@ public class ConvertUtilTest{
         ToStringConfig toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
 
-        assertEquals(EMPTY, ConvertUtil.toString(null, toStringConfig));
+        assertEquals(EMPTY, ConvertUtil.toString((List<String>) null, toStringConfig));
         assertEquals(EMPTY, ConvertUtil.toString(toList(), toStringConfig));
     }
 
