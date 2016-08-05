@@ -707,12 +707,47 @@ public final class ConvertUtil{
      * ConvertUtil.toString(list,toStringConfig);
      * </pre>
      * 
-     * <b>返回:</b>
+     * <b>输出:</b>
      * 
      * <pre class="code">
      * feilong,xinge
      * </pre>
      * 
+     * <hr>
+     * 
+     * 你还可以使用这个方法来将集合<b>换行输出</b>,比如:
+     * 
+     * <pre class="code">
+     * List{@code <String>} list = toList("飞龙", "小金", "四金", "金金金金");
+     * 
+     * ToStringConfig toStringConfig = new ToStringConfig(SystemUtils.LINE_SEPARATOR);
+     * LOGGER.debug(ConvertUtil.toString(list, toStringConfig));
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * 飞龙
+     * 小金
+     * 四金
+     * 金金金金
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>关于 default {@link ToStringConfig}:</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 如果参数 <code>toStringConfig</code> 是null,则使用默认的规则:<br>
+     * </p>
+     * 
+     * <ol>
+     * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
+     * <li>拼接null或者empty元素</li>
+     * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     * <li>最后一个元素后面不拼接拼接符</li>
+     * </ol>
      * </blockquote>
      * 
      * @param collection
@@ -751,6 +786,21 @@ public final class ConvertUtil{
      * int[] ints = { 2, 1 };
      * ConvertUtil.toString(new ToStringConfig(),ints)          =   "2,1"
      * </pre>
+     * 
+     * <h3>关于 default {@link ToStringConfig}:</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 如果参数 <code>toStringConfig</code> 是null,则使用默认的规则:<br>
+     * </p>
+     * 
+     * <ol>
+     * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
+     * <li>拼接null或者empty元素</li>
+     * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     * <li>最后一个元素后面不拼接拼接符</li>
+     * </ol>
+     * </blockquote>
      *
      * @param toStringConfig
      *            the join string entity

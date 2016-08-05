@@ -17,9 +17,23 @@ package com.feilong.core.bean;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 设置 连接object成为字符串 的配置.
- *
+ * 
+ * <h3>
+ * 默认的规则:
+ * </h3>
+ * 
+ * <ol>
+ * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
+ * <li>拼接null或者empty元素</li>
+ * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+ * <li>最后一个元素后面不拼接拼接符</li>
+ * </ol>
+ * </blockquote>
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.builder.ToStringStyle
  * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
@@ -52,14 +66,24 @@ public final class ToStringConfig implements Serializable{
     //**********************************************************************************************
 
     /**
-     * Instantiates a new join string entity.
+     * <h3>
+     * 默认的规则:
+     * </h3>
+     * 
+     * <ol>
+     * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
+     * <li>拼接null或者empty元素</li>
+     * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     * <li>最后一个元素后面不拼接拼接符</li>
+     * </ol>
+     * </blockquote>.
      */
     public ToStringConfig(){
     }
 
     /**
-     * Instantiates a new join string entity.
-     * 
+     * Instantiates a new to string config.
+     *
      * @param connector
      *            the connector
      */
@@ -68,7 +92,7 @@ public final class ToStringConfig implements Serializable{
     }
 
     /**
-     * The Constructor.
+     * Instantiates a new to string config.
      *
      * @param connector
      *            the connector

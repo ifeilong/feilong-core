@@ -643,10 +643,12 @@ public class ConvertUtilTest{
      */
     @Test
     public void testCollectionToString2(){
-        List<String> list = toList("2548", "2548", "2548", "2548", "2548");
+        List<String> list = toList("飞龙", "小金", "四金", "金金金金");
 
         ToStringConfig toStringConfig = new ToStringConfig(LINE_SEPARATOR);
-        LOGGER.debug(ConvertUtil.toString(list, toStringConfig));
+        assertEquals(
+                        "飞龙" + LINE_SEPARATOR + "小金" + LINE_SEPARATOR + "四金" + LINE_SEPARATOR + "金金金金",
+                        ConvertUtil.toString(list, toStringConfig));
     }
 
     //****************************************************************************************************
