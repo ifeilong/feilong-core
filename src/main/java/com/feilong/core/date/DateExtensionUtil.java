@@ -38,12 +38,13 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
  * </p>
  * </blockquote>
  * 
- * <h3>获得两个日期间隔:</h3>
+ * <h3>格式化日期间隔字符串:</h3>
  * 
  * <blockquote>
  * <ul>
- * <li>{@link #getIntervalForView(long)}</li>
- * <li>{@link #getIntervalForView(Date, Date)}</li>
+ * <li>{@link #formatDuration(long)}</li>
+ * <li>{@link #formatDuration(Date)}</li>
+ * <li>{@link #formatDuration(Date, Date)}</li>
  * </ul>
  * </blockquote>
  * 
@@ -59,19 +60,10 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
  * <td>获得两个日期间隔</td>
  * <td>
  * <ul>
- * <li>{@link #getIntervalDay(long)}</li>
  * <li>{@link #getIntervalDay(Date, Date)}</li>
- * 
- * <li>{@link #getIntervalWeek(long)}</li>
  * <li>{@link #getIntervalWeek(Date, Date)}</li>
- * 
- * <li>{@link #getIntervalHour(long)}</li>
  * <li>{@link #getIntervalHour(Date, Date)}</li>
- * 
- * <li>{@link #getIntervalMinute(long)}</li>
- * <li>{@link #getIntervalSecond(long)}</li>
  * <li>{@link #getIntervalSecond(Date, Date)}</li>
- * 
  * <li>{@link #getIntervalTime(Date, Date)}</li>
  * </ul>
  * </td>
@@ -161,7 +153,7 @@ public final class DateExtensionUtil{
     //****************************************************************************************************
 
     /**
-     * 将 开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,转换成直观的表示方式.
+     * 将 开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,格式化成直观的表示方式.
      * 
      * <h3>说明:</h3>
      * 
@@ -169,7 +161,7 @@ public final class DateExtensionUtil{
      * <ol>
      * <li>常用于日志输出一段代码执行时长</li>
      * <li>计算的是开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
-     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字</li>
+     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字,月和较大的格式不使用</li>
      * </ol>
      * </blockquote>
      * 
@@ -208,26 +200,39 @@ public final class DateExtensionUtil{
      * 
      * </blockquote>
      * 
+     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 的区别:
+     * </h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
+     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param beginDate
      *            开始日期
      * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #getIntervalForView(Date, Date)
+     * @see #formatDuration(Date, Date)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @since 1.8.0
+     * @since 1.8.4 change name from getIntervalForView
      */
-    public static String getIntervalForView(Date beginDate){
-        return getIntervalForView(beginDate, new Date());
+    public static String formatDuration(Date beginDate){
+        return formatDuration(beginDate, new Date());
     }
 
     /**
-     * 将<code>beginDate</code>和 <code>endDate</code> 两日期之间的<span style="color:red">绝对值</span>间隔,转换成直观的表示方式.
+     * 将<code>beginDate</code>和 <code>endDate</code> 两日期之间的<span style="color:red">绝对值</span>间隔,格式化成直观的表示方式.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>常用于日志输出一段代码执行时长</li>
      * <li>计算的是开始时间 <code>beginDate</code> 到结束时间 <code>endDate</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
-     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字</li>
+     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字,月和较大的格式不使用</li>
      * </ol>
      * </blockquote>
      * 
@@ -256,28 +261,41 @@ public final class DateExtensionUtil{
      * 
      * </blockquote>
      * 
+     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 的区别:
+     * </h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
+     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param beginDate
      *            开始日期
      * @param endDate
      *            结束日期
      * @return 如果 <code>beginDate</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>endDate</code> 是null,抛出 {@link NullPointerException}
-     * @see #getIntervalForView(long)
+     * @see #formatDuration(long)
      * @see #getIntervalTime(Date, Date)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @since 1.8.4 change name from getIntervalForView
      */
-    public static String getIntervalForView(Date beginDate,Date endDate){
-        return getIntervalForView(getIntervalTime(beginDate, endDate));
+    public static String formatDuration(Date beginDate,Date endDate){
+        return formatDuration(getIntervalTime(beginDate, endDate));
     }
 
     /**
-     * 将间隔毫秒数 <code>spaceMilliseconds</code> ,转换成直观的表示方式.
+     * 将间隔毫秒数 <code>spaceMilliseconds</code>,格式化成直观的表示方式.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>常用于日志输出一段代码执行时长</li>
-     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字</li>
+     * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字,月和较大的格式不使用</li>
      * </ol>
      * </blockquote>
      * 
@@ -291,6 +309,18 @@ public final class DateExtensionUtil{
      * 
      * </blockquote>
      * 
+     * <h3>和 {@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 的区别:
+     * </h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 显示的是英文,该方法显示的是中文</li>
+     * <li>{@link org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean) DurationFormatUtils
+     * formatDurationWords} 最小单位是秒,该方法最小单位是毫秒</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param spaceMilliseconds
      *            总共相差的毫秒数
      * @return 如果 spaceMilliseconds 是0 直接返回0<br>
@@ -300,8 +330,9 @@ public final class DateExtensionUtil{
      * @see #getIntervalMinute(long)
      * @see #getIntervalSecond(long)
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
+     * @since 1.8.4 change name from getIntervalForView
      */
-    public static String getIntervalForView(long spaceMilliseconds){
+    public static String formatDuration(long spaceMilliseconds){
         Validate.isTrue(spaceMilliseconds >= 0, "spaceMilliseconds can't <0");
 
         if (0 == spaceMilliseconds){

@@ -29,7 +29,7 @@ import com.feilong.tools.formatter.entity.BeanFormatterConfig;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * 
@@ -113,6 +113,6 @@ public class SimpleBeanFormattterTest2{
     public void after(){
         Date beginDate = new Date();
         LOGGER.debug(FormatterUtil.formatToSimpleTable(ITERABLE_DATA, beanFormatterConfig));
-        LOGGER.info("use time:{}", getIntervalForView(beginDate));
+        LOGGER.info("use time:{}", formatDuration(beginDate));
     }
 }

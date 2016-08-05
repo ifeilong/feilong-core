@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.tools.jsonlib.JsonUtil;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * The Class StringUtilTest.
@@ -46,7 +46,7 @@ public class StringUtilPerformanceTest2{
             tokenizeToStringArray1();
         }
 
-        LOGGER.debug("time:{}", getIntervalForView(beginDate));
+        LOGGER.debug("time:{}", formatDuration(beginDate));
     }
 
     /**
@@ -82,6 +82,6 @@ public class StringUtilPerformanceTest2{
             StringUtil.split(str, regexSpliter);
         }
 
-        LOGGER.debug("time:{}", getIntervalForView(beginDate));
+        LOGGER.debug("time:{}", formatDuration(beginDate));
     }
 }

@@ -34,7 +34,7 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.tools.formatter.AbstractFormatter;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.lang.ArrayUtil.newArray;
 import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
 
@@ -90,7 +90,7 @@ public class SimpleTableFormatter extends AbstractFormatter{
             sb.append(formatRowInfo(cells, colWidths)).append(LINE_SEPARATOR);
         }
 
-        LOGGER.debug("use time:[{}]", getIntervalForView(beginDate));
+        LOGGER.debug("use time:[{}]", formatDuration(beginDate));
 
         return LINE_SEPARATOR + sb.toString();
     }

@@ -35,7 +35,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
@@ -81,7 +81,7 @@ public class ArrayUtilTemp{
             }
             ++j;
         }
-        LOGGER.debug("loop count j=[{}],use time:[{}],\nlist:{}", j, getIntervalForView(beginDate), list);
+        LOGGER.debug("loop count j=[{}],use time:[{}],\nlist:{}", j, formatDuration(beginDate), list);
     }
 
     /**

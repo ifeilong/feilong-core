@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * 
@@ -64,7 +64,7 @@ public abstract class AbstractJsonPerformanceTest extends AbstractJsonTest{
         for (int i = 0; i < times; ++i){
             performanceMethod(user);
         }
-        LOGGER.debug("[{}]{},use time:{}", getType(), times, getIntervalForView(beginDate));
+        LOGGER.debug("[{}]{},use time:{}", getType(), times, formatDuration(beginDate));
     }
 
     /**
