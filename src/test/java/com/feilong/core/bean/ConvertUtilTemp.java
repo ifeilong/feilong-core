@@ -15,6 +15,11 @@
  */
 package com.feilong.core.bean;
 
+import java.io.IOException;
+import java.io.StreamTokenizer;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.beanutils.Converter;
@@ -131,5 +136,34 @@ public class ConvertUtilTemp{
         Long[] result = toLongArray(defaultType, stringA);
 
         System.out.println(JsonUtil.format(result));//TODO:remove
+    }
+
+    /**
+     * TestConvertUtilTest.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public void testConvertUtilTest5() throws IOException{
+        StreamTokenizer streamTokenizer = new StreamTokenizer(new StringReader("abaBc^babac^cb//ab/*test*/"));
+        streamTokenizer.whitespaceChars('^', '^'); // Set the delimiters
+        streamTokenizer.lowerCaseMode(true);
+
+        streamTokenizer.slashSlashComments(false);
+        streamTokenizer.slashStarComments(false);
+        // Split comma-delimited tokens into a List
+        List<String> list = new ArrayList<String>();
+        while (true){
+            int ttype = streamTokenizer.nextToken();
+            if ((ttype == StreamTokenizer.TT_WORD) || (ttype > 0)){
+                if (streamTokenizer.sval != null){
+                    list.add(streamTokenizer.sval);
+                }
+            }else if (ttype == StreamTokenizer.TT_EOF){
+                break;
+            }
+        }
+
+        LOGGER.debug(JsonUtil.format(list));
     }
 }
