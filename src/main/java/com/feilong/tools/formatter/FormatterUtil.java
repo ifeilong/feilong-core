@@ -47,6 +47,16 @@ public final class FormatterUtil{
     /**
      * 使用 {@link SimpleTableFormatter}来格式化.
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>不建议format 太多的数据,以容易查看为原则</li>
+     * <li>如果字段含有中文,显示可能会错位,你可以尝试将结果进行 replace(SPACE, "\u3000") 处理,参见
+     * <a href="http://stackoverflow.com/questions/18961628/how-can-i-align-the-next-lines-in-java#answer-18962279">format Chinese
+     * characters</a></li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -90,6 +100,16 @@ public final class FormatterUtil{
 
     /**
      * 使用 {@link SimpleTableFormatter}来格式化.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>不建议format 太多的数据,以容易查看为原则</li>
+     * <li>如果字段含有中文,显示可能会错位,你可以尝试将结果进行 replace(SPACE, "\u3000") 处理,参见
+     * <a href="http://stackoverflow.com/questions/18961628/how-can-i-align-the-next-lines-in-java#answer-18962279">format Chinese
+     * characters</a></li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -139,6 +159,16 @@ public final class FormatterUtil{
 
     /**
      * 格式化成简单的table格式.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>不建议format 太多的数据,以容易查看为原则</li>
+     * <li>如果字段含有中文,显示可能会错位,你可以尝试将结果进行 replace(SPACE, "\u3000") 处理,参见
+     * <a href="http://stackoverflow.com/questions/18961628/how-can-i-align-the-next-lines-in-java#answer-18962279">format Chinese
+     * characters</a></li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -190,6 +220,16 @@ public final class FormatterUtil{
 
     /**
      * 格式化成简单的table格式.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>不建议format 太多的数据,以容易查看为原则</li>
+     * <li>如果字段含有中文,显示可能会错位,你可以尝试将结果进行 replace(SPACE, "\u3000") 处理,参见
+     * <a href="http://stackoverflow.com/questions/18961628/how-can-i-align-the-next-lines-in-java#answer-18962279">format Chinese
+     * characters</a></li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 

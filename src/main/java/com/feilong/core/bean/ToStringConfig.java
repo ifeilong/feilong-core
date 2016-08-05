@@ -37,6 +37,8 @@ public final class ToStringConfig implements Serializable{
      */
     public static final String DEFAULT_CONNECTOR = ",";
 
+    //**********************************************************************************************
+
     /** 连接符,默认={@link #DEFAULT_CONNECTOR}. */
     private String             connector         = DEFAULT_CONNECTOR;
 
@@ -46,6 +48,8 @@ public final class ToStringConfig implements Serializable{
      * @since 1.2.1
      */
     private boolean            isJoinNullOrEmpty = true;
+
+    //**********************************************************************************************
 
     /**
      * Instantiates a new join string entity.

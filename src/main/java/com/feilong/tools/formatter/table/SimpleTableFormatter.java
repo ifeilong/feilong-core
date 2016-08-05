@@ -44,6 +44,16 @@ import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
  * <p>
  * 简单的table 会渲染标题 和分隔符,不包含 padding margin等设定,也不支持复杂的组合表格设置
  * </p>
+ * 
+ * <h3>说明:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>不建议format 太多的数据,以容易查看为原则</li>
+ * <li>如果字段含有中文,显示可能会错位,你可以尝试将结果进行 replace(SPACE, "\u3000") 处理,参见
+ * <a href="http://stackoverflow.com/questions/18961628/how-can-i-align-the-next-lines-in-java#answer-18962279">format Chinese
+ * characters</a></li>
+ * </ol>
+ * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @version 1.8.2 2016-7-21 18:30:09
@@ -80,7 +90,7 @@ public class SimpleTableFormatter extends AbstractFormatter{
             sb.append(formatRowInfo(cells, colWidths)).append(LINE_SEPARATOR);
         }
 
-        LOGGER.debug("use time:{}", getIntervalForView(beginDate));
+        LOGGER.debug("use time:[{}]", getIntervalForView(beginDate));
 
         return LINE_SEPARATOR + sb.toString();
     }

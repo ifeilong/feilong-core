@@ -15,6 +15,9 @@
  */
 package com.feilong.core.bean;
 
+import static java.util.Collections.emptyMap;
+import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.math.BigDecimal;
@@ -47,7 +50,6 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.LocaleUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
@@ -591,7 +593,7 @@ public final class ConvertUtil{
      * </pre>
      * 
      * <p>
-     * ,请使用 {@link #toString(ToStringConfig, Collection)}
+     * ,请使用 {@link #toString(Collection, ToStringConfig)}
      * </p>
      * 
      * <hr>
@@ -687,7 +689,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将集合 <code>collection</code>使用连接符号链接成字符串.
+     * 将集合 <code>collection</code> 使用拼接配置 toStringConfig 拼接成字符串.
      * 
      * <h3>示例:</h3>
      * 
@@ -713,19 +715,19 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
+     * @param collection
+     *            集合,建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
      * @param toStringConfig
      *            连接字符串 实体
-     * @param collection
-     *            集合, 建议基本类型泛型的结合,因为这个方法是直接循环collection 进行拼接
-     * @return 如果 <code>collection</code> isNullOrEmpty,返回null<br>
-     *         如果 <code>toStringConfig</code> 是null,默认使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 进行连接<br>
+     * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
      * @see #toString(ToStringConfig, Object...)
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see org.apache.commons.collections4.IteratorUtils#toString(Iterator)
-     * @since 1.4.0
+     * @since 1.8.4 change param order
      */
-    public static String toString(ToStringConfig toStringConfig,final Collection<?> collection){
+    public static String toString(final Collection<?> collection,ToStringConfig toStringConfig){
         return isNullOrEmpty(collection) ? EMPTY : toString(toStringConfig, collection.toArray());
     }
 
@@ -755,6 +757,7 @@ public final class ConvertUtil{
      * @param arrays
      *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
      * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         否则循环,拼接 {@link ToStringConfig#getConnector()}
      * @see org.apache.commons.lang3.builder.ToStringStyle
      * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
@@ -765,7 +768,7 @@ public final class ConvertUtil{
         if (isNullOrEmpty(arrays)){
             return EMPTY;
         }
-        ToStringConfig useToStringConfig = ObjectUtils.defaultIfNull(toStringConfig, new ToStringConfig());
+        ToStringConfig useToStringConfig = defaultIfNull(toStringConfig, new ToStringConfig());
         return join(toObjects(arrays), useToStringConfig.getConnector(), useToStringConfig.getIsJoinNullOrEmpty());
     }
 
@@ -792,7 +795,7 @@ public final class ConvertUtil{
             }
 
             //value转换,注意:如果 value是null,StringBuilder将拼接 "null" 字符串,详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(ObjectUtils.defaultIfNull(obj, EMPTY)); //see StringUtils.defaultString(t)
+            sb.append(defaultIfNull(obj, EMPTY)); //see StringUtils.defaultString(t)
 
             if (null != connector){//注意可能传过来的是换行符 不能使用Validator.isNullOrEmpty来判断
                 sb.append(connector);//放心大胆的拼接 connector, 不判断是否是最后一个,最后会截取
@@ -871,7 +874,7 @@ public final class ConvertUtil{
      */
     public static <V, K, E extends Map.Entry<K, V>> Map<K, V> toMap(Collection<E> mapEntryCollection){
         if (null == mapEntryCollection){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Map<K, V> map = newLinkedHashMap(mapEntryCollection.size());
         for (Map.Entry<K, V> entry : mapEntryCollection){
@@ -1005,7 +1008,7 @@ public final class ConvertUtil{
     @SafeVarargs
     public static <V, K> Map<K, V> toMap(Map.Entry<K, V>...mapEntrys){
         if (null == mapEntrys){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Map<K, V> map = newLinkedHashMap(mapEntrys.length);
         for (Map.Entry<K, V> entry : mapEntrys){
@@ -1533,7 +1536,7 @@ public final class ConvertUtil{
     @SafeVarargs
     private static <T> Object[] toObjects(T...arrays){
         if (isNullOrEmpty(arrays)){
-            return ArrayUtils.EMPTY_STRING_ARRAY;
+            return EMPTY_STRING_ARRAY;
         }
         if (arrays.length > 1){
             return arrays;

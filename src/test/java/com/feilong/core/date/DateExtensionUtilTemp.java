@@ -347,7 +347,6 @@ public class DateExtensionUtilTemp extends BaseDateUtilTest{
      * @see DateExtensionUtil#getIntervalHour(long)
      * @see DateExtensionUtil#getIntervalMinute(long)
      * @see DateExtensionUtil#getIntervalSecond(long)
-     * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      */
     public static String toPrettyDateString(Date inDate){
         Validate.notNull(inDate, "inDate can't be null!");

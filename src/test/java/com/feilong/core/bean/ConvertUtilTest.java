@@ -16,6 +16,7 @@
 package com.feilong.core.bean;
 
 import static java.util.Collections.emptyList;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -605,17 +606,15 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(toList((User) null)));
     }
 
-    /**
-     * 集合转成字符串.
-     */
+    //****************************************************************************************************
+
     @Test
     public void testCollectionToString(){
-        List<String> list = toList("feilong", "", "xinge");
-
         ToStringConfig toStringConfig = new ToStringConfig(",");
         toStringConfig.setIsJoinNullOrEmpty(false);
 
-        assertEquals("feilong,xinge", ConvertUtil.toString(toStringConfig, list));
+        assertEquals(EMPTY, ConvertUtil.toString(null, toStringConfig));
+        assertEquals(EMPTY, ConvertUtil.toString(toList(), toStringConfig));
     }
 
     /**
@@ -623,17 +622,34 @@ public class ConvertUtilTest{
      */
     @Test
     public void testCollectionToString1(){
-        List<String> list = new ArrayList<String>();
-        list.add("2548");
-        list.add("2548");
-        list.add("2548");
-        list.add("2548");
-        list.add("2548");
-        list.add("2548");
+        List<String> list = toList("feilong", "", "xinge");
+
+        ToStringConfig toStringConfig = new ToStringConfig(",");
+        toStringConfig.setIsJoinNullOrEmpty(false);
+
+        assertEquals("feilong,xinge", ConvertUtil.toString(list, toStringConfig));
+        assertEquals("feilong@@xinge", ConvertUtil.toString(list, new ToStringConfig("@")));
+        assertEquals("feilong,,xinge", ConvertUtil.toString(list, null));
+    }
+
+    @Test
+    public void testCollectionToString11(){
+        List<String> list = toList("feilong", "", "xinge", null);
+        assertEquals("feilong@@xinge@", ConvertUtil.toString(list, new ToStringConfig("@")));
+    }
+
+    /**
+     * 集合转成字符串.
+     */
+    @Test
+    public void testCollectionToString2(){
+        List<String> list = toList("2548", "2548", "2548", "2548", "2548");
 
         ToStringConfig toStringConfig = new ToStringConfig(LINE_SEPARATOR);
-        LOGGER.debug(ConvertUtil.toString(toStringConfig, list));
+        LOGGER.debug(ConvertUtil.toString(list, toStringConfig));
     }
+
+    //****************************************************************************************************
 
     /**
      * Test map to enumeration.

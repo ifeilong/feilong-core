@@ -35,6 +35,7 @@ import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  * The Class DateExtensionUtilTest.
@@ -55,6 +56,12 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
         assertEquals("25秒841毫秒", getIntervalForView(25841));
         assertEquals("0", getIntervalForView(0));
         LOGGER.debug(DurationFormatUtils.formatDurationWords(25841, true, true));
+        LOGGER.debug(DurationFormatUtils.formatDuration(25841, COMMON_DATE_AND_TIME));
+        LOGGER.debug(DurationFormatUtils.formatDuration(25841, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DurationFormatUtils.formatDuration(25841, "yyyy年MM月dd日 HH小时mm分钟ss秒SSS毫秒"));
+        LOGGER.debug(DurationFormatUtils.formatDurationHMS(25841));
+        LOGGER.debug(DurationFormatUtils.formatDurationISO(25841));
+        LOGGER.debug(DurationFormatUtils.formatPeriodISO(25841, 3555555));
     }
 
     @Test
