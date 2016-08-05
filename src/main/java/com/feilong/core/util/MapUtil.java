@@ -16,6 +16,7 @@
 package com.feilong.core.util;
 
 import static java.util.Collections.emptyMap;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -274,7 +274,7 @@ public final class MapUtil{
      */
     public static <K, V> Map<K, V> toSingleValueMap(Map<K, V[]> arrayValueMap){
         if (isNullOrEmpty(arrayValueMap)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Map<K, V> singleValueMap = newLinkedHashMap(arrayValueMap.size());//保证顺序和 参数 arrayValueMap 顺序相同
         for (Map.Entry<K, V[]> entry : arrayValueMap.entrySet()){
@@ -327,7 +327,7 @@ public final class MapUtil{
      */
     public static <K> Map<K, String[]> toArrayValueMap(Map<K, String> singleValueMap){
         if (isNullOrEmpty(singleValueMap)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Map<K, String[]> arrayValueMap = newLinkedHashMap(singleValueMap.size());//保证顺序和参数singleValueMap顺序相同
         for (Map.Entry<K, String> entry : singleValueMap.entrySet()){
@@ -600,7 +600,7 @@ public final class MapUtil{
     public static <K, V> Map<K, List<V>> putMultiValue(Map<K, List<V>> map,K key,V value){
         Validate.notNull(map, "map can't be null!");
 
-        List<V> list = ObjectUtils.defaultIfNull(map.get(key), new ArrayList<V>());
+        List<V> list = defaultIfNull(map.get(key), new ArrayList<V>());
         list.add(value);
 
         map.put(key, list);
@@ -725,7 +725,7 @@ public final class MapUtil{
     @SafeVarargs
     public static <K, T> Map<K, T> getSubMapExcludeKeys(Map<K, T> map,K...excludeKeys){
         if (isNullOrEmpty(map)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         return isNullOrEmpty(excludeKeys) ? map : removeKeys(new LinkedHashMap<K, T>(map), excludeKeys); //保证元素的顺序 
     }
@@ -985,7 +985,7 @@ public final class MapUtil{
      */
     public static <K, O, V> Map<K, V> extractSubMap(Map<K, O> map,K[] includeKeys,String extractPropertyName){
         if (isNullOrEmpty(map)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
 
         Validate.notBlank(extractPropertyName, "extractPropertyName can't be null/empty!");

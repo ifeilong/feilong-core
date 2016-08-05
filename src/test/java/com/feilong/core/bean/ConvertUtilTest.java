@@ -154,7 +154,7 @@ public class ConvertUtilTest{
     @Test
     public void test(){
         BigDecimal a = toBigDecimal("1.000000");
-        BigDecimal b = new BigDecimal(1);
+        BigDecimal b = BigDecimal.ONE;
         LOGGER.debug(a.compareTo(b) + "");
         LOGGER.debug(a.equals(b) + "");
     }

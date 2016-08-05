@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static java.math.BigDecimal.ZERO;
 import static java.math.RoundingMode.HALF_UP;
 
 import java.math.BigDecimal;
@@ -200,7 +201,7 @@ public final class NumberUtil{
         Validate.notNull(two, "two can't be null!");
 
         BigDecimal divisor = toBigDecimal(two);
-        Validate.isTrue(!divisor.equals(new BigDecimal(0)), "two can't be zero!");
+        Validate.isTrue(!divisor.equals(ZERO), "two can't be zero!");
 
         // 不能直接one.divide(two),应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
         // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result
@@ -272,7 +273,7 @@ public final class NumberUtil{
     public static BigDecimal getAddValue(Number...numbers){
         Validate.noNullElements(numbers, "numbers can't be null!");
 
-        BigDecimal sum = BigDecimal.ZERO;
+        BigDecimal sum = ZERO;
         for (Number number : numbers){
             sum = sum.add(toBigDecimal(number));
         }

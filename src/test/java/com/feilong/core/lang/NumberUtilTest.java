@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang;
 
+import static java.math.BigDecimal.ZERO;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -88,7 +89,8 @@ public class NumberUtilTest{
 
     /**
      * Gets the progress.
-     * 
+     *
+     * @return the progress
      */
     @Test
     public void getProgress(){
@@ -106,7 +108,8 @@ public class NumberUtilTest{
 
     /**
      * Gets the progress1.
-     * 
+     *
+     * @return the progress 1
      */
     @Test(expected = NullPointerException.class)
     public void getProgress1(){
@@ -115,7 +118,8 @@ public class NumberUtilTest{
 
     /**
      * Gets the progress2.
-     * 
+     *
+     * @return the progress 2
      */
     @Test(expected = NullPointerException.class)
     public void getProgress2(){
@@ -124,7 +128,8 @@ public class NumberUtilTest{
 
     /**
      * Gets the progress3.
-     * 
+     *
+     * @return the progress 3
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgress3(){
@@ -133,7 +138,8 @@ public class NumberUtilTest{
 
     /**
      * Gets the progress4.
-     * 
+     *
+     * @return the progress 4
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgress4(){
@@ -142,7 +148,8 @@ public class NumberUtilTest{
 
     /**
      * Gets the progress5.
-     * 
+     *
+     * @return the progress 5
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgress5(){
@@ -268,11 +275,11 @@ public class NumberUtilTest{
         assertEquals(new BigDecimal(88), NumberUtil.toNoScale(88.4999d));
         assertEquals(new BigDecimal(-89), NumberUtil.toNoScale(-88.5999d));
         // ***********************************************************************
-        assertEquals(new BigDecimal(0), NumberUtil.toNoScale(0.1));
-        assertEquals(new BigDecimal(1), NumberUtil.toNoScale(0.5));
+        assertEquals(ZERO, NumberUtil.toNoScale(0.1));
+        assertEquals(BigDecimal.ONE, NumberUtil.toNoScale(0.5));
         //
         assertEquals(new BigDecimal(-1), NumberUtil.toNoScale(-0.5));
-        assertEquals(new BigDecimal(0), NumberUtil.toNoScale(-0.11111111));
+        assertEquals(ZERO, NumberUtil.toNoScale(-0.11111111));
 
     }
 
@@ -318,7 +325,8 @@ public class NumberUtilTest{
 
     /**
      * Gets the divide no scale value.
-     * 
+     *
+     * @return the divide no scale value
      */
     @Test
     public void getDivideNoScaleValue(){
@@ -331,6 +339,8 @@ public class NumberUtilTest{
 
     /**
      * 获得 divide value1.
+     *
+     * @return the divide value 1
      */
     @Test(expected = NullPointerException.class)
     public void getDivideValue1(){
@@ -339,6 +349,8 @@ public class NumberUtilTest{
 
     /**
      * 获得 divide value2.
+     *
+     * @return the divide value 2
      */
     @Test(expected = NullPointerException.class)
     public void getDivideValue2(){
@@ -347,7 +359,8 @@ public class NumberUtilTest{
 
     /**
      * Gets the divide value.
-     * 
+     *
+     * @return the divide value
      */
     @Test(expected = IllegalArgumentException.class)
     public void getDivideValue(){
@@ -389,33 +402,50 @@ public class NumberUtilTest{
         NumberUtil.getMultiplyValue(null, null, 2);
     }
 
-    /**
-     * Gets the adds the value.
-     * 
-     */
-    @Test
-    public void getAddValue(){
-        assertEquals(11, NumberUtil.getAddValue(new BigDecimal(6), 5).intValue());
-    }
+    //***********************testGetAddValue**********************************************************
 
     /**
      * Test get add value.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetAddValue(){
+        assertEquals(new BigDecimal(11), NumberUtil.getAddValue(new BigDecimal(6), 5));
+    }
+
+    /**
+     * Test get add value 2.
+     */
+    @Test
+    public void testGetAddValue2(){
+        assertEquals(new BigDecimal(11), NumberUtil.getAddValue(2, 4, 5));
+    }
+
+    /**
+     * Test get add value null pointer exception.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetAddValueNullPointerException(){
+        NumberUtil.getAddValue(null);
+    }
+
+    /**
+     * Test get add value illegal argument exception.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetAddValueIllegalArgumentException(){
         NumberUtil.getAddValue(null, null);
     }
 
     /**
-     * Test get add value3.
+     * Test get add value illegal argument exception 1.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testGetAddValue3(){
+    public void testGetAddValueIllegalArgumentException1(){
         NumberUtil.getAddValue(null, 5);
     }
 
     /**
-     * Test get add value4.
+     * Test get add value 4.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetAddValue4(){
@@ -423,26 +453,10 @@ public class NumberUtilTest{
     }
 
     /**
-     * Test get add value1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testGetAddValue1(){
-        NumberUtil.getAddValue(null);
-    }
-
-    /**
-     * 获得 add value2.
-     */
-    @Test
-    public void getAddValue2(){
-        assertEquals(new BigDecimal(11), NumberUtil.getAddValue(2, 4, 5));
-    }
-
-    /**
-     * 获得 add value3.
+     * Test get add value 33.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void getAddValue3(){
+    public void testGetAddValue33(){
         NumberUtil.getAddValue(2, 4, null);
     }
 }

@@ -27,7 +27,6 @@ import java.util.Map;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.NumberUtil;
 
@@ -92,7 +91,7 @@ public final class AggregateUtil{
      */
     public static <O> BigDecimal avg(Collection<O> objectCollection,String propertyName,int scale){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return isNullOrEmpty(objectCollection) ? null : avg(objectCollection, ConvertUtil.toArray(propertyName), scale).get(propertyName);
+        return isNullOrEmpty(objectCollection) ? null : avg(objectCollection, toArray(propertyName), scale).get(propertyName);
     }
 
     /**
@@ -413,7 +412,7 @@ public final class AggregateUtil{
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String[] propertyNames,Predicate<O> includePredicate){
         if (isNullOrEmpty(objectCollection)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
@@ -552,7 +551,7 @@ public final class AggregateUtil{
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         if (isNullOrEmpty(objectCollection)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
