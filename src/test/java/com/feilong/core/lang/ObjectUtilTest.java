@@ -19,15 +19,9 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.test.User;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
@@ -36,9 +30,6 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ObjectUtilTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTest.class);
 
     /**
      * Test default if null or empty.
@@ -53,31 +44,37 @@ public class ObjectUtilTest{
         assertEquals("fl", defaultIfNullOrEmpty("fl", "feilong"));
     }
 
+    /**
+     * Test is array 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testIsArray1(){
         ObjectUtil.isArray(null);
     }
 
+    //***************************************************************************
+
     /**
-     * Assert equals.
+     * Test is primitive array.
      */
-    @Test
-    public void assertEquals2(){
-        Long a = new Long(1L);
-        Long b = new Long(1L);
-        assertEquals(false, a == b);
-        assertEquals(true, a.equals(b));
-
-        User user = new User(1L);
-
-        List<User> list = toList(//
-                        user,
-                        new User(1L),
-                        new User(new Long(1L)));
-
-        for (User user2 : list){
-            LOGGER.debug((user2.getId() == user.getId()) + "");
-        }
+    @Test(expected = NullPointerException.class)
+    public void testIsPrimitiveArray(){
+        ObjectUtil.isPrimitiveArray(null);
     }
 
+    /**
+     * Test is primitive array 1.
+     */
+    @Test
+    public void testIsPrimitiveArray1(){
+        assertEquals(false, ObjectUtil.isPrimitiveArray(1));
+        assertEquals(false, ObjectUtil.isPrimitiveArray(1L));
+        assertEquals(false, ObjectUtil.isPrimitiveArray("1"));
+
+        assertEquals(true, ObjectUtil.isPrimitiveArray(new int[] {}));
+        assertEquals(true, ObjectUtil.isPrimitiveArray(new int[] { 1, 2 }));
+        assertEquals(true, ObjectUtil.isPrimitiveArray(new byte[] { 1, 2 }));
+
+        assertEquals(false, ObjectUtil.isPrimitiveArray(new String[] { "1", "2" }));
+    }
 }

@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -41,6 +42,28 @@ public class ObjectUtilTemp{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectUtilTemp.class);
+
+    /**
+     * Assert equals.
+     */
+    @Test
+    public void assertEquals2(){
+        Long a = new Long(1L);
+        Long b = new Long(1L);
+        assertEquals(false, a == b);
+        assertEquals(true, a.equals(b));
+
+        User user = new User(1L);
+
+        List<User> list = toList(//
+                        user,
+                        new User(1L),
+                        new User(new Long(1L)));
+
+        for (User user2 : list){
+            LOGGER.debug((user2.getId() == user.getId()) + "");
+        }
+    }
 
     @Test
     public void test(){

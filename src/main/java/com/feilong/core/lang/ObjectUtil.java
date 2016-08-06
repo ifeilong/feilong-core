@@ -222,4 +222,37 @@ public final class ObjectUtil{
         Validate.notNull(object, "object can't be null!");
         return object.getClass().isArray();
     }
+
+    /**
+     * 判断指定的对象 <code>object</code> 是否是原生类型数组.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * ObjectUtil.isPrimitiveArray(1)                           = false
+     * ObjectUtil.isPrimitiveArray(1L)                          = false
+     * ObjectUtil.isPrimitiveArray("1")                         = false
+     * 
+     * 
+     * ObjectUtil.isPrimitiveArray(new int[] {})                = true
+     * ObjectUtil.isPrimitiveArray(new int[] { 1, 2 })          = true
+     * ObjectUtil.isPrimitiveArray(new byte[] { 1, 2 })         = true
+     * 
+     * ObjectUtil.isPrimitiveArray(new String[] { "1", "2" })   = false
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param object
+     *            the object
+     * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.8.4
+     */
+    public static boolean isPrimitiveArray(Object object){
+        Validate.notNull(object, "object can't be null!");
+        return isArray(object) && object.getClass().getComponentType().isPrimitive();//原始型的
+    }
 }
