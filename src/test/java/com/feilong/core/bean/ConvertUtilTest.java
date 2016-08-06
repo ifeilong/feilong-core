@@ -414,7 +414,17 @@ public class ConvertUtilTest{
         assertEquals("2,1", ConvertUtil.toString(toArray(int1), null));
         assertEquals("2", ConvertUtil.toString(toArray(2), new ToStringConfig(",")));
         assertEquals(",,,", ConvertUtil.toString(toArray(",", ","), new ToStringConfig(",", true)));
+    }
+
+    @Test
+    public void testToString222(){
         assertEquals("2,", ConvertUtil.toString(toArray(new Integer(2), null), new ToStringConfig(",", true)));
+    }
+
+    @Test
+    public void testToStringWithOneNullElementArray(){
+        String[] ss = { null };
+        assertEquals(EMPTY, ConvertUtil.toString(ss, new ToStringConfig(",", true)));
     }
 
     @Test

@@ -55,6 +55,7 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.feilong.core.lang.ArrayUtil;
+import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.lang.StringUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -823,6 +824,46 @@ public final class ConvertUtil{
     }
 
     /**
+     * 将数组转成对象型数组.
+     * 
+     * <p>
+     * 如果 <code>arrays</code>是原始型的,那么会进行转换.
+     * </p>
+     *
+     * @param <T>
+     *            the generic type
+     * @param arrays
+     *            the arrays
+     * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
+     *         如果 arrays.length {@code >} 1,那么表示是包装类型数组,直接返回 <code>arrays</code><br>
+     *         如果 arrays.length {@code =} 1,取到第一个元素,判断是否是原始类型数组,如果不是,那么直接返回 <code>arrays</code>
+     * @since 1.4.0
+     */
+    @SafeVarargs
+    private static <T> Object[] toObjects(T...arrays){
+        if (isNullOrEmpty(arrays)){
+            return EMPTY_STRING_ARRAY;
+        }
+        if (arrays.length > 1){
+            return arrays;
+        }
+
+        Object element = arrays[0];
+        if (null == element || !ObjectUtil.isPrimitiveArray(element)){
+            return arrays;
+        }
+
+        //************isPrimitiveArray********************************
+        int length = ArrayUtils.getLength(element);
+
+        Object[] returnStringArray = new Object[length];
+        for (int i = 0; i < length; ++i){
+            returnStringArray[i] = ArrayUtil.getElement(element, i);
+        }
+        return returnStringArray;
+    }
+
+    /**
      * Join.
      *
      * @param operateArray
@@ -1392,10 +1433,10 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * String[] array = ConvertUtil.toArray("1", "2");                  =   ["1", "2"];
+     * 
      * String[] emptyArray = ConvertUtil.{@code <String>}toArray();     =   [] ; //= new String[] {};
      * Integer[] emptyArray = ConvertUtil.{@code <Integer>}toArray();   =   [] ; //= new Integer[] {};
      * String[] nullArray = ConvertUtil.toArray(null)                   =   null;
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -1568,59 +1609,6 @@ public final class ConvertUtil{
         return null == toBeConvertedValue ? null : (T[]) ConvertUtils.convert(toBeConvertedValue, targetType);
     }
     //********************************************************************************
-
-    /**
-     * 将数组转成对象型数组.
-     * 
-     * <p>
-     * 如果 <code>arrays</code>是原始型的,那么会进行转换.
-     * </p>
-     *
-     * @param <T>
-     *            the generic type
-     * @param arrays
-     *            the arrays
-     * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
-     * @since 1.4.0
-     */
-    @SafeVarargs
-    private static <T> Object[] toObjects(T...arrays){
-        if (isNullOrEmpty(arrays)){
-            return EMPTY_STRING_ARRAY;
-        }
-        if (arrays.length > 1){
-            return arrays;
-        }
-
-        Object o = arrays[0];
-
-        if (!isPrimitiveArray(o)){
-            return arrays;
-        }
-
-        //*************************************************************************
-        int length = ArrayUtils.getLength(o);
-
-        Object[] returnStringArray = new Object[length];
-        for (int i = 0; i < length; ++i){
-            returnStringArray[i] = ArrayUtil.getElement(o, i);
-        }
-        return returnStringArray;
-    }
-
-    /**
-     * 判断是否是 Primitive型数组.
-     *
-     * @param o
-     *            the o
-     * @return true, if checks if is primitive array
-     * @since 1.4.0
-     */
-    private static boolean isPrimitiveArray(Object o){
-        // Allocate a new Array
-        Class<? extends Object> klass = o.getClass();
-        return !klass.isArray() ? false : klass.getComponentType().isPrimitive();//原始型的
-    }
 
     /**
      * 转成{@link String}数组.

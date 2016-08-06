@@ -64,6 +64,11 @@ public class ClassUtilTest{
      */
     @Test
     public void testIsInstance(){
+        assertEquals(false, ClassUtil.isInstance(new User(), null));
+    }
+
+    @Test
+    public void testIsInstance1(){
         assertEquals(true, ClassUtil.isInstance(new User(), Comparable.class));
         assertEquals(true, ClassUtil.isInstance("1234", CharSequence.class));
         assertEquals(true, new User() instanceof Comparable);
@@ -79,15 +84,25 @@ public class ClassUtilTest{
         assertEquals(true, object instanceof Serializable);
     }
 
-    /**
-     * Test is instance2.
-     */
+    //*************************************************************************************
     @Test
-    public void testIsInstance2(){
-        assertEquals(true, ClassUtil.isInstanceAnyClass(new User(), new Class<?>[] { Comparable.class, CharSequence.class }));
-        assertEquals(false, ClassUtil.isInstanceAnyClass(new User(), new Class<?>[] { Integer.class, CharSequence.class }));
-        assertEquals(true, ClassUtil.isInstanceAnyClass("1234", new Class<?>[] { Comparable.class, CharSequence.class }));
+    public void testIsInstanceAnyClass(){
+        assertEquals(false, ClassUtil.isInstanceAnyClass(new User(), null));
     }
+
+    @Test
+    public void testIsInstanceAnyClass1(){
+        assertEquals(false, ClassUtil.isInstanceAnyClass(null, Integer.class, CharSequence.class));
+    }
+
+    @Test
+    public void testIsInstanceAnyClass2(){
+        assertEquals(true, ClassUtil.isInstanceAnyClass(new User(), Comparable.class, CharSequence.class));
+        assertEquals(false, ClassUtil.isInstanceAnyClass(new User(), Integer.class, CharSequence.class));
+        assertEquals(true, ClassUtil.isInstanceAnyClass("1234", Comparable.class, CharSequence.class));
+    }
+
+    //**************************************************************************************
 
     /**
      * Test is assignable from.
