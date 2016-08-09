@@ -452,7 +452,7 @@ public final class DateUtil{
         return CalendarUtil.toDate(resetYearEnd(calendar));
     }
 
-    // [start]operate 时间操作(加减)
+    // [start]operate 时间操作(加减)--------------------------------------------------------------------------
 
     /**
      * 指定日期 <code>date</code>,加减年份(仅 {@link java.util.Calendar#YEAR}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
@@ -475,8 +475,10 @@ public final class DateUtil{
      * @param date
      *            任意时间
      * @param year
-     *            增加年份 可以是负数 表示前面多少
+     *            加减年数 ,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @throws IllegalArgumentException
+     *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#YEAR
      * @see org.apache.commons.lang3.time.DateUtils#addYears(Date, int)
      */
@@ -508,6 +510,8 @@ public final class DateUtil{
      *            加减月份, <span style="color:red">可以是负数</span>,表示前面多少<br>
      *            比如-3 表示 3个月之前
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @throws IllegalArgumentException
+     *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#MONTH
      * @see org.apache.commons.lang3.time.DateUtils#addMonths(Date, int)
      */
@@ -540,6 +544,8 @@ public final class DateUtil{
      * @param day
      *            需要加减的天数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @throws IllegalArgumentException
+     *             如果 <code>date</code> 是<code>null</code>
      * @see Calendar#DAY_OF_MONTH
      * @see org.apache.commons.lang3.time.DateUtils#addDays(Date, int)
      */
@@ -570,6 +576,8 @@ public final class DateUtil{
      * @param week
      *            需要加减的星期数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @throws IllegalArgumentException
+     *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addWeeks(Date, int)
      */
     public static Date addWeek(Date date,int week){
@@ -578,10 +586,6 @@ public final class DateUtil{
 
     /**
      * 指定日期 <code>date</code>加减小时 (仅仅{@link Calendar#HOUR_OF_DAY} 24小时制进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
-     * 
-     * <p>
-     * 传入的参数<code>date</code>不会改变
-     * </p>
      * 
      * <h3>示例:</h3>
      * 
@@ -593,16 +597,23 @@ public final class DateUtil{
      * </pre>
      * 
      * </blockquote>
-     * <p>
-     * {@link Calendar#HOUR}:12小时制的小时数 <br>
-     * {@link Calendar#HOUR_OF_DAY}:24小时制的小时数
-     * </p>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>传入的参数<code>date</code>不会改变</li>
+     * <li>{@link Calendar#HOUR}:12小时制的小时数</li>
+     * <li>{@link Calendar#HOUR_OF_DAY}:24小时制的小时数</li>
+     * </ol>
+     * </blockquote>
      * 
      * @param date
      *            任意时间
      * @param hour
-     *            the hour,<span style="color:red">可以是负数</span>,表示前面多少<br>
+     *            加减小时数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @throws IllegalArgumentException
+     *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addHours(Date, int)
      */
     public static Date addHour(Date date,int hour){
@@ -630,8 +641,10 @@ public final class DateUtil{
      * @param date
      *            任意时间
      * @param minute
-     *            the minute,<span style="color:red">可以是负数</span>,表示前面多少<br>
+     *            加减分钟数,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @throws IllegalArgumentException
+     *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addMinutes(Date, int)
      */
     public static Date addMinute(Date date,int minute){
@@ -661,6 +674,8 @@ public final class DateUtil{
      * @param second
      *            加减秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @throws IllegalArgumentException
+     *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addSeconds(Date, int)
      */
     public static Date addSecond(Date date,int second){
@@ -690,6 +705,8 @@ public final class DateUtil{
      * @param millisecond
      *            加减毫秒,<span style="color:red">可以是负数</span>,表示前面多少<br>
      * @return 如果 <code>date</code>是null,抛出 {@link java.lang.IllegalArgumentException}
+     * @throws IllegalArgumentException
+     *             如果 <code>date</code> 是<code>null</code>
      * @see org.apache.commons.lang3.time.DateUtils#addMilliseconds(Date, int)
      * @since 1.4.1
      */

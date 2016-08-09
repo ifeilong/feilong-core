@@ -387,7 +387,6 @@ public class DateUtilTest extends BaseDateUtilTest{
 
     /**
      * Gets the minute.
-     * 
      */
     @Test
     public void testGetMinute(){
@@ -396,7 +395,6 @@ public class DateUtilTest extends BaseDateUtilTest{
 
     /**
      * Gets the second.
-     * 
      */
     @Test
     public void testGetSecond(){
@@ -405,21 +403,10 @@ public class DateUtilTest extends BaseDateUtilTest{
 
     /**
      * Gets the time.
-     * 
      */
     @Test
     public void testGetTime(){
         LOGGER.debug(DateUtil.getTime(NOW) + "");
-    }
-
-    /**
-     * Test is leap year.
-     */
-    @Test
-    public void testIsLeapYear(){
-        int year = -3;
-        LOGGER.debug(new GregorianCalendar(-3, 1, 1).isLeapYear(year) + "");
-        LOGGER.debug(DateUtil.isLeapYear(year) + "");
     }
 
     /**
@@ -455,15 +442,22 @@ public class DateUtilTest extends BaseDateUtilTest{
         logDate(DateUtil.addWeek(NOW, -1));
     }
 
+    //********************
     /**
      * Test add hour.
      */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddHour1(){
+        DateUtil.addHour(null, 5);
+    }
+
     @Test
     public void testAddHour(){
         logDate(DateUtil.addHour(NOW, 5));
         logDate(DateUtil.addHour(NOW, -5));
     }
 
+    //***************************************************************************************************
     /**
      * Test is in time.
      */
@@ -510,6 +504,18 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test(expected = NullPointerException.class)
     public void testIsInTime5(){
         isInTime(toDate("2016-06-12", COMMON_DATE), toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME), null);
+    }
+
+    //***************************************************************************************************
+
+    /**
+     * Test is leap year.
+     */
+    @Test
+    public void testIsLeapYear(){
+        int year = -3;
+        LOGGER.debug(new GregorianCalendar(-3, 1, 1).isLeapYear(year) + "");
+        LOGGER.debug(DateUtil.isLeapYear(year) + "");
     }
 
     /**

@@ -35,7 +35,7 @@ abstract class BaseDateUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER                  = LoggerFactory.getLogger(BaseDateUtilTest.class);
 
-    /** <code>{@value}</code> . */
+    /** <code>{@value}</code>. */
     static final String         FROMSTRING              = "2011-03-5 23:31:25.456";
 
     /** The to string. */
