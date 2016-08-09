@@ -28,6 +28,14 @@ import org.slf4j.LoggerFactory;
 /**
  * {@link URL} 工具类.
  * 
+ * <h3>URL组成部分:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * <img src="http://venusdrogon.github.io/feilong-platform/mysource/url-parts.png"/>
+ * </p>
+ * </blockquote>
+ * 
  * <h3>URL 的长度上限</h3>
  * 
  * <blockquote>
