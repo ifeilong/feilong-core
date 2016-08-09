@@ -37,7 +37,11 @@ public class ObjectUtilIsArrayParameterizedTest extends AbstractBooleanParameter
     @Parameters(name = "index:{index}: ObjectUtil.isArray({0})={1}")
     public static Iterable<Object[]> data(){
         int[] i = {};
-        Object[] valids = { i, new int[] { 1, 2, 3 }, new Integer[0], new String[0] };
+        Object[] valids = {
+                            i, //
+                            new int[] { 1, 2, 3 },
+                            new Integer[0],
+                            new String[0] };
 
         Object[] invalids = { 1 };
         return toList(valids, invalids);
