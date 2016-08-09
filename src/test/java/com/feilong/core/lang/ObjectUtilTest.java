@@ -62,19 +62,4 @@ public class ObjectUtilTest{
         ObjectUtil.isPrimitiveArray(null);
     }
 
-    /**
-     * Test is primitive array 1.
-     */
-    @Test
-    public void testIsPrimitiveArray1(){
-        assertEquals(false, ObjectUtil.isPrimitiveArray(1));
-        assertEquals(false, ObjectUtil.isPrimitiveArray(1L));
-        assertEquals(false, ObjectUtil.isPrimitiveArray("1"));
-
-        assertEquals(true, ObjectUtil.isPrimitiveArray(new int[] {}));
-        assertEquals(true, ObjectUtil.isPrimitiveArray(new int[] { 1, 2 }));
-        assertEquals(true, ObjectUtil.isPrimitiveArray(new byte[] { 1, 2 }));
-
-        assertEquals(false, ObjectUtil.isPrimitiveArray(new String[] { "1", "2" }));
-    }
 }
