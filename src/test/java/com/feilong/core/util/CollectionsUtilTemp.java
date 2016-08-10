@@ -16,21 +16,34 @@
 package com.feilong.core.util;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
+import org.apache.commons.collections4.ListUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.tools.jsonlib.JsonUtil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+
 public class CollectionsUtilTemp{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CollectionsUtilTemp.class);
+
+    /**
+     * Test partition.
+     */
+    @Test
+    public void testPartition(){
+        List<String> list = toList("xinge", "feilong1", "feilong2");
+        LOGGER.debug("list:{}", JsonUtil.format(ListUtils.partition(list, 2)));
+    }
 
     /**
      * TestCollectionsUtilTest.

@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections4.ComparatorUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.Transformer;
@@ -95,6 +94,13 @@ public class CollectionsUtilTest{
     }
 
     //************************************************************************************************
+    /**
+     * Test add all ignore null1.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddAllIgnoreNull1(){
+        CollectionsUtil.addAllIgnoreNull(null, null);
+    }
 
     /**
      * Test add all ignore null.
@@ -116,14 +122,6 @@ public class CollectionsUtilTest{
         assertThat(list, hasItems("xinge", "feilong1", "xinge", "feilong1"));
     }
 
-    /**
-     * Test add all ignore null1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddAllIgnoreNull1(){
-        CollectionsUtil.addAllIgnoreNull(null, null);
-    }
-
     //*************************************************************************************
 
     @Test(expected = NullPointerException.class)
@@ -139,29 +137,18 @@ public class CollectionsUtilTest{
     @Test
     public void testAddIgnoreNullOrEmpty2(){
         List<String> list = toList("xinge", "feilong1");
-        boolean addIgnoreNullOrEmpty = CollectionsUtil.addIgnoreNullOrEmpty(list, "xinge");
-        assertEquals(true, addIgnoreNullOrEmpty);
-
+        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, "xinge"));
         assertThat(list, contains("xinge", "feilong1", "xinge"));
     }
 
     @Test
     public void testAddIgnoreNullOrEmpty3(){
         List<String> list = toList("xinge", "feilong1");
-        boolean addIgnoreNullOrEmpty = CollectionsUtil.addIgnoreNullOrEmpty(list, "  ");
-        assertEquals(false, addIgnoreNullOrEmpty);
-
+        assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, "  "));
         assertThat(list, contains("xinge", "feilong1"));
     }
 
-    /**
-     * Test partition.
-     */
-    @Test
-    public void testPartition(){
-        List<String> list = toList("xinge", "feilong1", "feilong2");
-        LOGGER.debug("list:{}", JsonUtil.format(ListUtils.partition(list, 2)));
-    }
+    //*************************************************************************************
 
     /**
      * Test collect.

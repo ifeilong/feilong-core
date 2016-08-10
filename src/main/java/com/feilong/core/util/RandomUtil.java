@@ -21,8 +21,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.tools.slf4j.Slf4jUtil;
-
 /**
  * 随机数工具类.
  * 
@@ -157,7 +155,7 @@ public final class RandomUtil{
      * @return 如果 <code>length</code> {@code <=0} ,抛出 {@link IllegalArgumentException}
      */
     public static long createRandomWithLength(int length){
-        Validate.isTrue(length > 0, "length:[%s] must >0", length);
+        Validate.isTrue(length > 0, "input param [length] must >0,but is [%s]", length);
         long num = 1;
         for (int i = 0; i < length; ++i){
             num = num * 10;
@@ -197,12 +195,12 @@ public final class RandomUtil{
      */
     public static String createRandomFromString(String str,int length){
         Validate.notBlank(str, "str can't be null/empty!");
-        Validate.isTrue(length > 0, Slf4jUtil.format("length:[{}] can not <=0", length));
+        Validate.isTrue(length > 0, "input param [length] must >0,but is [%s]", length);
         return RandomStringUtils.random(length, str);
     }
 
     /**
-     * 随机抽取字符串char,拼接最小长度(包含)是<code>minLength</code>,最大长度(不包含)是<code>maxLength</code>的字符串随机字符串.
+     * 随机抽取字符串char,拼接最小长度是<code>minLength</code>(包含),最大长度是<code>maxLength</code>(不包含)的随机字符串.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -225,15 +223,15 @@ public final class RandomUtil{
      * 
      * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>str</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>maxLength</code> {@code <=}0 ,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>minLength</code> {@code <=}0 ,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>maxLength</code> {@code <} minLength,抛出 {@link IllegalArgumentException}
      * @see #createRandomFromString(String, int)
      */
     public static String createRandomFromString(String str,int minLength,int maxLength){
         Validate.notBlank(str, "str can't be null/empty!");
 
-        Validate.isTrue(maxLength > 0, Slf4jUtil.format("maxLength:[{}] can not zero", maxLength));
-        Validate.isTrue(maxLength >= minLength, Slf4jUtil.format("maxLength:[{}] can not < minLength:[{}]", maxLength, minLength));
+        Validate.isTrue(minLength > 0, "input param [minLength] must >0,but is [%s]", minLength);
+        Validate.isTrue(maxLength >= minLength, "input param [maxLength]:[%s] must >= [minLength]:[%s]", maxLength, minLength);
 
         long length = createRandom(minLength, maxLength);
         return createRandomFromString(str, (int) length);
