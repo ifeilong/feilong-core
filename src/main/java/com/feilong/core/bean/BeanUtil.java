@@ -299,7 +299,7 @@ public final class BeanUtil{
     // [start] copyProperties
 
     /**
-     * 将<code class="code">fromObj</code>中的一组属性的值,复制到 <code>toObj</code>对象中.
+     * 将 <code class="code">fromObj</code> 中的一组属性的值,复制到 <code>toObj</code> 对象中.
      * 
      * <h3>注意:</h3>
      * 
@@ -378,6 +378,15 @@ public final class BeanUtil{
      * of certain data types),具体信息,可以参阅commons-beanutils的
      * <a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">RELEASE-NOTES.txt</a></li>
      * </ul>
+     * </blockquote>
+     * 
+     * <h3>相比较直接调用 {@link BeanUtils#copyProperties(Object, Object)}的优点:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>将 checkedException 异常转成了 {@link BeanUtilException} RuntimeException,因为通常copy的时候出现了checkedException,也是普普通通记录下log,没有更好的处理方式</li>
+     * <li>支持 includePropertyNames 参数,允许针对性copy 个别属性</li>
+     * <li>更多,更容易理解的的javadoc</li>
+     * </ol>
      * </blockquote>
      *
      * @param toObj

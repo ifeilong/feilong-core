@@ -817,7 +817,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "loves[1]")));
      * </pre>
      * 
-     * 返回 :
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * ["xiaoshuo1","xiaoshuo2"]
@@ -1541,7 +1541,7 @@ public final class CollectionsUtil{
      * LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
-     * 返回 :
+     * <b>返回:</b>
      * 
      * <pre class="code">
     {
@@ -1614,7 +1614,7 @@ public final class CollectionsUtil{
         LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
-     * 返回 :
+     * <b>返回:</b>
      * 
      * <pre class="code">
     {
@@ -1707,7 +1707,7 @@ public final class CollectionsUtil{
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
-     * 返回 :
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {

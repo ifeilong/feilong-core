@@ -67,7 +67,7 @@ public final class PropertyUtil{
     }
 
     /**
-     * 将<code>fromObj</code>中的一组属性的值,复制到<code>toObj</code>对象中.
+     * 将 <code>fromObj</code> 中的一组属性的值,复制到 <code>toObj</code> 对象中.
      * 
      * <h3>代码流程:</h3>
      * <blockquote>
@@ -108,23 +108,62 @@ public final class PropertyUtil{
      * LOGGER.debug(JsonUtil.format(newUser));
      * </pre>
      * 
-     * 返回 :
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * {
-        "date": "2015-09-06 13:27:43",
-        "id": 0,
-        "nickName":         [
-            "feilong",
-            "飞天奔月",
-            "venusdrogon"
-        ],
-        "age": 0,
-        "name": "feilong",
-        "money": 500000,
-        "userInfo": {"age": 0}
-    }
+     *         "date": "2015-09-06 13:27:43",
+     *         "id": 0,
+     *         "nickName":         [
+     *             "feilong",
+     *             "飞天奔月",
+     *             "venusdrogon"
+     *         ],
+     *         "age": 0,
+     *         "name": "feilong",
+     *         "money": 500000,
+     *         "userInfo": {"age": 0}
+     *     }
      * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * private ContactCommand toContactCommand(ShippingInfoSubForm shippingInfoSubForm){
+     *     ContactCommand contactCommand = new ContactCommand();
+     *     contactCommand.setCountryId(shippingInfoSubForm.getCountryId());
+     *     contactCommand.setProvinceId(shippingInfoSubForm.getProvinceId());
+     *     contactCommand.setCityId(shippingInfoSubForm.getCityId());
+     *     contactCommand.setAreaId(shippingInfoSubForm.getAreaId());
+     *     contactCommand.setTownId(shippingInfoSubForm.getTownId());
+     *     return contactCommand;
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * private ContactCommand toContactCommand(ShippingInfoSubForm shippingInfoSubForm){
+     *     ContactCommand contactCommand = new ContactCommand();
+     *     PropertyUtil.copyProperties(contactCommand, shippingInfoSubForm, "countryId", "provinceId", "cityId", "areaId", "townId");
+     *     return contactCommand;
+     * }
+     * </pre>
+     * 
+     * <p>
+     * 可以看出,代码更精简,目的性更明确
+     * </p>
      * 
      * </blockquote>
      * 
@@ -141,6 +180,15 @@ public final class PropertyUtil{
      * </ul>
      * </blockquote>
      * 
+     * <h3>相比较直接调用 {@link PropertyUtils#copyProperties(Object, Object)}的优点:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>将 checkedException 异常转成了 {@link BeanUtilException} RuntimeException,因为通常copy的时候出现了checkedException,也是普普通通记录下log,没有更好的处理方式</li>
+     * <li>支持 includePropertyNames 参数,允许针对性copy 个别属性</li>
+     * <li>更多,更容易理解的的javadoc</li>
+     * </ol>
+     * </blockquote>
+     *
      * @param toObj
      *            目标对象
      * @param fromObj
@@ -148,6 +196,10 @@ public final class PropertyUtil{
      * @param includePropertyNames
      *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
      *            如果是null或者empty,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}
+     * @throws NullPointerException
+     *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
+     * @throws BeanUtilException
+     *             如果在copy的过程中,有任何的checkedException,将会被转成BeanUtilException
      * @see #setProperty(Object, String, Object)
      * @see BeanUtil#copyProperties(Object, Object, String...)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)

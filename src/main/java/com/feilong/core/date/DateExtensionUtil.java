@@ -192,7 +192,7 @@ public final class DateExtensionUtil{
      * LOGGER.debug(getIntervalForView(date));
      * </pre>
      * 
-     * 返回 :
+     * <b>返回:</b>
      * 
      * <pre class="code">
      * 6天13小时3分钟53秒259毫秒
@@ -219,7 +219,6 @@ public final class DateExtensionUtil{
      * @see org.apache.commons.lang3.time.DurationFormatUtils#formatDurationWords(long, boolean, boolean)
      * @see <a href="http://stackoverflow.com/questions/266825/how-to-format-a-duration-in-java-e-g-format-hmmss">how-to-format-a-duration-
      *      in-java-e-g-format-hmmss</a>
-     * @since 1.8.0
      * @since 1.8.4 change name from getIntervalForView
      */
     public static String formatDuration(Date beginDate){

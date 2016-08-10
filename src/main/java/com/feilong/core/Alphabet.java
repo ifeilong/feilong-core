@@ -57,7 +57,7 @@ public final class Alphabet{
      * </ul>
      * 
      * <p>
-     * 返回 :23456789abcdefghijkmnpqrstuvwxyz
+     * <b>返回:</b>23456789abcdefghijkmnpqrstuvwxyz
      * </p>
      * 
      * @see com.feilong.core.util.RandomUtil#createRandomFromString(String, int)
