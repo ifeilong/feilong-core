@@ -42,6 +42,8 @@ public class RandomUtilTest{
     @Rule
     public RepeatRule           repeatRule = new RepeatRule();
 
+    //****************com.feilong.core.util.RandomUtil.createRandom(Number)***************************************
+
     /**
      * Test create random.
      */
@@ -54,6 +56,22 @@ public class RandomUtilTest{
     @Test(expected = NullPointerException.class)
     public void testCreateRandom1(){
         RandomUtil.createRandom(null);
+    }
+
+    //**************com.feilong.core.util.RandomUtil.createRandom(Number, Number)*******************************************************
+    @Test(expected = NullPointerException.class)
+    public void testCreateRandomNullPointerException1(){
+        RandomUtil.createRandom(null, 5);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateRandomNullPointerException2(){
+        RandomUtil.createRandom(5, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateRandomNullPointerException22(){
+        RandomUtil.createRandom(5, 2);
     }
 
     /**
@@ -70,6 +88,8 @@ public class RandomUtilTest{
     public void testCreateRandom3(){
         assertEquals(800L, RandomUtil.createRandom(800, 800));
     }
+
+    //********************com.feilong.core.util.RandomUtil.createRandomWithLength(int)**************************************************************************************
 
     @Test
     @Repeat(20000)
@@ -97,20 +117,36 @@ public class RandomUtilTest{
         RandomUtil.createRandomWithLength(-1);
     }
 
-    /**
-     * Testget random from string1.
-     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateRandomWithLengthZero(){
+        RandomUtil.createRandomWithLength(0);
+    }
+
+    //********************com.feilong.core.util.RandomUtil.createRandomFromString(String, int)*********************************************************************************
+
+    @Test(expected = NullPointerException.class)
+    public void testGetRandomFromStringNull(){
+        RandomUtil.createRandomFromString(null, 4);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRandomFromStringEmpty(){
+        RandomUtil.createRandomFromString("", 5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRandomFromStringBlank(){
+        RandomUtil.createRandomFromString(" ", 5);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testGetRandomFromString1(){
         RandomUtil.createRandomFromString(DECIMAL, 0);
     }
 
-    /**
-     * Testget random from string2.
-     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetRandomFromString2(){
-        RandomUtil.createRandomFromString("", 5);
+        RandomUtil.createRandomFromString(DECIMAL, -1);
     }
 
     /**
@@ -120,7 +156,6 @@ public class RandomUtilTest{
     @Repeat(20000)
     public void testGetRandomFromString(){
         assertThat(RandomUtil.createRandomFromString(DECIMAL_AND_LETTERS, 5).length(), equalTo(5));
-
     }
 
     @Test
@@ -129,9 +164,38 @@ public class RandomUtilTest{
         assertThat(RandomUtil.createRandomFromString(DECIMAL, 200).length(), equalTo(200));
     }
 
-    /**
-     * Creates the random from string.
-     */
+    //**************com.feilong.core.util.RandomUtil.createRandomFromString(String, int, int)********************************************************************************************
+
+    @Test(expected = NullPointerException.class)
+    public void testGetRandomFromStringNull3(){
+        RandomUtil.createRandomFromString(null, 4, 6);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRandomFromStringEmpty3(){
+        RandomUtil.createRandomFromString("", 5, 8);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRandomFromStringBlank3(){
+        RandomUtil.createRandomFromString(" ", 5, 8);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRandomFromString13(){
+        RandomUtil.createRandomFromString(DECIMAL, 0, 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRandomFromString33(){
+        RandomUtil.createRandomFromString(DECIMAL, -1, 8);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRandomFromString333(){
+        RandomUtil.createRandomFromString(DECIMAL, 8, 6);
+    }
+
     @Test
     @Repeat(20000)
     public void testCreateRandomFromString(){
