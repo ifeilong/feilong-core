@@ -64,6 +64,10 @@ public final class RandomUtil{
     /**
      * 创建0-最大值<b>(maxValue)</b>之间的随机数.
      * 
+     * <p>
+     * 即 0 {@code <=} result {@code <} maxValue
+     * </p>
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
@@ -78,7 +82,7 @@ public final class RandomUtil{
      * 
      * @param maxValue
      *            随机数最大值
-     * @return 如果 <code>maxValue</code> 是null,那么抛出 {@link NullPointerException}
+     * @return 0 {@code <=} result {@code <} maxValue
      * @throws NullPointerException
      *             如果 <code>maxValue</code> 是null
      */
@@ -91,6 +95,10 @@ public final class RandomUtil{
 
     /**
      * 创建最小值(包含)<code>minInclusiveValue</code>和最大值(不包含)<code>maxExclusiveValue</code>之间的随机数.
+     * 
+     * <p>
+     * 即 <code>minInclusiveValue</code> {@code <=} result {@code <} <code>maxExclusiveValue</code>
+     * </p>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -110,8 +118,8 @@ public final class RandomUtil{
      *            最大值
      * @return 如果 <code>minInclusiveValue</code>是 null,抛出 {@link NullPointerException};<br>
      *         如果 <code>maxExclusiveValue</code>是 null,抛出 {@link NullPointerException};<br>
-     *         如果 <code>minInclusiveValue</code>{@code <}<code>maxExclusiveValue</code>,抛出{@link IllegalArgumentException}<br>
-     *         如果 <code>minInclusiveValue</code>{@code =}<code>maxExclusiveValue</code>,直接返回 <code>minLong</code>
+     *         如果 <code>minInclusiveValue</code> {@code <} <code>maxExclusiveValue</code>,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>minInclusiveValue</code> {@code =} <code>maxExclusiveValue</code>,直接返回 <code>minLong</code>
      * 
      * @see org.apache.commons.lang3.RandomUtils#nextInt(int, int)
      * @see org.apache.commons.lang3.RandomUtils#nextLong(long, long)
@@ -125,7 +133,7 @@ public final class RandomUtil{
         long minLong = minInclusiveValue.longValue();
         long maxLong = maxExclusiveValue.longValue();
 
-        Validate.isTrue(maxLong >= minLong, Slf4jUtil.format("minInclusiveValue:[{}] can not < maxExclusiveValue:[{}]", maxLong, minLong));
+        Validate.isTrue(maxLong >= minLong, "input param [minInclusiveValue]:[%s] must <= [maxExclusiveValue]:[%s]", minLong, maxLong);
         return RandomUtils.nextLong(minLong, maxLong);
     }
 
