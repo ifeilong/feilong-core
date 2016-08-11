@@ -30,6 +30,7 @@ import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
 @SuiteClasses({
                 AggregateUtilTest.class,
                 CollectionsUtilTest.class,
+                EnumerationUtilTest.class,
                 MapUtilTest.class,
                 RandomUtilTest.class,
                 RegexUtilTest.class,

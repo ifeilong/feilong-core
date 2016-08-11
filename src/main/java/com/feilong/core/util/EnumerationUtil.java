@@ -61,6 +61,21 @@ public final class EnumerationUtil{
 
     /**
      * 判断<code>enumeration</code>枚举里面,是否有指定的元素<code>value</code>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * EnumerationUtil.contains(null, "a")                                          =   false
+     * 
+     * EnumerationUtil.contains(toEnumeration(toList("4", "5")), "a")               =   false
+     * EnumerationUtil.contains(toEnumeration(toList("4", "5")), "4")               =   true
+     * EnumerationUtil.contains(toEnumeration(toList("4", "5", "")), "")            =   true
+     * EnumerationUtil.contains(toEnumeration(toList("4", "5", "", null)), null)    =   true
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
