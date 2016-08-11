@@ -33,9 +33,9 @@ import org.apache.commons.lang3.text.StrSubstitutor;
 import com.feilong.core.CharsetType;
 import com.feilong.core.RegexPattern;
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.bean.ConvertUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * {@link String}工具类,可以查询,截取,format.
@@ -635,10 +635,14 @@ public final class StringUtil{
     // [start]tokenizeToStringArray
 
     /**
-     * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
+     * 使用StringTokenizer分隔给定的字符串到字符串数组,去除 tokens的空格并且忽略empty tokens.
      * 
      * <p>
-     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},本方法,默认使用参数 trimTokens = true;
+     * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
+     * </p>
+     * 
+     * <p>
+     * 调用了 {@link #tokenizeToStringArray(String, String, boolean, boolean)},本方法默认使用参数 trimTokens = true;
      * ignoreEmptyTokens = true;
      * </p>
      * 
@@ -667,22 +671,23 @@ public final class StringUtil{
      * 
      * </blockquote>
      * 
-     * <p>
-     * Tokenize the given String into a String array via a StringTokenizer. <br>
-     * Trims tokens and omits empty tokens.
-     * </p>
+     * <h3>说明:</h3>
      * 
+     * <blockquote>
      * <p>
-     * The given delimiters string is supposed to consist of any number of delimiter characters. Each of those characters can be used to
-     * separate tokens. A delimiter is always a single character; for multi-character delimiters, consider using
-     * <code>delimitedListToStringArray</code>
+     * 给定的delimiters字符串支持任意数量的分隔字符characters. <br>
+     * 每一个characters可以用来分隔tokens.一个delimiter分隔符常常是一个single字符;<br>
+     * 如果你要使用多字符 multi-character delimiters分隔, 你可以考虑使用<code>delimitedListToStringArray</code>
+     * </p>
+     * </blockquote>
      * 
      * @param str
-     *            the String to tokenize
+     *            需要被分隔的字符串
      * @param delimiters
-     *            the delimiter characters, assembled as String<br>
+     *            delimiter characters, assembled as String<br>
      *            参数中的所有字符都是分隔标记的分隔符,比如这里可以设置成 ";, " ,spring就是使用这样的字符串来分隔数组/集合的
      * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
+     *         如果 <code>str</code> 是blank,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
      * @see java.util.StringTokenizer
      * @see String#trim()
      * @see "org.springframework.util.StringUtils#delimitedListToStringArray"
@@ -698,20 +703,23 @@ public final class StringUtil{
     }
 
     /**
+     * 使用StringTokenizer分隔给定的字符串到字符串数组.
+     * 
+     * <p>
      * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
-     * 
-     * <p>
-     * Tokenize the given String into a String array via a StringTokenizer.
      * </p>
      * 
-     * <p>
-     * The given delimiters string is supposed to consist of any number of delimiter characters. <br>
-     * Each of those characters can be used to separate tokens. <br>
-     * A delimiter is always a single character; <br>
-     * for multi-character delimiters, consider using <code>delimitedListToStringArray</code>
-     * </p>
+     * <h3>说明:</h3>
      * 
-     * <h3>about {@link StringTokenizer}:</h3>
+     * <blockquote>
+     * <p>
+     * 给定的delimiters字符串支持任意数量的分隔字符characters. <br>
+     * 每一个characters可以用来分隔tokens.一个delimiter分隔符常常是一个single字符;<br>
+     * 如果你要使用多字符 multi-character delimiters分隔, 你可以考虑使用<code>delimitedListToStringArray</code>
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>关于 {@link StringTokenizer}:</h3>
      * 
      * <blockquote>
      * 
@@ -722,17 +730,15 @@ public final class StringUtil{
      * </blockquote>
      * 
      * @param str
-     *            the String to tokenize
+     *            需要被分隔的字符串
      * @param delimiters
-     *            the delimiter characters, assembled as String<br>
+     *            delimiter characters, assembled as String<br>
      *            参数中的所有字符都是分隔标记的分隔符,比如这里可以设置成 ";, " ,spring就是使用这样的字符串来分隔数组/集合的
      * @param trimTokens
      *            是否使用 {@link String#trim()}操作token
      * @param ignoreEmptyTokens
      *            是否忽视空白的token,如果为true,那么token必须长度 {@code >} 0;如果为false会包含长度=0 空白的字符<br>
-     *            omit empty tokens from the result array
-     *            (only applies to tokens that are empty after trimming; StringTokenizer
-     *            will not consider subsequent delimiters as token in the first place).
+     *            (仅仅用于那些 trim之后是empty的tokens,StringTokenizer不会考虑subsequent delimiters as token in the first place).
      * @return 如果 <code>str</code> 是null,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
      * @see java.util.StringTokenizer
      * @see String#trim()
@@ -745,8 +751,9 @@ public final class StringUtil{
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
 
-        StringTokenizer stringTokenizer = new StringTokenizer(str, delimiters);
         List<String> tokens = new ArrayList<String>();
+
+        StringTokenizer stringTokenizer = new StringTokenizer(str, delimiters);
         while (stringTokenizer.hasMoreTokens()){
             String token = stringTokenizer.nextToken();
             token = trimTokens ? token.trim() : token;//去空
@@ -755,7 +762,7 @@ public final class StringUtil{
                 tokens.add(token);
             }
         }
-        return ConvertUtil.toArray(tokens, String.class);
+        return toArray(tokens, String.class);
     }
 
     // [end]

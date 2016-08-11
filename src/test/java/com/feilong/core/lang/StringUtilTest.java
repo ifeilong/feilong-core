@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -306,6 +307,8 @@ public class StringUtilTest{
         assertEquals("", StringUtil.substringWithoutLast(null, "222"));
     }
 
+    //******************com.feilong.core.lang.StringUtil.tokenizeToStringArray(String, String, boolean, boolean)**************************************************************************************
+
     /**
      * Tokenize to string array2.
      */
@@ -313,20 +316,56 @@ public class StringUtilTest{
     public void tokenizeToStringArray2(){
         String str = "jin.xin  @ @aha ,@ala;";
         String delimiters = "@";
-        String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters, false, false);
-        assertArrayEquals(toArray("jin.xin  ", " ", "aha ,", "ala;"), tokenizeToStringArray);
+        assertArrayEquals(toArray("jin.xin  ", " ", "aha ,", "ala;"), StringUtil.tokenizeToStringArray(str, delimiters, false, false));
     }
+
+    @Test
+    public void tokenizeToStringArray22(){
+        String delimiters = "@";
+        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray(null, delimiters, false, false));
+    }
+
+    //    @Test
+    //    public void tokenizeToStringArray221(){
+    //        String delimiters = " ";
+    //        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters, false, false));
+    //    }
+    //
+    //    @Test
+    //    public void tokenizeToStringArray222(){
+    //        String delimiters = ",";
+    //        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters, false, false));
+    //    }
+    //*****************com.feilong.core.lang.StringUtil.tokenizeToStringArray(String, String)************************************************************************************
 
     /**
      * Tokenize to string array1.
      */
     @Test
-    public void tokenizeToStringArray1(){
+    public void tokenizeToStringArray(){
         String str = "jin.xin  feilong ,jinxin;venusdrogon;jim ";
         String delimiters = ";, .";
-        String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(str, delimiters);
+        assertArrayEquals(
+                        toArray("jin", "xin", "feilong", "jinxin", "venusdrogon", "jim"),
+                        StringUtil.tokenizeToStringArray(str, delimiters));
+    }
 
-        assertArrayEquals(toArray("jin", "xin", "feilong", "jinxin", "venusdrogon", "jim"), tokenizeToStringArray);
+    @Test
+    public void tokenizeToStringArray1(){
+        String delimiters = ";, .";
+        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray(null, delimiters));
+    }
+
+    @Test
+    public void tokenizeToStringArray11(){
+        String delimiters = " ";
+        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters));
+    }
+
+    @Test
+    public void tokenizeToStringArray112(){
+        String delimiters = ",";
+        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters));
     }
 
 }
