@@ -17,73 +17,103 @@ package com.feilong.core.text;
 
 import static org.junit.Assert.assertEquals;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The Class NumberFormatUtilTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.7
  */
 public class NumberFormatUtilTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(NumberFormatUtilTest.class);
-
-    /**
-     * Test method for {@link com.feilong.core.text.NumberFormatUtil#format(java.lang.Number, java.lang.String)}.
-     */
+    //***************NumberFormatUtil.format(Number, String)************************************
     @Test
     public void testFormat(){
         assertEquals("26", NumberFormatUtil.format(25.5, "#####"));
         assertEquals("RP 26", NumberFormatUtil.format(25.5, "RP #####"));
     }
 
-    /**
-     * Test format1.
-     */
     @Test(expected = NullPointerException.class)
-    public void testFormat1(){
+    public void testFormatNullValue(){
         NumberFormatUtil.format(null, "#####");
     }
 
-    /**
-     * Test format2.
-     */
     @Test(expected = NullPointerException.class)
-    public void testFormat2(){
+    public void testFormatNullNumberPattern(){
         NumberFormatUtil.format(25, null);
     }
 
-    /**
-     * Test format3.
-     */
     @Test(expected = IllegalArgumentException.class)
-    public void testFormat3(){
+    public void testFormatBlankNumberPattern(){
+        NumberFormatUtil.format(25, "");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFormatBlankNumberPattern1(){
         NumberFormatUtil.format(25, " ");
     }
 
-    /**
-     * Convert number to string2.
-     */
-    @Test
-    public void testConvertNumberToString2(){
-        DecimalFormat decimalFormat = new DecimalFormat("00");
-        decimalFormat.setRoundingMode(RoundingMode.CEILING);
-        // decimalFormat.setMaximumFractionDigits(2);
-        // decimalFormat.setMinimumFractionDigits(2);
-        // maxFractionDigits
+    //*************NumberFormatUtil.format(Number, String, RoundingMode)***************************************
 
-        BigDecimal number = BigDecimal.valueOf(88.50);
-        number.setScale(2, BigDecimal.ROUND_HALF_UP);
-
-        LOGGER.debug(number.toString());
-        LOGGER.debug(decimalFormat.format(number));
+    @Test(expected = NullPointerException.class)
+    public void testFormatNullValue1(){
+        NumberFormatUtil.format(null, "#####", RoundingMode.HALF_UP);
     }
+
+    @Test(expected = NullPointerException.class)
+    public void testFormatNullNumberPattern1(){
+        NumberFormatUtil.format(25, null, RoundingMode.HALF_UP);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFormatBlankNumberPattern2(){
+        NumberFormatUtil.format(25, "", RoundingMode.HALF_UP);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFormatBlankNumberPattern21(){
+        NumberFormatUtil.format(25, " ", RoundingMode.HALF_UP);
+    }
+
+    @Test
+    public void testFormat2(){
+        assertEquals("26", NumberFormatUtil.format(25.5, "#####", RoundingMode.HALF_UP));
+        assertEquals("RP 26", NumberFormatUtil.format(25.5, "RP #####", RoundingMode.HALF_UP));
+    }
+
+    @Test
+    public void testFormat32(){
+        assertEquals("1.2", NumberFormatUtil.format(1.15, "#####.#", RoundingMode.HALF_EVEN));
+        assertEquals("1.2", NumberFormatUtil.format(1.25, "#####.#", RoundingMode.HALF_EVEN));
+        assertEquals("1.3", NumberFormatUtil.format(1.251, "#####.#", RoundingMode.HALF_EVEN));
+
+        assertEquals("-1.2", NumberFormatUtil.format(-1.15, "#####.#", RoundingMode.HALF_EVEN));
+        assertEquals("-1.2", NumberFormatUtil.format(-1.25, "#####.#", RoundingMode.HALF_EVEN));
+        assertEquals("-1.3", NumberFormatUtil.format(-1.251, "#####.#", RoundingMode.HALF_EVEN));
+    }
+
+    @Test
+    public void testFormat321(){
+        assertEquals("1.2", NumberFormatUtil.format(1.15, "#####.#", null));
+        assertEquals("1.3", NumberFormatUtil.format(1.25, "#####.#", null));
+        assertEquals("1.3", NumberFormatUtil.format(1.251, "#####.#", null));
+
+        assertEquals("-1.2", NumberFormatUtil.format(-1.15, "#####.#", null));
+        assertEquals("-1.3", NumberFormatUtil.format(-1.25, "#####.#", null));
+        assertEquals("-1.3", NumberFormatUtil.format(-1.251, "#####.#", null));
+    }
+
+    @Test
+    public void testFormat111(){
+        assertEquals("1.2", NumberFormatUtil.format(1.15, "#####.#"));
+        assertEquals("1.3", NumberFormatUtil.format(1.25, "#####.#"));
+        assertEquals("1.3", NumberFormatUtil.format(1.251, "#####.#"));
+
+        assertEquals("-1.2", NumberFormatUtil.format(-1.15, "#####.#"));
+        assertEquals("-1.3", NumberFormatUtil.format(-1.25, "#####.#"));
+        assertEquals("-1.3", NumberFormatUtil.format(-1.251, "#####.#"));
+    }
+
 }

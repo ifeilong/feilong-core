@@ -58,19 +58,24 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
  * <h3><a name="RoundingMode">JAVA 8种舍入法:</a></h3>
  * 
  * <blockquote>
+ * 
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
+ * 
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link RoundingMode#UP}</td>
  * <td>远离零的方向舍入. 向绝对值最大的方向舍入,只要舍弃位非0即进位.</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link RoundingMode#DOWN}</td>
  * <td>靠近零的方向舍入,向绝对值最小的方向输入,所有的位都要舍弃,不存在进位情况.</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link RoundingMode#CEILING}</td>
  * <td>靠近正无穷方向舍入  向正无穷方向舍入 向正最大方向靠拢.<br>
@@ -78,21 +83,25 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
  * 若为负数,舍入行为类似于ROUND_DOWN.<br>
  * <span style="color:red">Math.round()方法就是使用的此模式.</span></td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link RoundingMode#FLOOR}</td>
  * <td>靠近负无穷方向舍入  向负无穷方向舍入 向负无穷方向靠拢.<br>
  * 若是正数,舍入行为类似于ROUND_DOWN;<br>
  * 若为负数,舍入行为类似于ROUND_UP.</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link RoundingMode#HALF_UP}</td>
  * <td>四舍五入,生活中的舍入方法.<br>
  * 最近数字舍入(5进).<span style="color:red">这是我们最经典的四舍五入</span>.</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link RoundingMode#HALF_DOWN}</td>
  * <td>五舍六入,最近数字舍入(5舍). 在这里5是要舍弃的.</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link RoundingMode#HALF_EVEN}</td>
  * <td>精确舍入,银行家舍入法. <br>
@@ -100,11 +109,43 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
  * 以下例子为保留小数点1位,那么这种舍入方式下的结果:  <br>
  * {@code 1.15 返回 1.2} {@code 1.25 返回  1.2}</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link RoundingMode#UNNECESSARY}</td>
  * <td>无需舍入</td>
  * </tr>
+ * 
  * </table>
+ * 
+ * <a name="RoundingMode_HALF_EVEN"></a>
+ * <h3>关于 {@link RoundingMode#HALF_EVEN}:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <pre class="code">
+ * 该算法是由美国银行家提出了，主要用于修正采用上面四舍五入规则而产生的误差。如下：
+ * 
+ * 舍去位的数值小于5时，直接舍去。
+ * 舍去位的数值大于5时，进位后舍去。
+ * 当舍去位的数值等于5时，
+ *          若5后面还有其他非0数值，则进位后舍去，
+ *          若5后面是0时，则根据5前一位数的奇偶性来判断，奇数进位，偶数舍去。
+ * </pre>
+ * 
+ * <b>对于上面的规则我们举例说明:</b>
+ * 
+ * <pre class="code">
+ * 11.556 = 11.56 ------六入
+ * 11.554 = 11.55 -----四舍
+ * 
+ * 11.5551 = 11.56 -----五后有数进位
+ * 
+ * 11.545 = 11.54 -----五后无数，若前位为偶数应舍去
+ * 11.555 = 11.56 -----五后无数，若前位为奇数应进位
+ * </pre>
+ * 
+ * </blockquote>
+ * 
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -204,7 +245,7 @@ public final class NumberUtil{
         Validate.isTrue(!divisor.equals(ZERO), "two can't be zero!");
 
         // 不能直接one.divide(two),应该指定scale和roundingMode,保证对于无限小数有足够的范围来表示结果.
-        // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result
+        // 避免 exception:Non-terminating decimal expansion; no exact representable decimal result (无法结束的除法表达式；没有精确的除结果)
         return toBigDecimal(one).divide(divisor, scale, roundingMode);
     }
 
@@ -302,7 +343,11 @@ public final class NumberUtil{
     }
 
     /**
-     * 数字格式化,和 {@link NumberFormatUtil#format(Number, String)}方法相等 .
+     * 数字格式化 .
+     * 
+     * <p>
+     * 调用 {@link NumberFormatUtil#format(Number, String)},当遇到需要舍入的时候,使用常用的 {@link RoundingMode#HALF_UP}
+     * </p>
      * 
      * <h3>示例:</h3>
      * 

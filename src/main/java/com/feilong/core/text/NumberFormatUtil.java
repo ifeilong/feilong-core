@@ -15,6 +15,9 @@
  */
 package com.feilong.core.text;
 
+import static java.math.RoundingMode.HALF_UP;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+
 import java.math.RoundingMode;
 import java.text.ChoiceFormat;
 import java.text.DecimalFormat;
@@ -64,11 +67,29 @@ public final class NumberFormatUtil{
      * <p>
      * 该方法使用 {@link java.math.RoundingMode#HALF_UP}
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberFormatUtil.format(1.15, "#####.#")     =   1.2
+     * NumberFormatUtil.format(1.25, "#####.#")     =   1.3
+     * NumberFormatUtil.format(1.251, "#####.#")    =   1.3
+     * 
+     * NumberFormatUtil.format(-1.15, "#####.#")    =   -1.2
+     * NumberFormatUtil.format(-1.25, "#####.#")    =   -1.3
+     * NumberFormatUtil.format(-1.251, "#####.#")   =   -1.3
+     * 
+     * NumberFormatUtil.format(25.5, "RP #####")    =   RP 26
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param value
      *            the value
      * @param numberPattern
-     *            the pattern {@link NumberPattern}
+     *            格式化数字格式,可以参见或者使用{@link NumberPattern}
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -78,19 +99,56 @@ public final class NumberFormatUtil{
      * @see #format(Number, String, RoundingMode)
      */
     public static String format(Number value,String numberPattern){
-        RoundingMode roundingMode = RoundingMode.HALF_UP;
-        return format(value, numberPattern, roundingMode);
+        return format(value, numberPattern, HALF_UP);
     }
 
     /**
      * 将 {@link Number} 使用 {@link RoundingMode} <code>numberPattern</code>格式化.
+     * 
+     * <h3>关于参数 <code>roundingMode</code></h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 虽然{@link DecimalFormat},默认使用的是银行家舍入法 {@link RoundingMode#HALF_EVEN},参见
+     * <a href="../util/NumberUtil.html#RoundingMode_HALF_EVEN">关于 RoundingMode#HALF_EVEN</a>
+     * </p>
+     * 
+     * <p>
+     * 但是我们常用标准的四舍五入,为了保持和 {@link #format(Number, String)}一致性,如果 roundingMode 为null,使用常用的 {@link RoundingMode#HALF_UP}来进行格式化
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberFormatUtil.format(1.15, "#####.#",null)     =   1.2
+     * NumberFormatUtil.format(1.25, "#####.#",null)     =   1.3
+     * NumberFormatUtil.format(1.251, "#####.#",null)    =   1.3
+     * 
+     * NumberFormatUtil.format(-1.15, "#####.#",null)    =   -1.2
+     * NumberFormatUtil.format(-1.25, "#####.#",null)    =   -1.3
+     * NumberFormatUtil.format(-1.251, "#####.#",null)   =   -1.3
+     * 
+     * 
+     * NumberFormatUtil.format(1.15, "#####.#", RoundingMode.HALF_EVEN)     =   1.2
+     * NumberFormatUtil.format(1.25, "#####.#", RoundingMode.HALF_EVEN)     =   1.2
+     * NumberFormatUtil.format(1.251, "#####.#", RoundingMode.HALF_EVEN)    =   1.3
+     * 
+     * NumberFormatUtil.format(-1.15, "#####.#", RoundingMode.HALF_EVEN)    =   -1.2
+     * NumberFormatUtil.format(-1.25, "#####.#", RoundingMode.HALF_EVEN)    =   -1.2
+     * NumberFormatUtil.format(-1.251, "#####.#", RoundingMode.HALF_EVEN)   =   -1.3
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param value
      *            the value
      * @param numberPattern
-     *            the pattern {@link NumberPattern}
+     *            格式化数字格式,可以参见或者使用{@link NumberPattern}
      * @param roundingMode
-     *            四舍五入的方法{@link RoundingMode}
+     *            舍入模式{@link RoundingMode},如果 为null,使用常用的 {@link RoundingMode#HALF_UP}
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -103,12 +161,8 @@ public final class NumberFormatUtil{
 
         //该构造方法内部 调用了applyPattern(pattern, false)
         DecimalFormat decimalFormat = new DecimalFormat(numberPattern);
+        decimalFormat.setRoundingMode(defaultIfNull(roundingMode, HALF_UP));
 
-        // 如果不设置默认使用的是 RoundingMode.HALF_EVEN  精确舍入,银行家舍入法.四舍六入,五分两种情况.如果前一位为奇数,则入位,否则舍去.以下例子为保留小数点1位,那么这种舍入方式下的结果.
-        // 1.15>1.2    1.25>1.2 
-        if (null != roundingMode){
-            decimalFormat.setRoundingMode(roundingMode);
-        }
         String result = decimalFormat.format(value);
         LOGGER.trace("input:[{}],with:[{}]=[{}],localizedPattern:[{}]", value, numberPattern, result, decimalFormat.toLocalizedPattern());
         return result;
