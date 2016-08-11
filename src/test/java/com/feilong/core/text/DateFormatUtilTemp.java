@@ -23,6 +23,9 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * {@link DateFormat}是日期/时间格式化子类的抽象类.
@@ -48,11 +51,27 @@ import org.apache.commons.lang3.Validate;
 @Deprecated
 public final class DateFormatUtilTemp{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateFormatUtilTemp.class);
+
     /** Don't let anyone instantiate this class. */
     private DateFormatUtilTemp(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * Parses the.
+     */
+    @Test
+    public void parse(){
+        Date now = new Date();
+        LOGGER.debug(now.toString());
+        Date now1 = DateFormatUtilTemp.parse(now.toString(), "EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        LOGGER.debug(now1.toString());
+
+        LOGGER.debug("{}", DateFormatUtilTemp.parse("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZZ"));
     }
 
     /**
