@@ -869,8 +869,8 @@ public final class BeanUtil{
      * New dyna bean.
      * 
      * <p>
-     * {@link LazyDynaBean}不需要首先创建一个包含期望的数据结构的DynaClass，就能向LazyDynaBean中填充我们任意想填充的数据。<br>
-     * {@link LazyDynaBean}内部会根据我们填充进的数据（即使是一个map中的一个key-value pair，LazyDynaBean也会创建一个map的metadata），创建metadata的。<br>
+     * {@link LazyDynaBean}不需要首先创建一个包含期望的数据结构的DynaClass,就能向LazyDynaBean中填充我们任意想填充的数据。<br>
+     * {@link LazyDynaBean}内部会根据我们填充进的数据（即使是一个map中的一个key-value pair,LazyDynaBean也会创建一个map的metadata）,创建metadata的。<br>
      * 
      * 程序内部,默认使用的是 {@link org.apache.commons.beanutils.LazyDynaClass}
      * </p>

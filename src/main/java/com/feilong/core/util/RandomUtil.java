@@ -88,7 +88,7 @@ public final class RandomUtil{
         Validate.notNull(maxValue, "maxValue can't be null!");
         // 该值大于等于 0.0 且小于 1.0 正号的 double 值
         double random = JVM_RANDOM.nextDouble();
-        return (long) Math.floor(random * maxValue.longValue());//返回最大的（最接近正无穷大）double 值，该值小于等于参数，并等于某个整数
+        return (long) Math.floor(random * maxValue.longValue());//返回最大的（最接近正无穷大）double 值,该值小于等于参数,并等于某个整数
     }
 
     /**

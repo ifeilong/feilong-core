@@ -39,7 +39,7 @@ public final class URIComponents{
      * http协议<code>{@value}</code>.
      * 
      * <p>
-     * 超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。
+     * 超文本传输协议（HTTP,HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。
      * </p>
      */
     public static final String SCHEME_HTTP  = "http";
@@ -49,18 +49,18 @@ public final class URIComponents{
      * 
      * <p>
      * 全称：Hyper Text Transfer Protocol over Secure Socket Layer; <br>
-     * 是以安全为目标的HTTP通道，简单讲是HTTP的安全版。<br>
-     * 即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。
+     * 是以安全为目标的HTTP通道,简单讲是HTTP的安全版。<br>
+     * 即HTTP下加入SSL层,HTTPS的安全基础是SSL,因此加密的详细内容就需要SSL。
      * </p>
      * 
      * <h3>HTTPS和HTTP的区别主要为以下四点:</h3>
      * 
      * <blockquote>
      * <ol>
-     * <li>https协议需要到ca申请证书，一般免费证书很少，需要交费。</li>
-     * <li>http是超文本传输协议，信息是明文传输，https 则是具有安全性的ssl加密传输协议。</li>
-     * <li>http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</li>
-     * <li>http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</li>
+     * <li>https协议需要到ca申请证书,一般免费证书很少,需要交费。</li>
+     * <li>http是超文本传输协议,信息是明文传输,https 则是具有安全性的ssl加密传输协议。</li>
+     * <li>http和https使用的是完全不同的连接方式,用的端口也不一样,前者是80,后者是443。</li>
+     * <li>http的连接很简单,是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议,比http协议安全。</li>
      * </ol>
      * </blockquote>
      */

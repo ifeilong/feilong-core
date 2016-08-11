@@ -313,7 +313,7 @@ public final class ResourceBundleUtil{
      * memcached.minconnection=5
      * memcached.maxconnection=250
      * 
-     * #设置主线程睡眠时间，每30秒苏醒一次，维持连接池大小
+     * #设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小
      * memcached.maintSleep=30
      * 
      * #关闭套接字缓存
@@ -433,7 +433,7 @@ public final class ResourceBundleUtil{
      * memcached.minconnection=5
      * memcached.maxconnection=250
      * 
-     * #设置主线程睡眠时间，每30秒苏醒一次，维持连接池大小
+     * #设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小
      * memcached.maintSleep=30
      * 
      * #关闭套接字缓存
