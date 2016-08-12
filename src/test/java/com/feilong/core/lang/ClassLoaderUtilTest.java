@@ -79,5 +79,4 @@ public class ClassLoaderUtilTest{
         // 获得编译类根目录
         LOGGER.debug(klass.getResource("/").getPath());///E:/Workspaces/feilong/feilong-core/target/test-classes/
     }
-
 }

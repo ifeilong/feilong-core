@@ -20,9 +20,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.AbstractBooleanParameterizedTest;
-import com.feilong.core.TestUtil;
 import com.feilong.core.util.RegexUtil;
+import com.feilong.test.AbstractBooleanParameterizedTest;
+import com.feilong.test.TestUtil;
 
 import static com.feilong.core.RegexPattern.EMAIL;
 

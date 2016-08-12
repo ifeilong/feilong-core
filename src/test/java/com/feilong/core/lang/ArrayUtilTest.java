@@ -74,11 +74,8 @@ public class ArrayUtilTest{
         assertSame(10, strs.length);
     }
 
-    /**
-     * Test is contain.
-     */
     @Test
-    public void testContain(){
+    public void testContains(){
         assertEquals(true, ArrayUtils.contains(new Integer[] { 1, 223 }, 1));
         assertEquals(true, ArrayUtils.contains(new Long[] { 1L, 223L }, 1L));
 

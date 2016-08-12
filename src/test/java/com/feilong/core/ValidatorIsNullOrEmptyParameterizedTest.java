@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.test.AbstractBooleanParameterizedTest;
+
 import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
@@ -39,6 +41,9 @@ public class ValidatorIsNullOrEmptyParameterizedTest extends AbstractBooleanPara
         return ValidatorData.buildData();
     }
 
+    /**
+     * Test is null or empty.
+     */
     @Test
     public void testIsNullOrEmpty(){
         assertEquals(expectedValue, isNullOrEmpty(input));

@@ -30,6 +30,9 @@ import static com.feilong.core.DatePattern.yyyy;
  */
 public class MessageFormatUtilTest{
 
+    /**
+     * Test format.
+     */
     @Test
     public void testFormat(){
         assertEquals("name=张三jinaxin", MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin"));
@@ -37,6 +40,9 @@ public class MessageFormatUtilTest{
         assertEquals("name=张三2000-1-1axin", MessageFormatUtil.format("name=张三{0,date}a{1}", toDate("2000", yyyy), "xin"));
     }
 
+    /**
+     * Test format 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testFormat1(){
         MessageFormatUtil.format(null, "jin", "xin");

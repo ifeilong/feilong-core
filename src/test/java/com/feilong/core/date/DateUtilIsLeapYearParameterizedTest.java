@@ -22,7 +22,7 @@ import java.util.Arrays;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.AbstractBooleanParameterizedTest;
+import com.feilong.test.AbstractBooleanParameterizedTest;
 
 /**
  * The Class DateUtilIsLeapYearTest.

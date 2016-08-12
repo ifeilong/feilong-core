@@ -27,8 +27,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.HttpMethodTestType;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.store.system.Menu;
 import com.feilong.test.User;
 import com.feilong.tools.AbstractJsonTest;

@@ -13,36 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core;
+package com.feilong.test;
 
-import org.junit.runners.Parameterized.Parameter;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
- * 两个参数 和一个返回结果的 ParameterizedTest.
+ * The Class AbstractParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @param <I>
- *            the generic type
- * @param <E>
- *            the element type
- * @param <T>
- *            the generic type
- * @since 1.8.5
+ * @since 1.8.3
  */
-public abstract class AbstractTwoParamsAndOneResultParameterizedTest<I, E, T> extends AbstractParameterizedTest{
-
-    //必须是 public 访问修饰符
-
-    /** 第一个参数. */
-    @Parameter(value = 0)
-    public I input1;
-
-    /** 第二个参数. */
-    @Parameter(value = 1)
-    public T input2;
-
-    /** 期望值. */
-    @Parameter(value = 2)
-    public E expectedValue;
+@RunWith(Parameterized.class)
+public abstract class AbstractParameterizedTest{
 
 }

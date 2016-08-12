@@ -26,8 +26,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.feilong.core.Repeat;
-import com.feilong.core.RepeatRule;
+import com.feilong.test.Repeat;
+import com.feilong.test.RepeatRule;
 
 import static com.feilong.core.Alphabet.DECIMAL;
 import static com.feilong.core.Alphabet.DECIMAL_AND_LETTERS;

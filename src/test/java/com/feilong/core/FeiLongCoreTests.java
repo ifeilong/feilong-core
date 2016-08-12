@@ -30,8 +30,11 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
 @SuiteClasses({
                 AlphabetTest.class,
                 CharsetTypeTest.class,
+
                 Slf4jUtilTest.class,
+
                 TimeIntervalTest.class,
+
                 ValidatorTest.class,
                 ValidatorIsNullOrEmptyParameterizedTest.class,
                 ValidatorIsNotNullOrEmptyParameterizedTest.class, })

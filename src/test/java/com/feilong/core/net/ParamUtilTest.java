@@ -65,6 +65,9 @@ public class ParamUtilTest{
                         ParamUtil.toNaturalOrderingQueryString(map));
     }
 
+    /**
+     * Test to natural ordering string 3.
+     */
     @Test
     public void testToNaturalOrderingString3(){
         Map<String, String> map = new HashMap<String, String>();
@@ -75,6 +78,9 @@ public class ParamUtilTest{
         LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
     }
 
+    /**
+     * Test to natural ordering string 1.
+     */
     @Test
     public void testToNaturalOrderingString1(){
         assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(null));

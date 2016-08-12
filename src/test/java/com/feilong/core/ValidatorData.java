@@ -20,17 +20,24 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import com.feilong.test.TestUtil;
 import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toEnumeration;
 
 /**
- * 
+ * The Class ValidatorData.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5
  */
 public class ValidatorData{
 
+    /**
+     * Builds the data.
+     *
+     * @return the iterable
+     */
     public static Iterable<Object[]> buildData(){
         List<String> emptyList = new ArrayList<String>();
         Object[] nullOrEmptyElement = {

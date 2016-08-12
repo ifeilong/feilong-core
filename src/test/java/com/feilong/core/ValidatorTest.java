@@ -33,6 +33,9 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  */
 public class ValidatorTest{
 
+    /**
+     * Test filter.
+     */
     @Test
     public void testFilter(){
         int[] i = {};
@@ -43,6 +46,9 @@ public class ValidatorTest{
         assertEquals(true, isNullOrEmpty(users));
     }
 
+    /**
+     * Test filter 1.
+     */
     @Test
     public void testFilter1(){
         assertEquals(true, StringUtils.isBlank(new StringBuilder("  ")));

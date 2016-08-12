@@ -23,7 +23,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 

@@ -28,6 +28,9 @@ import org.junit.Test;
  */
 public class NumberFormatUtilTest{
 
+    /**
+     * Test format.
+     */
     //***************NumberFormatUtil.format(Number, String)************************************
     @Test
     public void testFormat(){
@@ -35,21 +38,33 @@ public class NumberFormatUtilTest{
         assertEquals("RP 26", NumberFormatUtil.format(25.5, "RP #####"));
     }
 
+    /**
+     * Test format null value.
+     */
     @Test(expected = NullPointerException.class)
     public void testFormatNullValue(){
         NumberFormatUtil.format(null, "#####");
     }
 
+    /**
+     * Test format null number pattern.
+     */
     @Test(expected = NullPointerException.class)
     public void testFormatNullNumberPattern(){
         NumberFormatUtil.format(25, null);
     }
 
+    /**
+     * Test format blank number pattern.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testFormatBlankNumberPattern(){
         NumberFormatUtil.format(25, "");
     }
 
+    /**
+     * Test format blank number pattern 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testFormatBlankNumberPattern1(){
         NumberFormatUtil.format(25, " ");
@@ -57,32 +72,50 @@ public class NumberFormatUtilTest{
 
     //*************NumberFormatUtil.format(Number, String, RoundingMode)***************************************
 
+    /**
+     * Test format null value 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testFormatNullValue1(){
         NumberFormatUtil.format(null, "#####", RoundingMode.HALF_UP);
     }
 
+    /**
+     * Test format null number pattern 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testFormatNullNumberPattern1(){
         NumberFormatUtil.format(25, null, RoundingMode.HALF_UP);
     }
 
+    /**
+     * Test format blank number pattern 2.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testFormatBlankNumberPattern2(){
         NumberFormatUtil.format(25, "", RoundingMode.HALF_UP);
     }
 
+    /**
+     * Test format blank number pattern 21.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testFormatBlankNumberPattern21(){
         NumberFormatUtil.format(25, " ", RoundingMode.HALF_UP);
     }
 
+    /**
+     * Test format 2.
+     */
     @Test
     public void testFormat2(){
         assertEquals("26", NumberFormatUtil.format(25.5, "#####", RoundingMode.HALF_UP));
         assertEquals("RP 26", NumberFormatUtil.format(25.5, "RP #####", RoundingMode.HALF_UP));
     }
 
+    /**
+     * Test format 32.
+     */
     @Test
     public void testFormat32(){
         assertEquals("1.2", NumberFormatUtil.format(1.15, "#####.#", RoundingMode.HALF_EVEN));
@@ -94,6 +127,9 @@ public class NumberFormatUtilTest{
         assertEquals("-1.3", NumberFormatUtil.format(-1.251, "#####.#", RoundingMode.HALF_EVEN));
     }
 
+    /**
+     * Test format 321.
+     */
     @Test
     public void testFormat321(){
         assertEquals("1.2", NumberFormatUtil.format(1.15, "#####.#", null));
@@ -105,6 +141,9 @@ public class NumberFormatUtilTest{
         assertEquals("-1.3", NumberFormatUtil.format(-1.251, "#####.#", null));
     }
 
+    /**
+     * Test format 111.
+     */
     @Test
     public void testFormat111(){
         assertEquals("1.2", NumberFormatUtil.format(1.15, "#####.#"));

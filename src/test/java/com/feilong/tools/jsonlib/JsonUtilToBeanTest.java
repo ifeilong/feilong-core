@@ -28,7 +28,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.HttpMethodTestType;
+import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
