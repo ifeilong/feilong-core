@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
+import com.feilong.core.TestUtil;
 
 /**
  * The Class ObjectUtilIsArrayParameterizedTest.
@@ -44,7 +45,7 @@ public class ObjectUtilIsArrayParameterizedTest extends AbstractBooleanParameter
                             new String[0] };
 
         Object[] invalids = { 1 };
-        return toList(valids, invalids);
+        return TestUtil.toDataList(valids, invalids);
     }
 
     /**

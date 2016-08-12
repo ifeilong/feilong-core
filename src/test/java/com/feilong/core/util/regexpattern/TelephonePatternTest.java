@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
+import com.feilong.core.TestUtil;
 import com.feilong.core.util.RegexUtil;
 
 import static com.feilong.core.RegexPattern.TELEPHONE;
@@ -47,7 +48,7 @@ public class TelephonePatternTest extends AbstractBooleanParameterizedTest<Strin
                               "02021-86771588-888", //区号3-4位 太长了
                               "020-86771588888", //电话号码6-8位 太长了
                               "021-86775", };
-        return toList(valids, invalids);
+        return TestUtil.toDataList(valids, invalids);
     }
 
     @Test

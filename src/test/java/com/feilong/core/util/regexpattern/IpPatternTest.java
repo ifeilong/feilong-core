@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
+import com.feilong.core.TestUtil;
 import com.feilong.core.util.RegexUtil;
 
 import static com.feilong.core.RegexPattern.IP;
@@ -44,7 +45,7 @@ public class IpPatternTest extends AbstractBooleanParameterizedTest<String, Bool
 
         String[] invalids = { "venusdrogon@163.com", "127.0.0.*", "327.0.0.1" };
 
-        return toList(valids, invalids);
+        return TestUtil.toDataList(valids, invalids);
     }
 
     @Test

@@ -15,9 +15,6 @@
  */
 package com.feilong.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.runners.Parameterized.Parameter;
 
 /**
@@ -46,24 +43,4 @@ public abstract class AbstractBooleanParameterizedTest<I, E> extends AbstractPar
     @Parameter(value = 1)
     public E expectedValue;
 
-    /**
-     * To list.
-     *
-     * @param valids
-     *            the valids
-     * @param invalids
-     *            the invalids
-     * @return the list
-     * @since 1.6.4
-     */
-    protected static List<Object[]> toList(Object[] valids,Object[] invalids){
-        List<Object[]> list = new ArrayList<Object[]>();
-        for (Object valid : valids){
-            list.add(new Object[] { valid, true });
-        }
-        for (Object invalid : invalids){
-            list.add(new Object[] { invalid, false });
-        }
-        return list;
-    }
 }

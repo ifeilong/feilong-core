@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
+import com.feilong.core.TestUtil;
 import com.feilong.core.util.RegexUtil;
 
 import static com.feilong.core.RegexPattern.EMAIL;
@@ -66,7 +67,7 @@ public class EmailPatternTest extends AbstractBooleanParameterizedTest<String, B
                               "mkyong@mkyong@gmail.com",
                               "mkyong@gmail.com.1a" };
 
-        return toList(valids, invalids);
+        return TestUtil.toDataList(valids, invalids);
     }
 
     /**

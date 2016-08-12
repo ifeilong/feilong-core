@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
+import com.feilong.core.TestUtil;
 import com.feilong.core.util.RegexUtil;
 
 import static com.feilong.core.RegexPattern.TELEPHONE_MUST_AREACODE;
@@ -51,7 +52,7 @@ public class TelephoneMustAreaCodePatternTest extends AbstractBooleanParameteriz
                               "020-86771588888", //电话号码6-8位 太长了
                               "021-86775" //电话号码 需要 6-8位
         };
-        return toList(valids, invalids);
+        return TestUtil.toDataList(valids, invalids);
     }
 
     @Test

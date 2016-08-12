@@ -17,16 +17,10 @@ package com.feilong.core;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.User;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -64,7 +58,6 @@ public class ValidatorTest{
     /**
      * Name.
      */
-    @SuppressWarnings("cast")
     @Test
     public void name(){
         assertEquals(true, new Integer[][] {} instanceof Object[]);
@@ -76,67 +69,4 @@ public class ValidatorTest{
         assertEquals(true, aObject instanceof int[]);
     }
 
-    /**
-     * Test method for {@link com.feilong.core.Validator#isNullOrEmpty(java.lang.Object)}.
-     */
-    @Test
-    public void testIsNullOrEmpty(){
-        List<String> list = new ArrayList<String>();
-
-        assertEquals(true, isNullOrEmpty(""));
-        assertEquals(true, isNullOrEmpty("   "));
-        assertEquals(true, isNullOrEmpty(null));
-        assertEquals(true, isNullOrEmpty(list));
-        assertEquals(true, isNullOrEmpty(new LinkedHashMap<String, String>()));
-
-        // **********Array*********************************
-        assertEquals(true, isNullOrEmpty(new String[] {}));
-        assertEquals(false, isNullOrEmpty(new Integer[] { 2 }));
-        assertEquals(true, isNullOrEmpty(new Integer[][] {}));
-
-        assertEquals(false, isNullOrEmpty(new Long[] { 2L }));
-        assertEquals(true, isNullOrEmpty(new User[] {}));
-
-        assertEquals(true, isNullOrEmpty(new int[] {}));
-        assertEquals(false, isNullOrEmpty(new int[] { 1, 2 }));
-
-        assertEquals(true, isNullOrEmpty(new double[] {}));
-        assertEquals(false, isNullOrEmpty(new double[] { 1.2d }));
-
-        assertEquals(true, isNullOrEmpty(new long[] {}));
-        assertEquals(false, isNullOrEmpty(new long[] { 200L }));
-
-        assertEquals(true, isNullOrEmpty(new float[] {}));
-        assertEquals(false, isNullOrEmpty(new float[] { 5.8f }));
-
-        assertEquals(true, isNullOrEmpty(new boolean[] {}));
-        assertEquals(false, isNullOrEmpty(new boolean[] { true }));
-
-        assertEquals(true, isNullOrEmpty(new byte[] {}));
-
-        assertEquals(true, isNullOrEmpty(new char[] {}));
-        assertEquals(false, isNullOrEmpty(new char[] { 'a' }));
-
-        assertEquals(true, isNullOrEmpty(new short[] {}));
-        assertEquals(false, isNullOrEmpty(new short[] { 5 }));
-
-        assertEquals(true, isNullOrEmpty(list.iterator()));
-        assertEquals(true, isNullOrEmpty(ConvertUtil.toEnumeration(list)));
-        assertEquals(true, isNullOrEmpty(new Iterator<User>(){
-
-            @Override
-            public boolean hasNext(){
-                return false;
-            }
-
-            @Override
-            public User next(){
-                return null;
-            }
-
-            @Override
-            public void remove(){
-            }
-        }));
-    }
 }

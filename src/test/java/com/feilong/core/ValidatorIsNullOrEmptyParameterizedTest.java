@@ -13,41 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.regexpattern;
+package com.feilong.core;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.AbstractBooleanParameterizedTest;
-import com.feilong.core.TestUtil;
-import com.feilong.core.util.RegexUtil;
-
-import static com.feilong.core.RegexPattern.MOBILEPHONE;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
- * 
- * 
+ * The Class ObjectUtilIsPrimitiveArrayParameterizedTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.0
  */
-public class MobilephonePatternTest extends AbstractBooleanParameterizedTest<String, Boolean>{
+public class ValidatorIsNullOrEmptyParameterizedTest extends AbstractBooleanParameterizedTest<Object, Boolean>{
 
     /**
      * Data.
      *
-     * @return the collection
+     * @return the iterable
      */
-    @Parameters(name = "RegexUtil.matches(RegexPattern.MOBILEPHONE, {0})={1}")
+    @Parameters(name = "index:{index}: Validator.isNullOrEmpty({0})={1}")
     public static Iterable<Object[]> data(){
-        String[] valids = { "18501646315" };
-        String[] invalids = {};
-        return TestUtil.toDataList(valids, invalids);
+        return ValidatorData.buildData();
     }
 
     @Test
-    public void matches(){
-        assertEquals(expectedValue, RegexUtil.matches(MOBILEPHONE, input));
+    public void testIsNullOrEmpty(){
+        assertEquals(expectedValue, isNullOrEmpty(input));
     }
 }

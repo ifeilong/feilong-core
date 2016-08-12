@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.AbstractBooleanParameterizedTest;
+import com.feilong.core.TestUtil;
 
 /**
  * The Class ObjectUtilIsPrimitiveArrayParameterizedTest.
@@ -47,7 +48,7 @@ public class ObjectUtilIsPrimitiveArrayParameterizedTest extends AbstractBoolean
                               1L,
                               "1",
                               new String[] { "1", "2" } };
-        return toList(valids, invalids);
+        return TestUtil.toDataList(valids, invalids);
     }
 
     /**

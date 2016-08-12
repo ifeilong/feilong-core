@@ -15,27 +15,29 @@
  */
 package com.feilong.core;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.feilong.tools.slf4j.Slf4jUtilTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
+ * @since 1.8.5
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-                AlphabetTest.class,
-                CharsetTypeTest.class,
-                //HttpMethodTypeTest.class,
-                Slf4jUtilTest.class,
-                TimeIntervalTest.class,
-                ValidatorTest.class,
-                ValidatorIsNullOrEmptyParameterizedTest.class,
-                ValidatorIsNotNullOrEmptyParameterizedTest.class, })
-public class FeiLongCoreTests{
+public class TestUtil{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestUtil.class);
+
+    public static List<Object[]> toDataList(Object[] trueElements,Object[] falseElements){
+        List<Object[]> list = new ArrayList<Object[]>();
+        for (Object trueElement : trueElements){
+            list.add(new Object[] { trueElement, true });
+        }
+        for (Object falseElement : falseElements){
+            list.add(new Object[] { falseElement, false });
+        }
+        return list;
+    }
 }
