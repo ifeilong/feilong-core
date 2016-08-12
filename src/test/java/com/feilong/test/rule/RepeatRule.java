@@ -13,42 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.test;
+package com.feilong.test.rule;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
+/**
+ * The Class RepeatRule.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class RepeatRule implements TestRule{
 
-    private static class RepeatStatement extends Statement{
-
-        private final Statement statement;
-
-        private final int       repeat;
-
-        public RepeatStatement(Statement statement, int repeat){
-            this.statement = statement;
-            this.repeat = repeat;
-        }
-
-        @Override
-        public void evaluate() throws Throwable{
-            for (int i = 0; i < repeat; i++){
-                statement.evaluate();
-            }
-        }
-
-    }
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.junit.rules.TestRule#apply(org.junit.runners.model.Statement, org.junit.runner.Description)
+     */
     @Override
     public Statement apply(Statement statement,Description description){
-        Statement result = statement;
         Repeat repeat = description.getAnnotation(Repeat.class);
         if (repeat != null){
-            int times = repeat.value();
-            result = new RepeatStatement(statement, times);
+            return new RepeatStatement(statement, repeat.value());
         }
-        return result;
+        return statement;
     }
 }
