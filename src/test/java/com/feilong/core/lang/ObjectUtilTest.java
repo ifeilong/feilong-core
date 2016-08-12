@@ -15,14 +15,7 @@
  */
 package com.feilong.core.lang;
 
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-
 import org.junit.Test;
-
-import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
  * The Class ObjectUtilTest.
@@ -30,19 +23,6 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ObjectUtilTest{
-
-    /**
-     * Test default if null or empty.
-     */
-    @Test
-    public void testDefaultIfNullOrEmpty(){
-        assertEquals(1, defaultIfNullOrEmpty(new ArrayList<>(), 1));
-
-        assertEquals("feilong", defaultIfNullOrEmpty("  ", "feilong"));
-        assertEquals("  ", defaultIfNull("  ", "feilong"));
-
-        assertEquals("fl", defaultIfNullOrEmpty("fl", "feilong"));
-    }
 
     /**
      * Test is array 1.

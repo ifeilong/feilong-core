@@ -37,7 +37,7 @@ import com.feilong.core.lang.reflect.FieldUtilTest;
                 ObjectUtilTest.class,
                 ObjectUtilIsArrayParameterizedTest.class,
                 ObjectUtilIsPrimitiveArrayParameterizedTest.class,
-                //ObjectUtilDefaultIfNullOrEmptyParameterizedTest.class,
+                ObjectUtilDefaultIfNullOrEmptyParameterizedTest.class,
                 StringUtilTest.class,
                 StringReplaceParameterizedTest.class, })
 public class FeiLongLangSuiteTests{
