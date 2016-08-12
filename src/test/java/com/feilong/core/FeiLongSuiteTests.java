@@ -34,6 +34,7 @@ import com.feilong.core.util.FeiLongUtilSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({
                 FeiLongCoreTests.class,
+
                 FeiLongBeanSuiteTests.class,
                 FeiLongDateSuiteTests.class,
                 FeiLongLangSuiteTests.class,

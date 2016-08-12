@@ -36,6 +36,7 @@ import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
                 RegexUtilTest.class,
                 ResourceBundleUtilTest.class,
                 SortUtilTest.class,
+
                 FeiLongRegexPatternSuiteTests.class })
 public class FeiLongUtilSuiteTests{
 

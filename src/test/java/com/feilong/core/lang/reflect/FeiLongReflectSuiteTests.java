@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core;
+package com.feilong.core.lang.reflect;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-
-import com.feilong.tools.slf4j.Slf4jUtilTest;
 
 /**
  * 
@@ -27,14 +25,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
  * @since 1.8.3
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-                AlphabetTest.class,
-                CharsetTypeTest.class,
-                Slf4jUtilTest.class,
-                TimeIntervalTest.class,
-                ValidatorTest.class,
-                ValidatorIsNullOrEmptyParameterizedTest.class,
-                ValidatorIsNotNullOrEmptyParameterizedTest.class, })
-public class FeiLongCoreTests{
+@SuiteClasses({ FieldUtilTest.class, })
+public class FeiLongReflectSuiteTests{
 
 }
