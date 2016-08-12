@@ -18,37 +18,26 @@ package com.feilong.core.lang;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractParameterizedTest;
+import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
- * 
+ * The Class StringReplaceParameterizedTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
-public class StringReplaceParameterizedTest extends AbstractParameterizedTest{
+public class StringReplaceParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
 
-    //必须是 public 访问修饰符
-
-    /** The f input. */
-    @Parameter(value = 0) // first data value (0) is default
-    public String text;
-
-    @Parameter(value = 1)
-    public String searchString;
-
-    @Parameter(value = 2)
-    public String replacement;
-
-    /** The f expected. */
-    @Parameter(value = 3)
-    public String expectedValue;
-
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:StringUtil.replace({0}, {1}, {2})={3}")
     public static Iterable<Object[]> data(){
         return toList(
@@ -62,8 +51,11 @@ public class StringReplaceParameterizedTest extends AbstractParameterizedTest{
 
     }
 
+    /**
+     * Replace.
+     */
     @Test
     public void replace(){
-        assertEquals(expectedValue, StringUtil.replace(text, searchString, replacement));
+        assertEquals(expectedValue, StringUtil.replace(input1, input2, input3));
     }
 }

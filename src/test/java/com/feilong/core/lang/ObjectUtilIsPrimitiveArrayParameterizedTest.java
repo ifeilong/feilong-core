@@ -37,7 +37,6 @@ public class ObjectUtilIsPrimitiveArrayParameterizedTest extends AbstractBoolean
      */
     @Parameters(name = "index:{index}: ObjectUtil.isPrimitiveArray({0})={1}")
     public static Iterable<Object[]> data(){
-        int[] i = {};
         Object[] valids = {
                             new int[] {}, //
                             new int[] { 1, 2 },

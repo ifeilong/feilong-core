@@ -15,34 +15,39 @@
  */
 package com.feilong.test;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.runners.Parameterized.Parameter;
 
 /**
- * The Class TestUtil.
+ * 3个参数 和一个返回结果的 ParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @param <I>
+ *            the generic type
+ * @param <E>
+ *            the element type
+ * @param <T>
+ *            the generic type
+ * @param <Y>
  * @since 1.8.5
  */
-public class TestUtil{
+public abstract class AbstractThreeParamsAndOneResultParameterizedTest<I, E, T, Y> extends AbstractParameterizedTest{
 
-    /**
-     * To data list.
-     *
-     * @param trueElements
-     *            the true elements
-     * @param falseElements
-     *            the false elements
-     * @return the list
-     */
-    public static List<Object[]> toDataList(Object[] trueElements,Object[] falseElements){
-        List<Object[]> list = new ArrayList<Object[]>();
-        for (Object trueElement : trueElements){
-            list.add(new Object[] { trueElement, true });
-        }
-        for (Object falseElement : falseElements){
-            list.add(new Object[] { falseElement, false });
-        }
-        return list;
-    }
+    //必须是 public 访问修饰符
+
+    /** 第1个参数. */
+    @Parameter(value = 0)
+    public I input1;
+
+    /** 第2个参数. */
+    @Parameter(value = 1)
+    public T input2;
+
+    /** 第3个参数. */
+    @Parameter(value = 2)
+    public Y input3;
+
+    /** 期望值. */
+    @Parameter(value = 3)
+    public E expectedValue;
+
 }

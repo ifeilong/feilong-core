@@ -27,8 +27,18 @@ import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
+/**
+ * The Class ObjectUtilDefaultIfNullOrEmptyParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ObjectUtilDefaultIfNullOrEmptyParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Object, Object>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ObjectUtil.defaultIfNullOrEmpty({0},{1})={2}")
     public static Iterable<Object[]> data(){
         List<Object[]> list = new ArrayList<>();
