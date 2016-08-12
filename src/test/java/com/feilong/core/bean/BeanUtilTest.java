@@ -45,6 +45,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.entity.VarBean;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.store.member.Address;
 import com.feilong.store.member.Customer;
@@ -368,7 +369,6 @@ public class BeanUtilTest{
     @Test
     public void testLazyDynaBean(){
         DynaBean dynaBean = new LazyDynaBean();
-
         dynaBean.set("first", "1"); //simple
         dynaBean.set("num", "second", "2"); //map
         dynaBean.set("num", "third", "3"); //map

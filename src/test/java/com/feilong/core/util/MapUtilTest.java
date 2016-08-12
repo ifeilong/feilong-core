@@ -15,18 +15,18 @@
  */
 package com.feilong.core.util;
 
+import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.AbstractMap.SimpleEntry;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -70,7 +70,6 @@ public class MapUtilTest{
     @Test
     public void testRemoveKeys(){
         Map<String, String> map = newLinkedHashMap(3);
-
         map.put("name", "feilong");
         map.put("age", "18");
         map.put("country", "china");
@@ -112,7 +111,6 @@ public class MapUtilTest{
         singleValueMap.put("city", "南通市");
 
         Map<String, String[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap);
-        String[] strings = arrayValueMap.get("province");
         assertThat(arrayValueMap, allOf(hasEntry("province", toArray("江苏省")), hasEntry("city", toArray("南通市"))));
     }
 
@@ -171,7 +169,7 @@ public class MapUtilTest{
     //*********************************************************************************************
     @Test
     public void testExtractSubMap(){
-        assertEquals(Collections.emptyMap(), MapUtil.extractSubMap(null, "id"));
+        assertEquals(emptyMap(), MapUtil.extractSubMap(null, "id"));
     }
 
     @Test(expected = NullPointerException.class)
@@ -252,6 +250,17 @@ public class MapUtilTest{
 
         Map<String, Integer> subMapExcludeKeys = MapUtil.getSubMapExcludeKeys(map, "a", "g", "m");
         assertThat(subMapExcludeKeys, allOf(hasEntry("b", 3001), hasEntry("c", 3002), not(hasKey("a")), not(hasKey("g"))));
+    }
+
+    //******************com.feilong.core.util.MapUtil.newHashMap(int)*****************************************
+
+    /**
+     * TestMapUtilTest.
+     */
+    @Test
+    public void testNewHashMap(){
+        Map<Object, Object> newHashMap = MapUtil.newHashMap(100);
+        assertThat(newHashMap.size(), is(0));
     }
 
 }
