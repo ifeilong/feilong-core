@@ -397,8 +397,10 @@ public final class CollectionsUtil{
         return isNotNullOrEmpty(element) && objectCollection.add(element);
     }
 
+    //********************************************************************************************************
+
     /**
-     * 在list中,查找第一个属性 <code>propertyName</code> 值是指定值 <code>value</code>的索引位置.
+     * 在<code>list</code>中,查找第一个属性 <code>propertyName</code> 值是指定值 <code>propertyValue</code> 对象的索引位置.
      * 
      * <h3>示例:</h3>
      * 
@@ -426,9 +428,13 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValue
-     *            the value
-     * @return 如果 list是null 或者 empty,返回 -1<br>
-     *         如果指定属性<code>propertyName</code>的值 <code>value</code>在 list 查找不到也返回 -1<br>
+     *            指定属性的属性值
+     * @return 如果 <code>list</code>是null 或者 empty,返回 -1<br>
+     *         如果指定属性<code>propertyName</code>的值 <code>propertyValue</code>在 list 查找不到,返回 -1<br>
+     * @throws NullPointerException
+     *             如果 <code>propertyName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
      * @see org.apache.commons.collections4.ListUtils#indexOf(List, Predicate)
      * @see BeanPredicateUtil#equalPredicate(String, Object)
      * @since 1.5.5

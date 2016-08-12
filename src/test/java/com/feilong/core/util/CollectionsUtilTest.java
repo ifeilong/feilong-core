@@ -68,6 +68,169 @@ public class CollectionsUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CollectionsUtilTest.class);
 
+    //****************CollectionsUtil.addAllIgnoreNull(Collection<Object>, Iterable<? extends Object>)*****************
+    /**
+     * Test add all ignore null1.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddAllIgnoreNull1(){
+        CollectionsUtil.addAllIgnoreNull(null, null);
+    }
+
+    /**
+     * Test add all ignore null.
+     */
+    @Test
+    public void testAddAllIgnoreNull(){
+        List<String> list = toList("xinge", "feilong1");
+        assertEquals(false, CollectionsUtil.addAllIgnoreNull(list, null));
+        assertThat(list, contains("xinge", "feilong1"));
+    }
+
+    /**
+     * Test add all ignore null2.
+     */
+    @Test
+    public void testAddAllIgnoreNull2(){
+        List<String> list = toList("xinge", "feilong1");
+        boolean addAllIgnoreNull = CollectionsUtil.addAllIgnoreNull(list, toList("xinge", "feilong1"));
+        assertEquals(true, addAllIgnoreNull);
+        assertThat(list, contains("xinge", "feilong1", "xinge", "feilong1"));
+    }
+
+    //*************CollectionsUtil.addIgnoreNullOrEmpty(Collection<Object>, Object)**********
+
+    /**
+     * Test add ignore null or empty.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddIgnoreNullOrEmpty(){
+        CollectionsUtil.addIgnoreNullOrEmpty(null, null);
+    }
+
+    /**
+     * Test add ignore null or empty 1.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddIgnoreNullOrEmpty1(){
+        CollectionsUtil.addIgnoreNullOrEmpty(null, "");
+    }
+
+    /**
+     * Test add ignore null or empty 2.
+     */
+    @Test
+    public void testAddIgnoreNullOrEmpty2(){
+        List<String> list = toList("xinge", "feilong1");
+        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, "xinge"));
+        assertThat(list, contains("xinge", "feilong1", "xinge"));
+    }
+
+    /**
+     * Test add ignore null or empty 3.
+     */
+    @Test
+    public void testAddIgnoreNullOrEmpty3(){
+        List<String> list = toList("xinge", "feilong1");
+        assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, "  "));
+        assertThat(list, contains("xinge", "feilong1"));
+    }
+
+    //************CollectionsUtil.indexOf(List<User>, String, String)******************************
+    /**
+     * Test remove.
+     */
+    @Test
+    public void testIndexOf(){
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
+
+        assertEquals(0, CollectionsUtil.indexOf(list, "name", "张飞"));
+        assertEquals(1, CollectionsUtil.indexOf(list, "age", 24));
+    }
+
+    @Test
+    public void testIndexOfNotFindValue(){
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
+        assertEquals(-1, CollectionsUtil.indexOf(list, "age", 240));
+        assertEquals(-1, CollectionsUtil.indexOf(list, "age", null));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testIndexOfNullPropertyName(){
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
+        CollectionsUtil.indexOf(list, null, 240);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testIndexOfEmptyPropertyName1(){
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
+        CollectionsUtil.indexOf(list, "", 240);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testIndexOfEmptyPropertyName2(){
+        List<User> list = toList(//
+                        new User("张飞", 23),
+                        new User("关羽", 24),
+                        new User("刘备", 25));
+        CollectionsUtil.indexOf(list, " ", 240);
+    }
+
+    @Test
+    public void testIndexOfNullList(){
+        assertEquals(-1, CollectionsUtil.indexOf(null, "age", 24));
+    }
+
+    @Test
+    public void testIndexOfEmptyList(){
+        assertEquals(-1, CollectionsUtil.indexOf(new ArrayList<User>(), "age", 24));
+    }
+
+    //************CollectionsUtil.removeAll(Collection<User>, String, Collection<String>)*************
+
+    /**
+     * Test remove all.
+     */
+    @Test
+    public void testRemoveAll(){
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+
+        List<User> removeAll = CollectionsUtil.removeAll(list, "name", toList("张飞", "刘备"));
+
+        assertThat(removeAll, allOf(hasItem(guanyu), not(hasItem(zhangfei)), not(hasItem(liubei))));
+        assertThat(list, allOf(hasItem(zhangfei), hasItem(liubei), hasItem(guanyu)));
+
+    }
+
+    /**
+     * Test remove all1.
+     */
+    @Test
+    public void testRemoveAll1(){
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备")));
+        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备", "关羽")));
+    }
+
+    //**************************************************************************************************
     /**
      * Test remove.
      */
@@ -88,61 +251,6 @@ public class CollectionsUtilTest{
         List<String> removeList = CollectionsUtil.remove(list, "feilong2");
         assertThat(removeList, hasItems("xinge", "feilong1"));
         assertThat(list, hasItems("xinge", "feilong1", "feilong2", "feilong2"));
-    }
-
-    //************************************************************************************************
-    /**
-     * Test add all ignore null1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddAllIgnoreNull1(){
-        CollectionsUtil.addAllIgnoreNull(null, null);
-    }
-
-    /**
-     * Test add all ignore null.
-     */
-    @Test
-    public void testAddAllIgnoreNull(){
-        List<String> list = toList("xinge", "feilong1");
-        assertEquals(false, CollectionsUtil.addAllIgnoreNull(list, null));
-    }
-
-    /**
-     * Test add all ignore null2.
-     */
-    @Test
-    public void testAddAllIgnoreNull2(){
-        List<String> list = toList("xinge", "feilong1");
-        boolean addAllIgnoreNull = CollectionsUtil.addAllIgnoreNull(list, toList("xinge", "feilong1"));
-        assertEquals(true, addAllIgnoreNull);
-        assertThat(list, hasItems("xinge", "feilong1", "xinge", "feilong1"));
-    }
-
-    //*************************************************************************************
-
-    @Test(expected = NullPointerException.class)
-    public void testAddIgnoreNullOrEmpty(){
-        CollectionsUtil.addIgnoreNullOrEmpty(null, null);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testAddIgnoreNullOrEmpty1(){
-        CollectionsUtil.addIgnoreNullOrEmpty(null, "");
-    }
-
-    @Test
-    public void testAddIgnoreNullOrEmpty2(){
-        List<String> list = toList("xinge", "feilong1");
-        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, "xinge"));
-        assertThat(list, contains("xinge", "feilong1", "xinge"));
-    }
-
-    @Test
-    public void testAddIgnoreNullOrEmpty3(){
-        List<String> list = toList("xinge", "feilong1");
-        assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, "  "));
-        assertThat(list, contains("xinge", "feilong1"));
     }
 
     //*************************************************************************************
@@ -228,22 +336,6 @@ public class CollectionsUtilTest{
     }
 
     /**
-     * Test remove.
-     */
-    @Test
-    public void testIndexOf(){
-        List<User> list = toList(//
-                        new User("张飞", 23),
-                        new User("关羽", 24),
-                        new User("刘备", 25));
-
-        assertEquals(0, CollectionsUtil.indexOf(list, "name", "张飞"));
-        assertEquals(1, CollectionsUtil.indexOf(list, "age", 24));
-        assertEquals(-1, CollectionsUtil.indexOf(null, "age", 24));
-        assertEquals(-1, CollectionsUtil.indexOf(new ArrayList<User>(), "age", 24));
-    }
-
-    /**
      * Test group one.
      */
     @Test
@@ -317,6 +409,9 @@ public class CollectionsUtilTest{
                         allOf(hasItem(zhangfei), hasItem(liubei), not(hasItem(guanyu))));
     }
 
+    /**
+     * Test select 1.
+     */
     @Test
     public void testSelect1(){
         //查询 >10 的元素
@@ -386,41 +481,14 @@ public class CollectionsUtilTest{
         assertThat(select, allOf(hasItem(liubei), hasItem(guanyu), not(hasItem(zhangfei))));
     }
 
+    /**
+     * Test select predicate 1.
+     */
     @Test
     public void testSelectPredicate1(){
         List<Long> list = toList(1L, 1L, 2L, 3L);
         assertThat(CollectionsUtil.select(list, new EqualPredicate<Long>(1L)), contains(1L, 1L));
         assertEquals(emptyList(), CollectionsUtil.select(null, new EqualPredicate<Long>(1L)));
-    }
-
-    /**
-     * Test remove all.
-     */
-    @Test
-    public void testRemoveAll(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 24);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-
-        List<User> removeAll = CollectionsUtil.removeAll(list, "name", toList("张飞", "刘备"));
-
-        assertThat(removeAll, allOf(hasItem(guanyu), not(hasItem(zhangfei)), not(hasItem(liubei))));
-        assertThat(list, allOf(hasItem(zhangfei), hasItem(liubei), hasItem(guanyu)));
-
-    }
-
-    /**
-     * Test remove all1.
-     */
-    @Test
-    public void testRemoveAll1(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 24);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备")));
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备", "关羽")));
     }
 
     /**
