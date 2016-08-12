@@ -35,10 +35,10 @@ import static com.feilong.core.date.DateExtensionUtil.formatDuration;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SimpleBeanFormattterTest2{
+public class SimpleBeanFormattterTest{
 
     /** The Constant log. */
-    private static final Logger            LOGGER              = LoggerFactory.getLogger(SimpleBeanFormattterTest2.class);
+    private static final Logger            LOGGER              = LoggerFactory.getLogger(SimpleBeanFormattterTest.class);
 
     private static Iterable<OrderLine>     ITERABLE_DATA       = null;
 
