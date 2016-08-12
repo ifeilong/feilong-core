@@ -75,9 +75,6 @@ public class CollectionsUtilTest{
     public void testRemove(){
         List<String> list = new ArrayList<String>(){
 
-            /**
-             * 
-             */
             private static final long serialVersionUID = -9002323146501447769L;
 
             {
