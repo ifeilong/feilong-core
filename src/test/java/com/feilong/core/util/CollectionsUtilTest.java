@@ -137,9 +137,6 @@ public class CollectionsUtilTest{
     }
 
     //************CollectionsUtil.indexOf(List<User>, String, String)******************************
-    /**
-     * Test remove.
-     */
     @Test
     public void testIndexOf(){
         List<User> list = toList(//
@@ -196,61 +193,6 @@ public class CollectionsUtilTest{
     @Test
     public void testIndexOfEmptyList(){
         assertEquals(-1, CollectionsUtil.indexOf(new ArrayList<User>(), "age", 24));
-    }
-
-    //************CollectionsUtil.removeAll(Collection<User>, String, Collection<String>)*************
-
-    /**
-     * Test remove all.
-     */
-    @Test
-    public void testRemoveAll(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 24);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-
-        List<User> removeAll = CollectionsUtil.removeAll(list, "name", toList("张飞", "刘备"));
-
-        assertThat(removeAll, allOf(hasItem(guanyu), not(hasItem(zhangfei)), not(hasItem(liubei))));
-        assertThat(list, allOf(hasItem(zhangfei), hasItem(liubei), hasItem(guanyu)));
-
-    }
-
-    /**
-     * Test remove all1.
-     */
-    @Test
-    public void testRemoveAll1(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 24);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备")));
-        LOGGER.debug(JsonUtil.format(CollectionsUtil.removeAll(list, "name", "刘备", "关羽")));
-    }
-
-    //**************************************************************************************************
-    /**
-     * Test remove.
-     */
-    @Test
-    public void testRemove(){
-        List<String> list = new ArrayList<String>(){
-
-            private static final long serialVersionUID = -9002323146501447769L;
-
-            {
-                add("xinge");
-                add("feilong1");
-                add("feilong2");
-                add("feilong2");
-            }
-        };
-
-        List<String> removeList = CollectionsUtil.remove(list, "feilong2");
-        assertThat(removeList, hasItems("xinge", "feilong1"));
-        assertThat(list, hasItems("xinge", "feilong1", "feilong2", "feilong2"));
     }
 
     //*************************************************************************************
@@ -315,24 +257,6 @@ public class CollectionsUtilTest{
 
         List<String> collect1 = CollectionsUtil.collect(list, TransformerUtils.constantTransformer("jintian"));
         assertThat(collect1, hasItems("jintian", "jintian", "jintian"));
-    }
-
-    /**
-     * Removes the duplicate.
-     */
-    @Test
-    public void testRemoveDuplicate(){
-        List<String> list = toList("feilong1", "feilong2", "feilong2", "feilong3");
-
-        List<String> removeDuplicate = CollectionsUtil.removeDuplicate(list);
-
-        assertSame(3, removeDuplicate.size());
-        assertThat(removeDuplicate, hasItems("feilong1", "feilong2", "feilong3"));
-
-        assertSame(4, list.size());
-        assertThat(list, hasItems("feilong1", "feilong2", "feilong2", "feilong3"));
-
-        assertEquals(emptyList(), CollectionsUtil.removeDuplicate(null));
     }
 
     /**

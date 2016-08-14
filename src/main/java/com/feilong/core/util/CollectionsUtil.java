@@ -445,29 +445,26 @@ public final class CollectionsUtil{
     //***********************删除****************************************************
 
     /**
-     * 从 <code>collection</code>中 删除所有的 <code>remove</code>.
+     * 从 <code>collection</code>中 删除所有的 <code>removeCollection</code>.
      * 
-     * <p>
-     * The cardinality of an element <code>e</code> in the returned collection is the same as the cardinality of <code>e</code> in
-     * <code>collection</code> unless <code>remove</code> contains <code>e</code>, in which case the cardinality is zero.
-     * </p>
-     * 
-     * <p>
-     * 返回剩余的集合 <span style="color:red">(原集合对象不变)</span>,这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用
-     * <code>collection.removeAll(remove);</code>.
-     * </p>
-     * 
-     * <p>
-     * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
-     * </p>
-     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回剩余的集合 <span style="color:red">(原集合对象<code>objectCollection</code>不变)</span>,如果你不想修改 <code>objectCollection</code>的话,不能直接调用
+     * <code>collection.removeAll(remove);</code>,这个方法非常有用.</li>
+     * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
+     * </ol>
+     * </blockquote>
+     *
      * @param <O>
      *            the generic type
      * @param objectCollection
      *            the collection from which items are removed (in the returned collection)
      * @param removeCollection
      *            the items to be removed from the returned <code>collection</code>
-     * @return 如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return the list
+     * @throws NullPointerException
+     *             如果 <code>objectCollection</code> 是null
      * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 4
      * @since 1.0.8
@@ -478,16 +475,17 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 从 <code>collection</code>中 删除 所有的 <code>propertyName</code> 值在 <code>values</code>集合中的对象.
+     * 从 <code>objectCollection</code>中 删除所有的 <code>propertyName</code> 值在 <code>propertyValueList</code>集合中的对象.
      * 
-     * <p>
-     * 返回剩余的集合 <span style="color:red">(原集合对象不变)</span>,这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用
-     * <code>collection.removeAll(remove);</code>.
-     * </p>
-     * 
-     * <p>
-     * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回剩余的集合 <span style="color:red">(原集合对象<code>objectCollection</code>不变)</span>,如果你不想修改 <code>objectCollection</code>的话,不能直接调用
+     * <code>collection.removeAll(remove);</code>,这个方法非常有用.</li>
+     * <li>该方法等同于 {@link #selectRejected(Collection, String, Collection)}</li>
+     * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -517,7 +515,6 @@ public final class CollectionsUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
      *
      * @param <O>
      *            the generic type
@@ -529,9 +526,13 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
-     *            the values
+     *            指定的属性值范围列表
      * @return a <code>List</code> containing all the elements of <code>c</code> except
      *         any elements that also occur in <code>remove</code>.
+     * @throws NullPointerException
+     *             如果 <code>objectCollection</code> 是null 或者 <code>propertyName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
      * @see #select(Collection, String, Collection)
      * @see #removeAll(Collection, Collection)
      * @see org.apache.commons.collections4.CollectionUtils#filter(Iterable, Predicate)
@@ -545,20 +546,17 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 从 <code>collection</code>中 删除所有的 <code>propertyName</code> 值是在 <code>propertyValues</code>中的对象.
+     * 从 <code>objectCollection</code>中 删除所有的 <code>propertyName</code> 值是在 <code>propertyValues</code>中的对象.
      * 
-     * <p>
-     * 该方法等同于 {@link #selectRejected(Collection, String, Object...)}
-     * </p>
-     * 
-     * <p>
-     * 返回剩余的集合 <span style="color:red">(原集合对象不变)</span>,这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用
-     * <code>collection.removeAll(remove);</code>.
-     * </p>
-     * 
-     * <p>
-     * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回剩余的集合 <span style="color:red">(原集合对象<code>objectCollection</code>不变)</span>,如果你不想修改 <code>objectCollection</code>的话,不能直接调用
+     * <code>collection.removeAll(remove);</code>,这个方法非常有用.</li>
+     * <li>该方法等同于 {@link #selectRejected(Collection, String, Object...)}</li>
+     * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -614,9 +612,12 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
-     *            the values
-     * @return a <code>List</code> containing all the elements of <code>c</code> except
-     *         any elements that also occur in <code>remove</code>.
+     *            指定的属性值数组
+     * @return 从 <code>collection</code>中 删除所有的 <code>propertyName</code> 值是在 <code>propertyValues</code>中的对象.
+     * @throws NullPointerException
+     *             如果 <code>objectCollection</code> 是null 或者 <code>propertyName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
      * @see #select(Collection, String, Object...)
      * @see #removeAll(Collection, Collection)
      * @see org.apache.commons.collections4.CollectionUtils#filterInverse(Iterable, Predicate)
@@ -629,6 +630,7 @@ public final class CollectionsUtil{
         return removeAll(objectCollection, removeCollection);
     }
 
+    //********************************************************************************************************
     /**
      * 从 <code>collection</code>中 删除<code>removeElement</code>.
      * 
@@ -673,7 +675,7 @@ public final class CollectionsUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
      * @param <O>
      *            the generic type
      * @param objectCollection
@@ -681,6 +683,8 @@ public final class CollectionsUtil{
      * @param removeElement
      *            the remove element
      * @return a <code>List</code> containing all the elements of <code>c</code> except any elements that also occur in <code>remove</code>.
+     * @throws NullPointerException
+     *             如果 <code>objectCollection</code> 是null
      * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 4
      * @since 1.0.8
@@ -689,6 +693,7 @@ public final class CollectionsUtil{
         return removeAll(objectCollection, toList(removeElement));
     }
 
+    //********************************************************************************************************
     /**
      * 去重.
      * 
