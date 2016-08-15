@@ -36,7 +36,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 
 /**
- * Formatter 的base 实现.
+ * {@link Formatter} 的base 实现.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5

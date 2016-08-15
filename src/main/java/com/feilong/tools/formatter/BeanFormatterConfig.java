@@ -16,7 +16,7 @@
 package com.feilong.tools.formatter;
 
 /**
- * The Class BeanFormatterConfig.
+ * 提供格式化的时候,相关参数控制.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
