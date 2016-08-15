@@ -343,19 +343,29 @@ public final class NumberUtil{
     }
 
     /**
-     * 数字格式化 .
+     * 将数字 <code>value</code> 按照指定的格式 <code>numberPattern</code> 格式成字符串 .
      * 
      * <p>
      * 调用 {@link NumberFormatUtil#format(Number, String)},当遇到需要舍入的时候,使用常用的 {@link RoundingMode#HALF_UP}
      * </p>
      * 
+     * <h3>关于参数 <code>value</code>:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * <b>请尽量传递Integer,Long,BigDecimal,而不要使用 float,double等浮点类型</b>,否则可能结果不准确,特别是jdk8以下的版本,具体参见
+     * <a href="https://github.com/venusdrogon/feilong-core/issues/165">NumberFormatUtilTest 在 jdk8 下面测试不通过</a>
+     * </p>
+     * 
+     * </blockquote>
+     * 
      * <h3>示例:</h3>
      * 
      * <pre class="code">
-     * //将数字转成百分数字符串,不带小数点
+     * <span style="color:green">//将数字转成百分数字符串,不带小数点</span>
      * NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT)   = 24%
      * 
-     * //将数字转成百分数字符串,带两位小数点
+     * <span style="color:green">//将数字转成百分数字符串,带两位小数点</span>
      * NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT)    = 24.00%
      * </pre>
      * 
