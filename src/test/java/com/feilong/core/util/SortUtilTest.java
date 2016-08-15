@@ -15,7 +15,6 @@
  */
 package com.feilong.core.util;
 
-import static com.feilong.tools.formatter.FormatterUtil.formatToSimpleTable;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
@@ -38,7 +37,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 import com.feilong.test.User;
-import com.feilong.tools.formatter.BeanFormatterConfig;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -164,16 +162,16 @@ public class SortUtilTest{
         User id2_age36 = new User(2L, 36);
         List<User> list = toList(id12_age18, id2_age36, id2_age2, id2_age30, id1_age8);
 
-        LOGGER.debug(formatToSimpleTable(list));
+        //LOGGER.debug(formatToSimpleTable(list));
 
-        BeanFormatterConfig<User> beanFormatterConfig = new BeanFormatterConfig<>(User.class);
-        beanFormatterConfig.setIncludePropertyNames("id", "age");
-        beanFormatterConfig.setSorts("id", "age");
-        LOGGER.debug(formatToSimpleTable(list, beanFormatterConfig));
+        //        BeanFormatterConfig<User> beanFormatterConfig = new BeanFormatterConfig<>(User.class);
+        //        beanFormatterConfig.setIncludePropertyNames("id", "age");
+        //        beanFormatterConfig.setSorts("id", "age");
+        //        LOGGER.debug(formatToSimpleTable(list, beanFormatterConfig));
 
         sort(list, "age");
 
-        LOGGER.debug(formatToSimpleTable(list));
+        //LOGGER.debug(formatToSimpleTable(list));
         assertThat(list, contains(id2_age2, id1_age8, id12_age18, id2_age30, id2_age36));
     }
 
@@ -273,7 +271,7 @@ public class SortUtilTest{
         map.put("b", 8);
 
         Map<String, Integer> sortByKeyDesc = sortByKeyDesc(map);
-        LOGGER.debug(formatToSimpleTable(sortByKeyDesc));
+        //LOGGER.debug(formatToSimpleTable(sortByKeyDesc));
 
         assertThat(map, allOf(hasEntry("c", 345), hasEntry("b", 8), hasEntry("a", 123), hasEntry(null, 8)));
     }
