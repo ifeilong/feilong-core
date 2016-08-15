@@ -23,11 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Is used to specify the mapped column for a persistent property or field.
- * 
- * <p>
- * 可以使用这个注解来修改显示每列的顺序以及标题的名字
- * </p>
+ * 可以使用这个注解来修改显示每列的顺序以及标题的名字.
  * 
  * <h3>使用示例:</h3>
  * 

@@ -19,7 +19,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * The Class FormatterColumnEntity.
+ * 定制每列的顺序以及标题的名称.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5
@@ -31,13 +31,13 @@ public class FormatterColumnEntity{
     private String propertyName;
 
     /**
-     * The Column name.
+     * 显示的列的名称.
      * 
      * @see FormatterColumn#name()
      */
     private String name;
 
-    /** The order. */
+    /** 显示顺序. */
     private int    order;
 
     //***************************************************************************
@@ -46,11 +46,11 @@ public class FormatterColumnEntity{
      * Instantiates a new formatter column entity.
      *
      * @param name
-     *            the name
+     *            显示的列的名称
      * @param propertyName
-     *            the property name
+     *            属性名字
      * @param order
-     *            the order
+     *            显示顺序
      */
     public FormatterColumnEntity(String name, String propertyName, int order){
         super();
@@ -62,7 +62,7 @@ public class FormatterColumnEntity{
     //***************************************************************************
 
     /**
-     * 获得 the name.
+     * 获得 显示的列的名称.
      *
      * @return the name
      * @see FormatterColumn#name()
@@ -72,7 +72,7 @@ public class FormatterColumnEntity{
     }
 
     /**
-     * 设置 the name.
+     * 设置 显示的列的名称.
      *
      * @param name
      *            the name to set
@@ -83,7 +83,7 @@ public class FormatterColumnEntity{
     }
 
     /**
-     * 获得 the order.
+     * 获得 显示顺序.
      *
      * @return the order
      */
@@ -92,7 +92,7 @@ public class FormatterColumnEntity{
     }
 
     /**
-     * 设置 the order.
+     * 设置 显示顺序.
      *
      * @param order
      *            the order to set
