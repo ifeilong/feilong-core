@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.formatter.util;
+package com.feilong.tools.formatter;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.tools.formatter.entity.FormatterColumnEntity;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;

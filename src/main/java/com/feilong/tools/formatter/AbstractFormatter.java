@@ -30,10 +30,6 @@ import org.apache.commons.lang3.Validate;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.tools.formatter.entity.BeanFormatterConfig;
-import com.feilong.tools.formatter.entity.FormatterColumnEntity;
-import com.feilong.tools.formatter.util.DataListBuilder;
-import com.feilong.tools.formatter.util.FormatterColumnEntityExtractor;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;

@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.formatter.entity;
+package com.feilong.tools.formatter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import com.feilong.tools.formatter.FormatterColumn;
 
 /**
  * The Class FormatterColumnEntity.

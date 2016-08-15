@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.formatter.util;
+package com.feilong.tools.formatter;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -27,9 +27,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.comparator.BeanComparatorUtil;
-import com.feilong.tools.formatter.FormatterColumn;
-import com.feilong.tools.formatter.entity.BeanFormatterConfig;
-import com.feilong.tools.formatter.entity.FormatterColumnEntity;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
