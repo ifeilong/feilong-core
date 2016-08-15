@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.feilong.core.date.DateUtil.addHour;
 import static com.feilong.core.date.DateUtil.addMonth;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisWeek;
@@ -447,14 +448,32 @@ public class DateUtilTest extends BaseDateUtilTest{
      * Test add hour.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testAddHour1(){
+    public void testAddHourNullDate(){
         DateUtil.addHour(null, 5);
     }
 
     @Test
     public void testAddHour(){
-        logDate(DateUtil.addHour(NOW, 5));
-        logDate(DateUtil.addHour(NOW, -5));
+        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
+        assertEquals(toDate("2016-08-16 06:21:00", COMMON_DATE_AND_TIME), addHour(date, 5));
+    }
+
+    @Test
+    public void testAddHour1(){
+        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
+        assertEquals(toDate("2016-08-15 20:21:00", COMMON_DATE_AND_TIME), addHour(date, -5));
+    }
+
+    @Test
+    public void testAddHour2(){
+        Date date = toDate("2016-12-31 23:21:00", COMMON_DATE_AND_TIME);
+        assertEquals(toDate("2017-01-01 04:21:00", COMMON_DATE_AND_TIME), addHour(date, 5));
+    }
+
+    @Test
+    public void testAddHour3(){
+        Date date = toDate("2016-01-01 01:21:00", COMMON_DATE_AND_TIME);
+        assertEquals(toDate("2015-12-31 20:21:00", COMMON_DATE_AND_TIME), addHour(date, -5));
     }
 
     //***************************************************************************************************

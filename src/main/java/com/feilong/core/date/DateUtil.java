@@ -1041,26 +1041,26 @@ public final class DateUtil{
      * 
      * @param dateString
      *            时间字符串
-     * @param parsePatterns
+     * @param datePatterns
      *            模式,时间字符串的模式{@link DatePattern}
      * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>parsePatterns</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePatterns</code> 是 null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/">java-string-to-date-conversion</a>
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/22180505#22180505">java-string-to-date-
      *      conversion/22180505#22180505</a>
      * @see <a href="http://stackoverflow.com/questions/2735023/convert-string-to-java-util-date">convert-string-to-java-util-date</a>
-     * @since 1.7.3 change param to parsePatterns array
+     * @since 1.7.3 change param to datePatterns array
      */
-    public static Date toDate(String dateString,String...parsePatterns){
+    public static Date toDate(String dateString,String...datePatterns){
         Validate.notBlank(dateString, "dateString can't be blank!");
-        Validate.notNull(parsePatterns, "parsePatterns can't be null!");
+        Validate.notNull(datePatterns, "datePatterns can't be null!");
         try{
-            return DateUtils.parseDate(dateString, parsePatterns);
+            return DateUtils.parseDate(dateString, datePatterns);
         }catch (ParseException e){
             String pattern = "parse dateString [{}] use patterns:[{}] to date exception,message:[{}]";
-            throw new IllegalArgumentException(Slf4jUtil.format(pattern, dateString, parsePatterns, e.getMessage()), e);
+            throw new IllegalArgumentException(Slf4jUtil.format(pattern, dateString, datePatterns, e.getMessage()), e);
         }
     }
 
