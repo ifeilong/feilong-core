@@ -55,7 +55,7 @@ import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @version 1.8.2 2016-7-21 18:30:09
+ * @since 1.8.5
  */
 public class SimpleTableFormatter extends AbstractFormatter{
 

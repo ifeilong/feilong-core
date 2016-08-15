@@ -37,9 +37,9 @@ import static com.feilong.core.util.SortUtil.sort;
  * {@link FormatterColumnEntity} 提取器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.2
+ * @since 1.8.5
  */
-public class FormatterColumnEntityExtractor{
+class FormatterColumnEntityExtractor{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(FormatterColumnEntityExtractor.class);

@@ -39,7 +39,7 @@ import static com.feilong.core.util.SortUtil.sortByKeyAsc;
  * Formatter 的base 实现.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.2
+ * @since 1.8.5
  */
 public abstract class AbstractFormatter implements Formatter{
 

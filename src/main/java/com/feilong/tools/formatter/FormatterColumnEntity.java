@@ -22,7 +22,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * The Class FormatterColumnEntity.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.2
+ * @since 1.8.5
  */
 //实体需要声明成 public的 ,否则反射取不到
 public class FormatterColumnEntity{

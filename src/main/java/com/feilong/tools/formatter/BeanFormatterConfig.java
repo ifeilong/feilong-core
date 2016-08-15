@@ -21,7 +21,7 @@ package com.feilong.tools.formatter;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @since 1.8.2
+ * @since 1.8.5
  */
 public class BeanFormatterConfig<T> {
 

@@ -42,7 +42,7 @@ import java.lang.annotation.Target;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.2
+ * @since 1.8.5
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
