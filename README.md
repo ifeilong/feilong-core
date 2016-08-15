@@ -21,7 +21,7 @@ feilong core
 
 # :dragon: Maven使用配置
 
-feilong-core jar 你可以在这里 https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core 浏览 
+feilong-core jar你可以在 [仓库](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core "仓库") 浏览 
 
 在maven `pom.xml` 中,您可以通过以下方式来配置:
 
