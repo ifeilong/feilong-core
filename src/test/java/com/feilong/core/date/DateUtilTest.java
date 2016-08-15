@@ -102,7 +102,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      * Test1.
      */
     @Test
-    public void test1(){
+    public void testGetDayOfMonth1(){
         Calendar calendar = DateUtil.toCalendar(TESTDATE_20141231013024);
         LOGGER.debug(calendar.getActualMaximum(Calendar.SECOND) + "");
         LOGGER.debug(calendar.getTimeInMillis() + "");

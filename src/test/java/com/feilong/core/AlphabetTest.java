@@ -46,7 +46,7 @@ public class AlphabetTest{
      * Test.
      */
     @Test
-    public void test(){
+    public void testAlphabet(){
         assertEquals("23456789abcdefghijkmnpqrstuvwxyz", DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
     }
 

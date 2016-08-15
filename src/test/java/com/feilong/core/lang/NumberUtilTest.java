@@ -189,7 +189,7 @@ public class NumberUtilTest{
      * Test convert number to string.
      */
     @Test
-    public void toString1(){
+    public void testToString1(){
         String pattern = "#######.########";
         assertEquals("88.02", NumberUtil.toString(88.02, pattern));
         assertEquals("88.02", NumberUtil.toString(88.020, pattern));
@@ -222,11 +222,8 @@ public class NumberUtilTest{
         assertEquals("88888888", NumberUtil.toString(88888888, NumberPattern.NO_SCALE));
     }
 
-    /**
-     * To percen t_ wit h_ nopoint.
-     */
     @Test
-    public void toPERCENT_WITH_NOPOINT(){
+    public void testToPERCENT_WITH_NOPOINT(){
         assertEquals("0%", NumberUtil.toString(0, NumberPattern.PERCENT_WITH_NOPOINT));
         assertEquals("100%", NumberUtil.toString(1, NumberPattern.PERCENT_WITH_NOPOINT));
         assertEquals("10000%", NumberUtil.toString(100, NumberPattern.PERCENT_WITH_NOPOINT));

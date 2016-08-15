@@ -38,7 +38,7 @@ public class CharsetTypeTest{
      * Checks if is supported.
      */
     @Test
-    public void isSupported(){
+    public void testIsSupported(){
         assertEquals(true, Charset.isSupported(ISO_8859_1));
         assertEquals(true, Charset.isSupported(GB18030));
         assertEquals(true, Charset.isSupported(GB2312));

@@ -43,10 +43,10 @@ import static com.feilong.core.TimeInterval.SECONDS_PER_YEAR;
 public class TimeIntervalTest{
 
     /**
-     * Test.
+     * Test time interval.
      */
     @Test
-    public void test(){
+    public void testTimeInterval(){
         assertTrue(31536000 == SECONDS_PER_YEAR);
         assertTrue(2592000 == SECONDS_PER_MONTH);
         assertTrue(604800 == SECONDS_PER_WEEK);
@@ -57,10 +57,10 @@ public class TimeIntervalTest{
     }
 
     /**
-     * Test1.
+     * Test time interval 1.
      */
     @Test
-    public void test1(){
+    public void testTimeInterval1(){
         assertTrue(31536000000L == MILLISECOND_PER_YEAR);
         assertTrue(2592000000L == MILLISECOND_PER_MONTH);
         assertTrue(604800000 == MILLISECOND_PER_WEEK);

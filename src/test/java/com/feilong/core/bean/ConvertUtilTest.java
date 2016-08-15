@@ -148,11 +148,8 @@ public class ConvertUtilTest{
         assertEquals(BigDecimal.valueOf(0.1), toBigDecimal(0.1));
     }
 
-    /**
-     * Test.
-     */
     @Test
-    public void test(){
+    public void testToBigDecimal1(){
         BigDecimal a = toBigDecimal("1.000000");
         BigDecimal b = BigDecimal.ONE;
         LOGGER.debug(a.compareTo(b) + "");
@@ -690,7 +687,7 @@ public class ConvertUtilTest{
     }
 
     @Test
-    public void test1(){
+    public void testToProperties(){
         Map<String, Object> map = new LinkedHashMap<>();
 
         map.put("name", "feilong");

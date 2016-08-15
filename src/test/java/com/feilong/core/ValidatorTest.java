@@ -34,10 +34,10 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 public class ValidatorTest{
 
     /**
-     * Test filter.
+     * Test is null or empty.
      */
     @Test
-    public void testFilter(){
+    public void testIsNullOrEmpty(){
         int[] i = {};
         assertEquals(true, CollectionUtils.sizeIsEmpty(i));
         assertEquals(true, isNullOrEmpty(i));
@@ -47,10 +47,10 @@ public class ValidatorTest{
     }
 
     /**
-     * Test filter 1.
+     * Test is null or empty 1.
      */
     @Test
-    public void testFilter1(){
+    public void testIsNullOrEmpty1(){
         assertEquals(true, StringUtils.isBlank(new StringBuilder("  ")));
         assertEquals(true, isNullOrEmpty(new StringBuilder("  ")));
     }
