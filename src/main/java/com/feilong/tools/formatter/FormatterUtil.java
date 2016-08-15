@@ -32,7 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 public final class FormatterUtil{
 
     /** The Constant SIMPLE_TABLE_FORMATTER. */
-    private static final Formatter SIMPLE_TABLE_FORMATTER = new SimpleTableFormatter();
+    private static final SimpleTableFormatter SIMPLE_TABLE_FORMATTER = new SimpleTableFormatter();
 
     /** Don't let anyone instantiate this class. */
     private FormatterUtil(){

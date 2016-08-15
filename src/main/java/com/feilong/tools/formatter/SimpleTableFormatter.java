@@ -44,6 +44,99 @@ import static com.feilong.core.util.CollectionsUtil.addAllIgnoreNull;
  * 简单的table 会渲染标题 和分隔符,不包含 padding margin等设定,也不支持复杂的组合表格设置
  * </p>
  * 
+ * <h3>初衷:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 在做开发的时候,我们经常会记录一些日志,使用log,但是对于 list map ,bean的日志输出一直很难做得很好,为了格式化输出,我们可能会使用 json来输出,比如:
+ * </p>
+ * 
+ * <pre class="code">
+ * List{@code <Address>} list = toList(
+ *                 new Address("china", "shanghai", "wenshui wanrong.lu 888", "216000"),
+ *                 new Address("china", "beijing", "wenshui wanrong.lu 666", "216001"),
+ *                 new Address("china", "nantong", "wenshui wanrong.lu 222", "216002"),
+ *                 new Address("china", "tianjing", "wenshui wanrong.lu 999", "216600"));
+ * 
+ * LOGGER.debug(JsonUtil.format(list));
+ * </pre>
+ * 
+ * 结果:
+ * 
+ * <pre class="code">
+[{
+            "zipCode": "wenshui wanrong.lu 888",
+            "addr": "216000",
+            "country": "china",
+            "city": "shanghai"
+        },
+                {
+            "zipCode": "wenshui wanrong.lu 666",
+            "addr": "216001",
+            "country": "china",
+            "city": "beijing"
+        },
+                {
+            "zipCode": "wenshui wanrong.lu 222",
+            "addr": "216002",
+            "country": "china",
+            "city": "nantong"
+        },
+                {
+            "zipCode": "wenshui wanrong.lu 999",
+            "addr": "216600",
+            "country": "china",
+            "city": "tianjing"
+}]
+ * </pre>
+ * 
+ * <p>
+ * 可以看出,结果难以阅读,如果list元素更多一些,那么更加难以阅读;
+ * </p>
+ * 
+ * </blockquote>
+ * 
+ * 
+ * <h3>解决方案:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <p>
+ * 这个时候可以使用
+ * </p>
+ * 
+ * <pre class="code">
+ * List{@code <Address>} list = toList(
+ *                 new Address("china", "shanghai", "wenshui wanrong.lu 888", "216000"),
+ *                 new Address("china", "beijing", "wenshui wanrong.lu 666", "216001"),
+ *                 new Address("china", "nantong", "wenshui wanrong.lu 222", "216002"),
+ *                 new Address("china", "tianjing", "wenshui wanrong.lu 999", "216600"));
+ * 
+ * LOGGER.debug(formatToSimpleTable(list));
+ * </pre>
+ * 
+ * 
+ * 结果:
+ * 
+ * <pre class="code">
+addr   city     country zipCode                
+------ -------- ------- ---------------------- 
+216000 shanghai china   wenshui wanrong.lu 888 
+216001 beijing  china   wenshui wanrong.lu 666 
+216002 nantong  china   wenshui wanrong.lu 222 
+216600 tianjing china   wenshui wanrong.lu 999
+ * </pre>
+ * 
+ * <p>
+ * 可以看出,输出的结果会更加友好
+ * </p>
+ * 
+ * </blockquote>
+ * 
+ * <p>
+ * 为了方便使用,可以直接使用 {@link FormatterUtil} 工具类
+ * </p>
+ * 
  * <h3>说明:</h3>
  * <blockquote>
  * <ol>

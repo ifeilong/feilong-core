@@ -36,29 +36,37 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.SortUtil.sortByKeyAsc;
 
 /**
- * {@link Formatter} 的base 实现.
+ * AbstractFormatter.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5
  */
-public abstract class AbstractFormatter implements Formatter{
+abstract class AbstractFormatter{
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.tools.formatter.Formatter#format(java.lang.Object)
+    /**
+     * 对java <code>bean</code>格式化.
+     *
+     * @param <T>
+     *            the generic type
+     * @param bean
+     *            the bean
+     * @return 如果 <code>bean</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      */
-    @Override
     public <T> String format(T bean){
         return isNullOrEmpty(bean) ? EMPTY : format(PropertyUtil.describe(bean));
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.tools.formatter.Formatter#format(java.util.Map)
+    /**
+     * 将<code>map</code> 格式化成字符串.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      */
-    @Override
     public <K, V> String format(Map<K, V> map){
         if (isNullOrEmpty(map)){
             return EMPTY;
@@ -87,23 +95,34 @@ public abstract class AbstractFormatter implements Formatter{
         return format(null, dataList);
     }
 
-    /*
-     * (non-Javadoc)
+    //**********************Iterable***************************************************************
+
+    /**
+     * 将迭代对象 <code>iterable</code> 格式化.
      * 
-     * @see com.feilong.coreextension.formatter.Formatter#format(java.lang.Iterable)
+     * @param <T>
+     *            the generic type
+     * @param iterable
+     *            the iterable
+     * @return 如果 <code>iterable</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
      */
-    @Override
     public <T> String format(Iterable<T> iterable){
         return format(iterable, null);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.coreextension.formatter.Formatter#format(java.lang.Iterable,
-     * com.feilong.coreextension.formatter.BeanFormatterConfig)
+    /**
+     * 将迭代对象 <code>iterable</code> 格式化.
+     *
+     * @param <T>
+     *            the generic type
+     * @param iterable
+     *            the iterable
+     * @param beanFormatterConfig
+     *            the bean formatter config
+     * @return 如果 <code>iterable</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
      */
-    @Override
     public <T> String format(Iterable<T> iterable,BeanFormatterConfig<T> beanFormatterConfig){
         if (isNullOrEmpty(iterable)){
             return EMPTY;
