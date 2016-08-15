@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
  * 默认的规则:
  * </h3>
  * 
+ * <blockquote>
  * <ol>
  * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
  * <li>拼接null或者empty元素</li>
