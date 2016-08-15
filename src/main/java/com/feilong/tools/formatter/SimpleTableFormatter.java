@@ -133,13 +133,10 @@ addr   city     country zipCode
  * 
  * </blockquote>
  * 
- * <p>
- * 为了方便使用,可以直接使用 {@link FormatterUtil} 工具类
- * </p>
- * 
  * <h3>说明:</h3>
  * <blockquote>
  * <ol>
+ * <li>为了方便使用,可以直接使用 {@link FormatterUtil} 工具类</li>
  * <li>不建议format 太多的数据,以容易查看为原则</li>
  * <li>如果字段含有中文,显示可能会错位,你可以尝试将结果进行 replace(SPACE, "\u3000") 处理,参见
  * <a href="http://stackoverflow.com/questions/18961628/how-can-i-align-the-next-lines-in-java#answer-18962279">format Chinese
