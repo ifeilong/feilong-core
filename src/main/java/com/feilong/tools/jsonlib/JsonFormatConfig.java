@@ -122,8 +122,9 @@ public class JsonFormatConfig{
      *
      * @param excludes
      *            the new 排除属性名称的数组
+     * @since 1.8.5 change to Varargs
      */
-    public void setExcludes(String[] excludes){
+    public void setExcludes(String...excludes){
         this.excludes = excludes;
     }
 
@@ -141,8 +142,9 @@ public class JsonFormatConfig{
      *
      * @param includes
      *            the new 包含属性名称的数组
+     * @since 1.8.5 change to Varargs
      */
-    public void setIncludes(String[] includes){
+    public void setIncludes(String...includes){
         this.includes = includes;
     }
 
