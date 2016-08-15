@@ -29,8 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
 
@@ -43,15 +41,9 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  */
 public class CollectionsUtilRemoveTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CollectionsUtilRemoveTest.class);
     //************CollectionsUtil.removeAll(Collection<User>, String, Collection<String>)*************
-
-    /**
-     * Test remove all.
-     */
     @Test
-    public void testRemoveAll(){
+    public void testRemoveAllCollection(){
         User zhangfei = new User("张飞", 23);
         User guanyu = new User("关羽", 24);
         User liubei = new User("刘备", 25);
@@ -61,7 +53,42 @@ public class CollectionsUtilRemoveTest{
 
         assertThat(removeAll, allOf(hasItem(guanyu), not(hasItem(zhangfei)), not(hasItem(liubei))));
         assertThat(list, allOf(hasItem(zhangfei), hasItem(liubei), hasItem(guanyu)));
+    }
 
+    @Test
+    public void testRemoveAllCollection1(){
+        User zhangfei = new User("张飞", 23);
+        User guanyu = new User("关羽", 24);
+        User liubei = new User("刘备", 25);
+        List<User> list = toList(zhangfei, guanyu, liubei);
+
+        List<User> removeAll = CollectionsUtil.removeAll(list, "name", (List<String>) null);
+        assertThat(removeAll, contains(zhangfei, guanyu, liubei));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testRemoveAllCollectionNullObjectCollection(){
+        CollectionsUtil.removeAll(null, "name", toList("刘备"));
+    }
+
+    //******
+
+    @Test(expected = NullPointerException.class)
+    public void testRemoveAllCollectionNullPropertyName(){
+        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
+        CollectionsUtil.removeAll(list, null, toList("刘备"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveAllCollectionEmptyPropertyName(){
+        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
+        CollectionsUtil.removeAll(list, "", toList("刘备"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveAllCollectionEmptyPropertyName1(){
+        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
+        CollectionsUtil.removeAll(list, " ", toList("刘备"));
     }
 
     //****************CollectionsUtil.removeAll(Collection<User>, String, String...)************************
