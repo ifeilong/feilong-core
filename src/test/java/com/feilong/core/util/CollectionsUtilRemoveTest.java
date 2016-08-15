@@ -137,7 +137,7 @@ public class CollectionsUtilRemoveTest{
         CollectionsUtil.removeAll(list, " ", "刘备");
     }
 
-    //**************************************************************************************************
+    //**************CollectionsUtil.remove(Collection<String>, String)*************************
     /**
      * Test remove.
      */
@@ -159,6 +159,20 @@ public class CollectionsUtilRemoveTest{
         assertThat(removeList, hasItems("xinge", "feilong1"));
         assertThat(list, hasItems("xinge", "feilong1", "feilong2", "feilong2"));
     }
+
+    @Test
+    public void testRemoveElement1(){
+        assertThat(
+                        CollectionsUtil.remove(toList("xinge", "feilong1", "feilong2", "feilong2"), null),
+                        contains("xinge", "feilong1", "feilong2", "feilong2"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testRemoveElement(){
+        CollectionsUtil.remove(null, "刘备");
+    }
+
+    //**************CollectionsUtil.remove(Collection<String>, String)*************************
 
     /**
      * Removes the duplicate.

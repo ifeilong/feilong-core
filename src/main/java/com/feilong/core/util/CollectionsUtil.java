@@ -679,12 +679,13 @@ public final class CollectionsUtil{
      * @param <O>
      *            the generic type
      * @param objectCollection
-     *            the collection from which items are removed (in the returned collection)
+     *            the object collection
      * @param removeElement
-     *            the remove element
+     *            需要被删除的元素
      * @return a <code>List</code> containing all the elements of <code>c</code> except any elements that also occur in <code>remove</code>.
      * @throws NullPointerException
      *             如果 <code>objectCollection</code> 是null
+     * @see #removeAll(Collection, Collection)
      * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 4
      * @since 1.0.8
@@ -725,11 +726,11 @@ public final class CollectionsUtil{
      * <li>原 <code>collection</code>不变</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * @param <O>
      *            the generic type
      * @param objectCollection
-     *            the item src list
+     *            the object collection
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则先转换成 {@link LinkedHashSet},再转换成{@link ArrayList}返回
      * @see LinkedHashSet#LinkedHashSet(Collection)
