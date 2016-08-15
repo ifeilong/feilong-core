@@ -3,9 +3,9 @@ feilong core
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![build](https://img.shields.io/jenkins/s/https/jenkins.qa.ubuntu.com/precise-desktop-amd64_default.svg "build") 
-[![docs](http://progressed.io/bar/80?title=docs "docs")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
-[![tests](https://img.shields.io/badge/tests-576%20%2F%20576-green.svg "tests")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core) 
-![JDK](https://img.shields.io/badge/JDK-1.7-green.svg "JDK") 
+[![docs 80%](http://progressed.io/bar/80?title=docs "docs")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
+[![tests 576](https://img.shields.io/badge/tests-576%20%2F%20576-green.svg "tests")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core) 
+![JDK 1.7](https://img.shields.io/badge/JDK-1.7-green.svg "JDK") 
 
 > Reduce development, Release ideas (减少开发,释放思想)
 
