@@ -19,7 +19,7 @@ import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * The Class AbstractJsonValueProcessor.
+ * 所有 {@link JsonValueProcessor} 的基类,你只需要实现 {@link #processValue(Object, JsonConfig)}即可.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.7.3
@@ -47,13 +47,13 @@ abstract class AbstractJsonValueProcessor implements JsonValueProcessor{
     }
 
     /**
-     * Process value.
+     * 属性值处理器.
      *
      * @param value
      *            the value
      * @param jsonConfig
      *            the json config
-     * @return the object
+     * @return 自行对null做处理
      */
     protected abstract Object processValue(Object value,JsonConfig jsonConfig);
 }

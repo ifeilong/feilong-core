@@ -15,10 +15,54 @@
  */
 package com.feilong.tools.jsonlib.processor;
 
+import com.feilong.tools.jsonlib.JsonUtil;
+
 import net.sf.json.JsonConfig;
 
 /**
- * 过滤敏感信息,最直接的就是像密码这样的内容,不可以输出在控制台,需要转换成***字眼.
+ * 过滤敏感信息,最直接的就是像密码这样的内容,不可以直接明文输出在控制台或者日志文件,需要转换成***字眼.
+ * 
+ * <h3>示例:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <pre class="code">
+ * 
+ * User user = new User("feilong1", 24);
+ * user.setPassword("123456");
+ * 
+ * JsonValueProcessor jsonValueProcessor = new SensitiveWordsJsonValueProcessor();
+ * 
+ * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
+ * propertyNameAndJsonValueProcessorMap.put("password", jsonValueProcessor);
+ * propertyNameAndJsonValueProcessorMap.put("age", jsonValueProcessor);
+ * 
+ * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+ * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+ * jsonFormatConfig.setIncludes("name", "age", "password");
+ * 
+ * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * 
+ * </pre>
+ * 
+ * <b>返回:</b>
+ * 
+ * <pre class="code">
+ * {
+ * "password": "******",
+ * "age": "******",
+ * "name": "feilong1"
+ * }
+ * </pre>
+ * 
+ * </blockquote>
+ * 
+ * <h3>说明:</h3>
+ * 
+ * <blockquote>
+ * 目前 {@link JsonUtil} 内置对<b>"password"</b>, <b>"key"</b> 两个字眼的属性名字,默认是显示成*******,参见
+ * {@link JsonUtil#SENSITIVE_WORDS_PROPERTY_NAMES}
+ * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2

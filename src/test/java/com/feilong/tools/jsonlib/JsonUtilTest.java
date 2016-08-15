@@ -164,15 +164,31 @@ public class JsonUtilTest extends AbstractJsonTest{
     @Test
     public void testSensitiveWordsJsonValueProcessor(){
         User user = new User("feilong1", 24);
-        user.setPassword("123456");
         user.setMoney(toBigDecimal("99999999.00"));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
-        propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
         propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
 
         JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+
+        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+    }
+
+    @Test
+    public void testSensitiveWordsJsonValueProcessor1(){
+        User user = new User("feilong1", 24);
+        user.setPassword("123456");
+
+        JsonValueProcessor jsonValueProcessor = new SensitiveWordsJsonValueProcessor();
+
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
+        propertyNameAndJsonValueProcessorMap.put("password", jsonValueProcessor);
+        propertyNameAndJsonValueProcessorMap.put("age", jsonValueProcessor);
+
+        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+        jsonFormatConfig.setIncludes("name", "age", "password");
 
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }
