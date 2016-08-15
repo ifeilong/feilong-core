@@ -26,8 +26,10 @@ import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JsonFormatConfig;
 import com.feilong.tools.jsonlib.JsonUtil;
 
-import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.date.DateUtil.toDate;
+
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 import net.sf.json.processors.JsonValueProcessor;
 
@@ -36,32 +38,47 @@ import net.sf.json.processors.JsonValueProcessor;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5
  */
-public class BigDecimalJsonValueProcessorTest{
+public class DateJsonValueProcessorTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BigDecimalJsonValueProcessorTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateJsonValueProcessorTest.class);
 
     @Test
-    public void testBigDecimalJsonValueProcessor(){
+    public void testDateJsonValueProcessor(){
         User user = new User("feilong1", 24);
-        user.setMoney(toBigDecimal("99999999.00"));
+        user.setDate(toDate("2016-08-15 13:30:00", COMMON_DATE_AND_TIME));
 
         JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-        jsonFormatConfig.setIncludes("money");
+        jsonFormatConfig.setIncludes("date");
 
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }
 
     @Test
-    public void testBigDecimalJsonValueProcessor2(){
+    public void testDateJsonValueProcessor1(){
         User user = new User("feilong1", 24);
-        user.setMoney(toBigDecimal("99999999.00"));
+        user.setDate(toDate("2016-08-15 13:30:00", COMMON_DATE_AND_TIME));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
-        propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS));
+        propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE_AND_TIME));
 
         JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
-        jsonFormatConfig.setIncludes("name", "age", "money");
+        jsonFormatConfig.setIncludes("date");
+
+        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+    }
+
+    @Test
+    public void testDateJsonValueProcessor2(){
+        User user = new User("feilong1", 24);
+        user.setDate(toDate("2016-08-15", COMMON_DATE));
+
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
+        propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE));
+
+        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+        jsonFormatConfig.setIncludes("date");
 
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }

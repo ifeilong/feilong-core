@@ -55,9 +55,11 @@ import net.sf.json.JsonConfig;
  * "money": 99999999
  * }
  * 
- * <p>可以看出,money少了后面的 <code>.00</code></p>
- * 
  * </pre>
+ * 
+ * <p>
+ * 可以看出,money少了后面的 <code>.00</code>
+ * </p>
  * 
  * </blockquote>
  * 
