@@ -28,8 +28,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.feilong.core.date.DateUtil.addHour;
-import static com.feilong.core.date.DateUtil.addMonth;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.isBefore;
@@ -243,49 +241,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * Test get add minute.
-     */
-    @Test
-    public void testGetAddMinute(){
-        logDate(DateUtil.addMinute(NOW, 180));
-        logDate(DateUtil.addMinute(NOW, -180));
-    }
-
-    /**
-     * 添加 month.
-     */
-    @Test
-    public void testAddMonth(){
-        Date beginDate = toDate("2013-10-28", COMMON_DATE);
-        logDate(addMonth(beginDate, 6));
-        logDate(addMonth(NOW, 3));
-        logDate(addMonth(NOW, -3));
-
-        logDate(addMonth(NOW, 5));
-        logDate(addMonth(NOW, -5));
-    }
-
-    /**
-     * Test add second.
-     */
-    @Test
-    public void testAddSecond(){
-        logDate(NOW);
-        logDate(DateUtil.addSecond(NOW, 180));
-        logDate(DateUtil.addSecond(NOW, -180));
-    }
-
-    /**
-     * Test add millisecond.
-     */
-    @Test
-    public void testAddMillisecond(){
-        logDate(NOW);
-        logDate(DateUtil.addMillisecond(NOW, 5000));
-        logDate(DateUtil.addMillisecond(NOW, -5000));
-    }
-
-    /**
      * Test is before.
      */
     @Test
@@ -408,72 +363,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testGetTime(){
         LOGGER.debug(DateUtil.getTime(NOW) + "");
-    }
-
-    /**
-     * Adds the year.
-     */
-    @Test
-    public void testAddYear(){
-        logDate(DateUtil.addYear(NOW, 5));
-        logDate(NOW);
-        logDate(DateUtils.addYears(NOW, 5));
-        logDate(NOW);
-        logDate(DateUtil.addYear(NOW, -5));
-        logDate(NOW);
-    }
-
-    /**
-     * Adds the day.
-     */
-    @Test
-    public void testAddDay(){
-        logDate(DateUtil.addDay(NOW, 5));
-        logDate(DateUtil.addDay(NOW, -5));
-        logDate(DateUtil.addDay(toDate("2014-12-31 02:10:05", COMMON_DATE_AND_TIME), 5));
-        logDate(DateUtil.addDay(toDate("2014-01-01 02:10:05", COMMON_DATE_AND_TIME), -5));
-    }
-
-    /**
-     * Adds the week.
-     */
-    @Test
-    public void testAddWeek(){
-        logDate(DateUtil.addWeek(NOW, 1));
-        logDate(DateUtil.addWeek(NOW, -1));
-    }
-
-    //********************
-    /**
-     * Test add hour.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testAddHourNullDate(){
-        DateUtil.addHour(null, 5);
-    }
-
-    @Test
-    public void testAddHour(){
-        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2016-08-16 06:21:00", COMMON_DATE_AND_TIME), addHour(date, 5));
-    }
-
-    @Test
-    public void testAddHour1(){
-        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2016-08-15 20:21:00", COMMON_DATE_AND_TIME), addHour(date, -5));
-    }
-
-    @Test
-    public void testAddHour2(){
-        Date date = toDate("2016-12-31 23:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2017-01-01 04:21:00", COMMON_DATE_AND_TIME), addHour(date, 5));
-    }
-
-    @Test
-    public void testAddHour3(){
-        Date date = toDate("2016-01-01 01:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2015-12-31 20:21:00", COMMON_DATE_AND_TIME), addHour(date, -5));
     }
 
     //***************************************************************************************************

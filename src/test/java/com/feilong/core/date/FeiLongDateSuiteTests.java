@@ -27,10 +27,13 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
                 CalendarUtilTest.class, //
-                DateUtilTest.class,
+
                 DateExtensionUtilTest.class,
                 DateExtensionUtilTest2.class,
-                DateUtilIsLeapYearParameterizedTest.class, })
+
+                DateUtilAddTest.class,
+                DateUtilIsLeapYearParameterizedTest.class,
+                DateUtilTest.class, })
 public class FeiLongDateSuiteTests{
 
 }
