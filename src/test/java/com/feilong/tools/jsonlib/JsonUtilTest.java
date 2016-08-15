@@ -17,7 +17,6 @@ package com.feilong.tools.jsonlib;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -32,10 +31,7 @@ import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.store.system.Menu;
 import com.feilong.test.User;
 import com.feilong.tools.AbstractJsonTest;
-import com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor;
-import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
-import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -43,7 +39,6 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * The Class JsonlibTest.
@@ -157,53 +152,6 @@ public class JsonUtilTest extends AbstractJsonTest{
     @Test
     public void testExcludes1(){
         LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 4, 4));
-    }
-
-    /**
-     * TestJsonUtilTest.
-     */
-    @Test
-    public void testSensitiveWordsJsonValueProcessor(){
-        User user = new User("feilong1", 24);
-        user.setMoney(toBigDecimal("99999999.00"));
-
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-        jsonFormatConfig.setIncludes("money");
-
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
-    }
-
-    @Test
-    public void testSensitiveWordsJsonValueProcessor2(){
-        User user = new User("feilong1", 24);
-        user.setMoney(toBigDecimal("99999999.00"));
-
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
-        propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS));
-
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
-        jsonFormatConfig.setIncludes("name", "age", "money");
-
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
-    }
-
-    @Test
-    public void testSensitiveWordsJsonValueProcessor1(){
-        User user = new User("feilong1", 24);
-        user.setPassword("123456");
-
-        JsonValueProcessor jsonValueProcessor = new SensitiveWordsJsonValueProcessor();
-
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
-        propertyNameAndJsonValueProcessorMap.put("password", jsonValueProcessor);
-        propertyNameAndJsonValueProcessorMap.put("age", jsonValueProcessor);
-
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-        jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
-        jsonFormatConfig.setIncludes("name", "age", "password");
-
-        LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }
 
     /**
