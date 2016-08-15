@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.jsonlib.filters;
+package com.feilong.tools.jsonlib;
 
 import net.sf.json.util.PropertyFilter;
 
@@ -23,7 +23,7 @@ import net.sf.json.util.PropertyFilter;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
-public class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
+class ArrayContainsPropertyNamesPropertyFilter implements PropertyFilter{
 
     /** The property names. */
     private final String[] propertyNames;

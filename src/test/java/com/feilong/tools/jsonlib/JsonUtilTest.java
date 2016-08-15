@@ -155,7 +155,7 @@ public class JsonUtilTest extends AbstractJsonTest{
 
     @Test
     public void testExcludes1(){
-        LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 0, 0));
+        LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 4, 4));
     }
 
     /**

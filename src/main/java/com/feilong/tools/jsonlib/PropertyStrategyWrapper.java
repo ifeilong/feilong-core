@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.tools.jsonlib.util;
+package com.feilong.tools.jsonlib;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ import net.sf.json.util.PropertySetStrategy;
  * @see net.sf.json.util.PropertySetStrategy
  * @since 1.0.5
  */
-public class PropertyStrategyWrapper extends PropertySetStrategy{
+class PropertyStrategyWrapper extends PropertySetStrategy{
 
     /** The Constant LOGGER. */
     private static final Logger       LOGGER = LoggerFactory.getLogger(PropertyStrategyWrapper.class);

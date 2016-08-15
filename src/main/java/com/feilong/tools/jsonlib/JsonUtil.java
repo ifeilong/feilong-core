@@ -40,10 +40,8 @@ import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
-import com.feilong.tools.jsonlib.filters.ArrayContainsPropertyNamesPropertyFilter;
 import com.feilong.tools.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
-import com.feilong.tools.jsonlib.util.PropertyStrategyWrapper;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -435,7 +433,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 将对象格式化 成json字符串(<b>仅仅包含</b>指定名称的属性 <code>includes</code>).
+     * 将对象格式化成json字符串(<b>仅仅包含</b>指定名称的属性 <code>includes</code>).
      * 
      * <p>
      * 和该方法对应的有,仅仅<b>排除</b>某些属性,see {@link #format(Object, String[])}以及 {@link #format(Object, String[], int, int)}
