@@ -15,6 +15,7 @@
  */
 package com.feilong.tools.jsonlib;
 
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.lang.reflect.Field;
@@ -29,7 +30,6 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
@@ -760,7 +760,7 @@ public final class JsonUtil{
      * @see net.sf.json.JSONSerializer#toJSON(Object)
      */
     static JSON toJSON(Object obj,JsonConfig jsonConfig){
-        JsonConfig useJsonConfig = ObjectUtils.defaultIfNull(jsonConfig, DEFAULT_JSON_CONFIG);
+        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, DEFAULT_JSON_CONFIG);
         registerDefaultJsonValueProcessor(useJsonConfig);
 
         if (isNeedConvertToJSONArray(obj)){

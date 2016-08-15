@@ -61,7 +61,7 @@ import net.sf.json.JsonConfig;
  * 
  * <blockquote>
  * 目前 {@link JsonUtil} 内置对<b>"password"</b>, <b>"key"</b> 两个字眼的属性名字,默认是显示成*******,参见
- * {@link JsonUtil#SENSITIVE_WORDS_PROPERTY_NAMES}
+ * {@link JsonUtil#SENSITIVE_WORDS_PROPERTY_NAMES} 以及 {@link JsonUtil#registerDefaultJsonValueProcessor(JsonConfig)}
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>

@@ -25,7 +25,75 @@ import com.feilong.core.lang.NumberUtil;
 import net.sf.json.JsonConfig;
 
 /**
- * The Class BigDecimalJsonValueProcessor.
+ * {@link BigDecimal}数字json value处理器.
+ * 
+ * <p>
+ * 如果不使用这个处理器,对于 BigDecimal格式输出成json,在json to string 字符串的时候,会剔除末尾的0和小数点,会出现循环截断的情况,参见
+ * {@link net.sf.json.util.JSONUtils#numberToString(Number)}:
+ * </p>
+ * 
+ * <h3>示例:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <pre class="code">
+ * User user = new User("feilong1", 24);
+ * user.setMoney(toBigDecimal("99999999.00"));
+ * 
+ * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+ * jsonFormatConfig.setIncludes("name", "age", "money");
+ * 
+ * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * </pre>
+ * 
+ * <b>返回:</b>
+ * 
+ * <pre class="code">
+ * {
+ * "age": 24,
+ * "name": "feilong1",
+ * "money": 99999999
+ * }
+ * 
+ * <p>可以看出,money少了后面的 <code>.00</code></p>
+ * 
+ * </pre>
+ * 
+ * </blockquote>
+ * 
+ * <p>
+ * 此时,你可以使用该处理器,提前先把结果处理成字符串,这样就避免进行后面toString 的时候将number 转成字符串的过程
+ * </p>
+ * 
+ * <h3>示例:</h3>
+ * 
+ * <blockquote>
+ * 
+ * <pre class="code">
+ * User user = new User("feilong1", 24);
+ * user.setMoney(toBigDecimal("99999999.00"));
+ * 
+ * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
+ * propertyNameAndJsonValueProcessorMap.put("money", <b>new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS)</b>);
+ * 
+ * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+ * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+ * jsonFormatConfig.setIncludes("name", "age", "money");
+ * 
+ * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * </pre>
+ * 
+ * <b>返回:</b>
+ * 
+ * <pre class="code">
+ * {
+ * "age": 24,
+ * "name": "feilong1",
+ * "money": "99999999.00"
+ * }
+ * </pre>
+ * 
+ * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
