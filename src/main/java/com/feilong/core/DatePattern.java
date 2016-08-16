@@ -37,7 +37,7 @@ import java.util.Date;
  * <td><code>G</code></td>
  * <td>Era designator</td>
  * <td><a href="#text">Text</a></td>
- * <td><code>AD</code></td>
+ * <td><code>AD,公元,公元前</code></td>
  * </tr>
  * 
  * <tr style="background-color:#eeeeff">

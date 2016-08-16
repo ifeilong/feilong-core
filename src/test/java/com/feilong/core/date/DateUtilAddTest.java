@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import static com.feilong.core.date.DateUtil.addHour;
 import static com.feilong.core.date.DateUtil.addMonth;
+import static com.feilong.core.date.DateUtil.addYear;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
@@ -33,6 +34,80 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilAddTest extends BaseDateUtilTest{
+    //********com.feilong.core.date.DateUtil.addYear(Date, int)****************************
+
+    /**
+     * Adds the year.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddYearNullDate(){
+        DateUtil.addYear(null, 5);
+    }
+
+    @Test
+    public void testAddYear(){
+        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
+        assertEquals(toDate("2021-08-16 01:21:00", COMMON_DATE_AND_TIME), addYear(date, 5));
+    }
+
+    @Test
+    public void testAddYear1(){
+        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
+        assertEquals(toDate("2011-08-16 01:21:00", COMMON_DATE_AND_TIME), addYear(date, -5));
+    }
+
+    //**********
+
+    @Test
+    public void testAddYear2(){
+        Date date = toDate("9999-12-31 23:21:00", COMMON_DATE_AND_TIME);
+        assertEquals(toDate("10004-12-31 23:21:00", COMMON_DATE_AND_TIME), addYear(date, 5));
+    }
+
+    @Test
+    public void testAddYear3(){
+        Date date = toDate("0001-01-01 01:21:00", COMMON_DATE_AND_TIME);
+        Date addYear = addYear(date, -3);
+        //System.out.println(DateUtil.toString(date, "G yyyy-MM-dd HH:mm:ss"));//TODO:remove
+        //System.out.println(DateUtil.toString(addYear, "G yyyy-MM-dd HH:mm:ss"));//TODO:remove
+        assertEquals(toDate("公元前 0003-01-01 01:21:00", "G yyyy-MM-dd HH:mm:ss"), addYear);
+    }
+
+    //***************************************************************************
+
+    /**
+     * 添加 month.
+     */
+    @Test
+    public void testAddMonth(){
+        Date beginDate = toDate("2013-10-28", COMMON_DATE);
+        logDate(addMonth(beginDate, 6));
+        logDate(addMonth(NOW, 3));
+        logDate(addMonth(NOW, -3));
+
+        logDate(addMonth(NOW, 5));
+        logDate(addMonth(NOW, -5));
+    }
+
+    /**
+     * Adds the week.
+     */
+    @Test
+    public void testAddWeek(){
+        logDate(DateUtil.addWeek(NOW, 1));
+        logDate(DateUtil.addWeek(NOW, -1));
+    }
+
+    /**
+     * Adds the day.
+     */
+    @Test
+    public void testAddDay(){
+        logDate(DateUtil.addDay(NOW, 5));
+        logDate(DateUtil.addDay(NOW, -5));
+        logDate(DateUtil.addDay(toDate("2014-12-31 02:10:05", COMMON_DATE_AND_TIME), 5));
+        logDate(DateUtil.addDay(toDate("2014-01-01 02:10:05", COMMON_DATE_AND_TIME), -5));
+    }
 
     //********************
     /**
@@ -67,63 +142,15 @@ public class DateUtilAddTest extends BaseDateUtilTest{
         assertEquals(toDate("2015-12-31 20:21:00", COMMON_DATE_AND_TIME), addHour(date, -5));
     }
 
-    //***********************************************************
+    //***************************************************************************
 
-    /**
-     * Adds the year.
-     */
     @Test
-    public void testAddYear(){
-        logDate(DateUtil.addYear(NOW, 5));
-        logDate(NOW);
-        logDate(DateUtil.addYear(NOW, -5));
-        logDate(NOW);
+    public void testAddMinute(){
+        logDate(DateUtil.addMinute(NOW, 180));
+        logDate(DateUtil.addMinute(NOW, -180));
     }
 
-    /**
-     * Adds the day.
-     */
-    @Test
-    public void testAddDay(){
-        logDate(DateUtil.addDay(NOW, 5));
-        logDate(DateUtil.addDay(NOW, -5));
-        logDate(DateUtil.addDay(toDate("2014-12-31 02:10:05", COMMON_DATE_AND_TIME), 5));
-        logDate(DateUtil.addDay(toDate("2014-01-01 02:10:05", COMMON_DATE_AND_TIME), -5));
-    }
-
-    /**
-     * Adds the week.
-     */
-    @Test
-    public void testAddWeek(){
-        logDate(DateUtil.addWeek(NOW, 1));
-        logDate(DateUtil.addWeek(NOW, -1));
-    }
-
-    /**
-     * Test add millisecond.
-     */
-    @Test
-    public void testAddMillisecond(){
-        logDate(NOW);
-        logDate(DateUtil.addMillisecond(NOW, 5000));
-        logDate(DateUtil.addMillisecond(NOW, -5000));
-    }
-
-    /**
-     * 添加 month.
-     */
-    @Test
-    public void testAddMonth(){
-        Date beginDate = toDate("2013-10-28", COMMON_DATE);
-        logDate(addMonth(beginDate, 6));
-        logDate(addMonth(NOW, 3));
-        logDate(addMonth(NOW, -3));
-
-        logDate(addMonth(NOW, 5));
-        logDate(addMonth(NOW, -5));
-    }
-
+    //***************************************************************************
     /**
      * Test add second.
      */
@@ -134,9 +161,15 @@ public class DateUtilAddTest extends BaseDateUtilTest{
         logDate(DateUtil.addSecond(NOW, -180));
     }
 
+    //***************************************************************************
+    /**
+     * Test add millisecond.
+     */
     @Test
-    public void testAddMinute(){
-        logDate(DateUtil.addMinute(NOW, 180));
-        logDate(DateUtil.addMinute(NOW, -180));
+    public void testAddMillisecond(){
+        logDate(NOW);
+        logDate(DateUtil.addMillisecond(NOW, 5000));
+        logDate(DateUtil.addMillisecond(NOW, -5000));
     }
+
 }

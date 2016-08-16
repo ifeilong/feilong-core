@@ -85,7 +85,7 @@ public final class Validator{
     }
 
     /**
-     * 判断对象 <code>value</code> 是否为null或者empty.
+     * 判断对象 <code>value</code> 是不是 null或者empty.
      * 
      * <h3>示例:</h3>
      * 
@@ -178,7 +178,7 @@ public final class Validator{
     }
 
     /**
-     * 判断对象 <code>value</code> 是否不为null或者empty,调用 !{@link #isNullOrEmpty(Object)} 方法 .
+     * 判断对象 <code>value</code> 是否不是null或者empty,调用 !{@link #isNullOrEmpty(Object)} 方法 .
      * 
      * <p>
      * 示例参考 {@link #isNullOrEmpty(Object)} 方法
