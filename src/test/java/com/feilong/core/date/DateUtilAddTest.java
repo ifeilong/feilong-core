@@ -44,26 +44,6 @@ public class DateUtilAddTest extends BaseDateUtilTest{
     }
 
     @Test
-    public void testAddYear(){
-        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2021-08-16 01:21:00", COMMON_DATE_AND_TIME), addYear(date, 5));
-    }
-
-    @Test
-    public void testAddYear1(){
-        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2011-08-16 01:21:00", COMMON_DATE_AND_TIME), addYear(date, -5));
-    }
-
-    //**********
-
-    @Test
-    public void testAddYear2(){
-        Date date = toDate("9999-12-31 23:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("10004-12-31 23:21:00", COMMON_DATE_AND_TIME), addYear(date, 5));
-    }
-
-    @Test
     public void testAddYear3(){
         Date date = toDate("0001-01-01 01:21:00", COMMON_DATE_AND_TIME);
         Date addYear = addYear(date, -3);
