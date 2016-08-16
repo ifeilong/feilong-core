@@ -45,13 +45,6 @@ public class DateUtilGetTest extends BaseDateUtilTest{
     }
 
     //**********com.feilong.core.date.DateUtil.getMonth(Date)******************************
-    /**
-     * Test get month.
-     */
-    @Test
-    public void testGetMonth(){
-        LOGGER.debug(DateUtil.getMonth(NOW) + "");
-    }
 
     @Test(expected = NullPointerException.class)
     public void testGetMonthNullDate(){
