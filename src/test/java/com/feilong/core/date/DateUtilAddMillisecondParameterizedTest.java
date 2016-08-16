@@ -17,7 +17,6 @@ package com.feilong.core.date;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.Test;
@@ -25,17 +24,24 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.addMillisecond;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
- * 
+ * The Class DateUtilAddMillisecondParameterizedTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilAddMillisecondParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: DateUtil.addMillisecond({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
@@ -47,9 +53,12 @@ public class DateUtilAddMillisecondParameterizedTest extends AbstractTwoParamsAn
                                               { "2016-08-16 23:59:59.000", 5000, "2016-08-17 00:00:04.000" },
                 //
         };
-        return Arrays.asList(objects);
+        return toList(objects);
     }
 
+    /**
+     * Test add millisecond.
+     */
     @Test
     public void testAddMillisecond(){
         Date date = toDate(input1, COMMON_DATE_AND_TIME_WITH_MILLISECOND);

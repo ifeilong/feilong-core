@@ -17,7 +17,6 @@ package com.feilong.core.date;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.Test;
@@ -25,17 +24,24 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.addDay;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
- * 
+ * The Class DateUtilAddDayParameterizedTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilAddDayParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: DateUtil.addDay({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
@@ -44,9 +50,12 @@ public class DateUtilAddDayParameterizedTest extends AbstractTwoParamsAndOneResu
                                               { "2016-01-01 02:10:05", -5, "2015-12-27 02:10:05" },
                 //
         };
-        return Arrays.asList(objects);
+        return toList(objects);
     }
 
+    /**
+     * Test add day.
+     */
     @Test
     public void testAddDay(){
         //28 29

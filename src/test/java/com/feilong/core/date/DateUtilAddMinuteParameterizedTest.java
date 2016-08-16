@@ -17,7 +17,6 @@ package com.feilong.core.date;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.Test;
@@ -25,17 +24,24 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.addMinute;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
- * 
+ * The Class DateUtilAddMinuteParameterizedTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilAddMinuteParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: DateUtil.addMinute({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
@@ -46,9 +52,12 @@ public class DateUtilAddMinuteParameterizedTest extends AbstractTwoParamsAndOneR
                                               { "2016-08-16 00:00:01", -5, "2016-08-15 23:55:01" },
                 //
         };
-        return Arrays.asList(objects);
+        return toList(objects);
     }
 
+    /**
+     * Test add minute.
+     */
     @Test
     public void testAddMinute(){
         Date date = toDate(input1, COMMON_DATE_AND_TIME);

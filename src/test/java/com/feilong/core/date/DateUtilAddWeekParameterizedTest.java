@@ -17,7 +17,6 @@ package com.feilong.core.date;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.Test;
@@ -25,17 +24,24 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.addWeek;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
- * 
+ * The Class DateUtilAddWeekParameterizedTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilAddWeekParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: DateUtil.addWeek({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
@@ -46,9 +52,13 @@ public class DateUtilAddWeekParameterizedTest extends AbstractTwoParamsAndOneRes
                                               { "2016-01-01", -5, "2015-11-27" },
                 //
         };
-        return Arrays.asList(objects);
+
+        return toList(objects);
     }
 
+    /**
+     * Test add week.
+     */
     @Test
     public void testAddWeek(){
         Date date = toDate(input1, COMMON_DATE);

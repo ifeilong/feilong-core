@@ -27,10 +27,11 @@ import static com.feilong.core.date.DateUtil.toDate;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
- * 
+ * The Class DateUtilAddTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilAddTest extends BaseDateUtilTest{
+public class DateUtilAddTest{
     //********com.feilong.core.date.DateUtil.addYear(Date, int)****************************
 
     /**
@@ -41,6 +42,9 @@ public class DateUtilAddTest extends BaseDateUtilTest{
         DateUtil.addYear(null, 5);
     }
 
+    /**
+     * Test add year 3.
+     */
     @Test
     public void testAddYear3(){
         Date date = toDate("0001-01-01 01:21:00", COMMON_DATE_AND_TIME);
@@ -50,6 +54,9 @@ public class DateUtilAddTest extends BaseDateUtilTest{
         assertEquals(toDate("公元前 0003-01-01 01:21:00", "G yyyy-MM-dd HH:mm:ss"), addYear);
     }
 
+    /**
+     * Test add month null date.
+     */
     //**********com.feilong.core.date.DateUtil.addMonth(Date, int)********************
     @Test(expected = IllegalArgumentException.class)
     public void testAddMonthNullDate(){
@@ -58,11 +65,17 @@ public class DateUtilAddTest extends BaseDateUtilTest{
 
     //************com.feilong.core.date.DateUtil.addWeek(Date, int)****************************
 
+    /**
+     * Test add week null date.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testAddWeekNullDate(){
         DateUtil.addWeek(null, 5);
     }
 
+    /**
+     * Test add day null date.
+     */
     //**************com.feilong.core.date.DateUtil.addDay(Date, int)******************************
     @Test(expected = IllegalArgumentException.class)
     public void testAddDayNullDate(){
@@ -80,6 +93,9 @@ public class DateUtilAddTest extends BaseDateUtilTest{
 
     //***********com.feilong.core.date.DateUtil.addMinute(Date, int)*****************
 
+    /**
+     * Test add minute null date.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testAddMinuteNullDate(){
         DateUtil.addMinute(null, 5);
@@ -87,6 +103,9 @@ public class DateUtilAddTest extends BaseDateUtilTest{
 
     //*************com.feilong.core.date.DateUtil.addSecond(Date, int)********************
 
+    /**
+     * Test add second null date.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testAddSecondNullDate(){
         DateUtil.addSecond(null, 5);
@@ -94,6 +113,9 @@ public class DateUtilAddTest extends BaseDateUtilTest{
 
     //*************com.feilong.core.date.DateUtil.addMillisecond(Date, int)******************
 
+    /**
+     * Test add millisecond null date.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testAddMillisecondNullDate(){
         DateUtil.addMillisecond(null, 5);
