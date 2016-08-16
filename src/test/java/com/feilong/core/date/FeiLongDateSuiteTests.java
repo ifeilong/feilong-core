@@ -32,9 +32,13 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateExtensionUtilTest2.class,
 
                 DateUtilAddTest.class,
-                DateUtilAddDayParameterizedTest.class,
-                DateUtilAddHourParameterizedTest.class,
+
                 DateUtilAddYearParameterizedTest.class,
+                DateUtilAddDayParameterizedTest.class,
+
+                DateUtilAddHourParameterizedTest.class,
+                DateUtilAddMinuteParameterizedTest.class,
+                DateUtilAddSecondParameterizedTest.class,
                 DateUtilAddMillisecondParameterizedTest.class,
 
                 DateUtilIsLeapYearParameterizedTest.class,

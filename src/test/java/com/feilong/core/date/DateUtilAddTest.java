@@ -104,12 +104,6 @@ public class DateUtilAddTest extends BaseDateUtilTest{
         DateUtil.addMinute(null, 5);
     }
 
-    @Test
-    public void testAddMinute(){
-        logDate(DateUtil.addMinute(NOW, 180));
-        logDate(DateUtil.addMinute(NOW, -180));
-    }
-
     //*************com.feilong.core.date.DateUtil.addSecond(Date, int)********************
 
     @Test(expected = IllegalArgumentException.class)
