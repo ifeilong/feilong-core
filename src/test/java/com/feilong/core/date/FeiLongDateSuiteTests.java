@@ -31,6 +31,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateExtensionUtilTest.class,
                 DateExtensionUtilTest2.class,
 
+                DateUtilGetTest.class,
+
                 DateUtilAddTest.class,
 
                 DateUtilAddYearParameterizedTest.class,
