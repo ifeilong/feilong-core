@@ -23,13 +23,13 @@ import org.junit.runners.Parameterized.Parameter;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <I>
  *            the generic type
- * @param <E>
- *            the element type
  * @param <T>
  *            the generic type
+ * @param <E>
+ *            the element type
  * @since 1.8.5
  */
-public abstract class AbstractTwoParamsAndOneResultParameterizedTest<I, E, T> extends AbstractParameterizedTest{
+public abstract class AbstractTwoParamsAndOneResultParameterizedTest<I, T, E> extends AbstractParameterizedTest{
 
     //必须是 public 访问修饰符
 

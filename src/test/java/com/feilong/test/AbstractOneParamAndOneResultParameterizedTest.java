@@ -13,30 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.test;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.runners.Parameterized.Parameter;
 
 /**
- * 
+ * 1个参数 和1个返回结果的 ParameterizedTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
+ * @param <I>
+ *            the generic type
+ * @param <E>
+ *            the element type
+ * @since 1.8.5
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-                CalendarUtilTest.class, //
+public abstract class AbstractOneParamAndOneResultParameterizedTest<I, E> extends AbstractParameterizedTest{
 
-                DateExtensionUtilTest.class,
-                DateExtensionUtilTest2.class,
+    //必须是 public 访问修饰符
 
-                DateUtilAddTest.class,
-                DateUtilAddDayParameterizedTest.class,
+    /** 第一个参数. */
+    @Parameter(value = 0)
+    public I input1;
 
-                DateUtilIsLeapYearParameterizedTest.class,
-
-                DateUtilTest.class, })
-public class FeiLongDateSuiteTests{
+    /** 期望值. */
+    @Parameter(value = 2)
+    public E expectedValue;
 
 }
