@@ -726,12 +726,18 @@ public final class DateUtil{
 
     // [start]fieldValue获得日期中的某属性字段
     /**
-     * 获得任意指定日期 <code>date</code>中的年份 {@link java.util.Calendar#YEAR}部分.
+     * 获得任意指定日期 <code>date</code>中的<b>年份</b>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getYear(toDate("2012-06-29 00:26:53", COMMON_DATE_AND_TIME))    = 2012
      * DateUtil.getYear(toDate("2016-07-16", COMMON_DATE))                      = 2016
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -744,11 +750,16 @@ public final class DateUtil{
     }
 
     /**
-     * 获得任意指定日期 <code>date</code>中的月份{@link java.util.Calendar#MONTH}<span style="color:red">(已经+1处理)</span>.
+     * 获得任意指定日期 <code>date</code>中的<b>月份</b> <span style="color:red">(已经+1处理)</span>.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getMonth(<code>2012-06-29</code>)    =6
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -761,13 +772,10 @@ public final class DateUtil{
     }
 
     /**
-     * 指定日期 <code>date</code>年中的星期数{@link Calendar#WEEK_OF_YEAR},一年中第一个星期的值为 1,一年52(365/7=52.14)个星期.
+     * 指定日期 <code>date</code>年中的<b>星期数</b>.
      * 
-     * <p>
-     * 注意:<br>
-     * 2014年的1-1 1-2 1-3 1-4 得出的WEEK_OF_YEAR 是1; <br>
-     * 2014年的12-28 12-29 12-30 12-31 得出的WEEK_OF_YEAR 也是1
-     * </p>
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getWeekOfYear(2014-06-03)    =23
@@ -777,14 +785,26 @@ public final class DateUtil{
      * DateUtil.getWeekOfYear(2014-12-26)    =52
      * </pre>
      * 
-     * {@link Calendar#setMinimalDaysInFirstWeek(int)} 可以来修改第一周最小天数,但是如果设置为7的话
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>一年中第一个星期的值为 1,一年52(365/7=52.14)个星期</li>
+     * <li>2014年的1-1 1-2 1-3 1-4 得出的{@link Calendar#WEEK_OF_YEAR} 是1; <br>
+     * 2014年的12-28 12-29 12-30 12-31 得出的{@link Calendar#WEEK_OF_YEAR} 也是1</li>
+     * 
+     * <li>{@link Calendar#setMinimalDaysInFirstWeek(int)} 可以来修改第一周最小天数,但是如果设置为7的话
      * 
      * <pre class="code">
      * DateUtil.getWeekOfYear(2014-01-01)    =52
      * DateUtil.getWeekOfYear(2014-12-31)    =52
      * </pre>
      * 
-     * 可以看出,如果从1月1号算开始第一周的话,这年第一周时间不够我们设置的7天,那么1月1号算上一年的星期
+     * 可以看出,如果从1月1号算开始第一周的话,这年第一周时间不够我们设置的7天,那么1月1号算上一年的星期</li>
+     * </ol>
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -801,16 +821,22 @@ public final class DateUtil{
     }
 
     /**
-     * 获得任意指定日期 <code>date</code>中的天(在当年中).
+     * 获得任意指定日期 <code>date</code>中的<b>天(在当年中)</b>.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getDayOfYear(<code>2013-01-01</code>)    =1
      * DateUtil.getDayOfYear(<code>2013-01-05</code>)    =5
      * </pre>
      * 
+     * </blockquote>
+     *
      * @param date
      *            任意时间
      * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see Calendar#DAY_OF_YEAR
      * @since 1.0.2
      */
     public static int getDayOfYear(Date date){
@@ -818,11 +844,16 @@ public final class DateUtil{
     }
 
     /**
-     * 获得任意指定日期 <code>date</code>中的天{@link Calendar#DAY_OF_MONTH}.
+     * 获得任意指定日期 <code>date</code>中的<b>天</b>.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getDayOfMonth(<code>2012-06-29</code>)    =29
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -835,15 +866,20 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>星期几{@link Calendar#DAY_OF_WEEK}.
+     * 获得指定日期 <code>date</code><b>星期几</b>.
      * 
      * <p style="color:red">
      * 从星期天开始,并且星期天是1. SUNDAY、MONDAY、TUESDAY、WEDNESDAY、THURSDAY、FRIDAY 和 SATURDAY ,分别对应1-7
      * </p>
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getDayOfWeek(2012-6-29)  =6  是星期5
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -863,12 +899,45 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>中的小时(24小时制){@link Calendar#HOUR_OF_DAY}.
+     * 获得指定日期 <code>date</code>在它<b>一年中的小时数</b>.
+     * 
+     * <p>
+     * max value: 8784.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.getHourOfYear(2013-01-01 00:00:05)   =0
+     * DateUtil.getHourOfYear(2013-01-01 01:00:05)   =1
+     * DateUtil.getHourOfYear(2013-01-05 12:00:05)   =108
+     * DateUtil.getHourOfYear(2013-09-09 17:28)      =6041
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param date
+     *            任意时间
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.0.2
+     */
+    public static int getHourOfYear(Date date){
+        return (getDayOfYear(date) - 1) * 24 + CalendarUtil.getFieldValue(date, HOUR_OF_DAY);
+    }
+
+    /**
+     * 获得指定日期 <code>date</code>中的<b>小时</b>(24小时制).
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getHourOfDay(toDate("2012-06-29 00:26:53", COMMON_DATE_AND_TIME)) =0
      * DateUtil.getHourOfDay(toDate("2016-07-16 22:34:00", COMMON_DATE_AND_TIME)) =22
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -881,34 +950,16 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>在它一年中的 小时数.
+     * 获得指定日期 <code>date</code>中的<b>分钟</b>.
      * 
-     * <p>
-     * max value: 8784.
-     * </p>
-     * 
-     * <pre class="code">
-     * DateUtil.getHourOfYear(2013-01-01 00:00:05)   =0
-     * DateUtil.getHourOfYear(2013-01-01 01:00:05)   =1
-     * DateUtil.getHourOfYear(2013-01-05 12:00:05)   =108
-     * DateUtil.getHourOfYear(2013-09-09 17:28)      =6041
-     * </pre>
-     * 
-     * @param date
-     *            任意时间
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.0.2
-     */
-    public static int getHourOfYear(Date date){
-        return (getDayOfYear(date) - 1) * 24 + CalendarUtil.getFieldValue(date, HOUR_OF_DAY);
-    }
-
-    /**
-     * 获得指定日期 <code>date</code>中的分钟 {@link java.util.Calendar#MINUTE}.
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getMinute(2012-6-29 00:26:53)    =26
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -921,11 +972,16 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>中的秒{@link java.util.Calendar#SECOND}.
+     * 获得指定日期 <code>date</code>中的<b>秒</b>.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getSecond(2012-6-29 00:26:53)    =53
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -938,11 +994,16 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>在当天中的秒数,最大值86400 {@link TimeInterval#SECONDS_PER_DAY}.
+     * 获得指定日期 <code>date</code>在<b>当天中的秒数</b>,最大值86400.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getSecondOfDay(2013-09-09 16:42:41)= 60161
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -958,11 +1019,16 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>在当前小时中的秒数,最大值3600 {@link TimeInterval#SECONDS_PER_HOUR}.
+     * 获得指定日期 <code>date</code>在<b>当前小时中的秒数</b>,最大值3600 {@link TimeInterval#SECONDS_PER_HOUR}.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getSecondOfHour(2013-09-15 01:15:23)= 923
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -978,11 +1044,16 @@ public final class DateUtil{
     }
 
     /**
-     * 返回自 <code>1970 年 1 月 1 日 00:00:00 GMT</code> 以来,此 Date 对象表示的毫秒数.
+     * 返回自 <code>1970年1月1 日 00:00:00 GMT</code> 以来,此 Date 对象表示的<b>毫秒</b>数.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.getTime(2012-6-29 00:28)= 1340900883288
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -1001,9 +1072,14 @@ public final class DateUtil{
     /**
      * 将指定日期 <code>date</code>转换成特殊格式的字符串.
      * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.toString(Tue Oct 16 23:49:21 CST 2012,DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND) =2012-10-16 23:49:21.525
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -1119,9 +1195,9 @@ public final class DateUtil{
      *            指定日期
      * @param whenDate
      *            比照日期
-     * @return 如果 <code>date</code> 是null,返回false<br>
-     *         如果 <code>whenDate</code> 是null,抛出异常<br>
-     *         否则返回 <code>date.before(when)</code>
+     * @return 如果 <code>whenDate</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date</code> 是null,返回false<br>
+     *         否则返回 <code>date.before(whenDate)</code>
      * @see java.util.Date#before(Date)
      * @since 1.2.2
      */
@@ -1131,15 +1207,15 @@ public final class DateUtil{
     }
 
     /**
-     * 判断指定日期 <code>date</code>是否 在 <code>whenDate</code>时间之后.
+     * 判断指定日期 <code>date</code>是否在 <code>whenDate</code>时间之后.
      *
      * @param date
      *            指定的日期
      * @param whenDate
      *            比照日期
-     * @return 如果 <code>date</code> 是null,返回false<br>
-     *         如果 <code>when</code> 是null,抛出异常<br>
-     *         否则返回 <code>date.after(when)</code>
+     * @return 如果 <code>whenDate</code> 是null,抛出 {@link NullPointerException} <br>
+     *         如果 <code>date</code> 是null,返回false<br>
+     *         否则返回 <code>date.after(whenDate)</code>
      * @see java.util.Date#after(Date)
      * @since 1.2.2
      */
@@ -1153,29 +1229,34 @@ public final class DateUtil{
     // [start]isInTime 时间区间内
 
     /**
-     * 判断指定日期 <code>date</code> 是否在 <code>beginTimeDate</code> 和 <code>endTimeDate</code>两个时间之间.
+     * 判断指定日期 <code>date</code> 是否在 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
      * 
      * <pre class="code">
      * DateUtil.isInTime("2012-10-16 23:00:02", "2012-10-10 22:59:00", "2012-10-18 22:59:00") = true
      * </pre>
      * 
+     * </blockquote>
+     * 
      * @param date
      *            指定日期
-     * @param beginTimeDate
-     *            the begin time date
-     * @param endTimeDate
-     *            the end time date
-     * @return 如果 <code>date</code> 在 <code>beginTimeDate</code>之后, 并且 指定日期 <code>date</code> 在 <code>endTimeDate</code>之前,返回true<br>
+     * @param beginDate
+     *            开始时间
+     * @param endDate
+     *            结束时间
+     * @return 如果 <code>date</code> 在 <code>beginDate</code>之后, 并且 指定日期 <code>date</code> 在 <code>endDate</code>之前,返回true<br>
      * @throws NullPointerException
-     *             如果 <code>date</code> 是null,或者 <code>beginTimeDate</code> 是null 或者 <code>endTimeDate</code> 是null
+     *             如果 <code>date</code> 是null,或者 <code>beginDate</code> 是null 或者 <code>endDate</code> 是null
      * @see Date#after(Date)
      * @see Date#before(Date)
      */
-    public static boolean isInTime(Date date,Date beginTimeDate,Date endTimeDate){
+    public static boolean isInTime(Date date,Date beginDate,Date endDate){
         Validate.notNull(date, "date can't be null!");
-        Validate.notNull(beginTimeDate, "beginTimeDate can't be null!");
-        Validate.notNull(endTimeDate, "endTimeDate can't be null!");
-        return date.after(beginTimeDate) && date.before(endTimeDate);
+        Validate.notNull(beginDate, "beginDate can't be null!");
+        Validate.notNull(endDate, "endDate can't be null!");
+        return date.after(beginDate) && date.before(endDate);
     }
 
     // [end]
