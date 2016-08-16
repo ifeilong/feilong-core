@@ -22,6 +22,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.feilong.core.date.DateUtil.toDate;
 
@@ -34,6 +36,20 @@ import static com.feilong.core.DatePattern.yyyy;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class CalendarUtilTest extends BaseDateUtilTest{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(CalendarUtilTest.class);
+
+    /**
+     * Test1.
+     */
+    @Test
+    public void testGetDayOfMonth1(){
+        Calendar calendar = DateUtil.toCalendar(TESTDATE_20141231013024);
+        LOGGER.debug(calendar.getActualMaximum(Calendar.SECOND) + "");
+        LOGGER.debug(calendar.getTimeInMillis() + "");
+        LOGGER.debug(calendar.hashCode() + "");
+    }
 
     /**
      * Test reset year end.

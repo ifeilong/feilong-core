@@ -25,7 +25,7 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.getDayOfYear;
+import static com.feilong.core.date.DateUtil.getDayOfMonth;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
@@ -35,29 +35,29 @@ import static com.feilong.core.DatePattern.COMMON_DATE;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilGetDayOfYearParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
+public class DateUtilGetDayOfMonthParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: DateUtil.getDayOfYear({0})={1}")
+    @Parameters(name = "index:{index}: DateUtil.getDayOfMonth({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               { "2013-01-01", 1 },
                                               { "2013-01-05", 5 },
-                                              { "2016-12-31", 366 },
-                                              { "2016-02-01", 32 },
+                                              { "2016-12-31", 31 },
+                                              { "2016-02-01", 1 },
                 //
         };
         return toList(objects);
     }
 
     @Test
-    public void testGetDayOfYear(){
+    public void testGetDayOfMonth(){
         Date date = toDate(input1, COMMON_DATE);
-        assertEquals(expectedValue, (Integer) getDayOfYear(date));
+        assertEquals(expectedValue, (Integer) getDayOfMonth(date));
     }
 
 }

@@ -830,6 +830,8 @@ public final class DateUtil{
      * <pre class="code">
      * DateUtil.getDayOfYear(<code>2013-01-01</code>)    =1
      * DateUtil.getDayOfYear(<code>2013-01-05</code>)    =5
+     * DateUtil.getDayOfYear(<code>2016-12-31</code>)    =366
+     * DateUtil.getDayOfYear(<code>2016-02-01</code>)    =32
      * </pre>
      * 
      * </blockquote>
@@ -852,6 +854,9 @@ public final class DateUtil{
      * 
      * <pre class="code">
      * DateUtil.getDayOfMonth(<code>2012-06-29</code>)    =29
+     * DateUtil.getDayOfMonth(<code>2013-01-05</code>)    =5
+     * DateUtil.getDayOfMonth(<code>2016-12-31</code>)    =31
+     * DateUtil.getDayOfMonth(<code>2016-02-01</code>)    =1
      * </pre>
      * 
      * </blockquote>
@@ -869,15 +874,22 @@ public final class DateUtil{
     /**
      * 获得指定日期 <code>date</code><b>星期几</b>.
      * 
-     * <p style="color:red">
-     * 从星期天开始,并且星期天是1. SUNDAY、MONDAY、TUESDAY、WEDNESDAY、THURSDAY、FRIDAY 和 SATURDAY ,分别对应1-7
-     * </p>
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>从星期天开始,并且星期天是1</li>
+     * <li>{@link Calendar#SUNDAY SUNDAY}、{@link Calendar#MONDAY MONDAY}、{@link Calendar#TUESDAY TUESDAY}、{@link Calendar#WEDNESDAY
+     * WEDNESDAY}、 {@link Calendar#THURSDAY THURSDAY}、{@link Calendar#FRIDAY FRIDAY} 和 {@link Calendar#SATURDAY SATURDAY} ,分别对应1-7</li>
+     * <li>强烈建议拿上述常量来比较判断,而不是拿数字来比较</li>
+     * </ol>
+     * </blockquote>
+     * 
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * DateUtil.getDayOfWeek(2012-6-29)  =6  是星期5
+     * DateUtil.getDayOfWeek(2012-6-29)  =6  是 {@link Calendar#FRIDAY FRIDAY} 星期5
      * </pre>
      * 
      * </blockquote>

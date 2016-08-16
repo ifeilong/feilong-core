@@ -36,6 +36,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateUtilGetMonthParameterizedTest.class,
                 DateUtilGetWeekOfYearParameterizedTest.class,
                 DateUtilGetDayOfYearParameterizedTest.class,
+                DateUtilGetDayOfMonthParameterizedTest.class,
+                DateUtilGetDayOfWeekParameterizedTest.class,
 
                 DateUtilAddTest.class,
 

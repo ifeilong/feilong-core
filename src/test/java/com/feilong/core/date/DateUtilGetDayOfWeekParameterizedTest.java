@@ -15,6 +15,10 @@
  */
 package com.feilong.core.date;
 
+import static java.util.Calendar.FRIDAY;
+import static java.util.Calendar.MONDAY;
+import static java.util.Calendar.SATURDAY;
+import static java.util.Calendar.TUESDAY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
@@ -25,7 +29,7 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.getDayOfYear;
+import static com.feilong.core.date.DateUtil.getDayOfWeek;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
@@ -35,29 +39,28 @@ import static com.feilong.core.DatePattern.COMMON_DATE;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilGetDayOfYearParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
+public class DateUtilGetDayOfWeekParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: DateUtil.getDayOfYear({0})={1}")
+    @Parameters(name = "index:{index}: DateUtil.getDayOfWeek({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
-                                              { "2013-01-01", 1 },
-                                              { "2013-01-05", 5 },
-                                              { "2016-12-31", 366 },
-                                              { "2016-02-01", 32 },
+                                              { "2012-6-29", FRIDAY },
+                                              { "2016-08-16", TUESDAY },
+                                              { "2016-12-31", SATURDAY },
+                                              { "2016-02-01", MONDAY },
                 //
         };
         return toList(objects);
     }
 
     @Test
-    public void testGetDayOfYear(){
+    public void testGetDayOfWeek(){
         Date date = toDate(input1, COMMON_DATE);
-        assertEquals(expectedValue, (Integer) getDayOfYear(date));
+        assertEquals(expectedValue, (Integer) getDayOfWeek(date));
     }
-
 }

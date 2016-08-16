@@ -17,8 +17,6 @@ package com.feilong.core.date;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Calendar;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,42 +62,12 @@ public class DateUtilGetTest extends BaseDateUtilTest{
 
     //**********com.feilong.core.date.DateUtil.getDayOfMonth(Date)*****************************
 
-    /**
-     * Test get day of month.
-     */
-    @Test
-    public void testGetDayOfMonth(){
-        LOGGER.debug(DateUtil.getDayOfMonth(NOW) + "");
-    }
-
-    /**
-     * Test1.
-     */
-    @Test
-    public void testGetDayOfMonth1(){
-        Calendar calendar = DateUtil.toCalendar(TESTDATE_20141231013024);
-        LOGGER.debug(calendar.getActualMaximum(Calendar.SECOND) + "");
-        LOGGER.debug(calendar.getTimeInMillis() + "");
-        LOGGER.debug(calendar.hashCode() + "");
-        LOGGER.debug(DateUtil.getDayOfMonth(NOW) + "");
-    }
-
     @Test(expected = NullPointerException.class)
     public void testGetDayOfMonthNullDate(){
         DateUtil.getDayOfMonth(null);
     }
 
     //********com.feilong.core.date.DateUtil.getDayOfWeek(Date)******************************
-    /**
-     * Test get day of week.
-     */
-    @Test
-    public void testGetDayOfWeek(){
-        LOGGER.debug(DateUtil.getDayOfWeek(NOW) + "");
-        LOGGER.debug(DateUtil.getDayOfWeek(CURRENT_YEAR_BEGIN) + "");
-        LOGGER.debug(DateUtil.getDayOfWeek(CURRENT_YEAR_END) + "");
-    }
-
     @Test(expected = NullPointerException.class)
     public void testGetDayOfWeekNullDate(){
         DateUtil.getDayOfWeek(null);
