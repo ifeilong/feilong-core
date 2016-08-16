@@ -74,6 +74,10 @@ public class DateUtilGetTest extends BaseDateUtilTest{
     }
 
     //************com.feilong.core.date.DateUtil.getHourOfYear(Date)***************************
+    @Test(expected = NullPointerException.class)
+    public void testGetHourOfYearNullDate(){
+        DateUtil.getHourOfYear(null);
+    }
 
     /**
      * Gets the hour of year.
@@ -90,12 +94,12 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getHourOfYear(NOW) + "");
     }
 
+    //******************com.feilong.core.date.DateUtil.getHourOfDay(Date)**************************
     @Test(expected = NullPointerException.class)
-    public void testGetHourOfYearNullDate(){
-        DateUtil.getHourOfYear(null);
+    public void testGetHourOfDayNullDate(){
+        DateUtil.getHourOfDay(null);
     }
 
-    //******************com.feilong.core.date.DateUtil.getHourOfDay(Date)**************************
     /**
      * Gets the hour of day.
      */
@@ -106,12 +110,12 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         assertEquals(0, DateUtil.getHourOfDay(toDate("2016-07-16 24:34:00", COMMON_DATE_AND_TIME)));
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testGetHourOfDayNullDate(){
-        DateUtil.getHourOfDay(null);
-    }
-
     //**********com.feilong.core.date.DateUtil.getMinute(Date)****************************
+
+    @Test(expected = NullPointerException.class)
+    public void testGetMinuteNullDate(){
+        DateUtil.getMinute(null);
+    }
 
     /**
      * Gets the minute.
@@ -121,12 +125,13 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getMinute(NOW) + "");
     }
 
+    //**********com.feilong.core.date.DateUtil.getSecondOfDay(Date)************************************
+
     @Test(expected = NullPointerException.class)
-    public void testGetMinuteNullDate(){
-        DateUtil.getMinute(null);
+    public void testGetSecondOfDayNullDate(){
+        DateUtil.getSecondOfDay(null);
     }
 
-    //**********com.feilong.core.date.DateUtil.getSecondOfDay(Date)************************************
     /**
      * Gets the second of day.
      */
@@ -135,12 +140,13 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getSecondOfDay(NOW) + "");
     }
 
+    //*************com.feilong.core.date.DateUtil.getSecondOfHour(Date)***********************************
+
     @Test(expected = NullPointerException.class)
-    public void testGetSecondOfDayNullDate(){
-        DateUtil.getSecondOfDay(null);
+    public void testGetSecondOfHourNullDate(){
+        DateUtil.getSecondOfHour(null);
     }
 
-    //*************com.feilong.core.date.DateUtil.getSecondOfHour(Date)***********************************
     /**
      * Gets the second of hour.
      */
@@ -149,11 +155,12 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getSecondOfHour(NOW) + "");
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testGetSecondOfHourNullDate(){
-        DateUtil.getSecondOfHour(null);
-    }
     //********com.feilong.core.date.DateUtil.getSecond(Date)********************
+
+    @Test(expected = NullPointerException.class)
+    public void testGetSecondNullDate(){
+        DateUtil.getSecond(null);
+    }
 
     /**
      * Gets the second.
@@ -163,25 +170,19 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getSecond(NOW) + "");
     }
 
+    //************com.feilong.core.date.DateUtil.getTime(Date)***********************
+
     @Test(expected = NullPointerException.class)
-    public void testGetSecondNullDate(){
-        DateUtil.getSecond(null);
+    public void testGetTimeNullDate(){
+        DateUtil.getTime(null);
     }
 
-    //************************************************************************************
-
-    //************com.feilong.core.date.DateUtil.getTime(Date)***********************
     /**
      * Gets the time.
      */
     @Test
     public void testGetTime(){
         LOGGER.debug(DateUtil.getTime(NOW) + "");
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testGetTimeNullDate(){
-        DateUtil.getTime(null);
     }
 
 }

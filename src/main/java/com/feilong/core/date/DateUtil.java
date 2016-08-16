@@ -890,6 +890,9 @@ public final class DateUtil{
      * 
      * <pre class="code">
      * DateUtil.getDayOfWeek(2012-6-29)  =6  是 {@link Calendar#FRIDAY FRIDAY} 星期5
+     * DateUtil.getDayOfWeek(2016-08-16)  ={@link Calendar#TUESDAY}
+     * DateUtil.getDayOfWeek(2016-12-31)  ={@link Calendar#SATURDAY}
+     * DateUtil.getDayOfWeek(2016-02-01)  ={@link Calendar#MONDAY}
      * </pre>
      * 
      * </blockquote>
