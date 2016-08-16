@@ -21,11 +21,9 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import static com.feilong.core.date.DateUtil.addMonth;
 import static com.feilong.core.date.DateUtil.addYear;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
@@ -58,28 +56,11 @@ public class DateUtilAddTest extends BaseDateUtilTest{
         DateUtil.addMonth(null, 5);
     }
 
-    @Test
-    public void testAddMonth(){
-        Date beginDate = toDate("2013-10-28", COMMON_DATE);
-        logDate(addMonth(beginDate, 6));
-        logDate(addMonth(NOW, 3));
-        logDate(addMonth(NOW, -3));
-
-        logDate(addMonth(NOW, 5));
-        logDate(addMonth(NOW, -5));
-    }
-
     //************com.feilong.core.date.DateUtil.addWeek(Date, int)****************************
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddWeekNullDate(){
         DateUtil.addWeek(null, 5);
-    }
-
-    @Test
-    public void testAddWeek(){
-        logDate(DateUtil.addWeek(NOW, 1));
-        logDate(DateUtil.addWeek(NOW, -1));
     }
 
     //**************com.feilong.core.date.DateUtil.addDay(Date, int)******************************

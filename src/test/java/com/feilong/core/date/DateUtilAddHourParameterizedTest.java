@@ -39,6 +39,7 @@ public class DateUtilAddHourParameterizedTest extends AbstractTwoParamsAndOneRes
     @Parameters(name = "index:{index}: DateUtil.addHour({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
+                                              { "2016-01-01 01:21:00", 0, "2016-01-01 01:21:00" },
                                               { "2016-08-16 01:21:00", 5, "2016-08-16 06:21:00" },
                                               { "2016-08-16 01:21:00", -5, "2016-08-15 20:21:00" },
                                               { "2016-12-31 23:21:00", 5, "2017-01-01 04:21:00" },
@@ -50,7 +51,6 @@ public class DateUtilAddHourParameterizedTest extends AbstractTwoParamsAndOneRes
 
     @Test
     public void testAddHour(){
-        //28 29
         Date date = toDate(input1, COMMON_DATE_AND_TIME);
         assertEquals(toDate(expectedValue, COMMON_DATE_AND_TIME), addHour(date, input2));
     }

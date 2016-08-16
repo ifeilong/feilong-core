@@ -25,34 +25,33 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
-import static com.feilong.core.date.DateUtil.addMinute;
+import static com.feilong.core.date.DateUtil.addWeek;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilAddMinuteParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
+public class DateUtilAddWeekParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
 
-    @Parameters(name = "index:{index}: DateUtil.addMinute({0},{1})={2}")
+    @Parameters(name = "index:{index}: DateUtil.addWeek({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
-                                              { "2016-08-16 17:52:00", 0, "2016-08-16 17:52:00" },
-                                              { "2016-08-16 17:52:00", 180, "2016-08-16 20:52:00" },
-                                              { "2016-08-16 17:52:00", -180, "2016-08-16 14:52:00" },
-                                              { "2016-08-16 23:59:59", 5, "2016-08-17 00:04:59" },
-                                              { "2016-08-16 00:00:01", -5, "2016-08-15 23:55:01" },
+                                              { "2016-01-01", 0, "2016-01-01" },
+                                              { "2016-08-16", 1, "2016-08-23" },
+                                              { "2016-08-16", -1, "2016-08-09" },
+                                              { "2016-12-31", 3, "2017-01-21" },
+                                              { "2016-01-01", -5, "2015-11-27" },
                 //
         };
         return Arrays.asList(objects);
     }
 
     @Test
-    public void testAddMinute(){
-        Date date = toDate(input1, COMMON_DATE_AND_TIME);
-        assertEquals(toDate(expectedValue, COMMON_DATE_AND_TIME), addMinute(date, input2));
+    public void testAddWeek(){
+        Date date = toDate(input1, COMMON_DATE);
+        assertEquals(toDate(expectedValue, COMMON_DATE), addWeek(date, input2));
     }
-
 }

@@ -39,6 +39,7 @@ public class DateUtilAddMillisecondParameterizedTest extends AbstractTwoParamsAn
     @Parameters(name = "index:{index}: DateUtil.addMillisecond({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
+                                              { "2016-08-16 01:21:00.000", 0, "2016-08-16 01:21:00.000" },
                                               { "2016-08-16 01:21:00.000", 5000, "2016-08-16 01:21:05.000" },
                                               { "2016-08-16 01:21:00.000", -5000, "2016-08-16 01:20:55.000" },
                                               { "2016-08-16 01:21:00.325", -5, "2016-08-16 01:21:00.320" },

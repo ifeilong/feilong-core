@@ -39,6 +39,7 @@ public class DateUtilAddYearParameterizedTest extends AbstractTwoParamsAndOneRes
     @Parameters(name = "index:{index}: DateUtil.addYear({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
+                                              { "2016-08-16 01:21:00", 0, "2016-08-16 01:21:00" },
                                               { "2016-08-16 01:21:00", 5, "2021-08-16 01:21:00" },
                                               { "2016-08-16 01:21:00", -5, "2011-08-16 01:21:00" },
                                               { "9999-12-31 23:21:00", 5, "10004-12-31 23:21:00" },

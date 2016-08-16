@@ -39,6 +39,7 @@ public class DateUtilAddSecondParameterizedTest extends AbstractTwoParamsAndOneR
     @Parameters(name = "index:{index}: DateUtil.addSecond({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
+                                              { "2016-08-16 17:52:00", 0, "2016-08-16 17:52:00" },
                                               { "2016-08-16 17:52:00", 5, "2016-08-16 17:52:05" },
                                               { "2016-08-16 17:52:00", -5, "2016-08-16 17:51:55" },
                                               { "2016-08-16 23:59:59", 5, "2016-08-17 00:00:04" },
