@@ -134,14 +134,4 @@ public class DateUtilAddTest extends BaseDateUtilTest{
         DateUtil.addMillisecond(null, 5);
     }
 
-    /**
-     * Test add millisecond.
-     */
-    @Test
-    public void testAddMillisecond(){
-        logDate(NOW);
-        logDate(DateUtil.addMillisecond(NOW, 5000));
-        logDate(DateUtil.addMillisecond(NOW, -5000));
-    }
-
 }
