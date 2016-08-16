@@ -1009,30 +1009,85 @@ public final class MapUtil{
     //*************************************************************************************************
 
     /**
-     * Creates a {@code HashMap} instance, with a high enough "initial capacity" that it <i>should</i> hold {@code expectedSize} elements
-     * without growth.
-     * This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.7. It also can't be guaranteed that the
-     * method isn't inadvertently <i>oversizing</i> the returned map.
+     * 创建 {@code HashMap}实例,拥有足够的 "initial capacity" 应该控制{@code expectedSize} elements without growth.
      * 
-     * <h3>以前你可能需要这么写代码:</h3>
+     * <p>
+     * This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.7. <br>
+     * It also can't be guaranteed that the method isn't inadvertently <i>oversizing</i> the returned map.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, Map<Long, List<String>>>} map = new HashMap{@code <String, Map<Long, List<String>>>}(16);
+     * Map{@code <String, String>} newHashMap = MapUtil.newHashMap(3);
+     * newHashMap.put("name", "feilong");
+     * newHashMap.put("age", "18");
+     * newHashMap.put("address", "shanghai");
      * </pre>
      * 
-     * 如果你是使用JDK1.7或者以上,你可以使用 钻石符:
+     * </blockquote>
+     * 
+     * <h3>使用该方法的好处:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>简化代码书写方式
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 以前你可能需要这么写代码:
+     * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, Map<Long, List<String>>>} map = new HashMap{@code <>}(16);
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>HashMap</b>{@code <String, Map<Long, List<String>>>}(16);
      * </pre>
      * 
+     * <p>
+     * 如果你是使用JDK1.7或者以上,你可以使用钻石符:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>HashMap</b>{@code <>}(16);
+     * </pre>
+     * 
+     * <p>
      * 不过只要你是使用1.5+,你都可以写成:
+     * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.newHashMap(16);
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(16);
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * </li>
+     * <li>减少扩容次数
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如果你要一次性初始一个能存放100个元素的map,并且不需要扩容,提高性能的话,你需要
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>HashMap</b>{@code <String, Map<Long, List<String>>>}(100/0.75+1);
+     * </pre>
+     * 
+     * <p>
+     * 使用这个方法,你可以直接写成:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(100);
+     * </pre>
+     * 
+     * </blockquote>
+     * </li>
+     * 
+     * </ol>
      * </blockquote>
      *
      * @param <K>
@@ -1042,6 +1097,8 @@ public final class MapUtil{
      * @param expectedSize
      *            the number of entries you expect to add to the returned map
      * @return a new, empty {@code HashMap} with enough capacity to hold {@code expectedSize} entries without resizing
+     * @throws IllegalArgumentException
+     *             如果 size{@code  < }0
      * @see "com.google.common.collect.Maps#newHashMapWithExpectedSize(int)"
      * @see java.util.HashMap#HashMap(int)
      * @since 1.7.1
@@ -1051,10 +1108,88 @@ public final class MapUtil{
     }
 
     /**
-     * Creates a {@code LinkedHashMap} instance, with a high enough "initial capacity" that it <i>should</i> hold {@code expectedSize}
-     * elements without growth. This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.7. <br>
+     * 创建 {@code LinkedHashMap}实例,拥有足够的 "initial capacity" 应该控制{@code expectedSize} elements without growth.
+     * 
+     * <p>
+     * This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.7. <br>
      * It also can't be guaranteed that the method isn't inadvertently <i>oversizing</i> the returned map.
-     *
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = MapUtil.newLinkedHashMap(3);
+     * map.put("name", "feilong");
+     * map.put("age", "18");
+     * map.put("address", "shanghai");
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>使用该方法的好处:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>简化代码书写方式
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 以前你可能需要这么写代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>LinkedHashMap</b>{@code <String, Map<Long, List<String>>>}(16);
+     * </pre>
+     * 
+     * <p>
+     * 如果你是使用JDK1.7或者以上,你可以使用钻石符:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>LinkedHashMap</b>{@code <>}(16);
+     * </pre>
+     * 
+     * <p>
+     * 不过只要你是使用1.5+,你都可以写成:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>(16);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * </li>
+     * 
+     * <li>减少扩容次数
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如果你要一次性初始一个能存放100个元素的map,并且不需要扩容,提高性能的话,你需要
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>LinkedHashMap</b>{@code <String, Map<Long, List<String>>>}(100/0.75+1);
+     * </pre>
+     * 
+     * <p>
+     * 使用这个方法,你可以直接写成:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>(100);
+     * </pre>
+     * 
+     * </blockquote>
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     * 
      * @param <K>
      *            the key type
      * @param <V>
@@ -1062,6 +1197,8 @@ public final class MapUtil{
      * @param expectedSize
      *            the number of entries you expect to add to the returned map
      * @return a new, empty {@code LinkedHashMap} with enough capacity to hold {@code expectedSize} entries without resizing
+     * @throws IllegalArgumentException
+     *             如果 size{@code  < }0
      * @see "com.google.common.collect.Maps#newLinkedHashMapWithExpectedSize(int)"
      * @see java.util.LinkedHashMap#LinkedHashMap(int)
      * @since 1.7.1
@@ -1080,6 +1217,8 @@ public final class MapUtil{
      * @param size
      *            map的 size
      * @return the int
+     * @throws IllegalArgumentException
+     *             如果 size{@code  < }0
      * @see <a href="http://www.iteye.com/topic/1134016">java hashmap,如果确定只装载100个元素,new HashMap(?)多少是最佳的,why？ </a>
      * @see <a href=
      *      "http://stackoverflow.com/questions/30220820/difference-between-new-hashmapint-and-guava-maps-newhashmapwithexpectedsizein">

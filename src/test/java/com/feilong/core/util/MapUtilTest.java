@@ -91,6 +91,9 @@ public class MapUtilTest{
         assertThat(singleValueMap, allOf(hasEntry("province", "浙江省"), hasEntry("city", "南通市")));
     }
 
+    /**
+     * Test to single value map 1.
+     */
     @Test
     public void testToSingleValueMap1(){
         Map<String, String[]> arrayValueMap = newLinkedHashMap(2);
@@ -166,12 +169,18 @@ public class MapUtilTest{
         assertThat(subMap, allOf(hasEntry("a", 3007), hasEntry("c", 3001), not(hasKey("b")), not(hasKey("d"))));
     }
 
+    /**
+     * Test extract sub map.
+     */
     //*********************************************************************************************
     @Test
     public void testExtractSubMap(){
         assertEquals(emptyMap(), MapUtil.extractSubMap(null, "id"));
     }
 
+    /**
+     * Test extract sub map 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testExtractSubMap1(){
         Map<Long, User> map = new LinkedHashMap<Long, User>();
@@ -201,6 +210,9 @@ public class MapUtilTest{
 
     }
 
+    /**
+     * Test extract sub map 3.
+     */
     @Test
     public void testExtractSubMap3(){
         Map<Long, User> map = new LinkedHashMap<Long, User>();
@@ -263,4 +275,49 @@ public class MapUtilTest{
         assertThat(newHashMap.size(), is(0));
     }
 
+    @Test
+    public void testNewHashMap2(){
+        Map<String, String> newHashMap = MapUtil.newHashMap(3);
+        newHashMap.put("name", "feilong");
+        newHashMap.put("age", "18");
+        newHashMap.put("address", "shanghai");
+
+        assertThat(newHashMap.size(), is(3));
+    }
+
+    /**
+     * Test new hash map 1.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testNewHashMap1(){
+        MapUtil.newHashMap(-1);
+    }
+    //**************com.feilong.core.util.MapUtil.newLinkedHashMap(int)**************************************
+
+    /**
+     * Test new linked hash map.
+     */
+    @Test
+    public void testNewLinkedHashMap(){
+        Map<Object, Object> map = MapUtil.newLinkedHashMap(100);
+        assertThat(map.size(), is(0));
+    }
+
+    @Test
+    public void testNewLinkedHashMap2(){
+        Map<String, String> map = MapUtil.newLinkedHashMap(3);
+        map.put("name", "feilong");
+        map.put("age", "18");
+        map.put("address", "shanghai");
+
+        assertThat(map.size(), is(3));
+    }
+
+    /**
+     * Test new linked hash map 1.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testNewLinkedHashMap1(){
+        MapUtil.newLinkedHashMap(-1);
+    }
 }
