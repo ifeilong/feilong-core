@@ -18,7 +18,6 @@ package com.feilong.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import com.feilong.test.TestUtil;
 import com.feilong.test.User;
@@ -39,27 +38,39 @@ public class ValidatorData{
      * @return the iterable
      */
     public static Iterable<Object[]> buildData(){
-        List<String> emptyList = new ArrayList<String>();
         Object[] nullOrEmptyElement = {
                                         null,
                                         "", //
                                         "   ",
+
+                                        new StringBuffer(),
+                                        new StringBuffer(""),
+                                        new StringBuffer(" "),
+                                        //new StringBuffer(null), //NPE
+
+                                        new StringBuilder(),
+                                        new StringBuilder(""),
+                                        new StringBuilder(" "),
+                                        // new StringBuilder(null),//NPE
+
                                         new ArrayList<String>(),
                                         new LinkedHashMap<String, String>(),
                                         // **********Array*********************************
                                         new String[] {},
                                         new Integer[][] {},
                                         new User[] {},
-                                        new int[] {},
+
                                         new double[] {},
-                                        new long[] {},
                                         new float[] {},
-                                        new boolean[] {},
-                                        new byte[] {},
-                                        new char[] {},
+                                        new long[] {},
+                                        new int[] {},
                                         new short[] {},
-                                        emptyList.iterator(),
-                                        toEnumeration(emptyList),
+                                        new char[] {},
+                                        new byte[] {},
+                                        new boolean[] {},
+
+                                        new ArrayList<String>().iterator(),
+                                        toEnumeration(new ArrayList<String>()),
                                         new Iterator<User>(){
 
                                             @Override
