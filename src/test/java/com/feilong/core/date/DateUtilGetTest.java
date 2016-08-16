@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
@@ -58,19 +57,11 @@ public class DateUtilGetTest extends BaseDateUtilTest{
     }
 
     //************com.feilong.core.date.DateUtil.getDayOfYear(Date)************************************
-    /**
-     * Gets the day of year.
-     */
-    @Test
-    public void testGetDayOfYear(){
-        assertEquals(1, DateUtil.getDayOfYear(toDate("2013-01-01", COMMON_DATE)));
-        LOGGER.debug(DateUtil.getDayOfYear(NOW) + "");
-    }
-
     @Test(expected = NullPointerException.class)
     public void testGetDayOfYearNullDate(){
         DateUtil.getDayOfYear(null);
     }
+
     //**********com.feilong.core.date.DateUtil.getDayOfMonth(Date)*****************************
 
     /**
