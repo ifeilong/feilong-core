@@ -21,7 +21,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import static com.feilong.core.date.DateUtil.addHour;
 import static com.feilong.core.date.DateUtil.addMonth;
 import static com.feilong.core.date.DateUtil.addYear;
 import static com.feilong.core.date.DateUtil.toDate;
@@ -116,30 +115,6 @@ public class DateUtilAddTest extends BaseDateUtilTest{
     @Test(expected = IllegalArgumentException.class)
     public void testAddHourNullDate(){
         DateUtil.addHour(null, 5);
-    }
-
-    @Test
-    public void testAddHour(){
-        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2016-08-16 06:21:00", COMMON_DATE_AND_TIME), addHour(date, 5));
-    }
-
-    @Test
-    public void testAddHour1(){
-        Date date = toDate("2016-08-16 01:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2016-08-15 20:21:00", COMMON_DATE_AND_TIME), addHour(date, -5));
-    }
-
-    @Test
-    public void testAddHour2(){
-        Date date = toDate("2016-12-31 23:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2017-01-01 04:21:00", COMMON_DATE_AND_TIME), addHour(date, 5));
-    }
-
-    @Test
-    public void testAddHour3(){
-        Date date = toDate("2016-01-01 01:21:00", COMMON_DATE_AND_TIME);
-        assertEquals(toDate("2015-12-31 20:21:00", COMMON_DATE_AND_TIME), addHour(date, -5));
     }
 
     //***********com.feilong.core.date.DateUtil.addMinute(Date, int)*****************

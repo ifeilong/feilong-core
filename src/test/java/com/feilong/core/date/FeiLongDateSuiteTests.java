@@ -33,6 +33,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 DateUtilAddTest.class,
                 DateUtilAddDayParameterizedTest.class,
+                DateUtilAddHourParameterizedTest.class,
 
                 DateUtilIsLeapYearParameterizedTest.class,
 
