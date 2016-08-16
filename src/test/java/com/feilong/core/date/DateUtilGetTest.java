@@ -27,7 +27,6 @@ import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  *
@@ -52,21 +51,6 @@ public class DateUtilGetTest extends BaseDateUtilTest{
     }
 
     //******com.feilong.core.date.DateUtil.getWeekOfYear(Date)************************************
-    /**
-     * Test get week of year.
-     */
-    @Test
-    public void testGetWeekOfYear(){
-        LOGGER.debug(DateUtil.getWeekOfYear(NOW) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(toDate("2013-12-31 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(CURRENT_YEAR_BEGIN) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(CURRENT_YEAR_END) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(toDate("2014-12-31 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(toDate("2014-12-30 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(toDate("2014-12-20 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(toDate("2014-12-26 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-        LOGGER.debug(DateUtil.getWeekOfYear(toDate("2011-03-10 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
-    }
 
     @Test(expected = NullPointerException.class)
     public void testGetWeekOfYearNullDate(){

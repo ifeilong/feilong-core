@@ -781,7 +781,7 @@ public final class DateUtil{
      * <pre class="code">
      * DateUtil.getWeekOfYear(2014-06-03)    =23
      * DateUtil.getWeekOfYear(2014-01-01)    =1
-     * DateUtil.getWeekOfYear(2014-12-29)    =23
+     * DateUtil.getWeekOfYear(2014-12-29)    =1
      * DateUtil.getWeekOfYear(2014-12-20)    =51
      * DateUtil.getWeekOfYear(2014-12-26)    =52
      * </pre>
