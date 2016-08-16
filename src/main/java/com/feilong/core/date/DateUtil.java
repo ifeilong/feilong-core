@@ -735,6 +735,7 @@ public final class DateUtil{
      * <pre class="code">
      * DateUtil.getYear(toDate("2012-06-29 00:26:53", COMMON_DATE_AND_TIME))    = 2012
      * DateUtil.getYear(toDate("2016-07-16", COMMON_DATE))                      = 2016
+     * DateUtil.getYear(toDate("2016-13-16", COMMON_DATE))                      = 2017
      * </pre>
      * 
      * </blockquote>

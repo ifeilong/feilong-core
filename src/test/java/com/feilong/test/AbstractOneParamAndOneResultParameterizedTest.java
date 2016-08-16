@@ -36,7 +36,7 @@ public abstract class AbstractOneParamAndOneResultParameterizedTest<I, E> extend
     public I input1;
 
     /** 期望值. */
-    @Parameter(value = 2)
+    @Parameter(value = 1)
     public E expectedValue;
 
 }

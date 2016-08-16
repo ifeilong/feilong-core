@@ -38,68 +38,13 @@ public class DateUtilGetTest extends BaseDateUtilTest{
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilGetTest.class);
 
-    /**
-     * Gets the second of day.
-     */
-    @Test
-    public void testGetSecondOfDay(){
-        LOGGER.debug(DateUtil.getSecondOfDay(NOW) + "");
+    //**********com.feilong.core.date.DateUtil.getYear(Date)*********************
+    @Test(expected = NullPointerException.class)
+    public void testGetYear1(){
+        DateUtil.getYear(null);
     }
 
-    /**
-     * Gets the second of hour.
-     */
-    @Test
-    public void testGetSecondOfHour(){
-        LOGGER.debug(DateUtil.getSecondOfHour(NOW) + "");
-    }
-
-    /**
-     * Gets the day of year.
-     */
-    @Test
-    public void testGetDayOfYear(){
-        assertEquals(1, DateUtil.getDayOfYear(toDate("2013-01-01", COMMON_DATE)));
-        LOGGER.debug(DateUtil.getDayOfYear(NOW) + "");
-    }
-
-    /**
-     * Test1.
-     */
-    @Test
-    public void testGetDayOfMonth1(){
-        Calendar calendar = DateUtil.toCalendar(TESTDATE_20141231013024);
-        LOGGER.debug(calendar.getActualMaximum(Calendar.SECOND) + "");
-        LOGGER.debug(calendar.getTimeInMillis() + "");
-        LOGGER.debug(calendar.hashCode() + "");
-        LOGGER.debug(DateUtil.getDayOfMonth(NOW) + "");
-    }
-
-    /**
-     * Gets the hour of year.
-     * 
-     */
-    @Test
-    public void testGetHourOfYear(){
-        assertEquals(0, DateUtil.getHourOfYear(toDate("2013-01-01 00:00:05", COMMON_DATE_AND_TIME)));
-        assertEquals(31 * 24, DateUtil.getHourOfYear(toDate("2016-02-01 00:00:05", COMMON_DATE_AND_TIME)));
-        assertEquals(24, DateUtil.getHourOfYear(toDate("2013-01-02 00:00:05", COMMON_DATE_AND_TIME)));
-        LOGGER.debug(DateUtil.getHourOfYear(toDate("2013-01-05 12:00:05", COMMON_DATE_AND_TIME)) + "");
-
-        LOGGER.debug(DateUtil.getHourOfYear(toDate("2013-09-16 11:42:22", COMMON_DATE_AND_TIME)) + "");
-        LOGGER.debug(DateUtil.getHourOfYear(NOW) + "");
-    }
-
-    /**
-     * Test get day of week.
-     */
-    @Test
-    public void testGetDayOfWeek(){
-        LOGGER.debug(DateUtil.getDayOfWeek(NOW) + "");
-        LOGGER.debug(DateUtil.getDayOfWeek(CURRENT_YEAR_BEGIN) + "");
-        LOGGER.debug(DateUtil.getDayOfWeek(CURRENT_YEAR_END) + "");
-    }
-
+    //**********com.feilong.core.date.DateUtil.getMonth(Date)******************************
     /**
      * Test get month.
      */
@@ -108,6 +53,12 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getMonth(NOW) + "");
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testGetMonthNullDate(){
+        DateUtil.getMonth(null);
+    }
+
+    //******com.feilong.core.date.DateUtil.getWeekOfYear(Date)************************************
     /**
      * Test get week of year.
      */
@@ -124,6 +75,27 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getWeekOfYear(toDate("2011-03-10 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND)) + "");
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testGetWeekOfYearNullDate(){
+        DateUtil.getWeekOfYear(null);
+    }
+
+    //************com.feilong.core.date.DateUtil.getDayOfYear(Date)************************************
+    /**
+     * Gets the day of year.
+     */
+    @Test
+    public void testGetDayOfYear(){
+        assertEquals(1, DateUtil.getDayOfYear(toDate("2013-01-01", COMMON_DATE)));
+        LOGGER.debug(DateUtil.getDayOfYear(NOW) + "");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetDayOfYearNullDate(){
+        DateUtil.getDayOfYear(null);
+    }
+    //**********com.feilong.core.date.DateUtil.getDayOfMonth(Date)*****************************
+
     /**
      * Test get day of month.
      */
@@ -133,20 +105,61 @@ public class DateUtilGetTest extends BaseDateUtilTest{
     }
 
     /**
-     * Test get year.
+     * Test1.
      */
     @Test
-    public void testGetYear(){
-        assertEquals(2012, DateUtil.getYear(toDate("2012-06-29 00:26:53", COMMON_DATE_AND_TIME)));
-        assertEquals(2016, DateUtil.getYear(toDate("2016-07-16", COMMON_DATE)));
-        assertEquals(2017, DateUtil.getYear(toDate("2016-13-16", COMMON_DATE)));
+    public void testGetDayOfMonth1(){
+        Calendar calendar = DateUtil.toCalendar(TESTDATE_20141231013024);
+        LOGGER.debug(calendar.getActualMaximum(Calendar.SECOND) + "");
+        LOGGER.debug(calendar.getTimeInMillis() + "");
+        LOGGER.debug(calendar.hashCode() + "");
+        LOGGER.debug(DateUtil.getDayOfMonth(NOW) + "");
     }
 
     @Test(expected = NullPointerException.class)
-    public void testGetYear1(){
-        DateUtil.getYear(null);
+    public void testGetDayOfMonthNullDate(){
+        DateUtil.getDayOfMonth(null);
     }
 
+    //********com.feilong.core.date.DateUtil.getDayOfWeek(Date)******************************
+    /**
+     * Test get day of week.
+     */
+    @Test
+    public void testGetDayOfWeek(){
+        LOGGER.debug(DateUtil.getDayOfWeek(NOW) + "");
+        LOGGER.debug(DateUtil.getDayOfWeek(CURRENT_YEAR_BEGIN) + "");
+        LOGGER.debug(DateUtil.getDayOfWeek(CURRENT_YEAR_END) + "");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetDayOfWeekNullDate(){
+        DateUtil.getDayOfWeek(null);
+    }
+
+    //************com.feilong.core.date.DateUtil.getHourOfYear(Date)***************************
+
+    /**
+     * Gets the hour of year.
+     * 
+     */
+    @Test
+    public void testGetHourOfYear(){
+        assertEquals(0, DateUtil.getHourOfYear(toDate("2013-01-01 00:00:05", COMMON_DATE_AND_TIME)));
+        assertEquals(31 * 24, DateUtil.getHourOfYear(toDate("2016-02-01 00:00:05", COMMON_DATE_AND_TIME)));
+        assertEquals(24, DateUtil.getHourOfYear(toDate("2013-01-02 00:00:05", COMMON_DATE_AND_TIME)));
+        LOGGER.debug(DateUtil.getHourOfYear(toDate("2013-01-05 12:00:05", COMMON_DATE_AND_TIME)) + "");
+
+        LOGGER.debug(DateUtil.getHourOfYear(toDate("2013-09-16 11:42:22", COMMON_DATE_AND_TIME)) + "");
+        LOGGER.debug(DateUtil.getHourOfYear(NOW) + "");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetHourOfYearNullDate(){
+        DateUtil.getHourOfYear(null);
+    }
+
+    //******************com.feilong.core.date.DateUtil.getHourOfDay(Date)**************************
     /**
      * Gets the hour of day.
      */
@@ -157,6 +170,13 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         assertEquals(0, DateUtil.getHourOfDay(toDate("2016-07-16 24:34:00", COMMON_DATE_AND_TIME)));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testGetHourOfDayNullDate(){
+        DateUtil.getHourOfDay(null);
+    }
+
+    //**********com.feilong.core.date.DateUtil.getMinute(Date)****************************
+
     /**
      * Gets the minute.
      */
@@ -164,6 +184,40 @@ public class DateUtilGetTest extends BaseDateUtilTest{
     public void testGetMinute(){
         LOGGER.debug(DateUtil.getMinute(NOW) + "");
     }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetMinuteNullDate(){
+        DateUtil.getMinute(null);
+    }
+
+    //**********com.feilong.core.date.DateUtil.getSecondOfDay(Date)************************************
+    /**
+     * Gets the second of day.
+     */
+    @Test
+    public void testGetSecondOfDay(){
+        LOGGER.debug(DateUtil.getSecondOfDay(NOW) + "");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetSecondOfDayNullDate(){
+        DateUtil.getSecondOfDay(null);
+    }
+
+    //*************com.feilong.core.date.DateUtil.getSecondOfHour(Date)***********************************
+    /**
+     * Gets the second of hour.
+     */
+    @Test
+    public void testGetSecondOfHour(){
+        LOGGER.debug(DateUtil.getSecondOfHour(NOW) + "");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetSecondOfHourNullDate(){
+        DateUtil.getSecondOfHour(null);
+    }
+    //********com.feilong.core.date.DateUtil.getSecond(Date)********************
 
     /**
      * Gets the second.
@@ -173,6 +227,14 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getSecond(NOW) + "");
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testGetSecondNullDate(){
+        DateUtil.getSecond(null);
+    }
+
+    //************************************************************************************
+
+    //************com.feilong.core.date.DateUtil.getTime(Date)***********************
     /**
      * Gets the time.
      */
@@ -180,4 +242,10 @@ public class DateUtilGetTest extends BaseDateUtilTest{
     public void testGetTime(){
         LOGGER.debug(DateUtil.getTime(NOW) + "");
     }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetTimeNullDate(){
+        DateUtil.getTime(null);
+    }
+
 }
