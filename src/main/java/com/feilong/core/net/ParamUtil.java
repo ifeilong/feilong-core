@@ -423,9 +423,25 @@ public final class ParamUtil{
     /**
      * 将 <code>singleValueMap</code> 转成<code>自然排序</code>的 <code>queryString</code> 字符串.
      * 
-     * <p style="color:red">
-     * 常用于和第三方对接数据(比如支付宝),生成 <b>待签名的字符串</b>,该方法不会执行encode操作,<b>使用原生值进行拼接</b>
-     * </p>
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = new HashMap{@code <String, String>}();
+     * map.put("service", "create_salesorder");
+     * map.put("_input_charset", "gbk");
+     * map.put("totalActual", "210.00");
+     * map.put("address", "江苏南通市通州区888组888号");
+     * LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {@code _input_charset=gbk&address=江苏南通市通州区888组888号&service=create_salesorder&totalActual=210.00}
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>规则:</h3>
      * 
@@ -438,62 +454,44 @@ public final class ParamUtil{
      * 
      * </blockquote>
      * 
-     * <h3>示例:</h3>
+     * <h3>说明:</h3>
      * <blockquote>
+     * <ol>
      * 
-     * <pre class="code">
-     * Map{@code <String, String>} map = new HashMap{@code <String, String>}();
-     * map.put("service", "create_salesorder");
-     * map.put("_input_charset", "gbk");
-     * map.put("totalActual", "210.00");
-     * map.put("province", "江苏省");
-     * map.put("city", "南通市");
-     * map.put("district", "通州区");
-     * map.put("address", "江苏南通市通州区888组888号");
-     * LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
-     * </pre>
+     * <li>常用于和第三方对接数据(比如支付宝,生成 <b>待签名的字符串</b>)</li>
+     * <li>该方法不会执行encode操作,<b>使用原生值进行拼接</b></li>
      * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * {@code _input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&province=江苏省&service=create_salesorder&totalActual=210.00}
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>对于 空 key或者空 value的处理:</h3>
+     * <li>
+     * <h4>对于 null key或者null value的处理:</h4>
      * 
      * <blockquote>
      * <p>
-     * 如果 <code>singleValueMap</code> 中,如果有key是<code>null</code>,那么会抛出 {@link NullPointerException},这是因为 在使用
-     * {@link SortUtil#sortByKeyAsc(Map)} 进行排序, {@link TreeMap} 不允许有null 的key;<br>
-     * 
-     * 如果有value是 <code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接
+     * 如果 <code>singleValueMap</code> 中,<br>
+     * 如果有 <code>key</code> 是<code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接;<br>
+     * 如果有 <code>value</code> 是 <code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接
      * </p>
      * 
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
+     * <h4>示例:</h4>
      * 
      * <pre class="code">
-     * 
-     * Map{@code <String, String>} map = new HashMap{@code <String, String>}();
-     * map.put("service", null);
-     * map.put("totalActual", "210.00");
+     * Map{@code <String, String>} map = new HashMap{@code <>}();
+     * map.put("totalActual", <span style="color:red">null</span>);
+     * map.put(<span style="color:red">null</span>, "create_salesorder");
      * map.put("province", "江苏省");
      * 
      * LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * {@code province=江苏省&service=&totalActual=210.00}
+     * {@code =create_salesorder&province=江苏省&totalActual=}
      * </pre>
      * 
+     * </blockquote>
+     * </li>
+     * 
+     * </ol>
      * </blockquote>
      * 
      * @param singleValueMap

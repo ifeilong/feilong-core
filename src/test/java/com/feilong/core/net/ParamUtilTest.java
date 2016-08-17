@@ -46,6 +46,18 @@ public class ParamUtilTest{
     /** <code>{@value}</code>. */
     private static String       uriString = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
 
+    //***************com.feilong.core.net.ParamUtil.toNaturalOrderingQueryString(Map<String, String>)**********
+
+    @Test
+    public void testToNaturalOrderingStringNullMap(){
+        assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(null));
+    }
+
+    @Test
+    public void testToNaturalOrderingStringEmptyMap(){
+        assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(new HashMap<String, String>()));
+    }
+
     /**
      * Test to natural ordering string.
      */
@@ -55,13 +67,10 @@ public class ParamUtilTest{
         map.put("service", "create_salesorder");
         map.put("_input_charset", "gbk");
         map.put("totalActual", "210.00");
-        map.put("province", "江苏省");
-        map.put("city", "南通市");
-        map.put("district", "通州区");
         map.put("address", "江苏南通市通州区888组888号");
 
         assertEquals(
-                        "_input_charset=gbk&address=江苏南通市通州区888组888号&city=南通市&district=通州区&province=江苏省&service=create_salesorder&totalActual=210.00",
+                        "_input_charset=gbk&address=江苏南通市通州区888组888号&service=create_salesorder&totalActual=210.00",
                         ParamUtil.toNaturalOrderingQueryString(map));
     }
 
@@ -69,24 +78,24 @@ public class ParamUtilTest{
      * Test to natural ordering string 3.
      */
     @Test
-    public void testToNaturalOrderingString3(){
+    public void testToNaturalOrderingStringNullValue(){
         Map<String, String> map = new HashMap<String, String>();
         map.put("service", null);
         map.put("totalActual", "210.00");
         map.put("province", "江苏省");
-
-        LOGGER.debug(ParamUtil.toNaturalOrderingQueryString(map));
+        assertEquals("province=江苏省&service=&totalActual=210.00", ParamUtil.toNaturalOrderingQueryString(map));
     }
 
-    /**
-     * Test to natural ordering string 1.
-     */
     @Test
-    public void testToNaturalOrderingString1(){
-        assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(null));
-        assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(new HashMap<String, String>()));
+    public void testToNaturalOrderingStringNullKey(){
+        Map<String, String> map = new HashMap<>();
+        map.put("totalActual", null);
+        map.put(null, "create_salesorder");
+        map.put("province", "江苏省");
+        assertEquals("=create_salesorder&province=江苏省&totalActual=", ParamUtil.toNaturalOrderingQueryString(map));
     }
 
+    //***************************************************************************************************
     /**
      * Test join values.
      */

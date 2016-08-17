@@ -211,12 +211,24 @@ public class SortUtilTest{
         assertEquals(emptyMap(), sortByValueDesc(null));
     }
 
+    //************com.feilong.core.util.SortUtil.sortByKeyAsc(Map<String, Integer>)*****************************
+    @Test
+    public void testSortByKeyAscNullMap(){
+        assertEquals(emptyMap(), sortByKeyAsc(null));
+    }
+
+    @Test
+    public void testSortByKeyAsc2(){
+        assertEquals(emptyMap(), sortByKeyAsc(emptyMap()));
+        assertEquals(emptyMap(), sortByKeyAsc(new HashMap<>()));
+    }
+
     /**
      * Test sort by key asc.
      */
     @Test
     public void testSortByKeyAsc(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
 
         map.put("a", 123);
         map.put("d", 3455);
@@ -225,15 +237,11 @@ public class SortUtilTest{
         map.put("b", 8);
 
         Map<String, Integer> sortByKeyAsc = sortByKeyAsc(map);
+
         assertThat(sortByKeyAsc.keySet(), contains(null, "a", "b", "c", "d"));
         assertThat(
                         sortByKeyAsc,
                         allOf(hasEntry("a", 123), hasEntry("b", 8), hasEntry("c", 345), hasEntry("d", 3455), hasEntry(null, 1345)));
-    }
-
-    @Test
-    public void testSortByKeyAsc1(){
-        assertEquals(emptyMap(), sortByKeyAsc(null));
     }
 
     /**
@@ -259,6 +267,12 @@ public class SortUtilTest{
         assertThat(sort.keySet(), contains("a2", "a8", "a13"));
     }
 
+    //**************com.feilong.core.util.SortUtil.sortByKeyDesc(Map<String, Integer>)**************************
+    @Test
+    public void testSortByKeyDesc1(){
+        assertEquals(emptyMap(), sortByKeyDesc(null));
+    }
+
     /**
      * Test sort by key desc.
      */
@@ -271,13 +285,8 @@ public class SortUtilTest{
         map.put("b", 8);
 
         Map<String, Integer> sortByKeyDesc = sortByKeyDesc(map);
-        //LOGGER.debug(formatToSimpleTable(sortByKeyDesc));
-
+        assertThat(sortByKeyDesc.keySet(), contains("c", "b", "a", null));
         assertThat(map, allOf(hasEntry("c", 345), hasEntry("b", 8), hasEntry("a", 123), hasEntry(null, 8)));
     }
 
-    @Test
-    public void testSortByKeyDesc1(){
-        assertEquals(emptyMap(), sortByKeyDesc(null));
-    }
 }

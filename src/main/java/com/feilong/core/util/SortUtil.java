@@ -500,12 +500,12 @@ public final class SortUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>
-     * 如果直接使用 {@link java.util.TreeMap#TreeMap(Map)},TreeMap 不允许 key是null,<br>
-     * 如果传入的参数 <code>map</code>中,如果有key是null,那么将会抛出{@link NullPointerException}<br>
-     * 而此方法使用了 {@link PropertyComparator},允许 null key,null key将排在最前面
-     * </li>
      * <li>原 <code>map</code> 的顺序不变</li>
+     * <li>该方法使用了 {@link PropertyComparator},允许 null key,<b>null key排在最前面</b></li>
+     * <li>
+     * 如果直接使用 {@link java.util.TreeMap#TreeMap(Map)},TreeMap不允许 key是null,如果有key是null,那么将会抛出{@link NullPointerException}<br>
+     * </li>
+     * 
      * </ol>
      * </blockquote>
      *
@@ -558,6 +558,7 @@ public final class SortUtil{
      * <blockquote>
      * <ol>
      * <li>原 <code>map</code> 的顺序不变</li>
+     * <li>该方法使用了 {@link PropertyComparator},允许 null key,<b>null key排在最后面</b></li>
      * </ol>
      * </blockquote>
      *
