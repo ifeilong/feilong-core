@@ -106,6 +106,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * <p>
  * A URI path parameter is part of a path segment that occurs after its name. <br>
  * </p>
+ * 
  * <ul>
  * <li>Path parameters offer a unique opportunity to control the representations of resources</li>
  * <li>Since they can't be manipulated by standard Web forms, they have to be constructed out of band</li>
@@ -122,32 +123,39 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * In the last paragraph of section 3.3, The URI specification suggests employing the semicolon ;, equals = and comma , characters for this
  * task. Therefore:
  * </p>
+ * 
  * <blockquote>
+ * 
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">characters</th>
  * <th align="left">说明</th>
  * <th align="left">示例</th>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>semicolon ;</td>
  * <td>will delimit the parameters themselves.<br>
  * That is, anything in a path segment to the right of a semicolon will be treated as a new parameter</td>
  * <td>like this: <span style="color:green">/path/name;param1;p2;p3</span></td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>equals sign =</td>
  * <td>will separate parameter names from their values, should a given parameter take values.<br>
  * That is, within a path parameter, everything to the right of an equals sign is treated as a value,</td>
  * <td>like this: <span style="color:green">param=value;p2</span></td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>comma ,</td>
  * <td>will separate individual values passed into a single parameter,</td>
  * <td>like this: <span style="color:green">;param=val1,val2,val3</span></td>
  * </tr>
+ * 
  * </table>
  * </blockquote>
+ * 
  * <p>
  * This means that although it may be visually confusing, parameter names can take commas but no equals signs, values can take equals signs
  * but no commas, and no part of the path segment can take semicolons literally. All other sub-delimiters should be percent-encoded. This

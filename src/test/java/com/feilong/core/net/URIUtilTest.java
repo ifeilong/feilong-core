@@ -17,19 +17,11 @@ package com.feilong.core.net;
 
 import static org.junit.Assert.assertEquals;
 
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.tools.jsonlib.JsonUtil;
-
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.URIComponents.AMPERSAND;
-import static com.feilong.core.URIComponents.QUESTIONMARK;
 
 /**
  * The Class URIUtilTest.
@@ -41,6 +33,7 @@ public class URIUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(URIUtilTest.class);
 
+    //******************************************************************************************************
     /**
      * Test encode.
      */
@@ -55,18 +48,6 @@ public class URIUtilTest{
         LOGGER.debug(URIUtil.encode(value, UTF8));
         LOGGER.debug(URIUtil.encode("白色/黑色/纹理浅麻灰", UTF8));
         LOGGER.debug(URIUtil.encode("Lifestyle / Graphic,", UTF8));
-    }
-
-    /**
-     * Test to string.
-     */
-    @Test
-    public void testToString(){
-        String value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time DESC&search_page&areaid=2&server_id=63&act=search_browse&equip_type_ids&search_text=斩妖剑";
-        value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time";
-        URI uri = URIUtil.create(value);
-        LOGGER.debug("{}", uri.toString());
-
     }
 
     /**
@@ -113,71 +94,7 @@ public class URIUtilTest{
         LOGGER.debug(URIUtil.decode("%c", UTF8));
     }
 
-    /**
-     * Special char to hex string.
-     */
-    @Test
-    public void specialCharToHexString(){
-        LOGGER.debug(specialCharToHexString(" "));
-    }
-
-    /**
-     * url中的特殊字符转为16进制代码,用于url传递.
-     * 
-     * @param specialCharacter
-     *            特殊字符
-     * @return 特殊字符url编码
-     * @deprecated 将来会重构
-     */
-    @Deprecated
-    public static String specialCharToHexString(String specialCharacter){
-
-        Map<String, String> specialCharacterMap = new HashMap<String, String>();
-
-        specialCharacterMap.put("+", "%2B");// URL 中+号表示空格
-        specialCharacterMap.put(" ", "%20");// URL中的空格可以用+号或者编码
-        specialCharacterMap.put("/", "%2F");// 分隔目录和子目录
-        specialCharacterMap.put(QUESTIONMARK, "%3F");// 分隔实际的 URL 和参数
-        specialCharacterMap.put("%", "%25");// 指定特殊字符
-        specialCharacterMap.put("#", "%23");// 表示书签
-        specialCharacterMap.put(AMPERSAND, "%26");// URL 中指定的参数间的分隔符
-        specialCharacterMap.put("=", "%3D");// URL 中指定参数的值
-
-        if (specialCharacterMap.containsKey(specialCharacter)){
-            return specialCharacterMap.get(specialCharacter);
-        }
-        // 不是 url 特殊字符 原样输出
-        return specialCharacter;
-    }
-
-    /**
-     * Creates the.
-     */
-    @Test
-    public void create(){
-        String url = "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2";
-        URI uri = URIUtil.create(url, UTF8);
-        LOGGER.debug(uri.toString());
-    }
-
-    /**
-     * Test create2.
-     */
-    @Test
-    public void testCreate2(){
-        URI uri = URIUtil.create("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3", UTF8);
-        LOGGER.debug(JsonUtil.format(uri));
-    }
-
-    /**
-     * Test create3.
-     */
-    @Test
-    public void testCreate3(){
-        String uriString = "http://127.0.0.1/cmens?a=%";
-        LOGGER.debug("" + URI.create(uriString));
-    }
-
+    //****************com.feilong.core.net.URIUtil.getQueryString(String)********************************************
     /**
      * Test get query string.
      */
@@ -189,13 +106,4 @@ public class URIUtilTest{
         assertEquals("a", URIUtil.getQueryString("?a"));
     }
 
-    /**
-     * Test create4.
-     */
-    @Test
-    public void testCreate4(){
-        String uriString = "http://127.0.0.1/cmens?a=%";
-        URI uri = URIUtil.create(uriString, UTF8);
-        LOGGER.debug(uri.toString());
-    }
 }

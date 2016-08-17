@@ -25,7 +25,11 @@ import org.junit.runners.Suite.SuiteClasses;
  * @since 1.8.3
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ParamUtilTest.class, })
+@SuiteClasses({ //
+                ParamUtilTest.class,
+                URLUtilTest.class
+        //                
+})
 public class FeiLongNetSuiteTests{
 
 }

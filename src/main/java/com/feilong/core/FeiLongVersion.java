@@ -45,9 +45,9 @@ public final class FeiLongVersion{
     }
 
     /**
-     * 返回当前feilong代码的 version,如果不能determined返回 <code>null</code>.
+     * 返回当前feilong代码的 version.
      * 
-     * @return the version
+     * @return 如果不能determined,返回 <code>null</code>
      * @see java.lang.Package#getImplementationVersion()
      */
     public static String getVersion(){

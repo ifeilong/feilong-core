@@ -77,7 +77,7 @@ public final class URLUtil{
     }
 
     /**
-     * 将字符串转成url.
+     * 将字符串 <code>spec</code> 转成 {@link URL}.
      * 
      * <h3>该方法特点:</h3>
      * <blockquote>
