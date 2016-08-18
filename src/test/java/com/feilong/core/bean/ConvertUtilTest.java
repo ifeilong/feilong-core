@@ -218,18 +218,6 @@ public class ConvertUtilTest{
     }
 
     /**
-     * Test to long.
-     */
-    @Test
-    public void testToLong(){
-        assertEquals((Object) 1L, toLong("1"));
-        assertEquals(null, toLong(null));
-        LOGGER.debug("" + toLong(new String[] { "1", "2", "3" }));
-        LOGGER.debug("" + toLong(new String[] { "1", null, "2", "3" }));
-        LOGGER.debug("" + toLong("1,2,3"));
-    }
-
-    /**
      * To t test.
      */
     @Test

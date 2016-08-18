@@ -464,12 +464,38 @@ public final class ConvertUtil{
     }
 
     /**
-     * 把对象转换为{@link Long}类型.
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link Long}类型.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLong(null)                     = null
+     * ConvertUtil.toLong("aaaa")                   = null
+     * ConvertUtil.toLong(8)                        = 8L
+     * ConvertUtil.toLong("8")                      = 8L
+     * ConvertUtil.toLong(new BigDecimal("8"))      = 8L
+     * </pre>
      * 
      * <p>
-     * converted is missing or an error occurs converting the value,返回<span style="color:red"> null</span>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} L227:
      * </p>
-     *
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLong(new String[] { "1", "2", "3" }) = 1L
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} Line234:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLong(toList("1", "2")) = 1L
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param toBeConvertedValue
      *            包含数字的对象.
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
