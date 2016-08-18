@@ -137,16 +137,6 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(iterator, 0, 0));
     }
 
-    /**
-     * Test to big decimal.
-     */
-    @Test
-    public void testToBigDecimal(){
-        assertEquals(null, toBigDecimal(null));
-        assertEquals(BigDecimal.valueOf(1111), toBigDecimal(1111));
-        assertEquals(BigDecimal.valueOf(0.1), toBigDecimal(0.1));
-    }
-
     @Test
     public void testToBigDecimal1(){
         BigDecimal a = toBigDecimal("1.000000");

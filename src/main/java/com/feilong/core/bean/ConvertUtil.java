@@ -413,6 +413,8 @@ public final class ConvertUtil{
      * @param defaultValue
      *            默认值
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 <code>defaultValue</code> <br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 <code>defaultValue</code>
      * @see org.apache.commons.beanutils.converters.IntegerConverter
      * @see org.apache.commons.lang3.ObjectUtils#defaultIfNull(Object, Object)
@@ -420,47 +422,6 @@ public final class ConvertUtil{
      */
     public static Integer toInteger(Object toBeConvertedValue,Integer defaultValue){
         return new IntegerConverter(defaultValue).convert(Integer.class, toBeConvertedValue);
-    }
-
-    /**
-     * 将 <code>toBeConvertedValue</code> 转换成 {@link java.math.BigDecimal}.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toBigDecimal(1111) = BigDecimal.valueOf(1111)
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <p>
-     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 <code>new BigDecimal(double)</code>,参见 JDK API<br>
-     * </p>
-     * 
-     * <ul>
-     * <li>{@code new BigDecimal(0.1) ====> 0.1000000000000000055511151231257827021181583404541015625}</li>
-     * <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
-     * </ul>
-     * 
-     * 本方法底层调用的是 {@link NumberConverter#toNumber(Class, Class, Number)
-     * NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal} </blockquote>
-     * 
-     * @param toBeConvertedValue
-     *            值
-     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
-     *         如果找不到转换器或者转换的时候出现了异常,返回 null
-     * @see #convert(Object, Class)
-     * @see org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
-     * @see org.apache.commons.beanutils.converters.BigDecimalConverter
-     */
-    public static BigDecimal toBigDecimal(Object toBeConvertedValue){
-        return new BigDecimalConverter(null).convert(BigDecimal.class, toBeConvertedValue);
     }
 
     /**
@@ -499,6 +460,8 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            包含数字的对象.
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.LongConverter
@@ -507,6 +470,74 @@ public final class ConvertUtil{
     public static Long toLong(Object toBeConvertedValue){
         return new LongConverter(null).convert(Long.class, toBeConvertedValue);
     }
+
+    /**
+     * 将 <code>toBeConvertedValue</code> 转换成 {@link java.math.BigDecimal}.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toBigDecimal(null)                     = null
+     * ConvertUtil.toBigDecimal("aaaa")                   = null
+     * ConvertUtil.toBigDecimal(8)                        = BigDecimal.valueOf(8)
+     * ConvertUtil.toBigDecimal("8")                      = BigDecimal.valueOf(8)
+     * ConvertUtil.toBigDecimal(new BigDecimal("8"))      = BigDecimal.valueOf(8)
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} L227:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toBigDecimal(new String[] { "1", "2", "3" }) = BigDecimal.valueOf(1)
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} Line234:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toBigDecimal(toList("1", "2")) = BigDecimal.valueOf(1)
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>{@link java.lang.Double} 转成 {@link java.math.BigDecimal}注意点:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <span style="color:red">推荐使用 {@link BigDecimal#valueOf(double)}</span>,不建议使用 <code>new BigDecimal(double)</code>,参见 JDK API<br>
+     * </p>
+     * 
+     * <ul>
+     * <li>{@code new BigDecimal(0.1) ====> 0.1000000000000000055511151231257827021181583404541015625}</li>
+     * <li>{@code BigDecimal.valueOf(0.1) ====> 0.1}</li>
+     * </ul>
+     * 
+     * <p>
+     * 本方法底层调用的是 {@link NumberConverter#toNumber(Class, Class, Number)
+     * NumberConverter#toNumber(Class, Class, Number)},正确的处理了 {@link java.lang.Double} 转成 {@link java.math.BigDecimal}
+     * </p>
+     * </blockquote>
+     * 
+     * @param toBeConvertedValue
+     *            值
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果找不到转换器或者转换的时候出现了异常,返回 null
+     * @see #convert(Object, Class)
+     * @see org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)
+     * @see org.apache.commons.beanutils.converters.BigDecimalConverter
+     */
+    public static BigDecimal toBigDecimal(Object toBeConvertedValue){
+        return new BigDecimalConverter(null).convert(BigDecimal.class, toBeConvertedValue);
+    }
+
+    //************************************************************************************************************
 
     /**
      * 任意的数组转成{@link Integer} 数组.
