@@ -131,9 +131,9 @@ public final class ArrayUtil{
      * @param <T>
      *            the generic type
      * @param componentType
-     *            the component type
+     *            数组的类型
      * @param length
-     *            the length of the new array
+     *            数组的长度
      * @return 如果 <code>componentType</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 {@code length < 0} ,抛出 {@link IllegalArgumentException}<br>
      * @see java.lang.reflect.Array#newInstance(Class, int)

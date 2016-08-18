@@ -37,19 +37,23 @@ import com.feilong.core.lang.reflect.ReflectException;
  * <th align="left">字段</th>
  * <th align="left">说明</th>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link java.lang.Class#getCanonicalName() getCanonicalName()}<br>
  * 返回 Java Language Specification 中所定义的底层类的规范化名称</td>
  * <td>"com.feilong.core.date.DatePattern"</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.lang.Class#getName() getName()}</td>
  * <td>"com.feilong.core.date.DatePattern"</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link java.lang.Class#getSimpleName() getSimpleName()}</td>
  * <td>"DatePattern"</td>
  * </tr>
+ * 
  * </table>
  * 
  * <p>
@@ -57,6 +61,7 @@ import com.feilong.core.lang.reflect.ReflectException;
  * <br>
  * 但是对于array就显示出来了.
  * </p>
+ * 
  * <ul>
  * <li>{@link java.lang.Class#getName() getName()} 返回的是<b>[[Ljava.lang.String</b>之类的表现形式,</li>
  * <li>而 {@link java.lang.Class#getCanonicalName() getCanonicalName()} 返回的就是跟我们声明类似的形式.</li>
@@ -67,11 +72,13 @@ import com.feilong.core.lang.reflect.ReflectException;
  * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
  * 
  * <blockquote>
+ * 
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>instanceof运算符</td>
  * <td>针对实例,是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例<br>
@@ -79,17 +86,20 @@ import com.feilong.core.lang.reflect.ReflectException;
  * 第一个参数是对象实例名,第二个参数是具体的类名或接口名<br>
  * instanceof是Java的一个二元操作符,{@code ==,>,<}和是同一类东东,作用是测试它左边的对象是否是它右边的类的实例,返回boolean类型的数据</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>isAssignableFrom</td>
  * <td>针对class对象,是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的超类或接口.<br>
  * 通常调用格式是Class1.isAssignableFrom(Class2)<br>
  * 调用者和参数都是java.lang.Class类型.</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>isInstance(Object obj)方法</td>
  * <td>obj是被测试的对象,如果obj是调用这个方法的class或接口 的实例,则返回true.<br>
  * 这个方法是instanceof运算符的动态等价</td>
  * </tr>
+ * 
  * </table>
  * 
  * <p>
@@ -117,11 +127,13 @@ public final class ClassUtil{
      * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
      * 
      * <blockquote>
+     * 
      * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">字段</th>
      * <th align="left">说明</th>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>instanceof运算符</td>
      * <td>针对实例,是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例<br>
@@ -129,17 +141,20 @@ public final class ClassUtil{
      * 第一个参数是对象实例名,第二个参数是具体的类名或接口名<br>
      * instanceof是Java的一个二元操作符,{@code ==,>,<}和是同一类东东,作用是测试它左边的对象是否是它右边的类的实例,返回boolean类型的数据</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>isAssignableFrom</td>
      * <td>针对class对象,是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的超类或接口.<br>
      * 通常调用格式是Class1.isAssignableFrom(Class2)<br>
      * 调用者和参数都是java.lang.Class类型.</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td>isInstance(Object obj)方法</td>
      * <td>obj是被测试的对象,如果obj是调用这个方法的class或接口 的实例,则返回true.<br>
      * 这个方法是instanceof运算符的 <span style="color:red">动态等价</span></td>
      * </tr>
+     * 
      * </table>
      * 
      * <p>
@@ -291,24 +306,29 @@ public final class ClassUtil{
      * <th align="left">字段</th>
      * <th align="left">说明</th>
      * </tr>
+     * 
      * <tr valign="top">
      * <td><code>Class klass=对象引用o.{@link java.lang.Object#getClass() getClass()};</code></td>
      * <td>返回引用o运行时<b>真正所指的对象</b>(因为:儿子对象的引用可能会赋给父对象的引用变量中)所属的类O的Class的对象.<br>
      * 谈不上对类O做什么操作.</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td><code>Class klass=A.class;</code></td>
      * <td>JVM将使用类A的类装载器,将类A装入内存(前提:类A还没有装入内存),不对类A做类的初始化工作.<br>
      * 返回类A的Class的对象.</td>
      * </tr>
+     * 
      * <tr valign="top">
      * <td><code>Class klass={@link java.lang.Class#forName(String) Class.forName}("类全名");</code></td>
      * <td>装载连接<b>初始化类</b>.</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td><code>Class klass={@link java.lang.ClassLoader#loadClass(String) ClassLoader.loadClass}("类全名");</code></td>
      * <td>装载类,不连接不初始化.</td>
      * </tr>
+     * 
      * </table>
      * </blockquote>
      * 
