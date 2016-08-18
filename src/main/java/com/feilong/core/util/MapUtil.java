@@ -284,21 +284,13 @@ public final class MapUtil{
     }
 
     /**
-     * 将单值的参数map转成多值的参数map.
-     * 
-     * <p style="color:green">
-     * 返回的是 {@link LinkedHashMap},保证顺序和 参数 <code>singleValueMap</code>顺序相同
-     * </p>
-     * 
-     * <p>
-     * 和该方法正好相反的是 {@link #toSingleValueMap(Map)}
-     * </p>
+     * 将单值的<code>singleValueMap</code> 转成多值的map.
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <String, String>}();
+     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <>}();
      * 
      * singleValueMap.put("province", "江苏省");
      * singleValueMap.put("city", "南通市");
@@ -315,6 +307,14 @@ public final class MapUtil{
      * }
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的是 {@link LinkedHashMap},保证顺序和参数 <code>singleValueMap</code>顺序相同</li>
+     * <li>和该方法正好相反的是 {@link #toSingleValueMap(Map)}</li>
+     * </ol>
      * </blockquote>
      *
      * @param <K>

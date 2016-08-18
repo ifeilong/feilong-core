@@ -116,6 +116,15 @@ public class MapUtilTest{
     }
 
     //*******************com.feilong.core.util.MapUtil.toArrayValueMap(Map<String, String>)************************************************************
+    @Test
+    public void testToArrayValueMapNull(){
+        assertEquals(emptyMap(), MapUtil.toArrayValueMap(null));
+    }
+
+    @Test
+    public void testToArrayValueMapEmpty(){
+        assertEquals(emptyMap(), MapUtil.toArrayValueMap(new HashMap<String, String>()));
+    }
 
     /**
      * Test to array value map.
@@ -130,6 +139,17 @@ public class MapUtilTest{
         assertThat(arrayValueMap, allOf(hasEntry("province", toArray("江苏省")), hasEntry("city", toArray("南通市"))));
     }
 
+    @Test
+    public void testToArrayValueMap1(){
+        Map<String, String> singleValueMap = newLinkedHashMap(2);
+        singleValueMap.put("province", null);
+        singleValueMap.put("city", "南通市");
+
+        Map<String, String[]> arrayValueMap = MapUtil.toArrayValueMap(singleValueMap);
+        assertThat(arrayValueMap, allOf(hasEntry("province", toArray((String) null)), hasEntry("city", toArray("南通市"))));
+    }
+
+    //***************************************************************************
     /**
      * Test put sum value.
      */

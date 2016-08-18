@@ -1436,7 +1436,10 @@ public final class ConvertUtil{
      * 
      * String[] emptyArray = ConvertUtil.{@code <String>}toArray();     =   [] ; //= new String[] {};
      * Integer[] emptyArray = ConvertUtil.{@code <Integer>}toArray();   =   [] ; //= new Integer[] {};
+     * 
+     * <span style="color:red">//注意</span>
      * String[] nullArray = ConvertUtil.toArray(null)                   =   null;
+     * ConvertUtil.toArray((String) null)                               =   new String[] { null }
      * </pre>
      * 
      * </blockquote>

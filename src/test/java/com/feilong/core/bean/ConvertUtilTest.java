@@ -467,7 +467,18 @@ public class ConvertUtilTest{
     public void testToArray4(){
         assertArrayEquals(new String[] {}, ConvertUtil.<String> toArray());
         assertArrayEquals(new Integer[] {}, ConvertUtil.<Integer> toArray());
-        assertArrayEquals(null, ConvertUtil.<String> toArray(null));
+    }
+
+    @Test
+    public void testToArrayNull(){
+        Object[] array = ConvertUtil.toArray(null);
+        assertArrayEquals(null, array);
+    }
+
+    @Test
+    public void testToArrayNull1(){
+        String[] array = ConvertUtil.toArray((String) null);
+        assertArrayEquals(new String[] { null }, array);
     }
 
     /**
