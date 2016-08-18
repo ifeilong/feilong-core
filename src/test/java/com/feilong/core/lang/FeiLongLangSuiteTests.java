@@ -29,7 +29,10 @@ import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({
                 ArrayUtilTest.class,
+
+                ClassUtilIsInstanceAnyClassParameterizedTest.class,
                 ClassUtilTest.class,
+
                 ClassLoaderUtilTest.class,
                 EnumUtilTest.class,
                 NumberUtilTest.class,

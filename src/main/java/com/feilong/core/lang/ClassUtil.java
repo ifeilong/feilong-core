@@ -177,9 +177,23 @@ public final class ClassUtil{
 
     /**
      * 判断 <code>obj</code> 是否isInstance 任意的一个 <code>klasses</code>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ClassUtil.isInstanceAnyClass(null, toArray(Integer.class, CharSequence.class))           =   false
+     * ClassUtil.isInstanceAnyClass("1234", toArray(Comparable.class, CharSequence.class))      =   true
+     * ClassUtil.isInstanceAnyClass(new User(), null)                                           =   false
+     * ClassUtil.isInstanceAnyClass(new User(), toArray(Comparable.class, CharSequence.class))  =   true
+     * ClassUtil.isInstanceAnyClass(new User(), toArray(Integer.class, CharSequence.class))     =   false
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param obj
-     *            the obj
+     *            任意的对象
      * @param klasses
      *            the klasses
      * @return 如果 <code>null == klasses</code> ,返回 false<br>
