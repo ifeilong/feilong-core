@@ -78,6 +78,17 @@ public class MapUtilTest{
         assertThat(removeKeys, allOf(hasEntry("name", "feilong"), hasEntry("age", "18"), not(hasEntry("country", "china"))));
     }
 
+    //*****************com.feilong.core.util.MapUtil.toSingleValueMap(Map<String, String[]>)*************************************************
+    @Test
+    public void testToSingleValueMapNull(){
+        assertEquals(emptyMap(), MapUtil.toSingleValueMap(null));
+    }
+
+    @Test
+    public void testToSingleValueMapEmpty(){
+        assertEquals(emptyMap(), MapUtil.toSingleValueMap(new HashMap<String, String[]>()));
+    }
+
     /**
      * Test to single value map.
      */
@@ -103,6 +114,8 @@ public class MapUtilTest{
         Map<String, String> singleValueMap = MapUtil.toSingleValueMap(arrayValueMap);
         assertThat(singleValueMap, allOf(hasEntry("province", null), hasEntry("city", "南通市")));
     }
+
+    //*******************com.feilong.core.util.MapUtil.toArrayValueMap(Map<String, String>)************************************************************
 
     /**
      * Test to array value map.

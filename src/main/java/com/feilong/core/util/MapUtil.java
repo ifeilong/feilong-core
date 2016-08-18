@@ -202,22 +202,13 @@ public final class MapUtil{
     }
 
     /**
-     * 将多值的参数<code>arrayValueMap</code> 转成单值的参数map.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>返回的map是 提取参数 <code>arrayValueMap</code>的key做为key,value数组的第一个元素做<code>value</code></li>
-     * <li>返回的是 {@link LinkedHashMap},保证顺序和参数 <code>arrayValueMap</code>顺序相同</li>
-     * <li>和该方法正好相反的是 {@link #toArrayValueMap(Map)}</li>
-     * </ol>
-     * </blockquote>
+     * 将多值的<code>arrayValueMap</code> 转成单值的map.
      * 
      * <h3>示例1:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String[]>} arrayValueMap = new LinkedHashMap{@code <String, String[]>}();
+     * Map{@code <String, String[]>} arrayValueMap = new LinkedHashMap{@code <>}();
      * 
      * arrayValueMap.put("province", new String[] { "江苏省" });
      * arrayValueMap.put("city", new String[] { "南通市" });
@@ -259,6 +250,15 @@ public final class MapUtil{
      * }
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的map是 提取参数 <code>arrayValueMap</code>的key做为key,value数组的第一个元素做<code>value</code></li>
+     * <li>返回的是 {@link LinkedHashMap},保证顺序和参数 <code>arrayValueMap</code>顺序相同</li>
+     * <li>和该方法正好相反的是 {@link #toArrayValueMap(Map)}</li>
+     * </ol>
      * </blockquote>
      *
      * @param <K>
