@@ -40,6 +40,8 @@ public class ArrayUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ArrayUtilTest.class);
 
+    //************com.feilong.core.lang.ArrayUtil.newArray(Class<Object>, int)*************************************
+
     /**
      * Test new array.
      */
@@ -65,15 +67,72 @@ public class ArrayUtilTest{
         assertArrayEquals(new Integer[] { null, null, null }, ArrayUtil.newArray(Integer.class, 3));
     }
 
+    //***************com.feilong.core.lang.ArrayUtil.getElement(Object, int)**************************************
+
     /**
-     * TestArrayUtilTest.
+     * Test get by array.
      */
     @Test
-    public void testArrayUtilTest(){
-        String[] strs = new String[10];
-        assertSame(10, strs.length);
+    public void testGetElement(){
+        assertEquals("1", ArrayUtil.getElement(toArray("jinxin", "feilong", "1"), 2));
     }
 
+    /**
+     * Test get element primitive type.
+     */
+    @Test
+    public void testGetElementPrimitiveType(){
+        assertEquals(2, ArrayUtil.getElement(new int[] { 5, 8, 2, 0 }, 2));
+    }
+
+    /**
+     * Test get element null array.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetElementNullArray(){
+        ArrayUtil.getElement(null, 2);
+    }
+
+    /**
+     * Test get element error index.
+     */
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void testGetElementErrorIndex(){
+        ArrayUtil.getElement(toArray("jinxin", "feilong", "1"), -2);
+    }
+
+    /**
+     * Test get element error index 1.
+     */
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void testGetElementErrorIndex1(){
+        ArrayUtil.getElement(toArray("jinxin", "feilong", "1"), 5);
+    }
+
+    /**
+     * Test get element not array.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetElementNotArray(){
+        ArrayUtil.getElement("jinxin", 5);
+    }
+
+    //**************************************************************************************************
+    /**
+     * Convert list to string replace brackets.
+     */
+    @Test
+    public void convertListToStringReplaceBrackets(){
+        String[] array = toArray("1", "223");
+        //Use "Arrays.toString(array)" instead.
+        LOGGER.debug(array.toString());
+        LOGGER.debug(Arrays.toString(array));
+        LOGGER.debug(StringUtils.join(array, ","));
+    }
+
+    /**
+     * Test contains.
+     */
     @Test
     public void testContains(){
         assertEquals(true, ArrayUtils.contains(new Integer[] { 1, 223 }, 1));
@@ -86,22 +145,11 @@ public class ArrayUtilTest{
     }
 
     /**
-     * Test get by array.
+     * TestArrayUtilTest.
      */
     @Test
-    public void testGetElement(){
-        assertEquals("1", ArrayUtil.getElement(toArray("jinxin", "feilong", "1"), 2));
-    }
-
-    /**
-     * Convert list to string replace brackets.
-     */
-    @Test
-    public void convertListToStringReplaceBrackets(){
-        String[] array = toArray("1", "223");
-        //Use "Arrays.toString(array)" instead.
-        LOGGER.debug(array.toString());
-        LOGGER.debug(Arrays.toString(array));
-        LOGGER.debug(StringUtils.join(array, ","));
+    public void testArrayUtilTest(){
+        String[] strs = new String[10];
+        assertSame(10, strs.length);
     }
 }

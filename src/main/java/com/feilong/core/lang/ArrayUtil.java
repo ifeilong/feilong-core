@@ -35,6 +35,7 @@ import org.apache.commons.lang3.Validate;
  * <blockquote>
  * <ol>
  * <li>{@link #getElement(Object, int)},得到数组中的某个元素</li>
+ * <li>{@link #newArray(Class, int)},构造一个指定类型以及指定长度的数组.</li>
  * </ol>
  * </blockquote>
  * 
@@ -70,39 +71,51 @@ public final class ArrayUtil{
     }
 
     /**
-     * 得到指定数组对象 <code>array</code> 中指定索引 <code>index</code> 的值.
+     * 得到指定数组对象 <code>array</code> 中指定索引 <code>index</code> 的元素.
      * 
-     * <p>
-     * (Returns the value of the indexed component in the specified array object. <br>
-     * The value is automatically wrapped in an object if it has a primitive type.)
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>支持 primitive type类型数组</li>
+     * <li>
+     * Returns the value of the indexed component in the specified array object. <br>
+     * The value is automatically wrapped in an object if it has a primitive type.
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
-     * 
-     * Example 1:
-     * 
-     * Object array = new String[] { "jinxin", "feilong", "1" };
-     * LOGGER.info("" + ArrayUtil.getElement(array, 2));
-     * 
-     * 结果:1
+     * ArrayUtil.getElement(new String[] { "jinxin", "feilong", "1" }, 2)   =   1
+     * ArrayUtil.getElement(new int[] { 5, 8, 2, 0 }, 2)                    =   2
      * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param array
      *            数组
      * @param index
-     *            索引
+     *            索引,从0开始
      * @return 如果指定的参数{@code index}是负数,或者大于等于指定数组 <code>array</code> 的长度,抛出 {@link ArrayIndexOutOfBoundsException}
+     * @throws NullPointerException
+     *             如果 <code>array</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>array</code> 不是数组
      * @see java.lang.reflect.Array#get(Object, int)
      */
     @SuppressWarnings("unchecked")
     public static <T> T getElement(Object array,int index){
+        Validate.notNull(array, "array can't be null!");
         return (T) Array.get(array, index);
     }
 
     /**
-     * 构造一个指定类型 <code>componentType</code> 以及 指定长度 <code>length</code>的数组.
+     * 构造一个指定类型 <code>componentType</code> 以及指定长度 <code>length</code>的数组.
      * 
      * <h3>示例:</h3>
      * 
