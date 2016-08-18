@@ -24,7 +24,6 @@ import java.io.Serializable;
 import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 
-import com.feilong.core.DatePattern;
 import com.feilong.core.FeiLongVersion;
 import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.test.User;
@@ -122,16 +121,6 @@ public class ClassUtilTest{
         //        Class<?>[] klsClasses = { "1234".getClass(), "55555".getClass() };
         //        assertEquals(true, ClassUtils.isAssignable(klsClasses, CharSequence.class));
         assertEquals(true, ClassUtils.isAssignable("1234".getClass(), CharSequence.class));
-    }
-
-    /**
-     * Test is interface.
-     */
-    @Test
-    public void testIsInterface(){
-        assertEquals(false, ClassUtil.isInterface(null));
-        assertEquals(false, ClassUtil.isInterface(this.getClass()));
-        assertEquals(false, ClassUtil.isInterface(DatePattern.class));
     }
 
     /**

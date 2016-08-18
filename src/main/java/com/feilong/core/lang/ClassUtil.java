@@ -251,6 +251,21 @@ public final class ClassUtil{
     /**
      * 判断类 <code>ownerClass</code> 是否是接口.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ClassUtil.isInterface(null)                  =   false
+     * ClassUtil.isInterface(DatePattern.class)     =   false
+     * ClassUtil.isInterface(Validator.class)       =   false
+     * ClassUtil.isInterface(CharSequence.class)    =   true
+     * ClassUtil.isInterface(List.class)            =   true
+     * ClassUtil.isInterface(Map.class)             =   true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param ownerClass
      *            对象class
      * @return 是返回true<br>

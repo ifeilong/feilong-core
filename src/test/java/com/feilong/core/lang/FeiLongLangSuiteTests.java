@@ -30,6 +30,8 @@ import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
 @SuiteClasses({
                 ArrayUtilTest.class,
 
+                ClassUtilIsInterfaceParameterizedTest.class,
+                ClassUtilIsAssignableFromParameterizedTest.class,
                 ClassUtilIsInstanceAnyClassParameterizedTest.class,
                 ClassUtilTest.class,
 
