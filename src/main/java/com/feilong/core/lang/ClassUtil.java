@@ -220,6 +220,19 @@ public final class ClassUtil{
      * instanceof :子 {@code ----->} 父 <br>
      * isAssignableFrom :父 {@code ----->} 子
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ClassUtil.isAssignableFrom(Comparable.class, new User().getClass())      = true
+     * ClassUtil.isAssignableFrom(null, new User().getClass())                  = false
+     * ClassUtil.isAssignableFrom(CharSequence.class, "1234".getClass())        = true
+     * ClassUtil.isAssignableFrom(CharSequence.class, null)                     = false
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param klass
      *            the klass
