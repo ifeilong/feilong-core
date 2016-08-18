@@ -230,56 +230,6 @@ public class ConvertUtilTest{
     }
 
     /**
-     * Test to integer.
-     */
-    @Test
-    public void testToInteger(){
-        LOGGER.debug("" + toInteger(new String[] { "1", "2", "3" }));
-        assertEquals((Object) 1, toInteger("1"));
-        assertEquals(null, toInteger(null));
-        LOGGER.debug("" + toInteger(new String[] { "1", null, "2", "3" }));
-        LOGGER.debug("" + toInteger("1,2,3"));
-    }
-
-    /**
-     * Test to integer.
-     */
-    @Test
-    public void testToInteger2(){
-        assertEquals(null, toInteger(null));
-        assertEquals(8, toInteger(8L).intValue());
-        assertEquals(8, toInteger("8").intValue());
-        assertEquals(8, toInteger(new BigDecimal("8")).intValue());
-    }
-
-    /**
-     * Test to integer3.
-     */
-    @Test
-    public void testToInteger3(){
-        assertEquals(1, toInteger(null, 1).intValue());
-        assertEquals(8, toInteger(8L, 1).intValue());
-        assertEquals(8, toInteger("8", 1).intValue());
-        assertEquals(8, toInteger(new BigDecimal("8"), 1).intValue());
-    }
-
-    /**
-     * Test to intege4.
-     */
-    @Test
-    public void testToIntege4(){
-        assertEquals(null, toInteger("aaaa"));
-    }
-
-    /**
-     * Test to intege5.
-     */
-    @Test
-    public void testToIntege5(){
-        assertEquals(1, toInteger("aaaa", 1).intValue());
-    }
-
-    /**
      * To t test.
      */
     @Test
@@ -720,5 +670,19 @@ public class ConvertUtilTest{
         URL url = convert(spec, URL.class); //异常
 
         //MalformedURLException ConversionException
+    }
+
+    //**********************************************************************************************
+
+    /**
+     * 
+     * @since 1.8.6
+     */
+    private void b(){
+        assertEquals(1, toInteger(null, 1).intValue());
+        assertEquals(8, toInteger(8L, 1).intValue());
+        assertEquals(8, toInteger("8", 1).intValue());
+        assertEquals(8, toInteger(new BigDecimal("8"), 1).intValue());
+        assertEquals(1, toInteger("aaaa", 1).intValue());
     }
 }

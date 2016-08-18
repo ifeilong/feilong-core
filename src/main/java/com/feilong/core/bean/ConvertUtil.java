@@ -283,6 +283,22 @@ public final class ConvertUtil{
      * ConvertUtil.toInteger(new BigDecimal("8"))   = 8
      * </pre>
      * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} L227:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toInteger(new String[] { "1", "2", "3" }) = 1
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} Line234:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toInteger(toList("1", "2")) = 1
+     * </pre>
+     * 
      * </blockquote>
      * 
      * <p>
@@ -326,6 +342,8 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            值
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换<br>
+     *         如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换<br>
      *         如果找不到转换器或者转换的时候出现了异常,返回 null
      * @see org.apache.commons.beanutils.converters.IntegerConverter
      * @see org.apache.commons.lang3.math.NumberUtils#toInt(String)

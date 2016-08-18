@@ -28,6 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
                 //BeanUtilTest.class,
                 ConvertUtilTest.class, //
+                ConvertUtilToIntegerParameterizedTest.class,
                 ConvertUtilToBooleanParameterizedTest.class,
 
                 PropertyUtilTest.class,
