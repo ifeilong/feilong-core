@@ -68,7 +68,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toBoolean;
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toIntegers;
 import static com.feilong.core.bean.ConvertUtil.toIterator;
@@ -228,20 +227,6 @@ public class ConvertUtilTest{
         LOGGER.debug("" + toLong(new String[] { "1", "2", "3" }));
         LOGGER.debug("" + toLong(new String[] { "1", null, "2", "3" }));
         LOGGER.debug("" + toLong("1,2,3"));
-    }
-
-    /**
-     * Test to boolean.
-     */
-    @Test
-    public void testToBoolean(){
-        assertEquals(true, toBoolean(1L));
-        assertEquals(true, toBoolean("1"));
-        assertEquals(null, toBoolean(null));
-        assertEquals(false, toBoolean("9"));
-        assertEquals(false, toBoolean(new String[] { "0", "1", "2", "3" }));
-        assertEquals(true, toBoolean(new String[] { "1", null, "2", "3" }));
-        assertEquals(false, toBoolean("1,2,3"));
     }
 
     /**

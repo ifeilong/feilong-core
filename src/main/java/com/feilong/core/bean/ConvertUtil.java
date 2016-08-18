@@ -218,10 +218,11 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
+     * ConvertUtil.toBoolean(null)      =   null
+     * 
      * ConvertUtil.toBoolean(1L)        =   true
      * ConvertUtil.toBoolean("1")       =   true
      * ConvertUtil.toBoolean("9")       =   false
-     * ConvertUtil.toBoolean(null)      =   null
      * ConvertUtil.toBoolean("1,2,3")   =   false
      * </pre>
      * 
