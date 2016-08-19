@@ -21,7 +21,6 @@ import static java.math.RoundingMode.HALF_UP;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.NumberPattern;
@@ -376,7 +375,6 @@ public final class NumberUtil{
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果有异常,返回 {@link StringUtils#EMPTY}
      * @see NumberFormatUtil#format(Number, String)
      */
     public static String toString(Number value,String numberPattern){
@@ -386,58 +384,44 @@ public final class NumberUtil{
     // *****************************************************************************************************
 
     /**
-     * 获得进度,默认格式为 {@link NumberPattern#PERCENT_WITH_NOPOINT}.
+     * 计算进度(当前量 <code>current</code>/总量 <code>total</code>,然后转成指定的字符串格式 <code>toStringPattern</code>).
+     * 
+     * <p>
+     * 常用于友好的显示 下载进度,执行进度等等场景
+     * </p>
      * 
      * <h3>示例:</h3>
+     * 
      * <blockquote>
      * 
      * <pre class="code">
-     * NumberUtil.getProgress(2, 3)     = 67%
+     * 
+     * NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT) = "100%
+     * NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)  = "66.7%"
+     * 
      * </pre>
      * 
      * </blockquote>
-     *
-     * @param current
-     *            当前量
-     * @param total
-     *            总量
-     * @return 如果 <code>current</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>total</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 {@code current<=0},抛出 {@link IllegalArgumentException}<br>
-     *         如果 {@code total<=0},抛出 {@link IllegalArgumentException}<br>
-     *         如果 {@code current>total},抛出 {@link IllegalArgumentException}<br>
-     * @see NumberPattern#PERCENT_WITH_NOPOINT
-     * @see #getProgress(Number, Number, String)
-     * @since 1.0.7
-     */
-    public static String getProgress(Number current,Number total){
-        return getProgress(current, total, NumberPattern.PERCENT_WITH_NOPOINT);
-    }
-
-    /**
-     * 计算进度.
      * 
-     * <pre class="code">
-     * NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT) =   100%
-     * NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)  =   66.7%
-     * </pre>
-     *
      * @param current
      *            当前量
      * @param total
      *            总量
-     * @param numberPattern
-     *            the number pattern {@link NumberPattern}
+     * @param toStringPattern
+     *            转成字符串格式 {@link NumberPattern}
      * @return 如果 <code>current</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>total</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 {@code current<=0},抛出 {@link IllegalArgumentException}<br>
-     *         如果 {@code total<=0},抛出 {@link IllegalArgumentException}<br>
-     *         如果 {@code current>total},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code current <= 0},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code total <= 0},抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code current > total},抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>toStringPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>toStringPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see NumberPattern
      * @see #getDivideValue(Number, Number, int)
+     * @see #toString(Number, String)
      * @since 1.0.7
      */
-    public static String getProgress(Number current,Number total,String numberPattern){
+    public static String getProgress(Number current,Number total,String toStringPattern){
         Validate.notNull(current, "current can't be null/empty!");
         Validate.notNull(total, "total can't be null/empty!");
 
@@ -449,7 +433,7 @@ public final class NumberUtil{
         int scale = 8;
         BigDecimal bigDecimalCurrent = toBigDecimal(current);
         BigDecimal divideValue = getDivideValue(bigDecimalCurrent, total, scale);
-        return toString(divideValue, numberPattern);
+        return toString(divideValue, toStringPattern);
     }
 
     /**

@@ -1631,6 +1631,8 @@ public final class ConvertUtil{
         return map;
     }
 
+    //*************************************toProperties*********************************************************
+
     /**
      * 将map转成 {@link Properties}.
      * 

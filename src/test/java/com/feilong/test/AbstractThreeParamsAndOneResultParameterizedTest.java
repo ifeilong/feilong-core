@@ -30,7 +30,7 @@ import org.junit.runners.Parameterized.Parameter;
  * @param <Y>
  * @since 1.8.5
  */
-public abstract class AbstractThreeParamsAndOneResultParameterizedTest<I, E, T, Y> extends AbstractParameterizedTest{
+public abstract class AbstractThreeParamsAndOneResultParameterizedTest<I, T, Y, E> extends AbstractParameterizedTest{
 
     //必须是 public 访问修饰符
 

@@ -40,28 +40,6 @@ public class NumberUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(NumberUtilTest.class);
 
     /**
-     * int类型转换成16进制字符串.
-     * 
-     * @param i
-     *            int值
-     * @return int类型转换成16进制字符串
-     */
-    public static String intToHexString(int i){
-        return Integer.toHexString(i);
-    }
-
-    /**
-     * 16进制字符串转成int类型.
-     * 
-     * @param hexString
-     *            16进制字符串
-     * @return int类型
-     */
-    public static int hexStringToInt(String hexString){
-        return Integer.parseInt(hexString, 16);
-    }
-
-    /**
      * TestMathTest.
      */
     @Test
@@ -87,78 +65,8 @@ public class NumberUtilTest{
 
     }
 
-    /**
-     * Gets the progress.
-     *
-     * @return the progress
-     */
-    @Test
-    public void getProgress(){
-        assertEquals("100%", NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT));
-        assertEquals("100.00%", NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_2POINT));
-        assertEquals("100.0%", NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_1POINT));
-        assertEquals("50%", NumberUtil.getProgress(5, 10, NumberPattern.PERCENT_WITH_NOPOINT));
-        assertEquals("50.00%", NumberUtil.getProgress(5, 10, NumberPattern.PERCENT_WITH_2POINT));
-        assertEquals("50.0%", NumberUtil.getProgress(5, 10, NumberPattern.PERCENT_WITH_1POINT));
-        assertEquals("30.0%", NumberUtil.getProgress(3, 10, NumberPattern.PERCENT_WITH_1POINT));
-        assertEquals("33.3%", NumberUtil.getProgress(1, 3, NumberPattern.PERCENT_WITH_1POINT));
-        assertEquals("66.7%", NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT));
-        assertEquals("67%", NumberUtil.getProgress(2, 3));
-    }
+    //**************************************************************************
 
-    /**
-     * Gets the progress1.
-     *
-     * @return the progress 1
-     */
-    @Test(expected = NullPointerException.class)
-    public void getProgress1(){
-        NumberUtil.getProgress(null, 5, NumberPattern.PERCENT_WITH_NOPOINT);
-    }
-
-    /**
-     * Gets the progress2.
-     *
-     * @return the progress 2
-     */
-    @Test(expected = NullPointerException.class)
-    public void getProgress2(){
-        NumberUtil.getProgress(5, null, NumberPattern.PERCENT_WITH_NOPOINT);
-    }
-
-    /**
-     * Gets the progress3.
-     *
-     * @return the progress 3
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void getProgress3(){
-        LOGGER.debug(NumberUtil.getProgress(-5, 5, NumberPattern.PERCENT_WITH_NOPOINT));
-    }
-
-    /**
-     * Gets the progress4.
-     *
-     * @return the progress 4
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void getProgress4(){
-        NumberUtil.getProgress(5, -5, NumberPattern.PERCENT_WITH_NOPOINT);
-    }
-
-    /**
-     * Gets the progress5.
-     *
-     * @return the progress 5
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void getProgress5(){
-        NumberUtil.getProgress(5, 4, NumberPattern.PERCENT_WITH_NOPOINT);
-    }
-
-    /**
-     * Compare to.
-     */
     @Test
     public void compareTo(){
         BigDecimal totalFee = BigDecimal.valueOf(-0.01);

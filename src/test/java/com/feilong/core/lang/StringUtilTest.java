@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.User;
 
+import static com.feilong.core.NumberPattern.PERCENT_WITH_NOPOINT;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
@@ -213,7 +214,7 @@ public class StringUtilTest{
      */
     private static String buildMessageLog(int writeIndex,int bookSectionUrlMapSize,String sectionName,int contentLength){
         //进度,百分比
-        String progress = NumberUtil.getProgress(writeIndex + 1, bookSectionUrlMapSize);
+        String progress = NumberUtil.getProgress(writeIndex + 1, bookSectionUrlMapSize, PERCENT_WITH_NOPOINT);
         String format = "%1$-20s %2$-6s %3$-3s";
 
         return StringUtil.format(format, sectionName, "" + contentLength, progress).replace(" ", "\u3000");
