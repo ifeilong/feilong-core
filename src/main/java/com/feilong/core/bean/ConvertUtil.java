@@ -720,14 +720,111 @@ public final class ConvertUtil{
     /**
      * 将 <code>toBeConvertedValue</code> 转成Long 数组.
      * 
-     * <h3>示例:</h3>
+     * <h3>说明:</h3>
      * <blockquote>
      * 
+     * <p>
+     * 核心实现,参见 {@link ArrayConverter#convertToType(Class, Object)}
+     * </p>
+     * 
+     * <dl>
+     * <dt>如果参数 <code>toBeConvertedValue</code>是 <code>数组</code> 或者 {@link Collection}</dt>
+     * 
+     * <dd>
+     * <p>
+     * 参见{@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     * ArrayConverter#convertToType(Class,Object)}<br>
+     * 
+     * 会构造一个<code>Long</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
+     * </p>
+     * 
+     * <h4>示例:</h4>
+     * 
      * <pre class="code">
-     * toLongs("1,2,3")                             = [1,2,3]
-     * toLongs(new String[] { "1", "2", "3" })      = [1,2,3]
-     * toLongs(toList("1", "2", "3"))   = [1,2,3]
+     * ConvertUtil.toLongs(new String[] { "1", "2", "3" }       = [1L,2L,3L]
+     * ConvertUtil.toLongs(toList("1", "2", "3"))               = [1L,2L,3L]
      * </pre>
+     * 
+     * </dd>
+     * 
+     * <dt>如果参数 <code>toBeConvertedValue</code>不是 <code>数组</code>也不是{@link Collection}</dt>
+     * 
+     * <dd>
+     * <p>
+     * 那么首先会调用 {@link ArrayConverter#convertToCollection(Class, Object)} 将 <code>toBeConvertedValue</code>转成集合,转换逻辑参见
+     * {@link ArrayConverter#convertToCollection(Class, Object)}:
+     * </p>
+     * 
+     * <ol>
+     * <li>如果 <code>toBeConvertedValue</code>是{@link Number}, {@link Boolean} 或者 {@link java.util.Date} ,那么构造只有一个
+     * <code>toBeConvertedValue</code> 元素的 List返回.</li>
+     * <li>其他类型将转成字符串,然后调用 {@link ArrayConverter#parseElements(Class, String)}转成list.
+     * 
+     * <p>
+     * 具体转换逻辑为:
+     * </p>
+     * 
+     * <ul>
+     * <li>字符串期望是一个逗号分隔的字符串.</li>
+     * <li>字符串可以被'{' 开头 和 '}'结尾的分隔符包裹,程序内部会自动截取.</li>
+     * <li>会去除前后空白.</li>
+     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
+     * valid.</li>
+     * </ul>
+     * 
+     * </li>
+     * </ol>
+     * 
+     * <p>
+     * 得到list之后,会构造一个<code>Long</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
+     * </p>
+     * 
+     * <h4>示例:</h4>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLongs("1,2,3")                  = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs("{1,2,3}")                = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs("{ 1 ,2,3}")              = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs("1,2, 3")                 = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs("1,2 , 3")                = new Long[] { 1L, 2L, 3L }
+     * </pre>
+     * 
+     * </dd>
+     * 
+     * </dl>
+     * 
+     * <p>
+     * 每个元素转换成 Integer的时候,会调用
+     * {@link org.apache.commons.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
+     * </p>
+     * 
+     * <blockquote>
+     * 
+     * <dl>
+     * <dt>1.如果 元素是 Number类型</dt>
+     * <dd>那么会调用 {@link org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
+     * 
+     * <dt>2.如果 元素是 Boolean类型</dt>
+     * <dd>那么 true被转成1L,false 转成 0L</dd>
+     * 
+     * <dt>3.其他情况</dt>
+     * <dd>将元素转成字符串,并trim,再进行转换</dd>
+     * 
+     * <dt>4.元素是null的情况</dt>
+     * <dd>如果有元素是null,那么会调用 {@link org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
+     * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Integer 数组
+     * </dd>
+     * </dl>
+     * 
+     * <h4>示例:</h4>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toLongs(toList("1", "2", <span style="color:red">" 3"</span>))        = new Long[] { 1L, 2L, 3L }
+     * ConvertUtil.toLongs(toArray(true, false, false))                                  = new Long[] { 1L, 0L, 0L }
+     * ConvertUtil.toLongs(new String[] { "1", null, "2", "3" })                         = new Long[] {}
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * </blockquote>
      * 
@@ -738,7 +835,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * 
      * protected long[] getOrderIdLongs(String orderIds){
-     *     // 确认交易时候插入数据库的时候,不应该会出现 空的情况
+     *     <span style="color:green">// 确认交易时候插入数据库的时候,不应该会出现空的情况</span>
      *     String[] orderIdArray = orderIds.split(",");
      *     int orderLength = orderIdArray.length;
      *     long[] ids = new long[orderLength];
@@ -750,7 +847,7 @@ public final class ConvertUtil{
      * 
      * </pre>
      * 
-     * 可以重构成:
+     * <b>可以重构成:</b>
      * 
      * <pre class="code">
      * 
@@ -761,17 +858,6 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>value.getClass().isArray()</code> 或者 {@link Collection}</h3>
-     * <blockquote>
-     * 
-     * <p>
-     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
-     * Object)} 会基于targetType 构造一个<code>Long</code>数组对象, 大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代 <code>toBeConvertedValue</code>
-     * 依次进行转换
-     * </p>
-     * 
-     * </blockquote>
-     *
      * @param toBeConvertedValue
      *            the to be converted value
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>

@@ -36,6 +36,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ConvertUtilToIntegerDefaultValueParameterizedTest.class,
 
                 ConvertUtilToIntegersParameterizedTest.class,
+                ConvertUtilToLongsParameterizedTest.class,
 
                 PropertyUtilTest.class,
 

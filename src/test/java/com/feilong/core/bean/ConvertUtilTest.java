@@ -25,7 +25,6 @@ import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
 
 import java.io.Serializable;
@@ -72,7 +71,6 @@ import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLocale;
 import static com.feilong.core.bean.ConvertUtil.toLong;
-import static com.feilong.core.bean.ConvertUtil.toLongs;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.bean.ConvertUtil.toStrings;
 
@@ -141,26 +139,6 @@ public class ConvertUtilTest{
         BigDecimal b = BigDecimal.ONE;
         LOGGER.debug(a.compareTo(b) + "");
         LOGGER.debug(a.equals(b) + "");
-    }
-
-    /**
-     * Test to longs.
-     */
-    @Test
-    public void testToLongs(){
-        assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), toLongs("1,2,3"));
-        assertArrayEquals(ConvertUtil.<Long> toArray(1L, 2L, 3L), toLongs(new String[] { "1", "2", "3" }));
-        LOGGER.debug(JsonUtil.format(toLongs(new String[] { "1", null, "2", "3" }), 0, 0));
-
-        assertSame(null, toLongs(null));
-    }
-
-    /**
-     * Test to longs1.
-     */
-    @Test
-    public void testToLongs1(){
-        assertArrayEquals(new Long[] { 1L, 2L, 8L }, toLongs(toList("1", "2", "8")));
     }
 
     /**
