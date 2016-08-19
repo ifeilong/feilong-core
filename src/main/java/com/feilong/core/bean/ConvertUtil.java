@@ -209,6 +209,8 @@ public final class ConvertUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //*****************************************************************************************************
+
     /**
      * 将 <code>toBeConvertedValue</code> 转换成 {@link Boolean}类型.
      * 
@@ -228,7 +230,7 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>逻辑或者规则:</h3>
+     * <h3>逻辑及规则:</h3>
      * 
      * <blockquote>
      * 
