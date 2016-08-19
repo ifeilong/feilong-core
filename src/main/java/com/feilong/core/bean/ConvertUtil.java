@@ -39,6 +39,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.AbstractConverter;
+import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.BigDecimalConverter;
 import org.apache.commons.beanutils.converters.BooleanConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
@@ -593,36 +594,121 @@ public final class ConvertUtil{
         return new BigDecimalConverter(null).convert(BigDecimal.class, toBeConvertedValue);
     }
 
-    //************************************************************************************************************
+    //*********************数组***************************************************************************************
 
     /**
-     * 任意的数组转成{@link Integer} 数组.
+     * 将 <code>toBeConvertedValue</code> 转成{@link Integer} 数组.
      * 
-     * <h3>示例:</h3>
+     * <h3>说明:</h3>
      * <blockquote>
      * 
+     * <p>
+     * 核心实现,参见 {@link ArrayConverter#convertToType(Class, Object)}
+     * </p>
+     * 
+     * <dl>
+     * <dt>如果参数 <code>toBeConvertedValue</code>是 <code>数组</code> 或者 {@link Collection}</dt>
+     * 
+     * <dd>
+     * <p>
+     * 参见{@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object)
+     * ArrayConverter#convertToType(Class,Object)}<br>
+     * 
+     * 会构造一个<code>Integer</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
+     * </p>
+     * 
+     * <h4>示例:</h4>
+     * 
      * <pre class="code">
-     * ConvertUtil.toIntegers("1,2,3")                              = [1,2,3]
      * ConvertUtil.toIntegers(new String[] { "1", "2", "3" })       = [1,2,3]
      * ConvertUtil.toIntegers(toList("1", "2", "3"))    = [1,2,3]
      * </pre>
      * 
-     * </blockquote>
+     * </dd>
      * 
-     * <h3>如果传的 <code>toBeConvertedValue</code>是 <code>value.getClass().isArray()</code> 或者 {@link Collection}</h3>
-     * <blockquote>
+     * <dt>如果参数 <code>toBeConvertedValue</code>不是 <code>数组</code>也不是{@link Collection}</dt>
+     * 
+     * <dd>
+     * <p>
+     * 那么首先会调用 {@link ArrayConverter#convertToCollection(Class, Object)} 将 <code>toBeConvertedValue</code>转成集合,转换逻辑参见
+     * {@link ArrayConverter#convertToCollection(Class, Object)}:
+     * </p>
+     * 
+     * <ol>
+     * <li>如果 <code>toBeConvertedValue</code>是{@link Number}, {@link Boolean} 或者 {@link java.util.Date} ,那么构造只有一个
+     * <code>toBeConvertedValue</code> 元素的 List返回.</li>
+     * <li>其他类型将转成字符串,然后调用 {@link ArrayConverter#parseElements(Class, String)}转成list.
      * 
      * <p>
-     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToType(Class, Object) ArrayConverter#convertToType(Class,
-     * Object)} 会基于targetType 构造一个<code>Integer</code>数组对象, 大小长度就是 <code>toBeConvertedValue</code>的大小或者长度, 然后迭代
-     * <code>toBeConvertedValue</code>
-     * 依次进行转换
+     * 具体转换逻辑为:
      * </p>
+     * 
+     * <ul>
+     * <li>字符串期望是一个逗号分隔的字符串.</li>
+     * <li>字符串可以被'{' 开头 和 '}'结尾的分隔符包裹,程序内部会自动截取.</li>
+     * <li>会去除前后空白.</li>
+     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
+     * valid.</li>
+     * </ul>
+     * 
+     * </li>
+     * </ol>
+     * 
+     * <p>
+     * 得到list之后,会构造一个<code>Integer</code>数组,长度就是 <code>toBeConvertedValue</code>的大小或者长度,然后迭代<code>toBeConvertedValue</code>依次逐个进行转换
+     * </p>
+     * 
+     * <h4>示例:</h4>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toIntegers("1,2,3")                  = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers("{1,2,3}")                = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers("{ 1 ,2,3}")              = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers("1,2, 3")                 = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers("1,2 , 3")                = new Integer[] { 1, 2, 3 }
+     * </pre>
+     * 
+     * </dd>
+     * 
+     * </dl>
+     * 
+     * <p>
+     * 每个元素转换成 Integer的时候,会调用
+     * {@link org.apache.commons.beanutils.converters.NumberConverter#convertToType(Class, Object)},具体的规则是:
+     * </p>
+     * 
+     * <blockquote>
+     * 
+     * <dl>
+     * <dt>1.如果 元素是 Number类型</dt>
+     * <dd>那么会调用 {@link org.apache.commons.beanutils.converters.NumberConverter#toNumber(Class, Class, Number)}</dd>
+     * 
+     * <dt>2.如果 元素是 Boolean类型</dt>
+     * <dd>那么 true被转成1,false 转成 0</dd>
+     * 
+     * <dt>3.其他情况</dt>
+     * <dd>将元素转成字符串,并trim,再进行转换</dd>
+     * 
+     * <dt>4.元素是null的情况</dt>
+     * <dd>如果有元素是null,那么会调用 {@link org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)},会调用
+     * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleMissing(Class)} 方法,没有默认值的话,会抛出异常,然后catch之后返回 empty Integer 数组
+     * </dd>
+     * </dl>
+     * 
+     * <h4>示例:</h4>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toIntegers(toList("1", "2", <span style="color:red">" 3"</span>))        = new Integer[] { 1, 2, 3 }
+     * ConvertUtil.toIntegers(toArray(true, false, false))                                  = new Integer[] { 1, 0, 0 }
+     * ConvertUtil.toIntegers(new String[] { "1", null, "2", "3" })                         = new Integer[] {}
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * </blockquote>
      * 
      * @param toBeConvertedValue
-     *            the to be converted value
+     *            需要被转换的值
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
      * @see #convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.ArrayConverter
@@ -1964,9 +2050,9 @@ public final class ConvertUtil{
      * @param toBeConvertedValue
      *            需要被转换的对象/值
      * @param targetType
-     *            要被转换的目标类型
-     * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
-     *         如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
+     *            要转成什么类型
+     * @return 如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>toBeConvertedValue</code> 是null,那么直接返回null<br>
      *         否则返回 {@link org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)}
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object, Class)
      * @see org.apache.commons.beanutils.converters.AbstractConverter#convert(Class, Object)

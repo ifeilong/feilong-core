@@ -68,7 +68,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toIntegers;
 import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLocale;
@@ -175,35 +174,6 @@ public class ConvertUtilTest{
         assertArrayEquals(null, ConvertUtil.toStrings(null));
 
         LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings("null,1,2,3,\"4\",\'aaaa\'")));
-    }
-
-    /**
-     * Test to integers.
-     */
-    @Test
-    public void testToIntegers(){
-        assertEquals(null, toIntegers(null));
-
-        LOGGER.debug(JsonUtil.format(toIntegers(new String[] { "1", "2", "3" }), 0, 0));
-        LOGGER.debug(JsonUtil.format(toIntegers(new String[] { "1", null, "2", "3" }), 0, 0));
-
-        assertArrayEquals(new Integer[] { 1, 2, 3 }, toIntegers("1,2,3"));
-    }
-
-    /**
-     * Test to integers1.
-     */
-    @Test
-    public void testToIntegers1(){
-        LOGGER.debug(JsonUtil.format(toIntegers(toList("1", "2", "8")), 0, 0));
-    }
-
-    /**
-     * Test to integers2.
-     */
-    @Test
-    public void testToIntegers2(){
-        assertArrayEquals(null, toIntegers(null));
     }
 
     /**
@@ -648,7 +618,5 @@ public class ConvertUtilTest{
 
         //MalformedURLException ConversionException
     }
-
-    //**********************************************************************************************
 
 }
