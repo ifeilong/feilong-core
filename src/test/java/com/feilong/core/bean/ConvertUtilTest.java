@@ -18,10 +18,7 @@ package com.feilong.core.bean;
 import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -30,7 +27,6 @@ import static org.junit.Assert.assertThat;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,7 +39,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -54,7 +49,6 @@ import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,7 +65,6 @@ import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLocale;
 import static com.feilong.core.bean.ConvertUtil.toLong;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.bean.ConvertUtil.toStrings;
 
 /**
@@ -364,69 +357,6 @@ public class ConvertUtilTest{
     }
 
     /**
-     * Test to map.
-     */
-    @Test
-    public void testToMap(){
-        Map<String, String> map = toMap(
-
-                        Pair.of("张飞", "丈八蛇矛"),
-                        Pair.of("关羽", "青龙偃月刀"),
-                        Pair.of("赵云", "龙胆枪"),
-                        Pair.of("刘备", "双股剑"));
-
-        assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
-
-    }
-
-    /**
-     * Test to map1.
-     */
-    @Test
-    public void testToMap1(){
-        Map<String, String> map = toMap("张飞", "丈八蛇矛");
-        assertThat(map, allOf(notNullValue(), hasEntry("张飞", "丈八蛇矛")));
-
-    }
-
-    /**
-     * Test to map2.
-     */
-    @Test
-    public void testToMap2(){
-        Map<String, String> map = toMap(null, "丈八蛇矛");
-        assertThat(map, allOf(notNullValue(), hasEntry(null, "丈八蛇矛")));
-    }
-
-    /**
-     * Test to map3.
-     */
-    @Test
-    public void testToMap3(){
-        Map<String, String> map = toMap(toList(
-                        new SimpleEntry<>("张飞", "丈八蛇矛"),
-                        new SimpleEntry<>("关羽", "青龙偃月刀"),
-                        new SimpleEntry<>("赵云", "龙胆枪"),
-                        new SimpleEntry<>("刘备", "双股剑")));
-        assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
-
-    }
-
-    /**
-     * Test to map4.
-     */
-    @Test
-    public void testToMap4(){
-        Map<String, String> map = toMap(
-                        new SimpleEntry<>("张飞", "丈八蛇矛"),
-                        new SimpleEntry<>("关羽", "青龙偃月刀"),
-                        new SimpleEntry<>("赵云", "龙胆枪"),
-                        new SimpleEntry<>("刘备", "双股剑"));
-        assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
-
-    }
-
-    /**
      * To list.
      */
     @Test
@@ -555,23 +485,6 @@ public class ConvertUtilTest{
     @Test(expected = UnsupportedOperationException.class)
     public void testToLocale1(){
         toLocale(new User());
-    }
-
-    @Test
-    public void testToProperties(){
-        Map<String, Object> map = new LinkedHashMap<>();
-
-        map.put("name", "feilong");
-        map.put("age", 18);
-        map.put("country", "china");
-
-        Properties properties = org.apache.commons.collections4.MapUtils.toProperties(map);
-
-        LOGGER.debug("" + properties.get("age"));
-        LOGGER.debug(properties.getProperty("age"));
-        LOGGER.debug(JsonUtil.format(properties));
-
-        LOGGER.debug(JsonUtil.format(toMap(properties)));
     }
 
     @Test

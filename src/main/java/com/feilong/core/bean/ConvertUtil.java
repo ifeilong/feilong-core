@@ -58,6 +58,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.core.util.SortUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -1217,28 +1218,32 @@ public final class ConvertUtil{
         return null == collection ? Collections.<T> emptyEnumeration() : Collections.enumeration(collection);
     }
 
+    //**************************toMap******************************************************
+
     /**
      * 将 <code>mapEntryCollection</code> 转成map ({@link LinkedHashMap}).
      * 
-     * <p>
-     * 注意,返回是的是 {@link LinkedHashMap},顺序依照参数 <code>mapEntryCollection</code>,key是 {@link java.util.Map.Entry#getKey()},value 是
-     * {@link java.util.Map.Entry#getValue()}
-     * </p>
+     * <h3>说明:</h3>
      * 
-     * <h3>示例:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回是的是 {@link LinkedHashMap},顺序依照参数 <code>mapEntryCollection</code>,key是 {@link java.util.Map.Entry#getKey()},value 是
+     * {@link java.util.Map.Entry#getValue()}</li>
+     * <li>{@link java.util.Map.Entry} 已知实现类,你可以使用 {@link Pair},或者 {@link java.util.AbstractMap.SimpleEntry}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>{@link Pair} 示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
-     * Map{@code <String, String>} map = ConvertUtil.toMap(
-     *                 toList(
-     *                                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
-     *                                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
-     *                                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
-     *                                 new SimpleEntry{@code <>}("刘备", "双股剑")));
+     * Map{@code <String, String>} map = toMap(toList(//
+     *                 Pair.of("张飞", "丈八蛇矛"),
+     *                 Pair.of("关羽", "青龙偃月刀"),
+     *                 Pair.of("赵云", "龙胆枪"),
+     *                 Pair.of("刘备", "双股剑")));
      * LOGGER.debug(JsonUtil.format(map));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
@@ -1250,7 +1255,33 @@ public final class ConvertUtil{
      * "赵云": "龙胆枪",
      * "刘备": "双股剑"
      * }
+     * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>{@link java.util.AbstractMap.SimpleEntry} 示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = ConvertUtil.toMap(
+     *                 toList(
+     *                                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
+     *                                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
+     *                                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
+     *                                 new SimpleEntry{@code <>}("刘备", "双股剑")));
+     * LOGGER.debug(JsonUtil.format(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": "丈八蛇矛",
+     * "关羽": "青龙偃月刀",
+     * "赵云": "龙胆枪",
+     * "刘备": "双股剑"
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1264,6 +1295,7 @@ public final class ConvertUtil{
      * @param mapEntryCollection
      *            the map entry collection
      * @return 如果 <code>mapEntryCollection</code> 是null,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>mapEntryCollection</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
      * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
      * @since 1.7.1
      */
@@ -1271,6 +1303,9 @@ public final class ConvertUtil{
         if (null == mapEntryCollection){
             return emptyMap();
         }
+
+        Validate.noNullElements(mapEntryCollection, "mapEntryCollection can't has null elememt!");
+
         Map<K, V> map = newLinkedHashMap(mapEntryCollection.size());
         for (Map.Entry<K, V> entry : mapEntryCollection){
             map.put(entry.getKey(), entry.getValue());
@@ -1281,17 +1316,14 @@ public final class ConvertUtil{
     /**
      * 将 {@link java.util.Map.Entry}数组转成map ({@link LinkedHashMap}).
      * 
-     * <p>
-     * 注意,返回是的是 {@link LinkedHashMap},顺序依照参数 {@link java.util.Map.Entry}数组顺序,key是 {@link java.util.Map.Entry#getKey()},value 是
-     * {@link java.util.Map.Entry#getValue()}
-     * </p>
-     * 
-     * <h3>{@link java.util.Map.Entry} 已知实现类</h3>
+     * <h3>说明:</h3>
      * 
      * <blockquote>
-     * <p>
-     * 你可以使用 {@link Pair},或者 {@link java.util.AbstractMap.SimpleEntry}
-     * </p>
+     * <ol>
+     * <li>返回是的是 {@link LinkedHashMap},顺序依照参数 {@link java.util.Map.Entry}数组顺序,key是 {@link java.util.Map.Entry#getKey()},value 是
+     * {@link java.util.Map.Entry#getValue()}</li>
+     * <li>{@link java.util.Map.Entry} 已知实现类,你可以使用 {@link Pair},或者 {@link java.util.AbstractMap.SimpleEntry}</li>
+     * </ol>
      * </blockquote>
      * 
      * <h3>{@link Pair} 示例:</h3>
@@ -1299,7 +1331,6 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * Map{@code <String, String>} map = ConvertUtil.toMap(
      * 
      *                 Pair.of("张飞", "丈八蛇矛"),
@@ -1307,7 +1338,6 @@ public final class ConvertUtil{
      *                 Pair.of("赵云", "龙胆枪"),
      *                 Pair.of("刘备", "双股剑"));
      * LOGGER.debug(JsonUtil.format(map));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
@@ -1356,9 +1386,10 @@ public final class ConvertUtil{
      * 
      * <h3>重构:</h3>
      * 
-     * 以前初始化全局map的时候,你可能会这么写
-     * 
      * <blockquote>
+     * <p>
+     * 以前初始化全局map的时候,你可能会这么写
+     * </p>
      * 
      * <pre class="code">
      * 
@@ -1366,26 +1397,30 @@ public final class ConvertUtil{
      * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = new LinkedHashMap{@code <>}();
      * 
      * static{
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_GB, "GB");//(Gigabyte,吉字节,又称“千兆”)=1024MB, 
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_MB, "MB");//(Megabyte,兆字节,简称“兆”)=1024KB, 
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_KB, "KB");//(Kilobyte 千字节)=1024B
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");<span style="color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方)</span>
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_GB, "GB");<span style="color:green">//(Gigabyte,吉字节,又称“千兆”)=1024MB</span>
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_MB, "MB");<span style="color:green">//(Megabyte,兆字节,简称“兆”)=1024KB</span>
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_KB, "KB");<span style="color:green">//(Kilobyte 千字节)=1024B</span>
      * }
      * 
      * </pre>
      * 
-     * 现在你可以写成:
+     * <b>现在你可以重构成:</b>
      * 
      * <pre class="code">
      * 
      * <span style="color:green">// 除数和单位的map,必须是有顺序的 从大到小.</span>
      * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = ConvertUtil.toMap(
-     *                 Pair.of(FileUtils.ONE_TB, "TB"), //(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
-     *                 Pair.of(FileUtils.ONE_GB, "GB"), //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
-     *                 Pair.of(FileUtils.ONE_MB, "MB"), //(Megabyte,兆字节,简称“兆”)=1024KB, 
-     *                 Pair.of(FileUtils.ONE_KB, "KB")); //(Kilobyte 千字节)=1024B
+     *                 Pair.of(FileUtils.ONE_TB, "TB"), <span style="color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方) </span>
+     *                 Pair.of(FileUtils.ONE_GB, "GB"), <span style="color:green">//(Gigabyte,吉字节,又称“千兆”)=1024MB</span>
+     *                 Pair.of(FileUtils.ONE_MB, "MB"), <span style="color:green">//(Megabyte,兆字节,简称“兆”)=1024KB</span>
+     *                 Pair.of(FileUtils.ONE_KB, "KB")); <span style="color:green">//(Kilobyte 千字节)=1024B</span>
      * 
      * </pre>
+     * 
+     * <p>
+     * 代码更加简洁
+     * </p>
      * 
      * </blockquote>
      *
@@ -1396,6 +1431,7 @@ public final class ConvertUtil{
      * @param mapEntrys
      *            the entrys
      * @return 如果 <code>entrys</code> 是null,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>entrys</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
      * @see org.apache.commons.lang3.tuple.ImmutablePair#ImmutablePair(Object, Object)
      * @see org.apache.commons.lang3.tuple.Pair#of(Object, Object)
      * @since 1.7.1
@@ -1405,6 +1441,8 @@ public final class ConvertUtil{
         if (null == mapEntrys){
             return emptyMap();
         }
+        Validate.noNullElements(mapEntrys, "mapEntrys can't has null elememt!");
+
         Map<K, V> map = newLinkedHashMap(mapEntrys.length);
         for (Map.Entry<K, V> entry : mapEntrys){
             map.put(entry.getKey(), entry.getValue());
@@ -1498,18 +1536,48 @@ public final class ConvertUtil{
     }
 
     /**
-     * 转换成map.
+     * 将 <code>properties</code> 转换成map.
      * 
-     * <p>
-     * 注意,返回的是 {@link TreeMap}
-     * </p>
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Properties properties = new Properties();
+     * 
+     * properties.setProperty("name", "feilong");
+     * properties.setProperty("age", "18");
+     * properties.setProperty("country", "china");
+     * 
+     * LOGGER.debug(JsonUtil.format(toMap(properties)));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "age": "18",
+     * "country": "china",
+     * "name": "feilong"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的map 经过了 {@link SortUtil#sortByKeyAsc(Map)}排序处理,方便输出日志</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>关于 <code>Properties</code></h3>
      * 
      * <blockquote>
      * <p>
-     * Create a new HashMap and pass an instance of Properties.<br>
-     * Properties is an implementation of a Map which keys and values stored as in a string.
+     * Properties 是 Map的实现类 ,其 key和value 是String 类型.
      * </p>
      * 
      * <p>
@@ -1519,13 +1587,15 @@ public final class ConvertUtil{
      * 
      * @param properties
      *            the properties
-     * @return 如果 <code>properties</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>properties</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @see org.apache.commons.collections4.MapUtils#toProperties(Map)
      * @since 1.7.1
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static Map<String, String> toMap(Properties properties){
-        Validate.notEmpty(properties, "properties can't be null/empty!");
+        if (isNullOrEmpty(properties)){
+            return emptyMap();
+        }
         return sortByKeyAsc((Map) properties);//为了log方便,使用 treeMap
     }
 

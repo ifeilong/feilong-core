@@ -38,6 +38,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 ConvertUtilToIntegersParameterizedTest.class,
                 ConvertUtilToLongsParameterizedTest.class,
 
+                ConvertUtilToMapParameterizedTest.class,
+
                 PropertyUtilTest.class,
 
         //
