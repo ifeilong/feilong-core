@@ -84,6 +84,7 @@ import static com.feilong.core.util.SortUtil.sortByKeyAsc;
  * <th align="left">方法</th>
  * <th align="left">说明</th>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link ConvertUtils#convert(Object)}</td>
  * <td>将指定的value转成string.<br>
@@ -92,11 +93,13 @@ import static com.feilong.core.util.SortUtil.sortByKeyAsc;
  * 允许应用定制 Object{@code ->}String conversions(默认使用简单的使用 toString())<br>
  * see {@link ConvertUtilsBean#convert(Object)}</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link ConvertUtils#convert(String, Class)}</td>
  * <td>将String value转成 指定Class 类型的对象 (如果可能),否则返回string.<br>
  * see {@link ConvertUtilsBean#convert(String, Class)}</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link ConvertUtils#convert(String[], Class)}</td>
  * <td>将数组转成指定class类型的对象. <br>
@@ -104,12 +107,14 @@ import static com.feilong.core.util.SortUtil.sortByKeyAsc;
  * see {@link ConvertUtilsBean#convert(String[], Class)} <br>
  * see {@link #toArray(String[], Class)}</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link ConvertUtils#convert(Object, Class)}</td>
  * <td>将value转成指定Class类型的对象,如果Class的转换器没有注册,那么传入的value原样返回.<br>
  * see {@link ConvertUtilsBean#convert(Object, Class)}<br>
  * see {@link #convert(Object, Class)}</td>
  * </tr>
+ * 
  * </table>
  * </blockquote>
  * 
@@ -123,70 +128,87 @@ import static com.feilong.core.util.SortUtil.sortByKeyAsc;
  * <th align="left">字段</th>
  * <th align="left">说明</th>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link java.math.BigDecimal}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.math.BigInteger}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>boolean and {@link java.lang.Boolean}</td>
  * <td>default to false</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>byte and {@link java.lang.Byte}</td>
  * <td>default to zero</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>char and {@link java.lang.Character}</td>
  * <td>default to a space</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.lang.Class}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>double and {@link java.lang.Double}</td>
  * <td>default to zero</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>float and {@link java.lang.Float}</td>
  * <td>default to zero</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>int and {@link java.lang.Integer}</td>
  * <td>default to zero</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>long and {@link java.lang.Long}</td>
  * <td>default to zero</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>short and {@link java.lang.Short}</td>
  * <td>default to zero</td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.lang.String}</td>
  * <td>default to null</td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link java.io.File}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.net.URL}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link java.sql.Date}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
+ * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.sql.Time}</td>
  * <td><span style="color:red">no default value</span></td>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link java.sql.Timestamp}</td>
  * <td><span style="color:red">no default value</span></td>
@@ -304,14 +326,16 @@ public final class ConvertUtil{
      * </blockquote>
      * 
      * <p>
-     * 该方法非常适用于获取请求的分页参数
+     * 该方法非常适用 获取request请求的分页参数
      * </p>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
+     * <p>
      * 原来的写法:
+     * </p>
      * 
      * <pre class="code">
      * 
@@ -323,12 +347,14 @@ public final class ConvertUtil{
      *     }catch (Exception e){
      *         LOGGER.error(e.getClass().getName(), e);
      *     }
-     *     return 1; // 不带这个参数 或者转换异常 返回1
+     *     return 1; <span style="color:green">// 不带这个参数或者转换异常返回1</span>
      * }
      * 
      * </pre>
      * 
+     * <p>
      * 现在可以更改成:
+     * </p>
      * 
      * <pre class="code">
      * 
@@ -336,6 +362,18 @@ public final class ConvertUtil{
      *     String pageNoString = RequestUtil.getParameter(request, pageParamName);
      *     Integer pageNo = ConvertUtil.toInteger(pageNoString);
      *     return null == pageNo ? 1 : pageNo;
+     * }
+     * </pre>
+     * 
+     * <p>
+     * 当然对于这种场景,最快捷的:调用支持默认值的 {@link #toInteger(Object, Integer)} 方法
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public static Integer getCurrentPageNo(HttpServletRequest request,String pageParamName){
+     *     String pageNoString = RequestUtil.getParameter(request, pageParamName);
+     *     return ConvertUtil.toInteger(pageNoString, 1);
      * }
      * </pre>
      * 
@@ -363,7 +401,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
+     * ConvertUtil.toInteger(null,null)               = null
      * ConvertUtil.toInteger(null,1)                  = 1
      * ConvertUtil.toInteger("aaaa",1)                = 1
      * ConvertUtil.toInteger(8L,1)                    = 8
@@ -371,10 +409,26 @@ public final class ConvertUtil{
      * ConvertUtil.toInteger(new BigDecimal("8"),1)   = 8
      * </pre>
      * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>数组</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} L227:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toInteger(new String[] { "1", "2", "3" }, 8) = 1
+     * </pre>
+     * 
+     * <p>
+     * 如果传入的参数 <code>toBeConvertedValue</code> 是 <b>集合</b>,那么<b>取第一个元素</b>进行转换,参见 {@link AbstractConverter#convertArray(Object)} Line234:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toInteger(toList("1", "2"), 8) = 1
+     * </pre>
+     * 
      * </blockquote>
      * 
      * <p>
-     * 该方法非常适用于获取请求的分页参数
+     * 该方法非常适用 获取request请求的分页参数
      * </p>
      * 
      * <h3>示例:</h3>
@@ -393,7 +447,7 @@ public final class ConvertUtil{
      *     }catch (Exception e){
      *         LOGGER.error(e.getClass().getName(), e);
      *     }
-     *     return 1; // 不带这个参数 或者转换异常 返回1
+     *     return 1; <span style="color:green">// 不带这个参数或者转换异常返回1</span>
      * }
      * 
      * </pre>

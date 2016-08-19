@@ -33,6 +33,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 ConvertUtilToBooleanParameterizedTest.class,
                 ConvertUtilToBigDecimalParameterizedTest.class,
 
+                ConvertUtilToIntegerDefaultValueParameterizedTest.class,
+
                 PropertyUtilTest.class,
 
         //

@@ -68,7 +68,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import static com.feilong.core.bean.ConvertUtil.convert;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toIntegers;
 import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -652,15 +651,4 @@ public class ConvertUtilTest{
 
     //**********************************************************************************************
 
-    /**
-     * 
-     * @since 1.8.6
-     */
-    private void b(){
-        assertEquals(1, toInteger(null, 1).intValue());
-        assertEquals(8, toInteger(8L, 1).intValue());
-        assertEquals(8, toInteger("8", 1).intValue());
-        assertEquals(8, toInteger(new BigDecimal("8"), 1).intValue());
-        assertEquals(1, toInteger("aaaa", 1).intValue());
-    }
 }
