@@ -189,7 +189,9 @@ public final class NumberUtil{
      * @param two
      *            被除数,自动转成{@link BigDecimal}做除法运算
      * @param scale
-     *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
+     *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
+     *            如果为零或正数，则标度是小数点后的位数。<br>
+     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 0,抛出 {@link IllegalArgumentException}<br>
@@ -225,7 +227,9 @@ public final class NumberUtil{
      * @param two
      *            被除数,自动转成{@link BigDecimal}做除法运算
      * @param scale
-     *            标度,小数的位数,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
+     *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
+     *            如果为零或正数，则标度是小数点后的位数。<br>
+     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @param roundingMode
      *            舍入法 {@link RoundingMode}
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
@@ -253,15 +257,16 @@ public final class NumberUtil{
     // [start]Multiply
 
     /**
-     * 获得两个数字的乘积,并转成{@link BigDecimal}返回.
+     * 将第一个数字 <code>one</code> 和第二个数字 <code>two</code> 相乘,指定精度 <code>scale</code>, 返回{@link BigDecimal}.
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * NumberUtil.getMultiplyValue(5, 2, 5)                         =   10.00000
-     * NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5)   =   7.31250
+     * NumberUtil.getMultiplyValue(5, 2, 5)                         =   toBigDecimal("10.00000")
+     * NumberUtil.getMultiplyValue(new BigDecimal(6.25), 1.17, 5)   =   toBigDecimal("7.31250")
+     * NumberUtil.getMultiplyValue(9.86, 100, 0)                    =   toBigDecimal("986")
      * </pre>
      * 
      * </blockquote>
@@ -271,7 +276,9 @@ public final class NumberUtil{
      * @param two
      *            被乘数
      * @param scale
-     *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
+     *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
+     *            如果为零或正数，则标度是小数点后的位数。<br>
+     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
      *         否则 convert to {@link BigDecimal} and multiply each other
@@ -339,8 +346,7 @@ public final class NumberUtil{
         Validate.notNull(value, "value can't be null/empty!");
 
         long avgRankLong = Math.round(Double.parseDouble(value.toString()) * 2);
-        BigDecimal avgBigDecimal = BigDecimal.valueOf((double) (avgRankLong) / 2);
-        return setScale(avgBigDecimal, 1).toString();
+        return setScale(toBigDecimal((double) (avgRankLong) / 2), 1).toString();
     }
 
     /**
@@ -441,12 +447,30 @@ public final class NumberUtil{
     //********************setScale********************************************************
 
     /**
-     * 小学学的四舍五入的方式四舍五入 {@link RoundingMode#HALF_UP} 设置小数点位数.
+     * 使用四舍五入 {@link RoundingMode#HALF_UP} 设置小数点位数.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.setScale(5, 5)        = toBigDecimal("5.00000")
+     * NumberUtil.setScale(5.2, 3)      = toBigDecimal("5.200")
+     * NumberUtil.setScale(5.26, 1)     = toBigDecimal("5.3")
+     * NumberUtil.setScale(-5.26, 1)    = toBigDecimal("-5.3")
+     * 
+     * NumberUtil.setScale(-0, 1)       = toBigDecimal("0.0")
+     * 
+     * NumberUtil.setScale(0, 1)        = toBigDecimal("0.0")
+     * NumberUtil.setScale(0, 2)        = toBigDecimal("0.00")
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>被舍入部分>=0.5向上 否则向下<br>
+     * <li>被舍入部分{@code >=}0.5向上,否则向下<br>
      * </li>
      * <li>{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2</li>
      * </ol>
@@ -455,7 +479,9 @@ public final class NumberUtil{
      * @param value
      *            number
      * @param scale
-     *            标度,小数的位数,四舍五入,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
+     *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
+     *            如果为零或正数，则标度是小数点后的位数。<br>
+     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.RoundingMode#HALF_UP
@@ -472,7 +498,9 @@ public final class NumberUtil{
      * @param value
      *            number
      * @param scale
-     *            标度,小数的位数,see {@link java.math.BigDecimal#setScale(int, RoundingMode)}
+     *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
+     *            如果为零或正数，则标度是小数点后的位数。<br>
+     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @param roundingMode
      *            舍入法 {@link RoundingMode} 参考:<a href="#RoundingMode">JAVA 8种舍入法</a>
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>

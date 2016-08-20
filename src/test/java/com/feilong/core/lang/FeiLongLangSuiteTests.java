@@ -40,8 +40,12 @@ import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
 
                 NumberUtilTest.class,
 
+                NumberUtilSetScaleTest.class,
+                NumberUtilSetScaleParameterizedTest.class,
+
                 NumberUtilGetAddValueTest.class,
                 NumberUtilGetMultiplyValueTest.class,
+                NumberUtilGetMultiplyValueParameterizedTest.class,
                 NumberUtilGetDivideValueTest.class,
 
                 NumberUtilGetProgressTest.class,

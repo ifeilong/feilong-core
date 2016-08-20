@@ -15,32 +15,21 @@
  */
 package com.feilong.core.lang;
 
+import static java.math.RoundingMode.HALF_UP;
+
 import org.junit.Test;
 
-public class NumberUtilGetMultiplyValueTest{
+public class NumberUtilSetScaleTest{
 
-    /**
-     * Gets the progress5.
-     * 
-     */
     @Test(expected = NullPointerException.class)
-    public void testGetMultiplyValue1(){
-        NumberUtil.getMultiplyValue(null, 1, 2);
+    public void testSetScaleNullValue(){
+        NumberUtil.setScale(null, 5);
     }
 
-    /**
-     * Test get multiply value2.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testGetMultiplyValue2(){
-        NumberUtil.getMultiplyValue(1, null, 2);
-    }
+    //********************************************************
 
-    /**
-     * Test get multiply value3.
-     */
     @Test(expected = NullPointerException.class)
-    public void testGetMultiplyValue3(){
-        NumberUtil.getMultiplyValue(null, null, 2);
+    public void testSetScaleRoundingMode(){
+        NumberUtil.setScale(null, 5, HALF_UP);
     }
 }
