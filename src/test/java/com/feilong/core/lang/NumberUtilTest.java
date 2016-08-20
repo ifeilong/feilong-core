@@ -19,13 +19,10 @@ import static java.math.BigDecimal.ZERO;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.feilong.core.NumberPattern;
 
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 
@@ -94,70 +91,6 @@ public class NumberUtilTest{
     }
 
     /**
-     * Test convert number to string.
-     */
-    @Test
-    public void testToString1(){
-        String pattern = "#######.########";
-        assertEquals("88.02", NumberUtil.toString(88.02, pattern));
-        assertEquals("88.02", NumberUtil.toString(88.020, pattern));
-        assertEquals("88.02002", NumberUtil.toString(88.02002, pattern));
-        assertEquals("88", NumberUtil.toString(88, pattern));
-        assertEquals("88.02000005", NumberUtil.toString(88.02000005, pattern));
-        assertEquals("88.025", NumberUtil.toString(88.02500000, pattern));
-        assertEquals("88.0200005", NumberUtil.toString(88.0200005, pattern));
-        assertEquals("88.002", NumberUtil.toString(88.002, pattern));
-        // //######0
-        LOGGER.debug(NumberUtil.toString((double) 5 / 8 * 100, "#######.###"));
-        DecimalFormat df = new DecimalFormat("######0");
-        LOGGER.debug(df.format(((double) 5 / Integer.valueOf(8)) * 100));
-
-        assertEquals("C00000008", NumberUtil.toString(8, "C00000000"));
-
-        assertEquals("24%", NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_NOPOINT));
-        assertEquals("24.00%", NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT));
-
-        Integer a = 1;
-        Long b = 400L;
-        assertEquals("0.25%", NumberUtil.toString((double) a / b, NumberPattern.PERCENT_WITH_2POINT));
-
-        assertEquals("1", NumberUtil.toString(0.8, NumberPattern.NO_SCALE));
-        assertEquals("-1", NumberUtil.toString(-0.8, NumberPattern.NO_SCALE));
-        assertEquals("-2", NumberUtil.toString(-1.8, NumberPattern.NO_SCALE));
-        assertEquals("2", NumberUtil.toString(1.8, NumberPattern.NO_SCALE));
-        assertEquals("111112", NumberUtil.toString(111111.5, NumberPattern.NO_SCALE));
-        assertEquals("111113", NumberUtil.toString(111112.5, NumberPattern.NO_SCALE));
-        assertEquals("88888888", NumberUtil.toString(88888888, NumberPattern.NO_SCALE));
-    }
-
-    @Test
-    public void testToPERCENT_WITH_NOPOINT(){
-        assertEquals("0%", NumberUtil.toString(0, NumberPattern.PERCENT_WITH_NOPOINT));
-        assertEquals("100%", NumberUtil.toString(1, NumberPattern.PERCENT_WITH_NOPOINT));
-        assertEquals("10000%", NumberUtil.toString(100, NumberPattern.PERCENT_WITH_NOPOINT));
-    }
-
-    /**
-     * To percen t_ wit h_ nopoin t1.
-     */
-    @Test
-    public void toPERCENT_WITH_NOPOINT1(){
-        assertEquals("0.0%", NumberUtil.toString(0, NumberPattern.PERCENT_WITH_1POINT));
-        assertEquals("100.0%", NumberUtil.toString(1, NumberPattern.PERCENT_WITH_1POINT));
-        assertEquals("10000.0%", NumberUtil.toString(100, NumberPattern.PERCENT_WITH_1POINT));
-    }
-
-    /**
-     * To percen t_ wit h_ nopoin t2.
-     */
-    @Test
-    public void toPERCENT_WITH_NOPOINT2(){
-        assertEquals("0.00%", NumberUtil.toString(0, NumberPattern.PERCENT_WITH_2POINT));
-        assertEquals("100.00%", NumberUtil.toString(1, NumberPattern.PERCENT_WITH_2POINT));
-        assertEquals("10000.00%", NumberUtil.toString(100, NumberPattern.PERCENT_WITH_2POINT));
-    }
-
-    /**
      * To no scale.
      */
     @Test
@@ -196,43 +129,6 @@ public class NumberUtilTest{
         NumberUtil.toNoScale(null);
     }
 
-    /**
-     * Test to string.
-     */
-    @Test
-    public void testToString(){
-        assertEquals("88.02", NumberUtil.toString(88.02, NumberPattern.TWO_DECIMAL_POINTS));
-        assertEquals("88.03", NumberUtil.toString(88.028, NumberPattern.TWO_DECIMAL_POINTS));
-    }
-
-    /**
-     * Test to string2.
-     */
-    @Test
-    public void testToString2(){
-        double value = -88.6;
-        LOGGER.debug("" + toBigDecimal(value).setScale(2, BigDecimal.ROUND_HALF_UP));
-        LOGGER.debug(NumberUtil.toString(value, NumberPattern.TWO_DECIMAL_POINTS));
-
-        value = -88.067;
-        LOGGER.debug(NumberUtil.toString(value, NumberPattern.TWO_DECIMAL_POINTS));
-
-        LOGGER.debug("******************************");
-
-        value = 88.6;
-        LOGGER.debug("" + toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
-        LOGGER.debug(NumberUtil.toString(value, NumberPattern.NO_SCALE));
-
-        value = -88.6;
-        LOGGER.debug("" + toBigDecimal(value).setScale(0, BigDecimal.ROUND_HALF_UP));
-        LOGGER.debug(NumberUtil.toString(value, NumberPattern.NO_SCALE));
-    }
-
-    /**
-     * Gets the divide no scale value.
-     *
-     * @return the divide no scale value
-     */
     @Test
     public void getDivideNoScaleValue(){
         assertEquals(0, NumberUtil.getDivideValue(0, 2, 0).intValue());
@@ -307,61 +203,4 @@ public class NumberUtilTest{
         NumberUtil.getMultiplyValue(null, null, 2);
     }
 
-    //***********************testGetAddValue**********************************************************
-
-    /**
-     * Test get add value.
-     */
-    @Test
-    public void testGetAddValue(){
-        assertEquals(new BigDecimal(11), NumberUtil.getAddValue(new BigDecimal(6), 5));
-    }
-
-    /**
-     * Test get add value 2.
-     */
-    @Test
-    public void testGetAddValue2(){
-        assertEquals(new BigDecimal(11), NumberUtil.getAddValue(2, 4, 5));
-    }
-
-    /**
-     * Test get add value null pointer exception.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testGetAddValueNullPointerException(){
-        NumberUtil.getAddValue(null);
-    }
-
-    /**
-     * Test get add value illegal argument exception.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAddValueIllegalArgumentException(){
-        NumberUtil.getAddValue(null, null);
-    }
-
-    /**
-     * Test get add value illegal argument exception 1.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAddValueIllegalArgumentException1(){
-        NumberUtil.getAddValue(null, 5);
-    }
-
-    /**
-     * Test get add value 4.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAddValue4(){
-        NumberUtil.getAddValue(new BigDecimal(6), null);
-    }
-
-    /**
-     * Test get add value 33.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAddValue33(){
-        NumberUtil.getAddValue(2, 4, null);
-    }
 }

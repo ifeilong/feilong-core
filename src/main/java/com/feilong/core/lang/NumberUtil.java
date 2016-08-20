@@ -342,7 +342,7 @@ public final class NumberUtil{
     }
 
     /**
-     * 将数字 <code>value</code> 按照指定的格式 <code>numberPattern</code> 格式成字符串 .
+     * 将数字 <code>value</code> 按照指定的格式 <code>toStringPattern</code> 格式成字符串 .
      * 
      * <p>
      * 调用 {@link NumberFormatUtil#format(Number, String)},当遇到需要舍入的时候,使用常用的 {@link RoundingMode#HALF_UP}
@@ -370,15 +370,15 @@ public final class NumberUtil{
      * 
      * @param value
      *            值
-     * @param numberPattern
-     *            规则 {@link NumberPattern}
+     * @param toStringPattern
+     *            转成字符串格式 {@link NumberPattern}
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>toStringPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>toStringPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see NumberFormatUtil#format(Number, String)
      */
-    public static String toString(Number value,String numberPattern){
-        return NumberFormatUtil.format(value, numberPattern);
+    public static String toString(Number value,String toStringPattern){
+        return NumberFormatUtil.format(value, toStringPattern);
     }
 
     // *****************************************************************************************************
