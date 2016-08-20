@@ -17,6 +17,7 @@ package com.feilong.core.lang;
 
 import static java.math.BigDecimal.ZERO;
 import static java.math.RoundingMode.HALF_UP;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -493,7 +494,35 @@ public final class NumberUtil{
     }
 
     /**
-     * 设置精度.
+     * 使用<code>roundingMode</code> 来设置小数点位数.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.setScale(5, 5,HALF_UP)        = toBigDecimal("5.00000")
+     * NumberUtil.setScale(5.2, 3,HALF_UP)      = toBigDecimal("5.200")
+     * NumberUtil.setScale(5.26, 1,HALF_UP)     = toBigDecimal("5.3")
+     * NumberUtil.setScale(-5.26, 1,HALF_UP)    = toBigDecimal("-5.3")
+     * 
+     * NumberUtil.setScale(-0, 1,HALF_UP)       = toBigDecimal("0.0")
+     * 
+     * NumberUtil.setScale(0, 1,HALF_UP)        = toBigDecimal("0.0")
+     * NumberUtil.setScale(0, 2,HALF_UP)        = toBigDecimal("0.00")
+     * 
+     * NumberUtil.setScale(5, 5,null)           = toBigDecimal("5.00000")
+     * NumberUtil.setScale(5.2, 3,null)         = toBigDecimal("5.200")
+     * NumberUtil.setScale(5.26, 1,null)        = toBigDecimal("5.3")
+     * NumberUtil.setScale(-5.26, 1,null)       = toBigDecimal("-5.3")
+     * 
+     * NumberUtil.setScale(-0, 1,null)          = toBigDecimal("0.0")
+     * 
+     * NumberUtil.setScale(0, 1,null)           = toBigDecimal("0.0")
+     * NumberUtil.setScale(0, 2,null)           = toBigDecimal("0.00")
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param value
      *            number
@@ -502,15 +531,14 @@ public final class NumberUtil{
      *            如果为零或正数，则标度是小数点后的位数。<br>
      *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @param roundingMode
-     *            舍入法 {@link RoundingMode} 参考:<a href="#RoundingMode">JAVA 8种舍入法</a>
+     *            舍入模式{@link RoundingMode},如果 为null,使用常用的 {@link RoundingMode#HALF_UP}
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>roundingMode</code>是null,抛出 {@link NullPointerException}
+     *         如果 <code>roundingMode</code>是null,使用常用的 {@link RoundingMode#HALF_UP} <br>
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @since 1.8.6
      */
     public static BigDecimal setScale(Number value,int scale,RoundingMode roundingMode){
         Validate.notNull(value, "value can't be null!");
-        Validate.notNull(roundingMode, "roundingMode can't be null!");
-        return toBigDecimal(value).setScale(scale, roundingMode);
+        return toBigDecimal(value).setScale(scale, defaultIfNull(roundingMode, HALF_UP));
     }
 }

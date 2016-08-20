@@ -30,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 NumberUtilSetScaleTest.class,
                 NumberUtilSetScaleParameterizedTest.class,
+                NumberUtilSetScaleRoundingModeParameterizedTest.class,
 
                 NumberUtilGetAddValueTest.class,
                 NumberUtilGetMultiplyValueTest.class,
