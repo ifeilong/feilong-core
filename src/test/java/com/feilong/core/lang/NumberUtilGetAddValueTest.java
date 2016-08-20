@@ -40,12 +40,24 @@ public class NumberUtilGetAddValueTest{
         assertEquals(new BigDecimal(11), NumberUtil.getAddValue(2, 4, 5));
     }
 
+    //**********************************************************************
+
     /**
      * Test get add value null pointer exception.
      */
     @Test(expected = NullPointerException.class)
     public void testGetAddValueNullPointerException(){
         NumberUtil.getAddValue(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetAddValueNullPointerException2(){
+        NumberUtil.getAddValue();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetAddValueNullPointerException1(){
+        NumberUtil.getAddValue((BigDecimal) null);
     }
 
     /**

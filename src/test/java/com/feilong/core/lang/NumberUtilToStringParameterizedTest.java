@@ -19,8 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
@@ -34,9 +32,6 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 public class NumberUtilToStringParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Number, String, String>{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(NumberUtilToStringParameterizedTest.class);
 
     @Parameters(name = "index:{index}:NumberUtil.toString({0},\"{1}\")=\"{2}\"")
     public static Iterable<Object[]> data(){
@@ -96,5 +91,4 @@ public class NumberUtilToStringParameterizedTest extends AbstractTwoParamsAndOne
     public void testGetProgress(){
         assertEquals(expectedValue, NumberUtil.toString(input1, input2));
     }
-
 }

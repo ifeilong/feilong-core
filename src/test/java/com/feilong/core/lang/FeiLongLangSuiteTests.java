@@ -39,7 +39,11 @@ import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
                 EnumUtilTest.class,
 
                 NumberUtilTest.class,
+
                 NumberUtilGetAddValueTest.class,
+                NumberUtilGetMultiplyValueTest.class,
+                NumberUtilGetDivideValueTest.class,
+
                 NumberUtilGetProgressTest.class,
                 NumberUtilGetProgressParameterizedTest.class,
                 NumberUtilToStringParameterizedTest.class,

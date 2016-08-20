@@ -275,7 +275,7 @@ public final class NumberUtil{
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
      *         否则 convert to {@link BigDecimal} and multiply each other
-     * @see #setScale(BigDecimal, int)
+     * @see #setScale(Number, int)
      * @since 1.5.5
      */
     public static BigDecimal getMultiplyValue(Number one,Number two,int scale){
@@ -306,12 +306,14 @@ public final class NumberUtil{
      * @param numbers
      *            the numbers
      * @return 如果 <code>numbers</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>numbers</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      *         如果有元素是null,抛出 {@link IllegalArgumentException}<br>
      *         否则将每个元素转换成{@link BigDecimal},并进行累加操作
      * @since 1.5.5
      */
     public static BigDecimal getAddValue(Number...numbers){
-        Validate.noNullElements(numbers, "numbers can't be null!");
+        Validate.notEmpty(numbers, "numbers can't be null/empty!");
+        Validate.noNullElements(numbers, "numbers can't has null element!");
 
         BigDecimal sum = ZERO;
         for (Number number : numbers){
@@ -436,60 +438,19 @@ public final class NumberUtil{
         return toString(divideValue, toStringPattern);
     }
 
-    /**
-     * 四舍五入 {@link RoundingMode#HALF_UP},取整,无小数.
-     * 
-     * <p style="color:red">
-     * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 {@link Math#round(double) Math.round(-2.5)} 会是-2
-     * </p>
-     *
-     * @param value
-     *            the value
-     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
-     * @see #toNoScale(Number, RoundingMode)
-     */
-    public static BigDecimal toNoScale(Number value){
-        return toNoScale(value, HALF_UP);
-    }
+    //********************setScale********************************************************
 
     /**
-     * 取整,无小数.
+     * 小学学的四舍五入的方式四舍五入 {@link RoundingMode#HALF_UP} 设置小数点位数.
      * 
-     * <p style="color:red">
-     * 注意:{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 {@link Math#round(double) Math.round(-2.5)} 会是-2
-     * </p>
-     * 
-     * @param value
-     *            the value
-     * @param roundingMode
-     *            舍入法 {@link RoundingMode}
-     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>roundingMode</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
-     * @since 1.5.5
-     */
-    public static BigDecimal toNoScale(Number value,RoundingMode roundingMode){
-        Validate.notNull(value, "value can't be null!");
-        Validate.notNull(roundingMode, "roundingMode can't be null!");
-
-        //将int、long、double、string类型的数值转为BigDecimal.
-        //使用double会造成精度丢失,而使用BigDecimal就是为了解决精度丢失的问题,建议使用String方式转换.
-        return setScale(toBigDecimal(value), 0, roundingMode);
-    }
-
-    //************************************************************************************************
-
-    /**
-     * 小学学的 四舍五入的方式四舍五入 {@link RoundingMode#HALF_UP} 设置小数点位数.
-     * 
-     * <p>
-     * 被舍入部分>=0.5向上 否则向下<br>
-     * </p>
-     * 
-     * <p style="color:red">
-     * 注意{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>被舍入部分>=0.5向上 否则向下<br>
+     * </li>
+     * <li>{@link RoundingMode#HALF_UP} -2.5 会变成-3,如果是 Math.round(-2.5) 会是-2</li>
+     * </ol>
+     * </blockquote>
      * 
      * @param value
      *            number
@@ -499,8 +460,9 @@ public final class NumberUtil{
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.RoundingMode#HALF_UP
      * @see java.math.BigDecimal#ROUND_HALF_UP
+     * @since 1.8.6
      */
-    private static BigDecimal setScale(BigDecimal value,int scale){
+    public static BigDecimal setScale(Number value,int scale){
         return setScale(value, scale, HALF_UP);
     }
 
@@ -516,10 +478,11 @@ public final class NumberUtil{
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>roundingMode</code>是null,抛出 {@link NullPointerException}
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
+     * @since 1.8.6
      */
-    private static BigDecimal setScale(BigDecimal value,int scale,RoundingMode roundingMode){
+    public static BigDecimal setScale(Number value,int scale,RoundingMode roundingMode){
         Validate.notNull(value, "value can't be null!");
         Validate.notNull(roundingMode, "roundingMode can't be null!");
-        return value.setScale(scale, roundingMode);
+        return toBigDecimal(value).setScale(scale, roundingMode);
     }
 }
