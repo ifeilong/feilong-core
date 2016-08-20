@@ -20,6 +20,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.core.lang.numberutiltest.FeiLongNumberUtilSuiteTests;
+import com.feilong.core.lang.objectutiltest.FeiLongObjectUtilSuiteTests;
 import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
 
 /**
@@ -39,16 +40,14 @@ import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
                 ClassLoaderUtilTest.class,
                 EnumUtilTest.class,
 
-                ObjectUtilIsArrayParameterizedTest.class,
-                ObjectUtilIsPrimitiveArrayParameterizedTest.class,
-                ObjectUtilDefaultIfNullOrEmptyParameterizedTest.class,
-                ObjectUtilTest.class,
-
                 StringReplaceParameterizedTest.class,
                 StringUtilTest.class,
 
                 FeiLongReflectSuiteTests.class,
-                FeiLongNumberUtilSuiteTests.class, })
+                FeiLongNumberUtilSuiteTests.class,
+                FeiLongObjectUtilSuiteTests.class,
+        //
+})
 public class FeiLongLangSuiteTests{
 
 }

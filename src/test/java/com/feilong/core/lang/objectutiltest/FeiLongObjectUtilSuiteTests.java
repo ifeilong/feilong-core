@@ -13,33 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.objectutiltest;
 
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class ObjectUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ObjectUtilTest{
-
-    /**
-     * Test is array 1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testIsArray1(){
-        ObjectUtil.isArray(null);
-    }
-
-    //***************************************************************************
-
-    /**
-     * Test is primitive array.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testIsPrimitiveArray(){
-        ObjectUtil.isPrimitiveArray(null);
-    }
+@RunWith(Suite.class)
+@SuiteClasses({
+                ObjectUtilIsArrayParameterizedTest.class,
+                ObjectUtilIsPrimitiveArrayParameterizedTest.class,
+                ObjectUtilDefaultIfNullOrEmptyParameterizedTest.class,
+                ObjectUtilTest.class, })
+public class FeiLongObjectUtilSuiteTests{
 
 }
