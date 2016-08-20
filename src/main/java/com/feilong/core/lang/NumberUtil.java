@@ -333,24 +333,6 @@ public final class NumberUtil{
     // [end]
 
     /**
-     * 将数字转换成 小数点后一位为 0.0,0.5,1.0,1.5,2.0,2.5....
-     * 
-     * <p>
-     * 通常用于 评分制
-     * </p>
-     *
-     * @param value
-     *            数字
-     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}
-     */
-    public static String toPointFive(Number value){
-        Validate.notNull(value, "value can't be null/empty!");
-
-        long avgRankLong = Math.round(Double.parseDouble(value.toString()) * 2);
-        return setScale(toBigDecimal((double) (avgRankLong) / 2), 1).toString();
-    }
-
-    /**
      * 将数字 <code>value</code> 按照指定的格式 <code>toStringPattern</code> 格式成字符串 .
      * 
      * <p>
@@ -396,7 +378,7 @@ public final class NumberUtil{
      * 计算进度(当前量 <code>current</code>/总量 <code>total</code>,然后转成指定的字符串格式 <code>toStringPattern</code>).
      * 
      * <p>
-     * 常用于友好的显示 下载进度,执行进度等等场景
+     * 常用于友好的显示 <b>下载进度</b>,<code>执行进度</code>等等场景
      * </p>
      * 
      * <h3>示例:</h3>
@@ -405,7 +387,7 @@ public final class NumberUtil{
      * 
      * <pre class="code">
      * 
-     * NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT) = "100%
+     * NumberUtil.getProgress(5, 5, NumberPattern.PERCENT_WITH_NOPOINT) = "100%"
      * NumberUtil.getProgress(2, 3, NumberPattern.PERCENT_WITH_1POINT)  = "66.7%"
      * 
      * </pre>
@@ -440,8 +422,7 @@ public final class NumberUtil{
 
         // XXX  scale = 8不是最优方案
         int scale = 8;
-        BigDecimal bigDecimalCurrent = toBigDecimal(current);
-        BigDecimal divideValue = getDivideValue(bigDecimalCurrent, total, scale);
+        BigDecimal divideValue = getDivideValue(current, total, scale);
         return toString(divideValue, toStringPattern);
     }
 
