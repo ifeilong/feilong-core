@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.numberutiltest;
 
 import org.junit.Test;
+
+import com.feilong.core.lang.NumberUtil;
 
 import static com.feilong.core.NumberPattern.PERCENT_WITH_NOPOINT;
 

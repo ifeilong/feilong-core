@@ -13,23 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
-
-import static java.math.RoundingMode.HALF_UP;
+package com.feilong.core.lang.numberutiltest;
 
 import org.junit.Test;
 
-public class NumberUtilSetScaleTest{
+import com.feilong.core.lang.NumberUtil;
 
+public class NumberUtilGetMultiplyValueTest{
+
+    /**
+     * Gets the progress5.
+     * 
+     */
     @Test(expected = NullPointerException.class)
-    public void testSetScaleNullValue(){
-        NumberUtil.setScale(null, 5);
+    public void testGetMultiplyValue1(){
+        NumberUtil.getMultiplyValue(null, 1, 2);
     }
 
-    //********************************************************
-
+    /**
+     * Test get multiply value2.
+     */
     @Test(expected = NullPointerException.class)
-    public void testSetScaleRoundingMode(){
-        NumberUtil.setScale(null, 5, HALF_UP);
+    public void testGetMultiplyValue2(){
+        NumberUtil.getMultiplyValue(1, null, 2);
+    }
+
+    /**
+     * Test get multiply value3.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetMultiplyValue3(){
+        NumberUtil.getMultiplyValue(null, null, 2);
     }
 }

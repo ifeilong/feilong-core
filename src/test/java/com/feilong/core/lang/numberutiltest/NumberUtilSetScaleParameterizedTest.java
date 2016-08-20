@@ -13,40 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.numberutiltest;
 
 import static org.junit.Assert.assertEquals;
-
-import java.math.BigDecimal;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.core.lang.NumberUtil;
+import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
-public class NumberUtilGetMultiplyValueParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<Number, Number, Integer, BigDecimal>{
+public class NumberUtilSetScaleParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Number, Integer, String>{
 
-    @Test
-    public void testGetMultiplyValue(){
-        assertEquals(expectedValue, NumberUtil.getMultiplyValue(input1, input2, input3));
-    }
-
-    @Parameters(name = "index:{index}:NumberUtil.getMultiplyValue({0}, {1}, {2})={3}")
+    @Parameters(name = "index:{index}:NumberUtil.setScale({0}, {1})=\"{2}\"")
     public static Iterable<Object[]> data(){
         return toList(
-                        ConvertUtil.<Object> toArray(new BigDecimal(6.25), 1.17, 5, toBigDecimal("7.31250")),
-                        toArray(5, 2, 5, toBigDecimal("10.00000")),
+                        ConvertUtil.<Object> toArray(5, 5, toBigDecimal("5.00000")), //
+                        toArray(5.2, 3, toBigDecimal("5.200")),
+                        toArray(5.26, 1, toBigDecimal("5.3")),
 
-                        toArray(5, 2, 0, toBigDecimal("10")),
-                        toArray(9.86, 100, 0, toBigDecimal("986"))
+                        toArray(-0, 1, toBigDecimal("0.0")),
+
+                        toArray(0, 1, toBigDecimal("0.0")),
+                        toArray(0, 2, toBigDecimal("0.00"))
+
         //  
         );
     }
 
+    @Test
+    public void testGetProgress(){
+        assertEquals(expectedValue, NumberUtil.setScale(input1, input2));
+    }
 }

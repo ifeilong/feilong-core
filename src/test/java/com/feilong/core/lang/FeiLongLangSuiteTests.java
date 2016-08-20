@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.lang.numberutiltest.FeiLongNumberUtilSuiteTests;
 import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
 
 /**
@@ -38,20 +39,6 @@ import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
                 ClassLoaderUtilTest.class,
                 EnumUtilTest.class,
 
-                NumberUtilTest.class,
-
-                NumberUtilSetScaleTest.class,
-                NumberUtilSetScaleParameterizedTest.class,
-
-                NumberUtilGetAddValueTest.class,
-                NumberUtilGetMultiplyValueTest.class,
-                NumberUtilGetMultiplyValueParameterizedTest.class,
-                NumberUtilGetDivideValueTest.class,
-
-                NumberUtilGetProgressTest.class,
-                NumberUtilGetProgressParameterizedTest.class,
-                NumberUtilToStringParameterizedTest.class,
-
                 ObjectUtilIsArrayParameterizedTest.class,
                 ObjectUtilIsPrimitiveArrayParameterizedTest.class,
                 ObjectUtilDefaultIfNullOrEmptyParameterizedTest.class,
@@ -60,7 +47,8 @@ import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
                 StringReplaceParameterizedTest.class,
                 StringUtilTest.class,
 
-                FeiLongReflectSuiteTests.class, })
+                FeiLongReflectSuiteTests.class,
+                FeiLongNumberUtilSuiteTests.class, })
 public class FeiLongLangSuiteTests{
 
 }

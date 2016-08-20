@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.numberutiltest;
 
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 
 import org.junit.Test;
+
+import com.feilong.core.lang.NumberUtil;
 
 public class NumberUtilGetAddValueTest{
     //***********************testGetAddValue**********************************************************
