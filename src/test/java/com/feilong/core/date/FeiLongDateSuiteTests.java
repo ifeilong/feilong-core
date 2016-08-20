@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.date.dateutiltest.FeiLongDateUtilSuiteTests;
+
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -31,29 +33,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateExtensionUtilTest.class,
                 DateExtensionUtilTest2.class,
 
-                DateUtilGetTest.class,
-                DateUtilGetYearParameterizedTest.class,
-                DateUtilGetMonthParameterizedTest.class,
-                DateUtilGetWeekOfYearParameterizedTest.class,
-                DateUtilGetDayOfYearParameterizedTest.class,
-                DateUtilGetDayOfMonthParameterizedTest.class,
-                DateUtilGetDayOfWeekParameterizedTest.class,
+                FeiLongDateUtilSuiteTests.class,
 
-                DateUtilAddTest.class,
-
-                DateUtilAddYearParameterizedTest.class,
-                DateUtilAddMonthParameterizedTest.class,
-                DateUtilAddWeekParameterizedTest.class,
-                DateUtilAddDayParameterizedTest.class,
-
-                DateUtilAddHourParameterizedTest.class,
-                DateUtilAddMinuteParameterizedTest.class,
-                DateUtilAddSecondParameterizedTest.class,
-                DateUtilAddMillisecondParameterizedTest.class,
-
-                DateUtilIsLeapYearParameterizedTest.class,
-
-                DateUtilTest.class, })
+        //
+})
 public class FeiLongDateSuiteTests{
 
 }

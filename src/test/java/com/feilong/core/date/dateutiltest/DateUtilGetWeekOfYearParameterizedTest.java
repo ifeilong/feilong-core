@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core.date.dateutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,46 +22,43 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.addWeek;
+import static com.feilong.core.date.DateUtil.getWeekOfYear;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
- * The Class DateUtilAddWeekParameterizedTest.
+ * The Class DateUtilGetYearParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilAddWeekParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
+public class DateUtilGetWeekOfYearParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: DateUtil.addWeek({0},{1})={2}")
+    @Parameters(name = "index:{index}: DateUtil.getWeekOfYear({0})={1}")
     public static Iterable<Object[]> data(){
-        Object[][] objects = new Object[][] {
-                                              { "2016-01-01", 0, "2016-01-01" },
-                                              { "2016-08-16", 1, "2016-08-23" },
-                                              { "2016-08-16", -1, "2016-08-09" },
-                                              { "2016-12-31", 3, "2017-01-21" },
-                                              { "2016-01-01", -5, "2015-11-27" },
+        Object[][] objects = new Object[][] { //
+                                              { "2014-06-03", 23 },
+                                              { "2014-01-01", 1 },
+                                              { "2014-12-29", 1 },
+                                              { "2014-12-20", 51 },
+                                              { "2014-12-26", 52 },
                 //
         };
-
         return toList(objects);
     }
 
-    /**
-     * Test add week.
-     */
     @Test
-    public void testAddWeek(){
+    public void testGetWeekOfYear(){
         Date date = toDate(input1, COMMON_DATE);
-        assertEquals(toDate(expectedValue, COMMON_DATE), addWeek(date, input2));
+        assertEquals(expectedValue, (Integer) getWeekOfYear(date));
+
     }
 }

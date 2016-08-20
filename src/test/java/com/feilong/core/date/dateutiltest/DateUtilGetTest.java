@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core.date.dateutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,6 +21,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.date.BaseDateUtilTest;
+import com.feilong.core.date.DateUtil;
+
+import static com.feilong.core.date.BaseDateUtilTest.NOW;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
@@ -91,7 +95,6 @@ public class DateUtilGetTest extends BaseDateUtilTest{
         LOGGER.debug(DateUtil.getHourOfYear(toDate("2013-01-05 12:00:05", COMMON_DATE_AND_TIME)) + "");
 
         LOGGER.debug(DateUtil.getHourOfYear(toDate("2013-09-16 11:42:22", COMMON_DATE_AND_TIME)) + "");
-        LOGGER.debug(DateUtil.getHourOfYear(NOW) + "");
     }
 
     //******************com.feilong.core.date.DateUtil.getHourOfDay(Date)**************************

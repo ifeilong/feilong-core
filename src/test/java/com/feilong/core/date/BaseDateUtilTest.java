@@ -30,7 +30,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
-abstract class BaseDateUtilTest{
+public abstract class BaseDateUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER                  = LoggerFactory.getLogger(BaseDateUtilTest.class);
@@ -47,7 +47,7 @@ abstract class BaseDateUtilTest{
      * @deprecated
      */
     @Deprecated
-    static final Date           NOW                     = new Date();
+    public static final Date    NOW                     = new Date();
 
     /** The current year begin. */
     static final Date           CURRENT_YEAR_BEGIN      = DateUtil.getFirstDateOfThisYear(NOW);

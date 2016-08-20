@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core.date.dateutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,45 +22,41 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.addYear;
+import static com.feilong.core.date.DateUtil.getYear;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
- * The Class DateUtilAddYearParameterizedTest.
+ * The Class DateUtilGetYearParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilAddYearParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
+public class DateUtilGetYearParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: DateUtil.addYear({0},{1})={2}")
+    @Parameters(name = "index:{index}: DateUtil.getYear({0})={1}")
     public static Iterable<Object[]> data(){
-        Object[][] objects = new Object[][] {
-                                              { "2016-08-16 01:21:00", 0, "2016-08-16 01:21:00" },
-                                              { "2016-08-16 01:21:00", 5, "2021-08-16 01:21:00" },
-                                              { "2016-08-16 01:21:00", -5, "2011-08-16 01:21:00" },
-                                              { "9999-12-31 23:21:00", 5, "10004-12-31 23:21:00" },
+        Object[][] objects = new Object[][] { //
+                                              { "2012-06-29", 2012 },
+                                              { "2016-07-16", 2016 },
+                                              { "2016-13-16", 2017 },
                 //
         };
         return toList(objects);
     }
 
-    /**
-     * Test add hour.
-     */
     @Test
-    public void testAddHour(){
-        Date date = toDate(input1, COMMON_DATE_AND_TIME);
-        assertEquals(toDate(expectedValue, COMMON_DATE_AND_TIME), addYear(date, input2));
+    public void testGetYear(){
+        Date date = toDate(input1, COMMON_DATE);
+        assertEquals(expectedValue, (Integer) getYear(date));
     }
 
 }

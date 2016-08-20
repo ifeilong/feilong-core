@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core.date.dateutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,43 +25,44 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.addSecond;
+import static com.feilong.core.date.DateUtil.addMonth;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
- * The Class DateUtilAddSecondParameterizedTest.
+ * The Class DateUtilAddMonthParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilAddSecondParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
+public class DateUtilAddMonthParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: DateUtil.addSecond({0},{1})={2}")
+    @Parameters(name = "index:{index}: DateUtil.addMonth({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] {
-                                              { "2016-08-16 17:52:00", 0, "2016-08-16 17:52:00" },
-                                              { "2016-08-16 17:52:00", 5, "2016-08-16 17:52:05" },
-                                              { "2016-08-16 17:52:00", -5, "2016-08-16 17:51:55" },
-                                              { "2016-08-16 23:59:59", 5, "2016-08-17 00:00:04" },
-                                              { "2016-08-16 00:00:01", -5, "2016-08-15 23:59:56" },
+                                              { "2016-08-16 01:21:00", 0, "2016-08-16 01:21:00" },
+                                              { "2016-08-16 01:21:00", 5, "2017-01-16 01:21:00" },
+                                              { "2016-08-16 01:21:00", -5, "2016-03-16 01:21:00" },
+                                              { "2016-01-31 23:21:00", 1, "2016-02-29 23:21:00" },
+                                              { "2016-02-29 23:21:00", -1, "2016-01-29 23:21:00" },
+                                              { "2016-01-31 23:21:00", 2, "2016-03-31 23:21:00" },
                 //
         };
         return toList(objects);
     }
 
     /**
-     * Test add day.
+     * Test add month.
      */
     @Test
-    public void testAddDay(){
+    public void testAddMonth(){
         Date date = toDate(input1, COMMON_DATE_AND_TIME);
-        assertEquals(toDate(expectedValue, COMMON_DATE_AND_TIME), addSecond(date, input2));
+        assertEquals(toDate(expectedValue, COMMON_DATE_AND_TIME), addMonth(date, input2));
     }
 
 }

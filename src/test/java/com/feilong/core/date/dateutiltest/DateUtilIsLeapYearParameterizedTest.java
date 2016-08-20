@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core.date.dateutiltest;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.core.date.DateUtil;
 import com.feilong.test.AbstractBooleanParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;

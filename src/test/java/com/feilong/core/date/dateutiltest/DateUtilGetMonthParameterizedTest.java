@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core.date.dateutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,7 +25,7 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateUtil.getYear;
+import static com.feilong.core.date.DateUtil.getMonth;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
@@ -35,28 +35,28 @@ import static com.feilong.core.DatePattern.COMMON_DATE;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilGetYearParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
+public class DateUtilGetMonthParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: DateUtil.getYear({0})={1}")
+    @Parameters(name = "index:{index}: DateUtil.getMonth({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
-                                              { "2012-06-29", 2012 },
-                                              { "2016-07-16", 2016 },
-                                              { "2016-13-16", 2017 },
+                                              { "2012-06-29", 6 },
+                                              { "2016-07-16", 7 },
+                                              { "2016-13-16", 1 },
                 //
         };
         return toList(objects);
     }
 
     @Test
-    public void testGetYear(){
+    public void testGetMonth(){
         Date date = toDate(input1, COMMON_DATE);
-        assertEquals(expectedValue, (Integer) getYear(date));
+        assertEquals(expectedValue, (Integer) getMonth(date));
     }
 
 }
