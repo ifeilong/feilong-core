@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 /**
- * 对 <code>java.lang</code>包常用类的封装
+ * 对 <code>java.lang</code>包常用类的封装.
  */
 package com.feilong.core.lang;

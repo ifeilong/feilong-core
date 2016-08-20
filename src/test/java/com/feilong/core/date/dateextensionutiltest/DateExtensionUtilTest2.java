@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.date;
+package com.feilong.core.date.dateextensionutiltest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.date.BaseDateUtilTest;
 import com.feilong.core.lang.StringUtil;
 
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
@@ -66,7 +67,6 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
         LOGGER.debug(getIntervalSecond(startDate, NOW) + "");
         LOGGER.debug(getIntervalSecond(startDate, toDate("2113-01-01 00:00:00", COMMON_DATE_AND_TIME)) + "");
 
-        LOGGER.debug(getIntervalSecond(161986) + "");
         LOGGER.debug(Integer.MAX_VALUE + "");
     }
 
@@ -84,14 +84,6 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
                                         toDate("2014-10-28 00:00:00", COMMON_DATE_AND_TIME),
                                         toDate("2015-06-25 00:00:00", COMMON_DATE_AND_TIME)));
 
-    }
-
-    /**
-     * Test get interval day.
-     */
-    @Test
-    public void testGetIntervalDay(){
-        LOGGER.debug("" + getIntervalDay(toDate("2008-12-1", COMMON_DATE), toDate("2008-9-29", COMMON_DATE)));
     }
 
     //*****************************************************************************************************
@@ -141,6 +133,14 @@ public class DateExtensionUtilTest2 extends BaseDateUtilTest{
     @Test
     public void testGetIntervalDay2(){
         assertSame(3, getIntervalDay(toDate("2008-08-24", COMMON_DATE), toDate("2008-08-27", COMMON_DATE)));
+    }
+
+    /**
+     * Test get interval day.
+     */
+    @Test
+    public void testGetIntervalDay(){
+        LOGGER.debug("" + getIntervalDay(toDate("2008-12-1", COMMON_DATE), toDate("2008-9-29", COMMON_DATE)));
     }
 
 }

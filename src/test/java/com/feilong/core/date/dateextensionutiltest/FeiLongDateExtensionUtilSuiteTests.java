@@ -13,7 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * 对 <code>java.util</code>包常用类的封装.
- */
-package com.feilong.core.util;
+package com.feilong.core.date.dateextensionutiltest;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+@RunWith(Suite.class)
+@SuiteClasses({ //
+                DateExtensionUtilTest.class,
+                DateExtensionUtilTest2.class,
+        //
+})
+public class FeiLongDateExtensionUtilSuiteTests{
+
+}
