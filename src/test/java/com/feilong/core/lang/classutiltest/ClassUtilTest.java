@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.classutiltest;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -25,6 +25,7 @@ import org.apache.commons.lang3.ClassUtils;
 import org.junit.Test;
 
 import com.feilong.core.FeiLongVersion;
+import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.test.User;
 

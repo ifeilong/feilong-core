@@ -13,45 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.classutiltest;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
-import com.feilong.test.User;
+import com.feilong.core.DatePattern;
+import com.feilong.core.Validator;
+import com.feilong.core.lang.ClassUtil;
+import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
+ * The Class ClassUtilIsInterfaceParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ClassUtilIsAssignableFromParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Class<?>, Class<?>, Boolean>{
+public class ClassUtilIsInterfaceParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Class<?>, Boolean>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: ClassUtil.isAssignableFrom({0},{1})={2}")
+    @Parameters(name = "index:{index}: ClassUtil.isInterface({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
-                                              { Comparable.class, new User().getClass(), true },
-                                              { null, new User().getClass(), false },
-
-                                              { CharSequence.class, "1234".getClass(), true },
-                                              { CharSequence.class, null, false },
+                                              { null, false },
+                                              { DatePattern.class, false },
+                                              { Validator.class, false },
+                                              { CharSequence.class, true },
+                                              { List.class, true },
+                                              { Map.class, true },
                 //
         };
         return toList(objects);
     }
 
+    /**
+     * Test is interface.
+     */
     @Test
-    public void testIsAssignableFrom(){
-        assertEquals(expectedValue, ClassUtil.isAssignableFrom(input1, input2));
+    public void testIsInterface(){
+        assertEquals(expectedValue, ClassUtil.isInterface(input1));
     }
 
 }

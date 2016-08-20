@@ -13,49 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.classutiltest;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.core.lang.ClassUtil;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 import com.feilong.test.User;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
- * The Class ClassUtilTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ClassUtilIsInstanceAnyClassParameterizedTest
-                extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Class<?>[], Boolean>{
+public class ClassUtilIsAssignableFromParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Class<?>, Class<?>, Boolean>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: ClassUtil.isInstanceAnyClass({0},{1})={2}")
+    @Parameters(name = "index:{index}: ClassUtil.isAssignableFrom({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
-                                              { null, toArray(Integer.class, CharSequence.class), false },
-                                              { "1234", toArray(Comparable.class, CharSequence.class), true },
+                                              { Comparable.class, new User().getClass(), true },
+                                              { null, new User().getClass(), false },
 
-                                              { new User(), null, false },
-                                              { new User(), toArray(Comparable.class, CharSequence.class), true },
-                                              { new User(), toArray(Integer.class, CharSequence.class), false },
+                                              { CharSequence.class, "1234".getClass(), true },
+                                              { CharSequence.class, null, false },
                 //
         };
         return toList(objects);
     }
 
     @Test
-    public void testIsInstanceAnyClass(){
-        assertEquals(expectedValue, ClassUtil.isInstanceAnyClass(input1, input2));
+    public void testIsAssignableFrom(){
+        assertEquals(expectedValue, ClassUtil.isAssignableFrom(input1, input2));
     }
 
 }

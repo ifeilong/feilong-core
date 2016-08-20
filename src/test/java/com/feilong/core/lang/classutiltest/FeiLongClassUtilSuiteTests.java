@@ -13,38 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.classutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.lang.classutiltest.FeiLongClassUtilSuiteTests;
-import com.feilong.core.lang.numberutiltest.FeiLongNumberUtilSuiteTests;
-import com.feilong.core.lang.objectutiltest.FeiLongObjectUtilSuiteTests;
-import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
-
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-                ArrayUtilTest.class,
-
-                ClassLoaderUtilTest.class,
-                EnumUtilTest.class,
-
-                StringReplaceParameterizedTest.class,
-                StringUtilTest.class,
-
-                FeiLongReflectSuiteTests.class,
-                FeiLongNumberUtilSuiteTests.class,
-                FeiLongObjectUtilSuiteTests.class,
-                FeiLongClassUtilSuiteTests.class,
-        //
-})
-public class FeiLongLangSuiteTests{
+                ClassUtilIsInterfaceParameterizedTest.class,
+                ClassUtilIsAssignableFromParameterizedTest.class,
+                ClassUtilIsInstanceAnyClassParameterizedTest.class,
+                ClassUtilTest.class, })
+public class FeiLongClassUtilSuiteTests{
 
 }

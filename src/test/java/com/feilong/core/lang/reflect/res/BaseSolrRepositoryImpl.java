@@ -20,9 +20,7 @@ import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.ClassUtilTemp;
 import com.feilong.core.lang.reflect.TypeUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class BaseSolrRepositoryImpl.
@@ -47,6 +45,6 @@ public abstract class BaseSolrRepositoryImpl<T, PK extends Serializable> impleme
         Class<?>[] genericClassArray = TypeUtil.getGenericSuperclassParameterizedRawTypes(this.getClass());
         this.modelClass = (Class<T>) genericClassArray[0];
         //TypeUtils.getTypeArguments(this.getClass());
-        LOGGER.debug(JsonUtil.format(ClassUtilTemp.getClassInfoMapForLog(modelClass)));
+        // LOGGER.debug(JsonUtil.format(ClassUtilTemp.getClassInfoMapForLog(modelClass)));
     }
 }
