@@ -25,8 +25,11 @@ import org.junit.runners.Suite.SuiteClasses;
  * @since 1.8.3
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-                NumberFormatUtilTest.class, //
+@SuiteClasses({ //
+                NumberFormatUtilTest.class,
+                NumberFormatUtilFormatParameterizedTest.class,
+                NumberFormatUtilFormatRoundingModeParameterizedTest.class,
+
                 MessageFormatUtilTest.class })
 public class FeiLongTextSuiteTests{
 
