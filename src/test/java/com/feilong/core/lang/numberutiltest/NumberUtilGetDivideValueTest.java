@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang.numberutiltest;
 
-import static org.junit.Assert.assertEquals;
-
 import java.math.BigDecimal;
 
 import org.junit.Test;
@@ -24,15 +22,6 @@ import org.junit.Test;
 import com.feilong.core.lang.NumberUtil;
 
 public class NumberUtilGetDivideValueTest{
-
-    @Test
-    public void getDivideNoScaleValue(){
-        assertEquals(0, NumberUtil.getDivideValue(0, 2, 0).intValue());
-        assertEquals(2, NumberUtil.getDivideValue(6, 4, 0).intValue());
-
-        assertEquals("3.33", NumberUtil.getDivideValue(10, 3, 2).toString());
-        assertEquals("1.67", NumberUtil.getDivideValue(5, 3, 2).toString());
-    }
 
     @Test(expected = NullPointerException.class)
     public void getDivideValue1(){

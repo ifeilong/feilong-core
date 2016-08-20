@@ -177,10 +177,10 @@ public final class NumberUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * NumberUtil.getDivideValue(0, 2, 0)   =   0
-     * NumberUtil.getDivideValue(6, 4, 0)   =   2
-     * NumberUtil.getDivideValue(10, 3, 2)  =   3.33
-     * NumberUtil.getDivideValue(5, 3, 2)   =   1.67
+     * NumberUtil.getDivideValue(0, 2, 0)   =   toBigDecimal(0)
+     * NumberUtil.getDivideValue(6, 4, 0)   =   toBigDecimal(2)
+     * NumberUtil.getDivideValue(10, 3, 2)  =   toBigDecimal(3.33)
+     * NumberUtil.getDivideValue(5, 3, 2)   =   toBigDecimal(1.67)
      * </pre>
      * 
      * </blockquote>

@@ -26,8 +26,6 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-                NumberUtilTest.class,
-
                 NumberUtilSetScaleTest.class,
                 NumberUtilSetScaleParameterizedTest.class,
                 NumberUtilSetScaleRoundingModeParameterizedTest.class,
@@ -36,6 +34,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 NumberUtilGetMultiplyValueTest.class,
                 NumberUtilGetMultiplyValueParameterizedTest.class,
                 NumberUtilGetDivideValueTest.class,
+                NumberUtilGetDivideValueParameterizedTest.class,
 
                 NumberUtilGetProgressTest.class,
                 NumberUtilGetProgressParameterizedTest.class,
