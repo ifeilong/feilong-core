@@ -16,7 +16,6 @@
 package com.feilong.core.date.dateutiltest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -34,7 +33,6 @@ import com.feilong.core.date.DateUtil;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.isBefore;
-import static com.feilong.core.date.DateUtil.isInTime;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
@@ -223,55 +221,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     @Test
     public void testToDate2(){
         DateUtil.toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), COMMON_DATE_AND_TIME_WITHOUT_SECOND);
-    }
-
-    //***************************************************************************************************
-    /**
-     * Test is in time.
-     */
-    @Test
-    public void testIsInTime(){
-        assertSame(
-                        false,
-                        isInTime(
-                                        NOW,
-                                        toDate("2012-10-10 22:59:00", COMMON_DATE_AND_TIME),
-                                        toDate("2012-10-16 22:59:00", COMMON_DATE_AND_TIME)));
-        assertSame(
-                        true,
-                        isInTime(
-                                        toDate("2016-06-12", COMMON_DATE),
-                                        toDate("2016-06-11 22:59:00", COMMON_DATE_AND_TIME),
-                                        toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME)));
-
-    }
-
-    /**
-     * Test is in time2.
-     */
-    @Test
-    public void testIsInTime2(){
-        assertSame(
-                        false,
-                        isInTime(
-                                        toDate("2016-06-12", COMMON_DATE),
-                                        toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME),
-                                        toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME)));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testIsInTime3(){
-        isInTime(null, toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME), toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testIsInTime4(){
-        isInTime(toDate("2016-06-12", COMMON_DATE), null, toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testIsInTime5(){
-        isInTime(toDate("2016-06-12", COMMON_DATE), toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME), null);
     }
 
     //***************************************************************************************************

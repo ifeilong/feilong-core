@@ -1262,7 +1262,7 @@ public final class DateUtil{
      *            开始时间
      * @param endDate
      *            结束时间
-     * @return 如果 <code>date</code> 在 <code>beginDate</code>之后, 并且 指定日期 <code>date</code> 在 <code>endDate</code>之前,返回true<br>
+     * @return 如果 <code>date</code> 在 <code>beginDate</code>之后, 并且指定日期 <code>date</code> 在 <code>endDate</code>之前,返回true<br>
      * @throws NullPointerException
      *             如果 <code>date</code> 是null,或者 <code>beginDate</code> 是null 或者 <code>endDate</code> 是null
      * @see Date#after(Date)

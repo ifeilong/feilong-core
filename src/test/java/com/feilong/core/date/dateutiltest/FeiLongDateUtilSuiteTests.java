@@ -42,6 +42,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateUtilAddMillisecondParameterizedTest.class,
 
                 DateUtilIsLeapYearParameterizedTest.class,
+                DateUtilIsInTimeTest.class,
 
                 DateUtilTest.class, })
 public class FeiLongDateUtilSuiteTests{

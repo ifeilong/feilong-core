@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.BaseDateUtilTest;
 
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
@@ -72,14 +71,6 @@ public class DateExtensionUtilFormatDurationTest extends BaseDateUtilTest{
         LOGGER.debug(DurationFormatUtils.formatDurationISO(25841));
         //P0Y0M0DT0H58M49.714S
         LOGGER.debug(DurationFormatUtils.formatPeriodISO(25841, 3555555));
-    }
-
-    @Test
-    public void testFormatDuration(){
-        Date now = new Date();
-        Date date = toDate("2012-12-03 00:00:00", COMMON_DATE_AND_TIME);
-        LOGGER.debug(formatDuration(now, date));
-        LOGGER.debug(getIntervalTime(now, date) + "");
     }
 
     //**************com.feilong.core.date.DateExtensionUtil.formatDuration(Date)*****************
