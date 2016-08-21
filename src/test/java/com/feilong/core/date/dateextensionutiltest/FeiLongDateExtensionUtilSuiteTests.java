@@ -22,7 +22,16 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 DateExtensionUtilTest.class,
-                DateExtensionUtilTest2.class,
+                DateExtensionUtilFormatDurationTest.class,
+
+                DateExtensionUtilGetIntervalWeekTest.class,
+                //DateExtensionUtilGetIntervalDayParameterizedTest.class,
+                DateExtensionUtilGetIntervalDayTest.class,
+
+                DateExtensionUtilGetIntervalHourTest.class,
+                DateExtensionUtilGetIntervalMinuteTest.class,
+                DateExtensionUtilGetIntervalSecondTest.class,
+                DateExtensionUtilGetIntervalTimeTest.class,
         //
 })
 public class FeiLongDateExtensionUtilSuiteTests{
