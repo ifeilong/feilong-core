@@ -693,31 +693,16 @@ public final class DateExtensionUtil{
      * 
      * <pre class="code">
      * DateExtensionUtil.getIntervalTime(
-     *                 toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME),
-     *                 toDate("2016-07-16 15:21:01", COMMON_DATE_AND_TIME));
-     * </pre>
+     *      toDate("2016-07-16 15:21:00",COMMON_DATE_AND_TIME),
+     *      toDate("2016-07-16 15:21:01",COMMON_DATE_AND_TIME)) = 1000
      * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * 1000
-     * </pre>
-     * 
-     * <hr>
-     * 
-     * <pre class="code">
      * DateExtensionUtil.getIntervalTime(
-     *                 toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME),
-     *                 toDate("2016-07-16 15:22:00", COMMON_DATE_AND_TIME));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * 60000
+     *      toDate("2016-07-16 15:21:00",COMMON_DATE_AND_TIME),
+     *      toDate("2016-07-16 15:22:00",COMMON_DATE_AND_TIME)) = 60000
      * </pre>
      * 
      * </blockquote>
+     * 
      * 
      * @param date1
      *            date1

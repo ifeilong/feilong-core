@@ -15,39 +15,14 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
-import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 public class DateExtensionUtilGetIntervalTimeTest{
-
-    /**
-     * Test get interval time0.
-     */
-    @Test
-    public void testGetIntervalTime0(){
-        assertEquals(
-                        1 * MILLISECOND_PER_MINUTE,
-                        getIntervalTime(
-                                        toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME),
-                                        toDate("2016-07-16 15:22:00", COMMON_DATE_AND_TIME)));
-        assertEquals(
-                        61 * MILLISECOND_PER_MINUTE,
-                        getIntervalTime(
-                                        toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME),
-                                        toDate("2016-07-16 16:22:00", COMMON_DATE_AND_TIME)));
-        assertEquals(
-                        61 * MILLISECOND_PER_MINUTE,
-                        getIntervalTime(
-                                        toDate("2016-07-16 16:22:00", COMMON_DATE_AND_TIME),
-                                        toDate("2016-07-16 15:21:00", COMMON_DATE_AND_TIME)));
-    }
 
     /**
      * Test get interval time1.

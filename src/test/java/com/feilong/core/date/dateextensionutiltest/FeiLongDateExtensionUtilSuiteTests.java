@@ -40,6 +40,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateExtensionUtilGetIntervalSecondParameterizedTest.class,
 
                 DateExtensionUtilGetIntervalTimeTest.class,
+                DateExtensionUtilGetIntervalTimeParameterizedTest.class,
         //
 })
 public class FeiLongDateExtensionUtilSuiteTests{
