@@ -15,35 +15,22 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
-import java.util.Date;
-
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.feilong.core.date.BaseDateUtilTest;
 
 import static com.feilong.core.date.DateExtensionUtil.getIntervalSecond;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE;
 
-public class DateExtensionUtilGetIntervalSecondTest extends BaseDateUtilTest{
+public class DateExtensionUtilGetIntervalSecondTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateExtensionUtilGetIntervalSecondTest.class);
-
-    /**
-     * Test get interval second.
-     */
-    @Test
-    public void testGetIntervalSecond(){
-        Date startDate = toDate("2013-01-01 00:00:00", COMMON_DATE_AND_TIME);
-
-        LOGGER.debug(getIntervalSecond(startDate, NOW) + "");
-        LOGGER.debug(getIntervalSecond(startDate, toDate("2113-01-01 00:00:00", COMMON_DATE_AND_TIME)) + "");
-
-        LOGGER.debug(Integer.MAX_VALUE + "");
+    @Test(expected = NullPointerException.class)
+    public void testGetIntervalSecondNull(){
+        getIntervalSecond(null, toDate("2008-9-29", COMMON_DATE));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testGetIntervalSecondNull1(){
+        getIntervalSecond(toDate("2008-12-1", COMMON_DATE), null);
+    }
 }

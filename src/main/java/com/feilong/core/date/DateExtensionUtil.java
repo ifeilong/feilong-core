@@ -641,6 +641,23 @@ public final class DateExtensionUtil{
      * </p>
      * </blockquote>
      * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateExtensionUtil.getIntervalSecond(
+     *      toDate("2016-08-22 00:00:00",COMMON_DATE_AND_TIME),
+     *      toDate("2016-08-22 00:00:08",COMMON_DATE_AND_TIME)) = 8
+     * 
+     * DateExtensionUtil.getIntervalSecond(
+     *      toDate("2016-08-21 23:59:20",COMMON_DATE_AND_TIME),
+     *      toDate("2016-08-22 00:00:20",COMMON_DATE_AND_TIME)) = 60
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param date1
      *            the date1
      * @param date2
