@@ -25,7 +25,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateExtensionUtilFormatDurationTest.class,
 
                 DateExtensionUtilGetIntervalWeekTest.class,
-                //DateExtensionUtilGetIntervalDayParameterizedTest.class,
+
+                DateExtensionUtilGetIntervalDayParameterizedTest.class,
                 DateExtensionUtilGetIntervalDayTest.class,
 
                 DateExtensionUtilGetIntervalHourTest.class,
