@@ -393,6 +393,30 @@ public final class DateExtensionUtil{
      * </p>
      * </blockquote>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateExtensionUtil.getIntervalWeek(
+     *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME),
+     *      toDate("2014-02-01 00:00:00",COMMON_DATE_AND_TIME)) = 4
+     * 
+     * DateExtensionUtil.getIntervalWeek(
+     *      toDate("2016-08-01",COMMON_DATE),
+     *      toDate("2016-08-07",COMMON_DATE)) = 0
+     * 
+     * DateExtensionUtil.getIntervalWeek(
+     *      toDate("2016-08-01",COMMON_DATE),
+     *      toDate("2016-08-08",COMMON_DATE)) = 1
+     *      
+     * DateExtensionUtil.getIntervalWeek(
+     *      toDate("2016-08-21",COMMON_DATE),
+     *      toDate("2016-08-21",COMMON_DATE)) = 0
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param date1
      *            the date1
      * @param date2

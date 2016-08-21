@@ -39,7 +39,7 @@ public class DateExtensionUtilGetIntervalDayParameterizedTest
         assertEquals(expectedValue, (Integer) getIntervalDay(toDate(input1, input3), toDate(input2, input3)));
     }
 
-    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalDay({0}, {1})={2}")
+    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalDay(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//
                         ConvertUtil.<Object> toArray("2008-08-24", "2008-08-27", COMMON_DATE, 3),

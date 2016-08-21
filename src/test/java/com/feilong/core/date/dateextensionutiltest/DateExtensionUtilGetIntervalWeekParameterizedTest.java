@@ -23,32 +23,34 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
-import static com.feilong.core.TimeInterval.SECONDS_PER_DAY;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalMinute;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalWeek;
 import static com.feilong.core.date.DateUtil.toDate;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
-public class DateExtensionUtilGetIntervalMinuteParameterizedTest
+public class DateExtensionUtilGetIntervalWeekParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
 
     @Test
-    public void testGetIntervalMinute(){
-        assertEquals(expectedValue, (Integer) getIntervalMinute(toDate(input1, input3), toDate(input2, input3)));
+    public void testGetIntervalWeek(){
+        assertEquals(expectedValue, (Integer) getIntervalWeek(toDate(input1, input3), toDate(input2, input3)));
     }
 
-    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalMinute(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
+    @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalWeek(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//
-                        ConvertUtil.<Object> toArray("2008-08-24 00:00:00", "2008-08-24 01:00:00", COMMON_DATE_AND_TIME, 1 * 60),
+                        ConvertUtil.<Object> toArray("2014-01-01 00:00:00", "2014-02-01 00:00:00", COMMON_DATE_AND_TIME, 4),
 
-                        toArray("2008-08-24 00:00:00", "2008-08-24 00:00:00", COMMON_DATE_AND_TIME, 0),
-                        toArray("2008-08-24 00:00:00", "2008-08-24 00:00:50", COMMON_DATE_AND_TIME, 0),
+                        toArray("2016-08-01", "2016-08-07", COMMON_DATE, 0),
+                        toArray("2016-08-01", "2016-08-08", COMMON_DATE, 1),
 
-                        toArray("2008-08-24 00:00:00", "2008-08-23 00:00:00", COMMON_DATE_AND_TIME, SECONDS_PER_DAY / 60)
+                        toArray("2016-08-21", "2016-08-21", COMMON_DATE, 0),
+                        toArray("2016-08-21", "2016-08-22", COMMON_DATE, 0)
         //  
         );
     }
+
 }
