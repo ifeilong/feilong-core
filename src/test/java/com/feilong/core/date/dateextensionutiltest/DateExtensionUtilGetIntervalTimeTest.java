@@ -19,15 +19,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.date.BaseDateUtilTest;
-
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalTime;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
-public class DateExtensionUtilGetIntervalTimeTest extends BaseDateUtilTest{
+public class DateExtensionUtilGetIntervalTimeTest{
 
     /**
      * Test get interval time0.

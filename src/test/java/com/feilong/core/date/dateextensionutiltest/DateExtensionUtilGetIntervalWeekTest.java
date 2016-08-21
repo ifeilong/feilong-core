@@ -17,14 +17,12 @@ package com.feilong.core.date.dateextensionutiltest;
 
 import org.junit.Test;
 
-import com.feilong.core.date.BaseDateUtilTest;
-
 import static com.feilong.core.date.DateExtensionUtil.getIntervalWeek;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 
-public class DateExtensionUtilGetIntervalWeekTest extends BaseDateUtilTest{
+public class DateExtensionUtilGetIntervalWeekTest{
 
     @Test(expected = NullPointerException.class)
     public void testGetIntervalWeekNull(){

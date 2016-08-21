@@ -17,14 +17,12 @@ package com.feilong.core.date.dateextensionutiltest;
 
 import org.junit.Test;
 
-import com.feilong.core.date.BaseDateUtilTest;
-
 import static com.feilong.core.date.DateExtensionUtil.getIntervalMinute;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 
-public class DateExtensionUtilGetIntervalMinuteTest extends BaseDateUtilTest{
+public class DateExtensionUtilGetIntervalMinuteTest{
 
     @Test(expected = NullPointerException.class)
     public void testGetIntervalMinuteNull(){

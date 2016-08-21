@@ -519,6 +519,30 @@ public final class DateExtensionUtil{
      * </p>
      * </blockquote>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateExtensionUtil.getIntervalHour(
+     *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME),
+     *      toDate("2014-01-01 01:00:00",COMMON_DATE_AND_TIME)) = 1
+     * 
+     * DateExtensionUtil.getIntervalHour(
+     *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME),
+     *      toDate("2014-01-01 00:59:00",COMMON_DATE_AND_TIME)) = 0
+     * 
+     * DateExtensionUtil.getIntervalHour(
+     *      toDate("2014-01-01 00:59:00",COMMON_DATE_AND_TIME),
+     *      toDate("2014-01-01 00:00:00",COMMON_DATE_AND_TIME)) = 0
+     *      
+     * DateExtensionUtil.getIntervalHour(
+     *      toDate("2016-08-21 23:00:00",COMMON_DATE_AND_TIME),
+     *      toDate("2016-08-22 01:00:00",COMMON_DATE_AND_TIME)) = 2
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param date1
      *            date1
      * @param date2

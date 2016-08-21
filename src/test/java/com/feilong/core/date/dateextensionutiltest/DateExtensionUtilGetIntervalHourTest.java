@@ -16,27 +16,21 @@
 package com.feilong.core.date.dateextensionutiltest;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.feilong.core.date.BaseDateUtilTest;
-import com.feilong.core.lang.StringUtil;
 
 import static com.feilong.core.date.DateExtensionUtil.getIntervalHour;
 import static com.feilong.core.date.DateUtil.toDate;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE;
 
-public class DateExtensionUtilGetIntervalHourTest extends BaseDateUtilTest{
+public class DateExtensionUtilGetIntervalHourTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateExtensionUtilGetIntervalHourTest.class);
+    @Test(expected = NullPointerException.class)
+    public void testGetIntervalHourNull(){
+        getIntervalHour(null, toDate("2008-9-29", COMMON_DATE));
+    }
 
-    @Test
-    public void testGetIntervalHour(){
-        LOGGER.debug(
-                        StringUtil.format("%05d", getIntervalHour(
-                                        toDate("2014-01-01 00:00:00", COMMON_DATE_AND_TIME),
-                                        toDate("2014-02-01 00:00:00", COMMON_DATE_AND_TIME))));
+    @Test(expected = NullPointerException.class)
+    public void testGetIntervalHourNull1(){
+        getIntervalHour(toDate("2008-12-1", COMMON_DATE), null);
     }
 }
