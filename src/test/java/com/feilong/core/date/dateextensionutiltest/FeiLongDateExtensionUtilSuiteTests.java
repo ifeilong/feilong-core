@@ -30,7 +30,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateExtensionUtilGetIntervalDayTest.class,
 
                 DateExtensionUtilGetIntervalHourTest.class,
+
                 DateExtensionUtilGetIntervalMinuteTest.class,
+                DateExtensionUtilGetIntervalMinuteParameterizedTest.class,
+
                 DateExtensionUtilGetIntervalSecondTest.class,
                 DateExtensionUtilGetIntervalTimeTest.class,
         //
