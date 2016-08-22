@@ -369,7 +369,7 @@ public final class DateUtil{
      * 获得指定日期 <code>date</code><span style="color:red">所在月的最后一天</span>,<code>23:59:59.999</code> 到毫秒.
      * 
      * <p>
-     * 以指定日期 <code>date</code> 月的实际天数为准,也就是说,2月会自动区分闰年 是28天还是29天
+     * 以指定日期 <code>date</code> 月的实际天数为准,也就是说,2月会<b>自动区分闰年</b> 是28天还是29天
      * </p>
      * 
      * <h3>示例:</h3>
@@ -378,6 +378,9 @@ public final class DateUtil{
      * 
      * <pre class="code">
      * DateUtil.getLastDateOfThisMonth(2012-10-11 17:10:30.701)=2012-10-31 23:59:59.999
+     * 
+     * DateUtil.getLastDateOfThisMonth(2016-02-22 01:00:00)=2016-02-29 23:59:59.999
+     * DateUtil.getLastDateOfThisMonth(2015-02-22 01:00:00)=2015-02-28 23:59:59.999
      * </pre>
      * 
      * </blockquote>

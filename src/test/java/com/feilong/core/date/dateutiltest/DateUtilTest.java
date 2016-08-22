@@ -15,6 +15,7 @@
  */
 package com.feilong.core.date.dateutiltest;
 
+import static java.util.Calendar.DAY_OF_MONTH;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
@@ -84,16 +85,10 @@ public class DateUtilTest extends BaseDateUtilTest{
         assertEquals("2015-12-29", DateUtil.toString(NOW, "YYYY-MM-dd"));
     }
 
-    /**
-     * Gets the last date of this month.
-     * 
-     */
     @Test
-    public void testGetLastDateOfThisMonth(){
-        logDate(DateUtil.getLastDateOfThisMonth(NOW));
-        logDate(DateUtil.getLastDateOfThisMonth(toDate("2012-02-01", COMMON_DATE)));
-        logDate(DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(NOW, +1)));
-        logDate(DateUtil.getLastDateOfThisMonth(DateUtil.addMonth(NOW, -1)));
+    public void testGetFirstDateOfThisDay1(){
+        logDate(DateUtil.getFirstDateOfThisDay(new Date()));
+        logDate(DateUtils.truncate(new Date(), DAY_OF_MONTH));
     }
 
     /**

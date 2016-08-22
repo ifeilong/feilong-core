@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.date.BaseDateUtilTest;
 import com.feilong.core.date.DateUtil;
 
 import static com.feilong.core.date.DateUtil.toDate;
@@ -31,7 +30,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilGetLastDateOfThisDayTest extends BaseDateUtilTest{
+public class DateUtilGetLastDateOfThisDayTest{
 
     @Test
     public void testGetLastDateOfThisDay(){

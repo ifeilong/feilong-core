@@ -24,22 +24,30 @@ import com.feilong.core.date.DateUtil;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilGetFirstDateOfThisMonthTest{
+public class DateUtilGetLastDateOfThisMonthTest{
 
     @Test
-    public void testGetFirstDateOfThisMonth(){
+    public void testGetLastDateOfThisMonth(){
         assertEquals(
-                        toDate("2016-08-01 00:00:00", COMMON_DATE_AND_TIME),
-                        DateUtil.getFirstDateOfThisMonth(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
+                        toDate("2016-08-31 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                        DateUtil.getLastDateOfThisMonth(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
+        assertEquals(
+                        toDate("2016-02-29 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                        DateUtil.getLastDateOfThisMonth(toDate("2016-02-22 01:00:00", COMMON_DATE_AND_TIME)));
+        assertEquals(
+                        toDate("2015-02-28 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                        DateUtil.getLastDateOfThisMonth(toDate("2015-02-22 01:00:00", COMMON_DATE_AND_TIME)));
+
     }
 
     @Test(expected = NullPointerException.class)
-    public void testGetFirstDateOfThisMonthNull(){
-        DateUtil.getFirstDateOfThisMonth(null);
+    public void testGetLastDateOfThisMonthNull(){
+        DateUtil.getLastDateOfThisMonth(null);
     }
 }
