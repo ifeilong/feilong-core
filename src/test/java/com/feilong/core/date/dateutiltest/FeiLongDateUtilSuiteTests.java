@@ -56,6 +56,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 DateUtilIsBeforeTest.class,
                 DateUtilIsAfterTest.class,
+                DateUtilIsEqualsTest.class,
 
                 DateUtilToDateTest.class,
 

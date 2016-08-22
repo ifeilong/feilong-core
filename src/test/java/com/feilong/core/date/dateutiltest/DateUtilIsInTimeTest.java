@@ -19,8 +19,6 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
-import com.feilong.core.date.BaseDateUtilTest;
-
 import static com.feilong.core.date.DateUtil.isInTime;
 import static com.feilong.core.date.DateUtil.toDate;
 
@@ -31,19 +29,10 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilIsInTimeTest extends BaseDateUtilTest{
+public class DateUtilIsInTimeTest{
 
-    /**
-     * Test is in time.
-     */
     @Test
     public void testIsInTime(){
-        assertSame(
-                        false,
-                        isInTime(
-                                        NOW,
-                                        toDate("2012-10-10 22:59:00", COMMON_DATE_AND_TIME),
-                                        toDate("2012-10-16 22:59:00", COMMON_DATE_AND_TIME)));
         assertSame(
                         true,
                         isInTime(
@@ -60,17 +49,17 @@ public class DateUtilIsInTimeTest extends BaseDateUtilTest{
     }
 
     @Test(expected = NullPointerException.class)
-    public void testIsInTime3(){
+    public void testIsInTimeNullDate(){
         isInTime(null, toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME), toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME));
     }
 
     @Test(expected = NullPointerException.class)
-    public void testIsInTime4(){
+    public void testIsInTimeNullBeginDate(){
         isInTime(toDate("2016-06-12", COMMON_DATE), null, toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME));
     }
 
     @Test(expected = NullPointerException.class)
-    public void testIsInTime5(){
+    public void testIsInTimeNullEndDate(){
         isInTime(toDate("2016-06-12", COMMON_DATE), toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME), null);
     }
 

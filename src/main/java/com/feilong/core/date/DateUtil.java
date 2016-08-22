@@ -1310,19 +1310,43 @@ public final class DateUtil{
     // [start]isEquals
     /**
      * 在相同格式下 <code>datePattern</code>,将两个日期转成字符串判断是否相等.
-     *
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.isEquals(toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME), toDate("2016-06-16", COMMON_DATE), COMMON_DATE) = true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>常用于判断两个时间是否是同一个时间段,比如相同day,相同小时,相同年等等</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param date1
      *            日期1
      * @param date2
      *            日期2
      * @param datePattern
      *            格式 {@link DatePattern}
-     * @return 相等返回true,不相等则为false
+     * @return 相等返回true,不相等则为false<br>
+     *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
      * @see #toString(Date, String)
      * @see org.apache.commons.lang3.time.DateUtils#isSameDay(Date, Date)
      * @since 1.0.5 change name from isEqual to isEquals
      */
     public static boolean isEquals(Date date1,Date date2,String datePattern){
+        Validate.notNull(date1, "date1 can't be null!");
+        Validate.notNull(date2, "date2 can't be null!");
+
+        Validate.notBlank(datePattern, "datePattern can't be blank!");
         return toString(date1, datePattern).equals(toString(date2, datePattern));
     }
 
