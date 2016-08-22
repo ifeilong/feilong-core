@@ -16,7 +16,9 @@
 package com.feilong.core.net;
 
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.defaultString;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,14 +28,12 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
@@ -42,6 +42,7 @@ import static com.feilong.core.URIComponents.AMPERSAND;
 import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortByKeyAsc;
@@ -651,7 +652,7 @@ public final class ParamUtil{
         StringBuilder sb = new StringBuilder();
         for (K key : includeKeys){//有顺序的参数
             //注意:如果 value是null,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(StringUtils.defaultString(singleValueMap.get(key)));
+            sb.append(defaultString(singleValueMap.get(key)));
         }
         return sb.toString();
     }
@@ -679,7 +680,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     static String addParameterArrayValueMap(String uriString,String queryString,Map<String, String[]> arrayValueMap,String charsetType){
-        Map<String, String[]> safeArrayValueMap = ObjectUtils.defaultIfNull(arrayValueMap, Collections.<String, String[]> emptyMap());
+        Map<String, String[]> safeArrayValueMap = defaultIfNull(arrayValueMap, Collections.<String, String[]> emptyMap());
 
         Map<String, String[]> arrayParamValuesMap = newLinkedHashMap(safeArrayValueMap.size());
         //先提取queryString map
@@ -740,7 +741,7 @@ public final class ParamUtil{
         for (String value : paramValues){
             paramValueList.add(decodeAndEncode(value, charsetType));
         }
-        return ConvertUtil.toArray(paramValueList, String.class);
+        return toArray(paramValueList, String.class);
     }
 
     /**
@@ -771,7 +772,7 @@ public final class ParamUtil{
         StringBuilder sb = new StringBuilder();
         for (int i = 0, j = paramValues.length; i < j; ++i){
             //注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(StringUtils.defaultString(paramName)).append("=").append(StringUtils.defaultString(paramValues[i]));
+            sb.append(defaultString(paramName)).append("=").append(defaultString(paramValues[i]));
             if (i != j - 1){// 最后一个& 不拼接
                 sb.append(AMPERSAND);
             }
