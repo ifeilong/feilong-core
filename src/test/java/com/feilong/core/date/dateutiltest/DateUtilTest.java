@@ -85,17 +85,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * Gets the first date of this month.
-     * 
-     */
-    @Test
-    public void testGetFirstDateOfThisMonth(){
-        logDate(DateUtil.getFirstDateOfThisMonth(NOW));
-        logDate(DateUtil.getFirstDateOfThisMonth(DateUtil.addMonth(NOW, +1)));
-        logDate(DateUtil.getFirstDateOfThisMonth(DateUtil.addMonth(NOW, -1)));
-    }
-
-    /**
      * Gets the last date of this month.
      * 
      */
