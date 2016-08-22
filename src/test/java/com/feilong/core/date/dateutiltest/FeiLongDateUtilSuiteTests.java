@@ -19,6 +19,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * The Class FeiLongDateUtilSuiteTests.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 @RunWith(Suite.class)
 @SuiteClasses({
                 DateUtilGetFirstDateOfThisYearTest.class,
@@ -59,6 +64,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateUtilIsEqualsTest.class,
 
                 DateUtilToDateTest.class,
+                DateUtilToStringTest.class,
 
                 DateUtilTest.class, })
 public class FeiLongDateUtilSuiteTests{

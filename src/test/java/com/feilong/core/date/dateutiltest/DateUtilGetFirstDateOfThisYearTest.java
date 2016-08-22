@@ -26,11 +26,15 @@ import static com.feilong.core.date.DateUtil.toDate;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
+ * The Class DateUtilGetFirstDateOfThisYearTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilGetFirstDateOfThisYearTest{
 
+    /**
+     * Test get first date of this year.
+     */
     @Test
     public void testGetFirstDateOfThisYear(){
         assertEquals(
@@ -38,6 +42,9 @@ public class DateUtilGetFirstDateOfThisYearTest{
                         DateUtil.getFirstDateOfThisYear(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
     }
 
+    /**
+     * Test get first date of this year null.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetFirstDateOfThisYearNull(){
         DateUtil.getFirstDateOfThisYear(null);

@@ -27,11 +27,15 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
+ * The Class DateUtilGetLastDateOfThisMonthTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilGetLastDateOfThisMonthTest{
 
+    /**
+     * Test get last date of this month.
+     */
     @Test
     public void testGetLastDateOfThisMonth(){
         assertEquals(
@@ -46,6 +50,9 @@ public class DateUtilGetLastDateOfThisMonthTest{
 
     }
 
+    /**
+     * Test get last date of this month null.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetLastDateOfThisMonthNull(){
         DateUtil.getLastDateOfThisMonth(null);

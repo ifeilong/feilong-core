@@ -26,11 +26,15 @@ import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
+ * The Class DateUtilIsInTimeTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilIsInTimeTest{
 
+    /**
+     * Test is in time.
+     */
     @Test
     public void testIsInTime(){
         assertSame(
@@ -48,16 +52,25 @@ public class DateUtilIsInTimeTest{
                                         toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME)));
     }
 
+    /**
+     * Test is in time null date.
+     */
     @Test(expected = NullPointerException.class)
     public void testIsInTimeNullDate(){
         isInTime(null, toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME), toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME));
     }
 
+    /**
+     * Test is in time null begin date.
+     */
     @Test(expected = NullPointerException.class)
     public void testIsInTimeNullBeginDate(){
         isInTime(toDate("2016-06-12", COMMON_DATE), null, toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME));
     }
 
+    /**
+     * Test is in time null end date.
+     */
     @Test(expected = NullPointerException.class)
     public void testIsInTimeNullEndDate(){
         isInTime(toDate("2016-06-12", COMMON_DATE), toDate("2016-06-12 00:00:00", COMMON_DATE_AND_TIME), null);

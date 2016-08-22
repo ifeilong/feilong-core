@@ -1087,7 +1087,7 @@ public final class DateUtil{
     // [start]toString/toDate 类型转换
 
     /**
-     * 将指定日期 <code>date</code>转换成特殊格式的字符串.
+     * 将指定日期 <code>date</code>转换成特殊格式 <code>datePattern</code> 的字符串.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1105,7 +1105,6 @@ public final class DateUtil{
      * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>pattern</code> 是 blank,抛出 {@link IllegalArgumentException}<br>
-     *         否则使用 {@link java.util.Locale#getDefault()},调用{@link java.text.DateFormat#format(Date)}
      * @see org.apache.commons.lang3.time.DateFormatUtils#format(Date, String)
      * @see "org.joda.time.base.AbstractDateTime#toString(String)"
      * @see <a href="http://stackoverflow.com/questions/5683728/convert-java-util-date-to-string">convert-java-util-date-to-string</a>
@@ -1113,6 +1112,9 @@ public final class DateUtil{
      * @since 1.6.0
      */
     public static String toString(Date date,String datePattern){
+        Validate.notNull(date, "date can't be null!");
+        Validate.notBlank(datePattern, "datePattern can't be blank!");
+
         return DateFormatUtils.format(date, datePattern);
     }
 

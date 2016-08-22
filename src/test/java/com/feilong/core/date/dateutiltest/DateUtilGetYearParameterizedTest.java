@@ -53,6 +53,9 @@ public class DateUtilGetYearParameterizedTest extends AbstractOneParamAndOneResu
         return toList(objects);
     }
 
+    /**
+     * Test get year.
+     */
     @Test
     public void testGetYear(){
         Date date = toDate(input1, COMMON_DATE);

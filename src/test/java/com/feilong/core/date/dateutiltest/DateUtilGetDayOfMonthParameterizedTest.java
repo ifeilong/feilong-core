@@ -54,6 +54,9 @@ public class DateUtilGetDayOfMonthParameterizedTest extends AbstractOneParamAndO
         return toList(objects);
     }
 
+    /**
+     * Test get day of month.
+     */
     @Test
     public void testGetDayOfMonth(){
         Date date = toDate(input1, COMMON_DATE);

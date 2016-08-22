@@ -54,6 +54,9 @@ public class DateUtilGetDayOfYearParameterizedTest extends AbstractOneParamAndOn
         return toList(objects);
     }
 
+    /**
+     * Test get day of year.
+     */
     @Test
     public void testGetDayOfYear(){
         Date date = toDate(input1, COMMON_DATE);

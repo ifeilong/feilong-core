@@ -58,6 +58,9 @@ public class DateUtilGetDayOfWeekParameterizedTest extends AbstractOneParamAndOn
         return toList(objects);
     }
 
+    /**
+     * Test get day of week.
+     */
     @Test
     public void testGetDayOfWeek(){
         Date date = toDate(input1, COMMON_DATE);

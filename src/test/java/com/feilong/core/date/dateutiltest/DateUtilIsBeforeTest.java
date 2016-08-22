@@ -27,6 +27,7 @@ import static com.feilong.core.date.DateUtil.toDate;
 import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
+ * The Class DateUtilIsBeforeTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
@@ -41,16 +42,25 @@ public class DateUtilIsBeforeTest extends BaseDateUtilTest{
         assertEquals(false, isBefore(toDate("2011-05-01", COMMON_DATE), toDate("2011-04-01", COMMON_DATE)));
     }
 
+    /**
+     * Test is before null.
+     */
     @Test(expected = NullPointerException.class)
     public void testIsBeforeNull(){
         isBefore(null, null);
     }
 
+    /**
+     * Test is before null when date.
+     */
     @Test(expected = NullPointerException.class)
     public void testIsBeforeNullWhenDate(){
         isBefore(toDate("2011-05-01", COMMON_DATE), null);
     }
 
+    /**
+     * Test is before null date.
+     */
     @Test
     public void testIsBeforeNullDate(){
         assertEquals(false, isBefore(null, toDate("2011-04-01", COMMON_DATE)));

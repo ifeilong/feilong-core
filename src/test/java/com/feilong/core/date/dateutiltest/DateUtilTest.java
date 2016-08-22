@@ -16,7 +16,6 @@
 package com.feilong.core.date.dateutiltest;
 
 import static java.util.Calendar.DAY_OF_MONTH;
-import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -41,6 +40,9 @@ public class DateUtilTest extends BaseDateUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilTest.class);
 
+    /**
+     * Test get last date of this day 1.
+     */
     @Test
     public void testGetLastDateOfThisDay1(){
         logDate(DateUtils.ceiling(NOW, Calendar.DAY_OF_MONTH));
@@ -53,26 +55,8 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * TestDateUtilTest.
+     * Test get first date of this day 1.
      */
-    @Test
-    public void testDateUtil(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2014, Calendar.DECEMBER, 29);
-        Date time = calendar.getTime();
-
-        assertEquals("2014-12-29", DateUtil.toString(time, "yyyy-MM-dd"));
-    }
-
-    /**
-     * TestDateUtilTest.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testDateUtilTest8(){
-        //jdk7- throw exception
-        assertEquals("2015-12-29", DateUtil.toString(NOW, "YYYY-MM-dd"));
-    }
-
     @Test
     public void testGetFirstDateOfThisDay1(){
         logDate(DateUtil.getFirstDateOfThisDay(new Date()));

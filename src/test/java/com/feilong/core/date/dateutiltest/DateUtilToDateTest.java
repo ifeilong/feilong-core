@@ -51,16 +51,25 @@ public class DateUtilToDateTest{
         LOGGER.debug("" + toDate("20130102140806000", TIMESTAMP_WITH_MILLISECOND));
     }
 
+    /**
+     * Test to date null.
+     */
     @Test(expected = NullPointerException.class)
     public void testToDateNull(){
         toDate(null, COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
+    /**
+     * Test to date empty.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToDateEmpty(){
         toDate("", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
+    /**
+     * Test to date empty 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToDateEmpty1(){
         toDate(" ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
@@ -68,26 +77,41 @@ public class DateUtilToDateTest{
 
     //*****************************************************************
 
+    /**
+     * Test to date null pattern.
+     */
     @Test(expected = NullPointerException.class)
     public void testToDateNullPattern(){
         toDate("2016-06-30 15:36", null);
     }
 
+    /**
+     * Test to date empty patterns.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToDateEmptyPatterns(){
         toDate("2016-06-30 15:36");
     }
 
+    /**
+     * Test to date null pattern element.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToDateNullPatternElement(){
         toDate("2016-06-30 15:36", (String) null);
     }
 
+    /**
+     * Test to date 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToDate1(){
         toDate("2016-06-30 15:36 ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
+    /**
+     * Test to date 2.
+     */
     @Test
     public void testToDate2(){
         toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), COMMON_DATE_AND_TIME_WITHOUT_SECOND);

@@ -55,6 +55,9 @@ public class DateUtilGetWeekOfYearParameterizedTest extends AbstractOneParamAndO
         return toList(objects);
     }
 
+    /**
+     * Test get week of year.
+     */
     @Test
     public void testGetWeekOfYear(){
         Date date = toDate(input1, COMMON_DATE);

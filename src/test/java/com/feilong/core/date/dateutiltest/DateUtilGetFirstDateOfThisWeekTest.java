@@ -26,11 +26,15 @@ import static com.feilong.core.date.DateUtil.toDate;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
+ * The Class DateUtilGetFirstDateOfThisWeekTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class DateUtilGetFirstDateOfThisWeekTest{
 
+    /**
+     * Test get first date of this week.
+     */
     @Test
     public void testGetFirstDateOfThisWeek(){
         assertEquals(
@@ -41,6 +45,9 @@ public class DateUtilGetFirstDateOfThisWeekTest{
                         DateUtil.getFirstDateOfThisWeek(toDate("2014-01-01 05:00:00", COMMON_DATE_AND_TIME)));
     }
 
+    /**
+     * Test get first date of this week null.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetFirstDateOfThisWeekNull(){
         DateUtil.getFirstDateOfThisWeek(null);

@@ -53,6 +53,9 @@ public class DateUtilGetMonthParameterizedTest extends AbstractOneParamAndOneRes
         return toList(objects);
     }
 
+    /**
+     * Test get month.
+     */
     @Test
     public void testGetMonth(){
         Date date = toDate(input1, COMMON_DATE);
