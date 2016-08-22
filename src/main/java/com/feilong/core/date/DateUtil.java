@@ -17,7 +17,6 @@ package com.feilong.core.date;
 
 import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.DAY_OF_WEEK;
-import static java.util.Calendar.DAY_OF_WEEK_IN_MONTH;
 import static java.util.Calendar.DAY_OF_YEAR;
 import static java.util.Calendar.HOUR_OF_DAY;
 import static java.util.Calendar.JANUARY;
@@ -381,55 +380,6 @@ public final class DateUtil{
         calendar.set(MONTH, JANUARY);
         calendar.set(DAY_OF_MONTH, 1);
         return CalendarUtil.toDate(resetDayBegin(calendar));
-    }
-
-    /**
-     * 获得指定日期 <code>date</code>所在年的第一个星期 <code>week</code>.
-     * 
-     * <pre class="code">
-     * 如果传入的日期是 2015-7-29 14:08
-     * DateUtil.getFirstWeekOfSpecifyDateYear(NOW, Calendar.FRIDAY) =2015-01-02 00:00:00.000
-     * DateUtil.getFirstWeekOfSpecifyDateYear(NOW, Calendar.MONDAY) =2015-01-05 00:00:00.000
-     * </pre>
-     * 
-     * <p>
-     * {@link Calendar#DAY_OF_WEEK_IN_MONTH} 指示当前月中的第几个星期.与 DAY_OF_WEEK 字段一起使用时,就可以唯一地指定某月中的某一天.<br>
-     * 与 {@link Calendar#WEEK_OF_MONTH} 和 {@link Calendar#WEEK_OF_YEAR} 不同,该字段的值并不取决于 {@link Calendar#getFirstDayOfWeek()} 或
-     * {@link Calendar#getMinimalDaysInFirstWeek()}.
-     * </p>
-     * 
-     * <p>
-     * DAY_OF_MONTH 1 到 7 总是对应于 DAY_OF_WEEK_IN_MONTH 1;<br>
-     * 8 到 14 总是对应于 DAY_OF_WEEK_IN_MONTH 2,依此类推.<br>
-     * DAY_OF_WEEK_IN_MONTH 0 表示 DAY_OF_WEEK_IN_MONTH 1 之前的那个星期.<br>
-     * 负值是从一个月的末尾开始逆向计数,因此,一个月的最后一个星期天被指定为 DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1.<br>
-     * 因为负值是逆向计数的,所以它们在月份中的对齐方式通常与正值的不同.<br>
-     * 例如,如果一个月有 31 天,那么 DAY_OF_WEEK_IN_MONTH -1 将与 DAY_OF_WEEK_IN_MONTH 5 和 DAY_OF_WEEK_IN_MONTH 4 的末尾相重叠
-     * </p>
-     * 
-     * @param date
-     *            指定日期
-     * @param week
-     *            周几 星期天开始为1 依次2 3 4 5 6 7,建议使用 常量 {@link Calendar#SUNDAY}, {@link Calendar#MONDAY}, {@link Calendar#TUESDAY},
-     *            {@link Calendar#WEDNESDAY}, {@link Calendar#THURSDAY}, {@link Calendar#FRIDAY}, {@link Calendar#SATURDAY}
-     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
-     * @see Calendar#SUNDAY
-     * @see Calendar#MONDAY
-     * @see Calendar#TUESDAY
-     * @see Calendar#WEDNESDAY
-     * @see Calendar#THURSDAY
-     * @see Calendar#FRIDAY
-     * @see Calendar#SATURDAY
-     * @since 1.3.0
-     */
-    public static Date getFirstWeekOfSpecifyDateYear(Date date,int week){
-        Calendar calendar = toCalendar(date);
-        calendar.clear();
-        calendar.set(YEAR, getYear(date));
-        calendar.set(MONTH, JANUARY);
-        calendar.set(DAY_OF_WEEK_IN_MONTH, 1);
-        calendar.set(DAY_OF_WEEK, week);
-        return CalendarUtil.toDate(calendar);
     }
 
     /**
