@@ -25,6 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateUtilGetFirstDateOfThisMonthTest.class,
                 DateUtilGetFirstDateOfThisDayTest.class,
 
+                DateUtilGetLastDateOfThisYearTest.class,
                 DateUtilGetLastDateOfThisMonthTest.class,
                 DateUtilGetLastDateOfThisDayTest.class,
 

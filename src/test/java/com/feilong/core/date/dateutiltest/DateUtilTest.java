@@ -92,16 +92,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     }
 
     /**
-     * Test get last date of this year.
-     */
-    @Test
-    public void testGetLastDateOfThisYear(){
-        logDate(DateUtil.getLastDateOfThisYear(NOW));
-        logDate(DateUtil.getLastDateOfThisYear(DateUtil.addYear(NOW, +1)));
-        logDate(DateUtil.getLastDateOfThisYear(DateUtil.addYear(NOW, -1)));
-    }
-
-    /**
      * Gets the first date of this week.
      */
     @Test
