@@ -36,18 +36,24 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateUtilGetLastDateOfThisWeekTest.class,
                 DateUtilGetLastDateOfThisDayTest.class,
 
+                //*********************************************
                 DateUtilGetYearTest.class,
                 DateUtilGetMonthTest.class,
+                DateUtilGetWeekOfYearTest.class,
+
+                DateUtilGetDayOfYearTest.class,
                 DateUtilGetDayOfMonthTest.class,
+                DateUtilGetDayOfWeekTest.class,
+
+                DateUtilGetHourOfYearTest.class,
+                DateUtilGetHourOfDayTest.class,
+                DateUtilGetMinuteTest.class,
                 DateUtilGetSecondOfDayTest.class,
                 DateUtilGetSecondOfHourTest.class,
                 DateUtilGetSecondTest.class,
                 DateUtilGetTimeTest.class,
-                DateUtilGetHourOfYearTest.class,
-                DateUtilGetHourOfDayTest.class,
-                DateUtilGetMinuteTest.class,
-                DateUtilGetWeekOfYearTest.class,
 
+                //*********************************************
                 DateUtilGetYearParameterizedTest.class,
                 DateUtilGetMonthParameterizedTest.class,
                 DateUtilGetWeekOfYearParameterizedTest.class,

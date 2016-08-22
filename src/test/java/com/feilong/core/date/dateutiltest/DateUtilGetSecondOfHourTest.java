@@ -15,17 +15,17 @@
  */
 package com.feilong.core.date.dateutiltest;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.BaseDateUtilTest;
-import com.feilong.core.date.DateUtil;
+import static com.feilong.core.date.DateUtil.getSecondOfHour;
+import static com.feilong.core.date.DateUtil.toDate;
 
-public class DateUtilGetSecondOfHourTest extends BaseDateUtilTest{
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilGetSecondOfHourTest.class);
+public class DateUtilGetSecondOfHourTest{
+
     //*************com.feilong.core.date.DateUtil.getSecondOfHour(Date)***********************************
 
     /**
@@ -33,7 +33,7 @@ public class DateUtilGetSecondOfHourTest extends BaseDateUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetSecondOfHourNullDate(){
-        DateUtil.getSecondOfHour(null);
+        getSecondOfHour(null);
     }
 
     /**
@@ -41,7 +41,7 @@ public class DateUtilGetSecondOfHourTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetSecondOfHour(){
-        LOGGER.debug(DateUtil.getSecondOfHour(NOW) + "");
+        assertEquals(923, getSecondOfHour(toDate("2013-09-15 01:15:23", COMMON_DATE_AND_TIME)));
     }
 
 }

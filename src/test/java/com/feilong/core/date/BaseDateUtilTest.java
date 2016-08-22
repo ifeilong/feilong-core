@@ -20,8 +20,6 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.feilong.core.date.DateUtil.toDate;
-
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
@@ -33,13 +31,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND
 public abstract class BaseDateUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER                  = LoggerFactory.getLogger(BaseDateUtilTest.class);
-
-    /** <code>{@value}</code>. */
-    static final String         FROMSTRING              = "2011-03-5 23:31:25.456";
-
-    /** The to string. */
-    static final String         TOSTRING                = "2011-03-10 01:30:24.895";
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseDateUtilTest.class);
 
     /**
      * The now.
@@ -47,16 +39,7 @@ public abstract class BaseDateUtilTest{
      * @deprecated
      */
     @Deprecated
-    public static final Date    NOW                     = new Date();
-
-    /** The current year begin. */
-    static final Date           CURRENT_YEAR_BEGIN      = DateUtil.getFirstDateOfThisYear(NOW);
-
-    /** The current year end. */
-    static final Date           CURRENT_YEAR_END        = DateUtil.getLastDateOfThisYear(NOW);
-
-    /** The current year end. */
-    static final Date           TESTDATE_20141231013024 = toDate("2014-12-31 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND);
+    public static final Date    NOW    = new Date();
 
     /**
      * Prints the.

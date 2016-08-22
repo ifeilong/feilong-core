@@ -15,17 +15,17 @@
  */
 package com.feilong.core.date.dateutiltest;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.BaseDateUtilTest;
-import com.feilong.core.date.DateUtil;
+import static com.feilong.core.date.DateUtil.getTime;
+import static com.feilong.core.date.DateUtil.toDate;
 
-public class DateUtilGetTimeTest extends BaseDateUtilTest{
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilGetTimeTest.class);
+public class DateUtilGetTimeTest{
+
     //************com.feilong.core.date.DateUtil.getTime(Date)***********************
 
     /**
@@ -33,7 +33,7 @@ public class DateUtilGetTimeTest extends BaseDateUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetTimeNullDate(){
-        DateUtil.getTime(null);
+        getTime(null);
     }
 
     /**
@@ -41,6 +41,6 @@ public class DateUtilGetTimeTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetTime(){
-        LOGGER.debug(DateUtil.getTime(NOW) + "");
+        assertEquals(1340900880000L, getTime(toDate("2012-06-29 00:28:00", COMMON_DATE_AND_TIME)));
     }
 }

@@ -21,8 +21,13 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.feilong.core.date.DateUtil;
-
+import static com.feilong.core.date.DateUtil.addDay;
+import static com.feilong.core.date.DateUtil.addHour;
+import static com.feilong.core.date.DateUtil.addMillisecond;
+import static com.feilong.core.date.DateUtil.addMinute;
+import static com.feilong.core.date.DateUtil.addMonth;
+import static com.feilong.core.date.DateUtil.addSecond;
+import static com.feilong.core.date.DateUtil.addWeek;
 import static com.feilong.core.date.DateUtil.addYear;
 import static com.feilong.core.date.DateUtil.toDate;
 
@@ -41,7 +46,7 @@ public class DateUtilAddTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddYearNullDate(){
-        DateUtil.addYear(null, 5);
+        addYear(null, 5);
     }
 
     /**
@@ -62,7 +67,7 @@ public class DateUtilAddTest{
     //**********com.feilong.core.date.DateUtil.addMonth(Date, int)********************
     @Test(expected = IllegalArgumentException.class)
     public void testAddMonthNullDate(){
-        DateUtil.addMonth(null, 5);
+        addMonth(null, 5);
     }
 
     //************com.feilong.core.date.DateUtil.addWeek(Date, int)****************************
@@ -72,7 +77,7 @@ public class DateUtilAddTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddWeekNullDate(){
-        DateUtil.addWeek(null, 5);
+        addWeek(null, 5);
     }
 
     /**
@@ -81,7 +86,7 @@ public class DateUtilAddTest{
     //**************com.feilong.core.date.DateUtil.addDay(Date, int)******************************
     @Test(expected = IllegalArgumentException.class)
     public void testAddDayNullDate(){
-        DateUtil.addDay(null, 5);
+        addDay(null, 5);
     }
 
     //**********com.feilong.core.date.DateUtil.addHour(Date, int)**********
@@ -90,7 +95,7 @@ public class DateUtilAddTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddHourNullDate(){
-        DateUtil.addHour(null, 5);
+        addHour(null, 5);
     }
 
     //***********com.feilong.core.date.DateUtil.addMinute(Date, int)*****************
@@ -100,7 +105,7 @@ public class DateUtilAddTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddMinuteNullDate(){
-        DateUtil.addMinute(null, 5);
+        addMinute(null, 5);
     }
 
     //*************com.feilong.core.date.DateUtil.addSecond(Date, int)********************
@@ -110,7 +115,7 @@ public class DateUtilAddTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddSecondNullDate(){
-        DateUtil.addSecond(null, 5);
+        addSecond(null, 5);
     }
 
     //*************com.feilong.core.date.DateUtil.addMillisecond(Date, int)******************
@@ -120,7 +125,7 @@ public class DateUtilAddTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddMillisecondNullDate(){
-        DateUtil.addMillisecond(null, 5);
+        addMillisecond(null, 5);
     }
 
 }

@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.feilong.core.date.DateUtil.toCalendar;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
@@ -45,7 +46,7 @@ public class CalendarUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetDayOfMonth1(){
-        Calendar calendar = DateUtil.toCalendar(TESTDATE_20141231013024);
+        Calendar calendar = toCalendar(toDate("2014-12-31 01:30:24.895", COMMON_DATE_AND_TIME_WITH_MILLISECOND));
         LOGGER.debug(calendar.getActualMaximum(Calendar.SECOND) + "");
         LOGGER.debug(calendar.getTimeInMillis() + "");
         LOGGER.debug(calendar.hashCode() + "");

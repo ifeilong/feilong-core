@@ -1067,7 +1067,7 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateUtil.getTime(2012-6-29 00:28)= 1340900883288
+     * DateUtil.getTime(2012-06-29 00:28:00)= 1340900880000L
      * </pre>
      * 
      * </blockquote>

@@ -39,7 +39,10 @@ public class DateUtilIsLeapYearParameterizedTest extends AbstractBooleanParamete
      */
     @Parameters(name = "index:{index}: DateUtil.isLeapYear({0})={1}")
     public static Iterable<Object[]> data(){
-        Object[][] objects = new Object[][] { { 2014, false }, { 2000, true }, { 1900, false } };
+        Object[][] objects = new Object[][] { //
+                                              { 2014, false },
+                                              { 2000, true },
+                                              { 1900, false } };
         return toList(objects);
     }
 

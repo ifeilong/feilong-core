@@ -17,13 +17,16 @@ package com.feilong.core.date.dateutiltest;
 
 import org.junit.Test;
 
-import com.feilong.core.date.DateUtil;
+import static com.feilong.core.date.DateUtil.getDayOfWeek;
 
-public class DateUtilGetYearTest{
+public class DateUtilGetDayOfWeekTest{
 
-    //**********com.feilong.core.date.DateUtil.getYear(Date)*********************
+    /**
+     * Test get day of week null date.
+     */
+    //********com.feilong.core.date.DateUtil.getDayOfWeek(Date)******************************
     @Test(expected = NullPointerException.class)
-    public void testGetYear1(){
-        DateUtil.getYear(null);
+    public void testGetDayOfWeekNullDate(){
+        getDayOfWeek(null);
     }
 }

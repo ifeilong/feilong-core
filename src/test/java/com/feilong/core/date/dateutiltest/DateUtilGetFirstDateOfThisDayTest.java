@@ -19,8 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.date.DateUtil;
-
+import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
@@ -39,7 +38,7 @@ public class DateUtilGetFirstDateOfThisDayTest{
     public void testGetFirstDateOfThisDay(){
         assertEquals(
                         toDate("2016-08-22 00:00:00", COMMON_DATE_AND_TIME),
-                        DateUtil.getFirstDateOfThisDay(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
+                        getFirstDateOfThisDay(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -47,6 +46,6 @@ public class DateUtilGetFirstDateOfThisDayTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetFirstDateOfThisDayNull(){
-        DateUtil.getFirstDateOfThisDay(null);
+        getFirstDateOfThisDay(null);
     }
 }

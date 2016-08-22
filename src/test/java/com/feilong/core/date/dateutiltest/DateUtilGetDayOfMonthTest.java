@@ -16,16 +16,10 @@
 package com.feilong.core.date.dateutiltest;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.BaseDateUtilTest;
-import com.feilong.core.date.DateUtil;
+import static com.feilong.core.date.DateUtil.getDayOfMonth;
 
-public class DateUtilGetDayOfMonthTest extends BaseDateUtilTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilGetDayOfMonthTest.class);
+public class DateUtilGetDayOfMonthTest{
 
     //**********com.feilong.core.date.DateUtil.getDayOfMonth(Date)*****************************
 
@@ -34,15 +28,7 @@ public class DateUtilGetDayOfMonthTest extends BaseDateUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetDayOfMonthNullDate(){
-        DateUtil.getDayOfMonth(null);
+        getDayOfMonth(null);
     }
 
-    /**
-     * Test get day of week null date.
-     */
-    //********com.feilong.core.date.DateUtil.getDayOfWeek(Date)******************************
-    @Test(expected = NullPointerException.class)
-    public void testGetDayOfWeekNullDate(){
-        DateUtil.getDayOfWeek(null);
-    }
 }

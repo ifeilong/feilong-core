@@ -19,8 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.date.DateUtil;
-
+import static com.feilong.core.date.DateUtil.getLastDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
@@ -40,11 +39,10 @@ public class DateUtilGetLastDateOfThisWeekTest{
     public void testGetLastDateOfThisWeek(){
         assertEquals(
                         toDate("2016-08-27 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                        DateUtil.getLastDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
+                        getLastDateOfThisWeek(toDate("2016-08-22 01:00:00", COMMON_DATE_AND_TIME)));
         assertEquals(
                         toDate("2015-01-03 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
-                        DateUtil.getLastDateOfThisWeek(toDate("2014-12-31 05:00:00", COMMON_DATE_AND_TIME)));
-
+                        getLastDateOfThisWeek(toDate("2014-12-31 05:00:00", COMMON_DATE_AND_TIME)));
     }
 
     /**
@@ -52,7 +50,7 @@ public class DateUtilGetLastDateOfThisWeekTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetLastDateOfThisWeekNull(){
-        DateUtil.getLastDateOfThisWeek(null);
+        getLastDateOfThisWeek(null);
     }
 
 }

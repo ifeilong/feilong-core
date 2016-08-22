@@ -16,16 +16,10 @@
 package com.feilong.core.date.dateutiltest;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.BaseDateUtilTest;
-import com.feilong.core.date.DateUtil;
+import static com.feilong.core.date.DateUtil.getMonth;
 
-public class DateUtilGetMonthTest extends BaseDateUtilTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilGetMonthTest.class);
+public class DateUtilGetMonthTest{
 
     //**********com.feilong.core.date.DateUtil.getMonth(Date)******************************
 
@@ -34,7 +28,7 @@ public class DateUtilGetMonthTest extends BaseDateUtilTest{
      */
     @Test(expected = NullPointerException.class)
     public void testGetMonthNullDate(){
-        DateUtil.getMonth(null);
+        getMonth(null);
     }
 
 }

@@ -17,13 +17,16 @@ package com.feilong.core.date.dateutiltest;
 
 import org.junit.Test;
 
-import com.feilong.core.date.DateUtil;
+import static com.feilong.core.date.DateUtil.getDayOfYear;
 
-public class DateUtilGetYearTest{
+public class DateUtilGetDayOfYearTest{
 
-    //**********com.feilong.core.date.DateUtil.getYear(Date)*********************
+    /**
+     * Test get day of year null date.
+     */
+    //************com.feilong.core.date.DateUtil.getDayOfYear(Date)************************************
     @Test(expected = NullPointerException.class)
-    public void testGetYear1(){
-        DateUtil.getYear(null);
+    public void testGetDayOfYearNullDate(){
+        getDayOfYear(null);
     }
 }

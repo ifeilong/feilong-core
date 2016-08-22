@@ -19,8 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.date.BaseDateUtilTest;
-
 import static com.feilong.core.date.DateUtil.isAfter;
 import static com.feilong.core.date.DateUtil.toDate;
 
@@ -31,7 +29,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilIsAfterTest extends BaseDateUtilTest{
+public class DateUtilIsAfterTest{
 
     /**
      * Test is after.

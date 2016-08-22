@@ -16,16 +16,11 @@
 package com.feilong.core.date.dateutiltest;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.BaseDateUtilTest;
 import com.feilong.core.date.DateUtil;
 
-public class DateUtilGetWeekOfYearTest extends BaseDateUtilTest{
+public class DateUtilGetWeekOfYearTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilGetWeekOfYearTest.class);
     //******com.feilong.core.date.DateUtil.getWeekOfYear(Date)************************************
 
     /**
@@ -36,12 +31,4 @@ public class DateUtilGetWeekOfYearTest extends BaseDateUtilTest{
         DateUtil.getWeekOfYear(null);
     }
 
-    /**
-     * Test get day of year null date.
-     */
-    //************com.feilong.core.date.DateUtil.getDayOfYear(Date)************************************
-    @Test(expected = NullPointerException.class)
-    public void testGetDayOfYearNullDate(){
-        DateUtil.getDayOfYear(null);
-    }
 }

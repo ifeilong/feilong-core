@@ -82,5 +82,4 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void testGetTimeLength(){
         LOGGER.debug((NOW.getTime() + "").length() + "");
     }
-
 }
