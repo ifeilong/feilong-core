@@ -21,6 +21,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
+                DateUtilGetFirstDateOfThisDayTest.class,
+
                 DateUtilGetTest.class,
                 DateUtilGetYearParameterizedTest.class,
                 DateUtilGetMonthParameterizedTest.class,
