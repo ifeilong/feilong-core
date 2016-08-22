@@ -343,7 +343,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 添加 <code>object</code>元素到指定的<code>objectCollection</code>,如果 <code>object</code> 是null或者 empty将忽略.
+     * 添加 <code>element</code>元素到指定的<code>objectCollection</code>,如果 <code>element</code> 是null或者 empty将忽略.
      * 
      * <h3>示例:</h3>
      * 
@@ -364,7 +364,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * 可以重构成:
+     * <b>可以重构成:</b>
      * 
      * <pre class="code">
      * 
@@ -387,7 +387,7 @@ public final class CollectionsUtil{
      *            element to add
      * @return a boolean 标识 <code>objectCollection</code> 是否改变,如果改变了,返回true.<br>
      *         如果 <code>objectCollection</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>element</code> 是null or empty,直接返回false<br>
+     *         如果 <code>element</code> 是null 或者 empty,直接返回false<br>
      *         否则调用<code>objectCollection.add(object)</code>
      * @see org.apache.commons.collections4.CollectionUtils#addIgnoreNull(Collection, Object)
      * @since 1.8.2
@@ -445,7 +445,7 @@ public final class CollectionsUtil{
     //***********************删除****************************************************
 
     /**
-     * 从 <code>collection</code>中 删除所有的 <code>removeCollection</code>.
+     * 从 <code>objectCollection</code>中删除所有的 <code>removeCollection</code> <span style="color:red">(原集合对象不变)</span>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -475,7 +475,8 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 从 <code>objectCollection</code>中 删除所有的 <code>propertyName</code> 值在 <code>propertyValueList</code>集合中的对象.
+     * 从 <code>objectCollection</code>中 删除所有的 <code>propertyName</code> 值在 <code>propertyValueList</code>集合中的对象
+     * <span style="color:red">(原集合对象不变)</span>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -546,7 +547,8 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 从 <code>objectCollection</code>中 删除所有的 <code>propertyName</code> 值是在 <code>propertyValues</code>中的对象.
+     * 从 <code>objectCollection</code>中 删除所有的 <code>propertyName</code> 值是在 <code>propertyValues</code>中的对象
+     * <span style="color:red">(原集合对象不变)</span>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -632,7 +634,7 @@ public final class CollectionsUtil{
 
     //********************************************************************************************************
     /**
-     * 从 <code>collection</code>中 删除<code>removeElement</code>.
+     * 从 <code>objectCollection</code>中 删除<code>removeElement</code> <span style="color:red">(原集合对象不变)</span>.
      * 
      * <p>
      * 返回剩余的集合 <span style="color:red">(原集合对象不变)</span>,这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用
@@ -696,7 +698,7 @@ public final class CollectionsUtil{
 
     //********************************************************************************************************
     /**
-     * 去重.
+     * 去重,返回没有重复元素的新list <span style="color:red">(原集合对象不变)</span>.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -722,8 +724,8 @@ public final class CollectionsUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果原 <code>collection</code> 是有序的,那么会保留原 <code>collection</code>元素顺序</li>
-     * <li>原 <code>collection</code>不变</li>
+     * <li>如果原 <code>objectCollection</code> 是有序的,那么返回的结果参照原 <code>objectCollection</code>元素顺序</li>
+     * <li>原 <code>objectCollection</code>不变</li>
      * </ol>
      * </blockquote>
      *
@@ -895,7 +897,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 解析迭代集合 <code>objectCollection</code> ,取到对象指定的属性 <code>propertyName</code>的值,拼成{@link Set}.
+     * 解析迭代集合 <code>objectCollection</code> ,取到对象指定的属性 <code>propertyName</code>的值,拼成{@link Set}({@link LinkedHashSet}).
      * 
      * <p>
      * 注意:返回的是 {@link LinkedHashSet},顺序是参数 <code>objectCollection</code> 元素的顺序
@@ -982,7 +984,7 @@ public final class CollectionsUtil{
 
     //******************************getPropertyValueMap*********************************************************************
     /**
-     * 循环 <code>objectCollection</code> ,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为值,组成map返回.
+     * 循环 <code>objectCollection</code> ,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为value,组成map返回.
      * 
      * <p>
      * 注意:返回的是 {@link LinkedHashMap},顺序是参数 objectCollection 元素的顺序
@@ -1049,7 +1051,7 @@ public final class CollectionsUtil{
     //*************************find****************************************************************
 
     /**
-     * 找到 <code>iterable</code>中,第一个 <code>propertyName</code>属性名称值是 <code>value</code>对应的元素.
+     * 找到 <code>iterable</code>中,第一个 <code>propertyName</code>属性名称值是 <code>propertyValue</code> 的对应元素.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1145,7 +1147,8 @@ public final class CollectionsUtil{
     //**************************select*****************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否 在<code>values</code>数组中;如果在,将该对象存入list中返回.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否 在<code>propertyValues</code>
+     * 数组中;如果在,将该对象存入list中返回.
      * 
      * <h3>注意:</h3>
      * 
@@ -1206,7 +1209,8 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否 在<code>values</code>集合中;如果在,将该对象存入list中返回.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否 在<code>propertyValueList</code>
+     * 集合中;如果在,将该对象存入list中返回.
      * 
      * <h3>注意:</h3>
      * 
@@ -1390,7 +1394,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否 不在<code>values</code>
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否不在<code>propertyValueList</code>
      * 集合中;如果不在,将该对象存入list中返回.
      * 
      * <h3>示例:</h3>
@@ -1446,7 +1450,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * Select rejected.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code>,判断是否不匹配<code>predicate</code>,如果不匹配,将该对象存入list中返回.
      *
      * @param <O>
      *            the generic type
@@ -1532,7 +1536,7 @@ public final class CollectionsUtil{
     //*******************************group*********************************************************
 
     /**
-     * Group 对象(如果propertyName 存在相同的值,那么这些值,将会以list的形式 put到map中).
+     * 循环 <code>objectCollection</code>,以 元素的 <code>propertyName</code>属性值为key,相同值的元素组成list作为value,封装成map返回.
      * 
      * <p>
      * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
@@ -1596,7 +1600,8 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,找到符合条件的 <code>includePredicate</code>的元素,(如果propertyName存在相同的值,那么这些值,将会以list的形式 put到map中).
+     * 循环 <code>objectCollection</code>,找到符合条件的 <code>includePredicate</code>的元素,以元素的 <code>propertyName</code>
+     * 属性值为key,相同值的元素组成list作为value,封装成map返回.
      * 
      * <p>
      * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>
@@ -1694,7 +1699,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * Group one(map只put第一个匹配的元素,<b>后面出现相同的元素将会忽略</b>).
+     * 循环 <code>objectCollection</code>,以元素的 <code>propertyName</code>属性值为key,元素为value,封装成map返回(map只put第一个匹配的元素,<b>后面出现相同的元素将会忽略</b>).
      * 
      * <p>
      * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
