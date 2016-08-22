@@ -23,6 +23,11 @@ import org.junit.Test;
 
 import com.feilong.core.lang.NumberUtil;
 
+/**
+ * The Class NumberUtilGetAddValueTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilGetAddValueTest{
     //***********************testGetAddValue**********************************************************
 
@@ -52,11 +57,17 @@ public class NumberUtilGetAddValueTest{
         NumberUtil.getAddValue(null);
     }
 
+    /**
+     * Test get add value null pointer exception 2.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetAddValueNullPointerException2(){
         NumberUtil.getAddValue();
     }
 
+    /**
+     * Test get add value null pointer exception 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetAddValueNullPointerException1(){
         NumberUtil.getAddValue((BigDecimal) null);

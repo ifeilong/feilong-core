@@ -141,6 +141,9 @@ public class ResourceBundleUtilTest{
         LOGGER.debug(getValue(BASE_NAME, "config_date_hour", Locale.ENGLISH));
     }
 
+    /**
+     * Test read to properties.
+     */
     //**********************************************************************************************
     @Test
     public void testReadToProperties(){
@@ -148,16 +151,25 @@ public class ResourceBundleUtilTest{
         LOGGER.debug(JsonUtil.format(properties));
     }
 
+    /**
+     * Test read to properties nullpoint.
+     */
     @Test(expected = NullPointerException.class)
     public void testReadToPropertiesNullpoint(){
         ResourceBundleUtil.readToProperties(null);
     }
 
+    /**
+     * Test read to properties illegal argument exception.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testReadToPropertiesIllegalArgumentException(){
         ResourceBundleUtil.readToProperties("   ");
     }
 
+    /**
+     * Test read to properties missing resource exception.
+     */
     @Test(expected = MissingResourceException.class)
     public void testReadToPropertiesMissingResourceException(){
         ResourceBundleUtil.readToProperties("messages.memcached111");

@@ -31,9 +31,19 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class NumberUtilGetProgressParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilGetProgressParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<Number, Number, String, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:NumberUtil.getProgress({0}, {1}, \"{2}\")=\"{3}\"")
     public static Iterable<Object[]> data(){
         return toList(
@@ -60,6 +70,9 @@ public class NumberUtilGetProgressParameterizedTest
         );
     }
 
+    /**
+     * Test get progress.
+     */
     @Test
     public void testGetProgress(){
         assertEquals(expectedValue, NumberUtil.getProgress(input1, input2, input3));

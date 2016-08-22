@@ -27,24 +27,36 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.BaseDateUtilTest;
 import com.feilong.core.date.DateUtil;
+
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  * The Class DateUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DateUtilTest extends BaseDateUtilTest{
+public class DateUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilTest.class);
+
+    /**
+     * Prints the.
+     * 
+     * @param date
+     *            the date
+     */
+    protected void logDate(Date date){
+        LOGGER.debug(DateUtil.toString(date, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+    }
 
     /**
      * Test get last date of this day 1.
      */
     @Test
     public void testGetLastDateOfThisDay1(){
+        Date NOW = new Date();
         logDate(DateUtils.ceiling(NOW, Calendar.DAY_OF_MONTH));
         logDate(DateUtils.round(NOW, Calendar.DAY_OF_MONTH));
         logDate(DateUtils.truncate(NOW, Calendar.DAY_OF_MONTH));
@@ -80,6 +92,7 @@ public class DateUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetTimeLength(){
+        Date NOW = new Date();
         LOGGER.debug((NOW.getTime() + "").length() + "");
     }
 }

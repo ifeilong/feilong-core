@@ -22,13 +22,24 @@ import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 
+/**
+ * The Class DateExtensionUtilGetIntervalHourTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateExtensionUtilGetIntervalHourTest{
 
+    /**
+     * Test get interval hour null.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetIntervalHourNull(){
         getIntervalHour(null, toDate("2008-9-29", COMMON_DATE));
     }
 
+    /**
+     * Test get interval hour null 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetIntervalHourNull1(){
         getIntervalHour(toDate("2008-12-1", COMMON_DATE), null);

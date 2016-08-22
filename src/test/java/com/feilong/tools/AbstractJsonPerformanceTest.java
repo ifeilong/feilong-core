@@ -27,7 +27,8 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
- * 
+ * The Class AbstractJsonPerformanceTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */

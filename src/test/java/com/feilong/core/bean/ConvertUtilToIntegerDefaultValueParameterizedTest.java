@@ -27,9 +27,19 @@ import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class ConvertUtilToIntegerDefaultValueParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToIntegerDefaultValueParameterizedTest
                 extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Integer, Integer>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ConvertUtil.toInteger({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
@@ -54,6 +64,9 @@ public class ConvertUtilToIntegerDefaultValueParameterizedTest
         return toList(objects);
     }
 
+    /**
+     * Test to integer.
+     */
     @Test
     public void testToInteger(){
         assertEquals(expectedValue, toInteger(input1, input2));

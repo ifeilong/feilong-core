@@ -26,8 +26,18 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLongs;
 
+/**
+ * The Class ConvertUtilToLongsParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToLongsParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Long[]>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ConvertUtil.toLongs({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
@@ -49,6 +59,9 @@ public class ConvertUtilToLongsParameterizedTest extends AbstractOneParamAndOneR
         return toList(objects);
     }
 
+    /**
+     * Test to longs.
+     */
     @Test
     public void testToLongs(){
         assertArrayEquals(expectedValue, toLongs(input1));

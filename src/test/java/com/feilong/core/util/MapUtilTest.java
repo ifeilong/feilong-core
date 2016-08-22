@@ -78,12 +78,18 @@ public class MapUtilTest{
         assertThat(removeKeys, allOf(hasEntry("name", "feilong"), hasEntry("age", "18"), not(hasEntry("country", "china"))));
     }
 
+    /**
+     * Test to single value map null.
+     */
     //*****************com.feilong.core.util.MapUtil.toSingleValueMap(Map<String, String[]>)*************************************************
     @Test
     public void testToSingleValueMapNull(){
         assertEquals(emptyMap(), MapUtil.toSingleValueMap(null));
     }
 
+    /**
+     * Test to single value map empty.
+     */
     @Test
     public void testToSingleValueMapEmpty(){
         assertEquals(emptyMap(), MapUtil.toSingleValueMap(new HashMap<String, String[]>()));
@@ -115,12 +121,18 @@ public class MapUtilTest{
         assertThat(singleValueMap, allOf(hasEntry("province", null), hasEntry("city", "南通市")));
     }
 
+    /**
+     * Test to array value map null.
+     */
     //*******************com.feilong.core.util.MapUtil.toArrayValueMap(Map<String, String>)************************************************************
     @Test
     public void testToArrayValueMapNull(){
         assertEquals(emptyMap(), MapUtil.toArrayValueMap(null));
     }
 
+    /**
+     * Test to array value map empty.
+     */
     @Test
     public void testToArrayValueMapEmpty(){
         assertEquals(emptyMap(), MapUtil.toArrayValueMap(new HashMap<String, String>()));
@@ -139,6 +151,9 @@ public class MapUtilTest{
         assertThat(arrayValueMap, allOf(hasEntry("province", toArray("江苏省")), hasEntry("city", toArray("南通市"))));
     }
 
+    /**
+     * Test to array value map 1.
+     */
     @Test
     public void testToArrayValueMap1(){
         Map<String, String> singleValueMap = newLinkedHashMap(2);
@@ -308,6 +323,9 @@ public class MapUtilTest{
         assertThat(newHashMap.size(), is(0));
     }
 
+    /**
+     * Test new hash map 2.
+     */
     @Test
     public void testNewHashMap2(){
         Map<String, String> newHashMap = MapUtil.newHashMap(3);
@@ -336,6 +354,9 @@ public class MapUtilTest{
         assertThat(map.size(), is(0));
     }
 
+    /**
+     * Test new linked hash map 2.
+     */
     @Test
     public void testNewLinkedHashMap2(){
         Map<String, String> map = MapUtil.newLinkedHashMap(3);

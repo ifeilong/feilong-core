@@ -54,6 +54,9 @@ public class ClassUtilIsInstanceAnyClassParameterizedTest
         return toList(objects);
     }
 
+    /**
+     * Test is instance any class.
+     */
     @Test
     public void testIsInstanceAnyClass(){
         assertEquals(expectedValue, ClassUtil.isInstanceAnyClass(input1, input2));

@@ -19,14 +19,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.feilong.core.date.BaseDateUtilTest;
-
 import static com.feilong.core.date.DateUtil.getMinute;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
-public class DateUtilGetMinuteTest extends BaseDateUtilTest{
+/**
+ * The Class DateUtilGetMinuteTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
+public class DateUtilGetMinuteTest{
 
     //**********com.feilong.core.date.DateUtil.getMinute(Date)****************************
 

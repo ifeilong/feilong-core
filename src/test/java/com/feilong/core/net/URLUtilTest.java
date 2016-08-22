@@ -32,6 +32,9 @@ public class URLUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(URLUtilTest.class);
 
+    /**
+     * Test get union url 1.
+     */
     //****************com.feilong.core.net.URLUtil.getUnionUrl(URL, String)***********************
     @Test
     public void testGetUnionUrl1(){
@@ -47,6 +50,9 @@ public class URLUtilTest{
         LOGGER.debug(URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/"));
     }
 
+    /**
+     * Test to URI.
+     */
     //************com.feilong.core.net.URLUtil.toURI(URL)**************
     @Test
     public void testToURI(){
@@ -56,22 +62,34 @@ public class URLUtilTest{
 
     //***************com.feilong.core.net.URLUtil.toURL(String)**********
 
+    /**
+     * Test to URL.
+     */
     @Test
     public void testToURL(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
         LOGGER.debug("the param url:{}", URLUtil.toURL(spec));
     }
 
+    /**
+     * Test to URL null.
+     */
     @Test(expected = NullPointerException.class)
     public void testToURLNull(){
         URLUtil.toURL(null);
     }
 
+    /**
+     * Test to URL empty.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToURLEmpty(){
         URLUtil.toURL("");
     }
 
+    /**
+     * Test to URL empty 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToURLEmpty1(){
         URLUtil.toURL(" ");

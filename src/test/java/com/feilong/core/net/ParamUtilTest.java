@@ -48,11 +48,17 @@ public class ParamUtilTest{
 
     //***************com.feilong.core.net.ParamUtil.toNaturalOrderingQueryString(Map<String, String>)**********
 
+    /**
+     * Test to natural ordering string null map.
+     */
     @Test
     public void testToNaturalOrderingStringNullMap(){
         assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(null));
     }
 
+    /**
+     * Test to natural ordering string empty map.
+     */
     @Test
     public void testToNaturalOrderingStringEmptyMap(){
         assertEquals(EMPTY, ParamUtil.toNaturalOrderingQueryString(new HashMap<String, String>()));
@@ -86,6 +92,9 @@ public class ParamUtilTest{
         assertEquals("province=江苏省&service=&totalActual=210.00", ParamUtil.toNaturalOrderingQueryString(map));
     }
 
+    /**
+     * Test to natural ordering string null key.
+     */
     @Test
     public void testToNaturalOrderingStringNullKey(){
         Map<String, String> map = new HashMap<>();

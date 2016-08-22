@@ -27,14 +27,24 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ConvertUtilToBooleanParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ConvertUtilToBooleanParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Boolean>{
 
+    /**
+     * Test to boolean.
+     */
     @Test
     public void testToBoolean(){
         assertEquals(expectedValue, toBoolean(input1));
     }
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ConvertUtil.toBoolean({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //

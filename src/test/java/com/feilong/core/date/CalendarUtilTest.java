@@ -36,7 +36,7 @@ import static com.feilong.core.DatePattern.yyyy;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class CalendarUtilTest extends BaseDateUtilTest{
+public class CalendarUtilTest{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CalendarUtilTest.class);

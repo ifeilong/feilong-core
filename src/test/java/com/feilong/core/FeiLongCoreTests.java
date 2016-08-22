@@ -22,7 +22,8 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.feilong.tools.slf4j.Slf4jUtilTest;
 
 /**
- * 
+ * The Class FeiLongCoreTests.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.3
  */

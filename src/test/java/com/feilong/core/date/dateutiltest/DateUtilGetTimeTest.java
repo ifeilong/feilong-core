@@ -24,6 +24,11 @@ import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
+/**
+ * The Class DateUtilGetTimeTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateUtilGetTimeTest{
 
     //************com.feilong.core.date.DateUtil.getTime(Date)***********************

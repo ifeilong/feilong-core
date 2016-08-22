@@ -27,7 +27,8 @@ import com.feilong.core.text.FeiLongTextSuiteTests;
 import com.feilong.core.util.FeiLongUtilSuiteTests;
 
 /**
- * 
+ * The Class FeiLongSuiteTests.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.7.1
  */

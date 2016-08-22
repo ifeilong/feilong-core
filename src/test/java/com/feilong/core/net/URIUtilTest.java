@@ -71,6 +71,9 @@ public class URIUtilTest{
 
     }
 
+    /**
+     * Decode 1.
+     */
     @Test
     public void decode1(){
         String str = "%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88";

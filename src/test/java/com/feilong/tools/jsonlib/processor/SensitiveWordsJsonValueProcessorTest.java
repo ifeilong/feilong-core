@@ -29,14 +29,19 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * 
+ * The Class SensitiveWordsJsonValueProcessorTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5
  */
 public class SensitiveWordsJsonValueProcessorTest{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SensitiveWordsJsonValueProcessorTest.class);
 
+    /**
+     * Test sensitive words json value processor 1.
+     */
     @Test
     public void testSensitiveWordsJsonValueProcessor1(){
         User user = new User("feilong1", 24);

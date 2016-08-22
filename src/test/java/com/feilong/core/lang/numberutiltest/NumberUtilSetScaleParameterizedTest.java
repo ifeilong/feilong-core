@@ -28,8 +28,18 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class NumberUtilSetScaleParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilSetScaleParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Number, Integer, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:NumberUtil.setScale({0}, {1})=\"{2}\"")
     public static Iterable<Object[]> data(){
         return toList(
@@ -46,6 +56,9 @@ public class NumberUtilSetScaleParameterizedTest extends AbstractTwoParamsAndOne
         );
     }
 
+    /**
+     * Test get progress.
+     */
     @Test
     public void testGetProgress(){
         assertEquals(expectedValue, NumberUtil.setScale(input1, input2));

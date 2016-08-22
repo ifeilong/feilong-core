@@ -27,6 +27,7 @@ import com.feilong.test.TestUtil;
 import static com.feilong.core.RegexPattern.EMAIL;
 
 /**
+ * The Class EmailPatternTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.3

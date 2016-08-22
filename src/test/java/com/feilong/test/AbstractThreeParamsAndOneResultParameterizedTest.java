@@ -23,11 +23,12 @@ import org.junit.runners.Parameterized.Parameter;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <I>
  *            the generic type
- * @param <E>
- *            the element type
  * @param <T>
  *            the generic type
  * @param <Y>
+ *            the generic type
+ * @param <E>
+ *            the element type
  * @since 1.8.5
  */
 public abstract class AbstractThreeParamsAndOneResultParameterizedTest<I, T, Y, E> extends AbstractParameterizedTest{

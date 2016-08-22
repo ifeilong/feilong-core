@@ -27,6 +27,7 @@ import com.feilong.test.User;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
+ * The Class ClassUtilIsAssignableFromParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
@@ -50,6 +51,9 @@ public class ClassUtilIsAssignableFromParameterizedTest extends AbstractTwoParam
         return toList(objects);
     }
 
+    /**
+     * Test is assignable from.
+     */
     @Test
     public void testIsAssignableFrom(){
         assertEquals(expectedValue, ClassUtil.isAssignableFrom(input1, input2));

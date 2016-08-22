@@ -32,8 +32,18 @@ import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class NumberUtilToStringParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilToStringParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Number, String, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:NumberUtil.toString({0},\"{1}\")=\"{2}\"")
     public static Iterable<Object[]> data(){
         return toList(
@@ -88,6 +98,9 @@ public class NumberUtilToStringParameterizedTest extends AbstractTwoParamsAndOne
         );
     }
 
+    /**
+     * Test get progress.
+     */
     @Test
     public void testGetProgress(){
         assertEquals(expectedValue, NumberUtil.toString(input1, input2));

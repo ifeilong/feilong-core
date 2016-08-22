@@ -21,8 +21,16 @@ import org.junit.Test;
 
 import com.feilong.core.lang.NumberUtil;
 
+/**
+ * The Class NumberUtilSetScaleTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilSetScaleTest{
 
+    /**
+     * Test set scale null value.
+     */
     @Test(expected = NullPointerException.class)
     public void testSetScaleNullValue(){
         NumberUtil.setScale(null, 5);
@@ -30,6 +38,9 @@ public class NumberUtilSetScaleTest{
 
     //********************************************************
 
+    /**
+     * Test set scale rounding mode.
+     */
     @Test(expected = NullPointerException.class)
     public void testSetScaleRoundingMode(){
         NumberUtil.setScale(null, 5, HALF_UP);

@@ -31,6 +31,8 @@ public class SkuItem implements Serializable{
     private float             showOrder;
 
     /**
+     * 获得 showOrder 显示顺序.
+     *
      * @return the showOrder
      */
     public float getShowOrder(){
@@ -38,6 +40,8 @@ public class SkuItem implements Serializable{
     }
 
     /**
+     * 设置 showOrder 显示顺序.
+     *
      * @param showOrder
      *            the showOrder to set
      */

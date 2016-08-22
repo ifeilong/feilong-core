@@ -120,6 +120,9 @@ public class PropertyUtilTest{
         assertThat(PropertyUtil.describe(user, "date"), hasEntry("date", (Object) now));
     }
 
+    /**
+     * Test describe 3.
+     */
     @Test(expected = NullPointerException.class)
     public void testDescribe3(){
         PropertyUtil.describe(null);
@@ -141,6 +144,9 @@ public class PropertyUtilTest{
         LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe(new HashMap())));
     }
 
+    /**
+     * Test describe 1.
+     */
     @Test
     @Ignore
     public void testDescribe1(){

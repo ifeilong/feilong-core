@@ -84,6 +84,9 @@ public class StringUtilTest{
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
     }
 
+    /**
+     * Test replace 3.
+     */
     @Test
     public void testReplace3(){
         Map<String, Object> valuesMap = new HashMap<String, Object>();
@@ -245,6 +248,9 @@ public class StringUtilTest{
         assertEquals("'SH1265',SH5951", "SH1265,SH5951".replaceFirst("([a-zA-Z]+[0-9]+)", "'$1'"));
     }
 
+    /**
+     * Replace all 1.
+     */
     @Test
     public void replaceAll1(){
         String regex = "(_[A-Za-z0-9]+){0,2}\\.(properties|xml)";
@@ -320,6 +326,9 @@ public class StringUtilTest{
         assertArrayEquals(toArray("jin.xin  ", " ", "aha ,", "ala;"), StringUtil.tokenizeToStringArray(str, delimiters, false, false));
     }
 
+    /**
+     * Tokenize to string array 22.
+     */
     @Test
     public void tokenizeToStringArray22(){
         String delimiters = "@";
@@ -351,18 +360,27 @@ public class StringUtilTest{
                         StringUtil.tokenizeToStringArray(str, delimiters));
     }
 
+    /**
+     * Tokenize to string array 1.
+     */
     @Test
     public void tokenizeToStringArray1(){
         String delimiters = ";, .";
         assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray(null, delimiters));
     }
 
+    /**
+     * Tokenize to string array 11.
+     */
     @Test
     public void tokenizeToStringArray11(){
         String delimiters = " ";
         assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters));
     }
 
+    /**
+     * Tokenize to string array 112.
+     */
     @Test
     public void tokenizeToStringArray112(){
         String delimiters = ",";

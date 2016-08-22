@@ -30,14 +30,27 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class NumberUtilGetMultiplyValueParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilGetMultiplyValueParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<Number, Number, Integer, BigDecimal>{
 
+    /**
+     * Test get multiply value.
+     */
     @Test
     public void testGetMultiplyValue(){
         assertEquals(expectedValue, NumberUtil.getMultiplyValue(input1, input2, input3));
     }
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:NumberUtil.getMultiplyValue({0}, {1}, {2})={3}")
     public static Iterable<Object[]> data(){
         return toList(

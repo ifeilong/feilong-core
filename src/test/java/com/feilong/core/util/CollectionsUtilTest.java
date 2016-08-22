@@ -136,6 +136,9 @@ public class CollectionsUtilTest{
         assertThat(list, contains("xinge", "feilong1"));
     }
 
+    /**
+     * Test index of.
+     */
     //************CollectionsUtil.indexOf(List<User>, String, String)******************************
     @Test
     public void testIndexOf(){
@@ -148,6 +151,9 @@ public class CollectionsUtilTest{
         assertEquals(1, CollectionsUtil.indexOf(list, "age", 24));
     }
 
+    /**
+     * Test index of not find value.
+     */
     @Test
     public void testIndexOfNotFindValue(){
         List<User> list = toList(//
@@ -158,6 +164,9 @@ public class CollectionsUtilTest{
         assertEquals(-1, CollectionsUtil.indexOf(list, "age", null));
     }
 
+    /**
+     * Test index of null property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testIndexOfNullPropertyName(){
         List<User> list = toList(//
@@ -167,6 +176,9 @@ public class CollectionsUtilTest{
         CollectionsUtil.indexOf(list, null, 240);
     }
 
+    /**
+     * Test index of empty property name 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testIndexOfEmptyPropertyName1(){
         List<User> list = toList(//
@@ -176,6 +188,9 @@ public class CollectionsUtilTest{
         CollectionsUtil.indexOf(list, "", 240);
     }
 
+    /**
+     * Test index of empty property name 2.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testIndexOfEmptyPropertyName2(){
         List<User> list = toList(//
@@ -185,11 +200,17 @@ public class CollectionsUtilTest{
         CollectionsUtil.indexOf(list, " ", 240);
     }
 
+    /**
+     * Test index of null list.
+     */
     @Test
     public void testIndexOfNullList(){
         assertEquals(-1, CollectionsUtil.indexOf(null, "age", 24));
     }
 
+    /**
+     * Test index of empty list.
+     */
     @Test
     public void testIndexOfEmptyList(){
         assertEquals(-1, CollectionsUtil.indexOf(new ArrayList<User>(), "age", 24));

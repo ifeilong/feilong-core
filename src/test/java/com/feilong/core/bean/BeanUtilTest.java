@@ -94,7 +94,9 @@ public class BeanUtilTest{
     }
 
     /**
-     * @return
+     * Builds the member.
+     *
+     * @return the member
      * @since 1.7.2
      */
     private Member buildMember(){
@@ -181,6 +183,9 @@ public class BeanUtilTest{
         BeanUtil.copyProperties(null, new Person());
     }
 
+    /**
+     * Test bean util test 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testBeanUtilTest1(){
         BeanUtil.copyProperties(new Person(), null);
@@ -298,6 +303,9 @@ public class BeanUtilTest{
         LOGGER.debug(JsonUtil.format(user));
     }
 
+    /**
+     * Test populate alias.
+     */
     @Test
     public void testPopulateAlias(){
         Map<String, String> readPropertiesToMap = ResourceBundleUtil.readToMap("messages.feilong-core-test");
@@ -317,6 +325,9 @@ public class BeanUtilTest{
         assertThat(BeanUtil.populate(map, properties), allOf(hasEntry("id", (Object) 8L)));
     }
 
+    /**
+     * Clone bean 1.
+     */
     @Test
     public void cloneBean1(){
         SalesOrder newSalesOrder = salesOrder;
@@ -324,6 +335,9 @@ public class BeanUtilTest{
         assertEquals(toBigDecimal(599), salesOrder.getPrice());
     }
 
+    /**
+     * Clone bean 2.
+     */
     @Test
     public void cloneBean2(){
         OrderLine orderLine = new OrderLine();
@@ -366,6 +380,9 @@ public class BeanUtilTest{
         assertEquals(toBigDecimal(599), copyList.get(0).getSalePrice());
     }
 
+    /**
+     * Test lazy dyna bean.
+     */
     @Test
     public void testLazyDynaBean(){
         DynaBean dynaBean = new LazyDynaBean();
@@ -377,6 +394,9 @@ public class BeanUtilTest{
         LOGGER.debug(JsonUtil.format(dynaBean));
     }
 
+    /**
+     * Test basic dyna class 00.
+     */
     @Test
     public void testBasicDynaClass00(){
         DynaBean newDynaBean = BeanUtil.newDynaBean(toMap(//

@@ -36,6 +36,11 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
+/**
+ * The Class ConvertUtilToMapParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToMapParameterizedTest{
 
     //************com.feilong.core.bean.ConvertUtil.toMap(Entry<String, String>...)*****************************
@@ -53,6 +58,9 @@ public class ConvertUtilToMapParameterizedTest{
         assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
     }
 
+    /**
+     * Test to map 11.
+     */
     @Test
     public void testToMap11(){
         Map<String, String> map = toMap(toArray(
@@ -63,27 +71,42 @@ public class ConvertUtilToMapParameterizedTest{
         assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
     }
 
+    /**
+     * Test to map with null element.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToMapWithNullElement(){
         toMap((Map.Entry<String, String>) null);
     }
 
+    /**
+     * Test to map with null element 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToMapWithNullElement1(){
         toMap(Pair.of("张飞", "丈八蛇矛"), Pair.of("关羽", "青龙偃月刀"), null, Pair.of("刘备", "双股剑"));
     }
 
+    /**
+     * Test to map null array 3.
+     */
     @Test
     public void testToMapNullArray3(){
         assertEquals(emptyMap(), toMap((Map.Entry<String, String>[]) null));
     }
 
+    /**
+     * Test to map null array 2.
+     */
     @Test
     public void testToMapNullArray2(){
         Map.Entry<String, String>[] entries = null;
         assertEquals(emptyMap(), toMap(entries));
     }
 
+    /**
+     * Test to map null array 1.
+     */
     @Test
     public void testToMapNullArray1(){
         assertEquals(emptyMap(), toMap());
@@ -103,6 +126,9 @@ public class ConvertUtilToMapParameterizedTest{
         assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
     }
 
+    /**
+     * Test to map 33.
+     */
     @Test
     public void testToMap33(){
         Map<String, String> map = toMap(toList(
@@ -113,11 +139,17 @@ public class ConvertUtilToMapParameterizedTest{
         assertThat(map, allOf(hasEntry("张飞", "丈八蛇矛"), hasEntry("关羽", "青龙偃月刀"), hasEntry("赵云", "龙胆枪"), hasEntry("刘备", "双股剑")));
     }
 
+    /**
+     * Test to map null collection.
+     */
     @Test
     public void testToMapNullCollection(){
         assertEquals(emptyMap(), toMap((List<SimpleEntry<String, String>>) null));
     }
 
+    /**
+     * Test to map collection null element.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testToMapCollectionNullElement(){
         toMap(toList(new SimpleEntry<>("张飞", "丈八蛇矛"), null, new SimpleEntry<>("赵云", "龙胆枪"), new SimpleEntry<>("刘备", "双股剑")));
@@ -146,6 +178,9 @@ public class ConvertUtilToMapParameterizedTest{
 
     //*********************com.feilong.core.bean.ConvertUtil.toMap(Properties)*************
 
+    /**
+     * Test to properties.
+     */
     @Test
     public void testToProperties(){
         Map<String, Object> map = new LinkedHashMap<>();
@@ -162,6 +197,9 @@ public class ConvertUtilToMapParameterizedTest{
                         Matchers.<String, Object> hasEntry("country", "china")));
     }
 
+    /**
+     * Test to properties 1.
+     */
     @Test
     public void testToProperties1(){
         Properties properties = new Properties();
@@ -176,11 +214,17 @@ public class ConvertUtilToMapParameterizedTest{
                         hasEntry("country", "china")));
     }
 
+    /**
+     * Test to map null properties.
+     */
     @Test
     public void testToMapNullProperties(){
         toMap((Properties) null);
     }
 
+    /**
+     * Test to map empty properties.
+     */
     @Test
     public void testToMapEmptyProperties(){
         assertEquals(emptyMap(), toMap(new Properties()));

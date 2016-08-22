@@ -19,6 +19,11 @@ import org.junit.Test;
 
 import static com.feilong.core.date.DateUtil.getMonth;
 
+/**
+ * The Class DateUtilGetMonthTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateUtilGetMonthTest{
 
     //**********com.feilong.core.date.DateUtil.getMonth(Date)******************************

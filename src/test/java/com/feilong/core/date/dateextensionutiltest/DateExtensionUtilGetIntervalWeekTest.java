@@ -22,13 +22,24 @@ import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
 
+/**
+ * The Class DateExtensionUtilGetIntervalWeekTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateExtensionUtilGetIntervalWeekTest{
 
+    /**
+     * Test get interval week null.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetIntervalWeekNull(){
         getIntervalWeek(null, toDate("2008-9-29", COMMON_DATE));
     }
 
+    /**
+     * Test get interval week null 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetIntervalWeekNull1(){
         getIntervalWeek(toDate("2008-12-1", COMMON_DATE), null);

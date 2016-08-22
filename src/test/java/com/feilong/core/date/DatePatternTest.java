@@ -15,6 +15,7 @@
  */
 package com.feilong.core.date;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ import static com.feilong.core.DatePattern.yyyyMMdd;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
-public class DatePatternTest extends BaseDateUtilTest{
+public class DatePatternTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DatePatternTest.class);
@@ -63,6 +64,7 @@ public class DatePatternTest extends BaseDateUtilTest{
      */
     @Test
     public void testDatePattern(){
+        Date NOW = new Date();
         Map<String, String> map = new LinkedHashMap<String, String>();
 
         map.put("TO_STRING_STYLE", DateUtil.toString(NOW, TO_STRING_STYLE));

@@ -31,14 +31,27 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class NumberUtilGetDivideValueParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilGetDivideValueParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<Number, Number, Integer, BigDecimal>{
 
+    /**
+     * Test get divide value.
+     */
     @Test
     public void testGetDivideValue(){
         assertEquals(expectedValue, NumberUtil.getDivideValue(input1, input2, input3));
     }
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:NumberUtil.getDivideValue({0}, {1}, {2})={3}")
     public static Iterable<Object[]> data(){
         return toList(

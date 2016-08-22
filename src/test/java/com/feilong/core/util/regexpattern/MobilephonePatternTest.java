@@ -27,8 +27,8 @@ import com.feilong.test.TestUtil;
 import static com.feilong.core.RegexPattern.MOBILEPHONE;
 
 /**
- * 
- * 
+ * The Class MobilephonePatternTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
@@ -46,6 +46,9 @@ public class MobilephonePatternTest extends AbstractBooleanParameterizedTest<Str
         return TestUtil.toDataList(valids, invalids);
     }
 
+    /**
+     * Matches.
+     */
     @Test
     public void matches(){
         assertEquals(expectedValue, RegexUtil.matches(MOBILEPHONE, input));

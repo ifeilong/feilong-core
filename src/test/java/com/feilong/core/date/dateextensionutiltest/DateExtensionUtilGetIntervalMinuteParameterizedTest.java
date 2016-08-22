@@ -31,14 +31,27 @@ import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
+/**
+ * The Class DateExtensionUtilGetIntervalMinuteParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateExtensionUtilGetIntervalMinuteParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
 
+    /**
+     * Test get interval minute.
+     */
     @Test
     public void testGetIntervalMinute(){
         assertEquals(expectedValue, (Integer) getIntervalMinute(toDate(input1, input3), toDate(input2, input3)));
     }
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:DateExtensionUtil.getIntervalMinute(toDate(\"{0}\",\"{2}\"), toDate(\"{1}\",\"{2}\"))={3}")
     public static Iterable<Object[]> data(){
         return toList(//

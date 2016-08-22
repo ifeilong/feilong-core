@@ -27,8 +27,18 @@ import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class ConvertUtilToBigDecimalParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToBigDecimalParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, BigDecimal>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ConvertUtil.toBigDecimal({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
@@ -53,6 +63,9 @@ public class ConvertUtilToBigDecimalParameterizedTest extends AbstractOneParamAn
         return toList(objects);
     }
 
+    /**
+     * Test to big decimal.
+     */
     @Test
     public void testToBigDecimal(){
         assertEquals(expectedValue, toBigDecimal(input1));

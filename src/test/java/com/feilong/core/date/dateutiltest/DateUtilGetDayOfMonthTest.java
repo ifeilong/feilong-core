@@ -19,6 +19,11 @@ import org.junit.Test;
 
 import static com.feilong.core.date.DateUtil.getDayOfMonth;
 
+/**
+ * The Class DateUtilGetDayOfMonthTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateUtilGetDayOfMonthTest{
 
     //**********com.feilong.core.date.DateUtil.getDayOfMonth(Date)*****************************

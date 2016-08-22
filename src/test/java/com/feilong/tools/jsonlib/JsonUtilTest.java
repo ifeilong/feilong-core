@@ -69,6 +69,9 @@ public class JsonUtilTest extends AbstractJsonTest{
         LOGGER.debug("DEFAULT_USER_FOR_JSON_TEST_JSON:{}--->{}", USER_JSON_STRING, JsonUtil.format(USER_JSON_STRING));
     }
 
+    /**
+     * Test json string 11.
+     */
     @Test
     public void testJsonString11(){
         Map<String, Object> map = toMap("ID", (Object) 4616189619433466044L);
@@ -130,12 +133,18 @@ public class JsonUtilTest extends AbstractJsonTest{
         LOGGER.debug(JsonUtil.format(user));
     }
 
+    /**
+     * Format array 2.
+     */
     @Test
     public void formatArray2(){
         String json = "[{'name':'get'},{'name':'set'}]";
         LOGGER.debug(JsonUtil.format(json));
     }
 
+    /**
+     * Format enum.
+     */
     @Test
     public void formatEnum(){
         LOGGER.debug(JsonUtil.format(HttpMethodTestType.GET));
@@ -149,6 +158,9 @@ public class JsonUtilTest extends AbstractJsonTest{
         LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses")));
     }
 
+    /**
+     * Test excludes 1.
+     */
     @Test
     public void testExcludes1(){
         LOGGER.debug(JsonUtil.format(USER, toArray("name", "loves", "attrMap", "userInfo", "userAddresses"), 4, 4));

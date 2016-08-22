@@ -54,6 +54,9 @@ public class EnumUtilTest{
 
     }
 
+    /**
+     * Test get http method type 1.
+     */
     @Test
     public void testGetHttpMethodType1(){
         assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "post111"));

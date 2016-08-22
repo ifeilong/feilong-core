@@ -25,7 +25,8 @@ import com.feilong.core.lang.objectutiltest.FeiLongObjectUtilSuiteTests;
 import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
 
 /**
- * 
+ * The Class FeiLongLangSuiteTests.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.3
  */

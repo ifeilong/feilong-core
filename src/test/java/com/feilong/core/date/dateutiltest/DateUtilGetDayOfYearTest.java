@@ -19,6 +19,11 @@ import org.junit.Test;
 
 import static com.feilong.core.date.DateUtil.getDayOfYear;
 
+/**
+ * The Class DateUtilGetDayOfYearTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateUtilGetDayOfYearTest{
 
     /**

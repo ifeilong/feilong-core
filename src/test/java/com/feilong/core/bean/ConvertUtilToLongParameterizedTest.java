@@ -27,8 +27,18 @@ import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 
+/**
+ * The Class ConvertUtilToLongParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToLongParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Long>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ConvertUtil.toLong({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
@@ -52,6 +62,9 @@ public class ConvertUtilToLongParameterizedTest extends AbstractOneParamAndOneRe
         return toList(objects);
     }
 
+    /**
+     * Test to long.
+     */
     @Test
     public void testToLong(){
         assertEquals(expectedValue, toLong(input1));

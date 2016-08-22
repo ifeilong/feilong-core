@@ -24,6 +24,11 @@ import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
+/**
+ * The Class DateUtilGetHourOfYearTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateUtilGetHourOfYearTest{
 
     /**

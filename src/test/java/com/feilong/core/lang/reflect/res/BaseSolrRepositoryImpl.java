@@ -25,6 +25,7 @@ import com.feilong.core.lang.reflect.TypeUtil;
 /**
  * The Class BaseSolrRepositoryImpl.
  *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
  * @param <PK>

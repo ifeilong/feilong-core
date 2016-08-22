@@ -34,12 +34,18 @@ public class ClassLoaderUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassLoaderUtilTest.class);
 
+    /**
+     * Test get resource.
+     */
     @Test
     public void testGetResource(){
         LOGGER.debug(ClassLoaderUtil.getResource("") + "");
         LOGGER.debug("" + ClassLoaderUtil.getResource("com"));
     }
 
+    /**
+     * Test get resource 3.
+     */
     @Test
     public void testGetResource3(){
         assertEquals(null, ClassLoaderUtil.getResource("feilong-core-test.properties"));

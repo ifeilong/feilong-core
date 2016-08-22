@@ -17,9 +17,9 @@ package com.feilong.core.date.dateextensionutiltest;
 
 import static org.junit.Assert.assertArrayEquals;
 
-import org.junit.Test;
+import java.util.Date;
 
-import com.feilong.core.date.BaseDateUtilTest;
+import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateExtensionUtil.getResetTodayAndTomorrow;
@@ -33,14 +33,17 @@ import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.8
  */
-public class DateExtensionUtilTest extends BaseDateUtilTest{
+public class DateExtensionUtilTest{
 
     /**
      * Test get extent yesterday.
      */
     @Test
     public void testGetResetYesterdayAndToday(){
-        assertArrayEquals(toArray(getFirstDateOfThisDay(addDay(NOW, -1)), getFirstDateOfThisDay(NOW)), getResetYesterdayAndToday());
+        Date NOW = new Date();
+        assertArrayEquals(//
+                        toArray(getFirstDateOfThisDay(addDay(NOW, -1)), getFirstDateOfThisDay(NOW)),
+                        getResetYesterdayAndToday());
     }
 
     /**
@@ -48,7 +51,10 @@ public class DateExtensionUtilTest extends BaseDateUtilTest{
      */
     @Test
     public void testGetResetTodayAndTomorrow(){
-        assertArrayEquals(toArray(getFirstDateOfThisDay(NOW), getFirstDateOfThisDay(addDay(NOW, 1))), getResetTodayAndTomorrow());
+        Date NOW = new Date();
+        assertArrayEquals(//
+                        toArray(getFirstDateOfThisDay(NOW), getFirstDateOfThisDay(addDay(NOW, 1))),
+                        getResetTodayAndTomorrow());
     }
 
 }

@@ -19,6 +19,11 @@ import org.junit.Test;
 
 import com.feilong.core.date.DateUtil;
 
+/**
+ * The Class DateUtilGetWeekOfYearTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateUtilGetWeekOfYearTest{
 
     //******com.feilong.core.date.DateUtil.getWeekOfYear(Date)************************************

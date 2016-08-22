@@ -48,7 +48,8 @@ import static com.feilong.core.util.SortUtil.sortByValueAsc;
 import static com.feilong.core.util.SortUtil.sortByValueDesc;
 
 /**
- * 
+ * The Class SortUtilTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
@@ -57,42 +58,66 @@ public class SortUtilTest{
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(SortUtilTest.class);
 
+    /**
+     * Test sort T array.
+     */
     @Test
     public final void testSortTArray(){
         assertEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sort((Object[]) null));
     }
 
+    /**
+     * Test sort list.
+     */
     @Test
     public void testSortList(){
         List<Integer> list = toList(5, 10, 3, 2);
         assertThat(sort(list), contains(2, 3, 5, 10));
     }
 
+    /**
+     * Test sort list of T.
+     */
     @Test
     public final void testSortListOfT(){
         assertEquals(emptyList(), sort((List) null));
     }
 
+    /**
+     * Test sort list of T string.
+     */
     @Test
     public final void testSortListOfTString(){
         assertEquals(emptyList(), sort((List) null, "name"));
     }
 
+    /**
+     * Test sort list of T string array.
+     */
     @Test
     public final void testSortListOfTStringArray(){
         assertEquals(emptyList(), sort((List) null, "name", "age"));
     }
 
+    /**
+     * Test sort list of T string V array.
+     */
     @Test
     public final void testSortListOfTStringVArray(){
         assertEquals(emptyList(), sort((List) null, "name", "age"));
     }
 
+    /**
+     * Test sort list of T string list of V.
+     */
     @Test
     public final void testSortListOfTStringListOfV(){
         assertEquals(emptyList(), sort((List) null, "name", "age"));
     }
 
+    /**
+     * Test select array.
+     */
     @Test
     public void testSelectArray(){
         User zhangfei = new User("张飞", 23);
@@ -141,6 +166,9 @@ public class SortUtilTest{
         assertThat(list, contains(id1, id2, id5, id12));
     }
 
+    /**
+     * Test property comparator 3.
+     */
     @Test
     public void testPropertyComparator3(){
         User id12_age18 = new User(12L, 18);
@@ -153,6 +181,9 @@ public class SortUtilTest{
         assertThat(list, contains(id1_age8, id2_age2, id2_age30, id2_age36, id12_age18));
     }
 
+    /**
+     * Test property comparator 4.
+     */
     @Test
     public void testPropertyComparator4(){
         User id12_age18 = new User(12L, 18);
@@ -188,6 +219,9 @@ public class SortUtilTest{
         assertThat(sortByValueAsc.keySet(), contains("b", "a", "c"));
     }
 
+    /**
+     * Test sort by value ASC 1.
+     */
     @Test
     public void testSortByValueASC1(){
         assertEquals(emptyMap(), sortByValueAsc(null));
@@ -206,17 +240,26 @@ public class SortUtilTest{
         assertThat(sortByValueDesc(map).keySet(), contains("c", "a", "b"));
     }
 
+    /**
+     * Test sort by value desc 1.
+     */
     @Test
     public void testSortByValueDesc1(){
         assertEquals(emptyMap(), sortByValueDesc(null));
     }
 
+    /**
+     * Test sort by key asc null map.
+     */
     //************com.feilong.core.util.SortUtil.sortByKeyAsc(Map<String, Integer>)*****************************
     @Test
     public void testSortByKeyAscNullMap(){
         assertEquals(emptyMap(), sortByKeyAsc(null));
     }
 
+    /**
+     * Test sort by key asc 2.
+     */
     @Test
     public void testSortByKeyAsc2(){
         assertEquals(emptyMap(), sortByKeyAsc(emptyMap()));
@@ -267,6 +310,9 @@ public class SortUtilTest{
         assertThat(sort.keySet(), contains("a2", "a8", "a13"));
     }
 
+    /**
+     * Test sort by key desc 1.
+     */
     //**************com.feilong.core.util.SortUtil.sortByKeyDesc(Map<String, Integer>)**************************
     @Test
     public void testSortByKeyDesc1(){

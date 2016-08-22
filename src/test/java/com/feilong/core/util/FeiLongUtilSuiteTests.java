@@ -22,7 +22,8 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
 
 /**
- * 
+ * The Class FeiLongUtilSuiteTests.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.3
  */

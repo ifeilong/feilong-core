@@ -34,6 +34,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  */
 public abstract class AbstractJsonTest{
 
+    /** The Constant USER. */
     protected static final User   USER             = getUserForJsonTest();
 
     /** The Constant DEFAULT_USER_FOR_JSON_TEST_JSON. */

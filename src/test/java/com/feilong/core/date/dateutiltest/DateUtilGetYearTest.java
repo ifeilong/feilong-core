@@ -19,8 +19,16 @@ import org.junit.Test;
 
 import com.feilong.core.date.DateUtil;
 
+/**
+ * The Class DateUtilGetYearTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class DateUtilGetYearTest{
 
+    /**
+     * Test get year 1.
+     */
     //**********com.feilong.core.date.DateUtil.getYear(Date)*********************
     @Test(expected = NullPointerException.class)
     public void testGetYear1(){

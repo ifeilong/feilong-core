@@ -21,12 +21,14 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.Alias;
 
 /**
- * 
+ * The Class VarBean.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.1
  */
 public class VarBean{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(VarBean.class);
 
     //    with_space_value: a 
@@ -42,32 +44,42 @@ public class VarBean{
     //    FileType.audio=Audio
     //
     //    test=今天 {0}
+    /** The with space value. */
     //    test.arguments=my name is {0},age is {1}
     @Alias(name = "with_space_value")
     private String              withSpaceValue;
 
+    /** The b. */
     @Alias(name = "config_test_boolean")
     private boolean             b;
 
+    /** The i. */
     @Alias(name = "config_test_int")
     private boolean             i;
 
+    /** The longs. */
     @Alias(name = "config_test_array")
     private Long[]              longs;
 
+    /** The image. */
     @Alias(name = "FileType.image")
     private String              image;
 
+    /** The video. */
     @Alias(name = "FileType.video")
     private String              video;
 
+    /** The audio. */
     @Alias(name = "FileType.audio")
     private String              audio;
 
+    /** The arguments. */
     @Alias(name = "test.arguments")
     private String              arguments;
 
     /**
+     * Gets the with space value.
+     *
      * @return the withSpaceValue
      */
     public String getWithSpaceValue(){
@@ -75,6 +87,8 @@ public class VarBean{
     }
 
     /**
+     * Sets the with space value.
+     *
      * @param withSpaceValue
      *            the withSpaceValue to set
      */
@@ -83,6 +97,8 @@ public class VarBean{
     }
 
     /**
+     * Gets the b.
+     *
      * @return the b
      */
     public boolean getB(){
@@ -90,6 +106,8 @@ public class VarBean{
     }
 
     /**
+     * Sets the b.
+     *
      * @param b
      *            the b to set
      */
@@ -98,6 +116,8 @@ public class VarBean{
     }
 
     /**
+     * Gets the i.
+     *
      * @return the i
      */
     public boolean getI(){
@@ -105,6 +125,8 @@ public class VarBean{
     }
 
     /**
+     * Sets the i.
+     *
      * @param i
      *            the i to set
      */
@@ -113,6 +135,8 @@ public class VarBean{
     }
 
     /**
+     * Gets the longs.
+     *
      * @return the longs
      */
     public Long[] getLongs(){
@@ -120,6 +144,8 @@ public class VarBean{
     }
 
     /**
+     * Sets the longs.
+     *
      * @param longs
      *            the longs to set
      */
@@ -128,6 +154,8 @@ public class VarBean{
     }
 
     /**
+     * Gets the image.
+     *
      * @return the image
      */
     public String getImage(){
@@ -135,6 +163,8 @@ public class VarBean{
     }
 
     /**
+     * Sets the image.
+     *
      * @param image
      *            the image to set
      */
@@ -143,6 +173,8 @@ public class VarBean{
     }
 
     /**
+     * Gets the video.
+     *
      * @return the video
      */
     public String getVideo(){
@@ -150,6 +182,8 @@ public class VarBean{
     }
 
     /**
+     * Sets the video.
+     *
      * @param video
      *            the video to set
      */
@@ -158,6 +192,8 @@ public class VarBean{
     }
 
     /**
+     * Gets the audio.
+     *
      * @return the audio
      */
     public String getAudio(){
@@ -165,6 +201,8 @@ public class VarBean{
     }
 
     /**
+     * Sets the audio.
+     *
      * @param audio
      *            the audio to set
      */
@@ -173,6 +211,8 @@ public class VarBean{
     }
 
     /**
+     * Gets the arguments.
+     *
      * @return the arguments
      */
     public String getArguments(){
@@ -180,6 +220,8 @@ public class VarBean{
     }
 
     /**
+     * Sets the arguments.
+     *
      * @param arguments
      *            the arguments to set
      */

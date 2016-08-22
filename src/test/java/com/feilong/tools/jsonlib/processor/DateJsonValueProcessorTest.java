@@ -34,14 +34,19 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * 
+ * The Class DateJsonValueProcessorTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5
  */
 public class DateJsonValueProcessorTest{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DateJsonValueProcessorTest.class);
 
+    /**
+     * Test date json value processor.
+     */
     @Test
     public void testDateJsonValueProcessor(){
         User user = new User("feilong1", 24);
@@ -53,6 +58,9 @@ public class DateJsonValueProcessorTest{
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }
 
+    /**
+     * Test date json value processor 1.
+     */
     @Test
     public void testDateJsonValueProcessor1(){
         User user = new User("feilong1", 24);
@@ -68,6 +76,9 @@ public class DateJsonValueProcessorTest{
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }
 
+    /**
+     * Test date json value processor 2.
+     */
     @Test
     public void testDateJsonValueProcessor2(){
         User user = new User("feilong1", 24);

@@ -21,18 +21,38 @@ import org.junit.Test;
 
 import com.feilong.core.lang.NumberUtil;
 
+/**
+ * The Class NumberUtilGetDivideValueTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilGetDivideValueTest{
 
+    /**
+     * Gets the divide value 1.
+     *
+     * @return the divide value 1
+     */
     @Test(expected = NullPointerException.class)
     public void getDivideValue1(){
         NumberUtil.getDivideValue(null, 0, 0);
     }
 
+    /**
+     * Gets the divide value 2.
+     *
+     * @return the divide value 2
+     */
     @Test(expected = NullPointerException.class)
     public void getDivideValue2(){
         NumberUtil.getDivideValue(0, null, 0);
     }
 
+    /**
+     * Gets the divide value.
+     *
+     * @return the divide value
+     */
     @Test(expected = IllegalArgumentException.class)
     public void getDivideValue(){
         NumberUtil.getDivideValue(new BigDecimal(6), 0, 0);

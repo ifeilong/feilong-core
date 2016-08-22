@@ -21,6 +21,7 @@ import java.io.Serializable;
 /**
  * The Interface BaseSolrRepository.
  *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
  * @param <PK>

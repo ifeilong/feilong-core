@@ -23,7 +23,8 @@ import com.feilong.core.date.dateextensionutiltest.FeiLongDateExtensionUtilSuite
 import com.feilong.core.date.dateutiltest.FeiLongDateUtilSuiteTests;
 
 /**
- * 
+ * The Class FeiLongDateSuiteTests.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.3
  */

@@ -31,9 +31,19 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class NumberFormatUtilFormatRoundingModeParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberFormatUtilFormatRoundingModeParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<Number, String, RoundingMode, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:NumberFormatUtil.format({0}, \"{1}\", {2})=\"{3}\"")
     public static Iterable<Object[]> data(){
         return toList(
@@ -59,6 +69,9 @@ public class NumberFormatUtilFormatRoundingModeParameterizedTest
         );
     }
 
+    /**
+     * Test format.
+     */
     @Test
     public void testFormat(){
         assertEquals(expectedValue, NumberFormatUtil.format(input1, input2, input3));

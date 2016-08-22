@@ -27,8 +27,18 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class NumberFormatUtilFormatParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberFormatUtilFormatParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Number, String, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:NumberFormatUtil.format({0}, \"{1}\")=\"{2}\"")
     public static Iterable<Object[]> data(){
         return toList(
@@ -46,6 +56,9 @@ public class NumberFormatUtilFormatParameterizedTest extends AbstractTwoParamsAn
         );
     }
 
+    /**
+     * Test format.
+     */
     @Test
     public void testFormat(){
         assertEquals(expectedValue, NumberFormatUtil.format(input1, input2));

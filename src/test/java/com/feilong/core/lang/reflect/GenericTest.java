@@ -33,12 +33,26 @@ public class GenericTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(GenericTest.class);
 
+    /**
+     * Test generic test.
+     */
     @Test
     public void testGenericTest(){
         LOGGER.debug((String) getValue("jinxin", String.class));
         LOGGER.debug((String) getValue("jinxin", Integer.class));
     }
 
+    /**
+     * Gets the value.
+     *
+     * @param <T>
+     *            the generic type
+     * @param a
+     *            the a
+     * @param klass
+     *            the klass
+     * @return the value
+     */
     public static <T> T getValue(String a,Class<?> klass){
         try{
             Method method = GenericTest.class.getMethod("getValue", String.class, Class.class);

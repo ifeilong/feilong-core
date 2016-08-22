@@ -19,6 +19,11 @@ import org.junit.Test;
 
 import com.feilong.core.lang.NumberUtil;
 
+/**
+ * The Class NumberUtilGetMultiplyValueTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilGetMultiplyValueTest{
 
     /**

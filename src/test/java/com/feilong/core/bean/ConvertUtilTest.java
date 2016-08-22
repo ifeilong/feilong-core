@@ -126,6 +126,9 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(iterator, 0, 0));
     }
 
+    /**
+     * Test to big decimal 1.
+     */
     @Test
     public void testToBigDecimal1(){
         BigDecimal a = toBigDecimal("1.000000");
@@ -210,11 +213,17 @@ public class ConvertUtilTest{
         LOGGER.debug(arrayConverter.convert(String.class, toArray(2, null, 1, null)));
     }
 
+    /**
+     * Test to string 3.
+     */
     @Test
     public void testToString3(){
         assertEquals("张飞", ConvertUtil.toString(toList("张飞", "关羽", "", "赵云")));
     }
 
+    /**
+     * Test to string 5.
+     */
     @Test
     public void testToString5(){
         assertEquals(null, ConvertUtil.toString(null));
@@ -266,17 +275,26 @@ public class ConvertUtilTest{
         assertEquals(",,,", ConvertUtil.toString(toArray(",", ","), new ToStringConfig(",", true)));
     }
 
+    /**
+     * Test to string 222.
+     */
     @Test
     public void testToString222(){
         assertEquals("2,", ConvertUtil.toString(toArray(new Integer(2), null), new ToStringConfig(",", true)));
     }
 
+    /**
+     * Test to string with one null element array.
+     */
     @Test
     public void testToStringWithOneNullElementArray(){
         String[] ss = { null };
         assertEquals(EMPTY, ConvertUtil.toString(ss, new ToStringConfig(",", true)));
     }
 
+    /**
+     * Test to string 221.
+     */
     @Test
     public void testToString221(){
         assertEquals(EMPTY, ConvertUtil.toString((String[]) null, new ToStringConfig(",")));
@@ -322,12 +340,18 @@ public class ConvertUtilTest{
         assertArrayEquals(new Integer[] {}, ConvertUtil.<Integer> toArray());
     }
 
+    /**
+     * Test to array null.
+     */
     @Test
     public void testToArrayNull(){
         Object[] array = ConvertUtil.toArray(null);
         assertArrayEquals(null, array);
     }
 
+    /**
+     * Test to array null 1.
+     */
     @Test
     public void testToArrayNull1(){
         String[] array = ConvertUtil.toArray((String) null);
@@ -390,6 +414,9 @@ public class ConvertUtilTest{
 
     //****************************************************************************************************
 
+    /**
+     * Test collection to string.
+     */
     @Test
     public void testCollectionToString(){
         ToStringConfig toStringConfig = new ToStringConfig(",");
@@ -414,6 +441,9 @@ public class ConvertUtilTest{
         assertEquals("feilong,,xinge", ConvertUtil.toString(list, null));
     }
 
+    /**
+     * Test collection to string 11.
+     */
     @Test
     public void testCollectionToString11(){
         List<String> list = toList("feilong", "", "xinge", null);
@@ -482,11 +512,17 @@ public class ConvertUtilTest{
         assertEquals(Locale.CHINA, toLocale(Locale.CHINA));
     }
 
+    /**
+     * Test to locale 1.
+     */
     @Test(expected = UnsupportedOperationException.class)
     public void testToLocale1(){
         toLocale(new User());
     }
 
+    /**
+     * Test to strings UR ls.
+     */
     @Test
     public void testToStringsURLs(){
         URL[] urls = {
@@ -502,6 +538,9 @@ public class ConvertUtilTest{
         LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings(null)));
     }
 
+    /**
+     * Test to URL.
+     */
     @Test(expected = ConversionException.class)
     public void testToURL(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";

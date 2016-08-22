@@ -23,17 +23,24 @@ import static com.feilong.core.bean.ConvertUtil.toEnumeration;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
- * 
+ * The Class EnumerationUtilTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5
  */
 public class EnumerationUtilTest{
 
+    /**
+     * Test contains.
+     */
     @Test
     public final void testContains(){
         assertEquals(false, EnumerationUtil.contains(null, "a"));
     }
 
+    /**
+     * Test contains 1.
+     */
     @Test
     public final void testContains1(){
         assertEquals(false, EnumerationUtil.contains(toEnumeration(toList("4", "5")), "a"));

@@ -32,14 +32,19 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * 
+ * The Class BigDecimalJsonValueProcessorTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.5
  */
 public class BigDecimalJsonValueProcessorTest{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(BigDecimalJsonValueProcessorTest.class);
 
+    /**
+     * Test big decimal json value processor.
+     */
     @Test
     public void testBigDecimalJsonValueProcessor(){
         User user = new User("feilong1", 24);
@@ -51,6 +56,9 @@ public class BigDecimalJsonValueProcessorTest{
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
     }
 
+    /**
+     * Test big decimal json value processor 2.
+     */
     @Test
     public void testBigDecimalJsonValueProcessor2(){
         User user = new User("feilong1", 24);

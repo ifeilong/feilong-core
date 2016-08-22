@@ -32,9 +32,19 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class NumberUtilSetScaleRoundingModeParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class NumberUtilSetScaleRoundingModeParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<Number, Integer, RoundingMode, BigDecimal>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:NumberUtil.setScale({0}, {1}, {2})={3}")
     public static Iterable<Object[]> data(){
         return toList(
@@ -59,6 +69,9 @@ public class NumberUtilSetScaleRoundingModeParameterizedTest
         );
     }
 
+    /**
+     * Test set scale.
+     */
     @Test
     public void testSetScale(){
         assertEquals(expectedValue, NumberUtil.setScale(input1, input2, input3));

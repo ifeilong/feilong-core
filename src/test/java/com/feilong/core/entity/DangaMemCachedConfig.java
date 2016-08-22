@@ -18,7 +18,8 @@ package com.feilong.core.entity;
 import com.feilong.core.bean.Alias;
 
 /**
- * 
+ * The Class DangaMemCachedConfig.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.1
  */
@@ -28,6 +29,7 @@ public class DangaMemCachedConfig{
     @Alias(name = "memcached.serverlist",sampleValue = "172.20.31.23:11211,172.20.31.22:11211")
     private String[]  serverList;
 
+    /** The pool name. */
     @Alias(name = "memcached.poolname",sampleValue = "sidsock2")
     private String    poolName;
 
@@ -68,6 +70,8 @@ public class DangaMemCachedConfig{
     private Boolean   aliveCheck;
 
     /**
+     * 获得 serverlist.
+     *
      * @return the serverList
      */
     public String[] getServerList(){
@@ -75,6 +79,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 serverlist.
+     *
      * @param serverList
      *            the serverList to set
      */
@@ -83,6 +89,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * Gets the pool name.
+     *
      * @return the poolName
      */
     public String getPoolName(){
@@ -90,6 +98,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * Sets the pool name.
+     *
      * @param poolName
      *            the poolName to set
      */
@@ -98,6 +108,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 expire time 单位分钟.
+     *
      * @return the expireTime
      */
     public Integer getExpireTime(){
@@ -105,6 +117,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 expire time 单位分钟.
+     *
      * @param expireTime
      *            the expireTime to set
      */
@@ -113,6 +127,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 权重.
+     *
      * @return the weight
      */
     public Integer[] getWeight(){
@@ -120,6 +136,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 权重.
+     *
      * @param weight
      *            the weight to set
      */
@@ -128,6 +146,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 init connection.
+     *
      * @return the initConnection
      */
     public Integer getInitConnection(){
@@ -135,6 +155,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 init connection.
+     *
      * @param initConnection
      *            the initConnection to set
      */
@@ -143,6 +165,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 min connection.
+     *
      * @return the minConnection
      */
     public Integer getMinConnection(){
@@ -150,6 +174,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 min connection.
+     *
      * @param minConnection
      *            the minConnection to set
      */
@@ -158,6 +184,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 max connection.
+     *
      * @return the maxConnection
      */
     public Integer getMaxConnection(){
@@ -165,6 +193,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 max connection.
+     *
      * @param maxConnection
      *            the maxConnection to set
      */
@@ -173,6 +203,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小.
+     *
      * @return the maintSleep
      */
     public Integer getMaintSleep(){
@@ -180,6 +212,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小.
+     *
      * @param maintSleep
      *            the maintSleep to set
      */
@@ -188,6 +222,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 关闭套接字缓存.
+     *
      * @return the nagle
      */
     public Boolean getNagle(){
@@ -195,6 +231,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 关闭套接字缓存.
+     *
      * @param nagle
      *            the nagle to set
      */
@@ -203,6 +241,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 连接建立后的超时时间.
+     *
      * @return the socketTo
      */
     public Integer getSocketTo(){
@@ -210,6 +250,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 连接建立后的超时时间.
+     *
      * @param socketTo
      *            the socketTo to set
      */
@@ -218,6 +260,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 获得 alive check.
+     *
      * @return the aliveCheck
      */
     public Boolean getAliveCheck(){
@@ -225,6 +269,8 @@ public class DangaMemCachedConfig{
     }
 
     /**
+     * 设置 alive check.
+     *
      * @param aliveCheck
      *            the aliveCheck to set
      */

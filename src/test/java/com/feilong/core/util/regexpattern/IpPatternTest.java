@@ -27,8 +27,8 @@ import com.feilong.test.TestUtil;
 import static com.feilong.core.RegexPattern.IP;
 
 /**
- * 
- * 
+ * The Class IpPatternTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
@@ -48,6 +48,9 @@ public class IpPatternTest extends AbstractBooleanParameterizedTest<String, Bool
         return TestUtil.toDataList(valids, invalids);
     }
 
+    /**
+     * Matches.
+     */
     @Test
     public void matches(){
         assertEquals(expectedValue, RegexUtil.matches(IP, input));

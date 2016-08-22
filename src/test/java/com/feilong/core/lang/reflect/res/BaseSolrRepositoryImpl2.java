@@ -20,6 +20,7 @@ import java.io.Serializable;
 /**
  * The Class BaseSolrRepositoryImpl2.
  *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <L>
  *            the generic type
  * @param <T>
