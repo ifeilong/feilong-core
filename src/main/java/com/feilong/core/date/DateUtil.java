@@ -407,7 +407,7 @@ public final class DateUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DateUtil.getFirstDateOfThisYear(2012-10-11 17:10:30.701)=2012-01-01 00:00:00
+     * DateUtil.getFirstDateOfThisYear(2012-10-11 17:10:30.701)=2012-01-01 00:00:00.000
      * </pre>
      * 
      * </blockquote>
