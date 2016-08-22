@@ -1117,7 +1117,7 @@ public final class DateUtil{
     }
 
     /**
-     * 将时间字符串 <code>dateString</code> 使用一个或者多个不同的 <code>datePattern</code> 模式按照顺序转换成date类型.
+     * 将时间字符串 <code>dateString</code> 使用<b>一个或者多个</b>不同的 <code>datePattern</code> 模式按照顺序转换成date类型.
      * 
      * <h3>示例:</h3>
      * 
@@ -1147,6 +1147,8 @@ public final class DateUtil{
      * @return 如果 <code>dateString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>dateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>datePatterns</code> 是 null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePatterns</code> 是 empty,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>datePatterns</code> 有元素是 null,抛出 {@link IllegalArgumentException}<br>
      * @see org.apache.commons.lang3.time.DateUtils#parseDate(String, String...)
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/">java-string-to-date-conversion</a>
      * @see <a href="http://stackoverflow.com/questions/4216745/java-string-to-date-conversion/22180505#22180505">java-string-to-date-
@@ -1156,7 +1158,10 @@ public final class DateUtil{
      */
     public static Date toDate(String dateString,String...datePatterns){
         Validate.notBlank(dateString, "dateString can't be blank!");
-        Validate.notNull(datePatterns, "datePatterns can't be null!");
+
+        Validate.notEmpty(datePatterns, "datePatterns can't be null!");
+        Validate.noNullElements(datePatterns, "datePatterns can't has null datePattern");
+
         try{
             return DateUtils.parseDate(dateString, datePatterns);
         }catch (ParseException e){

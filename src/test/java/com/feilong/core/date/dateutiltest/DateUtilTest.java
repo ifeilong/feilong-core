@@ -35,8 +35,6 @@ import static com.feilong.core.date.DateUtil.isBefore;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
-import static com.feilong.core.DatePattern.TIMESTAMP_WITH_MILLISECOND;
 
 /**
  * The Class DateUtilTest.
@@ -50,7 +48,6 @@ public class DateUtilTest extends BaseDateUtilTest{
 
     @Test
     public void testGetLastDateOfThisDay1(){
-
         logDate(DateUtils.ceiling(NOW, Calendar.DAY_OF_MONTH));
         logDate(DateUtils.round(NOW, Calendar.DAY_OF_MONTH));
         logDate(DateUtils.truncate(NOW, Calendar.DAY_OF_MONTH));
@@ -94,31 +91,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void testIsBefore(){
         assertEquals(true, isBefore(toDate("2011-03-05", COMMON_DATE), toDate("2011-03-10", COMMON_DATE)));
         assertEquals(false, isBefore(toDate("2011-05-01", COMMON_DATE), toDate("2011-04-01", COMMON_DATE)));
-    }
-
-    /**
-     * Test string2 date.
-     * 
-     */
-    @Test
-    public void testToDate(){
-        logDate(toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
-        logDate(toDate("2016-06-28T01:21:12+0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
-
-        logDate(toDate("2016-02-33", COMMON_DATE));
-
-        // 商品上线时间
-        logDate(toDate("20130102140806000", TIMESTAMP_WITH_MILLISECOND));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testToDate1(){
-        DateUtil.toDate("2016-06-30 15:36 ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
-    }
-
-    @Test
-    public void testToDate2(){
-        DateUtil.toDate(StringUtils.trimToEmpty("2016-06-30 15:36 "), COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
     //***************************************************************************************************
