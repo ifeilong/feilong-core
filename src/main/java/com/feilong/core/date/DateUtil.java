@@ -216,7 +216,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>的开始时间,也就是 <code>00:00:00</code>.
+     * 获得指定日期 <code>date</code>的开始时间, <code>00:00:00.000</code> 到毫秒.
      * 
      * <h3>示例:</h3>
      * 
@@ -240,7 +240,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>的结束时间,也就是<code>23:59:59.999</code>.
+     * 获得指定日期 <code>date</code>的结束时间,<code>23:59:59.999</code> 到毫秒.
      * 
      * <h3>示例:</h3>
      * 

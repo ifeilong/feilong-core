@@ -107,7 +107,7 @@ public final class DateExtensionUtil{
 
     // [start] 获得时间 /时间数组,可以用于sql查询
     /**
-     * 获得重置清零的今天和明天,当天 <code>00:00:00</code> 及下一天 <code>00:00:00</code>.
+     * 获得重置清零的今天和明天,当天 <code>00:00:00.000</code> 及下一天 <code>00:00:00.000</code>.
      * 
      * <p>
      * 一般用于统计当天数据,between ... and ...
@@ -123,7 +123,9 @@ public final class DateExtensionUtil{
      * }
      * </pre>
      * 
-     * @return Date数组 第一个为today 第二个为tomorrow
+     * @return Date数组 <br>
+     *         第一个为今天00:00:00.000 <br>
+     *         第二个为明天00:00:00.000
      */
     public static Date[] getResetTodayAndTomorrow(){
         Date today = getFirstDateOfThisDay(new Date());
@@ -131,11 +133,11 @@ public final class DateExtensionUtil{
     }
 
     /**
-     * 获得重置清零的昨天和今天 [yestoday,today].
+     * 获得重置清零的昨天和今天,昨天 <code>00:00:00.000</code> 及 当天 <code>00:00:00.000</code>.
      * 
      * <p>
-     * 第一个为昨天00:00 <br>
-     * 第二个为今天00:00 <br>
+     * 第一个为昨天<code>00:00:00.000</code> <br>
+     * 第二个为今天<code>00:00:00.000</code> <br>
      * 一般用于sql/hql统计昨天数据,between ... and ...
      * </p>
      * 
@@ -146,8 +148,8 @@ public final class DateExtensionUtil{
      * </pre>
      * 
      * @return Date数组 <br>
-     *         第一个为昨天00:00 <br>
-     *         第二个为今天00:00
+     *         第一个为昨天00:00:00.000 <br>
+     *         第二个为今天00:00:00.000
      */
     public static Date[] getResetYesterdayAndToday(){
         Date today = getFirstDateOfThisDay(new Date());
