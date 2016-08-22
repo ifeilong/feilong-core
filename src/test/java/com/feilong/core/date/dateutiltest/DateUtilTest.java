@@ -32,7 +32,6 @@ import com.feilong.core.date.BaseDateUtilTest;
 import com.feilong.core.date.DateUtil;
 
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
-import static com.feilong.core.date.DateUtil.getLastDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.isBefore;
 import static com.feilong.core.date.DateUtil.toDate;
 
@@ -110,24 +109,6 @@ public class DateUtilTest extends BaseDateUtilTest{
                                         getFirstDateOfThisWeek(toDate("2014-01-01 05:00:00", COMMON_DATE_AND_TIME)),
                                         COMMON_DATE_AND_TIME_WITH_MILLISECOND));
 
-    }
-
-    /**
-     * Gets the last date of this week.
-     */
-    @Test
-    public void testGetLastDateOfThisWeek(){
-        Date date = DateUtil.addDay(NOW, -2);
-        LOGGER.debug("the param date:{}", DateUtil.toString(date, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-
-        Date now3 = DateUtil.getLastDateOfThisWeek(date);
-        LOGGER.debug(DateUtil.toString(now3, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-
-        LOGGER.debug(
-                        "getLastDateOfThisWeek:{}",
-                        DateUtil.toString(
-                                        getLastDateOfThisWeek(toDate("2014-12-31 05:00:00", COMMON_DATE_AND_TIME)),
-                                        COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 
     /**
