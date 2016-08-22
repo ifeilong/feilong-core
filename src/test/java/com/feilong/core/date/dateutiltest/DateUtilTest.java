@@ -31,11 +31,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.BaseDateUtilTest;
 import com.feilong.core.date.DateUtil;
 
-import static com.feilong.core.date.DateUtil.isBefore;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
-
 /**
  * The Class DateUtilTest.
  * 
@@ -82,15 +77,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void testGetFirstDateOfThisDay1(){
         logDate(DateUtil.getFirstDateOfThisDay(new Date()));
         logDate(DateUtils.truncate(new Date(), DAY_OF_MONTH));
-    }
-
-    /**
-     * Test is before.
-     */
-    @Test
-    public void testIsBefore(){
-        assertEquals(true, isBefore(toDate("2011-03-05", COMMON_DATE), toDate("2011-03-10", COMMON_DATE)));
-        assertEquals(false, isBefore(toDate("2011-05-01", COMMON_DATE), toDate("2011-04-01", COMMON_DATE)));
     }
 
     //***************************************************************************************************

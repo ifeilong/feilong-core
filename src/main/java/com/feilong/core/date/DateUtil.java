@@ -1212,6 +1212,17 @@ public final class DateUtil{
 
     /**
      * 判断指定日期 <code>date</code>是否 在 <code>whenDate</code>时间之前.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * isBefore(toDate("2011-05-01", COMMON_DATE), toDate("2011-04-01", COMMON_DATE))   =   false
+     * isBefore(toDate("2011-03-05", COMMON_DATE), toDate("2011-03-10", COMMON_DATE))   =   true
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param date
      *            指定日期
