@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
                 DateUtilGetFirstDateOfThisYearTest.class,
                 DateUtilGetFirstDateOfThisMonthTest.class,
+                DateUtilGetFirstDateOfThisWeekTest.class,
                 DateUtilGetFirstDateOfThisDayTest.class,
 
                 DateUtilGetLastDateOfThisYearTest.class,

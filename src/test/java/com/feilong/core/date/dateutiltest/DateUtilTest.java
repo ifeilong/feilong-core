@@ -31,14 +31,11 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.BaseDateUtilTest;
 import com.feilong.core.date.DateUtil;
 
-import static com.feilong.core.date.DateUtil.getFirstDateOfThisWeek;
 import static com.feilong.core.date.DateUtil.isBefore;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 import static com.feilong.core.DatePattern.TIMESTAMP_WITH_MILLISECOND;
 
 /**
@@ -88,27 +85,6 @@ public class DateUtilTest extends BaseDateUtilTest{
     public void testGetFirstDateOfThisDay1(){
         logDate(DateUtil.getFirstDateOfThisDay(new Date()));
         logDate(DateUtils.truncate(new Date(), DAY_OF_MONTH));
-    }
-
-    /**
-     * Gets the first date of this week.
-     */
-    @Test
-    public void testGetFirstDateOfThisWeek(){
-        Date date = DateUtil.addDay(NOW, -2);
-        LOGGER.debug("the param date:{}", DateUtil.toString(date, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-
-        Date now3 = DateUtil.getFirstDateOfThisWeek(date);
-        LOGGER.debug(DateUtil.toString(now3, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-
-        LOGGER.debug("今天所在week 第一天:{}", DateUtil.toString(DateUtil.getFirstDateOfThisWeek(NOW), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-
-        LOGGER.debug(
-                        "getFirstDateOfThisWeek:{}",
-                        DateUtil.toString(
-                                        getFirstDateOfThisWeek(toDate("2014-01-01 05:00:00", COMMON_DATE_AND_TIME)),
-                                        COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-
     }
 
     /**
