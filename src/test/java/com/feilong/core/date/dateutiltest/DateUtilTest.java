@@ -51,13 +51,8 @@ public class DateUtilTest extends BaseDateUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilTest.class);
 
-    /**
-     * Test get last date of this day.
-     */
     @Test
-    public void testGetLastDateOfThisDay(){
-        logDate(DateUtil.getLastDateOfThisDay(NOW));
-        LOGGER.debug(StringUtils.repeat("*", 20));
+    public void testGetLastDateOfThisDay1(){
 
         logDate(DateUtils.ceiling(NOW, Calendar.DAY_OF_MONTH));
         logDate(DateUtils.round(NOW, Calendar.DAY_OF_MONTH));

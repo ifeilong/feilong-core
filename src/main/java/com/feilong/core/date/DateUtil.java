@@ -218,10 +218,16 @@ public final class DateUtil{
     /**
      * 获得指定日期 <code>date</code>的开始时间,也就是 <code>00:00:00</code>.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getFirstDateOfThisDay(2011-01-01 10:20:20)  =2011-01-01 00:00:00
      * </pre>
-     *
+     * 
+     * </blockquote>
+     * 
      * @param date
      *            任意时间
      * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
@@ -236,10 +242,16 @@ public final class DateUtil{
     /**
      * 获得指定日期 <code>date</code>的结束时间,也就是<code>23:59:59.999</code>.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getLastDateOfThisDay(2011-01-01 10:20:20)=2011-01-01 23:59:59.999
      * </pre>
-     *
+     * 
+     * </blockquote>
+     * 
      * @param date
      *            任意时间
      * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}
@@ -254,10 +266,16 @@ public final class DateUtil{
     /**
      * 获得传入date 所在的<span style="color:red">星期 第一天(周日)</span> <code>00:00:00.000</code> 到毫秒.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getFirstDateOfThisWeek(2012-10-11 17:10:30.701)  =2012-10-07 00:00:00.000
      * DateUtil.getFirstDateOfThisWeek(2014-01-01 05:00:00)      =2013-12-29 00:00:00.000 //跨年
      * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>注意:</h3>
      * <blockquote>
@@ -284,10 +302,16 @@ public final class DateUtil{
     /**
      * 获得传入date 所在<span style="color:red">星期的最后一天(周六)</span> <code>23:59:59.999</code> 到毫秒.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getLastDateOfThisWeek(2012-10-11 17:10:30.701)   =2012-10-13 23:59:59.999
      * DateUtil.getLastDateOfThisWeek(2014-12-31 05:00:00)       =2015-01-03 23:59:59.999 //跨年
      * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>注意:</h3>
      * <blockquote>
@@ -317,9 +341,15 @@ public final class DateUtil{
     /**
      * 获得指定日期 <code>date</code>所在月的第一天,<code>00:00:00.000</code>到毫秒.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getFirstDateOfThisMonth(2012-10-11 17:10:30.701)=2012-10-01 00:00:00.000
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -342,9 +372,15 @@ public final class DateUtil{
      * 以指定日期 <code>date</code> 月的实际天数为准,也就是说,2月会自动区分闰年 是28天还是29天
      * </p>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getLastDateOfThisMonth(2012-10-11 17:10:30.701)=2012-10-31 23:59:59.999
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -363,9 +399,15 @@ public final class DateUtil{
     /**
      * 获得指定日期 <code>date</code><span style="color:red">所在年的第一天</span>,<code>00:00:00.000</code> 到毫秒.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getFirstDateOfThisYear(2012-10-11 17:10:30.701)=2012-01-01 00:00:00
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
@@ -385,9 +427,15 @@ public final class DateUtil{
     /**
      * 获得指定日期 <code>date</code><span style="color:red">所在年的最后一天</span> <code>23:59:59.999</code> 到毫秒.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
      * DateUtil.getLastDateOfThisYear(2012-10-11 17:10:30.701)=2012-12-31 23:59:59.999
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param date
      *            任意时间
