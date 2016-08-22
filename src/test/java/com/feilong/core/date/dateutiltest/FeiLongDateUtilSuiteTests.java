@@ -54,6 +54,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateUtilIsLeapYearParameterizedTest.class,
                 DateUtilIsInTimeTest.class,
 
+                DateUtilIsBeforeTest.class,
+                DateUtilIsAfterTest.class,
+
                 DateUtilToDateTest.class,
 
                 DateUtilTest.class, })
