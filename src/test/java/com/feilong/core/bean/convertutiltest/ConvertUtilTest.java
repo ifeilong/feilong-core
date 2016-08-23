@@ -16,8 +16,6 @@
 package com.feilong.core.bean.convertutiltest;
 
 import static java.util.Collections.emptyList;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertArrayEquals;
@@ -54,7 +52,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.bean.ToStringConfig;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.test.User;
@@ -332,57 +329,6 @@ public class ConvertUtilTest{
 
         LOGGER.debug(JsonUtil.format(toList(user1, user2)));
         LOGGER.debug(JsonUtil.format(toList((User) null)));
-    }
-
-    //****************************************************************************************************
-
-    /**
-     * Test collection to string.
-     */
-    @Test
-    public void testCollectionToString(){
-        ToStringConfig toStringConfig = new ToStringConfig(",");
-        toStringConfig.setIsJoinNullOrEmpty(false);
-
-        assertEquals(EMPTY, ConvertUtil.toString((List<String>) null, toStringConfig));
-        assertEquals(EMPTY, ConvertUtil.toString(toList(), toStringConfig));
-    }
-
-    /**
-     * 集合转成字符串.
-     */
-    @Test
-    public void testCollectionToString1(){
-        List<String> list = toList("feilong", "", "xinge");
-
-        ToStringConfig toStringConfig = new ToStringConfig(",");
-        toStringConfig.setIsJoinNullOrEmpty(false);
-
-        assertEquals("feilong,xinge", ConvertUtil.toString(list, toStringConfig));
-        assertEquals("feilong@@xinge", ConvertUtil.toString(list, new ToStringConfig("@")));
-        assertEquals("feilong,,xinge", ConvertUtil.toString(list, null));
-    }
-
-    /**
-     * Test collection to string 11.
-     */
-    @Test
-    public void testCollectionToString11(){
-        List<String> list = toList("feilong", "", "xinge", null);
-        assertEquals("feilong@@xinge@", ConvertUtil.toString(list, new ToStringConfig("@")));
-    }
-
-    /**
-     * 集合转成字符串.
-     */
-    @Test
-    public void testCollectionToString2(){
-        List<String> list = toList("飞龙", "小金", "四金", "金金金金");
-
-        ToStringConfig toStringConfig = new ToStringConfig(LINE_SEPARATOR);
-        assertEquals(
-                        "飞龙" + LINE_SEPARATOR + "小金" + LINE_SEPARATOR + "四金" + LINE_SEPARATOR + "金金金金",
-                        ConvertUtil.toString(list, toStringConfig));
     }
 
     //****************************************************************************************************
