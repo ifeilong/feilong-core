@@ -1043,7 +1043,7 @@ public final class MapUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>简化代码书写方式
+     * <li><b>简化代码书写方式</b>
      * 
      * <blockquote>
      * 
@@ -1074,7 +1074,7 @@ public final class MapUtil{
      * </blockquote>
      * 
      * </li>
-     * <li>减少扩容次数
+     * <li><b>减少扩容次数</b>
      * 
      * <blockquote>
      * 
@@ -1142,7 +1142,7 @@ public final class MapUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>简化代码书写方式
+     * <li><b>简化代码书写方式</b>
      * 
      * <blockquote>
      * 
@@ -1174,7 +1174,7 @@ public final class MapUtil{
      * 
      * </li>
      * 
-     * <li>减少扩容次数
+     * <li><b>减少扩容次数</b>
      * 
      * <blockquote>
      * 
