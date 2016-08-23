@@ -21,9 +21,23 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                MapUtilTest.class,
+                MapUtilToSingleValueMapTest.class,
+                MapUtilToArrayValueMapTest.class,
+
+                MapUtilGetSubMapTest.class,
+                MapUtilGetSubMapExcludeKeysTest.class,
+
+                MapUtilExtractSubMapTest.class,
+                MapUtilExtractSubMapIncludeKeysTest.class,
+
+                MapUtilNewHashMapTest.class,
+                MapUtilNewLinkedHashMapTest.class,
+
+                MapUtilInvertMapTest.class,
 
                 MapUtilPutMultiValueTest.class,
+                MapUtilPutSumValueTest.class,
+
                 MapUtilRemoveKeysTest.class,
         //
 })

@@ -610,13 +610,13 @@ public final class MapUtil{
     /**
      * 获得一个<code>map</code> 中的按照指定的<code>key</code> 整理成新的map.
      * 
-     * <p>
-     * 注意:如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
-     * </p>
-     * 
-     * <p>
-     * 返回的map为 {@link LinkedHashMap},key的顺序 按照参数 <code>keys</code>的顺序
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的map为 {@link LinkedHashMap},key的顺序 按照参数 <code>keys</code>的顺序</li>
+     * <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
