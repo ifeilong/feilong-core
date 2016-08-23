@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.util.maputiltest;
 
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -30,17 +30,16 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
 
+import com.feilong.core.util.MapUtil;
 import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
@@ -50,19 +49,6 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class MapUtilTest{
-
-    /**
-     * Test put multi value.
-     */
-    @Test
-    public void testPutMultiValue(){
-        Map<String, List<String>> mutiMap = newLinkedHashMap(2);
-        MapUtil.putMultiValue(mutiMap, "name", "张飞");
-        MapUtil.putMultiValue(mutiMap, "name", "关羽");
-        MapUtil.putMultiValue(mutiMap, "age", "30");
-
-        assertThat(mutiMap, allOf(hasEntry("name", toList("张飞", "关羽")), hasEntry("age", toList("30"))));
-    }
 
     /**
      * Test remove keys.

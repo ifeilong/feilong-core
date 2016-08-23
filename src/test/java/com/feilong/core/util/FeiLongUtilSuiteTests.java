@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.util.maputiltest.FeiLongMapUtilSuiteTests;
 import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
 
 /**
@@ -35,13 +36,16 @@ import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
                 CollectionsUtilTest.class,
 
                 EnumerationUtilTest.class,
-                MapUtilTest.class,
+
                 RandomUtilTest.class,
                 RegexUtilTest.class,
                 ResourceBundleUtilTest.class,
                 SortUtilTest.class,
 
-                FeiLongRegexPatternSuiteTests.class })
+                FeiLongRegexPatternSuiteTests.class,
+                FeiLongMapUtilSuiteTests.class,
+        //
+})
 public class FeiLongUtilSuiteTests{
 
 }
