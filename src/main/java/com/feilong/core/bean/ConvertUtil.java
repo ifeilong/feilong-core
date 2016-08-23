@@ -1931,7 +1931,7 @@ public final class ConvertUtil{
      *            collection
      * @param arrayComponentType
      *            数组组件类型的 Class
-     * @return 如果 <code>collection</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>collection</code> 是null,直接返回null<br>
      *         如果 <code>arrayComponentType</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.lang.reflect.Array#newInstance(Class, int)
      * @see java.lang.reflect.Array#newInstance(Class, int...)
@@ -1951,7 +1951,10 @@ public final class ConvertUtil{
      * @since 1.2.2
      */
     public static <T> T[] toArray(Collection<T> collection,Class<T> arrayComponentType){
-        Validate.notNull(collection, "collection must not be null");
+        if (null == collection){ // since 1.8.6
+            return null;
+        }
+
         Validate.notNull(arrayComponentType, "arrayComponentType must not be null");
 
         // 如果采用大家常用的把a的length设为0,就需要反射API来创建一个大小为size的数组,而这对性能有一定的影响.

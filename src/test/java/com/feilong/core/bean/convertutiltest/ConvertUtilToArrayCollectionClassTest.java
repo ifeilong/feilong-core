@@ -40,8 +40,8 @@ public class ConvertUtilToArrayCollectionClassTest{
         toArray(toList("xinge", "feilong"), null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testToArrayNullValue(){
-        toArray((List<String>) null, String.class);
+        assertArrayEquals(null, toArray((List<String>) null, String.class));
     }
 }
