@@ -806,10 +806,13 @@ public final class MapUtil{
     /**
      * 将 <code>map</code> 的key和value互转.
      * 
-     * <p>
-     * <span style="color:red">这个操作map预先良好的定义</span>.<br>
-     * 如果传过来的map,不同的key有相同的value,那么返回的map(key)只会有一个(value),其他重复的key被丢掉了
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li><span style="color:red">这个操作map预先良好的定义</span>.</li>
+     * <li>如果传过来的map,不同的key有相同的value,那么返回的map(key)只会有一个(value),其他重复的key被丢掉了</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -843,13 +846,13 @@ public final class MapUtil{
      *            the value type
      * @param map
      *            the map
-     * @return 如果<code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果<code>map</code> 是null,返回 null<br>
      *         如果<code>map</code> 是empty,返回 一个 new HashMap
      * @see org.apache.commons.collections4.MapUtils#invertMap(Map)
      * @since 1.2.2
      */
     public static <K, V> Map<V, K> invertMap(Map<K, V> map){
-        return MapUtils.invertMap(map);//返回的是 HashMap
+        return null == map ? null : MapUtils.invertMap(map);//返回的是 HashMap
     }
 
     /**
