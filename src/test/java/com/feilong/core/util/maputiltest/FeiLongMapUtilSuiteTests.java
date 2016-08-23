@@ -22,7 +22,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 MapUtilTest.class,
+
                 MapUtilPutMultiValueTest.class,
+                MapUtilRemoveKeysTest.class,
         //
 })
 public class FeiLongMapUtilSuiteTests{

@@ -51,20 +51,6 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 public class MapUtilTest{
 
     /**
-     * Test remove keys.
-     */
-    @Test
-    public void testRemoveKeys(){
-        Map<String, String> map = newLinkedHashMap(3);
-        map.put("name", "feilong");
-        map.put("age", "18");
-        map.put("country", "china");
-
-        Map<String, String> removeKeys = MapUtil.removeKeys(map, "country");
-        assertThat(removeKeys, allOf(hasEntry("name", "feilong"), hasEntry("age", "18"), not(hasEntry("country", "china"))));
-    }
-
-    /**
      * Test to single value map null.
      */
     //*****************com.feilong.core.util.MapUtil.toSingleValueMap(Map<String, String[]>)*************************************************

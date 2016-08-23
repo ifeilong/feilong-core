@@ -780,12 +780,19 @@ public final class MapUtil{
      *            the map
      * @param keys
      *            the keys
-     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>map</code> 是null,返回null<br>
+     *         如果 <code>keys</code> 是null或者empty,直接返回 <code>map</code><br>
      * @since 1.6.3
      */
     @SafeVarargs
     public static <K, V> Map<K, V> removeKeys(Map<K, V> map,K...keys){
-        Validate.notNull(map, "map can't be null!");
+        if (null == map){// since 1.8.6
+            return null;
+        }
+
+        if (isNullOrEmpty(keys)){
+            return map;
+        }
         for (K key : keys){
             if (map.containsKey(key)){
                 map.remove(key);
