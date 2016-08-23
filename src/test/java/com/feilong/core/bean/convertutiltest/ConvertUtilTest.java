@@ -134,15 +134,6 @@ public class ConvertUtilTest{
     }
 
     /**
-     * To array.
-     */
-    @Test
-    public void testToArray0(){
-        List<String> list = toList("xinge", "feilong");
-        assertArrayEquals(new String[] { "xinge", "feilong" }, toArray(list, String.class));
-    }
-
-    /**
      * Test to strings.
      */
     @Test

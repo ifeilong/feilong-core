@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 ConvertUtilTest.class, //
                 ConvertUtilToArrayClassTest.class, //
+                ConvertUtilToArrayCollectionClassTest.class, //
 
                 ConvertUtilToIntegerParameterizedTest.class,
                 ConvertUtilToLongParameterizedTest.class,

@@ -1920,10 +1920,7 @@ public final class ConvertUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * [
-     * "xinge",
-     * "feilong"
-     * ]
+     * ["xinge","feilong"]
      * </pre>
      * 
      * </blockquote>
