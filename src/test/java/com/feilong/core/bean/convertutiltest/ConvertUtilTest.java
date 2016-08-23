@@ -134,6 +134,15 @@ public class ConvertUtilTest{
     }
 
     /**
+     * To array.
+     */
+    @Test
+    public void testToArray0(){
+        List<String> list = toList("xinge", "feilong");
+        assertArrayEquals(new String[] { "xinge", "feilong" }, toArray(list, String.class));
+    }
+
+    /**
      * Test to strings.
      */
     @Test
@@ -167,25 +176,6 @@ public class ConvertUtilTest{
     }
 
     /**
-     * To t test.
-     */
-    @Test
-    public void testConvert1(){
-        String[] strings = null;
-        Serializable t = ConvertUtil.toArray(strings, Serializable.class);
-        assertEquals(null, t);
-    }
-
-    /**
-     * Test convert3.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testConvert3(){
-        String[] strings = toArray("");
-        ConvertUtil.toArray(strings, null);
-    }
-
-    /**
      * Test convert2.
      */
     @Test
@@ -207,24 +197,6 @@ public class ConvertUtilTest{
         arrayConverter.setDelimiter(',');
         arrayConverter.setAllowedChars(new char[] { '.', '-' });
         LOGGER.debug(arrayConverter.convert(String.class, toArray(2, null, 1, null)));
-    }
-
-    /**
-     * Test convert array.
-     */
-    @Test
-    public void testConvertArray(){
-        String[] int1 = { "2", "1" };
-        assertArrayEquals(new Long[] { 2L, 1L }, toArray(int1, Long.class));
-    }
-
-    /**
-     * To array.
-     */
-    @Test
-    public void testToArray0(){
-        List<String> list = toList("xinge", "feilong");
-        assertArrayEquals(new String[] { "xinge", "feilong" }, toArray(list, String.class));
     }
 
     /**

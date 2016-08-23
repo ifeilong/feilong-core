@@ -1966,12 +1966,20 @@ public final class ConvertUtil{
     }
 
     /**
-     * Convert an array of specified values to an array of objects of the specified class (if possible).
+     * 将字符串数组 <code>toBeConvertedValue</code> 转成指定类型 <code>targetType</code> 的数组.
      * 
-     * <p>
-     * If the specified Java class is itself an array class, this class will be the type of the returned value.<br>
-     * Otherwise, an array will be constructed whose component type is the specified class.
-     * </p>
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String[] ss = { "2", "1" };
+     * toArray(ss, Long.class);                                     =   new Long[] { 2L, 1L }
+     * 
+     * ConvertUtil.toArray((String[]) null, Serializable.class)     =   null
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -1988,6 +1996,7 @@ public final class ConvertUtil{
      */
     @SuppressWarnings("unchecked")
     public static <T> T[] toArray(String[] toBeConvertedValue,Class<T> targetType){
+        //如果指定的类型 本身就是数组类型的class,那么返回的类型就是该数组类型,否则将基于指定类型构造数组.
         return null == toBeConvertedValue ? null : (T[]) ConvertUtils.convert(toBeConvertedValue, targetType);
     }
     //********************************************************************************
@@ -2226,7 +2235,7 @@ public final class ConvertUtil{
     }
 
     /**
-     * 转成 {@link Locale}.
+     * 将对象转成 {@link Locale}.
      * 
      * <h3>示例:</h3>
      * 

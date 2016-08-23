@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 ConvertUtilTest.class, //
+                ConvertUtilToArrayClassTest.class, //
 
                 ConvertUtilToIntegerParameterizedTest.class,
                 ConvertUtilToLongParameterizedTest.class,
