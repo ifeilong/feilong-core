@@ -224,66 +224,6 @@ public class ConvertUtilTest{
     }
 
     /**
-     * Test to string.
-     */
-    @Test
-    public void testToString33(){
-        ToStringConfig toStringConfig = new ToStringConfig(",");
-        Object[] arrays = { "222", "1111" };
-        assertEquals("222,1111", ConvertUtil.toString(arrays, toStringConfig));
-
-        Integer[] array1 = { 2, 1 };
-        assertEquals("2,1", ConvertUtil.toString(array1, toStringConfig));
-
-        Integer[] array2 = { 2, 1, null };
-        toStringConfig = new ToStringConfig(",");
-        toStringConfig.setIsJoinNullOrEmpty(false);
-        assertEquals("2,1", ConvertUtil.toString(array2, toStringConfig));
-
-        Integer[] array3 = { 2, null, 1, null };
-        toStringConfig = new ToStringConfig(",");
-        toStringConfig.setIsJoinNullOrEmpty(false);
-        assertEquals("2,1", ConvertUtil.toString(array3, toStringConfig));
-    }
-
-    /**
-     * Test to string2.
-     */
-    @Test
-    public void testToString22(){
-        int[] int1 = { 2, 1 };
-        assertEquals("2,1", ConvertUtil.toString(toArray(int1), null));
-        assertEquals("2", ConvertUtil.toString(toArray(2), new ToStringConfig(",")));
-        assertEquals(",,,", ConvertUtil.toString(toArray(",", ","), new ToStringConfig(",", true)));
-    }
-
-    /**
-     * Test to string 222.
-     */
-    @Test
-    public void testToString222(){
-        assertEquals("2,", ConvertUtil.toString(toArray(new Integer(2), null), new ToStringConfig(",", true)));
-    }
-
-    /**
-     * Test to string with one null element array.
-     */
-    @Test
-    public void testToStringWithOneNullElementArray(){
-        String[] ss = { null };
-        assertEquals(EMPTY, ConvertUtil.toString(ss, new ToStringConfig(",", true)));
-    }
-
-    /**
-     * Test to string 221.
-     */
-    @Test
-    public void testToString221(){
-        assertEquals(EMPTY, ConvertUtil.toString((String[]) null, new ToStringConfig(",")));
-        assertEquals(EMPTY, ConvertUtil.toString(toArray(), new ToStringConfig(",")));
-    }
-
-    /**
      * To array.
      */
     @Test

@@ -1079,19 +1079,22 @@ public final class ConvertUtil{
      * 支持包装类型以及原始类型,比如 Integer [] arrays 或者 int []arrays
      * </p>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <pre class="code">
-     * Example 1:
      * ConvertUtil.toString(toArray("a","b"),new ToStringConfig())       =   "a,b"
      * 
-     * Example 2:
      * ToStringConfig toStringConfig=new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
      * ConvertUtil.toString(toArray("a","b",null),new ToStringConfig())  =   "a,b"
      * 
-     * Example 3:
      * int[] ints = { 2, 1 };
      * ConvertUtil.toString(toArray(ints),new ToStringConfig())          =   "2,1"
      * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>关于 default {@link ToStringConfig}:</h3>
      * <blockquote>
