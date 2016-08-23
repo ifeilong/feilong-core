@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.bean;
+package com.feilong.core.bean.convertutiltest;
 
 import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -53,6 +53,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.bean.ToStringConfig;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.test.User;
@@ -64,7 +66,6 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLocale;
-import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.bean.ConvertUtil.toStrings;
 
 /**
@@ -211,25 +212,6 @@ public class ConvertUtilTest{
         arrayConverter.setDelimiter(',');
         arrayConverter.setAllowedChars(new char[] { '.', '-' });
         LOGGER.debug(arrayConverter.convert(String.class, toArray(2, null, 1, null)));
-    }
-
-    /**
-     * Test to string 3.
-     */
-    @Test
-    public void testToString3(){
-        assertEquals("张飞", ConvertUtil.toString(toList("张飞", "关羽", "", "赵云")));
-    }
-
-    /**
-     * Test to string 5.
-     */
-    @Test
-    public void testToString5(){
-        assertEquals(null, ConvertUtil.toString(null));
-        assertEquals("1", ConvertUtil.toString(1));
-        assertEquals("1.0", ConvertUtil.toString(toBigDecimal(1.0)));
-        assertEquals("8", ConvertUtil.toString(toLong(8L)));
     }
 
     /**

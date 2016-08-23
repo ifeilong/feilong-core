@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.bean;
+package com.feilong.core.bean.convertutiltest;
 
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.allOf;

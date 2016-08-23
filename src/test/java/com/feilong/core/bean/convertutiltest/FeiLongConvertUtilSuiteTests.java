@@ -13,29 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.bean;
+package com.feilong.core.bean.convertutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.bean.convertutiltest.FeiLongConvertUtilSuiteTests;
-
-/**
- * The Class FeiLongBeanSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
- */
 @RunWith(Suite.class)
-@SuiteClasses({
-                //BeanUtilTest.class,
+@SuiteClasses({ //
+                ConvertUtilTest.class, //
 
-                PropertyUtilTest.class,
+                ConvertUtilToIntegerParameterizedTest.class,
+                ConvertUtilToLongParameterizedTest.class,
+                ConvertUtilToBooleanParameterizedTest.class,
+                ConvertUtilToBigDecimalParameterizedTest.class,
 
-                FeiLongConvertUtilSuiteTests.class,
-        //
-})
-public class FeiLongBeanSuiteTests{
+                ConvertUtilToIntegerDefaultValueParameterizedTest.class,
+
+                ConvertUtilToIntegersParameterizedTest.class,
+                ConvertUtilToLongsParameterizedTest.class,
+
+                ConvertUtilToStringParameterizedTest.class,
+                ConvertUtilToMapParameterizedTest.class, })
+public class FeiLongConvertUtilSuiteTests{
 
 }

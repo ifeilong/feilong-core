@@ -879,9 +879,9 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * assertEquals("1", ConvertUtil.toString(1));
-     * assertEquals("1.0", ConvertUtil.toString(toBigDecimal(1.0)));
-     * assertEquals("8", ConvertUtil.toString(toLong(8L)));
+     * ConvertUtil.toString(1)                  =   "1"
+     * ConvertUtil.toString(toBigDecimal(1.0))  =   "1.0"
+     * ConvertUtil.toString(toLong(8L))         =   "8"
      * </pre>
      * 
      * </blockquote>
@@ -919,7 +919,7 @@ public final class ConvertUtil{
      * 
      * </blockquote>
      * 
-     * <h3>对于 Array 转成 String</h3>
+     * <h3>对于 Array 转成 String:</h3>
      * 
      * <blockquote>
      * 

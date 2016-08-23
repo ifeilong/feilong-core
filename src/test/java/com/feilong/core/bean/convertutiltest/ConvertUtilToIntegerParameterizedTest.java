@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.bean;
+package com.feilong.core.bean.convertutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,36 +24,37 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
+import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toLong;
 
 /**
- * The Class ConvertUtilToLongParameterizedTest.
+ * The Class ConvertUtilToIntegerParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToLongParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Long>{
+public class ConvertUtilToIntegerParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Integer>{
 
     /**
-     * Data.
+     * The Constant log.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: ConvertUtil.toLong({0})={1}")
+
+    @Parameters(name = "index:{index}: ConvertUtil.toInteger({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               { null, null },
                                               { "aaaa", null },
 
-                                              { "1", 1L },
-                                              { 8, 8L },
-                                              { "8", 8L },
-                                              { new BigDecimal("8"), 8L },
+                                              { "1", 1 },
+                                              { 8L, 8 },
+                                              { "8", 8 },
+                                              { new BigDecimal("8"), 8 },
 
-                                              { new String[] { "1", "2", "3" }, 1L },
-                                              { new String[] { "1", null, "2", "3" }, 1L },
+                                              { new String[] { "1", "2", "3" }, 1 },
+                                              { new String[] { "1", null, "2", "3" }, 1 },
 
-                                              { toList("1", "2"), 1L },
+                                              { toList("1", "2"), 1 },
 
                                               { "1,2,3", null },
 
@@ -63,11 +64,10 @@ public class ConvertUtilToLongParameterizedTest extends AbstractOneParamAndOneRe
     }
 
     /**
-     * Test to long.
+     * Test to integer.
      */
     @Test
-    public void testToLong(){
-        assertEquals(expectedValue, toLong(input1));
+    public void testToInteger(){
+        assertEquals(expectedValue, toInteger(input1));
     }
-
 }
