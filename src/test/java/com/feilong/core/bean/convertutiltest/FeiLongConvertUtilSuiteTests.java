@@ -38,7 +38,11 @@ import org.junit.runners.Suite.SuiteClasses;
                 ConvertUtilToStringArrayToStringConfigParameterizedTest.class,
                 ConvertUtilToStringCollectionToStringConfigParameterizedTest.class,
 
-                ConvertUtilToMapParameterizedTest.class, })
+                ConvertUtilToMapParameterizedTest.class,
+                ConvertUtilToLocaleTest.class,
+
+        //
+})
 public class FeiLongConvertUtilSuiteTests{
 
 }

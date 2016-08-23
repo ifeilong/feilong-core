@@ -35,7 +35,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -62,7 +61,6 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toLocale;
 import static com.feilong.core.bean.ConvertUtil.toStrings;
 
 /**
@@ -360,32 +358,6 @@ public class ConvertUtilTest{
     public void testConvertUtilsTest22(){
         LOGGER.debug(ConvertUtils.convert(888.000f));
         LOGGER.debug("{}", ConvertUtils.convert(888.000f, BigDecimal.class));
-    }
-
-    /**
-     * Test convert5.
-     */
-    @Test
-    public void testConvert5(){
-        assertEquals("zh_CN", ConvertUtil.convert("zh_CN", Locale.class));
-    }
-
-    /**
-     * Test to locale.
-     */
-    @Test
-    public void testToLocale(){
-        assertEquals(null, toLocale(null));
-        assertEquals(Locale.CHINA, toLocale("zh_CN"));
-        assertEquals(Locale.CHINA, toLocale(Locale.CHINA));
-    }
-
-    /**
-     * Test to locale 1.
-     */
-    @Test(expected = UnsupportedOperationException.class)
-    public void testToLocale1(){
-        toLocale(new User());
     }
 
     /**
