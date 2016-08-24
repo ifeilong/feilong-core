@@ -1589,11 +1589,19 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>objectCollection</code>,以 元素的 <code>propertyName</code>属性值为key,相同值的元素组成list作为value,封装成map返回.
      * 
-     * <p>
-     * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是
+     * <code>objectCollection</code>中的元素对象;
      * <br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序
-     * </p>
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序</li>
+     * 
+     * <li>属性<code>propertyName</code>值相同的元素,组成集合 list</li>
+     * <li>如果value只需要单值的话,可以调用 {@link #groupOne(Collection, String)}方法</li>
+     * </ol>
+     * </blockquote>
+     * 
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1602,7 +1610,7 @@ public final class CollectionsUtil{
      * List{@code <User>} list = toList(
      *                 new User("张飞", 23),
      *                 new User("刘备", 25),
-     *                 new User("刘备", 25));
+     *                 new User("刘备", 30));
      * 
      * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, "name");
      * LOGGER.debug(JsonUtil.format(map));
@@ -1622,7 +1630,7 @@ public final class CollectionsUtil{
                 "name": "刘备",
             },
             {
-                "age": 25,
+                "age": 30,
                 "name": "刘备",
             }
         ]
@@ -1759,6 +1767,7 @@ public final class CollectionsUtil{
      * <code>objectCollection</code>中的元素对象;<br>
      * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序</li>
      * <li>间接的可以做到基于某个属性值去重的效果</li>
+     * <li>如果value需要是集合的话,可以调用 {@link #group(Collection, String)}方法</li>
      * </ol>
      * </blockquote>
      * 
