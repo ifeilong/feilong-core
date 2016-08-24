@@ -864,7 +864,6 @@ public final class MapUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log</li>
      * <li>返回map的顺序,按照参数 map key的顺序</li>
      * </ol>
      * </blockquote>
@@ -896,11 +895,11 @@ public final class MapUtil{
      * </blockquote>
      * 
      * @param <K>
-     *            the key type
+     *            key的类型
      * @param <O>
-     *            the generic type
+     *            map value bean类型
      * @param <V>
-     *            the generic type
+     *            map value bean相关 属性名称 <code>extractPropertyName</code> 的值类型
      * @param map
      *            the map
      * @param extractPropertyName
