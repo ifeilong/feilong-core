@@ -32,15 +32,36 @@ public class MapUtilPutIfValueNotNullOrEmptyTest{
 
     @Test
     public void testPutIfValueNotNullOrEmpty(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         MapUtil.putIfValueNotNullOrEmpty(map, "1000001", 5);
         assertThat(map, allOf(hasEntry("1000001", 5)));
     }
 
     @Test
     public void testPutIfValueNotNullOrEmptyNullValue(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         MapUtil.putIfValueNotNullOrEmpty(map, "1000001", null);
+        assertThat(map, allOf(not(hasKey("1000001"))));
+    }
+
+    @Test
+    public void testPutIfValueNotNullOrEmptyEmptyValue(){
+        Map<String, String> map = new HashMap<>();
+        MapUtil.putIfValueNotNullOrEmpty(map, "1000001", "");
+        assertThat(map, allOf(not(hasKey("1000001"))));
+    }
+
+    @Test
+    public void testPutIfValueNotNullOrEmptyEmptyValue1(){
+        Map<String, String> map = new HashMap<>();
+        MapUtil.putIfValueNotNullOrEmpty(map, "1000001", " ");
+        assertThat(map, allOf(not(hasKey("1000001"))));
+    }
+
+    @Test
+    public void testPutIfValueNotNullOrEmptyEmptyValue2(){
+        Map<String, Object[]> map = new HashMap<>();
+        MapUtil.putIfValueNotNullOrEmpty(map, "1000001", new Object[] {});
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
 

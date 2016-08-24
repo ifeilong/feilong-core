@@ -339,11 +339,14 @@ public final class MapUtil{
     /**
      * 仅当 <code>null != map 并且 null != value</code>才将key/value put到map中.
      * 
-     * <p>
-     * 如果 <code>map</code> 是null,什么都不做<br>
-     * 如果 <code>value</code> 是null,也什么都不做<br>
-     * 如果 <code>key</code> 是null,依照<code>map</code>的<code>key</code>是否允许是null的 规则<br>
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果 <code>map</code> 是null,什么都不做</li>
+     * <li>如果 <code>value</code> 是null,也什么都不做</li>
+     * <li>如果 <code>key</code> 是null,依照<code>map</code>的<code>key</code>是否允许是null的 规则</li>
+     * </ol>
+     * </blockquote>
      *
      * @param <K>
      *            the key type
