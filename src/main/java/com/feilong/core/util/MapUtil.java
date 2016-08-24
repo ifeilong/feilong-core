@@ -921,9 +921,8 @@ public final class MapUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>key需要在 <code>includeKeys</code>范围内</li>
-     * <li>如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会输出 warn log</li>
-     * <li>如果参数 <code>includeKeys</code>是null,那么会抽取map所有的key</li>
+     * <li>如果在抽取的过程中,<code>map</code>没有某个 <code>includeKeys</code>,将会忽略该key的抽取,并输出 warn log</li>
+     * <li>如果参数 <code>includeKeys</code>是null或者 empty,那么会抽取map所有的key</li>
      * <li>返回map的顺序,按照参数includeKeys的顺序(如果includeKeys是null,那么按照map key的顺序)</li>
      * </ol>
      * </blockquote>
@@ -967,7 +966,7 @@ public final class MapUtil{
      *     Long[] itemPropertiesIds = StoCommonUtil.toItemPropertiesIdLongs(properties);
      * 
      *     Map{@code <Long, Long>} itemPropertiesIdAndPropertyIdMap = MapUtil
-     *                     .extractSubMap(itemPropertiesIdAndPropertyValueSubViewCommandMap, itemPropertiesIds, "propertyId");
+     *                     .<b>extractSubMap</b>(itemPropertiesIdAndPropertyValueSubViewCommandMap, itemPropertiesIds, "propertyId");
      * 
      *     return MapUtil.invertMap(itemPropertiesIdAndPropertyIdMap);
      * }
@@ -977,11 +976,11 @@ public final class MapUtil{
      * </blockquote>
      *
      * @param <K>
-     *            the key type
+     *            key的类型
      * @param <O>
-     *            the generic type
+     *            map value bean类型
      * @param <V>
-     *            the value type
+     *            map value bean相关 属性名称 <code>extractPropertyName</code> 的值类型
      * @param map
      *            the map
      * @param includeKeys
