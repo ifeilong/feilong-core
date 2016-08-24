@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
+                CollectionsUtilAddAllIgnoreNullTest.class,
                 CollectionsUtilRemoveTest.class,
                 CollectionsUtilTest.class,
         //

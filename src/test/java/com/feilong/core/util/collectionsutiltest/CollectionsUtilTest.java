@@ -69,36 +69,6 @@ public class CollectionsUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CollectionsUtilTest.class);
 
-    //****************CollectionsUtil.addAllIgnoreNull(Collection<Object>, Iterable<? extends Object>)*****************
-    /**
-     * Test add all ignore null1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddAllIgnoreNull1(){
-        CollectionsUtil.addAllIgnoreNull(null, null);
-    }
-
-    /**
-     * Test add all ignore null.
-     */
-    @Test
-    public void testAddAllIgnoreNull(){
-        List<String> list = toList("xinge", "feilong1");
-        assertEquals(false, CollectionsUtil.addAllIgnoreNull(list, null));
-        assertThat(list, contains("xinge", "feilong1"));
-    }
-
-    /**
-     * Test add all ignore null2.
-     */
-    @Test
-    public void testAddAllIgnoreNull2(){
-        List<String> list = toList("xinge", "feilong1");
-        boolean addAllIgnoreNull = CollectionsUtil.addAllIgnoreNull(list, toList("xinge", "feilong1"));
-        assertEquals(true, addAllIgnoreNull);
-        assertThat(list, contains("xinge", "feilong1", "xinge", "feilong1"));
-    }
-
     //*************CollectionsUtil.addIgnoreNullOrEmpty(Collection<Object>, Object)**********
 
     /**

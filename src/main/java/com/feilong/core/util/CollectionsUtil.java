@@ -281,10 +281,12 @@ public final class CollectionsUtil{
      * 
      * </blockquote>
      * 
-     * 对于以下代码:
-     * 
+     * <h3>重构:</h3>
      * 
      * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
      * 
      * <pre class="code">
      * 
@@ -302,7 +304,7 @@ public final class CollectionsUtil{
      * 
      * </pre>
      * 
-     * 可以重构成:
+     * <b>可以重构成:</b>
      * 
      * <pre class="code">
      * 
@@ -318,10 +320,11 @@ public final class CollectionsUtil{
      * }
      * </pre>
      * 
+     * <p>
      * 重构之后,方法的复杂度会更小,阅读性更高
-     * 
+     * </p>
      * </blockquote>
-     *
+     * 
      * @param <O>
      *            the type of object the {@link Collection} contains
      * @param objectCollection
