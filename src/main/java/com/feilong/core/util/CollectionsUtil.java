@@ -1752,21 +1752,21 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>objectCollection</code>,以元素的 <code>propertyName</code>属性值为key,元素为value,封装成map返回(map只put第一个匹配的元素,<b>后面出现相同的元素将会忽略</b>).
      * 
-     * <p>
-     * 返回的LinkedHashMap,key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>中的元素对象;
-     * <br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序
-     * </p>
-     * 
-     * <p>
-     * 间接的可以做到基于某个属性值去重的效果
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是
+     * <code>objectCollection</code>中的元素对象;<br>
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序</li>
+     * <li>间接的可以做到基于某个属性值去重的效果</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("刘备", 25));
      * list.add(new User("刘备", 30));
