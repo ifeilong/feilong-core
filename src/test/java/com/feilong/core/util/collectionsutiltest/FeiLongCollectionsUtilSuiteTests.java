@@ -23,6 +23,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 
                 CollectionsUtilAddAllIgnoreNullTest.class,
+                CollectionsUtilAddIgnoreNullOrEmptyTest.class,
+
                 CollectionsUtilRemoveTest.class,
                 CollectionsUtilTest.class,
         //

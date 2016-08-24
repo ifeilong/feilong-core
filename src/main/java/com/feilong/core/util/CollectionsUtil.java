@@ -348,7 +348,7 @@ public final class CollectionsUtil{
     /**
      * 添加 <code>element</code>元素到指定的<code>objectCollection</code>,如果 <code>element</code> 是null或者 empty将忽略.
      * 
-     * <h3>示例:</h3>
+     * <h3>重构:</h3>
      * 
      * <blockquote>
      * 

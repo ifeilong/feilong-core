@@ -69,44 +69,6 @@ public class CollectionsUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(CollectionsUtilTest.class);
 
-    //*************CollectionsUtil.addIgnoreNullOrEmpty(Collection<Object>, Object)**********
-
-    /**
-     * Test add ignore null or empty.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddIgnoreNullOrEmpty(){
-        CollectionsUtil.addIgnoreNullOrEmpty(null, null);
-    }
-
-    /**
-     * Test add ignore null or empty 1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddIgnoreNullOrEmpty1(){
-        CollectionsUtil.addIgnoreNullOrEmpty(null, "");
-    }
-
-    /**
-     * Test add ignore null or empty 2.
-     */
-    @Test
-    public void testAddIgnoreNullOrEmpty2(){
-        List<String> list = toList("xinge", "feilong1");
-        assertEquals(true, CollectionsUtil.addIgnoreNullOrEmpty(list, "xinge"));
-        assertThat(list, contains("xinge", "feilong1", "xinge"));
-    }
-
-    /**
-     * Test add ignore null or empty 3.
-     */
-    @Test
-    public void testAddIgnoreNullOrEmpty3(){
-        List<String> list = toList("xinge", "feilong1");
-        assertEquals(false, CollectionsUtil.addIgnoreNullOrEmpty(list, "  "));
-        assertThat(list, contains("xinge", "feilong1"));
-    }
-
     /**
      * Test index of.
      */
