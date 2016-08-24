@@ -410,13 +410,15 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
      * 
-     * assertEquals(0, CollectionsUtil.indexOf(list, "name", "张飞"));
+     * CollectionsUtil.indexOf(list, "name", "张飞")                          =   0
+     * 
+     * CollectionsUtil.indexOf(null, "age", 24)                             =   -1
+     * CollectionsUtil.indexOf(new ArrayList{@code <User>}(), "age", 24)    =   -1
      * </pre>
      * 
      * </blockquote>
