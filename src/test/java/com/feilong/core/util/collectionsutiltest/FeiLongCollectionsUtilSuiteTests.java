@@ -22,6 +22,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
+                CollectionsUtilAddAllIgnoreNullTest.class,
+                CollectionsUtilAddIgnoreNullOrEmptyTest.class,
+
                 CollectionsUtilIndexOfTest.class,
                 CollectionsUtilCollectTest.class,
 
@@ -33,11 +36,11 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilGetPropertyValueMapTest.class,
 
                 CollectionsUtilGroupTest.class,
-                CollectionsUtilGroupPredicateTest.class,
+                CollectionsUtilGroupWithPredicateTest.class,
                 CollectionsUtilGroupOneTest.class,
 
-                CollectionsUtilAddAllIgnoreNullTest.class,
-                CollectionsUtilAddIgnoreNullOrEmptyTest.class,
+                CollectionsUtilSelectTest.class,
+                CollectionsUtilSelectRejectedTest.class,
 
                 CollectionsUtilRemoveTest.class,
         //

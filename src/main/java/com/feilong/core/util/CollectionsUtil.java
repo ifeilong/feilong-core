@@ -1662,18 +1662,26 @@ public final class CollectionsUtil{
      * 循环 <code>objectCollection</code>,找到符合条件的 <code>includePredicate</code>的元素,以元素的 <code>propertyName</code>
      * 属性值为key,相同值的元素组成list作为value,封装成map返回.
      * 
-     * <p>
-     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是 <code>objectCollection</code>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是
+     * <code>objectCollection</code>
      * 中的元素对象;
      * <br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值顺序
-     * </p>
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
+     * <p>
+     * 场景:将age {@code >} 20的User,按照name 进行 group
+     * </p>
+     * 
      * <pre class="code">
-        List{@code <User>} list = new ArrayList{@code <User>}();
+        List{@code <User>} list = new ArrayList{@code <>}();
         list.add(new User("张飞", 10));
         list.add(new User("张飞", 28));
         list.add(new User("刘备", 32));
@@ -1709,7 +1717,9 @@ public final class CollectionsUtil{
     }
      * </pre>
      * 
+     * <p>
      * 当然,对于上述代码,你还可以优化成:
+     * </p>
      * 
      * <pre class="code">
      * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
@@ -1717,7 +1727,7 @@ public final class CollectionsUtil{
      * </pre>
      * 
      * 参见
-     * {@link com.feilong.core.util.predicate.BeanPredicateUtil#comparatorPredicate(String, Comparable, org.apache.commons.collections4.functors.ComparatorPredicate.Criterion)}
+     * {@link BeanPredicateUtil#comparatorPredicate(String, Comparable, org.apache.commons.collections4.functors.ComparatorPredicate.Criterion)}
      * 
      * </blockquote>
      *
