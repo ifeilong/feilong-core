@@ -37,6 +37,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 MapUtilPutMultiValueTest.class,
                 MapUtilPutSumValueTest.class,
+
+                MapUtilPutAllIfNotNullTest.class,
                 MapUtilPutIfValueNotNullTest.class,
                 MapUtilPutIfValueNotNullOrEmptyTest.class,
 

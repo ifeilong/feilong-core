@@ -368,7 +368,28 @@ public final class MapUtil{
     }
 
     /**
-     * Put all if not null.
+     * 仅当 {@code null != map && null != m},才会进行 {@code map.putAll(m)} 操作
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * if (isNotNullOrEmpty(specialSignMap)){
+     *     map.putAll(specialSignMap);
+     * }
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * MapUtil.putAllIfNotNull(map, specialSignMap)
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <K>
      *            the key type
