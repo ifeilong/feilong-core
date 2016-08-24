@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.util.collectionsutiltest;
 
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -49,6 +49,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.test.User;
 import com.feilong.test.UserAddress;
