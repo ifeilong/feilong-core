@@ -434,7 +434,7 @@ public final class MapUtil{
     }
 
     /**
-     * 如果<code>map</code>中存在<code>key</code>,那么累加<code>value</code>值;如果不存在那么直接put.
+     * 将<code>key</code>和<code>value</code> 累加的形式put到 map中,如果<code>map</code>中存在<code>key</code>,那么累加<code>value</code>值;如果不存在那么直接put.
      * 
      * <h3>示例:</h3>
      * 
@@ -461,9 +461,12 @@ public final class MapUtil{
      * 
      * </blockquote>
      * 
-     * 该方法特别适合于以下的方法:
+     * <h3>重构:</h3>
      * 
      * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
      * 
      * <pre class="code">
      * 
@@ -475,7 +478,7 @@ public final class MapUtil{
      * 
      * </pre>
      * 
-     * 此时可以重构成:
+     * <b>可以重构成:</b>
      * 
      * <pre class="code">
      * MapUtil.putSumValue(disadvantageMap, disadvantageToken, 1);
@@ -490,7 +493,7 @@ public final class MapUtil{
      * @param key
      *            the key
      * @param value
-     *            the value
+     *            数值,不能为null
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.collections4.bag.HashBag
