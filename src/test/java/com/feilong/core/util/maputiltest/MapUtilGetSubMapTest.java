@@ -30,6 +30,11 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
+/**
+ * The Class MapUtilGetSubMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilGetSubMapTest{
 
     /**
@@ -46,6 +51,9 @@ public class MapUtilGetSubMapTest{
         assertThat(subMap, allOf(hasEntry("a", 3007), hasEntry("c", 3001), not(hasKey("b")), not(hasKey("d"))));
     }
 
+    /**
+     * Test get sub map 1.
+     */
     @Test
     public void testGetSubMap1(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -57,6 +65,9 @@ public class MapUtilGetSubMapTest{
         assertThat(subMap, allOf(hasEntry("a", 3007), hasEntry("c", 3001), not(hasKey("b")), not(hasKey("d"))));
     }
 
+    /**
+     * Test get sub map null keys.
+     */
     @Test
     public void testGetSubMapNullKeys(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -67,6 +78,9 @@ public class MapUtilGetSubMapTest{
         assertEquals(map, MapUtil.getSubMap(map, null));
     }
 
+    /**
+     * Test get sub map empty keys.
+     */
     @Test
     public void testGetSubMapEmptyKeys(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -77,11 +91,17 @@ public class MapUtilGetSubMapTest{
         assertEquals(map, MapUtil.getSubMap(map));
     }
 
+    /**
+     * Test get sub map null map.
+     */
     @Test
     public void testGetSubMapNullMap(){
         assertEquals(emptyMap(), MapUtil.getSubMap(null, "a", "c"));
     }
 
+    /**
+     * Test get sub map empty map.
+     */
     @Test
     public void testGetSubMapEmptyMap(){
         assertEquals(emptyMap(), MapUtil.getSubMap(new HashMap<>(), "a", "c"));

@@ -24,6 +24,11 @@ import org.junit.Test;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class ConvertUtilToArrayCollectionClassTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToArrayCollectionClassTest{
 
     /**
@@ -35,11 +40,17 @@ public class ConvertUtilToArrayCollectionClassTest{
         assertArrayEquals(new String[] { "xinge", "feilong" }, toArray(list, String.class));
     }
 
+    /**
+     * Test to array null type.
+     */
     @Test(expected = NullPointerException.class)
     public void testToArrayNullType(){
         toArray(toList("xinge", "feilong"), null);
     }
 
+    /**
+     * Test to array null value.
+     */
     @Test
     public void testToArrayNullValue(){
         assertArrayEquals(null, toArray((List<String>) null, String.class));

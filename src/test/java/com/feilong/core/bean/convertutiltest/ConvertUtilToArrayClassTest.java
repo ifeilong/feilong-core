@@ -26,6 +26,11 @@ import com.feilong.core.bean.ConvertUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
+/**
+ * The Class ConvertUtilToArrayClassTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToArrayClassTest{
 
     /**

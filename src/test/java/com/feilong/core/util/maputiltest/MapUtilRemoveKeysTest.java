@@ -29,6 +29,11 @@ import com.feilong.core.util.MapUtil;
 
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
+/**
+ * The Class MapUtilRemoveKeysTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilRemoveKeysTest{
 
     /**
@@ -45,6 +50,9 @@ public class MapUtilRemoveKeysTest{
         assertThat(removeKeys, allOf(hasEntry("name", "feilong"), hasEntry("age", "18"), not(hasEntry("country", "china"))));
     }
 
+    /**
+     * Test remove keys null keys.
+     */
     @Test
     public void testRemoveKeysNullKeys(){
         Map<String, String> map = newLinkedHashMap(3);
@@ -54,6 +62,9 @@ public class MapUtilRemoveKeysTest{
         assertEquals(map, MapUtil.removeKeys(map, null));
     }
 
+    /**
+     * Test remove keys empty keys.
+     */
     @Test
     public void testRemoveKeysEmptyKeys(){
         Map<String, String> map = newLinkedHashMap(3);
@@ -63,6 +74,9 @@ public class MapUtilRemoveKeysTest{
         assertEquals(map, MapUtil.removeKeys(map));
     }
 
+    /**
+     * Test remove keys not exist keys.
+     */
     @Test
     public void testRemoveKeysNotExistKeys(){
         Map<String, String> map = newLinkedHashMap(3);
@@ -73,6 +87,9 @@ public class MapUtilRemoveKeysTest{
         assertEquals(map, MapUtil.removeKeys(map, "name1"));
     }
 
+    /**
+     * Test remove keys null map.
+     */
     @Test
     public void testRemoveKeysNullMap(){
         assertEquals(null, MapUtil.removeKeys(null, "country"));

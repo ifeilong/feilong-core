@@ -29,6 +29,11 @@ import com.feilong.core.util.MapUtil;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
+/**
+ * The Class MapUtilPutMultiValueTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilPutMultiValueTest{
 
     /**
@@ -44,6 +49,9 @@ public class MapUtilPutMultiValueTest{
         assertThat(mutiMap, allOf(hasEntry("name", toList("张飞", "关羽")), hasEntry("age", toList("30"))));
     }
 
+    /**
+     * Test put multi value null map.
+     */
     @Test(expected = NullPointerException.class)
     public void testPutMultiValueNullMap(){
         MapUtil.putMultiValue(null, "name", "张飞");

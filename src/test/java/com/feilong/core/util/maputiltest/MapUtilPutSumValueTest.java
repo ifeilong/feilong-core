@@ -26,6 +26,11 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
+/**
+ * The Class MapUtilPutSumValueTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilPutSumValueTest{
 
     //***************************************************************************
@@ -42,6 +47,9 @@ public class MapUtilPutSumValueTest{
         assertThat(map, allOf(hasEntry("1000001", 5), hasEntry("1000002", 10)));
     }
 
+    /**
+     * Test put sum value negative value.
+     */
     @Test
     public void testPutSumValueNegativeValue(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -52,11 +60,17 @@ public class MapUtilPutSumValueTest{
         assertThat(map, allOf(hasEntry("1000001", 5), hasEntry("1000002", 0)));
     }
 
+    /**
+     * Test put sum value null map.
+     */
     @Test(expected = NullPointerException.class)
     public void testPutSumValueNullMap(){
         MapUtil.putSumValue(null, "1000001", 5);
     }
 
+    /**
+     * Test put sum value null value.
+     */
     @Test(expected = NullPointerException.class)
     public void testPutSumValueNullValue(){
         MapUtil.putSumValue(new HashMap<String, Integer>(), "1000001", null);

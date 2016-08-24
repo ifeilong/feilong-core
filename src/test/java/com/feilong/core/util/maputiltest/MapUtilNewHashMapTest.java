@@ -24,6 +24,11 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
+/**
+ * The Class MapUtilNewHashMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilNewHashMapTest{
     //******************com.feilong.core.util.MapUtil.newHashMap(int)*****************************************
 

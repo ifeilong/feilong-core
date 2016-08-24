@@ -32,8 +32,16 @@ import com.feilong.core.util.MapUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
+/**
+ * The Class MapUtilInvertMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilInvertMapTest{
 
+    /**
+     * Test invert map.
+     */
     @Test
     public void testInvertMap(){
         Map<String, Integer> map = toMap(
@@ -45,11 +53,17 @@ public class MapUtilInvertMapTest{
         assertThat(invertMap, allOf(hasEntry(3007, "a"), hasEntry(3001, "c"), hasEntry(3003, "d"), not(hasEntry(3001, "b"))));
     }
 
+    /**
+     * Test invert map null map.
+     */
     @Test
     public void testInvertMapNullMap(){
         assertEquals(null, MapUtil.invertMap(null));
     }
 
+    /**
+     * Test invert map empty map.
+     */
     @Test
     public void testInvertMapEmptyMap(){
         assertEquals(emptyMap(), MapUtil.invertMap(emptyMap()));

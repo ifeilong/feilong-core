@@ -31,9 +31,19 @@ import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class ConvertUtilToStringCollectionToStringConfigParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToStringCollectionToStringConfigParameterizedTest
                 extends AbstractTwoParamsAndOneResultParameterizedTest<Collection<?>, ToStringConfig, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}")
     public static Iterable<Object[]> data(){
 
@@ -55,6 +65,9 @@ public class ConvertUtilToStringCollectionToStringConfigParameterizedTest
         return toList(objects);
     }
 
+    /**
+     * Test to string.
+     */
     @Test
     public void testToString(){
         assertEquals(expectedValue, ConvertUtil.toString(input1, input2));

@@ -28,8 +28,16 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
+/**
+ * The Class MapUtilPutIfValueNotNullOrEmptyTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilPutIfValueNotNullOrEmptyTest{
 
+    /**
+     * Test put if value not null or empty.
+     */
     @Test
     public void testPutIfValueNotNullOrEmpty(){
         Map<String, Integer> map = new HashMap<>();
@@ -37,6 +45,9 @@ public class MapUtilPutIfValueNotNullOrEmptyTest{
         assertThat(map, allOf(hasEntry("1000001", 5)));
     }
 
+    /**
+     * Test put if value not null or empty null value.
+     */
     @Test
     public void testPutIfValueNotNullOrEmptyNullValue(){
         Map<String, Integer> map = new HashMap<>();
@@ -44,6 +55,9 @@ public class MapUtilPutIfValueNotNullOrEmptyTest{
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
 
+    /**
+     * Test put if value not null or empty empty value.
+     */
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue(){
         Map<String, String> map = new HashMap<>();
@@ -51,6 +65,9 @@ public class MapUtilPutIfValueNotNullOrEmptyTest{
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
 
+    /**
+     * Test put if value not null or empty empty value 1.
+     */
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue1(){
         Map<String, String> map = new HashMap<>();
@@ -58,6 +75,9 @@ public class MapUtilPutIfValueNotNullOrEmptyTest{
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
 
+    /**
+     * Test put if value not null or empty empty value 2.
+     */
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue2(){
         Map<String, Object[]> map = new HashMap<>();
@@ -65,6 +85,9 @@ public class MapUtilPutIfValueNotNullOrEmptyTest{
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
 
+    /**
+     * Test put if value not null or empty null map.
+     */
     @Test
     public void testPutIfValueNotNullOrEmptyNullMap(){
         MapUtil.putIfValueNotNullOrEmpty(null, "1000001", 5);

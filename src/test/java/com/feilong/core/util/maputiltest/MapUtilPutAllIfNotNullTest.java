@@ -28,8 +28,16 @@ import com.feilong.core.util.MapUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
+/**
+ * The Class MapUtilPutAllIfNotNullTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilPutAllIfNotNullTest{
 
+    /**
+     * Test put all if not null null value.
+     */
     @Test
     public void testPutAllIfNotNullNullValue(){
         Map<String, Integer> map = new HashMap<>();
@@ -37,6 +45,9 @@ public class MapUtilPutAllIfNotNullTest{
         assertThat(map, hasEntry("age", 18));
     }
 
+    /**
+     * Test put all if not null.
+     */
     @Test
     public void testPutAllIfNotNull(){
         Map<String, Integer> map = new HashMap<>();
@@ -44,6 +55,9 @@ public class MapUtilPutAllIfNotNullTest{
         assertThat(map.keySet(), hasSize(0));
     }
 
+    /**
+     * Test put all if not null null map.
+     */
     @Test
     public void testPutAllIfNotNullNullMap(){
         MapUtil.putAllIfNotNull(null, new HashMap<>());

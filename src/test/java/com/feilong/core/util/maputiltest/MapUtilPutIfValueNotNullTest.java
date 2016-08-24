@@ -28,8 +28,16 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
+/**
+ * The Class MapUtilPutIfValueNotNullTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilPutIfValueNotNullTest{
 
+    /**
+     * Test put if value not null.
+     */
     @Test
     public void testPutIfValueNotNull(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -37,6 +45,9 @@ public class MapUtilPutIfValueNotNullTest{
         assertThat(map, allOf(hasEntry("1000001", 5)));
     }
 
+    /**
+     * Test put if value not null empty.
+     */
     @Test
     public void testPutIfValueNotNullEmpty(){
         Map<String, String> map = new HashMap<String, String>();
@@ -44,6 +55,9 @@ public class MapUtilPutIfValueNotNullTest{
         assertThat(map, allOf(hasEntry("1000001", "")));
     }
 
+    /**
+     * Test put if value not null null value.
+     */
     @Test
     public void testPutIfValueNotNullNullValue(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -51,6 +65,9 @@ public class MapUtilPutIfValueNotNullTest{
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
 
+    /**
+     * Test put if value not null null map.
+     */
     @Test
     public void testPutIfValueNotNullNullMap(){
         MapUtil.putIfValueNotNull(null, "1000001", 5);

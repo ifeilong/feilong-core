@@ -30,6 +30,11 @@ import org.junit.Test;
 import com.feilong.core.util.MapUtil;
 import com.feilong.test.User;
 
+/**
+ * The Class MapUtilExtractSubMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilExtractSubMapTest{
 
     /**
@@ -56,11 +61,17 @@ public class MapUtilExtractSubMapTest{
         assertEquals(emptyMap(), MapUtil.extractSubMap(null, "id"));
     }
 
+    /**
+     * Test extract sub map empty map.
+     */
     @Test
     public void testExtractSubMapEmptyMap(){
         assertEquals(emptyMap(), MapUtil.extractSubMap(new HashMap<>(), "id"));
     }
 
+    /**
+     * Test extract sub map null extract property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testExtractSubMapNullExtractPropertyName(){
         Map<Long, User> map = new LinkedHashMap<Long, User>();
@@ -69,6 +80,9 @@ public class MapUtilExtractSubMapTest{
         MapUtil.extractSubMap(map, null);
     }
 
+    /**
+     * Test extract sub map empty extract property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName(){
         Map<Long, User> map = new LinkedHashMap<Long, User>();
@@ -77,6 +91,9 @@ public class MapUtilExtractSubMapTest{
         MapUtil.extractSubMap(map, "");
     }
 
+    /**
+     * Test extract sub map empty extract property name 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName1(){
         Map<Long, User> map = new LinkedHashMap<Long, User>();

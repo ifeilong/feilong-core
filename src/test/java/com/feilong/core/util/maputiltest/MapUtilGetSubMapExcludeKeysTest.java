@@ -31,6 +31,11 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
+/**
+ * The Class MapUtilGetSubMapExcludeKeysTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilGetSubMapExcludeKeysTest{
 
     /**
@@ -51,17 +56,26 @@ public class MapUtilGetSubMapExcludeKeysTest{
         assertThat(map, allOf(hasEntry("a", 3007), hasEntry("b", 3001), hasEntry("c", 3002), hasEntry("g", -1005)));
     }
 
+    /**
+     * Test get sub map null map.
+     */
     @Test
     public void testGetSubMapNullMap(){
         assertEquals(emptyMap(), MapUtil.getSubMapExcludeKeys(null, "a", "c"));
     }
 
+    /**
+     * Test get sub map empty map.
+     */
     @Test
     public void testGetSubMapEmptyMap(){
         assertEquals(emptyMap(), MapUtil.getSubMapExcludeKeys(new HashMap<>(), "a", "c"));
         assertEquals(emptyMap(), MapUtil.getSubMapExcludeKeys(emptyMap(), "a", "c"));
     }
 
+    /**
+     * Test get sub map null exclude keys.
+     */
     @Test
     public void testGetSubMapNullExcludeKeys(){
         Map<String, Integer> map = new LinkedHashMap<String, Integer>();

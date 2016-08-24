@@ -29,8 +29,18 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 
+/**
+ * The Class ConvertUtilToStringParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToStringParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ConvertUtil.toString({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
@@ -48,6 +58,9 @@ public class ConvertUtilToStringParameterizedTest extends AbstractOneParamAndOne
         return toList(objects);
     }
 
+    /**
+     * Test to string.
+     */
     @Test
     public void testToString(){
         assertEquals(expectedValue, ConvertUtil.toString(input1));

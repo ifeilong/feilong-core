@@ -31,6 +31,11 @@ import com.feilong.core.util.MapUtil;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
+/**
+ * The Class MapUtilToSingleValueMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class MapUtilToSingleValueMapTest{
 
     /**
