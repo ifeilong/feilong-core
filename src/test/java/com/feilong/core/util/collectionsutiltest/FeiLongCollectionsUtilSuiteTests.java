@@ -46,6 +46,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 CollectionsUtilRemoveTest.class,
                 CollectionsUtilRemoveAllCollectionTest.class,
+                CollectionsUtilRemoveAllPropertyNameArrayTest.class,
                 CollectionsUtilRemoveAllPropertyNameCollectionTest.class,
         //
 })

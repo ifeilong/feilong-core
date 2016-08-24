@@ -17,10 +17,7 @@ package com.feilong.core.util.collectionsutiltest;
 
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
@@ -31,7 +28,6 @@ import java.util.List;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
@@ -41,132 +37,6 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class CollectionsUtilRemoveTest{
-
-    /**
-     * Test remove all collection.
-     */
-    //************CollectionsUtil.removeAll(Collection<User>, String, Collection<String>)*************
-    @Test
-    public void testRemoveAllCollection(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 24);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-
-        List<User> removeAll = CollectionsUtil.removeAll(list, "name", toList("张飞", "刘备"));
-
-        assertThat(removeAll, allOf(hasItem(guanyu), not(hasItem(zhangfei)), not(hasItem(liubei))));
-        assertThat(list, allOf(hasItem(zhangfei), hasItem(liubei), hasItem(guanyu)));
-    }
-
-    /**
-     * Test remove all collection 1.
-     */
-    @Test
-    public void testRemoveAllCollection1(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 24);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-
-        List<User> removeAll = CollectionsUtil.removeAll(list, "name", (List<String>) null);
-        assertThat(removeAll, contains(zhangfei, guanyu, liubei));
-    }
-
-    /**
-     * Test remove all collection null object collection.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testRemoveAllCollectionNullObjectCollection(){
-        CollectionsUtil.removeAll(null, "name", toList("刘备"));
-    }
-
-    //******
-
-    /**
-     * Test remove all collection null property name.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testRemoveAllCollectionNullPropertyName(){
-        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
-        CollectionsUtil.removeAll(list, null, toList("刘备"));
-    }
-
-    /**
-     * Test remove all collection empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testRemoveAllCollectionEmptyPropertyName(){
-        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
-        CollectionsUtil.removeAll(list, "", toList("刘备"));
-    }
-
-    /**
-     * Test remove all collection empty property name 1.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testRemoveAllCollectionEmptyPropertyName1(){
-        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
-        CollectionsUtil.removeAll(list, " ", toList("刘备"));
-    }
-
-    //****************CollectionsUtil.removeAll(Collection<User>, String, String...)************************
-    /**
-     * Test remove all1.
-     */
-    @Test
-    public void testRemoveAll1(){
-        User zhangfei = new User("张飞", 23);
-        User guanyu = new User("关羽", 24);
-        User liubei = new User("刘备", 25);
-        List<User> list = toList(zhangfei, guanyu, liubei);
-
-        assertThat(CollectionsUtil.removeAll(list, "name", "刘备"), contains(zhangfei, guanyu));
-        assertThat(list, contains(zhangfei, guanyu, liubei));
-
-        assertThat(CollectionsUtil.removeAll(list, "name", (String) null), contains(zhangfei, guanyu, liubei));
-        assertThat(list, contains(zhangfei, guanyu, liubei));
-
-        assertThat(CollectionsUtil.removeAll(list, "name", "刘备", "关羽"), contains(zhangfei));
-        assertThat(list, contains(zhangfei, guanyu, liubei));
-    }
-
-    /**
-     * Test remove all null object collection.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testRemoveAllNullObjectCollection(){
-        CollectionsUtil.removeAll(null, "name", "刘备");
-    }
-
-    //******
-
-    /**
-     * Test remove all null property name.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testRemoveAllNullPropertyName(){
-        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
-        CollectionsUtil.removeAll(list, null, "刘备");
-    }
-
-    /**
-     * Test remove all empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testRemoveAllEmptyPropertyName(){
-        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
-        CollectionsUtil.removeAll(list, "", "刘备");
-    }
-
-    /**
-     * Test remove all empty property name 1.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testRemoveAllEmptyPropertyName1(){
-        List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));
-        CollectionsUtil.removeAll(list, " ", "刘备");
-    }
 
     //**************CollectionsUtil.remove(Collection<String>, String)*************************
     /**
