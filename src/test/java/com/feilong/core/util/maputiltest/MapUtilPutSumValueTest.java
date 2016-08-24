@@ -42,6 +42,16 @@ public class MapUtilPutSumValueTest{
         assertThat(map, allOf(hasEntry("1000001", 5), hasEntry("1000002", 10)));
     }
 
+    @Test
+    public void testPutSumValueNegativeValue(){
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        MapUtil.putSumValue(map, "1000001", 5);
+        MapUtil.putSumValue(map, "1000002", 5);
+        MapUtil.putSumValue(map, "1000002", -5);
+
+        assertThat(map, allOf(hasEntry("1000001", 5), hasEntry("1000002", 0)));
+    }
+
     @Test(expected = NullPointerException.class)
     public void testPutSumValueNullMap(){
         MapUtil.putSumValue(null, "1000001", 5);
@@ -51,5 +61,4 @@ public class MapUtilPutSumValueTest{
     public void testPutSumValueNullValue(){
         MapUtil.putSumValue(new HashMap<String, Integer>(), "1000001", null);
     }
-
 }

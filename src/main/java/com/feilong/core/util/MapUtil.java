@@ -276,7 +276,7 @@ public final class MapUtil{
         if (isNullOrEmpty(arrayValueMap)){
             return emptyMap();
         }
-        Map<K, V> singleValueMap = newLinkedHashMap(arrayValueMap.size());//保证顺序和 参数 arrayValueMap 顺序相同
+        Map<K, V> singleValueMap = newLinkedHashMap(arrayValueMap.size());//保证顺序和参数 arrayValueMap 顺序相同
         for (Map.Entry<K, V[]> entry : arrayValueMap.entrySet()){
             singleValueMap.put(entry.getKey(), null == entry.getValue() ? null : entry.getValue()[0]);
         }
@@ -493,7 +493,7 @@ public final class MapUtil{
      * @param key
      *            the key
      * @param value
-     *            数值,不能为null
+     *            数值,不能为null,可以是负数
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.collections4.bag.HashBag
