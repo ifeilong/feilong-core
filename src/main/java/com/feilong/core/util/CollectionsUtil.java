@@ -654,20 +654,20 @@ public final class CollectionsUtil{
     /**
      * 从 <code>objectCollection</code>中 删除<code>removeElement</code> <span style="color:red">(原集合对象不变)</span>.
      * 
-     * <p>
-     * 返回剩余的集合 <span style="color:red">(原集合对象不变)</span>,这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用
-     * <code>collection.remove(removeElement);</code>.
-     * </p>
-     * 
-     * <p>
-     * 底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回剩余的集合 <span style="color:red">(原集合对象不变)</span>,这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用
+     * <code>collection.remove(removeElement);</code>.</li>
+     * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("xinge");
      * list.add("feilong1");
      * list.add("feilong2");
