@@ -506,17 +506,21 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
+     * <p>
+     * 场景: 从 User list中,删除 name是 "张飞"或者是"刘备"的 User
+     * </p>
+     * 
      * <pre class="code">
-     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
-     * objectCollection.add(new User("张飞", 23));
-     * objectCollection.add(new User("关羽", 24));
-     * objectCollection.add(new User("刘备", 25));
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
      * 
-     * List{@code <String>} list = new ArrayList{@code <String>}();
-     * list.add("张飞");
-     * list.add("刘备");
+     * List{@code <String>} propertyValueList = new ArrayList{@code <>}();
+     * propertyValueList.add("张飞");
+     * propertyValueList.add("刘备");
      * 
-     * List{@code <User>} removeAll = CollectionsUtil.removeAll(objectCollection, "name", list);
+     * List{@code <User>} removeAll = CollectionsUtil.removeAll(list, "name", propertyValueList);
      * LOGGER.info(JsonUtil.format(removeAll));
      * </pre>
      * 

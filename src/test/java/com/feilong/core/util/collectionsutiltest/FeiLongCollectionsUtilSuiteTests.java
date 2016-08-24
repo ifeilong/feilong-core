@@ -26,7 +26,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilAddIgnoreNullOrEmptyTest.class,
 
                 CollectionsUtilIndexOfTest.class,
-                CollectionsUtilCollectTest.class,
+
+                CollectionsUtilCollectIterableTest.class,
+                CollectionsUtilCollectIteratorTest.class,
 
                 CollectionsUtilFindTest.class,
                 CollectionsUtilFindWithPredicateTest.class,
@@ -43,6 +45,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilSelectRejectedTest.class,
 
                 CollectionsUtilRemoveTest.class,
+                CollectionsUtilRemoveAllCollectionTest.class,
+                CollectionsUtilRemoveAllPropertyNameCollectionTest.class,
         //
 })
 public class FeiLongCollectionsUtilSuiteTests{
