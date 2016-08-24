@@ -1007,6 +1007,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * <ol>
      * <li>返回的是 {@link LinkedHashMap},顺序是参数 objectCollection 元素的顺序</li>
+     * <li>如果有元素 <code>keyPropertyName</code>属性值相同,那么后面的值会覆盖前面的值</li>
      * </ol>
      * </blockquote>
      * 
@@ -1029,6 +1030,29 @@ public final class CollectionsUtil{
      * "张飞": 23,
      * "关羽": 24,
      * "刘备": 25
+     * }
+     * </pre>
+     * 
+     * <hr>
+     * <p>
+     * 如果有元素 <code>keyPropertyName</code>属性值相同,那么后面的值会覆盖前面的值
+     * </p>
+     * 
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("张飞", 25));
+     * 
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueMap(list, "name", "age")));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": 25,
+     * "关羽": 24,
      * }
      * </pre>
      * 

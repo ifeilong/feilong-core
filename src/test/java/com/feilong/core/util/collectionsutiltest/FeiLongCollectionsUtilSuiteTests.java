@@ -27,6 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 CollectionsUtilGetPropertyValueListTest.class,
                 CollectionsUtilGetPropertyValueSetTest.class,
+                CollectionsUtilGetPropertyValueMapTest.class,
 
                 CollectionsUtilGroupTest.class,
                 CollectionsUtilGroupPredicateTest.class,
