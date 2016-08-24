@@ -1150,25 +1150,30 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
+     * <p>
+     * 场景:从list中查找name是 关羽,并且 age等于30的User对象
+     * </p>
+     * 
      * <pre class="code">
      * List{@code <User>} list = toList(//
      *                 new User("张飞", 23),
      *                 new User("关羽", 24),
      *                 new User("刘备", 25),
      *                 new User("关羽", 30));
+     *                 
      * Predicate{@code <User>} predicate = PredicateUtils
      *                 .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
+     * 
      * User user = CollectionsUtil.find(list, predicate);
      * LOGGER.debug(JsonUtil.format(user));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
      * {
-        "age": 30,
-        "name": "关羽"
+     * "age": 30,
+     * "name": "关羽"
      * }
      * </pre>
      * 

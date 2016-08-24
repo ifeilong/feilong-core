@@ -31,6 +31,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilGetPropertyValueSetTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilGetPropertyValueSetTest{
 
     /**
@@ -47,28 +52,43 @@ public class CollectionsUtilGetPropertyValueSetTest{
         assertThat(set, contains(2L, 5L));
     }
 
+    /**
+     * Test get property value set null collection.
+     */
     @Test
     public void testGetPropertyValueSetNullCollection(){
         assertEquals(emptySet(), CollectionsUtil.getPropertyValueSet(null, "id"));
     }
 
+    /**
+     * Test get property value set empty collection.
+     */
     @Test
     public void testGetPropertyValueSetEmptyCollection(){
         assertEquals(emptySet(), CollectionsUtil.getPropertyValueSet(new ArrayList<>(), "id"));
     }
 
+    /**
+     * Test get property value set null property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetPropertyValueSetNullPropertyName(){
         List<User> list = toList(new User(2L), new User(5L), new User(5L));
         CollectionsUtil.getPropertyValueSet(list, null);
     }
 
+    /**
+     * Test get property value set empty property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetPropertyValueSetEmptyPropertyName(){
         List<User> list = toList(new User(2L), new User(5L), new User(5L));
         CollectionsUtil.getPropertyValueSet(list, "");
     }
 
+    /**
+     * Test get property value set empty property name 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetPropertyValueSetEmptyPropertyName1(){
         List<User> list = toList(new User(2L), new User(5L), new User(5L));

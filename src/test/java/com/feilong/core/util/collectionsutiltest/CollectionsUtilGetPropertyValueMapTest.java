@@ -33,8 +33,16 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilGetPropertyValueMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilGetPropertyValueMapTest{
 
+    /**
+     * Test get property value map.
+     */
     @Test
     public void testGetPropertyValueMap(){
         User zhangfei = new User("张飞", 23);
@@ -50,6 +58,9 @@ public class CollectionsUtilGetPropertyValueMapTest{
                         hasEntry("刘备", 25)));
     }
 
+    /**
+     * Test get property value map same key.
+     */
     @Test
     public void testGetPropertyValueMapSameKey(){
         User zhangfei = new User("张飞", 23);
@@ -65,16 +76,25 @@ public class CollectionsUtilGetPropertyValueMapTest{
 
     //****************************************************************************************
 
+    /**
+     * Test get property value map null collection.
+     */
     @Test
     public void testGetPropertyValueMapNullCollection(){
         assertEquals(emptyMap(), CollectionsUtil.getPropertyValueMap(null, "name", "age"));
     }
 
+    /**
+     * Test get property value map empty collection.
+     */
     @Test
     public void testGetPropertyValueMapEmptyCollection(){
         assertEquals(emptyMap(), CollectionsUtil.getPropertyValueMap(new ArrayList<>(), "name", "age"));
     }
 
+    /**
+     * Test get property value map null key property name.
+     */
     //*****************
     @Test(expected = NullPointerException.class)
     public void testGetPropertyValueMapNullKeyPropertyName(){
@@ -82,12 +102,18 @@ public class CollectionsUtilGetPropertyValueMapTest{
         CollectionsUtil.getPropertyValueMap(list, null, "age");
     }
 
+    /**
+     * Test get property value map empty key property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetPropertyValueMapEmptyKeyPropertyName(){
         List<User> list = toList(new User("张飞", 23));
         CollectionsUtil.getPropertyValueMap(list, "", "age");
     }
 
+    /**
+     * Test get property value map blank key property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetPropertyValueMapBlankKeyPropertyName(){
         List<User> list = toList(new User("张飞", 23));
@@ -96,18 +122,27 @@ public class CollectionsUtilGetPropertyValueMapTest{
 
     //*****************
 
+    /**
+     * Test get property value map null value property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetPropertyValueMapNullValuePropertyName(){
         List<User> list = toList(new User("张飞", 23));
         CollectionsUtil.getPropertyValueMap(list, "name", null);
     }
 
+    /**
+     * Test get property value map empty value property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetPropertyValueMapEmptyValuePropertyName(){
         List<User> list = toList(new User("张飞", 23));
         CollectionsUtil.getPropertyValueMap(list, "name", "");
     }
 
+    /**
+     * Test get property value map blank value property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGetPropertyValueMapBlankValuePropertyName(){
         List<User> list = toList(new User("张飞", 23));
