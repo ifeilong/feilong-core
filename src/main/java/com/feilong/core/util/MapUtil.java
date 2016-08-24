@@ -387,17 +387,21 @@ public final class MapUtil{
     /**
      * 仅当 <code>null != map 并且 isNotNullOrEmpty(value)</code>才将key/value put到map中.
      * 
-     * <p>
-     * 如果 <code>map</code> 是null,什么都不做<br>
-     * 如果 <code>value</code> 是null或者empty,也什么都不做<br>
-     * 如果 <code>key</code> 是null,依照<code>map</code>的<code>key</code>是否允许是null的 规则<br>
-     * </p>
-     *
-     * <p>
-     * 如果你有以下代码,
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果 <code>map</code> 是null,什么都不做</li>
+     * <li>如果 <code>value</code> 是null或者empty,也什么都不做</li>
+     * <li>如果 <code>key</code> 是null,依照<code>map</code>的<code>key</code>是否允许是null的规则</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>重构:</h3>
      * 
      * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
      * 
      * <pre class="code">
      * 
@@ -407,7 +411,7 @@ public final class MapUtil{
      * 
      * </pre>
      * 
-     * 此时可以重构成:
+     * <b>可以重构成:</b>
      * 
      * <pre class="code">
      * MapUtil.putIfValueNotNullOrEmpty(nameAndValueMap, "state", taoBaoOAuthLoginForCodeEntity.getState());
