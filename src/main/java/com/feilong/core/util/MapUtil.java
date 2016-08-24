@@ -679,9 +679,13 @@ public final class MapUtil{
     /**
      * 获得 sub map(去除不需要的keys).
      * 
-     * <p>
-     * 返回值为 {@link LinkedHashMap},key的顺序 按照参数 <code>map</code>的顺序
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回值为 {@link LinkedHashMap},key的顺序 按照参数 <code>map</code>的顺序</li>
+     * <li>如果 <code>excludeKeys</code>中含有 map 中不存在的key,将会输出warn级别的log</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -708,10 +712,6 @@ public final class MapUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
-     * <p>
-     * 如果 <code>excludeKeys</code>中含有 map 中不存在的key,将会输出warn级别的log
-     * </p>
      * 
      * @param <K>
      *            the key type
