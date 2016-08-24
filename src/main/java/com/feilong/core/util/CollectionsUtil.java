@@ -1101,22 +1101,22 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
-     * objectCollection.add(new User("张飞", 23));
-     * objectCollection.add(new User("关羽", 24));
-     * objectCollection.add(new User("刘备", 25));
-     * objectCollection.add(new User("关羽", 24));
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     * list.add(new User("关羽", 50));
      * 
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.find(objectCollection, "name", "关羽")));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.find(list, "name", "关羽")));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * [{
+     * {
      * "age": 24,
      * "name": "关羽"
-     * }]
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1133,12 +1133,14 @@ public final class CollectionsUtil{
      * @param propertyValue
      *            指定的值
      * @return 如果 <code>iterable</code>是null, 返回null<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回null
      * @see #find(Iterable, Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
      */
     public static <O, V> O find(Iterable<O> iterable,String propertyName,V propertyValue){
-        return find(iterable, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
+        return null == iterable ? null : find(iterable, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
     }
 
     /**

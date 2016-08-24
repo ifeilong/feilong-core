@@ -25,6 +25,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilIndexOfTest.class,
                 CollectionsUtilCollectTest.class,
 
+                CollectionsUtilFindTest.class,
+
                 CollectionsUtilGetPropertyValueListTest.class,
                 CollectionsUtilGetPropertyValueSetTest.class,
                 CollectionsUtilGetPropertyValueMapTest.class,
