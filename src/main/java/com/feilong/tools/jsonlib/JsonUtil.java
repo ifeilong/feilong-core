@@ -15,6 +15,7 @@
  */
 package com.feilong.tools.jsonlib;
 
+import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -1256,7 +1257,7 @@ public final class JsonUtil{
         LOGGER.trace("input json:[{}],rootClass:[{}]", json, rootClass);
 
         if (isNullOrEmpty(json)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
 
         Map<String, T> map = new HashMap<String, T>();

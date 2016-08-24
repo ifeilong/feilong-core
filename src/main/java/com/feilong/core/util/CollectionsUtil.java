@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static java.util.Collections.emptyMap;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1001,9 +1003,12 @@ public final class CollectionsUtil{
     /**
      * 循环 <code>objectCollection</code> ,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为value,组成map返回.
      * 
-     * <p>
-     * 注意:返回的是 {@link LinkedHashMap},顺序是参数 objectCollection 元素的顺序
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的是 {@link LinkedHashMap},顺序是参数 objectCollection 元素的顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1052,7 +1057,7 @@ public final class CollectionsUtil{
      */
     public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
         if (isNullOrEmpty(objectCollection)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
         Validate.notBlank(valuePropertyName, "valuePropertyName can't be null/empty!");
@@ -1699,7 +1704,7 @@ public final class CollectionsUtil{
      */
     public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
         if (isNullOrEmpty(objectCollection)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
@@ -1773,7 +1778,7 @@ public final class CollectionsUtil{
      */
     public static <T, O> Map<T, O> groupOne(Collection<O> objectCollection,String propertyName){
         if (isNullOrEmpty(objectCollection)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 

@@ -15,7 +15,8 @@
  */
 package com.feilong.core.util;
 
-import java.util.Collections;
+import static java.util.Collections.emptyMap;
+
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -118,7 +119,7 @@ public final class RegexUtil{
         Matcher matcher = getMatcher(regexPattern, input);
         if (!matcher.matches()){
             LOGGER.trace("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
-            return Collections.emptyMap();
+            return emptyMap();
         }
         int groupCount = matcher.groupCount();
         Map<Integer, String> map = newLinkedHashMap(groupCount + 1);

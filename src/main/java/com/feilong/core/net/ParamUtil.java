@@ -15,6 +15,7 @@
  */
 package com.feilong.core.net;
 
+import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -341,7 +342,7 @@ public final class ParamUtil{
      */
     static Map<String, String[]> toSafeArrayValueMap(String queryString,String charsetType){
         if (isNullOrEmpty(queryString)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
 
         String[] nameAndValueArray = StringUtil.split(queryString, AMPERSAND);
@@ -708,7 +709,7 @@ public final class ParamUtil{
      */
     private static Map<String, String[]> toSafeArrayValueMap(Map<String, String[]> arrayValueMap,String charsetType){
         if (isNullOrEmpty(arrayValueMap)){
-            return Collections.emptyMap();
+            return emptyMap();
         }
         Map<String, String[]> safeArrayValueMap = newLinkedHashMap(arrayValueMap.size()); //使用 LinkedHashMap,保持map元素顺序
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
