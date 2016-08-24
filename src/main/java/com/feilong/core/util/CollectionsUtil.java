@@ -422,6 +422,13 @@ public final class CollectionsUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>常用于 浏览历史记录,当前的商品id是否在历史记录中第一条位置,如果是,可能就不会操作Cookie,诸如此类的操作</li>
+     * </ol>
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -904,9 +911,12 @@ public final class CollectionsUtil{
     /**
      * 解析迭代集合 <code>objectCollection</code> ,取到对象指定的属性 <code>propertyName</code>的值,拼成{@link Set}({@link LinkedHashSet}).
      * 
-     * <p>
-     * 注意:返回的是 {@link LinkedHashSet},顺序是参数 <code>objectCollection</code> 元素的顺序
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的是 {@link LinkedHashSet},顺序是参数 <code>objectCollection</code> 元素的顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>

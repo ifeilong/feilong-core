@@ -23,12 +23,19 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 
                 CollectionsUtilIndexOfTest.class,
+                CollectionsUtilCollectTest.class,
+
+                CollectionsUtilGetPropertyValueListTest.class,
+                CollectionsUtilGetPropertyValueSetTest.class,
+
+                CollectionsUtilGroupTest.class,
+                CollectionsUtilGroupPredicateTest.class,
+                CollectionsUtilGroupOneTest.class,
 
                 CollectionsUtilAddAllIgnoreNullTest.class,
                 CollectionsUtilAddIgnoreNullOrEmptyTest.class,
 
                 CollectionsUtilRemoveTest.class,
-                CollectionsUtilTest.class,
         //
 })
 public class FeiLongCollectionsUtilSuiteTests{
