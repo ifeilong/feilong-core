@@ -16,7 +16,6 @@
 package com.feilong.core.util.collectionsutiltest;
 
 import static java.util.Collections.emptyList;
-import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -31,53 +30,7 @@ import com.feilong.core.util.CollectionsUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
-/**
- * The Class CollectionUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-public class CollectionsUtilRemoveTest{
-
-    //**************CollectionsUtil.remove(Collection<String>, String)*************************
-    /**
-     * Test remove.
-     */
-    @Test
-    public void testRemove(){
-        List<String> list = new ArrayList<String>(){
-
-            private static final long serialVersionUID = -9002323146501447769L;
-
-            {
-                add("xinge");
-                add("feilong1");
-                add("feilong2");
-                add("feilong2");
-            }
-        };
-
-        List<String> removeList = CollectionsUtil.remove(list, "feilong2");
-        assertThat(removeList, hasItems("xinge", "feilong1"));
-        assertThat(list, hasItems("xinge", "feilong1", "feilong2", "feilong2"));
-    }
-
-    /**
-     * Test remove element 1.
-     */
-    @Test
-    public void testRemoveElement1(){
-        assertThat(
-                        CollectionsUtil.remove(toList("xinge", "feilong1", "feilong2", "feilong2"), null),
-                        contains("xinge", "feilong1", "feilong2", "feilong2"));
-    }
-
-    /**
-     * Test remove element.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testRemoveElement(){
-        CollectionsUtil.remove(null, "刘备");
-    }
+public class CollectionsUtilRemoveDuplicateTest{
 
     //************CollectionsUtil.removeDuplicate(Collection<O>)*************************
     /**
@@ -95,27 +48,18 @@ public class CollectionsUtilRemoveTest{
         assertThat(list, contains("feilong1", "feilong2", "feilong2", "feilong3"));
     }
 
-    /**
-     * Test remove duplicate 1.
-     */
     @Test
-    public void testRemoveDuplicate1(){
+    public void testRemoveDuplicateNullCollection(){
         assertEquals(emptyList(), CollectionsUtil.removeDuplicate(null));
     }
 
-    /**
-     * Test remove duplicate 2.
-     */
     @Test
-    public void testRemoveDuplicate2(){
+    public void testRemoveDuplicateEmptyCollection(){
         assertEquals(emptyList(), CollectionsUtil.removeDuplicate(new ArrayList<>()));
     }
 
-    /**
-     * Test remove duplicate 3.
-     */
     @Test
-    public void testRemoveDuplicate3(){
+    public void testRemoveDuplicateEmptyCollection1(){
         assertEquals(emptyList(), CollectionsUtil.removeDuplicate(toList()));
     }
 }

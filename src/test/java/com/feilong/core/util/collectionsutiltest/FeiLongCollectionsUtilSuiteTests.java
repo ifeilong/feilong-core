@@ -44,7 +44,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilSelectTest.class,
                 CollectionsUtilSelectRejectedTest.class,
 
-                CollectionsUtilRemoveTest.class,
+                CollectionsUtilRemoveDuplicateTest.class,
                 CollectionsUtilRemoveElementTest.class,
                 CollectionsUtilRemoveAllCollectionTest.class,
                 CollectionsUtilRemoveAllPropertyNameArrayTest.class,
