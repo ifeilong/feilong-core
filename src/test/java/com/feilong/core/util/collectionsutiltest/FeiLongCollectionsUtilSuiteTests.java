@@ -28,7 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilIndexOfTest.class,
 
                 CollectionsUtilCollectIterableTest.class,
-                CollectionsUtilCollectIteratorTest.class,
+                //CollectionsUtilCollectIteratorTest.class,
 
                 CollectionsUtilFindTest.class,
                 CollectionsUtilFindWithPredicateTest.class,
@@ -41,12 +41,17 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilGroupWithPredicateTest.class,
                 CollectionsUtilGroupOneTest.class,
 
-                CollectionsUtilSelectTest.class,
-                CollectionsUtilSelectRejectedTest.class,
+                CollectionsUtilSelectPredicateTest.class,
+                CollectionsUtilSelectArrayTest.class,
+                CollectionsUtilSelectCollectionTest.class,
+
+                CollectionsUtilSelectRejectedArrayTest.class,
+                CollectionsUtilSelectRejectedCollectionTest.class,
+                // CollectionsUtilSelectRejectedPredicateTest.class,
 
                 CollectionsUtilRemoveDuplicateTest.class,
                 CollectionsUtilRemoveElementTest.class,
-                CollectionsUtilRemoveAllCollectionTest.class,
+                // CollectionsUtilRemoveAllCollectionTest.class,
                 CollectionsUtilRemoveAllPropertyNameArrayTest.class,
                 CollectionsUtilRemoveAllPropertyNameCollectionTest.class,
         //

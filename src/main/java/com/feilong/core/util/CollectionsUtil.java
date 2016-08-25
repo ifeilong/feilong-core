@@ -1202,14 +1202,15 @@ public final class CollectionsUtil{
     //**************************select*****************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否 在<code>propertyValues</code>
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code>的 <code>propertyName</code>的值,判断是否在<code>propertyValues</code>
      * 数组中;如果在,将该对象存入list中返回.
      * 
      * <h3>注意:</h3>
      * 
      * <blockquote>
      * <p>
-     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValues</code> 无关
+     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValues</code> 无关,如果你需要排序的话,可以将结果再调用
+     * {@link SortUtil#sortByFixedOrderPropertyValues(List, String, Object...)}
      * </p>
      * </blockquote>
      * 
@@ -1218,13 +1219,13 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
-     * objectCollection.add(new User("张飞", 23));
-     * objectCollection.add(new User("关羽", 24));
-     * objectCollection.add(new User("刘备", 25));
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
      * 
      * String[] array = { "刘备", "关羽" };
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", array)));
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, "name", array)));
      * 
      * </pre>
      * 
@@ -1254,6 +1255,9 @@ public final class CollectionsUtil{
      * @param propertyValues
      *            the values
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>propertyValues</code> 是null,返回 {@code new ArrayList<O>}<br>
      * @see BeanPredicateUtil#containsPredicate(String, Object...)
      */
     @SafeVarargs
@@ -1271,7 +1275,8 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * <p>
-     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关
+     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关,如果你需要排序的话,可以将结果再调用
+     * {@link SortUtil#sortByFixedOrderPropertyValues(List, String, List)}
      * </p>
      * </blockquote>
      * 
