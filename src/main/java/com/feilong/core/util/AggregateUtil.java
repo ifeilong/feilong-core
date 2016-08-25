@@ -320,12 +320,19 @@ public final class AggregateUtil{
     /**
      * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyNames</code> 值的总和.
      * 
-     * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 在user list 中,分别统计 id属性以及age属性值总和
+     * </p>
      * 
      * <pre class="code">
      * User user1 = new User(2L);
@@ -334,11 +341,7 @@ public final class AggregateUtil{
      * User user2 = new User(3L);
      * user2.setAge(30);
      * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * list.add(user1);
-     * list.add(user2);
-     * 
-     * Map{@code <String, BigDecimal>} map = AggregateUtil.sum(list, "id", "age");
+     * Map{@code <String, BigDecimal>} map = AggregateUtil.sum(toList(user1, user2), "id", "age");
      * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
@@ -362,7 +365,7 @@ public final class AggregateUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
-     *         如果<code>propertyNames</code> 有元素 是null 抛出 {@link IllegalArgumentException}<br>
+     *         如果<code>propertyNames</code> 有元素是null 抛出 {@link IllegalArgumentException}<br>
      * @see #sum(Collection, String[], Predicate)
      */
     public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String...propertyNames){
