@@ -65,8 +65,12 @@ public final class AggregateUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
+     * <p>
+     * <b>场景:</b> 求的User list 里面 id属性 的平均值
+     * </p>
+     * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User(2L));
      * list.add(new User(5L));
      * list.add(new User(5L));
