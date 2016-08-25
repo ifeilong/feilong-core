@@ -638,11 +638,18 @@ public final class SortUtil{
     /**
      * 根据value 来倒序排序(desc).
      * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>原 <code>map</code> 的顺序不变</li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, Comparable>} map = new LinkedHashMap{@code <String, Comparable>}();
+     * Map{@code <String, Comparable>} map = new LinkedHashMap{@code <>}();
      * 
      * map.put("a", 123);
      * map.put("c", 345);
@@ -661,13 +668,6 @@ public final class SortUtil{
      * }
      * </pre>
      * 
-     * </blockquote>
-     * 
-     * <h3>注意:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
-     * </ol>
      * </blockquote>
      * 
      * @param <K>
