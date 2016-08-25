@@ -1342,6 +1342,10 @@ public final class CollectionsUtil{
      * <h3>示例1:</h3>
      * <blockquote>
      * 
+     * <p>
+     * 场景:查找等于 1的元素
+     * </p>
+     * 
      * <pre class="code">
      * List{@code <Long>} list = new ArrayList{@code <Long>}();
      * list.add(1L);
@@ -1361,6 +1365,10 @@ public final class CollectionsUtil{
      * 
      * <h3>示例2:</h3>
      * <blockquote>
+     * 
+     * <p>
+     * 场景:查找大于 10的元素
+     * </p>
      * 
      * <pre class="code">
      * Comparator{@code <Integer>} comparator = ComparatorUtils.naturalComparator();
