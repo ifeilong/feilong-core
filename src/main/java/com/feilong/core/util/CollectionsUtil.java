@@ -1411,15 +1411,20 @@ public final class CollectionsUtil{
     //***************************selectRejected*********************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code> 属性值都不在 <code>propertyValues</code> 时候的list.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code> 属性值<span style="color:red">都不在</span>
+     * <code>propertyValues</code> 时候的list.
      *
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
+     * <p>
+     * 场景:查询name 不是刘备 也不是张飞的 User list元素
+     * </p>
+     * 
      * <pre class="code">
      * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
@@ -1465,7 +1470,7 @@ public final class CollectionsUtil{
 
     /**
      * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否不在<code>propertyValueList</code>
-     * 集合中;如果不在,将该对象存入list中返回.
+     * 集合中;<span style="color:red">如果不在</span>,将该对象存入list中返回.
      * 
      * <h3>示例:</h3>
      * 
