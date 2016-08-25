@@ -28,7 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilIndexOfTest.class,
 
                 CollectionsUtilCollectIterableTest.class,
-                //CollectionsUtilCollectIteratorTest.class,
+                CollectionsUtilCollectIteratorTest.class,
 
                 CollectionsUtilFindTest.class,
                 CollectionsUtilFindWithPredicateTest.class,
