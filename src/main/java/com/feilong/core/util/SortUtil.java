@@ -472,31 +472,6 @@ public final class SortUtil{
     /**
      * 按照key asc顺序排序.
      * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, Comparable>} map = new HashMap{@code <String, Comparable>}();
-     * 
-     * map.put("a", 123);
-     * map.put("c", 345);
-     * map.put("b", 8);
-     * 
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * {
-     * "a": 123,
-     * "b": 8,
-     * "c": 345
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     * 
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
@@ -507,6 +482,33 @@ public final class SortUtil{
      * </li>
      * 
      * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Comparable>} map = new HashMap{@code <>}();
+     * 
+     * map.put("a", 123);
+     * map.put("c", 345);
+     * map.put(null, 1345);
+     * map.put("b", 8);
+     * 
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * null: 1345,
+     * "a": 123,
+     * "b": 8,
+     * "c": 345
+     * }
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param <K>

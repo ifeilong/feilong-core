@@ -23,21 +23,21 @@ import com.feilong.core.util.aggregateutiltest.FeiLongAggregateUtilSuiteTests;
 import com.feilong.core.util.collectionsutiltest.FeiLongCollectionsUtilSuiteTests;
 import com.feilong.core.util.maputiltest.FeiLongMapUtilSuiteTests;
 import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
+import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
 
 @RunWith(Suite.class)
-@SuiteClasses({
-
+@SuiteClasses({ //
                 EnumerationUtilTest.class,
 
                 RandomUtilTest.class,
                 RegexUtilTest.class,
                 ResourceBundleUtilTest.class,
-                SortUtilTest.class,
 
                 FeiLongAggregateUtilSuiteTests.class,
                 FeiLongRegexPatternSuiteTests.class,
                 FeiLongMapUtilSuiteTests.class,
                 FeiLongCollectionsUtilSuiteTests.class,
+                FeiLongSortUtilSuiteTests.class,
         //
 })
 public class FeiLongUtilSuiteTests{
