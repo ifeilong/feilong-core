@@ -1209,8 +1209,8 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * <p>
-     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValues</code> 无关,如果你需要排序的话,可以将结果再调用
-     * {@link SortUtil#sortByFixedOrderPropertyValues(List, String, Object...)}
+     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValues</code> 无关,如果你需要结果里面的元素按照指定的<code>propertyValues</code>
+     * 顺序排序的话,可以将结果再调用{@link SortUtil#sortByFixedOrderPropertyValues(List, String, Object...)}
      * </p>
      * </blockquote>
      * 
@@ -1268,15 +1268,15 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否 在<code>propertyValueList</code>
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否在<code>propertyValueList</code>
      * 集合中;如果在,将该对象存入list中返回.
      * 
      * <h3>注意:</h3>
      * 
      * <blockquote>
      * <p>
-     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关,如果你需要排序的话,可以将结果再调用
-     * {@link SortUtil#sortByFixedOrderPropertyValues(List, String, List)}
+     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关,如果你需要结果里面的元素按照指定的<code>propertyValueList</code>
+     * 顺序排序的话,可以将结果再调用{@link SortUtil#sortByFixedOrderPropertyValues(List, String, List)}
      * </p>
      * </blockquote>
      * 
@@ -1285,15 +1285,15 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
-     * objectCollection.add(new User("张飞", 23));
-     * objectCollection.add(new User("关羽", 24));
-     * objectCollection.add(new User("刘备", 25));
+     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
      * 
-     * List{@code <String>} list = new ArrayList{@code <String>}();
-     * list.add("张飞");
-     * list.add("刘备");
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(objectCollection, "name", list)));
+     * List{@code <String>} propertyValueList = new ArrayList{@code <String>}();
+     * propertyValueList.add("张飞");
+     * propertyValueList.add("刘备");
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, "name", propertyValueList)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1323,6 +1323,8 @@ public final class CollectionsUtil{
      * @param propertyValueList
      *            the values
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         否则调用 {@link #select(Collection, Predicate)}
      * @see #select(Collection, Predicate)
      * @see BeanPredicateUtil#containsPredicate(String, Collection)
