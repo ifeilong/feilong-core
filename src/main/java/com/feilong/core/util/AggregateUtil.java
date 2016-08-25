@@ -178,15 +178,18 @@ public final class AggregateUtil{
     /**
      * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyName</code> 值的总和.
      * 
-     * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User(2L));
      * list.add(new User(5L));
      * list.add(new User(5L));
@@ -201,7 +204,10 @@ public final class AggregateUtil{
      * <h3>说明:</h3>
      * 
      * <blockquote>
+     * 
+     * <p>
      * 当你需要写这样的代码的时候,
+     * </p>
      * 
      * <pre class="code">
      * 
@@ -218,7 +224,9 @@ public final class AggregateUtil{
      * }
      * </pre>
      * 
+     * <p>
      * 你可以写成:
+     * </p>
      * 
      * <pre class="code">
      * 
