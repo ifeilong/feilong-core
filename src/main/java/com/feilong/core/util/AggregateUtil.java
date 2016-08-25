@@ -511,18 +511,24 @@ public final class AggregateUtil{
     /**
      * 循环 <code>objectCollection</code>,只选择符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
      * 
-     * <p>
-     * 返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
-     * 顺序是 objectCollection <code>propertyName</code>的值的顺序
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 顺序是 objectCollection <code>propertyName</code>的值的顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
-     * <pre class="code">
+     * <p>
+     * <b>场景:</b> 统计user list(条件是 age {@code >} 30 的user),name属性值的数量
+     * </p>
      * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 20));
      * list.add(new User("关羽", 30));
      * list.add(new User("刘备", 40));
@@ -560,10 +566,11 @@ public final class AggregateUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param includePredicate
-     *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的Object
+     *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的元素
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      */
     public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
