@@ -249,47 +249,49 @@ public final class AggregateUtil{
     /**
      * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素 的指定 <code>propertyName</code> 元素的值 ,累计总和..
      * 
-     * <p>
-     * 如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
-     * 如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>null</code>
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果通过反射某个元素值是null,则使用默认值0代替,再进行累加</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
+     * <p>
+     * <b>场景:</b> 统计user list(条件是 id {@code >}10),id属性值的总和
+     * </p>
+     * 
      * <pre class="code">
      * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User(2L));
      * list.add(new User(50L));
      * list.add(new User(50L));
      * 
-     * assertEquals(new BigDecimal(100L), AggregateUtil.sum(list, "id", new Predicate{@code <User>}(){
+     * AggregateUtil.sum(list, "id", new Predicate{@code <User>}(){
      * 
      *     {@code @Override}
      *     public boolean evaluate(User user){
      *         return user.getId() {@code >} 10L;
      *     }
-     * }));
+     * });
      * 
      * </pre>
+     * 
+     * <p>
+     * <b>返回:</b> new BigDecimal(100L)
+     * </p>
      * 
      * <p>
      * 当然这段代码,你还可以优化成:
      * </p>
      * 
      * <pre class="code">
-     * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
-     * list.add(new User(2L));
-     * list.add(new User(50L));
-     * list.add(new User(50L));
-     * 
      * Predicate{@code <Long>} predicate = new ComparatorPredicate{@code <Long>}(10L, ComparatorUtils.{@code <Long>} naturalComparator(), Criterion.LESS);
      * BigDecimal sum = AggregateUtil.sum(list, "id", new BeanPredicate{@code <User>}("id", predicate));
-     * assertEquals(new BigDecimal(100L), sum);
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -307,6 +309,7 @@ public final class AggregateUtil{
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
+     *         如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>null</code>
      * @see #sum(Collection, String[], Predicate)
      */
     public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
