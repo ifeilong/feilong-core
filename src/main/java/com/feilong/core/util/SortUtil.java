@@ -531,14 +531,23 @@ public final class SortUtil{
     /**
      * 按照key desc 倒序排序.
      * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>原 <code>map</code> 的顺序不变</li>
+     * <li>该方法使用了 {@link PropertyComparator},允许 null key,<b>null key排在最后面</b></li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, Comparable>} map = new HashMap{@code <String, Comparable>}();
+     * Map{@code <String, Comparable>} map = new HashMap{@code <>}();
      * 
      * map.put("a", 123);
      * map.put("c", 345);
+     * map.put(null, 88);
      * map.put("b", 8);
      * 
      * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyDesc(map)));
@@ -550,18 +559,11 @@ public final class SortUtil{
      * {
      * "c": 345,
      * "b": 8,
-     * "a": 123
+     * "a": 123,
+     * null: 88
      * }
      * </pre>
      * 
-     * </blockquote>
-     * 
-     * <h3>注意:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
-     * <li>该方法使用了 {@link PropertyComparator},允许 null key,<b>null key排在最后面</b></li>
-     * </ol>
      * </blockquote>
      *
      * @param <K>
