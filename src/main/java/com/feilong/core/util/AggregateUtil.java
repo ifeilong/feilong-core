@@ -455,18 +455,24 @@ public final class AggregateUtil{
     /**
      * 循环 <code>objectCollection</code>,统计 <code>propertyName</code> 的值出现的次数.
      * 
-     * <p>
-     * 返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值的顺序
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值的顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
-     * <pre class="code">
+     * <p>
+     * <b>场景:</b> 统计user list,属性名字是name 的值的数量
+     * </p>
      * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞"));
      * list.add(new User("关羽"));
      * list.add(new User("刘备"));
@@ -474,7 +480,6 @@ public final class AggregateUtil{
      * 
      * Map{@code <String, Integer>} map = AggregateUtil.groupCount(list, "name");
      * LOGGER.info(JsonUtil.format(map));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
