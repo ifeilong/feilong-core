@@ -507,7 +507,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <p>
-     * 场景: 从 User list中,删除 name是 "张飞"或者是"刘备"的 User
+     * <b>场景:</b> 从 User list中,删除 name是 "张飞"或者是"刘备"的 User
      * </p>
      * 
      * <pre class="code">
@@ -1155,7 +1155,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <p>
-     * 场景:从list中查找name是 关羽,并且 age等于30的User对象
+     * <b>场景:</b> 从list中查找name是 关羽,并且 age等于30的User对象
      * </p>
      * 
      * <pre class="code">
@@ -1271,18 +1271,22 @@ public final class CollectionsUtil{
      * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否在<code>propertyValueList</code>
      * 集合中;如果在,将该对象存入list中返回.
      * 
-     * <h3>注意:</h3>
-     * 
+     * <h3>说明:</h3>
      * <blockquote>
-     * <p>
-     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关,如果你需要结果里面的元素按照指定的<code>propertyValueList</code>
-     * 顺序排序的话,可以将结果再调用{@link SortUtil#sortByFixedOrderPropertyValues(List, String, List)}
-     * </p>
+     * <ol>
+     * <li>查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关,如果你需要结果里面的元素按照指定的
+     * <code>propertyValueList</code>顺序排序的话,可以将结果再调用{@link SortUtil#sortByFixedOrderPropertyValues(List, String, List)}</li>
+     * <li>和该方法正好相反的是 {@link #selectRejected(Collection, String, Collection)}</li>
+     * </ol>
      * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 查询 name属性是"张飞"或者是"刘备"的 User list
+     * </p>
      * 
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <User>}();
@@ -1343,7 +1347,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <p>
-     * 场景:查找等于 1的元素
+     * <b>场景:</b> 查找等于 1的元素
      * </p>
      * 
      * <pre class="code">
@@ -1367,7 +1371,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <p>
-     * 场景:查找大于 10的元素
+     * <b>场景:</b> 查找大于 10的元素
      * </p>
      * 
      * <pre class="code">
@@ -1419,7 +1423,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <p>
-     * 场景:查询name 不是刘备 也不是张飞的 User list元素
+     * <b>场景:</b> 查询name 不是刘备 也不是张飞的 User list元素
      * </p>
      * 
      * <pre class="code">
@@ -1476,17 +1480,21 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
+     * <p>
+     * <b>场景:</b> 查询 name属性是不是"张飞",也不是"刘备"的 User list
+     * </p>
+     * 
      * <pre class="code">
      * 
-     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
-     * objectCollection.add(new User("张飞", 23));
-     * objectCollection.add(new User("关羽", 24));
-     * objectCollection.add(new User("刘备", 25));
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
      * 
-     * List{@code <String>} list = new ArrayList{@code <String>}();
-     * list.add("张飞");
-     * list.add("刘备");
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(objectCollection, "name", list)));
+     * List{@code <String>} propertyValueList = new ArrayList{@code <String>}();
+     * propertyValueList.add("张飞");
+     * propertyValueList.add("刘备");
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", propertyValueList)));
      * 
      * </pre>
      * 
@@ -1499,6 +1507,13 @@ public final class CollectionsUtil{
      * }]
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>和该方法正好相反的是 {@link #select(Collection, String, Collection)}</li>
+     * </ol>
      * </blockquote>
      *
      * @param <O>
@@ -1701,7 +1716,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <p>
-     * 场景:将age {@code >} 20的User,按照name 进行 group
+     * <b>场景:</b> 将age {@code >} 20的User,按照name 进行 group
      * </p>
      * 
      * <pre class="code">
