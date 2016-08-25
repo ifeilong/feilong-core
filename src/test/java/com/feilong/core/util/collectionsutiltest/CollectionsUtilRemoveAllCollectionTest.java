@@ -23,27 +23,39 @@ import java.util.List;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilRemoveAllCollectionTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilRemoveAllCollectionTest{
 
+    /**
+     * Test remove all collection.
+     */
     @Test
     public void testRemoveAllCollection(){
         List<String> list = toList("xinge", "feilong1", "feilong2", "feilong2");
         List<String> removeList = CollectionsUtil.removeAll(list, toList("feilong2", "feilong1"));
 
-        System.out.println(JsonUtil.format(removeList, 0, 0));//TODO:remove
         assertThat(removeList, contains("xinge"));
         assertThat(list, contains("xinge", "feilong1", "feilong2", "feilong2"));
     }
 
+    /**
+     * Test remove all collection null object collection.
+     */
     @Test(expected = NullPointerException.class)
     public void testRemoveAllCollectionNullObjectCollection(){
         CollectionsUtil.removeAll(null, toList("feilong2"));
     }
 
+    /**
+     * Test remove all collection null remove collection.
+     */
     @Test(expected = NullPointerException.class)
     public void testRemoveAllCollectionNullRemoveCollection(){
         CollectionsUtil.removeAll(toList("feilong2"), null);

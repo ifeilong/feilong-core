@@ -795,6 +795,10 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
+     * <p>
+     * <b>场景:</b> 获取user list每个元素的id属性值,组成新的list返回
+     * </p>
+     * 
      * <pre class="code">
      * 
      * List{@code <User>} list = toList(//
@@ -810,11 +814,7 @@ public final class CollectionsUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * [
-        2,
-        5,
-        5
-    ]
+     * [2,5,5]
      * </pre>
      * 
      * </blockquote>
@@ -823,13 +823,20 @@ public final class CollectionsUtil{
      * 
      * <blockquote>
      * 
+     * <p>
+     * 对于以下的数据结构:
+     * </p>
+     * 
      * <pre class="code">
+     * 
+     * <span style="color:green">//***************list****************************************</span>
      * List{@code <UserAddress>} userAddresseList = new ArrayList{@code <UserAddress>}();
+     * 
      * UserAddress userAddress = new UserAddress();
      * userAddress.setAddress("中南海");
      * userAddresseList.add(userAddress);
      * 
-     * //*******************************************************
+     * <span style="color:green">//***************map****************************************</span>
      * Map{@code <String, String>} attrMap = new HashMap{@code <String, String>}();
      * attrMap.put("蜀国", "赵子龙");
      * attrMap.put("魏国", "张文远");
@@ -855,65 +862,25 @@ public final class CollectionsUtil{
      * user2.setAttrMap(attrMap);
      * user2.setUserAddresseList(userAddresseList);
      * 
-     * List{@code <User>} userList = new ArrayList{@code <User>}();
-     * userList.add(user1);
-     * userList.add(user2);
+     * List{@code <User>} userList = toList(user1,user2);
      * </pre>
      * 
      * <p>
-     * 以下情况:
+     * <b>以下情况:</b>
      * </p>
      * 
-     * <hr>
-     * <span style="color:green">//数组</span>
-     * 
      * <pre class="code">
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "loves[1]")));
-     * </pre>
+     * <span style="color:green">//数组,取userList 每个元素的 loves属性第2个元素的值</span>
+     * CollectionsUtil.getPropertyValueList(userList, <b>"loves[1]"</b>)                   =   ["xiaoshuo1","xiaoshuo2"]
+    
+     * <span style="color:green">//级联对象,取userList 每个元素的 userInfo属性的 age 属性的值</span>
+     * CollectionsUtil.getPropertyValueList(userList, <b>"userInfo.age"</b>)               =   [28,null]
      * 
-     * <b>返回:</b>
+     * <span style="color:green">//Map,取userList 每个元素的 attrMap属性中的key是 "蜀国" 的值</span>
+     * CollectionsUtil.getPropertyValueList(userList, <b>"attrMap(蜀国)"</b>)                =   ["赵子龙","赵子龙"]
      * 
-     * <pre class="code">
-     * ["xiaoshuo1","xiaoshuo2"]
-     * </pre>
-     * 
-     * <hr>
-     * <span style="color:green">//级联对象</span>
-     * 
-     * <pre class="code">
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "userInfo.age")));
-     * </pre>
-     * 
-     * 结果 :
-     * 
-     * <pre class="code">
-     * [28,null]
-     * </pre>
-     * 
-     * <hr>
-     * <span style="color:green">//Map</span>
-     * 
-     * <pre class="code">
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)")));
-     * </pre>
-     * 
-     * 结果 :
-     * 
-     * <pre class="code">
-     * ["赵子龙","赵子龙"]
-     * </pre>
-     * 
-     * <hr>
-     * <span style="color:green">//集合</span>
-     * 
-     * <pre class="code">
-     * LOGGER.info(JsonUtil.format(CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]")));
-     * </pre>
-     * 
-     * 结果 :
-     * 
-     * <pre class="code">
-     * [{"address": "中南海"},{"address": "中南海"}]
+     * <span style="color:green">//集合,取userList 每个元素的 userAddresseList属性中的第一个元素</span>
+     * CollectionsUtil.getPropertyValueList(userList, <b>"userAddresseList[0]"</b>)        = [{"address": "中南海"},{"address": "中南海"}]
      * </pre>
      * 
      * </blockquote>
@@ -928,7 +895,8 @@ public final class CollectionsUtil{
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @return 如果参数 <code>objectCollection</code>是null或者empty,会返回empty ArrayList<br>
-     *         如果参数 <code>propertyName</code>是null或者empty,将会出现异常;
+     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #getPropertyValueCollection(Collection, String, Collection)
      * @since jdk1.5
      */
