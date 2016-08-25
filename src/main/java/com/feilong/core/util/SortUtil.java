@@ -690,9 +690,13 @@ public final class SortUtil{
     /**
      * 使用 基于 {@link java.util.Map.Entry Entry} 的 <code>mapEntryComparator</code> 来对 <code>map</code>进行排序.
      * 
-     * <p>
-     * 由于是对{@link java.util.Map.Entry Entry}排序的, 既可以按照key来排序,也可以按照value来排序哦
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>原 <code>map</code> 的顺序不变</li>
+     * <li>由于是对{@link java.util.Map.Entry Entry}排序的, 既可以按照key来排序,也可以按照value来排序哦</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -742,14 +746,6 @@ public final class SortUtil{
      * }
      * </pre>
      * 
-     * </blockquote>
-     * 
-     * 
-     * <h3>注意:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
-     * </ol>
      * </blockquote>
      * 
      * @param <K>
