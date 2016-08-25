@@ -41,7 +41,9 @@ import com.feilong.core.util.FeiLongUtilSuiteTests;
                 FeiLongLangSuiteTests.class,
                 FeiLongNetSuiteTests.class,
                 FeiLongTextSuiteTests.class,
-                FeiLongUtilSuiteTests.class })
+                FeiLongUtilSuiteTests.class
+        //
+})
 public class FeiLongSuiteTests{
 
 }

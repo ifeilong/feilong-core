@@ -19,19 +19,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.util.aggregateutiltest.FeiLongAggregateUtilSuiteTests;
 import com.feilong.core.util.collectionsutiltest.FeiLongCollectionsUtilSuiteTests;
 import com.feilong.core.util.maputiltest.FeiLongMapUtilSuiteTests;
 import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
 
-/**
- * The Class FeiLongUtilSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
- */
 @RunWith(Suite.class)
 @SuiteClasses({
-                AggregateUtilTest.class,
 
                 EnumerationUtilTest.class,
 
@@ -40,6 +34,7 @@ import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
                 ResourceBundleUtilTest.class,
                 SortUtilTest.class,
 
+                FeiLongAggregateUtilSuiteTests.class,
                 FeiLongRegexPatternSuiteTests.class,
                 FeiLongMapUtilSuiteTests.class,
                 FeiLongCollectionsUtilSuiteTests.class,
