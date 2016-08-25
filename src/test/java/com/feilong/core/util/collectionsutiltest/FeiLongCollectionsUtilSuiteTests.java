@@ -51,7 +51,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 CollectionsUtilRemoveDuplicateTest.class,
                 CollectionsUtilRemoveElementTest.class,
-                // CollectionsUtilRemoveAllCollectionTest.class,
+                CollectionsUtilRemoveAllCollectionTest.class,
                 CollectionsUtilRemoveAllPropertyNameArrayTest.class,
                 CollectionsUtilRemoveAllPropertyNameCollectionTest.class,
         //

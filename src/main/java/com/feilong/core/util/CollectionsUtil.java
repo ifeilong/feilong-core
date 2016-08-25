@@ -469,6 +469,27 @@ public final class CollectionsUtil{
      * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
      * </ol>
      * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 从list中删除 "feilong2","feilong1"元素
+     * </p>
+     * 
+     * <pre class="code">
+     * List{@code <String>} list = toList("xinge", "feilong1", "feilong2", "feilong2");
+     * List{@code <String>} removeList = CollectionsUtil.removeAll(list, toList("feilong2", "feilong1"));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * ["xinge"]
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
@@ -476,15 +497,16 @@ public final class CollectionsUtil{
      *            the collection from which items are removed (in the returned collection)
      * @param removeCollection
      *            the items to be removed from the returned <code>collection</code>
-     * @return the list
+     * @return 从 <code>objectCollection</code>中排除掉 <code>removeCollection</code> 元素的新的 list
      * @throws NullPointerException
-     *             如果 <code>objectCollection</code> 是null
+     *             如果 <code>objectCollection</code> 是null,或者 <code>removeCollection</code> 是null
      * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 4
      * @since 1.0.8
      */
     public static <O> List<O> removeAll(Collection<O> objectCollection,Collection<O> removeCollection){
         Validate.notNull(objectCollection, "objectCollection can't be null!");
+        Validate.notNull(removeCollection, "removeCollection can't be null!");
         return ListUtils.removeAll(objectCollection, removeCollection);
     }
 
