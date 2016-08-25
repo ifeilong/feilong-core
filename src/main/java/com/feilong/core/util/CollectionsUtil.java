@@ -1584,7 +1584,7 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>inputIterable</code>,将每个元素使用 <code>transformer</code> 转换成新的对象 返回<b>新的list</b>.
+     * 循环 <code>inputIterable</code>,将每个元素使用 <code>transformer</code> 转换成新的对象,返回<b>新的list</b>.
      * 
      * <h3>示例:</h3>
      * 
@@ -1600,14 +1600,14 @@ public final class CollectionsUtil{
      * 
      * Transformer{@code <String, Object>} nullTransformer = TransformerUtils.nullTransformer();
      * List{@code <Object>} collect = CollectionsUtil.collect(list, nullTransformer);
-     * LOGGER.info("list:{}", JsonUtil.format(collect, 0, 0));
+     * LOGGER.info(JsonUtil.format(collect, 0, 0));
      * 
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * list:[null,null,null,null]
+     * [null,null,null,null]
      * </pre>
      * 
      * </blockquote>
