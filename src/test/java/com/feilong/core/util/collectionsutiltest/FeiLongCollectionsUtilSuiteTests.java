@@ -47,7 +47,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 CollectionsUtilSelectRejectedArrayTest.class,
                 CollectionsUtilSelectRejectedCollectionTest.class,
-                // CollectionsUtilSelectRejectedPredicateTest.class,
+                CollectionsUtilSelectRejectedPredicateTest.class,
 
                 CollectionsUtilRemoveDuplicateTest.class,
                 CollectionsUtilRemoveElementTest.class,

@@ -1343,6 +1343,13 @@ public final class CollectionsUtil{
     /**
      * 按照指定的 {@link Predicate},返回查询出来的集合.
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>和该方法正好相反的是 {@link #selectRejected(Collection, Predicate)}</li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>示例1:</h3>
      * <blockquote>
      * 
@@ -1540,7 +1547,36 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code>,判断是否不匹配<code>predicate</code>,如果不匹配,将该对象存入list中返回.
+     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code>,判断是否不匹配<code>predicate</code>,<span style="color:red">如果不匹配</span>
+     * ,将该对象存入list中返回.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>和该方法正好相反的是 {@link #select(Collection, Predicate)}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 从list中查找不等于1的元素
+     * </p>
+     * 
+     * <pre class="code">
+     * List{@code <Long>} list = toList(1L, 1L, 2L, 3L);
+     * CollectionsUtil.selectRejected(list, new EqualPredicate{@code <Long>}(1L))
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * 2L, 3L
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
