@@ -13,53 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
-
-import java.net.URL;
+package com.feilong.core.net.urlutiltest;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * The Class URLUtilTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.4.0
- */
-public class URLUtilTest{
+import com.feilong.core.net.URLUtil;
+
+public class URLUtilToURLTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URLUtilTest.class);
-
-    /**
-     * Test get union url 1.
-     */
-    //****************com.feilong.core.net.URLUtil.getUnionUrl(URL, String)***********************
-    @Test
-    public void testGetUnionUrl1(){
-        LOGGER.debug(URLUtil.getUnionUrl(URLUtil.toURL("E:\\test"), "sanguo"));
-    }
-
-    /**
-     * Test get union url2.
-     */
-    @Test
-    public void testGetUnionUrl2(){
-        URL url = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
-        LOGGER.debug(URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/"));
-    }
-
-    /**
-     * Test to URI.
-     */
-    //************com.feilong.core.net.URLUtil.toURI(URL)**************
-    @Test
-    public void testToURI(){
-        URL url = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
-        LOGGER.debug("" + URLUtil.toURI(url));
-    }
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(URLUtilToURLTest.class);
     //***************com.feilong.core.net.URLUtil.toURL(String)**********
 
     /**

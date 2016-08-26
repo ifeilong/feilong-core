@@ -201,13 +201,16 @@ public final class URLUtil{
      *
      * @param url
      *            the url
-     * @return 如果 <code>url</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>url</code> 是null,返回null
      * @see "org.springframework.util.ResourceUtils#toURI(URL)"
      * @see java.net.URL#toURI()
      * @since 1.2.2
+     * @since 1.8.7 如果 null==url,返回null
      */
     public static URI toURI(URL url){
-        Validate.notNull(url, "url can't be null!");
+        if (null == url){
+            return null;
+        }
         try{
             return url.toURI();
         }catch (URISyntaxException e){

@@ -13,27 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
+package com.feilong.core.net.urlutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.net.urlutiltest.FeiLongURLUtilSuiteTests;
-
-/**
- * The Class FeiLongNetSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                ParamUtilTest.class,
-                FeiLongURLUtilSuiteTests.class,
-
+                URLUtilGetUnionUrlTest.class,
+                URLUtilToURITest.class,
+                URLUtilToURLTest.class,
         //                
 })
-public class FeiLongNetSuiteTests{
+public class FeiLongURLUtilSuiteTests{
 
 }
