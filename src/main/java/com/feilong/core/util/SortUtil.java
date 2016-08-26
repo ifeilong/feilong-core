@@ -272,7 +272,7 @@ public final class SortUtil{
      * List{@code <User>} list = CollectionsUtil.select(toList(liubei60, liubei30, liubei10, guanyu, liubei25), "name", names);
      * sortList(
      *                 list, //
-     *                 new PropertyComparator{@code <User>}("name", new FixedOrderComparator<>(names)),
+     *                 new PropertyComparator{@code <User>}("name", new FixedOrderComparator{@code <>}(names)),
      *                 new PropertyComparator{@code <User>}("age"));
      * </pre>
      * 
@@ -293,7 +293,7 @@ public final class SortUtil{
      * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>comparators</code> 是null或者empty,直接返回 <code>list</code><br>
      *         如果 <code>comparators length ==1</code>,取 comparators[0]做排序; <br>
-     *         如果 <code>comparators length {@code >} 1</code>,转成 {@link ComparatorUtils#chainedComparator(Comparator...)}排序;
+     *         如果 {@code comparators length > 1},转成 {@link ComparatorUtils#chainedComparator(Comparator...)}排序;
      * @see java.util.Collections#sort(List, Comparator)
      * @since 1.8.2
      * @since 1.8.7 change method name
@@ -431,6 +431,7 @@ public final class SortUtil{
      * 
      * <b>返回:</b>
      * 
+     * <pre class="code">
      * assertThat(resultList, contains(liubei, guanyu));
      * </pre>
      * 
