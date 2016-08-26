@@ -28,7 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 SortUtilSortByValueAscTest.class,
                 SortUtilSortByValueDescTest.class,
                 SortUtilSortListComparatorsTest.class,
-                SortUtilSortListPropertyNamesTest.class,
+                SortUtilSortByPropertyNamesValueTest.class,
                 SortUtilSortListTest.class,
         //
 })

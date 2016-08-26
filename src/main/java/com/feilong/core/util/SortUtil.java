@@ -250,7 +250,7 @@ public final class SortUtil{
      * </p>
      * 
      * <pre class="code">
-     * SortUtil.sort(list, "id");
+     * SortUtil.sortByPropertyNamesValue(list, "id");
      * </pre>
      * 
      * 
@@ -326,33 +326,39 @@ public final class SortUtil{
     //*****************************************************************************************
 
     /**
-     * 对 集合 <code>list</code>,指定属性(组合)进行排序.
+     * 对集合 <code>list</code>,按照指定属性的值(组合)进行排序.
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
-     * <pre class="code">
+     * <p>
+     * <b>场景:</b> 将user list 先按照 id 再按照 age 进行排序
+     * </p>
      * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User(12L, 18));
      * list.add(new User(2L, 36));
      * list.add(new User(2L, 2));
      * list.add(new User(2L, 30));
      * list.add(new User(1L, 8));
-     * SortUtil.sort(list, "id", "age");
-     * LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
      * 
+     * SortUtil.sortByPropertyNamesValue(list, "id", "age");
+     * 
+     * LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-        [{"id": 1,"age": 8},
-        {"id": 2,"age": 2},
-        {"id": 2,"age": 30},
-        {"id": 2,"age": 36},
-        {"id": 12,"age": 18}]
+     * [
+     * {"id": 1,"age": 8},
+     * {"id": 2,"age": 2},
+     * {"id": 2,"age": 30},
+     * {"id": 2,"age": 36},
+     * {"id": 12,"age": 18}
+     * ]
      * </pre>
      * 
      * </blockquote>
@@ -372,8 +378,10 @@ public final class SortUtil{
      * @see BeanComparatorUtil#chainedComparator(String...)
      * @see org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Comparator...)
      * @see #sort(List, Comparator...)
+     * 
+     * @since 1.8.7 change name
      */
-    public static <O> List<O> sort(List<O> list,String...propertyNames){
+    public static <O> List<O> sortByPropertyNamesValue(List<O> list,String...propertyNames){
         if (null == list){
             return emptyList();
         }
