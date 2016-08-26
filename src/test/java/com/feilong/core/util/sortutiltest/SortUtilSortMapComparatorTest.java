@@ -28,7 +28,7 @@ import org.junit.Test;
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 
-import static com.feilong.core.util.SortUtil.sort;
+import static com.feilong.core.util.SortUtil.sortMap;
 
 public class SortUtilSortMapComparatorTest{
 
@@ -43,7 +43,7 @@ public class SortUtilSortMapComparatorTest{
         map.put("a13", 123);
         map.put("a2", 345);
 
-        Map<String, Integer> sort = sort(
+        Map<String, Integer> sort = sortMap(
                         map,
                         new PropertyComparator<Map.Entry<String, Integer>>("key", new RegexGroupNumberComparator("a(\\d*)")));
         assertThat(sort.keySet(), contains("a2", "a8", "a13"));
@@ -57,13 +57,13 @@ public class SortUtilSortMapComparatorTest{
         map.put("a13", 123);
         map.put("a2", 345);
 
-        sort(map, null);
+        sortMap(map, null);
     }
 
     @Test
     public void testSortNullMap(){
         assertEquals(
                         emptyMap(),
-                        sort(null, new PropertyComparator<Map.Entry<String, Integer>>("key", new RegexGroupNumberComparator("a(\\d*)"))));
+                        sortMap(null, new PropertyComparator<Map.Entry<String, Integer>>("key", new RegexGroupNumberComparator("a(\\d*)"))));
     }
 }

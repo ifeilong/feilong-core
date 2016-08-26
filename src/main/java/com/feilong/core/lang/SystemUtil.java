@@ -23,7 +23,7 @@ import org.apache.commons.lang3.Validate;
 import com.feilong.core.bean.ConvertUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.util.SortUtil.sortByKeyAsc;
+import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 /**
  * {@link java.lang.System}工具类.
@@ -466,7 +466,7 @@ public final class SystemUtil{
      * @since 1.8.0 change name
      */
     public static Map<String, String> getEnvMap(){
-        return sortByKeyAsc(System.getenv());
+        return sortMapByKeyAsc(System.getenv());
     }
 
     /**

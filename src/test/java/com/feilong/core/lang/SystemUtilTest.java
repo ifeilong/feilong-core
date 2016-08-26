@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.tools.jsonlib.JsonUtil;
 
-import static com.feilong.core.util.SortUtil.sort;
+import static com.feilong.core.util.SortUtil.sortArray;
 
 /**
  * The Class SystemUtilTest.
@@ -50,7 +50,7 @@ public class SystemUtilTest{
     public void path(){
         String path = System.getenv("Path");
         String[] strings = path.split(";");
-        LOGGER.debug(JsonUtil.format(sort(strings)));
+        LOGGER.debug(JsonUtil.format(sortArray(strings)));
     }
 
     /**

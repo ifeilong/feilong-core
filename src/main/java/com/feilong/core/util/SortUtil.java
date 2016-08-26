@@ -82,7 +82,7 @@ public final class SortUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * sort(5, 10, 3, 2)  =   [2,3,5,10]
+     * sortArray(toArray(5, 10, 3, 2)  =   [2,3,5,10]
      * </pre>
      * 
      * </blockquote>
@@ -105,7 +105,7 @@ public final class SortUtil{
      * <pre class="code">
      * 
      * public static String toSalesPropertiesIdsJson(Long...itemPropertiesIdLongs){
-     *     return JsonUtil.format(sort(itemPropertiesIdLongs), 0, 0);
+     *     return JsonUtil.format(sortArray(itemPropertiesIdLongs), 0, 0);
      * }
      * </pre>
      * 
@@ -127,7 +127,7 @@ public final class SortUtil{
      * 
      * <span style="color:green">// 得到默认分类,目前是最小的</span>
      * private Long getDefaultCategoryId(Long[] categoriesIds){
-     *     return sort(categoriesIds)[0];
+     *     return sortArray(categoriesIds)[0];
      * }
      * </pre>
      * 
@@ -139,9 +139,9 @@ public final class SortUtil{
      *            the arrays
      * @return 如果 <code>array</code> 是null,返回 empty array<br>
      * @see java.util.Arrays#sort(Object[])
+     * @since 1.8.7 change T... to T[]
      */
-    @SafeVarargs
-    public static <T> T[] sort(T...arrays){
+    public static <T> T[] sortArray(T[] arrays){//此处定义为 T[] 而不是 T...,为了避免 jdk8以下的版本  sort(strs, fixedOrderComparator); 编译不通过
         if (null == arrays){
             return toArray();
         }
@@ -151,7 +151,7 @@ public final class SortUtil{
 
     /**
      * 对 数组 <code>arrays</code>使用 <code>comparator</code> 进行排序.
-     *
+     * 
      * @param <T>
      *            the generic type
      * @param arrays
@@ -162,9 +162,10 @@ public final class SortUtil{
      *         如果 <code>comparators</code> 是null或者empty,直接返回 <code>arrays</code><br>
      * @see java.util.Arrays#sort(Object[], Comparator)
      * @since 1.8.2 change to varargs parameter comparator
+     * @since 1.8.7 change method name
      */
     @SafeVarargs
-    public static <T> T[] sort(T[] arrays,Comparator<T>...comparators){
+    public static <T> T[] sortArray(T[] arrays,Comparator<T>...comparators){
         if (null == arrays){
             return toArray();
         }
@@ -192,7 +193,7 @@ public final class SortUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * sort(toList(5, 10, 3, 2))       = [2,3,5,10]
+     * sortList(toList(5, 10, 3, 2))       = [2,3,5,10]
      * </pre>
      * 
      * </blockquote>
@@ -203,8 +204,9 @@ public final class SortUtil{
      *            the list
      * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @see java.util.Collections#sort(List)
+     * @since 1.8.7 change method name
      */
-    public static <T extends Comparable<? super T>> List<T> sort(List<T> list){
+    public static <T extends Comparable<? super T>> List<T> sortList(List<T> list){
         if (null == list){
             return emptyList();
         }
@@ -230,7 +232,7 @@ public final class SortUtil{
      * list.add(new User(5L, 22));
      * list.add(new User(1L, 8));
      * 
-     * SortUtil.sort(list, new PropertyComparator{@code <User>}("id"));
+     * SortUtil.sortList(list, new PropertyComparator{@code <User>}("id"));
      * LOGGER.debug(JsonUtil.format(list));
      * </pre>
      * 
@@ -250,7 +252,7 @@ public final class SortUtil{
      * </p>
      * 
      * <pre class="code">
-     * SortUtil.sortByPropertyNamesValue(list, "id");
+     * {@link #sortListByPropertyNamesValue(List, String...) SortUtil.sortListByPropertyNamesValue(list, "id");}
      * </pre>
      * 
      * 
@@ -268,7 +270,7 @@ public final class SortUtil{
      * 
      * String[] names = { "刘备", "关羽" };
      * List{@code <User>} list = CollectionsUtil.select(toList(liubei60, liubei30, liubei10, guanyu, liubei25), "name", names);
-     * sort(
+     * sortList(
      *                 list, //
      *                 new PropertyComparator{@code <User>}("name", new FixedOrderComparator<>(names)),
      *                 new PropertyComparator{@code <User>}("age"));
@@ -294,9 +296,10 @@ public final class SortUtil{
      *         如果 <code>comparators length {@code >} 1</code>,转成 {@link ComparatorUtils#chainedComparator(Comparator...)}排序;
      * @see java.util.Collections#sort(List, Comparator)
      * @since 1.8.2
+     * @since 1.8.7 change method name
      */
     @SafeVarargs
-    public static <O> List<O> sort(List<O> list,Comparator<O>...comparators){
+    public static <O> List<O> sortList(List<O> list,Comparator<O>...comparators){
         if (null == list){
             return emptyList();
         }
@@ -344,7 +347,7 @@ public final class SortUtil{
      * list.add(new User(2L, 30));
      * list.add(new User(1L, 8));
      * 
-     * SortUtil.sortByPropertyNamesValue(list, "id", "age");
+     * SortUtil.sortListByPropertyNamesValue(list, "id", "age");
      * 
      * LOGGER.debug(JsonUtil.formatWithIncludes(list, "id", "age"));
      * </pre>
@@ -353,11 +356,11 @@ public final class SortUtil{
      * 
      * <pre class="code">
      * [
-     * {"id": 1,"age": 8},
-     * {"id": 2,"age": 2},
-     * {"id": 2,"age": 30},
-     * {"id": 2,"age": 36},
-     * {"id": 12,"age": 18}
+     *  {"id": 1,"age": 8},
+     *  {"id": 2,"age": 2},
+     *  {"id": 2,"age": 30},
+     *  {"id": 2,"age": 36},
+     *  {"id": 12,"age": 18}
      * ]
      * </pre>
      * 
@@ -377,18 +380,18 @@ public final class SortUtil{
      *             如果 <code>propertyNames</code> 是empty ,或者有 null元素
      * @see BeanComparatorUtil#chainedComparator(String...)
      * @see org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Comparator...)
-     * @see #sort(List, Comparator...)
+     * @see #sortList(List, Comparator...)
      * 
      * @since 1.8.7 change name
      */
-    public static <O> List<O> sortByPropertyNamesValue(List<O> list,String...propertyNames){
+    public static <O> List<O> sortListByPropertyNamesValue(List<O> list,String...propertyNames){
         if (null == list){
             return emptyList();
         }
         Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
         Validate.noNullElements(propertyNames, "propertyName:%s has empty value", propertyNames);
 
-        return sort(
+        return sortList(
                         list,
                         1 == propertyNames.length ? BeanComparatorUtil.<O> propertyComparator(propertyNames[0])
                                         : BeanComparatorUtil.<O> chainedComparator(propertyNames));
@@ -423,7 +426,7 @@ public final class SortUtil{
      * 
      * <pre class="code">
      * List{@code <User>} resultList = CollectionsUtil.select(list, "name", "刘备", "关羽");
-     * SortUtil.sortByFixedOrderPropertyValues(resultList, "name", "刘备", "关羽"));
+     * SortUtil.sortListByFixedOrderPropertyValueArray(resultList, "name", "刘备", "关羽"));
      * </pre>
      * 
      * <b>返回:</b>
@@ -450,16 +453,17 @@ public final class SortUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @see BeanComparatorUtil#propertyComparator(String, Object...)
-     * @see #sort(List, Comparator...)
+     * @see #sortList(List, Comparator...)
+     * @since 1.8.7 change method name
      */
     @SafeVarargs
-    public static <O, V> List<O> sortByFixedOrderPropertyValues(List<O> list,String propertyName,V...propertyValues){
+    public static <O, V> List<O> sortListByFixedOrderPropertyValueArray(List<O> list,String propertyName,V...propertyValues){
         if (null == list){
             return emptyList();
         }
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         Comparator<O> propertyComparator = BeanComparatorUtil.propertyComparator(propertyName, propertyValues);
-        return sort(list, propertyComparator);
+        return sortList(list, propertyComparator);
     }
 
     /**
@@ -481,7 +485,7 @@ public final class SortUtil{
      * List{@code <User>} list = toList(zhangfei, guanyu, liubei);
      * 
      * List{@code <User>} returnList = CollectionsUtil.select(list, "name", toList("刘备", "关羽"));
-     * returnList = sortByFixedOrderPropertyValues(returnList, "name", toList("刘备", "关羽"));
+     * returnList = sortListByFixedOrderPropertyValueList(returnList, "name", toList("刘备", "关羽"));
      * </pre>
      * 
      * <b>返回:</b>
@@ -509,16 +513,17 @@ public final class SortUtil{
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @see BeanComparatorUtil#propertyComparator(String, List)
-     * @see #sort(List, Comparator...)
+     * @see #sortList(List, Comparator...)
+     * @since 1.8.7 change method name
      */
-    public static <O, V> List<O> sortByFixedOrderPropertyValues(List<O> list,String propertyName,List<V> propertyValues){
+    public static <O, V> List<O> sortListByFixedOrderPropertyValueList(List<O> list,String propertyName,List<V> propertyValues){
         if (null == list){
             return emptyList();
         }
         Validate.notBlank(propertyName, "propertyName can't be blank!");
 
         Comparator<O> propertyComparator = BeanComparatorUtil.propertyComparator(propertyName, propertyValues);
-        return sort(list, propertyComparator);
+        return sortList(list, propertyComparator);
     }
 
     //*******************************排序****************************************************
@@ -548,7 +553,7 @@ public final class SortUtil{
      * map.put(null, 1345);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyAsc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortMapByKeyAsc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -573,12 +578,13 @@ public final class SortUtil{
      * @return 如果 <code>map</code> 是null,返回 {@link Collections#emptyMap()}<br>
      * @see java.util.TreeMap#TreeMap(Map)
      * @since 1.8.0 move from MapUtil
+     * @since 1.8.7 change method name
      */
-    public static <K, V> Map<K, V> sortByKeyAsc(Map<K, V> map){
+    public static <K, V> Map<K, V> sortMapByKeyAsc(Map<K, V> map){
         if (null == map){
             return emptyMap();
         }
-        return sort(map, new PropertyComparator<Map.Entry<K, V>>("key"));
+        return sortMap(map, new PropertyComparator<Map.Entry<K, V>>("key"));
     }
 
     /**
@@ -603,7 +609,7 @@ public final class SortUtil{
      * map.put(null, 88);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortByKeyDesc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortMapByKeyDesc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -628,14 +634,15 @@ public final class SortUtil{
      * @return 如果 <code>map</code> 是null,返回 {@link Collections#emptyMap()}<br>
      * @see ReverseComparator#ReverseComparator(Comparator)
      * @see PropertyComparator#PropertyComparator(String)
-     * @see #sort(Map, Comparator)
+     * @see #sortMap(Map, Comparator)
      * @since 1.8.0 move from MapUtil
+     * @since 1.8.7 change method name
      */
-    public static <K, V> Map<K, V> sortByKeyDesc(Map<K, V> map){
+    public static <K, V> Map<K, V> sortMapByKeyDesc(Map<K, V> map){
         if (null == map){
             return emptyMap();
         }
-        return sort(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("key")));
+        return sortMap(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("key")));
     }
 
     /**
@@ -656,7 +663,7 @@ public final class SortUtil{
      * map.put("a", 123);
      * map.put("c", 345);
      * map.put("b", 8);
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortByValueAsc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortMapByValueAsc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -678,14 +685,15 @@ public final class SortUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,返回 {@link Collections#emptyMap()}<br>
-     * @see #sort(Map, Comparator)
+     * @see #sortMap(Map, Comparator)
      * @since 1.8.0 move from MapUtil
+     * @since 1.8.7 change name from sortByValueAsc
      */
-    public static <K, V extends Comparable<V>> Map<K, V> sortByValueAsc(Map<K, V> map){
+    public static <K, V extends Comparable<V>> Map<K, V> sortMapByValueAsc(Map<K, V> map){
         if (null == map){
             return emptyMap();
         }
-        return sort(map, new PropertyComparator<Map.Entry<K, V>>("value"));
+        return sortMap(map, new PropertyComparator<Map.Entry<K, V>>("value"));
     }
 
     /**
@@ -708,7 +716,7 @@ public final class SortUtil{
      * map.put("c", 345);
      * map.put("b", 8);
      * 
-     * LOGGER.debug(JsonUtil.format(SortUtil.sortByValueDesc(map)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortMapByValueDesc(map)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -730,14 +738,15 @@ public final class SortUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,返回 {@link Collections#emptyMap()}<br>
-     * @see #sort(Map, Comparator)
+     * @see #sortMap(Map, Comparator)
      * @since 1.8.0 move from MapUtil
+     * @since 1.8.7 change method name from sortByValueDesc
      */
-    public static <K, V extends Comparable<V>> Map<K, V> sortByValueDesc(Map<K, V> map){
+    public static <K, V extends Comparable<V>> Map<K, V> sortMapByValueDesc(Map<K, V> map){
         if (null == map){
             return emptyMap();
         }
-        return sort(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("value")));
+        return sortMap(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("value")));
     }
 
     /**
@@ -757,7 +766,7 @@ public final class SortUtil{
      * 比如有以下的map
      * 
      * <pre class="code">
-     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * Map{@code <String, Integer>} map = new HashMap{@code <>}();
      * 
      * map.put("a13", 123);
      * map.put("a2", 345);
@@ -786,7 +795,7 @@ public final class SortUtil{
      * PropertyComparator{@code <Entry<String, Integer>>} propertyComparator = new PropertyComparator{@code <Map.Entry<String, Integer>>}(
      *                 "key",
      *                 new RegexGroupNumberComparator("a(\\d*)"));
-     * LOGGER.debug(JsonUtil.format(SortUtil.sort(map, propertyComparator)));
+     * LOGGER.debug(JsonUtil.format(SortUtil.sortMap(map, propertyComparator)));
      * </pre>
      * 
      * <b>返回:</b>
@@ -813,15 +822,16 @@ public final class SortUtil{
      *         如果 <code>mapEntryComparator</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.util.Collections#sort(List, Comparator)
      * @since 1.8.0 move from MapUtil
+     * @since 1.8.7 change method name from sort
      */
-    public static <K, V> Map<K, V> sort(Map<K, V> map,Comparator<Map.Entry<K, V>> mapEntryComparator){
+    public static <K, V> Map<K, V> sortMap(Map<K, V> map,Comparator<Map.Entry<K, V>> mapEntryComparator){
         if (null == map){
             return emptyMap();
         }
         Validate.notNull(mapEntryComparator, "mapEntryComparator can't be null!");
 
         List<Map.Entry<K, V>> mapEntryList = toList(map.entrySet());
-        return toMap(sort(mapEntryList, mapEntryComparator));
+        return toMap(sortList(mapEntryList, mapEntryComparator));
     }
 
 }

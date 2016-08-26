@@ -21,24 +21,24 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.util.SortUtil.sort;
+import static com.feilong.core.util.SortUtil.sortArray;
 
 public class SortUtilSortArrayTest{
 
     @Test
     public final void testSortArrayNullArray(){
-        assertEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sort((Object[]) null));
+        assertEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sortArray((Object[]) null));
     }
 
     @Test
     public final void testSortArrayNull(){
-        assertEquals(toArray((String) null), sort((String) null));
+        assertEquals(toArray((String) null), sortArray(toArray((String) null)));
     }
 
     @Test
     public final void testSortTArray(){
         Integer[] array = toArray(100, 2, 200, 1, 500);
-        sort(array);
+        sortArray(array);
         assertEquals(toArray(1, 2, 100, 200, 500), array);
     }
 }

@@ -1200,7 +1200,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * <p>
      * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValues</code> 无关,如果你需要结果里面的元素按照指定的<code>propertyValues</code>
-     * 顺序排序的话,可以将结果再调用{@link SortUtil#sortByFixedOrderPropertyValues(List, String, Object...)}
+     * 顺序排序的话,可以将结果再调用{@link SortUtil#sortListByFixedOrderPropertyValueArray(List, String, Object...)}
      * </p>
      * </blockquote>
      * 
@@ -1265,7 +1265,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * <ol>
      * <li>查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关,如果你需要结果里面的元素按照指定的
-     * <code>propertyValueList</code>顺序排序的话,可以将结果再调用{@link SortUtil#sortByFixedOrderPropertyValues(List, String, List)}</li>
+     * <code>propertyValueList</code>顺序排序的话,可以将结果再调用{@link SortUtil#sortListByFixedOrderPropertyValueList(List, String, List)}</li>
      * <li>和该方法正好相反的是 {@link #selectRejected(Collection, String, Collection)}</li>
      * </ol>
      * </blockquote>

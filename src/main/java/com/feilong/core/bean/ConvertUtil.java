@@ -62,7 +62,7 @@ import com.feilong.core.util.SortUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.util.SortUtil.sortByKeyAsc;
+import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 /**
  * 常用类型转换处理.
@@ -1572,7 +1572,7 @@ public final class ConvertUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回的map 经过了 {@link SortUtil#sortByKeyAsc(Map)}排序处理,方便输出日志</li>
+     * <li>返回的map 经过了 {@link SortUtil#sortMapByKeyAsc(Map)}排序处理,方便输出日志</li>
      * </ol>
      * </blockquote>
      * 
@@ -1599,7 +1599,7 @@ public final class ConvertUtil{
         if (isNullOrEmpty(properties)){
             return emptyMap();
         }
-        return sortByKeyAsc((Map) properties);//为了log方便,使用 treeMap
+        return sortMapByKeyAsc((Map) properties);//为了log方便,使用 treeMap
     }
 
     /**

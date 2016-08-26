@@ -46,7 +46,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.util.SortUtil.sortByKeyAsc;
+import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 /**
  * 处理参数相关.
@@ -449,7 +449,7 @@ public final class ParamUtil{
      * 
      * <blockquote>
      * <p>
-     * 首先将<code>singleValueMap</code> 使用 {@link SortUtil#sortByKeyAsc(Map)} 进行排序,<br>
+     * 首先将<code>singleValueMap</code> 使用 {@link SortUtil#sortMapByKeyAsc(Map)} 进行排序,<br>
      * 然后将map的key和value 使用= 符号 连接,<br>
      * 不同的entry之间再使用{@code &} 符号进行连接,最终格式类似于 url 的queryString,
      * </p>
@@ -504,7 +504,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
-        return null == singleValueMap ? EMPTY : toQueryStringUseSingleValueMap(sortByKeyAsc(singleValueMap));
+        return null == singleValueMap ? EMPTY : toQueryStringUseSingleValueMap(sortMapByKeyAsc(singleValueMap));
     }
 
     /**
