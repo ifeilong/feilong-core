@@ -180,25 +180,19 @@ public final class SortUtil{
     /**
      * 对 集合 <code>list</code> 进行排序.
      * 
-     * <p>
-     * {@link java.util.Collections#sort(List) Collections.sort} 底层就是调用的是 {@link java.util.Arrays#sort(Object[]) Arrays.sort}
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@link java.util.Collections#sort(List) Collections.sort} 底层就是调用的是 {@link java.util.Arrays#sort(Object[]) Arrays.sort}</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
-     * List{@code <Integer>} list = toList(5, 10, 3, 2);
-     * LOGGER.debug(JsonUtil.format(sort(list), 0, 0));
-     * 
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * [2,3,5,10]
+     * sort(toList(5, 10, 3, 2))       = [2,3,5,10]
      * </pre>
      * 
      * </blockquote>
