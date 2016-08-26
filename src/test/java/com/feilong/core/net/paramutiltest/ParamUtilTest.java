@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
+package com.feilong.core.net.paramutiltest;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.hamcrest.Matchers.allOf;
@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.net.ParamUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
@@ -218,33 +219,6 @@ public class ParamUtilTest{
         LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("a=", UTF8)));
         LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("a=1&", UTF8)));
         LOGGER.debug(JsonUtil.format(ParamUtil.toSingleValueMap("", UTF8)));
-    }
-
-    /**
-     * Parses the query to value map1.
-     */
-    @Test
-    public void testToSafeArrayValueMap(){
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a", UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=&b=2&a", UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1&b=2&a=5", UTF8)));
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap("a=1=2&b=2&a=5", UTF8)));
-    }
-
-    /**
-     * Test to safe array value map1.
-     */
-    @Test
-    public void testToSafeArrayValueMap1(){
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a& &", UTF8)));
-    }
-
-    /**
-     * Test to safe array value map2.
-     */
-    @Test
-    public void testToSafeArrayValueMap2(){
-        LOGGER.debug(JsonUtil.format(ParamUtil.toSafeArrayValueMap(" a", UTF8)));
     }
 
     /**
