@@ -22,14 +22,18 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                SortUtilSortArrayComparatorsTest.class,
                 SortUtilSortArrayTest.class,
-                SortUtilSortByKeyAscTest.class,
-                SortUtilSortByKeyDescTest.class,
-                SortUtilSortByValueAscTest.class,
-                SortUtilSortByValueDescTest.class,
+                SortUtilSortListByFixedOrderArrayPropertyValuesTest.class,
+                SortUtilSortListByFixedOrderListPropertyValuesTest.class,
+                SortUtilSortListByPropertyNamesValueTest.class,
                 SortUtilSortListComparatorsTest.class,
-                SortUtilSortByPropertyNamesValueTest.class,
                 SortUtilSortListTest.class,
+                SortUtilSortMapByKeyAscTest.class,
+                SortUtilSortMapByKeyDescTest.class,
+                SortUtilSortMapByValueAscTest.class,
+                SortUtilSortMapByValueDescTest.class,
+                SortUtilSortMapComparatorTest.class,
         //
 })
 public class FeiLongSortUtilSuiteTests{
