@@ -395,38 +395,32 @@ public final class SortUtil{
      * 
      * <blockquote>
      * 
-     * <pre class="code">
+     * <p>
+     * <b>场景:</b> 将user list中 "刘备" 排在 "关羽"前面
+     * </p>
      * 
+     * <pre class="code">
      * User zhangfei = new User("张飞", 23);
      * User guanyu = new User("关羽", 30);
      * User liubei = new User("刘备", 25);
      * List{@code <User>} list = toList(zhangfei, guanyu, liubei);
      * 
-     * List{@code <User>} select = CollectionsUtil.select(list, "name", "刘备", "关羽");
-     * Collections.sort(select, new PropertyComparator{@code <User>}("name", new FixedOrderComparator{@code <>}("刘备", "关羽")));
-     * LOGGER.debug(JsonUtil.formatWithIncludes(select, "name", "age"));
-     * 
+     * List{@code <User>} resultList = CollectionsUtil.select(list, "name", "刘备", "关羽");
+     * Collections.sort(resultList, new PropertyComparator{@code <User>}("name", new FixedOrderComparator{@code <>}("刘备", "关羽")));
      * </pre>
      * 
+     * <p>
      * 此时你可以直接调用:
+     * </p>
      * 
      * <pre class="code">
-     * 
-     * List{@code <User>} select2 = CollectionsUtil.select(list, "name", "刘备", "关羽");
-     * LOGGER.debug(JsonUtil.formatWithIncludes(SortUtil.sortByFixedOrderPropertyValues(select2, "name", "刘备", "关羽"), "name", "age"));
-     * 
+     * List{@code <User>} resultList = CollectionsUtil.select(list, "name", "刘备", "关羽");
+     * SortUtil.sortByFixedOrderPropertyValues(resultList, "name", "刘备", "关羽"));
      * </pre>
      * 
      * <b>返回:</b>
      * 
-     * <pre class="code">
-    [{
-                "age": 25,
-                "name": "刘备"
-            },{
-                "age": 30,
-                "name": "关羽"
-     }]
+     * assertThat(resultList, contains(liubei, guanyu));
      * </pre>
      * 
      * </blockquote>
@@ -444,7 +438,7 @@ public final class SortUtil{
      *            the property values
      * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @throws NullPointerException
-     *             如果 <code>propertyName</code> 是null
+     *             如果 <code>propertyName</code> 是null,或者 <code>propertyValues</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @see BeanComparatorUtil#propertyComparator(String, Object...)
