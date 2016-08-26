@@ -82,13 +82,7 @@ public final class SortUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(sort(5, 10, 3, 2), 0, 0));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * [2,3,5,10]
+     * sort(5, 10, 3, 2)  =   [2,3,5,10]
      * </pre>
      * 
      * </blockquote>
