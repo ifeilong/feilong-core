@@ -64,6 +64,7 @@ public class RegexGroupNumberComparator implements Comparator<String>,Serializab
 
     /**
      * The Constructor.
+     * 
      * <p style="color:red">
      * 默认会提取正则表达式中的第一个group 转成int 类型进行比较
      * </p>
