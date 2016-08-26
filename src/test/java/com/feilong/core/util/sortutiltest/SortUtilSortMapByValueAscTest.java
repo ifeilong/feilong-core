@@ -16,9 +16,7 @@
 package com.feilong.core.util.sortutiltest;
 
 import static java.util.Collections.emptyMap;
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -27,29 +25,26 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import static com.feilong.core.util.SortUtil.sortByKeyDesc;
+import static com.feilong.core.util.SortUtil.sortMapByValueAsc;
 
-public class SortUtilSortByKeyDescTest{
-
-    //**************com.feilong.core.util.SortUtil.sortByKeyDesc(Map<String, Integer>)**************************
-    @Test
-    public void testSortByKeyDescNullMap(){
-        assertEquals(emptyMap(), sortByKeyDesc(null));
-    }
+public class SortUtilSortMapByValueAscTest{
 
     /**
-     * Test sort by key desc.
+     * Test sort by value asc.
      */
     @Test
-    public void testSortByKeyDesc(){
+    public void testSortByValueASC(){
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("a", 123);
-        map.put(null, 8);
         map.put("c", 345);
         map.put("b", 8);
-
-        Map<String, Integer> sortByKeyDesc = sortByKeyDesc(map);
-        assertThat(sortByKeyDesc.keySet(), contains("c", "b", "a", null));
-        assertThat(map, allOf(hasEntry("c", 345), hasEntry("b", 8), hasEntry("a", 123), hasEntry(null, 8)));
+        Map<String, Integer> sortByValueAsc = sortMapByValueAsc(map);
+        assertThat(sortByValueAsc.keySet(), contains("b", "a", "c"));
     }
+
+    @Test
+    public void testSortByValueASCNullMap(){
+        assertEquals(emptyMap(), sortMapByValueAsc(null));
+    }
+
 }

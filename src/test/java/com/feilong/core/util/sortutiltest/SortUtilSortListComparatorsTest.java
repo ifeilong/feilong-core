@@ -32,7 +32,7 @@ import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.SortUtil.sort;
+import static com.feilong.core.util.SortUtil.sortList;
 
 public class SortUtilSortListComparatorsTest{
 
@@ -44,7 +44,7 @@ public class SortUtilSortListComparatorsTest{
 
         String[] names = { "刘备", "关羽" };
         List<User> list = CollectionsUtil.select(toList(zhangfei, guanyu, liubei), "name", names);
-        sort(list, new PropertyComparator<User>("name", new FixedOrderComparator<>(names)));
+        sortList(list, new PropertyComparator<User>("name", new FixedOrderComparator<>(names)));
 
         assertThat(list, contains(liubei, guanyu));
     }
@@ -60,7 +60,7 @@ public class SortUtilSortListComparatorsTest{
 
         String[] names = { "刘备", "关羽" };
         List<User> list = CollectionsUtil.select(toList(liubei60, liubei30, liubei10, guanyu, liubei25), "name", names);
-        sort(
+        sortList(
                         list, //
                         new PropertyComparator<User>("name", new FixedOrderComparator<>(names)),
                         new PropertyComparator<User>("age"));
@@ -70,24 +70,24 @@ public class SortUtilSortListComparatorsTest{
 
     @Test
     public void testSortListNullList(){
-        assertEquals(emptyList(), sort(null, (Comparator) null));
+        assertEquals(emptyList(), sortList((List) null, (Comparator) null));
     }
 
     @Test
     public void testSortListEmptyList(){
-        assertEquals(emptyList(), sort(new ArrayList<>(), (Comparator) null));
+        assertEquals(emptyList(), sortList(new ArrayList<>(), (Comparator) null));
     }
 
     @Test
     public void testSortListNullComparators(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
-        assertEquals(list, sort(list, (Comparator[]) null));
+        assertEquals(list, sortList(list, (Comparator[]) null));
     }
 
     @Test
     public void testSortListNullComparator(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
-        assertEquals(list, sort(list, (Comparator) null));
+        assertEquals(list, sortList(list, (Comparator) null));
     }
 
 }

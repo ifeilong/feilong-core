@@ -28,9 +28,9 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.SortUtil.sortByPropertyNamesValue;
+import static com.feilong.core.util.SortUtil.sortListByPropertyNamesValue;
 
-public class SortUtilSortByPropertyNamesValueTest{
+public class SortUtilSortListByPropertyNamesValueTest{
 
     /**
      * Test property comparator.
@@ -44,7 +44,7 @@ public class SortUtilSortByPropertyNamesValueTest{
         User id1 = new User(1L);
 
         List<User> list = toList(u_null_id, id12, id2, u_null, id1, u_null_id);
-        sortByPropertyNamesValue(list, "id");
+        sortListByPropertyNamesValue(list, "id");
         assertThat(list, contains(u_null_id, u_null_id, id1, id2, id12, u_null));
     }
 
@@ -58,7 +58,7 @@ public class SortUtilSortByPropertyNamesValueTest{
         User id5 = new User(5L, 22);
         User id1 = new User(1L, 8);
         List<User> list = toList(id12, id2, id5, id1);
-        sortByPropertyNamesValue(list, "id");
+        sortListByPropertyNamesValue(list, "id");
 
         assertThat(list, contains(id1, id2, id5, id12));
     }
@@ -72,7 +72,7 @@ public class SortUtilSortByPropertyNamesValueTest{
         User id2_age36 = new User(2L, 36);
         List<User> list = toList(id12_age18, id2_age36, id2_age2, id2_age30, id1_age8);
 
-        sortByPropertyNamesValue(list, "id", "age");
+        sortListByPropertyNamesValue(list, "id", "age");
         assertThat(list, contains(id1_age8, id2_age2, id2_age30, id2_age36, id12_age18));
     }
 
@@ -85,19 +85,19 @@ public class SortUtilSortByPropertyNamesValueTest{
         User id2_age36 = new User(2L, 36);
         List<User> list = toList(id12_age18, id2_age36, id2_age2, id2_age30, id1_age8);
 
-        sortByPropertyNamesValue(list, "age");
+        sortListByPropertyNamesValue(list, "age");
 
         assertThat(list, contains(id2_age2, id1_age8, id12_age18, id2_age30, id2_age36));
     }
 
     @Test
     public final void testSortByPropertyNamesValueNullList1PropertyName(){
-        assertEquals(emptyList(), sortByPropertyNamesValue((List) null, "name"));
+        assertEquals(emptyList(), sortListByPropertyNamesValue((List) null, "name"));
     }
 
     @Test
     public final void testSortByPropertyNamesValueNullList(){
-        assertEquals(emptyList(), sortByPropertyNamesValue((List) null, "name", "age"));
+        assertEquals(emptyList(), sortListByPropertyNamesValue((List) null, "name", "age"));
     }
 
     @Test(expected = NullPointerException.class)
@@ -105,7 +105,7 @@ public class SortUtilSortByPropertyNamesValueTest{
         User id12_age18 = new User(12L, 18);
         User id1_age8 = new User(1L, 8);
         List<User> list = toList(id12_age18, id1_age8);
-        sortByPropertyNamesValue(list, null);
+        sortListByPropertyNamesValue(list, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -113,7 +113,7 @@ public class SortUtilSortByPropertyNamesValueTest{
         User id12_age18 = new User(12L, 18);
         User id1_age8 = new User(1L, 8);
         List<User> list = toList(id12_age18, id1_age8);
-        sortByPropertyNamesValue(list, ConvertUtil.<String> toArray());
+        sortListByPropertyNamesValue(list, ConvertUtil.<String> toArray());
     }
 
     //    @Test(expected = IllegalArgumentException.class)

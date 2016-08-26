@@ -25,18 +25,18 @@ import java.util.List;
 import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.SortUtil.sort;
+import static com.feilong.core.util.SortUtil.sortList;
 
 public class SortUtilSortListTest{
 
     @Test
     public void testSortList(){
         List<Integer> list = toList(5, 10, 3, 2);
-        assertThat(sort(list), contains(2, 3, 5, 10));
+        assertThat(sortList(list), contains(2, 3, 5, 10));
     }
 
     @Test
     public final void testSortListNullList(){
-        assertEquals(emptyList(), sort((List) null));
+        assertEquals(emptyList(), sortList((List) null));
     }
 }

@@ -28,9 +28,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import static com.feilong.core.util.SortUtil.sortByKeyAsc;
+import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
-public class SortUtilSortByKeyAscTest{
+public class SortUtilSortMapByKeyAscTest{
 
     /**
      * Test sort by key asc.
@@ -45,7 +45,7 @@ public class SortUtilSortByKeyAscTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        Map<String, Integer> sortByKeyAsc = sortByKeyAsc(map);
+        Map<String, Integer> sortByKeyAsc = sortMapByKeyAsc(map);
 
         assertThat(sortByKeyAsc.keySet(), contains(null, "a", "b", "c", "d"));
         assertThat(
@@ -56,7 +56,7 @@ public class SortUtilSortByKeyAscTest{
     //************com.feilong.core.util.SortUtil.sortByKeyAsc(Map<String, Integer>)*****************************
     @Test
     public void testSortByKeyAscNullMap(){
-        assertEquals(emptyMap(), sortByKeyAsc(null));
+        assertEquals(emptyMap(), sortMapByKeyAsc(null));
     }
 
     /**
@@ -64,8 +64,8 @@ public class SortUtilSortByKeyAscTest{
      */
     @Test
     public void testSortByKeyAsc2(){
-        assertEquals(emptyMap(), sortByKeyAsc(emptyMap()));
-        assertEquals(emptyMap(), sortByKeyAsc(new HashMap<>()));
+        assertEquals(emptyMap(), sortMapByKeyAsc(emptyMap()));
+        assertEquals(emptyMap(), sortMapByKeyAsc(new HashMap<>()));
     }
 
     /**
@@ -81,7 +81,7 @@ public class SortUtilSortByKeyAscTest{
 
         assertThat(map.keySet(), contains("a8", "a13", "a2"));
 
-        Map<String, Integer> sortByKeyAsc = sortByKeyAsc(map);
+        Map<String, Integer> sortByKeyAsc = sortMapByKeyAsc(map);
         assertThat(sortByKeyAsc.keySet(), contains("a13", "a2", "a8"));
         assertThat(map.keySet(), contains("a8", "a13", "a2"));
     }

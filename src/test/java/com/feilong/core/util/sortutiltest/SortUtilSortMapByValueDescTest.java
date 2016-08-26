@@ -25,9 +25,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import static com.feilong.core.util.SortUtil.sortByValueDesc;
+import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
 
-public class SortUtilSortByValueDescTest{
+public class SortUtilSortMapByValueDescTest{
 
     @Test
     public void testSortByValueDesc(){
@@ -36,11 +36,11 @@ public class SortUtilSortByValueDescTest{
         map.put("c", 345);
         map.put("b", 8);
 
-        assertThat(sortByValueDesc(map).keySet(), contains("c", "a", "b"));
+        assertThat(sortMapByValueDesc(map).keySet(), contains("c", "a", "b"));
     }
 
     @Test
     public void testSortByValueDescNullMap(){
-        assertEquals(emptyMap(), sortByValueDesc(null));
+        assertEquals(emptyMap(), sortMapByValueDesc(null));
     }
 }
