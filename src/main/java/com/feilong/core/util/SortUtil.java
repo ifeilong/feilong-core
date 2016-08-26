@@ -213,37 +213,71 @@ public final class SortUtil{
     }
 
     /**
-     * 对集合 <code>list</code>,使用指定的 <code>comparator</code> 进行排序.
+     * 对集合 <code>list</code>,使用指定的 <code>comparators</code> 进行排序.
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
-     * <pre class="code">
+     * <p>
+     * <b>场景:</b> 将 user list 按照 id进行排序
+     * </p>
      * 
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User(12L, 18));
      * list.add(new User(2L, 36));
      * list.add(new User(5L, 22));
      * list.add(new User(1L, 8));
+     * 
      * SortUtil.sort(list, new PropertyComparator{@code <User>}("id"));
      * LOGGER.debug(JsonUtil.format(list));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * [{"id": 1,"age": 8},
-     * {"id": 2,"age": 36},
-     * {"id": 5,"age": 22},
-     * {"id": 12,"age": 18}]
+     * [
+     *  {"id": 1,"age": 8},
+     *  {"id": 2,"age": 36},
+     *  {"id": 5,"age": 22},
+     *  {"id": 12,"age": 18}
+     * ]
      * </pre>
      * 
+     * <p>
      * 当然对于上述示例,你可以直接调用:
+     * </p>
      * 
      * <pre class="code">
      * SortUtil.sort(list, "id");
+     * </pre>
+     * 
+     * 
+     * <p>
+     * <b>我们再来个复杂点的例子:</b> 将 user list 按照 "刘备" 排在 "关羽" 前面 进行排序,如果名字相同再按照 age进行排序
+     * </p>
+     * 
+     * <pre class="code">
+     * User guanyu = new User("关羽", 30);
+     * 
+     * User liubei60 = new User("刘备", 60);
+     * User liubei25 = new User("刘备", 25);
+     * User liubei30 = new User("刘备", 30);
+     * User liubei10 = new User("刘备", 10);
+     * 
+     * String[] names = { "刘备", "关羽" };
+     * List{@code <User>} list = CollectionsUtil.select(toList(liubei60, liubei30, liubei10, guanyu, liubei25), "name", names);
+     * sort(
+     *                 list, //
+     *                 new PropertyComparator{@code <User>}("name", new FixedOrderComparator<>(names)),
+     *                 new PropertyComparator{@code <User>}("age"));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * assertThat(list, contains(liubei10, liubei25, liubei30, liubei60, guanyu));
      * </pre>
      * 
      * </blockquote>
@@ -256,6 +290,8 @@ public final class SortUtil{
      *            the comparators
      * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>comparators</code> 是null或者empty,直接返回 <code>list</code><br>
+     *         如果 <code>comparators length ==1</code>,取 comparators[0]做排序; <br>
+     *         如果 <code>comparators length {@code >} 1</code>,转成 {@link ComparatorUtils#chainedComparator(Comparator...)}排序;
      * @see java.util.Collections#sort(List, Comparator)
      * @since 1.8.2
      */
