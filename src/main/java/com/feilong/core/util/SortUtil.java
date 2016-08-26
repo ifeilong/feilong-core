@@ -456,6 +456,33 @@ public final class SortUtil{
 
     /**
      * 对 集合 <code>list</code>,属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code> 进行排序.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 将user list中 "刘备" 排在 "关羽"前面
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * User zhangfei = new User("张飞", 23);
+     * User guanyu = new User("关羽", 30);
+     * User liubei = new User("刘备", 25);
+     * List{@code <User>} list = toList(zhangfei, guanyu, liubei);
+     * 
+     * List{@code <User>} returnList = CollectionsUtil.select(list, "name", toList("刘备", "关羽"));
+     * returnList = sortByFixedOrderPropertyValues(returnList, "name", toList("刘备", "关羽"));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * assertThat(returnList, contains(liubei, guanyu));
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <O>
      *            the generic type
