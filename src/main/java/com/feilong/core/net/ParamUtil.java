@@ -118,7 +118,7 @@ public final class ParamUtil{
      * 
      * <pre class="code">
      * String beforeUrl = "www.baidu.com";
-     * Map{@code <String, String>} keyAndArrayMap = new LinkedHashMap{@code <String, String>}();
+     * Map{@code <String, String>} keyAndArrayMap = new LinkedHashMap{@code <>}();
      * 
      * keyAndArrayMap.put("province", "江苏省");
      * keyAndArrayMap.put("city", "南通市");
@@ -138,7 +138,7 @@ public final class ParamUtil{
      * 
      * <pre class="code">
      * String beforeUrl = "www.baidu.com?a=b";
-     * Map{@code <String, String>} keyAndArrayMap = new LinkedHashMap{@code <String, String>}();
+     * Map{@code <String, String>} keyAndArrayMap = new LinkedHashMap{@code <>}();
      * 
      * keyAndArrayMap.put("province", "江苏省");
      * keyAndArrayMap.put("city", "南通市");
@@ -182,7 +182,7 @@ public final class ParamUtil{
      * 
      * <pre class="code">
      * String beforeUrl = "www.baidu.com";
-     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <>}();
      * 
      * keyAndArrayMap.put("receiver", new String[] { "鑫哥", "feilong" });
      * keyAndArrayMap.put("province", new String[] { "江苏省" });
@@ -204,7 +204,7 @@ public final class ParamUtil{
      * 
      * <pre class="code">
      * String beforeUrl = "www.baidu.com?a=b";
-     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <>}();
      * keyAndArrayMap.put("province", new String[] { "江苏省" });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
      * LOGGER.info(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
@@ -239,9 +239,12 @@ public final class ParamUtil{
     /**
      * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType不是null或者empty 返回安全的 key和value).
      * 
-     * <p>
-     * 内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -282,15 +285,15 @@ public final class ParamUtil{
     }
 
     /**
-     * 将{@code a=1&b=2}这样格式的数据转换成map (如果charsetType 不是null或者empty 返回安全的 key和value).
+     * 将{@code a=1&b=2}这样格式的数据转换成map (如果<code>charsetType</code> 不是null或者empty 返回安全的 key和value).
      * 
-     * <p>
-     * 内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序
-     * </p>
-     * 
-     * <p>
-     * 解析方式:参数和参数之间是以 {@code &} 分隔, 参数的key和value 是以 = 号分隔
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>内部使用 {@link LinkedHashMap},map顺序依照 <code>queryString</code> 逗号分隔的顺序</li>
+     * <li>解析方式:参数和参数之间是以 {@code &} 分隔, 参数的key和value 是以 = 号分隔</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例1:</h3>
      * <blockquote>
@@ -364,9 +367,12 @@ public final class ParamUtil{
     /**
      * 将map混合成 queryString.
      * 
-     * <p>
-     * 返回的queryString参数顺序,按照传入的singleValueMap key顺序排列,可以考虑传入 {@link TreeMap},{@link LinkedHashMap}等以适应不同业务的需求
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的queryString参数顺序,按照传入的singleValueMap key顺序排列,可以考虑传入 {@link TreeMap},{@link LinkedHashMap}等以适应不同业务的需求</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -374,7 +380,7 @@ public final class ParamUtil{
      * 对于以下的map,
      * 
      * <pre class="code">
-     * Map{@code <String, String[]>} keyAndArrayMap = new HashMap{@code <String, String[]>}();
+     * Map{@code <String, String[]>} keyAndArrayMap = new HashMap{@code <>}();
      * keyAndArrayMap.put("name", new String[] { "jim", "feilong", "鑫哥" });
      * keyAndArrayMap.put("age", new String[] { "18" });
      * keyAndArrayMap.put("love", new String[] { "sanguo" });
@@ -510,16 +516,23 @@ public final class ParamUtil{
     /**
      * 将<code>singleValueMap</code>转成 queryString.
      * 
-     * <p>
-     * 只是简单的将map的key value 按照 <code>singleValueMap</code>的顺序 连接起来,最终格式类似于 url 的queryString,
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 只是简单的将map的key value 按照 <code>singleValueMap</code>的顺序 连接起来,最终格式类似于 url 的queryString,<br>
      * 比如,参数名字<code>param Name=name</code>,<code>param Value=zhangfei</code>,那么返回值是 <code>name=zhangfei</code>
-     * </p>
+     * </li>
+     * <li>如果<code>singleValueMap</code>有key 是null,将使用 {@link StringUtils#EMPTY} 进行拼接</li>
+     * <li>如果<code>singleValueMap</code>有value 是null,将使用 {@link StringUtils#EMPTY} 进行拼接</li>
+     * </ol>
+     * </blockquote>
      * 
-     * <h3>示例:</h3>
+     * <h3>示例1:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <String, String>}();
+     * Map{@code <String, String>} singleValueMap = new LinkedHashMap{@code <>}();
      * 
      * singleValueMap.put("province", "江苏省");
      * singleValueMap.put("city", "南通市");
@@ -534,11 +547,32 @@ public final class ParamUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <h3>示例2:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = new LinkedHashMap<>();
+     * map.put(null, null);
+     * map.put("a", "");
+     * map.put("b", null);
+     * map.put("c", "jim");
+     * 
+     * LOGGER.info(ParamUtil.toQueryStringUseSingleValueMap(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {@code =&a=&b=&c=jim}
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param singleValueMap
      *            the params map
      * @return 如果<code>singleValueMap</code>是 null或者empty,返回 {@link StringUtils#EMPTY} <br>
-     *         否则 将 <code>singleValueMap</code> 转成 {@link MapUtil#toArrayValueMap(Map)},再调用 {@link #toQueryStringUseArrayValueMap(Map)}
+     *         否则将 <code>singleValueMap</code> 转成 {@link MapUtil#toArrayValueMap(Map)},再调用 {@link #toQueryStringUseArrayValueMap(Map)}
      * @see MapUtil#toArrayValueMap(Map)
      * @see #toQueryStringUseArrayValueMap(Map)
      * @see <a href="http://www.leveluplunch.com/java/examples/build-convert-map-to-query-string/">build-convert-map-to-query-string</a>
@@ -748,13 +782,10 @@ public final class ParamUtil{
     /**
      * 将参数和多值连接起来.
      * 
-     * <p>
-     * 比如,参数名字 {@code paramName=name}, {@code paramValues 为 zhangfei,guanyu},那么返回值是{@code name=zhangfei&name=guanyu}
-     * </p>
-     * 
-     * <h3>注意:</h3>
+     * <h3>说明:</h3>
      * <blockquote>
      * <ol>
+     * <li>比如,参数名字 {@code paramName=name}, {@code paramValues 为 zhangfei,guanyu},那么返回值是{@code name=zhangfei&name=guanyu}</li>
      * <li>paramName 和每个值 都会调用 {@link StringUtils#defaultString(String)}转换后才进行拼接</li>
      * </ol>
      * </blockquote>
