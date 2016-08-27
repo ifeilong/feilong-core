@@ -585,20 +585,22 @@ public final class ParamUtil{
     /**
      * 只是简单的将map的key value 连接起来,最终格式类似于 url 的queryString.
      * 
-     * <h3>注意点:</h3>
+     * <h3>注意:</h3>
      * 
      * <blockquote>
      * <ul>
      * <li>该方法<span style="color:red">不会执行encode操作</span>,使用原生值进行拼接</li>
      * <li>按照传入的map key顺序进行排序,不会自行自动排序转换;如有有业务需求,先行排序完传入进来</li>
+     * <li>如果<code>arrayValueMap</code>有key 是null,将使用 {@link StringUtils#EMPTY} 进行拼接</li>
+     * <li>如果<code>arrayValueMap</code>有value的元素是null,将使用 {@link StringUtils#EMPTY} 进行拼接</li>
      * </ul>
      * </blockquote>
      * 
-     * <h3>示例:</h3>
+     * <h3>示例1:</h3>
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <String, String[]>}();
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <>}();
      * 
      * keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
      * keyAndArrayMap.put("city", new String[] { "南通市" });
@@ -612,10 +614,30 @@ public final class ParamUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * 
+     * <h3>示例2:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String[]>} keyAndArrayMap = new LinkedHashMap{@code <>}();
+     * 
+     * keyAndArrayMap.put("province", new String[] { "江苏省", <span style="color:red">null</span> });
+     * keyAndArrayMap.put("city", new String[] { "南通市" });
+     * LOGGER.info(ParamUtil.joinArrayValueMap(keyAndArrayMap));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {@code province=江苏省&province=&city=南通市}
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param arrayValueMap
      *            the array value map
-     * @return 如果 <code>arrayValueMap</code> 是 Null或者Empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>arrayValueMap</code> 是 null或者Empty,返回 {@link StringUtils#EMPTY}<br>
      *         否则循环 <code>arrayValueMap</code> 拼接成QueryString
      * @see #joinParamNameAndValues(String, String[])
      * @see <a href="http://www.leveluplunch.com/java/examples/build-convert-map-to-query-string/">build-convert-map-to-query-string</a>
