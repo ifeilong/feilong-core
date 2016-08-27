@@ -1573,7 +1573,6 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * Properties properties = new Properties();
      * 
      * properties.setProperty("name", "feilong");
@@ -1581,7 +1580,6 @@ public final class ConvertUtil{
      * properties.setProperty("country", "china");
      * 
      * LOGGER.debug(JsonUtil.format(toMap(properties)));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
