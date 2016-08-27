@@ -429,7 +429,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map = new HashMap{@code <String, String>}();
+     * Map{@code <String, String>} map = new HashMap{@code <>}();
      * map.put("service", "create_salesorder");
      * map.put("_input_charset", "gbk");
      * map.put("totalActual", "210.00");
@@ -448,11 +448,11 @@ public final class ParamUtil{
      * <h3>规则:</h3>
      * 
      * <blockquote>
-     * <p>
-     * 首先将<code>singleValueMap</code> 使用 {@link SortUtil#sortMapByKeyAsc(Map)} 进行排序,<br>
-     * 然后将map的key和value 使用= 符号 连接,<br>
-     * 不同的entry之间再使用{@code &} 符号进行连接,最终格式类似于 url 的queryString,
-     * </p>
+     * 
+     * <ol>
+     * <li>首先将<code>singleValueMap</code> 使用 {@link SortUtil#sortMapByKeyAsc(Map)} 进行排序,</li>
+     * <li>然后将map的key和value 使用= 符号 连接,不同的entry之间再使用{@code &} 符号进行连接,最终格式类似于 url 的queryString</li>
+     * </ol>
      * 
      * </blockquote>
      * 
@@ -504,7 +504,7 @@ public final class ParamUtil{
      * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){
-        return null == singleValueMap ? EMPTY : toQueryStringUseSingleValueMap(sortMapByKeyAsc(singleValueMap));
+        return isNullOrEmpty(singleValueMap) ? EMPTY : toQueryStringUseSingleValueMap(sortMapByKeyAsc(singleValueMap));
     }
 
     /**
