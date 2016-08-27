@@ -1473,10 +1473,12 @@ public final class ConvertUtil{
     /**
      * 将 <code>key</code> 和 <code>value</code> 直接转成map.
      * 
-     * <p>
-     * 注意,返回是的是 {@link LinkedHashMap}}
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回是的是 {@link LinkedHashMap}</li>
      * 
+     * <li>
      * <p>
      * 非常适合单key的场景,比如
      * </p>
@@ -1497,28 +1499,9 @@ public final class ConvertUtil{
      * 一行代码就搞定了,很简洁,有木有~~
      * </p>
      * 
-     * <hr>
-     * 
-     * <p>
-     * 还有:
-     * </p>
-     * 
-     * <pre class="code">
-     * private List{@code <ShopCommand>} loadShopCommandList(){
-     *     Map{@code <String, Object>} paraMap = new HashMap{@code <String, Object>}();
-     *     paraMap.put("orgTypeId", OrgType.ID_SHOP_TYPE);
-     * 
-     *     return shopCommandDao.findShopListByOrgaTypeId(paraMap);
-     * }
-     * </pre>
-     * 
-     * 可以改写成 :
-     * 
-     * <pre class="code">
-     * private List{@code <ShopCommand>} loadShopCommandList(){
-     *     return shopCommandDao.findShopListByOrgaTypeId(ConvertUtil.toMap("orgTypeId", (Object) OrgType.ID_SHOP_TYPE));
-     * }
-     * </pre>
+     * </li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -1535,7 +1518,34 @@ public final class ConvertUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * private List{@code <ShopCommand>} loadShopCommandList(){
+     *     Map{@code <String, Object>} paraMap = new HashMap{@code <String, Object>}();
+     *     paraMap.put("orgTypeId", OrgType.ID_SHOP_TYPE);
+     * 
+     *     return shopCommandDao.findShopListByOrgaTypeId(paraMap);
+     * }
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * private List{@code <ShopCommand>} loadShopCommandList(){
+     *     return shopCommandDao.findShopListByOrgaTypeId(ConvertUtil.toMap("orgTypeId", (Object) OrgType.ID_SHOP_TYPE));
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <K>
      *            the key type
      * @param <V>
