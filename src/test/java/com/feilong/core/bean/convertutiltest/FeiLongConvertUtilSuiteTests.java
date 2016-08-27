@@ -26,28 +26,33 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                ConvertUtilTest.class, //
-                ConvertUtilToArrayClassTest.class, //
-                ConvertUtilToArrayCollectionClassTest.class, //
-
-                ConvertUtilToIntegerParameterizedTest.class,
-                ConvertUtilToLongParameterizedTest.class,
-                ConvertUtilToBooleanParameterizedTest.class,
+                ConvertUtilConvertClassTest.class,
+                ConvertUtilToArrayCollectionClassTest.class,
+                ConvertUtilToArrayStringArrayClassTest.class,
+                ConvertUtilToArrayVarargsTest.class,
                 ConvertUtilToBigDecimalParameterizedTest.class,
-
+                ConvertUtilToBooleanParameterizedTest.class,
+                ConvertUtilToEnumerationTest.class,
                 ConvertUtilToIntegerDefaultValueParameterizedTest.class,
-
+                ConvertUtilToIntegerParameterizedTest.class,
                 ConvertUtilToIntegersParameterizedTest.class,
+                ConvertUtilToIteratorTest.class,
+                ConvertUtilToListCollectionTest.class,
+                ConvertUtilToListEnumerationTest.class,
+                ConvertUtilToListVarargsTest.class,
+                ConvertUtilToLocaleTest.class,
+                ConvertUtilToLongParameterizedTest.class,
                 ConvertUtilToLongsParameterizedTest.class,
-
-                ConvertUtilToStringParameterizedTest.class,
-
+                ConvertUtilToMapArrayTest.class,
+                ConvertUtilToMapCollectionTest.class,
+                ConvertUtilToMapKeyValueTest.class,
+                ConvertUtilToMapPropertiesTest.class,
+                ConvertUtilToMapResourceBundleTest.class,
+                ConvertUtilToPropertiesTest.class,
                 ConvertUtilToStringArrayToStringConfigParameterizedTest.class,
                 ConvertUtilToStringCollectionToStringConfigParameterizedTest.class,
-
-                ConvertUtilToMapParameterizedTest.class,
-                ConvertUtilToLocaleTest.class,
-
+                ConvertUtilToStringParameterizedTest.class,
+                ConvertUtilToStringsTest.class,
         //
 })
 public class FeiLongConvertUtilSuiteTests{

@@ -1206,7 +1206,24 @@ public final class ConvertUtil{
     //**********************************************************************************************
 
     /**
-     * 将集合 <code>collection</code> 转成枚举.
+     * 将集合 <code>collection</code> 转成<code>Enumeration</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>一般情况,你可能不需要这个方法,不过在一些API的时候,需要<code>Enumeration</code>参数,此时调用这个方法来进行转换会比较方便</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toEnumeration(null) = Collections.emptyEnumeration()
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param <T>
      *            the generic type

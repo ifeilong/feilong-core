@@ -31,7 +31,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToArrayClassTest{
+public class ConvertUtilToArrayStringArrayClassTest{
 
     /**
      * To t test.
@@ -58,5 +58,4 @@ public class ConvertUtilToArrayClassTest{
         String[] ss = { "2", "1" };
         assertArrayEquals(new Long[] { 2L, 1L }, toArray(ss, Long.class));
     }
-
 }
