@@ -1701,16 +1701,19 @@ public final class ConvertUtil{
     /**
      * 将 集合 <code>collection</code> 转成 list.
      * 
-     * <p>
-     * 此方法很适合 快速的将 set转成list这样的操作
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>此方法很适合快速的将set转成list这样的操作</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * Set{@code <String>} set = new HashSet{@code <String>}();
+     * Set{@code <String>} set = new LinkedHashSet{@code <>}();
      * Collections.addAll(set, "a", "a", "b", "b");
      * LOGGER.debug("{}", toList(set));
      * </pre>
@@ -1718,7 +1721,7 @@ public final class ConvertUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * [b, a]
+     * [a,b]
      * </pre>
      * 
      * </blockquote>
