@@ -1753,7 +1753,18 @@ public final class ConvertUtil{
     }
 
     /**
-     * 数组转成 ({@link java.util.ArrayList ArrayList}),此方法返回的list可以进行add等操作.
+     * 数组转成 ({@link java.util.ArrayList ArrayList}).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>此方法返回的list可以进行add等操作</li>
+     * <li>如果直接使用{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list没有实现 {@link java.util.Collection#add(Object)
+     * Collection#add(Object)}等方法,执行<code>list.add("c")</code>;操作的话会导致异常!</li>
+     * <li>而本方法使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回,可以执行正常的list操作</li>
+     * </ol>
+     * </blockquote>
+     * 
      * 
      * <h3>特别适合:</h3>
      * 
@@ -1765,7 +1776,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("feilong1");
      * list.add("feilong2");
      * list.add("feilong2");
@@ -1776,7 +1787,6 @@ public final class ConvertUtil{
      * 此时你可以使用:
      * 
      * <pre class="code">
-     * 
      * List{@code <String>} list = toList("feilong1", "feilong2", "feilong2", "feilong3");
      * </pre>
      * 
@@ -1810,17 +1820,6 @@ public final class ConvertUtil{
      * List{@code <UserAddress>} userAddresseList = toList(userAddress);
      * </pre>
      * 
-     * </blockquote>
-     * 
-     * <h3>注意 :</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 如果直接使用{@link java.util.Arrays#asList(Object...) Arrays#asList(Object...)}返回的list没有实现 {@link java.util.Collection#add(Object)
-     * Collection#add(Object)}等方法,执行<code>list.add("c")</code>;操作的话会导致异常!<br>
-     * 
-     * 而本方法使用 {@link ArrayList#ArrayList(java.util.Collection)} 来进行重新封装返回,可以执行正常的list操作
-     * </p>
      * </blockquote>
      * 
      * @param <T>
