@@ -605,28 +605,29 @@ public final class ParamUtil{
     }
 
     /**
-     * 取到指定keys的value,连接起来(<span style="color:red">不使用任何连接符</span>).
+     * 在<code>singleValueMap</code>中取到指定<code>includeKeys</code> key的<b>value</b>,连接起来(<span style="color:red">不使用任何连接符</span>).
      * 
-     * <p>
-     * 会按照includeKeys的顺序拼接,目前适用于 个别银行(比如汇付天下) 需要将值拼接起来加密<br>
-     * 如果map中的value是null,那么会以{@link StringUtils#EMPTY}替代
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>拼接的顺序按照 <code>includeKeys</code> 的顺序,目前适用于 个别银行(比如汇付天下) 需要将值拼接起来加密</li>
+     * <li>如果<code>singleValueMap</code>中的value是null,那么会以{@link StringUtils#EMPTY}替代,进行拼接</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
+     * <p>
+     * <b>场景:</b> 拼接map中 key是 "service"以及 "paymentType"的 value
+     * </p>
+     * 
      * <pre class="code">
-     * Map{@code <String, String>} map = new HashMap{@code <String, String>}();
+     * Map{@code <String, String>} map = new HashMap{@code <>}();
      * map.put("service", "create_salesorder");
      * map.put("paymentType", "unionpay_mobile");
      * 
-     * LOGGER.info(ParamUtil.joinValues(map, "service", "paymentType"));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * create_salesorderunionpay_mobile
+     * ParamUtil.joinValuesOrderByIncludeKeys(map, "service", "paymentType")    =   create_salesorderunionpay_mobile
      * </pre>
      * 
      * </blockquote>
@@ -640,7 +641,6 @@ public final class ParamUtil{
      * @return 如果 <code>singleValueMap</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>includeKeys</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         否则循环 <code>includeKeys</code>,依次从 <code>singleValueMap</code>中取到值,连接起来;<br>
-     *         (如果 <code>singleValueMap</code>指定key的值是null,会使用{@link StringUtils#defaultString(String)} 转成{@link StringUtils#EMPTY}拼接)<br>
      * @see org.apache.commons.lang3.StringUtils#defaultString(String)
      * @since 1.5.5
      */
