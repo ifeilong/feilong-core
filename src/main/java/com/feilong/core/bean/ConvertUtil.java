@@ -1680,7 +1680,17 @@ public final class ConvertUtil{
 
     //*************************************toList*********************************************************
     /**
-     * 将枚举 <code>enumeration</code> 转成集合.
+     * 将枚举 <code>enumeration</code> 转成 {@link List}.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * toList((Enumeration{@code <String>}) null) = emptyList()
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param <T>
      *            the generic type
