@@ -558,7 +558,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map = new LinkedHashMap<>();
+     * Map{@code <String, String>} map = new LinkedHashMap{@code <>}();
      * map.put(null, null);
      * map.put("a", "");
      * map.put("b", null);
