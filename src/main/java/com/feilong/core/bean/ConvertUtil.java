@@ -627,7 +627,7 @@ public final class ConvertUtil{
      * 
      * </dd>
      * 
-     * <dt>如果参数 <code>toBeConvertedValue</code>不是 <code>数组</code>也不是{@link Collection}</dt>
+     * <dt>如果参数 <code>toBeConvertedValue</code>不是<code>数组</code>也不是{@link Collection}</dt>
      * 
      * <dd>
      * <p>
@@ -748,7 +748,7 @@ public final class ConvertUtil{
      * 
      * </dd>
      * 
-     * <dt>如果参数 <code>toBeConvertedValue</code>不是 <code>数组</code>也不是{@link Collection}</dt>
+     * <dt>如果参数 <code>toBeConvertedValue</code>不是<code>数组</code>也不是{@link Collection}</dt>
      * 
      * <dd>
      * <p>
@@ -2039,14 +2039,21 @@ public final class ConvertUtil{
     //********************************************************************************
 
     /**
-     * 转成{@link String}数组.
+     * 将 <code>toBeConvertedValue</code> 转成{@link String}数组.
      * 
      * <h3>说明:</h3>
      * 
      * <blockquote>
+     * 
+     * <ol>
+     * 
+     * <li>
+     * 
      * <p>
      * 该方法很适合将 <b>非字符串数组的数组</b> 转换成 <b>字符串数组</b>,比如
      * </p>
+     * 
+     * <blockquote>
      * 
      * <pre class="code">
      * URL[] urls = {
@@ -2069,8 +2076,19 @@ public final class ConvertUtil{
      * ]
      * </pre>
      * 
+     * <p>
+     * 还有诸如 Integer[] 转成 String[]
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toStrings(new Integer[] { 1, 2, 5 })     =   [ "1", "2", "5" ]
+     * </pre>
+     * 
      * </blockquote>
      * 
+     * </li>
+     * 
+     * <li>
      * <p>
      * 也可以将字符串 解析成数组 in the Java language into a <code>List</code> individual Strings for each element, 根据以下规则:
      * </p>
@@ -2080,7 +2098,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <p>
-     * 参加 {@link org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String) parseElements}
+     * 参见 {@link org.apache.commons.beanutils.converters.AbstractArrayConverter#parseElements(String) parseElements}
      * </p>
      * 
      * <ul>
@@ -2096,14 +2114,13 @@ public final class ConvertUtil{
      * </p>
      * 
      * <pre class="code">
-     * LOGGER.debug(JsonUtil.format(ConvertUtil.toStrings("{5,4, 8,2;8 9_5@3`a}")));
+     * ConvertUtil.toStrings("{5,4, 8,2;8 9_5@3`a}"); =  ["5","4","8","2","8","9","5","3","a"]
      * </pre>
      * 
-     * <b>返回:</b>
+     * </blockquote>
      * 
-     * <pre class="code">
-     * ["5","4","8","2","8","9","5","3","a"]
-     * </pre>
+     * </li>
+     * </ol>
      * 
      * </blockquote>
      * 
