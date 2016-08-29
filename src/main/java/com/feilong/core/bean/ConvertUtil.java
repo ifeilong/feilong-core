@@ -2120,15 +2120,45 @@ public final class ConvertUtil{
     }
 
     /**
-     * 转成Iterator类型.
+     * 将 <code>toBeConvertedValue</code>转成{@link Iterator}类型.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * <span style="color:green">// null</span>
+     * toIterator(null) = null
+     * 
+     * <span style="color:green">//PrimitiveArray</span>
+     * int[] i2 = { 1, 2 };
+     * Iterator{@code <Integer>} iterator = toIterator(i2);
+     * 
+     * <span style="color:green">//逗号分隔的字符串</span>
+     * Iterator{@code <String>} iterator = toIterator("1,2");
+     * 
+     * <span style="color:green">//collection</span>
+     * List{@code <String>} list = new ArrayList{@code <>}();
+     * list.add("aaaa");
+     * list.add("nnnnn");
+     * 
+     * Iterator{@code <String>} iterator = toIterator(list);
+     * 
+     * <span style="color:green">//Enumeration</span>
+     * Enumeration{@code <Object>} enumeration = new StringTokenizer("this is a test");
+     * Iterator{@code <String>} iterator = toIterator(enumeration);
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <h3>支持以下类型:</h3>
      * 
      * <blockquote>
      * <ul>
-     * <li>逗号分隔的字符串,{@link ConvertUtil#toStrings(Object)} 转成数组</li>
-     * <li>数组</li>
-     * <li>{@link java.util.Map},将 {@link java.util.Map#values()} 转成{@link java.util.Iterator}</li>
+     * <li>逗号分隔的字符串,先使用{@link ConvertUtil#toStrings(Object)} 转成数组</li>
+     * <li>数组(包括 包装类型数组 以及 原始类型数组)</li>
+     * <li>如果是{@link java.util.Map},将 {@link java.util.Map#values()} 转成{@link java.util.Iterator}</li>
      * <li>{@link java.util.Collection}</li>
      * <li>{@link java.util.Iterator}</li>
      * <li>{@link java.util.Enumeration}</li>
@@ -2141,17 +2171,7 @@ public final class ConvertUtil{
      * @param <T>
      *            the generic type
      * @param toBeConvertedValue
-     *            <ul>
-     *            <li>逗号分隔的字符串,{@link ConvertUtil#toStrings(Object)} 转成数组</li>
-     *            <li>数组</li>
-     *            <li>{@link java.util.Map},将 {@link java.util.Map#values()} 转成{@link java.util.Iterator}</li>
-     *            <li>{@link java.util.Collection}</li>
-     *            <li>{@link java.util.Iterator}</li>
-     *            <li>{@link java.util.Enumeration}</li>
-     *            <li>{@link java.util.Dictionary}</li>
-     *            <li>{@link org.w3c.dom.Node}</li>
-     *            <li>{@link org.w3c.dom.NodeList}</li>
-     *            </ul>
+     *            the to be converted value
      * @return 如果 <code>toBeConvertedValue</code> 是null,返回null<br>
      *         如果 <code>toBeConvertedValue</code> 是字符串,先转成数组,再转成迭代器<br>
      *         否则转成 {@link IteratorUtils#getIterator(Object)}

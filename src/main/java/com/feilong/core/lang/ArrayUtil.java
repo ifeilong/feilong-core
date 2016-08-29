@@ -22,15 +22,6 @@ import org.apache.commons.lang3.Validate;
 /**
  * 数组工具类.
  * 
- * <p>
- * 如果你想detect所有的 array类型,你必须判断一个object is an instanceof boolean[], byte[], short[], char[], int[], long[], float[], double[], or
- * Object[],
- * 
- * <br>
- * 注:Object[] 数组 Integer/String...自定义的对象User.等数组也 instanceof Object[],二维数组不管是primitive 还是包装类型,都instanceof Object[];<br>
- * so depending on how you want to handle nested arrays, it can get complicated.
- * </p>
- * 
  * <h3>提供以下方法:</h3>
  * <blockquote>
  * <ol>
@@ -55,6 +46,16 @@ import org.apache.commons.lang3.Validate;
  * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(short[], short)}</li>
  * <li>{@link org.apache.commons.lang3.ArrayUtils#contains(double[], double, double)}</li>
  * </ul>
+ * </blockquote>
+ * 
+ * <h3>判断对象是数组:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>如果你想detect所有的 array类型,你必须判断一个object is an instanceof boolean[], byte[], short[], char[], int[], long[], float[], double[], or
+ * Object[]</li>
+ * <li>Object[] 数组 Integer/String...自定义的对象User.等数组也 instanceof Object[],二维数组不管是primitive 还是包装类型,都instanceof Object[];<br>
+ * so depending on how you want to handle nested arrays, it can get complicated.</li>
+ * </ol>
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
