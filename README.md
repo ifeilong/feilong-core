@@ -19,6 +19,10 @@ feilong core
 1. 可以帮助你的代码更简短精炼，使它易写、易读、易于维护。
 1. 提高工作效率，让你从大量重复的底层代码中脱身。
 
+# 一图概述:
+
+![one-feilong-core](http://venusdrogon.github.io/feilong-platform/mysource/one-feilong-core.png) 
+
 
 # :dragon: Maven使用配置
 
