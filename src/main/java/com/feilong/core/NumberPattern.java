@@ -18,7 +18,7 @@ package com.feilong.core;
 import java.text.DecimalFormat;
 
 /**
- * 数字格式,内置常用数字格式.
+ * 常用的数字模式.
  * 
  * <h3>常用数字格式:</h3>
  * 

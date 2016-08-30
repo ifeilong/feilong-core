@@ -18,7 +18,7 @@ package com.feilong.core;
 import java.util.regex.Pattern;
 
 /**
- * 正则表达式格式,内置常用正则表达式.
+ * 常用的正则表达式模式.
  * 
  * <h3>开始结束</h3>
  * 

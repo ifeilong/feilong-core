@@ -37,7 +37,7 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
- * 专门用来统计数据的.
+ * 专门用来统计数据的工具类.
  * 
  * <p>
  * 类似于sql里面的 统计函数 <a href="http://www.sqlcourse2.com/agg_functions.html">(Aggregate functions)</a>
