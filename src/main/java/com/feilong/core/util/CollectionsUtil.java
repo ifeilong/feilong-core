@@ -1740,10 +1740,15 @@ public final class CollectionsUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是
-     * <code>objectCollection</code>中的元素对象;
-     * <br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序</li>
+     * 
+     * <li>
+     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是<code>objectCollection</code>
+     * 中的元素对象;
+     * </li>
+     * 
+     * <li>顺序是 <code>objectCollection</code> <code>propertyName</code>的值顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
+     * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
      * 
      * <li>属性<code>propertyName</code>值相同的元素,组成集合 list</li>
      * <li>如果value只需要单值的话,可以调用 {@link #groupOne(Collection, String)}方法</li>
@@ -1813,11 +1818,18 @@ public final class CollectionsUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是
-     * <code>objectCollection</code>
+     * 
+     * <li>
+     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是<code>objectCollection</code>
      * 中的元素对象;
-     * <br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值顺序</li>
+     * </li>
+     * 
+     * <li>
+     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
+     * {@link SortUtil#sortMap(Map, java.util.Comparator)}
+     * </li>
+     * 
      * </ol>
      * </blockquote>
      * 
@@ -1899,18 +1911,277 @@ public final class CollectionsUtil{
      * @see #groupOne(Collection, String)
      * @since 1.5.5
      */
-    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
+    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,final String propertyName,Predicate<O> includePredicate){
         if (isNullOrEmpty(objectCollection)){
             return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
+
+        //org.apache.commons.beanutils.BeanToPropertyValueTransformer 但是实现的是 commons-collection3
+        return group(objectCollection, includePredicate, new Transformer<O, T>(){
+
+            @Override
+            public T transform(O input){
+                return PropertyUtil.getProperty(input, propertyName);
+            }
+        });
+    }
+
+    /**
+     * 循环 <code>objectCollection</code>,将元素使用<code>keyTransformer</code>转成key,相同值的元素组成list作为value,封装成map返回.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素 使用<code>keyTransformer</code>转换的值,value是
+     * <code>objectCollection</code>中的元素对象(相同key值,组成list);
+     * </li>
+     * 
+     * <li>
+     * 返回的{@link LinkedHashMap}顺序,是 <code>objectCollection</code> 元素顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
+     * {@link SortUtil#sortMap(Map, java.util.Comparator)}
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 从user list中,提取user的姓名的姓为key,user组成list,返回map
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * User mateng55 = new User("马腾", 55);
+     * User machao28 = new User("马超", 28);
+     * User madai27 = new User("马岱", 27);
+     * User maxiu25 = new User("马休", 25);
+     * User zhangfei28 = new User("张飞", 28);
+     * User liubei32 = new User("刘备", 32);
+     * User guanyu50 = new User("关羽", 50);
+     * User guanping32 = new User("关平", 32);
+     * User guansuo31 = new User("关索", 31);
+     * User guanxing20 = new User("关兴", 18);
+     * 
+     * <span style="color:green">//************************************************************************</span>
+     * List{@code <User>} list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
+     * 
+     * <span style="color:green">//************************************************************************</span>
+     * 
+     * Map{@code <String, List<User>>} map = CollectionsUtil.group(list,new Transformer{@code <User, String>}(){
+     * 
+     *     &#64;Override
+     *     public String transform(User user){
+     *         <span style="color:green">//提取名字 的姓</span>
+     *         return user.getName().substring(0, 1);
+     *     }
+     * });
+     * 
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "马":[{
+                "age": 55,
+                "name": "马腾",
+            },{
+                "age": 28,
+                "name": "马超",
+            },{
+                "age": 27,
+                "name": "马岱",
+            },{
+                "age": 25,
+                "name": "马休",
+            }
+        ],
+        "张": [{
+            "age": 28,
+            "name": "张飞",
+        }],
+        "刘": [{
+            "age": 32,
+            "name": "刘备",
+        }],
+        "关": [{
+                "age": 50,
+                "name": "关羽",
+            },{
+                "age": 32,
+                "name": "关平",
+            },{
+                "age": 31,
+                "name": "关索",
+            },{
+                "age": 18,
+                "name": "关兴",
+            }
+        ]
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param keyTransformer
+     *            返回的map,key转换器
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keyTransformer</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.8.8
+     */
+    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,Transformer<O, T> keyTransformer){
+        return group(objectCollection, null, keyTransformer);
+    }
+
+    /**
+     * 循环 <code>objectCollection</code>,找到符合条件的 <code>includePredicate</code>的元素,将元素使用<code>keyTransformer</code>转成key
+     * ,相同值的元素组成list作为value,封装成map返回.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素 使用<code>keyTransformer</code>转换的值,value是
+     * <code>objectCollection</code>中的元素对象(相同key值,组成list);
+     * </li>
+     * 
+     * <li>
+     * 返回的{@link LinkedHashMap}顺序,是 <code>objectCollection</code> 元素顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
+     * {@link SortUtil#sortMap(Map, java.util.Comparator)}
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 从user list中,提取 年龄 大于20的user,user的姓名的姓为key,user组成list,返回map
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * User mateng55 = new User("马腾", 55);
+     * User machao28 = new User("马超", 28);
+     * User madai27 = new User("马岱", 27);
+     * User maxiu25 = new User("马休", 25);
+     * User zhangfei28 = new User("张飞", 28);
+     * User liubei32 = new User("刘备", 32);
+     * User guanyu50 = new User("关羽", 50);
+     * User guanping32 = new User("关平", 32);
+     * User guansuo31 = new User("关索", 31);
+     * User guanxing20 = new User("关兴", 18);
+     * 
+     * <span style="color:green">//************************************************************************</span>
+     * List{@code <User>} list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
+     * 
+     * <span style="color:green">//************************************************************************</span>
+     * 
+     * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
+     * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, comparatorPredicate, new Transformer{@code <User, String>}(){
+     * 
+     *     &#64;Override
+     *     public String transform(User user){
+     *         <span style="color:green">//提取名字 的姓</span>
+     *         return user.getName().substring(0, 1);
+     *     }
+     * });
+     * 
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+            "马":[{
+                    "age": 55,
+                    "name": "马腾",
+                },{
+                    "age": 28,
+                    "name": "马超",
+                },{
+                    "age": 27,
+                    "name": "马岱",
+                },{
+                    "age": 25,
+                    "name": "马休"
+                }],
+            "张": [{
+                "age": 28,
+                "name": "张飞"
+            }],
+            "刘": [{
+                "age": 32,
+                "name": "刘备"
+            }],
+            "关": [{
+                    "age": 50,
+                    "name": "关羽"
+                },{
+                    "age": 32,
+                    "name": "关平"
+                },{
+                    "age": 31,
+                    "name": "关索"
+                }]
+        }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object list
+     * @param includePredicate
+     *            the include predicate
+     * @param keyTransformer
+     *            返回的map,key转换器
+     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keyTransformer</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>includePredicate</code> 是null,那么以所有的元素进行分组<br>
+     *         如果没有任何element match <code>includePredicate</code>,返回 empty {@link LinkedHashMap}<br>
+     * @see org.apache.commons.collections4.Transformer#transform(Object)
+     * @since 1.8.8
+     */
+    public static <T, O> Map<T, List<O>> group(
+                    Collection<O> objectCollection,
+                    Predicate<O> includePredicate,
+                    Transformer<O, T> keyTransformer){
+        if (isNullOrEmpty(objectCollection)){
+            return emptyMap();
+        }
+        Validate.notNull(keyTransformer, "keyTransformer can't be null!");
 
         Map<T, List<O>> map = newLinkedHashMap(objectCollection.size());
         for (O obj : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
             }
-            MapUtil.putMultiValue(map, PropertyUtil.<T> getProperty(obj, propertyName), obj);
+            MapUtil.putMultiValue(map, keyTransformer.transform(obj), obj);
         }
         return map;
     }
@@ -1922,8 +2193,12 @@ public final class CollectionsUtil{
      * <blockquote>
      * <ol>
      * <li>返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是
-     * <code>objectCollection</code>中的元素对象;<br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序</li>
+     * <code>objectCollection</code>中的元素对象;</li>
+     * 
+     * <li>顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
+     * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
+     * 
      * <li>间接的可以做到基于某个属性值去重的效果</li>
      * <li>如果value需要是集合的话,可以调用 {@link #group(Collection, String)}方法</li>
      * </ol>

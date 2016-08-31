@@ -37,8 +37,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilGetPropertyValueSetTest.class,
                 CollectionsUtilGetPropertyValueMapTest.class,
 
-                CollectionsUtilGroupTest.class,
-                CollectionsUtilGroupWithPredicateTest.class,
+                CollectionsUtilGroupWithPropertyNameTest.class,
+                CollectionsUtilGroupWithPropertyNameAndPredicateTest.class,
+                CollectionsUtilGroupWithTransformerTest.class,
+                CollectionsUtilGroupWithTransformerAndPredicateTest.class,
                 CollectionsUtilGroupOneTest.class,
 
                 CollectionsUtilSelectPredicateTest.class,

@@ -45,7 +45,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class CollectionsUtilGroupWithPredicateTest{
+public class CollectionsUtilGroupWithPropertyNameAndPredicateTest{
 
     /**
      * Test group2.

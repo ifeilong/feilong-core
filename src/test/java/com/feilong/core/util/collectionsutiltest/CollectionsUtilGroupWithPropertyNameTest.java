@@ -37,7 +37,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class CollectionsUtilGroupTest{
+public class CollectionsUtilGroupWithPropertyNameTest{
 
     /**
      * Test group.
@@ -78,7 +78,7 @@ public class CollectionsUtilGroupTest{
     @Test(expected = NullPointerException.class)
     public void testGroupNullPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("刘备", 25), new User("刘备", 25));
-        CollectionsUtil.group(list, null);
+        CollectionsUtil.group(list, (String) null);
     }
 
     /**
