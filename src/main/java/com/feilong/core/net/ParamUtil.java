@@ -841,16 +841,19 @@ public final class ParamUtil{
     }
 
     /**
-     * 浏览器传递queryString()参数差别(浏览器兼容问题);chrome会将query进行 encoded再发送请求;而ie原封不动的发送.
+     * 浏览器传递queryString()参数差别;
      * 
-     * <p>
-     * 由于暂时不能辨别是否encoded过,所以先强制decode再encode;
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>主要是为了处理浏览器兼容问题,参见
+     * <a href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">
+     * java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>,chrome会将query进行 encoded再发送请求;而ie原封不动的发送.</li>
+     * <li>由于暂时不能辨别是否encoded过,所以先强制decode再encode;</li>
+     * <li>此处不能先转decode(query,charsetType),参数就是想传 =是转义符</li>
+     * </ol>
+     * </blockquote>
      * 
-     * <p>
-     * 此处不能先转decode(query,charsetType),参数就是想传 =是转义符
-     * </p>
-     *
      * @param value
      *            the value
      * @param charsetType
