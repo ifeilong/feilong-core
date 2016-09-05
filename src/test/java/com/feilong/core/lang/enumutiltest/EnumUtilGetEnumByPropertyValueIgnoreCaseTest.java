@@ -15,69 +15,58 @@
  */
 package com.feilong.core.lang.enumutiltest;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.core.lang.EnumUtil;
 
+/**
+ * The Class EnumUtilGetEnumByPropertyValueIgnoreCaseTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class EnumUtilGetEnumByPropertyValueIgnoreCaseTest{
 
     /**
-     * Test get enum.
+     * Test get http method type null enum class.
      */
-    @Test
-    public void testGetEnum(){
-        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "get"));
+    @Test(expected = NullPointerException.class)
+    public void testGetHttpMethodTypeNullEnumClass(){
+        EnumUtil.getEnumByPropertyValueIgnoreCase(null, "method", "aa");
     }
 
     /**
-     * Test get http method type.
+     * Test get http method type null property name.
      */
-    @Test
-    public void testGetHttpMethodType(){
-        assertEquals(HttpMethodTestType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "post"));
-        assertEquals(HttpMethodTestType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "pOst"));
-        assertEquals(HttpMethodTestType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "POST"));
-        assertEquals(HttpMethodTestType.POST, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "posT"));
-        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "get"));
-        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "gEt"));
-        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "geT"));
-        assertEquals(HttpMethodTestType.GET, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "GET"));
-
+    //*********************************************************************
+    @Test(expected = NullPointerException.class)
+    public void testGetHttpMethodTypeNullPropertyName(){
+        EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, null, "aa");
     }
 
     /**
-     * Test get http method type 1.
+     * Test get http method type empty property name.
      */
-    @Test
-    public void testGetHttpMethodType1(){
-        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", "post111"));
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetHttpMethodTypeEmptyPropertyName(){
+        EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "", "aa");
     }
 
     /**
-     * Test get http method type2.
+     * Test get http method type blank property name.
      */
-    @Test
-    public void testGetHttpMethodType2(){
-        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", ""));
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetHttpMethodTypeBlankPropertyName(){
+        EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, " ", "aa");
     }
 
     /**
-     * Test get http method type3.
+     * Test get http method type 4.
      */
-    @Test
-    public void testGetHttpMethodType3(){
-        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method", null));
-    }
-
-    /**
-     * Test get http method type4.
-     */
+    //*********************************************************************
     @Test(expected = BeanUtilException.class)
     public void testGetHttpMethodType4(){
-        assertEquals(null, EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method2222", null));
+        EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodTestType.class, "method2222", null);
     }
 }

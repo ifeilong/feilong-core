@@ -19,10 +19,18 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * The Class FeiLongEnumUtilSuiteTests.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 EnumUtilGetEnumByPropertyValueTest.class,
+                EnumUtilGetEnumByPropertyValueParameterizedTest.class,
+
                 EnumUtilGetEnumByPropertyValueIgnoreCaseTest.class,
+                EnumUtilGetEnumByPropertyValueIgnoreCaseParameterizedTest.class,
         //
 })
 public class FeiLongEnumUtilSuiteTests{

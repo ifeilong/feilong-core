@@ -45,24 +45,24 @@ public final class EnumUtil{
     }
 
     /**
-     * 通过<code>propertyName</code>的 <code>specifiedValue</code>(忽视大小写) 获得枚举(equalsIgnoreCase判断).
+     * 通过<code>propertyName</code>的 <code>specifiedValue</code><b>(忽视大小写)</b> 获得枚举(equalsIgnoreCase判断).
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
      * <p>
      * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,调用方式:
      * </p>
      * 
      * <pre class="code">
-     * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
+     * EnumUtil.getEnumByPropertyValueIgnoreCase(HttpMethodType.class, "method", "get")
      * </pre>
      * 
-     * <h3>说明:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 如果遍历所有枚举值,找不到枚举值的属性<code>propertyName</code>的值是 <code>specifiedValue</code>,那么返回null
-     * </p>
+     * </li>
+     * </ol>
      * </blockquote>
-     *
+     * 
      * @param <E>
      *            the element type
      * @param <T>
@@ -73,7 +73,7 @@ public final class EnumUtil{
      *            字段名称,比如 <code>HttpMethodType</code> 的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
-     * @return the enum by property value ignore case
+     * @return 如果遍历所有枚举值,找不到枚举值的属性<code>propertyName</code>的值是 <code>specifiedValue</code>,那么返回null
      * @throws NullPointerException
      *             如果 <code>enumClass</code> 是null,或者 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
@@ -87,22 +87,22 @@ public final class EnumUtil{
     }
 
     /**
-     * 通过<code>propertyName</code>的 <code>specifiedValue</code> 获得枚举(equals判断,区分大小写).
+     * 通过<code>propertyName</code>的 <code>specifiedValue</code> 获得枚举(equals判断,<b>区分大小写</b>).
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
      * <p>
      * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,调用方式:
      * </p>
      * 
      * <pre class="code">
-     * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
+     * EnumUtil.getEnumByPropertyValue(HttpMethodType.class, "method", "get")
      * </pre>
      * 
-     * <h3>说明:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 如果遍历所有枚举值,找不到枚举值的属性<code>propertyName</code>的值是 <code>specifiedValue</code>,那么返回null
-     * </p>
+     * </li>
+     * </ol>
      * </blockquote>
      *
      * @param <E>
@@ -115,15 +115,13 @@ public final class EnumUtil{
      *            字段名称,比如 <code>HttpMethodType</code> 的method,按照javabean 规范
      * @param specifiedValue
      *            属性值 比如post
-     * @return the enum by property value
+     * @return 如果遍历所有枚举值,找不到枚举值的属性<code>propertyName</code>的值是 <code>specifiedValue</code>,那么返回null
      * @throws NullPointerException
      *             如果 <code>enumClass</code> 是null,或者 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
      * @throws BeanUtilException
      *             如果枚举值没有相关 <code>propertyName</code> 属性,比如 <code>HttpMethodType</code> 有 <b>"method"</b> 属性,但是没有 <b>"method2222"</b> 属性
-     * 
-     * 
      * @since 1.0.8
      */
     public static <E extends Enum<?>, T> E getEnumByPropertyValue(Class<E> enumClass,String propertyName,T specifiedValue){
@@ -132,22 +130,6 @@ public final class EnumUtil{
 
     /**
      * 通过<code>propertyName</code>的 <code>specifiedValue</code> 获得枚举.
-     * 
-     * <p>
-     * 适用于 <code>HttpMethodType</code> 这种带自定义属性的枚举类型,调用方式:
-     * </p>
-     * 
-     * <pre class="code">
-     * EnumUtil.getEnumByField(HttpMethodType.class, "method", "get")
-     * </pre>
-     * 
-     * <h3>说明:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 如果遍历所有枚举值,找不到枚举值的属性<code>propertyName</code>的值是 <code>specifiedValue</code>,那么返回null
-     * </p>
-     * </blockquote>
      *
      * @param <E>
      *            the element type
