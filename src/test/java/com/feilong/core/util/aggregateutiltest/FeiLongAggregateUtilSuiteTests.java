@@ -28,7 +28,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 AggregateUtilAvgArrayTest.class,
                 AggregateUtilAvgTest.class,
-                AggregateUtilGetMinValueTest.class,
                 AggregateUtilGroupCountPredicateTest.class,
                 AggregateUtilGroupCountTest.class,
                 AggregateUtilSumArrayPredicateTest.class,

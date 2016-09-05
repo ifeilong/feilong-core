@@ -15,6 +15,7 @@
  */
 package com.feilong.core.net.uriutiltest;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +54,7 @@ public class URIUtilDecodeTest{
      * Decode2.
      */
     @Test
+    @Ignore
     public void decode2(){
         LOGGER.debug(URIUtil.decode("aaaaa%chu111", UTF8));
 
@@ -62,6 +64,7 @@ public class URIUtilDecodeTest{
      * Decode3.
      */
     @Test
+    @Ignore
     public void decode3(){
         LOGGER.debug(URIUtil.decode("%c", UTF8));
     }

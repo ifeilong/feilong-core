@@ -17,6 +17,7 @@ package com.feilong.core.net.uriutiltest;
 
 import java.net.URI;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,7 @@ public class URIUtilCreateTest{
      * Test create3.
      */
     @Test
+    @Ignore
     public void testCreate3(){
         String uriString = "http://127.0.0.1/cmens?a=%";
         LOGGER.debug("" + URI.create(uriString));
