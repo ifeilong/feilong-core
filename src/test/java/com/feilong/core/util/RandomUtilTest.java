@@ -43,25 +43,6 @@ public class RandomUtilTest{
     @Rule
     public RepeatRule repeatRule = new RepeatRule();
 
-    //****************com.feilong.core.util.RandomUtil.createRandom(Number)***************************************
-
-    /**
-     * Test create random.
-     */
-    @Test
-    @Repeat(20000)
-    public void testCreateRandom(){
-        assertThat(RandomUtil.createRandom(800), allOf(greaterThanOrEqualTo(0L), lessThan(800L)));
-    }
-
-    /**
-     * Test create random 1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testCreateRandom1(){
-        RandomUtil.createRandom(null);
-    }
-
     /**
      * Test create random null pointer exception 1.
      */

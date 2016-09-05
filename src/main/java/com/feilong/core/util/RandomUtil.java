@@ -60,38 +60,6 @@ public final class RandomUtil{
     }
 
     /**
-     * 创建0-最大值<b>(maxValue)</b>之间的随机数.
-     * 
-     * <p>
-     * 即 0 {@code <=} result {@code <} maxValue
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * RandomUtil.createRandom(8)
-     * 创建一个小于8的随机数
-     * 
-     * 生成的结果是可能是 3
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param maxValue
-     *            随机数最大值
-     * @return 0 {@code <=} result {@code <} maxValue
-     * @throws NullPointerException
-     *             如果 <code>maxValue</code> 是null
-     */
-    public static long createRandom(Number maxValue){
-        Validate.notNull(maxValue, "maxValue can't be null!");
-        // 该值大于等于 0.0 且小于 1.0 正号的 double 值
-        double random = JVM_RANDOM.nextDouble();
-        return (long) Math.floor(random * maxValue.longValue());//返回最大的（最接近正无穷大）double 值,该值小于等于参数,并等于某个整数
-    }
-
-    /**
      * 创建最小值(包含)<code>minInclusiveValue</code>和最大值(不包含)<code>maxExclusiveValue</code>之间的随机数.
      * 
      * <p>
