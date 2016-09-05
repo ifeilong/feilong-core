@@ -41,6 +41,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,7 @@ import static com.feilong.core.DatePattern.yyyyMMdd;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
+@Ignore
 public class BeanUtilTest{
 
     /** The Constant LOGGER. */

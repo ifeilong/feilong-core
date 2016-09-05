@@ -28,11 +28,9 @@ import com.feilong.core.bean.convertutiltest.FeiLongConvertUtilSuiteTests;
  * @since 1.8.3
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-                //BeanUtilTest.class,
-
+@SuiteClasses({ //
+                BeanUtilTest.class,
                 PropertyUtilTest.class,
-
                 FeiLongConvertUtilSuiteTests.class,
         //
 })
