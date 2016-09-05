@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.stringutiltest;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
@@ -31,7 +32,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
-public class StringReplaceParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
+public class StringUtilReplaceParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
 
     /**
      * Data.

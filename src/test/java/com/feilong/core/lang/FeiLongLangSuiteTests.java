@@ -23,6 +23,7 @@ import com.feilong.core.lang.classutiltest.FeiLongClassUtilSuiteTests;
 import com.feilong.core.lang.numberutiltest.FeiLongNumberUtilSuiteTests;
 import com.feilong.core.lang.objectutiltest.FeiLongObjectUtilSuiteTests;
 import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
+import com.feilong.core.lang.stringutiltest.FeiLongStringUtilSuiteTests;
 
 /**
  * The Class FeiLongLangSuiteTests.
@@ -37,9 +38,7 @@ import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
                 ClassLoaderUtilTest.class,
                 EnumUtilTest.class,
 
-                StringReplaceParameterizedTest.class,
-                StringUtilTest.class,
-
+                FeiLongStringUtilSuiteTests.class,
                 FeiLongReflectSuiteTests.class,
                 FeiLongNumberUtilSuiteTests.class,
                 FeiLongObjectUtilSuiteTests.class,
