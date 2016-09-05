@@ -24,8 +24,16 @@ import org.junit.Test;
 import com.feilong.core.net.URIUtil;
 import com.feilong.core.net.URLUtil;
 
+/**
+ * The Class URLUtilToURITest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class URLUtilToURITest{
 
+    /**
+     * Test to URI.
+     */
     //************com.feilong.core.net.URLUtil.toURI(URL)**************
     @Test
     public void testToURI(){
@@ -33,6 +41,9 @@ public class URLUtilToURITest{
         assertEquals(URIUtil.create("http://www.exiaoshuo.com/jinyiyexing/"), URLUtil.toURI(url));
     }
 
+    /**
+     * Test to URI null URL.
+     */
     @Test
     public void testToURINullURL(){
         assertEquals(null, URLUtil.toURI(null));

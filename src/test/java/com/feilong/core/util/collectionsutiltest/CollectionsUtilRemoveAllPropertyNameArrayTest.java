@@ -27,6 +27,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilRemoveAllPropertyNameArrayTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilRemoveAllPropertyNameArrayTest{
 
     //****************CollectionsUtil.removeAll(Collection<User>, String, String...)************************
@@ -78,6 +83,9 @@ public class CollectionsUtilRemoveAllPropertyNameArrayTest{
         CollectionsUtil.removeAll(list, "", "刘备");
     }
 
+    /**
+     * Test remove all blank property name 1.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testRemoveAllBlankPropertyName1(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 24), new User("刘备", 25));

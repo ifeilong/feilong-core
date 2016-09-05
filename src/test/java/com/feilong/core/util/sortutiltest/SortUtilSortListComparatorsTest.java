@@ -34,8 +34,16 @@ import com.feilong.test.User;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sortList;
 
+/**
+ * The Class SortUtilSortListComparatorsTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortListComparatorsTest{
 
+    /**
+     * Test sort list comparators.
+     */
     @Test
     public void testSortListComparators(){
         User zhangfei = new User("张飞", 23);
@@ -49,6 +57,9 @@ public class SortUtilSortListComparatorsTest{
         assertThat(list, contains(liubei, guanyu));
     }
 
+    /**
+     * Test sort list comparators 1.
+     */
     @Test
     public void testSortListComparators1(){
         User guanyu = new User("关羽", 30);
@@ -68,22 +79,34 @@ public class SortUtilSortListComparatorsTest{
         assertThat(list, contains(liubei10, liubei25, liubei30, liubei60, guanyu));
     }
 
+    /**
+     * Test sort list null list.
+     */
     @Test
     public void testSortListNullList(){
         assertEquals(emptyList(), sortList((List) null, (Comparator) null));
     }
 
+    /**
+     * Test sort list empty list.
+     */
     @Test
     public void testSortListEmptyList(){
         assertEquals(emptyList(), sortList(new ArrayList<>(), (Comparator) null));
     }
 
+    /**
+     * Test sort list null comparators.
+     */
     @Test
     public void testSortListNullComparators(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
         assertEquals(list, sortList(list, (Comparator[]) null));
     }
 
+    /**
+     * Test sort list null comparator.
+     */
     @Test
     public void testSortListNullComparator(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));

@@ -25,6 +25,11 @@ import org.junit.Test;
 
 import com.feilong.core.net.ParamUtil;
 
+/**
+ * The Class ParamUtilToNaturalOrderingQueryStringTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ParamUtilToNaturalOrderingQueryStringTest{
     //***************com.feilong.core.net.ParamUtil.toNaturalOrderingQueryString(Map<String, String>)**********
 

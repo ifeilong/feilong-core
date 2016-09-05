@@ -27,6 +27,11 @@ import org.junit.Test;
 
 import static com.feilong.core.util.SortUtil.sortMapByValueAsc;
 
+/**
+ * The Class SortUtilSortMapByValueAscTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortMapByValueAscTest{
 
     /**
@@ -42,6 +47,9 @@ public class SortUtilSortMapByValueAscTest{
         assertThat(sortByValueAsc.keySet(), contains("b", "a", "c"));
     }
 
+    /**
+     * Test sort by value ASC null map.
+     */
     @Test
     public void testSortByValueASCNullMap(){
         assertEquals(emptyMap(), sortMapByValueAsc(null));

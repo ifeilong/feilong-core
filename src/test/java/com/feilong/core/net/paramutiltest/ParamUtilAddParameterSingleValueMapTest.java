@@ -29,6 +29,11 @@ import com.feilong.core.net.ParamUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
+/**
+ * The Class ParamUtilAddParameterSingleValueMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ParamUtilAddParameterSingleValueMapTest{
 
     /** The Constant log. */
@@ -62,6 +67,9 @@ public class ParamUtilAddParameterSingleValueMapTest{
         LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
     }
 
+    /**
+     * Test add parameter single value map null uri string.
+     */
     @Test
     public void testAddParameterSingleValueMapNullUriString(){
         Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
@@ -71,6 +79,9 @@ public class ParamUtilAddParameterSingleValueMapTest{
         assertEquals(EMPTY, ParamUtil.addParameterSingleValueMap(null, singleValueMap, UTF8));
     }
 
+    /**
+     * Test add parameter single value map empty uri string.
+     */
     @Test
     public void testAddParameterSingleValueMapEmptyUriString(){
         Map<String, String> singleValueMap = new LinkedHashMap<String, String>();

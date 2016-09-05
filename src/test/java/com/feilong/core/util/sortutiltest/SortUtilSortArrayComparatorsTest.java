@@ -28,8 +28,16 @@ import com.feilong.core.bean.ConvertUtil;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.SortUtil.sortArray;
 
+/**
+ * The Class SortUtilSortArrayComparatorsTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortArrayComparatorsTest{
 
+    /**
+     * Test sort array comparators test.
+     */
     @Test
     public void testSortArrayComparatorsTest(){
         String[] arrays = { "almn", "fba", "cba" };
@@ -54,17 +62,26 @@ public class SortUtilSortArrayComparatorsTest{
         sortArray(arrays, comparator);
     }
 
+    /**
+     * Test sort array null array.
+     */
     @Test
     public void testSortArrayNullArray(){
         String[] arrays = null;
         assertEquals(EMPTY_STRING_ARRAY, sortArray(arrays, ComparatorUtils.<String> naturalComparator()));
     }
 
+    /**
+     * Test sort array null comparator.
+     */
     @Test
     public void testSortArrayNullComparator(){
         assertEquals(toArray(1, 2, 3), sortArray(toArray(1, 2, 3), null));
     }
 
+    /**
+     * Test sort array empty comparator.
+     */
     @Test
     public void testSortArrayEmptyComparator(){
         assertEquals(toArray(1, 2, 3), sortArray(toArray(1, 2, 3), ConvertUtil.<Comparator> toArray()));

@@ -32,8 +32,16 @@ import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toIterator;
 
+/**
+ * The Class ConvertUtilToIteratorTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToIteratorTest{
 
+    /**
+     * Test to iterator enumeration.
+     */
     @Test
     public void testToIteratorEnumeration(){
         Enumeration<Object> enumeration = new StringTokenizer("this is a test");
@@ -42,6 +50,9 @@ public class ConvertUtilToIteratorTest{
         assertThat(IteratorUtils.toList(iterator), contains("this", "is", "a", "test"));
     }
 
+    /**
+     * Test to iterator collection.
+     */
     @Test
     public void testToIteratorCollection(){
         List<String> list = new ArrayList<String>();
@@ -52,12 +63,18 @@ public class ConvertUtilToIteratorTest{
         assertThat(IteratorUtils.toList(iterator), contains("aaaa", "nnnnn"));
     }
 
+    /**
+     * Test to iterator string.
+     */
     @Test
     public void testToIteratorString(){
         Iterator<String> iterator = toIterator("1,2");
         assertThat(IteratorUtils.toList(iterator), contains("1", "2"));
     }
 
+    /**
+     * Test to iterator array.
+     */
     @Test
     public void testToIteratorArray(){
         Object[] array = { "5", 8 };
@@ -66,6 +83,9 @@ public class ConvertUtilToIteratorTest{
         assertThat(IteratorUtils.toList(iterator), org.hamcrest.Matchers.<Object> contains("5", 8));
     }
 
+    /**
+     * Test to iterator primitive array.
+     */
     @Test
     public void testToIteratorPrimitiveArray(){
         int[] i2 = { 1, 2 };
@@ -73,6 +93,9 @@ public class ConvertUtilToIteratorTest{
         assertThat(IteratorUtils.toList(iterator), contains(1, 2));
     }
 
+    /**
+     * Test to iterator map.
+     */
     @Test
     public void testToIteratorMap(){
         // ************************map*********************************
@@ -85,6 +108,9 @@ public class ConvertUtilToIteratorTest{
         assertThat(IteratorUtils.toList(iterator), contains("1", "2"));
     }
 
+    /**
+     * Test to iterator null.
+     */
     @Test
     public void testToIteratorNull(){
         assertEquals(null, toIterator(null));

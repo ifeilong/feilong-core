@@ -17,6 +17,11 @@ package com.feilong.core.bean.convertutiltest;
 
 import org.junit.Ignore;
 
+/**
+ * The Class ConvertUtilToPropertiesTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 @Ignore
 public class ConvertUtilToPropertiesTest{
 

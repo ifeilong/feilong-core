@@ -30,6 +30,11 @@ import com.feilong.core.net.ParamUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
+/**
+ * The Class ParamUtilToSafeQueryStringTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ParamUtilToSafeQueryStringTest{
 
     /** The Constant log. */
@@ -48,6 +53,9 @@ public class ParamUtilToSafeQueryStringTest{
         LOGGER.debug(ParamUtil.toSafeQueryString(keyAndArrayMap, null));
     }
 
+    /**
+     * Test to safe query string null charset type.
+     */
     @Test
     public void testToSafeQueryStringNullCharsetType(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
@@ -58,12 +66,18 @@ public class ParamUtilToSafeQueryStringTest{
         assertEquals("name=jim&name=feilong&name=鑫哥&age=18&love=sanguo", ParamUtil.toSafeQueryString(keyAndArrayMap, null));
     }
 
+    /**
+     * Test to safe query string null map.
+     */
     @Test
     public void testToSafeQueryStringNullMap(){
         assertEquals(EMPTY, ParamUtil.toSafeQueryString(null, UTF8));
         assertEquals(EMPTY, ParamUtil.toSafeQueryString(null, null));
     }
 
+    /**
+     * Test to safe query string empty map.
+     */
     @Test
     public void testToSafeQueryStringEmptyMap(){
         assertEquals(EMPTY, ParamUtil.toSafeQueryString(new HashMap<String, String[]>(), UTF8));

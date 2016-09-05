@@ -41,6 +41,11 @@ import com.feilong.test.User;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.CollectionsUtil.group;
 
+/**
+ * The Class CollectionsUtilGroupWithTransformerTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilGroupWithTransformerTest{
 
     /** The Constant log. */
@@ -89,16 +94,25 @@ public class CollectionsUtilGroupWithTransformerTest{
 
     //********************************************************************
 
+    /**
+     * Test group null collection.
+     */
     @Test
     public void testGroupNullCollection(){
         assertEquals(emptyMap(), group(null, TransformerUtils.constantTransformer(5)));
     }
 
+    /**
+     * Test group empty collection.
+     */
     @Test
     public void testGroupEmptyCollection(){
         assertEquals(emptyMap(), group(new ArrayList<>(), TransformerUtils.constantTransformer(5)));
     }
 
+    /**
+     * Test group null transformer.
+     */
     //*****
     @Test(expected = NullPointerException.class)
     public void testGroupNullTransformer(){

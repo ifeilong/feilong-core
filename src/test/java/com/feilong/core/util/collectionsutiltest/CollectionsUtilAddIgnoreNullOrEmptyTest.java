@@ -27,6 +27,11 @@ import com.feilong.core.util.CollectionsUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilAddIgnoreNullOrEmptyTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilAddIgnoreNullOrEmptyTest{
 
     /**
@@ -56,6 +61,9 @@ public class CollectionsUtilAddIgnoreNullOrEmptyTest{
         CollectionsUtil.addIgnoreNullOrEmpty(null, "");
     }
 
+    /**
+     * Test add ignore null or empty empty element.
+     */
     @Test
     public void testAddIgnoreNullOrEmptyEmptyElement(){
         List<String> list = toList("xinge", "feilong1");
@@ -63,6 +71,9 @@ public class CollectionsUtilAddIgnoreNullOrEmptyTest{
         assertThat(list, contains("xinge", "feilong1"));
     }
 
+    /**
+     * Test add ignore null or empty empty element 1.
+     */
     @Test
     public void testAddIgnoreNullOrEmptyEmptyElement1(){
         List<String> list = toList("xinge", "feilong1");

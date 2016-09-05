@@ -24,6 +24,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
+/**
+ * The Class ConvertUtilToArrayVarargsTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToArrayVarargsTest{
 
     /**

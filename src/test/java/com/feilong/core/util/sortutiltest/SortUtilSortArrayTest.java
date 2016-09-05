@@ -23,18 +23,32 @@ import org.junit.Test;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.util.SortUtil.sortArray;
 
+/**
+ * The Class SortUtilSortArrayTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortArrayTest{
 
+    /**
+     * Test sort array null array.
+     */
     @Test
     public final void testSortArrayNullArray(){
         assertEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sortArray((Object[]) null));
     }
 
+    /**
+     * Test sort array null.
+     */
     @Test
     public final void testSortArrayNull(){
         assertEquals(toArray((String) null), sortArray(toArray((String) null)));
     }
 
+    /**
+     * Test sort T array.
+     */
     @Test
     public final void testSortTArray(){
         Integer[] array = toArray(100, 2, 200, 1, 500);

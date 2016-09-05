@@ -26,10 +26,18 @@ import org.junit.Test;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.net.ParamUtil;
 
+/**
+ * The Class ParamUtilJoinValuesOrderByIncludeKeysTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ParamUtilJoinValuesOrderByIncludeKeysTest{
 
     //***************************************************************************************************
 
+    /**
+     * Test join values one key.
+     */
     @Test
     public void testJoinValuesOneKey(){
         Map<String, String> map = new HashMap<String, String>();
@@ -39,6 +47,9 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
         assertEquals("create_salesorder", ParamUtil.joinValuesOrderByIncludeKeys(map, "service"));
     }
 
+    /**
+     * Test join values two keys.
+     */
     @Test
     public void testJoinValuesTwoKeys(){
         Map<String, String> map = new HashMap<String, String>();
@@ -49,6 +60,9 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
         assertEquals("unionpay_mobile" + "create_salesorder", ParamUtil.joinValuesOrderByIncludeKeys(map, "paymentType", "service"));
     }
 
+    /**
+     * Test join values no exist key.
+     */
     @Test
     public void testJoinValuesNoExistKey(){
         Map<String, String> map = new HashMap<String, String>();
@@ -58,11 +72,17 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, "a", "b"));
     }
 
+    /**
+     * Test join values order by include keys null map.
+     */
     @Test(expected = NullPointerException.class)
     public void testJoinValuesOrderByIncludeKeysNullMap(){
         ParamUtil.joinValuesOrderByIncludeKeys(null, "service");
     }
 
+    /**
+     * Test join values order by include keys null keys.
+     */
     @Test
     public void testJoinValuesOrderByIncludeKeysNullKeys(){
         Map<String, String> map = new HashMap<String, String>();
@@ -71,6 +91,9 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, null));
     }
 
+    /**
+     * Test join values order by include keys empty keys.
+     */
     @Test
     public void testJoinValuesOrderByIncludeKeysEmptyKeys(){
         Map<String, String> map = new HashMap<String, String>();
@@ -79,6 +102,9 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map));
     }
 
+    /**
+     * Test join values order by include keys empty keys 1.
+     */
     @Test
     public void testJoinValuesOrderByIncludeKeysEmptyKeys1(){
         Map<String, String> map = new HashMap<String, String>();
@@ -87,6 +113,9 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, ConvertUtil.<String> toArray()));
     }
 
+    /**
+     * Test join values order by include keys null element keys.
+     */
     @Test
     public void testJoinValuesOrderByIncludeKeysNullElementKeys(){
         Map<String, String> map = new HashMap<String, String>();

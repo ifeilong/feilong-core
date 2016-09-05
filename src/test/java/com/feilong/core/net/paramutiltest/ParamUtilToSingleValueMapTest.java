@@ -27,6 +27,11 @@ import com.feilong.core.net.ParamUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
+/**
+ * The Class ParamUtilToSingleValueMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ParamUtilToSingleValueMapTest{
 
     /**
@@ -42,6 +47,9 @@ public class ParamUtilToSingleValueMapTest{
         assertThat(ParamUtil.toSingleValueMap("a=1&", UTF8), allOf(hasEntry("a", "1")));
     }
 
+    /**
+     * Test to single value map duplicate param.
+     */
     @Test
     public void testToSingleValueMapDuplicateParam(){
         assertThat(ParamUtil.toSingleValueMap("a=1&b=2&a=3", UTF8), allOf(//
@@ -49,11 +57,17 @@ public class ParamUtilToSingleValueMapTest{
                         hasEntry("b", "2")));
     }
 
+    /**
+     * Test to single value map null query string.
+     */
     @Test
     public void testToSingleValueMapNullQueryString(){
         assertEquals(emptyMap(), ParamUtil.toSingleValueMap(null, UTF8));
     }
 
+    /**
+     * Test to single value map empty query string.
+     */
     @Test
     public void testToSingleValueMapEmptyQueryString(){
         assertEquals(emptyMap(), ParamUtil.toSingleValueMap("", UTF8));

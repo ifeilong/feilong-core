@@ -25,6 +25,11 @@ import com.feilong.core.util.maputiltest.FeiLongMapUtilSuiteTests;
 import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
 import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
 
+/**
+ * The Class FeiLongUtilSuiteTests.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 EnumerationUtilTest.class,

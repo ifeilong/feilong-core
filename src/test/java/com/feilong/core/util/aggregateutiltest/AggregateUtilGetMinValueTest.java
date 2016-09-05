@@ -26,6 +26,11 @@ import org.junit.Test;
 
 import com.feilong.core.util.AggregateUtil;
 
+/**
+ * The Class AggregateUtilGetMinValueTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class AggregateUtilGetMinValueTest{
     //*************************************************************************************************************
 
@@ -47,16 +52,25 @@ public class AggregateUtilGetMinValueTest{
         assertThat(AggregateUtil.getMinValue(map, "a", "b", "d", "g", "m"), is(-1005));
     }
 
+    /**
+     * Test get min value null map.
+     */
     @Test
     public void testGetMinValueNullMap(){
         assertEquals(null, AggregateUtil.getMinValue(null, "a", "b", "d", "g", "m"));
     }
 
+    /**
+     * Test get min value empty map.
+     */
     @Test
     public void testGetMinValueEmptyMap(){
         assertEquals(null, AggregateUtil.getMinValue(new HashMap<String, Integer>(), "a", "b", "d", "g", "m"));
     }
 
+    /**
+     * Test get min value empty keys.
+     */
     @Test
     public void testGetMinValueEmptyKeys(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -70,6 +84,9 @@ public class AggregateUtilGetMinValueTest{
         assertThat(AggregateUtil.getMinValue(map), is(3001));
     }
 
+    /**
+     * Test get min value null keys 1.
+     */
     @Test
     public void testGetMinValueNullKeys1(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -83,6 +100,9 @@ public class AggregateUtilGetMinValueTest{
         assertThat(AggregateUtil.getMinValue(map, null), is(3001));
     }
 
+    /**
+     * Test get min value empty keys 1.
+     */
     @Test
     public void testGetMinValueEmptyKeys1(){
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -96,6 +116,9 @@ public class AggregateUtilGetMinValueTest{
         assertThat(AggregateUtil.getMinValue(map, new String[] {}), is(3001));
     }
 
+    /**
+     * Test get min value not exist key.
+     */
     @Test
     public void testGetMinValueNotExistKey(){
         Map<String, Integer> map = new HashMap<String, Integer>();

@@ -29,6 +29,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilFindWithPredicateTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilFindWithPredicateTest{
 
     /**
@@ -49,22 +54,34 @@ public class CollectionsUtilFindWithPredicateTest{
         assertEquals(guanyu30, CollectionsUtil.find(list, predicate));
     }
 
+    /**
+     * Test find null predicate.
+     */
     @Test(expected = NullPointerException.class)
     public void testFindNullPredicate(){
         List<User> list = toList(new User("张飞", 23));
         CollectionsUtil.find(list, null);
     }
 
+    /**
+     * Test find null predicate 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testFindNullPredicate1(){
         CollectionsUtil.find(null, null);
     }
 
+    /**
+     * Test find null iterable.
+     */
     @Test
     public void testFindNullIterable(){
         assertEquals(null, CollectionsUtil.find(null, BeanPredicateUtil.equalPredicate("name", "关羽")));
     }
 
+    /**
+     * Test find not find.
+     */
     @Test
     public void testFindNotFind(){
         List<User> list = toList(new User("张飞", 23));

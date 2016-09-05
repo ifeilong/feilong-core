@@ -34,8 +34,16 @@ import com.feilong.core.util.CollectionsUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilSelectRejectedPredicateTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilSelectRejectedPredicateTest{
 
+    /**
+     * Test select rejected predicate.
+     */
     @Test
     public void testSelectRejectedPredicate(){
         Predicate<Integer> predicate = new ComparatorPredicate<Integer>(10, ComparatorUtils.<Integer> naturalComparator(), Criterion.LESS);
@@ -44,17 +52,26 @@ public class CollectionsUtilSelectRejectedPredicateTest{
         assertThat(result, contains(1, 5, 10, 1, 3));
     }
 
+    /**
+     * Test select rejected predicate equal predicate.
+     */
     @Test
     public void testSelectRejectedPredicateEqualPredicate(){
         List<Long> list = toList(1L, 1L, 2L, 3L);
         assertThat(CollectionsUtil.selectRejected(list, new EqualPredicate<Long>(1L)), contains(2L, 3L));
     }
 
+    /**
+     * Test select rejected predicate null collection.
+     */
     @Test
     public void testSelectRejectedPredicateNullCollection(){
         assertEquals(emptyList(), CollectionsUtil.selectRejected(null, new EqualPredicate<Long>(1L)));
     }
 
+    /**
+     * Test select rejected predicate empty collection.
+     */
     @Test
     public void testSelectRejectedPredicateEmptyCollection(){
         assertEquals(emptyList(), CollectionsUtil.selectRejected(new ArrayList<Long>(), new EqualPredicate<Long>(1L)));

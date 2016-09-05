@@ -30,6 +30,11 @@ import com.feilong.core.util.CollectionsUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilRemoveDuplicateTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilRemoveDuplicateTest{
 
     //************CollectionsUtil.removeDuplicate(Collection<O>)*************************
@@ -48,16 +53,25 @@ public class CollectionsUtilRemoveDuplicateTest{
         assertThat(list, contains("feilong1", "feilong2", "feilong2", "feilong3"));
     }
 
+    /**
+     * Test remove duplicate null collection.
+     */
     @Test
     public void testRemoveDuplicateNullCollection(){
         assertEquals(emptyList(), CollectionsUtil.removeDuplicate(null));
     }
 
+    /**
+     * Test remove duplicate empty collection.
+     */
     @Test
     public void testRemoveDuplicateEmptyCollection(){
         assertEquals(emptyList(), CollectionsUtil.removeDuplicate(new ArrayList<>()));
     }
 
+    /**
+     * Test remove duplicate empty collection 1.
+     */
     @Test
     public void testRemoveDuplicateEmptyCollection1(){
         assertEquals(emptyList(), CollectionsUtil.removeDuplicate(toList()));

@@ -30,6 +30,11 @@ import org.junit.Test;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
+/**
+ * The Class ConvertUtilToMapArrayTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToMapArrayTest{
 
     //************com.feilong.core.bean.ConvertUtil.toMap(Entry<String, String>...)*****************************

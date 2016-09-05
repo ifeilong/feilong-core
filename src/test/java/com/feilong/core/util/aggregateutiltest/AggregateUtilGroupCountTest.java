@@ -31,6 +31,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class AggregateUtilGroupCountTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class AggregateUtilGroupCountTest{
     //***************AggregateUtil.groupCount(Collection<User>, String)*****************************************************************
 
@@ -49,16 +54,25 @@ public class AggregateUtilGroupCountTest{
         assertThat(map, allOf(hasEntry("刘备", 2), hasEntry("张飞", 1), hasEntry("关羽", 1)));
     }
 
+    /**
+     * Test group count null collection.
+     */
     @Test
     public void testGroupCountNullCollection(){
         assertEquals(emptyMap(), AggregateUtil.groupCount(null, "name"));
     }
 
+    /**
+     * Test group count empty collection.
+     */
     @Test
     public void testGroupCountEmptyCollection(){
         assertEquals(emptyMap(), AggregateUtil.groupCount(toList(), "name"));
     }
 
+    /**
+     * Test group count null property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testGroupCountNullPropertyName(){
         User user1 = new User(2L);
@@ -67,6 +81,9 @@ public class AggregateUtilGroupCountTest{
         AggregateUtil.groupCount(toList(user1), (String) null);
     }
 
+    /**
+     * Test group count blank property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGroupCountBlankPropertyName(){
         User user1 = new User(2L);
@@ -75,6 +92,9 @@ public class AggregateUtilGroupCountTest{
         AggregateUtil.groupCount(toList(user1), "   ");
     }
 
+    /**
+     * Test group count empty property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGroupCountEmptyPropertyName(){
         User user1 = new User(2L);

@@ -32,6 +32,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilSelectRejectedArrayTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilSelectRejectedArrayTest{
 
     /**
@@ -50,6 +55,9 @@ public class CollectionsUtilSelectRejectedArrayTest{
     }
     ///******************
 
+    /**
+     * Test select null value.
+     */
     @Test
     public void testSelectNullValue(){
         User zhangfei = new User("张飞", 23);

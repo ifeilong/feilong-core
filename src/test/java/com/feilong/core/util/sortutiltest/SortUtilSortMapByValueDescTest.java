@@ -27,8 +27,16 @@ import org.junit.Test;
 
 import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
 
+/**
+ * The Class SortUtilSortMapByValueDescTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortMapByValueDescTest{
 
+    /**
+     * Test sort by value desc.
+     */
     @Test
     public void testSortByValueDesc(){
         Map<String, Integer> map = new LinkedHashMap<>();
@@ -39,6 +47,9 @@ public class SortUtilSortMapByValueDescTest{
         assertThat(sortMapByValueDesc(map).keySet(), contains("c", "a", "b"));
     }
 
+    /**
+     * Test sort by value desc null map.
+     */
     @Test
     public void testSortByValueDescNullMap(){
         assertEquals(emptyMap(), sortMapByValueDesc(null));

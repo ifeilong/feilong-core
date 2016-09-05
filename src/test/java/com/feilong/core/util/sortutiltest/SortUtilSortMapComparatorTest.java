@@ -30,6 +30,11 @@ import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 
 import static com.feilong.core.util.SortUtil.sortMap;
 
+/**
+ * The Class SortUtilSortMapComparatorTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortMapComparatorTest{
 
     /**
@@ -49,6 +54,9 @@ public class SortUtilSortMapComparatorTest{
         assertThat(sort.keySet(), contains("a2", "a8", "a13"));
     }
 
+    /**
+     * Test sort null comparator.
+     */
     @Test(expected = NullPointerException.class)
     public void testSortNullComparator(){
         Map<String, Integer> map = new LinkedHashMap<>();
@@ -60,6 +68,9 @@ public class SortUtilSortMapComparatorTest{
         sortMap(map, null);
     }
 
+    /**
+     * Test sort null map.
+     */
     @Test
     public void testSortNullMap(){
         assertEquals(

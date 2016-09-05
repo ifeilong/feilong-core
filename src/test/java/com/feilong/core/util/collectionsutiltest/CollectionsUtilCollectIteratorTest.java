@@ -33,8 +33,16 @@ import com.feilong.core.util.CollectionsUtil;
 import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilCollectIteratorTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilCollectIteratorTest{
 
+    /**
+     * Test collect iterator.
+     */
     @Test
     public void testCollectIterator(){
         List<String> list = toList("xinge", "feilong1", "feilong2", "feilong2");
@@ -46,16 +54,25 @@ public class CollectionsUtilCollectIteratorTest{
         assertThat(collect, hasItems(objects));
     }
 
+    /**
+     * Test collect null iterator.
+     */
     @Test
     public void testCollectNullIterator(){
         assertEquals(emptyList(), CollectionsUtil.collect((Iterator<Long>) null, TransformerUtils.stringValueTransformer()));
     }
 
+    /**
+     * Test collect empty iterator.
+     */
     @Test
     public void testCollectEmptyIterator(){
         assertEquals(emptyList(), CollectionsUtil.collect((new ArrayList<Long>()).iterator(), TransformerUtils.stringValueTransformer()));
     }
 
+    /**
+     * Test collect null transformer.
+     */
     @Test
     public void testCollectNullTransformer(){
         assertEquals(emptyList(), CollectionsUtil.collect(toIterator("1,2,3"), null));

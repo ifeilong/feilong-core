@@ -30,6 +30,11 @@ import com.feilong.test.User;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sortListByPropertyNamesValue;
 
+/**
+ * The Class SortUtilSortListByPropertyNamesValueTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortListByPropertyNamesValueTest{
 
     /**
@@ -63,6 +68,9 @@ public class SortUtilSortListByPropertyNamesValueTest{
         assertThat(list, contains(id1, id2, id5, id12));
     }
 
+    /**
+     * Test sort by property names value 2 property names.
+     */
     @Test
     public void testSortByPropertyNamesValue2PropertyNames(){
         User id12_age18 = new User(12L, 18);
@@ -76,6 +84,9 @@ public class SortUtilSortListByPropertyNamesValueTest{
         assertThat(list, contains(id1_age8, id2_age2, id2_age30, id2_age36, id12_age18));
     }
 
+    /**
+     * Test sort by property names value age property name.
+     */
     @Test
     public void testSortByPropertyNamesValueAgePropertyName(){
         User id12_age18 = new User(12L, 18);
@@ -90,16 +101,25 @@ public class SortUtilSortListByPropertyNamesValueTest{
         assertThat(list, contains(id2_age2, id1_age8, id12_age18, id2_age30, id2_age36));
     }
 
+    /**
+     * Test sort by property names value null list 1 property name.
+     */
     @Test
     public final void testSortByPropertyNamesValueNullList1PropertyName(){
         assertEquals(emptyList(), sortListByPropertyNamesValue((List) null, "name"));
     }
 
+    /**
+     * Test sort by property names value null list.
+     */
     @Test
     public final void testSortByPropertyNamesValueNullList(){
         assertEquals(emptyList(), sortListByPropertyNamesValue((List) null, "name", "age"));
     }
 
+    /**
+     * Test sort by property names value null property names.
+     */
     @Test(expected = NullPointerException.class)
     public void testSortByPropertyNamesValueNullPropertyNames(){
         User id12_age18 = new User(12L, 18);
@@ -108,6 +128,9 @@ public class SortUtilSortListByPropertyNamesValueTest{
         sortListByPropertyNamesValue(list, null);
     }
 
+    /**
+     * Test sort by property names value empty property names.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testSortByPropertyNamesValueEmptyPropertyNames(){
         User id12_age18 = new User(12L, 18);

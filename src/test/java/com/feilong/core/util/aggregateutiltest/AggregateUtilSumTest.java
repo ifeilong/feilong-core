@@ -27,6 +27,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class AggregateUtilSumTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class AggregateUtilSumTest{
     //***************AggregateUtil.sum(Collection<User>, String)*******************************
 
@@ -42,21 +47,33 @@ public class AggregateUtilSumTest{
         assertEquals(new BigDecimal(12L), AggregateUtil.sum(list, "id"));
     }
 
+    /**
+     * Test sum null collection.
+     */
     @Test
     public void testSumNullCollection(){
         assertEquals(null, AggregateUtil.sum(null, "id"));
     }
 
+    /**
+     * Test sum null property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testSumNullPropertyName(){
         AggregateUtil.sum(toList(new User(2L), new User(5L), new User(5L)), (String) null);
     }
 
+    /**
+     * Test sum empty property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testSumEmptyPropertyName(){
         AggregateUtil.sum(toList(new User(2L), new User(5L), new User(5L)), "");
     }
 
+    /**
+     * Test sum blank property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testSumBlankPropertyName(){
         AggregateUtil.sum(toList(new User(2L), new User(5L), new User(5L)), " ");

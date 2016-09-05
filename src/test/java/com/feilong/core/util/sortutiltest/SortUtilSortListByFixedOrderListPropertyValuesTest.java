@@ -30,8 +30,16 @@ import com.feilong.test.User;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.SortUtil.sortListByFixedOrderPropertyValueList;
 
+/**
+ * The Class SortUtilSortListByFixedOrderListPropertyValuesTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortListByFixedOrderListPropertyValuesTest{
 
+    /**
+     * Test sort by fixed order property value list.
+     */
     @Test
     public void testSortByFixedOrderPropertyValueList(){
         User zhangfei = new User("张飞", 23);
@@ -45,23 +53,35 @@ public class SortUtilSortListByFixedOrderListPropertyValuesTest{
         assertThat(returnList, contains(liubei, guanyu));
     }
 
+    /**
+     * Test sort by fixed order property value list null list.
+     */
     @Test
     public void testSortByFixedOrderPropertyValueListNullList(){
         assertEquals(emptyList(), sortListByFixedOrderPropertyValueList(null, "name", toList("刘备", "关羽")));
     }
 
+    /**
+     * Test sort by fixed order property value list null property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testSortByFixedOrderPropertyValueListNullPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
         sortListByFixedOrderPropertyValueList(list, null, toList("刘备", "关羽"));
     }
 
+    /**
+     * Test sort by fixed order property value list empty property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testSortByFixedOrderPropertyValueListEmptyPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
         sortListByFixedOrderPropertyValueList(list, "", toList("刘备", "关羽"));
     }
 
+    /**
+     * Test sort by fixed order property value list blank property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testSortByFixedOrderPropertyValueListBlankPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
@@ -70,6 +90,9 @@ public class SortUtilSortListByFixedOrderListPropertyValuesTest{
 
     //****
 
+    /**
+     * Test sort by fixed order property value list null property values.
+     */
     @Test(expected = NullPointerException.class)
     public void testSortByFixedOrderPropertyValueListNullPropertyValues(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));

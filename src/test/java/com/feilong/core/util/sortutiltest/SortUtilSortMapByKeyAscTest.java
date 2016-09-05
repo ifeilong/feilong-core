@@ -30,6 +30,11 @@ import org.junit.Test;
 
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
+/**
+ * The Class SortUtilSortMapByKeyAscTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortMapByKeyAscTest{
 
     /**
@@ -53,6 +58,9 @@ public class SortUtilSortMapByKeyAscTest{
                         allOf(hasEntry("a", 123), hasEntry("b", 8), hasEntry("c", 345), hasEntry("d", 3455), hasEntry(null, 1345)));
     }
 
+    /**
+     * Test sort by key asc null map.
+     */
     //************com.feilong.core.util.SortUtil.sortByKeyAsc(Map<String, Integer>)*****************************
     @Test
     public void testSortByKeyAscNullMap(){

@@ -30,6 +30,11 @@ import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
+/**
+ * The Class ConvertUtilToMapPropertiesTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToMapPropertiesTest{
 
     //*********************com.feilong.core.bean.ConvertUtil.toMap(Properties)*************

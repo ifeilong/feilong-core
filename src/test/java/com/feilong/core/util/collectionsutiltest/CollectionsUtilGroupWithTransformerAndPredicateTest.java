@@ -42,6 +42,11 @@ import com.feilong.test.User;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.CollectionsUtil.group;
 
+/**
+ * The Class CollectionsUtilGroupWithTransformerAndPredicateTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilGroupWithTransformerAndPredicateTest{
 
     /**
@@ -88,6 +93,9 @@ public class CollectionsUtilGroupWithTransformerAndPredicateTest{
 
     //********************************************************************
 
+    /**
+     * Test group null collection.
+     */
     @Test
     public void testGroupNullCollection(){
         assertEquals(
@@ -98,6 +106,9 @@ public class CollectionsUtilGroupWithTransformerAndPredicateTest{
                                         TransformerUtils.constantTransformer(5)));
     }
 
+    /**
+     * Test group empty collection.
+     */
     @Test
     public void testGroupEmptyCollection(){
         assertEquals(
@@ -108,6 +119,9 @@ public class CollectionsUtilGroupWithTransformerAndPredicateTest{
                                         TransformerUtils.constantTransformer(5)));
     }
 
+    /**
+     * Test group null transformer.
+     */
     //*****
     @Test(expected = NullPointerException.class)
     public void testGroupNullTransformer(){

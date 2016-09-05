@@ -29,8 +29,16 @@ import org.junit.Test;
 
 import static com.feilong.core.util.SortUtil.sortMapByKeyDesc;
 
+/**
+ * The Class SortUtilSortMapByKeyDescTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SortUtilSortMapByKeyDescTest{
 
+    /**
+     * Test sort by key desc null map.
+     */
     //**************com.feilong.core.util.SortUtil.sortByKeyDesc(Map<String, Integer>)**************************
     @Test
     public void testSortByKeyDescNullMap(){

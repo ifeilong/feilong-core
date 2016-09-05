@@ -29,6 +29,11 @@ import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 
+/**
+ * The Class ConvertUtilToEnumerationTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToEnumerationTest{
 
     /**
@@ -39,6 +44,9 @@ public class ConvertUtilToEnumerationTest{
         assertEquals(Collections.emptyEnumeration(), ConvertUtil.toEnumeration(null));
     }
 
+    /**
+     * Test to enumeration.
+     */
     @Test
     public void testToEnumeration(){
         // Enumeration

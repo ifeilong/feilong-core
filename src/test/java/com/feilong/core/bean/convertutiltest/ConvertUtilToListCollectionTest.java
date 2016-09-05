@@ -29,8 +29,16 @@ import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class ConvertUtilToListCollectionTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToListCollectionTest{
 
+    /**
+     * Test to list.
+     */
     @Test
     public void testToList(){
         Set<String> set = new LinkedHashSet<>();
@@ -47,11 +55,17 @@ public class ConvertUtilToListCollectionTest{
         assertThat(toList(toList("a", "a", "b", "b")), contains("a", "a", "b", "b"));
     }
 
+    /**
+     * Test to list null collection.
+     */
     @Test
     public void testToListNullCollection(){
         assertEquals(emptyList(), toList((Set<String>) null));
     }
 
+    /**
+     * Test to list empty collection.
+     */
     @Test
     public void testToListEmptyCollection(){
         assertEquals(emptyList(), toList(new ArrayList<String>()));

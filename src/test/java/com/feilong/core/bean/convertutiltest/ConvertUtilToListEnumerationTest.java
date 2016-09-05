@@ -31,6 +31,11 @@ import com.feilong.core.bean.ConvertUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class ConvertUtilToListEnumerationTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToListEnumerationTest{
 
     /**
@@ -45,6 +50,9 @@ public class ConvertUtilToListEnumerationTest{
         assertThat(toList(enumeration), contains("a", "b"));
     }
 
+    /**
+     * Test to list null enumeration.
+     */
     @Test
     public void testToListNullEnumeration(){
         assertEquals(emptyList(), toList((Enumeration<String>) null));

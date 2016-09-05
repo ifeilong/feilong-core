@@ -32,6 +32,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilCollectIterableTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilCollectIterableTest{
 
     /**
@@ -48,16 +53,25 @@ public class CollectionsUtilCollectIterableTest{
         assertThat(collect, hasItems(objects));
     }
 
+    /**
+     * Test collect null iterable.
+     */
     @Test
     public void testCollectNullIterable(){
         assertEquals(emptyList(), CollectionsUtil.collect((List<Long>) null, TransformerUtils.stringValueTransformer()));
     }
 
+    /**
+     * Test collect empty iterable.
+     */
     @Test
     public void testCollectEmptyIterable(){
         assertEquals(emptyList(), CollectionsUtil.collect(new ArrayList<Long>(), TransformerUtils.stringValueTransformer()));
     }
 
+    /**
+     * Test collect 2.
+     */
     @Test
     public void testCollect2(){
         List<User> list = toList(//

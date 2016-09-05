@@ -28,6 +28,11 @@ import com.feilong.core.util.CollectionsUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilRemoveElementTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilRemoveElementTest{
 
     //**************CollectionsUtil.remove(Collection<String>, String)*************************

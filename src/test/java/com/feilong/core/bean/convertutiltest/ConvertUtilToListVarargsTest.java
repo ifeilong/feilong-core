@@ -30,8 +30,16 @@ import com.feilong.test.User;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class ConvertUtilToListVarargsTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToListVarargsTest{
 
+    /**
+     * Test to list.
+     */
     @Test
     public void testToList(){
         User user1 = new User();
@@ -42,16 +50,25 @@ public class ConvertUtilToListVarargsTest{
         assertThat(toList(user1, user2), contains(user1, user2));
     }
 
+    /**
+     * Test to list null array.
+     */
     @Test
     public void testToListNullArray(){
         assertEquals(emptyList(), toList((User[]) null));
     }
 
+    /**
+     * Test to list empty array.
+     */
     @Test
     public void testToListEmptyArray(){
         assertEquals(emptyList(), toList(toArray()));
     }
 
+    /**
+     * Test to list null element array.
+     */
     @Test
     public void testToListNullElementArray(){
         List<User> list = new ArrayList<User>();

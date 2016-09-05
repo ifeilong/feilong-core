@@ -26,6 +26,11 @@ import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
+/**
+ * The Class ConvertUtilToMapKeyValueTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToMapKeyValueTest{
     //******************com.feilong.core.bean.ConvertUtil.toMap(String, String)*************************
 
@@ -39,6 +44,9 @@ public class ConvertUtilToMapKeyValueTest{
 
     }
 
+    /**
+     * Test to map null key.
+     */
     @Test
     public void testToMapNullKey(){
         Map<String, String> map = toMap(null, "丈八蛇矛");

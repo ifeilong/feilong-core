@@ -34,6 +34,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class AggregateUtilGroupCountPredicateTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class AggregateUtilGroupCountPredicateTest{
 
     //********************AggregateUtil.groupCount(Collection<User>, String, Predicate<User>)******************************************************************
@@ -55,11 +60,17 @@ public class AggregateUtilGroupCountPredicateTest{
         assertThat(map, allOf(hasEntry("刘备", 1), hasEntry("赵云", 2)));
     }
 
+    /**
+     * Test group count null collection.
+     */
     @Test
     public void testGroupCountNullCollection(){
         assertEquals(emptyMap(), AggregateUtil.groupCount(null, "name", BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS)));
     }
 
+    /**
+     * Test group count empty collection.
+     */
     @Test
     public void testGroupCountEmptyCollection(){
         assertEquals(
@@ -67,6 +78,9 @@ public class AggregateUtilGroupCountPredicateTest{
                         AggregateUtil.groupCount(toList(), "name", BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS)));
     }
 
+    /**
+     * Test group count null property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testGroupCountNullPropertyName(){
         User user1 = new User(2L);
@@ -76,6 +90,9 @@ public class AggregateUtilGroupCountPredicateTest{
         AggregateUtil.groupCount(toList(user1), (String) null, comparatorPredicate);
     }
 
+    /**
+     * Test group count blank property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGroupCountBlankPropertyName(){
         User user1 = new User(2L);
@@ -85,6 +102,9 @@ public class AggregateUtilGroupCountPredicateTest{
         AggregateUtil.groupCount(toList(user1), "   ", comparatorPredicate);
     }
 
+    /**
+     * Test group count empty property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testGroupCountEmptyPropertyName(){
         User user1 = new User(2L);
@@ -94,6 +114,9 @@ public class AggregateUtilGroupCountPredicateTest{
         AggregateUtil.groupCount(toList(user1), "", comparatorPredicate);
     }
 
+    /**
+     * Test group count null predicate.
+     */
     @Test
     public void testGroupCountNullPredicate(){
         List<User> list = toList(//

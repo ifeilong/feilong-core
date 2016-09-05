@@ -26,8 +26,16 @@ import org.junit.Test;
 
 import com.feilong.core.net.ParamUtil;
 
+/**
+ * The Class ParamUtilToQueryStringUseArrayValueMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ParamUtilToQueryStringUseArrayValueMapTest{
 
+    /**
+     * Test join array value map.
+     */
     @Test
     public void testJoinArrayValueMap(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
@@ -38,6 +46,9 @@ public class ParamUtilToQueryStringUseArrayValueMapTest{
         assertEquals("province=江苏省&province=浙江省&city=南通市", ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
     }
 
+    /**
+     * Test join array value map null element.
+     */
     @Test
     public void testJoinArrayValueMapNullElement(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
@@ -58,11 +69,17 @@ public class ParamUtilToQueryStringUseArrayValueMapTest{
     //        assertEquals("province=&city=南通市", ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
     //    }
 
+    /**
+     * Test join array value map null map.
+     */
     @Test
     public void testJoinArrayValueMapNullMap(){
         assertEquals(EMPTY, ParamUtil.toQueryStringUseArrayValueMap(null));
     }
 
+    /**
+     * Test join array value map empty map.
+     */
     @Test
     public void testJoinArrayValueMapEmptyMap(){
         assertEquals(EMPTY, ParamUtil.toQueryStringUseArrayValueMap(new HashMap<String, String[]>()));

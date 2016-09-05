@@ -34,9 +34,17 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class AggregateUtilAvgArrayTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class AggregateUtilAvgArrayTest{
     //****************AggregateUtil.avg(Collection<User>, String[], int)*******************************
 
+    /**
+     * Test avg 2.
+     */
     @Test
     public void testAvg2(){
         User user1 = new User(2L);
@@ -49,16 +57,25 @@ public class AggregateUtilAvgArrayTest{
         assertThat(map, allOf(hasEntry("id", toBigDecimal("2.50")), hasEntry("age", toBigDecimal("24.00"))));
     }
 
+    /**
+     * Test avg null collection.
+     */
     @Test
     public void testAvgNullCollection(){
         assertEquals(emptyMap(), AggregateUtil.avg(null, ConvertUtil.toArray("id", "age"), 2));
     }
 
+    /**
+     * Test avg empty collection.
+     */
     @Test
     public void testAvgEmptyCollection(){
         assertEquals(emptyMap(), AggregateUtil.avg(toList(), ConvertUtil.toArray("id", "age"), 2));
     }
 
+    /**
+     * Test avg null property names.
+     */
     @Test(expected = NullPointerException.class)
     public void testAvgNullPropertyNames(){
         User user1 = new User(2L);
@@ -70,6 +87,9 @@ public class AggregateUtilAvgArrayTest{
         AggregateUtil.avg(toList(user1, user2), (String[]) null, 2);
     }
 
+    /**
+     * Test avg with empty property name element.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testAvgWithEmptyPropertyNameElement(){
         User user1 = new User(2L);

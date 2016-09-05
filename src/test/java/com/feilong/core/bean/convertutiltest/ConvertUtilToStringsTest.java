@@ -26,6 +26,11 @@ import com.feilong.core.net.URLUtil;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toStrings;
 
+/**
+ * The Class ConvertUtilToStringsTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToStringsTest{
 
     //    /** The Constant log. */
@@ -36,11 +41,17 @@ public class ConvertUtilToStringsTest{
     //        LOGGER.debug(JsonUtil.format(toStrings("null,1,2,3,\"4\",\'aaaa\'"), 0, 0));
     //    }
 
+    /**
+     * Test to strings string.
+     */
     @Test
     public void testToStringsString(){
         assertArrayEquals(new String[] { "5", "4", "8", "2", "8", "9", "5", "3", "a" }, toStrings("{5,4, 8,2;8 9_5@3`a}"));
     }
 
+    /**
+     * Test to strings integers.
+     */
     @Test
     public void testToStringsIntegers(){
         assertArrayEquals(new String[] { "1", "2", "5" }, toStrings(new Integer[] { 1, 2, 5 }));
@@ -65,11 +76,17 @@ public class ConvertUtilToStringsTest{
 
     }
 
+    /**
+     * Test to strings null.
+     */
     @Test
     public void testToStringsNull(){
         assertArrayEquals(null, toStrings(null));
     }
 
+    /**
+     * Test to strings empty UR ls.
+     */
     @Test
     public void testToStringsEmptyURLs(){
         URL[] urls1 = {};

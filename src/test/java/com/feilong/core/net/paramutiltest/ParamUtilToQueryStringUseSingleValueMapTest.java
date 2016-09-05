@@ -26,6 +26,11 @@ import org.junit.Test;
 
 import com.feilong.core.net.ParamUtil;
 
+/**
+ * The Class ParamUtilToQueryStringUseSingleValueMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ParamUtilToQueryStringUseSingleValueMapTest{
 
     /**
@@ -38,6 +43,9 @@ public class ParamUtilToQueryStringUseSingleValueMapTest{
         assertEquals("=", ParamUtil.toQueryStringUseSingleValueMap(map));
     }
 
+    /**
+     * Test join single value map 2.
+     */
     @Test
     public void testJoinSingleValueMap2(){
         Map<String, String> map = new LinkedHashMap<>();
@@ -62,11 +70,17 @@ public class ParamUtilToQueryStringUseSingleValueMapTest{
         assertEquals("province=江苏省&city=南通市", ParamUtil.toQueryStringUseSingleValueMap(singleValueMap));
     }
 
+    /**
+     * Test join single value map null map.
+     */
     @Test
     public void testJoinSingleValueMapNullMap(){
         assertEquals(EMPTY, ParamUtil.toQueryStringUseSingleValueMap(null));
     }
 
+    /**
+     * Test join single value map empty map.
+     */
     @Test
     public void testJoinSingleValueMapEmptyMap(){
         assertEquals(EMPTY, ParamUtil.toQueryStringUseSingleValueMap(new HashMap<String, String>()));

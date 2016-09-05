@@ -30,6 +30,11 @@ import com.feilong.core.net.ParamUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
+/**
+ * The Class ParamUtilAddParameterArrayValueMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ParamUtilAddParameterArrayValueMapTest{
 
     /** The Constant log. */
@@ -81,6 +86,9 @@ public class ParamUtilAddParameterArrayValueMapTest{
 
     //*******************************************************************************
 
+    /**
+     * Test get encoded url by array map null uri.
+     */
     @Test
     public void testGetEncodedUrlByArrayMapNullUri(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
@@ -90,6 +98,9 @@ public class ParamUtilAddParameterArrayValueMapTest{
         assertEquals(EMPTY, ParamUtil.addParameterArrayValueMap(null, keyAndArrayMap, UTF8));
     }
 
+    /**
+     * Test get encoded url by array map empty uri.
+     */
     @Test
     public void testGetEncodedUrlByArrayMapEmptyUri(){
         Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
@@ -99,12 +110,18 @@ public class ParamUtilAddParameterArrayValueMapTest{
         assertEquals(EMPTY, ParamUtil.addParameterArrayValueMap("", keyAndArrayMap, UTF8));
     }
 
+    /**
+     * Test get encoded url by array map null map.
+     */
     @Test
     public void testGetEncodedUrlByArrayMapNullMap(){
         String beforeUrl = "www.baidu.com?a=b";
         assertEquals(beforeUrl, ParamUtil.addParameterArrayValueMap(beforeUrl, null, UTF8));
     }
 
+    /**
+     * Test get encoded url by array map empty map.
+     */
     @Test
     public void testGetEncodedUrlByArrayMapEmptyMap(){
         String beforeUrl = "www.baidu.com?a=b";

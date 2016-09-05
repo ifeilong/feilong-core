@@ -24,6 +24,11 @@ import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.convert;
 
+/**
+ * The Class ConvertUtilConvertClassTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilConvertClassTest{
 
     //    /** The Constant log. */
@@ -70,6 +75,9 @@ public class ConvertUtilConvertClassTest{
         //MalformedURLException ConversionException
     }
 
+    /**
+     * Test convert target type.
+     */
     @Test(expected = NullPointerException.class)
     public void testConvertTargetType(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";

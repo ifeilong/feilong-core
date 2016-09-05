@@ -27,6 +27,11 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class CollectionsUtilIndexOfTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class CollectionsUtilIndexOfTest{
 
     /**
@@ -97,6 +102,9 @@ public class CollectionsUtilIndexOfTest{
         CollectionsUtil.indexOf(list, "", 240);
     }
 
+    /**
+     * Test index of empty property name 2.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testIndexOfEmptyPropertyName2(){
         List<User> list = toList(//

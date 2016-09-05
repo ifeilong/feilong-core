@@ -31,6 +31,11 @@ import org.junit.Test;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
+/**
+ * The Class ConvertUtilToMapCollectionTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ConvertUtilToMapCollectionTest{
 
     //******com.feilong.core.bean.ConvertUtil.toMap(Collection<SimpleEntry<String, String>>)**********************

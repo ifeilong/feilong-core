@@ -23,6 +23,11 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
 
+/**
+ * The Class URLUtilGetUnionUrlTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class URLUtilGetUnionUrlTest{
 
     /** The Constant LOGGER. */

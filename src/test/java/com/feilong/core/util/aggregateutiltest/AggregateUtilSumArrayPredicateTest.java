@@ -33,10 +33,18 @@ import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class AggregateUtilSumArrayPredicateTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class AggregateUtilSumArrayPredicateTest{
 
     //**************AggregateUtil.sum(Collection<User>, String, Predicate<User>)*******************************
 
+    /**
+     * Test sum predicate.
+     */
     @Test
     public void testSumPredicate(){
         List<User> list = toList(//
@@ -57,6 +65,9 @@ public class AggregateUtilSumArrayPredicateTest{
         assertEquals(new BigDecimal(100L), sum);
     }
 
+    /**
+     * Test sum predicate null value.
+     */
     @Test
     public void testSumPredicateNullValue(){
         List<User> list = toList(//
@@ -68,6 +79,9 @@ public class AggregateUtilSumArrayPredicateTest{
         assertEquals(new BigDecimal(102L), AggregateUtil.sum(list, "id", null));
     }
 
+    /**
+     * Test sum null collection.
+     */
     @Test
     public void testSumNullCollection(){
         assertEquals(null, AggregateUtil.sum(null, "id", new Predicate<User>(){
@@ -79,6 +93,9 @@ public class AggregateUtilSumArrayPredicateTest{
         }));
     }
 
+    /**
+     * Test sum empty collection.
+     */
     @Test
     public void testSumEmptyCollection(){
         assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), "id", new Predicate<User>(){
@@ -90,6 +107,9 @@ public class AggregateUtilSumArrayPredicateTest{
         }));
     }
 
+    /**
+     * Test sum null property name.
+     */
     @Test(expected = NullPointerException.class)
     public void testSumNullPropertyName(){
         assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), (String) null, new Predicate<User>(){
@@ -101,6 +121,9 @@ public class AggregateUtilSumArrayPredicateTest{
         }));
     }
 
+    /**
+     * Test sum empty property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testSumEmptyPropertyName(){
         assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), "", new Predicate<User>(){
@@ -112,6 +135,9 @@ public class AggregateUtilSumArrayPredicateTest{
         }));
     }
 
+    /**
+     * Test sum blank property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testSumBlankPropertyName(){
         assertEquals(null, AggregateUtil.sum(ConvertUtil.<User> toList(), " ", new Predicate<User>(){
@@ -123,6 +149,9 @@ public class AggregateUtilSumArrayPredicateTest{
         }));
     }
 
+    /**
+     * Test sum no match predicate.
+     */
     @Test
     public void testSumNoMatchPredicate(){
         List<User> list = toList(//
