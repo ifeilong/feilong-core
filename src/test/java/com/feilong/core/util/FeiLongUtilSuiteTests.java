@@ -32,7 +32,7 @@ import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                EnumerationUtilTest.class,
+                EnumerationUtilParameterizedTest.class,
 
                 RandomUtilTest.class,
                 RegexUtilTest.class,
