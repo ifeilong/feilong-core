@@ -199,12 +199,13 @@ public final class URIUtil{
      * 如果知道URI是有效的,不会产生 {@link URISyntaxException},可以使用静态的 {@link java.net.URI#create(String)}方法
      * </p>
      * </blockquote>
-     * 
+     *
      * @param uri
      *            the uri
-     * @return {@link java.net.URI#URI(String)} <br>
-     *         如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>uri</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uri</code> 是blank,抛出 {@link IllegalArgumentException}
+     * @throws URIParseException
+     *             如果转换的时候有任何异常
      * @see java.net.URI#URI(String)
      * @since 1.8.0
      */

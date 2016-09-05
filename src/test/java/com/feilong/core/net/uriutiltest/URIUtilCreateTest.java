@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
+package com.feilong.core.net.uriutiltest;
 
 import java.net.URI;
 
@@ -21,9 +21,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.tools.jsonlib.JsonUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
+import com.feilong.core.net.URIParseException;
+import com.feilong.core.net.URIUtil;
 
 /**
  * The Class URIUtilTest.
@@ -56,47 +55,24 @@ public class URIUtilCreateTest{
         LOGGER.debug("" + URI.create(uriString));
     }
 
-    /**
-     * Test create2.
-     */
-    @Test
-    public void testCreate2(){
-        URI uri = URIUtil.create("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o;a=2,4;p=3", UTF8);
-        LOGGER.debug(JsonUtil.format(uri));
-    }
-
-    /**
-     * Creates the.
-     */
-    @Test
-    public void create(){
-        String url = "http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2";
-        URI uri = URIUtil.create(url, UTF8);
-        LOGGER.debug(uri.toString());
+    @Test(expected = URIParseException.class)
+    public void testCreateErrorUri(){
+        URIUtil.create("://127.0.01/cmens");
     }
 
     //****************************************************************************************
-    /**
-     * Test create null.
-     */
     @Test(expected = NullPointerException.class)
     public void testCreateNull(){
         URIUtil.create(null);
     }
 
-    /**
-     * Test create empty.
-     */
     @Test(expected = IllegalArgumentException.class)
     public void testCreateEmpty(){
         URIUtil.create("");
     }
 
-    /**
-     * Test create empty 1.
-     */
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateEmpty1(){
+    public void testCreateBlank(){
         URIUtil.create(" ");
     }
 }

@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.net;
-
-import static org.junit.Assert.assertEquals;
+package com.feilong.core.net.uriutiltest;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.core.net.URIUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
@@ -28,10 +28,10 @@ import static com.feilong.core.CharsetType.UTF8;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class URIUtilTest{
+public class URIUtilEncodeTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URIUtilTest.class);
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(URIUtilEncodeTest.class);
 
     //******************************************************************************************************
     /**
@@ -58,55 +58,4 @@ public class URIUtilTest{
         LOGGER.debug(URIUtil.encode("%", UTF8));
         LOGGER.debug(URIUtil.encode("%25", UTF8));
     }
-
-    /**
-     * Decode.
-     */
-    @Test
-    public void decode(){
-        LOGGER.debug(
-                        URIUtil.decode(
-                                        "%E9%87%91%E6%80%BB%EF%BC%8C%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E4%B9%88%EF%BC%8C%E5%B0%B1%E6%80%8E%E4%B9%88%E4%B9%88",
-                                        UTF8));
-
-    }
-
-    /**
-     * Decode 1.
-     */
-    @Test
-    public void decode1(){
-        String str = "%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88";
-        LOGGER.debug(URIUtil.decode(str, "utf-8"));
-    }
-
-    /**
-     * Decode2.
-     */
-    @Test
-    public void decode2(){
-        LOGGER.debug(URIUtil.decode("aaaaa%chu111", UTF8));
-
-    }
-
-    /**
-     * Decode3.
-     */
-    @Test
-    public void decode3(){
-        LOGGER.debug(URIUtil.decode("%c", UTF8));
-    }
-
-    //****************com.feilong.core.net.URIUtil.getQueryString(String)********************************************
-    /**
-     * Test get query string.
-     */
-    @Test
-    public void testGetQueryString(){
-        assertEquals("a=1&a=2", URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2"));
-        assertEquals("a=1&a=2?a", URIUtil.getQueryString("http://127.0.0.1/cmens/t-b-f-a-c-s-f-p-g-e-i-o.htm?a=1&a=2?a"));
-        assertEquals("", URIUtil.getQueryString("?"));
-        assertEquals("a", URIUtil.getQueryString("?a"));
-    }
-
 }
