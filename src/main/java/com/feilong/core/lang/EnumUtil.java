@@ -52,7 +52,35 @@ public final class EnumUtil{
      * <ol>
      * <li>
      * <p>
-     * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,调用方式:
+     * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,
+     * 
+     * <pre class="code">
+     * public enum HttpMethodType{
+     * 
+     *     GET("get"),
+     * 
+     *     POST("post");
+     * 
+     *     private String method;
+     * 
+     *     private HttpMethodType(String method){
+     *         this.method = method;
+     *     }
+     * 
+     *     public String getMethod(){
+     *         return method;
+     *     }
+     * 
+     *     public void setMethod(String method){
+     *         this.method = method;
+     *     }
+     * }
+     * </pre>
+     * 
+     * <p>
+     * 要取HttpMethodType 里面的 method属性值是 "get"的枚举(忽视大小写),调用方式:
+     * </p>
+     * 
      * </p>
      * 
      * <pre class="code">
@@ -60,6 +88,8 @@ public final class EnumUtil{
      * </pre>
      * 
      * </li>
+     * 
+     * <li>如果你需要值区分大小写,可以调用 {@link #getEnumByPropertyValue(Class, String, Object)}</li>
      * </ol>
      * </blockquote>
      * 
@@ -94,7 +124,35 @@ public final class EnumUtil{
      * <ol>
      * <li>
      * <p>
-     * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,调用方式:
+     * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,
+     * 
+     * <pre class="code">
+     * public enum HttpMethodType{
+     * 
+     *     GET("get"),
+     * 
+     *     POST("post");
+     * 
+     *     private String method;
+     * 
+     *     private HttpMethodType(String method){
+     *         this.method = method;
+     *     }
+     * 
+     *     public String getMethod(){
+     *         return method;
+     *     }
+     * 
+     *     public void setMethod(String method){
+     *         this.method = method;
+     *     }
+     * }
+     * </pre>
+     * 
+     * <p>
+     * 要取HttpMethodType 里面的 method属性值是 "get"的枚举(区分大小写),调用方式:
+     * </p>
+     * 
      * </p>
      * 
      * <pre class="code">
@@ -102,6 +160,8 @@ public final class EnumUtil{
      * </pre>
      * 
      * </li>
+     * 
+     * <li>如果你需要值不区分大小写,可以调用 {@link #getEnumByPropertyValueIgnoreCase(Class, String, Object)}</li>
      * </ol>
      * </blockquote>
      *
