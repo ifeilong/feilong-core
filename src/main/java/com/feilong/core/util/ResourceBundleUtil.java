@@ -160,10 +160,10 @@ public final class ResourceBundleUtil{
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @param key
-     *            Properties配置文件键名
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
+     * @param key
+     *            Properties配置文件键名
      * @param arguments
      *            此处可以传递Object[]数组过来
      * @return 如果配置文件中,
@@ -184,8 +184,9 @@ public final class ResourceBundleUtil{
      *             如果资源文件 <code>baseName</code> 不存在
      * @see #getResourceBundle(String, Locale)
      * @see #getValue(ResourceBundle, String, Object...)
+     * @since 1.8.8 change method param locale order
      */
-    public static String getValue(String baseName,String key,Locale locale,Object...arguments){
+    public static String getValue(String baseName,Locale locale,String key,Object...arguments){
         ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
         return getValue(resourceBundle, key, arguments);
     }
