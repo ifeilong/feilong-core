@@ -61,7 +61,6 @@ public final class Alphabet{
      * </p>
      * 
      * @see com.feilong.core.util.RandomUtil#createRandomFromString(String, int)
-     * @see com.feilong.core.util.RandomUtil#createRandomFromString(String, int, int)
      */
     public static final String DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE = "23456789abcdefghijkmnpqrstuvwxyz";
 

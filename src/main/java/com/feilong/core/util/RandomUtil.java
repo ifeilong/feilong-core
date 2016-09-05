@@ -167,42 +167,4 @@ public final class RandomUtil{
         return RandomStringUtils.random(length, str);
     }
 
-    /**
-     * 随机抽取字符串char,拼接最小长度是<code>minLength</code>(包含),最大长度是<code>maxLength</code>(不包含)的随机字符串.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * RandomUtil.createRandomFromString({@link com.feilong.core.Alphabet#DECIMAL Alphabet.DECIMAL}, 8, 20)
-     * 从{@link com.feilong.core.Alphabet#DECIMAL Alphabet.DECIMAL}随机抽取字符,组成<b>最小长度是8</b>,<b>最大长度是20</b>的字符串
-     * 
-     * 生成的结果是可能是 142853574998970631
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param str
-     *            被抽取的字符串,比如示例中的 {@link com.feilong.core.Alphabet#DECIMAL}
-     * @param minLength
-     *            最小长度 ,比如示例中的 8
-     * @param maxLength
-     *            最大长度,比如示例中的 20
-     * 
-     * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>str</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>minLength</code> {@code <=}0 ,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>maxLength</code> {@code <} minLength,抛出 {@link IllegalArgumentException}
-     * @see #createRandomFromString(String, int)
-     */
-    public static String createRandomFromString(String str,int minLength,int maxLength){
-        Validate.notBlank(str, "str can't be null/empty!");
-
-        Validate.isTrue(minLength > 0, "input param [minLength] must >0,but is [%s]", minLength);
-        Validate.isTrue(maxLength >= minLength, "input param [maxLength]:[%s] must >= [minLength]:[%s]", maxLength, minLength);
-
-        long length = createRandom(minLength, maxLength);
-        return createRandomFromString(str, (int) length);
-    }
-
 }
