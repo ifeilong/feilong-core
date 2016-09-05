@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Rule;
@@ -42,49 +41,6 @@ public class RandomUtilTest{
     /** The repeat rule. */
     @Rule
     public RepeatRule repeatRule = new RepeatRule();
-
-    /**
-     * Test create random null pointer exception 1.
-     */
-    //**************com.feilong.core.util.RandomUtil.createRandom(Number, Number)***********************************
-    @Test(expected = NullPointerException.class)
-    public void testCreateRandomNullPointerException1(){
-        RandomUtil.createRandom(null, 5);
-    }
-
-    /**
-     * Test create random null pointer exception 2.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testCreateRandomNullPointerException2(){
-        RandomUtil.createRandom(5, null);
-    }
-
-    /**
-     * Test create random null pointer exception 22.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateRandomNullPointerException22(){
-        RandomUtil.createRandom(5, 2);
-    }
-
-    /**
-     * Creates the random.
-     */
-    @Test
-    @Repeat(20000)
-    public void testCreateRandom2(){
-        assertThat(RandomUtil.createRandom(10, 20), allOf(greaterThanOrEqualTo(10L), lessThan(20L)));
-        assertThat(RandomUtil.createRandom(0, 800), allOf(greaterThanOrEqualTo(0L), lessThan(800L)));
-    }
-
-    /**
-     * Test create random 3.
-     */
-    @Test
-    public void testCreateRandom3(){
-        assertEquals(800L, RandomUtil.createRandom(800, 800));
-    }
 
     //********************com.feilong.core.util.RandomUtil.createRandomWithLength(int)***************************
 

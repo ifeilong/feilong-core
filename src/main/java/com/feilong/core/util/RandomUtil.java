@@ -18,7 +18,6 @@ package com.feilong.core.util;
 import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.Validate;
 
 /**
@@ -57,50 +56,6 @@ public final class RandomUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    /**
-     * 创建最小值(包含)<code>minInclusiveValue</code>和最大值(不包含)<code>maxExclusiveValue</code>之间的随机数.
-     * 
-     * <p>
-     * 即 <code>minInclusiveValue</code> {@code <=} result {@code <} <code>maxExclusiveValue</code>
-     * </p>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * RandomUtil.createRandom(10, 20)
-     * 创建一个数值是10-20之间的随机数
-     * 
-     * 生成的结果是可能是 12
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param minInclusiveValue
-     *            最小值
-     * @param maxExclusiveValue
-     *            最大值
-     * @return 如果 <code>minInclusiveValue</code>是 null,抛出 {@link NullPointerException};<br>
-     *         如果 <code>maxExclusiveValue</code>是 null,抛出 {@link NullPointerException};<br>
-     *         如果 <code>minInclusiveValue</code> {@code <} <code>maxExclusiveValue</code>,抛出{@link IllegalArgumentException}<br>
-     *         如果 <code>minInclusiveValue</code> {@code =} <code>maxExclusiveValue</code>,直接返回 <code>minLong</code>
-     * 
-     * @see org.apache.commons.lang3.RandomUtils#nextInt(int, int)
-     * @see org.apache.commons.lang3.RandomUtils#nextLong(long, long)
-     * @see org.apache.commons.lang3.RandomUtils#nextFloat(float, float)
-     * @see org.apache.commons.lang3.RandomUtils#nextDouble(double, double)
-     */
-    public static long createRandom(Number minInclusiveValue,Number maxExclusiveValue){
-        Validate.notNull(minInclusiveValue, "minInclusiveValue can't be null!");
-        Validate.notNull(maxExclusiveValue, "maxExclusiveValue can't be null!");
-
-        long minLong = minInclusiveValue.longValue();
-        long maxLong = maxExclusiveValue.longValue();
-
-        Validate.isTrue(maxLong >= minLong, "input param [minInclusiveValue]:[%s] must <= [maxExclusiveValue]:[%s]", minLong, maxLong);
-        return RandomUtils.nextLong(minLong, maxLong);
     }
 
     // ********************************************************************
