@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.feilong.core.util.aggregateutiltest.FeiLongAggregateUtilSuiteTests;
 import com.feilong.core.util.collectionsutiltest.FeiLongCollectionsUtilSuiteTests;
 import com.feilong.core.util.maputiltest.FeiLongMapUtilSuiteTests;
+import com.feilong.core.util.randomutiltest.FeiLongRandomUtilSuiteTests;
 import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
 import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
 
@@ -34,7 +35,7 @@ import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
 @SuiteClasses({ //
                 EnumerationUtilParameterizedTest.class,
 
-                RandomUtilTest.class,
+                FeiLongRandomUtilSuiteTests.class,
                 RegexUtilTest.class,
                 ResourceBundleUtilTest.class,
 
