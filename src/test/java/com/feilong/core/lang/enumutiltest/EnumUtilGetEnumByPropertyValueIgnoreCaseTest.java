@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.lang.enumutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,14 +21,9 @@ import org.junit.Test;
 
 import com.feilong.core.bean.BeanUtilException;
 import com.feilong.core.entity.HttpMethodTestType;
+import com.feilong.core.lang.EnumUtil;
 
-/**
- * The Class EnumUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.6
- */
-public class EnumUtilTest{
+public class EnumUtilGetEnumByPropertyValueIgnoreCaseTest{
 
     /**
      * Test get enum.

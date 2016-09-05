@@ -21,6 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.core.lang.arrayutiltest.FeiLongArrayUtilSuiteTests;
 import com.feilong.core.lang.classutiltest.FeiLongClassUtilSuiteTests;
+import com.feilong.core.lang.enumutiltest.FeiLongEnumUtilSuiteTests;
 import com.feilong.core.lang.numberutiltest.FeiLongNumberUtilSuiteTests;
 import com.feilong.core.lang.objectutiltest.FeiLongObjectUtilSuiteTests;
 import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
@@ -37,7 +38,8 @@ import com.feilong.core.lang.stringutiltest.FeiLongStringUtilSuiteTests;
                 FeiLongArrayUtilSuiteTests.class,
 
                 ClassLoaderUtilTest.class,
-                EnumUtilTest.class,
+
+                FeiLongEnumUtilSuiteTests.class,
 
                 FeiLongStringUtilSuiteTests.class,
                 FeiLongReflectSuiteTests.class,
