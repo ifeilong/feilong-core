@@ -24,6 +24,7 @@ import com.feilong.core.util.collectionsutiltest.FeiLongCollectionsUtilSuiteTest
 import com.feilong.core.util.maputiltest.FeiLongMapUtilSuiteTests;
 import com.feilong.core.util.randomutiltest.FeiLongRandomUtilSuiteTests;
 import com.feilong.core.util.regexpattern.FeiLongRegexPatternSuiteTests;
+import com.feilong.core.util.resourcebundleutiltest.FeiLongResourceBundleUtilSuiteTests;
 import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
 
 /**
@@ -37,7 +38,8 @@ import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
 
                 FeiLongRandomUtilSuiteTests.class,
                 RegexUtilTest.class,
-                ResourceBundleUtilTest.class,
+
+                FeiLongResourceBundleUtilSuiteTests.class,
 
                 FeiLongAggregateUtilSuiteTests.class,
                 FeiLongRegexPatternSuiteTests.class,
