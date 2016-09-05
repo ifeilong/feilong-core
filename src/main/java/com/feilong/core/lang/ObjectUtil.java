@@ -147,9 +147,12 @@ public final class ObjectUtil{
     /**
      * 判断指定的对象 <code>object</code>是否是数组.
      * 
-     * <p>
-     * 支持判断原始类型数组 <code>primitive</code> 和包装类型数组
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>支持判断原始类型数组 <code>primitive</code> 和包装类型数组</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
