@@ -31,38 +31,6 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
  */
 public class StringUtilTokenizeToStringArrayTest{
 
-    //******************com.feilong.core.lang.StringUtil.tokenizeToStringArray(String, String, boolean, boolean)**************************************************************************************
-
-    /**
-     * Tokenize to string array2.
-     */
-    @Test
-    public void tokenizeToStringArray2(){
-        String str = "jin.xin  @ @aha ,@ala;";
-        String delimiters = "@";
-        assertArrayEquals(toArray("jin.xin  ", " ", "aha ,", "ala;"), StringUtil.tokenizeToStringArray(str, delimiters, false, false));
-    }
-
-    /**
-     * Tokenize to string array 22.
-     */
-    @Test
-    public void tokenizeToStringArray22(){
-        String delimiters = "@";
-        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray(null, delimiters, false, false));
-    }
-
-    //    @Test
-    //    public void tokenizeToStringArray221(){
-    //        String delimiters = " ";
-    //        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters, false, false));
-    //    }
-    //
-    //    @Test
-    //    public void tokenizeToStringArray222(){
-    //        String delimiters = ",";
-    //        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters, false, false));
-    //    }
     //*****************com.feilong.core.lang.StringUtil.tokenizeToStringArray(String, String)************************************************************************************
 
     /**
@@ -103,5 +71,4 @@ public class StringUtilTokenizeToStringArrayTest{
         String delimiters = ",";
         assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters));
     }
-
 }

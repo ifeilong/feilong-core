@@ -96,9 +96,6 @@ public class StringUtilFormatTest{
         //return StringUtils.rightPad(sectionName, 40, padStr) + StringUtils.rightPad("" + contentLength, 6, padStr) + progress;
     }
 
-    /**
-     * Format1.
-     */
     @Test
     public void format1(){
         Date date = new Date();

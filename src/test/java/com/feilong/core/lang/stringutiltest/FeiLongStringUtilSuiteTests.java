@@ -31,6 +31,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 StringUtilSubstringWithoutLastLastLengthTest.class,
                 StringUtilSubstringWithoutLastLastStringTest.class,
                 StringUtilTokenizeToStringArrayTest.class,
+                StringUtilTokenizeToStringArrayWithArgsTest.class,
         //
 })
 public class FeiLongStringUtilSuiteTests{
