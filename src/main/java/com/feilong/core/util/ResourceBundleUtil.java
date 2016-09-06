@@ -323,13 +323,10 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * <pre class="code">
-     * #expiretime period in minutes
-     * #逗号 分隔
-     * 
-     * # 注意此处 ip出现 - 横杆 仅作测试使用
+     * <span style="color:green"># 注意此处 ip出现 - 横杆 仅作测试使用</span>
      * memcached.serverlist=172.20.3-1.23:11211,172.20.31.22:11211 
      * memcached.poolname=sidsock2
-     * #单位分钟
+     * <span style="color:green">#单位分钟</span>
      * memcached.expiretime=180
      * 
      * memcached.serverweight=2
@@ -338,13 +335,13 @@ public final class ResourceBundleUtil{
      * memcached.minconnection=5
      * memcached.maxconnection=250
      * 
-     * #设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小
+     * <span style="color:green">#设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小</span>
      * memcached.maintSleep=30
      * 
-     * #关闭套接字缓存
+     * <span style="color:green">#关闭套接字缓存</span>
      * memcached.nagle=false
      * 
-     * #连接建立后的超时时间
+     * <span style="color:green">#连接建立后的超时时间</span>
      * memcached.socketto=3000
      * memcached.alivecheck=false
      * 
@@ -411,8 +408,7 @@ public final class ResourceBundleUtil{
      * </b>
      * 
      * <pre class="code">
-     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil
-     *                 .readPropertiesToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.readToAliasBean("messages.memcached", DangaMemCachedConfig.class);
      * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
@@ -441,7 +437,7 @@ public final class ResourceBundleUtil{
      * </pre>
      * 
      * <p>
-     * 你会发现类型会自动转换, 虽然properties里面存储key和value都是string,但是使用该方法, 可以自动类型转换,转成bean里面声明的类型
+     * 你会发现类型会自动转换,虽然properties里面存储key和value都是string,但是使用该方法,可以<b>自动类型转换</b>,转成bean里面声明的类型
      * </p>
      * 
      * <p>
@@ -450,7 +446,7 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * <p>
-     * 你需要如此这般:
+     * <b>你需要如此这般:</b>
      * </p>
      *
      * <pre class="code">
@@ -460,8 +456,7 @@ public final class ResourceBundleUtil{
      * 
      * BeanUtil.register(arrayConverter, String[].class);
      * 
-     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil
-     *                 .readPropertiesToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.readToAliasBean("messages.memcached", DangaMemCachedConfig.class);
      * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
@@ -502,7 +497,7 @@ public final class ResourceBundleUtil{
      *             如果 <code>baseName</code> 是 blank
      * @throws MissingResourceException
      *             如果资源文件 <code>baseName</code> 不存在
-     * @see com.feilong.core.bean.BeanUtil#populateAliasBean(Object, Map)
+     * @see BeanUtil#populateAliasBean(Object, Map)
      * @since 1.8.1
      */
     public static <T> T readToAliasBean(String baseName,Class<T> aliasBeanClass){
