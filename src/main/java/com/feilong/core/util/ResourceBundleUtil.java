@@ -556,6 +556,32 @@ public final class ResourceBundleUtil{
 
     /**
      * 获得ResourceBundle({@link PropertyResourceBundle}),新增这个方法的初衷是为了能读取任意的资源(包括本地file等).
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 有配置文件在 E:\\DataCommon\\Files\\Java\\config\\mail-read.properties (通常敏感的配置文件不会随着项目走),现在需要读取里面的信息
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * ResourceBundle resourceBundle = getResourceBundle(new FileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"));
+     * LOGGER.debug(JsonUtil.format(toMap(resourceBundle)));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "incoming.imap.hostname": "imap.exmail.qq.com",
+     * "incoming.pop.hostname": "pop.exmail.qq.com",
+     * }
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param inputStream
      *            the input stream

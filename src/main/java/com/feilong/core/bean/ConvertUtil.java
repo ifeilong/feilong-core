@@ -1630,10 +1630,13 @@ public final class ConvertUtil{
     /**
      * 读取配置文件,将k/v 统统转成map.
      * 
-     * <p>
-     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
-     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span></li>
+     * </ol>
+     * </blockquote>
      *
      * @param resourceBundle
      *            the resource bundle
