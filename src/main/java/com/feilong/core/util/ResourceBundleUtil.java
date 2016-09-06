@@ -154,9 +154,12 @@ public final class ResourceBundleUtil{
     /**
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      * 
-     * <p>
-     * 支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -212,9 +215,12 @@ public final class ResourceBundleUtil{
     /**
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
      * 
-     * <p>
-     * 支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -278,10 +284,13 @@ public final class ResourceBundleUtil{
     /**
      * 读取配置文件,将k/v 统统转成map.
      * 
-     * <p>
-     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
-     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是<span style="color:red">TreeMap</span></li>
+     * </ol>
+     * </blockquote>
      * 
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>

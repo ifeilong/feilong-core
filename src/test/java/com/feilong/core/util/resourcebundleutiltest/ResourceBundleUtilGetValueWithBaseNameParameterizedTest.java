@@ -28,17 +28,30 @@ import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
+/**
+ * The Class ResourceBundleUtilGetValueWithBaseNameParameterizedTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ResourceBundleUtilGetValueWithBaseNameParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, Object[], String>{
 
     /** The base name. */
     private static final String BASE_NAME = "messages/feilong-core-test";
 
+    /**
+     * Test get value.
+     */
     @Test
     public void testGetValue(){
         assertEquals(expectedValue, ResourceBundleUtil.getValue(input1, input2, input3));
     }
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}:ResourceBundleUtil.getValue(\"{0}\",\"{1}\",\"{2}\")={3}")
     public static Iterable<Object[]> data(){
         return toList(//
