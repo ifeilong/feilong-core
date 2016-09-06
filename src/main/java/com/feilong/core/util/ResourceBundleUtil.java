@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -90,127 +89,6 @@ public final class ResourceBundleUtil{
     }
 
     // ****************************getValue*************************************************
-
-    /**
-     * 获取Properties配置文件键值 ,采用 {@link ResourceBundle#getBundle(String)} 方法来读取.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <p>
-     * 如果 <b>messages/feilong-core-test.properties</b> 文件有以下内容:
-     * </p>
-     * 
-     * <pre class="code">
-     * config_test_array=5,8,7,6
-     * test.arguments=my name is {0},age is {1}
-     * </pre>
-     * 
-     * <p>
-     * 你可以使用以下代码来读取内容:
-     * </p>
-     * 
-     * <pre class="code">
-     * ResourceBundleUtil.getValue("messages/feilong-core-test", "config_test_array")   = "5,8,7,6"
-     * ResourceBundleUtil.getValue("messages/feilong-core-test", "test.arguments","feilong",28)   = my name is feilong,age is 28
-     * </pre>
-     * 
-     * <p>
-     * 关于 "5,8,7,6" 此类的逗号分隔的字符串,你可以再使用 {@link StringUtil#tokenizeToStringArray(String, String)} 来转成数组
-     * </p>
-     * </blockquote>
-     *
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @param key
-     *            Properties配置文件键名
-     * @param arguments
-     *            the arguments
-     * @return 如果配置文件中,key不存在,LOGGER.warn警告输出,并返回 {@link StringUtils#EMPTY}<br>
-     * @throws NullPointerException
-     *             如果 <code>baseName</code> 或者 <code>key</code> 是null
-     * @throws IllegalArgumentException
-     *             如果 <code>baseName</code> 是 blank,或者 <code>key</code> 是blank
-     * @throws MissingResourceException
-     *             如果资源文件 <code>baseName</code> 不存在
-     * @see #getResourceBundle(String)
-     * @see #getValue(ResourceBundle, String, Object...)
-     * @since 1.8.1 support arguments param
-     */
-    public static String getValue(String baseName,String key,Object...arguments){
-        ResourceBundle resourceBundle = getResourceBundle(baseName);
-        return getValue(resourceBundle, key, arguments);
-    }
-
-    /**
-     * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>支持配置文件含参数信息 <code>arguments</code> ,使用 {@link MessageFormatUtil#format(String, Object...)} 来解析</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <p>
-     * 如果有配置文件 <b>messages\feilong-core-test.properties</b> ,内容如下:
-     * </p>
-     * 
-     * <pre class="code">
-     * test.arguments=my name is {0},age is {1}
-     * </pre>
-     * 
-     * 此时调用方法:
-     * 
-     * <pre class="code">
-     * ResourceBundleUtil.getValueWithArguments("messages.feilong-core-test", "test.arguments", "feilong", "18")
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * my name is feilong,age is 18
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @param locale
-     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @param key
-     *            Properties配置文件键名
-     * @param arguments
-     *            此处可以传递Object[]数组过来
-     * @return 如果配置文件中,key不存在,LOGGER.warn警告输出,并返回 {@link StringUtils#EMPTY}<br>
-     * @throws NullPointerException
-     *             如果 <code>baseName</code> 或者 <code>key</code> 是null
-     * @throws IllegalArgumentException
-     *             如果 <code>baseName</code> 是 blank,或者 <code>key</code> 是blank
-     * @throws MissingResourceException
-     *             如果资源文件 <code>baseName</code> 不存在
-     * @see #getResourceBundle(String, Locale)
-     * @see #getValue(ResourceBundle, String, Object...)
-     * @since 1.8.8 change method param locale order
-     */
-    public static String getValue(String baseName,Locale locale,String key,Object...arguments){
-        ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
-        return getValue(resourceBundle, key, arguments);
-    }
 
     /**
      * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
