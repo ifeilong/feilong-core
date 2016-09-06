@@ -32,7 +32,7 @@ import static com.feilong.core.RegexPattern.MOBILEPHONE;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
-public class MobilephonePatternTest extends AbstractBooleanParameterizedTest<String, Boolean>{
+public class MobilephonePatternParameterizedTest extends AbstractBooleanParameterizedTest<String, Boolean>{
 
     /**
      * Data.

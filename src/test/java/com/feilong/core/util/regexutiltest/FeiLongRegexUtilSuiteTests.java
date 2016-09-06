@@ -31,10 +31,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 RegexUtilTest.class,
 
-                IpPatternTest.class,
-                MobilephonePatternTest.class,
-                TelephonePatternTest.class,
-                TelephoneMustAreaCodePatternTest.class, })
+                IpPatternParameterizedTest.class,
+                MobilephonePatternParameterizedTest.class,
+                TelephonePatternParameterizedTest.class,
+                TelephoneMustAreaCodePatternParameterizedTest.class, })
 public class FeiLongRegexUtilSuiteTests{
 
 }

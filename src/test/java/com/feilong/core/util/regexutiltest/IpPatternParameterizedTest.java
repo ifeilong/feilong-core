@@ -24,31 +24,26 @@ import com.feilong.core.util.RegexUtil;
 import com.feilong.test.AbstractBooleanParameterizedTest;
 import com.feilong.test.TestUtil;
 
-import static com.feilong.core.RegexPattern.TELEPHONE;
+import static com.feilong.core.RegexPattern.IP;
 
 /**
- * The Class TelephonePatternTest.
+ * The Class IpPatternTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.5.3
+ * @since 1.8.0
  */
-public class TelephonePatternTest extends AbstractBooleanParameterizedTest<String, Boolean>{
+public class IpPatternParameterizedTest extends AbstractBooleanParameterizedTest<String, Boolean>{
 
     /**
      * Data.
      *
      * @return the collection
      */
-    //@Parameters(name = "index:{index}: matches({0})={1}")
-    @Parameters(name = "RegexUtil.matches(RegexPattern.TELEPHONE, {0})={1}")
+    @Parameters(name = "index:{index}: matches({0})={1}")
     public static Iterable<Object[]> data(){
-        String[] valids = { "86771588", "021-86771588", "021-867715", "86771588-888", "021-86771588-888" };
-        String[] invalids = {
-                              "",
-                              "   ",
-                              "02021-86771588-888", //区号3-4位 太长了
-                              "020-86771588888", //电话号码6-8位 太长了
-                              "021-86775", };
+        String[] valids = { "127.0.0.1" };
+        String[] invalids = { "venusdrogon@163.com", "127.0.0.*", "327.0.0.1" };
+
         return TestUtil.toDataList(valids, invalids);
     }
 
@@ -57,6 +52,7 @@ public class TelephonePatternTest extends AbstractBooleanParameterizedTest<Strin
      */
     @Test
     public void matches(){
-        assertEquals(expectedValue, RegexUtil.matches(TELEPHONE, input));
+        assertEquals(expectedValue, RegexUtil.matches(IP, input));
     }
+
 }
