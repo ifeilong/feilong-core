@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.regexpattern;
+package com.feilong.core.util.regexutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -42,7 +42,6 @@ public class IpPatternTest extends AbstractBooleanParameterizedTest<String, Bool
     @Parameters(name = "index:{index}: matches({0})={1}")
     public static Iterable<Object[]> data(){
         String[] valids = { "127.0.0.1" };
-
         String[] invalids = { "venusdrogon@163.com", "127.0.0.*", "327.0.0.1" };
 
         return TestUtil.toDataList(valids, invalids);

@@ -13,24 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.regexpattern;
+package com.feilong.core.util.regexutiltest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import static org.junit.Assert.assertEquals;
 
-/**
- * The Class FeiLongRegexPatternSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
- */
-@RunWith(Suite.class)
-@SuiteClasses({ //
-                IpPatternTest.class,
-                MobilephonePatternTest.class,
-                TelephonePatternTest.class,
-                TelephoneMustAreaCodePatternTest.class, })
-public class FeiLongRegexPatternSuiteTests{
+import org.junit.Test;
 
+import com.feilong.core.util.RegexUtil;
+
+public class RegexUtilGroupIntTest{
+
+    @Test
+    public void testGroup(){
+        String regexPattern = "(.*?)@(.*?)";
+        String email = "venusdrogon@163.com";
+
+        assertEquals("venusdrogon", RegexUtil.group(regexPattern, email, 1));
+        assertEquals("163.com", RegexUtil.group(regexPattern, email, 2));
+    }
 }

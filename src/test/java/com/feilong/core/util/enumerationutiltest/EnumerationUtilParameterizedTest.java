@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util;
+package com.feilong.core.util.enumerationutiltest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,6 +22,7 @@ import java.util.Enumeration;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.core.util.EnumerationUtil;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;

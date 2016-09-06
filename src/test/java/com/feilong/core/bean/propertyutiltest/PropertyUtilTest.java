@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.bean;
+package com.feilong.core.bean.propertyutiltest;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -32,6 +32,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.BeanUtilException;
+import com.feilong.core.bean.PropertyUtil;
 import com.feilong.test.Person;
 import com.feilong.test.User;
 import com.feilong.test.UserInfo;
