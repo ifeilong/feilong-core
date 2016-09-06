@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.IOException;
@@ -29,7 +30,6 @@ import java.util.TreeMap;
 
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -564,14 +564,59 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 获得{@link ResourceBundle}.
+     * 使用 <code>baseName</code> 和 <code>locale</code> 获得{@link ResourceBundle}.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 比如在 classpath 下面有 <b>messages\feilong-archetypes_en.properties</b> 和 <b>messages\feilong-archetypes_zh_CN.properties</b>
+     * 两个配置文件,内容如下
+     * </p>
+     * 
+     * <p>
+     * <b>messages\feilong-archetypes_en.properties</b>
+     * </p>
+     * 
+     * <pre class="code">
+     * feilong-archetypes.welcome=欢迎(简体)
+     * </pre>
+     * 
+     * <p>
+     * <b>messages\feilong-archetypes_zh_CN.properties</b>
+     * </p>
+     * 
+     * <pre class="code">
+     * feilong-archetypes.welcome=欢迎(简体)
+     * </pre>
+     * 
+     * <p>
+     * 此时,我要读取 英文的配置文件,你可以这么写
+     * </p>
+     * 
+     * <pre class="code">
+     * ResourceBundle resourceBundle = getResourceBundle("messages/feilong-archetypes", Locale.ENGLISH);
+     * Map{@code <String, String>} map = toMap(resourceBundle);
+     * 
+     * LOGGER.debug(JsonUtil.format(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {"feilong-archetypes.welcome": "welcome(english)"}
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
      * @param locale
      *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果资源文件 <code>baseName</code> 里面没有任何内容,返回不是null的 {@link ResourceBundle}
+     * @return 如果资源文件 <code>baseName</code> 里面没有任何内容,返回不是null的 {@link ResourceBundle}<br>
+     *         如果是null,将使用 {@link Locale#getDefault()}来获取
      * @throws NullPointerException
      *             如果 <code>baseName</code> 是null
      * @throws IllegalArgumentException
@@ -582,7 +627,7 @@ public final class ResourceBundleUtil{
      */
     public static ResourceBundle getResourceBundle(String baseName,Locale locale){
         Validate.notBlank(baseName, "baseName can't be null/empty!");
-        return ResourceBundle.getBundle(baseName, ObjectUtils.defaultIfNull(locale, Locale.getDefault()));
+        return ResourceBundle.getBundle(baseName, defaultIfNull(locale, Locale.getDefault()));
     }
 
     //*****************************************************************************
