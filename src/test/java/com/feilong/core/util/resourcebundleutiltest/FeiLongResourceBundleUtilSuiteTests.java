@@ -21,7 +21,17 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                ResourceBundleUtilTest.class,
+                ResourceBundleUtilGetResourceBundleWithBaseNameAndLocaleTest.class,
+                ResourceBundleUtilGetResourceBundleWithBaseNameTest.class,
+                ResourceBundleUtilGetResourceBundleWithInputStreamTest.class,
+                ResourceBundleUtilGetValueWithBaseNameAndLocaleTest.class,
+                ResourceBundleUtilGetValueWithBaseNameTest.class,
+                ResourceBundleUtilGetValueWithBaseNameParameterizedTest.class,
+                ResourceBundleUtilGetValueWithResourceBundleTest.class,
+                ResourceBundleUtilReadToAliasBeanTest.class,
+                ResourceBundleUtilReadToMapTest.class,
+                ResourceBundleUtilReadToMapWithLocaleTest.class,
+                ResourceBundleUtilReadToPropertiesTest.class
         //
 })
 public class FeiLongResourceBundleUtilSuiteTests{
