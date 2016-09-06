@@ -91,7 +91,7 @@ public final class ResourceBundleUtil{
     // ****************************getValue*************************************************
 
     /**
-     * 获取Properties配置文件键值 ,采用 {@link java.util.ResourceBundle#getBundle(String)} 方法来读取.
+     * 获取<code>resourceBundle</code> 配置文件指定 <code>key</code>键的值.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -105,17 +105,20 @@ public final class ResourceBundleUtil{
      * <blockquote>
      * 
      * <p>
-     * 如果有配置文件 messages\feilong-core-test.properties ,内容如下:
+     * 如果有配置文件 <b>messages\feilong-core-test.properties</b>,内容如下:
      * </p>
      * 
      * <pre class="code">
      * test.arguments=my name is {0},age is {1}
      * </pre>
      * 
+     * <p>
      * 此时调用方法:
+     * </p>
      * 
      * <pre class="code">
-     * ResourceBundleUtil.getValueWithArguments(resourceBundle, "test.arguments", "feilong", "18")
+     * ResourceBundle resourceBundle = ResourceBundle.getBundle("messages/feilong-core-test");
+     * ResourceBundleUtil.getValueWithArguments(resourceBundle, "test.arguments", "feilong", "18");
      * </pre>
      * 
      * <b>返回:</b>

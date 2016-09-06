@@ -30,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ResourceBundleUtilGetResourceBundleWithBaseNameTest.class,
                 ResourceBundleUtilGetResourceBundleWithInputStreamTest.class,
                 ResourceBundleUtilGetValueWithResourceBundleTest.class,
+                ResourceBundleUtilGetValueWithResourceBundleParameterizedTest.class,
                 ResourceBundleUtilReadToAliasBeanTest.class,
                 ResourceBundleUtilReadToMapTest.class,
                 ResourceBundleUtilReadToMapWithLocaleTest.class,
