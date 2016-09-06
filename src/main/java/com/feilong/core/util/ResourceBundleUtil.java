@@ -513,6 +513,39 @@ public final class ResourceBundleUtil{
     /**
      * 使用 {@link Locale#getDefault()} 获得{@link ResourceBundle}.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 如项目的classpath下面有 messages/feilong-core-test.properties,内容如下
+     * </p>
+     * 
+     * <pre class="code">
+     * config_test_array=5,8,7,6
+     * test.arguments=my name is {0},age is {1}
+     * </pre>
+     * 
+     * <p>
+     * 你可以使用以下代码来读取内容:
+     * </p>
+     * 
+     * <pre class="code">
+     * ResourceBundle resourceBundle = getResourceBundle("messages/feilong-core-test");
+     * LOGGER.debug(JsonUtil.format(toMap(resourceBundle)));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "config_test_array": "5,8,7,6",
+     * "test.arguments": "my name is {0},age is {1}",
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param baseName
      *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
      *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>

@@ -18,9 +18,6 @@ package com.feilong.core.util.resourcebundleutiltest;
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.Assert.assertThat;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ResourceBundle;
 
 import org.junit.Test;
@@ -29,30 +26,46 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 
 /**
- * The Class ResourceBundleUtilGetResourceBundleWithInputStreamTest.
+ * The Class ResourceBundleUtilGetResourceBundleWithBaseNameTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ResourceBundleUtilGetResourceBundleWithInputStreamTest{
+public class ResourceBundleUtilGetResourceBundleWithBaseNameTest{
 
-    /**
-     * Test get resource bundle null input stream.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testGetResourceBundleNullInputStream(){
-        getResourceBundle((InputStream) null);
-    }
+    /** The base name. */
+    private static final String BASE_NAME = "messages/feilong-core-test";
 
     /**
      * Test get resource bundle.
-     *
-     * @throws FileNotFoundException
-     *             the file not found exception
      */
     @Test
-    public void testGetResourceBundle() throws FileNotFoundException{
-        ResourceBundle resourceBundle = getResourceBundle(new FileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"));
-        assertThat(toMap(resourceBundle), hasKey("incoming.pop.hostname"));
+    public void testGetResourceBundle(){
+        ResourceBundle resourceBundle = getResourceBundle(BASE_NAME);
+        assertThat(toMap(resourceBundle), hasKey("config_test_array"));
+    }
+
+    /**
+     * Test get resource bundle null base name.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetResourceBundleNullBaseName(){
+        getResourceBundle((String) null);
+    }
+
+    /**
+     * Test get resource bundle empty base name.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetResourceBundleEmptyBaseName(){
+        getResourceBundle("");
+    }
+
+    /**
+     * Test get resource bundle blank base name.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetResourceBundleBlankBaseName(){
+        getResourceBundle(" ");
     }
 
 }
