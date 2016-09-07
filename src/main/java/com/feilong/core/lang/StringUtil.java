@@ -107,27 +107,29 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
  * 
  * <blockquote>
  * <p>
- * 要看虚拟机的实现.而且要联系上下文<br>
- * 1、假设:HotSpot1.6<br>
- * 之前没有创建过xyz 则创建2个,之前创建过"xyz"则只创建1个<br>
- * 2、假设:HotSpot1.7<br>
- * 之前不管有没有创建过xyz 都创建1个
+ * 要看虚拟机的实现.而且要联系上下文
  * </p>
+ * 
+ * <ul>
+ * <li>假设:HotSpot1.6,之前没有创建过"xyz" 则创建2个,之前创建过"xyz"则只创建1个</li>
+ * <li>假设:HotSpot1.7,之前不管有没有创建过"xyz" 都创建1个</li>
+ * </ul>
  * </blockquote>
  * 
  * <h3>String s3 = s1 + s2; <br>
  * System.out.println(s3.intern() == s3); 到底相不相等</h3> <blockquote>
  * <p>
- * 要看虚拟机的实现<br>
- * 1、假设:hotspot1.6<br>
- * 则false不相等<br>
- * 2、假设:hotspot1.7<br>
- * 则在之前没有创建过"abcabc"时,true相等
+ * 要看虚拟机的实现
  * </p>
+ * 
+ * <ul>
+ * <li>假设:HotSpot1.6,则false不相等</li>
+ * <li>假设:HotSpot1.7,则在之前没有创建过"abcabc"时,true相等</li>
+ * </ul>
  * </blockquote>
  * 
- * <h3>{@link StringUtil#replace(String, String, String)} and {@link #replaceAll(CharSequence, String, String)} and
- * 区别:</h3>
+ * <h3>{@link StringUtil#replace(String, String, String) replace} 和 {@link #replaceAll(CharSequence, String, String) replaceAll} 和
+ * {@link String#replaceFirst(String, String) replaceFirst}区别:</h3>
  * 
  * <blockquote>
  * 
