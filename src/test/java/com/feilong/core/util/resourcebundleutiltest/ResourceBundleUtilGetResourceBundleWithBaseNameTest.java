@@ -22,8 +22,8 @@ import java.util.ResourceBundle;
 
 import org.junit.Test;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 /**
  * The Class ResourceBundleUtilGetResourceBundleWithBaseNameTest.

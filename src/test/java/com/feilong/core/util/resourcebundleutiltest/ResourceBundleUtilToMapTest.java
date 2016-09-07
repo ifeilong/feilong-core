@@ -15,13 +15,12 @@
  */
 package com.feilong.core.util.resourcebundleutiltest;
 
+import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.hasKey;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ResourceBundle;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -29,30 +28,35 @@ import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 /**
- * The Class ResourceBundleUtilGetResourceBundleWithInputStreamTest.
+ * The Class ResourceBundleUtilToMapTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ResourceBundleUtilGetResourceBundleWithInputStreamTest{
+public class ResourceBundleUtilToMapTest{
 
     /**
-     * Test get resource bundle null input stream.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testGetResourceBundleNullInputStream(){
-        getResourceBundle((InputStream) null);
-    }
-
-    /**
-     * Test get resource bundle.
-     *
-     * @throws FileNotFoundException
-     *             the file not found exception
+     * Test to map.
      */
     @Test
-    public void testGetResourceBundle() throws FileNotFoundException{
-        ResourceBundle resourceBundle = getResourceBundle(new FileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"));
-        assertThat(toMap(resourceBundle), hasKey("incoming.pop.hostname"));
+    public void testToMap(){
+        Map<String, String> map = toMap(getResourceBundle("messages/memcached"));
+        assertThat(map, hasKey("memcached.alivecheck"));
     }
 
+    /**
+     * Test to map empty.
+     */
+    @Test
+    public void testToMapEmpty(){
+        Map<String, String> map = toMap(getResourceBundle("messages/empty"));
+        assertEquals(emptyMap(), map);
+    }
+
+    /**
+     * Test to map null resource bundle.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testToMapNullResourceBundle(){
+        toMap(null);
+    }
 }

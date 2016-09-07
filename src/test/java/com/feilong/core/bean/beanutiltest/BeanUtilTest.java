@@ -66,6 +66,7 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.date.DateUtil.toDate;
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 
 import static com.feilong.core.DatePattern.TO_STRING_STYLE;
 import static com.feilong.core.DatePattern.yyyyMMdd;
@@ -312,7 +313,7 @@ public class BeanUtilTest{
      */
     @Test
     public void testPopulateAlias(){
-        Map<String, String> readPropertiesToMap = ResourceBundleUtil.readToMap("messages.feilong-core-test");
+        Map<String, String> readPropertiesToMap = ResourceBundleUtil.toMap(getResourceBundle("messages.feilong-core-test"));
 
         VarBean varBean = new VarBean();
         LOGGER.debug(JsonUtil.format(BeanUtil.populateAliasBean(varBean, readPropertiesToMap)));
