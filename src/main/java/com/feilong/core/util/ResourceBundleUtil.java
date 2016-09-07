@@ -15,11 +15,13 @@
  */
 package com.feilong.core.util;
 
+import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
@@ -29,7 +31,6 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 import org.apache.commons.beanutils.converters.ArrayConverter;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -41,8 +42,6 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.MessageFormatUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.bean.ConvertUtil.toProperties;
 import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
 
 /**
@@ -163,36 +162,15 @@ public final class ResourceBundleUtil{
     //***************************************************************************
 
     /**
-     * 读取配置文件,将k/v 统统转成map.
+     * 将 <code>resourceBundle</code> 转成map.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
-     * 本方法出于log以及使用方便,返回的是<span style="color:red">TreeMap</span></li>
+     * <li>JDK默认使用的是{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
+     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span></li>
      * </ol>
      * </blockquote>
-     * 
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @return 如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
-     *         否则,解析所有的key和value转成 {@link TreeMap}
-     * @throws NullPointerException
-     *             如果 <code>baseName</code> 是null
-     * @throws IllegalArgumentException
-     *             如果 <code>baseName</code> 是 blank
-     * @throws MissingResourceException
-     *             如果资源文件 <code>baseName</code> 不存在
-     * @see #readToMap(String, Locale)
-     * @since 1.8.1 change name
-     */
-    public static Map<String, String> readToMap(String baseName){
-        return readToMap(baseName, null);
-    }
-
-    /**
-     * 读取配置文件,将k/v 统统转成Properties.
      * 
      * <h3>示例:</h3>
      * 
@@ -235,80 +213,51 @@ public final class ResourceBundleUtil{
      * </b>
      * 
      * <pre class="code">
-     * Properties properties = ResourceBundleUtil.readToProperties("messages.memcached");
-     * LOGGER.debug(JsonUtil.format(properties));
+     * Map{@code <String, String>} map = toMap(getResourceBundle("messages/memcached"));
+     * LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "memcached.serverlist": "172.20.3-1.23:11211,172.20.31.22:11211",
-        "memcached.maxconnection": "250",
-        "memcached.socketto": "3000",
-        "memcached.initconnection": "10",
-        "memcached.nagle": "false",
-        "memcached.expiretime": "180",
-        "memcached.maintSleep": "30",
-        "memcached.alivecheck": "false",
-        "memcached.serverweight": "2",
-        "memcached.poolname": "sidsock2",
-        "memcached.minconnection": "5"
-    }
-     * 
+     * {
+     * "memcached.alivecheck": "false",
+     * "memcached.expiretime": "180",
+     * "memcached.initconnection": "10",
+     * "memcached.maintSleep": "30",
+     * "memcached.maxconnection": "250",
+     * "memcached.minconnection": "5",
+     * "memcached.nagle": "false",
+     * "memcached.poolname": "sidsock2",
+     * "memcached.serverlist": "172.20.3-1.23:11211,172.20.31.22:11211",
+     * "memcached.serverweight": "2",
+     * "memcached.socketto": "3000"
+     * }
      * </pre>
      * 
      * </blockquote>
-     * 
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @return 如果 <code>baseName</code> 没有key value,则返回 <code>new Properties</code><br>
-     *         否则,解析所有的key和value转成 {@link Properties}
-     * @throws NullPointerException
-     *             如果 <code>baseName</code> 是null
-     * @throws IllegalArgumentException
-     *             如果 <code>baseName</code> 是 blank
-     * @throws MissingResourceException
-     *             如果资源文件 <code>baseName</code> 不存在
-     * @see #readToMap(String)
-     * @see ConvertUtil#toProperties(Map)
-     * @since 1.8.1
-     */
-    public static Properties readToProperties(String baseName){
-        return toProperties(readToMap(baseName));
-    }
-
-    /**
-     * 读取配置文件,将k/v 统统转成map.
-     * 
-     * <p>
-     * 注意:JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
-     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span>
-     * </p>
-     * 
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
-     * @param locale
-     *            the locale for which a resource bundle is desired,如果是null,将使用 {@link Locale#getDefault()}
-     * @return 如果 <code>baseName</code> 没有key value,则返回{@link java.util.Collections#emptyMap()}<br>
+     *
+     * @param resourceBundle
+     *            the resource bundle
+     * @return 如果 <code>resourceBundle</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>resourceBundle</code> 没有key,则返回{@link java.util.Collections#emptyMap()}<br>
      *         否则,解析所有的key和value转成 {@link TreeMap}<br>
-     * 
-     * @throws NullPointerException
-     *             如果 <code>baseName</code> 是null
-     * @throws IllegalArgumentException
-     *             如果 <code>baseName</code> 是 blank
-     * @throws MissingResourceException
-     *             如果资源文件 <code>baseName</code> 不存在
-     * @see #getResourceBundle(String, Locale)
-     * @see java.util.ResourceBundle#getKeys()
-     * @see MapUtils#toMap(ResourceBundle)
-     * @since 1.8.1 change name
+     * @since 1.8.8
      */
-    public static Map<String, String> readToMap(String baseName,Locale locale){
-        ResourceBundle resourceBundle = getResourceBundle(baseName, locale);
-        return toMap(resourceBundle);
+    public static Map<String, String> toMap(ResourceBundle resourceBundle){
+        Validate.notNull(resourceBundle, "resourceBundle can't be null!");
+
+        Enumeration<String> keysEnumeration = resourceBundle.getKeys();
+        if (isNullOrEmpty(keysEnumeration)){
+            return emptyMap();
+        }
+
+        Map<String, String> map = new TreeMap<>();//为了log方便,使用 treeMap
+        while (keysEnumeration.hasMoreElements()){
+            String key = keysEnumeration.nextElement();
+            map.put(key, resourceBundle.getString(key));
+        }
+        return map;
     }
 
     /**
@@ -415,24 +364,24 @@ public final class ResourceBundleUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "maxConnection": 250,
-        "expireTime": 180,
-        "serverList":         [
-            "172.20.3-1.23",
-            "11211",
-            "172.20.31.22",
-            "11211"
-        ],
-        "weight": [2],
-        "nagle": false,
-        "initConnection": 10,
-        "aliveCheck": false,
-        "poolName": "sidsock2",
-        "maintSleep": 30,
-        "socketTo": 3000,
-        "minConnection": 5
-    }
+     *     {
+     *         "maxConnection": 250,
+     *         "expireTime": 180,
+     *         "serverList":         [
+     *             "172.20.3-1.23",
+     *             "11211",
+     *             "172.20.31.22",
+     *             "11211"
+     *         ],
+     *         "weight": [2],
+     *         "nagle": false,
+     *         "initConnection": 10,
+     *         "aliveCheck": false,
+     *         "poolName": "sidsock2",
+     *         "maintSleep": 30,
+     *         "socketTo": 3000,
+     *         "minConnection": 5
+     *     }
      * 
      * </pre>
      * 
@@ -448,7 +397,7 @@ public final class ResourceBundleUtil{
      * <p>
      * <b>你需要如此这般:</b>
      * </p>
-     *
+     * 
      * <pre class="code">
      * ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);
      * char[] allowedChars = { ':' };
@@ -463,31 +412,30 @@ public final class ResourceBundleUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "maxConnection": 250,
-        "expireTime": 180,
-        "serverList":         [
-            "172.20.3-1.23:11211",
-            "172.20.31.22:11211"
-        ],
-        "weight": [2],
-        "nagle": false,
-        "initConnection": 10,
-        "aliveCheck": false,
-        "poolName": "sidsock2",
-        "maintSleep": 30,
-        "socketTo": 3000,
-        "minConnection": 5
-    }
+     *     {
+     *         "maxConnection": 250,
+     *         "expireTime": 180,
+     *         "serverList":         [
+     *             "172.20.3-1.23:11211",
+     *             "172.20.31.22:11211"
+     *         ],
+     *         "weight": [2],
+     *         "nagle": false,
+     *         "initConnection": 10,
+     *         "aliveCheck": false,
+     *         "poolName": "sidsock2",
+     *         "maintSleep": 30,
+     *         "socketTo": 3000,
+     *         "minConnection": 5
+     *     }
      * </pre>
      * 
      * </blockquote>
      *
      * @param <T>
      *            the generic type
-     * @param baseName
-     *            一个完全限定类名,<b>配置文件的包+类全名</b>,比如 <b>message.feilong-core-test</b> <span style="color:red">(不要尾缀)</span>;<br>
-     *            但是,为了和早期版本兼容,也可使用路径名来访问,比如<b>message/feilong-core-test</b><span style="color:red">(使用 "/")</span>
+     * @param resourceBundle
+     *            the resource bundle
      * @param aliasBeanClass
      *            the alias bean class
      * @return the t
@@ -500,10 +448,88 @@ public final class ResourceBundleUtil{
      * @see BeanUtil#populateAliasBean(Object, Map)
      * @since 1.8.1
      */
-    public static <T> T readToAliasBean(String baseName,Class<T> aliasBeanClass){
-        Validate.notBlank(baseName, "baseName can't be null/empty!");
+    public static <T> T readToAliasBean(ResourceBundle resourceBundle,Class<T> aliasBeanClass){
+        Validate.notNull(resourceBundle, "resourceBundle can't be null/empty!");
         Validate.notNull(aliasBeanClass, "aliasBeanClass can't be null!");
-        return BeanUtil.populateAliasBean(newInstance(aliasBeanClass), readToMap(baseName));
+        return BeanUtil.populateAliasBean(newInstance(aliasBeanClass), toMap(resourceBundle));
+    }
+
+    /**
+     * 将 <code>resourceBundle</code> 转成Properties.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 在 classpath messages 目录下面有 memcached.properties,内容如下:
+     * </p>
+     * 
+     * <pre class="code">
+     * <span style="color:green"># 注意此处 ip出现 - 横杆 仅作测试使用</span>
+     * memcached.serverlist=172.20.3-1.23:11211,172.20.31.22:11211 
+     * memcached.poolname=sidsock2
+     * <span style="color:green">#单位分钟</span>
+     * memcached.expiretime=180
+     * 
+     * memcached.serverweight=2
+     * 
+     * memcached.initconnection=10
+     * memcached.minconnection=5
+     * memcached.maxconnection=250
+     * 
+     * <span style="color:green">#设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小</span>
+     * memcached.maintSleep=30
+     * 
+     * <span style="color:green">#关闭套接字缓存</span>
+     * memcached.nagle=false
+     * 
+     * <span style="color:green">#连接建立后的超时时间</span>
+     * memcached.socketto=3000
+     * memcached.alivecheck=false
+     * </pre>
+     * 
+     * <b>
+     * 此时你可以如此调用代码:
+     * </b>
+     * 
+     * <pre class="code">
+     * Properties properties = ResourceBundleUtil.toProperties("messages.memcached");
+     * LOGGER.debug(JsonUtil.format(properties));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "memcached.serverlist": "172.20.3-1.23:11211,172.20.31.22:11211",
+     * "memcached.maxconnection": "250",
+     * "memcached.socketto": "3000",
+     * "memcached.initconnection": "10",
+     * "memcached.nagle": "false",
+     * "memcached.expiretime": "180",
+     * "memcached.maintSleep": "30",
+     * "memcached.alivecheck": "false",
+     * "memcached.serverweight": "2",
+     * "memcached.poolname": "sidsock2",
+     * "memcached.minconnection": "5"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param resourceBundle
+     *            the resource bundle
+     * @return 如果 <code>resourceBundle</code> 没有key value,则返回 <code>new Properties</code><br>
+     *         否则,解析所有的key和value转成 {@link Properties}
+     * @throws NullPointerException
+     *             如果 <code>resourceBundle</code> 是null
+     * @see #toMap(ResourceBundle)
+     * @see ConvertUtil#toProperties(Map)
+     * @since 1.8.1
+     */
+    public static Properties toProperties(ResourceBundle resourceBundle){
+        return ConvertUtil.toProperties(toMap(resourceBundle));
     }
 
     //********************************getResourceBundle**********************************************
