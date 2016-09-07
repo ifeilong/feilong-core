@@ -181,13 +181,10 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * <pre class="code">
-     * #expiretime period in minutes
-     * #逗号 分隔
-     * 
-     * # 注意此处 ip出现 - 横杆 仅作测试使用
+     * <span style="color:green"># 注意此处 ip出现 - 横杆 仅作测试使用</span>
      * memcached.serverlist=172.20.3-1.23:11211,172.20.31.22:11211 
      * memcached.poolname=sidsock2
-     * #单位分钟
+     * <span style="color:green">#单位分钟</span>
      * memcached.expiretime=180
      * 
      * memcached.serverweight=2
@@ -196,16 +193,15 @@ public final class ResourceBundleUtil{
      * memcached.minconnection=5
      * memcached.maxconnection=250
      * 
-     * #设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小
+     * <span style="color:green">#设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小</span>
      * memcached.maintSleep=30
      * 
-     * #关闭套接字缓存
+     * <span style="color:green">#关闭套接字缓存</span>
      * memcached.nagle=false
      * 
-     * #连接建立后的超时时间
+     * <span style="color:green">#连接建立后的超时时间</span>
      * memcached.socketto=3000
      * memcached.alivecheck=false
-     * 
      * </pre>
      * 
      * <b>
@@ -261,7 +257,85 @@ public final class ResourceBundleUtil{
     }
 
     /**
-     * 读取properties配置文件,直接转换成aliasBean.
+     * 将 <code>resourceBundle</code> 转成Properties.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 在 classpath messages 目录下面有 memcached.properties,内容如下:
+     * </p>
+     * 
+     * <pre class="code">
+     * <span style="color:green"># 注意此处 ip出现 - 横杆 仅作测试使用</span>
+     * memcached.serverlist=172.20.3-1.23:11211,172.20.31.22:11211 
+     * memcached.poolname=sidsock2
+     * <span style="color:green">#单位分钟</span>
+     * memcached.expiretime=180
+     * 
+     * memcached.serverweight=2
+     * 
+     * memcached.initconnection=10
+     * memcached.minconnection=5
+     * memcached.maxconnection=250
+     * 
+     * <span style="color:green">#设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小</span>
+     * memcached.maintSleep=30
+     * 
+     * <span style="color:green">#关闭套接字缓存</span>
+     * memcached.nagle=false
+     * 
+     * <span style="color:green">#连接建立后的超时时间</span>
+     * memcached.socketto=3000
+     * memcached.alivecheck=false
+     * </pre>
+     * 
+     * <b>
+     * 此时你可以如此调用代码:
+     * </b>
+     * 
+     * <pre class="code">
+     * Properties properties = ResourceBundleUtil.toProperties("messages.memcached");
+     * LOGGER.debug(JsonUtil.format(properties));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "memcached.serverlist": "172.20.3-1.23:11211,172.20.31.22:11211",
+     * "memcached.maxconnection": "250",
+     * "memcached.socketto": "3000",
+     * "memcached.initconnection": "10",
+     * "memcached.nagle": "false",
+     * "memcached.expiretime": "180",
+     * "memcached.maintSleep": "30",
+     * "memcached.alivecheck": "false",
+     * "memcached.serverweight": "2",
+     * "memcached.poolname": "sidsock2",
+     * "memcached.minconnection": "5"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param resourceBundle
+     *            the resource bundle
+     * @return 如果 <code>resourceBundle</code> 没有key value,则返回 <code>new Properties</code><br>
+     *         否则,解析所有的key和value转成 {@link Properties}
+     * @throws NullPointerException
+     *             如果 <code>resourceBundle</code> 是null
+     * @see #toMap(ResourceBundle)
+     * @see ConvertUtil#toProperties(Map)
+     * @since 1.8.8
+     */
+    public static Properties toProperties(ResourceBundle resourceBundle){
+        return ConvertUtil.toProperties(toMap(resourceBundle));
+    }
+
+    /**
+     * 将 <code>resourceBundle</code> 转换成<code>aliasBean</code>.
      * 
      * <h3>示例:</h3>
      * 
@@ -349,7 +423,6 @@ public final class ResourceBundleUtil{
      * 
      *     <span style="color:green">//setter getter 略</span>
      * }
-     * 
      * </pre>
      * 
      * <b>
@@ -357,14 +430,14 @@ public final class ResourceBundleUtil{
      * </b>
      * 
      * <pre class="code">
-     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.readToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean("messages.memcached", DangaMemCachedConfig.class);
      * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     *     {
+     * {
      *         "maxConnection": 250,
      *         "expireTime": 180,
      *         "serverList":         [
@@ -381,8 +454,7 @@ public final class ResourceBundleUtil{
      *         "maintSleep": 30,
      *         "socketTo": 3000,
      *         "minConnection": 5
-     *     }
-     * 
+     * }
      * </pre>
      * 
      * <p>
@@ -405,14 +477,14 @@ public final class ResourceBundleUtil{
      * 
      * BeanUtil.register(arrayConverter, String[].class);
      * 
-     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.readToAliasBean("messages.memcached", DangaMemCachedConfig.class);
+     * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean("messages.memcached", DangaMemCachedConfig.class);
      * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     *     {
+     * {
      *         "maxConnection": 250,
      *         "expireTime": 180,
      *         "serverList":         [
@@ -427,7 +499,7 @@ public final class ResourceBundleUtil{
      *         "maintSleep": 30,
      *         "socketTo": 3000,
      *         "minConnection": 5
-     *     }
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -440,96 +512,14 @@ public final class ResourceBundleUtil{
      *            the alias bean class
      * @return the t
      * @throws NullPointerException
-     *             如果 <code>baseName</code>或者 <code>aliasBean</code> 是null
-     * @throws IllegalArgumentException
-     *             如果 <code>baseName</code> 是 blank
-     * @throws MissingResourceException
-     *             如果资源文件 <code>baseName</code> 不存在
+     *             如果 <code>resourceBundle</code>或者 <code>aliasBean</code> 是null
      * @see BeanUtil#populateAliasBean(Object, Map)
-     * @since 1.8.1
+     * @since 1.8.8
      */
-    public static <T> T readToAliasBean(ResourceBundle resourceBundle,Class<T> aliasBeanClass){
+    public static <T> T toAliasBean(ResourceBundle resourceBundle,Class<T> aliasBeanClass){
         Validate.notNull(resourceBundle, "resourceBundle can't be null/empty!");
         Validate.notNull(aliasBeanClass, "aliasBeanClass can't be null!");
         return BeanUtil.populateAliasBean(newInstance(aliasBeanClass), toMap(resourceBundle));
-    }
-
-    /**
-     * 将 <code>resourceBundle</code> 转成Properties.
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <p>
-     * 在 classpath messages 目录下面有 memcached.properties,内容如下:
-     * </p>
-     * 
-     * <pre class="code">
-     * <span style="color:green"># 注意此处 ip出现 - 横杆 仅作测试使用</span>
-     * memcached.serverlist=172.20.3-1.23:11211,172.20.31.22:11211 
-     * memcached.poolname=sidsock2
-     * <span style="color:green">#单位分钟</span>
-     * memcached.expiretime=180
-     * 
-     * memcached.serverweight=2
-     * 
-     * memcached.initconnection=10
-     * memcached.minconnection=5
-     * memcached.maxconnection=250
-     * 
-     * <span style="color:green">#设置主线程睡眠时间,每30秒苏醒一次,维持连接池大小</span>
-     * memcached.maintSleep=30
-     * 
-     * <span style="color:green">#关闭套接字缓存</span>
-     * memcached.nagle=false
-     * 
-     * <span style="color:green">#连接建立后的超时时间</span>
-     * memcached.socketto=3000
-     * memcached.alivecheck=false
-     * </pre>
-     * 
-     * <b>
-     * 此时你可以如此调用代码:
-     * </b>
-     * 
-     * <pre class="code">
-     * Properties properties = ResourceBundleUtil.toProperties("messages.memcached");
-     * LOGGER.debug(JsonUtil.format(properties));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * {
-     * "memcached.serverlist": "172.20.3-1.23:11211,172.20.31.22:11211",
-     * "memcached.maxconnection": "250",
-     * "memcached.socketto": "3000",
-     * "memcached.initconnection": "10",
-     * "memcached.nagle": "false",
-     * "memcached.expiretime": "180",
-     * "memcached.maintSleep": "30",
-     * "memcached.alivecheck": "false",
-     * "memcached.serverweight": "2",
-     * "memcached.poolname": "sidsock2",
-     * "memcached.minconnection": "5"
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param resourceBundle
-     *            the resource bundle
-     * @return 如果 <code>resourceBundle</code> 没有key value,则返回 <code>new Properties</code><br>
-     *         否则,解析所有的key和value转成 {@link Properties}
-     * @throws NullPointerException
-     *             如果 <code>resourceBundle</code> 是null
-     * @see #toMap(ResourceBundle)
-     * @see ConvertUtil#toProperties(Map)
-     * @since 1.8.1
-     */
-    public static Properties toProperties(ResourceBundle resourceBundle){
-        return ConvertUtil.toProperties(toMap(resourceBundle));
     }
 
     //********************************getResourceBundle**********************************************
