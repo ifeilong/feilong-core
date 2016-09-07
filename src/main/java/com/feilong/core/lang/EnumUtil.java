@@ -50,9 +50,12 @@ public final class EnumUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
+     * 
      * <li>
+     * 
      * <p>
      * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,
+     * </p>
      * 
      * <pre class="code">
      * public enum HttpMethodType{
@@ -79,8 +82,6 @@ public final class EnumUtil{
      * 
      * <p>
      * 要取HttpMethodType 里面的 method属性值是 "get"的枚举(忽视大小写),调用方式:
-     * </p>
-     * 
      * </p>
      * 
      * <pre class="code">
@@ -122,9 +123,12 @@ public final class EnumUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
+     * 
      * <li>
+     * 
      * <p>
      * 适用于这种 <code>HttpMethodType</code> 带自定义属性的枚举类型,
+     * </p>
      * 
      * <pre class="code">
      * public enum HttpMethodType{
@@ -151,8 +155,6 @@ public final class EnumUtil{
      * 
      * <p>
      * 要取HttpMethodType 里面的 method属性值是 "get"的枚举(区分大小写),调用方式:
-     * </p>
-     * 
      * </p>
      * 
      * <pre class="code">
