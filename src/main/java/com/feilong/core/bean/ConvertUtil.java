@@ -32,8 +32,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import java.util.ResourceBundle;
-import java.util.TreeMap;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
@@ -1625,41 +1623,6 @@ public final class ConvertUtil{
             return emptyMap();
         }
         return sortMapByKeyAsc((Map) properties);//为了log方便,使用 treeMap
-    }
-
-    /**
-     * 读取配置文件,将k/v 统统转成map.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>JDK实现{@link java.util.PropertyResourceBundle},内部是使用 hashmap来存储数据的,<br>
-     * 本方法出于log以及使用方便,返回的是<span style="color:red"> TreeMap</span></li>
-     * </ol>
-     * </blockquote>
-     *
-     * @param resourceBundle
-     *            the resource bundle
-     * @return 如果 <code>resourceBundle</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>resourceBundle</code> 没有key,则返回{@link java.util.Collections#emptyMap()}<br>
-     *         否则,解析所有的key和value转成 {@link TreeMap}<br>
-     * @see MapUtils#toMap(ResourceBundle)
-     * @since 1.7.3
-     */
-    public static Map<String, String> toMap(ResourceBundle resourceBundle){
-        Validate.notNull(resourceBundle, "resourceBundle can't be null!");
-
-        Enumeration<String> keysEnumeration = resourceBundle.getKeys();
-        if (isNullOrEmpty(keysEnumeration)){
-            return emptyMap();
-        }
-
-        Map<String, String> map = new TreeMap<>();//为了log方便,使用 treeMap
-        while (keysEnumeration.hasMoreElements()){
-            String key = keysEnumeration.nextElement();
-            map.put(key, resourceBundle.getString(key));
-        }
-        return map;
     }
 
     //*************************************toProperties*********************************************************
