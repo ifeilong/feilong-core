@@ -67,21 +67,15 @@ public final class PropertyUtil{
     }
 
     /**
-     * 将 <code>fromObj</code> 中的一组属性的值,复制到 <code>toObj</code> 对象中.
-     * 
-     * <h3>代码流程:</h3>
-     * <blockquote>
-     * <p>
-     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},<br>
-     * 否则循环调用 {@link #getProperty(Object, String)}再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中
-     * </p>
-     * </blockquote>
+     * 将 <code>fromObj</code> 中的全部或者一组属性的值,复制到 <code>toObj</code> 对象中.
      * 
      * <h3>注意点:</h3>
      * 
      * <blockquote>
      * 
      * <ol>
+     * <li>如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},否则循环调用
+     * {@link #getProperty(Object, String)}再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中</li>
      * <li>如果 <code>toObj</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>fromObj</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
@@ -123,7 +117,7 @@ public final class PropertyUtil{
      *         "name": "feilong",
      *         "money": 500000,
      *         "userInfo": {"age": 0}
-     *     }
+     * }
      * </pre>
      * 
      * </blockquote>

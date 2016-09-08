@@ -299,7 +299,7 @@ public final class BeanUtil{
     // [start] copyProperties
 
     /**
-     * 将 <code class="code">fromObj</code> 中的一组属性的值,复制到 <code>toObj</code> 对象中.
+     * 将 <code class="code">fromObj</code> 中的全部或者一组属性的值,复制到 <code>toObj</code> 对象中.
      * 
      * <h3>注意:</h3>
      * 
