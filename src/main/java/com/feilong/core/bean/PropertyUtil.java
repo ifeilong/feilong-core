@@ -233,50 +233,50 @@ public final class PropertyUtil{
      * 
      * <blockquote>
      * 
-     * <pre class="code">
+     * <p>
+     * <b>场景:</b> 取到user bean里面所有的属性成map
+     * </p>
      * 
+     * <pre class="code">
      * User user = new User();
      * user.setId(5L);
      * user.setDate(new Date());
      * 
-     * LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user)));
-     * 
+     * LOGGER.debug(JsonUtil.format(PropertyUtil.describe(user));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-            "id": 5,
-            "name": "feilong",
-            "age": null,
-            "date": "2016-07-13 22:18:26"
-        }
+     * {
+     * "id": 5,
+     * "name": "feilong",
+     * "age": null,
+     * "date": "2016-07-13 22:18:26"
+     * }
      * </pre>
      * 
      * <hr>
      * 
      * <p>
-     * 提取指定的属性:
+     * <b>场景:</b> 提取user bean "date"和 "id"属性:
      * </p>
      * 
      * <pre class="code">
-     * 
      * User user = new User();
      * user.setId(5L);
      * user.setDate(new Date());
      * 
-     * LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(user, "date", "id")));
-     * 
+     * LOGGER.debug(JsonUtil.format(PropertyUtil.describe(user, "date", "id"));
      * </pre>
      * 
-     * 返回的结果按照参数名称顺序:
+     * 返回的结果,按照指定参数名称顺序:
      * 
      * <pre class="code">
-    {
-        "date": "2016-07-13 22:21:24",
-        "id": 5
-    }
+     * {
+     * "date": "2016-07-13 22:21:24",
+     * "id": 5
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -284,7 +284,6 @@ public final class PropertyUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回 the entire set of properties for which the specified bean provides a read method.</li>
      * <li>另外还有一个名为class的属性,属性值是Object的类名,事实上class是java.lang.Object的一个属性</li>
      * <li>如果 <code>propertyNames</code>是null或者 empty,那么获取所有属性的值</li>
      * <li>map的key按照 <code>propertyNames</code> 的顺序</li>
@@ -307,7 +306,9 @@ public final class PropertyUtil{
      *            属性名称 (can be nested/indexed/mapped/combo),参见 <a href="../BeanUtil.html#propertyName">propertyName</a>
      * @return 如果 <code>propertyNames</code> 是null或者empty,返回 {@link PropertyUtils#describe(Object)}<br>
      * @throws NullPointerException
-     *             如果 <code>bean</code> 是null
+     *             如果 <code>bean</code> 是null,或者<code>propertyNames</code> 包含 null的元素
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyNames</code> 包含 blank的元素
      * @see org.apache.commons.beanutils.BeanUtils#describe(Object)
      * @see org.apache.commons.beanutils.PropertyUtils#describe(Object)
      * @since 1.8.0

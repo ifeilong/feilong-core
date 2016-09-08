@@ -17,17 +17,14 @@ package com.feilong.core.bean.propertyutiltest;
 
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,55 +101,6 @@ public class PropertyUtilTest{
     public void testSetProperty1(){
         User user = new User();
         PropertyUtil.setProperty(user, "name1", "feilong");
-    }
-
-    /**
-     * Describe.
-     */
-    @Test
-    public void testDescribe(){
-        Date now = new Date();
-
-        User user = new User();
-        user.setId(5L);
-        user.setDate(now);
-
-        assertThat(PropertyUtil.describe(user), allOf(hasEntry("id", (Object) 5L), hasEntry("date", (Object) now)));
-        assertThat(PropertyUtil.describe(user, "date", "id"), allOf(hasEntry("date", (Object) now), hasEntry("id", (Object) 5L)));
-        assertThat(PropertyUtil.describe(user, "date"), hasEntry("date", (Object) now));
-    }
-
-    /**
-     * Test describe 3.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testDescribe3(){
-        PropertyUtil.describe(null);
-    }
-
-    /**
-     * TestPropertyUtilTest.
-     */
-    @Test
-    public void testPropertyUtilTest(){
-        Date now = new Date();
-        User user = new User();
-        user.setId(5L);
-        user.setDate(now);
-        List<User> list = toList(user);
-        LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe(new BigDecimal(5L))));
-        LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe("123456")));
-        LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe(list)));
-        LOGGER.debug(" {}", JsonUtil.format(PropertyUtil.describe(new HashMap())));
-    }
-
-    /**
-     * Test describe 1.
-     */
-    @Test
-    @Ignore
-    public void testDescribe1(){
-        LOGGER.debug("map:{}", JsonUtil.format(PropertyUtil.describe(User.class)));
     }
 
     /**
