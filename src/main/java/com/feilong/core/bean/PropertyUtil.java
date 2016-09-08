@@ -461,11 +461,39 @@ public final class PropertyUtil{
     /**
      * 使用 {@link PropertyUtils#getProperty(Object, String)} 从指定bean对象中取得指定属性名称的值.
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>不会进行类型转换.</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
      * <p>
-     * no matter which property reference format is used, with no type conversions.<br>
-     * For more details see {@link PropertyUtilsBean}.
+     * <b>场景:</b> 取list中第一个元素的id
      * </p>
-     *
+     * 
+     * <pre class="code">
+     * User user = new User();
+     * user.setId(5L);
+     * user.setDate(new Date());
+     * 
+     * List{@code <User>} list = toList(user, user, user);
+     * 
+     * Long id = PropertyUtil.getProperty(list, "[0].id");
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * 5
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param bean
