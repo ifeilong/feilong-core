@@ -2042,6 +2042,7 @@ public final class CollectionsUtil{
      *            返回的map,key转换器
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>keyTransformer</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/270">List to Map 实现类似矩阵的逻辑 by ananbeike</a>
      * @since 1.8.8
      */
     public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,Transformer<O, T> keyTransformer){
@@ -2165,6 +2166,7 @@ public final class CollectionsUtil{
      *         如果 <code>includePredicate</code> 是null,那么以所有的元素进行分组<br>
      *         如果没有任何element match <code>includePredicate</code>,返回 empty {@link LinkedHashMap}<br>
      * @see org.apache.commons.collections4.Transformer#transform(Object)
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/270">List to Map 实现类似矩阵的逻辑 by ananbeike</a>
      * @since 1.8.8
      */
     public static <T, O> Map<T, List<O>> group(
