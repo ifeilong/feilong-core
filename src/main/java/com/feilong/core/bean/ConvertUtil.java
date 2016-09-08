@@ -1630,9 +1630,31 @@ public final class ConvertUtil{
     /**
      * 将map转成 {@link Properties}.
      * 
-     * <p>
-     * 由于 Properties 只能保存 非空的 key和value,因此如果map 有key或者 value是null,将会抛出 {@link NullPointerException}
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>由于 Properties 只能保存非空的key和value,因此如果map 有key或者value是null,将会抛出{@link NullPointerException}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = toMap("name", "feilong");
+     * Properties properties = ConvertUtil.toProperties(map);
+     * 
+     * LOGGER.debug(JsonUtil.format(properties));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {"name": "feilong"}
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param map
      *            the map

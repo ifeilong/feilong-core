@@ -15,14 +15,52 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
-import org.junit.Ignore;
+import static java.util.Collections.emptyMap;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
+import java.util.Map;
+import java.util.Properties;
+
+import org.junit.Test;
+
+import com.feilong.core.bean.ConvertUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class ConvertUtilToPropertiesTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-@Ignore
 public class ConvertUtilToPropertiesTest{
 
+    @Test
+    public void testToProperties(){
+        Map<String, String> map = toMap("name", "feilong");
+        Properties properties = ConvertUtil.toProperties(map);
+
+        Map<String, String> map1 = (Map) properties;
+        assertThat(map1, allOf(hasEntry("name", "feilong")));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testToPropertiesNullKey(){
+        Map<String, String> map = toMap(null, "feilong");
+        ConvertUtil.toProperties(map);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testToPropertiesNullValue(){
+        Map<String, String> map = toMap("name", null);
+        ConvertUtil.toProperties(map);
+    }
+
+    @Test
+    public void testToPropertiesNullMap(){
+        Properties properties = ConvertUtil.toProperties(null);
+        assertEquals(emptyMap(), properties);
+    }
 }
