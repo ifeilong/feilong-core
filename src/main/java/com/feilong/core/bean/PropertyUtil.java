@@ -330,22 +330,23 @@ public final class PropertyUtil{
     }
 
     /**
-     * 使用 {@link PropertyUtils#setProperty(Object, String, Object)} 来设置指定bean对象中的指定属性的值(<b>不会进行类型转换</b>).
+     * 使用 {@link PropertyUtils#setProperty(Object, String, Object)} 来设置指定bean对象中的指定属性的值.
      * 
-     * <p>
-     * no matter which property reference format is used, with no type conversions.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>不会进行类型转换</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * User newUser = new User();
      * PropertyUtil.setProperty(newUser, "name", "feilong");
      * LOGGER.info(JsonUtil.format(newUser));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
@@ -368,7 +369,7 @@ public final class PropertyUtil{
      * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
      * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
-     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) setSimpleProperty} Line2078</li>
+     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) setSimpleProperty} Line2078,转成 {@link BeanUtilException}</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * </ol>
      * </blockquote>
