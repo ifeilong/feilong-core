@@ -394,7 +394,6 @@ public final class PropertyUtil{
      * <h3>注意点:</h3>
      * 
      * <blockquote>
-     * 
      * <ol>
      * <li>如果 <code>bean</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
