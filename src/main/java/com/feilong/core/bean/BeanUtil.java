@@ -449,7 +449,7 @@ public final class BeanUtil{
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
      * @see com.feilong.core.bean.PropertyUtil#setProperty(Object, String, Object)
      */
-    public static void setProperty(Object bean,String propertyName,Object value){
+    private static void setProperty(Object bean,String propertyName,Object value){
         try{
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
@@ -479,8 +479,9 @@ public final class BeanUtil{
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
+     * @since 1.8.9 change access to private
      */
-    public static String getProperty(Object bean,String propertyName){
+    private static String getProperty(Object bean,String propertyName){
         Validate.notNull(bean, "bean can't be null!");
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         try{
