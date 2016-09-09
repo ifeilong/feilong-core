@@ -517,17 +517,31 @@ public final class PropertyUtil{
     // [end]
 
     /**
-     * 从指定的 <code>Object obj</code>中,查找指定类型的值.
+     * 从指定的 <code>obj</code>中,查找指定类型 <code>toBeFindedClassType</code> 的值.
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>如果 <code>ClassUtil.isInstance(obj, toBeFindedClassType)</code> 直接返回 findValue</li>
+     * <li>不支持obj是<code>isPrimitiveOrWrapper</code>,<code>CharSequence</code>,<code>Collection</code>,<code>Map</code>类型,自动过滤</li>
+     * <li>调用 {@link PropertyUtil#describe(Object, String...)} 再递归查找</li>
+     * <li>目前暂不支持从集合里面找到指定类型的值,参见 {@link #isDonotSupportFindType(Object)},如果你有相关需求,可以调用 {@link
+     * "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"}</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
+     * <p>
+     * <b>场景:</b> 从User中找到UserInfo类型的值
+     * </p>
+     * 
      * <pre class="code">
      * User user = new User();
      * user.setId(5L);
-     * Date now = new Date();
-     * user.setDate(now);
-     * 
+     * user.setDate(new Date());
      * user.getUserInfo().setAge(28);
      * 
      * LOGGER.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));
@@ -541,31 +555,16 @@ public final class PropertyUtil{
      * 
      * </blockquote>
      * 
-     * <h3>代码流程:</h3>
-     * 
-     * <blockquote>
-     * <ol>
-     * <li>如果 <code>ClassUtil.isInstance(findValue, toBeFindedClassType)</code> 直接返回 findValue</li>
-     * <li>自动过滤<code>isPrimitiveOrWrapper</code>,<code>CharSequence</code>,<code>Collection</code>,<code>Map</code>类型</li>
-     * <li>调用 {@link PropertyUtil#describe(Object, String...)} 再递归查找</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * <p>
-     * PS:目前暂不支持从集合里面找到指定类型的值,参见 {@link #isDonotSupportFindType(Object)},如果你有相关需求,可以调用 {@link
-     * "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"}
-     * </p>
-     *
      * @param <T>
      *            the generic type
      * @param obj
      *            要被查找的对象
      * @param toBeFindedClassType
      *            the to be finded class type
-     * @return 从对象中查找匹配的类型,如果找不到返回 <code>null</code><br>
-     *         如果 <code>obj</code> 是null,返回null<br>
+     * @return 如果 <code>obj</code> 是null或者是empty,返回null<br>
      *         如果 <code>toBeFindedClassType</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>ClassUtil.isInstance(obj, toBeFindedClassType)</code>,直接返回 <code>obj</code><br>
+     *         从对象中查找匹配的类型,如果找不到返回 <code>null</code><br>
      * @see "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"
      * @since 1.4.1
      */
@@ -582,7 +581,7 @@ public final class PropertyUtil{
         }
 
         if (isDonotSupportFindType(obj)){
-            LOGGER.debug("obj:[{}] not support find toBeFindedClassType:[{}]", obj.getClass().getName(), toBeFindedClassType.getName());
+            LOGGER.trace("obj:[{}] not support find toBeFindedClassType:[{}]", obj.getClass().getName(), toBeFindedClassType.getName());
             return null;
         }
 
