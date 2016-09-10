@@ -576,7 +576,10 @@ public final class BeanUtil{
      * 
      * <blockquote>
      * <p>
-     * {@link BeanUtil} 有标准的populate功能,{@link #populate(Object, Map)} ,但是要求 map的key 和 bean的属性名称必须是一一对应<br>
+     * {@link BeanUtil} 有标准的populate功能:{@link #populate(Object, Map)} ,但是要求 map的key 和 bean的属性名称必须是一一对应<br>
+     * </p>
+     * 
+     * <p>
      * 有很多情况,比如 map 的key是 <b>"memcached.alivecheck"</b> 这样的字符串(常见于properties 的配置文件),或者是大写的 <b>"ALIVECHECK"</b> 的字符串(常见于第三方接口 xml属性名称)<br>
      * 而我们的bean里面的属性名称是标准的 java bean 规范的名字,比如 <b>"aliveCheck"</b>,这时就没有办法直接使用 {@link #populate(Object, Map)} 方法了<br>
      * </p>
