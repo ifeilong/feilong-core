@@ -25,7 +25,6 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.LazyDynaBean;
@@ -44,9 +43,13 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 /**
  * 对 {@link org.apache.commons.beanutils.BeanUtils}的再次封装.
  * 
- * <p>
- * 目的是将原来的 checkedException 异常 转换成 {@link BeanOperationException}
- * </p>
+ * <h3>说明:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>目的是将原来的 checkedException 异常 转换成 {@link BeanOperationException}</li>
+ * </ol>
+ * </blockquote>
+ * 
  * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}区别:</h3>
  * 
@@ -186,73 +189,6 @@ public final class BeanUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    static{
-        //初始化注册器.
-        //initConverters();
-    }
-
-    /**
-     * 初始化注册器.
-     * 
-     * <h3>关于类型转换:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 这里使用偷懒的做法,调用了 {@link org.apache.commons.beanutils.ConvertUtilsBean#register(boolean, boolean, int) ConvertUtilsBean.register(boolean,
-     * boolean, int)}方法<br>
-     * 但是有后遗症,这是beanUtils核心公共的方法,可能会影响其他框架或者其他作者开发的代码<br>
-     * 最正确的做法,自定义的类,自己单独写 {@link org.apache.commons.beanutils.Converter},<br>
-     * 而 公共的类 比如 下面方法里面的类型:
-     * </p>
-     * 
-     * <ul>
-     * <li>{@link ConvertUtilsBean#registerPrimitives(boolean) registerPrimitives(boolean throwException)}</li>
-     * <li>{@link ConvertUtilsBean#registerStandard(boolean,boolean) registerStandard(boolean throwException, boolean defaultNull);}</li>
-     * <li>{@link ConvertUtilsBean#registerOther(boolean) registerOther(boolean throwException);}</li>
-     * <li>{@link ConvertUtilsBean#registerArrays(boolean,int) registerArrays(boolean throwException, int defaultArraySize);}</li>
-     * </ul>
-     * 
-     * 最好在用的时候 自行register,{@link org.apache.commons.beanutils.ConvertUtilsBean#deregister(Class) ConvertUtilsBean.deregister(Class)}
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * 
-     * MyObject myObject = new MyObject();
-     * myObject.setId(3l);
-     * myObject.setName(&quot;My Name&quot;);
-     * 
-     * ConvertUtilsBean cub = new ConvertUtilsBean();
-     * cub.deregister(Long.class);
-     * cub.register(new MyLongConverter(), Long.class);
-     * 
-     * LOGGER.debug(cub.lookup(Long.class));
-     * 
-     * BeanUtilsBean bub = new BeanUtilsBean(cub, new PropertyUtilsBean());
-     * 
-     * LOGGER.debug(bub.getProperty(myObject, &quot;name&quot;));
-     * LOGGER.debug(bub.getProperty(myObject, &quot;id&quot;));
-     * 
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @since 1.5.0
-     */
-    private static void initConverters(){
-        //XXX initConverters不是最优方案
-        BeanUtilsBean beanUtilsBean = BeanUtilsBean.getInstance();
-        ConvertUtilsBean convertUtils = beanUtilsBean.getConvertUtils();
-
-        boolean throwException = false;
-        boolean defaultNull = true;
-        int defaultArraySize = 10;
-        convertUtils.register(throwException, defaultNull, defaultArraySize);
-    }
-
     /**
      * 调用{@link ConvertUtils#register(Converter, Class)}将字符串和指定类型的实例之间进行转换.
      *  
@@ -383,7 +319,8 @@ public final class BeanUtil{
      * <h3>相比较直接调用 {@link BeanUtils#copyProperties(Object, Object)}的优点:</h3>
      * <blockquote>
      * <ol>
-     * <li>将 checkedException 异常转成了 {@link BeanOperationException} RuntimeException,因为通常copy的时候出现了checkedException,也是普普通通记录下log,没有更好的处理方式</li>
+     * <li>将 checkedException 异常转成了 {@link BeanOperationException} RuntimeException,因为通常copy的时候出现了checkedException,也是普普通通记录下log,没有更好的处理方式
+     * </li>
      * <li>支持 includePropertyNames 参数,允许针对性copy 个别属性</li>
      * <li>更多,更容易理解的的javadoc</li>
      * </ol>

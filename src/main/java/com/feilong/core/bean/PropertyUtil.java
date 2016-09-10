@@ -35,9 +35,12 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 /**
  * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
  * 
- * <p>
- * 目的是将原来的 checkedException 异常 转换成 {@link BeanOperationException}
- * </p>
+ * <h3>说明:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>目的是将原来的 checkedException 异常 转换成 {@link BeanOperationException}</li>
+ * </ol>
+ * </blockquote>
  * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}:</h3>
  * 
