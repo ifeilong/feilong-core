@@ -17,7 +17,7 @@ package com.feilong.core.lang.enumutiltest;
 
 import org.junit.Test;
 
-import com.feilong.core.bean.BeanUtilException;
+import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.core.lang.EnumUtil;
 
@@ -65,7 +65,7 @@ public class EnumUtilGetEnumByPropertyValueTest{
      * Test get http method type 4.
      */
     //*********************************************************************
-    @Test(expected = BeanUtilException.class)
+    @Test(expected = BeanOperationException.class)
     public void testGetHttpMethodType4(){
         EnumUtil.getEnumByPropertyValue(HttpMethodTestType.class, "method2222", null);
     }

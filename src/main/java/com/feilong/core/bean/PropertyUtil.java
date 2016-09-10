@@ -36,7 +36,7 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
  * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
  * 
  * <p>
- * 目的是将原来的 checkedException 异常 转换成 {@link BeanUtilException}
+ * 目的是将原来的 checkedException 异常 转换成 {@link BeanOperationException}
  * </p>
  * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}:</h3>
@@ -177,7 +177,8 @@ public final class PropertyUtil{
      * <h3>相比较直接调用 {@link PropertyUtils#copyProperties(Object, Object)}的优点:</h3>
      * <blockquote>
      * <ol>
-     * <li>将 checkedException 异常转成了 {@link BeanUtilException} RuntimeException,因为通常copy的时候出现了checkedException,也是普普通通记录下log,没有更好的处理方式</li>
+     * <li>将 checkedException 异常转成了 {@link BeanOperationException} RuntimeException,因为通常copy的时候出现了checkedException,也是普普通通记录下log,没有更好的处理方式
+     * </li>
      * <li>支持 includePropertyNames 参数,允许针对性copy 个别属性</li>
      * <li>更多,更容易理解的的javadoc</li>
      * </ol>
@@ -192,8 +193,8 @@ public final class PropertyUtil{
      *            如果是null或者empty,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}
      * @throws NullPointerException
      *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
-     * @throws BeanUtilException
-     *             如果在copy的过程中,有任何的checkedException,将会被转成BeanUtilException
+     * @throws BeanOperationException
+     *             如果在copy的过程中,有任何的checkedException,将会被转成该异常返回
      * @see #setProperty(Object, String, Object)
      * @see BeanUtil#copyProperties(Object, Object, String...)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
@@ -210,7 +211,7 @@ public final class PropertyUtil{
                 PropertyUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                throw new BeanUtilException(e);
+                throw new BeanOperationException(e);
             }
         }
         for (String propertyName : includePropertyNames){
@@ -313,7 +314,7 @@ public final class PropertyUtil{
             try{
                 return PropertyUtils.describe(bean);
             }catch (Exception e){
-                throw new BeanUtilException(e);
+                throw new BeanOperationException(e);
             }
         }
         Map<String, Object> map = newLinkedHashMap(propertyNames.length);
@@ -363,7 +364,7 @@ public final class PropertyUtil{
      * <li>如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}</li>
      * <li>如果<code>bean</code>没有传入的 <code>propertyName</code>属性名字,会抛出异常,see
-     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) setSimpleProperty} Line2078,转成 {@link BeanUtilException}</li>
+     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) setSimpleProperty} Line2078,转成 {@link BeanOperationException}</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * </ol>
      * </blockquote>
@@ -384,7 +385,7 @@ public final class PropertyUtil{
         try{
             PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
-            throw new BeanUtilException(e);
+            throw new BeanOperationException(e);
         }
     }
 
@@ -510,7 +511,7 @@ public final class PropertyUtil{
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            throw new BeanUtilException(e);
+            throw new BeanOperationException(e);
         }
     }
 

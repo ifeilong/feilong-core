@@ -45,7 +45,7 @@ import static com.feilong.core.util.MapUtil.newHashMap;
  * 对 {@link org.apache.commons.beanutils.BeanUtils}的再次封装.
  * 
  * <p>
- * 目的是将原来的 checkedException 异常 转换成 {@link BeanUtilException}
+ * 目的是将原来的 checkedException 异常 转换成 {@link BeanOperationException}
  * </p>
  * 
  * <h3>{@link PropertyUtils}与 {@link BeanUtils}区别:</h3>
@@ -188,7 +188,7 @@ public final class BeanUtil{
 
     static{
         //初始化注册器.
-        initConverters();
+        //initConverters();
     }
 
     /**
@@ -383,7 +383,7 @@ public final class BeanUtil{
      * <h3>相比较直接调用 {@link BeanUtils#copyProperties(Object, Object)}的优点:</h3>
      * <blockquote>
      * <ol>
-     * <li>将 checkedException 异常转成了 {@link BeanUtilException} RuntimeException,因为通常copy的时候出现了checkedException,也是普普通通记录下log,没有更好的处理方式</li>
+     * <li>将 checkedException 异常转成了 {@link BeanOperationException} RuntimeException,因为通常copy的时候出现了checkedException,也是普普通通记录下log,没有更好的处理方式</li>
      * <li>支持 includePropertyNames 参数,允许针对性copy 个别属性</li>
      * <li>更多,更容易理解的的javadoc</li>
      * </ol>
@@ -398,8 +398,8 @@ public final class BeanUtil{
      *            如果是null或者empty ,将会调用 {@link BeanUtils#copyProperties(Object, Object)}
      * @throws NullPointerException
      *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
-     * @throws BeanUtilException
-     *             其他调用api有任何异常,转成{@link BeanUtilException}返回
+     * @throws BeanOperationException
+     *             其他调用api有任何异常,转成{@link BeanOperationException}返回
      * @see #setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.BeanUtilsBean#copyProperties(Object, Object)
      * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
@@ -416,7 +416,7 @@ public final class BeanUtil{
                 return;
             }catch (Exception e){
                 LOGGER.error(e.getClass().getName(), e);
-                throw new BeanUtilException(e);
+                throw new BeanOperationException(e);
             }
         }
         for (String propertyName : includePropertyNames){
@@ -442,8 +442,8 @@ public final class BeanUtil{
      *            Property name (can be nested/indexed/mapped/combo),参见<a href="#propertyName">propertyName</a>
      * @param value
      *            Value to be set
-     * @throws BeanUtilException
-     *             有任何异常,转成{@link BeanUtilException}返回
+     * @throws BeanOperationException
+     *             有任何异常,转成{@link BeanOperationException}返回
      * @see org.apache.commons.beanutils.BeanUtils#setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.BeanUtilsBean#setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.PropertyUtils#setProperty(Object, String, Object)
@@ -454,7 +454,7 @@ public final class BeanUtil{
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
+            throw new BeanOperationException(e);
         }
     }
 
@@ -474,12 +474,12 @@ public final class BeanUtil{
      *             如果 <code>bean</code> 是null,或者如果 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @throws BeanUtilException
-     *             在调用 {@link BeanUtils#getProperty(Object, String)}过程中有任何异常,转成{@link BeanUtilException}返回
+     * @throws BeanOperationException
+     *             在调用 {@link BeanUtils#getProperty(Object, String)}过程中有任何异常,转成{@link BeanOperationException}返回
      * @see org.apache.commons.beanutils.BeanUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
-     * @since 1.8.9 change access to private
+     * @since 1.9.0 change access to private
      */
     private static String getProperty(Object bean,String propertyName){
         Validate.notNull(bean, "bean can't be null!");
@@ -488,7 +488,7 @@ public final class BeanUtil{
             return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
+            throw new BeanOperationException(e);
         }
     }
 
@@ -533,8 +533,8 @@ public final class BeanUtil{
      * @return the cloned bean (复制的引用 ,无法实现深clone)
      * @throws NullPointerException
      *             如果 <code>bean</code> 是null
-     * @throws BeanUtilException
-     *             在调用api有任何异常,转成{@link BeanUtilException}返回
+     * @throws BeanOperationException
+     *             在调用api有任何异常,转成{@link BeanOperationException}返回
      * @see org.apache.commons.beanutils.BeanUtils#cloneBean(Object)
      * @see org.apache.commons.beanutils.PropertyUtilsBean#copyProperties(Object, Object)
      * @see org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable)
@@ -548,7 +548,7 @@ public final class BeanUtil{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
             LOGGER.error(e.getClass().getName(), e);
-            throw new BeanUtilException(e);
+            throw new BeanOperationException(e);
         }
     }
 
@@ -616,8 +616,8 @@ public final class BeanUtil{
      * @return the t
      * @throws NullPointerException
      *             如果 <code>bean</code> 是null,或者如果 <code>properties</code> 是null
-     * @throws BeanUtilException
-     *             在调用{@link BeanUtils#populate(Object, Map)}过程中有任何异常,转成{@link BeanUtilException}返回
+     * @throws BeanOperationException
+     *             在调用{@link BeanUtils#populate(Object, Map)}过程中有任何异常,转成{@link BeanOperationException}返回
      * @see org.apache.commons.beanutils.BeanUtils#populate(Object, Map)
      */
     public static <T> T populate(T bean,Map<String, ?> properties){
@@ -628,7 +628,7 @@ public final class BeanUtil{
             BeanUtils.populate(bean, properties);
             return bean;
         }catch (Exception e){
-            throw new BeanUtilException(e);
+            throw new BeanOperationException(e);
         }
     }
 

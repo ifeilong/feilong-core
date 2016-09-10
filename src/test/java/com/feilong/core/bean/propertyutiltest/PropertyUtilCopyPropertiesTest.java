@@ -26,7 +26,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.feilong.core.bean.BeanUtilException;
+import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.test.Person;
 import com.feilong.test.User;
@@ -87,7 +87,7 @@ public class PropertyUtilCopyPropertiesTest{
     /**
      * Test copy properties from obj no exist property name.
      */
-    @Test(expected = BeanUtilException.class)
+    @Test(expected = BeanOperationException.class)
     public void testCopyPropertiesFromObjNoExistPropertyName(){
         User oldUser = new User();
         oldUser.setId(5L);
@@ -99,7 +99,7 @@ public class PropertyUtilCopyPropertiesTest{
     /**
      * Test copy properties to obj no exist property name.
      */
-    @Test(expected = BeanUtilException.class)
+    @Test(expected = BeanOperationException.class)
     public void testCopyPropertiesToObjNoExistPropertyName(){
         User oldUser = new User();
         oldUser.setId(5L);

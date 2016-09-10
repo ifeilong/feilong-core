@@ -20,7 +20,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.BeanUtilException;
+import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -109,7 +109,7 @@ public final class EnumUtil{
      *             如果 <code>enumClass</code> 是null,或者 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @throws BeanUtilException
+     * @throws BeanOperationException
      *             如果枚举值没有相关 <code>propertyName</code> 属性,比如 <code>HttpMethodType</code> 有 <b>"method"</b> 属性,但是没有 <b>"method2222"</b> 属性
      * @see #getEnumByPropertyValue(Class, String, Object, boolean)
      */
@@ -182,7 +182,7 @@ public final class EnumUtil{
      *             如果 <code>enumClass</code> 是null,或者 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @throws BeanUtilException
+     * @throws BeanOperationException
      *             如果枚举值没有相关 <code>propertyName</code> 属性,比如 <code>HttpMethodType</code> 有 <b>"method"</b> 属性,但是没有 <b>"method2222"</b> 属性
      * @since 1.0.8
      */
@@ -210,7 +210,7 @@ public final class EnumUtil{
      *             如果 <code>enumClass</code> 是null,或者 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @throws BeanUtilException
+     * @throws BeanOperationException
      *             如果枚举值没有相关 <code>propertyName</code> 属性,比如 <code>HttpMethodType</code> 有 <b>"method"</b> 属性,但是没有 <b>"method2222"</b> 属性
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      * @since 1.0.8

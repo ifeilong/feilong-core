@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import com.feilong.core.bean.BeanUtilException;
+import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.test.User;
 
@@ -108,7 +108,7 @@ public class PropertyUtilSetPropertyIfValueNotNullOrEmptyTest{
     /**
      * Test set property if value not null not exist property name.
      */
-    @Test(expected = BeanUtilException.class)
+    @Test(expected = BeanOperationException.class)
     public void testSetPropertyIfValueNotNullNotExistPropertyName(){
         PropertyUtil.setPropertyIfValueNotNullOrEmpty(new User(), "hahaha", "feilong");
     }

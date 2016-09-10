@@ -25,17 +25,22 @@ package com.feilong.core.bean;
 //  对于程序错误(言外之意不可恢复,大错已经酿成)使用运行时异常(RuntimeException).
 
 /**
- * 使用<code>org.apache.commons.beanutils</code>包下的类 出现的异常.
+ * 使用<code>org.apache.commons.beanutils</code>包下的类出现的异常.
  * 
- * <p>
- * Note that: this is a runtime (unchecked) exception. Beans exceptions are usually fatal; there is no reason for them to be checked.
- * </p>
+ * <h3>说明:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>this is a runtime (unchecked) exception. <br>
+ * Beans exceptions are usually fatal; <br>
+ * there is no reason for them to be checked.</li>
+ * </ol>
+ * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.beans.BeansException"
- * @since 1.0.8
+ * @since 1.9.0
  */
-public final class BeanUtilException extends RuntimeException{
+public final class BeanOperationException extends RuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
@@ -48,7 +53,7 @@ public final class BeanUtilException extends RuntimeException{
      * @param cause
      *            the cause
      */
-    public BeanUtilException(String message, Throwable cause){
+    public BeanOperationException(String message, Throwable cause){
         super(message, cause);
     }
 
@@ -58,7 +63,7 @@ public final class BeanUtilException extends RuntimeException{
      * @param cause
      *            the cause
      */
-    public BeanUtilException(Throwable cause){
+    public BeanOperationException(Throwable cause){
         super(cause);
     }
 }
