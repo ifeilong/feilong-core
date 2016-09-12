@@ -15,9 +15,6 @@
  */
 package com.feilong.core.entity;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.Alias;
 
 /**
@@ -27,9 +24,6 @@ import com.feilong.core.bean.Alias;
  * @since 1.8.1
  */
 public class VarBean{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(VarBean.class);
 
     //    with_space_value: a 
     //    !with_space_value= a 
@@ -47,35 +41,35 @@ public class VarBean{
     /** The with space value. */
     //    test.arguments=my name is {0},age is {1}
     @Alias(name = "with_space_value")
-    private String              withSpaceValue;
+    private String  withSpaceValue;
 
     /** The b. */
     @Alias(name = "config_test_boolean")
-    private boolean             b;
+    private boolean b;
 
     /** The i. */
     @Alias(name = "config_test_int")
-    private boolean             i;
+    private boolean i;
 
     /** The longs. */
     @Alias(name = "config_test_array")
-    private Long[]              longs;
+    private Long[]  longs;
 
     /** The image. */
     @Alias(name = "FileType.image")
-    private String              image;
+    private String  image;
 
     /** The video. */
     @Alias(name = "FileType.video")
-    private String              video;
+    private String  video;
 
     /** The audio. */
     @Alias(name = "FileType.audio")
-    private String              audio;
+    private String  audio;
 
     /** The arguments. */
     @Alias(name = "test.arguments")
-    private String              arguments;
+    private String  arguments;
 
     /**
      * Gets the with space value.
@@ -228,5 +222,4 @@ public class VarBean{
     public void setArguments(String arguments){
         this.arguments = arguments;
     }
-
 }

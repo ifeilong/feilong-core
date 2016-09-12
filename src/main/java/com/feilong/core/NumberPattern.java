@@ -36,7 +36,7 @@ import java.text.DecimalFormat;
  * <td><code>0</code></td>
  * <td>Number</td>
  * <td>Yes</td>
- * <td>代表阿拉伯数字,每一个0表示一位阿拉伯数字, 如果该位不存在则显示0<br>
+ * <td>每一个0表示一位阿拉伯数字,如果该位不存在,<b>则显示0</b><br>
  * 如果对应位置上没有数字,则用零代替</td>
  * </tr>
  * 
@@ -44,7 +44,7 @@ import java.text.DecimalFormat;
  * <td><code>#</code></td>
  * <td>Number</td>
  * <td>Yes</td>
- * <td>代表阿拉伯数字,每一个#表示一位阿拉伯数字, 如果该位不存在则不显示<br>
+ * <td>每一个#表示一位阿拉伯数字,如果该位不存在,<b>则不显示</b><br>
  * 如果对应位置上没有数字,则保持原样(不用补);如果最前、后为0,则保持为空.</td>
  * </tr>
  * 
