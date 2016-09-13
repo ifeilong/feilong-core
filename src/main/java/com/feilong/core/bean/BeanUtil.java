@@ -436,38 +436,31 @@ public final class BeanUtil{
     /**
      * 调用{@link BeanUtils#cloneBean(Object)}.
      * 
-     * <p>
-     * 这个方法通过默认构造函数建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中,即使这个bean没有实现 {@link Cloneable}接口 .
-     * </p>
-     * 
      * <h3>注意:</h3>
      * <blockquote>
      * 
      * <ol>
+     * <li>这个方法通过<b>默认构造函数</b>建立一个bean的新实例,然后拷贝每一个属性到这个新的bean中,即使这个bean没有实现 {@link Cloneable}接口 .</li>
      * <li>是为那些本身没有实现clone方法的类准备的</li>
      * <li>在源码上看是调用了 <b>getPropertyUtils().copyProperties(newBean, bean)</b>;最后实际上还是<b>复制的引用,无法实现深clone</b><br>
      * 但还是可以帮助我们减少工作量的,假如类的属性不是基础类型的话(即自定义类),可以先clone出那个自定义类,在把他付给新的类,覆盖原来类的引用
      * </li>
+     * <li>
+     * 如果需要深度clone,可以使用 {@link org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable) SerializationUtils.clone}
+     * ,但是它的性能要慢很多倍</li>
      * <li>由于内部实现是通过 {@link java.lang.Class#newInstance() Class.newInstance()}来构造新的对象,所以需要被clone的对象<b>必须存在默认无参构造函数</b>,否则会出现异常
      * {@link java.lang.InstantiationException InstantiationException}</li>
      * <li>目前无法clone list,总是返回empty list,参见
-     * <a href="https://issues.apache.org/jira/browse/BEANUTILS-471">BeanUtils.cloneBean with List is broken</a></li>
+     * <a href="https://issues.apache.org/jira/browse/BEANUTILS-471">BeanUtils.cloneBean with List is broken</a>
+     * </li>
      * </ol>
-     * </blockquote>
-     * 
-     * <h3>深度clone:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 如果需要深度clone,可以使用 {@link org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable) SerializationUtils.clone},但是它的性能要慢很多倍
-     * </p>
      * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param bean
      *            Bean to be cloned
-     * @return the cloned bean (复制的引用 ,无法实现深clone)
+     * @return the cloned bean (复制的引用 ,无法实现深clone)<br>
      * @throws NullPointerException
      *             如果 <code>bean</code> 是null
      * @throws BeanOperationException
@@ -477,6 +470,7 @@ public final class BeanUtil{
      * @see org.apache.commons.lang3.SerializationUtils#clone(java.io.Serializable)
      * @see org.apache.commons.lang3.ObjectUtils#clone(Object)
      * @see org.apache.commons.lang3.ObjectUtils#cloneIfPossible(Object)
+     * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-471">BeanUtils.cloneBean with List is broken</a>
      */
     @SuppressWarnings("unchecked")
     public static <T> T cloneBean(T bean){
@@ -484,7 +478,6 @@ public final class BeanUtil{
         try{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new BeanOperationException(e);
         }
     }
@@ -809,35 +802,35 @@ public final class BeanUtil{
     /**
      * New dyna bean.
      * 
-     * <p>
-     * {@link LazyDynaBean}不需要首先创建一个包含期望的数据结构的DynaClass,就能向LazyDynaBean中填充我们任意想填充的数据。<br>
-     * {@link LazyDynaBean}内部会根据我们填充进的数据（即使是一个map中的一个key-value pair,LazyDynaBean也会创建一个map的metadata）,创建metadata的。<br>
-     * 
-     * 程序内部,默认使用的是 {@link org.apache.commons.beanutils.LazyDynaClass}
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>程序内部,默认使用的是 {@link org.apache.commons.beanutils.LazyDynaClass}</li>
+     * <li>{@link LazyDynaBean}不需要首先创建一个包含期望的数据结构的DynaClass,就能向LazyDynaBean中填充我们任意想填充的数据。</li>
+     * <li>{@link LazyDynaBean}内部会根据我们填充进的数据（即使是一个map中的一个key-value pair,LazyDynaBean也会创建一个map的metadata）,创建metadata的。</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * DynaBean newDynaBean = BeanUtil.newDynaBean(toMap(//
      *                 Pair.of("address", (Object) new HashMap()),
      *                 Pair.of("firstName", (Object) "Fred"),
      *                 Pair.of("lastName", (Object) "Flintstone")));
      * LOGGER.debug(JsonUtil.format(newDynaBean));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
      * {
-        "address": {},
-        "firstName": "Fred",
-        "lastName": "Flintstone"
-    }
+     * "address": {},
+     * "firstName": "Fred",
+     * "lastName": "Flintstone"
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -845,9 +838,9 @@ public final class BeanUtil{
      * @param valueMap
      *            the value map
      * @return the dyna bean
-     * @see org.apache.commons.beanutils.LazyDynaBean
      * @throws NullPointerException
      *             如果 <code>valueMap</code> 是null,或者 map中有key是null
+     * @see org.apache.commons.beanutils.LazyDynaBean
      * @since 1.8.1
      */
     public static DynaBean newDynaBean(Map<String, ?> valueMap){
