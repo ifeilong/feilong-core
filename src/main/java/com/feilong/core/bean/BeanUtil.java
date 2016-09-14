@@ -32,8 +32,6 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -178,9 +176,6 @@ import static com.feilong.core.util.MapUtil.newHashMap;
  */
 public final class BeanUtil{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(BeanUtil.class);
-
     /** Don't let anyone instantiate this class. */
     private BeanUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -290,7 +285,6 @@ public final class BeanUtil{
                 BeanUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                LOGGER.error(e.getClass().getName(), e);
                 throw new BeanOperationException(e);
             }
         }
@@ -328,7 +322,6 @@ public final class BeanUtil{
         try{
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new BeanOperationException(e);
         }
     }
@@ -366,7 +359,6 @@ public final class BeanUtil{
         try{
             return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            LOGGER.error(e.getClass().getName(), e);
             throw new BeanOperationException(e);
         }
     }

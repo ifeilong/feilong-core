@@ -244,9 +244,9 @@ public final class EnumUtil{
         }
 
         //*************************************************************************
-        if (LOGGER.isInfoEnabled()){
+        if (LOGGER.isDebugEnabled()){
             String messagePattern = "[{}],propertyName:[{}],value:[{}],ignoreCase:[{}],constants not found";
-            LOGGER.info(Slf4jUtil.format(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
+            LOGGER.debug(Slf4jUtil.format(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));
         }
         return null;
     }
