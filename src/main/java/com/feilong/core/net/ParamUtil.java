@@ -99,7 +99,7 @@ public final class ParamUtil{
      * @param parameValue
      *            添加的参数值,会被转成 {@link String} 进行拼接
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换<br>
@@ -159,7 +159,7 @@ public final class ParamUtil{
      * @param singleValueMap
      *            singleValueMap param name 和value 的键值对
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
@@ -227,7 +227,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the name and array value map
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换<br>
@@ -279,7 +279,7 @@ public final class ParamUtil{
      * @param queryString
      *            the query string
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>queryString</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
@@ -341,7 +341,7 @@ public final class ParamUtil{
      * @param queryString
      *            {@code a=1&b=2}类型的数据,支持{@code a=1&a=1}的形式, 返回map的值是数组
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>queryString</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
@@ -421,7 +421,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            类似于 <code>request.getParamMap</code>
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>arrayValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
@@ -736,7 +736,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the name and array value map
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return the string
@@ -764,7 +764,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the array value map
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>arrayValueMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
@@ -792,7 +792,7 @@ public final class ParamUtil{
      * @param paramValues
      *            the param values
      * @param charsetType
-     *            the charset type
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @return the string[]
      * @since 1.6.2
      */
@@ -857,7 +857,7 @@ public final class ParamUtil{
      * @param value
      *            the value
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>value</code>是 null或者empty,返回 {@link StringUtils#EMPTY}<br>
@@ -883,7 +883,7 @@ public final class ParamUtil{
      * @param arrayValueMap
      *            the array value map
      * @param charsetType
-     *            何种编码, {@link CharsetType}<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>beforePathWithoutQueryString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>

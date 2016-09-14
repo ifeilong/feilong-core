@@ -224,7 +224,7 @@ public final class URIUtil{
      * @param uriString
      *            the uri string
      * @param charsetType
-     *            何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return 如果 <code>uriString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uriString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -245,7 +245,7 @@ public final class URIUtil{
      * @param uriString
      *            the uri string
      * @param charsetType
-     *            何种编码,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return 如果 <code>uriString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uriString</code> 是blank,抛出 {@link IllegalArgumentException}
@@ -360,7 +360,7 @@ public final class URIUtil{
      * @param value
      *            the value
      * @param charsetType
-     *            charsetType {@link CharsetType}
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see URLEncoder#encode(String, String)
@@ -398,7 +398,7 @@ public final class URIUtil{
      * @param value
      *            需要被解码的值
      * @param charsetType
-     *            charsetType {@link CharsetType}
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see <a href="http://dwr.2114559.n2.nabble.com/Exception-URLDecoder-Incomplete-trailing-escape-pattern-td5396332.html">Exception ::
@@ -416,7 +416,7 @@ public final class URIUtil{
      * @param value
      *            the value
      * @param charsetType
-     *            the charset type
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @param encodeOrDecode
      *            true 为encode,false为 decode
      * @return the string

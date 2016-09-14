@@ -187,7 +187,7 @@ public final class StringUtil{
      * @param bytes
      *            The bytes to be decoded into characters, may be <code>null</code>
      * @param charsetType
-     *            {@link CharsetType}
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @return A new <code>String</code> decoded from the specified array of bytes using the given charset,
      *         or <code>null</code> if the input byte array was <code>null</code>.
      * @see String#String(byte[], String)
