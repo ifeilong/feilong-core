@@ -45,6 +45,8 @@ import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.net.URIUtil.decode;
+import static com.feilong.core.net.URIUtil.encode;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
@@ -131,8 +133,10 @@ public final class ParamUtil{
      * <ol>
      * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么追加新的参数<code>paramName</code>和值<code>parameValue</code>.</li>
      * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>parameValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>parameValue</code>,其他的被丢弃.</li>
+     * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
      * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
-     * <li>如果<code>uriString</code>不带?,则自动增加?.</li>
+     * <li>如果<code>uriString</code>不带?,则自动增加?</li>
      * </ol>
      * </blockquote>
      * 
@@ -178,7 +182,8 @@ public final class ParamUtil{
      * </blockquote>
      *
      * @param uriString
-     *            the uri string
+     *            如果带有? 和参数,会先被截取,最后再拼接,<br>
+     *            如果不带?,则自动增加?
      * @param singleValueMap
      *            singleValueMap param name 和value 的键值对
      * @param charsetType
@@ -246,7 +251,8 @@ public final class ParamUtil{
      * </blockquote>
      *
      * @param uriString
-     *            the uri string
+     *            如果带有? 和参数,会先被截取,最后再拼接,<br>
+     *            如果不带?,则自动增加?
      * @param arrayValueMap
      *            the name and array value map
      * @param charsetType
@@ -644,7 +650,6 @@ public final class ParamUtil{
      * 
      * </blockquote>
      * 
-     * 
      * <h3>示例2:</h3>
      * <blockquote>
      * 
@@ -668,7 +673,6 @@ public final class ParamUtil{
      *            the array value map
      * @return 如果 <code>arrayValueMap</code> 是 null或者Empty,返回 {@link StringUtils#EMPTY}<br>
      *         否则循环 <code>arrayValueMap</code> 拼接成QueryString
-     * @see #joinParamNameAndValues(String, String[])
      * @see <a href="http://www.leveluplunch.com/java/examples/build-convert-map-to-query-string/">build-convert-map-to-query-string</a>
      * @since 1.5.5
      */
@@ -677,16 +681,45 @@ public final class ParamUtil{
             return EMPTY;
         }
 
-        int i = 0;
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String[]> entry : arrayValueMap.entrySet()){
             sb.append(joinParamNameAndValues(entry.getKey(), entry.getValue()));
-            if (i != arrayValueMap.size() - 1){// 最后一个& 不拼接
-                sb.append(AMPERSAND);
-            }
-            ++i;
+            sb.append(AMPERSAND); //放心大胆的拼接 &, 不判断是否是最后一个,最后会截取
         }
-        return sb.toString();
+        return StringUtil.substringWithoutLast(sb, AMPERSAND);
+    }
+
+    /**
+     * 将参数和多值连接起来.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>比如,参数名字 {@code paramName=name},{@code paramValues 为 zhangfei,guanyu},那么返回值是{@code name=zhangfei&name=guanyu}</li>
+     * <li>paramName和每个值都会调用 {@link StringUtils#defaultString(String)}转换后才进行拼接</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param paramName
+     *            参数名字
+     * @param paramValues
+     *            参数多值
+     * @return the string
+     * @see java.lang.AbstractStringBuilder#append(String)
+     * @see org.apache.commons.lang3.StringUtils#defaultString(String)
+     * @see "org.springframework.web.servlet.view.RedirectView#appendQueryProperties(StringBuilder,Map, String)"
+     * @since 1.4.0
+     */
+    private static String joinParamNameAndValues(String paramName,String[] paramValues){
+        StringBuilder sb = new StringBuilder();
+
+        for (String paramValue : paramValues){
+            //注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            sb.append(defaultString(paramName)).append("=").append(defaultString(paramValue));
+            sb.append(AMPERSAND);//放心大胆的拼接 &, 不判断是否是最后一个,最后会截取
+        }
+
+        return StringUtil.substringWithoutLast(sb, AMPERSAND);
     }
 
     /**
@@ -695,7 +728,7 @@ public final class ParamUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>拼接的顺序按照 <code>includeKeys</code> 的顺序,目前适用于 个别银行(比如汇付天下) 需要将值拼接起来加密</li>
+     * <li>拼接的顺序按照 <code>includeKeys</code> 的顺序,目前适用于个别银行(比如汇付天下)需要将值拼接起来加密</li>
      * <li>如果<code>singleValueMap</code>中的value是null,那么会以{@link StringUtils#EMPTY}替代,进行拼接</li>
      * </ol>
      * </blockquote>
@@ -823,44 +856,11 @@ public final class ParamUtil{
         if (isNullOrEmpty(charsetType)){
             return paramValues;
         }
-        List<String> paramValueList = new ArrayList<String>();
+        List<String> paramValueList = new ArrayList<>();
         for (String value : paramValues){
             paramValueList.add(decodeAndEncode(value, charsetType));
         }
         return toArray(paramValueList, String.class);
-    }
-
-    /**
-     * 将参数和多值连接起来.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>比如,参数名字 {@code paramName=name}, {@code paramValues 为 zhangfei,guanyu},那么返回值是{@code name=zhangfei&name=guanyu}</li>
-     * <li>paramName 和每个值 都会调用 {@link StringUtils#defaultString(String)}转换后才进行拼接</li>
-     * </ol>
-     * </blockquote>
-     *
-     * @param paramName
-     *            参数名字
-     * @param paramValues
-     *            参数多值
-     * @return the string
-     * @see java.lang.AbstractStringBuilder#append(String)
-     * @see org.apache.commons.lang3.StringUtils#defaultString(String)
-     * @see "org.springframework.web.servlet.view.RedirectView#appendQueryProperties(StringBuilder,Map, String)"
-     * @since 1.4.0
-     */
-    private static String joinParamNameAndValues(String paramName,String[] paramValues){
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0, j = paramValues.length; i < j; ++i){
-            //注意:如果 value 是null ,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(defaultString(paramName)).append("=").append(defaultString(paramValues[i]));
-            if (i != j - 1){// 最后一个& 不拼接
-                sb.append(AMPERSAND);
-            }
-        }
-        return sb.toString();
     }
 
     /**
@@ -895,7 +895,7 @@ public final class ParamUtil{
         if (isNullOrEmpty(value)){
             return EMPTY;
         }
-        return isNullOrEmpty(charsetType) ? value : URIUtil.encode(URIUtil.decode(value, charsetType), charsetType);
+        return isNullOrEmpty(charsetType) ? value : encode(decode(value, charsetType), charsetType);
     }
 
     /**
