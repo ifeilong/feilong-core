@@ -27,7 +27,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 BeanUtilNewDynaBeanTest.class,
                 BeanUtilPopulateAliasBeanTest.class,
                 BeanUtilPopulateTest.class,
-                BeanUtilRegisterTest.class,
         //
 })
 public class FeiLongBeanUtilSuiteTests{

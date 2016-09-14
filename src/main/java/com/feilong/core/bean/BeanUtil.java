@@ -30,7 +30,6 @@ import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.LazyDynaBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.ArrayConverter;
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
@@ -189,49 +188,6 @@ public final class BeanUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    /**
-     * 调用{@link ConvertUtils#register(Converter, Class)}将字符串和指定类型的实例之间进行转换.
-     *  
-     * <h3>特别说明:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 由于该类的方法都是静态方法,并且static方法块有默认参数的初始化,如果需要自行register converter的地方,<br>
-     * 比如时间转换,如果先使用ConvertUtils原生方法先注册Converter,再第一次调用该类相关方法,<br>
-     * 比如:
-     * </p>
-     * 
-     * <pre class="code">
-     * ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE), Date.class)
-     * 
-     * User user1 = new User();
-     * user1.setDate(new Date());
-     * 
-     * User user2 = new User();
-     * BeanUtil.copyProperties(user2, user1, "date");
-     * </pre>
-     * 
-     * <p>
-     * 那么自行注册的 {@link DateLocaleConverter} 将会被当前类里面 static 方法块内部默认的 {@link org.apache.commons.beanutils.converters.DateConverter} 替换掉
-     * </p>
-     * 
-     * <p>
-     * 因此,<span style="color:red">建议使用该方法,而不是使用commons-bean原生的 {@link ConvertUtils#register(Converter, Class)}</span> ,<br>
-     * 这样会先经过static方法块初始默认的注册器,再使用自定义的 {@link Converter} 覆盖相同类型的转换
-     * </p>
-     * </blockquote>
-     *
-     * @param converter
-     *            the converter
-     * @param klass
-     *            the klass
-     * @see org.apache.commons.beanutils.ConvertUtils#register(Converter, Class)
-     * @since 1.5.0
-     */
-    public static void register(Converter converter,Class<?> klass){
-        ConvertUtils.register(converter, klass);
-    }
-
     // [start] copyProperties
 
     /**
@@ -274,15 +230,11 @@ public final class BeanUtil{
      * 
      * <blockquote>
      * <p>
-     * 如果有 {@link java.util.Date} 类型的需要copy,那么需要先使用当前类的 {@link #register(Converter, Class)}方法:<br>
+     * 如果有 {@link java.util.Date}类型的需要copy,那么需要先使用{@link ConvertUtils#register(Converter, Class)}方法:<br>
      * 
-     * <code>BeanUtil.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE),Date.class);</code>
-     * 
-     * <br>
-     * 具体原因,参见 {@link #register(Converter, Class)}方法注释
+     * <code>ConvertUtils.register(new DateLocaleConverter(Locale.US, DatePattern.TO_STRING_STYLE),Date.class);</code>
      * </p>
      * </blockquote>
-     * 
      * 
      * <h3>{@link BeanUtils#copyProperties(Object, Object)}与 {@link PropertyUtils#copyProperties(Object, Object)}区别</h3>
      * 

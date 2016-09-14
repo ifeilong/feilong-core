@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.junit.Test;
 
@@ -61,7 +62,7 @@ public class BeanUtilCopyPropertiesTest{
         user.setNickNames(nickNames);
 
         DateLocaleConverter dateLocaleConverter = new DateLocaleConverter(Locale.US, TO_STRING_STYLE);
-        BeanUtil.register(dateLocaleConverter, Date.class);
+        ConvertUtils.register(dateLocaleConverter, Date.class);
 
         User user2 = new User();
         BeanUtil.copyProperties(user2, user);

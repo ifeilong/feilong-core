@@ -21,11 +21,11 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
 import org.junit.Test;
 
-import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.entity.DangaMemCachedConfig;
 
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
@@ -61,7 +61,7 @@ public class ResourceBundleUtilToAliasBeanTest{
         char[] allowedChars = { ':' };
         arrayConverter.setAllowedChars(allowedChars);
 
-        BeanUtil.register(arrayConverter, String[].class);
+        ConvertUtils.register(arrayConverter, String[].class);
 
         DangaMemCachedConfig dangaMemCachedConfig = toAliasBean(getResourceBundle("messages.memcached"), DangaMemCachedConfig.class);
         assertThat(dangaMemCachedConfig, allOf(//
