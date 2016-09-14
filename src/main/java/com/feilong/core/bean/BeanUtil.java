@@ -779,14 +779,16 @@ public final class BeanUtil{
     // [end]
 
     /**
-     * New dyna bean.
+     * 使用 <code>valueMap</code> 来构造一个 DynaBean.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
+     * <li>一般情况下,你可能不需要使用这个方法</li>
+     * <li>很适合那种属性值数量不确定,并且又不想在页面使用map来渲染的地方,比如制作多维度的图表</li>
      * <li>程序内部,默认使用的是 {@link org.apache.commons.beanutils.LazyDynaClass}</li>
-     * <li>{@link LazyDynaBean}不需要首先创建一个包含期望的数据结构的DynaClass,就能向LazyDynaBean中填充我们任意想填充的数据。</li>
-     * <li>{@link LazyDynaBean}内部会根据我们填充进的数据（即使是一个map中的一个key-value pair,LazyDynaBean也会创建一个map的metadata）,创建metadata的。</li>
+     * <li>不需要先创建一个期望的数据结构DynaClass,就能向{@link LazyDynaBean}中填充我们任意想填充的数据。</li>
+     * <li>{@link LazyDynaBean}内部会根据我们填充进的数据(即使是一个map中的一个key-value pair),创建metadata的。</li>
      * </ol>
      * </blockquote>
      * 
@@ -818,7 +820,9 @@ public final class BeanUtil{
      *            the value map
      * @return the dyna bean
      * @throws NullPointerException
-     *             如果 <code>valueMap</code> 是null,或者 map中有key是null
+     *             如果 <code>valueMap</code> 是null,或者 <code>valueMap</code>中有key是null
+     * @throws IllegalArgumentException
+     *             如果<code>valueMap</code>中有key是empty
      * @see org.apache.commons.beanutils.LazyDynaBean
      * @since 1.8.1
      */

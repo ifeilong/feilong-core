@@ -39,7 +39,7 @@ public final class URIComponents{
      * http协议<code>{@value}</code>.
      * 
      * <p>
-     * 超文本传输协议（HTTP,HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。
+     * 超文本传输协议(HTTP,HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。
      * </p>
      */
     public static final String SCHEME_HTTP  = "http";

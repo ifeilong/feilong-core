@@ -1859,10 +1859,10 @@ public final class ConvertUtil{
      * <b>泛型擦除的规则:</b>
      * 
      * <ol>
-     * <li>所有参数化容器类都被擦除成非参数化的（raw type）; 如 List{@code <E>}、List{@code <List<E>>}都被擦除成 List</li>
+     * <li>所有参数化容器类都被擦除成非参数化的(raw type); 如 List{@code <E>}、List{@code <List<E>>}都被擦除成 List</li>
      * <li>所有参数化数组都被擦除成非参数化的数组;如 List{@code <E>}[],被擦除成 List[]</li>
      * <li>Raw type 的容器类,被擦除成其自身,如 List{@code <E>}被擦 除成 List</li>
-     * <li>原生类型（int,String 还有 wrapper 类）都擦除成他们的自身</li>
+     * <li>原生类型(int,String 还有 wrapper 类)都擦除成他们的自身</li>
      * <li>参数类型 E,如果没有上限,则被擦除成 Object</li>
      * <li>所有约束参数如{@code <? Extends E>}、{@code <X extends E>}都被擦 除成 E</li>
      * <li>如果有多个约束,擦除成第一个,如{@code <T extends Object & E>},则擦除成 Object</li>

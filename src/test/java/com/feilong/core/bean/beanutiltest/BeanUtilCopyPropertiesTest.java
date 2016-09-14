@@ -99,8 +99,8 @@ public class BeanUtilCopyPropertiesTest{
     /**
      * Test copy properties no date locale converter.
      */
-    //*****************************************************************************************************
-    @Test(expected = NullPointerException.class)
+    //*******这个要放最上面, 否则maven来执行的时候  不会出现 异常****************************************************
+    @Test(expected = BeanOperationException.class)
     public void testCopyPropertiesNoDateLocaleConverter(){
         User user = new User();
         user.setDate(new Date());
