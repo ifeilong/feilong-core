@@ -120,6 +120,7 @@ public final class ParamUtil{
      *         如果 <code>paramName</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
      *         如果 <code>parameValue</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
      * @see #addParameterSingleValueMap(String, Map, String)
+     * @since 1.9.0 change paramValue type from Object to String
      */
     public static String addParameter(String uriString,String paramName,String parameValue,String charsetType){
         return addParameterSingleValueMap(uriString, toMap(paramName, parameValue), charsetType);
