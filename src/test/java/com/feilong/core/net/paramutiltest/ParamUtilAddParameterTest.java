@@ -115,7 +115,7 @@ public class ParamUtilAddParameterTest{
     /**
      * Test add parameter null value.
      */
-    //****************************************************************************
+    //*********************************************************************
     @Test
     public void testAddParameterNullValue(){
         String uriString = PATH + "?keyword=%E6%81%A4&page=";
