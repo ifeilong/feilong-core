@@ -924,9 +924,9 @@ public final class ConvertUtil{
      * <p>
      * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object) ArrayConverter#convertToString(Object)} <br>
      * 
-     * 在转换的过程中, 如果发现 object是数组,将使用 {@link java.lang.reflect.Array#get(Object, int) Array#get(Object, int)} 来获得数据,<br>
-     * 如果发现不是数组, 将会将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
-     * ArrayConverter#convertToCollection(Class, Object)} 再转成 迭代器 {@link java.util.Collection#iterator() Collection.iterator()}
+     * 在转换的过程中,如果发现object是数组,将使用 {@link java.lang.reflect.Array#get(Object, int) Array#get(Object, int)}来获得数据,<br>
+     * 如果发现不是数组,将会将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
+     * ArrayConverter#convertToCollection(Class, Object)}再转成迭代器 {@link java.util.Collection#iterator() Collection.iterator()}
      * </p>
      * 
      * <p>

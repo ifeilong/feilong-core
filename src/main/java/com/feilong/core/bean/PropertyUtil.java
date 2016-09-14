@@ -77,13 +77,8 @@ public final class PropertyUtil{
      * <blockquote>
      * 
      * <ol>
-     * <li>如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},否则循环调用
-     * {@link #getProperty(Object, String)}再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中</li>
      * <li>如果 <code>toObj</code> 是null,抛出 {@link NullPointerException}</li>
      * <li>如果 <code>fromObj</code> 是null,抛出 {@link NullPointerException}</li>
-     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
-     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,会抛出异常,see
-     * {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) copyProperties} Line2078</li>
      * <li>对于Date类型,<span style="color:red">不需要先注册converter</span></li>
      * <li>这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,这个在使用时要小心,特别是对于属性为自定义类的情况 .</li>
      * </ol>
@@ -193,7 +188,14 @@ public final class PropertyUtil{
      *            原始对象
      * @param includePropertyNames
      *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
-     *            如果是null或者empty,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}
+     *            如果是null或者empty,将会调用 {@link PropertyUtils#copyProperties(Object, Object)}<br>
+     *            <ol>
+     *            <li>如果没有传入<code>includePropertyNames</code>参数,那么直接调用{@link PropertyUtils#copyProperties(Object, Object)},否则循环调用
+     *            {@link #getProperty(Object, String)}再{@link #setProperty(Object, String, Object)}到<code>toObj</code>对象中</li>
+     *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
+     *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,会抛出异常,see
+     *            {@link PropertyUtilsBean#setSimpleProperty(Object, String, Object) copyProperties} Line2078</li>
+     *            </ol>
      * @throws NullPointerException
      *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
      * @throws BeanOperationException

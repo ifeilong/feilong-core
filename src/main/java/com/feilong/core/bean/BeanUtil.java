@@ -235,38 +235,20 @@ public final class BeanUtil{
     // [start] copyProperties
 
     /**
-     * 将 <code class="code">fromObj</code> 中的全部或者一组属性的值,复制到 <code>toObj</code> 对象中.
+     * 将 <code class="code">fromObj</code> 中的全部或者一组属性 <code>includePropertyNames</code> 的值,复制到 <code>toObj</code> 对象中.
      * 
      * <h3>注意:</h3>
      * 
      * <blockquote>
      * <ol>
      * <li>这种copy都是 <span style="color:red">浅拷贝</span>,复制后的2个Bean的同一个属性可能拥有同一个对象的ref,在使用时要小心,特别是对于属性为自定义类的情况 .</li>
-     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行{@code Object--->String--->Object}类型转换,<br>
-     * 如果需要copy的两个对象属性之间的类型是一样的话,那么调用这个方法会有<span style="color:red">性能消耗</span>,此时建议调用
+     * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行{@code Object--->String--->Object}类型转换</li>
+     * <li>如果指定了<code>includePropertyNames</code>,会调用 {@link #getProperty(Object, String)},在自动进行{@code Object--->String}
+     * 类型转换过程中,如果发现值是数组,只会取第一个元素重新构造数组转到 <code>toObj</code>中,规则参见 {@link ConvertUtil#toString(Object)}</li>
+     * <li>如果需要copy的两个对象属性之间的<b>类型一样</b>的话,那么调用这个方法会有<span style="color:red">性能消耗</span>,此时<b>强烈建议调用</b>
      * {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
      * </ol>
      * </blockquote>
-     * 
-     * <h3>代码流程:</h3>
-     * <blockquote>
-     * <p>
-     * 如果没有传入<code>includePropertyNames</code>参数,那么直接调用 {@link BeanUtils#copyProperties(Object, Object)}<br>
-     * 否则循环调用{@link #getProperty(Object, String)} 再{@link #setProperty(Object, String, Object)}到 <code>toObj</code>对象中
-     * </p>
-     * </blockquote>
-     * 
-     * <h3>参数说明:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <ol>
-     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
-     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行(跳过该属性设置),see
-     * {@link BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
-     * </ol>
-     * </blockquote>
-     * 
      * 
      * <h3>使用示例:</h3>
      * 
@@ -287,7 +269,6 @@ public final class BeanUtil{
      * </pre>
      * 
      * </blockquote>
-     * 
      * 
      * <h3>注册自定义 {@link Converter}:</h3>
      * 
@@ -331,13 +312,18 @@ public final class BeanUtil{
      * @param fromObj
      *            原始对象
      * @param includePropertyNames
-     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo)<br>
-     *            如果是null或者empty ,将会调用 {@link BeanUtils#copyProperties(Object, Object)}
+     *            包含的属性名字数组,(can be nested/indexed/mapped/combo)<br>
+     *            <ol>
+     *            <li>如果是null或者empty,那么直接调用 {@link BeanUtils#copyProperties(Object, Object)},否则循环调用{@link #getProperty(Object, String)} 再
+     *            {@link #setProperty(Object, String, Object)}到 <code>toObj</code>对象中</li>
+     *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
+     *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行(跳过该属性设置),see
+     *            {@link BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
+     *            </ol>
      * @throws NullPointerException
      *             如果 <code>toObj</code> 是null,或者 <code>fromObj</code> 是null
      * @throws BeanOperationException
      *             其他调用api有任何异常,转成{@link BeanOperationException}返回
-     * @see #setProperty(Object, String, Object)
      * @see org.apache.commons.beanutils.BeanUtilsBean#copyProperties(Object, Object)
      * @see <a href="http://www.cnblogs.com/kaka/archive/2013/03/06/2945514.html">Bean复制的几种框架性能比较(Apache BeanUtils、PropertyUtils,Spring
      *      BeanUtils,Cglib BeanCopier)</a>
@@ -401,6 +387,10 @@ public final class BeanUtil{
 
     /**
      * 使用 {@link BeanUtils#getProperty(Object, String)} 类从对象中取得属性值,不care值原本是什么类型,统统转成 {@link String}返回.
+     * 
+     * <p>
+     * 值转成字符串的规则,参见 {@link ConvertUtil#toString(Object)},比如如果发现值是数组,只会取第一个元素重新构造数组转到<code>toObj</code>中
+     * </p>
      *
      * @param bean
      *            bean
