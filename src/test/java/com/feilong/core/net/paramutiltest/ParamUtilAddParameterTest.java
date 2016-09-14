@@ -15,43 +15,136 @@
  */
 package com.feilong.core.net.paramutiltest;
 
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.junit.Assert.assertEquals;
 
-import com.feilong.core.net.ParamUtil;
+import org.junit.Test;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.net.ParamUtil.addParameter;
+import static com.feilong.core.net.URIUtil.encode;
 
 /**
- * The Class ParamUtilTest.
+ * The Class ParamUtilAddParameterTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ParamUtilAddParameterTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtilAddParameterTest.class);
+    /** The Constant PATH. */
+    private static final String PATH = "http://www.feilong.com:8888/esprit-frontend/search.htm";
 
     /**
-     * Adds the parameter1.
+     * Test add parameter no param.
      */
     @Test
-    public void addParameter1(){
-        String uriString = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
-        String pageParamName = "page";
-        Object prePageNo = "";
-        LOGGER.debug(ParamUtil.addParameter(uriString, pageParamName, prePageNo, UTF8));
+    public void testAddParameterNoParam(){
+        String uriString = PATH;
+        assertEquals(PATH + "?label=2-5-8-12", addParameter(uriString, "label", "2-5-8-12", UTF8));
     }
 
     /**
-     * Adds the parameter.
+     * Test add parameter.
      */
     @Test
-    public void addParameter(){
-        String uriString = "http://www.feilong.com:8888/esprit-frontend/search.htm?keyword=%E6%81%A4&page=";
-        String pageParamName = "label";
-        String prePageNo = "2-5-8-12";
-        LOGGER.debug(ParamUtil.addParameter(uriString, pageParamName, prePageNo, UTF8));
+    public void testAddParameter(){
+        String uriString = PATH + "?keyword=%E6%81%A4&page=";
+        assertEquals(PATH + "?keyword=%E6%81%A4&page=&label=2-5-8-12", addParameter(uriString, "label", "2-5-8-12", UTF8));
+    }
+
+    /**
+     * Test add parameter chinese value.
+     */
+    @Test
+    public void testAddParameterChineseValue(){
+        String uriString = PATH + "?keyword=%E6%81%A4&page=";
+        String value = "中国";
+        assertEquals(PATH + "?keyword=%E6%81%A4&page=&label=" + encode(value, UTF8), addParameter(uriString, "label", value, UTF8));
+    }
+
+    /**
+     * Test add parameter replace value.
+     */
+    @Test
+    public void testAddParameterReplaceValue(){
+        String uriString = PATH + "?keyword=%E6%81%A4&label=hahaha&page=";
+        String value = "中国";
+        assertEquals(PATH + "?keyword=%E6%81%A4&label=" + encode(value, UTF8) + "&page=", addParameter(uriString, "label", value, UTF8));
+    }
+
+    /**
+     * Test add parameter replace value two params.
+     */
+    @Test
+    public void testAddParameterReplaceValueTwoParams(){
+        String uriString = PATH + "?label=lalala&keyword=%E6%81%A4&label=hahaha&page=";
+
+        String value = "中国";
+        String expected = PATH + "?label=" + encode(value, UTF8) + "&keyword=%E6%81%A4&page=";
+        assertEquals(expected, addParameter(uriString, "label", value, UTF8));
+    }
+
+    /**
+     * Test add parameter null charset type.
+     */
+    @Test
+    public void testAddParameterNullCharsetType(){
+        String uriString = PATH + "?keyword=%E6%81%A4&page=";
+        assertEquals(PATH + "?keyword=%E6%81%A4&page=&label=中国", addParameter(uriString, "label", "中国", null));
+    }
+
+    /**
+     * Test add parameter null param name.
+     */
+    //****************************************************************************
+    @Test
+    public void testAddParameterNullParamName(){
+        String uriString = PATH + "?keyword=%E6%81%A4&page=";
+        assertEquals(PATH + "?keyword=%E6%81%A4&page=&=", addParameter(uriString, null, null, null));
+    }
+
+    /**
+     * Test add parameter null param name 1.
+     */
+    @Test
+    public void testAddParameterNullParamName1(){
+        String uriString = PATH + "?keyword=%E6%81%A4&page=";
+        assertEquals(PATH + "?keyword=%E6%81%A4&page=&=2-5-8-12", addParameter(uriString, null, "2-5-8-12", null));
+    }
+
+    /**
+     * Test add parameter null value.
+     */
+    //****************************************************************************
+    @Test
+    public void testAddParameterNullValue(){
+        String uriString = PATH + "?keyword=%E6%81%A4&page=";
+        assertEquals(PATH + "?keyword=%E6%81%A4&page=&label=", addParameter(uriString, "label", null, null));
+    }
+
+    //****************************************************************************
+
+    /**
+     * Test add parameter null uri.
+     */
+    @Test
+    public void testAddParameterNullUri(){
+        assertEquals(EMPTY, addParameter(null, "label", "2-5-8-12", UTF8));
+    }
+
+    /**
+     * Test add parameter empty uri.
+     */
+    @Test
+    public void testAddParameterEmptyUri(){
+        assertEquals(EMPTY, addParameter("", "label", "2-5-8-12", UTF8));
+    }
+
+    /**
+     * Test add parameter blank uri.
+     */
+    @Test
+    public void testAddParameterBlankUri(){
+        assertEquals(EMPTY, addParameter(" ", "label", "2-5-8-12", UTF8));
     }
 }

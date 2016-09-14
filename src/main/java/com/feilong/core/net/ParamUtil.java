@@ -71,7 +71,19 @@ public final class ParamUtil{
     // ************************************addParameter******************************************************
 
     /**
-     * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
+     * 给指定的<code>uriString</code>添加指定的参数 <code>paramName</code> 和值 <code>parameValue</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么追加新的参数<code>paramName</code>和值<code>parameValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>parameValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>parameValue</code>,其他的被丢弃.</li>
+     * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
+     * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
+     * <li>如果<code>uriString</code>不带?,则自动增加?</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -93,25 +105,36 @@ public final class ParamUtil{
      *
      * @param uriString
      *            如果带有? 和参数,会先被截取,最后再拼接,<br>
-     *            如果不带?,则自动 增加?
+     *            如果不带?,则自动增加?
      * @param paramName
      *            添加的参数名称
      * @param parameValue
-     *            添加的参数值,会被转成 {@link String} 进行拼接
+     *            添加的参数值
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换<br>
-     *         如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>paramName</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
+     *         如果 <code>parameValue</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
      * @see #addParameterSingleValueMap(String, Map, String)
      */
-    public static String addParameter(String uriString,String paramName,Object parameValue,String charsetType){
-        return addParameterSingleValueMap(uriString, toMap(paramName, "" + parameValue), charsetType);
+    public static String addParameter(String uriString,String paramName,String parameValue,String charsetType){
+        return addParameterSingleValueMap(uriString, toMap(paramName, parameValue), charsetType);
     }
 
     /**
-     * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
+     * 给指定的<code>uriString</code>添加指定的参数 <code>singleValueMap</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么追加新的参数<code>paramName</code>和值<code>parameValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>parameValue</code>.</li>
+     * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
+     * <li>如果<code>uriString</code>不带?,则自动增加?.</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例1:</h3>
      * <blockquote>
