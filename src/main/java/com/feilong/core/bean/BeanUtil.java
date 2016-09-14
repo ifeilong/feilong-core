@@ -262,7 +262,7 @@ public final class BeanUtil{
      * 
      * <ol>
      * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>没有的属性名字,将会抛出异常</li>
-     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行,see
+     * <li>如果传入的<code>includePropertyNames</code>,含有 <code>fromObj</code>有,但是 <code>toObj</code>没有的属性名字,可以正常运行(跳过该属性设置),see
      * {@link BeanUtilsBean#copyProperty(Object, String, Object)} Line391</li>
      * </ol>
      * </blockquote>
@@ -489,9 +489,17 @@ public final class BeanUtil{
     /**
      * 把properties/map里面的值 <code>populate</code> <b>(填充)</b>到bean中.
      * 
-     * <p>
-     * 将Map{@code <Key,value>}中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名. 
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>将Map{@code <Key,value>}中的以值(String或String[])转换到目标bean对应的属性中,Key是目标bean的属性名. </li>
+     * <li>apache的javadoc中,明确指明这个方法是为解析http请求参数特别定义和使用的,<b>在正常使用中不推荐使用</b>.推荐使用 {@link #copyProperties(Object, Object, String...)}方法</li>
+     * <li>底层方法原理 {@link BeanUtilsBean#populate(Object, Map)},循环map,调用 {@link BeanUtilsBean#setProperty(Object, String, Object)}方法 ,一一对应设置到
+     * <code>bean</code>对象</li>
+     * <li>如果properties key中有bean中不存在的属性,那么该条数据自动忽略</li>
+     * <li>如果properties key中有null,那么该条数据自动忽略,see {@link BeanUtilsBean#populate(Object, Map)} line 817</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -500,7 +508,7 @@ public final class BeanUtil{
      * User user = new User();
      * user.setId(5L);
      * 
-     * Map{@code <String, Object>} properties = new HashMap{@code <String, Object>}();
+     * Map{@code <String, Object>} properties = new HashMap{@code <>}();
      * properties.put("id", 8L);
      * 
      * BeanUtil.populate(user, properties);
@@ -511,39 +519,20 @@ public final class BeanUtil{
      * 
      * <pre class="code">
      * {
-     * "date": null,
      * "id": 8,
-     * "loves": []
      * }
      * </pre>
      * 
      * </blockquote>
      * 
-     * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * apache的javadoc中,明确指明这个方法是为解析http请求参数特别定义和使用的,在正常使用中不推荐使用.推荐使用 {@link #copyProperties(Object, Object, String...)}方法
-     * </p>
-     * </blockquote>
-     * 
-     * 
-     * <h3>底层方法原理 {@link BeanUtilsBean#populate(Object, Map)}:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 循环map,调用 {@link BeanUtilsBean#setProperty(Object, String, Object)}方法 ,一一对应设置到 <code>bean</code>对象
-     * </p>
-     * </blockquote>
-     *
      * @param <T>
      *            the generic type
      * @param bean
      *            JavaBean whose properties are being populated
      * @param properties
      *            Map keyed by property name,with the corresponding (String or String[]) value(s) to be set
-     * @return the t
+     * @return 如果properties key中有bean中不存在的属性,那么该条数据自动忽略<br>
+     *         如果properties key中有null,那么该条数据自动忽略,see {@link BeanUtilsBean#populate(Object, Map)} line 817<br>
      * @throws NullPointerException
      *             如果 <code>bean</code> 是null,或者如果 <code>properties</code> 是null
      * @throws BeanOperationException
