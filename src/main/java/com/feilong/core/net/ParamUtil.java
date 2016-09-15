@@ -192,9 +192,11 @@ public final class ParamUtil{
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>singleValueMap</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #addParameterArrayValueMap(String, Map, String)
      */
     public static String addParameterSingleValueMap(String uriString,Map<String, String> singleValueMap,String charsetType){
+        Validate.notNull(singleValueMap, "singleValueMap can't be null!");
         return addParameterArrayValueMap(uriString, MapUtil.toArrayValueMap(singleValueMap), charsetType);
     }
 

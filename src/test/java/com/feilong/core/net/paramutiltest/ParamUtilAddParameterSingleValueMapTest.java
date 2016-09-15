@@ -22,12 +22,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.core.net.ParamUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.net.ParamUtil.addParameterSingleValueMap;
+import static com.feilong.core.net.URIUtil.encode;
 
 /**
  * The Class ParamUtilAddParameterSingleValueMapTest.
@@ -36,58 +37,119 @@ import static com.feilong.core.CharsetType.UTF8;
  */
 public class ParamUtilAddParameterSingleValueMapTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtilAddParameterSingleValueMapTest.class);
+    /** The Constant PATH. */
+    private static final String PATH = "www.baidu.com";
 
     /**
      * Test add parameter single value map.
      */
     @Test
     public void testAddParameterSingleValueMap(){
-        String beforeUrl = "www.baidu.com";
-        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+        Map<String, String> singleValueMap = new LinkedHashMap<>();
 
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
+        assertEquals(
+                        PATH + "?province=" + encode("江苏省", UTF8) + "&city=" + encode("南通市", UTF8),
+                        addParameterSingleValueMap(PATH, singleValueMap, UTF8));
     }
 
     /**
-     * Test add parameter single value map2.
+     * Test add parameter single value map with param.
      */
     @Test
-    public void testAddParameterSingleValueMap2(){
-        String beforeUrl = "www.baidu.com?a=b";
-        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+    public void testAddParameterSingleValueMapWithParam(){
+        String beforeUrl = PATH + "?a=b";
+        Map<String, String> singleValueMap = new LinkedHashMap<>();
 
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
 
-        LOGGER.debug(ParamUtil.addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
+        assertEquals(
+                        PATH + "?a=b&province=" + encode("江苏省", UTF8) + "&city=" + encode("南通市", UTF8),
+                        addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
     }
 
     /**
-     * Test add parameter single value map null uri string.
+     * Test add parameter single value map with param by replace.
      */
     @Test
-    public void testAddParameterSingleValueMapNullUriString(){
-        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+    public void testAddParameterSingleValueMapWithParamByReplace(){
+        String beforeUrl = PATH + "?a=b&city=12345&name=feilong";
+        Map<String, String> singleValueMap = new LinkedHashMap<>();
 
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
-        assertEquals(EMPTY, ParamUtil.addParameterSingleValueMap(null, singleValueMap, UTF8));
+
+        String expected = Slf4jUtil.format(PATH + "?a=b&city={}&name=feilong&province={}", encode("南通市", UTF8), encode("江苏省", UTF8));
+        assertEquals(expected, addParameterSingleValueMap(beforeUrl, singleValueMap, UTF8));
     }
 
     /**
-     * Test add parameter single value map empty uri string.
+     * Test add parameter single value map null map.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddParameterSingleValueMapNullMap(){
+        addParameterSingleValueMap(PATH + "?a=中国", null, UTF8);
+    }
+
+    /**
+     * Test add parameter single value map empty map.
      */
     @Test
-    public void testAddParameterSingleValueMapEmptyUriString(){
-        Map<String, String> singleValueMap = new LinkedHashMap<String, String>();
+    public void testAddParameterSingleValueMapEmptyMap(){
+        assertEquals(
+                        PATH + "?a=" + encode("中国", UTF8),
+                        addParameterSingleValueMap(PATH + "?a=中国", new LinkedHashMap<String, String>(), UTF8));
+    }
 
-        singleValueMap.put("province", "江苏省");
-        singleValueMap.put("city", "南通市");
-        assertEquals(EMPTY, ParamUtil.addParameterSingleValueMap("", singleValueMap, UTF8));
+    /**
+     * Test add parameter single value map empty map and null charset type.
+     */
+    @Test
+    public void testAddParameterSingleValueMapEmptyMapAndNullCharsetType(){
+        assertEquals(PATH + "?a=中国", addParameterSingleValueMap(PATH + "?a=中国", new LinkedHashMap<String, String>(), null));
+    }
+
+    /**
+     * Test add parameter single value map empty map and empty charset type.
+     */
+    @Test
+    public void testAddParameterSingleValueMapEmptyMapAndEmptyCharsetType(){
+        assertEquals(PATH + "?a=中国", addParameterSingleValueMap(PATH + "?a=中国", new LinkedHashMap<String, String>(), ""));
+    }
+
+    /**
+     * Test add parameter single value map empty map and blank charset type.
+     */
+    @Test
+    public void testAddParameterSingleValueMapEmptyMapAndBlankCharsetType(){
+        assertEquals(PATH + "?a=中国", addParameterSingleValueMap(PATH + "?a=中国", new LinkedHashMap<String, String>(), " "));
+    }
+
+    /**
+     * Test add parameter single value map null uri.
+     */
+    //****************************************************************************
+    @Test
+    public void testAddParameterSingleValueMapNullUri(){
+        assertEquals(EMPTY, addParameterSingleValueMap(null, toMap("province", "江苏省"), UTF8));
+    }
+
+    /**
+     * Test add parameter single value map empty uri.
+     */
+    @Test
+    public void testAddParameterSingleValueMapEmptyUri(){
+        assertEquals(EMPTY, addParameterSingleValueMap("", toMap("province", "江苏省"), UTF8));
+    }
+
+    /**
+     * Test add parameter single value map blank uri.
+     */
+    @Test
+    public void testAddParameterSingleValueMapBlankUri(){
+        assertEquals(EMPTY, addParameterSingleValueMap(" ", toMap("province", "江苏省"), UTF8));
     }
 }
