@@ -15,39 +15,28 @@
  */
 package com.feilong.core.net.uriutiltest;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URIUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
 /**
- * The Class URIUtilTest.
- * 
+ * The Class URIUtilEncodeTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class URIUtilEncodeTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URIUtilEncodeTest.class);
-
-    //******************************************************************************************************
     /**
      * Test encode.
      */
     @Test
     public void testEncode(){
-        String value = "={}[]今天天气很不错今天天气很不错今天天气很不错今天天气很不错今天天气很不错";
-        value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time DESC&search_page&areaid=2&server_id=63&act=search_browse&equip_type_ids&search_text=斩妖剑";
-        value = "斩妖剑";
-        value = "风花雪月";
-        LOGGER.debug(URIUtil.encode(value, UTF8));
-        value = "景儿,么么哒";
-        LOGGER.debug(URIUtil.encode(value, UTF8));
-        LOGGER.debug(URIUtil.encode("白色/黑色/纹理浅麻灰", UTF8));
-        LOGGER.debug(URIUtil.encode("Lifestyle / Graphic,", UTF8));
+        assertEquals("Lifestyle+%2F+Graphic%2C", URIUtil.encode("Lifestyle / Graphic,", UTF8));
     }
 
     /**
@@ -55,7 +44,58 @@ public class URIUtilEncodeTest{
      */
     @Test
     public void testEncode2(){
-        LOGGER.debug(URIUtil.encode("%", UTF8));
-        LOGGER.debug(URIUtil.encode("%25", UTF8));
+
+        assertEquals("%25", URIUtil.encode("%", UTF8));
+        assertEquals("%2525", URIUtil.encode("%25", UTF8));
+    }
+
+    //**************************************************************************
+
+    /**
+     * Test encode null value.
+     */
+    @Test
+    public void testEncodeNullValue(){
+        assertEquals(EMPTY, URIUtil.encode(null, UTF8));
+    }
+
+    /**
+     * Test encode empty value.
+     */
+    @Test
+    public void testEncodeEmptyValue(){
+        assertEquals(EMPTY, URIUtil.encode("", UTF8));
+    }
+
+    /**
+     * Test encode blank value.
+     */
+    @Test
+    public void testEncodeBlankValue(){
+        assertEquals(EMPTY, URIUtil.encode(" ", UTF8));
+    }
+
+    /**
+     * Test encode null charset type.
+     */
+    @Test
+    public void testEncodeNullCharsetType(){
+        assertEquals("白色/黑色/纹理浅麻灰", URIUtil.encode("白色/黑色/纹理浅麻灰", null));
+    }
+
+    /**
+     * Test encode empty charset type.
+     */
+    @Test
+    public void testEncodeEmptyCharsetType(){
+        assertEquals("白色/黑色/纹理浅麻灰", URIUtil.encode("白色/黑色/纹理浅麻灰", ""));
+    }
+
+    /**
+     * Test encode blank charset type.
+     */
+    @Test
+    public void testEncodeBlankCharsetType(){
+        assertEquals("白色/黑色/纹理浅麻灰", URIUtil.encode("白色/黑色/纹理浅麻灰", " "));
     }
 }

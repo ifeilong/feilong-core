@@ -332,16 +332,15 @@ public final class URIUtil{
     // [start] encode/decode
 
     /**
-     * 加码,对参数值进行编码 .
+     * 使用指定的编码 <code>charsetType</code>,将普通的字符串转成<code>application/x-www-form-urlencoded</code>格式的字符串 .
      * 
-     * <p style="color:red">
-     * 不要用 {@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
      * 
-     * <p>
-     * Translates a string into <code>application/x-www-form-urlencoded</code> format using a specific encoding scheme. This method uses the
-     * supplied encoding scheme to obtain the bytes for unsafe characters.
-     * </p>
+     * <li>不要用 {@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.</li>
+     * 
+     * <li>
      * 
      * <p>
      * 使用以下规则:
@@ -351,12 +350,21 @@ public final class URIUtil{
      * <li>字母数字字符 "a" 到 "z"、"A" 到 "Z" 和 "0" 到 "9" 保持不变.</li>
      * <li>特殊字符 "."、"-"、"*" 和 "_" 保持不变.</li>
      * <li>空格字符 " " 转换为一个加号 "+".</li>
-     * <li>所有其他字符都是不安全的,因此首先使用一些编码机制将它们转换为一个或多个字节.<br>
-     * 然后每个字节用一个包含 3 个字符的字符串 "%xy" 表示,其中 xy 为该字节的两位十六进制表示形式.<br>
-     * 推荐的编码机制是 UTF-8.<br>
-     * 但是,出于兼容性考虑,如果未指定一种编码,则使用相应平台的默认编码.</li>
+     * 
+     * <li>
+     * 所有其他字符都是不安全的,因此首先使用一些编码机制将它们转换为一个或多个字节.<br>
+     * 然后每个字节用一个包含 3 个字符的字符串 "%xy" 表示,其中 xy 为该字节的两位十六进制表示形式.
+     * </li>
+     * 
+     * <li>
+     * 推荐的编码机制是{@link CharsetType#UTF8}.</li>
      * </ul>
-     *
+     * 
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     * 
      * @param value
      *            the value
      * @param charsetType
