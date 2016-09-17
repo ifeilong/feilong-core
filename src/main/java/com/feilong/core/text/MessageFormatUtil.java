@@ -141,14 +141,14 @@ public final class MessageFormatUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>两个单引号才表示一个单引号，仅写一个单引号将被忽略。</li>
-     * <li>单引号会使其后面的占位符均失效，导致直接输出占位符。
+     * <li>两个单引号才表示一个单引号,仅写一个单引号将被忽略。</li>
+     * <li>单引号会使其后面的占位符均失效,导致直接输出占位符。
      * 
      * <pre>
      * MessageFormatUtil.format("{0}{1}", 1, 2); // 结果12
      * MessageFormatUtil.format("'{0}{1}", 1, 2); // 结果{0}{1}
      * MessageFormatUtil.format("'{0}'{1}", 1, 2); // 结果{0}
-     * 因此可以用于输出左花括号(单写左花括号会报错，而单写右花括号将正常输出)
+     * 因此可以用于输出左花括号(单写左花括号会报错,而单写右花括号将正常输出)
      * 
      * MessageFormatUtil.format("'{'{0}}", 2); // 结果{2
      * </pre>

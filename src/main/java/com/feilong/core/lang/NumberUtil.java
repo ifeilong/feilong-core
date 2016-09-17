@@ -123,13 +123,13 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
  * <blockquote>
  * 
  * <pre class="code">
- * 该算法是由美国银行家提出了，主要用于修正采用上面四舍五入规则而产生的误差。如下：
+ * 该算法是由美国银行家提出了,主要用于修正采用上面四舍五入规则而产生的误差。如下：
  * 
- * 舍去位的数值小于5时，直接舍去。
- * 舍去位的数值大于5时，进位后舍去。
- * 当舍去位的数值等于5时，
- *          若5后面还有其他非0数值，则进位后舍去，
- *          若5后面是0时，则根据5前一位数的奇偶性来判断，奇数进位，偶数舍去。
+ * 舍去位的数值小于5时,直接舍去。
+ * 舍去位的数值大于5时,进位后舍去。
+ * 当舍去位的数值等于5时,
+ *          若5后面还有其他非0数值,则进位后舍去,
+ *          若5后面是0时,则根据5前一位数的奇偶性来判断,奇数进位,偶数舍去。
  * </pre>
  * 
  * <b>对于上面的规则我们举例说明:</b>
@@ -140,8 +140,8 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
  * 
  * 11.5551 = 11.56 -----五后有数进位
  * 
- * 11.545 = 11.54 -----五后无数，若前位为偶数应舍去
- * 11.555 = 11.56 -----五后无数，若前位为奇数应进位
+ * 11.545 = 11.54 -----五后无数,若前位为偶数应舍去
+ * 11.555 = 11.56 -----五后无数,若前位为奇数应进位
  * </pre>
  * 
  * </blockquote>
@@ -191,8 +191,8 @@ public final class NumberUtil{
      *            被除数,自动转成{@link BigDecimal}做除法运算
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
-     *            如果为零或正数，则标度是小数点后的位数。<br>
-     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
+     *            如果为零或正数,则标度是小数点后的位数。<br>
+     *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 0,抛出 {@link IllegalArgumentException}<br>
@@ -229,8 +229,8 @@ public final class NumberUtil{
      *            被除数,自动转成{@link BigDecimal}做除法运算
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
-     *            如果为零或正数，则标度是小数点后的位数。<br>
-     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
+     *            如果为零或正数,则标度是小数点后的位数。<br>
+     *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @param roundingMode
      *            舍入法 {@link RoundingMode}
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
@@ -278,8 +278,8 @@ public final class NumberUtil{
      *            被乘数
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
-     *            如果为零或正数，则标度是小数点后的位数。<br>
-     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
+     *            如果为零或正数,则标度是小数点后的位数。<br>
+     *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @return 如果 <code>one</code> 是 null,抛出 {@link NullPointerException}<br>
      *         如果 <code>two</code> 是 null,抛出 {@link NullPointerException}<br>
      *         否则 convert to {@link BigDecimal} and multiply each other
@@ -462,8 +462,8 @@ public final class NumberUtil{
      *            number
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
-     *            如果为零或正数，则标度是小数点后的位数。<br>
-     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
+     *            如果为零或正数,则标度是小数点后的位数。<br>
+     *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="#RoundingMode">JAVA 8种舍入法</a>
      * @see java.math.RoundingMode#HALF_UP
@@ -509,8 +509,8 @@ public final class NumberUtil{
      *            number
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
-     *            如果为零或正数，则标度是小数点后的位数。<br>
-     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
+     *            如果为零或正数,则标度是小数点后的位数。<br>
+     *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @param roundingMode
      *            舍入模式{@link RoundingMode},如果 为null,使用常用的 {@link RoundingMode#HALF_UP}
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>

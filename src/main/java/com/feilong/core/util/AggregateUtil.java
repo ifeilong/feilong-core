@@ -89,8 +89,8 @@ public final class AggregateUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
-     *            如果为零或正数，则标度是小数点后的位数。<br>
-     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
+     *            如果为零或正数,则标度是小数点后的位数。<br>
+     *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 null<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -151,8 +151,8 @@ public final class AggregateUtil{
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param scale
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
-     *            如果为零或正数，则标度是小数点后的位数。<br>
-     *            如果为负数，则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
+     *            如果为零或正数,则标度是小数点后的位数。<br>
+     *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
      * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素是null 抛出 {@link IllegalArgumentException}<br>

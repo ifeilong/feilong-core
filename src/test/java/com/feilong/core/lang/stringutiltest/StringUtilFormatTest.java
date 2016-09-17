@@ -15,16 +15,19 @@
  */
 package com.feilong.core.lang.stringutiltest;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Date;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.NumberUtil;
 import com.feilong.core.lang.StringUtil;
 
 import static com.feilong.core.NumberPattern.PERCENT_WITH_NOPOINT;
+import static com.feilong.core.lang.NumberUtil.getProgress;
 
 public class StringUtilFormatTest{
 
@@ -36,7 +39,6 @@ public class StringUtilFormatTest{
      */
     @Test
     public void format(){
-        LOGGER.debug(StringUtil.format("%03d", 1));
         LOGGER.debug(StringUtil.format("%s%n%s%h", 1.2d, 2, "feilong"));
         LOGGER.debug(StringUtil.format("%+d", -5));
         LOGGER.debug(StringUtil.format("%-5d", -5));
@@ -49,6 +51,18 @@ public class StringUtilFormatTest{
         LOGGER.debug(StringUtil.format("%2$s,%1$s", 99, "abc"));
         LOGGER.debug(StringUtil.format("%1$s,%1$s", 99));
     }
+
+    @Test
+    public void formatD(){
+        assertEquals("001", StringUtil.format("%03d", 1));
+    }
+
+    @Test
+    public void formatNull(){
+        assertEquals(EMPTY, StringUtil.format(null));
+    }
+
+    //*************************************************************************
 
     /**
      * TestStringUtilTest.
@@ -88,7 +102,7 @@ public class StringUtilFormatTest{
      */
     private static String buildMessageLog(int writeIndex,int bookSectionUrlMapSize,String sectionName,int contentLength){
         //进度,百分比
-        String progress = NumberUtil.getProgress(writeIndex + 1, bookSectionUrlMapSize, PERCENT_WITH_NOPOINT);
+        String progress = getProgress(writeIndex + 1, bookSectionUrlMapSize, PERCENT_WITH_NOPOINT);
         String format = "%1$-20s %2$-6s %3$-3s";
 
         return StringUtil.format(format, sectionName, "" + contentLength, progress).replace(" ", "\u3000");

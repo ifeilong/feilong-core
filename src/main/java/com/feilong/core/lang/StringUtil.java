@@ -772,16 +772,43 @@ public final class StringUtil{
     // [start]format
 
     /**
-     * 格式化字符串.
+     * 将各类数据,格式化为字符串.
      * 
      * <h3>规则:</h3>
      * <blockquote>
+     * 
      * <ol>
+     * 
+     * <li>
+     * 
+     * <p>
+     * <b>对整数进行格式化:</b>
+     * </p>
+     * 
+     * <p>
+     * 由4部分组成:<span style="color:green">%[index$][标识][最小宽度]转换方式</span>
+     * </p>
+     * 
+     * <p>
+     * 此外,StringUtil.format("%03d", 1) 不能写成 StringUtil.format("%03d", "1")
+     * </p>
+     * </li>
+     * 
+     * <li>
+     * <p>
+     * <b>对浮点数进行格式化:</b>
+     * </p>
+     * 
+     * <p>
+     * <span style="color:green">%[index$][标识][最少宽度][.精度]转换方式</span>
+     * </p>
+     * 
+     * </li>
+     * 
      * <li>%index$开头,index从1开始取值,表示将第index个参数拿进来进行格式化.</li>
-     * <li>对整数进行格式化:格式化字符串由4部分组成:%[index$][标识][最小宽度]转换方式</li>
-     * <li>StringUtil.format("%03d", 1) 不能写成 StringUtil.format("%03d", "1")</li>
-     * <li>对浮点数进行格式化:%[index$][标识][最少宽度][.精度]转换方式</li>
+     * 
      * </ol>
+     * 
      * </blockquote>
      * 
      * <p>
@@ -968,6 +995,7 @@ public final class StringUtil{
      * @param args
      *            the args
      * @return 如果 <code>format</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>format</code> 包含不需要转化的字符串,这些字符串是你写什么,最终就输出什么<br>
      *         否则返回 {@link String#format(String, Object...)}
      * @see java.util.Formatter
      * @see String#format(String, Object...)
