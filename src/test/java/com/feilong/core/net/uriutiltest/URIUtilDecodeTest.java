@@ -15,57 +15,112 @@
  */
 package com.feilong.core.net.uriutiltest;
 
-import org.junit.Ignore;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URIUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
+/**
+ * The Class URIUtilDecodeTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class URIUtilDecodeTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URIUtilDecodeTest.class);
-
     /**
-     * Decode.
+     * Test decode.
      */
     @Test
-    public void decode(){
-        LOGGER.debug(
-                        URIUtil.decode(
-                                        "%E9%87%91%E6%80%BB%EF%BC%8C%E4%BD%A0%E6%83%B3%E6%80%8E%E4%B9%88%E4%B9%88%EF%BC%8C%E5%B0%B1%E6%80%8E%E4%B9%88%E4%B9%88",
-                                        UTF8));
+    public void testDecode(){
+        assertEquals("飞天奔月", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", UTF8));
+    }
 
+    //************************************************
+
+    /**
+     * Test decode null value.
+     */
+    @Test
+    public void testDecodeNullValue(){
+        assertEquals(EMPTY, URIUtil.decode(null, UTF8));
     }
 
     /**
-     * Decode 1.
+     * Test decode empty value.
      */
     @Test
-    public void decode1(){
-        String str = "%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88";
-        LOGGER.debug(URIUtil.decode(str, "utf-8"));
+    public void testDecodeEmptyValue(){
+        assertEquals(EMPTY, URIUtil.decode("", UTF8));
+    }
+
+    /**
+     * Test decode blank value.
+     */
+    @Test
+    public void testDecodeBlankValue(){
+        assertEquals(EMPTY, URIUtil.decode(" ", UTF8));
+    }
+
+    //*******************************************************
+
+    /**
+     * Test decode null charset type.
+     */
+    @Test
+    public void testDecodeNullCharsetType(){
+        assertEquals("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", null));
+    }
+
+    /**
+     * Test decode empty charset type.
+     */
+    @Test
+    public void testDecodeEmptyCharsetType(){
+        assertEquals("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", ""));
+    }
+
+    /**
+     * Test decode blank charset type.
+     */
+    @Test
+    public void testDecodeBlankCharsetType(){
+        assertEquals("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", " "));
+    }
+
+    /**
+     * Test last percent.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testLastPercent(){
+        URIUtil.decode("%", UTF8);
+    }
+
+    /**
+     * Test last percent 1.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testLastPercent1(){
+        URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88%", UTF8);
     }
 
     /**
      * Decode2.
      */
-    @Test
-    @Ignore
+    @Test(expected = IllegalArgumentException.class)
     public void decode2(){
-        LOGGER.debug(URIUtil.decode("aaaaa%chu111", UTF8));
-
+        URIUtil.decode("aaaaa%chu111", UTF8);
+        // java.lang.IllegalArgumentException: URLDecoder: Illegal hex characters in escape (%) pattern - For input string: "ch"
     }
 
     /**
      * Decode3.
      */
-    @Test
-    @Ignore
+    @Test(expected = IllegalArgumentException.class)
     public void decode3(){
-        LOGGER.debug(URIUtil.decode("%c", UTF8));
+        URIUtil.decode("%c", UTF8);
     }
 }

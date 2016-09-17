@@ -370,31 +370,27 @@ public final class URIUtil{
     }
 
     /**
-     * 解码,对参数值进行解码.
+     * 使用指定的编码格式 <code>charsetType</code> 来解码一个 <code>application/x-www-form-urlencoded</code> 格式的字符串 .
      * 
-     * <p style="color:red">
-     * 不要用{@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.
-     * </p>
+     * <h3>说明:</h3>
      * 
-     * <p>
-     * Decodes a <code>application/x-www-form-urlencoded</code> string using a specific encoding scheme. The supplied encoding is used to
-     * determine what characters are represented by any consecutive sequences of the form "<code>%<i>xy</i></code>".
-     * </p>
-     * 
-     * <p>
-     * Not doing so may introduce incompatibilites.<br>
-     * <em><strong>Note:</strong> 
-     * 注:<a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>建议指出,UTF-8应该被使用. 不这样做可能会带来兼容性能.</em>
-     * </p>
-     * 
-     * <h3>URLDecoder: Incomplete trailing escape (%) pattern:</h3>
      * <blockquote>
+     * <ol>
      * 
-     * URLDecoder class throws this exception when last char is "%" sign. <br>
-     * If "%" sign comes in middle of string then it won't throw exception.
+     * <li>不要用{@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.</li>
      * 
+     * <li>
+     * <a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>
+     * 建议指出,UTF-8应该被使用.不这样做可能会带来兼容性能.</em>
+     * </li>
+     * 
+     * <li>
+     * 如果字符串最后的字符是 "%" 符号,那么URLDecoder将会抛出 exception;如果 "%" 符号在字符串中间,那么不会抛出异常.
+     * </li>
+     * 
+     * </ol>
      * </blockquote>
-     *
+     * 
      * @param value
      *            需要被解码的值
      * @param charsetType
