@@ -408,12 +408,12 @@ public final class ParamUtil{
     }
 
     /**
-     * 将map混合成 queryString.
+     * 将 <code>arrayValueMap</code> 混合成 queryString.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回的queryString参数顺序,按照传入的singleValueMap key顺序排列,可以考虑传入 {@link TreeMap},{@link LinkedHashMap}等以适应不同业务的需求</li>
+     * <li>返回的queryString参数顺序,按照传入的<code>arrayValueMap</code> key顺序排列,可以考虑传入 {@link TreeMap},{@link LinkedHashMap}等以适应不同业务的需求</li>
      * </ol>
      * </blockquote>
      * 
@@ -549,7 +549,6 @@ public final class ParamUtil{
      *            用于拼接签名的参数
      * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         否则将<code>singleValueMap</code>排序之后,调用 {@link #toQueryStringUseSingleValueMap(Map)}
-     * @see #toSafeQueryString(Map, String)
      * @since 1.4.0
      */
     public static String toNaturalOrderingQueryString(Map<String, String> singleValueMap){

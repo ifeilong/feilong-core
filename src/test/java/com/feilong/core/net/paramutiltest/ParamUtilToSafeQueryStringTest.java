@@ -23,12 +23,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.feilong.core.net.ParamUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.net.ParamUtil.toSafeQueryString;
+import static com.feilong.core.net.URIUtil.encode;
 
 /**
  * The Class ParamUtilToSafeQueryStringTest.
@@ -37,20 +35,18 @@ import static com.feilong.core.CharsetType.UTF8;
  */
 public class ParamUtilToSafeQueryStringTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtilToSafeQueryStringTest.class);
-
     /**
-     * Combine query string.
+     * Test to safe query string.
      */
     @Test
     public void testToSafeQueryString(){
-        Map<String, String[]> keyAndArrayMap = new HashMap<>();
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+
         keyAndArrayMap.put("name", new String[] { "jim", "feilong", "鑫哥" });
         keyAndArrayMap.put("age", new String[] { "18" });
         keyAndArrayMap.put("love", new String[] { "sanguo" });
-        LOGGER.debug(ParamUtil.toSafeQueryString(keyAndArrayMap, UTF8));
-        LOGGER.debug(ParamUtil.toSafeQueryString(keyAndArrayMap, null));
+
+        assertEquals("name=jim&name=feilong&name=" + encode("鑫哥", UTF8) + "&age=18&love=sanguo", toSafeQueryString(keyAndArrayMap, UTF8));
     }
 
     /**
@@ -63,7 +59,7 @@ public class ParamUtilToSafeQueryStringTest{
         keyAndArrayMap.put("age", new String[] { "18" });
         keyAndArrayMap.put("love", new String[] { "sanguo" });
 
-        assertEquals("name=jim&name=feilong&name=鑫哥&age=18&love=sanguo", ParamUtil.toSafeQueryString(keyAndArrayMap, null));
+        assertEquals("name=jim&name=feilong&name=鑫哥&age=18&love=sanguo", toSafeQueryString(keyAndArrayMap, null));
     }
 
     /**
@@ -71,8 +67,8 @@ public class ParamUtilToSafeQueryStringTest{
      */
     @Test
     public void testToSafeQueryStringNullMap(){
-        assertEquals(EMPTY, ParamUtil.toSafeQueryString(null, UTF8));
-        assertEquals(EMPTY, ParamUtil.toSafeQueryString(null, null));
+        assertEquals(EMPTY, toSafeQueryString(null, UTF8));
+        assertEquals(EMPTY, toSafeQueryString(null, null));
     }
 
     /**
@@ -80,6 +76,6 @@ public class ParamUtilToSafeQueryStringTest{
      */
     @Test
     public void testToSafeQueryStringEmptyMap(){
-        assertEquals(EMPTY, ParamUtil.toSafeQueryString(new HashMap<String, String[]>(), UTF8));
+        assertEquals(EMPTY, toSafeQueryString(new HashMap<String, String[]>(), UTF8));
     }
 }
