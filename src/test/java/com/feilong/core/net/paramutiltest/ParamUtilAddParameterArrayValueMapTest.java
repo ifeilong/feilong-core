@@ -23,12 +23,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.core.net.ParamUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.net.ParamUtil.addParameterArrayValueMap;
+import static com.feilong.core.net.URIUtil.encode;
 
 /**
  * The Class ParamUtilAddParameterArrayValueMapTest.
@@ -37,51 +37,65 @@ import static com.feilong.core.CharsetType.UTF8;
  */
 public class ParamUtilAddParameterArrayValueMapTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParamUtilAddParameterArrayValueMapTest.class);
-
-    /**
-     * Gets the encoded url by array map.
-     * 
-     */
-    @Test
-    public void testGetEncodedUrlByArrayMap(){
-        String beforeUrl = "www.baidu.com";
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
-        keyAndArrayMap.put("a", new String[] { "aaaa", "bbbb" });
-        keyAndArrayMap.put("name", new String[] { "aaaa", "bbbb" });
-        keyAndArrayMap.put("pa", new String[] { "aaaa" });
-
-        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
-    }
+    /** The Constant PATH. */
+    private static final String PATH = "www.baidu.com";
 
     /**
      * Test get encoded url by array map1.
      */
     @Test
-    public void testGetEncodedUrlByArrayMap1(){
-        String beforeUrl = "www.baidu.com";
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+    public void testGetEncodedUrlByArrayMapAdd(){
+        String beforeUrl = PATH;
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
 
         keyAndArrayMap.put("receiver", new String[] { "鑫哥", "feilong" });
         keyAndArrayMap.put("province", new String[] { "江苏省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
+        assertEquals(
+                        Slf4jUtil.format(
+                                        PATH + "?receiver={}&receiver={}&province={}&city={}",
+                                        encode("鑫哥", UTF8),
+                                        encode("feilong", UTF8),
+                                        encode("江苏省", UTF8),
+                                        encode("南通市", UTF8)),
+                        addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
     }
 
     /**
-     * Test get encoded url by array map2.
+     * Test get encoded url by array map 2.
      */
     @Test
     public void testGetEncodedUrlByArrayMap2(){
-        String beforeUrl = "www.baidu.com?a=b";
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+        String beforeUrl = PATH + "?a=b";
 
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
         keyAndArrayMap.put("province", new String[] { "江苏省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        LOGGER.debug(ParamUtil.addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
+        assertEquals(
+                        Slf4jUtil.format(PATH + "?a=b&province={}&city={}", encode("江苏省", UTF8), encode("南通市", UTF8)),
+                        addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
+    }
+
+    /**
+     * Test get encoded url by array map replace.
+     */
+    @Test
+    public void testGetEncodedUrlByArrayMapReplace(){
+        String beforeUrl = PATH + "?a=b&city=上海";
+
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+        keyAndArrayMap.put("province", new String[] { "江苏省" });
+        keyAndArrayMap.put("city", new String[] { "南通市", "无锡" });
+
+        assertEquals(
+                        Slf4jUtil.format(
+                                        PATH + "?a=b&city={}&city={}&province={}",
+                                        encode("南通市", UTF8),
+                                        encode("无锡", UTF8),
+                                        encode("江苏省", UTF8)),
+                        addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
     }
 
     //*******************************************************************************
@@ -91,11 +105,11 @@ public class ParamUtilAddParameterArrayValueMapTest{
      */
     @Test
     public void testGetEncodedUrlByArrayMapNullUri(){
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
         keyAndArrayMap.put("province", new String[] { "江苏省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        assertEquals(EMPTY, ParamUtil.addParameterArrayValueMap(null, keyAndArrayMap, UTF8));
+        assertEquals(EMPTY, addParameterArrayValueMap(null, keyAndArrayMap, UTF8));
     }
 
     /**
@@ -103,20 +117,33 @@ public class ParamUtilAddParameterArrayValueMapTest{
      */
     @Test
     public void testGetEncodedUrlByArrayMapEmptyUri(){
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<String, String[]>();
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
         keyAndArrayMap.put("province", new String[] { "江苏省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
 
-        assertEquals(EMPTY, ParamUtil.addParameterArrayValueMap("", keyAndArrayMap, UTF8));
+        assertEquals(EMPTY, addParameterArrayValueMap("", keyAndArrayMap, UTF8));
     }
+
+    /**
+     * Test get encoded url by array map blank uri.
+     */
+    @Test
+    public void testGetEncodedUrlByArrayMapBlankUri(){
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+        keyAndArrayMap.put("province", new String[] { "江苏省" });
+        keyAndArrayMap.put("city", new String[] { "南通市" });
+
+        assertEquals(EMPTY, addParameterArrayValueMap(" ", keyAndArrayMap, UTF8));
+    }
+
+    //******************************************************************************************
 
     /**
      * Test get encoded url by array map null map.
      */
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testGetEncodedUrlByArrayMapNullMap(){
-        String beforeUrl = "www.baidu.com?a=b";
-        assertEquals(beforeUrl, ParamUtil.addParameterArrayValueMap(beforeUrl, null, UTF8));
+        addParameterArrayValueMap(PATH + "?a=b", null, UTF8);
     }
 
     /**
@@ -124,7 +151,7 @@ public class ParamUtilAddParameterArrayValueMapTest{
      */
     @Test
     public void testGetEncodedUrlByArrayMapEmptyMap(){
-        String beforeUrl = "www.baidu.com?a=b";
-        assertEquals(beforeUrl, ParamUtil.addParameterArrayValueMap(beforeUrl, new HashMap<String, String[]>(), UTF8));
+        String beforeUrl = PATH + "?a=b";
+        assertEquals(beforeUrl, addParameterArrayValueMap(beforeUrl, new HashMap<String, String[]>(), UTF8));
     }
 }

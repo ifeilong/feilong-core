@@ -132,7 +132,8 @@ public final class ParamUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么追加新的参数<code>paramName</code>和值<code>parameValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么循环<code>arrayValueMap</code>,追加新的参数<code>paramName</code>和值
+     * <code>parameValue</code>.</li>
      * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>parameValue</code>.</li>
      * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>parameValue</code>,其他的被丢弃.</li>
      * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
@@ -201,14 +202,18 @@ public final class ParamUtil{
     }
 
     /**
-     * 添加参数,如果uri包含指定的参数名字,那么会被新的值替换.
+     * 给指定的 <code>uriString</code>添加参数 <code>arrayValueMap</code>,如果uri包含指定的参数名字,那么会被新的值替换.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果 解析的<code>queryString</code> 不为空,那么会解析成map,此后再拼接 <code>arrayValueMap</code>;<br>
-     * </li>
-     * <li>内部使用 {@link LinkedHashMap},保持map元素顺序</li>
+     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么循环<code>arrayValueMap</code>,追加新的参数<code>paramName</code>和值
+     * <code>parameValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>parameValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>parameValue</code>,其他的被丢弃.</li>
+     * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
+     * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
+     * <li>如果<code>uriString</code>不带?,则自动增加?</li>
      * </ol>
      * </blockquote>
      * 
@@ -262,14 +267,14 @@ public final class ParamUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
      *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 添加参数,如果uri包含指定的参数名字,那么会被新的值替换<br>
-     *         如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果 <code>arrayValueMap</code> 是null或者empty,直接返回 <code>uriString</code><br>
+     * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>arrayValueMap</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>charsetType</code> 是null或者empty,那么参数部分原样拼接处理,自行处理兼容性问题<br>
      * @see #addParameterArrayValueMap(String, String, Map, String)
      * @since 1.4.0
      */
     public static String addParameterArrayValueMap(String uriString,Map<String, String[]> arrayValueMap,String charsetType){
+        Validate.notNull(arrayValueMap, "arrayValueMap can't be null!");
         return addParameterArrayValueMap(uriString, URIUtil.getQueryString(uriString), arrayValueMap, charsetType);
     }
 
