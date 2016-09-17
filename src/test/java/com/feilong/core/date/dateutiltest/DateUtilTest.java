@@ -42,28 +42,20 @@ public class DateUtilTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilTest.class);
 
     /**
-     * Prints the.
-     * 
-     * @param date
-     *            the date
-     */
-    protected void logDate(Date date){
-        LOGGER.debug(DateUtil.toString(date, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-    }
-
-    /**
      * Test get last date of this day 1.
      */
     @Test
     public void testGetLastDateOfThisDay1(){
         Date NOW = new Date();
-        logDate(DateUtils.ceiling(NOW, Calendar.DAY_OF_MONTH));
-        logDate(DateUtils.round(NOW, Calendar.DAY_OF_MONTH));
-        logDate(DateUtils.truncate(NOW, Calendar.DAY_OF_MONTH));
+        LOGGER.debug(DateUtil.toString(DateUtils.ceiling(NOW, Calendar.DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(DateUtils.round(NOW, Calendar.DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(DateUtils.truncate(NOW, Calendar.DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+
         LOGGER.debug(StringUtils.repeat("*", 20));
-        logDate(DateUtils.ceiling(NOW, Calendar.MONTH));
-        logDate(DateUtils.round(NOW, Calendar.MONTH));
-        logDate(DateUtils.truncate(NOW, Calendar.MONTH));
+
+        LOGGER.debug(DateUtil.toString(DateUtils.ceiling(NOW, Calendar.MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(DateUtils.round(NOW, Calendar.MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(DateUtils.truncate(NOW, Calendar.MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 
     /**
@@ -71,8 +63,8 @@ public class DateUtilTest{
      */
     @Test
     public void testGetFirstDateOfThisDay1(){
-        logDate(DateUtil.getFirstDateOfThisDay(new Date()));
-        logDate(DateUtils.truncate(new Date(), DAY_OF_MONTH));
+        LOGGER.debug(DateUtil.toString(DateUtil.getFirstDateOfThisDay(new Date()), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(DateUtils.truncate(new Date(), DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 
     //***************************************************************************************************
