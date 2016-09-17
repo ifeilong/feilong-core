@@ -26,7 +26,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -405,68 +404,6 @@ public final class ParamUtil{
             safeArrayValueMap.put(key, ArrayUtils.add(safeArrayValueMap.get(key), value));
         }
         return safeArrayValueMap;
-    }
-
-    /**
-     * 将 <code>arrayValueMap</code> 混合成 queryString.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>返回的queryString参数顺序,按照传入的<code>arrayValueMap</code> key顺序排列,可以考虑传入 {@link TreeMap},{@link LinkedHashMap}等以适应不同业务的需求</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * 对于以下的map,
-     * 
-     * <pre class="code">
-     * Map{@code <String, String[]>} keyAndArrayMap = new HashMap{@code <>}();
-     * keyAndArrayMap.put("name", new String[] { "jim", "feilong", "鑫哥" });
-     * keyAndArrayMap.put("age", new String[] { "18" });
-     * keyAndArrayMap.put("love", new String[] { "sanguo" });
-     * </pre>
-     * 
-     * 如果使用的是:
-     * 
-     * <pre class="code">
-     * LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, UTF8));
-     * </pre>
-     * 
-     * 那么<b>返回:</b>
-     * 
-     * <pre class="code">
-     * {@code love=sanguo&age=18&name=jim&name=feilong&name=%E9%91%AB%E5%93%A5}
-     * </pre>
-     * 
-     * 如果使用的是:
-     * 
-     * <pre class="code">
-     * LOGGER.info(ParamUtil.toSafeQueryString(keyAndArrayMap, null));
-     * </pre>
-     * 
-     * 那么<b>返回:</b>
-     * 
-     * <pre class="code">
-     * {@code love=sanguo&age=18&name=jim&name=feilong&name=鑫哥}
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param arrayValueMap
-     *            类似于 <code>request.getParamMap</code>
-     * @param charsetType
-     *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
-     *            <span style="color:green">如果是null或者 empty,那么参数部分原样返回,自行处理兼容性问题</span><br>
-     *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
-     * @return 如果 <code>arrayValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     * @see #toQueryStringUseArrayValueMap(Map)
-     * @since 1.4.0
-     */
-    public static String toSafeQueryString(Map<String, String[]> arrayValueMap,String charsetType){
-        return toQueryStringUseArrayValueMap(toSafeArrayValueMap(arrayValueMap, charsetType));
     }
 
     //*********************************************************************************************
@@ -931,8 +868,9 @@ public final class ParamUtil{
         StringBuilder sb = new StringBuilder();
         sb.append(beforePathWithoutQueryString);
         sb.append(QUESTIONMARK);
-        sb.append(toSafeQueryString(arrayValueMap, charsetType));
+        sb.append(toQueryStringUseArrayValueMap(toSafeArrayValueMap(arrayValueMap, charsetType)));
 
         return sb.toString();
     }
+
 }

@@ -34,7 +34,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 ParamUtilToNaturalOrderingQueryStringTest.class,
                 ParamUtilToQueryStringUseArrayValueMapTest.class,
                 ParamUtilToQueryStringUseSingleValueMapTest.class,
-                ParamUtilToSafeQueryStringTest.class,
                 ParamUtilToSingleValueMapTest.class,
         //                
 })
