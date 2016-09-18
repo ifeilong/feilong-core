@@ -248,7 +248,7 @@ public final class URIUtil{
      * 
      * <pre class="code">
      * 
-     * String pattern = "mailto:venus@163.com?subject={}&body={}";
+     * String pattern = "mailto:venus@163.com?subject={}{@code &}body={}";
      * 
      * String uriString = Slf4jUtil.format(pattern, "你好", "我是飞天奔月<br>哈哈哈哈");
      * 
@@ -411,7 +411,7 @@ public final class URIUtil{
      * 
      * <li>
      * <a href="http://www.w3.org/TR/html40/appendix/notes.html#non-ascii-chars">World Wide Web Consortium Recommendation</a>
-     * 建议指出,UTF-8应该被使用.不这样做可能会带来兼容性能.</em>
+     * 建议指出,{@link CharsetType#UTF8}应该被使用.不这样做可能会带来兼容性能.
      * </li>
      * 
      * <li>

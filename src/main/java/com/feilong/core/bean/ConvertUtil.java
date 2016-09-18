@@ -1061,7 +1061,7 @@ public final class ConvertUtil{
      * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
-     * @see #toString(Object..., ToStringConfig)
+     * @see #toString(Object[], ToStringConfig)
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see org.apache.commons.collections4.IteratorUtils#toString(Iterator)
      * @since 1.8.4 change param order
