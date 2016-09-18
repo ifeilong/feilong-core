@@ -19,6 +19,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * The Class FeiLongURIUtilSuiteTests.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 URIUtilEncodeTest.class,
@@ -27,8 +32,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 URIUtilCreateTest.class,
                 URIUtilCreateWithCharsetTypeTest.class,
-
-                URIUtilGetQueryStringTest.class,
         //                
 })
 public class FeiLongURIUtilSuiteTests{

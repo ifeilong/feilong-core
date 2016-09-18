@@ -240,7 +240,28 @@ public final class URIUtil{
     }
 
     /**
-     * 基于 uriString和charset创建 {@link URI}.
+     * 基于 <code>uriString</code>和<code>charsetType</code>创建 {@link URI}.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * String pattern = "mailto:venus@163.com?subject={}&body={}";
+     * 
+     * String uriString = Slf4jUtil.format(pattern, "你好", "我是飞天奔月<br>哈哈哈哈");
+     * 
+     * String result = URIUtil.encodeUri(uriString, UTF8);
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {@code mailto:venus@163.com?subject=%E4%BD%A0%E5%A5%BD&body=%E6%88%91%E6%98%AF%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88%3Cbr%3E%E5%93%88%E5%93%88%E5%93%88%E5%93%88}
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param uriString
      *            the uri string
@@ -249,6 +270,7 @@ public final class URIUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return 如果 <code>uriString</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>uriString</code> 是blank,抛出 {@link IllegalArgumentException}
+     *         如果 <code>charsetType</code> 是null或者blank,直接返回 <code>uriString</code>
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">
      *      java-request-getquerystring-value-different-between-chrome-and-ie-browser</a>
@@ -302,7 +324,7 @@ public final class URIUtil{
      * 
      * @param uriString
      *            the uri
-     * @return 如果传入的参数 <code>uriString</code> isNullOrEmpty,返回 {@link StringUtils#EMPTY};<br>
+     * @return 如果传入的参数 <code>uriString</code> 是null或者是empty,返回 {@link StringUtils#EMPTY};<br>
      *         如果传入的参数 <code>uriString</code> 不含有?,返回 {@link StringUtils#EMPTY};<br>
      *         否则截取第一个出现的?后面内容返回
      * @since 1.8.0 change to default
