@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -1105,8 +1106,8 @@ public final class JsonUtil{
      * <hr>
      * 
      * <pre class="code">
-     * Map{@code <String, Integer>} map2 = JsonUtil.toMap("{'brandCode':55555}");
-     * LOGGER.info(JsonUtil.format(map2));
+     * Map{@code <String, Integer>} map = JsonUtil.toMap("{'brandCode':55555}");
+     * LOGGER.info(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1117,17 +1118,20 @@ public final class JsonUtil{
      * 
      * </blockquote>
      * 
-     * <h3>注意:</h3>
-     * 
-     * <p>
-     * 由于泛型 unchecked,所以可能返回的结果泛型里面有其他类型的值
-     * </p>
-     * 
+     * <h3>说明:</h3>
      * <blockquote>
      * 
+     * <ol>
+     * <li>返回的map是 {@link LinkedHashMap}</li>
+     * 
+     * <li>
+     * <p>
+     * 由于泛型 unchecked,所以可能返回的结果,泛型里面有其他类型的值
+     * </p>
+     * 
      * <pre class="code">
-     * Map{@code <String, Long>} map3 = JsonUtil.toMap("{'brandCode':55.555}");
-     * LOGGER.info(JsonUtil.format(map3));
+     * Map{@code <String, Long>} map = JsonUtil.toMap("{'brandCode':55.555}");
+     * LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
@@ -1136,6 +1140,9 @@ public final class JsonUtil{
      * {"brandCode": 55.555}
      * </pre>
      * 
+     * </li>
+     * 
+     * </ol>
      * </blockquote>
      *
      * @param <T>
@@ -1251,6 +1258,7 @@ public final class JsonUtil{
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @see net.sf.json.JSONObject#keys()
      * @see #toBean(Object, Class, Map)
+     * @since 1.9.2 use LinkedHashMap instead of HashMap
      */
     @SuppressWarnings("unchecked")
     public static <T> Map<String, T> toMap(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
@@ -1260,7 +1268,7 @@ public final class JsonUtil{
             return emptyMap();
         }
 
-        Map<String, T> map = new HashMap<String, T>();
+        Map<String, T> map = new LinkedHashMap<String, T>();
 
         JSONObject jsonObject = toJSONObject(json);
         Iterator<String> keys = jsonObject.keys();

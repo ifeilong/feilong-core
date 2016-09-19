@@ -17,6 +17,7 @@ package com.feilong.tools.jsonlib;
 
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -33,6 +34,19 @@ import com.feilong.tools.AbstractJsonTest;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class JsonUtilToMapTest extends AbstractJsonTest{
+
+    @Test
+    public void testToMapOrder(){
+        Map<String, String> map = JsonUtil.toMap("{'brandCode':'UA','name':'feilong','age':'18','type':'1'}");
+        assertThat(map, allOf(//
+                        hasEntry("brandCode", "UA"),
+                        hasEntry("name", "feilong"),
+                        hasEntry("age", "18"),
+                        hasEntry("type", "1")));
+
+        assertThat(map.keySet(), contains("brandCode", "name", "age", "type"));
+
+    }
 
     /**
      * To map 12.
