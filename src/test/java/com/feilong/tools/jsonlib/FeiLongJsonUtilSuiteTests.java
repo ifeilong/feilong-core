@@ -13,28 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core;
+package com.feilong.tools.jsonlib;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * The Class FeiLongCoreTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
- */
 @RunWith(Suite.class)
-@SuiteClasses({
-                AlphabetTest.class,
-                CharsetTypeTest.class,
+@SuiteClasses({ //
 
-                TimeIntervalTest.class,
+                JsonUtilToMapTest.class,
 
-                ValidatorTest.class,
-                ValidatorIsNullOrEmptyParameterizedTest.class,
-                ValidatorIsNotNullOrEmptyParameterizedTest.class, })
-public class FeiLongCoreTests{
+        //
+})
+public class FeiLongJsonUtilSuiteTests{
 
 }

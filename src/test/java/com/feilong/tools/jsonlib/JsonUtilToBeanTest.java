@@ -179,21 +179,6 @@ public class JsonUtilToBeanTest extends AbstractJsonTest{
     }
 
     /**
-     * To map12.
-     */
-    @Test
-    public void toMap12(){
-        Map<String, String> map = JsonUtil.toMap("{'brandCode':'UA'}");
-        LOGGER.debug(JsonUtil.format(map));
-
-        Map<String, Integer> map2 = JsonUtil.toMap("{'brandCode':55555}");
-        LOGGER.debug(JsonUtil.format(map2));
-
-        Map<String, Long> map3 = JsonUtil.toMap("{'brandCode':55.555}");
-        LOGGER.debug(JsonUtil.format(map3));
-    }
-
-    /**
      * Name.
      */
     @Test

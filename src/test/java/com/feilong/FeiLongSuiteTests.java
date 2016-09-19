@@ -13,18 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core;
+package com.feilong;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.FeiLongCoreTests;
 import com.feilong.core.bean.FeiLongBeanSuiteTests;
 import com.feilong.core.date.FeiLongDateSuiteTests;
 import com.feilong.core.lang.FeiLongLangSuiteTests;
 import com.feilong.core.net.FeiLongNetSuiteTests;
 import com.feilong.core.text.FeiLongTextSuiteTests;
 import com.feilong.core.util.FeiLongUtilSuiteTests;
+import com.feilong.tools.jsonlib.FeiLongJsonUtilSuiteTests;
+import com.feilong.tools.slf4j.Slf4jUtilTest;
 
 /**
  * The Class FeiLongSuiteTests.
@@ -35,6 +38,9 @@ import com.feilong.core.util.FeiLongUtilSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({
                 FeiLongCoreTests.class,
+
+                Slf4jUtilTest.class,
+                FeiLongJsonUtilSuiteTests.class,
 
                 FeiLongBeanSuiteTests.class,
                 FeiLongDateSuiteTests.class,
