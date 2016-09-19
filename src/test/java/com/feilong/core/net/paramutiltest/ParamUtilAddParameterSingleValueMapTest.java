@@ -89,9 +89,9 @@ public class ParamUtilAddParameterSingleValueMapTest{
     /**
      * Test add parameter single value map null map.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testAddParameterSingleValueMapNullMap(){
-        addParameterSingleValueMap(PATH + "?a=中国", null, UTF8);
+        assertEquals(PATH + "?a=" + encode("中国", UTF8), addParameterSingleValueMap(PATH + "?a=中国", null, UTF8));
     }
 
     /**

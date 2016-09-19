@@ -141,9 +141,9 @@ public class ParamUtilAddParameterArrayValueMapTest{
     /**
      * Test get encoded url by array map null map.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testGetEncodedUrlByArrayMapNullMap(){
-        addParameterArrayValueMap(PATH + "?a=b", null, UTF8);
+        assertEquals(PATH + "?a=b", addParameterArrayValueMap(PATH + "?a=b", null, UTF8));
     }
 
     /**
