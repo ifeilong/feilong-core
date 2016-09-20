@@ -510,6 +510,7 @@ public final class StringUtil{
      * @param length
      *            长度 {@code >=1}
      * @return 如果 <code>text</code> 是null,返回 null<br>
+     *         如果 <code>startIndex + length</code> {@code >} <code>text.length</code>,那么截取 从 startIndex 开始截取,截取到最后
      * @see org.apache.commons.lang3.StringUtils#substring(String, int, int)
      */
     public static String substring(final String text,int startIndex,int length){

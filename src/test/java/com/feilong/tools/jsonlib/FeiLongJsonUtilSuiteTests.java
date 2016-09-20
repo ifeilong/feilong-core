@@ -27,6 +27,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                JsonUtilToBeanTest.class,
+
                 JsonUtilToMapTest.class,
                 JsonUtilToMapWithRootClassTest.class,
                 JsonUtilToMapWithRootClassAndClassMapTest.class,

@@ -27,7 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 StringUtilReplaceValuesMapTest.class,
                 StringUtilSubstringBeginIndexTest.class,
                 StringUtilSubstringLastTest.class,
-                StringUtilSubstringStartIndexAndLengthTest.class,
+                StringUtilSubstringStartIndexAndLengthParameterizedTest.class,
                 StringUtilSubstringWithoutLastLastLengthTest.class,
                 StringUtilSubstringWithoutLastLastStringTest.class,
                 StringUtilTokenizeToStringArrayTest.class,

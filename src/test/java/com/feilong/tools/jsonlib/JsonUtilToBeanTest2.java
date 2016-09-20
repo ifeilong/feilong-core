@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.test.Person;
 import com.feilong.test.User;
-import com.feilong.test.UserAddress;
 import com.feilong.test.UserInfo;
 import com.feilong.tools.AbstractJsonTest;
 
@@ -47,31 +46,6 @@ public class JsonUtilToBeanTest2 extends AbstractJsonTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilToBeanTest2.class);
-
-    /**
-     * 从json串转换成实体对象,并且实体集合属性存有另外实体Bean void.
-     */
-    @Test
-    public void toBean(){
-        String json = "{'data':[{'name':'get'},{'name':'set'}],'id':5}";
-        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-        classMap.put("data", Person.class);
-
-        MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
-        LOGGER.debug(JsonUtil.format(myBean));
-    }
-
-    /**
-     * To bean.
-     */
-    @Test
-    public void toBean3(){
-        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-        classMap.put("userAddresseList", UserAddress.class);
-
-        User user = JsonUtil.toBean(USER_JSON_STRING, User.class, classMap);
-        LOGGER.debug(JsonUtil.format(user));
-    }
 
     /**
      * To bean n ull.
@@ -155,7 +129,6 @@ public class JsonUtilToBeanTest2 extends AbstractJsonTest{
         classMap.put("data", Person.class);
 
         List<MyBean> list = JsonUtil.toList(json, MyBean.class, classMap);
-
         LOGGER.debug(JsonUtil.format(list));
     }
 
