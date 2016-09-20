@@ -1311,7 +1311,10 @@ public final class JsonUtil{
      *            支持的格式有: {@link JSONObject#fromObject(Object, JsonConfig)}
      * @param rootClass
      *            e.g. Person.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @return the t
+     * @return 如果<code>json</code> 是null,那么返回 null
+     * @see JSONObject#fromObject(Object, JsonConfig)
+     * @see net.sf.json.JsonConfig#setRootClass(Class)
+     * @see #toBean(Object, Class, Map)
      */
     public static <T> T toBean(Object json,Class<T> rootClass){
         return toBean(json, rootClass, null);
@@ -1358,10 +1361,15 @@ public final class JsonUtil{
      *            e.g. MyBean.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
-     * @return Object
+     * @return 如果<code>json</code> 是null,那么返回 null
      * @see #toBean(Object, JsonConfig)
+     * @see JSONObject#fromObject(Object, JsonConfig)
+     * @see net.sf.json.JsonConfig#setRootClass(Class)
      */
     public static <T> T toBean(Object json,Class<T> rootClass,Map<String, Class<?>> classMap){
+        if (null == json){
+            return null;
+        }
         JSONObject jsonObject = JSONObject.fromObject(json);
 
         JsonConfig jsonConfig = getDefaultJsonConfig();
@@ -1382,7 +1390,7 @@ public final class JsonUtil{
      *            the json
      * @param jsonConfig
      *            the json config
-     * @return the object
+     * @return 如果<code>json</code> 是null,那么返回 null
      * @see net.sf.json.JSONObject#toBean(JSONObject, JsonConfig)
      */
     @SuppressWarnings("unchecked")

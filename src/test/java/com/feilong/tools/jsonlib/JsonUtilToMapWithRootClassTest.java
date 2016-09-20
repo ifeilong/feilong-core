@@ -28,7 +28,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.test.Person;
-import com.feilong.tools.AbstractJsonTest;
 
 import net.sf.json.JSONObject;
 
@@ -37,7 +36,7 @@ import net.sf.json.JSONObject;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class JsonUtilToMapWithRootClassTest extends AbstractJsonTest{
+public class JsonUtilToMapWithRootClassTest{
 
     /**
      * To map.

@@ -26,14 +26,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.feilong.tools.AbstractJsonTest;
-
 /**
  * The Class JsonUtilToMapTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class JsonUtilToMapTest extends AbstractJsonTest{
+public class JsonUtilToMapTest{
 
     @Test
     public void testToMapOrder(){

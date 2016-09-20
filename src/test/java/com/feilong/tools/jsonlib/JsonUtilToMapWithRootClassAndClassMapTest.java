@@ -29,14 +29,13 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.test.Person;
-import com.feilong.tools.AbstractJsonTest;
 
 /**
  * The Class JsonUtilToMapWithRootClassAndClassMapTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class JsonUtilToMapWithRootClassAndClassMapTest extends AbstractJsonTest{
+public class JsonUtilToMapWithRootClassAndClassMapTest{
 
     /**
      * To map 3.

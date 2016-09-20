@@ -124,16 +124,6 @@ public class JsonUtilTest extends AbstractJsonTest{
     }
 
     /**
-     * Name1.
-     */
-    @Test
-    public void format(){
-        User user = JsonUtil.toBean(USER_JSON_STRING, User.class);
-        user.setId(10L);
-        LOGGER.debug(JsonUtil.format(user));
-    }
-
-    /**
      * Format array 2.
      */
     @Test
