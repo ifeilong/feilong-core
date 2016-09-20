@@ -23,6 +23,11 @@ import com.feilong.core.lang.ArrayUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
+/**
+ * The Class ArrayUtilGetElementTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ArrayUtilGetElementTest{
 
     //***************com.feilong.core.lang.ArrayUtil.getElement(Object, int)**************************************

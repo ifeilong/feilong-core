@@ -37,6 +37,9 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
  */
 public class ConvertUtilToPropertiesTest{
 
+    /**
+     * Test to properties.
+     */
     @Test
     public void testToProperties(){
         Map<String, String> map = toMap("name", "feilong");
@@ -46,18 +49,27 @@ public class ConvertUtilToPropertiesTest{
         assertThat(map1, allOf(hasEntry("name", "feilong")));
     }
 
+    /**
+     * Test to properties null key.
+     */
     @Test(expected = NullPointerException.class)
     public void testToPropertiesNullKey(){
         Map<String, String> map = toMap(null, "feilong");
         ConvertUtil.toProperties(map);
     }
 
+    /**
+     * Test to properties null value.
+     */
     @Test(expected = NullPointerException.class)
     public void testToPropertiesNullValue(){
         Map<String, String> map = toMap("name", null);
         ConvertUtil.toProperties(map);
     }
 
+    /**
+     * Test to properties null map.
+     */
     @Test
     public void testToPropertiesNullMap(){
         Properties properties = ConvertUtil.toProperties(null);

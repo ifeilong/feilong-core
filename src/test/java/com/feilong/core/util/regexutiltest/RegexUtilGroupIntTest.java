@@ -21,8 +21,16 @@ import org.junit.Test;
 
 import com.feilong.core.util.RegexUtil;
 
+/**
+ * The Class RegexUtilGroupIntTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class RegexUtilGroupIntTest{
 
+    /**
+     * Test group.
+     */
     @Test
     public void testGroup(){
         String regexPattern = "(.*?)@(.*?)";

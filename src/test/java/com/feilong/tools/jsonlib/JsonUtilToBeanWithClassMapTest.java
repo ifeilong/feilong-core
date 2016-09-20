@@ -29,11 +29,19 @@ import com.feilong.test.User;
 import com.feilong.test.UserAddress;
 import com.feilong.tools.AbstractJsonTest;
 
+/**
+ * The Class JsonUtilToBeanWithClassMapTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class JsonUtilToBeanWithClassMapTest extends AbstractJsonTest{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilToBeanWithClassMapTest.class);
 
+    /**
+     * Test to bean.
+     */
     @Test
     public void testToBean(){
         String json = "{'data':[{'name':'get'},{'name':'set'}],'id':5}";
@@ -44,6 +52,9 @@ public class JsonUtilToBeanWithClassMapTest extends AbstractJsonTest{
         LOGGER.debug(JsonUtil.format(myBean));
     }
 
+    /**
+     * Test to bean 3.
+     */
     @Test
     public void testToBean3(){
         Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
@@ -53,6 +64,9 @@ public class JsonUtilToBeanWithClassMapTest extends AbstractJsonTest{
         LOGGER.debug(JsonUtil.format(user));
     }
 
+    /**
+     * Test to bean null json.
+     */
     @Test
     public void testToBeanNullJson(){
         Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();

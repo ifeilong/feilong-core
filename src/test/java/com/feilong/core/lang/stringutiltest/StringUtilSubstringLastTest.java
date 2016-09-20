@@ -21,6 +21,11 @@ import org.junit.Test;
 
 import com.feilong.core.lang.StringUtil;
 
+/**
+ * The Class StringUtilSubstringLastTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class StringUtilSubstringLastTest{
 
     /** <code>{@value}</code>. */

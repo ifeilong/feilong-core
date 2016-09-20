@@ -53,16 +53,25 @@ public class PropertyUtilFindValueOfTypeTest{
         //assertThat(PropertyUtil.findValueOfType(user, Long.class), is(5L));
     }
 
+    /**
+     * Test find value of type null obj.
+     */
     @Test
     public void testFindValueOfTypeNullObj(){
         assertEquals(null, PropertyUtil.findValueOfType(null, UserInfo.class));
     }
 
+    /**
+     * Test find value of type null to be finded class type.
+     */
     @Test(expected = NullPointerException.class)
     public void testFindValueOfTypeNullToBeFindedClassType(){
         PropertyUtil.findValueOfType(new User(), null);
     }
 
+    /**
+     * Test find value of type null is instance type.
+     */
     @Test
     public void testFindValueOfTypeNullIsInstanceType(){
         User user = new User();

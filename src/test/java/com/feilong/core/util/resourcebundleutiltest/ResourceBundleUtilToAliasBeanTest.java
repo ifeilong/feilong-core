@@ -31,8 +31,16 @@ import com.feilong.core.entity.DangaMemCachedConfig;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toAliasBean;
 
+/**
+ * The Class ResourceBundleUtilToAliasBeanTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ResourceBundleUtilToAliasBeanTest{
 
+    /**
+     * Test to alias bean.
+     */
     @Test
     public void testToAliasBean(){
         DangaMemCachedConfig dangaMemCachedConfig = toAliasBean(getResourceBundle("messages.memcached"), DangaMemCachedConfig.class);
@@ -82,11 +90,17 @@ public class ResourceBundleUtilToAliasBeanTest{
 
     //**********************************************************************************************
 
+    /**
+     * Test to alias bean null resource bundle.
+     */
     @Test(expected = NullPointerException.class)
     public void testToAliasBeanNullResourceBundle(){
         toAliasBean(null, DangaMemCachedConfig.class);
     }
 
+    /**
+     * Test to alias bean null alias bean class.
+     */
     @Test(expected = NullPointerException.class)
     public void testToAliasBeanNullAliasBeanClass(){
         toAliasBean(getResourceBundle("messages.memcached"), null);

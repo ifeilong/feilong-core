@@ -57,22 +57,34 @@ public class URIUtilCreateTest{
         LOGGER.debug("" + URI.create(uriString));
     }
 
+    /**
+     * Test create error uri.
+     */
     @Test(expected = URIParseException.class)
     public void testCreateErrorUri(){
         URIUtil.create("://127.0.01/cmens");
     }
 
+    /**
+     * Test create null.
+     */
     //****************************************************************************************
     @Test(expected = NullPointerException.class)
     public void testCreateNull(){
         URIUtil.create(null);
     }
 
+    /**
+     * Test create empty.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testCreateEmpty(){
         URIUtil.create("");
     }
 
+    /**
+     * Test create blank.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testCreateBlank(){
         URIUtil.create(" ");

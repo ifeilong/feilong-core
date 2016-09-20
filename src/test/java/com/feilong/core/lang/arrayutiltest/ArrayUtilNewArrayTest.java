@@ -21,6 +21,11 @@ import org.junit.Test;
 
 import com.feilong.core.lang.ArrayUtil;
 
+/**
+ * The Class ArrayUtilNewArrayTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class ArrayUtilNewArrayTest{
     //************com.feilong.core.lang.ArrayUtil.newArray(Class<Object>, int)*************************************
 

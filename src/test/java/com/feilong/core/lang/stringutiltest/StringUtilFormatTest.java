@@ -29,6 +29,11 @@ import com.feilong.core.lang.StringUtil;
 import static com.feilong.core.NumberPattern.PERCENT_WITH_NOPOINT;
 import static com.feilong.core.lang.NumberUtil.getProgress;
 
+/**
+ * The Class StringUtilFormatTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class StringUtilFormatTest{
 
     /** The Constant LOGGER. */
@@ -52,11 +57,17 @@ public class StringUtilFormatTest{
         LOGGER.debug(StringUtil.format("%1$s,%1$s", 99));
     }
 
+    /**
+     * Format D.
+     */
     @Test
     public void formatD(){
         assertEquals("001", StringUtil.format("%03d", 1));
     }
 
+    /**
+     * Format null.
+     */
     @Test
     public void formatNull(){
         assertEquals(EMPTY, StringUtil.format(null));
@@ -110,6 +121,9 @@ public class StringUtilFormatTest{
         //return StringUtils.rightPad(sectionName, 40, padStr) + StringUtils.rightPad("" + contentLength, 6, padStr) + progress;
     }
 
+    /**
+     * Format 1.
+     */
     @Test
     public void format1(){
         Date date = new Date();

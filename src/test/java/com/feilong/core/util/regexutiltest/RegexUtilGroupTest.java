@@ -23,8 +23,16 @@ import org.junit.Test;
 
 import com.feilong.core.util.RegexUtil;
 
+/**
+ * The Class RegexUtilGroupTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class RegexUtilGroupTest{
 
+    /**
+     * Test group 1.
+     */
     @Test
     public void testGroup1(){
         String regexPattern = "(.*?)@(.*?)";
@@ -34,6 +42,9 @@ public class RegexUtilGroupTest{
                         allOf(hasEntry(0, "venusdrogon@163.com"), hasEntry(1, "venusdrogon"), hasEntry(2, "163.com")));
     }
 
+    /**
+     * Test group 2.
+     */
     @Test
     public void testGroup2(){
         String regexPattern = "@Table.*name.*\"(.*?)\".*";
@@ -43,6 +54,9 @@ public class RegexUtilGroupTest{
                         allOf(hasEntry(0, "@Table(name = \"T_MEM_MEMBER_ADDRESS\")"), hasEntry(1, "T_MEM_MEMBER_ADDRESS")));
     }
 
+    /**
+     * Group 22.
+     */
     @Test
     public void group22(){
         String regexPattern = ".*@Column.*name.*\"(.*?)\"((?:.*)|(.*length.*(\\d+).*))";

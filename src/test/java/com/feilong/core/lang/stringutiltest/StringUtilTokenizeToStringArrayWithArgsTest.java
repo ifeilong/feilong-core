@@ -24,6 +24,11 @@ import com.feilong.core.lang.StringUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
+/**
+ * The Class StringUtilTokenizeToStringArrayWithArgsTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class StringUtilTokenizeToStringArrayWithArgsTest{
     //******************com.feilong.core.lang.StringUtil.tokenizeToStringArray(String, String, boolean, boolean)**************************************************************************************
 

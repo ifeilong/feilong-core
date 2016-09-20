@@ -35,6 +35,9 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
  */
 public class BeanUtilNewDynaBeanTest{
 
+    /**
+     * Test new dyna bean.
+     */
     @Test
     public void testNewDynaBean(){
         Map<String, Object> map = new HashMap<>();

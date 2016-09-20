@@ -26,6 +26,11 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
+/**
+ * The Class URIUtilCreateWithCharsetTypeTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class URIUtilCreateWithCharsetTypeTest{
 
     /** The Constant log. */
