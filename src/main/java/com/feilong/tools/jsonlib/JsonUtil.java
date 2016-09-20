@@ -1158,11 +1158,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 把json对象串转换成map对象,且map对象里存放的为其他实体Bean.
-     * 
-     * <p>
-     * 如果 null==klass,那么直接将json里面的value 作为map 的value
-     * </p>
+     * 把json字符串转换成map对象,且map对象里存放的为其他实体Bean.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1187,7 +1183,7 @@ public final class JsonUtil{
      * <hr>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
+     * Map{@code <String, JSONObject>} map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
      * LOGGER.info(JsonUtil.format(map1));
      * </pre>
      * 
@@ -1208,7 +1204,8 @@ public final class JsonUtil{
      *            e.g. {'data1':{'name':'get'}, 'data2':{'name':'set'}}
      * @param rootClass
      *            e.g. Person.class ,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}
+     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
      * @see #toMap(String, Class, Map)
      */
     public static <T> Map<String, T> toMap(String json,Class<T> rootClass){
@@ -1217,10 +1214,6 @@ public final class JsonUtil{
 
     /**
      * 把json对象串转换成map对象,且map对象里存放的其他实体Bean还含有另外实体Bean.
-     * 
-     * <p>
-     * 如果 null==klass,那么直接将json里面的value 作为map 的value
-     * </p>
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1256,6 +1249,7 @@ public final class JsonUtil{
      * @param classMap
      *            e.g. classMap.put("data", Person.class)
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
      * @see net.sf.json.JSONObject#keys()
      * @see #toBean(Object, Class, Map)
      * @since 1.9.2 use LinkedHashMap instead of HashMap

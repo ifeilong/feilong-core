@@ -19,10 +19,16 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * The Class FeiLongJsonUtilSuiteTests.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
                 JsonUtilToMapTest.class,
+                JsonUtilToMapWithRootClassTest.class,
 
         //
 })
