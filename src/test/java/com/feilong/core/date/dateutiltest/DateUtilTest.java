@@ -79,12 +79,4 @@ public class DateUtilTest{
         LOGGER.debug(DateUtil.isLeapYear(year) + "");
     }
 
-    /**
-     * Test get time length.
-     */
-    @Test
-    public void testGetTimeLength(){
-        Date NOW = new Date();
-        LOGGER.debug((NOW.getTime() + "").length() + "");
-    }
 }

@@ -184,7 +184,7 @@ public final class ClassLoaderUtil{
         String usePath = startsWithSlash ? StringUtil.substring(resourceName, 1) : resourceName;
         URL result = classLoader.getResource(usePath);
 
-        LOGGER.info("search resource:[\"{}\"] in [{}],result:[{}]", resourceName, classLoader, result);
+        LOGGER.trace("search resource:[\"{}\"] in [{}],result:[{}]", resourceName, classLoader, result);
         return result;
     }
 
