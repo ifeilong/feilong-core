@@ -22,7 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 StringUtilFormatTest.class,
-                StringUtilReplaceAllTest.class,
+                StringUtilReplaceAllParameterizedTest.class,
                 StringUtilReplaceParameterizedTest.class,
                 StringUtilReplaceValuesMapTest.class,
                 StringUtilSubstringBeginIndexTest.class,

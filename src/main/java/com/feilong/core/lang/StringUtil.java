@@ -303,12 +303,17 @@ public final class StringUtil{
     }
 
     /**
-     * 使用给定的<code>replacement</code>替换此字符串所有匹配给定的正则表达式 <code>regex</code>的子字符串.
+     * 使用给定的<code>replacement</code>替换 <code>content</code> 此字符串所有匹配给定的正则表达式 <code>regex</code>的子字符串.
      * 
-     * <p>
-     * 注意,此方法底层调用的是 {@link java.util.regex.Matcher#replaceAll(String)},same as
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 此方法底层调用的是 {@link java.util.regex.Matcher#replaceAll(String)},相同于
      * <code>Pattern.compile(regex).matcher(str).replaceAll(repl)</code>
-     * </p>
+     * </li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -329,16 +334,19 @@ public final class StringUtil{
      * <h3>请注意:</h3>
      * 
      * <blockquote>
+     * 
      * <p>
      * 在替代字符串<code>replacement</code>中,使用 backslashes反斜杆(<tt>\</tt>)和 dollar signs美元符号 (<tt>$</tt>)与将其视为字面值替代字符串所得的结果可能不同.
      * <br>
      * 请参阅 {@link java.util.regex.Matcher#replaceAll Matcher.replaceAll};如有需要,可使用 {@link java.util.regex.Matcher#quoteReplacement
      * Matcher.quoteReplacement}取消这些字符的特殊含义
-     * <br>
-     * Dollar signs may be treated as references to captured subsequences as described above,$这个特殊的字符,因为替换串使用这个引用正则表达式匹配的组,
+     * </p>
+     * 
+     * <p>
+     * <tt>$</tt> may be treated as references to captured subsequences as described above,<tt>$</tt>这个特殊的字符,因为替换串使用这个引用正则表达式匹配的组,
      * $0代表匹配项,$1代表第1个匹配分组,$1代表第2个匹配分组
      * <br>
-     * and backslashes are used to escape literal characters in the replacement string. 
+     * 并且 <tt>\</tt> are used to escape literal characters in the replacement string. 
      * </p>
      * </blockquote>
      * 
@@ -348,7 +356,7 @@ public final class StringUtil{
      * 
      * <pre class="code">
      * 
-     * //分隔字符串并添加引号.
+     * <span style="color:green">//分隔字符串并添加引号.</span>
      * public void splitAndAddYinHao(){
      *     String a = "12345,56789,1123456";
      *     String[] aStrings = a.split(",");
@@ -386,6 +394,7 @@ public final class StringUtil{
      * @param replacement
      *            用来替换每个匹配项的字符串
      * @return 如果 <code>content</code> 是null,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>content</code> 中,没有 regex匹配的字符串或者格式,返回<code>content</code><br>
      * @see <a href="http://stamen.iteye.com/blog/2028256">String字符串替换的一个诡异问题</a>
      * @see java.lang.String#replaceAll(String, String)
      * @since jdk 1.4
