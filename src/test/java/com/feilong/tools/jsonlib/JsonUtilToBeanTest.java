@@ -190,19 +190,6 @@ public class JsonUtilToBeanTest extends AbstractJsonTest{
     }
 
     /**
-     * 把json对象串转换成map对象,且map对象里 存放的其他实体Bean还含有另外实体Bean void.
-     */
-    @Test
-    public void toMap3(){
-        String json = "{'mybean':{'data':[{'name':'get'}]}}";
-        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-        classMap.put("data", Person.class);
-
-        Map<String, MyBean> map = JsonUtil.toMap(json, MyBean.class, classMap);
-        LOGGER.debug(JsonUtil.format(map));
-    }
-
-    /**
      * 实体Bean转json串 void.
      */
     @Test

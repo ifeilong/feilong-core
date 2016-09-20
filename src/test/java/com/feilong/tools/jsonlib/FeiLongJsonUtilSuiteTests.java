@@ -29,6 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 JsonUtilToMapTest.class,
                 JsonUtilToMapWithRootClassTest.class,
+                JsonUtilToMapWithRootClassAndClassMapTest.class,
 
         //
 })
