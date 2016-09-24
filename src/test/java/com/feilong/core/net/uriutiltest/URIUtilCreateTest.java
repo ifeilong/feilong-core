@@ -15,25 +15,22 @@
  */
 package com.feilong.core.net.uriutiltest;
 
+import static org.junit.Assert.assertEquals;
+
 import java.net.URI;
 
-import org.junit.Ignore;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URIParseException;
 import com.feilong.core.net.URIUtil;
 
 /**
- * The Class URIUtilTest.
- * 
+ * The Class URIUtilCreateTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class URIUtilCreateTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(URIUtilCreateTest.class);
     //***************com.feilong.core.net.URIUtil.create(String)************************************************************************
 
     /**
@@ -41,20 +38,9 @@ public class URIUtilCreateTest{
      */
     @Test
     public void testCreate(){
-        String value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time DESC&search_page&areaid=2&server_id=63&act=search_browse&equip_type_ids&search_text=斩妖剑";
-        value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time";
+        String value = "http://xy2.cbg.163.com/cgi-bin/equipquery.py?server_name=风花雪月&query_order=selling_time";
         URI uri = URIUtil.create(value);
-        LOGGER.debug("{}", uri.toString());
-    }
-
-    /**
-     * Test create3.
-     */
-    @Test
-    @Ignore
-    public void testCreate3(){
-        String uriString = "http://127.0.0.1/cmens?a=%";
-        LOGGER.debug("" + URI.create(uriString));
+        assertEquals(value, uri.toString());
     }
 
     /**
