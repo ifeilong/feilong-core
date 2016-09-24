@@ -17,9 +17,15 @@ package com.feilong.tools.jsonlib;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import org.junit.Test;
@@ -29,7 +35,9 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.store.system.Menu;
+import com.feilong.test.Person;
 import com.feilong.test.User;
+import com.feilong.test.UserInfo;
 import com.feilong.tools.AbstractJsonTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
@@ -39,6 +47,7 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 /**
  * The Class JsonlibTest.
@@ -209,5 +218,111 @@ public class JsonUtilTest extends AbstractJsonTest{
         hashtable.put("a", "a");
         // hashtable.put("a", null);
         LOGGER.debug("hashtable:{}", JsonUtil.format(hashtable));
+    }
+
+    /**
+     * To bean n ull.
+     */
+    @Test
+    public void toBeanNUll(){
+        LOGGER.debug(JsonUtil.toJSON(null).toString(4, 4));
+        LOGGER.debug(new JSONObject().toString(4));
+    }
+
+    /**
+     * To json.
+     */
+    @Test
+    public void toJSON(){
+        LOGGER.debug(JsonUtil.toJSON(HttpMethodTestType.GET).toString(4, 4));
+    }
+
+    /**
+     * To bean n ulluser.
+     */
+    @Test
+    public void toBeanNUlluser(){
+        User user = new User();
+        user.setId(8L);
+        user.setName("feilong");
+
+        JsonConfig jsonConfig = new JsonConfig();
+
+        // String[] excludes = { "userInfo" };
+        // jsonConfig.setExcludes(excludes);
+
+        Class<UserInfo> target = UserInfo.class;
+        String[] properties = { "age" };
+        jsonConfig.registerPropertyExclusions(target, properties);
+        LOGGER.debug(JsonUtil.toJSON(user, jsonConfig).toString(4, 4));
+    }
+
+    /**
+     * Name.
+     */
+    @Test
+    public void name1(){
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        Map<String, Object> map1 = new HashMap<String, Object>();
+
+        String[] aStrings = { "aaaa", "bbbb" };
+        map1.put("b", aStrings);
+        map1.put("bb", "2");
+        map1.put("bbb", "3");
+
+        map.put("a", map1);
+        map.put("aa", map1);
+        map.put("aaa", map1);
+        LOGGER.debug(JsonUtil.toJSON(map).toString(4, 4));
+    }
+
+    /**
+     * 实体Bean转json串 void.
+     */
+    @Test
+    public void testgetJsonStr1(){
+        Person ps = new Person();
+        ps.setDateAttr(new Date());
+        ps.setName("get");
+        MyBean myBean = new MyBean();
+        List<Object> list = new ArrayList<Object>();
+        list.add(ps);
+
+        myBean.setData(list);
+        // print: {"data":[{"dateAttr":"2009-09-12 07:24:54","name":"get"}]}
+        LOGGER.debug("" + JsonUtil.toJSON(myBean));
+    }
+
+    /**
+     * list转json串 void.
+     */
+    @Test
+    public void testgetJsonStr4(){
+        Person ps = new Person();
+        ps.setDateAttr(new Date());
+        ps.setName("get");
+        List<Person> list = new ArrayList<Person>();
+        list.add(ps);
+
+        // print: [{"dateAttr":"2009-09-12 07:22:49","name":"get"}]
+        LOGGER.debug("" + JsonUtil.toJSON(list));
+
+        Set set = new LinkedHashSet();
+        set.add(ps);
+
+        // print: [{"dateAttr":"2009-09-12 07:22:16","name":"get"}]
+        LOGGER.debug("" + JsonUtil.toJSON(set));
+
+        Person[] personArr = new Person[1];
+        personArr[0] = ps;
+        // print: [{"dateAttr":"2009-09-12 07:23:54","name":"get"}]
+        LOGGER.debug("" + JsonUtil.toJSON(personArr));
+
+        Map map = new LinkedHashMap();
+        map.put("person1", ps);
+
+        // print: {"person1":{"dateAttr":"2009-09-12 07:24:27","name":"get"}}
+        LOGGER.debug("" + JsonUtil.toJSON(map));
     }
 }

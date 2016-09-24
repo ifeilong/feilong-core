@@ -17,8 +17,6 @@ package com.feilong.core.date.dateutiltest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.feilong.core.date.DateUtil.toDate;
 
@@ -33,22 +31,17 @@ import static com.feilong.core.DatePattern.TIMESTAMP_WITH_MILLISECOND;
  */
 public class DateUtilToDateTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtilToDateTest.class);
-
     /**
      * Test string2 date.
      */
     @Test
     public void testToDate(){
-
-        LOGGER.debug("" + toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
-        LOGGER.debug("" + toDate("2016-06-28T01:21:12+0800", "yyyy-MM-dd'T'HH:mm:ssZ"));
-
-        LOGGER.debug("" + toDate("2016-02-33", COMMON_DATE));
+        toDate("2016-06-28T01:21:12-0800", "yyyy-MM-dd'T'HH:mm:ssZ");
+        toDate("2016-06-28T01:21:12+0800", "yyyy-MM-dd'T'HH:mm:ssZ");
+        toDate("2016-02-33", COMMON_DATE);
 
         // 商品上线时间
-        LOGGER.debug("" + toDate("20130102140806000", TIMESTAMP_WITH_MILLISECOND));
+        toDate("20130102140806000", TIMESTAMP_WITH_MILLISECOND);
     }
 
     /**

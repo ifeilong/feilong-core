@@ -16,8 +16,8 @@
 package com.feilong.core.date.dateutiltest;
 
 import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.MONTH;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -28,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateUtil;
+
+import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
@@ -47,15 +49,20 @@ public class DateUtilTest{
     @Test
     public void testGetLastDateOfThisDay1(){
         Date NOW = new Date();
-        LOGGER.debug(DateUtil.toString(DateUtils.ceiling(NOW, Calendar.DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-        LOGGER.debug(DateUtil.toString(DateUtils.round(NOW, Calendar.DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-        LOGGER.debug(DateUtil.toString(DateUtils.truncate(NOW, Calendar.DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        // ceiling 取上限 从日期特定字段开始向上舍入
+        LOGGER.debug(DateUtil.toString(DateUtils.ceiling(NOW, DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+
+        //从日期特定字段开始四舍五入
+        LOGGER.debug(DateUtil.toString(DateUtils.round(NOW, DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+
+        // 格式化截取日期，从给定字段开始  类似Oracle SQL语句中的truncate函数
+        LOGGER.debug(DateUtil.toString(DateUtils.truncate(NOW, DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
 
         LOGGER.debug(StringUtils.repeat("*", 20));
 
-        LOGGER.debug(DateUtil.toString(DateUtils.ceiling(NOW, Calendar.MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-        LOGGER.debug(DateUtil.toString(DateUtils.round(NOW, Calendar.MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-        LOGGER.debug(DateUtil.toString(DateUtils.truncate(NOW, Calendar.MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(DateUtils.ceiling(NOW, MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(DateUtils.round(NOW, MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(DateUtils.truncate(NOW, MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 
     /**
@@ -63,7 +70,7 @@ public class DateUtilTest{
      */
     @Test
     public void testGetFirstDateOfThisDay1(){
-        LOGGER.debug(DateUtil.toString(DateUtil.getFirstDateOfThisDay(new Date()), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
+        LOGGER.debug(DateUtil.toString(getFirstDateOfThisDay(new Date()), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
         LOGGER.debug(DateUtil.toString(DateUtils.truncate(new Date(), DAY_OF_MONTH), COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }
 

@@ -250,7 +250,7 @@ public final class URIUtil{
      * 
      * String pattern = "mailto:venus@163.com?subject={}{@code &}body={}";
      * 
-     * String uriString = Slf4jUtil.format(pattern, "你好", "我是飞天奔月<br>哈哈哈哈");
+     * String uriString = Slf4jUtil.format(pattern, "你好", "我是飞天奔月{@code <br>}哈哈哈哈");
      * 
      * String result = URIUtil.encodeUri(uriString, UTF8);
      * </pre>
@@ -263,13 +263,38 @@ public final class URIUtil{
      * 
      * </blockquote>
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 
+     * <ol>
+     * 
+     * <li>
+     * 适合于一些后台传递url参数需要encode的场景,比如支付宝 <b>show_url</b>(收银台页面上,商品展示的超链接),
+     * 
+     * <p>
+     * 支付宝目前不直接支持中文参数链接,比如 <code>http://www.underarmour.cn/s.htm?keyword=鞋&pageNo=2</code> ,在支付宝页面源码会显示成
+     * <code>http://www.underarmour.cn/s.htm?keyword=鞋{@code &amp;}pageNo=2</code>
+     * </p>
+     * 
+     * <br>
+     * 此时需要使用
+     * 
+     * <pre class="code">
+     * URIUtil.encodeUri("http://www.underarmour.cn/s.htm?keyword=鞋&pageNo=2", UTF8)
+     * </pre>
+     * 
+     * 传递 <code>http://www.underarmour.cn/s.htm?keyword=%E9%9E%8B&pageNo=2</code>
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param uriString
      *            the uri string
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量,如果是null或者 empty,那么参数部分原样返回,自己去处理兼容性问题<br>
      *            否则会先解码,再加码,因为ie浏览器和chrome 浏览器 url中访问路径 ,带有中文情况下 不一致
      * @return 如果 <code>uriString</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>uriString</code> 是blank,抛出 {@link IllegalArgumentException}
+     *         如果 <code>uriString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>charsetType</code> 是null或者blank,直接返回 <code>uriString</code>
      * @see <a
      *      href="http://stackoverflow.com/questions/15004593/java-request-getquerystring-value-different-between-chrome-and-ie-browser">

@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +48,11 @@ public class DateExtensionUtilFormatDurationTest{
     @Test
     public void testFormatDurationLong(){
         assertEquals("25秒841毫秒", formatDuration(25841));
+    }
 
+    @Test
+    @Ignore
+    public void testFormatDurationLong1(){
         LOGGER.debug(String.format("%d:%02d:%02d", 25841000 / 3600, (25841000 % 3600) / 60, (25841000 % 60)));
         //25 seconds
         LOGGER.debug(DurationFormatUtils.formatDurationWords(25841, true, false));
@@ -78,7 +83,7 @@ public class DateExtensionUtilFormatDurationTest{
     @Test
     public void testFormatDuration1(){
         Date date = toDate("2016-07-03 00:00:00", COMMON_DATE_AND_TIME);
-        LOGGER.debug(formatDuration(date));
+        formatDuration(date);
     }
 
     /**
