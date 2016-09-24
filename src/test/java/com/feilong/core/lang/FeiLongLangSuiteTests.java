@@ -20,6 +20,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.core.lang.arrayutiltest.FeiLongArrayUtilSuiteTests;
+import com.feilong.core.lang.classloaderitiltest.FeiLongClassLoaderUtilSuiteTests;
 import com.feilong.core.lang.classutiltest.FeiLongClassUtilSuiteTests;
 import com.feilong.core.lang.enumutiltest.FeiLongEnumUtilSuiteTests;
 import com.feilong.core.lang.numberutiltest.FeiLongNumberUtilSuiteTests;
@@ -37,7 +38,7 @@ import com.feilong.core.lang.stringutiltest.FeiLongStringUtilSuiteTests;
 @SuiteClasses({
                 FeiLongArrayUtilSuiteTests.class,
 
-                ClassLoaderUtilTest.class,
+                FeiLongClassLoaderUtilSuiteTests.class,
 
                 FeiLongEnumUtilSuiteTests.class,
 
