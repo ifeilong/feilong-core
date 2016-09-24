@@ -227,38 +227,39 @@ public final class ClassLoaderUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果 <code>resourceName</code> 是以 斜杆 "/" 开头,那么会被截取, 因为 ClassLoader解析方式不需要 开头的斜杆, 请参见
+     * <li>如果 <code>resourceName</code> 是以 斜杆 "/" 开头,那么会被截取,因为 ClassLoader解析方式不需要开头的斜杆, 请参见
      * <code>org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)</code></li>
      * <li>"",表示classes 的根目录</li>
-     * </ol>
-     * </blockquote>
-     * 
+     * <li>
      * <p>
      * This method will try to load the resource using the following methods (in order):
      * </p>
      * <ul>
      * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
      * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
-     * <li>From {@link Class#getClassLoader() callingClass.getClassLoader() }
+     * <li>From {@link Class#getClassLoader() callingClass.getClassLoader() } (如果 callingClass 不是null)
      * </ul>
+     * </li>
+     * </ol>
+     * </blockquote>
      * 
      * @param resourceName
      *            The name of the resource to load
      * @param callingClass
      *            The Class object of the calling object
      * @return 如果 <code>resourceName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>callingClass</code> 是null,将会忽略此参数<br>
      *         如果在所有的{@link ClassLoader}里面都查不到资源,那么返回null
      * @since 1.6.2
      */
     public static URL getResourceInAllClassLoader(String resourceName,Class<?> callingClass){
+        Validate.notNull(resourceName, "resourceName can't be null!");
+
         List<ClassLoader> classLoaderList = getAllClassLoaderList(callingClass);
         for (ClassLoader classLoader : classLoaderList){
-            if (null == classLoader){
-                continue;
-            }
             URL url = getResource(classLoader, resourceName);
             if (null == url){
-                LOGGER.warn(getLogInfo(resourceName, classLoader, false));
+                LOGGER.trace(getLogInfo(resourceName, classLoader, false));
             }else{
                 if (LOGGER.isTraceEnabled()){
                     LOGGER.trace(getLogInfo(resourceName, classLoader, true));
@@ -266,7 +267,7 @@ public final class ClassLoaderUtil{
                 return url;
             }
         }
-        LOGGER.warn("not found:[{}] in all ClassLoader,return null", resourceName);
+        LOGGER.info("not found:[{}] in all ClassLoader,return null", resourceName);
         return null;
     }
 
@@ -274,6 +275,15 @@ public final class ClassLoaderUtil{
 
     /**
      * 获得 all class loader list.
+     * 
+     * <p>
+     * This method will try to get ClassLoader list using the following methods (in order):
+     * </p>
+     * <ul>
+     * <li>From {@link Thread#getContextClassLoader() Thread.currentThread().getContextClassLoader()}
+     * <li>From {@link Class#getClassLoader() ClassLoaderUtil.class.getClassLoader()}
+     * <li>From {@link Class#getClassLoader() callingClass.getClassLoader() } (如果 <code>callingClass</code> 不是null)
+     * </ul>
      *
      * @param callingClass
      *            the calling class
@@ -281,10 +291,11 @@ public final class ClassLoaderUtil{
      * @since 1.6.2
      */
     private static List<ClassLoader> getAllClassLoaderList(Class<?> callingClass){
-        return toList(
-                        getClassLoaderByCurrentThread(),
-                        getClassLoaderByClass(ClassLoaderUtil.class),
-                        null == callingClass ? null : getClassLoaderByClass(callingClass));
+        List<ClassLoader> list = toList(getClassLoaderByCurrentThread(), getClassLoaderByClass(ClassLoaderUtil.class));
+        if (null != callingClass){
+            list.add(getClassLoaderByClass(callingClass));
+        }
+        return list;
     }
 
     /**
@@ -343,25 +354,11 @@ public final class ClassLoaderUtil{
      * @since 1.6.2
      */
     private static String formatClassLoader(ClassLoader classLoader){
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        Map<String, Object> map = new LinkedHashMap<>();
         map.put("classLoader", "" + classLoader);
         map.put("classLoader[CanonicalName]", classLoader.getClass().getCanonicalName());
-        map.put("classLoader[Root Classpath]", "" + getRootClassPath(classLoader));
+        map.put("classLoader[Root Classpath]", "" + getResource(classLoader, ""));
         return JsonUtil.format(map);
-    }
-
-    /**
-     * 获得 class path.
-     *
-     * @param classLoader
-     *            the class loader
-     * @return 如果 <code>classLoader</code> 是null,抛出 {@link NullPointerException}<br>
-     * @see #getResource(ClassLoader, String)
-     * @since 1.6.2
-     */
-    private static URL getRootClassPath(ClassLoader classLoader){
-        Validate.notNull(classLoader, "classLoader can't be null!");
-        return getResource(classLoader, "");
     }
 
 }
