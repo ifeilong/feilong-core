@@ -340,7 +340,7 @@ public final class ClassUtil{
      * </ol>
      * </blockquote>
      * 
-     * <h3>几点区别:</h3>
+     * <h3>对比:</h3>
      * <blockquote>
      * 
      * <table border="1" cellspacing="0" cellpadding="4" summary="">
