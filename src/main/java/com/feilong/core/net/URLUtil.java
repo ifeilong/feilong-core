@@ -16,6 +16,8 @@
 package com.feilong.core.net;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,6 +26,9 @@ import java.net.URL;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.core.UncheckedIOException;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link URL} 工具类.
@@ -215,6 +220,33 @@ public final class URLUtil{
             return url.toURI();
         }catch (URISyntaxException e){
             throw new URIParseException(e);
+        }
+    }
+
+    /**
+     * 打开当前<code>url</code>的连接,并且读取返回 <code>InputStream</code>.
+     * 
+     * <p>
+     * 这个方法是以下方法的简写
+     * </p>
+     * 
+     * <pre>
+     * url.openConnection().getInputStream()
+     * </pre>
+     * 
+     * @param url
+     *            the url
+     * @return 如果 <code>url</code> 是null,返回 null<br>
+     * @see java.net.URL#openStream()
+     * @since 1.9.2
+     */
+    public static InputStream openStream(URL url){
+        try{
+            return url == null ? null : url.openStream();
+        }catch (IOException e){
+            String message = Slf4jUtil.format("can not open url:[{}]", url.toString());
+            LOGGER.error(message, e);
+            throw new UncheckedIOException(message, e);
         }
     }
     //******************************************************************************************************

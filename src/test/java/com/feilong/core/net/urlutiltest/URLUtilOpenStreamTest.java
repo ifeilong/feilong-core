@@ -15,23 +15,25 @@
  */
 package com.feilong.core.net.urlutiltest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import com.feilong.core.net.URLUtil;
 
 /**
- * The Class FeiLongURLUtilSuiteTests.
+ * The Class URLUtilOpenStreamTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-@RunWith(Suite.class)
-@SuiteClasses({ //
-                URLUtilGetUnionUrlTest.class,
-                URLUtilToURITest.class,
-                URLUtilToURLTest.class,
-                URLUtilOpenStreamTest.class,
-        //                
-})
-public class FeiLongURLUtilSuiteTests{
+public class URLUtilOpenStreamTest{
+
+    /**
+     * Test open stream null url.
+     */
+    @Test
+    public void testOpenStreamNullUrl(){
+        assertEquals(null, URLUtil.openStream(null));
+    }
 
 }

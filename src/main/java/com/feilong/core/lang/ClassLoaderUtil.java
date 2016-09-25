@@ -15,7 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.LinkedHashMap;
@@ -26,7 +25,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.UncheckedIOException;
+import com.feilong.core.net.URLUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
@@ -212,13 +211,7 @@ public final class ClassLoaderUtil{
      */
     public static InputStream getResourceAsStream(String resourceName,Class<?> callingClass){
         URL url = getResourceInAllClassLoader(resourceName, callingClass);
-        try{
-            return url == null ? null : url.openStream();
-        }catch (IOException e){
-            String message = Slf4jUtil.format("can not open resourceName:[{}]", resourceName);
-            LOGGER.error(message, e);
-            throw new UncheckedIOException(message, e);
-        }
+        return URLUtil.openStream(url);
     }
 
     /**
