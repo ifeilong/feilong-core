@@ -25,11 +25,15 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-                ClassUtilIsInterfaceParameterizedTest.class,
+@SuiteClasses({ //
+                ClassUtilGetClassTest.class,
                 ClassUtilIsAssignableFromParameterizedTest.class,
                 ClassUtilIsInstanceAnyClassParameterizedTest.class,
-                ClassUtilTest.class, })
+                ClassUtilIsInstanceTest.class,
+                ClassUtilIsInterfaceParameterizedTest.class,
+                ClassUtilToClassTest.class,
+        //                
+})
 public class FeiLongClassUtilSuiteTests{
 
 }

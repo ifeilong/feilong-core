@@ -88,14 +88,14 @@ public final class ClassLoaderUtil{
     }
 
     /**
-     * 查找具有给定名称的资源,资源是可以通过类代码以与代码基无关的方式访问的一些数据(图像、声音、文本等).
+     * 获得给定名称 <code>resourceName</code> 的资源.
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <p>
-     * 比如,在<code> src/test/resources</code> 目录下面有 <code>messages/feilong-core-test.properties</code> 资源文件,编译之后,地址会出现在
+     * 比如,在 <code>src/test/resources</code> 目录下面有 <code>messages/feilong-core-test.properties</code> 资源文件,编译之后,地址会出现在
      * <code>target/test-classes/messages/feilong-core-test.properties</code>
      * </p>
      * 
@@ -115,7 +115,7 @@ public final class ClassLoaderUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果 <code>resourceName</code> 是以斜杆 "/" 开头,那么会被截取,因为 ClassLoader解析方式不需要开头的斜杆, 请参见
+     * <li>如果 <code>resourceName</code> 是以斜杆 "/" 开头,那么会被截取,因为 {@link ClassLoader} 解析方式不需要开头的斜杆, 请参见
      * <code>org.springframework.core.io.ClassPathResource#ClassPathResource(String, ClassLoader)</code></li>
      * <li>"",表示classes 的根目录</li>
      * </ol>

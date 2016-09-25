@@ -83,7 +83,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 DateUtilToDateTest.class,
                 DateUtilToStringTest.class,
 
-                DateUtilTest.class,
         //                
 })
 public class FeiLongDateUtilSuiteTests{

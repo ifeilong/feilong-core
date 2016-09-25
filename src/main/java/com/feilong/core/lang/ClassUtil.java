@@ -278,7 +278,7 @@ public final class ClassUtil{
     }
 
     /**
-     * 解析参数,获得参数类型.
+     * 解析对象参数 <code>paramValues</code> ,获得参数类型.
      * 
      * <h3>示例:</h3>
      * 

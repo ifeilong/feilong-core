@@ -212,6 +212,7 @@ import java.util.Date;
  *      href=
  *      "http://www.infoq.com/cn/news/2015/01/java-date-format-with-caution?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global">
  *      慎用Java日期格式化</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Date_format_by_country">各国的时间格式</a>
  * @since 1.0.2
  */
 public final class DatePattern{
@@ -358,6 +359,11 @@ public final class DatePattern{
      * example: <span style="color:green">31/03/2014 14:53:39</span>
      * </p>
      * 
+     * <p>
+     * 各国的时间格式参见 <a href="https://en.wikipedia.org/wiki/Date_format_by_country">Date format by country</a>
+     * </p>
+     * 
+     * @see <a href="https://en.wikipedia.org/wiki/Date_format_by_country">各国的时间格式</a>
      */
     public static final String ddMMyyyyHHmmss                               = "dd/MM/yyyy HH:mm:ss";
 
