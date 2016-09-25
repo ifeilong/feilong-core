@@ -189,7 +189,7 @@ public final class ClassLoaderUtil{
 
     // *****************************************************
     /**
-     * This is a convenience method to load a resource as a stream.
+     * 加载资源 <code>resourceName</code>为 InputStream.
      * 
      * <h3>注意:</h3>
      * <blockquote>
