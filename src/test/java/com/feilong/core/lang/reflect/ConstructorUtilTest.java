@@ -40,9 +40,7 @@ public class ConstructorUtilTest{
      *             the class not found exception
      */
     @Test
-    public void newInstance() throws ClassNotFoundException{
-        LOGGER.debug(JsonUtil.format(ConstructorUtil.newInstance("com.feilong.test.User")));
-        LOGGER.debug(JsonUtil.format(ConstructorUtil.newInstance("com.feilong.test.User", 100L)));
+    public void newInstance(){
         LOGGER.debug(JsonUtil.format(ConstructorUtil.newInstance(User.class, Long.parseLong("5"))));
         LOGGER.debug(JsonUtil.format(ConstructorUtil.newInstance(User.class, 5, 8)));
     }

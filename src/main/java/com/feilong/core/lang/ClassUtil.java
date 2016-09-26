@@ -124,7 +124,30 @@ public final class ClassUtil{
     /**
      * 判断一个对象 <code>obj</code> 是不是某个类 <code>klass</code> 的实例.
      * 
-     * <h3>instanceof运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>instanceof :子 {@code ----->} 父</li>
+     * <li>isAssignableFrom :父 {@code ----->} 子</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ClassUtil.isInstance(new User(), null)               =   false
+     * ClassUtil.isInstance(new User(), Comparable.class)   =   true
+     * ClassUtil.isInstance("1234", CharSequence.class)     =   true
+     * ClassUtil.isInstance("1234", Integer.class)          =   false
+     * ClassUtil.isInstance(null, CharSequence.class)       =   false
+     * ClassUtil.isInstance(null, Integer.class)            =   false
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>instanceof 运算符/isAssignableFrom/isInstance(Object obj) 区别</h3>
      * 
      * <blockquote>
      * 
@@ -136,31 +159,32 @@ public final class ClassUtil{
      * 
      * <tr valign="top">
      * <td>instanceof运算符</td>
-     * <td>针对实例,是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例<br>
-     * 格式是:oo instanceof TypeName<br>
+     * <td>
+     * <b>针对实例</b>,是用来判断一个对象实例是否是一个类或接口的或其子类子接口的实例<br>
+     * instanceof是Java的一个二元操作符,和{@code ==,>,<}是同一类东东,作用是测试它左边的对象是否是它右边的类的实例,返回boolean类型的数据<br>
+     * 格式是: oo instanceof TypeName<br>
      * 第一个参数是对象实例名,第二个参数是具体的类名或接口名<br>
-     * instanceof是Java的一个二元操作符,{@code ==,>,<}和是同一类东东,作用是测试它左边的对象是否是它右边的类的实例,返回boolean类型的数据</td>
+     * </td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>isAssignableFrom</td>
-     * <td>针对class对象,是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的超类或接口.<br>
-     * 通常调用格式是Class1.isAssignableFrom(Class2)<br>
-     * 调用者和参数都是java.lang.Class类型.</td>
+     * <td>
+     * <b>针对class对象</b>,是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的超类或接口.<br>
+     * 格式是: Class1.isAssignableFrom(Class2)<br>
+     * 调用者和参数都是java.lang.Class类型.
+     * </td>
      * </tr>
      * 
      * <tr valign="top">
-     * <td>isInstance(Object obj)方法</td>
-     * <td>obj是被测试的对象,如果obj是调用这个方法的class或接口 的实例,则返回true.<br>
-     * 这个方法是instanceof运算符的 <span style="color:red">动态等价</span></td>
+     * <td>java.lang.Class.isInstance(Object obj)方法</td>
+     * <td>
+     * obj是被测试的对象,如果obj是调用这个方法的class或接口 的实例,则返回true.<br>
+     * 这个方法是instanceof运算符的 <span style="color:red">动态等价</span>
+     * </td>
      * </tr>
      * 
      * </table>
-     * 
-     * <p>
-     * instanceof :子 {@code ----->} 父 <br>
-     * isAssignableFrom :父 {@code ----->} 子
-     * </p>
      * </blockquote>
      * 
      * @param obj
@@ -168,7 +192,8 @@ public final class ClassUtil{
      * @param klass
      *            类
      * @return 如果 obj 是此类的实例,则返回 true;<br>
-     *         如果 <code>null == klass</code> 返回 false
+     *         如果 <code>obj</code> 是null,返回 false<br>
+     *         如果 <code>klass</code> 是null,返回 false<br>
      * @see java.lang.Class#isInstance(Object)
      */
     public static boolean isInstance(Object obj,Class<?> klass){

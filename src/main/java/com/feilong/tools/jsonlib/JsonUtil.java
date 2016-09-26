@@ -1072,7 +1072,7 @@ public final class JsonUtil{
      */
     public static <T> List<T> toList(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
         JSONArray jsonArray = toJSONArray(json);
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         for (int i = 0, j = jsonArray.size(); i < j; i++){
             list.add(toBean(jsonArray.getJSONObject(i), rootClass, classMap));
         }
@@ -1262,7 +1262,7 @@ public final class JsonUtil{
             return emptyMap();
         }
 
-        Map<String, T> map = new LinkedHashMap<String, T>();
+        Map<String, T> map = new LinkedHashMap<>();
 
         JSONObject jsonObject = toJSONObject(json);
         Iterator<String> keys = jsonObject.keys();

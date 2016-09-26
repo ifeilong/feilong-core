@@ -17,7 +17,6 @@ package com.feilong.core.lang.reflect;
 
 import java.lang.reflect.Constructor;
 
-import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 
 import com.feilong.core.lang.ClassUtil;
@@ -96,28 +95,7 @@ public final class ConstructorUtil{
      * </pre>
      * 
      * 返回 id 是100的user对象构造函数
-     *
-     * @param <T>
-     *            t
-     * @param className
-     *            类得名称,比如 com.feilong.test.User
-     * @param parameterValues
-     *            构造函数的参数
-     * @return 如果 <code>className</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>className</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see ClassUtil#getClass(String)
-     * @see #newInstance(Class, Object...)
-     * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T newInstance(String className,Object...parameterValues){
-        Validate.notBlank(className, "className can't be null/empty!");
-        return (T) newInstance(ClassUtil.getClass(className), parameterValues);
-    }
-
-    /**
-     * 新建实例,返回 a new instance of the specified class choosing the right constructor from the list of parameter types.
-     *
+     * 
      * @param <T>
      *            the generic type
      * @param klass
