@@ -28,7 +28,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 FieldUtilGetAllFieldListTest.class,
                 FieldUtilGetAllFieldNameAndValueMapTest.class,
-                FieldUtilGetFieldValueTest.class,
         //
 })
 public class FeiLongFieldUtilSuiteTests{

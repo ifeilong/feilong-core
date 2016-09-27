@@ -236,9 +236,10 @@ public final class FieldUtil{
      *         如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see org.apache.commons.lang3.reflect.FieldUtils#readField(Object, String, boolean)
      * @since 1.4.0
+     * @since 1.9.2 change to private
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getFieldValue(Object obj,String fieldName){
+    private static <T> T getFieldValue(Object obj,String fieldName){
         try{
             return (T) FieldUtils.readField(obj, fieldName, true);
         }catch (IllegalAccessException e){
