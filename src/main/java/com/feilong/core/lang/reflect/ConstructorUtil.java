@@ -17,6 +17,7 @@ package com.feilong.core.lang.reflect;
 
 import java.lang.reflect.Constructor;
 
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 
 import com.feilong.core.lang.ClassUtil;
@@ -30,7 +31,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <blockquote>
  * <ol>
  * <li>{@link #newInstance(Class, Object...)} 获得实例</li>
- * <li>{@link #newInstance(String, Object...)} 获得实例</li>
  * <li>{@link #newInstance(Class, Object[], Class[])} 获得实例</li>
  * </ol>
  * 
@@ -79,22 +79,25 @@ public final class ConstructorUtil{
     // [start] newInstance
 
     /**
-     * 新建实例,返回 a new instance of the specified class choosing the right constructor from the list of parameter types.
+     * 新建实例,返回指定类型 <code>klass</code> 的实例,使用正确的构造函数使用参数类型parameterValues.
      * 
      * <h3>示例:</h3>
      * 
+     * <blockquote>
+     * 
      * <pre class="code">
-     * User user = ConstructorUtil.newInstance("com.feilong.test.User")
+     * User user = ConstructorUtil.newInstance(User.class)
      * </pre>
      * 
-     * 将返回user对象,你还可以:
+     * 调用无参的构造函数,返回User对象,你还可以:
      * 
      * <pre class="code">
      * 
-     * User user1 = ConstructorUtil.newInstance("com.feilong.test.User", 100L);
+     * User user1 = ConstructorUtil.newInstance(User.class, 100L);
      * </pre>
      * 
      * 返回 id 是100的user对象构造函数
+     * </blockquote>
      * 
      * @param <T>
      *            the generic type
@@ -102,7 +105,8 @@ public final class ConstructorUtil{
      *            类
      * @param parameterValues
      *            构造函数的参数值, 比如100L
-     * @return the t
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         有任何异常(比如 NoSuchMethodException 找不到相关参数的构造函数),将抛出 {@link ReflectException}
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
      * @see java.lang.Class#getConstructor(Class...)
      * @see java.lang.reflect.Constructor#newInstance(Object...)
@@ -110,6 +114,7 @@ public final class ConstructorUtil{
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     public static <T> T newInstance(Class<T> klass,Object...parameterValues){
+        Validate.notNull(klass, "klass can't be null!");
         Class<?>[] parameterTypes = ClassUtil.toClass(parameterValues);
         return newInstance(klass, parameterValues, parameterTypes);
     }
@@ -125,11 +130,13 @@ public final class ConstructorUtil{
      *            the args
      * @param parameterTypes
      *            the parameter types
-     * @return the t
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         有任何异常(比如 NoSuchMethodException 找不到相关参数的构造函数),将抛出 {@link ReflectException}
      * @see org.apache.commons.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object[], Class[])
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
     public static <T> T newInstance(Class<T> klass,Object[] args,Class<?>[] parameterTypes){
+        Validate.notNull(klass, "klass can't be null!");
         try{
             return ConstructorUtils.invokeConstructor(klass, args, parameterTypes);
         }catch (Exception e){

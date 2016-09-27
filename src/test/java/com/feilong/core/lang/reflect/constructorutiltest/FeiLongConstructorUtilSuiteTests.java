@@ -13,26 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.reflect;
+package com.feilong.core.lang.reflect.constructorutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.lang.reflect.constructorutiltest.FeiLongConstructorUtilSuiteTests;
-
 /**
- * The Class FeiLongReflectSuiteTests.
+ * The Class FeiLongConstructorUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FieldUtilTest.class,
-                FeiLongConstructorUtilSuiteTests.class,
+
+                ConstructorUtilNewInstanceArgsAndParameterTypesTest.class,
+                ConstructorUtilNewInstanceTest.class,
+
         //
 })
-public class FeiLongReflectSuiteTests{
+public class FeiLongConstructorUtilSuiteTests{
 
 }
