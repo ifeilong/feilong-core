@@ -20,16 +20,16 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.core.lang.reflect.constructorutiltest.FeiLongConstructorUtilSuiteTests;
+import com.feilong.core.lang.reflect.fieldutiltest.FeiLongFieldUtilSuiteTests;
 
 /**
  * The Class FeiLongReflectSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FieldUtilTest.class,
+                FeiLongFieldUtilSuiteTests.class,
                 FeiLongConstructorUtilSuiteTests.class,
         //
 })
