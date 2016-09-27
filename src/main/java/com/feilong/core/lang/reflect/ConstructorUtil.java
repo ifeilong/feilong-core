@@ -40,13 +40,15 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <p>
  * 因此,不用担心 int{@code -->}Integer 原始类型参数和包装类型参数,以及父类/子类 这样的参数不匹配带来的问题
  * </p>
+ * 
  * </blockquote>
  * 
  * <h3>如果不想使用自动匹配的特性</h3>
  * 
  * <blockquote>
+ * 
  * <p>
- * 您可以使用 原生方法,下面两个是 获得精准的构造函数并实例,如果参数类型不匹配,那么就会抛异常
+ * 您可以使用原生方法,下面两个是 获得精准的构造函数并实例,如果参数类型不匹配,那么就会抛异常
  * </p>
  * 
  * <ol>
@@ -60,6 +62,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <li>{@link ConstructorUtils#getAccessibleConstructor(Class, Class...)}</li>
  * <li>{@link ConstructorUtils#getMatchingAccessibleConstructor(Class, Class...)}</li>
  * </ol>
+ * 
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -79,7 +82,7 @@ public final class ConstructorUtil{
     // [start] newInstance
 
     /**
-     * 新建实例,返回指定类型 <code>klass</code> 的实例,使用正确的构造函数使用参数类型parameterValues.
+     * 新建实例,返回指定类型 <code>klass</code> 的实例,使用正确的构造函数使用参数类型<code>parameterValues</code>.
      * 
      * <h3>示例:</h3>
      * 
@@ -120,27 +123,55 @@ public final class ConstructorUtil{
     }
 
     /**
-     * Returns a new instance of the specified class choosing the right constructor from the list of parameter types.
+     * 返回指定类型 <code>klass</code>,指定参数 <code>parameterValues</code> 和指定参数类型 <code>parameterTypes</code>的构造函数示例.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>定位并调用一个构造函数。构造函数的签名必须与赋值兼容的参数类型相匹配。</li>
+     * <li>和 {@link #newInstance(Class, Object...)}的区别, 在于 如果一个类有些重载的构造函数,并且参数类型相似, 此时使用这个方法可以精准定位到需要的构造函数</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * User user = ConstructorUtil.newInstance(User.class,null,null)
+     * </pre>
+     * 
+     * 调用无参的构造函数,返回User对象,你还可以:
+     * 
+     * <pre class="code">
+     * 
+     * User user1 = ConstructorUtil.newInstance(User.class, toArray(100L), toArray(Long.class));
+     * </pre>
+     * 
+     * 返回 id 是100的user对象构造函数
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param klass
-     *            the klass
-     * @param args
-     *            the args
+     *            the class to be constructed, not {@code null}
+     * @param parameterValues
+     *            the array of arguments, {@code null} treated as empty
      * @param parameterTypes
-     *            the parameter types
+     *            the array of parameter types, {@code null} treated as empty
      * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
      *         有任何异常(比如 NoSuchMethodException 找不到相关参数的构造函数),将抛出 {@link ReflectException}
      * @see org.apache.commons.lang3.reflect.ConstructorUtils#invokeConstructor(Class, Object[], Class[])
      * @see "org.springframework.beans.BeanUtils.instantiateClass(Constructor<T>, Object...)"
      */
-    public static <T> T newInstance(Class<T> klass,Object[] args,Class<?>[] parameterTypes){
+    public static <T> T newInstance(Class<T> klass,Object[] parameterValues,Class<?>[] parameterTypes){
         Validate.notNull(klass, "klass can't be null!");
         try{
-            return ConstructorUtils.invokeConstructor(klass, args, parameterTypes);
+            return ConstructorUtils.invokeConstructor(klass, parameterValues, parameterTypes);
         }catch (Exception e){
-            throw new ReflectException(Slf4jUtil.format("class:[{}].args:[{}],parameterTypes:[{}]", klass, args, parameterTypes), e);
+            throw new ReflectException(
+                            Slf4jUtil.format("class:[{}].args:[{}],parameterTypes:[{}]", klass, parameterValues, parameterTypes),
+                            e);
         }
     }
 }

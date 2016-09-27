@@ -26,19 +26,21 @@ import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.test.User;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+
 /**
- * The Class ConstructorUtilNewInstanceTest.
+ * The Class ConstructorUtilNewInstanceArgsAndParameterTypesTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConstructorUtilNewInstanceTest{
+public class ConstructorUtilNewInstanceArgsAndParameterTypesTest{
 
     /**
      * Test new instance.
      */
     @Test
     public void testNewInstance(){
-        User user = ConstructorUtil.newInstance(User.class, 5L, 8);
+        User user = ConstructorUtil.newInstance(User.class, toArray(5L, 8), toArray(Long.class, Integer.class));
         assertThat(user, allOf(hasProperty("id", is(5L)), hasProperty("age", is(8))));
     }
 
@@ -47,7 +49,7 @@ public class ConstructorUtilNewInstanceTest{
      */
     @Test
     public void testNewInstanceDefault(){
-        User user = ConstructorUtil.newInstance(User.class);
+        User user = ConstructorUtil.newInstance(User.class, null, null);
         assertThat(user, allOf(hasProperty("id", is(0L)), hasProperty("name", is("feilong"))));
     }
 
@@ -56,7 +58,7 @@ public class ConstructorUtilNewInstanceTest{
      */
     @Test(expected = ReflectException.class)
     public void testNewInstanceNotExist(){
-        ConstructorUtil.newInstance(User.class, "feilong", 8, "feilong");
+        ConstructorUtil.newInstance(User.class, toArray("feilong", 8, "feilong"), null);
     }
 
     /**
@@ -64,6 +66,6 @@ public class ConstructorUtilNewInstanceTest{
      */
     @Test(expected = NullPointerException.class)
     public void testNewInstanceNullKlass(){
-        ConstructorUtil.newInstance(null, 5L);
+        ConstructorUtil.newInstance(null, toArray(5L), toArray(Long.class));
     }
 }
