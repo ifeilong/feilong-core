@@ -178,6 +178,14 @@ public final class FieldUtil{
     /**
      * 获得 <code>klass</code> 排除某些 <code>excludeFieldNames</code> 之后的字段list.
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>是所有字段的值(<b>不是属性</b>)</li>
+     * <li>自动过滤私有并且静态的字段,比如 LOGGER serialVersionUID</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param klass
      *            the klass
      * @param excludeFieldNames
@@ -189,8 +197,8 @@ public final class FieldUtil{
      * @see FieldUtils#getAllFieldsList(Class)
      * @since 1.7.1
      */
-    //no static
     public static List<Field> getAllFieldList(final Class<?> klass,String...excludeFieldNames){
+        Validate.notNull(klass, "klass can't be null!");
         //获得给定类的所有声明字段 {@link Field},包括所有的parents,包括 public/protect/private/inherited...
         List<Field> fieldList = FieldUtils.getAllFieldsList(klass);
         if (isNullOrEmpty(fieldList)){
