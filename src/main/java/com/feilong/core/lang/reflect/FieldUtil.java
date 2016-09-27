@@ -28,33 +28,30 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.selectRejected;
 
 /**
- * focus on {@link Field} 反射工具类
+ * focus on {@link Field} 反射工具类.
  * 
- * <p>
- * The ability is provided to break the scoping restrictions coded by the programmer.<br>
- * This can allow fields to be changed that shouldn't be.
- * This facility should be used with care.
- * </p>
- * 
- * <h3>和 {@link Field} 相关的几个方法的区别:</h3>
+ * <h3>{@link Field} 相关的几个方法的区别:</h3>
  * 
  * <blockquote>
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
+ * 
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link Class#getDeclaredFields() getDeclaredFields}</td>
  * <td>返回 {@link Field} 对象的一个数组,这些对象反映此 Class 对象所表示的类或接口所声明的<span style="color:green">所有字段</span>.
@@ -101,6 +98,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * 如果在第 1、2 两步没有找到任何字段,且 C 有一个<b>超类 S</b>,则在 S 上递归调用该算法.如果 C 没有超类,则抛出 NoSuchFieldException.<br>
  * </td>
  * </tr>
+ * 
  * </table>
  * </blockquote>
  * 
@@ -122,17 +120,24 @@ public final class FieldUtil{
     }
 
     /**
-     * 获得这个对象 <code>obj</code> 所有字段的值(<b>不是属性</b>),key是 fieldName,value 是值.
+     * 获得对象 <code>obj</code> 所有字段的值(<b>不是属性</b>),key是 fieldName,value 是值.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>是所有字段的值(<b>不是属性</b>)</li>
+     * <li>自动过滤私有并且静态的字段,比如 LOGGER serialVersionUID</li>
+     * <li>返回的map 是 TreeMap,顺序是 field name 的顺序</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * User user = new User(12L);
      * LOGGER.debug(JsonUtil.format(FieldUtil.getAllFieldNameAndValueMap(user, "date")));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
@@ -142,7 +147,6 @@ public final class FieldUtil{
      * "age": null,
      * "id": 12
      * }
-     * 
      * </pre>
      * 
      * </blockquote>
@@ -150,18 +154,21 @@ public final class FieldUtil{
      * @param obj
      *            the obj
      * @param excludeFieldNames
-     *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
+     *            需要排除的field names,如果是null或者empty, 那么不会判断
      * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>fieldList</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>excludeFieldNames</code> 是null或者empty,解析所有的field<br>
+     *         如果 <code>obj</code>没有字段或者字段都被参数 <code>excludeFieldNames</code> 排除掉了,返回 {@link Collections#emptyMap()}<br>
      * @see #getAllFieldList(Class, String...)
      * @see #getFieldValue(Object, String)
      */
     public static Map<String, Object> getAllFieldNameAndValueMap(Object obj,String...excludeFieldNames){
+        Validate.notNull(obj, "obj can't be null!");
+
         List<Field> fieldList = getAllFieldList(obj.getClass(), excludeFieldNames);
         if (isNullOrEmpty(fieldList)){
             return emptyMap();
         }
-        Map<String, Object> map = new TreeMap<String, Object>();
+        Map<String, Object> map = new TreeMap<>();
         for (Field field : fieldList){
             map.put(field.getName(), getFieldValue(obj, field.getName()));
         }
@@ -174,9 +181,11 @@ public final class FieldUtil{
      * @param klass
      *            the klass
      * @param excludeFieldNames
-     *            需要排除的field names,如果传递过来是nullOrEmpty 那么不会判断
+     *            需要排除的field names,如果传递过来是null或者empty 那么不会判断
      * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>excludeFieldNames</code> 是null或者empty,解析所有的field<br>
      *         如果 {@link FieldUtils#getAllFieldsList(Class)} 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>obj</code>没有字段或者字段都被参数 <code>excludeFieldNames</code> 排除掉了,返回 {@link Collections#emptyMap()}<br>
      * @see FieldUtils#getAllFieldsList(Class)
      * @since 1.7.1
      */
@@ -202,7 +211,7 @@ public final class FieldUtil{
                 return isStatic;
             }
         };
-        return CollectionsUtil.selectRejected(fieldList, PredicateUtils.orPredicate(excludeFieldPredicate, staticPredicate));
+        return selectRejected(fieldList, PredicateUtils.orPredicate(excludeFieldPredicate, staticPredicate));
     }
 
     /**
