@@ -1086,7 +1086,7 @@ public final class JsonUtil{
     // [start]toMap
 
     /**
-     * 这是简单的 将json字符串转成map.
+     * 将简单的json字符串转成<code>map</code>.
      * 
      * <h3>示例:</h3>
      * <blockquote>
