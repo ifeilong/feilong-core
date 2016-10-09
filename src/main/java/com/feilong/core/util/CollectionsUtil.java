@@ -918,7 +918,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User(2L));
      * list.add(new User(5L));
      * list.add(new User(5L));
