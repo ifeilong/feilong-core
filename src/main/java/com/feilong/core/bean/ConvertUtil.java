@@ -46,6 +46,7 @@ import org.apache.commons.beanutils.converters.NumberConverter;
 import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.LocaleUtils;
@@ -57,6 +58,7 @@ import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.SortUtil;
+import com.feilong.core.util.transformer.SimpleClassTransformer;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
@@ -1623,6 +1625,273 @@ public final class ConvertUtil{
             return emptyMap();
         }
         return sortMapByKeyAsc((Map) properties);//为了log方便,使用 treeMap
+    }
+
+    /**
+     * 将诸如 Map{@code <String, String>} 类型转成 Map{@code <Integer, Integer>} 类型.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合复杂的类型转换场景,如果只是简单的类型转换,你可以直接调用 {@link #toMap(Map, Class, Class)}</li>
+     * <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
+     * <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
+     * <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <Integer, String>} (key和value 使用不同的转换器)</li>
+     * <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>} (单值转数组)</li>
+     * <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>} (数组转数组)</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景1:</b> 将Map{@code <String, String>} 转 Map{@code <Integer, Integer>} 类型
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap("1", "2");
+     * 
+     * <span style="color:green">//key和value 都转成integer 使用相同的转换器</span>
+     * Transformer{@code <String, Integer>} transformer = new SimpleClassTransformer{@code <>}(Integer.class);
+     * 
+     * Map{@code <Integer, Integer>} returnMap = toMap(map, transformer, transformer);
+     * 
+     * <span style="color:green">// 输出测试</span>
+     * for (Map.Entry{@code <Integer, Integer>} entry : returnMap.entrySet()){
+     *     Integer key = entry.getKey();
+     *     Integer value = entry.getValue();
+     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * key:[1],value:[2]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * <b>场景2:</b> Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>}
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap("1", "2,2");
+     * 
+     * Transformer{@code <String, Integer>} keyTransformer = new SimpleClassTransformer{@code <>}(Integer.class);
+     * Transformer{@code <String, Integer[]>} valueTransformer = new SimpleClassTransformer{@code <>}(Integer[].class);
+     * 
+     * <span style="color:green">//key和value转成不同的类型</span>
+     * Map{@code <Integer, Integer[]>} returnMap = toMap(map, keyTransformer, valueTransformer);
+     * 
+     * <span style="color:green">// 输出测试</span>
+     * for (Map.Entry{@code <Integer, Integer[]>} entry : returnMap.entrySet()){
+     *     Integer key = entry.getKey();
+     *     Integer[] value = entry.getValue();
+     * 
+     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * key:[1],value:[[2, 2]]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * <b>场景3:</b> Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>}
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String[], String[]>} map = toMap(toArray("1"), toArray("2", "8"));
+     * 
+     * Transformer{@code <String[], Integer[]>} keyTransformer = new SimpleClassTransformer{@code <>}(Integer[].class);
+     * Transformer{@code <String[], Long[]>} valueTransformer = new SimpleClassTransformer{@code <>}(Long[].class);
+     * 
+     * <span style="color:green">//key和value转成不同的类型</span>
+     * Map{@code <Integer[], Long[]>} returnMap = toMap(map, keyTransformer, valueTransformer);
+     * 
+     * assertThat(returnMap, allOf(hasEntry(toArray(1), toArray(2L, 8L))));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param <I>
+     *            返回的map ,key的类型
+     * @param <J>
+     *            返回的map ,value的类型
+     * @param inputMap
+     *            the input map
+     * @param keyTransformer
+     *            key 转换器,如果是null,那么key直接使用<code>inputMap</code>的key<br>
+     * @param valueTransformer
+     *            value 转换器,如果是null,那么value直接使用<code>inputMap</code>的value<br>
+     * @return 如果 <code>inputMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keyTransformer</code> 是null,那么key直接使用<code>inputMap</code>的key<br>
+     *         如果 <code>valueTransformer</code> 是null,那么value 直接使用<code>inputMap</code>的 value<br>
+     * @see org.apache.commons.collections4.MapUtils#transformedMap(Map, Transformer, Transformer)
+     * @see org.apache.commons.collections4.map.TransformedMap#transformedMap(Map, Transformer, Transformer)
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/497">issues497</a>
+     * @since 1.9.2
+     */
+    @SuppressWarnings("unchecked")
+    public final static <K, V, I, J> Map<I, J> toMap(
+                    Map<K, V> inputMap,
+                    final Transformer<K, I> keyTransformer,
+                    final Transformer<V, J> valueTransformer){
+        if (isNullOrEmpty(inputMap)){
+            return emptyMap();
+        }
+
+        Map<I, J> returnMap = new LinkedHashMap<>(inputMap.size());
+
+        for (Map.Entry<K, V> entry : inputMap.entrySet()){
+            K key = entry.getKey();
+            V value = entry.getValue();
+
+            returnMap.put(
+                            null == keyTransformer ? (I) key : keyTransformer.transform(key),
+                            null == valueTransformer ? (J) value : valueTransformer.transform(value));
+        }
+        return returnMap;
+    }
+
+    /**
+     * 将诸如 Map{@code <String, String>} 类型转成 Map{@code <Integer, Integer>} 类型.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合只是简单的将key value类型转换,而不需要自己再构建Transformer,再去调用 {@link #toMap(Map, Transformer, Transformer)} ,简化操作</li>
+     * <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
+     * <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
+     * <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <Integer, String>} (key和value 使用不同的转换器)</li>
+     * <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>} (单值转数组)</li>
+     * <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>} (数组转数组)</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景1:</b> 将Map{@code <String, String>} 转 Map{@code <Integer, Integer>} 类型
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap("1", "2");
+     * Map{@code <Integer, Integer>} returnMap = toMap(map, Integer.class, Integer.class);
+     * 
+     * <span style="color:green">// 输出测试</span>
+     * for (Map.Entry{@code <Integer, Integer>} entry : returnMap.entrySet()){
+     *     Integer key = entry.getKey();
+     *     Integer value = entry.getValue();
+     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * key:[1],value:[2]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * <b>场景2:</b> Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>}
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap("1", "2,2");
+     * 
+     * <span style="color:green">//key和value转成不同的类型</span>
+     * Map{@code <Integer, Integer[]>} returnMap = toMap(map, Integer.class, Integer[].class);
+     * 
+     * <span style="color:green">// 输出测试</span>
+     * for (Map.Entry{@code <Integer, Integer[]>} entry : returnMap.entrySet()){
+     *     Integer key = entry.getKey();
+     *     Integer[] value = entry.getValue();
+     * 
+     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * key:[1],value:[[2, 2]]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * <b>场景3:</b> Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>}
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String[], String[]>} map = toMap(toArray("1"), toArray("2", "8"));
+     * 
+     * <span style="color:green">//key和value转成不同的类型</span>
+     * Map{@code <Integer[], Long[]>} returnMap = toMap(map, Integer[].class, Long[].class);
+     * 
+     * assertThat(returnMap, allOf(hasEntry(toArray(1), toArray(2L, 8L))));
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param <I>
+     *            返回的map ,key的类型
+     * @param <J>
+     *            返回的map ,value的类型
+     * @param inputMap
+     *            the input map
+     * @param keyTargetType
+     *            key需要转换成什么类型,类型可以和原map的类型相同或者可以设置为null,均表示返回的map使用<code>inputMap</code>原样的<code>key</code>,不会进行类型转换
+     * @param valueTargetType
+     *            value 需要转换成什么类型,类型可以和原map的类型相同或者可以设置为null,均表示返回的map使用<code>inputMap</code>原样的<code>value</code>,不会进行类型转换
+     * @return 如果 <code>inputMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keyTargetType</code> 是null,那么key直接使用<code>inputMap</code>的key<br>
+     *         如果 <code>valueTargetType</code> 是null,那么value 直接使用<code>inputMap</code>的 value<br>
+     * @see #toMap(Map, Transformer, Transformer)
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/497">issues497</a>
+     * @since 1.9.2
+     */
+    public final static <K, V, I, J> Map<I, J> toMap(Map<K, V> inputMap,final Class<I> keyTargetType,final Class<J> valueTargetType){
+        if (isNullOrEmpty(inputMap)){
+            return emptyMap();
+        }
+
+        Transformer<K, I> keyTransformer = null == keyTargetType ? null : new SimpleClassTransformer<K, I>(keyTargetType);
+        Transformer<V, J> valueTransformer = null == valueTargetType ? null : new SimpleClassTransformer<V, J>(valueTargetType);
+
+        return toMap(inputMap, keyTransformer, valueTransformer);
     }
 
     //*************************************toProperties*********************************************************

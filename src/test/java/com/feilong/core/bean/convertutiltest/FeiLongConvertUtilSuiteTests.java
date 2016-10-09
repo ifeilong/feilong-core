@@ -47,6 +47,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 ConvertUtilToMapCollectionTest.class,
                 ConvertUtilToMapKeyValueTest.class,
                 ConvertUtilToMapPropertiesTest.class,
+                ConvertUtilToMapTargetTypeClassTest.class,
+                ConvertUtilToMapTransformerTest.class,
                 ConvertUtilToPropertiesTest.class,
                 ConvertUtilToStringArrayToStringConfigParameterizedTest.class,
                 ConvertUtilToStringCollectionToStringConfigParameterizedTest.class,
