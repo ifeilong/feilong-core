@@ -29,7 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ClassUtilGetClassTest.class,
                 ClassUtilIsAssignableFromParameterizedTest.class,
                 ClassUtilIsInstanceAnyClassParameterizedTest.class,
-                ClassUtilIsInstanceTest.class,
+                ClassUtilIsInstanceParameterizedTest.class,
                 ClassUtilIsInterfaceParameterizedTest.class,
                 ClassUtilToClassTest.class,
         //                
