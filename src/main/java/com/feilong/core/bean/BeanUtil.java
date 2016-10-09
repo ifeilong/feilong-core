@@ -198,6 +198,8 @@ public final class BeanUtil{
      * 类型转换过程中,如果发现值是数组,只会取第一个元素重新构造数组转到 <code>toObj</code>中,规则参见 {@link ConvertUtil#toString(Object)}</li>
      * <li>如果需要copy的两个对象属性之间的<b>类型一样</b>的话,那么调用这个方法会有<span style="color:red">性能消耗</span>,此时<b>强烈建议调用</b>
      * {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
+     * <li>不支持<code>toObj</code>是map类型,从{@link BeanUtilsBean#copyProperties(Object, Object)}源码可以看出, <code class="code">fromObj</code>可以是map
+     * </li>
      * </ol>
      * </blockquote>
      * 
@@ -421,7 +423,7 @@ public final class BeanUtil{
     // [start] populate(填充) 把properties/map里面的值放入bean中
 
     /**
-     * 把properties/map里面的值 <code>populate</code> <b>(填充)</b>到bean中.
+     * 把properties/map里面的值 <code>populate</code> <b>(填充)</b>到<code>bean</code>中.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -432,6 +434,8 @@ public final class BeanUtil{
      * <code>bean</code>对象</li>
      * <li>如果properties key中有bean中不存在的属性,那么该条数据自动忽略</li>
      * <li>如果properties key中有null,那么该条数据自动忽略,see {@link BeanUtilsBean#populate(Object, Map)} line 817</li>
+     * <li><code>bean</code>可以是Map类型,不会转换之后的key和value都会是Object类型,而不是声明的类型,see {@link BeanUtilsBean#setProperty(Object, String, Object)} line
+     * 928</li>
      * </ol>
      * </blockquote>
      * 

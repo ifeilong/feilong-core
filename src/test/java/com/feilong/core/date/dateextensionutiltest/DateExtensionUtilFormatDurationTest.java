@@ -50,6 +50,9 @@ public class DateExtensionUtilFormatDurationTest{
         assertEquals("25秒841毫秒", formatDuration(25841));
     }
 
+    /**
+     * Test format duration long 1.
+     */
     @Test
     @Ignore
     public void testFormatDurationLong1(){

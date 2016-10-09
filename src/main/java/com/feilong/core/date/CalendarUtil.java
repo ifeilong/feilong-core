@@ -298,8 +298,8 @@ final class CalendarUtil{
      * @param calendar
      *            the calendar
      * @return 如果 <code>calendar</code> 是null,抛出 {@link NullPointerException}
-     * @since 1.3.0
      * @see #resetDayEnd(Calendar)
+     * @since 1.3.0
      */
     static Calendar resetYearEnd(Calendar calendar){
         Validate.notNull(calendar, "calendar can't be null!");
