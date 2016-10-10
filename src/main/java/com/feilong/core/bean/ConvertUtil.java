@@ -1750,7 +1750,7 @@ public final class ConvertUtil{
      * @since 1.9.2
      */
     @SuppressWarnings("unchecked")
-    public final static <K, V, I, J> Map<I, J> toMap(
+    public static <K, V, I, J> Map<I, J> toMap(
                     Map<K, V> inputMap,
                     final Transformer<K, I> keyTransformer,
                     final Transformer<V, J> valueTransformer){
@@ -1883,7 +1883,7 @@ public final class ConvertUtil{
      * @see <a href="https://github.com/venusdrogon/feilong-core/issues/497">issues497</a>
      * @since 1.9.2
      */
-    public final static <K, V, I, J> Map<I, J> toMap(Map<K, V> inputMap,final Class<I> keyTargetType,final Class<J> valueTargetType){
+    public static <K, V, I, J> Map<I, J> toMap(Map<K, V> inputMap,final Class<I> keyTargetType,final Class<J> valueTargetType){
         if (isNullOrEmpty(inputMap)){
             return emptyMap();
         }
