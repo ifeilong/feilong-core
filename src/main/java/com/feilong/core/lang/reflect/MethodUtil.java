@@ -204,7 +204,20 @@ public final class MethodUtil{
      * 
      * </blockquote>
      * </li>
-     * <li>如果你要精准调用,请使用 {@link #invokeMethod(Object, String, Object[], Class[])}</li>
+     * <li>如果你要精准调用,请使用 {@link #invokeMethod(Object, String, Object[], Class[])}
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Class<?>[] parameterTypes1 = { Integer.TYPE };
+     * assertEquals("age int:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(5), parameterTypes1));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * </ol>
      * </blockquote>
      *
@@ -236,7 +249,57 @@ public final class MethodUtil{
     }
 
     /**
-     * 指定指定对象 <code>object</code> 的指定方法名称 <code>methodName</code>.
+     * 执行指定对象 <code>object</code> 的指定方法 <code>methodName</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>使用场景:适合比如上传下载 service有很多相同类型的方法,比如 importXX1,importXX2,对于这种,可以使用调用此方法来快速调用方法</li>
+     * <li>支持调用对象父类方法</li>
+     * <li>调用的是 {@link MethodUtils#invokeMethod(Object, String, Object...)},内部调用的是 {@link java.lang.Class#getMethods()}来处理,<b>不支持</b>
+     * 调用private 方法</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如有以下的
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class OverloadMethod{
+     * 
+     *     public String age(int age){
+     *         return "age int:" + age;
+     *     }
+     * 
+     *     public String age(Integer age){
+     *         return "age Integer:" + age;
+     *     }
+     * }
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 测试调用
+     * </p>
+     *
+     * <pre class="code">
+     * 
+     * Class<?>[] parameterTypes1 = { Integer.TYPE };
+     * assertEquals("age int:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(5), parameterTypes1));
+     * 
+     * Class<?>[] parameterTypes2 = { Integer.class };
+     * assertEquals("age Integer:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(Integer.parseInt("5")), parameterTypes2));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type

@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
+import static org.apache.commons.lang3.ArrayUtils.EMPTY_CLASS_ARRAY;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
 import static org.junit.Assert.assertEquals;
 
@@ -26,37 +27,45 @@ import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.test.User;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+
 /**
- * The Class MethodUtilInvokeMethodWithParamsTest.
+ * The Class MethodUtilInvokeMethodWithParamsAndClassTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class MethodUtilInvokeMethodWithParamsTest{
+public class MethodUtilInvokeMethodWithParamsAndClassTest{
 
     /**
      * Test invoke method all pack type.
      */
     @Test
     public void testInvokeMethodAllPackType(){
-        assertEquals("age Integer:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", 5));
-        assertEquals("age Integer:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", Integer.parseInt("5")));
+        Class<?>[] parameterTypes1 = { Integer.TYPE };
+        assertEquals("age int:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(5), parameterTypes1));
+
+        Class<?>[] parameterTypes2 = { Integer.class };
+        assertEquals(
+                        "age Integer:5",
+                        MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(Integer.parseInt("5")), parameterTypes2));
     }
 
     //***************************************************************************
-    /**
-     * Test invoke method empty params.
-     */
-    @Test
-    public void testInvokeMethodNoParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId"));
-    }
 
     /**
      * Test invoke method null params.
      */
     @Test
     public void testInvokeMethodNullParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", null));
+        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", null, EMPTY_CLASS_ARRAY));
+    }
+
+    /**
+     * Test invoke method null params and null classs.
+     */
+    @Test
+    public void testInvokeMethodNullParamsAndNullClasss(){
+        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", null, null));
     }
 
     /**
@@ -64,7 +73,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
      */
     @Test
     public void testInvokeMethodEmptyParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", EMPTY_OBJECT_ARRAY));
+        assertEquals(0L, MethodUtil.invokeMethod(new User(), "getId", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY));
     }
 
     /**
@@ -73,7 +82,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
     //*******************PrivateMethod********************************************************
     @Test(expected = ReflectException.class)
     public void testInvokeMethodPrivateEmptyParams(){
-        assertEquals(0L, MethodUtil.invokeMethod(new PrivateMethod(), "name"));
+        assertEquals(0L, MethodUtil.invokeMethod(new PrivateMethod(), "name", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY));
     }
 
     /**
@@ -88,7 +97,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
      */
     @Test(expected = NoSuchMethodException.class)
     public void testInvokeMethodPrivateMethodEmptyParams() throws NoSuchMethodException,IllegalAccessException,InvocationTargetException{
-        org.apache.commons.lang3.reflect.MethodUtils.invokeMethod(new PrivateMethod(), "name");
+        org.apache.commons.lang3.reflect.MethodUtils.invokeMethod(new PrivateMethod(), "name", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
     }
 
     /**
@@ -97,7 +106,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
     //*******************parent********************************************************
     @Test
     public void testInvokeMethodParentEmptyParams(){
-        assertEquals("parent method", MethodUtil.invokeMethod(new SimpleChild(), "getMessage"));
+        assertEquals("parent method", MethodUtil.invokeMethod(new SimpleChild(), "getMessage", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY));
     }
 
     /**
@@ -106,7 +115,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
     //**********************MethodNotExist*****************************************************
     @Test(expected = ReflectException.class)
     public void testInvokeMethodMethodNotExist(){
-        MethodUtil.invokeMethod(new User(), "getId1", EMPTY_OBJECT_ARRAY);
+        MethodUtil.invokeMethod(new User(), "getId1", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
     }
 
     //***************************************************************************
@@ -116,7 +125,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
      */
     @Test(expected = NullPointerException.class)
     public void testInvokeMethodNullObj(){
-        MethodUtil.invokeMethod(null, "getId");
+        MethodUtil.invokeMethod(null, "getId", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
     }
 
     /**
@@ -124,7 +133,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
      */
     @Test(expected = NullPointerException.class)
     public void testInvokeMethodNullMethodName(){
-        MethodUtil.invokeMethod(new User(), null);
+        MethodUtil.invokeMethod(new User(), null, EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
     }
 
     /**
@@ -132,7 +141,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testInvokeMethodEmptyMethodName(){
-        MethodUtil.invokeMethod(new User(), "");
+        MethodUtil.invokeMethod(new User(), "", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
     }
 
     /**
@@ -140,6 +149,6 @@ public class MethodUtilInvokeMethodWithParamsTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testInvokeMethodBlankMethodName(){
-        MethodUtil.invokeMethod(new User(), " ");
+        MethodUtil.invokeMethod(new User(), " ", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
     }
 }

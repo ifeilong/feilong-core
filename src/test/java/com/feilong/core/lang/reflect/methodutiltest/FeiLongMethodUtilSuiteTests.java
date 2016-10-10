@@ -27,6 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 MethodUtilInvokeMethodWithParamsTest.class,
+                MethodUtilInvokeMethodWithParamsAndClassTest.class,
                 MethodUtilInvokeStaticMethodTest.class
         //
 })

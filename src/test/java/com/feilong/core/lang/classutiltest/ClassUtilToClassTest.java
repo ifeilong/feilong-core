@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.classutiltest;
 
+import static org.apache.commons.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
@@ -50,6 +51,6 @@ public class ClassUtilToClassTest{
      */
     @Test
     public void testToClassEmptyObj(){
-        assertArrayEquals(new Class[0], ClassUtil.toClass(new Object[0]));
+        assertArrayEquals(new Class[0], ClassUtil.toClass(EMPTY_OBJECT_ARRAY));
     }
 }
