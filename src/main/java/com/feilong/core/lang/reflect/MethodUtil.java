@@ -100,7 +100,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <td>
  * 返回一个包含某些 Method 对象的数组,
  * <p>
- * 这些对象反映此 Class 对象所表示的类或接口(包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口)的<span style="color:green">公共(public) member</span>方法.<br>
+ * 反映此 Class 所表示的类或接口(包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口)的<span style="color:green">公共(public) member</span>方法.<br>
  * </p>
  * 
  * <b>返回数组中的元素没有排序.</b><br>
@@ -115,8 +115,9 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <td>
  * 返回 Method 对象的一个数组,
  * <p>
- * 这些对象反映此 Class 对象表示的类或接口声明的所有方法,包括<span style="color:green">公共(public)、保护(protected)、默认(包)访问(default (package)
- * access)和私有方法(private)</span>,但 <span style="color:red">不包括继承(inherited)</span>的方法.
+ * 反映此 Class 对象表示的类或接口声明的所有方法,<br>
+ * 包括<span style="color:green">公共(public)、保护(protected)、默认(包)访问(default (package) access)和私有方法(private)</span>,<br>
+ * 但 <span style="color:red">不包括继承(inherited)</span>的方法.
  * </p>
  * 如果该类声明带有相同参数类型的多个公共成员方法,则它们都包含在返回的数组中.
  * <p>
@@ -150,14 +151,61 @@ public final class MethodUtil{
     // [start]
 
     /**
-     * 指定指定对象 <code>object</code> 的指定方法名称 <code>methodName</code>.
+     * 执行指定对象 <code>object</code> 的指定方法 <code>methodName</code>.
      * 
-     * <h3>使用场景:</h3>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>使用场景:适合比如上传下载 service有很多相同类型的方法,比如 importXX1,importXX2,对于这种,可以使用调用此方法来快速调用方法</li>
+     * <li>支持调用对象父类方法</li>
+     * <li>调用的是 {@link MethodUtils#invokeMethod(Object, String, Object...)},内部调用的是 {@link java.lang.Class#getMethods()}来处理,<b>不支持</b>
+     * 调用private 方法</li>
+     * <li>params将会转成<b>包装类型</b>来寻找method
+     * 
+     * <h3>示例:</h3>
      * 
      * <blockquote>
+     * 
      * <p>
-     * 比如 上传下载 service 有很多相同类型的方法,比如 importXX1,importXX2,对于这种,可以使用调用此方法来快速调用方法
+     * 如有以下的
      * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class OverloadMethod{
+     * 
+     *     public String age(int age){
+     *         return "age int:" + age;
+     *     }
+     * 
+     *     public String age(Integer age){
+     *         return "age Integer:" + age;
+     *     }
+     * }
+     * 
+     * </pre>
+     * 
+     * 测试调用
+     *
+     * <pre class="code">
+     * 
+     * public void testInvokeMethod(){
+     *     LOGGER.debug("" + MethodUtil.invokeMethod(new OverloadMethod(), "age", 5));
+     *     LOGGER.debug("" + MethodUtil.invokeMethod(new OverloadMethod(), "age", Integer.parseInt("5")));
+     * }
+     * </pre>
+     * 
+     * <b>结果都是:</b>
+     * 
+     * <pre class="code">
+     * age Integer:5
+     * age Integer:5
+     * </pre>
+     * 
+     * </blockquote>
+     * </li>
+     * <li>如果你要精准调用,请使用 {@link #invokeMethod(Object, String, Object[], Class[])}</li>
+     * </ol>
      * </blockquote>
      *
      * @param <T>
@@ -171,13 +219,18 @@ public final class MethodUtil{
      * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>obj</code>没有指定的<code>methodName</code>方法,抛出 {@link ReflectException}<br>
+     *         如果 <code>params</code> 是null,系统内部会使用 empty 的class 数组<br>
+     *         如果 <code>params</code> 是empty,表示不需要参数<br>
      * @see java.lang.reflect.Method#invoke(Object, Object...)
-     * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object...)
      * @see com.feilong.core.lang.ClassUtil#toClass(Object...)
+     * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object...)
+     * @see org.apache.commons.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
      */
     public static <T> T invokeMethod(Object obj,String methodName,Object...params){
         Validate.notNull(obj, "obj can't be null!");
         Validate.notBlank(methodName, "methodName can't be blank!");
+
         final Class<?>[] parameterTypes = ClassUtil.toClass(params);
         return invokeMethod(obj, methodName, params, parameterTypes);
     }
@@ -198,7 +251,11 @@ public final class MethodUtil{
      * @return 如果 <code>object</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>obj</code>没有指定的<code>methodName</code>方法,抛出 {@link ReflectException}<br>
+     *         如果 <code>parameterTypes</code> 是null,系统内部会使用 empty 的class 数组<br>
+     *         如果 <code>parameterTypes</code> 是empty,表示不需要参数<br>
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeMethod(Object, String, Object[], Class[])
+     * @see org.apache.commons.lang3.reflect.MethodUtils#getMatchingAccessibleMethod(Class, String, Class...)
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")
@@ -212,6 +269,8 @@ public final class MethodUtil{
             throw new ReflectException(Slf4jUtil.format(pattern, object, methodName, args, parameterTypes), e);
         }
     }
+
+    //***********************************************************************************************************
 
     /**
      * 执行静态方法.
