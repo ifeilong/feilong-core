@@ -397,6 +397,11 @@ public final class MethodUtil{
      * <pre class="code">
      * Class<?>[] parameterTypes1 = { Integer.TYPE };
      * assertEquals("static age int:5", MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(5), parameterTypes1));
+     * 
+     * Class<?>[] parameterTypes2 = { Integer.class };
+     * assertEquals(
+     *                 "static age Integer:5",
+     *                 MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(Integer.parseInt("5")), parameterTypes2));
      * </pre>
      * 
      * </blockquote>
@@ -427,7 +432,57 @@ public final class MethodUtil{
     }
 
     /**
-     * 执行静态方法.
+     * 执行指定类型 <code>klass</code> 的指定静态方法 <code>staticMethodName</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>支持调用对象父类静态方法</li>
+     * <li>不可以调用非静态的方法</li>
+     * <li>
+     * 调用的是 {@link MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])},内部调用的是 {@link java.lang.Class#getMethods()}来处理,
+     * <b>不支持</b> 调用private 方法
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如有以下的
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class OverloadStaticMethod{
+     * 
+     *     public static String age(int age){
+     *         return "static age int:" + age;
+     *     }
+     * 
+     *     public static String age(Integer age){
+     *         return "static age Integer:" + age;
+     *     }
+     * }
+     * 
+     * </pre>
+     * 
+     * 测试调用
+     *
+     * <pre class="code">
+     * Class<?>[] parameterTypes1 = { Integer.TYPE };
+     * assertEquals("static age int:5", MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(5), parameterTypes1));
+     * 
+     * Class<?>[] parameterTypes2 = { Integer.class };
+     * assertEquals(
+     *                 "static age Integer:5",
+     *                 MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(Integer.parseInt("5")), parameterTypes2));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
