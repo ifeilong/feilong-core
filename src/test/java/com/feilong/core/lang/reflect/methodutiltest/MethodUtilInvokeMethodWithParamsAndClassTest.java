@@ -109,6 +109,13 @@ public class MethodUtilInvokeMethodWithParamsAndClassTest{
         assertEquals("parent method", MethodUtil.invokeMethod(new SimpleChild(), "getMessage", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY));
     }
 
+    @Test
+    public void testInvokeStaticMethodParentEmptyParams(){
+        assertEquals(
+                        "parent static method",
+                        MethodUtil.invokeMethod(new SimpleChild(), "getStaticMessage", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY));
+    }
+
     /**
      * Test invoke method method not exist.
      */

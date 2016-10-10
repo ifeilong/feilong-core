@@ -15,24 +15,13 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+public class OverloadStaticMethod{
 
-/**
- * The Class FeiLongMethodUtilSuiteTests.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-@RunWith(Suite.class)
-@SuiteClasses({ //
-                MethodUtilInvokeMethodWithParamsTest.class,
-                MethodUtilInvokeMethodWithParamsAndClassTest.class,
-                MethodUtilInvokeStaticMethodWithParamsTest.class,
-                MethodUtilInvokeStaticMethodWithParamsAndClassTest.class,
-        //
-})
+    public static String age(int age){
+        return "static age int:" + age;
+    }
 
-public class FeiLongMethodUtilSuiteTests{
-
+    public static String age(Integer age){
+        return "static age Integer:" + age;
+    }
 }

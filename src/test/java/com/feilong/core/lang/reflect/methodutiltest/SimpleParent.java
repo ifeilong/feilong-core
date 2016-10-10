@@ -20,4 +20,8 @@ public class SimpleParent{
     public String getMessage(){
         return "parent method";
     }
+
+    public static String getStaticMessage(){
+        return "parent static method";
+    }
 }

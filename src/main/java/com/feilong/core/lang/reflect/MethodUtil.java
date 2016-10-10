@@ -158,6 +158,7 @@ public final class MethodUtil{
      * <ol>
      * <li>使用场景:适合比如上传下载 service有很多相同类型的方法,比如 importXX1,importXX2,对于这种,可以使用调用此方法来快速调用方法</li>
      * <li>支持调用对象父类方法</li>
+     * <li>也支持调用自己对象或者父类的静态方法,结果相似于 {@link #invokeStaticMethod(Class, String, Object...)},除了参数不同,一个是对象,一个是class,不过通常不建议这么使用</li>
      * <li>调用的是 {@link MethodUtils#invokeMethod(Object, String, Object...)},内部调用的是 {@link java.lang.Class#getMethods()}来处理,<b>不支持</b>
      * 调用private 方法</li>
      * <li>params将会转成<b>包装类型</b>来寻找method
@@ -256,6 +257,7 @@ public final class MethodUtil{
      * <ol>
      * <li>使用场景:适合比如上传下载 service有很多相同类型的方法,比如 importXX1,importXX2,对于这种,可以使用调用此方法来快速调用方法</li>
      * <li>支持调用对象父类方法</li>
+     * <li>也支持调用自己对象或者父类的静态方法,结果相似于 {@link #invokeStaticMethod(Class, String, Object[], Class[])},除了参数不同,一个是对象,一个是class,不过通常不建议这么使用</li>
      * <li>调用的是 {@link MethodUtils#invokeMethod(Object, String, Object...)},内部调用的是 {@link java.lang.Class#getMethods()}来处理,<b>不支持</b>
      * 调用private 方法</li>
      * </ol>
@@ -336,25 +338,92 @@ public final class MethodUtil{
     //***********************************************************************************************************
 
     /**
-     * 执行静态方法.
+     * 执行指定类型 <code>klass</code> 的指定静态方法 <code>staticMethodName</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>支持调用对象父类静态方法</li>
+     * <li>不可以调用非静态的方法</li>
+     * <li>调用的是 {@link MethodUtils#invokeStaticMethod(Class, String, Object...)},内部调用的是 {@link java.lang.Class#getMethods()}来处理,<b>不支持</b>
+     * 调用private 方法</li>
+     * <li>params将会转成<b>包装类型</b>来寻找method
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如有以下的
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class OverloadStaticMethod{
+     * 
+     *     public static String age(int age){
+     *         return "static age int:" + age;
+     *     }
+     * 
+     *     public static String age(Integer age){
+     *         return "static age Integer:" + age;
+     *     }
+     * }
+     * 
+     * </pre>
+     * 
+     * 测试调用
+     *
+     * <pre class="code">
+     * MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", 5);
+     * MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", Integer.parseInt("5"));
+     * </pre>
+     * 
+     * <b>结果都是:</b>
+     * 
+     * <pre class="code">
+     * static age Integer:5
+     * static age Integer:5
+     * </pre>
+     * 
+     * </blockquote>
+     * </li>
+     * <li>如果你要精准调用,请使用 {@link #invokeStaticMethod(Class, String, Object[], Class[])}
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Class<?>[] parameterTypes1 = { Integer.TYPE };
+     * assertEquals("static age int:5", MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(5), parameterTypes1));
+     * </pre>
+     * 
+     * </blockquote>
+     * </ol>
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
      * @param klass
      *            the klass
-     * @param methodName
-     *            方法名
+     * @param staticMethodName
+     *            静态方法名
      * @param params
      *            动态参数
      * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>staticMethodName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>staticMethodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>staticMethodName</code> 是实例方法,非静态方法,抛出 {@link ReflectException}<br>
+     *         如果 <code>klass</code>没有指定的<code>staticMethodName</code>方法,抛出 {@link ReflectException}<br>
+     *         如果 <code>parameterTypes</code> 是null,系统内部会使用 empty 的class 数组<br>
+     *         如果 <code>parameterTypes</code> 是empty,表示不需要参数<br>
      * @see java.lang.reflect.Method#invoke(Object, Object...)
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object...)
      */
-    public static <T> T invokeStaticMethod(Class<?> klass,String methodName,Object...params){
+    public static <T> T invokeStaticMethod(Class<?> klass,String staticMethodName,Object...params){
         final Class<?>[] parameterTypes = ClassUtil.toClass(params);
-        return invokeStaticMethod(klass, methodName, params, parameterTypes);
+        return invokeStaticMethod(klass, staticMethodName, params, parameterTypes);
     }
 
     /**
@@ -364,27 +433,31 @@ public final class MethodUtil{
      *            the generic type
      * @param klass
      *            the klass
-     * @param methodName
-     *            the method name
+     * @param staticMethodName
+     *            静态方法名
      * @param args
      *            the args
      * @param parameterTypes
      *            the parameter types
      * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>methodName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>methodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>staticMethodName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>staticMethodName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>staticMethodName</code> 是实例方法,非静态方法,抛出 {@link ReflectException}<br>
+     *         如果 <code>klass</code>没有指定的<code>staticMethodName</code>方法,抛出 {@link ReflectException}<br>
+     *         如果 <code>parameterTypes</code> 是null,系统内部会使用 empty 的class 数组<br>
+     *         如果 <code>parameterTypes</code> 是empty,表示不需要参数<br>
      * @see org.apache.commons.lang3.reflect.MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])
      * @since 1.1.1
      */
     @SuppressWarnings("unchecked")
-    public static <T> T invokeStaticMethod(final Class<?> klass,final String methodName,Object[] args,Class<?>[] parameterTypes){
+    public static <T> T invokeStaticMethod(final Class<?> klass,final String staticMethodName,Object[] args,Class<?>[] parameterTypes){
         Validate.notNull(klass, "klass can't be null!");
-        Validate.notBlank(methodName, "methodName can't be blank!");
+        Validate.notBlank(staticMethodName, "staticMethodName can't be blank!");
         try{
-            return (T) MethodUtils.invokeStaticMethod(klass, methodName, args, parameterTypes);
+            return (T) MethodUtils.invokeStaticMethod(klass, staticMethodName, args, parameterTypes);
         }catch (Exception e){
-            String pattern = "invoke Static Method Exception,class:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
-            throw new ReflectException(Slf4jUtil.format(pattern, klass.getName(), methodName, args, parameterTypes), e);
+            String pattern = "invoke Static Method Exception,class:[{}],staticMethodName:[{}],args:[{}],parameterTypes:[{}]";
+            throw new ReflectException(Slf4jUtil.format(pattern, klass.getName(), staticMethodName, args, parameterTypes), e);
         }
     }
 }

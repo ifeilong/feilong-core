@@ -37,7 +37,7 @@ public class MethodUtilInvokeMethodWithParamsTest{
      * Test invoke method all pack type.
      */
     @Test
-    public void testInvokeMethodAllPackType(){
+    public void testInvokeStaticMethodAllPackType(){
         assertEquals("age Integer:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", 5));
         assertEquals("age Integer:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", Integer.parseInt("5")));
     }
@@ -98,6 +98,11 @@ public class MethodUtilInvokeMethodWithParamsTest{
     @Test
     public void testInvokeMethodParentEmptyParams(){
         assertEquals("parent method", MethodUtil.invokeMethod(new SimpleChild(), "getMessage"));
+    }
+
+    @Test
+    public void testInvokeStaticMethodParentEmptyParams(){
+        assertEquals("parent static method", MethodUtil.invokeMethod(new SimpleChild(), "getStaticMessage"));
     }
 
     /**
