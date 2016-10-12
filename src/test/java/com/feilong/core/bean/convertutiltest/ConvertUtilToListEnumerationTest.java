@@ -43,7 +43,7 @@ public class ConvertUtilToListEnumerationTest{
      */
     @Test
     public void testToList(){
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         Collections.addAll(list, "a", "b");
 
         Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);

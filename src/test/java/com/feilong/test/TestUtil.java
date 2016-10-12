@@ -36,7 +36,7 @@ public class TestUtil{
      * @return the list
      */
     public static List<Object[]> toDataList(Object[] trueElements,Object[] falseElements){
-        List<Object[]> list = new ArrayList<Object[]>();
+        List<Object[]> list = new ArrayList<>();
         for (Object trueElement : trueElements){
             list.add(new Object[] { trueElement, true });
         }

@@ -763,7 +763,7 @@ public final class StringUtil{
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
 
-        List<String> tokens = new ArrayList<String>();
+        List<String> tokens = new ArrayList<>();
 
         StringTokenizer stringTokenizer = new StringTokenizer(str, delimiters);
         while (stringTokenizer.hasMoreTokens()){

@@ -55,7 +55,7 @@ public class ConvertUtilToIteratorTest{
      */
     @Test
     public void testToIteratorCollection(){
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add("aaaa");
         list.add("nnnnn");
 

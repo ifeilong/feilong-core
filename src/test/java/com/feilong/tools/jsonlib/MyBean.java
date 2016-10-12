@@ -30,7 +30,7 @@ public class MyBean{
     private Long         id;
 
     /** The data. */
-    private List<Object> data = new ArrayList<Object>();
+    private List<Object> data = new ArrayList<>();
 
     /**
      * 获得 data.

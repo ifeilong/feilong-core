@@ -71,7 +71,7 @@ public class ConvertUtilToListVarargsTest{
      */
     @Test
     public void testToListNullElementArray(){
-        List<User> list = new ArrayList<User>();
+        List<User> list = new ArrayList<>();
         list.add(null);
 
         assertEquals(list, toList((User) null));
