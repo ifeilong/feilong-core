@@ -304,7 +304,7 @@ public final class JsonUtil{
         if (null == inputMap){
             return EMPTY;
         }
-        Map<K, Object> simpleMap = new TreeMap<K, Object>();
+        Map<K, Object> simpleMap = new TreeMap<>();
         for (Map.Entry<K, V> entry : inputMap.entrySet()){
             V value = entry.getValue();
             simpleMap.put(entry.getKey(), isAllowFormatType(value, allowFormatClassTypes) ? value : String.valueOf(value)); //注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
@@ -691,7 +691,7 @@ public final class JsonUtil{
     private static JsonFormatConfig buildJsonFormatConfig(Object obj){
         List<Field> fieldsListWithAnnotation = FieldUtils.getFieldsListWithAnnotation(obj.getClass(), SensitiveWords.class);
         if (isNotNullOrEmpty(fieldsListWithAnnotation)){
-            Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<String, JsonValueProcessor>();
+            Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
             for (Field field : fieldsListWithAnnotation){
                 propertyNameAndJsonValueProcessorMap.put(field.getName(), SENSITIVE_WORDS_JSONVALUE_PROCESSOR);
             }

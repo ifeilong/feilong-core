@@ -758,7 +758,7 @@ public final class MapUtil{
         if (isNullOrEmpty(map)){
             return emptyMap();
         }
-        return isNullOrEmpty(excludeKeys) ? map : removeKeys(new LinkedHashMap<K, T>(map), excludeKeys); //保证元素的顺序 
+        return isNullOrEmpty(excludeKeys) ? map : removeKeys(new LinkedHashMap<>(map), excludeKeys); //保证元素的顺序 
     }
 
     /**
@@ -1143,7 +1143,7 @@ public final class MapUtil{
      * @since 1.7.1
      */
     public static <K, V> HashMap<K, V> newHashMap(int expectedSize){
-        return new HashMap<K, V>(toInitialCapacity(expectedSize));
+        return new HashMap<>(toInitialCapacity(expectedSize));
     }
 
     /**
@@ -1243,7 +1243,7 @@ public final class MapUtil{
      * @since 1.7.1
      */
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize){
-        return new LinkedHashMap<K, V>(toInitialCapacity(expectedSize));
+        return new LinkedHashMap<>(toInitialCapacity(expectedSize));
     }
 
     /**

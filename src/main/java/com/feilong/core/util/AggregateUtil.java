@@ -598,7 +598,7 @@ public final class AggregateUtil{
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
-        Map<T, Integer> map = new LinkedHashMap<T, Integer>();
+        Map<T, Integer> map = new LinkedHashMap<>();
         for (O obj : objectCollection){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
