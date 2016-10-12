@@ -40,7 +40,7 @@ public class MapUtilPutIfValueNotNullTest{
      */
     @Test
     public void testPutIfValueNotNull(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         MapUtil.putIfValueNotNull(map, "1000001", 5);
         assertThat(map, allOf(hasEntry("1000001", 5)));
     }
@@ -50,7 +50,7 @@ public class MapUtilPutIfValueNotNullTest{
      */
     @Test
     public void testPutIfValueNotNullEmpty(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         MapUtil.putIfValueNotNull(map, "1000001", "");
         assertThat(map, allOf(hasEntry("1000001", "")));
     }
@@ -60,7 +60,7 @@ public class MapUtilPutIfValueNotNullTest{
      */
     @Test
     public void testPutIfValueNotNullNullValue(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         MapUtil.putIfValueNotNull(map, "1000001", null);
         assertThat(map, allOf(not(hasKey("1000001"))));
     }

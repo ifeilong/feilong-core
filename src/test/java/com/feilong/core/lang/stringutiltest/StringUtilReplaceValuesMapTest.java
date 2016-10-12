@@ -48,7 +48,7 @@ public class StringUtilReplaceValuesMapTest{
      */
     @Test
     public void testReplace(){
-        Map<String, Object> valuesMap = new HashMap<String, Object>();
+        Map<String, Object> valuesMap = new HashMap<>();
         valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
         valuesMap.put("user", new User(1L));
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
@@ -59,7 +59,7 @@ public class StringUtilReplaceValuesMapTest{
      */
     @Test
     public void testReplace3(){
-        Map<String, Object> valuesMap = new HashMap<String, Object>();
+        Map<String, Object> valuesMap = new HashMap<>();
         valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
         valuesMap.put("user", 1L);
         LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
@@ -90,7 +90,7 @@ public class StringUtilReplaceValuesMapTest{
         String template = "/home/webuser/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
 
         Date date = new Date();
-        Map<String, String> valuesMap = new HashMap<String, String>();
+        Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put("yearMonth", DateUtil.toString(date, YEAR_AND_MONTH));
         valuesMap.put("expressDeliveryType", "sf");
         valuesMap.put("fileName", DateUtil.toString(date, TIMESTAMP));

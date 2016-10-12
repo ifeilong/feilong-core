@@ -39,7 +39,7 @@ public class SortUtilSortMapByValueAscTest{
      */
     @Test
     public void testSortByValueASC(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);

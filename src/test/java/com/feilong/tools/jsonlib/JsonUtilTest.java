@@ -262,9 +262,9 @@ public class JsonUtilTest extends AbstractJsonTest{
      */
     @Test
     public void name1(){
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
 
-        Map<String, Object> map1 = new HashMap<String, Object>();
+        Map<String, Object> map1 = new HashMap<>();
 
         String[] aStrings = { "aaaa", "bbbb" };
         map1.put("b", aStrings);

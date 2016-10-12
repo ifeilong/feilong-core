@@ -54,7 +54,7 @@ public class ParamUtilToNaturalOrderingQueryStringTest{
      */
     @Test
     public void testToNaturalOrderingString(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", "create_salesorder");
         map.put("_input_charset", "gbk");
         map.put("totalActual", "210.00");
@@ -70,7 +70,7 @@ public class ParamUtilToNaturalOrderingQueryStringTest{
      */
     @Test
     public void testToNaturalOrderingStringNullValue(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", null);
         map.put("totalActual", "210.00");
         map.put("province", "江苏省");

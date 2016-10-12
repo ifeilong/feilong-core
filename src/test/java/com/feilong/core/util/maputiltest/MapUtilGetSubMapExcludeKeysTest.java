@@ -43,7 +43,7 @@ public class MapUtilGetSubMapExcludeKeysTest{
      */
     @Test
     public void testGetSubMapExcludeKeys(){
-        Map<String, Integer> map = new LinkedHashMap<String, Integer>();
+        Map<String, Integer> map = new LinkedHashMap<>();
 
         map.put("a", 3007);
         map.put("b", 3001);
@@ -78,7 +78,7 @@ public class MapUtilGetSubMapExcludeKeysTest{
      */
     @Test
     public void testGetSubMapNullExcludeKeys(){
-        Map<String, Integer> map = new LinkedHashMap<String, Integer>();
+        Map<String, Integer> map = new LinkedHashMap<>();
 
         map.put("a", 3007);
         map.put("b", 3001);

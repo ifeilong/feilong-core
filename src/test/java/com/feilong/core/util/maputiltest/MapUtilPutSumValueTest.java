@@ -39,7 +39,7 @@ public class MapUtilPutSumValueTest{
      */
     @Test
     public void testPutSumValue(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         MapUtil.putSumValue(map, "1000001", 5);
         MapUtil.putSumValue(map, "1000002", 5);
         MapUtil.putSumValue(map, "1000002", 5);
@@ -52,7 +52,7 @@ public class MapUtilPutSumValueTest{
      */
     @Test
     public void testPutSumValueNegativeValue(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         MapUtil.putSumValue(map, "1000001", 5);
         MapUtil.putSumValue(map, "1000002", 5);
         MapUtil.putSumValue(map, "1000002", -5);

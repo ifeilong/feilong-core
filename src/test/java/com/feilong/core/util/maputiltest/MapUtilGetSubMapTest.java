@@ -42,7 +42,7 @@ public class MapUtilGetSubMapTest{
      */
     @Test
     public void testGetSubMap(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3001);
@@ -56,7 +56,7 @@ public class MapUtilGetSubMapTest{
      */
     @Test
     public void testGetSubMap1(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3001);
@@ -70,7 +70,7 @@ public class MapUtilGetSubMapTest{
      */
     @Test
     public void testGetSubMapNullKeys(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3001);
@@ -83,7 +83,7 @@ public class MapUtilGetSubMapTest{
      */
     @Test
     public void testGetSubMapEmptyKeys(){
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3001);

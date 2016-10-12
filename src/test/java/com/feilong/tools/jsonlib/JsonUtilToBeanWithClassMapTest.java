@@ -45,7 +45,7 @@ public class JsonUtilToBeanWithClassMapTest extends AbstractJsonTest{
     @Test
     public void testToBean(){
         String json = "{'data':[{'name':'get'},{'name':'set'}],'id':5}";
-        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+        Map<String, Class<?>> classMap = new HashMap<>();
         classMap.put("data", Person.class);
 
         MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
@@ -57,7 +57,7 @@ public class JsonUtilToBeanWithClassMapTest extends AbstractJsonTest{
      */
     @Test
     public void testToBean3(){
-        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+        Map<String, Class<?>> classMap = new HashMap<>();
         classMap.put("userAddresseList", UserAddress.class);
 
         User user = JsonUtil.toBean(USER_JSON_STRING, User.class, classMap);
@@ -69,7 +69,7 @@ public class JsonUtilToBeanWithClassMapTest extends AbstractJsonTest{
      */
     @Test
     public void testToBeanNullJson(){
-        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+        Map<String, Class<?>> classMap = new HashMap<>();
         classMap.put("userAddresseList", UserAddress.class);
 
         User user = JsonUtil.toBean(null, User.class, classMap);

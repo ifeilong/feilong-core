@@ -40,7 +40,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOneKey(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", "create_salesorder");
         map.put("paymentType", "unionpay_mobile");
 
@@ -52,7 +52,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesTwoKeys(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", "create_salesorder");
         map.put("paymentType", "unionpay_mobile");
 
@@ -65,7 +65,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesNoExistKey(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", "create_salesorder");
         map.put("paymentType", "unionpay_mobile");
 
@@ -85,7 +85,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOrderByIncludeKeysNullKeys(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", "create_salesorder");
         map.put("paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, null));
@@ -96,7 +96,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOrderByIncludeKeysEmptyKeys(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", "create_salesorder");
         map.put("paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map));
@@ -107,7 +107,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOrderByIncludeKeysEmptyKeys1(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", "create_salesorder");
         map.put("paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, ConvertUtil.<String> toArray()));
@@ -118,7 +118,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOrderByIncludeKeysNullElementKeys(){
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("service", "create_salesorder");
         map.put("paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, ConvertUtil.<String> toArray((String) null)));

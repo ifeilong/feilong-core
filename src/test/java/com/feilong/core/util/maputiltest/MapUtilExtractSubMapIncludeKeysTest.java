@@ -45,7 +45,7 @@ public class MapUtilExtractSubMapIncludeKeysTest{
      */
     @Test
     public void testExtractSubMap2(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(1L, new User(100L));
         map.put(2L, new User(200L));
         map.put(53L, new User(300L));
@@ -67,7 +67,7 @@ public class MapUtilExtractSubMapIncludeKeysTest{
     //*********************************************************************************************
     @Test
     public void testExtractSubMapNullIncludeKeys(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(5L, new User(500L));
         map.put(4L, new User(400L));
 
@@ -80,7 +80,7 @@ public class MapUtilExtractSubMapIncludeKeysTest{
      */
     @Test
     public void testExtractSubMapEmptyIncludeKeys(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(5L, new User(500L));
         map.put(4L, new User(400L));
 
@@ -112,7 +112,7 @@ public class MapUtilExtractSubMapIncludeKeysTest{
      */
     @Test(expected = NullPointerException.class)
     public void testExtractSubMapNullExtractPropertyName(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, toArray(5L, 4L), null);
@@ -123,7 +123,7 @@ public class MapUtilExtractSubMapIncludeKeysTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, toArray(5L, 4L), "");
@@ -134,7 +134,7 @@ public class MapUtilExtractSubMapIncludeKeysTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName1(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, toArray(5L, 4L), " ");

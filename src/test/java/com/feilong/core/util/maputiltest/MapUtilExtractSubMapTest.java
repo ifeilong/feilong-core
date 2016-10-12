@@ -42,7 +42,7 @@ public class MapUtilExtractSubMapTest{
      */
     @Test
     public void testExtractSubMap3(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(1L, new User(100L));
         map.put(2L, new User(200L));
         map.put(5L, new User(500L));
@@ -74,7 +74,7 @@ public class MapUtilExtractSubMapTest{
      */
     @Test(expected = NullPointerException.class)
     public void testExtractSubMapNullExtractPropertyName(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, null);
@@ -85,7 +85,7 @@ public class MapUtilExtractSubMapTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, "");
@@ -96,7 +96,7 @@ public class MapUtilExtractSubMapTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName1(){
-        Map<Long, User> map = new LinkedHashMap<Long, User>();
+        Map<Long, User> map = new LinkedHashMap<>();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, " ");

@@ -43,7 +43,7 @@ public class JsonUtilToMapWithRootClassAndClassMapTest{
     @Test
     public void toMap3(){
         String json = "{'mybean':{'data':[{'name':'get'}]}}";
-        Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+        Map<String, Class<?>> classMap = new HashMap<>();
         classMap.put("data", Person.class);
 
         Map<String, MyBean> map = JsonUtil.toMap(json, MyBean.class, classMap);

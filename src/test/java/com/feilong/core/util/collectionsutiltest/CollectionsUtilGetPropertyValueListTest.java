@@ -71,7 +71,7 @@ public class CollectionsUtilGetPropertyValueListTest{
         List<UserAddress> userAddresseList = toList(userAddress);
 
         //*******************************************************
-        Map<String, String> attrMap = new HashMap<String, String>();
+        Map<String, String> attrMap = new HashMap<>();
         attrMap.put("蜀国", "赵子龙");
         attrMap.put("魏国", "张文远");
         attrMap.put("吴国", "甘兴霸");
