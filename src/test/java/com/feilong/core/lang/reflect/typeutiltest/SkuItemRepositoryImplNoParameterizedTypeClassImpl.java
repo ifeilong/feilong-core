@@ -15,6 +15,6 @@
  */
 package com.feilong.core.lang.reflect.typeutiltest;
 
-public class SkuItemRepositoryImplNoParameterizedTypeClassImpl extends SkuItemRepositoryImplParentNoParameterizedTypeClass{
+public class SkuItemRepositoryImplNoParameterizedTypeClassImpl extends BaseSkuItemRepositoryImplParentNoParameterizedTypeClass{
 
 }

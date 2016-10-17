@@ -127,17 +127,58 @@ public final class TypeUtil{
 
     /**
      * 获得某个类的接口上面的泛型参数的类型.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>对于以下的场景:</b>
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public interface BaseSolrRepository{@code <T, PK extends Serializable>} {
+     * 
+     * }
+     * 
+     * public class SkuItemRepositoryInterfaceImpl implements BaseSolrRepository{@code <SkuItem, Long>}{
+     * 
+     * }
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 如果你需要提取 SkuItemRepositoryInterfaceImpl类 接口 BaseSolrRepository{@code <SkuItem, Long>}中的泛型参数
+     * </p>
+     * 
+     * <b>你可以使用:</b>
+     * 
+     * <pre class="code">
+     * Class<?>[] rawTypes = TypeUtil
+     *                 .getGenericInterfacesParameterizedRawTypes(SkuItemRepositoryInterfaceImpl.class, BaseSolrRepository.class);
+     * 
+     * assertArrayEquals(toArray(SkuItem.class, Long.class), rawTypes);
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param klass
      *            the klass
      * @param extractInterfaceClass
-     *            the extract interface class
-     * @return the generic interfaces parameterized raw types
+     *            待抽取的接口类型
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>extractInterfaceClass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>klass</code> 是没有泛型接口,抛出 {@link NullPointerException}<br>
+     *         如果 <code>klass</code> 有泛型接口但是其中没有指定的接口类型<code>extractInterfaceClass</code> ,抛出 {@link NullPointerException}<br>
      * @see #getGenericInterfacesParameterizedType(Class, Class)
      * @see #extractActualTypeArgumentClassArray(ParameterizedType)
      * @since 1.1.1
      */
     public static Class<?>[] getGenericInterfacesParameterizedRawTypes(Class<?> klass,Class<?> extractInterfaceClass){
+        Validate.notNull(klass, "klass can't be null/empty!");
+        Validate.notNull(extractInterfaceClass, "extractInterfaceClass can't be null/empty!");
+
         ParameterizedType parameterizedType = getGenericInterfacesParameterizedType(klass, extractInterfaceClass);
         return extractActualTypeArgumentClassArray(parameterizedType);
     }
@@ -151,15 +192,12 @@ public final class TypeUtil{
      *            the klass
      * @param extractInterfaceClass
      *            the extract interface class
-     * @return the generic interfaces parameterized type
+     * @return 如果 klass没有泛型接口,返回null
      * @see java.lang.Class#getGenericInterfaces()
      * @see java.lang.reflect.ParameterizedType#getRawType()
      * @since 1.1.1
      */
     private static ParameterizedType getGenericInterfacesParameterizedType(Class<?> klass,Class<?> extractInterfaceClass){
-        Validate.notNull(klass, "klass can't be null/empty!");
-        Validate.notNull(extractInterfaceClass, "extractInterfaceClass can't be null/empty!");
-
         Type[] genericInterfaces = klass.getGenericInterfaces();
         for (Type genericInterface : genericInterfaces){
             if (genericInterface instanceof ParameterizedType){

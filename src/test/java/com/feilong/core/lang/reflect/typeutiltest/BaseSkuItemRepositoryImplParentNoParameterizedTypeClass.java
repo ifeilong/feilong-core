@@ -15,7 +15,6 @@
  */
 package com.feilong.core.lang.reflect.typeutiltest;
 
-@SuppressWarnings("unused")
-public class SkuItemRepositoryImplNoParentClass<T> {
+public class BaseSkuItemRepositoryImplParentNoParameterizedTypeClass{
 
 }

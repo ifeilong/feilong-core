@@ -15,7 +15,11 @@
  */
 package com.feilong.core.lang.reflect.typeutiltest;
 
-@SuppressWarnings("unused")
-public class SkuItemRepositoryImplNoParentClass<T> {
+/**
+ * 查询商品.
+ * 
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
+public interface SkuItemRepository extends BaseSolrRepository<SkuItem, Long>{
 
 }

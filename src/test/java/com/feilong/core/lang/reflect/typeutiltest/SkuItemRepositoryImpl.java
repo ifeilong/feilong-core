@@ -15,7 +15,11 @@
  */
 package com.feilong.core.lang.reflect.typeutiltest;
 
-@SuppressWarnings("unused")
-public class SkuItemRepositoryImplNoParentClass<T> {
+/**
+ * 通过索引方式实现的查询商品的Dao.
+ * 
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
+public class SkuItemRepositoryImpl extends BaseSolrRepositoryFirstImpl<SkuItem, Long> implements SkuItemRepository{
 
 }

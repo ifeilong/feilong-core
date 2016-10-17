@@ -13,9 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.feilong.core.lang.reflect.typeutiltest;
 
+import java.io.Serializable;
+
+/**
+ * The Interface BaseSolrRepository.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @param <T>
+ *            the generic type
+ * @param <PK>
+ *            the generic type
+ */
 @SuppressWarnings("unused")
-public class SkuItemRepositoryImplNoParentClass<T> {
+public interface BaseSolrRepository2<T, PK extends Serializable> {
 
 }
