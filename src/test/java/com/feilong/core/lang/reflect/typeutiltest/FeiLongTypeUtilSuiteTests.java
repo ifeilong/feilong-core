@@ -13,30 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.reflect;
+package com.feilong.core.lang.reflect.typeutiltest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.core.lang.reflect.constructorutiltest.FeiLongConstructorUtilSuiteTests;
-import com.feilong.core.lang.reflect.fieldutiltest.FeiLongFieldUtilSuiteTests;
-import com.feilong.core.lang.reflect.methodutiltest.FeiLongMethodUtilSuiteTests;
-import com.feilong.core.lang.reflect.typeutiltest.FeiLongTypeUtilSuiteTests;
-
 /**
- * The Class FeiLongReflectSuiteTests.
+ * The Class FeiLongTypeUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FeiLongConstructorUtilSuiteTests.class,
-                FeiLongFieldUtilSuiteTests.class,
-                FeiLongMethodUtilSuiteTests.class,
-                FeiLongTypeUtilSuiteTests.class,
+                TypeUtilGetGenericInterfacesParameterizedRawTypesTest.class,
+                TypeUtilGetGenericSuperclassParameterizedRawTypesTest.class,
         //
 })
-public class FeiLongReflectSuiteTests{
+
+public class FeiLongTypeUtilSuiteTests{
 
 }

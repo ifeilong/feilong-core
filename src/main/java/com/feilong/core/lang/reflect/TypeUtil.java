@@ -35,20 +35,23 @@ import static com.feilong.core.bean.ConvertUtil.convert;
  * 
  * <ol>
  * 
- * <li>{@link Class#getGenericSuperclass()} 返回表示此 Class 所表示的实体(类、接口、基本类型或 void)的直接超类的 Type.
+ * <li>{@link Class#getGenericSuperclass()} 返回此 Class 所表示的实体(类、接口、基本类型或 void)的直接超类的 Type.
  * <ol>
- * <li>如果超类是参数化类型,则返回的 Type 对象必须准确反映源代码中所使用的实际类型参数.</li>
- * <li>如果以前未曾创建表示超类的参数化类型,则创建这个类型. 有关参数化类型创建过程的语义,请参阅 {@link ParameterizedType} 声明.</li>
+ * <li>如果超类是参数化类型,则返回的 Type 对象,必须准确反映源代码中所使用的实际类型参数.</li>
+ * <li>如果以前未曾创建表示超类的参数化类型,则创建这个类型.有关参数化类型创建过程的语义,请参阅 {@link ParameterizedType} 声明.</li>
  * <li>如果此 Class 表示 Object 类、接口、基本类型或 void,则返回 null.</li>
  * <li>如果此对象表示一个数组类,则返回表示 Object 类的 Class 对象.</li>
  * </ol>
  * </li>
  * 
- * <li>{@link Class#getGenericInterfaces()}
+ * <li>{@link Class#getGenericInterfaces()} 返回某些接口的 Type,这些接口由此对象所表示的类或接口直接实现
  * <ol>
- * <li>返回表示某些接口的 Type,这些接口由此对象所表示的类或接口直接实现.</li>
- * <li>如果超接口是参数化类型,则为它返回的 Type 对象必须准确反映源代码中所使用的实际类型参数.如果以前未曾创建表示每个超接口的参数化类型,则创建这个类型.有关参数化类型创建过程的语义,请参阅 {@link ParameterizedType} 声明.</li>
- * <li>如果此对象表示一个类,则返回一个包含这样一些对象的数组,这些对象表示该类实现的所有接口.数组中接口对象顺序与此对象所表示的类的声明的 implements 子句中接口名顺序一致.对于数组类,接口 Cloneable 和 Serializable 以该顺序返回.
+ * <li>如果超接口是参数化类型,则为它返回的 Type 对象必须准确反映源代码中所使用的实际类型参数.</li>
+ * <li>如果以前未曾创建表示每个超接口的参数化类型,则创建这个类型.有关参数化类型创建过程的语义,请参阅 {@link ParameterizedType} 声明.</li>
+ * <li>
+ * 如果此对象表示一个类,则返回一个包含这样一些对象的数组,这些对象表示该类实现的所有接口.<br>
+ * 数组中接口对象顺序与此对象所表示的类的声明的 implements 子句中接口名顺序一致.<br>
+ * 对于数组类,接口 Cloneable 和 Serializable 以该顺序返回.
  * </li>
  * <li>如果此对象表示一个接口,则该数组包含表示该接口直接扩展的所有接口的对象.数组中接口对象顺序与此对象所表示的接口的声明的 extends 子句中接口名顺序一致.</li>
  * <li>如果此对象表示一个不实现任何接口的类或接口,则此方法返回一个长度为 0 的数组.</li>
@@ -84,41 +87,46 @@ public final class TypeUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //**************************************************************************************
+
     /**
-     * 获得 generic superclass parameterized raw types.
+     * 获得某个类的父类上面的泛型参数的类型.
      * 
-     * <p>
-     * 获得 某个类,对应的某个接口 上面的泛型参数的类型.
-     * </p>
+     * <h3>示例:</h3>
      * 
-     * <p>
-     * Example 1:
-     * </p>
+     * <blockquote>
      * 
      * <pre class="code">
      * public class SkuItemRepositoryImpl extends BaseSolrRepositoryImpl{@code <SkuItem, Long>} implements SkuItemRepository
      * </pre>
      * 
      * <p>
-     * 这样的类,调用 {@link TypeUtil#getGenericSuperclassParameterizedRawTypes(Class)},使用
-     * <code>TypeUtil.getGenericSuperclassParameterizedRawTypes(SkuItemRepositoryImpl.class)</code>
-     * 取到泛型里面参数 [SkuItem.class,Long.class]
+     * 这样的类,如果想要取到父类的泛型参数 [SkuItem.class,Long.class],可以使用:
      * </p>
+     * 
+     * <pre class="code">
+     * TypeUtil.getGenericSuperclassParameterizedRawTypes(SkuItemRepositoryImpl.class)
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param klass
      *            the klass
-     * @return the generic superclass parameterized raw types
+     * @return 如果 <code>klass</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>klass</code> 没有父类(除了Object),抛出 {@link NullPointerException}<br>
+     *         如果 <code>klass</code> 有父类(除了Object)但是父类没有泛型参数,抛出 {@link NullPointerException}<br>
      * @see #getGenericSuperclassParameterizedType(Class)
      * @see #extractActualTypeArgumentClassArray(ParameterizedType)
      * @since 1.1.1
      */
     public static Class<?>[] getGenericSuperclassParameterizedRawTypes(Class<?> klass){
+        Validate.notNull(klass, "klass can't be null/empty!");
         ParameterizedType parameterizedType = getGenericSuperclassParameterizedType(klass);
         return extractActualTypeArgumentClassArray(parameterizedType);
     }
 
     /**
-     * 获得 generic interfaces parameterized raw types.
+     * 获得某个类的接口上面的泛型参数的类型.
      *
      * @param klass
      *            the klass
@@ -133,6 +141,8 @@ public final class TypeUtil{
         ParameterizedType parameterizedType = getGenericInterfacesParameterizedType(klass, extractInterfaceClass);
         return extractActualTypeArgumentClassArray(parameterizedType);
     }
+
+    //*******************************************************************************************
 
     /**
      * 获得 generic interfaces parameterized type.
@@ -169,29 +179,28 @@ public final class TypeUtil{
      *
      * @param klass
      *            the klass
-     * @return the superclass parameterized type
+     * @return 如果没有父类或者父类没有泛型参数,返回null
      * @see java.lang.Class#getGenericSuperclass()
      */
     private static ParameterizedType getGenericSuperclassParameterizedType(Class<?> klass){
-        Validate.notNull(klass, "klass can't be null/empty!");
-
         Class<?> useClass = klass;
-        Type type = useClass.getGenericSuperclass(); //com.feilong.core.lang.reflect.res.BaseSolrRepositoryImpl<com.feilong.core.lang.reflect.res.SkuItem, java.lang.Long>
+        Type type = useClass.getGenericSuperclass(); //com.feilong.....BaseSolrRepositoryImpl<com.feilong.....SkuItem, java.lang.Long>
 
         while (!(type instanceof ParameterizedType) && Object.class != useClass){
             useClass = useClass.getSuperclass();
             type = useClass.getGenericSuperclass();
         }
-
         return (ParameterizedType) type;
     }
 
     /**
-     * Extract actual type argument class array.
+     * 提取实际的泛型参数数组.
      *
      * @param parameterizedType
      *            the parameterized type
-     * @return the class<?>[]
+     * @return 如果 <code>parameterizedType</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>parameterizedType</code> 没有实际的泛型参数 {@link ParameterizedType#getActualTypeArguments()},抛出
+     *         {@link NullPointerException}<br>
      * @see java.lang.reflect.ParameterizedType#getActualTypeArguments()
      * @since 1.1.1
      */
