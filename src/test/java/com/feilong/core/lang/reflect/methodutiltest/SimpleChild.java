@@ -15,6 +15,11 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
+/**
+ * The Class SimpleChild.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SimpleChild extends SimpleParent{
 
 }

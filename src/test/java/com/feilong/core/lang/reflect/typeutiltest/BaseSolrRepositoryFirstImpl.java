@@ -19,6 +19,15 @@ import java.io.Serializable;
 
 import com.feilong.core.lang.reflect.TypeUtil;
 
+/**
+ * The Class BaseSolrRepositoryFirstImpl.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @param <T>
+ *            the generic type
+ * @param <PK>
+ *            the generic type
+ */
 public abstract class BaseSolrRepositoryFirstImpl<T, PK extends Serializable> implements BaseSolrRepository<T, PK>{
 
     /** 和solr schemal对应的对象类型. */
@@ -27,6 +36,7 @@ public abstract class BaseSolrRepositoryFirstImpl<T, PK extends Serializable> im
     /**
      * The Constructor.
      */
+    @SuppressWarnings("unchecked")
     public BaseSolrRepositoryFirstImpl(){
         Class<?>[] genericClassArray = TypeUtil.getGenericSuperclassParameterizedRawTypes(this.getClass());
         this.modelClass = (Class<T>) genericClassArray[0];

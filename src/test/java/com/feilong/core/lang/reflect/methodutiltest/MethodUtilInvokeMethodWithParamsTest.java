@@ -100,6 +100,9 @@ public class MethodUtilInvokeMethodWithParamsTest{
         assertEquals("parent method", MethodUtil.invokeMethod(new SimpleChild(), "getMessage"));
     }
 
+    /**
+     * Test invoke static method parent empty params.
+     */
     @Test
     public void testInvokeStaticMethodParentEmptyParams(){
         assertEquals("parent static method", MethodUtil.invokeMethod(new SimpleChild(), "getStaticMessage"));

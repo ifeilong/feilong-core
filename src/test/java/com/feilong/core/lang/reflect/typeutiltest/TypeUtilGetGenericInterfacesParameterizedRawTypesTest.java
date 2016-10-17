@@ -23,8 +23,16 @@ import com.feilong.core.lang.reflect.TypeUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
+/**
+ * The Class TypeUtilGetGenericInterfacesParameterizedRawTypesTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class TypeUtilGetGenericInterfacesParameterizedRawTypesTest{
 
+    /**
+     * Test get generic interfaces parameterized raw types.
+     */
     @Test
     public void testGetGenericInterfacesParameterizedRawTypes(){
         Class<?>[] rawTypes = TypeUtil
@@ -33,14 +41,17 @@ public class TypeUtilGetGenericInterfacesParameterizedRawTypesTest{
         assertArrayEquals(toArray(SkuItem.class, Long.class), rawTypes);
     }
 
+    /**
+     * Test get generic interfaces parameterized raw types no extract interface class.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetGenericInterfacesParameterizedRawTypesNoExtractInterfaceClass(){
         TypeUtil.getGenericInterfacesParameterizedRawTypes(SkuItemRepositoryInterfaceImpl.class, BaseSolrRepository2.class);
     }
 
     /**
-     * 没有实现接口的类
-     * 
+     * 没有实现接口的类.
+     *
      * @since 1.9.2
      */
     @Test(expected = NullPointerException.class)
@@ -48,11 +59,17 @@ public class TypeUtilGetGenericInterfacesParameterizedRawTypesTest{
         TypeUtil.getGenericInterfacesParameterizedRawTypes(SkuItemRepositoryImplNoParentClass.class, BaseSolrRepository.class);
     }
 
+    /**
+     * Test get generic interfaces parameterized raw types null klass.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetGenericInterfacesParameterizedRawTypesNullKlass(){
         TypeUtil.getGenericInterfacesParameterizedRawTypes(null, BaseSolrRepository.class);
     }
 
+    /**
+     * Test get generic interfaces parameterized raw types null extract interface class.
+     */
     @Test(expected = NullPointerException.class)
     public void testGetGenericInterfacesParameterizedRawTypesNullExtractInterfaceClass(){
         TypeUtil.getGenericInterfacesParameterizedRawTypes(SkuItemRepositoryInterfaceImpl.class, null);

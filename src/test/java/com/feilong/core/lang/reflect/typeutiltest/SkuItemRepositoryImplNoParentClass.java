@@ -15,6 +15,13 @@
  */
 package com.feilong.core.lang.reflect.typeutiltest;
 
+/**
+ * The Class SkuItemRepositoryImplNoParentClass.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @param <T>
+ *            the generic type
+ */
 @SuppressWarnings("unused")
 public class SkuItemRepositoryImplNoParentClass<T> {
 

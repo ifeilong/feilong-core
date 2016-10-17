@@ -17,6 +17,15 @@ package com.feilong.core.lang.reflect.typeutiltest;
 
 import java.io.Serializable;
 
+/**
+ * The Class BaseSolrRepositorySecondImpl.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @param <L>
+ *            the generic type
+ * @param <T>
+ *            the generic type
+ */
 @SuppressWarnings("unused")
 public abstract class BaseSolrRepositorySecondImpl<L, T> extends BaseSolrRepositoryFirstImpl<T, Serializable>{
 

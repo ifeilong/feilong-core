@@ -15,12 +15,27 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
+/**
+ * The Class SimpleParent.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class SimpleParent{
 
+    /**
+     * Gets the message.
+     *
+     * @return the message
+     */
     public String getMessage(){
         return "parent method";
     }
 
+    /**
+     * Gets the static message.
+     *
+     * @return the static message
+     */
     public static String getStaticMessage(){
         return "parent static method";
     }

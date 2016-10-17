@@ -15,6 +15,11 @@
  */
 package com.feilong.core.lang.reflect.typeutiltest;
 
+/**
+ * The Class BaseSkuItemRepositoryImplParentNoParameterizedTypeClass.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class BaseSkuItemRepositoryImplParentNoParameterizedTypeClass{
 
 }

@@ -15,8 +15,18 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
+/**
+ * The Class PrivateMethod.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class PrivateMethod{
 
+    /**
+     * Name.
+     *
+     * @return the string
+     */
     private String name(){
         return "hello world";
     }
