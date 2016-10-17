@@ -6,7 +6,7 @@ feilong core
 ![JDK 1.7](https://img.shields.io/badge/JDK-1.7-green.svg "JDK 1.7")
 [![jar size 107K](https://img.shields.io/badge/size-107K-green.svg "size 107K")](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core/1.9.1)
 [![javadoc 82%](http://progressed.io/bar/82?title=javadoc "javadoc 82%")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
-[![tests 1394](https://img.shields.io/badge/tests-1394%20%2F%201394-green.svg "tests 1394")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core) 
+[![tests 1404](https://img.shields.io/badge/tests-1404%20%2F%201404-green.svg "tests 1404")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core) 
 
 > Reduce development, Release ideas (减少开发,释放思想)
 
