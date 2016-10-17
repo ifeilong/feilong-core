@@ -286,7 +286,7 @@ public class JsonUtilTest extends AbstractJsonTest{
         ps.setDateAttr(new Date());
         ps.setName("get");
         MyBean myBean = new MyBean();
-        List<Object> list = new ArrayList<Object>();
+        List<Object> list = new ArrayList<>();
         list.add(ps);
 
         myBean.setData(list);
@@ -302,7 +302,7 @@ public class JsonUtilTest extends AbstractJsonTest{
         Person ps = new Person();
         ps.setDateAttr(new Date());
         ps.setName("get");
-        List<Person> list = new ArrayList<Person>();
+        List<Person> list = new ArrayList<>();
         list.add(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:49","name":"get"}]
