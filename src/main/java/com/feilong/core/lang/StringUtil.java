@@ -650,7 +650,7 @@ public final class StringUtil{
      * 使用StringTokenizer分隔给定的字符串到字符串数组,去除 tokens的空格并且忽略empty tokens.
      * 
      * <p>
-     * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
+     * (此方法借鉴 "org.springframework.util.StringUtils#tokenizeToStringArray").
      * </p>
      * 
      * <p>
@@ -718,7 +718,7 @@ public final class StringUtil{
      * 使用StringTokenizer分隔给定的字符串到字符串数组.
      * 
      * <p>
-     * (此方法借鉴 {@link "org.springframework.util.StringUtils#tokenizeToStringArray"}).
+     * (此方法借鉴 "org.springframework.util.StringUtils#tokenizeToStringArray").
      * </p>
      * 
      * <h3>说明:</h3>

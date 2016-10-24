@@ -155,7 +155,7 @@ public final class TypeUtil{
      * <b>你可以使用:</b>
      * 
      * <pre class="code">
-     * Class<?>[] rawTypes = TypeUtil
+     * Class{@code <?>}[] rawTypes = TypeUtil
      *                 .getGenericInterfacesParameterizedRawTypes(SkuItemRepositoryInterfaceImpl.class, BaseSolrRepository.class);
      * 
      * assertArrayEquals(toArray(SkuItem.class, Long.class), rawTypes);

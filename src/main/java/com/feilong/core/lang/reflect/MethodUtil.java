@@ -213,7 +213,7 @@ public final class MethodUtil{
      * 
      * <pre class="code">
      * 
-     * Class<?>[] parameterTypes1 = { Integer.TYPE };
+     * Class{@code <?>}[] parameterTypes1 = { Integer.TYPE };
      * assertEquals("age int:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(5), parameterTypes1));
      * 
      * </pre>
@@ -293,10 +293,10 @@ public final class MethodUtil{
      *
      * <pre class="code">
      * 
-     * Class<?>[] parameterTypes1 = { Integer.TYPE };
+     * Class{@code <?>}[] parameterTypes1 = { Integer.TYPE };
      * assertEquals("age int:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(5), parameterTypes1));
      * 
-     * Class<?>[] parameterTypes2 = { Integer.class };
+     * Class{@code <?>}[] parameterTypes2 = { Integer.class };
      * assertEquals("age Integer:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(Integer.parseInt("5")), parameterTypes2));
      * 
      * </pre>
@@ -395,10 +395,10 @@ public final class MethodUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Class<?>[] parameterTypes1 = { Integer.TYPE };
+     * Class{@code <?>}[] parameterTypes1 = { Integer.TYPE };
      * assertEquals("static age int:5", MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(5), parameterTypes1));
      * 
-     * Class<?>[] parameterTypes2 = { Integer.class };
+     * Class{@code <?>}[] parameterTypes2 = { Integer.class };
      * assertEquals(
      *                 "static age Integer:5",
      *                 MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(Integer.parseInt("5")), parameterTypes2));
@@ -472,10 +472,10 @@ public final class MethodUtil{
      * 测试调用
      *
      * <pre class="code">
-     * Class<?>[] parameterTypes1 = { Integer.TYPE };
+     * Class{@code <?>}[] parameterTypes1 = { Integer.TYPE };
      * assertEquals("static age int:5", MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(5), parameterTypes1));
      * 
-     * Class<?>[] parameterTypes2 = { Integer.class };
+     * Class{@code <?>}[] parameterTypes2 = { Integer.class };
      * assertEquals(
      *                 "static age Integer:5",
      *                 MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "age", toArray(Integer.parseInt("5")), parameterTypes2));
