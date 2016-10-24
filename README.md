@@ -80,6 +80,12 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 1. [require-jdk-version](https://github.com/venusdrogon/feilong-core/wiki/require-jdk-version)
 1. [dependencies](https://github.com/venusdrogon/feilong-core/wiki/dependencies)
 
+# Q&A
+
+## Q1:这是重复造轮子吗?
+
+A: https://github.com/venusdrogon/feilong-core/wiki/Repeat-the-wheel
+
 
 # :panda_face: About
 
