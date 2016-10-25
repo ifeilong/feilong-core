@@ -41,8 +41,20 @@ public class MobilephonePatternParameterizedTest extends AbstractBooleanParamete
      */
     @Parameters(name = "RegexUtil.matches(RegexPattern.MOBILEPHONE, {0})={1}")
     public static Iterable<Object[]> data(){
-        String[] valids = { "18501646315" };
-        String[] invalids = {};
+        String[] valids = { "18501646315", "15001841317", "14701841318" };
+        String[] invalids = { //
+                              "",
+                              " ",
+                              "1500184131", // count not match
+                              " 18501646315", // count not match
+                              "18501646315 ", // count not match
+                              "10201841318", //no 10
+                              "11201841318", //no 11
+                              "12201841318", //no 12
+                              "16201841318", //no 16
+                              "19201841318" //no 19
+        };
+
         return TestUtil.toDataList(valids, invalids);
     }
 
