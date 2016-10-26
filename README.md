@@ -1,4 +1,4 @@
-feilong core
+feilong core 让开发更简便的Java开发工具包
 ================
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
