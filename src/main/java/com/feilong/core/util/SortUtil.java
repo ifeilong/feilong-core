@@ -381,7 +381,6 @@ public final class SortUtil{
      * @see BeanComparatorUtil#chainedComparator(String...)
      * @see org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Comparator...)
      * @see #sortList(List, Comparator...)
-     * 
      * @since 1.8.7 change name
      */
     public static <O> List<O> sortListByPropertyNamesValue(List<O> list,String...propertyNames){
@@ -389,7 +388,7 @@ public final class SortUtil{
             return emptyList();
         }
         Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
-        Validate.noNullElements(propertyNames, "propertyName:%s has empty value", propertyNames);
+        Validate.noNullElements(propertyNames, "propertyNames:%s has empty value", propertyNames);
 
         return sortList(
                         list,

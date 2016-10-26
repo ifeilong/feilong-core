@@ -223,7 +223,7 @@ public final class DatePattern{
      * example:<span style="color:green">2012-01-22</span>
      * </p>
      * 
-     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_DATE_FORMAT
+     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_DATE_FORMAT
      */
     public static final String COMMON_DATE                                  = "yyyy-MM-dd";
 
@@ -243,7 +243,7 @@ public final class DatePattern{
      * example:<span style="color:green">21:57:36</span>
      * </p>
      * 
-     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_TIME_NO_T_FORMAT
+     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_TIME_FORMAT
      */
     public static final String COMMON_TIME                                  = "HH:mm:ss";
 
