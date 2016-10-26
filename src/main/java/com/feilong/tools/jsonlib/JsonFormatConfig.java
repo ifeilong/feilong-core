@@ -176,7 +176,8 @@ public class JsonFormatConfig{
      * </pre>
      * 
      * </blockquote>
-     * 
+     *
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/505">json format 需要支持修改key的名字</a>
      * @since 1.9.3
      */
     private Map<Class<?>, PropertyNameProcessor> jsonTargetClassAndPropertyNameProcessorMap;
@@ -445,6 +446,7 @@ public class JsonFormatConfig{
      * </blockquote>
      *
      * @return the 转成json的时候,对属性名字做特殊处理的控制器对映关系
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/505">json format 需要支持修改key的名字</a>
      * @since 1.9.3
      */
     public Map<Class<?>, PropertyNameProcessor> getJsonTargetClassAndPropertyNameProcessorMap(){
@@ -554,6 +556,7 @@ public class JsonFormatConfig{
      *
      * @param jsonTargetClassAndPropertyNameProcessorMap
      *            the new 转成json的时候,对属性名字做特殊处理的控制器对映关系
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/505">json format 需要支持修改key的名字</a>
      * @since 1.9.3
      */
     public void setJsonTargetClassAndPropertyNameProcessorMap(

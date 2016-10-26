@@ -23,6 +23,7 @@ import net.sf.json.processors.PropertyNameProcessor;
  * 将指定类型下面所有属性名字首字母变大写的处理器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="https://github.com/venusdrogon/feilong-core/issues/505">json format 需要支持修改key的名字</a>
  * @since 1.9.3
  */
 public class CapitalizePropertyNameProcessor implements PropertyNameProcessor{
