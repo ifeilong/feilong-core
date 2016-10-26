@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 /**
- * 自定义属性JsonValue处理器,可用于指定property名字或者类型自定义的转换.
+ * 自定义属性属性名字以及JsonValue处理器,可用于指定property名字或者类型自定义的转换.
  */
 package com.feilong.tools.jsonlib.processor;
