@@ -18,6 +18,7 @@ package com.feilong.tools.jsonlib;
 import java.util.Map;
 
 import net.sf.json.processors.JsonValueProcessor;
+import net.sf.json.processors.PropertyNameProcessor;
 
 /**
  * 格式化成json的一些配置.
@@ -29,13 +30,13 @@ import net.sf.json.processors.JsonValueProcessor;
 public class JsonFormatConfig{
 
     /** 排除属性名称的数组. */
-    private String[]                        excludes;
+    private String[]                             excludes;
 
     /** 包含属性名称的数组. */
-    private String[]                        includes;
+    private String[]                             includes;
 
     /**
-     * 指定属性名称使用的处理器.
+     * 指定属性名称使用的值修改处理器.
      * 
      * <h3>示例:</h3>
      * 
@@ -73,7 +74,112 @@ public class JsonFormatConfig{
      * @see com.feilong.tools.jsonlib.processor.BigDecimalJsonValueProcessor
      * @see com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor
      */
-    private Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap;
+    private Map<String, JsonValueProcessor>      propertyNameAndJsonValueProcessorMap;
+
+    /**
+     * 转成json的时候,对属性名字做特殊处理的控制器对映关系.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 
+     * 我们这边的代码
+     * 
+     * <pre class="code">
+     * public class CrmAddpointCommand implements Serializable{
+     * 
+     *     <span style="color:green">// 用户编码</span>
+     *     private String openId;
+     * 
+     *     <span style="color:green">// 渠道：Tmall - 天猫 JD - 京东</span>
+     *     private String consumptionChannel;
+     * 
+     *     <span style="color:green">// 淘宝/京东买家账号</span>
+     *     private String buyerId;
+     * 
+     *     <span style="color:green">// 电商订单编号 </span>
+     *     private String orderCode;
+     * 
+     *     <span style="color:green">// setter getter</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.tools.jsonlib.JsonUtil#format(Object)}
+     * 
+     * <pre class="code">
+     * 
+     * public void testJsonTest(){
+     *     CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
+     * 
+     *     crmAddpointCommand.setBuyerId("123456");
+     *     crmAddpointCommand.setConsumptionChannel("feilongstore");
+     *     crmAddpointCommand.setOpenId("feilong888888ky");
+     *     crmAddpointCommand.setOrderCode("fl123456");
+     * 
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand));
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>输出结果:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "orderCode": "fl123456",
+     * "buyerId": "123456",
+     * "consumptionChannel": "feilongstore",
+     * "openId": "feilong888888ky"
+     * }
+     * 
+     * </pre>
+     * 
+     * 输出的属性大小写和 crmAddpointCommand 对象里面字段的大小写相同,但是对方接口要求首字符要大写:
+     * 
+     * <p>
+     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png"/>
+     * </p>
+     * 
+     * 此时,你可以使用
+     * 
+     * <pre class="code">
+     * 
+     * public void testJsonTest(){
+     *     CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
+     * 
+     *     crmAddpointCommand.setBuyerId("123456");
+     *     crmAddpointCommand.setConsumptionChannel("feilongstore");
+     *     crmAddpointCommand.setOpenId("feilong888888ky");
+     *     crmAddpointCommand.setOrderCode("fl123456");
+     * 
+     *     //****************************************************************************************
+     * 
+     *     JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     * 
+     *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
+     *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
+     * 
+     *     <span style="color:red">jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     * 
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, jsonFormatConfig));
+     * }
+     * </pre>
+     * 
+     * <b>输出结果:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "OrderCode": "fl123456",
+     * "BuyerId": "123456",
+     * "ConsumptionChannel": "feilongstore",
+     * "OpenId": "feilong888888ky"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @since 1.9.3
+     */
+    private Map<Class<?>, PropertyNameProcessor> jsonTargetClassAndPropertyNameProcessorMap;
 
     //***************************************************************************
 
@@ -149,7 +255,7 @@ public class JsonFormatConfig{
     }
 
     /**
-     * 指定属性名称使用的处理器.
+     * 指定属性名称使用的值修改处理器.
      * 
      * <h3>示例:</h3>
      * 
@@ -193,7 +299,7 @@ public class JsonFormatConfig{
     }
 
     /**
-     * 指定属性名称使用的处理器.
+     * 指定属性名称使用的值修改处理器.
      *
      * <h3>示例:</h3>
      * 
@@ -235,6 +341,224 @@ public class JsonFormatConfig{
      */
     public void setPropertyNameAndJsonValueProcessorMap(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
         this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;
+    }
+
+    /**
+     * 转成json的时候,对属性名字做特殊处理的控制器对映关系.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 
+     * 我们这边的代码
+     * 
+     * <pre class="code">
+     * public class CrmAddpointCommand implements Serializable{
+     * 
+     *     <span style="color:green">// 用户编码</span>
+     *     private String openId;
+     * 
+     *     <span style="color:green">// 渠道：Tmall - 天猫 JD - 京东</span>
+     *     private String consumptionChannel;
+     * 
+     *     <span style="color:green">// 淘宝/京东买家账号</span>
+     *     private String buyerId;
+     * 
+     *     <span style="color:green">// 电商订单编号 </span>
+     *     private String orderCode;
+     * 
+     *     <span style="color:green">// setter getter</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.tools.jsonlib.JsonUtil#format(Object)}
+     * 
+     * <pre class="code">
+     * 
+     * public void testJsonTest(){
+     *     CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
+     * 
+     *     crmAddpointCommand.setBuyerId("123456");
+     *     crmAddpointCommand.setConsumptionChannel("feilongstore");
+     *     crmAddpointCommand.setOpenId("feilong888888ky");
+     *     crmAddpointCommand.setOrderCode("fl123456");
+     * 
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand));
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>输出结果:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "orderCode": "fl123456",
+     * "buyerId": "123456",
+     * "consumptionChannel": "feilongstore",
+     * "openId": "feilong888888ky"
+     * }
+     * 
+     * </pre>
+     * 
+     * 输出的属性大小写和 crmAddpointCommand 对象里面字段的大小写相同,但是对方接口要求首字符要大写:
+     * 
+     * <p>
+     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png"/>
+     * </p>
+     * 
+     * 此时,你可以使用
+     * 
+     * <pre class="code">
+     * 
+     * public void testJsonTest(){
+     *     CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
+     * 
+     *     crmAddpointCommand.setBuyerId("123456");
+     *     crmAddpointCommand.setConsumptionChannel("feilongstore");
+     *     crmAddpointCommand.setOpenId("feilong888888ky");
+     *     crmAddpointCommand.setOrderCode("fl123456");
+     * 
+     *     //****************************************************************************************
+     * 
+     *     JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     * 
+     *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
+     *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
+     * 
+     *     <span style="color:red">jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     * 
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, jsonFormatConfig));
+     * }
+     * </pre>
+     * 
+     * <b>输出结果:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "OrderCode": "fl123456",
+     * "BuyerId": "123456",
+     * "ConsumptionChannel": "feilongstore",
+     * "OpenId": "feilong888888ky"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @return the 转成json的时候,对属性名字做特殊处理的控制器对映关系
+     * @since 1.9.3
+     */
+    public Map<Class<?>, PropertyNameProcessor> getJsonTargetClassAndPropertyNameProcessorMap(){
+        return jsonTargetClassAndPropertyNameProcessorMap;
+    }
+
+    /**
+     * 转成json的时候,对属性名字做特殊处理的控制器对映关系.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 
+     * 我们这边的代码
+     * 
+     * <pre class="code">
+     * public class CrmAddpointCommand implements Serializable{
+     * 
+     *     <span style="color:green">// 用户编码</span>
+     *     private String openId;
+     * 
+     *     <span style="color:green">// 渠道：Tmall - 天猫 JD - 京东</span>
+     *     private String consumptionChannel;
+     * 
+     *     <span style="color:green">// 淘宝/京东买家账号</span>
+     *     private String buyerId;
+     * 
+     *     <span style="color:green">// 电商订单编号 </span>
+     *     private String orderCode;
+     * 
+     *     <span style="color:green">// setter getter</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * 符合标准的java代码规范,如果直接使用 {@link com.feilong.tools.jsonlib.JsonUtil#format(Object)}
+     * 
+     * <pre class="code">
+     * 
+     * public void testJsonTest(){
+     *     CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
+     * 
+     *     crmAddpointCommand.setBuyerId("123456");
+     *     crmAddpointCommand.setConsumptionChannel("feilongstore");
+     *     crmAddpointCommand.setOpenId("feilong888888ky");
+     *     crmAddpointCommand.setOrderCode("fl123456");
+     * 
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand));
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>输出结果:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "orderCode": "fl123456",
+     * "buyerId": "123456",
+     * "consumptionChannel": "feilongstore",
+     * "openId": "feilong888888ky"
+     * }
+     * 
+     * </pre>
+     * 
+     * 输出的属性大小写和 crmAddpointCommand 对象里面字段的大小写相同,但是对方接口要求首字符要大写:
+     * 
+     * <p>
+     * <img src="https://cloud.githubusercontent.com/assets/3479472/19713507/434572a8-9b79-11e6-987a-07e572df5bf9.png"/>
+     * </p>
+     * 
+     * 此时,你可以使用
+     * 
+     * <pre class="code">
+     * 
+     * public void testJsonTest(){
+     *     CrmAddpointCommand crmAddpointCommand = new CrmAddpointCommand();
+     * 
+     *     crmAddpointCommand.setBuyerId("123456");
+     *     crmAddpointCommand.setConsumptionChannel("feilongstore");
+     *     crmAddpointCommand.setOpenId("feilong888888ky");
+     *     crmAddpointCommand.setOrderCode("fl123456");
+     * 
+     *     //****************************************************************************************
+     * 
+     *     JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     * 
+     *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
+     *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
+     * 
+     *     <span style="color:red">jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     * 
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, jsonFormatConfig));
+     * }
+     * </pre>
+     * 
+     * <b>输出结果:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "OrderCode": "fl123456",
+     * "BuyerId": "123456",
+     * "ConsumptionChannel": "feilongstore",
+     * "OpenId": "feilong888888ky"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param jsonTargetClassAndPropertyNameProcessorMap
+     *            the new 转成json的时候,对属性名字做特殊处理的控制器对映关系
+     * @since 1.9.3
+     */
+    public void setJsonTargetClassAndPropertyNameProcessorMap(
+                    Map<Class<?>, PropertyNameProcessor> jsonTargetClassAndPropertyNameProcessorMap){
+        this.jsonTargetClassAndPropertyNameProcessorMap = jsonTargetClassAndPropertyNameProcessorMap;
     }
 
 }

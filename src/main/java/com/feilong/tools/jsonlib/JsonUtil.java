@@ -59,6 +59,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
+import net.sf.json.processors.PropertyNameProcessor;
 import net.sf.json.util.CycleDetectionStrategy;
 import net.sf.json.util.JSONUtils;
 import net.sf.json.util.PropertySetStrategy;
@@ -535,11 +536,11 @@ public final class JsonUtil{
      * 
      * <pre class="code">
      * [
-        30,
-        55,
-        88,
-        12
-    ]
+     * 30,
+     * 55,
+     * 88,
+     * 12
+     * ]
      * </pre>
      * 
      * </blockquote>
@@ -637,6 +638,18 @@ public final class JsonUtil{
         }
         JsonConfig jsonConfig = getDefaultJsonConfig();
 
+        //****************************************************************************************
+
+        //property name处理器
+        Map<Class<?>, PropertyNameProcessor> targetClassAndPropertyNameProcessorMap = jsonFormatConfig
+                        .getJsonTargetClassAndPropertyNameProcessorMap();
+        if (isNotNullOrEmpty(targetClassAndPropertyNameProcessorMap)){
+            for (Map.Entry<Class<?>, PropertyNameProcessor> entry : targetClassAndPropertyNameProcessorMap.entrySet()){
+                jsonConfig.registerJsonPropertyNameProcessor(entry.getKey(), entry.getValue());
+            }
+        }
+
+        //****************************************************************************************
         //value处理器
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = jsonFormatConfig.getPropertyNameAndJsonValueProcessorMap();
         if (isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
@@ -644,10 +657,14 @@ public final class JsonUtil{
                 jsonConfig.registerJsonValueProcessor(entry.getKey(), entry.getValue());
             }
         }
+
+        //****************************************************************************************
+
         //排除
         if (isNotNullOrEmpty(jsonFormatConfig.getExcludes())){
             jsonConfig.setExcludes(jsonFormatConfig.getExcludes());
         }
+
         //包含
         if (isNotNullOrEmpty(jsonFormatConfig.getIncludes())){
             jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(jsonFormatConfig.getIncludes()));
