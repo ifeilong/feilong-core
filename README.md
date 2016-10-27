@@ -92,6 +92,13 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 
 A: https://github.com/venusdrogon/feilong-core/wiki/Repeat-the-wheel
 
+# :cyclone: 即时交流
+
+
+微信公众号 `feilongjava`						|QQ 群 `243306798`
+:---- 										|:---------
+ ![](http://i.imgur.com/hM83Xv9.jpg)		|![](http://i.imgur.com/cIfglCa.png)
+
 
 # :panda_face: About
 
