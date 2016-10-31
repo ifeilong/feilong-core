@@ -15,9 +15,9 @@ feilong core 让Java开发更简便的工具包
 
 # 简介:
 
-1. 目标:`Reduce development, Release ideas`
-1. 可以帮助你的代码更简短精炼，使它易写、易读、易于维护。
-1. 提高工作效率，让你从大量重复的底层代码中脱身。
+1. 目标:`Reduce development, Release ideas` (减少开发,释放思想);
+1. 让你从大量重复的底层代码中脱身,提高工作效率;
+1. 让你的代码更简炼，易写、易读、易于维护;
 
 # 使用`feilong-core`的理由:
 
