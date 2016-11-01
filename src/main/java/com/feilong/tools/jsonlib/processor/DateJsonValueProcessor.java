@@ -41,10 +41,10 @@ import net.sf.json.JsonConfig;
  * User user = new User("feilong1", 24);
  * user.setDate(toDate("2016-08-15 13:30:00", COMMON_DATE_AND_TIME));
  * 
- * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
- * jsonFormatConfig.setIncludes("date");
+ * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+ * javaToJsonConfig.setIncludes("date");
  * 
- * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
  * </pre>
  * 
  * <b>返回:</b>
@@ -74,11 +74,11 @@ import net.sf.json.JsonConfig;
  * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
  * propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE_AND_TIME));
  * 
- * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
- * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
- * jsonFormatConfig.setIncludes("date");
+ * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+ * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+ * javaToJsonConfig.setIncludes("date");
  * 
- * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
  * </pre>
  * 
  * <b>返回:</b>
@@ -105,17 +105,17 @@ import net.sf.json.JsonConfig;
  * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
  * propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE));
  * 
- * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
- * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
- * jsonFormatConfig.setIncludes("date");
+ * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+ * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+ * javaToJsonConfig.setIncludes("date");
  * 
- * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
  * </pre>
  * 
  * <b>返回:</b>
  * 
  * <pre class="code">
-{"date": "2016-08-15"}
+ * {"date": "2016-08-15"}
  * </pre>
  * 
  * </blockquote>

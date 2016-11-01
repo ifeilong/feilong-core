@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonFormatConfig;
+import com.feilong.tools.jsonlib.JavaToJsonConfig;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import net.sf.json.processors.JsonValueProcessor;
@@ -53,7 +53,7 @@ public class SensitiveWordsJsonValueProcessorTest{
         propertyNameAndJsonValueProcessorMap.put("password", jsonValueProcessor);
         propertyNameAndJsonValueProcessorMap.put("age", jsonValueProcessor);
 
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
         jsonFormatConfig.setIncludes("name", "age", "password");
 

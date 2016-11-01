@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonFormatConfig;
+import com.feilong.tools.jsonlib.JavaToJsonConfig;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
@@ -50,7 +50,7 @@ public class BigDecimalJsonValueProcessorTest{
         User user = new User("feilong1", 24);
         user.setMoney(toBigDecimal("99999999.00"));
 
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setIncludes("money");
 
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
@@ -67,7 +67,7 @@ public class BigDecimalJsonValueProcessorTest{
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
         propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS));
 
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
         jsonFormatConfig.setIncludes("name", "age", "money");
 

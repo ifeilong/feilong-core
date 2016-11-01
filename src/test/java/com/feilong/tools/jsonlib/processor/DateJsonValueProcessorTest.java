@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonFormatConfig;
+import com.feilong.tools.jsonlib.JavaToJsonConfig;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.date.DateUtil.toDate;
@@ -52,7 +52,7 @@ public class DateJsonValueProcessorTest{
         User user = new User("feilong1", 24);
         user.setDate(toDate("2016-08-15 13:30:00", COMMON_DATE_AND_TIME));
 
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setIncludes("date");
 
         LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
@@ -69,7 +69,7 @@ public class DateJsonValueProcessorTest{
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
         propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE_AND_TIME));
 
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
         jsonFormatConfig.setIncludes("date");
 
@@ -87,7 +87,7 @@ public class DateJsonValueProcessorTest{
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
         propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE));
 
-        JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+        JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
         jsonFormatConfig.setIncludes("date");
 

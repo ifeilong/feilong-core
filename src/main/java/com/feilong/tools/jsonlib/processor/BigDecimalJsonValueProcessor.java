@@ -40,10 +40,10 @@ import net.sf.json.JsonConfig;
  * User user = new User("feilong1", 24);
  * user.setMoney(toBigDecimal("99999999.00"));
  * 
- * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
- * jsonFormatConfig.setIncludes("name", "age", "money");
+ * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+ * javaToJsonConfig.setIncludes("name", "age", "money");
  * 
- * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
  * </pre>
  * 
  * <b>返回:</b>
@@ -54,7 +54,6 @@ import net.sf.json.JsonConfig;
  * "name": "feilong1",
  * "money": 99999999
  * }
- * 
  * </pre>
  * 
  * <p>
@@ -78,11 +77,11 @@ import net.sf.json.JsonConfig;
  * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
  * propertyNameAndJsonValueProcessorMap.put("money", <b>new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS)</b>);
  * 
- * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
- * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
- * jsonFormatConfig.setIncludes("name", "age", "money");
+ * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+ * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+ * javaToJsonConfig.setIncludes("name", "age", "money");
  * 
- * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
  * </pre>
  * 
  * <b>返回:</b>

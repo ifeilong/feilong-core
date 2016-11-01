@@ -21,13 +21,14 @@ import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.processors.PropertyNameProcessor;
 
 /**
- * 格式化成json的一些配置.
+ * java格式化成json的一些配置.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see net.sf.json.JsonConfig
  * @since 1.2.2
+ * @since 1.9.4 <a href="https://github.com/venusdrogon/feilong-core/issues/511">rename</a>
  */
-public class JsonFormatConfig{
+public class JavaToJsonConfig{
 
     /** 排除属性名称的数组. */
     private String[]                             excludes;
@@ -51,10 +52,10 @@ public class JsonFormatConfig{
      * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
      * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
-     * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-     * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
+     * LOGGER.info(JsonUtil.format(user, javaToJsonConfig));
      * </pre>
      * 
      * 将会输出:
@@ -153,14 +154,14 @@ public class JsonFormatConfig{
      * 
      *     //****************************************************************************************
      * 
-     *     JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     *     JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * 
      *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
      *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
      * 
-     *     <span style="color:red">jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     *     <span style="color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, jsonFormatConfig));
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }
      * </pre>
      * 
@@ -187,7 +188,7 @@ public class JsonFormatConfig{
     /**
      * The Constructor.
      */
-    public JsonFormatConfig(){
+    public JavaToJsonConfig(){
     }
 
     /**
@@ -196,7 +197,7 @@ public class JsonFormatConfig{
      * @param propertyNameAndJsonValueProcessorMap
      *            the property name and json value processor map
      */
-    public JsonFormatConfig(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
+    public JavaToJsonConfig(Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap){
         this.propertyNameAndJsonValueProcessorMap = propertyNameAndJsonValueProcessorMap;
     }
 
@@ -208,7 +209,7 @@ public class JsonFormatConfig{
      * @param includes
      *            the includes
      */
-    public JsonFormatConfig(String[] excludes, String[] includes){
+    public JavaToJsonConfig(String[] excludes, String[] includes){
         this.excludes = excludes;
         this.includes = includes;
     }
@@ -271,10 +272,10 @@ public class JsonFormatConfig{
      * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
      * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
-     * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-     * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
+     * LOGGER.info(JsonUtil.format(user, javaToJsonConfig));
      * </pre>
      * 
      * 将会输出:
@@ -315,10 +316,10 @@ public class JsonFormatConfig{
      * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
      * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
-     * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-     * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * LOGGER.info(JsonUtil.format(user, jsonFormatConfig));
+     * LOGGER.info(JsonUtil.format(user, javaToJsonConfig));
      * </pre>
      * 
      * 将会输出:
@@ -421,14 +422,14 @@ public class JsonFormatConfig{
      * 
      *     //****************************************************************************************
      * 
-     *     JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     *     JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * 
      *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
      *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
      * 
-     *     <span style="color:red">jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     *     <span style="color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, jsonFormatConfig));
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }
      * </pre>
      * 
@@ -530,14 +531,14 @@ public class JsonFormatConfig{
      * 
      *     //****************************************************************************************
      * 
-     *     JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
+     *     JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
      * 
      *     Map{@code <Class<?>, PropertyNameProcessor>} targetClassAndPropertyNameProcessorMap = newHashMap(1);
      *     targetClassAndPropertyNameProcessorMap.put(CrmAddpointCommand.class, CapitalizePropertyNameProcessor.INSTANCE);
      * 
-     *     <span style="color:red">jsonFormatConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
+     *     <span style="color:red">javaToJsonConfig.setJsonTargetClassAndPropertyNameProcessorMap(targetClassAndPropertyNameProcessorMap);</span>
      * 
-     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, jsonFormatConfig));
+     *     LOGGER.debug(JsonUtil.format(crmAddpointCommand, javaToJsonConfig));
      * }
      * </pre>
      * 

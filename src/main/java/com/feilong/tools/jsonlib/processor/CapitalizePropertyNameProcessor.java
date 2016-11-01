@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import net.sf.json.processors.PropertyNameProcessor;
 
 /**
- * 将指定类型下面所有属性名字首字母变大写的处理器.
+ * 将指定类型下面所有属性名字<b>首字母变大写</b>的处理器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-core/issues/505">json format 需要支持修改key的名字</a>
@@ -28,7 +28,7 @@ import net.sf.json.processors.PropertyNameProcessor;
  */
 public class CapitalizePropertyNameProcessor implements PropertyNameProcessor{
 
-    /** Singleton predicate instance. */
+    /** Singleton instance. */
     public static final PropertyNameProcessor INSTANCE = new CapitalizePropertyNameProcessor();
 
     /**
