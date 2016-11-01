@@ -19,8 +19,9 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.math.BigDecimal;
 
-import com.feilong.core.NumberPattern;
 import com.feilong.core.lang.NumberUtil;
+
+import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 
 import net.sf.json.JsonConfig;
 
@@ -102,11 +103,11 @@ import net.sf.json.JsonConfig;
 public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
 
     /**
-     * The number pattern.
+     * The number pattern(默认两位小数点).
      * 
      * @see com.feilong.core.NumberPattern
      */
-    private String numberPattern = NumberPattern.TWO_DECIMAL_POINTS;
+    private String numberPattern = TWO_DECIMAL_POINTS;
 
     /**
      * The Constructor.

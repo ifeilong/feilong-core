@@ -25,7 +25,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import net.sf.json.JsonConfig;
 
 /**
- * 时间转换 日期值处理器实现.
+ * 时间转换日期值处理器实现.
  * 
  * {@link Date}日期json value处理器.
  * 
@@ -50,7 +50,7 @@ import net.sf.json.JsonConfig;
  * <b>返回:</b>
  * 
  * <pre class="code">
-{"date": {"date": 15}}
+ * {"date": {"date": 15}}
  * </pre>
  * 
  * <p>
@@ -84,7 +84,7 @@ import net.sf.json.JsonConfig;
  * <b>返回:</b>
  * 
  * <pre class="code">
-{"date": "2016-08-15 13:30:00"}
+ * {"date": "2016-08-15 13:30:00"}
  * </pre>
  * 
  * </blockquote>

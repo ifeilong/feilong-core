@@ -18,6 +18,7 @@ package com.feilong.tools.jsonlib.processor;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * 过滤敏感信息,最直接的就是像密码这样的内容,不可以直接明文输出在控制台或者日志文件,需要转换成***字眼.
@@ -70,10 +71,10 @@ import net.sf.json.JsonConfig;
 public class SensitiveWordsJsonValueProcessor extends AbstractJsonValueProcessor{
 
     /** Singleton instance. */
-    public static final SensitiveWordsJsonValueProcessor INSTANCE                = new SensitiveWordsJsonValueProcessor();
+    public static final JsonValueProcessor INSTANCE                = new SensitiveWordsJsonValueProcessor();
 
     /** The default sensitive words. */
-    private static String                                DEFAULT_SENSITIVE_WORDS = "******";
+    private static String                  DEFAULT_SENSITIVE_WORDS = "******";
 
     /*
      * (non-Javadoc)
