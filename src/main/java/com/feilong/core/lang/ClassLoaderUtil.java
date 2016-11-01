@@ -42,18 +42,22 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * <li>{@link #getResource(String)}</li>
  * <li>{@link #getResourceInAllClassLoader(String, Class)}</li>
  * </ul>
+ * 
  * </blockquote>
  * 
  * <h3>关于 {@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} VS
  * {@link java.lang.ClassLoader#getResourceAsStream(String) ClassLoader#getResourceAsStream(String)}</h3>
  * 
  * <blockquote>
+ * 
  * <p>
  * 基本上,两个都可以用于从 classpath 里面进行资源读取,classpath包含classpath中的路径和classpath中的jar
  * </p>
+ * 
  * <p>
  * 假设配置文件在 src/main/resources下面,比如 messages/feilong-core-message_en_US.properties,
  * </p>
+ * 
  * <ol>
  * <li>{@link java.lang.Class#getResourceAsStream(String) Class#getResourceAsStream(String)} 需要这么写
  * <b>"/messages/feilong-core-message_en_US.properties"</b>,<br>
@@ -123,17 +127,20 @@ public final class ClassLoaderUtil{
      * <h3>不同环境结果不一样:</h3>
      * 
      * <blockquote>
+     * 
      * <table border="1" cellspacing="0" cellpadding="4" summary="">
      * <tr style="background-color:#ccccff">
      * <th align="left">示例</th>
      * <th align="left">(maven)测试</th>
      * <th align="left">在web环境中,(即使打成jar的情形)</th>
      * </tr>
+     * 
      * <tr valign="top">
      * <td><code>getResource("")</code></td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-core/target/test-classes/</td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-web-test/src/main/webapp/WEB-INF/classes/</td>
      * </tr>
+     * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td><code>getResource("com")</code></td>
      * <td>file:/E:/Workspaces/feilong/feilong-platform/feilong-core/target/test-classes/com</td>

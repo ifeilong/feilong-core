@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 /**
- * 对json-lib的封装,提供对象(含list,map,array等)到json字符串,以及json字符串到对象的转换.
+ * 对 <i>json-lib</i> 的二次封装,提供java对象(含list,map,array等)到json字符串,以及json字符串到java对象的转换.
  */
 package com.feilong.tools.jsonlib;

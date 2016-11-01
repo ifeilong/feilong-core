@@ -21,9 +21,11 @@ import org.slf4j.LoggerFactory;
 import net.sf.json.util.PropertySetStrategy;
 
 /**
- * The Class PropertyStrategyWrapper.<br>
- * Ignore missing properties with Json-Lib <br>
- * 避免出现 Unknown property 'orderIdAndCodeMap' on class 'class com.baozun.trade.web.controller.payment.result.command.PaymentResultEntity' 异常
+ * Ignore missing properties with Json-Lib.
+ * 
+ * <p>
+ * 避免出现 Unknown property <code>'orderIdAndCodeMap'</code> on class 'class com.baozun.trade.....PaymentResultEntity' 异常
+ * </p>
  * 
  * @see <a
  *      href="http://javaskeleton.blogspot.com/2011/05/ignore-missing-properties-with-json-lib.html">ignore-missing-properties-with-json-lib
