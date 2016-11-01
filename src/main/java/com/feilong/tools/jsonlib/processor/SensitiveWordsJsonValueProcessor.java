@@ -37,11 +37,11 @@ import net.sf.json.JsonConfig;
  * propertyNameAndJsonValueProcessorMap.put("password", jsonValueProcessor);
  * propertyNameAndJsonValueProcessorMap.put("age", jsonValueProcessor);
  * 
- * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
- * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
- * jsonFormatConfig.setIncludes("name", "age", "password");
+ * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+ * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+ * javaToJsonConfig.setIncludes("name", "age", "password");
  * 
- * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+ * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
  * 
  * </pre>
  * 
@@ -69,8 +69,11 @@ import net.sf.json.JsonConfig;
  */
 public class SensitiveWordsJsonValueProcessor extends AbstractJsonValueProcessor{
 
+    /** Singleton instance. */
+    public static final SensitiveWordsJsonValueProcessor INSTANCE                = new SensitiveWordsJsonValueProcessor();
+
     /** The default sensitive words. */
-    private static String DEFAULT_SENSITIVE_WORDS = "******";
+    private static String                                DEFAULT_SENSITIVE_WORDS = "******";
 
     /*
      * (non-Javadoc)
