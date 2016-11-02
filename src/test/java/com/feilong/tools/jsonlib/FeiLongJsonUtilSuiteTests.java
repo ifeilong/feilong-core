@@ -30,8 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 JsonUtilToBeanTest.class,
 
                 JsonUtilToMapTest.class,
-                JsonUtilToMapWithRootClassTest.class,
-                JsonUtilToMapWithRootClassAndClassMapTest.class,
+                JsonUtilToMapWithJsonToJavaConfigTest.class,
 
         //
 })
