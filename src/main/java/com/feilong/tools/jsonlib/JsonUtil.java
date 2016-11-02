@@ -30,6 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
 import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
@@ -37,11 +38,18 @@ import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_TIME;
+
+import net.sf.ezmorph.MorpherRegistry;
+import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.processors.PropertyNameProcessor;
+import net.sf.json.util.JSONUtils;
 import net.sf.json.util.JavaIdentifierTransformer;
 import net.sf.json.util.PropertySetStrategy;
 
@@ -120,6 +128,16 @@ public final class JsonUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    /**
+     * 设置日期转换格式.
+     */
+    static{
+        // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
+        // 注意:此处的代码不能移到 JsonHelper,否则json转成 java的时候 日期格式会出错
+        MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
+        morpherRegistry.registerMorpher(new DateMorpher(ConvertUtil.toArray(COMMON_DATE_AND_TIME, COMMON_TIME, COMMON_DATE)));
+
+    }
     //***************************format********************************************************
 
     // [start] format
@@ -1000,6 +1018,21 @@ public final class JsonUtil{
      * 
      * <h3>示例:</h3>
      * <blockquote>
+     * 
+     * 比如有 Person.class,代码如下
+     * 
+     * <pre class="code">
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     * 
+     *     // setter /getter 略
+     * }
+     * </pre>
+     * 
+     * 此时,
      * 
      * <pre class="code">
      * String json = "{'name':'get','dateAttr':'2009-11-12'}";

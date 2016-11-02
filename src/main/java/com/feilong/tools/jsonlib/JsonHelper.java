@@ -37,14 +37,9 @@ import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_TIME;
 
-import net.sf.ezmorph.MorpherRegistry;
-import net.sf.ezmorph.object.DateMorpher;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -67,23 +62,12 @@ final class JsonHelper{
     private static final JsonConfig DEFAULT_JSON_CONFIG_INSTANCE   = new JsonConfig();
 
     /** The Constant DEFAULT_JAVA_TO_JSON_CONFIG. */
-    private static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG;
+    private static final JsonConfig DEFAULT_JAVA_TO_JSON_CONFIG    = buildDefaultJavaToJsonConfig();
 
     //***********************************************************************************
     /** The Constant SENSITIVE_WORDS_PROPERTY_NAMES. */
     private static final String[]   SENSITIVE_WORDS_PROPERTY_NAMES = { "password", "key" };
     //***********************************************************************************
-    /**
-     * 设置日期转换格式.
-     */
-    static{
-        // 注册器
-        MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
-        // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
-        morpherRegistry.registerMorpher(new DateMorpher(toArray(COMMON_DATE_AND_TIME, COMMON_TIME, COMMON_DATE)));
-
-        DEFAULT_JAVA_TO_JSON_CONFIG = buildDefaultJavaToJsonConfig();
-    }
 
     /** Don't let anyone instantiate this class. */
     private JsonHelper(){
