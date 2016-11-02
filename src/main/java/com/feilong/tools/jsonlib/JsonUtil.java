@@ -687,36 +687,85 @@ public final class JsonUtil{
     // [start]toArray
 
     /**
-     * 把一个json数组串转换成实体数组,且数组元素的属性含有另外实例Bean.
+     * 把一个json数组串转换成实体数组,数组元素的属性可以含有另外实例Bean.
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre class="code">
-     * String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
-     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <String, Class<?>>}();
-     * classMap.put("data", Person.class);
+     * 比如有 <b>Person.class</b>,代码如下
      * 
-     * MyBean[] objArr = JsonUtil.toArray(json, MyBean.class, classMap);
-     * LOGGER.info(JsonUtil.format(objArr));
+     * <pre class="code">
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     * 
+     *     // setter /getter 略
+     * }
+     * </pre>
+     * 
+     * 此时,
+     * 
+     * <pre class="code">
+     * String json = "[{'name':'get'},{'name':'set'}]";
+     * Person[] persons = JsonUtil.toArray(json, new JsonToJavaConfig(Person.class));
+     * 
+     * LOGGER.debug(JsonUtil.format(persons));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     *        [{
-     *                    "id": 0,
-     *                    "data": [            {
-     *                        "dateAttr": null,
-     *                        "name": "get"
-     *                    }]
-     *          },{
-     *                    "id": 0,
-     *                    "data": [            {
-     *                        "dateAttr": null,
-     *                        "name": "set"
-     *                   }]
-     *        }]
+    [{
+            "dateAttr": null,
+            "name": "get"
+        },
+                {
+            "dateAttr": null,
+            "name": "set"
+        }]
+     * </pre>
+     * 
+     * 又如,又有<b>MyBean.class</b>
+     * 
+     * <pre class="code">
+     * public class MyBean{
+     * 
+     *     private Long id;
+     * 
+     *     private List{@code <Object>} data = new ArrayList{@code <>}();
+     *     //setter /getter 略
+     * }
+     * </pre>
+     * 
+     * 下列的代码:
+     * 
+     * <pre class="code">
+     * String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
+     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <>}();
+     * classMap.put("data", Person.class);
+     * 
+     * MyBean[] myBeans = JsonUtil.toArray(json, new JsonToJavaConfig(MyBean.class, classMap));
+     * LOGGER.debug(JsonUtil.format(myBeans));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    [{
+            "id": 0,
+            "data": [{
+                "dateAttr": null,
+                "name": "get"
+            }]
+        },{
+            "id": 0,
+            "data": [{
+                "dateAttr": null,
+                "name": "set"
+            }]
+        }]
      * </pre>
      * 
      * </blockquote>
@@ -727,7 +776,9 @@ public final class JsonUtil{
      *            e.g. [{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]
      * @param jsonToJavaConfig
      *            the json to java config
-     * @return T[]
+     * @return 如果 <code>json</code> 是null,返回 null<br>
+     *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see net.sf.json.JSONArray#fromObject(Object)
      * @see net.sf.json.JSONArray#getJSONObject(int)
      * @see #toBean(Object, JsonToJavaConfig)
@@ -735,11 +786,22 @@ public final class JsonUtil{
      * @since 1.9.4
      */
     public static <T> T[] toArray(Object json,JsonToJavaConfig jsonToJavaConfig){
+        if (null == json){
+            return null;
+        }
+
+        Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
+
+        Class<?> rootClass = jsonToJavaConfig.getRootClass();
+        Validate.notNull(rootClass, "rootClass can't be null!");
+
+        //------------------------------------------------------------------------------
+
         JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
 
         int size = jsonArray.size();
         @SuppressWarnings("unchecked")
-        T[] t = (T[]) ArrayUtil.newArray(jsonToJavaConfig.getRootClass(), size);
+        T[] t = (T[]) ArrayUtil.newArray(rootClass, size);
         for (int i = 0; i < size; i++){
             t[i] = toBean(jsonArray.getJSONObject(i), jsonToJavaConfig);
         }

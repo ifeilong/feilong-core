@@ -27,6 +27,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                JsonUtilToArrayWithJsonToJavaConfigTest.class,
+
                 JsonUtilToBeanTest.class,
                 JsonUtilToBeanWithJsonToJavaConfigTest.class,
 
