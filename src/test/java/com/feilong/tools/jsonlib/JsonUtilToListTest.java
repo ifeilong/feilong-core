@@ -15,11 +15,15 @@
  */
 package com.feilong.tools.jsonlib;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.test.Person;
 
@@ -30,17 +34,27 @@ import com.feilong.test.Person;
  */
 public class JsonUtilToListTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilToListTest.class);
-
     /**
      * 把一个json数组串转换成集合,且集合里存放的为实例Bean void.
      */
     @Test
-    public void toList(){
+    public void testToList(){
         String json = "[{'name':'get'},{'name':'set'}]";
         List<Person> list = JsonUtil.toList(json, Person.class);
 
-        LOGGER.debug(JsonUtil.format(list));
+        assertThat(list.get(0), allOf(hasProperty("name", is("get"))));
+        assertThat(list.get(1), allOf(hasProperty("name", is("set"))));
+    }
+
+    //----------------------------------------------------------------------------------------
+    @Test
+    public void testToListNullJson(){
+        assertEquals(null, JsonUtil.toList(null, Person.class));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testToListNullRootClass(){
+        String json = "[{'name':'get'},{'name':'set'}]";
+        JsonUtil.toList(json, (Class) null);
     }
 }

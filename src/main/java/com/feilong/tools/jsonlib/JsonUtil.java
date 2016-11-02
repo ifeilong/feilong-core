@@ -813,10 +813,24 @@ public final class JsonUtil{
     // *****************************List********************************************************
     // [start]toList
     /**
-     * 把一个json数组串转换成集合,且集合里存放的为实例Bean.
+     * 把一个json数组串转换成集合,集合里存放的为实例Bean.
      * 
      * <h3>示例:</h3>
      * <blockquote>
+     * 
+     * 如果有以下的bean <b>Person.class</b>:
+     * 
+     * <pre class="code">
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     *     //setter /getter 略
+     * }
+     * </pre>
+     * 
+     * 使用下列代码:
      * 
      * <pre class="code">
      * String json = "[{'name':'get'},{'name':'set'}]";
@@ -847,10 +861,16 @@ public final class JsonUtil{
      *            e.g. [{'name':'get'},{'name':'set'}]
      * @param rootClass
      *            the klass,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @return List
+     * @return 如果<code>json</code> 是null,那么返回 null<br>
+     *         如果 <code>rootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toList(Object, JsonToJavaConfig)
      */
     public static <T> List<T> toList(Object json,Class<T> rootClass){
+        if (null == json){
+            return null;
+        }
+        Validate.notNull(rootClass, "rootClass can't be null!");
+
         JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(rootClass);
         return toList(json, jsonToJavaConfig);
     }

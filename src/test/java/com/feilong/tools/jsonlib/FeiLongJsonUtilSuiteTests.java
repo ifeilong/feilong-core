@@ -29,6 +29,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 JsonUtilToArrayWithJsonToJavaConfigTest.class,
 
+                JsonUtilToListTest.class,
+
                 JsonUtilToBeanTest.class,
                 JsonUtilToBeanWithJsonToJavaConfigTest.class,
 
