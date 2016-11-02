@@ -30,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 JsonUtilToArrayWithJsonToJavaConfigTest.class,
 
                 JsonUtilToListTest.class,
+                JsonUtilToListWithJsonToJavaConfigTest.class,
 
                 JsonUtilToBeanTest.class,
                 JsonUtilToBeanWithJsonToJavaConfigTest.class,

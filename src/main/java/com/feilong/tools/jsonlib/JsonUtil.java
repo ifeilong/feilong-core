@@ -881,13 +881,39 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
+     * 比如有 <b>Person.class</b>,代码如下
+     * 
+     * <pre class="code">
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     * 
+     *     // setter /getter 略
+     * }
+     * </pre>
+     * 
+     * 又有<b>MyBean.class</b>
+     * 
+     * <pre class="code">
+     * public class MyBean{
+     * 
+     *     private Long id;
+     * 
+     *     private List{@code <Object>} data = new ArrayList{@code <>}();
+     *     //setter /getter 略
+     * }
+     * </pre>
+     * 
+     * 下列的代码:
+     * 
      * <pre class="code">
      * String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
      * Map{@code <String, Class<?>>} classMap = new HashMap{@code <>}();
      * classMap.put("data", Person.class);
      * 
-     * List{@code <MyBean>} list = JsonUtil.toList(json, MyBean.class, classMap);
-     * 
+     * List{@code <MyBean>} list = JsonUtil.toList(json, new JsonToJavaConfig(MyBean.class, classMap));
      * LOGGER.debug(JsonUtil.format(list));
      * </pre>
      * 
@@ -918,12 +944,26 @@ public final class JsonUtil{
      *            e.g. [{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]
      * @param jsonToJavaConfig
      *            the json to java config
-     * @return List
+     * @return 如果 <code>json</code> 是null,返回 null<br>
+     *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
+     * 
      * @see net.sf.json.JSONArray#getJSONObject(int)
      * @see net.sf.json.JSONArray#fromObject(Object)
      * @see #toBean(Object, JsonToJavaConfig)
      */
     public static <T> List<T> toList(Object json,JsonToJavaConfig jsonToJavaConfig){
+        if (null == json){
+            return null;
+        }
+
+        Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
+
+        Class<?> rootClass = jsonToJavaConfig.getRootClass();
+        Validate.notNull(rootClass, "rootClass can't be null!");
+
+        //----------------------------------------------------------------------------------
+
         JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
         List<T> list = new ArrayList<>();
         for (int i = 0, j = jsonArray.size(); i < j; i++){
