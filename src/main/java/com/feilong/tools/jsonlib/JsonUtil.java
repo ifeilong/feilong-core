@@ -910,29 +910,46 @@ public final class JsonUtil{
     }
 
     /**
-     * 把json对象串转换成map对象,且map对象里存放的其他实体Bean还含有另外实体Bean.
+     * 把json对象串转换成map对象,map对象里可以存放的其他实体Bean还含有另外实体Bean.
      * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * <pre class="code">
-     * String json = "{'mybean':{'data':[{'name':'get'}]}}";
-     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <String, Class<?>>}();
-     * classMap.put("data", Person.class);
+     * 比如有 Person.class,代码如下
      * 
-     * Map{@code <String, MyBean>} map = JsonUtil.toMap(json, MyBean.class, classMap);
+     * <pre class="code">
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     * 
+     *     // setter /getter 略
+     * }
+     * </pre>
+     * 
+     * 此时,
+     * 
+     * <pre class="code">
+     * String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
+     * Map<String, Person> map = JsonUtil.toMap(json, new JsonToJavaConfig(Person.class));
+     * 
      * LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     *        {"mybean":{
-     *                  "id": 0,
-     *                  "data": [{
-     *                      "name": "get"
-     *                  }]
-     *        }}
+    {
+        "data1":         {
+            "dateAttr": null,
+            "name": "get"
+        },
+        "data2":         {
+            "dateAttr": null,
+            "name": "set"
+        }
+    }
      * </pre>
      * 
      * </blockquote>
@@ -940,7 +957,7 @@ public final class JsonUtil{
      * @param <T>
      *            the generic type
      * @param json
-     *            e.g. {'mybean':{'data':[{'name':'get'}]}}
+     *            e.g. {'data1':{'name':'get'},'data2':{'name':'set'}}
      * @param jsonToJavaConfig
      *            the json to java config
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
