@@ -158,6 +158,20 @@ public class JsonToJavaConfig{
     }
 
     /**
+     * Instantiates a new json to java config.
+     *
+     * @param rootClass
+     *            the root class
+     * @param classMap
+     *            the class map
+     */
+    public JsonToJavaConfig(Class<?> rootClass, Map<String, Class<?>> classMap){
+        super();
+        this.rootClass = rootClass;
+        this.classMap = classMap;
+    }
+
+    /**
      * java标识符号转换器.
      * 
      * <p>

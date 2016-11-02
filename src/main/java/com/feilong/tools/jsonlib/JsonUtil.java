@@ -1083,21 +1083,46 @@ public final class JsonUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
-     * //TODO update javadoc
+     * 如果有以下的bean:
+     * 
+     * <pre class="code">
+     * public class MyBean{
+     * 
+     *     private Long id;
+     * 
+     *     private List{@code <Object>} data = new ArrayList{@code <>}();
+     *     //setter /getter 略
+     * }
+     * </pre>
+     * 
+     * <pre class="code">
+     * public class Person{
+     * 
+     *     private String name;
+     * 
+     *     private Date dateAttr;
+     *     //setter /getter 略
+     * }
+     * </pre>
+     * 
+     * 使用以下的代码:
      * 
      * <pre class="code">
      * String json = "{'data':[{'name':'get'},{'name':'set'}],'id':5}";
-     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <String, Class<?>>}();
+     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <>}();
      * classMap.put("data", Person.class);
      * 
-     * MyBean myBean = JsonUtil.toBean(json, MyBean.class, classMap);
-     * LOGGER.info(JsonUtil.format(myBean));
+     * JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(MyBean.class);
+     * jsonToJavaConfig.setClassMap(classMap);
+     * 
+     * MyBean myBean = JsonUtil.toBean(json, jsonToJavaConfig);
+     * LOGGER.debug(JsonUtil.format(myBean));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     *      {
+     * {
      *              "id": 5,
      *              "data":[{
      *                      "dateAttr": null,
@@ -1107,7 +1132,7 @@ public final class JsonUtil{
      *                      "name": "set"
      *                  }
      *              ]
-     *       }
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1118,7 +1143,9 @@ public final class JsonUtil{
      *            e.g. {'data':[{'name':'get'},{'name':'set'}]}
      * @param jsonToJavaConfig
      *            the json to java config
-     * @return 如果<code>json</code> 是null,那么返回 null
+     * @return 如果<code>json</code> 是null,那么返回 null<br>
+     *         如果 <code>jsonToJavaConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>jsonToJavaConfig.getRootClass()</code> 是null,抛出 {@link NullPointerException}<br>
      * @see JSONObject#fromObject(Object, JsonConfig)
      * @see net.sf.json.JsonConfig#setRootClass(Class)
      * @since 1.9.4
@@ -1128,16 +1155,25 @@ public final class JsonUtil{
         if (null == json){
             return null;
         }
+        Validate.notNull(jsonToJavaConfig, "jsonToJavaConfig can't be null!");
+
+        Class<?> rootClass = jsonToJavaConfig.getRootClass();
+        Validate.notNull(rootClass, "rootClass can't be null!");
+
+        //**********************************************************************************
+
         JSONObject jsonObject = JSONObject.fromObject(json);
 
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootClass(jsonToJavaConfig.getRootClass());
+        jsonConfig.setRootClass(rootClass);
 
+        //--------------JavaIdentifierTransformer-------------------------------
         JavaIdentifierTransformer javaIdentifierTransformer = jsonToJavaConfig.getJavaIdentifierTransformer();
         if (isNotNullOrEmpty(javaIdentifierTransformer)){
             jsonConfig.setJavaIdentifierTransformer(javaIdentifierTransformer);
         }
 
+        //--------------setClassMap-------------------------------
         //Sets the current attribute/Class Map [JSON -> Java]
         //classMap a Map of classes, every key identifies a property or a regexp
         Map<String, Class<?>> classMap = jsonToJavaConfig.getClassMap();

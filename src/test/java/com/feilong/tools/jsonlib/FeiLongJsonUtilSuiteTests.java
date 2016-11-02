@@ -28,6 +28,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
 
                 JsonUtilToBeanTest.class,
+                JsonUtilToBeanWithJsonToJavaConfigTest.class,
 
                 JsonUtilToMapTest.class,
                 JsonUtilToMapWithJsonToJavaConfigTest.class,
