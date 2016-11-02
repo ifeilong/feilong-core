@@ -144,6 +144,20 @@ public class JsonToJavaConfig{
     }
 
     /**
+     * Instantiates a new json to java config.
+     *
+     * @param rootClass
+     *            the root class
+     * @param javaIdentifierTransformer
+     *            the java identifier transformer
+     */
+    public JsonToJavaConfig(Class<?> rootClass, JavaIdentifierTransformer javaIdentifierTransformer){
+        super();
+        this.rootClass = rootClass;
+        this.javaIdentifierTransformer = javaIdentifierTransformer;
+    }
+
+    /**
      * java标识符号转换器.
      * 
      * <p>
