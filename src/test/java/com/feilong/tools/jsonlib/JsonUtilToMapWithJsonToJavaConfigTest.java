@@ -23,6 +23,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -32,18 +34,28 @@ import com.feilong.test.Person;
 import net.sf.json.JSONObject;
 
 /**
- * The Class JsonUtilToMapWithRootClassTest.
+ * The Class JsonUtilToMapWithJsonToJavaConfigTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class JsonUtilToMapWithRootClassTest{
+public class JsonUtilToMapWithJsonToJavaConfigTest{
 
     /**
      * To map.
      */
     @Test
     public void toMap(){
-        Map<String, Person> map = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", Person.class);
+        String json = "{'data1':{'name':'get'}}";
+        Map<String, Person> map = JsonUtil.toMap(json, new JsonToJavaConfig(Person.class));
+
+        assertThat(map, allOf(hasEntry(is("data1"), hasProperty("name", is("get")))));
+    }
+
+    @Test
+    public void toMap1(){
+        String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
+        Map<String, Person> map = JsonUtil.toMap(json, new JsonToJavaConfig(Person.class));
+
         assertThat(map, allOf(//
                         hasEntry(is("data1"), hasProperty("name", is("get"))),
                         hasEntry(is("data2"), hasProperty("name", is("set")))));
@@ -63,6 +75,28 @@ public class JsonUtilToMapWithRootClassTest{
                         hasEntry("data2", json2)));
     }
 
+    /**
+     * To map 3.
+     */
+    @Test
+    public void toMap3(){
+        String json = "{'mybean':{'data':[{'name':'get'}]}}";
+        Map<String, Class<?>> classMap = new HashMap<>();
+        classMap.put("data", Person.class);
+
+        JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(MyBean.class);
+        jsonToJavaConfig.setClassMap(classMap);
+
+        Map<String, MyBean> map = JsonUtil.toMap(json, jsonToJavaConfig);
+
+        MyBean myBean = map.get("mybean");
+        List<Object> data = myBean.getData();
+
+        Object object = data.get(0);
+        assertThat(object, hasProperty("name", is("get")));
+    }
+
+    //*********************************************
     //*********************************************
 
     /**
@@ -70,7 +104,7 @@ public class JsonUtilToMapWithRootClassTest{
      */
     @Test
     public void testToMapNullJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap(null, Person.class));
+        assertEquals(emptyMap(), JsonUtil.toMap(null, new JsonToJavaConfig(Person.class)));
     }
 
     /**
@@ -78,7 +112,7 @@ public class JsonUtilToMapWithRootClassTest{
      */
     @Test
     public void testToMapEmptyJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap("", Person.class));
+        assertEquals(emptyMap(), JsonUtil.toMap("", new JsonToJavaConfig(Person.class)));
     }
 
     /**
@@ -86,7 +120,7 @@ public class JsonUtilToMapWithRootClassTest{
      */
     @Test
     public void testToMapBlankJson(){
-        assertEquals(emptyMap(), JsonUtil.toMap(" ", Person.class));
+        assertEquals(emptyMap(), JsonUtil.toMap(" ", new JsonToJavaConfig(Person.class)));
     }
 
     /**
@@ -94,6 +128,7 @@ public class JsonUtilToMapWithRootClassTest{
      */
     @Test
     public void testToMapBlankJson1(){
-        assertEquals(emptyMap(), JsonUtil.toMap("{}", Person.class));
+        assertEquals(emptyMap(), JsonUtil.toMap("{}", new JsonToJavaConfig(Person.class)));
     }
+
 }
