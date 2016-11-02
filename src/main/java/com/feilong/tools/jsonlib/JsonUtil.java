@@ -16,52 +16,33 @@
 package com.feilong.tools.jsonlib;
 
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.collections4.IteratorUtils;
-import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ArrayUtil;
-import com.feilong.core.lang.ClassUtil;
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.lang.reflect.FieldUtil;
-import com.feilong.tools.jsonlib.processor.DateJsonValueProcessor;
 import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_TIME;
-
-import net.sf.ezmorph.MorpherRegistry;
-import net.sf.ezmorph.object.DateMorpher;
-import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.processors.PropertyNameProcessor;
-import net.sf.json.util.CycleDetectionStrategy;
-import net.sf.json.util.JSONUtils;
+import net.sf.json.util.JavaIdentifierTransformer;
 import net.sf.json.util.PropertySetStrategy;
 
 /**
@@ -69,19 +50,18 @@ import net.sf.json.util.PropertySetStrategy;
  * 
  * <h3>提供以下主要方法:</h3>
  * <blockquote>
+ * 
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">方法:</th>
  * <th align="left">说明:</th>
  * </tr>
+ * 
  * <tr valign="top">
  * <td>{@link #format(Object)}</td>
  * <td>将对象格式化成json字符串</td>
  * </tr>
- * <tr valign="top" style="background-color:#eeeeff">
- * <td>{@link #toJSON(Object)}</td>
- * <td>把实体Bean、Map对象、数组、列表集合转换成Json串.</td>
- * </tr>
+ * 
  * </table>
  * </blockquote>
  * 
@@ -96,7 +76,6 @@ import net.sf.json.util.PropertySetStrategy;
  * <li>key也不能是"null" 字符串</li>
  * </ul>
  * </blockquote>
- * 
  * 
  * <h3>依赖于下面的jar:</h3>
  * 
@@ -132,36 +111,13 @@ import net.sf.json.util.PropertySetStrategy;
 public final class JsonUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger                           LOGGER                              = LoggerFactory.getLogger(JsonUtil.class);
-
-    /** The Constant DEFAULT_JSON_CONFIG. */
-    private static final JsonConfig                       DEFAULT_JSON_CONFIG;
-
-    //***********************************************************************************
-    /** The Constant SENSITIVE_WORDS_JSONVALUE_PROCESSOR. */
-    private static final SensitiveWordsJsonValueProcessor SENSITIVE_WORDS_JSONVALUE_PROCESSOR = new SensitiveWordsJsonValueProcessor();
-
-    /** The Constant SENSITIVE_WORDS_PROPERTY_NAMES. */
-    private static final String[]                         SENSITIVE_WORDS_PROPERTY_NAMES      = { "password", "key" };
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtil.class);
 
     /** Don't let anyone instantiate this class. */
     private JsonUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //***********************************************************************************
-    /**
-     * 设置日期转换格式.
-     */
-    static{
-        // 注册器
-        MorpherRegistry morpherRegistry = JSONUtils.getMorpherRegistry();
-        // 可转换的日期格式,即Json串中可以出现以下格式的日期与时间
-        morpherRegistry.registerMorpher(new DateMorpher(ConvertUtil.toArray(COMMON_DATE_AND_TIME, COMMON_TIME, COMMON_DATE)));
-
-        DEFAULT_JSON_CONFIG = getDefaultJsonConfig();
     }
 
     //***************************format********************************************************
@@ -222,17 +178,17 @@ public final class JsonUtil{
      * 
      * <p>
      * 如果不需要 <code>indent</code>缩进,你可以调用 {@link #format(Object, int, int)}或者 {@link #format(Object, JsonConfig, int, int)}或者
-     * {@link #format(Object, JsonFormatConfig, int, int)}
+     * {@link #format(Object, JavaToJsonConfig, int, int)}
      * </p>
      * </blockquote>
      * 
      * @param obj
-     *            任何对象
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @see #format(Object, JsonFormatConfig)
+     * @see #format(Object, JavaToJsonConfig)
      */
     public static String format(Object obj){
-        return format(obj, (JsonFormatConfig) null);
+        return format(obj, (JavaToJsonConfig) null);
     }
 
     /**
@@ -308,7 +264,7 @@ public final class JsonUtil{
         Map<K, Object> simpleMap = new TreeMap<>();
         for (Map.Entry<K, V> entry : inputMap.entrySet()){
             V value = entry.getValue();
-            simpleMap.put(entry.getKey(), isAllowFormatType(value, allowFormatClassTypes) ? value : String.valueOf(value)); //注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
+            simpleMap.put(entry.getKey(), JsonHelper.isAllowFormatType(value, allowFormatClassTypes) ? value : String.valueOf(value)); //注意 String.valueOf(value)如果value是null 那么会输出 "null"字符串
         }
         return format(simpleMap);
     }
@@ -367,7 +323,7 @@ public final class JsonUtil{
      * </blockquote>
      *
      * @param obj
-     *            对象
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param excludes
      *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
@@ -420,7 +376,7 @@ public final class JsonUtil{
      * </blockquote>
      *
      * @param obj
-     *            the obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param excludes
      *            排除需要序列化成json的属性,如果 excludes isNotNullOrEmpty,那么不会setExcludes
      * @param indentFactor
@@ -428,11 +384,11 @@ public final class JsonUtil{
      * @param indent
      *            the indent
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @see #format(Object, JsonFormatConfig)
-     * @see #buildJsonFormatConfig(String[], String[])
+     * @see #format(Object, JavaToJsonConfig)
+     * @see JsonHelper#toJavaToJsonConfig(String[], String[])
      */
     public static String format(Object obj,String[] excludes,int indentFactor,int indent){
-        return null == obj ? EMPTY : format(obj, buildJsonFormatConfig(excludes, null), indentFactor, indent);
+        return null == obj ? EMPTY : format(obj, JsonHelper.toJavaToJsonConfig(excludes, null), indentFactor, indent);
     }
 
     /**
@@ -476,35 +432,20 @@ public final class JsonUtil{
      * </blockquote>
      *
      * @param obj
-     *            the obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param includes
      *            the includes
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
-     * @see #format(Object, JsonFormatConfig)
-     * @see #buildJsonFormatConfig(String[], String[])
+     * @see #format(Object, JavaToJsonConfig)
+     * @see JsonHelper#toJavaToJsonConfig(String[], String[])
      * @since 1.0.8
      */
     public static String formatWithIncludes(Object obj,final String...includes){
-        return null == obj ? EMPTY : format(obj, buildJsonFormatConfig(null, includes));
+        return null == obj ? EMPTY : format(obj, JsonHelper.toJavaToJsonConfig(null, includes));
     }
 
     /**
-     * Builds the json format config.
-     *
-     * @param excludes
-     *            the excludes
-     * @param includes
-     *            the includes
-     * @return the json format config
-     * @since 1.6.3
-     */
-    private static JsonFormatConfig buildJsonFormatConfig(String[] excludes,String[] includes){
-        boolean noNeedBuild = isNullOrEmpty(excludes) && isNullOrEmpty(includes);
-        return noNeedBuild ? null : new JsonFormatConfig(excludes, includes);
-    }
-
-    /**
-     * 将对象格式化 成json字符串,并且按照指定的缩进(<code>indentFactor</code>和 <code>indent</code>) 输出.
+     * 将<code>obj</code>格式化成json字符串,并且按照指定的缩进(<code>indentFactor</code>和 <code>indent</code>) 输出.
      * 
      * <h3>示例:</h3>
      * 
@@ -546,7 +487,7 @@ public final class JsonUtil{
      * </blockquote>
      *
      * @param obj
-     *            the obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param indentFactor
      *            the indent factor
      * @param indent
@@ -559,7 +500,7 @@ public final class JsonUtil{
     }
 
     /**
-     * 使用配置 <code>JsonFormatConfig</code> 来格式化成json字符串.
+     * 使用配置 <code>JavaToJsonConfig</code> 来格式化成json字符串.
      * 
      * <h3>示例:</h3>
      * 
@@ -571,14 +512,14 @@ public final class JsonUtil{
      * user.setPassword("123456");
      * user.setMoney(toBigDecimal("99999999.00"));
      * 
-     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <String, JsonValueProcessor>}();
+     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
      * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
      * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
-     * JsonFormatConfig jsonFormatConfig = new JsonFormatConfig();
-     * jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
+     * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
+     * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
      * 
-     * LOGGER.debug(JsonUtil.format(user, jsonFormatConfig));
+     * LOGGER.debug(JsonUtil.format(user, javaToJsonConfig));
      * 
      * </pre>
      * 
@@ -586,19 +527,19 @@ public final class JsonUtil{
      * 
      * <pre class="code">
      * {
-        "userAddresseList": [],
-        "userAddresses": [],
-        "date": null,
-        "password": "******",
-        "id": 0,
-        "age": 24,
-        "name": "feilong1",
-        "money": "99999999.00",
-        "attrMap": null,
-        "userInfo": {"age": 0},
-        "nickNames": [],
-        "loves": []
-    }
+     * "userAddresseList": [],
+     * "userAddresses": [],
+     * "date": null,
+     * "password": "******",
+     * "id": 0,
+     * "age": 24,
+     * "name": "feilong1",
+     * "money": "99999999.00",
+     * "attrMap": null,
+     * "userInfo": {"age": 0},
+     * "nickNames": [],
+     * "loves": []
+     * }
      * </pre>
      * 
      * <p>
@@ -608,22 +549,22 @@ public final class JsonUtil{
      * </blockquote>
      *
      * @param obj
-     *            the obj
-     * @param jsonFormatConfig
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
+     * @param javaToJsonConfig
      *            the json format config
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @since 1.2.2
      */
-    public static String format(Object obj,JsonFormatConfig jsonFormatConfig){
-        return format(obj, jsonFormatConfig, 4, 4);
+    public static String format(Object obj,JavaToJsonConfig javaToJsonConfig){
+        return format(obj, javaToJsonConfig, 4, 4);
     }
 
     /**
      * Format.
      *
      * @param obj
-     *            the obj
-     * @param jsonFormatConfig
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
+     * @param javaToJsonConfig
      *            the json format config
      * @param indentFactor
      *            the indent factor
@@ -632,16 +573,16 @@ public final class JsonUtil{
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @since 1.2.2
      */
-    public static String format(Object obj,JsonFormatConfig jsonFormatConfig,int indentFactor,int indent){
-        if (null == jsonFormatConfig){
+    public static String format(Object obj,JavaToJsonConfig javaToJsonConfig,int indentFactor,int indent){
+        if (null == javaToJsonConfig){
             return format(obj, (JsonConfig) null, indentFactor, indent);
         }
-        JsonConfig jsonConfig = getDefaultJsonConfig();
+        JsonConfig jsonConfig = JsonHelper.buildDefaultJavaToJsonConfig();
 
         //****************************************************************************************
 
         //property name处理器
-        Map<Class<?>, PropertyNameProcessor> targetClassAndPropertyNameProcessorMap = jsonFormatConfig
+        Map<Class<?>, PropertyNameProcessor> targetClassAndPropertyNameProcessorMap = javaToJsonConfig
                         .getJsonTargetClassAndPropertyNameProcessorMap();
         if (isNotNullOrEmpty(targetClassAndPropertyNameProcessorMap)){
             for (Map.Entry<Class<?>, PropertyNameProcessor> entry : targetClassAndPropertyNameProcessorMap.entrySet()){
@@ -651,7 +592,7 @@ public final class JsonUtil{
 
         //****************************************************************************************
         //value处理器
-        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = jsonFormatConfig.getPropertyNameAndJsonValueProcessorMap();
+        Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = javaToJsonConfig.getPropertyNameAndJsonValueProcessorMap();
         if (isNotNullOrEmpty(propertyNameAndJsonValueProcessorMap)){
             for (Map.Entry<String, JsonValueProcessor> entry : propertyNameAndJsonValueProcessorMap.entrySet()){
                 jsonConfig.registerJsonValueProcessor(entry.getKey(), entry.getValue());
@@ -661,13 +602,13 @@ public final class JsonUtil{
         //****************************************************************************************
 
         //排除
-        if (isNotNullOrEmpty(jsonFormatConfig.getExcludes())){
-            jsonConfig.setExcludes(jsonFormatConfig.getExcludes());
+        if (isNotNullOrEmpty(javaToJsonConfig.getExcludes())){
+            jsonConfig.setExcludes(javaToJsonConfig.getExcludes());
         }
 
         //包含
-        if (isNotNullOrEmpty(jsonFormatConfig.getIncludes())){
-            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(jsonFormatConfig.getIncludes()));
+        if (isNotNullOrEmpty(javaToJsonConfig.getIncludes())){
+            jsonConfig.setJsonPropertyFilter(new ArrayContainsPropertyNamesPropertyFilter(javaToJsonConfig.getIncludes()));
         }
 
         return format(obj, jsonConfig, indentFactor, indent);
@@ -685,36 +626,16 @@ public final class JsonUtil{
      * </blockquote>
      * 
      * @param obj
-     *            the obj
+     *            可以是Java bean
      * @return 如果 <code>obj</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      *         否则取到该对象 所有field 的name 和value值 map {@link FieldUtil#getAllFieldNameAndValueMap(Object, String...)} 调用
-     *         {@link #format(Object, JsonFormatConfig)},再次过程中,会处理 {@link SensitiveWords}
+     *         {@link #format(Object, JavaToJsonConfig)},再次过程中,会处理 {@link SensitiveWords}
      * @see FieldUtil#getAllFieldNameAndValueMap(Object, String...)
      * @see org.apache.commons.lang3.reflect.FieldUtils#getFieldsListWithAnnotation(Class, Class)
      * @since 1.5.6
      */
     public static String formatObjectFieldsNameAndValueMap(Object obj){
-        return null == obj ? EMPTY : format(FieldUtil.getAllFieldNameAndValueMap(obj), buildJsonFormatConfig(obj));
-    }
-
-    /**
-     * Builds the json format config.
-     *
-     * @param obj
-     *            the obj
-     * @return the json format config
-     * @since 1.6.3
-     */
-    private static JsonFormatConfig buildJsonFormatConfig(Object obj){
-        List<Field> fieldsListWithAnnotation = FieldUtils.getFieldsListWithAnnotation(obj.getClass(), SensitiveWords.class);
-        if (isNotNullOrEmpty(fieldsListWithAnnotation)){
-            Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
-            for (Field field : fieldsListWithAnnotation){
-                propertyNameAndJsonValueProcessorMap.put(field.getName(), SENSITIVE_WORDS_JSONVALUE_PROCESSOR);
-            }
-            return new JsonFormatConfig(propertyNameAndJsonValueProcessorMap);
-        }
-        return null;
+        return null == obj ? EMPTY : format(FieldUtil.getAllFieldNameAndValueMap(obj), JsonHelper.buildJavaBeanToJsonConfig(obj));
     }
 
     /**
@@ -725,7 +646,7 @@ public final class JsonUtil{
      * </p>
      *
      * @param obj
-     *            the obj
+     *            可以是数组,字符串,枚举,集合,map,Java bean,Iterator等类型,内部自动识别转成{@link JSONArray}还是{@link JSONObject}
      * @param jsonConfig
      *            the json config
      * @param indentFactor
@@ -738,197 +659,13 @@ public final class JsonUtil{
      * @since 1.0.8
      */
     private static String format(Object obj,JsonConfig jsonConfig,int indentFactor,int indent){
-        return null == obj ? EMPTY : toJSON(obj, jsonConfig).toString(indentFactor, indent);
+        return null == obj ? EMPTY : JsonHelper.toJSON(obj, jsonConfig).toString(indentFactor, indent);
     }
 
     // [end]
-
-    // [start]toJSON
-
-    /**
-     * 把实体Bean、Map对象、数组、列表集合转换成Json串.
-     *
-     * @param obj
-     *            the obj
-     * @return the jSON
-     * @see #toJSON(Object, JsonConfig)
-     */
-    static JSON toJSON(Object obj){
-        return toJSON(obj, null);
-    }
-
-    /**
-     * 把实体Bean、Map对象、数组、列表集合转换成Json.
-     * 
-     * <p>
-     * 如果 <code>null==jsonConfig</code>,将使用 {@link #DEFAULT_JSON_CONFIG}
-     * </p>
-     *
-     * @param obj
-     *            the obj
-     * @param jsonConfig
-     *            the json config
-     * @return the jSON
-     * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
-     * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
-     * @see net.sf.json.util.JSONUtils#isArray(Object)
-     * @see java.lang.Class#isEnum()
-     * @see net.sf.json.JsonConfig#registerJsonValueProcessor(Class, JsonValueProcessor)
-     * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator)
-     * @see org.apache.commons.collections4.IteratorUtils#toList(Iterator, int)
-     * @see net.sf.json.JSONSerializer#toJSON(Object)
-     */
-    static JSON toJSON(Object obj,JsonConfig jsonConfig){
-        JsonConfig useJsonConfig = defaultIfNull(jsonConfig, DEFAULT_JSON_CONFIG);
-        registerDefaultJsonValueProcessor(useJsonConfig);
-
-        if (isNeedConvertToJSONArray(obj)){
-            Object arrayJsonObject = obj instanceof Iterator ? IteratorUtils.toList((Iterator<?>) obj) : obj;
-            return toJSONArray(arrayJsonObject, useJsonConfig);
-        }
-        return toJSONObject(obj, useJsonConfig);
-    }
-
-    /**
-     * 是否需要转成 JSONArray类型.
-     *
-     * @param obj
-     *            the obj
-     * @return true, if is array
-     * @see net.sf.json.JSONArray#_fromJSONTokener(net.sf.json.util.JSONTokener, JsonConfig)
-     * @since 1.7.2
-     */
-    private static boolean isNeedConvertToJSONArray(Object obj){
-        if (obj instanceof String){
-            String str = (String) obj;
-            if (str.startsWith("[") && str.endsWith("]")){// [] 格式的字符串 
-                return true;
-            }
-        }
-        return JSONUtils.isArray(obj) || //obj.getClass().isArray() || obj instanceof Collection || obj instanceof Object[]
-                        obj instanceof Enum || // obj.getClass().isEnum()这么写 null会报错// object' is an Enum. Use JSONArray instead
-                        obj instanceof Iterator;
-    }
-
-    // [end]
-
-    /**
-     * 默认的处理器.
-     *
-     * @param jsonConfig
-     *            the json config
-     * @since 1.5.3
-     */
-    private static void registerDefaultJsonValueProcessor(JsonConfig jsonConfig){
-        for (String propertyName : SENSITIVE_WORDS_PROPERTY_NAMES){
-            jsonConfig.registerJsonValueProcessor(propertyName, SENSITIVE_WORDS_JSONVALUE_PROCESSOR);
-        }
-    }
-
-    //********************************************************************************************
-
-    /**
-     * To json array.
-     *
-     * @param json
-     *            the json
-     * @return the JSON array
-     * @see net.sf.json.JSONArray#fromObject(Object)
-     * @since 1.4.0
-     */
-    private static JSONArray toJSONArray(String json){
-        return toJSONArray(json, new JsonConfig());
-    }
-
-    /**
-     * To json array.
-     *
-     * @param obj
-     *            Accepts JSON formatted strings, arrays, Collections and Enums.
-     * @param useJsonConfig
-     *            the use json config
-     * @return the JSON array
-     * @see net.sf.json.JSONArray#fromObject(Object, JsonConfig)
-     * @since 1.4.0
-     */
-    private static JSONArray toJSONArray(Object obj,JsonConfig useJsonConfig){
-        return JSONArray.fromObject(obj, useJsonConfig);
-    }
-
-    //**************toJSONObject********************
-
-    /**
-     * To json object.
-     *
-     * @param json
-     *            the json
-     * @return the JSON object
-     * @see net.sf.json.JSONObject#fromObject(Object)
-     * @since 1.4.0
-     */
-    private static JSONObject toJSONObject(String json){
-        return toJSONObject(json, new JsonConfig());
-    }
-
-    /**
-     * To json object.
-     *
-     * @param obj
-     *            Accepts JSON formatted strings, Maps, DynaBeans and JavaBeans
-     * @param useJsonConfig
-     *            the use json config
-     * @return the JSON object
-     * @see net.sf.json.JSONObject#fromObject(Object, JsonConfig)
-     * @since 1.4.0
-     */
-    private static JSONObject toJSONObject(Object obj,JsonConfig useJsonConfig){
-        return JSONObject.fromObject(obj, useJsonConfig);
-    }
 
     // *****************************Array******************************************************
     // [start]toArray
-
-    /**
-     * 把一个json数组串,转换成实体数组.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * String json = "[{'name':'get'},{'name':'set'}]";
-     * Person[] objArr = JsonUtil.toArray(json, Person.class);
-     * 
-     * LOGGER.info(JsonUtil.format(objArr));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-       [{
-               "dateAttr": null,
-               "name": "get"
-           },
-           {
-               "dateAttr": null,
-               "name": "set"
-        }]
-     * 
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <T>
-     *            the generic type
-     * @param json
-     *            e.g. [{'name':'get'},{'name':'set'}]
-     * @param rootClass
-     *            e.g. Person.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @return Object[]
-     * @see #toArray(String, Class, Map)
-     */
-    public static <T> T[] toArray(String json,Class<T> rootClass){
-        return toArray(json, rootClass, null);
-    }
 
     /**
      * 把一个json数组串转换成实体数组,且数组元素的属性含有另外实例Bean.
@@ -948,19 +685,19 @@ public final class JsonUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-       [{
-                   "id": 0,
-                   "data": [            {
-                       "dateAttr": null,
-                       "name": "get"
-                   }]
-         },{
-                   "id": 0,
-                   "data": [            {
-                       "dateAttr": null,
-                       "name": "set"
-                  }]
-       }]
+     *        [{
+     *                    "id": 0,
+     *                    "data": [            {
+     *                        "dateAttr": null,
+     *                        "name": "get"
+     *                    }]
+     *          },{
+     *                    "id": 0,
+     *                    "data": [            {
+     *                        "dateAttr": null,
+     *                        "name": "set"
+     *                   }]
+     *        }]
      * </pre>
      * 
      * </blockquote>
@@ -969,23 +706,23 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. [{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]
-     * @param rootClass
-     *            e.g. MyBean.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @param classMap
-     *            e.g. classMap.put("data", Person.class)
+     * @param jsonToJavaConfig
+     *            the json to java config
      * @return T[]
      * @see net.sf.json.JSONArray#fromObject(Object)
      * @see net.sf.json.JSONArray#getJSONObject(int)
-     * @see #toBean(Object, Class, Map)
+     * @see #toBean(Object, JsonToJavaConfig)
      * @see java.lang.reflect.Array#newInstance(Class, int)
+     * @since 1.9.4
      */
-    public static <T> T[] toArray(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
-        JSONArray jsonArray = toJSONArray(json);
+    public static <T> T[] toArray(Object json,JsonToJavaConfig jsonToJavaConfig){
+        JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
 
         int size = jsonArray.size();
-        T[] t = ArrayUtil.newArray(rootClass, size);
+        @SuppressWarnings("unchecked")
+        T[] t = (T[]) ArrayUtil.newArray(jsonToJavaConfig.getRootClass(), size);
         for (int i = 0; i < size; i++){
-            t[i] = toBean(jsonArray.getJSONObject(i), rootClass, classMap);
+            t[i] = toBean(jsonArray.getJSONObject(i), jsonToJavaConfig);
         }
         return t;
     }
@@ -994,7 +731,6 @@ public final class JsonUtil{
 
     // *****************************List********************************************************
     // [start]toList
-
     /**
      * 把一个json数组串转换成集合,且集合里存放的为实例Bean.
      * 
@@ -1031,10 +767,11 @@ public final class JsonUtil{
      * @param rootClass
      *            the klass,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
      * @return List
-     * @see #toList(String, Class, Map)
+     * @see #toList(Object, JsonToJavaConfig)
      */
-    public static <T> List<T> toList(String json,Class<T> rootClass){
-        return toList(json, rootClass, null);
+    public static <T> List<T> toList(Object json,Class<T> rootClass){
+        JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig(rootClass);
+        return toList(json, jsonToJavaConfig);
     }
 
     /**
@@ -1045,7 +782,7 @@ public final class JsonUtil{
      * 
      * <pre class="code">
      * String json = "[{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]";
-     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <String, Class<?>>}();
+     * Map{@code <String, Class<?>>} classMap = new HashMap{@code <>}();
      * classMap.put("data", Person.class);
      * 
      * List{@code <MyBean>} list = JsonUtil.toList(json, MyBean.class, classMap);
@@ -1056,20 +793,20 @@ public final class JsonUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     [{
-             "id": 0,
-             "data": [            {
-                 "dateAttr": null,
-                 "name": "get"
-             }]
-         },
-                 {
-             "id": 0,
-             "data": [            {
-                 "dateAttr": null,
-                 "name": "set"
-             }]
-      }]
+     *      [{
+     *              "id": 0,
+     *              "data": [            {
+     *                  "dateAttr": null,
+     *                  "name": "get"
+     *              }]
+     *          },
+     *                  {
+     *              "id": 0,
+     *              "data": [            {
+     *                  "dateAttr": null,
+     *                  "name": "set"
+     *              }]
+     *       }]
      * </pre>
      * 
      * </blockquote>
@@ -1078,20 +815,18 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. [{'data':[{'name':'get'}]},{'data':[{'name':'set'}]}]
-     * @param rootClass
-     *            e.g. MyBean.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @param classMap
-     *            e.g. classMap.put("data", Person.class)
+     * @param jsonToJavaConfig
+     *            the json to java config
      * @return List
      * @see net.sf.json.JSONArray#getJSONObject(int)
      * @see net.sf.json.JSONArray#fromObject(Object)
-     * @see #toBean(Object, Class, Map)
+     * @see #toBean(Object, JsonToJavaConfig)
      */
-    public static <T> List<T> toList(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
-        JSONArray jsonArray = toJSONArray(json);
+    public static <T> List<T> toList(Object json,JsonToJavaConfig jsonToJavaConfig){
+        JSONArray jsonArray = JsonHelper.toJSONArray(json, null);
         List<T> list = new ArrayList<>();
         for (int i = 0, j = jsonArray.size(); i < j; i++){
-            list.add(toBean(jsonArray.getJSONObject(i), rootClass, classMap));
+            list.add(JsonUtil.<T> toBean(jsonArray.getJSONObject(i), jsonToJavaConfig));
         }
         return list;
     }
@@ -1167,66 +902,11 @@ public final class JsonUtil{
      * @param json
      *            the json
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}
-     * @see #toMap(String, Class)
+     * @see #toMap(Object, JsonToJavaConfig)
      * @since 1.5.0
      */
-    public static <T> Map<String, T> toMap(String json){
+    public static <T> Map<String, T> toMap(Object json){
         return toMap(json, null);
-    }
-
-    /**
-     * 把json字符串转换成map对象,且map对象里存放的为其他实体Bean.
-     * 
-     * <h3>示例:</h3>
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
-     * Map{@code <String, Person>} map = JsonUtil.toMap(json, Person.class);
-     * LOGGER.info(JsonUtil.format(map));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     {"data1":{
-                 "name": "get"
-             },
-      "data2":{
-                 "name": "set"
-     }}
-     * </pre>
-     * 
-     * <hr>
-     * 
-     * <pre class="code">
-     * Map{@code <String, JSONObject>} map1 = JsonUtil.toMap("{'data1':{'name':'get'},'data2':{'name':'set'}}", null);
-     * LOGGER.info(JsonUtil.format(map1));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * {
-     * "data1": {"name": "get"},
-     * "data2": {"name": "set"}
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param <T>
-     *            the generic type
-     * @param json
-     *            e.g. {'data1':{'name':'get'}, 'data2':{'name':'set'}}
-     * @param rootClass
-     *            e.g. Person.class ,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
-     * @see #toMap(String, Class, Map)
-     */
-    public static <T> Map<String, T> toMap(String json,Class<T> rootClass){
-        return toMap(json, rootClass, null);
     }
 
     /**
@@ -1247,12 +927,12 @@ public final class JsonUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-       {"mybean":{
-                 "id": 0,
-                 "data": [{
-                     "name": "get"
-                 }]
-       }}
+     *        {"mybean":{
+     *                  "id": 0,
+     *                  "data": [{
+     *                      "name": "get"
+     *                  }]
+     *        }}
      * </pre>
      * 
      * </blockquote>
@@ -1261,19 +941,18 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. {'mybean':{'data':[{'name':'get'}]}}
-     * @param rootClass
-     *            e.g. MyBean.class ,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @param classMap
-     *            e.g. classMap.put("data", Person.class)
+     * @param jsonToJavaConfig
+     *            the json to java config
      * @return 如果 <code>json</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>rootClass</code> 是null,那么直接将json里面的value 作为map 的value
      * @see net.sf.json.JSONObject#keys()
-     * @see #toBean(Object, Class, Map)
+     * @see #toBean(Object, JsonToJavaConfig)
      * @since 1.9.2 use LinkedHashMap instead of HashMap
+     * @since 1.9.4
      */
     @SuppressWarnings("unchecked")
-    public static <T> Map<String, T> toMap(String json,Class<T> rootClass,Map<String, Class<?>> classMap){
-        LOGGER.trace("input json:[{}],rootClass:[{}]", json, rootClass);
+    public static <T> Map<String, T> toMap(Object json,JsonToJavaConfig jsonToJavaConfig){
+        LOGGER.trace("input json:[{}],jsonToJavaConfig:[{}]", json, jsonToJavaConfig);
 
         if (isNullOrEmpty(json)){
             return emptyMap();
@@ -1281,13 +960,15 @@ public final class JsonUtil{
 
         Map<String, T> map = new LinkedHashMap<>();
 
-        JSONObject jsonObject = toJSONObject(json);
+        JSONObject jsonObject = JsonHelper.toJSONObject(json, null);
         Iterator<String> keys = jsonObject.keys();
         while (keys.hasNext()){
             String key = keys.next();
             Object value = jsonObject.get(key);
             LOGGER.trace("key:[{}],value:[{}],value type is:[{}]", key, value, value.getClass().getName());
-            map.put(key, null == rootClass ? (T) value : toBean(value, rootClass, classMap));//如果rootClass是null,表示不需要转换
+
+            //如果rootClass是null,表示不需要转换
+            map.put(key, JsonHelper.<T> transformerValue(value, jsonToJavaConfig));
         }
         return map;
     }
@@ -1331,17 +1012,24 @@ public final class JsonUtil{
      * @return 如果<code>json</code> 是null,那么返回 null
      * @see JSONObject#fromObject(Object, JsonConfig)
      * @see net.sf.json.JsonConfig#setRootClass(Class)
-     * @see #toBean(Object, Class, Map)
+     * @see #toBean(Object, JsonToJavaConfig)
      */
     public static <T> T toBean(Object json,Class<T> rootClass){
-        return toBean(json, rootClass, null);
+        if (null == json){
+            return null;
+        }
+        JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig();
+        jsonToJavaConfig.setRootClass(rootClass);
+        return toBean(json, jsonToJavaConfig);
     }
 
     /**
-     * 从json串转换成实体对象,并且实体集合属性存有另外实体Bean.
+     * 从json串转换成 javabean 实体对象,支持实体集合属性可能存有另外实体Bean.
      * 
      * <h3>示例:</h3>
      * <blockquote>
+     * 
+     * //TODO update javadoc
      * 
      * <pre class="code">
      * String json = "{'data':[{'name':'get'},{'name':'set'}],'id':5}";
@@ -1355,17 +1043,17 @@ public final class JsonUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-     {
-             "id": 5,
-             "data":[{
-                     "dateAttr": null,
-                     "name": "get"
-                 },{
-                     "dateAttr": null,
-                     "name": "set"
-                 }
-             ]
-      }
+     *      {
+     *              "id": 5,
+     *              "data":[{
+     *                      "dateAttr": null,
+     *                      "name": "get"
+     *                  },{
+     *                      "dateAttr": null,
+     *                      "name": "set"
+     *                  }
+     *              ]
+     *       }
      * </pre>
      * 
      * </blockquote>
@@ -1374,45 +1062,34 @@ public final class JsonUtil{
      *            the generic type
      * @param json
      *            e.g. {'data':[{'name':'get'},{'name':'set'}]}
-     * @param rootClass
-     *            e.g. MyBean.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @param classMap
-     *            e.g. classMap.put("data", Person.class)
+     * @param jsonToJavaConfig
+     *            the json to java config
      * @return 如果<code>json</code> 是null,那么返回 null
-     * @see #toBean(Object, JsonConfig)
      * @see JSONObject#fromObject(Object, JsonConfig)
      * @see net.sf.json.JsonConfig#setRootClass(Class)
+     * @since 1.9.4
      */
-    public static <T> T toBean(Object json,Class<T> rootClass,Map<String, Class<?>> classMap){
+    @SuppressWarnings("unchecked")
+    public static <T> T toBean(Object json,JsonToJavaConfig jsonToJavaConfig){
         if (null == json){
             return null;
         }
         JSONObject jsonObject = JSONObject.fromObject(json);
 
-        JsonConfig jsonConfig = getDefaultJsonConfig();
-        jsonConfig.setRootClass(rootClass);
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setRootClass(jsonToJavaConfig.getRootClass());
 
+        JavaIdentifierTransformer javaIdentifierTransformer = jsonToJavaConfig.getJavaIdentifierTransformer();
+        if (isNotNullOrEmpty(javaIdentifierTransformer)){
+            jsonConfig.setJavaIdentifierTransformer(javaIdentifierTransformer);
+        }
+
+        //Sets the current attribute/Class Map [JSON -> Java]
+        //classMap a Map of classes, every key identifies a property or a regexp
+        Map<String, Class<?>> classMap = jsonToJavaConfig.getClassMap();
         if (isNotNullOrEmpty(classMap)){
             jsonConfig.setClassMap(classMap);
         }
-        return toBean(jsonObject, jsonConfig);
-    }
-
-    /**
-     * json串,转换成对象.
-     *
-     * @param <T>
-     *            the generic type
-     * @param json
-     *            the json
-     * @param jsonConfig
-     *            the json config
-     * @return 如果<code>json</code> 是null,那么返回 null
-     * @see net.sf.json.JSONObject#toBean(JSONObject, JsonConfig)
-     */
-    @SuppressWarnings("unchecked")
-    private static <T> T toBean(Object json,JsonConfig jsonConfig){
-        JSONObject jsonObject = JSONObject.fromObject(json);
 
         // Ignore missing properties with Json-Lib
 
@@ -1423,64 +1100,4 @@ public final class JsonUtil{
     }
 
     // [end]
-    //***********************************************************************************
-    /**
-     * 默认的JsonConfig.
-     *
-     * @return the default json config
-     * @see see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
-     * 
-     * @see net.sf.json.util.CycleDetectionStrategy#LENIENT
-     */
-    private static JsonConfig getDefaultJsonConfig(){
-        JsonConfig jsonConfig = new JsonConfig();
-
-        // 排除,避免循环引用 There is a cycle in the hierarchy!
-        //Returns empty array and null object
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
-
-        //see net.sf.json.JsonConfig#DEFAULT_EXCLUDES
-        //默认会过滤的几个key "class", "declaringClass","metaClass"  
-        jsonConfig.setIgnoreDefaultExcludes(false);
-
-        //See javax.persistence.Transient
-        //jsonConfig.setIgnoreJPATransient(true);
-
-        //see Modifier.TRANSIENT
-        //jsonConfig.setIgnoreTransientFields(true);
-
-        //jsonConfig.setIgnorePublicFields(false);
-
-        // 注册日期处理器
-        jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor(COMMON_DATE_AND_TIME));
-
-        // java.lang.ClassCastException: JSON keys must be strings
-        // see http://feitianbenyue.iteye.com/blog/2046877
-        jsonConfig.setAllowNonStringKeys(true);
-        return jsonConfig;
-    }
-
-    /**
-     * 是否是可以被json format的类型.
-     *
-     * @param <V>
-     *            the value type
-     * @param value
-     *            the value
-     * @param allowClassTypes
-     *            the allow class types
-     * @return true, if checks if is allow format type
-     * @since 1.4.0
-     */
-    private static <V> boolean isAllowFormatType(V value,Class<?>...allowClassTypes){
-        if (null == value){//null 是可以 format的
-            return true;
-        }
-        Class<?> klassClass = value.getClass();
-        return ClassUtils.isPrimitiveOrWrapper(klassClass) //
-                        || String.class == klassClass //
-                        || ObjectUtil.isArray(value)//XXX 数组一般 是可以转换的 
-                        || ClassUtil.isInstanceAnyClass(value, allowClassTypes)//
-        ;
-    }
 }
