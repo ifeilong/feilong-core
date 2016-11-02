@@ -45,6 +45,7 @@ import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -54,10 +55,10 @@ import net.sf.json.JsonConfig;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class JsonUtilTest extends AbstractJsonTest{
+public class JsonUtilFormatTest extends AbstractJsonTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtilFormatTest.class);
 
     /**
      * Test json menu.
@@ -200,7 +201,7 @@ public class JsonUtilTest extends AbstractJsonTest{
      */
     @Test
     public void testVector(){
-        Vector<Integer> vector = new Vector<Integer>();
+        Vector<Integer> vector = new Vector<>();
         vector.add(1);
         vector.add(2222);
         vector.add(3333);
@@ -214,7 +215,7 @@ public class JsonUtilTest extends AbstractJsonTest{
      */
     @Test
     public void testHashtable(){
-        Hashtable<String, Object> hashtable = new Hashtable<String, Object>();
+        Hashtable<String, Object> hashtable = new Hashtable<>();
         hashtable.put("a", "a");
         // hashtable.put("a", null);
         LOGGER.debug("hashtable:{}", JsonUtil.format(hashtable));
@@ -225,7 +226,7 @@ public class JsonUtilTest extends AbstractJsonTest{
      */
     @Test
     public void toBeanNUll(){
-        LOGGER.debug(JsonUtil.toJSON(null).toString(4, 4));
+        LOGGER.debug(toJSON(null).toString(4, 4));
         LOGGER.debug(new JSONObject().toString(4));
     }
 
@@ -234,7 +235,7 @@ public class JsonUtilTest extends AbstractJsonTest{
      */
     @Test
     public void toJSON(){
-        LOGGER.debug(JsonUtil.toJSON(HttpMethodTestType.GET).toString(4, 4));
+        LOGGER.debug(toJSON(HttpMethodTestType.GET).toString(4, 4));
     }
 
     /**
@@ -254,7 +255,7 @@ public class JsonUtilTest extends AbstractJsonTest{
         Class<UserInfo> target = UserInfo.class;
         String[] properties = { "age" };
         jsonConfig.registerPropertyExclusions(target, properties);
-        LOGGER.debug(JsonUtil.toJSON(user, jsonConfig).toString(4, 4));
+        LOGGER.debug(JsonHelper.toJSON(user, jsonConfig).toString(4, 4));
     }
 
     /**
@@ -274,7 +275,7 @@ public class JsonUtilTest extends AbstractJsonTest{
         map.put("a", map1);
         map.put("aa", map1);
         map.put("aaa", map1);
-        LOGGER.debug(JsonUtil.toJSON(map).toString(4, 4));
+        LOGGER.debug(toJSON(map).toString(4, 4));
     }
 
     /**
@@ -291,7 +292,7 @@ public class JsonUtilTest extends AbstractJsonTest{
 
         myBean.setData(list);
         // print: {"data":[{"dateAttr":"2009-09-12 07:24:54","name":"get"}]}
-        LOGGER.debug("" + JsonUtil.toJSON(myBean));
+        LOGGER.debug("" + toJSON(myBean));
     }
 
     /**
@@ -306,23 +307,36 @@ public class JsonUtilTest extends AbstractJsonTest{
         list.add(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:49","name":"get"}]
-        LOGGER.debug("" + JsonUtil.toJSON(list));
+        LOGGER.debug("" + toJSON(list));
 
         Set set = new LinkedHashSet();
         set.add(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:16","name":"get"}]
-        LOGGER.debug("" + JsonUtil.toJSON(set));
+        LOGGER.debug("" + toJSON(set));
 
         Person[] personArr = new Person[1];
         personArr[0] = ps;
         // print: [{"dateAttr":"2009-09-12 07:23:54","name":"get"}]
-        LOGGER.debug("" + JsonUtil.toJSON(personArr));
+        LOGGER.debug("" + toJSON(personArr));
 
         Map map = new LinkedHashMap();
         map.put("person1", ps);
 
         // print: {"person1":{"dateAttr":"2009-09-12 07:24:27","name":"get"}}
-        LOGGER.debug("" + JsonUtil.toJSON(map));
+        LOGGER.debug("" + toJSON(map));
     }
+
+    /**
+     * 把实体Bean、Map对象、数组、列表集合转换成Json串.
+     *
+     * @param obj
+     *            the obj
+     * @return the jSON
+     * @see #toJSON(Object, JsonConfig)
+     */
+    static JSON toJSON(Object obj){
+        return JsonHelper.toJSON(obj, null);
+    }
+
 }
