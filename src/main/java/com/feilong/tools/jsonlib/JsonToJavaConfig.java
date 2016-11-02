@@ -45,7 +45,7 @@ public class JsonToJavaConfig{
     private Map<String, Class<?>>     classMap;
 
     /**
-     * java标识器转换符号.
+     * java标识符号转换器.
      * 
      * <p>
      * <a href="http://json.org/">JSON 规范</a>指出一个对象的key是个字符串,并且该字符串是零个或多个Unicode字符的集合，用双引号括起来，使用反斜杠转义。<br>
@@ -144,7 +144,7 @@ public class JsonToJavaConfig{
     }
 
     /**
-     * java标识器转换符号.
+     * java标识符号转换器.
      * 
      * <p>
      * <a href="http://json.org/">JSON 规范</a>指出一个对象的key是个字符串,并且该字符串是零个或多个Unicode字符的集合，用双引号括起来，使用反斜杠转义。<br>
@@ -220,7 +220,7 @@ public class JsonToJavaConfig{
      * 
      * </blockquote>
      *
-     * @return the java标识器转换符号
+     * @return java标识符号转换器
      * @see net.sf.json.JsonConfig#setJavaIdentifierTransformer(JavaIdentifierTransformer)
      */
     public JavaIdentifierTransformer getJavaIdentifierTransformer(){
@@ -228,7 +228,7 @@ public class JsonToJavaConfig{
     }
 
     /**
-     * java标识器转换符号.
+     * java标识符号转换器.
      * 
      * <p>
      * <a href="http://json.org/">JSON 规范</a>指出一个对象的key是个字符串,并且该字符串是零个或多个Unicode字符的集合，用双引号括起来，使用反斜杠转义。<br>
@@ -305,7 +305,7 @@ public class JsonToJavaConfig{
      * </blockquote>
      *
      * @param javaIdentifierTransformer
-     *            the new java标识器转换符号
+     *            java标识符号转换器
      * @see net.sf.json.JsonConfig#setJavaIdentifierTransformer(JavaIdentifierTransformer)
      */
     public void setJavaIdentifierTransformer(JavaIdentifierTransformer javaIdentifierTransformer){

@@ -62,10 +62,10 @@ public class JavaToJsonConfig{
      * 
      * <pre class="code">
      * {
-     *   "password": "******",
-     *   "age": 24,
-     *   "name": "feilong1",
-     *   "money": "99999999.00"
+     * "password": "******",
+     * "age": 24,
+     * "name": "feilong1",
+     * "money": "99999999.00"
      * }
      * </pre>
      * 
