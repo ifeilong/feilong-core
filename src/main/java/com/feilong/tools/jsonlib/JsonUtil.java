@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1059,7 +1060,8 @@ public final class JsonUtil{
      *            支持的格式有: {@link JSONObject#fromObject(Object, JsonConfig)}
      * @param rootClass
      *            e.g. Person.class,see {@link net.sf.json.JsonConfig#setRootClass(Class)}
-     * @return 如果<code>json</code> 是null,那么返回 null
+     * @return 如果<code>json</code> 是null,那么返回 null <br>
+     *         如果 <code>rootClass</code> 是null,抛出 {@link NullPointerException}<br>
      * @see JSONObject#fromObject(Object, JsonConfig)
      * @see net.sf.json.JsonConfig#setRootClass(Class)
      * @see #toBean(Object, JsonToJavaConfig)
@@ -1068,6 +1070,8 @@ public final class JsonUtil{
         if (null == json){
             return null;
         }
+        Validate.notNull(rootClass, "rootClass can't be null!");
+
         JsonToJavaConfig jsonToJavaConfig = new JsonToJavaConfig();
         jsonToJavaConfig.setRootClass(rootClass);
         return toBean(json, jsonToJavaConfig);

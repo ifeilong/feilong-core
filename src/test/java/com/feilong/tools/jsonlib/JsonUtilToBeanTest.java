@@ -72,11 +72,19 @@ public class JsonUtilToBeanTest{
                                         hasProperty("dateAttr", is(toDate("2009-11-12 00:00:00", COMMON_DATE_AND_TIME)))));
     }
 
+    //************************************************************************************
     /**
      * Test to bean null json.
      */
     @Test
     public void testToBeanNullJson(){
         assertEquals(null, JsonUtil.toBean(null, Person.class));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test(expected = NullPointerException.class)
+    public void testToBeanNullRootClass(){
+        String json = "{'name':'get','dateAttr':'2009-11-12'}";
+        JsonUtil.toBean(json, (Class) null);
     }
 }
