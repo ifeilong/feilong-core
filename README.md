@@ -25,8 +25,8 @@ feilong core 让Java开发更简便的工具包
 1.  有常用的工具类 (如 处理日期的 `DateUtil`,处理 集合 的 `CollectionsUtil` 等)
 1.	有常用的JAVA常量类 (如日期格式 `DatePattern`, 时间间隔 `TimeInterval` 等)
 1.	不必要的`Exception` 转成了`RuntimeException`,减少不必要的代码
-1.  国内`中文注释`最完善的API [![javadoc 82%](http://progressed.io/bar/82?title=javadoc "javadoc 82%")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
-1.  有完善的单元测试 [![tests 1432](https://img.shields.io/badge/tests-1432%20%2F%201432-green.svg "tests 1432")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core) 
+1.  国内`中文注释`最完善的API
+1.  有完善的单元测试
 
 # 一图概述:
 
