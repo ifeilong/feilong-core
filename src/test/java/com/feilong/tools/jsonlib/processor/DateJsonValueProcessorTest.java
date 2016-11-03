@@ -67,7 +67,7 @@ public class DateJsonValueProcessorTest{
         user.setDate(toDate("2016-08-15 13:30:00", COMMON_DATE_AND_TIME));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
-        propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE_AND_TIME));
+        propertyNameAndJsonValueProcessorMap.put("date", DateJsonValueProcessor.DEFAULT_INSTANCE);
 
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
@@ -85,7 +85,7 @@ public class DateJsonValueProcessorTest{
         user.setDate(toDate("2016-08-15", COMMON_DATE));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
-        propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE));
+        propertyNameAndJsonValueProcessorMap.put("date", DateJsonValueProcessor.DEFAULT_INSTANCE);
 
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);

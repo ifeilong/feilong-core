@@ -38,8 +38,6 @@ import com.feilong.tools.jsonlib.processor.SensitiveWordsJsonValueProcessor;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -300,7 +298,7 @@ final class JsonHelper{
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         // 注册日期处理器
-        jsonConfig.registerJsonValueProcessor(Date.class, new DateJsonValueProcessor(COMMON_DATE_AND_TIME));
+        jsonConfig.registerJsonValueProcessor(Date.class, DateJsonValueProcessor.DEFAULT_INSTANCE);
         return jsonConfig;
     }
 

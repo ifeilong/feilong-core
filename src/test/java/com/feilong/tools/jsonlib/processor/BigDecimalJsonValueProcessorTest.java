@@ -26,7 +26,6 @@ import com.feilong.test.User;
 import com.feilong.tools.jsonlib.JavaToJsonConfig;
 import com.feilong.tools.jsonlib.JsonUtil;
 
-import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 
 import net.sf.json.processors.JsonValueProcessor;
@@ -65,7 +64,7 @@ public class BigDecimalJsonValueProcessorTest{
         user.setMoney(toBigDecimal("99999999.00"));
 
         Map<String, JsonValueProcessor> propertyNameAndJsonValueProcessorMap = new HashMap<>();
-        propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS));
+        propertyNameAndJsonValueProcessorMap.put("money", BigDecimalJsonValueProcessor.DEFAULT_INSTANCE);
 
         JavaToJsonConfig jsonFormatConfig = new JavaToJsonConfig();
         jsonFormatConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);

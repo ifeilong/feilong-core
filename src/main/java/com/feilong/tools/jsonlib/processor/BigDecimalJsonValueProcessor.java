@@ -24,6 +24,7 @@ import com.feilong.core.lang.NumberUtil;
 import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 
 import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * {@link BigDecimal}数字json value处理器.
@@ -76,7 +77,7 @@ import net.sf.json.JsonConfig;
  * user.setMoney(toBigDecimal("99999999.00"));
  * 
  * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
- * propertyNameAndJsonValueProcessorMap.put("money", <b>new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS)</b>);
+ * propertyNameAndJsonValueProcessorMap.put("money", <b>BigDecimalJsonValueProcessor.DEFAULT_INSTANCE</b>);
  * 
  * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
  * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
@@ -103,11 +104,18 @@ import net.sf.json.JsonConfig;
 public class BigDecimalJsonValueProcessor extends AbstractJsonValueProcessor{
 
     /**
+     * 默认Singleton instance.
+     * 
+     * @since 1.9.4
+     */
+    public static final JsonValueProcessor DEFAULT_INSTANCE = new BigDecimalJsonValueProcessor(TWO_DECIMAL_POINTS);
+
+    /**
      * The number pattern(默认两位小数点).
      * 
      * @see com.feilong.core.NumberPattern
      */
-    private String numberPattern = TWO_DECIMAL_POINTS;
+    private String                         numberPattern    = TWO_DECIMAL_POINTS;
 
     /**
      * The Constructor.

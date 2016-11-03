@@ -18,11 +18,11 @@ package com.feilong.tools.jsonlib.processor;
 import java.util.Date;
 
 import com.feilong.core.date.DateUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 
 /**
  * 时间转换日期值处理器实现.
@@ -72,7 +72,7 @@ import net.sf.json.JsonConfig;
  * user.setDate(toDate("2016-08-15 13:30:00", COMMON_DATE_AND_TIME));
  * 
  * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
- * propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE_AND_TIME));
+ * propertyNameAndJsonValueProcessorMap.put("date", <span style="color:red">DateJsonValueProcessor.DEFAULT_INSTANCE</span>);
  * 
  * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
  * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
@@ -90,7 +90,7 @@ import net.sf.json.JsonConfig;
  * </blockquote>
  * 
  * <p>
- * 为了简化操作,{@link JsonUtil#getDefaultJsonConfig()} 内置了 <code>new DateJsonValueProcessor(COMMON_DATE_AND_TIME)</code>
+ * 为了简化操作,JsonHelper#buildDefaultJavaToJsonConfig() 内置了 <code>new DateJsonValueProcessor(COMMON_DATE_AND_TIME)</code>
  * ,如果你想输出成其他的日期格式,也可以使用这个类来提前渲染
  * </p>
  * 
@@ -103,7 +103,7 @@ import net.sf.json.JsonConfig;
  * user.setDate(toDate("2016-08-15", COMMON_DATE));
  * 
  * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
- * propertyNameAndJsonValueProcessorMap.put("date", new DateJsonValueProcessor(COMMON_DATE));
+ * propertyNameAndJsonValueProcessorMap.put("date", <span style="color:red">DateJsonValueProcessor.DEFAULT_INSTANCE</span>);
  * 
  * JavaToJsonConfig javaToJsonConfig = new JavaToJsonConfig();
  * javaToJsonConfig.setPropertyNameAndJsonValueProcessorMap(propertyNameAndJsonValueProcessorMap);
@@ -125,8 +125,15 @@ import net.sf.json.JsonConfig;
  */
 public class DateJsonValueProcessor extends AbstractJsonValueProcessor{
 
+    /**
+     * 默认Singleton instance.
+     * 
+     * @since 1.9.4
+     */
+    public static final JsonValueProcessor DEFAULT_INSTANCE = new DateJsonValueProcessor(COMMON_DATE_AND_TIME);
+
     /** The date pattern. */
-    private String datePattern = COMMON_DATE_AND_TIME;
+    private String                         datePattern      = COMMON_DATE_AND_TIME;
 
     /**
      * The Constructor.

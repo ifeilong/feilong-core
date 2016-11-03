@@ -21,7 +21,7 @@ import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
 /**
- * 过滤敏感信息,最直接的就是像密码这样的内容,不可以直接明文输出在控制台或者日志文件,需要转换成***字眼.
+ * 过滤敏感信息,最直接的就是像密码这样的内容,<b>不可以</b>直接明文输出在控制台或者日志文件,需要转换成***字眼.
  * 
  * <h3>示例:</h3>
  * 
@@ -32,7 +32,7 @@ import net.sf.json.processors.JsonValueProcessor;
  * User user = new User("feilong1", 24);
  * user.setPassword("123456");
  * 
- * JsonValueProcessor jsonValueProcessor = new SensitiveWordsJsonValueProcessor();
+ * JsonValueProcessor jsonValueProcessor = <span style="color:red">SensitiveWordsJsonValueProcessor.INSTANCE</span>;
  * 
  * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
  * propertyNameAndJsonValueProcessorMap.put("password", jsonValueProcessor);
@@ -61,8 +61,8 @@ import net.sf.json.processors.JsonValueProcessor;
  * <h3>说明:</h3>
  * 
  * <blockquote>
- * 目前 {@link JsonUtil} 内置对<b>"password"</b>, <b>"key"</b> 两个字眼的属性名字,默认是显示成*******,参见
- * {@link JsonUtil#SENSITIVE_WORDS_PROPERTY_NAMES} 以及 {@link JsonUtil#registerDefaultJsonValueProcessor(JsonConfig)}
+ * 目前 {@link JsonUtil} 内置对<b>"password"</b>, <b>"key"</b> 两个字眼的属性名字,默认是显示成******,参见
+ * JsonHelper#SENSITIVE_WORDS_PROPERTY_NAMES 以及 JsonHelper#registerDefaultJsonValueProcessor(JsonConfig)
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>

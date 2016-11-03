@@ -101,7 +101,7 @@ import net.sf.json.util.JavaIdentifierTransformer;
  */
 public class UncapitalizeJavaIdentifierTransformer extends JavaIdentifierTransformer{
 
-    /** 首字母小写 transformer 'MemberNo' => 'memberNo'. */
+    /** 首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'. */
     public static final JavaIdentifierTransformer UNCAPITALIZE = new UncapitalizeJavaIdentifierTransformer();
 
     /*

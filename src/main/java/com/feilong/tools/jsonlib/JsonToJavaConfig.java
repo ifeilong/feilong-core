@@ -69,29 +69,29 @@ public class JsonToJavaConfig{
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#NOOP}</td>
      * <td>什么都不转换.<br>
-     * (Noop transformer '@invalid' => '@invalid')</td>
+     * (Noop transformer '@invalid' {@code =>} '@invalid')</td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link JavaIdentifierTransformer#STRICT}</td>
      * <td>抛出JSONException if a non JavaIdentifier character is found.<br>
-     * ('@invalid' => JSONException)</td>
+     * ('@invalid' {@code =>} JSONException)</td>
      * </tr>
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#CAMEL_CASE}</td>
      * <td>将使用非Java标识符和空格字符作为词边界,新单词的第一个字符大写。<br>
-     * ('camel case' => 'camelCase')</td>
+     * ('camel case' {@code =>} 'camelCase')</td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link JavaIdentifierTransformer#WHITESPACE}</td>
      * <td>删除所有空格以及不符合java规范的字符.<br>
-     * ('white space' =>'whitespace')</td>
+     * ('white space' {@code =>}'whitespace')</td>
      * </tr>
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#UNDERSCORE}</td>
      * <td>将所有空格以及不符合java属性规范的字符转成 下划线'_'.<br>
-     * ('under score' => 'under_score')
+     * ('under score' {@code =>} 'under_score')
      * </td>
      * </tr>
      * </table>
@@ -114,7 +114,7 @@ public class JsonToJavaConfig{
      * 
      * <tr valign="top">
      * <td>{@link UncapitalizeJavaIdentifierTransformer#UNCAPITALIZE}</td>
-     * <td>首字母小写 transformer 'MemberNo' => 'memberNo'.</td>
+     * <td>首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'.</td>
      * </tr>
      * 
      * </table>
@@ -196,29 +196,29 @@ public class JsonToJavaConfig{
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#NOOP}</td>
      * <td>什么都不转换.<br>
-     * (Noop transformer '@invalid' => '@invalid')</td>
+     * (Noop transformer '@invalid' {@code =>} '@invalid')</td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link JavaIdentifierTransformer#STRICT}</td>
      * <td>抛出JSONException if a non JavaIdentifier character is found.<br>
-     * ('@invalid' => JSONException)</td>
+     * ('@invalid' {@code =>} JSONException)</td>
      * </tr>
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#CAMEL_CASE}</td>
      * <td>将使用非Java标识符和空格字符作为词边界,新单词的第一个字符大写。<br>
-     * ('camel case' => 'camelCase')</td>
+     * ('camel case' {@code =>} 'camelCase')</td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link JavaIdentifierTransformer#WHITESPACE}</td>
      * <td>删除所有空格以及不符合java规范的字符.<br>
-     * ('white space' =>'whitespace')</td>
+     * ('white space' {@code =>}'whitespace')</td>
      * </tr>
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#UNDERSCORE}</td>
      * <td>将所有空格以及不符合java属性规范的字符转成 下划线'_'.<br>
-     * ('under score' => 'under_score')
+     * ('under score' {@code =>} 'under_score')
      * </td>
      * </tr>
      * </table>
@@ -241,7 +241,7 @@ public class JsonToJavaConfig{
      * 
      * <tr valign="top">
      * <td>{@link UncapitalizeJavaIdentifierTransformer#UNCAPITALIZE}</td>
-     * <td>首字母小写 transformer 'MemberNo' => 'memberNo'.</td>
+     * <td>首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'.</td>
      * </tr>
      * 
      * </table>
@@ -280,29 +280,29 @@ public class JsonToJavaConfig{
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#NOOP}</td>
      * <td>什么都不转换.<br>
-     * (Noop transformer '@invalid' => '@invalid')</td>
+     * (Noop transformer '@invalid' {@code =>} '@invalid')</td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link JavaIdentifierTransformer#STRICT}</td>
      * <td>抛出JSONException if a non JavaIdentifier character is found.<br>
-     * ('@invalid' => JSONException)</td>
+     * ('@invalid' {@code =>} JSONException)</td>
      * </tr>
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#CAMEL_CASE}</td>
      * <td>将使用非Java标识符和空格字符作为词边界,新单词的第一个字符大写。<br>
-     * ('camel case' => 'camelCase')</td>
+     * ('camel case' {@code =>} 'camelCase')</td>
      * </tr>
      * 
      * <tr valign="top" style="background-color:#eeeeff">
      * <td>{@link JavaIdentifierTransformer#WHITESPACE}</td>
      * <td>删除所有空格以及不符合java规范的字符.<br>
-     * ('white space' =>'whitespace')</td>
+     * ('white space' {@code =>}'whitespace')</td>
      * </tr>
      * <tr valign="top">
      * <td>{@link JavaIdentifierTransformer#UNDERSCORE}</td>
      * <td>将所有空格以及不符合java属性规范的字符转成 下划线'_'.<br>
-     * ('under score' => 'under_score')
+     * ('under score' {@code =>} 'under_score')
      * </td>
      * </tr>
      * </table>
@@ -325,7 +325,7 @@ public class JsonToJavaConfig{
      * 
      * <tr valign="top">
      * <td>{@link UncapitalizeJavaIdentifierTransformer#UNCAPITALIZE}</td>
-     * <td>首字母小写 transformer 'MemberNo' => 'memberNo'.</td>
+     * <td>首字母小写 transformer 'MemberNo' {@code =>} 'memberNo'.</td>
      * </tr>
      * 
      * </table>

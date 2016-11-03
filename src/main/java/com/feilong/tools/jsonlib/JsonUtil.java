@@ -1073,7 +1073,7 @@ public final class JsonUtil{
      * 
      * <pre class="code">
      * String json = "{'data1':{'name':'get'},'data2':{'name':'set'}}";
-     * Map<String, Person> map = JsonUtil.toMap(json, new JsonToJavaConfig(Person.class));
+     * Map{@code <String, Person>} map = JsonUtil.toMap(json, new JsonToJavaConfig(Person.class));
      * 
      * LOGGER.debug(JsonUtil.format(map));
      * </pre>
