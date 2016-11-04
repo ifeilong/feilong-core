@@ -456,11 +456,15 @@ public final class DateUtil{
     // [start]operate 时间操作(加减)--------------------------------------------------------------------------
 
     /**
-     * 指定日期 <code>date</code>,加减年份(仅 {@link java.util.Calendar#YEAR}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 指定日期 <code>date</code>,加减年份.
      * 
-     * <p>
-     * 传入的参数<code>date</code>不会改变
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>结果会自动跨月,跨年计算.</li>
+     * <li>传入的参数 <code>date</code> 不会改变</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -489,11 +493,15 @@ public final class DateUtil{
     }
 
     /**
-     * 指定日期 <code>date</code>加减月份,(仅仅 {@link java.util.Calendar#MONTH}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 指定日期 <code>date</code>加减月份.
      * 
-     * <p>
-     * 传入的参数<code>date</code>不会改变
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>结果会自动跨月,跨年计算.</li>
+     * <li>传入的参数 <code>date</code> 不会改变</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -523,11 +531,15 @@ public final class DateUtil{
     }
 
     /**
-     * 指定日期 <code>date</code>加减天数 (仅仅 {@link java.util.Calendar#DAY_OF_MONTH}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 指定日期 <code>date</code>加减天数.
      * 
-     * <p>
-     * 传入的参数<code>date</code>不会改变
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>结果会自动跨月,跨年计算.</li>
+     * <li>传入的参数 <code>date</code> 不会改变</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -559,10 +571,15 @@ public final class DateUtil{
     }
 
     /**
-     * 指定日期 <code>date</code>加减星期 (仅仅{@link Calendar#WEEK_OF_YEAR}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
-     * <p>
-     * 传入的参数<code>date</code>不会改变
-     * </p>
+     * 指定日期 <code>date</code>加减星期 .
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>结果会自动跨月,跨年计算.</li>
+     * <li>传入的参数 <code>date</code> 不会改变</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -590,7 +607,15 @@ public final class DateUtil{
     }
 
     /**
-     * 指定日期 <code>date</code>加减小时 (仅仅{@link Calendar#HOUR_OF_DAY} 24小时制进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 指定日期 <code>date</code>加减小时.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>结果会自动跨月,跨年计算.</li>
+     * <li>传入的参数 <code>date</code> 不会改变</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -601,15 +626,6 @@ public final class DateUtil{
      * DateUtil.addHour(2012-06-29 00:46:24,-5)  =2012-06-28 19:46:24
      * </pre>
      * 
-     * </blockquote>
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ol>
-     * <li>传入的参数<code>date</code>不会改变</li>
-     * <li>{@link Calendar#HOUR}:12小时制的小时数</li>
-     * <li>{@link Calendar#HOUR_OF_DAY}:24小时制的小时数</li>
-     * </ol>
      * </blockquote>
      * 
      * @param date
@@ -627,11 +643,15 @@ public final class DateUtil{
     }
 
     /**
-     * 指定日期 <code>date</code>加减分钟 (仅仅{@link Calendar#MINUTE}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 指定日期 <code>date</code>加减分钟.
      * 
-     * <p>
-     * 传入的参数<code>date</code>不会改变
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>结果会自动跨月,跨年计算.</li>
+     * <li>传入的参数 <code>date</code> 不会改变</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -659,19 +679,23 @@ public final class DateUtil{
     }
 
     /**
-     * 指定日期 <code>date</code>加减秒 (仅仅{@link java.util.Calendar#SECOND}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 指定日期 <code>date</code>加减秒.
      * 
-     * <p>
-     * 传入的参数<code>date</code>不会改变
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>结果会自动跨月,跨年计算.</li>
+     * <li>传入的参数 <code>date</code> 不会改变</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * DateUtil.addSecond(2012-10-16 23:22:02,180)   =2012-10-16 23:25:02.206
-     * DateUtil.addSecond(2012-10-16 23:22:02,-180)  =2012-10-16 23:19:02.206
+     * DateUtil.addSecond(2012-10-16 23:22:02,180)   = 2012-10-16 23:25:02.206
+     * DateUtil.addSecond(2012-10-16 23:22:02,-180)  = 2012-10-16 23:19:02.206
      * </pre>
      * 
      * </blockquote>
@@ -691,11 +715,15 @@ public final class DateUtil{
     }
 
     /**
-     * 指定日期 <code>date</code>加减毫秒 (仅仅{@link java.util.Calendar#MILLISECOND}进行加减,不会操作其他字段),结果会自动跨月,跨年计算.
+     * 指定日期 <code>date</code>加减毫秒.
      * 
-     * <p>
-     * 传入的参数<code>date</code>不会改变
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>结果会自动跨月,跨年计算.</li>
+     * <li>传入的参数 <code>date</code> 不会改变</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
