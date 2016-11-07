@@ -414,7 +414,7 @@ public final class StringUtil{
      * String template = "/home/webuser/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
      * Date date = new Date();
      * 
-     * Map{@code <String, String>} valuesMap = new HashMap{@code <String, String>}();
+     * Map{@code <String, String>} valuesMap = new HashMap{@code <>}();
      * valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
      * valuesMap.put("expressDeliveryType", "sf");
      * valuesMap.put("fileName", DateUtil.toString(date, DatePattern.TIMESTAMP));
@@ -438,7 +438,7 @@ public final class StringUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, Object>} valuesMap = new HashMap{@code <String, Object>}();
+     * Map{@code <String, Object>} valuesMap = new HashMap{@code <>}();
      * valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
      * valuesMap.put("user", new User(1L));
      * LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");

@@ -293,7 +293,7 @@ public final class CollectionsUtil{
      * <pre class="code">
      * 
      * private Set{@code <String>} getItemComboIds(List{@code <ShoppingCartLineCommand>} lines){
-     *     Set{@code <String>} set = new HashSet{@code <String>}();
+     *     Set{@code <String>} set = new HashSet{@code <>}();
      *     if ({@code null != lines && lines.size() > 0}){
      *         for (ShoppingCartLineCommand line : lines){
      *             if (line.getComboIds() != null){
@@ -314,7 +314,7 @@ public final class CollectionsUtil{
      *     if (isNullOrEmpty(lines)){
      *         return Collections.emptySet();
      *     }
-     *     Set{@code <String>} set = new HashSet{@code <String>}();
+     *     Set{@code <String>} set = new HashSet{@code <>}();
      *     for (ShoppingCartLineCommand line : lines){
      *         CollectionsUtil.addAllIgnoreNull(set, line.getComboIds());
      *     }
@@ -605,7 +605,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} objectCollection = new ArrayList{@code <User>}();
+     * List{@code <User>} objectCollection = new ArrayList{@code <>}();
      * objectCollection.add(new User("张飞", 23));
      * objectCollection.add(new User("关羽", 24));
      * objectCollection.add(new User("刘备", 25));
@@ -744,7 +744,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("feilong1");
      * list.add("feilong2");
      * list.add("feilong2");
@@ -830,14 +830,14 @@ public final class CollectionsUtil{
      * <pre class="code">
      * 
      * <span style="color:green">//***************list****************************************</span>
-     * List{@code <UserAddress>} userAddresseList = new ArrayList{@code <UserAddress>}();
+     * List{@code <UserAddress>} userAddresseList = new ArrayList{@code <>}();
      * 
      * UserAddress userAddress = new UserAddress();
      * userAddress.setAddress("中南海");
      * userAddresseList.add(userAddress);
      * 
      * <span style="color:green">//***************map****************************************</span>
-     * Map{@code <String, String>} attrMap = new HashMap{@code <String, String>}();
+     * Map{@code <String, String>} attrMap = new HashMap{@code <>}();
      * attrMap.put("蜀国", "赵子龙");
      * attrMap.put("魏国", "张文远");
      * attrMap.put("吴国", "甘兴霸");
@@ -1009,7 +1009,7 @@ public final class CollectionsUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
@@ -1033,7 +1033,7 @@ public final class CollectionsUtil{
      * </p>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("张飞", 25));
@@ -1279,12 +1279,12 @@ public final class CollectionsUtil{
      * </p>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <User>}();
+     * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
      * 
-     * List{@code <String>} propertyValueList = new ArrayList{@code <String>}();
+     * List{@code <String>} propertyValueList = new ArrayList{@code <>}();
      * propertyValueList.add("张飞");
      * propertyValueList.add("刘备");
      * LOGGER.info(JsonUtil.format(CollectionsUtil.select(list, "name", propertyValueList)));
@@ -1348,7 +1348,7 @@ public final class CollectionsUtil{
      * </p>
      * 
      * <pre class="code">
-     * List{@code <Long>} list = new ArrayList{@code <Long>}();
+     * List{@code <Long>} list = new ArrayList{@code <>}();
      * list.add(1L);
      * list.add(1L);
      * list.add(2L);
@@ -1488,7 +1488,7 @@ public final class CollectionsUtil{
      * list.add(new User("关羽", 24));
      * list.add(new User("刘备", 25));
      * 
-     * List{@code <String>} propertyValueList = new ArrayList{@code <String>}();
+     * List{@code <String>} propertyValueList = new ArrayList{@code <>}();
      * propertyValueList.add("张飞");
      * propertyValueList.add("刘备");
      * LOGGER.info(JsonUtil.format(CollectionsUtil.selectRejected(list, "name", propertyValueList)));
@@ -1535,6 +1535,8 @@ public final class CollectionsUtil{
         return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : selectRejected(objectCollection, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
     }
+
+    //***************************************************************************************
 
     /**
      * 循环 <code>objectCollection</code>,获得元素 <code>bean</code>,判断是否不匹配<code>predicate</code>,<span style="color:red">如果不匹配</span>

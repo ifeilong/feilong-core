@@ -48,7 +48,7 @@ public class JavaToJsonConfig{
      * user.setPassword("123456");
      * user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
      * 
-     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <String, JsonValueProcessor>}();
+     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
      * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
      * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
@@ -268,7 +268,7 @@ public class JavaToJsonConfig{
      * user.setPassword("123456");
      * user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
      * 
-     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <String, JsonValueProcessor>}();
+     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
      * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
      * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 
@@ -312,7 +312,7 @@ public class JavaToJsonConfig{
      * user.setPassword("123456");
      * user.setMoney(ConvertUtil.toBigDecimal("99999999.00"));
      * 
-     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <String, JsonValueProcessor>}();
+     * Map{@code <String, JsonValueProcessor>} propertyNameAndJsonValueProcessorMap = new HashMap{@code <>}();
      * propertyNameAndJsonValueProcessorMap.put("password", new SensitiveWordsJsonValueProcessor());
      * propertyNameAndJsonValueProcessorMap.put("money", new BigDecimalJsonValueProcessor());
      * 

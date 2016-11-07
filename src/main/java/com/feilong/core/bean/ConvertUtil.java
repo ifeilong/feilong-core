@@ -1002,7 +1002,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("feilong");
      * list.add("");
      * list.add("xinge");
@@ -1484,7 +1484,7 @@ public final class ConvertUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} paramMap = new HashMap{@code <String, String>}();
+     * Map{@code <String, String>} paramMap = new HashMap{@code <>}();
      * paramMap.put("name", "jinxin");
      * request.setParamMap(paramMap);
      * </pre>
@@ -1529,7 +1529,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * private List{@code <ShopCommand>} loadShopCommandList(){
-     *     Map{@code <String, Object>} paraMap = new HashMap{@code <String, Object>}();
+     *     Map{@code <String, Object>} paraMap = new HashMap{@code <>}();
      *     paraMap.put("orgTypeId", OrgType.ID_SHOP_TYPE);
      * 
      *     return shopCommandDao.findShopListByOrgaTypeId(paraMap);
@@ -2062,7 +2062,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * List{@code <UserAddress>} userAddresseList = new ArrayList{@code <UserAddress>}();
+     * List{@code <UserAddress>} userAddresseList = new ArrayList{@code <>}();
      * UserAddress userAddress = new UserAddress();
      * userAddress.setAddress("上海");
      * userAddresseList.add(userAddress);
@@ -2193,7 +2193,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("xinge");
      * list.add("feilong");
      * </pre>

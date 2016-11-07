@@ -105,7 +105,7 @@ public final class ObjectUtil{
      *     List{@code <Item>} itemList = map.get(categoryName);
      * 
      *     if (isNullOrEmpty(itemList)){
-     *         itemList = new ArrayList{@code <Item>}();
+     *         itemList = new ArrayList{@code <>}();
      *     }
      *     itemList.add(item);
      *     map.put(categoryName, itemList);

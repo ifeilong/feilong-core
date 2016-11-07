@@ -234,7 +234,7 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String[]>} arrayValueMap = new LinkedHashMap{@code <String, String[]>}();
+     * Map{@code <String, String[]>} arrayValueMap = new LinkedHashMap{@code <>}();
      * 
      * arrayValueMap.put("province", new String[] { "浙江省", "江苏省" });
      * arrayValueMap.put("city", new String[] { "南通市" });
@@ -470,7 +470,7 @@ public final class MapUtil{
      * 
      * <pre class="code">
      * 
-     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * Map{@code <String, Integer>} map = new HashMap{@code <>}();
      * MapUtil.putSumValue(map, "1000001", 5);
      * MapUtil.putSumValue(map, "1000002", 5);
      * MapUtil.putSumValue(map, "1000002", 5);
@@ -653,7 +653,7 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * Map{@code <String, Integer>} map = new HashMap{@code <>}();
      * map.put("a", 3007);
      * map.put("b", 3001);
      * map.put("c", 3001);
@@ -719,7 +719,7 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, Integer>} map = new LinkedHashMap{@code <String, Integer>}();
+     * Map{@code <String, Integer>} map = new LinkedHashMap{@code <>}();
      * 
      * map.put("a", 3007);
      * map.put("b", 3001);
@@ -849,7 +849,7 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, Integer>} map = new HashMap{@code <String, Integer>}();
+     * Map{@code <String, Integer>} map = new HashMap{@code <>}();
      * map.put("a", 3007);
      * map.put("b", 3001);
      * map.put("c", 3001);
@@ -900,7 +900,7 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <Long, User>} map = new LinkedHashMap{@code <Long, User>}();
+     * Map{@code <Long, User>} map = new LinkedHashMap{@code <>}();
      * map.put(1L, new User(100L));
      * map.put(2L, new User(200L));
      * map.put(5L, new User(500L));
@@ -959,7 +959,7 @@ public final class MapUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <Long, User>} map = new LinkedHashMap{@code <Long, User>}();
+     * Map{@code <Long, User>} map = new LinkedHashMap{@code <>}();
      * map.put(1L, new User(100L));
      * map.put(2L, new User(200L));
      * map.put(53L, new User(300L));
