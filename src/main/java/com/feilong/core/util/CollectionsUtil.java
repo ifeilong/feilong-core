@@ -1592,7 +1592,7 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * 
-     * List{@code <String>} list = new ArrayList{@code <String>}();
+     * List{@code <String>} list = new ArrayList{@code <>}();
      * list.add("xinge");
      * list.add("feilong1");
      * list.add("feilong2");
@@ -1608,6 +1608,58 @@ public final class CollectionsUtil{
      * 
      * <pre class="code">
      * [null,null,null,null]
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>更多的,使用这个方法来处理两个不同类型的转换:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 比如购物车功能,有游客购物车<b>CookieShoppingCartLine</b>以及内存购物车对象
+     * <b>ShoppingCartLineCommand</b>,两个数据结构部分元素相同,<br>
+     * 用户登陆需要把<b>cookie</b>中的购物车转成内存购物车<b>ShoppingCartLineCommand</b> list,这时我们可以先创建<b>ToShoppingCartLineCommandTransformer</b>
+     * </p>
+     * 
+     * <p>
+     * 代码示例:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * class <b>ToShoppingCartLineCommandTransformer</b> implements <b>Transformer</b>{@code <CookieShoppingCartLine, ShoppingCartLineCommand>}{
+     * 
+     *     private static final String[] COPY_PROPERTY_NAMES = {"skuId","extentionCode","quantity","createTime","settlementState","lineGroup" };
+     * 
+     *     public ShoppingCartLineCommand <b>transform</b>(CookieShoppingCartLine cookieShoppingCartLine){
+     *         <span style="color:green">// 将cookie中的购物车 转换为 shoppingCartLineCommand</span>
+     *         ShoppingCartLineCommand shoppingLineCommand = new ShoppingCartLineCommand();
+     *         PropertyUtil.copyProperties(shoppingLineCommand, cookieShoppingCartLine, COPY_PROPERTY_NAMES);
+     * 
+     *         shoppingLineCommand.setId(cookieShoppingCartLine.getId());
+     *         shoppingLineCommand.setGift(null == cookieShoppingCartLine.getIsGift() ? false : cookieShoppingCartLine.getIsGift());
+     * 
+     *         return shoppingLineCommand;
+     *     }
+     * }
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 然后调用:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public List{@code <ShoppingCartLineCommand>} load(HttpServletRequest request){
+     *     <span style="color:green">// 获取cookie中的购物车行集合</span>
+     *     List{@code <CookieShoppingCartLine>} cookieShoppingCartLineList = getCookieShoppingCartLines(request);
+     *     if (isNullOrEmpty(cookieShoppingCartLineList)){
+     *         return null;
+     *     }
+     * 
+     *     return CollectionsUtil.collect(cookieShoppingCartLineList, new ToShoppingCartLineCommandTransformer());
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -1657,65 +1709,6 @@ public final class CollectionsUtil{
      * 
      * </blockquote>
      * 
-     * <h3>更多的,使用这个方法来处理两个不同类型的转换</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 比如 购物车,游客购物车CookieShoppingCartLine,内存购物车对象
-     * ShoppingCartLineCommand,两个的数据结构部分元素相同,此时用户登陆需要把cookie中的购物车转成内存购物车ShoppingCartLineCommand list,这时我们可以先创建
-     * ToShoppingCartLineCommandTransformer
-     * </p>
-     * 
-     * <p>
-     * 代码示例:
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * class ToShoppingCartLineCommandTransformer implements Transformer{@code <CookieShoppingCartLine, ShoppingCartLineCommand>}{
-     * 
-     *     private static final String[] COPY_PROPERTY_NAMES = {
-     *                                                           "skuId",
-     *                                                           "extentionCode",
-     *                                                           "quantity",
-     *                                                           "createTime",
-     *                                                           "settlementState",
-     *                                                           "lineGroup" };
-     * 
-     *     public ShoppingCartLineCommand transform(CookieShoppingCartLine cookieShoppingCartLine){
-     *         // 将cookie中的购物车 转换为 shoppingCartLineCommand
-     *         ShoppingCartLineCommand shoppingLineCommand = new ShoppingCartLineCommand();
-     *         PropertyUtil.copyProperties(shoppingLineCommand, cookieShoppingCartLine, COPY_PROPERTY_NAMES);
-     * 
-     *         shoppingLineCommand.setId(cookieShoppingCartLine.getId());
-     *         shoppingLineCommand.setGift(null == cookieShoppingCartLine.getIsGift() ? false : cookieShoppingCartLine.getIsGift());
-     * 
-     *         return shoppingLineCommand;
-     *     }
-     * }
-     * 
-     * </pre>
-     * 
-     * <p>
-     * 然后调用:
-     * </p>
-     * 
-     * 
-     * <pre class="code">
-     * 
-     * public List{@code <ShoppingCartLineCommand>} load(HttpServletRequest request){
-     *     // 获取cookie中的购物车行集合
-     *     List{@code <CookieShoppingCartLine>} cookieShoppingCartLineList = getCookieShoppingCartLines(request);
-     *     if (isNullOrEmpty(cookieShoppingCartLineList)){
-     *         return null;
-     *     }
-     * 
-     *     return CollectionsUtil.collect(cookieShoppingCartLineList, new ToShoppingCartLineCommandTransformer());
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     *
      * @param <O>
      *            the type of object in the output collection
      * @param <T>
