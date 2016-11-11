@@ -152,6 +152,43 @@ public final class SortUtil{
     /**
      * 对 数组 <code>arrays</code>使用 <code>comparator</code> 进行排序.
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 对字符串数组先按照长度比较,如果长度相等,那么再按照字母比较
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * String[] arrays = { "almn", "fba", "cba" };
+     * 
+     * Comparator<String> comparator = new Comparator<String>(){
+     * 
+     *     &#64;Override
+     *     public int compare(String s1,String s2){
+     *         Integer length = s1.length();
+     *         Integer length2 = s2.length();
+     * 
+     *         <span style="color:green">//先判断长度,长度比较</span>
+     *         int compareTo = length.compareTo(length2);
+     * 
+     *         <span style="color:green">//如果长度相等,那么比较自己本身的顺序</span>
+     *         if (0 == compareTo){
+     *             compareTo = s1.compareTo(s2);
+     *         }
+     *         return compareTo;
+     *     }
+     * };
+     * sortArray(arrays, comparator);
+     * 
+     * assertArrayEquals(toArray("cba", "fba", "almn"), arrays);
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param arrays

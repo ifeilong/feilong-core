@@ -16,6 +16,7 @@
 package com.feilong.core.util.sortutiltest;
 
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Comparator;
@@ -60,6 +61,8 @@ public class SortUtilSortArrayComparatorsTest{
             }
         };
         sortArray(arrays, comparator);
+
+        assertArrayEquals(toArray("cba", "fba", "almn"), arrays);
     }
 
     /**
