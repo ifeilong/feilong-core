@@ -23,6 +23,7 @@ import com.feilong.core.util.aggregateutiltest.FeiLongAggregateUtilSuiteTests;
 import com.feilong.core.util.collectionsutiltest.FeiLongCollectionsUtilSuiteTests;
 import com.feilong.core.util.enumerationutiltest.EnumerationUtilParameterizedTest;
 import com.feilong.core.util.maputiltest.FeiLongMapUtilSuiteTests;
+import com.feilong.core.util.predicate.FeiLongBeanPredicateUtilSuiteTests;
 import com.feilong.core.util.randomutiltest.FeiLongRandomUtilSuiteTests;
 import com.feilong.core.util.regexutiltest.FeiLongRegexUtilSuiteTests;
 import com.feilong.core.util.resourcebundleutiltest.FeiLongResourceBundleUtilSuiteTests;
@@ -36,6 +37,8 @@ import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 EnumerationUtilParameterizedTest.class,
+
+                FeiLongBeanPredicateUtilSuiteTests.class,
 
                 FeiLongRandomUtilSuiteTests.class,
                 FeiLongResourceBundleUtilSuiteTests.class,

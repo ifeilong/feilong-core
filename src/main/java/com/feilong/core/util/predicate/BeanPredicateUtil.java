@@ -23,8 +23,11 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.functors.ComparatorPredicate;
 import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
+import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.util.AggregateUtil;
+import com.feilong.core.util.CollectionsUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 
@@ -46,11 +49,46 @@ public final class BeanPredicateUtil{
     }
 
     /**
-     * Equal predicate.
+     * 用来指定 <code>T</code> 对象的 特定属性 <code>propertyName</code> equals 指定的 propertyValue.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
      * 
      * <p>
-     * 用来指定 <code>T</code> 对象的 特定属性 <code>propertyName</code> equals 指定的 propertyValue
+     * <b>场景:</b> 在list中查找 名字是 关羽,并且 年龄是30 的user
      * </p>
+     * 
+     * <pre class="code">
+     * 
+     * User guanyu30 = new User("关羽", 30);
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 23),
+     *                 new User("关羽", 24),
+     *                 new User("刘备", 25),
+     *                 guanyu30);
+     * 
+     * Predicate{@code <User>} predicate = PredicateUtils
+     *                 .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
+     * 
+     * assertEquals(guanyu30, CollectionsUtil.find(list, predicate));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * @param <T>
      *            the generic type
@@ -66,17 +104,27 @@ public final class BeanPredicateUtil{
      * @see org.apache.commons.collections4.PredicateUtils#equalPredicate(Object)
      */
     public static <T, V> Predicate<T> equalPredicate(String propertyName,V propertyValue){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<T>(propertyName, PredicateUtils.equalPredicate(propertyValue));
     }
 
     /**
-     * Contains predicate.
-     * 
-     * <p>
      * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,使用
      * {@link org.apache.commons.lang3.ArrayUtils#contains(Object[], Object) ArrayUtils.contains} 判断是否在 <code>values</code>数组中.
-     * </p>
-     *
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param <V>
@@ -92,6 +140,7 @@ public final class BeanPredicateUtil{
      */
     @SafeVarargs
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final V...propertyValues){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<T>(propertyName, new Predicate<V>(){
 
             @Override
@@ -102,12 +151,21 @@ public final class BeanPredicateUtil{
     }
 
     /**
-     * Contains predicate.
-     * 
-     * <p>
      * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,使用{@link java.util.Collection#contains(Object)
      * Collection.contains} 判断是否在<code>values</code>集合中.
-     * </p>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * </li>
+     * </ol>
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -123,6 +181,7 @@ public final class BeanPredicateUtil{
      * @see java.util.Collection#contains(Object)
      */
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final Collection<V> propertyValueList){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<T>(propertyName, new Predicate<V>(){
 
             @Override
@@ -135,12 +194,21 @@ public final class BeanPredicateUtil{
     //**************************************************************************************************
 
     /**
-     * Comparator predicate.
-     * 
-     * <p>
      * 拿<code>valueToCompare</code> 和 提取t对象的属性<code>propertyName</code>的值,进行比较(使用 {@link ComparatorUtils#naturalComparator()} 自然排序比较器)<br>
-     * 注意,比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>
-     * </p>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>.</li>
+     * <li>
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * </li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>关于 {@link Criterion}:</h3>
      * 
@@ -241,16 +309,26 @@ public final class BeanPredicateUtil{
                     String propertyName,
                     V valueToCompare,
                     Criterion criterion){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         return comparatorPredicate(propertyName, valueToCompare, ComparatorUtils.<V> naturalComparator(), criterion);
     }
 
     /**
-     * Comparator predicate.
+     * 拿<code>valueToCompare</code> 和 提取t对象的属性<code>propertyName</code>的值,进行比较(使用 <code>comparator</code> 比较器).<br>
      * 
-     * <p>
-     * 拿<code>valueToCompare</code> 和 提取t对象的属性<code>propertyName</code>的值,进行比较(使用 <code>comparator</code> 比较器)<br>
-     * 注意,比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>
-     * </p>
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>.</li>
+     * <li>
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * </li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>关于 {@link Criterion}:</h3>
      * 
@@ -314,6 +392,7 @@ public final class BeanPredicateUtil{
                     V valueToCompare,
                     Comparator<V> comparator,
                     Criterion criterion){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<T>(propertyName, new ComparatorPredicate<V>(valueToCompare, comparator, criterion));
     }
 }
