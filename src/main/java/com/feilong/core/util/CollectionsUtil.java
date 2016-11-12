@@ -1154,9 +1154,12 @@ public final class CollectionsUtil{
      *                 new User("关羽", 24),
      *                 new User("刘备", 25),
      *                 new User("关羽", 30));
-     *                 
-     * Predicate{@code <User>} predicate = PredicateUtils
-     *                 .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
+     * 
+     * Map{@code <String, Object>} map = new HashMap{@code <>}();
+     * map.put("name", "关羽");
+     * map.put("age", 30);
+     * 
+     * Predicate{@code <User>} predicate = BeanPredicateUtil.equalPredicate(map);
      * 
      * User user = CollectionsUtil.find(list, predicate);
      * LOGGER.debug(JsonUtil.format(user));
