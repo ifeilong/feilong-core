@@ -15,8 +15,10 @@
  */
 package com.feilong.core.util.predicate;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map;
 
 import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.Predicate;
@@ -26,6 +28,7 @@ import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.core.util.CollectionsUtil;
 
@@ -49,7 +52,7 @@ public final class BeanPredicateUtil{
     }
 
     /**
-     * 用来指定 <code>T</code> 对象的 特定属性 <code>propertyName</code> equals 指定的 propertyValue.
+     * 用来指定 <code>T</code> 对象的 特定属性 <code>propertyName</code> equals 指定的 <code>propertyValue</code>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -107,6 +110,101 @@ public final class BeanPredicateUtil{
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<T>(propertyName, PredicateUtils.equalPredicate(propertyValue));
     }
+
+    /**
+     * 用来判断一个对象指定的属性以及属性值是否相等.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 在list中查找 名字是 关羽,并且 年龄是30 的user
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * User guanyu30 = new User("关羽", 30);
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 23),
+     *                 new User("关羽", 24),
+     *                 new User("刘备", 25),
+     *                 guanyu30);
+     * 
+     * Predicate{@code <User>} predicate = PredicateUtils
+     *                 .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
+     * 
+     * assertEquals(guanyu30, CollectionsUtil.find(list, predicate));
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 此时你可以优化成:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * User guanyu30 = new User("关羽", 30);
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 23),
+     *                 new User("关羽", 24),
+     *                 new User("刘备", 25),
+     *                 guanyu30);
+     * 
+     * Map{@code <String, Object>} map = new HashMap{@code <>}();
+     * map.put("name", "关羽");
+     * map.put("age", 30);
+     * 
+     * assertEquals(guanyu30, find(list, BeanPredicateUtil.{@code <User>} equalPredicate(map)));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param propertyNameAndPropertyValueMap
+     *            属性和指定属性值对应的map,其中key是泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>propertyNameAndPropertyValueMap</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是empty,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
+     * @see #equalPredicate(String, Object)
+     * @since 1.9.5
+     */
+    public static <T> Predicate<T> equalPredicate(Map<String, ?> propertyNameAndPropertyValueMap){
+        Validate.notEmpty(propertyNameAndPropertyValueMap, "propertyNameAndPropertyValueMap can't be null!");
+
+        BeanPredicate<T>[] beanPredicates = ArrayUtil.newArray(BeanPredicate.class, propertyNameAndPropertyValueMap.size());
+
+        int index = 0;
+        for (Map.Entry<String, ?> entry : propertyNameAndPropertyValueMap.entrySet()){
+            String propertyName = entry.getKey();
+            Object propertyValue = entry.getValue();
+
+            Validate.notBlank(propertyName, "propertyName can't be blank!");
+
+            Array.set(beanPredicates, index, equalPredicate(propertyName, propertyValue));
+            index++;
+        }
+        return PredicateUtils.allPredicate(beanPredicates);
+    }
+
+    //************************************************************************************************************
 
     /**
      * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,使用

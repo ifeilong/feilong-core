@@ -19,9 +19,15 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * The Class FeiLongBeanPredicateUtilSuiteTests.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 BeanPredicateUtilEqualPredicateTest.class,
+                BeanPredicateUtilEqualMapPredicateTest.class,
         //
 })
 public class FeiLongBeanPredicateUtilSuiteTests{

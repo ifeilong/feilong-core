@@ -17,24 +17,20 @@ package com.feilong.core.util.predicate;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections4.Predicate;
-import org.apache.commons.collections4.PredicateUtils;
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.CollectionsUtil.find;
 
-/**
- * The Class BeanPredicateUtilEqualPredicateTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.9.5
- */
-public class BeanPredicateUtilEqualPredicateTest{
+public class BeanPredicateUtilEqualMapPredicateTest{
 
     /**
      * Test find2.
@@ -48,55 +44,38 @@ public class BeanPredicateUtilEqualPredicateTest{
                         new User("刘备", 25),
                         guanyu30);
 
-        Predicate<User> predicate = PredicateUtils
-                        .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
+        //在list中查找 名字是 关羽,并且 年龄是30 的user
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "关羽");
+        map.put("age", 30);
 
-        assertEquals(guanyu30, CollectionsUtil.find(list, predicate));
+        assertEquals(guanyu30, find(list, BeanPredicateUtil.<User> equalPredicate(map)));
     }
 
-    /**
-     * Test equal predicate.
-     */
     @Test
     public void testEqualPredicate(){
         User user = new User(2L);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("id", 2L);
+        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(toMap("id", 2L));
         assertEquals(true, equalPredicate.evaluate(user));
     }
 
-    /**
-     * Test equal predicate 1.
-     */
     @Test
     public void testEqualPredicate1(){
         User user = new User(2L);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("id", null);
+        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(toMap("id", null));
         assertEquals(false, equalPredicate.evaluate(user));
     }
 
     //---------------------------------------------------------------------------
 
-    /**
-     * Test equal predicate null property name.
-     */
     @Test(expected = NullPointerException.class)
-    public void testEqualPredicateNullPropertyName(){
-        BeanPredicateUtil.equalPredicate(null, null);
+    public void testEqualPredicateNullMap(){
+        BeanPredicateUtil.equalPredicate(null);
     }
 
-    /**
-     * Test equal predicate empty property name.
-     */
     @Test(expected = IllegalArgumentException.class)
-    public void testEqualPredicateEmptyPropertyName(){
-        BeanPredicateUtil.equalPredicate("", null);
+    public void testEqualPredicateEmptyMap(){
+        BeanPredicateUtil.equalPredicate(new HashMap<String, Object>());
     }
 
-    /**
-     * Test equal predicate blank property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testEqualPredicateBlankPropertyName(){
-        BeanPredicateUtil.equalPredicate("", null);
-    }
 }
