@@ -1557,6 +1557,7 @@ public final class ConvertUtil{
      * @return 将 <code>key</code> 和 <code>value</code> 直接转成map
      * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
      * @see java.util.Collections#singletonMap(Object, Object)
+     * @see "com.google.common.collect.ImmutableMap#of(K, V)"
      * @since 1.7.1
      */
     public static <K, V> Map<K, V> toMap(K key,V value){

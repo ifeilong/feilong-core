@@ -15,43 +15,29 @@
  */
 package com.feilong.core.lang.stringutiltest;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.test.User;
 
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.TIMESTAMP;
-import static com.feilong.core.DatePattern.YEAR_AND_MONTH;
-
-/**
- * The Class StringUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class StringUtilReplaceValuesMapTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(StringUtilReplaceValuesMapTest.class);
-
-    /**
-     * Search count.
-     */
     @Test
     public void testReplace(){
+        User value = new User(1L);
         Map<String, Object> valuesMap = new HashMap<>();
-        valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
-        valuesMap.put("user", new User(1L));
-        LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
+        valuesMap.put("today", "2016-11-15");
+        valuesMap.put("user", value);
+
+        assertEquals(
+                        "2016-11-15${today1}${user.id}" + value.toString(),
+                        StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap));
     }
 
     /**
@@ -60,26 +46,10 @@ public class StringUtilReplaceValuesMapTest{
     @Test
     public void testReplace3(){
         Map<String, Object> valuesMap = new HashMap<>();
-        valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
+        valuesMap.put("today", "2016-11-15");
         valuesMap.put("user", 1L);
-        LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
-    }
 
-    /**
-     * Test replace22.
-     */
-    @Test
-    public void testReplace22(){
-        String source = "jiiiiiinxin.feilong";
-        assertEquals(source, StringUtil.replace(source, null));
-    }
-
-    /**
-     * Test replace1.
-     */
-    @Test
-    public void testReplace1(){
-        assertEquals("", StringUtil.replace(null, null));
+        assertEquals("2016-11-15${today1}${user.id}1", StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap));
     }
 
     /**
@@ -89,13 +59,44 @@ public class StringUtilReplaceValuesMapTest{
     public void testReplace2(){
         String template = "/home/webuser/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
 
-        Date date = new Date();
         Map<String, String> valuesMap = new HashMap<>();
-        valuesMap.put("yearMonth", DateUtil.toString(date, YEAR_AND_MONTH));
+        valuesMap.put("yearMonth", "2016-11");
         valuesMap.put("expressDeliveryType", "sf");
-        valuesMap.put("fileName", DateUtil.toString(date, TIMESTAMP));
-        LOGGER.debug(StringUtil.replace(template, valuesMap));
+        valuesMap.put("fileName", "221215151215");
 
+        assertEquals("/home/webuser/expressdelivery/2016-11/sf/vipQuery_221215151215.log", StringUtil.replace(template, valuesMap));
         assertEquals(template, StringUtil.replace(template, null));
+    }
+
+    //*************************************************************************
+
+    @Test
+    public void testReplaceNullValuesMap(){
+        String source = "jiiiiiinxin.${yearMonth}feilong";
+        assertEquals(source, StringUtil.replace(source, null));
+    }
+
+    @Test
+    public void testReplaceEmptyValuesMap(){
+        String source = "jiiiiiinxin.${yearMonth}feilong";
+        assertEquals(source, StringUtil.replace(source, new HashMap<String, String>()));
+    }
+
+    /**
+     * Test replace1.
+     */
+    @Test
+    public void testReplace1(){
+        assertEquals(EMPTY, StringUtil.replace(null, null));
+    }
+
+    @Test
+    public void testReplaceNullTemplateString(){
+        assertEquals(EMPTY, StringUtil.replace(null, new HashMap<String, String>()));
+    }
+
+    @Test
+    public void testReplaceEmptyTemplateString(){
+        assertEquals(EMPTY, StringUtil.replace("", new HashMap<String, String>()));
     }
 }
