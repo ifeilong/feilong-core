@@ -59,15 +59,31 @@ public class ParamUtilToQueryStringUseArrayValueMapTest{
         assertEquals("province=江苏省&province=&city=南通市", ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
     }
 
-    //    @Test
-    //    public void testJoinArrayValueMapNullValue(){
-    //        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
-    //
-    //        keyAndArrayMap.put("province", null);
-    //        keyAndArrayMap.put("city", new String[] { "南通市" });
-    //
-    //        assertEquals("province=&city=南通市", ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
-    //    }
+    /**
+     * Test join array value map null value.
+     */
+    @Test
+    public void testJoinArrayValueMapNullValue(){
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+
+        keyAndArrayMap.put("province", null);
+        keyAndArrayMap.put("city", new String[] { "南通市" });
+
+        assertEquals("province=&city=南通市", ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
+    }
+
+    /**
+     * Test join array value map null param and null value.
+     */
+    @Test
+    public void testJoinArrayValueMapNullParamAndNullValue(){
+        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+
+        keyAndArrayMap.put(null, null);
+        keyAndArrayMap.put("city", new String[] { "南通市" });
+
+        assertEquals("=&city=南通市", ParamUtil.toQueryStringUseArrayValueMap(keyAndArrayMap));
+    }
 
     /**
      * Test join array value map null map.

@@ -632,7 +632,7 @@ public final class ParamUtil{
     }
 
     /**
-     * 将参数和多值连接起来.
+     * 将参数名称<code>paramName</code>和多值 <code>paramValues</code> 连接起来.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -646,13 +646,17 @@ public final class ParamUtil{
      *            参数名字
      * @param paramValues
      *            参数多值
-     * @return the string
+     * @return 如果<code>paramValues</code>是null,那么直接返回 <code>paramName=</code>
      * @see java.lang.AbstractStringBuilder#append(String)
      * @see org.apache.commons.lang3.StringUtils#defaultString(String)
      * @see "org.springframework.web.servlet.view.RedirectView#appendQueryProperties(StringBuilder,Map, String)"
      * @since 1.4.0
      */
     private static String joinParamNameAndValues(String paramName,String[] paramValues){
+        //see https://github.com/venusdrogon/feilong-core/issues/372
+        if (null == paramValues){
+            return defaultString(paramName) + "=";
+        }
         StringBuilder sb = new StringBuilder();
 
         for (String paramValue : paramValues){
