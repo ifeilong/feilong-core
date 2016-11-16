@@ -26,7 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                StringUtilFormatTest.class,
+                StringUtilFormatParameterizedTest.class,
                 StringUtilReplaceAllParameterizedTest.class,
                 StringUtilReplaceParameterizedTest.class,
                 StringUtilReplaceValuesMapTest.class,

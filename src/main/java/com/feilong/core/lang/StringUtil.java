@@ -782,7 +782,7 @@ public final class StringUtil{
     // [start]format
 
     /**
-     * 将各类数据,格式化为字符串.
+     * 将各类数据,使用{@link String#format(String, Object...)}格式化为字符串.
      * 
      * <h3>规则:</h3>
      * <blockquote>
