@@ -30,7 +30,7 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 /**
  * The Class MapUtilInvertMapTest.
@@ -44,7 +44,7 @@ public class MapUtilInvertMapTest{
      */
     @Test
     public void testInvertMap(){
-        Map<String, Integer> map = toMap(
+        Map<String, Integer> map = toMapUseEntrys(
                         new SimpleEntry<>("a", 3007),
                         new SimpleEntry<>("b", 3001),
                         new SimpleEntry<>("c", 3001),

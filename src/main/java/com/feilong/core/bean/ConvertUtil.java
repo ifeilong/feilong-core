@@ -1351,8 +1351,7 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map = ConvertUtil.toMap(
-     * 
+     * Map{@code <String, String>} map = ConvertUtil.toMapUseEntrys(
      *                 Pair.of("张飞", "丈八蛇矛"),
      *                 Pair.of("关羽", "青龙偃月刀"),
      *                 Pair.of("赵云", "龙胆枪"),
@@ -1380,7 +1379,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * 
-     * Map{@code <String, String>} map = ConvertUtil.toMap(
+     * Map{@code <String, String>} map = ConvertUtil.toMapUseEntrys(
      *                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
      *                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
      *                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
@@ -1430,7 +1429,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * 
      * <span style="color:green">// 除数和单位的map,必须是有顺序的 从大到小.</span>
-     * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = ConvertUtil.toMap(
+     * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = ConvertUtil.toMapUseEntrys(
      *                 Pair.of(FileUtils.ONE_TB, "TB"), <span style="color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方) </span>
      *                 Pair.of(FileUtils.ONE_GB, "GB"), <span style="color:green">//(Gigabyte,吉字节,又称“千兆”)=1024MB</span>
      *                 Pair.of(FileUtils.ONE_MB, "MB"), <span style="color:green">//(Megabyte,兆字节,简称“兆”)=1024KB</span>
@@ -1455,9 +1454,10 @@ public final class ConvertUtil{
      * @see org.apache.commons.lang3.tuple.ImmutablePair#ImmutablePair(Object, Object)
      * @see org.apache.commons.lang3.tuple.Pair#of(Object, Object)
      * @since 1.7.1
+     * @since 1.9.5 change name
      */
     @SafeVarargs
-    public static <V, K> Map<K, V> toMap(Map.Entry<K, V>...mapEntrys){
+    public static <V, K> Map<K, V> toMapUseEntrys(Map.Entry<K, V>...mapEntrys){
         if (null == mapEntrys){
             return emptyMap();
         }
@@ -1563,6 +1563,87 @@ public final class ConvertUtil{
     public static <K, V> Map<K, V> toMap(K key,V value){
         Map<K, V> map = new LinkedHashMap<>();//不设置初始值 ,可能调用再PUT 这样浪费性能
         map.put(key, value);
+        return map;
+    }
+
+    /**
+     * 将 <code>key1</code> 和 <code>value1</code>/<code>key2</code> 和 <code>value2</code> 直接转成map.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回是的是 {@link LinkedHashMap}</li>
+     * 
+     * <li>
+     * <p>
+     * 非常适合2个key的场景,比如
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} paramMap = new HashMap{@code <>}();
+     * paramMap.put("name", "jinxin");
+     * paramMap.put("age", "18");
+     * request.setParamMap(paramMap);
+     * </pre>
+     * 
+     * 上面的3行代码可以重写成
+     * 
+     * <pre class="code">
+     * request.setParamMap(toMap("name", "jinxin", "age", "18"));
+     * </pre>
+     * 
+     * <p>
+     * 一行代码就搞定了,很简洁,有木有~~
+     * </p>
+     * 
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Long>} map = new HashMap{@code <>}();
+     * map.put("itemId", itemId);
+     * map.put("memberId", memberId);
+     * memberFavoritesDao.findMemberFavoritesByMemberIdAndItemId(map);
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Long>} map = ConvertUtil.toMap("itemId", itemId, "memberId", memberId);
+     * memberFavoritesDao.findMemberFavoritesByMemberIdAndItemId(map);
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param key1
+     *            the key 1
+     * @param value1
+     *            the value 1
+     * @param key2
+     *            the key 2
+     * @param value2
+     *            the value 2
+     * @return 将 <code>key1</code> 和 <code>value1</code>/<code>key2</code> 和 <code>value2</code> 直接转成map
+     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @see java.util.Collections#singletonMap(Object, Object)
+     * @see "com.google.common.collect.ImmutableMap#of(K, V)"
+     * @since 1.9.5
+     */
+    public static <K, V> Map<K, V> toMap(K key1,V value1,K key2,V value2){
+        Map<K, V> map = toMap(key1, value1);
+        map.put(key2, value2);
         return map;
     }
 

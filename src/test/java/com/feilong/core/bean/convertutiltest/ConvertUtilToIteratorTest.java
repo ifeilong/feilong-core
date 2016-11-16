@@ -22,7 +22,6 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -31,6 +30,7 @@ import org.apache.commons.collections4.IteratorUtils;
 import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toIterator;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class ConvertUtilToIteratorTest.
@@ -99,10 +99,7 @@ public class ConvertUtilToIteratorTest{
     @Test
     public void testToIteratorMap(){
         // ************************map*********************************
-        Map<String, String> map = new LinkedHashMap<>();
-
-        map.put("a", "1");
-        map.put("b", "2");
+        Map<String, String> map = toMap("a", "1", "b", "2");
 
         Iterator<String> iterator = toIterator(map);
         assertThat(IteratorUtils.toList(iterator), contains("1", "2"));

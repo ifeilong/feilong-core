@@ -29,6 +29,7 @@ import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 /**
  * The Class ConvertUtilToMapArrayTest.
@@ -43,7 +44,7 @@ public class ConvertUtilToMapArrayTest{
      */
     @Test
     public void testToMap(){
-        Map<String, String> map = toMap(//
+        Map<String, String> map = toMapUseEntrys(//
                         Pair.of("张飞", "丈八蛇矛"),
                         Pair.of("关羽", "青龙偃月刀"),
                         Pair.of("赵云", "龙胆枪"),
@@ -57,7 +58,7 @@ public class ConvertUtilToMapArrayTest{
      */
     @Test
     public void testToMap11(){
-        Map<String, String> map = toMap(toArray(
+        Map<String, String> map = toMapUseEntrys(toArray(
                         new SimpleEntry<>("张飞", "丈八蛇矛"),
                         new SimpleEntry<>("关羽", "青龙偃月刀"),
                         new SimpleEntry<>("赵云", "龙胆枪"),
@@ -70,7 +71,7 @@ public class ConvertUtilToMapArrayTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testToMapWithNullElement(){
-        toMap((Map.Entry<String, String>) null);
+        toMapUseEntrys((Map.Entry<String, String>) null);
     }
 
     /**
@@ -86,7 +87,7 @@ public class ConvertUtilToMapArrayTest{
      */
     @Test
     public void testToMapNullArray3(){
-        assertEquals(emptyMap(), toMap((Map.Entry<String, String>[]) null));
+        assertEquals(emptyMap(), toMapUseEntrys((Map.Entry<String, String>[]) null));
     }
 
     /**
@@ -95,7 +96,7 @@ public class ConvertUtilToMapArrayTest{
     @Test
     public void testToMapNullArray2(){
         Map.Entry<String, String>[] entries = null;
-        assertEquals(emptyMap(), toMap(entries));
+        assertEquals(emptyMap(), toMapUseEntrys(entries));
     }
 
     /**
@@ -103,6 +104,6 @@ public class ConvertUtilToMapArrayTest{
      */
     @Test
     public void testToMapNullArray1(){
-        assertEquals(emptyMap(), toMap());
+        assertEquals(emptyMap(), toMapUseEntrys());
     }
 }

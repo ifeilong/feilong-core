@@ -45,10 +45,7 @@ public class BeanPredicateUtilEqualMapPredicateTest{
                         guanyu30);
 
         //在list中查找 名字是 关羽,并且 年龄是30 的user
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", "关羽");
-        map.put("age", 30);
-
+        Map<String, ?> map = toMap("name", "关羽", "age", 30);
         assertEquals(guanyu30, find(list, BeanPredicateUtil.<User> equalPredicate(map)));
     }
 

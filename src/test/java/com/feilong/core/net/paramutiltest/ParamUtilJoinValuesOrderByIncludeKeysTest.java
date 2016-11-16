@@ -18,13 +18,14 @@ package com.feilong.core.net.paramutiltest;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.net.ParamUtil;
+
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class ParamUtilJoinValuesOrderByIncludeKeysTest.
@@ -40,10 +41,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOneKey(){
-        Map<String, String> map = new HashMap<>();
-        map.put("service", "create_salesorder");
-        map.put("paymentType", "unionpay_mobile");
-
+        Map<String, String> map = toMap("service", "create_salesorder", "paymentType", "unionpay_mobile");
         assertEquals("create_salesorder", ParamUtil.joinValuesOrderByIncludeKeys(map, "service"));
     }
 
@@ -52,9 +50,8 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesTwoKeys(){
-        Map<String, String> map = new HashMap<>();
-        map.put("service", "create_salesorder");
-        map.put("paymentType", "unionpay_mobile");
+
+        Map<String, String> map = toMap("service", "create_salesorder", "paymentType", "unionpay_mobile");
 
         assertEquals("create_salesorder" + "unionpay_mobile", ParamUtil.joinValuesOrderByIncludeKeys(map, "service", "paymentType"));
         assertEquals("unionpay_mobile" + "create_salesorder", ParamUtil.joinValuesOrderByIncludeKeys(map, "paymentType", "service"));
@@ -65,10 +62,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesNoExistKey(){
-        Map<String, String> map = new HashMap<>();
-        map.put("service", "create_salesorder");
-        map.put("paymentType", "unionpay_mobile");
-
+        Map<String, String> map = toMap("service", "create_salesorder", "paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, "a", "b"));
     }
 
@@ -85,9 +79,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOrderByIncludeKeysNullKeys(){
-        Map<String, String> map = new HashMap<>();
-        map.put("service", "create_salesorder");
-        map.put("paymentType", "unionpay_mobile");
+        Map<String, String> map = toMap("service", "create_salesorder", "paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, null));
     }
 
@@ -96,9 +88,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOrderByIncludeKeysEmptyKeys(){
-        Map<String, String> map = new HashMap<>();
-        map.put("service", "create_salesorder");
-        map.put("paymentType", "unionpay_mobile");
+        Map<String, String> map = toMap("service", "create_salesorder", "paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map));
     }
 
@@ -107,9 +97,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOrderByIncludeKeysEmptyKeys1(){
-        Map<String, String> map = new HashMap<>();
-        map.put("service", "create_salesorder");
-        map.put("paymentType", "unionpay_mobile");
+        Map<String, String> map = toMap("service", "create_salesorder", "paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, ConvertUtil.<String> toArray()));
     }
 
@@ -118,9 +106,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesOrderByIncludeKeysNullElementKeys(){
-        Map<String, String> map = new HashMap<>();
-        map.put("service", "create_salesorder");
-        map.put("paymentType", "unionpay_mobile");
+        Map<String, String> map = toMap("service", "create_salesorder", "paymentType", "unionpay_mobile");
         assertEquals(EMPTY, ParamUtil.joinValuesOrderByIncludeKeys(map, ConvertUtil.<String> toArray((String) null)));
     }
 }

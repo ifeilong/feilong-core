@@ -26,6 +26,8 @@ import org.junit.Test;
 
 import com.feilong.core.net.ParamUtil;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+
 /**
  * The Class ParamUtilToQueryStringUseSingleValueMapTest.
  *
@@ -38,8 +40,7 @@ public class ParamUtilToQueryStringUseSingleValueMapTest{
      */
     @Test
     public void testJoinSingleValueMapNullKey(){
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put(null, null);
+        Map<String, String> map = toMap(null, null);
         assertEquals("=", ParamUtil.toQueryStringUseSingleValueMap(map));
     }
 

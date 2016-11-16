@@ -17,7 +17,6 @@ package com.feilong.core.util.collectionsutiltest;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +28,7 @@ import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class CollectionsUtilFindWithPredicateTest.
@@ -49,9 +49,7 @@ public class CollectionsUtilFindWithPredicateTest{
                         new User("刘备", 25),
                         guanyu30);
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", "关羽");
-        map.put("age", 30);
+        Map<String, ?> map = toMap("name", "关羽", "age", 30);
 
         Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(map);
         assertEquals(guanyu30, CollectionsUtil.find(list, equalPredicate));
