@@ -28,7 +28,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 /**
@@ -79,7 +78,7 @@ public class ConvertUtilToMapArrayTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testToMapWithNullElement1(){
-        toMap(Pair.of("张飞", "丈八蛇矛"), Pair.of("关羽", "青龙偃月刀"), null, Pair.of("刘备", "双股剑"));
+        toMapUseEntrys(Pair.of("张飞", "丈八蛇矛"), Pair.of("关羽", "青龙偃月刀"), null, Pair.of("刘备", "双股剑"));
     }
 
     /**

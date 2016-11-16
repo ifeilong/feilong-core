@@ -34,8 +34,6 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
  */
 public class ParamUtilJoinValuesOrderByIncludeKeysTest{
 
-    //***************************************************************************************************
-
     /**
      * Test join values one key.
      */
@@ -50,9 +48,7 @@ public class ParamUtilJoinValuesOrderByIncludeKeysTest{
      */
     @Test
     public void testJoinValuesTwoKeys(){
-
         Map<String, String> map = toMap("service", "create_salesorder", "paymentType", "unionpay_mobile");
-
         assertEquals("create_salesorder" + "unionpay_mobile", ParamUtil.joinValuesOrderByIncludeKeys(map, "service", "paymentType"));
         assertEquals("unionpay_mobile" + "create_salesorder", ParamUtil.joinValuesOrderByIncludeKeys(map, "paymentType", "service"));
     }
