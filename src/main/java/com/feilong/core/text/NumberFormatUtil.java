@@ -79,7 +79,8 @@ public final class NumberFormatUtil{
      * </p>
      * 
      * <p>
-     * 但是我们常用标准的四舍五入,为了保持和 {@link #format(Number, String)}一致性,如果 roundingMode 为null,使用常用的 {@link RoundingMode#HALF_UP}来进行格式化
+     * 但是我们常用标准的四舍五入,为了保持和 {@link com.feilong.core.lang.NumberUtil#toString(Number, String)}一致性,如果 roundingMode 为null,使用常用的
+     * {@link RoundingMode#HALF_UP}来进行格式化
      * </p>
      * </blockquote>
      * 
