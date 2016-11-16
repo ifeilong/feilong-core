@@ -32,42 +32,6 @@ public class NumberFormatUtilTest{
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(NumberFormatUtilTest.class);
 
-    /**
-     * Test format.
-     */
-    //***************NumberFormatUtil.format(Number, String)************************************
-    /**
-     * Test format null value.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testFormatNullValue(){
-        NumberFormatUtil.format(null, "#####");
-    }
-
-    /**
-     * Test format null number pattern.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testFormatNullNumberPattern(){
-        NumberFormatUtil.format(25, null);
-    }
-
-    /**
-     * Test format blank number pattern.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testFormatBlankNumberPattern(){
-        NumberFormatUtil.format(25, "");
-    }
-
-    /**
-     * Test format blank number pattern 1.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testFormatBlankNumberPattern1(){
-        NumberFormatUtil.format(25, " ");
-    }
-
     //*************NumberFormatUtil.format(Number, String, RoundingMode)***************************************
 
     /**

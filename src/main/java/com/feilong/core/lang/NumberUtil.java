@@ -336,7 +336,7 @@ public final class NumberUtil{
      * 将数字 <code>value</code> 按照指定的格式 <code>toStringPattern</code> 格式成字符串 .
      * 
      * <p>
-     * 调用 {@link NumberFormatUtil#format(Number, String)},当遇到需要舍入的时候,使用常用的 {@link RoundingMode#HALF_UP}
+     * 调用 {@link NumberFormatUtil#format(Number, String, RoundingMode)},当遇到需要舍入的时候,使用常用的 {@link RoundingMode#HALF_UP}
      * </p>
      * 
      * <h3>关于参数 <code>value</code>:</h3>
@@ -357,6 +357,16 @@ public final class NumberUtil{
      * 
      * <span style="color:green">//将数字转成百分数字符串,带两位小数点</span>
      * NumberUtil.toString(0.24f, NumberPattern.PERCENT_WITH_2POINT)    = 24.00%
+     * 
+     * NumberUtil.toString(toBigDecimal(1.15), "#####.#")     =   1.2
+     * NumberUtil.toString(toBigDecimal(1.25), "#####.#")     =   1.3
+     * NumberUtil.toString(toBigDecimal(1.251), "#####.#")    =   1.3
+     * 
+     * NumberUtil.toString(toBigDecimal(-1.15), "#####.#")    =   -1.2
+     * NumberUtil.toString(toBigDecimal(-1.25), "#####.#")    =   -1.3
+     * NumberUtil.toString(toBigDecimal(-1.251), "#####.#")   =   -1.3
+     * 
+     * NumberUtil.toString(toBigDecimal(25.5), "RP #####")    =   RP 26
      * </pre>
      * 
      * @param value
@@ -366,10 +376,10 @@ public final class NumberUtil{
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>toStringPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>toStringPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see NumberFormatUtil#format(Number, String)
+     * @see NumberFormatUtil#format(Number, String, RoundingMode)
      */
     public static String toString(Number value,String toStringPattern){
-        return NumberFormatUtil.format(value, toStringPattern);
+        return NumberFormatUtil.format(value, toStringPattern, HALF_UP);
     }
 
     // *****************************************************************************************************

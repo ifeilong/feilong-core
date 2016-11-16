@@ -30,6 +30,7 @@ import static com.feilong.core.NumberPattern.PERCENT_WITH_2POINT;
 import static com.feilong.core.NumberPattern.PERCENT_WITH_NOPOINT;
 import static com.feilong.core.NumberPattern.TWO_DECIMAL_POINTS;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
@@ -93,7 +94,18 @@ public class NumberUtilToStringParameterizedTest extends AbstractTwoParamsAndOne
 
                         toArray(111111.5, NO_SCALE, "111112"),
                         toArray(111112.5, NO_SCALE, "111113"),
-                        toArray(88888888, NO_SCALE, "88888888")
+                        toArray(88888888, NO_SCALE, "88888888"),
+
+                        ConvertUtil.<Object> toArray(25.5, "#####", "26"),
+                        toArray(25.5, "RP #####", "RP 26"),
+
+                        toArray(toBigDecimal(1.15), "#####.#", "1.2"),
+                        toArray(toBigDecimal(1.25), "#####.#", "1.3"),
+                        toArray(toBigDecimal(1.251), "#####.#", "1.3"),
+
+                        toArray(toBigDecimal(-1.15), "#####.#", "-1.2"),
+                        toArray(toBigDecimal(-1.25), "#####.#", "-1.3"),
+                        toArray(toBigDecimal(-1.251), "#####.#", "-1.3")
         //  
         );
     }

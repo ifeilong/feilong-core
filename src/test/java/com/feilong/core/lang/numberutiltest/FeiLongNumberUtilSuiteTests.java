@@ -38,7 +38,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 NumberUtilGetProgressTest.class,
                 NumberUtilGetProgressParameterizedTest.class,
-                NumberUtilToStringParameterizedTest.class, })
+
+                NumberUtilToStringTest.class,
+                NumberUtilToStringParameterizedTest.class,
+        //
+})
 public class FeiLongNumberUtilSuiteTests{
 
 }

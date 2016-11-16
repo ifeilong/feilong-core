@@ -58,61 +58,6 @@ public final class NumberFormatUtil{
     }
 
     /**
-     * 将 {@link Number} 使用 numberPattern格式化.
-     * 
-     * <p style="color:red">
-     * 不建议直接调用此方法,建议使用 {@link com.feilong.core.lang.NumberUtil#toString(Number, String) NumberUtil.toString(Number, String)}替代
-     * </p>
-     * 
-     * <p>
-     * 该方法使用 {@link java.math.RoundingMode#HALF_UP}
-     * </p>
-     * 
-     * <h3>关于参数 <code>value</code>:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * <b>请尽量传递Integer,Long,BigDecimal,而不要使用 float,double等浮点类型</b>,否则可能结果不准确,特别是jdk8以下的版本,具体参见
-     * <a href="https://github.com/venusdrogon/feilong-core/issues/165">NumberFormatUtilTest 在 jdk8 下面测试不通过</a>
-     * </p>
-     * 
-     * </blockquote>
-     * 
-     * <h3>示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * NumberFormatUtil.format(toBigDecimal(1.15), "#####.#")     =   1.2
-     * NumberFormatUtil.format(toBigDecimal(1.25), "#####.#")     =   1.3
-     * NumberFormatUtil.format(toBigDecimal(1.251), "#####.#")    =   1.3
-     * 
-     * NumberFormatUtil.format(toBigDecimal(-1.15), "#####.#")    =   -1.2
-     * NumberFormatUtil.format(toBigDecimal(-1.25), "#####.#")    =   -1.3
-     * NumberFormatUtil.format(toBigDecimal(-1.251), "#####.#")   =   -1.3
-     * 
-     * NumberFormatUtil.format(toBigDecimal(25.5), "RP #####")    =   RP 26
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param value
-     *            the value
-     * @param numberPattern
-     *            格式化数字格式,可以参见或者使用{@link NumberPattern}
-     * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>numberPattern</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>numberPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see NumberPattern
-     * @see DecimalFormat
-     * @see RoundingMode#HALF_UP
-     * @see #format(Number, String, RoundingMode)
-     */
-    public static String format(Number value,String numberPattern){
-        return format(value, numberPattern, HALF_UP);
-    }
-
-    /**
      * 将 {@link Number} 使用 {@link RoundingMode} <code>numberPattern</code>格式化.
      * 
      * <h3>关于参数 <code>value</code>:</h3>

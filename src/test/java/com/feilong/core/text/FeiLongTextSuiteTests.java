@@ -28,7 +28,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 NumberFormatUtilTest.class,
-                NumberFormatUtilFormatParameterizedTest.class,
                 NumberFormatUtilFormatRoundingModeParameterizedTest.class,
 
                 MessageFormatUtilTest.class })
