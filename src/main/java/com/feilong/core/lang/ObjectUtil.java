@@ -124,10 +124,9 @@ public final class ObjectUtil{
      * }
      * </pre>
      * 
-     * 当然对于上面的case,你可以直接调用 {@link com.feilong.core.util.MapUtil#putMultiValue(java.util.Map, Object, Object)}
+     * 当然对于上面的case,你还可以直接调用 {@link com.feilong.core.util.MapUtil#putMultiValue(java.util.Map, Object, Object)}
      * 
      * </blockquote>
-     * 
      * 
      * @param <T>
      *            the type of the object
