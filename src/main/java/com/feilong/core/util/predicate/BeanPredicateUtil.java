@@ -148,7 +148,6 @@ public final class BeanPredicateUtil{
      *                 .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
      * 
      * assertEquals(guanyu30, CollectionsUtil.find(list, predicate));
-     * 
      * </pre>
      * 
      * <p>
@@ -164,12 +163,8 @@ public final class BeanPredicateUtil{
      *                 new User("刘备", 25),
      *                 guanyu30);
      * 
-     * Map{@code <String, Object>} map = new HashMap{@code <>}();
-     * map.put("name", "关羽");
-     * map.put("age", 30);
-     * 
+     * Map{@code <String, Object>} map = ConvertUtil.toMap("name", "关羽", "age", 30);
      * assertEquals(guanyu30, find(list, BeanPredicateUtil.{@code <User>} equalPredicate(map)));
-     * 
      * </pre>
      * 
      * </blockquote>
