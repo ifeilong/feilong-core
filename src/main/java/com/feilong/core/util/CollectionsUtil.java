@@ -1094,6 +1094,10 @@ public final class CollectionsUtil{
      * <h3>示例:</h3>
      * <blockquote>
      * 
+     * <p>
+     * <b>场景:</b> 从list中查找name是 关羽 的User对象
+     * </p>
+     * 
      * <pre class="code">
      * List{@code <User>} list = new ArrayList{@code <>}();
      * list.add(new User("张飞", 23));
@@ -1113,6 +1117,13 @@ public final class CollectionsUtil{
      * }
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回第一个匹配对象</li>
+     * </ol>
      * </blockquote>
      *
      * @param <O>
@@ -1174,6 +1185,13 @@ public final class CollectionsUtil{
      * }
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回第一个匹配对象</li>
+     * </ol>
      * </blockquote>
      *
      * @param <O>
