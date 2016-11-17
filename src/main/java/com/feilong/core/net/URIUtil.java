@@ -272,8 +272,8 @@ public final class URIUtil{
      * 适合于一些后台传递url参数需要encode的场景,比如支付宝 <b>show_url</b>(收银台页面上,商品展示的超链接),
      * 
      * <p>
-     * 支付宝目前不直接支持中文参数链接,比如 <code>http://www.underarmour.cn/s.htm?keyword=鞋{@code &}pageNo=2</code> ,在支付宝页面源码会显示成
-     * <code>http://www.underarmour.cn/s.htm?keyword=鞋{@code &amp;}pageNo=2</code>
+     * 支付宝目前不直接支持中文参数链接,比如 {@code http://www.underarmour.cn/s.htm?keyword=鞋&pageNo=2} ,在支付宝页面源码会显示成
+     * {@code http://www.underarmour.cn/s.htm?keyword=鞋&amp;pageNo=2}
      * </p>
      * 
      * <br>
@@ -283,7 +283,7 @@ public final class URIUtil{
      * URIUtil.encodeUri("http://www.underarmour.cn/s.htm?keyword=鞋{@code &}pageNo=2", UTF8)
      * </pre>
      * 
-     * 传递 <code>http://www.underarmour.cn/s.htm?keyword=%E9%9E%8B{@code &}pageNo=2</code>
+     * 传递 {@code http://www.underarmour.cn/s.htm?keyword=%E9%9E%8B&pageNo=2}
      * </li>
      * </ol>
      * </blockquote>

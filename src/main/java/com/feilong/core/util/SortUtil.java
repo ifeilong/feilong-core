@@ -164,7 +164,7 @@ public final class SortUtil{
      * 
      * String[] arrays = { "almn", "fba", "cba" };
      * 
-     * Comparator<String> comparator = new Comparator<String>(){
+     * Comparator{@code <String>} comparator = new Comparator{@code <String>}(){
      * 
      *     &#64;Override
      *     public int compare(String s1,String s2){

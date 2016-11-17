@@ -532,8 +532,7 @@ public final class PropertyUtil{
      * <li>如果 <code>ClassUtil.isInstance(obj, toBeFindedClassType)</code> 直接返回 findValue</li>
      * <li>不支持obj是<code>isPrimitiveOrWrapper</code>,<code>CharSequence</code>,<code>Collection</code>,<code>Map</code>类型,自动过滤</li>
      * <li>调用 {@link PropertyUtil#describe(Object, String...)} 再递归查找</li>
-     * <li>目前暂不支持从集合里面找到指定类型的值,参见 {@link #isDonotSupportFindType(Object)},如果你有相关需求,可以调用 {@link
-     * "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"}</li>
+     * <li>目前暂不支持从集合里面找到指定类型的值,如果你有相关需求,可以调用 "org.springframework.util.CollectionUtils#findValueOfType(Collection, Class)"</li>
      * </ol>
      * </blockquote>
      * 

@@ -87,7 +87,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
  * <blockquote>
  * <p>
  * {@link String#String(byte[] )} 其实调用了{@link String#String(byte[], Charset)};<br>
- * 先使用 {@link Charset#defaultCharset()},如果有异常再用 ISO-8859-1, 具体参见 {@link java.lang.StringCoding#decode(byte[], int, int) }
+ * 先使用 {@link Charset#defaultCharset()},如果有异常再用 ISO-8859-1, 具体参见 java.lang.StringCoding#decode(byte[], int, int)
  * </p>
  * </blockquote>
  * 
