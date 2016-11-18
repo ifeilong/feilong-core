@@ -20,7 +20,7 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 # 使用`feilong-core`的理由:
 
-- [使用`feilong-core`的理由](https://github.com/venusdrogon/feilong-core/wiki/Reasons-for-use-feilong-core) 
+- [使用 feilong-core 的理由](https://github.com/venusdrogon/feilong-core/wiki/Reasons-for-use-feilong-core) 
 
 1.  有常用的工具类 (如 处理日期的 `DateUtil`,处理 集合 的 `CollectionsUtil` 等)
 1.	有常用的JAVA常量类 (如日期格式 `DatePattern`, 时间间隔 `TimeInterval` 等)
