@@ -11,13 +11,13 @@ feilong core 让Java开发更简便的工具包
 
 focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-platform) 项目的核心项目
 
-# 简介:
+## 1.简介:
 
 1. 目标:`Reduce development, Release ideas` `(减少开发,释放思想)`;
 1. 让你从大量重复的底层代码中脱身,提高工作效率;
 1. 让你的代码更简炼，易写、易读、易于维护;
 
-# 使用`feilong-core`的理由:
+## 2.feilong-core 优点:
 
 - [使用 feilong-core 的理由](https://github.com/venusdrogon/feilong-core/wiki/Reasons-for-use-feilong-core) 
 
@@ -27,12 +27,12 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 1.  国内`中文注释`最完善的API
 1.  有完善的单元测试
 
-# 一图概述:
+## 3.一图概述:
 
 ![one-feilong-core](http://venusdrogon.github.io/feilong-platform/mysource/one-feilong-core.png) 
 
 
-# :dragon: Maven使用配置
+## 4.:dragon: Maven使用配置
 
 feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core "仓库") 浏览 
 
@@ -70,36 +70,36 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 	</project>
 ```
 
-# 帮助:
+## 5.帮助:
 
 - [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
 - [Release notes](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/) 
 - [wiki](https://github.com/venusdrogon/feilong-core/wiki) 
 - [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/) 
 
-# sonar 扫描
+## 6.sonar 扫描
 
 ![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core.png) 
 
-# :memo: 说明
+## 7.:memo: 说明
 
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. [require-jdk-version](https://github.com/venusdrogon/feilong-core/wiki/require-jdk-version)
 1. [dependencies](https://github.com/venusdrogon/feilong-core/wiki/dependencies)
 
-# Q&A
+## 8.Q&A
 
-## Q1:这是重复造轮子吗?
+### 8.1 Q1:这是重复造轮子吗?
 
 A: https://github.com/venusdrogon/feilong-core/wiki/Repeat-the-wheel
 
-# :cyclone: feilong 即时交流
+## 9.:cyclone: feilong 即时交流
 
 微信公众号 `feilongjava`							|QQ 群 `243306798`
 :---- 										|:---------
  ![](http://i.imgur.com/hM83Xv9.jpg)		|![](http://i.imgur.com/cIfglCa.png)
 
-# :panda_face: About
+## 10:panda_face: About
 
 如果您对本项目有任何建议和批评,可以使用下面的联系方式：
 
