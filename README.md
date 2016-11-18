@@ -10,7 +10,7 @@ feilong core 让Java开发更简便的工具包
 
 > Reduce development, Release ideas (减少开发,释放思想)
 
-`核心jar,所有feilong platform的基础` 
+focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-platform) 项目的核心项目
 
 # 简介:
 
