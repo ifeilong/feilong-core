@@ -34,9 +34,9 @@ public class RegexUtilGroupIntTest{
     @Test
     public void testGroup(){
         String regexPattern = "(.*?)@(.*?)";
-        String email = "venusdrogon@163.com";
+        String email = "venussanguodrogon@1263.com";
 
-        assertEquals("venusdrogon", RegexUtil.group(regexPattern, email, 1));
-        assertEquals("163.com", RegexUtil.group(regexPattern, email, 2));
+        assertEquals("venussanguodrogon", RegexUtil.group(regexPattern, email, 1));
+        assertEquals("1263.com", RegexUtil.group(regexPattern, email, 2));
     }
 }

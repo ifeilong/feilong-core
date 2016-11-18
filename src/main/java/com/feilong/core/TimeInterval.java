@@ -16,7 +16,7 @@
 package com.feilong.core;
 
 /**
- * 常用时间间隔.
+ * 常用的时间间隔.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.time.DateUtils
