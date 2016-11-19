@@ -1167,7 +1167,39 @@ public final class DateUtil{
      * <li>转换的时候,使用日历的<b>宽松模式</b>,参见 {@link java.text.DateFormat#setLenient(boolean)},即支持传入"2016-02-33",会转换成 2016-03-04</li>
      * <li>如果能解析所有的字符串,那么视为成功</li>
      * <li>如果没有任何的模式匹配,将会抛出异常</li>
+     * <li>如果转换有异常,会将 {@link ParseException} 转成 {@link IllegalArgumentException} 返回,是 UnCheckedException异常 ,非强行要求捕获处理</li>
      * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 经常我们会看到小伙伴写出下面的代码:
+     * 
+     * <pre class="code">
+     * SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+     * Date publishTimeDate = null;
+     * try{
+     *     publishTimeDate = format.parse(publishTime);
+     * }catch (ParseException e1){
+     *     e1.printStackTrace();
+     * }
+     * </pre>
+     * 
+     * <p>
+     * 可以看到直接使用 {@code SimpleDateFormat} 来写代码的话,代码行数较多,并且还需要自行处理 ParseException checkedException异常, 而且catch里面一般都是写的废话
+     * </p>
+     * 
+     * <p>
+     * 此时你可以一行代码搞定:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Date publishTimeDate = DateUtil.toDate(publishTime, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND);
+     * </pre>
+     * 
      * </blockquote>
      * 
      * @param dateString
