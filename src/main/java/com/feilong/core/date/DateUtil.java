@@ -216,7 +216,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>的开始时间, <code>00:00:00.000</code> 到毫秒.
+     * 获得指定日期<code>date</code>的 <code>00:00:00.000</code>时间.
      * 
      * <h3>示例:</h3>
      * 
@@ -240,7 +240,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>的结束时间,<code>23:59:59.999</code> 到毫秒.
+     * 获得指定日期<code>date</code>的 <code>23:59:59.999</code>时间.
      * 
      * <h3>示例:</h3>
      * 
@@ -264,7 +264,7 @@ public final class DateUtil{
 
     // *****************************week****************************************************
     /**
-     * 获得传入date 所在的<span style="color:red">星期 第一天(周日)</span> <code>00:00:00.000</code> 到毫秒.
+     * 获得指定日期所在的<span style="color:red">星期第一天(周日)</span> <code>00:00:00.000</code> 到毫秒.
      * 
      * <h3>示例:</h3>
      * 
@@ -300,7 +300,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得传入date 所在<span style="color:red">星期的最后一天(周六)</span> <code>23:59:59.999</code> 到毫秒.
+     * 获得指定日期所在<span style="color:red">星期的最后一天(周六)</span> <code>23:59:59.999</code> 到毫秒.
      * 
      * <h3>示例:</h3>
      * 
@@ -339,7 +339,7 @@ public final class DateUtil{
     // *********************************************************************************
 
     /**
-     * 获得指定日期 <code>date</code>所在月的第一天,<code>00:00:00.000</code>到毫秒.
+     * 获得指定日期<code>date</code>所在月的第一天,<code>00:00:00.000</code>到毫秒.
      * 
      * <h3>示例:</h3>
      * 
@@ -366,7 +366,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code><span style="color:red">所在月的最后一天</span>,<code>23:59:59.999</code> 到毫秒.
+     * 获得指定日期<code>date</code><span style="color:red">所在月的最后一天</span>,<code>23:59:59.999</code> 到毫秒.
      * 
      * <p>
      * 以指定日期 <code>date</code> 月的实际天数为准,也就是说,2月会<b>自动区分闰年</b> 是28天还是29天
@@ -400,7 +400,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code><span style="color:red">所在年的第一天</span>,<code>00:00:00.000</code> 到毫秒.
+     * 获得指定日期<code>date</code><span style="color:red">所在年的第一天</span>,<code>00:00:00.000</code> 到毫秒.
      * 
      * <h3>示例:</h3>
      * 
@@ -428,7 +428,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code><span style="color:red">所在年的最后一天</span> <code>23:59:59.999</code> 到毫秒.
+     * 获得指定日期<code>date</code><span style="color:red">所在年的最后一天</span> <code>23:59:59.999</code> 到毫秒.
      * 
      * <h3>示例:</h3>
      * 
@@ -755,7 +755,7 @@ public final class DateUtil{
 
     // [start]fieldValue获得日期中的某属性字段
     /**
-     * 获得任意指定日期 <code>date</code>中的<b>年份</b>.
+     * 获得指定日期 <code>date</code>中的<b>年份</b>.
      * 
      * <h3>示例:</h3>
      * 
@@ -780,7 +780,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得任意指定日期 <code>date</code>中的<b>月份</b> <span style="color:red">(已经+1处理)</span>.
+     * 获得指定日期 <code>date</code>中的<b>月份</b> <span style="color:red">(已经+1处理)</span>.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -851,7 +851,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得任意指定日期 <code>date</code>中的<b>天(在当年中)</b>.
+     * 获得指定日期 <code>date</code>是当年中的第几天</b>.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -876,7 +876,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得任意指定日期 <code>date</code>中的<b>天</b>.
+     * 获得指定日期 <code>date</code>是当前月的几号.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -901,7 +901,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code><b>星期几</b>.
+     * 获得指定日期<code>date</code><b>在当前星期是星期几</b>.
      * 
      * <h3>注意:</h3>
      * <blockquote>
@@ -944,7 +944,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>在它<b>一年中的小时数</b>.
+     * 获得指定日期<code>date</code>在它<b>一年中的小时数</b>.
      * 
      * <p>
      * max value: 8784.
@@ -972,7 +972,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>中的<b>小时</b>(24小时制).
+     * 获得指定日期<code>date</code>中的<b>小时</b>(24小时制).
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -995,7 +995,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>中的<b>分钟</b>.
+     * 获得指定日期<code>date</code>中的<b>分钟</b>.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1017,7 +1017,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>中的<b>秒</b>.
+     * 获得指定日期<code>date</code>中的<b>秒</b>.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1039,7 +1039,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>在<b>当天中的秒数</b>,最大值86400.
+     * 获得指定日期<code>date</code>在<b>当天中的秒数</b>,最大值86400.
      * 
      * <h3>示例:</h3>
      * <blockquote>
@@ -1064,7 +1064,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>在<b>当前小时中的秒数</b>,最大值3600 {@link TimeInterval#SECONDS_PER_HOUR}.
+     * 获得指定日期<code>date</code>在<b>当前小时中的秒数</b>,最大值3600 {@link TimeInterval#SECONDS_PER_HOUR}.
      * 
      * <h3>示例:</h3>
      * <blockquote>
