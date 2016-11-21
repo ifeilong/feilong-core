@@ -1417,7 +1417,7 @@ public final class DateUtil{
     // [start]isLeapYear 闰年
 
     /**
-     * 判断某年是否为闰年 .
+     * 判断指定年 <code>year</code> 是否为闰年 .
      * 
      * <p>
      * 规则: {@code (year % 4 == 0 && year % 100 != 0) || year % 400 == 0}
