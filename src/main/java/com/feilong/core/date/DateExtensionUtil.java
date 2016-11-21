@@ -161,7 +161,7 @@ public final class DateExtensionUtil{
     //****************************************************************************************************
 
     /**
-     * 将 开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,格式化成直观的表示方式.
+     * 将开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,格式化成直观的表示方式.
      * 
      * <h3>说明:</h3>
      * 
@@ -183,7 +183,6 @@ public final class DateExtensionUtil{
      * <span style="color:green">// balabala logic</span>
      * 
      * LOGGER.info("use time:{}", DateExtensionUtil.getIntervalForView(beginDate));
-     * 
      * </pre>
      * 
      * </blockquote>
