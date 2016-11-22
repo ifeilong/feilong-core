@@ -1557,8 +1557,6 @@ public final class CollectionsUtil{
                         : selectRejected(objectCollection, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
     }
 
-    //***************************************************************************************
-
     /**
      * 循环 <code>objectCollection</code>,获得元素 <code>bean</code>,判断是否不匹配<code>predicate</code>,<span style="color:red">如果不匹配</span>
      * ,将该对象存入list中返回.
@@ -1605,6 +1603,8 @@ public final class CollectionsUtil{
         return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
                         : (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
     }
+
+    //***************************************************************************************
 
     /**
      * 循环 <code>inputIterable</code>,将每个元素使用 <code>transformer</code> 转换成新的对象,返回<b>新的list</b>.
