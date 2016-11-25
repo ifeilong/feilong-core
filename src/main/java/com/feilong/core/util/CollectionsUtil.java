@@ -1326,6 +1326,50 @@ public final class CollectionsUtil{
      * 
      * </blockquote>
      * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * <span style="color:green">// 当前店铺 的物流方式Id set</span>
+     * Set{@code <Long>} distributionModeIdSet = new HashSet{@code <>}();
+     * for (TemeplateDistributionMode tdCmd : temeplateDistributionModeList){
+     *     distributionModeIdSet.add(tdCmd.getDistributionModeId());
+     * }
+     * 
+     * <span style="color:green">// 拿到所有的物流方式 列表</span>
+     * List{@code <DistributionCommand>} distributionCommandList = freigthMemoryManager.getDistributionList();
+     * 
+     * <span style="color:green">// 根据 物流方式ID 找出 支持本商铺的 DistributionCommand</span>
+     * List{@code <DistributionCommand>} curShopDistributionCommandList = new ArrayList{@code <>}();
+     * 
+     * for (Long modeId : distributionModeIdSet){
+     *     for (DistributionCommand distributionCmd : distributionCommandList){
+     *         if (modeId.equals(distributionCmd.getDistributionModeId())){
+     *             curShopDistributionCommandList.add(distributionCmd);
+     *         }
+     *     }
+     * }
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * <span style="color:green">// 当前店铺 的物流方式Id set</span>
+     * Set{@code <Long>} distributionModeIdSet = CollectionsUtil.getPropertyValueSet(temeplateDistributionModeList, "distributionModeId");
+     * <span style="color:green">// 拿到所有的物流方式 列表</span>
+     * List{@code <DistributionCommand>} distributionCommandList = freigthMemoryManager.getDistributionList();
+     * 
+     * <span style="color:green">// 根据 物流方式ID 找出 支持本商铺的 DistributionCommand</span>
+     * List{@code <DistributionCommand>} curShopDistributionCommandList = CollectionsUtil.select(distributionCommandList, "distributionModeId", distributionModeIdSet);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <O>
      *            the generic type
      * @param <V>
