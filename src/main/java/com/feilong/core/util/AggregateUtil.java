@@ -255,7 +255,7 @@ public final class AggregateUtil{
     }
 
     /**
-     * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素 的指定 <code>propertyName</code> 元素的值 ,累计总和..
+     * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素的指定 <code>propertyName</code> 元素的值 ,累计总和.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -381,7 +381,7 @@ public final class AggregateUtil{
     }
 
     /**
-     * 迭代<code>objectCollection</code>,提取符合 <code>includePredicate</code>的元素 的指定 <code>propertyNames</code> 元素的值 ,累计总和.
+     * 迭代<code>objectCollection</code>,提取符合 <code>includePredicate</code>的元素的指定 <code>propertyNames</code> 元素的值 ,累计总和.
      * 
      * <h3>示例:</h3>
      * 
