@@ -213,7 +213,7 @@ public final class AggregateUtil{
      * 
      * protected Integer getCookieShoppingCartLinesQty(List{@code <CookieShoppingCartLine>} cartLineList){
      *     Integer qty = 0;
-     *     //获取cookie中的购物车行集合
+     *     <span style="color:green">//获取cookie中的购物车行集合</span>
      *     if ({@code null != cartLineList && cartLineList.size() > 0}){
      *         for (Iterator iterator = cartLineList.iterator(); iterator.hasNext();){
      *             CookieShoppingCartLine cookieShoppingCartLine = (CookieShoppingCartLine) iterator.next();
