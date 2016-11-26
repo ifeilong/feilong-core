@@ -94,6 +94,13 @@ public final class RandomUtil{
     /**
      * 随机抽取字符串<code>char</code>,拼接成指定长度<code>length</code>的字符串.
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>常用于生成验证码</li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>示例:</h3>
      * <blockquote>
      * 
