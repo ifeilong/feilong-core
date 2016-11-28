@@ -27,33 +27,45 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 ConvertUtilConvertClassTest.class,
+
                 ConvertUtilToArrayCollectionClassTest.class,
                 ConvertUtilToArrayStringArrayClassTest.class,
                 ConvertUtilToArrayVarargsTest.class,
+
                 ConvertUtilToBigDecimalParameterizedTest.class,
                 ConvertUtilToBooleanParameterizedTest.class,
                 ConvertUtilToEnumerationTest.class,
+
                 ConvertUtilToIntegerDefaultValueParameterizedTest.class,
                 ConvertUtilToIntegerParameterizedTest.class,
                 ConvertUtilToIntegersParameterizedTest.class,
+
                 ConvertUtilToIteratorTest.class,
+
                 ConvertUtilToListCollectionTest.class,
                 ConvertUtilToListEnumerationTest.class,
                 ConvertUtilToListVarargsTest.class,
+
                 ConvertUtilToLocaleTest.class,
+
                 ConvertUtilToLongParameterizedTest.class,
                 ConvertUtilToLongsParameterizedTest.class,
+
                 ConvertUtilToMapArrayTest.class,
                 ConvertUtilToMapCollectionTest.class,
                 ConvertUtilToMapKeyValueTest.class,
                 ConvertUtilToMapPropertiesTest.class,
                 ConvertUtilToMapTargetTypeClassTest.class,
                 ConvertUtilToMapTransformerTest.class,
+
                 ConvertUtilToPropertiesTest.class,
+
                 ConvertUtilToStringArrayToStringConfigParameterizedTest.class,
                 ConvertUtilToStringCollectionToStringConfigParameterizedTest.class,
                 ConvertUtilToStringParameterizedTest.class,
                 ConvertUtilToStringsTest.class,
+
+                ConvertUtilToSetVarargsTest.class,
         //
 })
 public class FeiLongConvertUtilSuiteTests{

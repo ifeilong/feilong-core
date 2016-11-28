@@ -15,56 +15,64 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
-import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.junit.Test;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
+import com.feilong.test.User;
+
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toSet;
 
 /**
- * The Class ConvertUtilToListCollectionTest.
+ * The Class ConvertUtilToSetVarargsTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToListCollectionTest{
+public class ConvertUtilToSetVarargsTest{
 
     /**
-     * Test to list.
+     * Test to set.
      */
     @Test
-    public void testToList(){
-        Set<String> set = toSet("a", "a", "b", "b");
-        assertThat(toList(set), contains("a", "b"));
+    public void testToSet(){
+        User user1 = new User(1L);
+        User user2 = new User(2L);
+
+        assertThat(toSet(user1, user2), contains(user1, user2));
     }
 
     /**
-     * To list3.
+     * Test to set null array.
      */
+    //*********************************************************
     @Test
-    public void testToList3(){
-        assertThat(toList(toList("a", "a", "b", "b")), contains("a", "a", "b", "b"));
+    public void testToSetNullArray(){
+        assertEquals(emptySet(), toSet((User[]) null));
     }
 
     /**
-     * Test to list null collection.
+     * Test to set empty array.
      */
     @Test
-    public void testToListNullCollection(){
-        assertEquals(emptyList(), toList((Set<String>) null));
+    public void testToSetEmptyArray(){
+        assertEquals(emptySet(), toSet(toArray()));
     }
 
     /**
-     * Test to list empty collection.
+     * Test to set null element array.
      */
     @Test
-    public void testToListEmptyCollection(){
-        assertEquals(emptyList(), toList(new ArrayList<String>()));
+    public void testToSetNullElementArray(){
+        Set<User> set = new LinkedHashSet<>();
+        set.add(null);
+
+        assertEquals(set, toSet((User) null));
     }
 }

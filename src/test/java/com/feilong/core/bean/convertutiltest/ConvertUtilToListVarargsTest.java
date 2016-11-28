@@ -42,10 +42,8 @@ public class ConvertUtilToListVarargsTest{
      */
     @Test
     public void testToList(){
-        User user1 = new User();
-        user1.setId(1L);
-        User user2 = new User();
-        user2.setId(2L);
+        User user1 = new User(1L);
+        User user2 = new User(2L);
 
         assertThat(toList(user1, user2), contains(user1, user2));
     }

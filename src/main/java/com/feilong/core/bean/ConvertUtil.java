@@ -28,10 +28,12 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConvertUtilsBean;
@@ -2176,6 +2178,86 @@ public final class ConvertUtil{
     @SafeVarargs
     public static <T> List<T> toList(T...arrays){
         return isNullOrEmpty(arrays) ? Collections.<T> emptyList() : new ArrayList<T>(Arrays.asList(arrays));
+    }
+
+    //*************************************toSet*********************************************************
+
+    /**
+     * 数组转成 Set ({@link java.util.LinkedHashSet LinkedHashSet}).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>此方法返回的是{@link java.util.LinkedHashSet LinkedHashSet}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>特别适合:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如果你要通过以下方式来构造Set:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Set{@code <String>} set = new LinkedHashSet{@code <>}();
+     * set.add("feilong1");
+     * set.add("feilong2");
+     * set.add("feilong2");
+     * set.add("feilong3");
+     * 
+     * </pre>
+     * 
+     * 此时你可以使用:
+     * 
+     * <pre class="code">
+     * Set{@code <String>} set = toSet("feilong1", "feilong2", "feilong2", "feilong3");
+     * </pre>
+     * 
+     * <p>
+     * 代码会更简洁
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>甚至于:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 有很多时候,参数需要一个对象Set,构造的时候,你需要这样
+     * </p>
+     * 
+     * <pre class="code">
+     * Set{@code <UserAddress>} userAddresseSet = new LinkedHashSet{@code <>}();
+     * UserAddress userAddress = new UserAddress();
+     * userAddress.setAddress("上海");
+     * userAddresseSet.add(userAddress);
+     * </pre>
+     * 
+     * 你可以重构成:
+     * 
+     * <pre class="code">
+     * UserAddress userAddress = new UserAddress();
+     * userAddress.setAddress("上海");
+     * Set{@code <UserAddress>} userAddresseSet = toSet(userAddress);
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param arrays
+     *            the arrays
+     * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link Collections#emptySet()}<br>
+     *         否则返回 {@code new LinkedHashSet<T>(Arrays.asList(arrays));}
+     * @see "com.google.common.collect.Sets#newHashSet(E...)"
+     * @since 1.9.6
+     */
+    @SafeVarargs
+    public static <T> Set<T> toSet(T...arrays){
+        return isNullOrEmpty(arrays) ? Collections.<T> emptySet() : new LinkedHashSet<T>(Arrays.asList(arrays));
     }
 
     //*************************************toArray*********************************************************

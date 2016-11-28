@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,6 +43,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.bean.ConvertUtil.toSet;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
@@ -309,8 +309,7 @@ public class JsonUtilFormatTest extends AbstractJsonTest{
         // print: [{"dateAttr":"2009-09-12 07:22:49","name":"get"}]
         LOGGER.debug("" + toJSON(list));
 
-        Set set = new LinkedHashSet();
-        set.add(ps);
+        Set set = toSet(ps);
 
         // print: [{"dateAttr":"2009-09-12 07:22:16","name":"get"}]
         LOGGER.debug("" + toJSON(set));
@@ -338,5 +337,4 @@ public class JsonUtilFormatTest extends AbstractJsonTest{
     static JSON toJSON(Object obj){
         return JsonHelper.toJSON(obj, null);
     }
-
 }
