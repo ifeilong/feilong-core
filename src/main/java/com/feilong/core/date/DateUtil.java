@@ -851,7 +851,7 @@ public final class DateUtil{
     }
 
     /**
-     * 获得指定日期 <code>date</code>是当年中的第几天</b>.
+     * 获得指定日期 <code>date</code>是当年中的第几天.
      * 
      * <h3>示例:</h3>
      * <blockquote>
