@@ -20,7 +20,7 @@ import java.io.Serializable;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 设置 连接object成为字符串 的配置.
+ * 转成字符串的参数配置.
  * 
  * <h3>默认的规则:</h3>
  * 

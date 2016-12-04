@@ -18,6 +18,7 @@ package com.feilong.core.bean.convertutiltest;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
@@ -45,6 +46,9 @@ public class ConvertUtilToStringArrayToStringConfigParameterizedTest
     public static Iterable<Object[]> data(){
 
         int[] int1 = { 2, 1 };
+        //        Object[] array = toArray(int1);
+        Object[] array = ArrayUtils.toObject(int1);
+
         ToStringConfig toStringConfig = new ToStringConfig(",");
         Object[] arrays = { "222", "1111" };
         Integer[] array1 = { 2, 1 };
@@ -55,8 +59,9 @@ public class ConvertUtilToStringArrayToStringConfigParameterizedTest
         Integer[] array3 = { 2, null, 1, null };
 
         String[] ss = { null };
+
         Object[][] objects = new Object[][] { //
-                                              { toArray(int1), null, "2,1" },
+                                              { array, null, "2,1" },
 
                                               { toArray(2), toStringConfig, "2" },
                                               { toArray(",", ","), new ToStringConfig(",", true), ",,," },

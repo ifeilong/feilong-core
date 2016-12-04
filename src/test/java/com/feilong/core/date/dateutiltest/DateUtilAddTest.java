@@ -56,8 +56,6 @@ public class DateUtilAddTest{
     public void testAddYear3(){
         Date date = toDate("0001-01-01 01:21:00", COMMON_DATE_AND_TIME);
         Date addYear = addYear(date, -3);
-        //System.out.println(DateUtil.toString(date, "G yyyy-MM-dd HH:mm:ss"));//TODO:remove
-        //System.out.println(DateUtil.toString(addYear, "G yyyy-MM-dd HH:mm:ss"));//TODO:remove
         assertEquals(toDate("公元前 0003-01-01 01:21:00", "G yyyy-MM-dd HH:mm:ss"), addYear);
     }
 

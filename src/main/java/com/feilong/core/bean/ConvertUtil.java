@@ -16,7 +16,6 @@
 package com.feilong.core.bean;
 
 import static java.util.Collections.emptyMap;
-import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -57,7 +56,6 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.feilong.core.lang.ArrayUtil;
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.SortUtil;
 import com.feilong.core.util.transformer.SimpleClassTransformer;
@@ -1065,9 +1063,9 @@ public final class ConvertUtil{
      * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         都不是null,会循环,拼接toStringConfig.getConnector()
-     * @see #toString(Object[], ToStringConfig)
      * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
      * @see org.apache.commons.collections4.IteratorUtils#toString(Iterator)
+     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
      * @since 1.8.4 change param order
      */
     public static String toString(final Collection<?> collection,ToStringConfig toStringConfig){
@@ -1076,10 +1074,6 @@ public final class ConvertUtil{
 
     /**
      * 将数组 <code>arrays</code> 通过{@link ToStringConfig} 拼接成字符串.
-     * 
-     * <p style="color:green">
-     * 支持包装类型以及原始类型,比如 Integer [] arrays 或者 int []arrays
-     * </p>
      * 
      * <h3>示例:</h3>
      * 
@@ -1091,11 +1085,27 @@ public final class ConvertUtil{
      * ToStringConfig toStringConfig=new ToStringConfig(",");
      * toStringConfig.setIsJoinNullOrEmpty(false);
      * ConvertUtil.toString(toArray("a","b",null),new ToStringConfig())  =   "a,b"
-     * 
-     * int[] ints = { 2, 1 };
-     * ConvertUtil.toString(toArray(ints),new ToStringConfig())          =   "2,1"
      * </pre>
      * 
+     * </blockquote>
+     * 
+     * <h3>如果原始类型数组需要转换:</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 需要先使用下列的方式先转成包装类型数组
+     * </p>
+     * 
+     * <ol>
+     * <li>{@link ArrayUtils#toObject(boolean[])}</li>
+     * <li>{@link ArrayUtils#toObject(byte[])}</li>
+     * <li>{@link ArrayUtils#toObject(char[])}</li>
+     * <li>{@link ArrayUtils#toObject(double[])}</li>
+     * <li>{@link ArrayUtils#toObject(float[])}</li>
+     * <li>{@link ArrayUtils#toObject(int[])}</li>
+     * <li>{@link ArrayUtils#toObject(long[])}</li>
+     * <li>{@link ArrayUtils#toObject(short[])}</li>
+     * </ol>
      * </blockquote>
      * 
      * <h3>关于 default {@link ToStringConfig}:</h3>
@@ -1112,16 +1122,15 @@ public final class ConvertUtil{
      * <li>最后一个元素后面不拼接拼接符</li>
      * </ol>
      * </blockquote>
-     * 
+     *
      * @param arrays
-     *            <span style="color:red">支持包装类型以及原始类型,比如 Integer []arrays 以及 int []arrays</span>
+     *            支持包装类型,<b>不直接支持</b>原始类型
      * @param toStringConfig
-     *            the join string entity
+     *            the to string config
      * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>toStringConfig</code> 是null,使用默认 {@link ToStringConfig#DEFAULT_CONNECTOR}以及 joinNullOrEmpty 进行连接<br>
      *         否则循环,拼接 {@link ToStringConfig#getConnector()}
      * @see org.apache.commons.lang3.builder.ToStringStyle
-     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
      * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
      * @since 1.8.4 change param order
      */
@@ -1130,47 +1139,7 @@ public final class ConvertUtil{
             return EMPTY;
         }
         ToStringConfig useToStringConfig = defaultIfNull(toStringConfig, new ToStringConfig());
-        return join(toObjects(arrays), useToStringConfig.getConnector(), useToStringConfig.getIsJoinNullOrEmpty());
-    }
-
-    /**
-     * 将数组转成对象型数组.
-     * 
-     * <p>
-     * 如果 <code>arrays</code>是原始型的,那么会进行转换.
-     * </p>
-     *
-     * @param <T>
-     *            the generic type
-     * @param arrays
-     *            the arrays
-     * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link ArrayUtils#EMPTY_STRING_ARRAY}<br>
-     *         如果 arrays.length {@code >} 1,那么表示是包装类型数组,直接返回 <code>arrays</code><br>
-     *         如果 arrays.length {@code =} 1,取到第一个元素,判断是否是原始类型数组,如果不是,那么直接返回 <code>arrays</code>
-     * @since 1.4.0
-     */
-    @SafeVarargs
-    private static <T> Object[] toObjects(T...arrays){
-        if (isNullOrEmpty(arrays)){
-            return EMPTY_STRING_ARRAY;
-        }
-        if (arrays.length > 1){
-            return arrays;
-        }
-
-        Object element = arrays[0];
-        if (null == element || !ObjectUtil.isPrimitiveArray(element)){
-            return arrays;
-        }
-
-        //************isPrimitiveArray********************************
-        int length = ArrayUtils.getLength(element);
-
-        Object[] returnStringArray = new Object[length];
-        for (int i = 0; i < length; ++i){
-            returnStringArray[i] = ArrayUtil.getElement(element, i);
-        }
-        return returnStringArray;
+        return join(arrays, useToStringConfig.getConnector(), useToStringConfig.getIsJoinNullOrEmpty());
     }
 
     /**
