@@ -31,6 +31,8 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 ![one-feilong-core](http://venusdrogon.github.io/feilong-platform/mysource/one-feilong-core.png) 
 
+这里有详细的帮助文档 http://feilong-core.mydoc.io/
+
 
 ## 4.:dragon: Maven使用配置
 
@@ -72,6 +74,7 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 
 ## 5.帮助:
 
+- [帮助文档](http://feilong-core.mydoc.io/) 
 - [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
 - [Release notes](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/) 
 - [wiki](https://github.com/venusdrogon/feilong-core/wiki) 
