@@ -698,7 +698,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
             }else{
-                LOGGER.warn("map:[{}] don't contains key:[{}]", JsonUtil.format(map.keySet(), 0, 0), key);
+                LOGGER.warn("map has keys:[{}],but don't contains key:[{}]", JsonUtil.format(map.keySet(), 0, 0), key);
             }
         }
         return returnMap;
@@ -828,7 +828,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 map.remove(key);
             }else{
-                LOGGER.warn("map:[{}] don't contains key:[{}]", JsonUtil.format(map.keySet(), 0, 0), key);
+                LOGGER.warn("map has keys:[{}],but don't contains key:[{}]", JsonUtil.format(map.keySet(), 0, 0), key);
             }
         }
         return map;

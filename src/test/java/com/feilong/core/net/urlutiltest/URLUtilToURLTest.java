@@ -38,7 +38,7 @@ public class URLUtilToURLTest{
     @Test
     public void testToURL(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
-        LOGGER.debug("the param url:{}", URLUtil.toURL(spec));
+        LOGGER.debug("" + URLUtil.toURL(spec));
     }
 
     /**
