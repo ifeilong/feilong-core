@@ -72,7 +72,23 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 	</project>
 ```
 
-## 5.帮助:
+## 5. How to Install feilong-core?
+
+可能有些小伙伴想自行下载并install 进行研究, 你需要 
+
+```
+
+git clone https://github.com/venusdrogon/feilong-platform.git --depth 1
+mvn install -f feilong-platform
+
+
+git clone https://github.com/venusdrogon/feilong-core.git --depth 1
+mvn install -f feilong-core
+```
+
+详细参考 https://github.com/venusdrogon/feilong-core/wiki/install
+
+## 6.帮助:
 
 - [帮助文档](http://feilong-core.mydoc.io/) 
 - [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
@@ -80,29 +96,29 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 - [wiki](https://github.com/venusdrogon/feilong-core/wiki) 
 - [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/) 
 
-## 6.sonar 扫描
+## 7.sonar 扫描
 
 ![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core.png) 
 
-## 7.:memo: 说明
+## 8.:memo: 说明
 
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. [require-jdk-version](https://github.com/venusdrogon/feilong-core/wiki/require-jdk-version)
 1. [dependencies](https://github.com/venusdrogon/feilong-core/wiki/dependencies)
 
-## 8.Q&A
+## 9.Q&A
 
-### 8.1 Q1:这是重复造轮子吗?
+### 9.1 Q1:这是重复造轮子吗?
 
 A: https://github.com/venusdrogon/feilong-core/wiki/Repeat-the-wheel
 
-## 9.:cyclone: feilong 即时交流
+## 10.:cyclone: feilong 即时交流
 
 微信公众号 `feilongjava`							|QQ 群 `243306798`
 :---- 										|:---------
  ![](http://i.imgur.com/hM83Xv9.jpg)		|![](http://i.imgur.com/cIfglCa.png)
 
-## 10:panda_face: About
+## 11:panda_face: About
 
 如果您对本项目有任何建议和批评,可以使用下面的联系方式：
 
