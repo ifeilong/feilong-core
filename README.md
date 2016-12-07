@@ -76,11 +76,9 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 
 可能有些小伙伴想自行下载并install 进行研究, 你需要 
 
-```
-
+```bat
 git clone https://github.com/venusdrogon/feilong-platform.git --depth 1
 mvn install -f feilong-platform
-
 
 git clone https://github.com/venusdrogon/feilong-core.git --depth 1
 mvn install -f feilong-core
