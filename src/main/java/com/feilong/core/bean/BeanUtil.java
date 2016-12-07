@@ -434,7 +434,7 @@ public final class BeanUtil{
      * <code>bean</code>对象</li>
      * <li>如果properties key中有bean中不存在的属性,那么该条数据自动忽略</li>
      * <li>如果properties key中有null,那么该条数据自动忽略,see {@link BeanUtilsBean#populate(Object, Map)} line 817</li>
-     * <li><code>bean</code>可以是Map类型,不会转换之后的key和value都会是Object类型,而不是声明的类型,see {@link BeanUtilsBean#setProperty(Object, String, Object)} line
+     * <li><code>bean</code>可以是Map类型,不过转换之后的key和value都会是Object类型,而不是声明的类型,see {@link BeanUtilsBean#setProperty(Object, String, Object)} line
      * 928</li>
      * </ol>
      * </blockquote>
