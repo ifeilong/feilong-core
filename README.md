@@ -41,40 +41,39 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 如果你使用 `maven`, 您可以通过以下方式来配置 `pom.xml`:
 
 ```XML
+<project>
 
-	<project>
+	....
+	<properties>
+		<version.feilong-platform>1.9.6</version.feilong-platform>
+		....
+	</properties>
 	
+	....
+	<repositories>
+		<repository>
+			<id>feilong-repository</id>
+			<url>https://raw.github.com/venusdrogon/feilong-platform/repository</url>
+		</repository>
+	</repositories>
+	
+	....
+	<dependencies>
 		....
-		<properties>
-			<version.feilong-platform>1.9.6</version.feilong-platform>
-			....
-		</properties>
-		
+		<dependency>
+			<groupId>com.feilong.platform</groupId>
+			<artifactId>feilong-core</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
 		....
-		<repositories>
-			<repository>
-				<id>feilong-repository</id>
-				<url>https://raw.github.com/venusdrogon/feilong-platform/repository</url>
-			</repository>
-		</repositories>
-		
-		....
-		<dependencies>
-			....
-			<dependency>
-				<groupId>com.feilong.platform</groupId>
-				<artifactId>feilong-core</artifactId>
-				<version>${version.feilong-platform}</version>
-			</dependency>
-			....
-		</dependencies>
-		....
-	</project>
+	</dependencies>
+	....
+</project>
 ```
 
-## 5. How to Install feilong-core?
+## 5. How to install?
 
-可能有些小伙伴想自行下载并install 进行研究, 你需要 
+有些小伙伴想下载并自行install 进行研究, 你需要执行以下4个步骤:
 
 ```bat
 git clone https://github.com/venusdrogon/feilong-platform.git --depth 1
