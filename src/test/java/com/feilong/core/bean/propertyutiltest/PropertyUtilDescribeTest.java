@@ -25,13 +25,10 @@ import java.util.Date;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.test.User;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class PropertyUtilDescribeTest.
@@ -39,9 +36,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class PropertyUtilDescribeTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtilDescribeTest.class);
 
     /**
      * Test describe.
@@ -56,19 +50,6 @@ public class PropertyUtilDescribeTest{
 
         Map<String, Object> map = PropertyUtil.describe(user);
         assertThat(map, allOf(hasEntry("id", (Object) 5L), hasEntry("date", (Object) now)));
-    }
-
-    @Test
-    public void testDescribe1(){
-
-        User user = new User();
-        user.setId(null);
-        user.setDate(new Date());
-
-        LOGGER.debug(JsonUtil.format(PropertyUtil.describe(user)));
-
-        LOGGER.debug(JsonUtil.format(PropertyUtil.describe(user, "id")));
-
     }
 
     /**
