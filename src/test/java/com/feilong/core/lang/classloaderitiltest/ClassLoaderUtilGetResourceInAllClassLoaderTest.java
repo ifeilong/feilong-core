@@ -15,7 +15,9 @@
  */
 package com.feilong.core.lang.classloaderitiltest;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
@@ -52,9 +54,15 @@ public class ClassLoaderUtilGetResourceInAllClassLoaderTest{
      */
     @Test
     public void testGetResourceNullCallingClass(){
-        String path = "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class";
+
+        //https://github.com/venusdrogon/feilong-core/issues/557
+        //ClassLoaderUtilGetResourceInAllClassLoaderTest 单元测试 如果项目更改了目录那么执行不成功
+        //String path = "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class";
+
         String resourceName = "com/feilong/core/lang/ArrayUtil.class";
-        assertEquals(path, ClassLoaderUtil.getResourceInAllClassLoader(resourceName, null).toString());
+
+        String string = ClassLoaderUtil.getResourceInAllClassLoader(resourceName, null).toString();
+        assertThat(string, containsString(resourceName));
     }
 
     /**
@@ -62,9 +70,17 @@ public class ClassLoaderUtilGetResourceInAllClassLoaderTest{
      */
     @Test
     public void testGetResource232(){
-        String path = "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class";
+
+        //https://github.com/venusdrogon/feilong-core/issues/557
+        //ClassLoaderUtilGetResourceInAllClassLoaderTest 单元测试 如果项目更改了目录那么执行不成功
+        //String path = "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class";
+
         String resourceName = "com/feilong/core/lang/ArrayUtil.class";
-        assertEquals(path, ClassLoaderUtil.getResourceInAllClassLoader(resourceName, this.getClass()).toString());
+
+        String string = ClassLoaderUtil.getResourceInAllClassLoader(resourceName, this.getClass()).toString();
+        assertThat(string, containsString(resourceName));
+
+        //assertEquals(path, ClassLoaderUtil.getResourceInAllClassLoader(resourceName, this.getClass()).toString());
     }
 
     /**
@@ -72,8 +88,17 @@ public class ClassLoaderUtilGetResourceInAllClassLoaderTest{
      */
     @Test
     public void testGetResourceSlan(){
-        String path = "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class";
+
+        //https://github.com/venusdrogon/feilong-core/issues/557
+        //ClassLoaderUtilGetResourceInAllClassLoaderTest 单元测试 如果项目更改了目录那么执行不成功
+        //String path = "file:/E:/Workspaces/feilong/feilong-core/target/classes/com/feilong/core/lang/ArrayUtil.class";
+
         String resourceName = "com/feilong/core/lang/ArrayUtil.class";
-        assertEquals(path, ClassLoaderUtil.getResourceInAllClassLoader("/" + resourceName, this.getClass()).toString());
+
+        String string = ClassLoaderUtil.getResourceInAllClassLoader("/" + resourceName, this.getClass()).toString();
+        assertThat(string, containsString(resourceName));
+
+        //assertEquals(path, ClassLoaderUtil.getResourceInAllClassLoader(resourceName, this.getClass()).toString());
+
     }
 }
