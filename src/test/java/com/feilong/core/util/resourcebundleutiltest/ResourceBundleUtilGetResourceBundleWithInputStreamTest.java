@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ResourceBundle;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
@@ -49,9 +50,11 @@ public class ResourceBundleUtilGetResourceBundleWithInputStreamTest{
      * @throws FileNotFoundException
      *             the file not found exception
      */
-    @Test
+    @Test()
+    @Ignore
     public void testGetResourceBundle() throws FileNotFoundException{
-        ResourceBundle resourceBundle = getResourceBundle(new FileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"));
+        FileInputStream inputStream = new FileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties");
+        ResourceBundle resourceBundle = getResourceBundle(inputStream);
         assertThat(toMap(resourceBundle), hasKey("incoming.pop.hostname"));
     }
 
