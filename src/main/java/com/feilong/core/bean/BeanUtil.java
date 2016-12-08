@@ -780,7 +780,7 @@ public final class BeanUtil{
      * </b>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} readPropertiesToMap = ResourceBundleUtil.readPropertiesToMap("memcached");
+     * Map{@code <String, String>} readPropertiesToMap = ResourceBundleUtil.toMap(ResourceBundleUtil.getResourceBundle("memcached"));
      * 
      * DangaMemCachedConfig dangaMemCachedConfig = new DangaMemCachedConfig();
      * BeanUtil.populateAliasBean(dangaMemCachedConfig, readPropertiesToMap);
@@ -820,7 +820,7 @@ public final class BeanUtil{
      * </p>
      *
      * <pre class="code">
-     * Map{@code <String, String>} readPropertiesToMap = ResourceBundleUtil.readPropertiesToMap("memcached");
+     * Map{@code <String, String>} readPropertiesToMap = ResourceBundleUtil.toMap(ResourceBundleUtil.getResourceBundle("memcached"));
      * 
      * DangaMemCachedConfig dangaMemCachedConfig = new DangaMemCachedConfig();
      * 
