@@ -642,7 +642,7 @@ public final class BeanUtil{
      * <span style="color:blue">ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);</span>
      * <span style="color:blue">char[] allowedChars = { ':' };</span>
      * <span style="color:blue">arrayConverter.setAllowedChars(allowedChars);</span>
-     * <span style="color:blue">BeanUtil.register(arrayConverter, String[].class);</span>
+     * <span style="color:blue">ConvertUtils.register(arrayConverter, String[].class);</span>
      * 
      * BeanUtil.populateAliasBean(dangaMemCachedConfig, readPropertiesToMap);
      * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));

@@ -475,7 +475,7 @@ public final class ResourceBundleUtil{
      * char[] allowedChars = { ':' };
      * arrayConverter.setAllowedChars(allowedChars);
      * 
-     * BeanUtil.register(arrayConverter, String[].class);
+     * ConvertUtils.register(arrayConverter, String[].class);
      * 
      * DangaMemCachedConfig dangaMemCachedConfig = ResourceBundleUtil.toAliasBean("messages.memcached", DangaMemCachedConfig.class);
      * LOGGER.debug(JsonUtil.format(dangaMemCachedConfig));
