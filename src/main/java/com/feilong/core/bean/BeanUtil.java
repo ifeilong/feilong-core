@@ -463,6 +463,191 @@ public final class BeanUtil{
      * 
      * </blockquote>
      * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 将<b>mail.properties</b>配置文件数据直接转成 <code>MailSenderConfig</code>对象
+     * </p>
+     * 
+     * <p>
+     * 有以下的<b>mail.properties</b>配置文件信息:
+     * </p>
+     * 
+     * <pre class="code">
+     * mailServerHost=smtp.exmail.qq.com <span style="color:green">// this is 胡编乱造的 account</span>
+     * userName=feilong@feilong.cn  <span style="color:green">// this is 胡编乱造的 account</span>
+     * password=feilong  <span style="color:green">// this is 胡编乱造的 account</span>
+     * 
+     * personal=feilong store
+     * 
+     * tos=123456@163.com,1234567@163.cn
+     * ccs=123456test@163.com,123456test1@163.cn
+     * bccs=123456test2@163.com,123456test3@163.cn
+     * 
+     * subject=hello world
+     * 
+     * mailServerPort=25
+     * 
+     * isDebug=true
+     * 
+     * isNeedReturnReceipt=true
+     * </pre>
+     * 
+     * <p>
+     * 有以下<b>bean</b>信息:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * public class <b>MailSenderConfig</b>{
+     * 
+     *     <span style="color:green">//** 发送邮件的服务器的IP</span>
+     *     private String mailServerHost;
+     * 
+     *     <span style="color:green">//** 邮件服务的端口 默认25.</span>
+     *     private String mailServerPort = "25";
+     * 
+     *     <span style="color:green">//** 登录邮件发送服务器的用户名</span>
+     *     private String userName;
+     * 
+     *     <span style="color:green">//** 登录邮件发送服务器的密码</span>
+     *     private String password;
+     * 
+     *     <span style="color:green">//** 是否debug 输出. </span> 
+     *     private boolean isDebug = false;
+     * 
+     *     <span style="color:green">//** 是否需要回执, 默认不需要.</span>
+     *     private boolean isNeedReturnReceipt = false;
+     * 
+     *     <span style="color:green">//** 邮件发送者的地址.</span>
+     *     private String fromAddress;
+     * 
+     *     <span style="color:green">//** 个人名义.</span>
+     *     private String personal = "";
+     * 
+     *     <span style="color:green">//** 邮件多人接收地址.</span>
+     *     private String[] tos;
+     * 
+     *     <span style="color:green">//** 邮件多人接收地址(抄送).</span>
+     *     private String[] ccs;
+     * 
+     *     <span style="color:green">//** 邮件多人接收地址.</span>
+     *     private String[] bccs;
+     * 
+     *      <span style="color:green">//setter getter 略</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>
+     * 此时你可以如此调用代码:
+     * </b>
+     * 
+     * <pre class="code">
+     * MailSenderConfig mailSenderConfig = new MailSenderConfig();
+     * 
+     * ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream("mail.properties"));
+     * BeanUtil.populate(mailSenderConfig, ResourceBundleUtil.toMap(resourceBundle));
+     * 
+     * LOGGER.debug(JsonUtil.format(mailSenderConfig));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "subject": "hello world",
+        "mailServerHost": "smtp.exmail.qq.com",
+        "bccs":         [
+            "123456test2",
+            "163.com",
+            "123456test3",
+            "163.cn"
+        ],
+        "ccs":         [
+            "123456test",
+            "163.com",
+            "123456test1",
+            "163.cn"
+        ],
+        "password": "******",
+        "mailServerPort": "25",
+        "content": "",
+        "tos":         [
+            "123456",
+            "163.com",
+            "1234567",
+            "163.cn"
+        ],
+        "personal": "feilong store",
+        "isNeedReturnReceipt": true,
+        "fromAddress": "",
+        "userName": "feilong@feilong.cn",
+        "isDebug": true
+    }
+     * </pre>
+     * 
+     * <p>
+     * 此时你会发现,上面的 tos 期望值是 ["123456@163.com","1234567@163.cn"],但是和你的期望值不符合,ccs和bccs 也是相同的情况<br>
+     * 因为,{@link ArrayConverter} 默认允许的字符 allowedChars 只有 <code>'.', '-'</code>,其他都会被做成分隔符
+     * </p>
+     * 
+     * <p>
+     * 你可以如此这般:
+     * </p>
+     *
+     * <pre class="code">
+     * MailSenderConfig mailSenderConfig = new MailSenderConfig();
+     * 
+     * ResourceBundle resourceBundle = ResourceBundleUtil.getResourceBundle(FileUtil.getFileInputStream("mail.properties"));
+     * 
+     * <span style="color:blue">ArrayConverter arrayConverter = new ArrayConverter(String[].class, new StringConverter(), 2);</span>
+     * <span style="color:blue">char[] allowedChars = { '@' };</span>
+     * <span style="color:blue">arrayConverter.setAllowedChars(allowedChars);</span>
+     * <span style="color:blue">ConvertUtils.register(arrayConverter, String[].class);</span>
+     * 
+     * BeanUtil.populate(mailSenderConfig, ResourceBundleUtil.toMap(resourceBundle));
+     * 
+     * LOGGER.debug(JsonUtil.format(mailSenderConfig));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "subject": "hello world",
+        "mailServerHost": "smtp.exmail.qq.com",
+        "bccs":         [
+            "123456test2@163.com",
+            "123456test3@163.cn"
+        ],
+        "ccs":         [
+            "123456test@163.com",
+            "123456test1@163.cn"
+        ],
+        "password": "******",
+        "mailServerPort": "25",
+        "content": "",
+        "tos":         [
+            "123456@163.com",
+            "1234567@163.cn"
+        ],
+        "personal": "feilong store",
+        "isNeedReturnReceipt": true,
+        "fromAddress": "",
+        "userName": "feilong@feilong.cn",
+        "isDebug": true
+    }
+     * </pre>
+     * 
+     * <p>
+     * 如果你的配置文件的key和bean的属性不一致(比如大小写,有分隔符等情况),你可以使用 {@link #populateAliasBean(Object, Map)}
+     * </p>
+     * 
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param bean
