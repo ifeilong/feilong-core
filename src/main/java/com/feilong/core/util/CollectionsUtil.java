@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -2157,7 +2156,7 @@ public final class CollectionsUtil{
                 map.put(key, o);
             }else{
                 if (LOGGER.isTraceEnabled()){
-                    LOGGER.trace("map:{} already has the key:[{}],ignore!", JsonUtil.format(map.keySet()), key);
+                    LOGGER.trace("map:[{}] already has the key:[{}],ignore!", map.keySet(), key);
                 }
             }
         }

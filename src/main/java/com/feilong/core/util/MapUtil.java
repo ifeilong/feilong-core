@@ -31,7 +31,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
@@ -698,7 +697,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
             }else{
-                LOGGER.warn("map has keys:[{}],but don't contains key:[{}]", JsonUtil.format(map.keySet(), 0, 0), key);
+                LOGGER.warn("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
             }
         }
         return returnMap;
@@ -828,7 +827,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 map.remove(key);
             }else{
-                LOGGER.warn("map has keys:[{}],but don't contains key:[{}]", JsonUtil.format(map.keySet(), 0, 0), key);
+                LOGGER.warn("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
             }
         }
         return map;
@@ -1039,7 +1038,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, PropertyUtil.<V> getProperty(map.get(key), extractPropertyName));
             }else{
-                LOGGER.warn("map:[{}] don't contains key:[{}]", JsonUtil.format(map.keySet(), 0, 0), key);
+                LOGGER.warn("map:[{}] don't contains key:[{}]", map.keySet(), key);
             }
         }
         return returnMap;

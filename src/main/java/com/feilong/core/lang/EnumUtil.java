@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -232,7 +231,7 @@ public final class EnumUtil{
         E[] enumConstants = enumClass.getEnumConstants();
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("enumClass:[{}],enumConstants:{}", enumClass.getCanonicalName(), JsonUtil.format(enumConstants, 0, 0));
+            LOGGER.trace("enumClass:[{}],enumConstants:[{}]", enumClass.getCanonicalName(), enumConstants);
         }
 
         //*************************************************************************
