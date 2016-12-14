@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.classloaderitiltest;
+package com.feilong.core.lang.classloaderutiltest;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertEquals;
