@@ -59,8 +59,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilRemoveDuplicateTest.class,
                 CollectionsUtilRemoveElementTest.class,
                 CollectionsUtilRemoveAllCollectionTest.class,
-                CollectionsUtilRemoveAllPropertyNameArrayTest.class,
-                CollectionsUtilRemoveAllPropertyNameCollectionTest.class,
         //
 })
 public class FeiLongCollectionsUtilSuiteTests{
