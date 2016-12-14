@@ -26,7 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.RegexPattern;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
@@ -131,7 +130,7 @@ public final class RegexUtil{
         }
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("regexPattern:[{}],input:[{}],groupMap:{}", regexPattern, input, JsonUtil.format(map));
+            LOGGER.trace("regexPattern:[{}],input:[{}],groupMap:{}", regexPattern, input, map);
         }
         return map;
     }
