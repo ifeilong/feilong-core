@@ -58,11 +58,11 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -118,11 +118,11 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -184,6 +184,7 @@ public final class BeanPredicateUtil{
     public static <T> Predicate<T> equalPredicate(Map<String, ?> propertyNameAndPropertyValueMap){
         Validate.notEmpty(propertyNameAndPropertyValueMap, "propertyNameAndPropertyValueMap can't be null!");
 
+        @SuppressWarnings("unchecked")
         BeanPredicate<T>[] beanPredicates = ArrayUtil.newArray(BeanPredicate.class, propertyNameAndPropertyValueMap.size());
 
         int index = 0;
@@ -209,11 +210,11 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -251,11 +252,11 @@ public final class BeanPredicateUtil{
      * <blockquote>
      * <ol>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -294,11 +295,11 @@ public final class BeanPredicateUtil{
      * <ol>
      * <li>比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>.</li>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>
@@ -414,11 +415,11 @@ public final class BeanPredicateUtil{
      * <ol>
      * <li>比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>.</li>
      * <li>
-     * 常用于解析集合,如 {@link CollectionsUtil#select(Collection, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
-     * {@link CollectionsUtil#selectRejected(Collection, Predicate) selectRejected},
-     * {@link CollectionsUtil#group(Collection, String, Predicate) group},
-     * {@link AggregateUtil#groupCount(Collection, String, Predicate) groupCount},
-     * {@link AggregateUtil#sum(Collection, String, Predicate) sum} 等方法.
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
      * </li>
      * </ol>
      * </blockquote>

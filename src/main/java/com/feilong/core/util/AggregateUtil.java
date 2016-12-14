@@ -20,11 +20,11 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.Validate;
 
@@ -82,8 +82,8 @@ public final class AggregateUtil{
      *
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
@@ -91,14 +91,14 @@ public final class AggregateUtil{
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
      *            如果为零或正数,则标度是小数点后的位数。<br>
      *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 null<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 null<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see #sum(Collection, String...)
+     * @see #sum(Iterable, String...)
      */
-    public static <O> BigDecimal avg(Collection<O> objectCollection,String propertyName,int scale){
+    public static <O> BigDecimal avg(Iterable<O> beanIterable,String propertyName,int scale){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return isNullOrEmpty(objectCollection) ? null : avg(objectCollection, toArray(propertyName), scale).get(propertyName);
+        return isNullOrEmpty(beanIterable) ? null : avg(beanIterable, toArray(propertyName), scale).get(propertyName);
     }
 
     /**
@@ -144,8 +144,8 @@ public final class AggregateUtil{
      * 
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
@@ -153,19 +153,19 @@ public final class AggregateUtil{
      *            标度,小数的位数,四舍五入,用于 {@link java.math.BigDecimal#setScale(int, RoundingMode)}<br>
      *            如果为零或正数,则标度是小数点后的位数。<br>
      *            如果为负数,则将该数的非标度值乘以 10 的负 scale 次幂 (通常情况用不到负数的情况)
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素是null 抛出 {@link IllegalArgumentException}<br>
-     * @see #sum(Collection, String...)
+     * @see #sum(Iterable, String...)
      */
-    public static <O> Map<String, BigDecimal> avg(Collection<O> objectCollection,String[] propertyNames,int scale){
-        if (isNullOrEmpty(objectCollection)){
+    public static <O> Map<String, BigDecimal> avg(Iterable<O> beanIterable,String[] propertyNames,int scale){
+        if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
 
-        Map<String, BigDecimal> sumMap = sum(objectCollection, propertyNames);//先求和
+        Map<String, BigDecimal> sumMap = sum(beanIterable, propertyNames);//先求和
 
-        int size = objectCollection.size();
+        int size = IterableUtils.size(beanIterable);
         Map<String, BigDecimal> map = newLinkedHashMap(size);
         for (Map.Entry<String, BigDecimal> entry : sumMap.entrySet()){
             map.put(entry.getKey(), NumberUtil.getDivideValue(toBigDecimal(entry.getValue()), size, scale));
@@ -176,7 +176,7 @@ public final class AggregateUtil{
     //***********************************sum*************************************************************
 
     /**
-     * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyName</code> 值的总和.
+     * 总和,计算集合对象<code>beanIterable</code> 内指定的属性名 <code>propertyName</code> 值的总和.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -239,23 +239,23 @@ public final class AggregateUtil{
      * 
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
+     * @return 如果 <code>beanIterable</code> 是null或者 empty,返回 null<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #sum(Collection, String...)
+     * @see #sum(Iterable, String...)
      */
-    public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName){
+    public static <O> BigDecimal sum(Iterable<O> beanIterable,String propertyName){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return sum(objectCollection, propertyName, null);
+        return sum(beanIterable, propertyName, null);
     }
 
     /**
-     * 迭代<code>objectCollection</code>,提取 符合 <code>includePredicate</code>的元素的指定 <code>propertyName</code> 元素的值 ,累计总和.
+     * 迭代<code>beanIterable</code>,提取 符合 <code>includePredicate</code>的元素的指定 <code>propertyName</code> 元素的值 ,累计总和.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -306,27 +306,27 @@ public final class AggregateUtil{
      *
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param includePredicate
      *            the include predicate
-     * @return 如果 <code>objectCollection</code> 是null或者 empty,返回 null<br>
+     * @return 如果 <code>beanIterable</code> 是null或者 empty,返回 null<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
-     *         如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>null</code>
-     * @see #sum(Collection, String[], Predicate)
+     *         如果<code>beanIterable</code>没有符合 <code>includePredicate</code>的元素,返回 <code>null</code>
+     * @see #sum(Iterable, String[], Predicate)
      */
-    public static <O> BigDecimal sum(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
+    public static <O> BigDecimal sum(Iterable<O> beanIterable,String propertyName,Predicate<O> includePredicate){
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-        return sum(objectCollection, toArray(propertyName), includePredicate).get(propertyName);
+        return sum(beanIterable, toArray(propertyName), includePredicate).get(propertyName);
     }
 
     /**
-     * 总和,计算集合对象<code>objectCollection</code> 内指定的属性名 <code>propertyNames</code> 值的总和.
+     * 总和,计算集合对象<code>beanIterable</code> 内指定的属性名 <code>propertyNames</code> 值的总和.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -366,22 +366,22 @@ public final class AggregateUtil{
      *
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果<code>propertyNames</code> 是null 抛出 {@link NullPointerException} 异常<br>
      *         如果<code>propertyNames</code> 有元素是null 抛出 {@link IllegalArgumentException}<br>
-     * @see #sum(Collection, String[], Predicate)
+     * @see #sum(Iterable, String[], Predicate)
      */
-    public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String...propertyNames){
-        return sum(objectCollection, propertyNames, null);
+    public static <O> Map<String, BigDecimal> sum(Iterable<O> beanIterable,String...propertyNames){
+        return sum(beanIterable, propertyNames, null);
     }
 
     /**
-     * 迭代<code>objectCollection</code>,提取符合 <code>includePredicate</code>的元素的指定 <code>propertyNames</code> 元素的值 ,累计总和.
+     * 迭代<code>beanIterable</code>,提取符合 <code>includePredicate</code>的元素的指定 <code>propertyNames</code> 元素的值 ,累计总和.
      * 
      * <h3>示例:</h3>
      * 
@@ -425,30 +425,30 @@ public final class AggregateUtil{
      *
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyNames
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param includePredicate
      *            the include predicate
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
      *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
-     *         如果<code>objectCollection</code>没有符合 <code>includePredicate</code>的元素,返回 <code>new LinkedHashMap</code>
+     *         如果<code>beanIterable</code>没有符合 <code>includePredicate</code>的元素,返回 <code>new LinkedHashMap</code>
      * @throws NullPointerException
      *             如果<code>propertyNames</code> 是null
      * @throws IllegalArgumentException
      *             果<code>propertyNames</code> 有元素 是null <br>
      */
-    public static <O> Map<String, BigDecimal> sum(Collection<O> objectCollection,String[] propertyNames,Predicate<O> includePredicate){
-        if (isNullOrEmpty(objectCollection)){
+    public static <O> Map<String, BigDecimal> sum(Iterable<O> beanIterable,String[] propertyNames,Predicate<O> includePredicate){
+        if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
         Validate.noNullElements(propertyNames, "propertyNames can't be null/empty!");
 
-        Map<String, BigDecimal> sumMap = newLinkedHashMap(objectCollection.size());
-        for (O obj : objectCollection){
+        Map<String, BigDecimal> sumMap = newLinkedHashMap(IterableUtils.size(beanIterable));
+        for (O obj : beanIterable){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
             }
@@ -467,13 +467,13 @@ public final class AggregateUtil{
     //***********************************************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,统计 <code>propertyName</code> 的值出现的次数.
+     * 循环 <code>beanIterable</code>,统计 <code>propertyName</code> 的值出现的次数.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值的顺序</li>
+     * 顺序是 <code>beanIterable</code> <code>propertyName</code>的值的顺序</li>
      * </ol>
      * </blockquote>
      * 
@@ -512,29 +512,29 @@ public final class AggregateUtil{
      *            the generic type
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #groupCount(Collection , String, Predicate)
+     * @see #groupCount(Iterable , String, Predicate)
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      */
-    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName){
-        return groupCount(objectCollection, propertyName, null);
+    public static <T, O> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName){
+        return groupCount(beanIterable, propertyName, null);
     }
 
     /**
-     * 循环 <code>objectCollection</code>,只选择符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
+     * 循环 <code>beanIterable</code>,只选择符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>返回的{@link LinkedHashMap},key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
-     * 顺序是 objectCollection <code>propertyName</code>的值的顺序</li>
+     * 顺序是 <code>beanIterable</code> <code>propertyName</code>的值的顺序</li>
      * </ol>
      * </blockquote>
      * 
@@ -579,27 +579,27 @@ public final class AggregateUtil{
      *            the generic type
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param includePredicate
      *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的元素
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      */
-    public static <T, O> Map<T, Integer> groupCount(Collection<O> objectCollection,String propertyName,Predicate<O> includePredicate){
-        if (isNullOrEmpty(objectCollection)){
+    public static <T, O> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName,Predicate<O> includePredicate){
+        if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         Map<T, Integer> map = new LinkedHashMap<>();
-        for (O obj : objectCollection){
+        for (O obj : beanIterable){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
             }

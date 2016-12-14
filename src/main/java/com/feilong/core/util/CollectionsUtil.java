@@ -519,7 +519,7 @@ public final class CollectionsUtil{
      * <ol>
      * <li>返回剩余的集合 <span style="color:red">(原集合对象<code>objectCollection</code>不变)</span>,如果你不想修改 <code>objectCollection</code>的话,不能直接调用
      * <code>collection.removeAll(remove);</code>,这个方法非常有用.</li>
-     * <li>该方法等同于 {@link #selectRejected(Collection, String, Collection)}</li>
+     * <li>该方法等同于 {@link #selectRejected(Iterable, String, Collection)}</li>
      * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
      * </ol>
      * </blockquote>
@@ -574,7 +574,7 @@ public final class CollectionsUtil{
      *             如果 <code>objectCollection</code> 是null 或者 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @see #select(Collection, String, Collection)
+     * @see #select(Iterable, String, Collection)
      * @see #removeAll(Collection, Collection)
      * @see org.apache.commons.collections4.CollectionUtils#filter(Iterable, Predicate)
      * @see org.apache.commons.collections4.CollectionUtils#filterInverse(Iterable, Predicate)
@@ -595,7 +595,7 @@ public final class CollectionsUtil{
      * <ol>
      * <li>返回剩余的集合 <span style="color:red">(原集合对象<code>objectCollection</code>不变)</span>,如果你不想修改 <code>objectCollection</code>的话,不能直接调用
      * <code>collection.removeAll(remove);</code>,这个方法非常有用.</li>
-     * <li>该方法等同于 {@link #selectRejected(Collection, String, Object...)}</li>
+     * <li>该方法等同于 {@link #selectRejected(Iterable, String, Object...)}</li>
      * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
      * </ol>
      * </blockquote>
@@ -660,7 +660,7 @@ public final class CollectionsUtil{
      *             如果 <code>objectCollection</code> 是null 或者 <code>propertyName</code> 是null
      * @throws IllegalArgumentException
      *             如果 <code>propertyName</code> 是blank
-     * @see #select(Collection, String, Object...)
+     * @see #select(Iterable, String, Object...)
      * @see #removeAll(Collection, Collection)
      * @see org.apache.commons.collections4.CollectionUtils#filterInverse(Iterable, Predicate)
      * @see org.apache.commons.collections4.CollectionUtils#filter(Iterable, Predicate)
@@ -789,7 +789,7 @@ public final class CollectionsUtil{
     //*************************获得 属性值 *******************************************************************
 
     /**
-     * 循环集合 <code>objectCollection</code>,取到对象指定的属性 <code>propertyName</code>的值,拼成List({@link ArrayList}).
+     * 循环集合 <code>beanIterable</code>,取到对象指定的属性 <code>propertyName</code>的值,拼成List({@link ArrayList}).
      * 
      * <h3>示例:</h3>
      * 
@@ -889,28 +889,28 @@ public final class CollectionsUtil{
      *            返回集合类型 generic type
      * @param <O>
      *            可迭代对象类型 generic type
-     * @param objectCollection
-     *            任何可以迭代的对象
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果参数 <code>objectCollection</code>是null或者empty,会返回empty ArrayList<br>
+     * @return 如果参数 <code>beanIterable</code>是null或者empty,会返回empty ArrayList<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see #getPropertyValueCollection(Collection, String, Collection)
+     * @see #getPropertyValueCollection(Iterable, String, Collection)
      * @since jdk1.5
      */
-    public static <T, O> List<T> getPropertyValueList(Collection<O> objectCollection,String propertyName){
-        return getPropertyValueCollection(objectCollection, propertyName, new ArrayList<T>());
+    public static <T, O> List<T> getPropertyValueList(Iterable<O> beanIterable,String propertyName){
+        return getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>());
     }
 
     /**
-     * 解析迭代集合 <code>objectCollection</code> ,取到对象指定的属性 <code>propertyName</code>的值,拼成{@link Set}({@link LinkedHashSet}).
+     * 解析迭代集合 <code>beanIterable</code> ,取到对象指定的属性 <code>propertyName</code>的值,拼成{@link Set}({@link LinkedHashSet}).
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回的是 {@link LinkedHashSet},顺序是参数 <code>objectCollection</code> 元素的顺序</li>
+     * <li>返回的是 {@link LinkedHashSet},顺序是参数 <code>beanIterable</code> 元素的顺序</li>
      * </ol>
      * </blockquote>
      * 
@@ -938,23 +938,24 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果参数 <code>objectCollection</code>是null或者empty,会返回empty {@link LinkedHashSet}<br>
+     * @return 如果参数 <code>beanIterable</code>是null或者empty,会返回empty {@link LinkedHashSet}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see #getPropertyValueCollection(Collection, String, Collection)
+     * @see #getPropertyValueCollection(Iterable, String, Collection)
      * @since 1.0.8
      */
-    public static <T, O> Set<T> getPropertyValueSet(Collection<O> objectCollection,String propertyName){
-        return getPropertyValueCollection(objectCollection, propertyName, new LinkedHashSet<T>());
+    public static <T, O> Set<T> getPropertyValueSet(Iterable<O> beanIterable,String propertyName){
+        return getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>());
     }
 
     /**
-     * 循环objectCollection,调用 {@link PropertyUtil#getProperty(Object, String)} 获得 propertyName的值,塞到 <code>returnCollection</code> 中返回.
+     * 循环<code>beanIterable</code>,调用 {@link PropertyUtil#getProperty(Object, String)} 获得 propertyName的值,塞到 <code>returnCollection</code>
+     * 中返回.
      *
      * @param <T>
      *            the generic type
@@ -962,15 +963,15 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <K>
      *            the key type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param returnCollection
      *            the return collection
      * @return 如果 <code>returnCollection</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>objectCollection</code> 是null或者empty,返回 <code>returnCollection</code><br>
+     *         如果 <code>beanIterable</code> 是null或者empty,返回 <code>returnCollection</code><br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see PropertyUtil#getProperty(Object, String)
@@ -978,16 +979,16 @@ public final class CollectionsUtil{
      * @since 1.0.8
      */
     private static <T, O, K extends Collection<T>> K getPropertyValueCollection(
-                    Collection<O> objectCollection,
+                    Iterable<O> beanIterable,
                     String propertyName,
                     K returnCollection){
         Validate.notNull(returnCollection, "returnCollection can't be null!");
-        if (isNullOrEmpty(objectCollection)){//避免null point
+        if (isNullOrEmpty(beanIterable)){//避免null point
             return returnCollection;
         }
 
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-        for (O bean : objectCollection){
+        for (O bean : beanIterable){
             returnCollection.add(PropertyUtil.<T> getProperty(bean, propertyName));
         }
         return returnCollection;
@@ -995,12 +996,12 @@ public final class CollectionsUtil{
 
     //******************************getPropertyValueMap*********************************************************************
     /**
-     * 循环 <code>objectCollection</code> ,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为value,组成map返回.
+     * 循环 <code>beanIterable</code> ,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为value,组成map返回.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回的是 {@link LinkedHashMap},顺序是参数 objectCollection 元素的顺序</li>
+     * <li>返回的是 {@link LinkedHashMap},顺序是参数 <code>beanIterable</code> 元素的顺序</li>
      * <li>如果有元素 <code>keyPropertyName</code>属性值相同,那么后面的值会覆盖前面的值</li>
      * </ol>
      * </blockquote>
@@ -1058,30 +1059,30 @@ public final class CollectionsUtil{
      *            the value type
      * @param <O>
      *            可迭代对象类型 generic type
-     * @param objectCollection
-     *            任何可以迭代的对象
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param keyPropertyName
      *            泛型O对象指定的属性名称,取到的值将作为返回的map的key,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param valuePropertyName
      *            泛型O对象指定的属性名称,取到的值将作为返回的map的value,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>keyPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>keyPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>valuePropertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>valuePropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see com.feilong.core.bean.PropertyUtil#getProperty(Object, String)
      */
-    public static <K, V, O> Map<K, V> getPropertyValueMap(Collection<O> objectCollection,String keyPropertyName,String valuePropertyName){
-        if (isNullOrEmpty(objectCollection)){
+    public static <K, V, O> Map<K, V> getPropertyValueMap(Iterable<O> beanIterable,String keyPropertyName,String valuePropertyName){
+        if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
         Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
         Validate.notBlank(valuePropertyName, "valuePropertyName can't be null/empty!");
 
-        Map<K, V> map = newLinkedHashMap(objectCollection.size());
-        for (O bean : objectCollection){
+        Map<K, V> map = newLinkedHashMap(IterableUtils.size(beanIterable));
+        for (O bean : beanIterable){
             map.put(PropertyUtil.<K> getProperty(bean, keyPropertyName), PropertyUtil.<V> getProperty(bean, valuePropertyName));
         }
         return map;
@@ -1130,8 +1131,8 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <V>
      *            the value type
-     * @param iterable
-     *            the iterable
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
@@ -1144,8 +1145,8 @@ public final class CollectionsUtil{
      * @see #find(Iterable, Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
      */
-    public static <O, V> O find(Iterable<O> iterable,String propertyName,V propertyValue){
-        return null == iterable ? null : find(iterable, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
+    public static <O, V> O find(Iterable<O> beanIterable,String propertyName,V propertyValue){
+        return null == beanIterable ? null : find(beanIterable, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
     }
 
     /**
@@ -1213,14 +1214,14 @@ public final class CollectionsUtil{
     //**************************select*****************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code>的 <code>propertyName</code>的值,判断是否在<code>propertyValues</code>
+     * 循环 <code>beanIterable</code>,获得元素 <code>bean</code>的 <code>propertyName</code>的值,判断是否在<code>propertyValues</code>
      * 数组中;如果在,将该对象存入list中返回.
      * 
      * <h3>注意:</h3>
      * 
      * <blockquote>
      * <p>
-     * 查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValues</code> 无关,如果你需要结果里面的元素按照指定的<code>propertyValues</code>
+     * 查询的结果的顺序按照原来 <code>beanIterable</code>里面的顺序,和参数 <code>propertyValues</code> 无关,如果你需要结果里面的元素按照指定的<code>propertyValues</code>
      * 顺序排序的话,可以将结果再调用{@link SortUtil#sortListByFixedOrderPropertyValueArray(List, String, Object...)}
      * </p>
      * </blockquote>
@@ -1258,36 +1259,35 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <V>
      *            the value type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the values
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>propertyValues</code> 是null,返回 {@code new ArrayList<O>}<br>
      * @see BeanPredicateUtil#containsPredicate(String, Object...)
      */
     @SafeVarargs
-    public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,V...propertyValues){
-        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList() : select(
-                        objectCollection,
-                        BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValues));
+    public static <O, V> List<O> select(Iterable<O> beanIterable,String propertyName,V...propertyValues){
+        return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
+                        : select(beanIterable, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValues));
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否在<code>propertyValueList</code>
+     * 循环 <code>beanIterable</code>,获得元素 <code>bean</code> 的<code>propertyName</code>的值,判断是否在<code>propertyValueList</code>
      * 集合中;如果在,将该对象存入list中返回.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>查询的结果的顺序按照原来 <code>objectCollection</code>里面的顺序,和参数 <code>propertyValueList</code> 无关,如果你需要结果里面的元素按照指定的
+     * <li>查询的结果的顺序按照原来 <code>beanIterable</code>里面的顺序,和参数 <code>propertyValueList</code> 无关,如果你需要结果里面的元素按照指定的
      * <code>propertyValueList</code>顺序排序的话,可以将结果再调用{@link SortUtil#sortListByFixedOrderPropertyValueList(List, String, List)}</li>
-     * <li>和该方法正好相反的是 {@link #selectRejected(Collection, String, Collection)}</li>
+     * <li>和该方法正好相反的是 {@link #selectRejected(Iterable, String, Collection)}</li>
      * </ol>
      * </blockquote>
      * 
@@ -1374,25 +1374,24 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <V>
      *            the value type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
      *            the values
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         否则调用 {@link #select(Collection, Predicate)}
-     * @see #select(Collection, Predicate)
+     *         否则调用 {@link #select(Iterable, Predicate)}
+     * @see #select(Iterable, Predicate)
      * @see BeanPredicateUtil#containsPredicate(String, Collection)
      * @since 1.5.0
      */
-    public static <O, V> List<O> select(Collection<O> objectCollection,String propertyName,Collection<V> propertyValueList){
-        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList() : select(
-                        objectCollection,
-                        BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
+    public static <O, V> List<O> select(Iterable<O> beanIterable,String propertyName,Collection<V> propertyValueList){
+        return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
+                        : select(beanIterable, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
     }
 
     /**
@@ -1401,7 +1400,7 @@ public final class CollectionsUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>和该方法正好相反的是 {@link #selectRejected(Collection, Predicate)}</li>
+     * <li>和该方法正好相反的是 {@link #selectRejected(Iterable, Predicate)}</li>
      * </ol>
      * </blockquote>
      * 
@@ -1454,8 +1453,8 @@ public final class CollectionsUtil{
      *
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param predicate
      *            接口封装了对输入对象的判断,返回true或者false,可用的实现类有
      *            <ul>
@@ -1465,19 +1464,18 @@ public final class CollectionsUtil{
      *            <li>{@link org.apache.commons.collections4.functors.TruePredicate TruePredicate}</li>
      *            <li>....</li>
      *            </ul>
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         否则返回 {@link CollectionUtils#select(Iterable, Predicate)}
      * @see org.apache.commons.collections4.CollectionUtils#select(Iterable, Predicate)
      */
-    public static <O> List<O> select(Collection<O> objectCollection,Predicate<O> predicate){
-        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : (List<O>) CollectionUtils.select(objectCollection, predicate);
+    public static <O> List<O> select(Iterable<O> beanIterable,Predicate<O> predicate){
+        return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList() : (List<O>) CollectionUtils.select(beanIterable, predicate);
     }
 
     //***************************selectRejected*********************************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code> 属性值<span style="color:red">都不在</span>
+     * 循环 <code>beanIterable</code>,获得元素 <code>bean</code> 的 <code>propertyName</code> 属性值<span style="color:red">都不在</span>
      * <code>propertyValues</code> 时候的list.
      *
      * <h3>示例:</h3>
@@ -1515,27 +1513,27 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <V>
      *            the value type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValues
      *            the values
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see BeanPredicateUtil#containsPredicate(String, Object...)
-     * @see #selectRejected(Collection, Predicate)
+     * @see #selectRejected(Iterable, Predicate)
      */
     @SafeVarargs
-    public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,V...propertyValues){
-        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : selectRejected(objectCollection, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValues));
+    public static <O, V> List<O> selectRejected(Iterable<O> beanIterable,String propertyName,V...propertyValues){
+        return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
+                        : selectRejected(beanIterable, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValues));
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否不在<code>propertyValueList</code>
+     * 循环 <code>beanIterable</code>,获得元素 <code>bean</code> 的 <code>propertyName</code>的值,判断是否不在<code>propertyValueList</code>
      * 集合中;<span style="color:red">如果不在</span>,将该对象存入list中返回.
      * 
      * <h3>示例:</h3>
@@ -1574,7 +1572,7 @@ public final class CollectionsUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>和该方法正好相反的是 {@link #select(Collection, String, Collection)}</li>
+     * <li>和该方法正好相反的是 {@link #select(Iterable, String, Collection)}</li>
      * </ol>
      * </blockquote>
      *
@@ -1582,33 +1580,33 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <V>
      *            the value type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param propertyValueList
      *            the values
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
      * @see BeanPredicateUtil#containsPredicate(String, Collection)
-     * @see #selectRejected(Collection , Predicate)
+     * @see #selectRejected(Iterable, Predicate)
      * @since 1.5.0
      */
-    public static <O, V> List<O> selectRejected(Collection<O> objectCollection,String propertyName,Collection<V> propertyValueList){
-        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : selectRejected(objectCollection, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
+    public static <O, V> List<O> selectRejected(Iterable<O> beanIterable,String propertyName,Collection<V> propertyValueList){
+        return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
+                        : selectRejected(beanIterable, BeanPredicateUtil.<O, V> containsPredicate(propertyName, propertyValueList));
     }
 
     /**
-     * 循环 <code>objectCollection</code>,获得元素 <code>bean</code>,判断是否不匹配<code>predicate</code>,<span style="color:red">如果不匹配</span>
+     * 循环 <code>beanIterable</code>,获得元素 <code>bean</code>,判断是否不匹配<code>predicate</code>,<span style="color:red">如果不匹配</span>
      * ,将该对象存入list中返回.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>和该方法正好相反的是 {@link #select(Collection, Predicate)}</li>
+     * <li>和该方法正好相反的是 {@link #select(Iterable, Predicate)}</li>
      * </ol>
      * </blockquote>
      * 
@@ -1635,17 +1633,17 @@ public final class CollectionsUtil{
      *
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param predicate
      *            the predicate
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      * @see org.apache.commons.collections4.CollectionUtils#selectRejected(Iterable, Predicate)
      * @since 1.4.0
      */
-    public static <O> List<O> selectRejected(Collection<O> objectCollection,Predicate<O> predicate){
-        return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList()
-                        : (List<O>) CollectionUtils.selectRejected(objectCollection, predicate);
+    public static <O> List<O> selectRejected(Iterable<O> beanIterable,Predicate<O> predicate){
+        return isNullOrEmpty(beanIterable) ? Collections.<O> emptyList()
+                        : (List<O>) CollectionUtils.selectRejected(beanIterable, predicate);
     }
 
     //***************************************************************************************
@@ -1795,23 +1793,23 @@ public final class CollectionsUtil{
     //*******************************group*********************************************************
 
     /**
-     * 循环 <code>objectCollection</code>,以 元素的 <code>propertyName</code>属性值为key,相同值的元素组成list作为value,封装成map返回.
+     * 循环 <code>beanIterable</code>,以 元素的 <code>propertyName</code>属性值为key,相同值的元素组成list作为value,封装成map返回.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * 
      * <li>
-     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是<code>objectCollection</code>
+     * 返回的{@link LinkedHashMap},key是 <code>beanIterable</code>中的元素对象中 <code>propertyName</code>的值,value是<code>beanIterable</code>
      * 中的元素对象;
      * </li>
      * 
-     * <li>顺序是 <code>objectCollection</code> <code>propertyName</code>的值顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * <li>顺序是 <code>beanIterable</code> <code>propertyName</code>的值顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
      * 
      * <li>属性<code>propertyName</code>值相同的元素,组成集合 list</li>
-     * <li>如果value只需要单值的话,可以调用 {@link #groupOne(Collection, String)}方法</li>
+     * <li>如果value只需要单值的话,可以调用 {@link #groupOne(Iterable, String)}方法</li>
      * </ol>
      * </blockquote>
      * 
@@ -1856,23 +1854,23 @@ public final class CollectionsUtil{
      *            注意,此处的T是属性值,Object类型,如果从excel中读取的类型是String,那么不能简简单单的使用Integer来接收,不能强制转换
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object list
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #group(Collection, String, Predicate)
+     * @see #group(Iterable, String, Predicate)
      * @since 1.0.8
      */
-    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,String propertyName){
-        return group(objectCollection, propertyName, null);
+    public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,String propertyName){
+        return group(beanIterable, propertyName, null);
     }
 
     /**
-     * 循环 <code>objectCollection</code>,找到符合条件的 <code>includePredicate</code>的元素,以元素的 <code>propertyName</code>
+     * 循环 <code>beanIterable</code>,找到符合条件的 <code>includePredicate</code>的元素,以元素的 <code>propertyName</code>
      * 属性值为key,相同值的元素组成list作为value,封装成map返回.
      * 
      * <h3>说明:</h3>
@@ -1880,12 +1878,12 @@ public final class CollectionsUtil{
      * <ol>
      * 
      * <li>
-     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是<code>objectCollection</code>
+     * 返回的{@link LinkedHashMap},key是 <code>beanIterable</code>中的元素对象中 <code>propertyName</code>的值,value是<code>beanIterable</code>
      * 中的元素对象;
      * </li>
      * 
      * <li>
-     * 顺序是 <code>objectCollection</code> <code>propertyName</code>的值顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * 顺序是 <code>beanIterable</code> <code>propertyName</code>的值顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}
      * </li>
@@ -1955,30 +1953,30 @@ public final class CollectionsUtil{
      *            注意,此处的T是属性值,Object类型,如果从excel中读取的类型是String,那么不能简简单单的使用Integer来接收,不能强制转换
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object list
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
      * @param includePredicate
      *            the include predicate
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果没有任何element match <code>includePredicate</code>,返回 empty {@link LinkedHashMap}<br>
      *         如果 <code>includePredicate</code> 是null,那么以所有的元素进行分组
      * @see PropertyUtil#getProperty(Object, String)
-     * @see #groupOne(Collection, String)
+     * @see #groupOne(Iterable, String)
      * @since 1.5.5
      */
-    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,final String propertyName,Predicate<O> includePredicate){
-        if (isNullOrEmpty(objectCollection)){
+    public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,final String propertyName,Predicate<O> includePredicate){
+        if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         //org.apache.commons.beanutils.BeanToPropertyValueTransformer 但是实现的是 commons-collection3
-        return group(objectCollection, includePredicate, new Transformer<O, T>(){
+        return group(beanIterable, includePredicate, new Transformer<O, T>(){
 
             @Override
             public T transform(O input){
@@ -1988,18 +1986,18 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,将元素使用<code>keyTransformer</code>转成key,相同值的元素组成list作为value,封装成map返回.
+     * 循环 <code>beanIterable</code>,将元素使用<code>keyTransformer</code>转成key,相同值的元素组成list作为value,封装成map返回.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>
-     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素 使用<code>keyTransformer</code>转换的值,value是
-     * <code>objectCollection</code>中的元素对象(相同key值,组成list);
+     * 返回的{@link LinkedHashMap},key是 <code>beanIterable</code>中的元素 使用<code>keyTransformer</code>转换的值,value是
+     * <code>beanIterable</code>中的元素对象(相同key值,组成list);
      * </li>
      * 
      * <li>
-     * 返回的{@link LinkedHashMap}顺序,是 <code>objectCollection</code> 元素顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * 返回的{@link LinkedHashMap}顺序,是 <code>beanIterable</code> 元素顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}
      * </li>
@@ -2096,33 +2094,33 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param keyTransformer
      *            返回的map,key转换器
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>keyTransformer</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="https://github.com/venusdrogon/feilong-core/issues/270">List to Map 实现类似矩阵的逻辑 by ananbeike</a>
      * @since 1.8.8
      */
-    public static <T, O> Map<T, List<O>> group(Collection<O> objectCollection,Transformer<O, T> keyTransformer){
-        return group(objectCollection, null, keyTransformer);
+    public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,Transformer<O, T> keyTransformer){
+        return group(beanIterable, null, keyTransformer);
     }
 
     /**
-     * 循环 <code>objectCollection</code>,找到符合条件的 <code>includePredicate</code>的元素,将元素使用<code>keyTransformer</code>转成key
+     * 循环 <code>beanIterable</code>,找到符合条件的 <code>includePredicate</code>的元素,将元素使用<code>keyTransformer</code>转成key
      * ,相同值的元素组成list作为value,封装成map返回.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>
-     * 返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素 使用<code>keyTransformer</code>转换的值,value是
-     * <code>objectCollection</code>中的元素对象(相同key值,组成list);
+     * 返回的{@link LinkedHashMap},key是 <code>beanIterable</code>中的元素 使用<code>keyTransformer</code>转换的值,value是
+     * <code>beanIterable</code>中的元素对象(相同key值,组成list);
      * </li>
      * 
      * <li>
-     * 返回的{@link LinkedHashMap}顺序,是 <code>objectCollection</code> 元素顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * 返回的{@link LinkedHashMap}顺序,是 <code>beanIterable</code> 元素顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}
      * </li>
@@ -2215,13 +2213,13 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object list
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param includePredicate
      *            the include predicate
      * @param keyTransformer
      *            返回的map,key转换器
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>keyTransformer</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>includePredicate</code> 是null,那么以所有的元素进行分组<br>
      *         如果没有任何element match <code>includePredicate</code>,返回 empty {@link LinkedHashMap}<br>
@@ -2229,17 +2227,14 @@ public final class CollectionsUtil{
      * @see <a href="https://github.com/venusdrogon/feilong-core/issues/270">List to Map 实现类似矩阵的逻辑 by ananbeike</a>
      * @since 1.8.8
      */
-    public static <T, O> Map<T, List<O>> group(
-                    Collection<O> objectCollection,
-                    Predicate<O> includePredicate,
-                    Transformer<O, T> keyTransformer){
-        if (isNullOrEmpty(objectCollection)){
+    public static <T, O> Map<T, List<O>> group(Iterable<O> beanIterable,Predicate<O> includePredicate,Transformer<O, T> keyTransformer){
+        if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
         Validate.notNull(keyTransformer, "keyTransformer can't be null!");
 
-        Map<T, List<O>> map = newLinkedHashMap(objectCollection.size());
-        for (O obj : objectCollection){
+        Map<T, List<O>> map = newLinkedHashMap(IterableUtils.size(beanIterable));
+        for (O obj : beanIterable){
             if (null != includePredicate && !includePredicate.evaluate(obj)){
                 continue;
             }
@@ -2249,20 +2244,20 @@ public final class CollectionsUtil{
     }
 
     /**
-     * 循环 <code>objectCollection</code>,以元素的 <code>propertyName</code>属性值为key,元素为value,封装成map返回(map只put第一个匹配的元素,<b>后面出现相同的元素将会忽略</b>).
+     * 循环 <code>iterable</code>,以元素的 <code>propertyName</code>属性值为key,元素为value,封装成map返回(map只put第一个匹配的元素,<b>后面出现相同的元素将会忽略</b>).
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回的{@link LinkedHashMap},key是 <code>objectCollection</code>中的元素对象中 <code>propertyName</code>的值,value是
-     * <code>objectCollection</code>中的元素对象;</li>
+     * <li>返回的{@link LinkedHashMap},key是 <code>iterable</code>中的元素对象中 <code>propertyName</code>的值,value是
+     * <code>beanIterable</code>中的元素对象;</li>
      * 
-     * <li>顺序是 <code>objectCollection</code> <code>propertyName</code>的值 顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
+     * <li>顺序是 <code>beanIterable</code> <code>propertyName</code>的值 顺序,如果需要排序,可自行调用 {@link SortUtil#sortMapByKeyAsc(Map)},
      * {@link SortUtil#sortMapByKeyDesc(Map)}, {@link SortUtil#sortMapByValueAsc(Map)}, {@link SortUtil#sortMapByValueDesc(Map)}或者,
      * {@link SortUtil#sortMap(Map, java.util.Comparator)}</li>
      * 
      * <li>间接的可以做到基于某个属性值去重的效果</li>
-     * <li>如果value需要是集合的话,可以调用 {@link #group(Collection, String)}方法</li>
+     * <li>如果value需要是集合的话,可以调用 {@link #group(Iterable, String)}方法</li>
      * </ol>
      * </blockquote>
      * 
@@ -2300,25 +2295,25 @@ public final class CollectionsUtil{
      *            the generic type
      * @param <O>
      *            the generic type
-     * @param objectCollection
-     *            the object collection
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @return 如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}
-     * @see #group(Collection, String)
+     * @see #group(Iterable, String)
      * @since 1.0.8
      */
-    public static <T, O> Map<T, O> groupOne(Collection<O> objectCollection,String propertyName){
-        if (isNullOrEmpty(objectCollection)){
+    public static <T, O> Map<T, O> groupOne(Iterable<O> beanIterable,String propertyName){
+        if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
-        Map<T, O> map = newLinkedHashMap(objectCollection.size());
-        for (O o : objectCollection){
+        Map<T, O> map = newLinkedHashMap(IterableUtils.size(beanIterable));
+        for (O o : beanIterable){
             T key = PropertyUtil.getProperty(o, propertyName);
             if (!map.containsKey(key)){
                 map.put(key, o);
@@ -2330,5 +2325,4 @@ public final class CollectionsUtil{
         }
         return map;
     }
-
 }
