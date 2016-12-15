@@ -26,7 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
-import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -355,10 +354,9 @@ public final class ClassLoaderUtil{
      */
     private static String formatClassLoader(ClassLoader classLoader){
         Map<String, Object> map = new LinkedHashMap<>();
-        map.put("classLoader", "" + classLoader);
         map.put("classLoader[CanonicalName]", classLoader.getClass().getCanonicalName());
         map.put("classLoader[Root Classpath]", "" + getResource(classLoader, ""));
-        return JsonUtil.format(map);
+        return map.toString();
     }
 
 }
