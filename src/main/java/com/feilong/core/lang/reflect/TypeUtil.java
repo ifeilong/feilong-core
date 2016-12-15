@@ -22,7 +22,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.tools.jsonlib.JsonUtil;
+import com.feilong.core.bean.ConvertUtil;
 
 import static com.feilong.core.bean.ConvertUtil.convert;
 
@@ -245,13 +245,13 @@ public final class TypeUtil{
     private static Class<?>[] extractActualTypeArgumentClassArray(ParameterizedType parameterizedType){
         Validate.notNull(parameterizedType, "parameterizedType can't be null/empty!");
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("parameterizedType info:{}", JsonUtil.format(parameterizedType));
+            LOGGER.trace("parameterizedType info:[{}]", parameterizedType);
         }
         Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
         Validate.notNull(actualTypeArguments, "actualTypeArguments can't be null/empty!");
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("actualTypeArguments:[{}]", JsonUtil.format(actualTypeArguments));
+            LOGGER.trace("actualTypeArguments:[{}]", ConvertUtil.toString(actualTypeArguments, null));
         }
         return convert(actualTypeArguments, Class[].class);
     }
