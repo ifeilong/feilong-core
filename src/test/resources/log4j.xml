@@ -48,6 +48,12 @@
 		<priority value="info" />
 	</category>
 
+	<category name="com.feilong.core.lang.ClassLoaderUtil">
+		<priority value="info" />
+	</category>
+	<category name="com.feilong.core.lang.reflect.TypeUtil">
+		<priority value="info" />
+	</category>
 	<category name="com.feilong.core.util.comparator.PropertyComparator">
 		<priority value="info" />
 	</category>
