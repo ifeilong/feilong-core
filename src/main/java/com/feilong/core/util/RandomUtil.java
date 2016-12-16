@@ -46,7 +46,7 @@ public final class RandomUtil{
      * 把Random对象作为一个全局实例(static)来使用. Java中Random是线程安全的(内部进行了加锁处理);
      * </p>
      * 
-     * @see org.apache.commons.lang.math.RandomUtils
+     * @see org.apache.commons.lang3.RandomUtils
      * @since 1.0.7
      */
     private static final Random JVM_RANDOM = new Random();

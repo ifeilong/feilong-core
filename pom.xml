@@ -18,36 +18,6 @@
 
 	<url>https://github.com/venusdrogon/feilong-core</url>
 
-	<!-- 软件配置管理,如cvs 和svn -->
-	<!-- The scm url must start with 'scm:' -->
-	<scm>
-		<url>https://github.com/venusdrogon/feilong-core</url>
-		<connection>scm:git:https://github.com/venusdrogon/feilong-core</connection>
-		<developerConnection>scm:git:git@github.com:venusdrogon/feilong-core.git</developerConnection>
-	</scm>
-
-	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
-	<issueManagement>
-		<system>github</system>
-		<url>https://github.com/venusdrogon/feilong-core/issues</url>
-	</issueManagement>
-
-	<!-- 项目提交者信息 -->
-	<developers>
-		<developer>
-			<id>feilong</id>
-			<name>金鑫</name>
-			<email>${developer.feilong.email}</email>
-			<url>http://venusdrogon.github.io/feilong-platform/</url>
-			<organization>feilong</organization>
-			<organizationUrl>http://venusdrogon.github.io/feilong-platform/</organizationUrl>
-			<roles>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-			<timezone>8</timezone>
-		</developer>
-	</developers>
 
 	<!-- 项目的贡献者,但不属于开发小组 -->
 	<contributors>
@@ -103,12 +73,6 @@
 		</dependency>
 
 		<!-- **********************仅仅 统一下版本************************************** -->
-		<!-- commons-lang 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
-		<dependency>
-			<artifactId>commons-lang</artifactId>
-			<groupId>commons-lang</groupId>
-		</dependency>
-
 		<!-- commons-logging 仅仅 统一下版本 feilong platform 不直接使用这个jar -->
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -121,27 +85,12 @@
 			<artifactId>commons-collections</artifactId>
 		</dependency>
 
-		<!-- 这2个包的类在jdk1.6里自带有了,可能有冲突,如果你的运行环境是1.6的话就可以删掉这2个包 -->
-		<!-- <dependency>
-			<groupId>xml-apis</groupId>
-			<artifactId>xml-apis</artifactId>
-			<version>${version.xml-apis}</version>
-			</dependency> -->
+		<!-- xml-apis:xml-apis 这2个包的类在jdk1.6里自带有了,可能有冲突,如果你的运行环境是1.6的话就可以删掉这2个包 -->
 
 		<!-- 规范下 xercesImpl版本 -->
 		<!-- 解决This parser does not support specification "null" version "null" -->
 
-		<!-- 这2个包的类在jdk1.6里自带有了,可能有冲突,如果你的运行环境是1.6的话就可以删掉这2个包 -->
-		<!-- <dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-			<exclusions>
-			<exclusion>
-			<artifactId>xml-apis</artifactId>
-			<groupId>xml-apis</groupId>
-			</exclusion>
-			</exclusions>
-			</dependency> -->
+		<!-- xerces:xercesImpl 这2个包的类在jdk1.6里自带有了,可能有冲突,如果你的运行环境是1.6的话就可以删掉这2个包 -->
 	</dependencies>
 
 	<build>
@@ -271,4 +220,37 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+
+
+	<!-- 软件配置管理,如cvs 和svn -->
+	<!-- The scm url must start with 'scm:' -->
+	<scm>
+		<url>https://github.com/venusdrogon/feilong-core</url>
+		<connection>scm:git:https://github.com/venusdrogon/feilong-core</connection>
+		<developerConnection>scm:git:git@github.com:venusdrogon/feilong-core.git</developerConnection>
+	</scm>
+
+	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/venusdrogon/feilong-core/issues</url>
+	</issueManagement>
+
+	<!-- 项目提交者信息 -->
+	<developers>
+		<developer>
+			<id>feilong</id>
+			<name>金鑫</name>
+			<email>${developer.feilong.email}</email>
+			<url>http://venusdrogon.github.io/feilong-platform/</url>
+			<organization>feilong</organization>
+			<organizationUrl>http://venusdrogon.github.io/feilong-platform/</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>8</timezone>
+		</developer>
+	</developers>
 </project>
