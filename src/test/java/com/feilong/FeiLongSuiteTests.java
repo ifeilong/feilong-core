@@ -26,7 +26,6 @@ import com.feilong.core.lang.FeiLongLangSuiteTests;
 import com.feilong.core.net.FeiLongNetSuiteTests;
 import com.feilong.core.text.FeiLongTextSuiteTests;
 import com.feilong.core.util.FeiLongUtilSuiteTests;
-import com.feilong.tools.jsonlib.FeiLongJsonUtilSuiteTests;
 import com.feilong.tools.slf4j.Slf4jUtilTest;
 
 /**
@@ -40,7 +39,7 @@ import com.feilong.tools.slf4j.Slf4jUtilTest;
                 FeiLongCoreTests.class,
 
                 Slf4jUtilTest.class,
-                FeiLongJsonUtilSuiteTests.class,
+                //FeiLongJsonUtilSuiteTests.class,
 
                 FeiLongBeanSuiteTests.class,
                 FeiLongDateSuiteTests.class,
