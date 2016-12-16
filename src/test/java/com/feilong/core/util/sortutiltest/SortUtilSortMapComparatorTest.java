@@ -75,6 +75,10 @@ public class SortUtilSortMapComparatorTest{
     public void testSortNullMap(){
         assertEquals(
                         emptyMap(),
-                        sortMap(null, new PropertyComparator<Map.Entry<String, Integer>>("key", new RegexGroupNumberComparator("a(\\d*)"))));
+                        sortMap(
+                                        null,
+                                        new PropertyComparator<Map.Entry<String, Integer>>(
+                                                        "key",
+                                                        new RegexGroupNumberComparator("a(\\d*)"))));
     }
 }
