@@ -28,7 +28,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.test.User;
+import com.feilong.store.member.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 

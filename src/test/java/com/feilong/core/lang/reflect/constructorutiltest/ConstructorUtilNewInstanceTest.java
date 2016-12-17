@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import com.feilong.core.lang.reflect.ConstructorUtil;
 import com.feilong.core.lang.reflect.ReflectException;
-import com.feilong.test.User;
+import com.feilong.store.member.User;
 
 /**
  * The Class ConstructorUtilNewInstanceTest.

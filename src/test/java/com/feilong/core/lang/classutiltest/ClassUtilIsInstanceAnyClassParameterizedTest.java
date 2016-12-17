@@ -21,8 +21,8 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.store.member.User;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
-import com.feilong.test.User;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;

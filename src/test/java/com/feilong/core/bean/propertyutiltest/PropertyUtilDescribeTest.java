@@ -28,7 +28,7 @@ import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.test.User;
+import com.feilong.store.member.User;
 
 /**
  * The Class PropertyUtilDescribeTest.

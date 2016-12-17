@@ -28,8 +28,8 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.lang.reflect.FieldUtil;
-import com.feilong.test.User;
-import com.feilong.test.UserInfo;
+import com.feilong.store.member.User;
+import com.feilong.store.member.UserInfo;
 
 /**
  * The Class FieldUtilGetAllFieldNameAndValueMapTest.

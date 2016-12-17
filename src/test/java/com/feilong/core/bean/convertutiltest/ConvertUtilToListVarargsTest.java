@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.feilong.test.User;
+import com.feilong.store.member.User;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;

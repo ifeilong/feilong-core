@@ -22,7 +22,7 @@ import java.util.Locale;
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.test.User;
+import com.feilong.store.member.User;
 
 import static com.feilong.core.bean.ConvertUtil.toLocale;
 

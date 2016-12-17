@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import com.feilong.core.lang.reflect.FieldUtil;
-import com.feilong.test.UserInfo;
+import com.feilong.store.member.UserInfo;
 
 /**
  * The Class FieldUtilGetAllFieldListTest.

@@ -28,7 +28,7 @@ import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.AggregateUtil;
-import com.feilong.test.User;
+import com.feilong.store.member.User;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;

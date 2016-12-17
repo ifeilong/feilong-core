@@ -24,7 +24,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.test.User;
+import com.feilong.store.member.User;
 
 public class StringUtilReplaceValuesMapTest{
 
