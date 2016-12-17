@@ -31,7 +31,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 RegexUtilTest.class,
 
-                IpPatternParameterizedTest.class,
                 MobilephonePatternParameterizedTest.class,
                 TelephonePatternParameterizedTest.class,
                 TelephoneMustAreaCodePatternParameterizedTest.class, })

@@ -243,6 +243,59 @@ import java.util.regex.Pattern;
  * }
  * </pre>
  * 
+ * <h3>不建议使用自定义正则的地方</h3>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
+ * 
+ * <tr style="background-color:#ccccff">
+ * <th align="left">内容</th>
+ * <th align="left">原正则</th>
+ * <th align="left">替代方法</th>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>网址Url 链接</td>
+ * <td>http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?</td>
+ * <td>commons-validator<br>
+ * org.apache.commons.validator.routines.DomainValidator.getInstance().isValid(emailString)</td>
+ * </tr>
+ * 
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>所有都是字母</td>
+ * <td>^[A-Za-z]+$</td>
+ * <td>{@link org.apache.commons.lang3.StringUtils#isAlpha(CharSequence)}</td>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>大写字母</td>
+ * <td>^[A-Z]+$</td>
+ * <td>{@link org.apache.commons.lang3.StringUtils#isAllUpperCase(CharSequence)}</td>
+ * </tr>
+ * 
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>小写字母</td>
+ * <td>^[a-z]+$</td>
+ * <td>{@link org.apache.commons.lang3.StringUtils#isAllLowerCase(CharSequence)}</td>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>IP</td>
+ * <td>^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.
+ * (25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)</td>
+ * <td>commons-validator<br>
+ * org.apache.commons.validator.routines.InetAddressValidator.getInstance().isValid(emailString)</td>
+ * </tr>
+ * 
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td></td>
+ * <td></td>
+ * <td></td>
+ * </tr>
+ * 
+ * </table>
+ * </blockquote>
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see Pattern
  * @since 1.0.0
@@ -461,53 +514,6 @@ public final class RegexPattern{
     @Deprecated
     public static final String EMAIL                   = "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
     //"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
-
-    /**
-     * IP 的正则表达式 <code>{@value}</code>.
-     * 
-     * @deprecated 建议使用apache commons-validator <br>
-     *             "org.apache.commons.validator.routines.InetAddressValidator.getInstance().isValid(emailString)"
-     */
-    @Deprecated
-    public static final String IP                      = "^(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)\\.(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)$";
-
-    //******************************************************************************
-
-    /**
-     * 所有都是字母 <code>{@value}</code>.
-     * 
-     * @see java.lang.Character#isLetter(char)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlpha(CharSequence)}
-     */
-    @Deprecated
-    public static final String LETTER                  = "^[A-Za-z]+$";
-
-    /**
-     * 小写字母 <code>{@value}</code>.
-     * 
-     * @see java.lang.Character#isLowerCase(char)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAllLowerCase(CharSequence)}
-     */
-    @Deprecated
-    public static final String LETTER_LOWERCASE        = "^[a-z]+$";
-
-    /**
-     * 大写字母 <code>{@value}</code>.
-     * 
-     * @see java.lang.Character#isUpperCase(char)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAllUpperCase(CharSequence)}
-     */
-    @Deprecated
-    public static final String LETTER_UPPERCASE        = "^[A-Z]+$";
-
-    /**
-     * 网址Url 链接 <code>{@value}</code>.
-     * 
-     * @deprecated 建议使用apache commons-validator <br>
-     *             "org.apache.commons.validator.routines.DomainValidator.getInstance().isValid(emailString)"
-     */
-    @Deprecated
-    public static final String URLLINK                 = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
 
     /** Don't let anyone instantiate this class. */
     private RegexPattern(){
