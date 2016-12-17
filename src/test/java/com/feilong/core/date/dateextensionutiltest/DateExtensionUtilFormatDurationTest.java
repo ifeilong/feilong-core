@@ -19,17 +19,12 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.time.DurationFormatUtils;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.toDate;
 
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  * The Class DateExtensionUtilTest.
@@ -39,44 +34,12 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND
  */
 public class DateExtensionUtilFormatDurationTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateExtensionUtilTest.class);
-
     /**
      * Test get interval for view long.
      */
     @Test
     public void testFormatDurationLong(){
         assertEquals("25秒841毫秒", formatDuration(25841));
-    }
-
-    /**
-     * Test format duration long 1.
-     */
-    @Test
-    @Ignore
-    public void testFormatDurationLong1(){
-        LOGGER.debug(String.format("%d:%02d:%02d", 25841000 / 3600, (25841000 % 3600) / 60, (25841000 % 60)));
-        //25 seconds
-        LOGGER.debug(DurationFormatUtils.formatDurationWords(25841, true, false));
-        //43 minutes 4 seconds
-        LOGGER.debug(DurationFormatUtils.formatDurationWords(2584100, true, true));
-        //0000-00-00 00:00:25
-        LOGGER.debug(DurationFormatUtils.formatDuration(25841, COMMON_DATE_AND_TIME));
-        //0000-00-00 00:00:25
-        LOGGER.debug(DurationFormatUtils.formatDuration(25841, COMMON_DATE_AND_TIME, true));
-        //0-0-0 0:0:25
-        LOGGER.debug(DurationFormatUtils.formatDuration(25841, COMMON_DATE_AND_TIME, false));
-        //0000-00-00 00:00:25.841
-        LOGGER.debug(DurationFormatUtils.formatDuration(25841, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
-        //0000年00月00日 00小时00分钟25秒841毫秒
-        LOGGER.debug(DurationFormatUtils.formatDuration(25841, "yyyy年MM月dd日 HH小时mm分钟ss秒SSS毫秒"));
-        //00:00:25.841
-        LOGGER.debug(DurationFormatUtils.formatDurationHMS(25841));
-        //P0Y0M0DT0H0M25.841S
-        LOGGER.debug(DurationFormatUtils.formatDurationISO(25841));
-        //P0Y0M0DT0H58M49.714S
-        LOGGER.debug(DurationFormatUtils.formatPeriodISO(25841, 3555555));
     }
 
     /**
@@ -139,5 +102,4 @@ public class DateExtensionUtilFormatDurationTest{
     public void testFormatDuration_zero(){
         assertEquals("0", formatDuration(0));
     }
-
 }
