@@ -288,9 +288,21 @@ import java.util.regex.Pattern;
  * </tr>
  * 
  * <tr valign="top" style="background-color:#eeeeff">
- * <td></td>
- * <td></td>
- * <td></td>
+ * <td>纯数字</td>
+ * <td>^[0-9]*$</td>
+ * <td>{@link org.apache.commons.lang3.StringUtils#isNumeric(CharSequence)}</td>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>字母和数字 (alpha numeric)</td>
+ * <td>^[0-9a-zA-Z]+$</td>
+ * <td>{@link org.apache.commons.lang3.StringUtils#isAlphanumeric(CharSequence)}</td>
+ * </tr>
+ * 
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>字母和数字和空格(alpha numeric space)</td>
+ * <td>^[0-9a-zA-Z ]+$</td>
+ * <td>{@link org.apache.commons.lang3.StringUtils#isAlphanumericSpace(CharSequence)}</td>
  * </tr>
  * 
  * </table>
@@ -469,34 +481,6 @@ public final class RegexPattern{
      * </p>
      */
     public static final String DECIMAL_TWO_DIGIT       = "^[0-9]+(.[0-9]{2})?$";
-
-    /**
-     * 纯数字 <code>{@value}</code>.
-     *
-     * @see java.lang.Character#isDigit(char)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isNumeric(CharSequence)}
-     */
-    @Deprecated
-    public static final String NUMBER                  = "^[0-9]*$";
-
-    //**************************************************************************************
-    /**
-     * 字母和数字 (alpha numeric) <code>{@value}</code>.
-     * 
-     * @see java.lang.Character#isLetterOrDigit(int)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlphanumeric(CharSequence)}
-     */
-    @Deprecated
-    public static final String AN                      = "^[0-9a-zA-Z]+$";
-
-    /**
-     * 字母和数字和空格(alpha numeric space)<code>{@value}</code>.
-     * 
-     * @see java.lang.Character#isLetterOrDigit(int)
-     * @deprecated 建议使用 {@link org.apache.commons.lang3.StringUtils#isAlphanumericSpace(CharSequence)}
-     */
-    @Deprecated
-    public static final String ANS                     = "^[0-9a-zA-Z ]+$";
 
     //******************************************************************************
     /**

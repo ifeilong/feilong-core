@@ -21,10 +21,7 @@ import org.junit.Test;
 
 import com.feilong.core.util.RegexUtil;
 
-import static com.feilong.core.RegexPattern.AN;
-import static com.feilong.core.RegexPattern.ANS;
 import static com.feilong.core.RegexPattern.DECIMAL_TWO_DIGIT;
-import static com.feilong.core.RegexPattern.NUMBER;
 
 /**
  * The Class RegexUtilTest.
@@ -34,15 +31,6 @@ import static com.feilong.core.RegexPattern.NUMBER;
 public class RegexUtilTest{
 
     /**
-     * Test match1.
-     */
-    @Test
-    public void testMatch1(){
-        assertEquals(false, RegexUtil.matches(NUMBER, "2000.0"));
-        assertEquals(true, RegexUtil.matches(NUMBER, "02125454"));
-    }
-
-    /**
      * Test decima l_ tw o_ digit.
      */
     @Test
@@ -50,25 +38,5 @@ public class RegexUtilTest{
         assertEquals(false, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000阿.00"));
         assertEquals(false, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000.0"));
         assertEquals(true, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000.99"));
-    }
-
-    /**
-     * AN.
-     */
-    @Test
-    public void testAN(){
-        assertEquals(true, RegexUtil.matches(AN, "aa02125454"));
-        assertEquals(false, RegexUtil.matches(AN, "0212545.4"));
-        assertEquals(false, RegexUtil.matches(AN, "0212545$4"));
-        assertEquals(false, org.apache.commons.lang3.StringUtils.isAlphanumeric("0212545$4"));
-        assertEquals(true, RegexUtil.matches(AN, "02125454"));
-    }
-
-    /**
-     * ANS.
-     */
-    @Test
-    public void testANS(){
-        assertEquals(true, RegexUtil.matches(ANS, "02125 454"));
     }
 }
