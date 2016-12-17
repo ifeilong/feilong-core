@@ -108,7 +108,7 @@ public final class BeanPredicateUtil{
      */
     public static <T, V> Predicate<T> equalPredicate(String propertyName,V propertyValue){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return new BeanPredicate<T>(propertyName, PredicateUtils.equalPredicate(propertyValue));
+        return new BeanPredicate<>(propertyName, PredicateUtils.equalPredicate(propertyValue));
     }
 
     /**
@@ -235,7 +235,7 @@ public final class BeanPredicateUtil{
     @SafeVarargs
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final V...propertyValues){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return new BeanPredicate<T>(propertyName, new Predicate<V>(){
+        return new BeanPredicate<>(propertyName, new Predicate<V>(){
 
             @Override
             public boolean evaluate(V propertyValue){
@@ -276,7 +276,7 @@ public final class BeanPredicateUtil{
      */
     public static <T, V> Predicate<T> containsPredicate(final String propertyName,final Collection<V> propertyValueList){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return new BeanPredicate<T>(propertyName, new Predicate<V>(){
+        return new BeanPredicate<>(propertyName, new Predicate<V>(){
 
             @Override
             public boolean evaluate(V propertyValue){
@@ -487,6 +487,6 @@ public final class BeanPredicateUtil{
                     Comparator<V> comparator,
                     Criterion criterion){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return new BeanPredicate<T>(propertyName, new ComparatorPredicate<V>(valueToCompare, comparator, criterion));
+        return new BeanPredicate<>(propertyName, new ComparatorPredicate<V>(valueToCompare, comparator, criterion));
     }
 }

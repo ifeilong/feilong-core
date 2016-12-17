@@ -343,7 +343,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private int compare(T t1,T t2,Comparable propertyValue1,Comparable propertyValue2){
-        //NullPointException if propertyValue1.compareTo(propertyValue2);
+        //NullPointException if propertyValue1.compareTo(propertyValue2)
         int compareTo = ObjectUtils.compare(propertyValue1, propertyValue2);
 
         if (0 == compareTo){

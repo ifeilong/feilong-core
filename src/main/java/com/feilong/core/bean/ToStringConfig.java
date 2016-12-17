@@ -77,6 +77,7 @@ public final class ToStringConfig implements Serializable{
      * </blockquote>.
      */
     public ToStringConfig(){
+        // default
     }
 
     /**
