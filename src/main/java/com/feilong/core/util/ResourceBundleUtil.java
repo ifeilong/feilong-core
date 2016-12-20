@@ -658,10 +658,8 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * <pre class="code">
-     * 
      * ResourceBundle resourceBundle = getResourceBundle(new FileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"));
      * LOGGER.debug(JsonUtil.format(toMap(resourceBundle)));
-     * 
      * </pre>
      * 
      * <b>返回:</b>
@@ -688,6 +686,12 @@ public final class ResourceBundleUtil{
             return new PropertyResourceBundle(inputStream);
         }catch (IOException e){
             throw new UncheckedIOException(e);
+        }finally{
+            try{
+                inputStream.close();
+            }catch (IOException e){
+                throw new UncheckedIOException(e);
+            }
         }
     }
 
