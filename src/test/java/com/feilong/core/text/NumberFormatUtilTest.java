@@ -16,11 +16,8 @@
 package com.feilong.core.text;
 
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The Class NumberFormatUtilTest.
@@ -28,9 +25,6 @@ import org.slf4j.LoggerFactory;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class NumberFormatUtilTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(NumberFormatUtilTest.class);
 
     //*************NumberFormatUtil.format(Number, String, RoundingMode)***************************************
 
@@ -64,15 +58,5 @@ public class NumberFormatUtilTest{
     @Test(expected = IllegalArgumentException.class)
     public void testFormatBlankNumberPattern21(){
         NumberFormatUtil.format(25, " ", RoundingMode.HALF_UP);
-    }
-
-    /**
-     * Test convert number to string.
-     */
-    @Test
-    public void testToString1(){
-        // //######0
-        DecimalFormat df = new DecimalFormat("######0");
-        LOGGER.debug(df.format(((double) 5 / Integer.valueOf(8)) * 100));
     }
 }
