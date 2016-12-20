@@ -690,9 +690,8 @@ public final class ResourceBundleUtil{
             try{
                 inputStream.close();
             }catch (IOException e){
-                throw new UncheckedIOException(e);
+                LOGGER.error("", e);
             }
         }
     }
-
 }
