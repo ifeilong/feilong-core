@@ -55,6 +55,25 @@ public class CollectionsUtilGroupWithPropertyNameTest{
         assertThat(map, allOf(hasEntry("张飞", toList(zhangfei)), hasEntry("刘备", toList(liubei25, liubei30))));
     }
 
+    @Test
+    public void testGroupInt(){
+        User zhangfei = new User("张飞");
+        zhangfei.setAgeInt(25);
+
+        User hanxiangdi18 = new User("汉献帝");
+        hanxiangdi18.setAgeInt(18);
+
+        User zhugeliang18 = new User("诸葛亮");
+        zhugeliang18.setAgeInt(18);
+
+        List<User> list = toList(zhangfei, hanxiangdi18, zhugeliang18);
+
+        Map<Integer, List<User>> map = CollectionsUtil.group(list, "ageInt");
+
+        assertEquals(2, map.size());
+        assertThat(map, allOf(hasEntry(25, toList(zhangfei)), hasEntry(18, toList(hanxiangdi18, zhugeliang18))));
+    }
+
     /**
      * Test group null collection.
      */
