@@ -72,10 +72,6 @@ public final class EnumUtil{
      *     public String getMethod(){
      *         return method;
      *     }
-     * 
-     *     public void setMethod(String method){
-     *         this.method = method;
-     *     }
      * }
      * </pre>
      * 
@@ -146,9 +142,6 @@ public final class EnumUtil{
      *         return method;
      *     }
      * 
-     *     public void setMethod(String method){
-     *         this.method = method;
-     *     }
      * }
      * </pre>
      * 
