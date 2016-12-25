@@ -256,7 +256,7 @@ import java.util.regex.Pattern;
  * 
  * <tr valign="top">
  * <td>网址Url 链接</td>
- * <td>http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?</td>
+ * <td>{@code http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?}</td>
  * <td>commons-validator<br>
  * org.apache.commons.validator.routines.DomainValidator.getInstance().isValid(emailString)</td>
  * </tr>
