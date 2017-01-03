@@ -5,7 +5,7 @@ feilong core 让Java开发更简便的工具包
 ![JDK 1.7](https://img.shields.io/badge/JDK-1.7-green.svg "JDK 1.7")
 [![jar size 92K](https://img.shields.io/badge/size-92K-green.svg "size 92K")](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core/1.10.0)
 [![javadoc 83%](http://progressed.io/bar/83?title=javadoc "javadoc 83%")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
-[![tests 1400](https://img.shields.io/badge/tests-1400%20%2F%201400-green.svg "tests 1400")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core) 
+[![tests 1404](https://img.shields.io/badge/tests-1404%20%2F%201404-green.svg "tests 1404")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core) 
 
 > Reduce development, Release ideas (减少开发,释放思想)
 

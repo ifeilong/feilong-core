@@ -48,6 +48,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 MapUtilPutIfValueNotNullOrEmptyTest.class,
 
                 MapUtilRemoveKeysTest.class,
+                MapUtilGetTest.class,
         //
 })
 public class FeiLongMapUtilSuiteTests{
