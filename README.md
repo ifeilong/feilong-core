@@ -15,25 +15,28 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 ## 1.简介:
 
-1. 目标:`Reduce development, Release ideas` `(减少开发,释放思想)`;
-1. 让你从大量重复的底层代码中脱身,提高工作效率;
-1. 让你的代码更简炼，易写、易读、易于维护;
+1. 让你从`大量重复`的底层代码中脱身,`提高工作效率`;
+1. 让你的代码`更简炼`，`易写`、`易读`、`易于维护`;
 
 ## 2.feilong-core 优点:
 
 ![](http://i.imgur.com/NCuo13D.png)
 
+对比1:
+
 ![](http://i.imgur.com/YDP7Xgj.png)
+
+对比2:
 
 ![](http://i.imgur.com/g0F4Itp.png)
 
 - [使用 feilong-core 的理由](https://github.com/venusdrogon/feilong-core/wiki/Reasons-for-use-feilong-core) 
 
-1.  有常用的工具类 (如 处理日期的 `DateUtil`,处理 集合 的 `CollectionsUtil` 等)
-1.	有常用的JAVA常量类 (如日期格式 `DatePattern`, 时间间隔 `TimeInterval` 等)
-1.	不必要的`Exception` 转成了`RuntimeException`,减少不必要的代码
-1.  国内`中文注释`最完善的API
-1.  有完善的单元测试
+1. 有常用的工具类 (如 处理日期的 `DateUtil`,处理 集合 的 `CollectionsUtil` 等)
+1. 有常用的JAVA常量类 (如日期格式 `DatePattern`, 时间间隔 `TimeInterval` 等)
+1. 不必要的`Exception` 转成了`RuntimeException`,减少不必要的代码
+1. 国内`中文注释`最完善的API
+1. 有完善的单元测试
 
 ## 3.一图概述:
 
@@ -41,10 +44,9 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 这里有详细的帮助文档 http://feilong-core.mydoc.io/
 
-
 ## 4.:dragon: Maven使用配置
 
-feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core "仓库") 浏览 
+`feilong-core` jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core "仓库") 浏览 
 
 如果你使用 `maven`, 您可以通过以下方式来配置 `pom.xml`:
 
@@ -81,7 +83,7 @@ feilong-core jar你可以直接在 [仓库](https://github.com/venusdrogon/feilo
 
 ## 5. How to install?
 
-有些小伙伴想下载并自行install 进行研究, 你需要执行以下4个步骤:
+有些小伙伴想下载并 `自行install` 进行研究, 你需要执行以下 `4` 个步骤:
 
 ```bat
 git clone https://github.com/venusdrogon/feilong-platform.git --depth 1
@@ -91,7 +93,7 @@ git clone https://github.com/venusdrogon/feilong-core.git --depth 1
 mvn install -f feilong-core
 ```
 
-详细参考 https://github.com/venusdrogon/feilong-core/wiki/install
+**详细参考** https://github.com/venusdrogon/feilong-core/wiki/install
 
 ## 6.帮助:
 
@@ -119,9 +121,9 @@ A: https://github.com/venusdrogon/feilong-core/wiki/Repeat-the-wheel
 
 ## 10.:cyclone: feilong 即时交流
 
-微信公众号 `feilongjava`							|QQ 群 `243306798`
-:---- 										|:---------
- ![](http://i.imgur.com/hM83Xv9.jpg)		|![](http://i.imgur.com/cIfglCa.png)
+QQ 群 `243306798`
+:---------
+![](http://i.imgur.com/cIfglCa.png)
 
 ## 11:panda_face: About
 
