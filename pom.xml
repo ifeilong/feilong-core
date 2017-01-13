@@ -18,12 +18,21 @@
 
 	<url>https://github.com/venusdrogon/feilong-core</url>
 
-
 	<!-- 项目的贡献者,但不属于开发小组 -->
 	<contributors>
 		<contributor>
-			<name>bejamin.liu</name>
+			<name>benjamin.liu</name>
 			<url>https://github.com/benjaliu</url>
+		</contributor>
+
+		<contributor>
+			<name>yi.huang</name>
+			<url>https://github.com/ananbeike</url>
+		</contributor>
+
+		<contributor>
+			<name>minglei.feng</name>
+			<url>https://github.com/shade41-code</url>
 		</contributor>
 	</contributors>
 
