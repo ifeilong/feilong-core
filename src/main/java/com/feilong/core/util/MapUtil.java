@@ -307,6 +307,7 @@ public final class MapUtil{
      * @throws IndexOutOfBoundsException
      *             if the index is invalid
      * @see org.apache.commons.collections4.IterableUtils#get(Iterable, int)
+     * @see org.apache.commons.collections4.CollectionUtils#get(Map, int)
      * @since 1.10.1
      */
     public static <K, V> Map.Entry<K, V> get(Map<K, V> map,int index){
