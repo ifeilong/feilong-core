@@ -28,7 +28,7 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 **对比2:**
 
-![](http://i.imgur.com/cSlOGlE.png)
+![](http://i.imgur.com/FG9ty3Q.png)
 
 - [使用 feilong-core 的理由](https://github.com/venusdrogon/feilong-core/wiki/Reasons-for-use-feilong-core) 
 
