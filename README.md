@@ -11,6 +11,8 @@ feilong core 让Java开发更简便的工具包
 
 focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-platform) 项目的核心项目
 
+详细的帮助文档 [http://feilong-core.mydoc.io/](http://feilong-core.mydoc.io/)
+
 ## 1.简介:
 
 1. 目标:`Reduce development, Release ideas` `(减少开发,释放思想)`;
@@ -18,6 +20,12 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 1. 让你的代码更简炼，易写、易读、易于维护;
 
 ## 2.feilong-core 优点:
+
+![](http://i.imgur.com/NCuo13D.png)
+
+![](http://i.imgur.com/YDP7Xgj.png)
+
+![](http://i.imgur.com/g0F4Itp.png)
 
 - [使用 feilong-core 的理由](https://github.com/venusdrogon/feilong-core/wiki/Reasons-for-use-feilong-core) 
 
