@@ -30,6 +30,11 @@ import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.CollectionsUtil.find;
 
+/**
+ * The Class BeanPredicateUtilEqualMapPredicateTest.
+ *
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ */
 public class BeanPredicateUtilEqualMapPredicateTest{
 
     /**
@@ -49,6 +54,9 @@ public class BeanPredicateUtilEqualMapPredicateTest{
         assertEquals(guanyu30, find(list, BeanPredicateUtil.<User> equalPredicate(map)));
     }
 
+    /**
+     * Test equal predicate.
+     */
     @Test
     public void testEqualPredicate(){
         User user = new User(2L);
@@ -56,6 +64,9 @@ public class BeanPredicateUtilEqualMapPredicateTest{
         assertEquals(true, equalPredicate.evaluate(user));
     }
 
+    /**
+     * Test equal predicate 1.
+     */
     @Test
     public void testEqualPredicate1(){
         User user = new User(2L);
@@ -65,11 +76,17 @@ public class BeanPredicateUtilEqualMapPredicateTest{
 
     //---------------------------------------------------------------------------
 
+    /**
+     * Test equal predicate null map.
+     */
     @Test(expected = NullPointerException.class)
     public void testEqualPredicateNullMap(){
         BeanPredicateUtil.equalPredicate(null);
     }
 
+    /**
+     * Test equal predicate empty map.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testEqualPredicateEmptyMap(){
         BeanPredicateUtil.equalPredicate(new HashMap<String, Object>());

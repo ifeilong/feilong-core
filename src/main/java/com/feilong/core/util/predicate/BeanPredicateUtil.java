@@ -25,12 +25,14 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.collections4.functors.ComparatorPredicate;
 import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
+import org.apache.commons.collections4.functors.EqualPredicate;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.equator.IgnoreCaseEquator;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 
@@ -52,7 +54,7 @@ public final class BeanPredicateUtil{
     }
 
     /**
-     * 用来指定 <code>T</code> 对象的 特定属性 <code>propertyName</code> equals 指定的 <code>propertyValue</code>.
+     * 用来指定 <code>T</code> 对象的特定属性 <code>propertyName</code> equals 指定的 <code>propertyValue</code>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -109,6 +111,74 @@ public final class BeanPredicateUtil{
     public static <T, V> Predicate<T> equalPredicate(String propertyName,V propertyValue){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         return new BeanPredicate<>(propertyName, PredicateUtils.equalPredicate(propertyValue));
+    }
+
+    /**
+     * 用来指定 <code>T</code> 对象的特定属性 <code>propertyName</code> equalsIgnoreCase 指定的 <code>propertyValue</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 在list中查找 name是 zhangfei(忽视大小写) 的user
+     * </p>
+     * 
+     * <pre class="code">
+     * User zhangfei1 = new User("zhangfei", 22);
+     * User zhangfei2 = new User("zhangFei", 22);
+     * User zhangfei3 = new User("Zhangfei", 22);
+     * User zhangfeinull = new User((String) null, 22);
+     * User guanyu = new User("guanyu", 25);
+     * User liubei = new User("liubei", 30);
+     * 
+     * List{@code <User>} list = toList(zhangfei1, zhangfei2, zhangfei3, zhangfeinull, guanyu, liubei);
+     * 
+     * List{@code <User>} select = select(list, BeanPredicateUtil.{@code <User>} equalIgnoreCasePredicate("name", "zhangfei"));
+     * 
+     * assertThat(select, allOf(//
+     *                 hasItem(zhangfei1),
+     *                 hasItem(zhangfei2),
+     *                 hasItem(zhangfei3),
+     * 
+     *                 not(hasItem(zhangfeinull)),
+     *                 not(hasItem(guanyu)),
+     *                 not(hasItem(liubei))
+     * //
+     * ));
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <T>
+     *            the generic type
+     * @param propertyName
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param propertyValue
+     *            the property value
+     * @return 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see org.apache.commons.collections4.PredicateUtils#equalPredicate(Object)
+     * @see com.feilong.core.util.equator.IgnoreCaseEquator#INSTANCE
+     * @since 1.10.1
+     */
+    public static <T> Predicate<T> equalIgnoreCasePredicate(String propertyName,String propertyValue){
+        Validate.notBlank(propertyName, "propertyName can't be blank!");
+        return new BeanPredicate<>(propertyName, EqualPredicate.equalPredicate(propertyValue, IgnoreCaseEquator.INSTANCE));
     }
 
     /**

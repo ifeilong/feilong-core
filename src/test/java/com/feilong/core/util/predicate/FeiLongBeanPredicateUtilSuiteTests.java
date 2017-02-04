@@ -27,6 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 BeanPredicateUtilEqualPredicateTest.class,
+                BeanPredicateUtilEqualIgnoreCasePredicateTest.class,
                 BeanPredicateUtilEqualMapPredicateTest.class,
         //
 })
