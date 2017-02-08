@@ -1445,10 +1445,21 @@ public final class DateUtil{
      * </p>
      * </blockquote>
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>需要注意的是,有些文章说3200 是平年, 参见<a href="http://baike.baidu.com/item/闰年/27098#6">精确计算方法</a>,但是 jdk中 判定3200 依然是闰年,并且
+     * <a href="https://en.wikipedia.org/wiki/Leap_year">wiki</a> 也没有提及3200是平年的故事</li>
+     * <li>在 {@link java.util.GregorianCalendar#gregorianCutoverYearJulian 1582}年之前是四年一闰,
+     * {@link java.util.GregorianCalendar#gregorianCutoverYearJulian 1582}年之后 四年一闰,百年不闰,四百年再闰</li>
+     * </ol>
+     * </blockquote>
+     * 
      * @param year
      *            年份
      * @return 四年一闰,百年不闰,四百年再闰
      * @see GregorianCalendar#isLeapYear(int)
+     * @see <a href="https://en.wikipedia.org/wiki/Leap_year">Leap_year</a>
      */
     public static boolean isLeapYear(int year){
         return new GregorianCalendar().isLeapYear(year);
