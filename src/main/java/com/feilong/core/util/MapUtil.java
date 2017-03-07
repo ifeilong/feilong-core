@@ -15,6 +15,9 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
@@ -35,10 +38,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * {@link Map}工具类.
@@ -225,7 +224,7 @@ public final class MapUtil{
      * <pre class="code">
      * 
      * public void createFile(Novel novel){
-     *     Map<String, String> bookSectionUrlMap = parseBookSectionUrlMap(novel);
+     *     Map{@code <String, String>} bookSectionUrlMap = parseBookSectionUrlMap(novel);
      * 
      *     if (isNullOrEmpty(bookSectionUrlMap)){
      *         LOGGER.warn("bookSectionUrlMap is null/empty,Perhaps you read the latest chapter");
@@ -233,9 +232,9 @@ public final class MapUtil{
      *     }
      * 
      *     //********************************************************************************************
-     *     String beginName = null; <span style="color:green">// 开始章节名称</span>
+     *     String beginName = null; <span style="color:green">// 开始章节名称 </span>
      * 
-     *     for (Map.Entry<String, String> entry : bookSectionUrlMap.entrySet()){
+     *     for (Map.Entry{@code <String, String>} entry : bookSectionUrlMap.entrySet()){
      *         String sectionName = entry.getValue();
      *         if (isNullOrEmpty(beginName)){
      *             beginName = sectionName;<span style="color:red">//①这里纯粹只是为了获得 map 第一个 entry value 值</span>
@@ -266,7 +265,7 @@ public final class MapUtil{
      * <pre class="code">
      * 
      * public void createFile(Novel novel){
-     *     Map<String, String> bookSectionUrlMap = parseBookSectionUrlMap(novel);
+     *     Map{@code <String, String>} bookSectionUrlMap = parseBookSectionUrlMap(novel);
      * 
      *     if (isNullOrEmpty(bookSectionUrlMap)){
      *         LOGGER.warn("bookSectionUrlMap is null/empty,Perhaps you read the latest chapter");
@@ -275,7 +274,7 @@ public final class MapUtil{
      * 
      *     //********************************************************************************************
      * 
-     *     for (Map.Entry<String, String> entry : bookSectionUrlMap.entrySet()){
+     *     for (Map.Entry{@code <String, String>} entry : bookSectionUrlMap.entrySet()){
      *         try{
      * 
      *             <span style="color:green">//do some big logic</span>
