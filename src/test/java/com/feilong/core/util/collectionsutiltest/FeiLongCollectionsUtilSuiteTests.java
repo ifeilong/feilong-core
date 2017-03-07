@@ -33,6 +33,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectionsUtilIndexOfTest.class,
 
                 CollectionsUtilCollectIterableTest.class,
+                CollectionsUtilCollectIterableBeanTypeTest.class,
                 CollectionsUtilCollectIteratorTest.class,
 
                 CollectionsUtilFindTest.class,

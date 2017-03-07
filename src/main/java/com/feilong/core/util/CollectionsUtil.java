@@ -15,6 +15,10 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.ListUtils;
@@ -38,11 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import com.feilong.core.util.transformer.BeanTransformer;
 
 /**
  * {@link Collection} 工具类,是 {@link Collections} 的扩展和补充.
@@ -1582,6 +1583,140 @@ public final class CollectionsUtil{
      */
     public static <O, T> List<T> collect(final Iterable<O> inputIterable,final Transformer<? super O, ? extends T> transformer){
         return null == inputIterable ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterable, transformer);
+    }
+
+    /**
+     * 循环 <code>inputBeanIterable</code>,将每个元素使用转换程成新的 outputListBeanType 类型对象(如有需要只copy传入的<code>includePropertyNames</code>属性)
+     * 返回<b>新的list</b>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 已知有以下两个类 User 和 Customer
+     * 
+     * <pre class="code">
+     * 
+     * public class User{
+     * 
+     *     // The id. 
+     *     private Long id = 0L;
+     * 
+     *     //** The name. 
+     *     private String name = "feilong";
+     * 
+     *     //** 年龄. 
+     *     private Integer age;
+     * 
+     *     //setter /getter
+     * 
+     *     public User(Long id, String name){
+     *         this.id = id;
+     *         this.name = name;
+     *     }
+     * 
+     * }
+     * 
+     * </pre>
+     * 
+     * <pre class="code">
+     * 
+     * public class Customer{
+     * 
+     *     //** The id. 
+     *     private long id;
+     * 
+     *     //* The name. 
+     *     private String name;
+     * 
+     *     //setter /getter
+     * 
+     * }
+     * 
+     * </pre>
+     * 
+     * 此时有以下的 List{@code <User>} 需要转换成List{@code <Customer>}
+     * 
+     * <pre class="code">
+     * 
+     * List{@code <User>} list = toList(//
+     *                 new User(23L, "张飞"),
+     *                 new User(24L, "关羽"),
+     *                 new User(25L, "刘备"));
+     * </pre>
+     * 
+     * <b>以前你需要如此这般写:</b>
+     * 
+     * <pre class="code">
+     * List{@code <Customer>} customerList = new ArrayList{@code <>}();
+     * for (User user : list){
+     *     Customer customer = new Customer();
+     *     customer.setId(user.getId());
+     *     customer.setName(user.getName());
+     *     customerList.add(customer);
+     * }
+     * </pre>
+     * 
+     * <p>
+     * 如果属性很多,书写代码很繁琐
+     * </p>
+     * 
+     * <p>
+     * 此时你可以这么写:
+     * </p>
+     * 
+     * <pre class="code">
+     *  List{@code <Customer>} customerList = CollectionsUtil.collect(list, Customer.class);
+     * </pre>
+     * 
+     * <p>
+     * 一行代码搞定集合转换问题
+     * </p>
+     * 
+     * <p>
+     * 如果你只想转换id属性,你可以:
+     * </p>
+     * 
+     * <pre class="code">
+     *  List{@code <Customer>} customerList = CollectionsUtil.collect(list, Customer.class,"id");
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>outputListBeanType 需要有默认的构造函数</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <I>
+     *            the generic type
+     * @param inputBeanIterable
+     *            输入的input bean Iterable
+     * @param outputListBeanType
+     *            要转成Bean list的类型.
+     * @param includePropertyNames
+     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo),<br>
+     *            如果是null或者empty,那么复制所有的属性<br>
+     *            <ol>
+     *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>inputBeanIterable</code> bean 没有的属性名字,将会抛出异常</li>
+     *            <li>如果传入的<code>includePropertyNames</code>,含有 <code>inputBeanIterable</code>
+     *            bean有,但是<code>outputListBeanType</code>没有的属性名字,会抛出异常,see{@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)
+     *            copyProperties} Line2078</li>
+     *            </ol>
+     * @return 如果 <code>inputBeanIterable</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>inputBeanIterable</code> 中有元素是null,那么返回的list对应位置的元素也是null<br>
+     *         如果 <code>outputListBeanType</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.10.1
+     */
+    public static <O, I> List<O> collect(
+                    final Iterable<I> inputBeanIterable,
+                    final Class<O> outputListBeanType,
+                    final String...includePropertyNames){
+        Validate.notNull(outputListBeanType, "outListBeanType can't be null!");
+        return collect(inputBeanIterable, new BeanTransformer<>(outputListBeanType, includePropertyNames));
     }
 
     /**
