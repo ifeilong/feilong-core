@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toIterator;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertEquals;
@@ -29,9 +31,6 @@ import org.apache.commons.collections4.TransformerUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toIterator;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilCollectIteratorTest.
@@ -59,7 +58,7 @@ public class CollectionsUtilCollectIteratorTest{
      */
     @Test
     public void testCollectNullIterator(){
-        assertEquals(emptyList(), CollectionsUtil.collect((Iterator<Long>) null, TransformerUtils.stringValueTransformer()));
+        assertEquals(null, CollectionsUtil.collect((Iterator<Long>) null, TransformerUtils.stringValueTransformer()));
     }
 
     /**

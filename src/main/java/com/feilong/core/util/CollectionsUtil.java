@@ -1575,14 +1575,14 @@ public final class CollectionsUtil{
      *            the inputIterable to get the input from
      * @param transformer
      *            the transformer to use, may be null
-     * @return 如果 <code>inputIterable</code> 是null,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>inputIterable</code> 是null,返回 null<br>
      *         如果 <code>transformer</code> 是null,返回 empty list
      * @see org.apache.commons.collections4.CollectionUtils#collect(Iterable, Transformer)
      * @see org.apache.commons.collections4.CollectionUtils#transform(Collection, Transformer)
      * @since 1.5.5
      */
     public static <O, T> List<T> collect(final Iterable<O> inputIterable,final Transformer<? super O, ? extends T> transformer){
-        return null == inputIterable ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterable, transformer);
+        return null == inputIterable ? null : (List<T>) CollectionUtils.collect(inputIterable, transformer);
     }
 
     /**
@@ -1706,7 +1706,7 @@ public final class CollectionsUtil{
      *            bean有,但是<code>outputListBeanType</code>没有的属性名字,会抛出异常,see{@link PropertyUtilsBean#setSimpleProperty(Object, String, Object)
      *            copyProperties} Line2078</li>
      *            </ol>
-     * @return 如果 <code>inputBeanIterable</code> 是null,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>inputBeanIterable</code> 是null,返回 null<br>
      *         如果 <code>inputBeanIterable</code> 中有元素是null,那么返回的list对应位置的元素也是null<br>
      *         如果 <code>outputListBeanType</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.10.1
@@ -1754,13 +1754,13 @@ public final class CollectionsUtil{
      *            the iterator to get the input from
      * @param transformer
      *            the transformer to use, may be null
-     * @return 如果 <code>inputIterator</code> 是null,返回 {@link Collections#emptyList()}<br>
+     * @return 如果 <code>inputIterator</code> 是null,返回 null<br>
      *         如果 <code>transformer</code> 是null,返回 {@code new ArrayList<>}
      * @see org.apache.commons.collections4.CollectionUtils#collect(java.util.Iterator, Transformer)
      * @since 1.5.5
      */
     public static <O, T> List<T> collect(final Iterator<O> inputIterator,final Transformer<? super O, ? extends T> transformer){
-        return null == inputIterator ? Collections.<T> emptyList() : (List<T>) CollectionUtils.collect(inputIterator, transformer);
+        return null == inputIterator ? null : (List<T>) CollectionUtils.collect(inputIterator, transformer);
     }
     //*******************************group*********************************************************
 

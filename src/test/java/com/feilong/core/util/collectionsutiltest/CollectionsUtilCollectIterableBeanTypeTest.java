@@ -106,7 +106,7 @@ public class CollectionsUtilCollectIterableBeanTypeTest{
      */
     @Test
     public void testCollectNullIterable(){
-        assertEquals(emptyList(), CollectionsUtil.collect((List<Long>) null, User.class));
+        assertEquals(null, CollectionsUtil.collect((List<Long>) null, User.class));
     }
 
     /**
