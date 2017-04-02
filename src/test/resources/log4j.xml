@@ -25,7 +25,7 @@
 
 	<appender name="htmlFile" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.html'" />
-		<param name="File" value="D:\\logs\\feilong\\feilong-core\\log.html" />
+		<param name="File" value="${user.home}/feilong/logs/feilong-core/log.html" />
 		<layout class="org.apache.log4j.HTMLLayout">
 			<param name="LocationInfo" value="true" />
 			<param name="Title" value="feilong-common log" />
@@ -34,7 +34,7 @@
 
 	<appender name="logFile" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
-		<param name="File" value="D:\\logs\\feilong\\feilong-core\\log.log" />
+		<param name="File" value="${user.home}/feilong/logs/feilong-core/log.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %t (%F:%L) [%M()] - %m%n" />
 		</layout>
