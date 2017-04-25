@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.util.closure.BeanPropertyValueChangeClosure;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.core.util.transformer.BeanTransformer;
 
@@ -266,6 +267,74 @@ public final class CollectionsUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    /**
+     * 循环将<code>beanIterable</code>每个元素的每个指定属性 <code>propertyName</code>的值改成 <code>propertyValue</code>.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 对于以下购物车全选的代码:
+     * 
+     * <pre class="code">
+     * 
+     * <span style="color:green">//找到需要处理的对象list</span>
+     * List{@code <ShoppingCartLineCommand>} toDoNeedChangeCheckedCommandList = select(
+     *                 needChangeCheckedCommandList,
+     *                 toggleCheckStatusShoppingCartLinePredicateBuilder.build(shoppingCartLineCommandList, checkStatus));
+     * 
+     * <span style="color:green">// 将状态修改成对应状态</span>
+     * for (ShoppingCartLineCommand shoppingCartLineCommand : toDoNeedChangeCheckedCommandList){
+     *     shoppingCartLineCommand.setSettlementState(1);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>此时你还可以:</b>
+     * 
+     * <pre class="code">
+     * <span style="color:green">//找到需要处理的对象list</span>
+     * List{@code <ShoppingCartLineCommand>} toDoNeedChangeCheckedCommandList = select(
+     *                 needChangeCheckedCommandList,
+     *                 toggleCheckStatusShoppingCartLinePredicateBuilder.build(shoppingCartLineCommandList, checkStatus));
+     * 
+     * <span style="color:green">// 将状态修改成对应状态</span>
+     * CollectionsUtil.forEach(toDoNeedChangeCheckedCommandList, "settlementState", 1);
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果 <code>beanIterable</code> 是null或者empty,什么都不做</li>
+     * <li>如果 <code>beanIterable</code> 中有元素是null,将跳过去</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @param <O>
+     *            the element type
+     * @param beanIterable
+     *            beanIterable
+     * @param propertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param propertyValue
+     *            指定属性的属性值
+     * @throws NullPointerException
+     *             如果 <code>propertyName</code> 是null
+     * @throws IllegalArgumentException
+     *             如果 <code>propertyName</code> 是blank
+     * @see org.apache.commons.collections4.IterableUtils#forEach(Iterable, org.apache.commons.collections4.Closure)
+     * @see BeanPropertyValueChangeClosure
+     * @since 1.10.2
+     */
+    public static <O> void forEach(final Iterable<O> beanIterable,String propertyName,Object propertyValue){
+        if (isNotNullOrEmpty(beanIterable)){
+            IterableUtils.forEach(beanIterable, new BeanPropertyValueChangeClosure<O>(propertyName, propertyValue));
+        }
     }
 
     /**
