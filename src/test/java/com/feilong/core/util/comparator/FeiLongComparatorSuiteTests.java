@@ -19,6 +19,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.util.comparator.beancomparatorutiltest.FeiLongBeanComparatorUtilSuiteTests;
+import com.feilong.core.util.comparator.sorthelpertest.FeiLongSortHelperSuiteTests;
+
 /**
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -26,10 +29,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                ParsePropertyNameAndOrderTest.class,
-                IsAscTest.class,
+                FeiLongBeanComparatorUtilSuiteTests.class,
+                FeiLongSortHelperSuiteTests.class,
         //
 })
-public class FeiLongSortHelperSuiteTests{
+public class FeiLongComparatorSuiteTests{
 
 }

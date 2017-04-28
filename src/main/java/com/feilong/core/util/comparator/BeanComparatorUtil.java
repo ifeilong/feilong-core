@@ -15,6 +15,10 @@
  */
 package com.feilong.core.util.comparator;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.comparator.SortHelper.isAsc;
+import static org.apache.commons.collections4.ComparatorUtils.reversedComparator;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -24,8 +28,6 @@ import org.apache.commons.collections4.ComparatorUtils;
 import org.apache.commons.collections4.comparators.FixedOrderComparator;
 import org.apache.commons.collections4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import org.apache.commons.lang3.Validate;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * 专注于 bean 属性值的排序.
@@ -45,30 +47,71 @@ public final class BeanComparatorUtil{
     //*************************************************************************************************
 
     /**
-     * 按照不同指定属性 <code>propertyName</code> 排序的 {@link Comparator}.
+     * 按照不同指定属性 <code>propertyNameAndOrders</code> 排序的 {@link Comparator}.
      *
      * @param <T>
      *            the generic type
-     * @param propertyNames
-     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性对应的value 必须实现 {@link Comparable}接口.
-     * @return the comparator
+     * @param propertyNameAndOrders
+     *            属性名称和排序因子,
+     * 
+     *            <p>
+     *            格式可以是纯的属性名称, 比如 "name"; 也可以是属性名称+排序因子(以空格分隔),比如 "name desc"
+     *            </p>
+     * 
+     *            <h3>说明:</h3>
+     *            <blockquote>
+     * 
+     *            <dl>
+     *            <dt>关于属性名称</dt>
+     *            <dd>
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be
+     *            modified,参见<a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,<br>
+     *            该属性对应的value 必须实现 {@link Comparable}接口.
+     *            </dd>
+     * 
+     *            <dt>关于排序因子</dt>
+     *            <dd>
+     *            可以没有排序因子<br>
+     *            如果有,值可以是asc(顺序),desc(倒序)两种;<br>
+     *            如果没有,默认按照asc(顺序)排序;<br>
+     *            此外,asc/desc忽略大小写
+     *            </dd>
+     * 
+     *            </dl>
+     * 
+     *            </blockquote>
+     * @return 如果propertyNameAndOrders是单值,那么直接调用 {@link #propertyComparator(String)} 返回
      * @throws NullPointerException
-     *             如果 <code>propertyNames</code> 是null,或者有元素是 null
+     *             如果 <code>propertyNameAndOrders</code> 是null,<br>
+     *             或者有元素是 null;
      * @throws IllegalArgumentException
-     *             如果 <code>propertyNames</code> 是empty,或者有元素是 blank
+     *             如果 <code>propertyNameAndOrders</code> 是empty,<br>
+     *             或者有元素是 blank
      * @see org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Collection)
+     * @since 1.10.2 support propertyNameAndOrder
      */
-    public static <T> Comparator<T> chainedComparator(String...propertyNames){
-        Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
+    public static <T> Comparator<T> chainedComparator(String...propertyNameAndOrders){
+        Validate.notEmpty(propertyNameAndOrders, "propertyNameAndOrders can't be null/empty!");
+
+        //如果propertyNameAndOrders是单值,那么直接调用 com.feilong.core.util.comparator.BeanComparatorUtil.propertyComparator(String) 返回
+        if (1 == propertyNameAndOrders.length){
+            return propertyComparator(propertyNameAndOrders[0]);
+        }
+
+        //-------------
 
         List<Comparator<T>> comparators = new ArrayList<>();
-        for (String propertyName : propertyNames){
-            Validate.notBlank(propertyName, "propertyName can't be blank!");
+        for (String propertyNameAndOrder : propertyNameAndOrders){
+            Validate.notBlank(propertyNameAndOrder, "propertyNameAndOrder can't be blank!");
 
-            //注意此处不要使用 propertyComparator(propertyName)  PropertyComparator
-            //因为,上述 PropertyComparator 如果属性值相同 会比较 hashcode值(为了map), 也就是说通常而言会比较出顺序 
-            comparators.add(new BeanComparator<T>(propertyName));
+            String[] propertyNameAndOrderArray = SortHelper.parsePropertyNameAndOrder(propertyNameAndOrder);
+
+            //注意:此处不要使用 propertyComparator(propertyName)
+
+            //因为,PropertyComparator 如果属性值相同,会比较 hashcode值(为了map), 
+            //也就是说通常而言一次就比较出顺序,后续的propertyNameAndOrders 就没太大作用了
+            BeanComparator<T> beanComparator = new BeanComparator<T>(propertyNameAndOrderArray[0]);
+            comparators.add(isAsc(propertyNameAndOrderArray) ? beanComparator : reversedComparator(beanComparator));
         }
         return ComparatorUtils.chainedComparator(comparators);
     }
@@ -79,19 +122,49 @@ public final class BeanComparatorUtil{
      *
      * @param <T>
      *            the generic type
-     * @param propertyName
-     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性对应的value 必须实现 {@link Comparable}接口.
-     * @return the comparator
+     * @param propertyNameAndOrder
+     *            属性名称和排序因子,
+     * 
+     *            <p>
+     *            格式可以是纯的属性名称, 比如 "name"; 也可以是属性名称+排序因子(以空格分隔),比如 "name desc"
+     *            </p>
+     * 
+     *            <h3>说明:</h3>
+     *            <blockquote>
+     * 
+     *            <dl>
+     *            <dt>关于属性名称</dt>
+     *            <dd>
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be
+     *            modified,参见<a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,<br>
+     *            该属性对应的value 必须实现 {@link Comparable}接口.
+     *            </dd>
+     * 
+     *            <dt>关于排序因子</dt>
+     *            <dd>
+     *            可以没有排序因子<br>
+     *            如果有,值可以是asc(顺序),desc(倒序)两种;<br>
+     *            如果没有,默认按照asc(顺序)排序;<br>
+     *            此外,asc/desc忽略大小写
+     *            </dd>
+     * 
+     *            </dl>
+     * 
+     *            </blockquote>
+     * @return {@link PropertyComparator}
      * @throws NullPointerException
-     *             如果 <code>propertyName</code> 是null
+     *             如果 <code>propertyNameAndOrder</code> 是null
      * @throws IllegalArgumentException
-     *             如果 <code>propertyName</code> 是blank
+     *             如果 <code>propertyNameAndOrder</code> 是blank
      * @see PropertyComparator#PropertyComparator(String)
      */
-    public static <T> Comparator<T> propertyComparator(String propertyName){
-        Validate.notBlank(propertyName, "propertyName can't be blank!");
-        return new PropertyComparator<>(propertyName);
+    public static <T> Comparator<T> propertyComparator(String propertyNameAndOrder){
+        Validate.notBlank(propertyNameAndOrder, "propertyNameAndOrder can't be blank!");
+
+        String[] propertyNameAndOrderArray = SortHelper.parsePropertyNameAndOrder(propertyNameAndOrder);
+
+        PropertyComparator<T> propertyComparator = new PropertyComparator<>(propertyNameAndOrderArray[0]);
+        return isAsc(propertyNameAndOrderArray) ? propertyComparator : reversedComparator(propertyComparator);
     }
 
     /**
