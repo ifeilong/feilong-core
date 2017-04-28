@@ -28,76 +28,74 @@ import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.SortUtil.sortListByFixedOrderPropertyValueArray;
+import static com.feilong.core.util.SortUtil.sortListByFixedOrderPropertyValueList;
 
 /**
- * The Class SortUtilSortListByFixedOrderArrayPropertyValuesTest.
+ * The Class SortUtilSortListByFixedOrderListPropertyValuesTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SortUtilSortListByFixedOrderArrayPropertyValuesTest{
+public class SortListByFixedOrderListPropertyValuesTest{
 
     /**
-     * Test sort by fixed order property values.
+     * Test sort by fixed order property value list.
      */
     @Test
-    public void testSortByFixedOrderPropertyValues(){
+    public void testSortByFixedOrderPropertyValueList(){
         User zhangfei = new User("张飞", 23);
         User guanyu = new User("关羽", 30);
         User liubei = new User("刘备", 25);
         List<User> list = toList(zhangfei, guanyu, liubei);
 
-        String[] names = { "刘备", "关羽" };
-        List<User> select2 = CollectionsUtil.select(list, "name", names);
+        List<User> returnList = CollectionsUtil.select(list, "name", toList("刘备", "关羽"));
+        returnList = sortListByFixedOrderPropertyValueList(returnList, "name", toList("刘备", "关羽"));
 
-        assertThat(sortListByFixedOrderPropertyValueArray(select2, "name", names), contains(liubei, guanyu));
+        assertThat(returnList, contains(liubei, guanyu));
     }
 
     /**
-     * Test sort by fixed order property values null list.
+     * Test sort by fixed order property value list null list.
      */
     @Test
-    public void testSortByFixedOrderPropertyValuesNullList(){
-        String[] names = { "刘备", "关羽" };
-        assertEquals(emptyList(), sortListByFixedOrderPropertyValueArray(null, "name", names));
+    public void testSortByFixedOrderPropertyValueListNullList(){
+        assertEquals(emptyList(), sortListByFixedOrderPropertyValueList(null, "name", toList("刘备", "关羽")));
     }
 
     /**
-     * Test sort by fixed order property values null property name.
+     * Test sort by fixed order property value list null property name.
      */
     @Test(expected = NullPointerException.class)
-    public void testSortByFixedOrderPropertyValuesNullPropertyName(){
+    public void testSortByFixedOrderPropertyValueListNullPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
-        sortListByFixedOrderPropertyValueArray(list, null, "刘备", "关羽");
+        sortListByFixedOrderPropertyValueList(list, null, toList("刘备", "关羽"));
     }
 
     /**
-     * Test sort by fixed order property values empty property name.
+     * Test sort by fixed order property value list empty property name.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSortByFixedOrderPropertyValuesEmptyPropertyName(){
+    public void testSortByFixedOrderPropertyValueListEmptyPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
-        sortListByFixedOrderPropertyValueArray(list, "", "刘备", "关羽");
+        sortListByFixedOrderPropertyValueList(list, "", toList("刘备", "关羽"));
     }
 
     /**
-     * Test sort by fixed order property values blank property name.
+     * Test sort by fixed order property value list blank property name.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSortByFixedOrderPropertyValuesBlankPropertyName(){
+    public void testSortByFixedOrderPropertyValueListBlankPropertyName(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
-        sortListByFixedOrderPropertyValueArray(list, " ", "刘备", "关羽");
+        sortListByFixedOrderPropertyValueList(list, " ", toList("刘备", "关羽"));
     }
 
     //****
 
     /**
-     * Test sort by fixed order property values null property values.
+     * Test sort by fixed order property value list null property values.
      */
     @Test(expected = NullPointerException.class)
-    public void testSortByFixedOrderPropertyValuesNullPropertyValues(){
+    public void testSortByFixedOrderPropertyValueListNullPropertyValues(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
-        sortListByFixedOrderPropertyValueArray(list, "name", (Object[]) null);
+        sortListByFixedOrderPropertyValueList(list, "name", (List<String>) null);
     }
-
 }

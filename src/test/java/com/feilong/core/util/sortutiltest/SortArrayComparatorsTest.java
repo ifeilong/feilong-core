@@ -34,7 +34,7 @@ import static com.feilong.core.util.SortUtil.sortArray;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SortUtilSortArrayComparatorsTest{
+public class SortArrayComparatorsTest{
 
     /**
      * Test sort array comparators test.

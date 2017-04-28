@@ -35,7 +35,7 @@ import static com.feilong.core.util.SortUtil.sortMap;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SortUtilSortMapComparatorTest{
+public class SortMapComparatorTest{
 
     /**
      * Test sort.

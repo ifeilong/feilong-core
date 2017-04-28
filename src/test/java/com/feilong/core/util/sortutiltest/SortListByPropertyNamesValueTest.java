@@ -35,7 +35,7 @@ import static com.feilong.core.util.SortUtil.sortListByPropertyNamesValue;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SortUtilSortListByPropertyNamesValueTest{
+public class SortListByPropertyNamesValueTest{
 
     /**
      * Test property comparator.

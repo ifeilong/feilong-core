@@ -15,43 +15,44 @@
  */
 package com.feilong.core.util.sortutiltest;
 
-import static java.util.Collections.emptyMap;
-import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
-import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.util.SortUtil.sortArray;
 
 /**
- * The Class SortUtilSortMapByValueDescTest.
+ * The Class SortUtilSortArrayTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SortUtilSortMapByValueDescTest{
+public class SortArrayTest{
 
     /**
-     * Test sort by value desc.
+     * Test sort array null array.
      */
     @Test
-    public void testSortByValueDesc(){
-        Map<String, Integer> map = new LinkedHashMap<>();
-        map.put("a", 123);
-        map.put("c", 345);
-        map.put("b", 8);
-
-        assertThat(sortMapByValueDesc(map).keySet(), contains("c", "a", "b"));
+    public final void testSortArrayNullArray(){
+        assertEquals(ArrayUtils.EMPTY_OBJECT_ARRAY, sortArray((Object[]) null));
     }
 
     /**
-     * Test sort by value desc null map.
+     * Test sort array null.
      */
     @Test
-    public void testSortByValueDescNullMap(){
-        assertEquals(emptyMap(), sortMapByValueDesc(null));
+    public final void testSortArrayNull(){
+        assertEquals(toArray((String) null), sortArray(toArray((String) null)));
+    }
+
+    /**
+     * Test sort T array.
+     */
+    @Test
+    public final void testSortTArray(){
+        Integer[] array = toArray(100, 2, 200, 1, 500);
+        sortArray(array);
+        assertEquals(toArray(1, 2, 100, 200, 500), array);
     }
 }

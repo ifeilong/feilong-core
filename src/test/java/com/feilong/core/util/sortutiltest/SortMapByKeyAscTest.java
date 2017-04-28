@@ -35,7 +35,7 @@ import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SortUtilSortMapByKeyAscTest{
+public class SortMapByKeyAscTest{
 
     /**
      * Test sort by key asc.

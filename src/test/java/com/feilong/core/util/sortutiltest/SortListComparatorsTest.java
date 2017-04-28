@@ -39,7 +39,7 @@ import static com.feilong.core.util.SortUtil.sortList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SortUtilSortListComparatorsTest{
+public class SortListComparatorsTest{
 
     /**
      * Test sort list comparators.
