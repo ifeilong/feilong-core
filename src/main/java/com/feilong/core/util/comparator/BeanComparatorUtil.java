@@ -170,10 +170,10 @@ public final class BeanComparatorUtil{
     /**
      * 指定属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code> 排序的 {@link Comparator}.
      *
-     * @param <V>
-     *            the value type
      * @param <T>
      *            the generic type
+     * @param <V>
+     *            the value type
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性对应的value 必须实现 {@link Comparable}接口.
@@ -187,7 +187,7 @@ public final class BeanComparatorUtil{
      * @see #propertyComparator(String, List)
      */
     @SafeVarargs
-    public static <V, T> Comparator<T> propertyComparator(String propertyName,V...propertyValues){
+    public static <T, V> Comparator<T> propertyComparator(String propertyName,V...propertyValues){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         Validate.notNull(propertyValues, "propertyValues can't be null!");
         return propertyComparator(propertyName, toList(propertyValues));
@@ -200,10 +200,10 @@ public final class BeanComparatorUtil{
      * 调用 {@link #propertyComparator(String, List, UnknownObjectBehavior)},默认 {@link UnknownObjectBehavior#AFTER}
      * </p>
      *
-     * @param <V>
-     *            the value type
      * @param <T>
      *            the generic type
+     * @param <V>
+     *            the value type
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性对应的value 必须实现 {@link Comparable}接口.
@@ -216,7 +216,7 @@ public final class BeanComparatorUtil{
      *             如果 <code>propertyName</code> 是blank
      * @see #propertyComparator(String, List, UnknownObjectBehavior)
      */
-    public static <V, T> Comparator<T> propertyComparator(String propertyName,List<V> propertyValues){
+    public static <T, V> Comparator<T> propertyComparator(String propertyName,List<V> propertyValues){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         Validate.notNull(propertyValues, "propertyValues can't be null!");
         return propertyComparator(propertyName, propertyValues, UnknownObjectBehavior.AFTER);
@@ -225,10 +225,10 @@ public final class BeanComparatorUtil{
     /**
      * 指定属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code>,并且可以指定 <code>unknownObjectBehavior</code> 排序的 {@link Comparator}.
      *
-     * @param <V>
-     *            the value type
      * @param <T>
      *            the generic type
+     * @param <V>
+     *            the value type
      * @param propertyName
      *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,该属性对应的value 必须实现 {@link Comparable}接口.
@@ -237,7 +237,6 @@ public final class BeanComparatorUtil{
      * @param unknownObjectBehavior
      *            the unknown object behavior
      * @return the comparator
-     * 
      * @throws NullPointerException
      *             如果 <code>propertyName</code> 是null,或者<code>propertyValues</code> 是null
      * @throws IllegalArgumentException
@@ -246,7 +245,7 @@ public final class BeanComparatorUtil{
      * @see FixedOrderComparator#FixedOrderComparator(List)
      * @since 1.8.2
      */
-    public static <V, T> Comparator<T> propertyComparator(
+    public static <T, V> Comparator<T> propertyComparator(
                     String propertyName,
                     List<V> propertyValues,
                     UnknownObjectBehavior unknownObjectBehavior){
