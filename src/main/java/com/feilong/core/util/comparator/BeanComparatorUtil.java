@@ -135,7 +135,7 @@ public final class BeanComparatorUtil{
      *            <dl>
      *            <dt>关于属性名称</dt>
      *            <dd>
-     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be
+     *            泛型T对象的属性名称,Possibly indexed and/or nested name of the property to be
      *            modified,参见<a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,<br>
      *            该属性对应的value 必须实现 {@link Comparable}接口.
      *            </dd>

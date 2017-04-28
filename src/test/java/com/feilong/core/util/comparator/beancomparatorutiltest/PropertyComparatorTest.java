@@ -15,21 +15,30 @@
  */
 package com.feilong.core.util.comparator.beancomparatorutiltest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.Test;
+
+import com.feilong.core.util.comparator.BeanComparatorUtil;
 
 /**
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.10.2
  */
-@RunWith(Suite.class)
-@SuiteClasses({ //
+public class PropertyComparatorTest{
 
-                PropertyComparatorTest.class,
-                ChainedComparatorTest.class,
-        //
-})
-public class FeiLongBeanComparatorUtilSuiteTests{
+    //--------
+    @Test(expected = NullPointerException.class)
+    public void testPropertyNameAndOrdersNull(){
+        BeanComparatorUtil.propertyComparator(null);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testPropertyNameAndOrdersEmpty(){
+        BeanComparatorUtil.propertyComparator("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testPropertyNameAndOrdersBlank(){
+        BeanComparatorUtil.propertyComparator(" ");
+    }
 }
