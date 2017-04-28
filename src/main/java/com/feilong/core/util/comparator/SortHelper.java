@@ -64,6 +64,7 @@ public final class SortHelper{
      * 
      * SortHelper.parsePropertyNameAndOrder("name asc") = toArray("name", "aSc");
      * SortHelper.parsePropertyNameAndOrder("name aSc") = toArray("name", "asc");
+     * SortHelper.parsePropertyNameAndOrder("name   aSc") = toArray("name", "asc");
      * 
      * SortHelper.parsePropertyNameAndOrder("name desc") = toArray("name", "desc");
      * 

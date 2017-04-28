@@ -44,6 +44,7 @@ public class ParsePropertyNameAndOrderTest{
     public void testParsePropertyNameAndOrderAsc(){
         assertArrayEquals(toArray("name", "asc"), SortHelper.parsePropertyNameAndOrder("name asc"));
         assertArrayEquals(toArray("name", "aSc"), SortHelper.parsePropertyNameAndOrder("name aSc"));
+        assertArrayEquals(toArray("name", "aSc"), SortHelper.parsePropertyNameAndOrder("name   aSc"));
     }
 
     @Test
