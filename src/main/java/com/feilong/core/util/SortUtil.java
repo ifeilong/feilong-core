@@ -15,6 +15,10 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 
@@ -30,11 +34,6 @@ import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.util.comparator.BeanComparatorUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * 专注于排序的工具类.
@@ -401,15 +400,60 @@ public final class SortUtil{
      * ]
      * </pre>
      * 
+     * 你还可以
+     * 
+     * <p>
+     * <b>场景:</b> 将user list 先按照 id desc 再按照 age asc 进行排序
+     * </p>
+     * 
+     * <pre class="code">
+     * User id12_age18 = new User(12L, 18);
+     * User id1_age8 = new User(1L, 8);
+     * User id2_age30 = new User(2L, 30);
+     * User id2_age2 = new User(2L, 2);
+     * User id2_age36 = new User(2L, 36);
+     * List{@code <User>} list = toList(id12_age18, id2_age36, id2_age2, id2_age30, id1_age8);
+     * 
+     * sortListByPropertyNamesValue(list, "id desc", "age");
+     * 
+     * assertThat(list, contains(id12_age18, id2_age2, id2_age30, id2_age36, id1_age8));
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param <O>
      *            the generic type
      * @param list
      *            the list
-     * @param propertyNames
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param propertyNameAndOrders
+     *            属性名称和排序因子,
+     * 
+     *            <p>
+     *            格式可以是纯的属性名称, 比如 "name"; 也可以是属性名称+排序因子(以空格分隔),比如 "name desc"
+     *            </p>
+     * 
+     *            <h3>说明:</h3>
+     *            <blockquote>
+     * 
+     *            <dl>
+     *            <dt>关于属性名称</dt>
+     *            <dd>
+     *            泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be
+     *            modified,参见<a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,<br>
+     *            该属性对应的value 必须实现 {@link Comparable}接口.
+     *            </dd>
+     * 
+     *            <dt>关于排序因子</dt>
+     *            <dd>
+     *            可以没有排序因子<br>
+     *            如果有,值可以是asc(顺序),desc(倒序)两种;<br>
+     *            如果没有,默认按照asc(顺序)排序;<br>
+     *            此外,asc/desc忽略大小写
+     *            </dd>
+     * 
+     *            </dl>
+     * 
+     *            </blockquote>
      * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
      * @throws NullPointerException
      *             如果 <code>propertyNames</code> 是null
@@ -420,17 +464,15 @@ public final class SortUtil{
      * @see #sortList(List, Comparator...)
      * @since 1.8.7 change name
      */
-    public static <O> List<O> sortListByPropertyNamesValue(List<O> list,String...propertyNames){
+    public static <O> List<O> sortListByPropertyNamesValue(List<O> list,String...propertyNameAndOrders){
         if (null == list){
             return emptyList();
         }
-        Validate.notEmpty(propertyNames, "propertyNames can't be null/empty!");
-        Validate.noNullElements(propertyNames, "propertyNames:%s has empty value", propertyNames);
+        Validate.notEmpty(propertyNameAndOrders, "propertyNameAndOrders can't be null/empty!");
+        Validate.noNullElements(propertyNameAndOrders, "propertyNameAndOrders:[%s] has empty value", propertyNameAndOrders);
 
-        return sortList(
-                        list,
-                        1 == propertyNames.length ? BeanComparatorUtil.<O> propertyComparator(propertyNames[0])
-                                        : BeanComparatorUtil.<O> chainedComparator(propertyNames));
+        Comparator<O> comparator = BeanComparatorUtil.chainedComparator(propertyNameAndOrders);
+        return sortList(list, comparator);
     }
 
     //*************************************************************************************************

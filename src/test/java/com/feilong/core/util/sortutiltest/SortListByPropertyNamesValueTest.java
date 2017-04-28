@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.SortUtil.sortListByPropertyNamesValue;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -27,15 +29,40 @@ import org.junit.Test;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.SortUtil.sortListByPropertyNamesValue;
-
 /**
  * The Class SortUtilSortListByPropertyNamesValueTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class SortListByPropertyNamesValueTest{
+
+    @Test
+    public void testSortByPropertyNamesValueWithNullPropertyValueDesc(){
+        User u_null_id = new User((Long) null);
+        User id12 = new User(12L);
+        User id2 = new User(2L);
+        User u_null = null;
+        User id1 = new User(1L);
+
+        List<User> list = toList(u_null_id, id12, id2, u_null, id1, u_null_id);
+        sortListByPropertyNamesValue(list, "id desc");
+        assertThat(list, contains(u_null, id12, id2, id1, u_null_id, u_null_id));
+
+    }
+
+    @Test
+    public void testSortByPropertyNamesValueWithNullPropertyValueAsc(){
+        User u_null_id = new User((Long) null);
+        User id12 = new User(12L);
+        User id2 = new User(2L);
+        User u_null = null;
+        User id1 = new User(1L);
+
+        List<User> list = toList(u_null_id, id12, id2, u_null, id1, u_null_id);
+        sortListByPropertyNamesValue(list, "id asc");
+        assertThat(list, contains(u_null_id, u_null_id, id1, id2, id12, u_null));
+    }
+    //
 
     /**
      * Test property comparator.
@@ -71,6 +98,19 @@ public class SortListByPropertyNamesValueTest{
     /**
      * Test sort by property names value 2 property names.
      */
+    @Test
+    public void testSortByPropertyNamesValue2PropertyNamesIdDesc(){
+        User id12_age18 = new User(12L, 18);
+        User id1_age8 = new User(1L, 8);
+        User id2_age30 = new User(2L, 30);
+        User id2_age2 = new User(2L, 2);
+        User id2_age36 = new User(2L, 36);
+        List<User> list = toList(id12_age18, id2_age36, id2_age2, id2_age30, id1_age8);
+
+        sortListByPropertyNamesValue(list, "id desc", "age");
+        assertThat(list, contains(id12_age18, id2_age2, id2_age30, id2_age36, id1_age8));
+    }
+
     @Test
     public void testSortByPropertyNamesValue2PropertyNames(){
         User id12_age18 = new User(12L, 18);
