@@ -32,7 +32,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class StringUtilFormatParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Object[], String>{
+public class FormatParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Object[], String>{
 
     /**
      * Test format.

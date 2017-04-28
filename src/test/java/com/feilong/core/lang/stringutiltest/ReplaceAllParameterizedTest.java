@@ -32,7 +32,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class StringUtilReplaceAllParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
+public class ReplaceAllParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
 
     /**
      * Test replace all.

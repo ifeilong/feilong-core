@@ -15,21 +15,20 @@
  */
 package com.feilong.core.lang.stringutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static org.junit.Assert.assertArrayEquals;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
 import com.feilong.core.lang.StringUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class StringUtilTokenizeToStringArrayWithArgsTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class StringUtilTokenizeToStringArrayWithArgsTest{
+public class TokenizeToStringArrayWithArgsTest{
     //******************com.feilong.core.lang.StringUtil.tokenizeToStringArray(String, String, boolean, boolean)**************************************************************************************
 
     /**
@@ -48,7 +47,7 @@ public class StringUtilTokenizeToStringArrayWithArgsTest{
     @Test
     public void tokenizeToStringArray22(){
         String delimiters = "@";
-        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray(null, delimiters, false, false));
+        assertArrayEquals(EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray(null, delimiters, false, false));
     }
 
     //    @Test

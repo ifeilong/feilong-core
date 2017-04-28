@@ -22,20 +22,25 @@ import org.junit.Test;
 import com.feilong.core.lang.StringUtil;
 
 /**
- * The Class StringUtilSubstringLastTest.
- *
+ * The Class StringUtilTest.
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class StringUtilSubstringLastTest{
+public class SubstringBeginIndexTest{
 
     /** <code>{@value}</code>. */
     private static final String TEXT = "jinxin.feilong";
 
     /**
-     * Test substring last.
+     * Substring.
      */
     @Test
-    public void testSubstringLast(){
-        assertEquals("ilong", StringUtil.substringLast(TEXT, 5));
+    public void substring(){
+        assertEquals(
+                        "src/main/java/com/jumbo/shop/web/command/PageCacheCommand.java",
+                        StringUtil.substring("Index: src/main/java/com/jumbo/shop/web/command/PageCacheCommand.java", "Index: ".length()));
+        assertEquals(".feilong", StringUtil.substring(TEXT, "jinxin".length()));
+        assertEquals(".feilong", StringUtil.substring(TEXT, 6));
+        assertEquals("ng", StringUtil.substring(TEXT, -2));
     }
 }

@@ -26,7 +26,7 @@ import com.feilong.core.lang.StringUtil;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class StringUtilSubstringWithoutLastLastLengthTest{
+public class SubstringWithoutLastLastLengthTest{
 
     /** <code>{@value}</code>. */
     private static final String TEXT = "jinxin.feilong";

@@ -15,21 +15,20 @@
  */
 package com.feilong.core.lang.stringutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static org.junit.Assert.assertArrayEquals;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 
 import com.feilong.core.lang.StringUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class StringUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class StringUtilTokenizeToStringArrayTest{
+public class TokenizeToStringArrayTest{
 
     //*****************com.feilong.core.lang.StringUtil.tokenizeToStringArray(String, String)************************************************************************************
 
@@ -51,7 +50,7 @@ public class StringUtilTokenizeToStringArrayTest{
     @Test
     public void tokenizeToStringArray1(){
         String delimiters = ";, .";
-        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray(null, delimiters));
+        assertArrayEquals(EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray(null, delimiters));
     }
 
     /**
@@ -60,7 +59,7 @@ public class StringUtilTokenizeToStringArrayTest{
     @Test
     public void tokenizeToStringArray11(){
         String delimiters = " ";
-        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters));
+        assertArrayEquals(EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters));
     }
 
     /**
@@ -69,6 +68,6 @@ public class StringUtilTokenizeToStringArrayTest{
     @Test
     public void tokenizeToStringArray112(){
         String delimiters = ",";
-        assertArrayEquals(ArrayUtils.EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters));
+        assertArrayEquals(EMPTY_STRING_ARRAY, StringUtil.tokenizeToStringArray("   ", delimiters));
     }
 }

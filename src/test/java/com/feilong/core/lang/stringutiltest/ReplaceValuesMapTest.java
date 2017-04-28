@@ -26,7 +26,7 @@ import org.junit.Test;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.store.member.User;
 
-public class StringUtilReplaceValuesMapTest{
+public class ReplaceValuesMapTest{
 
     @Test
     public void testReplace(){

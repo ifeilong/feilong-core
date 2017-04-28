@@ -26,17 +26,17 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                StringUtilFormatParameterizedTest.class,
-                StringUtilReplaceAllParameterizedTest.class,
-                StringUtilReplaceParameterizedTest.class,
-                StringUtilReplaceValuesMapTest.class,
-                StringUtilSubstringBeginIndexTest.class,
-                StringUtilSubstringLastTest.class,
-                StringUtilSubstringStartIndexAndLengthParameterizedTest.class,
-                StringUtilSubstringWithoutLastLastLengthTest.class,
-                StringUtilSubstringWithoutLastLastStringTest.class,
-                StringUtilTokenizeToStringArrayTest.class,
-                StringUtilTokenizeToStringArrayWithArgsTest.class,
+                FormatParameterizedTest.class,
+                ReplaceAllParameterizedTest.class,
+                ReplaceParameterizedTest.class,
+                ReplaceValuesMapTest.class,
+                SubstringBeginIndexTest.class,
+                SubstringLastTest.class,
+                SubstringStartIndexAndLengthParameterizedTest.class,
+                SubstringWithoutLastLastLengthTest.class,
+                SubstringWithoutLastLastStringTest.class,
+                TokenizeToStringArrayTest.class,
+                TokenizeToStringArrayWithArgsTest.class,
         //
 })
 public class FeiLongStringUtilSuiteTests{
