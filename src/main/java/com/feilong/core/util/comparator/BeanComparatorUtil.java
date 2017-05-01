@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.collections4.ComparatorUtils;
+import org.apache.commons.collections4.comparators.ComparableComparator;
 import org.apache.commons.collections4.comparators.FixedOrderComparator;
 import org.apache.commons.collections4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import org.apache.commons.lang3.Validate;
@@ -110,7 +111,10 @@ public final class BeanComparatorUtil{
 
             //因为,PropertyComparator 如果属性值相同,会比较 hashcode值(为了map), 
             //也就是说通常而言一次就比较出顺序,后续的propertyNameAndOrders 就没太大作用了
-            BeanComparator<T> beanComparator = new BeanComparator<T>(propertyNameAndOrderArray[0]);
+
+            Comparator instance = ComparatorUtils.nullHighComparator(ComparableComparator.comparableComparator()); //null排在最后面  
+
+            BeanComparator<T> beanComparator = new BeanComparator<T>(propertyNameAndOrderArray[0], instance);
             comparators.add(isAsc(propertyNameAndOrderArray) ? beanComparator : reversedComparator(beanComparator));
         }
         return ComparatorUtils.chainedComparator(comparators);
