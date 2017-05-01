@@ -114,7 +114,7 @@ public final class BeanComparatorUtil{
 
             Comparator instance = ComparatorUtils.nullHighComparator(ComparableComparator.comparableComparator()); //null排在最后面  
 
-            BeanComparator<T> beanComparator = new BeanComparator<T>(propertyNameAndOrderArray[0], instance);
+            BeanComparator<T> beanComparator = new BeanComparator<>(propertyNameAndOrderArray[0], instance);
             comparators.add(isAsc(propertyNameAndOrderArray) ? beanComparator : reversedComparator(beanComparator));
         }
         return ComparatorUtils.chainedComparator(comparators);
