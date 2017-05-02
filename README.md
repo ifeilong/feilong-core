@@ -56,7 +56,7 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 	....
 	<properties>
-		<version.feilong-platform>1.10.1</version.feilong-platform>
+		<version.feilong-platform>1.10.2</version.feilong-platform>
 		....
 	</properties>
 	
