@@ -36,21 +36,42 @@ import com.feilong.core.lang.reflect.ReflectException;
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
+ * <th align="left">示例</th>
  * </tr>
  * 
  * <tr valign="top">
- * <td>{@link java.lang.Class#getCanonicalName() getCanonicalName()}<br>
- * 返回 Java Language Specification 中所定义的底层类的规范化名称</td>
+ * <td>{@link java.lang.Class#getCanonicalName() getCanonicalName()}</td>
+ * <td>返回 <b>Java Language Specification</b> 中所定义的底层类的规范化名称。<br>
+ * 如果底层类没有规范化名称（即如果底层类是一个组件类型没有规范化名称的本地类、匿名类或数组），则返回 null。</td>
  * <td>"com.feilong.core.date.DatePattern"</td>
  * </tr>
  * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link java.lang.Class#getName() getName()}</td>
+ * <td>除了数组外，其他的类都是输出类全名,以 String 的形式返回此 Class 对象所表示的实体（类、接口、数组类、基本类型或 void）名称。
+ * 
+ * <dl>
+ * <dt>1、此类对象表示的是非数组类型的引用类型</dt>
+ * <dd>返回该类的二进制名称，Java Language Specification, Second Edition 对此作了详细说明。</dd>
+ * 
+ * <dt>2、此类对象表示一个基本类型或 void</dt>
+ * <dd>返回的名字是一个与该基本类型或 void 所对应的 Java 语言关键字相同的 String。</dd>
+ * 
+ * <dt>3、此类对象表示一个数组类</dt>
+ * <dd>名字的内部形式为：表示该数组嵌套深度的一个或多个 '[' 字符加元素类型名。</dd>
+ * </dl>
+ * 
+ * </td>
  * <td>"com.feilong.core.date.DatePattern"</td>
  * </tr>
  * 
  * <tr valign="top">
  * <td>{@link java.lang.Class#getSimpleName() getSimpleName()}</td>
+ * <td>
+ * 返回<b>源代码中</b>给出的底层类的简称。<br>
+ * 如果底层类是匿名的则返回一个空字符串。<br>
+ * 数组的简称即附带 "[]" 的组件类型的简称。特别地，组件类型为匿名的数组的简称是 "[]"。
+ * </td>
  * <td>"DatePattern"</td>
  * </tr>
  * 
@@ -109,6 +130,7 @@ import com.feilong.core.lang.reflect.ReflectException;
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="http://www.cnblogs.com/maokun/p/6771365.html">Class的getName、getSimpleName与getCanonicalName的区别</a>
  * @see org.apache.commons.lang3.ClassUtils
  * @since 1.0.0
  */
