@@ -508,7 +508,8 @@ public final class ThreadUtil{
             }
         }catch (InterruptedException e){
             LOGGER.error("", e);
-            throw new RuntimeException(e);//XXX 是否有更合适的异常
+            // clean up state...
+            Thread.currentThread().interrupt();
         }
     }
 
