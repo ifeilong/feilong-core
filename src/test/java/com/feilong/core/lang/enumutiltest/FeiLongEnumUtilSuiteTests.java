@@ -26,11 +26,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                EnumUtilGetEnumByPropertyValueTest.class,
-                EnumUtilGetEnumByPropertyValueParameterizedTest.class,
+                GetEnumByPropertyValueTest.class,
+                GetEnumByPropertyValueParameterizedTest.class,
 
-                EnumUtilGetEnumByPropertyValueIgnoreCaseTest.class,
-                EnumUtilGetEnumByPropertyValueIgnoreCaseParameterizedTest.class,
+                GetEnumByPropertyValueIgnoreCaseTest.class,
+                GetEnumByPropertyValueIgnoreCaseParameterizedTest.class,
         //
 })
 public class FeiLongEnumUtilSuiteTests{

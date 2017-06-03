@@ -26,21 +26,21 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-                NumberUtilSetScaleTest.class,
-                NumberUtilSetScaleParameterizedTest.class,
-                NumberUtilSetScaleRoundingModeParameterizedTest.class,
+                SetScaleTest.class,
+                SetScaleParameterizedTest.class,
+                SetScaleRoundingModeParameterizedTest.class,
 
-                NumberUtilGetAddValueTest.class,
-                NumberUtilGetMultiplyValueTest.class,
-                NumberUtilGetMultiplyValueParameterizedTest.class,
-                NumberUtilGetDivideValueTest.class,
-                NumberUtilGetDivideValueParameterizedTest.class,
+                GetAddValueTest.class,
+                GetMultiplyValueTest.class,
+                GetMultiplyValueParameterizedTest.class,
+                GetDivideValueTest.class,
+                GetDivideValueParameterizedTest.class,
 
-                NumberUtilGetProgressTest.class,
-                NumberUtilGetProgressParameterizedTest.class,
+                GetProgressTest.class,
+                GetProgressParameterizedTest.class,
 
-                NumberUtilToStringTest.class,
-                NumberUtilToStringParameterizedTest.class,
+                ToStringTest.class,
+                ToStringParameterizedTest.class,
         //
 })
 public class FeiLongNumberUtilSuiteTests{

@@ -26,8 +26,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                ArrayUtilGetElementTest.class,
-                ArrayUtilNewArrayTest.class,
+                GetElementTest.class,
+                NewArrayTest.class,
         //
 })
 public class FeiLongArrayUtilSuiteTests{

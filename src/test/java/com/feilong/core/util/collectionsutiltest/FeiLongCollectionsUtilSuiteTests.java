@@ -27,39 +27,39 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-                CollectionsUtilAddAllIgnoreNullTest.class,
-                CollectionsUtilAddIgnoreNullOrEmptyTest.class,
+                AddAllIgnoreNullTest.class,
+                AddIgnoreNullOrEmptyTest.class,
 
-                CollectionsUtilIndexOfTest.class,
+                IndexOfTest.class,
 
-                CollectionsUtilCollectIterableTest.class,
-                CollectionsUtilCollectIterableBeanTypeTest.class,
-                CollectionsUtilCollectIteratorTest.class,
+                CollectIterableTest.class,
+                CollectIterableBeanTypeTest.class,
+                CollectIteratorTest.class,
 
-                CollectionsUtilFindTest.class,
-                CollectionsUtilFindWithPredicateTest.class,
+                FindTest.class,
+                FindWithPredicateTest.class,
 
-                CollectionsUtilGetPropertyValueListTest.class,
-                CollectionsUtilGetPropertyValueSetTest.class,
-                CollectionsUtilGetPropertyValueMapTest.class,
+                GetPropertyValueListTest.class,
+                GetPropertyValueSetTest.class,
+                GetPropertyValueMapTest.class,
 
-                CollectionsUtilGroupWithPropertyNameTest.class,
-                CollectionsUtilGroupWithPropertyNameAndPredicateTest.class,
-                CollectionsUtilGroupWithTransformerTest.class,
-                CollectionsUtilGroupWithTransformerAndPredicateTest.class,
-                CollectionsUtilGroupOneTest.class,
+                GroupWithPropertyNameTest.class,
+                GroupWithPropertyNameAndPredicateTest.class,
+                GroupWithTransformerTest.class,
+                GroupWithTransformerAndPredicateTest.class,
+                GroupOneTest.class,
 
-                CollectionsUtilSelectPredicateTest.class,
-                CollectionsUtilSelectArrayTest.class,
-                CollectionsUtilSelectCollectionTest.class,
+                SelectPredicateTest.class,
+                SelectArrayTest.class,
+                SelectCollectionTest.class,
 
-                CollectionsUtilSelectRejectedArrayTest.class,
-                CollectionsUtilSelectRejectedCollectionTest.class,
-                CollectionsUtilSelectRejectedPredicateTest.class,
+                SelectRejectedArrayTest.class,
+                SelectRejectedCollectionTest.class,
+                SelectRejectedPredicateTest.class,
 
-                CollectionsUtilRemoveDuplicateTest.class,
-                CollectionsUtilRemoveElementTest.class,
-                CollectionsUtilRemoveAllCollectionTest.class,
+                RemoveDuplicateTest.class,
+                RemoveElementTest.class,
+                RemoveAllCollectionTest.class,
 
                 ForEachTest.class,
         //

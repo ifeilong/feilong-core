@@ -26,8 +26,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                TypeUtilGetGenericInterfacesParameterizedRawTypesTest.class,
-                TypeUtilGetGenericSuperclassParameterizedRawTypesTest.class,
+                GetGenericInterfacesParameterizedRawTypesTest.class,
+                GetGenericSuperclassParameterizedRawTypesTest.class,
         //
 })
 

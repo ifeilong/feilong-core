@@ -26,62 +26,62 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-                DateUtilGetFirstDateOfThisYearTest.class,
-                DateUtilGetFirstDateOfThisMonthTest.class,
-                DateUtilGetFirstDateOfThisWeekTest.class,
-                DateUtilGetFirstDateOfThisDayTest.class,
+                GetFirstDateOfThisYearTest.class,
+                GetFirstDateOfThisMonthTest.class,
+                GetFirstDateOfThisWeekTest.class,
+                GetFirstDateOfThisDayTest.class,
 
-                DateUtilGetLastDateOfThisYearTest.class,
-                DateUtilGetLastDateOfThisMonthTest.class,
-                DateUtilGetLastDateOfThisWeekTest.class,
-                DateUtilGetLastDateOfThisDayTest.class,
-
-                //*********************************************
-                DateUtilGetYearTest.class,
-                DateUtilGetMonthTest.class,
-                DateUtilGetWeekOfYearTest.class,
-
-                DateUtilGetDayOfYearTest.class,
-                DateUtilGetDayOfMonthTest.class,
-                DateUtilGetDayOfWeekTest.class,
-
-                DateUtilGetHourOfYearTest.class,
-                DateUtilGetHourOfDayTest.class,
-                DateUtilGetMinuteTest.class,
-                DateUtilGetSecondOfDayTest.class,
-                DateUtilGetSecondOfHourTest.class,
-                DateUtilGetSecondTest.class,
-                DateUtilGetTimeTest.class,
+                GetLastDateOfThisYearTest.class,
+                GetLastDateOfThisMonthTest.class,
+                GetLastDateOfThisWeekTest.class,
+                GetLastDateOfThisDayTest.class,
 
                 //*********************************************
-                DateUtilGetYearParameterizedTest.class,
-                DateUtilGetMonthParameterizedTest.class,
-                DateUtilGetWeekOfYearParameterizedTest.class,
-                DateUtilGetDayOfYearParameterizedTest.class,
-                DateUtilGetDayOfMonthParameterizedTest.class,
-                DateUtilGetDayOfWeekParameterizedTest.class,
+                GetYearTest.class,
+                GetMonthTest.class,
+                GetWeekOfYearTest.class,
 
-                DateUtilAddTest.class,
+                GetDayOfYearTest.class,
+                GetDayOfMonthTest.class,
+                GetDayOfWeekTest.class,
 
-                DateUtilAddYearParameterizedTest.class,
-                DateUtilAddMonthParameterizedTest.class,
-                DateUtilAddWeekParameterizedTest.class,
-                DateUtilAddDayParameterizedTest.class,
+                GetHourOfYearTest.class,
+                GetHourOfDayTest.class,
+                GetMinuteTest.class,
+                GetSecondOfDayTest.class,
+                GetSecondOfHourTest.class,
+                GetSecondTest.class,
+                GetTimeTest.class,
 
-                DateUtilAddHourParameterizedTest.class,
-                DateUtilAddMinuteParameterizedTest.class,
-                DateUtilAddSecondParameterizedTest.class,
-                DateUtilAddMillisecondParameterizedTest.class,
+                //*********************************************
+                GetYearParameterizedTest.class,
+                GetMonthParameterizedTest.class,
+                GetWeekOfYearParameterizedTest.class,
+                GetDayOfYearParameterizedTest.class,
+                GetDayOfMonthParameterizedTest.class,
+                GetDayOfWeekParameterizedTest.class,
 
-                DateUtilIsLeapYearParameterizedTest.class,
-                DateUtilIsInTimeTest.class,
+                AddTest.class,
 
-                DateUtilIsBeforeTest.class,
-                DateUtilIsAfterTest.class,
-                DateUtilIsEqualsTest.class,
+                AddYearParameterizedTest.class,
+                AddMonthParameterizedTest.class,
+                AddWeekParameterizedTest.class,
+                AddDayParameterizedTest.class,
 
-                DateUtilToDateTest.class,
-                DateUtilToStringTest.class,
+                AddHourParameterizedTest.class,
+                AddMinuteParameterizedTest.class,
+                AddSecondParameterizedTest.class,
+                AddMillisecondParameterizedTest.class,
+
+                IsLeapYearParameterizedTest.class,
+                IsInTimeTest.class,
+
+                IsBeforeTest.class,
+                IsAfterTest.class,
+                IsEqualsTest.class,
+
+                ToDateTest.class,
+                ToStringTest.class,
 
         //                
 })

@@ -26,9 +26,9 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-                ObjectUtilIsArrayParameterizedTest.class,
-                ObjectUtilIsPrimitiveArrayParameterizedTest.class,
-                ObjectUtilDefaultIfNullOrEmptyParameterizedTest.class,
+                IsArrayParameterizedTest.class,
+                IsPrimitiveArrayParameterizedTest.class,
+                DefaultIfNullOrEmptyParameterizedTest.class,
                 ObjectUtilTest.class, })
 public class FeiLongObjectUtilSuiteTests{
 

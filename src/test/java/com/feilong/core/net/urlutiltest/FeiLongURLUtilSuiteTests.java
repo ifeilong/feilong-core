@@ -26,10 +26,10 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                URLUtilGetUnionUrlTest.class,
-                URLUtilToURITest.class,
-                URLUtilToURLTest.class,
-                URLUtilOpenStreamTest.class,
+                GetUnionUrlTest.class,
+                ToURITest.class,
+                ToURLTest.class,
+                OpenStreamTest.class,
         //                
 })
 public class FeiLongURLUtilSuiteTests{

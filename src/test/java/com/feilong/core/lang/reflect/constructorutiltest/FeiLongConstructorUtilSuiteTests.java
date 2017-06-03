@@ -27,8 +27,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                ConstructorUtilNewInstanceArgsAndParameterTypesTest.class,
-                ConstructorUtilNewInstanceTest.class,
+                NewInstanceArgsAndParameterTypesTest.class,
+                NewInstanceTest.class,
 
         //
 })

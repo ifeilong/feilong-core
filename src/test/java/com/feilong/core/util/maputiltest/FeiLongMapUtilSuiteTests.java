@@ -26,29 +26,29 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                MapUtilToSingleValueMapTest.class,
-                MapUtilToArrayValueMapTest.class,
+                ToSingleValueMapTest.class,
+                ToArrayValueMapTest.class,
 
-                MapUtilGetSubMapTest.class,
-                MapUtilGetSubMapExcludeKeysTest.class,
+                GetSubMapTest.class,
+                GetSubMapExcludeKeysTest.class,
 
-                MapUtilExtractSubMapTest.class,
-                MapUtilExtractSubMapIncludeKeysTest.class,
+                ExtractSubMapTest.class,
+                ExtractSubMapIncludeKeysTest.class,
 
-                MapUtilNewHashMapTest.class,
-                MapUtilNewLinkedHashMapTest.class,
+                NewHashMapTest.class,
+                NewLinkedHashMapTest.class,
 
-                MapUtilInvertMapTest.class,
+                InvertMapTest.class,
 
-                MapUtilPutMultiValueTest.class,
-                MapUtilPutSumValueTest.class,
+                PutMultiValueTest.class,
+                PutSumValueTest.class,
 
-                MapUtilPutAllIfNotNullTest.class,
-                MapUtilPutIfValueNotNullTest.class,
-                MapUtilPutIfValueNotNullOrEmptyTest.class,
+                PutAllIfNotNullTest.class,
+                PutIfValueNotNullTest.class,
+                PutIfValueNotNullOrEmptyTest.class,
 
-                MapUtilRemoveKeysTest.class,
-                MapUtilGetTest.class,
+                RemoveKeysTest.class,
+                GetTest.class,
         //
 })
 public class FeiLongMapUtilSuiteTests{

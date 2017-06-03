@@ -26,9 +26,9 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                ClassLoaderUtilGetResourceTest.class,
-                ClassLoaderUtilGetResourceInAllClassLoaderTest.class,
-                ClassLoaderUtilGetResourceAsStreamTest.class,
+                GetResourceTest.class,
+                GetResourceInAllClassLoaderTest.class,
+                GetResourceAsStreamTest.class,
         //
 })
 public class FeiLongClassLoaderUtilSuiteTests{

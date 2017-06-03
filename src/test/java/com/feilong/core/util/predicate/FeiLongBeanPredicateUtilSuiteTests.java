@@ -26,9 +26,9 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                BeanPredicateUtilEqualPredicateTest.class,
-                BeanPredicateUtilEqualIgnoreCasePredicateTest.class,
-                BeanPredicateUtilEqualMapPredicateTest.class,
+                EqualPredicateTest.class,
+                EqualIgnoreCasePredicateTest.class,
+                EqualMapPredicateTest.class,
         //
 })
 public class FeiLongBeanPredicateUtilSuiteTests{

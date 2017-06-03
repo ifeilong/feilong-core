@@ -27,11 +27,11 @@ import org.junit.runners.Suite.SuiteClasses;
 //@Ignore
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                BeanUtilCloneBeanTest.class,
-                BeanUtilCopyPropertiesTest.class,
-                BeanUtilNewDynaBeanTest.class,
-                BeanUtilPopulateAliasBeanTest.class,
-                BeanUtilPopulateTest.class,
+                CloneBeanTest.class,
+                CopyPropertiesTest.class,
+                NewDynaBeanTest.class,
+                PopulateAliasBeanTest.class,
+                PopulateTest.class,
         //
 })
 public class FeiLongBeanUtilSuiteTests{

@@ -26,8 +26,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                RandomUtilCreateRandomFromStringTest.class,
-                RandomUtilCreateRandomWithLengthTest.class,
+                CreateRandomFromStringTest.class,
+                CreateRandomWithLengthTest.class,
         //
 })
 public class FeiLongRandomUtilSuiteTests{

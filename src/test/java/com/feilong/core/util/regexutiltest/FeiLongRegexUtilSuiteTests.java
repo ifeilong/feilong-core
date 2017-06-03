@@ -26,8 +26,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                RegexUtilGroupIntTest.class,
-                RegexUtilGroupTest.class,
+                GroupIntTest.class,
+                GroupTest.class,
 
                 RegexUtilTest.class,
 

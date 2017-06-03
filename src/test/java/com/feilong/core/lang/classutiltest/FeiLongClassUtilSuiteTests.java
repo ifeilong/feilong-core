@@ -26,11 +26,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                ClassUtilGetClassTest.class,
-                ClassUtilIsAssignableFromParameterizedTest.class,
-                ClassUtilIsInstanceAnyClassParameterizedTest.class,
-                ClassUtilIsInstanceParameterizedTest.class,
-                ClassUtilIsInterfaceParameterizedTest.class,
+                GetClassTest.class,
+                IsAssignableFromParameterizedTest.class,
+                IsInstanceAnyClassParameterizedTest.class,
+                IsInstanceParameterizedTest.class,
+                IsInterfaceParameterizedTest.class,
                 ClassUtilToClassTest.class,
         //                
 })

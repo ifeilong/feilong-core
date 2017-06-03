@@ -26,13 +26,13 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                PropertyUtilCopyPropertiesTest.class,
-                PropertyUtilDescribeTest.class,
-                PropertyUtilFindValueOfTypeTest.class,
-                PropertyUtilGetPropertyTest.class,
-                PropertyUtilSetPropertyIfValueNotNullOrEmptyTest.class,
-                PropertyUtilSetPropertyIfValueNotNullTest.class,
-                PropertyUtilSetPropertyTest.class
+                CopyPropertiesTest.class,
+                DescribeTest.class,
+                FindValueOfTypeTest.class,
+                GetPropertyTest.class,
+                SetPropertyIfValueNotNullOrEmptyTest.class,
+                SetPropertyIfValueNotNullTest.class,
+                SetPropertyTest.class
         //
 })
 public class FeiLongPropertyUtilSuiteTests{

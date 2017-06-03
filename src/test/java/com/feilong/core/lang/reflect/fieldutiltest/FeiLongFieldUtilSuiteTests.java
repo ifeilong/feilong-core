@@ -26,8 +26,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FieldUtilGetAllFieldListTest.class,
-                FieldUtilGetAllFieldNameAndValueMapTest.class,
+                GetAllFieldListTest.class,
+                GetAllFieldNameAndValueMapTest.class,
         //
 })
 public class FeiLongFieldUtilSuiteTests{

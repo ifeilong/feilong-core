@@ -26,12 +26,12 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                URIUtilEncodeTest.class,
-                URIUtilEncodeUriTest.class,
-                URIUtilDecodeTest.class,
+                EncodeTest.class,
+                EncodeUriTest.class,
+                DecodeTest.class,
 
-                URIUtilCreateTest.class,
-                URIUtilCreateWithCharsetTypeTest.class,
+                CreateTest.class,
+                CreateWithCharsetTypeTest.class,
         //                
 })
 public class FeiLongURIUtilSuiteTests{

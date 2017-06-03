@@ -27,14 +27,14 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                ParamUtilAddParameterArrayValueMapTest.class,
-                ParamUtilAddParameterSingleValueMapTest.class,
-                ParamUtilAddParameterTest.class,
-                ParamUtilJoinValuesOrderByIncludeKeysTest.class,
-                ParamUtilToNaturalOrderingQueryStringTest.class,
-                ParamUtilToQueryStringUseArrayValueMapTest.class,
-                ParamUtilToQueryStringUseSingleValueMapTest.class,
-                ParamUtilToSingleValueMapTest.class,
+                AddParameterArrayValueMapTest.class,
+                AddParameterSingleValueMapTest.class,
+                AddParameterTest.class,
+                JoinValuesOrderByIncludeKeysTest.class,
+                ToNaturalOrderingQueryStringTest.class,
+                ToQueryStringUseArrayValueMapTest.class,
+                ToQueryStringUseSingleValueMapTest.class,
+                ToSingleValueMapTest.class,
         //                
 })
 public class FeiLongParamUtilSuiteTests{

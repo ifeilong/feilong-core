@@ -26,14 +26,14 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                AggregateUtilAvgArrayTest.class,
-                AggregateUtilAvgTest.class,
-                AggregateUtilGroupCountPredicateTest.class,
-                AggregateUtilGroupCountTest.class,
-                AggregateUtilSumArrayPredicateTest.class,
-                AggregateUtilSumArrayTest.class,
-                AggregateUtilSumPredicateTest.class,
-                AggregateUtilSumTest.class,
+                AvgArrayTest.class,
+                AvgTest.class,
+                GroupCountPredicateTest.class,
+                GroupCountTest.class,
+                SumArrayPredicateTest.class,
+                SumArrayTest.class,
+                SumPredicateTest.class,
+                SumTest.class,
         //
 })
 public class FeiLongAggregateUtilSuiteTests{
