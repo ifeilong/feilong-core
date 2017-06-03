@@ -130,7 +130,11 @@ public final class NumberFormatUtil{
         decimalFormat.setRoundingMode(defaultIfNull(roundingMode, HALF_UP));
 
         String result = decimalFormat.format(value);
-        LOGGER.trace("input:[{}],with:[{}]=[{}],localizedPattern:[{}]", value, numberPattern, result, decimalFormat.toLocalizedPattern());
+
+        if (LOGGER.isTraceEnabled()){
+            String message = "input:[{}],with:[{}]=[{}],localizedPattern:[{}]";
+            LOGGER.trace(message, value, numberPattern, result, decimalFormat.toLocalizedPattern());
+        }
         return result;
     }
 }

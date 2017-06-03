@@ -316,7 +316,10 @@ public final class ThreadUtil{
         Validate.isTrue(eachSize > 0, "eachSize must > 0");
 
         //-----------------------------------------------------------------------------------------------
-        LOGGER.info("begin,list size:[{}],eachSize:[{}],[{}]", list.size(), eachSize, getName(partitionRunnableBuilder));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("begin,list size:[{}],eachSize:[{}],[{}]", list.size(), eachSize, getName(partitionRunnableBuilder));
+        }
+
         Date beginDate = new Date();
 
         //1. 自动构造需要启动的线程数组
@@ -325,7 +328,9 @@ public final class ThreadUtil{
         //2. start 并且 join
         startAndJoin(threads);
 
-        LOGGER.info("end,use time:[{}],[{}]", formatDuration(beginDate), getName(partitionRunnableBuilder));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("end,use time:[{}],[{}]", formatDuration(beginDate), getName(partitionRunnableBuilder));
+        }
     }
 
     /**
