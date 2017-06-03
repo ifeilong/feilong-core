@@ -15,17 +15,16 @@
  */
 package com.feilong.core.lang.objectutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
-
-import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
  * The Class ObjectUtilDefaultIfNullOrEmptyParameterizedTest.
@@ -41,18 +40,28 @@ public class DefaultIfNullOrEmptyParameterizedTest extends AbstractTwoParamsAndO
      */
     @Parameters(name = "index:{index}: ObjectUtil.defaultIfNullOrEmpty({0},{1})={2}")
     public static Iterable<Object[]> data(){
-        List<Object[]> list = new ArrayList<>();
-        list.add(new Object[] { null, 1, 1 });
-        list.add(new Object[] { null, null, null });
-        list.add(new Object[] { new ArrayList<>(), 1, 1 });
-        list.add(new Object[] { "", "", "" });
-        list.add(new Object[] { "", " ", " " });
-        list.add(new Object[] { "", "fei", "fei" });
-        list.add(new Object[] { "  ", "feilong", "feilong" });
-        list.add(new Object[] { "fl", "feilong", "fl" });
-        list.add(new Object[] { " fl", "feilong", " fl" });
-        list.add(new Object[] { new int[] {}, "feilong", "feilong" });
-        return list;
+        Object[][] objects = build();
+        return toList(objects);
+    }
+
+    /**
+     * @return
+     * @since 1.10.3
+     */
+    private static Object[][] build(){
+        return new Object[][] { //
+                                new Object[] { null, 1, 1 },
+                                new Object[] { null, null, null },
+                                new Object[] { new ArrayList<>(), 1, 1 },
+                                new Object[] { "", "", "" },
+                                new Object[] { "", " ", " " },
+                                new Object[] { "", "fei", "fei" },
+                                new Object[] { "  ", "feilong", "feilong" },
+                                new Object[] { "fl", "feilong", "fl" },
+                                new Object[] { " fl", "feilong", " fl" },
+                                new Object[] { new int[] {}, "feilong", "feilong" }
+
+        };
     }
 
     /**

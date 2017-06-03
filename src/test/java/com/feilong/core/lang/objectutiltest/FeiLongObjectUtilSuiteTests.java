@@ -29,6 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsArrayParameterizedTest.class,
                 IsPrimitiveArrayParameterizedTest.class,
                 DefaultIfNullOrEmptyParameterizedTest.class,
+
                 ObjectUtilTest.class, })
 public class FeiLongObjectUtilSuiteTests{
 
