@@ -15,59 +15,55 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
-
-import java.math.BigDecimal;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 
 /**
- * The Class ConvertUtilToLongParameterizedTest.
+ * The Class ConvertUtilToStringParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToLongParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Long>{
+public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, String>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: ConvertUtil.toLong({0})={1}")
+    @Parameters(name = "index:{index}: ConvertUtil.toString({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               { null, null },
-                                              { "aaaa", null },
 
-                                              { "1", 1L },
-                                              { 8, 8L },
-                                              { "8", 8L },
-                                              { new BigDecimal("8"), 8L },
+                                              { 1L, "1" },
+                                              { toBigDecimal(1.0), "1.0" },
+                                              { toLong(8L), "8" },
 
-                                              { new String[] { "1", "2", "3" }, 1L },
-                                              { new String[] { "1", null, "2", "3" }, 1L },
-
-                                              { toList("1", "2"), 1L },
-
-                                              { "1,2,3", null },
-
+                                              { toList("张飞", "关羽", "", "赵云"), "张飞" },
+                                              { toArray("张飞", "关羽", "", "赵云"), "张飞" },
+                                              { toArray(null, "关羽", "", "赵云"), EMPTY },
                 //
         };
         return toList(objects);
     }
 
     /**
-     * Test to long.
+     * Test to string.
      */
     @Test
-    public void testToLong(){
-        assertEquals(expectedValue, toLong(input1));
+    public void testToString(){
+        assertEquals(expectedValue, ConvertUtil.toString(input1));
     }
 
 }

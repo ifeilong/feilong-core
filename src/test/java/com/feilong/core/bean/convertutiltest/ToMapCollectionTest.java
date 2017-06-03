@@ -36,7 +36,7 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToMapCollectionTest{
+public class ToMapCollectionTest{
 
     //******com.feilong.core.bean.ConvertUtil.toMap(Collection<SimpleEntry<String, String>>)**********************
     /**

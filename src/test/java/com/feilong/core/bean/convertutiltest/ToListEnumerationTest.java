@@ -15,47 +15,47 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static java.util.Collections.emptyList;
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toLocale;
+import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
- * The Class ConvertUtilToLocaleTest.
+ * The Class ConvertUtilToListEnumerationTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToLocaleTest{
+public class ToListEnumerationTest{
 
     /**
-     * Test convert5.
+     * To list.
      */
     @Test
-    public void testConvert5(){
-        assertEquals("zh_CN", ConvertUtil.convert("zh_CN", Locale.class));
+    public void testToList(){
+        List<String> list = new ArrayList<>();
+        Collections.addAll(list, "a", "b");
+
+        Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);
+        assertThat(toList(enumeration), contains("a", "b"));
     }
 
     /**
-     * Test to locale.
+     * Test to list null enumeration.
      */
     @Test
-    public void testToLocale(){
-        assertEquals(null, toLocale(null));
-        assertEquals(Locale.CHINA, toLocale("zh_CN"));
-        assertEquals(Locale.CHINA, toLocale(Locale.CHINA));
+    public void testToListNullEnumeration(){
+        assertEquals(emptyList(), toList((Enumeration<String>) null));
     }
 
-    /**
-     * Test to locale 1.
-     */
-    @Test(expected = UnsupportedOperationException.class)
-    public void testToLocale1(){
-        toLocale(new User());
-    }
 }

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
@@ -26,15 +28,12 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 /**
  * The Class ConvertUtilToStringArrayToStringConfigParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToStringArrayToStringConfigParameterizedTest
+public class ToStringArrayToStringConfigParameterizedTest
                 extends AbstractTwoParamsAndOneResultParameterizedTest<Object[], ToStringConfig, String>{
 
     /**
@@ -44,7 +43,15 @@ public class ConvertUtilToStringArrayToStringConfigParameterizedTest
      */
     @Parameters(name = "index:{index}: ConvertUtil.toString({0},{1})={2}")
     public static Iterable<Object[]> data(){
+        Object[][] objects = build();
+        return toList(objects);
+    }
 
+    /**
+     * @return
+     * @since 1.10.3
+     */
+    private static Object[][] build(){
         int[] int1 = { 2, 1 };
         //        Object[] array = toArray(int1);
         Object[] array = ArrayUtils.toObject(int1);
@@ -60,27 +67,24 @@ public class ConvertUtilToStringArrayToStringConfigParameterizedTest
 
         String[] ss = { null };
 
-        Object[][] objects = new Object[][] { //
-                                              { array, null, "2,1" },
+        return new Object[][] {
+                                { array, null, "2,1" },
 
-                                              { toArray(2), toStringConfig, "2" },
-                                              { toArray(",", ","), new ToStringConfig(",", true), ",,," },
+                                { toArray(2), toStringConfig, "2" },
+                                { toArray(",", ","), new ToStringConfig(",", true), ",,," },
 
-                                              { null, toStringConfig, EMPTY },
-                                              { toArray(), toStringConfig, EMPTY },
+                                { null, toStringConfig, EMPTY },
+                                { toArray(), toStringConfig, EMPTY },
 
-                                              { arrays, toStringConfig, "222,1111" },
-                                              { array1, toStringConfig, "2,1" },
+                                { arrays, toStringConfig, "222,1111" },
+                                { array1, toStringConfig, "2,1" },
 
-                                              { array2, toStringConfig1, "2,1" },
-                                              { array3, toStringConfig1, "2,1" },
+                                { array2, toStringConfig1, "2,1" },
+                                { array3, toStringConfig1, "2,1" },
 
-                                              { toArray(new Integer(2), null), new ToStringConfig(",", true), "2," },
-                                              { toArray(new Integer(2), null), new ToStringConfig(",", true), "2," },
-                                              { ss, new ToStringConfig(",", true), EMPTY },
-                //
-        };
-        return toList(objects);
+                                { toArray(new Integer(2), null), new ToStringConfig(",", true), "2," },
+                                { toArray(new Integer(2), null), new ToStringConfig(",", true), "2," },
+                                { ss, new ToStringConfig(",", true), EMPTY }, };
     }
 
     /**

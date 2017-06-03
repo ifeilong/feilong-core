@@ -24,37 +24,36 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toLong;
 
 /**
- * The Class ConvertUtilToBigDecimalParameterizedTest.
+ * The Class ConvertUtilToLongParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToBigDecimalParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, BigDecimal>{
+public class ToLongParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Long>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: ConvertUtil.toBigDecimal({0})={1}")
+    @Parameters(name = "index:{index}: ConvertUtil.toLong({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               { null, null },
                                               { "aaaa", null },
 
-                                              { "1", BigDecimal.valueOf(1) },
-                                              { 8, BigDecimal.valueOf(8) },
-                                              { "8", BigDecimal.valueOf(8) },
-                                              { new BigDecimal("8"), BigDecimal.valueOf(8) },
+                                              { "1", 1L },
+                                              { 8, 8L },
+                                              { "8", 8L },
+                                              { new BigDecimal("8"), 8L },
 
-                                              { new String[] { "1", "2", "3" }, BigDecimal.valueOf(1) },
-                                              { new String[] { "1", null, "2", "3" }, BigDecimal.valueOf(1) },
+                                              { new String[] { "1", "2", "3" }, 1L },
+                                              { new String[] { "1", null, "2", "3" }, 1L },
 
-                                              { toList("1", "2"), BigDecimal.valueOf(1) },
-                                              { 0.1, BigDecimal.valueOf(0.1) },
+                                              { toList("1", "2"), 1L },
 
                                               { "1,2,3", null },
 
@@ -64,10 +63,11 @@ public class ConvertUtilToBigDecimalParameterizedTest extends AbstractOneParamAn
     }
 
     /**
-     * Test to big decimal.
+     * Test to long.
      */
     @Test
-    public void testToBigDecimal(){
-        assertEquals(expectedValue, toBigDecimal(input1));
+    public void testToLong(){
+        assertEquals(expectedValue, toLong(input1));
     }
+
 }

@@ -29,7 +29,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToArrayVarargsTest{
+public class ToArrayVarargsTest{
 
     /**
      * To array2.

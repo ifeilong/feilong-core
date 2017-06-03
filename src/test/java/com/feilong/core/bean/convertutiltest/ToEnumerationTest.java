@@ -34,7 +34,7 @@ import com.feilong.core.bean.ConvertUtil;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToEnumerationTest{
+public class ToEnumerationTest{
 
     /**
      * Test to enumeration.

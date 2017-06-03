@@ -35,7 +35,7 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToPropertiesTest{
+public class ToPropertiesTest{
 
     /**
      * Test to properties.

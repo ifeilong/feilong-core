@@ -24,32 +24,27 @@ import static org.junit.Assert.assertThat;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections4.Transformer;
 import org.junit.Test;
-
-import com.feilong.core.util.transformer.SimpleClassTransformer;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
- * The Class ConvertUtilToMapTransformerTest.
+ * The Class ConvertUtilToMapTargetTypeClassTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToMapTransformerTest{
+public class ToMapTargetTypeClassTest{
 
     /**
-     * Test same transformer.
+     * Test same class type.
      */
     @Test
-    public void testSameTransformer(){
+    public void testSameClassType(){
         Map<String, String> map = toMap("1", "2");
 
-        Transformer<String, Integer> transformer = new SimpleClassTransformer<>(Integer.class);
-
         //key和value 都转成integer 使用相同的转换器
-        Map<Integer, Integer> returnMap = toMap(map, transformer, transformer);
+        Map<Integer, Integer> returnMap = toMap(map, Integer.class, Integer.class);
 
         assertThat(returnMap, allOf(hasEntry(1, 2)));
     }
@@ -61,11 +56,8 @@ public class ConvertUtilToMapTransformerTest{
     public void testArray(){
         Map<String, String> map = toMap("1", "2,2");
 
-        Transformer<String, Integer> keyTransformer = new SimpleClassTransformer<>(Integer.class);
-        Transformer<String, Integer[]> valueTransformer = new SimpleClassTransformer<>(Integer[].class);
-
         //key和value转成不同的类型
-        Map<Integer, Integer[]> returnMap = toMap(map, keyTransformer, valueTransformer);
+        Map<Integer, Integer[]> returnMap = toMap(map, Integer.class, Integer[].class);
 
         assertThat(returnMap, allOf(hasEntry(1, toArray(2, 2))));
     }
@@ -77,11 +69,8 @@ public class ConvertUtilToMapTransformerTest{
     public void testArrayToArray(){
         Map<String[], String[]> map = toMap(toArray("1"), toArray("2", "8"));
 
-        Transformer<String[], Integer[]> keyTransformer = new SimpleClassTransformer<>(Integer[].class);
-        Transformer<String[], Long[]> valueTransformer = new SimpleClassTransformer<>(Long[].class);
-
         //key和value转成不同的类型
-        Map<Integer[], Long[]> returnMap = toMap(map, keyTransformer, valueTransformer);
+        Map<Integer[], Long[]> returnMap = toMap(map, Integer[].class, Long[].class);
 
         assertThat(returnMap, allOf(hasEntry(toArray(1), toArray(2L, 8L))));
     }
@@ -89,40 +78,25 @@ public class ConvertUtilToMapTransformerTest{
     //************************************************************************************
 
     /**
-     * Test array null key transformer.
+     * Test array null key class.
      */
     @Test
-    public void testArrayNullKeyTransformer(){
+    public void testArrayNullKeyClass(){
         Map<String, String> map = toMap("1", "2,2");
 
-        Transformer<String, Integer[]> valueTransformer = new SimpleClassTransformer<>(Integer[].class);
-        Map<String, Integer[]> returnMap = toMap(map, null, valueTransformer);
+        Map<String, Integer[]> returnMap = toMap(map, null, Integer[].class);
 
         assertThat(returnMap, allOf(hasEntry("1", toArray(2, 2))));
     }
 
     /**
-     * Test array null value transformer.
+     * Test array null value class.
      */
     @Test
-    public void testArrayNullValueTransformer(){
+    public void testArrayNullValueClass(){
         Map<String, String> map = toMap("1", "2,2");
 
-        Transformer<String, Integer> keyTransformer = new SimpleClassTransformer<>(Integer.class);
-        Map<Integer, String> returnMap = toMap(map, keyTransformer, null);
-
-        assertThat(returnMap, allOf(hasEntry(1, "2,2")));
-    }
-
-    /**
-     * Test transformer null target type.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testTransformerNullTargetType(){
-        Map<String, String> map = toMap("1", "2,2");
-
-        Transformer<String, Integer> keyTransformer = new SimpleClassTransformer<>(null);
-        Map<Integer, String> returnMap = toMap(map, keyTransformer, null);
+        Map<Integer, String> returnMap = toMap(map, Integer.class, null);
 
         assertThat(returnMap, allOf(hasEntry(1, "2,2")));
     }
@@ -134,11 +108,8 @@ public class ConvertUtilToMapTransformerTest{
      */
     @Test
     public void testNullInputMap(){
-        Transformer<String, Integer> transformer = new SimpleClassTransformer<>(Integer.class);
-
         //key和value 都转成integer 使用相同的转换器
-        Map<Integer, Integer> returnMap = toMap(null, transformer, transformer);
-
+        Map<Integer, Integer> returnMap = toMap(null, Integer.class, Integer.class);
         assertEquals(emptyMap(), returnMap);
     }
 
@@ -147,11 +118,8 @@ public class ConvertUtilToMapTransformerTest{
      */
     @Test
     public void testEmptyInputMap(){
-        Transformer<String, Integer> transformer = new SimpleClassTransformer<>(Integer.class);
-
         //key和value 都转成integer 使用相同的转换器
-        Map<Integer, Integer> returnMap = toMap(new HashMap<String, String>(), transformer, transformer);
-
+        Map<Integer, Integer> returnMap = toMap(new HashMap<String, String>(), Integer.class, Integer.class);
         assertEquals(emptyMap(), returnMap);
     }
 }

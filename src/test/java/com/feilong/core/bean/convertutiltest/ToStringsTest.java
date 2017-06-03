@@ -31,7 +31,7 @@ import static com.feilong.core.bean.ConvertUtil.toStrings;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToStringsTest{
+public class ToStringsTest{
 
     //    /** The Constant log. */
     //    private static final Logger LOGGER = LoggerFactory.getLogger(ConvertUtilToStringsTest.class);

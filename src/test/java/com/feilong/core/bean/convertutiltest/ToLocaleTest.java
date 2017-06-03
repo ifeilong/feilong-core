@@ -15,47 +15,47 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import java.io.Serializable;
+import java.util.Locale;
 
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toLocale;
 
 /**
- * The Class ConvertUtilToArrayClassTest.
+ * The Class ConvertUtilToLocaleTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToArrayStringArrayClassTest{
+public class ToLocaleTest{
 
     /**
-     * To t test.
+     * Test convert5.
      */
     @Test
-    public void testConvert1(){
-        assertEquals((Serializable) null, ConvertUtil.toArray((String[]) null, Serializable.class));
+    public void testConvert5(){
+        assertEquals("zh_CN", ConvertUtil.convert("zh_CN", Locale.class));
     }
 
     /**
-     * Test convert3.
+     * Test to locale.
      */
-    @Test(expected = NullPointerException.class)
-    public void testConvert3(){
-        String[] strings = toArray("");
-        ConvertUtil.toArray(strings, null);
+    @Test
+    public void testToLocale(){
+        assertEquals(null, toLocale(null));
+        assertEquals(Locale.CHINA, toLocale("zh_CN"));
+        assertEquals(Locale.CHINA, toLocale(Locale.CHINA));
     }
 
     /**
-     * Test convert array.
+     * Test to locale 1.
      */
-    @Test
-    public void testConvertArray(){
-        String[] ss = { "2", "1" };
-        assertArrayEquals(new Long[] { 2L, 1L }, toArray(ss, Long.class));
+    @Test(expected = UnsupportedOperationException.class)
+    public void testToLocale1(){
+        toLocale(new User());
     }
 }

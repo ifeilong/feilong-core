@@ -30,7 +30,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToBooleanParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Boolean>{
+public class ToBooleanParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Boolean>{
 
     /**
      * Test to boolean.

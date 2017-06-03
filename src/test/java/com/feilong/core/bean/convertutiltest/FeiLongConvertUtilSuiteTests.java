@@ -26,46 +26,46 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                ConvertUtilConvertClassTest.class,
+                ConvertClassTest.class,
 
-                ConvertUtilToArrayCollectionClassTest.class,
-                ConvertUtilToArrayStringArrayClassTest.class,
-                ConvertUtilToArrayVarargsTest.class,
+                ToArrayCollectionClassTest.class,
+                ToArrayStringArrayClassTest.class,
+                ToArrayVarargsTest.class,
 
-                ConvertUtilToBigDecimalParameterizedTest.class,
-                ConvertUtilToBooleanParameterizedTest.class,
-                ConvertUtilToEnumerationTest.class,
+                ToBigDecimalParameterizedTest.class,
+                ToBooleanParameterizedTest.class,
+                ToEnumerationTest.class,
 
-                ConvertUtilToIntegerDefaultValueParameterizedTest.class,
-                ConvertUtilToIntegerParameterizedTest.class,
-                ConvertUtilToIntegersParameterizedTest.class,
+                ToIntegerDefaultValueParameterizedTest.class,
+                ToIntegerParameterizedTest.class,
+                ToIntegersParameterizedTest.class,
 
-                ConvertUtilToIteratorTest.class,
+                ToIteratorTest.class,
 
-                ConvertUtilToListCollectionTest.class,
-                ConvertUtilToListEnumerationTest.class,
-                ConvertUtilToListVarargsTest.class,
+                ToListCollectionTest.class,
+                ToListEnumerationTest.class,
+                ToListVarargsTest.class,
 
-                ConvertUtilToLocaleTest.class,
+                ToLocaleTest.class,
 
-                ConvertUtilToLongParameterizedTest.class,
-                ConvertUtilToLongsParameterizedTest.class,
+                ToLongParameterizedTest.class,
+                ToLongsParameterizedTest.class,
 
-                ConvertUtilToMapArrayTest.class,
-                ConvertUtilToMapCollectionTest.class,
-                ConvertUtilToMapKeyValueTest.class,
-                ConvertUtilToMapPropertiesTest.class,
-                ConvertUtilToMapTargetTypeClassTest.class,
-                ConvertUtilToMapTransformerTest.class,
+                ToMapArrayTest.class,
+                ToMapCollectionTest.class,
+                ToMapKeyValueTest.class,
+                ToMapPropertiesTest.class,
+                ToMapTargetTypeClassTest.class,
+                ToMapTransformerTest.class,
 
-                ConvertUtilToPropertiesTest.class,
+                ToPropertiesTest.class,
 
-                ConvertUtilToStringArrayToStringConfigParameterizedTest.class,
-                ConvertUtilToStringCollectionToStringConfigParameterizedTest.class,
-                ConvertUtilToStringParameterizedTest.class,
-                ConvertUtilToStringsTest.class,
+                ToStringArrayToStringConfigParameterizedTest.class,
+                ToStringCollectionToStringConfigParameterizedTest.class,
+                ToStringParameterizedTest.class,
+                ToStringsTest.class,
 
-                ConvertUtilToSetVarargsTest.class,
+                ToSetVarargsTest.class,
         //
 })
 public class FeiLongConvertUtilSuiteTests{

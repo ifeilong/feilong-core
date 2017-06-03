@@ -29,7 +29,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToArrayCollectionClassTest{
+public class ToArrayCollectionClassTest{
 
     /**
      * To array.

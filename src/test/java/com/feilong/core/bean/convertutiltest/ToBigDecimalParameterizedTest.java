@@ -15,55 +15,59 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
+
+import java.math.BigDecimal;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toLong;
 
 /**
- * The Class ConvertUtilToStringParameterizedTest.
+ * The Class ConvertUtilToBigDecimalParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToStringParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, String>{
+public class ToBigDecimalParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, BigDecimal>{
 
     /**
      * Data.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: ConvertUtil.toString({0})={1}")
+    @Parameters(name = "index:{index}: ConvertUtil.toBigDecimal({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               { null, null },
+                                              { "aaaa", null },
 
-                                              { 1L, "1" },
-                                              { toBigDecimal(1.0), "1.0" },
-                                              { toLong(8L), "8" },
+                                              { "1", BigDecimal.valueOf(1) },
+                                              { 8, BigDecimal.valueOf(8) },
+                                              { "8", BigDecimal.valueOf(8) },
+                                              { new BigDecimal("8"), BigDecimal.valueOf(8) },
 
-                                              { toList("张飞", "关羽", "", "赵云"), "张飞" },
-                                              { toArray("张飞", "关羽", "", "赵云"), "张飞" },
-                                              { toArray(null, "关羽", "", "赵云"), EMPTY },
+                                              { new String[] { "1", "2", "3" }, BigDecimal.valueOf(1) },
+                                              { new String[] { "1", null, "2", "3" }, BigDecimal.valueOf(1) },
+
+                                              { toList("1", "2"), BigDecimal.valueOf(1) },
+                                              { 0.1, BigDecimal.valueOf(0.1) },
+
+                                              { "1,2,3", null },
+
                 //
         };
         return toList(objects);
     }
 
     /**
-     * Test to string.
+     * Test to big decimal.
      */
     @Test
-    public void testToString(){
-        assertEquals(expectedValue, ConvertUtil.toString(input1));
+    public void testToBigDecimal(){
+        assertEquals(expectedValue, toBigDecimal(input1));
     }
-
 }

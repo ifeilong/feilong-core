@@ -15,47 +15,47 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
-import static java.util.Collections.emptyList;
-import static org.hamcrest.Matchers.contains;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
+import java.io.Serializable;
 
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
- * The Class ConvertUtilToListEnumerationTest.
+ * The Class ConvertUtilToArrayClassTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToListEnumerationTest{
+public class ToArrayStringArrayClassTest{
 
     /**
-     * To list.
+     * To t test.
      */
     @Test
-    public void testToList(){
-        List<String> list = new ArrayList<>();
-        Collections.addAll(list, "a", "b");
-
-        Enumeration<String> enumeration = ConvertUtil.toEnumeration(list);
-        assertThat(toList(enumeration), contains("a", "b"));
+    public void testConvert1(){
+        assertEquals((Serializable) null, ConvertUtil.toArray((String[]) null, Serializable.class));
     }
 
     /**
-     * Test to list null enumeration.
+     * Test convert3.
      */
-    @Test
-    public void testToListNullEnumeration(){
-        assertEquals(emptyList(), toList((Enumeration<String>) null));
+    @Test(expected = NullPointerException.class)
+    public void testConvert3(){
+        String[] strings = toArray("");
+        ConvertUtil.toArray(strings, null);
     }
 
+    /**
+     * Test convert array.
+     */
+    @Test
+    public void testConvertArray(){
+        String[] ss = { "2", "1" };
+        assertArrayEquals(new Long[] { 2L, 1L }, toArray(ss, Long.class));
+    }
 }

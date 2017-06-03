@@ -22,42 +22,41 @@ import java.math.BigDecimal;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
- * The Class ConvertUtilToIntegerDefaultValueParameterizedTest.
+ * The Class ConvertUtilToIntegerParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToIntegerDefaultValueParameterizedTest
-                extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Integer, Integer>{
+public class ToIntegerParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Integer>{
 
     /**
-     * Data.
+     * The Constant log.
      *
      * @return the iterable
      */
-    @Parameters(name = "index:{index}: ConvertUtil.toInteger({0},{1})={2}")
+
+    @Parameters(name = "index:{index}: ConvertUtil.toInteger({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
-                                              { null, null, null },
-                                              { null, 1, 1 },
-                                              { "aaaa", 1, 1 },
+                                              { null, null },
+                                              { "aaaa", null },
 
-                                              { "1", 2, 1 },
-                                              { 8L, 1, 8 },
-                                              { "8", 1, 8 },
-                                              { new BigDecimal("8"), 1, 8 },
+                                              { "1", 1 },
+                                              { 8L, 8 },
+                                              { "8", 8 },
+                                              { new BigDecimal("8"), 8 },
 
-                                              { new String[] { "1", "2", "3" }, 2, 1 },
-                                              { new String[] { "1", null, "2", "3" }, 2, 1 },
+                                              { new String[] { "1", "2", "3" }, 1 },
+                                              { new String[] { "1", null, "2", "3" }, 1 },
 
-                                              { toList("1", "2"), 5, 1 },
+                                              { toList("1", "2"), 1 },
 
-                                              { "1,2,3", 5, 5 },
+                                              { "1,2,3", null },
 
                 //
         };
@@ -69,7 +68,6 @@ public class ConvertUtilToIntegerDefaultValueParameterizedTest
      */
     @Test
     public void testToInteger(){
-        assertEquals(expectedValue, toInteger(input1, input2));
+        assertEquals(expectedValue, toInteger(input1));
     }
-
 }

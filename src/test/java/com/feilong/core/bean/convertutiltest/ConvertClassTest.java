@@ -29,7 +29,7 @@ import static com.feilong.core.bean.ConvertUtil.convert;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilConvertClassTest{
+public class ConvertClassTest{
 
     //    /** The Constant log. */
     //    private static final Logger LOGGER = LoggerFactory.getLogger(ConvertUtilConvertClassTest.class);

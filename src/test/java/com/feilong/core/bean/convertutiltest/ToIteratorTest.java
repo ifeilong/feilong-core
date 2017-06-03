@@ -37,7 +37,7 @@ import static com.feilong.core.bean.ConvertUtil.toMap;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToIteratorTest{
+public class ToIteratorTest{
 
     /**
      * Test to iterator enumeration.

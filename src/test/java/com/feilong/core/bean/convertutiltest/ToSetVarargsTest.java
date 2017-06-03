@@ -35,7 +35,7 @@ import static com.feilong.core.bean.ConvertUtil.toSet;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToSetVarargsTest{
+public class ToSetVarargsTest{
 
     /**
      * Test to set.

@@ -18,9 +18,12 @@ package com.feilong.core.bean;
 import java.io.Serializable;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * 转成字符串的参数配置.
+ * 将 {@link ConvertUtil#toString(java.util.Collection, ToStringConfig) 集合转成字符串},将{@link ConvertUtil#toString(Object[], ToStringConfig)
+ * 数组转成字符串} 的参数配置.
  * 
  * <h3>默认的规则:</h3>
  * 
@@ -41,30 +44,22 @@ import org.apache.commons.lang3.StringUtils;
 public final class ToStringConfig implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long  serialVersionUID  = 3182446945343865398L;
+    private static final long          serialVersionUID            = 3182446945343865398L;
+
+    //----------------------------------------------------------------------------------------
 
     /**
      * 默认逗号连接 <code>{@value}</code>.
      * 
      * @since 1.0.6
      */
-    public static final String DEFAULT_CONNECTOR = ",";
+    public static final String         DEFAULT_CONNECTOR           = ",";
 
-    //**********************************************************************************************
-
-    /** 连接符,默认={@link #DEFAULT_CONNECTOR}. */
-    private String             connector         = DEFAULT_CONNECTOR;
+    //----------------------------------------------------------------------------------------
 
     /**
-     * 是否拼接 null或者empty对象.
+     * 默认的转换参数.
      * 
-     * @since 1.2.1
-     */
-    private boolean            isJoinNullOrEmpty = true;
-
-    //**********************************************************************************************
-
-    /**
      * <h3>默认的规则:</h3>
      * 
      * <blockquote>.
@@ -74,7 +69,89 @@ public final class ToStringConfig implements Serializable{
      * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
      * <li>最后一个元素后面不拼接拼接符</li>
      * </ol>
-     * </blockquote>.
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     * 
+     * <p>
+     * 下面是调用 {@link ConvertUtil#toString(java.util.Collection, ToStringConfig) }或者 {@link ConvertUtil#toString(Object[], ToStringConfig)}的示例
+     * </p>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toString(toList("feilong", "xinge"), DEFAULT_CONFIG) = "feilong,xinge";
+     * ConvertUtil.toString(toList("feilong", "", "xinge", null), DEFAULT_CONFIG) = "feilong,,xinge,";
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @see org.apache.commons.lang3.builder.ToStringStyle#DEFAULT_STYLE
+     * 
+     * @since 1.10.3
+     */
+    public static final ToStringConfig DEFAULT_CONFIG              = new ToStringConfig();
+
+    /**
+     * 使用 {@link ToStringConfig#DEFAULT_CONNECTOR} 但是<span style="color:red">忽视 null 或者 empty 元素</span>进行拼接的参数.
+     * 
+     * <h3>默认的规则:</h3>
+     * 
+     * <blockquote>.
+     * <ol>
+     * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
+     * <li><span style="color:red">不拼接</span>null或者empty元素</li>
+     * <li>最后一个元素后面不拼接拼接符</li>
+     * </ol>
+     * </blockquote>
+     *
+     * <h3>示例:</h3>
+     * 
+     * <p>
+     * 下面是调用 {@link ConvertUtil#toString(java.util.Collection, ToStringConfig) }或者 {@link ConvertUtil#toString(Object[], ToStringConfig)}的示例
+     * </p>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toString(toList("feilong", "xinge"), IGNORE_NULL_OR_EMPTY_CONFIG) = "feilong,xinge";
+     * ConvertUtil.toString(toList("feilong", "", "xinge", null), IGNORE_NULL_OR_EMPTY_CONFIG) = "feilong,xinge";
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @see org.apache.commons.lang3.builder.ToStringStyle#DEFAULT_STYLE
+     * @since 1.10.3
+     */
+    public static final ToStringConfig IGNORE_NULL_OR_EMPTY_CONFIG = new ToStringConfig(DEFAULT_CONNECTOR, false);
+
+    //**********************************************************************************************
+
+    /** 连接符,默认={@link #DEFAULT_CONNECTOR}. */
+    private String                     connector                   = DEFAULT_CONNECTOR;
+
+    /**
+     * 是否拼接null或者empty的元素,如果是true ,表示拼接,如果是false,那么拼接的时候跳过这个元素.
+     * 
+     * @since 1.2.1
+     */
+    private boolean                    isJoinNullOrEmpty           = true;
+
+    //**********************************************************************************************
+
+    /**
+     * 默认的构造函数.
+     * 
+     * <h3>默认的规则:</h3>
+     * 
+     * <blockquote>.
+     * <ol>
+     * <li>连接符使用{@link ToStringConfig#DEFAULT_CONNECTOR}</li>
+     * <li>拼接null或者empty元素</li>
+     * <li>如果元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     * <li>最后一个元素后面不拼接拼接符</li>
+     * </ol>
+     * </blockquote>
      */
     public ToStringConfig(){
         // default
@@ -84,7 +161,7 @@ public final class ToStringConfig implements Serializable{
      * Instantiates a new to string config.
      *
      * @param connector
-     *            the connector
+     *            连接符
      */
     public ToStringConfig(String connector){
         this.connector = connector;
@@ -94,15 +171,17 @@ public final class ToStringConfig implements Serializable{
      * Instantiates a new to string config.
      *
      * @param connector
-     *            the connector
+     *            连接符
      * @param isJoinNullOrEmpty
-     *            the is join null或者empty
+     *            是否拼接null或者empty的元素,如果是true ,表示拼接,如果是false,那么拼接的时候跳过这个元素
      * @since 1.4.0
      */
     public ToStringConfig(String connector, boolean isJoinNullOrEmpty){
         this.connector = connector;
         this.isJoinNullOrEmpty = isJoinNullOrEmpty;
     }
+
+    //----------------------------------------------------------------------------------------
 
     /**
      * 获得 连接符,默认={@link #DEFAULT_CONNECTOR}.
@@ -124,7 +203,7 @@ public final class ToStringConfig implements Serializable{
     }
 
     /**
-     * 获得 是否拼接 null或者empty对象.
+     * 是否拼接null或者empty的元素,如果是true ,表示拼接,如果是false,那么拼接的时候跳过这个元素.
      *
      * @return the isJoinNullOrEmpty
      * @since 1.2.1
@@ -134,7 +213,7 @@ public final class ToStringConfig implements Serializable{
     }
 
     /**
-     * 设置 是否拼接 null或者empty对象.
+     * 是否拼接null或者empty的元素,如果是true ,表示拼接,如果是false,那么拼接的时候跳过这个元素.
      *
      * @param isJoinNullOrEmpty
      *            the isJoinNullOrEmpty to set
@@ -143,4 +222,15 @@ public final class ToStringConfig implements Serializable{
     public void setIsJoinNullOrEmpty(boolean isJoinNullOrEmpty){
         this.isJoinNullOrEmpty = isJoinNullOrEmpty;
     }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString(){
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
 }

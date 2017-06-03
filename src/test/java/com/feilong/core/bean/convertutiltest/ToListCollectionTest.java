@@ -21,57 +21,50 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
-import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toSet;
 
 /**
- * The Class ConvertUtilToListVarargsTest.
+ * The Class ConvertUtilToListCollectionTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ConvertUtilToListVarargsTest{
+public class ToListCollectionTest{
 
     /**
      * Test to list.
      */
     @Test
     public void testToList(){
-        User user1 = new User(1L);
-        User user2 = new User(2L);
-
-        assertThat(toList(user1, user2), contains(user1, user2));
+        Set<String> set = toSet("a", "a", "b", "b");
+        assertThat(toList(set), contains("a", "b"));
     }
 
     /**
-     * Test to list null array.
+     * To list3.
      */
     @Test
-    public void testToListNullArray(){
-        assertEquals(emptyList(), toList((User[]) null));
+    public void testToList3(){
+        assertThat(toList(toList("a", "a", "b", "b")), contains("a", "a", "b", "b"));
     }
 
     /**
-     * Test to list empty array.
+     * Test to list null collection.
      */
     @Test
-    public void testToListEmptyArray(){
-        assertEquals(emptyList(), toList(toArray()));
+    public void testToListNullCollection(){
+        assertEquals(emptyList(), toList((Set<String>) null));
     }
 
     /**
-     * Test to list null element array.
+     * Test to list empty collection.
      */
     @Test
-    public void testToListNullElementArray(){
-        List<User> list = new ArrayList<>();
-        list.add(null);
-
-        assertEquals(list, toList((User) null));
+    public void testToListEmptyCollection(){
+        assertEquals(emptyList(), toList(new ArrayList<String>()));
     }
 }
