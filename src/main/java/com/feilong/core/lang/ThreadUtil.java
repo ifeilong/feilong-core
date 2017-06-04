@@ -497,7 +497,7 @@ public final class ThreadUtil{
      *            the threads
      * @see java.lang.ApplicationShutdownHooks#runHooks()
      */
-    private static void startAndJoin(Thread[] threads){
+    public static void startAndJoin(Thread[] threads){
         Validate.notEmpty(threads, "threads can't be null/empty!");
 
         for (Thread thread : threads){
