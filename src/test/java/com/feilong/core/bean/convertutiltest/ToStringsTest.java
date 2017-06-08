@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toStrings;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
@@ -23,23 +25,12 @@ import org.junit.Test;
 
 import com.feilong.core.net.URLUtil;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toStrings;
-
 /**
  * The Class ConvertUtilToStringsTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ToStringsTest{
-
-    //    /** The Constant log. */
-    //    private static final Logger LOGGER = LoggerFactory.getLogger(ConvertUtilToStringsTest.class);
-    //
-    //    @Test
-    //    public void testToStrings(){
-    //        LOGGER.debug(JsonUtil.format(toStrings("null,1,2,3,\"4\",\'aaaa\'"), 0, 0));
-    //    }
 
     /**
      * Test to strings string.

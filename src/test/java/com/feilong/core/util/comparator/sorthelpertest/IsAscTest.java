@@ -20,8 +20,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.comparator.SortHelper;
 
@@ -32,9 +30,6 @@ import com.feilong.core.util.comparator.SortHelper;
  * @since 1.10.2
  */
 public class IsAscTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(IsAscTest.class);
 
     /**
      * Test property name and order array order desc ignore case.

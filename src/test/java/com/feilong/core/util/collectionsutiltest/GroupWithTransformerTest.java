@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.group;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -32,14 +34,9 @@ import java.util.Map;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.TransformerUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.CollectionsUtil.group;
 
 /**
  * The Class CollectionsUtilGroupWithTransformerTest.
@@ -47,9 +44,6 @@ import static com.feilong.core.util.CollectionsUtil.group;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class GroupWithTransformerTest{
-
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(GroupWithTransformerTest.class);
 
     /**
      * Test group2.
@@ -119,5 +113,4 @@ public class GroupWithTransformerTest{
         List<User> list = toList(new User("张飞", 10), new User("刘备", 10));
         CollectionsUtil.group(list, (Transformer<User, String>) null);
     }
-
 }

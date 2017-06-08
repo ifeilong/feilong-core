@@ -21,8 +21,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.Comparator;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ClassUtil;
@@ -37,18 +35,13 @@ import com.feilong.core.util.comparator.PropertyComparator;
  */
 public class ChainedComparatorTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ChainedComparatorTest.class);
-
     /**
      * Test property name and orders.
      */
     @Test
     public void testPropertyNameAndOrders(){
         Comparator<Object> chainedComparator = BeanComparatorUtil.chainedComparator("name");
-
         assertTrue(ClassUtil.isInstance(chainedComparator, PropertyComparator.class));
-
     }
 
     /**

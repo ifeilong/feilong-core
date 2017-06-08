@@ -25,21 +25,21 @@ import static org.junit.Assert.assertThat;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
 /**
- * 
+ * The Class ForEachTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.2
  */
 public class ForEachTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ForEachTest.class);
-
+    /**
+     * Test.
+     */
     @Test
     public void test(){
         User zhangfei28 = new User("张飞", 28);
@@ -54,6 +54,9 @@ public class ForEachTest{
         assertThat(liubei30, hasProperty("age", is(88)));
     }
 
+    /**
+     * Test null element.
+     */
     @Test
     public void testNullElement(){
         User zhangfei28 = new User("张飞", 28);
@@ -69,17 +72,26 @@ public class ForEachTest{
         assertThat(liubei30, hasProperty("age", is(88)));
     }
 
+    /**
+     * Test null iterable.
+     */
     //----------------
     @Test
     public void testNullIterable(){
         CollectionsUtil.forEach(null, null, 88);
     }
 
+    /**
+     * Test empty iterable.
+     */
     @Test
     public void testEmptyIterable(){
         CollectionsUtil.forEach(emptyList(), null, 88);
     }
 
+    /**
+     * Test null property name.
+     */
     //----------------
     @Test(expected = NullPointerException.class)
     public void testNullPropertyName(){
@@ -87,12 +99,18 @@ public class ForEachTest{
         CollectionsUtil.forEach(list, null, 88);
     }
 
+    /**
+     * Test empty property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testEmptyPropertyName(){
         List<User> list = toList(new User("张飞", 28), new User("刘备", 32), new User("刘备", 30));
         CollectionsUtil.forEach(list, "", 88);
     }
 
+    /**
+     * Test blank property name.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testBlankPropertyName(){
         List<User> list = toList(new User("张飞", 28), new User("刘备", 32), new User("刘备", 30));

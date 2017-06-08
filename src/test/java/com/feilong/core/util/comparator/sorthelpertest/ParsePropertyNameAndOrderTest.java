@@ -19,20 +19,20 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.comparator.SortHelper;
 
 /**
- * 
+ * The Class ParsePropertyNameAndOrderTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.2
  */
 public class ParsePropertyNameAndOrderTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ParsePropertyNameAndOrderTest.class);
-
+    /**
+     * Test parse property name and order no.
+     */
     @Test
     public void testParsePropertyNameAndOrderNo(){
         assertArrayEquals(toArray("name", null), SortHelper.parsePropertyNameAndOrder("name"));
@@ -40,6 +40,9 @@ public class ParsePropertyNameAndOrderTest{
         assertArrayEquals(toArray("name", null), SortHelper.parsePropertyNameAndOrder(" name "));
     }
 
+    /**
+     * Test parse property name and order asc.
+     */
     @Test
     public void testParsePropertyNameAndOrderAsc(){
         assertArrayEquals(toArray("name", "asc"), SortHelper.parsePropertyNameAndOrder("name asc"));
@@ -47,6 +50,9 @@ public class ParsePropertyNameAndOrderTest{
         assertArrayEquals(toArray("name", "aSc"), SortHelper.parsePropertyNameAndOrder("name   aSc"));
     }
 
+    /**
+     * Test parse property name and order desc.
+     */
     @Test
     public void testParsePropertyNameAndOrderDesc(){
         assertArrayEquals(toArray("name", "desc"), SortHelper.parsePropertyNameAndOrder("name desc"));
@@ -54,16 +60,25 @@ public class ParsePropertyNameAndOrderTest{
     }
     //------------------------------------------------------------
 
+    /**
+     * Test parse property name and order null.
+     */
     @Test(expected = NullPointerException.class)
     public void testParsePropertyNameAndOrderNull(){
         SortHelper.parsePropertyNameAndOrder(null);
     }
 
+    /**
+     * Test parse property name and order empty.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testParsePropertyNameAndOrderEmpty(){
         SortHelper.parsePropertyNameAndOrder("");
     }
 
+    /**
+     * Test parse property name and order blank.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testParsePropertyNameAndOrderBlank(){
         SortHelper.parsePropertyNameAndOrder(" ");
@@ -71,11 +86,17 @@ public class ParsePropertyNameAndOrderTest{
 
     //------------------------------------------------------------
 
+    /**
+     * Test parse property name and order array length more than 2.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testParsePropertyNameAndOrderArrayLengthMoreThan2(){
         SortHelper.parsePropertyNameAndOrder("name desc desc");
     }
 
+    /**
+     * Test parse property name and order array length eqals 2 but not asc.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testParsePropertyNameAndOrderArrayLengthEqals2ButNotAsc(){
         SortHelper.parsePropertyNameAndOrder("name des");

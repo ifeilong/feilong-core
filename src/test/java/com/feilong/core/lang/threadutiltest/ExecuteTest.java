@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.PartitionRunnableBuilder;
 import com.feilong.core.lang.PartitionThreadEntity;
@@ -36,8 +34,6 @@ import com.feilong.core.lang.ThreadUtil;
  * @since 1.10.3
  */
 public class ExecuteTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExecuteTest.class);
 
     //---------------------------------------------------------
 

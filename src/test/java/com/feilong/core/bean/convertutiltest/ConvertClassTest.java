@@ -15,14 +15,13 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.convert;
 import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 
 import org.apache.commons.beanutils.ConversionException;
 import org.junit.Test;
-
-import static com.feilong.core.bean.ConvertUtil.convert;
 
 /**
  * The Class ConvertUtilConvertClassTest.
@@ -31,9 +30,6 @@ import static com.feilong.core.bean.ConvertUtil.convert;
  */
 public class ConvertClassTest{
 
-    //    /** The Constant log. */
-    //    private static final Logger LOGGER = LoggerFactory.getLogger(ConvertUtilConvertClassTest.class);
-    //
     //    /**
     //     * To t test.
     //     */
