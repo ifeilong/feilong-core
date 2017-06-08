@@ -109,8 +109,8 @@ public final class BeanComparatorUtil{
 
             //注意:此处不要使用 propertyComparator(propertyName)
 
-            //因为,PropertyComparator 如果属性值相同,会比较 hashcode值(为了map), 
-            //也就是说通常而言一次就比较出顺序,后续的propertyNameAndOrders 就没太大作用了
+            //因为,PropertyComparator 如果属性值相同,会使用其他规则继续比较(为了TreeMap/treeSet), 
+            //也就是说,通常而言一次就比较出顺序,后续的propertyNameAndOrders 就没作用了
 
             Comparator instance = ComparatorUtils.nullHighComparator(ComparableComparator.comparableComparator()); //null排在最后面  
 
