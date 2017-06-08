@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.comparator;
 
+import static com.feilong.core.lang.ClassUtil.isInstance;
+
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.TreeMap;
@@ -28,7 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
-import com.feilong.core.lang.ClassUtil;
 
 /**
  * 属性比较器,自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值,进行比较,不用每个需要排序的字段创建 {@link Comparator}类.
@@ -448,9 +449,6 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private int compareWithSameValue(T t1,T t2){
         //如果对象实现了 Comparable 接口, 那么直接强转比较
-        if (ClassUtil.isInstance(t1, Comparable.class)){
-            return ((Comparable) t1).compareTo(t2);
-        }
-        return 1;
+        return isInstance(t1, Comparable.class) ? ((Comparable) t1).compareTo(t2) : 1;
     }
 }
