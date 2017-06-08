@@ -17,6 +17,8 @@ package com.feilong.core.util.comparator;
 
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ObjectUtils;
@@ -26,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.lang.ClassUtil;
 
 /**
  * 属性比较器,自动获取 <code>T</code>中的属性名字是 {@link #propertyName}的值,进行比较,不用每个需要排序的字段创建 {@link Comparator}类.
@@ -45,7 +48,7 @@ import com.feilong.core.bean.PropertyUtil;
  * 该类默认是<span style="color:red">正序</span>的形式,如果需要反序,请再使用 {@link ReverseComparator}进行包装
  * </p>
  * </blockquote>
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
@@ -61,6 +64,7 @@ import com.feilong.core.bean.PropertyUtil;
  * @see <a href=
  *      "http://stackoverflow.com/questions/11441666/java-error-comparison-method-violates-its-general-contract">Java error: Comparison
  *      method violates its general contract</a>
+ * @see <a href="http://www.it165.net/pro/html/201407/18366.html">Java中的TreeMap、Comparable、Comparator</a>
  * @since 1.2.0
  */
 public class PropertyComparator<T> implements Comparator<T>,Serializable{
@@ -70,6 +74,8 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
     /** The Constant LOGGER. */
     private static final Logger         LOGGER           = LoggerFactory.getLogger(PropertyComparator.class);
+
+    //----------------------------------------------------------------------------------------------------------
 
     /**
      * 指定bean对象排序属性名字(默认正序).
@@ -82,7 +88,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      */
     private final String                propertyName;
 
-    /** The comparator. */
+    /** 提取 <code>propertyName</code> 的属性值之后,支持使用自定义的比较器来比较值,如果是null,那么使用默认规则. */
     @SuppressWarnings("rawtypes")
     private Comparator                  comparator;
 
@@ -90,43 +96,81 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     @SuppressWarnings("rawtypes")
     private Class<? extends Comparable> propertyValueConvertToClass;
 
+    //----------------------------------------------------------------------------------------------------------
+
     /**
-     * The Constructor.
+     * 只有指定参数名字 <code>propertyName</code> 的构造函数.
+     * 
+     * <h3>排序规则:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>空元素排在后面</li>
+     * <li>提取bean对象指定属性名字的值,比较两个值,按照自然顺序排序,指定属性的属性值越小对应的对象排在前面,反之排在后面;如果对应的属性值是null,排在最前面</li>
+     * 
+     * <li>
+     * 如果两个值相等,那么比较对象本身
+     * 
+     * <ol>
+     * <li>如果对象实现了 {@link Comparable} 接口, 那么直接比较</li>
+     * <li>如果对象没有实现 {@link Comparable} 接口, 那么依照扎金花比牌原则(相同大小的牌,比牌方输),谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面</li>
+     * </ol>
+     * 
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * List{@code <User>} list = new ArrayList{@code <>}();
-     * list.add(new User(12L, 18));
-     * list.add(new User(2L, 36));
-     * list.add(new User(5L, 22));
-     * list.add(new User(1L, 8));
      * 
-     * Collections.sort(list, new PropertyComparator{@code <User>}("id"));
-     * LOGGER.debug(JsonUtil.format(list));
-     * </pre>
+     * public void testPropertyComparatorWithTreeSet(){
+     *     UserSameHashCode userSameHashCode_1_name1 = new UserSameHashCode(1, "name1");
+     *     UserSameHashCode userSameHashCode_5_name5 = new UserSameHashCode(5, "name5_5");
+     *     UserSameHashCode userSameHashCode_5_name6 = new UserSameHashCode(5, "name5_6");
+     *     UserSameHashCode userSameHashCode_5_name1 = new UserSameHashCode(5, "name5_1");
+     *     UserSameHashCode userSameHashCode_5_name2 = new UserSameHashCode(5, "name5_2");
      * 
-     * <b>返回:</b>
+     *     UserSameHashCode nullPropertyValue = new UserSameHashCode(null, "name2");
      * 
-     * <pre class="code">
-        [{
-                "id": 1,
-                "age": 8
-            },
-                    {
-                "id": 2,
-                "age": 36
-            },
-                    {
-                "id": 5,
-                "age": 22
-            },
-                    {
-                "id": 12,
-                "age": 18
-        }]
+     *     UserSameHashCode nullObject = null;
+     *     //------
+     * 
+     *     //null  相同 留一个
+     * 
+     *     Set{@code <UserSameHashCode>} set = new TreeSet{@code <>}(new PropertyComparator{@code <>(}"id"));
+     *     set.add(userSameHashCode_5_name5);
+     *     set.add(userSameHashCode_5_name6);
+     * 
+     *     set.add(nullPropertyValue);
+     *     set.add(nullObject);
+     * 
+     *     set.add(userSameHashCode_1_name1);
+     *     set.add(userSameHashCode_5_name1);
+     *     set.add(userSameHashCode_5_name2);
+     * 
+     *     set.add(nullObject);
+     *     set.add(nullPropertyValue);
+     * 
+     *     //----------------------------------------------------------
+     * 
+     *     assertEquals(7, set.size());
+     *     assertThat(set, allOf(contains(
+     *                     nullPropertyValue, <span style="color:green">//如果对应的属性值是null,排在后面</span>
+     *                     userSameHashCode_1_name1, <span style="color:green">//指定属性的属性值越小对应的对象排在前面,反之排在后面</span>
+     * 
+     *                     <span style="color:green">//如果两个值相等,那么比较对象本身</span>
+     *                     <span style="color:green">//如果对象没有实现 Comparable 接口, 那么谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面(扎金花原则)</span>
+     *                     userSameHashCode_5_name5,
+     *                     userSameHashCode_5_name6,
+     *                     userSameHashCode_5_name1,
+     *                     userSameHashCode_5_name2,
+     * 
+     *                     nullObject)<span style="color:green">//空元素排在后面</span>
+     *     ));
+     * }
      * </pre>
      * 
      * </blockquote>
@@ -139,6 +183,9 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,<br>
      *            该属性的value 必须实现 {@link Comparable}接口.
      *            </p>
+     * 
+     *            如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *            如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public PropertyComparator(String propertyName){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
@@ -157,8 +204,11 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,<br>
      *            该属性的value 必须实现 {@link Comparable}接口.
      *            </p>
+     * 
+     *            如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *            如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @param comparator
-     *            the comparator
+     *            提取 <code>propertyName</code> 的属性值之后,支持使用自定义的比较器来比较值,如果是null,那么使用默认规则
      * @since 1.5.4
      */
     @SuppressWarnings("rawtypes")
@@ -166,7 +216,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         this.comparator = comparator;
-        LOGGER.trace("propertyName:[{}]", propertyName);
+        LOGGER.trace("propertyName:[{}],comparator:[{}]", propertyName, comparator);
     }
 
     /**
@@ -245,6 +295,9 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,<br>
      *            该属性的value 必须实现 {@link Comparable}接口.
      *            </p>
+     * 
+     *            如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *            如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @param propertyValueConvertToClass
      *            反射提取出来的值,需要类型转成到的类型
      * @since 1.5.0
@@ -254,7 +307,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         this.propertyValueConvertToClass = propertyValueConvertToClass;
-        LOGGER.trace("propertyName:[{}]", propertyName);
+        LOGGER.trace("propertyName:[{}],propertyValueConvertToClass:[{}]", propertyName, propertyValueConvertToClass);
     }
 
     /**
@@ -274,10 +327,14 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>,<br>
      *            该属性的value 必须实现 {@link Comparable}接口.
      *            </p>
+     * 
+     *            如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *            如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
      * @param propertyValueConvertToClass
      *            反射提取出来的值,需要类型转成到的类型
      * @param comparator
-     *            the comparator
+     *            提取 <code>propertyName</code> 的属性值之后,支持使用自定义的比较器来比较值,如果是null,那么使用默认规则
      * @since 1.5.4
      */
     @SuppressWarnings("rawtypes")
@@ -288,6 +345,8 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         this.comparator = comparator;
         LOGGER.trace("propertyName:[{}]", propertyName);
     }
+
+    //----------------------------------------------------------------------------------------------------------
 
     /**
      * Compare.
@@ -311,6 +370,8 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             return -1;
         }
 
+        //--------------------------------------------------------------------------------
+
         Comparable propertyValue1 = PropertyUtil.getProperty(t1, propertyName);
         Comparable propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
 
@@ -326,7 +387,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * 先比较 propertyValue1以及propertyValue2,再比较 t1/t2 .
      * 
      * <p>
-     * 由于我们是提取 property的特殊性, 如果只判断值的话, 那么 TreeSet / TreeMap 过滤掉同sort字段但是对象不相同的情况
+     * 由于我们是提取 property的特殊性, 如果只判断值的话, 那么 {@link TreeSet} / {@link TreeMap} 过滤掉同sort字段但是对象不相同的情况
      * </p>
      *
      * @param t1
@@ -344,21 +405,52 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private int compare(T t1,T t2,Comparable propertyValue1,Comparable propertyValue2){
         //NullPointException if propertyValue1.compareTo(propertyValue2)
-        int compareTo = ObjectUtils.compare(propertyValue1, propertyValue2);
 
-        if (0 == compareTo){
-            //避免TreeSet / TreeMap 过滤掉同sort字段但是对象不相同的情况
-            int hashCode1 = t1.hashCode();
-            int hashCode2 = t2.hashCode();
-            compareTo = ObjectUtils.compare(hashCode1, hashCode2);
+        // if true null is considered greater than a non-null value or if false null is considered less than a Non-null value
+        boolean nullPropertyValueGreater = false;
+        int compareTo = ObjectUtils.compare(propertyValue1, propertyValue2, nullPropertyValueGreater);
 
-            String pattern = "propertyName:[{}],same propertyValue:[{}],hashCode1:[{}],hashCode2:[{}],result:[{}]";
-            LOGGER.trace(pattern, propertyName, propertyValue1, hashCode1, hashCode2, compareTo);
+        if (0 != compareTo){
+            String pattern = "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],result:[{}]";
+            LOGGER.trace(pattern, propertyName, propertyValue1, propertyValue2, compareTo);
             return compareTo;
         }
+        //比较值相等的情况
+        return compareWithSameValue(t1, t2);
+    }
 
-        String pattern = "propertyName:[{}],propertyValue1:[{}],propertyValue2:[{}],result:[{}]";
-        LOGGER.trace(pattern, propertyName, propertyValue1, propertyValue2, compareTo);
-        return compareTo;
+    /**
+     * 处理值相等的情况.
+     * 
+     * <p>
+     * 如果用于 {@link TreeSet}/{@link TreeMap},那么建议 bean 对象需要实现 {@link Comparable} 接口<br>
+     * 
+     * 避免过滤掉同sort字段但是对象不相同的情况
+     * </p>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果对象实现了 {@link Comparable} 接口, 那么直接比较</li>
+     * <li>如果对象没有实现 {@link Comparable} 接口, 那么依照<b>扎金花比牌原则</b>(相同大小的牌,比牌方输),谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param t1
+     *            the t 1
+     * @param t2
+     *            the t 2
+     * @return 如果对象实现了 {@link Comparable} 接口, 那么直接强转比较<br>
+     *         如果对象没有实现 {@link Comparable} 接口, 那么依照<b>扎金花比牌原则</b>(相同大小的牌,比牌方输),谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/631">PropertyComparator hash判断两个对象是否相等是否太草率？</a>
+     * @since 1.10.3
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private int compareWithSameValue(T t1,T t2){
+        //如果对象实现了 Comparable 接口, 那么直接强转比较
+        if (ClassUtil.isInstance(t1, Comparable.class)){
+            return ((Comparable) t1).compareTo(t2);
+        }
+        return 1;
     }
 }
