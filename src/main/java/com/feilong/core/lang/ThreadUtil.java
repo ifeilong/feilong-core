@@ -64,7 +64,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 之所以要提出“线程组”的概念，一般认为，是由于“安全”或者“保密”方面的理由。<br>
  * 根据Arnold和Gosling的说法：“线程组中的线程可以修改组内的其他线程，包括那些位于分层结构最深处的。一个线程不能修改位于自己所在组或者下属组之外的任何线程”
  * </p>
- * </p>
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -208,7 +207,7 @@ public final class ThreadUtil{
      *     Date beginDate = new Date();
      *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
      * 
-     *     final Map{@code <Integer, Boolean>} indexAndResultMap = Collections.synchronizedSortedMap(new TreeMap<Integer, Boolean>());
+     *     final Map{@code <Integer, Boolean>} indexAndResultMap = Collections.synchronizedSortedMap(new TreeMap{@code <Integer, Boolean>}());
      * 
      *     ThreadUtil.execute(list, 2, null, new PartitionRunnableBuilder{@code <Integer>}(){
      * 
@@ -292,7 +291,7 @@ public final class ThreadUtil{
      * 如果 <code>list</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>list</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * 如果 <code>partitionRunnableBuilder</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>eachSize{@code <=}0</code> 是null,抛出 {@link IllegalArgumentException}<br>
+     * 如果 {@code eachSize<=0} 是null,抛出 {@link IllegalArgumentException}<br>
      * </p>
      * </blockquote>
      *
