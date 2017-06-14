@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 
 import java.util.Map;
@@ -26,8 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.RegexPattern;
-
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * 正则表达式工具类.
@@ -52,8 +51,10 @@ public final class RegexUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * 编译给定正则表达式 <code>regexPattern</code> 并尝试将给定输入 <code>input</code> 与其匹配.
+     * 编译给定正则表达式 <code>regexPattern</code> ,并尝试将给定输入 <code>input</code> 与其匹配.
      * 
      * <p>
      * {@link Pattern#matches(String, CharSequence)} 等价于{@link #getMatcher(String, CharSequence)}.matches();
@@ -75,6 +76,8 @@ public final class RegexUtil{
         return getMatcher(regexPattern, input).matches();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 返回在以前匹配操作期间由给定组捕获的输入子序列.
      * 
@@ -89,24 +92,25 @@ public final class RegexUtil{
      * 
      * <pre class="code">
      * String regexPattern = "(.*?)@(.*?)";
-     * String email = "venusdrogon@163.com";
+     * String email = "feilong@163.com";
+     * 
      * RegexUtil.group(regexPattern, email);
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     *    0 venusdrogon@163.com
-     *    1 venusdrogon
+     *    0 feilong@163.com
+     *    1 feilong
      *    2 163.com
      * </pre>
      * 
      * </blockquote>
      * 
      * @param regexPattern
-     *            正则表达式字符串,pls use {@link RegexPattern}
+     *            正则表达式模式,比如 (.*?)@(.*?)
      * @param input
-     *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
+     *            需要被group的字符串,比如 feilong@163.com,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 匹配不了,返回 {@link java.util.Collections#emptyMap()}
@@ -120,6 +124,8 @@ public final class RegexUtil{
             LOGGER.trace("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
             return emptyMap();
         }
+
+        //---------------------------------------------------------------
         int groupCount = matcher.groupCount();
         Map<Integer, String> map = newLinkedHashMap(groupCount + 1);
         for (int i = 0; i <= groupCount; ++i){
@@ -128,6 +134,8 @@ public final class RegexUtil{
             LOGGER.trace("matcher group[{}],start-end:[{}-{}],groupValue:[{}]", i, matcher.start(i), matcher.end(i), groupValue);
             map.put(i, groupValue);//groupValue
         }
+
+        //---------------------------------------------------------------
 
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("regexPattern:[{}],input:[{}],groupMap:{}", regexPattern, input, map);
@@ -150,29 +158,33 @@ public final class RegexUtil{
      * <pre class="code">
      * 
      * String regexPattern = "(.*?)@(.*?)";
-     * String email = "venusdrogon@163.com";
-     * LOGGER.info(RegexUtil.group(regexPattern, email, 1) + "");//venusdrogon
-     * LOGGER.info(RegexUtil.group(regexPattern, email, 2) + "");//163.com
+     * String email = "feilong@163.com";
+     * 
+     * RegexUtil.group(regexPattern, email, 1);<span style="color:green">//feilong</span>
+     * RegexUtil.group(regexPattern, email, 2);<span style="color:green">//163.com</span>
      * 
      * </pre>
      * 
      * </blockquote>
      *
      * @param regexPattern
-     *            正则表达式字符串,pls use {@link RegexPattern}
+     *            正则表达式模式,比如 (.*?)@(.*?)
      * @param input
-     *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
-     * @param group
-     *            the group
+     *            需要被group的字符串,比如 feilong@163.com,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
+     * @param groupNo
+     *            组号,从0开始
      * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 {@code input < 0} ,抛出 {@link IllegalArgumentException}<br>
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#group(int)
      * @since 1.0.7
      */
-    public static String group(String regexPattern,CharSequence input,int group){
+    public static String group(String regexPattern,CharSequence input,int groupNo){
+        Validate.isTrue(groupNo >= 0, "groupNo must >=0");
+
         Map<Integer, String> map = group(regexPattern, input);
-        return map.get(group);
+        return map.get(groupNo);
     }
 
     //********************************************************************************************
@@ -223,6 +235,7 @@ public final class RegexUtil{
     private static Matcher getMatcher(String regexPattern,CharSequence input,int flags){
         Validate.notNull(regexPattern, "regexPattern can't be null!");
         Validate.notNull(input, "input can't be null!");
+
         Pattern pattern = Pattern.compile(regexPattern, flags);
         return pattern.matcher(input);
     }

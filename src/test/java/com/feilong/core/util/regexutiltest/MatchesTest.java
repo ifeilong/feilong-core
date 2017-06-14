@@ -15,28 +15,42 @@
  */
 package com.feilong.core.util.regexutiltest;
 
+import static com.feilong.core.RegexPattern.DECIMAL_TWO_DIGIT;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import com.feilong.core.util.RegexUtil;
 
-import static com.feilong.core.RegexPattern.DECIMAL_TWO_DIGIT;
-
 /**
  * The Class RegexUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class RegexUtilTest{
+public class MatchesTest{
 
-    /**
-     * Test decima l_ tw o_ digit.
-     */
+    private static final String EMAIL         = "feilong@163.com";
+
+    private static final String REGEX_PATTERN = "(.*?)@(.*?)";
+
+    //---------------------------------------------------------------
+
     @Test
     public void testDecimalTwoDigit(){
         assertEquals(false, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000阿.00"));
         assertEquals(false, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000.0"));
         assertEquals(true, RegexUtil.matches(DECIMAL_TWO_DIGIT, "2000.99"));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testGroupNullRegexPattern(){
+        RegexUtil.matches(null, EMAIL);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGroupNullInput(){
+        RegexUtil.matches(REGEX_PATTERN, null);
     }
 }

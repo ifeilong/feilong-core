@@ -26,10 +26,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
+
                 GroupIntTest.class,
                 GroupTest.class,
 
-                RegexUtilTest.class,
+                MatchesTest.class,
 
                 MobilephonePatternParameterizedTest.class,
                 TelephonePatternParameterizedTest.class,

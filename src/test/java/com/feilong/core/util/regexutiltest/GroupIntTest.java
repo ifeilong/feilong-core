@@ -28,15 +28,48 @@ import com.feilong.core.util.RegexUtil;
  */
 public class GroupIntTest{
 
+    private static final String EMAIL         = "feilong@163.com";
+
+    private static final String REGEX_PATTERN = "(.*?)@(.*?)";
+
     /**
      * Test group.
      */
     @Test
     public void testGroup(){
-        String regexPattern = "(.*?)@(.*?)";
-        String email = "venussanguodrogon@1263.com";
+        assertEquals(EMAIL, RegexUtil.group(REGEX_PATTERN, EMAIL, 0));
+        assertEquals("feilong", RegexUtil.group(REGEX_PATTERN, EMAIL, 1));
+        assertEquals("163.com", RegexUtil.group(REGEX_PATTERN, EMAIL, 2));
+    }
 
-        assertEquals("venussanguodrogon", RegexUtil.group(regexPattern, email, 1));
-        assertEquals("1263.com", RegexUtil.group(regexPattern, email, 2));
+    @Test
+    public void testGroupNotMatch(){
+        //不匹配
+        assertEquals(null, RegexUtil.group(REGEX_PATTERN, "feilong", 0));
+    }
+
+    @Test
+    public void testGroupOut(){
+        //超出
+        assertEquals(null, RegexUtil.group(REGEX_PATTERN, EMAIL, 3));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGroup1(){
+        RegexUtil.group(REGEX_PATTERN, EMAIL, -1);
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testGroupNullRegexPattern(){
+        RegexUtil.group(null, EMAIL, 1);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGroupNullInput(){
+        RegexUtil.group(REGEX_PATTERN, null, 1);
     }
 }

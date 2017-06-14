@@ -15,9 +15,13 @@
  */
 package com.feilong.core.util.regexutiltest;
 
+import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -30,16 +34,19 @@ import com.feilong.core.util.RegexUtil;
  */
 public class GroupTest{
 
+    private static final String EMAIL         = "feilong@163.com";
+
+    private static final String REGEX_PATTERN = "(.*?)@(.*?)";
+
     /**
      * Test group 1.
      */
     @Test
     public void testGroup1(){
-        String regexPattern = "(.*?)@(.*?)";
-        String email = "venusdrogon@163.com";
-        assertThat(
-                        RegexUtil.group(regexPattern, email),
-                        allOf(hasEntry(0, "venusdrogon@163.com"), hasEntry(1, "venusdrogon"), hasEntry(2, "163.com")));
+        assertThat(RegexUtil.group(REGEX_PATTERN, EMAIL), allOf(//
+                        hasEntry(0, EMAIL),
+                        hasEntry(1, "feilong"),
+                        hasEntry(2, "163.com")));
     }
 
     /**
@@ -49,9 +56,10 @@ public class GroupTest{
     public void testGroup2(){
         String regexPattern = "@Table.*name.*\"(.*?)\".*";
         String input = "@Table(name = \"T_MEM_MEMBER_ADDRESS\")";
-        assertThat(
-                        RegexUtil.group(regexPattern, input),
-                        allOf(hasEntry(0, "@Table(name = \"T_MEM_MEMBER_ADDRESS\")"), hasEntry(1, "T_MEM_MEMBER_ADDRESS")));
+
+        assertThat(RegexUtil.group(regexPattern, input), allOf(//
+                        hasEntry(0, input),
+                        hasEntry(1, "T_MEM_MEMBER_ADDRESS")));
     }
 
     /**
@@ -62,9 +70,49 @@ public class GroupTest{
         String regexPattern = ".*@Column.*name.*\"(.*?)\"((?:.*)|(.*length.*(\\d+).*))";
         regexPattern = ".*@Column.*?name\\s*=\\s*\"(.*?)\"(?:.*?length\\s*=\\s*(\\d+))?";
         regexPattern = ".*@Column.*name.*\"(.*?)\".*length\\s*=\\s*(\\d+).*";
+
         String input = "@Column(name = \"NAME\", length=80)";
-        assertThat(
-                        RegexUtil.group(regexPattern, input),
-                        allOf(hasEntry(0, "@Column(name = \"NAME\", length=80)"), hasEntry(1, "NAME"), hasEntry(2, "80")));
+
+        assertThat(RegexUtil.group(regexPattern, input), allOf(//
+                        hasEntry(0, input),
+                        hasEntry(1, "NAME"),
+                        hasEntry(2, "80")));
+    }
+
+    @Test
+    public void group3(){
+        String regexPattern = "s=(\\d*)";
+
+        String input = "s=123456789";
+        Map<Integer, String> group = RegexUtil.group(regexPattern, input);
+
+        assertThat(group, allOf(//
+                        hasEntry(0, input),
+                        hasEntry(1, "123456789")
+        //
+        ));
+    }
+
+    //---------------------------------------------------------------
+    @Test
+    public void group4(){
+        String regexPattern = "s=(\\d*)";
+
+        String input = "ss=123456789";
+        Map<Integer, String> group = RegexUtil.group(regexPattern, input);
+
+        assertEquals(emptyMap(), group);
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testGroupNullRegexPattern(){
+        RegexUtil.group(null, EMAIL);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGroupNullInput(){
+        RegexUtil.group(REGEX_PATTERN, null);
     }
 }
