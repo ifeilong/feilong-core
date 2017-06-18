@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.LinkedHashMap;
@@ -27,8 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URLUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * {@link java.lang.ClassLoader ClassLoader}工具类.
@@ -266,7 +266,7 @@ public final class ClassLoaderUtil{
                 return url;
             }
         }
-        LOGGER.info("not found:[{}] in all ClassLoader,return null", resourceName);
+        LOGGER.debug("not found:[{}] in all ClassLoader,return null", resourceName);
         return null;
     }
 

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net.urlutiltest;
 
+import static org.junit.Assert.assertEquals;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -33,10 +35,11 @@ public class GetUnionUrlTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(GetUnionUrlTest.class);
 
+    private final URL           url    = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
+
     /**
      * Test get union url 1.
      */
-    //****************com.feilong.core.net.URLUtil.getUnionUrl(URL, String)***********************
     @Test
     public void testGetUnionUrl1(){
         LOGGER.debug(URLUtil.getUnionUrl(URLUtil.toURL("E:\\test"), "sanguo"));
@@ -47,8 +50,27 @@ public class GetUnionUrlTest{
      */
     @Test
     public void testGetUnionUrl2(){
-        URL url = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
-        LOGGER.debug(URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/"));
+        assertEquals("http://www.exiaoshuo.com/jinyiyexing/1173348/", URLUtil.getUnionUrl(url, "/jinyiyexing/1173348/"));
+        assertEquals("http://www.exiaoshuo.com/jinyiyexing/jinyiyexing/1173348/", URLUtil.getUnionUrl(url, "jinyiyexing/1173348/"));
+        assertEquals("http://www.exiaoshuo.com/jinyiyexing/1173348/", URLUtil.getUnionUrl(url, "1173348/"));
+        assertEquals("http://www.exiaoshuo.com/jinyiyexing/1173348", URLUtil.getUnionUrl(url, "1173348"));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testGetUnionUrlTestNull(){
+        URLUtil.getUnionUrl(url, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetUnionUrlTestEmpty(){
+        URLUtil.getUnionUrl(url, "");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetUnionUrlTestBlank(){
+        URLUtil.getUnionUrl(url, " ");
     }
 
 }

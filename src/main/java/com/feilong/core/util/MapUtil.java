@@ -813,7 +813,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
             }else{
-                LOGGER.warn("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
+                LOGGER.debug("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
             }
         }
         return returnMap;
@@ -943,7 +943,7 @@ public final class MapUtil{
             if (map.containsKey(key)){
                 map.remove(key);
             }else{
-                LOGGER.warn("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
+                LOGGER.debug("map has keys:[{}],but don't contains key:[{}]", map.keySet(), key);
             }
         }
         return map;
