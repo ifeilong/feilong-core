@@ -15,12 +15,11 @@
  */
 package com.feilong.core;
 
+import static com.feilong.core.Alphabet.DECIMAL_AND_LETTERS;
+import static com.feilong.core.Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import static com.feilong.core.Alphabet.DECIMAL_AND_LETTERS;
-import static com.feilong.core.Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE;
 
 /**
  * The Class AlphabetTest.
@@ -45,6 +44,26 @@ public class AlphabetTest{
     /**
      * Test.
      */
+    @Test
+    public void testAlphabetDECIMAL(){
+        assertEquals("0123456789", Alphabet.DECIMAL);
+    }
+
+    @Test
+    public void testAlphabetLowercase(){
+        assertEquals("abcdefghijklmnopqrstuvwxyz", Alphabet.LOWERCASE);
+    }
+
+    @Test
+    public void testAlphabetUppercase(){
+        assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", Alphabet.UPPERCASE);
+    }
+
+    @Test
+    public void testAlphabetDecimalAndLetters(){
+        assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", Alphabet.DECIMAL_AND_LETTERS);
+    }
+
     @Test
     public void testAlphabet(){
         assertEquals("23456789abcdefghijkmnpqrstuvwxyz", DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
