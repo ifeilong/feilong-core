@@ -15,15 +15,15 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
+
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.ConvertUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 /**
  * {@link java.lang.System}工具类.
@@ -62,7 +62,7 @@ import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>line.separator <br>
- * {@link org.apache.commons.lang3.SystemUtils#LINE_SEPARATOR}</td>
+ * {@link System#lineSeparator()}</td>
  * <td>\r\n</td>
  * </tr>
  * <tr valign="top" style="background-color:#eeeeff">
@@ -329,6 +329,8 @@ public final class SystemUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 取到 {@link System#getProperty(String)},转成 {@link java.util.TreeMap},以遍输出log的时候,会顺序显示.
      * 
@@ -469,11 +471,14 @@ public final class SystemUtil{
         return sortMapByKeyAsc(System.getenv());
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * 设置 properties from map.
+     * 循环 <code>map</code> ,设置到系统属性 {@link java.lang.System#setProperty(String, String)}.
      * 
      * <p>
-     * 如果 <code>map</code> 是null或者empty,抛出 {@link NullPointerException}<br>
+     * 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>map</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * </p>
      *
      * @param map
