@@ -4,8 +4,9 @@ feilong core 让Java开发更简便的工具包
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![JDK 1.7](https://img.shields.io/badge/JDK-1.7-green.svg "JDK 1.7")
 [![jar size 92K](https://img.shields.io/badge/size-92K-green.svg "size 92K")](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core/1.10.1)
-[![javadoc 83%](http://progressed.io/bar/83?title=javadoc "javadoc 83%")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
-[![tests 1513](https://img.shields.io/badge/tests-1513%20%2F%201513-green.svg "tests 1513")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core) 
+[![javadoc 83%](http://progressed.io/bar/83?title=javadoc "javadoc 83%")](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/)
+[![tests 1513](https://img.shields.io/badge/tests-1513%20%2F%201513-green.svg "tests 1513")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core)
+![Coverage 85%](http://progressed.io/bar/85?title=Coverage "Coverage 85%")
 
 > Reduce development, Release ideas (减少开发,释放思想)
 
@@ -31,7 +32,7 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 ![](http://i.imgur.com/FG9ty3Q.png)
 
-- [使用 feilong-core 的理由](https://github.com/venusdrogon/feilong-core/wiki/Reasons-for-use-feilong-core) 
+- [使用 feilong-core 的理由](https://github.com/venusdrogon/feilong-core/wiki/Reasons-for-use-feilong-core)
 
 1. 有常用的工具类 (如 处理日期的 `DateUtil`,处理 集合 的 `CollectionsUtil` 等)
 1. 有常用的JAVA常量类 (如日期格式 `DatePattern`, 时间间隔 `TimeInterval` 等)
@@ -41,13 +42,13 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 ## 3.一图概述:
 
-![one-feilong-core](http://venusdrogon.github.io/feilong-platform/mysource/one-feilong-core.png) 
+![one-feilong-core](http://venusdrogon.github.io/feilong-platform/mysource/one-feilong-core.png)
 
 这里有详细的帮助文档 http://feilong-core.mydoc.io/
 
 ## 4.:dragon: Maven使用配置
 
-`feilong-core` jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core "仓库") 浏览 
+`feilong-core` jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-core "仓库") 浏览
 
 如果你使用 `maven`, 您可以通过以下方式来配置 `pom.xml`:
 
@@ -59,7 +60,7 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 		<version.feilong-platform>1.10.3</version.feilong-platform>
 		....
 	</properties>
-	
+
 	....
 	<repositories>
 		<repository>
@@ -67,7 +68,7 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 			<url>https://raw.github.com/venusdrogon/feilong-platform/repository</url>
 		</repository>
 	</repositories>
-	
+
 	....
 	<dependencies>
 		....
@@ -98,15 +99,15 @@ mvn install -f feilong-core
 
 ## 6.帮助:
 
-- [帮助文档](http://feilong-core.mydoc.io/) 
-- [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/) 
-- [Release notes](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/) 
-- [wiki](https://github.com/venusdrogon/feilong-core/wiki) 
-- [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/) 
+- [帮助文档](http://feilong-core.mydoc.io/)
+- [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/)
+- [Release notes](http://venusdrogon.github.io/feilong-platform/releasenotes/feilong-core/)
+- [wiki](https://github.com/venusdrogon/feilong-core/wiki)
+- [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/)
 
 ## 7.sonar 扫描
 
-![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core.png) 
+![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core.png)
 
 ## 8.:memo: 说明
 
