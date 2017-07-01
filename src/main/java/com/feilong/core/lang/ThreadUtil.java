@@ -84,6 +84,61 @@ public final class ThreadUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 创建指定数量 <b>threadCount</b> 的线程,并执行.
+     * 
+     * <p>
+     * 
+     * 如果 <code>runnable</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 {@code threadCount <=0},抛出 {@link IllegalArgumentException}<br>
+     * 
+     * </p>
+     *
+     * @param runnable
+     *            the runnable
+     * @param threadCount
+     *            the thread count
+     * @since 1.10.4
+     */
+    public static void execute(Runnable runnable,int threadCount){
+        Validate.notNull(runnable, "runnable can't be null!");
+        Validate.isTrue(threadCount > 0, "threadCount must > 0");
+
+        //---------------------------------------------------------------
+
+        Date beginDate = new Date();
+
+        Thread[] threads = buildThreadArray(runnable, threadCount);
+        ThreadUtil.startAndJoin(threads);
+
+        //---------------------------------------------------------------
+
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("total use time:{}", formatDuration(beginDate));
+        }
+    }
+
+    /**
+     * Builds the thread array.
+     *
+     * @param runnable
+     *            the runnable
+     * @param threadCount
+     *            the thread count
+     * @return the thread[]
+     */
+    private static Thread[] buildThreadArray(Runnable runnable,int threadCount){
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; ++i){
+            threads[i] = new Thread(runnable);
+        }
+        return threads;
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * 给定一个待解析的 <code>list</code>,设定每个线程执行多少条 <code>eachSize</code>,传入一些额外的参数 <code>paramsMap</code>,使用自定义的
      * <code>partitionRunnableBuilder</code>,自动<span style="color:green">构造多条线程</span>并运行.
@@ -121,7 +176,7 @@ public final class ThreadUtil{
      *         <span style="color:green">//---------</span>
      *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
      *     }
-     *     LOGGER.info("use time:{}", formatDuration(beginDate));
+     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -170,7 +225,7 @@ public final class ThreadUtil{
      * 
      *     });
      * 
-     *     LOGGER.info("use time:{}", formatDuration(beginDate));
+     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * </pre>
      * 
@@ -257,7 +312,7 @@ public final class ThreadUtil{
      * 
      *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
      * 
-     *     LOGGER.info("use time:{}", formatDuration(beginDate));
+     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
      * }
      * 
      * </pre>
@@ -316,10 +371,12 @@ public final class ThreadUtil{
 
         //-----------------------------------------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("begin,list size:[{}],eachSize:[{}],[{}]", list.size(), eachSize, getName(partitionRunnableBuilder));
+            LOGGER.info("begin [{}],list size:[{}],eachSize:[{}]", getName(partitionRunnableBuilder), list.size(), eachSize);
         }
 
         Date beginDate = new Date();
+
+        //---------------------------------------------------------------
 
         //1. 自动构造需要启动的线程数组
         Thread[] threads = buildThreadArray(list, eachSize, paramsMap, partitionRunnableBuilder);
@@ -327,8 +384,10 @@ public final class ThreadUtil{
         //2. start 并且 join
         startAndJoin(threads);
 
+        //---------------------------------------------------------------
+
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("end,use time:[{}],[{}]", formatDuration(beginDate), getName(partitionRunnableBuilder));
+            LOGGER.info("end [{}],use time:[{}]", getName(partitionRunnableBuilder), formatDuration(beginDate));
         }
     }
 
@@ -385,6 +444,8 @@ public final class ThreadUtil{
             threads[i] = new Thread(threadGroup, runnable, threadName);
             i++;
         }
+
+        //---------------------------------------------------------------
 
         LOGGER.info("total list size:[{}],build [{}] threads,perSize:[{}]", list.size(), threads.length, eachSize);
         return threads;
@@ -466,9 +527,9 @@ public final class ThreadUtil{
      * </ul>
      * 
      * </blockquote>
-     * 
-     * @param <T>
      *
+     * @param <T>
+     *            the generic type
      * @param batchNumber
      *            the batch number
      * @param partitionRunnableBuilder
@@ -504,6 +565,8 @@ public final class ThreadUtil{
             LOGGER.debug("thread [{}] start", thread.getName());
         }
 
+        //---------------------------------------------------------------
+
         try{
             for (Thread thread : threads){
                 LOGGER.debug("begin thread [{}] join", thread.getName());
@@ -517,6 +580,15 @@ public final class ThreadUtil{
         }
     }
 
+    /**
+     * Gets the name.
+     *
+     * @param <T>
+     *            the generic type
+     * @param partitionRunnableBuilder
+     *            the partition runnable builder
+     * @return the name
+     */
     private static <T> String getName(PartitionRunnableBuilder<T> partitionRunnableBuilder){
         return defaultIfNullOrEmpty(getSimpleName(partitionRunnableBuilder.getClass()), partitionRunnableBuilder.getClass().getName());
     }

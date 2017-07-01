@@ -26,6 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 ExecuteTest.class,
+                ExecuteCountTest.class,
         //
 })
 public class FeiLongThreadUtilSuiteTests{
