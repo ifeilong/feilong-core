@@ -15,17 +15,17 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.util.SortUtil.sortMapByValueAsc;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-
-import static com.feilong.core.util.SortUtil.sortMapByValueAsc;
 
 /**
  * The Class SortUtilSortMapByValueAscTest.
@@ -47,12 +47,31 @@ public class SortMapByValueAscTest{
         assertThat(sortByValueAsc.keySet(), contains("b", "a", "c"));
     }
 
+    @Test
+    public void testSortByValueASCSameValue(){
+        Map<String, Integer> map = new LinkedHashMap<>();
+        map.put("a", 123);
+        map.put("c", 345);
+        map.put("b", 8);
+        map.put("d", 123);
+        Map<String, Integer> sortByValueAsc = sortMapByValueAsc(map);
+        assertThat(sortByValueAsc.keySet(), contains("b", "a", "d", "c"));
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * Test sort by value ASC null map.
      */
     @Test
     public void testSortByValueASCNullMap(){
         assertEquals(emptyMap(), sortMapByValueAsc(null));
+    }
+
+    @Test
+    public void testSortByValueASCEmptyMap(){
+        Map<String, Integer> map = emptyMap();
+        assertEquals(emptyMap(), sortMapByValueAsc(map));
     }
 
 }

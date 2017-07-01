@@ -15,6 +15,8 @@
  */
 package com.feilong.core;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * 常用字符编码.
  * 
@@ -33,7 +35,7 @@ package com.feilong.core;
 public final class CharsetType{
 
     /**
-     * <code>{@value}</code>,Eight-bit (Unicode Transformation Format).
+     * <code>UTF-8</code>,Eight-bit (Unicode Transformation Format).
      *
      * <p>
      * Every implementation of the Java platform is required to support this character encoding.
@@ -78,7 +80,7 @@ public final class CharsetType{
      * @see org.apache.commons.lang3.CharEncoding#UTF_8
      * @see java.nio.charset.StandardCharsets#UTF_8
      */
-    public static final String UTF8       = org.apache.commons.lang3.CharEncoding.UTF_8;
+    public static final String UTF8       = StandardCharsets.UTF_8.name();
 
     //******************************************************************************************
 
@@ -151,7 +153,7 @@ public final class CharsetType{
     // *********************************************************************************************
 
     /**
-     * ISO/IEC 8859-1,又称Latin-1或"西欧语言",是国际标准化组织内ISO/IEC 8859的第一个8位字符集 <code>{@value}</code>.
+     * <code>ISO-8859-1</code>,ISO/IEC 8859-1,又称Latin-1或"西欧语言",是国际标准化组织内ISO/IEC 8859的第一个8位字符集 <code>{@value}</code>.
      * 
      * <p>
      * ISO Latin Alphabet #1, also known as ISO-LATIN-1.<br>
@@ -173,7 +175,7 @@ public final class CharsetType{
      * @see org.apache.commons.lang3.CharEncoding#ISO_8859_1
      * @see java.nio.charset.StandardCharsets#ISO_8859_1
      */
-    public static final String ISO_8859_1 = org.apache.commons.lang3.CharEncoding.ISO_8859_1;
+    public static final String ISO_8859_1 = StandardCharsets.ISO_8859_1.name();
 
     /** Don't let anyone instantiate this class. */
     private CharsetType(){

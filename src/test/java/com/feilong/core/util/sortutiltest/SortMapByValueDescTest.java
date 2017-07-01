@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -24,8 +25,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
-
-import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
 
 /**
  * The Class SortUtilSortMapByValueDescTest.
@@ -47,11 +46,32 @@ public class SortMapByValueDescTest{
         assertThat(sortMapByValueDesc(map).keySet(), contains("c", "a", "b"));
     }
 
+    @Test
+    public void testSortByValueDescSameValue(){
+        Map<String, Integer> map = new LinkedHashMap<>();
+        map.put("a", 123);
+        map.put("c", 345);
+        map.put("b", 8);
+        map.put("f", 8);
+        map.put("g", 123);
+        map.put("d", 123);
+
+        assertThat(sortMapByValueDesc(map).keySet(), contains("c", "a", "g", "d", "b", "f"));
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * Test sort by value desc null map.
      */
     @Test
     public void testSortByValueDescNullMap(){
         assertEquals(emptyMap(), sortMapByValueDesc(null));
+    }
+
+    @Test
+    public void testSortByValueDescEmptyMap(){
+        Map<String, Integer> map = emptyMap();
+        assertEquals(emptyMap(), sortMapByValueDesc(map));
     }
 }

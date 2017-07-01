@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.util.SortUtil.sortMapByKeyDesc;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
@@ -27,23 +28,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import static com.feilong.core.util.SortUtil.sortMapByKeyDesc;
-
 /**
  * The Class SortUtilSortMapByKeyDescTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class SortMapByKeyDescTest{
-
-    /**
-     * Test sort by key desc null map.
-     */
-    //**************com.feilong.core.util.SortUtil.sortByKeyDesc(Map<String, Integer>)**************************
-    @Test
-    public void testSortByKeyDescNullMap(){
-        assertEquals(emptyMap(), sortMapByKeyDesc(null));
-    }
 
     /**
      * Test sort by key desc.
@@ -60,4 +50,20 @@ public class SortMapByKeyDescTest{
         assertThat(sortByKeyDesc.keySet(), contains("c", "b", "a", null));
         assertThat(map, allOf(hasEntry("c", 345), hasEntry("b", 8), hasEntry("a", 123), hasEntry(null, 8)));
     }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Test sort by key desc null map.
+     */
+    @Test
+    public void testSortByKeyDescNullMap(){
+        assertEquals(emptyMap(), sortMapByKeyDesc(null));
+    }
+
+    @Test
+    public void testSortByKeyDescEmptyMap(){
+        assertEquals(emptyMap(), sortMapByKeyDesc(emptyMap()));
+    }
+
 }

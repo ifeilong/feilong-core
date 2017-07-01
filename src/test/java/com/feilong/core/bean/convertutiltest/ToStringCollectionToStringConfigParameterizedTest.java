@@ -18,8 +18,8 @@ package com.feilong.core.bean.convertutiltest;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ToStringConfig.DEFAULT_CONFIG;
 import static com.feilong.core.bean.ToStringConfig.IGNORE_NULL_OR_EMPTY_CONFIG;
+import static java.lang.System.lineSeparator;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
@@ -78,8 +78,8 @@ public class ToStringCollectionToStringConfigParameterizedTest
                                 { toList("feilong", "", "xinge", null), new ToStringConfig("@"), "feilong@@xinge@" },
                                 {
                                   toList("飞龙", "小金", "四金", "金金金金"),
-                                  new ToStringConfig(LINE_SEPARATOR),
-                                  "飞龙" + LINE_SEPARATOR + "小金" + LINE_SEPARATOR + "四金" + LINE_SEPARATOR + "金金金金" }, };
+                                  new ToStringConfig(lineSeparator()),
+                                  "飞龙" + lineSeparator() + "小金" + lineSeparator() + "四金" + lineSeparator() + "金金金金" }, };
     }
 
     /**
