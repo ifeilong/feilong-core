@@ -15,17 +15,16 @@
  */
 package com.feilong.core;
 
-import static org.junit.Assert.assertEquals;
-
-import java.nio.charset.Charset;
-
-import org.junit.Test;
-
 import static com.feilong.core.CharsetType.GB18030;
 import static com.feilong.core.CharsetType.GB2312;
 import static com.feilong.core.CharsetType.GBK;
 import static com.feilong.core.CharsetType.ISO_8859_1;
 import static com.feilong.core.CharsetType.UTF8;
+import static org.junit.Assert.assertEquals;
+
+import java.nio.charset.Charset;
+
+import org.junit.Test;
 
 /**
  * The Class CharsetTypeTest.
@@ -44,5 +43,15 @@ public class CharsetTypeTest{
         assertEquals(true, Charset.isSupported(GB2312));
         assertEquals(true, Charset.isSupported(GBK));
         assertEquals(true, Charset.isSupported(UTF8));
+    }
+
+    @Test
+    public void testUtf8(){
+        assertEquals("UTF-8", CharsetType.UTF8);
+    }
+
+    @Test
+    public void testIso88591(){
+        assertEquals("ISO-8859-1", CharsetType.ISO_8859_1);
     }
 }

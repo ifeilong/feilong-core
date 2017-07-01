@@ -27,6 +27,7 @@ import com.feilong.core.lang.numberutiltest.FeiLongNumberUtilSuiteTests;
 import com.feilong.core.lang.objectutiltest.FeiLongObjectUtilSuiteTests;
 import com.feilong.core.lang.reflect.FeiLongReflectSuiteTests;
 import com.feilong.core.lang.stringutiltest.FeiLongStringUtilSuiteTests;
+import com.feilong.core.lang.systemutiltest.FeiLongSystemUtilSuiteTests;
 import com.feilong.core.lang.threadutiltest.FeiLongThreadUtilSuiteTests;
 
 /**
@@ -50,6 +51,8 @@ import com.feilong.core.lang.threadutiltest.FeiLongThreadUtilSuiteTests;
                 FeiLongClassUtilSuiteTests.class,
 
                 FeiLongThreadUtilSuiteTests.class,
+
+                FeiLongSystemUtilSuiteTests.class,
         //
 })
 public class FeiLongLangSuiteTests{

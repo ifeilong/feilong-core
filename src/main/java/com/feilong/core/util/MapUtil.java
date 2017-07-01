@@ -760,7 +760,7 @@ public final class MapUtil{
      * <blockquote>
      * <ol>
      * <li>返回的map为 {@link LinkedHashMap},key的顺序 按照参数 <code>keys</code>的顺序</li>
-     * <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log</li>
+     * <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出debug level log</li>
      * </ol>
      * </blockquote>
      * 
@@ -794,10 +794,10 @@ public final class MapUtil{
      * @param map
      *            the map
      * @param keys
-     *            如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
+     *            如果循环的 key不在map key里面,则返回的map中忽略该key,并输出debug level log
      * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};<br>
      *         如果 <code>keys</code> 是null或者empty,直接返回 <code>map</code><br>
-     *         如果循环的 key不在map key里面,则返回的map中忽略该key,并输出warn level log
+     *         如果循环的 key不在map key里面,则返回的map中忽略该key,并输出debug level log
      */
     @SafeVarargs
     public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K...keys){
@@ -879,13 +879,13 @@ public final class MapUtil{
     /**
      * 删除 <code>map</code> 的指定的 <code>keys</code>.
      * 
-     * <h3>注意</h3>
+     * <h3>注意:</h3>
      * 
      * <blockquote>
      * <p>
-     * 直接操作的是参数<code>map</code>,迭代 <code>keys</code>,<br>
+     * 直接操作的是参数<code>map</code>本身,迭代 <code>keys</code>,<br>
      * 如果 <code>map</code>包含key,那么直接调用 {@link Map#remove(Object)},<br>
-     * 如果不包含,那么输出warn级别日志
+     * 如果不包含,那么输出debug级别日志
      * </p>
      * </blockquote>
      * 

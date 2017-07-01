@@ -182,7 +182,7 @@ public final class DateExtensionUtil{
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time:{}", DateExtensionUtil.getIntervalForView(beginDate));
+     * LOGGER.info("use time: [{}]", DateExtensionUtil.getIntervalForView(beginDate));
      * </pre>
      * 
      * </blockquote>
@@ -253,7 +253,7 @@ public final class DateExtensionUtil{
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time:{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+     * LOGGER.info("use time: [{}]", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
      * 
      * </pre>
      * 

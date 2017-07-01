@@ -15,6 +15,9 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -59,10 +62,6 @@ import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.SortUtil;
 import com.feilong.core.util.transformer.SimpleClassTransformer;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 /**
  * 常用类型转换处理.
@@ -1026,7 +1025,7 @@ public final class ConvertUtil{
      * <pre class="code">
      * List{@code <String>} list = toList("飞龙", "小金", "四金", "金金金金");
      * 
-     * ToStringConfig toStringConfig = new ToStringConfig(SystemUtils.LINE_SEPARATOR);
+     * ToStringConfig toStringConfig = new ToStringConfig(System.lineSeparator());
      * LOGGER.debug(ConvertUtil.toString(list, toStringConfig));
      * </pre>
      * 
@@ -1387,7 +1386,8 @@ public final class ConvertUtil{
      * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = new LinkedHashMap{@code <>}();
      * 
      * static{
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");<span style="color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方)</span>
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");<span style=
+    "color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方)</span>
      *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_GB, "GB");<span style="color:green">//(Gigabyte,吉字节,又称“千兆”)=1024MB</span>
      *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_MB, "MB");<span style="color:green">//(Megabyte,兆字节,简称“兆”)=1024KB</span>
      *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_KB, "KB");<span style="color:green">//(Kilobyte 千字节)=1024B</span>
