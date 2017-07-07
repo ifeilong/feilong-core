@@ -89,10 +89,10 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 ```bat
 git clone https://github.com/venusdrogon/feilong-platform.git --depth 1
-mvn install -f feilong-platform
+mvn install -f feilong-platform/pom.xml
 
 git clone https://github.com/venusdrogon/feilong-core.git --depth 1
-mvn install -f feilong-core
+mvn install -f feilong-core/pom.xml
 ```
 
 **详细参考** https://github.com/venusdrogon/feilong-core/wiki/install
