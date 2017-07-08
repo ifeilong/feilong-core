@@ -33,6 +33,7 @@ import java.util.Set;
 
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -203,6 +204,8 @@ public final class MapUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 根据索引来获得map 的entry.
      * 
@@ -315,6 +318,8 @@ public final class MapUtil{
         Set<Entry<K, V>> entrySet = map.entrySet();
         return IterableUtils.get(entrySet, index);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将多值的<code>arrayValueMap</code> 转成单值的map.
@@ -450,6 +455,8 @@ public final class MapUtil{
         }
         return arrayValueMap;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 仅当 <code>null != map 并且 null != value</code>才将key/value put到map中.
@@ -753,6 +760,8 @@ public final class MapUtil{
         return map;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得一个<code>map</code> 中的按照指定的<code>key</code> 整理成新的map.
      * 
@@ -820,13 +829,14 @@ public final class MapUtil{
     }
 
     /**
-     * 获得 sub map(去除不需要的keys).
+     * 获得 sub map(排除指定的 excludeKeys).
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>返回值为 {@link LinkedHashMap},key的顺序 按照参数 <code>map</code>的顺序</li>
-     * <li>如果 <code>excludeKeys</code>中含有 map 中不存在的key,将会输出warn级别的log</li>
+     * <li>原 <code>map</code> <b>不变</b></li>
+     * <li>此方法可以提取{@link Collections#unmodifiableMap(Map)}</li>
+     * <li>返回值为 {@link LinkedHashMap},key的顺序按照参数 <code>map</code>的顺序</li>
      * </ol>
      * </blockquote>
      * 
@@ -873,7 +883,21 @@ public final class MapUtil{
         if (isNullOrEmpty(map)){
             return emptyMap();
         }
-        return isNullOrEmpty(excludeKeys) ? map : removeKeys(new LinkedHashMap<>(map), excludeKeys); //保证元素的顺序 
+        //---------------------------------------------------------------
+        if (isNullOrEmpty(excludeKeys)){
+            return map;
+        }
+
+        //---------------------------------------------------------------
+        Map<K, T> returnMap = newLinkedHashMap(map.size());//保证元素的顺序 
+
+        for (Map.Entry<K, T> entry : map.entrySet()){
+            K key = entry.getKey();
+            if (!ArrayUtils.contains(excludeKeys, key)){
+                returnMap.put(key, entry.getValue());
+            }
+        }
+        return returnMap;
     }
 
     /**
@@ -882,11 +906,12 @@ public final class MapUtil{
      * <h3>注意:</h3>
      * 
      * <blockquote>
-     * <p>
-     * 直接操作的是参数<code>map</code>本身,迭代 <code>keys</code>,<br>
-     * 如果 <code>map</code>包含key,那么直接调用 {@link Map#remove(Object)},<br>
-     * 如果不包含,那么输出debug级别日志
-     * </p>
+     * <ol>
+     * <li>原 <code>map</code> <span style="color:red">会改变</span></li>
+     * <li>此方法<b>删除不了</b> {@link Collections#unmodifiableMap(Map)}</li>
+     * <li>如果 <code>map</code>包含key,那么直接调用 {@link Map#remove(Object)}</li>
+     * <li>如果不包含,那么输出debug级别日志</li>
+     * </ol>
      * </blockquote>
      * 
      * 
@@ -1000,6 +1025,8 @@ public final class MapUtil{
     public static <K, V> Map<V, K> invertMap(Map<K, V> map){
         return null == map ? null : MapUtils.invertMap(map);//返回的是 HashMap
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 以参数 <code>map</code>的key为key,以参数 <code>map</code> value的指定<code>extractPropertyName</code>属性值为值,拼装成新的map返回.
@@ -1144,9 +1171,13 @@ public final class MapUtil{
 
         Validate.notBlank(extractPropertyName, "extractPropertyName can't be null/empty!");
 
+        //---------------------------------------------------------------
+
         //如果excludeKeys是null,那么抽取所有的key
         @SuppressWarnings("unchecked") // NOPMD - false positive for generics
         K[] useIncludeKeys = isNullOrEmpty(includeKeys) ? (K[]) map.keySet().toArray() : includeKeys;
+
+        //---------------------------------------------------------------
 
         //保证元素的顺序,顺序是参数  includeKeys的顺序
         Map<K, V> returnMap = newLinkedHashMap(useIncludeKeys.length);
