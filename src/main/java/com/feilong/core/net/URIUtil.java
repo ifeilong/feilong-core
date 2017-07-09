@@ -188,6 +188,8 @@ public final class URIUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 直接调用 {@link java.net.URI#create(String)} 创造一个URI,异常信息更丰富.
      * 
@@ -416,6 +418,7 @@ public final class URIUtil{
      * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @see URLEncoder#encode(String, String)
+     * @see <a href="http://www.freeformatter.com/url-encoder.html">URL Encoder / Decoder</a>
      */
     public static String encode(String value,String charsetType){
         return encodeOrDecode(value, charsetType, true);

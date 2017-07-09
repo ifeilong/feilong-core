@@ -81,6 +81,8 @@ public final class URLUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将字符串 <code>spec</code> 转成 {@link URL}.
      * 

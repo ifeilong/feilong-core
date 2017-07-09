@@ -26,7 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                EncodeTest.class,
+                EncodeParameterizedTest.class,
                 EncodeUriTest.class,
                 DecodeTest.class,
 
