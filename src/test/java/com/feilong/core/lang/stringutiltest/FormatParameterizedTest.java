@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang.stringutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
@@ -23,9 +25,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class StringUtilFormatParameterizedTest.
@@ -50,7 +49,7 @@ public class FormatParameterizedTest extends AbstractTwoParamsAndOneResultParame
     @Parameters(name = "index:{index}:StringUtil.format(\"{0}\", {1})=\"{2}\"")
     public static Iterable<Object[]> data(){
         Object[] arrays = new Object[] { "%d", toArray(5), "5" };
-        return toList(//         
+        return toList(
                         arrays,
                         toArray(null, toArray(), EMPTY), // null
                         toArray("%+d", toArray(5), "+5"),

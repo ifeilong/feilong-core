@@ -49,7 +49,7 @@ public class DefaultIfNullOrEmptyParameterizedTest extends AbstractTwoParamsAndO
      * @since 1.10.3
      */
     private static Object[][] build(){
-        return new Object[][] { //
+        return new Object[][] {
                                 new Object[] { null, 1, 1 },
                                 new Object[] { null, null, null },
                                 new Object[] { new ArrayList<>(), 1, 1 },

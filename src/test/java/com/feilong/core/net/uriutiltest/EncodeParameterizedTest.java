@@ -38,41 +38,45 @@ public class EncodeParameterizedTest extends AbstractTwoParamsAndOneResultParame
      */
     @Parameters(name = "index:{index}: URIUtil.encode({0},{1})={2}")
     public static Iterable<Object[]> data(){
-        Object[][] objects = new Object[][] {
-                                              { "Lifestyle / Graphic,", UTF8, "Lifestyle+%2F+Graphic%2C" },
-                                              { "Lifestyle / Graphic,", UTF8, "Lifestyle+%2F+Graphic%2C" },
-                                              { "%", UTF8, "%25" },
-                                              { "%25", UTF8, "%2525" },
-                                              { null, UTF8, EMPTY },
+        Object[][] objects = build();
+        return toList(objects);
+    }
 
-                                              // $ (Dollar Sign) becomes %24
-                                              // & (Ampersand) becomes %26
-                                              // + (Plus) becomes %2B
-                                              // , (Comma) becomes %2C
-                                              // : (Colon) becomes %3A
-                                              // ; (Semi-Colon) becomes %3B
-                                              // = (Equals) becomes %3D
-                                              // ? (Question Mark) becomes %3F
-                                              // @ (Commercial A / At) becomes %40
+    private static Object[][] build(){
+        return new Object[][] {
+                                { "Lifestyle / Graphic,", UTF8, "Lifestyle+%2F+Graphic%2C" },
+                                { "Lifestyle / Graphic,", UTF8, "Lifestyle+%2F+Graphic%2C" },
+                                { "%", UTF8, "%25" },
+                                { "%25", UTF8, "%2525" },
+                                { null, UTF8, EMPTY },
 
-                                              { "$", UTF8, "%24" },
-                                              { "&", UTF8, "%26" },
-                                              { "+", UTF8, "%2B" },
-                                              { ",", UTF8, "%2C" },
-                                              { ":", UTF8, "%3A" },
-                                              { ";", UTF8, "%3B" },
-                                              { "=", UTF8, "%3D" },
-                                              { "?", UTF8, "%3F" },
-                                              { "@", UTF8, "%40" },
+                                // $ (Dollar Sign) becomes %24
+                                // & (Ampersand) becomes %26
+                                // + (Plus) becomes %2B
+                                // , (Comma) becomes %2C
+                                // : (Colon) becomes %3A
+                                // ; (Semi-Colon) becomes %3B
+                                // = (Equals) becomes %3D
+                                // ? (Question Mark) becomes %3F
+                                // @ (Commercial A / At) becomes %40
 
-                                              { "", UTF8, EMPTY },
-                                              { " ", UTF8, EMPTY },
-                                              { "白色/黑色/纹理浅麻灰", null, "白色/黑色/纹理浅麻灰" },
-                                              { "白色/黑色/纹理浅麻灰", "", "白色/黑色/纹理浅麻灰" },
-                                              { "白色/黑色/纹理浅麻灰", " ", "白色/黑色/纹理浅麻灰" },
+                                { "$", UTF8, "%24" },
+                                { "&", UTF8, "%26" },
+                                { "+", UTF8, "%2B" },
+                                { ",", UTF8, "%2C" },
+                                { ":", UTF8, "%3A" },
+                                { ";", UTF8, "%3B" },
+                                { "=", UTF8, "%3D" },
+                                { "?", UTF8, "%3F" },
+                                { "@", UTF8, "%40" },
+
+                                { "", UTF8, EMPTY },
+                                { " ", UTF8, EMPTY },
+                                { "白色/黑色/纹理浅麻灰", null, "白色/黑色/纹理浅麻灰" },
+                                { "白色/黑色/纹理浅麻灰", "", "白色/黑色/纹理浅麻灰" },
+                                { "白色/黑色/纹理浅麻灰", " ", "白色/黑色/纹理浅麻灰" },
                 //
         };
-        return toList(objects);
     }
 
     /**
