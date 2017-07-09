@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net;
 
+import static com.feilong.core.URIComponents.QUESTIONMARK;
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.INDEX_NOT_FOUND;
 
@@ -35,9 +37,6 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import static com.feilong.core.URIComponents.QUESTIONMARK;
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 处理{@link java.net.URI}(Uniform Resource Locator) {@link java.net.URL}(Uniform Resource Identifier) 等.
@@ -379,14 +378,11 @@ public final class URIUtil{
     // [start] encode/decode
 
     /**
-     * 使用指定的编码 <code>charsetType</code>,将普通的字符串转成<code>application/x-www-form-urlencoded</code>格式的字符串 .
+     * 使用指定的编码 <code>charsetType</code>,将普通的字符串转成<code>application/x-www-form-urlencoded</code>格式的字符串.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * 
-     * <li>不要用 {@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.</li>
-     * 
      * <li>
      * 
      * <p>
@@ -394,20 +390,21 @@ public final class URIUtil{
      * </p>
      * 
      * <ul>
-     * <li>字母数字字符 "a" 到 "z"、"A" 到 "Z" 和 "0" 到 "9" 保持不变.</li>
+     * <li>字母/数字字符保持不变, ("a-z"、"A-Z" 和 "0-9") .</li>
      * <li>特殊字符 "."、"-"、"*" 和 "_" 保持不变.</li>
      * <li>空格字符 " " 转换为一个加号 "+".</li>
+     * <li>% 转换为 %25</li>
      * 
      * <li>
-     * 所有其他字符都是不安全的,因此首先使用一些编码机制将它们转换为一个或多个字节.<br>
-     * 然后每个字节用一个包含 3 个字符的字符串 "%xy" 表示,其中 xy 为该字节的两位十六进制表示形式.
+     * 所有其他字符都是不安全的,因此首先使用一些编码机制将它们转换为一个或多个字节,然后每个字节用一个包含 3 个字符的字符串 "%xy" 表示,其中 xy 为该字节的两位十六进制表示形式.
      * </li>
      * 
-     * <li>
-     * 推荐的编码机制是{@link CharsetType#UTF8}.</li>
      * </ul>
      * 
      * </li>
+     * 
+     * <li>不要用 {@link java.net.URLEncoder} 或者 {@link java.net.URLDecoder}来处理整个URL,一般用来处理参数值.</li>
+     * <li>推荐的编码机制是{@link CharsetType#UTF8}.</li>
      * 
      * </ol>
      * </blockquote>
