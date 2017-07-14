@@ -18,18 +18,44 @@ package com.feilong.core.lang.annotation;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
+import java.lang.reflect.Field;
+
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
+import com.feilong.core.bean.Alias;
+import com.feilong.core.entity.DangaMemCachedConfig;
+
 /**
- * 
+ * The Class DefaultAnnotationToStringBuilderTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
  */
 public class DefaultAnnotationToStringBuilderTest{
 
+    /** The annotation to string builder. */
+    private final AnnotationToStringBuilder annotationToStringBuilder = DefaultAnnotationToStringBuilder.instance();
+
+    /**
+     * Test.
+     */
     @Test
     public void test(){
-        AnnotationToStringBuilder annotationToStringBuilder = new DefaultAnnotationToStringBuilder();
         assertEquals(EMPTY, annotationToStringBuilder.build(null));
     }
+
+    /**
+     * Test 1.
+     */
+    @Test
+    public void test1(){
+        Field field = FieldUtils.getDeclaredField(DangaMemCachedConfig.class, "serverList", true);
+        Alias alias = field.getAnnotation(Alias.class);
+
+        assertEquals(
+                        "@com.feilong.core.bean.Alias(name=memcached.serverlist, sampleValue=172.20.31.23:11211,172.20.31.22:11211)",
+                        annotationToStringBuilder.build(alias));
+    }
+
 }

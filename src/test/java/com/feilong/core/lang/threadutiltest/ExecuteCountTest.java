@@ -26,6 +26,16 @@ import com.feilong.core.lang.ThreadUtil;
  */
 public class ExecuteCountTest{
 
+    @Test
+    public void testExecute(){
+        ThreadUtil.execute(new Runnable(){
+
+            @Override
+            public void run(){
+
+            }
+        }, 1);
+    }
     //---------------------------------------------------------
 
     @Test(expected = NullPointerException.class)

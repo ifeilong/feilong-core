@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang.reflect;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.selectRejected;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -35,9 +37,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.CollectionsUtil.selectRejected;
 
 /**
  * focus on {@link Field} 反射工具类.
@@ -118,6 +117,8 @@ public final class FieldUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得对象 <code>obj</code> 所有字段的值(<b>不是属性</b>),key是 fieldName,value 是值.
@@ -221,6 +222,8 @@ public final class FieldUtil{
         };
         return selectRejected(fieldList, PredicateUtils.orPredicate(excludeFieldPredicate, staticPredicate));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 得到某个对象 <code>owner</code> 的公共字段 <code>fieldName</code> 值.

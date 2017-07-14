@@ -69,6 +69,9 @@
 	<category name="com.feilong.core.util.MapUtil">
 		<priority value="info" />
 	</category>
+	<category name="com.feilong.core.lang.ThreadUtil">
+		<priority value="info" />
+	</category>
 
 	<!-- 设置接收所有输出的通道 -->
 	<root>

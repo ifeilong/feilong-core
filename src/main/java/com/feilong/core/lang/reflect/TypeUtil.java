@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang.reflect;
 
+import static com.feilong.core.bean.ConvertUtil.convert;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -23,8 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-
-import static com.feilong.core.bean.ConvertUtil.convert;
 
 /**
  * Utility methods focusing on type inspection, particularly with regard to generics.
@@ -87,7 +87,7 @@ public final class TypeUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //**************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 获得某个类的父类上面的泛型参数的类型.
@@ -183,7 +183,7 @@ public final class TypeUtil{
         return extractActualTypeArgumentClassArray(parameterizedType);
     }
 
-    //*******************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 获得 generic interfaces parameterized type.
@@ -200,13 +200,17 @@ public final class TypeUtil{
     private static ParameterizedType getGenericInterfacesParameterizedType(Class<?> klass,Class<?> extractInterfaceClass){
         Type[] genericInterfaces = klass.getGenericInterfaces();
         for (Type genericInterface : genericInterfaces){
-            if (genericInterface instanceof ParameterizedType){
-                ParameterizedType genericInterfacesType = (ParameterizedType) genericInterface;
-                Type rawType = genericInterfacesType.getRawType();
+            if (!(genericInterface instanceof ParameterizedType)){
+                continue;
+            }
 
-                if (extractInterfaceClass == rawType){
-                    return genericInterfacesType;
-                }
+            //---------------------------------------------------------------
+
+            ParameterizedType genericInterfacesType = (ParameterizedType) genericInterface;
+            Type rawType = genericInterfacesType.getRawType();
+
+            if (extractInterfaceClass == rawType){
+                return genericInterfacesType;
             }
         }
         return null;
@@ -247,8 +251,12 @@ public final class TypeUtil{
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("parameterizedType info:[{}]", parameterizedType);
         }
+
+        //---------------------------------------------------------------
         Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
         Validate.notNull(actualTypeArguments, "actualTypeArguments can't be null/empty!");
+
+        //---------------------------------------------------------------
 
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("actualTypeArguments:[{}]", ConvertUtil.toString(actualTypeArguments, null));

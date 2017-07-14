@@ -116,7 +116,7 @@ public final class ThreadUtil{
         //---------------------------------------------------------------
 
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("total use time:{}", formatDuration(beginDate));
+            LOGGER.info("runnable:[{}],threadCount:[{}],total use time:{}", runnable.toString(), threadCount, formatDuration(beginDate));
         }
     }
 

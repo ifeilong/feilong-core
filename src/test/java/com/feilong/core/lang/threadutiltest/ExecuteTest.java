@@ -16,11 +16,14 @@
 package com.feilong.core.lang.threadutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static java.util.Collections.emptyList;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
@@ -34,6 +37,21 @@ import com.feilong.core.lang.ThreadUtil;
  * @since 1.10.3
  */
 public class ExecuteTest{
+
+    @Test
+    public void testExecute(){
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+
+        Map<String, Object> paramsMap = newHashMap(1);
+        paramsMap.put("result", atomicInteger);
+
+        ThreadUtil.execute(toList(2, 5, 6, 7), 2, paramsMap, new CalculatePartitionRunnableBuilder());
+
+        AtomicInteger result = (AtomicInteger) paramsMap.get("result");
+        assertEquals(20, result.get());
+
+        assertEquals(20, atomicInteger.get());
+    }
 
     //---------------------------------------------------------
 

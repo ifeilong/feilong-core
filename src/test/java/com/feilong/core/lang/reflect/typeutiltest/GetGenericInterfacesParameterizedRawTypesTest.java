@@ -15,13 +15,12 @@
  */
 package com.feilong.core.lang.reflect.typeutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
 import com.feilong.core.lang.reflect.TypeUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class TypeUtilGetGenericInterfacesParameterizedRawTypesTest.
@@ -40,6 +39,8 @@ public class GetGenericInterfacesParameterizedRawTypesTest{
 
         assertArrayEquals(toArray(SkuItem.class, Long.class), rawTypes);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test get generic interfaces parameterized raw types no extract interface class.

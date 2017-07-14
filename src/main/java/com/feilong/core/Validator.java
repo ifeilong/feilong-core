@@ -219,10 +219,14 @@ public final class Validator{
      * @since 1.5.2
      */
     private static boolean isCollectionsSupportType(Object value){
-        return value instanceof Collection // 集合
-                        || value instanceof Map// map
-                        || value instanceof Enumeration // 枚举
-                        || value instanceof Iterator// Iterator迭代器
+        // 集合或者map
+        boolean isCollectionOrMap = value instanceof Collection || value instanceof Map;
+
+        // 枚举 或者是 Iterator迭代器
+        boolean isEnumerationOrIterator = value instanceof Enumeration || value instanceof Iterator;
+
+        return isCollectionOrMap//集合或者map
+                        || isEnumerationOrIterator//枚举 或者是 Iterator迭代器
                         || value.getClass().isArray()//判断数组
         ;
     }
