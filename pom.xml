@@ -19,23 +19,9 @@
 
 	<url>https://github.com/venusdrogon/feilong-core</url>
 
-	<!-- 项目的贡献者,但不属于开发小组 -->
-	<contributors>
-		<contributor>
-			<name>benjamin.liu</name>
-			<url>https://github.com/benjaliu</url>
-		</contributor>
-
-		<contributor>
-			<name>yi.huang</name>
-			<url>https://github.com/ananbeike</url>
-		</contributor>
-
-		<contributor>
-			<name>minglei.feng</name>
-			<url>https://github.com/shade41-code</url>
-		</contributor>
-	</contributors>
+	<properties>
+		<version.jacoco-maven-plugin>0.7.9</version.jacoco-maven-plugin>
+	</properties>
 
 	<dependencies>
 		<!-- commons-lang3 -->
@@ -166,7 +152,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.9</version>
+				<version>${version.jacoco-maven-plugin}</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
@@ -215,7 +201,6 @@
 	</reporting>
 
 
-
 	<!-- 软件配置管理,如cvs 和svn -->
 	<!-- The scm url must start with 'scm:' -->
 	<scm>
@@ -246,4 +231,22 @@
 			<timezone>8</timezone>
 		</developer>
 	</developers>
+
+	<!-- 项目的贡献者,但不属于开发小组 -->
+	<contributors>
+		<contributor>
+			<name>benjamin.liu</name>
+			<url>https://github.com/benjaliu</url>
+		</contributor>
+
+		<contributor>
+			<name>yi.huang</name>
+			<url>https://github.com/ananbeike</url>
+		</contributor>
+
+		<contributor>
+			<name>minglei.feng</name>
+			<url>https://github.com/shade41-code</url>
+		</contributor>
+	</contributors>
 </project>
