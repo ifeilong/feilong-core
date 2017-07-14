@@ -15,6 +15,9 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static java.util.Collections.emptyMap;
 
 import java.lang.reflect.Field;
@@ -32,10 +35,6 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.MapUtil.newHashMap;
 
 /**
  * 对 {@link org.apache.commons.beanutils.BeanUtils}的再次封装.
@@ -113,9 +112,11 @@ import static com.feilong.core.util.MapUtil.newHashMap;
  * 
  * <pre class="code">
  * LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
- * Map am = new HashMap();
+ * 
+ * Map{@code <String,String>} am = new HashMap{@code <>}();
  * am.put("1", "234-222-1222211");
  * am.put("2", "021-086-1232323");
+ * 
  * BeanUtils.setProperty(c, "telephone", am);
  * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
  * </pre>
