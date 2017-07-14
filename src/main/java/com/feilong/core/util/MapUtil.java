@@ -18,6 +18,7 @@ package com.feilong.core.util;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toSet;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
@@ -33,7 +34,6 @@ import java.util.Set;
 
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -763,13 +763,13 @@ public final class MapUtil{
     //---------------------------------------------------------------
 
     /**
-     * 获得一个<code>map</code> 中的按照指定的<code>key</code> 整理成新的map.
+     * 获得一个<code>map</code> 中,按照指定的<code>keys</code> 整理成新的map.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>返回的map为 {@link LinkedHashMap},key的顺序 按照参数 <code>keys</code>的顺序</li>
-     * <li>如果循环的 key不在map key里面,则返回的map中忽略该key,并输出debug level log</li>
+     * <li>如果循环的 key不在map key里面,则忽略该key,并输出debug level log</li>
      * </ol>
      * </blockquote>
      * 
@@ -803,21 +803,77 @@ public final class MapUtil{
      * @param map
      *            the map
      * @param keys
-     *            如果循环的 key不在map key里面,则返回的map中忽略该key,并输出debug level log
+     *            如果循环的 key不在map key里面,则忽略该key,并输出debug level log
      * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};<br>
      *         如果 <code>keys</code> 是null或者empty,直接返回 <code>map</code><br>
-     *         如果循环的 key不在map key里面,则返回的map中忽略该key,并输出debug level log
+     *         如果循环的 key不在map key里面,则忽略该key,并输出debug level log
      */
     @SafeVarargs
     public static <K, T> Map<K, T> getSubMap(Map<K, T> map,K...keys){
+        if (isNullOrEmpty(keys)){
+            return map;
+        }
+        return getSubMap(map, toSet(keys));
+    }
+
+    /**
+     * 获得一个<code>map</code> 中,按照指定的<code>keys</code> 整理成新的map.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的map为 {@link LinkedHashMap},key的顺序 按照参数 <code>keys</code>的顺序</li>
+     * <li>如果循环的 key不在map key里面,则忽略该key,并输出debug level log</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Integer>} map = new HashMap{@code <>}();
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3001);
+     * map.put("d", 3003);
+     * LOGGER.debug(JsonUtil.format(MapUtil.getSubMap(map,toList("a", "c"))));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "a": 3007,
+     * "c": 3001
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <T>
+     *            the generic type
+     * @param map
+     *            the map
+     * @param keys
+     *            如果循环的 key不在map key里面,则忽略该key,并输出debug level log
+     * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};<br>
+     *         如果 <code>keys</code> 是null或者empty,直接返回 <code>map</code><br>
+     *         如果循环的 key不在map key里面,则忽略该key,并输出debug level log
+     * @since 1.10.4
+     */
+    public static <K, T> Map<K, T> getSubMap(Map<K, T> map,Iterable<K> keys){
         if (isNullOrEmpty(map)){
             return emptyMap();
         }
         if (isNullOrEmpty(keys)){
             return map;
         }
-        //保证元素的顺序 ,key的顺序 按照参数 <code>keys</code>的顺序
-        Map<K, T> returnMap = newLinkedHashMap(keys.length);
+
+        //---------------------------------------------------------------
+        //保证元素的顺序,key的顺序 按照参数 <code>keys</code>的顺序
+        Map<K, T> returnMap = newLinkedHashMap(10);
         for (K key : keys){
             if (map.containsKey(key)){
                 returnMap.put(key, map.get(key));
@@ -827,6 +883,8 @@ public final class MapUtil{
         }
         return returnMap;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 sub map(排除指定的 excludeKeys).
@@ -880,6 +938,64 @@ public final class MapUtil{
      */
     @SafeVarargs
     public static <K, T> Map<K, T> getSubMapExcludeKeys(Map<K, T> map,K...excludeKeys){
+        if (isNullOrEmpty(excludeKeys)){
+            return map;
+        }
+
+        return getSubMapExcludeKeys(map, toSet(excludeKeys));
+    }
+
+    /**
+     * 获得 sub map(排除指定的 excludeKeys).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>原 <code>map</code> <b>不变</b></li>
+     * <li>此方法可以提取{@link Collections#unmodifiableMap(Map)}</li>
+     * <li>返回值为 {@link LinkedHashMap},key的顺序按照参数 <code>map</code>的顺序</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Integer>} map = new LinkedHashMap{@code <>}();
+     * 
+     * map.put("a", 3007);
+     * map.put("b", 3001);
+     * map.put("c", 3002);
+     * map.put("g", -1005);
+     * 
+     * LOGGER.debug(JsonUtil.format(MapUtil.getSubMapExcludeKeys(map, toList("a", "g", "m"))));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "b": 3001,
+     * "c": 3002
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <T>
+     *            the generic type
+     * @param map
+     *            the map
+     * @param excludeKeys
+     *            the exclude keys
+     * @return 如果 <code>map</code> 是null或者empty,返回 {@link Collections#emptyMap()};<br>
+     *         如果 <code>excludeKeys</code> 是null或者empty,直接返回 <code>map</code>
+     * @since 1.10.4
+     */
+    public static <K, T> Map<K, T> getSubMapExcludeKeys(Map<K, T> map,Iterable<K> excludeKeys){
         if (isNullOrEmpty(map)){
             return emptyMap();
         }
@@ -893,12 +1009,14 @@ public final class MapUtil{
 
         for (Map.Entry<K, T> entry : map.entrySet()){
             K key = entry.getKey();
-            if (!ArrayUtils.contains(excludeKeys, key)){
+            if (!org.apache.commons.collections4.IterableUtils.contains(excludeKeys, key)){
                 returnMap.put(key, entry.getValue());
             }
         }
         return returnMap;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 删除 <code>map</code> 的指定的 <code>keys</code>.
