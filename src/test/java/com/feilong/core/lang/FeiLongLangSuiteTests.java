@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.lang.annotation.FeiLongAnnotationToStringBuilderSuiteTests;
 import com.feilong.core.lang.arrayutiltest.FeiLongArrayUtilSuiteTests;
 import com.feilong.core.lang.classloaderutiltest.FeiLongClassLoaderUtilSuiteTests;
 import com.feilong.core.lang.classutiltest.FeiLongClassUtilSuiteTests;
@@ -53,6 +54,7 @@ import com.feilong.core.lang.threadutiltest.FeiLongThreadUtilSuiteTests;
                 FeiLongThreadUtilSuiteTests.class,
 
                 FeiLongSystemUtilSuiteTests.class,
+                FeiLongAnnotationToStringBuilderSuiteTests.class,
         //
 })
 public class FeiLongLangSuiteTests{
