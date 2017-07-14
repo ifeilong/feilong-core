@@ -75,7 +75,7 @@ public class GetSubMapTest{
         map.put("b", 3001);
         map.put("c", 3001);
         map.put("d", 3003);
-        assertEquals(map, MapUtil.getSubMap(map, null));
+        assertEquals(map, MapUtil.getSubMap(map, (String[]) null));
     }
 
     /**

@@ -84,7 +84,7 @@ public class GetSubMapExcludeKeysTest{
         map.put("b", 3001);
         map.put("c", 3002);
         map.put("g", -1005);
-        assertEquals(map, MapUtil.getSubMapExcludeKeys(map, null));
+        assertEquals(map, MapUtil.getSubMapExcludeKeys(map, (String[]) null));
     }
 
 }
