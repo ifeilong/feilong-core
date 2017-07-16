@@ -768,6 +768,7 @@ public final class MapUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
+     * <li>原 <code>map</code> <b>不变</b></li>
      * <li>返回的map为 {@link LinkedHashMap},key的顺序 按照参数 <code>keys</code>的顺序</li>
      * <li>如果循环的 key不在map key里面,则忽略该key,并输出debug level log</li>
      * </ol>
@@ -822,6 +823,7 @@ public final class MapUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
+     * <li>原 <code>map</code> <b>不变</b></li>
      * <li>返回的map为 {@link LinkedHashMap},key的顺序 按照参数 <code>keys</code>的顺序</li>
      * <li>如果循环的 key不在map key里面,则忽略该key,并输出debug level log</li>
      * </ol>
