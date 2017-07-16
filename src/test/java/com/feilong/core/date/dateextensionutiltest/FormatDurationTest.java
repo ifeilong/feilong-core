@@ -15,16 +15,17 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.bean.ConvertUtil.toLong;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
 import org.junit.Test;
 
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import com.feilong.core.TimeInterval;
 
 /**
  * The Class DateExtensionUtilTest.
@@ -40,6 +41,11 @@ public class FormatDurationTest{
     @Test
     public void testFormatDurationLong(){
         assertEquals("25秒841毫秒", formatDuration(25841));
+    }
+
+    @Test
+    public void testFormatDurationLong1(){
+        assertEquals("365天", formatDuration(toLong(TimeInterval.SECONDS_PER_YEAR) * 1000));
     }
 
     /**
