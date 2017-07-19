@@ -15,10 +15,12 @@
  */
 package com.feilong.core.bean.propertyutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
@@ -30,8 +32,6 @@ import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class PropertyUtilTest.
@@ -64,6 +64,17 @@ public class CopyPropertiesTest{
                         hasProperty("nickNames", equalTo(array))
         //
         ));
+    }
+
+    @Test
+    public void testCopyPropertiesNullValue(){
+        User oldUser = new User();
+        oldUser.setId(null);
+
+        User newUser = new User();
+        PropertyUtil.copyProperties(newUser, oldUser);
+
+        assertEquals(null, newUser.getId());
     }
 
     //*******************************************************************

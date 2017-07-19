@@ -15,11 +15,14 @@
  */
 package com.feilong.core.bean.beanutiltest;
 
+import static com.feilong.core.DatePattern.TO_STRING_STYLE;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
@@ -35,16 +38,23 @@ import com.feilong.core.bean.BeanUtil;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-
-import static com.feilong.core.DatePattern.TO_STRING_STYLE;
-
 /**
  * The Class BeanUtilCopyPropertiesTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class CopyPropertiesTest{
+
+    @Test
+    public void testCopyPropertiesNullValue(){
+        User oldUser = new User();
+        oldUser.setId(null);
+
+        User newUser = new User();
+        BeanUtil.copyProperties(newUser, oldUser);
+
+        assertEquals(null, newUser.getId());
+    }
 
     /**
      * Test copy properties all.
