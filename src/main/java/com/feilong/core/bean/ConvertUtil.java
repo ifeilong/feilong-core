@@ -2146,7 +2146,7 @@ public final class ConvertUtil{
      */
     @SafeVarargs
     public static <T> List<T> toList(T...arrays){
-        return isNullOrEmpty(arrays) ? Collections.<T> emptyList() : new ArrayList<T>(Arrays.asList(arrays));
+        return isNullOrEmpty(arrays) ? Collections.<T> emptyList() : new ArrayList<>(Arrays.asList(arrays));
     }
 
     //*************************************toSet*********************************************************
@@ -2226,7 +2226,7 @@ public final class ConvertUtil{
      */
     @SafeVarargs
     public static <T> Set<T> toSet(T...arrays){
-        return isNullOrEmpty(arrays) ? Collections.<T> emptySet() : new LinkedHashSet<T>(Arrays.asList(arrays));
+        return isNullOrEmpty(arrays) ? Collections.<T> emptySet() : new LinkedHashSet<>(Arrays.asList(arrays));
     }
 
     //*************************************toArray*********************************************************
