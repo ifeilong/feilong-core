@@ -15,6 +15,11 @@
  */
 package com.feilong.core.date;
 
+import static com.feilong.core.TimeInterval.SECONDS_PER_HOUR;
+import static com.feilong.core.TimeInterval.SECONDS_PER_MINUTE;
+import static com.feilong.core.date.CalendarUtil.resetDayBegin;
+import static com.feilong.core.date.CalendarUtil.resetDayEnd;
+import static com.feilong.core.date.CalendarUtil.resetYearEnd;
 import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.DAY_OF_WEEK;
 import static java.util.Calendar.DAY_OF_YEAR;
@@ -40,12 +45,6 @@ import org.apache.commons.lang3.time.DateUtils;
 import com.feilong.core.DatePattern;
 import com.feilong.core.TimeInterval;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import static com.feilong.core.TimeInterval.SECONDS_PER_HOUR;
-import static com.feilong.core.TimeInterval.SECONDS_PER_MINUTE;
-import static com.feilong.core.date.CalendarUtil.resetDayBegin;
-import static com.feilong.core.date.CalendarUtil.resetDayEnd;
-import static com.feilong.core.date.CalendarUtil.resetYearEnd;
 
 /**
  * {@link java.util.Date}操作工具类(feilong-core核心类之一).
@@ -1167,7 +1166,7 @@ public final class DateUtil{
      * <li>转换的时候,使用日历的<b>宽松模式</b>,参见 {@link java.text.DateFormat#setLenient(boolean)},即支持传入"2016-02-33",会转换成 2016-03-04</li>
      * <li>如果能解析所有的字符串,那么视为成功</li>
      * <li>如果没有任何的模式匹配,将会抛出异常</li>
-     * <li>如果转换有异常,会将 {@link ParseException} 转成 {@link IllegalArgumentException} 返回,是 UnCheckedException异常 ,非强行要求捕获处理</li>
+     * <li>如果转换有异常,会将 {@link ParseException} 转成 {@link IllegalArgumentException} 返回,是 UnCheckedException异常 ,不需要强制catch处理</li>
      * </ol>
      * </blockquote>
      * 
