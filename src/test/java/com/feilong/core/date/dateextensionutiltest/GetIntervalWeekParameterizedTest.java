@@ -15,6 +15,12 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalWeek;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -23,29 +29,12 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalWeek;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-
 /**
  * The Class DateExtensionUtilGetIntervalWeekParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class GetIntervalWeekParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
-
-    /**
-     * Test get interval week.
-     */
-    @Test
-    public void testGetIntervalWeek(){
-        assertEquals(expectedValue, (Integer) getIntervalWeek(toDate(input1, input3), toDate(input2, input3)));
-    }
+public class GetIntervalWeekParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
 
     /**
      * Data.
@@ -64,6 +53,14 @@ public class GetIntervalWeekParameterizedTest
                         toArray("2016-08-21", "2016-08-22", COMMON_DATE, 0)
         //  
         );
+    }
+
+    /**
+     * Test get interval week.
+     */
+    @Test
+    public void testGetIntervalWeek(){
+        assertEquals(expectedValue, (Integer) getIntervalWeek(toDate(input1, input3), toDate(input2, input3)));
     }
 
 }

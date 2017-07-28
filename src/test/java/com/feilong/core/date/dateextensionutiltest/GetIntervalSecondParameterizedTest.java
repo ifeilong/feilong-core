@@ -15,6 +15,12 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalSecond;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -23,28 +29,10 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalSecond;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-
 /**
- * The Class DateExtensionUtilGetIntervalSecondParameterizedTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * The Class GetIntervalSecondParameterizedTest.
  */
-public class GetIntervalSecondParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
-
-    /**
-     * Test get interval minute.
-     */
-    @Test
-    public void testGetIntervalMinute(){
-        assertEquals(expectedValue, (Integer) getIntervalSecond(toDate(input1, input3), toDate(input2, input3)));
-    }
+public class GetIntervalSecondParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
 
     /**
      * Data.
@@ -56,8 +44,19 @@ public class GetIntervalSecondParameterizedTest
         return toList(//
                         ConvertUtil.<Object> toArray("2016-08-22 00:00:00", "2016-08-22 00:00:08", COMMON_DATE_AND_TIME, 8),
 
+                        //0
+                        toArray("2017-07-29 03:18:16.026", "2017-07-29 03:18:16.026", COMMON_DATE_AND_TIME_WITH_MILLISECOND, 0),
+                        toArray("2017-07-29 03:18:16.026", "2017-07-29 03:18:16.086", COMMON_DATE_AND_TIME_WITH_MILLISECOND, 0),
                         toArray("2016-08-21 23:59:20", "2016-08-22 00:00:20", COMMON_DATE_AND_TIME, 60)
         //  
         );
+    }
+
+    /**
+     * Test get interval minute.
+     */
+    @Test
+    public void testGetIntervalMinute(){
+        assertEquals(expectedValue, (Integer) getIntervalSecond(toDate(input1, input3), toDate(input2, input3)));
     }
 }

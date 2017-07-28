@@ -15,12 +15,6 @@
  */
 package com.feilong.core.date;
 
-import java.util.Date;
-
-import org.apache.commons.lang3.Validate;
-
-import com.feilong.core.TimeInterval;
-
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_DAY;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_HOUR;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
@@ -30,6 +24,12 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateUtil.addDay;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 import static com.feilong.core.date.DateUtil.getTime;
+
+import java.util.Date;
+
+import org.apache.commons.lang3.Validate;
+
+import com.feilong.core.TimeInterval;
 
 /**
  * 日期扩展工具类.
@@ -381,7 +381,7 @@ public final class DateExtensionUtil{
         return sb.toString();
     }
 
-    //**********************************************************************************************
+    //---------------------------------------------------------------
     // [start]interval时间间隔
 
     /**
@@ -389,9 +389,12 @@ public final class DateExtensionUtil{
      * 
      * <h3>说明:</h3>
      * <blockquote>
-     * <p>
-     * 值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_WEEK}
-     * </p>
+     * 
+     * <ul>
+     * <li>值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_WEEK}</li>
+     * <li>当两者时间差不足1星期,返回0</li>
+     * </ul>
+     * 
      * </blockquote>
      * 
      * <h3>示例:</h3>
@@ -419,9 +422,9 @@ public final class DateExtensionUtil{
      * </blockquote>
      * 
      * @param date1
-     *            the date1
+     *            第一个时间
      * @param date2
-     *            the date2
+     *            第二个时间
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalWeek(long)
@@ -444,15 +447,21 @@ public final class DateExtensionUtil{
         return (int) (spaceTime / (MILLISECOND_PER_WEEK));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 计算两个时间相差的的天数(<span style="color:red">绝对值</span>).
      * 
      * <h3>说明:</h3>
      * <blockquote>
-     * <p>
-     * 值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_DAY}
-     * </p>
+     * 
+     * <ul>
+     * <li>值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_DAY}</li>
+     * <li>当两者时间差不足1天,返回0</li>
+     * </ul>
+     * 
      * </blockquote>
+     * 
      * 
      * <h3>示例:</h3>
      * 
@@ -484,9 +493,9 @@ public final class DateExtensionUtil{
      * </blockquote>
      * 
      * @param date1
-     *            date1
+     *            第一个时间
      * @param date2
-     *            date2
+     *            第二个时间
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
@@ -510,15 +519,21 @@ public final class DateExtensionUtil{
         return (int) (spaceMilliseconds / (MILLISECOND_PER_DAY));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 两个时间相差的的小时数(<span style="color:red">绝对值</span>).
      * 
      * <h3>说明:</h3>
      * <blockquote>
-     * <p>
-     * 值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_HOUR}
-     * </p>
+     * 
+     * <ul>
+     * <li>值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_HOUR}</li>
+     * <li>当两者时间差不足1小时,返回0</li>
+     * </ul>
+     * 
      * </blockquote>
+     * 
      * 
      * <h3>示例:</h3>
      * 
@@ -545,9 +560,9 @@ public final class DateExtensionUtil{
      * </blockquote>
      * 
      * @param date1
-     *            date1
+     *            第一个时间
      * @param date2
-     *            date2
+     *            第二个时间
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
@@ -571,14 +586,19 @@ public final class DateExtensionUtil{
         return (int) (spaceMilliseconds / (MILLISECOND_PER_HOUR));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 两个时间相差的分钟(<span style="color:red">绝对值</span>).
      * 
      * <h3>说明:</h3>
      * <blockquote>
-     * <p>
-     * 值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_MINUTE}
-     * </p>
+     * 
+     * <ul>
+     * <li>值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_MINUTE}</li>
+     * <li>当两者时间差不足1分钟,返回0</li>
+     * </ul>
+     * 
      * </blockquote>
      * 
      * <h3>示例:</h3>
@@ -606,9 +626,9 @@ public final class DateExtensionUtil{
      * </blockquote>
      * 
      * @param date1
-     *            the date1
+     *            第一个时间
      * @param date2
-     *            the date2
+     *            第二个时间
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
@@ -632,16 +652,19 @@ public final class DateExtensionUtil{
         return (int) (spaceMilliseconds / (MILLISECOND_PER_MINUTE));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 两个时间相差的秒数(<span style="color:red">绝对值</span>).
      * 
      * <h3>说明:</h3>
      * <blockquote>
-     * <p>
-     * 值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_SECONDS}
-     * </p>
-     * </blockquote>
      * 
+     * <ul>
+     * <li>值=两个时间相差毫秒的绝对值/{@link TimeInterval#MILLISECOND_PER_SECONDS}</li>
+     * <li>不足1秒返回0</li>
+     * </ul>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -660,9 +683,9 @@ public final class DateExtensionUtil{
      * </blockquote>
      * 
      * @param date1
-     *            the date1
+     *            第一个时间
      * @param date2
-     *            the date2
+     *            第二个时间
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see #getIntervalTime(Date, Date)
@@ -676,6 +699,10 @@ public final class DateExtensionUtil{
     /**
      * 两个时间相差的秒数.
      * 
+     * <p>
+     * 不足1秒返回0
+     * </p>
+     * 
      * @param spaceMilliseconds
      *            间隔毫秒
      * @return 相差的秒数
@@ -684,6 +711,8 @@ public final class DateExtensionUtil{
     static int getIntervalSecond(long spaceMilliseconds){
         return (int) (spaceMilliseconds / MILLISECOND_PER_SECONDS);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 两个时间相差的<b>毫秒数</b> (<span style="color:red">绝对值</span>).
@@ -704,11 +733,10 @@ public final class DateExtensionUtil{
      * 
      * </blockquote>
      * 
-     * 
      * @param date1
-     *            date1
+     *            第一个时间
      * @param date2
-     *            date2
+     *            第二个时间
      * @return 如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}
      * @see DateUtil#getTime(Date)

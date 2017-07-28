@@ -15,6 +15,12 @@
  */
 package com.feilong.core.date.dateextensionutiltest;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalDay;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -23,29 +29,12 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalDay;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-
 /**
  * The Class DateExtensionUtilGetIntervalDayParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class GetIntervalDayParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
-
-    /**
-     * Test get interval day.
-     */
-    @Test
-    public void testGetIntervalDay(){
-        assertEquals(expectedValue, (Integer) getIntervalDay(toDate(input1, input3), toDate(input2, input3)));
-    }
+public class GetIntervalDayParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
 
     /**
      * Data.
@@ -57,6 +46,7 @@ public class GetIntervalDayParameterizedTest
         return toList(//
                         ConvertUtil.<Object> toArray("2008-08-24", "2008-08-27", COMMON_DATE, 3),
 
+                        toArray("2017-07-29 03:22:44", "2017-07-29 05:22:44", COMMON_DATE_AND_TIME, 0),
                         toArray("2016-08-21", "2016-08-21", COMMON_DATE, 0),
                         toArray("2016-08-21", "2016-08-22", COMMON_DATE, 1),
 
@@ -68,5 +58,13 @@ public class GetIntervalDayParameterizedTest
                         toArray("2008-12-1", "2008-9-29", COMMON_DATE, 63)
         //  
         );
+    }
+
+    /**
+     * Test get interval day.
+     */
+    @Test
+    public void testGetIntervalDay(){
+        assertEquals(expectedValue, (Integer) getIntervalDay(toDate(input1, input3), toDate(input2, input3)));
     }
 }
