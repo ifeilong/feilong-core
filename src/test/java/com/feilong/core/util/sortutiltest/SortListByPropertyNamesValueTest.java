@@ -16,6 +16,7 @@
 package com.feilong.core.util.sortutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.SortUtil.sortListByPropertyNamesValue;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.contains;
@@ -23,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -35,6 +37,36 @@ import com.feilong.store.member.User;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class SortListByPropertyNamesValueTest{
+
+    @Test
+    public void testSortByPropertyNamesValueMap(){
+        Map<String, Integer> map18_145 = toMap("age", 18, "height", 145);
+        Map<String, Integer> map14_120 = toMap("age", 14, "height", 120);
+        Map<String, Integer> map5_45 = toMap("age", 5, "height", 45);
+        Map<String, Integer> map20_170 = toMap("age", 20, "height", 170);
+
+        List<Map<String, Integer>> list = toList(map18_145, map14_120, map5_45, map20_170);
+        sortListByPropertyNamesValue(list, "age");
+
+        assertThat(list, contains(map5_45, map14_120, map18_145, map20_170));
+
+    }
+
+    @Test
+    public void testSortByPropertyNamesValueMapDesc(){
+        Map<String, Integer> map18_145 = toMap("age", 18, "height", 145);
+        Map<String, Integer> map14_120 = toMap("age", 14, "height", 120);
+        Map<String, Integer> map5_45 = toMap("age", 5, "height", 45);
+        Map<String, Integer> map20_170 = toMap("age", 20, "height", 170);
+
+        List<Map<String, Integer>> list = toList(map18_145, map14_120, map5_45, map20_170);
+        sortListByPropertyNamesValue(list, "age desc");
+
+        assertThat(list, contains(map20_170, map18_145, map14_120, map5_45));
+
+    }
+
+    //---------------------------------------------------------------
 
     @Test
     public void testSortByPropertyNamesValueWithNullPropertyValueDesc(){
