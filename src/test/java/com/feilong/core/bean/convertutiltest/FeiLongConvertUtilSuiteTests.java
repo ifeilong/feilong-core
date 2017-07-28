@@ -56,6 +56,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToMapKeyValueTest.class,
                 ToMapPropertiesTest.class,
                 ToMapTargetTypeClassTest.class,
+                ToMapValueTargetTypeClassTest.class,
                 ToMapTransformerTest.class,
 
                 ToPropertiesTest.class,

@@ -1211,237 +1211,6 @@ public final class ConvertUtil{
     //**************************toMap******************************************************
 
     /**
-     * 将 <code>mapEntryCollection</code> 转成map ({@link LinkedHashMap}).
-     * 
-     * <h3>说明:</h3>
-     * 
-     * <blockquote>
-     * <ol>
-     * <li>返回是的是 {@link LinkedHashMap},顺序依照参数 <code>mapEntryCollection</code>,key是 {@link java.util.Map.Entry#getKey()},value 是
-     * {@link java.util.Map.Entry#getValue()}</li>
-     * <li>{@link java.util.Map.Entry} 已知实现类,你可以使用 {@link Pair},或者 {@link java.util.AbstractMap.SimpleEntry}</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * <h3>{@link Pair} 示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, String>} map = toMap(toList(//
-     *                 Pair.of("张飞", "丈八蛇矛"),
-     *                 Pair.of("关羽", "青龙偃月刀"),
-     *                 Pair.of("赵云", "龙胆枪"),
-     *                 Pair.of("刘备", "双股剑")));
-     * LOGGER.debug(JsonUtil.format(map));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * {
-     * "张飞": "丈八蛇矛",
-     * "关羽": "青龙偃月刀",
-     * "赵云": "龙胆枪",
-     * "刘备": "双股剑"
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>{@link java.util.AbstractMap.SimpleEntry} 示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, String>} map = ConvertUtil.toMap(
-     *                 toList(
-     *                                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
-     *                                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
-     *                                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
-     *                                 new SimpleEntry{@code <>}("刘备", "双股剑")));
-     * LOGGER.debug(JsonUtil.format(map));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * {
-     * "张飞": "丈八蛇矛",
-     * "关羽": "青龙偃月刀",
-     * "赵云": "龙胆枪",
-     * "刘备": "双股剑"
-     * }
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param <V>
-     *            the value type
-     * @param <K>
-     *            the key type
-     * @param <E>
-     *            the element type
-     * @param mapEntryCollection
-     *            the map entry collection
-     * @return 如果 <code>mapEntryCollection</code> 是null,返回 {@link Collections#emptyMap()}<br>
-     *         如果 <code>mapEntryCollection</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
-     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
-     * @since 1.7.1
-     */
-    public static <V, K, E extends Map.Entry<K, V>> Map<K, V> toMap(Collection<E> mapEntryCollection){
-        if (null == mapEntryCollection){
-            return emptyMap();
-        }
-
-        Validate.noNullElements(mapEntryCollection, "mapEntryCollection can't has null elememt!");
-
-        Map<K, V> map = newLinkedHashMap(mapEntryCollection.size());
-        for (Map.Entry<K, V> entry : mapEntryCollection){
-            map.put(entry.getKey(), entry.getValue());
-        }
-        return map;
-    }
-
-    /**
-     * 将 {@link java.util.Map.Entry}数组转成map ({@link LinkedHashMap}).
-     * 
-     * <h3>说明:</h3>
-     * 
-     * <blockquote>
-     * <ol>
-     * <li>返回是的是 {@link LinkedHashMap},顺序依照参数 {@link java.util.Map.Entry}数组顺序,key是 {@link java.util.Map.Entry#getKey()},value 是
-     * {@link java.util.Map.Entry#getValue()}</li>
-     * <li>{@link java.util.Map.Entry} 已知实现类,你可以使用 {@link Pair},或者 {@link java.util.AbstractMap.SimpleEntry}</li>
-     * </ol>
-     * </blockquote>
-     * 
-     * <h3>{@link Pair} 示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * Map{@code <String, String>} map = ConvertUtil.toMapUseEntrys(
-     *                 Pair.of("张飞", "丈八蛇矛"),
-     *                 Pair.of("关羽", "青龙偃月刀"),
-     *                 Pair.of("赵云", "龙胆枪"),
-     *                 Pair.of("刘备", "双股剑"));
-     * LOGGER.debug(JsonUtil.format(map));
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * {
-     * "张飞": "丈八蛇矛",
-     * "关羽": "青龙偃月刀",
-     * "赵云": "龙胆枪",
-     * "刘备": "双股剑"
-     * }
-     * 
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * <h3>{@link java.util.AbstractMap.SimpleEntry} 示例:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * 
-     * Map{@code <String, String>} map = ConvertUtil.toMapUseEntrys(
-     *                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
-     *                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
-     *                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
-     *                 new SimpleEntry{@code <>}("刘备", "双股剑"));
-     * LOGGER.debug(JsonUtil.format(map));
-     * 
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * {
-     * "张飞": "丈八蛇矛",
-     * "关羽": "青龙偃月刀",
-     * "赵云": "龙胆枪",
-     * "刘备": "双股剑"
-     * }
-     * 
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * 
-     * <h3>重构:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 以前初始化全局map的时候,你可能会这么写
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * <span style="color:green">// 除数和单位的map,必须是有顺序的 从大到小.</span>
-     * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = new LinkedHashMap{@code <>}();
-     * 
-     * static{
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");<span style=
-    "color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方)</span>
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_GB, "GB");<span style="color:green">//(Gigabyte,吉字节,又称“千兆”)=1024MB</span>
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_MB, "MB");<span style="color:green">//(Megabyte,兆字节,简称“兆”)=1024KB</span>
-     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_KB, "KB");<span style="color:green">//(Kilobyte 千字节)=1024B</span>
-     * }
-     * 
-     * </pre>
-     * 
-     * <b>现在你可以重构成:</b>
-     * 
-     * <pre class="code">
-     * 
-     * <span style="color:green">// 除数和单位的map,必须是有顺序的 从大到小.</span>
-     * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = ConvertUtil.toMapUseEntrys(
-     *                 Pair.of(FileUtils.ONE_TB, "TB"), <span style="color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方) </span>
-     *                 Pair.of(FileUtils.ONE_GB, "GB"), <span style="color:green">//(Gigabyte,吉字节,又称“千兆”)=1024MB</span>
-     *                 Pair.of(FileUtils.ONE_MB, "MB"), <span style="color:green">//(Megabyte,兆字节,简称“兆”)=1024KB</span>
-     *                 Pair.of(FileUtils.ONE_KB, "KB")); <span style="color:green">//(Kilobyte 千字节)=1024B</span>
-     * 
-     * </pre>
-     * 
-     * <p>
-     * 代码更加简洁
-     * </p>
-     * 
-     * </blockquote>
-     *
-     * @param <V>
-     *            the value type
-     * @param <K>
-     *            the key type
-     * @param mapEntrys
-     *            the entrys
-     * @return 如果 <code>entrys</code> 是null,返回 {@link Collections#emptyMap()}<br>
-     *         如果 <code>entrys</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
-     * @see org.apache.commons.lang3.tuple.ImmutablePair#ImmutablePair(Object, Object)
-     * @see org.apache.commons.lang3.tuple.Pair#of(Object, Object)
-     * @since 1.7.1
-     * @since 1.9.5 change name
-     */
-    @SafeVarargs
-    public static <V, K> Map<K, V> toMapUseEntrys(Map.Entry<K, V>...mapEntrys){
-        if (null == mapEntrys){
-            return emptyMap();
-        }
-        Validate.noNullElements(mapEntrys, "mapEntrys can't has null elememt!");
-
-        Map<K, V> map = newLinkedHashMap(mapEntrys.length);
-        for (Map.Entry<K, V> entry : mapEntrys){
-            map.put(entry.getKey(), entry.getValue());
-        }
-        return map;
-    }
-
-    /**
      * 将 <code>key</code> 和 <code>value</code> 直接转成map.
      * 
      * <h3>说明:</h3>
@@ -1681,6 +1450,240 @@ public final class ConvertUtil{
     }
 
     /**
+     * 将诸如 Map{@code <String, String>} 类型转成 Map{@code <String, Integer>} 类型.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合只是简单的将key value类型转换,而不需要自己再构建Transformer,再去调用 {@link #toMap(Map, Transformer, Transformer)} ,简化操作</li>
+     * <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
+     * <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
+     * <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <String, String>} (key和value 使用不同的转换器)</li>
+     * <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <String, Integer[]>} (单值转数组)</li>
+     * <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <String[], Long[]>} (数组转数组)</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景1:</b> 将Map{@code <String, String>} 转 Map{@code <String, Integer>} 类型
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap("1", "2");
+     * Map{@code <String, Integer>} returnMap = toMap(map, Integer.class);
+     * 
+     * <span style="color:green">// 输出测试</span>
+     * for (Map.Entry{@code <String, Integer>} entry : returnMap.entrySet()){
+     *     String key = entry.getKey();
+     *     Integer value = entry.getValue();
+     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * key:["1"],value:[2]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * <b>场景2:</b> Map{@code <String, String>} 转 Map{@code <String, Integer[]>}
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap("1", "2,2");
+     * 
+     * <span style="color:green">//key和value转成不同的类型</span>
+     * Map{@code <String, Integer[]>} returnMap = toMap(map,  Integer[].class);
+     * 
+     * <span style="color:green">// 输出测试</span>
+     * for (Map.Entry{@code <String, Integer[]>} entry : returnMap.entrySet()){
+     *     String key = entry.getKey();
+     *     Integer[] value = entry.getValue();
+     * 
+     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * key:["1"],value:[[2, 2]]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * <b>场景3:</b> Map{@code <String[], String[]>} 转 Map{@code <String[], Long[]>}
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String[], String[]>} map = toMap(toArray("1"), toArray("2", "8"));
+     * 
+     * <span style="color:green">//key和value转成不同的类型</span>
+     * Map{@code <String[], Long[]>} returnMap = toMap(map, Long[].class);
+     * 
+     * assertThat(returnMap, allOf(hasEntry(toArray("1"), toArray(2L, 8L))));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param <J>
+     *            返回的map ,value的类型
+     * @param inputMap
+     *            the input map
+     * @param valueTargetType
+     *            value 需要转换成什么类型,类型可以和原map的类型相同或者可以设置为null,均表示返回的map使用<code>inputMap</code>原样的<code>value</code>,不会进行类型转换
+     * @return 如果 <code>inputMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>valueTargetType</code> 是null,那么value 直接使用<code>inputMap</code>的 value<br>
+     * @see #toMap(Map, Class, Class)
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/661">issues661</a>
+     * @since 1.10.5
+     */
+    public static <K, V, J> Map<K, J> toMap(Map<K, V> inputMap,final Class<J> valueTargetType){
+        return toMap(inputMap, null, valueTargetType);
+    }
+
+    /**
+     * 将诸如 Map{@code <String, String>} 类型转成 Map{@code <Integer, Integer>} 类型.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>适合只是简单的将key value类型转换,而不需要自己再构建Transformer,再去调用 {@link #toMap(Map, Transformer, Transformer)} ,简化操作</li>
+     * <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
+     * <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
+     * <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <Integer, String>} (key和value 使用不同的转换器)</li>
+     * <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>} (单值转数组)</li>
+     * <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>} (数组转数组)</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景1:</b> 将Map{@code <String, String>} 转 Map{@code <Integer, Integer>} 类型
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap("1", "2");
+     * Map{@code <Integer, Integer>} returnMap = toMap(map, Integer.class, Integer.class);
+     * 
+     * <span style="color:green">// 输出测试</span>
+     * for (Map.Entry{@code <Integer, Integer>} entry : returnMap.entrySet()){
+     *     Integer key = entry.getKey();
+     *     Integer value = entry.getValue();
+     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * key:[1],value:[2]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * <b>场景2:</b> Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>}
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = toMap("1", "2,2");
+     * 
+     * <span style="color:green">//key和value转成不同的类型</span>
+     * Map{@code <Integer, Integer[]>} returnMap = toMap(map, Integer.class, Integer[].class);
+     * 
+     * <span style="color:green">// 输出测试</span>
+     * for (Map.Entry{@code <Integer, Integer[]>} entry : returnMap.entrySet()){
+     *     Integer key = entry.getKey();
+     *     Integer[] value = entry.getValue();
+     * 
+     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * key:[1],value:[[2, 2]]
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * <b>场景3:</b> Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>}
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String[], String[]>} map = toMap(toArray("1"), toArray("2", "8"));
+     * 
+     * <span style="color:green">//key和value转成不同的类型</span>
+     * Map{@code <Integer[], Long[]>} returnMap = toMap(map, Integer[].class, Long[].class);
+     * 
+     * assertThat(returnMap, allOf(hasEntry(toArray(1), toArray(2L, 8L))));
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param <I>
+     *            返回的map ,key的类型
+     * @param <J>
+     *            返回的map ,value的类型
+     * @param inputMap
+     *            the input map
+     * @param keyTargetType
+     *            key需要转换成什么类型,类型可以和原map的类型相同或者可以设置为null,均表示返回的map使用<code>inputMap</code>原样的<code>key</code>,不会进行类型转换
+     * @param valueTargetType
+     *            value 需要转换成什么类型,类型可以和原map的类型相同或者可以设置为null,均表示返回的map使用<code>inputMap</code>原样的<code>value</code>,不会进行类型转换
+     * @return 如果 <code>inputMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keyTargetType</code> 是null,那么key直接使用<code>inputMap</code>的key<br>
+     *         如果 <code>valueTargetType</code> 是null,那么value 直接使用<code>inputMap</code>的 value<br>
+     * @see #toMap(Map, Transformer, Transformer)
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/497">issues497</a>
+     * @since 1.9.2
+     */
+    public static <K, V, I, J> Map<I, J> toMap(Map<K, V> inputMap,final Class<I> keyTargetType,final Class<J> valueTargetType){
+        if (isNullOrEmpty(inputMap)){
+            return emptyMap();
+        }
+
+        Transformer<K, I> keyTransformer = null == keyTargetType ? null : new SimpleClassTransformer<K, I>(keyTargetType);
+        Transformer<V, J> valueTransformer = null == valueTargetType ? null : new SimpleClassTransformer<V, J>(valueTargetType);
+
+        return toMap(inputMap, keyTransformer, valueTransformer);
+    }
+
+    /**
      * 将诸如 Map{@code <String, String>} 类型转成 Map{@code <Integer, Integer>} 类型.
      * 
      * <h3>说明:</h3>
@@ -1825,126 +1828,234 @@ public final class ConvertUtil{
     }
 
     /**
-     * 将诸如 Map{@code <String, String>} 类型转成 Map{@code <Integer, Integer>} 类型.
+     * 将 <code>mapEntryCollection</code> 转成map ({@link LinkedHashMap}).
      * 
      * <h3>说明:</h3>
+     * 
      * <blockquote>
      * <ol>
-     * <li>适合只是简单的将key value类型转换,而不需要自己再构建Transformer,再去调用 {@link #toMap(Map, Transformer, Transformer)} ,简化操作</li>
-     * <li>返回的是 {@link LinkedHashMap},顺序依照入参 inputMap</li>
-     * <li>返回的是新的map,原来的<code>toMap</code>参数不受影响</li>
-     * <li>也支持诸如 Map{@code <String, Integer>} 转 Map{@code <Integer, String>} (key和value 使用不同的转换器)</li>
-     * <li>也支持诸如 Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>} (单值转数组)</li>
-     * <li>也支持诸如 Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>} (数组转数组)</li>
+     * <li>返回是的是 {@link LinkedHashMap},顺序依照参数 <code>mapEntryCollection</code>,key是 {@link java.util.Map.Entry#getKey()},value 是
+     * {@link java.util.Map.Entry#getValue()}</li>
+     * <li>{@link java.util.Map.Entry} 已知实现类,你可以使用 {@link Pair},或者 {@link java.util.AbstractMap.SimpleEntry}</li>
      * </ol>
      * </blockquote>
      * 
-     * 
-     * <h3>示例:</h3>
+     * <h3>{@link Pair} 示例:</h3>
      * 
      * <blockquote>
      * 
-     * <p>
-     * <b>场景1:</b> 将Map{@code <String, String>} 转 Map{@code <Integer, Integer>} 类型
-     * </p>
-     * 
      * <pre class="code">
-     * 
-     * Map{@code <String, String>} map = toMap("1", "2");
-     * Map{@code <Integer, Integer>} returnMap = toMap(map, Integer.class, Integer.class);
-     * 
-     * <span style="color:green">// 输出测试</span>
-     * for (Map.Entry{@code <Integer, Integer>} entry : returnMap.entrySet()){
-     *     Integer key = entry.getKey();
-     *     Integer value = entry.getValue();
-     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
-     * }
-     * 
+     * Map{@code <String, String>} map = toMap(toList(//
+     *                 Pair.of("张飞", "丈八蛇矛"),
+     *                 Pair.of("关羽", "青龙偃月刀"),
+     *                 Pair.of("赵云", "龙胆枪"),
+     *                 Pair.of("刘备", "双股剑")));
+     * LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
-     * key:[1],value:[2]
-     * </pre>
-     * 
-     * <hr>
-     * 
-     * <p>
-     * <b>场景2:</b> Map{@code <String, String>} 转 Map{@code <Integer, Integer[]>}
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * Map{@code <String, String>} map = toMap("1", "2,2");
-     * 
-     * <span style="color:green">//key和value转成不同的类型</span>
-     * Map{@code <Integer, Integer[]>} returnMap = toMap(map, Integer.class, Integer[].class);
-     * 
-     * <span style="color:green">// 输出测试</span>
-     * for (Map.Entry{@code <Integer, Integer[]>} entry : returnMap.entrySet()){
-     *     Integer key = entry.getKey();
-     *     Integer[] value = entry.getValue();
-     * 
-     *     LOGGER.debug("key:[{}],value:[{}]", key, value);
+     * {
+     * "张飞": "丈八蛇矛",
+     * "关羽": "青龙偃月刀",
+     * "赵云": "龙胆枪",
+     * "刘备": "双股剑"
      * }
-     * 
-     * </pre>
-     * 
-     * <b>返回:</b>
-     * 
-     * <pre class="code">
-     * key:[1],value:[[2, 2]]
-     * </pre>
-     * 
-     * <hr>
-     * 
-     * <p>
-     * <b>场景3:</b> Map{@code <String[], String[]>} 转 Map{@code <Integer[], Long[]>}
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * Map{@code <String[], String[]>} map = toMap(toArray("1"), toArray("2", "8"));
-     * 
-     * <span style="color:green">//key和value转成不同的类型</span>
-     * Map{@code <Integer[], Long[]>} returnMap = toMap(map, Integer[].class, Long[].class);
-     * 
-     * assertThat(returnMap, allOf(hasEntry(toArray(1), toArray(2L, 8L))));
      * </pre>
      * 
      * </blockquote>
      * 
-     * @param <K>
-     *            the key type
+     * <h3>{@link java.util.AbstractMap.SimpleEntry} 示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = ConvertUtil.toMap(
+     *                 toList(
+     *                                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
+     *                                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
+     *                                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
+     *                                 new SimpleEntry{@code <>}("刘备", "双股剑")));
+     * LOGGER.debug(JsonUtil.format(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": "丈八蛇矛",
+     * "关羽": "青龙偃月刀",
+     * "赵云": "龙胆枪",
+     * "刘备": "双股剑"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     *
      * @param <V>
      *            the value type
-     * @param <I>
-     *            返回的map ,key的类型
-     * @param <J>
-     *            返回的map ,value的类型
-     * @param inputMap
-     *            the input map
-     * @param keyTargetType
-     *            key需要转换成什么类型,类型可以和原map的类型相同或者可以设置为null,均表示返回的map使用<code>inputMap</code>原样的<code>key</code>,不会进行类型转换
-     * @param valueTargetType
-     *            value 需要转换成什么类型,类型可以和原map的类型相同或者可以设置为null,均表示返回的map使用<code>inputMap</code>原样的<code>value</code>,不会进行类型转换
-     * @return 如果 <code>inputMap</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
-     *         如果 <code>keyTargetType</code> 是null,那么key直接使用<code>inputMap</code>的key<br>
-     *         如果 <code>valueTargetType</code> 是null,那么value 直接使用<code>inputMap</code>的 value<br>
-     * @see #toMap(Map, Transformer, Transformer)
-     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/497">issues497</a>
-     * @since 1.9.2
+     * @param <K>
+     *            the key type
+     * @param <E>
+     *            the element type
+     * @param mapEntryCollection
+     *            the map entry collection
+     * @return 如果 <code>mapEntryCollection</code> 是null,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>mapEntryCollection</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
+     * @see org.apache.commons.lang3.ArrayUtils#toMap(Object[])
+     * @since 1.7.1
      */
-    public static <K, V, I, J> Map<I, J> toMap(Map<K, V> inputMap,final Class<I> keyTargetType,final Class<J> valueTargetType){
-        if (isNullOrEmpty(inputMap)){
+    public static <V, K, E extends Map.Entry<K, V>> Map<K, V> toMap(Collection<E> mapEntryCollection){
+        if (null == mapEntryCollection){
             return emptyMap();
         }
 
-        Transformer<K, I> keyTransformer = null == keyTargetType ? null : new SimpleClassTransformer<K, I>(keyTargetType);
-        Transformer<V, J> valueTransformer = null == valueTargetType ? null : new SimpleClassTransformer<V, J>(valueTargetType);
+        Validate.noNullElements(mapEntryCollection, "mapEntryCollection can't has null elememt!");
 
-        return toMap(inputMap, keyTransformer, valueTransformer);
+        Map<K, V> map = newLinkedHashMap(mapEntryCollection.size());
+        for (Map.Entry<K, V> entry : mapEntryCollection){
+            map.put(entry.getKey(), entry.getValue());
+        }
+        return map;
+    }
+
+    /**
+     * 将 {@link java.util.Map.Entry}数组转成map ({@link LinkedHashMap}).
+     * 
+     * <h3>说明:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li>返回是的是 {@link LinkedHashMap},顺序依照参数 {@link java.util.Map.Entry}数组顺序,key是 {@link java.util.Map.Entry#getKey()},value 是
+     * {@link java.util.Map.Entry#getValue()}</li>
+     * <li>{@link java.util.Map.Entry} 已知实现类,你可以使用 {@link Pair},或者 {@link java.util.AbstractMap.SimpleEntry}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>{@link Pair} 示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = ConvertUtil.toMapUseEntrys(
+     *                 Pair.of("张飞", "丈八蛇矛"),
+     *                 Pair.of("关羽", "青龙偃月刀"),
+     *                 Pair.of("赵云", "龙胆枪"),
+     *                 Pair.of("刘备", "双股剑"));
+     * LOGGER.debug(JsonUtil.format(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": "丈八蛇矛",
+     * "关羽": "青龙偃月刀",
+     * "赵云": "龙胆枪",
+     * "刘备": "双股剑"
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>{@link java.util.AbstractMap.SimpleEntry} 示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, String>} map = ConvertUtil.toMapUseEntrys(
+     *                 new SimpleEntry{@code <>}("张飞", "丈八蛇矛"),
+     *                 new SimpleEntry{@code <>}("关羽", "青龙偃月刀"),
+     *                 new SimpleEntry{@code <>}("赵云", "龙胆枪"),
+     *                 new SimpleEntry{@code <>}("刘备", "双股剑"));
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "张飞": "丈八蛇矛",
+     * "关羽": "青龙偃月刀",
+     * "赵云": "龙胆枪",
+     * "刘备": "双股剑"
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 以前初始化全局map的时候,你可能会这么写
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * <span style="color:green">// 除数和单位的map,必须是有顺序的 从大到小.</span>
+     * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = new LinkedHashMap{@code <>}();
+     * 
+     * static{
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_TB, "TB");<span style=
+    "color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方)</span>
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_GB, "GB");<span style="color:green">//(Gigabyte,吉字节,又称“千兆”)=1024MB</span>
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_MB, "MB");<span style="color:green">//(Megabyte,兆字节,简称“兆”)=1024KB</span>
+     *     DIVISOR_AND_UNIT_MAP.put(FileUtils.ONE_KB, "KB");<span style="color:green">//(Kilobyte 千字节)=1024B</span>
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>现在你可以重构成:</b>
+     * 
+     * <pre class="code">
+     * 
+     * <span style="color:green">// 除数和单位的map,必须是有顺序的 从大到小.</span>
+     * private static final Map{@code <Long, String>} DIVISOR_AND_UNIT_MAP = ConvertUtil.toMapUseEntrys(
+     *                 Pair.of(FileUtils.ONE_TB, "TB"), <span style="color:green">//(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10(2的10次方) </span>
+     *                 Pair.of(FileUtils.ONE_GB, "GB"), <span style="color:green">//(Gigabyte,吉字节,又称“千兆”)=1024MB</span>
+     *                 Pair.of(FileUtils.ONE_MB, "MB"), <span style="color:green">//(Megabyte,兆字节,简称“兆”)=1024KB</span>
+     *                 Pair.of(FileUtils.ONE_KB, "KB")); <span style="color:green">//(Kilobyte 千字节)=1024B</span>
+     * 
+     * </pre>
+     * 
+     * <p>
+     * 代码更加简洁
+     * </p>
+     * 
+     * </blockquote>
+     *
+     * @param <V>
+     *            the value type
+     * @param <K>
+     *            the key type
+     * @param mapEntrys
+     *            the entrys
+     * @return 如果 <code>entrys</code> 是null,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>entrys</code> 有元素是null,将会抛出异常 {@link IllegalArgumentException}
+     * @see org.apache.commons.lang3.tuple.ImmutablePair#ImmutablePair(Object, Object)
+     * @see org.apache.commons.lang3.tuple.Pair#of(Object, Object)
+     * @since 1.7.1
+     * @since 1.9.5 change name
+     */
+    @SafeVarargs
+    public static <V, K> Map<K, V> toMapUseEntrys(Map.Entry<K, V>...mapEntrys){
+        if (null == mapEntrys){
+            return emptyMap();
+        }
+        Validate.noNullElements(mapEntrys, "mapEntrys can't has null elememt!");
+
+        Map<K, V> map = newLinkedHashMap(mapEntrys.length);
+        for (Map.Entry<K, V> entry : mapEntrys){
+            map.put(entry.getKey(), entry.getValue());
+        }
+        return map;
     }
 
     //*************************************toProperties*********************************************************

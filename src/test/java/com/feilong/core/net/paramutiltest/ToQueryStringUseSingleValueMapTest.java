@@ -15,6 +15,7 @@
  */
 package com.feilong.core.net.paramutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
@@ -25,8 +26,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.net.ParamUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class ParamUtilToQueryStringUseSingleValueMapTest.
@@ -40,7 +39,7 @@ public class ToQueryStringUseSingleValueMapTest{
      */
     @Test
     public void testJoinSingleValueMapNullKey(){
-        Map<String, String> map = toMap(null, null);
+        Map<String, String> map = toMap(null, (String) null);
         assertEquals("=", ParamUtil.toQueryStringUseSingleValueMap(map));
     }
 

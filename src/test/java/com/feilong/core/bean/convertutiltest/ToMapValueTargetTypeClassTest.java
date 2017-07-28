@@ -33,19 +33,29 @@ import org.junit.Test;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToMapTargetTypeClassTest{
+public class ToMapValueTargetTypeClassTest{
 
     /**
      * Test same class type.
      */
     @Test
-    public void testSameClassType(){
+    public void testValueTargetType(){
         Map<String, String> map = toMap("1", "2");
 
         //key和value 都转成integer 使用相同的转换器
-        Map<Integer, Integer> returnMap = toMap(map, Integer.class, Integer.class);
+        Map<String, Integer> returnMap = toMap(map, Integer.class);
 
-        assertThat(returnMap, allOf(hasEntry(1, 2)));
+        assertThat(returnMap, allOf(hasEntry("1", 2)));
+    }
+
+    @Test
+    public void testValueTargetTypeNullClass(){
+        Map<String, String> map = toMap("1", "2");
+
+        //key和value 都转成integer 使用相同的转换器
+        Map<String, String> returnMap = toMap(map, null);
+
+        assertThat(returnMap, allOf(hasEntry("1", "2")));
     }
 
     /**
@@ -56,29 +66,9 @@ public class ToMapTargetTypeClassTest{
         Map<String, String> map = toMap("1", "2,2");
 
         //key和value转成不同的类型
-        Map<Integer, Integer[]> returnMap = toMap(map, Integer.class, Integer[].class);
-
-        assertThat(returnMap, allOf(hasEntry(1, toArray(2, 2))));
-    }
-
-    @Test
-    public void testMapNullKeyClass1(){
-        Map<String, String> map = toMap("1", "2,2");
-
-        //key和value转成不同的类型
-        Map<String, Integer[]> returnMap = toMap(map, null, Integer[].class);
+        Map<String, Integer[]> returnMap = toMap(map, Integer[].class);
 
         assertThat(returnMap, allOf(hasEntry("1", toArray(2, 2))));
-    }
-
-    @Test
-    public void testMapNullValueClass1(){
-        Map<String, String> map = toMap("1", "2,2");
-
-        //key和value转成不同的类型
-        Map<Integer, String> returnMap = toMap(map, Integer.class, null);
-
-        assertThat(returnMap, allOf(hasEntry(1, "2,2")));
     }
 
     /**
@@ -86,12 +76,13 @@ public class ToMapTargetTypeClassTest{
      */
     @Test
     public void testMapToArray(){
-        Map<String[], String[]> map = toMap(toArray("1"), toArray("2", "8"));
+        String[] key = toArray("1");
+        Map<String[], String[]> map = toMap(key, toArray("2", "8"));
 
         //key和value转成不同的类型
-        Map<Integer[], Long[]> returnMap = toMap(map, Integer[].class, Long[].class);
+        Map<String[], Long[]> returnMap = toMap(map, Long[].class);
 
-        assertThat(returnMap, allOf(hasEntry(toArray(1), toArray(2L, 8L))));
+        assertThat(returnMap, allOf(hasEntry(key, toArray(2L, 8L))));
     }
 
     //************************************************************************************
@@ -103,7 +94,7 @@ public class ToMapTargetTypeClassTest{
     public void testMapNullKeyClass(){
         Map<String, String> map = toMap("1", "2,2");
 
-        Map<String, Integer[]> returnMap = toMap(map, null, Integer[].class);
+        Map<String, Integer[]> returnMap = toMap(map, Integer[].class);
 
         assertThat(returnMap, allOf(hasEntry("1", toArray(2, 2))));
     }
@@ -113,11 +104,11 @@ public class ToMapTargetTypeClassTest{
      */
     @Test
     public void testMapNullValueClass(){
-        Map<String, String> map = toMap("1", "2,2");
+        Map<String, String> map = toMap("1", "2");
 
-        Map<Integer, String> returnMap = toMap(map, Integer.class, null);
+        Map<String, Integer> returnMap = toMap(map, Integer.class);
 
-        assertThat(returnMap, allOf(hasEntry(1, "2,2")));
+        assertThat(returnMap, allOf(hasEntry("1", 2)));
     }
 
     //************************************************************************
@@ -128,7 +119,7 @@ public class ToMapTargetTypeClassTest{
     @Test
     public void testNullInputMap(){
         //key和value 都转成integer 使用相同的转换器
-        Map<Integer, Integer> returnMap = toMap(null, Integer.class, Integer.class);
+        Map<Integer, Integer> returnMap = toMap(null, Integer.class);
         assertEquals(emptyMap(), returnMap);
     }
 
@@ -138,7 +129,7 @@ public class ToMapTargetTypeClassTest{
     @Test
     public void testEmptyInputMap(){
         //key和value 都转成integer 使用相同的转换器
-        Map<Integer, Integer> returnMap = toMap(new HashMap<String, String>(), Integer.class, Integer.class);
+        Map<String, Integer> returnMap = toMap(new HashMap<String, String>(), Integer.class);
         assertEquals(emptyMap(), returnMap);
     }
 }

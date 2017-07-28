@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -28,9 +30,6 @@ import org.apache.commons.collections4.Transformer;
 import org.junit.Test;
 
 import com.feilong.core.util.transformer.SimpleClassTransformer;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class ConvertUtilToMapTransformerTest.
@@ -58,7 +57,7 @@ public class ToMapTransformerTest{
      * Test array.
      */
     @Test
-    public void testArray(){
+    public void testMap(){
         Map<String, String> map = toMap("1", "2,2");
 
         Transformer<String, Integer> keyTransformer = new SimpleClassTransformer<>(Integer.class);
@@ -74,7 +73,7 @@ public class ToMapTransformerTest{
      * Test array to array.
      */
     @Test
-    public void testArrayToArray(){
+    public void testMapToArray(){
         Map<String[], String[]> map = toMap(toArray("1"), toArray("2", "8"));
 
         Transformer<String[], Integer[]> keyTransformer = new SimpleClassTransformer<>(Integer[].class);
@@ -92,7 +91,7 @@ public class ToMapTransformerTest{
      * Test array null key transformer.
      */
     @Test
-    public void testArrayNullKeyTransformer(){
+    public void testMapNullKeyTransformer(){
         Map<String, String> map = toMap("1", "2,2");
 
         Transformer<String, Integer[]> valueTransformer = new SimpleClassTransformer<>(Integer[].class);
@@ -105,7 +104,7 @@ public class ToMapTransformerTest{
      * Test array null value transformer.
      */
     @Test
-    public void testArrayNullValueTransformer(){
+    public void testMapNullValueTransformer(){
         Map<String, String> map = toMap("1", "2,2");
 
         Transformer<String, Integer> keyTransformer = new SimpleClassTransformer<>(Integer.class);
