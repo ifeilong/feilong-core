@@ -113,7 +113,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * 
      * <ol>
      * <li>如果对象实现了 {@link Comparable} 接口, 那么直接比较</li>
-     * <li>如果对象没有实现 {@link Comparable} 接口, 那么依照扎金花比牌原则(相同大小的牌,比牌方输),谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面</li>
+     * <li>如果对象没有实现 {@link Comparable} 接口, 那么比较两个对象的hashCode</li>
      * </ol>
      * 
      * </li>
@@ -157,17 +157,14 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * 
      *     //----------------------------------------------------------
      * 
-     *     assertEquals(7, set.size());
+     *     assertEquals(4, set.size());
      *     assertThat(set, allOf(contains(
      *                     nullPropertyValue, <span style="color:green">//如果对应的属性值是null,排在后面</span>
      *                     userSameHashCode_1_name1, <span style="color:green">//指定属性的属性值越小对应的对象排在前面,反之排在后面</span>
      * 
      *                     <span style="color:green">//如果两个值相等,那么比较对象本身</span>
-     *                     <span style="color:green">//如果对象没有实现 Comparable 接口, 那么谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面(扎金花原则)</span>
+     *                     <span style="color:green">//如果对象没有实现 {@link Comparable} 接口, 那么比较两个对象的hashCode</span>
      *                     userSameHashCode_5_name5,
-     *                     userSameHashCode_5_name6,
-     *                     userSameHashCode_5_name1,
-     *                     userSameHashCode_5_name2,
      * 
      *                     nullObject)<span style="color:green">//空元素排在后面</span>
      *     ));
@@ -371,7 +368,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             return -1;
         }
 
-        //--------------------------------------------------------------------------------
+        //---------------------------------------------------------------------
 
         Comparable propertyValue1 = PropertyUtil.getProperty(t1, propertyName);
         Comparable propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
@@ -381,8 +378,10 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
             propertyValue1 = ConvertUtil.convert(propertyValue1, propertyValueConvertToClass);
             propertyValue2 = ConvertUtil.convert(propertyValue2, propertyValueConvertToClass);
         }
-        return null != comparator ? comparator.compare(propertyValue1, propertyValue2) : compare(t1, t2, propertyValue1, propertyValue2);
+        return null == comparator ? compare(t1, t2, propertyValue1, propertyValue2) : comparator.compare(propertyValue1, propertyValue2);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 先比较 propertyValue1以及propertyValue2,再比较 t1/t2 .
@@ -433,7 +432,7 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * <blockquote>
      * <ol>
      * <li>如果对象实现了 {@link Comparable} 接口, 那么直接比较</li>
-     * <li>如果对象没有实现 {@link Comparable} 接口, 那么依照<b>扎金花比牌原则</b>(相同大小的牌,比牌方输),谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面</li>
+     * <li>如果对象没有实现 {@link Comparable} 接口, 那么比较两个对象的hashCode</li>
      * </ol>
      * </blockquote>
      *
@@ -442,13 +441,15 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
      * @param t2
      *            the t 2
      * @return 如果对象实现了 {@link Comparable} 接口, 那么直接强转比较<br>
-     *         如果对象没有实现 {@link Comparable} 接口, 那么依照<b>扎金花比牌原则</b>(相同大小的牌,比牌方输),谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面
+     *         如果对象没有实现 {@link Comparable} 接口, 那么比较两个对象的hashCode
      * @see <a href="https://github.com/venusdrogon/feilong-core/issues/631">PropertyComparator hash判断两个对象是否相等是否太草率？</a>
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/643">SortUtil.sortMapByValueDesc(Map<String, Integer>) 会报异常</a>
      * @since 1.10.3
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private int compareWithSameValue(T t1,T t2){
         //如果对象实现了 Comparable 接口, 那么直接强转比较
-        return isInstance(t1, Comparable.class) ? ((Comparable) t1).compareTo(t2) : 1;
+        return isInstance(t1, Comparable.class) ? ObjectUtils.compare((Comparable) t1, (Comparable) t2)
+                        : ObjectUtils.compare(t1.hashCode(), t2.hashCode());
     }
 }

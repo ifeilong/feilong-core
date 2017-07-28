@@ -15,6 +15,9 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
@@ -23,6 +26,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -32,6 +36,8 @@ import org.junit.Test;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class SortMapByValueDescTest{
+
+    private static final Map<String, String> SORTMAP_BYVALUEDESC_MAP = toMap(getResourceBundle("messages/sortMapByValueDesc"));
 
     /**
      * Test sort by value desc.
@@ -47,6 +53,18 @@ public class SortMapByValueDescTest{
     }
 
     @Test
+    public void testSortByValueDesc1(){
+        sortMapByValueDesc(SORTMAP_BYVALUEDESC_MAP);
+    }
+
+    @Test
+    public void testSortByValueDesc12(){
+        //System.out.println(SORTMAP_BYVALUEDESC_MAP.values());//TODO:remove
+        Map<String, Integer> map = toMap(SORTMAP_BYVALUEDESC_MAP, Integer.class);
+        sortMapByValueDesc(map);
+    }
+
+    @Test
     public void testSortByValueDescSameValue(){
         Map<String, Integer> map = new LinkedHashMap<>();
         map.put("a", 123);
@@ -56,7 +74,16 @@ public class SortMapByValueDescTest{
         map.put("g", 123);
         map.put("d", 123);
 
-        assertThat(sortMapByValueDesc(map).keySet(), contains("c", "a", "g", "d", "b", "f"));
+        Set<String> keySet = sortMapByValueDesc(map).keySet();
+        assertThat(keySet, contains(
+                        "c",
+
+                        "d",
+                        "g",
+                        "a", //TODO
+
+                        "f",
+                        "b"));//c, d, g, a, f, b
     }
 
     //---------------------------------------------------------------

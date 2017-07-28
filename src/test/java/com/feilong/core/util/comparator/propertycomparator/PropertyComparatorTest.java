@@ -109,17 +109,13 @@ public class PropertyComparatorTest{//------------------------------------------
 
         //----------------------------------------------------------
 
-        assertEquals(7, set.size());
+        assertEquals(4, set.size());
         assertThat(set, allOf(contains(
                         nullPropertyValue, //如果对应的属性值是null,排在最前面
                         userSameHashCode_1_name1, //指定属性的属性值越小对应的对象排在前面,反之排在后面
 
                         //如果两个值相等,那么比较对象本身
-                        //如果对象没有实现 Comparable 接口, 那么谁(t1)比谁(t2),谁(t1)输,谁(t1)排后面(扎金花原则)
                         userSameHashCode_5_name5,
-                        userSameHashCode_5_name6,
-                        userSameHashCode_5_name1,
-                        userSameHashCode_5_name2,
 
                         nullObject)//空元素排在后面
         ));

@@ -44,7 +44,7 @@ public final class SortHelper{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //---------
+    //---------------------------------------------------------------
 
     /**
      * 将 <code>propertyNameAndOrder</code>字符串转换成数组.
