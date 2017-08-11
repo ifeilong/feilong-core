@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.regexutiltest;
 
+import static com.feilong.core.RegexPattern.MOBILEPHONE;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -23,8 +24,6 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.util.RegexUtil;
 import com.feilong.test.AbstractBooleanParameterizedTest;
 import com.feilong.test.TestUtil;
-
-import static com.feilong.core.RegexPattern.MOBILEPHONE;
 
 /**
  * The Class MobilephonePatternTest.
@@ -41,7 +40,7 @@ public class MobilephonePatternParameterizedTest extends AbstractBooleanParamete
      */
     @Parameters(name = "RegexUtil.matches(RegexPattern.MOBILEPHONE, {0})={1}")
     public static Iterable<Object[]> data(){
-        String[] valids = { "18501646315", "15001841317", "14701841318" };
+        String[] valids = { "18501646315", "15001841317", "14701841318", "16201841318", "19201841318" };
         String[] invalids = { //
                               "",
                               " ",
@@ -50,9 +49,7 @@ public class MobilephonePatternParameterizedTest extends AbstractBooleanParamete
                               "18501646315 ", // count not match
                               "10201841318", //no 10
                               "11201841318", //no 11
-                              "12201841318", //no 12
-                              "16201841318", //no 16
-                              "19201841318" //no 19
+                              "12201841318" //no 12
         };
 
         return TestUtil.toDataList(valids, invalids);

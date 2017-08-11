@@ -15,6 +15,11 @@
  */
 package com.feilong.core;
 
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toMap;
+
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -314,6 +319,17 @@ import java.util.regex.Pattern;
  */
 public final class RegexPattern{
 
+    //---------------------------------------------------------------
+
+    /**
+     * 配置的正则表达式.
+     * 
+     * @since 1.10.6
+     */
+    public static final Map<String, String> REGEX_PATTERN_MAP       = toMap(getResourceBundle("feilong-core-regex"));
+
+    //---------------------------------------------------------------
+
     /**
      * 大陆的电话号码 <code>{@value}</code>.
      * 
@@ -365,7 +381,9 @@ public final class RegexPattern{
      * @see <a href="https://en.wikipedia.org/wiki/Extension_(telephone)">Extension_(telephone)</a>
      * @see <a href="http://regexlib.com/Search.aspx?k=phone+number&c=7&m=5&ps=20">regexlib</a>
      */
-    public static final String TELEPHONE               = "^(\\d{3,4}-)?\\d{6,8}(-\\d{1,6})?$";
+    public static final String              TELEPHONE               = defaultIfNullOrEmpty(
+                    REGEX_PATTERN_MAP.get("regex_pattern_telephone"),
+                    "^(\\d{3,4}-)?\\d{6,8}(-\\d{1,6})?$");
 
     /**
      * 大陆的电话号码(必须要有区号) <code>{@value}</code>.
@@ -417,7 +435,11 @@ public final class RegexPattern{
      * @see <a href="http://baike.baidu.com/view/103379.htm">区号</a>
      * @since 1.7.1
      */
-    public static final String TELEPHONE_MUST_AREACODE = "^\\d{3,4}-\\d{6,8}(-\\d{1,6})?$";
+    public static final String              TELEPHONE_MUST_AREACODE = defaultIfNullOrEmpty(
+                    REGEX_PATTERN_MAP.get("regex_pattern_telephone_must_areacode"),
+                    "^\\d{3,4}-\\d{6,8}(-\\d{1,6})?$");
+
+    //---------------------------------------------------------------
 
     /**
      * 手机号码 <code>{@value}</code>.
@@ -457,20 +479,25 @@ public final class RegexPattern{
      * 
      * <blockquote>
      * <p>
-     * 家工信部为了鼓励民间资本进去电信行业,专门发放电信拍照.然后第三方电信上商又从三大运营商买的号码 <br>
-     * 据了解,按照工信部的批复,三大运营商4G新用户均将使用17开头的号段. <br>
-     * 中国电信称177号段为中国电信4G专属号段,并在7月15日向在上海、深圳、南京等16个城市实行177号段放号.<br>
-     * 中国移动则在今年已使用178号段并对多个城市进行放号.至此也就意味着三大运营商的4G号段已全面商用. <br>
+     * 工信部为了鼓励民间资本进去电信行业,专门发放电信拍照.然后第三方电信上商又从三大运营商买的号码 <br>
+     * 按照工信部的批复,三大运营商4G新用户均将使用17开头的号段. <br>
+     * 中国电信,称177号段为中国电信4G专属号段,并在7月15日向在上海等16个城市实行177号段放号.<br>
+     * 中国移动,则在今年已使用178号段并对多个城市进行放号.<br>
      * </p>
      * </blockquote>
      * 
      * @see <a href="http://blog.csdn.net/skychenjh/article/details/49923345">2015年最新手机号码正则表达式</a>
+     * @see <a href="https://www.ithome.com/html/it/319951.htm?mp_sourceid=0.1.1">新号段时代来临：工信部新批电信199/移动198/联通166</a>
      */
-    public static final String MOBILEPHONE             = "^1[34578]\\d{9}$";
+    public static final String              MOBILEPHONE             = defaultIfNullOrEmpty(
+                    REGEX_PATTERN_MAP.get("regex_pattern_mobile"),
+                    "^1[3456789]\\d{9}$");
     //******************************************************************************
 
     /** 邮政编码 <code>{@value}</code>. */
-    public static final String ZIPCODE                 = "^\\d{6}$";
+    public static final String              ZIPCODE                 = defaultIfNullOrEmpty(
+                    REGEX_PATTERN_MAP.get("regex_pattern_telephone_zipcode"),
+                    "^\\d{6}$");
 
     //******************************************************************************
     /**
@@ -480,7 +507,7 @@ public final class RegexPattern{
      * 可以是200 也可以是200.00 不可以是 200.0
      * </p>
      */
-    public static final String DECIMAL_TWO_DIGIT       = "^[0-9]+(.[0-9]{2})?$";
+    public static final String              DECIMAL_TWO_DIGIT       = "^[0-9]+(.[0-9]{2})?$";
 
     //******************************************************************************
     /**
@@ -496,8 +523,10 @@ public final class RegexPattern{
      *             验证更加完善,分别会对user 和domain再次校验
      */
     @Deprecated
-    public static final String EMAIL                   = "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+    public static final String              EMAIL                   = "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
     //"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private RegexPattern(){
