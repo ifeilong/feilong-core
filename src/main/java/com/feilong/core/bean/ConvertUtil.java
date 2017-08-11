@@ -1280,7 +1280,8 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * private List{@code <ShopCommand>} loadShopCommandList(){
-     *     return shopCommandDao.findShopListByOrgaTypeId(ConvertUtil.toMap("orgTypeId", (Object) OrgType.ID_SHOP_TYPE));
+     *   Map{@code <String, Object>} paraMap = ConvertUtil.toMap("orgTypeId", <span style="color:red">(Object)</span> OrgType.ID_SHOP_TYPE);
+     *     return shopCommandDao.findShopListByOrgaTypeId(paraMap);
      * }
      * </pre>
      * 

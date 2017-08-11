@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.hasEntry;
@@ -24,15 +25,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
-
 /**
  * The Class ConvertUtilToMapKeyValueTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ToMapKeyValueTest{
-    //******************com.feilong.core.bean.ConvertUtil.toMap(String, String)*************************
 
     /**
      * Test to map1.
@@ -41,7 +39,12 @@ public class ToMapKeyValueTest{
     public void testToMap1(){
         Map<String, String> map = toMap("张飞", "丈八蛇矛");
         assertThat(map, allOf(notNullValue(), hasEntry("张飞", "丈八蛇矛")));
+    }
 
+    @Test
+    public void testToMap2(){
+        Map<String, Object> map = toMap("张飞", (Object) "丈八蛇矛");
+        assertThat(map, allOf(notNullValue(), hasEntry("张飞", (Object) "丈八蛇矛")));
     }
 
     /**
