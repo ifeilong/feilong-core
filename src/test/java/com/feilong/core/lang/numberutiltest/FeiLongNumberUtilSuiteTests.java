@@ -31,8 +31,13 @@ import org.junit.runners.Suite.SuiteClasses;
                 SetScaleRoundingModeParameterizedTest.class,
 
                 GetAddValueTest.class,
+
+                GetSubtractValueTest.class,
+                GetSubtractValueParameterizedTest.class,
+
                 GetMultiplyValueTest.class,
                 GetMultiplyValueParameterizedTest.class,
+
                 GetDivideValueTest.class,
                 GetDivideValueParameterizedTest.class,
 

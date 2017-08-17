@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static java.math.BigDecimal.ZERO;
 import static java.math.RoundingMode.HALF_UP;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
@@ -26,8 +28,6 @@ import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.NumberPattern;
 import com.feilong.core.text.NumberFormatUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 
 /**
  * 处理{@link Integer},{@link Long},{@link BigDecimal}等数据类型.
@@ -328,6 +328,54 @@ public final class NumberUtil{
             sum = sum.add(toBigDecimal(number));
         }
         return sum;
+    }
+
+    /**
+     * 所有数相减.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.getSubtractValue(0, 2, 3)                 =   -5
+     * NumberUtil.getSubtractValue(0,null)                  =   0
+     * NumberUtil.getSubtractValue(0,  new Integer[5])      =   0
+     * NumberUtil.getSubtractValue(2, 1.1)                  =   0.9
+     * NumberUtil.getSubtractValue(1000, 99.5, 99.0)        =   801.5
+     * NumberUtil.getSubtractValue(1000, 50, null)          =   950
+     * NumberUtil.getSubtractValue(-1000, -50, 100)         =   -1050
+     * 
+     * NumberUtil.getSubtractValue(null, 5) // NullPointerException
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param beSubtractedValue
+     *            被减数,如 100-10-5, 其中的100 就是被减数
+     * @param subtractions
+     *            减数,如 100-10-5, 其中的10 和5 就是减数
+     * @return 如果 <code>beSubtractedValue</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>subtractions</code> 是null或者是empty,直接将<code>beSubtractedValue</code> 转成BigDecimal 并返回<br>
+     *         循环 <code>subtractions</code> ,使用 <code>beSubtractedValue</code>减去元素的值,如果循环的原始null,跳过这次减法<br>
+     * @since 1.10.6
+     */
+    public static BigDecimal getSubtractValue(Number beSubtractedValue,Number...subtractions){
+        Validate.notNull(beSubtractedValue, "beSubtractedValue can't be null/empty!");
+
+        BigDecimal result = toBigDecimal(beSubtractedValue);
+        if (isNullOrEmpty(subtractions)){
+            return result;
+        }
+
+        //---------------------------------------------------------------
+        for (Number subtraction : subtractions){
+            if (null == subtraction){//跳过 null 元素
+                continue;
+            }
+            result = result.subtract(toBigDecimal(subtraction));
+        }
+        return result;
     }
 
     // [end]
