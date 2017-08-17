@@ -15,8 +15,6 @@
  */
 package com.feilong.core.lang.numberutiltest;
 
-import static org.junit.Assert.assertEquals;
-
 import java.math.BigDecimal;
 
 import org.junit.Test;
@@ -29,25 +27,6 @@ import com.feilong.core.lang.NumberUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class GetAddValueTest{
-    //***********************testGetAddValue**********************************************************
-
-    /**
-     * Test get add value.
-     */
-    @Test
-    public void testGetAddValue(){
-        assertEquals(new BigDecimal(11), NumberUtil.getAddValue(new BigDecimal(6), 5));
-    }
-
-    /**
-     * Test get add value 2.
-     */
-    @Test
-    public void testGetAddValue2(){
-        assertEquals(new BigDecimal(11), NumberUtil.getAddValue(2, 4, 5));
-    }
-
-    //**********************************************************************
 
     /**
      * Test get add value null pointer exception.
