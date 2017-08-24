@@ -15,6 +15,16 @@
  */
 package com.feilong.core.net;
 
+import static com.feilong.core.URIComponents.AMPERSAND;
+import static com.feilong.core.URIComponents.QUESTIONMARK;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.net.URIUtil.decode;
+import static com.feilong.core.net.URIUtil.encode;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_STRING_ARRAY;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
@@ -37,17 +47,6 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.SortUtil;
-
-import static com.feilong.core.URIComponents.AMPERSAND;
-import static com.feilong.core.URIComponents.QUESTIONMARK;
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.net.URIUtil.decode;
-import static com.feilong.core.net.URIUtil.encode;
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 
 /**
  * 处理参数相关.
@@ -274,6 +273,8 @@ public final class ParamUtil{
     public static String addParameterArrayValueMap(String uriString,Map<String, String[]> arrayValueMap,String charsetType){
         return addParameterArrayValueMap(uriString, URIUtil.getQueryString(uriString), arrayValueMap, charsetType);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将{@code a=1&b=2}这样格式的 <code>queryString</code>数据转换成map.
