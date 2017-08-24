@@ -71,14 +71,14 @@ public final class ParamUtil{
     // ************************************addParameter******************************************************
 
     /**
-     * 给指定的<code>uriString</code>添加指定的参数 <code>paramName</code> 和值 <code>parameValue</code>.
+     * 给指定的<code>uriString</code>添加指定的参数 <code>paramName</code> 和值 <code>paramValue</code>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么追加新的参数<code>paramName</code>和值<code>parameValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>parameValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>parameValue</code>,其他的被丢弃.</li>
+     * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么追加新的参数<code>paramName</code>和值<code>paramValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>paramValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>paramValue</code>,其他的被丢弃.</li>
      * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
      * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
      * <li>如果<code>uriString</code>不带?,则自动增加?</li>
@@ -108,7 +108,7 @@ public final class ParamUtil{
      *            如果不带?,则自动增加?
      * @param paramName
      *            添加的参数名称
-     * @param parameValue
+     * @param paramValue
      *            添加的参数值
      * @param charsetType
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量<br>
@@ -116,12 +116,12 @@ public final class ParamUtil{
      *            否则会先解码,再加码,因为ie浏览器和chrome浏览器 url中访问路径 ,带有中文情况下不一致
      * @return 如果 <code>uriString</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
      *         如果 <code>paramName</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
-     *         如果 <code>parameValue</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
+     *         如果 <code>paramValue</code> 是null,以 {@link StringUtils#EMPTY}替代<br>
      * @see #addParameterSingleValueMap(String, Map, String)
      * @since 1.9.0 change paramValue type from Object to String
      */
-    public static String addParameter(String uriString,String paramName,String parameValue,String charsetType){
-        return addParameterSingleValueMap(uriString, toMap(paramName, parameValue), charsetType);
+    public static String addParameter(String uriString,String paramName,String paramValue,String charsetType){
+        return addParameterSingleValueMap(uriString, toMap(paramName, paramValue), charsetType);
     }
 
     /**
@@ -131,9 +131,9 @@ public final class ParamUtil{
      * <blockquote>
      * <ol>
      * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么循环<code>arrayValueMap</code>,追加新的参数<code>paramName</code>和值
-     * <code>parameValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>parameValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>parameValue</code>,其他的被丢弃.</li>
+     * <code>paramValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>paramValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>paramValue</code>,其他的被丢弃.</li>
      * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
      * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
      * <li>如果<code>uriString</code>不带?,则自动增加?</li>
@@ -205,9 +205,9 @@ public final class ParamUtil{
      * <blockquote>
      * <ol>
      * <li>如果原来的<code>uriString</code>没有指定的参数<code>paramName</code>,那么循环<code>arrayValueMap</code>,追加新的参数<code>paramName</code>和值
-     * <code>parameValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>parameValue</code>.</li>
-     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>parameValue</code>,其他的被丢弃.</li>
+     * <code>paramValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,那么会被新的值替换<code>paramValue</code>.</li>
+     * <li>如果原来的<code>uriString</code>有指定的参数<code>paramName</code>,并且是多值类型(参数数组),那么多值参数中第一个会被新的值替换<code>paramValue</code>,其他的被丢弃.</li>
      * <li>如果原来的<code>uriString</code>有参数,不管是拼接还是替换都会保持参数的原始顺序.</li>
      * <li>如果<code>uriString</code>带有? 和参数,会先被截取,最后再拼接.</li>
      * <li>如果<code>uriString</code>不带?,则自动增加?</li>
