@@ -16,6 +16,7 @@
 package com.feilong.core.util.predicate;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.find;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -24,16 +25,9 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
 import org.junit.Test;
 
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
-/**
- * The Class BeanPredicateUtilEqualPredicateTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.9.5
- */
-public class EqualPredicateTest{
+public class EqualBeanPredicateTest{
 
     /**
      * Test find2.
@@ -47,10 +41,7 @@ public class EqualPredicateTest{
                         new User("刘备", 25),
                         guanyu30);
 
-        Predicate<User> predicate = PredicateUtils
-                        .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
-
-        assertEquals(guanyu30, CollectionsUtil.find(list, predicate));
+        assertEquals(guanyu30, find(list, BeanPredicateUtil.equalPredicate(guanyu30, "name", "age")));
     }
 
     /**
@@ -59,43 +50,22 @@ public class EqualPredicateTest{
     @Test
     public void testEqualPredicate(){
         User user = new User(2L);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("id", 2L);
+        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(new User(2L), "id");
         assertEquals(true, equalPredicate.evaluate(user));
     }
 
-    /**
-     * Test equal predicate 1.
-     */
     @Test
     public void testEqualPredicate1(){
         User user = new User(2L);
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("id", (String) null);
+        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(new User(1L), "id");
         assertEquals(false, equalPredicate.evaluate(user));
     }
 
     //---------------------------------------------------------------------------
 
-    /**
-     * Test equal predicate null property name.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testEqualPredicateNullPropertyName(){
-        BeanPredicateUtil.equalPredicate((String) null, (String) null);
+    @Test
+    public void testEqualPredicateNullMap(){
+        assertEquals(PredicateUtils.nullPredicate(), BeanPredicateUtil.equalPredicate((User) null));
     }
 
-    /**
-     * Test equal predicate empty property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testEqualPredicateEmptyPropertyName(){
-        BeanPredicateUtil.equalPredicate("", (String) null);
-    }
-
-    /**
-     * Test equal predicate blank property name.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testEqualPredicateBlankPropertyName(){
-        BeanPredicateUtil.equalPredicate("", (String) null);
-    }
 }

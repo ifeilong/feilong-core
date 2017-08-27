@@ -29,6 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 EqualPredicateTest.class,
                 EqualIgnoreCasePredicateTest.class,
                 EqualMapPredicateTest.class,
+                EqualBeanPredicateTest.class,
         //
 })
 public class FeiLongBeanPredicateUtilSuiteTests{

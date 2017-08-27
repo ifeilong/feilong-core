@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -23,9 +25,6 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ConvertUtilToBigDecimalParameterizedTest.
@@ -44,6 +43,8 @@ public class ToBigDecimalParameterizedTest extends AbstractOneParamAndOneResultP
         Object[][] objects = new Object[][] { //
                                               { null, null },
                                               { "aaaa", null },
+
+                                              { "1%", null },
 
                                               { "1", BigDecimal.valueOf(1) },
                                               { 8, BigDecimal.valueOf(8) },

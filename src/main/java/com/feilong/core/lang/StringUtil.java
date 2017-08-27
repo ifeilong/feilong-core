@@ -15,6 +15,8 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.UnsupportedEncodingException;
@@ -31,11 +33,7 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.RegexPattern;
 import com.feilong.core.UncheckedIOException;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * {@link String}工具类,可以查询,截取,format.

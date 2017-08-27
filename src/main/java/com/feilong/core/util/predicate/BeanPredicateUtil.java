@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.predicate;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Comparator;
@@ -33,8 +35,6 @@ import com.feilong.core.lang.ArrayUtil;
 import com.feilong.core.util.AggregateUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.equator.IgnoreCaseEquator;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 专门针对bean,提供的 BeanPredicateUtil.
@@ -268,6 +268,83 @@ public final class BeanPredicateUtil{
             index++;
         }
         return PredicateUtils.allPredicate(beanPredicates);
+    }
+
+    /**
+     * 构造属性与一个指定对象 <code>bean</code> 的一组属性的值 <code>propertyNames</code> 都相等的判断器.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
+     * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
+     * {@link CollectionsUtil#group(Iterable, String, Predicate) group},
+     * {@link AggregateUtil#groupCount(Iterable, String, Predicate) groupCount},
+     * {@link AggregateUtil#sum(Iterable, String, Predicate) sum} 等方法.
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 在list中查找 名字是 关羽,并且 年龄是30 的user
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * User guanyu30 = new User("关羽", 30);
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 23),
+     *                 new User("关羽", 24),
+     *                 new User("刘备", 25),
+     *                 guanyu30);
+     * 
+     * Predicate{@code <User>} predicate = PredicateUtils
+     *                 .andPredicate(BeanPredicateUtil.equalPredicate("name", "关羽"), BeanPredicateUtil.equalPredicate("age", 30));
+     * 
+     * assertEquals(guanyu30, CollectionsUtil.find(list, predicate));
+     * </pre>
+     * 
+     * <p>
+     * 此时你可以优化成:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * User guanyu30 = new User("关羽", 30);
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 23),
+     *                 new User("关羽", 24),
+     *                 new User("刘备", 25),
+     *                 guanyu30);
+     * 
+     * assertEquals(guanyu30, find(list, BeanPredicateUtil.equalPredicate(guanyu30, "name", "age")));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param bean
+     *            the bean
+     * @param propertyNames
+     *            如果 <code>propertyNames</code> 是null或者empty 那么取所有属性值.
+     * @return 如果 <code>bean</code> 是null,返回 {@link org.apache.commons.collections4.PredicateUtils#nullPredicate()}<br>
+     *         否则 调用 {@link com.feilong.core.bean.PropertyUtil#describe(Object, String...)} 提取属性值,再调用 {@link #equalPredicate(Map)}
+     * @see #equalPredicate(String, Object)
+     * @see com.feilong.core.bean.PropertyUtil#describe(Object, String...)
+     * @since 1.10.6
+     */
+    public static <T> Predicate<T> equalPredicate(T bean,String...propertyNames){
+        if (null == bean){
+            return PredicateUtils.nullPredicate();
+        }
+        Map<String, ?> propertyNameAndPropertyValueMap = PropertyUtil.describe(bean, propertyNames);
+        return equalPredicate(propertyNameAndPropertyValueMap);
     }
 
     //************************************************************************************************************

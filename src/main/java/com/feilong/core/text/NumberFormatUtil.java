@@ -57,32 +57,10 @@ public final class NumberFormatUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将 {@link Number} 使用 {@link RoundingMode} <code>numberPattern</code>格式化.
-     * 
-     * <h3>关于参数 <code>value</code>:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * <b>请尽量传递Integer,Long,BigDecimal,而不要使用 float,double等浮点类型</b>,否则可能结果不准确,特别是jdk8以下的版本,具体参见
-     * <a href="https://github.com/venusdrogon/feilong-core/issues/165">NumberFormatUtilTest 在 jdk8 下面测试不通过</a>
-     * </p>
-     * 
-     * </blockquote>
-     * 
-     * <h3>关于参数 <code>roundingMode</code></h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 虽然{@link DecimalFormat},默认使用的是银行家舍入法 {@link RoundingMode#HALF_EVEN},参见
-     * <a href="../util/NumberUtil.html#RoundingMode_HALF_EVEN">关于 RoundingMode#HALF_EVEN</a>
-     * </p>
-     * 
-     * <p>
-     * 但是我们常用标准的四舍五入,为了保持和 {@link com.feilong.core.lang.NumberUtil#toString(Number, String)}一致性,如果 roundingMode 为null,使用常用的
-     * {@link RoundingMode#HALF_UP}来进行格式化
-     * </p>
-     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -108,7 +86,31 @@ public final class NumberFormatUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * 
+     * <h3>关于参数 <code>value</code>:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * <b>请尽量传递Integer,Long,BigDecimal,而不要使用 float,double等浮点类型</b>,否则可能结果不准确,特别是jdk8以下的版本,具体参见
+     * <a href="https://github.com/venusdrogon/feilong-core/issues/165">NumberFormatUtilTest 在 jdk8 下面测试不通过</a>
+     * </p>
+     * 
+     * </blockquote>
+     * 
+     * <h3>关于参数 <code>roundingMode</code></h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 虽然{@link DecimalFormat},默认使用的是银行家舍入法 {@link RoundingMode#HALF_EVEN},参见
+     * <a href="../util/NumberUtil.html#RoundingMode_HALF_EVEN">关于 RoundingMode#HALF_EVEN</a>
+     * </p>
+     * 
+     * <p>
+     * 但是我们常用标准的四舍五入,为了保持和 {@link com.feilong.core.lang.NumberUtil#toString(Number, String)}一致性,如果 roundingMode 为null,使用常用的
+     * {@link RoundingMode#HALF_UP}来进行格式化
+     * </p>
+     * </blockquote>
+     * 
      * @param value
      *            the value
      * @param numberPattern

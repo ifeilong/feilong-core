@@ -15,6 +15,9 @@
  */
 package com.feilong.core.text;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.math.RoundingMode.HALF_EVEN;
 import static java.math.RoundingMode.HALF_UP;
 import static org.junit.Assert.assertEquals;
@@ -26,10 +29,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class NumberFormatUtilFormatRoundingModeParameterizedTest.
@@ -61,6 +60,9 @@ public class NumberFormatUtilFormatRoundingModeParameterizedTest
                         toArray(toBigDecimal(1.15), "#####.#", null, "1.2"),
                         toArray(toBigDecimal(1.25), "#####.#", null, "1.3"),
                         toArray(toBigDecimal(1.251), "#####.#", null, "1.3"),
+
+                        //%
+                        toArray(toBigDecimal(-0.01), "#####.#%", null, "-1%"),
 
                         toArray(toBigDecimal(-1.15), "#####.#", null, "-1.2"),
                         toArray(toBigDecimal(-1.25), "#####.#", null, "-1.3"),
