@@ -22,6 +22,7 @@ import static org.apache.commons.lang3.ClassUtils.getSimpleName;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.Validate;
@@ -65,6 +66,17 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 根据Arnold和Gosling的说法：“线程组中的线程可以修改组内的其他线程，包括那些位于分层结构最深处的。一个线程不能修改位于自己所在组或者下属组之外的任何线程”
  * </p>
  * </blockquote>
+ * 
+ * <h3>{@link Callable}和{@link Runnable}的区别如下:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>{@link Callable} since jdk1.5,而{@link Runnable} since jdk1.0.</li>
+ * <li>{@link Callable}定义的方法是{@link Callable#call()},而{@link Runnable}定义的方法是{@link Runnable#run()}.</li>
+ * <li>{@link Callable}的{@link Callable#call()}方法有返回值,而{@link Runnable}的{@link Runnable#run()}方法没有返回值</li>
+ * <li>{@link Callable}的{@link Callable#call()}方法可抛出异常,而{@link Runnable}的{@link Runnable#run()}方法不能抛出异常</li>
+ * </ol>
+ * </blockquote>
+ * 
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.core.task.SimpleAsyncTaskExecutor"
