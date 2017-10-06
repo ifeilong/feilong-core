@@ -30,11 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 GroupIntTest.class,
                 GroupTest.class,
 
-                MatchesTest.class,
-
-                MobilephonePatternParameterizedTest.class,
-                TelephonePatternParameterizedTest.class,
-                TelephoneMustAreaCodePatternParameterizedTest.class, })
+})
 public class FeiLongRegexUtilSuiteTests{
 
 }
