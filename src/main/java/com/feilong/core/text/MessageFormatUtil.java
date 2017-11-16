@@ -38,7 +38,7 @@ public final class MessageFormatUtil{
     }
 
     /**
-     * 格式化.
+     * 调用 {@link java.text.MessageFormat#format(String, Object...)} 格式化.
      * 
      * <h3>用法:</h3>
      * 
@@ -47,7 +47,7 @@ public final class MessageFormatUtil{
      * <pre class="code">
      * MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin")                                             =   "name=张三jinaxin"
      * MessageFormatUtil.format("name=张三{0,number}a{1}", 5, "xin")                                          =   "name=张三5axin"
-     * MessageFormatUtil.format("name=张三{0,date}a{1}", DateUtil.toDate("2000", DatePattern.yyyy), "xin")    =   "name=张三2000-1-1axin"
+     * MessageFormatUtil.format("name=张三{0,date,yyyy-MM-dd}a{1}", DateUtil.toDate("2000", DatePattern.yyyy), "xin")    =   "name=张三2000-01-01axin"
      * </pre>
      * 
      * </blockquote>
