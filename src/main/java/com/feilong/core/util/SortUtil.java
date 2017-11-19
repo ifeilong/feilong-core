@@ -724,6 +724,81 @@ public final class SortUtil{
         return sortMap(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("key")));
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 按照key 指定名字顺序排序.
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>原 <code>map</code> 的顺序不变</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Integer>} map = new HashMap<>();
+     * 
+     * map.put("DE", 99);
+     * map.put("L", 3428);
+     * map.put("O", 13);
+     * map.put("UN", 17);
+     * map.put("S", 6);
+     * 
+     * //L-上市，S-暂停，DE-终止上市，UN-未上市
+     * Map{@code <String, Integer>} sortByKeyAsc = sortMapByKeyFixOrder(map, "L", "UN", "DE", "S", "O");
+     * 
+     * LOGGER.debug(JsonUtil.format(sortByKeyAsc));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "L": 3428,
+        "UN": 17,
+        "S": 6,
+        "DE": 99,
+        "O": 13
+    }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @param keys
+     *            the keys
+     * @return 如果 <code>map</code> 是null,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>keys</code> 是null或者empty,原样返回 <code>map</code><br>
+     * @see PropertyComparator#PropertyComparator(String)
+     * @see #sortMap(Map, Comparator)
+     * @since 1.10.6
+     */
+    public static <K, V> Map<K, V> sortMapByKeyFixOrder(Map<K, V> map,K...keys){
+        if (null == map){
+            return emptyMap();
+        }
+
+        if (isNullOrEmpty(keys)){
+            return map;
+        }
+
+        //---------------------------------------------------------------
+        Comparator<Map.Entry<K, V>> propertyComparator = BeanComparatorUtil.propertyComparator("key", keys);
+        return sortMap(map, propertyComparator);
+    }
+
+    //------------------------sortMapByValue---------------------------------------
+
     /**
      * 根据value 来顺序排序(asc).
      * 
@@ -827,6 +902,8 @@ public final class SortUtil{
         }
         return sortMap(map, new ReverseComparator<Map.Entry<K, V>>(new PropertyComparator<Map.Entry<K, V>>("value")));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 使用 基于 {@link java.util.Map.Entry Entry} 的 <code>mapEntryComparator</code> 来对 <code>map</code>进行排序.
