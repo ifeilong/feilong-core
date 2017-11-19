@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.aggregateutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -32,8 +33,6 @@ import com.feilong.core.util.AggregateUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 /**
  * The Class AggregateUtilGroupCountPredicateTest.
  *
@@ -41,7 +40,8 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  */
 public class GroupCountPredicateTest{
 
-    //********************AggregateUtil.groupCount(Collection<User>, String, Predicate<User>)******************************************************************
+    private final Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+
     /**
      * Test group count.
      */
@@ -55,7 +55,6 @@ public class GroupCountPredicateTest{
                         new User("刘备", 30),
                         new User("赵云", 50));
 
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
         Map<String, Integer> map = AggregateUtil.groupCount(list, "name", comparatorPredicate);
         assertThat(map, allOf(hasEntry("刘备", 1), hasEntry("赵云", 2)));
     }
@@ -86,7 +85,6 @@ public class GroupCountPredicateTest{
         User user1 = new User(2L);
         user1.setAge(18);
 
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
         AggregateUtil.groupCount(toList(user1), (String) null, comparatorPredicate);
     }
 
@@ -98,7 +96,6 @@ public class GroupCountPredicateTest{
         User user1 = new User(2L);
         user1.setAge(18);
 
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
         AggregateUtil.groupCount(toList(user1), "   ", comparatorPredicate);
     }
 
@@ -110,7 +107,6 @@ public class GroupCountPredicateTest{
         User user1 = new User(2L);
         user1.setAge(18);
 
-        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
         AggregateUtil.groupCount(toList(user1), "", comparatorPredicate);
     }
 
@@ -128,10 +124,12 @@ public class GroupCountPredicateTest{
                         new User("赵云", 50));
 
         Map<String, Integer> map = AggregateUtil.groupCount(list, "name", null);
-        assertThat(map, allOf(//
-                        hasEntry("刘备", 2),
-                        hasEntry("赵云", 2),
-                        hasEntry("张飞", 1),
-                        hasEntry("关羽", 1)));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry("刘备", 2),
+                                        hasEntry("赵云", 2),
+                                        hasEntry("张飞", 1),
+                                        hasEntry("关羽", 1)));
     }
 }
