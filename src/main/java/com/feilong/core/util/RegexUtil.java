@@ -19,6 +19,7 @@ import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,6 +50,14 @@ public final class RegexUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    /**
+     * Pattern cache提高速度.
+     *
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/665">RegexUtil 加上缓存</a>
+     * @since 1.10.6
+     */
+    private static final Map<String, Pattern> PATTERN_CACHE = new ConcurrentHashMap<>();
+
     //---------------------------------------------------------------
 
     /**
@@ -70,7 +79,7 @@ public final class RegexUtil{
      * @see Pattern#matches(String, CharSequence)
      * @since 1.0.7
      */
-    public static boolean matches(String regexPattern,CharSequence input){
+    public static boolean matches(final String regexPattern,final CharSequence input){
         return getMatcher(regexPattern, input).matches();
     }
 
@@ -116,7 +125,7 @@ public final class RegexUtil{
      * @see Matcher#group(int)
      * @since 1.0.7
      */
-    public static Map<Integer, String> group(String regexPattern,CharSequence input){
+    public static Map<Integer, String> group(final String regexPattern,final CharSequence input){
         Matcher matcher = getMatcher(regexPattern, input);
         if (!matcher.matches()){
             LOGGER.trace("[not matches] ,\n\tregexPattern:[{}] \n\tinput:[{}]", regexPattern, input);
@@ -178,7 +187,7 @@ public final class RegexUtil{
      * @see Matcher#group(int)
      * @since 1.0.7
      */
-    public static String group(String regexPattern,CharSequence input,int groupNo){
+    public static String group(final String regexPattern,final CharSequence input,final int groupNo){
         Validate.isTrue(groupNo >= 0, "groupNo must >=0");
 
         Map<Integer, String> map = group(regexPattern, input);
@@ -198,7 +207,7 @@ public final class RegexUtil{
      * @see Pattern#compile(String)
      * @since 1.0.7
      */
-    private static Matcher getMatcher(String regexPattern,CharSequence input){
+    private static Matcher getMatcher(final String regexPattern,final CharSequence input){
         return getMatcher(regexPattern, input, 0);
     }
 
@@ -230,11 +239,34 @@ public final class RegexUtil{
      * @see Pattern#compile(String, int)
      * @since 1.5.3
      */
-    private static Matcher getMatcher(String regexPattern,CharSequence input,int flags){
+    private static Matcher getMatcher(final String regexPattern,final CharSequence input,final int flags){
         Validate.notNull(regexPattern, "regexPattern can't be null!");
         Validate.notNull(input, "input can't be null!");
 
-        Pattern pattern = Pattern.compile(regexPattern, flags);
+        Pattern pattern = buildPattern(regexPattern, flags);
         return pattern.matcher(input);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 如果cache中有,那么直接返回, 如果没有构造一个并塞到cache中.
+     *
+     * @param regexPattern
+     *            the regex pattern
+     * @param flags
+     *            the flags
+     * @return the pattern
+     * @since 1.10.6
+     */
+    public static Pattern buildPattern(final String regexPattern,final int flags){
+        final String key = regexPattern + "@" + flags;
+        Pattern pattern = PATTERN_CACHE.get(key);
+
+        if (null == pattern){
+            pattern = Pattern.compile(regexPattern, flags);
+            PATTERN_CACHE.put(key, pattern);
+        }
+        return pattern;
     }
 }
