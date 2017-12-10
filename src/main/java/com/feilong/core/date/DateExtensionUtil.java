@@ -20,14 +20,19 @@ import static com.feilong.core.TimeInterval.MILLISECOND_PER_HOUR;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_SECONDS;
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_WEEK;
-import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.date.DateUtil.addDay;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
+import static com.feilong.core.date.DateUtil.getFirstDateOfThisMonth;
+import static com.feilong.core.date.DateUtil.getFirstDateOfThisYear;
+import static com.feilong.core.date.DateUtil.getLastDateOfThisDay;
+import static com.feilong.core.date.DateUtil.getLastDateOfThisMonth;
+import static com.feilong.core.date.DateUtil.getLastDateOfThisYear;
 import static com.feilong.core.date.DateUtil.getTime;
 
 import java.util.Date;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.feilong.core.TimeInterval;
 
@@ -81,6 +86,8 @@ import com.feilong.core.TimeInterval;
  */
 public final class DateExtensionUtil{
 
+    //---------------------------------------------------------------
+
     /** 天. */
     private static final String DAY         = "天";
 
@@ -96,6 +103,8 @@ public final class DateExtensionUtil{
     /** 毫秒. */
     private static final String MILLISECOND = "毫秒";
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private DateExtensionUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -103,62 +112,222 @@ public final class DateExtensionUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //*************************************************************************************
+    //---------------------------------------------------------------
 
     // [start] 获得时间 /时间数组,可以用于sql查询
+
     /**
-     * 获得重置清零的今天和明天,当天 <code>00:00:00.000</code> 及下一天 <code>00:00:00.000</code>.
+     * 获得 今天的开始时间 <code>00:00:00.000</code> 及今天的结束时间 <code>23:59:59.999</code>.
      * 
      * <p>
      * 一般用于统计当天数据,between ... and ...
      * </p>
      * 
-     * <pre class="code">
-     * 比如今天是 2012-10-16 22:18:34
+     * <h3>示例:</h3>
      * 
-     * <b>返回:</b>
-     * {
-     * 2012-10-16 00:00:00.000,
-     * 2012-10-17 00:00:00.000
-     * }
-     * </pre>
+     * <blockquote>
      * 
-     * @return Date数组 <br>
-     *         第一个为今天00:00:00.000 <br>
-     *         第二个为明天00:00:00.000
+     * <p>
+     * 比如今天的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-16 00:00:00.000, 2012-10-16 23:59:59.999
+     * 
+     * </blockquote>
+     *
+     * @return 左边,今天的开始时间 <code>00:00:00.000</code> <br>
+     *         右边,今天的结束时间 <code>23:59:59.999</code> <br>
+     * @see "java.time.LocalDate#atStartOfDay()"
+     * @see "java.time.LocalDate#atStartOfDay()"
+     * @since 1.10.6
      */
-    public static Date[] getResetTodayAndTomorrow(){
-        Date today = getFirstDateOfThisDay(new Date());
-        return toArray(today, addDay(today, 1));
+    public static Pair<Date, Date> getTodayStartAndEndPair(){
+        Date date = new Date();
+        return getDayStartAndEndPair(date);
     }
 
     /**
-     * 获得重置清零的昨天和今天,昨天 <code>00:00:00.000</code> 及 当天 <code>00:00:00.000</code>.
+     * 获得 昨天的开始时间 <code>00:00:00.000</code> 及昨天的结束时间 <code>23:59:59.999</code>.
      * 
      * <p>
-     * 第一个为昨天<code>00:00:00.000</code> <br>
-     * 第二个为今天<code>00:00:00.000</code> <br>
-     * 一般用于sql/hql统计昨天数据,between ... and ...
+     * 一般用于统计昨天数据,between ... and ...
      * </p>
      * 
-     * <pre class="code">
-     * 比如现在 :2012-10-16 22:46:42
+     * <h3>示例:</h3>
      * 
-     * 返回  {2012-10-15 00:00:00.000,2012-10-16 00:00:00.000}
-     * </pre>
+     * <blockquote>
      * 
-     * @return Date数组 <br>
-     *         第一个为昨天00:00:00.000 <br>
-     *         第二个为今天00:00:00.000
+     * <p>
+     * 比如今天的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-15 00:00:00.000, 2012-10-15 23:59:59.999
+     * 
+     * </blockquote>
+     *
+     * @return 左边,昨天的开始时间 <code>00:00:00.000</code> <br>
+     *         右边,昨天的结束时间 <code>23:59:59.999</code> <br>
+     * @since 1.10.6
      */
-    public static Date[] getResetYesterdayAndToday(){
-        Date today = getFirstDateOfThisDay(new Date());
-        return toArray(addDay(today, -1), today);
+    public static Pair<Date, Date> getYesterdayStartAndEndPair(){
+        Date date = new Date();
+        Date yesteday = addDay(date, -1);
+        return getDayStartAndEndPair(yesteday);
+    }
+
+    /**
+     * 获得 指定日的开始时间 <code>00:00:00.000</code> 及指定日的结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 一般用于统计指定日期数据,between ... and ...
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如传入的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-16 00:00:00.000, 2012-10-16 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * @param date
+     *            the date
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         左边,指定日的开始时间 <code>00:00:00.000</code> <br>
+     *         右边,指定日的结束时间 <code>23:59:59.999</code> <br>
+     * @since 1.10.6
+     */
+    public static Pair<Date, Date> getDayStartAndEndPair(Date date){
+        Validate.notNull(date, "date can't be null!");
+        return Pair.of(getFirstDateOfThisDay(date), getLastDateOfThisDay(date));
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 获得 当前月的开始时间 <code>00:00:00.000</code> 及当前月结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 一般用于统计当前月的数据,between ... and ...
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如传入的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-01 00:00:00.000, 2012-10-31 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * @return 左边,当前月的第一天 <code>00:00:00.000</code> <br>
+     *         右边,当前月最后一天 <code>23:59:59.999</code> <br>
+     * @since 1.10.6
+     */
+    public static Pair<Date, Date> getMonthStartAndEndPair(){
+        return getMonthStartAndEndPair(new Date());
+    }
+
+    /**
+     * 获得 指定月的开始时间 <code>00:00:00.000</code> 及指定月的结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 一般用于统计指定月数据,between ... and ...
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如传入的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-10-01 00:00:00.000, 2012-10-31 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * @param date
+     *            the date
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         左边,当前月的第一天 <code>00:00:00.000</code> <br>
+     *         右边,当前月最后一天 <code>23:59:59.999</code> <br>
+     * @since 1.10.6
+     */
+    public static Pair<Date, Date> getMonthStartAndEndPair(Date date){
+        Validate.notNull(date, "date can't be null!");
+        return Pair.of(getFirstDateOfThisMonth(date), getLastDateOfThisMonth(date));
+    }
+
+    /**
+     * 获得 当前年的开始时间 <code>00:00:00.000</code> 及当前年的结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 一般用于统计当前年数据,between ... and ...
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如传入的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-01-01 00:00:00.000, 2012-12-31 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * @return 左边,当前年的第一天 <code>00:00:00.000</code> <br>
+     *         右边,当前年最后一天 <code>23:59:59.999</code> <br>
+     * @since 1.10.6
+     */
+    public static Pair<Date, Date> getYearStartAndEndPair(){
+        return getYearStartAndEndPair(new Date());
+    }
+
+    /**
+     * 获得 指定年的开始时间 <code>00:00:00.000</code> 及指定年的结束时间 <code>23:59:59.999</code>.
+     * 
+     * <p>
+     * 一般用于统计指定年数据,between ... and ...
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 比如传入的是 2012-10-16 22:18:34
+     * </p>
+     * 
+     * <b>返回:</b> 2012-01-01 00:00:00.000, 2012-12-31 23:59:59.999
+     * 
+     * </blockquote>
+     * 
+     * @param date
+     *            the date
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         左边,当前年的第一天 <code>00:00:00.000</code> <br>
+     *         右边,当前年最后一天 <code>23:59:59.999</code> <br>
+     * @since 1.10.6
+     */
+    public static Pair<Date, Date> getYearStartAndEndPair(Date date){
+        Validate.notNull(date, "date can't be null!");
+
+        return Pair.of(getFirstDateOfThisYear(date), getLastDateOfThisYear(date));
     }
 
     // [end]
 
-    //****************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 将开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,格式化成直观的表示方式.

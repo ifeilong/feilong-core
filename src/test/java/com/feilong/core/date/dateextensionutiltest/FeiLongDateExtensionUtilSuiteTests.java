@@ -26,7 +26,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                DateExtensionUtilTest.class,
+
+                GetDayStartAndEndPairTest.class,
+                GetMonthStartAndEndPairTest.class,
+                GetYearStartAndEndPairTest.class,
+
                 FormatDurationTest.class,
 
                 GetIntervalWeekTest.class,
