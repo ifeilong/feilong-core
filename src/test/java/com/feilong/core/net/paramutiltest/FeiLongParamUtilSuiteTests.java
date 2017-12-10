@@ -31,7 +31,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 AddParameterSingleValueMapTest.class,
                 AddParameterTest.class,
                 JoinValuesOrderByIncludeKeysTest.class,
+
                 ToNaturalOrderingQueryStringTest.class,
+                ToNaturalOrderingKeyJoinValueTest.class,
+
                 ToQueryStringUseArrayValueMapTest.class,
                 ToQueryStringUseSingleValueMapTest.class,
                 ToSingleValueMapTest.class,
