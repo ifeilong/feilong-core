@@ -214,6 +214,8 @@ public final class DateUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //------------------------day---------------------------------------
+
     /**
      * 获得指定日期<code>date</code>的 <code>00:00:00.000</code>时间.
      * 
@@ -261,7 +263,7 @@ public final class DateUtil{
         return CalendarUtil.toDate(resetDayEnd(calendar));
     }
 
-    // *****************************week****************************************************
+    //--------------------------week-------------------------------------
     /**
      * 获得指定日期所在的<span style="color:red">星期第一天(周日)</span> <code>00:00:00.000</code> 到毫秒.
      * 
@@ -335,7 +337,7 @@ public final class DateUtil{
         return CalendarUtil.toDate(resetDayEnd(calendar));
     }
 
-    // *********************************************************************************
+    //---------------------------月 年------------------------------------
 
     /**
      * 获得指定日期<code>date</code>所在月的第一天,<code>00:00:00.000</code>到毫秒.
@@ -1366,6 +1368,46 @@ public final class DateUtil{
         return date.after(beginDate) && date.before(endDate);
     }
 
+    /**
+     * 判断指定的日期 <code>date</code>,是不是今天的日期.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.isToday(new Date()) = true
+     * 
+     * <span style="color:green">// 如果今天 是2017年12月14日</span>
+     * DateUtil.isToday(toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME)) = false
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>性能对比:</h3>
+     * 
+     * <blockquote>
+     * 
+     * 1000000 循环,
+     * 
+     * <ul>
+     * <li>DateUtils#isSameDay(Date, Date) ,893毫秒;</li>
+     * <li>isEquals(date, new Date(), DatePattern.COMMON_DATE),1秒335毫秒</li>
+     * <li>DateExtensionUtil.getDayStartAndEndPair 1秒185毫秒</li>
+     * </ul>
+     * </blockquote>
+     *
+     * @param date
+     *            指定的日期
+     * @return 如果指定的日期是今天,那么返回true,否则返回false <br>
+     *         如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see DateUtils#isSameDay(Date, Date)
+     * @since 1.10.6
+     */
+    public static boolean isToday(Date date){
+        Validate.notNull(date, "date can't be null!");
+        return DateUtils.isSameDay(date, new Date());
+    }
+
     // [end]
 
     // [start]isEquals
@@ -1395,6 +1437,7 @@ public final class DateUtil{
      * @param datePattern
      *            格式 {@link DatePattern}
      * @return 相等返回true,不相等则为false<br>
+     *         如果 <code>date1 == date2</code> 直接返回true<br>
      *         如果 <code>date1</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>date2</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>pattern</code> 是 null,抛出 {@link NullPointerException}<br>
@@ -1408,7 +1451,8 @@ public final class DateUtil{
         Validate.notNull(date2, "date2 can't be null!");
 
         Validate.notBlank(datePattern, "datePattern can't be blank!");
-        return toString(date1, datePattern).equals(toString(date2, datePattern));
+
+        return date1 == date2 ? true : toString(date1, datePattern).equals(toString(date2, datePattern));
     }
 
     // [end]

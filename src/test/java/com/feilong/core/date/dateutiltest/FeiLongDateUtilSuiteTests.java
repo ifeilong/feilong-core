@@ -79,6 +79,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsBeforeTest.class,
                 IsAfterTest.class,
                 IsEqualsTest.class,
+                IsTodayTest.class,
 
                 ToDateTest.class,
                 ToStringTest.class,
