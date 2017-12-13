@@ -26,6 +26,8 @@ public final class URIParseException extends RuntimeException{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
 
+    //---------------------------------------------------------------
+
     /**
      * The Constructor.
      *

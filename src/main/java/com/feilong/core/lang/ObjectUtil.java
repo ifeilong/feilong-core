@@ -15,10 +15,10 @@
  */
 package com.feilong.core.lang;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 /**
  * {@link Object} 工具类.
@@ -45,6 +45,8 @@ public final class ObjectUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 如果 <code>object</code> 是null或者empty,返回默认值 <code>defaultValue</code>.

@@ -45,7 +45,7 @@ public final class BeanComparatorUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //*************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 按照不同指定属性 <code>propertyNameAndOrders</code> 排序的 {@link Comparator}.
@@ -99,7 +99,7 @@ public final class BeanComparatorUtil{
             return propertyComparator(propertyNameAndOrders[0]);
         }
 
-        //-------------
+        //---------------------------------------------------------------
 
         List<Comparator<T>> comparators = new ArrayList<>();
         for (String propertyNameAndOrder : propertyNameAndOrders){

@@ -15,12 +15,12 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import java.util.Enumeration;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.iterators.EnumerationIterator;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * {@link Enumeration}工具类.
@@ -58,6 +58,8 @@ public final class EnumerationUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 判断<code>enumeration</code>枚举里面,是否有指定的元素<code>value</code>.

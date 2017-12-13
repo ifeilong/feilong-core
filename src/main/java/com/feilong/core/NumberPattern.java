@@ -157,7 +157,7 @@ public final class NumberPattern{
      */
     public static final String TWO_DECIMAL_POINTS   = "#0.00";
 
-    //********************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 百分数的表达式(不带小数) <code>{@value}</code>.
@@ -209,7 +209,7 @@ public final class NumberPattern{
      */
     public static final String PERCENT_WITH_2POINT  = "#0.00%";
 
-    //********************************************************************************
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private NumberPattern(){

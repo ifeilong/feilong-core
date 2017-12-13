@@ -245,6 +245,8 @@ final class CalendarUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     // [start]
 
     /**

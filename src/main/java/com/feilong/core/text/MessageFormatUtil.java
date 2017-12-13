@@ -37,6 +37,8 @@ public final class MessageFormatUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 调用 {@link java.text.MessageFormat#format(String, Object...)} 格式化.
      * 

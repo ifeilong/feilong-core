@@ -75,6 +75,8 @@ public class BeanPropertyValueChangeClosure<T> implements Closure<T>{
     /** 指定的属性值. */
     private final Object propertyValue;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new bean property value change closure.
      *

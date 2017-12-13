@@ -62,6 +62,8 @@ public class RegexGroupNumberComparator implements Comparator<String>,Serializab
     /** 文件名称的正则表达式,主要方便提取数字,比如 ".*ppt-coreContent(\\d*).png". */
     private final String      regexPattern;
 
+    //---------------------------------------------------------------
+
     /**
      * The Constructor.
      * 

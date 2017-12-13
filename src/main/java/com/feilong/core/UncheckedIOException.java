@@ -32,6 +32,8 @@ public class UncheckedIOException extends RuntimeException{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -8134305061645241065L;
 
+    //---------------------------------------------------------------
+
     /**
      * Constructs an instance of this class.
      *

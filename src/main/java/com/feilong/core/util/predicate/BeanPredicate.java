@@ -44,6 +44,8 @@ public class BeanPredicate<T> implements Predicate<T>{
     @SuppressWarnings("rawtypes")
     private final Predicate valuePredicate;
 
+    //---------------------------------------------------------------
+
     /**
      * The Constructor.
      * 

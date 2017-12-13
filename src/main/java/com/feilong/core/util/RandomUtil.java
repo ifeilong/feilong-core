@@ -58,7 +58,7 @@ public final class RandomUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    // ********************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 生成一个指定长度<code>length</code>的 <b>随机正整数</b>.

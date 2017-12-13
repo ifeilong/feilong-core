@@ -66,6 +66,8 @@ public final class URIComponents{
      */
     public static final String SCHEME_HTTPS = "https";
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private URIComponents(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.

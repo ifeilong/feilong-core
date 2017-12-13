@@ -71,6 +71,8 @@ public final class ArrayUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 得到指定数组对象 <code>array</code> 中指定索引 <code>index</code> 的元素.
      * 

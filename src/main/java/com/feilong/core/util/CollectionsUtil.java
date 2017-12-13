@@ -269,6 +269,8 @@ public final class CollectionsUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 循环将<code>beanIterable</code>每个元素的每个指定属性 <code>propertyName</code>的值改成 <code>propertyValue</code>.
      * 
@@ -471,7 +473,7 @@ public final class CollectionsUtil{
         return isNotNullOrEmpty(element) && objectCollection.add(element);
     }
 
-    //********************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 在<code>list</code>中,查找第一个属性 <code>propertyName</code> 值是指定值 <code>propertyValue</code> 对象的索引位置.
@@ -579,7 +581,7 @@ public final class CollectionsUtil{
         return ListUtils.removeAll(objectCollection, removeCollection);
     }
 
-    //********************************************************************************************************
+    //---------------------------------------------------------------
     /**
      * 从 <code>objectCollection</code>中 删除<code>removeElement</code> <span style="color:red">(原集合对象不变)</span>.
      * 

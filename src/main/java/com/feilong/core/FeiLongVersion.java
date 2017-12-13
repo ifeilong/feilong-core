@@ -44,6 +44,8 @@ public final class FeiLongVersion{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 返回当前feilong代码的 version.
      * 

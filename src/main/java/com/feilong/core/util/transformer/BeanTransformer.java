@@ -49,6 +49,8 @@ public class BeanTransformer<I, O> implements Transformer<I, O>{
      */
     private final String[] includePropertyNames;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new bean transformer.
      * 

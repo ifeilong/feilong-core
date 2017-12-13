@@ -151,7 +151,7 @@ public final class TimeInterval{
      */
     public static final long MILLISECOND_PER_YEAR    = 1000L * SECONDS_PER_YEAR;
 
-    //****************************************************************************************
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private TimeInterval(){

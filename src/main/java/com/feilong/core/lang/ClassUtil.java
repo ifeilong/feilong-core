@@ -143,6 +143,8 @@ public final class ClassUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 判断一个对象 <code>obj</code> 是不是某个类 <code>klass</code> 的实例.
      * 

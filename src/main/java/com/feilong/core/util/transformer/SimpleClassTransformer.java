@@ -15,14 +15,14 @@
  */
 package com.feilong.core.util.transformer;
 
+import static com.feilong.core.bean.ConvertUtil.convert;
+
 import java.io.Serializable;
 
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.ConvertUtil;
-
-import static com.feilong.core.bean.ConvertUtil.convert;
 
 /**
  * 简单的将对象转成指定 <code>targetType</code> 类型的转换器.
@@ -42,6 +42,8 @@ public class SimpleClassTransformer<T, V> implements Transformer<T, V>,Serializa
 
     /** 需要被转成什么目标类型. */
     private final Class<V>    targetType;
+
+    //---------------------------------------------------------------
 
     /**
      * Instantiates a new convert transformer.

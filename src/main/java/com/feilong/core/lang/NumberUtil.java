@@ -167,6 +167,8 @@ public final class NumberUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     // [start]Divide
 
     /**

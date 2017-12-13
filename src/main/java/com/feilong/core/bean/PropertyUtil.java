@@ -15,6 +15,10 @@
  */
 package com.feilong.core.bean;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -27,10 +31,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
@@ -68,6 +68,8 @@ public final class PropertyUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将 <code>fromObj</code> 中的全部或者一组属性的值,复制到 <code>toObj</code> 对象中.

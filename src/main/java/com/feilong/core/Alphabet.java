@@ -64,6 +64,8 @@ public final class Alphabet{
      */
     public static final String DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE = "23456789abcdefghijkmnpqrstuvwxyz";
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private Alphabet(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.

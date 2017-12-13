@@ -53,6 +53,8 @@ public final class BeanPredicateUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 用来指定 <code>T</code> 对象的特定属性 <code>propertyName</code> equals 指定的 <code>propertyValue</code>.
      * 

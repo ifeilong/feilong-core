@@ -179,6 +179,8 @@ public final class StringUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Constructs a new <code>String</code> by decoding the specified array of bytes using the given charset.
      *

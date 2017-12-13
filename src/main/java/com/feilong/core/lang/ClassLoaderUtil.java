@@ -89,6 +89,8 @@ public final class ClassLoaderUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得给定名称 <code>resourceName</code> 的资源.
      * 

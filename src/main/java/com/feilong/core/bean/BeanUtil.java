@@ -184,6 +184,8 @@ public final class BeanUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     // [start] copyProperties
 
     /**
@@ -931,10 +933,11 @@ public final class BeanUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * DynaBean newDynaBean = BeanUtil.newDynaBean(toMap(//
-     *                 Pair.of("address", (Object) new HashMap()),
-     *                 Pair.of("firstName", (Object) "Fred"),
-     *                 Pair.of("lastName", (Object) "Flintstone")));
+     * DynaBean newDynaBean = BeanUtil.newDynaBean(
+     *                 toMap(//
+     *                                 Pair.of("address", (Object) new HashMap()),
+     *                                 Pair.of("firstName", (Object) "Fred"),
+     *                                 Pair.of("lastName", (Object) "Flintstone")));
      * LOGGER.debug(JsonUtil.format(newDynaBean));
      * </pre>
      * 

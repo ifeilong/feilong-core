@@ -84,6 +84,8 @@ public final class Validator{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 判断对象 <code>value</code> 是不是 null或者empty.
      * 
@@ -176,6 +178,8 @@ public final class Validator{
         }
         return false;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 判断对象 <code>value</code> 是否不是null或者empty,调用 !{@link #isNullOrEmpty(Object)} 方法 .

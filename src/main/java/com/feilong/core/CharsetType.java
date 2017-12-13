@@ -82,7 +82,7 @@ public final class CharsetType{
      */
     public static final String UTF8       = StandardCharsets.UTF_8.name();
 
-    //******************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * <code>{@value}</code>,<span style="color:red">只能表示简体中文</span> .
@@ -150,7 +150,7 @@ public final class CharsetType{
      */
     public static final String GB18030    = "GB18030";
 
-    // *********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * <code>ISO-8859-1</code>,ISO/IEC 8859-1,又称Latin-1或"西欧语言",是国际标准化组织内ISO/IEC 8859的第一个8位字符集 <code>{@value}</code>.
@@ -176,6 +176,8 @@ public final class CharsetType{
      * @see java.nio.charset.StandardCharsets#ISO_8859_1
      */
     public static final String ISO_8859_1 = StandardCharsets.ISO_8859_1.name();
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private CharsetType(){

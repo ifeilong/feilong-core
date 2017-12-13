@@ -43,6 +43,8 @@ public final class EnumUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 通过<code>propertyName</code>的 <code>specifiedValue</code><b>(忽视大小写)</b> 获得枚举(equalsIgnoreCase判断).
      * 

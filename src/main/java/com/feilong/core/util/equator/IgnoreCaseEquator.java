@@ -34,6 +34,8 @@ public class IgnoreCaseEquator implements Equator<String>,Serializable{
     // the static instance works for all types
     public static final IgnoreCaseEquator INSTANCE         = new IgnoreCaseEquator();
 
+    //---------------------------------------------------------------
+
     /**
      * Restricted constructor.
      */

@@ -72,7 +72,7 @@ public final class SortUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //*****************************************************************************************
+    //---------------------------------------------------------------
     /**
      * 对 数组 <code>arrays</code> 进行排序.
      * 
