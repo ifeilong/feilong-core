@@ -68,7 +68,7 @@ public final class ParamUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    // ************************************addParameter******************************************************
+    // -------------------------------addParameter-------------------------------
 
     /**
      * 给指定的<code>uriString</code>添加指定的参数 <code>paramName</code> 和值 <code>paramValue</code>.
@@ -405,7 +405,7 @@ public final class ParamUtil{
         return safeArrayValueMap;
     }
 
-    //*********************************************************************************************
+    //---------------------------------------------------------------------------------------------
 
     /**
      * 将 <code>singleValueMap</code> 转成<code>自然排序</code>, 然后将key和value直接拼接成字符串(<span style="color:red">不使用 = 和& 分隔</span>).
@@ -825,7 +825,7 @@ public final class ParamUtil{
         }
         return sb.toString();
     }
-    //*******************************************************************************************
+    //---------------------------------------------------------------------------------------------
 
     /**
      * 添加 parameter array value map.
