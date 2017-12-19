@@ -60,7 +60,6 @@ public class GetAllFieldNameAndValueMapTest{
     /**
      * Test get all field name and value map null exclude field names.
      */
-    //******************************************************************************
     @Test
     public void testGetAllFieldNameAndValueMapNullExcludeFieldNames(){
         Map<String, Object> map = FieldUtil.getAllFieldNameAndValueMap(new UserInfo(18), null);

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net.uriutiltest;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.net.URIUtil.encode;
 import static org.junit.Assert.assertEquals;
 
 import java.net.URI;
@@ -23,9 +25,6 @@ import org.junit.Test;
 
 import com.feilong.core.net.URIParseException;
 import com.feilong.core.net.URIUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.net.URIUtil.encode;
 
 /**
  * The Class URIUtilCreateWithCharsetTypeTest.
@@ -63,8 +62,6 @@ public class CreateWithCharsetTypeTest{
         URI uri = URIUtil.create(url, null);
         assertEquals("http://127.0.0.1/cmens/../t-b-f-a-c-s-f-p-g-e-i-o.htm?a=" + "飞龙" + "&a=2", uri.toString());
     }
-
-    //***************************************************************************************
 
     /**
      * Test create null uri string.

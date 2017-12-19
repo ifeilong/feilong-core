@@ -301,8 +301,7 @@ public final class DatePattern{
      */
     public static final String COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND = "MM-dd HH:mm";
 
-    // *****************************************************************************************************
-
+    //---------------------------------------------------------------
     /**
      * 时间戳, 一般用于拼接文件名称<span style="color:green"><code>{@value}</code></span>.
      * 
@@ -321,7 +320,7 @@ public final class DatePattern{
      */
     public static final String TIMESTAMP_WITH_MILLISECOND                   = "yyyyMMddHHmmssSSS";
 
-    //******************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 年月 带水平线,一般用于分类日志,将众多日志按月分类 <span style="color:green"><code>{@value}</code></span>.
@@ -350,7 +349,7 @@ public final class DatePattern{
      */
     public static final String MONTH_AND_DAY_WITH_WEEK                      = "MM-dd(E)";
 
-    //**********************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * <span style="color:green"><code>{@value}</code></span>.
@@ -433,7 +432,7 @@ public final class DatePattern{
      */
     public static final String TO_STRING_STYLE                              = "EEE MMM dd HH:mm:ss zzz yyyy";
 
-    //***************************************************************************************************
+    //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */
     private DatePattern(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.

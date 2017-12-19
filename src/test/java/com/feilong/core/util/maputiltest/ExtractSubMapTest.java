@@ -55,7 +55,6 @@ public class ExtractSubMapTest{
     /**
      * Test extract sub map.
      */
-    //*********************************************************************************************
     @Test
     public void testExtractSubMapNullMap(){
         assertEquals(emptyMap(), MapUtil.extractSubMap(null, "id"));

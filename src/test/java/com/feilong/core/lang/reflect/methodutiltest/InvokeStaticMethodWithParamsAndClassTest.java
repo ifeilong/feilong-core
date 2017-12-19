@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_CLASS_ARRAY;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
 import static org.junit.Assert.assertEquals;
@@ -24,8 +25,6 @@ import org.junit.Test;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.lang.reflect.ReflectException;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class MethodUtilInvokeStaticMethodWithParamsAndClassTest.
@@ -65,7 +64,6 @@ public class InvokeStaticMethodWithParamsAndClassTest{
     /**
      * Test invoke static parent method.
      */
-    //*******************************************************
     @Test
     public void testInvokeStaticParentMethod(){
         assertEquals(
@@ -102,7 +100,6 @@ public class InvokeStaticMethodWithParamsAndClassTest{
     /**
      * Test invoke static not exist method.
      */
-    //*******************************************************
     @Test(expected = ReflectException.class)
     public void testInvokeStaticNotExistMethod(){
         MethodUtil.invokeStaticMethod(StringUtil.class, "substring11", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
@@ -111,7 +108,6 @@ public class InvokeStaticMethodWithParamsAndClassTest{
     /**
      * Test invoke static method null class.
      */
-    //*******************************************************
     @Test(expected = NullPointerException.class)
     public void testInvokeStaticMethodNullClass(){
         MethodUtil.invokeStaticMethod(null, "substring", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);

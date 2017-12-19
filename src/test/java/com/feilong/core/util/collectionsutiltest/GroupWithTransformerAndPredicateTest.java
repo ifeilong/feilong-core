@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.group;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -39,9 +41,6 @@ import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.CollectionsUtil.group;
-
 /**
  * The Class CollectionsUtilGroupWithTransformerAndPredicateTest.
  *
@@ -65,10 +64,11 @@ public class GroupWithTransformerAndPredicateTest{
         User guansuo31 = new User("关索", 31);
         User guanxing20 = new User("关兴", 18);
 
-        //************************************************************************
+        //---------------------------------------------------------------
+
         List<User> list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
 
-        //************************************************************************
+        //---------------------------------------------------------------
 
         Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
         Map<String, List<User>> map = CollectionsUtil.group(list, comparatorPredicate, new Transformer<User, String>(){
@@ -82,16 +82,18 @@ public class GroupWithTransformerAndPredicateTest{
 
         assertSame(4, map.size());
         assertThat(map.keySet(), contains("马", "张", "刘", "关"));
-        assertThat(map, allOf(//
-                        hasEntry(is("马"), hasItems(mateng55, machao28, madai27, maxiu25)),
-                        hasEntry(is("张"), hasItems(zhangfei28)),
-                        hasEntry(is("刘"), hasItems(liubei32)),
-                        hasEntry(is("关"), hasItems(guanping32, guansuo31))
-        //
-        ));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry(is("马"), hasItems(mateng55, machao28, madai27, maxiu25)),
+                                        hasEntry(is("张"), hasItems(zhangfei28)),
+                                        hasEntry(is("刘"), hasItems(liubei32)),
+                                        hasEntry(is("关"), hasItems(guanping32, guansuo31))
+                        //
+                        ));
     }
 
-    //********************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test group null collection.

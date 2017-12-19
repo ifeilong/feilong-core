@@ -61,11 +61,11 @@ public class GroupWithTransformerTest{
         User guansuo31 = new User("关索", 31);
         User guanxing20 = new User("关兴", 18);
 
-        //************************************************************************
+        //---------------------------------------------------------------
+
         List<User> list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
 
-        //************************************************************************
-
+        //---------------------------------------------------------------
         Map<String, List<User>> map = CollectionsUtil.group(list, new Transformer<User, String>(){
 
             @Override
@@ -77,16 +77,16 @@ public class GroupWithTransformerTest{
 
         assertSame(4, map.size());
         assertThat(map.keySet(), contains("马", "张", "刘", "关"));
-        assertThat(map, allOf(//
-                        hasEntry(is("马"), hasItems(mateng55, machao28, madai27, maxiu25)),
-                        hasEntry(is("张"), hasItems(zhangfei28)),
-                        hasEntry(is("刘"), hasItems(liubei32)),
-                        hasEntry(is("关"), hasItems(guanping32, guansuo31, guanxing20))
-        //
-        ));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry(is("马"), hasItems(mateng55, machao28, madai27, maxiu25)),
+                                        hasEntry(is("张"), hasItems(zhangfei28)),
+                                        hasEntry(is("刘"), hasItems(liubei32)),
+                                        hasEntry(is("关"), hasItems(guanping32, guansuo31, guanxing20))
+                        //
+                        ));
     }
-
-    //********************************************************************
 
     /**
      * Test group null collection.

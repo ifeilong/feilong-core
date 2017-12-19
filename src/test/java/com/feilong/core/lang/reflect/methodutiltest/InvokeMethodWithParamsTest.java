@@ -42,7 +42,6 @@ public class InvokeMethodWithParamsTest{
         assertEquals("age Integer:5", MethodUtil.invokeMethod(new OverloadMethod(), "age", Integer.parseInt("5")));
     }
 
-    //***************************************************************************
     /**
      * Test invoke method empty params.
      */
@@ -116,8 +115,6 @@ public class InvokeMethodWithParamsTest{
     public void testInvokeMethodMethodNotExist(){
         MethodUtil.invokeMethod(new User(), "getId1", EMPTY_OBJECT_ARRAY);
     }
-
-    //***************************************************************************
 
     /**
      * Test invoke method null obj.

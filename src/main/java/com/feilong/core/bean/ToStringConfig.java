@@ -46,7 +46,7 @@ public final class ToStringConfig implements Serializable{
     /** The Constant serialVersionUID. */
     private static final long          serialVersionUID            = 3182446945343865398L;
 
-    //----------------------------------------------------------------------------------------
+    //---------------------------------------------------------------
 
     /**
      * 默认逗号连接 <code>{@value}</code>.
@@ -55,7 +55,7 @@ public final class ToStringConfig implements Serializable{
      */
     public static final String         DEFAULT_CONNECTOR           = ",";
 
-    //----------------------------------------------------------------------------------------
+    //---------------------------------------------------------------
 
     /**
      * 默认的转换参数.
@@ -125,7 +125,7 @@ public final class ToStringConfig implements Serializable{
      */
     public static final ToStringConfig IGNORE_NULL_OR_EMPTY_CONFIG = new ToStringConfig(DEFAULT_CONNECTOR, false);
 
-    //**********************************************************************************************
+    //---------------------------------------------------------------
 
     /** 连接符,默认={@link #DEFAULT_CONNECTOR}. */
     private String                     connector                   = DEFAULT_CONNECTOR;
@@ -137,7 +137,7 @@ public final class ToStringConfig implements Serializable{
      */
     private boolean                    isJoinNullOrEmpty           = true;
 
-    //**********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 默认的构造函数.

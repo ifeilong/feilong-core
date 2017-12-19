@@ -54,7 +54,6 @@ public class CreateTest{
     /**
      * Test create null.
      */
-    //****************************************************************************************
     @Test(expected = NullPointerException.class)
     public void testCreateNull(){
         URIUtil.create(null);

@@ -68,7 +68,7 @@ public class ReplaceValuesMapTest{
         assertEquals(template, StringUtil.replace(template, null));
     }
 
-    //*************************************************************************
+    //---------------------------------------------------------------
 
     @Test
     public void testReplaceNullValuesMap(){

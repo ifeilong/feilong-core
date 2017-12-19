@@ -15,6 +15,9 @@
  */
 package com.feilong.core.net.paramutiltest;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.net.ParamUtil.addParameterArrayValueMap;
+import static com.feilong.core.net.URIUtil.encode;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
@@ -25,10 +28,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.net.ParamUtil.addParameterArrayValueMap;
-import static com.feilong.core.net.URIUtil.encode;
 
 /**
  * The Class ParamUtilAddParameterArrayValueMapTest.
@@ -98,7 +97,7 @@ public class AddParameterArrayValueMapTest{
                         addParameterArrayValueMap(beforeUrl, keyAndArrayMap, UTF8));
     }
 
-    //*******************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test get encoded url by array map null uri.
@@ -136,7 +135,7 @@ public class AddParameterArrayValueMapTest{
         assertEquals(EMPTY, addParameterArrayValueMap(" ", keyAndArrayMap, UTF8));
     }
 
-    //******************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test get encoded url by array map null map.

@@ -42,7 +42,6 @@ public class GetAllFieldListTest{
     /**
      * Test get all field list null exclude field names.
      */
-    //******************************************************************************
     @Test
     public void testGetAllFieldListNullExcludeFieldNames(){
         assertNotEquals(emptyList(), FieldUtil.getAllFieldList(UserInfo.class, null));

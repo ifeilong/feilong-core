@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -30,8 +31,6 @@ import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilGetPropertyValueMapTest.
@@ -52,10 +51,12 @@ public class GetPropertyValueMapTest{
 
         Map<String, Integer> map = CollectionsUtil.getPropertyValueMap(list, "name", "age");
 
-        assertThat(map, allOf(//
-                        hasEntry("张飞", 23),
-                        hasEntry("关羽", 24),
-                        hasEntry("刘备", 25)));
+        assertThat(
+                        map,
+                        allOf(//
+                                        hasEntry("张飞", 23),
+                                        hasEntry("关羽", 24),
+                                        hasEntry("刘备", 25)));
     }
 
     /**
@@ -74,7 +75,7 @@ public class GetPropertyValueMapTest{
         assertThat(map, allOf(hasEntry("张飞", 25), hasEntry("关羽", 24)));
     }
 
-    //****************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test get property value map null collection.

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -31,9 +33,6 @@ import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 import com.feilong.store.member.UserAddress;
 import com.feilong.store.member.UserInfo;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilGetPropertyValueListTest.
@@ -70,17 +69,17 @@ public class GetPropertyValueListTest{
         userAddress.setAddress("中南海");
         List<UserAddress> userAddresseList = toList(userAddress);
 
-        //*******************************************************
+        //---------------------------------------------------------------
         Map<String, String> attrMap = new HashMap<>();
         attrMap.put("蜀国", "赵子龙");
         attrMap.put("魏国", "张文远");
         attrMap.put("吴国", "甘兴霸");
 
-        //*******************************************************
+        //---------------------------------------------------------------
         UserInfo userInfo1 = new UserInfo();
         userInfo1.setAge(28);
 
-        //*******************************************************
+        //---------------------------------------------------------------
 
         User user1 = new User(2L);
 
@@ -89,7 +88,8 @@ public class GetPropertyValueListTest{
         user1.setAttrMap(attrMap);
         user1.setUserAddresseList(userAddresseList);
 
-        //*****************************************************
+        //---------------------------------------------------------------
+
         UserInfo userInfo2 = new UserInfo();
         userInfo2.setAge(null);
 
@@ -126,7 +126,6 @@ public class GetPropertyValueListTest{
     /**
      * Test get property value list null object collection.
      */
-    //*******************************
     @Test
     public void testGetPropertyValueListNullObjectCollection(){
         assertEquals(emptyList(), CollectionsUtil.getPropertyValueList(null, "userInfo.age"));

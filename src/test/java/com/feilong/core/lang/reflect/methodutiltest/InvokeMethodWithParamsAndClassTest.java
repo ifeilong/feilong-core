@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_CLASS_ARRAY;
 import static org.apache.commons.lang3.ArrayUtils.EMPTY_OBJECT_ARRAY;
 import static org.junit.Assert.assertEquals;
@@ -26,8 +27,6 @@ import org.junit.Test;
 import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class MethodUtilInvokeMethodWithParamsAndClassTest.
@@ -49,8 +48,6 @@ public class InvokeMethodWithParamsAndClassTest{
                         "age Integer:5",
                         MethodUtil.invokeMethod(new OverloadMethod(), "age", toArray(Integer.parseInt("5")), parameterTypes2));
     }
-
-    //***************************************************************************
 
     /**
      * Test invoke method null params.
@@ -127,8 +124,6 @@ public class InvokeMethodWithParamsAndClassTest{
     public void testInvokeMethodMethodNotExist(){
         MethodUtil.invokeMethod(new User(), "getId1", EMPTY_OBJECT_ARRAY, EMPTY_CLASS_ARRAY);
     }
-
-    //***************************************************************************
 
     /**
      * Test invoke method null obj.

@@ -33,7 +33,6 @@ import com.feilong.core.util.MapUtil;
  */
 public class PutSumValueTest{
 
-    //***************************************************************************
     /**
      * Test put sum value.
      */

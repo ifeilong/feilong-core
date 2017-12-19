@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -30,8 +31,6 @@ import org.junit.Test;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class MapUtilExtractSubMapIncludeKeysTest.
@@ -64,7 +63,6 @@ public class ExtractSubMapIncludeKeysTest{
     /**
      * Test extract sub map null include keys.
      */
-    //*********************************************************************************************
     @Test
     public void testExtractSubMapNullIncludeKeys(){
         Map<Long, User> map = new LinkedHashMap<>();
@@ -91,7 +89,6 @@ public class ExtractSubMapIncludeKeysTest{
     /**
      * Test extract sub map null map.
      */
-    //*********************************************************************************************
     @Test
     public void testExtractSubMapNullMap(){
         assertEquals(emptyMap(), MapUtil.extractSubMap(null, toArray(5L, 4L), "id"));
@@ -104,8 +101,6 @@ public class ExtractSubMapIncludeKeysTest{
     public void testExtractSubMapEmptyMap(){
         assertEquals(emptyMap(), MapUtil.extractSubMap(new HashMap<>(), toArray(5L, 4L), "id"));
     }
-
-    //*******************************************************************************************
 
     /**
      * Test extract sub map null extract property name.

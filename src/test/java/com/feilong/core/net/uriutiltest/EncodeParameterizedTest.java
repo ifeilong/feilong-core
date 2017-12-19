@@ -87,6 +87,4 @@ public class EncodeParameterizedTest extends AbstractTwoParamsAndOneResultParame
         assertEquals(expectedValue, URIUtil.encode(input1, input2));
     }
 
-    //**************************************************************************
-
 }

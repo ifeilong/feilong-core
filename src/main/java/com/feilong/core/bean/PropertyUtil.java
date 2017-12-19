@@ -592,7 +592,7 @@ public final class PropertyUtil{
             return null;
         }
 
-        //******************************************************************************
+        //---------------------------------------------------------------
         Map<String, Object> describe = describe(obj);
 
         for (Map.Entry<String, Object> entry : describe.entrySet()){

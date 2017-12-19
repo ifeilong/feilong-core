@@ -51,7 +51,6 @@ public class InvokeStaticMethodWithParamsTest{
     /**
      * Test invoke static parent method.
      */
-    //*******************************************************
     @Test
     public void testInvokeStaticParentMethod(){
         assertEquals("parent static method", MethodUtil.invokeStaticMethod(SimpleChild.class, "getStaticMessage"));
@@ -84,7 +83,6 @@ public class InvokeStaticMethodWithParamsTest{
     /**
      * Test invoke static not exist method.
      */
-    //*******************************************************
     @Test(expected = ReflectException.class)
     public void testInvokeStaticNotExistMethod(){
         MethodUtil.invokeStaticMethod(StringUtil.class, "substring11", EMPTY_OBJECT_ARRAY);
@@ -93,7 +91,6 @@ public class InvokeStaticMethodWithParamsTest{
     /**
      * Test invoke static method null class.
      */
-    //*******************************************************
     @Test(expected = NullPointerException.class)
     public void testInvokeStaticMethodNullClass(){
         MethodUtil.invokeStaticMethod(null, "substring", "feilong", "ei");

@@ -15,14 +15,13 @@
  */
 package com.feilong.core.net.uriutiltest;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import com.feilong.core.net.URIUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class URIUtilDecodeTest.
@@ -39,7 +38,7 @@ public class DecodeTest{
         assertEquals("飞天奔月", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", UTF8));
     }
 
-    //************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test decode null value.
@@ -65,7 +64,7 @@ public class DecodeTest{
         assertEquals(EMPTY, URIUtil.decode(" ", UTF8));
     }
 
-    //*******************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test decode null charset type.

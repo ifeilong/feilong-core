@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
@@ -29,8 +30,6 @@ import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilSelectRejectedArrayTest.
@@ -78,8 +77,6 @@ public class SelectRejectedArrayTest{
         List<User> list = toList(zhangfei, guanyu, liubei);
         assertEquals(list, CollectionsUtil.selectRejected(list, "name", (String) null));
     }
-
-    //**************************************************************
 
     /**
      * Test select array null collection.

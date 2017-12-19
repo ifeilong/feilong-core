@@ -868,7 +868,8 @@ public final class ConvertUtil{
     public static Long[] toLongs(Object toBeConvertedValue){
         return convert(toBeConvertedValue, Long[].class);
     }
-    //*************************************************************************************************
+
+    //---------------------------------------------------------------
 
     /**
      * 把对象 <code>toBeConvertedValue</code> 转换成字符串.
@@ -1173,7 +1174,7 @@ public final class ConvertUtil{
         return StringUtil.substringWithoutLast(sb, connector);
     }
 
-    //**********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 将集合 <code>collection</code> 转成<code>Enumeration</code>.
@@ -2059,7 +2060,7 @@ public final class ConvertUtil{
         return map;
     }
 
-    //*************************************toProperties*********************************************************
+    //-------------------------toProperties--------------------------------------
 
     /**
      * 将map转成 {@link Properties}.
@@ -2100,7 +2101,8 @@ public final class ConvertUtil{
         return MapUtils.toProperties(map);
     }
 
-    //*************************************toList*********************************************************
+    //--------------------------toList-------------------------------------
+
     /**
      * 将枚举 <code>enumeration</code> 转成 {@link List}.
      * 
@@ -2261,7 +2263,7 @@ public final class ConvertUtil{
         return isNullOrEmpty(arrays) ? Collections.<T> emptyList() : new ArrayList<>(Arrays.asList(arrays));
     }
 
-    //*************************************toSet*********************************************************
+    //---------------------------toSet------------------------------------
 
     /**
      * 数组转成 Set ({@link java.util.LinkedHashSet LinkedHashSet}).
@@ -2341,7 +2343,8 @@ public final class ConvertUtil{
         return isNullOrEmpty(arrays) ? Collections.<T> emptySet() : new LinkedHashSet<>(Arrays.asList(arrays));
     }
 
-    //*************************************toArray*********************************************************
+    //----------------------------toArray-----------------------------------
+
     /**
      * 将动态数组转成数组.
      * 
@@ -2538,7 +2541,8 @@ public final class ConvertUtil{
         //如果指定的类型 本身就是数组类型的class,那么返回的类型就是该数组类型,否则将基于指定类型构造数组.
         return null == toBeConvertedValue ? null : (T[]) ConvertUtils.convert(toBeConvertedValue, targetType);
     }
-    //********************************************************************************
+
+    //---------------------------------------------------------------
 
     /**
      * 将 <code>toBeConvertedValue</code> 转成{@link String}数组.

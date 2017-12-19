@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
@@ -29,8 +30,6 @@ import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class CollectionsUtilSelectArrayTest.
@@ -94,7 +93,7 @@ public class SelectArrayTest{
         assertEquals(emptyList(), CollectionsUtil.select(list, "name", (String) null));
     }
 
-    //**************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test select array null collection.

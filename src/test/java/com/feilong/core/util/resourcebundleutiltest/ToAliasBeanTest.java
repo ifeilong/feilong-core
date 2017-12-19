@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.resourcebundleutiltest;
 
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toAliasBean;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.arrayContaining;
 import static org.hamcrest.Matchers.hasProperty;
@@ -27,9 +29,6 @@ import org.apache.commons.beanutils.converters.StringConverter;
 import org.junit.Test;
 
 import com.feilong.core.entity.DangaMemCachedConfig;
-
-import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
-import static com.feilong.core.util.ResourceBundleUtil.toAliasBean;
 
 /**
  * The Class ResourceBundleUtilToAliasBeanTest.
@@ -44,20 +43,22 @@ public class ToAliasBeanTest{
     @Test
     public void testToAliasBean(){
         DangaMemCachedConfig dangaMemCachedConfig = toAliasBean(getResourceBundle("messages.memcached"), DangaMemCachedConfig.class);
-        assertThat(dangaMemCachedConfig, allOf(//
-                        hasProperty("serverList", arrayContaining("172.20.3-1.23", "11211", "172.20.31.22", "11211")),
-                        hasProperty("poolName", is("sidsock2")),
-                        hasProperty("expireTime", is(180)),
-                        hasProperty("weight", arrayContaining(2)),
-                        hasProperty("initConnection", is(10)),
-                        hasProperty("minConnection", is(5)),
-                        hasProperty("maxConnection", is(250)),
-                        hasProperty("maintSleep", is(30)),
-                        hasProperty("nagle", is(false)),
-                        hasProperty("socketTo", is(3000)),
-                        hasProperty("aliveCheck", is(false))
-        //
-        ));
+        assertThat(
+                        dangaMemCachedConfig,
+                        allOf(//
+                                        hasProperty("serverList", arrayContaining("172.20.3-1.23", "11211", "172.20.31.22", "11211")),
+                                        hasProperty("poolName", is("sidsock2")),
+                                        hasProperty("expireTime", is(180)),
+                                        hasProperty("weight", arrayContaining(2)),
+                                        hasProperty("initConnection", is(10)),
+                                        hasProperty("minConnection", is(5)),
+                                        hasProperty("maxConnection", is(250)),
+                                        hasProperty("maintSleep", is(30)),
+                                        hasProperty("nagle", is(false)),
+                                        hasProperty("socketTo", is(3000)),
+                                        hasProperty("aliveCheck", is(false))
+                        //
+                        ));
     }
 
     /**
@@ -72,23 +73,23 @@ public class ToAliasBeanTest{
         ConvertUtils.register(arrayConverter, String[].class);
 
         DangaMemCachedConfig dangaMemCachedConfig = toAliasBean(getResourceBundle("messages.memcached"), DangaMemCachedConfig.class);
-        assertThat(dangaMemCachedConfig, allOf(//
-                        hasProperty("serverList", arrayContaining("172.20.3-1.23:11211", "172.20.31.22:11211")),
-                        hasProperty("poolName", is("sidsock2")),
-                        hasProperty("expireTime", is(180)),
-                        hasProperty("weight", arrayContaining(2)),
-                        hasProperty("initConnection", is(10)),
-                        hasProperty("minConnection", is(5)),
-                        hasProperty("maxConnection", is(250)),
-                        hasProperty("maintSleep", is(30)),
-                        hasProperty("nagle", is(false)),
-                        hasProperty("socketTo", is(3000)),
-                        hasProperty("aliveCheck", is(false))
-        //
-        ));
+        assertThat(
+                        dangaMemCachedConfig,
+                        allOf(//
+                                        hasProperty("serverList", arrayContaining("172.20.3-1.23:11211", "172.20.31.22:11211")),
+                                        hasProperty("poolName", is("sidsock2")),
+                                        hasProperty("expireTime", is(180)),
+                                        hasProperty("weight", arrayContaining(2)),
+                                        hasProperty("initConnection", is(10)),
+                                        hasProperty("minConnection", is(5)),
+                                        hasProperty("maxConnection", is(250)),
+                                        hasProperty("maintSleep", is(30)),
+                                        hasProperty("nagle", is(false)),
+                                        hasProperty("socketTo", is(3000)),
+                                        hasProperty("aliveCheck", is(false))
+                        //
+                        ));
     }
-
-    //**********************************************************************************************
 
     /**
      * Test to alias bean null resource bundle.

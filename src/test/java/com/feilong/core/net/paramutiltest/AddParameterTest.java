@@ -15,14 +15,13 @@
  */
 package com.feilong.core.net.paramutiltest;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.net.ParamUtil.addParameter;
+import static com.feilong.core.net.URIUtil.encode;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.net.ParamUtil.addParameter;
-import static com.feilong.core.net.URIUtil.encode;
 
 /**
  * The Class ParamUtilAddParameterTest.
@@ -96,7 +95,6 @@ public class AddParameterTest{
     /**
      * Test add parameter null param name.
      */
-    //****************************************************************************
     @Test
     public void testAddParameterNullParamName(){
         String uriString = PATH + "?keyword=%E6%81%A4&page=";
@@ -115,14 +113,13 @@ public class AddParameterTest{
     /**
      * Test add parameter null value.
      */
-    //*********************************************************************
     @Test
     public void testAddParameterNullValue(){
         String uriString = PATH + "?keyword=%E6%81%A4&page=";
         assertEquals(PATH + "?keyword=%E6%81%A4&page=&label=", addParameter(uriString, "label", null, null));
     }
 
-    //****************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test add parameter null uri.

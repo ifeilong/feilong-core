@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedHashMap;
@@ -24,8 +25,6 @@ import java.util.Map.Entry;
 import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
-
-import static com.feilong.core.util.MapUtil.newHashMap;
 
 /**
  * The Class MapUtilGetTest.
@@ -49,8 +48,6 @@ public class GetTest{
         assertEquals("age", entry.getKey());
         assertEquals("18", entry.getValue());
     }
-
-    //******************************************************************
 
     /**
      * Test get index more index.
