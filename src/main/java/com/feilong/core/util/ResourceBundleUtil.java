@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -40,9 +42,6 @@ import com.feilong.core.UncheckedIOException;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.text.MessageFormatUtil;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.lang.reflect.ConstructorUtil.newInstance;
 
 /**
  * {@link java.util.ResourceBundle ResourceBundle} 工具类.
@@ -87,8 +86,7 @@ public final class ResourceBundleUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    // ****************************getValue*************************************************
-
+    //---------------------------------------------------------------
     /**
      * 获取<code>resourceBundle</code> 配置文件指定 <code>key</code>键的值.
      * 
@@ -159,7 +157,7 @@ public final class ResourceBundleUtil{
         return isNullOrEmpty(value) ? EMPTY : MessageFormatUtil.format(value, arguments);// 支持 arguments 为null,原样返回
     }
 
-    //***************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 将 <code>resourceBundle</code> 转成map.
@@ -522,7 +520,7 @@ public final class ResourceBundleUtil{
         return BeanUtil.populateAliasBean(newInstance(aliasBeanClass), toMap(resourceBundle));
     }
 
-    //********************************getResourceBundle**********************************************
+    //----------------------------getResourceBundle-----------------------------------
 
     /**
      * 使用 {@link Locale#getDefault()} 获得{@link ResourceBundle}.
@@ -644,7 +642,7 @@ public final class ResourceBundleUtil{
         return ResourceBundle.getBundle(baseName, defaultIfNull(locale, Locale.getDefault()));
     }
 
-    //*****************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 获得ResourceBundle({@link PropertyResourceBundle}),新增这个方法的初衷是为了能读取任意的资源(包括本地file等).

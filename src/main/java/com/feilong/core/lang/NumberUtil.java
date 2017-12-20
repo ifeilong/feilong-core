@@ -432,7 +432,7 @@ public final class NumberUtil{
         return NumberFormatUtil.format(value, toStringPattern, HALF_UP);
     }
 
-    // *****************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 计算进度(当前量 <code>current</code>/总量 <code>total</code>,然后转成指定的字符串格式 <code>toStringPattern</code>).

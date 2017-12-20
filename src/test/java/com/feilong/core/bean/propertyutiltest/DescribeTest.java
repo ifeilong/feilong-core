@@ -165,7 +165,7 @@ public class DescribeTest{
         assertThat(map, allOf(hasEntry("date", (Object) now)));
     }
 
-    //********************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test describe null bean.

@@ -205,7 +205,8 @@ public final class FieldUtil{
         if (isNullOrEmpty(fieldList)){
             return emptyList();
         }
-        //**********************************************************************************************
+
+        //---------------------------------------------------------------
         Predicate<Field> excludeFieldPredicate = BeanPredicateUtil.containsPredicate("name", excludeFieldNames);
         Predicate<Field> staticPredicate = new Predicate<Field>(){
 

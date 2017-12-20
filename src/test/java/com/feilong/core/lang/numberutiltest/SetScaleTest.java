@@ -36,8 +36,6 @@ public class SetScaleTest{
         NumberUtil.setScale(null, 5);
     }
 
-    //********************************************************
-
     /**
      * Test set scale rounding mode.
      */

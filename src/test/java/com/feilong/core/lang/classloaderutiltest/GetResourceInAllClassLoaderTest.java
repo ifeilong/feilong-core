@@ -47,7 +47,7 @@ public class GetResourceInAllClassLoaderTest{
         ClassLoaderUtil.getResourceInAllClassLoader(null, this.getClass());
     }
 
-    //*************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test get resource null calling class.

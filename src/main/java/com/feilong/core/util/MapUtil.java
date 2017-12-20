@@ -234,7 +234,7 @@ public final class MapUtil{
      *         return;
      *     }
      * 
-     *     //********************************************************************************************
+     *     //---------------------------------------------------------------
      *     String beginName = null; <span style="color:green">// 开始章节名称 </span>
      * 
      *     for (Map.Entry{@code <String, String>} entry : bookSectionUrlMap.entrySet()){
@@ -251,7 +251,7 @@ public final class MapUtil{
      *         }
      *     }
      * 
-     *     //**********************************************************************************************
+     *     //---------------------------------------------------------------
      *     write(novel, beginName);
      * 
      *     <span style="color:green">// do something logic</span>
@@ -275,7 +275,7 @@ public final class MapUtil{
      *         return;
      *     }
      * 
-     *     //********************************************************************************************
+     *     //---------------------------------------------------------------
      * 
      *     for (Map.Entry{@code <String, String>} entry : bookSectionUrlMap.entrySet()){
      *         try{
@@ -287,7 +287,7 @@ public final class MapUtil{
      *         }
      *     }
      * 
-     *     //**********************************************************************************************
+     *     //---------------------------------------------------------------
      *     write(novel, MapUtil.get(bookSectionUrlMap, 0).getValue());
      * 
      *     <span style="color:green">// do something logic</span>
@@ -1311,7 +1311,7 @@ public final class MapUtil{
         return returnMap;
     }
 
-    //*************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 创建 {@code HashMap}实例,拥有足够的 "initial capacity" 应该控制{@code expectedSize} elements without growth.

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toIterator;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -28,9 +30,6 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.junit.Test;
-
-import static com.feilong.core.bean.ConvertUtil.toIterator;
-import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class ConvertUtilToIteratorTest.
@@ -98,7 +97,6 @@ public class ToIteratorTest{
      */
     @Test
     public void testToIteratorMap(){
-        // ************************map*********************************
         Map<String, String> map = toMap("a", "1", "b", "2");
 
         Iterator<String> iterator = toIterator(map);

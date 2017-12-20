@@ -77,16 +77,18 @@ public class CopyPropertiesTest{
         User user2 = new User();
         BeanUtil.copyProperties(user2, user);
 
-        //*************************************************************************
-        assertThat(user2, allOf(//
-                        hasProperty("money", is(money)),
+        //---------------------------------------------------------------
+        assertThat(
+                        user2,
+                        allOf(//
+                                        hasProperty("money", is(money)),
 
-                        hasProperty("nickNames", is(nickNames)),
-                        //hasProperty("nickNames", is(toArray("feilong"))),
+                                        hasProperty("nickNames", is(nickNames)),
+                                        //hasProperty("nickNames", is(toArray("feilong"))),
 
-                        // not(hasProperty("date", equalTo(date)))//
-                        hasProperty("date", equalTo(date))//
-        ));
+                                        // not(hasProperty("date", equalTo(date)))//
+                                        hasProperty("date", equalTo(date))//
+                        ));
     }
 
     /**
@@ -102,9 +104,11 @@ public class CopyPropertiesTest{
         User user2 = new User();
         BeanUtil.copyProperties(user2, user, "nickNames");
 
-        assertThat(user2, allOf(//
-                        not(hasProperty("nickNames", is(nickNames))),
-                        hasProperty("nickNames", is(toArray("feilong")))));
+        assertThat(
+                        user2,
+                        allOf(//
+                                        not(hasProperty("nickNames", is(nickNames))),
+                                        hasProperty("nickNames", is(toArray("feilong")))));
     }
 
     /**

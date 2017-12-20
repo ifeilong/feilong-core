@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toSet;
 import static java.util.Collections.emptySet;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -26,9 +28,6 @@ import java.util.Set;
 import org.junit.Test;
 
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toSet;
 
 /**
  * The Class ConvertUtilToSetVarargsTest.
@@ -51,7 +50,6 @@ public class ToSetVarargsTest{
     /**
      * Test to set null array.
      */
-    //*********************************************************
     @Test
     public void testToSetNullArray(){
         assertEquals(emptySet(), toSet((User[]) null));

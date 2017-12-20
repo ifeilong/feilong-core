@@ -71,7 +71,7 @@ public class SetPropertyIfValueNotNullOrEmptyTest{
         PropertyUtil.setPropertyIfValueNotNullOrEmpty(user, "name", " ");
         assertThat(user, hasProperty("name", equalTo("feilong")));//默认值
     }
-    //******************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test set property if value not null null bean.

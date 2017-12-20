@@ -36,7 +36,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetLastDateOfThisWeekTest.class,
                 GetLastDateOfThisDayTest.class,
 
-                //*********************************************
+                //---------------------------------------------------------------
                 GetYearTest.class,
                 GetMonthTest.class,
                 GetWeekOfYearTest.class,
@@ -53,7 +53,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 GetSecondTest.class,
                 GetTimeTest.class,
 
-                //*********************************************
+                //---------------------------------------------------------------
                 GetYearParameterizedTest.class,
                 GetMonthParameterizedTest.class,
                 GetWeekOfYearParameterizedTest.class,

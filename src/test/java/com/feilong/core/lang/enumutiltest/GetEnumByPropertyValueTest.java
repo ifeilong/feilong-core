@@ -39,7 +39,6 @@ public class GetEnumByPropertyValueTest{
     /**
      * Test get http method type null property name.
      */
-    //*********************************************************************
     @Test(expected = NullPointerException.class)
     public void testGetHttpMethodTypeNullPropertyName(){
         EnumUtil.getEnumByPropertyValue(HttpMethodTestType.class, null, "aa");
@@ -64,7 +63,6 @@ public class GetEnumByPropertyValueTest{
     /**
      * Test get http method type 4.
      */
-    //*********************************************************************
     @Test(expected = BeanOperationException.class)
     public void testGetHttpMethodType4(){
         EnumUtil.getEnumByPropertyValue(HttpMethodTestType.class, "method2222", null);

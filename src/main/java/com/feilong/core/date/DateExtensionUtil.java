@@ -519,7 +519,8 @@ public final class DateExtensionUtil{
         if (0 == spaceMilliseconds){
             return "0";
         }
-        // **************************************************************************************
+        //---------------------------------------------------------------
+
         // 间隔天数
         long spaceDay = getIntervalDay(spaceMilliseconds);
         // 间隔小时 减去间隔天数后,
@@ -530,7 +531,8 @@ public final class DateExtensionUtil{
         long spaceSecond = getIntervalSecond(spaceMilliseconds) - ((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60;
         // 间隔毫秒 减去间隔天数及间隔小时,间隔分钟,间隔秒后,
         long spaceMillisecond = spaceMilliseconds - (((spaceDay * 24 + spaceHour) * 60 + spaceMinute) * 60 + spaceSecond) * 1000;
-        // **************************************************************************************
+
+        //---------------------------------------------------------------
         StringBuilder sb = new StringBuilder();
         if (0 != spaceDay){
             sb.append(spaceDay + DAY);

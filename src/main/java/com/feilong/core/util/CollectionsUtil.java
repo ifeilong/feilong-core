@@ -645,7 +645,7 @@ public final class CollectionsUtil{
         return removeAll(objectCollection, toList(removeElement));
     }
 
-    //********************************************************************************************************
+    //---------------------------------------------------------------
     /**
      * 去重,返回没有重复元素的新list <span style="color:red">(原集合对象不变)</span>.
      * 
@@ -751,7 +751,7 @@ public final class CollectionsUtil{
      * attrMap.put("魏国", "张文远");
      * attrMap.put("吴国", "甘兴霸");
      * 
-     * //*******************************************************
+     * //---------------------------------------------------------------
      * UserInfo userInfo1 = new UserInfo();
      * userInfo1.setAge(28);
      * 
@@ -761,7 +761,7 @@ public final class CollectionsUtil{
      * user1.setAttrMap(attrMap);
      * user1.setUserAddresseList(userAddresseList);
      * 
-     * //*****************************************************
+     * //---------------------------------------------------------------
      * UserInfo userInfo2 = new UserInfo();
      * userInfo2.setAge(null);
      * 
@@ -903,7 +903,8 @@ public final class CollectionsUtil{
         return returnCollection;
     }
 
-    //******************************getPropertyValueMap*********************************************************************
+    //----------------------------getPropertyValueMap-----------------------------------
+
     /**
      * 循环 <code>beanIterable</code> ,以 <code>keyPropertyName</code>属性值为key, <code>valuePropertyName</code>属性值为value,组成map返回.
      * 
@@ -1555,7 +1556,7 @@ public final class CollectionsUtil{
                         : (List<O>) CollectionUtils.selectRejected(beanIterable, predicate);
     }
 
-    //***************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 循环 <code>inputIterable</code>,将每个元素使用 <code>transformer</code> 转换成新的对象,返回<b>新的list</b>.
@@ -1833,7 +1834,8 @@ public final class CollectionsUtil{
     public static <O, T> List<T> collect(final Iterator<O> inputIterator,final Transformer<? super O, ? extends T> transformer){
         return null == inputIterator ? null : (List<T>) CollectionUtils.collect(inputIterator, transformer);
     }
-    //*******************************group*********************************************************
+
+    //----------------------------group-----------------------------------
 
     /**
      * 循环 <code>beanIterable</code>,以 元素的 <code>propertyName</code>属性值为key,相同值的元素组成list作为value,封装成map返回.
@@ -2070,10 +2072,10 @@ public final class CollectionsUtil{
      * User guansuo31 = new User("关索", 31);
      * User guanxing20 = new User("关兴", 18);
      * 
-     * <span style="color:green">//************************************************************************</span>
+     * <span style="color:green">//---------------------------------------------------------------</span>
      * List{@code <User>} list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
      * 
-     * <span style="color:green">//************************************************************************</span>
+     * <span style="color:green">//---------------------------------------------------------------</span>
      * 
      * Map{@code <String, List<User>>} map = CollectionsUtil.group(list,new Transformer{@code <User, String>}(){
      * 
@@ -2193,10 +2195,10 @@ public final class CollectionsUtil{
      * User guansuo31 = new User("关索", 31);
      * User guanxing20 = new User("关兴", 18);
      * 
-     * <span style="color:green">//************************************************************************</span>
+     * <span style="color:green">//---------------------------------------------------------------</span>
      * List{@code <User>} list = toList(mateng55, machao28, madai27, maxiu25, zhangfei28, liubei32, guanyu50, guanping32, guansuo31, guanxing20);
      * 
-     * <span style="color:green">//************************************************************************</span>
+     * <span style="color:green">//---------------------------------------------------------------</span>
      * 
      * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 20, Criterion.LESS);
      * Map{@code <String, List<User>>} map = CollectionsUtil.group(list, comparatorPredicate, new Transformer{@code <User, String>}(){

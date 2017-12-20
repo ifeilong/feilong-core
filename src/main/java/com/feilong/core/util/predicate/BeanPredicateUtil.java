@@ -349,7 +349,7 @@ public final class BeanPredicateUtil{
         return equalPredicate(propertyNameAndPropertyValueMap);
     }
 
-    //************************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 调用 {@link PropertyUtil#getProperty(Object, String)} 获得 <code>propertyName</code>的值,使用
@@ -434,7 +434,7 @@ public final class BeanPredicateUtil{
         });
     }
 
-    //**************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 拿<code>valueToCompare</code> 和 提取t对象的属性<code>propertyName</code>的值,进行比较(使用 {@link ComparatorUtils#naturalComparator()} 自然排序比较器)<br>

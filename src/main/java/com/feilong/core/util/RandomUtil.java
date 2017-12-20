@@ -90,7 +90,8 @@ public final class RandomUtil{
         return (long) (random * num);
     }
 
-    // ******************************createRandomFromString**********************************
+    //---------------------------------------------------------------
+
     /**
      * 随机抽取字符串<code>char</code>,拼接成指定长度<code>length</code>的字符串.
      * 

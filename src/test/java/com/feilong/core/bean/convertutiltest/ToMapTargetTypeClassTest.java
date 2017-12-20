@@ -94,7 +94,7 @@ public class ToMapTargetTypeClassTest{
         assertThat(returnMap, allOf(hasEntry(toArray(1), toArray(2L, 8L))));
     }
 
-    //************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test array null key class.
@@ -120,7 +120,7 @@ public class ToMapTargetTypeClassTest{
         assertThat(returnMap, allOf(hasEntry(1, "2,2")));
     }
 
-    //************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test null input map.

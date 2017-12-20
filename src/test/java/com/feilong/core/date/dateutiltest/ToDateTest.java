@@ -15,14 +15,13 @@
  */
 package com.feilong.core.date.dateutiltest;
 
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
-
-import static com.feilong.core.date.DateUtil.toDate;
-
 import static com.feilong.core.DatePattern.COMMON_DATE;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_SECOND;
 import static com.feilong.core.DatePattern.TIMESTAMP_WITH_MILLISECOND;
+import static com.feilong.core.date.DateUtil.toDate;
+
+import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 
 /**
  * The Class DateUtilToDateTest.
@@ -68,7 +67,7 @@ public class ToDateTest{
         toDate(" ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
     }
 
-    //*****************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test to date null pattern.

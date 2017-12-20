@@ -85,7 +85,7 @@ public class ToMapTransformerTest{
         assertThat(returnMap, allOf(hasEntry(toArray(1), toArray(2L, 8L))));
     }
 
-    //************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test array null key transformer.
@@ -126,7 +126,7 @@ public class ToMapTransformerTest{
         assertThat(returnMap, allOf(hasEntry(1, "2,2")));
     }
 
-    //************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test null input map.

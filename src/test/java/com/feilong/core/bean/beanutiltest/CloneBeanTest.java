@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.beanutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.allOf;
@@ -29,9 +31,6 @@ import org.junit.Test;
 import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.store.order.OrderLine;
-
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class BeanUtilCloneBeanTest.
@@ -68,7 +67,7 @@ public class CloneBeanTest{
         assertEquals(emptyList(), cloneList);
     }
 
-    //****************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test clone bean null bean.

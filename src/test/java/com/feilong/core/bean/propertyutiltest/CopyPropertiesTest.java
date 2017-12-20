@@ -58,12 +58,14 @@ public class CopyPropertiesTest{
         User newUser = new User();
         PropertyUtil.copyProperties(newUser, oldUser, "date", "money", "nickNames");
 
-        assertThat(newUser, allOf(//
-                        hasProperty("money", equalTo(new BigDecimal(500000))),
-                        hasProperty("date", is(now)),
-                        hasProperty("nickNames", equalTo(array))
-        //
-        ));
+        assertThat(
+                        newUser,
+                        allOf(//
+                                        hasProperty("money", equalTo(new BigDecimal(500000))),
+                                        hasProperty("date", is(now)),
+                                        hasProperty("nickNames", equalTo(array))
+                        //
+                        ));
     }
 
     @Test
@@ -77,7 +79,7 @@ public class CopyPropertiesTest{
         assertEquals(null, newUser.getId());
     }
 
-    //*******************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Test copy properties null to obj.

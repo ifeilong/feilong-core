@@ -217,7 +217,7 @@ public final class EnumUtil{
         Validate.notNull(enumClass, "enumClass can't be null!");
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
-        //*************************************************************************
+        //---------------------------------------------------------------
 
         // An enum is a kind of class
         // An annotation is a kind of interface
@@ -229,7 +229,7 @@ public final class EnumUtil{
             LOGGER.trace("enumClass:[{}],enumConstants:[{}]", enumClass.getCanonicalName(), enumConstants);
         }
 
-        //*************************************************************************
+        //---------------------------------------------------------------
         for (E e : enumConstants){
             Object propertyValue = PropertyUtil.getProperty(e, propertyName);
             if (isEquals(propertyValue, specifiedValue, ignoreCase)){
@@ -237,7 +237,7 @@ public final class EnumUtil{
             }
         }
 
-        //*************************************************************************
+        //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             String messagePattern = "[{}],propertyName:[{}],value:[{}],ignoreCase:[{}],constants not found";
             LOGGER.debug(Slf4jUtil.format(messagePattern, enumClass, propertyName, specifiedValue, ignoreCase));

@@ -35,7 +35,7 @@ public class IsTodayTest{
         assertSame(true, isToday(new Date()));
     }
 
-    //**************************************
+    //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testIsTodayNullDate(){

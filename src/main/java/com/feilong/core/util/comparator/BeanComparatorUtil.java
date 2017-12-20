@@ -120,7 +120,8 @@ public final class BeanComparatorUtil{
         return ComparatorUtils.chainedComparator(comparators);
     }
 
-    //*************************************************************************************************
+    //---------------------------------------------------------------
+
     /**
      * 指定属性 <code>propertyName</code> ,按照自然顺序 排序的 {@link Comparator}.
      *
