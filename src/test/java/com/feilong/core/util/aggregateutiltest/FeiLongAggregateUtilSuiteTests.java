@@ -28,10 +28,13 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 AvgArrayTest.class,
                 AvgTest.class,
+
                 GroupCountTest.class,
                 GroupCountPredicateTest.class,
                 GroupCountArrayTest.class,
                 GroupCountArrayPredicateTest.class,
+                GroupCountArrayAndTransformerPredicateTest.class,
+
                 SumArrayPredicateTest.class,
                 SumArrayTest.class,
                 SumPredicateTest.class,

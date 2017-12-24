@@ -17,6 +17,7 @@ package com.feilong.core.util.aggregateutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.Predicate;
+import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.functors.ComparatorPredicate.Criterion;
 import org.junit.Test;
 
@@ -39,13 +41,50 @@ import com.feilong.store.member.User;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class GroupCountArrayPredicateTest{
+public class GroupCountArrayAndTransformerPredicateTest{
 
     private final Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
 
-    /**
-     * Test group count.
-     */
+    @Test
+    public void testGroupCount1(){
+        List<User> list = toList(//
+                        new User("张飞", 20),
+                        new User("关羽", 30),
+                        new User("刘备", 32),
+                        new User("刘备", 40),
+                        new User("赵云", 51),
+                        new User("赵云", 50));
+
+        Transformer<?, ?> value = new Transformer<Integer, String>(){
+
+            @Override
+            public String transform(Integer input){
+                if (input >= 50){
+                    return ">=50";
+                }
+                if (input >= 30 && input < 50){
+                    return ">=30&&<50";
+                }
+                throw new UnsupportedOperationException("value not support!");
+            }
+
+        };
+
+        //---------------------------------------------------------------
+        Map<String, Transformer<Object, Object>> propertyValueAndTransformerMap = toMap("age", (Transformer<Object, Object>) value);
+
+        Predicate<User> comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+
+        //---------------------------------------------------------------
+
+        Map<String, Map<Object, Integer>> map = AggregateUtil
+                        .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap, comparatorPredicate);
+
+        assertThat(map.get("name"), allOf(hasEntry((Object) "刘备", 2), hasEntry((Object) "赵云", 2)));
+        assertThat(map.get("age"), allOf(hasEntry((Object) ">=50", 2), hasEntry((Object) ">=30&&<50", 2)));
+
+    }
+
     @Test
     public void testGroupCount(){
         List<User> list = toList(//
@@ -56,7 +95,7 @@ public class GroupCountArrayPredicateTest{
                         new User("刘备", 30),
                         new User("赵云", 50));
 
-        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name", "age"), comparatorPredicate);
+        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name", "age"), null, comparatorPredicate);
         assertThat(map.get("name"), allOf(hasEntry((Object) "刘备", 1), hasEntry((Object) "赵云", 2)));
         assertThat(map.get("age"), allOf(hasEntry((Object) 40, 1), hasEntry((Object) 50, 2)));
 
@@ -77,7 +116,7 @@ public class GroupCountArrayPredicateTest{
                         new User("刘备", 30),
                         new User("赵云", 50));
 
-        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name"), null);
+        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name"), null, null);
         assertThat(
                         map.get("name"),
                         allOf(//
@@ -97,7 +136,7 @@ public class GroupCountArrayPredicateTest{
                         new User("刘备", 30),
                         new User("赵云", 50));
 
-        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name", "age"), null);
+        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name", "age"), null, null);
         assertThat(
                         map.get("name"),
                         allOf(//
@@ -120,7 +159,7 @@ public class GroupCountArrayPredicateTest{
      */
     @Test
     public void testGroupCountNullCollection(){
-        assertEquals(emptyMap(), AggregateUtil.groupCount(null, toArray("name"), comparatorPredicate));
+        assertEquals(emptyMap(), AggregateUtil.groupCount(null, toArray("name"), null, comparatorPredicate));
     }
 
     /**
@@ -133,6 +172,7 @@ public class GroupCountArrayPredicateTest{
                         AggregateUtil.groupCount(
                                         toList(),
                                         toArray("name"),
+                                        null,
                                         BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS)));
     }
 
@@ -144,7 +184,7 @@ public class GroupCountArrayPredicateTest{
         User user1 = new User(2L);
         user1.setAge(18);
 
-        AggregateUtil.groupCount(toList(user1), (String[]) null, comparatorPredicate);
+        AggregateUtil.groupCount(toList(user1), (String[]) null, null, comparatorPredicate);
     }
 
     //---------------------------------------------------------------
@@ -157,7 +197,7 @@ public class GroupCountArrayPredicateTest{
         User user1 = new User(2L);
         user1.setAge(18);
 
-        AggregateUtil.groupCount(toList(user1), ConvertUtil.<String> toArray(), comparatorPredicate);
+        AggregateUtil.groupCount(toList(user1), ConvertUtil.<String> toArray(), null, comparatorPredicate);
     }
 
     @Test(expected = NullPointerException.class)
@@ -165,7 +205,7 @@ public class GroupCountArrayPredicateTest{
         User user1 = new User(2L);
         user1.setAge(18);
 
-        AggregateUtil.groupCount(toList(user1), toArray((String) null), comparatorPredicate);
+        AggregateUtil.groupCount(toList(user1), toArray((String) null), null, comparatorPredicate);
     }
 
     /**
@@ -176,7 +216,7 @@ public class GroupCountArrayPredicateTest{
         User user1 = new User(2L);
         user1.setAge(18);
 
-        AggregateUtil.groupCount(toList(user1), toArray(""), comparatorPredicate);
+        AggregateUtil.groupCount(toList(user1), toArray(""), null, comparatorPredicate);
     }
 
 }

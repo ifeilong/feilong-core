@@ -51,14 +51,14 @@ public class GroupCountArrayTest{
                         new User("刘备", 30),
                         new User("赵云", 50));
 
-        Map<String, Map<String, Integer>> map = AggregateUtil.groupCount(list, toArray("name"));
+        Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name"));
         assertThat(
                         map.get("name"),
                         allOf(//
-                                        hasEntry("刘备", 2),
-                                        hasEntry("赵云", 2),
-                                        hasEntry("张飞", 1),
-                                        hasEntry("关羽", 1)));
+                                        hasEntry((Object) "刘备", 2),
+                                        hasEntry((Object) "赵云", 2),
+                                        hasEntry((Object) "张飞", 1),
+                                        hasEntry((Object) "关羽", 1)));
     }
 
     @Test
@@ -72,9 +72,8 @@ public class GroupCountArrayTest{
                         new User("赵云", 50));
 
         Map<String, Map<Object, Integer>> map = AggregateUtil.groupCount(list, toArray("name", "age"));
-        Map<Object, Integer> map2 = map.get("name");
         assertThat(
-                        map2,
+                        map.get("name"),
                         allOf(//
                                         hasEntry((Object) "刘备", 2),
                                         hasEntry((Object) "赵云", 2),

@@ -31,6 +31,7 @@ import java.util.Map;
 
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.Predicate;
+import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.bean.PropertyUtil;
@@ -508,9 +509,9 @@ public final class AggregateUtil{
      * 
      * </blockquote>
      *
-     * @param <T>
-     *            the generic type
      * @param <O>
+     *            the generic type
+     * @param <T>
      *            the generic type
      * @param beanIterable
      *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
@@ -523,7 +524,7 @@ public final class AggregateUtil{
      * @see #groupCount(Iterable , String, Predicate)
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      */
-    public static <T, O> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName){
+    public static <O, T> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName){
         return groupCount(beanIterable, propertyName, null);
     }
 
@@ -575,9 +576,9 @@ public final class AggregateUtil{
      * 
      * </blockquote>
      *
-     * @param <T>
-     *            the generic type
      * @param <O>
+     *            the generic type
+     * @param <T>
      *            the generic type
      * @param beanIterable
      *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
@@ -592,16 +593,20 @@ public final class AggregateUtil{
      *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      */
-    public static <T, O> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName,Predicate<O> includePredicate){
+    public static <O, T> Map<T, Integer> groupCount(Iterable<O> beanIterable,String propertyName,Predicate<O> includePredicate){
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
-        //---------------------------------------------------------------
-
-        Map<String, Map<T, Integer>> groupCount = groupCount(beanIterable, toArray(propertyName), includePredicate);
-        return groupCount.get(propertyName);
+        Map<T, Integer> map = new LinkedHashMap<>();
+        for (O obj : beanIterable){
+            if (null != includePredicate && !includePredicate.evaluate(obj)){
+                continue;
+            }
+            MapUtil.putSumValue(map, PropertyUtil.<T> getProperty(obj, propertyName), 1);
+        }
+        return map;
     }
 
     //---------------------------------------------------------------
@@ -642,27 +647,25 @@ public final class AggregateUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "age":         {
-            "20": 1,
-            "30": 2,
-            "50": 2,
-            "40": 1
-        },
-        "name":         {
-            "张飞": 1,
-            "关羽": 1,
-            "赵云": 2,
-            "刘备": 2
-        }
-    }
+     *     {
+     *         "age":         {
+     *             "20": 1,
+     *             "30": 2,
+     *             "50": 2,
+     *             "40": 1
+     *         },
+     *         "name":         {
+     *             "张飞": 1,
+     *             "关羽": 1,
+     *             "赵云": 2,
+     *             "刘备": 2
+     *         }
+     *     }
      * 
      * </pre>
      * 
      * </blockquote>
      *
-     * @param <T>
-     *            the generic type
      * @param <O>
      *            the generic type
      * @param beanIterable
@@ -677,14 +680,15 @@ public final class AggregateUtil{
      *         如果 循环的<code>propertyName</code> 是empty或者blank,抛出 {@link IllegalArgumentException}<br>
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      * @since 1.10.6
-     * @since 1.10.7 change param type from {@code String[] propertyNames} to {@code String...propertyNames}
+     * @since 1.10.7 change param type from {@code String[] propertyNames} to {@code String...propertyNames} <br>
+     *        change return type from {@code Map<String, Map<T, Integer>>} to {@code Map<String, Map<Object, Integer>>}
      */
-    public static <T, O> Map<String, Map<T, Integer>> groupCount(Iterable<O> beanIterable,String...propertyNames){
+    public static <O> Map<String, Map<Object, Integer>> groupCount(Iterable<O> beanIterable,String...propertyNames){
         return groupCount(beanIterable, propertyNames, null);
     }
 
     /**
-     * 循环 <code>beanIterable</code>,只选择符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
+     * 循环 <code>beanIterable</code>,只选择符合 <code>includePredicate</code>的对象,分别统计 <code>propertyNames</code>的值出现的次数.
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -720,22 +724,20 @@ public final class AggregateUtil{
      * <b>返回:</b>
      * 
      * <pre class="code">
-    {
-        "age":         {
-            "50": 2,
-            "40": 1
-        },
-        "name":         {
-            "赵云": 2,
-            "刘备": 1
-        }
-    }
+     *     {
+     *         "age":         {
+     *             "50": 2,
+     *             "40": 1
+     *         },
+     *         "name":         {
+     *             "赵云": 2,
+     *             "刘备": 1
+     *         }
+     *     }
      * </pre>
      * 
      * </blockquote>
      *
-     * @param <T>
-     *            the generic type
      * @param <O>
      *            the generic type
      * @param beanIterable
@@ -753,10 +755,115 @@ public final class AggregateUtil{
      *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      * @since 1.10.6
+     * @since 1.10.7 change return type from {@code Map<String, Map<T, Integer>>} to {@code Map<String, Map<Object, Integer>>}
      */
-    public static <T, O> Map<String, Map<T, Integer>> groupCount(
+    public static <O> Map<String, Map<Object, Integer>> groupCount(
                     Iterable<O> beanIterable,
                     String[] propertyNames,
+                    Predicate<O> includePredicate){
+        return groupCount(beanIterable, propertyNames, null, includePredicate);
+    }
+
+    /**
+     * 循环 <code>beanIterable</code>,只选择符合 <code>includePredicate</code>的对象,分别统计 <code>propertyNames</code>的值出现的次数,统计的时候支持使用
+     * <code>propertyValueAndTransformerMap</code> 属性值的转换.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是<code>propertyName</code>名字,子map的key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 顺序是 <code>beanIterable</code> <code>propertyName</code>的值的顺序</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 统计user list(条件是 age {@code >} 30 的user),name属性值的数量以及age 的数量,并且 age以范围区间统计
+     * </p>
+     * 
+     * <pre class="code">
+    List{@code <User>} list = toList(//
+                        new User("张飞", 20),
+                        new User("关羽", 30),
+                        new User("刘备", 32),
+                        new User("刘备", 40),
+                        new User("赵云", 51),
+                        new User("赵云", 50));
+    
+        Transformer{@code <?, ?>} value = new Transformer{@code <Integer, String>}(){
+    
+            public String transform(Integer input){
+                if ({@code input >= 50}){
+                    return {@code ">=50"};
+                }
+                if ({@code input >= 30 && input < 50}){
+                    return {@code ">=30&&<50"};
+                }
+                throw new UnsupportedOperationException("value not support!");
+            }
+    
+        };
+    
+        //---------------------------------------------------------------
+        Map{@code <String, Transformer<Object, Object>>} propertyValueAndTransformerMap = toMap("age", (Transformer{@code <Object, Object>}) value);
+    
+        Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
+    
+        //---------------------------------------------------------------
+    
+        Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
+                        .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap, comparatorPredicate);
+    
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(map));
+        }
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "age":         {
+            ">=30&&<50": 2,
+            ">=50": 2
+        },
+        "name":         {
+            "刘备": 2,
+            "赵云": 2
+        }
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyNames
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param propertyValueAndTransformerMap
+     *            the property name value converter map
+     * @param includePredicate
+     *            只选择 符合 <code>includePredicate</code>的对象,如果是null 则统计集合中全部的元素
+     * @return 如果 <code>propertyValueAndTransformerMap</code> 是null或者empty,方法等于 {@link #groupCount(Iterable, String[], Predicate)}<br>
+     *         如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>propertyNames</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     *         如果 循环的<code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 循环的<code>propertyName</code> 是empty或者blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>includePredicate</code> 是null,则统计集合中全部的元素<br>
+     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
+     * @since 1.10.7
+     */
+    public static <O> Map<String, Map<Object, Integer>> groupCount(
+                    Iterable<O> beanIterable,
+                    String[] propertyNames,
+                    Map<String, Transformer<Object, Object>> propertyValueAndTransformerMap,
                     Predicate<O> includePredicate){
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
@@ -770,23 +877,87 @@ public final class AggregateUtil{
 
         //---------------------------------------------------------------
 
-        Map<String, Map<T, Integer>> map = newHashMap(propertyNames.length);
-        for (O obj : beanIterable){
-            if (null != includePredicate && !includePredicate.evaluate(obj)){
+        Map<String, Map<Object, Integer>> resultMap = newHashMap(propertyNames.length);
+        for (O bean : beanIterable){
+            if (null != includePredicate && !includePredicate.evaluate(bean)){
                 continue;
             }
+            handlerForeachPropertyNames(propertyNames, propertyValueAndTransformerMap, resultMap, bean);
+        }
+        return resultMap;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Handler foreach property names.
+     *
+     * @param <O>
+     *            the generic type
+     * @param propertyNames
+     *            the property names
+     * @param propertyNameValueConverterMap
+     *            the property name value converter map
+     * @param resultMap
+     *            the result map
+     * @param bean
+     *            the bean
+     * @since 1.10.7
+     */
+    private static <O> void handlerForeachPropertyNames(
+                    String[] propertyNames,
+                    Map<String, Transformer<Object, Object>> propertyNameValueConverterMap,
+                    Map<String, Map<Object, Integer>> resultMap,
+                    O bean){
+        for (String propertyName : propertyNames){
+
+            //取map,如果没有构造一个
+            Map<Object, Integer> propertyNameGroupCountMap = defaultIfNull(
+                            resultMap.get(propertyName),
+                            new LinkedHashMap<Object, Integer>());
+
+            Object value = convertValue(bean, propertyName, propertyNameValueConverterMap);
+            MapUtil.putSumValue(propertyNameGroupCountMap, value, 1);
 
             //---------------------------------------------------------------
-            for (String propertyName : propertyNames){
 
-                //取map,如果没有构造一个
-                Map<T, Integer> propertyNameGroupCountMap = defaultIfNull(map.get(propertyName), new LinkedHashMap<T, Integer>());
-
-                MapUtil.putSumValue(propertyNameGroupCountMap, PropertyUtil.<T> getProperty(obj, propertyName), 1);
-
-                map.put(propertyName, propertyNameGroupCountMap);
-            }
+            resultMap.put(propertyName, propertyNameGroupCountMap);
         }
-        return map;
+    }
+
+    /**
+     * Convert value.
+     *
+     * @param <O>
+     *            the generic type
+     * @param <T>
+     *            the generic type
+     * @param obj
+     *            the obj
+     * @param propertyName
+     *            the property name
+     * @param propertyValueAndTransformerMap
+     *            the property name value converter map
+     * @return the string
+     * @since 1.10.7
+     */
+    private static <O, T> Object convertValue(
+                    O obj,
+                    String propertyName,
+                    Map<String, Transformer<Object, Object>> propertyValueAndTransformerMap){
+        T value = PropertyUtil.<T> getProperty(obj, propertyName);
+
+        if (isNullOrEmpty(propertyValueAndTransformerMap)){
+            return value;
+        }
+
+        //---------------------------------------------------------------
+        Transformer<Object, Object> transformer = propertyValueAndTransformerMap.get(propertyName);
+        if (null == transformer){
+            return value;
+        }
+
+        //---------------------------------------------------------------
+        return transformer.transform(value);
     }
 }
