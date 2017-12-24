@@ -677,8 +677,9 @@ public final class AggregateUtil{
      *         如果 循环的<code>propertyName</code> 是empty或者blank,抛出 {@link IllegalArgumentException}<br>
      * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
      * @since 1.10.6
+     * @since 1.10.7 change param type from {@code String[] propertyNames} to {@code String...propertyNames}
      */
-    public static <T, O> Map<String, Map<T, Integer>> groupCount(Iterable<O> beanIterable,String[] propertyNames){
+    public static <T, O> Map<String, Map<T, Integer>> groupCount(Iterable<O> beanIterable,String...propertyNames){
         return groupCount(beanIterable, propertyNames, null);
     }
 
