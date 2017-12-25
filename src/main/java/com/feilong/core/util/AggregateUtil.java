@@ -18,7 +18,6 @@ package com.feilong.core.util;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
@@ -684,7 +683,7 @@ public final class AggregateUtil{
      *        change return type from {@code Map<String, Map<T, Integer>>} to {@code Map<String, Map<Object, Integer>>}
      */
     public static <O> Map<String, Map<Object, Integer>> groupCount(Iterable<O> beanIterable,String...propertyNames){
-        return groupCount(beanIterable, propertyNames, null);
+        return groupCount(beanIterable, propertyNames, (Predicate<O>) null);
     }
 
     /**
@@ -765,6 +764,108 @@ public final class AggregateUtil{
     }
 
     /**
+     * 循环 <code>beanIterable</code>,分别统计 <code>propertyNames</code>的值出现的次数,统计的时候支持使用
+     * <code>propertyValueAndTransformerMap</code> 属性值的转换.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回的{@link LinkedHashMap},key是<code>propertyName</code>名字,子map的key是<code>propertyName</code>对应的值,value是该值出现的次数;<br>
+     * 顺序是 <code>beanIterable</code> <code>propertyName</code>的值的顺序</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 统计user list,name属性值的数量以及age 的数量,并且 age以范围区间统计
+     * </p>
+     * 
+     * <pre class="code">
+    List{@code <User>} list = toList(//
+                        new User("张飞", 20),
+                        new User("关羽", 30),
+                        new User("刘备", 32),
+                        new User("刘备", 40),
+                        new User("赵云", 51),
+                        new User("赵云", 50));
+    
+        Transformer{@code <?, ?>} transformer = new Transformer{@code <Integer, String>}(){
+    
+            public String transform(Integer input){
+                if ({@code input >= 50}){
+                    return {@code ">=50"};
+                }
+                if ({@code input >= 30 && input < 50}){
+                    return {@code ">=30&&<50"};
+                }
+                if (input >= 20 && input < 30){
+                    return ">=20&&<30";
+                }               
+                throw new UnsupportedOperationException("value not support!");
+            }
+    
+        };
+    
+        //---------------------------------------------------------------
+        Map{@code <String, Transformer<Object, Object>>} propertyValueAndTransformerMap = toMap("age", (Transformer{@code <Object, Object>}) transformer);
+    
+        //---------------------------------------------------------------
+    
+        Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
+                        .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap);
+    
+        LOGGER.debug(JsonUtil.format(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+    {
+        "name":         {
+            "张飞": 1,
+            "关羽": 1,
+            "刘备": 2,
+            "赵云": 2
+        },
+        "age":         {
+            ">=20&&<30": 1,
+            ">=30&&<50": 3,
+            ">=50": 2
+        }
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyNames
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param propertyValueAndTransformerMap
+     *            the property name value converter map
+     * @return 如果 <code>propertyValueAndTransformerMap</code> 是null或者empty,方法等于 {@link #groupCount(Iterable, String[], Predicate)}<br>
+     *         如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果 <code>propertyNames</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyNames</code> 是empty,抛出 {@link IllegalArgumentException}<br>
+     *         如果 循环的<code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 循环的<code>propertyName</code> 是empty或者blank,抛出 {@link IllegalArgumentException}<br>
+     * @see org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)
+     * @since 1.10.7
+     */
+    public static <O> Map<String, Map<Object, Integer>> groupCount(
+                    Iterable<O> beanIterable,
+                    String[] propertyNames,
+                    Map<String, Transformer<Object, Object>> propertyValueAndTransformerMap){
+        return groupCount(beanIterable, propertyNames, propertyValueAndTransformerMap, null);
+    }
+
+    /**
      * 循环 <code>beanIterable</code>,只选择符合 <code>includePredicate</code>的对象,分别统计 <code>propertyNames</code>的值出现的次数,统计的时候支持使用
      * <code>propertyValueAndTransformerMap</code> 属性值的转换.
      * 
@@ -793,7 +894,7 @@ public final class AggregateUtil{
                         new User("赵云", 51),
                         new User("赵云", 50));
     
-        Transformer{@code <?, ?>} value = new Transformer{@code <Integer, String>}(){
+        Transformer{@code <?, ?>} transformer = new Transformer{@code <Integer, String>}(){
     
             public String transform(Integer input){
                 if ({@code input >= 50}){
@@ -808,7 +909,7 @@ public final class AggregateUtil{
         };
     
         //---------------------------------------------------------------
-        Map{@code <String, Transformer<Object, Object>>} propertyValueAndTransformerMap = toMap("age", (Transformer{@code <Object, Object>}) value);
+        Map{@code <String, Transformer<Object, Object>>} propertyValueAndTransformerMap = toMap("age", (Transformer{@code <Object, Object>}) transformer);
     
         Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.LESS);
     
@@ -817,22 +918,20 @@ public final class AggregateUtil{
         Map{@code <String, Map<Object, Integer>>} map = AggregateUtil
                         .groupCount(list, toArray("name", "age"), propertyValueAndTransformerMap, comparatorPredicate);
     
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(map));
-        }
+        LOGGER.debug(JsonUtil.format(map));
      * </pre>
      * 
      * <b>返回:</b>
      * 
      * <pre class="code">
     {
-        "age":         {
-            ">=30&&<50": 2,
-            ">=50": 2
-        },
         "name":         {
             "刘备": 2,
             "赵云": 2
+        },
+        "age":         {
+            ">=30&&<50": 2,
+            ">=50": 2
         }
     }
      * </pre>
@@ -877,7 +976,7 @@ public final class AggregateUtil{
 
         //---------------------------------------------------------------
 
-        Map<String, Map<Object, Integer>> resultMap = newHashMap(propertyNames.length);
+        Map<String, Map<Object, Integer>> resultMap = newLinkedHashMap(propertyNames.length);
         for (O bean : beanIterable){
             if (null != includePredicate && !includePredicate.evaluate(bean)){
                 continue;

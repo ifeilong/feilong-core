@@ -383,7 +383,7 @@ public final class NumberUtil{
     // [end]
 
     /**
-     * 将数字 <code>value</code> 按照指定的格式 <code>toStringPattern</code> 格式成字符串 .
+     * 将数字 <code>value</code> 按照指定的格式 <code>numberPattern</code> 格式成字符串 .
      * 
      * <p>
      * 调用 {@link NumberFormatUtil#format(Number, String, RoundingMode)},当遇到需要舍入的时候,使用常用的 {@link RoundingMode#HALF_UP}
@@ -421,21 +421,21 @@ public final class NumberUtil{
      * 
      * @param value
      *            值
-     * @param toStringPattern
+     * @param numberPattern
      *            转成字符串格式 {@link NumberPattern}
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>toStringPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>toStringPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see NumberFormatUtil#format(Number, String, RoundingMode)
      */
-    public static String toString(Number value,String toStringPattern){
-        return NumberFormatUtil.format(value, toStringPattern, HALF_UP);
+    public static String toString(Number value,String numberPattern){
+        return NumberFormatUtil.format(value, numberPattern, HALF_UP);
     }
 
     //---------------------------------------------------------------
 
     /**
-     * 计算进度(当前量 <code>current</code>/总量 <code>total</code>,然后转成指定的字符串格式 <code>toStringPattern</code>).
+     * 计算进度(当前量 <code>current</code>/总量 <code>total</code>,然后转成指定的字符串格式 <code>numberPattern</code>).
      * 
      * <p>
      * 常用于友好的显示 <b>下载进度</b>,<code>执行进度</code>等等场景
@@ -458,7 +458,7 @@ public final class NumberUtil{
      *            当前量
      * @param total
      *            总量
-     * @param toStringPattern
+     * @param numberPattern
      *            转成字符串格式 {@link NumberPattern}
      * @return 如果 <code>current</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>total</code> 是null,抛出 {@link NullPointerException}<br>
@@ -472,7 +472,7 @@ public final class NumberUtil{
      * @see #toString(Number, String)
      * @since 1.0.7
      */
-    public static String getProgress(Number current,Number total,String toStringPattern){
+    public static String getProgress(Number current,Number total,String numberPattern){
         Validate.notNull(current, "current can't be null/empty!");
         Validate.notNull(total, "total can't be null/empty!");
 
@@ -483,7 +483,7 @@ public final class NumberUtil{
         // XXX  scale = 8不是最优方案
         int scale = 8;
         BigDecimal divideValue = getDivideValue(current, total, scale);
-        return toString(divideValue, toStringPattern);
+        return toString(divideValue, numberPattern);
     }
 
     //********************setScale********************************************************
