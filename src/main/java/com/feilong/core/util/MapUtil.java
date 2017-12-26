@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -1314,6 +1316,103 @@ public final class MapUtil{
     //---------------------------------------------------------------
 
     /**
+     * New concurrent hash map.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @return a new, empty {@code ConcurrentHashMap}
+     * @since 1.10.7
+     */
+    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(){
+        return new ConcurrentHashMap<>();
+    }
+
+    /**
+     * New tree map.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @return a new, empty {@code ConcurrentHashMap}
+     * @since 1.10.7
+     */
+    public static <K extends Comparable, V> TreeMap<K, V> newTreeMap(){
+        return new TreeMap<>();
+    }
+
+    /**
+     * 创建 {@code HashMap}实例.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} newHashMap = MapUtil.newHashMap();
+     * newHashMap.put("name", "feilong");
+     * newHashMap.put("age", "18");
+     * newHashMap.put("address", "shanghai");
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>使用该方法的好处:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li><b>简化代码书写方式</b>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 以前你可能需要这么写代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>HashMap</b>{@code <String, Map<Long, List<String>>>}();
+     * </pre>
+     * 
+     * <p>
+     * 如果你是使用JDK1.7或者以上,你可以使用钻石符:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>HashMap</b>{@code <>}();
+     * </pre>
+     * 
+     * <p>
+     * 不过只要你是使用1.5+,你都可以写成:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(); <span style=
+    "color:green">// 如果搭配static import 使用会更加简洁</span>
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @return the hash map
+     * @see "com.google.common.collect.Maps#newHashMap()"
+     * @see java.util.HashMap#HashMap()
+     * @since 1.10.7
+     */
+    public static <K, V> HashMap<K, V> newHashMap(){
+        return new HashMap<>();
+    }
+
+    /**
      * 创建 {@code HashMap}实例,拥有足够的 "initial capacity" 应该控制{@code expectedSize} elements without growth.
      * 
      * <p>
@@ -1363,7 +1462,8 @@ public final class MapUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(16);
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(16);<span style=
+    "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -1386,7 +1486,8 @@ public final class MapUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(100);
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newHashMap</b>(100);<span style=
+    "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -1410,6 +1511,75 @@ public final class MapUtil{
      */
     public static <K, V> HashMap<K, V> newHashMap(int expectedSize){
         return new HashMap<>(toInitialCapacity(expectedSize));
+    }
+
+    /**
+     * 创建 {@code LinkedHashMap}实例.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = MapUtil.newLinkedHashMap();
+     * map.put("name", "feilong");
+     * map.put("age", "18");
+     * map.put("address", "shanghai");
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>使用该方法的好处:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li><b>简化代码书写方式</b>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 以前你可能需要这么写代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>LinkedHashMap</b>{@code <String, Map<Long, List<String>>>}();
+     * </pre>
+     * 
+     * <p>
+     * 如果你是使用JDK1.7或者以上,你可以使用钻石符:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>LinkedHashMap</b>{@code <>}();
+     * </pre>
+     * 
+     * <p>
+     * 不过只要你是使用1.5+,你都可以写成:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>();<span style=
+    "color:green">// 如果搭配static import 使用会更加简洁</span>
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @return the linked hash map
+     * @see "com.google.common.collect.Maps#newLinkedHashMapWithExpectedSize(int)"
+     * @see java.util.LinkedHashMap#LinkedHashMap()
+     * @since 1.10.7
+     */
+    public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(){
+        return new LinkedHashMap<>();
     }
 
     /**
@@ -1462,7 +1632,8 @@ public final class MapUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>(16);
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>(16);<span style=
+    "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -1486,7 +1657,8 @@ public final class MapUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>(100);
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newLinkedHashMap</b>(100);<span style=
+    "color:green">// 如果搭配static import 使用会更加简洁</span>
      * </pre>
      * 
      * </blockquote>
@@ -1511,6 +1683,8 @@ public final class MapUtil{
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize){
         return new LinkedHashMap<>(toInitialCapacity(expectedSize));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将<code>size</code>转成 <code>initialCapacity</code> (for {@link java.util.HashMap}).

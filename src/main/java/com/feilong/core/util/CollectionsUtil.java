@@ -24,12 +24,15 @@ import static java.util.Collections.emptyMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.collections4.CollectionUtils;
@@ -2370,4 +2373,67 @@ public final class CollectionsUtil{
         }
         return map;
     }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 创建 a <i>mutable</i>, empty {@code ArrayList} instance .
+     * 
+     * @param <E>
+     *            the element type
+     * @return the array list
+     * @since 1.10.7
+     */
+    public static <E> ArrayList<E> newArrayList(){
+        return new ArrayList<>();
+    }
+
+    /**
+     * 创建 a <i>mutable</i>, empty {@code LinkedList} instance .
+     * 
+     * @param <E>
+     *            the element type
+     * @return the linked list
+     * @since 1.10.7
+     */
+    public static <E> LinkedList<E> newLinkedList(){
+        return new LinkedList<>();
+    }
+
+    /**
+     * 创建 a <i>mutable</i>, empty {@code CopyOnWriteArrayList} instance .
+     * 
+     * @param <E>
+     *            the element type
+     * @return a new, empty {@code CopyOnWriteArrayList}
+     * @since 1.10.7
+     */
+    public static <E> CopyOnWriteArrayList<E> newCopyOnWriteArrayList(){
+        return new CopyOnWriteArrayList<>();
+    }
+
+    /**
+     * 创建 a <i>mutable</i>, empty {@code newHashSet} instance .
+     * 
+     * @param <E>
+     *            the element type
+     * @return the hash set
+     * @since 1.10.7
+     */
+    public static <E> HashSet<E> newHashSet(){
+        return new HashSet<E>();
+    }
+
+    /**
+     * 创建 a <i>mutable</i>, empty {@code LinkedHashSet} instance .
+     *
+     * @param <E>
+     *            the element type
+     * @return a new, empty {@code LinkedHashSet}
+     * @since 1.10.7
+     */
+    public static <E> LinkedHashSet<E> newLinkedHashSet(){
+        return new LinkedHashSet<E>();
+    }
+
 }
