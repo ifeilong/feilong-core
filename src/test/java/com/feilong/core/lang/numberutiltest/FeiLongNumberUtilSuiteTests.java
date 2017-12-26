@@ -47,6 +47,17 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ToStringTest.class,
                 ToStringParameterizedTest.class,
+
+                IsGatherThanOrEqualsTest.class,
+                IsGatherThanOrEqualsParameterizedTest.class,
+                IsGatherThanTest.class,
+                IsGatherThanParameterizedTest.class,
+                IsLessThanTest.class,
+                IsLessThanParameterizedTest.class,
+                IsLessThanOrEqualsTest.class,
+                IsLessThanOrEqualsParameterizedTest.class,
+                IsEqualsTest.class,
+                IsEqualsParameterizedTest.class,
         //
 })
 public class FeiLongNumberUtilSuiteTests{

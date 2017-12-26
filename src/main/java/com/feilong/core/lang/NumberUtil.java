@@ -169,6 +169,247 @@ public final class NumberUtil{
 
     //---------------------------------------------------------------
 
+    /**
+     * 判断第1个数字数字值 <code>one</code> 是不是{@code  > } (大于) 第2个数字数字值 <code>two</code>.
+     * 
+     * <h3>原理:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.isGatherThan(0, 0)                    =false
+     * 
+     * NumberUtil.isGatherThan(5, 4)                    =true
+     * NumberUtil.isGatherThan(5, 4L)                   =true
+     * NumberUtil.isGatherThan(5, 4.0f)                 =true
+     * NumberUtil.isGatherThan(5, 4.0d)                 =true
+     * NumberUtil.isGatherThan(5, toBigDecimal(4.0d))   =true
+     * 
+     * NumberUtil.isGatherThan(toBigDecimal(5.0d), 4)   =true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param one
+     *            第1个数字
+     * @param two
+     *            第2个数字
+     * @return 如果 <code>one</code> 大于 <code>two</code>,那么返回true,否则返回false <br>
+     *         如果 <code>one</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>two</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.10.7
+     */
+    public static boolean isGatherThan(Number one,Number two){
+        return compare(one, two) == 1;
+    }
+
+    /**
+     * 判断第1个数字数字值 <code>one</code> 是不是{@code  >= } (大于等于) 第2个数字数字值 <code>two</code>.
+     * 
+     * <h3>原理:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.isGatherThanOrEquals(0, 0)                    =true
+     * 
+     * NumberUtil.isGatherThanOrEquals(5, 4)                    =true
+     * NumberUtil.isGatherThanOrEquals(5, 4L)                   =true
+     * NumberUtil.isGatherThanOrEquals(5, 4.0f)                 =true
+     * NumberUtil.isGatherThanOrEquals(5, 4.0d)                 =true
+     * NumberUtil.isGatherThanOrEquals(5, toBigDecimal(4.0d))   =true
+     * 
+     * NumberUtil.isGatherThanOrEquals(toBigDecimal(5.0d), 4)   =true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param one
+     *            第1个数字
+     * @param two
+     *            第2个数字
+     * @return 如果 <code>one</code> 大于等于 <code>two</code>,那么返回true,否则返回false<br>
+     *         如果 <code>one</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>two</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.10.7
+     */
+    public static boolean isGatherThanOrEquals(Number one,Number two){
+        int compareTo = compare(one, two);
+        return compareTo == 1 || compareTo == 0;
+    }
+
+    /**
+     * 判断第1个数字数字值 <code>one</code> 是不是{@code  = } (等于) 第2个数字数字值 <code>two</code>.
+     * 
+     * <h3>原理:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.isEquals(0, 0)                    =true
+     * 
+     * NumberUtil.isEquals(5, 4)                    =false
+     * NumberUtil.isEquals(5, 5L)                   =true
+     * NumberUtil.isEquals(5, 5.0f)                 =true
+     * NumberUtil.isEquals(5, 5.0d)                 =true
+     * NumberUtil.isEquals(5, toBigDecimal(5.0d))   =true
+     * 
+     * NumberUtil.isEquals(toBigDecimal(5.0d), 5)   =true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param one
+     *            第1个数字
+     * @param two
+     *            第2个数字
+     * @return 如果 <code>one</code> 等于 <code>two</code>,那么返回true,否则返回false.<br>
+     *         如果 <code>one</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>two</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.10.7
+     */
+    public static boolean isEquals(Number one,Number two){
+        return compare(one, two) == 0;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 判断第1个数字数字值 <code>one</code> 是不是{@code  < } (小于) 第2个数字数字值 <code>two</code>.
+     * 
+     * <h3>原理:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.isLessThan(0, 0)                  =false
+     * 
+     * NumberUtil.isLessThan(5, 4)                  =false
+     * NumberUtil.isLessThan(5, 5L)                 =false
+     * NumberUtil.isLessThan(5, 5.0f)               =false
+     * NumberUtil.isLessThan(4, 5.0d)               =true
+     * NumberUtil.isLessThan(5, toBigDecimal(5.0d)) =false
+     * 
+     * NumberUtil.isLessThan(toBigDecimal(5.0d), 5) =false
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param one
+     *            第1个数字
+     * @param two
+     *            第2个数字
+     * @return 如果 <code>one</code> 小于 <code>two</code>,那么返回true,否则返回false.<br>
+     *         如果 <code>one</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>two</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.10.7
+     */
+    public static boolean isLessThan(Number one,Number two){
+        return compare(one, two) == -1;
+    }
+
+    /**
+     * 判断第1个数字数字值 <code>one</code> 是不是{@code  <= } (小于等于) 第2个数字数字值 <code>two</code>.
+     * 
+     * <h3>原理:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>是将两个数组转成 BigDecimal 类型,并调用 {@link java.math.BigDecimal#compareTo(BigDecimal)} 比较大小</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * NumberUtil.isLessThanOrEquals(0, 0)                      =true
+     * 
+     * NumberUtil.isLessThanOrEquals(5, 4)                      =false
+     * NumberUtil.isLessThanOrEquals(5, 5L)                     =true
+     * NumberUtil.isLessThanOrEquals(5, 5.0f)                   =true
+     * NumberUtil.isLessThanOrEquals(4, 5.0d)                   =true
+     * NumberUtil.isLessThanOrEquals(5, toBigDecimal(5.0d))     =true
+     * 
+     * NumberUtil.isLessThanOrEquals(toBigDecimal(5.0d), 5)     =true
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param one
+     *            第1个数字
+     * @param two
+     *            第2个数字
+     * @return 如果 <code>one</code> 小于等于 <code>two</code>,那么返回true,否则返回false <br>
+     *         如果 <code>one</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>two</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.10.7
+     */
+    public static boolean isLessThanOrEquals(Number one,Number two){
+        int compareTo = compare(one, two);
+        return compareTo == -1 || compareTo == 0;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Compare.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果one == two ,返回 0</li>
+     * <li>如果one.equals(two) , 返回 0</li>
+     * <li>其余返回 toBigDecimal(one).compareTo(toBigDecimal(two))</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param one
+     *            the one
+     * @param two
+     *            the two
+     * @return 如果 <code>one</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>two</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.10.7
+     */
+    private static int compare(Number one,Number two){
+        Validate.notNull(one, "one can't be null!");
+        Validate.notNull(two, "two can't be null!");
+
+        return one == two ? 0 : //
+                        (one.equals(two) ? 0 : toBigDecimal(one).compareTo(toBigDecimal(two)));
+    }
+
+    //---------------------------------------------------------------
+
     // [start]Divide
 
     /**
