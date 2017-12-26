@@ -25,6 +25,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.feilong.core.NumberPattern;
 import com.feilong.core.text.NumberFormatUtil;
@@ -166,6 +167,117 @@ public final class NumberUtil{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 一,<code>{@value}</code>.
+     * 
+     * @since 1.10.7
+     * @see BigDecimal#ONE
+     * @see NumberUtils#INTEGER_ONE
+     */
+    public static final int  ONE              = 1;
+
+    /**
+     * 十,<code>{@value}</code>.
+     * 
+     * @since 1.10.7
+     */
+    public static final int  TEN              = 10;
+
+    /**
+     * 百,<code>{@value}</code>.
+     * 
+     * @since 1.10.7
+     */
+    public static final int  HUNDRED          = 100;
+
+    /**
+     * 千,<code>{@value}</code>.
+     * 
+     * @since 1.10.7
+     */
+    public static final int  THOUSAND         = 1000;
+
+    //---------------------------------------------------------------
+    /**
+     * 万,<code>{@value}</code>.
+     * 
+     * @since 1.10.7
+     */
+    public static final int  TEN_THOUSAND     = 1_0000;
+
+    /**
+     * 十万,<code>{@value}</code>.
+     * 
+     * @since 1.10.7
+     */
+    public static final int  HUNDRED_THOUSAND = 10 * TEN_THOUSAND;
+
+    /**
+     * 百万,<code>{@value}</code>.
+     * 
+     * @since 1.10.7
+     */
+    public static final int  MILLION          = 10 * HUNDRED_THOUSAND;
+
+    /**
+     * 千万,<code>{@value}</code>.
+     * 
+     * @since 1.10.7
+     */
+    public static final int  TEN_MILLION      = 10 * MILLION;
+
+    //---------------------------------------------------------------
+
+    /**
+     * 亿, <code>{@value}</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * {@link Integer#MAX_VALUE}:21_4748_3647 ,21亿, 注意使用的时候,超过最大值使用long来计算
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @since 1.10.7
+     */
+    public static final int  HUNDRED_MILLION  = 10 * TEN_MILLION;
+
+    /**
+     * 十亿, <code>{@value}</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * {@link Integer#MAX_VALUE}:21_4748_3647 ,21亿, 注意使用的时候,超过最大值使用long来计算
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @since 1.10.7
+     */
+    public static final int  BILLION          = 10 * HUNDRED_MILLION;
+
+    /**
+     * 百亿, <code>{@value}</code>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>
+     * {@link Integer#MAX_VALUE}:21_4748_3647 ,21亿, 注意使用的时候,超过最大值使用long来计算
+     * </li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @since 1.10.7
+     */
+    public static final long TEN_BILLION      = (long) (BILLION) * 10;
 
     //---------------------------------------------------------------
 
