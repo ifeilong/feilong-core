@@ -17,11 +17,11 @@ package com.feilong.core.bean.convertutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toIterator;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
@@ -54,7 +54,7 @@ public class ToIteratorTest{
      */
     @Test
     public void testToIteratorCollection(){
-        List<String> list = new ArrayList<>();
+        List<String> list = newArrayList();
         list.add("aaaa");
         list.add("nnnnn");
 

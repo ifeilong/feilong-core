@@ -15,20 +15,19 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ConvertUtilToListVarargsTest.
@@ -69,7 +68,7 @@ public class ToListVarargsTest{
      */
     @Test
     public void testToListNullElementArray(){
-        List<User> list = new ArrayList<>();
+        List<User> list = newArrayList();
         list.add(null);
 
         assertEquals(list, toList((User) null));

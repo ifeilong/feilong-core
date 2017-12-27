@@ -16,10 +16,10 @@
 package com.feilong.core.util.comparator;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.comparator.SortHelper.isAsc;
 import static org.apache.commons.collections4.ComparatorUtils.reversedComparator;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -101,7 +101,7 @@ public final class BeanComparatorUtil{
 
         //---------------------------------------------------------------
 
-        List<Comparator<T>> comparators = new ArrayList<>();
+        List<Comparator<T>> comparators = newArrayList();
         for (String propertyNameAndOrder : propertyNameAndOrders){
             Validate.notBlank(propertyNameAndOrder, "propertyNameAndOrder can't be blank!");
 

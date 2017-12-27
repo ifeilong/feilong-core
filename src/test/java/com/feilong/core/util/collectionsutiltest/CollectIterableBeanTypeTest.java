@@ -46,7 +46,7 @@ public class CollectIterableBeanTypeTest{
                         new User(24L, "关羽"),
                         new User(25L, "刘备"));
         //
-        //        List<Customer> customerList = new ArrayList<>();
+        //        List<Customer> customerList = newArrayList();
         //        for (User user : list){
         //            Customer customer = new Customer();
         //            customer.setId(user.getId());

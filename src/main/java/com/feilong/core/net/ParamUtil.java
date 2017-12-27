@@ -23,6 +23,7 @@ import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.net.URIUtil.decode;
 import static com.feilong.core.net.URIUtil.encode;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static java.util.Collections.emptyMap;
@@ -31,7 +32,6 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.defaultString;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -906,7 +906,7 @@ public final class ParamUtil{
         if (isNullOrEmpty(charsetType)){
             return paramValues;
         }
-        List<String> paramValueList = new ArrayList<>();
+        List<String> paramValueList = newArrayList();
         for (String value : paramValues){
             paramValueList.add(decodeAndEncode(value, charsetType));
         }

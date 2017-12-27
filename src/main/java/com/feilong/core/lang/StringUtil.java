@@ -17,11 +17,11 @@ package com.feilong.core.lang;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -763,7 +763,7 @@ public final class StringUtil{
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
 
-        List<String> tokens = new ArrayList<>();
+        List<String> tokens = newArrayList();
 
         StringTokenizer stringTokenizer = new StringTokenizer(str, delimiters);
         while (stringTokenizer.hasMoreTokens()){

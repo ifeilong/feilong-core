@@ -16,11 +16,11 @@
 package com.feilong.core.lang.threadutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static java.util.Collections.emptyList;
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -99,7 +99,7 @@ public class ExecuteTest{
     //--------------
 
     private List<Integer> buildList(int start,int end){
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = newArrayList();
         for (int i = start; i < end; ++i){
             list.add(i);
         }
