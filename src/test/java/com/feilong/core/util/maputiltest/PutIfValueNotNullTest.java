@@ -15,13 +15,13 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class PutIfValueNotNullTest{
      */
     @Test
     public void testPutIfValueNotNull(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         MapUtil.putIfValueNotNull(map, "1000001", 5);
         assertThat(map, allOf(hasEntry("1000001", 5)));
     }
@@ -50,7 +50,7 @@ public class PutIfValueNotNullTest{
      */
     @Test
     public void testPutIfValueNotNullEmpty(){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         MapUtil.putIfValueNotNull(map, "1000001", "");
         assertThat(map, allOf(hasEntry("1000001", "")));
     }
@@ -60,7 +60,7 @@ public class PutIfValueNotNullTest{
      */
     @Test
     public void testPutIfValueNotNullNullValue(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         MapUtil.putIfValueNotNull(map, "1000001", null);
         assertThat(map, allOf(not(hasKey("1000001"))));
     }

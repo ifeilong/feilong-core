@@ -15,13 +15,13 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class PutIfValueNotNullOrEmptyTest{
      */
     @Test
     public void testPutIfValueNotNullOrEmpty(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         MapUtil.putIfValueNotNullOrEmpty(map, "1000001", 5);
         assertThat(map, allOf(hasEntry("1000001", 5)));
     }
@@ -50,7 +50,7 @@ public class PutIfValueNotNullOrEmptyTest{
      */
     @Test
     public void testPutIfValueNotNullOrEmptyNullValue(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         MapUtil.putIfValueNotNullOrEmpty(map, "1000001", null);
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
@@ -60,7 +60,7 @@ public class PutIfValueNotNullOrEmptyTest{
      */
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue(){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         MapUtil.putIfValueNotNullOrEmpty(map, "1000001", "");
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
@@ -70,7 +70,7 @@ public class PutIfValueNotNullOrEmptyTest{
      */
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue1(){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         MapUtil.putIfValueNotNullOrEmpty(map, "1000001", " ");
         assertThat(map, allOf(not(hasKey("1000001"))));
     }
@@ -80,7 +80,7 @@ public class PutIfValueNotNullOrEmptyTest{
      */
     @Test
     public void testPutIfValueNotNullOrEmptyEmptyValue2(){
-        Map<String, Object[]> map = new HashMap<>();
+        Map<String, Object[]> map = newHashMap();
         MapUtil.putIfValueNotNullOrEmpty(map, "1000001", new Object[] {});
         assertThat(map, allOf(not(hasKey("1000001"))));
     }

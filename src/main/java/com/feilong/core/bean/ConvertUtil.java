@@ -1225,7 +1225,7 @@ public final class ConvertUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} paramMap = new HashMap{@code <>}();
+     * Map{@code <String, String>} paramMap = newHashMap();
      * paramMap.put("name", "jinxin");
      * request.setParamMap(paramMap);
      * </pre>
@@ -1270,7 +1270,7 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * private List{@code <ShopCommand>} loadShopCommandList(){
-     *     Map{@code <String, Object>} paraMap = new HashMap{@code <>}();
+     *     Map{@code <String, Object>} paraMap = newHashMap();
      *     paraMap.put("orgTypeId", OrgType.ID_SHOP_TYPE);
      * 
      *     return shopCommandDao.findShopListByOrgaTypeId(paraMap);
@@ -1322,7 +1322,7 @@ public final class ConvertUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} paramMap = new HashMap{@code <>}();
+     * Map{@code <String, String>} paramMap =newHashMap();
      * paramMap.put("name", "jinxin");
      * paramMap.put("age", "18");
      * request.setParamMap(paramMap);
@@ -1350,7 +1350,7 @@ public final class ConvertUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, Long>} map = new HashMap{@code <>}();
+     * Map{@code <String, Long>} map = newHashMap();
      * map.put("itemId", itemId);
      * map.put("memberId", memberId);
      * memberFavoritesDao.findMemberFavoritesByMemberIdAndItemId(map);

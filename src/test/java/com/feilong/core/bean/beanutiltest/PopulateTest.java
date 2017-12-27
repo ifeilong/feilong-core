@@ -15,21 +15,20 @@
  */
 package com.feilong.core.bean.beanutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
 
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class BeanUtilPopulateTest.
@@ -91,7 +90,7 @@ public class PopulateTest{
      */
     @Test
     public void testPopulateMap(){
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = newHashMap();
         Map<String, Long> properties = toMap("id", 8L);
 
         assertThat(BeanUtil.populate(map, properties), allOf(hasEntry("id", (Object) 8L)));

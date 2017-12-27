@@ -418,7 +418,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map = new HashMap{@code <>}();
+     * Map{@code <String, String>} map = newHashMap();
      * map.put("service", "create_salesorder");
      * map.put("_input_charset", "gbk");
      * map.put("totalActual", "210.00");
@@ -465,7 +465,7 @@ public final class ParamUtil{
      * <h4>示例:</h4>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map = new HashMap{@code <>}();
+     * Map{@code <String, String>} map = newHashMap();
      * map.put("totalActual", <span style="color:red">null</span>);
      * map.put(<span style="color:red">null</span>, "create_salesorder");
      * map.put("province", "江苏省");
@@ -517,7 +517,7 @@ public final class ParamUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map = new HashMap{@code <>}();
+     * Map{@code <String, String>} map = newHashMap();
      * map.put("service", "create_salesorder");
      * map.put("_input_charset", "gbk");
      * map.put("totalActual", "210.00");
@@ -564,7 +564,7 @@ public final class ParamUtil{
      * <h4>示例:</h4>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map = new HashMap{@code <>}();
+     * Map{@code <String, String>} map = newHashMap();
      * map.put("totalActual", <span style="color:red">null</span>);
      * map.put(<span style="color:red">null</span>, "create_salesorder");
      * map.put("province", "江苏省");
@@ -791,7 +791,7 @@ public final class ParamUtil{
      * </p>
      * 
      * <pre class="code">
-     * Map{@code <String, String>} map = new HashMap{@code <>}();
+     * Map{@code <String, String>} map = newHashMap();
      * map.put("service", "create_salesorder");
      * map.put("paymentType", "unionpay_mobile");
      * 

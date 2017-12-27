@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyDesc;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
@@ -23,7 +24,6 @@ import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class SortMapByKeyDescTest{
      */
     @Test
     public void testSortByKeyDesc(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         map.put("a", 123);
         map.put(null, 8);
         map.put("c", 345);

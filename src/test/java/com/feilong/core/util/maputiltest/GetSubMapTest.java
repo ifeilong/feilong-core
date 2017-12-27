@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -42,7 +43,7 @@ public class GetSubMapTest{
      */
     @Test
     public void testGetSubMap(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3001);
@@ -56,7 +57,7 @@ public class GetSubMapTest{
      */
     @Test
     public void testGetSubMap1(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3001);
@@ -70,7 +71,7 @@ public class GetSubMapTest{
      */
     @Test
     public void testGetSubMapNullKeys(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3001);
@@ -83,7 +84,7 @@ public class GetSubMapTest{
      */
     @Test
     public void testGetSubMapEmptyKeys(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         map.put("a", 3007);
         map.put("b", 3001);
         map.put("c", 3001);

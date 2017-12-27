@@ -16,6 +16,7 @@
 package com.feilong.core.util.sortutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyFixOrder;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
@@ -39,7 +40,7 @@ public class SortMapByKeyFixOrderTest{
      */
     @Test
     public void testSortMapByKeyFixOrder(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
 
         map.put("DE", 99);
         map.put("L", 3428);

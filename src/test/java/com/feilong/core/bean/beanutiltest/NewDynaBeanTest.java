@@ -15,19 +15,18 @@
  */
 package com.feilong.core.bean.beanutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.apache.commons.lang3.tuple.Pair.of;
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.beanutils.DynaBean;
 import org.junit.Test;
 
 import com.feilong.core.bean.BeanUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
-import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 /**
  * The Class BeanUtilNewDynaBeanTest.
@@ -41,12 +40,13 @@ public class NewDynaBeanTest{
      */
     @Test
     public void testNewDynaBean(){
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = newHashMap();
 
-        DynaBean newDynaBean = BeanUtil.newDynaBean(toMapUseEntrys(//
-                        of("address", (Object) map),
-                        of("firstName", (Object) "Fred"),
-                        of("lastName", (Object) "Flintstone")));
+        DynaBean newDynaBean = BeanUtil.newDynaBean(
+                        toMapUseEntrys(//
+                                        of("address", (Object) map),
+                                        of("firstName", (Object) "Fred"),
+                                        of("lastName", (Object) "Flintstone")));
 
         assertEquals(map, newDynaBean.get("address"));
         assertEquals("Fred", newDynaBean.get("firstName"));

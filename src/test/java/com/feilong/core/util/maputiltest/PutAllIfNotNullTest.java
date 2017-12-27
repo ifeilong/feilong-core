@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
@@ -25,8 +27,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class MapUtilPutAllIfNotNullTest.
@@ -40,7 +40,7 @@ public class PutAllIfNotNullTest{
      */
     @Test
     public void testPutAllIfNotNullNullValue(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         MapUtil.putAllIfNotNull(map, toMap("age", 18));
         assertThat(map, hasEntry("age", 18));
     }
@@ -50,7 +50,7 @@ public class PutAllIfNotNullTest{
      */
     @Test
     public void testPutAllIfNotNull(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         MapUtil.putAllIfNotNull(map, new HashMap<String, Integer>());
         assertThat(map.keySet(), hasSize(0));
     }
@@ -60,7 +60,7 @@ public class PutAllIfNotNullTest{
      */
     @Test
     public void testPutAllIfNotNullNullMap(){
-        MapUtil.putAllIfNotNull(null, new HashMap<>());
+        MapUtil.putAllIfNotNull(null, newHashMap());
     }
 
 }

@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
@@ -28,8 +30,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import static com.feilong.core.util.SortUtil.sortMapByKeyAsc;
-
 /**
  * The Class SortUtilSortMapByKeyAscTest.
  *
@@ -42,7 +42,7 @@ public class SortMapByKeyAscTest{
      */
     @Test
     public void testSortByKeyAsc(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
 
         map.put("a", 123);
         map.put("d", 3455);

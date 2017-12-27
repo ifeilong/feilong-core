@@ -15,6 +15,7 @@
  */
 package com.feilong.core.lang.stringutiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
@@ -31,7 +32,7 @@ public class ReplaceValuesMapTest{
     @Test
     public void testReplace(){
         User value = new User(1L);
-        Map<String, Object> valuesMap = new HashMap<>();
+        Map<String, Object> valuesMap = newHashMap();
         valuesMap.put("today", "2016-11-15");
         valuesMap.put("user", value);
 
@@ -45,7 +46,7 @@ public class ReplaceValuesMapTest{
      */
     @Test
     public void testReplace3(){
-        Map<String, Object> valuesMap = new HashMap<>();
+        Map<String, Object> valuesMap = newHashMap();
         valuesMap.put("today", "2016-11-15");
         valuesMap.put("user", 1L);
 
@@ -59,7 +60,7 @@ public class ReplaceValuesMapTest{
     public void testReplace2(){
         String template = "/home/webuser/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
 
-        Map<String, String> valuesMap = new HashMap<>();
+        Map<String, String> valuesMap = newHashMap();
         valuesMap.put("yearMonth", "2016-11");
         valuesMap.put("expressDeliveryType", "sf");
         valuesMap.put("fileName", "221215151215");

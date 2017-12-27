@@ -113,7 +113,7 @@ import org.apache.commons.lang3.reflect.FieldUtils;
  * <pre class="code">
  * LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
  * 
- * Map{@code <String,String>} am = new HashMap{@code <>}();
+ * Map{@code <String,String>} am = newHashMap();
  * am.put("1", "234-222-1222211");
  * am.put("2", "021-086-1232323");
  * 
@@ -449,7 +449,7 @@ public final class BeanUtil{
      * User user = new User();
      * user.setId(5L);
      * 
-     * Map{@code <String, Object>} properties = new HashMap{@code <>}();
+     * Map{@code <String, Object>} properties = newHashMap();
      * properties.put("id", 8L);
      * 
      * BeanUtil.populate(user, properties);
@@ -935,7 +935,7 @@ public final class BeanUtil{
      * <pre class="code">
      * DynaBean newDynaBean = BeanUtil.newDynaBean(
      *                 toMap(//
-     *                                 Pair.of("address", (Object) new HashMap()),
+     *                                 Pair.of("address", (Object) newHashMap()),
      *                                 Pair.of("firstName", (Object) "Fred"),
      *                                 Pair.of("lastName", (Object) "Flintstone")));
      * LOGGER.debug(JsonUtil.format(newDynaBean));

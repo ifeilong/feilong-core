@@ -15,6 +15,7 @@
  */
 package com.feilong.core.net.paramutiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
@@ -39,7 +40,7 @@ public class ToNaturalOrderingKeyJoinValueTest{
 
     @Test
     public void testToNaturalOrderingKeyJoinValue(){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         map.put("service", "create_salesorder");
         map.put("_input_charset", "gbk");
         map.put("totalActual", "210.00");
@@ -52,7 +53,7 @@ public class ToNaturalOrderingKeyJoinValueTest{
 
     @Test
     public void testToNaturalOrderingKeyJoinValueNullValue(){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         map.put("service", null);
         map.put("totalActual", "210.00");
         map.put("province", "江苏省");
@@ -61,7 +62,7 @@ public class ToNaturalOrderingKeyJoinValueTest{
 
     @Test
     public void testToNaturalOrderingKeyJoinValueNullKey(){
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = newHashMap();
         map.put("totalActual", null);
         map.put(null, "create_salesorder");
         map.put("province", "江苏省");

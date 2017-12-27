@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertThat;
@@ -38,7 +39,7 @@ public class PutSumValueTest{
      */
     @Test
     public void testPutSumValue(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         MapUtil.putSumValue(map, "1000001", 5);
         MapUtil.putSumValue(map, "1000002", 5);
         MapUtil.putSumValue(map, "1000002", 5);
@@ -51,7 +52,7 @@ public class PutSumValueTest{
      */
     @Test
     public void testPutSumValueNegativeValue(){
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map = newHashMap();
         MapUtil.putSumValue(map, "1000001", 5);
         MapUtil.putSumValue(map, "1000002", 5);
         MapUtil.putSumValue(map, "1000002", -5);
