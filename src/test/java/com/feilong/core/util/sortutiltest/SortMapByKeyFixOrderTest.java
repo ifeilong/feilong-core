@@ -17,6 +17,7 @@ package com.feilong.core.util.sortutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByKeyFixOrder;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
@@ -24,7 +25,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -75,7 +75,7 @@ public class SortMapByKeyFixOrderTest{
 
     @Test
     public void testSortNoKeys(){
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> map = newLinkedHashMap();
 
         map.put("a8", 8);
         map.put("a13", 123);

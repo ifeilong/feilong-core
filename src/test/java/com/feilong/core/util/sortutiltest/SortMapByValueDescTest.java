@@ -16,6 +16,7 @@
 package com.feilong.core.util.sortutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static com.feilong.core.util.SortUtil.sortMapByValueDesc;
@@ -24,7 +25,6 @@ import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -44,7 +44,7 @@ public class SortMapByValueDescTest{
      */
     @Test
     public void testSortByValueDesc(){
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> map = newLinkedHashMap();
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);
@@ -66,7 +66,7 @@ public class SortMapByValueDescTest{
 
     @Test
     public void testSortByValueDescSameValue(){
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> map = newLinkedHashMap();
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);
@@ -75,15 +75,17 @@ public class SortMapByValueDescTest{
         map.put("d", 123);
 
         Set<String> keySet = sortMapByValueDesc(map).keySet();
-        assertThat(keySet, contains(
-                        "c",
+        assertThat(
+                        keySet,
+                        contains(
+                                        "c",
 
-                        "d",
-                        "g",
-                        "a", //TODO
+                                        "d",
+                                        "g",
+                                        "a", //TODO
 
-                        "f",
-                        "b"));//c, d, g, a, f, b
+                                        "f",
+                                        "b"));//c, d, g, a, f, b
     }
 
     //---------------------------------------------------------------

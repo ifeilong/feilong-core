@@ -15,13 +15,13 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +50,7 @@ public class ToEnumerationTest{
     @Test
     public void testToEnumeration(){
         // Enumeration
-        Map<Object, Object> map = new LinkedHashMap<>();
+        Map<Object, Object> map = newLinkedHashMap();
         map.put("jinxin", 1);
         map.put(2, 2);
         map.put("甲", 3);

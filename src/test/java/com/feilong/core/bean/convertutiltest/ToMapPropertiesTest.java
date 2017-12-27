@@ -15,20 +15,19 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
-
-import static com.feilong.core.bean.ConvertUtil.toMap;
 
 /**
  * The Class ConvertUtilToMapPropertiesTest.
@@ -50,10 +49,12 @@ public class ToMapPropertiesTest{
         properties.setProperty("age", "18");
         properties.setProperty("country", "china");
 
-        assertThat(toMap(properties), allOf(//
-                        hasEntry("name", "feilong"),
-                        hasEntry("age", "18"),
-                        hasEntry("country", "china")));
+        assertThat(
+                        toMap(properties),
+                        allOf(//
+                                        hasEntry("name", "feilong"),
+                                        hasEntry("age", "18"),
+                                        hasEntry("country", "china")));
     }
 
     /**
@@ -77,7 +78,7 @@ public class ToMapPropertiesTest{
      */
     @Test
     public void testToProperties(){
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = newLinkedHashMap();
 
         map.put("name", "feilong");
         map.put("age", 18);
@@ -85,9 +86,11 @@ public class ToMapPropertiesTest{
 
         Properties properties = org.apache.commons.collections4.MapUtils.toProperties(map);
 
-        assertThat(toMap(properties), allOf(//
-                        Matchers.<String, Object> hasEntry("name", "feilong"),
-                        Matchers.<String, Object> hasEntry("age", 18),
-                        Matchers.<String, Object> hasEntry("country", "china")));
+        assertThat(
+                        toMap(properties),
+                        allOf(//
+                                        Matchers.<String, Object> hasEntry("name", "feilong"),
+                                        Matchers.<String, Object> hasEntry("age", 18),
+                                        Matchers.<String, Object> hasEntry("country", "china")));
     }
 }

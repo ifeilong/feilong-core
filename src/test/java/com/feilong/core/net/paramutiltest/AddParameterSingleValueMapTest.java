@@ -19,6 +19,7 @@ import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.net.ParamUtil.addParameterSingleValueMap;
 import static com.feilong.core.net.URIUtil.encode;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
@@ -44,7 +45,7 @@ public class AddParameterSingleValueMapTest{
      */
     @Test
     public void testAddParameterSingleValueMap(){
-        Map<String, String> singleValueMap = new LinkedHashMap<>();
+        Map<String, String> singleValueMap = newLinkedHashMap();
 
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
@@ -60,7 +61,7 @@ public class AddParameterSingleValueMapTest{
     @Test
     public void testAddParameterSingleValueMapWithParam(){
         String beforeUrl = PATH + "?a=b";
-        Map<String, String> singleValueMap = new LinkedHashMap<>();
+        Map<String, String> singleValueMap = newLinkedHashMap();
 
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");
@@ -76,7 +77,7 @@ public class AddParameterSingleValueMapTest{
     @Test
     public void testAddParameterSingleValueMapWithParamByReplace(){
         String beforeUrl = PATH + "?a=b&city=12345&name=feilong";
-        Map<String, String> singleValueMap = new LinkedHashMap<>();
+        Map<String, String> singleValueMap = newLinkedHashMap();
 
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");

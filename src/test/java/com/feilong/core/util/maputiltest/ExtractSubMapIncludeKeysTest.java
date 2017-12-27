@@ -16,6 +16,7 @@
 package com.feilong.core.util.maputiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -23,7 +24,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class ExtractSubMapIncludeKeysTest{
      */
     @Test
     public void testExtractSubMap2(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(100L));
         map.put(2L, new User(200L));
         map.put(53L, new User(300L));
@@ -65,7 +65,7 @@ public class ExtractSubMapIncludeKeysTest{
      */
     @Test
     public void testExtractSubMapNullIncludeKeys(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(5L, new User(500L));
         map.put(4L, new User(400L));
 
@@ -78,7 +78,7 @@ public class ExtractSubMapIncludeKeysTest{
      */
     @Test
     public void testExtractSubMapEmptyIncludeKeys(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(5L, new User(500L));
         map.put(4L, new User(400L));
 
@@ -107,7 +107,7 @@ public class ExtractSubMapIncludeKeysTest{
      */
     @Test(expected = NullPointerException.class)
     public void testExtractSubMapNullExtractPropertyName(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, toArray(5L, 4L), null);
@@ -118,7 +118,7 @@ public class ExtractSubMapIncludeKeysTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, toArray(5L, 4L), "");
@@ -129,7 +129,7 @@ public class ExtractSubMapIncludeKeysTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName1(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, toArray(5L, 4L), " ");

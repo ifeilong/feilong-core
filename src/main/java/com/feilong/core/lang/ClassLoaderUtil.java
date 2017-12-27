@@ -16,10 +16,10 @@
 package com.feilong.core.lang;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -355,7 +355,7 @@ public final class ClassLoaderUtil{
      * @since 1.6.2
      */
     private static String formatClassLoader(ClassLoader classLoader){
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = newLinkedHashMap(2);
         map.put("classLoader[CanonicalName]", classLoader.getClass().getCanonicalName());
         map.put("classLoader[Root Classpath]", "" + getResource(classLoader, ""));
         return map.toString();

@@ -16,11 +16,11 @@
 package com.feilong.core.net.paramutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -48,7 +48,7 @@ public class ToQueryStringUseSingleValueMapTest{
      */
     @Test
     public void testJoinSingleValueMap2(){
-        Map<String, String> map = new LinkedHashMap<>();
+        Map<String, String> map = newLinkedHashMap();
         map.put(null, null);
         map.put("a", "");
         map.put("b", null);
@@ -62,7 +62,7 @@ public class ToQueryStringUseSingleValueMapTest{
      */
     @Test
     public void testJoinSingleValueMap1(){
-        Map<String, String> singleValueMap = new LinkedHashMap<>();
+        Map<String, String> singleValueMap = newLinkedHashMap();
 
         singleValueMap.put("province", "江苏省");
         singleValueMap.put("city", "南通市");

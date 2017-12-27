@@ -16,6 +16,7 @@
 package com.feilong.core.util.maputiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -25,7 +26,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +45,7 @@ public class GetSubMapExcludeIterableKeysTest{
      */
     @Test
     public void testGetSubMapExcludeKeys(){
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> map = newLinkedHashMap();
 
         map.put("a", 3007);
         map.put("b", 3001);
@@ -83,7 +83,7 @@ public class GetSubMapExcludeIterableKeysTest{
      */
     @Test
     public void testGetSubMapNullExcludeKeys(){
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> map = newLinkedHashMap();
 
         map.put("a", 3007);
         map.put("b", 3001);

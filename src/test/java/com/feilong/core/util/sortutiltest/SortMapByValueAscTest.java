@@ -16,13 +16,13 @@
 package com.feilong.core.util.sortutiltest;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.SortUtil.sortMapByValueAsc;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class SortMapByValueAscTest{
 
     @Test
     public void testSortByValueASCSameValue(){
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> map = newLinkedHashMap();
         map.put("a", 123);
         map.put("c", 345);
         map.put("b", 8);

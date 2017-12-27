@@ -15,11 +15,11 @@
  */
 package com.feilong.core.net.paramutiltest;
 
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class ToQueryStringUseArrayValueMapTest{
      */
     @Test
     public void testJoinArrayValueMap(){
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+        Map<String, String[]> keyAndArrayMap = newLinkedHashMap();
 
         keyAndArrayMap.put("province", new String[] { "江苏省", "浙江省" });
         keyAndArrayMap.put("city", new String[] { "南通市" });
@@ -51,7 +51,7 @@ public class ToQueryStringUseArrayValueMapTest{
      */
     @Test
     public void testJoinArrayValueMapNullElement(){
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+        Map<String, String[]> keyAndArrayMap = newLinkedHashMap();
 
         keyAndArrayMap.put("province", new String[] { "江苏省", null });
         keyAndArrayMap.put("city", new String[] { "南通市" });
@@ -64,7 +64,7 @@ public class ToQueryStringUseArrayValueMapTest{
      */
     @Test
     public void testJoinArrayValueMapNullValue(){
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+        Map<String, String[]> keyAndArrayMap = newLinkedHashMap();
 
         keyAndArrayMap.put("province", null);
         keyAndArrayMap.put("city", new String[] { "南通市" });
@@ -77,7 +77,7 @@ public class ToQueryStringUseArrayValueMapTest{
      */
     @Test
     public void testJoinArrayValueMapNullParamAndNullValue(){
-        Map<String, String[]> keyAndArrayMap = new LinkedHashMap<>();
+        Map<String, String[]> keyAndArrayMap = newLinkedHashMap();
 
         keyAndArrayMap.put(null, null);
         keyAndArrayMap.put("city", new String[] { "南通市" });

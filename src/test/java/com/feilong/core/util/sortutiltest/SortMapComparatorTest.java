@@ -15,20 +15,19 @@
  */
 package com.feilong.core.util.sortutiltest;
 
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.core.util.SortUtil.sortMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
-
-import static com.feilong.core.util.SortUtil.sortMap;
 
 /**
  * The Class SortUtilSortMapComparatorTest.
@@ -42,7 +41,7 @@ public class SortMapComparatorTest{
      */
     @Test
     public void testSort(){
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> map = newLinkedHashMap();
 
         map.put("a8", 8);
         map.put("a13", 123);
@@ -59,7 +58,7 @@ public class SortMapComparatorTest{
      */
     @Test(expected = NullPointerException.class)
     public void testSortNullComparator(){
-        Map<String, Integer> map = new LinkedHashMap<>();
+        Map<String, Integer> map = newLinkedHashMap();
 
         map.put("a8", 8);
         map.put("a13", 123);

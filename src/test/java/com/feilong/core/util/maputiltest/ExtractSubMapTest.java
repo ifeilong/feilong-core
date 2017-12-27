@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasEntry;
@@ -22,7 +23,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class ExtractSubMapTest{
      */
     @Test
     public void testExtractSubMap3(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(100L));
         map.put(2L, new User(200L));
         map.put(5L, new User(500L));
@@ -73,7 +73,7 @@ public class ExtractSubMapTest{
      */
     @Test(expected = NullPointerException.class)
     public void testExtractSubMapNullExtractPropertyName(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, null);
@@ -84,7 +84,7 @@ public class ExtractSubMapTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, "");
@@ -95,7 +95,7 @@ public class ExtractSubMapTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testExtractSubMapEmptyExtractPropertyName1(){
-        Map<Long, User> map = new LinkedHashMap<>();
+        Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
         map.put(2L, new User(2L));
         MapUtil.extractSubMap(map, " ");

@@ -16,9 +16,9 @@
 package com.feilong.core.util.maputiltest;
 
 import static com.feilong.core.util.MapUtil.newHashMap;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static org.junit.Assert.assertEquals;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -38,7 +38,7 @@ public class GetTest{
      */
     @Test
     public void testGetIndex(){
-        Map<String, String> map = new LinkedHashMap<>();
+        Map<String, String> map = newLinkedHashMap();
         map.put("name", "jim");
         map.put("address", "shanghai");
         map.put("age", "18");
