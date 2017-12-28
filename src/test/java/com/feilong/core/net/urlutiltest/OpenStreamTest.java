@@ -19,13 +19,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.feilong.core.UncheckedIOException;
 import com.feilong.core.net.URLUtil;
 
-/**
- * The Class URLUtilOpenStreamTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class OpenStreamTest{
 
     /**
@@ -34,6 +30,11 @@ public class OpenStreamTest{
     @Test
     public void testOpenStreamNullUrl(){
         assertEquals(null, URLUtil.openStream(null));
+    }
+
+    @Test(expected = UncheckedIOException.class)
+    public void testOpenStream1(){
+        URLUtil.openStream(URLUtil.toURL("www"));
     }
 
 }

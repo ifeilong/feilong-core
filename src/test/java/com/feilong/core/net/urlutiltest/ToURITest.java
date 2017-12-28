@@ -17,10 +17,12 @@ package com.feilong.core.net.urlutiltest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.junit.Test;
 
+import com.feilong.core.net.URIParseException;
 import com.feilong.core.net.URIUtil;
 import com.feilong.core.net.URLUtil;
 
@@ -34,11 +36,16 @@ public class ToURITest{
     /**
      * Test to URI.
      */
-    //************com.feilong.core.net.URLUtil.toURI(URL)**************
     @Test
     public void testToURI(){
         URL url = URLUtil.toURL("http://www.exiaoshuo.com/jinyiyexing/");
         assertEquals(URIUtil.create("http://www.exiaoshuo.com/jinyiyexing/"), URLUtil.toURI(url));
+    }
+
+    @Test(expected = URIParseException.class)
+    public void testToURI1() throws MalformedURLException{
+        URL url = new URL("file://");
+        URLUtil.toURI(url);
     }
 
     /**

@@ -247,7 +247,6 @@ public final class URLUtil{
             return url == null ? null : url.openStream();
         }catch (IOException e){
             String message = Slf4jUtil.format("can not open url:[{}]", url.toString());
-            LOGGER.error(message, e);
             throw new UncheckedIOException(message, e);
         }
     }

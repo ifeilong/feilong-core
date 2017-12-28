@@ -30,7 +30,6 @@ public class ToURLTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ToURLTest.class);
-    //***************com.feilong.core.net.URLUtil.toURL(String)**********
 
     /**
      * Test to URL.
