@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * 正则表达式工具类.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see RegexPattern
+ * @see "RegexPattern"
  * @see java.util.regex.Pattern
  * @see java.util.regex.Matcher
  * @see java.lang.String#matches(String)
@@ -41,14 +41,7 @@ import org.slf4j.LoggerFactory;
 public final class RegexUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RegexUtil.class);
-
-    /** Don't let anyone instantiate this class. */
-    private RegexUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
+    private static final Logger               LOGGER        = LoggerFactory.getLogger(RegexUtil.class);
 
     /**
      * Pattern cache提高速度.
@@ -60,6 +53,15 @@ public final class RegexUtil{
 
     //---------------------------------------------------------------
 
+    /** Don't let anyone instantiate this class. */
+    private RegexUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * 编译给定正则表达式 <code>regexPattern</code> ,并尝试将给定输入 <code>input</code> 与其匹配.
      * 
@@ -68,7 +70,7 @@ public final class RegexUtil{
      * </p>
      *
      * @param regexPattern
-     *            正则表达式字符串,pls use {@link RegexPattern}
+     *            正则表达式字符串,pls use {@link "RegexPattern"}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @return 如果input 符合 regex的正则表达式格式,返回true, 否则返回 false;<br>

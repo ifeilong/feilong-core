@@ -161,15 +161,6 @@ import com.feilong.core.text.NumberFormatUtil;
  */
 public final class NumberUtil{
 
-    /** Don't let anyone instantiate this class. */
-    private NumberUtil(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    //---------------------------------------------------------------
-
     /**
      * 一,<code>{@value}</code>.
      * 
@@ -278,6 +269,14 @@ public final class NumberUtil{
      * @since 1.10.7
      */
     public static final long TEN_BILLION      = (long) (BILLION) * 10;
+
+    //---------------------------------------------------------------
+    /** Don't let anyone instantiate this class. */
+    private NumberUtil(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
 
     //---------------------------------------------------------------
 

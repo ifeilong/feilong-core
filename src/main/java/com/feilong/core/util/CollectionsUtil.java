@@ -2374,7 +2374,7 @@ public final class CollectionsUtil{
         return map;
     }
 
-    //---------------------------------------------------------------
+    //------------------list---------------------------------------------
 
     /**
      * 创建 a <i>mutable</i>, empty {@code ArrayList} instance .
@@ -2412,6 +2412,8 @@ public final class CollectionsUtil{
         return new CopyOnWriteArrayList<>();
     }
 
+    //--------------------set-------------------------------------------
+
     /**
      * 创建 a <i>mutable</i>, empty {@code newHashSet} instance .
      * 
@@ -2421,7 +2423,7 @@ public final class CollectionsUtil{
      * @since 1.10.7
      */
     public static <E> HashSet<E> newHashSet(){
-        return new HashSet<E>();
+        return new HashSet<>();
     }
 
     /**
@@ -2433,7 +2435,7 @@ public final class CollectionsUtil{
      * @since 1.10.7
      */
     public static <E> LinkedHashSet<E> newLinkedHashSet(){
-        return new LinkedHashSet<E>();
+        return new LinkedHashSet<>();
     }
 
 }
