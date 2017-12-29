@@ -17,6 +17,9 @@ package com.feilong.core.lang;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  * 在每个线程中 {@link PartitionRunnableBuilder},你可以使用到的参数.
  *
@@ -29,29 +32,23 @@ public class PartitionThreadEntity implements Serializable{
     private static final long serialVersionUID = 6507966437017227236L;
 
     /** 线程的名字. */
-    private String            name;
+    private final String      name;
 
     //---------------------------------------------------
 
     /** 总数,list 的总size. */
-    private int               totalListCount;
+    private final int         totalListCount;
 
     /** 分配大小. */
-    private int               eachSize;
+    private final int         eachSize;
 
     /** 批次,当前线程序号,从0开始. */
-    private int               batchNumber;
+    private final int         batchNumber;
 
     /** 当前线程执行数量,=perBatchList size. */
-    private int               currentListSize;
+    private final int         currentListSize;
 
     //---------------------------------------------------
-    /**
-     * Instantiates a new group thread entity.
-     */
-    public PartitionThreadEntity(){
-        super();
-    }
 
     /**
      * Instantiates a new group thread entity.
@@ -76,6 +73,8 @@ public class PartitionThreadEntity implements Serializable{
         this.currentListSize = currentListSize;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 线程的名字.
      *
@@ -83,16 +82,6 @@ public class PartitionThreadEntity implements Serializable{
      */
     public String getName(){
         return name;
-    }
-
-    /**
-     * 设置 线程的名字.
-     *
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name){
-        this.name = name;
     }
 
     /**
@@ -105,32 +94,12 @@ public class PartitionThreadEntity implements Serializable{
     }
 
     /**
-     * 设置 总数,list 的总size.
-     *
-     * @param totalListCount
-     *            the totalListCount to set
-     */
-    public void setTotalListCount(int totalListCount){
-        this.totalListCount = totalListCount;
-    }
-
-    /**
      * 获得 批次,当前线程序号,从0开始.
      *
      * @return the batchNumber
      */
     public int getBatchNumber(){
         return batchNumber;
-    }
-
-    /**
-     * 设置 批次,当前线程序号,从0开始.
-     *
-     * @param batchNumber
-     *            the batchNumber to set
-     */
-    public void setBatchNumber(int batchNumber){
-        this.batchNumber = batchNumber;
     }
 
     /**
@@ -143,16 +112,6 @@ public class PartitionThreadEntity implements Serializable{
     }
 
     /**
-     * 设置 当前线程执行数量,=perBatchList size.
-     *
-     * @param currentListSize
-     *            the currentListSize to set
-     */
-    public void setCurrentListSize(int currentListSize){
-        this.currentListSize = currentListSize;
-    }
-
-    /**
      * 获得 分配大小.
      *
      * @return the eachSize
@@ -161,14 +120,15 @@ public class PartitionThreadEntity implements Serializable{
         return eachSize;
     }
 
-    /**
-     * 设置 分配大小.
-     *
-     * @param eachSize
-     *            the eachSize to set
-     */
-    public void setEachSize(int eachSize){
-        this.eachSize = eachSize;
-    }
+    //---------------------------------------------------------------
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString(){
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+    }
 }

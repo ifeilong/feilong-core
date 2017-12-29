@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.systemutiltest;
+package com.feilong.core.util.comparator.propertycomparator;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * The Class FeiLongStringUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                GetEnvMapTest.class,
-                GetPropertiesMapTest.class,
 
-                SetPropertiesFromMapTest.class,
-                SetPropertiesFromPropertiesTest.class,
-
+                PropertyNameTest.class,
+                PropertyNameAndComparatorTest.class,
+                PropertyNameAndValueConvertToClassTest.class,
+                PropertyNameAndValueConvertToClassAndComparatorTest.class,
         //
 })
-public class FeiLongSystemUtilSuiteTests{
+public class FeiLongPropertyComparatorSuiteTests{
 
 }

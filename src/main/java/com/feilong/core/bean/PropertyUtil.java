@@ -218,7 +218,7 @@ public final class PropertyUtil{
                 PropertyUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                throw new BeanOperationException(e);
+                throw new BeanOperationException("copyProperties exception", e);
             }
         }
         for (String propertyName : includePropertyNames){
@@ -321,7 +321,7 @@ public final class PropertyUtil{
             try{
                 return PropertyUtils.describe(bean);
             }catch (Exception e){
-                throw new BeanOperationException(e);
+                throw new BeanOperationException("describe exception", e);
             }
         }
         Map<String, Object> map = newLinkedHashMap(propertyNames.length);
@@ -518,7 +518,7 @@ public final class PropertyUtil{
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            throw new BeanOperationException(e);
+            throw new BeanOperationException("getProperty exception", e);
         }
     }
 

@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.feilong.core.lang.PartitionRunnableBuilder;
 import com.feilong.core.lang.PartitionThreadEntity;
 
@@ -29,13 +32,16 @@ import com.feilong.core.lang.PartitionThreadEntity;
  */
 public class CalculatePartitionRunnableBuilder implements PartitionRunnableBuilder<Integer>{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(CalculatePartitionRunnableBuilder.class);
+
     /*
      * (non-Javadoc)
      * 
      * @see com.feilong.core.lang.PartitionRunnableBuilder#build(java.util.List, com.feilong.core.lang.PartitionThreadEntity, java.util.Map)
      */
     @Override
-    public Runnable build(final List<Integer> perBatchList,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
+    public Runnable build(final List<Integer> perBatchList,final PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
         final AtomicInteger atomicInteger = (AtomicInteger) paramsMap.get("result");
 
         return new Runnable(){
@@ -43,6 +49,15 @@ public class CalculatePartitionRunnableBuilder implements PartitionRunnableBuild
             @Override
             public void run(){
                 for (Integer value : perBatchList){
+
+                    LOGGER.trace(
+                                    "{},BatchNumber:[{}],CurrentListSize:[{}],EachSize:[{}],Name:[{}],TotalListCount:[{}]",
+                                    partitionThreadEntity.toString(),
+                                    partitionThreadEntity.getBatchNumber(),
+                                    partitionThreadEntity.getCurrentListSize(),
+                                    partitionThreadEntity.getEachSize(),
+                                    partitionThreadEntity.getName(),
+                                    partitionThreadEntity.getTotalListCount());
                     atomicInteger.addAndGet(value);
                 }
             }

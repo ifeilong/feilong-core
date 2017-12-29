@@ -309,12 +309,71 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
     }
 
     /**
-     * The Constructor.
-     * *
+     * 带<code>propertyName</code> 和 <code>propertyValueConvertToClass</code> 以及 <code>comparator</code> 的构造函数.
+     * 
      * <h3>使用场景:</h3>
      * <blockquote>
      * 诸如需要排序的对象指定属性类型是数字,但是申明类型的时候由于种种原因是字符串,<br>
      * 此时需要排序,如果不转成Integer比较的话,字符串比较13 将会在 3数字的前面
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 我们现在有这样的数据,其中属性 totalNo是字符串类型的
+     * </p>
+     * 
+     * <pre class="code">
+     * CourseEntity courseEntity1 = new CourseEntity();
+     * courseEntity1.setTotalNo("3");
+     * 
+     * CourseEntity courseEntity2 = new CourseEntity();
+     * courseEntity2.setTotalNo("13");
+     * 
+     * List{@code <CourseEntity>} courseList = new ArrayList{@code <>}();
+     * courseList.add(courseEntity1);
+     * courseList.add(courseEntity2);
+     * </pre>
+     * 
+     * 如果 我们只是使用 propertyName进行排序的话:
+     * 
+     * <pre class="code">
+     * Collections.sort(courseList, new PropertyComparator{@code <CourseEntity>}("totalNo"));
+     * LOGGER.debug(JsonUtil.format(courseList));
+     * </pre>
+     * 
+     * 那么<b>返回:</b>
+     * 
+     * <pre class="code">
+     * [{
+     * "totalNo": "13",
+     * "name": ""
+     * },{
+     * "totalNo": "3",
+     * "name": ""
+     * }]
+     * </pre>
+     * 
+     * 如果我们使用 propertyName+ propertyValueConvertToClass进行排序的话:
+     * 
+     * <pre class="code">
+     * Collections.sort(courseList, new PropertyComparator{@code <CourseEntity>}("totalNo", Integer.class,ComparatorUtils.NATURAL_COMPARATOR));
+     * LOGGER.debug(JsonUtil.format(courseList));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * [{
+     * "totalNo": "3",
+     * "name": ""
+     * },{
+     * "totalNo": "13",
+     * "name": ""
+     * }]
+     * </pre>
+     * 
      * </blockquote>
      *
      * @param propertyName
@@ -346,18 +405,16 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
 
     //----------------------------------------------------------------------------------------------------------
 
-    /**
-     * Compare.
-     *
-     * @param t1
-     *            the t1
-     * @param t2
-     *            the t2
-     * @return the int
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+     * 
      * @see org.apache.commons.lang3.ObjectUtils#compare(Comparable, Comparable)
+     * 
      * @see org.apache.commons.lang3.ObjectUtils#compare(Comparable, Comparable, boolean)
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public int compare(T t1,T t2){
         if (t1 == t2){

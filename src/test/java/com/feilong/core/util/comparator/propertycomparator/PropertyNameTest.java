@@ -23,14 +23,13 @@ import static org.junit.Assert.assertThat;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.collections4.ComparatorUtils;
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.store.member.UserSameHashCode;
 import com.feilong.store.member.UserSameHashCodeWithComparable;
 
-public class PropertyComparatorTest{//----------------------------------------------------------------------------
+public class PropertyNameTest{
 
     @Test
     public void testPropertyComparatorWithTreeSetWithComparable(){
@@ -64,18 +63,21 @@ public class PropertyComparatorTest{//------------------------------------------
         //----------------------------------------------------------
 
         assertEquals(7, set.size());
-        assertThat(set, allOf(contains(
-                        nullPropertyValue, //如果对应的属性值是null,排在最前面
-                        userSameHashCodeWithComparable_1_name1, //指定属性的属性值越小对应的对象排在前面,反之排在后面
+        assertThat(
+                        set,
+                        allOf(
+                                        contains(
+                                                        nullPropertyValue, //如果对应的属性值是null,排在最前面
+                                                        userSameHashCodeWithComparable_1_name1, //指定属性的属性值越小对应的对象排在前面,反之排在后面
 
-                        //如果对象实现了 Comparable 接口, 那么直接比较
-                        userSameHashCodeWithComparable_5_name1,
-                        userSameHashCodeWithComparable_5_name2,
-                        userSameHashCodeWithComparable_5_name5,
-                        userSameHashCodeWithComparable_5_name6,
+                                                        //如果对象实现了 Comparable 接口, 那么直接比较
+                                                        userSameHashCodeWithComparable_5_name1,
+                                                        userSameHashCodeWithComparable_5_name2,
+                                                        userSameHashCodeWithComparable_5_name5,
+                                                        userSameHashCodeWithComparable_5_name6,
 
-                        nullObject)//空元素排在后面
-        ));
+                                                        nullObject)//空元素排在后面
+                        ));
     }
 
     @Test
@@ -110,15 +112,18 @@ public class PropertyComparatorTest{//------------------------------------------
         //----------------------------------------------------------
 
         assertEquals(4, set.size());
-        assertThat(set, allOf(contains(
-                        nullPropertyValue, //如果对应的属性值是null,排在最前面
-                        userSameHashCode_1_name1, //指定属性的属性值越小对应的对象排在前面,反之排在后面
+        assertThat(
+                        set,
+                        allOf(
+                                        contains(
+                                                        nullPropertyValue, //如果对应的属性值是null,排在最前面
+                                                        userSameHashCode_1_name1, //指定属性的属性值越小对应的对象排在前面,反之排在后面
 
-                        //如果两个值相等,那么比较对象本身
-                        userSameHashCode_5_name5,
+                                                        //如果两个值相等,那么比较对象本身
+                                                        userSameHashCode_5_name5,
 
-                        nullObject)//空元素排在后面
-        ));
+                                                        nullObject)//空元素排在后面
+                        ));
     }
 
     //----------------------------------------------------------------------------
@@ -136,56 +141,6 @@ public class PropertyComparatorTest{//------------------------------------------
     @Test(expected = IllegalArgumentException.class)
     public void testPropertyComparatorBlankPropertyName(){
         new PropertyComparator<>("    ");
-    }
-
-    //----------------------------------------------------------------------------
-
-    @Test(expected = NullPointerException.class)
-    public void testPropertyComparatorNullPropertyNameAndNaturalComparator(){
-        new PropertyComparator<>(null, ComparatorUtils.NATURAL_COMPARATOR);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testPropertyComparatorEmptyPropertyNameAndNaturalComparator(){
-        new PropertyComparator<>("", ComparatorUtils.NATURAL_COMPARATOR);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testPropertyComparatorBlankPropertyNameAndNaturalComparator(){
-        new PropertyComparator<>("    ", ComparatorUtils.NATURAL_COMPARATOR);
-    }
-
-    //----------------------------------------------------------------------------
-
-    @Test(expected = NullPointerException.class)
-    public void testPropertyComparatorNullPropertyNameAndPropertyValueConvertToClass(){
-        new PropertyComparator<>(null, Integer.class);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testPropertyComparatorEmptyPropertyNameAndPropertyValueConvertToClass(){
-        new PropertyComparator<>("", Integer.class);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testPropertyComparatorBlankPropertyNameAndPropertyValueConvertToClass(){
-        new PropertyComparator<>("    ", Integer.class);
-    }
-    //----------------------------------------------------------------------------
-
-    @Test(expected = NullPointerException.class)
-    public void testPropertyComparatorNullPropertyNameAndPropertyValueConvertToClassAndNaturalComparator(){
-        new PropertyComparator<>(null, Integer.class, ComparatorUtils.NATURAL_COMPARATOR);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testPropertyComparatorEmptyPropertyNameAndPropertyValueConvertToClassAndNaturalComparator(){
-        new PropertyComparator<>("", Integer.class, ComparatorUtils.NATURAL_COMPARATOR);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testPropertyComparatorBlankPropertyNameAndPropertyValueConvertToClassAndNaturalComparator(){
-        new PropertyComparator<>("    ", Integer.class, ComparatorUtils.NATURAL_COMPARATOR);
     }
 
 }

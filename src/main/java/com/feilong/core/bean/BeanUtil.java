@@ -290,7 +290,7 @@ public final class BeanUtil{
                 BeanUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                throw new BeanOperationException(e);
+                throw new BeanOperationException("copyProperties exception", e);
             }
         }
         for (String propertyName : includePropertyNames){
@@ -327,7 +327,7 @@ public final class BeanUtil{
         try{
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
-            throw new BeanOperationException(e);
+            throw new BeanOperationException("setProperty exception", e);
         }
     }
 
@@ -364,7 +364,7 @@ public final class BeanUtil{
         try{
             return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            throw new BeanOperationException(e);
+            throw new BeanOperationException("getProperty exception", e);
         }
     }
 
@@ -417,7 +417,7 @@ public final class BeanUtil{
         try{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
-            throw new BeanOperationException(e);
+            throw new BeanOperationException("cloneBean exception", e);
         }
     }
 
@@ -673,7 +673,7 @@ public final class BeanUtil{
             BeanUtils.populate(bean, properties);
             return bean;
         }catch (Exception e){
-            throw new BeanOperationException(e);
+            throw new BeanOperationException("populate exception", e);
         }
     }
 

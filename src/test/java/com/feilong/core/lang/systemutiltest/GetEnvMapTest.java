@@ -15,38 +15,26 @@
  */
 package com.feilong.core.lang.systemutiltest;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasKey;
 import static org.junit.Assert.assertThat;
-
-import java.util.Collections;
 
 import org.junit.Test;
 
 import com.feilong.core.lang.SystemUtil;
 
-public class SetPropertiesFromMapTest{
+public class GetEnvMapTest{
 
+    /**
+     * Test get env map for log.
+     */
     @Test
-    public void testGetPropertiesMap(){
-        SystemUtil.setPropertiesFromMap(toMap("feilongtest_setPropertiesFromMap", "1234"));
+    public void testGetEnvMap(){
+
         assertThat(
-                        SystemUtil.getPropertiesMap(),
+                        SystemUtil.getEnvMap(),
                         allOf(//
-                                        hasEntry("feilongtest_setPropertiesFromMap", "1234")
-                        //
-                        ));
-    }
+                                        hasKey("PATH")));
 
-    @Test(expected = NullPointerException.class)
-    public void testSetPropertiesFromMapTestNull(){
-        SystemUtil.setPropertiesFromMap(null);
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetPropertiesFromMapTestEmpty(){
-        SystemUtil.setPropertiesFromMap(Collections.<String, String> emptyMap());
-    }
-
 }
