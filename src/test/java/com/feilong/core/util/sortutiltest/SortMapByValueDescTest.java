@@ -59,7 +59,6 @@ public class SortMapByValueDescTest{
 
     @Test
     public void testSortByValueDesc12(){
-        //System.out.println(SORTMAP_BYVALUEDESC_MAP.values());//TODO:remove
         Map<String, Integer> map = toMap(SORTMAP_BYVALUEDESC_MAP, Integer.class);
         sortMapByValueDesc(map);
     }
@@ -82,7 +81,7 @@ public class SortMapByValueDescTest{
 
                                         "d",
                                         "g",
-                                        "a", //TODO
+                                        "a",
 
                                         "f",
                                         "b"));//c, d, g, a, f, b
