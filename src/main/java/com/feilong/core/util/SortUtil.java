@@ -749,7 +749,7 @@ public final class SortUtil{
      * map.put("UN", 17);
      * map.put("S", 6);
      * 
-     * //L-上市，S-暂停，DE-终止上市，UN-未上市
+     * //L-上市,S-暂停,DE-终止上市,UN-未上市
      * Map{@code <String, Integer>} sortByKeyAsc = sortMapByKeyFixOrder(map, "L", "UN", "DE", "S", "O");
      * 
      * LOGGER.debug(JsonUtil.format(sortByKeyAsc));

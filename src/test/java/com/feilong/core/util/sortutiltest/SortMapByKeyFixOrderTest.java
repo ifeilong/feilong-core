@@ -48,7 +48,7 @@ public class SortMapByKeyFixOrderTest{
         map.put("UN", 17);
         map.put("S", 6);
 
-        //L-上市，S-暂停，DE-终止上市，UN-未上市
+        //L-上市,S-暂停,DE-终止上市,UN-未上市
         Map<String, Integer> SortMapByKeyFixOrder = sortMapByKeyFixOrder(map, "L", "UN", "S", "DE", "O");
 
         assertThat(SortMapByKeyFixOrder.keySet(), contains("L", "UN", "S", "DE", "O"));

@@ -29,6 +29,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.TimeInterval;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -42,28 +43,28 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * 
  * <p>
- * 此外，线程组也可以包含其他线程组。线程组构成一棵树，<br>
- * 在树中，除了初始线程组外，每个线程组都有一个父线程组。<br>
- * 允许线程访问有关自己的线程组的信息，但是不允许它访问有关其线程组的父线程组或其他任何线程组的信息。
+ * 此外,线程组也可以包含其他线程组。线程组构成一棵树,<br>
+ * 在树中,除了初始线程组外,每个线程组都有一个父线程组。<br>
+ * 允许线程访问有关自己的线程组的信息,但是不允许它访问有关其线程组的父线程组或其他任何线程组的信息。
  * </p>
  * 
  * <p>
- * 所有线程都隶属于一个线程组。那可以是一个默认线程组，亦可是一个创建线程时明确指定的组。
+ * 所有线程都隶属于一个线程组。那可以是一个默认线程组,亦可是一个创建线程时明确指定的组。
  * </p>
  * 
  * <p>
- * 在创建之初，线程被限制到一个组里，而且不能改变到一个不同的组。每个应用都至少有一个线程从属于系统线程组。<br>
- * 若创建多个线程而不指定一个组，它们就会自动归属于系统线程组。<br>
+ * 在创建之初,线程被限制到一个组里,而且不能改变到一个不同的组。每个应用都至少有一个线程从属于系统线程组。<br>
+ * 若创建多个线程而不指定一个组,它们就会自动归属于系统线程组。<br>
  * 线程组也必须从属于其他线程组。<br>
  * 必须在构建器里指定新线程组从属于哪个线程组。<br>
  * 
- * 若在创建一个线程组的时候没有指定它的归属，则同样会自动成为系统线程组的一名属下。
+ * 若在创建一个线程组的时候没有指定它的归属,则同样会自动成为系统线程组的一名属下。
  * </p>
  * 
  * <p>
- * 因此，一个应用程序中的所有线程组最终都会将系统线程组作为自己的“父”
- * 之所以要提出“线程组”的概念，一般认为，是由于“安全”或者“保密”方面的理由。<br>
- * 根据Arnold和Gosling的说法：“线程组中的线程可以修改组内的其他线程，包括那些位于分层结构最深处的。一个线程不能修改位于自己所在组或者下属组之外的任何线程”
+ * 因此,一个应用程序中的所有线程组最终都会将系统线程组作为自己的“父”
+ * 之所以要提出“线程组”的概念,一般认为,是由于“安全”或者“保密”方面的理由。<br>
+ * 根据Arnold和Gosling的说法：“线程组中的线程可以修改组内的其他线程,包括那些位于分层结构最深处的。一个线程不能修改位于自己所在组或者下属组之外的任何线程”
  * </p>
  * </blockquote>
  * 
@@ -97,6 +98,62 @@ public final class ThreadUtil{
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 强制当前正在执行的线程休眠(暂停执行).
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>The thread does not lose ownership of any monitors.</li>
+     * <li>当线程睡眠时,它睡在某个地方,在苏醒之前不会返回到可运行状态,当睡眠时间到期,则返回到可运行状态。sleep()方法不能保证该线程睡眠到期后就开始执行</li>
+     * <li>该方法简便的地方在于,捕获了异常和记录了日志,不需要再写这些额外代码</li>
+     * <li>sleep()是静态方法,只能控制当前正在运行的线程</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * public void testNegative1(){
+     *     ThreadUtil.sleep(1);
+     * }
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>sleep()和wait()方法的最大区别:</h3>
+     * <blockquote>
+     * <p>
+     * sleep()睡眠时,保持对象锁,仍然占有该锁；<br>
+     * 而wait()睡眠时,释放对象锁。
+     * </p>
+     * </blockquote>
+     *
+     * @param milliseconds
+     *            睡眠的毫秒数,可以使用 {@link TimeInterval} 常量
+     * @throws IllegalArgumentException
+     *             如果 <code>milliseconds</code> 参数是负数
+     * @since 1.10.7
+     */
+    public static final void sleep(long milliseconds){
+        try{
+            Thread.sleep(milliseconds);
+        }catch (InterruptedException e){
+            //if any thread has interrupted the current thread. 
+            //The <i>interrupted status</i> of the current thread is cleared when this exception is thrown.
+            LOGGER.error("", e);
+
+            //see sonar http://127.0.0.1:9000/coding_rules#rule_key=squid%3AS2142
+
+            //线程的thread.interrupt()方法是中断线程,将会设置该线程的中断状态位,即设置为true,中断的结果线程是死亡、还是等待新的任务或是继续运行至下一步,就取决于这个程序本身。线程会不时地检测这个中断标示位,以判断线程是否应该被中断（中断标示值是否为true）。它并不像stop方法那样会中断一个正在运行的线程。
+            Thread.currentThread().interrupt();
+        }
+    }
 
     /**
      * 创建指定数量 <b>threadCount</b> 的线程,并执行.
@@ -256,7 +313,7 @@ public final class ThreadUtil{
      * 
      * <h3>说明:</h3>
      * <blockquote>
-     * 线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性;<br>
+     * 线程是稀缺资源,如果无限制的创建,不仅会消耗系统资源,还会降低系统的稳定性;<br>
      * 需要注意合理的评估<code>list</code> 的大小和<code>eachSize</code> 比率;<br>
      * 不建议<code>list</code> size很大,比如 20W,而<code>eachSize</code>值很小,比如2 ,那么会开启20W/2=10W个线程;此时建议考虑 线程池的实现方案
      * </blockquote>

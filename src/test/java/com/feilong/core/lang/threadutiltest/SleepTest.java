@@ -15,22 +15,30 @@
  */
 package com.feilong.core.lang.threadutiltest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.feilong.core.lang.ThreadUtil;
 
 /**
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.10.7
  */
-@RunWith(Suite.class)
-@SuiteClasses({ //
-                SleepTest.class,
+public class SleepTest{
 
-                ExecuteTest.class,
-                ExecuteCountTest.class,
-        //
-})
-public class FeiLongThreadUtilSuiteTests{
+    private static final Logger LOGGER = LoggerFactory.getLogger(SleepTest.class);
 
+    @Test
+    public void testNegative1(){
+        ThreadUtil.sleep(1);
+    }
+
+    //---------------------------------------------------------------
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNegative(){
+        ThreadUtil.sleep(-1);
+    }
 }
