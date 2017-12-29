@@ -586,14 +586,14 @@ public final class CollectionsUtil{
 
     //---------------------------------------------------------------
     /**
-     * 从 <code>objectCollection</code>中 删除<code>removeElement</code> <span style="color:red">(原集合对象不变)</span>.
+     * 从 <code>objectCollection</code>中 删除<code>removeElements</code> <span style="color:red">(原集合对象不变)</span>.
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>返回剩余的集合 <span style="color:red">(原集合对象不变)</span>,这个方法非常有用,如果你不想修改 <code>collection</code>的话,不能调用
-     * <code>collection.remove(removeElement);</code>.</li>
-     * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code> 的元素加入到新的list返回.</li>
+     * <code>collection.remove(removeElements);</code>.</li>
+     * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElements</code> 的元素加入到新的list返回.</li>
      * </ol>
      * </blockquote>
      * 
@@ -634,7 +634,7 @@ public final class CollectionsUtil{
      *            the generic type
      * @param objectCollection
      *            the object collection
-     * @param removeElement
+     * @param removeElements
      *            需要被删除的元素
      * @return a <code>List</code> containing all the elements of <code>c</code> except any elements that also occur in <code>remove</code>.
      * @throws NullPointerException
@@ -643,9 +643,11 @@ public final class CollectionsUtil{
      * @see ListUtils#removeAll(Collection, Collection)
      * @since Commons Collections 4
      * @since 1.0.8
+     * @since 1.10.7 change param to Varargs
      */
-    public static <O> List<O> remove(Collection<O> objectCollection,O removeElement){
-        return removeAll(objectCollection, toList(removeElement));
+    @SafeVarargs
+    public static <O> List<O> remove(Collection<O> objectCollection,O...removeElements){
+        return removeAll(objectCollection, toList(removeElements));
     }
 
     //---------------------------------------------------------------

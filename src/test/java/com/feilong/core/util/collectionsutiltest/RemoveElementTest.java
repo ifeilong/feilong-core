@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
@@ -26,19 +27,21 @@ import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
-/**
- * The Class CollectionsUtilRemoveElementTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class RemoveElementTest{
 
-    //**************CollectionsUtil.remove(Collection<String>, String)*************************
     /**
      * Test remove.
      */
+    @Test
+    public void testRemove1(){
+        List<String> list = toList("xinge", "feilong1", "feilong2", "feilong3", "feilong2");
+
+        List<String> removeList = CollectionsUtil.remove(list, "feilong2", "feilong3");
+
+        assertThat(removeList, hasItems("xinge", "feilong1"));
+        assertThat(list, hasItems("xinge", "feilong1", "feilong2", "feilong3"));
+    }
+
     @Test
     public void testRemove(){
 
