@@ -15,21 +15,27 @@
  */
 package com.feilong.core.util.transformer;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(Suite.class)
-@SuiteClasses({ //
+import org.junit.Test;
 
-                DateToStringTransformerTest.class,
-                NumberToStringTransformerTest.class,
+/**
+ * 
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.10.7
+ */
+public class SimpleClassTransformerTest{
 
-                BeanTransformerTest.class,
-                SimpleClassTransformerTest.class,
+    @Test
+    public void testTransform(){
+        assertEquals(123, new SimpleClassTransformer(Integer.class).transform("123"));
+    }
 
-        //
-})
-public class FeiLongTransformerSuiteTests{
+    //---------------------------------------------------------------
+
+    @Test(expected = NullPointerException.class)
+    public void testSimpleClassTransformerTestNull(){
+        new SimpleClassTransformer(null);
+    }
 
 }

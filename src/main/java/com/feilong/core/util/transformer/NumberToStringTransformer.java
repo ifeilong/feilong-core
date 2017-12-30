@@ -36,7 +36,12 @@ public class NumberToStringTransformer implements Transformer<Number, String>{
 
     /**
      * Instantiates a new number to string transformer.
-     *
+     * 
+     * <p>
+     * 如果 <code>pattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>pattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
+     * 
      * @param pattern
      *            模式,可以使用 {@link NumberPattern}
      */
