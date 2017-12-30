@@ -437,12 +437,13 @@ public final class BeanPredicateUtil{
     //---------------------------------------------------------------
 
     /**
-     * 拿<code>valueToCompare</code> 和 提取t对象的属性<code>propertyName</code>的值,进行比较(使用 {@link ComparatorUtils#naturalComparator()} 自然排序比较器)<br>
+     * 判断指定的值 <code>valueToCompare</code> <code>criterion</code> 提取的bean对象属性<code>propertyName</code>的值 .
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>.</li>
+     * <li>使用 {@link ComparatorUtils#naturalComparator()} 自然排序比较器.</li>
+     * <li>比较 <code><b><span style="color:red">comparator.compare(valueToCompare, propertyValue)</span></b></code>.</li>
      * <li>
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
@@ -492,10 +493,13 @@ public final class BeanPredicateUtil{
      * </table>
      * </blockquote>
      * 
-     * 
      * <h3>通常对于以下代码:</h3>
      * 
      * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 大于20岁的人分个组
+     * </p>
      * 
      * <pre class="code">
      * List{@code <User>} list = toList(//
@@ -557,12 +561,13 @@ public final class BeanPredicateUtil{
     }
 
     /**
-     * 拿<code>valueToCompare</code> 和 提取t对象的属性<code>propertyName</code>的值,进行比较(使用 <code>comparator</code> 比较器).<br>
+     * 判断指定的值 <code>valueToCompare</code> <code>criterion</code> 提取的bean对象属性<code>propertyName</code>的值 .
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>比较 <code><b>comparator.compare(valueToCompare, propertyValue)</b></code>.</li>
+     * <li>使用 <code>comparator</code> 比较器</li>
+     * <li>比较 <code><b><span style="color:red">comparator.compare(valueToCompare, propertyValue)</span></b></code>.</li>
      * <li>
      * 常用于解析集合,如 {@link CollectionsUtil#select(Iterable, Predicate) select},{@link CollectionsUtil#find(Iterable, Predicate) find},
      * {@link CollectionsUtil#selectRejected(Iterable, Predicate) selectRejected},
