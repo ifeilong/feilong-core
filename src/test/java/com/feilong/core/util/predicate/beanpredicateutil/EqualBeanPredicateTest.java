@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.util.predicate;
+package com.feilong.core.util.predicate.beanpredicateutil;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.CollectionsUtil.find;
@@ -25,6 +25,7 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.PredicateUtils;
 import org.junit.Test;
 
+import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.store.member.User;
 
 public class EqualBeanPredicateTest{

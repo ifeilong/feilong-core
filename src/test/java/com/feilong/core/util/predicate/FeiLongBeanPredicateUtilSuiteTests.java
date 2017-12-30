@@ -19,6 +19,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.core.util.predicate.beanpredicateutil.EqualBeanPredicateTest;
+import com.feilong.core.util.predicate.beanpredicateutil.EqualIgnoreCasePredicateTest;
+import com.feilong.core.util.predicate.beanpredicateutil.EqualMapPredicateTest;
+import com.feilong.core.util.predicate.beanpredicateutil.EqualPredicateTest;
+
 /**
  * The Class FeiLongBeanPredicateUtilSuiteTests.
  *
@@ -27,6 +32,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 BeanPredicateTest.class,
+
                 EqualPredicateTest.class,
                 EqualIgnoreCasePredicateTest.class,
                 EqualMapPredicateTest.class,
