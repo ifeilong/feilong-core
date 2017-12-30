@@ -15,60 +15,44 @@
  */
 package com.feilong.core.util.transformer;
 
-import static com.feilong.core.bean.ConvertUtil.convert;
-
-import java.io.Serializable;
-
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.NumberPattern;
+import com.feilong.core.lang.NumberUtil;
 
 /**
- * 简单的将对象转成指定 <code>targetType</code> 类型的转换器.
+ * 数字转成字符串的转换器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @param <T>
- *            原来的类型
- * @param <V>
- *            转成的结果类型
- * @see ConvertUtil#convert(Object, Class)
- * @since 1.9.2
+ * @since 1.10.7
  */
-public class SimpleClassTransformer<T, V> implements Transformer<T, V>,Serializable{
+public class NumberToStringTransformer implements Transformer<Number, String>{
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 809439581555072949L;
-
-    /** 需要被转成什么目标类型. */
-    private final Class<V>    targetType;
+    /** 模式,可以使用 {@link NumberPattern}. */
+    private final String pattern;
 
     //---------------------------------------------------------------
 
     /**
-     * Instantiates a new convert transformer.
-     * 
-     * <p>
-     * 如果 <code>targetType</code> 是null,抛出 {@link NullPointerException}<br>
-     * </p>
+     * Instantiates a new number to string transformer.
      *
-     * @param targetType
-     *            需要被转成什么目标类型
+     * @param pattern
+     *            模式,可以使用 {@link NumberPattern}
      */
-    public SimpleClassTransformer(Class<V> targetType){
-        Validate.notNull(targetType, "targetType can't be null!");
-        this.targetType = targetType;
+    public NumberToStringTransformer(String pattern){
+        Validate.notBlank(pattern, "pattern can't be blank!");
+        this.pattern = pattern;
     }
 
     //---------------------------------------------------------------
-
     /*
      * (non-Javadoc)
      * 
      * @see org.apache.commons.collections4.Transformer#transform(java.lang.Object)
      */
     @Override
-    public V transform(final T input){
-        return convert(input, targetType);
+    public String transform(Number value){
+        return null == value ? null : NumberUtil.toString(value, pattern);
     }
 }

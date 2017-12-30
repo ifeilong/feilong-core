@@ -29,6 +29,7 @@ import com.feilong.core.util.randomutiltest.FeiLongRandomUtilSuiteTests;
 import com.feilong.core.util.regexutiltest.FeiLongRegexUtilSuiteTests;
 import com.feilong.core.util.resourcebundleutiltest.FeiLongResourceBundleUtilSuiteTests;
 import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
+import com.feilong.core.util.transformer.FeiLongTransformerSuiteTests;
 
 /**
  * The Class FeiLongUtilSuiteTests.
@@ -50,6 +51,8 @@ import com.feilong.core.util.sortutiltest.FeiLongSortUtilSuiteTests;
                 FeiLongSortUtilSuiteTests.class,
 
                 FeiLongComparatorSuiteTests.class,
+
+                FeiLongTransformerSuiteTests.class,
         //
 })
 public class FeiLongUtilSuiteTests{

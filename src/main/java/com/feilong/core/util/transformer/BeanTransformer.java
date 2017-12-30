@@ -69,6 +69,8 @@ public class BeanTransformer<I, O> implements Transformer<I, O>{
         this.includePropertyNames = includePropertyNames;
     }
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
