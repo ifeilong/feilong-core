@@ -123,9 +123,9 @@ A: https://github.com/venusdrogon/feilong-core/wiki/Repeat-the-wheel
 
 ## 10.:cyclone: feilong 即时交流
 
-							|QQ 群 `243306798`
-:---- 										|:---------
-		|![](http://i.imgur.com/cIfglCa.png)
+|QQ 群 `243306798`
+|:---------
+|![](http://i.imgur.com/cIfglCa.png)
 
 ## 11:panda_face: About
 
