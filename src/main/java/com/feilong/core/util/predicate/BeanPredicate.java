@@ -69,6 +69,8 @@ public class BeanPredicate<T> implements Predicate<T>{
         this.valuePredicate = valuePredicate;
     }
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
