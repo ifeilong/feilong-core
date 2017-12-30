@@ -24,6 +24,7 @@ import com.feilong.core.util.closure.FeiLongClosureSuiteTests;
 import com.feilong.core.util.collectionsutiltest.FeiLongCollectionsUtilSuiteTests;
 import com.feilong.core.util.comparator.FeiLongComparatorSuiteTests;
 import com.feilong.core.util.enumerationutiltest.EnumerationUtilParameterizedTest;
+import com.feilong.core.util.equator.IgnoreCaseEquatorTest;
 import com.feilong.core.util.maputiltest.FeiLongMapUtilSuiteTests;
 import com.feilong.core.util.predicate.FeiLongBeanPredicateUtilSuiteTests;
 import com.feilong.core.util.randomutiltest.FeiLongRandomUtilSuiteTests;
@@ -40,6 +41,7 @@ import com.feilong.core.util.transformer.FeiLongTransformerSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 EnumerationUtilParameterizedTest.class,
+                IgnoreCaseEquatorTest.class,
 
                 FeiLongBeanPredicateUtilSuiteTests.class,
 

@@ -18,11 +18,13 @@ package com.feilong.core.util.equator;
 import java.io.Serializable;
 
 import org.apache.commons.collections4.Equator;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 忽视大小写的实现.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see org.apache.commons.collections4.functors#DefaultEquator
  * @since 1.10.1
  */
 public class IgnoreCaseEquator implements Equator<String>,Serializable{
@@ -43,6 +45,8 @@ public class IgnoreCaseEquator implements Equator<String>,Serializable{
         super();
     }
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -50,8 +54,10 @@ public class IgnoreCaseEquator implements Equator<String>,Serializable{
      */
     @Override
     public boolean equate(final String s1,final String s2){
-        return s1 == s2 || s1 != null && s1.equalsIgnoreCase(s2);
+        return StringUtils.equalsIgnoreCase(s1, s2);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * {@inheritDoc}
