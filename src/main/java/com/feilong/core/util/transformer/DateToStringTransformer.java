@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.transformer;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.commons.collections4.Transformer;
@@ -29,10 +30,13 @@ import com.feilong.core.date.DateUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.7
  */
-public class DateToStringTransformer implements Transformer<Date, String>{
+public class DateToStringTransformer implements Transformer<Date, String>,Serializable{
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -4826259468102686057L;
 
     /** 模式,可以使用 {@link DatePattern}. */
-    private final String pattern;
+    private final String      pattern;
 
     //---------------------------------------------------------------
 

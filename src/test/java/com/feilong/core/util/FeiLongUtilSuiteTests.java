@@ -20,6 +20,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.core.util.aggregateutiltest.FeiLongAggregateUtilSuiteTests;
+import com.feilong.core.util.closure.FeiLongClosureSuiteTests;
 import com.feilong.core.util.collectionsutiltest.FeiLongCollectionsUtilSuiteTests;
 import com.feilong.core.util.comparator.FeiLongComparatorSuiteTests;
 import com.feilong.core.util.enumerationutiltest.EnumerationUtilParameterizedTest;
@@ -53,6 +54,7 @@ import com.feilong.core.util.transformer.FeiLongTransformerSuiteTests;
                 FeiLongComparatorSuiteTests.class,
 
                 FeiLongTransformerSuiteTests.class,
+                FeiLongClosureSuiteTests.class,
         //
 })
 public class FeiLongUtilSuiteTests{

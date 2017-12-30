@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.transformer;
 
+import java.io.Serializable;
+
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.Validate;
 
@@ -27,10 +29,13 @@ import com.feilong.core.lang.NumberUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.7
  */
-public class NumberToStringTransformer implements Transformer<Number, String>{
+public class NumberToStringTransformer implements Transformer<Number, String>,Serializable{
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -8811898394834078637L;
 
     /** 模式,可以使用 {@link NumberPattern}. */
-    private final String pattern;
+    private final String      pattern;
 
     //---------------------------------------------------------------
 

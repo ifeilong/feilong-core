@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.transformer;
 
+import java.io.Serializable;
+
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.Validate;
 
@@ -37,17 +39,20 @@ import com.feilong.core.lang.reflect.ConstructorUtil;
  * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
  * @since 1.10.1
  */
-public class BeanTransformer<I, O> implements Transformer<I, O>{
+public class BeanTransformer<I, O> implements Transformer<I, O>,Serializable{
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -5873559262715038376L;
 
     /**
      * 转成Bean的类型.
      */
-    private final Class<O> toBeanType;
+    private final Class<O>    toBeanType;
 
     /**
      * 指定转换属性的名字(如果).
      */
-    private final String[] includePropertyNames;
+    private final String[]    includePropertyNames;
 
     //---------------------------------------------------------------
 

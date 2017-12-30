@@ -79,6 +79,11 @@ public class BeanPropertyValueChangeClosure<T> implements Closure<T>{
 
     /**
      * Instantiates a new bean property value change closure.
+     * 
+     * <p>
+     * 如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
      *
      * @param propertyName
      *            指定bean对象排序属性名字.
@@ -90,11 +95,12 @@ public class BeanPropertyValueChangeClosure<T> implements Closure<T>{
      *            the value
      */
     public BeanPropertyValueChangeClosure(String propertyName, Object propertyValue){
-        super();
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         this.propertyName = propertyName;
         this.propertyValue = propertyValue;
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
