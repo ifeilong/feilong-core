@@ -18,6 +18,8 @@ package com.feilong.core.util.comparator;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.util.RegexUtil;
 
 /**
@@ -65,7 +67,7 @@ public class RegexGroupNumberComparator implements Comparator<String>,Serializab
     //---------------------------------------------------------------
 
     /**
-     * The Constructor.
+     * Instantiates a new regex group number comparator.
      * 
      * <p style="color:red">
      * 默认会提取正则表达式中的第一个group 转成int 类型进行比较
@@ -83,12 +85,20 @@ public class RegexGroupNumberComparator implements Comparator<String>,Serializab
      * Collections.sort(includedFileUrlList, new RegexGroupNumberComparator(".*ppt-coreContent(\\d*).png"));
      * </pre>
      * 
+     * <p>
+     * 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>regexPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
+     * 
      * @param regexPattern
      *            文件名称的正则表达式,主要方便提取数字,比如 ".*ppt-coreContent(\\d*).png"
      */
     public RegexGroupNumberComparator(String regexPattern){
+        Validate.notBlank(regexPattern, "regexPattern can't be blank!");
         this.regexPattern = regexPattern;
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

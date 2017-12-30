@@ -21,6 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.core.util.comparator.beancomparatorutiltest.FeiLongBeanComparatorUtilSuiteTests;
 import com.feilong.core.util.comparator.propertycomparator.FeiLongPropertyComparatorSuiteTests;
+import com.feilong.core.util.comparator.regexgroupnumbercomparator.RegexGroupNumberComparatorTest;
 import com.feilong.core.util.comparator.sorthelpertest.FeiLongSortHelperSuiteTests;
 
 /**
@@ -34,6 +35,8 @@ import com.feilong.core.util.comparator.sorthelpertest.FeiLongSortHelperSuiteTes
                 FeiLongSortHelperSuiteTests.class,
 
                 FeiLongPropertyComparatorSuiteTests.class,
+
+                RegexGroupNumberComparatorTest.class,
         //
 })
 public class FeiLongComparatorSuiteTests{
