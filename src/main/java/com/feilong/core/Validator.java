@@ -172,6 +172,8 @@ public final class Validator{
             return StringUtils.isBlank((CharSequence) value);
         }
 
+        //---------------------------------------------------------------
+
         // collections 支持的类型
         if (isCollectionsSupportType(value)){
             return CollectionUtils.sizeIsEmpty(value);
@@ -213,6 +215,8 @@ public final class Validator{
     public static boolean isNotNullOrEmpty(Object value){
         return !isNullOrEmpty(value);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Checks if is collections support type.

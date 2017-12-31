@@ -109,6 +109,7 @@ public final class ThreadUtil{
      * <li>当线程睡眠时,它睡在某个地方,在苏醒之前不会返回到可运行状态,当睡眠时间到期,则返回到可运行状态。sleep()方法不能保证该线程睡眠到期后就开始执行</li>
      * <li>该方法简便的地方在于,捕获了异常和记录了日志,不需要再写这些额外代码</li>
      * <li>sleep()是静态方法,只能控制当前正在运行的线程</li>
+     * <li>sonarqube 不建议在单元测试中 使用 sleep, 参见 "Thread.sleep" should not be used in tests squid:S2925</li>
      * </ol>
      * </blockquote>
      * 
@@ -138,6 +139,7 @@ public final class ThreadUtil{
      *            睡眠的毫秒数,可以使用 {@link TimeInterval} 常量
      * @throws IllegalArgumentException
      *             如果 <code>milliseconds</code> 参数是负数
+     * @see <a href="http://localhost:9000/coding_rules#rule_key=squid%3AS2925">"Thread.sleep" should not be used in tests</a>
      * @since 1.10.7
      */
     public static final void sleep(long milliseconds){
