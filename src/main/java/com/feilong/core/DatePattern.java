@@ -213,9 +213,12 @@ import java.util.Date;
  *      "http://www.infoq.com/cn/news/2015/01/java-date-format-with-caution?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global">
  *      慎用Java日期格式化</a>
  * @see <a href="https://en.wikipedia.org/wiki/Date_format_by_country">各国的时间格式</a>
+ * @see <a href="https://en.wikipedia.org/wiki/Chinese_numerals#Usage">Dates in Chinese</a>
  * @since 1.0.2
  */
 public final class DatePattern{
+
+    //---------------------------------------------------------------
 
     /**
      * 只有日期 年月日<span style="color:green"><code>{@value}</code></span>.
@@ -228,24 +231,78 @@ public final class DatePattern{
     public static final String COMMON_DATE                                  = "yyyy-MM-dd";
 
     /**
-     * 中文日期格式,年月日<span style="color:green"><code>{@value}</code></span>.
-     * <p>
-     * example:<span style="color:green">2015年07月17日</span>
-     * </p>
+     * 不带秒 <span style="color:green"><code>{@value}</code></span>.
      * 
-     * @since 1.2.2
+     * <p>
+     * example: <span style="color:green">2013-12-27 22:13</span>
+     * </p>
      */
-    public static final String CHINESE_COMMON_DATE                          = "yyyy年MM月dd日";
+    public static final String COMMON_DATE_AND_TIME_WITHOUT_SECOND          = "yyyy-MM-dd HH:mm";
 
     /**
-     * 只有时间<span style="color:green"><code>{@value}</code></span>.
+     * <span style="color:green"><code>{@value}</code></span>.
      * <p>
-     * example:<span style="color:green">21:57:36</span>
+     * example:<span style="color:green">2013-12-27 22:13:55</span>
+     * </p>
+     */
+    public static final String COMMON_DATE_AND_TIME                         = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * 带毫秒的时间格式 <span style="color:green"><code>{@value}</code></span>.
+     * 
+     * <p>
+     * example: <span style="color:green">2013-12-27 22:13:55.453</span>
+     * </p>
+     */
+    public static final String COMMON_DATE_AND_TIME_WITH_MILLISECOND        = "yyyy-MM-dd HH:mm:ss.SSS";
+
+    //---------------------------------------------------------------
+
+    /**
+     * (点号格式的) 只有日期 年月日<span style="color:green"><code>{@value}</code></span>.
+     * 
+     * <p>
+     * example:<span style="color:green">2018.01.02</span>
      * </p>
      * 
-     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_TIME_FORMAT
+     * @since 1.10.7
      */
-    public static final String COMMON_TIME                                  = "HH:mm:ss";
+    public static final String DOTS_DATE                                    = "yyyy.MM.dd";
+
+    /**
+     * (点号格式的)不带秒 <span style="color:green"><code>{@value}</code></span>.
+     * 
+     * <p>
+     * example: <span style="color:green">2018.01.02 22:13</span>
+     * </p>
+     * 
+     * @since 1.10.7
+     */
+    public static final String DOTS_DATE_AND_TIME_WITHOUT_SECOND            = "yyyy.MM.dd HH:mm";
+
+    /**
+     * (点号格式的)<span style="color:green"><code>{@value}</code></span>.
+     * 
+     * <p>
+     * example:<span style="color:green">2018.01.02 22:13:55</span>
+     * </p>
+     * 
+     * @since 1.10.7
+     */
+    public static final String DOTS_DATE_AND_TIME                           = "yyyy.MM.dd HH:mm:ss";
+
+    /**
+     * (点号格式的)带毫秒的时间格式 <span style="color:green"><code>{@value}</code></span>.
+     * 
+     * <p>
+     * example: <span style="color:green">2018.01.02 22:13:55.453</span>
+     * </p>
+     * 
+     * @since 1.10.7
+     */
+    public static final String DOTS_DATE_AND_TIME_WITH_MILLISECOND          = "yyyy.MM.dd HH:mm:ss.SSS";
+
+    //---------------------------------------------------------------
 
     /**
      * 只有时间且不带秒 <span style="color:green"><code>{@value}</code></span>.
@@ -257,40 +314,14 @@ public final class DatePattern{
     public static final String COMMON_TIME_WITHOUT_SECOND                   = "HH:mm";
 
     /**
-     * <span style="color:green"><code>{@value}</code></span>.
+     * 只有时间<span style="color:green"><code>{@value}</code></span>.
      * <p>
-     * example:<span style="color:green">2013-12-27 22:13:55</span>
-     * </p>
-     */
-    public static final String COMMON_DATE_AND_TIME                         = "yyyy-MM-dd HH:mm:ss";
-
-    /**
-     * 中文日期+时间格式 <span style="color:green"><span style="color:green"><code>{@value}</code></span>.</span>.
-     * <p>
-     * example: <span style="color:green">2015年07月17日 15:33:00</span>
+     * example:<span style="color:green">21:57:36</span>
      * </p>
      * 
-     * @since 1.2.2
+     * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_TIME_FORMAT
      */
-    public static final String CHINESE_COMMON_DATE_AND_TIME                 = "yyyy年MM月dd日 HH:mm:ss";
-
-    /**
-     * 带毫秒的时间格式 <span style="color:green"><code>{@value}</code></span>.
-     * 
-     * <p>
-     * example: <span style="color:green">2013-12-27 22:13:55.453</span>
-     * </p>
-     */
-    public static final String COMMON_DATE_AND_TIME_WITH_MILLISECOND        = "yyyy-MM-dd HH:mm:ss.SSS";
-
-    /**
-     * 不带秒 <span style="color:green"><code>{@value}</code></span>.
-     * 
-     * <p>
-     * example: <span style="color:green">2013-12-27 22:13</span>
-     * </p>
-     */
-    public static final String COMMON_DATE_AND_TIME_WITHOUT_SECOND          = "yyyy-MM-dd HH:mm";
+    public static final String COMMON_TIME                                  = "HH:mm:ss";
 
     /**
      * 不带年 不带秒 <span style="color:green"><code>{@value}</code></span>.
@@ -366,6 +397,8 @@ public final class DatePattern{
      */
     public static final String ddMMyyyyHHmmss                               = "dd/MM/yyyy HH:mm:ss";
 
+    //---------------------------------------------------------------
+
     /**
      * <span style="color:green"><code>{@value}</code></span>.
      * 
@@ -412,13 +445,15 @@ public final class DatePattern{
     public static final String mmss                                         = "mmss";
 
     /**
-     * <span style="color:green"><code>{@value}</code></span>.
+     * 二十四小时制小时 <span style="color:green"><code>{@value}</code></span>.
      * 
      * <p>
      * example: <span style="color:green">21</span>
      * </p>
      */
     public static final String HH                                           = "HH";
+
+    //---------------------------------------------------------------
 
     /**
      * 系统 {@link Date#toString()}使用的格式,并且{@link java.util.Locale#US} <span style="color:green"><code>{@value}</code></span>.
@@ -431,6 +466,28 @@ public final class DatePattern{
      * @see org.apache.commons.lang3.time.DateFormatUtils#SMTP_DATETIME_FORMAT
      */
     public static final String TO_STRING_STYLE                              = "EEE MMM dd HH:mm:ss zzz yyyy";
+
+    //---------------------------------------------------------------
+
+    /**
+     * 中文日期格式,年月日<span style="color:green"><code>{@value}</code></span>.
+     * <p>
+     * example:<span style="color:green">2015年07月17日</span>
+     * </p>
+     * 
+     * @since 1.2.2
+     */
+    public static final String CHINESE_COMMON_DATE                          = "yyyy年MM月dd日";
+
+    /**
+     * 中文日期+时间格式 <span style="color:green"><span style="color:green"><code>{@value}</code></span>.</span>.
+     * <p>
+     * example: <span style="color:green">2015年07月17日 15:33:00</span>
+     * </p>
+     * 
+     * @since 1.2.2
+     */
+    public static final String CHINESE_COMMON_DATE_AND_TIME                 = "yyyy年MM月dd日 HH:mm:ss";
 
     //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */

@@ -82,7 +82,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 IsTodayTest.class,
 
                 ToDateTest.class,
+
                 ToStringTest.class,
+                ToStringParameterizedTest.class,
 
         //                
 })

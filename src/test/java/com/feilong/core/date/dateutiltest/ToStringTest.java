@@ -15,31 +15,18 @@
  */
 package com.feilong.core.date.dateutiltest;
 
-import static org.junit.Assert.assertEquals;
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.date.DateUtil.toDate;
 
 import org.junit.Test;
 
 import com.feilong.core.date.DateUtil;
 
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-
 /**
- * The Class DateUtilToStringTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ToStringTest{
-
-    /**
-     * Test to string.
-     */
-    @Test
-    public void testToString(){
-        assertEquals("2016-06-11", DateUtil.toString(toDate("2016-06-11 22:59:00", COMMON_DATE_AND_TIME), COMMON_DATE));
-    }
 
     /**
      * Test to string null date.
