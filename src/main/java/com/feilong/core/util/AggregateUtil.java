@@ -801,8 +801,8 @@ public final class AggregateUtil{
                 if ({@code input >= 30 && input < 50}){
                     return {@code ">=30&&<50"};
                 }
-                if (input >= 20 && input < 30){
-                    return ">=20&&<30";
+                if ({@code input >= 20 && input < 30}){
+                    return {@code ">=20&&<30"};
                 }               
                 throw new UnsupportedOperationException("value not support!");
             }
@@ -831,9 +831,9 @@ public final class AggregateUtil{
             "赵云": 2
         },
         "age":         {
-            ">=20&&<30": 1,
-            ">=30&&<50": 3,
-            ">=50": 2
+            {@code ">=20&&<30"}: 1,
+            {@code ">=30&&<50"}: 3,
+            {@code ">=50"}: 2
         }
     }
      * </pre>
@@ -930,8 +930,8 @@ public final class AggregateUtil{
             "赵云": 2
         },
         "age":         {
-            ">=30&&<50": 2,
-            ">=50": 2
+            {@code ">=30&&<50"}: 2,
+            {@code ">=50"}: 2
         }
     }
      * </pre>

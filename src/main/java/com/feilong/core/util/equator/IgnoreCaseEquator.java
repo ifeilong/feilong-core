@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  * 忽视大小写的实现.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see org.apache.commons.collections4.functors#DefaultEquator
+ * @see org.apache.commons.collections4.functors.DefaultEquator
  * @since 1.10.1
  */
 public class IgnoreCaseEquator implements Equator<String>,Serializable{

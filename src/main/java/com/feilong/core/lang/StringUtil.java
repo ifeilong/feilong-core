@@ -390,7 +390,7 @@ public final class StringUtil{
      * @param content
      *            需要被替换的字符串
      * @param regex
-     *            用来匹配此字符串的正则表达式,规则参见 {@link RegexPattern}注释
+     *            用来匹配此字符串的正则表达式,规则参见 {@link "RegexPattern"}注释
      * @param replacement
      *            用来替换每个匹配项的字符串
      * @return 如果 <code>content</code> 是null,返回 {@link StringUtils#EMPTY}<br>

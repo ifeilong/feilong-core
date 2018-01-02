@@ -408,7 +408,7 @@ public final class ParamUtil{
     //---------------------------------------------------------------------------------------------
 
     /**
-     * 将 <code>singleValueMap</code> 转成<code>自然排序</code>, 然后将key和value直接拼接成字符串(<span style="color:red">不使用 = 和& 分隔</span>).
+     * 将 <code>singleValueMap</code> 转成<code>自然排序</code>, 然后将key和value直接拼接成字符串(<span style="color:red">不使用 {@code =} 和{@code &} 分隔</span>).
      * 
      * <p>
      * 已知,适用于 网易易盾验证码

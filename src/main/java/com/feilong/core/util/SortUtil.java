@@ -741,7 +741,7 @@ public final class SortUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Map{@code <String, Integer>} map = new HashMap<>();
+     * Map{@code <String, Integer>} map = new HashMap{@code <>}();
      * 
      * map.put("DE", 99);
      * map.put("L", 3428);

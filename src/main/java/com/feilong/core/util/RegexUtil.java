@@ -202,7 +202,7 @@ public final class RegexUtil{
      * Gets the matcher.
      *
      * @param regexPattern
-     *            正则表达式字符串,pls use {@link RegexPattern}
+     *            正则表达式字符串,pls use {@link "RegexPattern"}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
@@ -218,7 +218,7 @@ public final class RegexUtil{
      * Gets the matcher.
      *
      * @param regexPattern
-     *            正则表达式字符串,pls use {@link RegexPattern}
+     *            正则表达式字符串,pls use {@link "RegexPattern"}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
      * @param flags
