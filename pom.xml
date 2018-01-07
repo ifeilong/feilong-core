@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.feilong.platform</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.10.7</version>
+		<version>1.11.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>feilong-core</artifactId>
@@ -18,10 +18,6 @@
 	<description>${project.name} ${project.version} API</description>
 
 	<url>https://github.com/venusdrogon/feilong-core</url>
-
-	<properties>
-		<version.jacoco-maven-plugin>0.7.9</version.jacoco-maven-plugin>
-	</properties>
 
 	<dependencies>
 		<!-- commons-lang3 -->
@@ -152,7 +148,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${version.jacoco-maven-plugin}</version>
+				<version>${v.jacoco-maven-plugin}</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
