@@ -16,17 +16,14 @@
 
 package com.feilong.core.date;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Test;
-
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
-import static com.feilong.core.DatePattern.yyyy;
 
 /**
  * The Class CalendarUtilTest.
@@ -40,7 +37,7 @@ public class CalendarUtilTest{
      */
     @Test
     public void testResetYearEnd(){
-        Date date = toDate("2016", yyyy);
+        Date date = toDate("2016", "yyyy");
         Calendar resetYearEnd = CalendarUtil.resetYearEnd(DateUtil.toCalendar(date));
         assertEquals("2016-12-31 23:59:59.999", CalendarUtil.toString(resetYearEnd, COMMON_DATE_AND_TIME_WITH_MILLISECOND));
     }

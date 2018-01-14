@@ -15,7 +15,6 @@
  */
 package com.feilong.core.text;
 
-import static com.feilong.core.DatePattern.yyyy;
 import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
@@ -35,7 +34,7 @@ public class MessageFormatUtilTest{
     public void testFormat(){
         assertEquals("name=张三jinaxin", MessageFormatUtil.format("name=张三{0}a{1}", "jin", "xin"));
         assertEquals("name=张三5axin", MessageFormatUtil.format("name=张三{0,number}a{1}", 5, "xin"));
-        assertEquals("name=张三2000-01-01axin", MessageFormatUtil.format("name=张三{0,date,yyyy-MM-dd}a{1}", toDate("2000", yyyy), "xin"));
+        assertEquals("name=张三2000-01-01axin", MessageFormatUtil.format("name=张三{0,date,yyyy-MM-dd}a{1}", toDate("2000", "yyyy"), "xin"));
     }
 
     /**

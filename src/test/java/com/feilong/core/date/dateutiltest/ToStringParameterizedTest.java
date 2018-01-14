@@ -56,7 +56,6 @@ public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParam
 
                                               { DatePattern.HH, "01" },
                                               { DatePattern.MM, "01" },
-                                              { DatePattern.mmss, "5300" },
 
                                               { DatePattern.MONTH_AND_DAY, "01-02" },
                                               { DatePattern.MONTH_AND_DAY_WITH_WEEK, "01-02(星期二)" },
@@ -68,8 +67,6 @@ public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParam
 
                                               { DatePattern.YEAR_AND_MONTH, "2018-01" },
 
-                                              { DatePattern.yy, "18" },
-                                              { DatePattern.yyyy, "2018" },
                                               { DatePattern.yyyyMMdd, "20180102" },
                 //
         };

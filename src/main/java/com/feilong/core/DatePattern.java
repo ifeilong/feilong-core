@@ -400,24 +400,6 @@ public final class DatePattern{
     //---------------------------------------------------------------
 
     /**
-     * <span style="color:green"><code>{@value}</code></span>.
-     * 
-     * <p>
-     * example: <span style="color:green">13</span>
-     * </p>
-     */
-    public static final String yy                                           = "yy";
-
-    /**
-     * <span style="color:green"><code>{@value}</code></span>.
-     * 
-     * <p>
-     * example: <span style="color:green">2013</span>
-     * </p>
-     */
-    public static final String yyyy                                         = "yyyy";
-
-    /**
      * MM月份 <span style="color:green"><code>{@value}</code></span>.
      * 
      * <p>
@@ -434,15 +416,6 @@ public final class DatePattern{
      * </p>
      */
     public static final String yyyyMMdd                                     = "yyyyMMdd";
-
-    /**
-     * <span style="color:green"><code>{@value}</code></span>.
-     * 
-     * <p>
-     * example: <span style="color:green">2156</span>
-     * </p>
-     */
-    public static final String mmss                                         = "mmss";
 
     /**
      * 二十四小时制小时 <span style="color:green"><code>{@value}</code></span>.
