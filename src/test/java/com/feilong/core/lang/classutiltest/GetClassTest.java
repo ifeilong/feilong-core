@@ -19,7 +19,7 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
-import com.feilong.core.FeiLongVersion;
+import com.feilong.core.Alphabet;
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 
@@ -37,7 +37,7 @@ public class GetClassTest{
      */
     @Test
     public void testGetClass(){
-        assertSame(FeiLongVersion.class, ClassUtil.getClass(FeiLongVersion.class.getName()));
+        assertSame(Alphabet.class, ClassUtil.getClass(Alphabet.class.getName()));
     }
 
     /**
