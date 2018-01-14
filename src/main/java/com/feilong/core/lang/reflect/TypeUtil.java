@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.bean.ToStringConfig;
 
 /**
  * Utility methods focusing on type inspection, particularly with regard to generics.
@@ -259,7 +260,7 @@ public final class TypeUtil{
         //---------------------------------------------------------------
 
         if (LOGGER.isTraceEnabled()){
-            LOGGER.trace("actualTypeArguments:[{}]", ConvertUtil.toString(actualTypeArguments, null));
+            LOGGER.trace("actualTypeArguments:[{}]", ConvertUtil.toString(actualTypeArguments, ToStringConfig.DEFAULT_CONNECTOR));
         }
         return convert(actualTypeArguments, Class[].class);
     }

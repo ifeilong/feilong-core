@@ -594,7 +594,8 @@ public final class ConvertUtil{
         return new BigDecimalConverter(null).convert(BigDecimal.class, toBeConvertedValue);
     }
 
-    //*********************数组***************************************************************************************
+    //---------------------------------------------------------------
+    //数组
 
     /**
      * 将 <code>toBeConvertedValue</code> 转成{@link Integer} 数组.
@@ -994,6 +995,133 @@ public final class ConvertUtil{
         return convert(toBeConvertedValue, String.class);
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 将集合 <code>collection</code> 使用拼接 <code>connector</code> 拼接成字符串.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * List{@code <String>} list = com.feilong.core.bean.ConvertUtil.toList("feilong", "", "xinge");
+     * ConvertUtil.toString(list,",");
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * feilong,,xinge
+     * </pre>
+     * 
+     * <hr>
+     * 
+     * 你还可以使用这个方法来将集合<b>换行输出</b>,比如:
+     * 
+     * <pre class="code">
+     * List{@code <String>} list = toList("飞龙", "小金", "四金", "金金金金");
+     * 
+     * LOGGER.debug(ConvertUtil.toString(list, System.lineSeparator()));
+     * </pre>
+     * 
+     * <b>输出:</b>
+     * 
+     * <pre class="code">
+     * 飞龙
+     * 小金
+     * 四金
+     * 金金金金
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明</h3>
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>如果有元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     * <li>最后一个元素后面不拼接拼接符</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param collection
+     *            集合,建议元素泛型不要使用自定义的对象(比如UserCommand等),因为这个方法是迭代collection,拿每个元素的字符串格式 进行拼接
+     * @param connector
+     *            the connector
+     * @return 如果 <code>collection</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     * @see "org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)"
+     * @see org.apache.commons.collections4.IteratorUtils#toString(Iterator)
+     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
+     * @since 1.11.0
+     */
+    public static String toString(final Collection<?> collection,String connector){
+        return isNullOrEmpty(collection) ? EMPTY : //
+                        toString(collection.toArray(), new ToStringConfig(connector));
+    }
+
+    /**
+     * 将数组 <code>arrays</code> 通过 <code>connector</code> 拼接成字符串.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toString(null,",")               =   ""
+     * ConvertUtil.toString(toArray(),",")          =   ""
+     * 
+     * ConvertUtil.toString(toArray("a","b"),",")   =   "a,b"
+     * 
+     * Integer[] array3 = { 2, null, 1, null };
+     * ConvertUtil.toString(array3,",")             =   "2,,1,"
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>如果原始类型数组需要转换:</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 需要先使用下列的方式先转成包装类型数组
+     * </p>
+     * 
+     * <ol>
+     * <li>{@link ArrayUtils#toObject(boolean[])}</li>
+     * <li>{@link ArrayUtils#toObject(byte[])}</li>
+     * <li>{@link ArrayUtils#toObject(char[])}</li>
+     * <li>{@link ArrayUtils#toObject(double[])}</li>
+     * <li>{@link ArrayUtils#toObject(float[])}</li>
+     * <li>{@link ArrayUtils#toObject(int[])}</li>
+     * <li>{@link ArrayUtils#toObject(long[])}</li>
+     * <li>{@link ArrayUtils#toObject(short[])}</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>说明</h3>
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>如果有元素是null,使用{@link StringUtils#EMPTY}替代拼接</li>
+     * <li>最后一个元素后面不拼接拼接符</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param arrays
+     *            支持包装类型,<b>不直接支持</b>原始类型
+     * @param connector
+     *            the connector
+     * @return 如果 <code>arrays</code> 是null 或者Empty,返回 {@link StringUtils#EMPTY}<br>
+     * @see org.apache.commons.lang3.builder.ToStringStyle
+     * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
+     * @since 1.11.0
+     */
+    public static String toString(Object[] arrays,String connector){
+        return isNullOrEmpty(arrays) ? EMPTY : toString(arrays, new ToStringConfig(connector));
+    }
+
+    //---------------------------------------------------------------
+
     /**
      * 将集合 <code>collection</code> 使用拼接配置 toStringConfig 拼接成字符串.
      * 
@@ -1142,6 +1270,8 @@ public final class ConvertUtil{
         return join(arrays, useToStringConfig.getConnector(), useToStringConfig.getIsJoinNullOrEmpty());
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Join.
      *
@@ -1209,7 +1339,8 @@ public final class ConvertUtil{
         return null == collection ? Collections.<T> emptyEnumeration() : Collections.enumeration(collection);
     }
 
-    //**************************toMap******************************************************
+    //---------------------------------------------------------------
+    //toMap
 
     /**
      * 将 <code>key</code> 和 <code>value</code> 直接转成map.
@@ -2813,6 +2944,8 @@ public final class ConvertUtil{
         Validate.notNull(targetType, "targetType can't be null!");
         return null == toBeConvertedValue ? null : (T) ConvertUtils.convert(toBeConvertedValue, targetType);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将对象转成 {@link Locale}.

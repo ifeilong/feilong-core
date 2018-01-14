@@ -63,6 +63,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ToStringArrayToStringConfigParameterizedTest.class,
                 ToStringCollectionToStringConfigParameterizedTest.class,
+                ToStringArrayAndConnectorParameterizedTest.class,
+                ToStringCollectionAndConnectorParameterizedTest.class,
+
                 ToStringParameterizedTest.class,
                 ToStringsTest.class,
 
