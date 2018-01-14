@@ -208,6 +208,8 @@ import java.util.Date;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see SimpleDateFormat
  * @see org.apache.commons.lang3.time.DateFormatUtils
+ * @see "org.springframework.format.annotation.DateTimeFormat"
+ * @see "java.time.format.DateTimeFormatter"
  * @see <a
  *      href=
  *      "http://www.infoq.com/cn/news/2015/01/java-date-format-with-caution?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global">
@@ -386,7 +388,7 @@ public final class DatePattern{
     //---------------------------------------------------------------
 
     /**
-     * <span style="color:green"><code>{@value}</code></span>.
+     * 印尼日期格式 <span style="color:green"><code>{@value}</code></span>.
      * 
      * <p>
      * example: <span style="color:green">31/03/2014 14:53:39</span>
@@ -397,8 +399,27 @@ public final class DatePattern{
      * </p>
      * 
      * @see <a href="https://en.wikipedia.org/wiki/Date_format_by_country">各国的时间格式</a>
+     * 
+     * @since 1.11.0
      */
-    public static final String ddMMyyyyHHmmss                               = "dd/MM/yyyy HH:mm:ss";
+    public static final String INDONESIA_DATE                               = "dd/MM/yyyy";
+
+    /**
+     * 印尼 带时分秒的时间格式 <span style="color:green"><code>{@value}</code></span>.
+     * 
+     * <p>
+     * example: <span style="color:green">31/03/2014 14:53:39</span>
+     * </p>
+     * 
+     * <p>
+     * 各国的时间格式参见 <a href="https://en.wikipedia.org/wiki/Date_format_by_country">Date format by country</a>
+     * </p>
+     * 
+     * @see <a href="https://en.wikipedia.org/wiki/Date_format_by_country">各国的时间格式</a>
+     * 
+     * @since 1.11.0 change name from ddMMyyyyHHmmss to INDONESIA_DATE_AND_TIME
+     */
+    public static final String INDONESIA_DATE_AND_TIME                      = "dd/MM/yyyy HH:mm:ss";
 
     //---------------------------------------------------------------
 
@@ -457,8 +478,9 @@ public final class DatePattern{
      * </p>
      * 
      * @since 1.2.2
+     * @since 1.11.0 rename from CHINESE_COMMON_DATE to CHINESE_DATE
      */
-    public static final String CHINESE_COMMON_DATE                          = "yyyy年MM月dd日";
+    public static final String CHINESE_DATE                                 = "yyyy年MM月dd日";
 
     /**
      * 中文日期+时间格式 <span style="color:green"><span style="color:green"><code>{@value}</code></span>.</span>.
@@ -467,8 +489,9 @@ public final class DatePattern{
      * </p>
      * 
      * @since 1.2.2
+     * @since 1.11.0 rename from CHINESE_COMMON_DATE_AND_TIME to CHINESE_DATE_AND_TIME
      */
-    public static final String CHINESE_COMMON_DATE_AND_TIME                 = "yyyy年MM月dd日 HH:mm:ss";
+    public static final String CHINESE_DATE_AND_TIME                        = "yyyy年MM月dd日 HH:mm:ss";
 
     //---------------------------------------------------------------
     /** Don't let anyone instantiate this class. */

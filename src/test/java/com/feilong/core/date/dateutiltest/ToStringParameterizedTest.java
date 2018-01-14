@@ -36,8 +36,8 @@ public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParam
     @Parameters(name = "index:{index}, DateUtil.toString(toDate(\"2018-01-02 01:53:00\", COMMON_DATE_AND_TIME), {0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
-                                              { DatePattern.CHINESE_COMMON_DATE, "2018年01月02日" },
-                                              { DatePattern.CHINESE_COMMON_DATE_AND_TIME, "2018年01月02日 01:53:00" },
+                                              { DatePattern.CHINESE_DATE, "2018年01月02日" },
+                                              { DatePattern.CHINESE_DATE_AND_TIME, "2018年01月02日 01:53:00" },
 
                                               { DatePattern.COMMON_DATE, "2018-01-02" },
                                               { DatePattern.COMMON_DATE_AND_TIME, "2018-01-02 01:53:00" },
@@ -47,7 +47,8 @@ public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParam
                                               { DatePattern.COMMON_TIME, "01:53:00" },
                                               { DatePattern.COMMON_TIME_WITHOUT_SECOND, "01:53" },
 
-                                              { DatePattern.ddMMyyyyHHmmss, "02/01/2018 01:53:00" },
+                                              { DatePattern.INDONESIA_DATE, "02/01/2018" },
+                                              { DatePattern.INDONESIA_DATE_AND_TIME, "02/01/2018 01:53:00" },
 
                                               { DatePattern.DOTS_DATE, "2018.01.02" },
                                               { DatePattern.DOTS_DATE_AND_TIME, "2018.01.02 01:53:00" },
