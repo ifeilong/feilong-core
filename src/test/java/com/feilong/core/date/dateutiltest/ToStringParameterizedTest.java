@@ -67,7 +67,7 @@ public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParam
 
                                               { DatePattern.YEAR_AND_MONTH, "2018-01" },
 
-                                              { DatePattern.yyyyMMdd, "20180102" },
+                                              { DatePattern.BASIC_ISO_DATE, "20180102" },
                 //
         };
         return toList(objects);

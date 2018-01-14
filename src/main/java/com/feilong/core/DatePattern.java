@@ -227,6 +227,8 @@ public final class DatePattern{
      * </p>
      * 
      * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_DATE_FORMAT
+     * @see "java.time.format.DateTimeFormatter#ISO_LOCAL_DATE"
+     * @see <a href="https://www.iso.org/iso-8601-date-and-time-format.html">Date and time format - ISO 8601</a>
      */
     public static final String COMMON_DATE                                  = "yyyy-MM-dd";
 
@@ -320,6 +322,7 @@ public final class DatePattern{
      * </p>
      * 
      * @see org.apache.commons.lang3.time.DateFormatUtils#ISO_8601_EXTENDED_TIME_FORMAT
+     * @see "java.time.format.DateTimeFormatter#ISO_LOCAL_TIME"
      */
     public static final String COMMON_TIME                                  = "HH:mm:ss";
 
@@ -409,13 +412,18 @@ public final class DatePattern{
     public static final String MM                                           = "MM";
 
     /**
+     * The ISO date formatter that formats or parses a date without an offset, such as '20111203' ,
      * <span style="color:green"><code>{@value}</code></span>.
      * 
      * <p>
      * example: <span style="color:green">20131227</span>
      * </p>
+     * 
+     * @see "java.time.format.DateTimeFormatter#BASIC_ISO_DATE"
+     * 
+     * @since 1.11.0 change name from "yyyyMMdd" to BASIC_ISO_DATE
      */
-    public static final String yyyyMMdd                                     = "yyyyMMdd";
+    public static final String BASIC_ISO_DATE                               = "yyyyMMdd";
 
     /**
      * 二十四小时制小时 <span style="color:green"><code>{@value}</code></span>.
