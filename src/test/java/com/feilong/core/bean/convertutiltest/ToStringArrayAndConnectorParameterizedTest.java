@@ -28,8 +28,16 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
+/**
+ * The Class ToStringArrayAndConnectorParameterizedTest.
+ */
 public class ToStringArrayAndConnectorParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Object[], String, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ConvertUtil.toString({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = build();
@@ -38,6 +46,11 @@ public class ToStringArrayAndConnectorParameterizedTest extends AbstractTwoParam
 
     //---------------------------------------------------------------
 
+    /**
+     * Builds the.
+     *
+     * @return the object[][]
+     */
     private static Object[][] build(){
         int[] int1 = { 2, 1 };
         Object[] array = ArrayUtils.toObject(int1);

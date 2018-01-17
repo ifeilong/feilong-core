@@ -35,6 +35,8 @@ public final class URIComponents{
     /** The Constant ampersand<code>{@value}</code>. */
     public static final String AMPERSAND    = "&";
 
+    //---------------------------------------------------------------
+
     /**
      * http协议<code>{@value}</code>.
      * 

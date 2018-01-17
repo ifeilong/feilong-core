@@ -30,15 +30,28 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
+/**
+ * The Class ToStringCollectionAndConnectorParameterizedTest.
+ */
 public class ToStringCollectionAndConnectorParameterizedTest
                 extends AbstractTwoParamsAndOneResultParameterizedTest<Collection<?>, String, String>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index} ConvertUtil.toString({0},{1})= {2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = build();
         return toList(objects);
     }
 
+    /**
+     * Builds the.
+     *
+     * @return the object[][]
+     */
     private static Object[][] build(){
         List<String> list = toList("feilong", "", "xinge");
 
@@ -64,6 +77,9 @@ public class ToStringCollectionAndConnectorParameterizedTest
                                   "飞龙" + lineSeparator() + "小金" + lineSeparator() + "四金" + lineSeparator() + "金金金金" }, };
     }
 
+    /**
+     * Test to string.
+     */
     @Test
     public void testToString(){
         assertEquals(expectedValue, ConvertUtil.toString(input1, input2));
