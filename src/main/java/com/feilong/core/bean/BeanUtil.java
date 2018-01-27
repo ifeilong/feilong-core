@@ -36,6 +36,8 @@ import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
+import com.feilong.tools.slf4j.Slf4jUtil;
+
 /**
  * 对 {@link org.apache.commons.beanutils.BeanUtils}的再次封装.
  * 
@@ -285,6 +287,8 @@ public final class BeanUtil{
         Validate.notNull(toObj, "toObj [destination bean] not specified!");
         Validate.notNull(fromObj, "fromObj [origin bean] not specified!");
 
+        //---------------------------------------------------------------
+
         if (isNullOrEmpty(includePropertyNames)){
             try{
                 BeanUtils.copyProperties(toObj, fromObj);
@@ -293,6 +297,8 @@ public final class BeanUtil{
                 throw new BeanOperationException("copyProperties exception", e);
             }
         }
+
+        //---------------------------------------------------------------
         for (String propertyName : includePropertyNames){
             String value = getProperty(fromObj, propertyName);
             setProperty(toObj, propertyName, value);
@@ -361,6 +367,8 @@ public final class BeanUtil{
     private static String getProperty(Object bean,String propertyName){
         Validate.notNull(bean, "bean can't be null!");
         Validate.notBlank(propertyName, "propertyName can't be blank!");
+
+        //---------------------------------------------------------------
         try{
             return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
@@ -414,6 +422,8 @@ public final class BeanUtil{
     @SuppressWarnings("unchecked")
     public static <T> T cloneBean(T bean){
         Validate.notNull(bean, "bean can't be null!");
+
+        //---------------------------------------------------------------
         try{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
@@ -669,11 +679,13 @@ public final class BeanUtil{
         Validate.notNull(bean, "bean can't be null/empty!");
         Validate.notNull(properties, "properties can't be null/empty!");
 
+        //---------------------------------------------------------------
+
         try{
             BeanUtils.populate(bean, properties);
             return bean;
         }catch (Exception e){
-            throw new BeanOperationException("populate exception", e);
+            throw new BeanOperationException(Slf4jUtil.format("can't populate:{} to bean:{},{}", properties, bean, e.getMessage()), e);
         }
     }
 
@@ -876,6 +888,9 @@ public final class BeanUtil{
         if (isNullOrEmpty(aliasAndValueMap)){
             return aliasBean;
         }
+
+        //---------------------------------------------------------------
+
         Map<String, String> propertyNameAndAliasMap = buildPropertyNameAndAliasMap(aliasBean.getClass());
         for (Map.Entry<String, String> entry : propertyNameAndAliasMap.entrySet()){
             String alias = entry.getValue();
@@ -884,6 +899,8 @@ public final class BeanUtil{
                 setProperty(aliasBean, entry.getKey(), value);
             }
         }
+
+        //---------------------------------------------------------------
         return aliasBean;
     }
 
@@ -899,10 +916,15 @@ public final class BeanUtil{
      */
     private static Map<String, String> buildPropertyNameAndAliasMap(Class<?> klass){
         Validate.notNull(klass, "klass can't be null!");
+
+        //---------------------------------------------------------------
+
         List<Field> aliasFieldsList = FieldUtils.getFieldsListWithAnnotation(klass, Alias.class);
         if (isNullOrEmpty(aliasFieldsList)){
             return emptyMap();
         }
+
+        //---------------------------------------------------------------
         //属性名字和key的对应关系
         Map<String, String> propertyNameAndAliasMap = newHashMap(aliasFieldsList.size());
         for (Field field : aliasFieldsList){
@@ -965,6 +987,8 @@ public final class BeanUtil{
      */
     public static DynaBean newDynaBean(Map<String, ?> valueMap){
         Validate.notNull(valueMap, "valueMap can't be null!");
+
+        //---------------------------------------------------------------
 
         LazyDynaBean lazyDynaBean = new LazyDynaBean();
         for (Map.Entry<String, ?> entry : valueMap.entrySet()){

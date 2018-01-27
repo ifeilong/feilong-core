@@ -62,6 +62,8 @@ public final class PropertyUtil{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtil.class);
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private PropertyUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -213,6 +215,8 @@ public final class PropertyUtil{
         Validate.notNull(toObj, "toObj [destination bean] not specified!");
         Validate.notNull(fromObj, "fromObj [origin bean] not specified!");
 
+        //---------------------------------------------------------------
+
         if (isNullOrEmpty(includePropertyNames)){
             try{
                 PropertyUtils.copyProperties(toObj, fromObj);
@@ -221,11 +225,15 @@ public final class PropertyUtil{
                 throw new BeanOperationException("copyProperties exception", e);
             }
         }
+
+        //---------------------------------------------------------------
         for (String propertyName : includePropertyNames){
             Object value = getProperty(fromObj, propertyName);
             setProperty(toObj, propertyName, value);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 返回一个 <code>bean</code>中指定属性 <code>propertyNames</code><span style="color:green">可读属性</span>,并将属性名/属性值放入一个
@@ -317,6 +325,8 @@ public final class PropertyUtil{
      */
     public static Map<String, Object> describe(Object bean,String...propertyNames){
         Validate.notNull(bean, "bean can't be null!");
+
+        //---------------------------------------------------------------
         if (isNullOrEmpty(propertyNames)){
             try{
                 return PropertyUtils.describe(bean);
@@ -324,6 +334,8 @@ public final class PropertyUtil{
                 throw new BeanOperationException("describe exception", e);
             }
         }
+
+        //---------------------------------------------------------------
         Map<String, Object> map = newLinkedHashMap(propertyNames.length);
         for (String propertyName : propertyNames){
             map.put(propertyName, getProperty(bean, propertyName));
@@ -389,6 +401,8 @@ public final class PropertyUtil{
     public static void setProperty(Object bean,String propertyName,Object value){
         Validate.notNull(bean, "bean can't be null!");
         Validate.notBlank(propertyName, "propertyName can't be null!");
+
+        //---------------------------------------------------------------
         try{
             PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
@@ -515,6 +529,8 @@ public final class PropertyUtil{
     public static <T> T getProperty(Object bean,String propertyName){
         Validate.notNull(bean, "bean can't be null!");
         Validate.notBlank(propertyName, "propertyName can't be blank!");
+
+        //---------------------------------------------------------------
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
@@ -583,9 +599,13 @@ public final class PropertyUtil{
 
         Validate.notNull(toBeFindedClassType, "toBeFindedClassType can't be null/empty!");
 
+        //---------------------------------------------------------------
+
         if (ClassUtil.isInstance(obj, toBeFindedClassType)){
             return (T) obj;
         }
+
+        //---------------------------------------------------------------
 
         if (isDonotSupportFindType(obj)){
             LOGGER.trace("obj:[{}] not support find toBeFindedClassType:[{}]", obj.getClass().getName(), toBeFindedClassType.getName());
