@@ -59,6 +59,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 RemoveDuplicateTest.class,
                 RemoveElementTest.class,
+                RemoveAllNullTest.class,
                 RemoveAllCollectionTest.class,
 
                 ForEachTest.class,

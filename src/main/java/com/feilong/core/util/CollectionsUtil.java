@@ -17,6 +17,7 @@ package com.feilong.core.util;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static java.util.Collections.emptyMap;
@@ -582,6 +583,57 @@ public final class CollectionsUtil{
         Validate.notNull(objectCollection, "objectCollection can't be null!");
         Validate.notNull(removeCollection, "removeCollection can't be null!");
         return ListUtils.removeAll(objectCollection, removeCollection);
+    }
+
+    /**
+     * 从 <code>objectCollection</code>中删除所有的 <code>null</code>元素 <span style="color:red">(原集合对象不变)</span>.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>返回剩余的集合 <span style="color:red">(原集合对象<code>objectCollection</code>不变)</span>,如果你不想修改 <code>objectCollection</code>的话,不能直接调用
+     * <code>collection.removeAll(remove);</code>,这个方法非常有用.</li>
+     * <li>底层实现是调用的 {@link ListUtils#removeAll(Collection, Collection)},将不是<code>removeElement</code>的元素加入到新的list返回.</li>
+     * </ol>
+     * 
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 从list中删除 null 元素
+     * </p>
+     * 
+     * <pre class="code">
+     * List{@code <String>} list = toList("xinge", null, "feilong2", "feilong2");
+     * List{@code <String>} removeList = CollectionsUtil.removeAllNull(list);
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * "xinge", "feilong2", "feilong2"
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the collection from which items are removed (in the returned collection)
+     * @return 从 <code>objectCollection</code>中排除掉 <code>null</code> 元素的新的 list
+     * @throws NullPointerException
+     *             如果 <code>objectCollection</code> 是null
+     * @see ListUtils#removeAll(Collection, Collection)
+     * @since Commons Collections 4
+     * @since 1.11.0
+     */
+    public static <O> List<O> removeAllNull(Collection<O> objectCollection){
+        Validate.notNull(objectCollection, "objectCollection can't be null!");
+        return remove(objectCollection, toArray((O) null));
     }
 
     //---------------------------------------------------------------
