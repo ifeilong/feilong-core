@@ -23,18 +23,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.junit.Test;
 
 import com.feilong.core.util.comparator.PropertyComparator;
 import com.feilong.core.util.comparator.RegexGroupNumberComparator;
 
-/**
- * The Class SortUtilSortMapComparatorTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class SortMapComparatorTest{
+
+    private final static PropertyComparator<Entry<String, Integer>> KEY_REGEX_PROPERTYCOMPARATOR = new PropertyComparator<>(
+                    "key",
+                    new RegexGroupNumberComparator("a(\\d*)"));
+
+    //---------------------------------------------------------------
 
     /**
      * Test sort.
@@ -47,11 +49,11 @@ public class SortMapComparatorTest{
         map.put("a13", 123);
         map.put("a2", 345);
 
-        Map<String, Integer> sort = sortMap(
-                        map,
-                        new PropertyComparator<Map.Entry<String, Integer>>("key", new RegexGroupNumberComparator("a(\\d*)")));
+        Map<String, Integer> sort = sortMap(map, KEY_REGEX_PROPERTYCOMPARATOR);
         assertThat(sort.keySet(), contains("a2", "a8", "a13"));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test sort null comparator.
@@ -67,17 +69,14 @@ public class SortMapComparatorTest{
         sortMap(map, null);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Test sort null map.
      */
     @Test
     public void testSortNullMap(){
-        assertEquals(
-                        emptyMap(),
-                        sortMap(
-                                        null,
-                                        new PropertyComparator<Map.Entry<String, Integer>>(
-                                                        "key",
-                                                        new RegexGroupNumberComparator("a(\\d*)"))));
+        Map<String, Integer> map = sortMap(null, KEY_REGEX_PROPERTYCOMPARATOR);
+        assertEquals(emptyMap(), map);
     }
 }

@@ -613,7 +613,7 @@ public final class SortUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
+     * <li><span style="color:red">原 <code>map</code> 的顺序不变</span></li>
      * <li>该方法使用了 {@link PropertyComparator},允许 null key,<b>null key排在最前面</b></li>
      * <li>
      * 如果直接使用 {@link java.util.TreeMap#TreeMap(Map)},TreeMap不允许 key是null,如果有key是null,那么将会抛出{@link NullPointerException}<br>
@@ -673,7 +673,7 @@ public final class SortUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
+     * <li><span style="color:red">原 <code>map</code> 的顺序不变</span></li>
      * <li>该方法使用了 {@link PropertyComparator},允许 null key,<b>null key排在最后面</b></li>
      * </ol>
      * </blockquote>
@@ -733,7 +733,7 @@ public final class SortUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
+     * <li><span style="color:red">原 <code>map</code> 的顺序不变</span></li>
      * </ol>
      * </blockquote>
      * 
@@ -806,7 +806,7 @@ public final class SortUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
+     * <li><span style="color:red">原 <code>map</code> 的顺序不变</span></li>
      * </ol>
      * </blockquote>
      * 
@@ -857,7 +857,7 @@ public final class SortUtil{
      * <h3>注意:</h3>
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
+     * <li><span style="color:red">原 <code>map</code> 的顺序不变</span></li>
      * </ol>
      * </blockquote>
      * 
@@ -912,7 +912,7 @@ public final class SortUtil{
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> 的顺序不变</li>
+     * <li><span style="color:red">原 <code>map</code> 的顺序不变</span></li>
      * <li>由于是对{@link java.util.Map.Entry Entry}排序的, 既可以按照key来排序,也可以按照value来排序哦</li>
      * </ol>
      * </blockquote>
