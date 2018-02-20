@@ -42,7 +42,7 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 ## 3.一图概述:
 
-![one-feilong-core](http://venusdrogon.github.io/feilong-platform/mysource/one-feilong-core-1.10.4.png)
+![one-feilong-core](http://venusdrogon.github.io/feilong-platform/mysource/one-feilong-core.png)
 
 这里有详细的帮助文档 http://feilong-core.mydoc.io/
 
