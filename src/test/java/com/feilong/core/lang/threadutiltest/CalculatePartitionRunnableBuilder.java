@@ -33,7 +33,11 @@ import com.feilong.core.lang.PartitionThreadEntity;
 public class CalculatePartitionRunnableBuilder implements PartitionRunnableBuilder<Integer>{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(CalculatePartitionRunnableBuilder.class);
+    private static final Logger                           LOGGER   = LoggerFactory.getLogger(CalculatePartitionRunnableBuilder.class);
+
+    /** Static instance. */
+    // the static instance works for all types
+    public static final CalculatePartitionRunnableBuilder INSTANCE = new CalculatePartitionRunnableBuilder();
 
     /*
      * (non-Javadoc)

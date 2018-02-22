@@ -15,23 +15,27 @@
  */
 package com.feilong.core.lang.threadutiltest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.11.0
  */
-@RunWith(Suite.class)
-@SuiteClasses({ //
-                SleepTest.class,
+public abstract class AbstractExcuteTest{
 
-                ExecuteTest.class,
-                ExecuteWithParamMapTest.class,
-                ExecuteCountTest.class,
-        //
-})
-public class FeiLongThreadUtilSuiteTests{
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractExcuteTest.class);
 
+    protected List<Integer> buildList(int start,int end){
+        List<Integer> list = newArrayList();
+        for (int i = start; i < end; ++i){
+            list.add(i);
+        }
+        return list;
+    }
 }
