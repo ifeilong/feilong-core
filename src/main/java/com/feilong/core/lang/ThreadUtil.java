@@ -138,6 +138,8 @@ public final class ThreadUtil{
      * @throws IllegalArgumentException
      *             如果 <code>milliseconds</code> 参数是负数
      * @see <a href="http://localhost:9000/coding_rules#rule_key=squid%3AS2925">"Thread.sleep" should not be used in tests</a>
+     * @see java.util.concurrent.TimeUnit#sleep(long) TimeUnit.SECONDS.sleep(3);
+     * @see java.lang.Thread#sleep(long)
      * @since 1.10.7
      */
     public static final void sleep(long milliseconds){
