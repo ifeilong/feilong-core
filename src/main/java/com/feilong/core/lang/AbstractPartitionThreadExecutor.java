@@ -97,26 +97,21 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
      *            the generic type
      * @param list
      *            执行解析的list
-     * 
      *            <p>
-     *            比如 100000个 User,不能为null或者empty
+     *            比如 100000个 User
      *            </p>
      * @param eachSize
      *            每个线程执行多少个对象
-     * 
      *            <p>
-     *            比如 一个线程解析 1000个 User, 那么程序内部 会自动创建 100000/1000个 线程去解析;<br>
-     *            必须{@code >}0
+     *            比如 一个线程解析 1000个 User, 那么程序内部 会自动创建 100000/1000个 线程去解析;
      *            </p>
      * @param paramsMap
      *            自定义的相关参数
-     * 
      *            <p>
-     *            该参数目的是你可以在自定义的 <code>partitionRunnableBuilder</code>中使用;<br>
-     *            如果你传入的<code>partitionRunnableBuilder</code>中不需要额外的自定义参数,那么此处可以传入null
+     *            自定义的 <code>partitionRunnableBuilder</code>中使用,可能为null
      *            </p>
      * @param partitionRunnableBuilder
-     *            每个线程做的事情,不能为null
+     *            每个线程做的事情
      */
     protected abstract <T> void actualExcute(
                     List<T> list,
