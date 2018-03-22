@@ -247,6 +247,13 @@ import com.feilong.core.util.transformer.BeanTransformer;
  * </ul>
  * </blockquote>
  * 
+ * <h3>guava 实用方法:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>com.google.common.collect.Iterables.concat({@code Iterable<? extends Iterable<? extends T>>})</li>
+ * </ol>
+ * </blockquote>
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.util.Collections
  * @see org.apache.commons.collections4.ListUtils

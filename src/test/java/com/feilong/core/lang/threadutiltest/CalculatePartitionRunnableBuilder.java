@@ -39,6 +39,8 @@ public class CalculatePartitionRunnableBuilder implements PartitionRunnableBuild
     // the static instance works for all types
     public static final CalculatePartitionRunnableBuilder INSTANCE = new CalculatePartitionRunnableBuilder();
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
