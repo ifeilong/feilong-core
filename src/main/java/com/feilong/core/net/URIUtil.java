@@ -377,6 +377,8 @@ public final class URIUtil{
         return isNullOrEmpty(uriString) ? false : StringUtils.contains(uriString, QUESTIONMARK);
     }
 
+    //---------------------------------------------------------------
+
     // [start] encode/decode
 
     /**
@@ -461,6 +463,8 @@ public final class URIUtil{
         return encodeOrDecode(value, charsetType, false);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Encode or decode.
      *
@@ -470,16 +474,24 @@ public final class URIUtil{
      *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      * @param encodeOrDecode
      *            true 为encode,false为 decode
-     * @return the string
+     * @return 如果 <code>value</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>charsetType</code> 是null或者empty,返回 <code>value</code><br>
      * @since 1.6.2
      */
     private static String encodeOrDecode(String value,String charsetType,boolean encodeOrDecode){
         if (isNullOrEmpty(value)){
             return EMPTY;
         }
+
+        //---------------------------------------------------------------
+
+        if (isNullOrEmpty(charsetType)){
+            return value;
+        }
+
+        //---------------------------------------------------------------
         try{
-            return isNullOrEmpty(charsetType) ? value
-                            : (encodeOrDecode ? URLEncoder.encode(value, charsetType) : URLDecoder.decode(value, charsetType));
+            return encodeOrDecode ? URLEncoder.encode(value, charsetType) : URLDecoder.decode(value, charsetType);
         }catch (UnsupportedEncodingException e){
             throw new URIParseException(e);
         }

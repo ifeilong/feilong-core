@@ -1298,6 +1298,7 @@ public final class MapUtil{
         //如果excludeKeys是null,那么抽取所有的key
         @SuppressWarnings("unchecked") // NOPMD - false positive for generics
         K[] useIncludeKeys = isNullOrEmpty(includeKeys) ? (K[]) map.keySet().toArray() : includeKeys;
+        Validate.notEmpty(useIncludeKeys, "useIncludeKeys can't be null/empty!");
 
         //---------------------------------------------------------------
 

@@ -515,8 +515,11 @@ public final class NumberUtil{
         Validate.notNull(one, "one can't be null!");
         Validate.notNull(two, "two can't be null!");
 
-        return one == two ? 0 : //
-                        (one.equals(two) ? 0 : toBigDecimal(one).compareTo(toBigDecimal(two)));
+        //---------------------------------------------------------------
+        if (one == two){
+            return 0;
+        }
+        return one.equals(two) ? 0 : toBigDecimal(one).compareTo(toBigDecimal(two));
     }
 
     //---------------------------------------------------------------

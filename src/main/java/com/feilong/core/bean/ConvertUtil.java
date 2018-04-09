@@ -2303,8 +2303,10 @@ public final class ConvertUtil{
      * @since 1.6.1
      */
     public static <T> List<T> toList(final Collection<T> collection){
-        return null == collection ? Collections.<T> emptyList()
-                        : (collection instanceof List ? (List<T>) collection : new ArrayList<T>(collection));
+        if (null == collection){
+            return Collections.<T> emptyList();
+        }
+        return collection instanceof List ? (List<T>) collection : new ArrayList<T>(collection);
     }
 
     /**
