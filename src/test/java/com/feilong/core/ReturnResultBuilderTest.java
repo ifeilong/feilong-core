@@ -15,28 +15,27 @@
  */
 package com.feilong.core;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.Test;
 
 /**
- * The Class FeiLongCoreTests.
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.8.3
+ * @since 1.11.0
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-                AlphabetTest.class,
-                CharsetTypeTest.class,
+public class ReturnResultBuilderTest{
 
-                ReturnResultBuilderTest.class,
+    @Test(expected = NullPointerException.class)
+    public void testReturnResultBuilderTestNull(){
+        ReturnResultBuilder.buildFailureResult(null);
+    }
 
-                TimeIntervalTest.class,
+    @Test(expected = IllegalArgumentException.class)
+    public void testReturnResultBuilderTestEmpty(){
+        ReturnResultBuilder.buildFailureResult("");
+    }
 
-                ValidatorTest.class,
-                ValidatorIsNullOrEmptyParameterizedTest.class,
-                ValidatorIsNotNullOrEmptyParameterizedTest.class, })
-public class FeiLongCoreTests{
-
+    @Test(expected = IllegalArgumentException.class)
+    public void testReturnResultBuilderTestBlank(){
+        ReturnResultBuilder.buildFailureResult(" ");
+    }
 }
