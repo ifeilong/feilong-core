@@ -615,7 +615,8 @@ public final class CollectionsUtil{
      * </p>
      * 
      * <pre class="code">
-     * List{@code <String>} list = toList("xinge", null, "feilong2", "feilong2");
+     * List{@code <String>} list = toList("xinge", <span style="color:red">null</span>, "feilong2", <span style=
+    "color:red">null</span>, "feilong2");
      * List{@code <String>} removeList = CollectionsUtil.removeAllNull(list);
      * </pre>
      * 

@@ -29,11 +29,11 @@ public class RemoveAllNullTest{
 
     @Test
     public void testRemoveAllCollection(){
-        List<String> list = toList("xinge", null, "feilong2", "feilong2");
+        List<String> list = toList("xinge", null, "feilong2", null, "feilong2");
         List<String> removeList = CollectionsUtil.removeAllNull(list);
 
         assertThat(removeList, contains("xinge", "feilong2", "feilong2"));
-        assertThat(list, contains("xinge", null, "feilong2", "feilong2"));
+        assertThat(list, contains("xinge", null, "feilong2", null, "feilong2"));
     }
 
     //---------------------------------------------------------------
