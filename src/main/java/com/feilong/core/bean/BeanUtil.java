@@ -193,6 +193,11 @@ public final class BeanUtil{
     /**
      * 将 <code class="code">fromObj</code> 中的全部或者一组属性 <code>includePropertyNames</code> 的值,复制到 <code>toObj</code> 对象中.
      * 
+     * <p>
+     * 如果需要copy的两个对象属性的<b>类型一样</b>,那么调用此方法会有<span style="color:red">性能消耗</span>,<span style="color:red"><b>强烈建议使用</b></span>
+     * {@link PropertyUtil#copyProperties(Object, Object, String...)}
+     * </p>
+     * 
      * <h3>注意:</h3>
      * 
      * <blockquote>
@@ -201,8 +206,6 @@ public final class BeanUtil{
      * <li>此方法调用了 {@link BeanUtils#copyProperties(Object, Object)},会自动进行{@code Object--->String--->Object}类型转换</li>
      * <li>如果指定了<code>includePropertyNames</code>,会调用 {@link #getProperty(Object, String)},在自动进行{@code Object--->String}
      * 类型转换过程中,如果发现值是数组,只会取第一个元素重新构造数组转到 <code>toObj</code>中,规则参见 {@link ConvertUtil#toString(Object)}</li>
-     * <li>如果需要copy的两个对象属性之间的<b>类型一样</b>的话,那么调用这个方法会有<span style="color:red">性能消耗</span>,此时<b>强烈建议调用</b>
-     * {@link PropertyUtil#copyProperties(Object, Object, String...)}</li>
      * <li>不支持<code>toObj</code>是map类型,从{@link BeanUtilsBean#copyProperties(Object, Object)}源码可以看出, <code class="code">fromObj</code>可以是map
      * </li>
      * </ol>

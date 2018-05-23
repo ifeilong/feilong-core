@@ -169,12 +169,16 @@ public final class FieldUtil{
         if (isNullOrEmpty(fieldList)){
             return emptyMap();
         }
+
+        //---------------------------------------------------------------
         Map<String, Object> map = new TreeMap<>();
         for (Field field : fieldList){
             map.put(field.getName(), getFieldValue(obj, field.getName()));
         }
         return map;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 <code>klass</code> 排除某些 <code>excludeFieldNames</code> 之后的字段list.
@@ -200,6 +204,8 @@ public final class FieldUtil{
      */
     public static List<Field> getAllFieldList(final Class<?> klass,String...excludeFieldNames){
         Validate.notNull(klass, "klass can't be null!");
+        //---------------------------------------------------------------
+
         //获得给定类的所有声明字段 {@link Field},包括所有的parents,包括 public/protect/private/inherited...
         List<Field> fieldList = FieldUtils.getAllFieldsList(klass);
         if (isNullOrEmpty(fieldList)){
