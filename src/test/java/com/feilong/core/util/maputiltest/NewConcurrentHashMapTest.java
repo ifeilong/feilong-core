@@ -24,37 +24,28 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
-public class NewLinkedHashMapTest{
+public class NewConcurrentHashMapTest{
 
-    /**
-     * Test new linked hash map.
-     */
     @Test
-    public void testNewLinkedHashMap(){
-        Map<Object, Object> map = MapUtil.newLinkedHashMap(100);
-        assertThat(map.size(), is(0));
+    public void testNewConcurrentHashMapSize(){
+        Map<Object, Object> newHashMap = MapUtil.newConcurrentHashMap(100);
+        assertThat(newHashMap.size(), is(0));
     }
 
-    /**
-     * Test new linked hash map 2.
-     */
     @Test
-    public void testNewLinkedHashMap2(){
-        Map<String, String> map = MapUtil.newLinkedHashMap(3);
-        map.put("name", "feilong");
-        map.put("age", "18");
-        map.put("address", "shanghai");
+    public void testNewConcurrentHashMapSize1(){
+        Map<String, String> newHashMap = MapUtil.newConcurrentHashMap(3);
+        newHashMap.put("name", "feilong");
+        newHashMap.put("age", "18");
+        newHashMap.put("address", "shanghai");
 
-        assertThat(map.size(), is(3));
+        assertThat(newHashMap.size(), is(3));
     }
 
     //---------------------------------------------------------------
 
-    /**
-     * Test new linked hash map 1.
-     */
     @Test(expected = IllegalArgumentException.class)
-    public void testNewLinkedHashMap1(){
-        MapUtil.newLinkedHashMap(-1);
+    public void testNewConcurrentHashMap1(){
+        MapUtil.newConcurrentHashMap(-1);
     }
 }

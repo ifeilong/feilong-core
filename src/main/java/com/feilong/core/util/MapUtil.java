@@ -1331,6 +1331,105 @@ public final class MapUtil{
     }
 
     /**
+     * 创建 {@code ConcurrentHashMap}实例,拥有足够的 "initial capacity" 应该控制{@code expectedSize} elements without growth.
+     * 
+     * <p>
+     * This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.7. <br>
+     * It also can't be guaranteed that the method isn't inadvertently <i>oversizing</i> the returned map.
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = MapUtil.newConcurrentHashMap(3);
+     * map.put("name", "feilong");
+     * map.put("age", "18");
+     * map.put("address", "shanghai");
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>使用该方法的好处:</h3>
+     * 
+     * <blockquote>
+     * <ol>
+     * <li><b>简化代码书写方式</b>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 以前你可能需要这么写代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>ConcurrentHashMap</b>{@code <String, Map<Long, List<String>>>}(16);
+     * </pre>
+     * 
+     * <p>
+     * 如果你是使用JDK1.7或者以上,你可以使用钻石符:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>ConcurrentHashMap</b>{@code <>}(16);
+     * </pre>
+     * 
+     * <p>
+     * 不过只要你是使用1.5+,你都可以写成:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newConcurrentHashMap</b>(16);<span style=
+     *     "color:green">// 如果搭配static import 使用会更加简洁</span>
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * </li>
+     * <li><b>减少扩容次数</b>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如果你要一次性初始一个能存放100个元素的map,并且不需要扩容,提高性能的话,你需要
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = new <b>ConcurrentHashMap</b>{@code <String, Map<Long, List<String>>>}(100/0.75+1);
+     * </pre>
+     * 
+     * <p>
+     * 使用这个方法,你可以直接写成:
+     * </p>
+     * 
+     * <pre class="code">
+     * Map{@code <String, Map<Long, List<String>>>} map = MapUtil.<b>newConcurrentHashMap</b>(100);<span style=
+     *     "color:green">// 如果搭配static import 使用会更加简洁</span>
+     * </pre>
+     * 
+     * </blockquote>
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param expectedSize
+     *            the number of entries you expect to add to the returned map
+     * @return a new, empty {@code ConcurrentHashMap} with enough capacity to hold {@code expectedSize} entries without resizing
+     * @throws IllegalArgumentException
+     *             如果 expectedSize{@code  < }0
+     * @since 1.11.1
+     */
+    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(int expectedSize){
+        return new ConcurrentHashMap<>(toInitialCapacity(expectedSize));
+    }
+
+    /**
      * New tree map.
      *
      * @param <K>
@@ -1340,6 +1439,7 @@ public final class MapUtil{
      * @return a new, empty {@code ConcurrentHashMap}
      * @since 1.10.7
      */
+    @SuppressWarnings("rawtypes")
     public static <K extends Comparable, V> TreeMap<K, V> newTreeMap(){
         return new TreeMap<>();
     }
@@ -1505,7 +1605,7 @@ public final class MapUtil{
      *            the number of entries you expect to add to the returned map
      * @return a new, empty {@code HashMap} with enough capacity to hold {@code expectedSize} entries without resizing
      * @throws IllegalArgumentException
-     *             如果 size{@code  < }0
+     *             如果 expectedSize{@code  < }0
      * @see "com.google.common.collect.Maps#newHashMapWithExpectedSize(int)"
      * @see java.util.HashMap#HashMap(int)
      * @since 1.7.1

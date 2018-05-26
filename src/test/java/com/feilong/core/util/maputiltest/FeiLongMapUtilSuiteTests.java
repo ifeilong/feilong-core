@@ -39,6 +39,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 NewHashMapTest.class,
                 NewLinkedHashMapTest.class,
+                NewConcurrentHashMapTest.class,
 
                 InvertMapTest.class,
 

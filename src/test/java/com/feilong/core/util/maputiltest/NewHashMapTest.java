@@ -24,13 +24,7 @@ import org.junit.Test;
 
 import com.feilong.core.util.MapUtil;
 
-/**
- * The Class MapUtilNewHashMapTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class NewHashMapTest{
-    //******************com.feilong.core.util.MapUtil.newHashMap(int)*****************************************
 
     /**
      * TestMapUtilTest.
@@ -53,6 +47,8 @@ public class NewHashMapTest{
 
         assertThat(newHashMap.size(), is(3));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test new hash map 1.
