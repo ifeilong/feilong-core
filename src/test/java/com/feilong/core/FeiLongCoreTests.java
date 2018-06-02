@@ -30,8 +30,6 @@ import org.junit.runners.Suite.SuiteClasses;
                 AlphabetTest.class,
                 CharsetTypeTest.class,
 
-                ReturnResultBuilderTest.class,
-
                 TimeIntervalTest.class,
 
                 ValidatorTest.class,
