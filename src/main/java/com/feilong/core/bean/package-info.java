@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * 对 <code>commons-beanutils</code> jar 常用类的封装.
- */
+
+/** 对 <code>commons-beanutils</code> jar 常用类的封装. */
 package com.feilong.core.bean;
