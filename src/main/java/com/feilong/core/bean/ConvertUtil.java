@@ -232,7 +232,7 @@ public final class ConvertUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    //---------------------------------------------------------------
+    //---------------------toBoolean------------------------------------------
 
     /**
      * 将 <code>toBeConvertedValue</code> 转换成 {@link Boolean}类型.
@@ -290,6 +290,8 @@ public final class ConvertUtil{
     public static Boolean toBoolean(Object toBeConvertedValue){
         return new BooleanConverter(null).convert(Boolean.class, toBeConvertedValue);
     }
+
+    //----------------------toInteger-----------------------------------------
 
     /**
      * 将 <code>toBeConvertedValue</code> 转换成 {@link Integer}类型.
@@ -480,6 +482,8 @@ public final class ConvertUtil{
         return new IntegerConverter(defaultValue).convert(Integer.class, toBeConvertedValue);
     }
 
+    //------------------------toLong---------------------------------------
+
     /**
      * 将 <code>toBeConvertedValue</code> 转换成 {@link Long}类型.
      * 
@@ -526,6 +530,8 @@ public final class ConvertUtil{
     public static Long toLong(Object toBeConvertedValue){
         return new LongConverter(null).convert(Long.class, toBeConvertedValue);
     }
+
+    //------------------------toBigDecimal---------------------------------------
 
     /**
      * 将 <code>toBeConvertedValue</code> 转换成 {@link java.math.BigDecimal}.
@@ -1292,6 +1298,7 @@ public final class ConvertUtil{
             if (isNullOrEmpty(obj) && !isJoinNullOrEmpty){
                 continue;
             }
+            //---------------------------------------------------------------
 
             //value转换,注意:如果 value是null,StringBuilder将拼接 "null" 字符串,详见  java.lang.AbstractStringBuilder#append(String)
             sb.append(defaultIfNull(obj, EMPTY)); //see StringUtils.defaultString(t)
@@ -1945,6 +1952,8 @@ public final class ConvertUtil{
         if (isNullOrEmpty(inputMap)){
             return emptyMap();
         }
+
+        //---------------------------------------------------------------
 
         Map<I, J> returnMap = new LinkedHashMap<>(inputMap.size());
 

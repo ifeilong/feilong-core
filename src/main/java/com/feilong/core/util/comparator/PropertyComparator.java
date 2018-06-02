@@ -476,6 +476,8 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         return compareWithSameValue(t1, t2);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 处理值相等的情况.
      * 
