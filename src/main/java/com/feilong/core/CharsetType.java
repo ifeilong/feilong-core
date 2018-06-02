@@ -153,7 +153,7 @@ public final class CharsetType{
     //---------------------------------------------------------------
 
     /**
-     * <code>ISO-8859-1</code>,ISO/IEC 8859-1,又称Latin-1或"西欧语言",是国际标准化组织内ISO/IEC 8859的第一个8位字符集 <code>{@value}</code>.
+     * <code>ISO-8859-1</code>,ISO/IEC 8859-1,又称Latin-1或"西欧语言",是国际标准化组织内ISO/IEC 8859的第一个8位字符集.
      * 
      * <p>
      * ISO Latin Alphabet #1, also known as ISO-LATIN-1.<br>
