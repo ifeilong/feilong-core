@@ -30,50 +30,40 @@ import org.junit.Test;
  */
 public class ConvertClassTest{
 
-    //    /**
-    //     * To t test.
-    //     */
     //    @Test
     //    public void testConvert(){
     //        String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray("6", "_");
-    //
     //        LinkedList<Serializable> linkedList = new LinkedList<Serializable>();
-    //
     //        for (String string : tokenizeToStringArray){
     //            Serializable t = ConvertUtil.convert(string, Serializable.class);
     //            LOGGER.debug(t.getClass().getCanonicalName());
     //            linkedList.add(t);
     //        }
-    //
     //        Serializable l = 6L;
-    //
     //        LOGGER.debug("linkedList:{},contains:{},{}", linkedList, l, linkedList.contains(l));
     //    }
 
-    /**
-     * Test convert2.
-     */
     @Test
     public void testConvert2(){
         assertEquals(1, convert("1", Integer.class).intValue());
         assertEquals(1, convert("1", Long.class).intValue());
-        assertEquals(0, convert("", Integer.class).intValue());
     }
 
-    /**
-     * Test to URL.
-     */
+    @Test
+    public void testConvert3(){
+        assertEquals(null, convert("", Integer.class));
+    }
+
+    //---------------------------------------------------------------
+
     @Test(expected = ConversionException.class)
     public void testToURL(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
-        URL url = convert(spec, URL.class); //异常
+        convert(spec, URL.class); //异常
 
         //MalformedURLException ConversionException
     }
 
-    /**
-     * Test convert target type.
-     */
     @Test(expected = NullPointerException.class)
     public void testConvertTargetType(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";

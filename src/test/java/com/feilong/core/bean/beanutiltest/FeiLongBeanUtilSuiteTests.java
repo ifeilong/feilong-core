@@ -32,6 +32,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 NewDynaBeanTest.class,
                 PopulateAliasBeanTest.class,
                 PopulateTest.class,
+                PopulateBigDecimalTest.class,
         //
 })
 public class FeiLongBeanUtilSuiteTests{

@@ -188,6 +188,13 @@ public final class BeanUtil{
 
     //---------------------------------------------------------------
 
+    static{
+        //初始化注册器.
+        ConvertUtil.registerStandardDefaultNull();
+    }
+
+    //---------------------------------------------------------------
+
     // [start] copyProperties
 
     /**

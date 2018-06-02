@@ -23,6 +23,7 @@ import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,10 +44,17 @@ import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.AbstractConverter;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.BigDecimalConverter;
+import org.apache.commons.beanutils.converters.BigIntegerConverter;
 import org.apache.commons.beanutils.converters.BooleanConverter;
+import org.apache.commons.beanutils.converters.ByteConverter;
+import org.apache.commons.beanutils.converters.CharacterConverter;
+import org.apache.commons.beanutils.converters.DoubleConverter;
+import org.apache.commons.beanutils.converters.FloatConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.beanutils.converters.LongConverter;
 import org.apache.commons.beanutils.converters.NumberConverter;
+import org.apache.commons.beanutils.converters.ShortConverter;
+import org.apache.commons.beanutils.converters.StringConverter;
 import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -230,6 +238,39 @@ public final class ConvertUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
+    static{
+        //初始化注册器.
+        ConvertUtil.registerStandardDefaultNull();
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Register standard default null.
+     * 
+     * @see ConvertUtilsBean#registerPrimitives(boolean) registerPrimitives(boolean throwException)
+     * @see ConvertUtilsBean#registerStandard(boolean,boolean) registerStandard(boolean throwException, boolean defaultNull)
+     * @see ConvertUtilsBean#registerOther(boolean) registerOther(boolean throwException)
+     * @see ConvertUtilsBean#registerArrays(boolean,int) registerArrays(boolean throwException, int defaultArraySize)
+     * @see ConvertUtilsBean#deregister(Class) ConvertUtilsBean.deregister(Class)
+     * @since 1.11.2
+     */
+    public static void registerStandardDefaultNull(){
+        ConvertUtils.register(new BigDecimalConverter(null), BigDecimal.class);
+        ConvertUtils.register(new BigIntegerConverter(null), BigInteger.class);
+        ConvertUtils.register(new BooleanConverter(null), Boolean.class);
+        ConvertUtils.register(new ByteConverter(null), Byte.class);
+        ConvertUtils.register(new CharacterConverter(null), Character.class);
+        ConvertUtils.register(new DoubleConverter(null), Double.class);
+        ConvertUtils.register(new FloatConverter(null), Float.class);
+        ConvertUtils.register(new IntegerConverter(null), Integer.class);
+        ConvertUtils.register(new LongConverter(null), Long.class);
+        ConvertUtils.register(new ShortConverter(null), Short.class);
+        ConvertUtils.register(new StringConverter(null), String.class);
     }
 
     //---------------------toBoolean------------------------------------------
