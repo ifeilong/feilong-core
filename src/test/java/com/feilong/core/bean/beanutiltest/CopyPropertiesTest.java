@@ -27,14 +27,12 @@ import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Locale;
 
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.junit.Test;
 
 import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.BeanUtil;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.store.member.Person;
 import com.feilong.store.member.User;
 
@@ -56,9 +54,6 @@ public class CopyPropertiesTest{
         assertEquals(null, newUser.getId());
     }
 
-    /**
-     * Test copy properties all.
-     */
     @Test
     public void testCopyPropertiesAll(){
         BigDecimal money = new BigDecimal(500000);
@@ -71,8 +66,7 @@ public class CopyPropertiesTest{
         user.setDate(date);
         user.setNickNames(nickNames);
 
-        DateLocaleConverter dateLocaleConverter = new DateLocaleConverter(Locale.US, TO_STRING_STYLE);
-        ConvertUtils.register(dateLocaleConverter, Date.class);
+        ConvertUtil.registerSimpleDateLocaleConverter(TO_STRING_STYLE);
 
         User user2 = new User();
         BeanUtil.copyProperties(user2, user);

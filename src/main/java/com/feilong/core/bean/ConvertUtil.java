@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -55,6 +56,7 @@ import org.apache.commons.beanutils.converters.LongConverter;
 import org.apache.commons.beanutils.converters.NumberConverter;
 import org.apache.commons.beanutils.converters.ShortConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
+import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.collections4.EnumerationUtils;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -271,6 +273,20 @@ public final class ConvertUtil{
         ConvertUtils.register(new LongConverter(null), Long.class);
         ConvertUtils.register(new ShortConverter(null), Short.class);
         ConvertUtils.register(new StringConverter(null), String.class);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Register simple date locale converter.
+     *
+     * @param pattern
+     *            the pattern
+     * @since 1.11.2
+     */
+    public static void registerSimpleDateLocaleConverter(String pattern){
+        DateLocaleConverter dateLocaleConverter = new DateLocaleConverter(null, Locale.getDefault(), pattern);
+        ConvertUtils.register(dateLocaleConverter, Date.class);
     }
 
     //---------------------toBoolean------------------------------------------
