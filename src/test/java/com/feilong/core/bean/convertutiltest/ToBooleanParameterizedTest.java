@@ -15,15 +15,14 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toBoolean;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
-
-import static com.feilong.core.bean.ConvertUtil.toBoolean;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ConvertUtilToBooleanParameterizedTest.
@@ -32,19 +31,6 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  */
 public class ToBooleanParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Boolean>{
 
-    /**
-     * Test to boolean.
-     */
-    @Test
-    public void testToBoolean(){
-        assertEquals(expectedValue, toBoolean(input1));
-    }
-
-    /**
-     * Data.
-     *
-     * @return the iterable
-     */
     @Parameters(name = "index:{index}: ConvertUtil.toBoolean({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
@@ -64,14 +50,19 @@ public class ToBooleanParameterizedTest extends AbstractOneParamAndOneResultPara
                                               { "n", false },
                                               { "off", false },
                                               { "0", false },
-                                              { "9", false },
+                                              { "9", null },
 
                                               { new String[] { "0", "1", "2", "3" }, false },
                                               { new String[] { "1", null, "2", "3" }, true },
-                                              { "1,2,3", false },
+                                              { "1,2,3", null },//false
                 //
         };
         return toList(objects);
+    }
+
+    @Test
+    public void testToBoolean(){
+        assertEquals(expectedValue, toBoolean(input1));
     }
 
 }

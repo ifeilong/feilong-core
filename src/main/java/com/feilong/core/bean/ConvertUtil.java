@@ -247,8 +247,8 @@ public final class ConvertUtil{
      * 
      * ConvertUtil.toBoolean(1L)        =   true
      * ConvertUtil.toBoolean("1")       =   true
-     * ConvertUtil.toBoolean("9")       =   false
-     * ConvertUtil.toBoolean("1,2,3")   =   false
+     * ConvertUtil.toBoolean("9")       =   null
+     * ConvertUtil.toBoolean("1,2,3")   =   null
      * </pre>
      * 
      * </blockquote>
@@ -262,8 +262,7 @@ public final class ConvertUtil{
      * <li>如果 "false", "no", "n", "off", "0", 返回 false</li>
      * <li>其他抛出 conversionException, 但是在
      * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
-     * Throwable)} 方法里面返回默认值, {@link BooleanConverter} 的默认值,参见
-     * {@link org.apache.commons.beanutils.ConvertUtilsBean#registerStandard(boolean, boolean) registerStandard(boolean, boolean)}</li>
+     * Throwable)} 方法里面返回默认值 是 null
      * </ul>
      * 
      * <p>
@@ -289,7 +288,7 @@ public final class ConvertUtil{
      * @see java.lang.Boolean#parseBoolean(String)
      */
     public static Boolean toBoolean(Object toBeConvertedValue){
-        return convert(toBeConvertedValue, Boolean.class);
+        return new BooleanConverter(null).convert(Boolean.class, toBeConvertedValue);
     }
 
     /**
