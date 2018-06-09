@@ -43,6 +43,7 @@ public class CloneBeanTest{
      * Test clone bean.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testCloneBean(){
         OrderLine orderLine = new OrderLine();
         orderLine.setCount(8);
@@ -56,6 +57,7 @@ public class CloneBeanTest{
      * Test clone bean list.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testCloneBeanList(){
         OrderLine orderLine = new OrderLine();
         orderLine.setCount(8);
@@ -73,6 +75,7 @@ public class CloneBeanTest{
      * Test clone bean null bean.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testCloneBeanNullBean(){
         BeanUtil.cloneBean(null);
     }

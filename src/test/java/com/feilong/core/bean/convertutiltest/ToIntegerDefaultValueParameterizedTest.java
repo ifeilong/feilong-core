@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toInteger;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -24,16 +26,12 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toInteger;
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 /**
  * The Class ConvertUtilToIntegerDefaultValueParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToIntegerDefaultValueParameterizedTest
-                extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Integer, Integer>{
+public class ToIntegerDefaultValueParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Integer, Integer>{
 
     /**
      * Data.

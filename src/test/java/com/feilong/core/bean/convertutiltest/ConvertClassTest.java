@@ -43,20 +43,32 @@ public class ConvertClassTest{
     //        LOGGER.debug("linkedList:{},contains:{},{}", linkedList, l, linkedList.contains(l));
     //    }
 
+    /**
+     * Test convert 2.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void testConvert2(){
         assertEquals(1, convert("1", Integer.class).intValue());
         assertEquals(1, convert("1", Long.class).intValue());
     }
 
+    /**
+     * Test convert 3.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void testConvert3(){
         assertEquals(null, convert("", Integer.class));
     }
 
     //---------------------------------------------------------------
 
+    /**
+     * Test to URL.
+     */
     @Test(expected = ConversionException.class)
+    @SuppressWarnings("static-method")
     public void testToURL(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
         convert(spec, URL.class); //异常
@@ -64,7 +76,11 @@ public class ConvertClassTest{
         //MalformedURLException ConversionException
     }
 
+    /**
+     * Test convert target type.
+     */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testConvertTargetType(){
         String spec = "C:\\Users\\feilong\\feilong\\train\\新员工\\warmReminder\\20160704141057.html";
         convert(spec, null);

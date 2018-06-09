@@ -15,14 +15,13 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.store.member.User;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class ConvertUtilToArrayVarargsTest.
@@ -35,6 +34,7 @@ public class ToArrayVarargsTest{
      * To array2.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToArray(){
         User user1 = new User();
         user1.setId(1L);
@@ -49,6 +49,7 @@ public class ToArrayVarargsTest{
      * Test to array1.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToArray1(){
         assertArrayEquals(new String[] { "xinge", "feilong" }, toArray("xinge", "feilong"));
     }
@@ -57,6 +58,7 @@ public class ToArrayVarargsTest{
      * Test to array null.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToArrayNull(){
         Object[] array = ConvertUtil.toArray(null);
         assertArrayEquals(null, array);
@@ -66,6 +68,7 @@ public class ToArrayVarargsTest{
      * Test to array4.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToArray4(){
         assertArrayEquals(new String[] {}, ConvertUtil.<String> toArray());
         assertArrayEquals(new Integer[] {}, ConvertUtil.<Integer> toArray());
@@ -75,6 +78,7 @@ public class ToArrayVarargsTest{
      * Test to array null 1.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToArrayNull1(){
         String[] array = ConvertUtil.toArray((String) null);
         assertArrayEquals(new String[] { null }, array);

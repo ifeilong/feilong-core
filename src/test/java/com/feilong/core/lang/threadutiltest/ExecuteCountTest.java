@@ -20,13 +20,18 @@ import org.junit.Test;
 import com.feilong.core.lang.ThreadUtil;
 
 /**
- * 
+ * The Class ExecuteCountTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
  */
 public class ExecuteCountTest{
 
+    /**
+     * Test execute.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void testExecute(){
         ThreadUtil.execute(new Runnable(){
 
@@ -38,14 +43,22 @@ public class ExecuteCountTest{
     }
     //---------------------------------------------------------
 
+    /**
+     * Test execute null list.
+     */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testExecuteNullList(){
         ThreadUtil.execute(null, 100);
     }
 
     //---------------------------------------------------------
 
+    /**
+     * Test execute invalid thread count.
+     */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testExecuteInvalidThreadCount(){
         ThreadUtil.execute(new Runnable(){
 
@@ -56,7 +69,11 @@ public class ExecuteCountTest{
         }, 0);
     }
 
+    /**
+     * Test execute invalid thread count 1.
+     */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testExecuteInvalidThreadCount1(){
         ThreadUtil.execute(new Runnable(){
 

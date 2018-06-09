@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean.beanutiltest;
 
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.arrayContaining;
 import static org.hamcrest.Matchers.hasProperty;
@@ -31,8 +32,6 @@ import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.entity.VarBean;
 import com.feilong.core.util.ResourceBundleUtil;
 
-import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
-
 /**
  * The Class BeanUtilPopulateAliasBeanTest.
  *
@@ -44,25 +43,29 @@ public class PopulateAliasBeanTest{
      * Test populate alias bean.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateAliasBean(){
         Map<String, String> readPropertiesToMap = ResourceBundleUtil.toMap(getResourceBundle("messages.feilong-core-test"));
 
         VarBean varBean = new VarBean();
         VarBean populateAliasBean = BeanUtil.populateAliasBean(varBean, readPropertiesToMap);
 
-        assertThat(populateAliasBean, allOf(//
-                        hasProperty("arguments", is("my name is {0},age is {1}")),
-                        hasProperty("audio", is("Audio")),
-                        hasProperty("longs", arrayContaining(5L, 8L, 7L, 6L)),
-                        hasProperty("b", is(true))
-        //
-        ));
+        assertThat(
+                        populateAliasBean,
+                        allOf(//
+                                        hasProperty("arguments", is("my name is {0},age is {1}")),
+                                        hasProperty("audio", is("Audio")),
+                                        hasProperty("longs", arrayContaining(5L, 8L, 7L, 6L)),
+                                        hasProperty("b", is(true))
+                        //
+                        ));
     }
 
     /**
      * Test populate alias null bean.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testPopulateAliasNullBean(){
         Map<String, String> readPropertiesToMap = ResourceBundleUtil.toMap(getResourceBundle("messages.feilong-core-test"));
         BeanUtil.populateAliasBean(null, readPropertiesToMap);
@@ -72,6 +75,7 @@ public class PopulateAliasBeanTest{
      * Test populate alias null alias and value map.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateAliasNullAliasAndValueMap(){
         VarBean varBean = new VarBean();
         assertEquals(varBean, BeanUtil.populateAliasBean(varBean, null));
@@ -81,6 +85,7 @@ public class PopulateAliasBeanTest{
      * Test populate alias empty alias and value map.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateAliasEmptyAliasAndValueMap(){
         VarBean varBean = new VarBean();
         assertEquals(varBean, BeanUtil.populateAliasBean(varBean, new HashMap<String, String>()));

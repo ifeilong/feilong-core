@@ -15,13 +15,12 @@
  */
 package com.feilong.core.lang.arrayutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import com.feilong.core.lang.ArrayUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class ArrayUtilGetElementTest.
@@ -67,6 +66,7 @@ public class GetElementTest{
     /**
      * Test get element error index 1.
      */
+    @SuppressWarnings("static-method")
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testGetElementErrorIndex1(){
         ArrayUtil.getElement(toArray("jinxin", "feilong", "1"), 5);

@@ -15,9 +15,9 @@
  */
 package com.feilong.core.date.dateutiltest;
 
-import org.junit.Test;
-
 import static com.feilong.core.date.DateUtil.getMonth;
+
+import org.junit.Test;
 
 /**
  * The Class DateUtilGetMonthTest.
@@ -26,12 +26,11 @@ import static com.feilong.core.date.DateUtil.getMonth;
  */
 public class GetMonthTest{
 
-    //**********com.feilong.core.date.DateUtil.getMonth(Date)******************************
-
     /**
      * Test get month null date.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testGetMonthNullDate(){
         getMonth(null);
     }

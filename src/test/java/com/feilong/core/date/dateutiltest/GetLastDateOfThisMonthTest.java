@@ -15,15 +15,13 @@
  */
 package com.feilong.core.date.dateutiltest;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.date.DateUtil.getLastDateOfThisMonth;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import static com.feilong.core.date.DateUtil.getLastDateOfThisMonth;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
 
 /**
  * The Class DateUtilGetLastDateOfThisMonthTest.
@@ -36,6 +34,7 @@ public class GetLastDateOfThisMonthTest{
      * Test get last date of this month.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testGetLastDateOfThisMonth(){
         assertEquals(
                         toDate("2016-08-31 23:59:59.999", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
@@ -53,6 +52,7 @@ public class GetLastDateOfThisMonthTest{
      * Test get last date of this month null.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testGetLastDateOfThisMonthNull(){
         getLastDateOfThisMonth(null);
     }

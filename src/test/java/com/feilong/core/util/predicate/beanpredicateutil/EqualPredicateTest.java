@@ -40,6 +40,7 @@ public class EqualPredicateTest{
      * Test find2.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//
@@ -58,6 +59,7 @@ public class EqualPredicateTest{
      * Test equal predicate.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testEqualPredicate(){
         User user = new User(2L);
         Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("id", 2L);
@@ -68,6 +70,7 @@ public class EqualPredicateTest{
      * Test equal predicate 1.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testEqualPredicate1(){
         User user = new User(2L);
         Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("id", (String) null);
@@ -80,6 +83,7 @@ public class EqualPredicateTest{
      * Test equal predicate null property name.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testEqualPredicateNullPropertyName(){
         BeanPredicateUtil.equalPredicate((String) null, (String) null);
     }
@@ -88,6 +92,7 @@ public class EqualPredicateTest{
      * Test equal predicate empty property name.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testEqualPredicateEmptyPropertyName(){
         BeanPredicateUtil.equalPredicate("", (String) null);
     }
@@ -96,6 +101,7 @@ public class EqualPredicateTest{
      * Test equal predicate blank property name.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testEqualPredicateBlankPropertyName(){
         BeanPredicateUtil.equalPredicate("", (String) null);
     }

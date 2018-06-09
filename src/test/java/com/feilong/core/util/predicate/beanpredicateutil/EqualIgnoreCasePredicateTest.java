@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.predicate.beanpredicateutil;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -27,8 +28,6 @@ import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 /**
  * The Class BeanPredicateUtilEqualIgnoreCasePredicateTest.
  *
@@ -40,6 +39,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test ignore case find 2.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testIgnoreCaseFind2(){
         User guanyu30 = new User("guanYu", 30);
         List<User> list = toList(//
@@ -59,6 +59,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testEqualIgnoreCasePredicate(){
         User user = new User("guanYu", 30);
         Predicate<User> equalPredicate = BeanPredicateUtil.equalIgnoreCasePredicate("name", "GUANYU");
@@ -69,6 +70,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate 1.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testEqualIgnoreCasePredicate1(){
         User user = new User("guanYu", 30);
         Predicate<User> equalPredicate = BeanPredicateUtil.equalIgnoreCasePredicate("name", null);
@@ -81,6 +83,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate null property name.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testEqualIgnoreCasePredicateNullPropertyName(){
         BeanPredicateUtil.equalIgnoreCasePredicate(null, null);
     }
@@ -89,6 +92,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate empty property name.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testEqualIgnoreCasePredicateEmptyPropertyName(){
         BeanPredicateUtil.equalIgnoreCasePredicate("", null);
     }
@@ -97,6 +101,7 @@ public class EqualIgnoreCasePredicateTest{
      * Test equal ignore case predicate blank property name.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testEqualIgnoreCasePredicateBlankPropertyName(){
         BeanPredicateUtil.equalIgnoreCasePredicate("", null);
     }

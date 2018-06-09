@@ -29,8 +29,8 @@ public class GetYearTest{
     /**
      * Test get year 1.
      */
-    //**********com.feilong.core.date.DateUtil.getYear(Date)*********************
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testGetYear1(){
         DateUtil.getYear(null);
     }

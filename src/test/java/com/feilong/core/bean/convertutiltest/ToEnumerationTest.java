@@ -40,6 +40,7 @@ public class ToEnumerationTest{
      * Test to enumeration.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToEnumerationNullCollection(){
         assertEquals(Collections.emptyEnumeration(), ConvertUtil.toEnumeration(null));
     }
@@ -48,6 +49,7 @@ public class ToEnumerationTest{
      * Test to enumeration.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToEnumeration(){
         // Enumeration
         Map<Object, Object> map = newLinkedHashMap();

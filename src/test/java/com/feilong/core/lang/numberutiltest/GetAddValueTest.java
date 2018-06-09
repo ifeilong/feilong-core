@@ -72,6 +72,7 @@ public class GetAddValueTest{
      * Test get add value 4.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testGetAddValue4(){
         NumberUtil.getAddValue(new BigDecimal(6), null);
     }

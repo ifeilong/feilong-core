@@ -29,9 +29,16 @@ import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.lang.NumberUtil;
 import com.feilong.store.member.User;
 
+/**
+ * The Class PopulateBigDecimalTest.
+ */
 public class PopulateBigDecimalTest{
 
+    /**
+     * Test populate null.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateNull(){
         User user = new User();
 
@@ -43,7 +50,11 @@ public class PopulateBigDecimalTest{
 
     //---------------------------------------------------------------
 
+    /**
+     * Test populate empty.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateEmpty(){
         User user = new User();
 
@@ -55,7 +66,11 @@ public class PopulateBigDecimalTest{
 
     //---------------------------------------------------------------
 
+    /**
+     * Test populate.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulate(){
         User user = new User();
 

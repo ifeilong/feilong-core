@@ -41,6 +41,7 @@ public class PopulateTest{
      * Test populate.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulate(){
         User user = new User();
         user.setId(5L);
@@ -53,6 +54,7 @@ public class PopulateTest{
      * Test populate bean not exists property name.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateBeanNotExistsPropertyName(){
         User user = new User();
         user.setId(5L);
@@ -65,6 +67,7 @@ public class PopulateTest{
      * Test populate bean with space exists property name.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateBeanWithSpaceExistsPropertyName(){
         User user = new User();
         user.setId(5L);
@@ -77,6 +80,7 @@ public class PopulateTest{
      * Test populate bean with null exists property name.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateBeanWithNullExistsPropertyName(){
         User user = new User();
         user.setId(5L);
@@ -89,6 +93,7 @@ public class PopulateTest{
      * Test populate map.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testPopulateMap(){
         Map<String, Object> map = newHashMap();
         Map<String, Long> properties = toMap("id", 8L);
@@ -100,6 +105,7 @@ public class PopulateTest{
      * Test populate null bean.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testPopulateNullBean(){
         Map<String, Long> map = toMap("id", 8L);
         BeanUtil.populate(null, map);
@@ -109,6 +115,7 @@ public class PopulateTest{
      * Test populate null properties.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testPopulateNullProperties(){
         BeanUtil.populate(new User(), null);
     }

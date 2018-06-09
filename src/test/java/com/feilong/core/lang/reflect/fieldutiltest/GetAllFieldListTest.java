@@ -67,6 +67,7 @@ public class GetAllFieldListTest{
     /**
      * Test get all field list no filed.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void testGetAllFieldListNoFiled(){
         assertEquals(emptyList(), FieldUtil.getAllFieldList(GetAllFieldListTest.class));

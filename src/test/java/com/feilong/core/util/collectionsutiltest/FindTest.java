@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
@@ -28,8 +29,6 @@ import org.junit.Test;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
 /**
  * The Class CollectionsUtilFindTest.
  *
@@ -41,6 +40,7 @@ public class FindTest{
      * Test find.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testFind(){
         User zhangfei = new User("张飞", 23);
         User guanyu24 = new User("关羽", 24);

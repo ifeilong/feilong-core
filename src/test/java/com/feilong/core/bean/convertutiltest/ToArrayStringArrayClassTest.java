@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -23,8 +24,6 @@ import java.io.Serializable;
 import org.junit.Test;
 
 import com.feilong.core.bean.ConvertUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * The Class ConvertUtilToArrayClassTest.
@@ -37,6 +36,7 @@ public class ToArrayStringArrayClassTest{
      * To t test.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testConvert1(){
         assertEquals((Serializable) null, ConvertUtil.toArray((String[]) null, Serializable.class));
     }
@@ -45,6 +45,7 @@ public class ToArrayStringArrayClassTest{
      * Test convert3.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testConvert3(){
         String[] strings = toArray("");
         ConvertUtil.toArray(strings, null);
@@ -54,6 +55,7 @@ public class ToArrayStringArrayClassTest{
      * Test convert array.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testConvertArray(){
         String[] ss = { "2", "1" };
         assertArrayEquals(new Long[] { 2L, 1L }, toArray(ss, Long.class));

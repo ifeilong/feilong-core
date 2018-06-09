@@ -43,7 +43,11 @@ import com.feilong.store.member.User;
  */
 public class CopyPropertiesTest{
 
+    /**
+     * Test copy properties null value.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void testCopyPropertiesNullValue(){
         User oldUser = new User();
         oldUser.setId(null);
@@ -54,7 +58,11 @@ public class CopyPropertiesTest{
         assertEquals(null, newUser.getId());
     }
 
+    /**
+     * Test copy properties all.
+     */
     @Test
+    @SuppressWarnings("static-method")
     public void testCopyPropertiesAll(){
         BigDecimal money = new BigDecimal(500000);
         String[] nickNames = toArray("feilong", "飞天奔月", "venusdrogon");
@@ -89,6 +97,7 @@ public class CopyPropertiesTest{
      * Test copy properties with array.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testCopyPropertiesWithArray(){
         String[] nickNames = toArray("feilong", "飞天奔月", "venusdrogon");
 
@@ -110,6 +119,7 @@ public class CopyPropertiesTest{
      */
     //*******这个要放最上面, 否则maven来执行的时候  不会出现 异常****************************************************
     @Test(expected = BeanOperationException.class)
+    @SuppressWarnings("static-method")
     public void testCopyPropertiesNoDateLocaleConverter(){
         User user = new User();
         user.setDate(new Date());
@@ -122,6 +132,7 @@ public class CopyPropertiesTest{
      * Test copy property from bean not exist properties.
      */
     @Test(expected = BeanOperationException.class)
+    @SuppressWarnings("static-method")
     public void testCopyPropertyFromBeanNotExistProperties(){
         User user = new User();
         user.setId(5L);
@@ -134,6 +145,7 @@ public class CopyPropertiesTest{
      * Test copy property to bean not exist properties.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testCopyPropertyToBeanNotExistProperties(){
         User user = new User();
         user.setId(5L);
@@ -148,6 +160,7 @@ public class CopyPropertiesTest{
      * Test bean util null to bean.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testBeanUtilNullToBean(){
         BeanUtil.copyProperties(null, new Person());
     }
@@ -156,6 +169,7 @@ public class CopyPropertiesTest{
      * Test bean util null from bean.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testBeanUtilNullFromBean(){
         BeanUtil.copyProperties(new Person(), null);
     }

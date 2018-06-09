@@ -41,6 +41,7 @@ public class ExtractSubMapTest{
      * Test extract sub map 3.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testExtractSubMap3(){
         Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(100L));
@@ -56,6 +57,7 @@ public class ExtractSubMapTest{
      * Test extract sub map.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testExtractSubMapNullMap(){
         assertEquals(emptyMap(), MapUtil.extractSubMap(null, "id"));
     }
@@ -64,6 +66,7 @@ public class ExtractSubMapTest{
      * Test extract sub map empty map.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testExtractSubMapEmptyMap(){
         assertEquals(emptyMap(), MapUtil.extractSubMap(new HashMap<>(), "id"));
     }
@@ -72,6 +75,7 @@ public class ExtractSubMapTest{
      * Test extract sub map null extract property name.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testExtractSubMapNullExtractPropertyName(){
         Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
@@ -83,6 +87,7 @@ public class ExtractSubMapTest{
      * Test extract sub map empty extract property name.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testExtractSubMapEmptyExtractPropertyName(){
         Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));
@@ -94,6 +99,7 @@ public class ExtractSubMapTest{
      * Test extract sub map empty extract property name 1.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testExtractSubMapEmptyExtractPropertyName1(){
         Map<Long, User> map = newLinkedHashMap();
         map.put(1L, new User(1L));

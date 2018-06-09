@@ -15,14 +15,12 @@
  */
 package com.feilong.core.date.dateutiltest;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
+import static com.feilong.core.date.DateUtil.getSecond;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import static com.feilong.core.date.DateUtil.getSecond;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 
 /**
  * The Class DateUtilGetSecondTest.
@@ -31,12 +29,11 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
  */
 public class GetSecondTest{
 
-    //********com.feilong.core.date.DateUtil.getSecond(Date)********************
-
     /**
      * Test get second null date.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testGetSecondNullDate(){
         getSecond(null);
     }
@@ -45,6 +42,7 @@ public class GetSecondTest{
      * Gets the second.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testGetSecond(){
         assertEquals(23, getSecond(toDate("2013-09-15 01:15:23", COMMON_DATE_AND_TIME)));
     }

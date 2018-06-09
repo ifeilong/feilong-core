@@ -15,14 +15,13 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.util.List;
 
 import org.junit.Test;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toList;
 
 /**
  * The Class ConvertUtilToArrayCollectionClassTest.
@@ -35,6 +34,7 @@ public class ToArrayCollectionClassTest{
      * To array.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToArray0(){
         List<String> list = toList("xinge", "feilong");
         assertArrayEquals(new String[] { "xinge", "feilong" }, toArray(list, String.class));
@@ -44,6 +44,7 @@ public class ToArrayCollectionClassTest{
      * Test to array null type.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testToArrayNullType(){
         toArray(toList("xinge", "feilong"), null);
     }
@@ -52,6 +53,7 @@ public class ToArrayCollectionClassTest{
      * Test to array null value.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testToArrayNullValue(){
         assertArrayEquals(null, toArray((List<String>) null, String.class));
     }

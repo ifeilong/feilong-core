@@ -31,6 +31,11 @@ import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
  */
 public class ToBooleanParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Boolean>{
 
+    /**
+     * Data.
+     *
+     * @return the iterable
+     */
     @Parameters(name = "index:{index}: ConvertUtil.toBoolean({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
@@ -60,6 +65,9 @@ public class ToBooleanParameterizedTest extends AbstractOneParamAndOneResultPara
         return toList(objects);
     }
 
+    /**
+     * Test to boolean.
+     */
     @Test
     public void testToBoolean(){
         assertEquals(expectedValue, toBoolean(input1));

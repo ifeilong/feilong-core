@@ -45,6 +45,7 @@ public class CreateRandomWithLengthTest{
      */
     @Test
     @Repeat(20000)
+    @SuppressWarnings("static-method")
     public void testCreateRandomWithLength0(){
         assertThat(RandomUtil.createRandomWithLength(1), allOf(greaterThan(0L), lessThan(10L)));
     }

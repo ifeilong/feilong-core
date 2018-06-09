@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
@@ -27,9 +29,6 @@ import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toMap;
-
 /**
  * The Class CollectionsUtilFindWithPredicateTest.
  *
@@ -41,6 +40,7 @@ public class FindWithPredicateTest{
      * Test find2.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
         List<User> list = toList(//

@@ -34,6 +34,7 @@ public class IsEqualsTest{
      * Test is equals.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testIsEquals(){
         assertSame(true, isEquals(toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME), toDate("2016-06-16", COMMON_DATE), COMMON_DATE));
     }
@@ -44,6 +45,7 @@ public class IsEqualsTest{
      * Test is equals null date.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testIsEqualsNullDate(){
         isEquals(null, null, COMMON_DATE_AND_TIME);
     }
@@ -52,6 +54,7 @@ public class IsEqualsTest{
      * Test is equals null date 1.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testIsEqualsNullDate1(){
         isEquals(null, toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME), COMMON_DATE_AND_TIME);
     }
@@ -60,6 +63,7 @@ public class IsEqualsTest{
      * Test is equals null date 2.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testIsEqualsNullDate2(){
         isEquals(toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME), null, COMMON_DATE_AND_TIME);
     }
@@ -68,6 +72,7 @@ public class IsEqualsTest{
      * Test is equals null pattern.
      */
     @Test(expected = NullPointerException.class)
+    @SuppressWarnings("static-method")
     public void testIsEqualsNullPattern(){
         isEquals(toDate("2016-06-12", COMMON_DATE), toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME), null);
     }
@@ -76,6 +81,7 @@ public class IsEqualsTest{
      * Test is equals empty pattern.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testIsEqualsEmptyPattern(){
         isEquals(toDate("2016-06-12", COMMON_DATE), toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME), "");
     }
@@ -84,6 +90,7 @@ public class IsEqualsTest{
      * Test is equals empty pattern 1.
      */
     @Test(expected = IllegalArgumentException.class)
+    @SuppressWarnings("static-method")
     public void testIsEqualsEmptyPattern1(){
         isEquals(toDate("2016-06-12", COMMON_DATE), toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME), " ");
     }
