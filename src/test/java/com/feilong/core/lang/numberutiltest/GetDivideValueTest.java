@@ -31,7 +31,6 @@ public class GetDivideValueTest{
     /**
      * Gets the divide value 1.
      *
-     * @return the divide value 1
      */
     @Test(expected = NullPointerException.class)
     public void getDivideValue1(){
@@ -40,8 +39,6 @@ public class GetDivideValueTest{
 
     /**
      * Gets the divide value 2.
-     *
-     * @return the divide value 2
      */
     @Test(expected = NullPointerException.class)
     public void getDivideValue2(){
@@ -51,7 +48,6 @@ public class GetDivideValueTest{
     /**
      * Gets the divide value.
      *
-     * @return the divide value
      */
     @Test(expected = IllegalArgumentException.class)
     public void getDivideValue(){

@@ -15,11 +15,11 @@
  */
 package com.feilong.core.lang.numberutiltest;
 
+import static com.feilong.core.NumberPattern.PERCENT_WITH_NOPOINT;
+
 import org.junit.Test;
 
 import com.feilong.core.lang.NumberUtil;
-
-import static com.feilong.core.NumberPattern.PERCENT_WITH_NOPOINT;
 
 /**
  * The Class NumberUtilGetProgressTest.
@@ -30,8 +30,6 @@ public class GetProgressTest{
 
     /**
      * Gets the progress null current.
-     *
-     * @return the progress null current
      */
     @Test(expected = NullPointerException.class)
     public void getProgressNullCurrent(){
@@ -40,8 +38,6 @@ public class GetProgressTest{
 
     /**
      * Gets the progress null total.
-     *
-     * @return the progress null total
      */
     @Test(expected = NullPointerException.class)
     public void getProgressNullTotal(){
@@ -50,8 +46,6 @@ public class GetProgressTest{
 
     /**
      * Gets the progress 3.
-     *
-     * @return the progress 3
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgress3(){
@@ -60,8 +54,6 @@ public class GetProgressTest{
 
     /**
      * Gets the progress 4.
-     *
-     * @return the progress 4
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgress4(){
@@ -71,7 +63,6 @@ public class GetProgressTest{
     /**
      * Gets the progress 5.
      *
-     * @return the progress 5
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgress5(){
@@ -81,7 +72,6 @@ public class GetProgressTest{
     /**
      * Gets the progress null pattern.
      *
-     * @return the progress null pattern
      */
     @Test(expected = NullPointerException.class)
     public void getProgressNullPattern(){
@@ -91,7 +81,6 @@ public class GetProgressTest{
     /**
      * Gets the progress empty pattern.
      *
-     * @return the progress empty pattern
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgressEmptyPattern(){
@@ -101,7 +90,6 @@ public class GetProgressTest{
     /**
      * Gets the progress empty pattern 1.
      *
-     * @return the progress empty pattern 1
      */
     @Test(expected = IllegalArgumentException.class)
     public void getProgressEmptyPattern1(){

@@ -24,12 +24,16 @@ import org.junit.Test;
 import com.feilong.store.member.User;
 
 /**
- * 
+ * The Class BeanPredicateTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.7
  */
 public class BeanPredicateTest{
 
+    /**
+     * Test.
+     */
     @Test
     public void test(){
         User user = new User("feilong");
@@ -41,21 +45,33 @@ public class BeanPredicateTest{
 
     //---------------------------------------------------------------
 
+    /**
+     * Test bean predicate test null 1.
+     */
     @Test(expected = NullPointerException.class)
     public void testBeanPredicateTestNull1(){
         new BeanPredicate("name", null);
     }
 
+    /**
+     * Test bean predicate test null.
+     */
     @Test(expected = NullPointerException.class)
     public void testBeanPredicateTestNull(){
         new BeanPredicate(null, null);
     }
 
+    /**
+     * Test bean predicate test empty.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testBeanPredicateTestEmpty(){
         new BeanPredicate("", null);
     }
 
+    /**
+     * Test bean predicate test blank.
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testBeanPredicateTestBlank(){
         new BeanPredicate(" ", null);
