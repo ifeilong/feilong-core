@@ -43,6 +43,7 @@ public class SortListComparatorsTest{
     /**
      * Test sort list comparators.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void testSortListComparators(){
         User zhangfei = new User("张飞", 23);
@@ -59,6 +60,7 @@ public class SortListComparatorsTest{
     /**
      * Test sort list comparators 1.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void testSortListComparators1(){
         User guanyu = new User("关羽", 30);
@@ -81,6 +83,7 @@ public class SortListComparatorsTest{
     /**
      * Test sort list null list.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void testSortListNullList(){
         assertEquals(emptyList(), sortList((List) null, (Comparator) null));
@@ -89,6 +92,7 @@ public class SortListComparatorsTest{
     /**
      * Test sort list empty list.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void testSortListEmptyList(){
         assertEquals(emptyList(), sortList(new ArrayList<>(), (Comparator) null));
@@ -97,6 +101,7 @@ public class SortListComparatorsTest{
     /**
      * Test sort list null comparators.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void testSortListNullComparators(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
@@ -106,10 +111,10 @@ public class SortListComparatorsTest{
     /**
      * Test sort list null comparator.
      */
+    @SuppressWarnings("static-method")
     @Test
     public void testSortListNullComparator(){
         List<User> list = toList(new User("张飞", 23), new User("关羽", 30), new User("刘备", 25));
         assertEquals(list, sortList(list, (Comparator) null));
     }
-
 }

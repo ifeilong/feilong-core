@@ -25,42 +25,63 @@ import org.junit.Test;
 import com.feilong.store.member.User;
 
 /**
- * 
+ * The Class BeanPropertyValueChangeClosureTest.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.7
  */
 public class BeanPropertyValueChangeClosureTest{
 
+    /**
+     * Test bean property value change closure test 1.
+     */
+    @SuppressWarnings("static-method")
     @Test
     public void testBeanPropertyValueChangeClosureTest1(){
         User user = new User();
 
-        BeanPropertyValueChangeClosure beanPropertyValueChangeClosure = new BeanPropertyValueChangeClosure("name", "feilong");
+        BeanPropertyValueChangeClosure<User> beanPropertyValueChangeClosure = new BeanPropertyValueChangeClosure("name", "feilong");
         beanPropertyValueChangeClosure.execute(user);
 
         assertThat(user, allOf(hasProperty("name", is("feilong"))));
     }
 
+    /**
+     * Test bean property value change closure test.
+     */
+    @SuppressWarnings("static-method")
     @Test
     public void testBeanPropertyValueChangeClosureTest(){
-        BeanPropertyValueChangeClosure beanPropertyValueChangeClosure = new BeanPropertyValueChangeClosure("name", 1);
+        BeanPropertyValueChangeClosure<User> beanPropertyValueChangeClosure = new BeanPropertyValueChangeClosure("name", 1);
         beanPropertyValueChangeClosure.execute(null);
     }
 
     //---------------------------------------------------------------
 
+    /**
+     * Test bean property value change closure test null.
+     */
+    @SuppressWarnings("static-method")
     @Test(expected = NullPointerException.class)
     public void testBeanPropertyValueChangeClosureTestNull(){
-        new BeanPropertyValueChangeClosure(null, 1);
+        new BeanPropertyValueChangeClosure<User>(null, 1);
     }
 
+    /**
+     * Test bean property value change closure test empty.
+     */
+    @SuppressWarnings("static-method")
     @Test(expected = IllegalArgumentException.class)
     public void testBeanPropertyValueChangeClosureTestEmpty(){
-        new BeanPropertyValueChangeClosure("", 1);
+        new BeanPropertyValueChangeClosure<User>("", 1);
     }
 
+    /**
+     * Test bean property value change closure test blank.
+     */
+    @SuppressWarnings("static-method")
     @Test(expected = IllegalArgumentException.class)
     public void testBeanPropertyValueChangeClosureTestBlank(){
-        new BeanPropertyValueChangeClosure(" ", 1);
+        new BeanPropertyValueChangeClosure<User>(" ", 1);
     }
 }
