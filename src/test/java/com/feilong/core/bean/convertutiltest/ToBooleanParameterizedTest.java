@@ -42,6 +42,7 @@ public class ToBooleanParameterizedTest extends AbstractOneParamAndOneResultPara
                                               { null, null },
 
                                               { true, true },
+
                                               { "true", true },
                                               { "yes", true },
                                               { "y", true },
@@ -49,11 +50,29 @@ public class ToBooleanParameterizedTest extends AbstractOneParamAndOneResultPara
                                               { "1", true },
                                               { 1L, true },
 
+                                              //---------------------------------------------------------------
+
+                                              { "TRUE", true },
+                                              { "YES", true },
+                                              { "Y", true },
+                                              { "ON", true },
+
+                                              //---------------------------------------------------------------
+
                                               { false, false },
+
                                               { "false", false },
                                               { "no", false },
                                               { "n", false },
                                               { "off", false },
+
+                                              { "FALSE", false },
+                                              { "NO", false },
+                                              { "N", false },
+                                              { "OFF", false },
+
+                                              //---------------------------------------------------------------
+
                                               { "0", false },
                                               { "9", null },
 
