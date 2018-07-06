@@ -148,6 +148,8 @@ public final class MethodUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     // [start]
 
     /**
@@ -249,6 +251,8 @@ public final class MethodUtil{
         return invokeMethod(obj, methodName, params, parameterTypes);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 执行指定对象 <code>object</code> 的指定方法 <code>methodName</code>.
      * 
@@ -330,8 +334,9 @@ public final class MethodUtil{
         try{
             return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
-            String pattern = "invokeMethod Exception,object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
-            throw new ReflectException(Slf4jUtil.format(pattern, object, methodName, args, parameterTypes), e);
+            String pattern = "invokeMethod Exception,message:[{}],object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.format(pattern, e.getMessage(), object, methodName, args, parameterTypes);
+            throw new ReflectException(message, e);
         }
     }
 
@@ -508,11 +513,13 @@ public final class MethodUtil{
     public static <T> T invokeStaticMethod(final Class<?> klass,final String staticMethodName,Object[] args,Class<?>[] parameterTypes){
         Validate.notNull(klass, "klass can't be null!");
         Validate.notBlank(staticMethodName, "staticMethodName can't be blank!");
+        //---------------------------------------------------------------
         try{
             return (T) MethodUtils.invokeStaticMethod(klass, staticMethodName, args, parameterTypes);
         }catch (Exception e){
-            String pattern = "invoke Static Method Exception,class:[{}],staticMethodName:[{}],args:[{}],parameterTypes:[{}]";
-            throw new ReflectException(Slf4jUtil.format(pattern, klass.getName(), staticMethodName, args, parameterTypes), e);
+            String pattern = "invokeStaticMethod Exception,message:[{}],class:[{}],staticMethodName:[{}],args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.format(pattern, e.getMessage(), klass.getName(), staticMethodName, args, parameterTypes);
+            throw new ReflectException(message, e);
         }
     }
 }
