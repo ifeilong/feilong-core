@@ -53,6 +53,6 @@ public class UncheckedIOException extends RuntimeException{
      *            the <code>IOException</code>
      */
     public UncheckedIOException(IOException cause){
-        super(cause);
+        super(cause.getMessage(), cause);
     }
 }
