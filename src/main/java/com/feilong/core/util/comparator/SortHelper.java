@@ -16,6 +16,7 @@
 package com.feilong.core.util.comparator;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
 import org.apache.commons.lang3.StringUtils;
@@ -116,11 +117,12 @@ public final class SortHelper{
     public static String[] parsePropertyNameAndOrder(String propertyNameAndOrder){
         Validate.notBlank(propertyNameAndOrder, "propertyNameAndOrder can't be blank!");
 
+        //---------------------------------------------------------------
         //空格
         String[] array = StringUtil.tokenizeToStringArray(propertyNameAndOrder.trim(), SPACE);
-
         if (array.length > 2){
-            throw new IllegalArgumentException("propertyNameAndOrder:[" + propertyNameAndOrder + "] IllegalArgument");
+            String message = format("propertyNameAndOrder:[{}] has more than 1 space,must max 1 space", propertyNameAndOrder);
+            throw new IllegalArgumentException(message);
         }
 
         //---------------------------------------------
@@ -128,14 +130,16 @@ public final class SortHelper{
         if (array.length == 2){
             order = array[1];//排序因子
             if (!(order.equalsIgnoreCase(ASC) || order.equalsIgnoreCase(DESC))){
-                throw new IllegalArgumentException(
-                                "propertyNameAndOrder:[" + propertyNameAndOrder + "] 's order must ignoreCase equals [asc or desc]");
+                String pattern = "propertyNameAndOrder:[{}] 's order:[{}] must ignoreCase equals [asc or desc]";
+                throw new IllegalArgumentException(format(pattern, propertyNameAndOrder, order));
             }
         }
 
         //---------------------------------------------
         return toArray(array[0], order);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 判断属性名称和排序因子数组是不是asc排序.
@@ -177,6 +181,8 @@ public final class SortHelper{
                         propertyNameAndOrderArray.length,
                         propertyNameAndOrderArray);
 
+        //---------------------------------------------------------------
+
         String order = propertyNameAndOrderArray[1];
 
         Validate.isTrue(
@@ -184,6 +190,8 @@ public final class SortHelper{
                         "order value must one of [null/ASC/DESC], but is:[%s],propertyNameAndOrderArray:[%s]",
                         order,
                         propertyNameAndOrderArray);
+
+        //---------------------------------------------------------------
 
         return null == order || ASC.equalsIgnoreCase(order);
     }

@@ -89,6 +89,7 @@ public class ParsePropertyNameAndOrderTest{
     /**
      * Test parse property name and order array length more than 2.
      */
+    //@Test()
     @Test(expected = IllegalArgumentException.class)
     public void testParsePropertyNameAndOrderArrayLengthMoreThan2(){
         SortHelper.parsePropertyNameAndOrder("name desc desc");
@@ -98,6 +99,7 @@ public class ParsePropertyNameAndOrderTest{
      * Test parse property name and order array length eqals 2 but not asc.
      */
     @Test(expected = IllegalArgumentException.class)
+    //@Test
     public void testParsePropertyNameAndOrderArrayLengthEqals2ButNotAsc(){
         SortHelper.parsePropertyNameAndOrder("name des");
     }
