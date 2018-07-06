@@ -315,8 +315,8 @@ public final class ConvertUtil{
      * <blockquote>
      * 
      * <ul>
-     * <li>如果 "true", "yes", "y", "on", "1", 返回 true</li>
-     * <li>如果 "false", "no", "n", "off", "0", 返回 false</li>
+     * <li>如果 "true", "yes", "y", "on", "1" <span style="color:green">(忽视大小写)</span>, 返回 true</li>
+     * <li>如果 "false", "no", "n", "off", "0" <span style="color:green">(忽视大小写)</span>, 返回 false</li>
      * <li>其他抛出 conversionException, 但是在
      * {@link org.apache.commons.beanutils.converters.AbstractConverter#handleError(Class, Object, Throwable) handleError(Class, Object,
      * Throwable)} 方法里面返回默认值 是 null
@@ -3041,12 +3041,16 @@ public final class ConvertUtil{
         if (null == locale){
             return null;
         }
+
+        //---------------------------------------------------------------
         if (locale instanceof Locale){
             return (Locale) locale;
         }
         if (locale instanceof String){
             return LocaleUtils.toLocale((String) locale);
         }
+
+        //---------------------------------------------------------------
         throw new UnsupportedOperationException("input param [locale] type is:[" + locale.getClass().getName() + "] not support!");
     }
 }
