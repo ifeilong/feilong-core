@@ -150,6 +150,8 @@ public final class ResourceBundleUtil{
             return EMPTY;
         }
 
+        //---------------------------------------------------------------
+
         String value = resourceBundle.getString(key);
         if (isNullOrEmpty(value)){
             LOGGER.trace("resourceBundle has key:[{}],but value is null/empty", key);
@@ -245,6 +247,8 @@ public final class ResourceBundleUtil{
         if (isNullOrEmpty(keysEnumeration)){
             return emptyMap();
         }
+
+        //---------------------------------------------------------------
 
         Map<String, String> map = new TreeMap<>();//为了log方便,使用 treeMap
         while (keysEnumeration.hasMoreElements()){
@@ -680,6 +684,8 @@ public final class ResourceBundleUtil{
      */
     public static ResourceBundle getResourceBundle(InputStream inputStream){
         Validate.notNull(inputStream, "inputStream can't be null!");
+
+        //---------------------------------------------------------------
         try{
             return new PropertyResourceBundle(inputStream);
         }catch (IOException e){
