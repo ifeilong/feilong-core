@@ -32,7 +32,10 @@ public class OpenStreamTest{
         assertEquals(null, URLUtil.openStream(null));
     }
 
+    //---------------------------------------------------------------
+
     @Test(expected = UncheckedIOException.class)
+    //@Test
     public void testOpenStream1(){
         URLUtil.openStream(URLUtil.toURL("www"));
     }

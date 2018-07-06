@@ -43,6 +43,7 @@ public class ToURITest{
     }
 
     @Test(expected = URIParseException.class)
+    //@Test
     public void testToURI1() throws MalformedURLException{
         URL url = new URL("file://");
         URLUtil.toURI(url);

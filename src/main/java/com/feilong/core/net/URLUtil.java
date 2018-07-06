@@ -15,6 +15,8 @@
  */
 package com.feilong.core.net;
 
+import static com.feilong.tools.slf4j.Slf4jUtil.format;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link URL} 工具类.
@@ -145,6 +146,8 @@ public final class URLUtil{
      */
     public static URL toURL(String spec){
         Validate.notBlank(spec, "spec can't be blank!");
+
+        //---------------------------------------------------------------
         try{
             return new URL(spec);
         }catch (MalformedURLException e){
@@ -153,6 +156,8 @@ public final class URLUtil{
             return toFileURL(spec);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将字符串路径 <code>filePath</code> 转成{@link URL}.
@@ -197,7 +202,8 @@ public final class URLUtil{
         try{
             return new File(filePath).toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
         }catch (MalformedURLException e){
-            throw new URIParseException("filePath:" + filePath, e);
+            String message = format("filePath:[{}],[{}]", filePath, e.getMessage());
+            throw new URIParseException(message, e);
         }
     }
 
@@ -218,10 +224,11 @@ public final class URLUtil{
         if (null == url){
             return null;
         }
+        //---------------------------------------------------------------
         try{
             return url.toURI();
         }catch (URISyntaxException e){
-            throw new URIParseException(e);
+            throw new URIParseException(format("input url:[{}],[{}]", url, e.getMessage()), e);
         }
     }
 
@@ -246,8 +253,7 @@ public final class URLUtil{
         try{
             return url == null ? null : url.openStream();
         }catch (IOException e){
-            String message = Slf4jUtil.format("can not open url:[{}]", url.toString());
-            throw new UncheckedIOException(message, e);
+            throw new UncheckedIOException(format("openStream url:[{}],exception:[{}]", url, e.getMessage()), e);
         }
     }
 
@@ -282,10 +288,13 @@ public final class URLUtil{
      */
     public static String getUnionUrl(URL context,String spec){
         Validate.notBlank(spec, "spec can't be null!");
+
+        //---------------------------------------------------------------
         try{
             return new URL(context, spec).toString();
         }catch (MalformedURLException e){
-            throw new URIParseException(e);
+            String message = format("context:[{}],spec:[{}],[{}]", context, spec, e.getMessage());
+            throw new URIParseException(message, e);
         }
     }
 }
