@@ -68,6 +68,7 @@ public class GetClassTest{
      * Test get class not exist class name.
      */
     @Test(expected = ReflectException.class)
+    //@Test
     public void testGetClassNotExistClassName(){
         ClassUtil.getClass("com.feilong.lalala");
     }

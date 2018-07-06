@@ -20,6 +20,7 @@ import java.lang.reflect.Modifier;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.lang.reflect.ReflectException;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link java.lang.Class} 工具类.
@@ -254,6 +255,8 @@ public final class ClassUtil{
             return false;
         }
 
+        //---------------------------------------------------------------
+
         for (Class<?> klass : klasses){
             if (isInstance(obj, klass)){
                 return true;
@@ -351,6 +354,8 @@ public final class ClassUtil{
         return null == paramValues ? null : org.apache.commons.lang3.ClassUtils.toClass(paramValues);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * JVM查找并加载指定的类.
      * 
@@ -438,10 +443,13 @@ public final class ClassUtil{
      */
     public static Class<?> getClass(String className){
         Validate.notBlank(className, "className can't be blank!");
+
+        //---------------------------------------------------------------
         try{
             return org.apache.commons.lang3.ClassUtils.getClass(className);
-        }catch (ClassNotFoundException e){
-            throw new ReflectException(e);
+        }catch (Exception e){
+            String message = Slf4jUtil.format("className:[{}],message:[{}]", className, e.getMessage());
+            throw new ReflectException(message, e);
         }
     }
 
