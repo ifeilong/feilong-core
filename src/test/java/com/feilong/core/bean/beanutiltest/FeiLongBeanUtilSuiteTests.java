@@ -29,6 +29,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 CloneBeanTest.class,
                 CopyPropertiesTest.class,
+                CopyPropertiesExceptionTest.class,
+
+                //GetPropertyExceptionTest.class,
+
                 NewDynaBeanTest.class,
                 PopulateAliasBeanTest.class,
                 PopulateTest.class,

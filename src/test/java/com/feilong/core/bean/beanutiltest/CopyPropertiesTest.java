@@ -30,7 +30,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.store.member.Person;
@@ -115,33 +114,6 @@ public class CopyPropertiesTest{
     }
 
     /**
-     * Test copy properties no date locale converter.
-     */
-    //*******这个要放最上面, 否则maven来执行的时候  不会出现 异常****************************************************
-    @Test(expected = BeanOperationException.class)
-    @SuppressWarnings("static-method")
-    public void testCopyPropertiesNoDateLocaleConverter(){
-        User user = new User();
-        user.setDate(new Date());
-
-        User user2 = new User();
-        BeanUtil.copyProperties(user2, user, "date");
-    }
-
-    /**
-     * Test copy property from bean not exist properties.
-     */
-    @Test(expected = BeanOperationException.class)
-    @SuppressWarnings("static-method")
-    public void testCopyPropertyFromBeanNotExistProperties(){
-        User user = new User();
-        user.setId(5L);
-
-        Person person = new Person();
-        BeanUtil.copyProperties(person, user, "name", "dateAttr");
-    }
-
-    /**
      * Test copy property to bean not exist properties.
      */
     @Test
@@ -156,21 +128,4 @@ public class CopyPropertiesTest{
         assertThat(person, allOf(hasProperty("name", is("feilong")), hasProperty("dateAttr", is((Object) null))));
     }
 
-    /**
-     * Test bean util null to bean.
-     */
-    @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
-    public void testBeanUtilNullToBean(){
-        BeanUtil.copyProperties(null, new Person());
-    }
-
-    /**
-     * Test bean util null from bean.
-     */
-    @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
-    public void testBeanUtilNullFromBean(){
-        BeanUtil.copyProperties(new Person(), null);
-    }
 }
