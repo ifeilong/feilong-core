@@ -27,6 +27,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 FormatParameterizedTest.class,
+
+                GetBytesTest.class,
+                GetBytesAndCharsetNameTest.class,
+
                 ReplaceAllParameterizedTest.class,
                 ReplaceParameterizedTest.class,
                 ReplaceValuesMapTest.class,

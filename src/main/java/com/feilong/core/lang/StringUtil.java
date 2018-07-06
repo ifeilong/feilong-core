@@ -34,6 +34,7 @@ import org.apache.commons.lang3.text.StrSubstitutor;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * {@link String}工具类,可以查询,截取,format.
@@ -224,15 +225,22 @@ public final class StringUtil{
      * @param charsetName
      *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
      * @return 如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>charsetName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>charsetName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see String#getBytes(String)
      * @since 1.3.0
      */
     public static byte[] getBytes(String value,String charsetName){
         Validate.notNull(value, "value can't be null!");
+        Validate.notBlank(charsetName, "charsetName can't be blank!");
+
+        //---------------------------------------------------------------
         try{
             return value.getBytes(charsetName);
         }catch (UnsupportedEncodingException e){
-            throw new UncheckedIOException(e);
+            String pattern = "value:[{}],charsetName:[{}],message:[{}],suggest you use [{}] constants";
+            String message = Slf4jUtil.format(pattern, value, charsetName, e.getMessage(), CharsetType.class.getCanonicalName());
+            throw new UncheckedIOException(message, e);
         }
     }
 
