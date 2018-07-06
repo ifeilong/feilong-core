@@ -1225,10 +1225,12 @@ public final class DateUtil{
         Validate.notEmpty(datePatterns, "datePatterns can't be null!");
         Validate.noNullElements(datePatterns, "datePatterns can't has null datePattern");
 
+        //---------------------------------------------------------------
+
         try{
             return DateUtils.parseDate(dateString, datePatterns);
         }catch (ParseException e){
-            String pattern = "parse dateString [{}] use patterns:[{}] to date exception,message:[{}]";
+            String pattern = "dateString:[{}],use patterns:[{}],parse to date exception,message:[{}]";
             throw new IllegalArgumentException(Slf4jUtil.format(pattern, dateString, datePatterns, e.getMessage()), e);
         }
     }

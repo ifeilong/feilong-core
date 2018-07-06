@@ -101,6 +101,7 @@ public class ToDateTest{
      * Test to date 1.
      */
     @Test(expected = IllegalArgumentException.class)
+    //@Test()
     @SuppressWarnings("static-method")
     public void testToDate1(){
         toDate("2016-06-30 15:36 ", COMMON_DATE_AND_TIME_WITHOUT_SECOND);
