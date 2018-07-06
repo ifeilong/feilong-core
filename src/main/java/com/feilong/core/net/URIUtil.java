@@ -17,10 +17,10 @@ package com.feilong.core.net;
 
 import static com.feilong.core.URIComponents.QUESTIONMARK;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.INDEX_NOT_FOUND;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -36,7 +36,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.CharsetType;
 import com.feilong.core.URIComponents;
 import com.feilong.core.lang.StringUtil;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 处理{@link java.net.URI}(Uniform Resource Locator) {@link java.net.URL}(Uniform Resource Identifier) 等.
@@ -212,10 +211,12 @@ public final class URIUtil{
      */
     public static URI create(String uri){
         Validate.notBlank(uri, "uri can't be blank!");
+
+        //---------------------------------------------------------------
         try{
             return URI.create(uri);
         }catch (Exception e){
-            throw new URIParseException(Slf4jUtil.format("uri:[{}]", uri), e);
+            throw new URIParseException(format("[{}],input uri:[{}]", e.getMessage(), uri), e);
         }
     }
 
@@ -239,6 +240,8 @@ public final class URIUtil{
     public static URI create(String uriString,String charsetType){
         return create(encodeUri(uriString, charsetType));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 基于 <code>uriString</code>和<code>charsetType</code>创建 {@link URI}.
@@ -312,11 +315,15 @@ public final class URIUtil{
             return uriString;// 不带参数 一般不需要处理
         }
 
+        //---------------------------------------------------------------
+
         Map<String, String[]> safeArrayValueMap = ParamUtil.toSafeArrayValueMap(getQueryString(uriString), charsetType);
         String encodeUrl = ParamUtil.addParameterArrayValueMap(uriString, safeArrayValueMap, charsetType);
         LOGGER.trace("input uriString:[{}],charsetType:[{}],after url:[{}]", uriString, charsetType, encodeUrl);
         return encodeUrl;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得不含queryString的path,即链接?前面的连接( <span style="color:red">不包含?</span>).
@@ -363,6 +370,8 @@ public final class URIUtil{
         int index = uriString.indexOf(QUESTIONMARK);
         return index == INDEX_NOT_FOUND ? EMPTY : StringUtil.substring(uriString, index + 1);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 是否有queryString.
@@ -482,18 +491,17 @@ public final class URIUtil{
         if (isNullOrEmpty(value)){
             return EMPTY;
         }
-
         //---------------------------------------------------------------
-
         if (isNullOrEmpty(charsetType)){
             return value;
         }
-
         //---------------------------------------------------------------
         try{
             return encodeOrDecode ? URLEncoder.encode(value, charsetType) : URLDecoder.decode(value, charsetType);
-        }catch (UnsupportedEncodingException e){
-            throw new URIParseException(e);
+        }catch (Exception e){
+            String pattern = "[{}] value:[{}],use charset:[{}],message:[{}]";
+            String message = format(pattern, encodeOrDecode ? "encode" : "decode", value, charsetType, e.getMessage());
+            throw new URIParseException(message, e);
         }
     }
 

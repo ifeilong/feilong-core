@@ -47,6 +47,7 @@ public class CreateTest{
      * Test create error uri.
      */
     @Test(expected = URIParseException.class)
+    //@Test
     public void testCreateErrorUri(){
         URIUtil.create("://127.0.01/cmens");
     }

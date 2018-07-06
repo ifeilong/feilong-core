@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.feilong.core.net.URIParseException;
 import com.feilong.core.net.URIUtil;
 
 /**
@@ -93,7 +94,8 @@ public class DecodeTest{
     /**
      * Test last percent.
      */
-    @Test(expected = IllegalArgumentException.class)
+    // @Test
+    @Test(expected = URIParseException.class)
     public void testLastPercent(){
         URIUtil.decode("%", UTF8);
     }
@@ -101,7 +103,7 @@ public class DecodeTest{
     /**
      * Test last percent 1.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = URIParseException.class)
     public void testLastPercent1(){
         URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88%", UTF8);
     }
@@ -109,7 +111,7 @@ public class DecodeTest{
     /**
      * Decode2.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = URIParseException.class)
     public void decode2(){
         URIUtil.decode("aaaaa%chu111", UTF8);
         // java.lang.IllegalArgumentException: URLDecoder: Illegal hex characters in escape (%) pattern - For input string: "ch"
@@ -118,7 +120,7 @@ public class DecodeTest{
     /**
      * Decode3.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = URIParseException.class)
     public void decode3(){
         URIUtil.decode("%c", UTF8);
     }
