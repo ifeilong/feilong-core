@@ -79,6 +79,8 @@ public final class ConstructorUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     // [start] newInstance
 
     /**
@@ -118,9 +120,12 @@ public final class ConstructorUtil{
      */
     public static <T> T newInstance(Class<T> klass,Object...parameterValues){
         Validate.notNull(klass, "klass can't be null!");
+
         Class<?>[] parameterTypes = ClassUtil.toClass(parameterValues);
         return newInstance(klass, parameterValues, parameterTypes);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 返回指定类型 <code>klass</code>,指定参数 <code>parameterValues</code> 和指定参数类型 <code>parameterTypes</code>的构造函数示例.
@@ -166,12 +171,14 @@ public final class ConstructorUtil{
      */
     public static <T> T newInstance(Class<T> klass,Object[] parameterValues,Class<?>[] parameterTypes){
         Validate.notNull(klass, "klass can't be null!");
+
+        //---------------------------------------------------------------
         try{
             return ConstructorUtils.invokeConstructor(klass, parameterValues, parameterTypes);
         }catch (Exception e){
-            throw new ReflectException(
-                            Slf4jUtil.format("class:[{}].args:[{}],parameterTypes:[{}]", klass, parameterValues, parameterTypes),
-                            e);
+            String pattern = "invokeConstructor exception,message:[{}],class:[{}].args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.format(pattern, e.getMessage(), klass, parameterValues, parameterTypes);
+            throw new ReflectException(message, e);
         }
     }
 }

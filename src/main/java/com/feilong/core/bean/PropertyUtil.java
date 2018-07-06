@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 对 {@link org.apache.commons.beanutils.PropertyUtils}的再次封装.
@@ -222,7 +223,9 @@ public final class PropertyUtil{
                 PropertyUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                throw new BeanOperationException("copyProperties exception", e);
+                String pattern = "copyProperties exception,message:[{}],toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
+                String message = Slf4jUtil.format(pattern, e.getMessage(), toObj, fromObj, includePropertyNames);
+                throw new BeanOperationException(message, e);
             }
         }
 
@@ -331,7 +334,9 @@ public final class PropertyUtil{
             try{
                 return PropertyUtils.describe(bean);
             }catch (Exception e){
-                throw new BeanOperationException("describe exception", e);
+                String pattern = "describe exception,message:[{}],bean:[{}],propertyNames:[{}]";
+                String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyNames);
+                throw new BeanOperationException(message, e);
             }
         }
 
@@ -342,6 +347,8 @@ public final class PropertyUtil{
         }
         return map;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 使用 {@link PropertyUtils#setProperty(Object, String, Object)} 来设置指定bean对象中的指定属性的值.
@@ -406,9 +413,13 @@ public final class PropertyUtil{
         try{
             PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
-            throw new BeanOperationException(e);
+            String pattern = "setProperty exception,message:[{}],bean:[{}],propertyName:[{}],value:[{}]";
+            String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyName, value);
+            throw new BeanOperationException(message, e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 如果 <code>value</code> isNotNullOrEmpty,那么才调用 {@link #setProperty(Object, String, Object)}.
@@ -472,6 +483,8 @@ public final class PropertyUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     // [start] getProperty
 
     /**
@@ -534,7 +547,9 @@ public final class PropertyUtil{
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            throw new BeanOperationException("getProperty exception", e);
+            String pattern = "getProperty exception,message:[{}],bean:[{}],propertyName:[{}]";
+            String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyName);
+            throw new BeanOperationException(message, e);
         }
     }
 
@@ -596,9 +611,7 @@ public final class PropertyUtil{
         if (isNullOrEmpty(obj)){
             return null;
         }
-
         Validate.notNull(toBeFindedClassType, "toBeFindedClassType can't be null/empty!");
-
         //---------------------------------------------------------------
 
         if (ClassUtil.isInstance(obj, toBeFindedClassType)){
@@ -606,7 +619,6 @@ public final class PropertyUtil{
         }
 
         //---------------------------------------------------------------
-
         if (isDonotSupportFindType(obj)){
             LOGGER.trace("obj:[{}] not support find toBeFindedClassType:[{}]", obj.getClass().getName(), toBeFindedClassType.getName());
             return null;
@@ -629,6 +641,8 @@ public final class PropertyUtil{
         }
         return null;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 一般自定义的command 里面 就是些 string int,list map等对象.
