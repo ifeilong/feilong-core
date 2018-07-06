@@ -304,7 +304,9 @@ public final class BeanUtil{
                 BeanUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                throw new BeanOperationException("copyProperties exception", e);
+                String pattern = "copyProperties exception,message:[{}],toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
+                String message = Slf4jUtil.format(pattern, e.getMessage(), toObj, fromObj, includePropertyNames);
+                throw new BeanOperationException(message, e);
             }
         }
 
@@ -343,7 +345,9 @@ public final class BeanUtil{
         try{
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
-            throw new BeanOperationException("setProperty exception", e);
+            String pattern = "setProperty exception,message:[{}],bean:[{}],propertyName:[{}],value:[{}]";
+            String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyName, value);
+            throw new BeanOperationException(message, e);
         }
     }
 
@@ -382,7 +386,9 @@ public final class BeanUtil{
         try{
             return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            throw new BeanOperationException("getProperty exception", e);
+            String pattern = "getProperty exception,message:[{}],bean:[{}],propertyName:[{}]";
+            String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyName);
+            throw new BeanOperationException(message, e);
         }
     }
 
@@ -437,7 +443,8 @@ public final class BeanUtil{
         try{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
-            throw new BeanOperationException("cloneBean exception", e);
+            String message = Slf4jUtil.format("cloneBean exception,message:[{}],bean:[{}]]", e.getMessage(), bean);
+            throw new BeanOperationException(message, e);
         }
     }
 
@@ -690,12 +697,12 @@ public final class BeanUtil{
         Validate.notNull(properties, "properties can't be null/empty!");
 
         //---------------------------------------------------------------
-
         try{
             BeanUtils.populate(bean, properties);
             return bean;
         }catch (Exception e){
-            throw new BeanOperationException(Slf4jUtil.format("can't populate:{} to bean:{},{}", properties, bean, e.getMessage()), e);
+            String message = Slf4jUtil.format("can't populate:[{}] to bean:{},message:{}", properties, bean, e.getMessage());
+            throw new BeanOperationException(message, e);
         }
     }
 
