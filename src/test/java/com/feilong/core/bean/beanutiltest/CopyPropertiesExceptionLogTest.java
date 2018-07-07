@@ -19,7 +19,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.feilong.core.bean.BeanOperationException;
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.bean.beanutiltest.entity.AccessExceptionProperty;
 import com.feilong.store.member.User;
@@ -41,8 +40,8 @@ public class CopyPropertiesExceptionLogTest{
         BeanUtil.copyProperties(user2, user, "date");
     }
 
-    //@Test
-    @Test(expected = BeanOperationException.class)
+    @Test
+    //@Test(expected = BeanOperationException.class)
     @SuppressWarnings("static-method")
     public void testCopyProperties(){
         AccessExceptionProperty user = new AccessExceptionProperty();

@@ -448,8 +448,7 @@ public final class ClassUtil{
         try{
             return org.apache.commons.lang3.ClassUtils.getClass(className);
         }catch (Exception e){
-            String message = Slf4jUtil.format("className:[{}],message:[{}]", className, e.getMessage());
-            throw new ReflectException(message, e);
+            throw new ReflectException(Slf4jUtil.format("className:[{}]", className), e);
         }
     }
 

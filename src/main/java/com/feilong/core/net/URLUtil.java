@@ -202,7 +202,7 @@ public final class URLUtil{
         try{
             return new File(filePath).toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
         }catch (MalformedURLException e){
-            String message = format("filePath:[{}],[{}]", filePath, e.getMessage());
+            String message = format("filePath:[{}]", filePath);
             throw new URIParseException(message, e);
         }
     }
@@ -228,7 +228,7 @@ public final class URLUtil{
         try{
             return url.toURI();
         }catch (URISyntaxException e){
-            throw new URIParseException(format("input url:[{}],[{}]", url, e.getMessage()), e);
+            throw new URIParseException(format("input url:[{}]", url), e);
         }
     }
 
@@ -253,7 +253,7 @@ public final class URLUtil{
         try{
             return url == null ? null : url.openStream();
         }catch (IOException e){
-            throw new UncheckedIOException(format("openStream url:[{}],exception:[{}]", url, e.getMessage()), e);
+            throw new UncheckedIOException(format("openStream url:[{}]", url), e);
         }
     }
 
@@ -293,7 +293,7 @@ public final class URLUtil{
         try{
             return new URL(context, spec).toString();
         }catch (MalformedURLException e){
-            String message = format("context:[{}],spec:[{}],[{}]", context, spec, e.getMessage());
+            String message = format("context:[{}],spec:[{}]", context, spec);
             throw new URIParseException(message, e);
         }
     }

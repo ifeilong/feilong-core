@@ -176,8 +176,8 @@ public final class ConstructorUtil{
         try{
             return ConstructorUtils.invokeConstructor(klass, parameterValues, parameterTypes);
         }catch (Exception e){
-            String pattern = "invokeConstructor exception,message:[{}],class:[{}].args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), klass, parameterValues, parameterTypes);
+            String pattern = "invokeConstructor exception,class:[{}].args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.format(pattern, klass, parameterValues, parameterTypes);
             throw new ReflectException(message, e);
         }
     }

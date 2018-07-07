@@ -216,7 +216,7 @@ public final class URIUtil{
         try{
             return URI.create(uri);
         }catch (Exception e){
-            throw new URIParseException(format("[{}],input uri:[{}]", e.getMessage(), uri), e);
+            throw new URIParseException(format("input uri:[{}]", uri), e);
         }
     }
 
@@ -499,8 +499,8 @@ public final class URIUtil{
         try{
             return encodeOrDecode ? URLEncoder.encode(value, charsetType) : URLDecoder.decode(value, charsetType);
         }catch (Exception e){
-            String pattern = "[{}] value:[{}],use charset:[{}],message:[{}]";
-            String message = format(pattern, encodeOrDecode ? "encode" : "decode", value, charsetType, e.getMessage());
+            String pattern = "[{}] value:[{}],use charset:[{}]";
+            String message = format(pattern, encodeOrDecode ? "encode" : "decode", value, charsetType);
             throw new URIParseException(message, e);
         }
     }

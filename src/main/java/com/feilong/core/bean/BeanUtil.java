@@ -304,9 +304,8 @@ public final class BeanUtil{
                 BeanUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                String pattern = "copyProperties exception,message:[{}],toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
-                String message = Slf4jUtil.format(pattern, e.getMessage(), toObj, fromObj, includePropertyNames);
-                throw new BeanOperationException(message, e);
+                String pattern = "copyProperties exception,toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
+                throw new BeanOperationException(Slf4jUtil.format(pattern, toObj, fromObj, includePropertyNames), e);
             }
         }
 
@@ -345,9 +344,8 @@ public final class BeanUtil{
         try{
             BeanUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
-            String pattern = "setProperty exception,message:[{}],bean:[{}],propertyName:[{}],value:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyName, value);
-            throw new BeanOperationException(message, e);
+            String pattern = "setProperty exception,bean:[{}],propertyName:[{}],value:[{}]";
+            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName, value), e);
         }
     }
 
@@ -386,9 +384,8 @@ public final class BeanUtil{
         try{
             return BeanUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            String pattern = "getProperty exception,message:[{}],bean:[{}],propertyName:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyName);
-            throw new BeanOperationException(message, e);
+            String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
+            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName), e);
         }
     }
 
@@ -443,7 +440,7 @@ public final class BeanUtil{
         try{
             return (T) BeanUtils.cloneBean(bean);
         }catch (Exception e){
-            String message = Slf4jUtil.format("cloneBean exception,message:[{}],bean:[{}]]", e.getMessage(), bean);
+            String message = Slf4jUtil.format("cloneBean exception,bean:[{}]]", bean);
             throw new BeanOperationException(message, e);
         }
     }
@@ -701,7 +698,7 @@ public final class BeanUtil{
             BeanUtils.populate(bean, properties);
             return bean;
         }catch (Exception e){
-            String message = Slf4jUtil.format("can't populate:[{}] to bean:{},message:{}", properties, bean, e.getMessage());
+            String message = Slf4jUtil.format("can't populate:[{}] to bean:{}", properties, bean);
             throw new BeanOperationException(message, e);
         }
     }

@@ -223,9 +223,8 @@ public final class PropertyUtil{
                 PropertyUtils.copyProperties(toObj, fromObj);
                 return;
             }catch (Exception e){
-                String pattern = "copyProperties exception,message:[{}],toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
-                String message = Slf4jUtil.format(pattern, e.getMessage(), toObj, fromObj, includePropertyNames);
-                throw new BeanOperationException(message, e);
+                String pattern = "copyProperties exception,toObj:[{}],fromObj:[{}],includePropertyNames:[{}]";
+                throw new BeanOperationException(Slf4jUtil.format(pattern, toObj, fromObj, includePropertyNames), e);
             }
         }
 
@@ -334,9 +333,8 @@ public final class PropertyUtil{
             try{
                 return PropertyUtils.describe(bean);
             }catch (Exception e){
-                String pattern = "describe exception,message:[{}],bean:[{}],propertyNames:[{}]";
-                String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyNames);
-                throw new BeanOperationException(message, e);
+                String pattern = "describe exception,bean:[{}],propertyNames:[{}]";
+                throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyNames), e);
             }
         }
 
@@ -413,9 +411,8 @@ public final class PropertyUtil{
         try{
             PropertyUtils.setProperty(bean, propertyName, value);
         }catch (Exception e){
-            String pattern = "setProperty exception,message:[{}],bean:[{}],propertyName:[{}],value:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyName, value);
-            throw new BeanOperationException(message, e);
+            String pattern = "setProperty exception,bean:[{}],propertyName:[{}],value:[{}]";
+            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName, value), e);
         }
     }
 
@@ -547,9 +544,8 @@ public final class PropertyUtil{
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
         }catch (Exception e){
-            String pattern = "getProperty exception,message:[{}],bean:[{}],propertyName:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), bean, propertyName);
-            throw new BeanOperationException(message, e);
+            String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
+            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName), e);
         }
     }
 

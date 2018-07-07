@@ -238,8 +238,8 @@ public final class StringUtil{
         try{
             return value.getBytes(charsetName);
         }catch (UnsupportedEncodingException e){
-            String pattern = "value:[{}],charsetName:[{}],message:[{}],suggest you use [{}] constants";
-            String message = Slf4jUtil.format(pattern, value, charsetName, e.getMessage(), CharsetType.class.getCanonicalName());
+            String pattern = "value:[{}],charsetName:[{}],suggest you use [{}] constants";
+            String message = Slf4jUtil.format(pattern, value, charsetName, CharsetType.class.getCanonicalName());
             throw new UncheckedIOException(message, e);
         }
     }

@@ -334,8 +334,8 @@ public final class MethodUtil{
         try{
             return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
-            String pattern = "invokeMethod Exception,message:[{}],object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), object, methodName, args, parameterTypes);
+            String pattern = "invokeMethod Exception,object:[{}],methodName:[{}],args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.format(pattern, object, methodName, args, parameterTypes);
             throw new ReflectException(message, e);
         }
     }
@@ -517,8 +517,8 @@ public final class MethodUtil{
         try{
             return (T) MethodUtils.invokeStaticMethod(klass, staticMethodName, args, parameterTypes);
         }catch (Exception e){
-            String pattern = "invokeStaticMethod Exception,message:[{}],class:[{}],staticMethodName:[{}],args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), klass.getName(), staticMethodName, args, parameterTypes);
+            String pattern = "invokeStaticMethod Exception,class:[{}],staticMethodName:[{}],args:[{}],parameterTypes:[{}]";
+            String message = Slf4jUtil.format(pattern, klass.getName(), staticMethodName, args, parameterTypes);
             throw new ReflectException(message, e);
         }
     }

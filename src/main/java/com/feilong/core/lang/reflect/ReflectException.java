@@ -15,13 +15,15 @@
  */
 package com.feilong.core.lang.reflect;
 
+import com.feilong.core.DefaultRuntimeException;
+
 /**
  * 反射时出现的异常.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
-public final class ReflectException extends RuntimeException{
+public final class ReflectException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;

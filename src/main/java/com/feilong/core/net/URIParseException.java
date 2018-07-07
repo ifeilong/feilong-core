@@ -15,13 +15,15 @@
  */
 package com.feilong.core.net;
 
+import com.feilong.core.DefaultRuntimeException;
+
 /**
  * 解析url/uri出现异常.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.8
  */
-public final class URIParseException extends RuntimeException{
+public final class URIParseException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;
@@ -40,13 +42,4 @@ public final class URIParseException extends RuntimeException{
         super(message, cause);
     }
 
-    /**
-     * The Constructor.
-     *
-     * @param cause
-     *            the cause
-     */
-    public URIParseException(Throwable cause){
-        super(cause);
-    }
 }

@@ -253,8 +253,8 @@ public final class FieldUtil{
         try{
             return (T) FieldUtils.readField(obj, fieldName, true);
         }catch (IllegalAccessException e){
-            String pattern = "readField exception,[{}],ownerClass:[{}],fieldName:[{}],ownerObj:[{}]";
-            String message = Slf4jUtil.format(pattern, e.getMessage(), obj.getClass().getName(), fieldName, obj);
+            String pattern = "readField exception,ownerClass:[{}],fieldName:[{}],ownerObj:[{}]";
+            String message = Slf4jUtil.format(pattern, obj.getClass().getName(), fieldName, obj);
             throw new ReflectException(message, e);
         }
     }

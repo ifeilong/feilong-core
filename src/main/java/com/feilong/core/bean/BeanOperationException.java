@@ -15,6 +15,8 @@
  */
 package com.feilong.core.bean;
 
+import com.feilong.core.DefaultRuntimeException;
+
 //Exception又分为两类:一种是CheckedException,一种是UncheckedException.
 //
 //这两种Exception的区别主要是CheckedException需要用try...catch...显示的捕获,
@@ -40,7 +42,7 @@ package com.feilong.core.bean;
  * @see "org.springframework.beans.BeansException"
  * @since 1.9.0
  */
-public final class BeanOperationException extends RuntimeException{
+public final class BeanOperationException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1699987643831455524L;

@@ -27,7 +27,7 @@ import java.io.IOException;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.9
  */
-public class UncheckedIOException extends RuntimeException{
+public class UncheckedIOException extends DefaultRuntimeException{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -8134305061645241065L;
@@ -53,6 +53,6 @@ public class UncheckedIOException extends RuntimeException{
      *            the <code>IOException</code>
      */
     public UncheckedIOException(IOException cause){
-        super(cause.getMessage(), cause);
+        super(cause);
     }
 }
