@@ -15,6 +15,8 @@
  */
 package com.feilong.core.util.resourcebundleutiltest;
 
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toMap;
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.Assert.assertThat;
 
@@ -25,9 +27,6 @@ import java.util.ResourceBundle;
 import org.junit.Test;
 
 import com.feilong.core.lang.ClassLoaderUtil;
-
-import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
-import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 /**
  * The Class ResourceBundleUtilGetResourceBundleWithInputStreamTest.
@@ -50,14 +49,13 @@ public class GetResourceBundleWithInputStreamTest{
      * @throws FileNotFoundException
      *             the file not found exception
      */
-    @Test()
+    @Test
     //@Ignore
     public void testGetResourceBundle() throws FileNotFoundException{
-        //InputStream inputStream = new FileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties");
+        //InputStream inputStream =  FileUtil.getFileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties");
 
-        InputStream inputStream = ClassLoaderUtil.getResourceAsStream(
-                        "messages/feilong-core-test.properties",
-                        GetResourceBundleWithInputStreamTest.class);
+        InputStream inputStream = ClassLoaderUtil
+                        .getResourceAsStream("messages/feilong-core-test.properties", GetResourceBundleWithInputStreamTest.class);
 
         ResourceBundle resourceBundle = getResourceBundle(inputStream);
         //assertThat(toMap(resourceBundle), hasKey("incoming.pop.hostname"));

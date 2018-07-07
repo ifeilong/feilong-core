@@ -660,7 +660,8 @@ public final class ResourceBundleUtil{
      * </p>
      * 
      * <pre class="code">
-     * ResourceBundle resourceBundle = getResourceBundle(new FileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"));
+     * ResourceBundle resourceBundle = getResourceBundle(
+     *                 FileUtil.getFileInputStream("E:\\DataCommon\\Files\\Java\\config\\mail-read.properties"));
      * LOGGER.debug(JsonUtil.format(toMap(resourceBundle)));
      * </pre>
      * 
