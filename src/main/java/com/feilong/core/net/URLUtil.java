@@ -20,7 +20,6 @@ import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -150,7 +149,7 @@ public final class URLUtil{
         //---------------------------------------------------------------
         try{
             return new URL(spec);
-        }catch (MalformedURLException e){
+        }catch (Exception e){
             // no URL -> treat as file path
             LOGGER.info("[new URL(\"{}\")] exception,cause by :[{}],will try call [toFileURL(\"{}\")]", spec, e.getMessage(), spec);
             return toFileURL(spec);
@@ -201,9 +200,8 @@ public final class URLUtil{
     private static URL toFileURL(String filePath){
         try{
             return new File(filePath).toURI().toURL();// file.toURL() 已经过时,它不会自动转义 URL 中的非法字符
-        }catch (MalformedURLException e){
-            String message = format("filePath:[{}]", filePath);
-            throw new URIParseException(message, e);
+        }catch (Exception e){
+            throw new URIParseException(format("filePath:[{}]", filePath), e);
         }
     }
 
@@ -292,7 +290,7 @@ public final class URLUtil{
         //---------------------------------------------------------------
         try{
             return new URL(context, spec).toString();
-        }catch (MalformedURLException e){
+        }catch (Exception e){
             String message = format("context:[{}],spec:[{}]", context, spec);
             throw new URIParseException(message, e);
         }

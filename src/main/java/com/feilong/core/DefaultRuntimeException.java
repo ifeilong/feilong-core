@@ -23,7 +23,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 默认的 RuntimeException.
  * 
  * <p>
- * 主要作用,是在异常message 中加入了上一个错误信息,方便查看
+ * 主要作用,是在异常message 中追加 cause exception信息,方便查看排查问题
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -77,7 +77,7 @@ public class DefaultRuntimeException extends RuntimeException{
      *            the cause
      */
     public DefaultRuntimeException(Throwable cause){
-        super(cause.getMessage(), cause);
+        super(cause);
     }
 
     //---------------------------------------------------------------
@@ -93,8 +93,22 @@ public class DefaultRuntimeException extends RuntimeException{
      */
     private static String buildMessage(String message,Throwable cause){
         if (isNullOrEmpty(message)){
-            return cause.getMessage();
+            return causeMessage(cause);
         }
-        return message + ",cause message:[" + cause.getMessage() + "]";
+        return message + ",cause by:[" + causeMessage(cause) + "]";
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Cause message.
+     *
+     * @param cause
+     *            the cause
+     * @return the string
+     * @since 1.11.5
+     */
+    private static String causeMessage(Throwable cause){
+        return cause == null ? null : cause.toString();
     }
 }

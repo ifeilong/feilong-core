@@ -244,6 +244,7 @@ public final class FieldUtil{
      * @return 如果 <code>owner</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fieldName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fieldName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>obj</code> 中没有 <code>fieldName</code>,抛出 {@link ReflectException}<br>
      * @see org.apache.commons.lang3.reflect.FieldUtils#readField(Object, String, boolean)
      * @since 1.4.0
      * @since 1.9.2 change to private
@@ -252,10 +253,9 @@ public final class FieldUtil{
     private static <T> T getFieldValue(Object obj,String fieldName){
         try{
             return (T) FieldUtils.readField(obj, fieldName, true);
-        }catch (IllegalAccessException e){
-            String pattern = "readField exception,ownerClass:[{}],fieldName:[{}],ownerObj:[{}]";
-            String message = Slf4jUtil.format(pattern, obj.getClass().getName(), fieldName, obj);
-            throw new ReflectException(message, e);
+        }catch (Exception e){
+            String pattern = "getFieldValue exception,ownerObj:[{}],fieldName:[{}]";
+            throw new ReflectException(Slf4jUtil.format(pattern, obj, fieldName), e);
         }
     }
 }

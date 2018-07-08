@@ -45,6 +45,13 @@ public class GetUnionUrlTest{
         LOGGER.debug(URLUtil.getUnionUrl(URLUtil.toURL("E:\\test"), "sanguo"));
     }
 
+    //
+
+    @Test
+    public void testGetUnionUrl1222(){
+        LOGGER.debug(URLUtil.getUnionUrl(URLUtil.toURL("Ea:\\test"), "sanguo"));
+    }
+
     /**
      * Test get union url2.
      */

@@ -32,6 +32,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 TimeIntervalTest.class,
 
+                DefaultRuntimeExceptionTest.class,
+
                 ValidatorTest.class,
                 ValidatorIsNullOrEmptyParameterizedTest.class,
                 ValidatorIsNotNullOrEmptyParameterizedTest.class, })

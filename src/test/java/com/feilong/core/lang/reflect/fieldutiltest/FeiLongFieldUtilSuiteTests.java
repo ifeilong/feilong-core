@@ -28,6 +28,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 GetAllFieldListTest.class,
                 GetAllFieldNameAndValueMapTest.class,
+
+                GetFieldValueTest.class,
         //
 })
 public class FeiLongFieldUtilSuiteTests{
