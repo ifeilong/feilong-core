@@ -83,6 +83,42 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 </project>
 ```
 
+此外强烈建议你使用 feilong 工具类全家桶(含IO操作,Net操作,Json,XML,自定义标签等等工具类)
+
+
+```XML
+<project>
+
+	....
+	<properties>
+		<version.feilong-platform>1.11.5</version.feilong-platform>
+		....
+	</properties>
+
+	....
+	<repositories>
+		<repository>
+			<id>feilong-repository</id>
+			<url>https://raw.github.com/venusdrogon/feilong-platform/repository</url>
+		</repository>
+	</repositories>
+
+	....
+	<dependencies>
+		....
+		<dependency>
+			<groupId>com.feilong.platform</groupId>
+			<artifactId>feilong-util-all</artifactId>
+			<version>${version.feilong-platform}</version>
+		</dependency>
+		....
+	</dependencies>
+	....
+</project>
+```
+
+
+
 ## 5. How to install?
 
 有些小伙伴想下载并 `自行install` 进行研究, 你需要执行以下 `4` 个步骤:
