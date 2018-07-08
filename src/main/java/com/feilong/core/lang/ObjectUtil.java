@@ -145,6 +145,8 @@ public final class ObjectUtil{
         return isNotNullOrEmpty(object) ? object : defaultValue;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 判断指定的对象 <code>object</code>是否是数组.
      * 
@@ -226,6 +228,8 @@ public final class ObjectUtil{
         Validate.notNull(object, "object can't be null!");
         return object.getClass().isArray();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 判断指定的对象 <code>object</code> 是否是原生类型数组.
