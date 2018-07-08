@@ -28,8 +28,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 InvokeMethodWithParamsTest.class,
                 InvokeMethodWithParamsAndClassTest.class,
+
                 InvokeStaticMethodWithParamsTest.class,
                 InvokeStaticMethodWithParamsAndClassTest.class,
+                InvokeStaticMethodWithParamsPrivateTest.class,
         //
 })
 

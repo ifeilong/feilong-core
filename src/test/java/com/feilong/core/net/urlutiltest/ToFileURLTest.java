@@ -15,11 +15,11 @@
  */
 package com.feilong.core.net.urlutiltest;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.net.URL;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.net.URLUtil;
 
 /**
@@ -32,17 +32,12 @@ public class ToFileURLTest{
     // @Test(expected = InvocationTargetException.class)
     @Test
     @SuppressWarnings("static-method")
-    public void testBeanUtilNullFromBean() throws NoSuchMethodException,SecurityException,IllegalAccessException,IllegalArgumentException,
-                    InvocationTargetException{
-
-        //com.feilong.core.net.URLUtil.toFileURL(String)
-        Method declaredMethod = URLUtil.class.getDeclaredMethod("toFileURL", String.class);
-        declaredMethod.setAccessible(true);
+    public void testBeanUtilNullFromBean(){
 
         String string = "https://www.zhihu.com/";
         string = "h1t://^&*name11";
         // string = "/a/b";
-        Object invoke = declaredMethod.invoke(URLUtil.class, string);
+        URL invoke = MethodUtil.invokeStaticMethod(URLUtil.class, "toFileURL", string);
 
         System.out.println(invoke);//TODO:remove
     }

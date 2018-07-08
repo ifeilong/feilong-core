@@ -15,36 +15,22 @@
  */
 package com.feilong.core.lang.reflect.methodutiltest;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import com.feilong.core.lang.reflect.MethodUtil;
+
 /**
- * The Class OverloadStaticMethod.
+ * The Class MethodUtilInvokeStaticMethodWithParamsTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class OverloadStaticMethod{
+public class InvokeStaticMethodWithParamsPrivateTest{
 
-    /**
-     * Age.
-     *
-     * @param age
-     *            the age
-     * @return the string
-     */
-    public static String age(int age){
-        return "static age int:" + age;
+    @Test
+    public void test(){
+        assertEquals("static age Integer:5", MethodUtil.invokeStaticMethod(OverloadStaticMethod.class, "agePrivate", 5));
     }
 
-    /**
-     * Age.
-     *
-     * @param age
-     *            the age
-     * @return the string
-     */
-    public static String age(Integer age){
-        return "static age Integer:" + age;
-    }
-
-    private static String agePrivate(Integer age){
-        return "static age Integer:" + age;
-    }
 }

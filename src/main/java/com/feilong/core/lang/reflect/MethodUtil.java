@@ -15,8 +15,12 @@
  */
 package com.feilong.core.lang.reflect;
 
+import java.lang.reflect.Method;
+
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.MethodUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -99,8 +103,10 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <td>{@link Class#getMethods()}</td>
  * <td>
  * 返回一个包含某些 Method 对象的数组,
+ * 
  * <p>
- * 反映此 Class 所表示的类或接口(包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口)的<span style="color:green">公共(public) member</span>方法.<br>
+ * 反映此 Class 所表示的类或接口(包括由该类或接口声明的以及继承的类或接口)的<span style="color:green"><b>公共(public) member</b>
+ * </span>方法.<br>
  * </p>
  * 
  * <b>返回数组中的元素没有排序.</b><br>
@@ -114,10 +120,15 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <td>{@link Class#getDeclaredMethods()}</td>
  * <td>
  * 返回 Method 对象的一个数组,
+ * 
  * <p>
  * 反映此 Class 对象表示的类或接口声明的所有方法,<br>
- * 包括<span style="color:green">公共(public)、保护(protected)、默认(包)访问(default (package) access)和私有方法(private)</span>,<br>
- * 但 <span style="color:red">不包括继承(inherited)</span>的方法.
+ * 包括<span style="color:green"><b>公共(public)</b>
+ * 、<b>保护(protected)</b>
+ * 、<b>默认(包)访问(default (package) access)</b>
+ * 和<b>私有方法(private)</b>
+ * </span>,<br>
+ * 但 <span style="color:red"><b>不包括继承(inherited)</b></span>的方法.
  * </p>
  * 如果该类声明带有相同参数类型的多个公共成员方法,则它们都包含在返回的数组中.
  * <p>
@@ -140,6 +151,11 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @since 1.0.7
  */
 public final class MethodUtil{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodUtil.class);
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private MethodUtil(){
@@ -331,6 +347,8 @@ public final class MethodUtil{
     public static <T> T invokeMethod(final Object object,final String methodName,Object[] args,Class<?>[] parameterTypes){
         Validate.notNull(object, "object can't be null!");
         Validate.notBlank(methodName, "methodName can't be blank!");
+
+        //---------------------------------------------------------------
         try{
             return (T) MethodUtils.invokeMethod(object, methodName, args, parameterTypes);
         }catch (Exception e){
@@ -343,16 +361,27 @@ public final class MethodUtil{
     //---------------------------------------------------------------
 
     /**
-     * 执行指定类型 <code>klass</code> 的指定静态方法 <code>staticMethodName</code>.
+     * 执行指定类型 <code>klass</code> 的指定静态方法 <code>staticMethodName</code> (同时支持 私有静态方法).
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>支持调用对象父类静态方法</li>
      * <li>不可以调用非静态的方法</li>
-     * <li>调用的是 {@link MethodUtils#invokeStaticMethod(Class, String, Object...)},内部调用的是 {@link java.lang.Class#getMethods()}来处理,<b>不支持</b>
-     * 调用private 方法</li>
-     * <li>params将会转成<b>包装类型</b>来寻找method
+     * <li>支持调用私有的静态的方法(since 1.11.5 )</li>
+     * <li>params将会转成<b>包装类型</b>来寻找method</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>注意 :</h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@link MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])} 内部调用的是 {@link java.lang.Class#getMethods()}来处理,
+     * 直接使用的话,<span style="color:red"><b>不支持</b></span> 调用 private 方法</li>
+     * 
+     * <li>该方法进行容错处理,如果{@link MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])} 找不到对应的 公共的静态方法, 将会去尝试找私有额静态方法</li>
+     * </ol>
+     * </blockquote>
      * 
      * <h3>示例:</h3>
      * 
@@ -392,8 +421,11 @@ public final class MethodUtil{
      * </pre>
      * 
      * </blockquote>
-     * </li>
-     * <li>如果你要精准调用,请使用 {@link #invokeStaticMethod(Class, String, Object[], Class[])}
+     * 
+     * 
+     * <p>
+     * 如果你要精准调用,请使用 {@link #invokeStaticMethod(Class, String, Object[], Class[])}
+     * </p>
      * 
      * <h3>示例:</h3>
      * 
@@ -410,9 +442,8 @@ public final class MethodUtil{
      * </pre>
      * 
      * </blockquote>
-     * </ol>
-     * </blockquote>
      *
+     * 
      * @param <T>
      *            the generic type
      * @param klass
@@ -437,17 +468,24 @@ public final class MethodUtil{
     }
 
     /**
-     * 执行指定类型 <code>klass</code> 的指定静态方法 <code>staticMethodName</code>.
+     * 执行指定类型 <code>klass</code> 的指定静态方法 <code>staticMethodName</code> (同时支持 私有静态方法).
      * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
      * <li>支持调用对象父类静态方法</li>
      * <li>不可以调用非静态的方法</li>
-     * <li>
-     * 调用的是 {@link MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])},内部调用的是 {@link java.lang.Class#getMethods()}来处理,
-     * <b>不支持</b> 调用private 方法
-     * </li>
+     * <li>支持调用私有的静态的方法(since 1.11.5 )</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>注意 :</h3>
+     * <blockquote>
+     * <ol>
+     * <li>{@link MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])} 内部调用的是 {@link java.lang.Class#getMethods()}来处理,
+     * 直接使用的话,<span style="color:red"><b>不支持</b></span> 调用 private 方法</li>
+     * 
+     * <li>该方法进行容错处理,如果{@link MethodUtils#invokeStaticMethod(Class, String, Object[], Class[])} 找不到对应的 公共的静态方法, 将会去尝试找私有额静态方法</li>
      * </ol>
      * </blockquote>
      * 
@@ -516,10 +554,78 @@ public final class MethodUtil{
         //---------------------------------------------------------------
         try{
             return (T) MethodUtils.invokeStaticMethod(klass, staticMethodName, args, parameterTypes);
+        }catch (NoSuchMethodException e){
+            LOGGER.debug(
+                            "from class:[{}],can't find [public static {}()] method,cause exception: [{}],will try to find [private static] method",
+                            klass.getSimpleName(),
+                            staticMethodName,
+                            e.toString());
+            //---------------------------------------------------------------
+            return doWithNoSuchMethodException(klass, staticMethodName, args, parameterTypes);
         }catch (Exception e){
-            String pattern = "invokeStaticMethod Exception,class:[{}],staticMethodName:[{}],args:[{}],parameterTypes:[{}]";
-            String message = Slf4jUtil.format(pattern, klass.getName(), staticMethodName, args, parameterTypes);
-            throw new ReflectException(message, e);
+            throw new ReflectException(buildMessage(klass, staticMethodName, args, parameterTypes), e);
         }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Do with no such method exception.
+     *
+     * @param <T>
+     *            the generic type
+     * @param klass
+     *            the klass
+     * @param staticMethodName
+     *            the static method name
+     * @param args
+     *            the args
+     * @param parameterTypes
+     *            the parameter types
+     * @return the t
+     * @throws ReflectException
+     *             the reflect exception
+     * @since 1.11.5
+     */
+    @SuppressWarnings("unchecked")
+    private static <T> T doWithNoSuchMethodException(Class<?> klass,String staticMethodName,Object[] args,Class<?>[] parameterTypes){
+        try{
+            Method matchingMethod = MethodUtils.getMatchingMethod(klass, staticMethodName, parameterTypes);
+            if (null == matchingMethod){
+                throw new NoSuchMethodException("No such method:[" + staticMethodName + "()] on class: " + klass.getName());
+            }
+
+            //---------------------------------------------------------------
+
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("bingo,from class:[{}],find name [{}] method", klass.getSimpleName(), staticMethodName);
+            }
+
+            //---------------------------------------------------------------
+            matchingMethod.setAccessible(true);
+            return (T) matchingMethod.invoke(null, args);
+        }catch (Exception e){
+            throw new ReflectException(buildMessage(klass, staticMethodName, args, parameterTypes), e);
+        }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Builds the message.
+     *
+     * @param klass
+     *            the klass
+     * @param staticMethodName
+     *            the static method name
+     * @param args
+     *            the args
+     * @param parameterTypes
+     *            the parameter types
+     * @return the string
+     */
+    private static String buildMessage(Class<?> klass,String staticMethodName,Object[] args,Class<?>[] parameterTypes){
+        String pattern = "invokeStaticMethod Exception,class:[{}],staticMethodName:[{}],args:[{}],parameterTypes:[{}]";
+        return Slf4jUtil.format(pattern, klass.getName(), staticMethodName, args, parameterTypes);
     }
 }

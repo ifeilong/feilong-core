@@ -24,11 +24,6 @@ import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.reflect.MethodUtil;
 import com.feilong.core.lang.reflect.ReflectException;
 
-/**
- * The Class MethodUtilInvokeStaticMethodWithParamsTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class InvokeStaticMethodWithParamsTest{
 
     /**

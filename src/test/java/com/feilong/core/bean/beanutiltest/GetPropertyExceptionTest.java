@@ -17,13 +17,11 @@ package com.feilong.core.bean.beanutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import org.junit.Test;
 
 import com.feilong.core.bean.BeanUtil;
 import com.feilong.core.lang.reflect.MethodUtil;
+import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.store.member.Person;
 
 /**
@@ -35,40 +33,26 @@ public class GetPropertyExceptionTest{
 
     /**
      * Test bean util null to bean.
-     * 
+     *
      * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
+     *             the security exception
      * @throws IllegalArgumentException
-     * @throws IllegalAccessException
+     *             the illegal argument exception
      */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ReflectException.class)
     @SuppressWarnings("static-method")
-    public void testBeanUtilNullToBean() throws NoSuchMethodException,SecurityException,IllegalAccessException,IllegalArgumentException,
-                    InvocationTargetException{
-
-        // MethodUtil.invokeStaticMethod(BeanUtil.class, "getProperty", null, "name");
+    public void testBeanUtilNullToBean(){
         MethodUtil.invokeStaticMethod(BeanUtil.class, "getProperty", toArray(null, "name"), toArray(Object.class, String.class));
 
     }
 
     /**
-     * Test bean util null from bean.
-     * 
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
+     * Test bean util null from bean 2.
      */
-    //@Test(expected = NullPointerException.class)
     @Test
     @SuppressWarnings("static-method")
-    public void testBeanUtilNullFromBean() throws NoSuchMethodException,SecurityException,IllegalAccessException,IllegalArgumentException,
-                    InvocationTargetException{
-        Method declaredMethod = BeanUtil.class.getDeclaredMethod("getProperty", Object.class, String.class);
-        declaredMethod.setAccessible(true);
-
-        declaredMethod.invoke(BeanUtil.class, new Person(), "name11");
+    public void testBeanUtilNullFromBean2(){
+        MethodUtil.invokeStaticMethod(BeanUtil.class, "getProperty", new Person(), "name11");
     }
+
 }

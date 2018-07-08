@@ -15,28 +15,19 @@
  */
 package com.feilong.core.lang.reflect.fieldutiltest;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import org.junit.Test;
 
 import com.feilong.core.lang.reflect.FieldUtil;
+import com.feilong.core.lang.reflect.MethodUtil;
+import com.feilong.core.lang.reflect.ReflectException;
 import com.feilong.store.member.Person;
 
-/**
- * The Class FieldUtilGetAllFieldListTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class GetFieldValueTest{
 
-    @Test(expected = InvocationTargetException.class)
+    @Test(expected = ReflectException.class)
     @SuppressWarnings("static-method")
-    public void testBeanUtilNullFromBean() throws NoSuchMethodException,SecurityException,IllegalAccessException,IllegalArgumentException,
-                    InvocationTargetException{
-        Method declaredMethod = FieldUtil.class.getDeclaredMethod("getFieldValue", Object.class, String.class);
-        declaredMethod.setAccessible(true);
+    public void testBeanUtilNullFromBean222(){
 
-        declaredMethod.invoke(FieldUtil.class, new Person(), "name11");
+        MethodUtil.invokeStaticMethod(FieldUtil.class, "getFieldValue", new Person(), "name11");
     }
 }
