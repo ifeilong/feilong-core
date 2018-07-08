@@ -25,7 +25,139 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <p>
  * 主要作用,是在异常message 中追加 cause exception信息,方便查看排查问题
  * </p>
- *
+ * 
+ * <h3>示例1:</h3>
+ * 
+ * <blockquote>
+ * 
+ * 如下代码
+ * 
+ * 
+ * <pre class="code">
+ * 
+ * public void testRuntimeException(){
+ *     try{
+ *         int i = 1 / 0;
+ *     }catch (Exception e){
+ *         throw new RuntimeException("", e);
+ *     }
+ * }
+ * 
+ * </pre>
+ * 
+ * <b>抛出的异常情况在控制台是这样的:</b>
+ * 
+ * <pre class="code">
+
+java.lang.RuntimeException: 
+    at com.feilong.core.DefaultRuntimeExceptionTest.testRuntimeException(DefaultRuntimeExceptionTest.java:63)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.lang.reflect.Method.invoke(Method.java:606)
+    at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+    at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: java.lang.ArithmeticException: / by zero
+    at com.feilong.core.DefaultRuntimeExceptionTest.testRuntimeException(DefaultRuntimeExceptionTest.java:61)
+    ... 23 more
+ * </pre>
+ * 
+ * 
+ * 
+ * 
+ * 而如果使用 DefaultRuntimeException
+ * 
+ * <pre class="code">
+ * 
+ * public void testDefaultRuntimeException(){
+ *     try{
+ *         int i = 1 / 0;
+ *     }catch (Exception e){
+ *         throw new DefaultRuntimeException("", e);
+ *     }
+ * }
+ * 
+ * </pre>
+ * 
+ * <b>抛出来的信息是这样的 :</b>
+ * 
+ * <pre class="code">
+com.feilong.core.DefaultRuntimeException: <span style="color:red">java.lang.ArithmeticException: / by zero</span>
+    at com.feilong.core.DefaultRuntimeExceptionTest.testDefaultRuntimeException(DefaultRuntimeExceptionTest.java:53)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+    at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+    at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+
+Caused by: java.lang.ArithmeticException: / by zero
+    at com.feilong.core.DefaultRuntimeExceptionTest.testDefaultRuntimeException(DefaultRuntimeExceptionTest.java:51)
+    ... 23 more
+ * </pre>
+ * 
+ * </blockquote>
+ * 
+ * <h3>示例2:</h3>
+ * 
+ * <blockquote>
+ * 
+ * 如下代码
+ * 
+ * 
+ * <pre class="code">
+ * 
+ * public void testRuntimeExceptionMessage(){
+ *     try{
+ *         int i = 1 / 0;
+ *     }catch (Exception e){
+ *         throw new RuntimeException("exception", e);
+ *     }
+ * }
+ * 
+ * </pre>
+ * 
+ * <b>抛出的异常情况在控制台是这样的:</b>
+ * 
+ * <pre class="code">
+java.lang.RuntimeException: exception
+    at com.feilong.core.DefaultRuntimeExceptionTest.testRuntimeExceptionMessage(DefaultRuntimeExceptionTest.java:105)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+    at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+    at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: java.lang.ArithmeticException: / by zero
+    at com.feilong.core.DefaultRuntimeExceptionTest.testRuntimeExceptionMessage(DefaultRuntimeExceptionTest.java:103)
+    ... 23 more
+ * </pre>
+ * 
+ * 
+ * 
+ * 
+ * 而如果使用 DefaultRuntimeException
+ * 
+ * <pre class="code">
+ * 
+ * public void testDefaultRuntimeExceptionMessageAppend(){
+ *     try{
+ *         int i = 1 / 0;
+ *     }catch (Exception e){
+ *         throw new DefaultRuntimeException("exception", e);
+ *     }
+ * }
+ * 
+ * </pre>
+ * 
+ * <b>抛出来的信息是这样的 :</b>
+ * 
+ * <pre class="code">
+com.feilong.core.DefaultRuntimeException: <span style="color:red">exception,cause by:[java.lang.ArithmeticException: / by zero]</span>
+    at com.feilong.core.DefaultRuntimeExceptionTest.testDefaultRuntimeExceptionMessageAppend(DefaultRuntimeExceptionTest.java:95)
+    at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+    at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: java.lang.ArithmeticException: / by zero
+    at com.feilong.core.DefaultRuntimeExceptionTest.testDefaultRuntimeExceptionMessageAppend(DefaultRuntimeExceptionTest.java:93)
+    ... 23 more
+ * </pre>
+ * 
+ * </blockquote>
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
