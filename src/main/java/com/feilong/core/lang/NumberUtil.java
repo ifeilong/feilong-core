@@ -684,10 +684,10 @@ public final class NumberUtil{
      *         如果所有元素都是null,抛出 {@link IllegalArgumentException}<br>
      *         否则将每个元素(跳过 null元素)转换成{@link BigDecimal},并进行累加操作
      * @since 1.5.5
+     * @since 1.11.5 allow null element
      */
     public static BigDecimal getAddValue(Number...numbers){
         Validate.notEmpty(numbers, "numbers can't be null/empty!");
-        //Validate.noNullElements(numbers, "numbers can't has null element!");
 
         //---------------------------------------------------------------
         if (isAllElementNull(numbers)){
