@@ -555,7 +555,7 @@ public final class MethodUtil{
         try{
             return (T) MethodUtils.invokeStaticMethod(klass, staticMethodName, args, parameterTypes);
         }catch (NoSuchMethodException e){
-            LOGGER.debug(
+            LOGGER.trace(
                             "from class:[{}],can't find [public static {}()] method,cause exception: [{}],will try to find [private static] method",
                             klass.getSimpleName(),
                             staticMethodName,

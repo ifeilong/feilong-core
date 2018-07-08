@@ -60,28 +60,4 @@ public class GetAddValueTest{
         NumberUtil.getAddValue(null, null);
     }
 
-    /**
-     * Test get add value illegal argument exception 1.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAddValueIllegalArgumentException1(){
-        NumberUtil.getAddValue(null, 5);
-    }
-
-    /**
-     * Test get add value 4.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
-    public void testGetAddValue4(){
-        NumberUtil.getAddValue(new BigDecimal(6), null);
-    }
-
-    /**
-     * Test get add value 33.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAddValue33(){
-        NumberUtil.getAddValue(2, 4, null);
-    }
 }

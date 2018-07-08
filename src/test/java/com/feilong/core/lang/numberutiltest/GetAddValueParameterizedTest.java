@@ -41,7 +41,15 @@ public class GetAddValueParameterizedTest extends AbstractOneParamAndOneResultPa
         return toList(
                         ConvertUtil.<Object> toArray(toArray(new BigDecimal(6), 5), toBigDecimal(11)),
 
-                        toArray(toArray(2, 4, 5), toBigDecimal(11))
+                        toArray(toArray(2, 4, 5), toBigDecimal(11)),
+
+                        toArray(toArray(null, 4, 5), toBigDecimal(9)),
+                        toArray(toArray(2, null, 5), toBigDecimal(7)),
+                        toArray(toArray(2, 4, null), toBigDecimal(6)),
+
+                        toArray(toArray(null, null, 5), toBigDecimal(5)),
+                        toArray(toArray(null, 4, null), toBigDecimal(4)),
+                        toArray(toArray(2, null, null), toBigDecimal(2))
 
         //
         );

@@ -163,10 +163,10 @@ public final class NumberUtil{
 
     /**
      * 一,<code>{@value}</code>.
-     * 
-     * @since 1.10.7
+     *
      * @see BigDecimal#ONE
      * @see NumberUtils#INTEGER_ONE
+     * @since 1.10.7
      */
     public static final int  ONE              = 1;
 
@@ -657,6 +657,14 @@ public final class NumberUtil{
     /**
      * 所有数加起来.
      * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>支持跳过null 元素相加 (since 1.11.5)</li>
+     * <li>但是如果所有元素都是null ,将会抛出 {@link IllegalArgumentException}</li>
+     * </ol>
+     * </blockquote>
+     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -664,6 +672,7 @@ public final class NumberUtil{
      * <pre class="code">
      * NumberUtil.getAddValue(2, 4, 5)              =   11
      * NumberUtil.getAddValue(new BigDecimal(6), 5) =   11
+     * NumberUtil.getAddValue(new BigDecimal(6), null) =   6
      * </pre>
      * 
      * </blockquote>
@@ -672,20 +681,48 @@ public final class NumberUtil{
      *            the numbers
      * @return 如果 <code>numbers</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>numbers</code> 是empty,抛出 {@link IllegalArgumentException}<br>
-     *         如果有元素是null,抛出 {@link IllegalArgumentException}<br>
-     *         否则将每个元素转换成{@link BigDecimal},并进行累加操作
+     *         如果所有元素都是null,抛出 {@link IllegalArgumentException}<br>
+     *         否则将每个元素(跳过 null元素)转换成{@link BigDecimal},并进行累加操作
      * @since 1.5.5
      */
     public static BigDecimal getAddValue(Number...numbers){
         Validate.notEmpty(numbers, "numbers can't be null/empty!");
-        Validate.noNullElements(numbers, "numbers can't has null element!");
+        //Validate.noNullElements(numbers, "numbers can't has null element!");
 
+        //---------------------------------------------------------------
+        if (isAllElementNull(numbers)){
+            throw new IllegalArgumentException("can not all numbers is null!");
+        }
+
+        //---------------------------------------------------------------
         BigDecimal sum = ZERO;
         for (Number number : numbers){
+            if (null == number){
+                continue;
+            }
             sum = sum.add(toBigDecimal(number));
         }
         return sum;
     }
+
+    /**
+     * 是否所有元素是null.
+     *
+     * @param numbers
+     *            the numbers
+     * @return true, if is all null
+     * @since 1.11.5
+     */
+    private static boolean isAllElementNull(Number...numbers){
+        for (Number number : numbers){
+            if (null != number){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 所有数相减.
@@ -719,6 +756,8 @@ public final class NumberUtil{
      */
     public static BigDecimal getSubtractValue(Number beSubtractedValue,Number...subtractions){
         Validate.notNull(beSubtractedValue, "beSubtractedValue can't be null/empty!");
+
+        //---------------------------------------------------------------
 
         BigDecimal result = toBigDecimal(beSubtractedValue);
         if (isNullOrEmpty(subtractions)){
