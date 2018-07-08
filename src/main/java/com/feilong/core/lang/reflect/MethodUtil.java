@@ -559,7 +559,7 @@ public final class MethodUtil{
                             "from class:[{}],can't find [public static {}()] method,cause exception: [{}],will try to find [private static] method",
                             klass.getSimpleName(),
                             staticMethodName,
-                            e.toString());
+                            e);
             //---------------------------------------------------------------
             return doWithNoSuchMethodException(klass, staticMethodName, args, parameterTypes);
         }catch (Exception e){
