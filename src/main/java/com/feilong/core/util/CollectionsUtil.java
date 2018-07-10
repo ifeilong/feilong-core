@@ -861,8 +861,6 @@ public final class CollectionsUtil{
      * 
      * </blockquote>
      * 
-     * 
-     * 
      * <h3>关于参数 beanIterable</h3>
      * <blockquote>
      * 支持以下类型:
