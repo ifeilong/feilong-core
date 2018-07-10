@@ -795,7 +795,7 @@ public final class CollectionsUtil{
      * 
      * </blockquote>
      * 
-     * <h3>当然,你还可以使用更加丰富的组合模式:</h3>
+     * <h3>对于参数 <code>propertyName</code>:</h3>
      * 
      * <blockquote>
      * 
@@ -861,12 +861,85 @@ public final class CollectionsUtil{
      * 
      * </blockquote>
      * 
+     * 
+     * 
+     * <h3>关于参数 beanIterable</h3>
+     * <blockquote>
+     * 支持以下类型:
+     * <dl>
+     * <dt>bean Iterable</dt>
+     * <dd>诸如List{@code <User>},Set{@code <User>}等</dd>
+     * 
+     * <dt>map Iterable</dt>
+     * <dd>
+     * 比如 {@code List<Map<String, String>>}
+     * 
+     * 示例:
+     * 
+     * <pre>
+     * List{@code <Map<String, String>>} list = newArrayList();
+     * list.add(toMap("key", "value1"));
+     * list.add(toMap("key", "value2"));
+     * list.add(toMap("key", "value3"));
+     * 
+     * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "(key)");
+     * assertThat(resultList, contains("value1", "value2", "value3"));
+     * </pre>
+     * 
+     * </dd>
+     * 
+     * <dt>list Iterable</dt>
+     * <dd>
+     * 比如 {@code  List<List<String>>}
+     * 
+     * 示例:
+     * 
+     * <pre>
+     * List{@code <List<String>>} list = newArrayList();
+     * list.add(toList("小明", "18"));
+     * list.add(toList("小宏", "18"));
+     * list.add(toList("小振", "18"));
+     * 
+     * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "[0]");
+     * assertThat(resultList, contains("小明", "小宏", "小振"));
+     * </pre>
+     * 
+     * </dd>
+     * 
+     * <dt>数组 Iterable</dt>
+     * <dd>
+     * 比如 {@code  List<String[]>}
+     * 
+     * 示例:
+     * 
+     * <pre>
+     * List<String[]> list = newArrayList();
+     * list.add(toArray("三国", "水浒"));
+     * list.add(toArray("西游", "金瓶梅"));
+     * 
+     * List{@code <String>} resultList = CollectionsUtil.getPropertyValueList(list, "[0]");
+     * assertThat(resultList, contains("三国", "西游"));
+     * </pre>
+     * 
+     * </dd>
+     * </dl>
+     * 
+     * </blockquote>
+     * 
      * @param <T>
      *            返回集合类型 generic type
      * @param <O>
      *            可迭代对象类型 generic type
      * @param beanIterable
-     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     *            支持
+     * 
+     *            <ul>
+     *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
+     *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
+     *            <li>list Iterable , 比如 {@code  List<List<String>>}</li>
+     *            <li>数组 Iterable ,比如 {@code  List<String[]>}</li>
+     *            </ul>
+     * 
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
@@ -918,7 +991,14 @@ public final class CollectionsUtil{
      * @param <O>
      *            the generic type
      * @param beanIterable
-     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     *            支持
+     * 
+     *            <ul>
+     *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
+     *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
+     *            <li>list Iterable , 比如 {@code  List<List<String>>}</li>
+     *            <li>数组 Iterable ,比如 {@code  List<String[]>}</li>
+     *            </ul>
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
@@ -946,7 +1026,14 @@ public final class CollectionsUtil{
      * @param <K>
      *            the key type
      * @param beanIterable
-     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     *            支持
+     * 
+     *            <ul>
+     *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
+     *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
+     *            <li>list Iterable , 比如 {@code  List<List<String>>}</li>
+     *            <li>数组 Iterable ,比如 {@code  List<String[]>}</li>
+     *            </ul>
      * @param propertyName
      *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
      *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>

@@ -54,9 +54,9 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * <blockquote>
  * 
  * <pre class="code">
- * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); // 这里的9是String类型
- * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); // 这里的是int类型
- * // 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化,后者不能
+ * BeanUtils.setProperty(pt1, &quot;x&quot;, &quot;9&quot;); <span style="color:green">// 这里的9是String类型</span>
+ * PropertyUtils.setProperty(pt1, &quot;x&quot;, 9); <span style="color:green">// 这里的是int类型</span>
+ * <span style="color:green">// 这两个类BeanUtils和PropertyUtils,前者能自动将int类型转化,后者不能</span>
  * </pre>
  * 
  * <p>
@@ -64,6 +64,68 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * BeanUtils着重于"Bean",返回值通常是String,<br>
  * 而PropertyUtils着重于属性,它的返回值通常是Object. 
  * </p>
+ * </blockquote>
+ * 
+ * <h3><a name="propertyName">关于propertyName</a></h3>
+ * 
+ * <blockquote>
+ * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
+ * 
+ * <pre class="code">
+ * Company company = new Company();
+ * company.setName("Simple");
+ * </pre>
+ * 
+ * <dl>
+ * <dt>Simple类型(简单类型,如String Int)</dt>
+ * <dd>
+ * 对于Simple类型,参数二直接是属性名即可
+ * 
+ * <pre class="code">
+ * LOGGER.debug(BeanUtils.getProperty(company, "name"));
+ * </pre>
+ * 
+ * </dd>
+ * 
+ * <dt>Map类型</dt>
+ * <dd>
+ * 对于Map类型,则需要以"<span style="color:red">属性名(key值)</span>"的形式
+ * 
+ * <pre class="code">
+ * LOGGER.debug(BeanUtils.getProperty(company, "address (A2)"));
+ * 
+ * Map{@code <String,String>} am = newHashMap();
+ * am.put("1", "234-222-1222211");
+ * am.put("2", "021-086-1232323");
+ * 
+ * BeanUtils.setProperty(company, "telephone", am);
+ * LOGGER.debug(BeanUtils.getProperty(company, "telephone (2)"));
+ * </pre>
+ * 
+ * </dd>
+ * 
+ * <dt>索引类型(Indexed),如 数组 arrayList</dt>
+ * <dd>
+ * 对于Indexed,则为"<span style="color:red">属性名[索引值]</span>",注意这里对于ArrayList和数组都可以用一样的方式进行操作.
+ * 
+ * <pre class="code">
+ * LOGGER.debug(BeanUtils.getProperty(company, "otherInfo[2]"));
+ * BeanUtils.setProperty(company, "product[1]", "NOTES SERVER");
+ * LOGGER.debug(BeanUtils.getProperty(company, "product[1]"));
+ * </pre>
+ * 
+ * </dd>
+ * 
+ * <dt>组合/嵌套(Nested)</dt>
+ * <dd>
+ * 当然这3种类也可以组合使用啦！
+ * 
+ * <pre class="code">
+ * LOGGER.debug(BeanUtils.getProperty(company, "employee[1].name"));
+ * </pre>
+ * 
+ * </dd>
+ * </dl>
  * </blockquote>
  * 
  * <h3>关于 {@link BeanUtils#copyProperty(Object, String, Object) copyProperty} 和 {@link BeanUtils#setProperty(Object, String, Object)
@@ -78,82 +140,13 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * 
  * 如果我们只是为bean的属性赋值的话,使用{@link BeanUtils#copyProperty(Object, String, Object)}就可以了;
  * 而{@link BeanUtils#setProperty(Object, String, Object)}方法是实现  {@link BeanUtils#populate(Object,Map)}机制的基础,也就是说如果我们需要自定义实现populate()方法,那么我们可以override {@link BeanUtils#setProperty(Object, String, Object)}方法.
- * 所以,做为一般的日常使用,{@link BeanUtils#setProperty(Object, String, Object)}方法是不推荐使用的.
+ * 所以,做为一般的日常使用,{@link BeanUtils#setProperty(Object, String, Object)}方法是<span style="color:red">不推荐使用</span>的.
  * </pre>
  * 
- * </blockquote>
- * 
- * <h3><a name="propertyName">关于propertyName</a></h3>
- * 
- * <blockquote>
- * getProperty和setProperty,它们都只有2个参数,第一个是JavaBean对象,第二个是要操作的属性名.
- * 
- * <pre class="code">
- * Company c = new Company();
- * c.setName("Simple");
- * </pre>
- * 
- * <ul>
- * <li>
- * <p>
- * <b>Simple类型(简单类型,如String Int)</b>
- * </p>
- * 
- * <pre class="code">
- * 对于Simple类型,参数二直接是属性名即可
- * LOGGER.debug(BeanUtils.getProperty(c, "name"));
- * </pre>
- * 
- * </li>
- * 
- * <li>
- * <p>
- * <b>Map类型</b>
- * </p>
- * 对于Map类型,则需要以"属性名(key值)"的形式
- * 
- * <pre class="code">
- * LOGGER.debug(BeanUtils.getProperty(c, "address (A2)"));
- * 
- * Map{@code <String,String>} am = newHashMap();
- * am.put("1", "234-222-1222211");
- * am.put("2", "021-086-1232323");
- * 
- * BeanUtils.setProperty(c, "telephone", am);
- * LOGGER.debug(BeanUtils.getProperty(c, "telephone (2)"));
- * </pre>
- * 
- * </li>
- * <li>
- * <p>
- * <b>索引类型(Indexed),如 数组 arrayList</b>
- * </p>
- * 
- * 对于Indexed,则为"属性名[索引值]",注意这里对于ArrayList和数组都可以用一样的方式进行操作.
- * 
- * <pre class="code">
- * LOGGER.debug(BeanUtils.getProperty(c, "otherInfo[2]"));
- * BeanUtils.setProperty(c, "product[1]", "NOTES SERVER");
- * LOGGER.debug(BeanUtils.getProperty(c, "product[1]"));
- * </pre>
- * 
- * </li>
- * 
- * <li>
- * <p>
- * <b>组合(nest)</b>
- * </p>
- * 
- * <pre class="code">
- * 当然这3种类也可以组合使用啦！
- * LOGGER.debug(BeanUtils.getProperty(c, "employee[1].name"));
- * </pre>
- * 
- * </li>
- * </ul>
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * 
  * @see com.feilong.core.bean.PropertyUtil
  * 
  * @see java.beans.BeanInfo
@@ -318,6 +311,8 @@ public final class BeanUtil{
 
     // [end]
 
+    //---------------------------------------------------------------
+
     // [start] setProperty
 
     /**
@@ -350,6 +345,8 @@ public final class BeanUtil{
     }
 
     // [end]
+
+    //---------------------------------------------------------------
 
     // [start] getProperty
 
@@ -390,6 +387,8 @@ public final class BeanUtil{
     }
 
     // [end]
+
+    //---------------------------------------------------------------
 
     // [start] cloneBean
 
@@ -446,6 +445,8 @@ public final class BeanUtil{
     }
 
     // [end]
+
+    //---------------------------------------------------------------
 
     // [start] populate(填充) 把properties/map里面的值放入bean中
 
@@ -703,6 +704,8 @@ public final class BeanUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将 alias 和value 的map <code>populate</code> <b>(填充)</b>到 <code>aliasBean</code>.
      * 
@@ -918,6 +921,8 @@ public final class BeanUtil{
         return aliasBean;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 提取 klass {@link Alias} 注释,将 属性名字和 {@link Alias#name()} 组成map 返回.
      *
@@ -949,6 +954,8 @@ public final class BeanUtil{
     }
 
     // [end]
+
+    //---------------------------------------------------------------
 
     /**
      * 使用 <code>valueMap</code> 来构造一个 DynaBean.

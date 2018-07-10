@@ -34,16 +34,18 @@ import com.feilong.store.member.User;
  */
 public class GetPropertyValueListTest{
 
+    private static final List<User> list = toList(//
+                    new User(2L),
+                    new User(5L),
+                    new User(5L));
+
+    //---------------------------------------------------------------
+
     /**
      * Test get property value list.
      */
     @Test
     public void testGetPropertyValueList(){
-        List<User> list = toList(//
-                        new User(2L),
-                        new User(5L),
-                        new User(5L));
-
         List<Long> resultList = CollectionsUtil.getPropertyValueList(list, "id");
         assertThat(resultList, contains(2L, 5L, 5L));
 
@@ -71,12 +73,13 @@ public class GetPropertyValueListTest{
         assertEquals(emptyList(), CollectionsUtil.getPropertyValueList(new ArrayList<>(), "userInfo.age"));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Test get property value list null property name.
      */
     @Test(expected = NullPointerException.class)
     public void testGetPropertyValueListNullPropertyName(){
-        List<User> list = toList(new User(2L), new User(5L), new User(5L));
         CollectionsUtil.getPropertyValueList(list, null);
     }
 
@@ -85,7 +88,6 @@ public class GetPropertyValueListTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetPropertyValueListEmptyPropertyName(){
-        List<User> list = toList(new User(2L), new User(5L), new User(5L));
         CollectionsUtil.getPropertyValueList(list, "");
     }
 
@@ -94,7 +96,6 @@ public class GetPropertyValueListTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testGetPropertyValueListBlankPropertyName(){
-        List<User> list = toList(new User(2L), new User(5L), new User(5L));
         CollectionsUtil.getPropertyValueList(list, " ");
     }
 
