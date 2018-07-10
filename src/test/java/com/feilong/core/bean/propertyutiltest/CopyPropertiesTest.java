@@ -68,6 +68,8 @@ public class CopyPropertiesTest{
                         ));
     }
 
+    //---------------------------------------------------------------
+
     @Test
     public void testCopyPropertiesNullValue(){
         User oldUser = new User();

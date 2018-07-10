@@ -15,9 +15,7 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.MapUtil.newHashMap;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
@@ -25,19 +23,14 @@ import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
-import com.feilong.store.member.UserAddress;
-import com.feilong.store.member.UserInfo;
 
 /**
- * The Class CollectionsUtilGetPropertyValueListTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * The Class GetPropertyValueListTest.
  */
 public class GetPropertyValueListTest{
 
@@ -60,68 +53,7 @@ public class GetPropertyValueListTest{
         assertThat(resultList, contains(2L, 5L, 5L, 7L, 8L));
     }
 
-    /**
-     * Test get property value list1.
-     */
-    @Test
-    public void testGetPropertyValueList1(){
-        UserAddress userAddress = new UserAddress();
-        userAddress.setAddress("中南海");
-        List<UserAddress> userAddresseList = toList(userAddress);
-
-        //---------------------------------------------------------------
-        Map<String, String> attrMap = newHashMap();
-        attrMap.put("蜀国", "赵子龙");
-        attrMap.put("魏国", "张文远");
-        attrMap.put("吴国", "甘兴霸");
-
-        //---------------------------------------------------------------
-        UserInfo userInfo1 = new UserInfo();
-        userInfo1.setAge(28);
-
-        //---------------------------------------------------------------
-
-        User user1 = new User(2L);
-
-        user1.setLoves(toArray("sanguo1", "xiaoshuo1"));
-        user1.setUserInfo(userInfo1);
-        user1.setAttrMap(attrMap);
-        user1.setUserAddresseList(userAddresseList);
-
-        //---------------------------------------------------------------
-
-        UserInfo userInfo2 = new UserInfo();
-        userInfo2.setAge(null);
-
-        User user2 = new User(3L);
-        user2.setLoves(toArray("sanguo2", "xiaoshuo2"));
-        user2.setUserInfo(userInfo2);
-        user2.setAttrMap(attrMap);
-        user2.setUserAddresseList(userAddresseList);
-
-        List<User> userList = toList(user1, user2);
-
-        //数组
-        List<String> fieldValueList1 = CollectionsUtil.getPropertyValueList(userList, "loves[1]");
-        //LOGGER.debug(JsonUtil.format(fieldValueList1));
-
-        assertThat(fieldValueList1, contains("xiaoshuo1", "xiaoshuo2"));
-
-        //级联对象
-        List<Integer> fieldValueList2 = CollectionsUtil.getPropertyValueList(userList, "userInfo.age");
-        // LOGGER.debug(JsonUtil.format(fieldValueList2));
-        assertThat(fieldValueList2, contains(28, null));
-
-        //Map
-        List<String> attrList = CollectionsUtil.getPropertyValueList(userList, "attrMap(蜀国)");
-        //LOGGER.debug(JsonUtil.format(attrList));
-        assertThat(attrList, contains("赵子龙", "赵子龙"));
-
-        //集合
-        List<UserAddress> addressList = CollectionsUtil.getPropertyValueList(userList, "userAddresseList[0]");
-        //LOGGER.debug(JsonUtil.format(addressList));
-        assertThat(addressList, contains(userAddress, userAddress));
-    }
+    //---------------------------------------------------------------
 
     /**
      * Test get property value list null object collection.

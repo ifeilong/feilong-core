@@ -20,7 +20,9 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
+import static java.util.Collections.emptySet;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -875,7 +877,10 @@ public final class CollectionsUtil{
      * @since jdk1.5
      */
     public static <T, O> List<T> getPropertyValueList(Iterable<O> beanIterable,String propertyName){
-        return getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>());
+        if (isNullOrEmpty(beanIterable)){//避免null point
+            return emptyList();
+        }
+        return getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(IterableUtils.size(beanIterable)));
     }
 
     /**
@@ -924,7 +929,10 @@ public final class CollectionsUtil{
      * @since 1.0.8
      */
     public static <T, O> Set<T> getPropertyValueSet(Iterable<O> beanIterable,String propertyName){
-        return getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>());
+        if (isNullOrEmpty(beanIterable)){//避免null point
+            return emptySet();
+        }
+        return getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>(IterableUtils.size(beanIterable)));
     }
 
     /**
@@ -961,6 +969,7 @@ public final class CollectionsUtil{
             return returnCollection;
         }
 
+        //---------------------------------------------------------------
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
         for (O bean : beanIterable){
             returnCollection.add(PropertyUtil.<T> getProperty(bean, propertyName));
@@ -1053,6 +1062,8 @@ public final class CollectionsUtil{
         if (isNullOrEmpty(beanIterable)){
             return emptyMap();
         }
+
+        //---------------------------------------------------------------
         Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
         Validate.notBlank(valuePropertyName, "valuePropertyName can't be null/empty!");
 

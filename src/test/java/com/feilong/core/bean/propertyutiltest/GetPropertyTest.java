@@ -15,32 +15,29 @@
  */
 package com.feilong.core.bean.propertyutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
 import com.feilong.core.bean.PropertyUtil;
 import com.feilong.store.member.User;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
-/**
- * The Class PropertyUtilGetPropertyTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class GetPropertyTest{
 
     /**
      * Test get property.
      */
     @Test
-    public void testGetProperty(){
+    public void testGetPropertyNest(){
         User user = new User();
         user.setId(5L);
         user.setDate(new Date());
@@ -50,6 +47,39 @@ public class GetPropertyTest{
         Long id = PropertyUtil.getProperty(list, "[0].id");
         assertThat(id, is(equalTo(5L)));
     }
+
+    //---------------------------------------------------------------
+    @Test
+    public void testGetBean(){
+        User user = new User();
+        user.setId(5L);
+        user.setDate(new Date());
+
+        Long id = PropertyUtil.getProperty(user, "id");
+        assertThat(id, is(equalTo(5L)));
+    }
+
+    @Test
+    public void testGetPropertyMap(){
+        Map<String, Object> map = newHashMap();
+        map.put("name", "jim");
+
+        assertThat(PropertyUtil.<String> getProperty(map, "name"), is(equalTo("jim")));
+    }
+
+    @Test
+    public void testGetPropertyList(){
+        List<String> list = toList("1", "2", "3");
+        assertThat(PropertyUtil.<String> getProperty(list, "[0]"), is(equalTo("1")));
+    }
+
+    @Test
+    public void testGetPropertyArray(){
+        String[] array = toArray("1", "2", "3");
+        assertThat(PropertyUtil.<String> getProperty(array, "[0]"), is(equalTo("1")));
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Test get property null bean.

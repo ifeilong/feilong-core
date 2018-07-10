@@ -30,9 +30,7 @@ import com.feilong.core.util.CollectionsUtil;
 import com.feilong.store.member.User;
 
 /**
- * The Class CollectionsUtilFindTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * The Class FindTest.
  */
 public class FindTest{
 
@@ -61,6 +59,8 @@ public class FindTest{
 
         assertEquals(null, CollectionsUtil.find(list, "name", "关羽"));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test find null iterable.
@@ -93,5 +93,4 @@ public class FindTest{
     public void testFindBlankPropertyName(){
         CollectionsUtil.find(new ArrayList<>(), " ", "关羽");
     }
-
 }

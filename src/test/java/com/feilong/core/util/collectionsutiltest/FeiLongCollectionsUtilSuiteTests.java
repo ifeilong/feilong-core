@@ -42,6 +42,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 FindWithPredicateTest.class,
 
                 GetPropertyValueListTest.class,
+                GetPropertyValueListPropertyNameTest.class,
+
                 GetPropertyValueSetTest.class,
                 GetPropertyValueMapTest.class,
 
