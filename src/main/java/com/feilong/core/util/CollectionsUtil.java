@@ -2181,6 +2181,8 @@ public final class CollectionsUtil{
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
+        //---------------------------------------------------------------
+
         //org.apache.commons.beanutils.BeanToPropertyValueTransformer 但是实现的是 commons-collection3
         return group(beanIterable, includePredicate, new Transformer<O, T>(){
 

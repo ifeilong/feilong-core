@@ -256,7 +256,6 @@ public final class ClassUtil{
         }
 
         //---------------------------------------------------------------
-
         for (Class<?> klass : klasses){
             if (isInstance(obj, klass)){
                 return true;
