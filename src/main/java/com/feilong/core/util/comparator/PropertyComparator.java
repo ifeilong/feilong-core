@@ -426,7 +426,6 @@ public class PropertyComparator<T> implements Comparator<T>,Serializable{
         }
 
         //---------------------------------------------------------------------
-
         Comparable propertyValue1 = PropertyUtil.getProperty(t1, propertyName);
         Comparable propertyValue2 = PropertyUtil.getProperty(t2, propertyName);
 

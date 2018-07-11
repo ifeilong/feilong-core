@@ -1292,7 +1292,6 @@ public final class MapUtil{
         }
 
         Validate.notBlank(extractPropertyName, "extractPropertyName can't be null/empty!");
-
         //---------------------------------------------------------------
 
         //如果excludeKeys是null,那么抽取所有的key
@@ -1301,7 +1300,6 @@ public final class MapUtil{
         Validate.notEmpty(useIncludeKeys, "useIncludeKeys can't be null/empty!");
 
         //---------------------------------------------------------------
-
         //保证元素的顺序,顺序是参数  includeKeys的顺序
         Map<K, V> returnMap = newLinkedHashMap(useIncludeKeys.length);
         for (K key : useIncludeKeys){
