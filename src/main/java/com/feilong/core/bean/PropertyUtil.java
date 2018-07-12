@@ -487,10 +487,26 @@ public final class PropertyUtil{
     /**
      * 使用 {@link PropertyUtils#getProperty(Object, String)} 从指定bean对象中取得指定属性名称的值.
      * 
+     * <h3>参数 bean 可以是以下类型:</h3>
+     * <blockquote>
+     * 
+     * <dl>
+     * <dt>Map</dt>
+     * <dd></dd>
+     * 
+     * <dt></dt>
+     * <dd></dd>
+     * 
+     * <dt></dt>
+     * <dd></dd>
+     * </dl>
+     * 
+     * </blockquote>
+     * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
-     * <li>不会进行类型转换.</li>
+     * <li>原样取出值,不会进行类型转换.</li>
      * </ol>
      * </blockquote>
      * 
@@ -535,19 +551,14 @@ public final class PropertyUtil{
      * @see org.apache.commons.beanutils.PropertyUtils#getProperty(Object, String)
      * @see org.apache.commons.beanutils.PropertyUtilsBean
      */
-    @SuppressWarnings("unchecked")
     public static <T> T getProperty(Object bean,String propertyName){
         Validate.notNull(bean, "bean can't be null!");
         Validate.notBlank(propertyName, "propertyName can't be blank!");
 
-        //---------------------------------------------------------------
-        try{
-            return (T) PropertyUtils.getProperty(bean, propertyName);
-        }catch (Exception e){
-            String pattern = "getProperty exception,bean:[{}],propertyName:[{}]";
-            throw new BeanOperationException(Slf4jUtil.format(pattern, bean, propertyName), e);
-        }
+        return PropertyValueObtainer.obtain(bean, propertyName);
     }
+
+    //---------------------------------------------------------------
 
     // [end]
 

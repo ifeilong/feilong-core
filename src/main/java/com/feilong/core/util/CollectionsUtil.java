@@ -48,6 +48,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.bean.PropertyValueObtainer;
 import com.feilong.core.util.closure.BeanPropertyValueChangeClosure;
 import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.core.util.transformer.BeanTransformer;
@@ -762,7 +763,7 @@ public final class CollectionsUtil{
         return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList() : toList(new LinkedHashSet<O>(objectCollection));
     }
 
-    //*************************获得 属性值 *******************************************************************
+    //----------------------获得 属性值-----------------------------------------
 
     /**
      * 循环集合 <code>beanIterable</code>,取到对象指定的属性 <code>propertyName</code>的值,拼成List({@link ArrayList}).
@@ -944,14 +945,15 @@ public final class CollectionsUtil{
      * @return 如果参数 <code>beanIterable</code>是null或者empty,会返回empty ArrayList<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see #getPropertyValueCollection(Iterable, String, Collection)
+     * @see PropertyValueObtainer#getPropertyValueCollection(Iterable, String, Collection)
      * @since jdk1.5
      */
     public static <T, O> List<T> getPropertyValueList(Iterable<O> beanIterable,String propertyName){
         if (isNullOrEmpty(beanIterable)){//避免null point
             return emptyList();
         }
-        return getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(IterableUtils.size(beanIterable)));
+        return PropertyValueObtainer
+                        .getPropertyValueCollection(beanIterable, propertyName, new ArrayList<T>(IterableUtils.size(beanIterable)));
     }
 
     /**
@@ -1003,63 +1005,15 @@ public final class CollectionsUtil{
      * @return 如果参数 <code>beanIterable</code>是null或者empty,会返回empty {@link LinkedHashSet}<br>
      *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see #getPropertyValueCollection(Iterable, String, Collection)
+     * @see PropertyValueObtainer#getPropertyValueCollection(Iterable, String, Collection)
      * @since 1.0.8
      */
     public static <T, O> Set<T> getPropertyValueSet(Iterable<O> beanIterable,String propertyName){
         if (isNullOrEmpty(beanIterable)){//避免null point
             return emptySet();
         }
-        return getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>(IterableUtils.size(beanIterable)));
-    }
-
-    /**
-     * 循环<code>beanIterable</code>,调用 {@link PropertyUtil#getProperty(Object, String)} 获得 propertyName的值,塞到 <code>returnCollection</code>
-     * 中返回.
-     *
-     * @param <T>
-     *            the generic type
-     * @param <O>
-     *            the generic type
-     * @param <K>
-     *            the key type
-     * @param beanIterable
-     *            支持
-     * 
-     *            <ul>
-     *            <li>bean Iterable,比如List{@code <User>},Set{@code <User>}等</li>
-     *            <li>map Iterable,比如{@code List<Map<String, String>>}</li>
-     *            <li>list Iterable , 比如 {@code  List<List<String>>}</li>
-     *            <li>数组 Iterable ,比如 {@code  List<String[]>}</li>
-     *            </ul>
-     * @param propertyName
-     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
-     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
-     * @param returnCollection
-     *            the return collection
-     * @return 如果 <code>returnCollection</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>beanIterable</code> 是null或者empty,返回 <code>returnCollection</code><br>
-     *         如果 <code>propertyName</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>propertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @see PropertyUtil#getProperty(Object, String)
-     * @see org.apache.commons.beanutils.BeanToPropertyValueTransformer
-     * @since 1.0.8
-     */
-    private static <T, O, K extends Collection<T>> K getPropertyValueCollection(
-                    Iterable<O> beanIterable,
-                    String propertyName,
-                    K returnCollection){
-        Validate.notNull(returnCollection, "returnCollection can't be null!");
-        if (isNullOrEmpty(beanIterable)){//避免null point
-            return returnCollection;
-        }
-
-        //---------------------------------------------------------------
-        Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-        for (O bean : beanIterable){
-            returnCollection.add(PropertyUtil.<T> getProperty(bean, propertyName));
-        }
-        return returnCollection;
+        return PropertyValueObtainer
+                        .getPropertyValueCollection(beanIterable, propertyName, new LinkedHashSet<T>(IterableUtils.size(beanIterable)));
     }
 
     //----------------------------getPropertyValueMap-----------------------------------
