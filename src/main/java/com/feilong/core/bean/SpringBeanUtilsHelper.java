@@ -29,20 +29,31 @@ import com.feilong.core.lang.ClassUtil;
 class SpringBeanUtilsHelper{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER                  = LoggerFactory.getLogger(SpringBeanUtilsHelper.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SpringBeanUtilsHelper.class);
+
+    //---------------------------------------------------------------
+
+    /** Don't let anyone instantiate this class. */
+    private SpringBeanUtilsHelper(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
 
     //---------------------------------------------------------------
 
     /** The spring bean utils class. */
-    private static Class<?>     SPRING_BEAN_UTILS_CLASS = null;
+    private static Class<?> springBeanUtilsClass = null;
+
+    //---------------------------------------------------------------
 
     static{
         String className = "org.springframework.beans.BeanUtils";
         try{
-            SPRING_BEAN_UTILS_CLASS = ClassUtil.getClass(className);
+            springBeanUtilsClass = ClassUtil.getClass(className);
             LOGGER.info("find and load:[{}]", className);
         }catch (Exception e){
-            LOGGER.warn("can't load:[{}],[{}],if you import spring, getPropertyValue will speed fast", className, e.toString());
+            LOGGER.warn("can't load:[{}],[{}],if you import spring, getPropertyValue will speed fast", className, e);
         }
     }
 
@@ -54,7 +65,7 @@ class SpringBeanUtilsHelper{
      * @return 如果 SPRING_BEAN_UTILS_CLASS 不是null ,表示有, 返回true; 否则返回false
      */
     static boolean hasSpringBeanUtilsClass(){
-        return SPRING_BEAN_UTILS_CLASS != null;
+        return springBeanUtilsClass != null;
     }
 
     /**
@@ -63,6 +74,6 @@ class SpringBeanUtilsHelper{
      * @return the spring bean utils class
      */
     static Class<?> getSpringBeanUtilsClass(){
-        return SPRING_BEAN_UTILS_CLASS;
+        return springBeanUtilsClass;
     }
 }

@@ -42,6 +42,13 @@ public class PropertyValueObtainer{
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyValueObtainer.class);
 
+    /** Don't let anyone instantiate this class. */
+    private PropertyValueObtainer(){
+        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
+        //see 《Effective Java》 2nd
+        throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
     //---------------------------------------------------------------
 
     /**
@@ -65,14 +72,18 @@ public class PropertyValueObtainer{
     //---------------------------------------------------------------
 
     /**
+     * Gets the data use apache.
+     *
      * @param <T>
+     *            the generic type
      * @param bean
+     *            the bean
      * @param propertyName
-     * @return
-     * @throws BeanOperationException
+     *            the property name
+     * @return the data use apache
      */
     @SuppressWarnings("unchecked")
-    private static <T> T getDataUseApache(Object bean,String propertyName) throws BeanOperationException{
+    private static <T> T getDataUseApache(Object bean,String propertyName){
         //---------------------------------------------------------------
         try{
             return (T) PropertyUtils.getProperty(bean, propertyName);
@@ -85,14 +96,18 @@ public class PropertyValueObtainer{
     //---------------------------------------------------------------
 
     /**
+     * Gets the data use spring.
+     *
      * @param <T>
+     *            the generic type
      * @param bean
+     *            the bean
      * @param propertyName
-     * @return
-     * @throws BeanOperationException
+     *            the property name
+     * @return the data use spring
      */
-    private static <T> T getDataUseSpring(Object bean,String propertyName) throws BeanOperationException{
-        LOGGER.trace("will use spring beanutils to excute");
+    private static <T> T getDataUseSpring(Object bean,String propertyName){
+        LOGGER.trace("will use spring beanutils to excute:[{}],propertyName:[{}]", bean, propertyName);
         try{
             PropertyDescriptor propertyDescriptor = PropertyDescriptorUtil.getSpringPropertyDescriptor(bean.getClass(), propertyName);
             return getValue(bean, propertyDescriptor);
