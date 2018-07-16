@@ -85,20 +85,37 @@ public class PropertyDescriptorUtil{
         if (KEY_AND_TYPE_MAP.containsKey(key)){
             return KEY_AND_TYPE_MAP.get(key);
         }
-        //---------------------------------------------------------------
-        String type = TYPE_COMMONS_BEANUTILS;
-        try{
-            PropertyDescriptor springPropertyDescriptor = getSpringPropertyDescriptor(klass, propertyName);
-            if (null != springPropertyDescriptor){
-                type = TYPE_SPRING;
-            }
-        }catch (Exception e){
-            // nothing to do 
-        }
+
+        String type = buildType(klass, propertyName);
 
         //---------------------------------------------------------------
         KEY_AND_TYPE_MAP.put(key, type);
         return type;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Builds the type.
+     *
+     * @param klass
+     *            the klass
+     * @param propertyName
+     *            the property name
+     * @return the string
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/760">PropertyUtil.getProperty(Object, String) 排序异常 #760</a>
+     * @since 1.12.1
+     */
+    private static String buildType(Class<?> klass,String propertyName){
+        try{
+            PropertyDescriptor springPropertyDescriptor = getSpringPropertyDescriptor(klass, propertyName);
+            if (null != springPropertyDescriptor){
+                return TYPE_SPRING;
+            }
+        }catch (Exception e){
+            // nothing to do 
+        }
+        return TYPE_COMMONS_BEANUTILS;
     }
 
     //---------------------------------------------------------------

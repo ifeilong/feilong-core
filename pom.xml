@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.feilong.platform</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.12.0</version>
+		<version>1.12.1</version>
 	</parent>
 
 	<artifactId>feilong-core</artifactId>
@@ -20,12 +20,13 @@
 	<url>https://github.com/venusdrogon/feilong-core</url>
 
 	<dependencies>
-	
-	<!-- 	<dependency>
+
+		<!-- -->
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<optional>true</optional>
-		</dependency> -->
+		</dependency>
 
 		<!-- commons-lang3 -->
 		<dependency>

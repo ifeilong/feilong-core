@@ -190,12 +190,18 @@ public class PropertyValueObtainer{
      * @param propertyDescriptor
      *            the property descriptor
      * @return the value
+     * @see <a href="https://github.com/venusdrogon/feilong-core/issues/760">PropertyUtil.getProperty(Object, String) 排序异常</a>
      */
     @SuppressWarnings("unchecked")
     public static <T, O> T getValue(O obj,PropertyDescriptor propertyDescriptor){
-        Method writeMethod = propertyDescriptor.getReadMethod();
+        Method readMethod = propertyDescriptor.getReadMethod();
+
+        //since 1.12.1
+        //https://github.com/venusdrogon/feilong-core/issues/760
+        readMethod = org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(obj.getClass(), readMethod);
+
         try{
-            return (T) writeMethod.invoke(obj);
+            return (T) readMethod.invoke(obj);
         }catch (ReflectiveOperationException e){
             throw new DefaultRuntimeException(e);
         }
