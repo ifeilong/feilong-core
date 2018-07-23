@@ -37,7 +37,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.12.0
  */
-public class PropertyValueObtainer{
+public final class PropertyValueObtainer{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyValueObtainer.class);
@@ -189,13 +189,27 @@ public class PropertyValueObtainer{
      *            the obj
      * @param propertyDescriptor
      *            the property descriptor
-     * @return the value
+     * @return 如果 <code>obj</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyDescriptor</code> 是null,抛出 {@link NullPointerException}<br>
      * @see <a href="https://github.com/venusdrogon/feilong-core/issues/760">PropertyUtil.getProperty(Object, String) 排序异常</a>
      */
     @SuppressWarnings("unchecked")
     public static <T, O> T getValue(O obj,PropertyDescriptor propertyDescriptor){
+        Validate.notNull(obj, "obj can't be null!");
+        Validate.notNull(propertyDescriptor, "propertyDescriptor can't be null!");
+
+        //---------------------------------------------------------------
         Method readMethod = propertyDescriptor.getReadMethod();
 
+        //---------------------------------------------------------------
+        //since 1.12.2
+        Validate.notNull(
+                        readMethod,
+                        "class:[%s],propertyDescriptor name:[%s],has no ReadMethod!!,pls check",
+                        obj.getClass().getCanonicalName(),
+                        propertyDescriptor.getDisplayName());
+
+        //---------------------------------------------------------------
         //since 1.12.1
         //https://github.com/venusdrogon/feilong-core/issues/760
         readMethod = org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(obj.getClass(), readMethod);
@@ -206,5 +220,4 @@ public class PropertyValueObtainer{
             throw new DefaultRuntimeException(e);
         }
     }
-
 }
