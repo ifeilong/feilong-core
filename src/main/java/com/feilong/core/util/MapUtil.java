@@ -1029,13 +1029,22 @@ public final class MapUtil{
      * 
      * <blockquote>
      * <ol>
-     * <li>原 <code>map</code> <span style="color:red">会改变</span></li>
+     * <li>
+     * 
+     * <p>
+     * 原 <code>map</code><span style="color:red">会改变</span>,
+     * </p>
+     * <p>
+     * 如果你只是需要从原map中获取非指定的<code>keys</code>,你可以调用
+     * {@link #getSubMapExcludeKeys(Map, Object...)} 或者{@link #getSubMapExcludeKeys(Map, Iterable)} 方法
+     * </p>
+     * </li>
+     * 
      * <li>此方法<b>删除不了</b> {@link Collections#unmodifiableMap(Map)}</li>
      * <li>如果 <code>map</code>包含key,那么直接调用 {@link Map#remove(Object)}</li>
      * <li>如果不包含,那么输出debug级别日志</li>
      * </ol>
      * </blockquote>
-     * 
      * 
      * <h3>示例:</h3>
      * 
@@ -1083,9 +1092,12 @@ public final class MapUtil{
             return null;
         }
 
+        //---------------------------------------------------------------
         if (isNullOrEmpty(keys)){
             return map;
         }
+
+        //---------------------------------------------------------------
         for (K key : keys){
             if (map.containsKey(key)){
                 map.remove(key);
