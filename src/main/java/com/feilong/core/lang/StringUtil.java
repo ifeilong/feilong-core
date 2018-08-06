@@ -438,7 +438,7 @@ public final class StringUtil{
      * </blockquote>
      * 
      * <p>
-     * 注意:此方法只能替换字符串,而不能像el表达式一样使用对象属性之类的来替换
+     * <span style="color:red">注意:此方法只能替换字符串,而不能像el表达式一样使用对象属性之类的来替换</span>
      * </p>
      * 
      * <h3>比如:</h3>
