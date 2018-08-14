@@ -487,20 +487,6 @@ public final class PropertyUtil{
     /**
      * 使用 {@link PropertyUtils#getProperty(Object, String)} 从指定bean对象中取得指定属性名称的值.
      * 
-     * <h3>参数 bean 可以是以下类型:</h3>
-     * <blockquote>
-     * 
-     * <dl>
-     * <dt>Map</dt>
-     * <dd></dd>
-     * 
-     * <dt></dt>
-     * <dd></dd>
-     * 
-     * <dt></dt>
-     * <dd></dd>
-     * </dl>
-     * 
      * </blockquote>
      * 
      * <h3>说明:</h3>
