@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.feilong.platform</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.12.7</version>
+		<version>1.12.8-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>feilong-core</artifactId>
@@ -132,13 +132,6 @@
 					</archive>
 					<!-- <excludes> <exclude>**/temple/**</exclude> </excludes> -->
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test-jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 			<!-- [ERROR] 'git' 不是内部或外部命令，也不是可运行的程序 或批处理文件。 -->
@@ -154,42 +147,6 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${v.jacoco-maven-plugin}</version>
-				<executions>
-					<execution>
-						<id>prepare-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>post-unit-test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-						<configuration>
-							<dataFile>target/jacoco.exec</dataFile>
-							<outputDirectory>target/jacoco-ut</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-				<configuration>
-					<systemPropertyVariables>
-						<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-					</systemPropertyVariables>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -237,21 +194,5 @@
 		</developer>
 	</developers>
 
-	<!-- 项目的贡献者,但不属于开发小组 -->
-	<contributors>
-		<contributor>
-			<name>benjamin.liu</name>
-			<url>https://github.com/benjaliu</url>
-		</contributor>
 
-		<contributor>
-			<name>yi.huang</name>
-			<url>https://github.com/ananbeike</url>
-		</contributor>
-
-		<contributor>
-			<name>minglei.feng</name>
-			<url>https://github.com/shade41-code</url>
-		</contributor>
-	</contributors>
 </project>
