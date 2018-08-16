@@ -1184,6 +1184,8 @@ public final class ConvertUtil{
 
     //---------------------------------------------------------------
 
+    // toString use ToStringConfig
+
     /**
      * 将集合 <code>collection</code> 使用拼接配置 toStringConfig 拼接成字符串.
      * 
