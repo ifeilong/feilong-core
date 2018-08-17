@@ -140,6 +140,15 @@ public final class ToStringConfig implements Serializable{
     //---------------------------------------------------------------
 
     /**
+     * 循环拼接元素的时候,支持给每个元素拼接一个前缀.
+     * 
+     * @since 1.12.9
+     */
+    private String                     prefix;
+
+    //---------------------------------------------------------------
+
+    /**
      * 默认的构造函数.
      * 
      * <h3>默认的规则:</h3>
@@ -179,6 +188,24 @@ public final class ToStringConfig implements Serializable{
     public ToStringConfig(String connector, boolean isJoinNullOrEmpty){
         this.connector = connector;
         this.isJoinNullOrEmpty = isJoinNullOrEmpty;
+    }
+
+    /**
+     * Instantiates a new to string config.
+     *
+     * @param connector
+     *            the connector
+     * @param isJoinNullOrEmpty
+     *            the is join null or empty
+     * @param prefix
+     *            the prefix
+     * @since 1.12.9
+     */
+    public ToStringConfig(String connector, boolean isJoinNullOrEmpty, String prefix){
+        super();
+        this.connector = connector;
+        this.isJoinNullOrEmpty = isJoinNullOrEmpty;
+        this.prefix = prefix;
     }
 
     //----------------------------------------------------------------------------------------
@@ -222,6 +249,29 @@ public final class ToStringConfig implements Serializable{
     public void setIsJoinNullOrEmpty(boolean isJoinNullOrEmpty){
         this.isJoinNullOrEmpty = isJoinNullOrEmpty;
     }
+
+    /**
+     * 获得 循环拼接元素的时候,支持给每个元素拼接一个前缀.
+     *
+     * @return the prefix
+     * @since 1.12.9
+     */
+    public String getPrefix(){
+        return prefix;
+    }
+
+    /**
+     * 设置 循环拼接元素的时候,支持给每个元素拼接一个前缀.
+     *
+     * @param prefix
+     *            the prefix to set
+     * @since 1.12.9
+     */
+    public void setPrefix(String prefix){
+        this.prefix = prefix;
+    }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

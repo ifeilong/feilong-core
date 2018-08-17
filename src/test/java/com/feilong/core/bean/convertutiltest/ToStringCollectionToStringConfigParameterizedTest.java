@@ -73,6 +73,24 @@ public class ToStringCollectionToStringConfigParameterizedTest
                                 { toList("feilong", "xinge"), IGNORE_NULL_OR_EMPTY_CONFIG, "feilong,xinge" },
                                 { toList("feilong", "", "xinge", null), IGNORE_NULL_OR_EMPTY_CONFIG, "feilong,xinge" },
 
+                                //---------------------------------------------------------------
+
+                                //since 1.12.9
+                                { toList("189", "150"), new ToStringConfig(",", false, "code:"), "code:189,code:150" },
+                                { toList("189", null, "150"), new ToStringConfig(",", false, "code:"), "code:189,code:150" },
+                                { toList("189", "", "150"), new ToStringConfig(",", false, "code:"), "code:189,code:150" },
+                                { toList("189", "150"), new ToStringConfig(" OR ", false, "code:"), "code:189 OR code:150" },
+                                { toList("189", "", "150"), new ToStringConfig(" OR ", false, "code:"), "code:189 OR code:150" },
+                                { toList("189", "", "150", ""), new ToStringConfig(" OR ", false, "code:"), "code:189 OR code:150" },
+                                { toList("189", "", "150", ""), new ToStringConfig(" OR ", false, null), "189 OR 150" },
+                                { toList("189", "", "150", ""), new ToStringConfig(" OR ", false, ""), "189 OR 150" },
+                                { toList("189", "", "150", ""), new ToStringConfig(" OR ", false, " "), " 189 OR  150" },
+                                { toList("", "189", "", "150", ""), new ToStringConfig(" OR ", false, "code:"), "code:189 OR code:150" },
+                                { toList("189", "", "150"), new ToStringConfig(",", true, "code:"), "code:189,code:,code:150" },
+                                { toList("189", " ", "150"), new ToStringConfig(",", true, "code:"), "code:189,code: ,code:150" },
+
+                                //---------------------------------------------------------------
+
                                 { list, toStringConfig, "feilong,xinge" },
                                 { list, new ToStringConfig("@"), "feilong@@xinge" },
                                 { toList("feilong", "", "xinge", null), new ToStringConfig("@"), "feilong@@xinge@" },

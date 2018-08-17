@@ -76,6 +76,24 @@ public class ToStringArrayToStringConfigParameterizedTest
                                 { null, toStringConfig, EMPTY },
                                 { toArray(), toStringConfig, EMPTY },
 
+                                //---------------------------------------------------------------
+
+                                //since 1.12.9
+                                { toArray("189", "150"), new ToStringConfig(",", false, "code:"), "code:189,code:150" },
+                                { toArray("189", null, "150"), new ToStringConfig(",", false, "code:"), "code:189,code:150" },
+                                { toArray("189", "", "150"), new ToStringConfig(",", false, "code:"), "code:189,code:150" },
+                                { toArray("189", "150"), new ToStringConfig(" OR ", false, "code:"), "code:189 OR code:150" },
+                                { toArray("189", "", "150"), new ToStringConfig(" OR ", false, "code:"), "code:189 OR code:150" },
+                                { toArray("189", "", "150", ""), new ToStringConfig(" OR ", false, "code:"), "code:189 OR code:150" },
+                                { toArray("189", "", "150", ""), new ToStringConfig(" OR ", false, null), "189 OR 150" },
+                                { toArray("189", "", "150", ""), new ToStringConfig(" OR ", false, ""), "189 OR 150" },
+                                { toArray("189", "", "150", ""), new ToStringConfig(" OR ", false, " "), " 189 OR  150" },
+                                { toArray("", "189", "", "150", ""), new ToStringConfig(" OR ", false, "code:"), "code:189 OR code:150" },
+                                { toArray("189", "", "150"), new ToStringConfig(",", true, "code:"), "code:189,code:,code:150" },
+                                { toArray("189", " ", "150"), new ToStringConfig(",", true, "code:"), "code:189,code: ,code:150" },
+
+                                //---------------------------------------------------------------
+
                                 { arrays, toStringConfig, "222,1111" },
                                 { array1, toStringConfig, "2,1" },
 

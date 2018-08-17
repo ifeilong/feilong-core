@@ -1248,6 +1248,35 @@ public final class ConvertUtil{
      * </ol>
      * </blockquote>
      * 
+     * <h3>关于 {@link ToStringConfig} prefix(since 1.12.9):</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 如果你需要在拼接每个元素的时候,给每个元素加上前缀, 比如 solr 查询, 运营人员配置了一些商品code ,<code>1533312,1533292,1785442</code>, 此时你需要生成
+     * <code>code:1533312 OR code:1533292 OR code:1785442</code> 字符串去solr 中查询
+     * </p>
+     * 
+     * <p>
+     * 此时你可以这么调用
+     * </p>
+     * 
+     * <pre>
+     * 
+     * String configItemCodes = "1533312,1533292,1785442";
+     * String[] tokenizeToStringArray = StringUtil.tokenizeToStringArray(configItemCodes, ",");
+     * List{@code <String>} list = toList(tokenizeToStringArray);
+     * ToStringConfig toStringConfig = new ToStringConfig(" OR ", false, "code:");
+     * String string = ConvertUtil.toString(list, toStringConfig);
+     * </pre>
+     * 
+     * <b>返回: </b>
+     * 
+     * <p>
+     * code:1533312 OR code:1533292 OR code:1785442
+     * </p>
+     * 
+     * </blockquote>
+     * 
      * @param collection
      *            集合,建议元素泛型不要使用自定义的对象(比如UserCommand等),因为这个方法是迭代collection,拿每个元素的字符串格式 进行拼接
      * @param toStringConfig
@@ -1314,7 +1343,35 @@ public final class ConvertUtil{
      * <li>最后一个元素后面不拼接拼接符</li>
      * </ol>
      * </blockquote>
-     *
+     * 
+     * <h3>关于 {@link ToStringConfig} prefix(since 1.12.9):</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * 如果你需要在拼接每个元素的时候,给每个元素加上前缀, 比如 solr 查询, 运营人员配置了一些商品code ,<code>1533312,1533292,1785442</code>, 此时你需要生成
+     * <code>code:1533312 OR code:1533292 OR code:1785442</code> 字符串去solr 中查询
+     * </p>
+     * 
+     * <p>
+     * 此时你可以这么调用
+     * </p>
+     * 
+     * <pre>
+     * 
+     * String configItemCodes = "1533312,1533292,1785442";
+     * String{@code []} tokenizeToStringArray = StringUtil.tokenizeToStringArray(configItemCodes, ",");
+     * ToStringConfig toStringConfig = new ToStringConfig(" OR ", false, "code:");
+     * String string = ConvertUtil.toString(tokenizeToStringArray, toStringConfig);
+     * </pre>
+     * 
+     * <b>返回: </b>
+     * 
+     * <p>
+     * code:1533312 OR code:1533292 OR code:1785442
+     * </p>
+     * 
+     * </blockquote>
+     * 
      * @param arrays
      *            支持包装类型,<b>不直接支持</b>原始类型
      * @param toStringConfig
@@ -1324,45 +1381,37 @@ public final class ConvertUtil{
      *         否则循环,拼接 {@link ToStringConfig#getConnector()}
      * @see org.apache.commons.lang3.builder.ToStringStyle
      * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
+     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
      * @since 1.8.4 change param order
      */
     public static String toString(Object[] arrays,ToStringConfig toStringConfig){
         if (isNullOrEmpty(arrays)){
             return EMPTY;
         }
+
+        //---------------------------------------------------------------
         ToStringConfig useToStringConfig = defaultIfNull(toStringConfig, new ToStringConfig());
-        return join(arrays, useToStringConfig.getConnector(), useToStringConfig.getIsJoinNullOrEmpty());
-    }
+        String connector = useToStringConfig.getConnector();
+        boolean isJoinNullOrEmpty = useToStringConfig.getIsJoinNullOrEmpty();
+        String prefix = useToStringConfig.getPrefix();
 
-    //---------------------------------------------------------------
-
-    /**
-     * Join.
-     *
-     * @param operateArray
-     *            the operate array
-     * @param connector
-     *            the connector
-     * @param isJoinNullOrEmpty
-     *            the is join null或者empty
-     * @return the string
-     * @see org.apache.commons.lang3.StringUtils#join(Iterable, String)
-     * @see org.apache.commons.lang3.StringUtils#join(Object[], String)
-     * @since 1.6.3
-     */
-    private static String join(Object[] operateArray,String connector,boolean isJoinNullOrEmpty){
+        //---------------------------------------------------------------
         StringBuilder sb = new StringBuilder();
-        for (Object obj : operateArray){
+        for (Object element : arrays){
             //如果是null或者empty,但是参数值是不拼接,那么跳过,继续循环
-            if (isNullOrEmpty(obj) && !isJoinNullOrEmpty){
+            if (isNullOrEmpty(element) && !isJoinNullOrEmpty){
                 continue;
             }
             //---------------------------------------------------------------
+            //since 1.12.9 support prefix
+            sb.append(defaultIfNull(prefix, EMPTY));
 
-            //value转换,注意:如果 value是null,StringBuilder将拼接 "null" 字符串,详见  java.lang.AbstractStringBuilder#append(String)
-            sb.append(defaultIfNull(obj, EMPTY)); //see StringUtils.defaultString(t)
+            //value转换
+            //注意:如果value是null,StringBuilder 将拼接 "null" 字符串,详见 java.lang.AbstractStringBuilder#append(String)
+            sb.append(defaultIfNull(element, EMPTY)); //see StringUtils.defaultString(t)
 
-            if (null != connector){//注意可能传过来的是换行符 不能使用Validator.isNullOrEmpty来判断
+            //---------------------------------------------------------------
+            if (null != connector){//注意可能传过来的是换行符,不能使用Validator.isNullOrEmpty来判断
                 sb.append(connector);//放心大胆的拼接 connector, 不判断是否是最后一个,最后会截取
             }
         }
