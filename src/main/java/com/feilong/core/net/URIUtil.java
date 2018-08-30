@@ -20,6 +20,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.INDEX_NOT_FOUND;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -488,7 +489,7 @@ public final class URIUtil{
      * @since 1.6.2
      */
     private static String encodeOrDecode(String value,String charsetType,boolean encodeOrDecode){
-        if (isNullOrEmpty(value)){
+        if (isEmpty(value)){
             return EMPTY;
         }
         //---------------------------------------------------------------

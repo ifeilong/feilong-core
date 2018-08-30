@@ -16,8 +16,6 @@
 package com.feilong.core.net.uriutiltest;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -31,64 +29,9 @@ import com.feilong.core.net.URIUtil;
  */
 public class DecodeTest{
 
-    /**
-     * Test decode.
-     */
-    @Test
-    public void testDecode(){
-        assertEquals("飞天奔月", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", UTF8));
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Test decode null value.
-     */
-    @Test
-    public void testDecodeNullValue(){
-        assertEquals(EMPTY, URIUtil.decode(null, UTF8));
-    }
-
-    /**
-     * Test decode empty value.
-     */
-    @Test
-    public void testDecodeEmptyValue(){
-        assertEquals(EMPTY, URIUtil.decode("", UTF8));
-    }
-
-    /**
-     * Test decode blank value.
-     */
     @Test
     public void testDecodeBlankValue(){
-        assertEquals(EMPTY, URIUtil.decode(" ", UTF8));
-    }
 
-    //---------------------------------------------------------------
-
-    /**
-     * Test decode null charset type.
-     */
-    @Test
-    public void testDecodeNullCharsetType(){
-        assertEquals("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", null));
-    }
-
-    /**
-     * Test decode empty charset type.
-     */
-    @Test
-    public void testDecodeEmptyCharsetType(){
-        assertEquals("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", ""));
-    }
-
-    /**
-     * Test decode blank charset type.
-     */
-    @Test
-    public void testDecodeBlankCharsetType(){
-        assertEquals("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", URIUtil.decode("%E9%A3%9E%E5%A4%A9%E5%A5%94%E6%9C%88", " "));
     }
 
     /**

@@ -18,6 +18,7 @@ package com.feilong.core.net.uriutiltest;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.SPACE;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -70,8 +71,10 @@ public class EncodeParameterizedTest extends AbstractTwoParamsAndOneResultParame
                                 { "?", UTF8, "%3F" },
                                 { "@", UTF8, "%40" },
 
-                                { "", UTF8, EMPTY },
-                                { " ", UTF8, EMPTY },
+                                { EMPTY, UTF8, EMPTY },
+                                { SPACE, UTF8, "+" }, //not %20
+                                { "fei long", UTF8, "fei+long" },
+
                                 { "白色/黑色/纹理浅麻灰", null, "白色/黑色/纹理浅麻灰" },
                                 { "白色/黑色/纹理浅麻灰", "", "白色/黑色/纹理浅麻灰" },
                                 { "白色/黑色/纹理浅麻灰", " ", "白色/黑色/纹理浅麻灰" },
@@ -79,9 +82,6 @@ public class EncodeParameterizedTest extends AbstractTwoParamsAndOneResultParame
         };
     }
 
-    /**
-     * Test encode.
-     */
     @Test
     public void testEncode(){
         assertEquals(expectedValue, URIUtil.encode(input1, input2));

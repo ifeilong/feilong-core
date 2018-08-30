@@ -29,6 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 EncodeParameterizedTest.class,
                 EncodeUriTest.class,
                 DecodeTest.class,
+                DecodeParameterizedTest.class,
 
                 CreateTest.class,
                 CreateWithCharsetTypeTest.class,
