@@ -487,8 +487,6 @@ public final class PropertyUtil{
     /**
      * 使用 {@link PropertyUtils#getProperty(Object, String)} 从指定bean对象中取得指定属性名称的值.
      * 
-     * </blockquote>
-     * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>
@@ -497,9 +495,7 @@ public final class PropertyUtil{
      * </blockquote>
      * 
      * <h3>示例:</h3>
-     * 
      * <blockquote>
-     * 
      * <p>
      * <b>场景:</b> 取list中第一个元素的id
      * </p>

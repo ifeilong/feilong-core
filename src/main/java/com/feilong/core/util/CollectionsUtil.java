@@ -912,7 +912,7 @@ public final class CollectionsUtil{
      * 示例:
      * 
      * <pre>
-     * List<String[]> list = newArrayList();
+     * List{@code <String[]>} list = newArrayList();
      * list.add(toArray("三国", "水浒"));
      * list.add(toArray("西游", "金瓶梅"));
      * 
