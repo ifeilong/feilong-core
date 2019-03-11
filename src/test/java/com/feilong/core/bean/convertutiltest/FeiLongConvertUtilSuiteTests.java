@@ -45,6 +45,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToListCollectionTest.class,
                 ToListEnumerationTest.class,
                 ToListVarargsTest.class,
+                ToListArrayTest.class,
 
                 ToLocaleTest.class,
 
