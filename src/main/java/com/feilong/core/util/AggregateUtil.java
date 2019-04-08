@@ -19,6 +19,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
@@ -462,6 +463,152 @@ public final class AggregateUtil{
             }
         }
         return sumMap;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 迭代<code>beanIterable</code>,取元素 <code>keyPropertyName</code> 的值为 key ,累计 <code>sumPropertyName</code> 属性值 为 value,返回 map.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 统计 user list 按照姓名分组, 累加每个人的 age 总和
+     * </p>
+     * 
+     * <pre class="code">
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 20),
+     *                 new User("关羽", 20),
+     *                 new User("刘备", 20),
+     *                 new User("刘备", 20));
+     * 
+     * Map{@code <String, BigDecimal>} map = AggregateUtil.groupSum(list, "name", "age");
+     * 
+     * </pre>
+     * 
+     * <b>assertThat:</b>
+     * 
+     * <pre class="code">
+     * assertThat(
+     *                 map,
+     *                 allOf(//
+     *                                 hasEntry("刘备", toBigDecimal(40)),
+     *                                 hasEntry("张飞", toBigDecimal(20)),
+     *                                 hasEntry("关羽", toBigDecimal(20))));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param keyPropertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param sumPropertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     *         如果 <code>keyPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>keyPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>sumPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>sumPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.13.2
+     */
+    public static <O, T> Map<T, BigDecimal> groupSum(Iterable<O> beanIterable,String keyPropertyName,String sumPropertyName){
+        return groupSum(beanIterable, keyPropertyName, sumPropertyName, null);
+    }
+
+    /**
+     * 迭代<code>beanIterable</code>,提取符合 <code>includePredicate</code>的元素,取元素 <code>keyPropertyName</code> 的值为 key ,累计
+     * <code>sumPropertyName</code> 属性值 为 value,返回 map.
+     * 
+     * <p>
+     * 统计 user list 所有 age 小于等于30的, 按照姓名分组, 累加每个人的 age 总和
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * Predicate{@code <User>} comparatorPredicate = BeanPredicateUtil.comparatorPredicate("age", 30, Criterion.GREATER_OR_EQUAL);
+     * 
+     * List{@code <User>} list = toList(//
+     *                 new User("张飞", 20),
+     *                 new User("关羽", 20),
+     *                 new User("刘备", 20),
+     *                 new User("刘备", 50),
+     *                 new User("刘备", 20));
+     * 
+     * Map{@code <String, BigDecimal>} map = AggregateUtil.groupSum(list, "name", "age",comparatorPredicate);
+     * 
+     * </pre>
+     * 
+     * <b>assertThat:</b>
+     * 
+     * <pre class="code">
+     * assertThat(
+     *                 map,
+     *                 allOf(//
+     *                                 hasEntry("刘备", toBigDecimal(40)),
+     *                                 hasEntry("张飞", toBigDecimal(20)),
+     *                                 hasEntry("关羽", toBigDecimal(20))));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param <T>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param keyPropertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param sumPropertyName
+     *            泛型O对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @param includePredicate
+     *            the include predicate
+     * @return 如果 <code>beanIterable</code> 是null或者empty,返回 {@link Collections#emptyMap()}<br>
+     *         如果通过反射某个元素值是null,则使用默认值0代替,再进行累加<br>
+     *         如果 <code>includePredicate</code> 是null,那么迭代所有的元素<br>
+     *         如果 <code>beanIterable</code>没有符合 <code>includePredicate</code>的元素,返回 <code>new LinkedHashMap</code>
+     * 
+     *         如果 <code>keyPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>keyPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>sumPropertyName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>sumPropertyName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.13.2
+     */
+    public static <O, T> Map<T, BigDecimal> groupSum(
+                    Iterable<O> beanIterable,
+                    String keyPropertyName,
+                    String sumPropertyName,
+                    Predicate<O> includePredicate){
+        if (isNullOrEmpty(beanIterable)){
+            return emptyMap();
+        }
+
+        //---------------------------------------------------------------
+        Validate.notBlank(keyPropertyName, "keyPropertyName can't be null/empty!");
+        Validate.notBlank(sumPropertyName, "sumPropertyName can't be null/empty!");
+
+        Map<T, BigDecimal> map = newLinkedHashMap();
+        for (O obj : beanIterable){
+            if (null != includePredicate && !includePredicate.evaluate(obj)){
+                continue;
+            }
+
+            T keyPropertyValue = PropertyUtil.<T> getProperty(obj, keyPropertyName);
+            BigDecimal value = toBigDecimal(defaultIfNull(PropertyUtil.<Number> getProperty(obj, sumPropertyName), ZERO));
+            MapUtil.putSumValue(map, keyPropertyValue, value);
+        }
+        return map;
     }
 
     //---------------------------------------------------------------

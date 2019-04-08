@@ -439,6 +439,11 @@ public final class BeanPredicateUtil{
     /**
      * 判断指定的值 <code>valueToCompare</code> <code>criterion</code> 提取的bean对象属性<code>propertyName</code>的值 .
      * 
+     * <p>
+     * 注意: 是参数 <code>valueToCompare</code> 和 属性值进行比较 <code>criterion</code>, BeanPredicateUtil.comparatorPredicate("age", 20,
+     * Criterion.LESS) 表示提取所有比20 大的结果
+     * </p>
+     * 
      * <h3>说明:</h3>
      * <blockquote>
      * <ol>

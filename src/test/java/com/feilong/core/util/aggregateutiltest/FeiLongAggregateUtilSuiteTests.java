@@ -31,6 +31,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 GroupCountTest.class,
                 GroupCountPredicateTest.class,
+
+                GroupSumTest.class,
+                GroupSumPredicateTest.class,
+
                 GroupCountArrayTest.class,
                 GroupCountArrayPredicateTest.class,
                 GroupCountArrayAndTransformerTest.class,
