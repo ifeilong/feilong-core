@@ -18,10 +18,12 @@ package com.feilong.core.util;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
 import static com.feilong.core.bean.ConvertUtil.toSet;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -41,6 +43,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.PropertyUtil;
+import com.feilong.core.lang.NumberUtil;
 
 /**
  * {@link Map}工具类.
@@ -585,6 +588,8 @@ public final class MapUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将<code>key</code>和<code>value</code> 累加的形式put到 map中,如果<code>map</code>中存在<code>key</code>,那么累加<code>value</code>值;如果不存在那么直接put.
      * 
@@ -663,6 +668,65 @@ public final class MapUtil{
         map.put(key, null == v ? value : value + v);//Suggestion: you should care about code readability more than little performance gain in most of the time.
         return map;
     }
+
+    /**
+     * 将<code>key</code>和<code>value</code> 累加的形式put到 map中,如果<code>map</code>中存在<code>key</code>,那么累加<code>value</code>值;如果不存在那么直接put.
+     * 
+     * <p>
+     * 常用于数据统计, 比如 {@link com.feilong.core.util.AggregateUtil#groupSum(Iterable, String, String)}
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * Map{@code <String, BigDecimal>} map = new HashMap{@code <>}();
+     * MapUtil.putSumValue(map, "1000001", 5);
+     * MapUtil.putSumValue(map, "1000002", 5);
+     * MapUtil.putSumValue(map, "1000002", 5);
+     * LOGGER.debug(JsonUtil.format(map));
+     * 
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "1000001": 5,
+     * "1000002": 10
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param <K>
+     *            the key type
+     * @param map
+     *            the map
+     * @param key
+     *            the key
+     * @param value
+     *            数值,不能为null,可以是负数
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>value</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see org.apache.commons.collections4.bag.HashBag
+     * @see "java.util.Map#getOrDefault(Object, Object)"
+     * @see <a href="http://stackoverflow.com/questions/81346/most-efficient-way-to-increment-a-map-value-in-java">most-efficient-way-to-
+     *      increment-a-map-value-in-java</a>
+     * @since 1.13.2
+     */
+    public static <K> Map<K, BigDecimal> putSumValue(Map<K, BigDecimal> map,K key,Number value){
+        Validate.notNull(map, "map can't be null!");
+        Validate.notNull(value, "value can't be null!");
+
+        BigDecimal v = map.get(key);//这里不要使用 map.containsKey(key),否则会有2次  two potentially expensive operations
+        map.put(key, null == v ? toBigDecimal(value) : NumberUtil.getAddValue(value, v));//Suggestion: you should care about code readability more than little performance gain in most of the time.
+        return map;
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 往 map 中put 指定 key value(多值形式).

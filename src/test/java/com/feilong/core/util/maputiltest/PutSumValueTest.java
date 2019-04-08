@@ -65,7 +65,7 @@ public class PutSumValueTest{
      */
     @Test(expected = NullPointerException.class)
     public void testPutSumValueNullMap(){
-        MapUtil.putSumValue(null, "1000001", 5);
+        MapUtil.putSumValue((Map<String, Integer>) null, "1000001", 5);
     }
 
     /**
