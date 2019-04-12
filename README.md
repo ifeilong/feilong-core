@@ -117,8 +117,6 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 </project>
 ```
 
-
-
 ## 5. How to install?
 
 有些小伙伴想下载并 `自行install` 进行研究, 你需要执行以下 `4` 个步骤:
@@ -133,7 +131,28 @@ mvn install -f feilong-core/pom.xml
 
 **详细参考** https://github.com/venusdrogon/feilong-core/wiki/install
 
-## 6.帮助:
+## 6. Proxying feilong Repositories with Nexus
+
+如果你使用 Sonatype's [Nexus repository manager][2], 你可能想要在Nexus configuration配置中将 feilong repositories 添加到 nexus proxy repositories. 
+
+下面是注意点:
+
+ * 由于 feilong repositories 没有索引. 你需要将 `Remote Repository Access > Download Remote Indexes` 设置为 `false`.
+ * 由于 GitHub 对于 `raw` repository url目录不会生成目录列表 , 请将 Nexus `Remote Repository Access > Auto blocking active` 设置为 `false`. 
+
+上面两步操作之后, 你可以看到 `Repository Status` 变成了 `Attempting to Proxy and Remote Unavailable`. 
+
+Nexus 在缺失目录列表的情况下仍然可以访问指定的 artifact, pom 和其他文件 .
+
+示例:
+
+![nexus-config.jpg](http://venusdrogon.github.io/feilong-platform/mysource/nexus-config.jpg)
+
+[1]: http://maven.apache.org/settings.html
+[2]: http://nexus.sonatype.org/
+
+
+## 7.帮助:
 
 - [帮助文档](http://feilong-core.mydoc.io/)
 - [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/feilong-core/)
@@ -141,29 +160,29 @@ mvn install -f feilong-core/pom.xml
 - [wiki](https://github.com/venusdrogon/feilong-core/wiki)
 - [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/)
 
-## 7.sonar 扫描
+## 8.sonar 扫描
 
 ![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core.png)
 
-## 8.:memo: 说明
+## 9.:memo: 说明
 
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. [require-jdk-version](https://github.com/venusdrogon/feilong-core/wiki/require-jdk-version)
 1. [dependencies](https://github.com/venusdrogon/feilong-core/wiki/dependencies)
 
-## 9.Q&A
+## 10.Q&A
 
-### 9.1 Q1:这是重复造轮子吗?
+### 10.1 Q1:这是重复造轮子吗?
 
 A: https://github.com/venusdrogon/feilong-core/wiki/Repeat-the-wheel
 
-## 10.:cyclone: feilong 即时交流
+## 11.:cyclone: feilong 即时交流
 
 |QQ 群 `243306798`
 |:---------
 |![](http://i.imgur.com/cIfglCa.png)
 
-## 11:panda_face: About
+## 12:panda_face: About
 
 如果您对本项目有任何建议和批评,可以使用下面的联系方式：
 
