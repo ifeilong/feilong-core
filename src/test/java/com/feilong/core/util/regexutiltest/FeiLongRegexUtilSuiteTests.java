@@ -29,6 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 GroupIntTest.class,
                 GroupTest.class,
+                MatchesTest.class,
 
 })
 public class FeiLongRegexUtilSuiteTests{

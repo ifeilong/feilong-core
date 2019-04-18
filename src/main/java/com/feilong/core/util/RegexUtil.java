@@ -73,15 +73,20 @@ public final class RegexUtil{
      *            正则表达式字符串,pls use {@link "RegexPattern"}
      * @param input
      *            The character sequence to be matched,support {@link String},{@link StringBuffer},{@link StringBuilder}... and so on
-     * @return 如果input 符合 regex的正则表达式格式,返回true, 否则返回 false;<br>
-     *         如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>input</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>regexPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>input</code> 是null,返回 false<br>
+     *         如果input 符合 regex的正则表达式格式,返回true,否则返回 false;<br>
      * @see #getMatcher(String, CharSequence)
      * @see Matcher#matches()
      * @see Pattern#matches(String, CharSequence)
      * @since 1.0.7
+     * @since 1.13.2 change, if input is null, return false from NPE
      */
     public static boolean matches(final String regexPattern,final CharSequence input){
+        Validate.notNull(regexPattern, "regexPattern can't be null!");
+        if (null == input){
+            return false;
+        }
         return getMatcher(regexPattern, input).matches();
     }
 
