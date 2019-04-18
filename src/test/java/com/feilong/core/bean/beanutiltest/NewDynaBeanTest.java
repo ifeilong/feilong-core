@@ -35,11 +35,7 @@ import com.feilong.core.bean.BeanUtil;
  */
 public class NewDynaBeanTest{
 
-    /**
-     * Test new dyna bean.
-     */
     @Test
-    @SuppressWarnings("static-method")
     public void testNewDynaBean(){
         Map<String, Object> map = newHashMap();
 
@@ -52,15 +48,25 @@ public class NewDynaBeanTest{
         assertEquals(map, newDynaBean.get("address"));
         assertEquals("Fred", newDynaBean.get("firstName"));
         assertEquals("Flintstone", newDynaBean.get("lastName"));
-
-        //        assertThat(newDynaBean, allOf(//
-        //                        hasProperty("address", is((Object) new HashMap())),
-        //                        hasProperty("firstName", is((Object) "Fred")),
-        //                        hasProperty("lastName", is((Object) "Flintstone"))
-        //
-        //        //
-        //        ));
     }
+
+    @Test
+    public void testNewDynaBean1(){
+        Map<Integer, Object> map = newHashMap();
+
+        DynaBean newDynaBean = BeanUtil.newDynaBean(
+                        toMapUseEntrys(//
+                                        of(1, (Object) map),
+                                        of(2, (Object) "Fred"),
+                                        of(3, (Object) "Flintstone")));
+
+        assertEquals(map, newDynaBean.get("1"));
+
+        assertEquals("Fred", newDynaBean.get("2"));
+        assertEquals("Flintstone", newDynaBean.get("3"));
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * Test new dyna bean null map.

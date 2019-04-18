@@ -988,9 +988,9 @@ public final class BeanUtil{
      * 
      * <pre class="code">
      * {
-     * "address": {},
-     * "firstName": "Fred",
-     * "lastName": "Flintstone"
+     *  "address": {},
+     *  "firstName": "Fred",
+     *  "lastName": "Flintstone"
      * }
      * </pre>
      * 
@@ -1005,16 +1005,18 @@ public final class BeanUtil{
      *             如果<code>valueMap</code>中有key是empty
      * @see org.apache.commons.beanutils.LazyDynaBean
      * @since 1.8.1
+     * @since 1.13.2 param map change from {@code Map<String, ?> valueMap} to {@code Map<?, ?> valueMap}
      */
-    public static DynaBean newDynaBean(Map<String, ?> valueMap){
+    public static DynaBean newDynaBean(Map<?, ?> valueMap){
         Validate.notNull(valueMap, "valueMap can't be null!");
 
         //---------------------------------------------------------------
-
         LazyDynaBean lazyDynaBean = new LazyDynaBean();
-        for (Map.Entry<String, ?> entry : valueMap.entrySet()){
-            Validate.notBlank(entry.getKey(), "entry.getKey() can't be blank!");
-            lazyDynaBean.set(entry.getKey(), entry.getValue());
+        for (Map.Entry<?, ?> entry : valueMap.entrySet()){
+            String key = ConvertUtil.toString(entry.getKey());
+
+            Validate.notBlank(key, "entry.getKey() can't be blank!");
+            lazyDynaBean.set(key, entry.getValue());
         }
         return lazyDynaBean;
     }
