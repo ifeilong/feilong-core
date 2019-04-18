@@ -22,7 +22,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                StringToDateTransformerTest.class,
                 DateToStringTransformerTest.class,
+
                 NumberToStringTransformerTest.class,
 
                 BeanTransformerTest.class,

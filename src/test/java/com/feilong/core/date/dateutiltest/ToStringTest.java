@@ -16,7 +16,9 @@
 package com.feilong.core.date.dateutiltest;
 
 import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.date.DateUtil.toDate;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -27,6 +29,16 @@ import com.feilong.core.date.DateUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ToStringTest{
+
+    /**
+     * TestToStringTest.
+     */
+    @Test
+    public void testToStringTest(){
+        String datePattern = "M月d日 HH:mm";
+        assertEquals("1月2日 01:53", DateUtil.toString(toDate("2018-01-02 01:53:00", COMMON_DATE_AND_TIME), datePattern));
+        assertEquals("1月12日 01:53", DateUtil.toString(toDate("2018-01-12 01:53:00", COMMON_DATE_AND_TIME), datePattern));
+    }
 
     /**
      * Test to string null date.

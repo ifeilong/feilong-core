@@ -37,6 +37,7 @@ public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParam
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               { DatePattern.CHINESE_DATE, "2018年01月02日" },
+                                              { "M月d日 HH:mm", "1月2日 01:53" },
                                               { DatePattern.CHINESE_DATE_AND_TIME, "2018年01月02日 01:53:00" },
 
                                               { DatePattern.COMMON_DATE, "2018-01-02" },
