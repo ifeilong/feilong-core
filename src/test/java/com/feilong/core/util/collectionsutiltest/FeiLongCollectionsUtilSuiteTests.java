@@ -68,6 +68,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 RemoveAllCollectionTest.class,
 
                 ForEachTest.class,
+
+                SelectRegexStringPredicateTest.class,
+                SelectNotNullOrEmptyStringPredicateTest.class,
         //
 })
 public class FeiLongCollectionsUtilSuiteTests{

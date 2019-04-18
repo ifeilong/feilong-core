@@ -27,19 +27,18 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.feilong.core.util.predicate.RegexStringPredicate;
+import com.feilong.core.util.predicate.NotNullOrEmptyStringPredicate;
 
 /**
  * The Class CollectionsUtilSelectPredicateTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SelectRegexStringPredicateTest{
+public class SelectNotNullOrEmptyStringPredicateTest{
 
     @Test
     public void testSelectPredicateTest(){
         String tel = "15002841618";
-        String regexPattern = "^1[3456789]\\d{9}$";
 
         //---------------------------------------------------------------
         List<String> list = toList(//
@@ -47,26 +46,24 @@ public class SelectRegexStringPredicateTest{
                         tel,
                         tel,
                         null,
-                        tel,
                         "飞龙",
                         "",
                         "jinxin",
                         tel,
                         tel);
 
-        List<String> select = select(list, new RegexStringPredicate(regexPattern));
-
-        assertEquals(5, select.size());
-
+        List<String> select = select(list, NotNullOrEmptyStringPredicate.INSTANCE);
+        assertEquals(6, select.size());
         assertThat(
                         select,
                         allOf(//
                                         hasItem(tel),
 
-                                        not(hasItem("飞龙")),
+                                        hasItem("jinxin"),
+                                        hasItem("飞龙"),
+
                                         not(hasItem("")),
-                                        not(hasItem((String) null)),
-                                        not(hasItem("jinxin"))
+                                        not(hasItem((String) null))
                         //
                         ));
     }
