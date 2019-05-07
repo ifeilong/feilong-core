@@ -48,6 +48,18 @@ public class SortMapByValueAscTest{
     }
 
     @Test
+    public void testSortByValueASC2(){
+        Map<String, Integer> map = newHashMap();
+        map.put("a", 123);
+        map.put("c", 345);
+        map.put("m", 3450);
+        map.put("b", 8);
+        Map<String, Integer> sortByValueAsc = sortMapByValueAsc(map);
+        assertThat(sortByValueAsc.keySet(), contains("b", "a", "c", "m"));
+        // assertThat(sortByValueAsc.keySet(), contains("m", "b", "a", "c", "m"));
+    }
+
+    @Test
     public void testSortByValueASCSameValue(){
         Map<String, Integer> map = newLinkedHashMap();
         map.put("a", 123);
