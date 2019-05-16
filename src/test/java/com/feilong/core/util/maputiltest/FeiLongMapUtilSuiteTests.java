@@ -38,6 +38,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 ExtractSubMapIncludeKeysTest.class,
 
                 NewHashMapTest.class,
+                NewTreeMapTest.class,
                 NewLinkedHashMapTest.class,
                 NewConcurrentHashMapTest.class,
 

@@ -1405,6 +1405,23 @@ public final class MapUtil{
     }
 
     /**
+     * New concurrent hash map.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.13.3
+     */
+    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(Map<K, V> map){
+        Validate.notNull(map, "map can't be null!");
+        return new ConcurrentHashMap<>(map);
+    }
+
+    /**
      * 创建 {@code ConcurrentHashMap}实例,拥有足够的 "initial capacity" 应该控制{@code expectedSize} elements without growth.
      * 
      * <p>
@@ -1503,6 +1520,8 @@ public final class MapUtil{
         return new ConcurrentHashMap<>(toInitialCapacity(expectedSize));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * New tree map.
      *
@@ -1517,6 +1536,25 @@ public final class MapUtil{
     public static <K extends Comparable, V> TreeMap<K, V> newTreeMap(){
         return new TreeMap<>();
     }
+
+    /**
+     * New tree map.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.13.3
+     */
+    public static <K extends Comparable, V> TreeMap<K, V> newTreeMap(Map<K, V> map){
+        Validate.notNull(map, "map can't be null!");
+        return new TreeMap<>(map);
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 创建 {@code HashMap}实例.
@@ -1585,6 +1623,23 @@ public final class MapUtil{
      */
     public static <K, V> HashMap<K, V> newHashMap(){
         return new HashMap<>();
+    }
+
+    /**
+     * New hash map.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.13.3
+     */
+    public static <K, V> HashMap<K, V> newHashMap(Map<K, V> map){
+        Validate.notNull(map, "map can't be null!");
+        return new HashMap<>(map);
     }
 
     /**
@@ -1688,6 +1743,8 @@ public final class MapUtil{
         return new HashMap<>(toInitialCapacity(expectedSize));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 创建 {@code LinkedHashMap}实例.
      * 
@@ -1755,6 +1812,23 @@ public final class MapUtil{
      */
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(){
         return new LinkedHashMap<>();
+    }
+
+    /**
+     * New linked hash map.
+     *
+     * @param <K>
+     *            the key type
+     * @param <V>
+     *            the value type
+     * @param map
+     *            the map
+     * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.13.3
+     */
+    public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Map<K, V> map){
+        Validate.notNull(map, "map can't be null!");
+        return new LinkedHashMap<>(map);
     }
 
     /**

@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.maputiltest;
 
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -46,6 +47,27 @@ public class NewHashMapTest{
         newHashMap.put("address", "shanghai");
 
         assertThat(newHashMap.size(), is(3));
+    }
+
+    //---------------------------------------------------------------
+    @Test
+    public void testNewHashMap2333(){
+        Map<String, String> newHashMap = newHashMap(3);
+        newHashMap.put("name", "feilong");
+        newHashMap.put("age", "18");
+        newHashMap.put("address", "shanghai");
+        assertThat(newHashMap.size(), is(3));
+
+        Map<String, String> newHashMap1 = newHashMap(newHashMap);
+        assertThat(newHashMap1.size(), is(3));
+    }
+
+    /**
+     * TestNewHashMapTest.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testNewHashMapTest(){
+        newHashMap(null);
     }
 
     //---------------------------------------------------------------
