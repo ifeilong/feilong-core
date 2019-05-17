@@ -8,13 +8,13 @@ feilong core 让Java开发更简便的工具包
 [![tests 2134](https://img.shields.io/badge/tests-2134%20%2F%202134-green.svg "tests 2134")](https://github.com/venusdrogon/feilong-core/tree/master/src/test/java/com/feilong/core)
 ![Coverage 91%](http://progressed.io/bar/91?title=Coverage "Coverage 91%")
 
+![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core-summary2.jpg)
+
 > Reduce development, Release ideas (减少开发,释放思想)
 
 focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-platform) 核心项目
 
 详细帮助文档参见 [http://feilong-core.mydoc.io/](http://feilong-core.mydoc.io/)
-
-![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core-summary1.jpg)
 
 ## 1.简介:
 
