@@ -162,6 +162,8 @@ Nexus 在缺失目录列表的情况下仍然可以访问指定的 artifact, pom
 
 ## 8.sonar 扫描
 
+![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core-summary.jpg)
+
 ![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core.png)
 
 ## 9.:memo: 说明
