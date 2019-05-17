@@ -14,6 +14,7 @@ focus on J2SE,是 [feilong platform](https://github.com/venusdrogon/feilong-plat
 
 详细帮助文档参见 [http://feilong-core.mydoc.io/](http://feilong-core.mydoc.io/)
 
+![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core-summary1.jpg)
 
 ## 1.简介:
 
@@ -161,8 +162,6 @@ Nexus 在缺失目录列表的情况下仍然可以访问指定的 artifact, pom
 - [Site](http://venusdrogon.github.io/feilong-platform/site/feilong-core/)
 
 ## 8.sonar 扫描
-
-![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core-summary.jpg)
 
 ![sonar](http://venusdrogon.github.io/feilong-platform/mysource/sonar/feilong-core.png)
 
