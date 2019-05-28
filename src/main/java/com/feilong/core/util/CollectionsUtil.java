@@ -2136,7 +2136,6 @@ public final class CollectionsUtil{
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
 
         //---------------------------------------------------------------
-
         //org.apache.commons.beanutils.BeanToPropertyValueTransformer 但是实现的是 commons-collection3
         return group(beanIterable, includePredicate, new Transformer<O, T>(){
 
@@ -2394,6 +2393,7 @@ public final class CollectionsUtil{
             return emptyMap();
         }
         Validate.notNull(keyTransformer, "keyTransformer can't be null!");
+        //---------------------------------------------------------------
 
         Map<T, List<O>> map = newLinkedHashMap(IterableUtils.size(beanIterable));
         for (O obj : beanIterable){
@@ -2473,7 +2473,7 @@ public final class CollectionsUtil{
             return emptyMap();
         }
         Validate.notBlank(propertyName, "propertyName can't be null/empty!");
-
+        //---------------------------------------------------------------
         Map<T, O> map = newLinkedHashMap(IterableUtils.size(beanIterable));
         for (O o : beanIterable){
             T key = PropertyUtil.getProperty(o, propertyName);
