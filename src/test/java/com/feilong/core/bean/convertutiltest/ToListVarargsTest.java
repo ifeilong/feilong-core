@@ -48,19 +48,21 @@ public class ToListVarargsTest{
     }
 
     /**
-     * Test to list null array.
-     */
-    @Test
-    public void testToListNullArray(){
-        assertEquals(emptyList(), toList((User[]) null));
-    }
-
-    /**
      * Test to list empty array.
      */
     @Test
     public void testToListEmptyArray(){
         assertEquals(emptyList(), toList(toArray()));
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Test to list null array.
+     */
+    @Test
+    public void testToListNullArray(){
+        assertEquals(emptyList(), toList((User[]) null));
     }
 
     /**

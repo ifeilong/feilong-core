@@ -48,19 +48,21 @@ public class ToSetVarargsTest{
     }
 
     /**
-     * Test to set null array.
-     */
-    @Test
-    public void testToSetNullArray(){
-        assertEquals(emptySet(), toSet((User[]) null));
-    }
-
-    /**
      * Test to set empty array.
      */
     @Test
     public void testToSetEmptyArray(){
         assertEquals(emptySet(), toSet(toArray()));
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Test to set null array.
+     */
+    @Test
+    public void testToSetNullArray(){
+        assertEquals(emptySet(), toSet((User[]) null));
     }
 
     /**

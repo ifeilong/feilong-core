@@ -2500,6 +2500,20 @@ public final class ConvertUtil{
      * @param arrays
      *            T数组
      * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * 
+     *         <span style="color:red">提别提醒:注意动态数组(Varargs)的陷阱:</span>
+     * 
+     *         <pre class="code">
+     *         assertEquals(emptyList(), <span style="color:red">toList((User[]) null)</span>);
+     *         
+     *         <span style="color:green">//-------------------------------------------------</span>
+     * 
+     *         List{@code <User>} list = newArrayList();
+     *         list.add(null);
+     * 
+     *         assertEquals(list, <span style="color:red">toList((User) null)</span>);
+     *         </pre>
+     * 
      *         否则返回 {@code new ArrayList<T>(Arrays.asList(arrays));}
      * @see java.util.Arrays#asList(Object...)
      * @see java.util.Collections#singleton(Object)
@@ -2583,6 +2597,20 @@ public final class ConvertUtil{
      * @param arrays
      *            the arrays
      * @return 如果 <code>arrays</code> 是null或者empty,返回 {@link Collections#emptySet()}<br>
+     * 
+     *         <span style="color:red">提别提醒:注意动态数组(Varargs)的陷阱:</span>
+     * 
+     *         <pre class="code">
+     *         assertEquals(emptySet(), toSet(<span style="color:red">(User[]) null</span>));
+     *         
+     *         <span style="color:green">//-------------------------------------------------</span>
+     * 
+     *         Set{@code <User>} set = new LinkedHashSet<>();
+     *         set.add(null);
+     * 
+     *         assertEquals(list, toSet(<span style="color:red">(User) null</span>));
+     *         </pre>
+     * 
      *         否则返回 {@code new LinkedHashSet<T>(Arrays.asList(arrays));}
      * @see "com.google.common.collect.Sets#newHashSet(E...)"
      * @since 1.9.6
