@@ -16,6 +16,7 @@
 package com.feilong.core.bean.propertyutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.date.DateUtil.now;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
@@ -46,7 +47,7 @@ public class CopyPropertiesTest{
      */
     @Test
     public void testCopyProperties(){
-        Date now = new Date();
+        Date now = now();
         String[] array = toArray("feilong", "飞天奔月", "venusdrogon");
 
         User oldUser = new User();

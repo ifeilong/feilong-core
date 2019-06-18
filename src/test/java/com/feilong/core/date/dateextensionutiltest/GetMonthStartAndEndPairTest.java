@@ -18,6 +18,7 @@ package com.feilong.core.date.dateextensionutiltest;
 import static com.feilong.core.date.DateExtensionUtil.getMonthStartAndEndPair;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisMonth;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisMonth;
+import static com.feilong.core.date.DateUtil.now;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
@@ -34,7 +35,7 @@ public class GetMonthStartAndEndPairTest{
 
     @Test
     public void testGetMonthStartAndEndPair(){
-        Date NOW = new Date();
+        Date NOW = now();
         Pair<Date, Date> MonthStartAndEndPair = getMonthStartAndEndPair();
 
         assertEquals(getFirstDateOfThisMonth(NOW), MonthStartAndEndPair.getLeft());
@@ -45,7 +46,7 @@ public class GetMonthStartAndEndPairTest{
 
     @Test
     public void testGetMonthStartAndEndPair1(){
-        Date NOW = new Date();
+        Date NOW = now();
         Pair<Date, Date> MonthStartAndEndPair = getMonthStartAndEndPair(NOW);
 
         assertEquals(getFirstDateOfThisMonth(NOW), MonthStartAndEndPair.getLeft());

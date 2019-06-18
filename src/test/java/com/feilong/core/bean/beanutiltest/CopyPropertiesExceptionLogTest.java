@@ -15,7 +15,7 @@
  */
 package com.feilong.core.bean.beanutiltest;
 
-import java.util.Date;
+import static com.feilong.core.date.DateUtil.now;
 
 import org.junit.Test;
 
@@ -34,7 +34,7 @@ public class CopyPropertiesExceptionLogTest{
     @SuppressWarnings("static-method")
     public void testCopyPropertiesNoDateLocaleConverter(){
         User user = new User();
-        user.setDate(new Date());
+        user.setDate(now());
 
         User user2 = new User();
         BeanUtil.copyProperties(user2, user, "date");

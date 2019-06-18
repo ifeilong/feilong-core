@@ -15,12 +15,11 @@
  */
 package com.feilong.core.bean.propertyutiltest;
 
+import static com.feilong.core.date.DateUtil.now;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-
-import java.util.Date;
 
 import org.junit.Test;
 
@@ -42,7 +41,7 @@ public class FindValueOfTypeTest{
     public void testFindValueOfType(){
         User user = new User();
         user.setId(5L);
-        user.setDate(new Date());
+        user.setDate(now());
 
         user.getUserInfo().setAge(28);
 

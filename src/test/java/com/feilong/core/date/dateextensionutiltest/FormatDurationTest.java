@@ -18,6 +18,7 @@ package com.feilong.core.date.dateextensionutiltest;
 import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
 import static com.feilong.core.bean.ConvertUtil.toLong;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
@@ -81,7 +82,7 @@ public class FormatDurationTest{
      */
     @Test(expected = NullPointerException.class)
     public void testFormatDuration233(){
-        formatDuration(new Date(), null);
+        formatDuration(now(), null);
     }
 
     /**
@@ -89,7 +90,7 @@ public class FormatDurationTest{
      */
     @Test(expected = NullPointerException.class)
     public void testFormatDuration2333(){
-        formatDuration(null, new Date());
+        formatDuration(null, now());
     }
 
     /**

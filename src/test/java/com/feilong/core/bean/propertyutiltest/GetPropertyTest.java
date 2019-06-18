@@ -17,12 +17,12 @@ package com.feilong.core.bean.propertyutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +40,7 @@ public class GetPropertyTest{
     public void testGetPropertyNest(){
         User user = new User();
         user.setId(5L);
-        user.setDate(new Date());
+        user.setDate(now());
 
         List<User> list = toList(user, user, user);
 
@@ -53,7 +53,7 @@ public class GetPropertyTest{
     public void testGetBean(){
         User user = new User();
         user.setId(5L);
-        user.setDate(new Date());
+        user.setDate(now());
 
         Long id = PropertyUtil.getProperty(user, "id");
         assertThat(id, is(equalTo(5L)));

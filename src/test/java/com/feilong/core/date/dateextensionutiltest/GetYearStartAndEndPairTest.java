@@ -18,6 +18,7 @@ package com.feilong.core.date.dateextensionutiltest;
 import static com.feilong.core.date.DateExtensionUtil.getYearStartAndEndPair;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisYear;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisYear;
+import static com.feilong.core.date.DateUtil.now;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
@@ -34,7 +35,7 @@ public class GetYearStartAndEndPairTest{
 
     @Test
     public void testGetYearStartAndEndPair(){
-        Date NOW = new Date();
+        Date NOW = now();
         Pair<Date, Date> yearStartAndEndPair = getYearStartAndEndPair();
 
         assertEquals(getFirstDateOfThisYear(NOW), yearStartAndEndPair.getLeft());
@@ -45,7 +46,7 @@ public class GetYearStartAndEndPairTest{
 
     @Test
     public void testGetYearStartAndEndPair1(){
-        Date NOW = new Date();
+        Date NOW = now();
         Pair<Date, Date> yearStartAndEndPair = getYearStartAndEndPair(NOW);
 
         assertEquals(getFirstDateOfThisYear(NOW), yearStartAndEndPair.getLeft());

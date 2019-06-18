@@ -17,6 +17,7 @@ package com.feilong.core.bean.beanutiltest;
 
 import static com.feilong.core.DatePattern.TO_STRING_STYLE;
 import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.date.DateUtil.now;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
@@ -65,7 +66,7 @@ public class CopyPropertiesTest{
     public void testCopyPropertiesAll(){
         BigDecimal money = new BigDecimal(500000);
         String[] nickNames = toArray("feilong", "飞天奔月", "venusdrogon");
-        Date date = new Date();
+        Date date = now();
 
         User user = new User();
         user.setId(5L);

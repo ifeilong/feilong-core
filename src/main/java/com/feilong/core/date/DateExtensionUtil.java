@@ -28,6 +28,7 @@ import static com.feilong.core.date.DateUtil.getLastDateOfThisDay;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisMonth;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisYear;
 import static com.feilong.core.date.DateUtil.getTime;
+import static com.feilong.core.date.DateUtil.now;
 
 import java.util.Date;
 
@@ -142,7 +143,7 @@ public final class DateExtensionUtil{
      * @since 1.10.6
      */
     public static Pair<Date, Date> getTodayStartAndEndPair(){
-        Date date = new Date();
+        Date date = now();
         return getDayStartAndEndPair(date);
     }
 
@@ -170,7 +171,7 @@ public final class DateExtensionUtil{
      * @since 1.10.6
      */
     public static Pair<Date, Date> getYesterdayStartAndEndPair(){
-        Date date = new Date();
+        Date date = now();
         Date yesteday = addDay(date, -1);
         return getDayStartAndEndPair(yesteday);
     }
@@ -232,7 +233,7 @@ public final class DateExtensionUtil{
      * @since 1.10.6
      */
     public static Pair<Date, Date> getMonthStartAndEndPair(){
-        return getMonthStartAndEndPair(new Date());
+        return getMonthStartAndEndPair(now());
     }
 
     /**
@@ -290,7 +291,7 @@ public final class DateExtensionUtil{
      * @since 1.10.6
      */
     public static Pair<Date, Date> getYearStartAndEndPair(){
-        return getYearStartAndEndPair(new Date());
+        return getYearStartAndEndPair(now());
     }
 
     /**
@@ -330,14 +331,14 @@ public final class DateExtensionUtil{
     //---------------------------------------------------------------
 
     /**
-     * 将开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,格式化成直观的表示方式.
+     * 将开始时间 <code>beginDate</code> 到当前时间 <code>now()</code>,两日期之间的<span style="color:red">绝对值</span>间隔,格式化成直观的表示方式.
      * 
      * <h3>说明:</h3>
      * 
      * <blockquote>
      * <ol>
      * <li>常用于日志输出一段代码执行时长</li>
-     * <li>计算的是开始时间 <code>beginDate</code> 到当前时间 <code>new Date()</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
+     * <li>计算的是开始时间 <code>beginDate</code> 到当前时间 <code>now()</code> 绝对值间隔时间,也就是说不care 时间先后顺序</li>
      * <li>间隔时间转成 <b>天,小时,分钟,秒,毫秒</b> 中文文字,月和较大的格式不使用</li>
      * </ol>
      * </blockquote>
@@ -346,7 +347,7 @@ public final class DateExtensionUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Date beginDate = new Date();
+     * Date beginDate = now();
      * 
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
@@ -398,7 +399,7 @@ public final class DateExtensionUtil{
      * @since 1.8.4 change name from getIntervalForView
      */
     public static String formatDuration(Date beginDate){
-        return formatDuration(beginDate, new Date());
+        return formatDuration(beginDate, now());
     }
 
     /**
@@ -417,12 +418,12 @@ public final class DateExtensionUtil{
      * <blockquote>
      * 
      * <pre class="code">
-     * Date beginDate = new Date();
+     * Date beginDate = now();
      * 
      * <span style="color:green">// do some logic</span>
      * <span style="color:green">// balabala logic</span>
      * 
-     * LOGGER.info("use time: [{}]", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+     * LOGGER.info("use time: [{}]", DateExtensionUtil.getIntervalForView(beginDate, now()));
      * 
      * </pre>
      * 

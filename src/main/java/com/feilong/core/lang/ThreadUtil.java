@@ -16,6 +16,7 @@
 package com.feilong.core.lang;
 
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 
 import java.util.Date;
 import java.util.List;
@@ -181,7 +182,7 @@ public final class ThreadUtil{
 
         //---------------------------------------------------------------
 
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         Thread[] threads = buildThreadArray(runnable, threadCount);
         ThreadUtil.startAndJoin(threads);
@@ -238,7 +239,7 @@ public final class ThreadUtil{
      * <pre class="code">
      * 
      * public void testExecuteTest() throws InterruptedException{
-     *     Date beginDate = new Date();
+     *     Date beginDate = now();
      * 
      *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
      *     for (Integer integer : list){
@@ -263,7 +264,7 @@ public final class ThreadUtil{
      * <pre class="code">
      * 
      * public void testExecuteTestUsePartitionRunnableBuilder() throws InterruptedException{
-     *     Date beginDate = new Date();
+     *     Date beginDate = now();
      *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
      * 
      *     <span style="color:green">//每个线程执行2条数据, 没有自定义 paramsMap</span>
@@ -384,7 +385,7 @@ public final class ThreadUtil{
      * <pre class="code">
      * 
      * public void testExecuteTest() throws InterruptedException{
-     *     Date beginDate = new Date();
+     *     Date beginDate = now();
      * 
      *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
      *     for (Integer integer : list){
@@ -409,7 +410,7 @@ public final class ThreadUtil{
      * <pre class="code">
      * 
      * public void testExecuteTestUsePartitionRunnableBuilder() throws InterruptedException{
-     *     Date beginDate = new Date();
+     *     Date beginDate = now();
      *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
      * 
      *     <span style="color:green">//每个线程执行2条数据, 没有自定义 paramsMap</span>
@@ -478,7 +479,7 @@ public final class ThreadUtil{
      * <pre class="code">
      * 
      * public void testExecuteTestUsePartitionRunnableBuilderParamsMap() throws InterruptedException{
-     *     Date beginDate = new Date();
+     *     Date beginDate = now();
      *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
      * 
      *     final Map{@code <Integer, Boolean>} indexAndResultMap = Collections.synchronizedSortedMap(new TreeMap{@code <Integer, Boolean>}());

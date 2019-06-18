@@ -21,6 +21,7 @@ import static com.feilong.core.date.DateExtensionUtil.getYesterdayStartAndEndPai
 import static com.feilong.core.date.DateUtil.addDay;
 import static com.feilong.core.date.DateUtil.getFirstDateOfThisDay;
 import static com.feilong.core.date.DateUtil.getLastDateOfThisDay;
+import static com.feilong.core.date.DateUtil.now;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
@@ -37,7 +38,7 @@ public class GetDayStartAndEndPairTest{
 
     @Test
     public void testGetDayStartAndEndPair(){
-        Date NOW = new Date();
+        Date NOW = now();
         Pair<Date, Date> pair = getTodayStartAndEndPair();
 
         assertEquals(getFirstDateOfThisDay(NOW), pair.getLeft());
@@ -46,7 +47,7 @@ public class GetDayStartAndEndPairTest{
 
     @Test
     public void testGetYesterdayStartAndEndPair(){
-        Date date = new Date();
+        Date date = now();
         Date yesteday = addDay(date, -1);
         Pair<Date, Date> pair = getYesterdayStartAndEndPair();
 
@@ -58,7 +59,7 @@ public class GetDayStartAndEndPairTest{
 
     @Test
     public void testGetDayStartAndEndPair1(){
-        Date NOW = new Date();
+        Date NOW = now();
         Pair<Date, Date> pair = getDayStartAndEndPair(NOW);
 
         assertEquals(getFirstDateOfThisDay(NOW), pair.getLeft());

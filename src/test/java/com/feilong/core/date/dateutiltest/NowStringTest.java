@@ -15,29 +15,25 @@
  */
 package com.feilong.core.date.dateutiltest;
 
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
-import static com.feilong.core.date.DateUtil.isToday;
-import static com.feilong.core.date.DateUtil.now;
-import static com.feilong.core.date.DateUtil.toDate;
-import static org.junit.Assert.assertSame;
+import static com.feilong.core.date.DateUtil.nowString;
 
 import org.junit.Test;
 
-public class IsTodayTest{
-
-    /**
-     * Test is equals.
-     */
-    @Test
-    public void testIsToday(){
-        assertSame(false, isToday(toDate("2016-06-16 22:59:00", COMMON_DATE_AND_TIME)));
-        assertSame(true, isToday(now()));
-    }
-
-    //---------------------------------------------------------------
+public class NowStringTest{
 
     @Test(expected = NullPointerException.class)
-    public void testIsTodayNullDate(){
-        isToday(null);
+    public void testNowStringTestNull(){
+        nowString(null);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNowStringTestEmpty(){
+        nowString("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNowStringTestBlank(){
+        nowString(" ");
+    }
+
 }

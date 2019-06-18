@@ -214,6 +214,63 @@ public final class DateUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 此时此刻的 {@link Date}.
+     * 
+     * <p>
+     * 使用静态导入 static import,开发效率要高于自己写 new Date()
+     * </p>
+     *
+     * @return the date
+     * @since 1.13.3
+     */
+    public static Date now(){
+        return new Date();
+    }
+
+    /**
+     * 将此时此刻转成时间字符串.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.toString(new Date(), COMMON_DATE_AND_TIME)
+     * </pre>
+     * 
+     * 可以简写(使用静态导入 static import更精简)
+     * 
+     * <pre class="code">
+     * DateUtil.nowString(COMMON_DATE_AND_TIME)
+     * </pre>
+     * 
+     * 尤其
+     * 
+     * <pre class="code">
+     * DateUtil.toString(Calendar.getInstance().getTime(), DatePattern.COMMON_DATE_AND_TIME)
+     * </pre>
+     * 
+     * 可以简写成(使用静态导入 static import更精简):
+     * 
+     * <pre class="code">
+     * DateUtil.nowString(COMMON_DATE_AND_TIME)
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param datePattern
+     *            the date pattern
+     * @return 如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.13.3
+     */
+    public static String nowString(String datePattern){
+        return toString(now(), datePattern);
+    }
+
     //------------------------day---------------------------------------
 
     /**
@@ -1407,7 +1464,7 @@ public final class DateUtil{
      */
     public static boolean isToday(Date date){
         Validate.notNull(date, "date can't be null!");
-        return DateUtils.isSameDay(date, new Date());
+        return DateUtils.isSameDay(date, now());
     }
 
     // [end]

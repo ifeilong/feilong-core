@@ -97,7 +97,7 @@ public final class PropertyUtil{
      * User oldUser = new User();
      * oldUser.setId(5L);
      * oldUser.setMoney(new BigDecimal(500000));
-     * oldUser.setDate(new Date());
+     * oldUser.setDate(now());
      * oldUser.setNickName(ConvertUtil.toArray("feilong", "飞天奔月", "venusdrogon"));
      * 
      * User newUser = new User();
@@ -252,7 +252,7 @@ public final class PropertyUtil{
      * <pre class="code">
      * User user = new User();
      * user.setId(5L);
-     * user.setDate(new Date());
+     * user.setDate(now());
      * 
      * LOGGER.debug(JsonUtil.format(PropertyUtil.describe(user));
      * </pre>
@@ -277,7 +277,7 @@ public final class PropertyUtil{
      * <pre class="code">
      * User user = new User();
      * user.setId(5L);
-     * user.setDate(new Date());
+     * user.setDate(now());
      * 
      * LOGGER.debug(JsonUtil.format(PropertyUtil.describe(user, "date", "id"));
      * </pre>
@@ -503,7 +503,7 @@ public final class PropertyUtil{
      * <pre class="code">
      * User user = new User();
      * user.setId(5L);
-     * user.setDate(new Date());
+     * user.setDate(now());
      * 
      * List{@code <User>} list = toList(user, user, user);
      * 
@@ -568,7 +568,7 @@ public final class PropertyUtil{
      * <pre class="code">
      * User user = new User();
      * user.setId(5L);
-     * user.setDate(new Date());
+     * user.setDate(now());
      * user.getUserInfo().setAge(28);
      * 
      * LOGGER.info(JsonUtil.format(PropertyUtil.findValueOfType(user, UserInfo.class)));

@@ -86,6 +86,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToStringTest.class,
                 ToStringParameterizedTest.class,
 
+                NowStringTest.class,
+
         //                
 })
 public class FeiLongDateUtilSuiteTests{

@@ -15,6 +15,7 @@
  */
 package com.feilong.core.bean.propertyutiltest;
 
+import static com.feilong.core.date.DateUtil.now;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.greaterThan;
@@ -42,7 +43,7 @@ public class DescribeTest{
      */
     @Test
     public void testDescribe(){
-        Date now = new Date();
+        Date now = now();
 
         User user = new User();
         user.setId(5L);
@@ -57,7 +58,7 @@ public class DescribeTest{
      */
     @Test
     public void testDescribeNullPropertyNames(){
-        Date now = new Date();
+        Date now = now();
 
         User user = new User();
         user.setId(5L);
@@ -74,7 +75,7 @@ public class DescribeTest{
      */
     @Test
     public void testDescribeNullPropertyNames1(){
-        Date now = new Date();
+        Date now = now();
 
         User user = new User();
         user.setId(5L);
@@ -120,7 +121,7 @@ public class DescribeTest{
      */
     @Test
     public void testDescribeEmptyPropertyNames(){
-        Date now = new Date();
+        Date now = now();
 
         User user = new User();
         user.setId(5L);
@@ -137,7 +138,7 @@ public class DescribeTest{
      */
     @Test
     public void testDescribeWithPropertyNames(){
-        Date now = new Date();
+        Date now = now();
 
         User user = new User();
         user.setId(5L);
@@ -154,7 +155,7 @@ public class DescribeTest{
      */
     @Test
     public void testDescribeWithPropertyNames1(){
-        Date now = new Date();
+        Date now = now();
 
         User user = new User();
         user.setId(5L);

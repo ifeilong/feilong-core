@@ -16,6 +16,7 @@
 package com.feilong.core.lang;
 
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static org.apache.commons.lang3.ClassUtils.getSimpleName;
 
@@ -76,7 +77,7 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
 
         //---------------------------------------------------------------
 
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         actualExcute(list, eachSize, paramsMap, partitionRunnableBuilder);
 

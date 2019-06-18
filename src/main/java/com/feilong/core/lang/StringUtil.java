@@ -420,7 +420,7 @@ public final class StringUtil{
      * 
      * <pre class="code">
      * String template = "/home/webuser/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}.log";
-     * Date date = new Date();
+     * Date date = now();
      * 
      * Map{@code <String, String>} valuesMap = newHashMap();
      * valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
@@ -447,7 +447,7 @@ public final class StringUtil{
      * 
      * <pre class="code">
      * Map{@code <String, Object>} valuesMap = newHashMap();
-     * valuesMap.put("today", DateUtil.toString(new Date(), COMMON_DATE));
+     * valuesMap.put("today", DateUtil.toString(now(), COMMON_DATE));
      * valuesMap.put("user", new User(1L));
      * LOGGER.debug(StringUtil.replace("${today}${today1}${user.id}${user}", valuesMap) + "");
      * </pre>
