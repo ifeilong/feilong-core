@@ -224,7 +224,7 @@ public final class DateUtil{
      * </p>
      *
      * @return the date
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static Date now(){
         return new Date();
@@ -265,7 +265,7 @@ public final class DateUtil{
      *            the date pattern
      * @return 如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static String nowString(String datePattern){
         return toString(now(), datePattern);

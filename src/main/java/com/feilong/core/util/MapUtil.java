@@ -1414,7 +1414,7 @@ public final class MapUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
@@ -1547,7 +1547,7 @@ public final class MapUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static <K extends Comparable, V> TreeMap<K, V> newTreeMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
@@ -1635,7 +1635,7 @@ public final class MapUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static <K, V> HashMap<K, V> newHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
@@ -1824,7 +1824,7 @@ public final class MapUtil{
      * @param map
      *            the map
      * @return 如果 <code>map</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Map<K, V> map){
         Validate.notNull(map, "map can't be null!");
