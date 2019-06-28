@@ -15,22 +15,23 @@
  */
 package com.feilong.core.bean.convertutiltest;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITH_MILLISECOND;
+import static com.feilong.core.bean.ConvertUtil.toArray;
+import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
+import static com.feilong.core.bean.ConvertUtil.toList;
+import static com.feilong.core.bean.ConvertUtil.toLong;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
-import static com.feilong.core.bean.ConvertUtil.toArray;
-import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
-import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.bean.ConvertUtil.toLong;
-
 /**
- * The Class ConvertUtilToStringParameterizedTest.
+ * The Class ToStringParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
@@ -47,16 +48,28 @@ public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParam
                                               { null, null },
 
                                               { 1L, "1" },
-                                              { toBigDecimal(1.0), "1.0" },
                                               { toLong(8L), "8" },
 
-                                              { toList("张飞", "关羽", "", "赵云"), "张飞" },
-                                              { toArray("张飞", "关羽", "", "赵云"), "张飞" },
-                                              { toArray(null, "关羽", "", "赵云"), EMPTY },
+                                              { new Double(1.0), "1.00" },
+                                              { new Float(1.0), "1.00" },
+                                              { toBigDecimal(1.0), "1.00" },
+                                              {
+                                                toDate("2019-06-28 12:00:00.666", COMMON_DATE_AND_TIME_WITH_MILLISECOND),
+                                                "2019-06-28 12:00:00" },
+                                              {
+                                                DateUtils.toCalendar(
+                                                                toDate("2019-06-28 12:00:00.666", COMMON_DATE_AND_TIME_WITH_MILLISECOND)),
+                                                "2019-06-28 12:00:00" },
+
+                                              { toList("张飞", "关羽", "", "赵云"), "张飞,关羽,,赵云" },
+                                              { toArray("张飞", "关羽", "", "赵云"), "张飞,关羽,,赵云" },
+                                              { toArray(null, "关羽", "", "赵云"), ",关羽,,赵云" },
                 //
         };
         return toList(objects);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test to string.

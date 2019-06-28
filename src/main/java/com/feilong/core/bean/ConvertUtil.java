@@ -943,118 +943,38 @@ public final class ConvertUtil{
      * 
      * <pre class="code">
      * ConvertUtil.toString(1)                  =   "1"
-     * ConvertUtil.toString(toBigDecimal(1.0))  =   "1.0"
      * ConvertUtil.toString(toLong(8L))         =   "8"
+     * ConvertUtil.toString(toBigDecimal(1.0))  =   "1.00"
+     * ConvertUtil.toString(new Double(1.0))  =   "1.00"
+     * ConvertUtil.toString(new Float(1.0))  =   "1.00"
+     * 
+     * ConvertUtil.toString(toList("张飞", "关羽", "", "赵云"))  =   "张飞,关羽,,赵云"
+     * ConvertUtil.toString(toArray("张飞", "关羽", "", "赵云"))  =   "张飞,关羽,,赵云"
+     * ConvertUtil.toString(toArray(null, "关羽", "", "赵云"))  =   ",关羽,,赵云"
      * </pre>
      * 
-     * </blockquote>
-     * 
-     * <h3>注意:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <p>
-     * 该方法<b>不适合</b> list转换成字符串,比如:
-     * </p>
-     * 
-     * <pre class="code">
-     * ConvertUtil.toString(toList("张飞", "关羽", "", "赵云")) = "张飞"
-     * </pre>
-     * 
-     * <p>
-     * ,请使用 {@link #toString(Collection, ToStringConfig)}
-     * </p>
-     * 
-     * <hr>
-     * 
-     * <p>
-     * 该方法也<b>不适合</b> array 转换成字符串,比如:
-     * </p>
-     * 
-     * <pre class="code">
-     * Integer[] int1 = { 2, null, 1, null };
-     * LOGGER.debug(ConvertUtil.toString(int1));        = 2
-     * </pre>
-     * 
-     * <p>
-     * 请使用 {@link #toString(Object[], ToStringConfig)}
-     * </p>
-     * 
-     * </blockquote>
-     * 
-     * <h3>对于 Array 转成 String:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <p>
-     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object) ArrayConverter#convertToString(Object)} <br>
-     * 
-     * 在转换的过程中,如果发现object是数组,将使用 {@link java.lang.reflect.Array#get(Object, int) Array#get(Object, int)}来获得数据,<br>
-     * 如果发现不是数组,将会将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
-     * ArrayConverter#convertToCollection(Class, Object)}再转成迭代器 {@link java.util.Collection#iterator() Collection.iterator()}
-     * </p>
-     * 
-     * <p>
-     * 在将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
-     * ArrayConverter#convertToCollection(Class, Object)}时候,有以下规则:
-     * </p>
-     *
-     * <ul>
-     * <li>The string is expected to be a comma-separated list of values.</li>
-     * <li>字符串可以被'{' and '}'分隔符包裹.</li>
-     * <li>去除前后空白.</li>
-     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
-     * valid.</li>
-     * </ul>
-     * 
-     * <p>
-     * 默认:
-     * </p>
-     * 
-     * <blockquote>
-     * <table border="1" cellspacing="0" cellpadding="4" summary="">
-     * 
-     * <tr style="background-color:#ccccff">
-     * <th align="left">字段</th>
-     * <th align="left">说明</th>
-     * </tr>
-     * 
-     * <tr valign="top">
-     * <td>int defaultSize</td>
-     * <td>指定构建的默认数组的大小 or if less than zero indicates that a <code>null</code> default value should be used.</td>
-     * </tr>
-     * 
-     * <tr valign="top" style="background-color:#eeeeff">
-     * <td>char delimiter = ','</td>
-     * <td>分隔符,转成的string中的元素分隔符</td>
-     * </tr>
-     * 
-     * <tr valign="top">
-     * <td>char[] allowedChars = new char[] {'.', '-'}</td>
-     * <td>用于{@link java.io.StreamTokenizer}分隔字符串</td>
-     * </tr>
-     * 
-     * <tr valign="top" style="background-color:#eeeeff">
-     * <td>boolean onlyFirstToString = true;</td>
-     * <td>只转第一个值</td>
-     * </tr>
-     * 
-     * </table>
-     * </blockquote>
      * </blockquote>
      * 
      * @param toBeConvertedValue
      *            参数值
-     * @return 如果 <code>toBeConvertedValue</code> 是null,返回null
+     * @return 如果 <code>toBeConvertedValue</code> 是null,返回 null<br>
+     *         如果 <code>toBeConvertedValue</code> 是 {@link CharSequence},直接 toString返回<br>
+     *         如果 <code>toBeConvertedValue</code> 是 数组,那么调用 {@link ConvertUtil#toString(Object[], String)}<br>
+     *         如果 <code>toBeConvertedValue</code> 是 {@link Collection},那么调用 {@link ConvertUtil#toString(Object[], String)}<br>
+     *         如果 <code>toBeConvertedValue</code> 是 {@link Date},那么返回 {@link com.feilong.core.DatePattern#COMMON_DATE_AND_TIME} 格式字符串<br>
+     *         如果 <code>toBeConvertedValue</code> 是 {@link BigDecimal}或者是{@link Float}或者是 {@link Double},那么返回
+     *         {@link com.feilong.core.NumberPattern#TWO_DECIMAL_POINTS} 2 位小数点格式字符串<br>
+     *         其他调用 {@link com.feilong.core.bean.ConvertUtil#convert(Object, Class)}
      * @see org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object)
      * @see org.apache.commons.beanutils.ConvertUtils#convert(Object)
      * @see org.apache.commons.beanutils.ConvertUtilsBean#convert(Object)
      * @see org.apache.commons.beanutils.converters.StringConverter
      * 
      * @see java.util.Arrays#toString(Object[])
+     * @since 1.14.0 call {@link com.feilong.core.bean.ToStringHandler#toStringValue(Object)}
      */
     public static String toString(Object toBeConvertedValue){
-        return convert(toBeConvertedValue, String.class);
+        return ToStringHandler.toStringValue(toBeConvertedValue);
     }
 
     //---------------------------------------------------------------
@@ -3071,7 +2991,102 @@ public final class ConvertUtil{
      * </li>
      * </ol>
      * </blockquote>
+     * 
+     * 
+     * <h3>注意:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 该方法<b>不适合</b> list转换成字符串,比如:
+     * </p>
+     * 
+     * <pre class="code">
+     * ConvertUtil.toString(toList("张飞", "关羽", "", "赵云"), String.class) = "张飞"
+     * </pre>
+     * 
+     * <p>
+     * ,请使用 {@link #toString(Collection, ToStringConfig)}
+     * </p>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * 该方法也<b>不适合</b> array 转换成字符串,比如:
+     * </p>
+     * 
+     * <pre class="code">
+     * Integer[] int1 = { 2, null, 1, null };
+     * LOGGER.debug(ConvertUtil.toString(int1),String.class);        = 2
+     * </pre>
+     * 
+     * <p>
+     * 请使用 {@link #toString(Object[], ToStringConfig)}
+     * </p>
+     * 
+     * </blockquote>
+     * 
+     * <h3>对于 Array 转成 String:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 参见 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToString(Object) ArrayConverter#convertToString(Object)} <br>
+     * 
+     * 在转换的过程中,如果发现object是数组,将使用 {@link java.lang.reflect.Array#get(Object, int) Array#get(Object, int)}来获得数据,<br>
+     * 如果发现不是数组,将会将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
+     * ArrayConverter#convertToCollection(Class, Object)}再转成迭代器 {@link java.util.Collection#iterator() Collection.iterator()}
+     * </p>
+     * 
+     * <p>
+     * 在将object转成集合 {@link org.apache.commons.beanutils.converters.ArrayConverter#convertToCollection(Class, Object)
+     * ArrayConverter#convertToCollection(Class, Object)}时候,有以下规则:
+     * </p>
      *
+     * <ul>
+     * <li>The string is expected to be a comma-separated list of values.</li>
+     * <li>字符串可以被'{' and '}'分隔符包裹.</li>
+     * <li>去除前后空白.</li>
+     * <li>Elements in the list may be delimited by single or double quotes. Within a quoted elements, the normal Java escape sequences are
+     * valid.</li>
+     * </ul>
+     * 
+     * <p>
+     * 默认:
+     * </p>
+     * 
+     * <blockquote>
+     * <table border="1" cellspacing="0" cellpadding="4" summary="">
+     * 
+     * <tr style="background-color:#ccccff">
+     * <th align="left">字段</th>
+     * <th align="left">说明</th>
+     * </tr>
+     * 
+     * <tr valign="top">
+     * <td>int defaultSize</td>
+     * <td>指定构建的默认数组的大小 or if less than zero indicates that a <code>null</code> default value should be used.</td>
+     * </tr>
+     * 
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>char delimiter = ','</td>
+     * <td>分隔符,转成的string中的元素分隔符</td>
+     * </tr>
+     * 
+     * <tr valign="top">
+     * <td>char[] allowedChars = new char[] {'.', '-'}</td>
+     * <td>用于{@link java.io.StreamTokenizer}分隔字符串</td>
+     * </tr>
+     * 
+     * <tr valign="top" style="background-color:#eeeeff">
+     * <td>boolean onlyFirstToString = true;</td>
+     * <td>只转第一个值</td>
+     * </tr>
+     * 
+     * </table>
+     * </blockquote>
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param toBeConvertedValue
