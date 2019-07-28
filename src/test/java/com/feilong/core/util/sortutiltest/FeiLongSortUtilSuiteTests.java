@@ -35,6 +35,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 SortListComparatorsTest.class,
                 SortListTest.class,
 
+                SortListByFixedOrderArrayTest.class,
+                SortListByFixedOrderListTest.class,
+
                 SortMapByKeyAscTest.class,
                 SortMapByKeyDescTest.class,
                 SortMapByKeyFixOrderTest.class,

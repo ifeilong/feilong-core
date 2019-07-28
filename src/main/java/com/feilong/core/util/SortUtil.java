@@ -29,10 +29,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.ComparatorUtils;
+import org.apache.commons.collections4.comparators.FixedOrderComparator.UnknownObjectBehavior;
 import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.util.comparator.BeanComparatorUtil;
+import com.feilong.core.util.comparator.ComparatorUtil;
 import com.feilong.core.util.comparator.PropertyComparator;
 
 /**
@@ -249,6 +251,96 @@ public final class SortUtil{
         Collections.sort(list);
         return list;
     }
+
+    //---------------------------------------------------------------
+    /**
+     * 对 集合 <code>list</code> 按照指定的固定顺序 <code>fixedOrderItems</code> 进行排序.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认使用的是 {@link UnknownObjectBehavior#AFTER} ,不在指定固定顺序的元素将排在后面</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * assertThat(
+     *                 sortListByFixedOrderArray(toList("张飞", "关羽", "刘备"), toArray("刘备", "张飞", "关羽")), //
+     *                 contains("刘备", "张飞", "关羽"));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param list
+     *            the list
+     * @param fixedOrderItems
+     *            the fixed order items
+     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>list</code> 是empty,返回 <code>list</code><br>
+     *         如果 <code>fixedOrderItems</code> 是null或者是 empty,返回 <code>list</code><br>
+     * @see java.util.Collections#sort(List)
+     * @since 1.14.3
+     */
+    @SafeVarargs
+    public static <T extends Comparable<? super T>> List<T> sortListByFixedOrderArray(List<T> list,T...fixedOrderItems){
+        return sortListByFixedOrderList(list, toList(fixedOrderItems));
+    }
+
+    /**
+     * 对 集合 <code>list</code> 按照指定的固定顺序 <code>fixedOrderItemList</code> 进行排序.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>默认使用的是 {@link UnknownObjectBehavior#AFTER} ,不在指定固定顺序的元素将排在后面</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * assertThat(
+     *                 sortListByFixedOrderList(toList("张飞", "关羽", "刘备"), toList("刘备", "张飞", "关羽")), //
+     *                 contains("刘备", "张飞", "关羽"));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param <T>
+     *            the generic type
+     * @param list
+     *            the list
+     * @param fixedOrderItemList
+     *            the fixed order item list
+     * @return 如果 <code>list</code> 是null,返回 {@link Collections#emptyList()}<br>
+     *         如果 <code>list</code> 是empty,返回 <code>list</code><br>
+     *         如果 <code>fixedOrderItemList</code> 是null或者是 empty,返回 <code>list</code><br>
+     * @see java.util.Collections#sort(List)
+     * @see com.feilong.core.util.comparator.ComparatorUtil#buildFixedOrderComparator(List)
+     * @since 1.14.3
+     */
+    public static <T extends Comparable<? super T>> List<T> sortListByFixedOrderList(List<T> list,List<T> fixedOrderItemList){
+        if (null == list){
+            return emptyList();
+        }
+        if (isNullOrEmpty(list)){
+            return list;
+        }
+        if (isNullOrEmpty(fixedOrderItemList)){
+            return list;
+        }
+        return sortList(list, ComparatorUtil.buildFixedOrderComparator(fixedOrderItemList));
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 对集合 <code>list</code>,使用指定的 <code>comparators</code> 进行排序.

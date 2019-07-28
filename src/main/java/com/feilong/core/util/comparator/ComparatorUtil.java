@@ -42,6 +42,10 @@ public final class ComparatorUtil{
 
     /**
      * Builds the.
+     * 
+     * <p>
+     * 默认使用的是 {@link UnknownObjectBehavior#AFTER} ,不在指定固定顺序的元素将排在后面
+     * </p>
      *
      * @param <T>
      *            the value type
