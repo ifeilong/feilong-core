@@ -34,6 +34,8 @@ import com.feilong.core.util.comparator.sorthelpertest.FeiLongSortHelperSuiteTes
                 FeiLongBeanComparatorUtilSuiteTests.class,
                 FeiLongSortHelperSuiteTests.class,
 
+                ComparatorUtilTest.class,
+
                 FeiLongPropertyComparatorSuiteTests.class,
 
                 RegexGroupNumberComparatorTest.class,

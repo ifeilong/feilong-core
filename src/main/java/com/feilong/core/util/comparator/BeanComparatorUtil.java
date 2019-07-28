@@ -34,6 +34,8 @@ import org.apache.commons.lang3.Validate;
  * 专注于 bean 属性值的排序.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see org.apache.commons.collections4.ComparatorUtils
+ * @see FixedOrderComparator
  * @since 1.8.0
  */
 public final class BeanComparatorUtil{
@@ -111,7 +113,6 @@ public final class BeanComparatorUtil{
 
             //因为,PropertyComparator 如果属性值相同,会使用其他规则继续比较(为了TreeMap/treeSet), 
             //也就是说,通常而言一次就比较出顺序,后续的propertyNameAndOrders 就没作用了
-
             Comparator instance = ComparatorUtils.nullHighComparator(ComparableComparator.comparableComparator()); //null排在最后面  
 
             BeanComparator<T> beanComparator = new BeanComparator<>(propertyNameAndOrderArray[0], instance);
@@ -171,6 +172,8 @@ public final class BeanComparatorUtil{
         PropertyComparator<T> propertyComparator = new PropertyComparator<>(propertyNameAndOrderArray[0]);
         return isAsc(propertyNameAndOrderArray) ? propertyComparator : reversedComparator(propertyComparator);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 指定属性 <code>propertyName</code> 按照固定顺序值 <code>propertyValues</code> 排序的 {@link Comparator}.
@@ -256,8 +259,8 @@ public final class BeanComparatorUtil{
                     UnknownObjectBehavior unknownObjectBehavior){
         Validate.notBlank(propertyName, "propertyName can't be blank!");
         Validate.notNull(propertyValues, "propertyValues can't be null!");
-        FixedOrderComparator<V> fixedOrderComparator = new FixedOrderComparator<>(propertyValues);
-        fixedOrderComparator.setUnknownObjectBehavior(unknownObjectBehavior);
+        FixedOrderComparator<V> fixedOrderComparator = ComparatorUtil.buildFixedOrderComparator(propertyValues, unknownObjectBehavior);
         return new PropertyComparator<>(propertyName, fixedOrderComparator);
     }
+
 }
