@@ -274,6 +274,52 @@ public final class SortUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * try{
+     *     Collections.sort(
+     *                     list,
+     *                     new FixedOrderComparator<>(
+     *                                     StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
+     *                                     StoPropertyConstants.PRPT_ITEM_MIADIDAS_VALUE_EN,
+     *                                     StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_VIP_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_COMINGSOON_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_DISCOUNT_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_NORMAL_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_NOSALE));
+     * }catch (Exception e){
+     *     LOGGER.error("itemType sort error:{},itemType:{}", e, JsonUtil.format(itemType));
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * com.feilong.core.util.SortUtil.sortListByFixedOrderArray(
+     *                 list,
+     *                 StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
+     *                 StoPropertyConstants.PRPT_ITEM_MIADIDAS_VALUE_EN,
+     *                 StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
+     *                 StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
+     *                 StoPropertyConstants.PRPT_ITEM_VIP_CODE,
+     *                 StoPropertyConstants.PRPT_ITEM_COMINGSOON_CODE,
+     *                 StoPropertyConstants.PRPT_ITEM_DISCOUNT_CODE,
+     *                 StoPropertyConstants.PRPT_ITEM_NORMAL_CODE,
+     *                 StoPropertyConstants.PRPT_ITEM_NOSALE);
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param <T>
      *            the generic type
@@ -313,7 +359,53 @@ public final class SortUtil{
      * </pre>
      * 
      * </blockquote>
-     *
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * try{
+     *     Collections.sort(
+     *                     list,
+     *                     new FixedOrderComparator<>(
+     *                                     StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
+     *                                     StoPropertyConstants.PRPT_ITEM_MIADIDAS_VALUE_EN,
+     *                                     StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_VIP_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_COMINGSOON_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_DISCOUNT_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_NORMAL_CODE,
+     *                                     StoPropertyConstants.PRPT_ITEM_NOSALE));
+     * }catch (Exception e){
+     *     LOGGER.error("itemType sort error:{},itemType:{}", e, JsonUtil.format(itemType));
+     * }
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * com.feilong.core.util.SortUtil.sortListByFixedOrderList(
+     *                 list,
+     *                 toList(
+     *                                 StoPropertyConstants.PRPT_ITEM_HYPELAUNCH,
+     *                                 StoPropertyConstants.PRPT_ITEM_MIADIDAS_VALUE_EN,
+     *                                 StoPropertyConstants.PRPT_ITEM_PRESONALLZATION_CODE,
+     *                                 StoPropertyConstants.PRPT_ITEM_PERSALES_CODE,
+     *                                 StoPropertyConstants.PRPT_ITEM_VIP_CODE,
+     *                                 StoPropertyConstants.PRPT_ITEM_COMINGSOON_CODE,
+     *                                 StoPropertyConstants.PRPT_ITEM_DISCOUNT_CODE,
+     *                                 StoPropertyConstants.PRPT_ITEM_NORMAL_CODE,
+     *                                 StoPropertyConstants.PRPT_ITEM_NOSALE));
+     * </pre>
+     * 
+     * </blockquote>
+     * 
      * @param <T>
      *            the generic type
      * @param list
