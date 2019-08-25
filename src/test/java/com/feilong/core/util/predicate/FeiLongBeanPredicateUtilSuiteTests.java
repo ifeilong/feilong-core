@@ -42,6 +42,8 @@ import com.feilong.core.util.predicate.beanpredicateutil.EqualPredicateTest;
                 EqualMapPredicateTest.class,
                 EqualBeanPredicateTest.class,
 
+                ContainsStringPredicateParameterizedTest.class,
+
                 ComparatorPredicateComparatorTest.class,
                 ComparatorPredicateTest.class,
                 ContainsPredicateListTest.class,
