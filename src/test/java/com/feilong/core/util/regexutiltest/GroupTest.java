@@ -43,10 +43,12 @@ public class GroupTest{
      */
     @Test
     public void testGroup1(){
-        assertThat(RegexUtil.group(REGEX_PATTERN, EMAIL), allOf(//
-                        hasEntry(0, EMAIL),
-                        hasEntry(1, "feilong"),
-                        hasEntry(2, "163.com")));
+        assertThat(
+                        RegexUtil.group(REGEX_PATTERN, EMAIL),
+                        allOf(//
+                                        hasEntry(0, EMAIL),
+                                        hasEntry(1, "feilong"),
+                                        hasEntry(2, "163.com")));
     }
 
     /**
@@ -57,9 +59,11 @@ public class GroupTest{
         String regexPattern = "@Table.*name.*\"(.*?)\".*";
         String input = "@Table(name = \"T_MEM_MEMBER_ADDRESS\")";
 
-        assertThat(RegexUtil.group(regexPattern, input), allOf(//
-                        hasEntry(0, input),
-                        hasEntry(1, "T_MEM_MEMBER_ADDRESS")));
+        assertThat(
+                        RegexUtil.group(regexPattern, input),
+                        allOf(//
+                                        hasEntry(0, input),
+                                        hasEntry(1, "T_MEM_MEMBER_ADDRESS")));
     }
 
     /**
@@ -73,10 +77,12 @@ public class GroupTest{
 
         String input = "@Column(name = \"NAME\", length=80)";
 
-        assertThat(RegexUtil.group(regexPattern, input), allOf(//
-                        hasEntry(0, input),
-                        hasEntry(1, "NAME"),
-                        hasEntry(2, "80")));
+        assertThat(
+                        RegexUtil.group(regexPattern, input),
+                        allOf(//
+                                        hasEntry(0, input),
+                                        hasEntry(1, "NAME"),
+                                        hasEntry(2, "80")));
     }
 
     @Test
@@ -86,11 +92,13 @@ public class GroupTest{
         String input = "s=123456789";
         Map<Integer, String> group = RegexUtil.group(regexPattern, input);
 
-        assertThat(group, allOf(//
-                        hasEntry(0, input),
-                        hasEntry(1, "123456789")
-        //
-        ));
+        assertThat(
+                        group,
+                        allOf(//
+                                        hasEntry(0, input),
+                                        hasEntry(1, "123456789")
+                        //
+                        ));
     }
 
     //---------------------------------------------------------------
