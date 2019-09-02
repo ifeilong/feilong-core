@@ -99,17 +99,23 @@ public final class ThreadUtil{
     //---------------------------------------------------------------
 
     /**
-     * 强制当前正在执行的线程休眠(暂停执行).
+     * 强制当前正在执行的线程 休眠(暂停执行) <code>milliseconds</code> 毫秒.
+     * 
+     * <p>
+     * 该方法简便的地方在于,捕获了异常和记录了日志,不需要再写这些额外代码
+     * </p>
      * 
      * <h3>说明:</h3>
      * <blockquote>
+     * 
      * <ol>
      * <li>The thread does not lose ownership of any monitors.</li>
-     * <li>当线程睡眠时,它睡在某个地方,在苏醒之前不会返回到可运行状态,当睡眠时间到期,则返回到可运行状态。sleep()方法不能保证该线程睡眠到期后就开始执行</li>
-     * <li>该方法简便的地方在于,捕获了异常和记录了日志,不需要再写这些额外代码</li>
+     * <li>当线程睡眠时,它睡在某个地方,在苏醒之前不会返回到可运行状态,<br>
+     * 当睡眠时间到期,则返回到可运行状态。sleep()方法不能保证该线程睡眠到期后就开始执行</li>
      * <li>sleep()是静态方法,只能控制当前正在运行的线程</li>
-     * <li>sonarqube 不建议在单元测试中 使用 sleep, 参见 "Thread.sleep" should not be used in tests squid:S2925</li>
+     * <li>sonarqube不建议在单元测试中使用 sleep, 参见 "Thread.sleep" should not be used in tests squid:S2925</li>
      * </ol>
+     * 
      * </blockquote>
      * 
      * <h3>示例:</h3>
@@ -163,17 +169,35 @@ public final class ThreadUtil{
     /**
      * 创建指定数量 <b>threadCount</b> 的线程,并执行.
      * 
-     * <p>
+     * <h3>示例:</h3>
      * 
+     * <blockquote>
+     * 
+     * 多线程调用某个 API 20 次
+     * 
+     * <pre class="code">
+     * 
+     * ThreadUtil.execute(new Runnable(){
+     * 
+     *     public void run(){
+     *         String uri = "http://127.0.0.1:8084?name=jinxin&age=18";
+     *         LOGGER.debug(HttpClientUtil.get(uri, toMap("country", "china")));
+     *     }
+     * }, 20);
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <p>
      * 如果 <code>runnable</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 {@code threadCount <=0},抛出 {@link IllegalArgumentException}<br>
-     * 
      * </p>
      *
      * @param runnable
      *            the runnable
      * @param threadCount
-     *            the thread count
+     *            线程数量
      * @since 1.10.4
      */
     public static void execute(Runnable runnable,int threadCount){
@@ -181,14 +205,12 @@ public final class ThreadUtil{
         Validate.isTrue(threadCount > 0, "threadCount must > 0");
 
         //---------------------------------------------------------------
-
         Date beginDate = now();
 
         Thread[] threads = buildThreadArray(runnable, threadCount);
         ThreadUtil.startAndJoin(threads);
 
         //---------------------------------------------------------------
-
         if (LOGGER.isInfoEnabled()){
             LOGGER.info("runnable:[{}],threadCount:[{}],total use time:{}", runnable, threadCount, formatDuration(beginDate));
         }
