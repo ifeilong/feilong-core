@@ -18,8 +18,6 @@ package com.feilong.core.thread;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.core.lang.PartitionRunnableBuilder;
-
 /**
  * 分区线程执行器.
  * 

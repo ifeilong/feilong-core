@@ -184,6 +184,8 @@ public final class EnumUtil{
         return getEnumByPropertyValue(enumClass, propertyName, specifiedValue, false);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 通过<code>propertyName</code>的 <code>specifiedValue</code> 获得枚举.
      *
