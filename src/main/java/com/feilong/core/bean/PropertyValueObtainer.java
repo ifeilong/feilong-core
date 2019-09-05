@@ -107,7 +107,7 @@ public final class PropertyValueObtainer{
      * @return the data use spring
      */
     private static <T> T getDataUseSpring(Object bean,String propertyName){
-        LOGGER.trace("will use spring beanutils to excute:[{}],propertyName:[{}]", bean, propertyName);
+        LOGGER.trace("will use spring beanutils to execute:[{}],propertyName:[{}]", bean, propertyName);
         try{
             PropertyDescriptor propertyDescriptor = PropertyDescriptorUtil.getSpringPropertyDescriptor(bean.getClass(), propertyName);
             return getValue(bean, propertyDescriptor);
