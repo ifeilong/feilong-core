@@ -21,8 +21,8 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import com.feilong.core.lang.PartitionRunnableBuilder;
 import com.feilong.core.lang.ThreadUtil;
+import com.feilong.core.thread.PartitionRunnableBuilder;
 
 /**
  * 

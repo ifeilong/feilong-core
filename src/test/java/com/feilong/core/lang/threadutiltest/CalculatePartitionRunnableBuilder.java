@@ -22,8 +22,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.PartitionRunnableBuilder;
-import com.feilong.core.lang.PartitionThreadEntity;
+import com.feilong.core.thread.PartitionRunnableBuilder;
+import com.feilong.core.thread.PartitionThreadEntity;
 
 /**
  * 

@@ -23,9 +23,6 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.AbstractPartitionThreadExecutor;
-import com.feilong.core.lang.PartitionRunnableBuilder;
-import com.feilong.core.lang.PartitionThreadEntity;
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
