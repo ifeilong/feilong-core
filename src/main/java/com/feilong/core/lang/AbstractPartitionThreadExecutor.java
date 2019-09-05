@@ -44,26 +44,41 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractPartitionThreadExecutor.class);
 
     //---------------------------------------------------------------
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.lang.PartitionThreadExecutor#excute(java.util.List, int, com.feilong.core.lang.PartitionRunnableBuilder)
+    /**
+     * Excute.
+     *
+     * @param <T>
+     *            the generic type
+     * @param list
+     *            the list
+     * @param eachSize
+     *            the each size
+     * @param partitionRunnableBuilder
+     *            the partition runnable builder
      */
     @Override
-    public <T> void excute(List<T> list,int eachSize,PartitionRunnableBuilder<T> partitionRunnableBuilder){
-        excute(list, eachSize, null, partitionRunnableBuilder);
+    public <T> void execute(List<T> list,int eachSize,PartitionRunnableBuilder<T> partitionRunnableBuilder){
+        execute(list, eachSize, null, partitionRunnableBuilder);
     }
 
     //---------------------------------------------------------------
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.lang.PartitionThreadExecutor#excute(java.util.List, int, java.util.Map,
-     * com.feilong.core.lang.PartitionRunnableBuilder)
+    /**
+     * Execute.
+     *
+     * @param <T>
+     *            the generic type
+     * @param list
+     *            the list
+     * @param eachSize
+     *            the each size
+     * @param paramsMap
+     *            the params map
+     * @param partitionRunnableBuilder
+     *            the partition runnable builder
      */
     @Override
-    public <T> void excute(List<T> list,int eachSize,Map<String, ?> paramsMap,PartitionRunnableBuilder<T> partitionRunnableBuilder){
+    public <T> void execute(List<T> list,int eachSize,Map<String, ?> paramsMap,PartitionRunnableBuilder<T> partitionRunnableBuilder){
         Validate.notEmpty(list, "list can't be null/empty!");
         Validate.notNull(partitionRunnableBuilder, "partitionRunnableBuilder can't be null!");
 
@@ -76,17 +91,14 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
         }
 
         //---------------------------------------------------------------
-
         Date beginDate = now();
 
-        actualExcute(list, eachSize, paramsMap, partitionRunnableBuilder);
+        actualExecute(list, eachSize, paramsMap, partitionRunnableBuilder);
 
         //---------------------------------------------------------------
-
         if (LOGGER.isInfoEnabled()){
             LOGGER.info("end [{}],use time:[{}]", partitionRunnableBuilderName, formatDuration(beginDate));
         }
-
     }
 
     //---------------------------------------------------------------
@@ -113,8 +125,9 @@ public abstract class AbstractPartitionThreadExecutor implements PartitionThread
      *            </p>
      * @param partitionRunnableBuilder
      *            每个线程做的事情
+     * @since 2.0.0 change name from actualExcute to actualExecute
      */
-    protected abstract <T> void actualExcute(
+    protected abstract <T> void actualExecute(
                     List<T> list,
                     int eachSize,
                     Map<String, ?> paramsMap,

@@ -21,6 +21,7 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.PartitionRunnableBuilder;
 import com.feilong.core.lang.ThreadUtil;
 
 /**
@@ -63,7 +64,7 @@ public class ExecuteTest extends AbstractExcuteTest{
 
     @Test(expected = NullPointerException.class)
     public void testExecuteNullGroupRunnableBuilder(){
-        ThreadUtil.execute(toList(2), 100, null);
+        ThreadUtil.execute(toList(2), 100, (PartitionRunnableBuilder) null);
     }
 
 }

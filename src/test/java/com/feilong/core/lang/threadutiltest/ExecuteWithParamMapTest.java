@@ -25,6 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
+import com.feilong.core.lang.PartitionRunnableBuilder;
 import com.feilong.core.lang.ThreadUtil;
 
 /**
@@ -101,7 +102,7 @@ public class ExecuteWithParamMapTest extends AbstractExcuteTest{
     @Test(expected = NullPointerException.class)
     @SuppressWarnings("static-method")
     public void testExecuteNullGroupRunnableBuilder(){
-        ThreadUtil.execute(toList(2), 100, null, null);
+        ThreadUtil.execute(toList(2), 100, null, (PartitionRunnableBuilder) null);
     }
 
 }

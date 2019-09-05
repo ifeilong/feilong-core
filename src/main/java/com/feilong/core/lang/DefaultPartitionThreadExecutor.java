@@ -43,14 +43,22 @@ public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecu
 
     //---------------------------------------------------------------
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.lang.PartitionThreadExecutor#excute(java.util.List, int, java.util.Map,
-     * com.feilong.core.lang.PartitionRunnableBuilder)
+    /**
+     * Actual execute.
+     *
+     * @param <T>
+     *            the generic type
+     * @param list
+     *            the list
+     * @param eachSize
+     *            the each size
+     * @param paramsMap
+     *            the params map
+     * @param partitionRunnableBuilder
+     *            the partition runnable builder
      */
     @Override
-    protected <T> void actualExcute(
+    protected <T> void actualExecute(
                     List<T> list,
                     int eachSize,
                     Map<String, ?> paramsMap,

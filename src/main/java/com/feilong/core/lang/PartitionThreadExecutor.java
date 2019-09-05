@@ -83,7 +83,7 @@ import java.util.Map;
  * public void test(){
  *     final List{@code <Integer>} list = toList(1, 2, 3, 4, 5);
  * 
- *     partitionThreadExecutor.excute(list, 2, new PartitionRunnableBuilder{@code <Integer>}(){
+ *     partitionThreadExecutor.execute(list, 2, new PartitionRunnableBuilder{@code <Integer>}(){
  * 
  *         public Runnable build(List{@code <Integer>} perBatchList,final PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
  *             return new Runnable(){
@@ -135,8 +135,9 @@ public interface PartitionThreadExecutor{
      * @param partitionRunnableBuilder
      *            每个线程做的事情,不能为null
      * @see com.feilong.core.lang.ThreadUtil#execute(List, int, Map, PartitionRunnableBuilder)
+     * @since 2.0.0 change name from <b>excute</b> to <b>execute</b>
      */
-    <T> void excute(List<T> list,int eachSize,PartitionRunnableBuilder<T> partitionRunnableBuilder);
+    <T> void execute(List<T> list,int eachSize,PartitionRunnableBuilder<T> partitionRunnableBuilder);
 
     //---------------------------------------------------------------
 
@@ -176,6 +177,8 @@ public interface PartitionThreadExecutor{
      * @param partitionRunnableBuilder
      *            每个线程做的事情,不能为null
      * @see com.feilong.core.lang.ThreadUtil#execute(List, int, Map, PartitionRunnableBuilder)
+     * @since 2.0.0 change name from <b>excute</b> to <b>execute</b>
      */
-    <T> void excute(List<T> list,int eachSize,Map<String, ?> paramsMap,PartitionRunnableBuilder<T> partitionRunnableBuilder);
+    <T> void execute(List<T> list,int eachSize,Map<String, ?> paramsMap,PartitionRunnableBuilder<T> partitionRunnableBuilder);
+
 }
