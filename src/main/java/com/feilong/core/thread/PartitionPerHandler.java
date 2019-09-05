@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.thread;
 
 import java.util.List;
 import java.util.Map;
 
+import com.feilong.core.lang.PartitionThreadEntity;
+
 /**
- * 分区中的 每个线程执行.
+ * 分区中的每个线程执行.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see com.feilong.core.lang.DefaultPartitionRunnableBuilder
+ * @see com.feilong.core.thread.DefaultPartitionRunnableBuilder
  * @since 2.0.0
  */
 public interface PartitionPerHandler<T> {

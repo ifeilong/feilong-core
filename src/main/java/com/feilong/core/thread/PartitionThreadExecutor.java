@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.thread;
 
 import java.util.List;
 import java.util.Map;
+
+import com.feilong.core.lang.PartitionRunnableBuilder;
 
 /**
  * 分区线程执行器.
@@ -40,7 +42,7 @@ import java.util.Map;
  * <blockquote>
  * <p>
  * 目前已知快速调用有 {@link com.feilong.core.lang.ThreadUtil#execute(List, int, Map, PartitionRunnableBuilder) }, 或者调用
- * {@link com.feilong.core.lang.DefaultPartitionThreadExecutor}, 或者调用
+ * {@link com.feilong.core.thread.DefaultPartitionThreadExecutor}, 或者调用
  * {@link "com.feilong.spring.scheduling.concurrent.AsyncTaskExecutorPartitionThreadExecutor"}
  * </p>
  * 
@@ -103,6 +105,7 @@ import java.util.Map;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
+ * @since 2.0.0 move from package com.feilong.core.lang
  */
 public interface PartitionThreadExecutor{
 

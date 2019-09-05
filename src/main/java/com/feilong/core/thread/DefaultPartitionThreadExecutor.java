@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang;
+package com.feilong.core.thread;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +23,10 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.AbstractPartitionThreadExecutor;
+import com.feilong.core.lang.PartitionRunnableBuilder;
+import com.feilong.core.lang.PartitionThreadEntity;
+import com.feilong.core.lang.ThreadUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
@@ -30,6 +34,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
+ * @since 2.0.0 move from package com.feilong.core.lang
  */
 public class DefaultPartitionThreadExecutor extends AbstractPartitionThreadExecutor{
 
