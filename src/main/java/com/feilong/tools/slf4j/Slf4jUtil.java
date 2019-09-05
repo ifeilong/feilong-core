@@ -33,6 +33,8 @@ public final class Slf4jUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 格式化字符串,此方法是抽取slf4j的核心方法.
      * 
