@@ -18,8 +18,8 @@ package com.feilong.core.lang.threadutiltest;
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.core.thread.PartitionRunnableBuilder;
-import com.feilong.core.thread.PartitionThreadEntity;
+import com.feilong.core.lang.thread.PartitionRunnableBuilder;
+import com.feilong.core.lang.thread.PartitionThreadEntity;
 
 /**
  * 

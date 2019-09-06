@@ -22,7 +22,7 @@ import java.util.Collections;
 import org.junit.Test;
 
 import com.feilong.core.lang.ThreadUtil;
-import com.feilong.core.thread.PartitionRunnableBuilder;
+import com.feilong.core.lang.thread.PartitionRunnableBuilder;
 
 /**
  * 

@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Test;
 
 import com.feilong.core.lang.ThreadUtil;
-import com.feilong.core.thread.PartitionRunnableBuilder;
+import com.feilong.core.lang.thread.PartitionRunnableBuilder;
 
 /**
  * The Class ExecuteWithParamMapTest.

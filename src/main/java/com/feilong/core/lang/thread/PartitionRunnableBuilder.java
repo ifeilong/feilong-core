@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.thread;
+package com.feilong.core.lang.thread;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * 分区中的每个线程执行.
+ * {@link Runnable}构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
- * @see com.feilong.core.thread.DefaultPartitionRunnableBuilder
- * @since 2.0.0
+ * @since 1.10.3
  */
-public interface PartitionPerHandler<T> {
+public interface PartitionRunnableBuilder<T> {
 
     /**
-     * Handle.
+     * 构造{@link Runnable}.
      *
      * @param perBatchList
      *            自动分组之后,每个对象list组的数据
@@ -38,6 +37,8 @@ public interface PartitionPerHandler<T> {
      *            线程执行此组list 的时候,可以使用的 thread参数信息
      * @param paramsMap
      *            自定义的参数map
+     * @return the runnable
      */
-    void handle(List<T> perBatchList,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap);
+    Runnable build(List<T> perBatchList,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap);
+
 }

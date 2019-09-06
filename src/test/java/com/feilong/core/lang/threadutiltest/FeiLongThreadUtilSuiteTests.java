@@ -30,6 +30,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 ExecuteTest.class,
                 ExecuteWithParamMapTest.class,
                 ExecuteCountTest.class,
+
+                PartitionEachSizeEntityUtilParameterizedTest.class,
+                PartitionEachSizeEntityUtilTest.class
         //
 })
 public class FeiLongThreadUtilSuiteTests{

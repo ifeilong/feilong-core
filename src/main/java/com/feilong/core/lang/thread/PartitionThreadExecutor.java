@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.thread;
+package com.feilong.core.lang.thread;
 
 import java.util.List;
 import java.util.Map;
@@ -40,7 +40,7 @@ import java.util.Map;
  * <blockquote>
  * <p>
  * 目前已知快速调用有 {@link com.feilong.core.lang.ThreadUtil#execute(List, int, Map, PartitionRunnableBuilder) }, 或者调用
- * {@link com.feilong.core.thread.DefaultPartitionThreadExecutor}, 或者调用
+ * {@link com.feilong.core.lang.thread.DefaultPartitionThreadExecutor}, 或者调用
  * {@link "com.feilong.spring.scheduling.concurrent.AsyncTaskExecutorPartitionThreadExecutor"}
  * </p>
  * 

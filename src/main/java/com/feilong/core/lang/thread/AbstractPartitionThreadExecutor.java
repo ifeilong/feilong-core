@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.thread;
+package com.feilong.core.lang.thread;
 
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
@@ -28,7 +28,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.thread.PartitionThreadExecutor;
+import com.feilong.core.lang.thread.PartitionThreadExecutor;
 
 /**
  * 抽象实现.
