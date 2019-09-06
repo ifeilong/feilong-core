@@ -13,33 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.threadutiltest;
+package com.feilong.core.lang.threadutiltest.entity;
 
 import java.util.List;
 import java.util.Map;
 
-import com.feilong.core.lang.thread.PartitionRunnableBuilder;
+import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.thread.PartitionThreadEntity;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.10.4
- */
-public class EmptyPartitionRunnableBuilder implements PartitionRunnableBuilder<Integer>{
+public class EmptyPartitionPerHandler implements PartitionPerHandler<Integer>{
 
     /** Static instance. */
     // the static instance works for all types
-    public static final EmptyPartitionRunnableBuilder INSTANCE = new EmptyPartitionRunnableBuilder();
+    public static final EmptyPartitionPerHandler INSTANCE = new EmptyPartitionPerHandler();
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.core.lang.PartitionRunnableBuilder#build(java.util.List, com.feilong.core.lang.PartitionThreadEntity, java.util.Map)
-     */
     @Override
-    public Runnable build(final List<Integer> perBatchList,final PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
-        return null;
+    public void handle(List<Integer> perBatchList,PartitionThreadEntity partitionThreadEntity,Map<String, ?> paramsMap){
+
     }
 
 }

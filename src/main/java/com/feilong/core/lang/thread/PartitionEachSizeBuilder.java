@@ -13,34 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.lang.threadutiltest;
-
-import static com.feilong.core.util.CollectionsUtil.newArrayList;
-
-import java.util.List;
+package com.feilong.core.lang.thread;
 
 /**
- * The Class AbstractExcuteTest.
+ * 用来计算 each size 大小的.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
+ * @since 2.0.0
  */
-public abstract class AbstractExcuteTest{
+public interface PartitionEachSizeBuilder{
 
     /**
-     * Builds the list.
+     * Builds the.
      *
-     * @param start
-     *            the start
-     * @param end
-     *            the end
-     * @return the list
+     * @param totalSize
+     *            the total size
+     * @return 如果 <code>totalSize<=0</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      */
-    protected static List<Integer> buildList(int start,int end){
-        List<Integer> list = newArrayList();
-        for (int i = start; i < end; ++i){
-            list.add(i);
-        }
-        return list;
-    }
+    int build(int totalSize);
 }

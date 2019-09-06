@@ -22,49 +22,50 @@ import java.util.Collections;
 import org.junit.Test;
 
 import com.feilong.core.lang.ThreadUtil;
-import com.feilong.core.lang.thread.PartitionRunnableBuilder;
+import com.feilong.core.lang.thread.PartitionPerHandler;
+import com.feilong.core.lang.threadutiltest.entity.EmptyPartitionPerHandler;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
  */
-public class ExecuteTest extends AbstractExcuteTest{
+public class ExecuteWithPartitionPerHandlerTest extends AbstractExcuteTest{
 
     @Test
     public void testExecute(){
-        ThreadUtil.execute(toList(2, 5, 6, 7), 2, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(toList(2, 5, 6, 7), 2, EmptyPartitionPerHandler.INSTANCE);
     }
 
     //---------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testExecuteNullList(){
-        ThreadUtil.execute(null, 100, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(null, 100, EmptyPartitionPerHandler.INSTANCE);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testExecuteEmptyList(){
-        ThreadUtil.execute(Collections.<Integer> emptyList(), 100, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(Collections.<Integer> emptyList(), 100, EmptyPartitionPerHandler.INSTANCE);
     }
 
     //---------------------------------------------------------
 
     @Test(expected = IllegalArgumentException.class)
     public void testExecuteInvalidPerSize(){
-        ThreadUtil.execute(toList(2), 0, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(toList(2), 0, EmptyPartitionPerHandler.INSTANCE);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testExecuteInvalidPerSize1(){
-        ThreadUtil.execute(toList(2), -100, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(toList(2), -100, EmptyPartitionPerHandler.INSTANCE);
     }
 
     //---------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testExecuteNullGroupRunnableBuilder(){
-        ThreadUtil.execute(toList(2), 100, (PartitionRunnableBuilder) null);
+        ThreadUtil.execute(toList(2), 100, (PartitionPerHandler) null);
     }
 
 }

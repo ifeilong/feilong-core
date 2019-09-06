@@ -20,6 +20,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
+ * The Class FeiLongThreadUtilSuiteTests.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
@@ -27,12 +28,16 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 SleepTest.class,
 
-                ExecuteTest.class,
-                ExecuteWithParamMapTest.class,
+                ExecuteWithPartitionPerHandlerTest.class,
+                ExecuteWithPartitionRunnableBuilderTest.class,
+
+                ExecuteWithPartitionRunnableBuilderParamMapTest.class,
+
+                ExecuteConfigWithParamMapTest.class,
                 ExecuteCountTest.class,
 
-                PartitionEachSizeEntityUtilParameterizedTest.class,
-                PartitionEachSizeEntityUtilTest.class
+                PartitionEachSizeBuilderParameterizedTest.class,
+                PartitionEachSizeBuilderTest.class
         //
 })
 public class FeiLongThreadUtilSuiteTests{

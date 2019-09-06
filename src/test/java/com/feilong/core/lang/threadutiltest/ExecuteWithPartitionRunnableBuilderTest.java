@@ -16,93 +16,56 @@
 package com.feilong.core.lang.threadutiltest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.core.util.MapUtil.newHashMap;
-import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
 import com.feilong.core.lang.ThreadUtil;
 import com.feilong.core.lang.thread.PartitionRunnableBuilder;
+import com.feilong.core.lang.threadutiltest.entity.EmptyPartitionRunnableBuilder;
 
 /**
- * The Class ExecuteWithParamMapTest.
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.3
  */
-public class ExecuteWithParamMapTest extends AbstractExcuteTest{
+public class ExecuteWithPartitionRunnableBuilderTest extends AbstractExcuteTest{
 
-    /**
-     * Test execute.
-     */
     @Test
-    @SuppressWarnings("static-method")
     public void testExecute(){
-        AtomicInteger atomicInteger = new AtomicInteger(0);
-
-        Map<String, Object> paramsMap = newHashMap(1);
-        paramsMap.put("result", atomicInteger);
-
-        ThreadUtil.execute(toList(2, 5, 6, 7), 2, paramsMap, new CalculatePartitionRunnableBuilder());
-
-        AtomicInteger result = (AtomicInteger) paramsMap.get("result");
-        assertEquals(20, result.get());
-
-        assertEquals(20, atomicInteger.get());
+        ThreadUtil.execute(toList(2, 5, 6, 7), 2, EmptyPartitionRunnableBuilder.INSTANCE);
     }
+
     //---------------------------------------------------------
 
-    /**
-     * Test execute null list.
-     */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
     public void testExecuteNullList(){
-        ThreadUtil.execute(null, 100, null, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(null, 100, EmptyPartitionRunnableBuilder.INSTANCE);
     }
 
-    /**
-     * Test execute empty list.
-     */
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
     public void testExecuteEmptyList(){
-        ThreadUtil.execute(Collections.<Integer> emptyList(), 100, null, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(Collections.<Integer> emptyList(), 100, EmptyPartitionRunnableBuilder.INSTANCE);
     }
 
     //---------------------------------------------------------
 
-    /**
-     * Test execute invalid per size.
-     */
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
     public void testExecuteInvalidPerSize(){
-        ThreadUtil.execute(toList(2), 0, null, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(toList(2), 0, EmptyPartitionRunnableBuilder.INSTANCE);
     }
 
-    /**
-     * Test execute invalid per size 1.
-     */
     @Test(expected = IllegalArgumentException.class)
-    @SuppressWarnings("static-method")
     public void testExecuteInvalidPerSize1(){
-        ThreadUtil.execute(toList(2), -100, null, EmptyPartitionRunnableBuilder.INSTANCE);
+        ThreadUtil.execute(toList(2), -100, EmptyPartitionRunnableBuilder.INSTANCE);
     }
 
     //---------------------------------------------------------
 
-    /**
-     * Test execute null group runnable builder.
-     */
     @Test(expected = NullPointerException.class)
-    @SuppressWarnings("static-method")
     public void testExecuteNullGroupRunnableBuilder(){
-        ThreadUtil.execute(toList(2), 100, null, (PartitionRunnableBuilder) null);
+        ThreadUtil.execute(toList(2), 100, (PartitionRunnableBuilder) null);
     }
 
 }

@@ -15,7 +15,6 @@
  */
 package com.feilong.core.lang;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.date.DateUtil.now;
 
@@ -31,10 +30,10 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.TimeInterval;
 import com.feilong.core.lang.thread.DefaultPartitionRunnableBuilder;
 import com.feilong.core.lang.thread.DefaultPartitionThreadExecutor;
-import com.feilong.core.lang.thread.PartitionConfig;
-import com.feilong.core.lang.thread.PartitionEachSizeEntityUtil;
+import com.feilong.core.lang.thread.PartitionEachSizeThreadConfigBuilder;
 import com.feilong.core.lang.thread.PartitionPerHandler;
 import com.feilong.core.lang.thread.PartitionRunnableBuilder;
+import com.feilong.core.lang.thread.PartitionThreadConfig;
 
 /**
  * 线程相关工具类.
@@ -504,7 +503,7 @@ public final class ThreadUtil{
      * 如果 <code>list</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>list</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * 如果 {@code eachSize <=0} ,抛出 {@link IllegalArgumentException}<br>
-     * 如果 <code>partitionRunnableBuilder</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>partitionPerHandler</code> 是null,抛出 {@link NullPointerException}<br>
      * </p>
      * </blockquote>
      *
@@ -780,7 +779,7 @@ public final class ThreadUtil{
 
     /**
      * 给定一个待解析的 <code>list</code>,设定每个线程执行多少条 <code>eachSize</code>,传入一些额外的参数 <code>paramsMap</code>,使用自定义的
-     * <code>partitionRunnableBuilder</code>,自动<span style="color:green">构造多条线程</span>并运行.
+     * <code>partitionPerHandler</code>,自动<span style="color:green">构造多条线程</span>并运行.
      * 
      * <h3>适用场景:</h3>
      * <blockquote>
@@ -985,7 +984,7 @@ public final class ThreadUtil{
      * 如果 <code>list</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>list</code> 是empty,抛出 {@link IllegalArgumentException}<br>
      * 如果 {@code eachSize <=0} ,抛出 {@link IllegalArgumentException}<br>
-     * 如果 <code>partitionRunnableBuilder</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>partitionPerHandler</code> 是null,抛出 {@link NullPointerException}<br>
      * </p>
      * </blockquote>
      *
@@ -1018,6 +1017,7 @@ public final class ThreadUtil{
      * @since 2.0.0
      */
     public static <T> void execute(List<T> list,int eachSize,Map<String, ?> paramsMap,PartitionPerHandler<T> partitionPerHandler){
+        Validate.notNull(partitionPerHandler, "partitionPerHandler can't be null!");
         execute(list, eachSize, paramsMap, new DefaultPartitionRunnableBuilder<T>(partitionPerHandler));
     }
 
@@ -1223,7 +1223,7 @@ public final class ThreadUtil{
      * <p>
      * 如果 <code>list</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>list</code> 是empty,抛出 {@link IllegalArgumentException}<br>
-     * 如果 {@code eachSize <=0} ,抛出 {@link IllegalArgumentException}<br>
+     * 如果 <code>partitionThreadConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * 如果 <code>partitionPerHandler</code> 是null,抛出 {@link NullPointerException}<br>
      * </p>
      * </blockquote>
@@ -1236,7 +1236,7 @@ public final class ThreadUtil{
      *            <p>
      *            比如 100000个 User,不能为null或者empty
      *            </p>
-     * @param partitionConfig
+     * @param partitionThreadConfig
      *            the partition config
      * @param paramsMap
      *            自定义的相关参数
@@ -1247,21 +1247,19 @@ public final class ThreadUtil{
      *            </p>
      * @param partitionPerHandler
      *            the partition per handler
-     * @see com.feilong.core.lang.thread.DefaultPartitionThreadExecutor
      * @see com.feilong.core.lang.thread.DefaultPartitionThreadExecutor#INSTANCE
      * @since 2.0.0
      */
     public static <T> void execute(
                     List<T> list,
-                    PartitionConfig partitionConfig,
+                    PartitionThreadConfig partitionThreadConfig,
                     Map<String, ?> paramsMap,
                     PartitionPerHandler<T> partitionPerHandler){
-        if (isNullOrEmpty(list)){
-            return;
-        }
-        Validate.notNull(partitionConfig, "partitionConfig can't be null!");
+        Validate.notEmpty(list, "list can't be null/empty!");
+        Validate.notNull(partitionThreadConfig, "partitionConfig can't be null!");
+        Validate.notNull(partitionPerHandler, "partitionPerHandler can't be null!");
         //---------------------------------------------------------------
-        int eachSize = PartitionEachSizeEntityUtil.build(list.size(), partitionConfig);
+        int eachSize = new PartitionEachSizeThreadConfigBuilder(partitionThreadConfig).build(list.size());
         execute(list, eachSize, paramsMap, new DefaultPartitionRunnableBuilder<T>(partitionPerHandler));
     }
 
@@ -1285,6 +1283,8 @@ public final class ThreadUtil{
      */
     public static void startAndJoin(Thread[] threads){
         Validate.notEmpty(threads, "threads can't be null/empty!");
+
+        //---------------------------------------------------------------
 
         for (Thread thread : threads){
             thread.start();// 使该线程开始执行；Java 虚拟机调用该线程的 run 方法。
