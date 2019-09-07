@@ -391,6 +391,53 @@ public final class ThreadUtil{
      * 给定一个待解析的 <code>list</code>,设定每个线程执行多少条 <code>eachSize</code>,使用自定义的
      * <code>partitionRunnableBuilder</code>,自动<span style="color:green">构造多条线程</span>并运行.
      * 
+     * <p>
+     * 主要是用来简化 {@link #execute(List, int, PartitionRunnableBuilder)} 调用
+     * </p>
+     * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * ThreadUtil.execute(list, 5, new PartitionRunnableBuilder{@code <String>}(){
+     * 
+     *     &#64;Override
+     *     public Runnable build(final List{@code <String>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
+     * 
+     *         return new Runnable(){
+     * 
+     *             &#64;Override
+     *             public void run(){
+     *                 map.putAll(handle(perBatchList, noList));
+     *             }
+     *         };
+     *     }
+     * });
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * ThreadUtil.execute(list, 5, new PartitionPerHandler{@code <String>}(){
+     * 
+     *     &#64;Override
+     *     public void handle(List{@code <String>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
+     *         map.putAll(CopyrightTest.this.handle(perBatchList, noList));
+     *     }
+     * });
+     * </pre>
+     * 
+     * 上述事例,可以从 14 行代码, 精简到 7 行代码
+     * 
+     * </blockquote>
+     * 
+     * 
      * <h3>适用场景:</h3>
      * <blockquote>
      * 
@@ -403,92 +450,6 @@ public final class ThreadUtil{
      * 
      * </blockquote>
      * 
-     * <h3>重构:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 对于以下代码:模拟10个对象/数字,循环执行任务(可能是操作数据库等)
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * public void testExecuteTest() throws InterruptedException{
-     *     Date beginDate = now();
-     * 
-     *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-     *     for (Integer integer : list){
-     *         <span style="color:green">//------</span>
-     * 
-     *         <span style="color:green">//模拟 do something</span>
-     * 
-     *         <span style="color:green">//---------</span>
-     *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
-     *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
-     * }
-     * 
-     * </pre>
-     * 
-     * <p>
-     * 统计总耗时时间 需要 use time:<span style="color:red">10秒28毫秒</span>
-     * </p>
-     * 
-     * <b>此时你可以调用此方法,改成多线程执行:</b>
-     * 
-     * <pre class="code">
-     * 
-     * public void testExecuteTestUsePartitionRunnableBuilder() throws InterruptedException{
-     *     Date beginDate = now();
-     *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-     * 
-     *     <span style="color:green">//每个线程执行2条数据, 没有自定义 paramsMap</span>
-     * 
-     *     <span style="color:green">//将会自动创建 list.size()/2 =5个 线程执行</span>
-     * 
-     *     <span style="color:green">//每个线程执行的,将会是 PartitionRunnableBuilder build 返回的 Runnable</span>
-     *     ThreadUtil.execute(list, 1, new PartitionRunnableBuilder{@code <Integer>}(){
-     * 
-     *         &#64;Override
-     *         public Runnable build(final List{@code <Integer>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
-     * 
-     *             return new Runnable(){
-     * 
-     *                 &#64;Override
-     *                 public void run(){
-     *                     for (Integer integer : perBatchList){
-     *                         <span style="color:green">//------</span>
-     * 
-     *                         <span style="color:green">//模拟 do something</span>
-     * 
-     *                         <span style="color:green">//---------</span>
-     *                         try{
-     *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
-     *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
-     *                         }
-     *                     }
-     *                 }
-     *             };
-     *         }
-     * 
-     *     });
-     * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
-     * }
-     * </pre>
-     * 
-     * <p>
-     * 统计总耗时时间 需要 use time:<span style="color:red">2秒36毫秒</span>
-     * </p>
-     * 
-     * <p>
-     * 对于上述的case,如果将 eachSize 参数由2 改成1, 统计总耗时时间 需要 use time:<span style="color:red">1秒36毫秒</span>
-     * </p>
-     * 
-     * <p>
-     * 可见 调用该方法,使用多线程能节省执行时间,提高效率; 但是也需要酌情考虑eachSize大小,合理的开启线程数量
-     * </p>
-     * </blockquote>
      * 
      * <h3>说明:</h3>
      * <blockquote>
@@ -780,7 +741,51 @@ public final class ThreadUtil{
     /**
      * 给定一个待解析的 <code>list</code>,设定每个线程执行多少条 <code>eachSize</code>,传入一些额外的参数 <code>paramsMap</code>,使用自定义的
      * <code>partitionPerHandler</code>,自动<span style="color:green">构造多条线程</span>并运行.
+     * <p>
+     * 主要是用来简化 {@link #execute(List, int, Map, PartitionRunnableBuilder)} 调用
+     * </p>
      * 
+     * <h3>重构:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * 对于以下代码:
+     * </p>
+     * 
+     * <pre class="code">
+     * 
+     * ThreadUtil.execute(list, 5, new PartitionRunnableBuilder{@code <String>}(){
+     * 
+     *     &#64;Override
+     *     public Runnable build(final List{@code <String>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
+     * 
+     *         return new Runnable(){
+     * 
+     *             &#64;Override
+     *             public void run(){
+     *                 map.putAll(handle(perBatchList, noList));
+     *             }
+     *         };
+     *     }
+     * });
+     * 
+     * </pre>
+     * 
+     * <b>可以重构成:</b>
+     * 
+     * <pre class="code">
+     * ThreadUtil.execute(list, 5, new PartitionPerHandler{@code <String>}(){
+     * 
+     *     &#64;Override
+     *     public void handle(List{@code <String>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
+     *         map.putAll(CopyrightTest.this.handle(perBatchList, noList));
+     *     }
+     * });
+     * </pre>
+     * 
+     * 上述事例,可以从 14 行代码, 精简到 7 行代码
+     * 
+     * </blockquote>
      * <h3>适用场景:</h3>
      * <blockquote>
      * 
@@ -792,80 +797,6 @@ public final class ThreadUtil{
      * </p>
      * 
      * </blockquote>
-     * 
-     * <h3>重构:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * 对于以下代码:模拟10个对象/数字,循环执行任务(可能是操作数据库等)
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * public void testExecuteTest() throws InterruptedException{
-     *     Date beginDate = now();
-     * 
-     *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-     *     for (Integer integer : list){
-     *         <span style="color:green">//------</span>
-     * 
-     *         <span style="color:green">//模拟 do something</span>
-     * 
-     *         <span style="color:green">//---------</span>
-     *         Thread.sleep(1 * MILLISECOND_PER_SECONDS);
-     *     }
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
-     * }
-     * 
-     * </pre>
-     * 
-     * <p>
-     * 统计总耗时时间 需要 use time:<span style="color:red">10秒28毫秒</span>
-     * </p>
-     * 
-     * <b>此时你可以调用此方法,改成多线程执行:</b>
-     * 
-     * <pre class="code">
-     * 
-     * public void testExecuteTestUsePartitionRunnableBuilder() throws InterruptedException{
-     *     Date beginDate = now();
-     *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-     * 
-     *     <span style="color:green">//每个线程执行2条数据, 没有自定义 paramsMap</span>
-     * 
-     *     <span style="color:green">//将会自动创建 list.size()/2 =5个 线程执行</span>
-     * 
-     *     <span style="color:green">//每个线程执行的,将会是 PartitionRunnableBuilder build 返回的 Runnable</span>
-     *     ThreadUtil.execute(list, 1, null, new PartitionRunnableBuilder{@code <Integer>}(){
-     * 
-     *         &#64;Override
-     *         public Runnable build(final List{@code <Integer>} perBatchList,PartitionThreadEntity partitionThreadEntity,Map{@code <String, ?>} paramsMap){
-     * 
-     *             return new Runnable(){
-     * 
-     *                 &#64;Override
-     *                 public void run(){
-     *                     for (Integer integer : perBatchList){
-     *                         <span style="color:green">//------</span>
-     * 
-     *                         <span style="color:green">//模拟 do something</span>
-     * 
-     *                         <span style="color:green">//---------</span>
-     *                         try{
-     *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
-     *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
-     *                         }
-     *                     }
-     *                 }
-     *             };
-     *         }
-     * 
-     *     });
-     * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
-     * }
-     * </pre>
      * 
      * <p>
      * 统计总耗时时间 需要 use time:<span style="color:red">2秒36毫秒</span>
@@ -887,96 +818,6 @@ public final class ThreadUtil{
      * 不建议<code>list</code> size很大,比如 20W,而<code>eachSize</code>值很小,比如2 ,那么会开启20W/2=10W个线程;此时建议考虑 线程池的实现方案
      * </blockquote>
      * 
-     * <h3>对于参数 paramsMap 的使用:</h3>
-     * <blockquote>
-     * 
-     * <p>
-     * 比如你需要拿到最终每条数据执行的结果,以便后续进行处理(比如对失败的操作再次执行或者发送汇报邮件等)
-     * </p>
-     * 
-     * <pre class="code">
-     * 
-     * public void testExecuteTestUsePartitionRunnableBuilderParamsMap() throws InterruptedException{
-     *     Date beginDate = now();
-     *     List{@code <Integer>} list = toList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-     * 
-     *     final Map{@code <Integer, Boolean>} indexAndResultMap = Collections.synchronizedSortedMap(new TreeMap{@code <Integer, Boolean>}());
-     * 
-     *     ThreadUtil.execute(list, 2, null, new PartitionRunnableBuilder{@code <Integer>}(){
-     * 
-     *         &#64;Override
-     *         public Runnable build(
-     *                         final List{@code <Integer>} perBatchList,
-     *                         final PartitionThreadEntity partitionThreadEntity,
-     *                         Map{@code <String, ?>} paramsMap){
-     * 
-     *             return new Runnable(){
-     * 
-     *                 &#64;Override
-     *                 public void run(){
-     * 
-     *                     int i = 0;
-     *                     for (Integer integer : perBatchList){
-     *                         <span style="color:green">//------</span>
-     * 
-     *                         <span style="color:green">//模拟 do something</span>
-     * 
-     *                         <span style="color:green">//---------</span>
-     *                         try{
-     *                             Thread.sleep(1 * MILLISECOND_PER_SECONDS);
-     *                         }catch (InterruptedException e){
-     *                             LOGGER.error("", e);
-     *                         }
-     * 
-     *                         int indexInTotalList = getIndex(partitionThreadEntity, i);
-     * 
-     *                         <span style="color:green">//模拟 当值是 5 或者8 的时候 操作结果是false</span>
-     *                         boolean result = (integer == 5 || integer == 8) ? false : true;
-     * 
-     *                         indexAndResultMap.put(indexInTotalList, result);
-     * 
-     *                         i++;
-     *                     }
-     *                 }
-     * 
-     *                 private Integer getIndex(PartitionThreadEntity partitionThreadEntity,int i){
-     *                     int batchNumber = partitionThreadEntity.getBatchNumber();
-     *                     return batchNumber * partitionThreadEntity.getEachSize() + i;
-     *                 }
-     *             };
-     *         }
-     * 
-     *     });
-     * 
-     *     LOGGER.debug(JsonUtil.format(indexAndResultMap));
-     * 
-     *     LOGGER.info("use time: [{}]", formatDuration(beginDate));
-     * }
-     * 
-     * </pre>
-     * 
-     * <p>
-     * 输出结果:
-     * </p>
-     * 
-     * <pre>
-     *     29:21 DEBUG (ThreadUtilExample.java:161) [testExecuteTestUsePartitionRunnableBuilderParamsMap()]     {
-     *         "0": true,
-     *         "1": true,
-     *         "2": true,
-     *         "3": true,
-     *         "4": true,
-     *         "5": false,
-     *         "6": true,
-     *         "7": true,
-     *         "8": false,
-     *         "9": true
-     *     }
-     *     29:21 INFO  (ThreadUtilExample.java:164) [testExecuteTestUsePartitionRunnableBuilderParamsMap()] use time:2秒181毫秒
-     * 
-     * </pre>
-     * 
-     * </blockquote>
      * 
      * <h3>异常:</h3>
      * <blockquote>
