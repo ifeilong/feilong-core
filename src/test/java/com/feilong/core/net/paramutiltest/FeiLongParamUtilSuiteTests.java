@@ -34,6 +34,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 ToNaturalOrderingQueryStringTest.class,
                 ToNaturalOrderingKeyJoinValueTest.class,
+                ToNaturalOrderingJoinValueTest.class,
 
                 ToQueryStringUseArrayValueMapTest.class,
                 ToQueryStringUseSingleValueMapTest.class,

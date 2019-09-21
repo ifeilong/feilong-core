@@ -511,6 +511,105 @@ public final class ParamUtil{
     }
 
     /**
+     * 将 <code>singleValueMap</code> 转成<code>自然排序</code>, 然后仅将value直接拼接成字符串(<span style="color:red">不使用 {@code =} 和{@code &} 分隔</span>).
+     * 
+     * <p>
+     * 已知,适用于 银联大华捷通
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = newHashMap();
+     * map.put("service", "create_salesorder");
+     * map.put("_input_charset", "gbk");
+     * map.put("totalActual", "210.00");
+     * map.put("address", "江苏南通市通州区888组888号");
+     * LOGGER.debug(ParamUtil.toNaturalOrderingJoinValue(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {@code gbk江苏南通市通州区888组888号create_salesorder210.00}
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>规则:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <ol>
+     * <li>首先将<code>singleValueMap</code> 使用 {@link SortUtil#sortMapByKeyAsc(Map)} 进行排序,</li>
+     * <li>然后将map的value 直接连接</li>
+     * </ol>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * 
+     * <li>常用于和第三方对接数据(比如银联大华捷通,生成 <b>待签名的字符串</b>)</li>
+     * <li>该方法不会执行encode操作,<b>使用原生值进行拼接</b></li>
+     * 
+     * <li>
+     * <h4>对于 null key或者null value的处理:</h4>
+     * 
+     * <blockquote>
+     * <p>
+     * 如果 <code>singleValueMap</code> 中,<br>
+     * 如果有 <code>value</code> 是 <code>null</code>,那么会使用 {@link StringUtils#EMPTY} 进行拼接
+     * </p>
+     * 
+     * <h4>示例:</h4>
+     * 
+     * <pre class="code">
+     * Map{@code <String, String>} map = newHashMap();
+     * map.put("totalActual", <span style="color:red">null</span>);
+     * map.put("province", "江苏省");
+     * 
+     * LOGGER.debug(ParamUtil.toNaturalOrderingKeyJoinValue(map));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {@code 江苏省}
+     * </pre>
+     * 
+     * </blockquote>
+     * </li>
+     * 
+     * </ol>
+     * </blockquote>
+     * 
+     * @param singleValueMap
+     *            用于拼接签名的参数
+     * @return 如果 <code>singleValueMap</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         否则将<code>singleValueMap</code>排序之后,循环直接拼接value
+     * @since 2.0.1
+     */
+    public static String toNaturalOrderingJoinValue(Map<String, String> singleValueMap){
+        if (isNullOrEmpty(singleValueMap)){
+            return EMPTY;
+        }
+
+        //---------------------------------------------------------------
+        Map<String, String> sortMapByKeyAsc = sortMapByKeyAsc(singleValueMap);
+
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, String> entry : sortMapByKeyAsc.entrySet()){//有顺序的参数
+            String value = entry.getValue();
+            //注意:如果 value是null,StringBuilder将拼接 "null" 字符串, 详见  java.lang.AbstractStringBuilder#append(String)
+            sb.append(defaultString(value));
+        }
+        return sb.toString();
+    }
+
+    /**
      * 将 <code>singleValueMap</code> 转成<code>自然排序</code>的 <code>queryString</code> 字符串.
      * 
      * <h3>示例:</h3>
