@@ -758,7 +758,7 @@ public final class AggregateUtil{
     //---------------------------------------------------------------
 
     /**
-     * 循环 <code>beanIterable</code>,只选择符合 <code>includePredicate</code>的对象,统计 <code>propertyName</code>的值出现的次数.
+     * 循环 <code>beanIterable</code>,统计不同 <code>propertyNames</code>的不同值出现的次数.
      * 
      * <h3>说明:</h3>
      * <blockquote>
