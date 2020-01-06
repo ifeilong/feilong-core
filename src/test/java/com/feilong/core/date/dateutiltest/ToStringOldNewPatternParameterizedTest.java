@@ -25,13 +25,13 @@ import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
-public class ToStringOldNewPatternParameterizedTest
-                extends Abstract3ParamsAndResultParameterizedTest<String, String, String, String>{
+public class ToStringOldNewPatternParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, String>{
 
-    @Parameters(name = "index:{index}, DateUtil.toString(\"{0}\", {1}, {2})={3}")
+    @Parameters(name = "index:{index}, DateUtil.toString(\"{0}\", \"{1}\", \"{2}\")=\"{3}\"")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
-                                              { "2019-01-06", DatePattern.COMMON_DATE, DatePattern.DOTS_DATE, "2019.01.06" },
+                                              { "2020-01-06", DatePattern.COMMON_DATE, DatePattern.DOTS_DATE, "2020.01.06" },
+                                              { "2020-01-06", DatePattern.COMMON_DATE, DatePattern.CHINESE_DATE, "2020年01月06日" },
                 //
         };
         return toList(objects);

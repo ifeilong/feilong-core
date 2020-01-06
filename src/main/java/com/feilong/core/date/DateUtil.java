@@ -1207,6 +1207,18 @@ public final class DateUtil{
 
     /**
      * 将一个 <code>oldPattern</code> 格式日期 <code>dateString</code> 字符串 使用新格式 <code>newPattern</code> 转成新的字符串.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.toString("2020-01-06", "yyyy-MM-dd", "yyyy.MM.dd")="2020.01.06"
+     * DateUtil.toString("2020-01-06", "yyyy-MM-dd", "yyyy年MM月dd日")="2020年01月06日"
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param dateString
      *            日期字符串
