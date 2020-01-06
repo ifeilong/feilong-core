@@ -327,7 +327,7 @@ public final class AggregateUtil{
     }
 
     /**
-     * 总和,计算集合对象<code>beanIterable</code> 内指定的属性名 <code>propertyNames</code> 值的总和.
+     * 求和,分别计算集合对象<code>beanIterable</code> 内指定的不同属性名 <code>propertyNames</code> 值的总和.
      * 
      * <h3>说明:</h3>
      * <blockquote>
