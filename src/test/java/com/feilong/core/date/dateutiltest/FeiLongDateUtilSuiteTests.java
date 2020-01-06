@@ -74,7 +74,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 AddMillisecondParameterizedTest.class,
 
                 IsLeapYearParameterizedTest.class,
+
                 IsInTimeTest.class,
+                IsInTimeStringTest.class,
+                IsInTimeDateStringTest.class,
 
                 IsBeforeTest.class,
                 IsAfterTest.class,

@@ -1470,6 +1470,91 @@ public final class DateUtil{
     }
 
     /**
+     * 判断当前时间 是否在格式是<code>pattern</code>的 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
+     * 
+     * <h3>使用场景:</h3>
+     * <blockquote>
+     * 比如当日达,判断下单的时间是否是 08:00-16:00 之间, 超过这个时间段的订单不能下
+     * </blockquote>
+     *
+     * @param beginDateString
+     *            开始时间
+     * @param endDateString
+     *            结束时间
+     * @param datePattern
+     *            the date pattern
+     * @return 如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>beginDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>endDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>endDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see #isInTime(Date, String, String, String)
+     * @since 2.0.3
+     */
+    public static boolean isInTime(String beginDateString,String endDateString,String datePattern){
+        Date now = now();
+        return isInTime(now, beginDateString, endDateString, datePattern);
+    }
+
+    /**
+     * 判断指定时间 <code>date</code>, 是否在格式是<code>pattern</code>的 <code>beginDate</code> 和 <code>endDate</code>两个时间之间.
+     * 
+     * <h3>使用场景:</h3>
+     * <blockquote>
+     * 比如当日达,判断下单的时间是否是 08:00-16:00 之间, 超过这个时间段的订单不能下
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.isInTime(toDate("2020-01-06 10:00:00", COMMON_DATE_AND_TIME), "08:00:00", "16:00:00", COMMON_TIME) = true
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param date
+     *            the date
+     * @param beginDateString
+     *            the begin date string
+     * @param endDateString
+     *            the end date string
+     * @param datePattern
+     *            the date pattern
+     * @return 如果 <code>date</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>beginDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>beginDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>endDateString</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>endDateString</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @see #isInTime(Date, Date, Date)
+     * @since 2.0.3
+     */
+    public static boolean isInTime(Date date,String beginDateString,String endDateString,String datePattern){
+        Validate.notNull(date, "date can't be null!");
+        Validate.notBlank(beginDateString, "beginDateString can't be blank!");
+        Validate.notBlank(endDateString, "endDateString can't be blank!");
+        Validate.notBlank(datePattern, "datePattern can't be blank!");
+
+        //---------------------------------------------------------------
+
+        //大家使用同样的格式进行比较
+        Date compareDate = toDate(toString(date, datePattern), datePattern);
+        Date beginDate = toDate(beginDateString, datePattern);
+        Date endDate = toDate(endDateString, datePattern);
+
+        return isInTime(compareDate, beginDate, endDate);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
      * 判断指定的日期 <code>date</code>,是不是今天的日期.
      * 
      * <h3>示例:</h3>
