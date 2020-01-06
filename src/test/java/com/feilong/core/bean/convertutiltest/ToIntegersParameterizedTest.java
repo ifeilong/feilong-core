@@ -20,7 +20,7 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toIntegers;
@@ -31,7 +31,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToIntegersParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Integer[]>{
+public class ToIntegersParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Object, Integer[]>{
 
     /**
      * Data.

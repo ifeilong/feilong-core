@@ -27,9 +27,9 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
-public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, String>{
+public class ToStringParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{
 
     private static Date date = toDate("2018-01-02 01:53:00", COMMON_DATE_AND_TIME);
 

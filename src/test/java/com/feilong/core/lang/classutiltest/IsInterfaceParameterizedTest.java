@@ -26,7 +26,7 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.DatePattern;
 import com.feilong.core.Validator;
 import com.feilong.core.lang.ClassUtil;
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
@@ -35,7 +35,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class IsInterfaceParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Class<?>, Boolean>{
+public class IsInterfaceParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Class<?>, Boolean>{
 
     /**
      * Data.

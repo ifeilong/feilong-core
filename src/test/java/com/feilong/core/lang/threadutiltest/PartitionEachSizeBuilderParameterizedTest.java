@@ -23,7 +23,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.lang.thread.PartitionEachSizeThreadConfigBuilder;
 import com.feilong.core.lang.thread.PartitionThreadConfig;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class PartitionEachSizeBuilderParameterizedTest.
@@ -32,7 +32,7 @@ import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
  * @since 2.0.0
  */
 public class PartitionEachSizeBuilderParameterizedTest
-                extends AbstractTwoParamsAndOneResultParameterizedTest<Integer, PartitionThreadConfig, Integer>{
+                extends Abstract2ParamsAndResultParameterizedTest<Integer, PartitionThreadConfig, Integer>{
 
     @Parameters(name = "index:{index}: new PartitionEachSizeThreadConfigBuilder({1}).build({0})={2}")
     public static Iterable<Object[]> data(){

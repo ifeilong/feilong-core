@@ -27,14 +27,14 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
 /**
  * The Class DateExtensionUtilGetIntervalDayParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class GetIntervalDayParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
+public class GetIntervalDayParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, Integer>{
 
     /**
      * Data.

@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.util.EnumerationUtil;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toEnumeration;
@@ -35,7 +35,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.8
  */
-public class EnumerationUtilParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Enumeration<Object>, Object, Boolean>{
+public class EnumerationUtilParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Enumeration<Object>, Object, Boolean>{
 
     /**
      * Data.

@@ -22,7 +22,7 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.getMonth;
@@ -35,7 +35,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class GetMonthParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
+public class GetMonthParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, Integer>{
 
     /**
      * Data.

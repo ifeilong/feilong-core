@@ -22,7 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.NumberPattern.PERCENT_WITH_1POINT;
 import static com.feilong.core.NumberPattern.PERCENT_WITH_2POINT;
@@ -37,7 +37,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class GetProgressParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<Number, Number, String, String>{
+                extends Abstract3ParamsAndResultParameterizedTest<Number, Number, String, String>{
 
     /**
      * Data.

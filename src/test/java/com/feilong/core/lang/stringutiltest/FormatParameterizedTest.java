@@ -24,14 +24,14 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class StringUtilFormatParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class FormatParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Object[], String>{
+public class FormatParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, Object[], String>{
 
     /**
      * Test format.

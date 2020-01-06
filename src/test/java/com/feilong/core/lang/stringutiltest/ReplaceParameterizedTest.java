@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -32,7 +32,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.8.0
  */
-public class ReplaceParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
+public class ReplaceParameterizedTest extends Abstract3ParamsAndResultParameterizedTest<String, String, String, String>{
 
     /**
      * Data.

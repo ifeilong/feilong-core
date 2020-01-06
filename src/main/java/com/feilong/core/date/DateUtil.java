@@ -17,6 +17,7 @@ package com.feilong.core.date;
 
 import static com.feilong.core.TimeInterval.SECONDS_PER_HOUR;
 import static com.feilong.core.TimeInterval.SECONDS_PER_MINUTE;
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.CalendarUtil.resetDayBegin;
 import static com.feilong.core.date.CalendarUtil.resetDayEnd;
 import static com.feilong.core.date.CalendarUtil.resetYearEnd;
@@ -1202,6 +1203,35 @@ public final class DateUtil{
         Validate.notBlank(datePattern, "datePattern can't be blank!");
 
         return DateFormatUtils.format(date, datePattern);
+    }
+
+    /**
+     * 将一个 <code>oldPattern</code> 格式日期 <code>dateString</code> 字符串 使用新格式 <code>newPattern</code> 转成新的字符串.
+     *
+     * @param dateString
+     *            日期字符串
+     * @param oldPattern
+     *            老的格式
+     * @param newPattern
+     *            新的格式
+     * @return 如果 <code>dateString</code> 是null或者empty,返回 null<br>
+     *         如果 <code>oldPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>oldPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     *         如果 <code>newPattern</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>newPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 2.0.3
+     */
+    public static String toString(String dateString,String oldPattern,String newPattern){
+        if (isNullOrEmpty(dateString)){
+            return null;
+        }
+
+        Validate.notBlank(oldPattern, "oldPattern can't be blank!");
+        Validate.notBlank(newPattern, "newPattern can't be blank!");
+
+        //---------------------------------------------------------------
+        return toString(toDate(dateString, oldPattern), newPattern);
     }
 
     /**

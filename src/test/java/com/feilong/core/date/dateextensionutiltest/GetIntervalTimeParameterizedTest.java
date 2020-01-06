@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.TimeInterval.MILLISECOND_PER_MINUTE;
 import static com.feilong.core.bean.ConvertUtil.toArray;
@@ -37,7 +37,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class GetIntervalTimeParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, Integer>{
+                extends Abstract3ParamsAndResultParameterizedTest<String, String, String, Integer>{
 
     /**
      * Test get interval time.

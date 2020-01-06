@@ -25,9 +25,9 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
-public class IsEqualsParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Number, Number, Boolean>{
+public class IsEqualsParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Number, Number, Boolean>{
 
     /**
      * Data.

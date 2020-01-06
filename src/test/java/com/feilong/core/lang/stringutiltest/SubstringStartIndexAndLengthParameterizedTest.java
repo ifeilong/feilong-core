@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -33,7 +33,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class SubstringStartIndexAndLengthParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<String, Integer, Integer, String>{
+                extends Abstract3ParamsAndResultParameterizedTest<String, Integer, Integer, String>{
 
     /** <code>{@value}</code>. */
     private static final String TEXT = "jinxin.feilong";

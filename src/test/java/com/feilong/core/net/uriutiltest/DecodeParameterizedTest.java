@@ -25,9 +25,9 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.net.URIUtil;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
-public class DecodeParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, String, String>{
+public class DecodeParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, String, String>{
 
     /**
      * Data.

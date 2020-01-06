@@ -23,7 +23,7 @@ import org.junit.runners.Parameterized.Parameters;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.entity.HttpMethodTestType;
 import com.feilong.core.lang.EnumUtil;
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toList;
@@ -40,7 +40,7 @@ import static com.feilong.core.entity.HttpMethodTestType.POST;
  *            the element type
  */
 public class GetEnumByPropertyValueIgnoreCaseParameterizedTest<T, E extends Enum<?>>
-                extends AbstractThreeParamsAndOneResultParameterizedTest<Class<E>, String, T, E>{
+                extends Abstract3ParamsAndResultParameterizedTest<Class<E>, String, T, E>{
 
     /**
      * Test get enum by property value ignore case.

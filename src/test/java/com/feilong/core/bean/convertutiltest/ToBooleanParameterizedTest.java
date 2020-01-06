@@ -22,14 +22,14 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 /**
  * The Class ConvertUtilToBooleanParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToBooleanParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Boolean>{
+public class ToBooleanParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Object, Boolean>{
 
     /**
      * Data.

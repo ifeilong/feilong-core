@@ -24,14 +24,14 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class ObjectUtilDefaultIfNullOrEmptyParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class DefaultIfNullOrEmptyParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Object, Object>{
+public class DefaultIfNullOrEmptyParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Object, Object, Object>{
 
     /**
      * Data.

@@ -27,9 +27,9 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
-public class GetAddValueParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Number[], BigDecimal>{
+public class GetAddValueParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Number[], BigDecimal>{
 
     /**
      * Data.

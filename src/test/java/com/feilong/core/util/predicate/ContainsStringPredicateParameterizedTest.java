@@ -21,14 +21,14 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.14.3
  */
-public class ContainsStringPredicateParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, String, Boolean>{
+public class ContainsStringPredicateParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, String, Boolean>{
 
     @Parameters(name = "index:{index}: new ContainsStringPredicate({1}).evaluate({0})={2}")
     public static Iterable<Object[]> data(){

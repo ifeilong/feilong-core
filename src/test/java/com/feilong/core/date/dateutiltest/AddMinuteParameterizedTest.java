@@ -22,7 +22,7 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.date.DateUtil.addMinute;
@@ -35,7 +35,7 @@ import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class AddMinuteParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, Integer, String>{
+public class AddMinuteParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, Integer, String>{
 
     /**
      * Data.

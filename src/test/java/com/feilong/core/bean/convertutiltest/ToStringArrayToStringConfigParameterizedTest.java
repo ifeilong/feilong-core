@@ -26,7 +26,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class ConvertUtilToStringArrayToStringConfigParameterizedTest.
@@ -34,7 +34,7 @@ import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class ToStringArrayToStringConfigParameterizedTest
-                extends AbstractTwoParamsAndOneResultParameterizedTest<Object[], ToStringConfig, String>{
+                extends Abstract2ParamsAndResultParameterizedTest<Object[], ToStringConfig, String>{
 
     /**
      * Data.

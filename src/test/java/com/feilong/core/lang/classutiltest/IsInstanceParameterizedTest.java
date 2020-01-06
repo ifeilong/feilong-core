@@ -22,7 +22,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.lang.ClassUtil;
 import com.feilong.store.member.User;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
@@ -31,7 +31,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class IsInstanceParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Class<?>, Boolean>{
+public class IsInstanceParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Object, Class<?>, Boolean>{
 
     /**
      * Data.

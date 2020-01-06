@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.core.bean.ConvertUtil.toLong;
@@ -32,7 +32,7 @@ import static com.feilong.core.bean.ConvertUtil.toLong;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToLongParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Long>{
+public class ToLongParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Object, Long>{
 
     /**
      * Data.

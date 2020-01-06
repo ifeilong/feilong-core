@@ -23,14 +23,14 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 /**
  * The Class ConvertUtilToLongsParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToLongsParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, Long[]>{
+public class ToLongsParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Object, Long[]>{
 
     /**
      * Data.

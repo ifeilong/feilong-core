@@ -25,7 +25,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract3ParamsAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toArray;
 import static com.feilong.core.bean.ConvertUtil.toBigDecimal;
@@ -37,7 +37,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class GetDivideValueParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<Number, Number, Integer, BigDecimal>{
+                extends Abstract3ParamsAndResultParameterizedTest<Number, Number, Integer, BigDecimal>{
 
     /**
      * Test get divide value.

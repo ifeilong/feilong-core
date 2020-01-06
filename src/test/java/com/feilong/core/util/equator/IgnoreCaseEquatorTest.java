@@ -23,12 +23,12 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class IgnoreCaseEquatorTest.
  */
-public class IgnoreCaseEquatorTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, String, Boolean>{
+public class IgnoreCaseEquatorTest extends Abstract2ParamsAndResultParameterizedTest<String, String, Boolean>{
 
     /**
      * Data.

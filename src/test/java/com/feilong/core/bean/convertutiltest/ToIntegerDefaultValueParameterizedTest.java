@@ -24,14 +24,14 @@ import java.math.BigDecimal;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class ConvertUtilToIntegerDefaultValueParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToIntegerDefaultValueParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Object, Integer, Integer>{
+public class ToIntegerDefaultValueParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Object, Integer, Integer>{
 
     /**
      * Data.

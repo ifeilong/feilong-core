@@ -27,12 +27,12 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class GetSubtractValueParameterizedTest.
  */
-public class GetSubtractValueParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Number, Number[], BigDecimal>{
+public class GetSubtractValueParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Number, Number[], BigDecimal>{
 
     /**
      * Data.

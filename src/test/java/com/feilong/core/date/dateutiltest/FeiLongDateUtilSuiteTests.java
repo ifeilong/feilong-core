@@ -86,6 +86,9 @@ import org.junit.runners.Suite.SuiteClasses;
                 ToStringTest.class,
                 ToStringParameterizedTest.class,
 
+                ToStringOldNewPatternParameterizedTest.class,
+                ToStringOldNewPatternTest.class,
+
                 NowStringTest.class,
 
         //                

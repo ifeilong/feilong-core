@@ -28,14 +28,14 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 /**
  * The Class ToStringParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ToStringParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<Object, String>{
+public class ToStringParameterizedTest extends Abstract1ParamAndResultParameterizedTest<Object, String>{
 
     /**
      * Data.

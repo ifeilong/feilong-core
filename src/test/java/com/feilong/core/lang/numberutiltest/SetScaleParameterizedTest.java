@@ -25,14 +25,14 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.NumberUtil;
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
 /**
  * The Class NumberUtilSetScaleParameterizedTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class SetScaleParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<Number, Integer, String>{
+public class SetScaleParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<Number, Integer, String>{
 
     /**
      * Data.
