@@ -34,6 +34,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -763,6 +764,182 @@ public final class CollectionsUtil{
         return isNullOrEmpty(objectCollection) ? Collections.<O> emptyList() : toList(new LinkedHashSet<O>(objectCollection));
     }
 
+    /**
+     * 去重,返回指定属性 propertyName的值没有重复元素的新list <span style="color:red">(原集合对象不变)</span>.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * User user1 = new User(1L);
+     * User user2 = new User(1L);
+     * List{@code <User>} list = toList(user1, user2);
+     * 
+     * List{@code <User>} removeDuplicate = CollectionsUtil.removeDuplicate(list, "id");
+     * 
+     * assertThat(removeDuplicate, contains(user1));
+     * assertSame(1, removeDuplicate.size());
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果原 <code>objectCollection</code> 是有序的,那么返回的结果参照原 <code>objectCollection</code>元素顺序</li>
+     * <li>原 <code>objectCollection</code>不变</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyName
+     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo),<br>
+     *            如果是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
+     * @return 如果 <code>propertyNames</code> 是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
+     *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @see LinkedHashSet#LinkedHashSet(Collection)
+     * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
+     * @see org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)
+     * @see <a
+     *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
+     *      </a>
+     * @since 2.0.3
+     */
+    public static <O> List<O> removeDuplicate(Collection<O> objectCollection,String propertyName){
+        if (isNullOrEmpty(propertyName)){
+            return removeDuplicate(objectCollection);
+        }
+        if (isNullOrEmpty(objectCollection)){
+            return Collections.<O> emptyList();
+        }
+
+        //---------------------------------------------------------------
+        Map<Object, O> map = groupOne(objectCollection, propertyName);
+        return toList(map.values());
+    }
+
+    /**
+     * 去重,返回指定属性 propertyNames 组合的值都不重复元素的新list <span style="color:red">(原集合对象不变)</span>.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * User user1 = new User(1L);
+     * user1.setUserInfo(new UserInfo(15));
+     * 
+     * User user2 = new User(1L);
+     * user2.setUserInfo(new UserInfo(16));
+     * 
+     * User user3 = new User(1L);
+     * user3.setUserInfo(new UserInfo(15));
+     * 
+     * List{@code <User>} list = toList(user1, user2, user3);
+     * 
+     * List{@code <User>} removeDuplicate = CollectionsUtil.removeDuplicate(list, "id", "userInfo.age");
+     * 
+     * assertThat(removeDuplicate, contains(user1, user2));
+     * assertSame(2, removeDuplicate.size());
+     * </pre>
+     * 
+     * 
+     * </blockquote>
+     * 
+     * <h3>注意:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果原 <code>objectCollection</code> 是有序的,那么返回的结果参照原 <code>objectCollection</code>元素顺序</li>
+     * <li>原 <code>objectCollection</code>不变</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param objectCollection
+     *            the object collection
+     * @param propertyNames
+     *            包含的属性数组名字数组,(can be nested/indexed/mapped/combo),<br>
+     *            如果是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
+     * @return 如果 <code>propertyNames</code> 是null或者empty,那么直接调用 {@link #removeDuplicate(Collection)}<br>
+     *         如果 <code>objectCollection</code> 是null或者empty,返回 {@link Collections#emptyList()}<br>
+     * @see LinkedHashSet#LinkedHashSet(Collection)
+     * @see com.feilong.core.bean.ConvertUtil#toList(Collection)
+     * @see org.apache.commons.collections4.IterableUtils#uniqueIterable(Iterable)
+     * @see <a
+     *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
+     *      </a>
+     * @since 2.0.3
+     */
+    public static <O> List<O> removeDuplicate(Collection<O> objectCollection,String...propertyNames){
+        if (isNullOrEmpty(propertyNames)){
+            return removeDuplicate(objectCollection);
+        }
+        if (isNullOrEmpty(objectCollection)){
+            return Collections.<O> emptyList();
+        }
+
+        //---------------------------------------------------------------
+        //用来识别是否重复
+        List<Map<String, Object>> mapList = newArrayList();
+
+        //用来存放返回list
+        List<O> returnList = new ArrayList<>(IterableUtils.size(objectCollection));
+        for (O o : objectCollection){
+            Map<String, Object> propertyNameAndValueMap = PropertyUtil.describe(o, propertyNames);
+            boolean isNotExist = !isExist(mapList, propertyNameAndValueMap, propertyNames);
+            if (isNotExist){
+                returnList.add(o);
+                mapList.add(propertyNameAndValueMap);
+            }
+        }
+        return returnList;
+    }
+
+    /**
+     * 判断<code>mapList</code> 中,是否含有 指定 key-value 的map.
+     *
+     * @param mapList
+     *            the map list
+     * @param propertyNameAndValueMap
+     *            the property name and value map
+     * @param keys
+     *            the keys
+     * @return 存在,返回true
+     * @since 2.0.3
+     */
+    private static boolean isExist(List<Map<String, Object>> mapList,Map<String, Object> propertyNameAndValueMap,String...keys){
+        for (Map<String, Object> map : mapList){
+            if (eqauls(map, propertyNameAndValueMap, keys)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断两个map ,提取每个属性 <code>keys</code> 值, 看看是否一致, 如果有不一致的返回false; 如果都一致那么返回true.
+     *
+     * @param map
+     *            the map
+     * @param propertyNameAndValueMap
+     *            the property name and value map
+     * @param keys
+     *            the property names
+     * @return true, if successful
+     * @since 2.0.3
+     */
+    private static boolean eqauls(Map<String, Object> map,Map<String, Object> propertyNameAndValueMap,String...keys){
+        for (String propertyName : keys){
+            if (!Objects.equals(map.get(propertyName), propertyNameAndValueMap.get(propertyName))){
+                return false;
+            }
+        }
+        return true;
+    }
+
     //----------------------获得 属性值-----------------------------------------
 
     /**
@@ -1172,6 +1349,66 @@ public final class CollectionsUtil{
      */
     public static <O, V> O find(Iterable<O> beanIterable,String propertyName,V propertyValue){
         return null == beanIterable ? null : find(beanIterable, BeanPredicateUtil.<O, V> equalPredicate(propertyName, propertyValue));
+    }
+
+    /**
+     * 找到 <code>iterable</code>中,第一个 <code>propertyName</code>属性名称和值是 <code>propertyValue</code>是 propertyNameAndPropertyValueMap 的对应元素.
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <p>
+     * <b>场景:</b> 从list中查找name是 关羽,且年龄是24 的User对象
+     * </p>
+     * 
+     * <pre class="code">
+     * List{@code <User>} list = new ArrayList{@code <>}();
+     * list.add(new User("张飞", 23));
+     * list.add(new User("关羽", 24));
+     * list.add(new User("刘备", 25));
+     * list.add(new User("关羽", 50));
+     * 
+     * Map{@code <String, ?>} map = toMap("name", "关羽", "age", 24);
+     * LOGGER.info(JsonUtil.format(CollectionsUtil.find(list, map)));
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     * {
+     * "age": 24,
+     * "name": "关羽"
+     * }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>返回第一个匹配对象</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param <O>
+     *            the generic type
+     * @param beanIterable
+     *            bean Iterable,诸如List{@code <User>},Set{@code <User>}等
+     * @param propertyNameAndPropertyValueMap
+     *            属性和指定属性值对应的map,其中key是泛型T对象指定的属性名称,Possibly indexed and/or nested name of the property to be modified,参见
+     *            <a href="../../bean/BeanUtil.html#propertyName">propertyName</a>
+     * @return 如果 <code>iterable</code>是null, 返回null<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 是empty,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是null,抛出{@link NullPointerException}<br>
+     *         如果 <code>propertyNameAndPropertyValueMap</code> 中有key是blank,抛出{@link IllegalArgumentException}<br>
+     *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回null
+     * @see #find(Iterable, Predicate)
+     * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
+     * @since 2.0.3
+     */
+    public static <O> O find(Iterable<O> beanIterable,Map<String, ?> propertyNameAndPropertyValueMap){
+        return null == beanIterable ? null : find(beanIterable, BeanPredicateUtil.<O> equalPredicate(propertyNameAndPropertyValueMap));
     }
 
     /**

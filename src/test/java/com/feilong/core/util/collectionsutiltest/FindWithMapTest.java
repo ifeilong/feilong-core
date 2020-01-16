@@ -22,11 +22,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.Predicate;
 import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.core.util.predicate.BeanPredicateUtil;
 import com.feilong.store.member.User;
 
 /**
@@ -34,7 +32,7 @@ import com.feilong.store.member.User;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class FindWithPredicateTest{
+public class FindWithMapTest{
 
     /**
      * Test find2.
@@ -43,6 +41,7 @@ public class FindWithPredicateTest{
     @SuppressWarnings("static-method")
     public void testFind2(){
         User guanyu30 = new User("关羽", 30);
+
         List<User> list = toList(//
                         new User("张飞", 23),
                         new User("关羽", 24),
@@ -50,10 +49,10 @@ public class FindWithPredicateTest{
                         guanyu30);
 
         Map<String, ?> map = toMap("name", "关羽", "age", 30);
-
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate(map);
-        assertEquals(guanyu30, CollectionsUtil.find(list, equalPredicate));
+        assertEquals(guanyu30, CollectionsUtil.find(list, map));
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Test find null predicate.
@@ -61,15 +60,12 @@ public class FindWithPredicateTest{
     @Test(expected = NullPointerException.class)
     public void testFindNullPredicate(){
         List<User> list = toList(new User("张飞", 23));
-        CollectionsUtil.find(list, (Predicate) null);
+        CollectionsUtil.find(list, (Map<String, ?>) null);
     }
 
-    /**
-     * Test find null predicate 1.
-     */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testFindNullPredicate1(){
-        CollectionsUtil.find(null, (Predicate) null);
+        assertEquals(null, CollectionsUtil.find(null, (Map<String, ?>) null));
     }
 
     /**
@@ -77,7 +73,7 @@ public class FindWithPredicateTest{
      */
     @Test
     public void testFindNullIterable(){
-        assertEquals(null, CollectionsUtil.find(null, BeanPredicateUtil.equalPredicate("name", "关羽")));
+        assertEquals(null, CollectionsUtil.find(null, toMap("name", "关羽")));
     }
 
     /**
@@ -86,7 +82,6 @@ public class FindWithPredicateTest{
     @Test
     public void testFindNotFind(){
         List<User> list = toList(new User("张飞", 23));
-        Predicate<User> equalPredicate = BeanPredicateUtil.equalPredicate("name", "关羽");
-        assertEquals(null, CollectionsUtil.find(list, equalPredicate));
+        assertEquals(null, CollectionsUtil.find(list, toMap("name", "关羽")));
     }
 }

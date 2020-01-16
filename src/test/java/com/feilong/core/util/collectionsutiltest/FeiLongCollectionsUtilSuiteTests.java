@@ -39,6 +39,7 @@ import org.junit.runners.Suite.SuiteClasses;
                 CollectIteratorTest.class,
 
                 FindTest.class,
+                FindWithMapTest.class,
                 FindWithPredicateTest.class,
 
                 GetPropertyValueListTest.class,
@@ -63,6 +64,8 @@ import org.junit.runners.Suite.SuiteClasses;
                 SelectRejectedPredicateTest.class,
 
                 RemoveDuplicateTest.class,
+                RemoveDuplicateOnePropertyNameTest.class,
+                RemoveDuplicatePropertyNamesTest.class,
                 RemoveElementTest.class,
                 RemoveAllNullTest.class,
                 RemoveAllCollectionTest.class,

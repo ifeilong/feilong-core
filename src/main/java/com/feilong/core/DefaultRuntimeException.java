@@ -178,6 +178,22 @@ public class DefaultRuntimeException extends RuntimeException{
 
     /**
      * Instantiates a new abstract runtime exception.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * throw new DefaultRuntimeException(
+     *                 "code not 00 is[{}],gatewayResponse:[{}],chinaumsQueryResultCommand:[{}]",
+     *                 code,
+     *                 gatewayResponse,
+     *                 JsonUtil.format(chinaumsQueryResultCommand));
+     * 
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param messagePattern
      *            the message pattern
