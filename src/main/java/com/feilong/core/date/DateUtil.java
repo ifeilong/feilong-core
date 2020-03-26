@@ -272,6 +272,44 @@ public final class DateUtil{
         return toString(now(), datePattern);
     }
 
+    /**
+     * 将此时此刻转成 TIMESTAMP 时间字符串,(常用于生成文件名字).
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * DateUtil.toString(new Date(), TIMESTAMP)
+     * </pre>
+     * 
+     * 可以简写(使用静态导入 static import更精简)
+     * 
+     * <pre class="code">
+     * DateUtil.nowString(TIMESTAMP)
+     * </pre>
+     * 
+     * 尤其
+     * 
+     * <pre class="code">
+     * DateUtil.toString(Calendar.getInstance().getTime(), DatePattern.TIMESTAMP)
+     * </pre>
+     * 
+     * 可以简写成(使用静态导入 static import更精简):
+     * 
+     * <pre class="code">
+     * DateUtil.nowTimestamp()
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @return the string
+     * @since 2.0.3
+     */
+    public static String nowTimestamp(){
+        return nowString(DatePattern.TIMESTAMP);
+    }
+
     //------------------------day---------------------------------------
 
     /**
