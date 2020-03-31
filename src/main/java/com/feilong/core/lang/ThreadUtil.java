@@ -86,6 +86,7 @@ import com.feilong.core.lang.thread.PartitionThreadConfig;
  * @see "org.springframework.core.task.SimpleAsyncTaskExecutor"
  * @see "org.springframework.core.task.SyncTaskExecutor"
  * @see "org.springframework.core.task.TaskExecutor"
+ * @see java.util.concurrent.ThreadFactory
  * @since 1.10.3
  */
 public final class ThreadUtil{
