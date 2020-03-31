@@ -20,6 +20,8 @@ import java.util.Random;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.Validate;
 
+import com.feilong.core.Alphabet;
+
 /**
  * 随机数工具类.
  * 
@@ -34,6 +36,7 @@ import org.apache.commons.lang3.Validate;
  * @see java.lang.Math#random()
  * @see org.apache.commons.lang3.RandomUtils
  * @see org.apache.commons.lang3.RandomStringUtils
+ * @see java.util.concurrent.ThreadLocalRandom
  * @since 1.0.0
  */
 public final class RandomUtil{
@@ -128,6 +131,40 @@ public final class RandomUtil{
         Validate.notBlank(str, "str can't be null/empty!");
         Validate.isTrue(length > 0, "input param [length] must >0,but is [%s]", length);
         return RandomStringUtils.random(length, str);
+    }
+
+    /**
+     * 随机抽取字符串<code>char</code>,拼接成指定长度<code>length</code>的字符串.
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>常用于生成验证码</li>
+     * <li>接口传参,比如微信需要 nonce_str ,不长于32位的随机字符串</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * <h3>示例:</h3>
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * RandomUtil.createRandomString(5)
+     * 从 {@link com.feilong.core.Alphabet#DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE  Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE} 随机抽取字符,组成长度是5的字符串
+     * 生成的结果是可能是IFSMB
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param length
+     *            指定字符串长度,比如 5
+     * @return 如果 <code>length</code> {@code <=0}, 抛出 {@link IllegalArgumentException}
+     * 
+     * @see org.apache.commons.lang3.RandomStringUtils#random(int, String)
+     * @since 2.0.3
+     */
+    public static String createRandomString(int length){
+        Validate.isTrue(length > 0, "input param [length] must >0,but is [%s]", length);
+        return RandomStringUtils.random(length, Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE);
     }
 
 }
