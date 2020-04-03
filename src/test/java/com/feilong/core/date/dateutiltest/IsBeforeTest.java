@@ -29,9 +29,6 @@ import org.junit.Test;
  */
 public class IsBeforeTest{
 
-    /**
-     * Test is before.
-     */
     @Test
     @SuppressWarnings("static-method")
     public void testIsBefore(){

@@ -1439,7 +1439,7 @@ public final class DateUtil{
      */
     public static boolean isBefore(Date date,Date whenDate){
         Validate.notNull(whenDate, "whenDate can't be null!");
-        return null == date ? false : date.before(whenDate);
+        return null != date && date.before(whenDate);
     }
 
     /**
@@ -1469,7 +1469,7 @@ public final class DateUtil{
      */
     public static boolean isAfter(Date date,Date whenDate){
         Validate.notNull(whenDate, "whenDate can't be null!");
-        return null == date ? false : date.after(whenDate);
+        return null != date && date.after(whenDate);
     }
 
     // [end]
@@ -1676,7 +1676,7 @@ public final class DateUtil{
 
         Validate.notBlank(datePattern, "datePattern can't be blank!");
 
-        return date1 == date2 ? true : toString(date1, datePattern).equals(toString(date2, datePattern));
+        return date1 == date2 || toString(date1, datePattern).equals(toString(date2, datePattern));
     }
 
     // [end]

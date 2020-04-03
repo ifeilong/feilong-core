@@ -15,14 +15,12 @@
  */
 package com.feilong.core.date.dateutiltest;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.date.DateUtil.isAfter;
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import static com.feilong.core.date.DateUtil.isAfter;
-import static com.feilong.core.date.DateUtil.toDate;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
  * The Class DateUtilIsAfterTest.
@@ -31,9 +29,6 @@ import static com.feilong.core.DatePattern.COMMON_DATE;
  */
 public class IsAfterTest{
 
-    /**
-     * Test is after.
-     */
     @Test
     public void testIsAfter(){
         assertEquals(true, isAfter(toDate("2011-03-10", COMMON_DATE), toDate("2011-03-05", COMMON_DATE)));
