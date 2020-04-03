@@ -134,7 +134,8 @@ public final class RandomUtil{
     }
 
     /**
-     * 随机抽取字符串<code>char</code>,拼接成指定长度<code>length</code>的字符串.
+     * 从{@link com.feilong.core.Alphabet#DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE
+     * Alphabet.DECIMAL_AND_LOWERCASE_LETTERS_DISTINGUISHABLE} 随机抽取字符串,拼接成指定长度<code>length</code>的字符串.
      * 
      * <h3>说明:</h3>
      * <blockquote>
