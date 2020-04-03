@@ -160,7 +160,7 @@ public final class RandomUtil{
      * @return 如果 <code>length</code> {@code <=0}, 抛出 {@link IllegalArgumentException}
      * 
      * @see org.apache.commons.lang3.RandomStringUtils#random(int, String)
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static String createRandomString(int length){
         Validate.isTrue(length > 0, "input param [length] must >0,but is [%s]", length);

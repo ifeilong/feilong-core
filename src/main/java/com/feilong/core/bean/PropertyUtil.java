@@ -66,14 +66,14 @@ public final class PropertyUtil{
     /**
      * 传入的bean 是null 的消息提示.
      * 
-     * @since 2.0.3
+     * @since 2.1.0
      */
     private static final String MESSAGE_BEAN_IS_NULL          = "bean can't be null!";
 
     /**
      * 传入的propertyName 是blank 的消息提示.
      * 
-     * @since 2.0.3
+     * @since 2.1.0
      */
     private static final String MESSAGE_PROPERTYNAME_IS_BLANK = "propertyName can't be blank!";
     //---------------------------------------------------------------

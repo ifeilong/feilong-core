@@ -304,7 +304,7 @@ public final class DateUtil{
      * </blockquote>
      *
      * @return the string
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static String nowTimestamp(){
         return nowString(DatePattern.TIMESTAMP);
@@ -1270,7 +1270,7 @@ public final class DateUtil{
      * 
      *         如果 <code>newPattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>newPattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static String toString(String dateString,String oldPattern,String newPattern){
         if (isNullOrEmpty(dateString)){
@@ -1530,7 +1530,7 @@ public final class DateUtil{
      *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #isInTime(Date, String, String, String)
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static boolean isInTime(String beginDateString,String endDateString,String datePattern){
         Date now = now();
@@ -1572,7 +1572,7 @@ public final class DateUtil{
      *         如果 <code>datePattern</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>datePattern</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see #isInTime(Date, Date, Date)
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static boolean isInTime(Date date,String beginDateString,String endDateString,String datePattern){
         Validate.notNull(date, "date can't be null!");

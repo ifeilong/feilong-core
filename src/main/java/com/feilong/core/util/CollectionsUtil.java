@@ -806,7 +806,7 @@ public final class CollectionsUtil{
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static <O> List<O> removeDuplicate(Collection<O> objectCollection,String propertyName){
         if (isNullOrEmpty(propertyName)){
@@ -871,7 +871,7 @@ public final class CollectionsUtil{
      * @see <a
      *      href="http://www.oschina.net/code/snippet_117714_2991?p=2#comments">http://www.oschina.net/code/snippet_117714_2991?p=2#comments
      *      </a>
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static <O> List<O> removeDuplicate(Collection<O> objectCollection,String...propertyNames){
         if (isNullOrEmpty(propertyNames)){
@@ -908,7 +908,7 @@ public final class CollectionsUtil{
      * @param keys
      *            the keys
      * @return 存在,返回true
-     * @since 2.0.3
+     * @since 2.1.0
      */
     private static boolean isExist(List<Map<String, Object>> mapList,Map<String, Object> propertyNameAndValueMap,String...keys){
         for (Map<String, Object> map : mapList){
@@ -929,7 +929,7 @@ public final class CollectionsUtil{
      * @param keys
      *            the property names
      * @return true, if successful
-     * @since 2.0.3
+     * @since 2.1.0
      */
     private static boolean eqauls(Map<String, Object> map,Map<String, Object> propertyNameAndValueMap,String...keys){
         for (String propertyName : keys){
@@ -1405,7 +1405,7 @@ public final class CollectionsUtil{
      *         如果 <code>iterable</code>中没有相关元素的属性<code>propertyName</code> 值是<code>propertyValue</code>,返回null
      * @see #find(Iterable, Predicate)
      * @see com.feilong.core.util.predicate.BeanPredicateUtil#equalPredicate(String, Object)
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static <O> O find(Iterable<O> beanIterable,Map<String, ?> propertyNameAndPropertyValueMap){
         return null == beanIterable ? null : find(beanIterable, BeanPredicateUtil.<O> equalPredicate(propertyNameAndPropertyValueMap));
