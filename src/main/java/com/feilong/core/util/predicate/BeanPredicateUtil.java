@@ -15,7 +15,7 @@
  */
 package com.feilong.core.util.predicate;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
@@ -429,7 +429,7 @@ public final class BeanPredicateUtil{
 
             @Override
             public boolean evaluate(V propertyValue){
-                return isNullOrEmpty(propertyValueList) ? false : propertyValueList.contains(propertyValue);
+                return isNotNullOrEmpty(propertyValueList) && propertyValueList.contains(propertyValue);
             }
         });
     }

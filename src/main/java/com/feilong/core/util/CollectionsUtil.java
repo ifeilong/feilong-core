@@ -430,7 +430,7 @@ public final class CollectionsUtil{
      */
     public static <O> boolean addAllIgnoreNull(final Collection<O> objectCollection,final Iterable<? extends O> iterable){
         Validate.notNull(objectCollection, "objectCollection can't be null!");
-        return null == iterable ? false : CollectionUtils.addAll(objectCollection, iterable);
+        return null != iterable && CollectionUtils.addAll(objectCollection, iterable);
     }
 
     /**

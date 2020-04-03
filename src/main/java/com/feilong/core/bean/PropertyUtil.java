@@ -61,8 +61,21 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 public final class PropertyUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtil.class);
+    private static final Logger LOGGER                        = LoggerFactory.getLogger(PropertyUtil.class);
 
+    /**
+     * 传入的bean 是null 的消息提示.
+     * 
+     * @since 2.0.3
+     */
+    private static final String MESSAGE_BEAN_IS_NULL          = "bean can't be null!";
+
+    /**
+     * 传入的propertyName 是blank 的消息提示.
+     * 
+     * @since 2.0.3
+     */
+    private static final String MESSAGE_PROPERTYNAME_IS_BLANK = "propertyName can't be blank!";
     //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
@@ -326,7 +339,7 @@ public final class PropertyUtil{
      * @since 1.8.0
      */
     public static Map<String, Object> describe(Object bean,String...propertyNames){
-        Validate.notNull(bean, "bean can't be null!");
+        Validate.notNull(bean, MESSAGE_BEAN_IS_NULL);
 
         //---------------------------------------------------------------
         if (isNullOrEmpty(propertyNames)){
@@ -404,8 +417,8 @@ public final class PropertyUtil{
      * @see BeanUtil#setProperty(Object, String, Object)
      */
     public static void setProperty(Object bean,String propertyName,Object value){
-        Validate.notNull(bean, "bean can't be null!");
-        Validate.notBlank(propertyName, "propertyName can't be null!");
+        Validate.notNull(bean, MESSAGE_BEAN_IS_NULL);
+        Validate.notBlank(propertyName, MESSAGE_PROPERTYNAME_IS_BLANK);
 
         //---------------------------------------------------------------
         try{
@@ -534,8 +547,8 @@ public final class PropertyUtil{
      * @see org.apache.commons.beanutils.PropertyUtilsBean
      */
     public static <T> T getProperty(Object bean,String propertyName){
-        Validate.notNull(bean, "bean can't be null!");
-        Validate.notBlank(propertyName, "propertyName can't be blank!");
+        Validate.notNull(bean, MESSAGE_BEAN_IS_NULL);
+        Validate.notBlank(propertyName, MESSAGE_PROPERTYNAME_IS_BLANK);
 
         return PropertyValueObtainer.obtain(bean, propertyName);
     }

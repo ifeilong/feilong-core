@@ -15,7 +15,7 @@
  */
 package com.feilong.core.util;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import java.util.Enumeration;
 
@@ -93,6 +93,6 @@ public final class EnumerationUtil{
      * @see org.apache.commons.collections4.IteratorUtils#contains(java.util.Iterator, Object)
      */
     public static <O> boolean contains(Enumeration<O> enumeration,O value){
-        return isNullOrEmpty(enumeration) ? false : IteratorUtils.contains(new EnumerationIterator<O>(enumeration), value);
+        return isNotNullOrEmpty(enumeration) && IteratorUtils.contains(new EnumerationIterator<O>(enumeration), value);
     }
 }

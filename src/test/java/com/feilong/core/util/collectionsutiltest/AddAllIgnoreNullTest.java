@@ -15,6 +15,7 @@
  */
 package com.feilong.core.util.collectionsutiltest;
 
+import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -25,19 +26,8 @@ import org.junit.Test;
 
 import com.feilong.core.util.CollectionsUtil;
 
-import static com.feilong.core.bean.ConvertUtil.toList;
-
-/**
- * The Class CollectionsUtilAddAllIgnoreNullTest.
- *
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class AddAllIgnoreNullTest{
 
-    //****************CollectionsUtil.addAllIgnoreNull(Collection<Object>, Iterable<? extends Object>)*****************
-    /**
-     * Test add all ignore null1.
-     */
     @Test(expected = NullPointerException.class)
     public void testAddAllIgnoreNullNullObjectCollection(){
         CollectionsUtil.addAllIgnoreNull(null, null);

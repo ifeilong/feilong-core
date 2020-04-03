@@ -115,13 +115,9 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
-						<!-- <manifestFile>
-							src/main/resources/META-INF/MANIFEST.MF
-							</manifestFile> -->
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<!-- <mainClass>com.mypackage.MyClass</mainClass> -->
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
@@ -129,7 +125,6 @@
 							<copyright>feilong</copyright>
 						</manifestEntries>
 					</archive>
-					<!-- <excludes> <exclude>**/temple/**</exclude> </excludes> -->
 				</configuration>
 			</plugin>
 
@@ -192,6 +187,5 @@
 			<timezone>8</timezone>
 		</developer>
 	</developers>
-
 
 </project>

@@ -222,7 +222,7 @@ public final class ClassUtil{
      * @see java.lang.Class#isInstance(Object)
      */
     public static boolean isInstance(Object obj,Class<?> klass){
-        return null == klass ? false : klass.isInstance(obj);
+        return null != klass && klass.isInstance(obj);
     }
 
     /**
@@ -296,7 +296,7 @@ public final class ClassUtil{
      * @since 1.4.0
      */
     public static boolean isAssignableFrom(Class<?> klass,Class<?> cls){
-        return (null == klass || null == cls) ? false : klass.isAssignableFrom(cls);
+        return null != klass && null != cls && klass.isAssignableFrom(cls);
     }
 
     /**
@@ -325,7 +325,7 @@ public final class ClassUtil{
      * @see java.lang.reflect.Modifier#isInterface(int)
      */
     public static boolean isInterface(Class<?> ownerClass){
-        return null == ownerClass ? false : Modifier.isInterface(ownerClass.getModifiers());// 对类和成员访问修饰符进行解码
+        return null != ownerClass && Modifier.isInterface(ownerClass.getModifiers());// 对类和成员访问修饰符进行解码
     }
 
     /**
