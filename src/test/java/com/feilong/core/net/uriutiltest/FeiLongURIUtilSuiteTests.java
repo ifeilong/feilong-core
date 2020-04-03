@@ -28,6 +28,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ //
                 EncodeParameterizedTest.class,
                 EncodeUriTest.class,
+
+                HasQueryTest.class,
                 DecodeTest.class,
                 DecodeParameterizedTest.class,
 

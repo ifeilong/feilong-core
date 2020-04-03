@@ -16,6 +16,7 @@
 package com.feilong.core.net;
 
 import static com.feilong.core.URIComponents.QUESTIONMARK;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.tools.slf4j.Slf4jUtil.format;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -384,7 +385,7 @@ public final class URIUtil{
      */
     // XXX 有待严谨
     private static boolean hasQueryString(String uriString){
-        return isNullOrEmpty(uriString) ? false : StringUtils.contains(uriString, QUESTIONMARK);
+        return isNotNullOrEmpty(uriString) && StringUtils.contains(uriString, QUESTIONMARK);
     }
 
     //---------------------------------------------------------------
