@@ -1,3 +1,7 @@
+feilong-core 2系列将不在维护,  请移步到 feilong 3版本,地址 https://github.com/ifeilong/feilong
+
+
+
 feilong core 让Java开发更简便的工具包
 ================
 
